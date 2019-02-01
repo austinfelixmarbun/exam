@@ -1,0 +1,11 @@
+<div class="row text-left">
+  <app-search id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
+  <div style="float:right;">
+    <button type="button" class="btn btn-raised btn-warning mr-1">
+      <i class="ft-x"></i> Cancel
+    </button>
+    <button type="button" (click)="search()" class="btn btn-raised btn-primary">
+      <i class="fa fa-search"></i> Search
+    </button>
+  </div>
+</div>
