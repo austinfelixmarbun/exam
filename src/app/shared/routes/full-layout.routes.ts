@@ -74,5 +74,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'player',
     loadChildren: './player/player.module#PlayerModule'
+  },
+  {
+    path: 'supplier',
+    loadChildren: './supplier/supplier.module#SupplierModule'
   }
 ];

@@ -1,0 +1,52 @@
+<!-- Basic form layout section start -->
+<section id="horizontal-form-layouts">
+  <div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="px-3">
+            <form class="form form-horizontal" id="formSearch" #formIdSearch>
+              <div class="form-body">
+                <h4 class="form-section"><i class="ft-search"></i> Search</h4>
+                <!-- Ini Digunakan untuk Generate Dynamic Component -->
+                <div *ngFor="let question of configuration?.component" class="form-group row">
+                  <label class="col-md-2 label-control" for="projectinput1">{{question.label}}</label>
+                  <div class="col-md-4">
+                    <div *ngIf="question.type==='textbox'">
+                      <input type="text" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}">
+                    </div>
+                    <div *ngIf="question.type==='textarea'">
+                      <textarea type="text" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}"></textarea>
+                    </div>
+                    <div *ngIf="question.type==='dropdown'">
+                      <!-- Ini kalau datanya tidak di load dari URL -->
+                      <div *ngIf="!question.isFromURL">
+                        <select id="projectinput6" name="{{question.name}}" class="form-control">
+                          <option *ngFor="let item of question?.items" value = "{{item.key}}">    
+                            {{item.value}}
+                          </option>
+                        </select>
+                      </div>
+                      <!-- Ini kalau datanya di load dari URL -->
+                      <div *ngIf="question.isFromURL">
+                          <select id="projectinput6" name="{{question.name}}" class="form-control">
+                            <option *ngFor="let item of question?.itemsUrl" value = "{{item.key}}">
+                              {{item.value}}
+                            </option>
+                          </select>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+
+</section>
+<!-- // Basic form layout section end -->
