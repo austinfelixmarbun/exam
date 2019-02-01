@@ -19,6 +19,7 @@ import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
+import { StorageServiceModule } from 'angular-webstorage-service';
 
 import * as $ from 'jquery';
 
@@ -52,7 +53,8 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBr5_picK8YJK7fFR2CPzTVMj6GG1TtRGo'
-        })
+        }),
+        StorageServiceModule
     ],
     providers: [
         AuthService,

@@ -8,6 +8,7 @@ import { LockScreenPageComponent } from "./lock-screen/lock-screen-page.componen
 import { LoginPageComponent } from "./login/login-page.component";
 import { MaintenancePageComponent } from "./maintenance/maintenance-page.component";
 import { RegisterPageComponent } from "./register/register-page.component";
+import { AuthGuard2 } from '../../shared/auth/auth-guard2.service';
 
 
 const routes: Routes = [
@@ -48,7 +49,7 @@ const routes: Routes = [
         component: LoginPageComponent,
         data: {
           title: 'Login Page'
-        }
+        }, canActivate: [AuthGuard2] 
       },
       {
         path: 'maintenance',
