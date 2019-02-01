@@ -88,6 +88,15 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  lessThanFour(): boolean {
+    if (this.countForm > 3) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
   resolveObject(obj:any,url:string){
     const val=this.getJSON(url);
       val.subscribe(tempData => {
