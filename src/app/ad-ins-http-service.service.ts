@@ -9,21 +9,26 @@ export declare type HttpObserve = 'body' | 'events' | 'response';
 export class AdInsHttpServiceService {
 
   ipAddress: any;
+  loc: string[];
+
   constructor(private http: HttpClient,
     private datepipe: DatePipe) {
     this.getIpAddress();
    }
 
-   createHeader() {
+   createHeader(): HttpHeaders {
     // var displayDate = new Date().toLocaleDateString();
+    this.loc = this.ipAddress.loc.split(',');
     const httpHeaders = new HttpHeaders({
       'Authorization' : 'my-token' ,
       'Content-Type' : 'application/json',
       'Cache-Control': 'no-cache',
-      'IP' : this.ipAddress.ip,
+      'Ip' : this.ipAddress.ip,
       'City' : this.ipAddress.city,
+      'Latitude' : this.loc[0],
+      'Longitude' : this.loc[1],
       'UserName' : 'user1',
-      'DateTime' : new Date().toLocaleDateString()
+      'SendDateTime' : new Date().toLocaleDateString()
     });
     return httpHeaders;
   }
