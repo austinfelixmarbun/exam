@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import { ChartType, ChartEvent } from "ng-chartist";
+import { UserService } from 'app/shared/auth/user.service';
 
 declare var require: any;
 
@@ -20,8 +21,22 @@ export interface Chart {
     styleUrls: ['./dashboard1.component.scss']
 })
 
-export class Dashboard1Component {
+export class Dashboard1Component implements OnInit{
 
+    message = "loading...";
+    constructor(private user: UserService){}
+    ngOnInit() {
+        this.user.getSomeData().subscribe(data =>{
+        this.message = data.message;
+        if (!data.success) {
+            localStorage.removeItem('loggedIn')
+        }
+        })
+        var getObject = JSON.parse(localStorage.getItem('currentUserContext'));
+        var getAccess = JSON.parse(localStorage.getItem('pageAccess'));
+        console.log(getObject);
+        console.log(getAccess);
+    }
     // Line area chart configuration Starts
     lineArea: Chart = {
         type: 'Line',
