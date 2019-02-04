@@ -33,7 +33,9 @@ export class Dashboard1Component implements OnInit{
         }
         })
         var getObject = JSON.parse(localStorage.getItem('currentUserContext'));
+        var getAccess = JSON.parse(localStorage.getItem('pageAccess'));
         console.log(getObject);
+        console.log(getAccess);
     }
     // Line area chart configuration Starts
     lineArea: Chart = {
