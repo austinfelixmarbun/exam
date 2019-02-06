@@ -27,7 +27,7 @@ export class SupplierComponent implements OnInit{
     for (var i = 0; i < this.searchComponent.countForm; i++) {
       var component = this.searchComponent.myForm.nativeElement[i];
       console.log(component);
-      if(component.nodeName==='SELECT')
+      if(component.nodeName ==='SELECT')
       {
         var ddl = component.options;
         var text = ddl[ddl.selectedIndex].value;
