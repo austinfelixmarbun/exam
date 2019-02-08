@@ -10,6 +10,7 @@ import { AdInsConstant } from '../AdInstConstant';
 import { AdInsHttpServiceService } from 'app/ad-ins-http-service.service';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import {HttpRequestObj} from 'app/shared/model/HttpRequestObj.model';
+import { DOCUMENT } from '@angular/platform-browser';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class SearchComponent implements OnInit {
   form: FormGroup;
   payLoad = '';
   countForm = 0;
-  constructor(private http: HttpClient,private adInsService: AdInsServiceService) {
+  constructor(private http: HttpClient,private adInsService: AdInsServiceService, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
   }
 
 
