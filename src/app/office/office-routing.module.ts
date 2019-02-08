@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { OfficeComponent } from './office.component';
+import { OfficeAddComponent } from './office-add/office-add.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,13 @@ const routes: Routes = [
         data: {
           title: 'Office'
         },
+      },
+      {
+        path: 'add',
+        component: OfficeAddComponent,
+        data: {
+          title: 'Add Office'
+        }
       },
     ]
   }
