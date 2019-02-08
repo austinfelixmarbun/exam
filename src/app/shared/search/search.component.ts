@@ -3,7 +3,13 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
+import {CriteriaObj} from '../model/CriteriaObj.model';
+import {RequestCriteriaObj} from '../model/RequestCriteriaObj.model';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { AdInsConstant } from '../AdInstConstant';
+import { AdInsHttpServiceService } from 'app/ad-ins-http-service.service';
+import { AdInsServiceService } from 'app/ad-ins-service.service';
+import {HttpRequestObj} from 'app/shared/model/HttpRequestObj.model';
 
 
 @Component({
@@ -24,7 +30,7 @@ export class SearchComponent implements OnInit {
   form: FormGroup;
   payLoad = '';
   countForm = 0;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private adInsService: AdInsServiceService) {
   }
 
 
@@ -59,22 +65,6 @@ export class SearchComponent implements OnInit {
     return this.http.get(url);
   }
 
-  getServer(url: string): Observable<any> {
-    return this.http.get(url)
-      .map(
-        (response: Response) => {
-          const data = response.json();
-          return data;
-        }
-      )
-  }
-
-  getDataPromise(url: string): Promise<any[]> {
-    return this.http.get<any[]>(url)
-      .toPromise()
-      .then((response) => response);
-  }
-
   onSubmit() {
     this.payLoad = JSON.stringify(this.form.value);
     console.log("This is Payload:" + this.payLoad);
@@ -86,6 +76,67 @@ export class SearchComponent implements OnInit {
     for (var i = 0; i < this.countForm; i++) {
       console.log(this.myForm.nativeElement[i].name + " - " + this.myForm.nativeElement[i].value);
     }
+  }
+
+  callSearch(pageNo:number,rowPerPage:number,orderBy:any){
+    console.log(pageNo);
+    var request = new RequestCriteriaObj();
+    var arrCrit = new Array();
+
+    request.pageNo=pageNo;
+    request.rowPerPage=rowPerPage;
+    request.orderBy=orderBy;
+
+    for (var i = 0; i < this.countForm; i++) {
+      var critObj = new CriteriaObj();
+      var component = this.myForm.nativeElement[i];
+      //Ini khusus kalau dari Drop Down
+      if(component.nodeName ==='SELECT')
+      {
+        var ddl = component.options;
+        var text = ddl[ddl.selectedIndex].value;
+        //Kalau Dari Dropdown udah pasti pake Eq
+        critObj.restriction = AdInsConstant.RestrictionEq;
+        critObj.propName = component.name;
+        critObj.value = text;
+      }
+      else{
+        //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
+        critObj.propName = component.name;
+        critObj.value = component.value;
+        if(component.value.includes("%"))
+        {
+          critObj.restriction=AdInsConstant.RestrictionLike;
+          
+        }
+        else{
+          critObj.restriction = AdInsConstant.RestrictionEq
+        }
+      }
+      arrCrit.push(critObj);
+      
+    }
+
+    request.criteria=arrCrit;
+    var temp=this.adInsService.postData(AdInsConstant.GetListProduct,request);
+    this.adInsService.postData(AdInsConstant.GetListProduct,request)
+    .subscribe(
+      (response) => 
+        {
+          console.log("Success");
+          console.log(response);
+        },
+      (error) => 
+      {
+        console.log("Error");
+        console.log(error)
+      }
+    );
+    // this.http.get<any>('https://ipinfo.io/json')
+    // .subscribe( data => {
+    //   console.log(data.ip);
+    // });
+    //console.log(this.adInsService.postData('a','b'));
   }
 
   lessThanFour(): boolean {
