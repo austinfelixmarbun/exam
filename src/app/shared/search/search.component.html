@@ -7,11 +7,13 @@
           <div class="px-3">
             <form class="form form-horizontal" id="formSearch" #formIdSearch>
               <div class="form-body">
-                <h4 class="form-section"><i class="ft-search"></i> Search</h4>
+                <h4 class="form-section"><i class="ft-search"></i> Search <button id="flip" class="btn float-right" (click)="isHidden = !isHidden"><i class="fa" [ngClass]="isHidden ? 'fa-chevron-down' : 'fa-chevron-up'"></i></button></h4>
                 <!-- Ini Digunakan untuk Generate Dynamic Component -->
-                <div class="col-md-12" *ngFor="let question of configuration?.component" class="form-group">
-                  <div class="col-md-6 left-style" style="float:left;">
-                    <label style="float:left;" class="col-md-4 label-control" for="projectinput1">{{question.label}}</label>
+                <!-- [hidden]="isHidden" -->
+                <div id="panel" style="display: none;">
+                <div class="col-md-6 form-group" style="float:left;"*ngFor="let question of configuration?.component">
+                  <div class="col-md-12">
+                    <label style="float:left;" class="col-md-4" for="projectinput1">{{question.label}}</label>
                     <div class="col-md-8" style="float:left;">
                       <div *ngIf="question.type==='textbox'">
                         <input type="text" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}">
@@ -39,6 +41,7 @@
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </form>

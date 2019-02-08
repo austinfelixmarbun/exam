@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { DOCUMENT } from '@angular/common';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class SearchComponent implements OnInit {
   form: FormGroup;
   payLoad = '';
   countForm = 0;
-  constructor(private http: HttpClient) {
+  isHidden = true;
+  constructor(private http: HttpClient,private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
   }
 
 
@@ -52,6 +54,16 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    let js = this._renderer2.createElement('script');
+    js.text = `
+          $(document).ready(function(){
+            $("#flip").click(function(){
+              $("#panel").slideToggle("slow");
+            });
+          });
+        `;
+
+    this._renderer2.appendChild(this._document.body, js);
     this.initiateForm();
   }
 

@@ -78,5 +78,13 @@ export const Full_ROUTES: Routes = [
   {
     path: 'supplier',
     loadChildren: './supplier/supplier.module#SupplierModule'
+  },
+  {
+    path: 'office',
+    loadChildren: './office/office.module#OfficeModule'
+  },
+  {
+    path: 'employee',
+    loadChildren: './employee/employee.module#EmployeeModule'
   }
 ];

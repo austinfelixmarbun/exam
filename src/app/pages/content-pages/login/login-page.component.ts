@@ -25,7 +25,7 @@ export class LoginPageComponent implements OnInit{
         
         this.user.getSomeData().subscribe(data =>{
             if (data.success) {
-            this.router.navigate(['dashboard/dashboard1'])
+            this.router.navigate(['dashboard/dash-board'])
             }else{
                 this.router.navigate(['pages/login'])
             }
@@ -94,7 +94,7 @@ export class LoginPageComponent implements OnInit{
             localStorage.setItem('currentUserContext', JSON.stringify(myObj));
             localStorage.setItem('pageAccess', JSON.stringify(pageAccess));
             //redirect the person to admin
-            this.router.navigate(['dashboard/dashboard1'])
+            this.router.navigate(['dashboard/dash-board'])
             this.Auth.setLoggedIn(true)
         }else{
             window.alert(data['message'])

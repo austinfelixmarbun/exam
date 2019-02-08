@@ -6,19 +6,23 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { SupplierAddComponent } from './supplier-add/supplier-add.component';
 
 @NgModule({
     imports: [
         SupplierRoutingModule,
+        FormsModule,
+        HttpModule,
         NgbModule,
         NgSelectModule,
-        FormsModule,
         ReactiveFormsModule,
-        CommonModule
+        CommonModule,
     ],
     declarations: [
         SupplierComponent,
-        SearchComponent
+        SearchComponent,
+        SupplierAddComponent
         
     ]
 })

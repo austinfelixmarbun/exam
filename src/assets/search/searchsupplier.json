@@ -3,78 +3,48 @@
   "component": [
     {
       "type": "textbox",
-      "name": "supplCode",
-      "id": "supplId",
-      "value": "Auto 2000",
-      "label": "Supplier Code",
+      "name": "firstName",
+      "id": "firstNameId",
+      "value": "John",
+      "label": "First Name",
       "placeholder": "Placeholder"
     },
     {
       "type": "textbox",
-      "name": "supplCode2",
-      "id": "supplId2",
+      "name": "lastName",
+      "id": "lastNameId",
       "value": "%",
-      "label": "Supplier Code 2",
-      "placeholder": "Placeholder"
-    },
-    {
-      "type": "textbox",
-      "name": "supplName",
-      "id": "supplName",
-      "value": "Auto 2001",
-      "label": "Supplier Name",
+      "label": "Last Name",
       "placeholder": "Placeholder"
     },
     {
       "type": "dropdown",
-      "name": "supplType2",
-      "id": "supplType2",
+      "name": "gender",
+      "id": "genderId",
       "value": "Auto 2001",
       "placeholder": "Placeholder",
       "isFromURL":false,
       "url":"https://api.myjson.com/bins/ld6e8",
-      "label": "Supplier Type 2",
+      "label": "Gender",
       "items": [
         {
-          "key": "P",
-          "value": "Perorangan"
+          "key": "M",
+          "value": "Male"
         },
         {
-          "key": "C",
-          "value": "Company"
+          "key": "F",
+          "value": "Female"
         }
       ],
       "itemsUrl":[
       ]
     },
     {
-      "type": "dropdown",
-      "name": "supplType",
-      "id": "supplType",
-      "value": "Auto 2001",
-      "placeholder": "Placeholder",
-      "isFromURL":true,
-      "url":"https://api.myjson.com/bins/xva3k",
-      "label": "Supplier Type",
-      "items": [
-        {
-          "key": "P",
-          "value": "Perorangan"
-        },
-        {
-          "key": "C",
-          "value": "Company"
-        }
-      ],
-      "itemsUrl":[
-      ]
-    },
-    {
-      "type": "textarea",
-      "name": "supplAddress",
-      "id": "supplAddress",
-      "value": "Auto 2001",
-      "label": "Supplier Area",
+      "type": "textbox",
+      "name": "email",
+      "id": "emailId",
+      "value": "",
+      "label": "Email",
       "placeholder": "Placeholder"
     }
   ]
