@@ -4,6 +4,7 @@ import { EmployeeComponent } from './employee.component';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { SharingModule } from 'app/shared/sharing.module';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { HttpModule } from '@angular/http';
     CommonModule,
     FormsModule,
     HttpModule,
+    SharingModule
   ],
   declarations: [
     EmployeeComponent

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeComponent implements OnInit {
 
+  urlJson:string = "./assets/search/searchEmployee.json";
+
   constructor() { }
 
   ngOnInit() {

@@ -1,0 +1,71 @@
+{
+    "url": "http://getEmployee",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "employeeNo",
+            "id": "employeeNoId",
+            "value": "John",
+            "label": "employee No",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "employeeName",
+            "id": "employeeNameId",
+            "value": "%",
+            "label": "employee Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "extEmp",
+            "id": "extEmpId",
+            "value": "External Employee",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "url": "https://api.myjson.com/bins/ld6e8",
+            "label": "External Employee",
+            "items": [
+                {
+                    "key": "all",
+                    "value": "All"
+                },
+                {
+                    "key": "yes",
+                    "value": "Yes"
+                },
+                {
+                    "key": "no",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        },
+        {
+            "type": "dropdown",
+            "name": "actStat",
+            "id": "actStatId",
+            "value": "Active Status",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "url": "https://api.myjson.com/bins/ld6e8",
+            "label": "Active Status",
+            "items": [
+                {
+                    "key": "all",
+                    "value": "All"
+                },
+                {
+                    "key": "yes",
+                    "value": "Yes"
+                },
+                {
+                    "key": "no",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ]
+}

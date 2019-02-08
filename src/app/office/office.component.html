@@ -1,3 +1,109 @@
-<p>
-  office works!
-</p>
+<app-search id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
+<div class="col-md-12">
+    <form>
+        <div class="form-actions right">
+                <button type="button" class="btn btn-raised btn-warning mr-1">
+                    <i class="ft-x"></i> Cancel
+                </button>
+                <button type="button" (click)="search()" class="btn btn-raised btn-primary">
+                    <i class="fa fa-search"></i> Search
+                </button>
+            </div>      
+    </form>
+</div>
+
+<table class="table table-responsive-md text-center table-hover">
+  <thead>
+      <tr>
+          <th>Office Name</th>
+          <th>Office Code</th>
+          <th>Contact Person</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>Model Name</th>
+          <th>Active Status</th>
+          <th>Konvensional / Syariah</th>
+          <th>Virtual Office</th>
+          <th>Organization Level</th>
+          <th>Employee List</th>
+          <th>Action</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Head Office</td>
+          <td>000</td>
+          <td>Hansen</td>
+          <td>Jl. Kebon Jeruk Raya no: 80</td>
+          <td>Jakarta</td>
+          <td>Adins Head Office</td>
+          <td>Yes</td>
+          <td>Konvensional</td>
+          <td>No</td>
+          <td>Head Office</td>
+          <td>
+            <a class="success p-0" data-original-title="" title="">
+                <i class="ft-edit-2 font-medium-3 mr-2"></i>
+            </a>
+          </td>
+          <td>
+              <a class="success p-0" data-original-title="" title="">
+                  <i class="ft-edit-2 font-medium-3 mr-2"></i>
+              </a>
+              <a class="danger p-0" data-original-title="" title="">
+                  <i class="ft-x font-medium-3 mr-2"></i>
+              </a>
+          </td>
+      </tr>
+      <tr>
+          <td>Bogor</td>
+          <td>003</td>
+          <td>Dewi Yunita</td>
+          <td>Jl. Raya Pajajaran no: 70L</td>
+          <td>Bogor</td>
+          <td>Area</td>
+          <td>Yes</td>
+          <td>Konvensional</td>
+          <td>No</td>
+          <td>Branch</td>
+          <td>
+            <a class="success p-0" data-original-title="" title="">
+                <i class="ft-edit-2 font-medium-3 mr-2"></i>
+            </a>
+          </td>
+          <td>
+              <a class="success p-0" data-original-title="" title="">
+                  <i class="ft-edit-2 font-medium-3 mr-2"></i>
+              </a>
+              <a class="danger p-0" data-original-title="" title="">
+                  <i class="ft-x font-medium-3 mr-2"></i>
+              </a>
+          </td>
+      </tr>
+      <tr>
+          <td>Bogor</td>
+          <td>007</td>
+          <td>CPP</td>
+          <td>Jl. Tangerang</td>
+          <td>bandung</td>
+          <td>Branch Model A</td>
+          <td>Yes</td>
+          <td>Konvensional</td>
+          <td>No</td>
+          <td>Branch Org</td>
+          <td>
+            <a class="success p-0" data-original-title="" title="">
+                <i class="ft-edit-2 font-medium-3 mr-2"></i>
+            </a>
+          </td>
+          <td>
+              <a class="success p-0" data-original-title="" title="">
+                  <i class="ft-edit-2 font-medium-3 mr-2"></i>
+              </a>
+              <a class="danger p-0" data-original-title="" title="">
+                  <i class="ft-x font-medium-3 mr-2"></i>
+              </a>
+          </td>
+      </tr>
+  </tbody>
+  </table>

@@ -4,6 +4,7 @@ import { OfficeComponent } from './office.component';
 import { OfficeRoutingModule } from './office-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { SharingModule } from 'app/shared/sharing.module';
 
 @NgModule({
   imports: [
@@ -11,9 +12,11 @@ import { HttpModule } from '@angular/http';
     CommonModule,
     FormsModule,
     HttpModule,
+    SharingModule
   ],
   declarations: [
-    OfficeComponent
+    OfficeComponent,
   ]
 })
 export class OfficeModule { }
+ 
