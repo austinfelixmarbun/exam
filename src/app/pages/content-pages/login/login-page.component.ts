@@ -3,7 +3,11 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from "@angular/router";
 import { AuthService } from 'app/shared/auth/auth.service';
 import { UserService } from 'app/shared/auth/user.service';
-import { formatDate } from '@angular/common';
+import { formatDate, getLocaleDateTimeFormat } from '@angular/common';
+import { AdInsServiceService } from 'app/ad-ins-service.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import {CurrentUserContext} from 'app/shared/model/CurrentUserContext.model';
+import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
 
 @Component({
     selector: 'app-login-page',
@@ -19,8 +23,8 @@ export class LoginPageComponent implements OnInit{
     private currentUrl: string;
     jstoday = '';
 
-    constructor(private router: Router,
-        private route: ActivatedRoute, private Auth: AuthService, private user: UserService) {
+    constructor(private router: Router,private currentUserContextService:CurrentUserContextService,
+        private route: ActivatedRoute, private Auth: AuthService, private user: UserService,private adInsService : AdInsServiceService) {
         console.log('test')
         
         this.user.getSomeData().subscribe(data =>{
@@ -87,19 +91,39 @@ export class LoginPageComponent implements OnInit{
             currUrl: '',
             bussinessDt: ''
         };
+
+        this.adInsService.getData(AdInsConstant.Login).subscribe(data=>{
+            console.log(data);
+            var currentUserContext = new CurrentUserContext;
+            if(data.UserName==username && data.Password==password)
+            {
+                currentUserContext.UserName=username;
+                currentUserContext.Office="HO";
+                currentUserContext.Role="SUPUSR";
+                currentUserContext.BusinessDate=getLocaleDateTimeFormat.toString();
+                this.currentUserContextService.addCurrentUserContext(currentUserContext);
+                this.router.navigate(['dashboard/dashboard1']);
+            }
+            else{
+                window.alert('Login Failed');
+            }
+            //this.router.navigate(['dashboard/dashboard1']);
+        })
         // console.log(username, password);
 
-        this.Auth.getuserDetails(username, password).subscribe(data =>{
-        if (data['success']) {
-            localStorage.setItem('currentUserContext', JSON.stringify(myObj));
-            localStorage.setItem('pageAccess', JSON.stringify(pageAccess));
-            //redirect the person to admin
-            this.router.navigate(['dashboard/dash-board'])
-            this.Auth.setLoggedIn(true)
-        }else{
-            window.alert(data['message'])
-        }
-        })
+        // this.Auth.getuserDetails(username, password).subscribe(data =>{
+        // if (data['success']) {
+        //     localStorage.setItem('currentUserContext', JSON.stringify(myObj));
+        //     localStorage.setItem('pageAccess', JSON.stringify(pageAccess));
+        //     //redirect the person to admin
+        //     this.router.navigate(['dashboard/dashboard1'])
+        //     this.Auth.setLoggedIn(true)
+        // }else{
+        //     window.alert(data['message'])
+        // }
+        // this.Auth.getuserDetails(username,password).subscribe(data=>{
+        //     if(data.UserName)
+        // })
     }
     // On Forgot password link click
     onForgotPassword() {

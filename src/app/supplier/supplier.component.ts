@@ -99,23 +99,24 @@ export class SupplierComponent implements OnInit{
   }
 
   search() {
-    console.log(this.searchComponent.myForm);
-    console.log("This Call Search");
-    console.log(this.searchComponent.countForm);
-    for (var i = 0; i < this.searchComponent.countForm; i++) {
-      var component = this.searchComponent.myForm.nativeElement[i];
-      console.log(component);
-      if(component.nodeName ==='SELECT')
-      {
-        var ddl = component.options;
-        var text = ddl[ddl.selectedIndex].value;
-        console.log(component.name + " - " + text);
-      }
-      else{
-        console.log(component.name + " - " + component.value);
-      }
+    console.log("Call Search");
+    this.searchComponent.callSearch(1,25,null);
+    // console.log(this.searchComponent.myForm);
+    // console.log(this.searchComponent.countForm);
+    // for (var i = 0; i < this.searchComponent.countForm; i++) {
+    //   var component = this.searchComponent.myForm.nativeElement[i];
+    //   console.log(component);
+    //   if(component.nodeName ==='SELECT')
+    //   {
+    //     var ddl = component.options;
+    //     var text = ddl[ddl.selectedIndex].value;
+    //     console.log(component.name + " - " + text);
+    //   }
+    //   else{
+    //     console.log(component.name + " - " + component.value);
+    //   }
       
-    }
+    // }
   }
   
 

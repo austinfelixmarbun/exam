@@ -49,7 +49,8 @@ const routes: Routes = [
         component: LoginPageComponent,
         data: {
           title: 'Login Page'
-        }, canActivate: [AuthGuard2] 
+        }
+        , canActivate: [AuthGuard2] 
       },
       {
         path: 'maintenance',

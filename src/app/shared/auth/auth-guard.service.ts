@@ -9,20 +9,26 @@ import { UserService } from './user.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router, private user: UserService) {}
+  constructor(private authService: AuthService, private router: Router, private user: UserService) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {if (this.authService.isLoggedIn) {
-    return true
-  }
-  return this.user.isLoggedIn().pipe(map(res =>{
-    if (res.status) {
-      this.authService.setLoggedIn(true)
-      return true
-    }else{
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    var currentUser = localStorage.getItem("UserContext");
+    if (currentUser == null) {
       this.router.navigate(['pages/login'])
-      return false
+      return false;
     }
-  }))
-  // return this.authService.isLoggedIn();
+    else {
+      return true;
+    }
+    // return this.user.isLoggedIn().pipe(map(res => {
+    //   if (res.status) {
+    //     this.authService.setLoggedIn(true)
+    //     return true
+    //   } else {
+    //     this.router.navigate(['pages/login'])
+    //     return false
+    //   }
+    // }))
+    // return this.authService.isLoggedIn();
   }
 }
