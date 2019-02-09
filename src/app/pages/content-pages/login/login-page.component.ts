@@ -87,12 +87,14 @@ export class LoginPageComponent implements OnInit{
         this.adInsService.getData(AdInsConstant.Login).subscribe(data=>{
             console.log(data);
             var currentUserContext = new CurrentUserContext;
+            let today = new Date();
+            var businessDt=formatDate(today, 'yyyy-MM-dd', 'en-US')
             if(data.UserName==username && data.Password==password)
             {
                 currentUserContext.UserName=username;
                 currentUserContext.Office="HO";
                 currentUserContext.Role="SUPUSR";
-                currentUserContext.BusinessDate=getLocaleDateTimeFormat.toString();
+                currentUserContext.BusinessDate=businessDt;
                 this.currentUserContextService.addCurrentUserContext(currentUserContext);
                 this.router.navigate(['dashboard/dashboard1']);
             }

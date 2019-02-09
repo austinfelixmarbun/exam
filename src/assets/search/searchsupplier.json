@@ -10,6 +10,24 @@
       "placeholder": "Placeholder"
     },
     {
+      "type": "datepicker",
+      "name": "DtStart",
+      "id": "DtStart",
+      "value": "BD+2",
+      "label": "Start Date >=",
+      "restriction":"Gte",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "numeric",
+      "name": "numberAmount",
+      "id": "numberAmount",
+      "value": "100",
+      "label": "NTF Amount <=",
+      "restriction":"Gte",
+      "placeholder": "Placeholder"
+    },
+    {
       "type": "textbox",
       "name": "lastName",
       "id": "lastNameId",

@@ -10,7 +10,7 @@ import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 export class EmployeeComponent implements OnInit {
 
   urlJson:string = "./assets/search/searchEmployee.json";
-  page5 = 4;
+  page5 = 1;
 
   constructor() { }
 

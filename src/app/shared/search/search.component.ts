@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2 } fr
 import { Observable } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
+import { formatDate, getLocaleDateTimeFormat } from '@angular/common';
 import 'rxjs/add/operator/map';
 import {CriteriaObj} from '../model/CriteriaObj.model';
 import {RequestCriteriaObj} from '../model/RequestCriteriaObj.model';
@@ -46,12 +47,40 @@ export class SearchComponent implements OnInit {
       this.isDataLoaded = true;
       var i = 0;
       for (var i = 0; i < this.countForm; i++) {
+        //ini kalau datanya di load dari URL
         if (data.component[i].isFromURL == true) {
           var _this = this;
           var _index = i;
           //lempar objectnya sekalian sama urlnya, nnti di bind di dalem karena masalah di asyncnya
           //biar tiap function ada state2nya sendiri
           this.resolveObject(data.component[i],data.component[i].url);
+        }
+        //pengecekan tanggal
+        if(data.component[i].type==="datepicker")
+        {
+          if(data.component[i].value.includes("BD")){
+            console.log("VALUE " + data.component[i].value);
+            let businessDate = new Date(JSON.parse(localStorage.getItem("UserContext")).BusinessDate);
+            console.log("BD " + businessDate);
+            var operator = data.component[i].value.charAt(2);
+            var dateShow = new Date();
+            console.log("show :" + dateShow);
+            console.log("FMT : " + dateShow.getDate());
+            if(operator==="-")
+            {
+              var tempMinus = data.component[i].value.split("-",2);
+              var numDay = parseInt(tempMinus[1]);
+              dateShow.setDate(businessDate.getDate()-numDay);
+            }
+            else if(operator==="+")
+            {
+              var tempMinus = data.component[i].value.split("+",2);
+              var numDay = parseInt(tempMinus[1]);
+              dateShow.setDate(businessDate.getDate()+numDay);
+            }
+            var dateText=formatDate(dateShow, 'yyy-MM-dd', 'en-US')
+            data.component[i].value = dateText;
+          }
         }
       }
     });
@@ -67,7 +96,6 @@ export class SearchComponent implements OnInit {
             });
           });
         `;
-
     this._renderer2.appendChild(this._document.body, js);
     this.initiateForm();
   }
@@ -101,6 +129,7 @@ export class SearchComponent implements OnInit {
     for (var i = 0; i < this.countForm; i++) {
       var critObj = new CriteriaObj();
       var component = this.myForm.nativeElement[i];
+      //console.log(component);
       //Ini khusus kalau dari Drop Down
       if(component.nodeName ==='SELECT')
       {
@@ -111,14 +140,25 @@ export class SearchComponent implements OnInit {
         critObj.propName = component.name;
         critObj.value = text;
       }
+      
       else{
         //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
         critObj.propName = component.name;
         critObj.value = component.value;
+        console.log(component.type);
         if(component.value.includes("%"))
         {
           critObj.restriction=AdInsConstant.RestrictionLike;
           
+        }
+        //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
+        else if(component.type==='date')
+        {
+          critObj.restriction=component.title;
+        }
+        else if(component.type==='number')
+        {
+          critObj.restriction=component.title;
         }
         else{
           critObj.restriction = AdInsConstant.RestrictionEq

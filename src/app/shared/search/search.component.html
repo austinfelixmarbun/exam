@@ -21,6 +21,12 @@
                       <div *ngIf="question.type==='textarea'">
                         <textarea type="text" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}"></textarea>
                       </div>
+                      <div *ngIf="question.type==='numeric'">
+                        <input type="number" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}" data-title="{{question.restriction}}">
+                      </div>
+                      <div *ngIf="question.type==='datepicker'">
+                        <input type="date" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}" data-title="{{question.restriction}}">
+                      </div>
                       <div *ngIf="question.type==='dropdown'">
                         <!-- Ini kalau datanya tidak di load dari URL -->
                         <div *ngIf="!question.isFromURL">
