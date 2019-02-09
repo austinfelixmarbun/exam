@@ -11,10 +11,10 @@
                 <!-- Ini Digunakan untuk Generate Dynamic Component -->
                 <!-- [hidden]="isHidden" -->
                 <div id="panel" style="display: none;">
-                <div class="col-md-6 form-group" style="float:left;"*ngFor="let question of configuration?.component">
+                <div class="col-md-6 form-group no-padding" style="float:left;"*ngFor="let question of configuration?.component">
                   <div class="col-md-12">
-                    <label style="float:left;" class="col-md-5" for="projectinput1">{{question.label}}</label>
-                    <div class="col-md-7" style="float:left;">
+                    <label style="float:left;" class="col-md-5 no-padding" for="projectinput1">{{question.label}}</label>
+                    <div class="col-md-7 no-padding" style="float:left;">
                       <div *ngIf="question.type==='textbox'">
                         <input type="text" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}">
                       </div>

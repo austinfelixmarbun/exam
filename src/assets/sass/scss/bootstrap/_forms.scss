@@ -1,6 +1,6 @@
 form{
     label{
-        color: #75787d;
+        color: #000000;
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -15,7 +15,7 @@ form{
 
     .form-control{
         border: 1px solid #A6A9AE;
-        color: #75787d;
+        color: #000000;
 
         &::-webkit-input-placeholder {
            color: darken($body-bg, 20%);
