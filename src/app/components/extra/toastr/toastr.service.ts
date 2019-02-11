@@ -38,7 +38,7 @@ export class NGXToastrService {
 
     // Timeout
     timeout() {
-        this.toastr.error('I do not think that word means what you think it means.', 'Timeout!', { "timeOut": 2000 });
+        this.toastr.error('I do not think that word means what you think it means.', 'Timeout!', { "timeOut": 5000 });
     }
 
    
@@ -66,6 +66,10 @@ export class NGXToastrService {
     // Message Class
     messageClass() {
         this.toastr.info('Have fun storming the castle!', 'Miracle Max Says', { messageClass: 'text-uppercase' });
+    }
+
+    errorMessage(msg){
+        this.toastr.info(msg);
     }
 
 }

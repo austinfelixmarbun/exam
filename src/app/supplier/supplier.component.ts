@@ -4,12 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import {SearchComponent} from '../shared/search/search.component';
 import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 import { Http, Response } from '@angular/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
   styleUrls: ['./supplier.component.scss'],
-  providers: [NgbPaginationConfig] // add NgbPaginationConfig to the component providers
+  providers: [NgbPaginationConfig, NGXToastrService] // add NgbPaginationConfig to the component providers
 })
 export class SupplierComponent implements OnInit{
 
@@ -25,7 +26,7 @@ export class SupplierComponent implements OnInit{
   // paged items
   pagedItems: any[];
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private service: NGXToastrService) {
   }
   ngOnInit() {
     // get dummy data
@@ -118,8 +119,31 @@ export class SupplierComponent implements OnInit{
       
     // }
   }
-  
 
-  
+    typeSuccess() {
+        this.service.typeSuccess();
+    }
 
+    // Success Type
+    typeInfo() {
+        this.service.typeInfo();
+    }
+
+    // Success Type
+    typeWarning() {
+        this.service.typeWarning();
+    }
+
+    // Success Type
+    typeError() {
+        this.service.typeError();
+    }
+
+    timeout() {
+        this.service.timeout();
+    }
+
+    errMsg() {
+        this.service.errorMessage('asdasd');
+    }
 }
