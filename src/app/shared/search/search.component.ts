@@ -59,13 +59,9 @@ export class SearchComponent implements OnInit {
         if(data.component[i].type==="datepicker")
         {
           if(data.component[i].value.includes("BD")){
-            console.log("VALUE " + data.component[i].value);
             let businessDate = new Date(JSON.parse(localStorage.getItem("UserContext")).BusinessDate);
-            console.log("BD " + businessDate);
             var operator = data.component[i].value.charAt(2);
             var dateShow = new Date();
-            console.log("show :" + dateShow);
-            console.log("FMT : " + dateShow.getDate());
             if(operator==="-")
             {
               var tempMinus = data.component[i].value.split("-",2);
@@ -169,25 +165,7 @@ export class SearchComponent implements OnInit {
     }
 
     request.criteria=arrCrit;
-    var temp=this.adInsService.postData(AdInsConstant.GetListProduct,request);
-    this.adInsService.postData(AdInsConstant.GetListProduct,request)
-    .subscribe(
-      (response) => 
-        {
-          console.log("Success");
-          console.log(response);
-        },
-      (error) => 
-      {
-        console.log("Error");
-        console.log(error)
-      }
-    );
-    // this.http.get<any>('https://ipinfo.io/json')
-    // .subscribe( data => {
-    //   console.log(data.ip);
-    // });
-    //console.log(this.adInsService.postData('a','b'));
+    return this.adInsService.postData(AdInsConstant.GetListProduct,request);
   }
 
   lessThanFour(): boolean {
