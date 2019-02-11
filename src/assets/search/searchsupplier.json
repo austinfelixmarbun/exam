@@ -3,6 +3,7 @@
   "component": [
     {
       "type": "textbox",
+<<<<<<< HEAD
       "name": "firstName",
       "id": "firstNameId",
       "value": "John",
@@ -26,44 +27,21 @@
       "label": "NTF Amount <=",
       "restriction":"Gte",
       "placeholder": "Placeholder"
+=======
+      "name": "ProductType",
+      "id": "ProductType",
+      "value": "MCYNW",
+      "label": "Product Type",
+      "placeholder": "Product Type"
+>>>>>>> origin/master
     },
     {
       "type": "textbox",
-      "name": "lastName",
-      "id": "lastNameId",
+      "name": "ProductName",
+      "id": "ProductName",
       "value": "%",
-      "label": "Last Name",
-      "placeholder": "Placeholder"
-    },
-    {
-      "type": "dropdown",
-      "name": "gender",
-      "id": "genderId",
-      "value": "Auto 2001",
-      "placeholder": "Placeholder",
-      "isFromURL":false,
-      "url":"https://api.myjson.com/bins/ld6e8",
-      "label": "Gender",
-      "items": [
-        {
-          "key": "M",
-          "value": "Male"
-        },
-        {
-          "key": "F",
-          "value": "Female"
-        }
-      ],
-      "itemsUrl":[
-      ]
-    },
-    {
-      "type": "textbox",
-      "name": "email",
-      "id": "emailId",
-      "value": "",
-      "label": "Email",
-      "placeholder": "Placeholder"
+      "label": "Product Name",
+      "placeholder": "Product Type"
     }
   ]
 }

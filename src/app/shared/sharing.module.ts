@@ -8,7 +8,7 @@ import { SearchComponent } from './search/search.component';
         SearchComponent,
     ],
     imports: [
-        CommonModule,
+        CommonModule
     ],
     declarations: [
         SearchComponent

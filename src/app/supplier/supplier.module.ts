@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SupplierAddComponent } from './supplier-add/supplier-add.component';
 import { SharingModule } from 'app/shared/sharing.module';
+import { NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import { SharingModule } from 'app/shared/sharing.module';
         NgSelectModule,
         ReactiveFormsModule,
         CommonModule,
+        NgxSpinnerModule,
         SharingModule
     ],
     declarations: [

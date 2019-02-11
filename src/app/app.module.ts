@@ -20,6 +20,7 @@ import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
 import { StorageServiceModule } from 'angular-webstorage-service';
+import { NgxSpinnerModule} from 'ngx-spinner';
 
 import * as $ from 'jquery';
 import { UserMaintenanceComponent } from './user/user-maintenance/user-maintenance.component';
@@ -41,6 +42,7 @@ export function createTranslateLoader(http: HttpClient) {
         BrowserAnimationsModule,
         StoreModule.forRoot({}),
         AppRoutingModule,
+        NgxSpinnerModule,
         SharedModule,
         DragulaModule.forRoot(),
         HttpClientModule,
