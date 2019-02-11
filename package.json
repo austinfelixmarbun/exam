@@ -57,6 +57,7 @@
     "ngx-chips": "1.9.8",
     "ngx-indexed-db": "^2.0.5",
     "ngx-quill": "4.0.0",
+    "ngx-spinner": "^7.0.0",
     "ngx-toastr": "9.1.1",
     "ngx-ui-switch": "7.0.1",
     "node-sass": "4.9.4",

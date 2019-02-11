@@ -11,15 +11,21 @@
                 <!-- Ini Digunakan untuk Generate Dynamic Component -->
                 <!-- [hidden]="isHidden" -->
                 <div id="panel" style="display: none;">
-                <div class="col-md-6 form-group" style="float:left;"*ngFor="let question of configuration?.component">
+                <div class="col-md-6 form-group no-padding" style="float:left;"*ngFor="let question of configuration?.component">
                   <div class="col-md-12">
-                    <label style="float:left;" class="col-md-5" for="projectinput1">{{question.label}}</label>
-                    <div class="col-md-7" style="float:left;">
+                    <label style="float:left;" class="col-md-5 no-padding" for="projectinput1">{{question.label}}</label>
+                    <div class="col-md-7 no-padding" style="float:left;">
                       <div *ngIf="question.type==='textbox'">
                         <input type="text" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}">
                       </div>
                       <div *ngIf="question.type==='textarea'">
                         <textarea type="text" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}"></textarea>
+                      </div>
+                      <div *ngIf="question.type==='numeric'">
+                        <input type="text" id="{{question.id}}" (focus)="transformToDecimal($event)" (blur)="transformAmount($event)" class="form-control" name="{{question.name}}" value="{{question.value}}" data-title="{{question.restriction}}">
+                      </div>
+                      <div *ngIf="question.type==='datepicker'">
+                        <input type="date" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}" data-title="{{question.restriction}}">
                       </div>
                       <div *ngIf="question.type==='dropdown'">
                         <!-- Ini kalau datanya tidak di load dari URL -->

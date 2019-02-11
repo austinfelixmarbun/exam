@@ -51,7 +51,7 @@ export class AdInsServiceService {
         'Authorization': 'my-auth-token'
       })
     };
-    requestObj.orderBy={"Key":"City","Value":"True"};
+    requestObj.orderBy={"Key":"CountView","Value":"FALSE"};
     // httpRequest.UserName=currentUserContext.
     console.log(httpRequest);
     console.log(JSON.stringify(requestObj));
