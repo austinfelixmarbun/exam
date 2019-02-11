@@ -5,6 +5,7 @@ import { SearchComponent } from '../shared/search/search.component';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Http, Response } from '@angular/http';
 import { data } from 'app/shared/data/smart-data-table';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-supplier',
@@ -30,7 +31,7 @@ export class SupplierComponent implements OnInit {
     // paged items
     pagedItems: any[];
 
-    constructor(private http: Http) {
+    constructor(private http: Http,private spinner: NgxSpinnerService) {
     }
     ngOnInit() {
         this.pageNow=1;
@@ -106,6 +107,7 @@ export class SupplierComponent implements OnInit {
     }
 
     search() {
+        this.spinner.show();
         this.searchComponent.callSearch(this.pageNow, this.pageSize, null)
             .subscribe(
                 (response) => {
@@ -113,10 +115,12 @@ export class SupplierComponent implements OnInit {
                     this.resultData = response;
                     this.totalData = response.count;
                     console.log(response);
+                    this.spinner.hide();
                 },
                 (error) => {
                     console.log("Error");
                     console.log(error);
+                    this.spinner.hide();
                 }
             );
     }
