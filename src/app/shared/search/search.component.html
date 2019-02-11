@@ -22,7 +22,7 @@
                         <textarea type="text" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}"></textarea>
                       </div>
                       <div *ngIf="question.type==='numeric'">
-                        <input type="number" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}" data-title="{{question.restriction}}">
+                        <input type="text" id="{{question.id}}" (focus)="transformToDecimal($event)" (blur)="transformAmount($event)" class="form-control" name="{{question.name}}" value="{{question.value}}" data-title="{{question.restriction}}">
                       </div>
                       <div *ngIf="question.type==='datepicker'">
                         <input type="date" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}" data-title="{{question.restriction}}">

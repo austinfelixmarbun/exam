@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2 } fr
 import { Observable } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { formatDate, getLocaleDateTimeFormat } from '@angular/common';
+import { formatDate, getLocaleDateTimeFormat, DecimalPipe} from '@angular/common';
 import 'rxjs/add/operator/map';
 import {CriteriaObj} from '../model/CriteriaObj.model';
 import {RequestCriteriaObj} from '../model/RequestCriteriaObj.model';
@@ -12,14 +12,13 @@ import { AdInsHttpServiceService } from 'app/ad-ins-http-service.service';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import {HttpRequestObj} from 'app/shared/model/HttpRequestObj.model';
 import { DOCUMENT } from '@angular/platform-browser';
-
-
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
+  providers: [ DecimalPipe ]
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit{
   @ViewChild('formIdSearch') myForm: ElementRef;
   @Input() _url: string;
   tempUrl: string;
@@ -32,7 +31,9 @@ export class SearchComponent implements OnInit {
   form: FormGroup;
   payLoad = '';
   countForm = 0;
-  constructor(private http: HttpClient,private adInsService: AdInsServiceService, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
+  formattedAmount = '';
+  amount = 0;
+  constructor(private http: HttpClient,private adInsService: AdInsServiceService,private decimalPipe : DecimalPipe, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
   }
 
 
@@ -55,6 +56,12 @@ export class SearchComponent implements OnInit {
           //biar tiap function ada state2nya sendiri
           this.resolveObject(data.component[i],data.component[i].url);
         }
+
+        if(data.component[i].type ==="numeric")
+        {
+          data.component[i].value = parseFloat(data.component[i].value).toLocaleString('en'); 
+        }
+
         //pengecekan tanggal
         if(data.component[i].type==="datepicker")
         {
@@ -205,5 +212,18 @@ export class SearchComponent implements OnInit {
         obj.itemsUrl = tempData;
       });
   }
+
+  transformAmount(element: any){
+
+    this.formattedAmount = parseFloat(element.target.value).toLocaleString('en');
+    // Remove or comment this line if you dont want 
+    // to show the formatted amount in the textbox.
+    element.target.value = this.formattedAmount;
+}
+
+transformToDecimal(element: any)
+{
+  element.target.value = parseFloat(element.target.value.toString().replace(/,/g, ''));
+}
 
 }
