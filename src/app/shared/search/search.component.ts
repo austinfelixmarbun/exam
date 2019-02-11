@@ -155,11 +155,7 @@ export class SearchComponent implements OnInit{
           
         }
         //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
-        else if(component.type==='date')
-        {
-          critObj.restriction=component.title;
-        }
-        else if(component.type==='number')
+        else if(component.title!=null)
         {
           critObj.restriction=component.title;
         }

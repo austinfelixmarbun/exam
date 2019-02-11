@@ -3,37 +3,11 @@
   "component": [
     {
       "type": "textbox",
-<<<<<<< HEAD
-      "name": "firstName",
-      "id": "firstNameId",
-      "value": "John",
-      "label": "First Name",
-      "placeholder": "Placeholder"
-    },
-    {
-      "type": "datepicker",
-      "name": "DtStart",
-      "id": "DtStart",
-      "value": "BD+2",
-      "label": "Start Date >=",
-      "restriction":"Gte",
-      "placeholder": "Placeholder"
-    },
-    {
-      "type": "numeric",
-      "name": "numberAmount",
-      "id": "numberAmount",
-      "value": "10000",
-      "label": "NTF Amount <=",
-      "restriction":"Gte",
-      "placeholder": "Placeholder"
-=======
       "name": "ProductType",
       "id": "ProductType",
       "value": "MCYNW",
       "label": "Product Type",
       "placeholder": "Product Type"
->>>>>>> origin/master
     },
     {
       "type": "textbox",
@@ -41,6 +15,15 @@
       "id": "ProductName",
       "value": "%",
       "label": "Product Name",
+      "placeholder": "Product Type"
+    },
+    {
+      "type": "numeric",
+      "name": "MinValue",
+      "id": "MinValue",
+      "value": "100,00",
+      "label": "Min Value",
+      "restriction":"Gte",
       "placeholder": "Product Type"
     }
   ]
