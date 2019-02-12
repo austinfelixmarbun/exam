@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  coreUrl:'http://R3App-Server/FOUNDATION'
 };

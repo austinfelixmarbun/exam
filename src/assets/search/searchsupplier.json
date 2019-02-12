@@ -16,15 +16,6 @@
       "value": "%",
       "label": "Product Name",
       "placeholder": "Product Type"
-    },
-    {
-      "type": "numeric",
-      "name": "MinValue",
-      "id": "MinValue",
-      "value": "100,00",
-      "label": "Min Value",
-      "restriction":"Gte",
-      "placeholder": "Product Type"
     }
   ]
 }

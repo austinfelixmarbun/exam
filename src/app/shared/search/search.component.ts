@@ -149,13 +149,15 @@ export class SearchComponent implements OnInit{
         critObj.propName = component.name;
         critObj.value = component.value;
         console.log(component.type);
+        console.log(component.title);
         if(component.value.includes("%"))
         {
           critObj.restriction=AdInsConstant.RestrictionLike;
           
         }
         //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
-        else if(component.title!=null)
+        
+        else if(component.title!="")
         {
           critObj.restriction=component.title;
         }
@@ -168,7 +170,7 @@ export class SearchComponent implements OnInit{
     }
 
     request.criteria=arrCrit;
-    return this.adInsService.postData(AdInsConstant.GetListProduct,request);
+    return this.adInsService.postDataDummy(AdInsConstant.GetListProduct,request);
   }
 
   lessThanFour(): boolean {
