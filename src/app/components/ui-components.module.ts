@@ -102,7 +102,7 @@ import { SelectComponent } from './extra/select/select.component';
         CropperComponent,
         TagsInputComponent,
         SwitchComponent,
-        SelectComponent        
+        SelectComponent       
     ],
     entryComponents: [NgbdModalContent]
 })

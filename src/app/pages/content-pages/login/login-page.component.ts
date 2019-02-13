@@ -2,7 +2,6 @@ import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from "@angular/router";
 import { AuthService } from 'app/shared/auth/auth.service';
-import { UserService } from 'app/shared/auth/user.service';
 import { formatDate, getLocaleDateTimeFormat } from '@angular/common';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -24,16 +23,9 @@ export class LoginPageComponent implements OnInit{
     jstoday = '';
 
     constructor(private router: Router,private currentUserContextService:CurrentUserContextService,
-        private route: ActivatedRoute, private Auth: AuthService, private user: UserService,private adInsService : AdInsServiceService) {
+        private route: ActivatedRoute, private Auth: AuthService, private adInsService : AdInsServiceService) {
         console.log('test')
         
-        this.user.getSomeData().subscribe(data =>{
-            if (data.success) {
-            this.router.navigate(['dashboard/dashboard1'])
-            }else{
-                this.router.navigate(['pages/login'])
-            }
-        })
     }
 
     ngOnInit() { 
@@ -54,11 +46,11 @@ export class LoginPageComponent implements OnInit{
             localStorage.setItem('pageAccess', JSON.stringify(pageAccess));
         };
         if (event instanceof NavigationStart) {
-            this.user.getSomeData().subscribe(data =>{
-                if (!data.success) {
-                    this.router.navigate(['pages/login'])
-                }
-            });
+            // this.user.getSomeData().subscribe(data =>{
+            //     if (!data.success) {
+            //         this.router.navigate(['pages/login'])
+            //     }
+            // });
         }
         });
     }   
@@ -95,12 +87,14 @@ export class LoginPageComponent implements OnInit{
         this.adInsService.getData(AdInsConstant.Login).subscribe(data=>{
             console.log(data);
             var currentUserContext = new CurrentUserContext;
+            let today = new Date();
+            var businessDt=formatDate(today, 'yyyy-MM-dd', 'en-US')
             if(data.UserName==username && data.Password==password)
             {
                 currentUserContext.UserName=username;
                 currentUserContext.Office="HO";
                 currentUserContext.Role="SUPUSR";
-                currentUserContext.BusinessDate=getLocaleDateTimeFormat.toString();
+                currentUserContext.BusinessDate=businessDt;
                 this.currentUserContextService.addCurrentUserContext(currentUserContext);
                 this.router.navigate(['dashboard/dashboard1']);
             }

@@ -10,3 +10,4 @@ export class BaseObj {
     RequestObject: any;
     LocalIp:string;
   }
+  

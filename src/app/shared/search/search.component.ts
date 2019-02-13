@@ -1,21 +1,22 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
+import { formatDate, getLocaleDateTimeFormat, DecimalPipe } from '@angular/common';
 import 'rxjs/add/operator/map';
-import {CriteriaObj} from '../model/CriteriaObj.model';
-import {RequestCriteriaObj} from '../model/RequestCriteriaObj.model';
+import { CriteriaObj } from '../model/CriteriaObj.model';
+import { RequestCriteriaObj } from '../model/RequestCriteriaObj.model';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AdInsConstant } from '../AdInstConstant';
 import { AdInsHttpServiceService } from 'app/ad-ins-http-service.service';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
-import {HttpRequestObj} from 'app/shared/model/HttpRequestObj.model';
-
-
+import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
+import { DOCUMENT } from '@angular/platform-browser';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
+  providers: [DecimalPipe]
 })
 export class SearchComponent implements OnInit {
   @ViewChild('formIdSearch') myForm: ElementRef;
@@ -30,7 +31,9 @@ export class SearchComponent implements OnInit {
   form: FormGroup;
   payLoad = '';
   countForm = 0;
-  constructor(private http: HttpClient,private adInsService: AdInsServiceService) {
+  formattedAmount = '';
+  amount = 0;
+  constructor(private http: HttpClient, private adInsService: AdInsServiceService, private decimalPipe: DecimalPipe, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
   }
 
 
@@ -45,12 +48,39 @@ export class SearchComponent implements OnInit {
       this.isDataLoaded = true;
       var i = 0;
       for (var i = 0; i < this.countForm; i++) {
+
+        //ini kalau datanya di load dari URL
         if (data.component[i].isFromURL == true) {
           var _this = this;
           var _index = i;
           //lempar objectnya sekalian sama urlnya, nnti di bind di dalem karena masalah di asyncnya
           //biar tiap function ada state2nya sendiri
-          this.resolveObject(data.component[i],data.component[i].url);
+          this.resolveObject(data.component[i], data.component[i].url);
+        }
+
+        if (data.component[i].type === "numeric") {
+          data.component[i].value = parseFloat(data.component[i].value).toLocaleString('en');
+        }
+
+        //pengecekan tanggal
+        if (data.component[i].type === "datepicker") {
+          if (data.component[i].value.includes("BD")) {
+            let businessDate = new Date(JSON.parse(localStorage.getItem("UserContext")).BusinessDate);
+            var operator = data.component[i].value.charAt(2);
+            var dateShow = new Date();
+            if (operator === "-") {
+              var tempMinus = data.component[i].value.split("-", 2);
+              var numDay = parseInt(tempMinus[1]);
+              dateShow.setDate(businessDate.getDate() - numDay);
+            }
+            else if (operator === "+") {
+              var tempMinus = data.component[i].value.split("+", 2);
+              var numDay = parseInt(tempMinus[1]);
+              dateShow.setDate(businessDate.getDate() + numDay);
+            }
+            var dateText = formatDate(dateShow, 'yyy-MM-dd', 'en-US')
+            data.component[i].value = dateText;
+          }
         }
       }
     });
@@ -58,6 +88,15 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    let js = this._renderer2.createElement('script');
+    js.text = `
+          $(document).ready(function(){
+            $("#flip").click(function(){
+              $("#panel").slideToggle("slow");
+            });
+          });
+        `;
+    this._renderer2.appendChild(this._document.body, js);
     this.initiateForm();
   }
 
@@ -78,21 +117,21 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  callSearch(pageNo:number,rowPerPage:number,orderBy:any){
+  callSearch(pageNo: number, rowPerPage: number, orderBy: any) {
     console.log(pageNo);
     var request = new RequestCriteriaObj();
     var arrCrit = new Array();
 
-    request.pageNo=pageNo;
-    request.rowPerPage=rowPerPage;
-    request.orderBy=orderBy;
+    request.pageNo = pageNo;
+    request.rowPerPage = rowPerPage;
+    request.orderBy = orderBy;
 
     for (var i = 0; i < this.countForm; i++) {
       var critObj = new CriteriaObj();
       var component = this.myForm.nativeElement[i];
+      //console.log(component);
       //Ini khusus kalau dari Drop Down
-      if(component.nodeName ==='SELECT')
-      {
+      if (component.nodeName === 'SELECT') {
         var ddl = component.options;
         var text = ddl[ddl.selectedIndex].value;
         //Kalau Dari Dropdown udah pasti pake Eq
@@ -100,43 +139,92 @@ export class SearchComponent implements OnInit {
         critObj.propName = component.name;
         critObj.value = text;
       }
-      else{
+
+      else {
         //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
         critObj.propName = component.name;
         critObj.value = component.value;
-        if(component.value.includes("%"))
-        {
-          critObj.restriction=AdInsConstant.RestrictionLike;
-          
+        console.log(component.type);
+        console.log(component.title);
+        if (component.value.includes("%")) {
+          critObj.restriction = AdInsConstant.RestrictionLike;
+
         }
-        else{
+        //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
+
+        else if (component.title != "") {
+          critObj.restriction = component.title;
+        }
+        else {
           critObj.restriction = AdInsConstant.RestrictionEq
         }
       }
       arrCrit.push(critObj);
-      
+
     }
 
-    request.criteria=arrCrit;
-    var temp=this.adInsService.postData(AdInsConstant.GetListProduct,request);
-    this.adInsService.postData(AdInsConstant.GetListProduct,request)
-    .subscribe(
-      (response) => 
-        {
-          console.log("Success");
-          console.log(response);
-        },
-      (error) => 
-      {
-        console.log("Error");
-        console.log(error)
+    request.criteria = arrCrit;
+    return this.adInsService.postDataDummy(AdInsConstant.GetListProduct, request);
+  }
+
+  ucSearch(apiUrl: string, pageNo: number, rowPerPage: number, orderBy: any, addCrit: CriteriaObj[] = null) {
+    console.log(pageNo);
+    var request = new RequestCriteriaObj();
+    var arrCrit = new Array();
+
+    request.pageNo = pageNo;
+    request.rowPerPage = rowPerPage;
+    request.orderBy = orderBy;
+
+    for (var i = 0; i < this.countForm; i++) {
+      var critObj = new CriteriaObj();
+      var component = this.myForm.nativeElement[i];
+      //console.log(component);
+      //Ini khusus kalau dari Drop Down
+      if (component.nodeName === 'SELECT') {
+        var ddl = component.options;
+        var text = ddl[ddl.selectedIndex].value;
+        if (text !== "All") {
+          //Kalau Dari Dropdown udah pasti pake Eq
+          critObj.restriction = AdInsConstant.RestrictionEq;
+          critObj.propName = component.name;
+          critObj.value = text;
+
+          arrCrit.push(critObj);
+        }
       }
-    );
-    // this.http.get<any>('https://ipinfo.io/json')
-    // .subscribe( data => {
-    //   console.log(data.ip);
-    // });
-    //console.log(this.adInsService.postData('a','b'));
+
+      else {
+        //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
+        critObj.propName = component.name;
+        critObj.value = component.value;
+        console.log(component.type);
+        console.log(component.title);
+        if (component.value.includes("%")) {
+          critObj.restriction = AdInsConstant.RestrictionLike;
+
+        }
+        //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
+
+        else if (component.title != "") {
+          critObj.restriction = component.title;
+        }
+        else {
+          critObj.restriction = AdInsConstant.RestrictionEq
+        }
+        arrCrit.push(critObj);
+      }
+
+
+    }
+    if (addCrit !== null) {
+      for (var i = 0; i < addCrit.length; i++) {
+        arrCrit.push(addCrit[i]);
+      }
+    }
+
+    request.criteria = arrCrit;
+    return this.adInsService.postData(apiUrl, request);
   }
 
   lessThanFour(): boolean {
@@ -148,11 +236,23 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  resolveObject(obj:any,url:string){
-    const val=this.getJSON(url);
-      val.subscribe(tempData => {
-        obj.itemsUrl = tempData;
-      });
+  resolveObject(obj: any, url: string) {
+    const val = this.getJSON(url);
+    val.subscribe(tempData => {
+      obj.itemsUrl = tempData;
+    });
+  }
+
+  transformAmount(element: any) {
+
+    this.formattedAmount = parseFloat(element.target.value).toLocaleString('en');
+    // Remove or comment this line if you dont want 
+    // to show the formatted amount in the textbox.
+    element.target.value = this.formattedAmount;
+  }
+
+  transformToDecimal(element: any) {
+    element.target.value = parseFloat(element.target.value.toString().replace(/,/g, ''));
   }
 
 }

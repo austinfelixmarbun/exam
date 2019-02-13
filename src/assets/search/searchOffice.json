@@ -1,0 +1,101 @@
+{
+    "url": "http://getOffice",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "officeCode",
+            "id": "officeCodeId",
+            "value": "",
+            "label": "Office Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "officeName",
+            "id": "officeNameId",
+            "value": "",
+            "label": "Office Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "contactPersonName",
+            "id": "contactPersonNameId",
+            "value": "",
+            "label": "Contact Person",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "addr",
+            "id": "addrId",
+            "value": "",
+            "label": "Address",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "city",
+            "id": "cityId",
+            "value": "",
+            "label": "City",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "modelName",
+            "id": "modelNameId",
+            "value": "",
+            "label": "Model Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "actStat",
+            "id": "actStatId",
+            "value": "ActiveStat",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne" : false,
+            "url": "https://api.myjson.com/bins/ld6e8",
+            "label": "Active Status",
+            "items": [
+                {
+                    "key": "all",
+                    "value": "All"
+                },
+                {
+                    "key": "yes",
+                    "value": "Yes"
+                },
+                {
+                    "key": "no",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        },
+        {
+            "type": "dropdown",
+            "name": "virtualOffice",
+            "id": "virtualOfficeId",
+            "value": "virtualOffice",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "url": "https://api.myjson.com/bins/ld6e8",
+            "label": "virtual Office",
+            "items": [
+                {
+                    "key": "yes",
+                    "value": "Yes"
+                },
+                {
+                    "key": "no",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ]
+}
