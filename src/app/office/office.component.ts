@@ -24,12 +24,6 @@ export class OfficeComponent implements OnInit {
   pageSize: any;
   apiUrl: any;
 
-  // array of all items to be paged
-  private allItems: any[];
-  // pager object
-  pager: any = {};
-  // paged items
-  pagedItems: any[];
   foundationUrl: string = environment.foundationUrl;
 
   constructor(private http: Http, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }

@@ -22,25 +22,21 @@
             <th>City</th>
             <th>Model Name</th>
             <th>Active Status</th>
-            <th>Konvensional / Syariah</th>
             <th>Virtual Office</th>
-            <th>Organization Level</th>
             <th>Employee List</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let item of resultData?.returnObject">
-            <td>{{item.refOfficeId}}</td>
-            <td>{{item.officeCode}}</td>
-            <td>{{item.officeShortName}}</td>
             <td>{{item.officeName}}</td>
+            <td>{{item.officeCode}}</td>
+            <td>{{item.cntctPersonName}}</td>
+            <td>{{item.officeAddr}}</td>
+            <td>{{item.city}}</td>
             <td>{{item.orgMdlId}}</td>
-            <td>Adins Head Office</td>
-            <td>Yes</td>
-            <td>Konvensional</td>
-            <td>No</td>
-            <td>Head Office</td>
+            <td>{{item.isActive}}</td>
+            <td>{{item.isVirtualOffice}}</td>
             <td>
                 <a class="success p-0" data-original-title="" title="">
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>

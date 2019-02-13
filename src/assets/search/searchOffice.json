@@ -94,31 +94,6 @@
                 }
             ],
             "itemsUrl": []
-        },
-        {
-            "type": "dropdown",
-            "name": "syariah",
-            "id": "syariahId",
-            "value": "syariah",
-            "placeholder": "Placeholder",
-            "isFromURL": false,
-            "url": "https://api.myjson.com/bins/ld6e8",
-            "label": "Konvensional / Syariah",
-            "items": [
-                {
-                    "key": "all",
-                    "value": "All"
-                },
-                {
-                    "key": "konvensional",
-                    "value": "Konvensional"
-                },
-                {
-                    "key": "syariah",
-                    "value": "Syariah"
-                }
-            ],
-            "itemsUrl": []
         }
     ]
 }
