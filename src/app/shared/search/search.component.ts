@@ -173,6 +173,59 @@ export class SearchComponent implements OnInit{
     return this.adInsService.postDataDummy(AdInsConstant.GetListProduct,request);
   }
 
+  ucSearch(apiUrl:string, pageNo:number, rowPerPage:number, orderBy:any){
+    console.log(pageNo);
+    var request = new RequestCriteriaObj();
+    var arrCrit = new Array();
+
+    request.pageNo=pageNo;
+    request.rowPerPage=rowPerPage;
+    request.orderBy=orderBy;
+
+    for (var i = 0; i < this.countForm; i++) {
+      var critObj = new CriteriaObj();
+      var component = this.myForm.nativeElement[i];
+      //console.log(component);
+      //Ini khusus kalau dari Drop Down
+      if(component.nodeName ==='SELECT')
+      {
+        var ddl = component.options;
+        var text = ddl[ddl.selectedIndex].value;
+        //Kalau Dari Dropdown udah pasti pake Eq
+        critObj.restriction = AdInsConstant.RestrictionEq;
+        critObj.propName = component.name;
+        critObj.value = text;
+      }
+      
+      else{
+        //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
+        critObj.propName = component.name;
+        critObj.value = component.value;
+        console.log(component.type);
+        console.log(component.title);
+        if(component.value.includes("%"))
+        {
+          critObj.restriction=AdInsConstant.RestrictionLike;
+          
+        }
+        //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
+        
+        else if(component.title!="")
+        {
+          critObj.restriction=component.title;
+        }
+        else{
+          critObj.restriction = AdInsConstant.RestrictionEq
+        }
+      }
+      arrCrit.push(critObj);
+      
+    }
+
+    request.criteria=arrCrit;
+    return this.adInsService.postData(apiUrl,request);
+  }
+
   lessThanFour(): boolean {
     if (this.countForm > 3) {
       return false;
