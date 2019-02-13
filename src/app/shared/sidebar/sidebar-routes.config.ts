@@ -37,6 +37,7 @@ export const ROUTES: RouteInfo[] = [
       path: '', title: 'Marketing', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
       submenu: [
           { path: '/prospect', title: 'Prospect Request', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/prospectVerif', title: 'Prospect Verification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       ]
   },
     // // {
