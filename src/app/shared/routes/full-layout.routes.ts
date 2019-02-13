@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 
-// Route for content layout with sidebar, navbar and footer.
+//Route for content layout with sidebar, navbar and footer.
 
 export const Full_ROUTES: Routes = [
   {
@@ -87,12 +87,16 @@ export const Full_ROUTES: Routes = [
   path: 'prospectVerif',
     loadChildren: './prospect-verif/prospect-verif.module#ProspectVerifModule'
   },
-  /*{
+  {
     path: 'office',
     loadChildren: './office/office.module#OfficeModule'
   },
   {
     path: 'employee',
     loadChildren: './employee/employee.module#EmployeeModule'
-  }*/
+  },
+  {
+    path : 'organization',
+    loadChildren: './organization/organization.module#OrganizationModule'
+  }
 ];
