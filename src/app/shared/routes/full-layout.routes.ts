@@ -86,5 +86,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'employee',
     loadChildren: './employee/employee.module#EmployeeModule'
+  },
+  {
+    path : 'organization',
+    loadChildren: './organization/organization.module#OrganizationModule'
   }
 ];

@@ -24,13 +24,10 @@
             "value": "External Employee",
             "placeholder": "Placeholder",
             "isFromURL": false,
+            "isSelectOne" : false,
             "url": "https://api.myjson.com/bins/ld6e8",
             "label": "External Employee",
             "items": [
-                {
-                    "key": "all",
-                    "value": "All"
-                },
                 {
                     "key": "yes",
                     "value": "Yes"
@@ -49,13 +46,10 @@
             "value": "Active Status",
             "placeholder": "Placeholder",
             "isFromURL": false,
+            "isSelectOne" : false,
             "url": "https://api.myjson.com/bins/ld6e8",
             "label": "Active Status",
             "items": [
-                {
-                    "key": "all",
-                    "value": "All"
-                },
                 {
                     "key": "yes",
                     "value": "Yes"

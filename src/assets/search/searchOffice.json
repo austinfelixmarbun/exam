@@ -56,6 +56,7 @@
             "value": "ActiveStat",
             "placeholder": "Placeholder",
             "isFromURL": false,
+            "isSelectOne" : false,
             "url": "https://api.myjson.com/bins/ld6e8",
             "label": "Active Status",
             "items": [
@@ -81,6 +82,7 @@
             "value": "virtualOffice",
             "placeholder": "Placeholder",
             "isFromURL": false,
+            "isSelectOne": false,
             "url": "https://api.myjson.com/bins/ld6e8",
             "label": "virtual Office",
             "items": [

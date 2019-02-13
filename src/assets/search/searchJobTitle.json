@@ -1,0 +1,48 @@
+{
+    "url": "http://getRefJobTitle",
+    "component": [
+        {
+            "type": "dropdown",
+            "name": "organizationName",
+            "id": "organizationName",
+            "value": "",
+            "label": "Organization Name",
+            "isSelectOne" : false,
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Head Office"
+                },
+                {
+                    "key": "2",
+                    "value": "Business Unit"
+                }
+            ],
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "jobTitleCode",
+            "id": "jobTitleCodeId",
+            "value": "%",
+            "label": "Job Title Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "jobTitleName",
+            "id": "jobTitleNameId",
+            "label" : "Job Title Name",
+            "value": "%",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "posLevel",
+            "id": "posLevelId",
+            "value": "%",
+            "label": "Position Level",
+            "placeholder": "Placeholder"
+        }
+    ]
+}

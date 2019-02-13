@@ -15,24 +15,22 @@
 <table class="table table-responsive-md text-center table-hover">
     <thead>
         <tr>
-            <th>Employee No</th>
-            <th>Employee Name</th>
-            <th>External Employee</th>
-            <th>Active Status</th>
+            <th>Job Title Code</th>
+            <th>Job Title Name</th>
+            <th>Description</th>
+            <th>Position Level</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let item of resultData?.returnObject">
-            <td>{{item.empNo}}</td>
-            <td>{{item.empName}}</td>
-            <td>{{item.isExt}}</td>
-            <td>{{item.isActive}}</td>
+            <td>{{item.refOfficeId}}</td>
+            <td>{{item.officeCode}}</td>
+            <td>{{item.officeShortName}}</td>
+            <td>{{item.officeName}}</td>
+            <td>{{item.orgMdlId}}</td>
             <td>
-                <a class="success p-0" data-original-title="" title="">
-                    <i class="ft-edit-2 font-medium-3 mr-2"></i>
-                </a>
-                <a class="success p-0" data-original-title="" title="" [routerLink]="['/employee/add']">
+                <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/add']">
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>
                 </a>
                 <a class="danger p-0" data-original-title="" title="">
@@ -42,7 +40,8 @@
         </tr>
     </tbody>
 </table>
+Current Page : {{pageNow}}
 <div class="d-flex justify-content-center">
-    <ngb-pagination [collectionSize]="120" [(page)]="page5" [maxSize]="5" [rotate]="true" [ellipses]="false"
-        [boundaryLinks]="false"></ngb-pagination>
+    <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData" [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true"
+        [boundaryLinks]="true"></ngb-pagination>
 </div>
