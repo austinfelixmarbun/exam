@@ -1,0 +1,36 @@
+{
+    "url": "http://getSupplier",
+    "title":"Lookup Product",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "ProductType",
+        "id": "ProductType",
+        "value": "MCYNW",
+        "label": "Product Type",
+        "placeholder": "Product Type"
+      },
+      {
+        "type": "textbox",
+        "name": "ProductName",
+        "id": "ProductName",
+        "value": "%",
+        "label": "Product Name",
+        "placeholder": "Product Type"
+      }
+    ],
+    "header":[
+        {
+            "label":"Product Id",
+            "visibility":true
+        },
+        {
+            "label":"Product Name",
+            "visibility":true
+        },
+        {
+            "label":"Product Type",
+            "visibility":true
+        }
+    ]
+  }
