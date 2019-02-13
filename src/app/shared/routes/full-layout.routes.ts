@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 
-//Route for content layout with sidebar, navbar and footer.
+// Route for content layout with sidebar, navbar and footer.
 
 export const Full_ROUTES: Routes = [
   {
@@ -78,5 +78,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'supplier',
     loadChildren: './supplier/supplier.module#SupplierModule'
+  },
+  {
+    path: 'prospect',
+    loadChildren: './prospect/prospect.module#ProspectModule'
   }
 ];
