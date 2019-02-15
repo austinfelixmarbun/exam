@@ -126,10 +126,13 @@ export class SearchComponent implements OnInit {
     request.rowPerPage = rowPerPage;
     request.orderBy = orderBy;
 
-    for (var i = 0; i < this.countForm; i++) {
+    var formControl = this.myForm.nativeElement.querySelectorAll('.form-control')
+    console.log(formControl)
+    
+    for (var i = 0; i < formControl.length; i++) {
       var critObj = new CriteriaObj();
-      var component = this.myForm.nativeElement[i];
-      //console.log(component);
+      var component = formControl[i];
+      console.log(component);
       //Ini khusus kalau dari Drop Down
       if (component.nodeName === 'SELECT') {
         var ddl = component.options;
@@ -139,7 +142,6 @@ export class SearchComponent implements OnInit {
         critObj.propName = component.name;
         critObj.value = text;
       }
-
       else {
         //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
         critObj.propName = component.name;
@@ -160,10 +162,47 @@ export class SearchComponent implements OnInit {
         }
       }
       arrCrit.push(critObj);
-
     }
 
+    // for (var i = 0; i < this.countForm; i++) {
+    //   var critObj = new CriteriaObj();
+    //   var component = this.myForm.nativeElement[i];
+    //   //console.log(component);
+    //   //Ini khusus kalau dari Drop Down
+    //   if (component.nodeName === 'SELECT') {
+    //     var ddl = component.options;
+    //     var text = ddl[ddl.selectedIndex].value;
+    //     //Kalau Dari Dropdown udah pasti pake Eq
+    //     critObj.restriction = AdInsConstant.RestrictionEq;
+    //     critObj.propName = component.name;
+    //     critObj.value = text;
+    //   }
+
+    //   else {
+    //     //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
+    //     critObj.propName = component.name;
+    //     critObj.value = component.value;
+    //     console.log(component.type);
+    //     console.log(component.title);
+    //     if (component.value.includes("%")) {
+    //       critObj.restriction = AdInsConstant.RestrictionLike;
+
+    //     }
+    //     //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
+
+    //     else if (component.title != "") {
+    //       critObj.restriction = component.title;
+    //     }
+    //     else {
+    //       critObj.restriction = AdInsConstant.RestrictionEq
+    //     }
+    //   }
+    //   arrCrit.push(critObj);
+
+    // }
+
     request.criteria = arrCrit;
+    console.log(request.criteria)
     return this.adInsService.postDataDummy(AdInsConstant.GetListProduct, request);
   }
 

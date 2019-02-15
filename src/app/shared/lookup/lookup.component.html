@@ -1,7 +1,6 @@
 <div class="input-group">
-  <input type="hidden" value="{{idSelect}}" id="idSelect" name="idSelect">
-  <input type="hidden" value="{{jsonSelect}}" id="jsonSelect" name="jsonSelect">
-  <input type="text" class="form-control" disabled placeholder="{{nameSelect}}">
+  <input type="text" class="form-control" attr.data-json='{{jsonSelect}}' attr.data-id='{{idSelect}}' 
+  name="ProductName" value="{{nameSelect}}" disabled>
   <div class="input-group-append">
     <span class="input-group-btn">
       <button class="btn btn-raised btn-primary" type="button" (click)="open(content)">Go!</button>
