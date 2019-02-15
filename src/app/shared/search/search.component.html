@@ -28,6 +28,13 @@
                           <input type="text" id="{{question.id}}" (focus)="transformToDecimal($event)" (blur)="transformAmount($event)"
                             class="form-control" name="{{question.name}}" value="{{question.value}}" data-title="{{question.restriction}}">
                         </div>
+
+                        <!-- Sementara di Hardcode begini dulu-->
+                        <div *ngIf="question.type==='lookupProduct'">
+                            <app-lookup></app-lookup>
+                        </div>
+
+                        <!-- End Hardcode Lookup didalem-->
                         <div *ngIf="question.type==='datepicker'">
                           <input type="date" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}"
                             data-title="{{question.restriction}}">

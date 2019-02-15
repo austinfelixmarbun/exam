@@ -6,8 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./office-add.component.scss']
 })
 export class OfficeAddComponent implements OnInit {
-
-  urlJson:string = './assets/lookup/lookupProduct.json';
+  
   constructor() { }
 
   ngOnInit() {
