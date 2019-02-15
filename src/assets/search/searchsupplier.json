@@ -20,11 +20,51 @@
     {
       "type": "lookupProduct",
       "name": "ProductName",
-      "urlLookup":"./assets/lookup/lookupProduct.json",
+      "urlLookup": "./assets/lookup/lookupProduct.json",
       "id": "ProductName",
       "value": "lookup",
       "label": "Lookup Product",
       "placeholder": "Product Type"
+    },
+    {
+      "type": "lookupProduct",
+      "name": "ProductNam2e",
+      "urlLookup": "./assets/lookup/lookupProduct.json",
+      "id": "ProductName2",
+      "value": "lookup",
+      "label": "Lookup Product",
+      "placeholder": "Product Type"
+    },
+    {
+      "type": "datepicker",
+      "name": "DtStart",
+      "id": "DtStart",
+      "value": "BD-2",
+      "label": "Start Date >=",
+      "restriction":"Gte",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "dropdown",
+      "name": "virtualOffice",
+      "id": "virtualOfficeId",
+      "value": "virtualOffice",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "virtual Office",
+      "items": [
+        {
+          "key": "yes",
+          "value": "Yes"
+        },
+        {
+          "key": "no",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
     }
   ]
 }
