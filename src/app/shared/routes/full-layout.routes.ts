@@ -80,6 +80,14 @@ export const Full_ROUTES: Routes = [
     loadChildren: './supplier/supplier.module#SupplierModule'
   },
   {
+    path: 'prospect',
+    loadChildren: './prospect/prospect.module#ProspectModule'
+  },
+  {
+  path: 'prospectVerif',
+    loadChildren: './prospect-verif/prospect-verif.module#ProspectVerifModule'
+  },
+  {
     path: 'office',
     loadChildren: './office/office.module#OfficeModule'
   },

@@ -19,20 +19,34 @@ export class LookupComponent implements OnInit {
   @Input() _url: string;
 
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild('content') contentTemplate;
 
   configuration: any;
   urlGet: string;
   countForm = 0;
   isDataLoaded: boolean = false;
-  title:string;
-  resultData:any;
-  pageNow:any = 1;
-  pageSize:any = 25;
-  totalData:any;
+  title: string;
+  resultData: any;
+  pageNow: any = 1;
+  pageSize: any = 25;
+  totalData: any;
+
+  jsonSelect:string;
+  idSelect: any;
+  nameSelect: any = "Search ...";
 
   closeResult: string;
 
   ngOnInit() {
+  }
+
+  choose(id, name,item) {
+    console.log(id + " : " + name);
+    console.log(item);
+    this.idSelect = id;
+    this.nameSelect = name;
+    this.jsonSelect = JSON.stringify(item);
+    this.modalService.dismissAll();
   }
 
   open(content) {
@@ -43,32 +57,33 @@ export class LookupComponent implements OnInit {
     });
   }
 
-  search(){
-    this.searchComponent.callSearch(this.pageNow, this.pageSize, null)
-            .subscribe(
-                (response) => {
-                    console.log("Success");
-                    this.resultData = response;
-                    this.totalData = response.count;
-                    console.log(response);
-                    //this.spinner.hide();
-                },
-                (error) => {
-                    console.log("Error");
-                    console.log(error);
-                    //this.spinner.hide();
-                }
-            );
+  search(searchComp) {
+    searchComp.callSearch(this.pageNow, this.pageSize, null)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response;
+          this.totalData = response.count;
+          console.log(response);
+          //this.spinner.hide();
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+          //this.spinner.hide();
+        }
+      );
+
   }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
-        return 'by pressing ESC';
+      return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-        return 'by clicking on a backdrop';
+      return 'by clicking on a backdrop';
     } else {
-        return `with: ${reason}`;
+      return `with: ${reason}`;
     }
-}
+  }
 
 }

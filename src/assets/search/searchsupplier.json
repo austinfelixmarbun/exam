@@ -16,6 +16,15 @@
       "value": "%",
       "label": "Product Name",
       "placeholder": "Product Type"
+    },
+    {
+      "type": "lookupProduct",
+      "name": "ProductName",
+      "urlLookup":"./assets/lookup/lookupProduct.json",
+      "id": "ProductName",
+      "value": "lookup",
+      "label": "Lookup Product",
+      "placeholder": "Product Type"
     }
   ]
 }
