@@ -48,7 +48,7 @@ export class RefJobTitleComponent implements OnInit {
 
   search() {
     this.spinner.show();
-    this.searchComponent.ucSearch(this.apiUrl, this.pageNow, this.pageSize, null)
+    this.searchComponent.ucSearch("http://r3app-server/FOUNDATION/Holiday/IsHoliday", this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
           console.log("Success");

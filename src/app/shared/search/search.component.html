@@ -18,15 +18,15 @@
                       <label style="float:left;" class="col-md-5 no-padding" for="projectinput1">{{question.label}}</label>
                       <div class="col-md-7 no-padding" style="float:left;">
                         <div *ngIf="question.type==='textbox'">
-                          <input type="text" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}">
+                          <input type="text" id="{{question.id}}" class="form-control search-form-control" name="{{question.name}}" value="{{question.value}}">
                         </div>
                         <div *ngIf="question.type==='textarea'">
-                          <textarea type="text" id="{{question.id}}" class="form-control" name="{{question.name}}"
+                          <textarea type="text" id="{{question.id}}" class="form-control search-form-control" name="{{question.name}}"
                             value="{{question.value}}"></textarea>
                         </div>
                         <div *ngIf="question.type==='numeric'">
                           <input type="text" id="{{question.id}}" (focus)="transformToDecimal($event)" (blur)="transformAmount($event)"
-                            class="form-control" name="{{question.name}}" value="{{question.value}}" data-title="{{question.restriction}}">
+                            class="form-control search-form-control" name="{{question.name}}" value="{{question.value}}" data-title="{{question.restriction}}">
                         </div>
 
                         <!-- Sementara di Hardcode begini dulu-->
@@ -36,13 +36,13 @@
 
                         <!-- End Hardcode Lookup didalem-->
                         <div *ngIf="question.type==='datepicker'">
-                          <input type="date" id="{{question.id}}" class="form-control" name="{{question.name}}" value="{{question.value}}"
+                          <input type="date" id="{{question.id}}" class="form-control search-form-control" name="{{question.name}}" value="{{question.value}}"
                             data-title="{{question.restriction}}">
                         </div>
                         <div *ngIf="question.type==='dropdown'">
                           <!-- Ini kalau datanya tidak di load dari URL -->
                           <div *ngIf="!question.isFromURL">
-                            <select id="projectinput6" name="{{question.name}}" class="form-control">
+                            <select id="projectinput6" name="{{question.name}}" class="form-control search-form-control">
                               <option *ngIf="!question.isSelectOne" value="All">
                                 All
                               </option>
@@ -53,7 +53,7 @@
                           </div>
                           <!-- Ini kalau datanya di load dari URL -->
                           <div *ngIf="question.isFromURL">
-                            <select id="projectinput6" name="{{question.name}}" class="form-control">
+                            <select id="projectinput6" name="{{question.name}}" class="form-control search-form-control">
                               <option *ngIf="!question.isSelectOne" value="All">
                                 All
                               </option>
