@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RefJobTitleComponent } from './ref-job-title/ref-job-title.component';
+import { RefJobTitleAddComponent } from './ref-job-title/ref-job-title-add/ref-job-title-add.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,14 @@ const routes: Routes = [
         path: 'refjobtitle',
         component: RefJobTitleComponent,
         data: {
-          title: 'Ref Job Title'
+          title: 'Job Title'
+        },
+      },
+      {
+        path: 'refjobtitle/add',
+        component: RefJobTitleAddComponent,
+        data: {
+          title: 'Job Title add'
         },
       }
     ]

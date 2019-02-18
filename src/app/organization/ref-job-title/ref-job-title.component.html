@@ -1,3 +1,4 @@
+<h4>JOB TITLE</h4>
 <app-search id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
 <div class="col-md-12">
     <form>
@@ -28,7 +29,6 @@
             <td>{{item.officeCode}}</td>
             <td>{{item.officeShortName}}</td>
             <td>{{item.officeName}}</td>
-            <td>{{item.orgMdlId}}</td>
             <td>
                 <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/add']">
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>
@@ -40,6 +40,7 @@
         </tr>
     </tbody>
 </table>
+<i class="fa fa-plus-circle" [routerLink]="['/organization/refjobtitle/add']" style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
 Current Page : {{pageNow}}
 <div class="d-flex justify-content-center">
     <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData" [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true"
