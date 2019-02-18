@@ -207,15 +207,15 @@ export class SearchComponent implements OnInit {
         critObj.propName = component.name;
         critObj.value = component.value;
         console.log(component.type);
-        console.log(component.title);
+        console.log(component.restriction);
         if (component.value.includes("%")) {
           critObj.restriction = AdInsConstant.RestrictionLike;
 
         }
         //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
 
-        else if (component.title != "") {
-          critObj.restriction = component.title;
+        else if (component.restriction != "") {
+          critObj.restriction = component.restriction;
         }
         else {
           critObj.restriction = AdInsConstant.RestrictionEq
