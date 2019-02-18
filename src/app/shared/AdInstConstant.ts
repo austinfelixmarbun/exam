@@ -6,4 +6,5 @@ export class AdInsConstant{
     public static GetListOffice = "/RefOffice/GetAllRefOffice";
     public static GetListEmployee = "/RefEmp/GetAllEmpList";
     public static GetRefJobTitle = "/OrganizationDefinition/GetAvailableRefJobTitle";
+    public static GetRefOrg = "/OrganizationDefinition/GetRefOrgPaging";
 }

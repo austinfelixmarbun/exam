@@ -7,6 +7,7 @@ import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RefJobTitleComponent } from './ref-job-title/ref-job-title.component';
 import { RefJobTitleAddComponent } from './ref-job-title/ref-job-title-add/ref-job-title-add.component';
+import { OrganizationComponent } from './organization.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { RefJobTitleAddComponent } from './ref-job-title/ref-job-title-add/ref-j
   ],
   declarations: [
     RefJobTitleComponent,
-    RefJobTitleAddComponent
+    RefJobTitleAddComponent,
+    OrganizationComponent
   ]
 })
 export class OrganizationModule { }
