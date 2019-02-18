@@ -48,13 +48,13 @@ export class RefJobTitleComponent implements OnInit {
 
   search() {
     this.spinner.show();
-    this.searchComponent.ucSearch(this.apiUrl, this.pageNow, this.pageSize, null)
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
           console.log("Success");
-          this.resultData = response;
+          this.resultData = response.returnObject;
           this.totalData = response.count;
-          console.log(response);
+          console.log(this.resultData);
           this.spinner.hide();
         },
         (error) => {

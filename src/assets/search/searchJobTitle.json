@@ -19,7 +19,7 @@
                 }
             ],
             "placeholder": "Placeholder",
-            "datatype": "Text"
+            "datatype": "Numeric"
         },
         {
             "type": "textbox",
@@ -36,6 +36,15 @@
             "id": "jobTitleNameId",
             "label" : "Job Title Name",
             "value": "%",
+            "placeholder": "Placeholder",
+            "datatype": "Text"
+        },
+        {
+            "type": "textbox",
+            "name": "mrJobPositionLvl",
+            "id": "posLevelId",
+            "value": "%",
+            "label": "Position Level",
             "placeholder": "Placeholder",
             "datatype": "Text"
         }

@@ -5,6 +5,6 @@ export class AdInsConstant{
     public static Login="https://api.myjson.com/bins/vk2vs";
     public static GetListOffice = "/RefOffice/GetAllRefOffice";
     public static GetListEmployee = "/RefEmp/GetAllEmpList";
-    public static GetRefJobTitle = "/OrganizationDefinition/GetAvailableRefJobTitle";
+    public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrgPaging";
 }

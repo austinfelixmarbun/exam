@@ -41,7 +41,7 @@ export class OfficeComponent implements OnInit {
 
   search() {
     this.spinner.show();
-    this.searchComponent.ucSearch(this.apiUrl, this.pageNow, this.pageSize, null)
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
           console.log("Success");
