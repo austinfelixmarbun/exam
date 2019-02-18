@@ -187,6 +187,7 @@ export class SearchComponent implements OnInit {
     for (var i = 0; i < this.countForm; i++) {
       var critObj = new CriteriaObj();
       var component = this.myForm.nativeElement[i];
+      critObj.DataType = component.datatype;
       //console.log(component);
       //Ini khusus kalau dari Drop Down
       if (component.nodeName === 'SELECT') {
