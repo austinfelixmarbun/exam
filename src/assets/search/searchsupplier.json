@@ -7,7 +7,8 @@
       "id": "ProductType",
       "value": "MCYNW",
       "label": "Product Type",
-      "placeholder": "Product Type"
+      "placeholder": "Product Type",
+      "datatype": "Text"
     },
     {
       "type": "textbox",
@@ -15,7 +16,8 @@
       "id": "ProductName",
       "value": "%",
       "label": "Product Name",
-      "placeholder": "Product Type"
+      "placeholder": "Product Type",
+      "datatype": "Text"
     },
     {
       "type": "lookupProduct",
@@ -24,7 +26,8 @@
       "id": "ProductName",
       "value": "lookup",
       "label": "Lookup Product",
-      "placeholder": "Product Type"
+      "placeholder": "Product Type",
+      "datatype": "Text"
     },
     {
       "type": "lookupProduct",
@@ -33,38 +36,8 @@
       "id": "ProductName2",
       "value": "lookup",
       "label": "Lookup Product",
-      "placeholder": "Product Type"
-    },
-    {
-      "type": "datepicker",
-      "name": "DtStart",
-      "id": "DtStart",
-      "value": "BD-2",
-      "label": "Start Date >=",
-      "restriction":"Gte",
-      "placeholder": "Placeholder"
-    },
-    {
-      "type": "dropdown",
-      "name": "virtualOffice",
-      "id": "virtualOfficeId",
-      "value": "virtualOffice",
-      "placeholder": "Placeholder",
-      "isFromURL": false,
-      "isSelectOne": false,
-      "url": "https://api.myjson.com/bins/ld6e8",
-      "label": "virtual Office",
-      "items": [
-        {
-          "key": "yes",
-          "value": "Yes"
-        },
-        {
-          "key": "no",
-          "value": "No"
-        }
-      ],
-      "itemsUrl": []
+      "placeholder": "Product Type",
+      "datatype": "Text"
     }
   ]
 }
