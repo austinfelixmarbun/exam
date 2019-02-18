@@ -25,7 +25,9 @@ export const ROUTES: RouteInfo[] = [
     {
         path: '', title: 'Organization Struct', icon: 'ft-bar-chart-2', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
-            { path: '/organization/refjobtitle', title: 'Ref Job Title', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+            { path: '/organization/refjobtitle', title: 'Ref Job Title', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '/organization/organization', title: 'Organization', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+
         ]
     },
     {
