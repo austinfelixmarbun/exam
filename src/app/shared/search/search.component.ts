@@ -110,7 +110,7 @@ export class SearchComponent implements OnInit {
     console.log("This is Payload:" + this.payLoad);
   }
 
-  search() {
+  searchTry() {
     console.log("This Call Search");
     console.log(this.myForm);
     for (var i = 0; i < this.countForm; i++) {
@@ -176,7 +176,7 @@ export class SearchComponent implements OnInit {
     return this.adInsService.postDataDummy(AdInsConstant.GetListProduct, request);
   }
 
-  ucSearch(apiUrl: string, pageNo: number, rowPerPage: number, orderBy: any, addCrit: CriteriaObj[] = null) {
+  search(apiUrl: string, pageNo: number, rowPerPage: number, orderBy: any, addCrit: CriteriaObj[] = null) {
     console.log(pageNo);
     var request = new RequestCriteriaObj();
     var arrCrit = new Array();
