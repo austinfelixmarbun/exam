@@ -3,8 +3,8 @@
     "component": [
         {
             "type": "dropdown",
-            "name": "organizationName",
-            "id": "organizationName",
+            "name": "refOrgId",
+            "id": "refOrgId",
             "value": "",
             "label": "Organization Name",
             "isSelectOne" : false,
@@ -18,31 +18,35 @@
                     "value": "Business Unit"
                 }
             ],
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "Numeric"
         },
         {
             "type": "textbox",
             "name": "jobTitleCode",
             "id": "jobTitleCodeId",
-            "value": "%",
+            "value": "",
             "label": "Job Title Code",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "Text"
         },
         {
             "type": "textbox",
             "name": "jobTitleName",
             "id": "jobTitleNameId",
             "label" : "Job Title Name",
-            "value": "%",
-            "placeholder": "Placeholder"
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "Text"
         },
         {
             "type": "textbox",
-            "name": "posLevel",
+            "name": "mrJobPositionLvl",
             "id": "posLevelId",
-            "value": "%",
+            "value": "",
             "label": "Position Level",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "Text"
         }
     ]
 }

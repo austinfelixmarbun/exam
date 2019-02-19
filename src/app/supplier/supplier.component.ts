@@ -7,6 +7,7 @@ import { Http, Response } from '@angular/http';
 import { data } from 'app/shared/data/smart-data-table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-supplier',
@@ -24,9 +25,15 @@ export class SupplierComponent implements OnInit {
     pageNow:any;
     totalData:any;
     pageSize:any;
+    param: string;
 
-    constructor(private http: Http, private spinner: NgxSpinnerService,  private service: NGXToastrService) {
+    constructor(private http: Http, private spinner: NgxSpinnerService,  private service: NGXToastrService, private route: ActivatedRoute) {
+        this.route.queryParams.subscribe(params => {
+            this.param = params['param'];
+            console.log(this.param)
+        });
     }
+    
     ngOnInit() {
         this.pageNow=1;
         this.pageSize=25;

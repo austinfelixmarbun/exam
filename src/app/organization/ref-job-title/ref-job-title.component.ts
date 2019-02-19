@@ -38,7 +38,7 @@ export class RefJobTitleComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 25;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetListOffice;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitle;
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
@@ -48,13 +48,13 @@ export class RefJobTitleComponent implements OnInit {
 
   search() {
     this.spinner.show();
-    this.searchComponent.ucSearch("http://r3app-server/FOUNDATION/Holiday/IsHoliday", this.pageNow, this.pageSize, null)
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
           console.log("Success");
-          this.resultData = response;
+          this.resultData = response.returnObject;
           this.totalData = response.count;
-          console.log(response);
+          console.log(this.resultData);
           this.spinner.hide();
         },
         (error) => {
