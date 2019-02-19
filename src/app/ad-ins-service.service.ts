@@ -75,8 +75,8 @@ export class AdInsServiceService {
     })
     httpRequest.UserName=currentUserContext.UserName;
     httpRequest.RequestObject = requestObj;
-    
-    console.log(httpRequest);
+
+    console.log(JSON.stringify(httpRequest));
     return this.httpClient.post(url,httpRequest,httpOptions);
   }
 

@@ -1,3 +1,4 @@
+import { value } from './../data/dropdowns';
 import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -109,7 +110,7 @@ export class SearchComponent implements OnInit {
     console.log("This is Payload:" + this.payLoad);
   }
 
-  search() {
+  searchTry() {
     console.log("This Call Search");
     console.log(this.myForm);
     for (var i = 0; i < this.countForm; i++) {
@@ -128,11 +129,11 @@ export class SearchComponent implements OnInit {
 
     var formControl = this.myForm.nativeElement.querySelectorAll('.search-form-control')
     console.log(formControl)
-    
+
     for (var i = 0; i < formControl.length; i++) {
       var critObj = new CriteriaObj();
       var component = formControl[i];
-      console.log(component);
+      console.log('a', component.value);
       //Ini khusus kalau dari Drop Down
       if (component.attributes['data-inputId'] != null || component.value != "") {
         if (component.nodeName === 'SELECT') {
@@ -175,7 +176,7 @@ export class SearchComponent implements OnInit {
     return this.adInsService.postDataDummy(AdInsConstant.GetListProduct, request);
   }
 
-  ucSearch(apiUrl: string, pageNo: number, rowPerPage: number, orderBy: any, addCrit: CriteriaObj[] = null) {
+  search(apiUrl: string, pageNo: number, rowPerPage: number, orderBy: any, addCrit: CriteriaObj[] = null) {
     console.log(pageNo);
     var request = new RequestCriteriaObj();
     var arrCrit = new Array();
@@ -187,8 +188,11 @@ export class SearchComponent implements OnInit {
     for (var i = 0; i < this.countForm; i++) {
       var critObj = new CriteriaObj();
       var component = this.myForm.nativeElement[i];
-      //console.log(component);
+      critObj.DataType = component.getAttribute('data-type');
+      console.log('component');
+      console.log(component.value);
       //Ini khusus kalau dari Drop Down
+      if (component.value != "") {
       if (component.nodeName === 'SELECT') {
         var ddl = component.options;
         var text = ddl[ddl.selectedIndex].value;
@@ -207,22 +211,22 @@ export class SearchComponent implements OnInit {
         critObj.propName = component.name;
         critObj.value = component.value;
         console.log(component.type);
-        console.log(component.title);
+        console.log(component.restriction);
         if (component.value.includes("%")) {
           critObj.restriction = AdInsConstant.RestrictionLike;
 
         }
         //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
 
-        else if (component.title != "") {
-          critObj.restriction = component.title;
+        else if ( component.getAttribute('data-restriction') != "") {
+          critObj.restriction = component.getAttribute('data-restriction');
         }
         else {
           critObj.restriction = AdInsConstant.RestrictionEq
         }
         arrCrit.push(critObj);
       }
-
+    }
 
     }
     if (addCrit !== null) {
@@ -254,7 +258,7 @@ export class SearchComponent implements OnInit {
   transformAmount(element: any) {
 
     this.formattedAmount = parseFloat(element.target.value).toLocaleString('en');
-    // Remove or comment this line if you dont want 
+    // Remove or comment this line if you dont want
     // to show the formatted amount in the textbox.
     element.target.value = this.formattedAmount;
   }

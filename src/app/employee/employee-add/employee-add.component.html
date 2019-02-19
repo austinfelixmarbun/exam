@@ -1,57 +1,55 @@
-<div class="row text-left">
-  <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title" id="horz-layout-colored-controls">Employee Add</h4>
-                </div>
-                <div class="card-body">
-                    <div class="px-3">
-                        <form class="form form-horizontal">
-                          <div class="form-body">
-                            <h4 class="form-section"><i class="ft-file-text"></i> Add/ Edit</h4>
-                              <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput5">Employee No: </label>
-                                <div class="col-md-9">
-                                    <input type="text" id="projectinput5" class="form-control"  name="empNo">
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput5">Employee Name: </label>
-                                <div class="col-md-9">
-                                    <input type="text" id="projectinput5" class="form-control"  name="empName">
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput6">External Employee: </label>
-                                <div class="col-md-9">
-                                    <select id="projectinput6" name="extEmp" class="form-control">
-                                        <option value="yes">Yes</option>
-                                        <option value="no">No</option>
-                                    </select>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput6">Active Status: </label>
-                                <div class="col-md-9">
-                                    <select id="projectinput6" name="actStat" class="form-control">
-                                        <option value="all">All</option>
-                                        <option value="yes">Yes</option>
-                                        <option value="no">No</option>
-                                    </select>
-                                </div>
-                              </div>
-                            </div>
-                          <div class="form-actions right">
-                              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/employee']">
-                                <i class="ft-x"></i> Cancel
-                              </button>
-                              <button type="button" class="btn btn-raised btn-primary">
-                                  <i class="fa fa-check-square-o"></i> Save
-                              </button>
-                          </div>
-                        </form>
-                    </div>
-                </div>
-        </div>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="horz-layout-colored-controls">Employee Add</h4>
     </div>
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal">
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-file-text"></i> Add/ Edit</h4>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="projectinput5">Employee No: </label>
+              <div class="col-md-9">
+                <input type="text" id="projectinput5" class="form-control" name="empNo">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="projectinput5">Employee Name: </label>
+              <div class="col-md-9">
+                <input type="text" id="projectinput5" class="form-control" name="empName">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="projectinput6">External Employee: </label>
+              <div class="col-md-9">
+                <select id="projectinput6" name="extEmp" class="form-control">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="projectinput6">Active Status: </label>
+              <div class="col-md-9">
+                <select id="projectinput6" name="actStat" class="form-control">
+                  <option value="all">All</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/employee']">
+              <i class="ft-x"></i> Cancel
+            </button>
+            <button type="button" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

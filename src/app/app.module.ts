@@ -24,8 +24,7 @@ import { NgxSpinnerModule} from 'ngx-spinner';
 
 import * as $ from 'jquery';
 import { UserMaintenanceComponent } from './user/user-maintenance/user-maintenance.component';
-
-
+import { HttpModule } from '@angular/http';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,6 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
         UserMaintenanceComponent
     ],
     imports: [
+        HttpModule,
         BrowserAnimationsModule,
         StoreModule.forRoot({}),
         AppRoutingModule,

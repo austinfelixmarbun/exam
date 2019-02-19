@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProspectVerifDetailComponent } from './prospect-verif-detail/prospect-verif-detail.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         SharingModule
     ],
     declarations: [
-      ProspectVerifComponent
+      ProspectVerifComponent,
+      ProspectVerifDetailComponent
     ]
 })
 export class ProspectVerifModule { }

@@ -16,7 +16,7 @@ export class ProspectComponent implements OnInit {
   birthDate: string;
   Gender = 'M';
   CustModel = 'Professional';
-  Income = 'income1';
+  Income = 'Less than 5,000,000.00';
 
   prosObj: ProspectObj;
 

@@ -1,0 +1,63 @@
+<h4>JOB TITLE</h4>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="horz-layout-colored-controls">Job Title Add / Edit</h4>
+    </div>
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal">
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-file-text"></i> Add / Edit</h4>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="projectinput1">Job Title Code: </label>
+              <div class="col-md-9">
+                <input type="text" id="projectinput1" class="form-control" name="jobTitleCode">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="projectinput2">Job Title Name: </label>
+              <div class="col-md-9">
+                <input type="text" id="projectinput2" class="form-control" name="jobTitleName">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="projectinput3">Organization Name: </label>
+              <div class="col-md-9">
+                <select id="projectinput3" name="orgName" class="form-control">
+                  <option value="-">Select One</option>
+                  <option value="HO">Head Office</option>
+                  <option value="BU">Business Unit</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="projectinput4">Position Level: </label>
+              <div class="col-md-9">
+                <select id="projectinput4" name="positionLevel" class="form-control">
+                  <option value="-">Select One</option>
+                  <option value="SPV">Supervisor</option>
+                  <option value="DIR">Director</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="projectinput5">Description: </label>
+              <div class="col-md-9">
+                <textarea id="projectinput5" rows="5" class="form-control" name="comment"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/oraganization/refjobtitle']">
+              <i class="ft-x"></i> Cancel
+            </button>
+            <button type="button" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
