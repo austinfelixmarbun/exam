@@ -1,3 +1,4 @@
+import { OrgAddEditComponent } from './organization-add-edit/org-add-edit/org-add-edit.component';
 import { OrganizationComponent } from './organization.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -21,6 +22,13 @@ const routes: Routes = [
         component: OrganizationComponent,
         data: {
           title: 'Organization'
+        },
+      },
+      {
+        path: 'addedit',
+        component: OrgAddEditComponent,
+        data: {
+          title: 'Organization Add Edit'
         },
       }
     ]

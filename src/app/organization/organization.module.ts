@@ -7,6 +7,7 @@ import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RefJobTitleComponent } from './ref-job-title/ref-job-title.component';
 import { OrganizationComponent } from './organization.component';
+import { OrgAddEditComponent } from './organization-add-edit/org-add-edit/org-add-edit.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { OrganizationComponent } from './organization.component';
   ],
   declarations: [
     RefJobTitleComponent,
-    OrganizationComponent
+    OrganizationComponent,
+    OrgAddEditComponent
   ]
 })
 export class OrganizationModule { }
