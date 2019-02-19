@@ -6,8 +6,12 @@ import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RefJobTitleComponent } from './ref-job-title/ref-job-title.component';
+import { BusinessUnitComponent } from './business-unit/business-unit.component';
+import { AddBusinessUnitComponent } from './business-unit/add/add-business-unit.component';
+import { RefJobTitleAddComponent } from './ref-job-title/ref-job-title-add/ref-job-title-add.component';
 import { OrganizationComponent } from './organization.component';
 import { OrgAddEditComponent } from './organization-add-edit/org-add-edit/org-add-edit.component';
+
 
 @NgModule({
   imports: [
@@ -21,7 +25,12 @@ import { OrgAddEditComponent } from './organization-add-edit/org-add-edit/org-ad
   declarations: [
     RefJobTitleComponent,
     OrganizationComponent,
-    OrgAddEditComponent
+    OrgAddEditComponent,
+    BusinessUnitComponent,
+    AddBusinessUnitComponent,
+    RefJobTitleAddComponent,
+    OrganizationComponent
+
   ]
 })
 export class OrganizationModule { }
