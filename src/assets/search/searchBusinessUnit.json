@@ -1,0 +1,42 @@
+{
+    "url": "http://getBusinessUnit",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "businessUnitCode",
+            "id": "businessUnitCodeId",
+            "value": "",
+            "label": "Business Unit Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "businessUnitName",
+            "id": "businessUnitNameId",
+            "value": "",
+            "label": "Business Unit Name",
+            "placeholder": "Placeholder"
+        },
+        {   
+            "type": "dropdown",
+            "name": "activeStatus",
+            "id": "activeStatusId",
+            "label" : "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne" : false,
+            "items": [
+                {
+                    "key": "Yes",
+                    "value": "Yes"
+                },
+                {
+                    "key": "No",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ]
+}
