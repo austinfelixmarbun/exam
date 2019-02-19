@@ -35,12 +35,13 @@ const routes: Routes = [
         },
       },
       {
-<<<<<<< HEAD
         path: 'addedit',
         component: OrgAddEditComponent,
         data: {
           title: 'Organization Add Edit'
-=======
+        },
+      },
+      {
         path: 'businessunit',
         component: BusinessUnitComponent,
         data: {
@@ -52,7 +53,6 @@ const routes: Routes = [
         component: AddBusinessUnitComponent,
         data: {
           title: 'Add Business Unit'
->>>>>>> 0d6501dd01108adc5a6e151e492860c133f2d2f4
         },
       }
     ]
