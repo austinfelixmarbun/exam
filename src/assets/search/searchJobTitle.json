@@ -25,7 +25,7 @@
             "type": "textbox",
             "name": "jobTitleCode",
             "id": "jobTitleCodeId",
-            "value": "%",
+            "value": "",
             "label": "Job Title Code",
             "placeholder": "Placeholder",
             "datatype": "Text"
@@ -35,7 +35,7 @@
             "name": "jobTitleName",
             "id": "jobTitleNameId",
             "label" : "Job Title Name",
-            "value": "%",
+            "value": "",
             "placeholder": "Placeholder",
             "datatype": "Text"
         },
@@ -43,7 +43,7 @@
             "type": "textbox",
             "name": "mrJobPositionLvl",
             "id": "posLevelId",
-            "value": "%",
+            "value": "",
             "label": "Position Level",
             "placeholder": "Placeholder",
             "datatype": "Text"

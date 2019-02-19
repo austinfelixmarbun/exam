@@ -30,7 +30,7 @@
             <td>{{item.descr}}</td>
             <td>{{item.mrJobPositionLvl}}</td>
             <td>
-                <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/add']">
+                <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/refjobtitle/add']"  [queryParams]="{param:'edit',jobTitleId:item.refJobTitleId}">
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>
                 </a>
                 <a class="danger p-0" data-original-title="" title="">

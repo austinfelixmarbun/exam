@@ -2,23 +2,23 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title" id="horz-layout-colored-controls">Job Title Add / Edit</h4>
+      <h4 class="card-title" id="horz-layout-colored-controls">Job Title {{type}}</h4>
     </div>
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal">
           <div class="form-body">
-            <h4 class="form-section"><i class="ft-file-text"></i> Add / Edit</h4>
+            <h4 class="form-section"><i class="ft-file-text"></i> {{type}}</h4>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="projectinput1">Job Title Code: </label>
               <div class="col-md-9">
-                <input type="text" id="projectinput1" class="form-control" name="jobTitleCode">
+                <input type="text" id="projectinput1" class="form-control" name="jobTitleCode" [value]="resultData?.jobTitleCode">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="projectinput2">Job Title Name: </label>
               <div class="col-md-9">
-                <input type="text" id="projectinput2" class="form-control" name="jobTitleName">
+                <input type="text" id="projectinput2" class="form-control" name="jobTitleName" [value]="resultData?.jobTitleName">
               </div>
             </div>
             <div class="form-group row">
@@ -44,12 +44,12 @@
             <div class="form-group row">
               <label class="col-md-3 label-control" for="projectinput5">Description: </label>
               <div class="col-md-9">
-                <textarea id="projectinput5" rows="5" class="form-control" name="comment"></textarea>
+                <textarea id="projectinput5" rows="5" class="form-control" name="comment"  [value]="resultData?.descr"></textarea>
               </div>
             </div>
           </div>
           <div class="form-actions right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/oraganization/refjobtitle']">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/organization/refjobtitle']">
               <i class="ft-x"></i> Cancel
             </button>
             <button type="button" class="btn btn-raised btn-primary">
