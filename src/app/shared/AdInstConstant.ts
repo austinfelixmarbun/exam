@@ -12,4 +12,5 @@ export class AdInsConstant{
     public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
     public static AddRefOrg = "";
     public static GetListAllRefOrg = "";
+    public static GetCity = "";
 }

@@ -1,150 +1,325 @@
 <section id="horizontal-form-layouts">
-    <div class="row text-left">
-          <div class="col-sm-12">
-              <div class="content-header">PROSPECT REQUEST</div>
-          </div>
-      </div>
-    <div class="row text-left">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="px-3">
-                        <form class="form form-horizontal" name="ProspectReqForm" #ProspectReqForm="ngForm" (ngSubmit)="Save(ProspectReqForm)">
-                          <div class="form-body">
-                            <h4 class="form-section"><i class="ft-user"></i> Customer Info </h4>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control">Customer Type: </label>
-                                <div class="col-md-9">
-                                    <label class="label-control"> Personal</label>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="CustModel">Customer Model: </label>
-                                <div class="input-group col-md-9">
-                                    <div class="custom-control custom-radio display-inline-block">
-                                      <input type="radio" id="Professional" value="Professional" checked name="CustModel" class="custom-control-input" [(ngModel)]="CustModel">
-                                      <label class="custom-control-label" for="Professional">Professional</label>
-                                    </div>
-                                    <div class="custom-control custom-radio display-inline-block">
-                                      <input type="radio" id="Employee" value="Employee" name="CustModel" class="custom-control-input" [(ngModel)]="CustModel">
-                                      <label class="custom-control-label" for="Employee">Employee</label>
-                                    </div>
-                                    <div class="custom-control custom-radio display-inline-block">
-                                        <input type="radio" id="SME" value="SME"  name="CustModel" class="custom-control-input" [(ngModel)]="CustModel">
-                                        <label class="custom-control-label" for="SME">Small Medium Enterprise</label>
-                                      </div>
-                                      <div class="custom-control custom-radio display-inline-block">
-                                          <input type="radio" id="NonProf" value="NonProf" name="CustModel" class="custom-control-input" [(ngModel)]="CustModel">
-                                          <label class="custom-control-label" for="NonProf">Non Professional</label>
-                                        </div>
-                                  </div>
-                            </div>
-                            <div class="form-group row">
-                                  <label class="col-md-3 label-control" for="CustName">Customer Name: </label>
-                                  <div class="col-md-9">
-                                    <input type="text" class="form-control"  name="CustName" [(ngModel)]="CustName">
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label class="col-md-3 label-control" for="KtpNo">KTP No: </label>
-                              <div class="col-md-9">
-                                    <input type="text" id="KtpNo" class="form-control"  name="KtpNo"  required [(ngModel)]="KtpNo">
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label class="col-md-3 label-control" for="Gender">Gender: </label>
-                                  <div class="input-group col-md-9">
-                                      <div class="custom-control custom-radio display-inline-block">
-                                        <input type="radio" id="Male" name="Gender" class="custom-control-input" value="M" [(ngModel)]="Gender" >
-                                        <label class="custom-control-label" for="Male">Male</label>
-                                      </div>
-                                      <div class="custom-control custom-radio display-inline-block">
-                                        <input type="radio" id="Female"  name="Gender" class="custom-control-input" value="F" [(ngModel)]="Gender" >
-                                        <label class="custom-control-label" for="Female">Female</label>
-                                      </div>
-                                    </div>
-                              </div>
-
-                                  <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="BirthPlace">Birth Place: </label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="BirthPlace" class="form-control"  name="BirthPlace"  required [(ngModel)]="BirthPlace">
-                                      </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="BirthDt">Birth Date: </label>
-                                    <div class="col-md-9">
-                                        <div class="position-relative">
-                                        <input type="date" id="BirthDt" class="form-control" name="BirthDt"  required [(ngModel)]="BirthDt">
-                                        <!--<div class="form-control-position">
-                                            <i class="ft-message-square"></i>
-                                        </div>-->
-                                      </div>
-                                    </div>
-                              </div>
-                              <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="NpwpNo">NPWP No: </label>
-                                <div class="col-md-9">
-                                      <input type="text" id="NpwpNo" class="form-control"  name="NpwpNo"  required [(ngModel)]="NpwpNo">
-                                    </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label class="col-md-3 label-control" for="MotherMaidenName">Mother Maiden Name: </label>
-                              <div class="col-md-9">
-                                    <input type="text" id="MotherMaidenName" class="form-control"  name="MotherMaidenName"  required [(ngModel)]="MotherMaidenName">
-                              </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label class="col-md-3 label-control" for="PhoneNo">Phone No: </label>
-                              <div class="col-md-9">
-                                    <input type="text" id="PhoneNo" class="form-control"  name="PhoneNo"  required [(ngModel)]="PhoneNo">
-                              </div>
-                            </div>
-                              <div class="form-group row">
-                                  <label class="col-md-3 label-control" for="Email">E-mail: </label>
-                                  <div class="col-md-9">
-                                    <input type="text" id="Email" class="form-control"  name="Email"  required [(ngModel)]="Email">
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label class="col-md-3 label-control" for="Job">Job: </label>
-                                  <div class="col-md-9">
-                                    <input type="text" id="Job" class="form-control"  name="Job"  required [(ngModel)]="Job">
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label class="col-md-3 label-control" for="Job">Income: </label>
-                                  <div class="col-md-9">
-                                      <select id="Income" name="Income" class="form-control"  required [(ngModel)]="Income">
-                                          <option id="1" value="Less than 5,000,000.00">Less than 5,000,000.00</option>
-                                          <option id="2" value="5,000,000.00 - 10,000,000.00">5,000,000.00 - 10,000,000.00</option>
-                                          <option id="3" value="10,000,000.00 - 15,000,000.00">10,000,000.00 - 15,000,000.00</option>
-                                          <option id="4" value="15,000,000.00 - 20,000,000.00">15,000,000.00 - 20,000,000.00</option>
-                                          <option id="5" value="More than 20,000,000.00">More than 20,000,000.00</option>
-                                      </select>
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label class="col-md-3 label-control" for="Address">Address: </label>
-                                  <div class="col-md-9">
-                                      <textarea id="Address" rows="5" class="form-control" name="Address" [(ngModel)]="Address" ></textarea>
-                                    </div>
-                              </div>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-                                  <i class="ft-x"></i> Cancel
-                                </button>
-                                <button type="submit"  class="btn btn-raised btn-primary">
-                                    <i class="fa fa-check-square-o"></i> Save
-                                </button>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="row text-left">
+    <div class="col-sm-12">
+      <h1>PROSPECT REQUEST</h1>
     </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <form class="form form-horizontal" name="ProspectReqForm" #ProspectReqForm="ngForm" novalidate
+            (ngSubmit)="ProspectReqForm.form.valid && SavePros(ProspectReqForm)">
+            <div class="form-body">
+              <h4 class="form-section"><i class="ft-user"></i> Customer Info </h4>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="CustName">Customer Name: </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="CustName" required [(ngModel)]="CustName" #custName="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && custName.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && custName.invalid" class="invalid-feedback">
+                      <div *ngIf="custName.errors.required">Customer Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="KtpNo">KTP No: </label>
+                <div class="col-md-9">
+                  <input type="text" id="KtpNo" class="form-control" name="KtpNo" required [(ngModel)]="KtpNo" #ktpNo="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && ktpNo.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && ktpNo.invalid" class="invalid-feedback">
+                      <div *ngIf="ktpNo.errors.required">KTP No is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="BirthPlace">Birth Place: </label>
+                <div class="col-md-9">
+                  <input type="text" id="BirthPlace" class="form-control" name="BirthPlace" required
+                    [(ngModel)]="BirthPlace" #birthPlace="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && birthPlace.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && birthPlace.invalid" class="invalid-feedback">
+                      <div *ngIf="birthPlace.errors.required">Birth Place is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="BirthDt">Birth Date: </label>
+                <div class="col-md-9">
+                  <div class="position-relative">
+                    <input type="date" id="BirthDt" class="form-control" name="BirthDt" required [(ngModel)]="BirthDt" #birthDt="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && birthDt.invalid }">
+                    <div *ngIf="ProspectReqForm.submitted && birthDt.invalid" class="invalid-feedback">
+                        <div *ngIf="birthDt.errors.required">Birth Date is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="MotherMaidenName">Mother Maiden Name: </label>
+                <div class="col-md-9">
+                  <input type="text" id="MotherMaidenName" class="form-control" name="MotherMaidenName" required
+                    [(ngModel)]="MotherMaidenName" #motherMaidenName="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && motherMaidenName.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && motherMaidenName.invalid" class="invalid-feedback">
+                      <div *ngIf="motherMaidenName.errors.required">Mother Maiden Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="PhoneNo">Phone No: </label>
+                <div class="col-md-9">
+                  <input type="text" id="PhoneNo" class="form-control" name="PhoneNo" required [(ngModel)]="PhoneNo" #phoneNo="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && phoneNo.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && phoneNo.invalid" class="invalid-feedback">
+                      <div *ngIf="phoneNo.errors.required">Phone No is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="MblPhoneNo">Mobile Phone No: </label>
+                <div class="col-md-9">
+                  <input type="text" id="MblPhoneNo" class="form-control" name="MblPhoneNo" required [(ngModel)]="MblPhoneNo" #mblPhoneNo="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && mblPhoneNo.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && mblPhoneNo.invalid" class="invalid-feedback">
+                      <div *ngIf="mblPhoneNo.errors.required">Mobile Phone No is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Address">Address: </label>
+                <div class="col-md-9">
+                  <textarea id="Address" rows="5" class="form-control" name="Address" required [(ngModel)]="Address" #addr="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && addr.invalid }"></textarea>
+                  <div *ngIf="ProspectReqForm.submitted && addr.invalid" class="invalid-feedback">
+                      <div *ngIf="addr.errors.required">Address is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Rt">Rt: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Rt" class="form-control" name="Rt" required [(ngModel)]="Rt" #rt="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && rt.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && rt.invalid" class="invalid-feedback">
+                      <div *ngIf="rt.errors.required">RT is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Rw">Rw: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Rw" class="form-control" name="Rw" required [(ngModel)]="Rw" #rw="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && rw.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && rw.invalid" class="invalid-feedback">
+                      <div *ngIf="rw.errors.required">RW is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Zipcode">Zipcode: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Zipcode" class="form-control" name="Zipcode" required [(ngModel)]="Zipcode" #zipcode="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && zipcode.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && zipcode.invalid" class="invalid-feedback">
+                      <div *ngIf="zipcode.errors.required">Zipcode is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Kelurahan">Kelurahan: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Kelurahan" class="form-control" name="Kelurahan" required [(ngModel)]="Kelurahan" #kelurahan="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && kelurahan.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && kelurahan.invalid" class="invalid-feedback">
+                      <div *ngIf="kelurahan.errors.required">Kelurahan is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Kecamatan">Kecamatan: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Kecamatan" class="form-control" name="Kecamatan" required [(ngModel)]="Kecamatan" #kecamatan="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && kecamatan.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && kecamatan.invalid" class="invalid-feedback">
+                      <div *ngIf="kecamatan.errors.required">Kecamatan is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Province">Province: </label>
+                <div class="col-md-9">
+                  <select class="form-control" [(ngModel)]="Province" name="Province" (change)="onChange($event.target.value)" #province="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && province.value != ''}">
+                    <option *ngIf="allProv != '{}'" selected>Select One</option>
+                    <option value="s">asd</option>
+                  </select>
+                  <div *ngIf="ProspectReqForm.submitted && province.value != ''" class="invalid-feedback">
+                      <div *ngIf="province.value != ''">Province is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="City">City: </label>
+                <div class="col-md-9">
+                  <select class="form-control" [(ngModel)]="City" name="City" (change)="onChange($event.target.value)" #city="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && city.invalid }">
+                    <!-- <option ng-repeat="c in allCity" value=""></option> -->
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                  <div *ngIf="ProspectReqForm.submitted && city.invalid" class="invalid-feedback">
+                      <div *ngIf="city.errors.required">City is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                <i class="ft-x"></i> Cancel
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--   
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <form class="form form-horizontal" name="ProspectReqForm" #ProspectReqForm="ngForm"
+            (ngSubmit)="Save(ProspectReqForm)">
+            <div class="form-body">
+              <h4 class="form-section"><i class="ft-user"></i> Customer Info </h4>
+              <div class="form-group row">
+                <label class="col-md-3 label-control">Customer Type: </label>
+                <div class="col-md-9">
+                  <label class="label-control"> Personal</label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="CustModel">Customer Model: </label>
+                <div class="input-group col-md-9">
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="Professional" value="Professional" checked name="CustModel"
+                      class="custom-control-input" [(ngModel)]="CustModel">
+                    <label class="custom-control-label" for="Professional">Professional</label>
+                  </div>
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="Employee" value="Employee" name="CustModel" class="custom-control-input"
+                      [(ngModel)]="CustModel">
+                    <label class="custom-control-label" for="Employee">Employee</label>
+                  </div>
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="SME" value="SME" name="CustModel" class="custom-control-input"
+                      [(ngModel)]="CustModel">
+                    <label class="custom-control-label" for="SME">Small Medium Enterprise</label>
+                  </div>
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="NonProf" value="NonProf" name="CustModel" class="custom-control-input"
+                      [(ngModel)]="CustModel">
+                    <label class="custom-control-label" for="NonProf">Non Professional</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="CustName">Customer Name: </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="CustName" [(ngModel)]="CustName">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="KtpNo">KTP No: </label>
+                <div class="col-md-9">
+                  <input type="text" id="KtpNo" class="form-control" name="KtpNo" required [(ngModel)]="KtpNo">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Gender">Gender: </label>
+                <div class="input-group col-md-9">
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="Male" name="Gender" class="custom-control-input" value="M"
+                      [(ngModel)]="Gender">
+                    <label class="custom-control-label" for="Male">Male</label>
+                  </div>
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="Female" name="Gender" class="custom-control-input" value="F"
+                      [(ngModel)]="Gender">
+                    <label class="custom-control-label" for="Female">Female</label>
+                  </div>
+                </div>
+              </div>
 
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="BirthPlace">Birth Place: </label>
+                <div class="col-md-9">
+                  <input type="text" id="BirthPlace" class="form-control" name="BirthPlace" required
+                    [(ngModel)]="BirthPlace">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="BirthDt">Birth Date: </label>
+                <div class="col-md-9">
+                  <div class="position-relative">
+                    <input type="date" id="BirthDt" class="form-control" name="BirthDt" required [(ngModel)]="BirthDt">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="NpwpNo">NPWP No: </label>
+                <div class="col-md-9">
+                  <input type="text" id="NpwpNo" class="form-control" name="NpwpNo" required [(ngModel)]="NpwpNo">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="MotherMaidenName">Mother Maiden Name: </label>
+                <div class="col-md-9">
+                  <input type="text" id="MotherMaidenName" class="form-control" name="MotherMaidenName" required
+                    [(ngModel)]="MotherMaidenName">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="PhoneNo">Phone No: </label>
+                <div class="col-md-9">
+                  <input type="text" id="PhoneNo" class="form-control" name="PhoneNo" required [(ngModel)]="PhoneNo">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Email">E-mail: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Email" class="form-control" name="Email" required [(ngModel)]="Email">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Job">Job: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Job" class="form-control" name="Job" required [(ngModel)]="Job">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Job">Income: </label>
+                <div class="col-md-9">
+                  <select id="Income" name="Income" class="form-control" required [(ngModel)]="Income">
+                    <option id="1" value="Less than 5,000,000.00">Less than 5,000,000.00</option>
+                    <option id="2" value="5,000,000.00 - 10,000,000.00">5,000,000.00 - 10,000,000.00</option>
+                    <option id="3" value="10,000,000.00 - 15,000,000.00">10,000,000.00 - 15,000,000.00</option>
+                    <option id="4" value="15,000,000.00 - 20,000,000.00">15,000,000.00 - 20,000,000.00</option>
+                    <option id="5" value="More than 20,000,000.00">More than 20,000,000.00</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Address">Address: </label>
+                <div class="col-md-9">
+                  <textarea id="Address" rows="5" class="form-control" name="Address" [(ngModel)]="Address"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                <i class="ft-x"></i> Cancel
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+-->

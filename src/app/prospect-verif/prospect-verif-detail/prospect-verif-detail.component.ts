@@ -18,20 +18,20 @@ export class ProspectVerifDetailComponent implements OnInit {
   ngOnInit(): void {
     this.ProsObj = new ProspectObj()
 
-
-    this.ProsObj.CustModel = 'SME';
     this.ProsObj.CustName = 'Danang Argasuma';
     this.ProsObj.KtpNo = '20180001000325';
-    this.ProsObj.NpwpNo = '20180001000324';
-    this.ProsObj.PhoneNo = '08999293613';
-    this.ProsObj.MotherMaidenName = 'Ibu Kandung';
-    this.ProsObj.BirthDt = '20/11/1990';
     this.ProsObj.BirthPlace = 'Jakarta';
-    this.ProsObj.Address = 'Jl Raya Bekasi No 08 Cakung Jakarta Timur';
-    this.ProsObj.Email = 'danang@gmail.com';
-    this.ProsObj.Gender = 'Laki - Laki';
-    this.ProsObj.Income = '5,000,000.00 - 10,000,000.00'
-    this.ProsObj.Job = 'PNS';
+    this.ProsObj.MotherMaidenName = 'Ibu Kandung';
+    this.ProsObj.PhoneNo = '08999293613';
+    this.ProsObj.MblPhoneNo = '08517294448';
+    this.ProsObj.Addr = 'Jl Raya Bekasi No 08 Cakung Jakarta Timur';
+    this.ProsObj.Rt = '01';
+    this.ProsObj.Rw = '05';
+    this.ProsObj.Zipcode = '11260';
+    this.ProsObj.Kelurahan = 'Kebon Jeruk';
+    this.ProsObj.Kecamatan = 'Kebon Jeruk';
+    this.ProsObj.City = 'jakarta';
+    this.ProsObj.Province = 'Jawa';
 
   }
 

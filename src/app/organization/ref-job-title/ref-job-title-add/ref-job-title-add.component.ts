@@ -48,7 +48,7 @@ export class RefJobTitleAddComponent implements OnInit {
         console.log("Error");
         console.log(error);
       }
-    );;
+    );
     }
   }
 
