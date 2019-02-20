@@ -16,7 +16,7 @@
     <thead>
         <tr class="table-header">
             <th>Hierarchy No</th>
-            <th>Organization Level</th>
+            <th>Organization Name</th>
             <th>Parent Organization</th>
             <th>Active Status</th>
             <th>Models</th>
@@ -45,7 +45,7 @@
         </tr>
     </tbody>
 </table>
-<i class="fa fa-plus-circle" [routerLink]="['/prospectVerif/detail']" style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+<i class="fa fa-plus-circle" [routerLink]="['/organization/addedit']" style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
 Current Page : {{pageNow}}
 <div class="d-flex justify-content-center">
     <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData" [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true"

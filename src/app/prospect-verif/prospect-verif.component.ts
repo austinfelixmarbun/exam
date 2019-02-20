@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { SearchComponent } from '../shared/search/search.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Http, Response } from '@angular/http';
-import { data } from 'app/shared/data/smart-data-table';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { AdInsServiceService } from 'app/ad-ins-service.service';
+import { environment } from '../../environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-prospect-verif',
@@ -16,60 +16,67 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class ProspectVerifComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
-  textbox1: string = 'asd';
-  urlJson: string = './assets/search/searchprospectverif.json';
-  configuration: any;
+  urlJson: string = "./assets/search/searchOrganization.json";
   resultData: string;
   pageNow: any;
   totalData: any;
   pageSize: any;
+  apiUrl: any;
 
-  constructor(private http: Http, private spinner: NgxSpinnerService,  private service: NGXToastrService) { }
+  foundationUrl: string = environment.foundationUrl;
+
+  constructor(private http: Http, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }
 
   ngOnInit() {
     this.pageNow = 1;
-    this.pageSize = 25;
+    this.pageSize = 10;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
+    console.log('ip:', this.apiUrl);
+    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
+    //   .subscribe(data => {
+    //     console.log(data);
+    //   }
+    //   )
   }
 
   search() {
     this.spinner.show();
-    this.searchComponent.callSearch(this.pageNow, this.pageSize, null)
-        .subscribe(
-            (response) => {
-                console.log("Success");
-                this.resultData = response;
-                this.totalData = response.count;
-                console.log(response);
-                this.spinner.hide();
-            },
-            (error) => {
-                console.log("Error");
-                console.log(error);
-                this.spinner.hide();
-            }
-        );
-}
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response;
+          this.totalData = response.count;
+          console.log(response);
+          this.spinner.hide();
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+          this.spinner.hide();
+        }
+      );
+  }
 
-pageChange(page:number)
-{
+  pageChange(page: number) {
     this.pageNow = page;
     this.search();
-}
+  }
 
-// Success Type
-typeSuccess(){
+  // Success Type
+  typeSuccess() {
     this.service.typeSuccess();
-}
+  }
 
-typeError() {
+  typeError() {
     this.service.typeError();
-}
+  }
 
-timeout() {
+  timeout() {
     this.service.timeout();
-}
+  }
 
-errMsg() {
+  errMsg() {
     this.service.errorMessage('asdasd');
-}
+  }
 }
