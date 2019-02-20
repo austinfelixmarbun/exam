@@ -5,51 +5,56 @@
         <div class="card-body">
           <div class="px-3">
             <form class="form form-horizontal" name="OrgAddEditForm" #OrgAddEditForm="ngForm"
-              (ngSubmit)="Save(OrgAddEditForm)">
+              (ngSubmit)="Save(OrgAddEditForm)" >
               <div class="form-body">
                 <h4 class="form-section"><i class="ft-user"></i>Add Edit Organization</h4>
                 <div class="form-group row">
                   <label class="col-md-3 label-control" for="OrgName">Organization Name</label>
                   <div class="col-md-9">
-                    <input type="text" id="OrgName"  class="form-control" required name="OrgName" [(ngModel)]="OrgName">
+                    <input type="text" id="OrgName" class="form-control" required name="OrgName" [(ngModel)]="OrgName"
+                      value={{orgObj.OrgName}} #required="ngModel" required >
+                    <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 label-control" for="HierarchyNo">Hierarchy No</label>
                   <div class="col-md-9">
-                    <input type="text" id="HierarchyNo" class="form-control" required name="HierarchyNo" [(ngModel)]="HierarchyNo">
+                    <input type="text" id="HierarchyNo" class="form-control" required name="HierarchyNo"
+                      [(ngModel)]="HierarchyNo" value={{orgObj.HierarchyNo}} #required="ngModel" required >
+                      <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 label-control" for="ParentId">Parent Organization</label>
                   <div class="col-md-9">
                     <select id="ParentsId" name="ParentsId" class="form-control" [(ngModel)]="ParentsId">
-                      <option value="0">None</option>
-                      <option *ngFor="let item of parents?.returnObject" [value]="item.refOrgId">{{item.orgName}}</option>
+                      <option value="">None</option>
+                      <option *ngFor="let item of parents?.returnObject" [value]="item.refOrgId">{{item.orgName}}
+                      </option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 label-control" for="IsActive">Active Status</label>
-                  <div class="col-md-9">
-                    <input class="form-check-input" type="checkbox" value="1" id="IsActive" name="IsActive" required [(ngModel)]="IsActive">
-                  </div>
+                 <div class="custom-control custom-checkbox m-0">
+                    <input type="checkbox" value="1" id="IsActive" name="IsActive" required
+                      [(ngModel)]="IsActive">
                 </div>
-
               </div>
-
-              <div class="form-actions">
-                <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-                  <i class="ft-x"></i> Cancel
-                </button>
-                <button type="submit" class="btn btn-raised btn-primary">
-                  <i class="fa fa-check-square-o"></i> Save
-                </button>
-              </div>
-
-            </form>
           </div>
+
+          <div class="form-actions">
+            <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+              <i class="ft-x"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+
+          </form>
         </div>
       </div>
     </div>
+  </div>
   </div>

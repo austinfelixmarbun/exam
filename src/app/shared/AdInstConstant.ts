@@ -8,9 +8,11 @@ export class AdInsConstant{
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
     public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
-    public static GetRefOrg = "/OrganizationDefinition/GetRefOrgPaging";
+    public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
     public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
-    public static AddRefOrg = "";
-    public static GetListAllRefOrg = "";
+    public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";
+    public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
     public static GetCity = "";
+
+
 }

@@ -35,7 +35,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'addedit',
+        path: 'organization/add',
         component: OrgAddEditComponent,
         data: {
           title: 'Organization Add Edit'

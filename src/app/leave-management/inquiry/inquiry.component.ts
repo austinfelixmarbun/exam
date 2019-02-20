@@ -1,23 +1,23 @@
+import { environment } from './../../../environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { environment } from '../../environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 
+
 @Component({
-  selector: 'app-organization',
-  templateUrl: './organization.component.html',
-  styleUrls: ['./organization.component.scss'],
+  selector: 'app-inquiry',
+  templateUrl: './inquiry.component.html',
+  styleUrls: ['./inquiry.component.scss'],
   providers: [NgbPaginationConfig, NGXToastrService]
 })
-export class OrganizationComponent implements OnInit {
-
+export class InquiryComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
-  urlJson: string = "./assets/search/searchOrganization.json";
+  urlJson: string = "./assets/search/searchLeaveInquiry.json";
   resultData: string;
   pageNow: any;
   totalData: any;

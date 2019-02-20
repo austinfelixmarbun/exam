@@ -4,17 +4,27 @@ import { RouteInfo } from './sidebar.metadata';
 export const ROUTES: RouteInfo[] = [
 
     { path: '/dashboard/dash-board', title: 'Menu', icon: 'ft-home', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    {
-        path: '', title: 'Supplier', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-        submenu: [
-            { path: '/supplier', title: 'Supplier  Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-        ]
-    },
+
     {
         path: '', title: 'Employee', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
             { path: '/employee', title: 'Employee  Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
+    },
+    {
+      path: '', title: 'Leave Management', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+      submenu: [
+          { path: '/leaveManagament/request', title: 'Request', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/leaveManagament/verification', title: 'Verification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/leaveManagament/inquiry', title: 'Inquiry', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      ]
+    },
+    {
+      path: '', title: 'Marketing', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+      submenu: [
+          { path: '/prospect', title: 'Prospect Request', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/prospectVerif', title: 'Prospect Verification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      ]
     },
     {
         path: '', title: 'Office', icon: 'ft-airplay', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
@@ -32,12 +42,12 @@ export const ROUTES: RouteInfo[] = [
         ]
     },
     {
-      path: '', title: 'Marketing', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+      path: '', title: 'Supplier', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
       submenu: [
-          { path: '/prospect', title: 'Prospect Request', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/prospectVerif', title: 'Prospect Verification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/supplier', title: 'Supplier  Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       ]
-    },
+  },
+
     // {
     //     path: '', title: 'Dashboard', icon: 'ft-home', class: 'has-sub', badge: '2', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [
     //         { path: '/dashboard/dashboard1', title: 'Dashboard1', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

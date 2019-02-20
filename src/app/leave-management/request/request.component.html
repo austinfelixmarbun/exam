@@ -1,0 +1,61 @@
+<section id="horizontal-form-layouts">
+  <div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="px-3">
+            <form class="form form-horizontal" name="ReqLeaveForm" #ReqLeaveForm="ngForm"
+              (ngSubmit)="Save(ReqLeaveForm)" >
+              <div class="form-body">
+                <h4 class="form-section"><i class="ft-file-text"></i>Request Leave Management</h4>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="EmpName">Employee Name</label>
+                  <div class="col-md-9">
+                    <input type="text" id="EmpName" class="form-control" required name="EmpName" [(ngModel)]="EmpName"
+                    #required="ngModel" required >
+                    <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="JobPosition">Job Position</label>
+                  <div class="col-md-9">
+                    <select id="JobPosition" name="JobPosition" class="form-control"  required [(ngModel)]="JobPosition">
+                      <option id="1" value="">Select One</option>
+                      <option id="2" value="Staff">Staff</option>
+                      <option id="3" value="Branch Manager">Branch Manager</option>
+                      <option id="4" value="Area Manager">Area Manager</option>
+                  </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="StartDt">Start Date</label>
+                  <div class="col-md-9">
+                    <input type="date" id="StartDt" class="form-control" name="StartDt"  #required [(ngModel)]="StartDt">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="EndDt">Finish Date</label>
+                  <div class="col-md-9">
+                  <input type="date" id="EndDt" class="form-control" name="EndDt"  #required [(ngModel)]="EndDt">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Reason">Reason</label>
+                <div class="col-md-9">
+                    <textarea id="Reason" rows="5" class="form-control" name="Reason" [(ngModel)]="Reason" ></textarea>
+                  </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
