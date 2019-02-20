@@ -31,7 +31,7 @@ export class OrganizationComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrgPaging;
     console.log('ip:', this.apiUrl);
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {

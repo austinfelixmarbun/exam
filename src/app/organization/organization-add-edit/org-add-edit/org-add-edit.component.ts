@@ -1,8 +1,7 @@
 import { AdInsServiceService } from './../../../ad-ins-service.service';
 import { OrganizationObj } from './../../../shared/model/OrganizationObj.Model';
 import { environment } from './../../../../environments/environment';
-import { FormGroup, FormControl } from '@angular/forms';
-import { formatDate } from '@angular/common';
+
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
@@ -22,9 +21,15 @@ export class OrgAddEditComponent implements OnInit {
   foundationUrl: string = environment.foundationUrl;
   apiUrl: any;
   parents: string;
-  ParentsId = '0';
-  orgObj: OrganizationObj
-  constructor(private service: NGXToastrService, private http: Http, private spinner: NgxSpinnerService, private location: Location, private adInsService: AdInsServiceService) { }
+  orgObj: OrganizationObj;
+  ParentsId = '';
+  constructor(
+    private service: NGXToastrService,
+    private http: Http,
+    private spinner: NgxSpinnerService,
+    private location: Location,
+    private adInsService: AdInsServiceService) { }
+
 
   ngOnInit() {
     this.GetListParents();
