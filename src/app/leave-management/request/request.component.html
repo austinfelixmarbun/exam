@@ -7,19 +7,19 @@
             <form class="form form-horizontal" name="ReqLeaveForm" #ReqLeaveForm="ngForm"
               (ngSubmit)="Save(ReqLeaveForm)" >
               <div class="form-body">
-                <h4 class="form-section"><i class="ft-file-text"></i>Request Leave Management</h4>
+                <h4 class="form-section">Leave Management Request</h4>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="EmpName">Employee Name</label>
+                  <label class="col-md-3 label-control" for="empName">Employee Name</label>
                   <div class="col-md-9">
-                    <input type="text" id="EmpName" class="form-control" required name="EmpName" [(ngModel)]="EmpName"
+                    <input type="text" id="empName" class="form-control" required name="empName" [(ngModel)]="empName"
                     #required="ngModel" required >
                     <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="JobPosition">Job Position</label>
+                  <label class="col-md-3 label-control" for="jobPosition">Job Position</label>
                   <div class="col-md-9">
-                    <select id="JobPosition" name="JobPosition" class="form-control"  required [(ngModel)]="JobPosition">
+                    <select id="jobPosition" name="jobPosition" class="form-control"  required [(ngModel)]="jobPosition">
                       <option id="1" value="">Select One</option>
                       <option id="2" value="Staff">Staff</option>
                       <option id="3" value="Branch Manager">Branch Manager</option>
@@ -28,21 +28,21 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="StartDt">Start Date</label>
+                  <label class="col-md-3 label-control" for="startDt">Start Date</label>
                   <div class="col-md-9">
-                    <input type="date" id="StartDt" class="form-control" name="StartDt"  #required [(ngModel)]="StartDt">
+                    <input type="date" id="startDt" class="form-control" name="startDt"  #required [(ngModel)]="startDt">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="EndDt">Finish Date</label>
+                  <label class="col-md-3 label-control" for="endDt">Finish Date</label>
                   <div class="col-md-9">
-                  <input type="date" id="EndDt" class="form-control" name="EndDt"  #required [(ngModel)]="EndDt">
+                  <input type="date" id="endDt" class="form-control" name="endDt"  #required [(ngModel)]="endDt">
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="Reason">Reason</label>
+                <label class="col-md-3 label-control" for="reason">Reason</label>
                 <div class="col-md-9">
-                    <textarea id="Reason" rows="5" class="form-control" name="Reason" [(ngModel)]="Reason" ></textarea>
+                    <textarea id="reason" rows="5" class="form-control" name="reason" [(ngModel)]="reason" ></textarea>
                   </div>
             </div>
           </div>

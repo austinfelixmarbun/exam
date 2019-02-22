@@ -31,7 +31,7 @@ export class InquiryComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrgPaging;
+    this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/GetLeaveMngmtPaging';
     console.log('ip:', this.apiUrl);
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {

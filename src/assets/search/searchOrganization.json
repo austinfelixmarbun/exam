@@ -16,7 +16,7 @@
           "name": "orgName",
           "id": "orgNameId",
           "value": "",
-          "label": "Organization Level",
+          "label": "Organization Name",
           "placeholder": "Placeholder",
           "datatype": "text"
       },

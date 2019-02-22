@@ -1,6 +1,9 @@
+<h4 class="form-section">Leave Management Verification</h4>
+<br/>
 <app-search id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
 <div class="col-md-12">
   <form>
+
     <div class="form-actions right">
       <button type="button" class="btn btn-raised btn-warning mr-1">
         <i class="ft-x"></i> Cancel
@@ -33,7 +36,7 @@
       <td>{{item.endDt}}</td>
       <td>{{item.reason}}</td>
       <td>
-        <a class="success p-0" data-original-title="" title="" [routerLink]="['detail']">
+        <a class="success p-0" data-original-title="" title="" [routerLink]="['detail']"  [queryParams]="{leaveMngmtId:item.leaveMngmtId}">
           <i class="ft-edit-2 font-medium-3 mr-2"></i>
         </a>
       </td>

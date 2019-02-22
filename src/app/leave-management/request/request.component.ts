@@ -18,23 +18,53 @@ import { Http } from '@angular/http';
 export class RequestComponent implements OnInit {
 
   foundationUrl: string = environment.foundationUrl;
-  apiUrl: any;
-
-  JobPosition = '';
   leaveManagementObj: LeaveManagementObj;
+  apiUrl: any;
+  jobPosition: any;
+  startDt: any;
 
   constructor(
     private service: NGXToastrService,
     private http: Http,
     private spinner: NgxSpinnerService,
     private location: Location,
-    private adInsService: AdInsServiceService) { }
+    private adInsService: AdInsServiceService) {
+
+    }
 
   ngOnInit() {
+    var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+    this.startDt = currentUserContext.BusinessDate;
+    this. jobPosition = '';
   }
 
   Save(ReqLeaveForm: NgForm): void {
     this.spinner.show();
+
+    this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/AddLeaveMngmt';
+    //GENERATE OBJECT
+    this.leaveManagementObj = new LeaveManagementObj();
+    this.leaveManagementObj.empName = ReqLeaveForm.value.empName;
+    this.leaveManagementObj.jobPosition = ReqLeaveForm.value.jobPosition;
+    this.leaveManagementObj.startDt = ReqLeaveForm.value.startDt;
+    this.leaveManagementObj.endDt = ReqLeaveForm.value.endDt;
+    this.leaveManagementObj.reason = ReqLeaveForm.value.reason;
+    this.leaveManagementObj.verifBy = '';
+   this.leaveManagementObj.status = 'REQ';
+    //SAVE
+    this.adInsService.postData(this.apiUrl, this.leaveManagementObj).subscribe(
+      (response) => {
+        console.log("Success Save");
+        console.log(response);
+
+      },
+      (error) => {
+        console.log("Error Save");
+        console.log(error);
+
+      }
+    );
+    location.reload();
     this.spinner.hide();
   }
 

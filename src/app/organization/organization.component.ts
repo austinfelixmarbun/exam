@@ -7,6 +7,7 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
+import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
 
 @Component({
   selector: 'app-organization',
@@ -62,6 +63,28 @@ export class OrganizationComponent implements OnInit {
   pageChange(page: number) {
     this.pageNow = page;
     this.search();
+  }
+
+  del(id: number): void {
+    this.spinner.show();
+    var url = this.foundationUrl + AdInsConstant.DeleteRefOrg;
+    var organizObj: OrganizationObj;
+    organizObj = new OrganizationObj();
+    organizObj.refOrgId = id;
+    this.adInsService.postData(url, organizObj).subscribe(
+      (response) => {
+        console.log("Success Delete");
+        console.log(response);
+        this.spinner.hide();
+      },
+      (error) => {
+        console.log("Error Delete");
+        console.log(error);
+        this.spinner.hide();
+      }
+    );
+    location.reload();
+    this.spinner.hide();
   }
 
   // Success Type

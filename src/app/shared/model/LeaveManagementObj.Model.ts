@@ -1,11 +1,11 @@
 export class LeaveManagementObj {
-  LeaveManagementId: number;
-  TransactionNo: string;
-  EmpName: string;
-  JobPosition: string;
-  StartDt: string;
-  EndDt: string;
-  Status: string;
-  Reason: string;
-  VerifBy: string;
+  leaveMngmtId: number;
+  transactionNo: string;
+  empName: string;
+  jobPosition: string;
+  startDt: string;
+  endDt: string;
+  status: string;
+  reason: string;
+  verifBy: string;
 }

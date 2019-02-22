@@ -1,8 +1,8 @@
 export class OrganizationObj {
-  RefOrgId: number;
-  OrgName: string;
-  HierarchyNo: string;
-  IsActive: string;
-  ParentId: number;
-  OldParentId: number;
+  refOrgId: number;
+  orgName: string;
+  hierarchyNo: string;
+  isActive: string;
+  parentId: number;
+  oldParentId: number;
 }
