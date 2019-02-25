@@ -1,3 +1,4 @@
+import { ModalsComponent } from './../components/bootstrap/modals/modals.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
@@ -27,7 +28,12 @@ export class OrganizationComponent implements OnInit {
 
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: Http, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }
+  constructor(
+    private http: Http,
+    private spinner: NgxSpinnerService,
+    private service: NGXToastrService,
+    private adInsService: AdInsServiceService,
+    private modal: ModalsComponent) { }
 
   ngOnInit() {
     this.pageNow = 1;
@@ -87,21 +93,5 @@ export class OrganizationComponent implements OnInit {
     this.spinner.hide();
   }
 
-  // Success Type
-  typeSuccess() {
-    this.service.typeSuccess();
-  }
-
-  typeError() {
-    this.service.typeError();
-  }
-
-  timeout() {
-    this.service.timeout();
-  }
-
-  errMsg() {
-    this.service.errorMessage('asdasd');
-  }
 
 }

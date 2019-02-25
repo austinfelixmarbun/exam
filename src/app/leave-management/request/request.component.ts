@@ -24,7 +24,7 @@ export class RequestComponent implements OnInit {
   startDt: any;
 
   constructor(
-    private service: NGXToastrService,
+    private toastrService: NGXToastrService,
     private http: Http,
     private spinner: NgxSpinnerService,
     private location: Location,
@@ -54,17 +54,20 @@ export class RequestComponent implements OnInit {
     //SAVE
     this.adInsService.postData(this.apiUrl, this.leaveManagementObj).subscribe(
       (response) => {
-        console.log("Success Save");
+        console.log('Success Save');
         console.log(response);
+        this.toastrService.typeSave('Request Successed');
+        location.reload();
 
       },
       (error) => {
-        console.log("Error Save");
+        console.log('Error Save');
         console.log(error);
-
+        this.toastrService.errorMessage(error);
       }
     );
-    location.reload();
+
+
     this.spinner.hide();
   }
 

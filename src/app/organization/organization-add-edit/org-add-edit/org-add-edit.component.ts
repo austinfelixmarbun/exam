@@ -83,11 +83,15 @@ export class OrgAddEditComponent implements OnInit {
         (response) => {
           console.log("Success Save");
           console.log(response);
+          this.service.typeSave('Save Successed');
+          this.location.back();
           this.spinner.hide();
+
         },
         (error) => {
           console.log("Error Save");
           console.log(error);
+          this.service.errorMessage(error);
           this.spinner.hide();
         }
       );
@@ -110,15 +114,18 @@ export class OrgAddEditComponent implements OnInit {
         (response) => {
           console.log("Success Edit");
           console.log(response);
+          this.service.typeSave('Save Successed');
+          this.location.back();
           this.spinner.hide();
         },
         (error) => {
           console.log("Error Edit");
           console.log(error);
+          this.service.errorMessage(error);
           this.spinner.hide();
         }
       );
-      this.location.back();
+
     };
   }
 

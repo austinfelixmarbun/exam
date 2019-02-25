@@ -26,7 +26,7 @@ export class VerfDetailComponent implements OnInit {
   leaveManagementObj: LeaveManagementObj;
 
   constructor(
-    private service: NGXToastrService,
+    private toastrService: NGXToastrService,
     private http: Http,
     private spinner: NgxSpinnerService,
     private location: Location,
@@ -55,13 +55,16 @@ export class VerfDetailComponent implements OnInit {
       (response) => {
         console.log("Success Verify");
         console.log(response);
+        this.toastrService.typeSave('Verification Successed');
+        this.location.back();
       },
       (error) => {
         console.log("Error Verify");
         console.log(error);
+        this.toastrService.errorMessage(error);
       }
     );
-    this.location.back();
+
     this.spinner.hide();
 
   }
