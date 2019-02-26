@@ -41,7 +41,7 @@ export class RequestComponent implements OnInit {
   Save(ReqLeaveForm: NgForm): void {
     this.spinner.show();
 
-    this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/AddLeaveMngmt';
+    this.apiUrl = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/AddLeaveMngmt';
     //GENERATE OBJECT
     this.leaveManagementObj = new LeaveManagementObj();
     this.leaveManagementObj.empName = ReqLeaveForm.value.empName;
@@ -58,17 +58,16 @@ export class RequestComponent implements OnInit {
         console.log(response);
         this.toastrService.typeSave('Request Successed');
         location.reload();
+        this.spinner.hide();
 
       },
       (error) => {
         console.log('Error Save');
         console.log(error);
         this.toastrService.errorMessage(error);
+        this.spinner.hide();
       }
     );
-
-
-    this.spinner.hide();
   }
 
 }

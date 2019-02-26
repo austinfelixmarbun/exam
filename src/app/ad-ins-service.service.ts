@@ -66,8 +66,9 @@ export class AdInsServiceService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Accepts':'application/json',
-        'Authentication':'my-authentication'
+        'Accepts': 'application/json',
+        'Authentication': 'my-authentication',
+        'Authorization': 'Bearer dbbbf15f-2360-3a32-b6e9-2373d8b5556b'
       })
     };
     let headers = new HttpHeaders({
@@ -77,6 +78,7 @@ export class AdInsServiceService {
     httpRequest.RequestObject = requestObj;
 
     console.log(JSON.stringify(httpRequest));
+    console.log(httpOptions);
     return this.httpClient.post(url,httpRequest,httpOptions);
   }
 

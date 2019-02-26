@@ -47,7 +47,7 @@ export class VerfDetailComponent implements OnInit {
 
   Save(LeaveVerifForm: NgForm): void {
     this.spinner.show();
-    this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/EditLeaveMngmt';
+    this.apiUrl = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/EditLeaveMngmt';
     this.leaveManagementObj.verifBy = LeaveVerifForm.value.verifBy;
     this.leaveManagementObj.status = LeaveVerifForm.value.status;
 
@@ -57,15 +57,17 @@ export class VerfDetailComponent implements OnInit {
         console.log(response);
         this.toastrService.typeSave('Verification Successed');
         this.location.back();
+        this.spinner.hide();
       },
       (error) => {
         console.log("Error Verify");
         console.log(error);
         this.toastrService.typeErrorCustom(error);
+        this.spinner.hide();
+
       }
     );
 
-    this.spinner.hide();
 
   }
 
@@ -82,13 +84,14 @@ export class VerfDetailComponent implements OnInit {
         console.log(response);
         this.leaveManagementObj = response.returnObject;
         this.verifBy = currentUserContext.UserName;
+        this.spinner.hide();
       },
       (error) => {
         console.log("Error Get Object");
         console.log(error);
+        this.spinner.hide();
       }
     );
-    this.spinner.hide();
   }
 
 }
