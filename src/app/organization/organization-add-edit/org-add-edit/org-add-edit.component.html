@@ -11,8 +11,8 @@
                 <div class="form-group row">
                   <label class="col-md-3 label-control" for="orgName">Organization Name</label>
                   <div class="col-md-9">
-                    <input type="text" id="OrgName" class="form-control" required name="orgName" [(ngModel)]="orgName"
-                      value={{orgObj.orgName}} #required="ngModel" required >
+                    <input type="text" id="orgName" class="form-control" required name="orgName" [(ngModel)]="orgName"
+                    #required="ngModel" required >
                     <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
                   </div>
                 </div>
@@ -20,7 +20,7 @@
                   <label class="col-md-3 label-control" for="hierarchyNo">Hierarchy No</label>
                   <div class="col-md-9">
                     <input type="text" id="hierarchyNo" class="form-control" required name="hierarchyNo"
-                      [(ngModel)]="hierarchyNo" value={{orgObj.hierarchyNo}} #required="ngModel" required >
+                      [(ngModel)]="hierarchyNo" #required="ngModel" required >
                       <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
                   </div>
                 </div>

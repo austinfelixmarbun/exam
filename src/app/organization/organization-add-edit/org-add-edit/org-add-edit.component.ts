@@ -24,7 +24,7 @@ export class OrgAddEditComponent implements OnInit {
   orgObj: OrganizationObj;
 
   param: string;
-  mode: string = "add";
+  mode: string = 'add';
 
   parentId: any;
   orgName: any;
@@ -39,23 +39,27 @@ export class OrgAddEditComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private location: Location,
     private adInsService: AdInsServiceService) {
-      this.route.queryParams.subscribe(params => {
-        this.param = params['refOrgId'];
-        this.mode = params['mode'];
 
-
+    this.route.queryParams.subscribe(params => {
+      this.param = params['refOrgId'];
+      this.mode = params['mode'];
     })
-    }
+  }
 
 
   ngOnInit() {
-    this.spinner.show();
+
+
     this.GetListParents();
     this.parentId = '';
     if (this.mode === 'edit') {
       this.FillFormEdit();
     }
-    this.spinner.hide();
+    else {
+      this.mode = 'add';
+      this.orgObj = new OrganizationObj();
+    }
+
   }
 
   Back(): void {
@@ -64,25 +68,23 @@ export class OrgAddEditComponent implements OnInit {
 
   Save(OrgObjectForm: NgForm): void {
     this.spinner.show();
-
-    if (this.mode !== 'edit')
-    {
+    if (this.mode !== 'edit') {
       this.apiUrl = this.foundationUrl + AdInsConstant.AddRefOrg;
 
       //GENERATE OBJECT
       this.orgObj = new OrganizationObj();
       this.orgObj.refOrgId = 0;
-      this.orgObj.oldParentId =  0;
+      this.orgObj.oldParentId = 0;
       this.orgObj.orgName = OrgObjectForm.value.orgName;
       this.orgObj.hierarchyNo = OrgObjectForm.value.hierarchyNo;
-      this.orgObj.parentId =   OrgObjectForm.value.parentId;
-      if (OrgObjectForm.value.isActive) {this.orgObj.isActive = '1'} else {this.orgObj.isActive = '0'};
+      this.orgObj.parentId = OrgObjectForm.value.parentId;
+      if (OrgObjectForm.value.isActive) { this.orgObj.isActive = '1' } else { this.orgObj.isActive = '0' };
 
       //SAVE
       this.adInsService.postData(this.apiUrl, this.orgObj).subscribe(
         (response) => {
           console.log("Success Save");
-          console.log(response);
+
           this.service.typeSave('Save Successed');
           this.location.back();
           this.spinner.hide();
@@ -90,44 +92,42 @@ export class OrgAddEditComponent implements OnInit {
         },
         (error) => {
           console.log("Error Save");
-          console.log(error);
-          this.service.errorMessage(error);
+
+          this.service.typeErrorCustom(error);
           this.spinner.hide();
         }
       );
 
 
     }
-    else
-    {
+    else {
       this.apiUrl = this.foundationUrl + AdInsConstant.EditRefOrgWithOldParentId;
 
       //GENERATE OBJECT
       this.orgObj.oldParentId = this.orgObj.parentId
       this.orgObj.orgName = OrgObjectForm.value.orgName;
       this.orgObj.hierarchyNo = OrgObjectForm.value.hierarchyNo;
-      this.orgObj.parentId =   OrgObjectForm.value.parentId;
-      if (OrgObjectForm.value.isActive) {this.orgObj.isActive = '1'} else {this.orgObj.isActive = '0'};
+      this.orgObj.parentId = OrgObjectForm.value.parentId;
+      if (OrgObjectForm.value.isActive) { this.orgObj.isActive = '1' } else { this.orgObj.isActive = '0' };
 
       //SAVE
       this.adInsService.postData(this.apiUrl, this.orgObj).subscribe(
         (response) => {
           console.log("Success Edit");
-          console.log(response);
-          this.service.typeSave('Save Successed');
+
+          this.service.typeSave('Edit Successed');
           this.location.back();
           this.spinner.hide();
         },
         (error) => {
           console.log("Error Edit");
-          console.log(error);
-          this.service.errorMessage(error);
+
+          this.service.typeErrorCustom(error);
           this.spinner.hide();
         }
       );
-
-    };
   }
+}
 
   GetListParents() {
     this.spinner.show();
@@ -135,52 +135,39 @@ export class OrgAddEditComponent implements OnInit {
     var organizationObj = new OrganizationObj();
     this.adInsService.postData(this.apiUrl, organizationObj).subscribe(
       (response) => {
-        console.log("Success Get List");
         this.parents = response;
-        console.log(response);
-
       },
       (error) => {
-        console.log("Error");
         console.log(error);
-
       }
     );
     this.spinner.hide();
-   }
+  }
 
-   FillFormEdit(){
+  FillFormEdit() {
     this.spinner.show();
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
     this.orgObj = new OrganizationObj();
     this.orgObj.refOrgId = +this.param;
-    console.log(this.orgObj.refOrgId);
-    console.log(this.apiUrl);
 
     this.adInsService.postData(this.apiUrl, this.orgObj).subscribe(
-        (response) => {
-            console.log("Success Get Object");
-            console.log(response);
+      (response) => {
+        this.orgObj = response.returnObject;
 
-
-            this.orgObj = response.returnObject;
-
-            if(this.orgObj.isActive === '1'){
-                this.isActive = true;
-            }
-            else
-            {
-                this.isActive = false;
-            }
-            if(this.orgObj.parentId === null) { this.parentId = '' } else {this.parentId = +this.orgObj.parentId};
-            this.orgName = this.orgObj.orgName;
-            this.hierarchyNo = this.orgObj.hierarchyNo;
-        },
-        (error) => {
-            console.log("Error");
-            console.log(error);
+        if (this.orgObj.isActive === '1') {
+          this.isActive = true;
         }
+        else {
+          this.isActive = false;
+        }
+        if (this.orgObj.parentId === null) { this.parentId = '' } else { this.parentId = +this.orgObj.parentId };
+        this.orgName = this.orgObj.orgName;
+        this.hierarchyNo = this.orgObj.hierarchyNo;
+      },
+      (error) => {
+
+      }
     );
     this.spinner.hide();
-   }
+  }
 }

@@ -61,7 +61,7 @@ export class VerfDetailComponent implements OnInit {
       (error) => {
         console.log("Error Verify");
         console.log(error);
-        this.toastrService.errorMessage(error);
+        this.toastrService.typeErrorCustom(error);
       }
     );
 

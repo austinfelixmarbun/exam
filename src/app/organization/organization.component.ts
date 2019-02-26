@@ -1,4 +1,3 @@
-import { ModalsComponent } from './../components/bootstrap/modals/modals.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
@@ -32,8 +31,8 @@ export class OrganizationComponent implements OnInit {
     private http: Http,
     private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private modal: ModalsComponent) { }
+    private adInsService: AdInsServiceService
+  ) { }
 
   ngOnInit() {
     this.pageNow = 1;
@@ -81,17 +80,17 @@ export class OrganizationComponent implements OnInit {
       (response) => {
         console.log("Success Delete");
         console.log(response);
+        this.service.typeSave('Delete Successed');
+        location.reload();
         this.spinner.hide();
       },
       (error) => {
         console.log("Error Delete");
         console.log(error);
+        this.service.typeSave('error');
         this.spinner.hide();
       }
     );
-    location.reload();
-    this.spinner.hide();
   }
-
 
 }

@@ -76,4 +76,8 @@ export class NGXToastrService {
       this.toastr.success(msg);
     }
 
+    typeErrorCustom(msg) {
+      this.toastr.error(msg);
+    }
+
 }
