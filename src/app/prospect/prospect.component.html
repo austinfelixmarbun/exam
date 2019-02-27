@@ -22,7 +22,7 @@
             <div class="form-group row">
               <label class="col-md-3 label-control" for="KtpNo">KTP No: </label>
               <div class="col-md-9">
-                <input type="text" id="KtpNo" class="form-control" name="KtpNo" required [(ngModel)]="KtpNo"
+                <input type="text" id="KtpNo" class="form-control" name="IdNo" required [(ngModel)]="IdNo"
                   #ktpNo="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && ktpNo.invalid }">
                 <div *ngIf="ProspectReqForm.submitted && ktpNo.invalid" class="invalid-feedback">
                   <div *ngIf="ktpNo.errors.required">KTP No is required</div>
@@ -88,7 +88,7 @@
               <label class="col-md-3 label-control" for="Product">Product: </label>
               <div class="col-md-9">
                 <select class="form-control" name="LobCode" #product [(ngModel)]="LobCode">
-                  <option value="NDFMTR">Refinancing Motorcycle</option>
+                  <option value="NDFMCY">Refinancing Motorcycle</option>
                   <option value="NDFCAR">Refinancing Car</option>
                   <option value="DFCAR">New Car</option>
                   <option value="PBF">Property</option>

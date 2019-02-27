@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  foundationUrl:'http://r3app-server/foundation',
+  foundationUrl:'http://r3appserver/foundation',
   localHostUrl: 'http://R2AppServer/CONFINS',
   r2AppServerUrl:'http://R2AppServer/POC/api'
 };

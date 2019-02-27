@@ -37,6 +37,7 @@ export class ProspectComponent implements OnInit {
   type: string = "add";
   prospectNo: string = "";
   CustName: any;
+  IdNo: any;
   KtpNo: any;
   BirthPlace: any;
   BirthDt: any;
@@ -91,6 +92,7 @@ export class ProspectComponent implements OnInit {
           console.log("Success");
           console.log(response);
           this.CustName = response['CustName']
+          this.IdNo = response['IdNo']
           this.BirthPlace = response['BirthPlace']
           this.Kelurahan = response['Kelurahan']
           this.Kecamatan = response['Kecamatan']
@@ -164,6 +166,8 @@ export class ProspectComponent implements OnInit {
     this.prosObj.assetTypeCode = 'ADINS HE';
     this.prosObj.LeadStat = 'NEW';
     this.prosObj.ProspectNo = this.prospectNo;
+    this.prosObj.MrIdType = 'KTP';
+    this.prosObj.MrGender = 'F';
 
 
     this.httpClient.post(this.submitProsUrl,this.prosObj).subscribe(

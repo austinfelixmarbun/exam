@@ -34,4 +34,7 @@ export class ProspectObj {
   ProspectNo : string;
   LeadStat : string;
   LobCode : string;
+  MrIdType : string;
+  IdNo : string;
+  MrGender : string;
 }
