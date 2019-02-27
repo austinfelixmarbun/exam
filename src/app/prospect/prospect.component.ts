@@ -168,7 +168,13 @@ export class ProspectComponent implements OnInit {
     this.prosObj.ProspectNo = this.prospectNo;
     this.prosObj.MrIdType = 'KTP';
     this.prosObj.MrGender = 'F';
-
+    this.prosObj.PhnArea1 = '021';
+    this.prosObj.PhnArea2 = '021';
+    this.prosObj.FaxArea = '082';
+    this.prosObj.Fax = '888';
+    this.prosObj.Npwp = '09897987123';
+    this.prosObj.EMail1 = 'email.adins@example.com';
+    this.prosObj.MobilePhnNo1 = '0821981298';
 
     this.httpClient.post(this.submitProsUrl,this.prosObj).subscribe(
       (response) => {
