@@ -80,6 +80,7 @@ export class AdInsServiceService {
     httpRequest.UserName = currentUserContext.UserName;
     httpRequest.Role = currentUserContext.Role;
     httpRequest.Office = currentUserContext.Office;
+    httpRequest.SendDateTime = currentUserContext.BusinessDate;
 
     httpRequest.RequestObject = requestObj;
     console.log(url);

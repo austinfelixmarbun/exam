@@ -42,7 +42,7 @@ export class RequestComponent implements OnInit {
   Save(ReqLeaveForm: NgForm): void {
     this.spinner.show();
 
-    this.apiUrlGateway = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/AddLeaveMngmt';
+    this.apiUrlGateway = 'https://172.19.11.114:8243/POC_TEST2/v1/LeaveManagement/AddLeaveMngmt';
     this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/AddLeaveMngmt';
 
     //GENERATE OBJECT
