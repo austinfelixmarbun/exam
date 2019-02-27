@@ -22,6 +22,8 @@ export class VerfDetailComponent implements OnInit {
   foundationUrl: string = environment.foundationUrl;
   apiUrl: any;
   verifBy: any;
+  apiUrlGateway: any;
+
   status = '';
   leaveManagementObj: LeaveManagementObj;
 
@@ -47,7 +49,8 @@ export class VerfDetailComponent implements OnInit {
 
   Save(LeaveVerifForm: NgForm): void {
     this.spinner.show();
-    this.apiUrl = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/EditLeaveMngmt';
+    this.apiUrlGateway = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/EditLeaveMngmt';
+    this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/EditLeaveMngmt';
     this.leaveManagementObj.verifBy = LeaveVerifForm.value.verifBy;
     this.leaveManagementObj.status = LeaveVerifForm.value.status;
 
@@ -74,6 +77,7 @@ export class VerfDetailComponent implements OnInit {
   FillForm(): void {
     this.spinner.show();
     this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/GetLeaveMngmt';
+    this.apiUrlGateway = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/GetLeaveMngmt';
     var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
     this.leaveManagementObj = new LeaveManagementObj();
     this.leaveManagementObj.leaveMngmtId = +this.param;

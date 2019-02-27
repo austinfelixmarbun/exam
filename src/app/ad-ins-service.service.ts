@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {HttpRequestObj} from 'app/shared/model/HttpRequestObj.model';
-import {IpObjModel} from 'app/shared/model/IpObj.model';
+import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
+import { IpObjModel } from 'app/shared/model/IpObj.model';
 import { HttpHeaders } from '@angular/common/http';
 import { RequestOptions, RequestMethod } from '@angular/http';
 
@@ -10,76 +10,82 @@ import { RequestOptions, RequestMethod } from '@angular/http';
 })
 export class AdInsServiceService {
 
-  ipAddress:string;
-  loc:string;
-  httpRequest:HttpRequestObj;
-  ipObj:IpObjModel;
-  constructor(private httpClient:HttpClient) { }
+  ipAddress: string;
+  loc: string;
+  httpRequest: HttpRequestObj;
+  ipObj: IpObjModel;
+  constructor(private httpClient: HttpClient) { }
 
   getIpAddress(): any {
     return this.httpClient.get<any>('https://ipinfo.io/json')
-    .subscribe( data => {
-      localStorage.setItem("IP",JSON.stringify(data));
-    });
+      .subscribe(data => {
+        localStorage.setItem("IP", JSON.stringify(data));
+      });
   }
 
-  private generateHeader():any{
+  private generateHeader(): any {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         'Authorization': 'my-auth-token',
-        'Access-Control-Allow-Origin':'true'
+        'Access-Control-Allow-Origin': 'true'
       })
     };
     return httpOptions;
   }
 
-  getData(url:string,withHeader:boolean=false){
+  getData(url: string, withHeader: boolean = false) {
     const httpOptions = this.generateHeader();
-    if(withHeader==true)
-    {
-      return this.httpClient.get<any>(url,httpOptions);
+    if (withHeader == true) {
+      return this.httpClient.get<any>(url, httpOptions);
     }
     return this.httpClient.get<any>(url);
   }
 
-  postDataDummy(url:string,requestObj:any):any{
+  postDataDummy(url: string, requestObj: any): any {
     var httpRequest = new HttpRequestObj();
     var currentUserContext = localStorage.getItem("currentUserContext")
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         'Authorization': 'my-auth-token'
       })
     };
     // httpRequest.UserName=currentUserContext.
     console.log(httpRequest);
-    requestObj.orderBy={"Key":"CountView","Value":"FALSE"};
+    requestObj.orderBy = { "Key": "CountView", "Value": "FALSE" };
     console.log(JSON.stringify(requestObj));
-    return this.httpClient.post(url,requestObj);
+    return this.httpClient.post(url, requestObj);
   }
 
-  postData(url:string,requestObj:any):any{
+  postData(url: string, requestObj: any): any {
     var httpRequest = new HttpRequestObj();
     var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
     var headerOptions = new Headers({ 'Content-Type': 'application/json' });
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Accepts': 'application/json',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
         'Authentication': 'my-authentication',
-        'Authorization': 'Bearer dbbbf15f-2360-3a32-b6e9-2373d8b5556b'
+        'Authorization': 'Bearer dbbbf15f-2360-3a32-b6e9-2373d8b5556b',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'Content-Type,Accept,Authorization'
       })
     };
     let headers = new HttpHeaders({
-      'Content-Type':'application/json'
+      'Content-Type': 'application/json'
     })
-    httpRequest.UserName=currentUserContext.UserName;
-    httpRequest.RequestObject = requestObj;
+    httpRequest.UserName = currentUserContext.UserName;
+    httpRequest.Role = currentUserContext.Role;
+    httpRequest.Office = currentUserContext.Office;
 
+    httpRequest.RequestObject = requestObj;
+    console.log(url);
     console.log(JSON.stringify(httpRequest));
     console.log(httpOptions);
-    return this.httpClient.post(url,httpRequest,httpOptions);
+    return this.httpClient.post(url, httpRequest, httpOptions);
   }
 
 }

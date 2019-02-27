@@ -8,4 +8,5 @@ export class LeaveManagementObj {
   status: string;
   reason: string;
   verifBy: string;
+  taskId: number;
 }

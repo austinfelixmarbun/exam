@@ -20,6 +20,7 @@ export class RequestComponent implements OnInit {
   foundationUrl: string = environment.foundationUrl;
   leaveManagementObj: LeaveManagementObj;
   apiUrl: any;
+  apiUrlGateway: any;
   jobPosition: any;
   startDt: any;
 
@@ -30,18 +31,20 @@ export class RequestComponent implements OnInit {
     private location: Location,
     private adInsService: AdInsServiceService) {
 
-    }
+  }
 
   ngOnInit() {
     var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
     this.startDt = currentUserContext.BusinessDate;
-    this. jobPosition = '';
+    this.jobPosition = '';
   }
 
   Save(ReqLeaveForm: NgForm): void {
     this.spinner.show();
 
-    this.apiUrl = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/AddLeaveMngmt';
+    this.apiUrlGateway = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/AddLeaveMngmt';
+    this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/AddLeaveMngmt';
+
     //GENERATE OBJECT
     this.leaveManagementObj = new LeaveManagementObj();
     this.leaveManagementObj.empName = ReqLeaveForm.value.empName;
@@ -50,9 +53,9 @@ export class RequestComponent implements OnInit {
     this.leaveManagementObj.endDt = ReqLeaveForm.value.endDt;
     this.leaveManagementObj.reason = ReqLeaveForm.value.reason;
     this.leaveManagementObj.verifBy = '';
-   this.leaveManagementObj.status = 'REQ';
+    this.leaveManagementObj.status = 'REQ';
     //SAVE
-    this.adInsService.postData(this.apiUrl, this.leaveManagementObj).subscribe(
+    this.adInsService.postData(this.apiUrlGateway, this.leaveManagementObj).subscribe(
       (response) => {
         console.log('Success Save');
         console.log(response);
