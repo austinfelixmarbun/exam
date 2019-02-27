@@ -24,6 +24,7 @@ export class VerfPagingComponent implements OnInit {
   totalData: any;
   pageSize: any;
   apiUrl: any;
+  apiUrlGateway: any;
 
   foundationUrl: string = environment.foundationUrl;
 
@@ -32,7 +33,8 @@ export class VerfPagingComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/GetLeaveMngmtPagingReq';
+    this.apiUrlGateway = 'http://172.19.11.114:8280/POC_TEST/v1/LeaveManagement/GetLeaveMngmtPagingReq';
+    this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/GetLeaveMngmtPagingReq';
     console.log('ip:', this.apiUrl);
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
@@ -43,6 +45,7 @@ export class VerfPagingComponent implements OnInit {
 
   search() {
     this.spinner.show();
+    console.log('api',this.apiUrl);
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
@@ -63,23 +66,6 @@ export class VerfPagingComponent implements OnInit {
   pageChange(page: number) {
     this.pageNow = page;
     this.search();
-  }
-
-  // Success Type
-  typeSuccess() {
-    this.service.typeSuccess();
-  }
-
-  typeError() {
-    this.service.typeError();
-  }
-
-  timeout() {
-    this.service.timeout();
-  }
-
-  errMsg() {
-    this.service.errorMessage('asdasd');
   }
 
 }

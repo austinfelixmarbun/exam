@@ -23,6 +23,7 @@ export class InquiryComponent implements OnInit {
   totalData: any;
   pageSize: any;
   apiUrl: any;
+  apiUrlGateway: any;
 
   foundationUrl: string = environment.foundationUrl;
 
@@ -31,8 +32,9 @@ export class InquiryComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/GetLeaveMngmtPaging';
-    console.log('ip:', this.apiUrl);
+    this.apiUrlGateway = 'hhttp://r3appserver:8280/POC_TEST/v1/LeaveManagement/GetLeaveMngmtPaging';
+    this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/GetLeaveMngmtPaging';
+    console.log('ip:', this.apiUrlGateway);
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
@@ -42,7 +44,7 @@ export class InquiryComponent implements OnInit {
 
   search() {
     this.spinner.show();
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
+    this.searchComponent.search(this.apiUrlGateway, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
           console.log("Success");
