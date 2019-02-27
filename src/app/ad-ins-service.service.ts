@@ -82,7 +82,7 @@ export class AdInsServiceService {
     httpRequest.Office = currentUserContext.Office;
 
     httpRequest.RequestObject = requestObj;
-
+    console.log(url);
     console.log(JSON.stringify(httpRequest));
     console.log(httpOptions);
     return this.httpClient.post(url, httpRequest, httpOptions);
