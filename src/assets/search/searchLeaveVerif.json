@@ -1,5 +1,5 @@
 {
-  "url": "http://GetRefOrgPaging",
+  "url": "http://GetLeaveManagementVerifPaging",
   "component": [
     {
       "type": "textbox",
@@ -42,7 +42,7 @@
       "datatype": "date",
       "name": "startDt",
       "id": "startDtId",
-      "value": "",
+      "value": "BD",
       "restriction": "gte",
       "label": "Start Date >=",
       "placeholder": "Placeholder"
@@ -52,9 +52,9 @@
       "datatype": "date",
       "name": "endDt",
       "id": "endDtId",
-      "value": "",
+      "value": "BD+500",
       "restriction": "lte",
-      "label": "End Date >=",
+      "label": "End Date <=",
       "placeholder": "Placeholder"
     }
   ]

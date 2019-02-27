@@ -20,7 +20,7 @@ import { BusinessUnitObj } from 'app/shared/model/BusinessUnitObj.Model';
 export class AddBusinessUnitComponent implements OnInit {
 
     param: string;
-    
+
     businessUnitCode: string;
     businessUnitName: string;
     description: string;
@@ -31,7 +31,10 @@ export class AddBusinessUnitComponent implements OnInit {
     isActive:boolean = false;
     foundationUrl: string = environment.foundationUrl;
 
-    constructor(private route: ActivatedRoute, private http: AdInsServiceService, private spinner: NgxSpinnerService) {
+    constructor(
+      private route: ActivatedRoute,
+      private http: AdInsServiceService,
+      private spinner: NgxSpinnerService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refBizUnitId"];
             this.mode = params["mode"];

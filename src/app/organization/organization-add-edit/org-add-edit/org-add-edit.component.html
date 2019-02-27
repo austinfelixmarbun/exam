@@ -9,25 +9,25 @@
               <div class="form-body">
                 <h4 class="form-section"><i class="ft-user"></i>Add Edit Organization</h4>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="OrgName">Organization Name</label>
+                  <label class="col-md-3 label-control" for="orgName">Organization Name</label>
                   <div class="col-md-9">
-                    <input type="text" id="OrgName" class="form-control" required name="OrgName" [(ngModel)]="OrgName"
-                      value={{orgObj.OrgName}} #required="ngModel" required >
+                    <input type="text" id="orgName" class="form-control" required name="orgName" [(ngModel)]="orgName"
+                    #required="ngModel" required >
                     <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="HierarchyNo">Hierarchy No</label>
+                  <label class="col-md-3 label-control" for="hierarchyNo">Hierarchy No</label>
                   <div class="col-md-9">
-                    <input type="text" id="HierarchyNo" class="form-control" required name="HierarchyNo"
-                      [(ngModel)]="HierarchyNo" value={{orgObj.HierarchyNo}} #required="ngModel" required >
+                    <input type="text" id="hierarchyNo" class="form-control" required name="hierarchyNo"
+                      [(ngModel)]="hierarchyNo" #required="ngModel" required >
                       <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="ParentId">Parent Organization</label>
+                  <label class="col-md-3 label-control" for="parentId">Parent Organization</label>
                   <div class="col-md-9">
-                    <select id="ParentsId" name="ParentsId" class="form-control" [(ngModel)]="ParentsId">
+                    <select id="parentId" name="parentId" class="form-control" [(ngModel)]="parentId">
                       <option value="">None</option>
                       <option *ngFor="let item of parents?.returnObject" [value]="item.refOrgId">{{item.orgName}}
                       </option>
@@ -35,10 +35,10 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="IsActive">Active Status</label>
+                  <label class="col-md-3 label-control" for="isActive">Active Status</label>
                  <div class="custom-control custom-checkbox m-0">
-                    <input type="checkbox" value="1" id="IsActive" name="IsActive" required
-                      [(ngModel)]="IsActive">
+                    <input type="checkbox" value="1" id="isActive" name="isActive" required
+                      [(ngModel)]="isActive" [checked]="isActive">
                 </div>
               </div>
           </div>

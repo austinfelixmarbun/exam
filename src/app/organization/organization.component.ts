@@ -7,6 +7,7 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
+import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
 
 @Component({
   selector: 'app-organization',
@@ -26,7 +27,12 @@ export class OrganizationComponent implements OnInit {
 
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: Http, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }
+  constructor(
+    private http: Http,
+    private spinner: NgxSpinnerService,
+    private service: NGXToastrService,
+    private adInsService: AdInsServiceService
+  ) { }
 
   ngOnInit() {
     this.pageNow = 1;
@@ -64,21 +70,27 @@ export class OrganizationComponent implements OnInit {
     this.search();
   }
 
-  // Success Type
-  typeSuccess() {
-    this.service.typeSuccess();
-  }
-
-  typeError() {
-    this.service.typeError();
-  }
-
-  timeout() {
-    this.service.timeout();
-  }
-
-  errMsg() {
-    this.service.errorMessage('asdasd');
+  del(id: number): void {
+    this.spinner.show();
+    var url = this.foundationUrl + AdInsConstant.DeleteRefOrg;
+    var organizObj: OrganizationObj;
+    organizObj = new OrganizationObj();
+    organizObj.refOrgId = id;
+    this.adInsService.postData(url, organizObj).subscribe(
+      (response) => {
+        console.log("Success Delete");
+        console.log(response);
+        this.service.typeSave('Delete Successed');
+        location.reload();
+        this.spinner.hide();
+      },
+      (error) => {
+        console.log("Error Delete");
+        console.log(error);
+        this.service.typeSave('error');
+        this.spinner.hide();
+      }
+    );
   }
 
 }

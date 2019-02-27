@@ -32,7 +32,7 @@ export class VerfPagingComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrgPaging;
+    this.apiUrl = 'https://172.19.11.114:8243/POC_TEST/v1/LeaveManagement/GetLeaveMngmtPagingReq';
     console.log('ip:', this.apiUrl);
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {

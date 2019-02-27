@@ -211,18 +211,19 @@ export class SearchComponent implements OnInit {
         critObj.propName = component.name;
         critObj.value = component.value;
         console.log(component.type);
-        console.log(component.restriction);
+        console.log(component.getAttribute('data-restriction'));
         if (component.value.includes("%")) {
           critObj.restriction = AdInsConstant.RestrictionLike;
 
         }
         //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
 
-        else if ( component.getAttribute('data-restriction') != "") {
+        else if ( component.getAttribute('data-restriction') !== '' && component.getAttribute('data-restriction') !== null ) {
           critObj.restriction = component.getAttribute('data-restriction');
         }
         else {
-          critObj.restriction = AdInsConstant.RestrictionEq
+          critObj.restriction = AdInsConstant.RestrictionEq;
+          console.log('else restrict', critObj.restriction );
         }
         arrCrit.push(critObj);
       }
