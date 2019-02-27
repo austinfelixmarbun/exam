@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
   foundationUrl:'http://r3app-server/foundation',
-  localHostUrl: 'http://localhost/CONFINS_POC_BFI',
+  localHostUrl: 'http://R2AppServer/CONFINS',
   r2AppServerUrl:'http://R2AppServer/POC/api'
 };
