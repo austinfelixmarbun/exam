@@ -145,7 +145,7 @@ export class ProspectComponent implements OnInit {
     console.log(this.MotherMaidenName);
     this.prosObj = new ProspectObj();
     this.prosObj = prsReqFoem.value;
-    this.prosObj.RefOfficeId = 30194;
+    this.prosObj.RefOfficeId = 9;
     this.prosObj.CustType = 'P';
     this.prosObj.AssetPriceAmt = 0;
     this.prosObj.DownPaymentAmt = 0;
@@ -156,7 +156,7 @@ export class ProspectComponent implements OnInit {
     this.prosObj.AppStep = 'NEW';
     this.prosObj.IsActive = '1';
     this.prosObj.NoOfDependents = 0;
-    this.prosObj.OfficeCode = 'MRY';
+    this.prosObj.OfficeCode = '0037';
     this.prosObj.SupplBranchEmpCode = '000SBEMP20160600001';
     this.prosObj.assetCode = 'D3K';
     this.prosObj.assetHierarchyL1Code = 'KOMATSU';
