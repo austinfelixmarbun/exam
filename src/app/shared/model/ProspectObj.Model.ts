@@ -37,4 +37,11 @@ export class ProspectObj {
   MrIdType : string;
   IdNo : string;
   MrGender : string;
+  PhnArea1 : string;
+  PhnArea2 : string;
+  FaxArea : string;
+  Fax : string;
+  Npwp : string;
+  EMail1 : string;
+  MobilePhnNo1 : string;
 }
