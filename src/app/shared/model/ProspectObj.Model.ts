@@ -14,4 +14,24 @@ export class ProspectObj {
   Kecamatan: string;
   City: string;
   Province: string;
+  RefOfficeId: number;
+  CustType: string;
+  AssetPriceAmt: number;
+  DownPaymentAmt: number;
+  NtfAmt: number;
+  Tenor: number;
+  InsAmt: number;
+  FlatRatePrcnt: number;
+  AppStep: string;
+  IsActive: string;
+  NoOfDependents: number;
+  OfficeCode: string;
+  SupplBranchEmpCode: string;
+  assetTypeCode: string;
+  assetHierarchyL1Code : string;
+  assetHierarchyL2Code : string;
+  assetCode : string;
+  ProspectNo : string;
+  LeadStat : string;
+  LobCode : string;
 }

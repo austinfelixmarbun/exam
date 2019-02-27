@@ -1,0 +1,306 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <h2>CUSTOMER DATA</h2>
+        <form class="form form-horizontal" name="ProspectReqForm" #ProspectReqForm="ngForm" novalidate
+          (ngSubmit)="ProspectReqForm.form.valid && SavePros(ProspectReqForm)">
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-user"></i> Customer Info <div id="flip1" class="btn float-right"
+                (click)="isHidden1 = !isHidden1">
+                <i class="fa" [ngClass]="isHidden1 ? 'fa-chevron-down' : 'fa-chevron-up'"></i></div>
+            </h4>
+            <div id="panel1">
+              <div class="form-group row">
+                <label class="col-md-3 label-control">Customer Type: </label>
+                <div class="col-md-9">
+                  <label class="label-control"> Personal</label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="CustModel">Customer Model: </label>
+                <div class="input-group col-md-9">
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="Professional" value="Professional" checked name="CustModel"
+                      class="custom-control-input" [(ngModel)]="CustModel">
+                    <label class="custom-control-label" for="Professional">Professional</label>
+                  </div>
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="Employee" value="Employee" name="CustModel" class="custom-control-input"
+                      [(ngModel)]="CustModel">
+                    <label class="custom-control-label" for="Employee">Employee</label>
+                  </div>
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="SME" value="SME" name="CustModel" class="custom-control-input"
+                      [(ngModel)]="CustModel">
+                    <label class="custom-control-label" for="SME">Small Medium Enterprise</label>
+                  </div>
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="NonProf" value="NonProf" name="CustModel" class="custom-control-input"
+                      [(ngModel)]="CustModel">
+                    <label class="custom-control-label" for="NonProf">Non Professional</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="CustName">Customer Name: </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="CustName" [(ngModel)]="CustName"
+                    #custName="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && custName.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && custName.invalid" class="invalid-feedback">
+                    <div *ngIf="custName.errors.required">Customer Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control">Marital Status: </label>
+                <div class="col-md-9">
+                  <select name="maritalStat" class="form-control" [(ngModel)]="maritalStat">
+                    <option value="" selected>Select One</option>
+                    <option value="1">Duda/Janda</option>
+                    <option value="2">Menikah</option>
+                    <option value="3">Single</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control">ID Type: </label>
+                <div class="col-md-9">
+                  <select name="idType" class="form-control" [(ngModel)]="idType">
+                    <option value="" selected>Select One</option>
+                    <option value="1">E-KTP</option>
+                    <option value="2">NIK</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="KtpNo">ID Number: </label>
+                <div class="col-md-9">
+                  <input type="text" id="idNum" class="form-control" name="idNum" [(ngModel)]="idNum">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="IDExpDt">ID Expired Date: </label>
+                <div class="col-md-9">
+                  <div class="position-relative">
+                    <input type="date" id="IDExpDt" class="form-control" name="IDExpDt" [(ngModel)]="IDExpDt"
+                      #idExpDt="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && idExpDt.invalid }">
+                    <div *ngIf="ProspectReqForm.submitted && idExpDt.invalid" class="invalid-feedback">
+                      <div *ngIf="idExpDt.errors.required">ID Expired Date is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Gender">Gender: </label>
+                <div class="input-group col-md-9">
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="Male" name="Gender" class="custom-control-input" value="M"
+                      [(ngModel)]="Gender">
+                    <label class="custom-control-label" for="Male">Male</label>
+                  </div>
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="jk" name="Gender" class="custom-control-input" value="JK"
+                      [(ngModel)]="Gender">
+                    <label class="custom-control-label" for="jk">JK</label>
+                  </div>
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="Female" name="Gender" class="custom-control-input" value="F"
+                      [(ngModel)]="Gender">
+                    <label class="custom-control-label" for="Female">Female</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="BirthPlace">Birth Place: </label>
+                <div class="col-md-9">
+                  <input type="text" id="BirthPlace" class="form-control" name="BirthPlace"
+                    [(ngModel)]="BirthPlace" #birthPlace="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && birthPlace.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && birthPlace.invalid" class="invalid-feedback">
+                    <div *ngIf="birthPlace.errors.required">Birth Place is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="BirthDt">Birth Date: </label>
+                <div class="col-md-9">
+                  <div class="position-relative">
+                    <input type="date" id="BirthDt" class="form-control" name="BirthDt" [(ngModel)]="BirthDt"
+                      #birthDt="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && birthDt.invalid }">
+                    <div *ngIf="ProspectReqForm.submitted && birthDt.invalid" class="invalid-feedback">
+                      <div *ngIf="birthDt.errors.required">Birth Date is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="NpwpNo">NPWP No: </label>
+                <div class="col-md-9">
+                  <input type="text" id="NpwpNo" class="form-control" name="NpwpNo" [(ngModel)]="NpwpNo">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="MotherMaidenName">Mother Maiden Name: </label>
+                <div class="col-md-9">
+                  <input type="text" id="MotherMaidenName" class="form-control" name="MotherMaidenName"
+                    [(ngModel)]="MotherMaidenName" #motherMaidenName="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && motherMaidenName.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && motherMaidenName.invalid" class="invalid-feedback">
+                    <div *ngIf="motherMaidenName.errors.required">Mother Maiden Name is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h4 class="form-section"><i class="ft-user"></i> Business/Job Data <div id="flip2" class="btn float-right"
+                (click)="isHidden2 = !isHidden2">
+                <i class="fa" [ngClass]="isHidden2 ? 'fa-chevron-down' : 'fa-chevron-up'"></i></div>
+            </h4>
+            <div id="panel2">
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Profession">Profession: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Profession" class="form-control" name="Profession"
+                    [(ngModel)]="Profession">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="EmpSince">Employment Since: </label>
+                <div class="col-md-9">
+                  <input type="text" id="EmpSince" class="form-control" name="EmpSince" [(ngModel)]="EmpSince">
+                </div>
+              </div>
+            </div>
+            <h4 class="form-section"><i class="ft-user"></i> Address <div id="flip3" class="btn float-right"
+                (click)="isHidden3 = !isHidden3">
+                <i class="fa" [ngClass]="isHidden3 ? 'fa-chevron-down' : 'fa-chevron-up'"></i></div>
+            </h4>
+            <div id="panel3">
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Address">Address: </label>
+                <div class="col-md-9">
+                  <textarea id="Address" rows="5" class="form-control" name="Address" [(ngModel)]="Address"
+                    #addr="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && addr.invalid }"></textarea>
+                  <div *ngIf="ProspectReqForm.submitted && addr.invalid" class="invalid-feedback">
+                    <div *ngIf="addr.errors.required">Address is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Rt">Rt: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Rt" class="form-control" name="Rt" [(ngModel)]="Rt" #rt="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && rt.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && rt.invalid" class="invalid-feedback">
+                    <div *ngIf="rt.errors.required">RT is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Rw">Rw: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Rw" class="form-control" name="Rw" [(ngModel)]="Rw" #rw="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && rw.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && rw.invalid" class="invalid-feedback">
+                    <div *ngIf="rw.errors.required">RW is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Zipcode">Zipcode: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Zipcode" class="form-control" name="Zipcode" [(ngModel)]="Zipcode"
+                    #zipcode="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && zipcode.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && zipcode.invalid" class="invalid-feedback">
+                    <div *ngIf="zipcode.errors.required">Zipcode is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Kelurahan">Kelurahan: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Kelurahan" class="form-control" name="Kelurahan"
+                    [(ngModel)]="Kelurahan" #kelurahan="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && kelurahan.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && kelurahan.invalid" class="invalid-feedback">
+                    <div *ngIf="kelurahan.errors.required">Kelurahan is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Kecamatan">Kecamatan: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Kecamatan" class="form-control" name="Kecamatan"
+                    [(ngModel)]="Kecamatan" #kecamatan="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && kecamatan.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && kecamatan.invalid" class="invalid-feedback">
+                    <div *ngIf="kecamatan.errors.required">Kecamatan is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="City">City: </label>
+                <div class="col-md-9">
+                  <input type="text" id="City" class="form-control" name="City" [(ngModel)]="City">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Phone1">Phone(Fix Line) 1: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Phone1" class="form-control" name="Phone1" [(ngModel)]="Phone1">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Phone2">Phone(Fix Line) 2: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Phone2" class="form-control" name="Phone2" [(ngModel)]="Phone2">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Fax">Fax: </label>
+                <div class="col-md-9">
+                  <input type="text" id="Fax" class="form-control" name="Fax" [(ngModel)]="Fax">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control">House Ownership: </label>
+                <div class="col-md-9">
+                  <select name="own" class="form-control" [(ngModel)]="own">
+                    <option value="" selected>Select One</option>
+                    <option value="1">Company</option>
+                    <option value="2">Family House</option>
+                    <option value="3">Mortage</option>
+                    <option value="4">Others</option>
+                    <option value="5">Rent</option>
+                    <option value="6">Self Owned</option>
+                    <option value="7">Spouse Owned</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control">House Ownership Class: </label>
+                <div class="col-md-9">
+                  <select name="ownClass" class="form-control" [(ngModel)]="idType">
+                    <option value="" selected>Select One</option>
+                    <option value="1">Fair</option>
+                    <option value="2">High</option>
+                    <option value="3">Low</option>
+                    <option value="4">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+              <i class="ft-x"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o" [routerLink]="['/LOS/CreditProcess/ApplicationData']"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

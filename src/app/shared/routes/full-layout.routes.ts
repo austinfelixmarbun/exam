@@ -102,5 +102,9 @@ export const Full_ROUTES: Routes = [
   {
     path : 'leaveManagament',
     loadChildren: './leave-management/leave-management.module#LeaveManagementModule'
+  },
+  {
+    path : 'LOS',
+    loadChildren: './los/los.module#LosModule'
   }
 ];

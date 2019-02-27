@@ -12,7 +12,10 @@ export class AdInsConstant{
     public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
     public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";
     public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
-    public static GetCity = "";
+    public static GetProvince = "/los/v1/get_provinsi";
+    public static GetCityByProvince = "/los/v1/get_kota";
+    public static getProspectByProspectNo = "/api/MobileProspectTask/GetProspectByProspectNo";
+    public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
 
 
 }

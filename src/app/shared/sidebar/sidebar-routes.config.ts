@@ -4,7 +4,6 @@ import { RouteInfo } from './sidebar.metadata';
 export const ROUTES: RouteInfo[] = [
 
     { path: '/dashboard/dash-board', title: 'Menu', icon: 'ft-home', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-
     {
         path: '', title: 'Employee', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
@@ -18,6 +17,12 @@ export const ROUTES: RouteInfo[] = [
           { path: '/leaveManagament/verification', title: 'Verification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/leaveManagament/inquiry', title: 'Inquiry', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
       ]
+    },
+    {
+        path: '', title: 'LOS', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+        submenu: [
+            { path: '/LOS/CreditProcess/CustomerData', title: 'New Application', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+        ]
     },
     {
       path: '', title: 'Marketing', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
