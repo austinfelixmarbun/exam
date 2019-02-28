@@ -115,10 +115,9 @@ export class ProspectComponent implements OnInit {
           this.MblPhoneNo = response['MobilePhnNo1']
           this.PhoneNo = response['Phn1']
           this.BirthDt = formatDate(response['BirthDt'], 'yyyy-MM-dd', 'en-US');
-          this.IdExpiredDt = formatDate(response['BirthDt'], 'yyyy-MM-dd', 'en-US');
+          this.IdExpiredDt = formatDate(response['IdExpiredDt'], 'yyyy-MM-dd', 'en-US');
           this.EMail1 = response['EMail1']
           this.Npwp = response['Npwp']
-          this.IdExpiredDt = response['IdExpiredDt']
         },
         (error) => {
           console.log("Error");
@@ -207,8 +206,8 @@ export class ProspectComponent implements OnInit {
         this.newProspectNo = response;
         this.toastr.successMessage(this.newProspectNo);
         this.spinner.hide();
-        this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
-          this.router.navigate(["prospect"]));
+        // this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
+        //   this.router.navigate(["prospect"]));
       },
       (error) => {
         console.log("Error");
