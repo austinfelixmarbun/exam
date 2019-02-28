@@ -91,7 +91,7 @@
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="PhoneNo">Phone No: </label>
                 <div class="col-md-9">
-                  <input type="text" pattern="^[0-9]+$" id="PhoneNo" class="form-control" name="Phn2" required
+                  <input type="text" pattern="^[0-9]+$" id="PhoneNo" class="form-control" name="Phn1" required
                     [(ngModel)]="PhoneNo" #phoneNo="ngModel"
                     [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && phoneNo.invalid }">
                   <div *ngIf="ProspectReqForm.submitted && phoneNo.invalid" class="invalid-feedback">

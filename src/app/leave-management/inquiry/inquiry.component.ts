@@ -32,7 +32,7 @@ export class InquiryComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrlGateway = 'hhttp://r3appserver:8280/POC_TEST/v1/LeaveManagement/GetLeaveMngmtPaging';
+    this.apiUrlGateway = 'http://r3appserver:8280/POC_TEST/v1/LeaveManagement/GetLeaveMngmtPaging';
     this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/GetLeaveMngmtPaging';
     console.log('ip:', this.apiUrlGateway);
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
@@ -49,7 +49,7 @@ export class InquiryComponent implements OnInit {
         (response) => {
           console.log("Success");
           this.resultData = response;
-          this.totalData = response.count;
+          this.totalData = response.returnObject.count;
           console.log(response);
           this.spinner.hide();
         },

@@ -53,7 +53,7 @@ export class OrganizationComponent implements OnInit {
         (response) => {
           console.log("Success");
           this.resultData = response;
-          this.totalData = response.count;
+          this.totalData = response.returnObject.count;
           console.log(response);
           this.spinner.hide();
         },
