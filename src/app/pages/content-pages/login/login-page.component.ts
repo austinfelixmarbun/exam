@@ -96,7 +96,7 @@ export class LoginPageComponent implements OnInit{
                 currentUserContext.Role="SUPUSR";
                 currentUserContext.BusinessDate=businessDt;
                 this.currentUserContextService.addCurrentUserContext(currentUserContext);
-                this.router.navigate(['dashboard/dashboard1']);
+                this.router.navigate(['dashboard/dash-board']);
             }
             else{
                 window.alert('Login Failed');

@@ -80,4 +80,7 @@ export class NGXToastrService {
       this.toastr.error(msg);
     }
 
+    successMessage(msg) {
+        this.toastr.success(msg, 'Success!');
+    }
 }

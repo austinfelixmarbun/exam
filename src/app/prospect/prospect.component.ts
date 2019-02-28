@@ -1,4 +1,3 @@
-import { FormGroup, FormControl } from '@angular/forms';
 import { value } from './../shared/data/dropdowns';
 import { formatDate } from '@angular/common';
 import { ProspectObj } from './../shared/model/ProspectObj.Model';
@@ -9,15 +8,19 @@ import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-prospect',
   templateUrl: './prospect.component.html',
-  styleUrls: ['./prospect.component.scss']
+  styleUrls: ['./prospect.component.scss'],
+  providers: [NGXToastrService] // add NgbPaginationConfig to the component providers
 })
 export class ProspectComponent implements OnInit {
 
+  prospectModel = 'P';
   birthDate: string;
   Gender = 'M';
   CustModel = 'Professional';
@@ -36,6 +39,7 @@ export class ProspectComponent implements OnInit {
   test: any;
   type: string = "add";
   prospectNo: string = "";
+  newProspectNo: any;
   CustName: any;
   IdNo: any;
   KtpNo: any;
@@ -49,17 +53,20 @@ export class ProspectComponent implements OnInit {
   Rw: any;
   MblPhoneNo: any;
   PhoneNo: any;
+  Npwp: any;
   MotherMaidenName: any;
+  EMail1: any;
   Province: any;
-
+  myForm: NgForm;
   prosObj: ProspectObj;
 
-  constructor(private route: ActivatedRoute, private location: Location, private adInsService: AdInsServiceService, private httpClient:HttpClient) {
+  constructor(private router: Router, private route: ActivatedRoute, private location: Location, private spinner: NgxSpinnerService, 
+              private adInsService: AdInsServiceService, private httpClient:HttpClient,  private toastr: NGXToastrService) {
     this.provUrl = this.r2AppServerUrl + AdInsConstant.GetProvince;
     this.cityUrl = this.r2AppServerUrl + AdInsConstant.GetCityByProvince;
     this.getProsUrl = this.localHostUrl + AdInsConstant.getProspectByProspectNo;
     this.submitProsUrl = this.localHostUrl + AdInsConstant.submitNCProspect;
-    
+
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
         this.type = params['param'];
@@ -73,6 +80,7 @@ export class ProspectComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.adInsService.postData(this.provUrl, null).subscribe(
       (response) => {
         console.log("Success");
@@ -91,6 +99,7 @@ export class ProspectComponent implements OnInit {
         (response) => {
           console.log("Success");
           console.log(response);
+          this.prospectModel = response['CustType']
           this.CustName = response['CustName']
           this.IdNo = response['IdNo']
           this.BirthPlace = response['BirthPlace']
@@ -101,9 +110,11 @@ export class ProspectComponent implements OnInit {
           this.Rw = response['Rw']
           this.Zipcode = response['Zipcode']
           this.MotherMaidenName = response['MotherMaidenName']
-          this.MblPhoneNo = response['Phn2']
+          this.MblPhoneNo = response['MobilePhnNo1']
           this.PhoneNo = response['Phn1']
           this.BirthDt = formatDate(response['BirthDt'], 'yyyy-MM-dd', 'en-US');
+          this.EMail1 = response['EMail1']
+          this.Npwp = response['Npwp']
         },
         (error) => {
           console.log("Error");
@@ -112,6 +123,7 @@ export class ProspectComponent implements OnInit {
       );
     }
     console.log(this.Province)
+    this.spinner.hide();
   }
 
   Back(): void {
@@ -119,6 +131,7 @@ export class ProspectComponent implements OnInit {
   }
 
   onChange(cityValue) {
+    this.spinner.show();
     console.log(cityValue);
     var tes = {"id":cityValue};
     this.httpClient.post(this.cityUrl,tes).subscribe(
@@ -127,12 +140,19 @@ export class ProspectComponent implements OnInit {
         this.allCity = response['data'];
         console.log(response);
         console.log(this.allCity);
+        this.spinner.hide();
       },
       (error) => {
         console.log("Error");
         console.log(error);
+        this.spinner.hide();
       }
     );
+  }
+
+  selectType(type, prsReqFoem: NgForm){
+    this.prospectModel = type;
+    prsReqFoem.reset()
   }
 
   Save(prsReqFoem: NgForm): void {
@@ -144,11 +164,12 @@ export class ProspectComponent implements OnInit {
   }
 
   SavePros(prsReqFoem: NgForm) {
+    this.spinner.show();
     console.log(this.MotherMaidenName);
     this.prosObj = new ProspectObj();
     this.prosObj = prsReqFoem.value;
     this.prosObj.RefOfficeId = 9;
-    this.prosObj.CustType = 'P';
+    this.prosObj.CustType = this.prospectModel;
     this.prosObj.AssetPriceAmt = 0;
     this.prosObj.DownPaymentAmt = 0;
     this.prosObj.NtfAmt = 0;
@@ -172,19 +193,22 @@ export class ProspectComponent implements OnInit {
     this.prosObj.PhnArea2 = '021';
     this.prosObj.FaxArea = '082';
     this.prosObj.Fax = '888';
-    this.prosObj.Npwp = '09897987123';
-    this.prosObj.EMail1 = 'email.adins@example.com';
-    this.prosObj.MobilePhnNo1 = '0821981298';
+    this.prosObj.Phn2 = '0821981298';
 
-    this.httpClient.post(this.submitProsUrl,this.prosObj).subscribe(
+    this.httpClient.post(this.submitProsUrl, this.prosObj).subscribe(
       (response) => {
         console.log("Success");
         console.log(response);
-        this.prospectNo = response['prospectNo'];
+        this.newProspectNo = response;
+        this.toastr.successMessage(this.newProspectNo);
+        this.spinner.hide();
+        // this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
+        //   this.router.navigate(["prospect"]));
       },
       (error) => {
         console.log("Error");
         console.log(error);
+        this.spinner.hide();
       }
     );
   }

@@ -43,5 +43,5 @@ export class ProspectObj {
   Fax : string;
   Npwp : string;
   EMail1 : string;
-  MobilePhnNo1 : string;
+  Phn2 : string;
 }
