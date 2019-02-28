@@ -44,4 +44,5 @@ export class ProspectObj {
   Npwp : string;
   EMail1 : string;
   Phn2 : string;
+  IdExpiredDt : Date;
 }

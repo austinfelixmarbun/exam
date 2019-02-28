@@ -60,6 +60,7 @@ export class ProspectComponent implements OnInit {
   Province: any;
   myForm: NgForm;
   prosObj: ProspectObj;
+  IdExpiredDt: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private location: Location, private spinner: NgxSpinnerService, 
               private adInsService: AdInsServiceService, private httpClient:HttpClient,  private toastr: NGXToastrService) {
@@ -114,8 +115,10 @@ export class ProspectComponent implements OnInit {
           this.MblPhoneNo = response['MobilePhnNo1']
           this.PhoneNo = response['Phn1']
           this.BirthDt = formatDate(response['BirthDt'], 'yyyy-MM-dd', 'en-US');
+          this.IdExpiredDt = formatDate(response['BirthDt'], 'yyyy-MM-dd', 'en-US');
           this.EMail1 = response['EMail1']
           this.Npwp = response['Npwp']
+          this.IdExpiredDt = response['IdExpiredDt']
         },
         (error) => {
           console.log("Error");
