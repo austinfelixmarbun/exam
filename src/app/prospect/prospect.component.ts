@@ -204,8 +204,8 @@ export class ProspectComponent implements OnInit {
         this.newProspectNo = response;
         this.toastr.successMessage(this.newProspectNo);
         this.spinner.hide();
-        // this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
-        //   this.router.navigate(["prospect"]));
+        this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
+          this.router.navigate(["prospect"]));
       },
       (error) => {
         console.log("Error");
