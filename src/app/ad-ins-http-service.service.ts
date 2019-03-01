@@ -54,7 +54,7 @@ export class AdInsHttpServiceService {
   }
 
  getIpAddress(): any {
-    return this.ipAddress = this.http.get<{ip: string}>('https://ipinfo.io/json')
+    return this.ipAddress = this.http.get<{ip: string}>('')
       .subscribe( data => {});
 
     }

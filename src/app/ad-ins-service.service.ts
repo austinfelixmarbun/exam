@@ -17,7 +17,7 @@ export class AdInsServiceService {
   constructor(private httpClient: HttpClient) { }
 
   getIpAddress(): any {
-    return this.httpClient.get<any>('https://ipinfo.io/json')
+    return this.httpClient.get<any>('')
       .subscribe(data => {
         localStorage.setItem("IP", JSON.stringify(data));
       });
