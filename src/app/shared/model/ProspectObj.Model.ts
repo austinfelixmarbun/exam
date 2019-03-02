@@ -17,9 +17,6 @@ export class ProspectObj {
   RefOfficeId: number;
   CustType: string;
   AssetPriceAmt: number;
-  DownPaymentAmt: number;
-  NtfAmt: number;
-  Tenor: number;
   InsAmt: number;
   FlatRatePrcnt: number;
   AppStep: string;

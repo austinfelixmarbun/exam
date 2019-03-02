@@ -36,6 +36,19 @@
                 </div>
               </div>
               <div class="form-group row">
+                <label class="col-md-3 label-control" for="MrGender">Gender: </label>
+                <div class="col-md-9">
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="Male" value="M" checked name="MrGender" [(ngModel)]="MrGender" class="custom-control-input">
+                    <label class="custom-control-label" for="Male">Male</label>
+                  </div>
+                  <div class="custom-control custom-radio display-inline-block">
+                    <input type="radio" id="Female" value="F" name="MrGender" [(ngModel)]="MrGender" class="custom-control-input">
+                    <label class="custom-control-label" for="Female">Female</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
                 <label class="col-md-3 label-control" for="KtpNo">KTP No: </label>
                 <div class="col-md-9">
                   <input type="text" id="KtpNo" class="form-control" name="IdNo" required [(ngModel)]="IdNo"
@@ -100,6 +113,20 @@
                 </div>
               </div>
               <div class="form-group row">
+                <label class="col-md-3 label-control" for="Product">Product: </label>
+                <div class="col-md-9">
+                  <select class="form-control" name="LobCode" #product [(ngModel)]="LobCode">
+                    <option value="NDFMCY">Refinancing Motorcycle</option>
+                    <option value="NDFCAR">Refinancing Car</option>
+                    <option value="DFCAR">Used Car</option>
+                    <option value="PBF">Property</option>
+                    <option value="HETO">Heavy Equipment</option>
+                    <option value="SYA">Syariah</option>
+                    <option value="EDU">Education</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
                 <label class="col-md-3 label-control" for="PhoneNo">Phone No: </label>
                 <div class="col-md-9">
                   <input type="text" pattern="^[0-9]+$" id="PhoneNo" class="form-control" name="Phn1" required
@@ -136,16 +163,13 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="Product">Product: </label>
+                <label class="col-md-3 label-control" for="MrMartialStat">Marital Status: </label>
                 <div class="col-md-9">
-                  <select class="form-control" name="LobCode" #product [(ngModel)]="LobCode">
-                    <option value="NDFMCY">Refinancing Motorcycle</option>
-                    <option value="NDFCAR">Refinancing Car</option>
-                    <option value="DFCAR">Used Car</option>
-                    <option value="PBF">Property</option>
-                    <option value="HETO">Heavy Equipment</option>
-                    <option value="SYA">Syariah</option>
-                    <option value="EDU">Education</option>
+                  <select class="form-control" name="MrMartialStat" #mrMartialStat [(ngModel)]="MrMartialStat">
+                    <option value="MAR">Menikah</option>
+                    <option value="SIN">Single</option>
+                    <option value="WID">Duda / janda</option>
+                    <option value="DIV">Widow</option>
                   </select>
                 </div>
               </div>
@@ -220,7 +244,7 @@
                 <div class="col-md-9">
                   <select class="form-control" name="Province" (change)="onChange($event.target.value)" #province
                     [(ngModel)]="Province" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && province.invalid }">
-                    <option *ngFor="let p of allProv?.data" value="{{p.id}}">{{p.description}}</option>
+                    <option *ngFor="let p of allProv?.Data" value="{{p.Id}}">{{p.Description}}</option>
                   </select>
                 </div>
               </div>
@@ -229,11 +253,45 @@
                 <div class="col-md-9">
                   <select class="form-control" name="City" #city [(ngModel)]="City"
                     [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && city.invalid }">
-                    <option *ngFor="let c of allCity?.data" value="{{c.id}}">{{c.description}}</option>
+                    <option *ngFor="let c of allCity?.Data" value="{{c.Id}}">{{c.Description}}</option>
                     <!-- <option ng-repeat="c in allCity" value=""></option> -->
                   </select>
                   <div *ngIf="ProspectReqForm.submitted && city.invalid" class="invalid-feedback">
                     <div *ngIf="city.errors.required">City is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Tenor">Tenor: </label>
+                <div class="col-md-9">
+                  <input type="text" pattern="^[0-9]+$" id="Tenor" class="form-control" name="Tenor" required
+                    [(ngModel)]="Tenor" #tenor="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && tenor.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && tenor.invalid" class="invalid-feedback">
+                    <div *ngIf="tenor.errors.required">Tenor is required</div>
+                    <div *ngIf="tenor.errors?.pattern">Number Only</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="DownPaymentAmt">DP Amount: </label>
+                <div class="col-md-9">
+                  <input type="number" id="DownPaymentAmt" class="form-control" name="DownPaymentAmt" required
+                    [(ngModel)]="DownPaymentAmt" #downPaymentAmt="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && downPaymentAmt.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && downPaymentAmt.invalid" class="invalid-feedback">
+                    <div *ngIf="downPaymentAmt.errors.required">DP Amount is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="NtfAmt">NTF Amount: </label>
+                <div class="col-md-9">
+                  <input type="number" id="NtfAmt" class="form-control" name="NtfAmt" required
+                    [(ngModel)]="NtfAmt" #ntfAmt="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && ntfAmt.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && ntfAmt.invalid" class="invalid-feedback">
+                    <div *ngIf="ntfAmt.errors.required">NTF Amount is required</div>
                   </div>
                 </div>
               </div>
@@ -273,30 +331,6 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="MblPhoneNo">Mobile Phone No: </label>
-                <div class="col-md-9">
-                  <input type="text" pattern="^[0-9]+$" id="MblPhoneNo" class="form-control" name="MobilePhnNo1"
-                    required [(ngModel)]="MblPhoneNo" #mblPhoneNo="ngModel"
-                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && mblPhoneNo.invalid }">
-                  <div *ngIf="ProspectReqForm.submitted && mblPhoneNo.invalid" class="invalid-feedback">
-                    <div *ngIf="mblPhoneNo.errors.required">Mobile Phone No is required</div>
-                    <div *ngIf="mblPhoneNo.errors?.pattern">Number Only</div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="EMail1">Email: </label>
-                <div class="col-md-9">
-                  <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="EMail1"
-                    class="form-control" name="EMail1" required [(ngModel)]="EMail1" #eMail1="ngModel"
-                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && eMail1.invalid }">
-                  <div *ngIf="ProspectReqForm.submitted && eMail1.invalid" class="invalid-feedback">
-                    <div *ngIf="eMail1.errors.required">Email is required</div>
-                    <div *ngIf="eMail1.errors?.pattern">Email Invalid</div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
                 <label class="col-md-3 label-control" for="Product">Product: </label>
                 <div class="col-md-9">
                   <select class="form-control" name="LobCode" #product [(ngModel)]="LobCode">
@@ -377,24 +411,36 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="Province">Province: </label>
+                <label class="col-md-3 label-control" for="Tenor">Tenor: </label>
                 <div class="col-md-9">
-                  <select class="form-control" name="Province" (change)="onChange($event.target.value)" #province
-                    [(ngModel)]="Province" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && province.invalid }">
-                    <option *ngFor="let p of allProv?.data" value="{{p.id}}">{{p.description}}</option>
-                  </select>
+                  <input type="text" pattern="^[0-9]+$" id="Tenor" class="form-control" name="Tenor" required
+                    [(ngModel)]="Tenor" #tenor="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && tenor.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && tenor.invalid" class="invalid-feedback">
+                    <div *ngIf="tenor.errors.required">Tenor is required</div>
+                    <div *ngIf="tenor.errors?.pattern">Number Only</div>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="City">City: </label>
+                <label class="col-md-3 label-control" for="DownPaymentAmt">DP Amount: </label>
                 <div class="col-md-9">
-                  <select class="form-control" name="City" #city [(ngModel)]="City"
-                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && city.invalid }">
-                    <option *ngFor="let c of allCity?.data" value="{{c.id}}">{{c.description}}</option>
-                    <!-- <option ng-repeat="c in allCity" value=""></option> -->
-                  </select>
-                  <div *ngIf="ProspectReqForm.submitted && city.invalid" class="invalid-feedback">
-                    <div *ngIf="city.errors.required">City is required</div>
+                  <input type="number" id="DownPaymentAmt" class="form-control" name="DownPaymentAmt" required
+                    [(ngModel)]="DownPaymentAmt" #downPaymentAmt="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && downPaymentAmt.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && downPaymentAmt.invalid" class="invalid-feedback">
+                    <div *ngIf="downPaymentAmt.errors.required">DP Amount is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="NtfAmt">NTF Amount: </label>
+                <div class="col-md-9">
+                  <input type="number" id="NtfAmt" class="form-control" name="NtfAmt" required
+                    [(ngModel)]="NtfAmt" #ntfAmt="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && ntfAmt.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && ntfAmt.invalid" class="invalid-feedback">
+                    <div *ngIf="ntfAmt.errors.required">NTF Amount is required</div>
                   </div>
                 </div>
               </div>

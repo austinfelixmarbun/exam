@@ -25,14 +25,14 @@ export const ROUTES: RouteInfo[] = [
             { path: '/employee', title: 'Employee  Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
     },
-    {
-        path: '', title: 'Leave Management', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-        submenu: [
-            { path: '/leaveManagament/request', title: 'Request', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-            { path: '/leaveManagament/verification', title: 'Verification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-            // { path: '/leaveManagament/inquiry', title: 'Inquiry', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
-        ]
-    },
+    // {
+    //     path: '', title: 'Leave Management', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    //     submenu: [
+    //         { path: '/leaveManagament/request', title: 'Request', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    //         { path: '/leaveManagament/verification', title: 'Verification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    //         { path: '/leaveManagament/inquiry', title: 'Inquiry', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+    //     ]
+    // },
     {
         path: '', title: 'Marketing', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [

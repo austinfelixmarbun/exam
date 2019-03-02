@@ -23,7 +23,7 @@ export class ProspectComponent implements OnInit {
   prospectModel = 'P';
   newProspectModel = 'P';
   birthDate: string;
-  Gender = 'M';
+  MrGender = 'M';
   CustModel = 'Professional';
   Income = 'Less than 5,000,000.00';
   resultData: any;
@@ -60,7 +60,13 @@ export class ProspectComponent implements OnInit {
   Province: any;
   myForm: NgForm;
   prosObj: ProspectObj;
-  IdExpiredDt: any;
+  LobCode = 'NDFMCY';
+  MrMartialStat = 'MAR';
+  Tenor: any;
+  DownPaymentAmt: any;
+  NtfAmt: any;
+  IdExpiredDt: any = '2100-01-01'
+
 
   constructor(private router: Router, private route: ActivatedRoute, private location: Location, private spinner: NgxSpinnerService, 
               private adInsService: AdInsServiceService, private httpClient:HttpClient,  private toastr: NGXToastrService) {
@@ -83,7 +89,7 @@ export class ProspectComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.adInsService.postData(this.provUrl, null).subscribe(
+    this.adInsService.postData('https://gw-dev.bfi.co.id/poclos/api/los/v1/get_provinsi', null).subscribe(
       (response) => {
         console.log("Success");
         this.allProv = response.data;
@@ -118,6 +124,10 @@ export class ProspectComponent implements OnInit {
           this.IdExpiredDt = formatDate(response['IdExpiredDt'], 'yyyy-MM-dd', 'en-US');
           this.EMail1 = response['EMail1']
           this.Npwp = response['Npwp']
+          this.LobCode = response['LobCode']
+          this.Tenor = response['Tenor']
+          this.DownPaymentAmt = response['DownPaymentAmt']
+          this.NtfAmt = response['NtfAmt']
         },
         (error) => {
           console.log("Error");
@@ -137,7 +147,7 @@ export class ProspectComponent implements OnInit {
     this.spinner.show();
     console.log(cityValue);
     var tes = {"id":cityValue};
-    this.httpClient.post(this.cityUrl,tes).subscribe(
+    this.adInsService.postData('https://gw-dev.bfi.co.id/poclos/api/los/v1/get_kota',tes).subscribe(
       (response) => {
         console.log("Success");
         this.allCity = response['data'];
@@ -175,9 +185,6 @@ export class ProspectComponent implements OnInit {
     this.prosObj.RefOfficeId = 9;
     this.prosObj.CustType = this.prospectModel;
     this.prosObj.AssetPriceAmt = 0;
-    this.prosObj.DownPaymentAmt = 0;
-    this.prosObj.NtfAmt = 0;
-    this.prosObj.Tenor = 0;
     this.prosObj.InsAmt = 0;
     this.prosObj.FlatRatePrcnt = 0;
     this.prosObj.AppStep = 'NEW';
@@ -192,13 +199,14 @@ export class ProspectComponent implements OnInit {
     this.prosObj.LeadStat = 'NEW';
     this.prosObj.ProspectNo = this.prospectNo;
     this.prosObj.MrIdType = 'KTP';
-    this.prosObj.MrGender = 'F';
     this.prosObj.PhnArea1 = '021';
     this.prosObj.PhnArea2 = '021';
     this.prosObj.FaxArea = '082';
     this.prosObj.Fax = '888';
     this.prosObj.Phn2 = '0821981298';
 
+    console.log(JSON.stringify(this.prosObj))
+    console.log(this.prosObj);
     this.httpClient.post(this.submitProsUrl, this.prosObj).subscribe(
       (response) => {
         console.log("Success");
