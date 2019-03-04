@@ -9,4 +9,6 @@ export class LeaveManagementObj {
   reason: string;
   verifBy: string;
   taskId: number;
+  workingDateTime: string;
+  userName: string;
 }

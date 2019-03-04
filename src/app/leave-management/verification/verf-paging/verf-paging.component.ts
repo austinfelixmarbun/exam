@@ -33,7 +33,7 @@ export class VerfPagingComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrlGateway = 'http://172.19.11.114:8280/POC_TEST/v1/LeaveManagement/GetLeaveMngmtPagingReq';
+    this.apiUrlGateway = 'https://172.19.11.114:8243/POC_TEST2/v1/LeaveManagement/GetLeaveMngmtPagingReq';
     this.apiUrl = 'http://R2AppServer/POC/LeaveManagement/GetLeaveMngmtPagingReq';
     console.log('ip:', this.apiUrl);
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
@@ -46,7 +46,7 @@ export class VerfPagingComponent implements OnInit {
   search() {
     this.spinner.show();
     console.log('api',this.apiUrl);
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
+    this.searchComponent.search(this.apiUrlGateway, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
           console.log("Success");
