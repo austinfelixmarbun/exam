@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-prospect',
@@ -58,6 +59,7 @@ export class ProspectComponent implements OnInit {
   MotherMaidenName: any;
   EMail1: any;
   Province: any;
+  City: any;
   myForm: NgForm;
   prosObj: ProspectObj;
   LobCode = 'NDFMCY';
@@ -128,6 +130,13 @@ export class ProspectComponent implements OnInit {
           this.Tenor = response['Tenor']
           this.DownPaymentAmt = response['DownPaymentAmt']
           this.NtfAmt = response['NtfAmt']
+          this.MrMartialStat = response['MrMartialStat']
+          this.MrGender = response['MrGender']
+          this.Province = response['Province']
+          if (this.Province != null) {
+            this.onChange(this.Province);
+            this.City = response['City']
+          }
         },
         (error) => {
           console.log("Error");
@@ -135,7 +144,6 @@ export class ProspectComponent implements OnInit {
         }
       );
     }
-    console.log(this.Province)
     this.spinner.hide();
   }
 
@@ -147,7 +155,14 @@ export class ProspectComponent implements OnInit {
     this.spinner.show();
     console.log(cityValue);
     var tes = {"id":cityValue};
-    this.adInsService.postData('https://gw-dev.bfi.co.id/poclos/api/los/v1/get_kota',tes).subscribe(
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'apikey': 'f7nzqhHWi9R5Gr62U99YNfN8VA27tYnH',
+        'rejectUnauthorized': 'false'
+      })
+    };
+    this.httpClient.post('https://gw-dev.bfi.co.id/poclos/api/los/v1/get_kota', tes, httpOptions).subscribe(
       (response) => {
         console.log("Success");
         this.allCity = response['data'];
@@ -212,10 +227,14 @@ export class ProspectComponent implements OnInit {
         console.log("Success");
         console.log(response);
         this.newProspectNo = response;
-        this.toastr.successMessage(this.newProspectNo);
         this.spinner.hide();
-        this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
-          this.router.navigate(["prospect"]));
+        if (this.newProspectNo != '') {
+          this.toastr.successMessage(this.newProspectNo);
+          this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
+            this.router.navigate(["prospect"]));
+        }else {
+          this.toastr.typeError();
+        }
       },
       (error) => {
         console.log("Error");

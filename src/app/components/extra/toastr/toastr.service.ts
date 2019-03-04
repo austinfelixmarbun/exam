@@ -23,7 +23,7 @@ export class NGXToastrService {
 
     // Success Type
     typeError() {
-        this.toastr.error('I do not think that word means what you think it means.', 'Inconceivable!');
+        this.toastr.error('there is an internal error', 'Failed!');
     }
 
     // Custom Type

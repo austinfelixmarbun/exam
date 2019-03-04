@@ -81,6 +81,7 @@ export class AdInsServiceService {
     console.log(url);
     console.log(JSON.stringify(httpRequest));
     console.log(httpOptions);
+    console.log(requestObj);
     return this.httpClient.post(url, httpRequest, httpOptions);
   }
 
