@@ -166,6 +166,7 @@ export class ProspectComponent implements OnInit {
       (response) => {
         console.log("Success");
         this.allCity = response['data'];
+        this.City = response['data']['Data'][0]['Description'];
         console.log(response);
         console.log(this.allCity);
         this.spinner.hide();
@@ -219,6 +220,7 @@ export class ProspectComponent implements OnInit {
     this.prosObj.FaxArea = '082';
     this.prosObj.Fax = '888';
     this.prosObj.Phn2 = '0821981298';
+    this.prosObj.City = this.City;
 
     console.log(JSON.stringify(this.prosObj))
     console.log(this.prosObj);
