@@ -24,6 +24,7 @@ export class OrganizationComponent implements OnInit {
   totalData: any;
   pageSize: any;
   apiUrl: any;
+  show: any;
 
   foundationUrl: string = environment.foundationUrl;
 
@@ -38,7 +39,7 @@ export class OrganizationComponent implements OnInit {
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrgPaging;
-    console.log('ip:', this.apiUrl);
+    this.show = AdInsConstant.showData.split(',');
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
@@ -92,5 +93,8 @@ export class OrganizationComponent implements OnInit {
       }
     );
   }
-
+  changeShowData(value: any) {
+    this.pageSize = +value;
+    if (this.resultData !== null && this.resultData !== '' && this.resultData !== undefined) { this.search(); }
+  }
 }
