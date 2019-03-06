@@ -8,6 +8,8 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-employee',
@@ -25,15 +27,28 @@ export class EmployeeComponent implements OnInit {
   totalData : any;
   pageSize: any;
   apiUrl: any;
+  exportData: any;
 
   foundationUrl: string = environment.foundationUrl;
   constructor(private http: Http, private spinner: NgxSpinnerService, private service: NGXToastrService, 
-    private adInsService: AdInsServiceService, private excelService: ExcelService) { }
+    private adInsService: AdInsServiceService, private excelService: ExcelService, private https: HttpClient ) { }
+
+    initiateForm() {
+      this.getJSON(this.urlJson).subscribe(data => {
+        console.log(data);
+        this.exportData = data.exportExcel;
+    });
+  }
+
+  public getJSON(url: string): Observable<any> {
+    return this.https.get(url);
+  }
 
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize= 25;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListEmployee;
+    this.initiateForm()
   }
 
   search() {
