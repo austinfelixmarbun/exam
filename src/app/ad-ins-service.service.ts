@@ -65,8 +65,13 @@ export class AdInsServiceService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'apikey': 'f7nzqhHWi9R5Gr62U99YNfN8VA27tYnH',
-        'rejectUnauthorized': 'false'
+        'Accept': 'application/json',
+        'Authentication': 'my-authentication',
+        'Authorization': 'Bearer dbbbf15f-2360-3a32-b6e9-2373d8b5556b',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'Content-Type,Accept,Authorization'
       })
     };
     let headers = new HttpHeaders({
