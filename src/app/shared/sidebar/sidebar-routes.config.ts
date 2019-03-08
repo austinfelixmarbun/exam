@@ -14,6 +14,12 @@ export const ROUTES: RouteInfo[] = [
         ]
     },
     {
+        path: '', title: 'Customer', icon: 'ft-user-plus', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+        submenu: [
+            { path: '/customer', title: 'Customer Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+        ]
+    },
+    {
         path: '', title: 'Office', icon: 'ft-airplay', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
             { path: '/office', title: 'Office  Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

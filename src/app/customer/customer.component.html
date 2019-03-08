@@ -1,0 +1,77 @@
+<div class="col-sm-12">
+  <h1 class="text-uppercase">CUSTOMER REQUEST - {{type}}</h1>
+</div>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" name="CustomerReqForm" #CustomerReqForm="ngForm" novalidate
+          (ngSubmit)="CustomerReqForm.form.valid && SavePros(CustomerReqForm)">
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-user"></i> Customer Info </h4>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="CustName">Type: </label>
+              <div class="col-md-9">
+                <div class="custom-control custom-radio display-inline-block">
+                  <input type="radio"  id="Personal" value="P" checked name="CustType" [(ngModel)]="CustType" class="custom-control-input">
+                  <label class="custom-control-label" for="Personal">Personal</label>
+                </div>
+                <div class="custom-control custom-radio display-inline-block">
+                  <input type="radio"  id="Company" value="C" name="CustType" [(ngModel)]="CustType" class="custom-control-input">
+                  <label class="custom-control-label" for="Company">Company</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="CustName">Customer Name: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="CustName" required [(ngModel)]="CustName"
+                  #custName="ngModel" [ngClass]="{ 'is-invalid': CustomerReqForm.submitted && custName.invalid }">
+                <div *ngIf="CustomerReqForm.submitted && custName.invalid" class="invalid-feedback">
+                  <div *ngIf="custName.errors.required">Customer Name is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="Npwp">NPWP : </label>
+              <div class="col-md-9">
+                <input type="text" id="Npwp" class="form-control" name="Npwp" required [(ngModel)]="Npwp"
+                  #npwp="ngModel" [ngClass]="{ 'is-invalid': CustomerReqForm.submitted && npwp.invalid }">
+                <div *ngIf="CustomerReqForm.submitted && npwp.invalid" class="invalid-feedback">
+                  <div *ngIf="npwp.errors.required">NPWP No is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="KtpNo">KTP No: </label>
+              <div class="col-md-9">
+                <input type="text" id="KtpNo" class="form-control" name="IdNo" required [(ngModel)]="IdNo"
+                  #ktpNo="ngModel" [ngClass]="{ 'is-invalid': CustomerReqForm.submitted && ktpNo.invalid }">
+                <div *ngIf="CustomerReqForm.submitted && ktpNo.invalid" class="invalid-feedback">
+                  <div *ngIf="ktpNo.errors.required">KTP No is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="MrCustRating">Customer Rating: </label>
+              <div class="col-md-9">
+                <select class="form-control" name="MrCustRating" #mrCustRating [(ngModel)]="MrCustRating">
+                  <option value="INDETERMINED">Indetermined</option>
+                  <option value="GOLD">Gold</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+              <i class="ft-x"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

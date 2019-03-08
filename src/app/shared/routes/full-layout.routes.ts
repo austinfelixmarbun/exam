@@ -106,5 +106,9 @@ export const Full_ROUTES: Routes = [
   {
     path : 'LOS',
     loadChildren: './los/los.module#LosModule'
-  }
+  },
+  {
+    path: 'customer',
+    loadChildren: './customer/customer.module#CustomerModule'
+  },
 ];

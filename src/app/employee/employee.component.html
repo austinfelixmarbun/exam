@@ -2,6 +2,9 @@
 <div class="col-md-12">
     <form>
         <div class="form-actions right">
+            <button *ngIf="exportData" type="button" (click)="exportAsXLSX()" class="btn btn-raised btn-success mr-1">
+                <i class="fa fa-plus-circle"></i> Export Excel
+            </button>
             <button type="button" class="btn btn-raised btn-warning mr-1">
                 <i class="ft-x"></i> Cancel
             </button>
@@ -41,11 +44,6 @@
 </table>
 Current Page : {{pageNow}} <br>
 Total Data : {{totalData}}
-<div *ngIf="exportData">
-    <button type="button" (click)="exportAsXLSX()" class="btn btn-raised btn-success" style="position: absolute; right: 30px; bottom: 0; cursor: pointer;">
-        <i class="fa fa-plus-circle"></i> Export Excel
-    </button>
-</div>
 <div class="d-flex justify-content-center">
     <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData" [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true"
         [boundaryLinks]="true"></ngb-pagination>

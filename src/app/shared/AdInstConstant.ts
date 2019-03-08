@@ -17,6 +17,7 @@ export class AdInsConstant{
     public static GetCityByProvince = "/los/v1/get_kota";
     public static getProspectByProspectNo = "/api/MobileProspectTask/GetProspectByProspectNo";
     public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
+    public static addCustPersonal = "";
 
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
