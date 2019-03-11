@@ -91,10 +91,10 @@ export class ProspectComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.adInsService.postData('https://gw-dev.bfi.co.id/poclos/api/los/v1/get_provinsi', null).subscribe(
+    this.httpClient.post('https://gw-dev.bfi.co.id/poclos/api/los/v1/get_provinsi', null).subscribe(
       (response) => {
         console.log("Success");
-        this.allProv = response.data;
+        this.allProv = response['data'];
         console.log(this.allProv);
       },
       (error) => {
