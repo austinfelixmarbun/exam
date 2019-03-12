@@ -240,6 +240,28 @@
                 </div>
               </div>
               <div class="form-group row">
+                <label class="col-md-3 label-control" for="Province">Province: </label>
+                <div class="col-md-9">
+                  <select class="form-control" id="Province" name="Province" (change)="onChange($event.target.value)" #province="ngModel"
+                    [(ngModel)]="Province" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && province.invalid }">
+                    <option *ngFor="let p of allProv?.Data" value="{{p.Id}}">{{p.Description}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="City">City: </label>
+                <div class="col-md-9">
+                  <select class="form-control" id="City" name="City" #city="ngModel" [(ngModel)]="City"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && city.invalid }">
+                    <option *ngFor="let c of allCity?.Data" value="{{c.Description}}">{{c.Description}}</option>
+                    <!-- <option ng-repeat="c in allCity" value=""></option> -->
+                  </select>
+                  <div *ngIf="ProspectReqForm.submitted && city.invalid" class="invalid-feedback">
+                    <div *ngIf="city.errors.required">City is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
                 <label class="col-md-3 label-control" for="Tenor">Tenor: </label>
                 <div class="col-md-9">
                   <input type="text" pattern="^[0-9]+$" id="Tenor" class="form-control" name="Tenor" required

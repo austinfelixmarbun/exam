@@ -52,7 +52,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   search() {
-    this.spinner.show();
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
@@ -60,12 +59,10 @@ export class EmployeeComponent implements OnInit {
           this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
           console.log(response);
-          this.spinner.hide();
         },
         (error) => {
           console.log("Error");
           console.log(error);
-          this.spinner.hide();
         }
       );
   }
