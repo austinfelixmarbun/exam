@@ -35,21 +35,15 @@ export class CustomerComponent implements OnInit {
   }
 
   SavePros(custReqFoem: NgForm) {
-    this.spinner.show();
     this.custObj = new CustPersonalObj();
     this.custObj = custReqFoem.value;
     this.custObj.token = 'asdasd';
-    var myObj = {
-      RequestObject:this.custObj
-    }
 
-    console.log(JSON.stringify(myObj))
-    this.httpClient.post('http://R3App-Server/BFI_API/POCHit/AddCust', myObj).subscribe(
+    this.httpClient.post('http://R3App-Server/BFI_API/POCHit/AddCust', this.custObj).subscribe(
       (response) => {
         console.log("Success");
         console.log(response);
         this.newCustPersonalNo = response;
-        this.spinner.hide();
         if (this.newCustPersonalNo != '') {
           this.toastr.successMessage(this.newCustPersonalNo);
           this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
@@ -61,7 +55,6 @@ export class CustomerComponent implements OnInit {
       (error) => {
         console.log("Error");
         console.log(error);
-        this.spinner.hide();
       }
     );
   }

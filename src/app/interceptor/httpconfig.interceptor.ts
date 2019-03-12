@@ -21,6 +21,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
     constructor(public errorDialogService: ErrorDialogService,private spinner: NgxSpinnerService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        // if (request.body == null || request.body.isLoading == null || request.body.isLoading == true) {
+        //     this.spinner.show();
+        // }
         this.spinner.show();
         this.count++;
         // const token: string = localStorage.getItem('token');
@@ -40,12 +43,21 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
         }
 
+        var myObj = {
+            UserName: currentUserContext.UserName,
+            Role: currentUserContext.Role,
+            Office: currentUserContext.Office,
+            SendDateTime: currentUserContext.BusinessDate,
+            RequestObject: request.body
+          }
+        console.log(JSON.stringify(myObj))
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
         request = request.clone({ headers: request.headers.set('Authentication', 'my-authentication') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Origin', '*') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Credentials', 'true') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Methods', 'POST') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
+        request = request.clone({body: myObj});
         console.log(request)
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
