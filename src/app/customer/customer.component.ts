@@ -24,6 +24,7 @@ export class CustomerComponent implements OnInit {
   custObj: CustPersonalObj;
   submitProsUrl: any;
   localHostUrl: string = environment.localHostUrl;
+  requestObject: any;
 
   constructor(private router: Router, private spinner: NgxSpinnerService, private httpClient: HttpClient, private toastr: NGXToastrService) { 
     this.submitProsUrl = this.localHostUrl + AdInsConstant.addCustPersonal;
@@ -37,10 +38,13 @@ export class CustomerComponent implements OnInit {
     this.spinner.show();
     this.custObj = new CustPersonalObj();
     this.custObj = custReqFoem.value;
+    this.custObj.token = 'asdasd';
+    var myObj = {
+      RequestObject:this.custObj
+    }
 
-    console.log(JSON.stringify(this.custObj))
-    console.log(this.custObj);
-    this.httpClient.post(this.submitProsUrl, this.custObj).subscribe(
+    console.log(JSON.stringify(myObj))
+    this.httpClient.post('http://R3App-Server/BFI_API/POCHit/AddCust', myObj).subscribe(
       (response) => {
         console.log("Success");
         console.log(response);
@@ -49,7 +53,7 @@ export class CustomerComponent implements OnInit {
         if (this.newCustPersonalNo != '') {
           this.toastr.successMessage(this.newCustPersonalNo);
           this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
-            this.router.navigate(["prospect"]));
+            this.router.navigate(["customer"]));
         }else {
           this.toastr.typeError();
         }
