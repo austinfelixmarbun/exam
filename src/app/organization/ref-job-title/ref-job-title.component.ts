@@ -53,7 +53,7 @@ export class RefJobTitleComponent implements OnInit {
         (response) => {
           console.log("Success");
           this.resultData = response.returnObject;
-          this.totalData = response.count;
+          this.totalData = response.returnObject.count;
           console.log(this.resultData);
           this.spinner.hide();
         },

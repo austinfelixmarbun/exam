@@ -84,25 +84,25 @@ export class LoginPageComponent implements OnInit{
             bussinessDt: ''
         };
 
-        this.adInsService.getData(AdInsConstant.Login).subscribe(data=>{
-            console.log(data);
+        // this.adInsService.getData(AdInsConstant.Login).subscribe(data=>{
+            // console.log(data);
             var currentUserContext = new CurrentUserContext;
             let today = new Date();
             var businessDt=formatDate(today, 'yyyy-MM-dd', 'en-US')
-            if(data.UserName==username && data.Password==password)
+            if("Admin"==username && "Admin"==password)
             {
                 currentUserContext.UserName=username;
                 currentUserContext.Office="HO";
                 currentUserContext.Role="SUPUSR";
                 currentUserContext.BusinessDate=businessDt;
                 this.currentUserContextService.addCurrentUserContext(currentUserContext);
-                this.router.navigate(['dashboard/dashboard1']);
+                this.router.navigate(['dashboard/dash-board']);
             }
             else{
                 window.alert('Login Failed');
             }
             //this.router.navigate(['dashboard/dashboard1']);
-        })
+        // })
         // console.log(username, password);
 
         // this.Auth.getuserDetails(username, password).subscribe(data =>{

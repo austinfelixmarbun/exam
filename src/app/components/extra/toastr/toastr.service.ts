@@ -23,7 +23,7 @@ export class NGXToastrService {
 
     // Success Type
     typeError() {
-        this.toastr.error('I do not think that word means what you think it means.', 'Inconceivable!');
+        this.toastr.error('there is an internal error', 'Failed!');
     }
 
     // Custom Type
@@ -41,7 +41,7 @@ export class NGXToastrService {
         this.toastr.error('I do not think that word means what you think it means.', 'Timeout!', { "timeOut": 5000 });
     }
 
-   
+
     //Dismiss toastr on Click
     dismissToastOnClick() {
         this.toastr.info('We do have the Kapua suite available.', 'Turtle Bay Resort', { "tapToDismiss": true });
@@ -68,8 +68,19 @@ export class NGXToastrService {
         this.toastr.info('Have fun storming the castle!', 'Miracle Max Says', { messageClass: 'text-uppercase' });
     }
 
-    errorMessage(msg){
+    errorMessage(msg) {
         this.toastr.info(msg);
     }
 
+    typeSave(msg) {
+      this.toastr.success(msg);
+    }
+
+    typeErrorCustom(msg) {
+      this.toastr.error(msg);
+    }
+
+    successMessage(msg) {
+        this.toastr.success(msg, 'Success!');
+    }
 }

@@ -1,0 +1,48 @@
+<h4 class="form-section">Leave Management Inquiry</h4>
+<br/>
+<app-search id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
+<div class="col-md-12">
+  <form>
+
+    <div class="form-actions right">
+      <button type="button" class="btn btn-raised btn-warning mr-1">
+        <i class="ft-x"></i> Cancel
+      </button>
+      <button type="button" (click)="search()" class="btn btn-raised btn-primary">
+        <i class="fa fa-search"></i> Search
+      </button>
+    </div>
+  </form>
+</div>
+
+<table class="table table-responsive-md text-center table-hover">
+  <thead>
+    <tr class="table-header">
+      <th>Transaction No</th>
+      <th>Employee Name</th>
+      <th>Job Position</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Reason</th>
+      <th>Verif By</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of resultData?.returnObject.data">
+      <td>{{item.transactionNo}}</td>
+      <td>{{item.empName}}</td>
+      <td>{{item.jobPosition}}</td>
+      <td>{{item.startDt}}</td>
+      <td>{{item.endDt}}</td>
+      <td>{{item.reason}}</td>
+      <td>{{item.verifBy}}</td>
+      <td>{{item.status}}</td>
+    </tr>
+  </tbody>
+</table>
+Current Page : {{pageNow}}
+<div class="d-flex justify-content-center">
+  <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData"
+    [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
+</div>

@@ -102,5 +102,17 @@ export const Full_ROUTES: Routes = [
   {
     path : 'bank',
     loadChildren: './bank/bank.module#BankModule'
-  }
+  },
+  {
+    path : 'leaveManagament',
+    loadChildren: './leave-management/leave-management.module#LeaveManagementModule'
+  },
+  {
+    path : 'LOS',
+    loadChildren: './los/los.module#LosModule'
+  },
+  {
+    path: 'customer',
+    loadChildren: './customer/customer.module#CustomerModule'
+  },
 ];

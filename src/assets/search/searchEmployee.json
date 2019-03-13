@@ -1,9 +1,10 @@
 {
     "url": "http://getEmployee",
+    "exportExcel": true, 
     "component": [
         {
             "type": "textbox",
-            "name": "employeeNo",
+            "name": "empNo",
             "id": "employeeNoId",
             "value": "John",
             "label": "employee No",
@@ -11,7 +12,7 @@
         },
         {
             "type": "textbox",
-            "name": "employeeName",
+            "name": "empName",
             "id": "employeeNameId",
             "value": "%",
             "label": "employee Name",

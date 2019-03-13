@@ -15,12 +15,12 @@
 <table class="table table-responsive-md text-center table-hover">
     <thead>
         <tr class="table-header">
-            <th>Office Name</th>
+            <th class="text-left">Office Name</th>
             <th>Office Code</th>
-            <th>Contact Person</th>
-            <th>Address</th>
-            <th>City</th>
-            <th>Model Name</th>
+            <th class="text-left">Contact Person</th>
+            <th class="text-left">Address</th>
+            <th class="text-left">City</th>
+            <th class="text-left">Model Name</th>
             <th>Active Status</th>
             <th>Virtual Office</th>
             <th>Employee List</th>
@@ -28,13 +28,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of resultData?.returnObject">
-            <td>{{item.officeName}}</td>
+        <tr *ngFor="let item of resultData?.data">
+            <td class="text-left">{{item.officeName}}</td>
             <td>{{item.officeCode}}</td>
-            <td>{{item.cntctPersonName}}</td>
-            <td>{{item.officeAddr}}</td>
-            <td>{{item.city}}</td>
-            <td>{{item.orgMdlId}}</td>
+            <td class="text-left">{{item.cntctPersonName}}</td>
+            <td class="text-left">{{item.officeAddr}}</td>
+            <td class="text-left">{{item.city}}</td>
+            <td class="text-left">{{item.orgMdlId}}</td>
             <td>{{item.isActive}}</td>
             <td>{{item.isVirtualOffice}}</td>
             <td>
@@ -43,7 +43,7 @@
                 </a>
             </td>
             <td>
-                <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/add']">
+                <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/add']" [queryParams]="{param:'edit',refOfficeId:item.refOfficeId}">
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>
                 </a>
                 <a class="danger p-0" data-original-title="" title="">

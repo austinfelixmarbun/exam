@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from "./shared/shared.module";
 import { ToastrModule } from 'ngx-toastr';
 import { AgmCoreModule } from '@agm/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StoreModule } from '@ngrx/store';
@@ -21,10 +21,14 @@ import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
 import { StorageServiceModule } from 'angular-webstorage-service';
 import { NgxSpinnerModule} from 'ngx-spinner';
+import { MatDialogModule } from '@angular/material';
 
 import * as $ from 'jquery';
 import { UserMaintenanceComponent } from './user/user-maintenance/user-maintenance.component';
 import { HttpModule } from '@angular/http';
+import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
+import { ErrorDialogService } from './error-dialog/error-dialog.service';
+
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -58,11 +62,15 @@ export function createTranslateLoader(http: HttpClient) {
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBr5_picK8YJK7fFR2CPzTVMj6GG1TtRGo'
         }),
-        StorageServiceModule
+        StorageServiceModule,
+        MatDialogModule,
+        BrowserAnimationsModule
     ],
     providers: [
         AuthService,
-        AuthGuard
+        AuthGuard,
+        ErrorDialogService,
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
 })

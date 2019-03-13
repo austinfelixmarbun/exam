@@ -45,8 +45,8 @@ export class OfficeComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log("Success");
-          this.resultData = response;
-          this.totalData = response.count;
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
           console.log(response);
           this.spinner.hide();
         },

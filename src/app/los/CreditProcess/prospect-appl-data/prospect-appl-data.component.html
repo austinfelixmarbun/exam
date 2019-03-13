@@ -1,0 +1,145 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <h2>APPLICATION DATA</h2>
+        <form class="form form-horizontal" name="ProspectReqForm" #ProspectReqForm="ngForm" novalidate
+          (ngSubmit)="ProspectReqForm.form.valid && SavePros(ProspectReqForm)">
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-user"></i> Application Data <div id="flip1" class="btn float-right"
+                (click)="isHidden1 = !isHidden1">
+                <i class="fa" [ngClass]="isHidden1 ? 'fa-chevron-down' : 'fa-chevron-up'"></i></div>
+            </h4>
+            <div id="panel1">
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Product">Product: </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="Product" [(ngModel)]="Product" required
+                    #product="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && product.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && product.invalid" class="invalid-feedback">
+                    <div *ngIf="product.errors.required">Product Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="AssetName">Asset Name: </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="AssetName" [(ngModel)]="AssetName" required
+                    #assetName="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && assetName.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && assetName.invalid" class="invalid-feedback">
+                    <div *ngIf="assetName.errors.required">Asset Name Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="TotalAsset">Num Of Asset: </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="TotalAsset" [(ngModel)]="TotalAsset" required
+                    #totalAsset="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && totalAsset.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && totalAsset.invalid" class="invalid-feedback">
+                    <div *ngIf="totalAsset.errors.required">Num of Asset is required</div>
+                  </div>
+                </div>
+              </div>
+              <table class="table table-responsive-md text-center table-hover">
+                <thead>
+                  <tr class="table-header">
+                    <th>No</th>
+                    <th>Asset Category Name</th>
+                    <th>Asset Price</th>
+                    <th>DP Amount</th>
+                    <th>Notes</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>
+                      <input type="text" class="form-control" name="AssetCat" [(ngModel)]="AssetCat" required
+                        #assetCat="ngModel" [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && assetCat.invalid }">
+                      <div *ngIf="ProspectReqForm.submitted && assetCat.invalid" class="invalid-feedback">
+                        <div *ngIf="assetCat.errors.required">Asset Category Name is required</div>
+                      </div>
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" name="AssetPrice" [(ngModel)]="AssetPrice" required
+                        #assetPrice="ngModel"
+                        [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && assetPrice.invalid }">
+                      <div *ngIf="ProspectReqForm.submitted && assetPrice.invalid" class="invalid-feedback">
+                        <div *ngIf="assetPrice.errors.required">Asset Price is required</div>
+                      </div>
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" name="DPAmount" [(ngModel)]="DPAmount" required
+                        #dpAmount="ngModel"
+                        [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && dpAmount.invalid }">
+                      <div *ngIf="ProspectReqForm.submitted && dpAmount.invalid" class="invalid-feedback">
+                        <div *ngIf="dpAmount.errors.required">DP AMount is required</div>
+                      </div>
+                    </td>
+                    <td>
+                      <input type="text" id="notes" class="form-control" name="notes" [(ngModel)]="notes"></td>
+                    <td>
+                      <a class="danger p-0" data-original-title="" title="">
+                        <i class="ft-x font-medium-3 mr-2"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="TotalAsset">Num Of Asset: </label>
+                <div class="col-md-9">
+                  <input type="number" class="form-control" name="TotalAssetPrice" [(ngModel)]="TotalAssetPrice" required
+                    #totalAssetPrice="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && totalAssetPrice.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && totalAssetPrice.invalid" class="invalid-feedback">
+                    <div *ngIf="totalAssetPrice.errors.required">Total Asset Price is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="DownPayment">Down Payment: </label>
+                <div class="col-md-9">
+                  <input type="number" class="form-control" name="TotalAssetPrice" [(ngModel)]="DownPayment" required
+                    #downPayment="ngModel"
+                    [ngClass]="{ 'is-invalid': ProspectReqForm.submitted && downPayment.invalid }">
+                  <div *ngIf="ProspectReqForm.submitted && downPayment.invalid" class="invalid-feedback">
+                    <div *ngIf="downPayment.errors.required">Down Payment is required</div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <h4 class="form-section"><i class="ft-user"></i> Financial Data <div id="flip2" class="btn float-right"
+                  (click)="isHidden2 = !isHidden2">
+                  <i class="fa" [ngClass]="isHidden2 ? 'fa-chevron-down' : 'fa-chevron-up'"></i></div>
+              </h4>
+              <div id="panel2">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="Profession">Profession: </label>
+                  <div class="col-md-9">
+                    <input type="text" id="Profession" class="form-control" name="Profession" [(ngModel)]="Profession">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="EmpSince">Employment Since: </label>
+                  <div class="col-md-9">
+                    <input type="text" id="EmpSince" class="form-control" name="EmpSince" [(ngModel)]="EmpSince">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                <i class="ft-x"></i> Cancel
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="fa fa-check-square-o" [routerLink]="['/LOS/CreditProcess/CustomerData']"></i> Save
+              </button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

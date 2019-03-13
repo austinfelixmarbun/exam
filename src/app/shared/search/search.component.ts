@@ -236,7 +236,14 @@ export class SearchComponent implements OnInit {
     }
 
     request.criteria = arrCrit;
-    return this.adInsService.postData(apiUrl, request);
+    var httpRequest = new HttpRequestObj();
+    //var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+    // httpRequest.UserName = currentUserContext.UserName;
+    // httpRequest.Role = currentUserContext.Role;
+    // httpRequest.Office = currentUserContext.Office;
+    // httpRequest.SendDateTime = currentUserContext.BusinessDate;
+    // httpRequest.RequestObject = request;
+    return this.http.post(apiUrl, request);
   }
 
   lessThanFour(): boolean {
