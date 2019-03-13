@@ -95,6 +95,7 @@ export class LoginPageComponent implements OnInit{
                 currentUserContext.Office="HO";
                 currentUserContext.Role="SUPUSR";
                 currentUserContext.BusinessDate=businessDt;
+                currentUserContext.TokenId="dbbbf15f-2360-3a32-b6e9-2373d8b5556b";
                 this.currentUserContextService.addCurrentUserContext(currentUserContext);
                 this.router.navigate(['dashboard/dash-board']);
             }
