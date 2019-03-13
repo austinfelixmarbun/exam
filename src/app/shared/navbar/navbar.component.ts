@@ -15,7 +15,7 @@ export class NavbarComponent implements AfterViewChecked {
 
     constructor(public translate: TranslateService) {
         const browserLang: string = translate.getBrowserLang();
-        translate.use(browserLang.match(/en|es|pt|de/) ? browserLang : 'en');       
+        translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');       
     }
 
     ngAfterViewChecked() {
