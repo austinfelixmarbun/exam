@@ -149,7 +149,7 @@ export class SearchComponent implements OnInit {
           critObj.propName = component.name;
           if (component.attributes['data-inputId'] != null) {
             critObj.value = component.attributes['data-inputId'].value;
-          }else{
+          } else {
             critObj.value = component.value;
           }
           console.log(component.type);
@@ -193,40 +193,40 @@ export class SearchComponent implements OnInit {
       console.log(component.value);
       //Ini khusus kalau dari Drop Down
       if (component.value != "") {
-      if (component.nodeName === 'SELECT') {
-        var ddl = component.options;
-        var text = ddl[ddl.selectedIndex].value;
-        if (text !== "All") {
-          //Kalau Dari Dropdown udah pasti pake Eq
-          critObj.restriction = AdInsConstant.RestrictionEq;
-          critObj.propName = component.name;
-          critObj.value = text;
+        if (component.nodeName === 'SELECT') {
+          var ddl = component.options;
+          var text = ddl[ddl.selectedIndex].value;
+          if (text !== "All") {
+            //Kalau Dari Dropdown udah pasti pake Eq
+            critObj.restriction = AdInsConstant.RestrictionEq;
+            critObj.propName = component.name;
+            critObj.value = text;
 
+            arrCrit.push(critObj);
+          }
+        }
+
+        else {
+          //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
+          critObj.propName = component.name;
+          critObj.value = component.value;
+          console.log(component.type);
+          console.log(component.restriction);
+          if (component.value.includes("%")) {
+            critObj.restriction = AdInsConstant.RestrictionLike;
+
+          }
+          //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
+
+          else if (component.getAttribute('data-restriction') != "" && component.getAttribute('data-restriction') != null) {
+            critObj.restriction = component.getAttribute('data-restriction');
+          }
+          else {
+            critObj.restriction = AdInsConstant.RestrictionEq
+          }
           arrCrit.push(critObj);
         }
       }
-
-      else {
-        //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
-        critObj.propName = component.name;
-        critObj.value = component.value;
-        console.log(component.type);
-        console.log(component.restriction);
-        if (component.value.includes("%")) {
-          critObj.restriction = AdInsConstant.RestrictionLike;
-
-        }
-        //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
-
-        else if ( component.getAttribute('data-restriction') != "") {
-          critObj.restriction = component.getAttribute('data-restriction');
-        }
-        else {
-          critObj.restriction = AdInsConstant.RestrictionEq
-        }
-        arrCrit.push(critObj);
-      }
-    }
 
     }
     if (addCrit !== null) {

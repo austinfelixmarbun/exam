@@ -98,5 +98,9 @@ export const Full_ROUTES: Routes = [
   {
     path : 'organization',
     loadChildren: './organization/organization.module#OrganizationModule'
+  },
+  {
+    path : 'bank',
+    loadChildren: './bank/bank.module#BankModule'
   }
 ];

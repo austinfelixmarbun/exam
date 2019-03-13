@@ -1,0 +1,50 @@
+{
+    "url": "http://getBank",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "bankCode",
+            "id": "bankCodeId",
+            "value": "",
+            "label": "Bank Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "bankName",
+            "id": "bankNameId",
+            "value": "",
+            "label": "Bank Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "biCode",
+            "id": "biCodeId",
+            "value": "",
+            "label": "BI Code",
+            "placeholder": "Placeholder"
+        },
+        {   
+            "type": "dropdown",
+            "name": "activeStatus",
+            "id": "activeStatusId",
+            "label" : "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne" : false,
+            "items": [
+                {
+                    "key": "Yes",
+                    "value": "Yes"
+                },
+                {
+                    "key": "No",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ]
+}
