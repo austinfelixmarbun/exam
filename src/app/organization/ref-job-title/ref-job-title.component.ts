@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ref-job-title',
@@ -33,7 +34,7 @@ export class RefJobTitleComponent implements OnInit {
   pagedItems: any[];
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: Http, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }
 
   ngOnInit() {
     this.pageNow = 1;

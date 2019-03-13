@@ -10,6 +10,7 @@ import { environment } from 'environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { AdInsHttpServiceService } from 'app/ad-ins-http-service.service';
 import { BusinessUnitObj } from 'app/shared/model/BusinessUnitObj.Model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'add-app-business-unit',
@@ -33,7 +34,7 @@ export class AddBusinessUnitComponent implements OnInit {
 
     constructor(
       private route: ActivatedRoute,
-      private http: AdInsServiceService,
+      private http: HttpClient,
       private spinner: NgxSpinnerService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refBizUnitId"];
@@ -42,15 +43,14 @@ export class AddBusinessUnitComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.spinner.show();
         if (this.mode === "edit") {
             this.apiUrl = this.foundationUrl + AdInsConstant.GetRefBizUnit;
             var bizUnitObj = new BusinessUnitObj();
             bizUnitObj.RefBizUnitId = this.param;
-            this.http.postData(this.apiUrl, bizUnitObj).subscribe(
+            this.http.post(this.apiUrl, bizUnitObj).subscribe(
                 (response) => {
                     console.log("Success");
-                    this.result = response.returnObject;
+                    this.result = response["returnObject"];
                     if(this.result.isActive=="1"){
                         this.isActive = true;
                     }
@@ -58,18 +58,15 @@ export class AddBusinessUnitComponent implements OnInit {
                     {
                         this.isActive = false;
                     }
-                    this.spinner.hide();
                 },
                 (error) => {
                     console.log("Error");
                     console.log(error);
-                    this.spinner.hide();
                 }
             );
         }
         else
         {
-            this.spinner.hide();
         }
 
     }
