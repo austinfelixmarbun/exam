@@ -21,15 +21,16 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
     constructor(public errorDialogService: ErrorDialogService,private spinner: NgxSpinnerService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // if (request.body == null || request.body.isLoading == null || request.body.isLoading == true) {
-        //     this.spinner.show();
-        // }
-        this.spinner.show();
+        if(request.method=="POST")
+        {
+            this.spinner.show();
+        }
         this.count++;
-        // const token: string = localStorage.getItem('token');
-        const token: string = 'dbbbf15f-2360-3a32-b6e9-2373d8b5556b'
         var httpRequest = new HttpRequestObj();
+        console.log("Request Interceptor");
+        console.log(request);
         var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+        const token: string = currentUserContext.TokenId;
           httpRequest.UserName = currentUserContext.UserName;
           httpRequest.Role = currentUserContext.Role;
           httpRequest.Office = currentUserContext.Office;
@@ -77,7 +78,12 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 return throwError(error);
             }),finalize(() => {
                 this.count--;
-                if ( this.count == 0 ) this.spinner.hide ()
+                if ( this.count == 0 ) {
+                    if(request.method=="POST")
+                    {
+                        this.spinner.hide ();
+                    }
+                }
             })
             );
     }

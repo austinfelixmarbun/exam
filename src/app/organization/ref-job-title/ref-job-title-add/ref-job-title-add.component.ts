@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefJobTitleObj } from 'app/shared/model/RefJobTitle.model';
@@ -20,7 +19,7 @@ export class RefJobTitleAddComponent implements OnInit {
   apiUrl: any
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: HttpClient ,private route: ActivatedRoute, private adInsService: AdInsServiceService) {
+  constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitleById; 
 
     this.route.queryParams.subscribe(params => {
@@ -39,10 +38,10 @@ export class RefJobTitleAddComponent implements OnInit {
     if (this.type == "edit") {
     var jobTitleObj = new RefJobTitleObj()
     jobTitleObj.RefJobTitleId = this.jobTitleId
-    this.http.post(this.apiUrl,jobTitleObj).subscribe(
+    this.httpClient.post(this.apiUrl, jobTitleObj).subscribe(
       (response) => {
         console.log("Success");
-        this.resultData = response["returnObject"];
+        this.resultData = response['returnObject'];
         console.log(this.resultData);
       },
       (error) => {

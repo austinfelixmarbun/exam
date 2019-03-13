@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { SearchComponent } from './search/search.component';
 import {LookupComponent} from './lookup/lookup.component';
+import { TranslateModule } from '@ngx-translate/core';
 import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 
 @NgModule({
@@ -9,10 +10,12 @@ import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
         CommonModule,
         SearchComponent,
         LookupComponent,
-        ErrorDialogComponent
+        ErrorDialogComponent,
+        TranslateModule
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        TranslateModule
     ],
     declarations: [
         SearchComponent,

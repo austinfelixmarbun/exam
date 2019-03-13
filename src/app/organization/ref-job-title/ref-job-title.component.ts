@@ -20,11 +20,13 @@ export class RefJobTitleComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
   urlJson: string = "./assets/search/searchJobTitle.json";
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
-  pageSize: any;
+  pageSize: any = 10;
   apiUrl: any;
+  orderByKey: any = null;
+  orderByValue: boolean = true;
 
   // array of all items to be paged
   private allItems: any[];
@@ -38,7 +40,6 @@ export class RefJobTitleComponent implements OnInit {
 
   ngOnInit() {
     this.pageNow = 1;
-    this.pageSize = 25;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitle;
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
@@ -47,9 +48,57 @@ export class RefJobTitleComponent implements OnInit {
     //   )
   }
 
-  search() {
-    this.spinner.show();
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
+  search(orderBy = null) {
+      if (orderBy == null) {
+        this.orderByKey = null
+        this.orderByValue = true
+        this.pageNow = 1;
+        this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
+          .subscribe(
+            (response) => {
+              console.log("Success");
+              this.resultData = response.returnObject;
+              this.totalData = response.returnObject.count;
+              console.log(this.resultData);
+            },
+            (error) => {
+              console.log("Error");
+              console.log(error);
+            }
+          );
+      } else {
+        if (this.orderByKey == orderBy.target.attributes.name.nodeValue) {
+          this.orderByValue = !this.orderByValue
+        } else {
+          this.orderByValue = true
+        }
+        this.orderByKey = orderBy.target.attributes.name.nodeValue
+        var order = {
+          key: this.orderByKey,
+          value: this.orderByValue
+        }
+        this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+          .subscribe(
+            (response) => {
+              console.log("Success");
+              this.resultData = response.returnObject;
+              this.totalData = response.returnObject.count;
+              console.log(this.resultData);
+            },
+            (error) => {
+              console.log("Error");
+              console.log(error);
+            }
+          );
+      }
+  }
+
+  pagingSearch() {
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
       .subscribe(
         (response) => {
           console.log("Success");
@@ -68,9 +117,9 @@ export class RefJobTitleComponent implements OnInit {
 
   pageChange(page: number) {
     this.pageNow = page;
-    this.search();
+    this.pagingSearch();
   }
-  
+
   // Success Type
   typeSuccess() {
     this.service.typeSuccess();
