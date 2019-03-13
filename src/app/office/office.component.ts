@@ -7,6 +7,7 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-office',
@@ -26,7 +27,10 @@ export class OfficeComponent implements OnInit {
 
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: Http, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }
+  constructor(private http: Http, private spinner: NgxSpinnerService,
+     private service: NGXToastrService, private adInsService: AdInsServiceService) 
+     {
+     }
 
   ngOnInit() {
     this.pageNow = 1;

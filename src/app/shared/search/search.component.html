@@ -15,7 +15,7 @@
                 <div id="panel">
                   <div class="col-md-6 form-group no-padding" style="float:left;" *ngFor="let question of configuration?.component">
                     <div class="col-md-12">
-                      <label style="float:left;" class="col-md-5 no-padding" for="projectinput1">{{question.label}}</label>
+                      <label style="float:left;" class="col-md-5 no-padding" for="projectinput1" translate>{{question.label}}</label>
                       <div class="col-md-7 no-padding" style="float:left;">
                         <div *ngIf="question.type==='textbox'">
                           <input type="text" id="{{question.id}}" class="form-control search-form-control" name="{{question.name}}" value="{{question.value}}" attr.data-type="{{question.datatype}}">
