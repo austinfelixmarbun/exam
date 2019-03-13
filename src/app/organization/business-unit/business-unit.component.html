@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of resultData?.returnObject">
+            <tr *ngFor="let item of resultData?.returnObject?.data">
                 <td>{{item.bizUnitCode}}</td>
                 <td>{{item.bizUnitName}}</td>
                 <td>{{item.isActive}}</td>

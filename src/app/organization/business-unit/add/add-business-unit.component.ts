@@ -67,6 +67,10 @@ export class AddBusinessUnitComponent implements OnInit {
                 }
             );
         }
+        else
+        {
+            this.spinner.hide();
+        }
 
     }
 }

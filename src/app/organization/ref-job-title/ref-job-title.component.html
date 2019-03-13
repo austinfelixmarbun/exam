@@ -16,10 +16,10 @@
 <table class="table table-responsive-md text-center table-hover">
     <thead>
         <tr class="table-header">
-            <th class="text-left">Job Title Code</th>
-            <th class="text-left">Job Title Name</th>
-            <th class="text-left">Description</th>
-            <th>Position Level</th>
+            <th class="text-left pointer" (click)="search($event)" name='jobTitleCode'>Job Title Code</th>
+            <th class="text-left pointer" (click)="search($event)" name='jobTitleName'>Job Title Name</th>
+            <th class="text-left pointer" (click)="search($event)" name='descr'>Description</th>
+            <th (click)="search($event)" name='mrJobPositionLvl'>Position Level</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -30,7 +30,8 @@
             <td class="text-left">{{item.descr}}</td>
             <td>{{item.mrJobPositionLvl}}</td>
             <td>
-                <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/refjobtitle/add']"  [queryParams]="{param:'edit',jobTitleId:item.refJobTitleId}">
+                <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/refjobtitle/add']"
+                    [queryParams]="{param:'edit',jobTitleId:item.refJobTitleId}">
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>
                 </a>
                 <a class="danger p-0" data-original-title="" title="">
@@ -40,9 +41,16 @@
         </tr>
     </tbody>
 </table>
-<i class="fa fa-plus-circle" [routerLink]="['/organization/refjobtitle/add']" style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+<i class="fa fa-plus-circle" [routerLink]="['/organization/refjobtitle/add']"
+    style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
 Current Page : {{pageNow}}
 <div class="d-flex justify-content-center">
-    <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData" [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true"
-        [boundaryLinks]="true"></ngb-pagination>
+    <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData"
+        [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
+    
+        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+        <option [ngValue]="10">10</option>
+        <option [ngValue]="20">20</option>
+        <option [ngValue]="50">50</option>
+    </select>
 </div>

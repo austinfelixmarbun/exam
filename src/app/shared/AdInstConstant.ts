@@ -11,6 +11,11 @@ export class AdInsConstant{
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
     public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
     public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
+    public static GetBankPaging = "/RefBank/GetRefBankPaging";
+    public static GetBank = "/RefBank/GetBank";
+    public static EditRefBank = "/RefBank/EditRefBank";
+    public static AddRefBank = "/RefBank/AddRefBank";
+    public static DeleteRefBank = "/RefBank/DeleteRefBank";
     public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";
     public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
     public static GetProvince = "/los/v1/get_provinsi";

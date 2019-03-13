@@ -100,6 +100,10 @@ export const Full_ROUTES: Routes = [
     loadChildren: './organization/organization.module#OrganizationModule'
   },
   {
+    path : 'bank',
+    loadChildren: './bank/bank.module#BankModule'
+  },
+  {
     path : 'leaveManagament',
     loadChildren: './leave-management/leave-management.module#LeaveManagementModule'
   },
