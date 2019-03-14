@@ -9,7 +9,9 @@ export class AdInsConstant{
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
     public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
+    public static AddRefJobTitle = "/OrganizationDefinition/AddRefJobTitle";
     public static EditRefJobTitle = "/OrganizationDefinition/EditRefJobTitle";
+    public static DeleteRefJobTitle = "/OrganizationDefinition/DeleteRefJobTitle";
     public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
     public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
     public static GetBankPaging = "/RefBank/GetRefBankPaging";

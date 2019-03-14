@@ -66,3 +66,7 @@ form label{
 .navigation li > a {
     margin: 0px !important;
 }
+
+.thead-header {
+    cursor: pointer;
+}
