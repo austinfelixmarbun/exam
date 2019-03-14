@@ -6,8 +6,8 @@
             "type": "textbox",
             "name": "empNo",
             "id": "employeeNoId",
-            "value": "John",
-            "label": "employee No",
+            "value": "",
+            "label": "Employee No",
             "placeholder": "Placeholder"
         },
         {
@@ -15,7 +15,7 @@
             "name": "empName",
             "id": "employeeNameId",
             "value": "%",
-            "label": "employee Name",
+            "label": "Employee Name",
             "placeholder": "Placeholder"
         },
         {

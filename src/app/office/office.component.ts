@@ -7,6 +7,7 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-office',
@@ -21,16 +22,20 @@ export class OfficeComponent implements OnInit {
   resultData: string;
   pageNow: any;
   totalData: any;
-  pageSize: any;
+  pageSize: any = 10;
   apiUrl: any;
+  orderByKey: any = null;
+  orderByValue: boolean = true;
 
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: Http, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }
+  constructor(private http: Http, private spinner: NgxSpinnerService,
+    private service: NGXToastrService, private adInsService: AdInsServiceService) {
+  }
 
   ngOnInit() {
     this.pageNow = 1;
-    this.pageSize = 25;
+    this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListOffice;
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
@@ -39,30 +44,6 @@ export class OfficeComponent implements OnInit {
     //   )
   }
 
-  search() {
-    this.spinner.show();
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(response);
-          this.spinner.hide();
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-          this.spinner.hide();
-        }
-      );
-  }
-
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.search();
-  }
-  
   // Success Type
   typeSuccess() {
     this.service.typeSuccess();
@@ -78,6 +59,98 @@ export class OfficeComponent implements OnInit {
 
   errMsg() {
     this.service.errorMessage('asdasd');
+  }
+
+  onChange() {
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  search() {
+    this.orderByKey = null
+    this.orderByValue = true
+    this.pageNow = 1;
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  searchSort(event: any) {
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
+    }
+    this.orderByKey = event.target.attributes.name.nodeValue
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  searchPagination(event: number) {
+    this.pageNow = event;
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
   }
 
 }

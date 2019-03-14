@@ -6,53 +6,44 @@
     </div>
     <div class="card-body">
       <div class="px-3">
-        <form class="form form-horizontal">
+        <form class="form form-horizontal" name="RefJobTitleForm" #RefJobTitleForm="ngForm" novalidate
+        (ngSubmit)="RefJobTitleForm.form.valid && SaveForm(RefJobTitleForm)">
           <div class="form-body">
             <h4 class="form-section"><i class="ft-file-text"></i> {{type}}</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="projectinput1">Job Title Code: </label>
+              <label class="col-md-3 label-control" for="JobTitleCode">Job Title Code: </label>
               <div class="col-md-9">
-                <input type="text" id="projectinput1" class="form-control" name="jobTitleCode" [value]="resultData?.jobTitleCode">
+                <input type="text" class="form-control" name="JobTitleCode" [(ngModel)]="JobTitleCode"
+                #jobTitleCode="ngModel">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="projectinput2">Job Title Name: </label>
+              <label class="col-md-3 label-control" for="JobTitleName">Job Title Name: </label>
               <div class="col-md-9">
-                <input type="text" id="projectinput2" class="form-control" name="jobTitleName" [value]="resultData?.jobTitleName">
+                <input type="text" class="form-control" name="JobTitleName" [(ngModel)]="JobTitleName"
+                #jobTitleName="ngModel">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="projectinput3">Organization Name: </label>
+              <label class="col-md-3 label-control" for="Descr">Description: </label>
               <div class="col-md-9">
-                <select id="projectinput3" name="orgName" class="form-control">
-                  <option value="-">Select One</option>
-                  <option value="HO">Head Office</option>
-                  <option value="BU">Business Unit</option>
-                </select>
+                <textarea rows="5" class="form-control" name="Descr" [(ngModel)]="Descr"
+                #descr="ngModel"></textarea>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="projectinput4">Position Level: </label>
-              <div class="col-md-9">
-                <select id="projectinput4" name="positionLevel" class="form-control">
-                  <option value="-">Select One</option>
-                  <option value="SPV">Supervisor</option>
-                  <option value="DIR">Director</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3 label-control" for="projectinput5">Description: </label>
-              <div class="col-md-9">
-                <textarea id="projectinput5" rows="5" class="form-control" name="comment"  [value]="resultData?.descr"></textarea>
-              </div>
+                <label class="col-md-3 label-control" for="isInternal">Active Status: </label>
+                <div class="col-md-9">
+                    <input class="border-primary" type="checkbox"
+                    [ngModel]="isInternal" data-md-icheck (change)="toggleVisibility($event)" name="isInternal">
+                </div>
             </div>
           </div>
           <div class="form-actions right">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/organization/refjobtitle']">
               <i class="ft-x"></i> Cancel
             </button>
-            <button type="button" class="btn btn-raised btn-primary">
+            <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>
           </div>

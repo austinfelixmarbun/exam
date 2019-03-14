@@ -7,6 +7,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
+import { RefJobTitleObj } from 'app/shared/model/RefJobTitle.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ref-job-title',
@@ -19,11 +21,15 @@ export class RefJobTitleComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
   urlJson: string = "./assets/search/searchJobTitle.json";
-  resultData: string;
+  resultData: any;
+  rjtObj: RefJobTitleObj;
   pageNow: any;
   totalData: any;
-  pageSize: any;
+  pageSize: any = 10;
   apiUrl: any;
+  deleteUrl: any;
+  orderByKey: any = null;
+  orderByValue: boolean = true;
 
   // array of all items to be paged
   private allItems: any[];
@@ -33,11 +39,12 @@ export class RefJobTitleComponent implements OnInit {
   pagedItems: any[];
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: Http, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }
+  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService, private toastr: NGXToastrService) {
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefJobTitle;
+  }
 
   ngOnInit() {
     this.pageNow = 1;
-    this.pageSize = 25;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitle;
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
@@ -47,7 +54,9 @@ export class RefJobTitleComponent implements OnInit {
   }
 
   search() {
-    this.spinner.show();
+    this.orderByKey = null
+    this.orderByValue = true
+    this.pageNow = 1;
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
@@ -55,21 +64,95 @@ export class RefJobTitleComponent implements OnInit {
           this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
           console.log(this.resultData);
-          this.spinner.hide();
         },
         (error) => {
           console.log("Error");
           console.log(error);
-          this.spinner.hide();
         }
       );
   }
 
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.search();
+  searchSort(event: any) {
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
+    }
+    this.orderByKey = event.target.attributes.name.nodeValue
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
   }
-  
+
+  searchPagination(event: number) {
+    this.pageNow = event;
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  onChange() {
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  delete(refJobId: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      this.rjtObj = new RefJobTitleObj();
+      this.rjtObj.RefJobTitleId = refJobId;
+      this.httpClient.post(this.deleteUrl, this.rjtObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          this.onChange()
+        });
+    }
+  }
   // Success Type
   typeSuccess() {
     this.service.typeSuccess();
