@@ -186,6 +186,7 @@ export class ProspectComponent implements OnInit {
   }
 
   Save(prsReqFoem: NgForm): void {
+    console.log(prsReqFoem);
     this.prosObj = new ProspectObj();
     this.prosObj = prsReqFoem.value;
     this.test = prsReqFoem.value.Rt
@@ -194,6 +195,8 @@ export class ProspectComponent implements OnInit {
   }
 
   SavePros(prsReqFoem: NgForm) {
+    
+    console.log(prsReqFoem);
     this.spinner.show();
     console.log(this.MotherMaidenName);
     this.prosObj = new ProspectObj();

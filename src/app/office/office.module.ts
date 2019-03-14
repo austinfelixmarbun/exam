@@ -5,7 +5,6 @@ import { OfficeRoutingModule } from './office-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OfficeAddComponent } from './office-add/office-add.component';
 
 
@@ -14,8 +13,6 @@ import { OfficeAddComponent } from './office-add/office-add.component';
     OfficeRoutingModule,
     CommonModule,
     FormsModule,
-    HttpModule,
-    NgbModule,
     SharingModule
   ],
   declarations: [
