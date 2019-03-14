@@ -24,13 +24,14 @@ export class OfficeComponent implements OnInit {
   totalData: any;
   pageSize: any = 10;
   apiUrl: any;
+  orderByKey: any = null;
+  orderByValue: boolean = true;
 
   foundationUrl: string = environment.foundationUrl;
 
   constructor(private http: Http, private spinner: NgxSpinnerService,
-     private service: NGXToastrService, private adInsService: AdInsServiceService) 
-     {
-     }
+    private service: NGXToastrService, private adInsService: AdInsServiceService) {
+  }
 
   ngOnInit() {
     this.pageNow = 1;
@@ -43,30 +44,6 @@ export class OfficeComponent implements OnInit {
     //   )
   }
 
-  search() {
-    this.spinner.show();
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(response);
-          this.spinner.hide();
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-          this.spinner.hide();
-        }
-      );
-  }
-
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.search();
-  }
-  
   // Success Type
   typeSuccess() {
     this.service.typeSuccess();
@@ -82,6 +59,99 @@ export class OfficeComponent implements OnInit {
 
   errMsg() {
     this.service.errorMessage('asdasd');
+  }
+
+  onChange(eventValue: any) {
+
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  search() {
+    this.orderByKey = null
+    this.orderByValue = true
+    this.pageNow = 1;
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  searchSort(event: any) {
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
+    }
+    this.orderByKey = event.target.attributes.name.nodeValue
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  searchPagination(event: number) {
+    this.pageNow = event;
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
   }
 
 }
