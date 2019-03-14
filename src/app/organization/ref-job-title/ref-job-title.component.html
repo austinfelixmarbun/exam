@@ -16,9 +16,9 @@
 <table class="table table-responsive-md text-center table-hover">
     <thead>
         <tr class="table-header">
-            <th class="text-left pointer" (click)="search($event)" name='jobTitleCode'>Job Title Code</th>
-            <th class="text-left pointer" (click)="search($event)" name='jobTitleName'>Job Title Name</th>
-            <th class="text-left pointer" (click)="search($event)" name='descr'>Description</th>
+            <th class="text-left pointer" (click)="searchSort($event)" name='jobTitleCode'>Job Title Code</th>
+            <th class="text-left pointer" (click)="searchSort($event)" name='jobTitleName'>Job Title Name</th>
+            <th class="text-left pointer" (click)="searchSort($event)" name='descr'>Description</th>
             <th (click)="search($event)" name='mrJobPositionLvl'>Position Level</th>
             <th>Action</th>
         </tr>
@@ -45,10 +45,10 @@
     style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
 Current Page : {{pageNow}}
 <div class="d-flex justify-content-center">
-    <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData"
+    <ngb-pagination (pageChange)="searchPagination($event)" [pageSize]="pageSize" [collectionSize]="totalData"
         [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
     
-        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize" (change)="onChange()">
         <option [ngValue]="10">10</option>
         <option [ngValue]="20">20</option>
         <option [ngValue]="50">50</option>

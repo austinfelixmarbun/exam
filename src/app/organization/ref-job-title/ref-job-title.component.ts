@@ -48,52 +48,32 @@ export class RefJobTitleComponent implements OnInit {
     //   )
   }
 
-  search(orderBy = null) {
-      if (orderBy == null) {
-        this.orderByKey = null
-        this.orderByValue = true
-        this.pageNow = 1;
-        this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-          .subscribe(
-            (response) => {
-              console.log("Success");
-              this.resultData = response.returnObject;
-              this.totalData = response.returnObject.count;
-              console.log(this.resultData);
-            },
-            (error) => {
-              console.log("Error");
-              console.log(error);
-            }
-          );
-      } else {
-        if (this.orderByKey == orderBy.target.attributes.name.nodeValue) {
-          this.orderByValue = !this.orderByValue
-        } else {
-          this.orderByValue = true
+  search() {
+    this.orderByKey = null
+    this.orderByValue = true
+    this.pageNow = 1;
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
         }
-        this.orderByKey = orderBy.target.attributes.name.nodeValue
-        var order = {
-          key: this.orderByKey,
-          value: this.orderByValue
-        }
-        this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-          .subscribe(
-            (response) => {
-              console.log("Success");
-              this.resultData = response.returnObject;
-              this.totalData = response.returnObject.count;
-              console.log(this.resultData);
-            },
-            (error) => {
-              console.log("Error");
-              console.log(error);
-            }
-          );
-      }
+      );
   }
 
-  pagingSearch() {
+  searchSort(event: any) {
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
+    }
+    this.orderByKey = event.target.attributes.name.nodeValue
     var order = {
       key: this.orderByKey,
       value: this.orderByValue
@@ -105,19 +85,33 @@ export class RefJobTitleComponent implements OnInit {
           this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
           console.log(this.resultData);
-          this.spinner.hide();
         },
         (error) => {
           console.log("Error");
           console.log(error);
-          this.spinner.hide();
         }
       );
   }
 
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.pagingSearch();
+  searchPagination(event: number) {
+    this.pageNow = event;
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
   }
 
   // Success Type
@@ -135,6 +129,30 @@ export class RefJobTitleComponent implements OnInit {
 
   errMsg() {
     this.service.errorMessage('asdasd');
+  }
+
+  onChange(eventValue: any) {
+
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
   }
 
 }
