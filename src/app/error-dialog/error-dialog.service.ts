@@ -9,6 +9,9 @@ export class ErrorDialogService {
         console.log(data)
         const dialogRef = this.dialog.open(ErrorDialogComponent, {
             width: '300px',
+            position: {
+            top: '12px',
+            right: '12px'},
             data: data
         });
 

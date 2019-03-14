@@ -5,11 +5,11 @@ import { environment } from 'environments/environment';
 import { Http } from '@angular/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 
 @Component({
   selector: 'app-employee',
@@ -23,15 +23,18 @@ export class EmployeeComponent implements OnInit {
   urlJson:string = "./assets/search/searchEmployee.json";
   resultData : string;
   ExcelData : any;
+  empObj: RefEmpObj;
   pageNow : any;
   totalData : any;
-  pageSize: any;
+  pageSize: any = 10;
   apiUrl: any;
+  deleteUrl: any;
   exportData: any;
+  orderByKey: any = null;
+  orderByValue: boolean = true;
 
   foundationUrl: string = environment.foundationUrl;
-  constructor(private http: Http, private spinner: NgxSpinnerService, private service: NGXToastrService, 
-    private adInsService: AdInsServiceService, private excelService: ExcelService, private https: HttpClient ) { }
+  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private toastr: NGXToastrService, private excelService: ExcelService, private https: HttpClient ) { }
 
     initiateForm() {
       this.getJSON(this.urlJson).subscribe(data => {
@@ -46,25 +49,117 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.pageNow = 1;
-    this.pageSize= 25;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListEmployee;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefEmployee;
     this.initiateForm()
   }
 
   search() {
+    this.orderByKey = null
+    this.orderByValue = true
+    this.pageNow = 1;
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
           console.log("Success");
           this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
-          console.log(response);
+          console.log(this.resultData);
         },
         (error) => {
           console.log("Error");
           console.log(error);
         }
       );
+  }
+
+  searchSort(event: any) {
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
+    }
+    this.orderByKey = event.target.attributes.name.nodeValue
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  searchPagination(event: number) {
+    this.pageNow = event;
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  onChange() {
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  delete(refEmpId: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      this.empObj = new RefEmpObj();
+      this.empObj.refEmpId = refEmpId;
+      this.httpClient.post(this.deleteUrl, this.empObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          this.onChange()
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        });
+    }
   }
 
   exportAsXLSX():void {
@@ -90,19 +185,19 @@ export class EmployeeComponent implements OnInit {
   
   // Success Type
   typeSuccess() {
-    this.service.typeSuccess();
+    this.toastr.typeSuccess();
   }
 
   typeError() {
-    this.service.typeError();
+    this.toastr.typeError();
   }
 
   timeout() {
-    this.service.timeout();
+    this.toastr.timeout();
   }
 
   errMsg() {
-    this.service.errorMessage('asdasd');
+    this.toastr.errorMessage('asdasd');
   }
 }
  

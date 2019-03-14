@@ -39,13 +39,12 @@ export class RefJobTitleComponent implements OnInit {
   pagedItems: any[];
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService, private toastr: NGXToastrService) {
-    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefJobTitle;
-  }
+  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private toastr: NGXToastrService) { }
 
   ngOnInit() {
     this.pageNow = 1;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitle;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefJobTitle;
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
@@ -155,19 +154,19 @@ export class RefJobTitleComponent implements OnInit {
   }
   // Success Type
   typeSuccess() {
-    this.service.typeSuccess();
+    this.toastr.typeSuccess();
   }
 
   typeError() {
-    this.service.typeError();
+    this.toastr.typeError();
   }
 
   timeout() {
-    this.service.timeout();
+    this.toastr.timeout();
   }
 
   errMsg() {
-    this.service.errorMessage('asdasd');
+    this.toastr.errorMessage('asdasd');
   }
 
 }
