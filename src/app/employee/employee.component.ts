@@ -68,7 +68,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   exportAsXLSX():void {
-    this.spinner.show();
     this.searchComponent.search(this.apiUrl, this.pageNow, 9999, null)
       .subscribe(
         (response) => {
@@ -76,12 +75,10 @@ export class EmployeeComponent implements OnInit {
           this.ExcelData = response.returnObject.data;
           this.excelService.exportAsExcelFile(this.ExcelData, 'sample');
           console.log(response);
-          this.spinner.hide();
         },
         (error) => {
           console.log("Error");
           console.log(error);
-          this.spinner.hide();
         }
       );
   }

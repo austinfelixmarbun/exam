@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-organization',
@@ -27,9 +28,9 @@ export class OrganizationComponent implements OnInit {
   show: any;
 
   foundationUrl: string = environment.foundationUrl;
-
+HttpClient
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private spinner: NgxSpinnerService,
     private service: NGXToastrService,
     private adInsService: AdInsServiceService
@@ -48,7 +49,6 @@ export class OrganizationComponent implements OnInit {
   }
 
   search() {
-    this.spinner.show();
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
@@ -56,12 +56,10 @@ export class OrganizationComponent implements OnInit {
           this.resultData = response;
           this.totalData = response.returnObject.count;
           console.log(response);
-          this.spinner.hide();
         },
         (error) => {
           console.log("Error");
           console.log(error);
-          this.spinner.hide();
         }
       );
   }
@@ -72,24 +70,21 @@ export class OrganizationComponent implements OnInit {
   }
 
   del(id: number): void {
-    this.spinner.show();
     var url = this.foundationUrl + AdInsConstant.DeleteRefOrg;
     var organizObj: OrganizationObj;
     organizObj = new OrganizationObj();
     organizObj.refOrgId = id;
-    this.adInsService.postData(url, organizObj).subscribe(
+    this.http.post(url, organizObj).subscribe(
       (response) => {
         console.log("Success Delete");
         console.log(response);
         this.service.typeSave('Delete Successed');
         location.reload();
-        this.spinner.hide();
       },
       (error) => {
         console.log("Error Delete");
         console.log(error);
         this.service.typeSave('error');
-        this.spinner.hide();
       }
     );
   }

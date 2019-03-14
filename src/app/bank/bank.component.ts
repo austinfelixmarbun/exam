@@ -8,6 +8,7 @@ import { Http } from '@angular/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-bank',
@@ -34,7 +35,7 @@ export class BankComponent implements OnInit {
   pagedItems: any[];
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: AdInsServiceService, private spinner: NgxSpinnerService, private service: NGXToastrService) { }
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService) { }
 
   ngOnInit() {
     this.pageNow = 1;
@@ -48,7 +49,6 @@ export class BankComponent implements OnInit {
   }
 
   search() {
-    this.spinner.show();
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
@@ -56,12 +56,10 @@ export class BankComponent implements OnInit {
           this.resultData = response;
           this.totalData = response.returnObject.count;
           console.log(response);
-          this.spinner.hide();
         },
         (error) => {
           console.log("Error");
           console.log(error);
-          this.spinner.hide();
         }
       );
   }
@@ -93,10 +91,14 @@ export class BankComponent implements OnInit {
       this.editUrl = this.foundationUrl + AdInsConstant.DeleteRefBank;
       this.bankObj = new RefBankObj();
       this.bankObj.refBankId = refBankId;
-      this.http.postData(this.editUrl, this.bankObj).subscribe(
+      this.http.post(this.editUrl, this.bankObj).subscribe(
         (response) => {
           console.log(response);
         });
     }
+  }
+
+  reset(){
+    this.searchComponent.initiateForm();
   }
 }

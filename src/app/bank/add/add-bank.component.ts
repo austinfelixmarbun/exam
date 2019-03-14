@@ -3,7 +3,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -31,7 +31,7 @@ export class BankAddComponent implements OnInit {
     bankObj: RefBankObj;
     editUrl: any;
 
-    constructor(private route: ActivatedRoute, private http: AdInsServiceService, private spinner: NgxSpinnerService) {
+    constructor(private router: Router,private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refBankId"];
             this.mode = params["mode"];
@@ -39,12 +39,11 @@ export class BankAddComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.spinner.show();
         if (this.mode === "edit") {
             this.apiUrl = this.foundationUrl + AdInsConstant.GetBank;
             var bankObj = new RefBankObj();
             bankObj.refBankId = this.param;
-            this.http.postData(this.apiUrl, bankObj).subscribe(
+            this.http.post(this.apiUrl, bankObj).subscribe(
                 (response) => {
                     console.log("Success");
                     console.log(response);
@@ -55,19 +54,13 @@ export class BankAddComponent implements OnInit {
                     else {
                         this.isActive = false;
                     }
-                    this.spinner.hide();
                 },
                 (error) => {
                     console.log("Error");
                     console.log(error);
-                    this.spinner.hide();
                 }
             );
         }
-        else {
-            this.spinner.hide();
-        }
-
     }
     Save(BankAddReqForm: NgForm): void {
         if (this.mode === "edit") {
@@ -81,9 +74,14 @@ export class BankAddComponent implements OnInit {
             else {
                 this.bankObj.isActive = "1";
             }
-            this.http.postData(this.editUrl, this.bankObj).subscribe(
+            this.http.post(this.editUrl, this.bankObj).subscribe(
                 (response) => {
                     console.log(response);
+                    this.router.navigateByUrl('/bank');
+                },
+                (error)=>
+                {
+                    console.log(error);
                 });
         }
         else
@@ -98,9 +96,14 @@ export class BankAddComponent implements OnInit {
             else {
                 this.bankObj.isActive = "1";
             }
-            this.http.postData(this.editUrl, this.bankObj).subscribe(
+            this.http.post(this.editUrl, this.bankObj).subscribe(
                 (response) => {
                     console.log(response);
+                    this.router.navigateByUrl('/bank');
+                },
+                (error)=>
+                {
+                    console.log(error);
                 });
         }
     }

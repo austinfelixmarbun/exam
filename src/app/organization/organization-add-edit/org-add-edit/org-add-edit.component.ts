@@ -9,6 +9,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-org-add-edit',
@@ -20,7 +21,7 @@ export class OrgAddEditComponent implements OnInit {
 
   foundationUrl: string = environment.foundationUrl;
   apiUrl: any;
-  parents: string;
+  parents: any;
   orgObj: OrganizationObj;
 
   param: string;
@@ -35,7 +36,7 @@ export class OrgAddEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: NGXToastrService,
-    private http: Http,
+    private http: HttpClient,
     private spinner: NgxSpinnerService,
     private location: Location,
     private adInsService: AdInsServiceService) {
@@ -81,7 +82,7 @@ export class OrgAddEditComponent implements OnInit {
       if (OrgObjectForm.value.isActive) { this.orgObj.isActive = '1' } else { this.orgObj.isActive = '0' };
 
       //SAVE
-      this.adInsService.postData(this.apiUrl, this.orgObj).subscribe(
+      this.http.post(this.apiUrl, this.orgObj).subscribe(
         (response) => {
           console.log("Success Save");
 
@@ -111,7 +112,7 @@ export class OrgAddEditComponent implements OnInit {
       if (OrgObjectForm.value.isActive) { this.orgObj.isActive = '1' } else { this.orgObj.isActive = '0' };
 
       //SAVE
-      this.adInsService.postData(this.apiUrl, this.orgObj).subscribe(
+      this.http.post(this.apiUrl, this.orgObj).subscribe(
         (response) => {
           console.log("Success Edit");
 
@@ -130,10 +131,9 @@ export class OrgAddEditComponent implements OnInit {
 }
 
   GetListParents() {
-    this.spinner.show();
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListAllRefOrg;
     var organizationObj = new OrganizationObj();
-    this.adInsService.postData(this.apiUrl, organizationObj).subscribe(
+    this.http.post(this.apiUrl, organizationObj).subscribe(
       (response) => {
         this.parents = response;
       },
@@ -141,18 +141,16 @@ export class OrgAddEditComponent implements OnInit {
         console.log(error);
       }
     );
-    this.spinner.hide();
   }
 
   FillFormEdit() {
-    this.spinner.show();
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
     this.orgObj = new OrganizationObj();
     this.orgObj.refOrgId = +this.param;
 
-    this.adInsService.postData(this.apiUrl, this.orgObj).subscribe(
+    this.http.post(this.apiUrl, this.orgObj).subscribe(
       (response) => {
-        this.orgObj = response.returnObject;
+        this.orgObj = response["returnObject"];
 
         if (this.orgObj.isActive === '1') {
           this.isActive = true;
@@ -165,9 +163,8 @@ export class OrgAddEditComponent implements OnInit {
         this.hierarchyNo = this.orgObj.hierarchyNo;
       },
       (error) => {
-
+        console.log(error);
       }
     );
-    this.spinner.hide();
   }
 }

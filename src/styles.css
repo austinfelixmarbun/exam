@@ -61,6 +61,7 @@ form label{
 
 .table{
     background-color: white;
+    margin-bottom:3px !important;
 }
 
 .navigation li > a {
@@ -69,4 +70,11 @@ form label{
 
 .thead-header {
     cursor: pointer;
+}
+
+.gridFooter{
+    border-top: 1px solid #e7e7e7;
+    background-color:white;
+    margin-left:0px !important;
+    padding-top:10px;
 }
