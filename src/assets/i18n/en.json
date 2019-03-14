@@ -1,5 +1,51 @@
 {
-  "Office Code":"Office Code English",
+  "_comment":"SECTION A",
+  "Action":"Action",
+  "Address":"Address",
+  "Active Status":"Active Status",
+  "Description":"Description",
+  "Employee List":"Employee List",
+  "Employee":"Employee",
+  "Employee No":"Employee No",
+  "Employee Name":"Employee Name",
+  "External Employee":"External Employee",
+  "Current Page":"Current Page",
+  "City":"City",
+  "Contact Person":"Contact Person",
+  "Job Title":"Job Title",
+  "Job Title Name":"Job Title Name",
+  "Job Title Code":"Job Title Code",
+  "Position Level":"Position Level",
+  "Model Name":"Model Name",
+  "Office":"Office",
+  "Office Code":"Office Code",
+  "Office Name":"Office Name",
+  "Organization":"Organization",
+  "Hierarchy No":"Hierarchy No",
+  "Parent Organization":"Parent Organization",
+  "Models":"Models",
+  "Organization Structure":"Organization Structure",
+  "Organization Name":"Organization Name",
+  "Virtual Office":"Virtual Office",
+  "Search":"Search",
+  "Cancel":"Cancel",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   "Dashboard": "Dashboard",
     "Dashboard1": "Dashboard1",
     "Dashboard2": "Dashboard2",
