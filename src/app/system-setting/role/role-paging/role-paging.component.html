@@ -1,0 +1,77 @@
+<h4 class="form-section">Role Maintenance</h4>
+<br/>
+<app-search id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
+<div class="col-md-12">
+  <form>
+    <div class="form-actions right">
+        <button *ngIf="exportData" type="button" (click)="exportAsXLSX()" class="btn btn-raised btn-success mr-1">
+            <i class="fa fa-plus-circle"></i> Export Excel
+        </button>
+      <button type="button" class="btn btn-raised btn-warning mr-1">
+        <i class="ft-x"></i> Cancel
+      </button>
+      <button type="button" (click)="search()" class="btn btn-raised btn-primary">
+        <i class="fa fa-search"></i> Search
+      </button>
+    </div>
+  </form>
+</div>
+
+<table class="table table-responsive-md text-center table-hover">
+  <thead>
+    <tr class="table-header">
+      <th>Role Code</th>
+      <th>Role Name</th>
+      <th>Active</th>
+      <th>Users</th>
+      <th>Forms</th>
+      <th>Form Features</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of resultData?.returnObject.data">
+      <td>{{item.roleCode}}</td>
+      <td align="left">{{item.roleName}}</td>
+      <td>{{item.isActive}}</td>
+      <td>
+        <a class="success p-0" data-original-title="" title="">
+          <i class="ft-edit-2 font-medium-3 mr-2"></i>
+        </a>
+      </td>
+      <td>
+        <a class="success p-0" data-original-title="" title="" [routerLink]="['/systemSetting/role/detail']"
+          [queryParams]="{refOrgId:item.refOrgId,mode:'edit'}">
+          <i class="ft-edit-2 font-medium-3 mr-2"></i>
+        </a>
+      </td>
+      <td>
+        <a class="success p-0" data-original-title="" title="" [routerLink]="['/systemSetting/role/detail']"
+          [queryParams]="{refOrgId:item.refOrgId,mode:'edit'}">
+          <i class="ft-edit-2 font-medium-3 mr-2"></i>
+        </a>
+      </td>
+      <td>
+        <a class="success p-0" data-original-title="" title="" [routerLink]="['/systemSetting/role/detail']"
+          [queryParams]="{refOrgId:item.refOrgId,mode:'edit'}">
+          <i class="ft-edit-2 font-medium-3 mr-2"></i>
+        </a>
+      <a class="danger p-0" data-original-title="" title="" (click)="del(item.refOrgId)">
+        <i class="ft-x font-medium-3 mr-2"></i>
+      </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<i class="fa fa-plus-circle" [routerLink]="['/systemSetting/role/detail']"
+  style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+Current Page : {{pageNow}}
+<div class="d-flex justify-content-center">
+  <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData"
+    [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
+    <fieldset class="form-group">
+      <select id="showData" (change)="changeShowData(showData.value)" #showData class="form-control">
+        <option *ngFor="let item of show" [value]="item">{{item}}</option>
+      </select>
+      </fieldset>
+</div>

@@ -115,4 +115,8 @@ export const Full_ROUTES: Routes = [
     path: 'customer',
     loadChildren: './customer/customer.module#CustomerModule'
   },
+  {
+    path: 'systemSetting',
+    loadChildren: './system-setting/system-setting.module#SystemSettingModule'
+  },
 ];

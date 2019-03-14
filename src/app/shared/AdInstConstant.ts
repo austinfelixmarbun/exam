@@ -1,3 +1,4 @@
+
 export class AdInsConstant{
     public static RestrictionLike = "Like";
     public static RestrictionEq = "Eq";
@@ -27,5 +28,18 @@ export class AdInsConstant{
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
     public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
+
+    //SYSTEM-SETTING
+    //REF-USER
+    public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
+    public static AddRefUser = "/UserManagement/AddRefUser";
+    public static EditRefUser = "/UserManagement/EditRefUser";
+    public static ChangePassword = "/UserManagement/ChangePassword";
+
+    //REF-ROLE
+    public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
+    public static AddRefRole = "/UserManagement/AddRefRole";
+    public static EditRefRole = "/UserManagement/EditRefRole";
+    public static DeleteRefRole = "/UserManagement/DeleteRefRole";
 
 }
