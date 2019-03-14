@@ -5,8 +5,10 @@ import { AuthService } from 'app/shared/auth/auth.service';
 import { formatDate, getLocaleDateTimeFormat } from '@angular/common';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import {CurrentUserContext} from 'app/shared/model/CurrentUserContext.model';
+import { environment } from '../../../../environments/environment';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
+import { Http } from '@angular/http';
 
 @Component({
     selector: 'app-login-page',
@@ -14,46 +16,50 @@ import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current
     styleUrls: ['./login-page.component.scss']
 })
 
-export class LoginPageComponent implements OnInit{
+export class LoginPageComponent implements OnInit {
     @ViewChild('user') userInputRef: ElementRef;
     @ViewChild('pass') userPassRef: ElementRef;
     @ViewChild('f') loginForm: NgForm;
     private previousUrl: string;
     private currentUrl: string;
+    private apiUrl: string;
+    foundationUrl: string;
     jstoday = '';
 
-    constructor(private router: Router,private currentUserContextService:CurrentUserContextService,
-        private route: ActivatedRoute, private Auth: AuthService, private adInsService : AdInsServiceService) {
+    constructor(private router: Router, private currentUserContextService: CurrentUserContextService,
+        private http: Http,
+        private route: ActivatedRoute, private Auth: AuthService, private adInsService: AdInsServiceService) {
         console.log('test')
-        
+
     }
 
-    ngOnInit() { 
+    ngOnInit() {
+        this.foundationUrl = environment.foundationUrl;
         this.currentUrl = this.router.url;
         this.router.events.subscribe(event => {
             console.log(event)
-        if (event instanceof NavigationEnd) {   
-            let today = new Date();
-            this.previousUrl = this.currentUrl;
-            this.currentUrl = event.url;
-            this.jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US');
+            if (event instanceof NavigationEnd) {
+                let today = new Date();
+                this.previousUrl = this.currentUrl;
+                this.currentUrl = event.url;
+                this.jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US');
 
-            var pageAccess = {
-                prevUrl: this.previousUrl,
-                currUrl: this.currentUrl,
-                bussinessDt: this.jstoday
+                var pageAccess = {
+                    prevUrl: this.previousUrl,
+                    currUrl: this.currentUrl,
+                    bussinessDt: this.jstoday
+                }
+                localStorage.setItem('pageAccess', JSON.stringify(pageAccess));
+            };
+            if (event instanceof NavigationStart) {
+                // this.user.getSomeData().subscribe(data =>{
+                //     if (!data.success) {
+                //         this.router.navigate(['pages/login'])
+                //     }
+                // });
             }
-            localStorage.setItem('pageAccess', JSON.stringify(pageAccess));
-        };
-        if (event instanceof NavigationStart) {
-            // this.user.getSomeData().subscribe(data =>{
-            //     if (!data.success) {
-            //         this.router.navigate(['pages/login'])
-            //     }
-            // });
-        }
         });
-    }   
+    }
     onSubmit(event) {
         // this.loginForm.reset();
         event.preventDefault();
@@ -64,7 +70,7 @@ export class LoginPageComponent implements OnInit{
             one: {
                 title: 'first',
                 id: 1,
-                customKey : {
+                customKey: {
                     first: "first",
                     second: "second"
                 }
@@ -83,42 +89,42 @@ export class LoginPageComponent implements OnInit{
             currUrl: '',
             bussinessDt: ''
         };
+        this.apiUrl = this.foundationUrl + AdInsConstant.GetListOffice;
+        var requestObj = { "Username": username, "Password": password };
 
-        // this.adInsService.getData(AdInsConstant.Login).subscribe(data=>{
-            // console.log(data);
-            var currentUserContext = new CurrentUserContext;
-            let today = new Date();
-            var businessDt=formatDate(today, 'yyyy-MM-dd', 'en-US')
-            if("Admin"==username && "Admin"==password)
-            {
-                currentUserContext.UserName=username;
-                currentUserContext.Office="HO";
-                currentUserContext.Role="SUPUSR";
-                currentUserContext.BusinessDate=businessDt;
-                currentUserContext.TokenId="dbbbf15f-2360-3a32-b6e9-2373d8b5556b";
-                this.currentUserContextService.addCurrentUserContext(currentUserContext);
-                this.router.navigate(['dashboard/dash-board']);
-            }
-            else{
-                window.alert('Login Failed');
-            }
-            //this.router.navigate(['dashboard/dashboard1']);
-        // })
-        // console.log(username, password);
+        // this.http.post(this.apiUrl,requestObj).subscribe(
+        //     (response) => {
+        //       console.log(response);
+        //       currentUserContext.UserName=username;
+        //         currentUserContext.Office="HO";
+        //         currentUserContext.Role="SUPUSR";
+        //         currentUserContext.BusinessDate=businessDt;
+        //         currentUserContext.TokenId="dbbbf15f-2360-3a32-b6e9-2373d8b5556b";
+        //         this.currentUserContextService.addCurrentUserContext(currentUserContext);
+        //       this.router.navigate(['dashboard/dash-board']);
 
-        // this.Auth.getuserDetails(username, password).subscribe(data =>{
-        // if (data['success']) {
-        //     localStorage.setItem('currentUserContext', JSON.stringify(myObj));
-        //     localStorage.setItem('pageAccess', JSON.stringify(pageAccess));
-        //     //redirect the person to admin
-        //     this.router.navigate(['dashboard/dashboard1'])
-        //     this.Auth.setLoggedIn(true)
-        // }else{
-        //     window.alert(data['message'])
-        // }
-        // this.Auth.getuserDetails(username,password).subscribe(data=>{
-        //     if(data.UserName)
-        // })
+        //     },
+        //     (error) => {
+        //       console.log("Error");
+        //       console.log(error);
+        //     }
+        //   );
+        var currentUserContext = new CurrentUserContext;
+        let today = new Date();
+        var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US')
+        if ("Admin" == username && "Admin" == password) {
+            currentUserContext.UserName = username;
+            currentUserContext.Office = "HO";
+            currentUserContext.Role = "SUPUSR";
+            currentUserContext.BusinessDate = businessDt;
+            currentUserContext.TokenId = "dbbbf15f-2360-3a32-b6e9-2373d8b5556b";
+            this.currentUserContextService.addCurrentUserContext(currentUserContext);
+            this.router.navigate(['dashboard/dash-board']);
+        }
+        else {
+            window.alert('Login Failed');
+        }
+
     }
     // On Forgot password link click
     onForgotPassword() {
