@@ -22,7 +22,7 @@ export class RefJobTitleComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
   urlJson: string = "./assets/search/searchJobTitle.json";
   resultData: any;
-  rjtObj : RefJobTitleObj;
+  rjtObj: RefJobTitleObj;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
@@ -39,7 +39,7 @@ export class RefJobTitleComponent implements OnInit {
   pagedItems: any[];
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService, private toastr: NGXToastrService) { 
+  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService, private toastr: NGXToastrService) {
     this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefJobTitle;
   }
 
@@ -119,35 +119,7 @@ export class RefJobTitleComponent implements OnInit {
       );
   }
 
-  delete(refJobId: any) {
-    if(confirm("Are you sure to delete this record?")) {
-      this.rjtObj = new RefJobTitleObj();
-      this.rjtObj.RefJobTitleId = refJobId;
-      this.httpClient.post(this.deleteUrl, this.rjtObj).subscribe(
-        (response) => {
-          this.toastr.successMessage(response['message']);
-        });
-    }
-  }
-  // Success Type
-  typeSuccess() {
-    this.service.typeSuccess();
-  }
-
-  typeError() {
-    this.service.typeError();
-  }
-
-  timeout() {
-    this.service.timeout();
-  }
-
-  errMsg() {
-    this.service.errorMessage('asdasd');
-  }
-
-  onChange(eventValue: any) {
-
+  onChange() {
     var order = null;
     if (this.orderByKey != null) {
       order = {
@@ -168,6 +140,34 @@ export class RefJobTitleComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  delete(refJobId: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      this.rjtObj = new RefJobTitleObj();
+      this.rjtObj.RefJobTitleId = refJobId;
+      this.httpClient.post(this.deleteUrl, this.rjtObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          this.onChange()
+        });
+    }
+  }
+  // Success Type
+  typeSuccess() {
+    this.service.typeSuccess();
+  }
+
+  typeError() {
+    this.service.typeError();
+  }
+
+  timeout() {
+    this.service.timeout();
+  }
+
+  errMsg() {
+    this.service.errorMessage('asdasd');
   }
 
 }

@@ -61,8 +61,7 @@ export class OfficeComponent implements OnInit {
     this.service.errorMessage('asdasd');
   }
 
-  onChange(eventValue: any) {
-
+  onChange() {
     var order = null;
     if (this.orderByKey != null) {
       order = {
