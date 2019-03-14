@@ -48,7 +48,7 @@ Current Page : {{pageNow}}
     <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData"
         [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
     
-        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
         <option [ngValue]="10">10</option>
         <option [ngValue]="20">20</option>
         <option [ngValue]="50">50</option>

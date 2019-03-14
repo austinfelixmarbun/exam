@@ -22,7 +22,7 @@ export class OfficeComponent implements OnInit {
   resultData: string;
   pageNow: any;
   totalData: any;
-  pageSize: any;
+  pageSize: any = 10;
   apiUrl: any;
 
   foundationUrl: string = environment.foundationUrl;
@@ -34,7 +34,7 @@ export class OfficeComponent implements OnInit {
 
   ngOnInit() {
     this.pageNow = 1;
-    this.pageSize = 25;
+    this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListOffice;
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
