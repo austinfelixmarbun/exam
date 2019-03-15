@@ -14,12 +14,12 @@ import { HttpModule } from '@angular/http';
         CommonModule,
         SearchComponent,
         LookupComponent,
-        LookupEmployeeComponent
+        LookupEmployeeComponent,
+        LookupzipcodeComponent
     ],
     imports: [
         CommonModule,
         FormsModule,
-        LookupzipcodeComponent,
         NgbModule,
         HttpModule,
         TranslateModule

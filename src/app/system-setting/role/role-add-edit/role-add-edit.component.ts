@@ -90,60 +90,59 @@ export class RoleAddEditComponent implements OnInit {
   Save(RoleAddEditForm: NgForm): void {
     this.spinner.show();
     var getRoleUrl = this.foundationUrl + AdInsConstant.GetRefRole;
-    var duplicate: string;
     var roleObj: RefRoleObj;
     roleObj = new RefRoleObj()
     roleObj.roleCode = RoleAddEditForm.value.roleCodeModel;
 
-    this.httpClient.post(getRoleUrl, roleObj).subscribe(
-      (response) => {
-        console.log("Success Check Duplicate");
-        roleObj = response['returnObject'];
-        if (roleObj !== null) {
-          duplicate = '1';
-        }
-        else {
-          duplicate = '0';
-        }
-      },
-      (error) => {
-        console.log("Error Check Duplicate");
-        this.service.typeErrorCustom(error);
-      }
-    );
 
+
+    //MODE-ADD
     if (this.type !== 'edit') {
-      if (duplicate !== '' && duplicate !== undefined && duplicate !== '1') {
-        this.apiUrl = this.foundationUrl + AdInsConstant.AddRefRole;
 
-        this.refRoleObj = new RefRoleObj();
-        this.refRoleObj.roleCode = RoleAddEditForm.value.roleCodeModel;
-        this.refRoleObj.roleName = RoleAddEditForm.value.roleNameModel;
-        if (RoleAddEditForm.value.isActive) { this.refRoleObj.isActive = '1' } else { this.refRoleObj.isActive = '0' };
-
-        //SAVE
-        this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
-          (response) => {
-            console.log("Success Save");
-
-            this.service.typeSave('Save Successed');
-            this.location.back();
-            this.spinner.hide();
-
-          },
-          (error) => {
-            console.log("Error Save");
-
-            this.service.typeErrorCustom(error);
-            this.spinner.hide();
+      //CHECK-DUPLICATE-CODE
+      this.httpClient.post(getRoleUrl, roleObj).subscribe(
+        (response) => {
+          console.log("Success Check Duplicate");
+          roleObj = response['returnObject'];
+          if (roleObj !== null) {
+            this.service.typeErrorCustom('Code Has Been Used');
           }
-        );
-      }
-      else {
-        this.service.typeErrorCustom('Code Has Been Used');
-        this.spinner.hide();
-      }
+          else {
+            this.apiUrl = this.foundationUrl + AdInsConstant.AddRefRole;
+
+            this.refRoleObj = new RefRoleObj();
+            this.refRoleObj.roleCode = RoleAddEditForm.value.roleCodeModel;
+            this.refRoleObj.roleName = RoleAddEditForm.value.roleNameModel;
+            if (RoleAddEditForm.value.isActive) { this.refRoleObj.isActive = '1' } else { this.refRoleObj.isActive = '0' };
+
+            //SAVE
+            this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
+              (response) => {
+                console.log("Success Save");
+
+                this.service.typeSave('Save Successed');
+                this.location.back();
+                this.spinner.hide();
+
+              },
+              (error) => {
+                console.log("Error Save");
+
+                this.service.typeErrorCustom(error);
+                this.spinner.hide();
+              }
+            );
+          }
+        },
+        (error) => {
+          console.log("Error Check Duplicate");
+          this.service.typeErrorCustom(error);
+        }
+      );
+
+
     }
+    //MODE-EDIT
     else {
       this.apiUrl = this.foundationUrl + AdInsConstant.EditRefRole;
 
