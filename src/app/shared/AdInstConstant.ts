@@ -7,6 +7,9 @@ export class AdInsConstant{
     public static Login="";
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
     public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
+    public static GetRefEmployeeById = "/RefEmp/GetEmp"
+    public static AddRefEmp = "/RefEmp/AddRefEmp";
+    public static EditRefEmp = "/RefEmp/EditRefEmp";
     public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
     public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";
@@ -14,6 +17,8 @@ export class AdInsConstant{
     public static AddRefJobTitle = "/OrganizationDefinition/AddRefJobTitle";
     public static EditRefJobTitle = "/OrganizationDefinition/EditRefJobTitle";
     public static DeleteRefJobTitle = "/OrganizationDefinition/DeleteRefJobTitle";
+    public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
+    public static GetJobPositionLvl = "/OrganizationDefinition/GetJobPositionLvl";
     public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
     public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
     public static GetBankPaging = "/RefBank/GetRefBankPaging";

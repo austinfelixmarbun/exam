@@ -1,42 +1,280 @@
+<h4>EMPLOYEE</h4>
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title" id="horz-layout-colored-controls">Employee Add</h4>
+      <h4 class="card-title" id="horz-layout-colored-controls">Employee {{pageType}}</h4>
     </div>
     <div class="card-body">
       <div class="px-3">
-        <form class="form form-horizontal">
+        <form class="form form-horizontal" name="RefEmpForm" #RefEmpForm="ngForm" novalidate
+          (ngSubmit)="RefEmpForm.form.valid && SaveForm(RefEmpForm)">
           <div class="form-body">
-            <h4 class="form-section"><i class="ft-file-text"></i> Add/ Edit</h4>
+            <h4 class="form-section"><i class="ft-file-text"></i> {{pageType}}</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="projectinput5">Employee No: </label>
+              <label class="col-md-3 label-control" for="empNo">Employee No: </label>
               <div class="col-md-9">
-                <input type="text" id="projectinput5" class="form-control" name="empNo">
+                <input type="text" class="form-control" name="empNo" required [(ngModel)]="empNo" #EmpNo="ngModel"
+                  [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpNo.invalid }">
+                <div *ngIf="RefEmpForm.submitted && EmpNo.invalid" class="invalid-feedback">
+                  <div *ngIf="EmpNo.errors.required">Employee No is required</div>
+                </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="projectinput5">Employee Name: </label>
+              <label class="col-md-3 label-control" for="empName">Employee Name: </label>
               <div class="col-md-9">
-                <input type="text" id="projectinput5" class="form-control" name="empName">
+                <input type="text" class="form-control" name="empName" required [(ngModel)]="empName" #EmpName="ngModel"
+                  [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpName.invalid }">
+                <div *ngIf="RefEmpForm.submitted && EmpName.invalid" class="invalid-feedback">
+                  <div *ngIf="EmpName.errors.required">Employee Name is required</div>
+                </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="projectinput6">External Employee: </label>
+              <label class="col-md-3 label-control" for="joinDt">Join Date: </label>
               <div class="col-md-9">
-                <select id="projectinput6" name="extEmp" class="form-control">
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
+                <input type="date" id="joinDt" class="form-control" name="joinDt" required
+                  [(ngModel)]="joinDt" #JoinDt="ngModel"
+                  [ngClass]="{ 'is-invalid': RefEmpForm.submitted && JoinDt.invalid }">
+                <div *ngIf="RefEmpForm.submitted && JoinDt.invalid" class="invalid-feedback">
+                  <div *ngIf="JoinDt.errors.required">Join Date is required</div>
+                </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="projectinput6">Active Status: </label>
+                <label class="col-md-3 label-control" for="isExt">External Employee: </label>
+                <div class="col-md-9">
+                    <input class="border-primary" type="checkbox"
+                    [ngModel]="isExt" data-md-icheck (change)="toggleExt($event)" name="isExt">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 label-control" for="isActive">Active Status: </label>
+                <div class="col-md-9">
+                    <input class="border-primary" type="checkbox"
+                    [ngModel]="isActive" data-md-icheck (change)="toggleActive($event)" name="isActive">
+                </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="mobilePhn1">Mobile Phone 1: </label>
               <div class="col-md-9">
-                <select id="projectinput6" name="actStat" class="form-control">
-                  <option value="all">All</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
+                <input type="text" pattern="^[0-9]+$" id="mobilePhn1" class="form-control" name="mobilePhn1"
+                  required [(ngModel)]="mobilePhn1" #MobilePhn1="ngModel"
+                  [ngClass]="{ 'is-invalid': RefEmpForm.submitted && MobilePhn1.invalid }">
+                <div *ngIf="RefEmpForm.submitted && MobilePhn1.invalid" class="invalid-feedback">
+                  <div *ngIf="MobilePhn1.errors.required">Mobile Phone 1 is required</div>
+                  <div *ngIf="MobilePhn1.errors?.pattern">Number Only</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="mobilePhn2">Mobile Phone 2: </label>
+              <div class="col-md-9">
+                <input type="text" pattern="^[0-9]+$" id="mobilePhn2" class="form-control" name="mobilePhn2"
+                  [(ngModel)]="mobilePhn2" #MobilePhn2="ngModel">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="phn1">Phone(Fix Line) 1: </label>
+              <div class="col-md-9">
+                <div class="form-group row">
+                  <div class="col-md-2" style="border-right: 1px solid grey">
+                    <input type="text" pattern="^[0-9]+$" id="phnArea1" class="form-control" name="phnArea1" required
+                      [(ngModel)]="phnArea1" #PhnArea1="ngModel"
+                      [ngClass]="{ 'is-invalid': RefEmpForm.submitted && PhnArea1.invalid }">
+                    <div *ngIf="RefEmpForm.submitted && PhnArea1.invalid" class="invalid-feedback">
+                      <div *ngIf="PhnArea1.errors.required">Phone Area 1 is required</div>
+                      <div *ngIf="PhnArea1.errors?.pattern">Number Only</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4" style="border-right: 1px solid grey">
+                    <input type="text" pattern="^[0-9]+$" id="phn1" class="form-control" name="phn1" required
+                      [(ngModel)]="phn1" #Phn1="ngModel"
+                      [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Phn1.invalid }">
+                    <div *ngIf="RefEmpForm.submitted && Phn1.invalid" class="invalid-feedback">
+                      <div *ngIf="Phn1.errors.required">Phone 1 is required</div>
+                      <div *ngIf="Phn1.errors?.pattern">Number Only</div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" pattern="^[0-9]+$" id="phnExt1" class="form-control" name="phnExt1" required
+                      [(ngModel)]="phnExt1" #PhnExt1="ngModel"
+                      [ngClass]="{ 'is-invalid': RefEmpForm.submitted && PhnExt1.invalid }">
+                    <div *ngIf="RefEmpForm.submitted && PhnExt1.invalid" class="invalid-feedback">
+                      <div *ngIf="PhnExt1.errors.required">Phone Ext 1 is required</div>
+                      <div *ngIf="PhnExt1.errors?.pattern">Number Only</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="phn2">Phone(Fix Line) 2: </label>
+              <div class="col-md-9">
+                <div class="form-group row">
+                  <div class="col-md-2" style="border-right: 1px solid grey">
+                    <input type="text" pattern="^[0-9]+$" id="phnArea2" class="form-control" name="phnArea2"
+                      [(ngModel)]="phnArea2" #PhnArea2="ngModel">
+                  </div>
+                  <div class="col-md-4" style="border-right: 1px solid grey">
+                    <input type="text" pattern="^[0-9]+$" id="phn2" class="form-control" name="phn2"
+                      [(ngModel)]="phn2" #Phn2="ngModel">
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" pattern="^[0-9]+$" id="phnExt2" class="form-control" name="phnExt2"
+                      [(ngModel)]="phnExt2" #PhnExt2="ngModel">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="phn3">Phone(Fix Line) 3: </label>
+              <div class="col-md-9">
+                <div class="form-group row">
+                  <div class="col-md-2" style="border-right: 1px solid grey">
+                    <input type="text" pattern="^[0-9]+$" id="phnArea3" class="form-control" name="phnArea3"
+                      [(ngModel)]="phnArea3" #PhnArea3="ngModel">
+                  </div>
+                  <div class="col-md-4" style="border-right: 1px solid grey">
+                    <input type="text" pattern="^[0-9]+$" id="phn3" class="form-control" name="phn3"
+                      [(ngModel)]="phn3" #Phn2="ngModel">
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" pattern="^[0-9]+$" id="phnExt3" class="form-control" name="phnExt3"
+                      [(ngModel)]="phnExt3" #PhnExt3="ngModel">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="fax">Fax: </label>
+              <div class="col-md-9">
+                <div class="form-group row">
+                  <div class="col-md-2" style="border-right: 1px solid grey">
+                    <input type="text" pattern="^[0-9]+$" id="faxArea" class="form-control" name="faxArea"
+                      [(ngModel)]="faxArea" #FaxArea="ngModel">
+                  </div>
+                  <div class="col-md-4">
+                    <input type="text" pattern="^[0-9]+$" id="fax" class="form-control" name="fax"
+                      [(ngModel)]="fax" #Fax="ngModel">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="email1">Email 1: </label>
+              <div class="col-md-9">
+                <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="email1"
+                  class="form-control" name="email1" required [(ngModel)]="email1" #Email1="ngModel"
+                  [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Email1.invalid }">
+                <div *ngIf="RefEmpForm.submitted && Email1.invalid" class="invalid-feedback">
+                  <div *ngIf="Email1.errors.required">Email 1 is required</div>
+                  <div *ngIf="Email1.errors?.pattern">Email 1 Invalid</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="email2">Email 2: </label>
+              <div class="col-md-9">
+                <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="email2"
+                  class="form-control" name="email2" [(ngModel)]="email2" #Email2="ngModel">
+              </div>
+            </div>
+            <!-- <div class="form-group row">
+              <label class="col-md-3 label-control" for="ktpNo">KTP No: </label>
+              <div class="col-md-9">
+                <input type="text" id="ktpNo" class="form-control" name="IdNo" required [(ngModel)]="ktpNo"
+                  #KtpNo="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && KtpNo.invalid }">
+                <div *ngIf="RefEmpForm.submitted && KtpNo.invalid" class="invalid-feedback">
+                  <div *ngIf="KtpNo.errors.required">KTP No is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="npwp">NPWP : </label>
+              <div class="col-md-9">
+                <input type="text" id="npwp" class="form-control" name="npwp" required [(ngModel)]="npwp"
+                  #Npwp="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Npwp.invalid }">
+                <div *ngIf="RefEmpForm.submitted && Npwp.invalid" class="invalid-feedback">
+                  <div *ngIf="Npwp.errors.required">NPWP No is required</div>
+                </div>
+              </div>
+            </div> -->
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="address">Address: </label>
+              <div class="col-md-9">
+                <textarea id="address" rows="5" class="form-control" name="addr" required [(ngModel)]="addr"
+                  #Addr="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Addr.invalid }"></textarea>
+                <div *ngIf="RefEmpForm.submitted && Addr.invalid" class="invalid-feedback">
+                  <div *ngIf="Addr.errors.required">Address is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="rt">Rt / Rw: </label>
+              <div class="col-md-9">
+                <div class="form-group row">
+                  <div class="col-md-2" style="border-right: 1px solid grey">
+                    <input type="text" pattern="^[0-9]+$" id="rt" class="form-control" name="rt" required
+                      [(ngModel)]="rt" #Rt="ngModel"
+                      [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Rt.invalid }">
+                    <div *ngIf="RefEmpForm.submitted && Rt.invalid" class="invalid-feedback">
+                      <div *ngIf="Rt.errors.required">RT is required</div>
+                      <div *ngIf="Rt.errors?.pattern">Number Only</div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" pattern="^[0-9]+$" id="rw" class="form-control" name="rw" required
+                      [(ngModel)]="rw" #Rw="ngModel"
+                      [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Rw.invalid }">
+                    <div *ngIf="RefEmpForm.submitted && Rw.invalid" class="invalid-feedback">
+                      <div *ngIf="Rw.errors.required">RW is required</div>
+                      <div *ngIf="Rw.errors?.pattern">Number Only</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="zipcode">Zipcode: </label>
+              <div class="col-md-3">
+                <input type="text" pattern="^[0-9]+$" id="zipcode" class="form-control" name="zipcode" required
+                  [(ngModel)]="zipcode" #Zipcode="ngModel"
+                  [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Zipcode.invalid }">
+                <div *ngIf="RefEmpForm.submitted && Zipcode.invalid" class="invalid-feedback">
+                  <div *ngIf="Zipcode.errors.required">Zipcode is required</div>
+                  <div *ngIf="Zipcode.errors?.pattern">Number Only</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="kelurahan">Kelurahan: </label>
+              <div class="col-md-9">
+                <input type="text" id="kelurahan" class="form-control" name="kelurahan" required [(ngModel)]="kelurahan"
+                  #Kelurahan="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Kelurahan.invalid }">
+                <div *ngIf="RefEmpForm.submitted && Kelurahan.invalid" class="invalid-feedback">
+                  <div *ngIf="Kelurahan.errors.required">Kelurahan is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="kecamatan">Kecamatan: </label>
+              <div class="col-md-9">
+                <input type="text" id="kecamatan" class="form-control" name="kecamatan" required [(ngModel)]="kecamatan"
+                  #Kecamatan="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Kecamatan.invalid }">
+                <div *ngIf="RefEmpForm.submitted && Kecamatan.invalid" class="invalid-feedback">
+                  <div *ngIf="Kecamatan.errors.required">Kecamatan is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="city">City: </label>
+              <div class="col-md-9">
+                <input type="text" id="city" class="form-control" name="city" required [(ngModel)]="city"
+                  #City="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && City.invalid }">
+                <div *ngIf="RefEmpForm.submitted && City.invalid" class="invalid-feedback">
+                  <div *ngIf="City.errors.required">City is required</div>
+                </div>
               </div>
             </div>
           </div>
@@ -44,7 +282,7 @@
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/employee']">
               <i class="ft-x"></i> Cancel
             </button>
-            <button type="button" class="btn btn-raised btn-primary">
+            <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>
           </div>

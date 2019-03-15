@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeAddComponent } from './employee-add/employee-add.component';
+import { EmployeePositionComponent } from './employee-position/employee-position.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { EmployeeAddComponent } from './employee-add/employee-add.component';
   ],
   declarations: [
     EmployeeComponent,
-    EmployeeAddComponent
+    EmployeeAddComponent,
+    EmployeePositionComponent
   ]
 })
 export class EmployeeModule { }
