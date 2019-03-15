@@ -1,0 +1,88 @@
+<div class="col-sm-12">
+  <h1 class="text-uppercase">User Maintenance - {{type}}</h1>
+</div>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" name="UserAddEditForm" #UserAddEditForm="ngForm" novalidate
+          (ngSubmit)="UserAddEditForm.form.valid && Save(UserAddEditForm)">
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-user"></i> User Maintenance - {{type}} </h4>
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="EmployeeName">Employee Name</label>
+              <div class="col-md-9">
+                <app-lookup-emp  [(ngModel)]="EmployeeName" name="EmployeeName" ngDefaultControl #lookupEmp> </app-lookup-emp>
+                <!--<input type="text" class="form-control" name="EmployeeName" required [(ngModel)]="EmployeeName"
+                    #employeeName="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">
+                  <div *ngIf="UserAddEditForm.submitted && employeeName.invalid" class="invalid-feedback">
+                    <div *ngIf="employeeName.errors.required">Employee Name is required</div>
+                  </div>-->
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="Username">Username</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="Username" required [(ngModel)]="Username"
+                  #username="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">
+                <div *ngIf="UserAddEditForm.submitted && username.invalid" class="invalid-feedback">
+                  <div *ngIf="username.errors.required">Username is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prospectPersonal" *ngIf=" type !== 'Edit' ">
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="Password">Password</label>
+                <div class="col-md-9">
+                  <input type="password" class="form-control" name="Password" required [(ngModel)]="Password"
+                    #password="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">
+                  <div *ngIf="UserAddEditForm.submitted && password.invalid" class="invalid-feedback">
+                    <div *ngIf="password.errors.required">Password is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="RePassword">Re-Password</label>
+                <div class="col-md-9">
+                  <input type="password" class="form-control" name="RePassword" required [(ngModel)]="RePassword"
+                    #rePassword="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">
+                  <div *ngIf="UserAddEditForm.submitted && rePassword.invalid" class="invalid-feedback">
+                    <div *ngIf="rePassword.errors.required">Re-Password is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="LockedStatus">Locked Status</label>
+              <div class="custom-control custom-checkbox m-0">
+                <input type="checkbox" value="0" id="LockedStatus" name="LockedStatus"
+                  [(ngModel)]="LockedStatus" [checked]="LockedStatus">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="IsActive">Active Status</label>
+              <div class="custom-control custom-checkbox m-0">
+                <input type="checkbox" value="1" id="IsActive" name="IsActive" [(ngModel)]="IsActive"
+                  [checked]="IsActive">
+              </div>
+            </div>
+
+          </div>
+          <div class="form-actions">
+            <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+              <i class="ft-x"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

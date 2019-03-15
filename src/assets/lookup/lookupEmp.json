@@ -1,0 +1,29 @@
+{
+  "url": "http://getEmployee",
+  "title":"Lookup Employee",
+  "component": [
+    {
+      "type": "textbox",
+      "name": "empName",
+      "id": "empNaeId",
+      "value": "",
+      "label": "Employee Name",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    }
+  ],
+  "header":[
+      {
+          "label":"Employee Id",
+          "visibility":true
+      },
+      {
+          "label":"Employee Name",
+          "visibility":true
+      },
+      {
+          "label":"Employee No",
+          "visibility":true
+      }
+  ]
+}

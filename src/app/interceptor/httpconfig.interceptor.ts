@@ -64,6 +64,14 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     console.log('event--->>>', event);
+                    if (event.body.isError == true) {
+                        let data = {};
+                        data = {
+                            reason: event.body.message ? event.body.message : '',
+                            status: event.body.statusCode
+                        };
+                        this.errorDialogService.openDialog(data);
+                    }
                     // this.errorDialogService.openDialog(event);
                 }
                 return event;

@@ -20,12 +20,12 @@ import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 export class EmployeeComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
-  urlJson:string = "./assets/search/searchEmployee.json";
-  resultData : string;
-  ExcelData : any;
+  urlJson: string = "./assets/search/searchEmployee.json";
+  resultData: string;
+  ExcelData: any;
   empObj: RefEmpObj;
-  pageNow : any;
-  totalData : any;
+  pageNow: any;
+  totalData: any;
   pageSize: any = 10;
   apiUrl: any;
   deleteUrl: any;
@@ -34,12 +34,12 @@ export class EmployeeComponent implements OnInit {
   orderByValue: boolean = true;
 
   foundationUrl: string = environment.foundationUrl;
-  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private toastr: NGXToastrService, private excelService: ExcelService, private https: HttpClient ) { }
+  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private toastr: NGXToastrService, private excelService: ExcelService, private https: HttpClient) { }
 
-    initiateForm() {
-      this.getJSON(this.urlJson).subscribe(data => {
-        console.log(data);
-        this.exportData = data.exportExcel;
+  initiateForm() {
+    this.getJSON(this.urlJson).subscribe(data => {
+      console.log(data);
+      this.exportData = data.exportExcel;
     });
   }
 
@@ -74,29 +74,31 @@ export class EmployeeComponent implements OnInit {
   }
 
   searchSort(event: any) {
-    if (this.orderByKey == event.target.attributes.name.nodeValue) {
-      this.orderByValue = !this.orderByValue
-    } else {
-      this.orderByValue = true
+    if (this.resultData != null) {
+      if (this.orderByKey == event.target.attributes.name.nodeValue) {
+        this.orderByValue = !this.orderByValue
+      } else {
+        this.orderByValue = true
+      }
+      this.orderByKey = event.target.attributes.name.nodeValue
+      var order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+        .subscribe(
+          (response) => {
+            console.log("Success");
+            this.resultData = response.returnObject;
+            this.totalData = response.returnObject.count;
+            console.log(this.resultData);
+          },
+          (error) => {
+            console.log("Error");
+            console.log(error);
+          }
+        );
     }
-    this.orderByKey = event.target.attributes.name.nodeValue
-    var order = {
-      key: this.orderByKey,
-      value: this.orderByValue
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
   }
 
   searchPagination(event: number) {
@@ -162,7 +164,7 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  exportAsXLSX():void {
+  exportAsXLSX(): void {
     this.searchComponent.search(this.apiUrl, this.pageNow, 9999, null)
       .subscribe(
         (response) => {
@@ -177,12 +179,12 @@ export class EmployeeComponent implements OnInit {
         }
       );
   }
-  
+
   pageChange(page: number) {
     this.pageNow = page;
     this.search();
   }
-  
+
   // Success Type
   typeSuccess() {
     this.toastr.typeSuccess();
@@ -200,4 +202,3 @@ export class EmployeeComponent implements OnInit {
     this.toastr.errorMessage('asdasd');
   }
 }
- 

@@ -118,4 +118,8 @@ export const Full_ROUTES: Routes = [
     path: 'zipcode',
     loadChildren: './zipcode/zipcode.module#ZipcodeModule'
   },
+  {
+    path: 'systemSetting',
+    loadChildren: './system-setting/system-setting.module#SystemSettingModule'
+  },
 ];

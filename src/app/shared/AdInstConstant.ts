@@ -1,3 +1,4 @@
+
 export class AdInsConstant{
     public static RestrictionLike = "Like";
     public static RestrictionEq = "Eq";
@@ -6,6 +7,9 @@ export class AdInsConstant{
     public static Login="";
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
     public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
+    public static GetRefEmployeeById = "/RefEmp/GetEmp"
+    public static AddRefEmp = "/RefEmp/AddRefEmp";
+    public static EditRefEmp = "/RefEmp/EditRefEmp";
     public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
     public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";
@@ -13,6 +17,8 @@ export class AdInsConstant{
     public static AddRefJobTitle = "/OrganizationDefinition/AddRefJobTitle";
     public static EditRefJobTitle = "/OrganizationDefinition/EditRefJobTitle";
     public static DeleteRefJobTitle = "/OrganizationDefinition/DeleteRefJobTitle";
+    public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
+    public static GetJobPositionLvl = "/OrganizationDefinition/GetJobPositionLvl";
     public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
     public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
     public static GetBankPaging = "/RefBank/GetRefBankPaging";
@@ -21,7 +27,6 @@ export class AdInsConstant{
     public static AddRefBank = "/RefBank/AddRefBank";
     public static DeleteRefBank = "/RefBank/DeleteRefBank";
     public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";
-    public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
     public static GetProvince = "/los/v1/get_provinsi";
     public static GetCityByProvince = "/los/v1/get_kota";
     public static getProspectByProspectNo = "/api/MobileProspectTask/GetProspectByProspectNo";
@@ -33,6 +38,19 @@ export class AdInsConstant{
     public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
 
-    public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
-    public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
+    //SYSTEM-SETTING
+    //REF-USER
+    public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
+    public static AddRefUser = "/UserManagement/AddRefUser";
+    public static EditRefUser = "/UserManagement/EditRefUser";
+    public static ChangePassword = "/UserManagement/ChangePassword";
+
+    //REF-ROLE
+    public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
+    public static AddRefRole = "/UserManagement/AddRefRole";
+    public static EditRefRole = "/UserManagement/EditRefRole";
+    public static DeleteRefRole = "/UserManagement/DeleteRefRole";
+    public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
+    public static GetRefRole = "/RefRole/GetRefRole";
+
 }
