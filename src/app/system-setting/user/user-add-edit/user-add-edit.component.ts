@@ -4,7 +4,6 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
@@ -31,20 +30,61 @@ export class UserAddEditComponent implements OnInit {
   RePassword: any;
   LockedStatus: any;
   IsActive: any;
+  RefUserId: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
-    private adInsService: AdInsServiceService,
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private service: NGXToastrService,
-    ) {  }
+    ) {
+      this.route.queryParams.subscribe(params => {
+        if (params['mode'] != null) {
+          this.type = params['mode'];
+        }
+        if (params['refUserId'] != null) {
+          this.RefUserId = params['refUserId'];
+        }
+        console.log(this.type)
+        console.log(this.RefUserId)
+      });
+     }
 
 
   ngOnInit() {
+    if (this.type === 'edit') {
+      this.refUserObj = new RefUserObj()
+      this.refUserObj.refUserId = this.RefUserId
+      this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
+        (response) => {
+          console.log('Success Get');
+          this.refUserObj = response['returnObject'];
+          console.log(this.refUserObj);
+          this.Username = this.refUserObj.username;
+          this.Password = this.refUserObj.password;
+          this.RePassword = this.refUserObj.password;
+          if (this.refUserObj.isActive === '1') {
+            this.IsActive = true;
+          }
+          else {
+            this.IsActive = false;
+          }
+          if (this.refUserObj.isLocked === '1') {
+            this.LockedStatus = true;
+          }
+          else {
+            this.LockedStatus = false;
+          }
+        },
+        (error) => {
+          console.log('Error Get');
+          console.log(error);
+        }
+      );
+    }
   }
 
   Back(): void {
@@ -53,7 +93,7 @@ export class UserAddEditComponent implements OnInit {
 
   Save(UserAddEditForm: NgForm): void {
     this.spinner.show();
-    console.log(UserAddEditForm);
+    console.log(UserAddEditForm.value);
 
     if (this.type !== 'edit') {
 
@@ -66,10 +106,10 @@ export class UserAddEditComponent implements OnInit {
       if (UserAddEditForm.value.IsLocked) { this.refUserObj.isLocked = '1' } else { this.refUserObj.isLocked = '0' };
       if (UserAddEditForm.value.IsActive) { this.refUserObj.isActive = '1' } else { this.refUserObj.isActive = '0' };
 
-      console.log(RefUserObj);
+
 
        //SAVE
-       this.adInsService.postData(this.apiUrl, this.refUserObj).subscribe(
+       this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
         (response) => {
           console.log("Success Save");
 

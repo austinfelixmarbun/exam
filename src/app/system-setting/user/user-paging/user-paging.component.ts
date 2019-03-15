@@ -30,7 +30,8 @@ export class UserPagingComponent implements OnInit {
   show: any;
   exportData: any;
   ExcelData: any;
-
+  orderByKey: any = null;
+  orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
 
   constructor(
@@ -112,6 +113,32 @@ export class UserPagingComponent implements OnInit {
           console.log("Error");
           console.log(error);
           this.spinner.hide();
+        }
+      );
+  }
+
+   searchSort(event: any) {
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
+    }
+    this.orderByKey = event.target.attributes.name.nodeValue
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
         }
       );
   }

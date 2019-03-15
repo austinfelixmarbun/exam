@@ -44,5 +44,7 @@ export class AdInsConstant{
     public static AddRefRole = "/UserManagement/AddRefRole";
     public static EditRefRole = "/UserManagement/EditRefRole";
     public static DeleteRefRole = "/UserManagement/DeleteRefRole";
+    public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
+    public static GetRefRole = "/RefRole/GetRefRole";
 
 }

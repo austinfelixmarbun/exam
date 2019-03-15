@@ -6,14 +6,14 @@
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="RoleAddEditForm" #RoleAddEditForm="ngForm" novalidate
-          (ngSubmit)="RoleAddEditForm.form.valid && Save(RoleAddEditForm)">
+          (ngSubmit)="RoleAddEditForm.form.valid && Save(RoleAddEditForm)" >
           <div class="form-body">
             <h4 class="form-section"><i class="ft-user"></i> Role Maintenance - {{type}} </h4>
             <br>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="RoleCode">Role Code</label>
+              <label class="col-md-3 label-control" for="roleCodeModel">Role Code</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="RoleCode" required [(ngModel)]="RoleCode"
+                <input type="text" class="form-control" name="roleCodeModel" required [(ngModel)]="roleCodeModel"
                   #roleCode="ngModel" [ngClass]="{ 'is-invalid': RoleAddEditForm.submitted && roleCode.invalid }">
                 <div *ngIf="RoleAddEditForm.submitted && roleCode.invalid" class="invalid-feedback">
                   <div *ngIf="roleCode.errors.required">Role Code is required</div>
@@ -22,9 +22,9 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="RoleName">Role Name</label>
+              <label class="col-md-3 label-control" for="roleNameModel">Role Name</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="RoleName" required [(ngModel)]="RoleName"
+                <input type="text" class="form-control" name="roleNameModel" required [(ngModel)]="roleNameModel"
                   #roleName="ngModel" [ngClass]="{ 'is-invalid': RoleAddEditForm.submitted && roleName.invalid }">
                 <div *ngIf="RoleAddEditForm.submitted && roleName.invalid" class="invalid-feedback">
                   <div *ngIf="roleName.errors.required">Role Name is required</div>
@@ -33,10 +33,10 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="IsActive">Active Status</label>
+              <label class="col-md-3 label-control" for="isActive">Active Status</label>
               <div class="custom-control custom-checkbox m-0">
-                <input type="checkbox" value="1" id="IsActive" name="IsActive" [(ngModel)]="IsActive"
-                  [checked]="IsActive">
+                <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
+                  [checked]="isActive">
               </div>
             </div>
 

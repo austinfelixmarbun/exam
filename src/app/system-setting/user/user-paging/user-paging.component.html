@@ -1,12 +1,12 @@
 <h4 class="form-section">User Maintenance</h4>
-<br/>
+<br />
 <app-search id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
 <div class="col-md-12">
   <form>
     <div class="form-actions right">
-        <button *ngIf="exportData" type="button" (click)="exportAsXLSX()" class="btn btn-raised btn-success mr-1">
-            <i class="fa fa-plus-circle"></i> Export Excel
-        </button>
+      <button *ngIf="exportData" type="button" (click)="exportAsXLSX()" class="btn btn-raised btn-success mr-1">
+        <i class="fa fa-plus-circle"></i> Export Excel
+      </button>
       <button type="button" class="btn btn-raised btn-warning mr-1">
         <i class="ft-x"></i> Cancel
       </button>
@@ -20,9 +20,12 @@
 <table class="table table-responsive-md text-center table-hover">
   <thead>
     <tr class="table-header">
-      <th>Username</th>
-      <th>Employee No</th>
-      <th>Employee Name</th>
+      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)" name='username'>Username
+      </span></th>
+      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)" name='empNo'>Employee No
+      </span></th>
+      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)" name='empName'>Employee
+          Name</span></th>
       <th>Roles</th>
       <th>Change Password</th>
       <th>Edit</th>
@@ -59,9 +62,9 @@ Current Page : {{pageNow}}
 <div class="d-flex justify-content-center">
   <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData"
     [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
-    <fieldset class="form-group">
-      <select id="showData" (change)="changeShowData(showData.value)" #showData class="form-control">
-        <option *ngFor="let item of show" [value]="item">{{item}}</option>
-      </select>
-      </fieldset>
+  <fieldset class="form-group">
+    <select id="showData" (change)="changeShowData(showData.value)" #showData class="form-control">
+      <option *ngFor="let item of show" [value]="item">{{item}}</option>
+    </select>
+  </fieldset>
 </div>

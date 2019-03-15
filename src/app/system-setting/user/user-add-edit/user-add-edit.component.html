@@ -13,7 +13,7 @@
             <div class="form-group row">
               <label class="col-md-3 label-control" for="EmployeeName">Employee Name</label>
               <div class="col-md-9">
-                <app-lookup-emp  [(ngModel)]="EmployeeName" name="EmployeeName" ngDefaultControl> </app-lookup-emp>
+                <app-lookup-emp  [(ngModel)]="EmployeeName" name="EmployeeName" ngDefaultControl #lookupEmp> </app-lookup-emp>
                 <!--<input type="text" class="form-control" name="EmployeeName" required [(ngModel)]="EmployeeName"
                     #employeeName="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">
                   <div *ngIf="UserAddEditForm.submitted && employeeName.invalid" class="invalid-feedback">
