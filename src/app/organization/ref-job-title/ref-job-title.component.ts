@@ -72,29 +72,31 @@ export class RefJobTitleComponent implements OnInit {
   }
 
   searchSort(event: any) {
-    if (this.orderByKey == event.target.attributes.name.nodeValue) {
-      this.orderByValue = !this.orderByValue
-    } else {
-      this.orderByValue = true
+    if (this.resultData != null) {
+      if (this.orderByKey == event.target.attributes.name.nodeValue) {
+        this.orderByValue = !this.orderByValue
+      } else {
+        this.orderByValue = true
+      }
+      this.orderByKey = event.target.attributes.name.nodeValue
+      var order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+        .subscribe(
+          (response) => {
+            console.log("Success");
+            this.resultData = response.returnObject;
+            this.totalData = response.returnObject.count;
+            console.log(this.resultData);
+          },
+          (error) => {
+            console.log("Error");
+            console.log(error);
+          }
+        );
     }
-    this.orderByKey = event.target.attributes.name.nodeValue
-    var order = {
-      key: this.orderByKey,
-      value: this.orderByValue
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
   }
 
   searchPagination(event: number) {

@@ -2,33 +2,57 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title" id="horz-layout-colored-controls">Job Title {{type}}</h4>
+      <h4 class="card-title" id="horz-layout-colored-controls">Job Title {{pageType}}</h4>
     </div>
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="RefJobTitleForm" #RefJobTitleForm="ngForm" novalidate
         (ngSubmit)="RefJobTitleForm.form.valid && SaveForm(RefJobTitleForm)">
           <div class="form-body">
-            <h4 class="form-section"><i class="ft-file-text"></i> {{type}}</h4>
+            <h4 class="form-section"><i class="ft-file-text"></i> {{pageType}}</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="JobTitleCode">Job Title Code: </label>
+              <label class="col-md-3 label-control" for="jobTitleCode">Job Title Code: </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="JobTitleCode" [(ngModel)]="JobTitleCode"
-                #jobTitleCode="ngModel">
+                <input type="text" class="form-control" name="jobTitleCode" [(ngModel)]="jobTitleCode"
+                #JobTitleCode="ngModel" [ngClass]="{ 'is-invalid': RefJobTitleForm.submitted && JobTitleCode.invalid }">
+                <div *ngIf="RefJobTitleForm.submitted && JobTitleCode.invalid" class="invalid-feedback">
+                  <div *ngIf="JobTitleCode.errors.required">Job Title Code is required</div>
+                </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="JobTitleName">Job Title Name: </label>
+              <label class="col-md-3 label-control" for="jobTitleName">Job Title Name: </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="JobTitleName" [(ngModel)]="JobTitleName"
-                #jobTitleName="ngModel">
+                <input type="text" class="form-control" name="jobTitleName" [(ngModel)]="jobTitleName"
+                #JobTitleName="ngModel" [ngClass]="{ 'is-invalid': RefJobTitleForm.submitted && JobTitleName.invalid }">
+                <div *ngIf="RefJobTitleForm.submitted && JobTitleName.invalid" class="invalid-feedback">
+                  <div *ngIf="JobTitleName.errors.required">Job Title Name is required</div>
+                </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="Descr">Description: </label>
+              <label class="col-md-3 label-control" for="refOrgId">Organization Level: </label>
               <div class="col-md-9">
-                <textarea rows="5" class="form-control" name="Descr" [(ngModel)]="Descr"
-                #descr="ngModel"></textarea>
+                <select class="form-control" id="refOrgId" name="refOrgId" [(ngModel)]="refOrgId" #RefOrgId="ngModel"
+                  >
+                  <option *ngFor="let ro of allRefOrg" value="{{ro.refOrgId}}">{{ro.orgName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="mrJobPositionLvl">Position Level: </label>
+              <div class="col-md-9">
+                <select class="form-control" id="mrJobPositionLvl" name="mrJobPositionLvl" [(ngModel)]="MrJobPositionLvl" #mrJobPositionLvl="ngModel"
+                  >
+                  <option *ngFor="let pos of allJobPosition" value="{{pos.descr}}">{{pos.descr}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="descr">Description: </label>
+              <div class="col-md-9">
+                <textarea rows="5" class="form-control" name="descr" [(ngModel)]="descr"
+                #Descr="ngModel"></textarea>
               </div>
             </div>
             <div class="form-group row">
