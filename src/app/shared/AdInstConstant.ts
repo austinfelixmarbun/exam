@@ -33,6 +33,6 @@ export class AdInsConstant{
     public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
 
-    public static GetRefZipCode = "/RefZipcode/GetRefZipcodePaging";
-
+    public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
+    public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
 }
