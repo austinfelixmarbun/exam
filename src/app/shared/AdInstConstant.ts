@@ -23,9 +23,10 @@ export class AdInsConstant{
     public static getProspectByProspectNo = "/api/MobileProspectTask/GetProspectByProspectNo";
     public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
     public static addCustPersonal = "";
-
+    public static getRefOfficeObj = "/RefOffice/GetRefOfficeObj";
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
     public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
+    public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
 
 }
