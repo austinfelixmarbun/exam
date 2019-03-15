@@ -7,6 +7,7 @@ export class AdInsConstant{
     public static Login="";
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
     public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
+    public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
     public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
@@ -32,6 +33,7 @@ export class AdInsConstant{
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
     public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
 
+<<<<<<< HEAD
     //SYSTEM-SETTING
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
@@ -46,5 +48,8 @@ export class AdInsConstant{
     public static DeleteRefRole = "/UserManagement/DeleteRefRole";
     public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
     public static GetRefRole = "/RefRole/GetRefRole";
+=======
+    public static GetRefZipCode = "/RefZipcode/GetRefZipcodePaging";
+>>>>>>> 88aa92a9b461f10e209dabc503c107b273252842
 
 }
