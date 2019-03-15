@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 import { SearchComponent } from './search/search.component';
 import {LookupComponent} from './lookup/lookup.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 import { LookupzipcodeComponent } from './lookup/lookupzipcode/lookupzipcode.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule} from '@angular/forms';
@@ -14,7 +13,6 @@ import { HttpModule } from '@angular/http';
         CommonModule,
         SearchComponent,
         LookupComponent,
-        ErrorDialogComponent,
         LookupzipcodeComponent,
         NgbModule,
         HttpModule,
@@ -29,7 +27,6 @@ import { HttpModule } from '@angular/http';
     declarations: [
         SearchComponent,
         LookupComponent,
-        ErrorDialogComponent,
         LookupzipcodeComponent
     ]
 })
