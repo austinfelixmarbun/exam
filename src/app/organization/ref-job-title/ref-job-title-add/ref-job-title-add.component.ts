@@ -19,20 +19,28 @@ export class RefJobTitleAddComponent implements OnInit {
   param: string;
   resultData: any;
   jobTitleId: any;
-  JobTitleCode: any;
-  JobTitleName: any;
-  Descr: any;
+  jobTitleCode: any;
+  jobTitleName: any;
+  refOrgId: any;
+  jobPosition: any;
+  descr: any;
   isInternal: boolean = false;
   rjtObj : RefJobTitleObj;
   apiUrl: any;
   addUrl: any;
   editUrl: any;
+  refOrgUrl: any;
+  allRefOrg: any;
+  allJobPosition: any;
+  jobPositionUrl: any;
   foundationUrl: string = environment.foundationUrl;
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitleById;
     this.addUrl = this.foundationUrl + AdInsConstant.AddRefJobTitle;
     this.editUrl = this.foundationUrl + AdInsConstant.EditRefJobTitle;
+    this.refOrgUrl = this.foundationUrl + AdInsConstant.GetListAllRefOrg;
+    this.jobPositionUrl = this.foundationUrl + AdInsConstant.GetJobPositionLvl;
 
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
@@ -47,6 +55,33 @@ export class RefJobTitleAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.httpClient.post(this.refOrgUrl, null).subscribe(
+      (response) => {
+        console.log("Success");
+        console.log(response);
+        this.allRefOrg = response['returnObject'];
+        this.refOrgId = response['returnObject'][0]['refOrgId']
+        console.log(this.allRefOrg);
+      },
+      (error) => {
+        console.log("Error");
+        console.log(error);
+      }
+    );
+    this.httpClient.post(this.jobPositionUrl, null).subscribe(
+      (response) => {
+        console.log("Success");
+        console.log(response);
+        this.allJobPosition = response['returnObject'];
+        this.jobPosition = response['returnObject'][0]['jobPositionId']
+        console.log(this.allJobPosition);
+      },
+      (error) => {
+        console.log("Error");
+        console.log(error);
+      }
+    );
+
     if (this.pageType == "edit") {
       this.rjtObj = new RefJobTitleObj()
       this.rjtObj.RefJobTitleId = this.jobTitleId
@@ -55,9 +90,10 @@ export class RefJobTitleAddComponent implements OnInit {
           console.log("Success");
           this.resultData = response['returnObject'];
           console.log(this.resultData);
-          this.JobTitleCode = response['returnObject']['jobTitleCode']
-          this.JobTitleName = response['returnObject']['jobTitleName']
-          this.Descr = response['returnObject']['descr']
+          this.jobTitleCode = response['returnObject']['jobTitleCode']
+          this.jobTitleName = response['returnObject']['jobTitleName']
+          this.descr = response['returnObject']['descr']
+          this.refOrgId = response['returnObject']['refOrgId']
           if (this.resultData.isInternal == "1") {
             this.isInternal = true;
           }
@@ -88,16 +124,17 @@ export class RefJobTitleAddComponent implements OnInit {
         this.rjtObj.IsInternal = "1";
       }
       this.rjtObj.MrJobPositionLvl = '3';
-      this.rjtObj.RefOrgId = '1';
 
       console.log(JSON.stringify(this.rjtObj))
       console.log(this.rjtObj);
       this.httpClient.post(this.addUrl, this.rjtObj).subscribe(
         (response) => {
-          console.log("Success");
           console.log(response);
-          this.toastr.successMessage(response['returnObject']['refJobTitleId']);
-          this.router.navigate(["/organization/refjobtitle"]);
+          if (response['isError'] != true) {
+            this.toastr.successMessage(response['returnObject']['refJobTitleId']);
+            this.router.navigate(["/organization/refjobtitle"]);
+          }else{
+          }
         },
         (error) => {
           console.log("Error");
