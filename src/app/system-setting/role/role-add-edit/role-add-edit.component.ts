@@ -73,6 +73,7 @@ export class RoleAddEditComponent implements OnInit {
           else {
             this.isActive = false;
           }
+
         },
         (error) => {
           console.log('Error Get');

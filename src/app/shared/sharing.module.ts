@@ -12,19 +12,20 @@ import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
         CommonModule,
         SearchComponent,
         LookupComponent,
-        LookupEmployeeComponent
-
+        LookupEmployeeComponent,
+        ErrorDialogComponent
     ],
     imports: [
         CommonModule,
         FormsModule,
-
+        ErrorDialogComponent,
         TranslateModule
     ],
     declarations: [
         SearchComponent,
         LookupComponent,
-        LookupEmployeeComponent
+        LookupEmployeeComponent,
+        ErrorDialogComponent
 
     ]
 })

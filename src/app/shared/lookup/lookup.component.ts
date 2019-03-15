@@ -5,13 +5,29 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { formatDate } from '@angular/common';
 import { SearchComponent } from '../search/search.component';
+import { ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-lookup',
   templateUrl: './lookup.component.html',
   styleUrls: ['./lookup.component.scss']
 })
-export class LookupComponent implements OnInit {
+export class LookupComponent implements OnInit,ControlValueAccessor {
+  value:string;
+  onChange:() => void;
+  writeValue(value:string): void {
+    this.value=value ? value: '';
+    throw new Error("Method not implemented.");
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    throw new Error("Method not implemented.");
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    throw new Error("Method not implemented.");
+  }
 
   constructor(private modalService: NgbModal) { }
 

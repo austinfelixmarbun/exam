@@ -78,3 +78,8 @@ form label{
     margin-left:0px !important;
     padding-top:10px;
 }
+
+.mat-dialog-container {
+    background-color: #BD362F;
+    color: #FFFFFF;
+}

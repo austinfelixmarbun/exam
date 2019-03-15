@@ -14,7 +14,8 @@
               <label class="col-md-3 label-control" for="roleCodeModel">Role Code</label>
               <div class="col-md-9">
                 <input type="text" class="form-control" name="roleCodeModel" required [(ngModel)]="roleCodeModel"
-                  #roleCode="ngModel" [ngClass]="{ 'is-invalid': RoleAddEditForm.submitted && roleCode.invalid }">
+                  #roleCode="ngModel" [ngClass]="{ 'is-invalid': RoleAddEditForm.submitted && roleCode.invalid }"
+                  [attr.disabled]="type === 'edit' ? true : null">
                 <div *ngIf="RoleAddEditForm.submitted && roleCode.invalid" class="invalid-feedback">
                   <div *ngIf="roleCode.errors.required">Role Code is required</div>
                 </div>

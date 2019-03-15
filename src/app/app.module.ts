@@ -28,6 +28,7 @@ import { UserMaintenanceComponent } from './user/user-maintenance/user-maintenan
 import { HttpModule } from '@angular/http';
 import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
 import { ErrorDialogService } from './error-dialog/error-dialog.service';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -39,7 +40,8 @@ export function createTranslateLoader(http: HttpClient) {
         AppComponent,
         FullLayoutComponent,
         ContentLayoutComponent,
-        UserMaintenanceComponent
+        UserMaintenanceComponent,
+        ErrorDialogComponent
     ],
     imports: [
         HttpModule,
@@ -72,6 +74,7 @@ export function createTranslateLoader(http: HttpClient) {
         ErrorDialogService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [ErrorDialogComponent]
 })
 export class AppModule { }
