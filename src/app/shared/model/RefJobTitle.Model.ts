@@ -5,10 +5,5 @@ export class RefJobTitleObj{
     Descr: string
     IsInternal: string
     MrJobPositionLvl: string
-    RefOrgId : number
-
-    constructor()
-    {
-    }
-
+    RefOrgId : string
 }

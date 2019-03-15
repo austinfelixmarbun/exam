@@ -83,4 +83,8 @@ export class NGXToastrService {
     successMessage(msg) {
         this.toastr.success(msg, 'Success!');
     }
+
+    errorAPI(status, reason) {
+        this.toastr.error(reason, 'Status: ' + status, { "tapToDismiss": true});   
+    }
 }

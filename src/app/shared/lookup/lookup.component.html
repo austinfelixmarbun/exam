@@ -1,5 +1,5 @@
 <div class="input-group">
-  <input type="text" class="form-control search-form-control" attr.data-json='{{jsonSelect}}'
+  <input type="text" (input)="onChange($event.target.value)" class="form-control search-form-control" attr.data-json='{{jsonSelect}}'
     attr.data-inputId='{{idSelect}}' name="MsNewCatalogId" attr.data-datatype="Text" value="{{nameSelect}}" disabled>
   <div class="input-group-append">
     <span class="input-group-btn">

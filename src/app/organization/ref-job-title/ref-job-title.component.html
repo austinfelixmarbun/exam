@@ -16,10 +16,14 @@
 <table class="table table-responsive-md text-center table-hover">
     <thead>
         <tr class="table-header">
-            <th class="text-left pointer" (click)="searchSort($event)" name='jobTitleCode'>Job Title Code</th>
-            <th class="text-left pointer" (click)="searchSort($event)" name='jobTitleName'>Job Title Name</th>
-            <th class="text-left pointer" (click)="searchSort($event)" name='descr'>Description</th>
-            <th (click)="search($event)" name='mrJobPositionLvl'>Position Level</th>
+            <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                    name='jobTitleCode'>Job Title Code</span></th>
+            <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                    name='jobTitleName'>Job Title Name</span></th>
+            <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                    name='descr'>Description</span></th>
+            <th><span class="thead-header" (click)="searchSort($event)" name='mrJobPositionLvl'>Position Level</span>
+            </th>
             <th>Action</th>
         </tr>
     </thead>
@@ -34,7 +38,7 @@
                     [queryParams]="{param:'edit',jobTitleId:item.refJobTitleId}">
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>
                 </a>
-                <a class="danger p-0" data-original-title="" title="">
+                <a class="danger p-0" data-original-title="" title="" (click)="delete(item.refJobTitleId)">
                     <i class="ft-x font-medium-3 mr-2"></i>
                 </a>
             </td>
@@ -47,8 +51,8 @@ Current Page : {{pageNow}}
 <div class="d-flex justify-content-center">
     <ngb-pagination (pageChange)="searchPagination($event)" [pageSize]="pageSize" [collectionSize]="totalData"
         [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
-    
-        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize" (change)="onChange()">
+
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize" (change)="onChange()">
         <option [ngValue]="10">10</option>
         <option [ngValue]="20">20</option>
         <option [ngValue]="50">50</option>

@@ -5,6 +5,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharingModule } from 'app/shared/sharing.module';
+
 
 @NgModule({
     imports: [
@@ -13,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         NgSelectModule,
         FormsModule,
         ReactiveFormsModule,
+        SharingModule,
         CommonModule
     ],
     declarations: [

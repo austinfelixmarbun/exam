@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
+import { RefJobTitleObj } from 'app/shared/model/RefJobTitle.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -21,10 +22,12 @@ export class RefJobTitleComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
   urlJson: string = "./assets/search/searchJobTitle.json";
   resultData: any;
+  rjtObj: RefJobTitleObj;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
   apiUrl: any;
+  deleteUrl: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
@@ -36,11 +39,12 @@ export class RefJobTitleComponent implements OnInit {
   pagedItems: any[];
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }
+  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private toastr: NGXToastrService) { }
 
   ngOnInit() {
     this.pageNow = 1;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitle;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefJobTitle;
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
@@ -114,25 +118,7 @@ export class RefJobTitleComponent implements OnInit {
       );
   }
 
-  // Success Type
-  typeSuccess() {
-    this.service.typeSuccess();
-  }
-
-  typeError() {
-    this.service.typeError();
-  }
-
-  timeout() {
-    this.service.timeout();
-  }
-
-  errMsg() {
-    this.service.errorMessage('asdasd');
-  }
-
-  onChange(eventValue: any) {
-
+  onChange() {
     var order = null;
     if (this.orderByKey != null) {
       order = {
@@ -153,6 +139,34 @@ export class RefJobTitleComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  delete(refJobId: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      this.rjtObj = new RefJobTitleObj();
+      this.rjtObj.RefJobTitleId = refJobId;
+      this.httpClient.post(this.deleteUrl, this.rjtObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          this.onChange()
+        });
+    }
+  }
+  // Success Type
+  typeSuccess() {
+    this.toastr.typeSuccess();
+  }
+
+  typeError() {
+    this.toastr.typeError();
+  }
+
+  timeout() {
+    this.toastr.timeout();
+  }
+
+  errMsg() {
+    this.toastr.errorMessage('asdasd');
   }
 
 }
