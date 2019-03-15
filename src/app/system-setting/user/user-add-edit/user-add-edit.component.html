@@ -6,14 +6,14 @@
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="UserAddEditForm" #UserAddEditForm="ngForm" novalidate
-          (ngSubmit)="UserAddEditForm.form.valid && Save(UserAddEditForm)">
+          (ngSubmit)="UserAddEditForm.form.valid && Save(UserAddEditForm, lookupEmp)">
           <div class="form-body">
             <h4 class="form-section"><i class="ft-user"></i> User Maintenance - {{type}} </h4>
             <br>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="EmployeeName">Employee Name</label>
               <div class="col-md-9">
-                <app-lookup-emp  [(ngModel)]="EmployeeName" name="EmployeeName" ngDefaultControl #lookupEmp> </app-lookup-emp>
+                <app-lookup-emp #lookupEmp > </app-lookup-emp>
                 <!--<input type="text" class="form-control" name="EmployeeName" required [(ngModel)]="EmployeeName"
                     #employeeName="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">
                   <div *ngIf="UserAddEditForm.submitted && employeeName.invalid" class="invalid-feedback">
@@ -26,7 +26,8 @@
               <label class="col-md-3 label-control" for="Username">Username</label>
               <div class="col-md-9">
                 <input type="text" class="form-control" name="Username" required [(ngModel)]="Username"
-                  #username="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">
+                  #username="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }"
+                  [attr.disabled]="type === 'edit' ? true : null">
                 <div *ngIf="UserAddEditForm.submitted && username.invalid" class="invalid-feedback">
                   <div *ngIf="username.errors.required">Username is required</div>
                 </div>

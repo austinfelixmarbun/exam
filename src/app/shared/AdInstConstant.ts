@@ -39,6 +39,8 @@ export class AdInsConstant{
     public static AddRefUser = "/UserManagement/AddRefUser";
     public static EditRefUser = "/UserManagement/EditRefUser";
     public static ChangePassword = "/UserManagement/ChangePassword";
+    public static GetUserByUsername = "/UserManagement/GetUserByUsername";
+    public static GetRefUser = "/UserManagement/GetRefUser";
 
     //REF-ROLE
     public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
