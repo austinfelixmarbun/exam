@@ -7,7 +7,6 @@ import {LookupEmployeeComponent} from './lookup/lookup-employee/lookup-employee.
 import { TranslateModule } from '@ngx-translate/core';
 import { LookupzipcodeComponent } from './lookup/lookupzipcode/lookupzipcode.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
@@ -15,37 +14,21 @@ import { HttpModule } from '@angular/http';
         CommonModule,
         SearchComponent,
         LookupComponent,
-<<<<<<< HEAD
-        LookupEmployeeComponent,
-        ErrorDialogComponent
+        LookupEmployeeComponent
     ],
     imports: [
         CommonModule,
         FormsModule,
-        ErrorDialogComponent,
-=======
         LookupzipcodeComponent,
         NgbModule,
         HttpModule,
         TranslateModule
     ],
-    imports: [
-        CommonModule,
-        NgbModule,
-        FormsModule,
->>>>>>> 88aa92a9b461f10e209dabc503c107b273252842
-        TranslateModule
-    ],
     declarations: [
         SearchComponent,
         LookupComponent,
-<<<<<<< HEAD
         LookupEmployeeComponent,
-        ErrorDialogComponent
-
-=======
         LookupzipcodeComponent
->>>>>>> 88aa92a9b461f10e209dabc503c107b273252842
     ]
 })
 

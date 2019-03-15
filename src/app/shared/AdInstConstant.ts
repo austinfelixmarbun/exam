@@ -33,7 +33,6 @@ export class AdInsConstant{
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
     public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
 
-<<<<<<< HEAD
     //SYSTEM-SETTING
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
@@ -48,8 +47,8 @@ export class AdInsConstant{
     public static DeleteRefRole = "/UserManagement/DeleteRefRole";
     public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
     public static GetRefRole = "/RefRole/GetRefRole";
-=======
+
+    //ZIPCODE
     public static GetRefZipCode = "/RefZipcode/GetRefZipcodePaging";
->>>>>>> 88aa92a9b461f10e209dabc503c107b273252842
 
 }
