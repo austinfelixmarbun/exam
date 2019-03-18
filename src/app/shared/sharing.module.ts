@@ -15,7 +15,8 @@ import { HttpModule } from '@angular/http';
         SearchComponent,
         LookupComponent,
         LookupEmployeeComponent,
-        LookupzipcodeComponent
+        LookupzipcodeComponent,
+        NgbModule
     ],
     imports: [
         CommonModule,

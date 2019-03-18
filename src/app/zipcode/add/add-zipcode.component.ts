@@ -110,8 +110,6 @@ export class ZipcodeAddComponent implements OnInit {
             this.zipcodeObj = ZipcodeAddReqForm.value;
             this.zipcodeObj.refProvDistrictId = uclZipcode.idSelect;
             this.zipcodeObj.refZipcodeId = "0";
-            console.log("object = ");
-            console.log(this.zipcodeObj);
             if (this.isActive === false) {
                 this.zipcodeObj.isActive = "0";
             }
@@ -120,7 +118,6 @@ export class ZipcodeAddComponent implements OnInit {
             }
             this.http.post(this.editUrl, this.zipcodeObj).subscribe(
                 (response) => {
-                    console.log(response);
                     this.router.navigateByUrl('/zipcode');
                 },
                 (error)=>

@@ -56,4 +56,7 @@ export class AdInsConstant {
     //ZIPCODE
     public static GetRefZipCode = "/RefZipcode/GetRefZipcodePaging";
     public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
+    public static EditRefZipcode= "/RefZipcode/EditRefZipCode";
+    public static AddRefZipcode= "/RefZipcode/AddRefZipCode";
+    public static DeletRefZipcode = "/RefZipcode/DeleteRefZipCode"
 }
