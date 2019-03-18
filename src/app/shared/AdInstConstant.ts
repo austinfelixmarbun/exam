@@ -42,7 +42,9 @@ export class AdInsConstant {
     public static AddRefEmp = "/RefEmp/AddRefEmp";
     public static EditRefEmp = "/RefEmp/EditRefEmp";
     public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
-
+    public static AddEmpBankAcc = "/EmpBankAcc/AddEmpBankAcc";
+    public static GetEmpBankAccByRefEmpId = "/EmpBankAcc/GetEmpBankAccByRefEmpId";
+    
     //SYSTEM-SETTING
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
@@ -60,6 +62,6 @@ export class AdInsConstant {
 
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
-    public static GetRefZipCode = "/RefZipcode/GetRefZipcodePaging";
+    public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
     public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
 }
