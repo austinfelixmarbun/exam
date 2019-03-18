@@ -1,15 +1,14 @@
-<h4>EMPLOYEE</h4>
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title" id="horz-layout-colored-controls">Employee {{pageType}}</h4>
+      <h4 class="card-title" id="horz-layout-colored-controls">Employee</h4>
     </div>
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="RefEmpForm" #RefEmpForm="ngForm" novalidate
           (ngSubmit)="RefEmpForm.form.valid && SaveForm(RefEmpForm)">
           <div class="form-body">
-            <h4 class="form-section"><i class="ft-file-text"></i> {{pageType}}</h4>
+            <h4 class="form-section card-title"><i class="ft-file-text"></i> Employee - {{pageType}}</h4>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="empNo">Employee No: </label>
               <div class="col-md-9">

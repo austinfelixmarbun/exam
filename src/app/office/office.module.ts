@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { OfficeAddComponent } from './office-add/office-add.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { OfficeAddComponent } from './office-add/office-add.component';
     OfficeRoutingModule,
     CommonModule,
     FormsModule,
+    NgbModule,
     SharingModule
   ],
   declarations: [

@@ -6,27 +6,8 @@ export class AdInsConstant {
     public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
     public static Login = "";
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
-    public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
-    public static GetRefEmployeeById = "/RefEmp/GetEmp"
-    public static AddRefEmp = "/RefEmp/AddRefEmp";
-    public static EditRefEmp = "/RefEmp/EditRefEmp";
-    public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
     public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";
-    public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
-    public static AddRefJobTitle = "/OrganizationDefinition/AddRefJobTitle";
-    public static EditRefJobTitle = "/OrganizationDefinition/EditRefJobTitle";
-    public static DeleteRefJobTitle = "/OrganizationDefinition/DeleteRefJobTitle";
-    public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
-    public static GetJobPositionLvl = "/OrganizationDefinition/GetJobPositionLvl";
-    public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
-    public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
-    public static GetBankPaging = "/RefBank/GetRefBankPaging";
-    public static GetBank = "/RefBank/GetBank";
-    public static EditRefBank = "/RefBank/EditRefBank";
-    public static AddRefBank = "/RefBank/AddRefBank";
-    public static DeleteRefBank = "/RefBank/DeleteRefBank";
-    public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";
     public static GetProvince = "/los/v1/get_provinsi";
     public static GetCityByProvince = "/los/v1/get_kota";
     public static getProspectByProspectNo = "/api/MobileProspectTask/GetProspectByProspectNo";
@@ -36,7 +17,31 @@ export class AdInsConstant {
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
     public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
-    public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
+
+    //REF-JOB-TITLE
+    public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
+    public static AddRefJobTitle = "/OrganizationDefinition/AddRefJobTitle";
+    public static EditRefJobTitle = "/OrganizationDefinition/EditRefJobTitle";
+    public static DeleteRefJobTitle = "/OrganizationDefinition/DeleteRefJobTitle";
+    public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
+    public static GetJobPositionLvl = "/OrganizationDefinition/GetJobPositionLvl";
+    public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
+    public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
+    public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";
+
+    //REF-BANK
+    public static GetBankPaging = "/RefBank/GetRefBankPaging";
+    public static GetBank = "/RefBank/GetBank";
+    public static EditRefBank = "/RefBank/EditRefBank";
+    public static AddRefBank = "/RefBank/AddRefBank";
+    public static DeleteRefBank = "/RefBank/DeleteRefBank";
+
+    //REF-EMP
+    public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
+    public static GetRefEmployeeById = "/RefEmp/GetEmp"
+    public static AddRefEmp = "/RefEmp/AddRefEmp";
+    public static EditRefEmp = "/RefEmp/EditRefEmp";
+    public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
 
     //SYSTEM-SETTING
     //REF-USER
@@ -54,6 +59,7 @@ export class AdInsConstant {
     public static GetRefRole = "/RefRole/GetRefRole";
 
     //ZIPCODE
+    public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
     public static GetRefZipCode = "/RefZipcode/GetRefZipcodePaging";
     public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
     public static EditRefZipcode= "/RefZipcode/EditRefZipCode";

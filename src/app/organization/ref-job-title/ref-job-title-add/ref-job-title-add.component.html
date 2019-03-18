@@ -1,15 +1,14 @@
-<h4>JOB TITLE</h4>
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title" id="horz-layout-colored-controls">Job Title {{pageType}}</h4>
+      <h4 class="card-title" id="horz-layout-colored-controls">Job Title</h4>
     </div>
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="RefJobTitleForm" #RefJobTitleForm="ngForm" novalidate
         (ngSubmit)="RefJobTitleForm.form.valid && SaveForm(RefJobTitleForm)">
           <div class="form-body">
-            <h4 class="form-section"><i class="ft-file-text"></i> {{pageType}}</h4>
+            <h4 class="form-section card-title"><i class="ft-file-text"></i> Job Title - {{pageType}}</h4>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="jobTitleCode">Job Title Code: </label>
               <div class="col-md-9">

@@ -164,6 +164,10 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
+  reset(){
+    this.searchComponent.initiateForm();
+  }
+  
   exportAsXLSX(): void {
     this.searchComponent.search(this.apiUrl, this.pageNow, 9999, null)
       .subscribe(
