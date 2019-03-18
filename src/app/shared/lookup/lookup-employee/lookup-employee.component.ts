@@ -21,11 +21,14 @@ export class LookupEmployeeComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupEmp.json";
   @Input() _url: string;
-
+  @Input() nameSelect: any = "Search ...";
+  @Input() idSelect: any;
+  @Input() jsonSelect:string;
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
 
   EmployeeName: any;
+  EmployeeId: any;
 
   configuration: any;
   urlGet: string;
@@ -36,10 +39,6 @@ export class LookupEmployeeComponent implements OnInit {
   pageNow: any = 1;
   pageSize: any = 25;
   totalData: any;
-
-  jsonSelect: string;
-  idSelect: any;
-  nameSelect: any = "Search ...";
 
   closeResult: string;
 
@@ -53,6 +52,7 @@ export class LookupEmployeeComponent implements OnInit {
     console.log(id + " : " + name);
     console.log(item);
     this.idSelect = id;
+    this.EmployeeId = id;
     this.EmployeeName = name;
     this.nameSelect = name;
     this.jsonSelect = JSON.stringify(item);

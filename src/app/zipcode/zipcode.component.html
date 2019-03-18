@@ -1,0 +1,56 @@
+<app-search id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
+<div class="col-md-12">
+  <form>
+    <div class="form-actions right">
+      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="reset()" translate>
+        <i class="ft-x"></i> Cancel
+      </button>
+      <button type="button" (click)="search()" class="btn btn-raised btn-primary" translate>
+        <i class="fa fa-search"></i> Search
+      </button>
+    </div>
+  </form>
+</div>
+<div>
+  <table class="table table-responsive-md text-center table-hover">
+    <thead>
+      <tr class="table-header">
+        <th translate>Kelurahan</th>
+        <th translate>Kecamatan</th>
+        <th translate>City</th>
+        <th translate>Zipcode</th>
+        <th translate>Sub Zipcode</th>
+        <th translate>District Name</th> 
+        <th translate>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of resultData?.returnObject?.data">
+        <td>{{item.kelurahan}}</td>
+        <td>{{item.kecamatan}}</td>
+        <td>{{item.city}}</td>
+        <td>{{item.zipcode}}</td>
+        <td>{{item.subZipcode}}</td>
+        <td>{{item.districtName}}</td>
+        <td>
+          <a class="success p-0" data-original-title="" title="" [routerLink]="['/zipcode/add']"
+            [queryParams]="{refZipcodeId:item.refZipcodeId,mode:'edit'}">
+            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+          </a>
+          <a class="danger p-0" data-original-title="" title="" (click)="delete(item.refZipcodeId)">
+            <i class="ft-x font-medium-3 mr-2"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <i class="fa fa-plus-circle" [routerLink]="['/zipcode/add']"
+    style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+</div>
+<div translate>
+  Current Page : {{pageNow}}
+</div>
+<div class="d-flex justify-content-center">
+  <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData"
+    [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
+</div>

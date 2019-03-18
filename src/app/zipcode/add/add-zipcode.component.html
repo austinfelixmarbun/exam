@@ -1,0 +1,82 @@
+<div class="row text-left">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title" id="horz-layout-colored-controls" translate>Add / Edit Zipcode</h4>
+            </div>
+            <div class="card-body">
+                <div class="px-3">
+                    <form class="form form-horizontal" name="BankAddReqForm" #BankAddReqForm="ngForm"
+                        (ngSubmit)="Save(BankAddReqForm, uclZipcode)">
+                        <div class="form-body">
+                            <h4 class="form-section" translate><i class="ft-file-text"></i> Add/ Edit</h4>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="projectinput5" translate>Kelurahan : </label>
+                                <div class="col-md-9">
+                                    <input type="text" id="projectinput5" class="form-control" name="kelurahan"
+                                        [ngModel]="result?.kelurahan" #kelurahan="ngModel">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="projectinput5" translate>Kecamatan : </label>
+                                <div class="col-md-9">
+                                    <input type="text" id="projectinput5" class="form-control" name="kecamatan"
+                                    [ngModel]="result?.kecamatan" #kecamatan="ngModel">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="projectinput6" translate>City: </label>
+                                <div class="col-md-9">
+                                    <textarea id="projectinput5" class="form-control" name="city"
+                                    [ngModel]="result?.city" #city="ngModel"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="userinput5" translate>Zipcode: </label>
+                                <div class="col-md-9">
+                                    <textarea id="projectinput5" class="form-control" name="zipcode"
+                                    [ngModel]="result?.zipcode" #zipcode="ngModel"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="userinput5" translate>Sub Zipcode: </label>
+                                <div class="col-md-9">
+                                    <textarea id="projectinput5" class="form-control" name="subZipcode"
+                                    [ngModel]="result?.subZipcode" #subZipcode="ngModel"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="userinput5" translate>District : </label>
+                                <div class="col-md-9">
+                                    <app-lookupzipcode #uclZipcode [nameSelect] = "districtName" [idSelect]="idSelect" [jsonSelect]="jsonSelect"></app-lookupzipcode>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="userinput5" translate>Phone Area Number : </label>
+                                <div class="col-md-9">
+                                    <textarea id="projectinput5" class="form-control" name="phnArea"
+                                    [ngModel]="result?.phnArea" #phnArea="ngModel"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="userinput5" translate>Is Active : </label>
+                                <div class="col-md-9">
+                                    <input class="border-primary" type="checkbox"
+                                    [ngModel]="isActive" data-md-icheck (change)="toggleVisibility($event)" id="projectinput5" name="isActive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions right">
+                            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/zipcode']" translate>
+                                <i class="ft-x"></i> Cancel
+                            </button>
+                            <button type="submit" class="btn btn-raised btn-primary" translate>
+                                <i class="fa fa-check-square-o"></i> Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

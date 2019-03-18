@@ -4,5 +4,10 @@ export class RefUserObj {
   password: string;
   isLocked: string;
   isActive: string;
-  refEmpId: string;
+  refEmpId: number;
+  newPass: string;
+  oldPass: string;
+  newPassVerif: string;
+
+
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
+import { OfficeObj } from 'app/shared/model/OfficeObj.model';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-office-add',
@@ -14,13 +16,17 @@ export class OfficeAddComponent implements OnInit {
   
   type: string = "add";
   param: string;
-  resultData: any;
+  result: any;
   refOfficeId: any
   apiUrl: any
   foundationUrl: string = environment.foundationUrl;
+  isActive: any = 1;
+  isVirtualOffice: any = 1;
+  addEditUrl : any;
+  officeObj: OfficeObj;
 
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitleById; 
+  constructor(private router: Router,private route: ActivatedRoute, private httpClient: HttpClient) {
+    this.apiUrl = this.foundationUrl + AdInsConstant.getRefOfficeObj; 
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
         this.type = params['param'];
@@ -40,8 +46,10 @@ export class OfficeAddComponent implements OnInit {
     this.httpClient.post(this.apiUrl, refOfficeObj).subscribe(
       (response) => {
         console.log("Success");
-        this.resultData = response['returnObject'];
-        console.log(this.resultData);
+        this.result = response['returnObject'];
+        this.isActive = this.result.isActive;
+        this.isVirtualOffice = this.result.isVirtualOffice;
+        console.log(this.result);
       },
       (error) => {
         console.log("Error");
@@ -50,5 +58,39 @@ export class OfficeAddComponent implements OnInit {
     );
     }
   }
+
+  Save(OfficeAddReqForm: NgForm): void {
+    if (this.type === "edit") {
+        this.addEditUrl = this.foundationUrl + AdInsConstant.EditRefBank;
+        this.officeObj = new OfficeObj();
+        this.officeObj = OfficeAddReqForm.value;
+        this.officeObj.refOfficeId = this.param;
+        this.httpClient.post(this.addEditUrl, this.officeObj).subscribe(
+            (response) => {
+                console.log(response);
+                this.router.navigateByUrl('/bank');
+            },
+            (error)=>
+            {
+                console.log(error);
+            });
+    }
+    else
+    {
+        this.addEditUrl = this.foundationUrl + AdInsConstant.AddRefBank;
+        this.officeObj = new OfficeObj();
+        this.officeObj = OfficeAddReqForm.value;
+        this.officeObj.refOfficeId = "0";
+        this.httpClient.post(this.addEditUrl, this.officeObj).subscribe(
+            (response) => {
+                console.log(response);
+                this.router.navigateByUrl('/bank');
+            },
+            (error)=>
+            {
+                console.log(error);
+            });
+    }
+}
 
 }

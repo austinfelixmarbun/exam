@@ -14,7 +14,9 @@ export class LookupzipcodeComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupZipcode.json";
   @Input() _url: string;
-
+  @Input() nameSelect: any = "Search ...";
+  @Input() idSelect: any;
+  @Input() jsonSelect:string;
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
 
@@ -25,9 +27,9 @@ export class LookupzipcodeComponent implements OnInit {
   title: string;
   
 
-  jsonSelect:string;
-  idSelect: any;
-  nameSelect: any = "Search ...";
+  
+  
+  
 
   closeResult: string;
 
@@ -46,7 +48,7 @@ export class LookupzipcodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiUrl = environment.foundationUrl+AdInsConstant.GetRefZipCode;
+    this.apiUrl = environment.foundationUrl+AdInsConstant.GetRefZipcodePaging;
     this.pageSize = 10;
   }
 
