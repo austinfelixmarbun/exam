@@ -27,7 +27,7 @@
         },
         {   
             "type": "dropdown",
-            "name": "activeStatus",
+            "name": "isActive",
             "id": "activeStatusId",
             "label" : "Active Status",
             "value": "",

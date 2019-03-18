@@ -73,7 +73,7 @@ export class RefJobTitleAddComponent implements OnInit {
         console.log("Success");
         console.log(response);
         this.allJobPosition = response['returnObject'];
-        this.jobPosition = response['returnObject'][0]['jobPositionId']
+        // this.jobPosition = response['returnObject'][0]['jobPositionId']
         console.log(this.allJobPosition);
       },
       (error) => {
