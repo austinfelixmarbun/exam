@@ -39,11 +39,8 @@ export class AdInsConstant {
     public static AddRefBank = "/RefBank/AddRefBank";
     public static DeleteRefBank = "/RefBank/DeleteRefBank";
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 2ee0187b52f4c0e4bf290c3a4a7c762548b07231
     //REF-EMP
     public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
     public static GetRefEmployeeById = "/RefEmp/GetEmp"
@@ -55,7 +52,7 @@ export class AdInsConstant {
     public static AddRefEmpAndEmpBankAcc = "/RefEmp/AddRefEmpAndEmpBankAcc";
     public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
     public static DeleteRefEmpAndEmpBankAcc = "/RefEmp/DeleteRefEmpAndEmpBankAcc";
-    
+
     //SYSTEM-SETTING
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
