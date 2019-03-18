@@ -20,7 +20,7 @@
         },
         {
             "type": "dropdown",
-            "name": "extEmp",
+            "name": "isExt",
             "id": "extEmpId",
             "value": "External Employee",
             "placeholder": "Placeholder",
@@ -42,7 +42,7 @@
         },
         {
             "type": "dropdown",
-            "name": "actStat",
+            "name": "isActive",
             "id": "actStatId",
             "value": "Active Status",
             "placeholder": "Placeholder",

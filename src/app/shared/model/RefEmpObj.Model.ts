@@ -30,4 +30,10 @@ export class RefEmpObj {
     email1: string
     email2: string
     imageLocation: string
+    EmpBankAccId : number
+    refBankId : number
+    bankBranch : string
+    bankBranchBiCode : string
+    bankAccNo : string
+    bankAccName : string
 }  

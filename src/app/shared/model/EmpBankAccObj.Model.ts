@@ -1,5 +1,5 @@
 export class EmpBankAccObj {
-    empbankAccId : number;
+    empBankAccId : number;
     refEmpId : number;
     refBankId : number;
     bankBranch : string;
