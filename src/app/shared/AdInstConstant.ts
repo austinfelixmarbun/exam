@@ -1,10 +1,10 @@
 
-export class AdInsConstant{
+export class AdInsConstant {
     public static RestrictionLike = "Like";
     public static RestrictionEq = "Eq";
     public static showData = "10,50,100";
     public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
-    public static Login="";
+    public static Login = "";
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
     public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
     public static GetRefEmployeeById = "/RefEmp/GetEmp"
@@ -53,4 +53,7 @@ export class AdInsConstant{
     public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
     public static GetRefRole = "/RefRole/GetRefRole";
 
+    //ZIPCODE
+    public static GetRefZipCode = "/RefZipcode/GetRefZipcodePaging";
+    public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
 }
