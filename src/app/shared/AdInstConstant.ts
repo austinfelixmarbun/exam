@@ -45,7 +45,9 @@ export class AdInsConstant {
     public static AddRefEmp = "/RefEmp/AddRefEmp";
     public static EditRefEmp = "/RefEmp/EditRefEmp";
     public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
-
+    public static AddEmpBankAcc = "/EmpBankAcc/AddEmpBankAcc";
+    public static GetEmpBankAccByRefEmpId = "/EmpBankAcc/GetEmpBankAccByRefEmpId";
+    
     //SYSTEM-SETTING
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";

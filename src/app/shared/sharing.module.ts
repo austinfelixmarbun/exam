@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LookupzipcodeComponent } from './lookup/lookupzipcode/lookupzipcode.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
+import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank.component';
 
 @NgModule({
     exports: [
@@ -16,7 +17,8 @@ import { HttpModule } from '@angular/http';
         LookupComponent,
         LookupEmployeeComponent,
         LookupzipcodeComponent,
-        NgbModule
+        NgbModule,
+        LookupRefBankComponent
     ],
     imports: [
         CommonModule,
@@ -29,7 +31,8 @@ import { HttpModule } from '@angular/http';
         SearchComponent,
         LookupComponent,
         LookupEmployeeComponent,
-        LookupzipcodeComponent
+        LookupzipcodeComponent,
+        LookupRefBankComponent
     ]
 })
 

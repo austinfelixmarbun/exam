@@ -7,6 +7,8 @@ import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { NgForm } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { formatDate } from '@angular/common';
+import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
+import { EmpBankAccObj } from 'app/shared/model/EmpBankAccObj.Model';
 
 @Component({
   selector: 'app-employee-add',
@@ -48,11 +50,23 @@ export class EmployeeAddComponent implements OnInit {
   imageLocation: any;
   isActive: boolean = false;
   isExt: boolean = false;
+  bankBranch: any;
+  bankBranchBiCode: any;
+  bankAccName: any;
+  bankAccNo: any;
   empObj: RefEmpObj;
+  bankObj: RefBankObj;
+  empBankAccObj: EmpBankAccObj;
   resultData: any;
   apiUrl: any;
   addUrl: any;
   editUrl: any;
+  refBankUrl: any;
+  empBankUrl: any;
+  addEmpBankUrl: any;
+  bankName: string;
+  idSelect;
+  jsonSelect: string;
 
   foundationUrl: string = environment.foundationUrl;
 
@@ -60,7 +74,10 @@ export class EmployeeAddComponent implements OnInit {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
     this.addUrl = this.foundationUrl + AdInsConstant.AddRefEmp;
     this.editUrl = this.foundationUrl + AdInsConstant.EditRefEmp;
-
+    this.refBankUrl = this.foundationUrl + AdInsConstant.GetBank;
+    this.empBankUrl = this.foundationUrl + AdInsConstant.GetEmpBankAccByRefEmpId;
+    this.addEmpBankUrl = this.foundationUrl + AdInsConstant.AddEmpBankAcc;
+    
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
         this.pageType = params['param'];
@@ -123,6 +140,31 @@ export class EmployeeAddComponent implements OnInit {
           else {
             this.isExt = false;
           }
+          this.empObj = new RefEmpObj()
+          this.empObj.refEmpId = this.refEmpId
+          this.httpClient.post(this.empBankUrl, this.empObj).subscribe(
+            (response) => {
+              this.bankBranch = response["returnObject"].bankBranch;
+              this.bankBranchBiCode = response["returnObject"].bankBranchBiCode;
+              this.bankAccName = response["returnObject"].bankAccName;
+              this.bankAccNo = response["returnObject"].bankAccNo;
+              this.bankObj = new RefBankObj()
+              this.bankObj.refBankId = response["returnObject"].refBankId;
+              this.httpClient.post(this.refBankUrl, this.bankObj).subscribe(
+                (response) => {
+                  this.bankName = response["returnObject"].bankName;
+                  this.jsonSelect = response["returnObject"];
+                  this.idSelect = response["returnObject"].refBankId;
+                },
+                (error) => {
+                  console.log("Error");
+                  console.log(error);
+                })
+            },
+            (error) => {
+              console.log("Error");
+              console.log(error);
+            })
         },
         (error) => {
           console.log("Error");
@@ -140,10 +182,37 @@ export class EmployeeAddComponent implements OnInit {
     this.isExt = e.target.checked;
   }
 
-  SaveForm(ReqForm: NgForm) {
+  SaveForm(ReqForm: NgForm, uclRefBank) {
+    console.log(uclRefBank);
     if (this.pageType == 'add') {
       this.empObj = new RefEmpObj();
-      this.empObj = ReqForm.value;
+      this.empObj.empNo = ReqForm.value.empNo;
+      this.empObj.empName = ReqForm.value.empName;
+      this.empObj.joinDt = ReqForm.value.joinDt;
+      this.empObj.addr = ReqForm.value.addr;
+      this.empObj.npwp = ReqForm.value.npwp;
+      this.empObj.idNo = ReqForm.value.idNo;
+      this.empObj.rt = ReqForm.value.rt;
+      this.empObj.rw = ReqForm.value.rw;
+      this.empObj.kelurahan = ReqForm.value.kelurahan;
+      this.empObj.kecamatan = ReqForm.value.kecamatan;
+      this.empObj.city = ReqForm.value.city;
+      this.empObj.zipcode = ReqForm.value.zipcode;
+      this.empObj.phnArea1 = ReqForm.value.phnArea1;
+      this.empObj.phnArea2 = ReqForm.value.phnArea2;
+      this.empObj.phnArea3 = ReqForm.value.phnArea3;
+      this.empObj.phn1 = ReqForm.value.phn1;
+      this.empObj.phn2 = ReqForm.value.phn2;
+      this.empObj.phn3 = ReqForm.value.phn3;
+      this.empObj.phnExt1 = ReqForm.value.phnExt1;
+      this.empObj.phnExt2 = ReqForm.value.phnExt2;
+      this.empObj.phnExt3 = ReqForm.value.phnExt3;
+      this.empObj.faxArea = ReqForm.value.faxArea;
+      this.empObj.fax = ReqForm.value.fax;
+      this.empObj.mobilePhn1 = ReqForm.value.mobilePhn1;
+      this.empObj.mobilePhn2 = ReqForm.value.mobilePhn2;
+      this.empObj.email1 = ReqForm.value.email1;
+      this.empObj.email2 = ReqForm.value.email2;
       if (this.isExt === false) {
         this.empObj.isExt = "0";
       }
@@ -163,8 +232,23 @@ export class EmployeeAddComponent implements OnInit {
         (response) => {
           console.log("Success");
           console.log(response);
-          this.toastr.successMessage(response['returnObject']['refJobTitleId']);
-          this.router.navigate(["/employee"]);
+          this.empBankAccObj = new EmpBankAccObj();
+          this.empBankAccObj.refEmpId = response["returnObject"].refEmpId;
+          this.empBankAccObj.bankBranch = ReqForm.value.bankBranch;
+          this.empBankAccObj.bankBranchBiCode = ReqForm.value.bankBranchBiCode;
+          this.empBankAccObj.bankAccName = ReqForm.value.bankAccName;
+          this.empBankAccObj.bankAccNo = ReqForm.value.bankAccNo;
+          this.empBankAccObj.bankBranch = ReqForm.value.bankBranch;
+          this.empBankAccObj.refBankId = uclRefBank.idSelect;
+          this.httpClient.post(this.addEmpBankUrl, this.empBankAccObj).subscribe(
+            (response) => {
+              this.toastr.successMessage(response['message']);
+              this.router.navigate(["/employee"]);
+            },
+            (error) => {
+              console.log("Error");
+              console.log(error);
+            });
         },
         (error) => {
           console.log("Error");
@@ -207,10 +291,10 @@ export class EmployeeAddComponent implements OnInit {
         formInput.isExt = "1";
       }
       if (this.isActive === false) {
-        this.empObj.isActive = "0";
+        formInput.isActive = "0";
       }
       else {
-        this.empObj.isActive = "1";
+        formInput.isActive = "1";
       }
 
       console.log(JSON.stringify(formInput))

@@ -1,0 +1,14 @@
+{
+    "url": "http://getRefBank",
+    "title":"Lookup Bank",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "bankName",
+        "id": "BankName",
+        "value": "",
+        "label": "Bank Name",
+        "placeholder": "Bank Name"
+      }
+    ]
+  }
