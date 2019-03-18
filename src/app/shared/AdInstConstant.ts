@@ -27,16 +27,16 @@ export class AdInsConstant{
     public static AddRefBank = "/RefBank/AddRefBank";
     public static DeleteRefBank = "/RefBank/DeleteRefBank";
     public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";
-    public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
     public static GetProvince = "/los/v1/get_provinsi";
     public static GetCityByProvince = "/los/v1/get_kota";
     public static getProspectByProspectNo = "/api/MobileProspectTask/GetProspectByProspectNo";
     public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
     public static addCustPersonal = "";
-
+    public static getRefOfficeObj = "/RefOffice/GetRefOfficeObj";
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
     public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
+    public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
 
     //SYSTEM-SETTING
     //REF-USER
@@ -52,8 +52,5 @@ export class AdInsConstant{
     public static DeleteRefRole = "/UserManagement/DeleteRefRole";
     public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
     public static GetRefRole = "/RefRole/GetRefRole";
-
-    //ZIPCODE
-    public static GetRefZipCode = "/RefZipcode/GetRefZipcodePaging";
 
 }

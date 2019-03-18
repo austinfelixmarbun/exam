@@ -114,6 +114,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'customer',
     loadChildren: './customer/customer.module#CustomerModule'
+  },{
+    path: 'zipcode',
+    loadChildren: './zipcode/zipcode.module#ZipcodeModule'
   },
   {
     path: 'systemSetting',

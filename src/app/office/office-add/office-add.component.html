@@ -6,38 +6,44 @@
       </div>
       <div class="card-body">
         <div class="px-3">
-          <form class="form form-horizontal">
+          <form class="form form-horizontal" name="OfficeAddReqForm" #OfficeAddReqForm="ngForm"
+          (ngSubmit)="Save(OfficeAddReqForm)">
             <!-- <app-lookup></app-lookup> -->
             <div class="form-body">
               <h4 class="form-section"><i class="ft-file-text"></i> Add/ Edit</h4>
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="projectinput5">Office Code: </label>
                 <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="officeCode">
+                  <input type="text" id="projectinput5" class="form-control" name="officeCode"
+                  [ngModel]="result?.officeCode" #officeCode="ngModel">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="projectinput5">Office Name: </label>
                 <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="officeName">
+                  <input type="text" id="projectinput5" class="form-control" name="officeName"
+                  [ngModel]="result?.officeName" #officeName="ngModel">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="projectinput5">Contact Person Name: </label>
                 <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="personName">
+                  <input type="text" id="projectinput5" class="form-control" name="personName"
+                  [ngModel]="result?.cntctPersonName" #cntctPersonName="ngModel">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="projectinput5">Address: </label>
                 <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="addr">
+                  <input type="text" id="projectinput5" class="form-control" name="addr"
+                  [ngModel]="result?.officeAddr" #officeAddr="ngModel">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="projectinput5">City: </label>
                 <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="city">
+                  <input type="text" id="projectinput5" class="form-control" name="city"
+                  [ngModel]="result?.officeAddr" #officeAddr="ngModel">
                 </div>
               </div>
               <div class="form-group row">
@@ -49,27 +55,27 @@
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="projectinput6">Active Status: </label>
                 <div class="col-md-9">
-                  <select id="projectinput6" name="actStat" class="form-control">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                  <select id="projectinput6" name="actStat" class="form-control" [(ngModel)]="isActive">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
                   </select>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="projectinput6">Virtual Office: </label>
                 <div class="col-md-9">
-                  <select id="projectinput6" name="virtualOffice" class="form-control">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                  <select id="projectinput6" name="virtualOffice" class="form-control" [(ngModel)]="isVirtualOffice">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/office']">
+              <button type="button" class="btn btn-raised btn-warning mr-1"  [routerLink]="['/office']">
                 <i class="ft-x"></i> Cancel
               </button>
-              <button type="button" class="btn btn-raised btn-primary">
+              <button type="submit" class="btn btn-raised btn-primary" (click)="onclick()">
                 <i class="fa fa-check-square-o"></i> Save
               </button>
             </div>

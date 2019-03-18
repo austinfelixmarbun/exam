@@ -1,0 +1,54 @@
+{
+    "url": "http://getRefZipcode",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "Kelurahan",
+        "id": "Keluarahan",
+        "value": "",
+        "label": "Kelurahan",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "Kecamatan",
+        "id": "Kecamatan",
+        "value": "",
+        "label": "Kecamatan",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "City",
+        "id": "City",
+        "value": "",
+        "label": "City",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "Zipcode",
+        "id": "Zipcode",
+        "value": "",
+        "label": "Zipcode",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "DisTrictName",
+        "id": "DisTrictName",
+        "value": "",
+        "label": "District Name",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "SubZipcodeCode",
+        "id": "SubZipcodeCode",
+        "value": "",
+        "label": "Sub Zipcode Code",
+        "placeholder": "Placeholder"
+      }
+    ]
+  }
+  
