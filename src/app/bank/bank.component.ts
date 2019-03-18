@@ -34,12 +34,14 @@ export class BankComponent implements OnInit {
   // paged items
   pagedItems: any[];
   foundationUrl: string = environment.foundationUrl;
+  orderByKey: any = null;
+  orderByValue: boolean = true;
 
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService) { }
 
   ngOnInit() {
     this.pageNow = 1;
-    this.pageSize = 25;
+    this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetBankPaging;
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
@@ -49,6 +51,9 @@ export class BankComponent implements OnInit {
   }
 
   search() {
+    this.orderByKey = null
+    this.orderByValue = true
+    this.pageNow = 1;
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
       .subscribe(
         (response) => {
@@ -64,9 +69,54 @@ export class BankComponent implements OnInit {
       );
   }
 
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.search();
+  searchSort(event: any) {
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
+    }
+    this.orderByKey = event.target.attributes.name.nodeValue
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+  }
+
+  searchPagination(event: number) {
+    this.pageNow = event;
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
   }
 
   // Success Type
@@ -100,5 +150,28 @@ export class BankComponent implements OnInit {
 
   reset(){
     this.searchComponent.initiateForm();
+  }
+
+  onChange() {
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
   }
 }

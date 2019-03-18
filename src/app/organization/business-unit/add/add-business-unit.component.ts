@@ -1,16 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
-import { ActivatedRoute } from '@angular/router';
-import { AdInsHttpServiceService } from 'app/ad-ins-http-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessUnitObj } from 'app/shared/model/BusinessUnitObj.Model';
 import { HttpClient } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'add-app-business-unit',
@@ -20,6 +17,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class AddBusinessUnitComponent implements OnInit {
 
+    bizUnitObj : BusinessUnitObj;
     param: string;
 
     businessUnitCode: string;
@@ -27,15 +25,17 @@ export class AddBusinessUnitComponent implements OnInit {
     description: string;
     activestatus: string;
     result: any;
-    mode: string = "edit";
+    mode: string = "add";
     apiUrl: any;
-    isActive:boolean = false;
+    isActive: boolean = false;
     foundationUrl: string = environment.foundationUrl;
+    editUrl: any;
 
     constructor(
-      private route: ActivatedRoute,
-      private http: HttpClient,
-      private spinner: NgxSpinnerService) {
+        private router: Router,
+        private route: ActivatedRoute,
+        private http: HttpClient,
+        private spinner: NgxSpinnerService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refBizUnitId"];
             this.mode = params["mode"];
@@ -51,11 +51,10 @@ export class AddBusinessUnitComponent implements OnInit {
                 (response) => {
                     console.log("Success");
                     this.result = response["returnObject"];
-                    if(this.result.isActive=="1"){
+                    if (this.result.isActive == "1") {
                         this.isActive = true;
                     }
-                    else
-                    {
+                    else {
                         this.isActive = false;
                     }
                 },
@@ -65,9 +64,51 @@ export class AddBusinessUnitComponent implements OnInit {
                 }
             );
         }
-        else
-        {
-        }
+    }
 
+    Save(BusinessUnitAddReqForm: NgForm): void {
+        if (this.mode === "edit") {
+            this.editUrl = this.foundationUrl + AdInsConstant.EditRefZipcode;
+            this.bizUnitObj = new BusinessUnitObj();
+            this.bizUnitObj = BusinessUnitAddReqForm.value;
+            this.bizUnitObj.RefBizUnitId = this.param;
+            if (this.isActive === false) {
+                this.bizUnitObj.IsActive = "0";
+            }
+            else {
+                this.bizUnitObj.IsActive = "1";
+            }
+            this.http.post(this.editUrl, this.bizUnitObj).subscribe(
+                (response) => {
+                    console.log(response);
+                    this.router.navigateByUrl('/organization/businessunit');
+                },
+                (error) => {
+                    console.log(error);
+                });
+        }
+        else {
+            this.editUrl = this.foundationUrl + AdInsConstant.AddRefZipcode;
+            this.bizUnitObj = new BusinessUnitObj();
+            this.bizUnitObj = BusinessUnitAddReqForm.value;
+            this.bizUnitObj.RefBizUnitId = "0";
+            if (this.isActive === false) {
+                this.bizUnitObj.IsActive = "0";
+            }
+            else {
+                this.bizUnitObj.IsActive = "1";
+            }
+            this.http.post(this.editUrl, this.bizUnitObj).subscribe(
+                (response) => {
+                    this.router.navigateByUrl('/organization/businessunit');
+                },
+                (error) => {
+                    console.log(error);
+                });
+        }
+    }
+
+    toggleVisibility(e) {
+        this.isActive = e.target.checked;
     }
 }

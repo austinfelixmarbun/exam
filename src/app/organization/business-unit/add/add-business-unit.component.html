@@ -2,43 +2,47 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title" id="horz-layout-colored-controls">Add Business Unit</h4>
+                <h4 class="card-title" id="horz-layout-colored-controls" translate>Add Business Unit</h4>
             </div>
             <div class="card-body">
                 <div class="px-3">
-                    <form class="form form-horizontal">
+                    <form class="form form-horizontal" name="BusinessUnitAddReqForm" #BusinessUnitAddReqForm="ngForm"
+                    (ngSubmit)="Save(BusinessUnitAddReqForm)">
                         <div class="form-body">
-                            <h4 class="form-section"><i class="ft-file-text"></i> Add/ Edit</h4>
+                            <h4 class="form-section" translate><i class="ft-file-text" ></i> Add/ Edit</h4>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput5">Business Unit Code: </label>
+                                <label class="col-md-3 label-control" translate>Business Unit Code: </label>
                                 <div class="col-md-9">
-                                    <input type="text" id="projectinput5" class="form-control" name="bizCode" value="{{result?.bizUnitCode}}">
+                                    <input type="text" id="projectinput5" class="form-control" name="bizUnitCode"
+                                    [ngModel]="result?.bizUnitCode" #bizUnitCode="ngModel">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput5">Business Unit Name: </label>
+                                <label class="col-md-3 label-control" translate>Business Unit Name: </label>
                                 <div class="col-md-9">
-                                    <input type="text" id="projectinput5" class="form-control" name="bizName" [value]="result?.bizUnitName">
+                                    <input type="text" id="projectinput5" class="form-control" name="bizUnitName"
+                                    [ngModel]="result?.bizUnitName" #bizUnitName="ngModel">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput6">Description: </label>
+                                <label class="col-md-3 label-control" translate>Description: </label>
                                 <div class="col-md-9">
-                                    <textarea id="projectinput5" class="form-control" name="desc" [value]="result?.descr"></textarea>
+                                    <textarea id="projectinput5" class="form-control" name="descr"
+                                    [ngModel]="result?.descr" #descr="ngModel"></textarea>
                               </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control" for="userinput5">Active Status: </label>
+                                <label class="col-md-3 label-control" translate>Active Status: </label>
                                 <div class="col-md-9">
                                     <input class="border-primary" [checked]="isActive" type="checkbox" id="projectinput5">
                                 </div>
                             </div>
                         </div>
                         <div class="form-actions right">
-                            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/organization/businessunit']">
+                            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/organization/businessunit']" translate>
                               <i class="ft-x"></i> Cancel
                             </button>
-                            <button type="submit" class="btn btn-raised btn-primary">
+                            <button type="submit" class="btn btn-raised btn-primary" translate>
                                 <i class="fa fa-check-square-o"></i> Save
                             </button>
                         </div>

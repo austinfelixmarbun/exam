@@ -82,7 +82,7 @@ export class ZipcodeAddComponent implements OnInit {
         console.log(uclZipcode);
         console.log(ZipcodeAddReqForm);
         if (this.mode === "edit") {
-            this.editUrl = this.foundationUrl + AdInsConstant.EditRefBank;
+            this.editUrl = this.foundationUrl + AdInsConstant.EditRefZipcode;
             this.zipcodeObj = new RefZipcodeObj();
             this.zipcodeObj = ZipcodeAddReqForm.value;
             this.zipcodeObj.refProvDistrictId = uclZipcode.idSelect;
@@ -105,7 +105,7 @@ export class ZipcodeAddComponent implements OnInit {
         }
         else
         {
-            this.editUrl = this.foundationUrl + AdInsConstant.AddRefBank;
+            this.editUrl = this.foundationUrl + AdInsConstant.AddRefZipcode;
             this.zipcodeObj = new RefZipcodeObj();
             this.zipcodeObj = ZipcodeAddReqForm.value;
             this.zipcodeObj.refProvDistrictId = uclZipcode.idSelect;
