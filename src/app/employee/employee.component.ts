@@ -50,7 +50,7 @@ export class EmployeeComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListEmployee;
-    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefEmployee;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefEmpAndEmpBankAcc;
     this.initiateForm()
   }
 
