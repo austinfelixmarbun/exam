@@ -39,10 +39,6 @@ export class AdInsConstant {
     public static AddRefBank = "/RefBank/AddRefBank";
     public static DeleteRefBank = "/RefBank/DeleteRefBank";
 
-    public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
-    public static GetRefProvDistrictObj = "/RefZipcode/GetProvinsi";
-
-
     //REF-EMP
     public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
     public static GetRefEmployeeById = "/RefEmp/GetEmp"
