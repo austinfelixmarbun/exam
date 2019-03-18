@@ -244,32 +244,14 @@ export class UserAddEditComponent implements OnInit {
         this.refUserObj.newPass = UserAddEditForm.value.NewPassword;
         this.refUserObj.oldPass = UserAddEditForm.value.Password;
         this.refUserObj.newPassVerif = UserAddEditForm.value.NewRePassword;
-
-        //CHECK NEW PASSWORD VALID
-        this.httpClient.post(validateOldPassUrl, this.refUserObj).subscribe(
+        //SAVE
+        this.apiUrl = this.foundationUrl + AdInsConstant.ChangePassword;
+        this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
           (response) => {
-            //SAVE
-            this.apiUrl = this.foundationUrl + AdInsConstant.ChangePassword;
-            this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
-              (response) => {
-                if (response['statusCode'] !== '999') {
-                  console.log("Success Edit");
-                  this.service.typeSave('Edit Successed');
-                  this.location.back();
-                  this.spinner.hide();
-                }
-                else {
-                  this.service.typeErrorCustom(response['message']);
-                  this.spinner.hide();
-                }
-
-              },
-              (error) => {
-                console.log("Error Edit");
-                this.service.typeErrorCustom(error);
-                this.spinner.hide();
-              }
-            );
+            console.log("Success Edit");
+            this.service.typeSave('Edit Successed');
+            this.location.back();
+            this.spinner.hide();
           },
           (error) => {
             console.log("Error Edit");
