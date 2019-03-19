@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "businessUnitCode",
+            "name": "bizUnitCode",
             "id": "businessUnitCodeId",
             "value": "",
             "label": "Business Unit Code",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "businessUnitName",
+            "name": "bizUnitName",
             "id": "businessUnitNameId",
             "value": "",
             "label": "Business Unit Name",
@@ -19,7 +19,7 @@
         },
         {   
             "type": "dropdown",
-            "name": "activeStatus",
+            "name": "isActive",
             "id": "activeStatusId",
             "label" : "Active Status",
             "value": "",

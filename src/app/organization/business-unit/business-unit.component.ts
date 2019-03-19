@@ -157,4 +157,8 @@ import { HttpClient } from '@angular/common/http';
         );
     }
 
+    reset(){
+      this.searchComponent.initiateForm();
+    }
+
   }
