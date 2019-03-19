@@ -27,7 +27,7 @@
         },
         {   
             "type": "dropdown",
-            "name": "activeStatus",
+            "name": "isActive",
             "id": "activeStatusId",
             "label" : "Active Status",
             "value": "",
@@ -36,11 +36,11 @@
             "isSelectOne" : false,
             "items": [
                 {
-                    "key": "Yes",
+                    "key": "1",
                     "value": "Yes"
                 },
                 {
-                    "key": "No",
+                    "key": "0",
                     "value": "No"
                 }
             ],

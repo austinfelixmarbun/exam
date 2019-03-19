@@ -24,7 +24,8 @@ import { HttpClient } from '@angular/common/http';
     totalData: any;
     pageSize: any;
     apiUrl: any;
-  
+    orderByKey: any = null;
+    orderByValue: boolean = true;
     // array of all items to be paged
     private allItems: any[];
     // pager object
@@ -37,17 +38,15 @@ import { HttpClient } from '@angular/common/http';
   
     ngOnInit() {
       this.pageNow = 1;
-      this.pageSize = 25;
+      this.pageSize = 10;
       this.apiUrl = this.foundationUrl + AdInsConstant.GetBusinessUnitPaging;
-      // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
-      //   .subscribe(data => {
-      //     console.log(data);
-      //   }
-      //   )
+
     }
   
     search() {
-      this.spinner.show();
+      this.orderByKey = null
+      this.orderByValue = true
+      this.pageNow = 1;
       this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
         .subscribe(
           (response) => {
@@ -55,12 +54,60 @@ import { HttpClient } from '@angular/common/http';
             this.resultData = response;
             this.totalData = response.returnObject.count;
             console.log(response);
-            this.spinner.hide();
           },
           (error) => {
             console.log("Error");
             console.log(error);
-            this.spinner.hide();
+          }
+        );
+    }
+  
+    searchSort(event: any) {
+      if (this.orderByKey == event.target.attributes.name.nodeValue) {
+        this.orderByValue = !this.orderByValue
+      } else {
+        this.orderByValue = true
+      }
+      this.orderByKey = event.target.attributes.name.nodeValue
+      var order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+        .subscribe(
+          (response) => {
+            console.log("Success");
+            this.resultData = response;
+            this.totalData = response.returnObject.count;
+            console.log(this.resultData);
+          },
+          (error) => {
+            console.log("Error");
+            console.log(error);
+          }
+        );
+    }
+  
+    searchPagination(event: number) {
+      this.pageNow = event;
+      var order = null;
+      if (this.orderByKey != null) {
+        order = {
+          key: this.orderByKey,
+          value: this.orderByValue
+        }
+      }
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+        .subscribe(
+          (response) => {
+            console.log("Success");
+            this.resultData = response;
+            this.totalData = response.returnObject.count;
+            console.log(this.resultData);
+          },
+          (error) => {
+            console.log("Error");
+            console.log(error);
           }
         );
     }
@@ -86,5 +133,32 @@ import { HttpClient } from '@angular/common/http';
     errMsg() {
       this.service.errorMessage('asdasd');
     }
-  
+    
+    onChange() {
+      var order = null;
+      if (this.orderByKey != null) {
+        order = {
+          key: this.orderByKey,
+          value: this.orderByValue
+        }
+      }
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+        .subscribe(
+          (response) => {
+            console.log("Success");
+            this.resultData = response;
+            this.totalData = response.returnObject.count;
+            console.log(this.resultData);
+          },
+          (error) => {
+            console.log("Error");
+            console.log(error);
+          }
+        );
+    }
+
+    reset(){
+      this.searchComponent.initiateForm();
+    }
+
   }
