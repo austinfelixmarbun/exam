@@ -45,9 +45,13 @@ export class NavbarComponent implements AfterViewChecked {
     logout(){
         console.log("Log Out");
         localStorage.removeItem("UserContext");
-        localStorage.removeItem("pageAccess");
+        localStorage.removeItem("PageAccess");
         localStorage.removeItem("RoleId");
         localStorage.removeItem("Username");
+        localStorage.removeItem("BusinessDate");
+        localStorage.removeItem("UserAccess");
+        localStorage.removeItem("Token");
+        localStorage.removeItem("Menu");
         this.router.navigate(['pages/login']);
     }
 

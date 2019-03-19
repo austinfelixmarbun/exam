@@ -39,16 +39,13 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         //Ini kalau buat Login belom punya Current User Contexts
         if(currentUserContext != null)
         {
-            token = currentUserContext.TokenId;
-            httpRequest.UserName = currentUserContext.UserName;
-            httpRequest.Role = currentUserContext.Role;
-            httpRequest.Office = currentUserContext.Office;
-            httpRequest.SendDateTime = currentUserContext.BusinessDate;
+            token = localStorage.getItem("Token");
             myObj = {
                 UserName: currentUserContext.UserName,
                 Role: currentUserContext.Role,
                 Office: currentUserContext.Office,
                 SendDateTime: currentUserContext.BusinessDate,
+                Ip:localStorage.getItem("IP"),
                 RequestObject: request.body
               };
         }
@@ -81,7 +78,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    console.log('event--->>>', event);
                     if (event.body.isError == true) {
                         let data = {};
                         data = {
@@ -89,6 +85,16 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                             status: event.body.statusCode
                         };
                         this.errorDialogService.openDialog(data);
+                    }
+                    else{
+                        if(event.body.token==undefined)
+                        {
+                            localStorage.setItem("Token",localStorage.getItem("Token"));
+                        }
+                        else{
+                            localStorage.setItem("Token",event.body.token); 
+                        }
+                        
                     }
                     // this.errorDialogService.openDialog(event);
                 }

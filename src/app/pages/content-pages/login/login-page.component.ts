@@ -26,6 +26,7 @@ export class LoginPageComponent implements OnInit {
     private previousUrl: string;
     private currentUrl: string;
     private apiUrl: string;
+    private pageAccess:any;
     foundationUrl: string;
     jstoday = '';
 
@@ -47,20 +48,9 @@ export class LoginPageComponent implements OnInit {
         this.foundationUrl = environment.foundationUrl;
         this.currentUrl = this.router.url;
         this.router.events.subscribe(event => {
-            console.log(event);
             if (event instanceof NavigationEnd) {
                 console.log("Event Init");
-                let today = new Date();
-                this.previousUrl = this.currentUrl;
-                this.currentUrl = event.url;
-                this.jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US');
-
-                var pageAccess = {
-                    prevUrl: this.previousUrl,
-                    currUrl: this.currentUrl,
-                    bussinessDt: this.jstoday
-                }
-                localStorage.setItem('pageAccess', JSON.stringify(pageAccess));
+                
             };
             if (event instanceof NavigationStart) {
                 // this.user.getSomeData().subscribe(data =>{
@@ -77,49 +67,20 @@ export class LoginPageComponent implements OnInit {
         const target = event.target;
         const username = this.userInputRef.nativeElement.value;
         const password = this.userPassRef.nativeElement.value;
-        var myObj = {
-            one: {
-                title: 'first',
-                id: 1,
-                customKey: {
-                    first: "first",
-                    second: "second"
-                }
-            },
-            two: {
-                title: 'second',
-                id: 2
-            },
-            three: {
-                title: 'this is the third',
-                id: 3
-            }
-        };
-        var pageAccess = {
-            prevUrl: '',
-            currUrl: '',
-            bussinessDt: ''
-        };
         this.apiUrl = this.foundationUrl + AdInsConstant.Login;
         var requestObj = { "Username": username, "Password": password };
-
         var currentUserContext = new CurrentUserContext;
         let today = new Date();
-        var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US')
+        var businessDt = formatDate(today, 'dd-MM-yyyy', 'en-US');
         this.http.post(this.apiUrl, requestObj).subscribe(
             (response) => {
                 console.log(response);
                 currentUserContext.UserName = username;
-                //currentUserContext.Office = "HO";
-                //currentUserContext.Role = "SUPUSR";
                 currentUserContext.BusinessDate = businessDt;
                 localStorage.setItem("Username",username);
-                //this.currentUserContextService.addCurrentUserContext(currentUserContext);
-                //localStorage.setItem("ListRole",)
                 var object = response["returnObject"];
                 console.log(object);
                 this.rolePickService.openDialog(object);
-                //this.router.navigate(['dashboard/dash-board']);
 
             },
             (error) => {
@@ -127,21 +88,6 @@ export class LoginPageComponent implements OnInit {
                 console.log(error);
             }
         );
-        // var currentUserContext = new CurrentUserContext;
-        // let today = new Date();
-        // var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US')
-        // if ("Admin" == username && "Admin" == password) {
-        //     currentUserContext.UserName = username;
-        //     currentUserContext.Office = "HO";
-        //     currentUserContext.Role = "SUPUSR";
-        //     currentUserContext.BusinessDate = businessDt;
-        //     currentUserContext.TokenId = "dbbbf15f-2360-3a32-b6e9-2373d8b5556b";
-        //     this.currentUserContextService.addCurrentUserContext(currentUserContext);
-        //     this.router.navigate(['dashboard/dash-board']);
-        // }
-        // else {
-        //     window.alert('Login Failed');
-        // }
 
     }
     // On Forgot password link click
