@@ -19,7 +19,7 @@
         },
         {
             "type": "textbox",
-            "name": "contactPersonName",
+            "name": "cntctPersonName",
             "id": "contactPersonNameId",
             "value": "",
             "label": "Contact Person",
@@ -27,7 +27,7 @@
         },
         {
             "type": "textbox",
-            "name": "addr",
+            "name": "officeAddr",
             "id": "addrId",
             "value": "",
             "label": "Address",
@@ -43,7 +43,7 @@
         },
         {
             "type": "textbox",
-            "name": "modelName",
+            "name": "orgMdlName",
             "id": "modelNameId",
             "value": "",
             "label": "Model Name",
@@ -51,7 +51,7 @@
         },
         {
             "type": "dropdown",
-            "name": "actStat",
+            "name": "isActive",
             "id": "actStatId",
             "value": "ActiveStat",
             "placeholder": "Placeholder",
@@ -61,15 +61,11 @@
             "label": "Active Status",
             "items": [
                 {
-                    "key": "all",
-                    "value": "All"
-                },
-                {
-                    "key": "yes",
+                    "key": "1",
                     "value": "Yes"
                 },
                 {
-                    "key": "no",
+                    "key": "0",
                     "value": "No"
                 }
             ],
@@ -77,7 +73,7 @@
         },
         {
             "type": "dropdown",
-            "name": "virtualOffice",
+            "name": "isVirtualOffice",
             "id": "virtualOfficeId",
             "value": "virtualOffice",
             "placeholder": "Placeholder",
@@ -87,11 +83,11 @@
             "label": "virtual Office",
             "items": [
                 {
-                    "key": "yes",
+                    "key": "1",
                     "value": "Yes"
                 },
                 {
-                    "key": "no",
+                    "key": "0",
                     "value": "No"
                 }
             ],

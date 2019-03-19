@@ -34,9 +34,11 @@
             <td class="text-left">{{item.cntctPersonName}}</td>
             <td class="text-left">{{item.officeAddr}}</td>
             <td class="text-left">{{item.city}}</td>
-            <td class="text-left">{{item.orgMdlId}}</td>
-            <td>{{item.isActive}}</td>
-            <td>{{item.isVirtualOffice}}</td>
+            <td class="text-left">{{item.orgMdlName}}</td>
+            <td *ngIf="item.isActive === '1'">Yes</td>
+            <td *ngIf="item.isActive === '0'">No</td>
+            <td *ngIf="item.isVirtualOffice === '1'">Yes</td>
+            <td *ngIf="item.isVirtualOffice === '0'">No</td>
             <td>
                 <a class="success p-0" data-original-title="" title="">
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>
