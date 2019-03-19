@@ -14,6 +14,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, finalize } from 'rxjs/operators';
 import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { formatDate } from '@angular/common';
 
 
 @Injectable()
@@ -21,6 +22,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
     constructor(public errorDialogService: ErrorDialogService,private spinner: NgxSpinnerService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        console.log("Interceptor In");
         if(request.method=="POST")
         {
             this.spinner.show();
@@ -30,27 +32,43 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         console.log("Request Interceptor");
         console.log(request);
         var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
-        const token: string = currentUserContext.TokenId;
-          httpRequest.UserName = currentUserContext.UserName;
-          httpRequest.Role = currentUserContext.Role;
-          httpRequest.Office = currentUserContext.Office;
-          httpRequest.SendDateTime = currentUserContext.BusinessDate;
+        var token : string = "";
+        var myObj;
+        let today = new Date();
+        var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US');
+        //Ini kalau buat Login belom punya Current User Contexts
+        if(currentUserContext != null)
+        {
+            token = currentUserContext.TokenId;
+            httpRequest.UserName = currentUserContext.UserName;
+            httpRequest.Role = currentUserContext.Role;
+            httpRequest.Office = currentUserContext.Office;
+            httpRequest.SendDateTime = currentUserContext.BusinessDate;
+            myObj = {
+                UserName: currentUserContext.UserName,
+                Role: currentUserContext.Role,
+                Office: currentUserContext.Office,
+                SendDateTime: currentUserContext.BusinessDate,
+                RequestObject: request.body
+              };
+        }
+        else{
+            myObj = {
+                SendDateTime:businessDt,
+                Ip:localStorage.getItem("IP"),
+                RequestObject: request.body
+            };
+        }
+        
       
-        if (token) {
+        if (token != "") {
             request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
         }
 
         if (!request.headers.has('Content-Type')) {
             request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
         }
-
-        var myObj = {
-            UserName: currentUserContext.UserName,
-            Role: currentUserContext.Role,
-            Office: currentUserContext.Office,
-            SendDateTime: currentUserContext.BusinessDate,
-            RequestObject: request.body
-          }
+        console.log("Request Object Interceptor: " );
         console.log(JSON.stringify(myObj))
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
         request = request.clone({ headers: request.headers.set('Authentication', 'my-authentication') });

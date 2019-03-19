@@ -27,7 +27,7 @@
             <div class="form-group row">
               <label class="col-md-3 label-control" for="CustName">Zip Code </label>
               <div class="col-md-9">
-                  <app-lookupzipcode></app-lookupzipcode>
+                  <app-lookupzipcode #lookupZip></app-lookupzipcode>
               </div>
               
             </div>
@@ -75,7 +75,7 @@
             <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
               <i class="ft-x"></i> Cancel
             </button>
-            <button type="submit" class="btn btn-raised btn-primary">
+            <button type="button" (click)="Submit(lookupZip)" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>
           </div>

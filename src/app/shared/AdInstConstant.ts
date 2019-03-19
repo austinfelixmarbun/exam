@@ -4,7 +4,7 @@ export class AdInsConstant{
     public static RestrictionEq = "Eq";
     public static showData = "10,50,100";
     public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
-    public static Login="";
+    public static Login="/UserManagement/HTML5Login";
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
     public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
     public static GetRefEmployeeById = "/RefEmp/GetEmp"
@@ -36,7 +36,11 @@ export class AdInsConstant{
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
     public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
+
+    //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
+    public static GetRefZipCode = "";
+    public static GetRefProvDistrictObj = "";
 
     //SYSTEM-SETTING
     //REF-USER
@@ -52,5 +56,6 @@ export class AdInsConstant{
     public static DeleteRefRole = "/UserManagement/DeleteRefRole";
     public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
     public static GetRefRole = "/RefRole/GetRefRole";
+    public static GetListDataCurrentUser = "/UserManagement/GetListDataCurrentUser";
 
 }
