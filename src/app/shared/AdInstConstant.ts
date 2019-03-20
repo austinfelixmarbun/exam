@@ -32,7 +32,8 @@ export class AdInsConstant {
     public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
     public static GetAllRefBizUnit = "/OrganizationDefinition/GetAllRefBizUnit";
     public static GetOrgJobTitleByMdlStruc = "/OrganizationDefinition/GetOrgJobTitleByMdlStruc";
-
+    public static GetRefBizUnitByOffice = "/OrganizationDefinition/GetRefBizUnitByOffice";
+    
     //REF-JOB-TITLE
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
     public static AddRefJobTitle = "/OrganizationDefinition/AddRefJobTitle";
@@ -65,7 +66,10 @@ export class AdInsConstant {
     
     //EMP_POSITION
     public static GetEmpPositionPaging = "/EmpPosition/GetEmpPositionPaging";
+    public static GetEmpByEmpPositionId = "/EmpPosition/GetEmpByEmpPositionId";
     public static AddEmpPosition = "/EmpPosition/AddEmpPosition";
+    public static EditEmpPosition = "/EmpPosition/EditEmpPosition";
+    public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
     
     //SYSTEM-SETTING
     //REF-USER

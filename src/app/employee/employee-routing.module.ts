@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EmployeeComponent } from './employee.component';
 import { EmployeeAddComponent } from './employee-add/employee-add.component';
 import { EmployeePositionComponent } from './employee-position/employee-position.component';
+import { EmployeePositionAddComponent } from './employee-position/employee-position-add/employee-position-add.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,13 @@ const routes: Routes = [
         component: EmployeePositionComponent,
         data: {
           title: 'Employee Position'
+        }
+      },
+      {
+        path: 'employeePositionAddEdit',
+        component: EmployeePositionAddComponent,
+        data: {
+          title: 'Employee Position Add Edit'
         }
       },
     ]

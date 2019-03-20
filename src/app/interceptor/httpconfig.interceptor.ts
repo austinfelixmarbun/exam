@@ -75,7 +75,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Methods', 'POST') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
         request = request.clone({body: myObj});
-        AdInsHelper.InsertLog(request.url,"API",JSON.stringify(request.body));
+        // AdInsHelper.InsertLog(request.url,"API",JSON.stringify(request.body));
         //console.log(request)
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {

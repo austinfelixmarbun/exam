@@ -19,7 +19,17 @@ export class RolePickService {
                 //Kalau cuman 1 Role maka lgsg masuk ke Dashboard
                 if(response["returnObject"])
                 {
-
+                    const dialogRef = this.dialog.open(RolepickComponent, {
+                        id:'role-modal',
+                        width: '85%',
+                        position: {
+                        top: '12px'},
+                        data: response["returnObject"]
+                    });
+    
+                    dialogRef.afterClosed().subscribe(result => {
+                        console.log('The dialog was closed');
+                    });
                 }
                 //Ini kalau dia ada lebih dari 1 Role, maka buka modal
                 else{
