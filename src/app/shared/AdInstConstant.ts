@@ -15,7 +15,9 @@ export class AdInsConstant {
 
     //REF OFFICE
     public static getRefOfficeObj = "/RefOffice/GetRefOfficeObj";
-
+    public static GetRefOfficeActiveAndNonVirtualKeyValue = "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue";
+    public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
+    
     //ORGANIZATION
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
@@ -23,6 +25,8 @@ export class AdInsConstant {
     public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
     public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";
     public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
+    public static GetAllRefBizUnit = "/OrganizationDefinition/GetAllRefBizUnit";
+    public static GetOrgJobTitleByMdlStruc = "/OrganizationDefinition/GetOrgJobTitleByMdlStruc";
 
     //REF-JOB-TITLE
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
@@ -52,7 +56,12 @@ export class AdInsConstant {
     public static AddRefEmpAndEmpBankAcc = "/RefEmp/AddRefEmpAndEmpBankAcc";
     public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
     public static DeleteRefEmpAndEmpBankAcc = "/RefEmp/DeleteRefEmpAndEmpBankAcc";
-
+    public static GetEmpListByOfficeIdAndIsActive = "/RefEmp/GetEmpListByOfficeIdAndIsActive";
+    
+    //EMP_POSITION
+    public static GetEmpPositionPaging = "/EmpPosition/GetEmpPositionPaging";
+    public static AddEmpPosition = "/EmpPosition/AddEmpPosition";
+    
     //SYSTEM-SETTING
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";

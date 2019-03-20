@@ -1,0 +1,17 @@
+{
+    "url": "http://getEmpList",
+    "component": [
+        {
+            "type": "dropdown",
+            "name": "refOfficeId",
+            "id": "refOfficeId",
+            "value": "Office Name",
+            "placeholder": "Placeholder",
+            "isFromURL": true,
+            "isSelectOne" : false,
+            "url": "http://r3app-server/FOUNDATION/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue",
+            "label": "Office Name",
+            "itemsUrl": []
+        }
+    ]
+}
