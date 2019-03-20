@@ -14,6 +14,8 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, finalize } from 'rxjs/operators';
 import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { formatDate } from '@angular/common';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 
 @Injectable()
@@ -27,31 +29,45 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         }
         this.count++;
         var httpRequest = new HttpRequestObj();
-        console.log("Request Interceptor");
-        console.log(request);
+        console.log("HTTP Interceptor");
+        //console.log(request);
         var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
-        const token: string = currentUserContext.TokenId;
-          httpRequest.UserName = currentUserContext.UserName;
-          httpRequest.Role = currentUserContext.Role;
-          httpRequest.Office = currentUserContext.Office;
-          httpRequest.SendDateTime = currentUserContext.BusinessDate;
+        var token : string = "";
+        var myObj;
+        let today = new Date();
+        var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US');
+        //Ini kalau buat Login belom punya Current User Contexts
+        if(currentUserContext != null)
+        {
+            token = localStorage.getItem("Token");
+            myObj = {
+                UserName: currentUserContext.UserName,
+                Role: currentUserContext.Role,
+                Office: currentUserContext.Office,
+                SendDateTime: currentUserContext.BusinessDate,
+                Ip:localStorage.getItem("LocalIp"),
+                RequestObject: request.body,
+                UserLog:JSON.parse(localStorage.getItem("PageAccess"))
+              };
+        }
+        else{
+            myObj = {
+                SendDateTime:businessDt,
+                UserName:localStorage.getItem("Username"),
+                Ip:localStorage.getItem("LocalIp"),
+                RequestObject: request.body,
+                UserLog:JSON.parse(localStorage.getItem("PageAccess"))
+            };
+        }
+        
       
-        if (token) {
+        if (token != "") {
             request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
         }
 
         if (!request.headers.has('Content-Type')) {
             request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
         }
-
-        var myObj = {
-            UserName: currentUserContext.UserName,
-            Role: currentUserContext.Role,
-            Office: currentUserContext.Office,
-            SendDateTime: currentUserContext.BusinessDate,
-            RequestObject: request.body
-          }
-        console.log(JSON.stringify(myObj))
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
         request = request.clone({ headers: request.headers.set('Authentication', 'my-authentication') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Origin', '*') });
@@ -59,11 +75,11 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Methods', 'POST') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
         request = request.clone({body: myObj});
-        console.log(request)
+        AdInsHelper.InsertLog(request.url,"API",request.body);
+        //console.log(request)
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    console.log('event--->>>', event);
                     if (event.body.isError == true) {
                         let data = {};
                         data = {
@@ -71,6 +87,19 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                             status: event.body.statusCode
                         };
                         this.errorDialogService.openDialog(data);
+                        //Kalau balikan dari Server error, lgsg return aja, biar g lanjut lagi
+                        return;
+                    }
+                    else{
+                        //Kalau pake Http Get yang bukan ke Backend sendiri g punya token, jadi g boleh asal di replace
+                        if(event.body.token==undefined)
+                        {
+                            localStorage.setItem("Token",localStorage.getItem("Token"));
+                        }
+                        else{
+                            localStorage.setItem("Token",event.body.token); 
+                        }
+                        
                     }
                     // this.errorDialogService.openDialog(event);
                 }
@@ -83,13 +112,15 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     status: error.status
                 };
                 this.errorDialogService.openDialog(data);
-                console.log(error);
+                console.log(JSON.stringify(request.body));
                 return throwError(error);
             }),finalize(() => {
                 this.count--;
+                
                 if ( this.count == 0 ) {
                     if(request.method=="POST")
                     {
+                        AdInsHelper.ClearPageAccessLog();
                         this.spinner.hide ();
                     }
                 }

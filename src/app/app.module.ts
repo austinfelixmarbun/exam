@@ -29,6 +29,12 @@ import { HttpModule } from '@angular/http';
 import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
 import { ErrorDialogService } from './error-dialog/error-dialog.service';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { RolepickComponent } from './shared/rolepick/rolepick.component';
+import { RolePickService } from './shared/rolepick/rolepick.service';
+import { environment } from 'environments/environment.prod';
+import { AdInsConstant } from './shared/AdInstConstant';
+import { subscribeOn } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -41,7 +47,8 @@ export function createTranslateLoader(http: HttpClient) {
         FullLayoutComponent,
         ContentLayoutComponent,
         UserMaintenanceComponent,
-        ErrorDialogComponent
+        ErrorDialogComponent,
+        RolepickComponent
     ],
     imports: [
         HttpModule,
@@ -72,9 +79,25 @@ export function createTranslateLoader(http: HttpClient) {
         AuthService,
         AuthGuard,
         ErrorDialogService,
+        RolePickService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],
-    entryComponents: [ErrorDialogComponent]
+    entryComponents: [ErrorDialogComponent,RolepickComponent]
 })
-export class AppModule { }
+export class AppModule { 
+    constructor(private http:HttpClient){
+        console.log("App Module Constructor");
+        var url = environment.coreUrl+AdInsConstant.GetBusinessDt;
+        this.http.post(url,null).subscribe(
+            (response)=>{
+                var datePipe = new DatePipe("en-US");
+                var value = datePipe.transform(response["returnObject"],'dd-MM-yyyy');
+                localStorage.setItem("BusinessDate",value);
+            },
+            (error)=>{
+
+            }
+        )
+    }
+}

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeeComponent } from './employee.component';
 import { EmployeeAddComponent } from './employee-add/employee-add.component';
+import { EmployeePositionComponent } from './employee-position/employee-position.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,13 @@ const routes: Routes = [
         component: EmployeeAddComponent,
         data: {
           title: 'Add Employee'
+        }
+      },
+      {
+        path: 'employeePosition',
+        component: EmployeePositionComponent,
+        data: {
+          title: 'Employee Position'
         }
       },
     ]

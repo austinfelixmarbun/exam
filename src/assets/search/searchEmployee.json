@@ -30,11 +30,11 @@
             "label": "External Employee",
             "items": [
                 {
-                    "key": "yes",
+                    "key": "1",
                     "value": "Yes"
                 },
                 {
-                    "key": "no",
+                    "key": "0",
                     "value": "No"
                 }
             ],
@@ -52,11 +52,11 @@
             "label": "Active Status",
             "items": [
                 {
-                    "key": "yes",
+                    "key": "1",
                     "value": "Yes"
                 },
                 {
-                    "key": "no",
+                    "key": "0",
                     "value": "No"
                 }
             ],

@@ -93,10 +93,10 @@
                             <i class="ft-user font-medium-3 blue-grey darken-4"></i>
                             <p class="d-none">User Settings</p>
                         </a>
-                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left">                           
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3"  class="text-left">                           
                             <a class="dropdown-item py-1">
                                 <i class="ft-mail mr-2"></i>
-                                <span>Role</span>
+                                <span (click)="ShowRole()">Role</span>
                             </a>
                             <a class="dropdown-item py-1" routerLink="/pages/profile">
                                 <i class="ft-edit mr-2"></i>
@@ -108,9 +108,9 @@
                                 <span>Settings</span>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:;">
+                            <a class="dropdown-item">
                                 <i class="ft-power mr-2"></i>
-                                <span>Logout</span>
+                                <span (click)="logout()">Logout</span>
                             </a>
                         </div>
                     </li>

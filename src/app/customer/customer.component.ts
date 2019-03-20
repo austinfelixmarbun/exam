@@ -31,6 +31,10 @@ export class CustomerComponent implements OnInit {
 
   }
 
+  Submit(lookupZip){
+    console.log(lookupZip);
+  }
+
   ngOnInit() {
   }
 

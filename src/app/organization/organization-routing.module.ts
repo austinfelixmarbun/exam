@@ -6,12 +6,13 @@ import { RefJobTitleComponent } from './ref-job-title/ref-job-title.component';
 import { BusinessUnitComponent } from './business-unit/business-unit.component';
 import { AddBusinessUnitComponent } from './business-unit/add/add-business-unit.component';
 import { RefJobTitleAddComponent } from './ref-job-title/ref-job-title-add/ref-job-title-add.component';
+import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: '',canActivate: [AuthGuard] ,
     children: [
       {
         path: 'refjobtitle',

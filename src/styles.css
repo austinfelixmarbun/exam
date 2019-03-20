@@ -79,7 +79,17 @@ form label{
     padding-top:10px;
 }
 
-.mat-dialog-container {
+#role-modal{
+    background-color:white !important;
+    color:black !important;
+}
+
+.white-background{
+    background-color:white !important;
+    color:black !important;
+}
+
+.mat-dialog-container{
     background-color: #BD362F;
     color: #FFFFFF;
 }

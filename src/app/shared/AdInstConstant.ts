@@ -1,10 +1,12 @@
+import { formatDate } from "@angular/common";
 
 export class AdInsConstant {
     public static RestrictionLike = "Like";
     public static RestrictionEq = "Eq";
     public static showData = "10,50,100";
     public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
-    public static Login = "";
+
+    public static Login = "/UserManagement/HTML5Login";
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
 
     public static GetProvince = "/los/v1/get_provinsi";
@@ -13,9 +15,14 @@ export class AdInsConstant {
     public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
     public static addCustPersonal = "";
 
+    //GENERAL SETTING
+    public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
+
     //REF OFFICE
     public static getRefOfficeObj = "/RefOffice/GetRefOfficeObj";
-
+    public static GetRefOfficeActiveAndNonVirtualKeyValue = "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue";
+    public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
+    
     //ORGANIZATION
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
@@ -23,6 +30,8 @@ export class AdInsConstant {
     public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
     public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";
     public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
+    public static GetAllRefBizUnit = "/OrganizationDefinition/GetAllRefBizUnit";
+    public static GetOrgJobTitleByMdlStruc = "/OrganizationDefinition/GetOrgJobTitleByMdlStruc";
 
     //REF-JOB-TITLE
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
@@ -52,7 +61,12 @@ export class AdInsConstant {
     public static AddRefEmpAndEmpBankAcc = "/RefEmp/AddRefEmpAndEmpBankAcc";
     public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
     public static DeleteRefEmpAndEmpBankAcc = "/RefEmp/DeleteRefEmpAndEmpBankAcc";
-
+    public static GetEmpListByOfficeIdAndIsActive = "/RefEmp/GetEmpListByOfficeIdAndIsActive";
+    
+    //EMP_POSITION
+    public static GetEmpPositionPaging = "/EmpPosition/GetEmpPositionPaging";
+    public static AddEmpPosition = "/EmpPosition/AddEmpPosition";
+    
     //SYSTEM-SETTING
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
@@ -70,13 +84,14 @@ export class AdInsConstant {
     public static DeleteRefRole = "/UserManagement/DeleteRefRole";
     public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
     public static GetRefRole = "/RefRole/GetRefRole";
+    public static GetListDataCurrentUser = "/UserManagement/GetListDataCurrentUser";
 
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
     public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
     public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
-    public static EditRefZipcode= "/RefZipcode/EditRefZipCode";
-    public static AddRefZipcode= "/RefZipcode/AddRefZipCode";
+    public static EditRefZipcode = "/RefZipcode/EditRefZipCode";
+    public static AddRefZipcode = "/RefZipcode/AddRefZipCode";
     public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode"
 
     //BUSINESS UNIT
@@ -103,4 +118,9 @@ export class AdInsConstant {
 
     //REF PROV DISTRICT
     public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
+    //MENU
+    public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
+
+
+    
 }
