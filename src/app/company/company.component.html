@@ -1,0 +1,38 @@
+<div>
+  <table class="table table-responsive-md text-center table-hover">
+    <thead>
+      <tr class="table-header">
+        <th translate>Full Name</th>
+        <th translate>Address</th>
+        <th translate>Phone(Fix Line)</th>
+        <th translate>BOD</th>
+        <th translate>Commissioner</th>
+        <th translate>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of resultData">
+        <td>{{item.fullName}}</td>
+        <td>{{item.address}}</td>
+        <td>{{item.phone}}</td>
+        <td>
+          <a class="success p-0" data-original-title="" title="" [routerLink]="['/company/bod']">
+            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+          </a>
+        </td>
+        <td>
+          <a class="success p-0" data-original-title="" title="" [routerLink]="['/bank/add']"
+            [queryParams]="{refBankId:item.refBankId,mode:'edit'}">
+            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+          </a>
+        </td>
+        <td>
+          <a class="success p-0" data-original-title="" title="" [routerLink]="['/bank/add']"
+            [queryParams]="{refBankId:item.refBankId,mode:'edit'}">
+            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

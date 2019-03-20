@@ -1,0 +1,22 @@
+{
+    "url": "http://getDistrict",
+    "title":"Lookup District",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "name",
+        "id": "nameId",
+        "value": "",
+        "label": "District Name",
+        "placeholder": "District Name"
+      },
+      {
+        "type": "textbox",
+        "name": "districtSandiBi",
+        "id": "districtSandiBiId",
+        "value": "",
+        "label": "District Sandi BI",
+        "placeholder": "District Sandi BI"
+      }
+    ]
+  }

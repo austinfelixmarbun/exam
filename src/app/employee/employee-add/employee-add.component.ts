@@ -21,7 +21,6 @@ export class EmployeeAddComponent implements OnInit {
   refEmpId: any;
   EmpBankAccId: any;
   empNo: any;
-  empName: any;
   joinDt: any;
   addr: any;
   npwp: any;
@@ -98,7 +97,7 @@ export class EmployeeAddComponent implements OnInit {
           console.log(this.resultData);
           this.refEmpId = response['returnObject']['refEmpId']
           this.empNo = response['returnObject']['empNo']
-          this.empName = response['returnObject']['empName']
+         // this.empName = response['returnObject']['empName']
           this.joinDt = formatDate(response['returnObject']['joinDt'], 'yyyy-MM-dd', 'en-US');
           this.addr = response['returnObject']['addr']
           this.npwp = response['returnObject']['npwp']

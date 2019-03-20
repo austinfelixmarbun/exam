@@ -84,4 +84,23 @@ export class AdInsConstant {
     public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";
     public static AddRefBizUnit = "/OrganizationDefinition/AddRefBizUnit";
     public static EditRefBizUnit = "/OrganizationDefinition/EditRefBizUnit";
+
+    //REF COY
+    public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
+    public static GetBodCoyPaging = "";
+    public static AddCoyBod = "/CoyBod/AddCoyBOD";
+    public static EditCoyBod = "/CoyBod/EditCoyBOD";
+    public static DeleteCoyBod = "/CoyBod/DeleteCoyBOD";
+    public static GetCoyBod = "/CoyBod/GetCoyBod";
+    public static GetCommissionerPaging = "";
+    public static AddCoyCommissioner = "/CoyCommissioner/AddCoyCommissioner";
+    public static EditCoyCommissioner = "/CoyCommissioner/EditCoyCommissioner";
+    public static DeleteCoyCommissioner = "/CoyCommissioner/DeleteCoyCommissioner";
+    public static GetCoyCommissioner = "/CoyCommissioner/GetCoyCommissioner";
+
+    //REF MASTER
+    public static getListRefMaster = "/RefMaster/GetRefMasterList";
+
+    //REF PROV DISTRICT
+    public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
 }
