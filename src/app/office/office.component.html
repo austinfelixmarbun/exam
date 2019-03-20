@@ -21,8 +21,9 @@
             <th class="text-left" (click)="searchSort($event)" name='officeAddr'>Address</th>
             <th class="text-left" (click)="searchSort($event)" name='city'>City</th>
             <th class="text-left">Model Name</th>
-            <th>Active Status</th>
-            <th>Virtual Office</th>
+            <th (click)="searchSort($event)" name='isActive'>Active Status</th>
+            <th (click)="searchSort($event)" name='mrKonvenSyariah'>Konvensional / Syariah</th>
+            <th (click)="searchSort($event)" name='isVirtualOffice'>Virtual Office</th>
             <th>Employee List</th>
             <th>Action</th>
         </tr>
@@ -37,6 +38,9 @@
             <td class="text-left">{{item.orgMdlName}}</td>
             <td *ngIf="item.isActive === '1'">Yes</td>
             <td *ngIf="item.isActive === '0'">No</td>
+            <td *ngIf="item.mrKonvenSyariah === 'KON'">Konvensional</td>
+            <td *ngIf="item.mrKonvenSyariah === 'SYA'">Syariah</td>
+            <td *ngIf="item.mrKonvenSyariah === ''"></td>
             <td *ngIf="item.isVirtualOffice === '1'">Yes</td>
             <td *ngIf="item.isVirtualOffice === '0'">No</td>
             <td>
@@ -72,3 +76,5 @@
         </select>
     </div>
 </div>
+<i class="fa fa-plus-circle" [routerLink]="['/office/add']"
+    style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>

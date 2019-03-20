@@ -10,7 +10,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 label-control">Employee No: </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="empNo" required disabled
+                                <input type="text" class="form-control" name="empNo" required [disabled]="false"
                                     [(ngModel)]="empNo" #EmpNo="ngModel"
                                     [ngClass]="{ 'is-invalid': EmpPositionForm.submitted && EmpNo.invalid }">
                                 <div *ngIf="EmpPositionForm.submitted && EmpNo.invalid" class="invalid-feedback">
@@ -21,7 +21,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 label-control">Employee Name: </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="empName" required disabled
+                                <input type="text" class="form-control" name="empName" required [disabled]="true"
                                     [(ngModel)]="empName" #EmpName="ngModel"
                                     [ngClass]="{ 'is-invalid': EmpPositionForm.submitted && EmpName.invalid }">
                                 <div *ngIf="EmpPositionForm.submitted && EmpName.invalid" class="invalid-feedback">
