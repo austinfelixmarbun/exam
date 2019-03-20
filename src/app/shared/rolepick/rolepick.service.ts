@@ -4,60 +4,78 @@ import { RolepickComponent } from './rolepick.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from '../AdInstConstant';
+import { CurrentUserContext } from '../model/CurrentUserContext.model';
+import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
+import { forEach } from '@angular/router/src/utils/collection';
+import { CurrentUserContextService } from '../CurrentUserContext/current-user-context.service';
 
 @Injectable()
 export class RolePickService {
-    constructor(public dialog: MatDialog,private http:HttpClient) { }
-    openDialog(data): void {
+    constructor(public dialog: MatDialog, private http: HttpClient,
+        private currentUserContextService: CurrentUserContextService,
+        private router: Router) { }
+    openDialog(data, type = ""): void {
         console.log("Get User Title Role");
         var url = environment.foundationUrl + AdInsConstant.GetListDataCurrentUser;
-        var user = {Username:localStorage.getItem("Username")};
-        this.http.post(url,user).subscribe(
+        var user = { Username: localStorage.getItem("Username") };
+        this.http.post(url, user).subscribe(
             (response) => {
-                
                 console.log(response["returnObject"]);
                 //Kalau cuman 1 Role maka lgsg masuk ke Dashboard
-                if(response["returnObject"])
-                {
-                    const dialogRef = this.dialog.open(RolepickComponent, {
-                        id:'role-modal',
-                        width: '85%',
-                        position: {
-                        top: '12px'},
-                        data: response["returnObject"]
-                    });
-    
-                    dialogRef.afterClosed().subscribe(result => {
-                        console.log('The dialog was closed');
-                    });
+                var obj = response["returnObject"];
+                if (obj.length == 1 && type == "") {
+                    var item = obj[0];
+                    var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
+                    var roleObject = { RefRoleId: item.refRoleId };
+                    this.http.post(url, roleObject).subscribe(
+                        (response) => {
+                            localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
+                            var currentUserContext = new CurrentUserContext;
+                            currentUserContext.UserName = localStorage.getItem("Username");
+                            currentUserContext.Office = item.officeCode;
+                            currentUserContext.Role = item.roleCode;
+                            currentUserContext.BusinessDate = item.businessDt;
+                            var dateParse = formatDate(item.businessDt, 'dd-MM-yyyy', 'en-US');
+                            localStorage.setItem("BusinessDate", dateParse);
+                            localStorage.setItem("UserAccess", JSON.stringify(item));
+                            this.currentUserContextService.addCurrentUserContext(currentUserContext);
+                            localStorage.setItem("RoleId", item.refRoleId);
+                            this.router.navigate(['dashboard/dash-board']);
+                        },
+                        (error) => {
+                            console.log(error);
+                        }
+                    )
                 }
                 //Ini kalau dia ada lebih dari 1 Role, maka buka modal
-                else{
+                else {
                     const dialogRef = this.dialog.open(RolepickComponent, {
-                        id:'role-modal',
+                        id: 'role-modal',
                         width: '85%',
                         position: {
-                        top: '12px'},
+                            top: '12px'
+                        },
                         data: response["returnObject"]
                     });
-    
+
                     dialogRef.afterClosed().subscribe(result => {
                         console.log('The dialog was closed');
                     });
                 }
-                
+
             },
             (error) => {
                 console.log(error);
             }
         );
         //console.log(data)
-        
 
-        
+
+
     }
 
-    closeDialog(){
+    closeDialog() {
         this.dialog.closeAll;
     }
 }

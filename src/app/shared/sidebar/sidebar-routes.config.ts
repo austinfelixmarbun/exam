@@ -30,7 +30,14 @@ export const ROUTES: RouteInfo[] = [
         submenu: [
             { path: '/bank', title: 'Bank Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
-    },{
+    },
+    {
+        path: '', title: 'Company', icon: 'ft-user-plus', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+        submenu: [
+            { path: '/company', title: 'Company Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+        ]
+    },
+    {
         path: '', title: 'Zipcode', icon: 'ft-airplay', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
             { path: '/zipcode', title: 'Zipcode Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

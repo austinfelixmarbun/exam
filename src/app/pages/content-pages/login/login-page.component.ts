@@ -81,11 +81,13 @@ export class LoginPageComponent implements OnInit {
                 localStorage.setItem("Username",username);
                 var object = response["returnObject"];
                 console.log(object);
+                // if(object["isError"]==false)
+                // {
+                //     this.rolePickService.openDialog(object);
+                // }
                 this.rolePickService.openDialog(object);
-
             },
             (error) => {
-                console.log("Error");
                 console.log(error);
             }
         );

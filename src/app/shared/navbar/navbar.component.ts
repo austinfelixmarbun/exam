@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment.prod';
 import { AdInsConstant } from '../AdInstConstant';
 import { Router } from '@angular/router';
+import { AdInsHelper } from '../AdInsHelper';
 
 @Component({
     selector: 'app-navbar',
@@ -44,14 +45,7 @@ export class NavbarComponent implements AfterViewChecked {
 
     logout(){
         console.log("Log Out");
-        localStorage.removeItem("UserContext");
-        localStorage.removeItem("PageAccess");
-        localStorage.removeItem("RoleId");
-        localStorage.removeItem("Username");
-        localStorage.removeItem("BusinessDate");
-        localStorage.removeItem("UserAccess");
-        localStorage.removeItem("Token");
-        localStorage.removeItem("Menu");
+        AdInsHelper.ClearAllLog();
         this.router.navigate(['pages/login']);
     }
 
@@ -60,7 +54,7 @@ export class NavbarComponent implements AfterViewChecked {
         // this.http.post(apiUrl,)
         console.log("Show Role");
         var data = {status:"200",reason:"OK"};
-        this.rolePickService.openDialog(data);
+        this.rolePickService.openDialog(data,"modal");
     }
 
 

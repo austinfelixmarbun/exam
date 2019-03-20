@@ -123,4 +123,8 @@ export const Full_ROUTES: Routes = [
     path: 'systemSetting',
     loadChildren: './system-setting/system-setting.module#SystemSettingModule'
   },
+  {
+    path: 'company',
+    loadChildren: './company/company.module#CompanyModule'
+  },
 ];
