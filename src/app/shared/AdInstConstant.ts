@@ -1,3 +1,4 @@
+import { formatDate } from "@angular/common";
 
 export class AdInsConstant {
     public static RestrictionLike = "Like";
@@ -5,7 +6,7 @@ export class AdInsConstant {
     public static showData = "10,50,100";
     public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
 
-    public static Login="/UserManagement/HTML5Login";
+    public static Login = "/UserManagement/HTML5Login";
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
 
     public static GetProvince = "/los/v1/get_provinsi";
@@ -89,8 +90,8 @@ export class AdInsConstant {
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
     public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
     public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
-    public static EditRefZipcode= "/RefZipcode/EditRefZipCode";
-    public static AddRefZipcode= "/RefZipcode/AddRefZipCode";
+    public static EditRefZipcode = "/RefZipcode/EditRefZipCode";
+    public static AddRefZipcode = "/RefZipcode/AddRefZipCode";
     public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode"
 
     //BUSINESS UNIT
@@ -101,4 +102,7 @@ export class AdInsConstant {
 
     //MENU
     public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
+
+
+    
 }

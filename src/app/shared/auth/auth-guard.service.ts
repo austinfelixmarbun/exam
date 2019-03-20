@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { map } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
+import { AdInsConstant } from '../AdInstConstant';
+import { AdInsHelper } from '../AdInsHelper';
 
 @Injectable({
   providedIn: 'root'
@@ -24,28 +26,28 @@ export class AuthGuard implements CanActivate {
     let today = new Date();
     this.previousUrl = route.url;
     this.currentUrl = state.url;
-    this.jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US');
+    // this.jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US');
 
-    var listPageAccess;
-    listPageAccess = JSON.parse(localStorage.getItem("PageAccess"));
-    var pageAccess;
-    if(listPageAccess==null)
-    {
-      pageAccess = [];
-    }
-    else
-    {
-      pageAccess = listPageAccess;
-    }
-    
-    
+    // var listPageAccess;
+    // listPageAccess = JSON.parse(localStorage.getItem("PageAccess"));
+    // var pageAccess;
+    // if(listPageAccess==null)
+    // {
+    //   pageAccess = [];
+    // }
+    // else
+    // {
+    //   pageAccess = listPageAccess;
+    // }
+    // var pageAccessNow = {
+    //   CurrentUrl: this.currentUrl,
+    //   UrlAccessTime: this.jstoday,
+    //   Type:"PAGE"
+    // }
+    // pageAccess.push(pageAccessNow);
+    // localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
 
-    var pageAccessNow = {
-      CurrentUrl: this.currentUrl,
-      UrlAccessTime: this.jstoday
-    }
-    pageAccess.push(pageAccessNow);
-    localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
+    AdInsHelper.InsertLog(this.currentUrl,"PAGE");
 
     if (currentUser == null) {
       this.router.navigate(['pages/login'])
