@@ -50,7 +50,7 @@ const routes: Routes = [
         data: {
           title: 'Login Page'
         }
-        , canActivate: [AuthGuard2] 
+        
       },
       {
         path: 'maintenance',

@@ -3,6 +3,8 @@ import { ROUTES } from './sidebar-routes.config';
 import { RouteInfo } from "./sidebar.metadata";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 declare var $: any;
 
@@ -13,15 +15,33 @@ declare var $: any;
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+    public menu:any[];
+    private url:string;
 
     constructor(private router: Router,
-        private route: ActivatedRoute, public translate: TranslateService) {
-        
+        private route: ActivatedRoute, public translate: TranslateService, private http: HttpClient) {
+
+    }
+
+    public getJSON(url: string): Observable<any> {
+        return this.http.get(url);
     }
 
     ngOnInit() {
+        console.log("Get Menu");
         $.getScript('./assets/js/app-sidebar.js');
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.url = "./assets/menu.json";
+        this.getJSON(this.url).subscribe
+            (data => {
+                console.log(JSON.stringify(data));
+                this.menuItems = data;
+            }
+            );
+        //this.menuItems = ROUTES.filter(menuItem => menuItem);
+        //this.menuItems = JSON.parse(localStorage.getItem("Menu"));
+        //this.menu = JSON.parse(localStorage.getItem("Menu"));
+        //console.log(localStorage.getItem("Menu"));
+        //console.log(this.menu);
     }
 
     //NGX Wizard - skip url change
