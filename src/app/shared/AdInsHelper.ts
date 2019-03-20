@@ -1,5 +1,4 @@
 import { formatDate } from "@angular/common";
-import * as Collections from 'typescript-collections';
 
 export class AdInsHelper{
     //Function
