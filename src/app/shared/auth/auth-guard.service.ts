@@ -20,32 +20,12 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     var currentUser = localStorage.getItem("UserContext");
     console.log("Router Interceptor" + route.url);
-    console.log(route);
-    console.log(state);
+    //console.log(route);
+    //console.log(state);
 
     let today = new Date();
     this.previousUrl = route.url;
     this.currentUrl = state.url;
-    // this.jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US');
-
-    // var listPageAccess;
-    // listPageAccess = JSON.parse(localStorage.getItem("PageAccess"));
-    // var pageAccess;
-    // if(listPageAccess==null)
-    // {
-    //   pageAccess = [];
-    // }
-    // else
-    // {
-    //   pageAccess = listPageAccess;
-    // }
-    // var pageAccessNow = {
-    //   CurrentUrl: this.currentUrl,
-    //   UrlAccessTime: this.jstoday,
-    //   Type:"PAGE"
-    // }
-    // pageAccess.push(pageAccessNow);
-    // localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
 
     AdInsHelper.InsertLog(this.currentUrl,"PAGE");
 

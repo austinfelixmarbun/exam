@@ -1,4 +1,5 @@
 import { formatDate } from "@angular/common";
+import * as Collections from 'typescript-collections';
 
 export class AdInsHelper{
     //Function
@@ -6,9 +7,9 @@ export class AdInsHelper{
         let today = new Date();
         var dateNow = formatDate(today, 'dd-MM-yyyy hh:mm:ss', 'en-US');
 
-        var listPageAccess;
+        var listPageAccess = [];
         listPageAccess = JSON.parse(localStorage.getItem("PageAccess"));
-        var pageAccess;
+        var pageAccess = listPageAccess;
         if (listPageAccess == null) {
             pageAccess = [];
         }
@@ -18,10 +19,24 @@ export class AdInsHelper{
         var pageAccessNow = {
             CurrentUrl: url,
             UrlAccessTime: dateNow,
-            Type: type,
-            Param: param
+            Type: type
         }
         pageAccess.push(pageAccessNow);
         localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
+    }
+
+    public static ClearAllLog(){
+        localStorage.removeItem("UserContext");
+        localStorage.removeItem("PageAccess");
+        localStorage.removeItem("RoleId");
+        localStorage.removeItem("Username");
+        localStorage.removeItem("BusinessDate");
+        localStorage.removeItem("UserAccess");
+        localStorage.removeItem("Token");
+        localStorage.removeItem("Menu");
+    }
+
+    public static ClearPageAccessLog(){
+        localStorage.removeItem("PageAccess");
     }
 }

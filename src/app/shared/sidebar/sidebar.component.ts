@@ -28,12 +28,11 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("Get Menu");
         $.getScript('./assets/js/app-sidebar.js');
         this.url = "./assets/menu.json";
         this.getJSON(this.url).subscribe
             (data => {
-                console.log(JSON.stringify(data));
+                //console.log(JSON.stringify(data));
                 this.menuItems = data;
             }
             );

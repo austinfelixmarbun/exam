@@ -47,7 +47,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 SendDateTime: currentUserContext.BusinessDate,
                 Ip:localStorage.getItem("LocalIp"),
                 RequestObject: request.body,
-                UserLog:localStorage.getItem("PageAccess")
+                UserLog:JSON.parse(localStorage.getItem("PageAccess"))
               };
         }
         else{
@@ -56,7 +56,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 UserName:localStorage.getItem("Username"),
                 Ip:localStorage.getItem("LocalIp"),
                 RequestObject: request.body,
-                UserLog:localStorage.getItem("PageAccess")
+                UserLog:JSON.parse(localStorage.getItem("PageAccess"))
             };
         }
         
@@ -75,7 +75,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Methods', 'POST') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
         request = request.clone({body: myObj});
-        AdInsHelper.InsertLog(request.url,"API",JSON.stringify(request.body));
+        AdInsHelper.InsertLog(request.url,"API",request.body);
         //console.log(request)
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
@@ -87,6 +87,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                             status: event.body.statusCode
                         };
                         this.errorDialogService.openDialog(data);
+                        //Kalau balikan dari Server error, lgsg return aja, biar g lanjut lagi
+                        return;
                     }
                     else{
                         //Kalau pake Http Get yang bukan ke Backend sendiri g punya token, jadi g boleh asal di replace
@@ -114,9 +116,11 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 return throwError(error);
             }),finalize(() => {
                 this.count--;
+                
                 if ( this.count == 0 ) {
                     if(request.method=="POST")
                     {
+                        AdInsHelper.ClearPageAccessLog();
                         this.spinner.hide ();
                     }
                 }
