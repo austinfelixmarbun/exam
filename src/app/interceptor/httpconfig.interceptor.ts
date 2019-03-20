@@ -15,6 +15,7 @@ import { map, catchError, finalize } from 'rxjs/operators';
 import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { formatDate } from '@angular/common';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 
 @Injectable()
@@ -22,15 +23,14 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
     constructor(public errorDialogService: ErrorDialogService,private spinner: NgxSpinnerService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log("Interceptor In");
         if(request.method=="POST")
         {
             this.spinner.show();
         }
         this.count++;
         var httpRequest = new HttpRequestObj();
-        console.log("Request Interceptor");
-        console.log(request);
+        console.log("HTTP Interceptor");
+        //console.log(request);
         var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
         var token : string = "";
         var myObj;
@@ -45,15 +45,18 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 Role: currentUserContext.Role,
                 Office: currentUserContext.Office,
                 SendDateTime: currentUserContext.BusinessDate,
-                Ip:localStorage.getItem("IP"),
-                RequestObject: request.body
+                Ip:localStorage.getItem("LocalIp"),
+                RequestObject: request.body,
+                UserLog:localStorage.getItem("PageAccess")
               };
         }
         else{
             myObj = {
                 SendDateTime:businessDt,
-                Ip:localStorage.getItem("IP"),
-                RequestObject: request.body
+                UserName:localStorage.getItem("Username"),
+                Ip:localStorage.getItem("LocalIp"),
+                RequestObject: request.body,
+                UserLog:localStorage.getItem("PageAccess")
             };
         }
         
@@ -65,8 +68,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (!request.headers.has('Content-Type')) {
             request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
         }
-        console.log("Request Object Interceptor: " );
-        console.log(JSON.stringify(myObj))
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
         request = request.clone({ headers: request.headers.set('Authentication', 'my-authentication') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Origin', '*') });
@@ -74,7 +75,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Methods', 'POST') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
         request = request.clone({body: myObj});
-        console.log(request)
+        AdInsHelper.InsertLog(request.url,"API",JSON.stringify(request.body));
+        //console.log(request)
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
@@ -87,6 +89,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                         this.errorDialogService.openDialog(data);
                     }
                     else{
+                        //Kalau pake Http Get yang bukan ke Backend sendiri g punya token, jadi g boleh asal di replace
                         if(event.body.token==undefined)
                         {
                             localStorage.setItem("Token",localStorage.getItem("Token"));
@@ -107,7 +110,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     status: error.status
                 };
                 this.errorDialogService.openDialog(data);
-                console.log(error);
+                console.log(JSON.stringify(request.body));
                 return throwError(error);
             }),finalize(() => {
                 this.count--;

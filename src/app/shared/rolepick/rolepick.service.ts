@@ -14,18 +14,28 @@ export class RolePickService {
         var user = {Username:localStorage.getItem("Username")};
         this.http.post(url,user).subscribe(
             (response) => {
-                console.log(response);
-                const dialogRef = this.dialog.open(RolepickComponent, {
-                    id:'role-modal',
-                    width: '85%',
-                    position: {
-                    top: '12px'},
-                    data: response["returnObject"]
-                });
+                
+                console.log(response["returnObject"]);
+                //Kalau cuman 1 Role maka lgsg masuk ke Dashboard
+                if(response["returnObject"])
+                {
 
-                dialogRef.afterClosed().subscribe(result => {
-                    console.log('The dialog was closed');
-                });
+                }
+                //Ini kalau dia ada lebih dari 1 Role, maka buka modal
+                else{
+                    const dialogRef = this.dialog.open(RolepickComponent, {
+                        id:'role-modal',
+                        width: '85%',
+                        position: {
+                        top: '12px'},
+                        data: response["returnObject"]
+                    });
+    
+                    dialogRef.afterClosed().subscribe(result => {
+                        console.log('The dialog was closed');
+                    });
+                }
+                
             },
             (error) => {
                 console.log(error);

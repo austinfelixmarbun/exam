@@ -69,6 +69,7 @@ export class LoginPageComponent implements OnInit {
         const password = this.userPassRef.nativeElement.value;
         this.apiUrl = this.foundationUrl + AdInsConstant.Login;
         var requestObj = { "Username": username, "Password": password };
+        localStorage.setItem("Username",username);
         var currentUserContext = new CurrentUserContext;
         let today = new Date();
         var businessDt = formatDate(today, 'dd-MM-yyyy', 'en-US');
