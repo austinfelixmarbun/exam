@@ -11,6 +11,8 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+
 
 
 
@@ -22,6 +24,7 @@ import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 export class RolePagingComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlJson: string = './assets/search/searchRole.json';
   resultData: string;
   pageNow: any;
@@ -36,6 +39,7 @@ export class RolePagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
+  urlQryPaging : string = AdInsConstant.GetRefRolePaging;
 
   constructor(
     private http: Http,
@@ -78,6 +82,13 @@ export class RolePagingComponent implements OnInit {
           this.spinner.hide();
         }
       );
+  }
+
+  getResult(event){
+    this.resultData = event;
+    this.totalData = event.returnObject.count;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
   }
 
   pageChange(page: number) {

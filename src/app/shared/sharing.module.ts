@@ -6,7 +6,7 @@ import { SearchComponent } from './search/search.component';
 import {LookupComponent} from './lookup/lookup.component';
 import {LookupEmployeeComponent} from './lookup/lookup-employee/lookup-employee.component';
 import { TranslateModule } from '@ngx-translate/core';
-//import { LookupzipcodeComponent } from './lookup/lookupzipcode/lookupzipcode.component';
+import { LookupzipcodeComponent } from './lookup/lookupzipcode/lookupzipcode.component';
 import { LookupDistrictComponent } from './lookup/lookup-district/lookup-district.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
@@ -20,7 +20,7 @@ import { UCGridFooterComponent } from '../shared/UserControl/ucgrid-footer/ucgri
         SearchComponent,
         LookupComponent,
         LookupEmployeeComponent,
-        //LookupzipcodeComponent,
+        LookupzipcodeComponent,
         NgbModule,
         LookupRefBankComponent,
         LookupRoleComponent,
@@ -39,7 +39,7 @@ import { UCGridFooterComponent } from '../shared/UserControl/ucgrid-footer/ucgri
         SearchComponent,
         LookupComponent,
         LookupEmployeeComponent,
-        //LookupzipcodeComponent,
+        LookupzipcodeComponent,
         LookupRefBankComponent,
         LookupRoleComponent,
         LookupDistrictComponent,
