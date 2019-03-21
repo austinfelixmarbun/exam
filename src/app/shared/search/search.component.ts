@@ -1,5 +1,5 @@
 import { value } from './../data/dropdowns';
-import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
@@ -13,6 +13,7 @@ import { AdInsHttpServiceService } from 'app/ad-ins-http-service.service';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
 import { DOCUMENT } from '@angular/platform-browser';
+import { environment } from 'environments/environment';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -22,11 +23,16 @@ import { DOCUMENT } from '@angular/platform-browser';
 export class SearchComponent implements OnInit {
   @ViewChild('formIdSearch') myForm: ElementRef;
   @Input() _url: string;
+  @Input() apiQryPaging: string;
+  @Input() pageSize : any = 10;
+  @Input() pageNow : any = 1;
+  @Output() result : EventEmitter<any> = new EventEmitter();
+  orderByKey : any;
+  orderByValue : any;
   tempUrl: string;
   urlGet: string;
   server: any;
   configuration: any;
-  result: any;
   itemUrl: any;
   isDataLoaded: boolean = false;
   form: FormGroup;
@@ -34,6 +40,8 @@ export class SearchComponent implements OnInit {
   countForm = 0;
   formattedAmount = '';
   amount = 0;
+  apiUrl: string;
+  foundationUrl: string = environment.foundationUrl;
   constructor(private http: HttpClient, private adInsService: AdInsServiceService, private decimalPipe: DecimalPipe, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
   }
 
@@ -89,6 +97,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.apiUrl = this.foundationUrl + this.apiQryPaging;
     let js = this._renderer2.createElement('script');
     js.text = `
           $(document).ready(function(){
@@ -180,6 +189,13 @@ export class SearchComponent implements OnInit {
     return this.adInsService.postDataDummy(AdInsConstant.GetListProduct, request);
   }
 
+  searchClick() {
+    this.orderByKey = null
+    this.orderByValue = true
+    this.pageNow = 1;
+    this.search(this.apiUrl, this.pageNow, this.pageSize, null);
+  }
+
   search(apiUrl: string, pageNo: number, rowPerPage: number, orderBy: any, addCrit: CriteriaObj[] = null) {
     console.log(pageNo);
     var request = new RequestCriteriaObj();
@@ -247,7 +263,11 @@ export class SearchComponent implements OnInit {
     // httpRequest.Office = currentUserContext.Office;
     // httpRequest.SendDateTime = currentUserContext.BusinessDate;
     // httpRequest.RequestObject = request;
-    return this.http.post(apiUrl, request);
+    this.http.post(apiUrl, request).subscribe((response) =>
+    {
+      this.result.emit(response);
+      return response;
+    });
   }
 
   lessThanFour(): boolean {
