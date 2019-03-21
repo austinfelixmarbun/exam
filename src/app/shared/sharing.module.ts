@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank.component';
 import { UcAddressComponent } from './ucAddress/ucAddress.component';
+import { UCGridFooterComponent } from '../shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 
 @NgModule({
     exports: [
@@ -22,7 +23,8 @@ import { UcAddressComponent } from './ucAddress/ucAddress.component';
         NgbModule,
         LookupRefBankComponent,
         LookupDistrictComponent,
-        UcAddressComponent
+        UcAddressComponent,
+        UCGridFooterComponent
     ],
     imports: [
         CommonModule,
@@ -38,7 +40,8 @@ import { UcAddressComponent } from './ucAddress/ucAddress.component';
         LookupzipcodeComponent,
         LookupRefBankComponent,
         LookupDistrictComponent,
-        UcAddressComponent
+        UcAddressComponent,
+        UCGridFooterComponent
     ]
 })
 

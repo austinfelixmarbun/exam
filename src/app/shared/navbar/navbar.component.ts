@@ -27,7 +27,8 @@ export class NavbarComponent implements AfterViewChecked {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
         var userAccess = JSON.parse(localStorage.getItem("UserAccess")); 
-        this.displayName = userAccess.userId + ", " + userAccess.roleName + " - " + userAccess.officeName;
+        var businessDate = localStorage.getItem("BusinessDate");
+        this.displayName = userAccess.userId + ", " + userAccess.roleName + " - " + userAccess.officeName + " - " + businessDate;
     }
 
     ngAfterViewChecked() {
