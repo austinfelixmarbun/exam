@@ -20,5 +20,9 @@ import { CustomerRoutingModule } from './customer-routing.module';
     CustomerComponent
   ]
 })
-export class CustomerModule { }
+export class CustomerModule { 
+  constructor(){
+    
+  }
+}
  

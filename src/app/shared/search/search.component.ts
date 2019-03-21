@@ -105,6 +105,10 @@ export class SearchComponent implements OnInit {
     return this.http.get(url);
   }
 
+  public postJSON(url: string): Observable<any> {
+    return this.http.post(url,null);
+  }
+
   onSubmit() {
     this.payLoad = JSON.stringify(this.form.value);
     console.log("This is Payload:" + this.payLoad);
@@ -256,9 +260,9 @@ export class SearchComponent implements OnInit {
   }
 
   resolveObject(obj: any, url: string) {
-    const val = this.getJSON(url);
+    const val = this.postJSON(url);
     val.subscribe(tempData => {
-      obj.itemsUrl = tempData;
+      obj.itemsUrl = tempData.returnObject;
     });
   }
 

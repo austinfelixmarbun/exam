@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="px-3">
                     <form class="form form-horizontal" name="BankAddReqForm" #BankAddReqForm="ngForm"
-                        (ngSubmit)="Save(BankAddReqForm, uclZipcode)">
+                        (ngSubmit)="Save(BankAddReqForm, uclDistrict)">
                         <div class="form-body">
                             <h4 class="form-section" translate><i class="ft-file-text"></i> Add/ Edit</h4>
                             <div class="form-group row">
@@ -48,7 +48,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 label-control" for="userinput5" translate>District : </label>
                                 <div class="col-md-9">
-                                    <app-lookupzipcode #uclZipcode [nameSelect] = "districtName" [idSelect]="idSelect" [jsonSelect]="jsonSelect"></app-lookupzipcode>
+                                    <app-lookupdistrict #uclDistrict [nameSelect] = "districtName" [idSelect]="idSelect" [jsonSelect]="jsonSelect"></app-lookupdistrict>
                                 </div>
                             </div>
                             <div class="form-group row">

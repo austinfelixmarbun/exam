@@ -3,16 +3,16 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { NgbModal, ModalDismissReasons, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment} from '../../../../environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
-  selector: 'app-lookupzipcode',
-  templateUrl: './lookupzipcode.component.html',
-  styleUrls: ['./lookupzipcode.component.scss'],
+  selector: 'app-lookupdistrict',
+  templateUrl: './lookup-district.component.html',
   providers: [NgbPaginationConfig]
 })
-export class LookupzipcodeComponent implements OnInit {
+export class LookupDistrictComponent implements OnInit {
 
-  urlJson: string = "./assets/lookup/lookupZipcode.json";
+  urlJson: string = "./assets/lookup/lookupDistrict.json";
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
@@ -25,16 +25,7 @@ export class LookupzipcodeComponent implements OnInit {
   countForm = 0;
   isDataLoaded: boolean = false;
   title: string;
-  
-
-  
-  
-  
-
   closeResult: string;
-
-  
-
   apiUrl:string;
   resultData: any;
   pageNow: any = 1;
@@ -42,22 +33,37 @@ export class LookupzipcodeComponent implements OnInit {
   totalData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-
+  addCrit : CriteriaObj[];
   constructor(private modalService: NgbModal){
     
   }
 
   ngOnInit() {
-    this.apiUrl = environment.foundationUrl+AdInsConstant.GetRefZipcodePaging;
+    this.addCrit = new Array();
+    this.apiUrl = environment.foundationUrl+AdInsConstant.GetRefProvDistrictPaging;
     this.pageSize = 10;
+    var critIsActive = new CriteriaObj();
+
+    critIsActive.propName = "isActive";
+    critIsActive.value = "1";
+    critIsActive.restriction = AdInsConstant.RestrictionEq;
+
+    var critType = new CriteriaObj();
+    critType.propName = "type";
+    critType.value = "DIS";
+    critType.restriction = AdInsConstant.RestrictionEq;
+    this.addCrit.push(critIsActive);
+    this.addCrit.push(critType);
   }
 
-  choose(id, name,item) {
+  choose(id, name,item,searchComp) {
     console.log(id + " : " + name);
     console.log(item);
     this.idSelect = id;
     this.nameSelect = name;
     this.jsonSelect = JSON.stringify(item);
+    this.resultData = "";
+    searchComp.initiateForm();
     this.modalService.dismissAll();
   }
 
@@ -70,7 +76,7 @@ export class LookupzipcodeComponent implements OnInit {
   }
 
   search(searchComp) {
-    searchComp.search(this.apiUrl,this.pageNow,this.pageSize,null)
+    searchComp.search(this.apiUrl,this.pageNow,this.pageSize,null,this.addCrit)
       .subscribe(
         (response) => {
           this.resultData = response.returnObject;
@@ -94,7 +100,7 @@ export class LookupzipcodeComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order,this.addCrit)
       .subscribe(
         (response) => {
           console.log("Success");
@@ -118,7 +124,7 @@ export class LookupzipcodeComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order,this.addCrit)
       .subscribe(
         (response) => {
           console.log("Success");
@@ -142,7 +148,7 @@ export class LookupzipcodeComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order,this.addCrit)
       .subscribe(
         (response) => {
           console.log("Success");

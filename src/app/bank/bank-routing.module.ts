@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BankComponent } from './bank.component';
 import { BankAddComponent } from './add/add-bank.component';
+import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -12,14 +13,14 @@ const routes: Routes = [
         component: BankComponent,
         data: {
           title: 'Bank'
-        },
+        }, canActivate: [AuthGuard] 
       },
       {
         path: 'add',
         component: BankAddComponent,
         data: {
           title: 'Add / Edit Bank'
-        }
+        }, canActivate: [AuthGuard] 
       },
     ]
   }

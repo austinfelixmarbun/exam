@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment.prod';
 import { AdInsConstant } from '../AdInstConstant';
 import { Router } from '@angular/router';
+import { AdInsHelper } from '../AdInsHelper';
 
 @Component({
     selector: 'app-navbar',
@@ -17,13 +18,17 @@ export class NavbarComponent implements AfterViewChecked {
     currentLang = 'en';
     toggleClass = 'ft-maximize';
     placement = 'bottom-right'
+    displayName : string;
     public isCollapsed = true;
 
     constructor(public translate: TranslateService,
         private router: Router,
         private http:HttpClient,public rolePickService: RolePickService) {
         const browserLang: string = translate.getBrowserLang();
-        translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');       
+        translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
+        var userAccess = JSON.parse(localStorage.getItem("UserAccess")); 
+        var businessDate = localStorage.getItem("BusinessDate");
+        this.displayName = userAccess.userId + ", " + userAccess.roleName + " - " + userAccess.officeName + " - " + businessDate;
     }
 
     ngAfterViewChecked() {
@@ -43,11 +48,9 @@ export class NavbarComponent implements AfterViewChecked {
     }
 
     logout(){
-        console.log("Log Out");
-        localStorage.removeItem("UserContext");
-        localStorage.removeItem("pageAccess");
-        localStorage.removeItem("RoleId");
-        localStorage.removeItem("Username");
+        var url = environment.coreUrl+AdInsConstant.Logout;
+        this.http.post(url,"");
+        AdInsHelper.ClearAllLog();
         this.router.navigate(['pages/login']);
     }
 
@@ -56,7 +59,7 @@ export class NavbarComponent implements AfterViewChecked {
         // this.http.post(apiUrl,)
         console.log("Show Role");
         var data = {status:"200",reason:"OK"};
-        this.rolePickService.openDialog(data);
+        this.rolePickService.openDialog(data,"modal");
     }
 
 

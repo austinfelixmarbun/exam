@@ -30,7 +30,6 @@ $(document).ready( function(){
 
         $this.closest('.cz-bg-color').find('span.selected').removeClass('selected');
         $this.addClass('selected');
-
         $('.app-sidebar').attr('data-background-color', bgColor);
         if(bgColor == 'white'){
             $('.logo-img img').attr('src','assets/img/logo-dark.png');

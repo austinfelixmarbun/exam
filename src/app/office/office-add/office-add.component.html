@@ -1,87 +1,118 @@
-<div class="row text-left">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title" id="horz-layout-colored-controls">Office Add</h4>
-      </div>
-      <div class="card-body">
-        <div class="px-3">
-          <form class="form form-horizontal" name="OfficeAddReqForm" #OfficeAddReqForm="ngForm"
-          (ngSubmit)="Save(OfficeAddReqForm)">
-            <!-- <app-lookup></app-lookup> -->
-            <div class="form-body">
-              <h4 class="form-section"><i class="ft-file-text"></i> Add/ Edit</h4>
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput5">Office Code: </label>
-                <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="officeCode"
-                  [ngModel]="result?.officeCode" #officeCode="ngModel">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput5">Office Name: </label>
-                <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="officeName"
-                  [ngModel]="result?.officeName" #officeName="ngModel">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput5">Contact Person Name: </label>
-                <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="personName"
-                  [ngModel]="result?.cntctPersonName" #cntctPersonName="ngModel">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput5">Address: </label>
-                <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="addr"
-                  [ngModel]="result?.officeAddr" #officeAddr="ngModel">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput5">City: </label>
-                <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="city"
-                  [ngModel]="result?.city" #officeAddr="ngModel">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput5">Model Name: </label>
-                <div class="col-md-9">
-                  <input type="text" id="projectinput5" class="form-control" name="city"
-                  [ngModel]="result?.city" #officeAddr="ngModel">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput6">Active Status: </label>
-                <div class="col-md-9">
-                  <select id="projectinput6" name="actStat" class="form-control" [(ngModel)]="isActive">
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput6">Virtual Office: </label>
-                <div class="col-md-9">
-                  <select id="projectinput6" name="virtualOffice" class="form-control" [(ngModel)]="isVirtualOffice">
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                  </select>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="horz-layout-colored-controls">Office</h4>
+    </div>
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" name="OfficeReqForm" #OfficeReqForm="ngForm"
+          (ngSubmit)="OfficeReqForm.form.valid && SaveForm(OfficeReqForm)">
+          <div class="form-body">
+            <h4 class="form-section card-title"><i class="ft-file-text"></i> General</h4>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Office Code: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="officeCode" required [(ngModel)]="officeCode" #OfficeCode="ngModel"
+                  [ngClass]="{ 'is-invalid': OfficeReqForm.submitted && OfficeCode.invalid }">
+                <div *ngIf="OfficeReqForm.submitted && OfficeCode.invalid" class="invalid-feedback">
+                  <div *ngIf="OfficeCode.errors.required">Office Code is required</div>
                 </div>
               </div>
             </div>
-            <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1"  [routerLink]="['/office']">
-                <i class="ft-x"></i> Cancel
-              </button>
-              <button type="submit" class="btn btn-raised btn-primary" (click)="onclick()">
-                <i class="fa fa-check-square-o"></i> Save
-              </button>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Office Name: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="officeName" required [(ngModel)]="officeName" #OfficeName="ngModel"
+                  [ngClass]="{ 'is-invalid': OfficeReqForm.submitted && OfficeName.invalid }">
+                <div *ngIf="OfficeReqForm.submitted && OfficeName.invalid" class="invalid-feedback">
+                  <div *ngIf="OfficeName.errors.required">Office Name is required</div>
+                </div>
+              </div>
             </div>
-          </form>
-        </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Office Short Name: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="officeShortName" required [(ngModel)]="officeShortName" #OfficeShortName="ngModel"
+                  [ngClass]="{ 'is-invalid': OfficeReqForm.submitted && OfficeShortName.invalid }">
+                <div *ngIf="OfficeReqForm.submitted && OfficeShortName.invalid" class="invalid-feedback">
+                  <div *ngIf="OfficeShortName.errors.required">Office Short Name is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Contact Person Name: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="cntctPersonName" [(ngModel)]="cntctPersonName" #CntctPersonName="ngModel">
+              </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 label-control">Office Class: </label>
+                <div class="col-md-9">
+                    <select class="form-control" name="mrOfficeClass" [(ngModel)]="mrOfficeClass" #MrOfficeClass="ngModel">
+                        <option *ngFor="let oc of allOfficeClass" value="{{oc.masterCode}}">{{oc.descr}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 label-control">Organization Level: </label>
+                <div class="col-md-9">
+                    <select class="form-control" name="mrOfficeClass" [(ngModel)]="mrOfficeClass" #MrOfficeClass="ngModel">
+                        <option *ngFor="let oc of allOfficeClass" value="{{oc.masterCode}}">{{oc.descr}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Address: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="officeAddr" required [(ngModel)]="officeAddr" #OfficeAddr="ngModel"
+                  [ngClass]="{ 'is-invalid': OfficeReqForm.submitted && OfficeAddr.invalid }">
+                <div *ngIf="OfficeReqForm.submitted && OfficeAddr.invalid" class="invalid-feedback">
+                  <div *ngIf="OfficeAddr.errors.required">Address is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">City: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="city" [(ngModel)]="city" #City="ngModel">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Model Name: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="modelName" [(ngModel)]="modelName" #ModelName="ngModel">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Active Status: </label>
+              <div class="col-md-9">
+                <select name="isActive" class="form-control" [(ngModel)]="isActive">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Virtual Office: </label>
+              <div class="col-md-9">
+                <select name="isVirtualOffice" class="form-control" [(ngModel)]="isVirtualOffice">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/office']">
+              <i class="ft-x"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
