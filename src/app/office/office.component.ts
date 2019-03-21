@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { TranslateService } from '@ngx-translate/core';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 
 @Component({
   selector: 'app-office',
@@ -17,6 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class OfficeComponent implements OnInit {
 
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
   @ViewChild(SearchComponent) searchComponent;
   urlJson: string = "./assets/search/searchOffice.json";
   resultData: string;
@@ -26,6 +28,7 @@ export class OfficeComponent implements OnInit {
   apiUrl: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
+  urlQryPaging : string = AdInsConstant.GetListOffice;
 
   foundationUrl: string = environment.foundationUrl;
 
@@ -61,48 +64,6 @@ export class OfficeComponent implements OnInit {
     this.service.errorMessage('asdasd');
   }
 
-  onChange() {
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
-  }
-
-  search() {
-    this.orderByKey = null
-    this.orderByValue = true
-    this.pageNow = 1;
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
-  }
-
   searchSort(event: any) {
     if (this.orderByKey == event.target.attributes.name.nodeValue) {
       this.orderByValue = !this.orderByValue
@@ -115,18 +76,6 @@ export class OfficeComponent implements OnInit {
       value: this.orderByValue
     }
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
   }
 
   searchPagination(event: number) {
@@ -139,18 +88,20 @@ export class OfficeComponent implements OnInit {
       }
     }
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
   }
 
+  //** Start UC Search **/
+  getResult(event){
+    this.resultData = event.returnObject;
+    this.totalData = event.returnObject.count;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
+  }
+
+  onSelect(event)
+  {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(this.pageNow);
+  }
 }
