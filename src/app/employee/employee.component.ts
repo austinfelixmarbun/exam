@@ -10,6 +10,7 @@ import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 
 @Component({
   selector: 'app-employee',
@@ -20,6 +21,7 @@ import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 export class EmployeeComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchEmployee.json";
   resultData: string;
   ExcelData: any;
@@ -64,13 +66,21 @@ export class EmployeeComponent implements OnInit {
           console.log("Success");
           this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
-          console.log(this.resultData);
+          this.ucgridFooter.totalData = this.totalData;
+          this.ucgridFooter.resultData = this.resultData;
+          console.log(response);
         },
         (error) => {
           console.log("Error");
           console.log(error);
         }
       );
+  }
+
+  onSelect(event){
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(this.pageNow);
   }
 
   searchSort(event: any) {
@@ -163,6 +173,8 @@ export class EmployeeComponent implements OnInit {
         });
     }
   }
+
+  
 
   reset(){
     this.searchComponent.initiateForm();

@@ -19,8 +19,10 @@ import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgr
 })
 export class BankComponent implements OnInit {
 
+  //** Start UC Search **//
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
+  //** End UC Search **//
   editUrl: any;
   bankObj: RefBankObj;
   urlJson: string = "./assets/search/searchBank.json";
@@ -46,25 +48,24 @@ export class BankComponent implements OnInit {
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetBankPaging;
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
-    //   .subscribe(data => {
-    //     console.log(data);
-    //   }
-    //   )
   }
 
+  //** Start UC Search **/
+
   getResult(event){
-    this.resultData = event;
+    this.resultData = event.returnObject;
     this.totalData = event.returnObject.count;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
   }
+
   onSelect(event)
   {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);
   }
+
   searchSort(event: any) {
     if (this.orderByKey == event.target.attributes.name.nodeValue) {
       this.orderByValue = !this.orderByValue
@@ -80,7 +81,7 @@ export class BankComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log("Success");
-          this.resultData = response;
+          this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
           console.log(this.resultData);
         },
@@ -104,7 +105,7 @@ export class BankComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log("Success");
-          this.resultData = response;
+          this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
           console.log(this.resultData);
         },
@@ -114,6 +115,8 @@ export class BankComponent implements OnInit {
         }
       );
   }
+
+  //** End UC Search **/
 
   // Success Type
   typeSuccess() {
