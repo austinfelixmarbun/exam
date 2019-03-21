@@ -1,0 +1,15 @@
+<div class="gridFooter row col-md-12">
+  <div class="col-md-5 col-xs-12" style="float:left;font-weight: bold;" translate>Total Data : {{totalData}}</div>
+  <div class="justify-content-center col-md-3 col-xs-12">
+      <ngb-pagination (pageChange)="searchPagination($event)" [pageSize]="pageSize" [collectionSize]="totalData"
+          [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
+
+  </div>
+  <div class="col-md-4 col-xs-12" style="float:right;">
+      <select class="custom-select" style="width: auto;float:right;" name="pageSize" [(ngModel)]="pageSize" (change)="onChange()">
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="20">20</option>
+          <option [ngValue]="50">50</option>
+      </select>
+  </div>
+</div>

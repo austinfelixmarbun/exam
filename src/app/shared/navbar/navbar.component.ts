@@ -18,13 +18,17 @@ export class NavbarComponent implements AfterViewChecked {
     currentLang = 'en';
     toggleClass = 'ft-maximize';
     placement = 'bottom-right'
+    displayName : string;
     public isCollapsed = true;
 
     constructor(public translate: TranslateService,
         private router: Router,
         private http:HttpClient,public rolePickService: RolePickService) {
         const browserLang: string = translate.getBrowserLang();
-        translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');       
+        translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
+        var userAccess = JSON.parse(localStorage.getItem("UserAccess")); 
+        var businessDate = localStorage.getItem("BusinessDate");
+        this.displayName = userAccess.userId + ", " + userAccess.roleName + " - " + userAccess.officeName + " - " + businessDate;
     }
 
     ngAfterViewChecked() {
@@ -44,7 +48,8 @@ export class NavbarComponent implements AfterViewChecked {
     }
 
     logout(){
-        console.log("Log Out");
+        var url = environment.coreUrl+AdInsConstant.Logout;
+        this.http.post(url,"");
         AdInsHelper.ClearAllLog();
         this.router.navigate(['pages/login']);
     }
