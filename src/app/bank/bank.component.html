@@ -1,16 +1,4 @@
-<app-search id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
-<div class="col-md-12">
-  <form>
-    <div class="form-actions right">
-      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="reset()" translate>
-        <i class="ft-x"></i> Cancel
-      </button>
-      <button type="button" (click)="search()" class="btn btn-raised btn-primary" translate>
-        <i class="fa fa-search"></i> Search
-      </button>
-    </div>
-  </form>
-</div>
+<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' (result)="getResult($event)"></app-search>
 <div>
   <table class="table table-responsive-md text-center table-hover">
     <thead>
@@ -44,18 +32,4 @@
   <i class="fa fa-plus-circle" [routerLink]="['/bank/add']"
     style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
 </div>
-<div class="gridFooter row col-md-12">
-  <div class="col-md-5 col-xs-12" style="float:left;font-weight: bold;" translate>Total Data : {{totalData}}</div>
-  <div class="justify-content-center col-md-3 col-xs-12">
-      <ngb-pagination (pageChange)="searchPagination($event)" [pageSize]="pageSize" [collectionSize]="totalData"
-          [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
-
-  </div>
-  <div class="col-md-4 col-xs-12" style="float:right;">
-      <select class="custom-select" style="width: auto;float:right;" name="pageSize" [(ngModel)]="pageSize" (change)="onChange()">
-          <option [ngValue]="10">10</option>
-          <option [ngValue]="20">20</option>
-          <option [ngValue]="50">50</option>
-      </select>
-  </div>
-</div>
+<app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>

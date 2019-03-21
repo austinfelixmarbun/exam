@@ -9,6 +9,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { HttpClient } from '@angular/common/http';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 
 @Component({
   selector: 'app-bank',
@@ -19,6 +20,7 @@ import { HttpClient } from '@angular/common/http';
 export class BankComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
   editUrl: any;
   bankObj: RefBankObj;
   urlJson: string = "./assets/search/searchBank.json";
@@ -27,6 +29,7 @@ export class BankComponent implements OnInit {
   totalData: any;
   pageSize: any;
   apiUrl: any;
+  urlQryPaging : string = AdInsConstant.GetBankPaging;
   // array of all items to be paged
   private allItems: any[];
   // pager object
@@ -50,25 +53,18 @@ export class BankComponent implements OnInit {
     //   )
   }
 
-  search() {
-    this.orderByKey = null
-    this.orderByValue = true
-    this.pageNow = 1;
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(response);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+  getResult(event){
+    this.resultData = event;
+    this.totalData = event.returnObject.count;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
   }
-
+  onSelect(event)
+  {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(this.pageNow);
+  }
   searchSort(event: any) {
     if (this.orderByKey == event.target.attributes.name.nodeValue) {
       this.orderByValue = !this.orderByValue
