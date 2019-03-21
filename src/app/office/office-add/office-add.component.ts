@@ -14,11 +14,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class OfficeAddComponent implements OnInit {
   
-  type: string = "add";
+  pageType: string = "add";
   param: string;
   result: any;
   refOfficeId: any
+  allOfficeClass: any
   apiUrl: any
+  officeClassUrl: any
   foundationUrl: string = environment.foundationUrl;
   isActive: any = 1;
   isVirtualOffice: any = 1;
@@ -26,21 +28,31 @@ export class OfficeAddComponent implements OnInit {
   officeObj: OfficeObj;
 
   constructor(private router: Router,private route: ActivatedRoute, private httpClient: HttpClient) {
-    this.apiUrl = this.foundationUrl + AdInsConstant.getRefOfficeObj; 
+    this.apiUrl = this.foundationUrl + AdInsConstant.getRefOfficeObj;
+    this.officeClassUrl = this.foundationUrl + AdInsConstant.GetRefMasterList;
+    
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
-        this.type = params['param'];
+        this.pageType = params['param'];
       }
       if (params['refOfficeId'] != null) {
         this.refOfficeId = params['refOfficeId'];
       }
-      console.log(this.type)
+      console.log(this.pageType)
       console.log(this.refOfficeId)
   });
   }
 
   ngOnInit() {
-    if (this.type == "edit") {
+    // this.refOfficeObj = new RefOfficeObj()
+    this.httpClient.post(this.officeClassUrl, null).subscribe(
+        (response) => {
+            this.allOfficeClass = response['returnObject']
+        },
+        (error) => {
+            console.log(error);
+        })
+    if (this.pageType == "edit") {
     var refOfficeObj = new RefOfficeObj()
     refOfficeObj.refOfficeId = this.refOfficeId
     this.httpClient.post(this.apiUrl, refOfficeObj).subscribe(
@@ -60,7 +72,7 @@ export class OfficeAddComponent implements OnInit {
   }
 
   Save(OfficeAddReqForm: NgForm): void {
-    if (this.type === "edit") {
+    if (this.pageType === "edit") {
         this.addEditUrl = this.foundationUrl + AdInsConstant.EditRefBank;
         this.officeObj = new OfficeObj();
         this.officeObj = OfficeAddReqForm.value;

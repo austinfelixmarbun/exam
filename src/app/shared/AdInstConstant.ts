@@ -34,7 +34,8 @@ export class AdInsConstant {
     public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
     public static GetAllRefBizUnit = "/OrganizationDefinition/GetAllRefBizUnit";
     public static GetOrgJobTitleByMdlStruc = "/OrganizationDefinition/GetOrgJobTitleByMdlStruc";
-
+    public static GetRefBizUnitByOffice = "/OrganizationDefinition/GetRefBizUnitByOffice";
+    
     //REF-JOB-TITLE
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
     public static AddRefJobTitle = "/OrganizationDefinition/AddRefJobTitle";
@@ -67,7 +68,10 @@ export class AdInsConstant {
     
     //EMP_POSITION
     public static GetEmpPositionPaging = "/EmpPosition/GetEmpPositionPaging";
+    public static GetEmpByEmpPositionId = "/EmpPosition/GetEmpByEmpPositionId";
     public static AddEmpPosition = "/EmpPosition/AddEmpPosition";
+    public static EditEmpPosition = "/EmpPosition/EditEmpPosition";
+    public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
     
     //SYSTEM-SETTING
     //REF-USER
@@ -102,6 +106,24 @@ export class AdInsConstant {
     public static AddRefBizUnit = "/OrganizationDefinition/AddRefBizUnit";
     public static EditRefBizUnit = "/OrganizationDefinition/EditRefBizUnit";
 
+    //REF COY
+    public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
+    public static GetBodCoyPaging = "";
+    public static AddCoyBod = "/CoyBod/AddCoyBOD";
+    public static EditCoyBod = "/CoyBod/EditCoyBOD";
+    public static DeleteCoyBod = "/CoyBod/DeleteCoyBOD";
+    public static GetCoyBod = "/CoyBod/GetCoyBod";
+    public static GetCommissionerPaging = "";
+    public static AddCoyCommissioner = "/CoyCommissioner/AddCoyCommissioner";
+    public static EditCoyCommissioner = "/CoyCommissioner/EditCoyCommissioner";
+    public static DeleteCoyCommissioner = "/CoyCommissioner/DeleteCoyCommissioner";
+    public static GetCoyCommissioner = "/CoyCommissioner/GetCoyCommissioner";
+
+    //REF MASTER
+    public static GetRefMasterList = "/RefMaster/GetRefMasterList";
+
+    //REF PROV DISTRICT
+    public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
     //MENU
     public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
 

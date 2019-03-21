@@ -8,6 +8,7 @@ import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeAddComponent } from './employee-add/employee-add.component';
 import { EmployeePositionComponent } from './employee-position/employee-position.component';
+import { EmployeePositionAddComponent } from './employee-position/employee-position-add/employee-position-add.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { EmployeePositionComponent } from './employee-position/employee-position
   declarations: [
     EmployeeComponent,
     EmployeeAddComponent,
-    EmployeePositionComponent
+    EmployeePositionComponent,
+    EmployeePositionAddComponent
   ]
 })
 export class EmployeeModule { }

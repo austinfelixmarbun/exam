@@ -92,6 +92,28 @@
                 }
             ],
             "itemsUrl": []
+        },
+        {
+            "type": "dropdown",
+            "name": "mrKonvenSyariah",
+            "id": "mrKonvenSyariah",
+            "value": "Konvensional/Syariah",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne" : false,
+            "url": "https://api.myjson.com/bins/ld6e8",
+            "label": "Konvensional/Syariah",
+            "items": [
+                {
+                    "key": "KON",
+                    "value": "Konvensional"
+                },
+                {
+                    "key": "SYA",
+                    "value": "Syariah"
+                }
+            ],
+            "itemsUrl": []
         }
     ]
 }

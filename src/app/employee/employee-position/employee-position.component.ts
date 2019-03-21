@@ -11,6 +11,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { OrgJobTitleObj } from 'app/shared/model/OrgJobTitleObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-employee-position',
@@ -22,63 +23,46 @@ export class EmployeePositionComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
   urlJson: string = "./assets/search/searchEmpList.json";
-  pageType: string = "add";
-  refEmpId: any
+  refEmpId: any;
+  refOfficeId: any;
   empNo: any
   empName: any
-  isActive: boolean = false;
-  allRefOffice: any;
-  refOfficeId: any = '1557';
-  allSupervisor: any;
-  superiorRefEmpId: any = '';
-  allBiz: any;
-  refBizUnitId: any = 'selectOne';
-  allOrgJobTitle: any;
-  orgJobTitleId: any = 'selectOne';
-  positionStartDt: any;
-  positionFinishDt: any;
   empObj: RefEmpObj;
   refOfficeObj: RefOfficeObj
   empPositionObj: EmpPositionObj;
   orgJobTitleObj: OrgJobTitleObj;
   apiUrl: any;
-  addUrl: any;
-  getUrl: any;
   deleteUrl: any;
-  refOfficeUrl: any;
-  supervisorUrl: any;
-  bizUrl: any;
-  orgJobTitleUrl: any;
   foundationUrl: string = environment.foundationUrl;
-  empPositionVisible: boolean = true;
-  addEditVisible: boolean = false;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
-  resultData: string;
+  resultData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
   arrCrit: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
-    this.getUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetEmpPositionPaging;
-    this.addUrl = this.foundationUrl + AdInsConstant.AddEmpPosition;
-    this.refOfficeUrl = this.foundationUrl + AdInsConstant.GetAllRefOffice;
-    this.supervisorUrl = this.foundationUrl + AdInsConstant.GetEmpListByOfficeIdAndIsActive;
-    this.bizUrl = this.foundationUrl + AdInsConstant.GetAllRefBizUnit;
-    this.orgJobTitleUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitleByMdlStruc;
-    this.deleteUrl = '';
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteEmpPosition;
     
     this.route.queryParams.subscribe(params => {
       if (params['refEmpId'] != null) {
         this.refEmpId = params['refEmpId'];
+      }
+      if (params['empNo'] != null) {
+        this.empNo = params['empNo'];
+      }
+      if (params['empName'] != null) {
+        this.empName = params['empName'];
       }
     });
   }
 
   ngOnInit() {
     console.log('test')
+    const getuserAccess = JSON.parse(localStorage.getItem('UserAccess'));
+    this.refOfficeId = getuserAccess.refOfficeId
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.DataType = 'Numeric'
@@ -92,40 +76,6 @@ export class EmployeePositionComponent implements OnInit {
     critObj.propName = 'refOfficeId';
     critObj.value = this.refOfficeId
     this.arrCrit.push(critObj);
-
-    this.empObj = new RefEmpObj()
-    this.refOfficeObj = new RefOfficeObj()
-    this.empObj.refEmpId = this.refEmpId
-    this.httpClient.post(this.getUrl, this.empObj).subscribe(
-      (response) => {
-        this.empNo = response['returnObject']['empNo']
-        this.empName = response['returnObject']['empName']
-      },
-      (error) => {
-        console.log(error);
-      })
-    this.httpClient.post(this.refOfficeUrl, null).subscribe(
-      (response) => {
-        this.allRefOffice = response['returnObject']
-      },
-      (error) => {
-        console.log(error);
-      })
-      this.refOfficeObj.refOfficeId = 1557
-    this.httpClient.post(this.supervisorUrl, this.refOfficeObj).subscribe(
-      (response) => {
-        this.allSupervisor = response['returnObject']
-      },
-      (error) => {
-        console.log(error);
-      })
-    this.httpClient.post(this.bizUrl, null).subscribe(
-      (response) => {
-        this.allBiz = response['returnObject']
-      },
-      (error) => {
-        console.log(error);
-      })
   }
 
   search() {
@@ -160,7 +110,7 @@ export class EmployeePositionComponent implements OnInit {
         key: this.orderByKey,
         value: this.orderByValue
       }
-      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit)
         .subscribe(
           (response) => {
             console.log("Success");
@@ -185,7 +135,7 @@ export class EmployeePositionComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit)
       .subscribe(
         (response) => {
           console.log("Success");
@@ -208,7 +158,7 @@ export class EmployeePositionComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit)
       .subscribe(
         (response) => {
           console.log("Success");
@@ -223,11 +173,11 @@ export class EmployeePositionComponent implements OnInit {
       );
   }
 
-  delete(refEmpId: any) {
+  delete(empPositionId: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.empObj = new RefEmpObj();
-      this.empObj.refEmpId = refEmpId;
-      this.httpClient.post(this.deleteUrl, this.empObj).subscribe(
+      this.empPositionObj = new EmpPositionObj();
+      this.empPositionObj.empPositionId = empPositionId;
+      this.httpClient.post(this.deleteUrl, this.empPositionObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.onChange()
@@ -239,7 +189,7 @@ export class EmployeePositionComponent implements OnInit {
     }
   }
 
-  reset(){
+  reset() {
     this.searchComponent.initiateForm();
   }
 
@@ -248,77 +198,4 @@ export class EmployeePositionComponent implements OnInit {
     this.search();
   }
 
-  onChangeBiz(bizValue) {
-    this.orgJobTitleId = 'selectOne';
-    this.orgJobTitleObj = new OrgJobTitleObj()
-    if (bizValue == 'selectOne') {
-      bizValue = 0
-    }
-    this.orgJobTitleObj.orgMdlStrucId = bizValue
-    this.httpClient.post(this.orgJobTitleUrl, this.orgJobTitleObj).subscribe(
-      (response) => {
-        console.log(response);
-        this.allOrgJobTitle = response['returnObject']
-      },
-      (error) => {
-        console.log(error);
-      })
-  }
-
-  SaveForm(ReqForm: NgForm) {
-    if (this.pageType == 'add') {
-      this.empPositionObj = new EmpPositionObj();
-      this.empPositionObj = ReqForm.value
-      this.empPositionObj.refEmpId = this.refEmpId
-      if (this.isActive === false) {
-        this.empPositionObj.isActive = "0";
-      }
-      else {
-        this.empPositionObj.isActive = "1";
-      }
-
-      console.log(JSON.stringify(this.empPositionObj))
-      console.log(this.empPositionObj);
-      this.httpClient.post(this.addUrl, this.empPositionObj).subscribe(
-        (response) => {
-          console.log("Success");
-          console.log(response);
-          this.toastr.successMessage(response['message']);
-          this.router.navigate(["/employee"]);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
-    }
-  }
-
-  toggleActive(e) {
-    this.isActive = e.target.checked;
-  }
-
-  empPosition() {
-    this.refOfficeId = 'selectOne';
-    this.superiorRefEmpId = '';
-    this.refBizUnitId = 'selectOne';
-    this.onChangeBiz('selectOne');
-    this.positionStartDt = '';
-    this.positionFinishDt = '';
-    this.isActive = false;
-    this.addEditVisible = false;
-    this.empPositionVisible = true;
-  }
-
-  addPosition() {
-    this.refOfficeId = 'selectOne';
-    this.superiorRefEmpId = '';
-    this.refBizUnitId = 'selectOne';
-    this.onChangeBiz('selectOne');
-    this.positionStartDt = '';
-    this.positionFinishDt = '';
-    this.isActive = false;
-    this.addEditVisible = true;
-    this.empPositionVisible = false;
-  }
 }

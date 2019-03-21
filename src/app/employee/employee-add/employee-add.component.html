@@ -256,6 +256,9 @@
                   <div class="col-md-4">
                     <input type="text" pattern="^[0-9]+$" id="fax" class="form-control" name="fax" [(ngModel)]="fax"
                       #Fax="ngModel">
+                    <div *ngIf="Fax.errors?.pattern" class="invalid-feedback">
+                      <div *ngIf="Fax.errors?.pattern">Number Only</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -283,16 +286,18 @@
           <div class="form-body">
             <h4 class="form-section card-title"><i class="ft-file-text"></i> Bank Data</h4>
             <div class="form-group row">
-                <label class="col-md-3 label-control" for="bankName" translate>Bank Name : </label>
-                <div class="col-md-9">
-                    <app-lookup-ref-bank #uclRefBank [nameSelect]="bankName" [idSelect]="idSelect" [jsonSelect]="jsonSelect"></app-lookup-ref-bank>
-                </div>
+              <label class="col-md-3 label-control" for="bankName" translate>Bank Name : </label>
+              <div class="col-md-9">
+                <app-lookup-ref-bank #uclRefBank [nameSelect]="bankName" [idSelect]="idSelect"
+                  [jsonSelect]="jsonSelect"></app-lookup-ref-bank>
+              </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="bankBranch">Bank Branch: </label>
               <div class="col-md-9">
-                <input type="text" id="bankBranch" class="form-control" name="bankBranch" required [(ngModel)]="bankBranch"
-                  #BankBranch="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankBranch.invalid }">
+                <input type="text" id="bankBranch" class="form-control" name="bankBranch" required
+                  [(ngModel)]="bankBranch" #BankBranch="ngModel"
+                  [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankBranch.invalid }">
                 <div *ngIf="RefEmpForm.submitted && BankBranch.invalid" class="invalid-feedback">
                   <div *ngIf="BankBranch.errors.required">Bank Branch is required</div>
                 </div>
@@ -301,15 +306,16 @@
             <div class="form-group row">
               <label class="col-md-3 label-control" for="bankBranchBiCode">Bank Branch BI Code: </label>
               <div class="col-md-9">
-                <input type="text" id="bankBranchBiCode" class="form-control" name="bankBranchBiCode" [(ngModel)]="bankBranchBiCode"
-                  #BankBranchBiCode="ngModel">
+                <input type="text" id="bankBranchBiCode" class="form-control" name="bankBranchBiCode"
+                  [(ngModel)]="bankBranchBiCode" #BankBranchBiCode="ngModel">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="bankAccName">Account Name: </label>
               <div class="col-md-9">
-                <input type="text" id="bankAccName" class="form-control" name="bankAccName" required [(ngModel)]="bankAccName"
-                  #BankAccName="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankAccName.invalid }">
+                <input type="text" id="bankAccName" class="form-control" name="bankAccName" required
+                  [(ngModel)]="bankAccName" #BankAccName="ngModel"
+                  [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankAccName.invalid }">
                 <div *ngIf="RefEmpForm.submitted && BankAccName.invalid" class="invalid-feedback">
                   <div *ngIf="BankAccName.errors.required">Account Name is required</div>
                 </div>
