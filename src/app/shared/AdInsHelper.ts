@@ -1,4 +1,5 @@
 import { formatDate } from "@angular/common";
+import { AdInsConstant } from "./AdInstConstant";
 
 export class AdInsHelper{
     //Function
@@ -25,17 +26,44 @@ export class AdInsHelper{
     }
 
     public static ClearAllLog(){
-        localStorage.removeItem("UserContext");
-        localStorage.removeItem("PageAccess");
-        localStorage.removeItem("RoleId");
-        localStorage.removeItem("Username");
-        localStorage.removeItem("BusinessDate");
-        localStorage.removeItem("UserAccess");
-        localStorage.removeItem("Token");
-        localStorage.removeItem("Menu");
+        // localStorage.removeItem("UserContext");
+        // localStorage.removeItem("PageAccess");
+        // localStorage.removeItem("RoleId");
+        // localStorage.removeItem("Username");
+        // localStorage.removeItem("BusinessDate");
+        // localStorage.removeItem("UserAccess");
+        // localStorage.removeItem("Token");
+        // localStorage.removeItem("Menu");
+
+        localStorage.clear();
     }
 
     public static ClearPageAccessLog(){
         localStorage.removeItem("PageAccess");
+    }
+
+    public static CheckSessionTimeout(){
+        let today = new Date();
+        var businessDtBefore = localStorage.getItem("LastAccessTime");
+        var businessDtNow = formatDate(today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
+        if(businessDtBefore==undefined || businessDtBefore==null)
+        {
+            localStorage.setItem("LastAccessTime",businessDtNow);
+        }
+        else
+        {
+            var bsDtBefore = new Date(businessDtBefore);
+            var tempDate = today.getTime()-bsDtBefore.getTime();
+            console.log(tempDate);
+            if(tempDate>AdInsConstant.TimeoutSession)
+            {
+                var data = {status:"001",reason:"Session Time Out"};
+                AdInsHelper.ClearAllLog();
+                return "1";
+            }
+            localStorage.setItem("LastAccessTime",businessDtNow);
+        }
+        return "0";
+
     }
 }

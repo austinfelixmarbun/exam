@@ -29,7 +29,7 @@ export class CustomizerComponent implements OnInit, AfterViewChecked {
 
   }
 
-  sendOptions() {    
+  sendOptions() {
     this.directionEvent.emit(this.options);
   }
 

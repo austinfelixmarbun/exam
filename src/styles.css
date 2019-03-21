@@ -56,11 +56,11 @@ form label{
 
 .table-header{
     font-size: 12px !important;
-    font-family: "Montserrat";
+    background-color:lightgray;
 }
 
 .table{
-    background-color: white;
+    background-color:white;
     margin-bottom:3px !important;
 }
 
@@ -92,4 +92,9 @@ form label{
 .mat-dialog-container{
     background-color: #BD362F;
     color: #FFFFFF;
+}
+
+.header-page{
+    background-color:white !important;
+    color:black !important;
 }

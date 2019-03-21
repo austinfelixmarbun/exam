@@ -16,6 +16,9 @@ import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { formatDate } from '@angular/common';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { format } from 'util';
+import { environment } from 'environments/environment.prod';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Injectable()
@@ -36,6 +39,15 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         var myObj;
         let today = new Date();
         var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US');
+
+        var checkSession=AdInsHelper.CheckSessionTimeout();
+        if(checkSession=="1")
+        {
+            var data = {status:"001",reason:"Session Timeout"};
+            this.errorDialogService.openDialog(data);
+            this.spinner.hide ();
+            
+        }
         //Ini kalau buat Login belom punya Current User Contexts
         if(currentUserContext != null)
         {
@@ -44,7 +56,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 UserName: currentUserContext.UserName,
                 Role: currentUserContext.Role,
                 Office: currentUserContext.Office,
-                SendDateTime: currentUserContext.BusinessDate,
+                SendDateTime: businessDt,
                 Ip:localStorage.getItem("LocalIp"),
                 RequestObject: request.body,
                 UserLog:JSON.parse(localStorage.getItem("PageAccess"))
