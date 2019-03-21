@@ -116,12 +116,12 @@
               <div class="col-md-9">
                 <div class="custom-control custom-radio display-inline-block">
                   <input type="radio" id="Konvensional" value="KON" checked name="mrKonvenSyariah" [(ngModel)]="mrKonvenSyariah"
-                    class="custom-control-input" [attr.disabled]="isDisabledState === true">
+                    class="custom-control-input" [attr.disabled]="isDisabledState? true : null">
                   <label class="custom-control-label" for="Konvensional">Konvensional</label>
                 </div>
                 <div class="custom-control custom-radio display-inline-block">
                   <input type="radio" id="Syariah" value="SYA" name="mrKonvenSyariah" [(ngModel)]="mrKonvenSyariah"
-                    class="custom-control-input" [attr.disabled]="isDisabledState === true">
+                    class="custom-control-input" [attr.disabled]="isDisabledState? true : null">
                   <label class="custom-control-label" for="Syariah">Syariah</label>
                 </div>
               </div>
