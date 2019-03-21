@@ -219,7 +219,7 @@ export class SearchComponent implements OnInit {
   }
 
   resolveObject(obj: any, url: string) {
-    const val = this.postJSON(url);
+    const val = this.postJSON(environment.foundationUrl+url);
     val.subscribe(tempData => {
       obj.itemsUrl = tempData.returnObject;
     });
