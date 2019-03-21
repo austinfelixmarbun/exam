@@ -4,11 +4,7 @@ export class AdInsConstant {
     public static RestrictionEq = "Eq";
     public static showData = "10,50,100";
     public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
-<<<<<<< HEAD
     public static Login="/UserManagement/HTML5Login";
-=======
-    public static Login = "";
->>>>>>> origin/master
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
 
     public static GetProvince = "/los/v1/get_provinsi";
@@ -57,7 +53,10 @@ export class AdInsConstant {
     public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
     public static DeleteRefEmpAndEmpBankAcc = "/RefEmp/DeleteRefEmpAndEmpBankAcc";
 
-    //SYSTEM-SETTING
+    //REF-EMP-POSITION
+    public static GetListEmployeebyRefEmpId = "/EmpPosition/GetListEmployeebyRefEmpId";
+
+
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
     public static AddRefUser = "/UserManagement/AddRefUser";
@@ -75,6 +74,13 @@ export class AdInsConstant {
     public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
     public static GetRefRole = "/RefRole/GetRefRole";
     public static GetListDataCurrentUser = "/UserManagement/GetListDataCurrentUser";
+    public static GetRefRoleByEmpPositionId = "/RefRole/GetRefRoleByEmpPositionId";
+    public static EditUserTitleRole = "/UserManagement/EditUserTitleRole";
+    public static AddUserTitleRole = "/UserManagement/AddUserTitleRole";
+    public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
+
+
+
 
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";

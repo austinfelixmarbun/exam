@@ -1,3 +1,4 @@
+import { LookupRoleComponent } from './lookup/lookup-role/lookup-role.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
@@ -18,7 +19,8 @@ import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank
         LookupEmployeeComponent,
         LookupzipcodeComponent,
         NgbModule,
-        LookupRefBankComponent
+        LookupRefBankComponent,
+        LookupRoleComponent
     ],
     imports: [
         CommonModule,
@@ -32,7 +34,8 @@ import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank
         LookupComponent,
         LookupEmployeeComponent,
         LookupzipcodeComponent,
-        LookupRefBankComponent
+        LookupRefBankComponent,
+        LookupRoleComponent
     ]
 })
 

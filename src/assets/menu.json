@@ -37,7 +37,19 @@
         "path": "", "title": "Marketing", "icon": "ft-copy", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false,
         "submenu": [
             { "path": "/prospect", "title": "Prospect Request", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
-            
+
         ]
+    },
+    {
+      "path": "", "title": "System Setting", "icon": "ft-users", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false,
+      "submenu": [
+        {
+          "path": "", "title": "Security", "icon": "", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false,
+          "submenu": [
+            { "path": "/systemSetting/role", "title": "Role Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] },
+            { "path": "/systemSetting/refUser", "title": "User Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
+          ]
+        }
+      ]
     }
 ]

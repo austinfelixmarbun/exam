@@ -167,7 +167,7 @@ export class UserAddEditComponent implements OnInit {
               this.apiUrl = this.foundationUrl + AdInsConstant.AddRefUser;
               console.log(lookupEmp);
               this.refUserObj = new RefUserObj();
-              this.refUserObj.refEmpId = lookupEmp.EmployeeId;
+              this.refUserObj.refEmpId = lookupEmp.idSelect;
               this.refUserObj.username = UserAddEditForm.value.Username;
               this.refUserObj.password = UserAddEditForm.value.Password;
 
@@ -204,7 +204,7 @@ export class UserAddEditComponent implements OnInit {
       console.log('edit');
       this.apiUrl = this.foundationUrl + AdInsConstant.EditRefUser;
 
-      this.refUserObj.refEmpId = lookupEmp.EmployeeId;
+      this.refUserObj.refEmpId = lookupEmp.idSelect;
       this.refUserObj.username = UserAddEditForm.value.Username;
 
       if (UserAddEditForm.value.IsActive) { this.refUserObj.isActive = '1' } else { this.refUserObj.isActive = '0' };

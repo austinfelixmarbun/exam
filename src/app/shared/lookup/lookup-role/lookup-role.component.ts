@@ -11,15 +11,15 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
-  selector: 'app-lookup-emp',
-  templateUrl: './lookup-employee.component.html',
+  selector: 'app-lookup-role',
+  templateUrl: './lookup-role.component.html',
   providers: [NGXToastrService]
 })
-export class LookupEmployeeComponent implements OnInit {
+export class LookupRoleComponent implements OnInit {
 
   constructor(private modalService: NgbModal) { }
 
-  urlJson: string = "./assets/lookup/lookupEmp.json";
+  urlJson: string = "./assets/lookup/lookupRole.json";
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
@@ -27,8 +27,8 @@ export class LookupEmployeeComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
 
-  EmployeeName: any;
-  EmployeeId: any;
+  roleName: any;
+  refRoleId: any;
 
   configuration: any;
   urlGet: string;
@@ -50,7 +50,7 @@ export class LookupEmployeeComponent implements OnInit {
   foundationUrl: string = environment.foundationUrl;
 
   ngOnInit() {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetListEmployee;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
@@ -61,8 +61,8 @@ export class LookupEmployeeComponent implements OnInit {
     console.log(id + " : " + name);
     console.log(item);
     this.idSelect = id;
-    this.EmployeeId = id;
-    this.EmployeeName = name;
+    this.refRoleId = id;
+    this.roleName = name;
     this.nameSelect = name;
     this.jsonSelect = JSON.stringify(item);
     this.modalService.dismissAll();
