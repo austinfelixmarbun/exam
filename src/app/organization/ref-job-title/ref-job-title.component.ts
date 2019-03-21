@@ -20,10 +20,12 @@ import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgr
 })
 export class RefJobTitleComponent implements OnInit {
 
-  //Start UC Grid Footer//
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
-  //End UC Grid Footer//
+  //** Start Query Paging */
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  urlQryPaging : string = AdInsConstant.GetRefJobTitle;
+  //** End Query Paging */
+
   urlJson: string = "./assets/search/searchJobTitle.json";
   resultData: any;
   rjtObj: RefJobTitleObj;
@@ -51,84 +53,49 @@ export class RefJobTitleComponent implements OnInit {
     this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefJobTitle;
   }
 
-  // ** Start UC Search **//
-  search() {
-    this.orderByKey = null
-    this.orderByValue = true
-    this.pageNow = 1;
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          this.ucgridFooter.totalData = this.totalData;
-          this.ucgridFooter.resultData = this.resultData;
-          console.log(response);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+  //** Start UC Search **/
+
+  getResult(event){
+    this.resultData = event.returnObject;
+    this.totalData = event.returnObject.count;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
   }
 
-  onSelect(event) {
+  onSelect(event)
+  {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);
   }
 
-
   searchSort(event: any) {
-    if (this.resultData != null) {
-      if (this.orderByKey == event.target.attributes.name.nodeValue) {
-        this.orderByValue = !this.orderByValue
-      } else {
-        this.orderByValue = true
-      }
-      this.orderByKey = event.target.attributes.name.nodeValue
-      var order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-        .subscribe(
-          (response) => {
-            console.log("Success");
-            this.resultData = response.returnObject;
-            this.totalData = response.returnObject.count;
-            console.log(this.resultData);
-          },
-          (error) => {
-            console.log("Error");
-            console.log(error);
-          }
-        );
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
     }
-  }
-
-  searchPagination(event: number) {
-    this.pageNow = event;
+    this.orderByKey = event.target.attributes.name.nodeValue
     var order = {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
-  // ** End UC Grid Footer ** //
+
+  searchPagination(event: number) {
+    this.pageNow = event;
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+  }
+
+  //** End UC Search **/
 
   delete(refJobId: any) {
     if (confirm("Are you sure to delete this record?")) {

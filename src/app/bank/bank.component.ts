@@ -22,6 +22,7 @@ export class BankComponent implements OnInit {
   //** Start UC Search **//
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
+  urlQryPaging : string = AdInsConstant.GetBankPaging;
   //** End UC Search **//
   editUrl: any;
   bankObj: RefBankObj;
@@ -31,7 +32,7 @@ export class BankComponent implements OnInit {
   totalData: any;
   pageSize: any;
   apiUrl: any;
-  urlQryPaging : string = AdInsConstant.GetBankPaging;
+  
   // array of all items to be paged
   private allItems: any[];
   // pager object
@@ -51,6 +52,8 @@ export class BankComponent implements OnInit {
   }
 
   //** Start UC Search **/
+
+  
 
   getResult(event){
     this.resultData = event.returnObject;

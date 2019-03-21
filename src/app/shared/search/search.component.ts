@@ -131,64 +131,6 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  callSearch(pageNo: number, rowPerPage: number, orderBy: any) {
-    console.log(pageNo);
-    var request = new RequestCriteriaObj();
-    var arrCrit = new Array();
-
-    request.pageNo = pageNo;
-    request.rowPerPage = rowPerPage;
-    request.orderBy = orderBy;
-
-    var formControl = this.myForm.nativeElement.querySelectorAll('.search-form-control')
-    console.log(formControl)
-
-    for (var i = 0; i < formControl.length; i++) {
-      var critObj = new CriteriaObj();
-      var component = formControl[i];
-      console.log('a', component.value);
-      //Ini khusus kalau dari Drop Down
-      if (component.attributes['data-inputId'] != null || component.value != "") {
-        if (component.nodeName === 'SELECT') {
-          var ddl = component.options;
-          var text = ddl[ddl.selectedIndex].value;
-          //Kalau Dari Dropdown udah pasti pake Eq
-          critObj.restriction = AdInsConstant.RestrictionEq;
-          critObj.propName = component.name;
-          critObj.value = text;
-        }
-        else {
-          //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
-          critObj.propName = component.name;
-          if (component.attributes['data-inputId'] != null) {
-            critObj.value = component.attributes['data-inputId'].value;
-          } else {
-            critObj.value = component.value;
-          }
-          console.log(component.type);
-          console.log(component.restriction);
-          if (component.value.includes("%")) {
-            critObj.restriction = AdInsConstant.RestrictionLike;
-
-          }
-          //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
-
-          else if (component.attributes['data-restriction'] != null) {
-            critObj.restriction = component.restriction;
-          }
-          else {
-            critObj.restriction = AdInsConstant.RestrictionEq
-          }
-        }
-        arrCrit.push(critObj);
-      }
-    }
-
-    request.criteria = arrCrit;
-    console.log(request.criteria)
-    return this.adInsService.postDataDummy(AdInsConstant.GetListProduct, request);
-  }
-
   searchClick() {
     this.orderByKey = null
     this.orderByValue = true
@@ -201,6 +143,9 @@ export class SearchComponent implements OnInit {
     var request = new RequestCriteriaObj();
     var arrCrit = new Array();
 
+    
+    console.log("Search");
+    
     request.pageNo = pageNo;
     request.rowPerPage = rowPerPage;
     request.orderBy = orderBy;
@@ -257,12 +202,6 @@ export class SearchComponent implements OnInit {
 
     request.criteria = arrCrit;
     var httpRequest = new HttpRequestObj();
-    //var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
-    // httpRequest.UserName = currentUserContext.UserName;
-    // httpRequest.Role = currentUserContext.Role;
-    // httpRequest.Office = currentUserContext.Office;
-    // httpRequest.SendDateTime = currentUserContext.BusinessDate;
-    // httpRequest.RequestObject = request;
     this.http.post(apiUrl, request).subscribe((response) =>
     {
       this.result.emit(response);

@@ -1,5 +1,4 @@
 {
-    "url": "http://getEmpList",
     "component": [
         {
             "type": "dropdown",

@@ -1,5 +1,4 @@
 {
-    "url": "http://getEmployee",
     "exportExcel": true, 
     "component": [
         {

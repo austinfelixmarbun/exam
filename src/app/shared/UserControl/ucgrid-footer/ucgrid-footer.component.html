@@ -1,5 +1,5 @@
 <div class="gridFooter row col-md-12">
-  <div class="col-md-5 col-xs-12" style="float:left;font-weight: bold;" translate>Total Data : {{totalData}}</div>
+  <div class="col-md-4 col-xs-12" style="float:left;font-weight: bold;" translate>Total Data : {{totalData}}</div>
   <div class="justify-content-center col-md-3 col-xs-12">
       <ngb-pagination (pageChange)="searchPagination($event)" [pageSize]="pageSize" [collectionSize]="totalData"
           [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>

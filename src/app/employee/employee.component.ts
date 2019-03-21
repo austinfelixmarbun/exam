@@ -20,8 +20,12 @@ import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgr
 })
 export class EmployeeComponent implements OnInit {
 
+  //** Start Query Paging */
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
+  urlQryPaging : string = AdInsConstant.GetListEmployee;
+  //** End Query Paging */
+
   urlJson: string = "./assets/search/searchEmployee.json";
   resultData: string;
   ExcelData: any;
@@ -40,7 +44,6 @@ export class EmployeeComponent implements OnInit {
 
   initiateForm() {
     this.getJSON(this.urlJson).subscribe(data => {
-      console.log(data);
       this.exportData = data.exportExcel;
     });
   }
@@ -56,59 +59,34 @@ export class EmployeeComponent implements OnInit {
     this.initiateForm()
   }
 
-  search() {
-    this.orderByKey = null
-    this.orderByValue = true
-    this.pageNow = 1;
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          this.ucgridFooter.totalData = this.totalData;
-          this.ucgridFooter.resultData = this.resultData;
-          console.log(response);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+  //** Start UC Search **/
+
+  getResult(event){
+    this.resultData = event.returnObject;
+    this.totalData = event.returnObject.count;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
   }
 
-  onSelect(event){
+  onSelect(event)
+  {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);
   }
 
   searchSort(event: any) {
-    if (this.resultData != null) {
-      if (this.orderByKey == event.target.attributes.name.nodeValue) {
-        this.orderByValue = !this.orderByValue
-      } else {
-        this.orderByValue = true
-      }
-      this.orderByKey = event.target.attributes.name.nodeValue
-      var order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-        .subscribe(
-          (response) => {
-            console.log("Success");
-            this.resultData = response.returnObject;
-            this.totalData = response.returnObject.count;
-            console.log(this.resultData);
-          },
-          (error) => {
-            console.log("Error");
-            console.log(error);
-          }
-        );
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
     }
+    this.orderByKey = event.target.attributes.name.nodeValue
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   searchPagination(event: number) {
@@ -120,43 +98,10 @@ export class EmployeeComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
-  onChange() {
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
-  }
+  //** End UC Search **/
 
   delete(refEmpId: any) {
     if (confirm("Are you sure to delete this record?")) {
@@ -165,7 +110,6 @@ export class EmployeeComponent implements OnInit {
       this.httpClient.post(this.deleteUrl, this.empObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.onChange()
         },
         (error) => {
           console.log("Error");
@@ -194,11 +138,6 @@ export class EmployeeComponent implements OnInit {
           console.log(error);
         }
       );
-  }
-
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.search();
   }
 
   // Success Type
