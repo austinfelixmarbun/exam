@@ -25,6 +25,7 @@ export class AdInsConstant {
     public static GetRefOfficeActiveAndNonVirtualKeyValue = "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue";
     public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
     public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
+    public static AddRefOffice = "/RefOffice/AddRefOffice";
     
     //REF OFFICE AREA
     public static GetAllListArea = "/RefOfficeArea/GetAllListArea";

@@ -8,11 +8,13 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-office-add',
   templateUrl: './office-add.component.html',
-  styleUrls: ['./office-add.component.scss']
+  styleUrls: ['./office-add.component.scss'],
+  providers: [NGXToastrService]
 })
 export class OfficeAddComponent implements OnInit {
 
@@ -35,9 +37,12 @@ export class OfficeAddComponent implements OnInit {
   refOfficeAreaId: any = '';
   holidaySchmHId: any;
   workingHourSchmHId: any;
+  hierarchyNo: any;
   apiUrl: any;
+  addUrl: any;
   officeClassUrl: any;
   refOrgUrl: any;
+  getRefOrgUrl: any;
   orgMdlUrl: any;
   addEditUrl: any;
   areaUrl: any;
@@ -47,13 +52,13 @@ export class OfficeAddComponent implements OnInit {
   foundationUrl: string = environment.foundationUrl;
   isActive: boolean = true;
   isAllowAppCreated: boolean = true;
-  isVirtualOffice: any = 1;
   officeObj: OfficeObj;
   refMasterObj: RefMasterObj;
   orgMdlObj: OrgMdlObj
 
-  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) {
+  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
     this.apiUrl = this.foundationUrl + AdInsConstant.getRefOfficeObj;
+    this.addUrl = this.foundationUrl + AdInsConstant.AddRefOffice;
     this.officeClassUrl = this.foundationUrl + AdInsConstant.GetRefMasterList;
     this.refOrgUrl = this.foundationUrl + AdInsConstant.GetListAllRefOrg;
     this.orgMdlUrl = this.foundationUrl + AdInsConstant.GetAllActiveOrgMdlByRefOrgId;
@@ -61,6 +66,7 @@ export class OfficeAddComponent implements OnInit {
     this.areaUrl = this.foundationUrl + AdInsConstant.GetAllListArea;
     this.holidaySchmUrl = this.foundationUrl + AdInsConstant.GetAllActiveHolidaySchmH;
     this.workingHourSchmUrl = this.foundationUrl + AdInsConstant.GetListOfWorkingHourSchm;
+    this.getRefOrgUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
 
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
@@ -119,52 +125,60 @@ export class OfficeAddComponent implements OnInit {
         console.log(error);
       })
     if (this.pageType == "edit") {
-      var refOfficeObj = new RefOfficeObj();
-      refOfficeObj.refOfficeId = this.refOfficeId;
-      this.httpClient.post(this.apiUrl, refOfficeObj).subscribe(
+
+    }
+  }
+
+  SaveForm(OfficeAddReqForm: NgForm): void {
+    if (this.pageType === "add") {
+      this.officeObj = new OfficeObj();
+      this.officeObj = OfficeAddReqForm.value;
+      this.officeObj.cntctPersonEmail1 = 'test.test@test.com'
+      this.officeObj.cntctPersonJobTitle = 'test'
+      this.officeObj.cntctPersonMobilePhn1 = '123'
+      this.officeObj.isOfficeClose = '0'
+      this.officeObj.kecamatan = 'test'
+      this.officeObj.kelurahan = 'test'
+      this.officeObj.zipcode = '0'
+      this.officeObj.rt = '0'
+      this.officeObj.rw = '0'
+      this.officeObj.officeAddr = 'test'
+      this.officeObj.rw = '0'
+      this.officeObj.phn1 = '0'
+      this.officeObj.phnArea1 = '0'
+      this.officeObj.phnArea1 = '0'
+      this.officeObj.phn1 = '0'
+
+      if (this.isAllowAppCreated === false) {
+        this.officeObj.isAllowAppCreated = "0";
+      }
+      else {
+        this.officeObj.isAllowAppCreated = "1";
+      }
+      if (this.isActive === false) {
+        this.officeObj.isActive = "0";
+      }
+      else {
+        this.officeObj.isActive = "1";
+      }
+      console.log(JSON.stringify(this.officeObj))
+      console.log(this.officeObj);
+      this.httpClient.post(this.addUrl, this.officeObj).subscribe(
         (response) => {
           console.log("Success");
-          this.result = response['returnObject'];
-          this.isActive = this.result.isActive;
-          this.isVirtualOffice = this.result.isVirtualOffice;
-          console.log(this.result);
+          console.log(response);
+          this.toastr.successMessage(response['message']);
+          // this.router.navigate(["/employee"]);
         },
         (error) => {
           console.log("Error");
           console.log(error);
         }
       );
-    }
-  }
 
-  SaveForm(OfficeAddReqForm: NgForm): void {
-    if (this.pageType === "edit") {
-      this.addEditUrl = this.foundationUrl + AdInsConstant.EditRefBank;
-      this.officeObj = new OfficeObj();
-      this.officeObj = OfficeAddReqForm.value;
-      this.officeObj.refOfficeId = this.refOfficeId;
-      this.httpClient.post(this.addEditUrl, this.officeObj).subscribe(
-        (response) => {
-          console.log(response);
-          this.router.navigateByUrl('/bank');
-        },
-        (error) => {
-          console.log(error);
-        });
     }
     else {
-      this.addEditUrl = this.foundationUrl + AdInsConstant.AddRefBank;
-      this.officeObj = new OfficeObj();
-      this.officeObj = OfficeAddReqForm.value;
-      this.officeObj.refOfficeId = "0";
-      this.httpClient.post(this.addEditUrl, this.officeObj).subscribe(
-        (response) => {
-          console.log(response);
-          this.router.navigateByUrl('/bank');
-        },
-        (error) => {
-          console.log(error);
-        });
+      
     }
   }
 
@@ -192,6 +206,25 @@ export class OfficeAddComponent implements OnInit {
         this.allOfficeParent = response['returnObject'];
         if (response['returnObject']['length'] != 0) {
           this.parentId = response['returnObject'][0]['refOfficeId'];
+        }
+        if (response['returnObject']['length'] != 0) {
+          this.httpClient.post(this.getRefOrgUrl, this.orgMdlObj).subscribe(
+            (response) => {
+              // this.allOrgMdl = response['returnObject'];
+              this.hierarchyNo = response['returnObject']['hierarchyNo'];
+              if (this.hierarchyNo <= 2) {
+                this.mrKonvenSyariah = 'KON';
+                this.isDisabledState = false;
+              }else {
+                this.isDisabledState = true;
+              }
+            },
+            (error) => {
+              console.log(error);
+            })
+        }else {
+          this.mrKonvenSyariah = 'KON';
+          this.isDisabledState = false;
         }
       },
       (error) => {

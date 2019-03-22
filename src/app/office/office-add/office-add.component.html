@@ -140,46 +140,6 @@
                   (change)="toggleActive($event)" name="isActive">
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-md-3 label-control">Address: </label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" name="officeAddr" required [(ngModel)]="officeAddr" #OfficeAddr="ngModel"
-                  [ngClass]="{ 'is-invalid': OfficeReqForm.submitted && OfficeAddr.invalid }">
-                <div *ngIf="OfficeReqForm.submitted && OfficeAddr.invalid" class="invalid-feedback">
-                  <div *ngIf="OfficeAddr.errors.required">Address is required</div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3 label-control">City: </label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" name="city" [(ngModel)]="city" #City="ngModel">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3 label-control">Model Name: </label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" name="modelName" [(ngModel)]="modelName" #ModelName="ngModel">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3 label-control">Active Status: </label>
-              <div class="col-md-9">
-                <select name="isActive" class="form-control" [(ngModel)]="isActive">
-                  <option value="1">Yes</option>
-                  <option value="0">No</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3 label-control">Virtual Office: </label>
-              <div class="col-md-9">
-                <select name="isVirtualOffice" class="form-control" [(ngModel)]="isVirtualOffice">
-                  <option value="1">Yes</option>
-                  <option value="0">No</option>
-                </select>
-              </div>
-            </div>
           </div>
           <div class="form-actions right">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/office']">
