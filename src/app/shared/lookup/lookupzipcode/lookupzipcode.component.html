@@ -1,6 +1,6 @@
 <div class="input-group">
   <input type="text" (input)="onChange($event.target.value)" class="form-control search-form-control"
-    attr.data-json='{{jsonSelect}}' attr.data-inputId='{{idSelect}}' name="MsNewCatalogId" attr.data-datatype="Text"
+    attr.data-json='{{jsonSelect}}' attr.data-inputId='{{idSelect}}' name="zipcode" attr.data-datatype="Text"
     value="{{nameSelect}}" disabled>
   <div class="input-group-append">
     <span class="input-group-btn">
@@ -17,15 +17,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
-    <div class="form-actions right" style="float:right;text-align: right;margin-right: 10px;">
-      <button type="button" class="btn btn-raised btn-warning mr-1">
-        <i class="ft-x"></i> Cancel
-      </button>
-      <button type="button" (click)="search(lookupSearch)" class="btn btn-raised btn-primary">
-        <i class="fa fa-search"></i> Search
-      </button>
-    </div>
+    <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' (result)="getResult(ucgridFooter, $event)"></app-search>
     <table class="table table-responsive-md text-center table-hover">
       <thead>
         <tr>
@@ -51,22 +43,6 @@
         </tr>
       </tbody>
     </table>
-    <div class="gridFooter row col-md-12">
-
-      <div class="col-md-5 col-xs-12" style="float:left;font-weight: bold;">Total Data : {{totalData}}</div>
-      <div class="justify-content-center col-md-3 col-xs-12">
-        <ngb-pagination (pageChange)="searchPagination(lookupSearch,$event)" [pageSize]="pageSize" [collectionSize]="totalData"
-          [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
-
-      </div>
-      <div class="col-md-4 col-xs-12" style="float:right;">
-        <select class="custom-select" style="width: auto;float:right;" name="pageSize" [(ngModel)]="pageSize"
-          (change)="onChange(lookupSearch)">
-          <option [ngValue]="10">10</option>
-          <option [ngValue]="20">20</option>
-          <option [ngValue]="50">50</option>
-        </select>
-      </div>
-    </div>
+    <app-ucgrid-footer #ucgridFooter (select)="onSelect(lookupsearch, $event)"></app-ucgrid-footer>
   </div>
 </ng-template>

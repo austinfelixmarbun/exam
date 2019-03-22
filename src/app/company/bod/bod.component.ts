@@ -8,6 +8,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-bod',
@@ -18,6 +20,7 @@ import { HttpClient } from '@angular/common/http';
 export class BODComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
     urlJson: string = "./assets/search/searchBod.json";
     resultData: string;
     pageNow: any;
@@ -26,6 +29,7 @@ export class BODComponent implements OnInit {
     apiUrl: any;
     orderByKey: any = null;
     orderByValue: boolean = true;
+    urlQryPaging : string = AdInsConstant.GetCoyBodPaging;
     // array of all items to be paged
     private allItems: any[];
     // pager object
@@ -33,33 +37,24 @@ export class BODComponent implements OnInit {
     // paged items
     pagedItems: any[];
     foundationUrl: string = environment.foundationUrl;
-  
-    constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) { }
+    refCoyId : any;
+    constructor(private http: HttpClient,private route: ActivatedRoute, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) {
+      this.route.queryParams.subscribe(params => {
+        this.refCoyId = params["refCoyId"];
+    })
+     }
   
     ngOnInit() {
       this.pageNow = 1;
       this.pageSize = 10;
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetBodCoyPaging;
-
+      this.apiUrl = this.foundationUrl + AdInsConstant.GetCoyBodPaging;
     }
   
-    search() {
-      this.orderByKey = null
-      this.orderByValue = true
-      this.pageNow = 1;
-      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-        .subscribe(
-          (response) => {
-            console.log("Success");
-            this.resultData = response;
-            this.totalData = response.returnObject.count;
-            console.log(response);
-          },
-          (error) => {
-            console.log("Error");
-            console.log(error);
-          }
-        );
+    getResult(event){
+      this.resultData = event.returnObject;
+      this.totalData = event.returnObject.count;
+      this.ucgridFooter.totalData = this.totalData;
+      this.ucgridFooter.resultData = this.resultData;
     }
   
     searchSort(event: any) {
@@ -73,19 +68,7 @@ export class BODComponent implements OnInit {
         key: this.orderByKey,
         value: this.orderByValue
       }
-      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-        .subscribe(
-          (response) => {
-            console.log("Success");
-            this.resultData = response;
-            this.totalData = response.returnObject.count;
-            console.log(this.resultData);
-          },
-          (error) => {
-            console.log("Error");
-            console.log(error);
-          }
-        );
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
     }
   
     searchPagination(event: number) {
@@ -97,41 +80,7 @@ export class BODComponent implements OnInit {
           value: this.orderByValue
         }
       }
-      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-        .subscribe(
-          (response) => {
-            console.log("Success");
-            this.resultData = response;
-            this.totalData = response.returnObject.count;
-            console.log(this.resultData);
-          },
-          (error) => {
-            console.log("Error");
-            console.log(error);
-          }
-        );
-    }
-  
-    pageChange(page: number) {
-      this.pageNow = page;
-      this.search();
-    }
-    
-    // Success Type
-    typeSuccess() {
-      this.service.typeSuccess();
-    }
-  
-    typeError() {
-      this.service.typeError();
-    }
-  
-    timeout() {
-      this.service.timeout();
-    }
-  
-    errMsg() {
-      this.service.errorMessage('asdasd');
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
     }
     
     onChange() {
@@ -142,23 +91,16 @@ export class BODComponent implements OnInit {
           value: this.orderByValue
         }
       }
-      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-        .subscribe(
-          (response) => {
-            console.log("Success");
-            this.resultData = response;
-            this.totalData = response.returnObject.count;
-            console.log(this.resultData);
-          },
-          (error) => {
-            console.log("Error");
-            console.log(error);
-          }
-        );
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
     }
 
     reset(){
       this.searchComponent.initiateForm();
     }
-
+    onSelect(event)
+    {
+      this.pageNow = event.pageNow;
+      this.pageSize = event.pageSize;
+      this.searchPagination(this.pageNow);
+    }
 }
