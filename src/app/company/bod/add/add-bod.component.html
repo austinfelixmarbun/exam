@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div class="px-3">
-                <form class="form form-horizontal" name="RefCoyBodForm" #RefCoyBodForm="ngForm" (ngSubmit)="Save(RefCoyBodForm)">
+                <form class="form form-horizontal" name="RefCoyBodForm" #RefCoyBodForm="ngForm" (ngSubmit)="Save(RefCoyBodForm, ucAddress)">
                     <div class="form-body">
                         <h4 class="form-section card-title"><i class="ft-file-text"></i> Board Of Director</h4>
                         <div class="form-group row">
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                    <app-ucAddress></app-ucAddress>
+                    <app-ucAddress #ucAddress></app-ucAddress>
                     <!-- <div class="form-body">
                         <h4 class="form-section card-title"><i class="ft-file-text"></i> Address</h4>
                         <div class="form-group row">
