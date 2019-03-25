@@ -1,21 +1,6 @@
 <h4 class="form-section">User Maintenance</h4>
 <br />
-<app-search id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
-<div class="col-md-12">
-  <form>
-    <div class="form-actions right">
-      <button *ngIf="exportData" type="button" (click)="exportAsXLSX()" class="btn btn-raised btn-success mr-1">
-        <i class="fa fa-plus-circle"></i> Export Excel
-      </button>
-      <button type="button" class="btn btn-raised btn-warning mr-1">
-        <i class="ft-x"></i> Cancel
-      </button>
-      <button type="button" (click)="search()" class="btn btn-raised btn-primary">
-        <i class="fa fa-search"></i> Search
-      </button>
-    </div>
-  </form>
-</div>
+<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' (result)="getResult($event)"></app-search>
 
 <table class="table table-responsive-md text-center table-hover">
   <thead>
@@ -57,15 +42,7 @@
     </tr>
   </tbody>
 </table>
+<app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
 <i class="fa fa-plus-circle" [routerLink]="['/systemSetting/refUser/detail']" [queryParams]="{mode:'add'}"
   style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
-Current Page : {{pageNow}}
-<div class="d-flex justify-content-center">
-  <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pageSize" [collectionSize]="totalData"
-    [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
-  <fieldset class="form-group">
-    <select id="showData" (change)="changeShowData(showData.value)" #showData class="form-control">
-      <option *ngFor="let item of show" [value]="item">{{item}}</option>
-    </select>
-  </fieldset>
-</div>
+

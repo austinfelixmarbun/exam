@@ -3,4 +3,6 @@ export class RefRoleObj {
   roleCode: string;
   roleName: string;
   isActive: string;
+  listAddEmpPositionId: Array<any>;
+  listDelEmpPositionId: Array<any>;
 }

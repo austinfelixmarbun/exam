@@ -10,8 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
-
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 
 @Component({
   selector: 'app-user-paging',
@@ -21,6 +20,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserPagingComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlJson: string = './assets/search/searchUser.json';
   resultData: string;
   pageNow: any;
@@ -33,7 +33,7 @@ export class UserPagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-
+  urlQryPaging : string = AdInsConstant.GetRefUserPaging;
   constructor(
     private http: Http,
     private spinner: NgxSpinnerService,
@@ -57,64 +57,46 @@ export class UserPagingComponent implements OnInit {
     //   )
   }
 
-  search() {
-    this.spinner.show();
+  getResult(event){
+    this.resultData = event;
+    this.totalData = event.returnObject.count;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
+  }
 
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
+  onSelect(event)
+  {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(this.pageNow);
+  }
+  searchPagination(event: number) {
+    this.pageNow = event;
+
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
       .subscribe(
         (response) => {
           console.log("Success");
-          this.resultData = response;
+          this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
-          console.log(response);
-          this.spinner.hide();
+          console.log(this.resultData);
         },
         (error) => {
           console.log("Error");
           console.log(error);
-          this.spinner.hide();
         }
       );
-  }
-
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.search();
   }
 
   initiateForm() {
-    this.getJSON(this.urlJson).subscribe(data => {
-      console.log(data);
-      this.exportData = data.exportExcel;
-    });
-  }
 
-  public getJSON(url: string): Observable<any> {
-    return this.https.get(url);
-  }
-
-  changeShowData(value: any) {
-    this.pageSize = +value;
-    if (this.resultData !== null && this.resultData !== '' && this.resultData !== undefined) { this.search(); }
-  }
-
-  exportAsXLSX(): void {
-    this.spinner.show();
-    this.searchComponent.search(this.apiUrl, this.pageNow, 9999, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.ExcelData = response.returnObject.data;
-          this.excelService.exportAsExcelFile(this.ExcelData, 'sample');
-          console.log(response);
-          this.spinner.hide();
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-          this.spinner.hide();
-        }
-      );
   }
 
   searchSort(event: any) {

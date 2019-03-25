@@ -77,6 +77,8 @@ export class AdInsConstant {
     public static AddEmpPosition = "/EmpPosition/AddEmpPosition";
     public static EditEmpPosition = "/EmpPosition/EditEmpPosition";
     public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
+    public static GetListUserEmployee = "/EmpPosition/GetListUserEmployee";
+
 
     //SYSTEM-SETTING
     //REF-USER
@@ -85,8 +87,8 @@ export class AdInsConstant {
     public static EditRefUser = "/UserManagement/EditRefUser";
     public static ChangePassword = "/UserManagement/ChangePassword";
     public static GetRefUser = "/UserManagement/GetRefUser";
-    public static GetUserByUsername = "/UserManagement/GetUserByUsername"
-    public static ValidatePwd = "/UserManagement/ValidatePwd"
+    public static GetUserByUsername = "/UserManagement/GetUserByUsername";
+    public static ValidatePwd = "/UserManagement/ValidatePwd";
 
     //REF-ROLE
     public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
@@ -99,10 +101,8 @@ export class AdInsConstant {
     public static GetRefRoleByEmpPositionId = "/RefRole/GetRefRoleByEmpPositionId";
     public static EditUserTitleRole = "/UserManagement/EditUserTitleRole";
     public static AddUserTitleRole = "/UserManagement/AddUserTitleRole";
+    public static AssignRoleToUsers = "/UserManagement/AssignRoleToUsers";
     public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
-
-
-
 
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";

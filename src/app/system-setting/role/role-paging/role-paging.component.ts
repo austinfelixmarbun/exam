@@ -13,9 +13,6 @@ import { HttpClient } from '@angular/common/http';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 
-
-
-
 @Component({
   selector: 'app-role-paging',
   templateUrl: './role-paging.component.html',
@@ -39,7 +36,7 @@ export class RolePagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging : string = AdInsConstant.GetRefRolePaging;
+  urlQryPaging: string = AdInsConstant.GetRefRolePaging;
 
   constructor(
     private http: Http,
@@ -55,6 +52,7 @@ export class RolePagingComponent implements OnInit {
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
     this.initiateForm()
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
@@ -63,73 +61,45 @@ export class RolePagingComponent implements OnInit {
     //   )
   }
 
-  search() {
-    this.spinner.show();
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
-
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(response);
-          this.spinner.hide();
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-          this.spinner.hide();
-        }
-      );
-  }
-
-  getResult(event){
+  getResult(event) {
     this.resultData = event;
     this.totalData = event.returnObject.count;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
   }
 
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.search();
+  onSelect(event) {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(this.pageNow);
   }
+  searchPagination(event: number) {
+    this.pageNow = event;
 
-  initiateForm() {
-    this.getJSON(this.urlJson).subscribe(data => {
-      console.log(data);
-      this.exportData = data.exportExcel;
-    });
-  }
-
-  public getJSON(url: string): Observable<any> {
-    return this.https.get(url);
-  }
-
-  changeShowData(value: any) {
-    this.pageSize = +value;
-    if (this.resultData !== null && this.resultData !== '' && this.resultData !== undefined) { this.search(); }
-  }
-
-  exportAsXLSX(): void {
-    this.spinner.show();
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
-    this.searchComponent.search(this.apiUrl, this.pageNow, 9999, null)
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
       .subscribe(
         (response) => {
           console.log("Success");
-          this.excelData = response.returnObject.data;
-          this.excelService.exportAsExcelFile(this.excelData, 'sample');
-          console.log(response);
-          this.spinner.hide();
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
         },
         (error) => {
           console.log("Error");
           console.log(error);
-          this.spinner.hide();
         }
       );
+  }
+
+  initiateForm() {
+
   }
 
   del(id: any) {
@@ -141,7 +111,26 @@ export class RolePagingComponent implements OnInit {
       this.https.post(this.deleteUrl, this.refRoleObj).subscribe(
         (response) => {
           this.service.successMessage(response['message']);
-          this.search()
+          var order = null;
+          if (this.orderByKey != null) {
+            order = {
+              key: this.orderByKey,
+              value: this.orderByValue
+            }
+          }
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+            .subscribe(
+              (response) => {
+                console.log("Success");
+                this.resultData = response;
+                this.totalData = response.returnObject.count;
+                console.log(this.resultData);
+              },
+              (error) => {
+                console.log("Error");
+                console.log(error);
+              }
+            );
         });
     }
   }

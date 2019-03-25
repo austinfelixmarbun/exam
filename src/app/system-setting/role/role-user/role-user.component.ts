@@ -1,30 +1,31 @@
-import { ExcelService } from './../../../shared/excel-service/excel-service';
-import { environment } from './../../../../environments/environment';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
-import { RefUserObj } from 'app/shared/model/RefUserObj.Model';
-import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
-import { Location } from '@angular/common';
-import { NgForm } from '@angular/forms';
-
+import { ActivatedRoute } from "@angular/router";
+import { ExcelService } from "./../../../shared/excel-service/excel-service";
+import { environment } from "./../../../../environments/environment";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { NgbPaginationConfig } from "@ng-bootstrap/ng-bootstrap";
+import { AdInsServiceService } from "app/ad-ins-service.service";
+import { AdInsConstant } from "app/shared/AdInstConstant";
+import { SearchComponent } from "app/shared/search/search.component";
+import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { NgxSpinnerService } from "ngx-spinner";
+import { Http } from "@angular/http";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { RefRoleObj } from "app/shared/model/RefRoleObj.Model";
+import { RefUserObj } from "app/shared/model/RefUserObj.Model";
+import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
+import { Location } from "@angular/common";
+import { NgForm, FormBuilder, FormGroup } from "@angular/forms";
+import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
 @Component({
-  selector: 'app-role-user',
-  templateUrl: './role-user.component.html',
+  selector: "app-role-user",
+  templateUrl: "./role-user.component.html",
   providers: [NGXToastrService, NGXToastrService, ExcelService]
 })
 export class RoleUserComponent implements OnInit {
-
   @ViewChild(SearchComponent) searchComponent;
-  urlJson: string = './assets/search/searchUser.json';
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  urlJson: string = "./assets/search/searchUser.json";
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -34,14 +35,21 @@ export class RoleUserComponent implements OnInit {
   show: any;
   exportData: any;
   excelData: any;
-  refRoleObj: RefRoleObj;
+  refRoleObj: RefRoleObj = new RefRoleObj();
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
+  urlQryPaging: string = AdInsConstant.GetListUserEmployee;
 
-  refUserId: any;
-  refUserObj: RefUserObj;
-  refEmpObj: RefEmpObj;
+  refRoleId: any;
+  check: any;
+
+  listSelectedId: Array<any> = [];
+  listDeletedId: Array<any> = [];
+
+
+  form: FormGroup;
+  data =  [];
 
   constructor(
     private http: Http,
@@ -50,139 +58,116 @@ export class RoleUserComponent implements OnInit {
     private adInsService: AdInsServiceService,
     private excelService: ExcelService,
     private httpClient: HttpClient,
-    private location: Location
-  ) { }
-
-  ngOnInit() {
-    console.log('masuk');
-    this.show = AdInsConstant.showData.split(',');
-    this.pageNow = 1;
-    this.pageSize = this.show[0];
-    this.initiateForm()
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
-    //   .subscribe(data => {
-    //     console.log(data);
-    //   }
-    //   )
-  }
-
-  search() {
-    this.spinner.show();
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
-
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(response);
-          this.spinner.hide();
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-          this.spinner.hide();
-        }
-      );
-  }
-
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.search();
-  }
-
-  initiateForm() {
-
-    /// GET INFO USER AND EMPLOYEE
-    var urlGetUser: any = this.foundationUrl + AdInsConstant.GetRefUser;
-    var urlGetEmp: any = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
-    var urlGetListEmpPos: any = this.foundationUrl + AdInsConstant.GetListEmployeebyRefEmpId;
-    var empObj: RefEmpObj = new RefEmpObj;
-    var urlGetEmpPosition: any;
-
-    this.refUserObj = new RefUserObj();
-    this.refEmpObj = new RefEmpObj();
-
-    this.refUserObj.refUserId = this.refUserId;
-
-    this.httpClient.post(urlGetUser, this.refUserObj).subscribe(
-      (response) => {
-        console.log('Success Get');
-        this.refUserObj = response['returnObject'];
-        this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
-        this.httpClient.post(urlGetEmp, this.refEmpObj).subscribe(
-          (response) => {
-            this.refEmpObj = response["returnObject"];
-            console.log(this.refEmpObj);
-          },
-          (error) => {
-            console.log('Error Get');
-            console.log(error);
-          })
-      },
-      (error) => {
-        console.log('Error Get');
-        console.log(error);
+    private location: Location,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
+  ) {
+    this.route.queryParams.subscribe(params => {
+      if (params["refRoleId"] != null) {
+        this.refRoleId = params["refRoleId"];
+        console.log("RefRoleId", this.refRoleId);
       }
-    );
+    });
 
-    /// FOR EXCEL EXPORT
-    this.getJSON(this.urlJson).subscribe(data => {
-      console.log(data);
-      this.exportData = data.exportExcel;
+    this.form = this.formBuilder.group({
+      data: []
     });
   }
 
-  public getJSON(url: string): Observable<any> {
-    return this.httpClient.get(url);
+  ngOnInit() {
+    console.log("masuk");
+    this.initiateForm();
+    this.show = AdInsConstant.showData.split(",");
+    this.pageNow = 1;
+    this.pageSize = this.show[0];
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetListUserEmployee;
   }
 
-  changeShowData(value: any) {
-    this.pageSize = +value;
-    if (this.resultData !== null && this.resultData !== '' && this.resultData !== undefined) { this.search(); }
+  getResult(event) {
+    this.resultData = event;
+    this.totalData = event.returnObject.count;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
   }
 
-  exportAsXLSX(): void {
-    this.spinner.show();
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
-    this.searchComponent.search(this.apiUrl, this.pageNow, 9999, null)
+  onSelect(event) {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(this.pageNow);
+  }
+  searchPagination(event: number) {
+    this.pageNow = event;
+
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      };
+    }
+    this.searchComponent
+      .search(this.apiUrl, this.pageNow, this.pageSize, order)
       .subscribe(
-        (response) => {
+        response => {
           console.log("Success");
-          this.excelData = response.returnObject.data;
-          this.excelService.exportAsExcelFile(this.excelData, 'sample');
-          console.log(response);
-          this.spinner.hide();
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
         },
-        (error) => {
+        error => {
           console.log("Error");
           console.log(error);
-          this.spinner.hide();
         }
       );
+  }
+
+  initiateForm() {
+    this.spinner.show();
+    /// GET INFO USER AND EMPLOYEE
+    var urlGetRefRole: any =
+      this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
+
+    var urlGetRefRoleGateway: any = 'http://172.19.10.228:8280/GWFoundation/v1/RefRole/GetRefRole';
+
+    this.refRoleObj = new RefRoleObj();
+    this.refRoleObj.refRoleId = this.refRoleId;
+    console.log(urlGetRefRole);
+    this.httpClient.post(urlGetRefRole, this.refRoleObj).subscribe(
+      response => {
+        console.log("Success Get");
+        this.refRoleObj = response["returnObject"];
+        console.log(this.refRoleObj);
+        this.spinner.hide();
+      },
+      error => {
+        console.log("Error Get");
+        console.log(error);
+        this.spinner.hide();
+      }
+    );
   }
 
   searchSort(event: any) {
     if (this.orderByKey == event.target.attributes.name.nodeValue) {
-      this.orderByValue = !this.orderByValue
+      this.orderByValue = !this.orderByValue;
     } else {
-      this.orderByValue = true
+      this.orderByValue = true;
     }
-    this.orderByKey = event.target.attributes.name.nodeValue
+    this.orderByKey = event.target.attributes.name.nodeValue;
     var order = {
       key: this.orderByKey,
       value: this.orderByValue
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    };
+    this.searchComponent
+      .search(this.apiUrl, this.pageNow, this.pageSize, order)
       .subscribe(
-        (response) => {
+        response => {
           console.log("Success");
           this.resultData = response;
           this.totalData = response.returnObject.count;
           console.log(this.resultData);
         },
-        (error) => {
+        error => {
           console.log("Error");
           console.log(error);
         }
@@ -194,5 +179,28 @@ export class RoleUserComponent implements OnInit {
   }
 
   Save(RoleUserForm: NgForm): void {
+
+    this.refRoleObj = new RefRoleObj();
+    this.refRoleObj.refRoleId = this.refRoleId;
+    this.refRoleObj.listAddEmpPositionId = this.listSelectedId;
+    this.refRoleObj.listDelEmpPositionId = this.listDeletedId;
+    this.apiUrl = this.foundationUrl + AdInsConstant.AssignRoleToUsers;
+    console.log(this.refRoleObj);
+    /*this.httpClient.post(this.apiUrl , this.refRoleObj).subscribe(
+      response => {
+        console.log("Success Save");
+        this.spinner.hide();
+      },
+      error => {
+        console.log("Error Save");
+        console.log(error);
+        this.spinner.hide();
+      }
+    );*/
+  }
+
+  Checked(empPositionId: any): void{
+    console.log(empPositionId);
+    this.listSelectedId.push(empPositionId);
   }
 }
