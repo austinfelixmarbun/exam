@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 import { AdInsConstant } from '../AdInstConstant';
 import { AdInsHelper } from '../AdInsHelper';
+import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
+import { AdInsErrorMessage } from '../AdInsErrorMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,7 @@ export class AuthGuard implements CanActivate {
   private currentUrl;
   private jstoday;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,public errorDialogService: ErrorDialogService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     var currentUser = localStorage.getItem("UserContext");
@@ -28,6 +30,12 @@ export class AuthGuard implements CanActivate {
     this.currentUrl = state.url;
 
     AdInsHelper.InsertLog(this.currentUrl,"PAGE");
+
+    if(!AdInsHelper.IsGrantAccess(this.currentUrl))
+    {
+      this.errorDialogService.openDialog(AdInsErrorMessage.PageNotAuthorized);
+      this.router.navigate([AdInsConstant.FormDefault]);
+    }
 
     if (currentUser == null) {
       this.router.navigate(['pages/login'])
