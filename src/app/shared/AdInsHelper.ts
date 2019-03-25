@@ -66,4 +66,16 @@ export class AdInsHelper{
         return "0";
 
     }
+
+    public static IsGrantAccess(formPath)
+    {
+        var temp = localStorage.getItem("Menu");
+        var objectMenu = [];
+        objectMenu = JSON.parse(temp);
+        var exsisting=objectMenu.find(x=>x.path === formPath);
+        if(exsisting==undefined){
+            return false;
+        }
+        return true;
+    }
 }
