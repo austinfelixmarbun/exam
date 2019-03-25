@@ -1,5 +1,5 @@
 import { environment } from './../../../../environments/environment';
-import { Component, OnInit, Input, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewChildren, Output, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -8,6 +8,7 @@ import { formatDate } from '@angular/common';
 import { SearchComponent } from './../../search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 
 
 @Component({
@@ -29,7 +30,10 @@ export class LookupzipcodeComponent implements OnInit {
 
   roleName: any;
   refRoleId: any;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @Output() select : EventEmitter<any> = new EventEmitter();
 
+  urlQryPaging : any = AdInsConstant.GetRefZipcodePaging;
   configuration: any;
   urlGet: string;
   countForm = 0;
@@ -102,6 +106,7 @@ export class LookupzipcodeComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+    //searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
   searchPagination(searchComp, event: number) {
     this.pageNow = event;
@@ -112,19 +117,7 @@ export class LookupzipcodeComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   searchSort(searchComp, key) {
@@ -138,19 +131,7 @@ export class LookupzipcodeComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
 
@@ -180,5 +161,18 @@ export class LookupzipcodeComponent implements OnInit {
     }
   }
 
+  getResult(gridFooter, event){
+    this.resultData = event.returnObject;
+    this.totalData = event.returnObject.count;
+    gridFooter.totalData = this.totalData;
+    gridFooter.resultData = this.resultData;
+  }
+
+  onSelect(searchComp, event)
+  {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(searchComp, this.pageNow);
+  }
 
 }

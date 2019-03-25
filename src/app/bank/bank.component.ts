@@ -22,6 +22,7 @@ export class BankComponent implements OnInit {
   //** Start UC Search **//
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
+  urlQryPaging : string = AdInsConstant.GetBankPaging;
   //** End UC Search **//
   editUrl: any;
   bankObj: RefBankObj;
@@ -31,7 +32,7 @@ export class BankComponent implements OnInit {
   totalData: any;
   pageSize: any;
   apiUrl: any;
-  urlQryPaging : string = AdInsConstant.GetBankPaging;
+  
   // array of all items to be paged
   private allItems: any[];
   // pager object
@@ -51,6 +52,8 @@ export class BankComponent implements OnInit {
   }
 
   //** Start UC Search **/
+
+  
 
   getResult(event){
     this.resultData = event.returnObject;
@@ -77,19 +80,7 @@ export class BankComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   searchPagination(event: number) {
@@ -101,19 +92,7 @@ export class BankComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   //** End UC Search **/
@@ -159,18 +138,6 @@ export class BankComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 }

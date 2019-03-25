@@ -16,6 +16,12 @@
         ]
     },
     {
+        "path": "", "title": "Company", "icon": "ft-user-plus", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false,
+        "submenu": [
+            { "path": "/company", "title": "Company Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
+        ]
+    },
+    {
         "path": "", "title": "Office", "icon": "ft-airplay", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false,
         "submenu": [
             { "path": "/office", "title": "Office  Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }

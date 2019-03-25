@@ -1,5 +1,4 @@
 {
-    "url": "http://getRefZipcode",
     "component": [
       {
         "type": "textbox",

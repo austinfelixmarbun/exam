@@ -1,5 +1,4 @@
 {
-    "url": "http://getEmpList",
     "component": [
         {
             "type": "dropdown",
@@ -9,7 +8,7 @@
             "placeholder": "Placeholder",
             "isFromURL": true,
             "isSelectOne" : false,
-            "url": "http://r3app-server/FOUNDATION/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue",
+            "url": "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue",
             "label": "Office Name",
             "itemsUrl": []
         }

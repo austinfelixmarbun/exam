@@ -19,6 +19,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { format } from 'util';
 import { environment } from 'environments/environment.prod';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { AdInsErrorMessage } from 'app/shared/AdInsErrorMessage';
 
 
 @Injectable()
@@ -43,8 +44,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         var checkSession=AdInsHelper.CheckSessionTimeout();
         if(checkSession=="1")
         {
-            var data = {status:"001",reason:"Session Timeout"};
-            this.errorDialogService.openDialog(data);
+            this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
             this.spinner.hide ();
             
         }
@@ -88,7 +88,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
         request = request.clone({body: myObj});
         AdInsHelper.InsertLog(request.url,"API",request.body);
-        //console.log(request)
+        console.log(JSON.stringify(request.body ));
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
