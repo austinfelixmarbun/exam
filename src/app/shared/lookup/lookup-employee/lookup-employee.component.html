@@ -16,15 +16,9 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson'></app-search>
-    <div class="form-actions right" style="float:right;text-align: right;margin-right: 10px;">
-      <button type="button" class="btn btn-raised btn-warning mr-1">
-        <i class="ft-x"></i> Cancel
-      </button>
-      <button type="button" (click)="search(lookupSearch)" class="btn btn-raised btn-primary">
-        <i class="fa fa-search"></i> Search
-      </button>
-    </div>
+    <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson'[apiQryPaging]='urlQryPaging'
+    (result)="getResult(ucgridFooter, $event)"></app-search>
+
     <table class="table table-responsive-md text-center table-hover">
       <thead>
         <tr>
@@ -34,7 +28,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of resultData?.data">
+        <tr *ngFor="let item of resultData?.returnObject.data">
           <td>{{item.empNo}}</td>
           <td>{{item.empName}}</td>
           <td>
@@ -45,15 +39,6 @@
         </tr>
       </tbody>
     </table>
-    Current Page : {{pageNow}}
-    <div class="d-flex justify-content-center">
-      <ngb-pagination (pageChange)="searchPagination(lookupSearch,$event)" [pageSize]="pageSize" [collectionSize]="totalData"
-        [(page)]="pageNow" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"></ngb-pagination>
-      <fieldset class="form-group">
-        <select id="showData" (change)="changeShowData(lookupSearch,showData.value)" #showData class="form-control">
-          <option *ngFor="let item of show" [value]="item">{{item}}</option>
-        </select>
-      </fieldset>
-    </div>
+    <app-ucgrid-footer #ucgridFooter (select)="onSelect(lookupSearch,$event)"></app-ucgrid-footer>
   </div>
 </ng-template>

@@ -97,6 +97,8 @@ export class AdInsConstant {
     public static GetRefUser = "/UserManagement/GetRefUser";
     public static GetUserByUsername = "/UserManagement/GetUserByUsername";
     public static ValidatePwd = "/UserManagement/ValidatePwd";
+    public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
+
 
     //REF-ROLE
     public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";

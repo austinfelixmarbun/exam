@@ -8,6 +8,7 @@ import { formatDate } from '@angular/common';
 import { SearchComponent } from './../../search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 
 
 @Component({
@@ -20,12 +21,14 @@ export class LookupRoleComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   urlJson: string = "./assets/lookup/lookupRole.json";
+  urlQryPaging: string = AdInsConstant.GetRefRolePaging;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
 
   roleName: any;
   refRoleId: any;
@@ -76,23 +79,45 @@ export class LookupRoleComponent implements OnInit {
     });
   }
 
-  search(searchComp) {
+  getResult(ucgridFooter, event) {
+    console.log(this.urlQryPaging);
+    this.resultData = event;
+    this.totalData = event.returnObject.count;
+    ucgridFooter.totalData = this.totalData;
+    ucgridFooter.resultData = this.resultData;
+  }
 
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, null)
+  onSelect(searchComponent,event) {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(searchComponent, this.pageNow);
+  }
+  searchPagination(searchComponent, event: number) {
+    this.pageNow = event;
+
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      };
+    }
+    searchComponent
+      .search(this.apiUrl, this.pageNow, this.pageSize, order)
       .subscribe(
-        (response) => {
+        response => {
           console.log("Success");
           this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
-          console.log(response);
+          console.log(this.resultData);
         },
-        (error) => {
+        error => {
           console.log("Error");
           console.log(error);
         }
       );
-
   }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -103,29 +128,7 @@ export class LookupRoleComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  searchPagination(searchComp, event: number) {
-    this.pageNow = event;
-    var order = null;
-    if (this.orderByKey != null && this.orderByKey != undefined) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
-  }
+
 
   searchSort(searchComp, key) {
     if (this.orderByKey == key) {
@@ -152,33 +155,4 @@ export class LookupRoleComponent implements OnInit {
         }
       );
   }
-
-
-  changeShowData(searchComp, value: any) {
-    this.pageSize = +value;
-    if (this.resultData !== null && this.resultData !== '' && this.resultData !== undefined) {
-      var order = null;
-      if (this.orderByKey != null) {
-        order = {
-          key: this.orderByKey,
-          value: this.orderByValue
-        }
-      }
-      searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
-        .subscribe(
-          (response) => {
-            console.log("Success");
-            this.resultData = response.returnObject;
-            this.totalData = response.returnObject.count;
-            console.log(this.resultData);
-          },
-          (error) => {
-            console.log("Error");
-            console.log(error);
-          }
-        );
-    }
-  }
-
-
 }

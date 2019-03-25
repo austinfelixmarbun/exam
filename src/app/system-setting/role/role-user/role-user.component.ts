@@ -49,7 +49,7 @@ export class RoleUserComponent implements OnInit {
 
 
   form: FormGroup;
-  data =  [];
+  data = [];
 
   constructor(
     private http: Http,
@@ -88,6 +88,15 @@ export class RoleUserComponent implements OnInit {
     this.totalData = event.returnObject.count;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
+
+    event.returnObject.data.forEach(element => {
+      console.log(element);
+      if (element.refRoleId === this.refRoleObj.refRoleId) {
+        this.listDeletedId.push(element.empPositionId);
+        if (element.isActive === '1') { this.listSelectedId.push(element.empPositionId); }
+      }
+    });
+
   }
 
   onSelect(event) {
@@ -179,28 +188,37 @@ export class RoleUserComponent implements OnInit {
   }
 
   Save(RoleUserForm: NgForm): void {
-
-    this.refRoleObj = new RefRoleObj();
+    var urlAssignRole = this.foundationUrl + AdInsConstant.AssignRoleToUsers;
     this.refRoleObj.refRoleId = this.refRoleId;
     this.refRoleObj.listAddEmpPositionId = this.listSelectedId;
     this.refRoleObj.listDelEmpPositionId = this.listDeletedId;
-    this.apiUrl = this.foundationUrl + AdInsConstant.AssignRoleToUsers;
     console.log(this.refRoleObj);
-    /*this.httpClient.post(this.apiUrl , this.refRoleObj).subscribe(
+    this.httpClient.post(urlAssignRole, this.refRoleObj).subscribe(
       response => {
-        console.log("Success Save");
+        console.log(response['message']);
+        this.service.typeSave(response['message']);
+        this.location.back();
         this.spinner.hide();
       },
       error => {
         console.log("Error Save");
         console.log(error);
+        this.service.typeErrorCustom(error);
         this.spinner.hide();
       }
-    );*/
+    );
   }
 
-  Checked(empPositionId: any): void{
+  Checked(empPositionId: any, isChecked: any): void {
     console.log(empPositionId);
-    this.listSelectedId.push(empPositionId);
+    if (isChecked) {
+      this.listSelectedId.push(empPositionId);
+    } else {
+      let index = this.listSelectedId.indexOf(empPositionId)
+      console.log(index);
+      if (index > -1) { this.listSelectedId.splice(index, 1); }
+    }
+    console.log(this.listSelectedId);
+    console.log(this.listDeletedId);
   }
 }
