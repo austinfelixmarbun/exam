@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CompanyComponent } from './company.component';
 import { BODComponent } from './bod/bod.component';
 import { BodAddComponent } from './bod/add/add-bod.component';
+import { CommisionerComponent } from './Commisioner/commisioner.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,13 @@ const routes: Routes = [
         component: BodAddComponent,
         data: {
           title: 'BOD Information'
+        }
+      },
+      {
+        path: 'commisioner',
+        component: CommisionerComponent,
+        data: {
+          title: 'Commisioner Information'
         }
       }
     ]
