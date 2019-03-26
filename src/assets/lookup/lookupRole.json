@@ -1,0 +1,24 @@
+{
+  "url": "http://getRole",
+  "title":"Lookup Role",
+  "component": [
+    {
+      "type": "textbox",
+      "name": "roleCode",
+      "id": "roleCodeId",
+      "value": "",
+      "label": "Role Code",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "textbox",
+      "name": "roleName",
+      "id": "roleNameId",
+      "value": "",
+      "label": "Role Name",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    }
+  ]
+}

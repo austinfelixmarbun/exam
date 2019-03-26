@@ -1,5 +1,5 @@
 import { environment } from './../../../../environments/environment';
-import { Component, OnInit, Input, ViewChild, ViewChildren, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewChildren } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -12,28 +12,27 @@ import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgr
 
 
 @Component({
-  selector: 'app-lookupzipcode',
-  templateUrl: './lookupzipcode.component.html',
+  selector: 'app-lookup-role',
+  templateUrl: './lookup-role.component.html',
   providers: [NGXToastrService]
 })
-export class LookupzipcodeComponent implements OnInit {
+export class LookupRoleComponent implements OnInit {
 
   constructor(private modalService: NgbModal) { }
 
-  urlJson: string = "./assets/lookup/lookupZipcode.json";
+  urlJson: string = "./assets/lookup/lookupRole.json";
+  urlQryPaging: string = AdInsConstant.GetRefRolePaging;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
 
   roleName: any;
   refRoleId: any;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
-  @Output() select : EventEmitter<any> = new EventEmitter();
 
-  urlQryPaging : any = AdInsConstant.GetRefZipcodePaging;
   configuration: any;
   urlGet: string;
   countForm = 0;
@@ -80,23 +79,45 @@ export class LookupzipcodeComponent implements OnInit {
     });
   }
 
-  search(searchComp) {
+  getResult(ucgridFooter, event) {
+    console.log(this.urlQryPaging);
+    this.resultData = event;
+    this.totalData = event.returnObject.count;
+    ucgridFooter.totalData = this.totalData;
+    ucgridFooter.resultData = this.resultData;
+  }
 
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, null)
+  onSelect(searchComponent,event) {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(searchComponent, this.pageNow);
+  }
+  searchPagination(searchComponent, event: number) {
+    this.pageNow = event;
+
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      };
+    }
+    searchComponent
+      .search(this.apiUrl, this.pageNow, this.pageSize, order)
       .subscribe(
-        (response) => {
+        response => {
           console.log("Success");
           this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
-          console.log(response);
+          console.log(this.resultData);
         },
-        (error) => {
+        error => {
           console.log("Error");
           console.log(error);
         }
       );
-
   }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -106,19 +127,8 @@ export class LookupzipcodeComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
-    //searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
-  searchPagination(searchComp, event: number) {
-    this.pageNow = event;
-    var order = null;
-    if (this.orderByKey != null && this.orderByKey != undefined) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order);
-  }
+
 
   searchSort(searchComp, key) {
     if (this.orderByKey == key) {
@@ -131,48 +141,18 @@ export class LookupzipcodeComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order);
-  }
-
-
-  changeShowData(searchComp, value: any) {
-    this.pageSize = +value;
-    if (this.resultData !== null && this.resultData !== '' && this.resultData !== undefined) {
-      var order = null;
-      if (this.orderByKey != null) {
-        order = {
-          key: this.orderByKey,
-          value: this.orderByValue
+    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      .subscribe(
+        (response) => {
+          console.log("Success");
+          this.resultData = response.returnObject;
+          this.totalData = response.returnObject.count;
+          console.log(this.resultData);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
         }
-      }
-      searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
-        .subscribe(
-          (response) => {
-            console.log("Success");
-            this.resultData = response.returnObject;
-            this.totalData = response.returnObject.count;
-            console.log(this.resultData);
-          },
-          (error) => {
-            console.log("Error");
-            console.log(error);
-          }
-        );
-    }
+      );
   }
-
-  getResult(gridFooter, event){
-    this.resultData = event.returnObject;
-    this.totalData = event.returnObject.count;
-    gridFooter.totalData = this.totalData;
-    gridFooter.resultData = this.resultData;
-  }
-
-  onSelect(searchComp, event)
-  {
-    this.pageNow = event.pageNow;
-    this.pageSize = event.pageSize;
-    this.searchPagination(searchComp, this.pageNow);
-  }
-
 }

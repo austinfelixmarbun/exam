@@ -90,6 +90,7 @@ export class RoleAddEditComponent implements OnInit {
   Save(RoleAddEditForm: NgForm): void {
     this.spinner.show();
     var getRoleUrl = this.foundationUrl + AdInsConstant.GetRefRole;
+    var getRoleUrlGateway = 'http://01-05-0064-0618/FOUNDATION_R3/RefRole/GetRefRole'
     var roleObj: RefRoleObj;
     roleObj = new RefRoleObj()
     roleObj.roleCode = RoleAddEditForm.value.roleCodeModel;

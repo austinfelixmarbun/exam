@@ -17,6 +17,8 @@ export class AdInsConstant {
     public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
     public static addCustPersonal = "";
 
+    public static FormDefault = "dashboard/dash-board";
+
     //GENERAL SETTING
     public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
 
@@ -26,7 +28,7 @@ export class AdInsConstant {
     public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
     public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
     public static AddRefOffice = "/RefOffice/AddRefOffice";
-    
+
     //REF OFFICE AREA
     public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
 
@@ -40,9 +42,10 @@ export class AdInsConstant {
     public static GetAllRefBizUnit = "/OrganizationDefinition/GetAllRefBizUnit";
     public static GetOrgJobTitleByMdlStruc = "/OrganizationDefinition/GetOrgJobTitleByMdlStruc";
     public static GetRefBizUnitByOffice = "/OrganizationDefinition/GetRefBizUnitByOffice";
+
     public static GetAllOrgMdl = "/OrganizationDefinition/GetAllOrgMdl";
     public static GetAllActiveOrgMdlByRefOrgId = "/OrganizationDefinition/GetAllActiveOrgMdlByRefOrgId";
-    
+
     //REF-JOB-TITLE
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
     public static AddRefJobTitle = "/OrganizationDefinition/AddRefJobTitle";
@@ -69,15 +72,22 @@ export class AdInsConstant {
     public static AddRefEmpAndEmpBankAcc = "/RefEmp/AddRefEmpAndEmpBankAcc";
     public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
     public static DeleteRefEmpAndEmpBankAcc = "/RefEmp/DeleteRefEmpAndEmpBankAcc";
+
+    //REF-EMP-POSITION
+    public static GetListEmployeebyRefEmpId = "/EmpPosition/GetListEmployeebyRefEmpId";
+
+
     public static GetEmpListByOfficeIdAndIsActive = "/RefEmp/GetEmpListByOfficeIdAndIsActive";
-    
+
     //EMP_POSITION
     public static GetEmpPositionPaging = "/EmpPosition/GetEmpPositionPaging";
     public static GetEmpByEmpPositionId = "/EmpPosition/GetEmpByEmpPositionId";
     public static AddEmpPosition = "/EmpPosition/AddEmpPosition";
     public static EditEmpPosition = "/EmpPosition/EditEmpPosition";
     public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
-    
+    public static GetListUserEmployee = "/EmpPosition/GetListUserEmployee";
+
+
     //SYSTEM-SETTING
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
@@ -85,8 +95,10 @@ export class AdInsConstant {
     public static EditRefUser = "/UserManagement/EditRefUser";
     public static ChangePassword = "/UserManagement/ChangePassword";
     public static GetRefUser = "/UserManagement/GetRefUser";
-    public static GetUserByUsername = "/UserManagement/GetUserByUsername"
-    public static ValidatePwd = "/UserManagement/ValidatePwd"
+    public static GetUserByUsername = "/UserManagement/GetUserByUsername";
+    public static ValidatePwd = "/UserManagement/ValidatePwd";
+    public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
+
 
     //REF-ROLE
     public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
@@ -96,6 +108,11 @@ export class AdInsConstant {
     public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
     public static GetRefRole = "/RefRole/GetRefRole";
     public static GetListDataCurrentUser = "/UserManagement/GetListDataCurrentUser";
+    public static GetRefRoleByEmpPositionId = "/RefRole/GetRefRoleByEmpPositionId";
+    public static EditUserTitleRole = "/UserManagement/EditUserTitleRole";
+    public static AddUserTitleRole = "/UserManagement/AddUserTitleRole";
+    public static AssignRoleToUsers = "/UserManagement/AssignRoleToUsers";
+    public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
 
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
@@ -118,7 +135,7 @@ export class AdInsConstant {
     public static EditCoyBod = "/CoyBod/EditCoyBOD";
     public static DeleteCoyBod = "/CoyBod/DeleteCoyBOD";
     public static GetCoyBod = "/CoyBod/GetCoyBod";
-    public static GetCommissionerPaging = "";
+    public static GetCommissionerPaging = "/CoyCommissioner/GetCoyCommissionerPaging";
     public static AddCoyCommissioner = "/CoyCommissioner/AddCoyCommissioner";
     public static EditCoyCommissioner = "/CoyCommissioner/EditCoyCommissioner";
     public static DeleteCoyCommissioner = "/CoyCommissioner/DeleteCoyCommissioner";
@@ -137,5 +154,6 @@ export class AdInsConstant {
 
     //WORK HOUR
     public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
+
 
 }

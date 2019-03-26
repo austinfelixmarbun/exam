@@ -1,3 +1,4 @@
+import { LookupRoleComponent } from './lookup/lookup-role/lookup-role.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
@@ -23,6 +24,7 @@ import { UcContactInfoComponent } from './UserControl/ucContactInfo/ucContactInf
         LookupzipcodeComponent,
         NgbModule,
         LookupRefBankComponent,
+        LookupRoleComponent,
         LookupDistrictComponent,
         UcAddressComponent,
         UCGridFooterComponent,
@@ -41,6 +43,7 @@ import { UcContactInfoComponent } from './UserControl/ucContactInfo/ucContactInf
         LookupEmployeeComponent,
         LookupzipcodeComponent,
         LookupRefBankComponent,
+        LookupRoleComponent,
         LookupDistrictComponent,
         UcAddressComponent,
         UCGridFooterComponent,

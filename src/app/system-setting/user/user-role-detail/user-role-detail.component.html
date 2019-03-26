@@ -1,0 +1,72 @@
+<section id="horizontal-form-layouts">
+  <div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="px-3">
+            <form class="form form-horizontal" name="UserRoleDetailForm" #UserRoleDetailForm="ngForm"
+              (ngSubmit)="Save(UserRoleDetailForm, lookupRole)">
+              <div class="form-body">
+                <h4 class="form-section"><i class="ft-user"></i>Assign User to Role</h4>
+
+                <div class="form-group row">
+                  <label class="col-md-3 label-control">Username</label>
+                  <div class="col-md-9">
+                    <label>{{userName}}</label></div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control">Office Code</label>
+                  <div class="col-md-9">
+                    <label>{{officeCode}}</label></div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 label-control">Office Name</label>
+                  <div class="col-md-9">
+                    <label>{{officeName}}</label></div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 label-control">Business Unit</label>
+                  <div class="col-md-9">
+                    <label>{{bizUnitName}}</label></div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 label-control">Job Title Name</label>
+                  <div class="col-md-9">
+                    <label>{{jobTitleName}}</label></div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="RoleName">Role Name</label>
+                  <div class="col-md-9">
+                    <app-lookup-role #lookupRole [nameSelect]="nameSelect" [idSelect]="idSelect"
+                      [jsonSelect]="jsonSelect"> </app-lookup-role>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="isActive">Active</label>
+                  <div class="custom-control custom-checkbox m-0">
+                    <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
+                      [checked]="isActive">
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-actions">
+                <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                  <i class="ft-x"></i> Back
+                </button>
+
+                <button type="submit" class="btn btn-raised btn-primary">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -10,6 +10,9 @@ import { SystemSettingRoutingModule } from './system-setting-routing.module';
 import { RoleAddEditComponent } from './role/role-add-edit/role-add-edit.component';
 import { RolePagingComponent } from './role/role-paging/role-paging.component';
 import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/lookup-employee.component';
+import { UserRoleComponent } from './user/user-role/user-role.component';
+import { UserRoleDetailComponent } from './user/user-role-detail/user-role-detail.component';
+import { RoleUserComponent } from './role/role-user/role-user.component';
 
 
 
@@ -28,7 +31,10 @@ import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/looku
     UserPagingComponent,
     UserAddEditComponent,
     RoleAddEditComponent,
-    RolePagingComponent
+    RolePagingComponent,
+    UserRoleComponent,
+    UserRoleDetailComponent,
+    RoleUserComponent
   ],
   providers: [
     {

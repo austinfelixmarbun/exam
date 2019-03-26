@@ -1,0 +1,99 @@
+<section id="horizontal-form-layouts">
+  <div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="px-3">
+            <form class="form form-horizontal" name="RoleUserFoem" #RoleUserForm="ngForm"
+              (ngSubmit)="Save(RoleUserForm)">
+              <div class="form-body">
+                <h4 class="form-section"><i class="ft-user"></i>Assign User to Role</h4>
+
+                <div class="form-group row">
+                  <label class="col-md-3 label-control">Role Code</label>
+                  <div class="col-md-9">
+                    <label>{{refRoleObj.roleCode}}</label></div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control">Role Name</label>
+                  <div class="col-md-9">
+                    <label>{{refRoleObj.roleName}}</label></div>
+                </div>
+
+                <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+                  (result)="getResult($event)"></app-search>
+
+                <table class="table table-responsive-md text-center table-hover">
+                  <thead>
+                    <tr class="table-header">
+                      <th>Action</th>
+                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                          name='officeCode'>OfficeCode
+                        </span></th>
+                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                          name='officeName'>Office Name
+                        </span></th>
+                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                          name='busUnitName'>Business Unit
+                          Name</span></th>
+                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                          name='jobTitleName'>Job Title Name</span>
+                      </th>
+                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                          name='empNo'>Employee No</span>
+                      </th>
+                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                          name='empName'>Employee Name</span>
+                      </th>
+                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                          name='userName'>User Name</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of resultData?.returnObject.data;  let i = index">
+                      <td>
+                        <div *ngIf="refRoleObj.refRoleId === item.refRoleId && item.isActive === '1'">
+                          <input type="checkbox" id="checkSame" name="itemSame"
+                            (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=true>
+                        </div>
+                        <div *ngIf="refRoleObj.refRoleId === item.refRoleId && item.isActive === '0'">
+                            <input type="checkbox" id="checkActive" name="itemActive"
+                              (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
+                          </div>
+                        <div *ngIf="refRoleObj.refRoleId !== item.refRoleId">
+                        </div>
+                        <div *ngIf="item.refRoleId === 0">
+                          <input type="checkbox" id="checkDiff" name="itemDiff"
+                            (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
+                        </div>
+                      </td>
+                      <td>{{item.officeCode}}</td>
+                      <td align="left">{{item.officeName}}</td>
+                      <td align="left">{{item.bizUnitName}}</td>
+                      <td align="left">{{item.jobTitleName}}</td>
+                      <td align="left">{{item.employeeNo}}</td>
+                      <td align="left">{{item.employeeName}}</td>
+                      <td align="left">{{item.username}}</td>
+
+                    </tr>
+                  </tbody>
+                </table>
+                <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+              </div>
+              <div class="form-actions">
+                <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                  <i class="ft-x"></i> Back
+                </button>
+
+                <button type="submit" class="btn btn-raised btn-primary">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

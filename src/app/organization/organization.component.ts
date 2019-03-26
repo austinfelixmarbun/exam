@@ -9,7 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
 import { HttpClient } from '@angular/common/http';
-
+import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',
@@ -19,16 +19,22 @@ import { HttpClient } from '@angular/common/http';
 export class OrganizationComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchOrganization.json";
   resultData: string;
   pageNow: any;
   totalData: any;
   pageSize: any;
   apiUrl: any;
+  deleteUrl: any;
   show: any;
-
+  exportData: any;
+  excelData: any;
+  orderByKey: any = null;
+  orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-HttpClient
+  urlQryPaging: string = AdInsConstant.GetRefOrgPaging;
+
   constructor(
     private http: HttpClient,
     private spinner: NgxSpinnerService,
@@ -48,48 +54,81 @@ HttpClient
     //   )
   }
 
-  search() {
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
+  getResult(event) {
+    this.resultData = event;
+    this.totalData = event.returnObject.count;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
+  }
+
+  onSelect(event) {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(this.pageNow);
+  }
+  searchPagination(event: number) {
+    this.pageNow = event;
+
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      };
+    }
+    this.searchComponent
+      .search(this.apiUrl, this.pageNow, this.pageSize, order)
       .subscribe(
-        (response) => {
+        response => {
           console.log("Success");
-          this.resultData = response;
+          this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
-          console.log(response);
+          console.log(this.resultData);
         },
-        (error) => {
+        error => {
           console.log("Error");
           console.log(error);
         }
       );
   }
 
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.search();
-  }
-
   del(id: number): void {
+    this.spinner.show();
     var url = this.foundationUrl + AdInsConstant.DeleteRefOrg;
     var organizObj: OrganizationObj;
     organizObj = new OrganizationObj();
     organizObj.refOrgId = id;
     this.http.post(url, organizObj).subscribe(
       (response) => {
-        console.log("Success Delete");
-        console.log(response);
-        this.service.typeSave('Delete Successed');
-        location.reload();
+        var order = null;
+        if (this.orderByKey != null) {
+          order = {
+            key: this.orderByKey,
+            value: this.orderByValue
+          }
+        }
+        this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+          .subscribe(
+            (response) => {
+              console.log("Success");
+              this.resultData = response;
+              this.totalData = response.returnObject.count;
+              console.log(this.resultData);
+              this.spinner.hide();
+            },
+            (error) => {
+              console.log("Error");
+              console.log(error);
+              this.spinner.hide();
+            }
+          );
       },
       (error) => {
         console.log("Error Delete");
         console.log(error);
         this.service.typeSave('error');
+        this.spinner.hide();
       }
     );
-  }
-  changeShowData(value: any) {
-    this.pageSize = +value;
-    if (this.resultData !== null && this.resultData !== '' && this.resultData !== undefined) { this.search(); }
   }
 }
