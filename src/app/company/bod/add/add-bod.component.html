@@ -5,28 +5,37 @@
         </div>
         <div class="card-body">
             <div class="px-3">
-                <form class="form form-horizontal" name="RefCoyBodForm" #RefCoyBodForm="ngForm" (ngSubmit)="Save(RefCoyBodForm, ucAddress)">
+                <form class="form form-horizontal" name="RefCoyBodForm" #RefCoyBodForm="ngForm" (ngSubmit)="RefCoyBodForm.form.valid && Save(RefCoyBodForm, ucAddress, ucContactInfo)" novalidate>
                     <div class="form-body">
                         <h4 class="form-section card-title"><i class="ft-file-text"></i> Board Of Director</h4>
                         <div class="form-group row">
                             <label class="col-md-3 label-control">Name : </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="name" required [(ngModel)]="name"
-                                    #Name="ngModel">
+                                    #Name="ngModel" [ngClass]="{ 'is-invalid': (Name.touched || Name.dirty || RefCoyBodForm.submitted) && Name.invalid }">
+                                    <div *ngIf="RefCoyBodForm.submitted && Name.invalid" class="invalid-feedback">
+                                      <div *ngIf="Name.errors.required">Employee Name is required</div>
+                                    </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 label-control">Job Title: </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="jobTitle" required [(ngModel)]="jobTitle"
-                                    #JobTitle="ngModel">
+                                    #JobTitle="ngModel" [ngClass]="{ 'is-invalid': (JobTitle.touched || JobTitle.dirty || RefCoyBodForm.submitted) && JobTitle.invalid }">
+                                    <div *ngIf="RefCoyBodForm.submitted && JobTitle.invalid" class="invalid-feedback">
+                                      <div *ngIf="JobTitle.errors.required">Job Title is required</div>
+                                    </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 label-control">NPWP: </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="npwp" required [(ngModel)]="npwp"
-                                    #Npwp="ngModel">
+                                    #Npwp="ngModel" [ngClass]="{ 'is-invalid': (Npwp.touched || Npwp.dirty || RefCoyBodForm.submitted) && Npwp.invalid }">
+                                    <div *ngIf="RefCoyBodForm.submitted && Npwp.invalid" class="invalid-feedback">
+                                      <div *ngIf="Npwp.errors.required">Npwp is required</div>
+                                    </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -42,167 +51,15 @@
                             <label class="col-md-3 label-control">Id No: </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="idNo" required [(ngModel)]="idNo"
-                                    #IdNo="ngModel">
+                                    #IdNo="ngModel" [ngClass]="{ 'is-invalid': (IdNo.touched || IdNo.dirty || RefCoyBodForm.submitted) && IdNo.invalid }">
+                                    <div *ngIf="RefCoyBodForm.submitted && IdNo.invalid" class="invalid-feedback">
+                                      <div *ngIf="IdNo.errors.required">Id No is required</div>
+                                    </div>
                             </div>
                         </div>
                     </div>
-                    <app-ucAddress #ucAddress></app-ucAddress>
-                    <!-- <div class="form-body">
-                        <h4 class="form-section card-title"><i class="ft-file-text"></i> Address</h4>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="address">Address: </label>
-                            <div class="col-md-9">
-                                <textarea id="address" rows="5" class="form-control" name="addr" required
-                                    [(ngModel)]="addr" #Addr="ngModel"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="rt">Rt / Rw: </label>
-                            <div class="col-md-9">
-                                <div class="form-group row">
-                                    <div class="col-md-2" style="border-right: 1px solid grey">
-                                        <input type="text" pattern="^[0-9]+$" id="rt" class="form-control" name="rt"
-                                            required [(ngModel)]="rt" #Rt="ngModel">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <input type="text" pattern="^[0-9]+$" id="rw" class="form-control" name="rw"
-                                            required [(ngModel)]="rw" #Rw="ngModel">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="zipcode">Zipcode: </label>
-                            <div class="col-md-3">
-                                <input type="text" pattern="^[0-9]+$" id="zipcode" class="form-control" name="zipcode"
-                                    required [(ngModel)]="zipcode" #Zipcode="ngModel">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="kelurahan">Kelurahan: </label>
-                            <div class="col-md-9">
-                                <input type="text" id="kelurahan" class="form-control" name="kelurahan" required
-                                    [(ngModel)]="kelurahan" #Kelurahan="ngModel">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="kecamatan">Kecamatan: </label>
-                            <div class="col-md-9">
-                                <input type="text" id="kecamatan" class="form-control" name="kecamatan" required
-                                    [(ngModel)]="kecamatan" #Kecamatan="ngModel">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="city">City: </label>
-                            <div class="col-md-9">
-                                <input type="text" id="city" class="form-control" name="city" required
-                                    [(ngModel)]="city" #City="ngModel">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-body">
-                        <h4 class="form-section card-title"><i class="ft-file-text"></i> Contact Information</h4>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="mobilePhn1">Mobile Phone 1: </label>
-                            <div class="col-md-9">
-                                <input type="text" pattern="^[0-9]+$" id="mobilePhn1" class="form-control"
-                                    name="mobilePhn1" required [(ngModel)]="mobilePhn1" #MobilePhn1="ngModel">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="mobilePhn2">Mobile Phone 2: </label>
-                            <div class="col-md-9">
-                                <input type="text" pattern="^[0-9]+$" id="mobilePhn2" class="form-control"
-                                    name="mobilePhn2" [(ngModel)]="mobilePhn2" #MobilePhn2="ngModel">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="phn1">Phone(Fix Line) 1: </label>
-                            <div class="col-md-9">
-                                <div class="form-group row">
-                                    <div class="col-md-2" style="border-right: 1px solid grey">
-                                        <input type="text" pattern="^[0-9]+$" id="phnArea1" class="form-control"
-                                            name="phnArea1" required [(ngModel)]="phnArea1" #PhnArea1="ngModel">
-                                    </div>
-                                    <div class="col-md-4" style="border-right: 1px solid grey">
-                                        <input type="text" pattern="^[0-9]+$" id="phn1" class="form-control" name="phn1"
-                                            required [(ngModel)]="phn1" #Phn1="ngModel">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <input type="text" pattern="^[0-9]+$" id="phnExt1" class="form-control"
-                                            name="phnExt1" required [(ngModel)]="phnExt1" #PhnExt1="ngModel">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="phn2">Phone(Fix Line) 2: </label>
-                            <div class="col-md-9">
-                                <div class="form-group row">
-                                    <div class="col-md-2" style="border-right: 1px solid grey">
-                                        <input type="text" pattern="^[0-9]+$" id="phnArea2" class="form-control"
-                                            name="phnArea2" [(ngModel)]="phnArea2" #PhnArea2="ngModel">
-                                    </div>
-                                    <div class="col-md-4" style="border-right: 1px solid grey">
-                                        <input type="text" pattern="^[0-9]+$" id="phn2" class="form-control" name="phn2"
-                                            [(ngModel)]="phn2" #Phn2="ngModel">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <input type="text" pattern="^[0-9]+$" id="phnExt2" class="form-control"
-                                            name="phnExt2" [(ngModel)]="phnExt2" #PhnExt2="ngModel">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="phn3">Phone(Fix Line) 3: </label>
-                            <div class="col-md-9">
-                                <div class="form-group row">
-                                    <div class="col-md-2" style="border-right: 1px solid grey">
-                                        <input type="text" pattern="^[0-9]+$" id="phnArea3" class="form-control"
-                                            name="phnArea3" [(ngModel)]="phnArea3" #PhnArea3="ngModel">
-                                    </div>
-                                    <div class="col-md-4" style="border-right: 1px solid grey">
-                                        <input type="text" pattern="^[0-9]+$" id="phn3" class="form-control" name="phn3"
-                                            [(ngModel)]="phn3" #Phn2="ngModel">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <input type="text" pattern="^[0-9]+$" id="phnExt3" class="form-control"
-                                            name="phnExt3" [(ngModel)]="phnExt3" #PhnExt3="ngModel">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="fax">Fax: </label>
-                            <div class="col-md-9">
-                                <div class="form-group row">
-                                    <div class="col-md-2" style="border-right: 1px solid grey">
-                                        <input type="text" pattern="^[0-9]+$" id="faxArea" class="form-control"
-                                            name="faxArea" [(ngModel)]="faxArea" #FaxArea="ngModel">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" pattern="^[0-9]+$" id="fax" class="form-control" name="fax"
-                                            [(ngModel)]="fax" #Fax="ngModel">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="email1">Email 1: </label>
-                            <div class="col-md-9">
-                                <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="email1"
-                                    class="form-control" name="email1" required [(ngModel)]="email1" #Email1="ngModel">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 label-control" for="email2">Email 2: </label>
-                            <div class="col-md-9">
-                                <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="email2"
-                                    class="form-control" name="email2" [(ngModel)]="email2" #Email2="ngModel">
-                            </div>
-                        </div>
-                    </div> -->
+                    <app-ucAddress #ucAddress [parentForm]='RefCoyBodForm'></app-ucAddress>
+                    <app-ucContactInfo #ucContactInfo [parentForm]='RefCoyBodForm'></app-ucContactInfo>
                     <div class="form-actions right">
                         <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/employee']">
                             <i class="ft-x"></i> Cancel
