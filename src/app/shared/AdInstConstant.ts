@@ -135,7 +135,7 @@ export class AdInsConstant {
     public static EditCoyBod = "/CoyBod/EditCoyBOD";
     public static DeleteCoyBod = "/CoyBod/DeleteCoyBOD";
     public static GetCoyBod = "/CoyBod/GetCoyBod";
-    public static GetCommissionerPaging = "";
+    public static GetCommissionerPaging = "/CoyCommissioner/GetCoyCommissionerPaging";
     public static AddCoyCommissioner = "/CoyCommissioner/AddCoyCommissioner";
     public static EditCoyCommissioner = "/CoyCommissioner/EditCoyCommissioner";
     public static DeleteCoyCommissioner = "/CoyCommissioner/DeleteCoyCommissioner";

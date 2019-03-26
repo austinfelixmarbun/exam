@@ -30,36 +30,4 @@ export class CoyBodObj {
     phnExt1:    string;
     phnExt2:    string;
     phnExt3:    string;
-
-    constructor(){
-    this.coyBodId= "";
-    this.name= "";
-    this.jobTitle= "";
-    this.mrIdType= "";
-    this.idNo= "";
-    this.npwp= "";
-    this.addr= "";
-    this.rt= "";
-    this.rw= "";
-    this.kelurahan= "";
-    this.kecamatan= "";
-    this.city= "";
-    this.zipcode= "";
-    this.phnArea1= "";
-    this.phn1= "";
-    this.phnArea2= "";
-    this.phn2= "";
-    this.faxArea= "";
-    this.fax= "";
-    this.email1= "";
-    this.mobilePhn1= "";
-    this.mobilePhn2= "";
-    this.refCoyId= "";
-    this.phnArea3= "";
-    this.phn3= "";
-    this.email2= "";
-    this.phnExt1= "";
-    this.phnExt2= "";
-    this.phnExt3= "";
-    }
 }

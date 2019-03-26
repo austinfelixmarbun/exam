@@ -10,15 +10,14 @@ import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { ActivatedRoute } from '@angular/router';
-import { CoyBodObj } from 'app/shared/model/CoyBodObj.Model';
+import { CoyCommisionerObj } from 'app/shared/model/CoyCommisionerObj.Model';
 
 @Component({
-  selector: 'app-bod',
-  templateUrl: './bod.component.html',
-  styleUrls: ['./bod.component.scss'],
+  selector: 'app-commisioner',
+  templateUrl: './commisioner.component.html',
   providers: [NgbPaginationConfig, NGXToastrService]
 })
-export class BODComponent implements OnInit {
+export class CommisionerComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
@@ -30,9 +29,9 @@ export class BODComponent implements OnInit {
     apiUrl: any;
     orderByKey: any = null;
     orderByValue: boolean = true;
-    urlQryPaging : string = AdInsConstant.GetCoyBodPaging;
+    urlQryPaging : string = AdInsConstant.GetCommissionerPaging;
     editUrl : any;
-    bodObj : CoyBodObj;
+    commisionerObj : CoyCommisionerObj;
     // array of all items to be paged
     private allItems: any[];
     // pager object
@@ -50,7 +49,7 @@ export class BODComponent implements OnInit {
     ngOnInit() {
       this.pageNow = 1;
       this.pageSize = 10;
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetCoyBodPaging;
+      this.apiUrl = this.foundationUrl + AdInsConstant.GetCommissionerPaging;
     }
   
     getResult(event){
@@ -107,14 +106,15 @@ export class BODComponent implements OnInit {
       this.searchPagination(this.pageNow);
     }
 
-    delete(coyBodId: any) {
+    delete(coyCommissionerId: any) {
       if(confirm("Are you sure to delete this record?")) {
-        this.editUrl = this.foundationUrl + AdInsConstant.DeleteCoyBod;
-        this.bodObj = new CoyBodObj();
-        this.bodObj.coyBodId = coyBodId;
-        this.http.post(this.editUrl, this.bodObj).subscribe(
+        this.editUrl = this.foundationUrl + AdInsConstant.DeleteCoyCommissioner;
+        this.commisionerObj = new CoyCommisionerObj();
+        this.commisionerObj.coyCommissionerId = coyCommissionerId;
+        this.http.post(this.editUrl, this.commisionerObj).subscribe(
           (response) => {
             console.log(response);
+            this.searchComponent.search();
           });
       }
     }

@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharingModule } from 'app/shared/sharing.module';
 import { BODComponent } from './bod/bod.component';
 import { BodAddComponent } from './bod/add/add-bod.component';
+import { CommisionerComponent } from './Commisioner/commisioner.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { BodAddComponent } from './bod/add/add-bod.component';
   declarations: [
     CompanyComponent,
     BODComponent,
-    BodAddComponent
+    BodAddComponent,
+    CommisionerComponent
   ]
 })
 export class CompanyModule { }
