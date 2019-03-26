@@ -10,8 +10,9 @@ import { LookupDistrictComponent } from './lookup/lookup-district/lookup-distric
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank.component';
-import { UcAddressComponent } from './ucAddress/ucAddress.component';
 import { UCGridFooterComponent } from '../shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { UcAddressComponent } from './UserControl/ucAddress/ucAddress.component';
+import { UcContactInfoComponent } from './UserControl/ucContactInfo/ucContactInfo.component';
 
 @NgModule({
     exports: [
@@ -24,7 +25,8 @@ import { UCGridFooterComponent } from '../shared/UserControl/ucgrid-footer/ucgri
         LookupRefBankComponent,
         LookupDistrictComponent,
         UcAddressComponent,
-        UCGridFooterComponent
+        UCGridFooterComponent,
+        UcContactInfoComponent
     ],
     imports: [
         CommonModule,
@@ -41,7 +43,8 @@ import { UCGridFooterComponent } from '../shared/UserControl/ucgrid-footer/ucgri
         LookupRefBankComponent,
         LookupDistrictComponent,
         UcAddressComponent,
-        UCGridFooterComponent
+        UCGridFooterComponent,
+        UcContactInfoComponent
     ]
 })
 
