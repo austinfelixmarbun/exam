@@ -5,7 +5,7 @@ export class AdInsHelper{
     //Function
     public static InsertLog(url,type,param="") {
         let today = new Date();
-        var dateNow = formatDate(today, 'dd-MM-yyyy hh:mm:ss', 'en-US');
+        var dateNow = formatDate(today, 'yyyy-MM-dd hh:mm:ss', 'en-US');
 
         var listPageAccess = [];
         listPageAccess = JSON.parse(localStorage.getItem("PageAccess"));

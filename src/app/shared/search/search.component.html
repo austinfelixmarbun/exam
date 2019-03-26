@@ -63,7 +63,7 @@
                           <!-- Ini kalau datanya di load dari URL -->
                           <div *ngIf="question.isFromURL">
                             <select id="projectinput6" name="{{question.name}}"
-                              class="form-control search-form-control">
+                              class="form-control search-form-control" attr.data-type="{{question.datatype}}">
                               <option *ngIf="!question.isSelectOne" value="All">
                                 All
                               </option>

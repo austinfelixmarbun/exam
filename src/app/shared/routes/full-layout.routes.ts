@@ -127,4 +127,8 @@ export const Full_ROUTES: Routes = [
     path: 'company',
     loadChildren: './company/company.module#CompanyModule'
   },
+  {
+    path: 'commonSetting',
+    loadChildren: './common-setting/common-setting.module#CommonSettingModule'
+  },
 ];

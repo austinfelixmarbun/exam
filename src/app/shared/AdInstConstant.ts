@@ -143,6 +143,17 @@ export class AdInsConstant {
 
     //REF MASTER
     public static GetRefMasterList = "/RefMaster/GetRefMasterList";
+    public static GetRefMastersByCriteria = "/RefMaster/GetRefMastersByCriteria";
+    public static GetRefMaster = "/RefMaster/GetRefMaster";
+    public static GetRefMasterListByTypeCode = "/RefMaster/GetRefMasterListByTypeCode";
+    public static AddRefMaster = "/RefMaster/AddRefMaster";
+    public static EditRefMaster = "/RefMaster/EditRefMaster";
+    public static GetRefMasterType = "/RefMaster/GetRefMasterType";
+    public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
+    public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
+
+
+
 
     //REF PROV DISTRICT
     public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
