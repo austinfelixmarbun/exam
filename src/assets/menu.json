@@ -214,7 +214,37 @@
         "badgeClass": "",
         "isExternalLink": false,
         "submenu": []
-      }
+      },
+      {
+        "path": "",
+        "title": "Office Area",
+        "icon": "",
+        "class": "has-sub",
+        "badge": "",
+        "badgeClass": "",
+        "isExternalLink": false,
+        "submenu": [
+          {
+            "path": "/office/officeArea",
+            "title": "Office Area Maintenance",
+            "icon": "",
+            "class": "",
+            "badge": "",
+            "badgeClass": "",
+            "isExternalLink": false,
+            "submenu": []
+          },
+          {
+            "path": "/office/officeArea/detail",
+            "title": "Office Area Add",
+            "icon": "",
+            "class": "",
+            "badge": "",
+            "badgeClass": "",
+            "isExternalLink": false,
+            "submenu": []
+          }
+        ]}
     ]
   },
   {

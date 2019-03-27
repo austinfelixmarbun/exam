@@ -1,44 +1,46 @@
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 
 @Component({
-  selector: 'app-general-setting-paging',
-  templateUrl: './general-setting-paging.component.html'
+  selector: 'app-office-area-paging',
+  templateUrl: './office-area-paging.component.html',
+  providers: [NGXToastrService]
 })
-export class GeneralSettingPagingComponent implements OnInit {
+export class OfficeAreaPagingComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
-  urlJson: string = './assets/search/searchGeneralSetting.json';
+  urlJson: string = './assets/search/searchOfficeArea.json';
   resultData: string;
   pageNow: any;
   totalData: any;
   pageSize: any;
   apiUrl: any;
   deleteUrl: any;
-  show: any;
   exportData: any;
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging: string = AdInsConstant.GetGeneralSettingPaging;
-  addCrit: CriteriaObj[];
+  urlQryPaging: string = AdInsConstant.GetRefOfficeAreaPaging;
 
+  refOfficeAreaObj: RefOfficeAreaObj;
   constructor(
-
+    private service: NGXToastrService,
+    private https: HttpClient
   ) { }
 
   ngOnInit() {
     console.log('masuk');
-    this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
-    this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetGeneralSettingPaging;
+    this.pageSize = 10;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOfficeAreaPaging;
     this.initiateForm()
   }
 
@@ -80,13 +82,6 @@ export class GeneralSettingPagingComponent implements OnInit {
   }
 
   initiateForm() {
-    this.addCrit = new Array();
-    var critIsActive = new CriteriaObj();
-    critIsActive.propName = "isUpdateable";
-    critIsActive.value = "Yes";
-    critIsActive.restriction = AdInsConstant.RestrictionEq;
-
-    this.addCrit.push(critIsActive);
   }
 
   searchSort(event: any) {
@@ -131,6 +126,39 @@ export class GeneralSettingPagingComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  del(id: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefOfficeArea;
+      this.refOfficeAreaObj = new RefOfficeAreaObj();
+      this.refOfficeAreaObj.refOfficeAreaId = +id;
+
+      this.https.post(this.deleteUrl, this.refOfficeAreaObj).subscribe(
+        (response) => {
+          this.service.successMessage(response['message']);
+          var order = null;
+          if (this.orderByKey != null) {
+            order = {
+              key: this.orderByKey,
+              value: this.orderByValue
+            }
+          }
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+            .subscribe(
+              (response) => {
+                console.log("Success");
+                this.resultData = response;
+                this.totalData = response.returnObject.count;
+                console.log(this.resultData);
+              },
+              (error) => {
+                console.log("Error");
+                console.log(error);
+              }
+            );
+        });
+    }
   }
 
 }

@@ -18,8 +18,12 @@ export class AdInsConstant {
 
     //GENERAL SETTING
     public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
+    public static AddGeneralSetting = "/GeneralSetting/AddGeneralSetting";
     public static EditGeneralSetting = "/GeneralSetting/EditGeneralSetting";
     public static GetGeneralSettingPaging = "/GeneralSetting/GetGeneralSettingPaging";
+    public static GetGeneralSettingById = "/GeneralSetting/GetGeneralSettingById";
+    public static GetGeneralSettingValue = "/GeneralSetting/GetGeneralSettingValue";
+
 
     //REF OFFICE
     public static GetRefOfficeObj = "/RefOffice/GetRefOfficeObj";
@@ -30,6 +34,14 @@ export class AdInsConstant {
 
     //REF OFFICE AREA
     public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
+    public static GetRefOfficeAreaPaging = "/RefOfficeArea/GetRefOfficeAreaPaging";
+    public static GetRefArea = "/RefOfficeArea/GetRefArea";
+    public static AddRefOfficeArea = "/RefOfficeArea/AddRefOfficeArea";
+    public static EditRefOfficeArea = "/RefOfficeArea/EditRefOfficeArea";
+    public static DeleteRefOfficeArea = "/RefOfficeArea/DeleteRefOfficeArea";
+    public static CheckDuplAreaCode = "/RefOfficeArea/CheckDuplAreaCode";
+
+
 
     //ORGANIZATION
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
