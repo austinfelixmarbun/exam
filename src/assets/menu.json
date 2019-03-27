@@ -36,7 +36,8 @@
     {
         "path": "", "title": "Office", "icon": "ft-airplay", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false,
         "submenu": [
-            { "path": "/office", "title": "Office  Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
+            { "path": "/office", "title": "Office Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] },
+            { "path": "/office/add", "title": "Office Add", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
         ]
     },
     {

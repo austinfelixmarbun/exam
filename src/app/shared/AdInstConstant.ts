@@ -23,7 +23,7 @@ export class AdInsConstant {
     public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
 
     //REF OFFICE
-    public static getRefOfficeObj = "/RefOffice/GetRefOfficeObj";
+    public static GetRefOfficeObj = "/RefOffice/GetRefOfficeObj";
     public static GetRefOfficeActiveAndNonVirtualKeyValue = "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue";
     public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
     public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
@@ -140,6 +140,9 @@ export class AdInsConstant {
     public static EditCoyCommissioner = "/CoyCommissioner/EditCoyCommissioner";
     public static DeleteCoyCommissioner = "/CoyCommissioner/DeleteCoyCommissioner";
     public static GetCoyCommissioner = "/CoyCommissioner/GetCoyCommissioner";
+
+    //REF TAX OFFICE
+    public static GetAllActiveRefTaxOffice = "/RefTaxOffice/GetAllActiveRefTaxOffice";
 
     //REF MASTER
     public static GetRefMasterList = "/RefMaster/GetRefMasterList";

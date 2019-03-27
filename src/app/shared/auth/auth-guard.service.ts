@@ -33,8 +33,8 @@ export class AuthGuard implements CanActivate {
 
     if(!AdInsHelper.IsGrantAccess(this.currentUrl))
     {
-      this.errorDialogService.openDialog(AdInsErrorMessage.PageNotAuthorized);
-      this.router.navigate([AdInsConstant.FormDefault]);
+      // this.errorDialogService.openDialog(AdInsErrorMessage.PageNotAuthorized);
+      // this.router.navigate([AdInsConstant.FormDefault]);
     }
 
     if (currentUser == null) {

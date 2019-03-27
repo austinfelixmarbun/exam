@@ -87,7 +87,7 @@ export class SearchComponent implements OnInit {
               var numDay = parseInt(tempMinus[1]);
               dateShow.setDate(businessDate.getDate() + numDay);
             }
-            var dateText = formatDate(dateShow, 'yyy-MM-dd', 'en-US')
+            var dateText = formatDate(dateShow, 'yyyy-MM-dd', 'en-US')
             data.component[i].value = dateText;
           }
         }
