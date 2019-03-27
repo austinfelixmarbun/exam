@@ -4,6 +4,8 @@ import { MasterAddEditComponent } from './master/master-add-edit/master-add-edit
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MasterTypePagingComponent } from './master-type/master-type-paging/master-type-paging.component';
+import { GeneralSettingAddEditComponent } from './general-setting/general-setting-add-edit/general-setting-add-edit.component';
+import { GeneralSettingPagingComponent } from './general-setting/general-setting-paging/general-setting-paging.component';
 
 const routes: Routes = [
   {
@@ -35,6 +37,20 @@ const routes: Routes = [
         component: MasterAddEditComponent,
         data: {
           title: 'Master Maintenance Add Edit'
+        },
+      },
+      {
+        path: 'generalSetting',
+        component: GeneralSettingPagingComponent,
+        data: {
+          title: 'General Setting Maintenance Paging'
+        },
+      },
+      {
+        path: 'generalSetting/detail',
+        component: GeneralSettingAddEditComponent,
+        data: {
+          title: 'General Setting Maintenance Add Edit'
         },
       }
     ]

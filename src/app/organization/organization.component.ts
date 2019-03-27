@@ -92,43 +92,44 @@ export class OrganizationComponent implements OnInit {
       );
   }
 
-  del(id: number): void {
-    this.spinner.show();
-    var url = this.foundationUrl + AdInsConstant.DeleteRefOrg;
-    var organizObj: OrganizationObj;
-    organizObj = new OrganizationObj();
-    organizObj.refOrgId = id;
-    this.http.post(url, organizObj).subscribe(
-      (response) => {
-        var order = null;
-        if (this.orderByKey != null) {
-          order = {
-            key: this.orderByKey,
-            value: this.orderByValue
-          }
-        }
-        this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-          .subscribe(
-            (response) => {
-              console.log("Success");
-              this.resultData = response;
-              this.totalData = response.returnObject.count;
-              console.log(this.resultData);
-              this.spinner.hide();
-            },
-            (error) => {
-              console.log("Error");
-              console.log(error);
-              this.spinner.hide();
+  del(id: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      var url = this.foundationUrl + AdInsConstant.DeleteRefOrg;
+      var organizObj: OrganizationObj;
+      organizObj = new OrganizationObj();
+      organizObj.refOrgId = id;
+      this.http.post(url, organizObj).subscribe(
+        (response) => {
+          var order = null;
+          if (this.orderByKey != null) {
+            order = {
+              key: this.orderByKey,
+              value: this.orderByValue
             }
-          );
-      },
-      (error) => {
-        console.log("Error Delete");
-        console.log(error);
-        this.service.typeSave('error');
-        this.spinner.hide();
-      }
-    );
+          }
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+            .subscribe(
+              (response) => {
+                console.log("Success");
+                this.resultData = response;
+                this.totalData = response.returnObject.count;
+                console.log(this.resultData);
+                this.spinner.hide();
+              },
+              (error) => {
+                console.log("Error");
+                console.log(error);
+                this.spinner.hide();
+              }
+            );
+        },
+        (error) => {
+          console.log("Error Delete");
+          console.log(error);
+          this.service.typeSave('error');
+          this.spinner.hide();
+        }
+      );
+    }
   }
 }

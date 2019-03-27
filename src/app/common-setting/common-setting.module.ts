@@ -10,6 +10,8 @@ import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/lookup-employee.component';
+import { GeneralSettingAddEditComponent } from './general-setting/general-setting-add-edit/general-setting-add-edit.component';
+import { GeneralSettingPagingComponent } from './general-setting/general-setting-paging/general-setting-paging.component';
 
 
 
@@ -29,7 +31,9 @@ import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/looku
     MasterPagingComponent,
     MasterAddEditComponent,
     MasterTypePagingComponent,
-    MasterTypeAddEditComponent
+    MasterTypeAddEditComponent,
+    GeneralSettingAddEditComponent,
+    GeneralSettingPagingComponent
   ],
   providers: [
     {

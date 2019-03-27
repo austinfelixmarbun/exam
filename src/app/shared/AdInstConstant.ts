@@ -6,21 +6,20 @@ export class AdInsConstant {
     public static showData = "10,50,100";
     public static TimeoutSession = 6000000;
     public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
-
     public static Login = "/UserManagement/HTML5Login";
     public static Logout = "/UserManagement/LogOut"
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
-
     public static GetProvince = "/los/v1/get_provinsi";
     public static GetCityByProvince = "/los/v1/get_kota";
     public static getProspectByProspectNo = "/api/MobileProspectTask/GetProspectByProspectNo";
     public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
     public static addCustPersonal = "";
-
     public static FormDefault = "dashboard/dash-board";
 
     //GENERAL SETTING
     public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
+    public static EditGeneralSetting = "/GeneralSetting/EditGeneralSetting";
+    public static GetGeneralSettingPaging = "/GeneralSetting/GetGeneralSettingPaging";
 
     //REF OFFICE
     public static GetRefOfficeObj = "/RefOffice/GetRefOfficeObj";
@@ -42,7 +41,6 @@ export class AdInsConstant {
     public static GetAllRefBizUnit = "/OrganizationDefinition/GetAllRefBizUnit";
     public static GetOrgJobTitleByMdlStruc = "/OrganizationDefinition/GetOrgJobTitleByMdlStruc";
     public static GetRefBizUnitByOffice = "/OrganizationDefinition/GetRefBizUnitByOffice";
-
     public static GetAllOrgMdl = "/OrganizationDefinition/GetAllOrgMdl";
     public static GetAllActiveOrgMdlByRefOrgId = "/OrganizationDefinition/GetAllActiveOrgMdlByRefOrgId";
 
@@ -72,11 +70,7 @@ export class AdInsConstant {
     public static AddRefEmpAndEmpBankAcc = "/RefEmp/AddRefEmpAndEmpBankAcc";
     public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
     public static DeleteRefEmpAndEmpBankAcc = "/RefEmp/DeleteRefEmpAndEmpBankAcc";
-
-    //REF-EMP-POSITION
     public static GetListEmployeebyRefEmpId = "/EmpPosition/GetListEmployeebyRefEmpId";
-
-
     public static GetEmpListByOfficeIdAndIsActive = "/RefEmp/GetEmpListByOfficeIdAndIsActive";
 
     //EMP_POSITION
@@ -87,8 +81,6 @@ export class AdInsConstant {
     public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
     public static GetListUserEmployee = "/EmpPosition/GetListUserEmployee";
 
-
-    //SYSTEM-SETTING
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
     public static AddRefUser = "/UserManagement/AddRefUser";
@@ -98,7 +90,6 @@ export class AdInsConstant {
     public static GetUserByUsername = "/UserManagement/GetUserByUsername";
     public static ValidatePwd = "/UserManagement/ValidatePwd";
     public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
-
 
     //REF-ROLE
     public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
@@ -155,11 +146,9 @@ export class AdInsConstant {
     public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
     public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
 
-
-
-
     //REF PROV DISTRICT
     public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
+
     //MENU
     public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
 
@@ -168,6 +157,4 @@ export class AdInsConstant {
 
     //WORK HOUR
     public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
-
-
 }

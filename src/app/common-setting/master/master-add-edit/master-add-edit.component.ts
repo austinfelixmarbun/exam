@@ -1,19 +1,15 @@
-import { RefMasterTypeObj } from './../../../shared/model/RefMasterTypeObj.Model';
+
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
-import { FormGroup } from '@angular/forms';
-import { Http } from '@angular/http';
-import { formatDate } from '@angular/common';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-master-add-edit',
@@ -39,9 +35,7 @@ export class MasterAddEditComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
-    private adInsService: AdInsServiceService,
     private httpClient: HttpClient,
-    private toastr: NGXToastrService,
     private service: NGXToastrService,
   ) {
     this.route.queryParams.subscribe(params => {
@@ -58,6 +52,8 @@ export class MasterAddEditComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log('masuk');
+    this.refMasterObj = new RefMasterObj()
     this.GetListMasterType();
     if (this.type === 'edit') {
       this.apiUrl = this.foundationUrl + AdInsConstant.GetRefMaster;
@@ -71,7 +67,7 @@ export class MasterAddEditComponent implements OnInit {
           this.masterCodeModel = response['returnObject']['masterCode']
           this.descrModel = response['returnObject']['descr']
           if (this.refMasterObj.isActive === '1') { this.isActive = true; } else { this.isActive = false; }
-          if (this.refMasterObj.refMasterTypeCode === null){ this.refMasterTypeCodeModule = '' } else { this.refMasterTypeCodeModule = this.refMasterObj.refMasterTypeCode };
+          if (this.refMasterObj.refMasterTypeCode === null) { this.refMasterTypeCodeModule = '' } else { this.refMasterTypeCodeModule = this.refMasterObj.refMasterTypeCode };
         },
         (error) => {
           console.log('Error Get');
@@ -121,17 +117,16 @@ export class MasterAddEditComponent implements OnInit {
             this.httpClient.post(this.apiUrl, this.refMasterObj).subscribe(
               (response) => {
                 console.log("Success Save");
-
+                //location.reload();
                 this.service.typeSave(response['message']);
-                this.location.back();
-                this.spinner.hide();
+                this.router.navigateByUrl('commonSetting/master', { skipLocationChange: true }).then(() =>
+                this.router.navigate(['/commonSetting/master/detail']));
+                // this.router.navigate(['/commonSetting/master/detail']);
 
               },
               (error) => {
                 console.log("Error Save");
-
                 this.service.typeErrorCustom(error);
-                this.spinner.hide();
               }
             );
           }
