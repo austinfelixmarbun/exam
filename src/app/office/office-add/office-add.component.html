@@ -6,15 +6,17 @@
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="OfficeReqForm" #OfficeReqForm="ngForm"
-          (ngSubmit)="OfficeReqForm.form.valid && SaveForm(OfficeReqForm)">
+          (ngSubmit)="OfficeReqForm.form.valid && SaveForm(OfficeReqForm, ucAddress, ucContactInfo)">
           <div class="form-body">
             <h4 class="form-section card-title"><i class="ft-file-text"></i> General</h4>
             <div class="form-group row">
               <label class="col-md-3 label-control">Office Code: </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="officeCode" required [(ngModel)]="officeCode" #OfficeCode="ngModel"
-                  [ngClass]="{ 'is-invalid': OfficeReqForm.submitted && OfficeCode.invalid }">
-                <div *ngIf="OfficeReqForm.submitted && OfficeCode.invalid" class="invalid-feedback">
+                <input type="text" class="form-control" name="officeCode" required [(ngModel)]="officeCode"
+                  #OfficeCode="ngModel"
+                  [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || OfficeCode.touched || OfficeCode.dirty) && OfficeCode.invalid }">
+                <div *ngIf="(OfficeReqForm.submitted || OfficeCode.touched || OfficeCode.dirty) && OfficeCode.invalid"
+                  class="invalid-feedback">
                   <div *ngIf="OfficeCode.errors.required">Office Code is required</div>
                 </div>
               </div>
@@ -22,9 +24,11 @@
             <div class="form-group row">
               <label class="col-md-3 label-control">Office Name: </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="officeName" required [(ngModel)]="officeName" #OfficeName="ngModel"
-                  [ngClass]="{ 'is-invalid': OfficeReqForm.submitted && OfficeName.invalid }">
-                <div *ngIf="OfficeReqForm.submitted && OfficeName.invalid" class="invalid-feedback">
+                <input type="text" class="form-control" name="officeName" required [(ngModel)]="officeName"
+                  #OfficeName="ngModel"
+                  [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || OfficeName.touched || OfficeName.dirty) && OfficeName.invalid }">
+                <div *ngIf="(OfficeReqForm.submitted || OfficeName.touched || OfficeName.dirty) && OfficeName.invalid"
+                  class="invalid-feedback">
                   <div *ngIf="OfficeName.errors.required">Office Name is required</div>
                 </div>
               </div>
@@ -32,91 +36,93 @@
             <div class="form-group row">
               <label class="col-md-3 label-control">Office Short Name: </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="officeShortName" required [(ngModel)]="officeShortName" #OfficeShortName="ngModel"
-                  [ngClass]="{ 'is-invalid': OfficeReqForm.submitted && OfficeShortName.invalid }">
-                <div *ngIf="OfficeReqForm.submitted && OfficeShortName.invalid" class="invalid-feedback">
+                <input type="text" class="form-control" name="officeShortName" required [(ngModel)]="officeShortName"
+                  #OfficeShortName="ngModel"
+                  [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || OfficeShortName.touched || OfficeShortName.dirty) && OfficeShortName.invalid }">
+                <div
+                  *ngIf="(OfficeReqForm.submitted || OfficeShortName.touched || OfficeShortName.dirty) && OfficeShortName.invalid"
+                  class="invalid-feedback">
                   <div *ngIf="OfficeShortName.errors.required">Office Short Name is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control">Contact Person Name: </label>
+              <label class="col-md-3 label-control">Office Class: </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="cntctPersonName" [(ngModel)]="cntctPersonName" #CntctPersonName="ngModel">
+                <select class="form-control" name="mrOfficeClass" [(ngModel)]="mrOfficeClass" #MrOfficeClass="ngModel">
+                  <option *ngFor="let oc of allOfficeClass" value="{{oc.masterCode}}">{{oc.descr}}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 label-control">Office Class: </label>
-                <div class="col-md-9">
-                    <select class="form-control" name="mrOfficeClass" [(ngModel)]="mrOfficeClass" #MrOfficeClass="ngModel">
-                        <option *ngFor="let oc of allOfficeClass" value="{{oc.masterCode}}">{{oc.descr}}
-                        </option>
-                    </select>
-                </div>
+              <label class="col-md-3 label-control">Organization Level: </label>
+              <div class="col-md-9">
+                <select class="form-control" name="refOrgId" [(ngModel)]="refOrgId" #RefOrgId="ngModel"
+                  (change)="onChangeRefOrg($event.target.value)">
+                  <option *ngFor="let ro of allRefOrg" value="{{ro.refOrgId}}">{{ro.orgName}}
+                  </option>
+                </select>
+              </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 label-control">Organization Level: </label>
-                <div class="col-md-9">
-                    <select class="form-control" name="refOrgId" [(ngModel)]="refOrgId" #RefOrgId="ngModel"
-                    (change)="onChangeRefOrg($event.target.value)">
-                        <option *ngFor="let ro of allRefOrg" value="{{ro.refOrgId}}">{{ro.orgName}}
-                        </option>
-                    </select>
-                </div>
+              <label class="col-md-3 label-control">Model Name: </label>
+              <div class="col-md-9">
+                <select class="form-control" name="orgMdlId" [(ngModel)]="orgMdlId" #OrgMdlId="ngModel"
+                  (change)="onChangeOrgMdl($event.target.value)">
+                  <option *ngFor="let om of allOrgMdl" value="{{om.orgMdlId}}">{{om.orgMdlName}}
+                  </option>
+                </select>
+              </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 label-control">Model Name: </label>
-                <div class="col-md-9">
-                    <select class="form-control" name="orgMdlId" [(ngModel)]="orgMdlId" #OrgMdlId="ngModel"
-                    (change)="onChangeOrgMdl($event.target.value)">
-                        <option *ngFor="let om of allOrgMdl" value="{{om.orgMdlId}}">{{om.orgMdlName}}
-                        </option>
-                    </select>
-                </div>
+              <label class="col-md-3 label-control">Office Parent: </label>
+              <div class="col-md-9">
+                <select class="form-control" name="parentId" [(ngModel)]="parentId" #ParentId="ngModel">
+                  <option *ngFor="let op of allOfficeParent" value="{{op.refOfficeId}}">{{op.officeName}}
+                  </option>
+                </select>
+              </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 label-control">Office Parent: </label>
-                <div class="col-md-9">
-                    <select class="form-control" name="parentId" [(ngModel)]="parentId" #ParentId="ngModel">
-                        <option *ngFor="let op of allOfficeParent" value="{{op.refOfficeId}}">{{op.officeName}}
-                        </option>
-                    </select>
-                </div>
+              <label class="col-md-3 label-control">Area: </label>
+              <div class="col-md-9">
+                <select class="form-control" name="refOfficeAreaId" [(ngModel)]="refOfficeAreaId"
+                  #RefOfficeAreaId="ngModel">
+                  <option value="">Select None</option>
+                  <option *ngFor="let rfa of allRefOfficeArea" value="{{rfa.refOfficeAreaId}}">{{rfa.areaName}}
+                  </option>
+                </select>
+              </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 label-control">Area: </label>
-                <div class="col-md-9">
-                    <select class="form-control" name="refOfficeAreaId" [(ngModel)]="refOfficeAreaId" #RefOfficeAreaId="ngModel">
-                      <option value="">Select None</option>
-                        <option *ngFor="let rfa of allRefOfficeArea" value="{{rfa.refOfficeAreaId}}">{{rfa.areaName}}
-                        </option>
-                    </select>
-                </div>
+              <label class="col-md-3 label-control">Holiday Scheme: </label>
+              <div class="col-md-9">
+                <select class="form-control" name="holidaySchmHId" [(ngModel)]="holidaySchmHId"
+                  #HolidaySchmHId="ngModel">
+                  <option *ngFor="let hs of allHolidaySchm" value="{{hs.holidaySchmHId}}">{{hs.holidaySchmName}}
+                  </option>
+                </select>
+              </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 label-control">Holiday Scheme: </label>
-                <div class="col-md-9">
-                    <select class="form-control" name="holidaySchmHId" [(ngModel)]="holidaySchmHId" #HolidaySchmHId="ngModel">
-                        <option *ngFor="let hs of allHolidaySchm" value="{{hs.holidaySchmHId}}">{{hs.holidaySchmName}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 label-control">Working Hour Scheme: </label>
-                <div class="col-md-9">
-                    <select class="form-control" name="workingHourSchmHId" [(ngModel)]="workingHourSchmHId" #WorkingHourSchmHId="ngModel">
-                        <option *ngFor="let whs of allWorkingHourSchm" value="{{whs.workingHourSchmHId}}">{{whs.workingHourSchmName}}
-                        </option>
-                    </select>
-                </div>
+              <label class="col-md-3 label-control">Working Hour Scheme: </label>
+              <div class="col-md-9">
+                <select class="form-control" name="workingHourSchmHId" [(ngModel)]="workingHourSchmHId"
+                  #WorkingHourSchmHId="ngModel">
+                  <option *ngFor="let whs of allWorkingHourSchm" value="{{whs.workingHourSchmHId}}">
+                    {{whs.workingHourSchmName}}
+                  </option>
+                </select>
+              </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 label-control">Konvensional/Syariah: </label>
               <div class="col-md-9">
                 <div class="custom-control custom-radio display-inline-block">
-                  <input type="radio" id="Konvensional" value="KON" checked name="mrKonvenSyariah" [(ngModel)]="mrKonvenSyariah"
-                    class="custom-control-input" [attr.disabled]="isDisabledState? true : null">
+                  <input type="radio" id="Konvensional" value="KON" checked name="mrKonvenSyariah"
+                    [(ngModel)]="mrKonvenSyariah" class="custom-control-input"
+                    [attr.disabled]="isDisabledState? true : null">
                   <label class="custom-control-label" for="Konvensional">Konvensional</label>
                 </div>
                 <div class="custom-control custom-radio display-inline-block">
@@ -138,6 +144,47 @@
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                   (change)="toggleActive($event)" name="isActive">
+              </div>
+            </div>
+            <app-ucAddress #ucAddress [parentForm]='OfficeReqForm'></app-ucAddress>
+            <app-ucContactInfo #ucContactInfo [parentForm]='OfficeReqForm'></app-ucContactInfo>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Contact Person Name: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="cntctPersonName" [(ngModel)]="cntctPersonName"
+                  #CntctPersonName="ngModel"
+                  [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || CntctPersonName.touched || CntctPersonName.dirty) && CntctPersonName.invalid }">
+                <div
+                  *ngIf="(OfficeReqForm.submitted || CntctPersonName.touched || CntctPersonName.dirty) && CntctPersonName.invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="CntctPersonName.errors.required">Contact Person Name is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Contact Person Job Title: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="cntctPersonJobTitle" [(ngModel)]="cntctPersonJobTitle"
+                  #CntctPersonJobTitle="ngModel"
+                  [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || CntctPersonJobTitle.touched || CntctPersonJobTitle.dirty) && CntctPersonJobTitle.invalid }">
+                <div
+                  *ngIf="(OfficeReqForm.submitted || CntctPersonJobTitle.touched || CntctPersonJobTitle.dirty) && CntctPersonJobTitle.invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="CntctPersonJobTitle.errors.required">Contact Person Job Title is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-body">
+            <h4 class="form-section card-title"><i class="ft-file-text"></i> General</h4>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Tax Office: </label>
+              <div class="col-md-9">
+                <select class="form-control" name="refTaxOfficeId" [(ngModel)]="refTaxOfficeId"
+                  #RefTaxOfficeId="ngModel">
+                  <option *ngFor="let rto of allRefTaxOffice" value="{{rto.refTaxOfficeId}}">{{rto.taxOfficeName}}
+                  </option>
+                </select>
               </div>
             </div>
           </div>

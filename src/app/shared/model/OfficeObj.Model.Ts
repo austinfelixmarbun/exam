@@ -38,4 +38,5 @@ export class OfficeObj {
     workingHourSchmHId:    number;
     refTaxOfficeId:        number;
     isVirtualOffice:       string;
+    mrKonvenSyariah: any;
 }

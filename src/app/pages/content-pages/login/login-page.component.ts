@@ -72,7 +72,7 @@ export class LoginPageComponent implements OnInit {
         localStorage.setItem("Username",username);
         var currentUserContext = new CurrentUserContext;
         let today = new Date();
-        var businessDt = formatDate(today, 'dd-MM-yyyy', 'en-US');
+        var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US');
         this.http.post(this.apiUrl, requestObj).subscribe(
             (response) => {
                 console.log(response);
