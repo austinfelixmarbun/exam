@@ -6,7 +6,7 @@
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="RoleAddEditForm" #RoleAddEditForm="ngForm" novalidate
-          (ngSubmit)="RoleAddEditForm.form.valid && Save(RoleAddEditForm)" >
+          (ngSubmit)="RoleAddEditForm.form.valid && Save(RoleAddEditForm)">
           <div class="form-body">
             <h4 class="form-section"><i class="ft-user"></i> Role Maintenance - {{type}} </h4>
             <br>
@@ -43,9 +43,10 @@
 
           </div>
           <div class="form-actions">
-            <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-              <i class="ft-x"></i> Back
-            </button>
+
+              <button *ngIf=" type === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                <i class="ft-x"></i> Back
+              </button>
             <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>

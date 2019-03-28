@@ -1,14 +1,12 @@
-import { AdInsServiceService } from './../../../ad-ins-service.service';
-import { OrganizationObj } from './../../../shared/model/OrganizationObj.Model';
-import { environment } from './../../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
+import { environment } from 'environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -34,12 +32,12 @@ export class OrgAddEditComponent implements OnInit {
   result: any;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private service: NGXToastrService,
     private http: HttpClient,
     private spinner: NgxSpinnerService,
-    private location: Location,
-    private adInsService: AdInsServiceService) {
+    private location: Location) {
 
     this.route.queryParams.subscribe(params => {
       this.param = params['refOrgId'];
@@ -86,8 +84,9 @@ export class OrgAddEditComponent implements OnInit {
         (response) => {
           console.log("Success Save");
 
-          this.service.typeSave('Save Successed');
-          this.location.back();
+          this.service.typeSave(response['message']);
+          this.router.navigateByUrl('/organization/organization', { skipLocationChange: true }).then(() =>
+          this.router.navigate(['/organization/organization/add']));
           this.spinner.hide();
 
         },
@@ -116,7 +115,7 @@ export class OrgAddEditComponent implements OnInit {
         (response) => {
           console.log("Success Edit");
 
-          this.service.typeSave('Edit Successed');
+          this.service.typeSave(response['message']);
           this.location.back();
           this.spinner.hide();
         },

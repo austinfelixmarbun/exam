@@ -1,7 +1,6 @@
-import { Http } from "@angular/http";
-import { RefUserObj } from "./../../../shared/model/RefUserObj.Model";
-import { formatDate } from "@angular/common";
-import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
+
+import { RefUserObj } from "app/shared/model/RefUserObj.Model";
+import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { NgForm } from "@angular/forms";
 import { environment } from "environments/environment";
@@ -10,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { HttpHeaders } from "@angular/common/http";
+
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
 
 @Component({
@@ -23,7 +22,7 @@ export class UserAddEditComponent implements OnInit {
   apiUrl: any;
   parents: string;
   refUserObj: RefUserObj;
-  type: string = "Add";
+  type: string = "add";
   nameSelect: any;
   idSelect: any;
   jsonSelect: any;
@@ -139,6 +138,8 @@ export class UserAddEditComponent implements OnInit {
   }
 
   Save(UserAddEditForm: NgForm, lookupEmp: any): void {
+    console.log("Masuk Save");
+
     this.spinner.show();
     console.log(UserAddEditForm.value);
     var getUserUrl = this.foundationUrl + AdInsConstant.GetUserByUsername;
@@ -152,7 +153,7 @@ export class UserAddEditComponent implements OnInit {
     userObj.username = UserAddEditForm.value.Username;
 
     //MODE-ADD
-    if (this.type === "add") {
+    if (this.type === "add" || this.type === '' || this.type ===  undefined) {
       console.log("add");
       if (UserAddEditForm.value.Password !== UserAddEditForm.value.RePassword) {
         console.log("Password and Re-Password Not Valid");
@@ -169,7 +170,8 @@ export class UserAddEditComponent implements OnInit {
             } else {
               this.httpClient.post(getCountUserUrl, empObj).subscribe(
                 response => {
-                  if (response["returnObject"] > 0) {
+                  console.log(response);
+                  if (response['returnObject'] > 0) {
                     this.service.typeErrorCustom("Employee Already Have User");
                     this.spinner.hide();
                   } else {
@@ -195,8 +197,9 @@ export class UserAddEditComponent implements OnInit {
                         response => {
                           console.log("Success Save");
 
-                          this.service.typeSave("Save Successed");
-                          this.location.back();
+                          this.service.typeSave(response['message']);
+                          this.router.navigateByUrl('/systemSetting/refUser', { skipLocationChange: true }).then(() =>
+                          this.router.navigate(['/systemSetting/refUser/detail']));
                           this.spinner.hide();
                         },
                         error => {
@@ -248,7 +251,7 @@ export class UserAddEditComponent implements OnInit {
               response => {
                 console.log("Success Edit");
 
-                this.service.typeSave('Edit Success');
+                this.service.typeSave(response['message']);
                 this.location.back();
                 this.spinner.hide();
               },
@@ -266,6 +269,7 @@ export class UserAddEditComponent implements OnInit {
           this.spinner.hide();
         }
       );
+    //CHANE PASSWORD
     } else if (this.type === "changePassword") {
       console.log("changePassword");
       var validateOldPassUrl: any =
@@ -290,7 +294,7 @@ export class UserAddEditComponent implements OnInit {
         this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
           response => {
             console.log("Success Edit");
-            this.service.typeSave("Edit Successed");
+            this.service.typeSave(response['message']);
             this.location.back();
             this.spinner.hide();
           },

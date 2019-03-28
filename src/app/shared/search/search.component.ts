@@ -24,11 +24,12 @@ export class SearchComponent implements OnInit {
   @ViewChild('formIdSearch') myForm: ElementRef;
   @Input() _url: string;
   @Input() apiQryPaging: string;
-  @Input() pageSize : any = 10;
-  @Input() pageNow : any = 1;
-  @Output() result : EventEmitter<any> = new EventEmitter();
-  orderByKey : any;
-  orderByValue : any;
+  @Input() pageSize: any = 10;
+  @Input() pageNow: any = 1;
+  @Input() addCritInput: CriteriaObj[] = null;
+  @Output() result: EventEmitter<any> = new EventEmitter();
+  orderByKey: any;
+  orderByValue: any;
   tempUrl: string;
   urlGet: string;
   server: any;
@@ -87,7 +88,7 @@ export class SearchComponent implements OnInit {
               var numDay = parseInt(tempMinus[1]);
               dateShow.setDate(businessDate.getDate() + numDay);
             }
-            var dateText = formatDate(dateShow, 'yyy-MM-dd', 'en-US')
+            var dateText = formatDate(dateShow, 'yyyy-MM-dd', 'en-US')
             data.component[i].value = dateText;
           }
         }
@@ -115,7 +116,7 @@ export class SearchComponent implements OnInit {
   }
 
   public postJSON(url: string): Observable<any> {
-    return this.http.post(url,null);
+    return this.http.post(url, null);
   }
 
   onSubmit() {
@@ -143,9 +144,9 @@ export class SearchComponent implements OnInit {
     var request = new RequestCriteriaObj();
     var arrCrit = new Array();
 
-    
+
     console.log("Search");
-    
+
     request.pageNo = pageNo;
     request.rowPerPage = rowPerPage;
     request.orderBy = orderBy;
@@ -166,7 +167,6 @@ export class SearchComponent implements OnInit {
             critObj.restriction = AdInsConstant.RestrictionEq;
             critObj.propName = component.name;
             critObj.value = text;
-
             arrCrit.push(critObj);
           }
         }
@@ -199,11 +199,15 @@ export class SearchComponent implements OnInit {
         arrCrit.push(addCrit[i]);
       }
     }
+    else if (this.addCritInput !== null) {
+      for (var i = 0; i < this.addCritInput.length; i++) {
+        arrCrit.push(this.addCritInput[i]);
+      }
+    }
 
     request.criteria = arrCrit;
     var httpRequest = new HttpRequestObj();
-    this.http.post(apiUrl, request).subscribe((response) =>
-    {
+    this.http.post(apiUrl, request).subscribe((response) => {
       this.result.emit(response);
       return response;
     });
@@ -219,7 +223,7 @@ export class SearchComponent implements OnInit {
   }
 
   resolveObject(obj: any, url: string) {
-    const val = this.postJSON(environment.foundationUrl+url);
+    const val = this.postJSON(environment.foundationUrl + url);
     val.subscribe(tempData => {
       obj.itemsUrl = tempData.returnObject;
     });

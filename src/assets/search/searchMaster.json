@@ -1,0 +1,69 @@
+{
+  "exportExcel": true,
+  "component": [
+    {
+      "type": "dropdown",
+      "name": "refMasterTypeCode",
+      "id": "refMasterTypeCodeId",
+      "value": "refMasterTypeCode",
+      "placeholder": "Placeholder",
+      "datatype": "text",
+      "isFromURL": true,
+      "isSelectOne": true,
+      "url": "/RefMaster/GetRefMasterTypeKeyValue",
+      "label": "Master Type",
+      "items": [],
+      "itemsUrl": []
+    },
+    {
+      "type": "textbox",
+      "name": "masterCode",
+      "id": "masterCodeId",
+      "value": "",
+      "label": "Master Code",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "textbox",
+      "name": "descr",
+      "id": "descrId",
+      "value": "",
+      "label": "Description",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "textbox",
+      "name": "biCode",
+      "id": "biCodeId",
+      "value": "",
+      "label": "BI Code",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "dropdown",
+      "name": "isActive",
+      "datatype": "text",
+      "id": "isActiveId",
+      "value": "",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Active Status",
+      "items": [
+        {
+          "key": "Yes",
+          "value": "Yes"
+        },
+        {
+          "key": "No",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    }
+  ]
+}

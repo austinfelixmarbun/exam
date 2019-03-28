@@ -1,7 +1,5 @@
-import { FormGroup } from '@angular/forms';
-import { RefRoleObj } from './../../../shared/model/RefRoleObj.Model';
-import { Http } from '@angular/http';
-import { formatDate } from '@angular/common';
+
+import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
@@ -12,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-role-add-edit',
@@ -121,8 +119,9 @@ export class RoleAddEditComponent implements OnInit {
               (response) => {
                 console.log("Success Save");
 
-                this.service.typeSave('Save Successed');
-                this.location.back();
+                this.service.typeSave(response['message']);
+                this.router.navigateByUrl('/systemSetting/role', { skipLocationChange: true }).then(() =>
+                this.router.navigate(['/systemSetting/role/detail']));
                 this.spinner.hide();
 
               },
@@ -157,7 +156,7 @@ export class RoleAddEditComponent implements OnInit {
         (response) => {
           console.log("Success Edit");
 
-          this.service.typeSave('Edit Successed');
+          this.service.typeSave(response['message']);
           this.location.back();
           this.spinner.hide();
 

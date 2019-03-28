@@ -1,0 +1,37 @@
+<h4 class="form-section">General Setting Maintenance</h4>
+<br />
+<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+  (result)="getResult($event)" [addCritInput]='addCrit'></app-search>
+
+
+<table class="table table-responsive-md text-center table-hover">
+  <thead>
+    <tr class="table-header">
+      <th><span class="thead-header" (click)="searchSort($event)" name='gsCode'>General Setting Code</span></th>
+      <th><span class="thead-header" (click)="searchSort($event)"
+          name='gsName'>General Setting Name</span></th>
+      <th><span class="thead-header" (click)="searchSort($event)" name='gsDescr'>General Setting Description</span></th>
+      <th><span class="thead-header" (click)="searchSort($event)" name='gsValue'>General Setting Value</span></th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of resultData?.returnObject.data">
+      <td>{{item.gsCode}}</td>
+      <td class="text-left">{{item.gsName}}</td>
+      <td class="text-left">{{item.gsDescr}}</td>
+      <td>{{item.gsValue}}</td>
+      <td>
+        <div *ngIf="item.isUpdateable === 'Yes'">
+          <a class="success p-0" data-original-title="" title="" [routerLink]="['/commonSetting/generalSetting/detail']"
+            [queryParams]="{generalSettingId:item.generalSettingId,mode:'edit'}">
+            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+          </a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+<!--<i class="fa fa-plus-circle" [routerLink]="['/commonSetting/generalSetting/detail']"
+  style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>-->

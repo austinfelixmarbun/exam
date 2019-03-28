@@ -1,0 +1,66 @@
+<div class="col-sm-12">
+  <h1 class="text-uppercase">Master Type Maintenance - {{type}}</h1>
+</div>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" name="MasterTypeAddEditForm" #MasterTypeAddEditForm="ngForm" novalidate
+          (ngSubmit)="MasterTypeAddEditForm.form.valid && Save(MasterTypeAddEditForm)">
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-user"></i> {{type}} </h4>
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="masterTypeCodeModel">Master Type Code</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="masterTypeCodeModel" required
+                  [(ngModel)]="masterTypeCodeModel" #masterTypeCode="ngModel"
+                  [ngClass]="{ 'is-invalid': MasterTypeAddEditForm.submitted && masterType.invalid }"
+                  [attr.disabled]="type === 'edit' ? true : null">
+                <div *ngIf="MasterTypeAddEditForm.submitted && masterTypeCode.invalid" class="invalid-feedback">
+                  <div *ngIf="masterTypeCode.errors.required">Master Type Code is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="descrModel">Description</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="descrModel" required [(ngModel)]="descrModel"
+                  #descr="ngModel" [ngClass]="{ 'is-invalid': MasterTypeAddEditForm.submitted && descr.invalid }">
+                <div *ngIf="MasterTypeAddEditForm.submitted && descr.invalid" class="invalid-feedback">
+                  <div *ngIf="descr.errors.required">Description is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="sandiBiModel">Description</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="sandiBiModel" required [(ngModel)]="sandiBiModel"
+                  #sandiBi="ngModel">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="isActive">Active Status</label>
+              <div class="custom-control custom-checkbox m-0">
+                <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
+                  [checked]="isActive">
+              </div>
+            </div>
+
+          </div>
+          <div class="form-actions">
+            <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+              <i class="ft-x"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

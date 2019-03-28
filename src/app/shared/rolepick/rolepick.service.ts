@@ -36,7 +36,7 @@ export class RolePickService {
                             currentUserContext.Office = item.officeCode;
                             currentUserContext.Role = item.roleCode;
                             currentUserContext.BusinessDate = item.businessDt;
-                            var dateParse = formatDate(item.businessDt, 'dd-MM-yyyy', 'en-US');
+                            var dateParse = formatDate(item.businessDt, 'yyyy-MM-dd', 'en-US');
                             localStorage.setItem("BusinessDate", dateParse);
                             localStorage.setItem("UserAccess", JSON.stringify(item));
                             this.currentUserContextService.addCurrentUserContext(currentUserContext);

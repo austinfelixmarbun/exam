@@ -1,0 +1,58 @@
+<div class="col-sm-12">
+    <h1 class="text-uppercase">Office Area - {{type}}</h1>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <form class="form form-horizontal" name="OfficeForm" #OfficeForm="ngForm" novalidate
+            (ngSubmit)="OfficeForm.form.valid && Save(OfficeForm)">
+            <div class="form-body">
+              <h4 class="form-section"><i class="ft-user"></i>{{type}} </h4>
+              <br>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="areaCode">Area Code</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="areaCode" required [(ngModel)]="areaCode"
+                    #AreaCode ="ngModel" [ngClass]="{ 'is-invalid': OfficeForm.submitted && AreaCode.invalid }"
+                    [attr.disabled]="type === 'edit' ? true : null">
+                  <div *ngIf="OfficeForm.submitted && AreaCode.invalid" class="invalid-feedback">
+                    <div *ngIf="AreaCode.errors.required">This is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="areaName">Area Name</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="areaName" required [(ngModel)]="areaName"
+                    #AreaName="ngModel" [ngClass]="{ 'is-invalid': OfficeForm.submitted && AreaName.invalid }">
+                  <div *ngIf="OfficeForm.submitted && AreaName.invalid" class="invalid-feedback">
+                    <div *ngIf="AreaName.errors.required">This is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="isActive">Active Status</label>
+                <div class="custom-control custom-checkbox m-0">
+                  <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
+                    [checked]="isActive">
+                </div>
+              </div>
+
+            </div>
+            <div class="form-actions">
+
+                <button *ngIf=" type === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                  <i class="ft-x"></i> Back
+                </button>
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
