@@ -115,6 +115,7 @@ export class BODComponent implements OnInit {
         this.http.post(this.editUrl, this.bodObj).subscribe(
           (response) => {
             console.log(response);
+            this.searchPagination(1);
           });
       }
     }
