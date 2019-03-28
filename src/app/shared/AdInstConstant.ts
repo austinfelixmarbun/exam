@@ -28,7 +28,9 @@ export class AdInsConstant {
     public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
     public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
     public static AddRefOffice = "/RefOffice/AddRefOffice";
-
+    public static EditRefOffice = "/RefOffice/EditRefOffice";
+    public static DeleteRefOffice = "/RefOffice/DeleteRefOffice";
+    
     //REF OFFICE AREA
     public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
 

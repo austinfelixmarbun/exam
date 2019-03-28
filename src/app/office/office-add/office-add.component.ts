@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
@@ -22,6 +22,7 @@ export class OfficeAddComponent implements OnInit {
 
   @ViewChild(UcAddressComponent) ucAddr;
   @ViewChild(UcContactInfoComponent) ucContact;
+  @ViewChild('ParentId') test: ElementRef;
   pageType: string = "add";
   mrKonvenSyariah = 'KON';
   isDisabledState: boolean = false;
@@ -42,6 +43,8 @@ export class OfficeAddComponent implements OnInit {
   holidaySchmHId: any;
   workingHourSchmHId: any;
   refTaxOfficeId: any;
+  cntctPersonName: any;
+  cntctPersonJobTitle: any;
   hierarchyNo: any;
   officeCode: any;
   officeName: any;
@@ -49,6 +52,7 @@ export class OfficeAddComponent implements OnInit {
   resultData: any;
   apiUrl: any;
   addUrl: any;
+  editUrl: any;
   officeClassUrl: any;
   refOrgUrl: any;
   getRefOrgUrl: any;
@@ -69,6 +73,7 @@ export class OfficeAddComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
     this.addUrl = this.foundationUrl + AdInsConstant.AddRefOffice;
+    this.editUrl = this.foundationUrl + AdInsConstant.EditRefOffice;
     this.officeClassUrl = this.foundationUrl + AdInsConstant.GetRefMasterList;
     this.refOrgUrl = this.foundationUrl + AdInsConstant.GetListAllRefOrg;
     this.orgMdlUrl = this.foundationUrl + AdInsConstant.GetAllActiveOrgMdlByRefOrgId;
@@ -172,6 +177,8 @@ export class OfficeAddComponent implements OnInit {
           }
           this.mrKonvenSyariah = response['returnObject']['mrKonvenSyariah']
           this.refTaxOfficeId = response['returnObject']['refTaxOfficeId']
+          this.cntctPersonName = response['returnObject']['cntctPersonName']
+          this.cntctPersonJobTitle = response['returnObject']['cntctPersonJobTitle']
           this.ucAddr.setData(this.resultData);
           this.ucContact.setData(this.resultData);
         })
@@ -179,59 +186,60 @@ export class OfficeAddComponent implements OnInit {
   }
 
   SaveForm(OfficeAddReqForm: NgForm, ucAddress, ucContactInfo): void {
-    if (this.pageType === "add") {
-      this.officeObj = new OfficeObj();
-      this.officeObj.refOfficeId = OfficeAddReqForm.value.refOfficeId;
-      this.officeObj.officeCode = OfficeAddReqForm.value.officeCode;
-      this.officeObj.officeShortName = OfficeAddReqForm.value.officeShortName;
-      this.officeObj.officeName = OfficeAddReqForm.value.officeName;
-      this.officeObj.orgMdlId = OfficeAddReqForm.value.orgMdlId;
-      this.officeObj.officeAddr = ucAddress.addr;
-      this.officeObj.rt = ucAddress.rt;
-      this.officeObj.rw = ucAddress.rw;
-      this.officeObj.kelurahan = ucAddress.kelurahan;
-      this.officeObj.kecamatan = ucAddress.kecamatan;
-      this.officeObj.city = ucAddress.city;
-      this.officeObj.zipcode = ucAddress.zipcode;
-      this.officeObj.phnArea1 = ucAddress.phnArea1;
-      this.officeObj.phn1 = ucAddress.phn1;
-      this.officeObj.phnArea2 = ucAddress.phnArea2;
-      this.officeObj.phn2 = ucAddress.phn2;
-      this.officeObj.faxArea = ucAddress.faxArea;
-      this.officeObj.fax = ucAddress.fax;
-      this.officeObj.cntctPersonName = OfficeAddReqForm.value.cntctPersonName;
-      this.officeObj.cntctPersonJobTitle = OfficeAddReqForm.value.cntctPersonJobTitle;
-      this.officeObj.cntctPersonMobilePhn1 = ucContactInfo.mobilePhn1;
-      this.officeObj.cntctPersonMobilePhn2 = ucContactInfo.mobilePhn2;
-      this.officeObj.mrOfficeClass = OfficeAddReqForm.value.mrOfficeClass;
-      this.officeObj.refOfficeAreaId = OfficeAddReqForm.value.refOfficeAreaId;
-      this.officeObj.isActive = OfficeAddReqForm.value.isActive;
-      this.officeObj.parentId = OfficeAddReqForm.value.parentId;
-      this.officeObj.isOfficeClose = '0';
-      this.officeObj.officeOpeningDt = OfficeAddReqForm.value.officeOpeningDt;
-      this.officeObj.isAllowAppCreated = OfficeAddReqForm.value.isAllowAppCreated;
-      this.officeObj.holidaySchmHId = OfficeAddReqForm.value.holidaySchmHId;
-      this.officeObj.cntctPersonEmail1 = ucContactInfo.email1;
-      this.officeObj.phnArea3 = ucAddress.phnArea3;
-      this.officeObj.phn3 = ucAddress.phn3;
-      this.officeObj.cntctPersonEmail2 = ucContactInfo.email2;
-      this.officeObj.workingHourSchmHId = OfficeAddReqForm.value.workingHourSchmHId;
-      this.officeObj.refTaxOfficeId = OfficeAddReqForm.value.refTaxOfficeId;
-      this.officeObj.isVirtualOffice = OfficeAddReqForm.value.isVirtualOffice;
-      this.officeObj.mrKonvenSyariah = OfficeAddReqForm.value.mrKonvenSyariah;
+    this.officeObj = new OfficeObj();
+    this.officeObj.refOfficeId = OfficeAddReqForm.value.refOfficeId;
+    this.officeObj.officeCode = OfficeAddReqForm.value.officeCode;
+    this.officeObj.officeShortName = OfficeAddReqForm.value.officeShortName;
+    this.officeObj.officeName = OfficeAddReqForm.value.officeName;
+    this.officeObj.orgMdlId = OfficeAddReqForm.value.orgMdlId;
+    this.officeObj.officeAddr = ucAddress.addr;
+    this.officeObj.rt = ucAddress.rt;
+    this.officeObj.rw = ucAddress.rw;
+    this.officeObj.kelurahan = ucAddress.kelurahan;
+    this.officeObj.kecamatan = ucAddress.kecamatan;
+    this.officeObj.city = ucAddress.city;
+    this.officeObj.zipcode = ucAddress.zipcode;
+    this.officeObj.phnArea1 = ucAddress.phnArea1;
+    this.officeObj.phn1 = ucAddress.phn1;
+    this.officeObj.phnArea2 = ucAddress.phnArea2;
+    this.officeObj.phn2 = ucAddress.phn2;
+    this.officeObj.faxArea = ucAddress.faxArea;
+    this.officeObj.fax = ucAddress.fax;
+    this.officeObj.cntctPersonName = OfficeAddReqForm.value.cntctPersonName;
+    this.officeObj.cntctPersonJobTitle = OfficeAddReqForm.value.cntctPersonJobTitle;
+    this.officeObj.cntctPersonMobilePhn1 = ucContactInfo.mobilePhn1;
+    this.officeObj.cntctPersonMobilePhn2 = ucContactInfo.mobilePhn2;
+    this.officeObj.mrOfficeClass = OfficeAddReqForm.value.mrOfficeClass;
+    this.officeObj.refOfficeAreaId = OfficeAddReqForm.value.refOfficeAreaId;
+    this.officeObj.isActive = OfficeAddReqForm.value.isActive;
+    this.officeObj.parentId = OfficeAddReqForm.value.parentId;
+    this.officeObj.isOfficeClose = '0';
+    this.officeObj.officeOpeningDt = OfficeAddReqForm.value.officeOpeningDt;
+    this.officeObj.isAllowAppCreated = OfficeAddReqForm.value.isAllowAppCreated;
+    this.officeObj.holidaySchmHId = OfficeAddReqForm.value.holidaySchmHId;
+    this.officeObj.cntctPersonEmail1 = ucContactInfo.email1;
+    this.officeObj.phnArea3 = ucAddress.phnArea3;
+    this.officeObj.phn3 = ucAddress.phn3;
+    this.officeObj.cntctPersonEmail2 = ucContactInfo.email2;
+    this.officeObj.workingHourSchmHId = OfficeAddReqForm.value.workingHourSchmHId;
+    this.officeObj.refTaxOfficeId = OfficeAddReqForm.value.refTaxOfficeId;
+    this.officeObj.isVirtualOffice = '0'
+    this.officeObj.mrKonvenSyariah = OfficeAddReqForm.value.mrKonvenSyariah;
 
-      if (this.isAllowAppCreated === false) {
-        this.officeObj.isAllowAppCreated = "0";
-      }
-      else {
-        this.officeObj.isAllowAppCreated = "1";
-      }
-      if (this.isActive === false) {
-        this.officeObj.isActive = "0";
-      }
-      else {
-        this.officeObj.isActive = "1";
-      }
+    if (this.isAllowAppCreated === false) {
+      this.officeObj.isAllowAppCreated = "0";
+    }
+    else {
+      this.officeObj.isAllowAppCreated = "1";
+    }
+    if (this.isActive === false) {
+      this.officeObj.isActive = "0";
+    }
+    else {
+      this.officeObj.isActive = "1";
+    }
+
+    if (this.pageType === "add") {
       console.log(JSON.stringify(this.officeObj))
       console.log(this.officeObj);
       this.httpClient.post(this.addUrl, this.officeObj).subscribe(
@@ -246,15 +254,30 @@ export class OfficeAddComponent implements OnInit {
           console.log(error);
         }
       );
-
     }
     else {
+      this.officeObj.refOfficeId = this.refOfficeId;
+      console.log(JSON.stringify(this.officeObj))
+      console.log(this.officeObj);
+      this.httpClient.post(this.editUrl, this.officeObj).subscribe(
+        (response) => {
+          console.log("Success");
+          console.log(response);
+          this.toastr.successMessage(response['message']);
+          this.router.navigate(["/office"]);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
 
     }
   }
 
   toggleActive(e) {
     this.isActive = e.target.checked;
+    console.log(this.test);
   }
 
   toggleAllowAppCreated(e) {

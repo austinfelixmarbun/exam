@@ -24,6 +24,7 @@ export class SearchComponent implements OnInit {
   @ViewChild('formIdSearch') myForm: ElementRef;
   @Input() _url: string;
   @Input() apiQryPaging: string;
+  @Input() arrCritObj: any;
   @Input() pageSize: any = 10;
   @Input() pageNow: any = 1;
   @Output() result: EventEmitter<any> = new EventEmitter();
@@ -41,6 +42,7 @@ export class SearchComponent implements OnInit {
   formattedAmount = '';
   amount = 0;
   apiUrl: string;
+  arrCrit: any;
   foundationUrl: string = environment.foundationUrl;
   constructor(private http: HttpClient, private adInsService: AdInsServiceService, private decimalPipe: DecimalPipe, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
   }
@@ -98,6 +100,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.apiUrl = this.foundationUrl + this.apiQryPaging;
+    this.arrCrit = this.arrCritObj;
     let js = this._renderer2.createElement('script');
     js.text = `
           $(document).ready(function(){
@@ -135,7 +138,7 @@ export class SearchComponent implements OnInit {
     this.orderByKey = null
     this.orderByValue = true
     this.pageNow = 1;
-    this.search(this.apiUrl, this.pageNow, this.pageSize, null);
+    this.search(this.apiUrl, this.pageNow, this.pageSize, null, this.arrCrit);
   }
 
   search(apiUrl: string, pageNo: number, rowPerPage: number, orderBy: any, addCrit: CriteriaObj[] = null) {

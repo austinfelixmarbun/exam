@@ -7,6 +7,8 @@ import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { OfficeAddComponent } from './office-add/office-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OfficeEmpPosComponent } from './office-emp-pos/office-emp-pos.component';
+import { OfficeEmpPosAddComponent } from './office-emp-pos/office-emp-pos-add/office-emp-pos-add.component';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     OfficeComponent,
     OfficeAddComponent,
+    OfficeEmpPosComponent,
+    OfficeEmpPosAddComponent,
   ]
 })
 export class OfficeModule { }
