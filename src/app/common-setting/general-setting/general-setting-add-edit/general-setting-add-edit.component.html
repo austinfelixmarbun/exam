@@ -1,0 +1,73 @@
+<div class="col-sm-12">
+    <h1 class="text-uppercase">General Setting - {{type}}</h1>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <form class="form form-horizontal" name="GSForm" #GSForm="ngForm" novalidate
+            (ngSubmit)="GSForm.form.valid && Save(GSForm)" >
+            <div class="form-body">
+              <h4 class="form-section"><i class="ft-user"></i> General Setting Ingo</h4>
+              <br>
+
+
+              <div class="form-group row">
+                  <label class="col-md-3 label-control" for="gsCode">General Setting Code</label>
+                  <div class="col-md-9">
+                      <input type="text" class="form-control" name="gsCode" required [(ngModel)]="gsCode"
+                    #GsCode="ngModel" [ngClass]="{ 'is-invalid': GSForm.submitted && GsCode.invalid }"
+                    [attr.disabled]="type === 'edit' ? true : null">
+                  <div *ngIf="GSForm.submitted && GsCode.invalid" class="invalid-feedback">
+                    <div *ngIf="GSForm.errors.required">Required</div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="gsName">General Setting Name</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="gsName" required [(ngModel)]="gsName"
+                    #GsName="ngModel" [ngClass]="{ 'is-invalid': GSForm.submitted && GsName.invalid }">
+                  <div *ngIf="GSForm.submitted && GsName.invalid" class="invalid-feedback">
+                    <div *ngIf="GsName.errors.required">Required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="gsValue">General Setting Value</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="gsValue" required [(ngModel)]="gsValue"
+                    #GsValue="ngModel" [ngClass]="{ 'is-invalid': GSForm.submitted && GsValue.invalid }">
+                  <div *ngIf="GSForm.submitted && GsValue.invalid" class="invalid-feedback">
+                    <div *ngIf="GsValue.errors.required">Required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                  <label class="col-md-3 label-control" for="gsDescr">General Setting Description</label>
+                  <div class="col-md-9">
+                      <textarea id="gsDescr" rows="6" class="form-control" name="gsDescr" required [(ngModel)]="gsDescr"></textarea>
+                      <!-- #GsDescr="ngModel" [ngClass]="{ 'is-invalid': GSForm.submitted && GsDescr.invalid }">
+                    <div *ngIf="GSForm.submitted && GsDescr.invalid" class="invalid-feedback"></textarea>
+                      <div *ngIf="GsDescr.errors.required">Required</div> -->
+                    </div>
+                  </div>
+                </div>
+            <div class="form-actions">
+
+              <button *ngIf=" type === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                <i class="ft-x"></i> Back
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

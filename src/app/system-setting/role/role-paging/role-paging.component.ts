@@ -1,14 +1,12 @@
-import { ExcelService } from './../../../shared/excel-service/excel-service';
-import { environment } from './../../../../environments/environment';
+import { ExcelService } from 'app/shared/excel-service/excel-service';
+import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';

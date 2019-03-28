@@ -50,43 +50,20 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
-      "isSelectOne" : false,
+      "isSelectOne": false,
       "url": "https://api.myjson.com/bins/ld6e8",
       "label": "Active Status",
       "items": [
-          {
-              "key": "Yes",
-              "value": "Yes"
-          },
-          {
-              "key": "No",
-              "value": "No"
-          }
-      ],
-      "itemsUrl": []
-  },
-  {
-    "type": "dropdown",
-    "name": "isSystem",
-    "datatype": "text",
-    "id": "isSystemId",
-    "value": "",
-    "placeholder": "Placeholder",
-    "isFromURL": false,
-    "isSelectOne" : false,
-    "url": "https://api.myjson.com/bins/ld6e8",
-    "label": "System",
-    "items": [
         {
-            "key": "Yes",
-            "value": "Yes"
+          "key": "Yes",
+          "value": "Yes"
         },
         {
-            "key": "No",
-            "value": "No"
+          "key": "No",
+          "value": "No"
         }
-    ],
-    "itemsUrl": []
-}
+      ],
+      "itemsUrl": []
+    }
   ]
 }

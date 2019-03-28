@@ -1,9 +1,11 @@
+import { OfficeAreaAddEditComponent } from './office-area/office-area-add-edit/office-area-add-edit.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { OfficeComponent } from './office.component';
 import { OfficeAddComponent } from './office-add/office-add.component';
 import { OfficeEmpPosComponent } from './office-emp-pos/office-emp-pos.component';
 import { OfficeEmpPosAddComponent } from './office-emp-pos/office-emp-pos-add/office-emp-pos-add.component';
+import { OfficeAreaPagingComponent } from './office-area/office-area-paging/office-area-paging.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,20 @@ const routes: Routes = [
           title: 'Office Employee Position Add'
         }
       },
+      {
+        path: 'officeArea',
+        component: OfficeAreaPagingComponent,
+        data: {
+          title: 'Office Area'
+        }
+      },
+      {
+        path: 'officeArea/detail',
+        component: OfficeAreaAddEditComponent,
+        data: {
+          title: 'Office Area Add Edit'
+        }
+      }
     ]
   }
 ];

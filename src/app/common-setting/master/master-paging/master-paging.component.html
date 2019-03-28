@@ -1,7 +1,7 @@
 <h4 class="form-section">Master Maintenance</h4>
 <br />
 <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-  (result)="getResult($event)"></app-search>
+  (result)="getResult($event)" [addCritInput]='addCrit'></app-search>
 
 
 <table class="table table-responsive-md text-center table-hover">
@@ -15,8 +15,6 @@
           BI</span></th>
       <th><span class="thead-header" (click)="searchSort($event)"
           name='isActive'>Active</span></th>
-      <th><span class="thead-header" (click)="searchSort($event)"
-          name='isSystem'>System</span></th>
       <th>Action</th>
     </tr>
   </thead>
@@ -26,7 +24,6 @@
       <td class="text-left">{{item.descr}}</td>
       <td>{{item.biCode}}</td>
       <td>{{item.isActive}}</td>
-      <td>{{item.isSystem}}</td>
       <td>
         <div *ngIf="item.isSystem === 'No'">
           <a class="success p-0" data-original-title="" title="" [routerLink]="['/commonSetting/master/detail']"
@@ -42,5 +39,5 @@
   </tbody>
 </table>
 <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
-<i class="fa fa-plus-circle" [routerLink]="['/commonSetting/master/detail']"
-  style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+<!--<i class="fa fa-plus-circle" [routerLink]="['/commonSetting/master/detail']"
+  style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>-->

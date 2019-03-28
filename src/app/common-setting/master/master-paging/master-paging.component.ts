@@ -1,14 +1,9 @@
-import { ExcelService } from './../../../shared/excel-service/excel-service';
-import { environment } from './../../../../environments/environment';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
@@ -16,7 +11,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 @Component({
   selector: 'app-master-paging',
   templateUrl: './master-paging.component.html',
-  providers: [NGXToastrService, NGXToastrService, ExcelService]
+  providers: [NGXToastrService, NGXToastrService]
 })
 export class MasterPagingComponent implements OnInit {
 
@@ -37,13 +32,10 @@ export class MasterPagingComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetRefMasterPaging;
+  addCrit: CriteriaObj[];
 
   constructor(
-    private http: Http,
-    private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private excelService: ExcelService,
     private https: HttpClient
   ) { }
 
@@ -62,6 +54,7 @@ export class MasterPagingComponent implements OnInit {
   }
 
   getResult(event) {
+    console.log(event);
     this.resultData = event;
     this.totalData = event.returnObject.count;
     this.ucgridFooter.totalData = this.totalData;
@@ -83,7 +76,7 @@ export class MasterPagingComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
       .subscribe(
         (response) => {
           console.log("Success");
@@ -99,7 +92,13 @@ export class MasterPagingComponent implements OnInit {
   }
 
   initiateForm() {
+    this.addCrit = new Array();
+    var critIsActive = new CriteriaObj();
+    critIsActive.propName = "isSystem";
+    critIsActive.value = "No";
+    critIsActive.restriction = AdInsConstant.RestrictionEq;
 
+    this.addCrit.push(critIsActive);
   }
 
   del(id: any) {
@@ -117,7 +116,7 @@ export class MasterPagingComponent implements OnInit {
               value: this.orderByValue
             }
           }
-          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
             .subscribe(
               (response) => {
                 console.log("Success");
@@ -146,7 +145,7 @@ export class MasterPagingComponent implements OnInit {
       value: this.orderByValue
     }
     console.log(this.apiUrl);
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
       .subscribe(
         (response) => {
           console.log("Success");

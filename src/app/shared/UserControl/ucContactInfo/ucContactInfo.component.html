@@ -1,6 +1,30 @@
 <fieldset ngModelGroup="contactInfo">
     <div class="form-body">
         <h4 class="form-section card-title"><i class="ft-file-text"></i> Contact Information</h4>
+        <div class="form-group row" *ngIf="useName">
+            <label class="col-md-3 label-control" for="cntctPersonName">Contact Person Name :</label>
+            <div class="col-md-9">
+                <input type="text"id="cntctPersonName" class="form-control" name="cntctPersonName" required
+                    [(ngModel)]="cntctPersonName" #CntctPersonName="ngModel"
+                    [ngClass]="{ 'is-invalid':(parentForm.submitted || CntctPersonName.touched || CntctPersonName.dirty) && CntctPersonName.invalid }">
+                <div *ngIf=" (parentForm.submitted || CntctPersonName.touched || CntctPersonName.dirty) && CntctPersonName.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="CntctPersonName.errors.required">Contact Person Name is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="useTitle">
+            <label class="col-md-3 label-control" for="cntctPersonJobTitle">Contact Person Job Title :</label>
+            <div class="col-md-9">
+                <input type="text" id="cntctPersonJobTitle" class="form-control" name="cntctPersonJobTitle" required
+                    [(ngModel)]="cntctPersonJobTitle" #CntctPersonJobTitle="ngModel"
+                    [ngClass]="{ 'is-invalid':(parentForm.submitted || CntctPersonJobTitle.touched || CntctPersonJobTitle.dirty) && CntctPersonJobTitle.invalid }">
+                <div *ngIf=" (parentForm.submitted || CntctPersonJobTitle.touched || CntctPersonJobTitle.dirty) && CntctPersonJobTitle.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="CntctPersonJobTitle.errors.required">Contact Person Job Title is required</div>
+                </div>
+            </div>
+        </div>
         <div class="form-group row">
             <label class="col-md-3 label-control" for="mobilePhn1">Mobile Phone 1: </label>
             <div class="col-md-9">
@@ -91,7 +115,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" *ngIf="useEmail2">
             <label class="col-md-3 label-control" for="email2">Email 2: </label>
             <div class="col-md-9">
                 <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="email2"

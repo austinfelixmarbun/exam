@@ -27,6 +27,7 @@ export class SearchComponent implements OnInit {
   @Input() arrCritObj: any;
   @Input() pageSize: any = 10;
   @Input() pageNow: any = 1;
+  @Input() addCritInput: CriteriaObj[] = null;
   @Output() result: EventEmitter<any> = new EventEmitter();
   orderByKey: any;
   orderByValue: any;
@@ -199,6 +200,11 @@ export class SearchComponent implements OnInit {
     if (addCrit !== null) {
       for (var i = 0; i < addCrit.length; i++) {
         arrCrit.push(addCrit[i]);
+      }
+    }
+    else if (this.addCritInput !== null) {
+      for (var i = 0; i < this.addCritInput.length; i++) {
+        arrCrit.push(this.addCritInput[i]);
       }
     }
 
