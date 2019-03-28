@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { CompanyComponent } from './company.component';
 import { BODComponent } from './bod/bod.component';
 import { BodAddComponent } from './bod/add/add-bod.component';
-import { CommisionerComponent } from './Commisioner/commisioner.component';
+import { CommissionerComponent } from './Commissioner/commissioner.component';
+import { CommissionerAddComponent } from './Commissioner/add/add-commissioner.component';
+import { EditCompanyComponent } from './edit/edit-company.component';
 
 const routes: Routes = [
   {
@@ -31,10 +33,24 @@ const routes: Routes = [
         }
       },
       {
-        path: 'commisioner',
-        component: CommisionerComponent,
+        path: 'commissioner',
+        component: CommissionerComponent,
         data: {
           title: 'Commisioner Information'
+        }
+      },
+      {
+        path: 'commissioner/add',
+        component: CommissionerAddComponent,
+        data: {
+          title: 'Commisioner Information'
+        }
+      },
+      {
+        path: 'edit',
+        component: EditCompanyComponent,
+        data: {
+          title: 'Edit Company'
         }
       }
     ]

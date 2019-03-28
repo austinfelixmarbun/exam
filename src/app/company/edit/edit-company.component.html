@@ -1,0 +1,90 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title" id="horz-layout-colored-controls">Company Profile</h4>
+        </div>
+        <div class="card-body">
+            <div class="px-3">
+                <form class="form form-horizontal" name="RefCoyForm" #RefCoyForm="ngForm" (ngSubmit)="RefCoyForm.form.valid && Save(RefCoyForm, ucAddress, ucContactInfo)" novalidate>
+                    <div class="form-body">
+                        <h4 class="form-section card-title"><i class="ft-file-text"></i>Company Profile</h4>
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">Company Code : </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="coyCode" required [(ngModel)]="coyCode"
+                                    #CoyCode="ngModel" [ngClass]="{ 'is-invalid': (CoyCode.touched || CoyCode.dirty || RefCoyForm.submitted) && CoyCode.invalid }">
+                                    <div *ngIf="RefCoyForm.submitted && CoyCode.invalid" class="invalid-feedback">
+                                      <div *ngIf="CoyCode.errors.required">Company Code is required</div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">Full Name: </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="fullName" required [(ngModel)]="fullName"
+                                    #FullName="ngModel" [ngClass]="{ 'is-invalid': (FullName.touched || FullName.dirty || RefCoyForm.submitted) && FullName.invalid }">
+                                    <div *ngIf="RefCoyForm.submitted && FullName.invalid" class="invalid-feedback">
+                                      <div *ngIf="FullName.errors.required">Full Name is required</div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">Short Name: </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="shortName" required [(ngModel)]="shortName"
+                                    #ShortName="ngModel" [ngClass]="{ 'is-invalid': (ShortName.touched || ShortName.dirty || RefCoyForm.submitted) && ShortName.invalid }">
+                                    <div *ngIf="RefCoyForm.submitted && ShortName.invalid" class="invalid-feedback">
+                                      <div *ngIf="ShortName.errors.required">Short Name is required</div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">Initial Name: </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="initialName" required [(ngModel)]="initialName"
+                                    #InitialName="ngModel" [ngClass]="{ 'is-invalid': (InitialName.touched || InitialName.dirty || RefCoyForm.submitted) && InitialName.invalid }">
+                                    <div *ngIf="RefCoyForm.submitted && InitialName.invalid" class="invalid-feedback">
+                                      <div *ngIf="InitialName.errors.required">Initial Name is required</div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">BI Code: </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="biCode" required [(ngModel)]="biCode"
+                                    #BiCode="ngModel">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">NPWP :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="npwp" required [(ngModel)]="npwp"
+                                    #Npwp="ngModel" [ngClass]="{ 'is-invalid': (Npwp.touched || Npwp.dirty || RefCoyForm.submitted) && Npwp.invalid }">
+                                    <div *ngIf="RefCoyForm.submitted && Npwp.invalid" class="invalid-feedback">
+                                      <div *ngIf="Npwp.errors.required">NPWP is required</div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">TDP :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="tdp" required [(ngModel)]="tdp"
+                                    #TDP="ngModel">
+                            </div>
+                        </div>
+                    </div>
+                    <app-ucAddress #ucAddress [parentForm]='RefCoyForm'></app-ucAddress>
+                    <app-ucContactInfo #ucContactInfo [parentForm]='RefCoyForm' [useEmail2]="false"></app-ucContactInfo>
+                    <div class="form-actions right">
+                        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/company/commissioner']">
+                            <i class="ft-x"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-raised btn-primary">
+                            <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

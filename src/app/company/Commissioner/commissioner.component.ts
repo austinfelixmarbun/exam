@@ -10,18 +10,18 @@ import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { ActivatedRoute } from '@angular/router';
-import { CoyCommisionerObj } from 'app/shared/model/CoyCommisionerObj.Model';
+import { CoyCommissionerObj } from 'app/shared/model/CoyCommissionerObj.Model';
 
 @Component({
-  selector: 'app-commisioner',
-  templateUrl: './commisioner.component.html',
+  selector: 'app-commissioner',
+  templateUrl: './commissioner.component.html',
   providers: [NgbPaginationConfig, NGXToastrService]
 })
-export class CommisionerComponent implements OnInit {
+export class CommissionerComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
-    urlJson: string = "./assets/search/searchBod.json";
+    urlJson: string = "./assets/search/searchCommissioner.json";
     resultData: string;
     pageNow: any;
     totalData: any;
@@ -31,7 +31,7 @@ export class CommisionerComponent implements OnInit {
     orderByValue: boolean = true;
     urlQryPaging : string = AdInsConstant.GetCommissionerPaging;
     editUrl : any;
-    commisionerObj : CoyCommisionerObj;
+    commissionerObj : CoyCommissionerObj;
     // array of all items to be paged
     private allItems: any[];
     // pager object
@@ -109,9 +109,9 @@ export class CommisionerComponent implements OnInit {
     delete(coyCommissionerId: any) {
       if(confirm("Are you sure to delete this record?")) {
         this.editUrl = this.foundationUrl + AdInsConstant.DeleteCoyCommissioner;
-        this.commisionerObj = new CoyCommisionerObj();
-        this.commisionerObj.coyCommissionerId = coyCommissionerId;
-        this.http.post(this.editUrl, this.commisionerObj).subscribe(
+        this.commissionerObj = new CoyCommissionerObj();
+        this.commissionerObj.coyCommissionerId = coyCommissionerId;
+        this.http.post(this.editUrl, this.commissionerObj).subscribe(
           (response) => {
             console.log(response);
             this.searchComponent.search();

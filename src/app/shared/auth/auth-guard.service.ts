@@ -31,11 +31,11 @@ export class AuthGuard implements CanActivate {
 
     AdInsHelper.InsertLog(this.currentUrl,"PAGE");
 
-    if(!AdInsHelper.IsGrantAccess(this.currentUrl))
-    {
-      this.errorDialogService.openDialog(AdInsErrorMessage.PageNotAuthorized);
-      this.router.navigate([AdInsConstant.FormDefault]);
-    }
+    // if(!AdInsHelper.IsGrantAccess(this.currentUrl))
+    // {
+    //   this.errorDialogService.openDialog(AdInsErrorMessage.PageNotAuthorized);
+    //   this.router.navigate([AdInsConstant.FormDefault]);
+    // }
 
     if (currentUser == null) {
       this.router.navigate(['pages/login'])

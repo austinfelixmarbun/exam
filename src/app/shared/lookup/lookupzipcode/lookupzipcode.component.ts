@@ -70,6 +70,7 @@ export class LookupzipcodeComponent implements OnInit {
     this.nameSelect = name;
     this.jsonSelect = JSON.stringify(item);
     this.modalService.dismissAll();
+    this.select.emit(item);
   }
 
   open(content) {

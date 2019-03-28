@@ -1,20 +1,20 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title" id="horz-layout-colored-controls">Board Of Director Information</h4>
+            <h4 class="card-title" id="horz-layout-colored-controls">Commissioner Information</h4>
         </div>
         <div class="card-body">
             <div class="px-3">
-                <form class="form form-horizontal" name="RefCoyBodForm" #RefCoyBodForm="ngForm" (ngSubmit)="RefCoyBodForm.form.valid && Save(RefCoyBodForm, ucAddress, ucContactInfo)" novalidate>
+                <form class="form form-horizontal" name="RefCoyCommisionerForm" #RefCoyCommisionerForm="ngForm" (ngSubmit)="RefCoyCommisionerForm.form.valid && Save(RefCoyCommisionerForm, ucAddress, ucContactInfo)" novalidate>
                     <div class="form-body">
                         <h4 class="form-section card-title"><i class="ft-file-text"></i> Board Of Director</h4>
                         <div class="form-group row">
                             <label class="col-md-3 label-control">Name : </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="name" required [(ngModel)]="name"
-                                    #Name="ngModel" [ngClass]="{ 'is-invalid': (Name.touched || Name.dirty || RefCoyBodForm.submitted) && Name.invalid }">
-                                    <div *ngIf="RefCoyBodForm.submitted && Name.invalid" class="invalid-feedback">
-                                      <div *ngIf="Name.errors.required">Employee Name is required</div>
+                                    #Name="ngModel" [ngClass]="{ 'is-invalid': (Name.touched || Name.dirty || RefCoyCommisionerForm.submitted) && Name.invalid }">
+                                    <div *ngIf="RefCoyCommisionerForm.submitted && Name.invalid" class="invalid-feedback">
+                                      <div *ngIf="Name.errors.required">Name is required</div>
                                     </div>
                             </div>
                         </div>
@@ -22,8 +22,8 @@
                             <label class="col-md-3 label-control">Job Title: </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="jobTitle" required [(ngModel)]="jobTitle"
-                                    #JobTitle="ngModel" [ngClass]="{ 'is-invalid': (JobTitle.touched || JobTitle.dirty || RefCoyBodForm.submitted) && JobTitle.invalid }">
-                                    <div *ngIf="RefCoyBodForm.submitted && JobTitle.invalid" class="invalid-feedback">
+                                    #JobTitle="ngModel" [ngClass]="{ 'is-invalid': (JobTitle.touched || JobTitle.dirty || RefCoyCommisionerForm.submitted) && JobTitle.invalid }">
+                                    <div *ngIf="RefCoyCommisionerForm.submitted && JobTitle.invalid" class="invalid-feedback">
                                       <div *ngIf="JobTitle.errors.required">Job Title is required</div>
                                     </div>
                             </div>
@@ -32,8 +32,8 @@
                             <label class="col-md-3 label-control">NPWP: </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="npwp" required [(ngModel)]="npwp"
-                                    #Npwp="ngModel" [ngClass]="{ 'is-invalid': (Npwp.touched || Npwp.dirty || RefCoyBodForm.submitted) && Npwp.invalid }">
-                                    <div *ngIf="RefCoyBodForm.submitted && Npwp.invalid" class="invalid-feedback">
+                                    #Npwp="ngModel" [ngClass]="{ 'is-invalid': (Npwp.touched || Npwp.dirty || RefCoyCommisionerForm.submitted) && Npwp.invalid }">
+                                    <div *ngIf="RefCoyCommisionerForm.submitted && Npwp.invalid" class="invalid-feedback">
                                       <div *ngIf="Npwp.errors.required">Npwp is required</div>
                                     </div>
                             </div>
@@ -51,17 +51,17 @@
                             <label class="col-md-3 label-control">Id No: </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="idNo" required [(ngModel)]="idNo"
-                                    #IdNo="ngModel" [ngClass]="{ 'is-invalid': (IdNo.touched || IdNo.dirty || RefCoyBodForm.submitted) && IdNo.invalid }">
-                                    <div *ngIf="RefCoyBodForm.submitted && IdNo.invalid" class="invalid-feedback">
+                                    #IdNo="ngModel" [ngClass]="{ 'is-invalid': (IdNo.touched || IdNo.dirty || RefCoyCommisionerForm.submitted) && IdNo.invalid }">
+                                    <div *ngIf="RefCoyCommisionerForm.submitted && IdNo.invalid" class="invalid-feedback">
                                       <div *ngIf="IdNo.errors.required">Id No is required</div>
                                     </div>
                             </div>
                         </div>
                     </div>
-                    <app-ucAddress #ucAddress [parentForm]='RefCoyBodForm'></app-ucAddress>
-                    <app-ucContactInfo #ucContactInfo [parentForm]='RefCoyBodForm'></app-ucContactInfo>
+                    <app-ucAddress #ucAddress [parentForm]='RefCoyCommisionerForm'></app-ucAddress>
+                    <app-ucContactInfo #ucContactInfo [parentForm]='RefCoyCommisionerForm'></app-ucContactInfo>
                     <div class="form-actions right">
-                        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/company/bod']">
+                        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/company/commissioner']">
                             <i class="ft-x"></i> Cancel
                         </button>
                         <button type="submit" class="btn btn-raised btn-primary">

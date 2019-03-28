@@ -4,9 +4,14 @@
     {
         "path": "", "title": "Organization Struct", "icon": "ft-bar-chart-2", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false,
         "submenu": [
-            { "path": "/organization/refjobtitle", "title": "Job Title", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] },
-            { "path": "/organization/organization", "title": "Organization", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
-
+            { "path": "", "title": "Job Title", "icon": "", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [
+                { "path": "/organization/refjobtitle", "title": "Job Title Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": []},
+                { "path": "/organization/refjobtitle/add", "title": "Add Job Title", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": []}
+            ] },
+            { "path": "", "title": "Organization", "icon": "", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [
+                { "path": "/organization/organization", "title": "Organization Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": []},
+                { "path": "/organization/organization/add", "title": "Add Organization", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": []}
+            ] }
         ]
     },
     {
@@ -24,19 +29,22 @@
     {
         "path": "", "title": "Office", "icon": "ft-airplay", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false,
         "submenu": [
-            { "path": "/office", "title": "Office  Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
+            { "path": "/office", "title": "Office  Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] },
+            { "path": "/office/add", "title": "Add Office", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
         ]
     },
     {
         "path": "", "title": "Bank", "icon": "ft-airplay", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false,
         "submenu": [
-            { "path": "/bank", "title": "Bank Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
+            { "path": "/bank", "title": "Bank Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] },
+            { "path": "/bank/add", "title": "Add Bank", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
         ]
     },
     {
         "path": "", "title": "Employee", "icon": "ft-users", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false,
         "submenu": [
-            { "path": "/employee", "title": "Employee  Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
+            { "path": "/employee", "title": "Employee  Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] },
+            { "path": "/employee/add", "title": "Add Employee", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [] }
         ]
     },
     {

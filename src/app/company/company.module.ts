@@ -8,7 +8,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharingModule } from 'app/shared/sharing.module';
 import { BODComponent } from './bod/bod.component';
 import { BodAddComponent } from './bod/add/add-bod.component';
-import { CommisionerComponent } from './Commisioner/commisioner.component';
+import { CommissionerComponent } from './Commissioner/commissioner.component';
+import { CommissionerAddComponent } from './Commissioner/add/add-commissioner.component';
+import { EditCompanyComponent } from './edit/edit-company.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { CommisionerComponent } from './Commisioner/commisioner.component';
     CompanyComponent,
     BODComponent,
     BodAddComponent,
-    CommisionerComponent
+    CommissionerComponent,
+    CommissionerAddComponent,
+    EditCompanyComponent
   ]
 })
 export class CompanyModule { }

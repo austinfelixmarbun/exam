@@ -130,6 +130,8 @@ export class AdInsConstant {
 
     //REF COY
     public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
+    public static GetRefCoy = "/RefCoy/GetRefCoy";
+    public static EditRefCoy = "/RefCoy/EditRefCoy";
     public static GetCoyBodPaging = "/CoyBod/GetCoyBodPaging";
     public static AddCoyBod = "/CoyBod/AddCoyBOD";
     public static EditCoyBod = "/CoyBod/EditCoyBOD";
