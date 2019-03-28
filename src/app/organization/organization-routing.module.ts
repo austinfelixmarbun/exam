@@ -7,8 +7,8 @@ import { BusinessUnitComponent } from './business-unit/business-unit.component';
 import { AddBusinessUnitComponent } from './business-unit/add/add-business-unit.component';
 import { RefJobTitleAddComponent } from './ref-job-title/ref-job-title-add/ref-job-title-add.component';
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
-
-
+import { OrganizationModelPagingComponent } from './organization-model/organization-model-paging/organization-model-paging.component';
+import { OrganizationModelDetailComponent } from './organization-model/organization-model-detail/organization-model-detail.component';
 
 const routes: Routes = [
   {
@@ -54,6 +54,20 @@ const routes: Routes = [
         component: AddBusinessUnitComponent,
         data: {
           title: 'Add Business Unit'
+        },
+      },
+      {
+        path: 'model',
+        component: OrganizationModelPagingComponent,
+        data: {
+          title: 'Organization Model'
+        },
+      },
+      {
+        path: 'model/detail',
+        component: OrganizationModelDetailComponent,
+        data: {
+          title: 'Organization Model Detail'
         },
       }
     ]

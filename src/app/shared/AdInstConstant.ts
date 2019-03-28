@@ -41,8 +41,6 @@ export class AdInsConstant {
     public static DeleteRefOfficeArea = "/RefOfficeArea/DeleteRefOfficeArea";
     public static CheckDuplAreaCode = "/RefOfficeArea/CheckDuplAreaCode";
 
-
-
     //ORGANIZATION
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
@@ -55,6 +53,12 @@ export class AdInsConstant {
     public static GetRefBizUnitByOffice = "/OrganizationDefinition/GetRefBizUnitByOffice";
     public static GetAllOrgMdl = "/OrganizationDefinition/GetAllOrgMdl";
     public static GetAllActiveOrgMdlByRefOrgId = "/OrganizationDefinition/GetAllActiveOrgMdlByRefOrgId";
+    public static GetOrgMdlPaging = "/OrganizationDefinition/GetOrgMdlPaging";
+    public static DeleteOrgMdl = "/OrganizationDefinition/DeleteOrgMdl";
+    public static EditOrgMdl = "/OrganizationDefinition/EditOrgMdl";
+    public static AddOrgMdl = "/OrganizationDefinition/AddOrgMdl";
+    public static GetOrgMdl = "/OrganizationDefinition/GetOrgMdl";
+    public static GetOrgMdlByOrgMdlId = "/OrganizationDefinition/GetOrgMdlByOrgMdlId";
 
     //REF-JOB-TITLE
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";

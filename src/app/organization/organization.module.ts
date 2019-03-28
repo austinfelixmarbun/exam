@@ -11,6 +11,8 @@ import { AddBusinessUnitComponent } from './business-unit/add/add-business-unit.
 import { RefJobTitleAddComponent } from './ref-job-title/ref-job-title-add/ref-job-title-add.component';
 import { OrganizationComponent } from './organization.component';
 import { OrgAddEditComponent } from './organization-add-edit/org-add-edit/org-add-edit.component';
+import { OrganizationModelPagingComponent } from './organization-model/organization-model-paging/organization-model-paging.component';
+import { OrganizationModelDetailComponent } from './organization-model/organization-model-detail/organization-model-detail.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { OrgAddEditComponent } from './organization-add-edit/org-add-edit/org-ad
     BusinessUnitComponent,
     AddBusinessUnitComponent,
     RefJobTitleAddComponent,
-    OrganizationComponent
+    OrganizationComponent,
+    OrganizationModelPagingComponent,
+    OrganizationModelDetailComponent
 
   ]
 })

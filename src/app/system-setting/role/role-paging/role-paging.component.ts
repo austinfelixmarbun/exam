@@ -154,7 +154,7 @@ export class RolePagingComponent implements OnInit {
         },
         (error) => {
           console.log("Error");
-          console.log(error);
+          this.service.typeErrorCustom(error);
         }
       );
   }
