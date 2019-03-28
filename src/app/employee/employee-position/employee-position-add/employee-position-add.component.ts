@@ -220,43 +220,4 @@ export class EmployeePositionAddComponent implements OnInit {
         this.isActive = e.target.checked;
     }
 
-    addPosition() {
-        this.pageType = 'add'
-        this.refOfficeId = 'selectOne';
-        this.superiorRefEmpId = '';
-        this.refBizUnitId = 'selectOne';
-        this.onChangeBiz('selectOne');
-        this.positionStartDt = '';
-        this.positionFinishDt = '';
-        this.isActive = false;
-        this.addEditVisible = true;
-        this.empPositionVisible = false;
-    }
-
-    editPosition(empPositionId, refBizUnitId) {
-        this.pageType = 'edit'
-        this.addEditVisible = true;
-        this.empPositionVisible = false;
-        this.empPositionObj = new EmpPositionObj();
-        this.empPositionObj.empPositionId = empPositionId
-        this.refBizUnitId = refBizUnitId;
-        this.onChangeBiz(refBizUnitId)
-        this.httpClient.post(this.getEditUrl, this.empPositionObj).subscribe(
-            (response) => {
-                console.log("Success");
-                this.resultData = response['returnObject'];
-                console.log(this.resultData);
-                this.refOfficeId = response['returnObject']['refOfficeId']
-                this.orgJobTitleId = response['returnObject']['orgJobTitleId']
-                this.positionStartDt = formatDate(response['returnObject']['positionStartDt'], 'yyyy-MM-dd', 'en-US')
-                this.positionFinishDt = formatDate(response['returnObject']['positionFinishDt'], 'yyyy-MM-dd', 'en-US')
-                this.superiorRefEmpId = response['returnObject']['superiorRefEmpId']
-                if (this.resultData.isActive == "1") {
-                    this.isActive = true;
-                }
-                else {
-                    this.isActive = false;
-                }
-            })
-    }
 }

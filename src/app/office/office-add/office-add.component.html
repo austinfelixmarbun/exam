@@ -78,10 +78,15 @@
             <div class="form-group row">
               <label class="col-md-3 label-control">Office Parent: </label>
               <div class="col-md-9">
-                <select class="form-control" name="parentId" [(ngModel)]="parentId" #ParentId="ngModel">
+                <select class="form-control" name="parentId" required [(ngModel)]="parentId" #ParentId="ngModel"
+                [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || ParentId.touched || ParentId.dirty) && ParentId.value === undefined  }">
                   <option *ngFor="let op of allOfficeParent" value="{{op.refOfficeId}}">{{op.officeName}}
                   </option>
                 </select>
+              <div *ngIf="(OfficeReqForm.submitted || ParentId.touched || ParentId.dirty) && ParentId.value === undefined "
+                class="invalid-feedback">
+                <div *ngIf="ParentId.errors.required">Office Code is required</div>
+              </div>
               </div>
             </div>
             <div class="form-group row">

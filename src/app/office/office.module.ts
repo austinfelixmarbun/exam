@@ -7,6 +7,8 @@ import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { OfficeAddComponent } from './office-add/office-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OfficeEmpPosComponent } from './office-emp-pos/office-emp-pos.component';
+import { OfficeEmpPosAddComponent } from './office-emp-pos/office-emp-pos-add/office-emp-pos-add.component';
 import { OfficeAreaAddEditComponent } from './office-area/office-area-add-edit/office-area-add-edit.component';
 import { OfficeAreaPagingComponent } from './office-area/office-area-paging/office-area-paging.component';
 
@@ -22,6 +24,8 @@ import { OfficeAreaPagingComponent } from './office-area/office-area-paging/offi
   declarations: [
     OfficeComponent,
     OfficeAddComponent,
+    OfficeEmpPosComponent,
+    OfficeEmpPosAddComponent,
     OfficeAreaAddEditComponent,
     OfficeAreaPagingComponent,
   ]

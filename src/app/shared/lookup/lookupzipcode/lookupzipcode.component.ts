@@ -71,6 +71,7 @@ export class LookupzipcodeComponent implements OnInit {
     this.jsonSelect = JSON.stringify(item);
     this.select.emit(item);
     this.modalService.dismissAll();
+    this.select.emit(item);
   }
 
   open(content) {

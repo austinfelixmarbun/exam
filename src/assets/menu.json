@@ -101,47 +101,15 @@
     "badgeClass": "",
     "isExternalLink": false,
     "submenu": [
-      {
-        "path": "/organization/refjobtitle",
-        "title": "Job Title",
-        "icon": "",
-        "class": "",
-        "badge": "",
-        "badgeClass": "",
-        "isExternalLink": false,
-        "submenu": []
-      },
-      {
-        "path": "",
-        "title": "Organization",
-        "icon": "",
-        "class": "has-sub",
-        "badge": "",
-        "badgeClass": "",
-        "isExternalLink": false,
-        "submenu": [
-          {
-            "path": "/organization/organization",
-            "title": "Organization Maintenance",
-            "icon": "",
-            "class": "",
-            "badge": "",
-            "badgeClass": "",
-            "isExternalLink": false,
-            "submenu": []
-          },
-          {
-            "path": "/organization/organization/add",
-            "title": "Organization Add",
-            "icon": "",
-            "class": "",
-            "badge": "",
-            "badgeClass": "",
-            "isExternalLink": false,
-            "submenu": []
-          }
-        ]
-      }
+      
+      { "path": "", "title": "Job Title", "icon": "", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [
+        { "path": "/organization/refjobtitle", "title": "Job Title Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": []},
+        { "path": "/organization/refjobtitle/add", "title": "Add Job Title", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": []}
+    ] },
+    { "path": "", "title": "Organization", "icon": "", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [
+        { "path": "/organization/organization", "title": "Organization Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": []},
+        { "path": "/organization/organization/add", "title": "Add Organization", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": []}
+    ] }
     ]
   },
   {

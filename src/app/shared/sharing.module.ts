@@ -14,6 +14,7 @@ import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank
 import { UCGridFooterComponent } from '../shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UcAddressComponent } from './UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from './UserControl/ucContactInfo/ucContactInfo.component';
+import { LookupParentFormComponent } from './lookup/lookup-parent-form/lookup-parent-form.component';
 
 @NgModule({
     exports: [
@@ -26,6 +27,7 @@ import { UcContactInfoComponent } from './UserControl/ucContactInfo/ucContactInf
         LookupRefBankComponent,
         LookupRoleComponent,
         LookupDistrictComponent,
+        LookupParentFormComponent,
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent
@@ -45,6 +47,7 @@ import { UcContactInfoComponent } from './UserControl/ucContactInfo/ucContactInf
         LookupRefBankComponent,
         LookupRoleComponent,
         LookupDistrictComponent,
+        LookupParentFormComponent,
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent

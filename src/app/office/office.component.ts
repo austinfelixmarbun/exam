@@ -9,6 +9,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { TranslateService } from '@ngx-translate/core';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { HttpClient } from '@angular/common/http';
+import { OfficeObj } from 'app/shared/model/OfficeObj.model';
 
 @Component({
   selector: 'app-office',
@@ -26,20 +28,24 @@ export class OfficeComponent implements OnInit {
   totalData: any;
   pageSize: any = 10;
   apiUrl: any;
+  deleteUrl: any;
+  officeObj: OfficeObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
   urlQryPaging : string = AdInsConstant.GetListOffice;
 
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private http: Http, private spinner: NgxSpinnerService,
-    private service: NGXToastrService, private adInsService: AdInsServiceService) {
+  constructor(private httpClient: HttpClient, private spinner: NgxSpinnerService,
+    private toastr: NGXToastrService, private adInsService: AdInsServiceService) {
   }
 
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListOffice;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefOffice;
+    
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
@@ -48,34 +54,21 @@ export class OfficeComponent implements OnInit {
   }
 
   // Success Type
-  typeSuccess() {
-    this.service.typeSuccess();
-  }
-
-  typeError() {
-    this.service.typeError();
-  }
-
-  timeout() {
-    this.service.timeout();
-  }
-
-  errMsg() {
-    this.service.errorMessage('asdasd');
-  }
 
   searchSort(event: any) {
-    if (this.orderByKey == event.target.attributes.name.nodeValue) {
-      this.orderByValue = !this.orderByValue
-    } else {
-      this.orderByValue = true
+    if (this.resultData != null) {
+      if (this.orderByKey == event.target.attributes.name.nodeValue) {
+        this.orderByValue = !this.orderByValue
+      } else {
+        this.orderByValue = true
+      }
+      this.orderByKey = event.target.attributes.name.nodeValue
+      var order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
     }
-    this.orderByKey = event.target.attributes.name.nodeValue
-    var order = {
-      key: this.orderByKey,
-      value: this.orderByValue
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
   }
 
   searchPagination(event: number) {
@@ -103,5 +96,21 @@ export class OfficeComponent implements OnInit {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);
+  }
+  
+  delete(refOfficeId: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      this.officeObj = new OfficeObj();
+      this.officeObj.refOfficeId = refOfficeId;
+      this.httpClient.post(this.deleteUrl, this.officeObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          this.searchPagination(1);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        });
+    }
   }
 }

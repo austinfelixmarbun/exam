@@ -1,35 +1,33 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
-import { NgForm } from '@angular/forms';
-import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { environment } from 'environments/environment';
+import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { formatDate } from '@angular/common';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 
 @Component({
-  selector: 'app-employee-position',
-  templateUrl: './employee-position.component.html',
-  styleUrls: ['./employee-position.component.scss'],
+  selector: 'app-office-emp-pos',
+  templateUrl: './office-emp-pos.component.html',
+  styleUrls: ['./office-emp-pos.component.scss'],
   providers: [NGXToastrService]
 })
-export class EmployeePositionComponent implements OnInit {
+export class OfficeEmpPosComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchEmpList.json";
   urlQryPaging : string = AdInsConstant.GetEmpPositionPaging;
-  refEmpId: any;
-  empNo: any
-  empName: any
+  refOfficeId: any;
+  officeCode: any;
+  officeName: any;
   empObj: RefEmpObj;
-  refOfficeObj: RefOfficeObj
+  refOfficeObj: RefOfficeObj;
   empPositionObj: EmpPositionObj;
   apiUrl: any;
   deleteUrl: any;
@@ -41,20 +39,20 @@ export class EmployeePositionComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   arrCrit: any;
-
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
+  
+  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) { 
     this.apiUrl = this.foundationUrl + AdInsConstant.GetEmpPositionPaging;
     this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteEmpPosition;
     
     this.route.queryParams.subscribe(params => {
-      if (params['refEmpId'] != null) {
-        this.refEmpId = params['refEmpId'];
+      if (params['refOfficeId'] != null) {
+        this.refOfficeId = params['refOfficeId'];
       }
-      if (params['empNo'] != null) {
-        this.empNo = params['empNo'];
+      if (params['officeCode'] != null) {
+        this.officeCode = params['officeCode'];
       }
-      if (params['empName'] != null) {
-        this.empName = params['empName'];
+      if (params['officeName'] != null) {
+        this.officeName = params['officeName'];
       }
     });
   }
@@ -64,11 +62,10 @@ export class EmployeePositionComponent implements OnInit {
     var critObj = new CriteriaObj();
       critObj.DataType = 'Numeric'
       critObj.restriction = AdInsConstant.RestrictionEq;
-      critObj.propName = 'refEmpId';
-      critObj.value = this.refEmpId
+      critObj.propName = 'refOfficeId';
+      critObj.value = this.refOfficeId
       this.arrCrit.push(critObj);
   }
-
   searchSort(event: any) {
     if (this.resultData != null) {
       if (this.orderByKey == event.target.attributes.name.nodeValue) {
@@ -97,6 +94,10 @@ export class EmployeePositionComponent implements OnInit {
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
   }
 
+  reset() {
+    this.searchComponent.initiateForm();
+  }
+
   delete(empPositionId: any) {
     if (confirm("Are you sure to delete this record?")) {
       this.empPositionObj = new EmpPositionObj();
@@ -111,11 +112,7 @@ export class EmployeePositionComponent implements OnInit {
         });
     }
   }
-
-  reset() {
-    this.searchComponent.initiateForm();
-  }
-
+  
   //** Start UC Search **/
   getResult(event){
     this.resultData = event.returnObject;
@@ -130,4 +127,5 @@ export class EmployeePositionComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);
   }
+
 }

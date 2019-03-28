@@ -1,0 +1,53 @@
+<fieldset ngModelGroup="lookup">
+    <div class="input-group">
+        <input type="text" class="form-control search-form-control" attr.data-json='{{jsonSelect}}' name="lookupInput"
+            attr.data-inputId='{{idSelect}}' attr.data-datatype="Text" value="{{nameSelect}}" readonly required
+            [(ngModel)]="lookupInput" #LookupInput="ngModel" [ngClass]="{ 'is-invalid':(LookupInput.touched || LookupInput.dirty) && LookupInput.invalid }">
+        <div class="input-group-append">
+            <span class="input-group-btn">
+                <button class="btn btn-raised btn-primary lookup-form-control btn-lookup" type="button"
+                    (click)="open(content)"><i class="ft-search"></i></button>
+            </span>
+        </div>
+        <div *ngIf=" (LookupInput.touched || LookupInput.dirty) && LookupInput.invalid" class="invalid-feedback">
+            <div *ngIf="LookupInput.errors.required">Parent Form is required</div>
+        </div>
+    </div>
+</fieldset>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+            (result)="getResult(ucgridFooter, $event)"></app-search>
+
+        <table class="table table-responsive-md text-center table-hover">
+            <thead>
+                <tr>
+                    <th (click)="searchSort(lookupSearch,'formCode')">Form Code</th>
+                    <th (click)="searchSort(lookupSearch,'title')">Form Name</th>
+                    <th (click)="searchSort(lookupSearch,'path')">Path</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of resultData?.returnObject.data">
+                    <td>{{item.formCode}}</td>
+                    <td>{{item.title}}</td>
+                    <td>{{item.path}}</td>
+                    <td>
+                        <a class="success p-0" data-original-title="" title=""
+                            (click)="choose(item.refFormId,item.title,item)">
+                            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <app-ucgrid-footer #ucgridFooter (select)="onSelect(lookupSearch,$event)"></app-ucgrid-footer>
+    </div>
+</ng-template>
