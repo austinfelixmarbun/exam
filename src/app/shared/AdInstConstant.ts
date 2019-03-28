@@ -166,8 +166,9 @@ export class AdInsConstant {
     public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
 
     //MENU
+    public static GetRefFormPaging = "/MenuManagement/GetRefFormPaging";
     public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
-
+    
     //HOLIDAY
     public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
 

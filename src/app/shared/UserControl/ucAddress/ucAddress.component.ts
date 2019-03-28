@@ -66,6 +66,10 @@ export class UcAddressComponent implements OnInit {
     this.zipcode = event.zipcode;
   }
 
+  onSelected(event) {
+    console.log(event);
+  }
+
   // public ucAddressValid(validity): boolean {
   //   this.addrValid = !validity;
   //   return true

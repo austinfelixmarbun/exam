@@ -99,56 +99,57 @@ export class OfficeAddComponent implements OnInit {
   ngOnInit() {
     this.refMasterObj = new RefMasterObj();
     this.refMasterObj.refMasterTypeCode = 'OFFICE_CLASS';
-    this.httpClient.post(this.officeClassUrl, this.refMasterObj).subscribe(
-      (response) => {
-        this.allOfficeClass = response['returnObject'];
-        this.mrOfficeClass = response['returnObject'][0]['masterCode'];
-      },
-      (error) => {
-        console.log(error);
-      })
-    this.httpClient.post(this.refOrgUrl, null).subscribe(
-      (response) => {
-        this.allRefOrg = response['returnObject'];
-        this.refOrgId = response['returnObject'][0]['refOrgId'];
-        this.onChangeRefOrg(this.refOrgId);
-      },
-      (error) => {
-        console.log(error);
-      })
-    this.httpClient.post(this.areaUrl, null).subscribe(
-      (response) => {
-        this.allRefOfficeArea = response['returnObject'];
-        // this.refOfficeAreaId = response['returnObject'][0]['refOfficeAreaId'];
-      },
-      (error) => {
-        console.log(error);
-      })
-    this.httpClient.post(this.holidaySchmUrl, null).subscribe(
-      (response) => {
-        this.allHolidaySchm = response['returnObject'];
-        this.holidaySchmHId = response['returnObject'][0]['holidaySchmHId'];
-      },
-      (error) => {
-        console.log(error);
-      })
-    this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
-      (response) => {
-        this.allWorkingHourSchm = response['returnObject'];
-        this.workingHourSchmHId = response['returnObject'][0]['workingHourSchmHId'];
-      },
-      (error) => {
-        console.log(error);
-      })
-    this.httpClient.post(this.refTaxOfficeUrl, null).subscribe(
-      (response) => {
-        this.allRefTaxOffice = response['returnObject'];
-        this.refTaxOfficeId = response['returnObject'][0]['refTaxOfficeId'];
-      },
-      (error) => {
-        console.log(error);
-      })
-    if (this.pageType == "edit") {
+    if (this.pageType == "add") {
+      this.httpClient.post(this.officeClassUrl, this.refMasterObj).subscribe(
+        (response) => {
+          this.allOfficeClass = response['returnObject'];
+          this.mrOfficeClass = response['returnObject'][0]['masterCode'];
+        },
+        (error) => {
+          console.log(error);
+        })
+      this.httpClient.post(this.refOrgUrl, null).subscribe(
+        (response) => {
+          this.allRefOrg = response['returnObject'];
+          this.refOrgId = response['returnObject'][0]['refOrgId'];
+          this.onChangeRefOrg(this.refOrgId);
+        },
+        (error) => {
+          console.log(error);
+        })
+      this.httpClient.post(this.areaUrl, null).subscribe(
+        (response) => {
+          this.allRefOfficeArea = response['returnObject'];
+          // this.refOfficeAreaId = response['returnObject'][0]['refOfficeAreaId'];
+        },
+        (error) => {
+          console.log(error);
+        })
+      this.httpClient.post(this.holidaySchmUrl, null).subscribe(
+        (response) => {
+          this.allHolidaySchm = response['returnObject'];
+          this.holidaySchmHId = response['returnObject'][0]['holidaySchmHId'];
+        },
+        (error) => {
+          console.log(error);
+        })
+      this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
+        (response) => {
+          this.allWorkingHourSchm = response['returnObject'];
+          this.workingHourSchmHId = response['returnObject'][0]['workingHourSchmHId'];
+        },
+        (error) => {
+          console.log(error);
+        })
+      this.httpClient.post(this.refTaxOfficeUrl, null).subscribe(
+        (response) => {
+          this.allRefTaxOffice = response['returnObject'];
+          this.refTaxOfficeId = response['returnObject'][0]['refTaxOfficeId'];
+        },
+        (error) => {
+          console.log(error);
+        })
+    } else if (this.pageType == "edit") {
       this.officeObj = new OfficeObj();
       this.officeObj.refOfficeId = this.refOfficeId
       this.httpClient.post(this.apiUrl, this.officeObj).subscribe(
@@ -160,6 +161,7 @@ export class OfficeAddComponent implements OnInit {
           this.officeShortName = response['returnObject']['officeShortName']
           this.mrOfficeClass = response['returnObject']['mrOfficeClass']
           this.refOrgId = response['returnObject']['refOrgId']
+          this.orgMdlId = response['returnObject']['orgMdlId']
           this.refOfficeAreaId = response['returnObject']['refOfficeAreaId']
           this.holidaySchmHId = response['returnObject']['holidaySchmHId']
           this.workingHourSchmHId = response['returnObject']['workingHourSchmHId']
@@ -181,6 +183,50 @@ export class OfficeAddComponent implements OnInit {
           this.cntctPersonJobTitle = response['returnObject']['cntctPersonJobTitle']
           this.ucAddr.setData(this.resultData);
           this.ucContact.setData(this.resultData);
+
+          this.httpClient.post(this.officeClassUrl, this.refMasterObj).subscribe(
+            (response) => {
+              this.allOfficeClass = response['returnObject'];
+            },
+            (error) => {
+              console.log(error);
+            })
+          this.httpClient.post(this.refOrgUrl, null).subscribe(
+            (response) => {
+              this.allRefOrg = response['returnObject'];
+              this.onChangeRefOrg(this.refOrgId, true);
+            },
+            (error) => {
+              console.log(error);
+            })
+          this.httpClient.post(this.areaUrl, null).subscribe(
+            (response) => {
+              this.allRefOfficeArea = response['returnObject'];
+            },
+            (error) => {
+              console.log(error);
+            })
+          this.httpClient.post(this.holidaySchmUrl, null).subscribe(
+            (response) => {
+              this.allHolidaySchm = response['returnObject'];
+            },
+            (error) => {
+              console.log(error);
+            })
+          this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
+            (response) => {
+              this.allWorkingHourSchm = response['returnObject'];
+            },
+            (error) => {
+              console.log(error);
+            })
+          this.httpClient.post(this.refTaxOfficeUrl, null).subscribe(
+            (response) => {
+              this.allRefTaxOffice = response['returnObject'];
+            },
+            (error) => {
+              console.log(error);
+            })
         })
     }
   }
@@ -284,13 +330,15 @@ export class OfficeAddComponent implements OnInit {
     this.isAllowAppCreated = e.target.checked;
   }
 
-  onChangeRefOrg(refOrgValue) {
+  onChangeRefOrg(refOrgValue, edit: boolean = false) {
     this.orgMdlObj = new OrgMdlObj();
     this.orgMdlObj.refOrgId = refOrgValue
     this.httpClient.post(this.orgMdlUrl, this.orgMdlObj).subscribe(
       (response) => {
         this.allOrgMdl = response['returnObject'];
-        this.orgMdlId = response['returnObject'][0]['orgMdlId'];
+        if (edit == false) {
+          this.orgMdlId = response['returnObject'][0]['orgMdlId'];
+        }
       },
       (error) => {
         console.log(error);
@@ -299,7 +347,9 @@ export class OfficeAddComponent implements OnInit {
       (response) => {
         this.allOfficeParent = response['returnObject'];
         if (response['returnObject']['length'] != 0) {
+          if (edit == false) {
           this.parentId = response['returnObject'][0]['refOfficeId'];
+          }
         }
         if (response['returnObject']['length'] != 0) {
           this.httpClient.post(this.getRefOrgUrl, this.orgMdlObj).subscribe(

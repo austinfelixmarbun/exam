@@ -5,7 +5,7 @@
     {
       "type": "textbox",
       "name": "empName",
-      "id": "empNaeId",
+      "id": "empNameId",
       "value": "",
       "label": "Employee Name",
       "placeholder": "Placeholder",
