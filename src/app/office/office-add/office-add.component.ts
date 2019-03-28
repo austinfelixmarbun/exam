@@ -179,8 +179,6 @@ export class OfficeAddComponent implements OnInit {
           }
           this.mrKonvenSyariah = response['returnObject']['mrKonvenSyariah']
           this.refTaxOfficeId = response['returnObject']['refTaxOfficeId']
-          this.cntctPersonName = response['returnObject']['cntctPersonName']
-          this.cntctPersonJobTitle = response['returnObject']['cntctPersonJobTitle']
           this.ucAddr.setData(this.resultData);
           this.ucContact.setData(this.resultData);
 
@@ -251,8 +249,8 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.phn2 = ucAddress.phn2;
     this.officeObj.faxArea = ucAddress.faxArea;
     this.officeObj.fax = ucAddress.fax;
-    this.officeObj.cntctPersonName = OfficeAddReqForm.value.cntctPersonName;
-    this.officeObj.cntctPersonJobTitle = OfficeAddReqForm.value.cntctPersonJobTitle;
+    this.officeObj.cntctPersonName = ucContactInfo.cntctPersonName;
+    this.officeObj.cntctPersonJobTitle = ucContactInfo.cntctPersonJobTitle;
     this.officeObj.cntctPersonMobilePhn1 = ucContactInfo.mobilePhn1;
     this.officeObj.cntctPersonMobilePhn2 = ucContactInfo.mobilePhn2;
     this.officeObj.mrOfficeClass = OfficeAddReqForm.value.mrOfficeClass;

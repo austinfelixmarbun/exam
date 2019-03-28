@@ -30,7 +30,8 @@ import { LookupParentFormComponent } from './lookup/lookup-parent-form/lookup-pa
         LookupParentFormComponent,
         UcAddressComponent,
         UCGridFooterComponent,
-        UcContactInfoComponent
+        UcContactInfoComponent,
+        TranslateModule
     ],
     imports: [
         CommonModule,
@@ -50,7 +51,7 @@ import { LookupParentFormComponent } from './lookup/lookup-parent-form/lookup-pa
         LookupParentFormComponent,
         UcAddressComponent,
         UCGridFooterComponent,
-        UcContactInfoComponent
+        UcContactInfoComponent,
     ]
 })
 
