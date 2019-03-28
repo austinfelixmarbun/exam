@@ -31,7 +31,9 @@ export class AdInsConstant {
     public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
     public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
     public static AddRefOffice = "/RefOffice/AddRefOffice";
-
+    public static EditRefOffice = "/RefOffice/EditRefOffice";
+    public static DeleteRefOffice = "/RefOffice/DeleteRefOffice";
+    
     //REF OFFICE AREA
     public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
     public static GetRefOfficeAreaPaging = "/RefOfficeArea/GetRefOfficeAreaPaging";
@@ -137,6 +139,8 @@ export class AdInsConstant {
 
     //REF COY
     public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
+    public static GetRefCoy = "/RefCoy/GetRefCoy";
+    public static EditRefCoy = "/RefCoy/EditRefCoy";
     public static GetCoyBodPaging = "/CoyBod/GetCoyBodPaging";
     public static AddCoyBod = "/CoyBod/AddCoyBOD";
     public static EditCoyBod = "/CoyBod/EditCoyBOD";
@@ -166,8 +170,9 @@ export class AdInsConstant {
     public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
 
     //MENU
+    public static GetRefFormPaging = "/MenuManagement/GetRefFormPaging";
     public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
-
+    
     //HOLIDAY
     public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
 
