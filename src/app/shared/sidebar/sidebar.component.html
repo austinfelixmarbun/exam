@@ -21,7 +21,7 @@
             <!-- First level menu -->
              <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.class]" [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
                 [routerLinkActiveOptions]="{exact: true}">
-                <a [routerLink]="menuItem.class === '' ? [menuItem.path] : null" *ngIf="!menuItem.isExternalLink; else externalLinkBlock">
+                <a [routerLink]="menuItem.class === '' ? [menuItem.path] : null" *ngIf="!menuItem.isExternalLink; else externalLinkBlock" [contextMenu]="basicMenu" [contextMenuSubject]="menuItem">
                     <i [ngClass]="[menuItem.icon]"></i>
                     <span class="menu-title">{{menuItem.title | translate }}</span>
                     <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span>
@@ -70,6 +70,14 @@
                 </ul>
             </li>
         </ul>
+        <context-menu>
+          <ng-template contextMenuItem>
+            Add to Favorites!
+          </ng-template>
+          <!-- <ng-template contextMenuItem passive="true">
+            Input something: <input type="text">
+          </ng-template> -->
+        </context-menu>
     </div>
 </div>
 <!-- Sidebar Content Ends -->

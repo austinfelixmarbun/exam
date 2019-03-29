@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { ContextMenuComponent } from 'ngx-contextmenu';
 
 declare var $: any;
 
@@ -15,6 +16,7 @@ export class SidebarComponent implements OnInit {
     public menuItems: any[];
     public menu:any[];
     private url:string;
+    @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
         private route: ActivatedRoute, public translate: TranslateService, private http: HttpClient) {

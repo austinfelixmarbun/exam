@@ -11,6 +11,7 @@ import { SidebarComponent } from "app/shared/sidebar/sidebar.component";
 import { CustomizerComponent } from 'app/shared/customizer/customizer.component';
 import { NotificationSidebarComponent } from 'app/shared/notification-sidebar/notification-sidebar.component';
 import { ToggleFullscreenDirective } from "app/shared/directives/toggle-fullscreen.directive";
+import { ContextMenuModule } from 'ngx-contextmenu';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { ToggleFullscreenDirective } from "app/shared/directives/toggle-fullscre
         CommonModule,
         NgbModule,
         TranslateModule,
-        
+        ContextMenuModule.forRoot()
     ],
     declarations: [
         FooterComponent,
