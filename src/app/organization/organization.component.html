@@ -20,9 +20,10 @@
       <td>{{item.parentRefOrgName}}</td>
       <td>{{item.isActive}}</td>
       <td>
-        <a class="success p-0" data-original-title="" title="">
-          <i class="ft-edit-2 font-medium-3 mr-2"></i>
-        </a>
+        <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/model']"
+        [queryParams]="{refOrgId:item.refOrgId}">
+        <i class="ft-edit-2 font-medium-3 mr-2"></i>
+      </a>
       </td>
       <td>
         <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/organization/add']"

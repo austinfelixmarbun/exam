@@ -1,0 +1,74 @@
+<section id="horizontal-form-layouts">
+  <div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="px-3">
+            <form class="form form-horizontal">
+              <div class="form-body">
+                <h4 class="form-section">Organization Model</h4>
+                <br />
+
+                <div class="form-group row">
+                  <label class="col-md-3 label-control">Organization Level</label>
+                  <div class="col-md-9">
+                    <label>{{orgObj.orgName}}</label></div>
+                </div>
+
+                <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+                  (result)="getResult($event)" [addCritInput]='addCrit'></app-search>
+
+
+                <table class="table table-responsive-md text-center table-hover">
+                  <thead>
+                    <tr class="table-header">
+                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                          name='orgMdlCode'>Module Code</span></th>
+                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                          name='orgMdlName'>Module
+                          Name</span></th>
+                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                          name='isActive'>Active</span></th>
+                      <th>Structure</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of resultData?.returnObject.data">
+                      <td>{{item.orgMdlCode}}</td>
+                      <td class="text-left">{{item.orgMdlName}}</td>
+                      <td>
+                        <div *ngIf="item.isActive === '1'">Yes</div>
+                        <div *ngIf="item.isActive === '0'">No</div>
+                      </td>
+                      <td>
+                        <a class="success p-0" data-original-title="" title=""
+                          [routerLink]="['/organization/model/detail']"
+                          [queryParams]="{orgMdlId:item.orgMdlId,mode:'edit',refOrgId:refOrgId}">
+                          <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <a class="success p-0" data-original-title="" title=""
+                          [routerLink]="['/organization/model/detail']"
+                          [queryParams]="{orgMdlId:item.orgMdlId,mode:'edit',refOrgId:refOrgId}">
+                          <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                        </a>
+                        <a class="danger p-0" data-original-title="" title="" (click)="del(item.orgMdlId)">
+                          <i class="ft-x font-medium-3 mr-2"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+                <i class="fa fa-plus-circle" [routerLink]="['/organization/model/detail']"
+                  [queryParams]="{refOrgId:refOrgId, mode:'add'}"
+                  style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

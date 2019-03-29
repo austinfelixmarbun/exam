@@ -22,7 +22,7 @@ export class MasterAddEditComponent implements OnInit {
   apiUrl: any;
   refMasterObj: RefMasterObj;
   refMasterTypeObj: any;
-  type: string = 'Add';
+  type: string = 'add';
   masterCodeModel: any;
   descrModel: any;
   refMasterTypeCodeModule: any;

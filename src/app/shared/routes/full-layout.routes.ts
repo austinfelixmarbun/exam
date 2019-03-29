@@ -130,4 +130,8 @@ export const Full_ROUTES: Routes = [
     path: 'commonSetting',
     loadChildren: './common-setting/common-setting.module#CommonSettingModule'
   },
+  {
+    path: 'menuSetting',
+    loadChildren: './menu/menu-setting.module#MenuSettingModule'
+  }
 ];
