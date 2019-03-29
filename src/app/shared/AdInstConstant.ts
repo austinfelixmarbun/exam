@@ -33,7 +33,7 @@ export class AdInsConstant {
     public static AddRefOffice = "/RefOffice/AddRefOffice";
     public static EditRefOffice = "/RefOffice/EditRefOffice";
     public static DeleteRefOffice = "/RefOffice/DeleteRefOffice";
-    
+
     //REF OFFICE AREA
     public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
     public static GetRefOfficeAreaPaging = "/RefOfficeArea/GetRefOfficeAreaPaging";
@@ -61,6 +61,7 @@ export class AdInsConstant {
     public static AddOrgMdl = "/OrganizationDefinition/AddOrgMdl";
     public static GetOrgMdl = "/OrganizationDefinition/GetOrgMdl";
     public static GetOrgMdlByOrgMdlId = "/OrganizationDefinition/GetOrgMdlByOrgMdlId";
+    public static GetAllRefBizUnitKeyValuePair = "/OrganizationDefinition/GetAllRefBizUnitKeyValuePair";
 
     //REF-JOB-TITLE
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
@@ -172,7 +173,7 @@ export class AdInsConstant {
     //MENU
     public static GetRefFormPaging = "/MenuManagement/GetRefFormPaging";
     public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
-    
+
     //HOLIDAY
     public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
 

@@ -21,25 +21,16 @@
       },
       {
         "type": "dropdown",
-        "datatype": "text",
+        "datatype": "numeric",
         "name": "parentId",
         "id": "parentId",
         "value": "",
         "placeholder": "Placeholder",
-        "isFromURL": false,
+        "isFromURL": true,
         "isSelectOne" : false,
-        "url": "https://api.myjson.com/bins/ld6e8",
-        "label": "Active Status",
-        "items": [
-            {
-                "key": "ho",
-                "value": "Head Office"
-            },
-            {
-                "key": "branch",
-                "value": "Branch"
-            }
-        ],
+        "url": "/OrganizationDefinition/GetListOrgParentKeyValue",
+        "label": "Parent",
+        "items": [],
         "itemsUrl": []
     },
     {

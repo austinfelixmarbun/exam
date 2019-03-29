@@ -13,6 +13,10 @@ import { OrganizationComponent } from './organization.component';
 import { OrgAddEditComponent } from './organization-add-edit/org-add-edit/org-add-edit.component';
 import { OrganizationModelPagingComponent } from './organization-model/organization-model-paging/organization-model-paging.component';
 import { OrganizationModelDetailComponent } from './organization-model/organization-model-detail/organization-model-detail.component';
+import { OrgMdlStrucPagingComponent } from './org-mdl-struc/org-mdl-struc-paging/org-mdl-struc-paging.component';
+import { OrgMdlStrucDetailComponent } from './org-mdl-struc/org-mdl-struc-detail/org-mdl-struc-detail.component';
+import { OrgJobTitleDetailComponent } from './org-mdl-struc/org-job-title-detail/org-job-title-detail.component';
+import { OrgJobTitlePagingComponent } from './org-mdl-struc/org-job-title-paging/org-job-title-paging.component';
 
 
 @NgModule({
@@ -33,7 +37,11 @@ import { OrganizationModelDetailComponent } from './organization-model/organizat
     RefJobTitleAddComponent,
     OrganizationComponent,
     OrganizationModelPagingComponent,
-    OrganizationModelDetailComponent
+    OrganizationModelDetailComponent,
+    OrgMdlStrucPagingComponent,
+    OrgMdlStrucDetailComponent,
+    OrgJobTitleDetailComponent,
+    OrgJobTitlePagingComponent
 
   ]
 })
