@@ -1,7 +1,7 @@
 <fieldset ngModelGroup="lookup">
     <div class="input-group">
         <input type="text" class="form-control search-form-control" attr.data-json='{{jsonSelect}}' name="lookupInput"
-            attr.data-inputId='{{idSelect}}' attr.data-datatype="Text" value="{{nameSelect}}" readonly required
+            attr.data-inputId='{{idSelect}}' attr.data-datatype="Text" value="{{nameSelect}}" readonly
             [(ngModel)]="lookupInput" #LookupInput="ngModel" [ngClass]="{ 'is-invalid':(LookupInput.touched || LookupInput.dirty) && LookupInput.invalid }">
         <div class="input-group-append">
             <span class="input-group-btn">
@@ -9,9 +9,9 @@
                     (click)="open(content)"><i class="ft-search"></i></button>
             </span>
         </div>
-        <div *ngIf=" (LookupInput.touched || LookupInput.dirty) && LookupInput.invalid" class="invalid-feedback">
+        <!-- <div *ngIf=" (LookupInput.touched || LookupInput.dirty) && LookupInput.invalid" class="invalid-feedback">
             <div *ngIf="LookupInput.errors.required">Parent Form is required</div>
-        </div>
+        </div> -->
     </div>
 </fieldset>
 <ng-template #content let-c="close" let-d="dismiss">
