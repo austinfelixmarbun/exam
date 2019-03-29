@@ -1,26 +1,18 @@
-import { UserTitleRoleObj } from './../../../shared/model/UserTitleRoleObj';
-import { EmpPositionObj } from './../../../shared/model/EmpPositionObj';
 import { ActivatedRoute } from '@angular/router';
-import { BusinessUnitObj } from 'app/shared/model/BusinessUnitObj.Model';
-import { OfficeObj } from 'app/shared/model/OfficeObj.model';
-import { RefUserObj } from './../../../shared/model/RefUserObj.Model';
-import { ExcelService } from './../../../shared/excel-service/excel-service';
-import { environment } from './../../../../environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
-import { RefJobTitleObj } from 'app/shared/model/RefJobTitle.model';
 import { NgForm } from '@angular/forms';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
+import { environment } from 'environments/environment';
+import { UserTitleRoleObj } from 'app/shared/model/UserTitleRoleObj';
+import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 
 
 @Component({

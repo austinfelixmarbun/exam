@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ZipcodeComponent } from './zipcode.component';
-import { ZipcodeAddComponent } from './add/add-zipcode.component';
+import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
 
 const routes: Routes = [
   {

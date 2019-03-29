@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { environment } from '../../environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -11,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/OfficeObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-office',

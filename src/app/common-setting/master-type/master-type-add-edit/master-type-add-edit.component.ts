@@ -1,5 +1,4 @@
 import { FormGroup } from '@angular/forms';
-import { RefRoleObj } from './../../../shared/model/RefRoleObj.Model';
 import { Http } from '@angular/http';
 import { formatDate } from '@angular/common';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
@@ -13,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpHeaders } from '@angular/common/http';
+import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 
 @Component({
   selector: 'app-master-type-add-edit',

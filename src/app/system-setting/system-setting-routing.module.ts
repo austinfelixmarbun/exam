@@ -1,12 +1,12 @@
-import { RoleUserComponent } from './role/role-user/role-user.component';
+import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UserPagingComponent } from './user/user-paging/user-paging.component';
-import { UserAddEditComponent } from './user/user-add-edit/user-add-edit.component';
-import { RoleAddEditComponent } from './role/role-add-edit/role-add-edit.component';
-import { RolePagingComponent } from './role/role-paging/role-paging.component';
-import { UserRoleComponent } from './user/user-role/user-role.component';
-import { UserRoleDetailComponent } from './user/user-role-detail/user-role-detail.component';
+import { UserPagingComponent } from 'app/system-setting/user/user-paging/user-paging.component';
+import { UserAddEditComponent } from 'app/system-setting/user/user-add-edit/user-add-edit.component';
+import { RoleAddEditComponent } from 'app/system-setting/role/role-add-edit/role-add-edit.component';
+import { RolePagingComponent } from 'app/system-setting/role/role-paging/role-paging.component';
+import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.component';
+import { UserRoleDetailComponent } from 'app/system-setting/user/user-role-detail/user-role-detail.component';
 const routes: Routes = [
   {
     path: '',

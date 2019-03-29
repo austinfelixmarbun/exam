@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit, Inject, Injector } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
-import { CurrentUserContext } from '../model/CurrentUserContext.model';
-import { CurrentUserContextService } from '../CurrentUserContext/current-user-context.service';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from '../AdInstConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
 
 @Component({

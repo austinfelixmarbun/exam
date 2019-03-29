@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTES } from './sidebar-routes.config';
-import { RouteInfo } from "./sidebar.metadata";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';

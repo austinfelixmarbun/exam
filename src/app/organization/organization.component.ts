@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { environment } from '../../environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -10,6 +9,7 @@ import { Http } from '@angular/http';
 import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
+import { environment } from 'environments/environment';
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',

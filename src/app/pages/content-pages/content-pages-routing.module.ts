@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ComingSoonPageComponent } from "./coming-soon/coming-soon-page.component";
-import { ErrorPageComponent } from "./error/error-page.component";
-import { ForgotPasswordPageComponent } from "./forgot-password/forgot-password-page.component";
-import { LockScreenPageComponent } from "./lock-screen/lock-screen-page.component";
-import { LoginPageComponent } from "./login/login-page.component";
-import { MaintenancePageComponent } from "./maintenance/maintenance-page.component";
-import { RegisterPageComponent } from "./register/register-page.component";
-import { AuthGuard2 } from '../../shared/auth/auth-guard2.service';
+import { ComingSoonPageComponent } from "app/pages/content-pages/coming-soon/coming-soon-page.component";
+import { ErrorPageComponent } from "app/pages/content-pages/error/error-page.component";
+import { ForgotPasswordPageComponent } from "app/pages/content-pages/forgot-password/forgot-password-page.component";
+import { LockScreenPageComponent } from "app/pages/content-pages/lock-screen/lock-screen-page.component";
+import { LoginPageComponent } from "app/pages/content-pages/login/login-page.component";
+import { MaintenancePageComponent } from "app/pages/content-pages/maintenance/maintenance-page.component";
+import { RegisterPageComponent } from "app/pages/content-pages/register/register-page.component";
 
 
 const routes: Routes = [

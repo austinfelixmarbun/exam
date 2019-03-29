@@ -1,18 +1,16 @@
 import { ActivatedRoute } from '@angular/router';
-import { RefUserObj } from './../../../shared/model/RefUserObj.Model';
-import { environment } from './../../../../environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
+import { environment } from 'environments/environment';
+import { RefUserObj } from 'app/shared/model/RefUserObj.Model';
 
 
 @Component({

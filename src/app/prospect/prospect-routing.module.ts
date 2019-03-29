@@ -1,4 +1,4 @@
-import { ProspectComponent } from './prospect.component';
+import { ProspectComponent } from 'app/prospect/prospect.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

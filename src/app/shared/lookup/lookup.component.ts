@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { formatDate } from '@angular/common';
-import { SearchComponent } from '../search/search.component';
 import { ControlValueAccessor } from '@angular/forms';
+import { SearchComponent } from 'app/pages/full-pages/search/search.component';
 
 @Component({
   selector: 'app-lookup',

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { RolepickComponent } from './rolepick.component';
+import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from '../AdInstConstant';
-import { CurrentUserContext } from '../model/CurrentUserContext.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { forEach } from '@angular/router/src/utils/collection';
-import { CurrentUserContextService } from '../CurrentUserContext/current-user-context.service';
+import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
 
 @Injectable()
 export class RolePickService {

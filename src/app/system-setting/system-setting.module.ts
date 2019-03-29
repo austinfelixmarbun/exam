@@ -1,18 +1,18 @@
-import { UserPagingComponent } from './user/user-paging/user-paging.component';
-import { UserAddEditComponent } from './user/user-add-edit/user-add-edit.component';
+import { UserPagingComponent } from 'app/system-setting/user/user-paging/user-paging.component';
+import { UserAddEditComponent } from 'app/system-setting/user/user-add-edit/user-add-edit.component';
 import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SystemSettingRoutingModule } from './system-setting-routing.module';
-import { RoleAddEditComponent } from './role/role-add-edit/role-add-edit.component';
-import { RolePagingComponent } from './role/role-paging/role-paging.component';
+import { SystemSettingRoutingModule } from 'app/system-setting/system-setting-routing.module';
+import { RoleAddEditComponent } from 'app/system-setting/role/role-add-edit/role-add-edit.component';
+import { RolePagingComponent } from 'app/system-setting/role/role-paging/role-paging.component';
 import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/lookup-employee.component';
-import { UserRoleComponent } from './user/user-role/user-role.component';
-import { UserRoleDetailComponent } from './user/user-role-detail/user-role-detail.component';
-import { RoleUserComponent } from './role/role-user/role-user.component';
+import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.component';
+import { UserRoleDetailComponent } from 'app/system-setting/user/user-role-detail/user-role-detail.component';
+import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.component';
 
 
 

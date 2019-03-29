@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ErrorDialogService } from '../error-dialog/error-dialog.service';
 import {
     HttpInterceptor,
     HttpRequest,
@@ -20,6 +19,7 @@ import { format } from 'util';
 import { environment } from 'environments/environment.prod';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AdInsErrorMessage } from 'app/shared/AdInsErrorMessage';
+import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 
 
 @Injectable()

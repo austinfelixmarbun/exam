@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CompanyComponent } from './company.component';
-import { BODComponent } from './bod/bod.component';
-import { BodAddComponent } from './bod/add/add-bod.component';
-import { CommissionerComponent } from './Commissioner/commissioner.component';
-import { CommissionerAddComponent } from './Commissioner/add/add-commissioner.component';
-import { EditCompanyComponent } from './edit/edit-company.component';
+import { CompanyComponent } from 'app/company/company.component';
+import { BODComponent } from 'app/company/bod/bod.component';
+import { BodAddComponent } from 'app/company/bod/add/add-bod.component';
+import { CommissionerComponent } from 'app/company/Commissioner/commissioner.component';
+import { CommissionerAddComponent } from 'app/company/Commissioner/add/add-commissioner.component';
+import { EditCompanyComponent } from 'app/company/edit/edit-company.component';
 
 const routes: Routes = [
   {

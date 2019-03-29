@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { GalleryPageComponent } from "./gallery/gallery-page.component";
-import { InvoicePageComponent } from "./invoice/invoice-page.component";
-import { HorizontalTimelinePageComponent } from "./timeline/horizontal/horizontal-timeline-page.component";
-import { VerticalTimelinePageComponent } from "./timeline/vertical/vertical-timeline-page.component";
-import { UserProfilePageComponent } from "./user-profile/user-profile-page.component";
-import { SearchComponent } from './search/search.component';
-import { FaqComponent } from './faq/faq.component';
-import { KnowledgeBaseComponent } from './knowledge-base/knowledge-base.component';
+import { GalleryPageComponent } from "app/pages/full-pages/gallery/gallery-page.component";
+import { InvoicePageComponent } from "app/pages/full-pages/invoice/invoice-page.component";
+import { HorizontalTimelinePageComponent } from "app/pages/full-pages/timeline/horizontal/horizontal-timeline-page.component";
+import { VerticalTimelinePageComponent } from "app/pages/full-pages/timeline/vertical/vertical-timeline-page.component";
+import { UserProfilePageComponent } from "app/pages/full-pages/user-profile/user-profile-page.component";
+import { SearchComponent } from 'app/pages/full-pages/search/search.component';
+import { FaqComponent } from 'app/pages/full-pages/faq/faq.component';
+import { KnowledgeBaseComponent } from 'app/pages/full-pages/knowledge-base/knowledge-base.component';
 
 const routes: Routes = [
   {

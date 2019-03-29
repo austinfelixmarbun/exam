@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NgbModal, ModalDismissReasons, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { environment} from '../../../../environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-lookup-ref-bank',

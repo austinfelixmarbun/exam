@@ -1,14 +1,13 @@
-import { value } from './../data/dropdowns';
 import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { formatDate, getLocaleDateTimeFormat, DecimalPipe } from '@angular/common';
 import 'rxjs/add/operator/map';
-import { CriteriaObj } from '../model/CriteriaObj.model';
-import { RequestCriteriaObj } from '../model/RequestCriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { RequestCriteriaObj } from 'app/shared/model/RequestCriteriaObj.model';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
-import { AdInsConstant } from '../AdInstConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AdInsHttpServiceService } from 'app/ad-ins-http-service.service';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';

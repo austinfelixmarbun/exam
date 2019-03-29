@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from "./shared/shared.module";
+import { AppRoutingModule } from 'app/app-routing.module';
+import { SharedModule } from "app/shared/shared.module";
 import { ToastrModule } from 'ngx-toastr';
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -13,29 +13,29 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StoreModule } from '@ngrx/store';
 import { DragulaModule } from 'ng2-dragula';
 
-import { AppComponent } from './app.component';
-import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
-import { FullLayoutComponent } from "./layouts/full/full-layout.component";
+import { AppComponent } from 'app/app.component';
+import { ContentLayoutComponent } from "app/layouts/content/content-layout.component";
+import { FullLayoutComponent } from "app/layouts/full/full-layout.component";
 
-import { AuthService } from './shared/auth/auth.service';
-import { AuthGuard } from './shared/auth/auth-guard.service';
+import { AuthService } from 'app/shared/auth/auth.service';
+import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 import { StorageServiceModule } from 'angular-webstorage-service';
 import { NgxSpinnerModule} from 'ngx-spinner';
 import { MatDialogModule } from '@angular/material';
 
 import * as $ from 'jquery';
-import { UserMaintenanceComponent } from './user/user-maintenance/user-maintenance.component';
+import { UserMaintenanceComponent } from 'app/user/user-maintenance/user-maintenance.component';
 import { HttpModule } from '@angular/http';
-import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
-import { ErrorDialogService } from './error-dialog/error-dialog.service';
-import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
-import { RolepickComponent } from './shared/rolepick/rolepick.component';
-import { RolePickService } from './shared/rolepick/rolepick.service';
+import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
+import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
+import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
+import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
+import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { environment } from 'environments/environment.prod';
-import { AdInsConstant } from './shared/AdInstConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { subscribeOn } from 'rxjs/operators';
 import { DatePipe, formatDate } from '@angular/common';
-import { AdInsHelper } from './shared/AdInsHelper';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 
 export function createTranslateLoader(http: HttpClient) {

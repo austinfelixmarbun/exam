@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NewApplicationComponent } from './CreditProcess/new-application/new-application.component';
-import { ProspectApplDataComponent } from './CreditProcess/prospect-appl-data/prospect-appl-data.component';
+import { NewApplicationComponent } from 'app/los/CreditProcess/new-application/new-application.component';
+import { ProspectApplDataComponent } from 'app/los/CreditProcess/prospect-appl-data/prospect-appl-data.component';
 
 const routes: Routes = [
   {

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmployeeComponent } from './employee.component';
-import { EmployeeAddComponent } from './employee-add/employee-add.component';
-import { EmployeePositionComponent } from './employee-position/employee-position.component';
-import { EmployeePositionAddComponent } from './employee-position/employee-position-add/employee-position-add.component';
+import { EmployeeComponent } from 'app/employee/employee.component';
+import { EmployeeAddComponent } from 'app/employee/employee-add/employee-add.component';
+import { EmployeePositionComponent } from 'app/employee/employee-position/employee-position.component';
+import { EmployeePositionAddComponent } from 'app/employee/employee-position/employee-position-add/employee-position-add.component';
 
 const routes: Routes = [
   {

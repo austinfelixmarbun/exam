@@ -1,11 +1,11 @@
 import { Component, AfterViewChecked } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { RolePickService} from '../rolepick/rolepick.service'; 
+import { RolePickService} from 'app/shared/rolepick/rolepick.service'; 
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment.prod';
-import { AdInsConstant } from '../AdInstConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Router } from '@angular/router';
-import { AdInsHelper } from '../AdInsHelper';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
     selector: 'app-navbar',

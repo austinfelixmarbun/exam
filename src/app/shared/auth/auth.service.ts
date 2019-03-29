@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from '../AdInstConstant';
-import { AdInsServiceService} from '../../ad-ins-service.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { AdInsServiceService} from 'app/ad-ins-service.service';
 
 interface myData{
   success: boolean,

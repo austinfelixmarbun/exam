@@ -1,6 +1,4 @@
-import { value } from './../shared/data/dropdowns';
 import { formatDate } from '@angular/common';
-import { ProspectObj } from './../shared/model/ProspectObj.Model';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
@@ -12,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpHeaders } from '@angular/common/http';
+import { ProspectObj } from 'app/shared/model/ProspectObj.Model';
 
 @Component({
   selector: 'app-prospect',

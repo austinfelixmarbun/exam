@@ -1,5 +1,5 @@
 import { formatDate } from "@angular/common";
-import { AdInsConstant } from "./AdInstConstant";
+import { AdInsConstant } from "app/shared/AdInstConstant";
 
 export class AdInsHelper{
     //Function
@@ -72,10 +72,13 @@ export class AdInsHelper{
         var temp = localStorage.getItem("Menu");
         var objectMenu = [];
         objectMenu = JSON.parse(temp);
-        var exsisting=objectMenu.find(x=>x.path === formPath);
-        if(exsisting==undefined){
-            return false;
+        if (objectMenu != null) {
+            var exsisting=objectMenu['find'](x=>x.path === formPath);
+            if(exsisting==undefined){
+                return false;
+            }else {
+                return true;
+            }
         }
-        return true;
     }
 }

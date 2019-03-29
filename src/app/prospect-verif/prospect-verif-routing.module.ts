@@ -1,5 +1,5 @@
-import { ProspectVerifComponent } from './prospect-verif.component';
-import { ProspectVerifDetailComponent } from './prospect-verif-detail/prospect-verif-detail.component';
+import { ProspectVerifComponent } from 'app/prospect-verif/prospect-verif.component';
+import { ProspectVerifDetailComponent } from 'app/prospect-verif/prospect-verif-detail/prospect-verif-detail.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

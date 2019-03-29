@@ -1,12 +1,10 @@
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
+import { AuthService } from 'app/shared/auth/auth.service';
 import { map } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
-import { AdInsConstant } from '../AdInstConstant';
-import { AdInsHelper } from '../AdInsHelper';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
-import { AdInsErrorMessage } from '../AdInsErrorMessage';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Injectable({
   providedIn: 'root'

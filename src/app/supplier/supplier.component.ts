@@ -1,10 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { SearchComponent } from '../shared/search/search.component';
+import { SearchComponent } from 'app/shared/search/search.component';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Http, Response } from '@angular/http';
-import { data } from 'app/shared/data/smart-data-table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';

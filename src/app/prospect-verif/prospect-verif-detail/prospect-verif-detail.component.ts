@@ -1,7 +1,7 @@
-import { ProspectObj } from './../../shared/model/ProspectObj.Model';
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
+import { ProspectObj } from 'app/shared/model/ProspectObj.Model';
 
 @Component({
   selector: 'app-prospect-verif-detail',

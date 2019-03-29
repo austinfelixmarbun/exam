@@ -1,5 +1,4 @@
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '../auth/auth-guard.service';
 
 //Route for content layout with sidebar, navbar and footer.
 

@@ -5,12 +5,12 @@ import { AuthService } from 'app/shared/auth/auth.service';
 import { formatDate, getLocaleDateTimeFormat } from '@angular/common';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from '../../../../environments/environment';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app-login-page',

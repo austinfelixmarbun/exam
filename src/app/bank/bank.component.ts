@@ -26,7 +26,7 @@ export class BankComponent implements OnInit {
   //** End UC Search **//
   editUrl: any;
   bankObj: RefBankObj;
-  urlJson: string = "./assets/search/searchBank.json";
+  urlJson: string = "app/assets/search/searchBank.json";
   resultData: string;
   pageNow: any;
   totalData: any;
