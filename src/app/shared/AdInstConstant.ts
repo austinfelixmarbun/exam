@@ -172,6 +172,10 @@ export class AdInsConstant {
     //MENU
     public static GetRefFormPaging = "/MenuManagement/GetRefFormPaging";
     public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
+    public static GetRefFormByRefFormId = "/MenuManagement/GetRefFormByRefFormId";
+    public static EditRefForm = "/MenuManagement/EditRefForm";
+    public static AddRefForm = "/MenuManagement/AddRefForm";
+    public static DeleteRefForm = "/MenuManagement/DeleteRefForm";
     
     //HOLIDAY
     public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
