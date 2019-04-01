@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/app/shared/lookup/lookup-org-job-title/lookup-org-job-title.component.ts
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { environment } from "environments/environment";
 import {
@@ -20,6 +21,20 @@ import { SearchComponent } from "app/shared/search/search.component";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
+=======
+import { Component, OnInit, Input, ViewChild, ViewChildren } from '@angular/core';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { AdInsServiceService } from 'app/ad-ins-service.service';
+import { formatDate } from '@angular/common';
+import { SearchComponent } from 'app/shared/search/search.component';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { environment } from 'environments/environment';
+
+>>>>>>> f1f1a234b8e9122df89b390010317c53b47ba30c:src/app/shared/lookup/lookup-employee/lookup-employee.component.ts
 
 @Component({
   selector: "app-lookup-org-job-title",

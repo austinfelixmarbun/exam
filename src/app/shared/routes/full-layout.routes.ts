@@ -1,0 +1,137 @@
+import { Routes, RouterModule } from '@angular/router';
+
+//Route for content layout with sidebar, navbar and footer.
+
+export const Full_ROUTES: Routes = [
+  {
+    path: 'dashboard',
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
+  },
+  {
+    path: 'calendar',
+    loadChildren: './calendar/calendar.module#CalendarsModule'
+  },
+  {
+    path: 'charts',
+    loadChildren: './charts/charts.module#ChartsNg2Module'
+  },
+   {
+    path: 'forms',
+    loadChildren: './forms/forms.module#FormModule'
+  },
+  {
+    path: 'maps',
+    loadChildren: './maps/maps.module#MapsModule'
+  },
+  {
+    path: 'tables',
+    loadChildren: './tables/tables.module#TablesModule'
+  },
+  {
+    path: 'datatables',
+    loadChildren: './data-tables/data-tables.module#DataTablesModule'
+  },
+  {
+    path: 'uikit',
+    loadChildren: './ui-kit/ui-kit.module#UIKitModule'
+  },
+  {
+    path: 'components',
+    loadChildren: './components/ui-components.module#UIComponentsModule'
+  },
+  {
+    path: 'pages',
+    loadChildren: './pages/full-pages/full-pages.module#FullPagesModule'
+  },
+  {
+    path: 'cards',
+    loadChildren: './cards/cards.module#CardsModule'
+  },
+  {
+    path: 'colorpalettes',
+    loadChildren: './color-palette/color-palette.module#ColorPaletteModule'
+  },
+  {
+    path: 'chat',
+    loadChildren: './chat/chat.module#ChatModule'
+  },
+  {
+    path: 'chat-ngrx',
+    loadChildren: './chat-ngrx/chat-ngrx.module#ChatNGRXModule'
+  },
+  {
+    path: 'inbox',
+    loadChildren: './inbox/inbox.module#InboxModule'
+  },
+  {
+    path: 'taskboard',
+    loadChildren: './taskboard/taskboard.module#TaskboardModule'
+  },
+  {
+    path: 'taskboard-ngrx',
+    loadChildren: './taskboard-ngrx/taskboard-ngrx.module#TaskboardNGRXModule'
+  },
+  {
+    path: 'player',
+    loadChildren: './player/player.module#PlayerModule'
+  },
+  {
+    path: 'supplier',
+    loadChildren: './supplier/supplier.module#SupplierModule'
+  },
+  {
+    path: 'prospect',
+    loadChildren: './prospect/prospect.module#ProspectModule'
+  },
+  {
+  path: 'prospectVerif',
+    loadChildren: './prospect-verif/prospect-verif.module#ProspectVerifModule'
+  },
+  {
+    path: 'office',
+    loadChildren: './office/office.module#OfficeModule'
+  },
+  {
+    path: 'employee',
+    loadChildren: './employee/employee.module#EmployeeModule'
+  },
+  {
+    path : 'organization',
+    loadChildren: './organization/organization.module#OrganizationModule'
+  },
+  {
+    path : 'bank',
+    loadChildren: './bank/bank.module#BankModule'
+  },
+  {
+    path : 'leaveManagament',
+    loadChildren: './leave-management/leave-management.module#LeaveManagementModule'
+  },
+  {
+    path : 'LOS',
+    loadChildren: './los/los.module#LosModule'
+  },
+  {
+    path: 'customer',
+    loadChildren: './customer/customer.module#CustomerModule'
+  },{
+    path: 'zipcode',
+    loadChildren: './zipcode/zipcode.module#ZipcodeModule'
+  },
+  {
+    path: 'systemSetting',
+    loadChildren: './system-setting/system-setting.module#SystemSettingModule'
+  },
+  {
+    path: 'company',
+    loadChildren: './company/company.module#CompanyModule'
+  },
+  {
+    path: 'commonSetting',
+    loadChildren: './common-setting/common-setting.module#CommonSettingModule'
+  },
+  {
+    path: 'menuSetting',
+    loadChildren: './menu/menu-setting.module#MenuSettingModule'
+  }
+];
