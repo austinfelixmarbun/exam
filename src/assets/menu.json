@@ -350,5 +350,36 @@
         ]
       }
     ]
+  },
+  {
+    "path": "",
+    "title": "Menu Setting",
+    "icon": "ft-copy",
+    "class": "has-sub",
+    "badge": "",
+    "badgeClass": "",
+    "isExternalLink": false,
+    "submenu": [
+      {
+        "path": "/menuSetting",
+        "title": "Menu Maintenance",
+        "icon": "",
+        "class": "",
+        "badge": "",
+        "badgeClass": "",
+        "isExternalLink": false,
+        "submenu": []
+      },
+      {
+        "path": "/menuSetting/add",
+        "title": "Menu Add",
+        "icon": "",
+        "class": "",
+        "badge": "",
+        "badgeClass": "",
+        "isExternalLink": false,
+        "submenu": []
+      }
+    ]
   }
 ]

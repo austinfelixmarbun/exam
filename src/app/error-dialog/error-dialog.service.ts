@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ErrorDialogComponent } from './error-dialog.component';
+import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment.prod';
 import { AdInsConstant } from 'app/shared/AdInstConstant';

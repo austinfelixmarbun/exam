@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpHandler, HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-import { BaseObj } from '../app/shared/model/BaseObj.model';
+import { BaseObj } from 'app/shared/model/BaseObj.model';
 
 export declare type HttpObserve = 'body' | 'events' | 'response';
 

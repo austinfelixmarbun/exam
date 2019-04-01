@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ContextMenuComponent } from 'ngx-contextmenu';
 
 @Component({
   selector: 'app-dash-board',
@@ -7,6 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashBoardComponent implements OnInit {
 
+  name = 'Angular';
+  public items = [
+      { name: 'John', otherProperty: 'Foo' },
+      { name: 'Joe', otherProperty: 'Bar' }
+  ];
+  @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
+
+  showMessage(message: any) {
+    console.log(message);
+  }
   constructor() { }
 
   ngOnInit() {

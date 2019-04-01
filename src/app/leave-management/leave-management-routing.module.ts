@@ -1,7 +1,7 @@
-import { InquiryComponent } from './inquiry/inquiry.component';
-import { VerfPagingComponent } from './verification/verf-paging/verf-paging.component';
-import { VerfDetailComponent } from './verification/verf-detail/verf-detail.component';
-import { RequestComponent } from './request/request.component';
+import { InquiryComponent } from 'app/leave-management/inquiry/inquiry.component';
+import { VerfPagingComponent } from 'app/leave-management/verification/verf-paging/verf-paging.component';
+import { VerfDetailComponent } from 'app/leave-management/verification/verf-detail/verf-detail.component';
+import { RequestComponent } from 'app/leave-management/request/request.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

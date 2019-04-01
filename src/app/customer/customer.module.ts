@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CustomerComponent } from './customer.component';
-import { CustomerRoutingModule } from './customer-routing.module';
+import { CustomerComponent } from 'app/customer/customer.component';
+import { CustomerRoutingModule } from 'app/customer/customer-routing.module';
 
 @NgModule({
   imports: [

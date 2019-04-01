@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
-import { FullLayoutComponent } from "./layouts/full/full-layout.component";
-import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
+import { FullLayoutComponent } from "app/layouts/full/full-layout.component";
+import { ContentLayoutComponent } from "app/layouts/content/content-layout.component";
 
-import { Full_ROUTES } from "./shared/routes/full-layout.routes";
-import { CONTENT_ROUTES } from "./shared/routes/content-layout.routes";
+import { Full_ROUTES } from "app/shared/routes/full-layout.routes";
+import { CONTENT_ROUTES } from "app/shared/routes/content-layout.routes";
 
-import { AuthGuard } from './shared/auth/auth-guard.service';
+import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 
 const appRoutes: Routes = [
   {

@@ -1,8 +1,8 @@
-import { EmployeeRoutingModule } from './employee-routing.module';
-import { EmployeeAddComponent } from './employee-add/employee-add.component';
-import { EmployeeComponent } from './employee.component';
-import { EmployeePositionComponent } from './employee-position/employee-position.component';
-import { EmployeePositionAddComponent } from './employee-position/employee-position-add/employee-position-add.component';
+import { EmployeeRoutingModule } from 'app/employee/employee-routing.module';
+import { EmployeeAddComponent } from 'app/employee/employee-add/employee-add.component';
+import { EmployeeComponent } from 'app/employee/employee.component';
+import { EmployeePositionComponent } from 'app/employee/employee-position/employee-position.component';
+import { EmployeePositionAddComponent } from 'app/employee/employee-position/employee-position-add/employee-position-add.component';
 import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';

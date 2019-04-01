@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ZipcodeComponent } from './zipcode.component';
-import { ZipcodeAddComponent } from './add/add-zipcode.component';
+import { MenuSettingComponent } from './menu-setting.component';
+import { AddMenuSettingComponent } from './add/add-menu.component';
 
 const routes: Routes = [
   {
@@ -9,18 +9,18 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ZipcodeComponent,
+        component: MenuSettingComponent,
         data: {
-          title: 'Zipcode'
+          title: 'Menu Setting'
         },
       },
       {
         path: 'add',
-        component: ZipcodeAddComponent,
+        component: AddMenuSettingComponent,
         data: {
-          title: 'Add / Edit Zipcode'
-        }
-      },
+          title: 'Add / Edit Menu'
+        },
+      }
     ]
   }
 ];
@@ -29,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ZipcodeRoutingComponent { }
+export class MenuSettingRoutingComponent { }
