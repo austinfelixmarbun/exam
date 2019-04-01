@@ -1,27 +1,27 @@
-
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
+import { SearchComponent } from "app/shared/search/search.component";
+import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { AdInsConstant } from "app/shared/AdInstConstant";
 import { Component, OnInit, Input, ViewChild, ViewChildren } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { formatDate } from '@angular/common';
-import { SearchComponent } from 'app/shared/search/search.component';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { environment } from 'environments/environment';
 
+
 @Component({
-  selector: "app-lookup-org-job-title",
-  templateUrl: "./lookup-org-job-title.component.html",
+  selector: "app-lookup-employee",
+  templateUrl: "./lookup-employee.component.html",
   providers: [NGXToastrService]
 })
-export class LookupOrgJobTitleComponent implements OnInit {
+export class LookupEmployeeComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
-  urlJson: string = "./assets/lookup/lookupRefJobTitle.json";
-  urlQryPaging: string = AdInsConstant.GetOrgJobTitlePaging;
+  urlJson: string = "./assets/lookup/looktupEmp.json";
+  urlQryPaging: string = AdInsConstant.GetListEmployee;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
@@ -31,8 +31,8 @@ export class LookupOrgJobTitleComponent implements OnInit {
   @ViewChild("content") contentTemplate;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
 
-  jobTitleName: any;
-  refJobTitleId: any;
+  refEmpId: any;
+  empName: any;
 
   configuration: any;
   urlGet: string;
@@ -53,7 +53,7 @@ export class LookupOrgJobTitleComponent implements OnInit {
   addCrit: Array<any>;
 
   ngOnInit() {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitlePaging;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetListEmployee;
     this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
     this.pageSize = this.show[0];
@@ -72,8 +72,8 @@ export class LookupOrgJobTitleComponent implements OnInit {
     console.log(id + " : " + name);
     console.log(item);
     this.idSelect = id;
-    this.refJobTitleId = id;
-    this.jobTitleName = name;
+    this.refEmpId = id;
+    this.empName = name;
     this.nameSelect = name;
     this.jsonSelect = JSON.stringify(item);
     this.modalService.dismissAll();
