@@ -1,3 +1,4 @@
+import { LookupOrgMdlStrucComponent } from './lookup/lookup-org-mdl-struc/lookup-org-mdl-struc.component';
 import { LookupRoleComponent } from './lookup/lookup-role/lookup-role.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -15,6 +16,9 @@ import { UCGridFooterComponent } from '../shared/UserControl/ucgrid-footer/ucgri
 import { UcAddressComponent } from './UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from './UserControl/ucContactInfo/ucContactInfo.component';
 import { LookupParentFormComponent } from './lookup/lookup-parent-form/lookup-parent-form.component';
+import { LookupBizUnitComponent } from './lookup/lookup-biz-unit/lookup-biz-unit.component';
+import { LookupOrgJobTitleComponent } from './lookup/lookup-org-job-title/lookup-org-job-title.component';
+import { LookupRefJobTitleComponent } from './lookup/lookup-ref-job-title/lookup-ref-job-title.component';
 
 @NgModule({
     exports: [
@@ -31,7 +35,11 @@ import { LookupParentFormComponent } from './lookup/lookup-parent-form/lookup-pa
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
-        TranslateModule
+        TranslateModule,
+        LookupBizUnitComponent,
+        LookupOrgMdlStrucComponent,
+        LookupOrgJobTitleComponent,
+        LookupRefJobTitleComponent
     ],
     imports: [
         CommonModule,
@@ -52,6 +60,10 @@ import { LookupParentFormComponent } from './lookup/lookup-parent-form/lookup-pa
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
+        LookupBizUnitComponent,
+        LookupOrgMdlStrucComponent,
+        LookupOrgJobTitleComponent,
+        LookupRefJobTitleComponent
     ]
 })
 

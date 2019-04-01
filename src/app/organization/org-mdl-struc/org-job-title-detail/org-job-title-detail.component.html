@@ -1,3 +1,55 @@
-<p>
-  org-job-title-detail works!
-</p>
+<section id="horizontal-form-layouts">
+    <div class="row text-left">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="px-3">
+                <form class="form form-horizontal" name="OrgJobTitleForm" #OrgJobTitleForm="ngForm" novalidate
+                (ngSubmit)="OrgJobTitleForm.form.valid && Save(OrgJobTitleForm, lookupRefJobTitle, lookupOrgJobTitle)" >
+                <div class="form-body">
+                  <h4 class="form-section">Organization Job Title - {{type}}</h4>
+                  <br />
+
+                  <div class="form-group row">
+                      <label class="col-md-3 label-control">Business Unit Name</label>
+                      <div class="col-md-9">
+                        <label>{{bizUnitName}}</label></div>
+                    </div>
+
+                  <div class="form-group row">
+                      <label class="col-md-3 label-control" for="lookupRefJobTitle">Business Unit Name</label>
+                      <div class="col-md-9">
+                          <app-lookup-ref-job-title #lookupRefJobTitle [nameSelect] = "jobTitleName" [idSelect]="refJobTitleId" [jsonSelect]="jsonSelectRefJobTile" [addCritInput]='addCritJobTitle'> </app-lookup-ref-job-title>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 label-control" for="lookupBizUnit">Parent</label>
+                        <div class="col-md-9">
+                            <app-lookup-org-job-title #lookupOrgJobTitle [nameSelect] = "parentJobTitleName" [idSelect]="parentOrgJobTitleId" [jsonSelect]="jsonSelectOrgJobTitle" [addCritInput]='addCritOrgJobTitle'> </app-lookup-org-job-title>
+                        </div>
+                      </div>
+
+                    <div class="form-group row">
+                      <label class="col-md-3 label-control" for="isActive">Active Status</label>
+                      <div class="custom-control custom-checkbox m-0">
+                        <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
+                          [checked]="isActive">
+                      </div>
+                    </div>
+                    <div class="form-actions">
+
+                        <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                          <i class="ft-x"></i> Back
+                        </button>
+                        <button type="submit" class="btn btn-raised btn-primary">
+                          <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                      </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

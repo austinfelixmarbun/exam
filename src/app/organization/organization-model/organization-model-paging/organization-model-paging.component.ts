@@ -96,7 +96,7 @@ export class OrganizationModelPagingComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
       .subscribe(
         (response) => {
           console.log("Success");
@@ -148,7 +148,7 @@ export class OrganizationModelPagingComponent implements OnInit {
               value: this.orderByValue
             }
           }
-          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
             .subscribe(
               (response) => {
                 console.log("Success");
@@ -176,7 +176,7 @@ export class OrganizationModelPagingComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
       .subscribe(
         (response) => {
           console.log("Success");
