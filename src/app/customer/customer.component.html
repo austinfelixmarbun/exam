@@ -70,12 +70,25 @@
                 </select>
               </div>
             </div>
+            <div class="form-group row" *ngFor="let item of repeaters;let index = index;trackBy:trackByIndex;">
+              <label class="col-md-3 label-control">Input repeater : </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" required [(ngModel)]="repeaters[index]" name="test{{index}}"
+                  #item="ngModel" [ngClass]="{ 'is-invalid': CustomerReqForm.submitted && item.invalid }">
+                <div *ngIf="CustomerReqForm.submitted && item.invalid" class="invalid-feedback">
+                  <div *ngIf="item.errors.required">TEST No is required</div>
+                </div>
+              </div>
+            </div>
+            <div *ngFor="let item of repeaters">
+              <label>{{item}}</label>
+            </div>
           </div>
           <div class="form-actions">
             <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
               <i class="ft-x"></i> Cancel
             </button>
-            <button type="button" (click)="Submit(lookupZip)" class="btn btn-raised btn-primary">
+            <button type="submit" (click)="Submit(CustomerReqForm.value, lookupZip)" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>
           </div>

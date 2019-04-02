@@ -25,17 +25,23 @@ export class CustomerComponent implements OnInit {
   submitProsUrl: any;
   localHostUrl: string = environment.localHostUrl;
   requestObject: any;
+  repeaters: string[] =["","",""];
 
   constructor(private router: Router, private spinner: NgxSpinnerService, private httpClient: HttpClient, private toastr: NGXToastrService) { 
     this.submitProsUrl = this.localHostUrl + AdInsConstant.addCustPersonal;
 
   }
 
-  Submit(lookupZip){
+  Submit(custReqFoem: NgForm, lookupZip){
+    console.log(custReqFoem);
     console.log(lookupZip);
   }
 
   ngOnInit() {
+  }
+  
+  trackByIndex(index: number, obj: any): any {
+    return index;
   }
 
   SavePros(custReqFoem: NgForm) {
