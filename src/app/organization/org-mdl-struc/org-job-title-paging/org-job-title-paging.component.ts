@@ -13,6 +13,8 @@ import { HttpClient } from "@angular/common/http";
 import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { OrgJobTitleObj } from "app/shared/model/OrgJobTitleObj.Model";
+import { Location } from "@angular/common";
+
 @Component({
   selector: "app-org-job-title-paging",
   templateUrl: "./org-job-title-paging.component.html",
@@ -34,7 +36,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging: string = AdInsConstant.GetOrgMdlPaging;
+  urlQryPaging: string = AdInsConstant.GetOrgJobTitlePaging;
   addCrit: CriteriaObj[];
 
   orgJobTitleObj: OrgJobTitleObj;
@@ -52,7 +54,8 @@ export class OrgJobTitlePagingComponent implements OnInit {
     private service: NGXToastrService,
     private adInsService: AdInsServiceService,
     private excelService: ExcelService,
-    private https: HttpClient
+    private https: HttpClient,
+    private location: Location
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["orgMdlStrucId"] != null) {
@@ -72,7 +75,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
     this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlPaging;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitlePaging;
     this.initiateForm();
   }
 
@@ -186,5 +189,9 @@ export class OrgJobTitlePagingComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  Back(): void {
+    this.location.back();
   }
 }

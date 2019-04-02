@@ -7,7 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
-import { RefJobTitleObj } from 'app/shared/model/RefJobTitle.model';
+import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 

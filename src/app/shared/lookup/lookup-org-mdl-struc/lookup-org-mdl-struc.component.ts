@@ -20,7 +20,7 @@ import { environment } from 'environments/environment';
 export class LookupOrgMdlStrucComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
-  urlJson: string = "./assets/lookup/lookupBizUnit.json";
+  urlJson: string = "./assets/lookup/lookupOrgMdlStruc.json";
   urlQryPaging: string = AdInsConstant.GetOrgMdlStrucPaging;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";

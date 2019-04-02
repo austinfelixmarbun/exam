@@ -5,7 +5,7 @@
       "name": "jobTitleName",
       "id": "jobTitleNameNoId",
       "value": "",
-      "label": "Job Title Name <=",
+      "label": "Job Title Name",
       "placeholder": "Placeholder",
       "datatype": "text"
     },

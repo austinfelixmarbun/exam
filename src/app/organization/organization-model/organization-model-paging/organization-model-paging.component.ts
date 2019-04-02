@@ -13,7 +13,7 @@ import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-organization-model-paging',
@@ -51,7 +51,8 @@ export class OrganizationModelPagingComponent implements OnInit {
     private service: NGXToastrService,
     private adInsService: AdInsServiceService,
     private excelService: ExcelService,
-    private https: HttpClient
+    private https: HttpClient,
+    private location: Location
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['refOrgId'] != null) {
@@ -189,6 +190,10 @@ export class OrganizationModelPagingComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  Back(): void {
+    this.location.back();
   }
 
 }

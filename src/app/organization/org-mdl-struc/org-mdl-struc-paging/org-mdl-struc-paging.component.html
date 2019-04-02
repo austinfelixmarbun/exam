@@ -64,9 +64,14 @@
                   </tbody>
                 </table>
                 <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+                <div class="form-actions">
+                  <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                    <i class="ft-x"></i> Back
+                  </button>
                 <i class="fa fa-plus-circle" [routerLink]="['/organization/struc/detail']"
                   [queryParams]="{orgMdlId:orgMdlId, mode:'add'}"
                   style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+                </div>
               </div>
             </form>
           </div>

@@ -1,4 +1,4 @@
-import { RefJobTitleObj } from 'app/shared/model/RefJobTitle.Model';
+import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
@@ -63,6 +63,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
       }
       if (params["refOrgId"] != null) {
         this.refOrgId = params["refOrgId"];
+        console.log(params["refOrgId"] );
       }
       if (params["orgMdlStrucId"] != null) {
         this.orgMdlStrucId = params["orgMdlStrucId"];
@@ -96,7 +97,26 @@ export class OrgJobTitleDetailComponent implements OnInit {
             this.isActive = false;
           }
 
+          /* #region Fill Lookup RefJobTitle */
+          console.log('fill lookup job title',+this.refJobTitleId )
+          var jobTitleObj: RefJobTitleObj = new RefJobTitleObj();
+          var getJobTitleUrl: any =
+            this.foundationUrl + AdInsConstant.GetRefJobTitleById;
+          jobTitleObj.RefJobTitleId = +this.refJobTitleId;
+          this.httpClient
+            .post(getJobTitleUrl, jobTitleObj)
+            .subscribe(response => {
+              console.log(jobTitleObj);
+              this.jobTitleName =  response["returnObject"]["jobTitleName"];
+              this.jsonSelectRefJobTile = response["returnObject"];
+            });
+          /* #endregion */
+
+
           /* #region Fill Lookup OrgJobTitle */
+          if(this.parentOrgJobTitleId !== 0 && this.parentOrgJobTitleId !== null){
+          console.log('fill lookup OrgJobTitle',this.parentOrgJobTitleId )
+
           var job: RefJobTitleObj = new RefJobTitleObj();
           var orgJobTitle: OrgJobTitleObj = new OrgJobTitleObj();
           var orgJobTitleUrl =
@@ -112,24 +132,12 @@ export class OrgJobTitleDetailComponent implements OnInit {
               this.httpClient
                 .post(getJobUrl, job)
                 .subscribe(response => {
-                  this.parentJobTitleName = response["returnObject"]["JobTitleName"];
+                  this.parentJobTitleName = response["returnObject"]["jobTitleName"];
                 });
             });
+          }
           /* #endregion */
 
-          /* #region Fill Lookup RefJobTitle */
-          var jobTitleObj: RefJobTitleObj = new RefJobTitleObj();
-          var getJobTitleUrl: any =
-            this.foundationUrl + AdInsConstant.GetRefJobTitleById;
-          jobTitleObj.RefJobTitleId = this.refJobTitleId;
-          this.httpClient
-            .post(getJobTitleUrl, jobTitleObj)
-            .subscribe(response => {
-              jobTitleObj = response["returnObject"];
-              this.jobTitleName = jobTitleObj.JobTitleName;
-              this.jsonSelectRefJobTile = response["returnObject"];
-            });
-          /* #endregion */
         },
         error => {
           console.log("Error Get");
@@ -150,7 +158,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
 
     //MODE-ADD
     if (this.type !== "edit") {
-      this.apiUrl = this.foundationUrl + AdInsConstant.AddRefJobTitle;
+      this.apiUrl = this.foundationUrl + AdInsConstant.AddOrgJobTitle;
       this.orgJobTitleObj = new OrgJobTitleObj();
       this.orgJobTitleObj.orgMdlStrucId = +this.orgMdlStrucId;
       this.orgJobTitleObj.refJobTitleId = lookupRefJobTitle.idSelect;
@@ -209,13 +217,29 @@ export class OrgJobTitleDetailComponent implements OnInit {
     /* #endregion */
 
     /* #region  Additional Criteria Org Job Title */
-    this.addCritJobTitle = new Array();
+    this.addCritOrgJobTitle = new Array();
+
     var critOrgStrucId = new CriteriaObj();
     critOrgStrucId.propName = "orgMdlStrucId";
     critOrgStrucId.value = this.orgMdlStrucId;
     critOrgStrucId.restriction = AdInsConstant.RestrictionEq;
     critOrgStrucId.DataType = "numeric";
-    this.addCritJobTitle.push(critOrgId);
+
+    var critJobTitleId = new CriteriaObj();
+    critJobTitleId.propName = "orgJobTitleId";
+    critJobTitleId.value = this.orgJobTitleId;
+    critJobTitleId.restriction = 'Neq';
+    critJobTitleId.DataType = "numeric";
+
+    var critParent = new CriteriaObj();
+    critParent.propName = "parentOrgJobTitleId";
+    critParent.value = this.orgJobTitleId;
+    critParent.restriction = 'Neq';
+    critParent.DataType = "numeric";
+
+    this.addCritOrgJobTitle.push(critJobTitleId);
+    this.addCritOrgJobTitle.push(critOrgStrucId);
+    this.addCritOrgJobTitle.push(critParent);
     /* #endregion */
   }
 

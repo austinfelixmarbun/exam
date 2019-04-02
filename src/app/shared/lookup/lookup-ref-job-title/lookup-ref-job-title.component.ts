@@ -69,7 +69,7 @@ export class LookupRefJobTitleComponent implements OnInit {
     this.pageSize = this.show[0];
 
      /* #region   Additional Criteria*/
-     if (this.addCritInput !== null) {
+     if (this.addCritInput !== null || this.addCritInput !== undefined) {
       this.addCrit = new Array();
       for (var i = 0; i < this.addCritInput.length; i++) {
         this.addCrit.push(this.addCritInput[i]);

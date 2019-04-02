@@ -67,6 +67,7 @@ export class AdInsConstant {
     public static EditOrgMdlStruc = "/OrganizationDefinition/EditOrgMdlStruc";
     public static GetOrgMdlStruc = "/OrganizationDefinition/GetOrgMdlStruc";
     public static GetOrgMdlStrucPaging = "/OrganizationDefinition/GetOrgMdlStrucPaging";
+    public static GetOrgMdlStrucById = "/OrganizationDefinition/GetOrgMdlStrucById";
 
     //REF-JOB-TITLE
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";

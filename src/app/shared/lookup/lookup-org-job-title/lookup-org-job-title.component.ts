@@ -20,7 +20,7 @@ import { environment } from 'environments/environment';
 export class LookupOrgJobTitleComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
-  urlJson: string = "./assets/lookup/lookupRefJobTitle.json";
+  urlJson: string = "./assets/lookup/lookupOrgJobTitle.json";
   urlQryPaging: string = AdInsConstant.GetOrgJobTitlePaging;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
@@ -32,7 +32,7 @@ export class LookupOrgJobTitleComponent implements OnInit {
   @ViewChild(UCGridFooterComponent) ucgridFooter;
 
   jobTitleName: any;
-  refJobTitleId: any;
+  orgJobTitleId: any;
 
   configuration: any;
   urlGet: string;
@@ -72,7 +72,7 @@ export class LookupOrgJobTitleComponent implements OnInit {
     console.log(id + " : " + name);
     console.log(item);
     this.idSelect = id;
-    this.refJobTitleId = id;
+    this.orgJobTitleId = id;
     this.jobTitleName = name;
     this.nameSelect = name;
     this.jsonSelect = JSON.stringify(item);

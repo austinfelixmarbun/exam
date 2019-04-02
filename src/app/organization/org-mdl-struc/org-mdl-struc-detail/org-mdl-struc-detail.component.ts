@@ -78,15 +78,13 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     this.orgMdlStrucObj = new OrgMdlStrucObj();
     this.InitForm();
     if (this.type === "edit") {
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlStruc;
+      this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlStrucById;
       this.orgMdlStrucObj = new OrgMdlStrucObj();
-      this.orgMdlStrucObj.orgMdlId = +this.orgMdlId;
-      this.orgMdlStrucObj.refBizUnitId = +this.refBizUnitId;
+      this.orgMdlStrucObj.orgMdlStrucId = +this.orgMdlStrucId;
       this.httpClient.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
         response => {
           console.log("Success Get");
           this.orgMdlStrucObj = response["returnObject"];
-          console.log("obj", response["returnObject"]);
           this.orgMdlLvl = response["returnObject"]["orgMdlLvl"];
           this.refBizUnitId = response["returnObject"]["refBizUnitId"];
           this.parentId = response["returnObject"]["parentId"];
@@ -97,16 +95,18 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           }
 
           /* #region Fill Lookup Mdl Struct */
+          if(this.parentId !== 0)
+          {
           var orgMdlStruc: OrgMdlStrucObj = new OrgMdlStrucObj();
           var getOrgMdlSructUrl =
-            this.foundationUrl + AdInsConstant.GetRefBizUnit;
+            this.foundationUrl + AdInsConstant.GetOrgMdlStrucById;
           var getBizUnitUrl: any =
-            this.foundationUrl + AdInsConstant.GetOrgMdlStruc;
-          orgMdlStruc.orgMdlId = +this.orgMdlId;
-          orgMdlStruc.refBizUnitId = +this.parentId;
+            this.foundationUrl + AdInsConstant.GetRefBizUnit;
+          orgMdlStruc.orgMdlStrucId = +this.parentId;
           this.httpClient
             .post(getOrgMdlSructUrl, orgMdlStruc)
             .subscribe(response => {
+              console.log("obj", response["returnObject"]);
               this.jsonSelectStruct = response["returnObject"];
               var bizUnit: BusinessUnitObj = new BusinessUnitObj();
               bizUnit.RefBizUnitId = response["returnObject"]["refBizUnitId"];
@@ -116,18 +116,19 @@ export class OrgMdlStrucDetailComponent implements OnInit {
                   this.parentName = response["returnObject"]["bizUnitName"];
                 });
             });
+          }
           /* #endregion */
 
           /* #region Fill Lookup Biz Unit */
           var bizUnitObj: BusinessUnitObj = new BusinessUnitObj();
           var getBizUnitUrl: any =
-            this.foundationUrl + AdInsConstant.GetOrgMdlStruc;
+            this.foundationUrl + AdInsConstant.GetRefBizUnit;
           bizUnitObj.RefBizUnitId = this.refBizUnitId;
           this.httpClient
             .post(getBizUnitUrl, bizUnitObj)
             .subscribe(response => {
               bizUnitObj = response["returnObject"];
-              this.bizUnitName = bizUnitObj.BizUnitName;
+              this.bizUnitName = response["returnObject"]['bizUnitName'];
               this.jsonSelectBizUnit = response["returnObject"];
             });
           /* #endregion */
@@ -151,21 +152,23 @@ export class OrgMdlStrucDetailComponent implements OnInit {
 
     if (OrgMdlForm.value.orgMdlLvl > 1 && lookupMdlStruc.idSelect === undefined) {
       this.service.typeErrorCustom('Must Have Parent');
+      this.spinner.hide();
     }
     else {
       /* #region  Have Parent */
       if (lookupMdlStruc.idSelect !== undefined) {
         var orgMdlStrucCheck: OrgMdlStrucObj = new OrgMdlStrucObj();
         var getOrgMdlSructCheckUrl =
-          this.foundationUrl + AdInsConstant.GetRefBizUnit;
-        orgMdlStrucCheck.orgMdlId = +this.orgMdlId;
-        orgMdlStrucCheck.refBizUnitId = +lookupMdlStruc.idSelect;
+          this.foundationUrl + AdInsConstant.GetOrgMdlStrucById;
+        orgMdlStrucCheck.orgMdlStrucId = +lookupMdlStruc.idSelect;
         this.httpClient
           .post(getOrgMdlSructCheckUrl, orgMdlStrucCheck)
           .subscribe(response => {
-            if (OrgMdlForm.value.orgMdlLvl !== orgMdlStrucCheck.orgMdlId + 1) {
+            console.log(response)
+            var lvlMust: number = + response['returnObject']['orgMdlLvl'] + 1;
+            if (+OrgMdlForm.value.orgMdlLvl !== lvlMust) {
               this.service.typeErrorCustom(
-                "Level Must Be " + orgMdlStrucCheck.orgMdlId + 1
+                "Level Must Be " + lvlMust
               );
             } else {
               //MODE-ADD
@@ -294,7 +297,23 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     critOrgMdlId.value = this.orgMdlId;
     critOrgMdlId.restriction = AdInsConstant.RestrictionEq;
     critOrgMdlId.DataType = "numeric";
+
+    var critOrgMdlStrucId = new CriteriaObj();
+    critOrgMdlStrucId.propName = "orgMdlStrucId";
+    critOrgMdlStrucId.value = this.orgMdlStrucId;
+    critOrgMdlStrucId.restriction = 'Neq';
+    critOrgMdlStrucId.DataType = "numeric";
+
+    var critParentId = new CriteriaObj();
+    critParentId.propName = "parentId";
+    critParentId.value = this.orgMdlStrucId;
+    critParentId.restriction = 'Neq';
+    critParentId.DataType = "numeric";
+
     this.addCrit.push(critOrgMdlId);
+    this.addCrit.push(critParentId);
+    this.addCrit.push(critOrgMdlStrucId);
+
     /* #endregion */
   }
 }

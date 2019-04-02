@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { RefJobTitleObj } from 'app/shared/model/RefJobTitle.model';
+import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
