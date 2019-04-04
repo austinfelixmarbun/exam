@@ -1,3 +1,4 @@
+import { OrgMdlStrucObj } from 'app/shared/model/OrgMdlStrucObj';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { environment } from 'environments/environment';
@@ -11,20 +12,19 @@ import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
-import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from "@angular/common";
 
 @Component({
-  selector: 'app-organization-model-paging',
-  templateUrl: './organization-model-paging.component.html',
+  selector: 'app-org-mdl-struc-paging',
+  templateUrl: './org-mdl-struc-paging.component.html',
   providers: [NGXToastrService, NGXToastrService, ExcelService]
 })
-export class OrganizationModelPagingComponent implements OnInit {
+export class OrgMdlStrucPagingComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
-  urlJson: string = './assets/search/searchOrgModel.json';
+  urlJson: string = './assets/search/searchOrgMdlStruc.json';
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -34,14 +34,17 @@ export class OrganizationModelPagingComponent implements OnInit {
   show: any;
   exportData: any;
   excelData: any;
-  refOrgId: any;
-  orgModelObj: OrgMdlObj;
-  orgObj: OrganizationObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging: string = AdInsConstant.GetOrgMdlPaging;
+  urlQryPaging: string = AdInsConstant.GetOrgMdlStrucPaging;
   addCrit: CriteriaObj[];
+
+  orgMdlObj: OrgMdlObj;
+  orgMdlStrucObj: OrgMdlStrucObj;
+  orgMdlId: any;
+
+  refOrgId: number = 0;
 
   constructor(
     private router: Router,
@@ -52,27 +55,24 @@ export class OrganizationModelPagingComponent implements OnInit {
     private adInsService: AdInsServiceService,
     private excelService: ExcelService,
     private https: HttpClient,
-    private location: Location
+    private location: Location,
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['refOrgId'] != null) {
-        this.refOrgId = +params['refOrgId'];
+      if (params['orgMdlId'] != null) {
+        this.orgMdlId = +params['orgMdlId'];
       }
     });
   }
 
   ngOnInit() {
+    this.spinner.show();
     console.log('masuk');
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlPaging;
-    this.initiateForm()
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
-    //   .subscribe(data => {
-    //     console.log(data);
-    //   }
-    //   )
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlStrucPaging;
+    this.initiateForm();
+    this.spinner.hide();
   }
 
   getResult(event) {
@@ -112,12 +112,15 @@ export class OrganizationModelPagingComponent implements OnInit {
   }
 
   initiateForm() {
-    var getOrgUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
-    this.orgObj = new OrganizationObj();
-    this.orgObj.refOrgId = +this.refOrgId;
-    this.https.post(getOrgUrl, this.orgObj).subscribe(
+    var getOrgMdlUrl = this.foundationUrl + AdInsConstant.GetOrgMdlByOrgMdlId;
+    this.orgMdlObj = new OrgMdlObj();
+    this.orgMdlObj.orgMdlId = +this.orgMdlId;
+    this.https.post(getOrgMdlUrl, this.orgMdlObj).subscribe(
       (response) => {
-        this.orgObj = response['returnObject'];
+        this.orgMdlObj = response['returnObject'];
+        this.refOrgId += response['returnObject']['refOrgId'];
+        console.log('response',response['returnObject'])
+        console.log(this.refOrgId)
       },
       (error) => {
         this.service.typeErrorCustom(error);
@@ -125,8 +128,8 @@ export class OrganizationModelPagingComponent implements OnInit {
 
     this.addCrit = new Array();
     var additionCrit = new CriteriaObj();
-    additionCrit.propName = "refOrgId";
-    additionCrit.value = this.refOrgId;
+    additionCrit.propName = "orgMdlId";
+    additionCrit.value = this.orgMdlId;
     additionCrit.DataType = 'numeric';
     additionCrit.restriction = AdInsConstant.RestrictionEq;
 
@@ -135,11 +138,11 @@ export class OrganizationModelPagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteOrgMdl;
-      this.orgModelObj = new OrgMdlObj();
-      this.orgModelObj.orgMdlId = +id;
-      console.log(this.orgModelObj);
-      this.https.post(this.deleteUrl, this.orgModelObj).subscribe(
+      this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteOrgMdlStruc;
+      this.orgMdlStrucObj = new OrgMdlStrucObj();
+      this.orgMdlStrucObj.orgMdlStrucId = +id;
+
+      this.https.post(this.deleteUrl, this.orgMdlStrucObj).subscribe(
         (response) => {
           this.service.successMessage(response['message']);
           var order = null;
@@ -197,3 +200,4 @@ export class OrganizationModelPagingComponent implements OnInit {
   }
 
 }
+

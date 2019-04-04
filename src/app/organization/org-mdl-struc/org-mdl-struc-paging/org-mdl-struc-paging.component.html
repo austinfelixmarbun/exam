@@ -6,13 +6,13 @@
           <div class="px-3">
             <form class="form form-horizontal">
               <div class="form-body">
-                <h4 class="form-section">Organization Model</h4>
+                <h4 class="form-section">Organization Strcture</h4>
                 <br />
 
                 <div class="form-group row">
-                  <label class="col-md-3 label-control">Organization Level</label>
+                  <label class="col-md-3 label-control">Organization Model</label>
                   <div class="col-md-9">
-                    <label>{{orgObj.orgName}}</label></div>
+                    <label>{{orgMdlObj.orgMdlName}}</label></div>
                 </div>
 
                 <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
@@ -23,37 +23,40 @@
                   <thead>
                     <tr class="table-header">
                       <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
-                          name='orgMdlCode'>Module Code</span></th>
+                          name='orgMdlLvl'>Level</span></th>
                       <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
-                          name='orgMdlName'>Module
-                          Name</span></th>
+                          name='bizUnitName'>Business Unit Name</span></th>
+                          <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                            name='parentName'>Business Unit Parent Name</span></th>
                       <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
                           name='isActive'>Active</span></th>
-                      <th>Structure</th>
+                      <th>Org Job Title</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let item of resultData?.returnObject.data">
-                      <td>{{item.orgMdlCode}}</td>
-                      <td class="text-left">{{item.orgMdlName}}</td>
+                      <td>{{item.orgMdlLvl}}</td>
+                      <td class="text-left">{{item.bizUnitName}}</td>
+                      <td class="text-left">{{item.parentName}}</td>
                       <td>
                         <div *ngIf="item.isActive === '1'">Yes</div>
                         <div *ngIf="item.isActive === '0'">No</div>
                       </td>
                       <td>
-                        <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/struc']"
-                          [queryParams]="{orgMdlId:item.orgMdlId}">
+                        <a class="success p-0" data-original-title="" title=""
+                          [routerLink]="['/organization/orgJob']"
+                          [queryParams]="{orgMdlStrucId:item.orgMdlStrucId,bizUnitName:item.bizUnitName, refOrgId: refOrgId}">
                           <i class="ft-edit-2 font-medium-3 mr-2"></i>
                         </a>
                       </td>
                       <td>
                         <a class="success p-0" data-original-title="" title=""
-                          [routerLink]="['/organization/model/detail']"
-                          [queryParams]="{orgMdlId:item.orgMdlId,mode:'edit',refOrgId:refOrgId}">
+                          [routerLink]="['/organization/struc/detail']"
+                          [queryParams]="{orgMdlStrucId:item.orgMdlStrucId,mode:'edit',orgMdlId:orgMdlId,refBizUnitId:item.refBizUnitId}">
                           <i class="ft-edit-2 font-medium-3 mr-2"></i>
                         </a>
-                        <a class="danger p-0" data-original-title="" title="" (click)="del(item.orgMdlId)">
+                        <a class="danger p-0" data-original-title="" title="" (click)="del(item.orgMdlStrucId)">
                           <i class="ft-x font-medium-3 mr-2"></i>
                         </a>
                       </td>
@@ -65,9 +68,9 @@
                   <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
                     <i class="ft-x"></i> Back
                   </button>
-                  <i class="fa fa-plus-circle" [routerLink]="['/organization/model/detail']"
-                    [queryParams]="{refOrgId:refOrgId, mode:'add'}"
-                    style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+                <i class="fa fa-plus-circle" [routerLink]="['/organization/struc/detail']"
+                  [queryParams]="{orgMdlId:orgMdlId, mode:'add'}"
+                  style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
                 </div>
               </div>
             </form>

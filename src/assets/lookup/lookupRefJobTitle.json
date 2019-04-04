@@ -1,0 +1,22 @@
+{
+  "url": "http://getRefJobTitle",
+  "title":"Lookup Job Title",
+  "component": [
+    {
+      "type": "textbox",
+      "name": "jobTitleCode",
+      "id": "jobTitleCodeId",
+      "value": "",
+      "label": "Job Title Code",
+      "placeholder": "Job Title Code"
+    },
+    {
+      "type": "textbox",
+      "name": "jobTitleName",
+      "id": "jobTitleNameId",
+      "value": "",
+      "label": "Job Title Name",
+      "placeholder": "Job Title Name"
+    }
+  ]
+}

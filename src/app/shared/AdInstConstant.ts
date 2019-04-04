@@ -33,7 +33,7 @@ export class AdInsConstant {
     public static AddRefOffice = "/RefOffice/AddRefOffice";
     public static EditRefOffice = "/RefOffice/EditRefOffice";
     public static DeleteRefOffice = "/RefOffice/DeleteRefOffice";
-    
+
     //REF OFFICE AREA
     public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
     public static GetRefOfficeAreaPaging = "/RefOfficeArea/GetRefOfficeAreaPaging";
@@ -61,6 +61,13 @@ export class AdInsConstant {
     public static AddOrgMdl = "/OrganizationDefinition/AddOrgMdl";
     public static GetOrgMdl = "/OrganizationDefinition/GetOrgMdl";
     public static GetOrgMdlByOrgMdlId = "/OrganizationDefinition/GetOrgMdlByOrgMdlId";
+    public static GetAllRefBizUnitKeyValuePair = "/OrganizationDefinition/GetAllRefBizUnitKeyValuePair";
+    public static DeleteOrgMdlStruc = "/OrganizationDefinition/DeleteOrgMdlStruc";
+    public static AddOrgMdlStruc = "/OrganizationDefinition/AddOrgMdlStruc";
+    public static EditOrgMdlStruc = "/OrganizationDefinition/EditOrgMdlStruc";
+    public static GetOrgMdlStruc = "/OrganizationDefinition/GetOrgMdlStruc";
+    public static GetOrgMdlStrucPaging = "/OrganizationDefinition/GetOrgMdlStrucPaging";
+    public static GetOrgMdlStrucById = "/OrganizationDefinition/GetOrgMdlStrucById";
 
     //REF-JOB-TITLE
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
@@ -69,6 +76,13 @@ export class AdInsConstant {
     public static DeleteRefJobTitle = "/OrganizationDefinition/DeleteRefJobTitle";
     public static GetJobPositionLvl = "/OrganizationDefinition/GetJobPositionLvl";
     public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
+
+    //ORG JOB TITLE
+    public static GetOrgJobTitlePaging = "/OrganizationDefinition/GetOrgJobTitlePaging";
+    public static AddOrgJobTitle = "/OrganizationDefinition/AddOrgJobTitle";
+    public static EditOrgJobTitle = "/OrganizationDefinition/EditOrgJobTitle";
+    public static DeleteOrgJobTitle = "/OrganizationDefinition/DeleteOrgJobTitle";
+    public static GetOrgJobTitleByOrgJobTitleId = "/OrganizationDefinition/GetOrgJobTitleByOrgJobTitleId";
 
     //REF-BANK
     public static GetBankPaging = "/RefBank/GetRefBankPaging";
@@ -176,7 +190,7 @@ export class AdInsConstant {
     public static EditRefForm = "/MenuManagement/EditRefForm";
     public static AddRefForm = "/MenuManagement/AddRefForm";
     public static DeleteRefForm = "/MenuManagement/DeleteRefForm";
-    
+
     //HOLIDAY
     public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
 

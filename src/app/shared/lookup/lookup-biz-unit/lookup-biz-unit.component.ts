@@ -22,15 +22,15 @@ import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
 
 @Component({
-  selector: "app-lookup-role",
-  templateUrl: "./lookup-role.component.html",
+  selector: "app-lookup-biz-unit",
+  templateUrl: "./lookup-biz-unit.component.html",
   providers: [NGXToastrService]
 })
-export class LookupRoleComponent implements OnInit {
+export class LookupBizUnitComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
 
-  urlJson: string = "./assets/lookup/lookupRole.json";
-  urlQryPaging: string = AdInsConstant.GetRefRolePaging;
+  urlJson: string = "./assets/lookup/lookupBizUnit.json";
+  urlQryPaging: string = AdInsConstant.GetBusinessUnitPaging;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
@@ -40,6 +40,9 @@ export class LookupRoleComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild("content") contentTemplate;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
+
+  bizUnitName: any;
+  refBizUnitId: any;
 
   configuration: any;
   urlGet: string;
@@ -57,24 +60,22 @@ export class LookupRoleComponent implements OnInit {
   closeResult: string;
   foundationUrl: string = environment.foundationUrl;
 
-  refRoleId: any;
-  roleName: any;
-
   addCrit: Array<any>;
 
   ngOnInit() {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetBusinessUnitPaging;
     this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
     this.pageSize = this.show[0];
 
-     /* #region   Additional Criteria*/
-     if (this.addCritInput !== null) {
-      this.addCrit = new Array();
-      for (var i = 0; i < this.addCritInput.length; i++) {
-        this.addCrit.push(this.addCritInput[i]);
-      }
-    }
+    /* #region   Additional Criteria*/
+    this.addCrit = new Array();
+    var critIsActive = new CriteriaObj();
+    critIsActive.propName = "isActive";
+    critIsActive.value = "1";
+    critIsActive.restriction = AdInsConstant.RestrictionEq;
+    critIsActive.DataType = "text";
+    this.addCrit.push(critIsActive);
     /* #endregion */
   }
 
@@ -82,8 +83,8 @@ export class LookupRoleComponent implements OnInit {
     console.log(id + " : " + name);
     console.log(item);
     this.idSelect = id;
-    this.refRoleId = id;
-    this.roleName = name;
+    this.refBizUnitId = id;
+    this.bizUnitName = name;
     this.nameSelect = name;
     this.jsonSelect = JSON.stringify(item);
     this.modalService.dismissAll();

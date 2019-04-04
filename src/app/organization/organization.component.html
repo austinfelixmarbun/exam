@@ -18,7 +18,10 @@
       <td>{{item.hierarchyNo}}</td>
       <td>{{item.orgName}}</td>
       <td>{{item.parentRefOrgName}}</td>
-      <td>{{item.isActive}}</td>
+      <td>
+        <div *ngIf="item.isActive === '1'">Yes</div>
+        <div *ngIf="item.isActive === '0'">No</div>
+      </td>
       <td>
         <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/model']"
         [queryParams]="{refOrgId:item.refOrgId}">

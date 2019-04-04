@@ -1,45 +1,38 @@
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
-import { environment } from "environments/environment";
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewChild,
-  ViewChildren
-} from "@angular/core";
-import {
-  NgbModal,
-  ModalDismissReasons,
-  NgbActiveModal
-} from "@ng-bootstrap/ng-bootstrap";
-import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { AdInsServiceService } from "app/ad-ins-service.service";
-import { formatDate } from "@angular/common";
 import { SearchComponent } from "app/shared/search/search.component";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
+import { Component, OnInit, Input, ViewChild, ViewChildren } from '@angular/core';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { AdInsServiceService } from 'app/ad-ins-service.service';
+import { formatDate } from '@angular/common';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { environment } from 'environments/environment';
+
 
 @Component({
-  selector: "app-lookup-role",
-  templateUrl: "./lookup-role.component.html",
+  selector: "app-lookup-org-mdl-struc",
+  templateUrl: "./lookup-org-mdl-struc.component.html",
   providers: [NGXToastrService]
 })
-export class LookupRoleComponent implements OnInit {
-  constructor(private modalService: NgbModal) {}
+export class LookupOrgMdlStrucComponent implements OnInit {
+  constructor(private modalService: NgbModal) { }
 
-  urlJson: string = "./assets/lookup/lookupRole.json";
-  urlQryPaging: string = AdInsConstant.GetRefRolePaging;
+  urlJson: string = "./assets/lookup/lookupOrgMdlStruc.json";
+  urlQryPaging: string = AdInsConstant.GetOrgMdlStrucPaging;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
   @Input() addCritInput: CriteriaObj[] = null;
-  @Input() isRequired: any;
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild("content") contentTemplate;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
+
+  bizUnitName: any;
+  refBizUnitId: any;
 
   configuration: any;
   urlGet: string;
@@ -57,19 +50,16 @@ export class LookupRoleComponent implements OnInit {
   closeResult: string;
   foundationUrl: string = environment.foundationUrl;
 
-  refRoleId: any;
-  roleName: any;
-
   addCrit: Array<any>;
 
   ngOnInit() {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlStrucPaging;
     this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
     this.pageSize = this.show[0];
 
-     /* #region   Additional Criteria*/
-     if (this.addCritInput !== null) {
+    /* #region   Additional Criteria*/
+    if (this.addCritInput !== null) {
       this.addCrit = new Array();
       for (var i = 0; i < this.addCritInput.length; i++) {
         this.addCrit.push(this.addCritInput[i]);
@@ -82,8 +72,8 @@ export class LookupRoleComponent implements OnInit {
     console.log(id + " : " + name);
     console.log(item);
     this.idSelect = id;
-    this.refRoleId = id;
-    this.roleName = name;
+    this.refBizUnitId = id;
+    this.bizUnitName = name;
     this.nameSelect = name;
     this.jsonSelect = JSON.stringify(item);
     this.modalService.dismissAll();
@@ -124,7 +114,7 @@ export class LookupRoleComponent implements OnInit {
       };
     }
     searchComponent
-      .search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit )
+      .search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
       .subscribe(
         response => {
           console.log("Success");
@@ -161,7 +151,7 @@ export class LookupRoleComponent implements OnInit {
       value: this.orderByValue
     };
     searchComp
-      .search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit )
+      .search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
       .subscribe(
         response => {
           console.log("Success");

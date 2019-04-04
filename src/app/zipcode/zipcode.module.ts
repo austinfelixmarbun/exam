@@ -1,12 +1,14 @@
-import { NgModule } from '@angular/core';
+import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
+import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
-import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/lookup-employee.component';
 import { ZipcodeRoutingComponent } from 'app/zipcode/zipcode-routing.module';
+import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+
 
 @NgModule({
   imports: [
@@ -15,12 +17,19 @@ import { ZipcodeRoutingComponent } from 'app/zipcode/zipcode-routing.module';
     FormsModule,
     HttpModule,
     NgbModule,
-    SharingModule
+    SharingModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ZipcodeComponent,
     ZipcodeAddComponent
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => LookupEmployeeComponent),
+      multi: true
+    }
   ]
 })
 export class ZipcodeModule { }
- 

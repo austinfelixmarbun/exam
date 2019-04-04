@@ -1,3 +1,4 @@
+import { LookupOrgMdlStrucComponent } from './lookup/lookup-org-mdl-struc/lookup-org-mdl-struc.component';
 import { LookupRoleComponent } from 'app/shared/lookup/lookup-role/lookup-role.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -10,11 +11,15 @@ import { LookupzipcodeComponent } from 'app/shared/lookup/lookupzipcode/lookupzi
 import { LookupDistrictComponent } from 'app/shared/lookup/lookup-district/lookup-district.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
+import { LookupBizUnitComponent } from 'app/shared/lookup/lookup-biz-unit/lookup-biz-unit.component';
+import { LookupOrgJobTitleComponent } from 'app/shared/lookup/lookup-org-job-title/lookup-org-job-title.component';
+import { LookupRefJobTitleComponent } from 'app/shared/lookup/lookup-ref-job-title/lookup-ref-job-title.component';
 import { LookupRefBankComponent } from 'app/shared/lookup/lookup-ref-bank/lookup-ref-bank.component';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 import { LookupParentFormComponent } from 'app/shared/lookup/lookup-parent-form/lookup-parent-form.component';
+
 
 @NgModule({
     exports: [
@@ -31,7 +36,11 @@ import { LookupParentFormComponent } from 'app/shared/lookup/lookup-parent-form/
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
-        TranslateModule
+        TranslateModule,
+        LookupBizUnitComponent,
+        LookupOrgMdlStrucComponent,
+        LookupOrgJobTitleComponent,
+        LookupRefJobTitleComponent
     ],
     imports: [
         CommonModule,
@@ -52,6 +61,10 @@ import { LookupParentFormComponent } from 'app/shared/lookup/lookup-parent-form/
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
+        LookupBizUnitComponent,
+        LookupOrgMdlStrucComponent,
+        LookupOrgJobTitleComponent,
+        LookupRefJobTitleComponent
     ]
 })
 
