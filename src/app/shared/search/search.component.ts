@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { formatDate, getLocaleDateTimeFormat, DecimalPipe } from '@angular/common';
 import 'rxjs/add/operator/map';

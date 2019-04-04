@@ -7,10 +7,12 @@ export class RequestCriteriaObj{
     rowPerPage:number;
     orderBy:any;
     criteria:CriteriaObj[];
+    isLoading : boolean;
 
     constructor()
     {
         this.includeCount=true;
         this.includeData=true;
+        this.isLoading = true;
     }
 }
