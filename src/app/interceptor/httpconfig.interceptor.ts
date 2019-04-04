@@ -36,6 +36,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         console.log("HTTP Interceptor");
         //console.log(request);
         var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+        var userAcc = JSON.parse(localStorage.getItem("UserAccess"));
         var token : string = "";
         var myObj;
         let today = new Date();
@@ -52,24 +53,48 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if(currentUserContext != null)
         {
             token = localStorage.getItem("Token");
-            myObj = {
-                UserName: currentUserContext.UserName,
-                Role: currentUserContext.Role,
-                Office: currentUserContext.Office,
-                SendDateTime: businessDt,
-                Ip:localStorage.getItem("LocalIp"),
-                RequestObject: request.body,
-                UserLog:JSON.parse(localStorage.getItem("PageAccess"))
-              };
+            if (userAcc != null) {
+                myObj = {
+                    UserName: currentUserContext.UserName,
+                    Role: currentUserContext.Role,
+                    Office: currentUserContext.Office,
+                    SendDateTime: businessDt,
+                    Ip:localStorage.getItem("LocalIp"),
+                    RequestObject: request.body,
+                    UserSessionLogId: userAcc.userSessionLogId,
+                    UserLog:JSON.parse(localStorage.getItem("PageAccess"))
+                  };
+            }else {
+                myObj = {
+                    UserName: currentUserContext.UserName,
+                    Role: currentUserContext.Role,
+                    Office: currentUserContext.Office,
+                    SendDateTime: businessDt,
+                    Ip:localStorage.getItem("LocalIp"),
+                    RequestObject: request.body,
+                    UserLog:JSON.parse(localStorage.getItem("PageAccess"))
+                  };
+            }
         }
-        else{
-            myObj = {
-                SendDateTime:businessDt,
-                UserName:localStorage.getItem("Username"),
-                Ip:localStorage.getItem("LocalIp"),
-                RequestObject: request.body,
-                UserLog:JSON.parse(localStorage.getItem("PageAccess"))
-            };
+        else {
+            if (userAcc != null) {
+                myObj = {
+                    SendDateTime:businessDt,
+                    UserName:localStorage.getItem("Username"),
+                    Ip:localStorage.getItem("LocalIp"),
+                    RequestObject: request.body,
+                    UserSessionLogId: userAcc.userSessionLogId,
+                    UserLog:JSON.parse(localStorage.getItem("PageAccess"))
+                };
+            }else {
+                myObj = {
+                    SendDateTime:businessDt,
+                    UserName:localStorage.getItem("Username"),
+                    Ip:localStorage.getItem("LocalIp"),
+                    RequestObject: request.body,
+                    UserLog:JSON.parse(localStorage.getItem("PageAccess"))
+                };
+            }
         }
         
       

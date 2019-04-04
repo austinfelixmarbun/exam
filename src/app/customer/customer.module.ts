@@ -6,15 +6,20 @@ import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerComponent } from 'app/customer/customer.component';
 import { CustomerRoutingModule } from 'app/customer/customer-routing.module';
+import { ArchwizardModule } from 'angular-archwizard';
 
 @NgModule({
+  exports: [
+    CustomerComponent
+  ],
   imports: [
     CustomerRoutingModule,
     CommonModule,
     FormsModule,
     HttpModule,
     NgbModule,
-    SharingModule
+    SharingModule,
+    ArchwizardModule
   ],
   declarations: [
     CustomerComponent

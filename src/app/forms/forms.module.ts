@@ -21,6 +21,8 @@ import { InputsComponent } from './elements/inputs/inputs.component';
 import { InputGroupsComponent } from './elements/input-groups/input-groups.component';
 import { InputGridComponent } from './elements/input-grid/input-grid.component';
 import { ArchwizardComponent } from './archwizard/archwizard.component';
+import { SharingModule } from 'app/shared/sharing.module';
+import { CustomerModule } from 'app/customer/customer.module';
 
 @NgModule({
     imports: [
@@ -32,7 +34,9 @@ import { ArchwizardComponent } from './archwizard/archwizard.component';
         ArchwizardModule,
         CustomFormsModule,
         MatchHeightModule,
-        NgbModule
+        NgbModule,
+        SharingModule,
+        CustomerModule
     ],
     declarations: [
         ValidationFormsComponent,
@@ -46,7 +50,8 @@ import { ArchwizardComponent } from './archwizard/archwizard.component';
         InputsComponent,
         InputGroupsComponent,
         InputGridComponent,
-        ArchwizardComponent
+        ArchwizardComponent,
+
     ]
 
 })
