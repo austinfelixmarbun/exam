@@ -82,22 +82,74 @@ const PARAMS = new HttpParams({
 });
 
 @Injectable()
-export class WikipediaService {
+// export class WikipediaService {
+//   foundationUrl: string = environment.foundationUrl;
+//   userData: any[] = [];
+//   constructor(private http: HttpClient) { }
+
+//   search(term: string) {
+//     if (term === '') {
+//       return of([]);
+//     }
+
+//     return this.http
+//       .get(WIKI_URL, { params: PARAMS.set('search', term) }).pipe(
+//         map(response => response[1])
+//       );
+//   }
+//   searching(term: string) {
+//     this.userData = [];
+//     if (term === '') {
+//       return of([]);
+//     }
+//     var request = new RequestCriteriaObj();
+//     var arrCrit = new Array();
+//     // request.isLoading = false;
+//     request.pageNo = 1;
+//     request.rowPerPage = 20;
+//     request.orderBy = NullTemplateVisitor;
+//     var critObj = new CriteriaObj();
+//     critObj.DataType = "text";
+//     critObj.restriction = AdInsConstant.RestrictionLike;
+//     critObj.propName = "bankName";
+//     critObj.value = "%" + term + "%";
+//     arrCrit.push(critObj);
+//     request.criteria = arrCrit;
+//     var Url = this.foundationUrl + AdInsConstant.GetBankPaging;
+//     return this.http.post(Url, request).pipe(
+//         map(response => {
+//           var num = 0;
+//           for (num = 0; num < response["returnObject"].data.length; num++) {
+//             this.userData.push(response["returnObject"].data[num].bankName)
+//           }
+//           return this.userData;
+//         })
+//       );
+//   }
+// }
+
+
+@Component({
+  selector: 'app-typeahead',
+  templateUrl: './typeahead.component.html',
+  styleUrls: ['./typeahead.component.scss'],
+  // providers: [WikipediaService]
+})
+export class TypeaheadComponent {
+  // Variable Declaration
+  public model: any;
+  modelFormat: any;
+  modelWiki: any;
+  modelTemp: any;
+  searching = false;
+  searchFailed = false;
+  hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
   foundationUrl: string = environment.foundationUrl;
   userData: any[] = [];
+  
   constructor(private http: HttpClient) { }
 
-  search(term: string) {
-    if (term === '') {
-      return of([]);
-    }
-
-    return this.http
-      .get(WIKI_URL, { params: PARAMS.set('search', term) }).pipe(
-        map(response => response[1])
-      );
-  }
-  searching(term: string) {
+  searched(term: string) {
     this.userData = [];
     if (term === '') {
       return of([]);
@@ -126,25 +178,6 @@ export class WikipediaService {
         })
       );
   }
-}
-
-
-@Component({
-  selector: 'app-typeahead',
-  templateUrl: './typeahead.component.html',
-  styleUrls: ['./typeahead.component.scss'],
-  providers: [WikipediaService]
-})
-export class TypeaheadComponent {
-  // Variable Declaration
-  public model: any;
-  modelFormat: any;
-  modelWiki: any;
-  modelTemp: any;
-  searching = false;
-  searchFailed = false;
-  hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
-
   // Default Search
   search = (text$: Observable<string>) =>
     text$.pipe(
@@ -161,7 +194,7 @@ export class TypeaheadComponent {
       distinctUntilChanged(),
       tap(() => this.searching = true),
       switchMap(term =>
-        this._service.searching(term).pipe(
+        this.searched(term).pipe(
           tap(() => this.searchFailed = false),
           catchError(() => {
             this.searchFailed = true;
@@ -184,5 +217,5 @@ export class TypeaheadComponent {
         : statesWithFlags.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     );
 
-  constructor(private _service: WikipediaService) { }
+  // constructor(private _service: WikipediaService) { }
 }
