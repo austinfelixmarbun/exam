@@ -27,7 +27,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
     constructor(public errorDialogService: ErrorDialogService,private spinner: NgxSpinnerService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if(request.method=="POST")
+        if(request.method=="POST" && request.body.isLoading == true)
         {
             this.spinner.show();
         }
