@@ -2,6 +2,11 @@ import { Component, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, tap, switchMap, merge } from 'rxjs/operators'
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { environment } from 'environments/environment';
+import { RequestCriteriaObj } from 'app/shared/model/RequestCriteriaObj.model';
+import { NullTemplateVisitor } from '@angular/compiler';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 // State constant declaration
 const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
@@ -78,6 +83,8 @@ const PARAMS = new HttpParams({
 
 @Injectable()
 export class WikipediaService {
+  foundationUrl: string = environment.foundationUrl;
+  userData: any[] = [];
   constructor(private http: HttpClient) { }
 
   search(term: string) {
@@ -88,6 +95,35 @@ export class WikipediaService {
     return this.http
       .get(WIKI_URL, { params: PARAMS.set('search', term) }).pipe(
         map(response => response[1])
+      );
+  }
+  searching(term: string) {
+    this.userData = [];
+    if (term === '') {
+      return of([]);
+    }
+    var request = new RequestCriteriaObj();
+    var arrCrit = new Array();
+    // request.isLoading = false;
+    request.pageNo = 1;
+    request.rowPerPage = 20;
+    request.orderBy = NullTemplateVisitor;
+    var critObj = new CriteriaObj();
+    critObj.DataType = "text";
+    critObj.restriction = AdInsConstant.RestrictionLike;
+    critObj.propName = "bankName";
+    critObj.value = "%" + term + "%";
+    arrCrit.push(critObj);
+    request.criteria = arrCrit;
+    var Url = this.foundationUrl + AdInsConstant.GetBankPaging;
+    return this.http.post(Url, request).pipe(
+        map(response => {
+          var num = 0;
+          for (num = 0; num < response["returnObject"].data.length; num++) {
+            this.userData.push(response["returnObject"].data[num].bankName)
+          }
+          return this.userData;
+        })
       );
   }
 }
@@ -125,7 +161,7 @@ export class TypeaheadComponent {
       distinctUntilChanged(),
       tap(() => this.searching = true),
       switchMap(term =>
-        this._service.search(term).pipe(
+        this._service.searching(term).pipe(
           tap(() => this.searchFailed = false),
           catchError(() => {
             this.searchFailed = true;
