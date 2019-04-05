@@ -28,6 +28,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   chooseRole(item){
     console.log(item);
     var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
+    var roleUrl = environment.foundationUrl + AdInsConstant.SelectRole;
     var roleObject = {RefRoleId:item.refRoleId};
     this.http.post(url,roleObject).subscribe(
       (response) => {
@@ -42,7 +43,18 @@ export class RolepickComponent implements OnInit, AfterViewInit {
         localStorage.setItem("UserAccess",JSON.stringify(item));
         this.currentUserContextService.addCurrentUserContext(currentUserContext);
         localStorage.setItem("RoleId",item.refRoleId);
-        this.router.navigate(['dashboard/dash-board']);
+
+        this.http.post(roleUrl,item).subscribe(
+          (response) => {
+            console.log(response);
+            localStorage.setItem("UserAccess",JSON.stringify(response["returnObject"]));
+            this.router.navigate(['dashboard/dash-board']);
+          },
+          (error) =>{
+            console.log(error);
+          }
+        )
+
       },
       (error) =>{
         console.log(error);

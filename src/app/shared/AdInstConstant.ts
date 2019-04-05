@@ -199,4 +199,7 @@ export class AdInsConstant {
 
     //WORK HOUR
     public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
+
+    //USER SESSION LOG
+    public static SelectRole = "/UserSessionLog/SelectRole";
 }
