@@ -90,8 +90,8 @@ export class AppModule {
     constructor(private http: HttpClient,
         private errorDialogService: ErrorDialogService) {
 
-        localStorage.setItem("LocalIp", window.location.origin);
-        console.log(window.location.origin); // 192.168.0.122
+        // localStorage.setItem("LocalIp", window.location.origin);
+        // console.log(window.location.origin); // 192.168.0.122
 
         var url = environment.coreUrl + AdInsConstant.GetBusinessDt;
         this.http.post(url, null).subscribe(
