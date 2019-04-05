@@ -190,6 +190,9 @@ export class AdInsConstant {
     public static EditRefForm = "/MenuManagement/EditRefForm";
     public static AddRefForm = "/MenuManagement/AddRefForm";
     public static DeleteRefForm = "/MenuManagement/DeleteRefForm";
+    public static AssignRoleToForms = "/MenuManagement/AssignRoleToForms";
+    public static GetAllAuthFormsByRefRoleId = "/MenuManagement/GetAllAuthFormsByRefRoleId";
+
 
     //HOLIDAY
     public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";

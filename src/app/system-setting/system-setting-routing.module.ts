@@ -7,6 +7,7 @@ import { RoleAddEditComponent } from 'app/system-setting/role/role-add-edit/role
 import { RolePagingComponent } from 'app/system-setting/role/role-paging/role-paging.component';
 import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.component';
 import { UserRoleDetailComponent } from 'app/system-setting/user/user-role-detail/user-role-detail.component';
+import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
 const routes: Routes = [
   {
     path: '',
@@ -58,6 +59,13 @@ const routes: Routes = [
         component: RoleUserComponent,
         data: {
           title: 'Assign Role to User'
+        },
+      },
+      {
+        path: 'roleForm',
+        component: RoleFormComponent,
+        data: {
+          title: 'Assign Form to Role'
         },
       }
     ]
