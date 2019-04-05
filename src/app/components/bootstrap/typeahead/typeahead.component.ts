@@ -156,7 +156,7 @@ export class TypeaheadComponent {
     }
     var request = new RequestCriteriaObj();
     var arrCrit = new Array();
-    // request.isLoading = false;
+    request.isLoading = false;
     request.pageNo = 1;
     request.rowPerPage = 20;
     request.orderBy = NullTemplateVisitor;
