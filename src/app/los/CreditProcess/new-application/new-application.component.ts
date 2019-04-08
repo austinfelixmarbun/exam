@@ -19,6 +19,7 @@ export class NewApplicationComponent implements OnInit {
     let js = this._renderer2.createElement('script');
     js.text = `
           $(document).ready(function(){
+            window.alert("test 1 2 3.");
             $("#flip1").click(function(){
               $("#panel1").slideToggle("slow");
             });
@@ -28,6 +29,7 @@ export class NewApplicationComponent implements OnInit {
             $("#flip3").click(function(){
               $("#panel3").slideToggle("slow");
             });
+            $(".testSubmit").hide();
           });
         `;
     this._renderer2.appendChild(this._document.body, js);

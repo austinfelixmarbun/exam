@@ -25,10 +25,10 @@ import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
-    constructor(public errorDialogService: ErrorDialogService,private spinner: NgxSpinnerService) { }
+    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if(request.method=="POST" && request.body.isLoading == true)
-        {
+        console.log(request);
+        if (request.method == "POST" && request.body.isLoading == true) {
             this.spinner.show();
         }
         this.count++;
@@ -37,67 +37,69 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         //console.log(request);
         var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
         var userAcc = JSON.parse(localStorage.getItem("UserAccess"));
-        var token : string = "";
+        var token: string = "";
         var myObj;
         let today = new Date();
         var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US');
 
-        var checkSession=AdInsHelper.CheckSessionTimeout();
-        if(checkSession=="1")
-        {
+        var checkSession = AdInsHelper.CheckSessionTimeout();
+        if (checkSession == "1") {
             this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
-            this.spinner.hide ();
-            
+            this.spinner.hide();
+
         }
         //Ini kalau buat Login belom punya Current User Contexts
-        if(currentUserContext != null)
-        {
-            token = localStorage.getItem("Token");
-            if (userAcc != null) {
+        if (request.url == "http://r3app-server.ad-ins.com/foundation/UserManagement/HTML5Login") {
+            if (currentUserContext != null) {
+                token = localStorage.getItem("Token");
+                myObj = {
+                    UserName: localStorage.getItem("Username"),
+                    Role: currentUserContext.Role,
+                    Office: currentUserContext.Office,
+                    SendDateTime: businessDt,
+                    Ip: localStorage.getItem("LocalIp"),
+                    RequestObject: request.body,
+                    UserLog: JSON.parse(localStorage.getItem("PageAccess"))
+                };
+            }
+            else {
+                myObj = {
+                    Role: null,
+                    Office: null,
+                    SendDateTime: businessDt,
+                    UserName: localStorage.getItem("Username"),
+                    Ip: localStorage.getItem("LocalIp"),
+                    RequestObject: request.body,
+                    UserLog: JSON.parse(localStorage.getItem("PageAccess"))
+                };
+            }
+        } else {
+            if (currentUserContext != null) {
+                token = localStorage.getItem("Token");
                 myObj = {
                     UserName: currentUserContext.UserName,
                     Role: currentUserContext.Role,
                     Office: currentUserContext.Office,
                     SendDateTime: businessDt,
-                    Ip:localStorage.getItem("LocalIp"),
+                    Ip: localStorage.getItem("LocalIp"),
                     RequestObject: request.body,
-                    UserSessionLogId: userAcc.userSessionLogId,
-                    UserLog:JSON.parse(localStorage.getItem("PageAccess"))
-                  };
-            }else {
+                    UserLog: JSON.parse(localStorage.getItem("PageAccess"))
+                };
+            }
+            else {
                 myObj = {
-                    UserName: currentUserContext.UserName,
-                    Role: currentUserContext.Role,
-                    Office: currentUserContext.Office,
+                    Role: null,
+                    Office: null,
                     SendDateTime: businessDt,
-                    Ip:localStorage.getItem("LocalIp"),
+                    UserName: localStorage.getItem("Username"),
+                    Ip: localStorage.getItem("LocalIp"),
                     RequestObject: request.body,
-                    UserLog:JSON.parse(localStorage.getItem("PageAccess"))
-                  };
-            }
-        }
-        else {
-            if (userAcc != null) {
-                myObj = {
-                    SendDateTime:businessDt,
-                    UserName:localStorage.getItem("Username"),
-                    Ip:localStorage.getItem("LocalIp"),
-                    RequestObject: request.body,
-                    UserSessionLogId: userAcc.userSessionLogId,
-                    UserLog:JSON.parse(localStorage.getItem("PageAccess"))
-                };
-            }else {
-                myObj = {
-                    SendDateTime:businessDt,
-                    UserName:localStorage.getItem("Username"),
-                    Ip:localStorage.getItem("LocalIp"),
-                    RequestObject: request.body,
-                    UserLog:JSON.parse(localStorage.getItem("PageAccess"))
+                    UserLog: JSON.parse(localStorage.getItem("PageAccess"))
                 };
             }
         }
-        
-      
+
+
         if (token != "") {
             request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
         }
@@ -111,9 +113,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Credentials', 'true') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Methods', 'POST') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
-        request = request.clone({body: myObj});
-        AdInsHelper.InsertLog(request.url,"API",request.body);
-        console.log(JSON.stringify(request.body ));
+        request = request.clone({ body: myObj });
+        AdInsHelper.InsertLog(request.url, "API", request.body);
+        console.log(JSON.stringify(request.body));
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
@@ -127,16 +129,15 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                         //Kalau balikan dari Server error, lgsg return aja, biar g lanjut lagi
                         return;
                     }
-                    else{
+                    else {
                         //Kalau pake Http Get yang bukan ke Backend sendiri g punya token, jadi g boleh asal di replace
-                        if(event.body.token==undefined)
-                        {
-                            localStorage.setItem("Token",localStorage.getItem("Token"));
+                        if (event.body.token == undefined) {
+                            localStorage.setItem("Token", localStorage.getItem("Token"));
                         }
-                        else{
-                            localStorage.setItem("Token",event.body.token); 
+                        else {
+                            localStorage.setItem("Token", event.body.token);
                         }
-                        
+
                     }
                     // this.errorDialogService.openDialog(event);
                 }
@@ -151,17 +152,16 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 this.errorDialogService.openDialog(data);
                 console.log(JSON.stringify(request.body));
                 return throwError(error);
-            }),finalize(() => {
+            }), finalize(() => {
                 this.count--;
-                
-                if ( this.count == 0 ) {
-                    if(request.method=="POST")
-                    {
+
+                if (this.count == 0) {
+                    if (request.method == "POST") {
                         AdInsHelper.ClearPageAccessLog();
-                        this.spinner.hide ();
+                        this.spinner.hide();
                     }
                 }
             })
-            );
+        );
     }
 }
