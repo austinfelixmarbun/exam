@@ -20,7 +20,7 @@ import { environment } from 'environments/environment';
 export class LookupEmployeeComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
-  urlJson: string = "./assets/lookup/looktupEmp.json";
+  urlJson: string = "./assets/lookup/lookupEmp.json";
   urlQryPaging: string = AdInsConstant.GetListEmployee;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";

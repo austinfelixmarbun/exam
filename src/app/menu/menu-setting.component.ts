@@ -40,20 +40,20 @@ export class MenuSettingComponent implements OnInit {
     foundationUrl: string = environment.foundationUrl;
     refCoyId : any;
     constructor(private http: HttpClient,private route: ActivatedRoute, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) {}
-  
+
     ngOnInit() {
       this.pageNow = 1;
       this.pageSize = 10;
       this.apiUrl = this.foundationUrl + AdInsConstant.GetRefFormPaging;
     }
-  
+
     getResult(event){
       this.resultData = event.returnObject;
       this.totalData = event.returnObject.count;
       this.ucgridFooter.totalData = this.totalData;
       this.ucgridFooter.resultData = this.resultData;
     }
-  
+
     searchSort(event: any) {
       if (this.orderByKey == event.target.attributes.name.nodeValue) {
         this.orderByValue = !this.orderByValue
@@ -67,7 +67,7 @@ export class MenuSettingComponent implements OnInit {
       }
       this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
     }
-  
+
     searchPagination(event: number) {
       this.pageNow = event;
       var order = null;
@@ -79,7 +79,7 @@ export class MenuSettingComponent implements OnInit {
       }
       this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
     }
-    
+
     onChange() {
       var order = null;
       if (this.orderByKey != null) {
