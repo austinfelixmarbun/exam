@@ -8,6 +8,7 @@ import { RolePagingComponent } from 'app/system-setting/role/role-paging/role-pa
 import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.component';
 import { UserRoleDetailComponent } from 'app/system-setting/user/user-role-detail/user-role-detail.component';
 import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
+import { RoleFormFeatureComponent } from 'app/system-setting/role/role-form-feature/role-form-feature.component';
 const routes: Routes = [
   {
     path: '',
@@ -66,6 +67,13 @@ const routes: Routes = [
         component: RoleFormComponent,
         data: {
           title: 'Assign Form to Role'
+        },
+      },
+      {
+        path: 'roleForm/feature',
+        component: RoleFormFeatureComponent,
+        data: {
+          title: 'Assign Form Feature'
         },
       }
     ]

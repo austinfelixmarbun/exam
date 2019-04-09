@@ -4,7 +4,5 @@ export class RefRoleObj {
   roleName: string;
   isActive: string;
   listAddEmpPositionId: Array<any>;
-  listDelEmpPositionId: Array<any>;
-  listAddRefFormId: Array<any>;
-  listDelRefFormId: Array<any>;
+listDelEmpPositionId: Array<any>;
 }

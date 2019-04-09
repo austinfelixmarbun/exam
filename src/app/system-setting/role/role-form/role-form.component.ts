@@ -1,3 +1,4 @@
+import { AuthFormObj } from 'app/shared/model/AuthFormObj.Model';
 import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AdInsServiceService } from "app/ad-ins-service.service";
@@ -33,7 +34,7 @@ export class RoleFormComponent implements OnInit {
   show: any;
   exportData: any;
   excelData: any;
-  refRoleObj: RefRoleObj = new RefRoleObj();
+  refRoleObj: AuthFormObj = new AuthFormObj();
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
@@ -150,7 +151,7 @@ export class RoleFormComponent implements OnInit {
 
     var urlGetRefRoleGateway: any = 'http://172.19.10.228:8280/GWFoundation/v1/RefRole/GetRefRole';
 
-    this.refRoleObj = new RefRoleObj();
+    this.refRoleObj = new AuthFormObj();
     this.refRoleObj.refRoleId = this.refRoleId;
     console.log(urlGetRefRole);
     this.httpClient.post(urlGetRefRole, this.refRoleObj).subscribe(

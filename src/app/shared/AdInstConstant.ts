@@ -192,7 +192,12 @@ export class AdInsConstant {
     public static DeleteRefForm = "/MenuManagement/DeleteRefForm";
     public static AssignRoleToForms = "/MenuManagement/AssignRoleToForms";
     public static GetAllAuthFormsByRefRoleId = "/MenuManagement/GetAllAuthFormsByRefRoleId";
+    public static GetAuthByRefFormIdAndRefRoleId = "/MenuManagement/GetAuthByRefFormIdAndRefRoleId";
+    public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
 
+    //FORM FEATURE
+    public static GetListRefFeature = "/RefFeature/GetListRefFeature";
+    public static GetRefFeatureByComponent = "/RefFeature/GetRefFeatureByComponent";
 
     //HOLIDAY
     public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";

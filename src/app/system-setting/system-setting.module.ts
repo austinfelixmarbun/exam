@@ -13,10 +13,8 @@ import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/looku
 import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.component';
 import { UserRoleDetailComponent } from 'app/system-setting/user/user-role-detail/user-role-detail.component';
 import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.component';
-import { RoleFormComponent } from './role/role-form/role-form.component';
-
-
-
+import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
+import { RoleFormFeatureComponent } from 'app/system-setting/role/role-form-feature/role-form-feature.component';
 
 @NgModule({
   imports: [
@@ -36,7 +34,8 @@ import { RoleFormComponent } from './role/role-form/role-form.component';
     UserRoleComponent,
     UserRoleDetailComponent,
     RoleUserComponent,
-    RoleFormComponent
+    RoleFormComponent,
+    RoleFormFeatureComponent
   ],
   providers: [
     {
