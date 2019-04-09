@@ -33,6 +33,7 @@ export class OfficeComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   urlQryPaging : string = AdInsConstant.GetListOffice;
+  displayNone: boolean = false
 
   foundationUrl: string = environment.foundationUrl;
 
@@ -46,11 +47,6 @@ export class OfficeComponent implements OnInit {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListOffice;
     this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefOffice;
     
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
-    //   .subscribe(data => {
-    //     console.log(data);
-    //   }
-    //   )
   }
 
   // Success Type
