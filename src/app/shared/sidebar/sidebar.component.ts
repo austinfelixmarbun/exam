@@ -29,18 +29,18 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         $.getScript('./assets/js/app-sidebar.js');
-        this.url = "./assets/menu.json";
-        this.getJSON(this.url).subscribe
-            (data => {
-                //console.log(JSON.stringify(data));
-                this.menuItems = data;
-            }
-            );
+        // this.url = "./assets/menu.json";
+        // this.getJSON(this.url).subscribe
+        //     (data => {
+        //         //console.log(JSON.stringify(data));
+        //         this.menuItems = data;
+        //     }
+        //     );
         //this.menuItems = ROUTES.filter(menuItem => menuItem);
-        //this.menuItems = JSON.parse(localStorage.getItem("Menu"));
+        this.menuItems = JSON.parse(localStorage.getItem("Menu"));
         //this.menu = JSON.parse(localStorage.getItem("Menu"));
         //console.log(localStorage.getItem("Menu"));
-        //console.log(this.menu);
+        console.log(this.menuItems);
     }
 
     //NGX Wizard - skip url change

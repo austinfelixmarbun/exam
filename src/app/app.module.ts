@@ -36,6 +36,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { subscribeOn } from 'rxjs/operators';
 import { DatePipe, formatDate } from '@angular/common';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { GrowlModule } from 'primeng/primeng';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -74,7 +75,8 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         StorageServiceModule,
         MatDialogModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        GrowlModule
     ],
     providers: [
         AuthService,

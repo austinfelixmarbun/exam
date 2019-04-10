@@ -11,7 +11,8 @@
               <label class="col-md-3 label-control" for="EmpName">Employee Name</label>
               <div class="col-md-9">
 
-                <app-lookup-employee #lookupEmp [nameSelect] = "nameSelect" [idSelect]="idSelect" [jsonSelect]="jsonSelect"> </app-lookup-employee>
+                <app-lookup-employee #lookupEmp [nameSelect]="nameSelect" [idSelect]="idSelect"
+                  [jsonSelect]="jsonSelect"> </app-lookup-employee>
 
                 <!--<input type="text" class="form-control" name="EmployeeName" required [(ngModel)]="EmployeeName"
                     #employeeName="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">
@@ -59,21 +60,23 @@
             </div>
 
             <div class="newPass" *ngIf="  type === 'changePassword'">
-                <div class="form-group row">
-                    <label class="col-md-3 label-control" for="NewPassword">New Password</label>
-                    <div class="col-md-9">
-                      <input type="password" class="form-control" name="NewPassword" required [(ngModel)]="NewPassword"
-                        #newPassword="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && newPassword.invalid }">
-                      <div *ngIf="UserAddEditForm.submitted && newPassword.invalid" class="invalid-feedback">
-                        <div *ngIf="newPassword.errors.required">New Password is required</div>
-                      </div>
-                    </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="NewPassword">New Password</label>
+                <div class="col-md-9">
+                  <input type="password" class="form-control" name="NewPassword" required [(ngModel)]="NewPassword"
+                    #newPassword="ngModel"
+                    [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && newPassword.invalid }">
+                  <div *ngIf="UserAddEditForm.submitted && newPassword.invalid" class="invalid-feedback">
+                    <div *ngIf="newPassword.errors.required">New Password is required</div>
                   </div>
+                </div>
+              </div>
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="NewRePassword">New Re-Password</label>
                 <div class="col-md-9">
                   <input type="password" class="form-control" name="NewRePassword" required [(ngModel)]="NewRePassword"
-                    #newRePassword="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && newRePassword.invalid }">
+                    #newRePassword="ngModel"
+                    [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && newRePassword.invalid }">
                   <div *ngIf="UserAddEditForm.submitted && newRePassword.invalid" class="invalid-feedback">
                     <div *ngIf="newRePassword.errors.required">Re-Password is required</div>
                   </div>
@@ -81,19 +84,32 @@
               </div>
             </div>
             <div class="stat" *ngIf=" type !== 'changePassword' ">
-            <div class="form-group row">
-              <label class="col-md-3 label-control" for="IsActive">Active Status</label>
-              <div class="custom-control custom-checkbox m-0">
-                <input type="checkbox" value="1" id="IsActive" name="IsActive" [(ngModel)]="IsActive"
-                  [checked]="IsActive">
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="IsActive">Active Status</label>
+                <div class="custom-control custom-checkbox m-0">
+                  <input type="checkbox" value="1" id="IsActive" name="IsActive" [(ngModel)]="IsActive"
+                    [checked]="IsActive">
+                </div>
               </div>
             </div>
+            <div class="stat" *ngIf=" type !== 'changePassword' ">
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="loggedInMethod">Logged In Method: </label>
+                <div class="col-md-9">
+                  <select class="form-control" name="loggedInMethod" #LoggedInMethod [(ngModel)]="loggedInMethod">
+                    <option value="DB">Database</option>
+                    <option value="LDAP">Active Directory</option>
+                    <option value="INT">Interface</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
           </div>
           <div class="form-actions">
 
-            <button *ngIf=" type === 'edit' || type === 'changePassword'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+            <button *ngIf=" type === 'edit' || type === 'changePassword'" type="button" (click)="Back()"
+              class="btn btn-raised btn-warning mr-1">
               <i class="ft-x"></i> Back
             </button>
             <button type="submit" class="btn btn-raised btn-primary">
