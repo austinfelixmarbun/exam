@@ -20,37 +20,6 @@
     "submenu": [
       {
         "path": "",
-        "title": "Master Type",
-        "icon": "",
-        "class": "has-sub",
-        "badge": "",
-        "badgeClass": "",
-        "isExternalLink": false,
-        "submenu": [
-          {
-            "path": "/commonSetting/masterType",
-            "title": "Master Type Maintenance",
-            "icon": "",
-            "class": "",
-            "badge": "",
-            "badgeClass": "",
-            "isExternalLink": false,
-            "submenu": []
-          },
-          {
-            "path": "/commonSetting/masterType/detail",
-            "title": "Master Type Add",
-            "icon": "",
-            "class": "",
-            "badge": "",
-            "badgeClass": "",
-            "isExternalLink": false,
-            "submenu": []
-          }
-        ]
-      },
-      {
-        "path": "",
         "title": "Master",
         "icon": "",
         "class": "has-sub",
@@ -101,7 +70,7 @@
     "badgeClass": "",
     "isExternalLink": false,
     "submenu": [
-      
+
       { "path": "", "title": "Job Title", "icon": "", "class": "has-sub", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": [
         { "path": "/organization/refjobtitle", "title": "Job Title Maintenance", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": []},
         { "path": "/organization/refjobtitle/add", "title": "Add Job Title", "icon": "", "class": "", "badge": "", "badgeClass": "", "isExternalLink": false, "submenu": []}

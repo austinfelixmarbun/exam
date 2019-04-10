@@ -1,27 +1,28 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
-import { ExcelService } from 'app/shared/excel-service/excel-service';
-import { environment } from 'environments/environment';
+import { Router } from "@angular/router";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { NgbPaginationConfig } from "@ng-bootstrap/ng-bootstrap";
+import { AdInsServiceService } from "app/ad-ins-service.service";
+import { AdInsConstant } from "app/shared/AdInstConstant";
+import { SearchComponent } from "app/shared/search/search.component";
+import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { NgxSpinnerService } from "ngx-spinner";
+import { Http } from "@angular/http";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
+import { ExcelService } from "app/shared/excel-service/excel-service";
+import { environment } from "environments/environment";
+import { RefUserObj } from "app/shared/model/RefUserObj.Model";
 
 @Component({
-  selector: 'app-user-paging',
-  templateUrl: './user-paging.component.html',
+  selector: "app-user-paging",
+  templateUrl: "./user-paging.component.html",
   providers: [NGXToastrService, NGXToastrService, ExcelService]
 })
 export class UserPagingComponent implements OnInit {
-
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
-  urlJson: string = './assets/search/searchUser.json';
+  urlJson: string = "./assets/search/searchUser.json";
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -33,23 +34,24 @@ export class UserPagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging : string = AdInsConstant.GetRefUserPaging;
+  urlQryPaging: string = AdInsConstant.GetRefUserPaging;
   constructor(
     private http: Http,
     private spinner: NgxSpinnerService,
     private service: NGXToastrService,
     private adInsService: AdInsServiceService,
     private excelService: ExcelService,
-    private https: HttpClient
-  ) { }
+    private https: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.show = AdInsConstant.showData.split(',');
+    this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
     this.pageSize = this.show[0];
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefUserPaging;
 
-    this.initiateForm()
+    this.initiateForm();
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
@@ -57,15 +59,14 @@ export class UserPagingComponent implements OnInit {
     //   )
   }
 
-  getResult(event){
+  getResult(event) {
     this.resultData = event;
     this.totalData = event.returnObject.count;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
   }
 
-  onSelect(event)
-  {
+  onSelect(event) {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);
@@ -78,51 +79,72 @@ export class UserPagingComponent implements OnInit {
       order = {
         key: this.orderByKey,
         value: this.orderByValue
-      }
+      };
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    this.searchComponent
+      .search(this.apiUrl, this.pageNow, this.pageSize, order)
       .subscribe(
-        (response) => {
+        response => {
           console.log("Success");
           this.resultData = response.returnObject;
           this.totalData = response.returnObject.count;
           console.log(this.resultData);
         },
-        (error) => {
+        error => {
           console.log("Error");
           console.log(error);
         }
       );
   }
 
-  initiateForm() {
-
-  }
+  initiateForm() {}
 
   searchSort(event: any) {
     if (this.orderByKey == event.target.attributes.name.nodeValue) {
-      this.orderByValue = !this.orderByValue
+      this.orderByValue = !this.orderByValue;
     } else {
-      this.orderByValue = true
+      this.orderByValue = true;
     }
-    this.orderByKey = event.target.attributes.name.nodeValue
+    this.orderByKey = event.target.attributes.name.nodeValue;
     var order = {
       key: this.orderByKey,
       value: this.orderByValue
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    };
+    this.searchComponent
+      .search(this.apiUrl, this.pageNow, this.pageSize, order)
       .subscribe(
-        (response) => {
+        response => {
           console.log("Success");
           this.resultData = response;
           this.totalData = response.returnObject.count;
           console.log(this.resultData);
         },
-        (error) => {
+        error => {
           console.log("Error");
           console.log(error);
         }
       );
   }
 
+  resetPassword(id: any) {
+    if (confirm("Are you sure to reset this password to default?")) {
+      var resetPassUrl = this.foundationUrl + AdInsConstant.ResetPassword;
+      var refUser = new RefUserObj();
+      refUser.refUserId = id;
+      this.https.post(resetPassUrl, refUser).subscribe(
+        response => {
+          this.service.successMessage(response["message"]);
+          this.router
+            .navigateByUrl("/dashboard/dash-board", {
+              skipLocationChange: true
+            })
+            .then(() => this.router.navigate(["/systemSetting/refUser"]));
+        },
+        error => {
+          console.log(error);
+          this.service.typeErrorCustom(error);
+        }
+      );
+    }
+  }
 }

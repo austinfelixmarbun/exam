@@ -15,6 +15,7 @@ import { UserRoleDetailComponent } from 'app/system-setting/user/user-role-detai
 import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.component';
 import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
 import { RoleFormFeatureComponent } from 'app/system-setting/role/role-form-feature/role-form-feature.component';
+import { UserChangePasswordComponent } from 'app/system-setting/user/user-change-password/user-change-password.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { RoleFormFeatureComponent } from 'app/system-setting/role/role-form-feat
     UserRoleDetailComponent,
     RoleUserComponent,
     RoleFormComponent,
-    RoleFormFeatureComponent
+    RoleFormFeatureComponent,
+    UserChangePasswordComponent
   ],
   providers: [
     {

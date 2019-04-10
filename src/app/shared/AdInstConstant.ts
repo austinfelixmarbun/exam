@@ -122,6 +122,7 @@ export class AdInsConstant {
     public static GetUserByUsername = "/UserManagement/GetUserByUsername";
     public static ValidatePwd = "/UserManagement/ValidatePwd";
     public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
+    public static ResetPassword = "/UserManagement/ResetPassword";
 
     //REF-ROLE
     public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";

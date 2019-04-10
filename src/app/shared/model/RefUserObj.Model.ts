@@ -8,6 +8,5 @@ export class RefUserObj {
   newPass: string;
   oldPass: string;
   newPassVerif: string;
-
-
+  isReset: boolean;
 }
