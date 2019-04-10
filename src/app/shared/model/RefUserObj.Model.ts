@@ -8,6 +8,7 @@ export class RefUserObj {
   newPass: string;
   oldPass: string;
   newPassVerif: string;
+  loggedInMethod: any;
 
 
 }

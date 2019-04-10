@@ -33,6 +33,7 @@ export class UserAddEditComponent implements OnInit {
   RePassword: any;
   IsActive: any;
   RefUserId: any;
+  loggedInMethod: any = 'DB'
 
   constructor(
     private router: Router,
@@ -76,8 +77,12 @@ export class UserAddEditComponent implements OnInit {
           this.refUserObj.password = userTemp.password;
           this.refUserObj.isActive = userTemp.isActive;
           this.refUserObj.isLockedOut = userTemp.isLockedOut;
+          this.refUserObj.loggedInMethod = userTemp.loggedInMethod;
 
           this.Username = this.refUserObj.username;
+          if (this.refUserObj.loggedInMethod != null) {
+            this.loggedInMethod = this.refUserObj.loggedInMethod;
+          }
 
           if (this.refUserObj.isActive === "1") {
             this.IsActive = true;
@@ -181,6 +186,7 @@ export class UserAddEditComponent implements OnInit {
                     this.refUserObj.refEmpId = lookupEmp.idSelect;
                     this.refUserObj.username = UserAddEditForm.value.Username;
                     this.refUserObj.password = UserAddEditForm.value.Password;
+                    this.refUserObj.loggedInMethod = UserAddEditForm.value.loggedInMethod;
                     this.refUserObj.isLockedOut = '0';
 
 
@@ -240,6 +246,7 @@ export class UserAddEditComponent implements OnInit {
           } else {
             this.refUserObj.refEmpId = lookupEmp.idSelect;
             this.refUserObj.username = UserAddEditForm.value.Username;
+            this.refUserObj.loggedInMethod = UserAddEditForm.value.loggedInMethod;
             if (UserAddEditForm.value.IsActive) {
               this.refUserObj.isActive = "1";
             } else {
