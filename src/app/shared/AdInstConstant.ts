@@ -208,4 +208,7 @@ export class AdInsConstant {
 
     //USER SESSION LOG
     public static SelectRole = "/UserSessionLog/SelectRole";
+
+    //NOTIFICATION
+    public static NotificationPost = "/Message/Post";
 }

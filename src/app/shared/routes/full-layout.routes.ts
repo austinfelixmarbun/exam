@@ -114,7 +114,8 @@ export const Full_ROUTES: Routes = [
   {
     path: 'customer',
     loadChildren: './customer/customer.module#CustomerModule'
-  },{
+  },
+  {
     path: 'zipcode',
     loadChildren: './zipcode/zipcode.module#ZipcodeModule'
   },
@@ -133,5 +134,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'menuSetting',
     loadChildren: './menu/menu-setting.module#MenuSettingModule'
+  },
+  {
+    path: 'notification',
+    loadChildren: './notification/notification.module#NotificationModule'
   }
 ];

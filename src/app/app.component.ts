@@ -24,5 +24,13 @@ export class AppComponent implements OnInit {
         this._hubConnection.on('BroadcastMessage', (type: string, payload: string) => {
             this.msgs.push({ severity: type, summary: payload });
         });
+        this._hubConnection.on('SendPrivateMessage', (user: string, message: string) => {
+            console.log(user)
+            console.log(message)
+        });
+        this._hubConnection.on('SendMessageToClient', (title, user, message) => {
+            const received = `title: ${title}, name: ${user}, message: ${message}`;
+            console.log(received);
+        });
     }
 }
