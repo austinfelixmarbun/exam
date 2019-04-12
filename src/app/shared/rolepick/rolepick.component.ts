@@ -29,7 +29,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
     console.log(item);
     var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
     var roleUrl = environment.foundationUrl + AdInsConstant.SelectRole;
-    var roleObject = { RefRoleId: item.refRoleId};
+    var roleObject = { RefRoleId: item.refRoleId, ModuleCode: "FOUNDATION"};
     this.http.post(url, roleObject).subscribe(
       (response) => {
         localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));

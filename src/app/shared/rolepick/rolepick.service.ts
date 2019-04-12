@@ -28,7 +28,7 @@ export class RolePickService {
                     if (obj.length == 1 && type == "") {
                         var item = obj[0];
                         var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
-                        var roleObject = { RefRoleId: item.refRoleId };
+                        var roleObject = { RefRoleId: item.refRoleId, ModuleCode: "FOUNDATION" };
                         this.http.post(url, roleObject).subscribe(
                             (response) => {
                                 localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
@@ -76,7 +76,7 @@ export class RolePickService {
             if (obj.length == 1 && type == "") {
                 var item = obj[0];
                 var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
-                var roleObject = { RefRoleId: item.refRoleId };
+                var roleObject = { RefRoleId: item.refRoleId, ModuleCode: "FOUNDATION" };
                 this.http.post(url, roleObject).subscribe(
                     (response) => {
                         localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
