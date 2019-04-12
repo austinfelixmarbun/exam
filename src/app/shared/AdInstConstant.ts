@@ -7,6 +7,7 @@ export class AdInsConstant {
     public static TimeoutSession = 6000000;
     public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
     public static Login = "/UserManagement/HTML5Login";
+    public static LoginToken = "/UserManagement/HTML6Login";
     public static Logout = "/UserManagement/LogOut"
     public static GetListOffice = "/RefOffice/GetRefOfficePaging";
     public static GetProvince = "/los/v1/get_provinsi";

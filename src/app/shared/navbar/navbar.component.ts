@@ -2,7 +2,7 @@ import { Component, AfterViewChecked } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { RolePickService} from 'app/shared/rolepick/rolepick.service'; 
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment.prod';
+import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -20,6 +20,7 @@ export class NavbarComponent implements AfterViewChecked {
     placement = 'bottom-right'
     displayName : string;
     public isCollapsed = true;
+    token : string;
 
     constructor(public translate: TranslateService,
         private router: Router,
@@ -48,7 +49,7 @@ export class NavbarComponent implements AfterViewChecked {
     }
 
     logout(){
-        var url = environment.coreUrl+AdInsConstant.Logout;
+        var url = environment.foundationUrl+AdInsConstant.Logout;
         this.http.post(url,"");
         AdInsHelper.ClearAllLog();
         this.router.navigate(['pages/login']);
@@ -65,6 +66,12 @@ export class NavbarComponent implements AfterViewChecked {
 
     ChangeLanguage(language: string) {
         this.translate.use(language);
+    }
+
+    changeModul(modul : string) {
+        var token = localStorage.getItem("Token");
+        var url = environment.losUrl +"?token="+token;
+        window.open( url , "_blank");
     }
 
     ToggleClass() {
