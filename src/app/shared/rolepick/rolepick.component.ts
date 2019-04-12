@@ -15,52 +15,51 @@ import { formatDate } from '@angular/common';
 })
 export class RolepickComponent implements OnInit, AfterViewInit {
 
-  
+
   ngAfterViewInit(): void {
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: string,
-  private currentUserContextService: CurrentUserContextService,
-  private http: HttpClient,
-  private router: Router) {
+    private currentUserContextService: CurrentUserContextService,
+    private http: HttpClient,
+    private router: Router) {
   }
 
-  chooseRole(item){
+  chooseRole(item) {
     console.log(item);
     var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
     var roleUrl = environment.foundationUrl + AdInsConstant.SelectRole;
-    var roleObject = {RefRoleId:item.refRoleId};
-    this.http.post(url,roleObject).subscribe(
+    var roleObject = { RefRoleId: item.refRoleId, ModuleCode: "FOUNDATION"};
+    this.http.post(url, roleObject).subscribe(
       (response) => {
-        localStorage.setItem("Menu",JSON.stringify(response["returnObject"]));
-        var currentUserContext = new CurrentUserContext;
-        currentUserContext.UserName = localStorage.getItem("Username");
-        currentUserContext.Office = item.officeCode;
-        currentUserContext.Role = item.roleCode;
-        currentUserContext.BusinessDate = item.businessDt;
-        var dateParse = formatDate(item.businessDt, 'yyyy-MM-dd', 'en-US');
-        localStorage.setItem("BusinessDate",dateParse);
-        localStorage.setItem("UserAccess",JSON.stringify(item));
-        this.currentUserContextService.addCurrentUserContext(currentUserContext);
-        localStorage.setItem("RoleId",item.refRoleId);
+        localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
 
-        this.http.post(roleUrl,item).subscribe(
+        this.http.post(roleUrl, item).subscribe(
           (response) => {
+            var currentUserContext = new CurrentUserContext;
+            currentUserContext.UserName = response["returnObject"].userId;
+            currentUserContext.Office = item.officeCode;
+            currentUserContext.Role = item.roleCode;
+            currentUserContext.BusinessDate = item.businessDt;
+            var dateParse = formatDate(item.businessDt, 'yyyy-MM-dd', 'en-US');
+            localStorage.setItem("BusinessDate", dateParse);
+            this.currentUserContextService.addCurrentUserContext(currentUserContext);
+            localStorage.setItem("RoleId", item.refRoleId);
             console.log(response);
-            localStorage.setItem("UserAccess",JSON.stringify(response["returnObject"]));
+            localStorage.setItem("UserAccess", JSON.stringify(response["returnObject"]));
             this.router.navigate(['dashboard/dash-board']);
           },
-          (error) =>{
+          (error) => {
             console.log(error);
           }
         )
 
       },
-      (error) =>{
+      (error) => {
         console.log(error);
       }
     )
-    
+
   }
 
   ngOnInit() {
