@@ -12,7 +12,6 @@
       <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)" name='empName'>Employee
           Name</span></th>
       <th>Roles</th>
-      <th>Change Password</th>
       <th>Reset Password</th>
       <th>Edit</th>
     </tr>
@@ -25,12 +24,6 @@
       <td>
         <a class="success p-0" data-original-title="" title="" [routerLink]="['/systemSetting/userRole']"
         [queryParams]="{refUserId:item.refUserId}">
-          <i class="ft-edit-2 font-medium-3 mr-2"></i>
-        </a>
-      </td>
-      <td>
-        <a class="success p-0" data-original-title="" title="" [routerLink]="['/systemSetting/refUser/detail']"
-        [queryParams]="{refUserId:item.refUserId,mode:'changePassword'}">
           <i class="ft-edit-2 font-medium-3 mr-2"></i>
         </a>
       </td>

@@ -136,7 +136,7 @@ export class BodAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyAdd).subscribe(
                     (response) => {
                         console.log(response);
-                        this.router.navigateByUrl('/company/bod');
+                        this.router.navigateByUrl('/company/bod?refCoyId' + this.refCoyId);
                     },
                     (error) => {
                         console.log(error);
@@ -147,7 +147,7 @@ export class BodAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyAdd).subscribe(
                     (response) => {
                         console.log(response);
-                        this.router.navigateByUrl('/company/bod');
+                        this.router.navigateByUrl('/company/bod?refCoyId' + this.refCoyId);
                     },
                     (error) => {
                         console.log(error);
@@ -156,4 +156,4 @@ export class BodAddComponent implements OnInit {
 
     }
 
-} 
+}

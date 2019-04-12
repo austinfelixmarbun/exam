@@ -15,7 +15,7 @@
                     #GsCode="ngModel" [ngClass]="{ 'is-invalid': GSForm.submitted && GsCode.invalid }"
                     [attr.disabled]="type === 'edit' ? true : null">
                   <div *ngIf="GSForm.submitted && GsCode.invalid" class="invalid-feedback">
-                    <div *ngIf="GSForm.errors.required">Required</div>
+                    <div *ngIf="GSForm.errors.required">This is required</div>
                   </div>
                 </div>
               </div>
@@ -27,7 +27,7 @@
                   <input type="text" class="form-control" name="gsName" required [(ngModel)]="gsName"
                     #GsName="ngModel" [ngClass]="{ 'is-invalid': GSForm.submitted && GsName.invalid }">
                   <div *ngIf="GSForm.submitted && GsName.invalid" class="invalid-feedback">
-                    <div *ngIf="GsName.errors.required">Required</div>
+                    <div *ngIf="GsName.errors.required">This is required</div>
                   </div>
                 </div>
               </div>
@@ -38,7 +38,7 @@
                   <input type="text" class="form-control" name="gsValue" required [(ngModel)]="gsValue"
                     #GsValue="ngModel" [ngClass]="{ 'is-invalid': GSForm.submitted && GsValue.invalid }">
                   <div *ngIf="GSForm.submitted && GsValue.invalid" class="invalid-feedback">
-                    <div *ngIf="GsValue.errors.required">Required</div>
+                    <div *ngIf="GsValue.errors.required">This is required</div>
                   </div>
                 </div>
               </div>
@@ -46,10 +46,11 @@
               <div class="form-group row">
                   <label class="col-md-3 label-control" for="gsDescr">General Setting Description</label>
                   <div class="col-md-9">
-                      <textarea id="gsDescr" rows="6" class="form-control" name="gsDescr" required [(ngModel)]="gsDescr"></textarea>
-                      <!-- #GsDescr="ngModel" [ngClass]="{ 'is-invalid': GSForm.submitted && GsDescr.invalid }">
-                    <div *ngIf="GSForm.submitted && GsDescr.invalid" class="invalid-feedback"></textarea>
-                      <div *ngIf="GsDescr.errors.required">Required</div> -->
+                      <textarea id="gsDescr" rows="6" class="form-control" name="gsDescr" required [(ngModel)]="gsDescr"
+                      #GsDescr="ngModel" [ngClass]="{ 'is-invalid': GSForm.submitted && GsDescr.invalid }"></textarea>
+                      <div *ngIf="GSForm.submitted && GsDescr.invalid" class="invalid-feedback">
+                        <div *ngIf="GsDescr.errors.required">This is required</div>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -120,7 +120,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(this.areaUrl, null).subscribe(
         (response) => {
           this.allRefOfficeArea = response['returnObject'];
-          // this.refOfficeAreaId = response['returnObject'][0]['refOfficeAreaId'];
+          //this.refOfficeAreaId = response['returnObject'][0]['refOfficeAreaId'];
         },
         (error) => {
           console.log(error);
@@ -165,6 +165,8 @@ export class OfficeAddComponent implements OnInit {
           this.refOfficeAreaId = response['returnObject']['refOfficeAreaId']
           this.holidaySchmHId = response['returnObject']['holidaySchmHId']
           this.workingHourSchmHId = response['returnObject']['workingHourSchmHId']
+          this.parentId = response['returnObject']['parentId']
+
           if (this.resultData.isAllowAppCreated == "1") {
             this.isAllowAppCreated = true;
           }
@@ -181,7 +183,7 @@ export class OfficeAddComponent implements OnInit {
           this.refTaxOfficeId = response['returnObject']['refTaxOfficeId']
           this.ucAddr.setData(this.resultData);
           this.ucContact.setData(this.resultData);
-
+          var orgMdlObj = new OrgMdlObj();
           this.httpClient.post(this.officeClassUrl, this.refMasterObj).subscribe(
             (response) => {
               this.allOfficeClass = response['returnObject'];
@@ -223,8 +225,18 @@ export class OfficeAddComponent implements OnInit {
               this.allRefTaxOffice = response['returnObject'];
             },
             (error) => {
-              console.log(error);
-            })
+              console.log(error + this.refTaxOfficeUrl);
+            }),
+
+            orgMdlObj.refOrgId = this.refOrgId
+            this.httpClient.post(this.officeParentUrl, orgMdlObj).subscribe(
+              (response) => {
+                this.allOfficeParent = response['returnObject'];
+              },
+              (error) => {
+                console.log(error + ' Parent 1');
+              })
+
         })
     }
   }
@@ -291,7 +303,8 @@ export class OfficeAddComponent implements OnInit {
           console.log("Success");
           console.log(response);
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/office"]);
+          this.router.navigateByUrl('/Office', { skipLocationChange: true }).then(() =>
+          this.router.navigate(['/Office/add']));
         },
         (error) => {
           console.log("Error");
@@ -370,7 +383,7 @@ export class OfficeAddComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error);
+        console.log(error + ' Parent 2');
       })
   }
 }

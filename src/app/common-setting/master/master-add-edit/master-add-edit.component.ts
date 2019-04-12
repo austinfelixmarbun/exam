@@ -29,6 +29,7 @@ export class MasterAddEditComponent implements OnInit {
   isActive: any;
   refMasterId: any;
   resultData: any;
+  sandiBI: any;
 
   constructor(
     private router: Router,
@@ -66,6 +67,7 @@ export class MasterAddEditComponent implements OnInit {
           console.log(this.refMasterObj);
           this.masterCodeModel = response['returnObject']['masterCode']
           this.descrModel = response['returnObject']['descr']
+          this.sandiBI = response['returnObject']['biCode']
           if (this.refMasterObj.isActive === '1') { this.isActive = true; } else { this.isActive = false; }
           if (this.refMasterObj.refMasterTypeCode === null) { this.refMasterTypeCodeModule = '' } else { this.refMasterTypeCodeModule = this.refMasterObj.refMasterTypeCode };
         },
@@ -109,7 +111,7 @@ export class MasterAddEditComponent implements OnInit {
             this.refMasterObj.refMasterTypeCode = MasterAddEditForm.value.refMasterTypeCodeModule;
             this.refMasterObj.masterCode = MasterAddEditForm.value.masterCodeModel;
             this.refMasterObj.descr = MasterAddEditForm.value.descrModel;
-            this.refMasterObj.biCode = '0';
+            this.refMasterObj.biCode = MasterAddEditForm.value.sandiBI;
             this.refMasterObj.isSystem = '0';
             if (MasterAddEditForm.value.isActive) { this.refMasterObj.isActive = '1' } else { this.refMasterObj.isActive = '0' };
 
@@ -147,6 +149,7 @@ export class MasterAddEditComponent implements OnInit {
       this.refMasterObj.refMasterTypeCode = MasterAddEditForm.value.refMasterTypeCodeModule;
       this.refMasterObj.masterCode = MasterAddEditForm.value.masterCodeModel;
       this.refMasterObj.descr = MasterAddEditForm.value.descrModel;
+      this.refMasterObj.biCode = MasterAddEditForm.value.sandiBI;
       if (MasterAddEditForm.value.isActive) { this.refMasterObj.isActive = '1' } else { this.refMasterObj.isActive = '0' };
 
       //SAVE

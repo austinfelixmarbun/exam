@@ -29,7 +29,7 @@
                   #username="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }"
                   [attr.disabled]="type === 'edit' ||  type === 'changePassword' ? true : null">
                 <div *ngIf="UserAddEditForm.submitted && username.invalid" class="invalid-feedback">
-                  <div *ngIf="username.errors.required">Username is required</div>
+                  <div *ngIf="username.errors.required">This is required</div>
                 </div>
               </div>
             </div>
@@ -39,9 +39,9 @@
                 <label class="col-md-3 label-control" for="Password">Password</label>
                 <div class="col-md-9">
                   <input type="password" class="form-control" name="Password" required [(ngModel)]="Password"
-                    #password="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">
+                    #password="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && password.invalid }">
                   <div *ngIf="UserAddEditForm.submitted && password.invalid" class="invalid-feedback">
-                    <div *ngIf="password.errors.required">Password is required</div>
+                    <div *ngIf="password.errors.required">This is required</div>
                   </div>
                 </div>
               </div>
@@ -53,36 +53,12 @@
                   <input type="password" class="form-control" name="RePassword" required [(ngModel)]="RePassword"
                     #rePassword="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && rePassword.invalid }">
                   <div *ngIf="UserAddEditForm.submitted && rePassword.invalid" class="invalid-feedback">
-                    <div *ngIf="rePassword.errors.required">Re-Password is required</div>
+                    <div *ngIf="rePassword.errors.required">This is required</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="newPass" *ngIf="  type === 'changePassword'">
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="NewPassword">New Password</label>
-                <div class="col-md-9">
-                  <input type="password" class="form-control" name="NewPassword" required [(ngModel)]="NewPassword"
-                    #newPassword="ngModel"
-                    [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && newPassword.invalid }">
-                  <div *ngIf="UserAddEditForm.submitted && newPassword.invalid" class="invalid-feedback">
-                    <div *ngIf="newPassword.errors.required">New Password is required</div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="NewRePassword">New Re-Password</label>
-                <div class="col-md-9">
-                  <input type="password" class="form-control" name="NewRePassword" required [(ngModel)]="NewRePassword"
-                    #newRePassword="ngModel"
-                    [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && newRePassword.invalid }">
-                  <div *ngIf="UserAddEditForm.submitted && newRePassword.invalid" class="invalid-feedback">
-                    <div *ngIf="newRePassword.errors.required">Re-Password is required</div>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="stat" *ngIf=" type !== 'changePassword' ">
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="IsActive">Active Status</label>

@@ -5,30 +5,35 @@
         <div class="card-body">
           <div class="px-3">
             <form class="form form-horizontal" name="OrgAddEditForm" #OrgAddEditForm="ngForm"
-              (ngSubmit)="Save(OrgAddEditForm)" >
+              (ngSubmit)="OrgAddEditForm.form.valid && Save(OrgAddEditForm)">
               <div class="form-body">
                 <h4 class="form-section"><i class="ft-user"></i>Organization - {{mode}}</h4>
                 <div class="form-group row">
                   <label class="col-md-3 label-control" for="orgName">Organization Name</label>
                   <div class="col-md-9">
                     <input type="text" id="orgName" class="form-control" required name="orgName" [(ngModel)]="orgName"
-                    #required="ngModel" required >
-                    <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
+                      #OrgName="ngModel" [ngClass]="{ 'is-invalid': OrgAddEditForm.submitted && OrgName.invalid }">
+                      <div *ngIf="OrgAddEditForm.submitted && OrgName.invalid" class="invalid-feedback">
+                        <div *ngIf="OrgName.errors.required">Job Title Code is required</div>
+                      </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 label-control" for="hierarchyNo">Hierarchy No</label>
                   <div class="col-md-9">
                     <input type="text" id="hierarchyNo" class="form-control" required name="hierarchyNo"
-                      [(ngModel)]="hierarchyNo" #required="ngModel" required >
-                      <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
+                      [(ngModel)]="hierarchyNo" #HierarchyNo="ngModel"
+                      [ngClass]="{ 'is-invalid': OrgAddEditForm.submitted && HierarchyNo.invalid }">
+                      <div *ngIf="OrgAddEditForm.submitted && HierarchyNo.invalid" class="invalid-feedback">
+                        <div *ngIf="HierarchyNo.errors.required">Job Title Code is required</div>
+                      </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 label-control" for="parentId">Parent Organization</label>
                   <div class="col-md-9">
-                    <select id="parentId" name="parentId" class="form-control" [(ngModel)]="parentId">
-                      <option value="">None</option>
+                    <select id="parentId" name="parentId" class="form-control" [(ngModel)]="parentId" required>
+                      <option [value]="" selected="None">None</option>
                       <option *ngFor="let item of parents?.returnObject" [value]="item.refOrgId">{{item.orgName}}
                       </option>
                     </select>
@@ -36,26 +41,26 @@
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 label-control" for="isActive">Active Status</label>
-                 <div class="custom-control custom-checkbox m-0">
-                    <input type="checkbox" value="1" id="isActive" name="isActive" required
-                      [(ngModel)]="isActive" [checked]="isActive">
+                  <div class="custom-control custom-checkbox m-0">
+                    <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
+                      [checked]="isActive">
+                  </div>
                 </div>
               </div>
+
+              <div class="form-actions">
+
+                <button *ngIf=" mode === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                  <i class="ft-x"></i> Back
+                </button>
+                <button type="submit" class="btn btn-raised btn-primary">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+              </div>
+
+            </form>
           </div>
-
-          <div class="form-actions">
-
-              <button *ngIf=" mode === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-                <i class="ft-x"></i> Back
-              </button>
-            <button type="submit" class="btn btn-raised btn-primary">
-              <i class="fa fa-check-square-o"></i> Save
-            </button>
-          </div>
-
-          </form>
         </div>
       </div>
     </div>
-  </div>
   </div>

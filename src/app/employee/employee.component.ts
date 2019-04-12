@@ -110,6 +110,7 @@ export class EmployeeComponent implements OnInit {
       this.httpClient.post(this.deleteUrl, this.empObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
+          this.searchPagination(this.pageNow);
         },
         (error) => {
           console.log("Error");
@@ -118,12 +119,12 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  
+
 
   reset(){
     this.searchComponent.initiateForm();
   }
-  
+
   exportAsXLSX(): void {
     this.searchComponent.search(this.apiUrl, this.pageNow, 9999, null)
       .subscribe(

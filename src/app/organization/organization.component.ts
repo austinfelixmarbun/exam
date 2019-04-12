@@ -92,6 +92,20 @@ export class OrganizationComponent implements OnInit {
       );
   }
 
+  searchSort(event: any) {
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
+    }
+    this.orderByKey = event.target.attributes.name.nodeValue
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+  }
+
   del(id: any) {
     if (confirm("Are you sure to delete this record?")) {
       var url = this.foundationUrl + AdInsConstant.DeleteRefOrg;

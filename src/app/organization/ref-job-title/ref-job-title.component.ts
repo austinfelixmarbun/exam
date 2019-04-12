@@ -104,7 +104,7 @@ export class RefJobTitleComponent implements OnInit {
       this.httpClient.post(this.deleteUrl, this.rjtObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.onSelect;
+          this.searchPagination(this.pageNow);
         });
     }
   }

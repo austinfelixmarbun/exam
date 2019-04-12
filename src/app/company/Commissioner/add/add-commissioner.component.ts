@@ -101,6 +101,7 @@ export class CommissionerAddComponent implements OnInit {
             var coyCommisionerObj = new CoyCommissionerObj();
             console.log(ucAddress);
             console.log(ucContactInfo);
+            coyCommisionerObj.refCoyId = +this.refCoyId;
             coyCommisionerObj.name = form.value.name;
             coyCommisionerObj.jobTitle = form.value.jobTitle;
             coyCommisionerObj.npwp = form.value.npwp;
@@ -137,7 +138,7 @@ export class CommissionerAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
                         console.log(response);
-                        this.router.navigateByUrl('/company/commissioner');
+                        this.router.navigateByUrl('/company/commissioner?refCoyId=' + this.refCoyId);
                     },
                     (error) => {
                         console.log(error);
@@ -148,7 +149,7 @@ export class CommissionerAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
                         console.log(response);
-                        this.router.navigateByUrl('/company/commissioner');
+                        this.router.navigateByUrl('/company/commissioner?refCoyId=' + this.refCoyId);
                     },
                     (error) => {
                         console.log(error);
@@ -157,4 +158,4 @@ export class CommissionerAddComponent implements OnInit {
 
     }
 
-} 
+}

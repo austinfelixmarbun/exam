@@ -108,14 +108,8 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" pattern="^[0-9]+$" id="phnExt1" class="form-control" name="phnExt1" required
-                            [(ngModel)]="phnExt1" #PhnExt1="ngModel"
-                            [ngClass]="{ 'is-invalid':(parentForm.submitted || PhnExt1.touched || PhnExt1.dirty) && PhnExt1.invalid }">
-                        <div *ngIf=" (parentForm.submitted || PhnExt1.touched || PhnExt1.dirty) && PhnExt1.invalid"
-                            class="invalid-feedback">
-                            <div *ngIf="PhnExt1.errors.required" translate>This field is required</div>
-                            <div *ngIf="PhnExt1.errors?.pattern" translate>Number Only</div>
-                        </div>
+                        <input type="text" pattern="^[0-9]+$" id="phnExt1" class="form-control" name="phnExt1"
+                            [(ngModel)]="phnExt1" #PhnExt1="ngModel">
                     </div>
                 </div>
             </div>

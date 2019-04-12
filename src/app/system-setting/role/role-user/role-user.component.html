@@ -27,26 +27,26 @@
                   <thead>
                     <tr class="table-header">
                       <th>Action</th>
-                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                      <th><span class="thead-header" (click)="searchSort($event)"
                           name='officeCode'>OfficeCode
                         </span></th>
                       <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
                           name='officeName'>Office Name
                         </span></th>
                       <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
-                          name='busUnitName'>Business Unit
+                          name='bizUnitName'>Business Unit
                           Name</span></th>
                       <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
                           name='jobTitleName'>Job Title Name</span>
                       </th>
-                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
-                          name='empNo'>Employee No</span>
+                      <th><span class="thead-header" (click)="searchSort($event)"
+                          name='employeeNo'>Employee No</span>
                       </th>
                       <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
-                          name='empName'>Employee Name</span>
+                          name='employeeName'>Employee Name</span>
                       </th>
-                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
-                          name='userName'>User Name</span>
+                      <th><span class="thead-header" (click)="searchSort($event)"
+                          name='username'>User Name</span>
                       </th>
                     </tr>
                   </thead>
@@ -72,9 +72,9 @@
                       <td align="left">{{item.officeName}}</td>
                       <td align="left">{{item.bizUnitName}}</td>
                       <td align="left">{{item.jobTitleName}}</td>
-                      <td align="left">{{item.employeeNo}}</td>
+                      <td>{{item.employeeNo}}</td>
                       <td align="left">{{item.employeeName}}</td>
-                      <td align="left">{{item.username}}</td>
+                      <td>{{item.username}}</td>
 
                     </tr>
                   </tbody>

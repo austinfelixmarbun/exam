@@ -13,7 +13,8 @@
               <label class="col-md-3 label-control" for="jobTitleCode">Job Title Code: </label>
               <div class="col-md-9">
                 <input type="text" class="form-control" name="jobTitleCode" [(ngModel)]="jobTitleCode"
-                #JobTitleCode="ngModel" [ngClass]="{ 'is-invalid': RefJobTitleForm.submitted && JobTitleCode.invalid }">
+                #JobTitleCode="ngModel" [ngClass]="{ 'is-invalid': RefJobTitleForm.submitted && JobTitleCode.invalid }"
+                [attr.disabled]="pageType === 'edit' ? true : null" required>
                 <div *ngIf="RefJobTitleForm.submitted && JobTitleCode.invalid" class="invalid-feedback">
                   <div *ngIf="JobTitleCode.errors.required">Job Title Code is required</div>
                 </div>
@@ -23,7 +24,7 @@
               <label class="col-md-3 label-control" for="jobTitleName">Job Title Name: </label>
               <div class="col-md-9">
                 <input type="text" class="form-control" name="jobTitleName" [(ngModel)]="jobTitleName"
-                #JobTitleName="ngModel" [ngClass]="{ 'is-invalid': RefJobTitleForm.submitted && JobTitleName.invalid }">
+                #JobTitleName="ngModel" [ngClass]="{ 'is-invalid': RefJobTitleForm.submitted && JobTitleName.invalid }" required>
                 <div *ngIf="RefJobTitleForm.submitted && JobTitleName.invalid" class="invalid-feedback">
                   <div *ngIf="JobTitleName.errors.required">Job Title Name is required</div>
                 </div>
@@ -33,7 +34,7 @@
               <label class="col-md-3 label-control" for="refOrgId">Organization Level: </label>
               <div class="col-md-9">
                 <select class="form-control" id="refOrgId" name="refOrgId" [(ngModel)]="refOrgId" #RefOrgId="ngModel"
-                  >
+                required>
                   <option *ngFor="let ro of allRefOrg" value="{{ro.refOrgId}}">{{ro.orgName}}</option>
                 </select>
               </div>
@@ -41,8 +42,8 @@
             <div class="form-group row">
               <label class="col-md-3 label-control" for="mrJobPositionLvl">Position Level: </label>
               <div class="col-md-9">
-                <select class="form-control" id="mrJobPositionLvl" name="mrJobPositionLvl" [(ngModel)]="MrJobPositionLvl" #mrJobPositionLvl="ngModel"
-                  >
+                <select class="form-control" id="mrJobPositionLvl" name="mrJobPositionLvl" [(ngModel)]="mrJobPositionLvl" #MrJobPositionLvl="ngModel"
+                required>
                   <option *ngFor="let pos of allJobPosition" value="{{pos.descr}}">{{pos.descr}}</option>
                 </select>
               </div>
@@ -63,7 +64,7 @@
             </div>
           </div>
           <div class="form-actions right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/organization/refjobtitle']">
+            <button *ngIf="pageType === 'edit'" type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/organization/refjobtitle']">
               <i class="ft-x"></i> Cancel
             </button>
             <button type="submit" class="btn btn-raised btn-primary">

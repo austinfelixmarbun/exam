@@ -46,6 +46,14 @@
               </div>
 
               <div class="form-group row">
+                <label class="col-md-3 label-control" for="sandiBI">Sandi BI</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="sandiBI" required [(ngModel)]="sandiBI"
+                    #descr="ngModel">
+                </div>
+              </div>
+
+              <div class="form-group row">
                 <label class="col-md-3 label-control" for="isActive">Active Status</label>
                 <div class="custom-control custom-checkbox m-0">
                   <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"

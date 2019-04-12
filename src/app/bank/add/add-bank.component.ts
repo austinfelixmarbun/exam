@@ -31,7 +31,7 @@ export class BankAddComponent implements OnInit {
     bankObj: RefBankObj;
     editUrl: any;
 
-    constructor(private router: Router,private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
+    constructor(private toastr: NGXToastrService, private router: Router,private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refBankId"];
             this.mode = params["mode"];
@@ -78,6 +78,7 @@ export class BankAddComponent implements OnInit {
                 (response) => {
                     console.log(response);
                     this.router.navigateByUrl('/bank');
+                    this.toastr.successMessage(response['message']);
                 },
                 (error)=>
                 {
@@ -99,7 +100,9 @@ export class BankAddComponent implements OnInit {
             this.http.post(this.editUrl, this.bankObj).subscribe(
                 (response) => {
                     console.log(response);
-                    this.router.navigateByUrl('/bank');
+                    this.toastr.successMessage(response['message']);
+                    this.router.navigateByUrl('/bank', { skipLocationChange: true }).then(() =>
+                    this.router.navigate(['/bank/add']));
                 },
                 (error)=>
                 {

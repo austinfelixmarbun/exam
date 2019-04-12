@@ -88,7 +88,9 @@ export class RoleFormFeatureComponent implements OnInit {
             console.log("hasil", hasil);
             if (
               hasil["returnObject"]["formFeature"] !== undefined &&
-              hasil["returnObject"]["formFeature"] !== ""
+              hasil["returnObject"]["formFeature"] !== '' &&
+              hasil["returnObject"]["formFeature"] !== null
+
             ) {
               this.listFeature = [];
               var featureData: any = JSON.parse(

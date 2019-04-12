@@ -12,6 +12,7 @@ import { environment } from 'environments/environment';
 export class LookupRefBankComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupRefBank.json";
+  urlQryPaging: string = AdInsConstant.GetBankPaging;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
@@ -33,8 +34,10 @@ export class LookupRefBankComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
+  addCrit: Array<any>;
+
   constructor(private modalService: NgbModal){
-    
+
   }
 
   ngOnInit() {
@@ -59,18 +62,12 @@ export class LookupRefBankComponent implements OnInit {
     });
   }
 
-  search(searchComp) {
-    searchComp.search(this.apiUrl,this.pageNow,this.pageSize,null)
-      .subscribe(
-        (response) => {
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(response);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+  getResult(ucgridFooter, event) {
+    console.log(this.urlQryPaging);
+    this.resultData = event;
+    this.totalData = event.returnObject.count;
+    ucgridFooter.totalData = this.totalData;
+    ucgridFooter.resultData = this.resultData;
   }
 
   searchSort(searchComp,key) {
@@ -123,28 +120,10 @@ export class LookupRefBankComponent implements OnInit {
       );
   }
 
-  onChange(searchComp,eventValue: any) {
-
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+  onSelect(searchComponent, event) {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(searchComponent, this.pageNow);
   }
 
   private getDismissReason(reason: any): string {

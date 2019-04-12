@@ -6,7 +6,8 @@
             "id": "officeCodeId",
             "value": "",
             "label": "Office Code",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "text"
         },
         {
             "type": "textbox",
@@ -14,7 +15,8 @@
             "id": "officeNameId",
             "value": "",
             "label": "Office Name",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "text"
         },
         {
             "type": "textbox",
@@ -22,7 +24,8 @@
             "id": "contactPersonNameId",
             "value": "",
             "label": "Contact Person",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "text"
         },
         {
             "type": "textbox",
@@ -30,7 +33,8 @@
             "id": "addrId",
             "value": "",
             "label": "Address",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "text"
         },
         {
             "type": "textbox",
@@ -38,7 +42,8 @@
             "id": "cityId",
             "value": "",
             "label": "City",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "text"
         },
         {
             "type": "textbox",
@@ -46,7 +51,8 @@
             "id": "modelNameId",
             "value": "",
             "label": "Model Name",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "text"
         },
         {
             "type": "dropdown",
@@ -68,7 +74,8 @@
                     "value": "No"
                 }
             ],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "datatype": "text"
         },
         {
             "type": "dropdown",
@@ -90,7 +97,8 @@
                     "value": "No"
                 }
             ],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "datatype": "text"
         },
         {
             "type": "dropdown",
@@ -112,7 +120,8 @@
                     "value": "Syariah"
                 }
             ],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "datatype": "text"
         }
     ]
 }

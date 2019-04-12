@@ -1,96 +1,111 @@
 <div class="row text-left">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title" id="horz-layout-colored-controls" translate>Menu Management</h4>
-            </div>
-            <div class="card-body">
-                <div class="px-3">
-                    <form class="form form-horizontal" name="MenuReqForm" #MenuReqForm="ngForm"
-                        (ngSubmit)="Save(MenuReqForm, lookupParent)">
-                        <div class="form-body">
-                            <h4 class="form-section" translate><i class="ft-file-text"></i> Add Menu</h4>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput5" translate>Parent Form: </label>
-                                <div class="col-md-9">
-                                    <app-lookup-parent-form #lookupParent (select)="onSelect($event)" [idSelect]="parentId" [nameSelect]="parentTitle"></app-lookup-parent-form>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput5" translate>Form Code: </label>
-                                <div class="col-md-9">
-                                    <input type="text" id="projectinput5" class="form-control" name="formCode"
-                                    [ngModel]="formCode" #FormCode="ngModel">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput6" translate>Title: </label>
-                                <div class="col-md-9">
-                                    <textarea id="projectinput5" class="form-control" name="title"
-                                    [ngModel]="title" #Title="ngModel"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="userinput5" translate>Is External: </label>
-                                <div class="col-md-9">
-                                    <input class="border-primary" type="checkbox"
-                                    [ngModel]="isExternalLink" data-md-icheck (change)="onChange($event, 'ext')" id="projectinput5" name="isExternalLink">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="userinput5" translate>Has Sub: </label>
-                                <div class="col-md-9">
-                                    <input class="border-primary" type="checkbox"
-                                    [ngModel]="hasSub" data-md-icheck (change)="onChange($event, 'Sub')" id="projectinput5" name="hasSub">
-                                </div>
-                            </div>
-                            <div class="form-group row" *ngIf="!hasSub">
-                                <label class="col-md-3 label-control" for="projectinput6" translate>Form Path: </label>
-                                <div class="col-md-9">
-                                    <textarea id="projectinput5" class="form-control" name="path"
-                                    [ngModel]="path" #Path="ngModel"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput6" translate>Icon : </label>
-                                <div class="col-md-9">
-                                    <textarea id="projectinput5" class="form-control" name="icon"
-                                    [ngModel]="icon" #Icon="ngModel"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput6" translate>Badge Class : </label>
-                                <div class="col-md-9">
-                                    <textarea id="projectinput5" class="form-control" name="badgeClass"
-                                    [ngModel]="badgeClass" #BadgeClass="ngModel"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="userinput5" translate>Is Hidden: </label>
-                                <div class="col-md-9">
-                                    <input class="border-primary" type="checkbox"
-                                    [ngModel]="isHidden" data-md-icheck (change)="onChange($event,'hidden')" id="projectinput5" name="isHidden">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput6" translate>Order No : </label>
-                                <div class="col-md-9">
-                                    <textarea id="projectinput5" class="form-control" name="orderNo"
-                                    [ngModel]="orderNo" #OrderNo="ngModel"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-actions right">
-                            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/menuSetting']" translate>
-                                <i class="ft-x"></i> Cancel
-                            </button>
-                            <button type="submit" class="btn btn-raised btn-primary" translate>
-                                <i class="fa fa-check-square-o"></i> Save
-                            </button>
-                        </div>
-                    </form>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title" id="horz-layout-colored-controls" translate>Menu Management</h4>
+      </div>
+      <div class="card-body">
+        <div class="px-3">
+          <form class="form form-horizontal" name="MenuReqForm" #MenuReqForm="ngForm"
+            (ngSubmit)="MenuReqForm.form.valid && Save(MenuReqForm, lookupParent)">
+            <div class="form-body">
+              <h4 class="form-section" translate><i class="ft-file-text"></i> Add Menu</h4>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="projectinput5" translate>Parent Form: </label>
+                <div class="col-md-9">
+                  <app-lookup-parent-form #lookupParent (select)="onSelect($event)" [idSelect]="parentId"
+                    [nameSelect]="parentTitle"></app-lookup-parent-form>
                 </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="projectinput5" translate>Form Code: </label>
+                <div class="col-md-9">
+                  <input type="text" id="projectinput5" class="form-control" required name="formCode" [ngModel]="formCode"
+                    #FormCode="ngModel" [ngClass]="{ 'is-invalid': MenuReqForm.submitted && FormCode.invalid }"
+                    [attr.disabled]="mode === 'edit' ? true : null">
+                  <div *ngIf="MenuReqForm.submitted && FormCode.invalid" class="invalid-feedback">
+                    <div *ngIf="FormCode.errors.required">This is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="projectinput6" translate>Title: </label>
+                <div class="col-md-9">
+                  <textarea id="projectinput5" class="form-control" name="title" [ngModel]="title"
+                    #Title="ngModel" required
+                    [ngClass]="{ 'is-invalid': MenuReqForm.submitted && Title.invalid }"></textarea>
+                    <div *ngIf="MenuReqForm.submitted && Title.invalid" class="invalid-feedback">
+                      <div *ngIf="Title.errors.required">This is required</div>
+                    </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="userinput5" translate>Is External: </label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" [ngModel]="isExternalLink" data-md-icheck
+                    (change)="onChange($event, 'ext')" id="projectinput5" name="isExternalLink">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="userinput5" translate>Has Sub: </label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" [ngModel]="hasSub" data-md-icheck
+                    (change)="onChange($event, 'Sub')" id="projectinput5" name="hasSub">
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="!hasSub">
+                <label class="col-md-3 label-control" for="projectinput6" translate>Form Path: </label>
+                <div class="col-md-9">
+                  <textarea id="projectinput5" class="form-control" name="path" [ngModel]="path"
+                    #Path="ngModel" required [ngClass]="{ 'is-invalid': MenuReqForm.submitted && Path.invalid }"></textarea>
+                    <div *ngIf="MenuReqForm.submitted && Path.invalid" class="invalid-feedback">
+                      <div *ngIf="Path.errors.required">This is required</div>
+                    </div>
+                  </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="projectinput6" translate>Icon : </label>
+                <div class="col-md-9">
+                  <textarea id="projectinput5" class="form-control" name="icon" [ngModel]="icon"
+                    #Icon="ngModel"></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="projectinput6" translate>Badge Class : </label>
+                <div class="col-md-9">
+                  <textarea id="projectinput5" class="form-control" name="badgeClass" [ngModel]="badgeClass"
+                    #BadgeClass="ngModel"></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="userinput5" translate>Is Hidden: </label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" [ngModel]="isHidden" data-md-icheck
+                    (change)="onChange($event,'hidden')" id="projectinput5" name="isHidden">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" for="projectinput6" translate>Order No : </label>
+                <div class="col-md-9">
+                  <textarea id="projectinput5" class="form-control" name="orderNo" [ngModel]="orderNo"
+                    #OrderNo="ngModel" required required [ngClass]="{ 'is-invalid': MenuReqForm.submitted && OrderNo.invalid }"></textarea>
+                    <div *ngIf="MenuReqForm.submitted && OrderNo.invalid" class="invalid-feedback">
+                      <div *ngIf="OrderNo.errors.required">This is required</div>
+                    </div>
+                  </div>
+              </div>
             </div>
+            <div class="form-actions right">
+              <button *ngIf="mode === 'edit'" type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/menuSetting']" translate>
+                <i class="ft-x"></i> Cancel
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>

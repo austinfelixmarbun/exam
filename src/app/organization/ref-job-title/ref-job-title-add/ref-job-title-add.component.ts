@@ -34,6 +34,7 @@ export class RefJobTitleAddComponent implements OnInit {
   allJobPosition: any;
   jobPositionUrl: any;
   foundationUrl: string = environment.foundationUrl;
+  mrJobPositionLvl: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitleById;
@@ -94,6 +95,7 @@ export class RefJobTitleAddComponent implements OnInit {
           this.jobTitleName = response['returnObject']['jobTitleName']
           this.descr = response['returnObject']['descr']
           this.refOrgId = response['returnObject']['refOrgId']
+          this.mrJobPositionLvl = response['returnObject']['mrJobPositionLvl']
           if (this.resultData.isInternal == "1") {
             this.isInternal = true;
           }
@@ -123,7 +125,7 @@ export class RefJobTitleAddComponent implements OnInit {
       else {
         this.rjtObj.IsInternal = "1";
       }
-      this.rjtObj.MrJobPositionLvl = '3';
+      this.rjtObj.MrJobPositionLvl = ReqForm.value.MrJobPositionLvl;
 
       console.log(JSON.stringify(this.rjtObj))
       console.log(this.rjtObj);
@@ -132,7 +134,8 @@ export class RefJobTitleAddComponent implements OnInit {
           console.log(response);
           if (response['isError'] != true) {
             this.toastr.successMessage(response['returnObject']['refJobTitleId']);
-            this.router.navigate(["/organization/refjobtitle"]);
+            this.router.navigateByUrl('/organization/refjobtitle', { skipLocationChange: true }).then(() =>
+            this.router.navigate(['/organization/refjobtitle/add']));
           }else{
           }
         },
@@ -142,15 +145,16 @@ export class RefJobTitleAddComponent implements OnInit {
         }
       );
     } else {
-      var formInput = this.resultData;
-      formInput.jobTitleCode = ReqForm.value.JobTitleCode;
-      formInput.jobTitleName = ReqForm.value.JobTitleName;
-      formInput.descr = ReqForm.value.Descr;
+      var formInput: RefJobTitleObj = this.resultData;
+      formInput.JobTitleCode = ReqForm.value.jobTitleCode;
+      formInput.JobTitleName = ReqForm.value.jobTitleName;
+      formInput.Descr = ReqForm.value.descr;
+      formInput.MrJobPositionLvl = ReqForm.value.mrJobPositionLvl;
       if (this.isInternal === false) {
-        formInput.isInternal = "0";
+        formInput.IsInternal = "0";
       }
       else {
-        formInput.isInternal = "1";
+        formInput.IsInternal = "1";
       }
 
       console.log(JSON.stringify(formInput))

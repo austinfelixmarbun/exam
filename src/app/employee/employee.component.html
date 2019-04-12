@@ -16,7 +16,8 @@
         <tr *ngFor="let item of resultData?.data">
             <td>{{item.empNo}}</td>
             <td class="text-left">{{item.empName}}</td>
-            <td>{{item.isExt}}</td>
+            <td *ngIf="item.isExt === '1'">Yes</td>
+            <td *ngIf="item.isExt === '0'">No</td>
             <td *ngIf="item.isActive === '1'">Yes</td>
             <td *ngIf="item.isActive === '0'">No</td>
             <td>

@@ -79,25 +79,31 @@
               <label class="col-md-3 label-control" translate>Office Parent </label>
               <div class="col-md-9">
                 <select class="form-control" name="parentId" required [(ngModel)]="parentId" #ParentId="ngModel"
-                [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || ParentId.touched || ParentId.dirty) && ParentId.value === undefined  }">
+                  [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || ParentId.touched || ParentId.dirty) && ParentId.value === undefined  }">
                   <option *ngFor="let op of allOfficeParent" value="{{op.refOfficeId}}">{{op.officeName}}
                   </option>
                 </select>
-              <div *ngIf="(OfficeReqForm.submitted || ParentId.touched || ParentId.dirty) && ParentId.value === undefined "
-                class="invalid-feedback">
-                <div *ngIf="ParentId.errors.required" translate>This field is required</div>
-              </div>
+                <div
+                  *ngIf="(OfficeReqForm.submitted || ParentId.touched || ParentId.dirty) && ParentId.value === undefined "
+                  class="invalid-feedback">
+                  <div *ngIf="ParentId.errors.required" translate>This field is required</div>
+                </div>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 label-control" translate>Area </label>
               <div class="col-md-9">
-                <select class="form-control" name="refOfficeAreaId" [(ngModel)]="refOfficeAreaId"
-                  #RefOfficeAreaId="ngModel">
-                  <option value="">Select None</option>
+                <select class="form-control" name="refOfficeAreaId" required [(ngModel)]="refOfficeAreaId"
+                  #RefOfficeAreaId="ngModel"
+                  [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || RefOfficeAreaId.touched || RefOfficeAreaId.dirty) && RefOfficeAreaId.value === undefined  }">
                   <option *ngFor="let rfa of allRefOfficeArea" value="{{rfa.refOfficeAreaId}}">{{rfa.areaName}}
                   </option>
                 </select>
+                <div
+                  *ngIf="(OfficeReqForm.submitted || RefOfficeAreaId.touched || RefOfficeAreaId.dirty) && RefOfficeAreaId.value === undefined "
+                  class="invalid-feedback">
+                  <div *ngIf="RefOfficeAreaId.errors.required" translate>This field is required</div>
+                </div>
               </div>
             </div>
             <div class="form-group row">
@@ -168,7 +174,8 @@
             </div>
           </div>
           <div class="form-actions right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/office']" translate>
+            <button *ngIf="pageType === 'edit'" type="button" class="btn btn-raised btn-warning mr-1"
+              [routerLink]="['/office']" translate>
               <i class="ft-x"></i> Cancel
             </button>
             <button type="submit" class="btn btn-raised btn-primary" translate>

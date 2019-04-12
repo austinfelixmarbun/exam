@@ -2,17 +2,14 @@
     <div class="col-md-6" style="float:left;">
         <h4>Job Title</h4>
     </div>
-    <div class="col-md-6" style="float:right;text-align: right;">
-        <h5>Add</h5>
-    </div>
-    
+
 </div>
 <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' (result)="getResult($event)"></app-search>
 
 <table class="table table-responsive-md text-center table-hover">
     <thead>
         <tr class="table-header">
-            <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+            <th><span class="thead-header" (click)="searchSort($event)"
                     name='jobTitleCode'>Job Title Code</span></th>
             <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
                     name='jobTitleName'>Job Title Name</span></th>
@@ -25,7 +22,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of resultData?.data">
-            <td class="text-left">{{item.jobTitleCode}}</td>
+            <td>{{item.jobTitleCode}}</td>
             <td class="text-left">{{item.jobTitleName}}</td>
             <td class="text-left">{{item.descr}}</td>
             <td>{{item.mrJobPositionLvl}}</td>
@@ -44,5 +41,5 @@
 <!-- Region UC Grid Footer -->
 <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
 <!-- End Region UC Grid Footer -->
-<i class="fa fa-plus-circle" [routerLink]="['/organization/refjobtitle/add']"
-    style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+<!-- <i class="fa fa-plus-circle" [routerLink]="['/organization/refjobtitle/add']"
+    style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i> -->

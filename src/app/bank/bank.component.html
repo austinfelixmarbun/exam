@@ -3,17 +3,17 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th translate (click)="searchSort($event)" name='bankCode'>Bank Code</th>
-        <th translate (click)="searchSort($event)" name='bankName'>Bank Name</th>
-        <th translate (click)="searchSort($event)" name='biCode'>BI Code</th>
-        <th translate (click)="searchSort($event)" name='isActive'>Active</th>
+        <th><span translate class="thead-header"  (click)="searchSort($event)" name='bankCode'>Bank Code</span></th>
+        <th class="text-left pointer"><span translate class="thead-header"  (click)="searchSort($event)" name='bankName'>Bank Name</span></th>
+        <th><span translate class="thead-header"  (click)="searchSort($event)"name='biCode'>BI Code</span></th>
+        <th><span translate class="thead-header"  (click)="searchSort($event)" name='isActive'>Active</span></th>
         <th translate>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.data">
         <td>{{item.bankCode}}</td>
-        <td>{{item.bankName}}</td>
+        <td class="text-left">{{item.bankName}}</td>
         <td>{{item.biCode}}</td>
         <td *ngIf="item.isActive === '1'">Yes</td>
         <td *ngIf="item.isActive === '0'">No</td>

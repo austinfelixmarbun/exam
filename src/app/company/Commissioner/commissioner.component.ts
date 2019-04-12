@@ -45,20 +45,20 @@ export class CommissionerComponent implements OnInit {
         this.refCoyId = params["refCoyId"];
     })
      }
-  
+
     ngOnInit() {
       this.pageNow = 1;
       this.pageSize = 10;
       this.apiUrl = this.foundationUrl + AdInsConstant.GetCommissionerPaging;
     }
-  
+
     getResult(event){
       this.resultData = event.returnObject;
       this.totalData = event.returnObject.count;
       this.ucgridFooter.totalData = this.totalData;
       this.ucgridFooter.resultData = this.resultData;
     }
-  
+
     searchSort(event: any) {
       if (this.orderByKey == event.target.attributes.name.nodeValue) {
         this.orderByValue = !this.orderByValue
@@ -72,7 +72,7 @@ export class CommissionerComponent implements OnInit {
       }
       this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
     }
-  
+
     searchPagination(event: number) {
       this.pageNow = event;
       var order = null;
@@ -84,7 +84,7 @@ export class CommissionerComponent implements OnInit {
       }
       this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
     }
-    
+
     onChange() {
       var order = null;
       if (this.orderByKey != null) {
@@ -114,7 +114,7 @@ export class CommissionerComponent implements OnInit {
         this.http.post(this.editUrl, this.commissionerObj).subscribe(
           (response) => {
             console.log(response);
-            this.searchComponent.search();
+            this.searchPagination(1);
           });
       }
     }
