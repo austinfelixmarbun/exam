@@ -42,7 +42,13 @@
             <label class="col-md-3 label-control" for="mobilePhn2" translate>Mobile Phone 2</label>
             <div class="col-md-9">
                 <input type="text" pattern="^[0-9]+$" id="mobilePhn2" class="form-control" name="mobilePhn2"
-                    [(ngModel)]="mobilePhn2" #MobilePhn2="ngModel">
+                    [(ngModel)]="mobilePhn2" #MobilePhn2="ngModel"
+                    [ngClass]="{ 'is-invalid':(parentForm.submitted || MobilePhn2.touched || MobilePhn2.dirty) && MobilePhn2.invalid }">
+                <div *ngIf=" (parentForm.submitted || MobilePhn2.touched || MobilePhn2.dirty) && MobilePhn2.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="MobilePhn2.errors.required" translate>This field is required</div>
+                    <div *ngIf="MobilePhn2.errors?.pattern" translate>Number Only</div>
+                </div>
             </div>
         </div>
         <!-- <div class="form-group row">

@@ -18,8 +18,8 @@
             <div class="col-md-9">
                 <div class="form-group row">
                     <div class="col-md-2" style="border-right: 1px solid grey">
-                        <input type="text" pattern="^[0-9]+$" id="areaCode4" class="form-control" name="areaCode4" required
-                            [(ngModel)]="areaCode4" #AreaCode4="ngModel"
+                        <input type="text" pattern="^[0-9]+$" id="areaCode4" class="form-control" name="areaCode4"
+                            required [(ngModel)]="areaCode4" #AreaCode4="ngModel"
                             [ngClass]="{ 'is-invalid':(parentForm.submitted || AreaCode4.touched || AreaCode4.dirty) && AreaCode4.invalid }">
                         <div *ngIf=" (parentForm.submitted || AreaCode4.touched || AreaCode4.dirty) && AreaCode4.invalid"
                             class="invalid-feedback">
@@ -28,8 +28,8 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" pattern="^[0-9]+$" id="areaCode3" class="form-control" name="areaCode3" required
-                            [(ngModel)]="areaCode3" #AreaCode3="ngModel"
+                        <input type="text" pattern="^[0-9]+$" id="areaCode3" class="form-control" name="areaCode3"
+                            required [(ngModel)]="areaCode3" #AreaCode3="ngModel"
                             [ngClass]="{ 'is-invalid':(parentForm.submitted || AreaCode3.touched || AreaCode3.dirty) && AreaCode3.invalid }">
                         <div *ngIf=" (parentForm.submitted || AreaCode3.touched || AreaCode3.dirty) && AreaCode3.invalid"
                             class="invalid-feedback">
@@ -53,10 +53,10 @@
                 <input type="text" id="areaCode2" class="form-control" name="areaCode2" required [(ngModel)]="areaCode2"
                     #AreaCode2="ngModel" readonly
                     [ngClass]="{ 'is-invalid':(parentForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid }">
-                    <div *ngIf="(parentForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid"
-                        class="invalid-feedback">
-                        <div *ngIf="AreaCode2.errors.required" translate>This field is required</div>
-                    </div>
+                <div *ngIf="(parentForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="AreaCode2.errors.required" translate>This field is required</div>
+                </div>
             </div>
         </div>
         <div class="form-group row">
@@ -65,10 +65,10 @@
                 <input type="text" id="areaCode1" class="form-control" name="areaCode1" required [(ngModel)]="areaCode1"
                     #AreaCode1="ngModel" readonly
                     [ngClass]="{ 'is-invalid':(parentForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid }">
-                    <div *ngIf="(parentForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid"
-                        class="invalid-feedback">
-                        <div *ngIf="AreaCode1.errors.required" translate>This field is required</div>
-                    </div>
+                <div *ngIf="(parentForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="AreaCode1.errors.required" translate>This field is required</div>
+                </div>
             </div>
         </div>
         <div class="form-group row">
@@ -77,10 +77,10 @@
                 <input type="text" id="city" class="form-control" name="city" required [(ngModel)]="city"
                     #City="ngModel" readonly
                     [ngClass]="{ 'is-invalid':(parentForm.submitted || City.touched || City.dirty) && City.invalid }">
-                    <div *ngIf="(parentForm.submitted || City.touched || City.dirty) && City.invalid"
-                        class="invalid-feedback">
-                        <div *ngIf="City.errors.required" translate>This field is required</div>
-                    </div>
+                <div *ngIf="(parentForm.submitted || City.touched || City.dirty) && City.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="City.errors.required" translate>This field is required</div>
+                </div>
             </div>
         </div>
         <div class="form-group row">
@@ -109,7 +109,13 @@
                     </div>
                     <div class="col-md-2">
                         <input type="text" pattern="^[0-9]+$" id="phnExt1" class="form-control" name="phnExt1"
-                            [(ngModel)]="phnExt1" #PhnExt1="ngModel">
+                            [(ngModel)]="phnExt1" #PhnExt1="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || PhnExt1.touched || PhnExt1.dirty) && PhnExt1.invalid }">
+                        <div *ngIf=" (parentForm.submitted || PhnExt1.touched || PhnExt1.dirty) && PhnExt1.invalid"
+                            class="invalid-feedback">
+                            <div *ngIf="PhnExt1.errors.required" translate>This field is required</div>
+                            <div *ngIf="PhnExt1.errors?.pattern" translate>Number Only</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,15 +126,33 @@
                 <div class="form-group row">
                     <div class="col-md-2" style="border-right: 1px solid grey">
                         <input type="text" pattern="^[0-9]+$" id="phnArea2" class="form-control" name="phnArea2"
-                            [(ngModel)]="phnArea2" #PhnArea2="ngModel">
+                            [(ngModel)]="phnArea2" #PhnArea2="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || PhnArea2.touched || PhnArea2.dirty) && PhnArea2.invalid }">
+                        <div *ngIf=" (parentForm.submitted || PhnArea2.touched || PhnArea2.dirty) && PhnArea2.invalid"
+                            class="invalid-feedback">
+                            <div *ngIf="PhnArea2.errors.required" translate>This field is required</div>
+                            <div *ngIf="PhnArea2.errors?.pattern" translate>Number Only</div>
+                        </div>
                     </div>
                     <div class="col-md-4" style="border-right: 1px solid grey">
                         <input type="text" pattern="^[0-9]+$" id="phn2" class="form-control" name="phn2"
-                            [(ngModel)]="phn2" #Phn2="ngModel">
+                            [(ngModel)]="phn2" #Phn2="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || Phn2.touched || Phn2.dirty) && Phn2.invalid }">
+                        <div *ngIf=" (parentForm.submitted || Phn2.touched || Phn2.dirty) && Phn2.invalid"
+                            class="invalid-feedback">
+                            <div *ngIf="Phn2.errors.required" translate>This field is required</div>
+                            <div *ngIf="Phn2.errors?.pattern" translate>Number Only</div>
+                        </div>
                     </div>
                     <div class="col-md-2">
                         <input type="text" pattern="^[0-9]+$" id="phnExt2" class="form-control" name="phnExt2"
-                            [(ngModel)]="phnExt2" #PhnExt2="ngModel">
+                            [(ngModel)]="phnExt2" #PhnExt2="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || PhnExt2.touched || PhnExt2.dirty) && PhnExt2.invalid }">
+                        <div *ngIf=" (parentForm.submitted || PhnExt2.touched || PhnExt2.dirty) && PhnExt2.invalid"
+                            class="invalid-feedback">
+                            <div *ngIf="PhnExt2.errors.required" translate>This field is required</div>
+                            <div *ngIf="PhnExt2.errors?.pattern" translate>Number Only</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,15 +163,33 @@
                 <div class="form-group row">
                     <div class="col-md-2" style="border-right: 1px solid grey">
                         <input type="text" pattern="^[0-9]+$" id="phnArea3" class="form-control" name="phnArea3"
-                            [(ngModel)]="phnArea3" #PhnArea3="ngModel">
+                            [(ngModel)]="phnArea3" #PhnArea3="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || PhnArea3.touched || PhnArea3.dirty) && PhnArea3.invalid }">
+                        <div *ngIf=" (parentForm.submitted || PhnArea3.touched || PhnArea3.dirty) && PhnArea3.invalid"
+                            class="invalid-feedback">
+                            <div *ngIf="PhnArea3.errors.required" translate>This field is required</div>
+                            <div *ngIf="PhnArea3.errors?.pattern" translate>Number Only</div>
+                        </div>
                     </div>
                     <div class="col-md-4" style="border-right: 1px solid grey">
                         <input type="text" pattern="^[0-9]+$" id="phn3" class="form-control" name="phn3"
-                            [(ngModel)]="phn3" #Phn2="ngModel">
+                            [(ngModel)]="phn3" #Phn2="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || Phn2.touched || Phn2.dirty) && Phn2.invalid }">
+                        <div *ngIf=" (parentForm.submitted || Phn2.touched || Phn2.dirty) && Phn2.invalid"
+                            class="invalid-feedback">
+                            <div *ngIf="Phn2.errors.required" translate>This field is required</div>
+                            <div *ngIf="Phn2.errors?.pattern" translate>Number Only</div>
+                        </div>
                     </div>
                     <div class="col-md-2">
                         <input type="text" pattern="^[0-9]+$" id="phnExt3" class="form-control" name="phnExt3"
-                            [(ngModel)]="phnExt3" #PhnExt3="ngModel">
+                            [(ngModel)]="phnExt3" #PhnExt3="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || PhnExt3.touched || PhnExt3.dirty) && PhnExt3.invalid }">
+                        <div *ngIf=" (parentForm.submitted || PhnExt3.touched || PhnExt3.dirty) && PhnExt3.invalid"
+                            class="invalid-feedback">
+                            <div *ngIf="PhnExt3.errors.required" translate>This field is required</div>
+                            <div *ngIf="PhnExt3.errors?.pattern" translate>Number Only</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -158,11 +200,23 @@
                 <div class="form-group row">
                     <div class="col-md-2" style="border-right: 1px solid grey">
                         <input type="text" pattern="^[0-9]+$" id="faxArea" class="form-control" name="faxArea"
-                            [(ngModel)]="faxArea" #FaxArea="ngModel">
+                            [(ngModel)]="faxArea" #FaxArea="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || FaxArea.touched || FaxArea.dirty) && FaxArea.invalid }">
+                        <div *ngIf=" (parentForm.submitted || FaxArea.touched || FaxArea.dirty) && FaxArea.invalid"
+                            class="invalid-feedback">
+                            <div *ngIf="FaxArea.errors.required" translate>This field is required</div>
+                            <div *ngIf="FaxArea.errors?.pattern" translate>Number Only</div>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <input type="text" pattern="^[0-9]+$" id="fax" class="form-control" name="fax" [(ngModel)]="fax"
-                            #Fax="ngModel">
+                            #Fax="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || Fax.touched || Fax.dirty) && Fax.invalid }">
+                        <div *ngIf=" (parentForm.submitted || Fax.touched || Fax.dirty) && Fax.invalid"
+                            class="invalid-feedback">
+                            <div *ngIf="Fax.errors.required" translate>This field is required</div>
+                            <div *ngIf="Fax.errors?.pattern" translate>Number Only</div>
+                        </div>
                     </div>
                 </div>
             </div>
