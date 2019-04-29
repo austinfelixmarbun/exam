@@ -15,8 +15,8 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th translate (click)="searchSort($event)" name='kelurahan'>Kelurahan</th>
-        <th translate (click)="searchSort($event)" name='kecamatan'>Kecamatan</th>
+        <th translate (click)="searchSort($event)" name='areaCode2'>areaCode2</th>
+        <th translate (click)="searchSort($event)" name='areaCode1'>areaCode1</th>
         <th translate (click)="searchSort($event)" name='city'>City</th>
         <th translate (click)="searchSort($event)" name='zipcode'>Zipcode</th>
         <th translate (click)="searchSort($event)" name='subZipcode'>Sub Zipcode</th>
@@ -26,8 +26,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.returnObject?.data">
-        <td>{{item.kelurahan}}</td>
-        <td>{{item.kecamatan}}</td>
+        <td>{{item.areaCode2}}</td>
+        <td>{{item.areaCode1}}</td>
         <td>{{item.city}}</td>
         <td>{{item.zipcode}}</td>
         <td>{{item.subZipcode}}</td>

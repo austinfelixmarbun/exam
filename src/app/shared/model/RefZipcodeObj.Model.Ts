@@ -2,8 +2,8 @@
 
 export class RefZipcodeObj {
     refZipcodeId:      string;
-    kelurahan:         string;
-    kecamatan:         string;
+    areaCode2:         string;
+    areaCode1:         string;
     city:              string;
     zipcode:           string;
     phnArea:           string;

@@ -14,27 +14,27 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control" for="rt" translate>Rt / Rw </label>
+            <label class="col-md-3 label-control" for="areaCode4" translate>Rt / Rw </label>
             <div class="col-md-9">
                 <div class="form-group row">
                     <div class="col-md-2" style="border-right: 1px solid grey">
-                        <input type="text" pattern="^[0-9]+$" id="rt" class="form-control" name="rt" required
-                            [(ngModel)]="rt" #Rt="ngModel"
-                            [ngClass]="{ 'is-invalid':(parentForm.submitted || Rt.touched || Rt.dirty) && Rt.invalid }">
-                        <div *ngIf=" (parentForm.submitted || Rt.touched || Rt.dirty) && Rt.invalid"
+                        <input type="text" pattern="^[0-9]+$" id="areaCode4" class="form-control" name="areaCode4" required
+                            [(ngModel)]="areaCode4" #AreaCode4="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || AreaCode4.touched || AreaCode4.dirty) && AreaCode4.invalid }">
+                        <div *ngIf=" (parentForm.submitted || AreaCode4.touched || AreaCode4.dirty) && AreaCode4.invalid"
                             class="invalid-feedback">
-                            <div *ngIf="Rt.errors.required" translate>This field is required</div>
-                            <div *ngIf="Rt.errors?.pattern" translate>Number Only</div>
+                            <div *ngIf="AreaCode4.errors.required" translate>This field is required</div>
+                            <div *ngIf="AreaCode4.errors?.pattern" translate>Number Only</div>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" pattern="^[0-9]+$" id="rw" class="form-control" name="rw" required
-                            [(ngModel)]="rw" #Rw="ngModel"
-                            [ngClass]="{ 'is-invalid':(parentForm.submitted || Rw.touched || Rw.dirty) && Rw.invalid }">
-                        <div *ngIf=" (parentForm.submitted || Rw.touched || Rw.dirty) && Rw.invalid"
+                        <input type="text" pattern="^[0-9]+$" id="areaCode3" class="form-control" name="areaCode3" required
+                            [(ngModel)]="areaCode3" #AreaCode3="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || AreaCode3.touched || AreaCode3.dirty) && AreaCode3.invalid }">
+                        <div *ngIf=" (parentForm.submitted || AreaCode3.touched || AreaCode3.dirty) && AreaCode3.invalid"
                             class="invalid-feedback">
-                            <div *ngIf="Rw.errors.required" translate>This field is required</div>
-                            <div *ngIf="Rw.errors?.pattern" translate>Number Only</div>
+                            <div *ngIf="AreaCode3.errors.required" translate>This field is required</div>
+                            <div *ngIf="AreaCode3.errors?.pattern" translate>Number Only</div>
                         </div>
                     </div>
                 </div>
@@ -48,26 +48,26 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control" for="kelurahan" translate>Kelurahan </label>
+            <label class="col-md-3 label-control" for="areaCode2" translate>Kelurahan </label>
             <div class="col-md-9">
-                <input type="text" id="kelurahan" class="form-control" name="kelurahan" required [(ngModel)]="kelurahan"
-                    #Kelurahan="ngModel" readonly
-                    [ngClass]="{ 'is-invalid':(parentForm.submitted || Kelurahan.touched || Kelurahan.dirty) && Kelurahan.invalid }">
-                    <div *ngIf="(parentForm.submitted || Kelurahan.touched || Kelurahan.dirty) && Kelurahan.invalid"
+                <input type="text" id="areaCode2" class="form-control" name="areaCode2" required [(ngModel)]="areaCode2"
+                    #AreaCode2="ngModel" readonly
+                    [ngClass]="{ 'is-invalid':(parentForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid }">
+                    <div *ngIf="(parentForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid"
                         class="invalid-feedback">
-                        <div *ngIf="Kelurahan.errors.required" translate>This field is required</div>
+                        <div *ngIf="AreaCode2.errors.required" translate>This field is required</div>
                     </div>
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control" for="kecamatan" translate>Kecamatan </label>
+            <label class="col-md-3 label-control" for="areaCode1" translate>Kecamatan </label>
             <div class="col-md-9">
-                <input type="text" id="kecamatan" class="form-control" name="kecamatan" required [(ngModel)]="kecamatan"
-                    #Kecamatan="ngModel" readonly
-                    [ngClass]="{ 'is-invalid':(parentForm.submitted || Kecamatan.touched || Kecamatan.dirty) && Kecamatan.invalid }">
-                    <div *ngIf="(parentForm.submitted || Kecamatan.touched || Kecamatan.dirty) && Kecamatan.invalid"
+                <input type="text" id="areaCode1" class="form-control" name="areaCode1" required [(ngModel)]="areaCode1"
+                    #AreaCode1="ngModel" readonly
+                    [ngClass]="{ 'is-invalid':(parentForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid }">
+                    <div *ngIf="(parentForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid"
                         class="invalid-feedback">
-                        <div *ngIf="Kecamatan.errors.required" translate>This field is required</div>
+                        <div *ngIf="AreaCode1.errors.required" translate>This field is required</div>
                     </div>
             </div>
         </div>

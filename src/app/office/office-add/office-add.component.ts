@@ -249,10 +249,10 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.officeName = OfficeAddReqForm.value.officeName;
     this.officeObj.orgMdlId = OfficeAddReqForm.value.orgMdlId;
     this.officeObj.officeAddr = ucAddress.addr;
-    this.officeObj.rt = ucAddress.rt;
-    this.officeObj.rw = ucAddress.rw;
-    this.officeObj.kelurahan = ucAddress.kelurahan;
-    this.officeObj.kecamatan = ucAddress.kecamatan;
+    this.officeObj.areaCode4 = ucAddress.areaCode4;
+    this.officeObj.areaCode3 = ucAddress.areaCode3;
+    this.officeObj.areaCode2 = ucAddress.areaCode2;
+    this.officeObj.areaCode1 = ucAddress.areaCode1;
     this.officeObj.city = ucAddress.city;
     this.officeObj.zipcode = ucAddress.zipcode;
     this.officeObj.phnArea1 = ucAddress.phnArea1;

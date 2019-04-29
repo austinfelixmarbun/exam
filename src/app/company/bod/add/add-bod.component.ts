@@ -111,8 +111,8 @@ export class BodAddComponent implements OnInit {
             coyAdd.email2 = ucContactInfo.email2;
             coyAdd.fax = ucAddress.fax;
             coyAdd.faxArea = ucAddress.faxArea;
-            coyAdd.kecamatan = ucAddress.kecamatan;
-            coyAdd.kelurahan = ucAddress.kelurahan;
+            coyAdd.areaCode1 = ucAddress.areaCode1;
+            coyAdd.areaCode2 = ucAddress.areaCode2;
             coyAdd.mobilePhn1 = ucContactInfo.mobilePhn1;
             coyAdd.mobilePhn2 = ucContactInfo.mobilePhn2;
             coyAdd.phn1 = ucAddress.phn1;
@@ -124,8 +124,8 @@ export class BodAddComponent implements OnInit {
             coyAdd.phnExt1 = ucAddress.phnExt1;
             coyAdd.phnExt2 = ucAddress.phnExt2;
             coyAdd.phnExt3 = ucAddress.phnExt3;
-            coyAdd.rt = ucAddress.rt;
-            coyAdd.rw = ucAddress.rw;
+            coyAdd.areaCode4 = ucAddress.areaCode4;
+            coyAdd.areaCode3 = ucAddress.areaCode3;
             coyAdd.zipcode = ucAddress.zipcode;
             coyAdd.refCoyId = this.refCoyId;
 

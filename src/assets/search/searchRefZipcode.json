@@ -2,15 +2,15 @@
     "component": [
       {
         "type": "textbox",
-        "name": "Kelurahan",
-        "id": "Keluarahan",
+        "name": "areaCode2",
+        "id": "Kelurahan",
         "value": "",
         "label": "Kelurahan",
         "placeholder": "Placeholder"
       },
       {
         "type": "textbox",
-        "name": "Kecamatan",
+        "name": "areaCode1",
         "id": "Kecamatan",
         "value": "",
         "label": "Kecamatan",
@@ -34,7 +34,7 @@
       },
       {
         "type": "textbox",
-        "name": "DisTrictName",
+        "name": "DistrictName",
         "id": "DisTrictName",
         "value": "",
         "label": "District Name",

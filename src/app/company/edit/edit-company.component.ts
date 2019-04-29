@@ -88,8 +88,8 @@ export class EditCompanyComponent implements OnInit {
             refCoyObj.cntctPersonEmail = ucContactInfo.email1;
             refCoyObj.fax = ucAddress.fax;
             refCoyObj.faxArea = ucAddress.faxArea;
-            refCoyObj.kecamatan = ucAddress.kecamatan;
-            refCoyObj.kelurahan = ucAddress.kelurahan;
+            refCoyObj.areaCode1 = ucAddress.areaCode1;
+            refCoyObj.areaCode2 = ucAddress.areaCode2;
             refCoyObj.cntctPersonName = ucContactInfo.cntctPersonName;
             refCoyObj.cntctPersonJobTitle = ucContactInfo.cntctPersonJobTitle;
             refCoyObj.cntctPersonMobilePhn1 = ucContactInfo.mobilePhn1;
@@ -104,8 +104,8 @@ export class EditCompanyComponent implements OnInit {
             refCoyObj.phnExt1 = ucAddress.phnExt1;
             refCoyObj.phnExt2 = ucAddress.phnExt2;
             refCoyObj.phnExt3 = ucAddress.phnExt3;
-            refCoyObj.rt = ucAddress.rt;
-            refCoyObj.rw = ucAddress.rw;
+            refCoyObj.areaCode4 = ucAddress.areaCode4;
+            refCoyObj.areaCode3 = ucAddress.areaCode3;
             refCoyObj.zipcode = ucAddress.zipcode;
             refCoyObj.refCoyId = this.param;
 

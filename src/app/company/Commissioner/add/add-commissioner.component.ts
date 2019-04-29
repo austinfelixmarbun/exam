@@ -113,8 +113,8 @@ export class CommissionerAddComponent implements OnInit {
             coyCommisionerObj.email2 = ucContactInfo.email2;
             coyCommisionerObj.fax = ucAddress.fax;
             coyCommisionerObj.faxArea = ucAddress.faxArea;
-            coyCommisionerObj.kecamatan = ucAddress.kecamatan;
-            coyCommisionerObj.kelurahan = ucAddress.kelurahan;
+            coyCommisionerObj.areaCode1 = ucAddress.areaCode1;
+            coyCommisionerObj.areaCode2 = ucAddress.areaCode2;
             coyCommisionerObj.mobilePhn1 = ucContactInfo.mobilePhn1;
             coyCommisionerObj.mobilePhn2 = ucContactInfo.mobilePhn2;
             coyCommisionerObj.phn1 = ucAddress.phn1;
@@ -126,8 +126,8 @@ export class CommissionerAddComponent implements OnInit {
             coyCommisionerObj.phnExt1 = ucAddress.phnExt1;
             coyCommisionerObj.phnExt2 = ucAddress.phnExt2;
             coyCommisionerObj.phnExt3 = ucAddress.phnExt3;
-            coyCommisionerObj.rt = ucAddress.rt;
-            coyCommisionerObj.rw = ucAddress.rw;
+            coyCommisionerObj.areaCode4 = ucAddress.areaCode4;
+            coyCommisionerObj.areaCode3 = ucAddress.areaCode3;
             coyCommisionerObj.zipcode = ucAddress.zipcode;
             coyCommisionerObj.refCoyId = this.refCoyId;
 

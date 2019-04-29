@@ -18,12 +18,12 @@ export class UcAddressComponent implements OnInit {
   @Input() resultData: any;
   @Input() parentForm: any;
   jsonData: any;
-  kelurahan: any;
-  kecamatan: any;
+  areaCode2: any;
+  areaCode1: any;
   city: any;
   addr: any;
-  rt: any;
-  rw: any;
+  areaCode4: any;
+  areaCode3: any;
   phnArea1: any;
   phn1: any;
   phnExt1: any;
@@ -38,12 +38,12 @@ export class UcAddressComponent implements OnInit {
   zipcode: any;
   addrValid: boolean = false;
   setData(data) {
-    this.kelurahan = data.kelurahan;
-    this.kecamatan = data.kecamatan;
+    this.areaCode2 = data.areaCode2;
+    this.areaCode1 = data.areaCode1;
     this.city = data.city;
     this.addr = data.addr;
-    this.rt = data.rt;
-    this.rw = data.rw;
+    this.areaCode4 = data.areaCode4;
+    this.areaCode3 = data.areaCode3;
     this.phnArea1 = data.phnArea1;
     this.phn1 = data.phn1;
     this.phnExt1 = data.phnExt1;
@@ -60,8 +60,8 @@ export class UcAddressComponent implements OnInit {
 
   onSelect(event) {
     console.log(event);
-    this.kelurahan = event.kelurahan;
-    this.kecamatan = event.kecamatan;
+    this.areaCode2 = event.areaCode2;
+    this.areaCode1 = event.areaCode1;
     this.city = event.city;
     this.zipcode = event.zipcode;
   }

@@ -8,10 +8,10 @@ export class CoyBodObj {
     idNo:       string;
     npwp:       string;
     addr:       string;
-    rt:         string;
-    rw:         string;
-    kelurahan:  string;
-    kecamatan:  string;
+    areaCode1:  string;
+    areaCode2:  string;
+    areaCode3:  string;
+    areaCode4:  string;
     city:       string;
     zipcode:    string;
     phnArea1:   string;
