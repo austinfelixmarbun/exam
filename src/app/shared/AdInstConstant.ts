@@ -91,6 +91,7 @@ export class AdInsConstant {
     public static EditRefBank = "/RefBank/EditRefBank";
     public static AddRefBank = "/RefBank/AddRefBank";
     public static DeleteRefBank = "/RefBank/DeleteRefBank";
+    public static GetBankByBankCode = "/RefBank/GetBankByBankCode";
 
     //REF-EMP
     public static GetListEmployee = "/RefEmp/GetRefEmpPaging";

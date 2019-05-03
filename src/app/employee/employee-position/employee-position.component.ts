@@ -25,6 +25,7 @@ export class EmployeePositionComponent implements OnInit {
   @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchEmpList.json";
   urlQryPaging : string = AdInsConstant.GetEmpPositionPaging;
+  urlEnviPaging : string = environment.foundationUrl;
   refEmpId: any;
   empNo: any
   empName: any

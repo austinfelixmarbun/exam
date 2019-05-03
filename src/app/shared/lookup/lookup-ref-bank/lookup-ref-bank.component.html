@@ -17,7 +17,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+      <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging'
       (result)="getResult(ucgridFooter, $event)"></app-search>
       <table class="table table-responsive-md text-center table-hover">
         <thead>
@@ -31,7 +31,7 @@
             <td class="text-left">{{item.bankName}}</td>
             <td>
               <a class="success p-0" data-original-title="" title=""
-                (click)="choose(item.refBankId,item.bankName,item)">
+                (click)="choose(item.bankCode,item.bankName,item)">
                 <i class="ft-edit-2 font-medium-3 mr-2"></i>
               </a>
             </td>

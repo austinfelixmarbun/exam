@@ -34,6 +34,7 @@ export class LookupzipcodeComponent implements OnInit {
   @Output() select : EventEmitter<any> = new EventEmitter();
 
   urlQryPaging : any = AdInsConstant.GetRefZipcodePaging;
+  urlEnviPaging : string = environment.settingUrl;
   configuration: any;
   urlGet: string;
   countForm = 0;

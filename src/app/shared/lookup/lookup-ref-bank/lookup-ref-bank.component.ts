@@ -13,9 +13,10 @@ export class LookupRefBankComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupRefBank.json";
   urlQryPaging: string = AdInsConstant.GetBankPaging;
+  urlEnviPaging : string = environment.settingUrl;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
-  @Input() idSelect: any;
+  @Input() codeSelect: any;
   @Input() jsonSelect:string;
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
@@ -45,10 +46,10 @@ export class LookupRefBankComponent implements OnInit {
     this.pageSize = 10;
   }
 
-  choose(id, name,item) {
-    console.log(id + " : " + name);
+  choose(code, name,item) {
+    console.log(code + " : " + name);
     console.log(item);
-    this.idSelect = id;
+    this.codeSelect = code;
     this.nameSelect = name;
     this.jsonSelect = JSON.stringify(item);
     this.modalService.dismissAll();

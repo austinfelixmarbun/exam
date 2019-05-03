@@ -2,7 +2,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "bankCode",
+            "name": "bank_Code",
             "id": "bankCodeId",
             "value": "",
             "label": "Bank Code",
@@ -10,7 +10,7 @@
         },
         {
             "type": "textbox",
-            "name": "bankName",
+            "name": "bank_Name",
             "id": "bankNameId",
             "value": "",
             "label": "Bank Name",
@@ -18,7 +18,7 @@
         },
         {
             "type": "textbox",
-            "name": "biCode",
+            "name": "bi_Code",
             "id": "biCodeId",
             "value": "",
             "label": "BI Code",
@@ -26,7 +26,7 @@
         },
         {   
             "type": "dropdown",
-            "name": "isActive",
+            "name": "is_Active",
             "id": "activeStatusId",
             "label" : "Active Status",
             "value": "",

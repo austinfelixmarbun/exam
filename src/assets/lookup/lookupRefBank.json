@@ -4,7 +4,7 @@
     "component": [
       {
         "type": "textbox",
-        "name": "bankName",
+        "name": "bank_Name",
         "id": "BankName",
         "value": "",
         "label": "Bank Name",

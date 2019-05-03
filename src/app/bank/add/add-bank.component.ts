@@ -27,7 +27,7 @@ export class BankAddComponent implements OnInit {
     mode: string = "add";
     apiUrl: any;
     isActive: boolean = false;
-    foundationUrl: string = environment.foundationUrl;
+    settingUrl: string = environment.settingUrl;
     bankObj: RefBankObj;
     editUrl: any;
 
@@ -40,7 +40,7 @@ export class BankAddComponent implements OnInit {
 
     ngOnInit() {
         if (this.mode === "edit") {
-            this.apiUrl = this.foundationUrl + AdInsConstant.GetBank;
+            this.apiUrl = this.settingUrl + AdInsConstant.GetBank;
             var bankObj = new RefBankObj();
             bankObj.refBankId = this.param;
             this.http.post(this.apiUrl, bankObj).subscribe(
@@ -64,7 +64,7 @@ export class BankAddComponent implements OnInit {
     }
     Save(BankAddReqForm: NgForm): void {
         if (this.mode === "edit") {
-            this.editUrl = this.foundationUrl + AdInsConstant.EditRefBank;
+            this.editUrl = this.settingUrl + AdInsConstant.EditRefBank;
             this.bankObj = new RefBankObj();
             this.bankObj = BankAddReqForm.value;
             this.bankObj.refBankId = this.param;
@@ -80,14 +80,13 @@ export class BankAddComponent implements OnInit {
                     this.router.navigateByUrl('/bank');
                     this.toastr.successMessage(response['message']);
                 },
-                (error)=>
-                {
+                (error)=> {
                     console.log(error);
                 });
         }
         else
         {
-            this.editUrl = this.foundationUrl + AdInsConstant.AddRefBank;
+            this.editUrl = this.settingUrl + AdInsConstant.AddRefBank;
             this.bankObj = new RefBankObj();
             this.bankObj = BankAddReqForm.value;
             this.bankObj.refBankId = "0";

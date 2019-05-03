@@ -36,4 +36,5 @@ export class RefEmpObj {
     bankBranchBiCode : string
     bankAccNo : string
     bankAccName : string
+    bankCode : string
 }  

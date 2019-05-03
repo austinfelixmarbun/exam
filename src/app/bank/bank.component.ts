@@ -23,6 +23,7 @@ export class BankComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlQryPaging : string = AdInsConstant.GetBankPaging;
+  urlEnviPaging : string = environment.settingUrl;
   //** End UC Search **//
   editUrl: any;
   bankObj: RefBankObj;
@@ -39,7 +40,7 @@ export class BankComponent implements OnInit {
   pager: any = {};
   // paged items
   pagedItems: any[];
-  foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
@@ -48,7 +49,7 @@ export class BankComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetBankPaging;
+    this.apiUrl = this.settingUrl + AdInsConstant.GetBankPaging;
   }
 
   //** Start UC Search **/
@@ -116,12 +117,15 @@ export class BankComponent implements OnInit {
 
   delete(refBankId: any) {
     if(confirm("Are you sure to delete this record?")) {
-      this.editUrl = this.foundationUrl + AdInsConstant.DeleteRefBank;
+      this.editUrl = this.settingUrl + AdInsConstant.DeleteRefBank;
       this.bankObj = new RefBankObj();
       this.bankObj.refBankId = refBankId;
       this.http.post(this.editUrl, this.bankObj).subscribe(
         (response) => {
           console.log(response);
+        },
+        (error)=> {
+            console.log(error);
         });
     }
   }

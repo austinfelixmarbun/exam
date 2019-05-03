@@ -24,6 +24,7 @@ export class EmployeeComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlQryPaging : string = AdInsConstant.GetListEmployee;
+  urlEnviPaging : string = environment.foundationUrl;
   //** End Query Paging */
 
   urlJson: string = "./assets/search/searchEmployee.json";

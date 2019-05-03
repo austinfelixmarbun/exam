@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit {
   @ViewChild('formIdSearch') myForm: ElementRef;
   @Input() _url: string;
   @Input() apiQryPaging: string;
+  @Input() enviromentUrl: string;
   @Input() arrCritObj: any;
   @Input() pageSize: any = 10;
   @Input() pageNow: any = 1;
@@ -43,7 +44,6 @@ export class SearchComponent implements OnInit {
   amount = 0;
   apiUrl: string;
   arrCrit: any;
-  foundationUrl: string = environment.foundationUrl;
   constructor(private http: HttpClient, private adInsService: AdInsServiceService, private decimalPipe: DecimalPipe, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
   }
 
@@ -99,7 +99,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiUrl = this.foundationUrl + this.apiQryPaging;
+    this.apiUrl = this.enviromentUrl + this.apiQryPaging;
     this.arrCrit = this.arrCritObj;
     let js = this._renderer2.createElement('script');
     js.text = `
@@ -210,6 +210,7 @@ export class SearchComponent implements OnInit {
     request.criteria = arrCrit;
     var httpRequest = new HttpRequestObj();
     this.http.post(apiUrl, request).subscribe((response) => {
+      console.log(response);
       this.result.emit(response);
       return response;
     });
@@ -225,7 +226,7 @@ export class SearchComponent implements OnInit {
   }
 
   resolveObject(obj: any, url: string) {
-    const val = this.postJSON(environment.foundationUrl + url);
+    const val = this.postJSON(this.enviromentUrl + url);
     val.subscribe(tempData => {
       obj.itemsUrl = tempData.returnObject;
     });

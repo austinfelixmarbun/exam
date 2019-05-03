@@ -67,10 +67,11 @@ export class EmployeeAddComponent implements OnInit {
   refBankUrl: any;
   empBankUrl: any;
   bankName: string;
-  idSelect;
+  codeSelect;
   jsonSelect: string;
 
   foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
 
   constructor(
     private router: Router,
@@ -81,9 +82,8 @@ export class EmployeeAddComponent implements OnInit {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
     this.addUrl = this.foundationUrl + AdInsConstant.AddRefEmpAndEmpBankAcc;
     this.editUrl = this.foundationUrl + AdInsConstant.EditRefEmpAndEmpBankAcc;
-    this.refBankUrl = this.foundationUrl + AdInsConstant.GetBank;
-    this.empBankUrl =
-      this.foundationUrl + AdInsConstant.GetEmpBankAccByRefEmpId;
+    this.refBankUrl = this.settingUrl + AdInsConstant.GetBankByBankCode;
+    this.empBankUrl = this.foundationUrl + AdInsConstant.GetEmpBankAccByRefEmpId;
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -139,12 +139,12 @@ export class EmployeeAddComponent implements OnInit {
               this.bankAccName = response["returnObject"].bankAccName;
               this.bankAccNo = response["returnObject"].bankAccNo;
               this.bankObj = new RefBankObj();
-              this.bankObj.refBankId = response["returnObject"].refBankId;
+              this.bankObj.bankCode = response["returnObject"].bankCode;
               this.httpClient.post(this.refBankUrl, this.bankObj).subscribe(
                 response => {
                   this.bankName = response["returnObject"].bankName;
                   this.jsonSelect = response["returnObject"];
-                  this.idSelect = response["returnObject"].refBankId;
+                  this.codeSelect = response["returnObject"].bankCode;
                 },
                 error => {
                   console.log("Error");
@@ -210,7 +210,7 @@ export class EmployeeAddComponent implements OnInit {
       this.empObj.bankBranchBiCode = ReqForm.value.bankBranchBiCode;
       this.empObj.bankAccName = ReqForm.value.bankAccName;
       this.empObj.bankAccNo = ReqForm.value.bankAccNo;
-      this.empObj.refBankId = uclRefBank.idSelect;
+      this.empObj.bankCode = uclRefBank.codeSelect;
       if (this.isExt === false) {
         this.empObj.isExt = "0";
       } else {
@@ -272,7 +272,7 @@ export class EmployeeAddComponent implements OnInit {
       this.empObj.bankBranchBiCode = ReqForm.value.bankBranchBiCode;
       this.empObj.bankAccName = ReqForm.value.bankAccName;
       this.empObj.bankAccNo = ReqForm.value.bankAccNo;
-      this.empObj.refBankId = uclRefBank.idSelect;
+      this.empObj.bankCode = uclRefBank.codeSelect;
       if (this.isExt === false) {
         this.empObj.isExt = "0";
       } else {
