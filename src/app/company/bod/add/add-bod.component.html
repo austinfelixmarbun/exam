@@ -41,7 +41,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 label-control">Id Type: </label>
                             <div class="col-md-9">
-                                <select class="form-control" name="mrIdType" class="custom-select" style="width: auto" [(ngModel)]="idType">
+                                <select class="form-control" name="mrIdType" style="width: auto" [(ngModel)]="idType">
                                     <option *ngFor="let it of itemIdType" value="{{it.masterCode}}">
                                         {{it.descr}}</option>
                                 </select>

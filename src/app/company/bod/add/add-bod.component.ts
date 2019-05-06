@@ -35,6 +35,7 @@ export class BodAddComponent implements OnInit {
     idTypeUrl: any;
     isActive: boolean = false;
     foundationUrl: string = environment.foundationUrl;
+    settingUrl: string = environment.settingUrl;
     editUrl: any;
     idType: any;
     name: any;
@@ -52,7 +53,7 @@ export class BodAddComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.idTypeUrl = this.foundationUrl + AdInsConstant.GetRefMasterList;
+        this.idTypeUrl = this.settingUrl + AdInsConstant.GetRefMasterList;
         var refMasterObj = new RefMasterObj();
         refMasterObj.refMasterTypeCode = "ID_TYPE";
         this.http.post(this.idTypeUrl, refMasterObj).subscribe(

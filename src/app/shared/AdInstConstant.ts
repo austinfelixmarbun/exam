@@ -213,4 +213,13 @@ export class AdInsConstant {
 
     //NOTIFICATION
     public static NotificationPost = "/Message/Post";
+
+    //REF CURR
+    public static GetRefCurrPaging = "/RefCurr/GetRefCurrPaging";
+    public static AddRefCurr = "/RefCurr/AddRefCurr";
+    public static EditRefCurr = "/RefCurr/EditRefCurr";
+    public static GetRefCurr = "/RefCurr/GetRefCurr";
+    public static AddExchangeRate = "/RefCurr/AddExchangeRate";
+    public static EditExchangeRate = "/RefCurr/EditExchangeRate";
+    public static GetExchangeRate = "/RefCurr/GetExchangeRate";
 }
