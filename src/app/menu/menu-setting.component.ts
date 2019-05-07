@@ -30,6 +30,7 @@ export class MenuSettingComponent implements OnInit {
     orderByKey: any = null;
     orderByValue: boolean = true;
     urlQryPaging : string = AdInsConstant.GetRefFormPaging;
+    urlEnviPaging : string = environment.foundationUrl;
     editUrl : any;
     // array of all items to be paged
     private allItems: any[];

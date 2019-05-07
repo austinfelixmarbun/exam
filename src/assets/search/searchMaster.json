@@ -3,7 +3,7 @@
   "component": [
     {
       "type": "dropdown",
-      "name": "refMasterTypeCode",
+      "name": "ref_Master_Type_Code",
       "id": "refMasterTypeCodeId",
       "value": "refMasterTypeCode",
       "placeholder": "Placeholder",
@@ -17,7 +17,7 @@
     },
     {
       "type": "textbox",
-      "name": "masterCode",
+      "name": "master_Code",
       "id": "masterCodeId",
       "value": "",
       "label": "Master Code",
@@ -35,7 +35,7 @@
     },
     {
       "type": "textbox",
-      "name": "biCode",
+      "name": "bi_Code",
       "id": "biCodeId",
       "value": "",
       "label": "BI Code",
@@ -44,7 +44,7 @@
     },
     {
       "type": "dropdown",
-      "name": "isActive",
+      "name": "is_Active",
       "datatype": "text",
       "id": "isActiveId",
       "value": "",

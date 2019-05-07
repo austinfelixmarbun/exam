@@ -24,6 +24,7 @@ export class RefJobTitleComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlQryPaging : string = AdInsConstant.GetRefJobTitle;
+  urlEnviPaging : string = environment.foundationUrl;
   //** End Query Paging */
 
   urlJson: string = "./assets/search/searchJobTitle.json";

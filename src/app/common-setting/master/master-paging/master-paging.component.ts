@@ -30,8 +30,9 @@ export class MasterPagingComponent implements OnInit {
   refMasterObj : RefMasterObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
   urlQryPaging: string = AdInsConstant.GetRefMasterPaging;
+  urlEnviPaging : string = environment.settingUrl;
   addCrit: CriteriaObj[];
 
   constructor(
@@ -44,9 +45,9 @@ export class MasterPagingComponent implements OnInit {
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefMasterPaging;
+    this.apiUrl = this.settingUrl + AdInsConstant.GetRefMasterPaging;
     this.initiateForm()
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
+    // this.adInsService.postData(this.settingUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
     //   }
@@ -94,7 +95,7 @@ export class MasterPagingComponent implements OnInit {
   initiateForm() {
     this.addCrit = new Array();
     var critIsActive = new CriteriaObj();
-    critIsActive.propName = "isSystem";
+    critIsActive.propName = "is_System";
     critIsActive.value = "No";
     critIsActive.restriction = AdInsConstant.RestrictionEq;
 
@@ -103,7 +104,7 @@ export class MasterPagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefMaster;
+      this.deleteUrl = this.settingUrl + AdInsConstant.DeleteRefMaster;
       this.refMasterObj = new RefMasterObj();
       this.refMasterObj.refMasterId = +id;
       this.https.post(this.deleteUrl, this.refMasterObj).subscribe(

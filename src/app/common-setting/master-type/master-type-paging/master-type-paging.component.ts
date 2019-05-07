@@ -37,6 +37,7 @@ export class MasterTypePagingComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetRefRolePaging;
+  urlEnviPaging : string = environment.foundationUrl;
 
   constructor(
     private http: Http,

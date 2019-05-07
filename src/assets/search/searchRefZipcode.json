@@ -2,7 +2,7 @@
     "component": [
       {
         "type": "textbox",
-        "name": "areaCode2",
+        "name": "rz.area_Code_2",
         "id": "Kelurahan",
         "value": "",
         "label": "Kelurahan",
@@ -10,7 +10,7 @@
       },
       {
         "type": "textbox",
-        "name": "areaCode1",
+        "name": "rz.area_Code_1",
         "id": "Kecamatan",
         "value": "",
         "label": "Kecamatan",
@@ -18,7 +18,7 @@
       },
       {
         "type": "textbox",
-        "name": "City",
+        "name": "rz.City",
         "id": "City",
         "value": "",
         "label": "City",
@@ -26,7 +26,7 @@
       },
       {
         "type": "textbox",
-        "name": "Zipcode",
+        "name": "rz.Zipcode",
         "id": "Zipcode",
         "value": "",
         "label": "Zipcode",
@@ -34,15 +34,15 @@
       },
       {
         "type": "textbox",
-        "name": "DistrictName",
-        "id": "DisTrictName",
+        "name": "rpd.Name",
+        "id": "DistrictName",
         "value": "",
         "label": "District Name",
         "placeholder": "Placeholder"
       },
       {
         "type": "textbox",
-        "name": "SubZipcodeCode",
+        "name": "rz.Sub_Zipcode",
         "id": "SubZipcodeCode",
         "value": "",
         "label": "Sub Zipcode Code",

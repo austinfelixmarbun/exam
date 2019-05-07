@@ -42,7 +42,6 @@ export class OfficeAddComponent implements OnInit {
   refOfficeAreaId: any = '';
   holidaySchmHId: any;
   workingHourSchmHId: any;
-  refTaxOfficeId: any;
   cntctPersonName: any;
   cntctPersonJobTitle: any;
   hierarchyNo: any;
@@ -62,8 +61,8 @@ export class OfficeAddComponent implements OnInit {
   officeParentUrl: any;
   holidaySchmUrl: any;
   workingHourSchmUrl: any;
-  refTaxOfficeUrl: any;
   foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
   isActive: boolean = true;
   isAllowAppCreated: boolean = true;
   officeObj: OfficeObj;
@@ -74,7 +73,7 @@ export class OfficeAddComponent implements OnInit {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
     this.addUrl = this.foundationUrl + AdInsConstant.AddRefOffice;
     this.editUrl = this.foundationUrl + AdInsConstant.EditRefOffice;
-    this.officeClassUrl = this.foundationUrl + AdInsConstant.GetRefMasterList;
+    this.officeClassUrl = this.settingUrl + AdInsConstant.GetRefMasterList;
     this.refOrgUrl = this.foundationUrl + AdInsConstant.GetListAllRefOrg;
     this.orgMdlUrl = this.foundationUrl + AdInsConstant.GetAllActiveOrgMdlByRefOrgId;
     this.officeParentUrl = this.foundationUrl + AdInsConstant.GetListUpperHierarchyRefOfficeByRefOrgId;
@@ -82,7 +81,6 @@ export class OfficeAddComponent implements OnInit {
     this.holidaySchmUrl = this.foundationUrl + AdInsConstant.GetAllActiveHolidaySchmH;
     this.workingHourSchmUrl = this.foundationUrl + AdInsConstant.GetListOfWorkingHourSchm;
     this.getRefOrgUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
-    this.refTaxOfficeUrl = this.foundationUrl + AdInsConstant.GetAllActiveRefTaxOffice;
 
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
@@ -120,7 +118,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(this.areaUrl, null).subscribe(
         (response) => {
           this.allRefOfficeArea = response['returnObject'];
-          //this.refOfficeAreaId = response['returnObject'][0]['refOfficeAreaId'];
+          this.refOfficeAreaId = response['returnObject'][0]['refOfficeAreaId'];
         },
         (error) => {
           console.log(error);
@@ -137,14 +135,6 @@ export class OfficeAddComponent implements OnInit {
         (response) => {
           this.allWorkingHourSchm = response['returnObject'];
           this.workingHourSchmHId = response['returnObject'][0]['workingHourSchmHId'];
-        },
-        (error) => {
-          console.log(error);
-        })
-      this.httpClient.post(this.refTaxOfficeUrl, null).subscribe(
-        (response) => {
-          this.allRefTaxOffice = response['returnObject'];
-          this.refTaxOfficeId = response['returnObject'][0]['refTaxOfficeId'];
         },
         (error) => {
           console.log(error);
@@ -180,7 +170,6 @@ export class OfficeAddComponent implements OnInit {
             this.isActive = false;
           }
           this.mrKonvenSyariah = response['returnObject']['mrKonvenSyariah']
-          this.refTaxOfficeId = response['returnObject']['refTaxOfficeId']
           this.ucAddr.setData(this.resultData);
           this.ucContact.setData(this.resultData);
           var orgMdlObj = new OrgMdlObj();
@@ -220,13 +209,6 @@ export class OfficeAddComponent implements OnInit {
             (error) => {
               console.log(error);
             })
-          this.httpClient.post(this.refTaxOfficeUrl, null).subscribe(
-            (response) => {
-              this.allRefTaxOffice = response['returnObject'];
-            },
-            (error) => {
-              console.log(error + this.refTaxOfficeUrl);
-            }),
 
             orgMdlObj.refOrgId = this.refOrgId
             this.httpClient.post(this.officeParentUrl, orgMdlObj).subscribe(
@@ -278,7 +260,6 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.phn3 = ucAddress.phn3;
     this.officeObj.cntctPersonEmail2 = ucContactInfo.email2;
     this.officeObj.workingHourSchmHId = OfficeAddReqForm.value.workingHourSchmHId;
-    this.officeObj.refTaxOfficeId = OfficeAddReqForm.value.refTaxOfficeId;
     this.officeObj.isVirtualOffice = '0'
     this.officeObj.mrKonvenSyariah = OfficeAddReqForm.value.mrKonvenSyariah;
 
@@ -303,8 +284,7 @@ export class OfficeAddComponent implements OnInit {
           console.log("Success");
           console.log(response);
           this.toastr.successMessage(response['message']);
-          this.router.navigateByUrl('/Office', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['/Office/add']));
+          this.router.navigate(["/office"]);
         },
         (error) => {
           console.log("Error");

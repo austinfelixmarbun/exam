@@ -4,7 +4,7 @@
   </div>
 </div>
 <div>
-  <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' (result)="getResult($event)"></app-search>
+  <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></app-search>
   <table class="table table-responsive-md text-center table-hover">
       <thead>
           <tr class="table-header">

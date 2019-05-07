@@ -31,6 +31,7 @@ export class BODComponent implements OnInit {
     orderByKey: any = null;
     orderByValue: boolean = true;
     urlQryPaging : string = AdInsConstant.GetCoyBodPaging;
+    urlEnviPaging : string = environment.foundationUrl;
     editUrl : any;
     bodObj : CoyBodObj;
     // array of all items to be paged

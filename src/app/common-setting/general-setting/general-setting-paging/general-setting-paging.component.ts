@@ -24,8 +24,9 @@ export class GeneralSettingPagingComponent implements OnInit {
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
   urlQryPaging: string = AdInsConstant.GetGeneralSettingPaging;
+  urlEnviPaging : string = environment.settingUrl;
   addCrit: CriteriaObj[];
 
   constructor() {}
@@ -35,7 +36,7 @@ export class GeneralSettingPagingComponent implements OnInit {
     this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetGeneralSettingPaging;
+    this.apiUrl = this.settingUrl + AdInsConstant.GetGeneralSettingPaging;
     this.initiateForm();
   }
 
@@ -79,7 +80,7 @@ export class GeneralSettingPagingComponent implements OnInit {
   initiateForm() {
     this.addCrit = new Array();
     var critIsActive = new CriteriaObj();
-    critIsActive.propName = "isUpdateable";
+    critIsActive.propName = "is_Updateable";
     critIsActive.value = "Yes";
     critIsActive.restriction = AdInsConstant.RestrictionEq;
 

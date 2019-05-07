@@ -39,6 +39,7 @@ export class CommissionerComponent implements OnInit {
     // paged items
     pagedItems: any[];
     foundationUrl: string = environment.foundationUrl;
+    urlEnviPaging : string = environment.foundationUrl;
     refCoyId : any;
     constructor(private http: HttpClient,private route: ActivatedRoute, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) {
       this.route.queryParams.subscribe(params => {

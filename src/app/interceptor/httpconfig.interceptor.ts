@@ -59,7 +59,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     SendDateTime: businessDt,
                     Ip: localStorage.getItem("LocalIp"),
                     RequestObject: request.body,
-                    UserLog: JSON.parse(localStorage.getItem("PageAccess"))
+                    UserLog: JSON.parse(localStorage.getItem("PageAccess")),
+                    Token: token
                 };
             }
             else {
@@ -83,7 +84,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     SendDateTime: businessDt,
                     Ip: localStorage.getItem("LocalIp"),
                     RequestObject: request.body,
-                    UserLog: JSON.parse(localStorage.getItem("PageAccess"))
+                    UserLog: JSON.parse(localStorage.getItem("PageAccess")),
+                    Token: token
                 };
             }
             else {

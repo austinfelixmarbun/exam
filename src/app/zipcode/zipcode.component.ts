@@ -8,6 +8,7 @@ import { Http } from '@angular/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 
 @Component({
   selector: 'app-zipcode',
@@ -18,6 +19,7 @@ import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
 export class ZipcodeComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
   editUrl: any;
   zipcodeObj: RefZipcodeObj;
   urlJson: string = "./assets/search/searchRefZipcode.json";
@@ -32,7 +34,9 @@ export class ZipcodeComponent implements OnInit {
   pager: any = {};
   // paged items
   pagedItems: any[];
-  foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
+  urlQryPaging: string = AdInsConstant.GetRefZipcodePaging;
+  urlEnviPaging : string = environment.settingUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
@@ -41,31 +45,26 @@ export class ZipcodeComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefZipcodePaging;
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
+    this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipcodePaging;
+    // this.adInsService.postData(this.settingUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
     //   }
     //   )
   }
 
-  search() {
-    this.orderByKey = null
-    this.orderByValue = true
-    this.pageNow = 1;
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(response);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+  getResult(event){
+    this.resultData = event.returnObject;
+    this.totalData = event.returnObject.count;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
+  }
+
+  onSelect(event)
+  {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.searchPagination(this.pageNow);
   }
 
   searchSort(event: any) {
@@ -79,19 +78,7 @@ export class ZipcodeComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   searchPagination(event: number) {
@@ -103,46 +90,12 @@ export class ZipcodeComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
-  }
-
-  pageChange(page: number) {
-    this.pageNow = page;
-    this.search();
-  }
-
-  // Success Type
-  typeSuccess() {
-    this.service.typeSuccess();
-  }
-
-  typeError() {
-    this.service.typeError();
-  }
-
-  timeout() {
-    this.service.timeout();
-  }
-
-  errMsg() {
-    this.service.errorMessage('asdasd');
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   delete(refZipcodeId: any) {
     if(confirm("Are you sure to delete this record?")) {
-      this.editUrl = this.foundationUrl + AdInsConstant.DeleteRefZipcode;
+      this.editUrl = this.settingUrl + AdInsConstant.DeleteRefZipcode;
       this.zipcodeObj = new RefZipcodeObj();
       this.zipcodeObj.refZipcodeId = refZipcodeId;
       this.http.post(this.editUrl, this.zipcodeObj).subscribe(
@@ -154,28 +107,5 @@ export class ZipcodeComponent implements OnInit {
 
   reset(){
     this.searchComponent.initiateForm();
-  }
-
-  onChange() {
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
   }
 }

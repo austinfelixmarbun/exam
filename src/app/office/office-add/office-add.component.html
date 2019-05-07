@@ -68,8 +68,7 @@
             <div class="form-group row">
               <label class="col-md-3 label-control" translate>Model Name </label>
               <div class="col-md-9">
-                <select class="form-control" name="orgMdlId" [(ngModel)]="orgMdlId" #OrgMdlId="ngModel"
-                  (change)="onChangeOrgMdl($event.target.value)">
+                <select class="form-control" name="orgMdlId" [(ngModel)]="orgMdlId" #OrgMdlId="ngModel">
                   <option *ngFor="let om of allOrgMdl" value="{{om.orgMdlId}}">{{om.orgMdlName}}
                   </option>
                 </select>
@@ -159,19 +158,6 @@
             </div>
             <app-ucAddress #ucAddress [parentForm]='OfficeReqForm'></app-ucAddress>
             <app-ucContactInfo #ucContactInfo [parentForm]='OfficeReqForm'></app-ucContactInfo>
-          </div>
-          <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> General</h4>
-            <div class="form-group row">
-              <label class="col-md-3 label-control" translate>Tax Office </label>
-              <div class="col-md-9">
-                <select class="form-control" name="refTaxOfficeId" [(ngModel)]="refTaxOfficeId"
-                  #RefTaxOfficeId="ngModel">
-                  <option *ngFor="let rto of allRefTaxOffice" value="{{rto.refTaxOfficeId}}">{{rto.taxOfficeName}}
-                  </option>
-                </select>
-              </div>
-            </div>
           </div>
           <div class="form-actions right">
             <button *ngIf="pageType === 'edit'" type="button" class="btn btn-raised btn-warning mr-1"

@@ -33,6 +33,7 @@ export class OfficeComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   urlQryPaging : string = AdInsConstant.GetListOffice;
+  urlEnviPaging : string = environment.foundationUrl;
   displayNone: boolean = false
 
   foundationUrl: string = environment.foundationUrl;

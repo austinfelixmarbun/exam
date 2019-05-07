@@ -23,6 +23,7 @@ export class OfficeEmpPosComponent implements OnInit {
   @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchEmpList.json";
   urlQryPaging : string = AdInsConstant.GetEmpPositionPaging;
+  urlEnviPaging : string = environment.foundationUrl;
   refOfficeId: any;
   officeCode: any;
   officeName: any;
