@@ -177,6 +177,7 @@ export class AdInsConstant {
     public static GetRefMastersByCriteria = "/RefMaster/GetRefMastersByCriteria";
     public static GetRefMaster = "/RefMaster/GetRefMaster";
     public static GetRefMasterListByTypeCode = "/RefMaster/GetRefMasterListByTypeCode";
+    public static GetRefMasterListKeyValuePair = "/RefMaster/GetRefMasterListKeyValuePair";
     public static AddRefMaster = "/RefMaster/AddRefMaster";
     public static EditRefMaster = "/RefMaster/EditRefMaster";
     public static GetRefMasterType = "/RefMaster/GetRefMasterType";
