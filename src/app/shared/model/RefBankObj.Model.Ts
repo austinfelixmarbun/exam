@@ -2,7 +2,7 @@ export class RefBankObj {
     refBankId : string;
     bankName : string;
     bankCode : string;
-    biCode : string;
+    regRptCode : string;
     isActive : string;
     constructor()
     {}

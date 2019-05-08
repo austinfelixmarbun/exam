@@ -25,7 +25,7 @@ export class CurrencyAddComponent implements OnInit {
   currDt: any;
   roundedAmt: any;
   minRefundAmt: any;
-  biCode: any;
+  regRptCode: any;
   exchangeRateId: any;
   exchangeRateAmt: any = 0;
   currObj: CurrObj;
@@ -77,7 +77,7 @@ export class CurrencyAddComponent implements OnInit {
           this.currName = response['returnObject']['currName'];
           this.roundedAmt = response['returnObject']['roundedAmt'];
           this.minRefundAmt = response['returnObject']['minRefundAmt'];
-          this.biCode = response['returnObject']['biCode'];
+          this.regRptCode = response['returnObject']['regRptCode'];
           if (this.resultData.isActive == "1") {
             this.isActive = true;
           } else {
@@ -103,7 +103,7 @@ export class CurrencyAddComponent implements OnInit {
           this.currName = response['returnObject']['currName'];
           this.roundedAmt = response['returnObject']['roundedAmt'];
           this.minRefundAmt = response['returnObject']['minRefundAmt'];
-          this.biCode = response['returnObject']['biCode'];
+          this.regRptCode = response['returnObject']['regRptCode'];
           if (this.resultData.isActive == "1") {
             this.isActive = true;
           } else {
@@ -153,7 +153,7 @@ export class CurrencyAddComponent implements OnInit {
           console.log("Success");
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/menuSetting/currency"]);
+          this.router.navigate(["/commonSetting/currency"]);
         },
         error => {
           console.log(error);
@@ -166,7 +166,7 @@ export class CurrencyAddComponent implements OnInit {
           console.log("Success");
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/menuSetting/currency"]);
+          this.router.navigate(["/commonSetting/currency"]);
         },
         error => {
           console.log(error);
@@ -187,7 +187,7 @@ export class CurrencyAddComponent implements OnInit {
           console.log("addExchange");
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/menuSetting/currency"]);
+          this.router.navigate(["/commonSetting/currency"]);
         },
         error => {
           console.log(error);
@@ -200,7 +200,7 @@ export class CurrencyAddComponent implements OnInit {
           console.log("editExchange");
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/menuSetting/currency"]);
+          this.router.navigate(["/commonSetting/currency"]);
         },
         error => {
           console.log(error);

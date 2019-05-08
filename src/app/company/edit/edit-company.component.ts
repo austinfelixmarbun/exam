@@ -29,7 +29,7 @@ export class EditCompanyComponent implements OnInit {
     fullName : any;
     shortName : any;
     initialName : any;
-    biCode : any;
+    regRptCode : any;
     npwp: any;
     tdp: any;
 
@@ -67,7 +67,7 @@ export class EditCompanyComponent implements OnInit {
         this.fullName = data.fullName;
         this.shortName = data.shortName;
         this.initialName = data.initialName;
-        this.biCode = data.biCode;
+        this.regRptCode = data.regRptCode;
         this.npwp = data.npwp;
         this.tdp = data.tdp;
     }
@@ -80,7 +80,7 @@ export class EditCompanyComponent implements OnInit {
             refCoyObj.fullName = form.value.fullName;
             refCoyObj.shortName = form.value.shortName;
             refCoyObj.initialName = form.value.initialName;
-            refCoyObj.biCode = form.value.biCode;
+            refCoyObj.regRptCode = form.value.regRptCode;
             refCoyObj.npwp = form.value.npwp;
             refCoyObj.tdp = form.value.tdp;
             refCoyObj.addr = ucAddress.addr;

@@ -71,11 +71,11 @@
               <div class="form-group row">
                 <label class="col-md-3 label-control" translate>BI Code </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" name="biCode" required [(ngModel)]="biCode" #BiCode="ngModel"
-                    [ngClass]="{ 'is-invalid': (CurrReqForm.submitted || BiCode.touched || BiCode.dirty) && BiCode.invalid }">
-                  <div *ngIf="(CurrReqForm.submitted || BiCode.touched || BiCode.dirty) && BiCode.invalid"
+                  <input type="text" class="form-control" name="regRptCode" required [(ngModel)]="regRptCode" #RegRptCode="ngModel"
+                    [ngClass]="{ 'is-invalid': (CurrReqForm.submitted || RegRptCode.touched || RegRptCode.dirty) && RegRptCode.invalid }">
+                  <div *ngIf="(CurrReqForm.submitted || RegRptCode.touched || RegRptCode.dirty) && RegRptCode.invalid"
                     class="invalid-feedback">
-                    <div *ngIf="BiCode.errors.required" translate>This field is required</div>
+                    <div *ngIf="RegRptCode.errors.required" translate>This field is required</div>
                   </div>
                 </div>
               </div>
@@ -88,7 +88,7 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/menuSetting/currency']"
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/commonSetting/currency']"
                 translate>
                 <i class="ft-x"></i> Cancel
               </button>

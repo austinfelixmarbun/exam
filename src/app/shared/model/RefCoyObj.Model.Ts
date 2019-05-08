@@ -9,7 +9,7 @@ export class RefCoyObj {
     npwp:                  string;
     tdp:                   string;
     siup:                  string;
-    biCode:                string;
+    regRptCode:            string;
     addr:                  string;
     areaCode1:             string;
     areaCode2:             string;

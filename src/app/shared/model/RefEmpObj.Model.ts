@@ -33,7 +33,7 @@ export class RefEmpObj {
     EmpBankAccId : number
     refBankId : number
     bankBranch : string
-    bankBranchBiCode : string
+    bankBranchRegRptCode : string
     bankAccNo : string
     bankAccName : string
     bankCode : string

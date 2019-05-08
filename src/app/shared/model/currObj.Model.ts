@@ -6,7 +6,7 @@ export class CurrObj {
     minRefundAmt: any;
     toleranceAmt: any;
     cofId: any;
-    biCode: any;
+    regRptCode: any;
     lbppCode: any;
     isActive: any;
 }

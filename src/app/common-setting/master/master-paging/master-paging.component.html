@@ -11,8 +11,7 @@
           Code</span></th>
       <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
           name='descr'>Description</span></th>
-      <th><span class="thead-header" (click)="searchSort($event)" name='biCode'>Sandi
-          BI</span></th>
+      <th><span class="thead-header" (click)="searchSort($event)" name='regRptCode'>BI Code</span></th>
       <th><span class="thead-header" (click)="searchSort($event)"
           name='isActive'>Active</span></th>
       <th>Action</th>
@@ -22,7 +21,7 @@
     <tr *ngFor="let item of resultData?.returnObject.data">
       <td>{{item.masterCode}}</td>
       <td class="text-left">{{item.descr}}</td>
-      <td>{{item.biCode}}</td>
+      <td>{{item.regRptCode}}</td>
       <td>{{item.isActive}}</td>
       <td>
         <div *ngIf="item.isSystem === 'No'">
