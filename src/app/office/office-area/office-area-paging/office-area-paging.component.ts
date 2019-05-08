@@ -29,6 +29,7 @@ export class OfficeAreaPagingComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetRefOfficeAreaPaging;
+  urlEnviPaging : string = environment.foundationUrl;
 
   refOfficeAreaObj: RefOfficeAreaObj;
   constructor(

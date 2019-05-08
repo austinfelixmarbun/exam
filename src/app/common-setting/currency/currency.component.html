@@ -17,13 +17,13 @@
             <td *ngIf="item.isActive === '1'">Yes</td>
             <td *ngIf="item.isActive === '0'">No</td>
             <td>
-                <a class="success p-0" data-original-title="" title="" [routerLink]="['/menuSetting/currency/add']"
+                <a class="success p-0" data-original-title="" title="" [routerLink]="['/commonSetting/currency/add']"
                     [queryParams]="{refCurrId:item.refCurrId,exRate:'true'}">
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>
                 </a>
             </td>
             <td>
-                <a class="success p-0" data-original-title="" title="" [routerLink]="['/menuSetting/currency/add']"
+                <a class="success p-0" data-original-title="" title="" [routerLink]="['/commonSetting/currency/add']"
                     [queryParams]="{refCurrId:item.refCurrId,param:'edit'}">
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>
                 </a>

@@ -18,7 +18,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class MasterAddEditComponent implements OnInit {
 
-  foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
   apiUrl: any;
   refMasterObj: RefMasterObj;
   refMasterTypeObj: any;
@@ -57,7 +57,7 @@ export class MasterAddEditComponent implements OnInit {
     this.refMasterObj = new RefMasterObj()
     this.GetListMasterType();
     if (this.type === 'edit') {
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetRefMaster;
+      this.apiUrl = this.settingUrl + AdInsConstant.GetRefMaster;
       this.refMasterObj = new RefMasterObj()
       this.refMasterObj.refMasterId = +this.refMasterId
       this.httpClient.post(this.apiUrl, this.refMasterObj).subscribe(
@@ -86,7 +86,7 @@ export class MasterAddEditComponent implements OnInit {
   Save(MasterAddEditForm: NgForm): void {
     this.spinner.show();
     var returnObj: Array<any> = [];
-    var getRefMasterUrl = this.foundationUrl + AdInsConstant.GetRefMasterListByTypeCode;
+    var getRefMasterUrl = this.settingUrl + AdInsConstant.GetRefMasterListByTypeCode;
     var masterObj: RefMasterObj;
     masterObj = new RefMasterObj()
     masterObj.refMasterTypeCode = MasterAddEditForm.value.refMasterTypeCodeModule;
@@ -105,7 +105,7 @@ export class MasterAddEditComponent implements OnInit {
             this.service.typeErrorCustom('Code Has Been Used');
           }
           else {
-            this.apiUrl = this.foundationUrl + AdInsConstant.AddRefMaster;
+            this.apiUrl = this.settingUrl + AdInsConstant.AddRefMaster;
 
             this.refMasterObj = new RefMasterObj();
             this.refMasterObj.refMasterTypeCode = MasterAddEditForm.value.refMasterTypeCodeModule;
@@ -143,7 +143,7 @@ export class MasterAddEditComponent implements OnInit {
     }
     //MODE-EDIT
     else {
-      this.apiUrl = this.foundationUrl + AdInsConstant.EditRefMaster;
+      this.apiUrl = this.settingUrl + AdInsConstant.EditRefMaster;
 
       this.refMasterObj.refMasterId = this.refMasterId;
       this.refMasterObj.refMasterTypeCode = MasterAddEditForm.value.refMasterTypeCodeModule;
@@ -175,7 +175,7 @@ export class MasterAddEditComponent implements OnInit {
   }
 
   GetListMasterType() {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefMasterType;
+    this.apiUrl = this.settingUrl + AdInsConstant.GetRefMasterType;
     var masterObj = new RefMasterObj();
     this.httpClient.post(this.apiUrl, masterObj).subscribe(
       (response) => {

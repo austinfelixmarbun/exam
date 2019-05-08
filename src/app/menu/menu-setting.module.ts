@@ -7,8 +7,6 @@ import { MenuSettingRoutingComponent } from 'app/menu/menu-setting-routing.compo
 import { SharingModule } from 'app/shared/sharing.module';
 import { MenuSettingComponent } from './menu-setting.component';
 import { AddMenuSettingComponent } from './add/add-menu.component';
-import { CurrencyComponent } from './currency/currency.component';
-import { CurrencyAddComponent } from './currency/currency-add/currency-add.component';
 
 @NgModule({
   imports: [
@@ -21,9 +19,7 @@ import { CurrencyAddComponent } from './currency/currency-add/currency-add.compo
   ],
   declarations: [
     MenuSettingComponent,
-    AddMenuSettingComponent,
-    CurrencyComponent,
-    CurrencyAddComponent
+    AddMenuSettingComponent
   ]
 })
 export class MenuSettingModule { }

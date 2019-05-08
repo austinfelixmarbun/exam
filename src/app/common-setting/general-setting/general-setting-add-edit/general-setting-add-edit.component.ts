@@ -16,7 +16,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class GeneralSettingAddEditComponent implements OnInit {
 
-  foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
   gsObj: GeneralSettingObj;
   apiUrl: any;
   type: string = 'add';
@@ -49,7 +49,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
 
   ngOnInit() {
     if (this.type === 'edit') {
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetGeneralSettingById;
+      this.apiUrl = this.settingUrl + AdInsConstant.GetGeneralSettingById;
       this.gsObj = new GeneralSettingObj()
       this.gsObj.generalSettingId = +this.generalSettingId
       this.httpClient.post(this.apiUrl, this.gsObj).subscribe(
@@ -75,7 +75,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
   Save(GSForm: NgForm): void {
     this.spinner.show();
     var returnObj: any;
-    var getValueUrl = this.foundationUrl + AdInsConstant.GetGeneralSettingValue;
+    var getValueUrl = this.settingUrl + AdInsConstant.GetGeneralSettingValue;
     var gsCheckObj: GeneralSettingObj;
     gsCheckObj = new GeneralSettingObj()
     gsCheckObj.gsCode = GSForm.value.gsCode;
@@ -91,7 +91,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
             this.service.typeErrorCustom('Code Has Been Used');
           }
           else {
-            this.apiUrl = this.foundationUrl + AdInsConstant.AddGeneralSetting;
+            this.apiUrl = this.settingUrl + AdInsConstant.AddGeneralSetting;
 
             this.gsObj = new GeneralSettingObj();
             this.gsObj.gsCode =  GSForm.value.gsCode;
@@ -121,7 +121,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     }
     //MODE-EDIT
     else {
-      this.apiUrl = this.foundationUrl + AdInsConstant.EditGeneralSetting;
+      this.apiUrl = this.settingUrl + AdInsConstant.EditGeneralSetting;
 
       this.gsObj.gsCode =  GSForm.value.gsCode;
       this.gsObj.gsName = GSForm.value.gsName;

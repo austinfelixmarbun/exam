@@ -12,6 +12,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/lookup-employee.component';
 import { GeneralSettingAddEditComponent } from 'app/common-setting/general-setting/general-setting-add-edit/general-setting-add-edit.component';
 import { GeneralSettingPagingComponent } from 'app/common-setting/general-setting/general-setting-paging/general-setting-paging.component';
+import { CurrencyComponent } from 'app/common-setting/currency/currency.component';
+import { CurrencyAddComponent } from 'app/common-setting/currency/currency-add/currency-add.component';
+import { WorkingHourPagingComponent } from './working-hour-scheme/working-hour-paging/working-hour-paging.component';
 
 @NgModule({
   imports: [
@@ -29,7 +32,10 @@ import { GeneralSettingPagingComponent } from 'app/common-setting/general-settin
     MasterTypePagingComponent,
     MasterTypeAddEditComponent,
     GeneralSettingAddEditComponent,
-    GeneralSettingPagingComponent
+    GeneralSettingPagingComponent,
+    CurrencyComponent,
+    CurrencyAddComponent,
+    WorkingHourPagingComponent
   ],
   providers: [
     {

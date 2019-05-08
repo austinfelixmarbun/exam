@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { MasterTypePagingComponent } from 'app/common-setting/master-type/master-type-paging/master-type-paging.component';
 import { GeneralSettingAddEditComponent } from 'app/common-setting/general-setting/general-setting-add-edit/general-setting-add-edit.component';
 import { GeneralSettingPagingComponent } from 'app/common-setting/general-setting/general-setting-paging/general-setting-paging.component';
+import { CurrencyComponent } from 'app/common-setting/currency/currency.component';
+import { CurrencyAddComponent } from 'app/common-setting/currency/currency-add/currency-add.component';
 
 const routes: Routes = [
   {
@@ -51,6 +53,20 @@ const routes: Routes = [
         component: GeneralSettingAddEditComponent,
         data: {
           title: 'General Setting Maintenance Add Edit'
+        },
+      },
+      {
+        path: 'currency',
+        component: CurrencyComponent,
+        data: {
+          title: 'Currency'
+        },
+      },
+      {
+        path: 'currency/add',
+        component: CurrencyAddComponent,
+        data: {
+          title: 'Currency add'
         },
       }
     ]
