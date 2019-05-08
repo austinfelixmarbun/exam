@@ -37,6 +37,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetOrgJobTitlePaging;
+  urlEnviPaging : string = environment.foundationUrl;
   addCrit: CriteriaObj[];
 
   orgJobTitleObj: OrgJobTitleObj;

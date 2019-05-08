@@ -22,6 +22,7 @@ export class LookupOrgMdlStrucComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupOrgMdlStruc.json";
   urlQryPaging: string = AdInsConstant.GetOrgMdlStrucPaging;
+  urlEnviPaging : string = environment.foundationUrl;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;

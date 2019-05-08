@@ -1,30 +1,30 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
-import { WorkingHourObj } from 'app/shared/model/workingHourObj.Model';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { SearchComponent } from 'app/shared/search/search.component';
+import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
 
 @Component({
-  selector: 'app-working-hour-paging',
-  templateUrl: './working-hour-paging.component.html',
-  styleUrls: ['./working-hour-paging.component.scss']
+  selector: 'app-holiday-paging',
+  templateUrl: './holiday-paging.component.html',
+  styleUrls: ['./holiday-paging.component.scss']
 })
-export class WorkingHourPagingComponent implements OnInit {
+export class HolidayPagingComponent implements OnInit {
 
   @ViewChild(UCGridFooterComponent) ucgridFooter;
   @ViewChild(SearchComponent) searchComponent;
-  urlJson: string = "./assets/search/searchWorkingHour.json";
+  urlJson: string = "./assets/search/searchHoliday.json";
   resultData: string;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
   apiUrl: any;
   deleteUrl: any;
-  workingHourObj: WorkingHourObj;
+  holidayObj: HolidayObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  urlQryPaging : string = AdInsConstant.GetWorkHourSchmHPaging;
+  urlQryPaging : string = AdInsConstant.GetHolidayPaging;
   urlEnviPaging : string = environment.foundationUrl;
   foundationUrl: string = environment.foundationUrl;
   
@@ -33,7 +33,7 @@ export class WorkingHourPagingComponent implements OnInit {
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetWorkHourSchmHPaging;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetHolidayPaging;
   }
 
   searchSort(event: any) {

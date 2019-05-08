@@ -31,6 +31,7 @@ export class LookupRoleComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupRole.json";
   urlQryPaging: string = AdInsConstant.GetRefRolePaging;
+  urlEnviPaging : string = environment.foundationUrl;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;

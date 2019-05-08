@@ -38,6 +38,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetOrgMdlStrucPaging;
+  urlEnviPaging : string = environment.foundationUrl;
   addCrit: CriteriaObj[];
 
   orgMdlObj: OrgMdlObj;

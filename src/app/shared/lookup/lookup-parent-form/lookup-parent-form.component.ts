@@ -20,6 +20,7 @@ export class LookupParentFormComponent implements OnInit {
 
     urlJson: string = "./assets/lookup/lookupParentForm.json";
     urlQryPaging: string = AdInsConstant.GetRefFormPaging;
+    urlEnviPaging : string = environment.foundationUrl;
     @Input() _url: string;
     @Input() nameSelect: any = "Search ...";
     @Input() idSelect: any;

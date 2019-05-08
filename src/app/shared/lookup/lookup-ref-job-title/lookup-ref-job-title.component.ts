@@ -31,6 +31,7 @@ export class LookupRefJobTitleComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupRefJobTitle.json";
   urlQryPaging: string = AdInsConstant.GetRefJobTitle;
+  urlEnviPaging : string = environment.foundationUrl;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;

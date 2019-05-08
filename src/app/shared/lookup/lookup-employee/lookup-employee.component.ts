@@ -22,6 +22,7 @@ export class LookupEmployeeComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupEmp.json";
   urlQryPaging: string = AdInsConstant.GetListEmployee;
+  urlEnviPaging : string = environment.foundationUrl;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;

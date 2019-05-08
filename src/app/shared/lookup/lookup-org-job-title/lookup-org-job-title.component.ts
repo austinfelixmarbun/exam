@@ -22,6 +22,7 @@ export class LookupOrgJobTitleComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupOrgJobTitle.json";
   urlQryPaging: string = AdInsConstant.GetOrgJobTitlePaging;
+  urlEnviPaging : string = environment.foundationUrl;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;

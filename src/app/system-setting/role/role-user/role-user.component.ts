@@ -37,6 +37,7 @@ export class RoleUserComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetListUserEmployee;
+  urlEnviPaging : string = environment.foundationUrl;
 
   refRoleId: any;
   check: any;

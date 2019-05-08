@@ -35,6 +35,7 @@ export class UserPagingComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetRefUserPaging;
+  urlEnviPaging : string = environment.foundationUrl;
   constructor(
     private http: Http,
     private spinner: NgxSpinnerService,

@@ -8,6 +8,10 @@ import { GeneralSettingAddEditComponent } from 'app/common-setting/general-setti
 import { GeneralSettingPagingComponent } from 'app/common-setting/general-setting/general-setting-paging/general-setting-paging.component';
 import { CurrencyComponent } from 'app/common-setting/currency/currency.component';
 import { CurrencyAddComponent } from 'app/common-setting/currency/currency-add/currency-add.component';
+import { WorkingHourPagingComponent } from './working-hour-scheme/working-hour-paging/working-hour-paging.component';
+import { WorkingHourDetailComponent } from './working-hour-scheme/working-hour-detail/working-hour-detail.component';
+import { HolidayPagingComponent } from './holiday-scheme/holiday-paging/holiday-paging.component';
+import { HolidayDetailComponent } from './holiday-scheme/holiday-detail/holiday-detail.component';
 
 const routes: Routes = [
   {
@@ -67,6 +71,34 @@ const routes: Routes = [
         component: CurrencyAddComponent,
         data: {
           title: 'Currency add'
+        },
+      },
+      {
+        path: 'workingHour',
+        component: WorkingHourPagingComponent,
+        data: {
+          title: 'Working Hour'
+        },
+      },
+      {
+        path: 'workingHour/add',
+        component: WorkingHourDetailComponent,
+        data: {
+          title: 'Working Hour Add Edit'
+        },
+      },
+      {
+        path: 'holiday',
+        component: HolidayPagingComponent,
+        data: {
+          title: 'Holiday'
+        },
+      },
+      {
+        path: 'holiday/add',
+        component: HolidayDetailComponent,
+        data: {
+          title: 'Holiday Add Edit'
         },
       }
     ]

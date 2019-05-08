@@ -39,6 +39,7 @@ export class RoleFormComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetRefFormPaging;
+  urlEnviPaging : string = environment.foundationUrl;
 
   refRoleId: any;
   check: any;

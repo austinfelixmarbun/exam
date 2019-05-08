@@ -34,6 +34,7 @@ export class OrganizationComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetRefOrgPaging;
+  urlEnviPaging : string = environment.foundationUrl;
 
   constructor(
     private http: HttpClient,

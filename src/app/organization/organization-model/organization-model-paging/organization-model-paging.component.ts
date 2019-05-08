@@ -41,6 +41,7 @@ export class OrganizationModelPagingComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetOrgMdlPaging;
+  urlEnviPaging : string = environment.foundationUrl;
   addCrit: CriteriaObj[];
 
   constructor(

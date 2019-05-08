@@ -204,7 +204,11 @@ export class AdInsConstant {
 
     //HOLIDAY
     public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
-
+    public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
+    public static AddHolidaySchmH = "/Holiday/AddHolidaySchmH";
+    public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
+    public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
+    
     //WORK HOUR
     public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
 
@@ -222,4 +226,8 @@ export class AdInsConstant {
     public static AddExchangeRate = "/RefCurr/AddExchangeRate";
     public static EditExchangeRate = "/RefCurr/EditExchangeRate";
     public static GetExchangeRate = "/RefCurr/GetExchangeRate";
+
+    //WORKHOUR
+    public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
+    
 }

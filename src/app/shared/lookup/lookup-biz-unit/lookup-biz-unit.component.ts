@@ -31,6 +31,7 @@ export class LookupBizUnitComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupBizUnit.json";
   urlQryPaging: string = AdInsConstant.GetBusinessUnitPaging;
+  urlEnviPaging : string = environment.foundationUrl;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;

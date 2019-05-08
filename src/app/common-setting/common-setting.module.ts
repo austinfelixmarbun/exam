@@ -15,6 +15,9 @@ import { GeneralSettingPagingComponent } from 'app/common-setting/general-settin
 import { CurrencyComponent } from 'app/common-setting/currency/currency.component';
 import { CurrencyAddComponent } from 'app/common-setting/currency/currency-add/currency-add.component';
 import { WorkingHourPagingComponent } from './working-hour-scheme/working-hour-paging/working-hour-paging.component';
+import { WorkingHourDetailComponent } from './working-hour-scheme/working-hour-detail/working-hour-detail.component';
+import { HolidayPagingComponent } from './holiday-scheme/holiday-paging/holiday-paging.component';
+import { HolidayDetailComponent } from './holiday-scheme/holiday-detail/holiday-detail.component';
 
 @NgModule({
   imports: [
@@ -35,7 +38,10 @@ import { WorkingHourPagingComponent } from './working-hour-scheme/working-hour-p
     GeneralSettingPagingComponent,
     CurrencyComponent,
     CurrencyAddComponent,
-    WorkingHourPagingComponent
+    WorkingHourPagingComponent,
+    WorkingHourDetailComponent,
+    HolidayPagingComponent,
+    HolidayDetailComponent
   ],
   providers: [
     {

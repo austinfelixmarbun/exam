@@ -15,7 +15,7 @@
                     <label>{{orgMdlObj.orgMdlName}}</label></div>
                 </div>
 
-                <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+                <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging'
                   (result)="getResult($event)" [addCritInput]='addCrit'></app-search>
 
 
