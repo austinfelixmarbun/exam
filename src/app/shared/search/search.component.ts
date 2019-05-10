@@ -210,8 +210,12 @@ export class SearchComponent implements OnInit {
     request.criteria = arrCrit;
     var httpRequest = new HttpRequestObj();
     this.http.post(apiUrl, request).subscribe((response) => {
-      console.log(response);
-      this.result.emit(response);
+      var test = {
+        response : response,
+        pageNow : pageNo
+      }
+      console.log(test);
+      this.result.emit(test);
       return response;
     });
   }

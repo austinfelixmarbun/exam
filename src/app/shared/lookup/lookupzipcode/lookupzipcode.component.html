@@ -21,10 +21,10 @@
     <table class="table table-responsive-md text-center table-hover">
       <thead>
         <tr>
-          <th (click)="searchSort(lookupSearch,'city')"><span class="thead-header">City</span></th>
-          <th (click)="searchSort(lookupSearch,'areaCode2')"><span class="thead-header">Kelurahan</span></th>
-          <th>Kecamatan</th>
-          <th>Zipcode</th>
+          <th (click)="searchSort(lookupSearch,'rz.city')"><span class="thead-header">City</span></th>
+          <th (click)="searchSort(lookupSearch,'rz.area_Code_2')"><span class="thead-header">Kelurahan</span></th>
+          <th (click)="searchSort(lookupSearch,'rz.area_Code_1')"><span class="thead-header">Kecamatan</span></th>
+          <th (click)="searchSort(lookupSearch,'rz.zipcode')"><span class="thead-header">Zipcode</span></th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -43,6 +43,6 @@
         </tr>
       </tbody>
     </table>
-    <app-ucgrid-footer #ucgridFooter (select)="onSelect(lookupsearch, $event)"></app-ucgrid-footer>
+    <app-ucgrid-footer #ucgridFooter (select)="onSelect(lookupSearch, $event)"></app-ucgrid-footer>
   </div>
 </ng-template>

@@ -50,17 +50,16 @@
             <div class="form-group row" *ngFor="let item of listOfDay;let i = index;">
               <label class="col-md-2 text-center" translate>{{item.label}} </label>
               <div class="col-md-2" style="border-right: 1px solid grey">
-                <input type="time" class="form-control" [(ngModel)]="item.whTime" name="item.day" #item.day="ngModel">
+                <input type="time" class="form-control" [(ngModel)]="item.workingHourFrom1" name="item.workingHourSchmDay" #item.workingHourSchmDay="ngModel" value="{{item.workingHourFrom1}}">
               </div>
               <div class="col-md-2">
-                <input type="time" class="form-control" [(ngModel)]="item.whTimeTo" name="item.day" #item.day="ngModel">
+                <input type="time" class="form-control" [(ngModel)]="item.workingHourTo1" name="item.workingHourSchmDay" #item.workingHourSchmDay="ngModel" value="{{item.workingHourTo1}}">
               </div>
               <div class="col-md-2" style="border-right: 1px solid grey">
-                <input type="time" class="form-control" [(ngModel)]="item.whabTime" name="item.day" #item.day="ngModel">
+                <input type="time" class="form-control" [(ngModel)]="item.workingHourFrom2" name="item.workingHourSchmDay" #item.workingHourSchmDay="ngModel" value="{{item.workingHourFrom2}}">
               </div>
               <div class="col-md-2">
-                <input type="time" class="form-control" [(ngModel)]="item.whabTimeTo" name="item.day"
-                  #item.day="ngModel">
+                <input type="time" class="form-control" [(ngModel)]="item.workingHourTo2" name="item.workingHourSchmDay" #item.workingHourSchmDay="ngModel" value="{{item.workingHourTo2}}">
               </div>
             </div>
           </div>

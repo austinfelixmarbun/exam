@@ -3,12 +3,15 @@ import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgr
 import { SearchComponent } from 'app/shared/search/search.component';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
-import { WorkingHourObj } from 'app/shared/model/workingHourObj.Model';
+import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
+import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-working-hour-paging',
   templateUrl: './working-hour-paging.component.html',
-  styleUrls: ['./working-hour-paging.component.scss']
+  styleUrls: ['./working-hour-paging.component.scss'],
+  providers: [NGXToastrService]
 })
 export class WorkingHourPagingComponent implements OnInit {
 
@@ -21,19 +24,20 @@ export class WorkingHourPagingComponent implements OnInit {
   pageSize: any = 10;
   apiUrl: any;
   deleteUrl: any;
-  workingHourObj: WorkingHourObj;
+  workingHourSchmHObj: WorkingHourSchmHObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
   urlQryPaging : string = AdInsConstant.GetWorkHourSchmHPaging;
   urlEnviPaging : string = environment.foundationUrl;
   foundationUrl: string = environment.foundationUrl;
   
-  constructor() { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetWorkHourSchmHPaging;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteWorkingHourSchmH;
   }
 
   searchSort(event: any) {
@@ -77,5 +81,21 @@ export class WorkingHourPagingComponent implements OnInit {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);
+  }
+
+  delete(workingHourSchmHId: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      this.workingHourSchmHObj = new WorkingHourSchmHObj();
+      this.workingHourSchmHObj.workingHourSchmHId = workingHourSchmHId;
+      this.http.post(this.deleteUrl, this.workingHourSchmHObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          this.searchPagination(1);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        });
+    }
   }
 }

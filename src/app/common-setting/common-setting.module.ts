@@ -18,6 +18,7 @@ import { WorkingHourPagingComponent } from './working-hour-scheme/working-hour-p
 import { WorkingHourDetailComponent } from './working-hour-scheme/working-hour-detail/working-hour-detail.component';
 import { HolidayPagingComponent } from './holiday-scheme/holiday-paging/holiday-paging.component';
 import { HolidayDetailComponent } from './holiday-scheme/holiday-detail/holiday-detail.component';
+import { HolidayDetailAddComponent } from './holiday-scheme/holiday-detail-add/holiday-detail-add.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { HolidayDetailComponent } from './holiday-scheme/holiday-detail/holiday-
     WorkingHourPagingComponent,
     WorkingHourDetailComponent,
     HolidayPagingComponent,
-    HolidayDetailComponent
+    HolidayDetailComponent,
+    HolidayDetailAddComponent
   ],
   providers: [
     {

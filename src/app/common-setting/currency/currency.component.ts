@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CurrObj } from 'app/shared/model/currObj.Model';
+import { CurrObj } from 'app/shared/model/CurrObj.Model';
 import { environment } from 'environments/environment';
 
 @Component({

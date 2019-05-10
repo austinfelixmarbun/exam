@@ -52,10 +52,10 @@ export class LookupzipcodeComponent implements OnInit {
 
   closeResult: string;
 
-  foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
 
   ngOnInit() {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
+    this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipcodePaging;
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];

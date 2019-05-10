@@ -13,7 +13,7 @@
                             <form novalidate="" (ngSubmit)="onSubmit($event)" #f="ngForm">
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Email" ngModel required email #user>
+                                        <input type="text" class="form-control" name="inputEmail" id="inputEmail" placeholder="User" ngModel required #user>
                                     </div>
                                 </div>
 
@@ -43,10 +43,10 @@
                             </form>
                         </div>
                     </div>
-                    <div class="card-footer">
+                    <!-- <div class="card-footer">
                         <div class="float-left"><a (click)="onForgotPassword()" class="white">Recover Password</a></div>
                         <div class="float-right"><a (click)="onRegister()" class="white">New User?</a></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

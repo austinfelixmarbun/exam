@@ -1,6 +1,6 @@
-export class WorkingHourObj {
+export class WorkingHourSchmHObj {
     workingHourSchmHId: any;
-    workingHourSchmName: any;
     workingHourSchmCode: any;
+    workingHourSchmName: any;
     isActive: any;
 }

@@ -4,11 +4,14 @@ import { environment } from 'environments/environment';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
+import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-holiday-paging',
   templateUrl: './holiday-paging.component.html',
-  styleUrls: ['./holiday-paging.component.scss']
+  styleUrls: ['./holiday-paging.component.scss'],
+  providers: [NGXToastrService]
 })
 export class HolidayPagingComponent implements OnInit {
 
@@ -28,12 +31,13 @@ export class HolidayPagingComponent implements OnInit {
   urlEnviPaging : string = environment.foundationUrl;
   foundationUrl: string = environment.foundationUrl;
   
-  constructor() { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetHolidayPaging;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteHolidaySchmH;
   }
 
   searchSort(event: any) {
@@ -77,5 +81,21 @@ export class HolidayPagingComponent implements OnInit {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);
+  }
+
+  delete(holidaySchmHId: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      this.holidayObj = new HolidayObj();
+      this.holidayObj.holidaySchmHId = holidaySchmHId;
+      this.http.post(this.deleteUrl, this.holidayObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          this.searchPagination(1);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        });
+    }
   }
 }

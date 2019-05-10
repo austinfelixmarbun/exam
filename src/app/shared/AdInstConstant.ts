@@ -207,11 +207,13 @@ export class AdInsConstant {
     public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
     public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
     public static AddHolidaySchmH = "/Holiday/AddHolidaySchmH";
+    public static AddHolidaySchmD = "/Holiday/AddHolidaySchmD";
+    public static AddHolidaySchmDUntilYear = "/Holiday/AddHolidaySchmDUntilYear";
     public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
     public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
-    
-    //WORK HOUR
-    public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
+    public static DeleteHolidaySchmH = "/Holiday/DeleteHolidaySchmH";
+    public static DeleteHolidaySchmD = "/Holiday/DeleteHolidaySchmD";
+    public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
 
     //USER SESSION LOG
     public static SelectRole = "/UserSessionLog/SelectRole";
@@ -229,6 +231,11 @@ export class AdInsConstant {
     public static GetExchangeRate = "/RefCurr/GetExchangeRate";
 
     //WORKHOUR
+    public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
     public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
+    public static AddWorkingHourSchmH = "/WorkHour/AddWorkingHourSchmH";
+    public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
+    public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
+    public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
     
 }
