@@ -102,12 +102,13 @@ export class LookupBizUnitComponent implements OnInit {
     );
   }
 
-  getResult(ucgridFooter, event) {
+  getResult(event) {
     console.log(this.urlQryPaging);
-    this.resultData = event;
-    this.totalData = event.returnObject.count;
-    ucgridFooter.totalData = this.totalData;
-    ucgridFooter.resultData = this.resultData;
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    this.ucgridFooter.pageNow = event.pageNow;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
   }
 
   onSelect(searchComponent, event) {

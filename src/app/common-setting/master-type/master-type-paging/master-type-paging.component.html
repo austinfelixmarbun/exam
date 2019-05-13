@@ -1,4 +1,4 @@
-<h4 class="form-section">Role Maintenance</h4>
+<h4 class="form-section">Master Type Maintenance</h4>
 <br />
 <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging'
   (result)="getResult($event)"></app-search>
@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of resultData?.returnObject.data">
+    <tr *ngFor="let item of resultData?.data">
       <td>{{item.refMasterTypeCode}}</td>
       <td align="left">{{item.descr}}</td>
       <td>

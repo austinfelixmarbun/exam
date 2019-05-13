@@ -63,8 +63,9 @@ export class EmployeeComponent implements OnInit {
   //** Start UC Search **/
 
   getResult(event){
-    this.resultData = event.returnObject;
-    this.totalData = event.returnObject.count;
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
   }

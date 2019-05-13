@@ -17,7 +17,7 @@
     </div>
     <div class="modal-body">
         <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson'[apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging'
-        (result)="getResult(ucgridFooter, $event)" [addCritInput]='addCrit'></app-search>
+        (result)="getResult($event)" [addCritInput]='addCrit'></app-search>
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr>
@@ -29,7 +29,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of resultData?.returnObject.data">
+          <tr *ngFor="let item of resultData?.data">
             <td class="text-left">{{item.bizUnitName}}</td>
             <td class="text-left">
                 <div *ngIf="item.parentName === null">-</div>

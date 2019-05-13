@@ -164,11 +164,12 @@ export class LookupzipcodeComponent implements OnInit {
     }
   }
 
-  getResult(gridFooter, event){
-    this.resultData = event.returnObject;
-    this.totalData = event.returnObject.count;
-    gridFooter.totalData = this.totalData;
-    gridFooter.resultData = this.resultData;
+  getResult(event){
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    this.ucgridFooter.pageNow = event.pageNow;
+    this.ucgridFooter.totalData = this.totalData;
+    this.ucgridFooter.resultData = this.resultData;
   }
 
   onSelect(searchComp, event)

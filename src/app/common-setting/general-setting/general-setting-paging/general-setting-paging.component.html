@@ -1,4 +1,13 @@
-<h4 class="form-section">General Setting Maintenance</h4>
+<div class="row">
+  <div class="col-md-11">
+    <h4 class="form-section">General Setting Maintenance</h4>
+  </div>
+  <div class="col-md-1">
+    <button type="button" class="btn btn-raised btn-primary" [routerLink]="['/commonSetting/generalSetting/detail']" translate>
+      <i class="fa fa-plus-circle"></i> Add
+    </button>
+  </div>
+</div>
 <br />
 <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging'
   (result)="getResult($event)" [addCritInput]='addCrit'></app-search>
@@ -33,5 +42,5 @@
   </tbody>
 </table>
 <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
-<!--<i class="fa fa-plus-circle" [routerLink]="['/commonSetting/generalSetting/detail']"
-  style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>-->
+<i class="fa fa-plus-circle" [routerLink]="['/commonSetting/generalSetting/detail']"
+  style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>

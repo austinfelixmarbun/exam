@@ -119,9 +119,9 @@
                             <p class="d-none">User Settings</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left">
-                            <a class="dropdown-item py-1">
+                            <a class="dropdown-item py-1" (click)="ShowRole()">
                                 <i class="ft-mail mr-2"></i>
-                                <span (click)="ShowRole()">Role</span>
+                                <span>Role</span>
                             </a>
                             <a class="dropdown-item py-1" routerLink="/pages/profile">
                                 <i class="ft-edit mr-2"></i>
