@@ -94,7 +94,7 @@ export class WorkingHourDetailComponent implements OnInit {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetWorkingHourSchmH;
     this.api2Url = this.foundationUrl + AdInsConstant.GetWorkingHourSchmD;
     this.addUrl = this.foundationUrl + AdInsConstant.AddWorkingHourSchmH;
-    
+    this.editUrl = this.foundationUrl + AdInsConstant.EditWorkingHourSchmH;
     
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -149,7 +149,9 @@ export class WorkingHourDetailComponent implements OnInit {
     }
   }
 
-  SaveWorkingHourForm(ReqWorkingHourForm: NgForm) {
+  SaveWorkingHourForm(ReqWorkingHourForm: NgForm, input: any) {
+    console.log(ReqWorkingHourForm);
+    console.log(input);
     console.log(ReqWorkingHourForm.value);
     console.log(this.listOfDay);
     this.workingHourSchmHObj = new WorkingHourSchmHObj();
@@ -163,6 +165,7 @@ export class WorkingHourDetailComponent implements OnInit {
     var arrWHSchmD = new Array();
     for (var i = 0; i < this.listOfDay.length; i++) {
         var listworkingHourSchmD = new WorkingHourSchmDObj();
+        listworkingHourSchmD.workingHourSchmHId = this.workingHourSchmHId;
         listworkingHourSchmD.workingHourSchmDay = this.listOfDay[i].workingHourSchmDay;
         listworkingHourSchmD.workingHourFrom1 = this.listOfDay[i].workingHourFrom1;
         listworkingHourSchmD.workingHourTo1 = this.listOfDay[i].workingHourTo1;
@@ -177,20 +180,25 @@ export class WorkingHourDetailComponent implements OnInit {
         WorkingHourSchmD: arrWHSchmD
       };
       console.log(WorkingHourSchm);
-      this.http.post(this.addUrl, WorkingHourSchm).subscribe(
-        response => {
-          console.log("Success");
-          console.log(response);
-          this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/commonSetting/workingHour"]);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+      // this.http.post(this.addUrl, WorkingHourSchm).subscribe(
+      //   response => {
+      //     console.log("Success");
+      //     console.log(response);
+      //     this.toastr.successMessage(response["message"]);
+      //     this.router.navigate(["/commonSetting/workingHour"]);
+      //   },
+      //   error => {
+      //     console.log(error);
+      //   }
+      // );
     } else {
       this.workingHourSchmHObj.workingHourSchmHId = this.workingHourSchmHId;
-      this.http.post(this.editUrl, this.workingHourSchmHObj).subscribe(
+      var WorkingHourSchm = {
+        WorkingHourSchmH: this.workingHourSchmHObj,
+        WorkingHourSchmD: arrWHSchmD
+      };
+      console.log(WorkingHourSchm);
+      this.http.post(this.editUrl, WorkingHourSchm).subscribe(
         response => {
           console.log("Success");
           console.log(response);

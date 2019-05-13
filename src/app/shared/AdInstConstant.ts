@@ -234,6 +234,7 @@ export class AdInsConstant {
     public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
     public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
     public static AddWorkingHourSchmH = "/WorkHour/AddWorkingHourSchmH";
+    public static EditWorkingHourSchmH = "/WorkHour/EditWorkingHourSchmH";
     public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
     public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
     public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
