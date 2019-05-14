@@ -20,66 +20,65 @@
                     <label>{{refRoleObj.roleName}}</label></div>
                 </div>
 
-                <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging'
-                  (result)="getResult($event)"></app-search>
+                <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+                  [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></app-search>
 
-                <table class="table table-responsive-md text-center table-hover">
-                  <thead>
-                    <tr class="table-header">
-                      <th>Action</th>
-                      <th><span class="thead-header" (click)="searchSort($event)"
-                          name='officeCode'>OfficeCode
-                        </span></th>
-                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
-                          name='officeName'>Office Name
-                        </span></th>
-                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
-                          name='bizUnitName'>Business Unit
-                          Name</span></th>
-                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
-                          name='jobTitleName'>Job Title Name</span>
-                      </th>
-                      <th><span class="thead-header" (click)="searchSort($event)"
-                          name='employeeNo'>Employee No</span>
-                      </th>
-                      <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
-                          name='employeeName'>Employee Name</span>
-                      </th>
-                      <th><span class="thead-header" (click)="searchSort($event)"
-                          name='username'>User Name</span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of resultData?.data;  let i = index">
-                      <td>
-                        <div *ngIf="refRoleObj.refRoleId === item.refRoleId && item.isActive === '1'">
-                          <input type="checkbox" id="checkSame" name="itemSame"
-                            (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=true>
-                        </div>
-                        <div *ngIf="refRoleObj.refRoleId === item.refRoleId && item.isActive === '0'">
+                <div [hidden]="resultData?.data == null|| resultData?.data.length == 0">
+                  <table class="table table-responsive-md text-center table-hover">
+                    <thead>
+                      <tr class="table-header">
+                        <th>Action</th>
+                        <th><span class="thead-header" (click)="searchSort($event)" name='officeCode'>OfficeCode
+                          </span></th>
+                        <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                            name='officeName'>Office Name
+                          </span></th>
+                        <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                            name='bizUnitName'>Business Unit
+                            Name</span></th>
+                        <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                            name='jobTitleName'>Job Title Name</span>
+                        </th>
+                        <th><span class="thead-header" (click)="searchSort($event)" name='employeeNo'>Employee No</span>
+                        </th>
+                        <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                            name='employeeName'>Employee Name</span>
+                        </th>
+                        <th><span class="thead-header" (click)="searchSort($event)" name='username'>User Name</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of resultData?.data;  let i = index">
+                        <td>
+                          <div *ngIf="refRoleObj.refRoleId === item.refRoleId && item.isActive === '1'">
+                            <input type="checkbox" id="checkSame" name="itemSame"
+                              (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=true>
+                          </div>
+                          <div *ngIf="refRoleObj.refRoleId === item.refRoleId && item.isActive === '0'">
                             <input type="checkbox" id="checkActive" name="itemActive"
                               (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
                           </div>
-                        <div *ngIf="refRoleObj.refRoleId !== item.refRoleId">
-                        </div>
-                        <div *ngIf="item.refRoleId === 0">
-                          <input type="checkbox" id="checkDiff" name="itemDiff"
-                            (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
-                        </div>
-                      </td>
-                      <td>{{item.officeCode}}</td>
-                      <td align="left">{{item.officeName}}</td>
-                      <td align="left">{{item.bizUnitName}}</td>
-                      <td align="left">{{item.jobTitleName}}</td>
-                      <td>{{item.employeeNo}}</td>
-                      <td align="left">{{item.employeeName}}</td>
-                      <td>{{item.username}}</td>
+                          <div *ngIf="refRoleObj.refRoleId !== item.refRoleId">
+                          </div>
+                          <div *ngIf="item.refRoleId === 0">
+                            <input type="checkbox" id="checkDiff" name="itemDiff"
+                              (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
+                          </div>
+                        </td>
+                        <td>{{item.officeCode}}</td>
+                        <td align="left">{{item.officeName}}</td>
+                        <td align="left">{{item.bizUnitName}}</td>
+                        <td align="left">{{item.jobTitleName}}</td>
+                        <td>{{item.employeeNo}}</td>
+                        <td align="left">{{item.employeeName}}</td>
+                        <td>{{item.username}}</td>
 
-                    </tr>
-                  </tbody>
-                </table>
-                <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+                </div>
               </div>
               <div class="form-actions">
                 <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">

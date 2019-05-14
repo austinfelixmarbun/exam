@@ -47,7 +47,11 @@ export class RolepickComponent implements OnInit, AfterViewInit {
             localStorage.setItem("RoleId", item.refRoleId);
             console.log(response);
             localStorage.setItem("UserAccess", JSON.stringify(response["returnObject"]));
-            this.router.navigate(['dashboard/dash-board']);
+            if (window.location.pathname == "/pages/login") {
+              this.router.navigate(['dashboard/dash-board']);
+            } else {
+              window.location.reload();
+            }
           },
           (error) => {
             console.log(error);
