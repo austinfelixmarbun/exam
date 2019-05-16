@@ -1,16 +1,13 @@
 <div class="col-md-12">
   <div class="card">
-    <div class="card-header">
-      <h4 class="card-title" id="horz-layout-colored-controls" translate>Holiday</h4>
-    </div>
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="HolidayDetReqForm" #HolidayDetReqForm="ngForm"
           (ngSubmit)="HolidayDetReqForm.form.valid && SaveHolidayDetForm(HolidayDetReqForm)">
           <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday Detail </h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday Detail Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control">Public Holiday: </label>
+              <label class="col-md-3 label-control">Public Holiday </label>
               <div class="col-md-9">
                 <select class="form-control" name="isPublicHoliday" [(ngModel)]="isPublicHoliday" #IsPublicHoliday>
                   <option value="1">Yes</option>
@@ -20,7 +17,7 @@
             </div>
             <div *ngIf="isPublicHoliday == '1'">
               <div class="form-group row">
-                <label class="col-md-3 label-control" translate>Date: </label>
+                <label class="col-md-3 label-control" translate>Date </label>
                 <div class="col-md-9">
                   <input type="date" class="form-control" name="holidayDt" required [(ngModel)]="holidayDt"
                     #HolidayDt="ngModel" [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || HolidayDt.touched || HolidayDt.dirty) && HolidayDt.invalid }">

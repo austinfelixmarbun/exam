@@ -5,7 +5,7 @@
         <form class="form form-horizontal" name="UserAddEditForm" #UserAddEditForm="ngForm" novalidate
           (ngSubmit)="UserAddEditForm.form.valid && Save(UserAddEditForm, lookupEmp)">
           <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> User Maintenance - {{type}} </h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> User Information </h4>
             <br>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="EmpName">Employee Name</label>
@@ -70,7 +70,7 @@
             </div>
             <div class="stat" *ngIf=" type !== 'changePassword' ">
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="loggedInMethod">Logged In Method: </label>
+                <label class="col-md-3 label-control" for="loggedInMethod">Logged In Method </label>
                 <div class="col-md-9">
                   <select class="form-control" name="loggedInMethod" #LoggedInMethod [(ngModel)]="loggedInMethod">
                     <option value="DB">Database</option>

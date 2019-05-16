@@ -1,6 +1,3 @@
-<div class="col-sm-12">
-  <h1 class="text-uppercase">Master Type Maintenance - {{type}}</h1>
-</div>
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
@@ -8,7 +5,7 @@
         <form class="form form-horizontal" name="MasterTypeAddEditForm" #MasterTypeAddEditForm="ngForm" novalidate
           (ngSubmit)="MasterTypeAddEditForm.form.valid && Save(MasterTypeAddEditForm)">
           <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> {{type}} </h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Master Type Information </h4>
             <br>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="masterTypeCodeModel">Master Type Code</label>

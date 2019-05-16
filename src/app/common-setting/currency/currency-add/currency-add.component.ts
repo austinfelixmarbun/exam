@@ -49,7 +49,9 @@ export class CurrencyAddComponent implements OnInit {
     this.addRateUrl = this.settingUrl + AdInsConstant.AddExchangeRate;
     this.editRateUrl = this.settingUrl + AdInsConstant.EditExchangeRate;
 
-    this.currDt = formatDate(localStorage.getItem("BusinessDate"), 'yyyy-MM-dd', 'en-US')
+    var businessDate = localStorage.getItem("BusinessDate");
+    var date = new Date(businessDate.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+    this.currDt = formatDate(date, 'yyyy-MM-dd', 'en-US');
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {

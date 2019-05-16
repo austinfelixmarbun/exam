@@ -1,14 +1,11 @@
 <div class="col-md-12">
   <div class="card">
-    <div class="card-header">
-      <h4 class="card-title" id="horz-layout-colored-controls" translate>Holiday</h4>
-    </div>
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="HolidayReqForm" #HolidayReqForm="ngForm"
           (ngSubmit)="HolidayReqForm.form.valid && SaveHolidayForm(HolidayReqForm)">
           <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday - {{pageType}}</h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday Information</h4>
             <div class="form-group row">
               <label class="col-md-3 label-control" translate>Scheme Code </label>
               <div class="col-md-9">

@@ -5,10 +5,10 @@
                 <form class="form form-horizontal" name="EmpPositionForm" #EmpPositionForm="ngForm" novalidate
                     (ngSubmit)="EmpPositionForm.form.valid && SaveForm(EmpPositionForm)">
                     <div class="form-body">
-                        <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Position -
-                            {{pageType}}</h4>
+                        <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Position
+                            Information</h4>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Employee No: </label>
+                            <label class="col-md-3 label-control">Employee No </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="empNo" required [disabled]="true"
                                     [(ngModel)]="empNo" #EmpNo="ngModel"
@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Employee Name: </label>
+                            <label class="col-md-3 label-control">Employee Name </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="empName" required [disabled]="true"
                                     [(ngModel)]="empName" #EmpName="ngModel"
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Office Name: </label>
+                            <label class="col-md-3 label-control">Office Name </label>
                             <div class="col-md-9">
                                 <select class="form-control" id="refOfficeId" name="refOfficeId"
                                     [(ngModel)]="refOfficeId" #RefOfficeId="ngModel"
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Business Unit Name: </label>
+                            <label class="col-md-3 label-control">Business Unit Name </label>
                             <div class="col-md-9">
                                 <select class="form-control" id="refBizUnitId" name="refBizUnitId" required
                                     (change)="onChangeBiz($event.target.value)" #RefBizUnitId="ngModel"
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Job Title: </label>
+                            <label class="col-md-3 label-control">Job Title </label>
                             <div class="col-md-9">
                                 <select class="form-control" id="orgJobTitleId" name="orgJobTitleId" required
                                     #OrgJobTitleId="ngModel" [(ngModel)]="orgJobTitleId"
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Supervisor: </label>
+                            <label class="col-md-3 label-control">Supervisor </label>
                             <div class="col-md-9">
                                 <select class="form-control" id="superiorRefEmpId" name="superiorRefEmpId"
                                     [(ngModel)]="superiorRefEmpId" #SuperiorRefEmpId="ngModel">
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Position Start Date: </label>
+                            <label class="col-md-3 label-control">Position Start Date </label>
                             <div class="col-md-9">
                                 <input type="date" id="positionStartDt" class="form-control" name="positionStartDt"
                                     required [(ngModel)]="positionStartDt" #PositionStartDt="ngModel"
@@ -91,14 +91,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Position Finish Date: </label>
+                            <label class="col-md-3 label-control">Position Finish Date </label>
                             <div class="col-md-9">
                                 <input type="date" id="positionFinishDt" class="form-control" name="positionFinishDt"
                                     [(ngModel)]="positionFinishDt" #PositionFinishDt="ngModel">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Active: </label>
+                            <label class="col-md-3 label-control">Active </label>
                             <div class="col-md-9">
                                 <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                                     (change)="toggleActive($event)" name="isActive">
@@ -106,8 +106,8 @@
                         </div>
                     </div>
                     <div class="form-actions right">
-                        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/employee/employeePosition']"
-                        [queryParams]="{refEmpId:refEmpId}">
+                        <button type="button" class="btn btn-raised btn-warning mr-1"
+                            [routerLink]="['/employee/employeePosition']" [queryParams]="{refEmpId:refEmpId}">
                             <i class="fa fa-arrow-circle-left"></i> Back
                         </button>
                         <button type="submit" class="btn btn-raised btn-primary">

@@ -1,17 +1,14 @@
 <div class="row text-left">
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header">
-        <h4 class="card-title" id="horz-layout-colored-controls" translate>Add / Edit Bank</h4>
-      </div>
       <div class="card-body">
         <div class="px-3">
           <form class="form form-horizontal" name="BankAddReqForm" #BankAddReqForm="ngForm"
             (ngSubmit)="Save(BankAddReqForm)">
             <div class="form-body">
-              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Add/ Edit</h4>
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Bank Information</h4>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput5" translate>Bank Code: </label>
+                <label class="col-md-3 label-control" for="projectinput5" translate>Bank Code </label>
                 <div class="col-md-9">
                   <input type="text" id="projectinput5" class="form-control" name="bankCode"
                     [ngModel]="result?.bankCode" #BankCode="ngModel" [required]>
@@ -23,7 +20,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput5" translate>Bank Name: </label>
+                <label class="col-md-3 label-control" for="projectinput5" translate>Bank Name </label>
                 <div class="col-md-9">
                   <input type="text" id="projectinput5" class="form-control" name="bankName"
                     [ngModel]="result?.bankName" #BankName="ngModel" [required]>
@@ -35,14 +32,14 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput6" translate>BI Code: </label>
+                <label class="col-md-3 label-control" for="projectinput6" translate>BI Code </label>
                 <div class="col-md-9">
                   <textarea id="projectinput5" class="form-control" name="regRptCode" [ngModel]="result?.regRptCode"
                     #RegRptCode="ngModel"></textarea>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="userinput5" translate>Active Status: </label>
+                <label class="col-md-3 label-control" for="userinput5" translate>Active Status </label>
                 <div class="col-md-9">
                   <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                     (change)="toggleVisibility($event)" id="projectinput5" name="isActive">
