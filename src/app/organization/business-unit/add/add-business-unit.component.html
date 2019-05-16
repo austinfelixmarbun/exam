@@ -9,7 +9,7 @@
                     <form class="form form-horizontal" name="BusinessUnitAddReqForm" #BusinessUnitAddReqForm="ngForm"
                     (ngSubmit)="Save(BusinessUnitAddReqForm)">
                         <div class="form-body">
-                            <h4 class="form-section" translate><i class="ft-file-text" ></i> Add/ Edit</h4>
+                            <h4 class="form-section card-title" translate><i class="ft-file-text" ></i> Add/ Edit</h4>
                             <div class="form-group row">
                                 <label class="col-md-3 label-control" translate>Business Unit Code: </label>
                                 <div class="col-md-9">
@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-actions right">
                             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/organization/businessunit']" translate>
-                              <i class="ft-x"></i> Back
+                              <i class="fa fa-arrow-circle-left"></i> Back
                             </button>
                             <button type="submit" class="btn btn-raised btn-primary" translate>
                                 <i class="fa fa-check-square-o"></i> Save

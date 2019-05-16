@@ -14,67 +14,88 @@
                 <!-- Ini Digunakan untuk Generate Dynamic Component -->
                 <!-- [hidden]="isHidden" -->
                 <div id="panel">
-                  <div class="col-md-6 form-group no-padding" style="float:left;"
-                    *ngFor="let question of configuration?.component">
-                    <div class="col-md-12">
-                      <label style="float:left;" class="col-md-5 no-padding" for="projectinput1"
-                        translate>{{question.label}}</label>
-                      <div class="col-md-7 no-padding" style="float:left;">
-                        <div *ngIf="question.type==='textbox'">
-                          <input type="text" id="{{question.id}}" class="form-control search-form-control"
-                            name="{{question.name}}" value="{{question.value}}" attr.data-type="{{question.datatype}}">
-                        </div>
-                        <div *ngIf="question.type==='textarea'">
-                          <textarea type="text" id="{{question.id}}" class="form-control search-form-control"
-                            name="{{question.name}}" attr.data-type="{{question.datatype}}"
-                            value="{{question.value}}"></textarea>
-                        </div>
-                        <div *ngIf="question.type==='numeric'">
-                          <input type="text" id="{{question.id}}" (focus)="transformToDecimal($event)"
-                            (blur)="transformAmount($event)" class="form-control search-form-control"
-                            name="{{question.name}}" value="{{question.value}}"
-                            attr.data-restriction="{{question.restriction}}" attr.data-type="{{question.datatype}}">
-                        </div>
-
-                        <!-- Sementara di Hardcode begini dulu-->
-                        <div *ngIf="question.type==='lookupProduct'">
-                          <app-lookup></app-lookup>
-                        </div>
-
-                        <!-- End Hardcode Lookup didalem-->
-                        <div *ngIf="question.type==='datepicker'">
-                          <input type="date" id="{{question.id}}" class="form-control search-form-control btn-lookup"
-                            name="{{question.name}}" value="{{question.value}}" attr.data-type="{{question.datatype}}"
-                            attr.data-restriction="{{question.restriction}}">
-                        </div>
-                        <div *ngIf="question.type==='dropdown'">
-                          <!-- Ini kalau datanya tidak di load dari URL -->
-                          <div *ngIf="!question.isFromURL">
-                            <select id="projectinput6" name="{{question.name}}" class="form-control search-form-control"
+                  <div class="row">
+                    <div class="col-md-6 form-group"
+                      *ngFor="let question of configuration?.component">
+                      <div class="col-md-12">
+                        <div class="row">
+                        <label class="col-md-5 no-padding" for="projectinput1"
+                          translate>{{question.label}}</label>
+                        <div class="col-md-7 no-padding">
+                          <div *ngIf="question.type==='textbox'">
+                            <input type="text" id="{{question.id}}" class="form-control search-form-control"
+                              name="{{question.name}}" value="{{question.value}}"
                               attr.data-type="{{question.datatype}}">
-                              <option *ngIf="!question.isSelectOne" value="All">
-                                All
-                              </option>
-                              <option *ngFor="let item of question?.items" value="{{item.key}}">
-                                {{item.value}}
-                              </option>
-                            </select>
                           </div>
-                          <!-- Ini kalau datanya di load dari URL -->
-                          <div *ngIf="question.isFromURL">
-                            <select id="projectinput6" name="{{question.name}}"
-                              class="form-control search-form-control" attr.data-type="{{question.datatype}}">
-                              <option *ngIf="!question.isSelectOne" value="All">
-                                All
-                              </option>
-                              <option *ngFor="let item of question?.itemsUrl" value="{{item.key}}">
-                                {{item.value}}
-                              </option>
-                            </select>
+                          <div *ngIf="question.type==='textarea'">
+                            <textarea type="text" id="{{question.id}}" class="form-control search-form-control"
+                              name="{{question.name}}" attr.data-type="{{question.datatype}}"
+                              value="{{question.value}}"></textarea>
                           </div>
+                          <div *ngIf="question.type==='numeric'">
+                            <input type="text" id="{{question.id}}" (focus)="transformToDecimal($event)"
+                              (blur)="transformAmount($event)" class="form-control search-form-control"
+                              name="{{question.name}}" value="{{question.value}}"
+                              attr.data-restriction="{{question.restriction}}" attr.data-type="{{question.datatype}}">
+                          </div>
+
+                          <!-- Sementara di Hardcode begini dulu-->
+                          <div *ngIf="question.type==='lookupProduct'">
+                            <app-lookup></app-lookup>
+                          </div>
+
+                          <!-- End Hardcode Lookup didalem-->
+                          <div *ngIf="question.type==='datepicker'">
+                            <input type="date" id="{{question.id}}" class="form-control search-form-control btn-lookup"
+                              name="{{question.name}}" value="{{question.value}}" attr.data-type="{{question.datatype}}"
+                              attr.data-restriction="{{question.restriction}}">
+                          </div>
+                          <div *ngIf="question.type==='dropdown'">
+                            <!-- Ini kalau datanya tidak di load dari URL -->
+                            <div *ngIf="!question.isFromURL">
+                              <select id="projectinput6" name="{{question.name}}"
+                                class="form-control search-form-control" attr.data-type="{{question.datatype}}">
+                                <option *ngIf="!question.isSelectOne" value="All">
+                                  All
+                                </option>
+                                <option *ngFor="let item of question?.items" value="{{item.key}}">
+                                  {{item.value}}
+                                </option>
+                              </select>
+                            </div>
+                            <!-- Ini kalau datanya di load dari URL -->
+                            <div *ngIf="question.isFromURL">
+                              <select id="projectinput6" name="{{question.name}}"
+                                class="form-control search-form-control" attr.data-type="{{question.datatype}}">
+                                <option *ngIf="!question.isSelectOne" value="All">
+                                  All
+                                </option>
+                                <option *ngFor="let item of question?.itemsUrl" value="{{item.key}}">
+                                  {{item.value}}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>
+                  </div>
+                  <div class="col-md-12 no-padding">
+                    <form>
+                      <div class="form-actions right">
+                        <button *ngIf="exportData" type="button" (click)="exportAsXLSX()"
+                          class="btn btn-raised btn-success mr-1" translate>
+                          <i class="fa fa-plus-circle"></i> Export Excel
+                        </button>
+                        <button type="button" (click)="reset()" class="btn btn-raised btn-warning mr-1" translate>
+                          <i class="ft-x"></i> Reset
+                        </button>
+                        <button type="button" (click)="searchClick()" class="btn btn-raised btn-primary" translate>
+                          <i class="fa fa-search"></i> Search
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -85,19 +106,5 @@
     </div>
   </div>
 </section>
-<section>
-  <form>
-    <div class="form-actions right">
-      <button *ngIf="exportData" type="button" (click)="exportAsXLSX()" class="btn btn-raised btn-success mr-1" translate>
-        <i class="fa fa-plus-circle"></i> Export Excel
-      </button>
-      <button type="button" (click)="reset()" class="btn btn-raised btn-warning mr-1" translate>
-        <i class="ft-x"></i> Reset
-      </button>
-      <button type="button" (click)="searchClick()" class="btn btn-raised btn-primary" translate>
-        <i class="fa fa-search"></i> Search
-      </button>
-    </div>
-  </form>
-</section>
+<br>
 <!-- // Basic form layout section end -->

@@ -9,7 +9,7 @@
           <form class="form form-horizontal" name="MenuReqForm" #MenuReqForm="ngForm"
             (ngSubmit)="MenuReqForm.form.valid && Save(MenuReqForm, lookupParent)">
             <div class="form-body">
-              <h4 class="form-section" translate><i class="ft-file-text"></i> Add Menu</h4>
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Add Menu</h4>
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="projectinput5" translate>Parent Form: </label>
                 <div class="col-md-9">
@@ -97,7 +97,7 @@
             </div>
             <div class="form-actions right">
               <button *ngIf="mode === 'edit'" type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/menuSetting']" translate>
-                <i class="ft-x"></i> Back
+                <i class="fa fa-arrow-circle-left"></i> Back
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
                 <i class="fa fa-check-square-o"></i> Save

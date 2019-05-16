@@ -5,7 +5,7 @@
           <form class="form form-horizontal" name="GSForm" #GSForm="ngForm" novalidate
             (ngSubmit)="GSForm.form.valid && Save(GSForm)" >
             <div class="form-body">
-              <h4 class="form-section"><i class="ft-user"></i> General Setting Info</h4>
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> General Setting Info</h4>
               <br>
 
               <div class="form-group row">
@@ -57,7 +57,7 @@
             <div class="form-actions">
 
               <button *ngIf=" type === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-                <i class="ft-x"></i> Back
+                <i class="fa fa-arrow-circle-left"></i> Back
               </button>
               <button type="submit" class="btn btn-raised btn-primary">
                 <i class="fa fa-check-square-o"></i> Save

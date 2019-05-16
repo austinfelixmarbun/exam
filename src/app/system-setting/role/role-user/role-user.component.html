@@ -7,7 +7,7 @@
             <form class="form form-horizontal" name="RoleUserFoem" #RoleUserForm="ngForm"
               (ngSubmit)="Save(RoleUserForm)">
               <div class="form-body">
-                <h4 class="form-section"><i class="ft-user"></i>Assign User to Role</h4>
+                <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Assign User to Role</h4>
 
                 <div class="form-group row">
                   <label class="col-md-3 label-control">Role Code</label>
@@ -28,23 +28,23 @@
                     <thead>
                       <tr class="table-header">
                         <th>Action</th>
-                        <th><span class="thead-header" (click)="searchSort($event)" name='officeCode'>OfficeCode
+                        <th><span translate class="thead-header" (click)="searchSort($event)" name='officeCode'>OfficeCode
                           </span></th>
-                        <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                        <th><span translate class="thead-header" (click)="searchSort($event)"
                             name='officeName'>Office Name
                           </span></th>
-                        <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                        <th><span translate class="thead-header" (click)="searchSort($event)"
                             name='bizUnitName'>Business Unit
                             Name</span></th>
-                        <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                        <th><span translate class="thead-header" (click)="searchSort($event)"
                             name='jobTitleName'>Job Title Name</span>
                         </th>
-                        <th><span class="thead-header" (click)="searchSort($event)" name='employeeNo'>Employee No</span>
+                        <th><span translate class="thead-header" (click)="searchSort($event)" name='employeeNo'>Employee No</span>
                         </th>
-                        <th class="text-left pointer"><span class="thead-header" (click)="searchSort($event)"
+                        <th><span translate class="thead-header" (click)="searchSort($event)"
                             name='employeeName'>Employee Name</span>
                         </th>
-                        <th><span class="thead-header" (click)="searchSort($event)" name='username'>User Name</span>
+                        <th><span translate class="thead-header" (click)="searchSort($event)" name='username'>User Name</span>
                         </th>
                       </tr>
                     </thead>
@@ -82,7 +82,7 @@
               </div>
               <div class="form-actions">
                 <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-                  <i class="ft-x"></i> Back
+                  <i class="fa fa-arrow-circle-left"></i> Back
                 </button>
 
                 <button type="submit" class="btn btn-raised btn-primary">

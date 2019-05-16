@@ -4,9 +4,9 @@
     <table class="table table-responsive-md text-center table-hover">
         <thead>
             <tr class="table-header">
-                <th class="text-left pointer"><span translate class="thead-header" (click)="searchSort($event)"
+                <th><span translate class="thead-header" (click)="searchSort($event)"
                         name='name'>Name</span> </th>
-                <th class="text-left pointer"><span translate class="thead-header" (click)="searchSort($event)"
+                <th><span translate class="thead-header" (click)="searchSort($event)"
                         name='jobTitle'>Job Title</span></th>
                 <th translate>Action</th>
             </tr>
@@ -31,7 +31,7 @@
 </div>
 <div class="form-actions right">
     <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/company']">
-        <i class="ft-x"></i> Back
+        <i class="fa fa-arrow-circle-left"></i> Back
     </button>
     <i class="fa fa-plus-circle" [routerLink]="['/company/bod/add']" [queryParams]="{refCoyId:refCoyId}"
         style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>

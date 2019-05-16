@@ -8,7 +8,7 @@
         <form class="form form-horizontal" name="RefEmpForm" #RefEmpForm="ngForm" novalidate
           (ngSubmit)="RefEmpForm.form.valid && SaveForm(RefEmpForm, uclRefBank, ucAddress, ucContactInfo)">
           <div class="form-body">
-            <h4 class="form-section card-title"><i class="ft-file-text"></i> Employee - {{pageType}}</h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee - {{pageType}}</h4>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="empNo">Employee No: </label>
               <div class="col-md-9">
@@ -77,7 +77,7 @@
           <app-ucAddress #ucAddress [parentForm]='RefEmpForm'></app-ucAddress>
           <app-ucContactInfo #ucContactInfo [parentForm]='RefEmpForm' [useEmail2]="false" [useTitle]="false" [useName]="false"></app-ucContactInfo>
           <div class="form-body">
-            <h4 class="form-section card-title"><i class="ft-file-text"></i> Bank Data</h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Bank Data</h4>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="bankName" translate>Bank Name : </label>
               <div class="col-md-9">
@@ -127,7 +127,7 @@
           </div>
           <div class="form-actions right">
             <button *ngIf="pageType !== 'add'" type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/employee']">
-              <i class="ft-x"></i> Back
+              <i class="fa fa-arrow-circle-left"></i> Back
             </button>
             <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save

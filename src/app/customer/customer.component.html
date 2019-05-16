@@ -8,7 +8,7 @@
         <form class="form form-horizontal" name="CustomerReqForm" #CustomerReqForm="ngForm" novalidate
           (ngSubmit)="CustomerReqForm.form.valid && SavePros(CustomerReqForm)">
           <div class="form-body">
-            <h4 class="form-section"><i class="ft-user"></i> Customer Info </h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Customer Info </h4>
             <div class="form-group row">
               <label class="col-md-3 label-control" for="CustName">Type: </label>
               <div class="col-md-9">
@@ -86,7 +86,7 @@
           </div>
           <div class="form-actions">
             <button type="button" class="btn btn-raised btn-warning mr-1" awPreviousStep>
-              <i class="ft-x"></i> Back
+              <i class="fa fa-arrow-circle-left"></i> Back
             </button>
             <button type="submit" (click)="Submit(CustomerReqForm.value, lookupZip)" class="btn btn-raised btn-primary" awNextStep>
               <i class="fa fa-check-square-o"></i> Save

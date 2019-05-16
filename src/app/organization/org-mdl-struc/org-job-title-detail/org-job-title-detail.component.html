@@ -7,7 +7,7 @@
                 <form class="form form-horizontal" name="OrgJobTitleForm" #OrgJobTitleForm="ngForm" novalidate
                 (ngSubmit)="OrgJobTitleForm.form.valid && Save(OrgJobTitleForm, lookupRefJobTitle, lookupOrgJobTitle)" >
                 <div class="form-body">
-                  <h4 class="form-section">Organization Job Title - {{type}}</h4>
+                  <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Organization Job Title - {{type}}</h4>
                   <br />
 
                   <div class="form-group row">
@@ -40,7 +40,7 @@
                     <div class="form-actions">
 
                         <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-                          <i class="ft-x"></i> Back
+                          <i class="fa fa-arrow-circle-left"></i> Back
                         </button>
                         <button type="submit" class="btn btn-raised btn-primary">
                           <i class="fa fa-check-square-o"></i> Save
