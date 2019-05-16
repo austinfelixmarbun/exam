@@ -36,6 +36,7 @@ export class SearchComponent implements OnInit {
   server: any;
   configuration: any;
   itemUrl: any;
+  exportData: any;
   isDataLoaded: boolean = false;
   form: FormGroup;
   payLoad = '';
@@ -54,6 +55,7 @@ export class SearchComponent implements OnInit {
       console.log(data);
       this.configuration = data;
       this.urlGet = data.url;
+      this.exportData = data.exportExcel;
       this.countForm = data.component.length;
       console.log(this.countForm);
       this.isDataLoaded = true;

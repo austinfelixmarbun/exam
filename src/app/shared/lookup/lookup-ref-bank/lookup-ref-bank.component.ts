@@ -65,13 +65,13 @@ export class LookupRefBankComponent implements OnInit {
     });
   }
 
-  getResult(event) {
+  getResult(ucgridFooter, event) {
     console.log(this.urlQryPaging);
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
-    this.ucgridFooter.pageNow = event.pageNow;
-    this.ucgridFooter.totalData = this.totalData;
-    this.ucgridFooter.resultData = this.resultData;
+    ucgridFooter.pageNow = event.pageNow;
+    ucgridFooter.totalData = this.totalData;
+    ucgridFooter.resultData = this.resultData;
   }
 
   searchSort(searchComp,key) {

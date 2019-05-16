@@ -3,17 +3,16 @@
     <div class="container-fluid">
         <div class="row full-height-vh">
             <div class="col-12 d-flex align-items-center justify-content-center">
-                <div class="card gradient-indigo-purple text-center width-400">
+                <div class="card text-center width-400" style="background-color: #a7c0ec">
                     <div class="card-img">
-                        <img alt="element 06" class="mb-1" src="assets/img/logo.png" width="190">
+                        <img alt="element 06" class="mb-1" src="assets/img/ConfinsRthree_v2[2857].png" width="190" style="margin-top: 18px;">
                     </div>
                     <div class="card-body">
                         <div class="card-block">
-                            <h2 class="white">Login</h2>
                             <form novalidate="" (ngSubmit)="onSubmit($event)" #f="ngForm">
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" name="inputEmail" id="inputEmail" placeholder="User" ngModel required #user>
+                                        <input type="text" class="form-control" name="inputEmail" id="inputEmail" placeholder="Username" ngModel required #user>
                                     </div>
                                 </div>
 
@@ -24,20 +23,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 ml-3">
-                                                <input type="checkbox" class="custom-control-input" checked id="rememberme">
-                                                <label class="custom-control-label float-left white" for="rememberme">Remember Me</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-pink btn-block btn-raised">Submit</button>
-                                        <button type="button" class="btn btn-secondary btn-block btn-raised">Cancel</button>
+                                        <button type="submit" class="btn btn-block btn-raised" style="background-color: #2f6e92; font-size: 16px; font-weight: bold; color: antiquewhite">Login</button>
                                     </div>
                                 </div>
                             </form>

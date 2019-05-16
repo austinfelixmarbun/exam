@@ -18,7 +18,7 @@
   </div>
   <div class="modal-body">
     <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-      [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></app-search>
+      [enviromentUrl]='urlEnviPaging' (result)="getResult(ucgridFooter, $event)"></app-search>
     <div [hidden]="resultData?.data == null|| resultData?.data.length == 0">
       <table class="table table-responsive-md text-center table-hover">
         <thead>
