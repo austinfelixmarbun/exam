@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment.prod';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class ErrorDialogService {
@@ -14,7 +14,7 @@ export class ErrorDialogService {
         if(data.status=="001" && localStorage.getItem("Username") != undefined)
         {   
 
-            var url = environment.coreUrl+AdInsConstant.Logout;
+            var url = environment.foundationUrl+AdInsConstant.Logout;
             this.http.post(url,"");
         }
         const dialogRef = this.dialog.open(ErrorDialogComponent, {
