@@ -98,7 +98,7 @@ export class RoleFormComponent implements OnInit {
       response => {
         this.listDeletedId = [];
         this.listSelectedId = [];
-        arrayPaging = event.returnObject.data;
+        arrayPaging = event.response.returnObject.data;
         console.log(arrayPaging);
         response['returnObject'].forEach(element => {
           this.listSelectedId.push(element.refFormId);

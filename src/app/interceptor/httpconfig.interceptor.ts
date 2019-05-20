@@ -20,12 +20,13 @@ import { environment } from 'environments/environment.prod';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AdInsErrorMessage } from 'app/shared/AdInsErrorMessage';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
+import { Router } from '@angular/router';
 
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
-    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService) { }
+    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log(request);
         if (request.method == "POST" && (request.body == null || request.body.isLoading == true)) {
@@ -46,7 +47,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (checkSession == "1") {
             this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
             this.spinner.hide();
-            window.location.reload();
+            this.router.navigate(["/pages/login"]);
         }
         //Ini kalau buat Login belom punya Current User Contexts
         if (request.url == "http://r3app-server.ad-ins.com/foundation/UserManagement/HTML5Login") {
