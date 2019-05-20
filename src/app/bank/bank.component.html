@@ -1,4 +1,4 @@
-<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></app-search>
+<lib-UCSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></lib-UCSearch>
 <div [hidden]="resultData?.data == null|| resultData?.data.length == 0">
   <table class="table table-responsive-md text-center table-hover">
     <thead>
@@ -31,5 +31,5 @@
   </table>
   <!-- <i class="fa fa-plus-circle" [routerLink]="['/bank/add']"
     style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i> -->
-<app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+<lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
 </div>

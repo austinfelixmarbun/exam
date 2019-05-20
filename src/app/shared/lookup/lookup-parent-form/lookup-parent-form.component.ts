@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ViewChildren } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from 'app/shared/search/search.component';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { environment } from 'environments/environment';
@@ -11,7 +10,6 @@ import { NgForm, ControlContainer } from '@angular/forms';
 @Component({
     selector: 'app-lookup-parent-form',
     templateUrl: './lookup-parent-form.component.html',
-    providers: [NGXToastrService],
     viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 export class LookupParentFormComponent implements OnInit {
