@@ -1,12 +1,13 @@
-<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></app-search>
+<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+  [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></app-search>
 <div [hidden]="resultData?.data == null">
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th><span translate class="thead-header"  (click)="searchSort($event)" name='bankCode'>Bank Code</span></th>
-        <th><span translate class="thead-header"  (click)="searchSort($event)" name='bankName'>Bank Name</span></th>
-        <th><span translate class="thead-header"  (click)="searchSort($event)"name='regRptCode'>BI Code</span></th>
-        <th><span translate class="thead-header"  (click)="searchSort($event)" name='isActive'>Active</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='bankCode'>Bank Code</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='bankName'>Bank Name</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='regRptCode'>BI Code</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active</span></th>
         <th translate>Action</th>
       </tr>
     </thead>
@@ -31,5 +32,5 @@
   </table>
   <!-- <i class="fa fa-plus-circle" [routerLink]="['/bank/add']"
     style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i> -->
-<lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
+  <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
 </div>
