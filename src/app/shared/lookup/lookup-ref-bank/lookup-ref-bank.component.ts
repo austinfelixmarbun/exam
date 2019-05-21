@@ -12,10 +12,9 @@ import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgr
 })
 export class LookupRefBankComponent implements OnInit {
 
-  urlJson: string = "./assets/lookup/lookupRefBank.json";
+  @Input() urlJson: string = "./assets/lookup/lookupRefBank.json";
   urlQryPaging: string = AdInsConstant.GetBankPaging;
   urlEnviPaging : string = environment.settingUrl;
-  @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() codeSelect: any;
   @Input() jsonSelect:string;
@@ -44,7 +43,7 @@ export class LookupRefBankComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiUrl = environment.foundationUrl+AdInsConstant.GetBankPaging;
+    this.apiUrl = environment.settingUrl + AdInsConstant.GetBankPaging;
     this.pageSize = 10;
   }
 

@@ -19,6 +19,8 @@ import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgr
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 import { LookupParentFormComponent } from 'app/shared/lookup/lookup-parent-form/lookup-parent-form.component';
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { LookupParentFormComponent } from 'app/shared/lookup/lookup-parent-form/
         LookupBizUnitComponent,
         LookupOrgMdlStrucComponent,
         LookupOrgJobTitleComponent,
-        LookupRefJobTitleComponent
+        LookupRefJobTitleComponent,
+        UCSearchModule,
+        UcgridfooterModule
     ],
     imports: [
         CommonModule,

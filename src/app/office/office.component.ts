@@ -2,26 +2,27 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
+import { UCSearchComponent } from '@adins/ucsearch';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { TranslateService } from '@ngx-translate/core';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/OfficeObj.model';
 import { environment } from 'environments/environment';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-office',
   templateUrl: './office.component.html',
   styleUrls: ['./office.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService] // add NgbPaginationConfig to the component providers
+  providers: [DecimalPipe, NgbPaginationConfig, NGXToastrService] // add NgbPaginationConfig to the component providers
 })
 export class OfficeComponent implements OnInit {
 
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
-  @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
   urlJson: string = "./assets/search/searchOffice.json";
   resultData: string;
   pageNow: any;
