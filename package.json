@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@adins/form-engine": "^1.0.1",
     "@adins/lookupparentform": "^1.0.3",
     "@adins/ucgridfooter": "^1.0.0",
     "@adins/ucsearch": "^1.0.0",

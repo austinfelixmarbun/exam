@@ -22,8 +22,6 @@ import { LookupparentformModule } from '@adins/lookupparentform';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 
-
-
 @NgModule({
     exports: [
         CommonModule,
