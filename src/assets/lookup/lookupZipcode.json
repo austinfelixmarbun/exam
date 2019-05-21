@@ -4,7 +4,7 @@
     "component": [
       {
         "type": "textbox",
-        "name": "zipCode",
+        "name": "rz.zipCode",
         "id": "ZipCode",
         "value": "%",
         "label": "Zip Code",

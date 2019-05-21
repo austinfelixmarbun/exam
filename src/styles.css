@@ -98,3 +98,12 @@ form label{
     background-color:white !important;
     color:black !important;
 }
+
+thead tr th {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.form-section {
+    text-transform: uppercase;
+}

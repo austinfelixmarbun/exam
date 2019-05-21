@@ -41,8 +41,9 @@ export class GeneralSettingPagingComponent implements OnInit {
   }
 
   getResult(event) {
-    this.resultData = event;
-    this.totalData = event.returnObject.count;
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
   }
@@ -81,7 +82,7 @@ export class GeneralSettingPagingComponent implements OnInit {
     this.addCrit = new Array();
     var critIsActive = new CriteriaObj();
     critIsActive.propName = "is_Updateable";
-    critIsActive.value = "Yes";
+    critIsActive.value = "1";
     critIsActive.restriction = AdInsConstant.RestrictionEq;
 
     this.addCrit.push(critIsActive);
@@ -89,29 +90,15 @@ export class GeneralSettingPagingComponent implements OnInit {
 
   searchSort(event: any) {
     if (this.orderByKey == event.target.attributes.name.nodeValue) {
-      this.orderByValue = !this.orderByValue;
+      this.orderByValue = !this.orderByValue
     } else {
-      this.orderByValue = true;
+      this.orderByValue = true
     }
-    this.orderByKey = event.target.attributes.name.nodeValue;
+    this.orderByKey = event.target.attributes.name.nodeValue
     var order = {
       key: this.orderByKey,
       value: this.orderByValue
-    };
-    console.log(this.apiUrl);
-    this.searchComponent
-      .search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
-      .subscribe(
-        response => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        error => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit);
   }
 }

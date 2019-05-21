@@ -31,6 +31,7 @@ export class LookupRoleComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupRole.json";
   urlQryPaging: string = AdInsConstant.GetRefRolePaging;
+  urlEnviPaging : string = environment.foundationUrl;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
@@ -102,8 +103,9 @@ export class LookupRoleComponent implements OnInit {
 
   getResult(ucgridFooter, event) {
     console.log(this.urlQryPaging);
-    this.resultData = event;
-    this.totalData = event.returnObject.count;
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    ucgridFooter.pageNow = event.pageNow;
     ucgridFooter.totalData = this.totalData;
     ucgridFooter.resultData = this.resultData;
   }

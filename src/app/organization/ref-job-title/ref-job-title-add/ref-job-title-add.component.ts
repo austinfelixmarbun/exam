@@ -34,6 +34,7 @@ export class RefJobTitleAddComponent implements OnInit {
   allJobPosition: any;
   jobPositionUrl: any;
   foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
   mrJobPositionLvl: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
@@ -41,7 +42,7 @@ export class RefJobTitleAddComponent implements OnInit {
     this.addUrl = this.foundationUrl + AdInsConstant.AddRefJobTitle;
     this.editUrl = this.foundationUrl + AdInsConstant.EditRefJobTitle;
     this.refOrgUrl = this.foundationUrl + AdInsConstant.GetListAllRefOrg;
-    this.jobPositionUrl = this.foundationUrl + AdInsConstant.GetJobPositionLvl;
+    this.jobPositionUrl = this.settingUrl + AdInsConstant.GetRefMasterListKeyValuePair;
 
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
@@ -69,12 +70,15 @@ export class RefJobTitleAddComponent implements OnInit {
         console.log(error);
       }
     );
-    this.httpClient.post(this.jobPositionUrl, null).subscribe(
+    var refMasterObj = {
+      RefMasterTypeCode: "JOB_POSITION_LVL",
+    };
+    this.httpClient.post(this.jobPositionUrl, refMasterObj).subscribe(
       (response) => {
         console.log("Success");
         console.log(response);
         this.allJobPosition = response['returnObject'];
-        // this.jobPosition = response['returnObject'][0]['jobPositionId']
+        this.mrJobPositionLvl = response['returnObject'][0]['value']
         console.log(this.allJobPosition);
       },
       (error) => {

@@ -31,12 +31,12 @@ import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
-import { environment } from 'environments/environment.prod';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { subscribeOn } from 'rxjs/operators';
 import { DatePipe, formatDate } from '@angular/common';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GrowlModule } from 'primeng/primeng';
+import { environment } from 'environments/environment';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -95,7 +95,7 @@ export class AppModule {
         // localStorage.setItem("LocalIp", window.location.origin);
         // console.log(window.location.origin); // 192.168.0.122
 
-        var url = environment.coreUrl + AdInsConstant.GetBusinessDt;
+        var url = environment.foundationUrl + AdInsConstant.GetBusinessDt;
         this.http.post(url, null).subscribe(
             (response) => {
                 var datePipe = new DatePipe("en-US");

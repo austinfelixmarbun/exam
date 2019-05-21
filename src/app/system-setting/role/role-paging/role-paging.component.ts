@@ -35,6 +35,7 @@ export class RolePagingComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetRefRolePaging;
+  urlEnviPaging : string = environment.foundationUrl;
 
   constructor(
     private http: Http,
@@ -60,8 +61,9 @@ export class RolePagingComponent implements OnInit {
   }
 
   getResult(event) {
-    this.resultData = event;
-    this.totalData = event.returnObject.count;
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
   }

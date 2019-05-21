@@ -1,0 +1,79 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" name="HolidayDetReqForm" #HolidayDetReqForm="ngForm"
+          (ngSubmit)="HolidayDetReqForm.form.valid && SaveHolidayDetForm(HolidayDetReqForm)">
+          <div class="form-body">
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday Detail Information</h4>
+            <div class="form-group row">
+              <label class="col-md-3 label-control">Public Holiday </label>
+              <div class="col-md-9">
+                <select class="form-control" name="isPublicHoliday" [(ngModel)]="isPublicHoliday" #IsPublicHoliday>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="isPublicHoliday == '1'">
+              <div class="form-group row">
+                <label class="col-md-3 label-control" translate>Date </label>
+                <div class="col-md-9">
+                  <input type="date" class="form-control" name="holidayDt" required [(ngModel)]="holidayDt"
+                    #HolidayDt="ngModel" [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || HolidayDt.touched || HolidayDt.dirty) && HolidayDt.invalid }">
+                  <div *ngIf="(HolidayDetReqForm.submitted || HolidayDt.touched || HolidayDt.dirty) && HolidayDt.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="HolidayDt.errors.required" translate>This field is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 label-control" translate>Description </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" name="descr" required [(ngModel)]="descr"
+                    #Descr="ngModel"
+                    [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || Descr.touched || Descr.dirty) && Descr.invalid }">
+                  <div
+                    *ngIf="(HolidayDetReqForm.submitted || Descr.touched || Descr.dirty) && Descr.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="Descr.errors.required" translate>This field is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="isPublicHoliday == '0'">
+                <div class="form-group row" *ngFor="let item of listOfDay;let i = index;">
+                  <label class="col-md-3 label-control" translate>{{item.day}} </label>
+                  <div class="col-md-9">
+                    <input class="border-primary" type="checkbox" [(ngModel)]="item.isActive" [ngModelOptions]="{standalone: true}" data-md-icheck>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" translate>Until Year </label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" name="untilYear" required [(ngModel)]="untilYear"
+                      #UntilYear="ngModel"
+                      [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || UntilYear.touched || UntilYear.dirty) && UntilYear.invalid }">
+                    <div
+                      *ngIf="(HolidayDetReqForm.submitted || UntilYear.touched || UntilYear.dirty) && UntilYear.invalid"
+                      class="invalid-feedback">
+                      <div *ngIf="UntilYear.errors.required" translate>This field is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/commonSetting/holiday/add']"
+            [queryParams]="{param:'edit',holidaySchmHId:holidaySchmHId}" translate>
+              <i class="fa fa-arrow-circle-left"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

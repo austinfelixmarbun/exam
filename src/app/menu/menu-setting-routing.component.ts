@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MenuSettingComponent } from './menu-setting.component';
 import { AddMenuSettingComponent } from './add/add-menu.component';
-import { CurrencyComponent } from './currency/currency.component';
-import { CurrencyAddComponent } from './currency/currency-add/currency-add.component';
 
 const routes: Routes = [
   {
@@ -21,20 +19,6 @@ const routes: Routes = [
         component: AddMenuSettingComponent,
         data: {
           title: 'Add / Edit Menu'
-        },
-      },
-      {
-        path: 'currency',
-        component: CurrencyComponent,
-        data: {
-          title: 'Currency'
-        },
-      },
-      {
-        path: 'currency/add',
-        component: CurrencyAddComponent,
-        data: {
-          title: 'Currency add'
         },
       }
     ]

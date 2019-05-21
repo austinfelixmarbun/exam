@@ -29,6 +29,7 @@ export class OfficeAreaPagingComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetRefOfficeAreaPaging;
+  urlEnviPaging : string = environment.foundationUrl;
 
   refOfficeAreaObj: RefOfficeAreaObj;
   constructor(
@@ -45,9 +46,9 @@ export class OfficeAreaPagingComponent implements OnInit {
   }
 
   getResult(event) {
-
-    this.resultData = event;
-    this.totalData = event.returnObject.count;
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
   }

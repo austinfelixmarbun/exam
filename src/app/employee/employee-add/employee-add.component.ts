@@ -55,7 +55,7 @@ export class EmployeeAddComponent implements OnInit {
   isActive: boolean = false;
   isExt: boolean = false;
   bankBranch: any;
-  bankBranchBiCode: any;
+  bankBranchRegRptCode: any;
   bankAccName: any;
   bankAccNo: any;
   empObj: RefEmpObj;
@@ -135,7 +135,7 @@ export class EmployeeAddComponent implements OnInit {
             response => {
               this.EmpBankAccId = response["returnObject"].empBankAccId;
               this.bankBranch = response["returnObject"].bankBranch;
-              this.bankBranchBiCode = response["returnObject"].bankBranchBiCode;
+              this.bankBranchRegRptCode = response["returnObject"].bankBranchRegRptCode;
               this.bankAccName = response["returnObject"].bankAccName;
               this.bankAccNo = response["returnObject"].bankAccNo;
               this.bankObj = new RefBankObj();
@@ -207,7 +207,7 @@ export class EmployeeAddComponent implements OnInit {
       this.empObj.email2 = ucContactInfo.email2;
       this.empObj.EmpBankAccId = this.EmpBankAccId;
       this.empObj.bankBranch = ReqForm.value.bankBranch;
-      this.empObj.bankBranchBiCode = ReqForm.value.bankBranchBiCode;
+      this.empObj.bankBranchRegRptCode = ReqForm.value.bankBranchRegRptCode;
       this.empObj.bankAccName = ReqForm.value.bankAccName;
       this.empObj.bankAccNo = ReqForm.value.bankAccNo;
       this.empObj.bankCode = uclRefBank.codeSelect;
@@ -269,7 +269,7 @@ export class EmployeeAddComponent implements OnInit {
       this.empObj.email2 = ucContactInfo.email2;
       this.empObj.EmpBankAccId = this.EmpBankAccId;
       this.empObj.bankBranch = ReqForm.value.bankBranch;
-      this.empObj.bankBranchBiCode = ReqForm.value.bankBranchBiCode;
+      this.empObj.bankBranchRegRptCode = ReqForm.value.bankBranchRegRptCode;
       this.empObj.bankAccName = ReqForm.value.bankAccName;
       this.empObj.bankAccNo = ReqForm.value.bankAccNo;
       this.empObj.bankCode = uclRefBank.codeSelect;

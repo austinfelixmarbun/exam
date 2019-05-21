@@ -1,0 +1,89 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" name="WorkingHourReqForm" #WorkingHourReqForm="ngForm"
+          (ngSubmit)="WorkingHourReqForm.form.valid && SaveWorkingHourForm(WorkingHourReqForm, input)">
+          <div class="form-body">
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Working Hour Information</h4>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" translate>Scheme Code </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="workingHourSchmCode" required
+                  [(ngModel)]="workingHourSchmCode" #WorkingHourSchmCode="ngModel"
+                  [ngClass]="{ 'is-invalid': (WorkingHourReqForm.submitted || WorkingHourSchmCode.touched || WorkingHourSchmCode.dirty) && WorkingHourSchmCode.invalid }">
+                <div
+                  *ngIf="(WorkingHourReqForm.submitted || WorkingHourSchmCode.touched || WorkingHourSchmCode.dirty) && WorkingHourSchmCode.invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="WorkingHourSchmCode.errors.required" translate>This field is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" translate>Scheme Name </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="workingHourSchmName" required
+                  [(ngModel)]="workingHourSchmName" #WorkingHourSchmName="ngModel"
+                  [ngClass]="{ 'is-invalid': (WorkingHourReqForm.submitted || WorkingHourSchmName.touched || WorkingHourSchmName.dirty) && WorkingHourSchmName.invalid }">
+                <div
+                  *ngIf="(WorkingHourReqForm.submitted || WorkingHourSchmName.touched || WorkingHourSchmName.dirty) && WorkingHourSchmName.invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="WorkingHourSchmName.errors.required" translate>This field is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" translate>Active </label>
+              <div class="col-md-9">
+                <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
+                  (change)="toggleActive($event)" name="isActive">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 text-center" translate>Day </label>
+              <label class="col-md-4 text-center" translate>Work Hour </label>
+              <label class="col-md-4 text-center" translate>Work Hour After Break </label>
+            </div>
+            <div class="form-group row" *ngFor="let item of listOfDay;let i = index;">
+              <label class="col-md-2 text-center" translate>{{item.label}} </label>
+              <div class="col-md-2" style="border-right: 1px solid grey">
+                <input type="time" class="form-control" [(ngModel)]="item.workingHourFrom1"
+                  name="{{item.workingHourSchmDay}}0" #input="ngModel" value="{{item.workingHourFrom1}}"
+                  [ngClass]="{ 'is-invalid':(WorkingHourReqForm.submitted || input.touched || input.dirty) && input.invalid }">
+                <div *ngIf=" (WorkingHourReqForm.submitted || input.touched || input.dirty) && input.invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="input.errors.required" translate>This field is required</div>
+                  <div *ngIf="input.errors?.pattern" translate>Number Only</div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <input type="time" class="form-control" [(ngModel)]="item.workingHourTo1"
+                  name="{{item.workingHourSchmDay}}1" #item.workingHourSchmDay="ngModel"
+                  value="{{item.workingHourTo1}}">
+              </div>
+              <div class="col-md-2" style="border-right: 1px solid grey">
+                <input type="time" class="form-control" [(ngModel)]="item.workingHourFrom2"
+                  name="{{item.workingHourSchmDay}}2" #item.workingHourSchmDay="ngModel"
+                  value="{{item.workingHourFrom2}}">
+              </div>
+              <div class="col-md-2">
+                <input type="time" class="form-control" [(ngModel)]="item.workingHourTo2"
+                  name="{{item.workingHourSchmDay}}3" #item.workingHourSchmDay="ngModel"
+                  value="{{item.workingHourTo2}}">
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button *ngIf=" pageType === 'edit'" type="button" class="btn btn-raised btn-warning mr-1"
+              [routerLink]="['/commonSetting/workingHour']" translate>
+              <i class="fa fa-arrow-circle-left"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" name="HolidayReqForm" #HolidayReqForm="ngForm"
+          (ngSubmit)="HolidayReqForm.form.valid && SaveHolidayForm(HolidayReqForm)">
+          <div class="form-body">
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday Information</h4>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" translate>Scheme Code </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="holidaySchmCode" required [readonly]="isEdit"
+                  [(ngModel)]="holidaySchmCode" #HolidaySchmCode="ngModel"
+                  [ngClass]="{ 'is-invalid': (HolidayReqForm.submitted || HolidaySchmCode.touched || HolidaySchmCode.dirty) && HolidaySchmCode.invalid }">
+                <div
+                  *ngIf="(HolidayReqForm.submitted || HolidaySchmCode.touched || HolidaySchmCode.dirty) && HolidaySchmCode.invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="HolidaySchmCode.errors.required" translate>This field is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" translate>Scheme Name </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="holidaySchmName" required [(ngModel)]="holidaySchmName"
+                  #HolidaySchmName="ngModel"
+                  [ngClass]="{ 'is-invalid': (HolidayReqForm.submitted || HolidaySchmName.touched || HolidaySchmName.dirty) && HolidaySchmName.invalid }">
+                <div
+                  *ngIf="(HolidayReqForm.submitted || HolidaySchmName.touched || HolidaySchmName.dirty) && HolidaySchmName.invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="HolidaySchmName.errors.required" translate>This field is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" translate>Active </label>
+              <div class="col-md-9">
+                <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
+                  (change)="toggleActive($event)" name="isActive" [readonly]="isEdit">
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button *ngIf=" pageType === 'edit'" type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/commonSetting/holiday']"
+              translate>
+              <i class="fa fa-arrow-circle-left"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="editDetail  === 'true'" class="holidayDetail">
+    <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+      [enviromentUrl]='urlEnviPaging' [arrCritObj]='arrCrit' (result)="getResult($event)"></app-search>
+  </div>
+</div>
+
+<div *ngIf="editDetail  === 'true'" class="holidayDetail">
+  <div [hidden]="resultData?.data == null|| resultData?.data.length == 0">
+    <table class="table table-responsive-md text-center table-hover">
+      <thead>
+        <tr class="table-header">
+          <th><span translate class="thead-header" (click)="searchSort($event)" name='holidayDt'>Date</span></th>
+          <th><span translate class="thead-header" (click)="searchSort($event)" name='Descr'>Description</span></th>
+          <th><span translate class="thead-header" (click)="searchSort($event)" name='isPublicHoliday' translate>Public
+              Holiday</span></th>
+          <th translate>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of resultDataSearch?.data">
+          <td>{{item.holidayDt | date: 'dd-MMM-yyyy'}}</td>
+          <td>{{item.descr}}</td>
+          <td *ngIf="item.isPublicHoliday === '1'">Yes</td>
+          <td *ngIf="item.isPublicHoliday === '0'">No</td>
+          <td>
+            <a class="danger p-0" data-original-title="" title="" (click)="delete(item.holidaySchmDId)">
+              <i class="ft-trash-2 font-medium-3 mr-2"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+  </div>
+  <i class="fa fa-plus-circle" [routerLink]="['/commonSetting/holiday/detail']"
+    [queryParams]="{holidaySchmHId:holidaySchmHId}"
+    style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+</div>

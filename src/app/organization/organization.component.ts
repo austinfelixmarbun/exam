@@ -34,6 +34,7 @@ export class OrganizationComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetRefOrgPaging;
+  urlEnviPaging : string = environment.foundationUrl;
 
   constructor(
     private http: HttpClient,
@@ -55,8 +56,9 @@ export class OrganizationComponent implements OnInit {
   }
 
   getResult(event) {
-    this.resultData = event;
-    this.totalData = event.returnObject.count;
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
   }

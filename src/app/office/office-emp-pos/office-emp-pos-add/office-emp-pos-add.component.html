@@ -5,8 +5,7 @@
               <form class="form form-horizontal" name="EmpPositionForm" #EmpPositionForm="ngForm" novalidate
                   (ngSubmit)="EmpPositionForm.form.valid && SaveForm(EmpPositionForm)">
                   <div class="form-body">
-                      <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Position -
-                          {{pageType}}</h4>
+                      <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Position Information</h4>
                       <div class="form-group row">
                           <label class="col-md-3 label-control" translate>Employee No </label>
                           <div class="col-md-9">
@@ -108,7 +107,7 @@
                   <div class="form-actions right">
                       <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/employee/employeePosition']" translate
                       [queryParams]="{refEmpId:refEmpId}">
-                          <i class="ft-x"></i> Cancel
+                          <i class="fa fa-arrow-circle-left"></i> Back
                       </button>
                       <button type="submit" class="btn btn-raised btn-primary" translate>
                           <i class="fa fa-check-square-o"></i> Save

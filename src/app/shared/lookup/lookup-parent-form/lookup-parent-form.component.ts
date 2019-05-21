@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ViewChildren } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from 'app/shared/search/search.component';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { environment } from 'environments/environment';
@@ -11,7 +10,6 @@ import { NgForm, ControlContainer } from '@angular/forms';
 @Component({
     selector: 'app-lookup-parent-form',
     templateUrl: './lookup-parent-form.component.html',
-    providers: [NGXToastrService],
     viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 export class LookupParentFormComponent implements OnInit {
@@ -20,6 +18,7 @@ export class LookupParentFormComponent implements OnInit {
 
     urlJson: string = "./assets/lookup/lookupParentForm.json";
     urlQryPaging: string = AdInsConstant.GetRefFormPaging;
+    urlEnviPaging : string = environment.foundationUrl;
     @Input() _url: string;
     @Input() nameSelect: any = "Search ...";
     @Input() idSelect: any;
@@ -79,9 +78,9 @@ export class LookupParentFormComponent implements OnInit {
     }
 
     getResult(ucgridFooter, event) {
-
-        this.resultData = event;
-        this.totalData = event.returnObject.count;
+        this.resultData = event.response.returnObject;
+        this.totalData = event.response.returnObject.count;
+        ucgridFooter.pageNow = event.pageNow;
         ucgridFooter.totalData = this.totalData;
         ucgridFooter.resultData = this.resultData;
     }

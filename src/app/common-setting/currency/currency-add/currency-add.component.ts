@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CurrObj } from 'app/shared/model/currObj.Model';
+import { CurrObj } from 'app/shared/model/CurrObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { formatDate } from '@angular/common';
@@ -25,7 +25,7 @@ export class CurrencyAddComponent implements OnInit {
   currDt: any;
   roundedAmt: any;
   minRefundAmt: any;
-  biCode: any;
+  regRptCode: any;
   exchangeRateId: any;
   exchangeRateAmt: any = 0;
   currObj: CurrObj;
@@ -49,7 +49,9 @@ export class CurrencyAddComponent implements OnInit {
     this.addRateUrl = this.settingUrl + AdInsConstant.AddExchangeRate;
     this.editRateUrl = this.settingUrl + AdInsConstant.EditExchangeRate;
 
-    this.currDt = formatDate(localStorage.getItem("BusinessDate"), 'yyyy-MM-dd', 'en-US')
+    var businessDate = localStorage.getItem("BusinessDate");
+    var date = new Date(businessDate.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+    this.currDt = formatDate(date, 'yyyy-MM-dd', 'en-US');
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -77,7 +79,7 @@ export class CurrencyAddComponent implements OnInit {
           this.currName = response['returnObject']['currName'];
           this.roundedAmt = response['returnObject']['roundedAmt'];
           this.minRefundAmt = response['returnObject']['minRefundAmt'];
-          this.biCode = response['returnObject']['biCode'];
+          this.regRptCode = response['returnObject']['regRptCode'];
           if (this.resultData.isActive == "1") {
             this.isActive = true;
           } else {
@@ -103,7 +105,7 @@ export class CurrencyAddComponent implements OnInit {
           this.currName = response['returnObject']['currName'];
           this.roundedAmt = response['returnObject']['roundedAmt'];
           this.minRefundAmt = response['returnObject']['minRefundAmt'];
-          this.biCode = response['returnObject']['biCode'];
+          this.regRptCode = response['returnObject']['regRptCode'];
           if (this.resultData.isActive == "1") {
             this.isActive = true;
           } else {
@@ -153,7 +155,7 @@ export class CurrencyAddComponent implements OnInit {
           console.log("Success");
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/menuSetting/currency"]);
+          this.router.navigate(["/commonSetting/currency"]);
         },
         error => {
           console.log(error);
@@ -166,7 +168,7 @@ export class CurrencyAddComponent implements OnInit {
           console.log("Success");
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/menuSetting/currency"]);
+          this.router.navigate(["/commonSetting/currency"]);
         },
         error => {
           console.log(error);
@@ -187,7 +189,7 @@ export class CurrencyAddComponent implements OnInit {
           console.log("addExchange");
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/menuSetting/currency"]);
+          this.router.navigate(["/commonSetting/currency"]);
         },
         error => {
           console.log(error);
@@ -200,7 +202,7 @@ export class CurrencyAddComponent implements OnInit {
           console.log("editExchange");
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/menuSetting/currency"]);
+          this.router.navigate(["/commonSetting/currency"]);
         },
         error => {
           console.log(error);

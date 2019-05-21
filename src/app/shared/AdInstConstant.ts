@@ -177,6 +177,7 @@ export class AdInsConstant {
     public static GetRefMastersByCriteria = "/RefMaster/GetRefMastersByCriteria";
     public static GetRefMaster = "/RefMaster/GetRefMaster";
     public static GetRefMasterListByTypeCode = "/RefMaster/GetRefMasterListByTypeCode";
+    public static GetRefMasterListKeyValuePair = "/RefMaster/GetRefMasterListKeyValuePair";
     public static AddRefMaster = "/RefMaster/AddRefMaster";
     public static EditRefMaster = "/RefMaster/EditRefMaster";
     public static GetRefMasterType = "/RefMaster/GetRefMasterType";
@@ -204,9 +205,15 @@ export class AdInsConstant {
 
     //HOLIDAY
     public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
-
-    //WORK HOUR
-    public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
+    public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
+    public static AddHolidaySchmH = "/Holiday/AddHolidaySchmH";
+    public static AddHolidaySchmD = "/Holiday/AddHolidaySchmD";
+    public static AddHolidaySchmDUntilYear = "/Holiday/AddHolidaySchmDUntilYear";
+    public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
+    public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
+    public static DeleteHolidaySchmH = "/Holiday/DeleteHolidaySchmH";
+    public static DeleteHolidaySchmD = "/Holiday/DeleteHolidaySchmD";
+    public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
 
     //USER SESSION LOG
     public static SelectRole = "/UserSessionLog/SelectRole";
@@ -228,4 +235,13 @@ export class AdInsConstant {
     public static AddObjectBySQL = "/Generic/AddObjectBySQL";
     public static UpdateObjectBySQL = "/Generic/UpdateObjectBySQL";
     public static DeleteObjectBySQL = "/Generic/DeleteObjectBySQL";
+    //WORKHOUR
+    public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
+    public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
+    public static AddWorkingHourSchmH = "/WorkHour/AddWorkingHourSchmH";
+    public static EditWorkingHourSchmH = "/WorkHour/EditWorkingHourSchmH";
+    public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
+    public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
+    public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
+    
 }

@@ -31,6 +31,7 @@ export class LookupBizUnitComponent implements OnInit {
 
   urlJson: string = "./assets/lookup/lookupBizUnit.json";
   urlQryPaging: string = AdInsConstant.GetBusinessUnitPaging;
+  urlEnviPaging : string = environment.foundationUrl;
   @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
@@ -101,10 +102,11 @@ export class LookupBizUnitComponent implements OnInit {
     );
   }
 
-  getResult(ucgridFooter, event) {
+  getResult(ucgridFooter,event) {
     console.log(this.urlQryPaging);
-    this.resultData = event;
-    this.totalData = event.returnObject.count;
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    ucgridFooter.pageNow = event.pageNow;
     ucgridFooter.totalData = this.totalData;
     ucgridFooter.resultData = this.resultData;
   }

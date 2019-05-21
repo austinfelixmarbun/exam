@@ -1,15 +1,12 @@
 <div class="col-md-12">
   <div class="card">
-    <div class="card-header">
-      <h4 class="card-title" id="horz-layout-colored-controls" translate>Currency</h4>
-    </div>
     <div class="card-body">
       <div class="px-3">
         <div class="addEdit" *ngIf="exRate === 'false'">
           <form class="form form-horizontal" name="CurrReqForm" #CurrReqForm="ngForm"
             (ngSubmit)="CurrReqForm.form.valid && SaveCurrForm(CurrReqForm)">
             <div class="form-body">
-              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Currency - {{pageType}}</h4>
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Currency Information</h4>
               <div class="form-group row">
                 <label class="col-md-3 label-control" translate>Currency Code </label>
                 <div class="col-md-9">
@@ -71,11 +68,11 @@
               <div class="form-group row">
                 <label class="col-md-3 label-control" translate>BI Code </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" name="biCode" required [(ngModel)]="biCode" #BiCode="ngModel"
-                    [ngClass]="{ 'is-invalid': (CurrReqForm.submitted || BiCode.touched || BiCode.dirty) && BiCode.invalid }">
-                  <div *ngIf="(CurrReqForm.submitted || BiCode.touched || BiCode.dirty) && BiCode.invalid"
+                  <input type="text" class="form-control" name="regRptCode" required [(ngModel)]="regRptCode" #RegRptCode="ngModel"
+                    [ngClass]="{ 'is-invalid': (CurrReqForm.submitted || RegRptCode.touched || RegRptCode.dirty) && RegRptCode.invalid }">
+                  <div *ngIf="(CurrReqForm.submitted || RegRptCode.touched || RegRptCode.dirty) && RegRptCode.invalid"
                     class="invalid-feedback">
-                    <div *ngIf="BiCode.errors.required" translate>This field is required</div>
+                    <div *ngIf="RegRptCode.errors.required" translate>This field is required</div>
                   </div>
                 </div>
               </div>
@@ -88,9 +85,9 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/menuSetting/currency']"
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/commonSetting/currency']"
                 translate>
-                <i class="ft-x"></i> Cancel
+                <i class="ft-x"></i> Back
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
                 <i class="fa fa-check-square-o"></i> Save
@@ -102,7 +99,7 @@
             <form class="form form-horizontal" name="RateReqForm" #RateReqForm="ngForm"
               (ngSubmit)="RateReqForm.form.valid && SaveRateForm(RateReqForm)">
               <div class="form-body">
-                <h4 class="form-section card-title" translate><i class="ft-file-text"></i> RefCurr - Exchange Rate</h4>
+                <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Exchange Rate</h4>
                 <div class="form-group row">
                   <label class="col-md-3 label-control" translate>Currency Code </label>
                   <div class="col-md-9">
@@ -153,9 +150,9 @@
                 </div>
               </div>
               <div class="form-actions right">
-                <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/menuSetting/currency']"
+                <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/commonSetting/currency']"
                   translate>
-                  <i class="ft-x"></i> Cancel
+                  <i class="ft-x"></i> Back
                 </button>
                 <button type="submit" class="btn btn-raised btn-primary" translate>
                   <i class="fa fa-check-square-o"></i> Save

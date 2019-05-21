@@ -52,10 +52,10 @@ export class LookupzipcodeComponent implements OnInit {
 
   closeResult: string;
 
-  foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
 
   ngOnInit() {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
+    this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipcodePaging;
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
@@ -164,11 +164,12 @@ export class LookupzipcodeComponent implements OnInit {
     }
   }
 
-  getResult(gridFooter, event){
-    this.resultData = event.returnObject;
-    this.totalData = event.returnObject.count;
-    gridFooter.totalData = this.totalData;
-    gridFooter.resultData = this.resultData;
+  getResult(ucgridFooter, event){
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    ucgridFooter.pageNow = event.pageNow;
+    ucgridFooter.totalData = this.totalData;
+    ucgridFooter.resultData = this.resultData;
   }
 
   onSelect(searchComp, event)

@@ -13,11 +13,12 @@ import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
 import { DOCUMENT } from '@angular/platform-browser';
 import { environment } from 'environments/environment';
+import { ExcelService } from '../excel-service/excel-service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  providers: [DecimalPipe]
+  providers: [DecimalPipe, ExcelService]
 })
 export class SearchComponent implements OnInit {
   @ViewChild('formIdSearch') myForm: ElementRef;
@@ -36,6 +37,8 @@ export class SearchComponent implements OnInit {
   server: any;
   configuration: any;
   itemUrl: any;
+  exportData: any;
+  ExcelData: any;
   isDataLoaded: boolean = false;
   form: FormGroup;
   payLoad = '';
@@ -44,7 +47,7 @@ export class SearchComponent implements OnInit {
   amount = 0;
   apiUrl: string;
   arrCrit: any;
-  constructor(private http: HttpClient, private adInsService: AdInsServiceService, private decimalPipe: DecimalPipe, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
+  constructor(private http: HttpClient, private adInsService: AdInsServiceService, private excelService: ExcelService, private decimalPipe: DecimalPipe, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
   }
 
 
@@ -54,6 +57,7 @@ export class SearchComponent implements OnInit {
       console.log(data);
       this.configuration = data;
       this.urlGet = data.url;
+      this.exportData = data.exportExcel;
       this.countForm = data.component.length;
       console.log(this.countForm);
       this.isDataLoaded = true;
@@ -210,8 +214,12 @@ export class SearchComponent implements OnInit {
     request.criteria = arrCrit;
     var httpRequest = new HttpRequestObj();
     this.http.post(apiUrl, request).subscribe((response) => {
-      console.log(response);
-      this.result.emit(response);
+      var qryPaging = {
+        response : response,
+        pageNow : pageNo
+      }
+      console.log(qryPaging);
+      this.result.emit(qryPaging);
       return response;
     });
   }
@@ -244,4 +252,23 @@ export class SearchComponent implements OnInit {
     element.target.value = parseFloat(element.target.value.toString().replace(/,/g, ''));
   }
 
+  exportAsXLSX(): void {
+    var request = new RequestCriteriaObj();
+    request.pageNo = 1;
+    request.rowPerPage = 9999;
+    request.orderBy = null;
+    request.criteria = [];
+    
+    this.http.post(this.apiUrl, request).subscribe(
+      response => {
+        console.log("Success");
+        this.ExcelData = response["returnObject"]["data"];
+        this.excelService.exportAsExcelFile(this.ExcelData, 'sample');
+        console.log(response);
+      },
+      (error) => {
+        console.log("Error");
+        console.log(error);
+      });
+  }
 }

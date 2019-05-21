@@ -1,15 +1,12 @@
 <div class="col-md-12">
     <div class="card">
-        <div class="card-header">
-            <h4 class="card-title" id="horz-layout-colored-controls">Company Profile</h4>
-        </div>
         <div class="card-body">
             <div class="px-3">
                 <form class="form form-horizontal" name="RefCoyForm" #RefCoyForm="ngForm" (ngSubmit)="RefCoyForm.form.valid && Save(RefCoyForm, ucAddress, ucContactInfo)" novalidate>
                     <div class="form-body">
-                        <h4 class="form-section card-title"><i class="ft-file-text"></i>Company Profile</h4>
+                        <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Company Profile</h4>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Company Code : </label>
+                            <label class="col-md-3 label-control">Company Code </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="coyCode" required [(ngModel)]="coyCode"
                                     #CoyCode="ngModel" [ngClass]="{ 'is-invalid': (CoyCode.touched || CoyCode.dirty || RefCoyForm.submitted) && CoyCode.invalid }">
@@ -19,7 +16,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Full Name: </label>
+                            <label class="col-md-3 label-control">Full Name </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="fullName" required [(ngModel)]="fullName"
                                     #FullName="ngModel" [ngClass]="{ 'is-invalid': (FullName.touched || FullName.dirty || RefCoyForm.submitted) && FullName.invalid }">
@@ -29,7 +26,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Short Name: </label>
+                            <label class="col-md-3 label-control">Short Name </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="shortName" required [(ngModel)]="shortName"
                                     #ShortName="ngModel" [ngClass]="{ 'is-invalid': (ShortName.touched || ShortName.dirty || RefCoyForm.submitted) && ShortName.invalid }">
@@ -39,7 +36,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Initial Name: </label>
+                            <label class="col-md-3 label-control">Initial Name </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="initialName" required [(ngModel)]="initialName"
                                     #InitialName="ngModel" [ngClass]="{ 'is-invalid': (InitialName.touched || InitialName.dirty || RefCoyForm.submitted) && InitialName.invalid }">
@@ -49,14 +46,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">BI Code: </label>
+                            <label class="col-md-3 label-control">BI Code </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="biCode" required [(ngModel)]="biCode"
-                                    #BiCode="ngModel">
+                                <input type="text" class="form-control" name="regRptCode" required [(ngModel)]="regRptCode"
+                                    #RegRptCode="ngModel">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">NPWP :</label>
+                            <label class="col-md-3 label-control">NPWP</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="npwp" required [(ngModel)]="npwp"
                                     #Npwp="ngModel" [ngClass]="{ 'is-invalid': (Npwp.touched || Npwp.dirty || RefCoyForm.submitted) && Npwp.invalid }">
@@ -66,7 +63,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">TDP :</label>
+                            <label class="col-md-3 label-control">TDP</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="tdp" required [(ngModel)]="tdp"
                                     #TDP="ngModel">
@@ -77,7 +74,7 @@
                     <app-ucContactInfo #ucContactInfo [parentForm]='RefCoyForm' [useEmail2]="false"></app-ucContactInfo>
                     <div class="form-actions right">
                         <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/company/commissioner']">
-                            <i class="ft-x"></i> Cancel
+                            <i class="fa fa-arrow-circle-left"></i> Back
                         </button>
                         <button type="submit" class="btn btn-raised btn-primary">
                             <i class="fa fa-check-square-o"></i> Save

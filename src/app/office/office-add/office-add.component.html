@@ -1,14 +1,11 @@
 <div class="col-md-12">
   <div class="card">
-    <div class="card-header">
-      <h4 class="card-title" id="horz-layout-colored-controls" translate>Office</h4>
-    </div>
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="OfficeReqForm" #OfficeReqForm="ngForm"
           (ngSubmit)="OfficeReqForm.form.valid && SaveForm(OfficeReqForm, ucAddress, ucContactInfo)">
           <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> General</h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Office Information</h4>
             <div class="form-group row">
               <label class="col-md-3 label-control" translate>Office Code </label>
               <div class="col-md-9">
@@ -162,7 +159,7 @@
           <div class="form-actions right">
             <button *ngIf="pageType === 'edit'" type="button" class="btn btn-raised btn-warning mr-1"
               [routerLink]="['/office']" translate>
-              <i class="ft-x"></i> Cancel
+              <i class="fa fa-arrow-circle-left"></i> Back
             </button>
             <button type="submit" class="btn btn-raised btn-primary" translate>
               <i class="fa fa-check-square-o"></i> Save

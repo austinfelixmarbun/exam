@@ -1,16 +1,13 @@
 <div class="col-md-12">
   <div class="card">
-    <div class="card-header">
-      <h4 class="card-title" id="horz-layout-colored-controls">Employee</h4>
-    </div>
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="RefEmpForm" #RefEmpForm="ngForm" novalidate
           (ngSubmit)="RefEmpForm.form.valid && SaveForm(RefEmpForm, uclRefBank, ucAddress, ucContactInfo)">
           <div class="form-body">
-            <h4 class="form-section card-title"><i class="ft-file-text"></i> Employee - {{pageType}}</h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="empNo">Employee No: </label>
+              <label class="col-md-3 label-control" for="empNo">Employee No </label>
               <div class="col-md-9">
                 <input type="text" class="form-control" name="empNo" required [(ngModel)]="empNo" #EmpNo="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpNo.invalid }">
@@ -20,7 +17,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="empName">Employee Name: </label>
+              <label class="col-md-3 label-control" for="empName">Employee Name </label>
               <div class="col-md-9">
                 <input type="text" class="form-control" name="empName" required [(ngModel)]="empName" #EmpName="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpName.invalid }">
@@ -30,7 +27,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="joinDt">Join Date: </label>
+              <label class="col-md-3 label-control" for="joinDt">Join Date </label>
               <div class="col-md-9">
                 <input type="date" id="joinDt" class="form-control" name="joinDt" required [(ngModel)]="joinDt"
                   #JoinDt="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && JoinDt.invalid }">
@@ -40,21 +37,21 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="isExt">External Employee: </label>
+              <label class="col-md-3 label-control" for="isExt">External Employee </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isExt" data-md-icheck
                   (change)="toggleExt($event)" name="isExt">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="isActive">Active Status: </label>
+              <label class="col-md-3 label-control" for="isActive">Active Status </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                   (change)="toggleActive($event)" name="isActive">
               </div>
             </div>
             <!-- <div class="form-group row">
-              <label class="col-md-3 label-control" for="ktpNo">KTP No: </label>
+              <label class="col-md-3 label-control" for="ktpNo">KTP No </label>
               <div class="col-md-9">
                 <input type="text" id="ktpNo" class="form-control" name="IdNo" required [(ngModel)]="ktpNo"
                   #KtpNo="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && KtpNo.invalid }">
@@ -64,7 +61,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="npwp">NPWP : </label>
+              <label class="col-md-3 label-control" for="npwp">NPWP </label>
               <div class="col-md-9">
                 <input type="text" id="npwp" class="form-control" name="npwp" required [(ngModel)]="npwp"
                   #Npwp="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Npwp.invalid }">
@@ -77,16 +74,16 @@
           <app-ucAddress #ucAddress [parentForm]='RefEmpForm'></app-ucAddress>
           <app-ucContactInfo #ucContactInfo [parentForm]='RefEmpForm' [useEmail2]="false" [useTitle]="false" [useName]="false"></app-ucContactInfo>
           <div class="form-body">
-            <h4 class="form-section card-title"><i class="ft-file-text"></i> Bank Data</h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Bank Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="bankName" translate>Bank Name : </label>
+              <label class="col-md-3 label-control" for="bankName" translate>Bank Name </label>
               <div class="col-md-9">
                 <app-lookup-ref-bank #uclRefBank [nameSelect]="bankName" [codeSelect]="codeSelect"
                   [jsonSelect]="jsonSelect"></app-lookup-ref-bank>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="bankBranch">Bank Branch: </label>
+              <label class="col-md-3 label-control" for="bankBranch">Bank Branch </label>
               <div class="col-md-9">
                 <input type="text" id="bankBranch" class="form-control" name="bankBranch" required
                   [(ngModel)]="bankBranch" #BankBranch="ngModel"
@@ -97,14 +94,14 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="bankBranchBiCode">Bank Branch BI Code: </label>
+              <label class="col-md-3 label-control" for="bankBranchRegRptCode">Bank Branch BI Code </label>
               <div class="col-md-9">
-                <input type="text" id="bankBranchBiCode" class="form-control" name="bankBranchBiCode"
-                  [(ngModel)]="bankBranchBiCode" #BankBranchBiCode="ngModel">
+                <input type="text" id="bankBranchRegRptCode" class="form-control" name="bankBranchRegRptCode"
+                  [(ngModel)]="bankBranchRegRptCode" #BankBranchRegRptCode="ngModel">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="bankAccName">Account Name: </label>
+              <label class="col-md-3 label-control" for="bankAccName">Account Name </label>
               <div class="col-md-9">
                 <input type="text" id="bankAccName" class="form-control" name="bankAccName" required
                   [(ngModel)]="bankAccName" #BankAccName="ngModel"
@@ -115,7 +112,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="bankAccNo">Account No: </label>
+              <label class="col-md-3 label-control" for="bankAccNo">Account No </label>
               <div class="col-md-9">
                 <input type="text" id="bankAccNo" class="form-control" name="bankAccNo" required [(ngModel)]="bankAccNo"
                   #BankAccNo="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankAccNo.invalid }">
@@ -127,7 +124,7 @@
           </div>
           <div class="form-actions right">
             <button *ngIf="pageType !== 'add'" type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/employee']">
-              <i class="ft-x"></i> Cancel
+              <i class="fa fa-arrow-circle-left"></i> Back
             </button>
             <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save

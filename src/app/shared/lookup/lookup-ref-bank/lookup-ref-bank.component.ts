@@ -3,6 +3,7 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { NgbModal, ModalDismissReasons, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
+import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 
 @Component({
   selector: 'app-lookup-ref-bank',
@@ -19,6 +20,7 @@ export class LookupRefBankComponent implements OnInit {
   @Input() codeSelect: any;
   @Input() jsonSelect:string;
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCGridFooterComponent) ucgridFooter;
   @ViewChild('content') contentTemplate;
 
   configuration: any;
@@ -65,8 +67,9 @@ export class LookupRefBankComponent implements OnInit {
 
   getResult(ucgridFooter, event) {
     console.log(this.urlQryPaging);
-    this.resultData = event;
-    this.totalData = event.returnObject.count;
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    ucgridFooter.pageNow = event.pageNow;
     ucgridFooter.totalData = this.totalData;
     ucgridFooter.resultData = this.resultData;
   }

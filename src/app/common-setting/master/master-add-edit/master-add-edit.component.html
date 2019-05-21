@@ -1,78 +1,80 @@
 <div class="col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="px-3">
-          <form class="form form-horizontal" name="MasterAddEditForm" #MasterAddEditForm="ngForm" novalidate
-            (ngSubmit)="MasterAddEditForm.form.valid && Save(MasterAddEditForm)" >
-            <div class="form-body">
-              <h4 class="form-section"><i class="ft-user"></i> Master - {{type}} </h4>
-              <br>
-              <div class="form-group row">
-                  <label class="col-md-3 label-control" for="refMasterTypeCodeModule">Master Type</label>
-                  <div class="col-md-9">
-                      <select id="refMasterTypeCodeModule" name="refMasterTypeCodeModule" class="form-control" [(ngModel)]="refMasterTypeCodeModule"
-                      #refMasterTypeCode="ngModel" [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && refMasterTypeCode.invalid }" [required]=true>
-                          <option *ngFor="let item of refMasterTypeObj?.returnObject" [value]="item.refMasterTypeCode">{{item.descr}}
-                          </option>
-                        </select>
-                    <div *ngIf="MasterAddEditForm.submitted && refMasterTypeCode.invalid" class="invalid-feedback">
-                      <div *ngIf="refMasterTypeCode.errors.required">Master Type is required</div>
-                    </div>
-                  </div>
-                </div>
-
-
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="masterCodeModel">Master Code</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control" name="masterCodeModel" required [(ngModel)]="masterCodeModel"
-                    #masterCode="ngModel" [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && masterCode.invalid }"
-                    [attr.disabled]="type === 'edit' ? true : null">
-                  <div *ngIf="MasterAddEditForm.submitted && masterCode.invalid" class="invalid-feedback">
-                    <div *ngIf="masterCode.errors.required">Master Code is required</div>
-                  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" name="MasterAddEditForm" #MasterAddEditForm="ngForm" novalidate
+          (ngSubmit)="MasterAddEditForm.form.valid && Save(MasterAddEditForm)">
+          <div class="form-body">
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Master Information </h4>
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="refMasterTypeCodeModule">Master Type</label>
+              <div class="col-md-9">
+                <select id="refMasterTypeCodeModule" name="refMasterTypeCodeModule" class="form-control"
+                  [(ngModel)]="refMasterTypeCodeModule" #refMasterTypeCode="ngModel"
+                  [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && refMasterTypeCode.invalid }"
+                  [required]=true>
+                  <option *ngFor="let item of refMasterTypeObj?.returnObject" [value]="item.refMasterTypeCode">
+                    {{item.descr}}
+                  </option>
+                </select>
+                <div *ngIf="MasterAddEditForm.submitted && refMasterTypeCode.invalid" class="invalid-feedback">
+                  <div *ngIf="refMasterTypeCode.errors.required">Master Type is required</div>
                 </div>
               </div>
-
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="descrModel">Description</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control" name="descrModel" required [(ngModel)]="descrModel"
-                    #descr="ngModel" [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && descr.invalid }">
-                  <div *ngIf="MasterAddEditForm.submitted && descr.invalid" class="invalid-feedback">
-                    <div *ngIf="descr.errors.required">Description is required</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="sandiBI">Sandi BI</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control" name="sandiBI" required [(ngModel)]="sandiBI"
-                    #descr="ngModel">
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-md-3 label-control" for="isActive">Active Status</label>
-                <div class="custom-control custom-checkbox m-0">
-                  <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
-                    [checked]="isActive">
-                </div>
-              </div>
-
             </div>
-            <div class="form-actions">
 
-              <button *ngIf=" type === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-                <i class="ft-x"></i> Back
-              </button>
-              <button type="submit" class="btn btn-raised btn-primary">
-                <i class="fa fa-check-square-o"></i> Save
-              </button>
+
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="masterCodeModel">Master Code</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="masterCodeModel" required [(ngModel)]="masterCodeModel"
+                  #masterCode="ngModel" [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && masterCode.invalid }"
+                  [attr.disabled]="type === 'edit' ? true : null">
+                <div *ngIf="MasterAddEditForm.submitted && masterCode.invalid" class="invalid-feedback">
+                  <div *ngIf="masterCode.errors.required">Master Code is required</div>
+                </div>
+              </div>
             </div>
-          </form>
-        </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="descrModel">Description</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="descrModel" required [(ngModel)]="descrModel"
+                  #descr="ngModel" [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && descr.invalid }">
+                <div *ngIf="MasterAddEditForm.submitted && descr.invalid" class="invalid-feedback">
+                  <div *ngIf="descr.errors.required">Description is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="sandiBI">Sandi BI</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="sandiBI" required [(ngModel)]="sandiBI" #descr="ngModel">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 label-control" for="isActive">Active Status</label>
+              <div class="custom-control custom-checkbox m-0">
+                <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
+                  [checked]="isActive">
+              </div>
+            </div>
+
+          </div>
+          <div class="form-actions">
+
+            <button *ngIf=" type === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+              <i class="fa fa-arrow-circle-left"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>

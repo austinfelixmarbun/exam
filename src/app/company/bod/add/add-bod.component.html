@@ -1,15 +1,12 @@
 <div class="col-md-12">
     <div class="card">
-        <div class="card-header">
-            <h4 class="card-title" id="horz-layout-colored-controls">Board Of Director Information</h4>
-        </div>
         <div class="card-body">
             <div class="px-3">
                 <form class="form form-horizontal" name="RefCoyBodForm" #RefCoyBodForm="ngForm" (ngSubmit)="RefCoyBodForm.form.valid && Save(RefCoyBodForm, ucAddress, ucContactInfo)" novalidate>
                     <div class="form-body">
-                        <h4 class="form-section card-title"><i class="ft-file-text"></i> Board Of Director</h4>
+                        <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Board Of Director Information</h4>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Name : </label>
+                            <label class="col-md-3 label-control">Name </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="name" required [(ngModel)]="name"
                                     #Name="ngModel" [ngClass]="{ 'is-invalid': (Name.touched || Name.dirty || RefCoyBodForm.submitted) && Name.invalid }">
@@ -19,7 +16,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Job Title: </label>
+                            <label class="col-md-3 label-control">Job Title </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="jobTitle" required [(ngModel)]="jobTitle"
                                     #JobTitle="ngModel" [ngClass]="{ 'is-invalid': (JobTitle.touched || JobTitle.dirty || RefCoyBodForm.submitted) && JobTitle.invalid }">
@@ -29,7 +26,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">NPWP: </label>
+                            <label class="col-md-3 label-control">NPWP </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="npwp" required [(ngModel)]="npwp"
                                     #Npwp="ngModel" [ngClass]="{ 'is-invalid': (Npwp.touched || Npwp.dirty || RefCoyBodForm.submitted) && Npwp.invalid }">
@@ -39,7 +36,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Id Type: </label>
+                            <label class="col-md-3 label-control">Id Type </label>
                             <div class="col-md-9">
                                 <select class="form-control" name="mrIdType" style="width: auto" [(ngModel)]="idType">
                                     <option *ngFor="let it of itemIdType" value="{{it.masterCode}}">
@@ -48,7 +45,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 label-control">Id No: </label>
+                            <label class="col-md-3 label-control">Id No </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="idNo" required [(ngModel)]="idNo"
                                     #IdNo="ngModel" [ngClass]="{ 'is-invalid': (IdNo.touched || IdNo.dirty || RefCoyBodForm.submitted) && IdNo.invalid }">
@@ -62,7 +59,7 @@
                     <app-ucContactInfo #ucContactInfo [parentForm]='RefCoyBodForm' [useName]=false [useTitle]=false></app-ucContactInfo>
                     <div class="form-actions right">
                         <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/company/bod']">
-                            <i class="ft-x"></i> Cancel
+                            <i class="fa fa-arrow-circle-left"></i> Back
                         </button>
                         <button type="submit" class="btn btn-raised btn-primary">
                             <i class="fa fa-check-square-o"></i> Save

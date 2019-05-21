@@ -1,15 +1,16 @@
 <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging'
     (result)="getResult($event)"></app-search>
 
+<div [hidden]="resultData?.data == null|| resultData?.data.length == 0">
 <table class="table table-responsive-md text-center table-hover">
     <thead>
         <tr class="table-header">
-            <th class="text-left pointer"><span translate class="thead-header" (click)="searchSort($event)" name='officeName'>Office Name</span></th>
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='officeName'>Office Name</span></th>
             <th><span translate class="thead-header"  (click)="searchSort($event)" name='officeCode'>Office Code</span></th>
-            <th class="text-left pointer"><span translate class="thead-header"  (click)="searchSort($event)" name='cntctPersonName' translate>Contact Person</span></th>
-            <th class="text-left pointer"><span translate class="thead-header"  (click)="searchSort($event)" name='officeAddr' translate>Address</span></th>
-            <th class="text-left pointer"><span translate class="thead-header"  (click)="searchSort($event)" name='city' translate>City</span></th>
-            <th class="text-left pointer"><span translate class="thead-header"  (click)="searchSort($event)" name='orgMdlName'>Model Name</span></th>
+            <th><span translate class="thead-header"  (click)="searchSort($event)" name='cntctPersonName' translate>Contact Person</span></th>
+            <th><span translate class="thead-header"  (click)="searchSort($event)" name='officeAddr' translate>Address</span></th>
+            <th><span translate class="thead-header"  (click)="searchSort($event)" name='city' translate>City</span></th>
+            <th><span translate class="thead-header"  (click)="searchSort($event)" name='orgMdlName'>Model Name</span></th>
             <th><span translate class="thead-header"  (click)="searchSort($event)" name='isActive'>Active Status</span></th>
             <th><span translate class="thead-header"  (click)="searchSort($event)" name='mrKonvenSyariah'>Konvensional / Syariah</span></th>
             <th><span translate class="thead-header"  (click)="searchSort($event)" name='isVirtualOffice' translate>Virtual Office</span></th>
@@ -53,3 +54,4 @@
 <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
 <!-- <i class="fa fa-plus-circle" [routerLink]="['/office/add']"
     style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i> -->
+</div>

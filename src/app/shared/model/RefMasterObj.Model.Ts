@@ -2,7 +2,7 @@ export class RefMasterObj {
     refMasterId : any;
     masterCode : any;
     descr : any;
-    biCode : any;
+    regRptCode : any;
     isActive : any;
     refMasterTypeCode : any;
     isSystem : any;

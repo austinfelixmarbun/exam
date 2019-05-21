@@ -1,11 +1,11 @@
-<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></app-search>
-<div>
+<lib-UCSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging' [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></lib-UCSearch>
+<div [hidden]="resultData?.data == null|| resultData?.data.length == 0">
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
         <th><span translate class="thead-header"  (click)="searchSort($event)" name='bankCode'>Bank Code</span></th>
-        <th class="text-left pointer"><span translate class="thead-header"  (click)="searchSort($event)" name='bankName'>Bank Name</span></th>
-        <th><span translate class="thead-header"  (click)="searchSort($event)"name='biCode'>BI Code</span></th>
+        <th><span translate class="thead-header"  (click)="searchSort($event)" name='bankName'>Bank Name</span></th>
+        <th><span translate class="thead-header"  (click)="searchSort($event)"name='regRptCode'>BI Code</span></th>
         <th><span translate class="thead-header"  (click)="searchSort($event)" name='isActive'>Active</span></th>
         <th translate>Action</th>
       </tr>
@@ -14,7 +14,7 @@
       <tr *ngFor="let item of resultData?.data">
         <td>{{item.bankCode}}</td>
         <td class="text-left">{{item.bankName}}</td>
-        <td>{{item.biCode}}</td>
+        <td>{{item.regRptCode}}</td>
         <td *ngIf="item.isActive === '1'">Yes</td>
         <td *ngIf="item.isActive === '0'">No</td>
         <td>
@@ -31,5 +31,5 @@
   </table>
   <!-- <i class="fa fa-plus-circle" [routerLink]="['/bank/add']"
     style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i> -->
+<lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
 </div>
-<app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>

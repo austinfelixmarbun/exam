@@ -1,4 +1,5 @@
 {
+  "title": "Master",
   "exportExcel": true,
   "component": [
     {
@@ -35,8 +36,8 @@
     },
     {
       "type": "textbox",
-      "name": "bi_Code",
-      "id": "biCodeId",
+      "name": "reg_Rpt_Code",
+      "id": "regRptCode",
       "value": "",
       "label": "BI Code",
       "placeholder": "Placeholder",

@@ -6,6 +6,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { formatDate } from '@angular/common';
 
 @Component({
     selector: 'app-navbar',
@@ -29,6 +30,9 @@ export class NavbarComponent implements AfterViewChecked {
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
         var userAccess = JSON.parse(localStorage.getItem("UserAccess")); 
         var businessDate = localStorage.getItem("BusinessDate");
+        var date = new Date(businessDate.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+        businessDate = formatDate(date, 'dd-MMM-yyyy', 'en-US');
+        console.log(businessDate);
         this.displayName = userAccess.userId + ", " + userAccess.roleName + " - " + userAccess.officeName + " - " + businessDate;
     }
 

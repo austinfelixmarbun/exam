@@ -2,38 +2,42 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CurrObj } from 'app/shared/model/currObj.Model';
 import { environment } from 'environments/environment';
+import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
+import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
-  selector: 'app-currency',
-  templateUrl: './currency.component.html',
-  styleUrls: ['./currency.component.scss']
+  selector: 'app-working-hour-paging',
+  templateUrl: './working-hour-paging.component.html',
+  styleUrls: ['./working-hour-paging.component.scss'],
+  providers: [NGXToastrService]
 })
-export class CurrencyComponent implements OnInit {
+export class WorkingHourPagingComponent implements OnInit {
 
   @ViewChild(UCGridFooterComponent) ucgridFooter;
   @ViewChild(SearchComponent) searchComponent;
-  urlJson: string = "./assets/search/searchCurrency.json";
+  urlJson: string = "./assets/search/searchWorkingHour.json";
   resultData: string;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
   apiUrl: any;
   deleteUrl: any;
-  currObj: CurrObj;
+  workingHourSchmHObj: WorkingHourSchmHObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  urlQryPaging : string = AdInsConstant.GetRefCurrPaging;
-  urlEnviPaging : string = environment.settingUrl;
-  settingUrl: string = environment.settingUrl;
+  urlQryPaging : string = AdInsConstant.GetWorkHourSchmHPaging;
+  urlEnviPaging : string = environment.foundationUrl;
+  foundationUrl: string = environment.foundationUrl;
   
-  constructor() { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.settingUrl + AdInsConstant.GetRefCurrPaging;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetWorkHourSchmHPaging;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteWorkingHourSchmH;
   }
 
   searchSort(event: any) {
@@ -66,8 +70,9 @@ export class CurrencyComponent implements OnInit {
 
   //** Start UC Search **/
   getResult(event){
-    this.resultData = event.returnObject;
-    this.totalData = event.returnObject.count;
+    this.resultData = event.response.returnObject;
+    this.totalData = event.response.returnObject.count;
+    this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
   }
@@ -79,4 +84,19 @@ export class CurrencyComponent implements OnInit {
     this.searchPagination(this.pageNow);
   }
 
+  delete(workingHourSchmHId: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      this.workingHourSchmHObj = new WorkingHourSchmHObj();
+      this.workingHourSchmHObj.workingHourSchmHId = workingHourSchmHId;
+      this.http.post(this.deleteUrl, this.workingHourSchmHObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          this.searchPagination(1);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        });
+    }
+  }
 }
