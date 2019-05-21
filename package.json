@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@adins/lookupparentform": "^1.0.3",
     "@adins/ucgridfooter": "^1.0.0",
     "@adins/ucsearch": "^1.0.0",
     "@agm/core": "1.0.0-beta.5",

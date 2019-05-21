@@ -84,19 +84,7 @@ export class LookupRefBankComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   searchPagination(searchComp,event: number) {
@@ -108,19 +96,7 @@ export class LookupRefBankComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   onSelect(searchComponent, event) {

@@ -34,6 +34,8 @@ export class AddMenuSettingComponent implements OnInit {
     mode: string = "add";
     apiUrl: any;
     foundationUrl: string = environment.foundationUrl;
+    urlQryPaging: string = AdInsConstant.GetRefFormPaging;
+    urlEnviPaging : string = environment.foundationUrl;
     editUrl: any;
     result: any;
     hierarchyNo: any;

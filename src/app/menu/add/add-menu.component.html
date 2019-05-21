@@ -10,8 +10,8 @@
               <div class="form-group row">
                 <label class="col-md-3 label-control" for="projectinput5" translate>Parent Form </label>
                 <div class="col-md-9">
-                  <app-lookup-parent-form #lookupParent (select)="onSelect($event)" [idSelect]="parentId"
-                    [nameSelect]="parentTitle"></app-lookup-parent-form>
+                  <lib-lookupparentform #lookupParent (select)="onSelect($event)" [idSelect]="parentId"
+                    [nameSelect]="parentTitle" [urlQryPaging]="urlQryPaging" [urlEnviPaging]="urlEnviPaging" ></lib-lookupparentform>
                 </div>
               </div>
               <div class="form-group row">

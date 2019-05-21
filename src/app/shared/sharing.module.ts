@@ -18,9 +18,10 @@ import { LookupRefBankComponent } from 'app/shared/lookup/lookup-ref-bank/lookup
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
-import { LookupParentFormComponent } from 'app/shared/lookup/lookup-parent-form/lookup-parent-form.component';
+import { LookupparentformModule } from '@adins/lookupparentform';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
+
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
         LookupRefBankComponent,
         LookupRoleComponent,
         LookupDistrictComponent,
-        LookupParentFormComponent,
+        LookupparentformModule,
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
@@ -61,7 +62,6 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
         LookupRefBankComponent,
         LookupRoleComponent,
         LookupDistrictComponent,
-        LookupParentFormComponent,
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
