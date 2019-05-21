@@ -230,6 +230,11 @@ export class AdInsConstant {
     public static EditExchangeRate = "/RefCurr/EditExchangeRate";
     public static GetExchangeRate = "/RefCurr/GetExchangeRate";
 
+    //GENERIC
+    public static GetObjectBySQL = "/Generic/GetObjectBySQL";
+    public static AddObjectBySQL = "/Generic/AddObjectBySQL";
+    public static UpdateObjectBySQL = "/Generic/UpdateObjectBySQL";
+    public static DeleteObjectBySQL = "/Generic/DeleteObjectBySQL";
     //WORKHOUR
     public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
     public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";

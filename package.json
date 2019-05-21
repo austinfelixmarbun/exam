@@ -79,6 +79,8 @@
     "rxjs": "6.3.3",
     "screenfull": "3.3.3",
     "sweetalert2": "7.28.8",
+    "ucgridfooter": "file:../AdInsSearch/dist/ucgridfooter",
+    "ucsearch": "file:../AdInsSearch/dist/ucsearch",
     "videogular2": "6.3.0",
     "web-animations-js": "2.2.5",
     "xlsx": "^0.14.1",
