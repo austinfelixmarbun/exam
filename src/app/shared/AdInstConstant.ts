@@ -222,4 +222,10 @@ export class AdInsConstant {
     public static AddExchangeRate = "/RefCurr/AddExchangeRate";
     public static EditExchangeRate = "/RefCurr/EditExchangeRate";
     public static GetExchangeRate = "/RefCurr/GetExchangeRate";
+
+    //GENERIC
+    public static GetObjectBySQL = "/Generic/GetObjectBySQL";
+    public static AddObjectBySQL = "/Generic/AddObjectBySQL";
+    public static UpdateObjectBySQL = "/Generic/UpdateObjectBySQL";
+    public static DeleteObjectBySQL = "/Generic/DeleteObjectBySQL";
 }

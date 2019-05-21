@@ -9,6 +9,7 @@ import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { NgForm } from '@angular/forms';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
     selector: 'add-bank',
@@ -30,11 +31,22 @@ export class BankAddComponent implements OnInit {
     settingUrl: string = environment.settingUrl;
     bankObj: RefBankObj;
     editUrl: any;
+    key: any;
+    criteria: CriteriaObj[] = [];
+    afterSaveUrl = "/bank";
 
-    constructor(private toastr: NGXToastrService, private router: Router,private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
+    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refBankId"];
             this.mode = params["mode"];
+            this.key = params["key"];
+            if (this.mode == "edit") {
+                var tempCrit = new CriteriaObj();
+                tempCrit.propName = this.key;
+                tempCrit.restriction = "Eq";
+                tempCrit.value = this.param;
+                this.criteria.push(tempCrit);
+            }
         })
     }
 
@@ -80,12 +92,11 @@ export class BankAddComponent implements OnInit {
                     this.router.navigateByUrl('/bank');
                     this.toastr.successMessage(response['message']);
                 },
-                (error)=> {
+                (error) => {
                     console.log(error);
                 });
         }
-        else
-        {
+        else {
             this.editUrl = this.settingUrl + AdInsConstant.AddRefBank;
             this.bankObj = new RefBankObj();
             this.bankObj = BankAddReqForm.value;
@@ -101,16 +112,15 @@ export class BankAddComponent implements OnInit {
                     console.log(response);
                     this.toastr.successMessage(response['message']);
                     this.router.navigateByUrl('/bank', { skipLocationChange: true }).then(() =>
-                    this.router.navigate(['/bank/add']));
+                        this.router.navigate(['/bank/add']));
                 },
-                (error)=>
-                {
+                (error) => {
                     console.log(error);
                 });
         }
     }
 
-    toggleVisibility(e){
-        this.isActive= e.target.checked;
-      }
+    toggleVisibility(e) {
+        this.isActive = e.target.checked;
+    }
 }

@@ -19,7 +19,7 @@
         <td *ngIf="item.isActive === '0'">No</td>
         <td>
           <a class="success p-0" data-original-title="" title="" [routerLink]="['/bank/add']"
-            [queryParams]="{refBankId:item.refBankId,mode:'edit'}">
+            [queryParams]="{key:'REF_BANK_ID',refBankId:item.refBankId,mode:'edit'}">
             <i class="ft-edit-2 font-medium-3 mr-2"></i>
           </a>
           <a class="danger p-0" data-original-title="" title="" (click)="delete(item.refBankId)">
