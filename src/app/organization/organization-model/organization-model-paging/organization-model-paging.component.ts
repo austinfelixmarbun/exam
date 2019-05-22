@@ -4,26 +4,26 @@ import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from "@angular/common";
+import { Location, DecimalPipe } from "@angular/common";
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 
 @Component({
   selector: 'app-organization-model-paging',
   templateUrl: './organization-model-paging.component.html',
-  providers: [NGXToastrService, NGXToastrService, ExcelService]
+  providers: [NGXToastrService, NGXToastrService, ExcelService, DecimalPipe]
 })
 export class OrganizationModelPagingComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = './assets/search/searchOrgModel.json';
   resultData: string;
   pageNow: any;

@@ -2,27 +2,28 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
 import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
 import { HttpClient } from '@angular/common/http';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-ref-job-title',
   templateUrl: './ref-job-title.component.html',
   styleUrls: ['./ref-job-title.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService] // add NgbPaginationConfig to the component providers
+  providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe] // add NgbPaginationConfig to the component providers
 
 })
 export class RefJobTitleComponent implements OnInit {
 
   //** Start Query Paging */
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlQryPaging : string = AdInsConstant.GetRefJobTitle;
   urlEnviPaging : string = environment.foundationUrl;
   //** End Query Paging */

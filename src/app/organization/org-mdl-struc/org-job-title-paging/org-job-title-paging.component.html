@@ -14,8 +14,8 @@
   </div>
 </div>
 
-<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-  [enviromentUrl]='urlEnviPaging' (result)="getResult($event)" [addCritInput]='addCrit'></app-search>
+<lib-UCSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+  [enviromentUrl]='urlEnviPaging' (result)="getResult($event)" [addCritInput]='addCrit'></lib-UCSearch>
 
 <div [hidden]="resultData?.data == null">
   <table class="table table-responsive-md text-center table-hover">
@@ -49,7 +49,7 @@
       </tr>
     </tbody>
   </table>
-  <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+  <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
 </div>
 <div class="form-actions">
   <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">

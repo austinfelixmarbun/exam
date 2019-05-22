@@ -54,8 +54,8 @@
     </div>
   </div>
   <div *ngIf="editDetail  === 'true'" class="holidayDetail">
-    <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-      [enviromentUrl]='urlEnviPaging' [arrCritObj]='arrCrit' (result)="getResult($event)"></app-search>
+    <lib-UCSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+      [enviromentUrl]='urlEnviPaging' [arrCritObj]='arrCrit' (result)="getResult($event)"></lib-UCSearch>
   </div>
 </div>
 
@@ -85,7 +85,7 @@
         </tr>
       </tbody>
     </table>
-    <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+    <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
   </div>
   <i class="fa fa-plus-circle" [routerLink]="['/commonSetting/holiday/detail']"
     [queryParams]="{holidaySchmHId:holidaySchmHId}"

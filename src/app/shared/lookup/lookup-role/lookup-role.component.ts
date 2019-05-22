@@ -15,32 +15,31 @@ import {
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { AdInsServiceService } from "app/ad-ins-service.service";
-import { formatDate } from "@angular/common";
-import { SearchComponent } from "app/shared/search/search.component";
+import { formatDate, DecimalPipe } from "@angular/common";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 
 @Component({
   selector: "app-lookup-role",
   templateUrl: "./lookup-role.component.html",
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class LookupRoleComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
 
-  urlJson: string = "./assets/lookup/lookupRole.json";
+  @Input() urlJson: string = "./assets/lookup/lookupRole.json";
   urlQryPaging: string = AdInsConstant.GetRefRolePaging;
   urlEnviPaging : string = environment.foundationUrl;
-  @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
   @Input() addCritInput: CriteriaObj[] = null;
   @Input() isRequired: any;
-  @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild("content") contentTemplate;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
 
   configuration: any;
   urlGet: string;

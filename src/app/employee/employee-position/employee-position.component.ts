@@ -4,25 +4,24 @@ import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NgForm } from '@angular/forms';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { formatDate } from '@angular/common';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
-
+import { formatDate, DecimalPipe } from '@angular/common';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 @Component({
   selector: 'app-employee-position',
   templateUrl: './employee-position.component.html',
   styleUrls: ['./employee-position.component.scss'],
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class EmployeePositionComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UcgridfooterComponent) searchComponent;
+  @ViewChild(UCSearchComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchEmpList.json";
   urlQryPaging : string = AdInsConstant.GetEmpPositionPaging;
   urlEnviPaging : string = environment.foundationUrl;

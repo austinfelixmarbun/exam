@@ -1,5 +1,5 @@
-<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-  [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></app-search>
+<lib-UCSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+  [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></lib-UCSearch>
 
 <div [hidden]="resultData?.data == null">
   <table class="table table-responsive-md text-center table-hover">
@@ -34,5 +34,5 @@
       </tr>
     </tbody>
   </table>
-  <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+  <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
 </div>

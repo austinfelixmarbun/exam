@@ -5,32 +5,31 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { formatDate } from '@angular/common';
-import { SearchComponent } from 'app/shared/search/search.component';
+import { formatDate, DecimalPipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { environment } from 'environments/environment';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 
 @Component({
   selector: "app-lookup-org-job-title",
   templateUrl: "./lookup-org-job-title.component.html",
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class LookupOrgJobTitleComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
-  urlJson: string = "./assets/lookup/lookupOrgJobTitle.json";
+  @Input() urlJson: string = "./assets/lookup/lookupOrgJobTitle.json";
   urlQryPaging: string = AdInsConstant.GetOrgJobTitlePaging;
   urlEnviPaging : string = environment.foundationUrl;
-  @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
   @Input() addCritInput: CriteriaObj[] = null;
-  @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild("content") contentTemplate;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
 
   jobTitleName: any;
   orgJobTitleId: any;

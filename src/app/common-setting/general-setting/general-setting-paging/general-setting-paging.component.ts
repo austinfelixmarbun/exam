@@ -2,16 +2,18 @@ import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { environment } from "environments/environment";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { SearchComponent } from "app/shared/search/search.component";
-import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from "@angular/common";
 
 @Component({
   selector: "app-general-setting-paging",
-  templateUrl: "./general-setting-paging.component.html"
+  templateUrl: "./general-setting-paging.component.html",
+  providers: [DecimalPipe]
 })
 export class GeneralSettingPagingComponent implements OnInit {
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchGeneralSetting.json";
   resultData: string;
   pageNow: any;

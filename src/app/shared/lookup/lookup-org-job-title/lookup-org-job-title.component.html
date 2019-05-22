@@ -16,8 +16,8 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-      [enviromentUrl]='urlEnviPaging' (result)="getResult(ucgridFooter, $event)" [addCritInput]='addCrit'></app-search>
+    <lib-UCSearch #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+      [enviromentUrl]='urlEnviPaging' (result)="getResult(ucgridFooter, $event)" [addCritInput]='addCrit'></lib-UCSearch>
     <div [hidden]="resultData?.data == null">
       <table class="table table-responsive-md text-center table-hover">
         <thead>
@@ -40,7 +40,7 @@
           </tr>
         </tbody>
       </table>
-      <app-ucgrid-footer #ucgridFooter (select)="onSelect(lookupSearch,$event)"></app-ucgrid-footer>
+      <lib-ucgridfooter #ucgridFooter (select)="onSelect(lookupSearch,$event)"></lib-ucgridfooter>
     </div>
   </div>
 </ng-template>

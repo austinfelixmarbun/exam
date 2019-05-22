@@ -2,25 +2,26 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { ActivatedRoute } from '@angular/router';
 import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'menu-setting',
   templateUrl: './menu-setting.component.html',
-  providers: [NgbPaginationConfig, NGXToastrService]
+  providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe]
 })
 export class MenuSettingComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
     urlJson: string = "./assets/search/searchRefForm.json";
     resultData: string;
     pageNow: any;

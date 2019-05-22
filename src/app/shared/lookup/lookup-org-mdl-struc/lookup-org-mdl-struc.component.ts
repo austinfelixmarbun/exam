@@ -1,5 +1,4 @@
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
-import { SearchComponent } from "app/shared/search/search.component";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { Component, OnInit, Input, ViewChild, ViewChildren } from '@angular/core';
@@ -7,30 +6,30 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { formatDate } from '@angular/common';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { formatDate, DecimalPipe } from '@angular/common';
 import { environment } from 'environments/environment';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 
 
 @Component({
   selector: "app-lookup-org-mdl-struc",
   templateUrl: "./lookup-org-mdl-struc.component.html",
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class LookupOrgMdlStrucComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
-  urlJson: string = "./assets/lookup/lookupOrgMdlStruc.json";
+  @Input() urlJson: string = "./assets/lookup/lookupOrgMdlStruc.json";
   urlQryPaging: string = AdInsConstant.GetOrgMdlStrucPaging;
   urlEnviPaging : string = environment.foundationUrl;
-  @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
   @Input() addCritInput: CriteriaObj[] = null;
-  @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild("content") contentTemplate;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
 
   bizUnitName: any;
   refBizUnitId: any;

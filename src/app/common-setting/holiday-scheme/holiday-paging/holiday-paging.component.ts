@@ -1,22 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
-import { SearchComponent } from 'app/shared/search/search.component';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-holiday-paging',
   templateUrl: './holiday-paging.component.html',
   styleUrls: ['./holiday-paging.component.scss'],
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class HolidayPagingComponent implements OnInit {
 
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
-  @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
   urlJson: string = "./assets/search/searchHoliday.json";
   resultData: string;
   pageNow: any;

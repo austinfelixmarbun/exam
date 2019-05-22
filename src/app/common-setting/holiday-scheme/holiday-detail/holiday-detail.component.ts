@@ -6,21 +6,22 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm } from '@angular/forms';
-import { SearchComponent } from 'app/shared/search/search.component';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-holiday-detail',
   templateUrl: './holiday-detail.component.html',
   styleUrls: ['./holiday-detail.component.scss'],
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class HolidayDetailComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchHolidayDetail.json";
   urlQryPaging : string = AdInsConstant.GetHolidayDetailPaging;
   urlEnviPaging : string = environment.foundationUrl;
