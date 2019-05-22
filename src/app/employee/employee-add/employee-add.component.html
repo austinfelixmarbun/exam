@@ -7,66 +7,66 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="empNo">Employee No </label>
+              <label class="col-md-3 label-control adInsLabel" for="empNo">Employee No </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="empNo" required [(ngModel)]="empNo" #EmpNo="ngModel"
+                <input type="text" class="form-control adInsInput" name="empNo" required [(ngModel)]="empNo" #EmpNo="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpNo.invalid }">
                 <div *ngIf="RefEmpForm.submitted && EmpNo.invalid" class="invalid-feedback">
-                  <div *ngIf="EmpNo.errors.required">Employee No is required</div>
+                  <div *ngIf="EmpNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="empName">Employee Name </label>
+              <label class="col-md-3 label-control adInsLabel" for="empName">Employee Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="empName" required [(ngModel)]="empName" #EmpName="ngModel"
+                <input type="text" class="form-control adInsInput" name="empName" required [(ngModel)]="empName" #EmpName="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpName.invalid }">
                 <div *ngIf="RefEmpForm.submitted && EmpName.invalid" class="invalid-feedback">
-                  <div *ngIf="EmpName.errors.required">Employee Name is required</div>
+                  <div *ngIf="EmpName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="joinDt">Join Date </label>
+              <label class="col-md-3 label-control adInsLabel" for="joinDt">Join Date </label>
               <div class="col-md-9">
-                <input type="date" id="joinDt" class="form-control" name="joinDt" required [(ngModel)]="joinDt"
+                <input type="date" id="joinDt" class="form-control adInsInput" name="joinDt" required [(ngModel)]="joinDt"
                   #JoinDt="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && JoinDt.invalid }">
                 <div *ngIf="RefEmpForm.submitted && JoinDt.invalid" class="invalid-feedback">
-                  <div *ngIf="JoinDt.errors.required">Join Date is required</div>
+                  <div *ngIf="JoinDt.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="isExt">External Employee </label>
+              <label class="col-md-3 label-control adInsLabel" for="isExt">External Employee </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isExt" data-md-icheck
                   (change)="toggleExt($event)" name="isExt">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="isActive">Active Status </label>
+              <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                   (change)="toggleActive($event)" name="isActive">
               </div>
             </div>
             <!-- <div class="form-group row">
-              <label class="col-md-3 label-control" for="ktpNo">KTP No </label>
+              <label class="col-md-3 label-control adInsLabel" for="ktpNo">KTP No </label>
               <div class="col-md-9">
-                <input type="text" id="ktpNo" class="form-control" name="IdNo" required [(ngModel)]="ktpNo"
+                <input type="text" id="ktpNo" class="form-control adInsInput" name="IdNo" required [(ngModel)]="ktpNo"
                   #KtpNo="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && KtpNo.invalid }">
                 <div *ngIf="RefEmpForm.submitted && KtpNo.invalid" class="invalid-feedback">
-                  <div *ngIf="KtpNo.errors.required">KTP No is required</div>
+                  <div *ngIf="KtpNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="npwp">NPWP </label>
+              <label class="col-md-3 label-control adInsLabel" for="npwp">NPWP </label>
               <div class="col-md-9">
-                <input type="text" id="npwp" class="form-control" name="npwp" required [(ngModel)]="npwp"
+                <input type="text" id="npwp" class="form-control adInsInput" name="npwp" required [(ngModel)]="npwp"
                   #Npwp="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && Npwp.invalid }">
                 <div *ngIf="RefEmpForm.submitted && Npwp.invalid" class="invalid-feedback">
-                  <div *ngIf="Npwp.errors.required">NPWP No is required</div>
+                  <div *ngIf="Npwp.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div> -->
@@ -76,48 +76,48 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Bank Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="bankName" translate>Bank Name </label>
+              <label class="col-md-3 label-control adInsLabel" for="bankName" translate>Bank Name </label>
               <div class="col-md-9">
                 <app-lookup-ref-bank #uclRefBank [nameSelect]="bankName" [codeSelect]="codeSelect"
                   [jsonSelect]="jsonSelect"></app-lookup-ref-bank>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="bankBranch">Bank Branch </label>
+              <label class="col-md-3 label-control adInsLabel" for="bankBranch">Bank Branch </label>
               <div class="col-md-9">
-                <input type="text" id="bankBranch" class="form-control" name="bankBranch" required
+                <input type="text" id="bankBranch" class="form-control adInsInput" name="bankBranch" required
                   [(ngModel)]="bankBranch" #BankBranch="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankBranch.invalid }">
                 <div *ngIf="RefEmpForm.submitted && BankBranch.invalid" class="invalid-feedback">
-                  <div *ngIf="BankBranch.errors.required">Bank Branch is required</div>
+                  <div *ngIf="BankBranch.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="bankBranchRegRptCode">Bank Branch BI Code </label>
+              <label class="col-md-3 label-control adInsLabel" for="bankBranchRegRptCode">Bank Branch BI Code </label>
               <div class="col-md-9">
-                <input type="text" id="bankBranchRegRptCode" class="form-control" name="bankBranchRegRptCode"
+                <input type="text" id="bankBranchRegRptCode" class="form-control adInsInput" name="bankBranchRegRptCode"
                   [(ngModel)]="bankBranchRegRptCode" #BankBranchRegRptCode="ngModel">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="bankAccName">Account Name </label>
+              <label class="col-md-3 label-control adInsLabel" for="bankAccName">Account Name </label>
               <div class="col-md-9">
-                <input type="text" id="bankAccName" class="form-control" name="bankAccName" required
+                <input type="text" id="bankAccName" class="form-control adInsInput" name="bankAccName" required
                   [(ngModel)]="bankAccName" #BankAccName="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankAccName.invalid }">
                 <div *ngIf="RefEmpForm.submitted && BankAccName.invalid" class="invalid-feedback">
-                  <div *ngIf="BankAccName.errors.required">Account Name is required</div>
+                  <div *ngIf="BankAccName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="bankAccNo">Account No </label>
+              <label class="col-md-3 label-control adInsLabel" for="bankAccNo">Account No </label>
               <div class="col-md-9">
-                <input type="text" id="bankAccNo" class="form-control" name="bankAccNo" required [(ngModel)]="bankAccNo"
+                <input type="text" id="bankAccNo" class="form-control adInsInput" name="bankAccNo" required [(ngModel)]="bankAccNo"
                   #BankAccNo="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankAccNo.invalid }">
                 <div *ngIf="RefEmpForm.submitted && BankAccNo.invalid" class="invalid-feedback">
-                  <div *ngIf="BankAccNo.errors.required">Account No is required</div>
+                  <div *ngIf="BankAccNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>

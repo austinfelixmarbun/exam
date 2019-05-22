@@ -8,39 +8,39 @@
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Master Type Information </h4>
             <br>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="masterTypeCodeModel">Master Type Code</label>
+              <label class="col-md-3 label-control adInsLabel" for="masterTypeCodeModel">Master Type Code</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="masterTypeCodeModel" required
+                <input type="text" class="form-control adInsInput" name="masterTypeCodeModel" required
                   [(ngModel)]="masterTypeCodeModel" #masterTypeCode="ngModel"
                   [ngClass]="{ 'is-invalid': MasterTypeAddEditForm.submitted && masterType.invalid }"
                   [attr.disabled]="type === 'edit' ? true : null">
                 <div *ngIf="MasterTypeAddEditForm.submitted && masterTypeCode.invalid" class="invalid-feedback">
-                  <div *ngIf="masterTypeCode.errors.required">Master Type Code is required</div>
+                  <div *ngIf="masterTypeCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="descrModel">Description</label>
+              <label class="col-md-3 label-control adInsLabel" for="descrModel">Description</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="descrModel" required [(ngModel)]="descrModel"
+                <input type="text" class="form-control adInsInput" name="descrModel" required [(ngModel)]="descrModel"
                   #descr="ngModel" [ngClass]="{ 'is-invalid': MasterTypeAddEditForm.submitted && descr.invalid }">
                 <div *ngIf="MasterTypeAddEditForm.submitted && descr.invalid" class="invalid-feedback">
-                  <div *ngIf="descr.errors.required">Description is required</div>
+                  <div *ngIf="descr.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="sandiBiModel">Description</label>
+              <label class="col-md-3 label-control adInsLabel" for="sandiBiModel">Description</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="sandiBiModel" required [(ngModel)]="sandiBiModel"
+                <input type="text" class="form-control adInsInput" name="sandiBiModel" required [(ngModel)]="sandiBiModel"
                   #sandiBi="ngModel">
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="isActive">Active Status</label>
+              <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
               <div class="custom-control custom-checkbox m-0">
                 <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                   [checked]="isActive">

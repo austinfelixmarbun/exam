@@ -7,33 +7,33 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Working Hour Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control" translate>Scheme Code </label>
+              <label class="col-md-3 label-control adInsLabel" translate>Scheme Code </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="workingHourSchmCode" required
+                <input type="text" class="form-control adInsInput" name="workingHourSchmCode" required
                   [(ngModel)]="workingHourSchmCode" #WorkingHourSchmCode="ngModel"
                   [ngClass]="{ 'is-invalid': (WorkingHourReqForm.submitted || WorkingHourSchmCode.touched || WorkingHourSchmCode.dirty) && WorkingHourSchmCode.invalid }">
                 <div
                   *ngIf="(WorkingHourReqForm.submitted || WorkingHourSchmCode.touched || WorkingHourSchmCode.dirty) && WorkingHourSchmCode.invalid"
                   class="invalid-feedback">
-                  <div *ngIf="WorkingHourSchmCode.errors.required" translate>This field is required</div>
+                  <div *ngIf="WorkingHourSchmCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" translate>Scheme Name </label>
+              <label class="col-md-3 label-control adInsLabel" translate>Scheme Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="workingHourSchmName" required
+                <input type="text" class="form-control adInsInput" name="workingHourSchmName" required
                   [(ngModel)]="workingHourSchmName" #WorkingHourSchmName="ngModel"
                   [ngClass]="{ 'is-invalid': (WorkingHourReqForm.submitted || WorkingHourSchmName.touched || WorkingHourSchmName.dirty) && WorkingHourSchmName.invalid }">
                 <div
                   *ngIf="(WorkingHourReqForm.submitted || WorkingHourSchmName.touched || WorkingHourSchmName.dirty) && WorkingHourSchmName.invalid"
                   class="invalid-feedback">
-                  <div *ngIf="WorkingHourSchmName.errors.required" translate>This field is required</div>
+                  <div *ngIf="WorkingHourSchmName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" translate>Active </label>
+              <label class="col-md-3 label-control adInsLabel" translate>Active </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                   (change)="toggleActive($event)" name="isActive">
@@ -52,7 +52,7 @@
                   [ngClass]="{ 'is-invalid':(WorkingHourReqForm.submitted || input.touched || input.dirty) && input.invalid }">
                 <div *ngIf=" (WorkingHourReqForm.submitted || input.touched || input.dirty) && input.invalid"
                   class="invalid-feedback">
-                  <div *ngIf="input.errors.required" translate>This field is required</div>
+                  <div *ngIf="input.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   <div *ngIf="input.errors?.pattern" translate>Number Only</div>
                 </div>
               </div>

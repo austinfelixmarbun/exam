@@ -7,9 +7,9 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday Detail Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control">Public Holiday </label>
+              <label class="col-md-3 label-control adInsLabel">Public Holiday </label>
               <div class="col-md-9">
-                <select class="form-control" name="isPublicHoliday" [(ngModel)]="isPublicHoliday" #IsPublicHoliday>
+                <select class="form-control adInsInput" name="isPublicHoliday" [(ngModel)]="isPublicHoliday" #IsPublicHoliday>
                   <option value="1">Yes</option>
                   <option value="0">No</option>
                 </select>
@@ -17,47 +17,47 @@
             </div>
             <div *ngIf="isPublicHoliday == '1'">
               <div class="form-group row">
-                <label class="col-md-3 label-control" translate>Date </label>
+                <label class="col-md-3 label-control adInsLabel" translate>Date </label>
                 <div class="col-md-9">
-                  <input type="date" class="form-control" name="holidayDt" required [(ngModel)]="holidayDt"
+                  <input type="date" class="form-control adInsInput" name="holidayDt" required [(ngModel)]="holidayDt"
                     #HolidayDt="ngModel" [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || HolidayDt.touched || HolidayDt.dirty) && HolidayDt.invalid }">
                   <div *ngIf="(HolidayDetReqForm.submitted || HolidayDt.touched || HolidayDt.dirty) && HolidayDt.invalid"
                     class="invalid-feedback">
-                    <div *ngIf="HolidayDt.errors.required" translate>This field is required</div>
+                    <div *ngIf="HolidayDt.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" translate>Description </label>
+                <label class="col-md-3 label-control adInsLabel" translate>Description </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" name="descr" required [(ngModel)]="descr"
+                  <input type="text" class="form-control adInsInput" name="descr" required [(ngModel)]="descr"
                     #Descr="ngModel"
                     [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || Descr.touched || Descr.dirty) && Descr.invalid }">
                   <div
                     *ngIf="(HolidayDetReqForm.submitted || Descr.touched || Descr.dirty) && Descr.invalid"
                     class="invalid-feedback">
-                    <div *ngIf="Descr.errors.required" translate>This field is required</div>
+                    <div *ngIf="Descr.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
                 </div>
               </div>
             </div>
             <div *ngIf="isPublicHoliday == '0'">
                 <div class="form-group row" *ngFor="let item of listOfDay;let i = index;">
-                  <label class="col-md-3 label-control" translate>{{item.day}} </label>
+                  <label class="col-md-3 label-control adInsLabel" translate>{{item.day}} </label>
                   <div class="col-md-9">
                     <input class="border-primary" type="checkbox" [(ngModel)]="item.isActive" [ngModelOptions]="{standalone: true}" data-md-icheck>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" translate>Until Year </label>
+                  <label class="col-md-3 label-control adInsLabel" translate>Until Year </label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control" name="untilYear" required [(ngModel)]="untilYear"
+                    <input type="text" class="form-control adInsInput" name="untilYear" required [(ngModel)]="untilYear"
                       #UntilYear="ngModel"
                       [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || UntilYear.touched || UntilYear.dirty) && UntilYear.invalid }">
                     <div
                       *ngIf="(HolidayDetReqForm.submitted || UntilYear.touched || UntilYear.dirty) && UntilYear.invalid"
                       class="invalid-feedback">
-                      <div *ngIf="UntilYear.errors.required" translate>This field is required</div>
+                      <div *ngIf="UntilYear.errors.required" class="adInsReqMsg" translate>This field is required</div>
                     </div>
                   </div>
                 </div>

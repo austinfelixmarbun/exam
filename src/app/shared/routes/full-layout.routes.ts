@@ -108,10 +108,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: './leave-management/leave-management.module#LeaveManagementModule'
   },
   {
-    path : 'LOS',
-    loadChildren: './los/los.module#LosModule'
-  },
-  {
     path: 'customer',
     loadChildren: './customer/customer.module#CustomerModule'
   },

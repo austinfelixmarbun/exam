@@ -11,27 +11,27 @@
                   <br />
 
                   <div class="form-group row">
-                      <label class="col-md-3 label-control">Business Unit Name</label>
+                      <label class="col-md-3 label-control adInsLabel">Business Unit Name</label>
                       <div class="col-md-9">
                         <label>{{bizUnitName}}</label></div>
                     </div>
 
                   <div class="form-group row">
-                      <label class="col-md-3 label-control" for="lookupRefJobTitle">Job Title</label>
+                      <label class="col-md-3 label-control adInsLabel" for="lookupRefJobTitle">Job Title</label>
                       <div class="col-md-9">
                           <app-lookup-ref-job-title #lookupRefJobTitle [nameSelect] = "jobTitleName" [idSelect]="refJobTitleId" [jsonSelect]="jsonSelectRefJobTile" [addCritInput]='addCritJobTitle'> </app-lookup-ref-job-title>
                       </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 label-control" for="lookupBizUnit">Parent</label>
+                        <label class="col-md-3 label-control adInsLabel" for="lookupBizUnit">Parent</label>
                         <div class="col-md-9">
                             <app-lookup-org-job-title #lookupOrgJobTitle [nameSelect] = "parentJobTitleName" [idSelect]="parentOrgJobTitleId" [jsonSelect]="jsonSelectOrgJobTitle" [addCritInput]='addCritOrgJobTitle'> </app-lookup-org-job-title>
                         </div>
                       </div>
 
                     <div class="form-group row">
-                      <label class="col-md-3 label-control" for="isActive">Active Status</label>
+                      <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
                       <div class="custom-control custom-checkbox m-0">
                         <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                           [checked]="isActive">

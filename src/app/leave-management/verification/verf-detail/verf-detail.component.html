@@ -10,24 +10,24 @@
                 <h4 class="form-section"><i class="ft-file-text"></i>Request Info</h4>
 
                 <div class="form-group row">
-                  <label class="col-md-3 label-control">Transaction No</label>
+                  <label class="col-md-3 label-control adInsLabel">Transaction No</label>
                   <div class="col-md-9">
                     <label>{{leaveManagementObj.transactionNo}}</label></div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control">Employee Name</label>
+                  <label class="col-md-3 label-control adInsLabel">Employee Name</label>
                   <div class="col-md-9">
                     <label>{{leaveManagementObj.empName}}</label></div>
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-md-3 label-control">Job Position</label>
+                  <label class="col-md-3 label-control adInsLabel">Job Position</label>
                   <div class="col-md-9">
                     <label>{{leaveManagementObj.jobPosition}}</label></div>
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-md-3 label-control">Start Date</label>
+                  <label class="col-md-3 label-control adInsLabel">Start Date</label>
                   <div class="col-md-9">
                     <label>{{leaveManagementObj.startDt}}</label>
                   </div>
@@ -35,13 +35,13 @@
 
 
                 <div class="form-group row">
-                  <label class="col-md-3 label-control">End Date</label>
+                  <label class="col-md-3 label-control adInsLabel">End Date</label>
                   <div class="col-md-9">
                     <label>{{leaveManagementObj.endDt}}</label></div>
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-md-3 label-control">Reason</label>
+                  <label class="col-md-3 label-control adInsLabel">Reason</label>
                   <div class="col-md-9">
                     <label>{{leaveManagementObj.reason}}</label>
                   </div>
@@ -50,16 +50,16 @@
                 <h4 class="form-section"><i class="ft-file-text"></i>Verification Action</h4>
 
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="verifBy">Verify By</label>
+                  <label class="col-md-3 label-control adInsLabel" for="verifBy">Verify By</label>
                   <div class="col-md-9">
-                    <input type="text" id="verifBy" class="form-control" name="verifBy" [(ngModel)]="verifBy"
+                    <input type="text" id="verifBy" class="form-control adInsInput" name="verifBy" [(ngModel)]="verifBy"
                       #required="ngModel" required>
                     <small class="form-text text-muted danger" *ngIf="required.errors?.required">*</small>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="status">Verification</label>
+                  <label class="col-md-3 label-control adInsLabel" for="status">Verification</label>
                   <div class="col-md-9">
                     <select id="status" name="status" class="form-control" required [(ngModel)]="status">
                       <option id="1" value="">Select One</option>

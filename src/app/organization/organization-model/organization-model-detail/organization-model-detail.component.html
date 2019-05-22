@@ -11,36 +11,36 @@
                   <br />
 
                   <div class="form-group row">
-                    <label class="col-md-3 label-control">Organization Level</label>
+                    <label class="col-md-3 label-control adInsLabel">Organization Level</label>
                     <div class="col-md-9">
                       <label>{{orgObj.orgName}}</label></div>
                   </div>
 
                   <div class="form-group row">
-                      <label class="col-md-3 label-control" for="modelCode">Model Code</label>
+                      <label class="col-md-3 label-control adInsLabel" for="modelCode">Model Code</label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control" name="modelCode" required [(ngModel)]="modelCode"
+                        <input type="text" class="form-control adInsInput" name="modelCode" required [(ngModel)]="modelCode"
                           #ModelCode="ngModel" [ngClass]="{ 'is-invalid': OrgModelForm.submitted && ModelCode.invalid }"
                           [attr.disabled]="type === 'edit' ? true : null">
                         <div *ngIf="OrgModelForm.submitted && ModelCode.invalid" class="invalid-feedback">
-                          <div *ngIf="ModelCode.errors.required">This is required</div>
+                          <div *ngIf="ModelCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                         </div>
                       </div>
                     </div>
 
                     <div class="form-group row">
-                      <label class="col-md-3 label-control" for="modelName">Model Name</label>
+                      <label class="col-md-3 label-control adInsLabel" for="modelName">Model Name</label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control" name="modelName" required [(ngModel)]="modelName"
+                        <input type="text" class="form-control adInsInput" name="modelName" required [(ngModel)]="modelName"
                           #ModelName="ngModel" [ngClass]="{ 'is-invalid': OrgModelForm.submitted && ModelName.invalid }">
                         <div *ngIf="OrgModelForm.submitted && ModelName.invalid" class="invalid-feedback">
-                          <div *ngIf="ModelName.errors.required">This is required</div>
+                          <div *ngIf="ModelName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                         </div>
                       </div>
                     </div>
 
                     <div class="form-group row">
-                      <label class="col-md-3 label-control" for="isActive">Active Status</label>
+                      <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
                       <div class="custom-control custom-checkbox m-0">
                         <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                           [checked]="isActive">
