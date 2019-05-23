@@ -92,10 +92,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: './bank/bank.module#BankModule'
   },
   {
-    path : 'leaveManagament',
-    loadChildren: './leave-management/leave-management.module#LeaveManagementModule'
-  },
-  {
     path: 'customer',
     loadChildren: './customer/customer.module#CustomerModule'
   },

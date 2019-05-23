@@ -88,7 +88,7 @@ export class RoleUserComponent implements OnInit {
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
 
-    event.returnObject.data.forEach(element => {
+    event.response.returnObject.data.forEach(element => {
       console.log(element);
       if (element.refRoleId === this.refRoleObj.refRoleId) {
         this.listDeletedId.push(element.empPositionId);
@@ -113,20 +113,7 @@ export class RoleUserComponent implements OnInit {
         value: this.orderByValue
       };
     }
-    this.searchComponent
-      .search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        response => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        error => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   initiateForm() {
@@ -166,20 +153,7 @@ export class RoleUserComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     };
-    this.searchComponent
-      .search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        response => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        error => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   Back(): void {

@@ -140,19 +140,7 @@ export class OrganizationModelPagingComponent implements OnInit {
               value: this.orderByValue
             }
           }
-          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
-            .subscribe(
-              (response) => {
-                console.log("Success");
-                this.resultData = response;
-                this.totalData = response.returnObject.count;
-                console.log(this.resultData);
-              },
-              (error) => {
-                console.log("Error");
-                this.service.typeErrorCustom(error);
-              }
-            );
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit);
         });
     }
   }

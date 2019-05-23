@@ -86,19 +86,7 @@ export class MasterTypePagingComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   initiateForm() {
@@ -121,19 +109,7 @@ export class MasterTypePagingComponent implements OnInit {
               value: this.orderByValue
             }
           }
-          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-            .subscribe(
-              (response) => {
-                console.log("Success");
-                this.resultData = response;
-                this.totalData = response.returnObject.count;
-                console.log(this.resultData);
-              },
-              (error) => {
-                console.log("Error");
-                console.log(error);
-              }
-            );
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
         });
     }
   }
@@ -149,19 +125,7 @@ export class MasterTypePagingComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
 }

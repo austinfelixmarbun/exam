@@ -111,21 +111,7 @@ export class OrganizationComponent implements OnInit {
               value: this.orderByValue
             }
           }
-          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-            .subscribe(
-              (response) => {
-                console.log("Success");
-                this.resultData = response;
-                this.totalData = response.returnObject.count;
-                console.log(this.resultData);
-                this.spinner.hide();
-              },
-              (error) => {
-                console.log("Error");
-                console.log(error);
-                this.spinner.hide();
-              }
-            );
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
         },
         (error) => {
           console.log("Error Delete");
