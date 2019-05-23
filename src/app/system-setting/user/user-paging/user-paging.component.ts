@@ -85,19 +85,7 @@ export class UserPagingComponent implements OnInit {
       };
     }
     this.searchComponent
-      .search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        response => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        error => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+      .search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   initiateForm() {}
@@ -114,19 +102,7 @@ export class UserPagingComponent implements OnInit {
       value: this.orderByValue
     };
     this.searchComponent
-      .search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        response => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        error => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+      .search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   resetPassword(id: any) {

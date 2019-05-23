@@ -20,8 +20,8 @@ import { UCSearchComponent } from '@adins/ucsearch';
 })
 export class EmployeePositionComponent implements OnInit {
 
-  @ViewChild(UcgridfooterComponent) searchComponent;
-  @ViewChild(UCSearchComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchEmpList.json";
   urlQryPaging : string = AdInsConstant.GetEmpPositionPaging;
   urlEnviPaging : string = environment.foundationUrl;
@@ -60,6 +60,7 @@ export class EmployeePositionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.pageNow = 1;
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
       critObj.DataType = 'Numeric'
@@ -81,6 +82,7 @@ export class EmployeePositionComponent implements OnInit {
         key: this.orderByKey,
         value: this.orderByValue
       }
+      console.log("asd")
       this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
     }
   }

@@ -76,18 +76,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: './player/player.module#PlayerModule'
   },
   {
-    path: 'supplier',
-    loadChildren: './supplier/supplier.module#SupplierModule'
-  },
-  {
-    path: 'prospect',
-    loadChildren: './prospect/prospect.module#ProspectModule'
-  },
-  {
-  path: 'prospectVerif',
-    loadChildren: './prospect-verif/prospect-verif.module#ProspectVerifModule'
-  },
-  {
     path: 'office',
     loadChildren: './office/office.module#OfficeModule'
   },

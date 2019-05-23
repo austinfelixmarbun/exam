@@ -60,6 +60,7 @@ export class OfficeEmpPosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.pageNow = 1;
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
       critObj.DataType = 'Numeric'
