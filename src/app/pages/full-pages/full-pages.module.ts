@@ -7,15 +7,7 @@ import { ChartistModule} from 'ng-chartist';
 import { AgmCoreModule } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { GalleryPageComponent } from "app/pages/full-pages/gallery/gallery-page.component";
-import { InvoicePageComponent } from "app/pages/full-pages/invoice/invoice-page.component";
-import { HorizontalTimelinePageComponent } from "app/pages/full-pages/timeline/horizontal/horizontal-timeline-page.component";
-import { HorizontalTimelineComponent } from 'app/pages/full-pages/timeline/horizontal/component/horizontal-timeline.component';
-import { VerticalTimelinePageComponent } from "app/pages/full-pages/timeline/vertical/vertical-timeline-page.component";
 import { UserProfilePageComponent } from "app/pages/full-pages/user-profile/user-profile-page.component";
-import { FaqComponent } from 'app/pages/full-pages/faq/faq.component';
-import { KnowledgeBaseComponent } from 'app/pages/full-pages/knowledge-base/knowledge-base.component';
-import { SearchComponent } from 'app/pages/full-pages/search/search.component';
 
 
 @NgModule({
@@ -28,15 +20,7 @@ import { SearchComponent } from 'app/pages/full-pages/search/search.component';
         NgbModule,
     ],
     declarations: [       
-        GalleryPageComponent,
-        InvoicePageComponent,       
-        HorizontalTimelinePageComponent,
-        HorizontalTimelineComponent,
-        VerticalTimelinePageComponent,
-        UserProfilePageComponent,
-        SearchComponent,
-        FaqComponent,
-        KnowledgeBaseComponent
+        UserProfilePageComponent
     ]
 })
 export class FullPagesModule { }

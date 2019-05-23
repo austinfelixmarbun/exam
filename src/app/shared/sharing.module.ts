@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { SearchComponent } from 'app/shared/search/search.component';
-import {LookupComponent} from 'app/shared/lookup/lookup.component';
 import {LookupEmployeeComponent} from 'app/shared/lookup/lookup-employee/lookup-employee.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LookupzipcodeComponent } from 'app/shared/lookup/lookupzipcode/lookupzipcode.component';
@@ -28,7 +27,6 @@ import { FormEngineModule } from '@adins/form-engine';
     exports: [
         CommonModule,
         SearchComponent,
-        LookupComponent,
         LookupEmployeeComponent,
         LookupzipcodeComponent,
         NgbModule,
@@ -60,7 +58,6 @@ import { FormEngineModule } from '@adins/form-engine';
     ],
     declarations: [
         SearchComponent,
-        LookupComponent,
         LookupEmployeeComponent,
         LookupzipcodeComponent,
         LookupRefBankComponent,
