@@ -1,11 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
@@ -17,7 +12,7 @@ import { DecimalPipe } from '@angular/common';
 @Component({
   selector: 'app-master-type-paging',
   templateUrl: './master-type-paging.component.html',
-  providers: [NGXToastrService, NGXToastrService, ExcelService, DecimalPipe]
+  providers: [NGXToastrService, ExcelService, DecimalPipe]
 })
 export class MasterTypePagingComponent implements OnInit {
 
@@ -41,11 +36,7 @@ export class MasterTypePagingComponent implements OnInit {
   urlEnviPaging : string = environment.foundationUrl;
 
   constructor(
-    private http: Http,
-    private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private excelService: ExcelService,
     private https: HttpClient
   ) { }
 

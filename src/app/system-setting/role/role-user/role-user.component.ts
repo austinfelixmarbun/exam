@@ -1,11 +1,9 @@
 import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { AdInsServiceService } from "app/ad-ins-service.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Http } from "@angular/http";
-import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { RefRoleObj } from "app/shared/model/RefRoleObj.Model";
 import { Location, DecimalPipe } from "@angular/common";
@@ -17,7 +15,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 @Component({
   selector: "app-role-user",
   templateUrl: "./role-user.component.html",
-  providers: [NGXToastrService, NGXToastrService, ExcelService, DecimalPipe]
+  providers: [NGXToastrService, ExcelService, DecimalPipe]
 })
 export class RoleUserComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
@@ -53,8 +51,6 @@ export class RoleUserComponent implements OnInit {
     private http: Http,
     private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private excelService: ExcelService,
     private httpClient: HttpClient,
     private location: Location,
     private route: ActivatedRoute,

@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
-import { Http } from '@angular/http';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { Observable } from 'rxjs';
@@ -42,7 +40,7 @@ export class EmployeeComponent implements OnInit {
   orderByValue: boolean = true;
 
   foundationUrl: string = environment.foundationUrl;
-  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private toastr: NGXToastrService, private excelService: ExcelService, private https: HttpClient) { }
+  constructor(private httpClient: HttpClient, private toastr: NGXToastrService, private excelService: ExcelService, private https: HttpClient) { }
 
   initiateForm() {
     this.getJSON(this.urlJson).subscribe(data => {
@@ -122,8 +120,6 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-
-
   reset(){
     this.searchComponent.initiateForm();
   }
@@ -142,6 +138,11 @@ export class EmployeeComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  addToTemp(body: any) {
+    console.log(body);
+    console.log(body["tbody"]);
   }
 
   // Success Type

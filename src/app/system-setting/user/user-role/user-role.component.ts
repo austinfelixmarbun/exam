@@ -1,11 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
@@ -16,7 +13,7 @@ import { RefUserObj } from 'app/shared/model/RefUserObj.Model';
 @Component({
   selector: 'app-user-role',
   templateUrl: './user-role.component.html',
-  providers: [NGXToastrService, NGXToastrService]
+  providers: [NGXToastrService]
 })
 export class UserRoleComponent implements OnInit {
 
@@ -29,10 +26,6 @@ export class UserRoleComponent implements OnInit {
   refUserId: any;
 
   constructor(
-    private http: Http,
-    private spinner: NgxSpinnerService,
-    private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private location: Location,

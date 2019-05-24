@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { NgForm } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
@@ -36,7 +34,7 @@ export class BankAddComponent implements OnInit {
     criteria: CriteriaObj[] = [];
     afterSaveUrl = "/bank";
 
-    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
+    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refBankId"];
             this.mode = params["mode"];

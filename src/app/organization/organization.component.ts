@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
 import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
@@ -37,12 +35,7 @@ export class OrganizationComponent implements OnInit {
   urlQryPaging: string = AdInsConstant.GetRefOrgPaging;
   urlEnviPaging : string = environment.foundationUrl;
 
-  constructor(
-    private http: HttpClient,
-    private spinner: NgxSpinnerService,
-    private service: NGXToastrService,
-    private adInsService: AdInsServiceService
-  ) { }
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService) { }
 
   ngOnInit() {
     this.pageNow = 1;

@@ -1,11 +1,8 @@
 import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
@@ -15,7 +12,7 @@ import { DecimalPipe } from '@angular/common';
 @Component({
   selector: 'app-role-paging',
   templateUrl: './role-paging.component.html',
-  providers: [NGXToastrService, NGXToastrService, ExcelService, DecimalPipe]
+  providers: [NGXToastrService, ExcelService, DecimalPipe]
 })
 export class RolePagingComponent implements OnInit {
 
@@ -39,11 +36,7 @@ export class RolePagingComponent implements OnInit {
   urlEnviPaging : string = environment.foundationUrl;
 
   constructor(
-    private http: Http,
-    private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private excelService: ExcelService,
     private https: HttpClient
   ) { }
 

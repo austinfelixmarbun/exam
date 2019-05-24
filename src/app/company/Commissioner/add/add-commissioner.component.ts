@@ -6,10 +6,7 @@ import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
-import { CoyBodObj } from 'app/shared/model/CoyBodObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { NgForm } from '@angular/forms';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 import { CoyCommissionerObj } from 'app/shared/model/CoyCommissionerObj.Model';
@@ -44,7 +41,7 @@ export class CommissionerAddComponent implements OnInit {
     idNo: any;
     refCoyId: any;
 
-    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
+    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
         this.route.queryParams.subscribe(params => {
             this.param = params["coyCommissionerId"];
             this.refCoyId = params["refCoyId"];

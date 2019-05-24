@@ -1,17 +1,12 @@
-import { FormGroup } from '@angular/forms';
-import { Http } from '@angular/http';
-import { formatDate } from '@angular/common';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { HttpHeaders } from '@angular/common/http';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 
 @Component({
@@ -32,16 +27,7 @@ export class MasterTypeAddEditComponent implements OnInit {
   refRoleId: any;
   resultData: any;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private location: Location,
-    private spinner: NgxSpinnerService,
-    private adInsService: AdInsServiceService,
-    private httpClient: HttpClient,
-    private toastr: NGXToastrService,
-    private service: NGXToastrService,
-  ) {
+  constructor(private route: ActivatedRoute, private location: Location, private spinner: NgxSpinnerService, private httpClient: HttpClient, private service: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
         this.type = params['mode'];

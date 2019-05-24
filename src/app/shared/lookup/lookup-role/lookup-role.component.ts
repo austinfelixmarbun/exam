@@ -1,21 +1,8 @@
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { environment } from "environments/environment";
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewChild,
-  ViewChildren
-} from "@angular/core";
-import {
-  NgbModal,
-  ModalDismissReasons,
-  NgbActiveModal
-} from "@ng-bootstrap/ng-bootstrap";
-import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { AdInsServiceService } from "app/ad-ins-service.service";
-import { formatDate, DecimalPipe } from "@angular/common";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { DecimalPipe } from "@angular/common";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
@@ -27,11 +14,11 @@ import { UCSearchComponent } from '@adins/ucsearch';
   providers: [NGXToastrService, DecimalPipe]
 })
 export class LookupRoleComponent implements OnInit {
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal) { }
 
   @Input() urlJson: string = "./assets/lookup/lookupRole.json";
   urlQryPaging: string = AdInsConstant.GetRefRolePaging;
-  urlEnviPaging : string = environment.foundationUrl;
+  urlEnviPaging: string = environment.foundationUrl;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
@@ -68,8 +55,8 @@ export class LookupRoleComponent implements OnInit {
     this.pageNow = 1;
     this.pageSize = this.show[0];
 
-     /* #region   Additional Criteria*/
-     if (this.addCritInput !== null) {
+    /* #region   Additional Criteria*/
+    if (this.addCritInput !== null) {
       this.addCrit = new Array();
       for (var i = 0; i < this.addCritInput.length; i++) {
         this.addCrit.push(this.addCritInput[i]);
@@ -125,7 +112,7 @@ export class LookupRoleComponent implements OnInit {
       };
     }
     searchComponent
-      .search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit )
+      .search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
       .subscribe(
         response => {
           console.log("Success");
@@ -162,7 +149,7 @@ export class LookupRoleComponent implements OnInit {
       value: this.orderByValue
     };
     searchComp
-      .search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit )
+      .search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
       .subscribe(
         response => {
           console.log("Success");

@@ -1,12 +1,7 @@
 import { Router } from "@angular/router";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { NgbPaginationConfig } from "@ng-bootstrap/ng-bootstrap";
-import { AdInsServiceService } from "app/ad-ins-service.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { NgxSpinnerService } from "ngx-spinner";
-import { Http } from "@angular/http";
-import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { environment } from "environments/environment";
@@ -18,7 +13,7 @@ import { DecimalPipe } from "@angular/common";
 @Component({
   selector: "app-user-paging",
   templateUrl: "./user-paging.component.html",
-  providers: [NGXToastrService, NGXToastrService, ExcelService, DecimalPipe]
+  providers: [NGXToastrService, ExcelService, DecimalPipe]
 })
 export class UserPagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
@@ -38,11 +33,7 @@ export class UserPagingComponent implements OnInit {
   urlQryPaging: string = AdInsConstant.GetRefUserPaging;
   urlEnviPaging : string = environment.foundationUrl;
   constructor(
-    private http: Http,
-    private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private excelService: ExcelService,
     private https: HttpClient,
     private router: Router
   ) {}

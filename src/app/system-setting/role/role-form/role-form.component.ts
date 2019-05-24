@@ -1,16 +1,12 @@
 import { AuthFormObj } from 'app/shared/model/AuthFormObj.Model';
 import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { AdInsServiceService } from "app/ad-ins-service.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { NgxSpinnerService } from "ngx-spinner";
-import { Http } from "@angular/http";
-import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { RefRoleObj } from "app/shared/model/RefRoleObj.Model";
 import { Location, DecimalPipe } from "@angular/common";
-import { NgForm, FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { environment } from "environments/environment";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
@@ -19,7 +15,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 @Component({
   selector: 'app-role-form',
   templateUrl: './role-form.component.html',
-  providers: [NGXToastrService, NGXToastrService, ExcelService, DecimalPipe]
+  providers: [NGXToastrService, ExcelService, DecimalPipe]
 })
 export class RoleFormComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
@@ -52,11 +48,8 @@ export class RoleFormComponent implements OnInit {
   data = [];
 
   constructor(
-    private http: Http,
     private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private excelService: ExcelService,
     private httpClient: HttpClient,
     private location: Location,
     private route: ActivatedRoute,

@@ -8,8 +8,6 @@ import { HttpClient } from '@angular/common/http';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { CoyBodObj } from 'app/shared/model/CoyBodObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { NgForm } from '@angular/forms';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 

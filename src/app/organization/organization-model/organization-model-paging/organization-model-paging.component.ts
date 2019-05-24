@@ -2,15 +2,12 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
 import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location, DecimalPipe } from "@angular/common";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
@@ -44,17 +41,7 @@ export class OrganizationModelPagingComponent implements OnInit {
   urlEnviPaging : string = environment.foundationUrl;
   addCrit: CriteriaObj[];
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private http: Http,
-    private spinner: NgxSpinnerService,
-    private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private excelService: ExcelService,
-    private https: HttpClient,
-    private location: Location
-  ) {
+  constructor(private route: ActivatedRoute, private service: NGXToastrService, private https: HttpClient, private location: Location) {
     this.route.queryParams.subscribe(params => {
       if (params['refOrgId'] != null) {
         this.refOrgId = +params['refOrgId'];

@@ -1,13 +1,9 @@
 import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from "@angular/router";
-import { AuthService } from 'app/shared/auth/auth.service';
-import { formatDate, getLocaleDateTimeFormat } from '@angular/common';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
+import { formatDate } from '@angular/common';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
-import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
-import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { environment } from 'environments/environment';
@@ -26,17 +22,14 @@ export class LoginPageComponent implements OnInit {
     private previousUrl: string;
     private currentUrl: string;
     private apiUrl: string;
-    private pageAccess:any;
     foundationUrl: string;
     jstoday = '';
 
-    constructor(private router: Router, private currentUserContextService: CurrentUserContextService,
-        private http: HttpClient,
-        public rolePickService : RolePickService,
-        private route: ActivatedRoute, private Auth: AuthService, private adInsService: AdInsServiceService) {
+    constructor(private router: Router, private http: HttpClient, public rolePickService : RolePickService,
+        private route: ActivatedRoute) {
         console.log('Constructor Login');
         //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
-        if(localStorage.getItem("UserContext"!)!="")
+        if(localStorage.getItem("UserContext") != null)
         {
             this.router.navigate(['dashboard/dash-board']);
         }

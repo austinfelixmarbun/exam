@@ -2,7 +2,6 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { AdInsServiceService} from 'app/ad-ins-service.service';
 
 interface myData{
   success: boolean,
@@ -17,7 +16,7 @@ export class AuthService {
   loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'true')
   // private loggedInStatus = false
 
-  constructor(private http: HttpClient,private adInsService:AdInsServiceService) {}
+  constructor(private http: HttpClient) {}
 
   signupUser(email: string, password: string) {
     //your code for signing up the new user

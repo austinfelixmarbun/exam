@@ -5,17 +5,20 @@
     <table class="table table-responsive-md text-center table-hover">
         <thead>
             <tr class="table-header">
+                <th>CB</th>
                 <th><span translate class="thead-header" (click)="searchSort($event)" name='empNo'>Employee No</span></th>
-                <th><span translate class="thead-header" (click)="searchSort($event)" name='empName'>Employee
-                        Name</span></th>
+                <th><span translate class="thead-header" (click)="searchSort($event)" name='empName'>Employee Name</span></th>
                 <th><span translate class="thead-header" (click)="searchSort($event)" name='isExt'>External Employee</span></th>
                 <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active Status</span></th>
                 <th translate>Employee Position</th>
                 <th translate>Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody #bade>
             <tr *ngFor="let item of resultData?.data">
+                <td>
+                    <input type="checkbox" name="checkbox">
+                </td>
                 <td>{{item.empNo}}</td>
                 <td class="text-left">{{item.empName}}</td>
                 <td *ngIf="item.isExt === '1'">Yes</td>
@@ -42,5 +45,9 @@
     </table>
     <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
 </div>
+<button type="button" class="btn btn-raised btn-primary" style="position: absolute; right: 33px;"
+    (click)="addToTemp(bade)" translate>
+    <i class="fa fa-plus-circle"></i> Add to temp
+</button>
 <!-- <i class="fa fa-plus-circle" [routerLink]="['/employee/add']"
     style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i> -->

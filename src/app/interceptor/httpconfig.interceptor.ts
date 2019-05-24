@@ -45,12 +45,12 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
         var checkSession = AdInsHelper.CheckSessionTimeout();
         if (checkSession == "1") {
-            this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
+            // this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
             this.spinner.hide();
             this.router.navigate(["/pages/login"]);
         }
         //Ini kalau buat Login belom punya Current User Contexts
-        if (request.url == "http://r3app-server.ad-ins.com/foundation/UserManagement/HTML5Login") {
+        if (request.url == "http://r3app-server/foundation/UserManagement/HTML5Login") {
             if (currentUserContext != null) {
                 token = localStorage.getItem("Token");
                 myObj = {
