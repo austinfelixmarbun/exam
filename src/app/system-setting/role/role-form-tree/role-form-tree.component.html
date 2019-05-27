@@ -1,0 +1,17 @@
+<div class="example-config">
+  Checked keys: {{selectedKeys.join(",")}}
+</div>
+<kendo-treeview
+[nodes]="listFeature"
+textField="title"
+kendoTreeViewExpandable
+kendoTreeViewFlatDataBinding
+idField="refFormId"
+parentIdField="parentId"
+
+[kendoTreeViewCheckable]="{ mode: 'multiple' }"
+[checkBy]="key"
+[(checkedKeys)]="selectedKeys"
+>
+</kendo-treeview>
+<i>Press SPACE to check/uncheck the active node</i>

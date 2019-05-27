@@ -198,6 +198,10 @@ export class AdInsConstant {
     public static GetAllAuthFormsByRefRoleId = "/MenuManagement/GetAllAuthFormsByRefRoleId";
     public static GetAuthByRefFormIdAndRefRoleId = "/MenuManagement/GetAuthByRefFormIdAndRefRoleId";
     public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
+    public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
+    public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
+
+
 
     //FORM FEATURE
     public static GetListRefFeature = "/RefFeature/GetListRefFeature";
@@ -243,5 +247,5 @@ export class AdInsConstant {
     public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
     public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
     public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
-    
+
 }
