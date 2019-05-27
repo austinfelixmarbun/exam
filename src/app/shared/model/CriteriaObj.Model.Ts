@@ -5,7 +5,7 @@ export class CriteriaObj{
     low:number;
     high:number;
     DataType:string;
-
+    listValue : Array<any>;
     constructor()
     {
         this.low=0;

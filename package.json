@@ -13,9 +13,9 @@
   "private": true,
   "dependencies": {
     "@adins/form-engine": "^1.0.1",
-    "@adins/lookupparentform": "^1.0.3",
-    "@adins/ucgridfooter": "^1.0.0",
-    "@adins/ucsearch": "^1.0.0",
+    "@adins/lookupparentform": "^1.0.4",
+    "@adins/ucgridfooter": "^1.0.1",
+    "@adins/ucsearch": "^1.0.1",
     "@agm/core": "1.0.0-beta.5",
     "@angular/animations": "^7.0.0",
     "@angular/cdk": "^7.3.6",

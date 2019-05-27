@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 //import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import {UCSearchComponent} from 'ucsearch';
+import {UCSearchComponent} from '@adins/ucsearch';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
@@ -10,7 +10,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { HttpClient } from '@angular/common/http';
-import { UcgridfooterComponent} from 'ucgridfooter';
+import { UcgridfooterComponent} from '@adins/ucgridfooter';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { DecimalPipe } from '@angular/common';
 

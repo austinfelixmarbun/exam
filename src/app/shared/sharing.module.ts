@@ -5,8 +5,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { SearchComponent } from 'app/shared/search/search.component';
 import {LookupComponent} from 'app/shared/lookup/lookup.component';
-import {UcgridfooterModule} from 'ucgridfooter';
-import { UCSearchModule} from 'ucsearch';
 import {LookupEmployeeComponent} from 'app/shared/lookup/lookup-employee/lookup-employee.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LookupzipcodeComponent } from 'app/shared/lookup/lookupzipcode/lookupzipcode.component';
