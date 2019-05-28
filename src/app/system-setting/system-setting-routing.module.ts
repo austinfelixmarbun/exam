@@ -1,3 +1,4 @@
+import { RoleFormFeaturePagingComponent } from 'app/system-setting/role/role-form-feature-paging/role-form-feature-paging.component';
 import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -79,10 +80,17 @@ const routes: Routes = [
         },
       },
       {
-        path: 'roleForm/feature',
-        component: RoleFormFeatureComponent,
+        path: 'formFeature',
+        component: RoleFormFeaturePagingComponent,
         data: {
           title: 'Assign Form Feature'
+        },
+      },
+      {
+        path: 'formFeature/detail',
+        component: RoleFormFeatureComponent,
+        data: {
+          title: 'Assign Form Feature Detail'
         },
       },
       {

@@ -18,6 +18,7 @@ import { RoleFormFeatureComponent } from 'app/system-setting/role/role-form-feat
 import { UserChangePasswordComponent } from 'app/system-setting/user/user-change-password/user-change-password.component';
 import { RoleFormTreeComponent } from 'app/system-setting/role/role-form-tree/role-form-tree.component';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
+import { RoleFormFeaturePagingComponent } from './role/role-form-feature-paging/role-form-feature-paging.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { TreeViewModule } from '@progress/kendo-angular-treeview';
     RoleFormComponent,
     RoleFormFeatureComponent,
     UserChangePasswordComponent,
-    RoleFormTreeComponent
+    RoleFormTreeComponent,
+    RoleFormFeaturePagingComponent
   ],
   providers: [
     {

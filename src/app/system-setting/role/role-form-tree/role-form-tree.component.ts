@@ -19,6 +19,7 @@ import { environment } from "environments/environment";
 import { UcgridfooterComponent } from "@adins/ucgridfooter";
 import { UCSearchComponent } from "@adins/ucsearch";
 import { elementStylingMap } from "@angular/core/src/render3";
+import { TreeItemLookup } from '@progress/kendo-angular-treeview';
 
 @Component({
   selector: "app-role-form-tree",
@@ -26,8 +27,7 @@ import { elementStylingMap } from "@angular/core/src/render3";
   providers: [NGXToastrService, ExcelService, DecimalPipe]
 })
 export class RoleFormTreeComponent implements OnInit {
-  resultData: any;
-  apiUrl: any;
+ apiUrl: any;
   deleteUrl: any;
   authFormObj: AuthFormObj = new AuthFormObj();
   foundationUrl: string = environment.foundationUrl;
@@ -38,15 +38,15 @@ export class RoleFormTreeComponent implements OnInit {
   check: any;
   menu: any;
   formFeature: any;
-  listSelectedId: Array<any> = [];
-  listDeletedId: Array<any> = [];
-  listFeature: any[] = [];
+  refRoleObj: AuthFormObj = new AuthFormObj();
+  listSelectedId: any[] = [];
+  listDeletedId: any[] = [];
+  listMenu: any[] = [];
 
   expandedKeys: any[] = ["0", "1"];
   selectedKeys: any[] = [];
   selection: SelectableSettings = { mode: "multiple" };
-  hasChildren = (item: any) => item.items && item.items.length > 0;
-  fetchChildren = (item: any) => of(item.items);
+
   key = "refFormId";
 
   form: FormGroup;
@@ -77,50 +77,87 @@ export class RoleFormTreeComponent implements OnInit {
   }
 
   initiateForm() {
-    this.listFeature = [];
+    this.listMenu = [];
     var temp: any;
     var refFormObj: RefFormObj = new RefFormObj();
+
+    //Generate Tree
     var urlGetFeature: any =
       this.foundationUrl + AdInsConstant.GetAllActiveRefForm;
     this.httpClient.post(urlGetFeature, refFormObj).subscribe(response => {
-      this.resultData = response;
-      this.listFeature = response["returnObject"];
-
+      this.listMenu = response["returnObject"];
+      this.menu = response["returnObject"];
       response["returnObject"].forEach(x => {
         if (x.submenu.length > 0)
         {
           x.submenu.forEach(y => {
             temp = {title: y.title, refFormId: y.refFormId, parentId: y.parentId};
-            this.listFeature.push(temp);
+            this.listMenu.push(temp);
             if (y.submenu.length > 0)
             {
               y.submenu.forEach(z => {
                 temp = {title: z.title, refFormId: z.refFormId, parentId: z.parentId};
-                this.listFeature.push(temp);
+                this.listMenu.push(temp);
               });
             }
           });
         }
-
       });
-      // console.log(this.listFeature);
     });
+
+    ///Get Data Auth Form
+    var urlGetRefRole: any =
+      this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
+    var getAuthFormUrl: any = this.foundationUrl + AdInsConstant.GetAllAuthFormsByRefRoleId;
+    this.refRoleObj = new AuthFormObj();
+    this.refRoleObj.refRoleId = this.refRoleId;
+    console.log(urlGetRefRole);
+    this.httpClient.post(urlGetRefRole, this.refRoleObj).subscribe(
+      response => {
+        this.refRoleObj = response["returnObject"];
+        this.spinner.hide();
+        this.httpClient.post(getAuthFormUrl, this.refRoleObj).subscribe(
+          response => {
+            this.listDeletedId = [];
+            this.listSelectedId = [];
+            response['returnObject'].forEach(element => {
+              this.listSelectedId.push(element.refFormId);
+              this.listDeletedId.push(element.refFormId);
+            });
+            console.log('Sel', this.listSelectedId);
+            console.log('Del', this.listDeletedId);
+          },
+          error => {
+            console.log(error);
+            this.spinner.hide();
+          }
+        );
+      },
+      error => {
+        this.spinner.hide();
+      }
+    );
   }
 
   isChecked = (dataItem: any, index: string): CheckedState => {
+    console.log('masuk');
     if (this.containsItem(dataItem)) {
+      console.log('checked');
       return "checked";
     }
 
     if (this.isIndeterminate(dataItem.items)) {
+      console.log('indeterminate');
       return "indeterminate";
     }
-
+    console.log('none');
     return "none";
   };
 
   containsItem(item: any): boolean {
-    return this.selectedKeys.indexOf(item[this.key]) > -1;
+    console.log(this.key);
+    return this.listSelectedId.indexOf(item[this.key]) > -1;
+
   }
 
   isIndeterminate(items: any[] = []): boolean {
@@ -129,6 +166,7 @@ export class RoleFormTreeComponent implements OnInit {
 
     while ((item = items[idx])) {
       if (this.isIndeterminate(item.items) || this.containsItem(item)) {
+        console.log(item.items);
         return true;
       }
 
@@ -136,5 +174,30 @@ export class RoleFormTreeComponent implements OnInit {
     }
 
     return false;
+  }
+
+
+  Back(): void {
+    this.location.back();
+  }
+
+  Save(): void {
+    var assignRoleToFormsUrl = this.foundationUrl + AdInsConstant.AssignRoleToForms;
+    this.refRoleObj.refRoleId = this.refRoleId;
+    this.refRoleObj.listAddRefFormId = this.listSelectedId;
+    this.refRoleObj.listDelRefFormId = this.listDeletedId;
+    console.log(this.refRoleObj);
+    this.httpClient.post(assignRoleToFormsUrl, this.refRoleObj).subscribe(
+      response => {
+        this.service.typeSave(response['message']);
+        this.location.back();
+        this.spinner.hide();
+      },
+      error => {
+        console.log(error);
+        this.service.typeErrorCustom(error);
+        this.spinner.hide();
+      }
+    );
   }
 }

@@ -53,6 +53,7 @@ export class RoleAddEditComponent implements OnInit {
   ngOnInit() {
     if (this.type === 'edit') {
       this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
+      var abc = 'http://172.19.10.228:8280/Foundation/v1/RefRole/GetRefRoleByRefRoleId';
       this.refRoleObj = new RefRoleObj()
       this.refRoleObj.refRoleId = +this.refRoleId
       this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
