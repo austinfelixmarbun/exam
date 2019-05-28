@@ -14,4 +14,5 @@ export class RefFormObj {
     hierarchyNo:       string;
     isHidden:          string;
     isExternalLink:    boolean;
+    refModuleId:       string;
 }

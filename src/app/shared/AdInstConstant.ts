@@ -245,4 +245,6 @@ export class AdInsConstant {
     public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
     public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
     
+    //REF MODULE
+    public static GetListRefModuleKeyValue = "/RefModule/GetListRefModuleKeyValue";
 }
