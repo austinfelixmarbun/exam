@@ -1,12 +1,12 @@
 <fieldset ngModelGroup="lookup">
     <div class="input-group">
-        <input type="text" class="form-control search-form-control" attr.data-json='{{jsonSelect}}' name="lookupInput"
+        <input type="text" class="form-control" attr.data-json='{{jsonSelect}}' name="lookupInput"
             attr.data-inputId='{{idSelect}}' attr.data-datatype="Text" value="{{nameSelect}}" readonly
             [(ngModel)]="lookupInput" #LookupInput="ngModel"
             [ngClass]="{ 'is-invalid':(LookupInput.touched || LookupInput.dirty) && LookupInput.invalid }">
         <div class="input-group-append">
             <span class="input-group-btn">
-                <button class="btn btn-raised btn-primary lookup-form-control btn-lookup" type="button"
+                <button class="btn btn-raised btn-primary" type="button"
                     (click)="open(content)"><i class="ft-search"></i></button>
             </span>
         </div>

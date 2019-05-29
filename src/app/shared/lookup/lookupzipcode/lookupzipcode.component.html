@@ -1,10 +1,10 @@
 <div class="input-group">
-  <input type="text" (input)="onChange($event.target.value)" class="form-control search-form-control"
+  <input type="text" (input)="onChange($event.target.value)" class="form-control"
     attr.data-json='{{jsonSelect}}' attr.data-inputId='{{idSelect}}' name="zipcode" attr.data-datatype="Text"
     value="{{nameSelect}}" disabled>
   <div class="input-group-append">
     <span class="input-group-btn">
-      <button class="btn btn-raised btn-primary lookup-form-control btn-lookup" type="button" (click)="open(content)"><i
+      <button class="btn btn-raised btn-primary" type="button" (click)="open(content)"><i
           class="ft-search"></i></button>
     </span>
   </div>
