@@ -38,7 +38,6 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GrowlModule } from 'primeng/primeng';
 import { environment } from 'environments/environment';
 
-
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

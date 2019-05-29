@@ -9,7 +9,8 @@ import { MatchHeightModule } from "app/shared/directives/match-height.directive"
 import { Dashboard1Component } from "app/dashboard/dashboard1/dashboard1.component";
 import { Dashboard2Component } from "app/dashboard/dashboard2/dashboard2.component";
 import { DashBoardComponent } from 'app/dashboard/dash-board/dash-board.component';
-import { ContextMenuModule } from 'ngx-contextmenu';
+import { TreeViewModule } from '@progress/kendo-angular-treeview';
+import { ContextMenuModule } from '@progress/kendo-angular-menu';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ContextMenuModule } from 'ngx-contextmenu';
         ChartistModule,
         NgbModule,
         MatchHeightModule,
-        ContextMenuModule.forRoot()
+        TreeViewModule,
+        ContextMenuModule
     ],
     exports: [],
     declarations: [

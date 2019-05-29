@@ -235,6 +235,7 @@ export class AdInsConstant {
     public static AddObjectBySQL = "/Generic/AddObjectBySQL";
     public static UpdateObjectBySQL = "/Generic/UpdateObjectBySQL";
     public static DeleteObjectBySQL = "/Generic/DeleteObjectBySQL";
+
     //WORKHOUR
     public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
     public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
@@ -244,4 +245,6 @@ export class AdInsConstant {
     public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
     public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
     
+    //QUEUE
+    public static AddQueue = "http://R3App-Server/FOUNDATION/RabbitMq/AddQueue";
 }

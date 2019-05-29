@@ -49,6 +49,14 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             this.spinner.hide();
             this.router.navigate(["/pages/login"]);
         }
+
+        if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {
+            var n = request.url.lastIndexOf("/");
+            var oldPath = request.url.substring(n+1);
+        } else {
+            var oldPath = "-";
+        }
+
         //Ini kalau buat Login belom punya Current User Contexts
         if (request.url == "http://r3app-server/foundation/UserManagement/HTML5Login") {
             if (currentUserContext != null) {
@@ -61,7 +69,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     Ip: localStorage.getItem("LocalIp"),
                     RequestObject: request.body,
                     UserLog: JSON.parse(localStorage.getItem("PageAccess")),
-                    Token: token
+                    Token: token,
+                    Method: oldPath
                 };
             }
             else {
@@ -119,7 +128,18 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ body: myObj });
         AdInsHelper.InsertLog(request.url, "API", request.body);
         console.log(JSON.stringify(request.body));
-        return next.handle(request).pipe(
+        if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {
+            var q = "AddQueue";
+            var url = request.url;
+            var n = url.lastIndexOf("/");
+            var envi = url.substring(0,n+1);
+            var newUrl = envi.concat(q);
+
+            var req = request.clone({url: newUrl});
+        } else {
+            var req = request;
+        }
+        return next.handle(req).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     if (event.body.isError == true) {
