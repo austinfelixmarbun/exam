@@ -1,9 +1,8 @@
 
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
@@ -35,9 +34,7 @@ export class RoleAddEditComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
-    private adInsService: AdInsServiceService,
     private httpClient: HttpClient,
-    private toastr: NGXToastrService,
     private service: NGXToastrService,
   ) {
     this.route.queryParams.subscribe(params => {
@@ -56,6 +53,7 @@ export class RoleAddEditComponent implements OnInit {
   ngOnInit() {
     if (this.type === 'edit') {
       this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
+      var abc = 'http://172.19.10.228:8280/Foundation/v1/RefRole/GetRefRoleByRefRoleId';
       this.refRoleObj = new RefRoleObj()
       this.refRoleObj.refRoleId = +this.refRoleId
       this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(

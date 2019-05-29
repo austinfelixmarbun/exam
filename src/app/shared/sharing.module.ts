@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { SearchComponent } from 'app/shared/search/search.component';
-import {LookupComponent} from 'app/shared/lookup/lookup.component';
 import {LookupEmployeeComponent} from 'app/shared/lookup/lookup-employee/lookup-employee.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LookupzipcodeComponent } from 'app/shared/lookup/lookupzipcode/lookupzipcode.component';
@@ -21,12 +20,13 @@ import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucC
 import { LookupparentformModule } from '@adins/lookupparentform';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { FormEngineComponent } from './form-engine/form-engine.component';
+import { FormEngineModule } from '@adins/form-engine';
 
 @NgModule({
     exports: [
         CommonModule,
         SearchComponent,
-        LookupComponent,
         LookupEmployeeComponent,
         LookupzipcodeComponent,
         NgbModule,
@@ -34,6 +34,7 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
         LookupRoleComponent,
         LookupDistrictComponent,
         LookupparentformModule,
+        FormEngineComponent,
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
@@ -43,7 +44,8 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
         LookupOrgJobTitleComponent,
         LookupRefJobTitleComponent,
         UCSearchModule,
-        UcgridfooterModule
+        UcgridfooterModule,
+        FormEngineModule
     ],
     imports: [
         CommonModule,
@@ -56,13 +58,13 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
     ],
     declarations: [
         SearchComponent,
-        LookupComponent,
         LookupEmployeeComponent,
         LookupzipcodeComponent,
         LookupRefBankComponent,
         LookupRoleComponent,
         LookupDistrictComponent,
         UcAddressComponent,
+        FormEngineComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
         LookupBizUnitComponent,

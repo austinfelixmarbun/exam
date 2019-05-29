@@ -1,36 +1,32 @@
-import { Component, OnInit, Input, ViewChild, ViewChildren, Output, EventEmitter } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { formatDate } from '@angular/common';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { DecimalPipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { environment } from 'environments/environment';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 
 
 @Component({
   selector: 'app-lookupzipcode',
   templateUrl: './lookupzipcode.component.html',
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class LookupzipcodeComponent implements OnInit {
 
   constructor(private modalService: NgbModal) { }
 
-  urlJson: string = "./assets/lookup/lookupZipcode.json";
-  @Input() _url: string;
+  @Input() urlJson: string = "./assets/lookup/lookupZipcode.json";
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
-  @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
 
   roleName: any;
   refRoleId: any;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   @Output() select : EventEmitter<any> = new EventEmitter();
 
   urlQryPaging : any = AdInsConstant.GetRefZipcodePaging;

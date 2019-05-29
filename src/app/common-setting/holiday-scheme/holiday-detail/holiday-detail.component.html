@@ -7,33 +7,33 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control" translate>Scheme Code </label>
+              <label class="col-md-3 label-control adInsLabel" translate>Scheme Code </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="holidaySchmCode" required [readonly]="isEdit"
+                <input type="text" class="form-control adInsInput" name="holidaySchmCode" required [readonly]="isEdit"
                   [(ngModel)]="holidaySchmCode" #HolidaySchmCode="ngModel"
                   [ngClass]="{ 'is-invalid': (HolidayReqForm.submitted || HolidaySchmCode.touched || HolidaySchmCode.dirty) && HolidaySchmCode.invalid }">
                 <div
                   *ngIf="(HolidayReqForm.submitted || HolidaySchmCode.touched || HolidaySchmCode.dirty) && HolidaySchmCode.invalid"
                   class="invalid-feedback">
-                  <div *ngIf="HolidaySchmCode.errors.required" translate>This field is required</div>
+                  <div *ngIf="HolidaySchmCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" translate>Scheme Name </label>
+              <label class="col-md-3 label-control adInsLabel" translate>Scheme Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="holidaySchmName" required [(ngModel)]="holidaySchmName"
+                <input type="text" class="form-control adInsInput" name="holidaySchmName" required [(ngModel)]="holidaySchmName"
                   #HolidaySchmName="ngModel"
                   [ngClass]="{ 'is-invalid': (HolidayReqForm.submitted || HolidaySchmName.touched || HolidaySchmName.dirty) && HolidaySchmName.invalid }">
                 <div
                   *ngIf="(HolidayReqForm.submitted || HolidaySchmName.touched || HolidaySchmName.dirty) && HolidaySchmName.invalid"
                   class="invalid-feedback">
-                  <div *ngIf="HolidaySchmName.errors.required" translate>This field is required</div>
+                  <div *ngIf="HolidaySchmName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control" translate>Active </label>
+              <label class="col-md-3 label-control adInsLabel" translate>Active </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                   (change)="toggleActive($event)" name="isActive" [readonly]="isEdit">
@@ -54,13 +54,13 @@
     </div>
   </div>
   <div *ngIf="editDetail  === 'true'" class="holidayDetail">
-    <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-      [enviromentUrl]='urlEnviPaging' [arrCritObj]='arrCrit' (result)="getResult($event)"></app-search>
+    <lib-UCSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+      [enviromentUrl]='urlEnviPaging' [arrCritObj]='arrCrit' (result)="getResult($event)"></lib-UCSearch>
   </div>
 </div>
 
 <div *ngIf="editDetail  === 'true'" class="holidayDetail">
-  <div [hidden]="resultData?.data == null">
+  <div [hidden]="resultDataSearch?.data == null">
     <table class="table table-responsive-md text-center table-hover">
       <thead>
         <tr class="table-header">
@@ -85,7 +85,7 @@
         </tr>
       </tbody>
     </table>
-    <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+    <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
   </div>
   <i class="fa fa-plus-circle" [routerLink]="['/commonSetting/holiday/detail']"
     [queryParams]="{holidaySchmHId:holidaySchmHId}"

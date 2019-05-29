@@ -16,6 +16,10 @@ import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.c
 import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
 import { RoleFormFeatureComponent } from 'app/system-setting/role/role-form-feature/role-form-feature.component';
 import { UserChangePasswordComponent } from 'app/system-setting/user/user-change-password/user-change-password.component';
+import { RoleFormTreeComponent } from 'app/system-setting/role/role-form-tree/role-form-tree.component';
+import { TreeViewModule } from '@progress/kendo-angular-treeview';
+import { RoleFormFeaturePagingComponent } from './role/role-form-feature-paging/role-form-feature-paging.component';
+
 
 @NgModule({
   imports: [
@@ -25,7 +29,8 @@ import { UserChangePasswordComponent } from 'app/system-setting/user/user-change
     HttpModule,
     NgbModule,
     SharingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TreeViewModule
   ],
   declarations: [
     UserPagingComponent,
@@ -37,7 +42,9 @@ import { UserChangePasswordComponent } from 'app/system-setting/user/user-change
     RoleUserComponent,
     RoleFormComponent,
     RoleFormFeatureComponent,
-    UserChangePasswordComponent
+    UserChangePasswordComponent,
+    RoleFormTreeComponent,
+    RoleFormFeaturePagingComponent
   ],
   providers: [
     {

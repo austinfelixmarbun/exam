@@ -1,27 +1,23 @@
 import { Router } from "@angular/router";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { NgbPaginationConfig } from "@ng-bootstrap/ng-bootstrap";
-import { AdInsServiceService } from "app/ad-ins-service.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { SearchComponent } from "app/shared/search/search.component";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { NgxSpinnerService } from "ngx-spinner";
-import { Http } from "@angular/http";
-import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { environment } from "environments/environment";
 import { RefUserObj } from "app/shared/model/RefUserObj.Model";
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from "@angular/common";
 
 @Component({
   selector: "app-user-paging",
   templateUrl: "./user-paging.component.html",
-  providers: [NGXToastrService, NGXToastrService, ExcelService]
+  providers: [NGXToastrService, ExcelService, DecimalPipe]
 })
 export class UserPagingComponent implements OnInit {
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchUser.json";
   resultData: string;
   pageNow: any;
@@ -37,11 +33,7 @@ export class UserPagingComponent implements OnInit {
   urlQryPaging: string = AdInsConstant.GetRefUserPaging;
   urlEnviPaging : string = environment.foundationUrl;
   constructor(
-    private http: Http,
-    private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private excelService: ExcelService,
     private https: HttpClient,
     private router: Router
   ) {}
@@ -84,19 +76,7 @@ export class UserPagingComponent implements OnInit {
       };
     }
     this.searchComponent
-      .search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        response => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        error => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+      .search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   initiateForm() {}
@@ -113,19 +93,7 @@ export class UserPagingComponent implements OnInit {
       value: this.orderByValue
     };
     this.searchComponent
-      .search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        response => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        error => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+      .search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   resetPassword(id: any) {

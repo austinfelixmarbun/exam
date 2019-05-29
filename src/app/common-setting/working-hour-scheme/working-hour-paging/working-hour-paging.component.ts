@@ -1,22 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
-import { SearchComponent } from 'app/shared/search/search.component';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-working-hour-paging',
   templateUrl: './working-hour-paging.component.html',
   styleUrls: ['./working-hour-paging.component.scss'],
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class WorkingHourPagingComponent implements OnInit {
 
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
-  @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
   urlJson: string = "./assets/search/searchWorkingHour.json";
   resultData: string;
   pageNow: any;

@@ -1,14 +1,15 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NgbModal, ModalDismissReasons, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-lookup-ref-bank',
   templateUrl: './lookup-ref-bank.component.html',
-  providers: [NgbPaginationConfig]
+  providers: [NgbPaginationConfig, DecimalPipe]
 })
 export class LookupRefBankComponent implements OnInit {
 
@@ -18,8 +19,8 @@ export class LookupRefBankComponent implements OnInit {
   @Input() nameSelect: any = "Search ...";
   @Input() codeSelect: any;
   @Input() jsonSelect:string;
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild('content') contentTemplate;
 
   configuration: any;

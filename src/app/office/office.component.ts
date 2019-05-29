@@ -1,12 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
-import { TranslateService } from '@ngx-translate/core';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/OfficeObj.model';
@@ -39,8 +35,7 @@ export class OfficeComponent implements OnInit {
 
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private httpClient: HttpClient, private spinner: NgxSpinnerService,
-    private toastr: NGXToastrService, private adInsService: AdInsServiceService) {
+  constructor(private httpClient: HttpClient, private toastr: NGXToastrService) {
   }
 
   ngOnInit() {

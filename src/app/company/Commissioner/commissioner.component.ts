@@ -1,26 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { ActivatedRoute } from '@angular/router';
 import { CoyCommissionerObj } from 'app/shared/model/CoyCommissionerObj.Model';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-commissioner',
   templateUrl: './commissioner.component.html',
-  providers: [NgbPaginationConfig, NGXToastrService]
+  providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe]
 })
 export class CommissionerComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
     urlJson: string = "./assets/search/searchCommissioner.json";
     resultData: string;
     pageNow: any;
@@ -41,7 +40,7 @@ export class CommissionerComponent implements OnInit {
     foundationUrl: string = environment.foundationUrl;
     urlEnviPaging : string = environment.foundationUrl;
     refCoyId : any;
-    constructor(private http: HttpClient,private route: ActivatedRoute, private spinner: NgxSpinnerService, private service: NGXToastrService, private adInsService: AdInsServiceService) {
+    constructor(private http: HttpClient,private route: ActivatedRoute) {
       this.route.queryParams.subscribe(params => {
         this.refCoyId = params["refCoyId"];
     })

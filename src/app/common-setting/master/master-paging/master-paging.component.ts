@@ -2,21 +2,22 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-master-paging',
   templateUrl: './master-paging.component.html',
-  providers: [NGXToastrService, NGXToastrService]
+  providers: [NGXToastrService, NGXToastrService, DecimalPipe]
 })
 export class MasterPagingComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = './assets/search/searchMaster.json';
   resultData: string;
   pageNow: any;
@@ -77,19 +78,7 @@ export class MasterPagingComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit);
   }
 
   initiateForm() {
@@ -117,19 +106,7 @@ export class MasterPagingComponent implements OnInit {
               value: this.orderByValue
             }
           }
-          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
-            .subscribe(
-              (response) => {
-                console.log("Success");
-                this.resultData = response;
-                this.totalData = response.returnObject.count;
-                console.log(this.resultData);
-              },
-              (error) => {
-                console.log("Error");
-                console.log(error);
-              }
-            );
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit);
         });
     }
   }
@@ -146,19 +123,7 @@ export class MasterPagingComponent implements OnInit {
       value: this.orderByValue
     }
     console.log(this.apiUrl);
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          this.service.typeErrorCustom(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit);
   }
 
 }

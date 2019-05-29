@@ -9,30 +9,30 @@
               <div class="form-body">
                 <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Organization Information</h4>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="orgName">Organization Name</label>
+                  <label class="col-md-3 label-control adInsLabel" for="orgName">Organization Name</label>
                   <div class="col-md-9">
-                    <input type="text" id="orgName" class="form-control" required name="orgName" [(ngModel)]="orgName"
-                      #OrgName="ngModel" [ngClass]="{ 'is-invalid': OrgAddEditForm.submitted && OrgName.invalid }">
+                    <input type="text" id="orgName" class="form-control adInsInput" name="orgName" [(ngModel)]="orgName"
+                      #OrgName="ngModel" required [ngClass]="{ 'is-invalid': OrgAddEditForm.submitted && OrgName.invalid }">
                       <div *ngIf="OrgAddEditForm.submitted && OrgName.invalid" class="invalid-feedback">
-                        <div *ngIf="OrgName.errors.required">Job Title Code is required</div>
+                        <div *ngIf="OrgName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                       </div>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="hierarchyNo">Hierarchy No</label>
+                  <label class="col-md-3 label-control adInsLabel" for="hierarchyNo">Hierarchy No</label>
                   <div class="col-md-9">
-                    <input type="text" id="hierarchyNo" class="form-control" required name="hierarchyNo"
-                      [(ngModel)]="hierarchyNo" #HierarchyNo="ngModel"
+                    <input type="text" id="hierarchyNo" class="form-control adInsInput" name="hierarchyNo"
+                      [(ngModel)]="hierarchyNo" required #HierarchyNo="ngModel"
                       [ngClass]="{ 'is-invalid': OrgAddEditForm.submitted && HierarchyNo.invalid }">
                       <div *ngIf="OrgAddEditForm.submitted && HierarchyNo.invalid" class="invalid-feedback">
-                        <div *ngIf="HierarchyNo.errors.required">Job Title Code is required</div>
+                        <div *ngIf="HierarchyNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
                       </div>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="parentId">Parent Organization</label>
+                  <label class="col-md-3 label-control adInsLabel" for="parentId">Parent Organization</label>
                   <div class="col-md-9">
-                    <select id="parentId" name="parentId" class="form-control" [(ngModel)]="parentId" required>
+                    <select id="parentId" class="form-control adInsInput" name="parentId" [(ngModel)]="parentId" required>
                       <option [value]="" selected="None">None</option>
                       <option *ngFor="let item of parents?.returnObject" [value]="item.refOrgId">{{item.orgName}}
                       </option>
@@ -40,7 +40,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" for="isActive">Active Status</label>
+                  <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
                   <div class="custom-control custom-checkbox m-0">
                     <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                       [checked]="isActive">

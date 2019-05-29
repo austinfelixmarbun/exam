@@ -8,76 +8,76 @@
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Currency Information</h4>
               <div class="form-group row">
-                <label class="col-md-3 label-control" translate>Currency Code </label>
+                <label class="col-md-3 label-control adInsLabel" translate>Currency Code </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" name="currCode" required [(ngModel)]="currCode"
+                  <input type="text" class="form-control adInsInput" name="currCode" required [(ngModel)]="currCode"
                     #CurrCode="ngModel" maxlength="5"
                     [ngClass]="{ 'is-invalid': (CurrReqForm.submitted || CurrCode.touched || CurrCode.dirty) && CurrCode.invalid }">
                   <div *ngIf="(CurrReqForm.submitted || CurrCode.touched || CurrCode.dirty) && CurrCode.invalid"
                     class="invalid-feedback">
-                    <div *ngIf="CurrCode.errors.required" translate>This field is required</div>
+                    <div *ngIf="CurrCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" translate>Currency </label>
+                <label class="col-md-3 label-control adInsLabel" translate>Currency </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" name="currName" required [(ngModel)]="currName"
+                  <input type="text" class="form-control adInsInput" name="currName" required [(ngModel)]="currName"
                     #CurrName="ngModel"
                     [ngClass]="{ 'is-invalid': (CurrReqForm.submitted || CurrName.touched || CurrName.dirty) && CurrName.invalid }">
                   <div *ngIf="(CurrReqForm.submitted || CurrName.touched || CurrName.dirty) && CurrName.invalid"
                     class="invalid-feedback">
-                    <div *ngIf="CurrName.errors.required" translate>This field is required</div>
+                    <div *ngIf="CurrName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" translate>Rounded Amount </label>
+                <label class="col-md-3 label-control adInsLabel" translate>Rounded Amount </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" name="roundedAmt" required [(ngModel)]="roundedAmt"
+                  <input type="text" class="form-control adInsInput" name="roundedAmt" required [(ngModel)]="roundedAmt"
                     #RoundedAmt="ngModel" maxlength="1"
                     [ngClass]="{ 'is-invalid': (CurrReqForm.submitted || RoundedAmt.touched || RoundedAmt.dirty) && RoundedAmt.invalid }">
                   <div *ngIf="(CurrReqForm.submitted || RoundedAmt.touched || RoundedAmt.dirty) && RoundedAmt.invalid"
                     class="invalid-feedback">
-                    <div *ngIf="RoundedAmt.errors.required" translate>This field is required</div>
+                    <div *ngIf="RoundedAmt.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" translate>Minimum Refund Amount </label>
+                <label class="col-md-3 label-control adInsLabel" translate>Minimum Refund Amount </label>
                 <div class="col-md-9">
-                  <input type="number" class="form-control" name="minRefundAmt" required [(ngModel)]="minRefundAmt"
+                  <input type="number" class="form-control adInsInput" name="minRefundAmt" required [(ngModel)]="minRefundAmt"
                     #MinRefundAmt="ngModel"
                     [ngClass]="{ 'is-invalid': (CurrReqForm.submitted || MinRefundAmt.touched || MinRefundAmt.dirty) && MinRefundAmt.invalid }">
                   <div
                     *ngIf="(CurrReqForm.submitted || MinRefundAmt.touched || MinRefundAmt.dirty) && MinRefundAmt.invalid"
                     class="invalid-feedback">
-                    <div *ngIf="MinRefundAmt.errors.required" translate>This field is required</div>
+                    <div *ngIf="MinRefundAmt.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" translate>COF Scheme </label>
+                <label class="col-md-3 label-control adInsLabel" translate>COF Scheme </label>
                 <div class="col-md-9">
-                  <select class="form-control" name="cofId" [(ngModel)]="cofId" #CofId="ngModel">
+                  <select class="form-control adInsInput" name="cofId" [(ngModel)]="cofId" #CofId="ngModel">
                     <option *ngFor="let oc of COFSchm" value="{{oc.masterCode}}">{{oc.descr}}
                     </option>
                   </select>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" translate>BI Code </label>
+                <label class="col-md-3 label-control adInsLabel" translate>BI Code </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" name="regRptCode" required [(ngModel)]="regRptCode" #RegRptCode="ngModel"
+                  <input type="text" class="form-control adInsInput" name="regRptCode" required [(ngModel)]="regRptCode" #RegRptCode="ngModel"
                     [ngClass]="{ 'is-invalid': (CurrReqForm.submitted || RegRptCode.touched || RegRptCode.dirty) && RegRptCode.invalid }">
                   <div *ngIf="(CurrReqForm.submitted || RegRptCode.touched || RegRptCode.dirty) && RegRptCode.invalid"
                     class="invalid-feedback">
-                    <div *ngIf="RegRptCode.errors.required" translate>This field is required</div>
+                    <div *ngIf="RegRptCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" translate>Active </label>
+                <label class="col-md-3 label-control adInsLabel" translate>Active </label>
                 <div class="col-md-9">
                   <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                     (change)="toggleActive($event)" name="isActive">
@@ -101,50 +101,50 @@
               <div class="form-body">
                 <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Exchange Rate</h4>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" translate>Currency Code </label>
+                  <label class="col-md-3 label-control adInsLabel" translate>Currency Code </label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control" name="currCode" required [(ngModel)]="currCode"
+                    <input type="text" class="form-control adInsInput" name="currCode" required [(ngModel)]="currCode"
                       #CurrCode="ngModel" maxlength="5" readonly
                       [ngClass]="{ 'is-invalid': (RateReqForm.submitted || CurrCode.touched || CurrCode.dirty) && CurrCode.invalid }">
                     <div *ngIf="(RateReqForm.submitted || CurrCode.touched || CurrCode.dirty) && CurrCode.invalid"
                       class="invalid-feedback">
-                      <div *ngIf="CurrCode.errors.required" translate>This field is required</div>
+                      <div *ngIf="CurrCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" translate>Currency </label>
+                  <label class="col-md-3 label-control adInsLabel" translate>Currency </label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control" name="currName" required [(ngModel)]="currName"
+                    <input type="text" class="form-control adInsInput" name="currName" required [(ngModel)]="currName"
                       #CurrName="ngModel" readonly
                       [ngClass]="{ 'is-invalid': (RateReqForm.submitted || CurrName.touched || CurrName.dirty) && CurrName.invalid }">
                     <div *ngIf="(RateReqForm.submitted || CurrName.touched || CurrName.dirty) && CurrName.invalid"
                       class="invalid-feedback">
-                      <div *ngIf="CurrName.errors.required" translate>This field is required</div>
+                      <div *ngIf="CurrName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" translate>Currency Date: </label>
+                  <label class="col-md-3 label-control adInsLabel" translate>Currency Date: </label>
                   <div class="col-md-9">
-                    <input type="date" class="form-control" name="currDt" required [(ngModel)]="currDt"
+                    <input type="date" class="form-control adInsInput" name="currDt" required [(ngModel)]="currDt"
                       #CurrDt="ngModel" readonly [ngClass]="{ 'is-invalid': (RateReqForm.submitted || CurrDt.touched || CurrDt.dirty) && CurrDt.invalid }">
                     <div *ngIf="(RateReqForm.submitted || CurrDt.touched || CurrDt.dirty) && CurrDt.invalid"
                       class="invalid-feedback">
-                      <div *ngIf="CurrDt.errors.required" translate>This field is required</div>
+                      <div *ngIf="CurrDt.errors.required" class="adInsReqMsg" translate>This field is required</div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control" translate>Exchange Rate </label>
+                  <label class="col-md-3 label-control adInsLabel" translate>Exchange Rate </label>
                   <div class="col-md-9">
-                    <input type="number" class="form-control" name="exchangeRateAmt" required [(ngModel)]="exchangeRateAmt"
+                    <input type="number" class="form-control adInsInput" name="exchangeRateAmt" required [(ngModel)]="exchangeRateAmt"
                       #ExchangeRateAmt="ngModel"
                       [ngClass]="{ 'is-invalid': (RateReqForm.submitted || ExchangeRateAmt.touched || ExchangeRateAmt.dirty) && ExchangeRateAmt.invalid }">
                     <div
                       *ngIf="(RateReqForm.submitted || ExchangeRateAmt.touched || ExchangeRateAmt.dirty) && ExchangeRateAmt.invalid"
                       class="invalid-feedback">
-                      <div *ngIf="ExchangeRateAmt.errors.required" translate>This field is required</div>
+                      <div *ngIf="ExchangeRateAmt.errors.required" class="adInsReqMsg" translate>This field is required</div>
                     </div>
                   </div>
                 </div>

@@ -2,28 +2,25 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from "@angular/common";
+import { ActivatedRoute } from '@angular/router';
+import { Location, DecimalPipe } from "@angular/common";
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 
 @Component({
   selector: 'app-organization-model-paging',
   templateUrl: './organization-model-paging.component.html',
-  providers: [NGXToastrService, NGXToastrService, ExcelService]
+  providers: [NGXToastrService, NGXToastrService, ExcelService, DecimalPipe]
 })
 export class OrganizationModelPagingComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = './assets/search/searchOrgModel.json';
   resultData: string;
   pageNow: any;
@@ -44,17 +41,7 @@ export class OrganizationModelPagingComponent implements OnInit {
   urlEnviPaging : string = environment.foundationUrl;
   addCrit: CriteriaObj[];
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private http: Http,
-    private spinner: NgxSpinnerService,
-    private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private excelService: ExcelService,
-    private https: HttpClient,
-    private location: Location
-  ) {
+  constructor(private route: ActivatedRoute, private service: NGXToastrService, private https: HttpClient, private location: Location) {
     this.route.queryParams.subscribe(params => {
       if (params['refOrgId'] != null) {
         this.refOrgId = +params['refOrgId'];
@@ -99,18 +86,7 @@ export class OrganizationModelPagingComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit);
   }
 
   initiateForm() {
@@ -151,19 +127,7 @@ export class OrganizationModelPagingComponent implements OnInit {
               value: this.orderByValue
             }
           }
-          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
-            .subscribe(
-              (response) => {
-                console.log("Success");
-                this.resultData = response;
-                this.totalData = response.returnObject.count;
-                console.log(this.resultData);
-              },
-              (error) => {
-                console.log("Error");
-                this.service.typeErrorCustom(error);
-              }
-            );
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit);
         });
     }
   }
@@ -179,19 +143,7 @@ export class OrganizationModelPagingComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit);
   }
 
   Back(): void {

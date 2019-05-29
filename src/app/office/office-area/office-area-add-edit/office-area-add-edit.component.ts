@@ -2,7 +2,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';

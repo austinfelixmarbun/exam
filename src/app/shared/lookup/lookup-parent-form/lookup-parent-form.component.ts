@@ -1,31 +1,32 @@
 import { Component, OnInit, Input, ViewChild, ViewChildren } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { environment } from 'environments/environment';
 import { NgForm, ControlContainer } from '@angular/forms';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from '@angular/common';
 
 
 @Component({
     selector: 'app-lookup-parent-form',
     templateUrl: './lookup-parent-form.component.html',
-    viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
+    viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
+    providers: [DecimalPipe]
 })
 export class LookupParentFormComponent implements OnInit {
 
     constructor(private modalService: NgbModal) { }
 
-    urlJson: string = "./assets/lookup/lookupParentForm.json";
+    @Input() urlJson: string = "./assets/lookup/lookupParentForm.json";
     urlQryPaging: string = AdInsConstant.GetRefFormPaging;
     urlEnviPaging : string = environment.foundationUrl;
-    @Input() _url: string;
     @Input() nameSelect: any = "Search ...";
     @Input() idSelect: any;
     @Input() jsonSelect: string;
-    @ViewChild(SearchComponent) searchComponent;
+    @ViewChild(UCSearchComponent) searchComponent;
     @ViewChild('content') contentTemplate;
-    @ViewChild(UCGridFooterComponent) ucgridFooter;
+    @ViewChild(UcgridfooterComponent) ucgridFooter;
 
     EmployeeName: any;
     EmployeeId: any;

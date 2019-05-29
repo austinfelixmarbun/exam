@@ -8,7 +8,7 @@
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Master Information </h4>
             <br>
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="refMasterTypeCodeModule">Master Type</label>
+              <label class="col-md-3 label-control adInsLabel" for="refMasterTypeCodeModule">Master Type</label>
               <div class="col-md-9">
                 <select id="refMasterTypeCodeModule" name="refMasterTypeCodeModule" class="form-control"
                   [(ngModel)]="refMasterTypeCodeModule" #refMasterTypeCode="ngModel"
@@ -19,44 +19,44 @@
                   </option>
                 </select>
                 <div *ngIf="MasterAddEditForm.submitted && refMasterTypeCode.invalid" class="invalid-feedback">
-                  <div *ngIf="refMasterTypeCode.errors.required">Master Type is required</div>
+                  <div *ngIf="refMasterTypeCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
 
 
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="masterCodeModel">Master Code</label>
+              <label class="col-md-3 label-control adInsLabel" for="masterCodeModel">Master Code</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="masterCodeModel" required [(ngModel)]="masterCodeModel"
+                <input type="text" class="form-control adInsInput" name="masterCodeModel" required [(ngModel)]="masterCodeModel"
                   #masterCode="ngModel" [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && masterCode.invalid }"
                   [attr.disabled]="type === 'edit' ? true : null">
                 <div *ngIf="MasterAddEditForm.submitted && masterCode.invalid" class="invalid-feedback">
-                  <div *ngIf="masterCode.errors.required">Master Code is required</div>
+                  <div *ngIf="masterCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="descrModel">Description</label>
+              <label class="col-md-3 label-control adInsLabel" for="descrModel">Description</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="descrModel" required [(ngModel)]="descrModel"
+                <input type="text" class="form-control adInsInput" name="descrModel" required [(ngModel)]="descrModel"
                   #descr="ngModel" [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && descr.invalid }">
                 <div *ngIf="MasterAddEditForm.submitted && descr.invalid" class="invalid-feedback">
-                  <div *ngIf="descr.errors.required">Description is required</div>
+                  <div *ngIf="descr.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="sandiBI">Sandi BI</label>
+              <label class="col-md-3 label-control adInsLabel" for="sandiBI">Sandi BI</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="sandiBI" required [(ngModel)]="sandiBI" #descr="ngModel">
+                <input type="text" class="form-control adInsInput" name="sandiBI" required [(ngModel)]="sandiBI" #descr="ngModel">
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control" for="isActive">Active Status</label>
+              <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
               <div class="custom-control custom-checkbox m-0">
                 <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                   [checked]="isActive">

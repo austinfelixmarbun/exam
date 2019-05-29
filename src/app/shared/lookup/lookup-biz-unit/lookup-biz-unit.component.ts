@@ -1,46 +1,32 @@
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { environment } from "environments/environment";
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewChild,
-  ViewChildren
-} from "@angular/core";
-import {
-  NgbModal,
-  ModalDismissReasons,
-  NgbActiveModal
-} from "@ng-bootstrap/ng-bootstrap";
-import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { AdInsServiceService } from "app/ad-ins-service.service";
-import { formatDate } from "@angular/common";
-import { SearchComponent } from "app/shared/search/search.component";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { DecimalPipe } from "@angular/common";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { UCGridFooterComponent } from "app/shared/UserControl/ucgrid-footer/ucgrid-footer.component";
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 
 @Component({
   selector: "app-lookup-biz-unit",
   templateUrl: "./lookup-biz-unit.component.html",
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class LookupBizUnitComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
 
-  urlJson: string = "./assets/lookup/lookupBizUnit.json";
+  @Input() urlJson: string = "./assets/lookup/lookupBizUnit.json";
   urlQryPaging: string = AdInsConstant.GetBusinessUnitPaging;
   urlEnviPaging : string = environment.foundationUrl;
-  @Input() _url: string;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
   @Input() addCritInput: CriteriaObj[] = null;
   @Input() isRequired: any;
-  @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild("content") contentTemplate;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
 
   bizUnitName: any;
   refBizUnitId: any;

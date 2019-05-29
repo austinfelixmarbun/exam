@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -8,18 +7,20 @@ import { Http } from '@angular/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-zipcode',
   templateUrl: './zipcode.component.html',
   styleUrls: ['./zipcode.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService]
+  providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe]
 })
 export class ZipcodeComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   editUrl: any;
   zipcodeObj: RefZipcodeObj;
   urlJson: string = "./assets/search/searchRefZipcode.json";

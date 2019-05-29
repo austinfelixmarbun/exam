@@ -3,19 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-office-area-paging',
   templateUrl: './office-area-paging.component.html',
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class OfficeAreaPagingComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = './assets/search/searchOfficeArea.json';
   resultData: string;
   pageNow: any;

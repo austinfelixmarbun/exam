@@ -1,27 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { environment } from 'environments/environment';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-master-type-paging',
   templateUrl: './master-type-paging.component.html',
-  providers: [NGXToastrService, NGXToastrService, ExcelService]
+  providers: [NGXToastrService, ExcelService, DecimalPipe]
 })
 export class MasterTypePagingComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = './assets/search/searchRefMasterType.json';
   resultData: string;
   pageNow: any;
@@ -40,11 +36,7 @@ export class MasterTypePagingComponent implements OnInit {
   urlEnviPaging : string = environment.foundationUrl;
 
   constructor(
-    private http: Http,
-    private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
-    private excelService: ExcelService,
     private https: HttpClient
   ) { }
 
@@ -85,19 +77,7 @@ export class MasterTypePagingComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response.returnObject;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   initiateForm() {
@@ -120,19 +100,7 @@ export class MasterTypePagingComponent implements OnInit {
               value: this.orderByValue
             }
           }
-          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-            .subscribe(
-              (response) => {
-                console.log("Success");
-                this.resultData = response;
-                this.totalData = response.returnObject.count;
-                console.log(this.resultData);
-              },
-              (error) => {
-                console.log("Error");
-                console.log(error);
-              }
-            );
+          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
         });
     }
   }
@@ -148,19 +116,7 @@ export class MasterTypePagingComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.resultData = response;
-          this.totalData = response.returnObject.count;
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
 }

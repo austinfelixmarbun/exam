@@ -1,15 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -42,7 +38,7 @@ export class AddMenuSettingComponent implements OnInit {
     module : any;
     moduleList : any; 
 
-    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
+    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refFormId"];
             this.mode = params["mode"];

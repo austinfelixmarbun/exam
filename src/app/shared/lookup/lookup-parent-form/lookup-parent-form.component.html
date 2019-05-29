@@ -11,7 +11,7 @@
             </span>
         </div>
         <!-- <div *ngIf=" (LookupInput.touched || LookupInput.dirty) && LookupInput.invalid" class="invalid-feedback">
-            <div *ngIf="LookupInput.errors.required">Parent Form is required</div>
+            <div *ngIf="LookupInput.errors.required" class="adInsReqMsg" translate>This field is required</div>
         </div> -->
     </div>
 </fieldset>
@@ -23,8 +23,8 @@
         </button>
     </div>
     <div class="modal-body">
-        <app-search #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-            [enviromentUrl]='urlEnviPaging' (result)="getResult(ucgridFooter, $event)"></app-search>
+        <lib-UCSearch #lookupSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+            [enviromentUrl]='urlEnviPaging' (result)="getResult(ucgridFooter, $event)"></lib-UCSearch>
 
         <div [hidden]="resultData?.data == null">
             <table class="table table-responsive-md text-center table-hover">
@@ -50,7 +50,7 @@
                     </tr>
                 </tbody>
             </table>
-            <app-ucgrid-footer #ucgridFooter (select)="onSelect(lookupSearch,$event)"></app-ucgrid-footer>
+            <lib-ucgridfooter #ucgridFooter (select)="onSelect(lookupSearch,$event)"></lib-ucgridfooter>
         </div>
     </div>
 </ng-template>

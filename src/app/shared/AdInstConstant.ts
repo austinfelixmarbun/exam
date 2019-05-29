@@ -199,6 +199,10 @@ export class AdInsConstant {
     public static GetAllAuthFormsByRefRoleId = "/MenuManagement/GetAllAuthFormsByRefRoleId";
     public static GetAuthByRefFormIdAndRefRoleId = "/MenuManagement/GetAuthByRefFormIdAndRefRoleId";
     public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
+    public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
+    public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
+
+
 
     //FORM FEATURE
     public static GetListRefFeature = "/RefFeature/GetListRefFeature";

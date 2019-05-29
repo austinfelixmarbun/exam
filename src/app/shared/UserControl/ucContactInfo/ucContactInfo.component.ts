@@ -1,9 +1,6 @@
-import { Component, OnInit, Input, Inject, Renderer2 } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Input } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import 'rxjs/add/operator/map';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
-import { DOCUMENT } from '@angular/platform-browser';
 import { NgForm, ControlContainer } from '@angular/forms';
 @Component({
   selector: 'app-ucContactInfo',
@@ -12,7 +9,7 @@ import { NgForm, ControlContainer } from '@angular/forms';
   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 export class UcContactInfoComponent implements OnInit {
-  constructor(private http: HttpClient, private adInsService: AdInsServiceService, private decimalPipe: DecimalPipe, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
+  constructor() {
   }
   ngOnInit() { }
   @Input() resultData: any;

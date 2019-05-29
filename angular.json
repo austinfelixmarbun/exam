@@ -22,6 +22,9 @@
               "src/favicon.ico"
             ],
             "styles": [
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
               "src/assets/css/prism.min.css",
               "node_modules/sweetalert2/dist/sweetalert2.min.css",
               "src/assets/css/wizard.css",
@@ -100,6 +103,9 @@
               "src/assets/js/perfect-scrollbar.jquery.min.js"
             ],
             "styles": [
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
               "src/assets/css/prism.min.css",
               "node_modules/sweetalert2/dist/sweetalert2.min.css",
               "src/assets/css/wizard.css",

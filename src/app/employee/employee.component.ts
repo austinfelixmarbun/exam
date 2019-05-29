@@ -2,27 +2,26 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
-import { Http } from '@angular/http';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService, ExcelService] // add NgbPaginationConfig to the component providers
+  providers: [NgbPaginationConfig, NGXToastrService, ExcelService, DecimalPipe] // add NgbPaginationConfig to the component providers
 })
 export class EmployeeComponent implements OnInit {
 
   //** Start Query Paging */
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlQryPaging : string = AdInsConstant.GetListEmployee;
   urlEnviPaging : string = environment.foundationUrl;
   //** End Query Paging */
@@ -41,7 +40,7 @@ export class EmployeeComponent implements OnInit {
   orderByValue: boolean = true;
 
   foundationUrl: string = environment.foundationUrl;
-  constructor(private http: Http, private httpClient: HttpClient, private spinner: NgxSpinnerService, private toastr: NGXToastrService, private excelService: ExcelService, private https: HttpClient) { }
+  constructor(private httpClient: HttpClient, private toastr: NGXToastrService, private excelService: ExcelService, private https: HttpClient) { }
 
   initiateForm() {
     this.getJSON(this.urlJson).subscribe(data => {
@@ -121,8 +120,6 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-
-
   reset(){
     this.searchComponent.initiateForm();
   }
@@ -141,6 +138,11 @@ export class EmployeeComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  addToTemp(body: any) {
+    console.log(body);
+    console.log(body["tbody"]);
   }
 
   // Success Type

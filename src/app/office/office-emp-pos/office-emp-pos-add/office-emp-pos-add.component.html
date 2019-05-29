@@ -7,29 +7,29 @@
                   <div class="form-body">
                       <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Position Information</h4>
                       <div class="form-group row">
-                          <label class="col-md-3 label-control" translate>Employee No </label>
+                          <label class="col-md-3 label-control adInsLabel" translate>Employee No </label>
                           <div class="col-md-9">
-                              <input type="text" class="form-control" name="empNo" required readonly
+                              <input type="text" class="form-control adInsInput" name="empNo" required readonly
                                   [(ngModel)]="empNo" #EmpNo="ngModel"
                                   [ngClass]="{ 'is-invalid': EmpPositionForm.submitted && EmpNo.invalid }">
                               <div *ngIf="EmpPositionForm.submitted && EmpNo.invalid" class="invalid-feedback">
-                                  <div *ngIf="EmpNo.errors.required" translate>This field is required</div>
+                                  <div *ngIf="EmpNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
                               </div>
                           </div>
                       </div>
                       <div class="form-group row">
-                          <label class="col-md-3 label-control" translate>Employee Name </label>
+                          <label class="col-md-3 label-control adInsLabel" translate>Employee Name </label>
                           <div class="col-md-9">
-                              <input type="text" class="form-control" name="empName" required readonly
+                              <input type="text" class="form-control adInsInput" name="empName" required readonly
                                   [(ngModel)]="empName" #EmpName="ngModel"
                                   [ngClass]="{ 'is-invalid': EmpPositionForm.submitted && EmpName.invalid }">
                               <div *ngIf="EmpPositionForm.submitted && EmpName.invalid" class="invalid-feedback">
-                                  <div *ngIf="EmpName.errors.required" translate>This field is required</div>
+                                  <div *ngIf="EmpName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                               </div>
                           </div>
                       </div>
                       <div class="form-group row">
-                          <label class="col-md-3 label-control" translate>Office Name </label>
+                          <label class="col-md-3 label-control adInsLabel" translate>Office Name </label>
                           <div class="col-md-9">
                               <select class="form-control" id="refOfficeId" name="refOfficeId" readonly
                                   [(ngModel)]="refOfficeId" #RefOfficeId="ngModel"
@@ -41,7 +41,7 @@
                           </div>
                       </div>
                       <div class="form-group row">
-                          <label class="col-md-3 label-control" translate>Business Unit Name </label>
+                          <label class="col-md-3 label-control adInsLabel" translate>Business Unit Name </label>
                           <div class="col-md-9">
                               <select class="form-control" id="refBizUnitId" name="refBizUnitId" required
                                   (change)="onChangeBiz($event.target.value)" #RefBizUnitId="ngModel"
@@ -54,7 +54,7 @@
                           </div>
                       </div>
                       <div class="form-group row">
-                          <label class="col-md-3 label-control" translate>Job Title </label>
+                          <label class="col-md-3 label-control adInsLabel" translate>Job Title </label>
                           <div class="col-md-9">
                               <select class="form-control" id="orgJobTitleId" name="orgJobTitleId" required
                                   #OrgJobTitleId="ngModel" [(ngModel)]="orgJobTitleId"
@@ -67,7 +67,7 @@
                           </div>
                       </div>
                       <div class="form-group row">
-                          <label class="col-md-3 label-control" translate>Supervisor </label>
+                          <label class="col-md-3 label-control adInsLabel" translate>Supervisor </label>
                           <div class="col-md-9">
                               <select class="form-control" id="superiorRefEmpId" name="superiorRefEmpId"
                                   [(ngModel)]="superiorRefEmpId" #SuperiorRefEmpId="ngModel">
@@ -78,26 +78,26 @@
                           </div>
                       </div>
                       <div class="form-group row">
-                          <label class="col-md-3 label-control" translate>Position Start Date </label>
+                          <label class="col-md-3 label-control adInsLabel" translate>Position Start Date </label>
                           <div class="col-md-9">
-                              <input type="date" id="positionStartDt" class="form-control" name="positionStartDt"
+                              <input type="date" id="positionStartDt" class="form-control adInsInput" name="positionStartDt"
                                   required [(ngModel)]="positionStartDt" #PositionStartDt="ngModel"
                                   [ngClass]="{ 'is-invalid': EmpPositionForm.submitted && PositionStartDt.invalid }">
                               <div *ngIf="EmpPositionForm.submitted && PositionStartDt.invalid"
                                   class="invalid-feedback">
-                                  <div *ngIf="PositionStartDt.errors.required" translate>This field is required</div>
+                                  <div *ngIf="PositionStartDt.errors.required" class="adInsReqMsg" translate>This field is required</div>
                               </div>
                           </div>
                       </div>
                       <div class="form-group row">
-                          <label class="col-md-3 label-control" translate>Position Finish Date </label>
+                          <label class="col-md-3 label-control adInsLabel" translate>Position Finish Date </label>
                           <div class="col-md-9">
-                              <input type="date" id="positionFinishDt" class="form-control" name="positionFinishDt"
+                              <input type="date" id="positionFinishDt" class="form-control adInsInput" name="positionFinishDt"
                                   [(ngModel)]="positionFinishDt" #PositionFinishDt="ngModel">
                           </div>
                       </div>
                       <div class="form-group row">
-                          <label class="col-md-3 label-control" translate>Active </label>
+                          <label class="col-md-3 label-control adInsLabel" translate>Active </label>
                           <div class="col-md-9">
                               <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                                   (change)="toggleActive($event)" name="isActive">

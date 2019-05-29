@@ -7,30 +7,30 @@
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Office Area </h4>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="areaCode">Area Code</label>
+                <label class="col-md-3 label-control adInsLabel" for="areaCode">Area Code</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" name="areaCode" required [(ngModel)]="areaCode"
+                  <input type="text" class="form-control adInsInput" name="areaCode" required [(ngModel)]="areaCode"
                     #AreaCode ="ngModel" [ngClass]="{ 'is-invalid': OfficeForm.submitted && AreaCode.invalid }"
                     [attr.disabled]="type === 'edit' ? true : null">
                   <div *ngIf="OfficeForm.submitted && AreaCode.invalid" class="invalid-feedback">
-                    <div *ngIf="AreaCode.errors.required">This is required</div>
+                    <div *ngIf="AreaCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="areaName">Area Name</label>
+                <label class="col-md-3 label-control adInsLabel" for="areaName">Area Name</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control" name="areaName" required [(ngModel)]="areaName"
+                  <input type="text" class="form-control adInsInput" name="areaName" required [(ngModel)]="areaName"
                     #AreaName="ngModel" [ngClass]="{ 'is-invalid': OfficeForm.submitted && AreaName.invalid }">
                   <div *ngIf="OfficeForm.submitted && AreaName.invalid" class="invalid-feedback">
-                    <div *ngIf="AreaName.errors.required">This is required</div>
+                    <div *ngIf="AreaName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="isActive">Active Status</label>
+                <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
                 <div class="custom-control custom-checkbox m-0">
                   <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                     [checked]="isActive">

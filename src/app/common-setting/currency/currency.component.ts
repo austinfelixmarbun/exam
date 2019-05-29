@@ -1,19 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CurrObj } from 'app/shared/model/CurrObj.Model';
 import { environment } from 'environments/environment';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-currency',
   templateUrl: './currency.component.html',
-  styleUrls: ['./currency.component.scss']
+  styleUrls: ['./currency.component.scss'],
+  providers: [DecimalPipe]
 })
 export class CurrencyComponent implements OnInit {
 
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
-  @ViewChild(SearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
   urlJson: string = "./assets/search/searchCurrency.json";
   resultData: string;
   pageNow: any;

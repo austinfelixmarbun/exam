@@ -3,24 +3,25 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 import { environment } from 'environments/environment';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-office-emp-pos',
   templateUrl: './office-emp-pos.component.html',
   styleUrls: ['./office-emp-pos.component.scss'],
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class OfficeEmpPosComponent implements OnInit {
 
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchEmpList.json";
   urlQryPaging : string = AdInsConstant.GetEmpPositionPaging;
   urlEnviPaging : string = environment.foundationUrl;
@@ -59,6 +60,7 @@ export class OfficeEmpPosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.pageNow = 1;
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
       critObj.DataType = 'Numeric'

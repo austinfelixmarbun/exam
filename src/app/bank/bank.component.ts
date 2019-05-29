@@ -1,24 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-//import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import {UCSearchComponent} from '@adins/ucsearch';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
-import { Http } from '@angular/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { HttpClient } from '@angular/common/http';
-import { UcgridfooterComponent} from '@adins/ucgridfooter';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { DecimalPipe } from '@angular/common';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
 
 @Component({
   selector: 'app-bank',
   templateUrl: './bank.component.html',
   styleUrls: ['./bank.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService,DecimalPipe]
+  providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe]
 })
 export class BankComponent implements OnInit {
 

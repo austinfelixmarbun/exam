@@ -1,11 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsServiceService } from 'app/ad-ins-service.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
@@ -18,7 +16,7 @@ import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 @Component({
   selector: 'app-user-role-detail',
   templateUrl: './user-role-detail.component.html',
-  providers: [NGXToastrService, NGXToastrService]
+  providers: [NGXToastrService]
 })
 export class UserRoleDetailComponent implements OnInit {
 
@@ -45,10 +43,8 @@ export class UserRoleDetailComponent implements OnInit {
 
 
   constructor(
-    private http: Http,
     private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private adInsService: AdInsServiceService,
     private httpClient: HttpClient,
     private route: ActivatedRoute,
     private location: Location,

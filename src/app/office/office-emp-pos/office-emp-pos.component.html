@@ -7,23 +7,23 @@
       <div class="px-3">
         <div class="form-body">
           <div class="form-group row" *ngIf="refEmpId != null">
-            <label class="col-md-3 label-control">Employee No. </label>
-            <label class="col-md-3 label-control">{{empNo}} </label>
-            <label class="col-md-3 label-control">Employee Name. </label>
-            <label class="col-md-3 label-control">{{empName}} </label>
+            <label class="col-md-3 label-control adInsLabel">Employee No. </label>
+            <label class="col-md-3 label-control adInsLabel">{{empNo}} </label>
+            <label class="col-md-3 label-control adInsLabel">Employee Name. </label>
+            <label class="col-md-3 label-control adInsLabel">{{empName}} </label>
           </div>
           <div class="form-group row" *ngIf="refOfficeId != null">
-            <label class="col-md-3 label-control">Office Code </label>
-            <label class="col-md-3 label-control">{{officeCode}} </label>
-            <label class="col-md-3 label-control">Office Name </label>
-            <label class="col-md-3 label-control">{{officeName}} </label>
+            <label class="col-md-3 label-control adInsLabel">Office Code </label>
+            <label class="col-md-3 label-control adInsLabel">{{officeCode}} </label>
+            <label class="col-md-3 label-control adInsLabel">Office Name </label>
+            <label class="col-md-3 label-control adInsLabel">{{officeName}} </label>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-    [enviromentUrl]='urlEnviPaging' [arrCritObj]='arrCrit' (result)="getResult($event)"></app-search>
+  <lib-UCSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+    [enviromentUrl]='urlEnviPaging' [arrCritObj]='arrCrit' (result)="getResult($event)"></lib-UCSearch>
 </div>
 
 <div [hidden]="resultData?.data == null">
@@ -66,7 +66,7 @@
     </tbody>
   </table>
 
-  <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+  <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
 </div>
 <i class="fa fa-plus-circle" [routerLink]="['/employee/employeePositionAddEdit']"
   [queryParams]="{refEmpId:refEmpId,empNo:empNo,empName:empName}"
