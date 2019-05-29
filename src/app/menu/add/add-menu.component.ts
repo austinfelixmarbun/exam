@@ -35,6 +35,9 @@ export class AddMenuSettingComponent implements OnInit {
     editUrl: any;
     result: any;
     hierarchyNo: any;
+    module : any;
+    moduleList : any; 
+
     constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refFormId"];
@@ -43,6 +46,14 @@ export class AddMenuSettingComponent implements OnInit {
     }
 
     ngOnInit() {
+        var moduleApi = this.foundationUrl + AdInsConstant.GetListRefModuleKeyValue;
+        var refFormObj = new RefFormObj();
+        this.http.post(moduleApi, refFormObj).subscribe(
+            (response) => {
+                this.moduleList = response['returnObject'];
+                this.module = this.moduleList[0].key;
+            }
+        )
         if (this.mode === "edit") {
             this.apiUrl = this.foundationUrl + AdInsConstant.GetRefFormByRefFormId;
             var refFormObj = new RefFormObj();
@@ -89,7 +100,7 @@ export class AddMenuSettingComponent implements OnInit {
             this.isHidden = false;
         }
         this.isExternalLink = data.isExternalLink;
-
+        this.module = data.refModuleId;
     }
 
     onChange(event, field) {
@@ -109,6 +120,7 @@ export class AddMenuSettingComponent implements OnInit {
         refForm.title = form.value.title;
         refForm.path = form.value.path;
         refForm.icon = form.value.icon;
+        refForm.refModuleId = this.module;
         if (this.hasSub === true) {
             refForm.class = "has-sub";
         }

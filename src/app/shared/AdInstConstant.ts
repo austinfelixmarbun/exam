@@ -3,6 +3,7 @@ import { formatDate } from "@angular/common";
 export class AdInsConstant {
     public static RestrictionLike = "Like";
     public static RestrictionEq = "Eq";
+    public static RestrictionNotIn = "NotIn";
     public static showData = "10,50,100";
     public static TimeoutSession = 6000000;
     public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
@@ -198,6 +199,10 @@ export class AdInsConstant {
     public static GetAllAuthFormsByRefRoleId = "/MenuManagement/GetAllAuthFormsByRefRoleId";
     public static GetAuthByRefFormIdAndRefRoleId = "/MenuManagement/GetAuthByRefFormIdAndRefRoleId";
     public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
+    public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
+    public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
+
+
 
     //FORM FEATURE
     public static GetListRefFeature = "/RefFeature/GetListRefFeature";
@@ -247,4 +252,7 @@ export class AdInsConstant {
     
     //QUEUE
     public static AddQueue = "http://R3App-Server/FOUNDATION/RabbitMq/AddQueue";
+    
+    //REF MODULE
+    public static GetListRefModuleKeyValue = "/RefModule/GetListRefModuleKeyValue";
 }

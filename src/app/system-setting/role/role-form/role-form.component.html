@@ -26,7 +26,7 @@
                   <table class="table table-responsive-md text-center table-hover">
                     <thead>
                       <tr class="table-header">
-                        <th>Action</th>
+                        <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll" name="CheckAll"></th>
                         <th><span translate class="thead-header" (click)="searchSort($event)" name='formCode'>Form Code
                           </span></th>
                         <th><span translate class="thead-header" (click)="searchSort($event)" name='title'>Title
@@ -41,7 +41,7 @@
                         <td>
                           <div *ngIf="listSelectedId.indexOf(item.refFormId) >- 1">
                             <input type="checkbox" id="checkSame" name="itemSame"
-                              (change)="Checked(item.refFormId,  $event.target.checked)" [checked]=true>
+                              (change)="Checked(item.refFormId,  $event.target.checked)" [checked]="true">
                           </div>
                           <div *ngIf="listSelectedId.indexOf(item.refFormId) < 0">
                             <input type="checkbox" id="checkDiff" name="itemDiff"
@@ -70,13 +70,44 @@
                 </div>
               </div>
               <div class="form-actions">
+                <button type="button" (click)="AddToTemp()" class="btn btn-raised btn-warning mr-1">
+                  <i class="fa fa-arrow-circle-left"></i> Add To Temp
+                </button>
                 <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
                   <i class="fa fa-arrow-circle-left"></i> Back
                 </button>
-
                 <button type="submit" class="btn btn-raised btn-primary">
                   <i class="fa fa-check-square-o"></i> Save
                 </button>
+              </div>
+              <div [hidden]="resultData?.data == null">
+                <table class="table table-responsive-md text-center table-hover">
+                  <thead>
+                    <tr class="table-header">
+                      <th><span translate class="thead-header" (click)="searchSort($event)" name='formCode'>Form Code
+                        </span></th>
+                      <th><span translate class="thead-header" (click)="searchSort($event)" name='title'>Title
+                        </span></th>
+                      <th><span translate class="thead-header" (click)="searchSort($event)" name='path'>Path</span>
+                      </th>
+                      <th translate>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of tempData;  let i = index">
+                      <td>{{item.formCode}}</td>
+                      <td class="text-left">{{item.title}}</td>
+                      <td class="text-left">{{item.path}}</td>
+                      <td>
+                        <div>
+                          <a class="success p-0" data-original-title="" title=""
+                            (click)="deleteFromTemp(item.refFormId)">
+                            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                          </a></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </form>
           </div>

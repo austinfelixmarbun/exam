@@ -9,6 +9,8 @@ import { Location, DecimalPipe } from "@angular/common";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { environment } from "environments/environment";
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { Checkbox } from 'primeng/primeng';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 
@@ -21,7 +23,7 @@ export class RoleFormComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   urlJson: string = "./assets/search/searchRefForm.json";
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -35,15 +37,16 @@ export class RoleFormComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
   urlQryPaging: string = AdInsConstant.GetRefFormPaging;
-  urlEnviPaging : string = environment.foundationUrl;
-
+  urlEnviPaging: string = environment.foundationUrl;
+  tempListId: Array<any> = [];
   refRoleId: any;
   check: any;
-
+  tempData: Array<any> = [];
   listSelectedId: Array<any> = [];
   listDeletedId: Array<any> = [];
-
-
+  checkboxAll = false;
+  
+  arrAddCrit = new Array<CriteriaObj>();
   form: FormGroup;
   data = [];
 
@@ -77,6 +80,7 @@ export class RoleFormComponent implements OnInit {
   }
 
   getResult(event) {
+    this.checkboxAll = false;
     console.log(event);
     var getAuthFormUrl: any = this.foundationUrl + AdInsConstant.GetAllAuthFormsByRefRoleId;
     var arrayPaging: Array<any> = [];
@@ -103,6 +107,9 @@ export class RoleFormComponent implements OnInit {
       error => {
         console.log(error);
         this.spinner.hide();
+
+
+
       }
     );
   }
@@ -203,5 +210,87 @@ export class RoleFormComponent implements OnInit {
     }
     console.log('Sel', this.listSelectedId);
     console.log('Del', this.listDeletedId);
+  }
+
+  SelectAll(condition) {
+    this.checkboxAll = condition;
+    console.log(condition);
+    if (condition) {
+      for (var i = 0; i < this.resultData.data.length; i++) {
+        if (this.listSelectedId.indexOf(this.resultData.data[i].refFormId) < 0) {
+          this.listSelectedId.push(this.resultData.data[i].refFormId);
+        }
+      }
+
+    } else {
+      for (var i = 0; i < this.resultData.data.length; i++) {
+        var index = this.listSelectedId.indexOf(this.resultData.data[i].refFormId);
+        if (index > -1) {
+          this.listSelectedId.splice(index, 1);
+        }
+      }
+    }
+    console.log(this.checkboxAll);
+    console.log(this.listSelectedId);
+  }
+
+  AddToTemp() {
+    this.checkboxAll = false;
+    console.log(this.resultData);
+    var value = "";
+    for(var i = 0; i < this.listSelectedId.length;i++){
+      this.tempListId.push(this.listSelectedId[i]);
+      
+    }
+    for (var i = 0; i < this.listSelectedId.length; i++) {
+      var object = this.resultData.data.find(x => x.refFormId == this.listSelectedId[i]);
+      this.tempData.push(object);
+    }
+    this.arrAddCrit = new Array<CriteriaObj>();
+    var addCrit = new CriteriaObj();
+    addCrit.DataType = "numeric";
+    addCrit.propName = "refFormId";
+    addCrit.restriction = AdInsConstant.RestrictionNotIn;
+    addCrit.listValue = this.tempListId;
+    this.arrAddCrit.push(addCrit);
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      };
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+
+    this.listSelectedId = [];
+    console.log(this.listSelectedId);
+    console.log(this.tempData);
+  }
+
+  deleteFromTemp(refFormId) {
+    var index = this.tempListId.indexOf(refFormId);
+    if (index > -1) {
+      this.tempListId.splice(index, 1);
+      this.tempData.splice(index, 1);
+    }
+    var value = "";
+    var addCrit = new CriteriaObj();
+    addCrit.DataType = "numeric";
+    addCrit.propName = "refFormId";
+    addCrit.restriction = AdInsConstant.RestrictionNotIn;
+    addCrit.listValue = this.tempListId;
+    this.arrAddCrit.push(addCrit);
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      };
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+    console.log("selectedID : " + this.listSelectedId)
+    console.log("templateID : " + this.tempListId);
+    console.log(this.tempData);
+    console.log(this.resultData.data);
   }
 }
