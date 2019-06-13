@@ -139,7 +139,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         } else {
             var req = request;
         }
-        return next.handle(req).pipe(
+        return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     if (event.body.isError == true) {

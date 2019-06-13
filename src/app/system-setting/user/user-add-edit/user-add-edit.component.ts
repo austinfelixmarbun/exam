@@ -33,7 +33,10 @@ export class UserAddEditComponent implements OnInit {
   RePassword: any;
   IsActive: any;
   RefUserId: any;
-  loggedInMethod: any = 'DB'
+  loggedInMethod: any = 'DB';
+  url: any = './assets/lookup/lookupEmp.json';
+  urlQryPaging: string = AdInsConstant.GetListEmployee;
+  urlEnviPaging : string = environment.foundationUrl;
 
   constructor(
     private router: Router,

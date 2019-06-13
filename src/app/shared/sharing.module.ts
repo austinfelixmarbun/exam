@@ -4,10 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { SearchComponent } from 'app/shared/search/search.component';
-import {LookupEmployeeComponent} from 'app/shared/lookup/lookup-employee/lookup-employee.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LookupzipcodeComponent } from 'app/shared/lookup/lookupzipcode/lookupzipcode.component';
-import { LookupDistrictComponent } from 'app/shared/lookup/lookup-district/lookup-district.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 import { LookupBizUnitComponent } from 'app/shared/lookup/lookup-biz-unit/lookup-biz-unit.component';
@@ -22,17 +20,19 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { FormEngineComponent } from './form-engine/form-engine.component';
 import { FormEngineModule } from '@adins/form-engine';
+import { LookupemployeeModule } from '@adins/lookupemployee';
+import { LookupdistrictModule } from '@adins/lookupdistrict';
 
 @NgModule({
     exports: [
         CommonModule,
         SearchComponent,
-        LookupEmployeeComponent,
+        LookupemployeeModule,
         LookupzipcodeComponent,
         NgbModule,
         LookupRefBankComponent,
         LookupRoleComponent,
-        LookupDistrictComponent,
+        LookupdistrictModule,
         LookupparentformModule,
         FormEngineComponent,
         UcAddressComponent,
@@ -58,11 +58,9 @@ import { FormEngineModule } from '@adins/form-engine';
     ],
     declarations: [
         SearchComponent,
-        LookupEmployeeComponent,
         LookupzipcodeComponent,
         LookupRefBankComponent,
         LookupRoleComponent,
-        LookupDistrictComponent,
         UcAddressComponent,
         FormEngineComponent,
         UCGridFooterComponent,

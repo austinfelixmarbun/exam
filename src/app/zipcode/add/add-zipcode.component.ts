@@ -8,6 +8,7 @@ import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm } from '@angular/forms';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
     selector: 'add-bank',
@@ -34,6 +35,10 @@ export class ZipcodeAddComponent implements OnInit {
     jsonSelect: string;
     provDistrictObj : RefProvDistrictObj;
     urlGetProvDistrict : string;
+    url: any = './assets/lookup/lookupDistrict.json';
+    urlQryPaging: string = AdInsConstant.GetRefProvDistrictPaging;
+    urlEnviPaging : string = environment.settingUrl;
+    crit : CriteriaObj[];
 
     constructor(private router: Router,private route: ActivatedRoute, private http: HttpClient) {
         this.route.queryParams.subscribe(params => {
