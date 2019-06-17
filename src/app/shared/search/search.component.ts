@@ -57,7 +57,11 @@ export class SearchComponent implements OnInit {
       this.countForm = data.component.length;
       console.log(this.countForm);
       this.isDataLoaded = true;
-      var i = 0;
+
+      var request = new RequestCriteriaObj();
+      var arrayCrit = new Array();
+      request.criteria = arrayCrit;
+
       for (var i = 0; i < this.countForm; i++) {
 
         //ini kalau datanya di load dari URL
@@ -66,7 +70,7 @@ export class SearchComponent implements OnInit {
           var _index = i;
           //lempar objectnya sekalian sama urlnya, nnti di bind di dalem karena masalah di asyncnya
           //biar tiap function ada state2nya sendiri
-          this.resolveObject(data.component[i], data.component[i].url);
+          this.resolveObject(data.component[i], data.component[i].url, request);
         }
 
         if (data.component[i].type === "numeric") {
@@ -117,8 +121,8 @@ export class SearchComponent implements OnInit {
     return this.http.get(url);
   }
 
-  public postJSON(url: string): Observable<any> {
-    return this.http.post(url, null);
+  public postJSON(url: string, criteria: any = null): Observable<any> {
+    return this.http.post(url, criteria);
   }
 
   onSubmit() {
@@ -229,10 +233,10 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  resolveObject(obj: any, url: string) {
-    const val = this.postJSON(this.enviromentUrl + url);
+  resolveObject(obj: any, url: string, crit: RequestCriteriaObj = null) {
+    const val = this.postJSON(this.enviromentUrl + url, crit);
     val.subscribe(tempData => {
-      obj.itemsUrl = tempData.returnObject;
+        obj.itemsUrl = tempData.returnObject;
     });
   }
 
@@ -267,4 +271,30 @@ export class SearchComponent implements OnInit {
         console.log(error);
       });
   }
+
+  onChangeEvent(optValue, afFilter) {
+    var jsonComp = this.configuration.component;
+    
+    for (var i = 0; i < afFilter.affectedFilter.length; i++) {
+      for (var j = 0; j < jsonComp.length; j++) {
+        if (jsonComp[j].name == afFilter.affectedFilter[i]) {
+          var request = new RequestCriteriaObj();
+          var arrayCrit = new Array();
+
+          if (optValue != "All") {
+            var critObj = new CriteriaObj();
+            critObj.DataType = afFilter.datatype;
+            critObj.propName = afFilter.name;
+            critObj.value = optValue;
+            critObj.restriction = AdInsConstant.RestrictionEq;
+            arrayCrit.push(critObj);
+          }
+
+          request.criteria = arrayCrit;
+          this.resolveObject(jsonComp[j], jsonComp[j].url, request);
+        }
+      }
+    }
+  }
+
 }

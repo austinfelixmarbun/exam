@@ -32,6 +32,7 @@ export class AddMenuSettingComponent implements OnInit {
     foundationUrl: string = environment.foundationUrl;
     urlQryPaging: string = AdInsConstant.GetRefFormPaging;
     urlEnviPaging : string = environment.foundationUrl;
+    url: any = './assets/lookup/lookupParentForm.json';
     editUrl: any;
     result: any;
     hierarchyNo: any;

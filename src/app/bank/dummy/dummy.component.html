@@ -1,0 +1,11 @@
+<form>
+  <select (change)="onChangeType($event.target.value)">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+</form>
+<br>
+<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
+  [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></app-search>
+<app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>

@@ -7,6 +7,8 @@ import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BankAddComponent } from 'app/bank/add/add-bank.component';
+import { DummyComponent } from './dummy/dummy.component';
+import { DummyAddComponent } from './dummy/dummy-add/dummy-add.component';
 
 @NgModule({
   imports: [
@@ -19,8 +21,9 @@ import { BankAddComponent } from 'app/bank/add/add-bank.component';
   ],
   declarations: [
     BankComponent,
-    BankAddComponent
+    BankAddComponent,
+    DummyComponent,
+    DummyAddComponent
   ]
 })
 export class BankModule { }
- 

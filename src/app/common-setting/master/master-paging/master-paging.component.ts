@@ -85,7 +85,7 @@ export class MasterPagingComponent implements OnInit {
     this.addCrit = new Array();
     var critIsActive = new CriteriaObj();
     critIsActive.propName = "is_System";
-    critIsActive.value = "No";
+    critIsActive.value = "0";
     critIsActive.restriction = AdInsConstant.RestrictionEq;
 
     this.addCrit.push(critIsActive);
