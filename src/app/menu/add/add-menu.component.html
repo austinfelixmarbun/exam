@@ -8,7 +8,7 @@
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Menu Information</h4>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="projectinput5" translate>Parent Form </label>
+                <label class="col-md-3  adInsLabel" for="projectinput5" translate>Parent Form </label>
                 <div class="col-md-9">
                   <lib-lookupparentform #lookupParent (select)="onSelect($event)" [idSelect]="parentId"
                   [urlJson]="url" [nameSelect]="parentTitle" [urlQryPaging]="urlQryPaging" [urlEnviPaging]="urlEnviPaging">
@@ -16,7 +16,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="projectinput5" translate>Form Code </label>
+                <label class="col-md-3  adInsLabel" for="projectinput5" translate>Form Code </label>
                 <div class="col-md-9">
                   <input type="text" id="projectinput5" class="form-control adInsInput" name="formCode"
                     [ngModel]="formCode" #FormCode="ngModel" required
@@ -28,7 +28,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="projectinput6" translate>Title </label>
+                <label class="col-md-3  adInsLabel" for="projectinput6" translate>Title </label>
                 <div class="col-md-9">
                   <textarea id="projectinput5" class="form-control adInsInput" name="title" [ngModel]="title"
                     #Title="ngModel" required
@@ -39,21 +39,21 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="userinput5" translate>Is External </label>
+                <label class="col-md-3  adInsLabel" for="userinput5" translate>Is External </label>
                 <div class="col-md-9">
                   <input class="border-primary" type="checkbox" [ngModel]="isExternalLink" data-md-icheck
                     (change)="onChange($event, 'ext')" id="projectinput5" name="isExternalLink">
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="userinput5" translate>Has Sub </label>
+                <label class="col-md-3  adInsLabel" for="userinput5" translate>Has Sub </label>
                 <div class="col-md-9">
                   <input class="border-primary" type="checkbox" [ngModel]="hasSub" data-md-icheck
                     (change)="onChange($event, 'Sub')" id="projectinput5" name="hasSub">
                 </div>
               </div>
               <div class="form-group row" *ngIf="!hasSub">
-                <label class="col-md-3 label-control adInsLabel" for="projectinput6" translate>Form Path </label>
+                <label class="col-md-3  adInsLabel" for="projectinput6" translate>Form Path </label>
                 <div class="col-md-9">
                   <textarea id="projectinput5" class="form-control adInsInput" name="path" [ngModel]="path"
                     #Path="ngModel" required
@@ -64,28 +64,28 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="projectinput6" translate>Icon </label>
+                <label class="col-md-3  adInsLabel" for="projectinput6" translate>Icon </label>
                 <div class="col-md-9">
                   <textarea id="projectinput5" class="form-control adInsInput" name="icon" [ngModel]="icon"
                     #Icon="ngModel"></textarea>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="projectinput6" translate>Badge Class </label>
+                <label class="col-md-3  adInsLabel" for="projectinput6" translate>Badge Class </label>
                 <div class="col-md-9">
                   <textarea id="projectinput5" class="form-control adInsInput" name="badgeClass" [ngModel]="badgeClass"
                     #BadgeClass="ngModel"></textarea>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="userinput5" translate>Is Hidden </label>
+                <label class="col-md-3  adInsLabel" for="userinput5" translate>Is Hidden </label>
                 <div class="col-md-9">
                   <input class="border-primary" type="checkbox" [ngModel]="isHidden" data-md-icheck
                     (change)="onChange($event,'hidden')" id="projectinput5" name="isHidden">
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="projectinput6" translate>Order No </label>
+                <label class="col-md-3  adInsLabel" for="projectinput6" translate>Order No </label>
                 <div class="col-md-9">
                   <textarea id="projectinput5" class="form-control adInsInput" name="orderNo" [ngModel]="orderNo"
                     #OrderNo="ngModel" required required
@@ -96,7 +96,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control" for="projectinput7" translate>Module </label>
+                <label class="col-md-3 " for="projectinput7" translate>Module </label>
                 <div class="col-md-9">
                   <select id="projectinput7" [(ngModel)]="module" class="form-control" name="Module">
                     <option *ngFor="let item of moduleList" value="{{item.key}}">

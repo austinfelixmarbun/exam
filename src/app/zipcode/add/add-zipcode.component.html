@@ -8,56 +8,56 @@
                         <div class="form-body">
                             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Zipcode Information</h4>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control adInsLabel" for="projectinput5" translate>Kelurahan </label>
+                                <label class="col-md-3  adInsLabel" for="projectinput5" translate>Kelurahan </label>
                                 <div class="col-md-9">
                                     <input type="text" id="projectinput5" class="form-control adInsInput" name="areaCode2"
                                         [ngModel]="result?.areaCode2" #areaCode2="ngModel">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control adInsLabel" for="projectinput5" translate>Kecamatan </label>
+                                <label class="col-md-3  adInsLabel" for="projectinput5" translate>Kecamatan </label>
                                 <div class="col-md-9">
                                     <input type="text" id="projectinput5" class="form-control adInsInput" name="areaCode1"
                                     [ngModel]="result?.areaCode1" #areaCode1="ngModel">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control adInsLabel" for="projectinput6" translate>City </label>
+                                <label class="col-md-3  adInsLabel" for="projectinput6" translate>City </label>
                                 <div class="col-md-9">
                                     <textarea id="projectinput5" class="form-control adInsInput" name="city"
                                     [ngModel]="result?.city" #city="ngModel"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control adInsLabel" for="userinput5" translate>Zipcode </label>
+                                <label class="col-md-3  adInsLabel" for="userinput5" translate>Zipcode </label>
                                 <div class="col-md-9">
                                     <textarea id="projectinput5" class="form-control adInsInput" name="zipcode"
                                     [ngModel]="result?.zipcode" #zipcode="ngModel"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control adInsLabel" for="userinput5" translate>Sub Zipcode </label>
+                                <label class="col-md-3  adInsLabel" for="userinput5" translate>Sub Zipcode </label>
                                 <div class="col-md-9">
                                     <textarea id="projectinput5" class="form-control adInsInput" name="subZipcode"
                                     [ngModel]="result?.subZipcode" #subZipcode="ngModel"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control adInsLabel" for="userinput5" translate>District </label>
+                                <label class="col-md-3  adInsLabel" for="userinput5" translate>District </label>
                                 <div class="col-md-9">
                                     <lib-lookupdistrict #uclDistrict [nameSelect] = "districtName" [idSelect]="idSelect" [jsonSelect]="jsonSelect" 
                                     [urlQryPaging]="urlQryPaging" [urlJson]="url" [urlEnviPaging]="urlEnviPaging" [addCritInput]="crit"></lib-lookupdistrict>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control adInsLabel" for="userinput5" translate>Phone Area Number </label>
+                                <label class="col-md-3  adInsLabel" for="userinput5" translate>Phone Area Number </label>
                                 <div class="col-md-9">
                                     <textarea id="projectinput5" class="form-control adInsInput" name="phnArea"
                                     [ngModel]="result?.phnArea" #phnArea="ngModel"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 label-control adInsLabel" for="userinput5" translate>Is Active </label>
+                                <label class="col-md-3  adInsLabel" for="userinput5" translate>Is Active </label>
                                 <div class="col-md-9">
                                     <input class="border-primary" type="checkbox"
                                     [ngModel]="isActive" data-md-icheck (change)="toggleVisibility($event)" id="projectinput5" name="isActive">

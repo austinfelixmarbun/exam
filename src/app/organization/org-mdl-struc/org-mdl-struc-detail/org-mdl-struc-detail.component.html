@@ -11,20 +11,20 @@
                 <br />
 
                 <div class="form-group row">
-                  <label class="col-md-3 label-control adInsLabel">Organization Model</label>
+                  <label class="col-md-3  adInsLabel">Organization Model</label>
                   <div class="col-md-9">
                     <label>{{orgModelObj.orgMdlName}}</label></div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-md-3 label-control adInsLabel" for="lookupBizUnit">Business Unit Name</label>
+                    <label class="col-md-3  adInsLabel" for="lookupBizUnit">Business Unit Name</label>
                     <div class="col-md-9">
                         <app-lookup-biz-unit #lookupBizUnit [nameSelect] = "bizUnitName" [idSelect]="refBizUnitId" [jsonSelect]="jsonSelectBizUnit" [isRequired]=true> </app-lookup-biz-unit>
                     </div>
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-md-3 label-control adInsLabel" for="orgMdlLvl">Level</label>
+                    <label class="col-md-3  adInsLabel" for="orgMdlLvl">Level</label>
                     <div class="col-md-9">
                       <input type="text" class="form-control adInsInput" name="orgMdlLvl" required [(ngModel)]="orgMdlLvl"
                         #OrgMdlLvl="ngModel" [ngClass]="{ 'is-invalid': OrgMdlStrucForm.submitted && OrgMdlLvl.invalid }">
@@ -35,14 +35,14 @@
                   </div>
 
                   <div class="form-group row">
-                      <label class="col-md-3 label-control adInsLabel" for="lookupBizUnit">Parent</label>
+                      <label class="col-md-3  adInsLabel" for="lookupBizUnit">Parent</label>
                       <div class="col-md-9">
                           <app-lookup-org-mdl-struc #lookupMdlStruc [nameSelect] = "parentName" [idSelect]="parentId" [jsonSelect]="jsonSelectStruct" [addCritInput]='addCrit'> </app-lookup-org-mdl-struc>
                       </div>
                     </div>
 
                   <div class="form-group row">
-                    <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
+                    <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
                     <div class="custom-control custom-checkbox m-0">
                       <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                         [checked]="isActive">

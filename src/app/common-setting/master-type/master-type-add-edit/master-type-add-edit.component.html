@@ -8,7 +8,7 @@
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Master Type Information </h4>
             <br>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="masterTypeCodeModel">Master Type Code</label>
+              <label class="col-md-3  adInsLabel" for="masterTypeCodeModel">Master Type Code</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="masterTypeCodeModel" required
                   [(ngModel)]="masterTypeCodeModel" #masterTypeCode="ngModel"
@@ -21,7 +21,7 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="descrModel">Description</label>
+              <label class="col-md-3  adInsLabel" for="descrModel">Description</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="descrModel" required [(ngModel)]="descrModel"
                   #descr="ngModel" [ngClass]="{ 'is-invalid': MasterTypeAddEditForm.submitted && descr.invalid }">
@@ -32,7 +32,7 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="sandiBiModel">Description</label>
+              <label class="col-md-3  adInsLabel" for="sandiBiModel">Description</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="sandiBiModel" required [(ngModel)]="sandiBiModel"
                   #sandiBi="ngModel">
@@ -40,7 +40,7 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
+              <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
               <div class="custom-control custom-checkbox m-0">
                 <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                   [checked]="isActive">
