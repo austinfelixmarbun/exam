@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: '',
+        path: 'paging',
         component: BankComponent,
         data: {
           title: 'Bank'
