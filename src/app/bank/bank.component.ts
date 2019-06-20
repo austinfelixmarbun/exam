@@ -1,32 +1,30 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { HttpClient } from '@angular/common/http';
-import { DecimalPipe } from '@angular/common';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-bank',
   templateUrl: './bank.component.html',
   styleUrls: ['./bank.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe]
+  providers: [NgbPaginationConfig]
 })
 export class BankComponent implements OnInit {
 
   //** Start UC Search **//
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
+  inputObj : any;
   urlQryPaging : string = AdInsConstant.GetBankPaging;
   urlEnviPaging : string = environment.settingUrl;
   //** End UC Search **//
   editUrl: any;
   bankObj: RefBankObj;
-  urlJson: string = "./assets/search/searchBank.json";
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -34,7 +32,6 @@ export class BankComponent implements OnInit {
   apiUrl: any;
   
   // array of all items to be paged
-  private allItems: any[];
   // pager object
   pager: any = {};
   // paged items
@@ -43,18 +40,21 @@ export class BankComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService) { }
+  constructor(private http: HttpClient) { 
+  }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchBank.json";
+    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetBankPaging;
+    
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.settingUrl + AdInsConstant.GetBankPaging;
   }
 
   //** Start UC Search **/
-
-  
-
   getResult(event){
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
@@ -97,23 +97,6 @@ export class BankComponent implements OnInit {
   }
 
   //** End UC Search **/
-
-  // Success Type
-  typeSuccess() {
-    this.service.typeSuccess();
-  }
-
-  typeError() {
-    this.service.typeError();
-  }
-
-  timeout() {
-    this.service.timeout();
-  }
-
-  errMsg() {
-    this.service.errorMessage('asdasd');
-  }
 
   delete(refBankId: any) {
     if(confirm("Are you sure to delete this record?")) {
