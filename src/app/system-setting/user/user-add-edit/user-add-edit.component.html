@@ -8,7 +8,7 @@
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> User Information </h4>
             <br>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="EmpName">Employee Name</label>
+              <label class="col-md-3  adInsLabel" for="EmpName">Employee Name</label>
               <div class="col-md-9">
 
                 <lib-lookupemployee #lookupEmp [nameSelect]="nameSelect" [idSelect]="idSelect"
@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="Username">Username</label>
+              <label class="col-md-3  adInsLabel" for="Username">Username</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="Username" required [(ngModel)]="Username"
                   #username="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }"
@@ -36,7 +36,7 @@
 
             <div class="oldPass" *ngIf=" type !== 'edit' ">
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="Password">Password</label>
+                <label class="col-md-3  adInsLabel" for="Password">Password</label>
                 <div class="col-md-9">
                   <input type="password" class="form-control adInsInput" name="Password" required [(ngModel)]="Password"
                     #password="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && password.invalid }">
@@ -48,7 +48,7 @@
             </div>
             <div class="rePass" *ngIf=" type !== 'edit' && type !== 'changePassword'">
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="RePassword">Re-Password</label>
+                <label class="col-md-3  adInsLabel" for="RePassword">Re-Password</label>
                 <div class="col-md-9">
                   <input type="password" class="form-control adInsInput" name="RePassword" required [(ngModel)]="RePassword"
                     #rePassword="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && rePassword.invalid }">
@@ -61,7 +61,7 @@
 
             <div class="stat" *ngIf=" type !== 'changePassword' ">
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="IsActive">Active Status</label>
+                <label class="col-md-3  adInsLabel" for="IsActive">Active Status</label>
                 <div class="custom-control custom-checkbox m-0">
                   <input type="checkbox" value="1" id="IsActive" name="IsActive" [(ngModel)]="IsActive"
                     [checked]="IsActive">
@@ -70,7 +70,7 @@
             </div>
             <div class="stat" *ngIf=" type !== 'changePassword' ">
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="loggedInMethod">Logged In Method </label>
+                <label class="col-md-3  adInsLabel" for="loggedInMethod">Logged In Method </label>
                 <div class="col-md-9">
                   <select class="form-control adInsInput" name="loggedInMethod" #LoggedInMethod [(ngModel)]="loggedInMethod">
                     <option value="DB">Database</option>

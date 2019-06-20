@@ -7,7 +7,7 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> General Setting Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="gsCode">General Setting Code</label>
+              <label class="col-md-3  adInsLabel" for="gsCode">General Setting Code</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="gsCode" required [(ngModel)]="gsCode" #GsCode="ngModel"
                   [ngClass]="{ 'is-invalid': GSForm.submitted && GsCode.invalid }"
@@ -20,7 +20,7 @@
 
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="gsName">General Setting Name</label>
+              <label class="col-md-3  adInsLabel" for="gsName">General Setting Name</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="gsName" required [(ngModel)]="gsName" #GsName="ngModel"
                   [ngClass]="{ 'is-invalid': GSForm.submitted && GsName.invalid }">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="gsValue">General Setting Value</label>
+              <label class="col-md-3  adInsLabel" for="gsValue">General Setting Value</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="gsValue" required [(ngModel)]="gsValue" #GsValue="ngModel"
                   [ngClass]="{ 'is-invalid': GSForm.submitted && GsValue.invalid }">
@@ -42,7 +42,7 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="gsDescr">General Setting Description</label>
+              <label class="col-md-3  adInsLabel" for="gsDescr">General Setting Description</label>
               <div class="col-md-9">
                 <textarea id="gsDescr" rows="6" class="form-control adInsInput" name="gsDescr" required [(ngModel)]="gsDescr"
                   #GsDescr="ngModel" [ngClass]="{ 'is-invalid': GSForm.submitted && GsDescr.invalid }"></textarea>

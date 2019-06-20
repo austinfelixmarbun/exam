@@ -7,7 +7,7 @@
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Office Area </h4>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="areaCode">Area Code</label>
+                <label class="col-md-3  adInsLabel" for="areaCode">Area Code</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" name="areaCode" required [(ngModel)]="areaCode"
                     #AreaCode ="ngModel" [ngClass]="{ 'is-invalid': OfficeForm.submitted && AreaCode.invalid }"
@@ -19,7 +19,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="areaName">Area Name</label>
+                <label class="col-md-3  adInsLabel" for="areaName">Area Name</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" name="areaName" required [(ngModel)]="areaName"
                     #AreaName="ngModel" [ngClass]="{ 'is-invalid': OfficeForm.submitted && AreaName.invalid }">
@@ -30,7 +30,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
+                <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
                 <div class="custom-control custom-checkbox m-0">
                   <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                     [checked]="isActive">

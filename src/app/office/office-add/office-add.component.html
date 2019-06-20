@@ -7,7 +7,7 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Office Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Office Code </label>
+              <label class="col-md-3  adInsLabel" translate>Office Code </label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="officeCode" required [(ngModel)]="officeCode"
                   #OfficeCode="ngModel"
@@ -19,7 +19,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Office Name </label>
+              <label class="col-md-3  adInsLabel" translate>Office Name </label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="officeName" required [(ngModel)]="officeName"
                   #OfficeName="ngModel"
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Office Short Name </label>
+              <label class="col-md-3  adInsLabel" translate>Office Short Name </label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="officeShortName" required [(ngModel)]="officeShortName"
                   #OfficeShortName="ngModel"
@@ -44,7 +44,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Office Class </label>
+              <label class="col-md-3  adInsLabel" translate>Office Class </label>
               <div class="col-md-9">
                 <select class="form-control adInsInput" name="mrOfficeClass" [(ngModel)]="mrOfficeClass" #MrOfficeClass="ngModel">
                   <option *ngFor="let oc of allOfficeClass" value="{{oc.masterCode}}">{{oc.descr}}
@@ -53,7 +53,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Organization Level </label>
+              <label class="col-md-3  adInsLabel" translate>Organization Level </label>
               <div class="col-md-9">
                 <select class="form-control adInsInput" name="refOrgId" [(ngModel)]="refOrgId" #RefOrgId="ngModel"
                   (change)="onChangeRefOrg($event.target.value)">
@@ -63,7 +63,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Model Name </label>
+              <label class="col-md-3  adInsLabel" translate>Model Name </label>
               <div class="col-md-9">
                 <select class="form-control adInsInput" name="orgMdlId" [(ngModel)]="orgMdlId" #OrgMdlId="ngModel">
                   <option *ngFor="let om of allOrgMdl" value="{{om.orgMdlId}}">{{om.orgMdlName}}
@@ -72,7 +72,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Office Parent </label>
+              <label class="col-md-3  adInsLabel" translate>Office Parent </label>
               <div class="col-md-9">
                 <select class="form-control adInsInput" name="parentId" required [(ngModel)]="parentId" #ParentId="ngModel"
                   [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || ParentId.touched || ParentId.dirty) && ParentId.value === undefined  }">
@@ -87,7 +87,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Area </label>
+              <label class="col-md-3  adInsLabel" translate>Area </label>
               <div class="col-md-9">
                 <select class="form-control adInsInput" name="refOfficeAreaId" required [(ngModel)]="refOfficeAreaId"
                   #RefOfficeAreaId="ngModel"
@@ -103,7 +103,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Holiday Scheme </label>
+              <label class="col-md-3  adInsLabel" translate>Holiday Scheme </label>
               <div class="col-md-9">
                 <select class="form-control adInsInput" name="holidaySchmHId" [(ngModel)]="holidaySchmHId"
                   #HolidaySchmHId="ngModel">
@@ -113,7 +113,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Working Hour Scheme </label>
+              <label class="col-md-3  adInsLabel" translate>Working Hour Scheme </label>
               <div class="col-md-9">
                 <select class="form-control adInsInput" name="workingHourSchmHId" [(ngModel)]="workingHourSchmHId"
                   #WorkingHourSchmHId="ngModel">
@@ -124,7 +124,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Konvensional/Syariah </label>
+              <label class="col-md-3  adInsLabel" translate>Konvensional/Syariah </label>
               <div class="col-md-9">
                 <div class="custom-control custom-radio display-inline-block">
                   <input type="radio" id="Konvensional" value="KON" checked name="mrKonvenSyariah"
@@ -140,14 +140,14 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Allowed To Create Application </label>
+              <label class="col-md-3  adInsLabel" translate>Allowed To Create Application </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isAllowAppCreated" data-md-icheck
                   (change)="toggleAllowAppCreated($event)" name="isAllowAppCreated">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Active Status </label>
+              <label class="col-md-3  adInsLabel" translate>Active Status </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                   (change)="toggleActive($event)" name="isActive">

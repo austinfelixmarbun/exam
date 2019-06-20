@@ -8,7 +8,7 @@
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Role Information </h4>
             <br>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="roleCodeModel">Role Code</label>
+              <label class="col-md-3  adInsLabel" for="roleCodeModel">Role Code</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="roleCodeModel" required [(ngModel)]="roleCodeModel"
                   #roleCode="ngModel" [ngClass]="{ 'is-invalid': RoleAddEditForm.submitted && roleCode.invalid }"
@@ -20,7 +20,7 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="roleNameModel">Role Name</label>
+              <label class="col-md-3  adInsLabel" for="roleNameModel">Role Name</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="roleNameModel" required [(ngModel)]="roleNameModel"
                   #roleName="ngModel" [ngClass]="{ 'is-invalid': RoleAddEditForm.submitted && roleName.invalid }">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
+              <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
               <div class="custom-control custom-checkbox m-0">
                 <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                   [checked]="isActive">

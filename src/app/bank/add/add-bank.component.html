@@ -8,7 +8,7 @@
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Bank Information</h4>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="projectinput5" translate>Bank Code </label>
+                <label class="col-md-3 adInsLabel" for="projectinput5" translate>Bank Code </label>
                 <div class="col-md-9">
                   <input type="text" id="projectinput5" class="form-control adInsInput" name="bankCode"
                     [ngModel]="result?.bankCode" #BankCode="ngModel" [required]>
@@ -20,7 +20,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="projectinput5" translate>Bank Name </label>
+                <label class="col-md-3 adInsLabel" for="projectinput5" translate>Bank Name </label>
                 <div class="col-md-9">
                   <input type="text" id="projectinput5" class="form-control adInsInput" name="bankName"
                     [ngModel]="result?.bankName" #BankName="ngModel" [required]>
@@ -32,14 +32,14 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="projectinput6" translate>BI Code </label>
+                <label class="col-md-3 adInsLabel" for="projectinput6" translate>BI Code </label>
                 <div class="col-md-9">
                   <textarea id="projectinput5" class="form-control adInsInput" name="regRptCode" [ngModel]="result?.regRptCode"
                     #RegRptCode="ngModel"></textarea>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 label-control adInsLabel" for="userinput5" translate>Active Status </label>
+                <label class="col-md-3 adInsLabel" for="userinput5" translate>Active Status </label>
                 <div class="col-md-9">
                   <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                     (change)="toggleVisibility($event)" id="projectinput5" name="isActive">
@@ -60,5 +60,5 @@
     </div>
   </div>
 </div>
-
-<lib-form-engine [mode]="mode" [addCritInput]= "criteria" [afterSaveUrl]= "afterSaveUrl" [enviromentUrl]="urlEnviPaging"></lib-form-engine>
+<!-- 
+<lib-form-engine [mode]="mode" [addCritInput]= "criteria" [afterSaveUrl]= "afterSaveUrl" [enviromentUrl]="urlEnviPaging"></lib-form-engine> -->

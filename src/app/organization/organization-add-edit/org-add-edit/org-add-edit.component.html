@@ -9,7 +9,7 @@
               <div class="form-body">
                 <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Organization Information</h4>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control adInsLabel" for="orgName">Organization Name</label>
+                  <label class="col-md-3  adInsLabel" for="orgName">Organization Name</label>
                   <div class="col-md-9">
                     <input type="text" id="orgName" class="form-control adInsInput" name="orgName" [(ngModel)]="orgName"
                       #OrgName="ngModel" required [ngClass]="{ 'is-invalid': OrgAddEditForm.submitted && OrgName.invalid }">
@@ -19,7 +19,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control adInsLabel" for="hierarchyNo">Hierarchy No</label>
+                  <label class="col-md-3  adInsLabel" for="hierarchyNo">Hierarchy No</label>
                   <div class="col-md-9">
                     <input type="text" id="hierarchyNo" class="form-control adInsInput" name="hierarchyNo"
                       [(ngModel)]="hierarchyNo" required #HierarchyNo="ngModel"
@@ -30,7 +30,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control adInsLabel" for="parentId">Parent Organization</label>
+                  <label class="col-md-3  adInsLabel" for="parentId">Parent Organization</label>
                   <div class="col-md-9">
                     <select id="parentId" class="form-control adInsInput" name="parentId" [(ngModel)]="parentId" required>
                       <option [value]="" selected="None">None</option>
@@ -40,7 +40,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
+                  <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
                   <div class="custom-control custom-checkbox m-0">
                     <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                       [checked]="isActive">

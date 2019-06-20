@@ -7,7 +7,7 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday Information</h4>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Scheme Code </label>
+              <label class="col-md-3  adInsLabel" translate>Scheme Code </label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="holidaySchmCode" required [readonly]="isEdit"
                   [(ngModel)]="holidaySchmCode" #HolidaySchmCode="ngModel"
@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Scheme Name </label>
+              <label class="col-md-3  adInsLabel" translate>Scheme Name </label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="holidaySchmName" required [(ngModel)]="holidaySchmName"
                   #HolidaySchmName="ngModel"
@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" translate>Active </label>
+              <label class="col-md-3  adInsLabel" translate>Active </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
                   (change)="toggleActive($event)" name="isActive" [readonly]="isEdit">

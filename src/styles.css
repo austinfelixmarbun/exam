@@ -108,6 +108,9 @@ thead tr th {
     text-transform: uppercase;
 }
 
+.overlay {
+    position : fixed !important;
+}
 /* 
 .adInsReqMsg {
     

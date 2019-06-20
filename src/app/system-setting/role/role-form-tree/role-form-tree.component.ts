@@ -115,6 +115,7 @@ export class RoleFormTreeComponent implements OnInit {
     this.httpClient.post(urlGetRefRole, this.refRoleObj).subscribe(
       response => {
         this.refRoleObj = response["returnObject"];
+        console.log(response["returnObject"]);
         this.spinner.hide();
         this.httpClient.post(getAuthFormUrl, this.refRoleObj).subscribe(
           response => {

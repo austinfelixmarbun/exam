@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: '',
+        path: 'paging',
         component: EmployeeComponent,
         data: {
           title: 'Employee'

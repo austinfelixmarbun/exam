@@ -8,7 +8,7 @@
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Master Information </h4>
             <br>
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="refMasterTypeCodeModule">Master Type</label>
+              <label class="col-md-3  adInsLabel" for="refMasterTypeCodeModule">Master Type</label>
               <div class="col-md-9">
                 <select id="refMasterTypeCodeModule" name="refMasterTypeCodeModule" class="form-control"
                   [(ngModel)]="refMasterTypeCodeModule" #refMasterTypeCode="ngModel"
@@ -26,7 +26,7 @@
 
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="masterCodeModel">Master Code</label>
+              <label class="col-md-3  adInsLabel" for="masterCodeModel">Master Code</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="masterCodeModel" required [(ngModel)]="masterCodeModel"
                   #masterCode="ngModel" [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && masterCode.invalid }"
@@ -38,7 +38,7 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="descrModel">Description</label>
+              <label class="col-md-3  adInsLabel" for="descrModel">Description</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="descrModel" required [(ngModel)]="descrModel"
                   #descr="ngModel" [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && descr.invalid }">
@@ -49,14 +49,14 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="sandiBI">Sandi BI</label>
+              <label class="col-md-3  adInsLabel" for="sandiBI">Sandi BI</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="sandiBI" required [(ngModel)]="sandiBI" #descr="ngModel">
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status</label>
+              <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
               <div class="custom-control custom-checkbox m-0">
                 <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
                   [checked]="isActive">
