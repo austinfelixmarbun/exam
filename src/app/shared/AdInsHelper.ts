@@ -1,5 +1,6 @@
 import { formatDate } from "@angular/common";
 import { AdInsConstant } from "app/shared/AdInstConstant";
+import { ParsedVariable } from "@angular/compiler";
 
 export class AdInsHelper {
     //Function
@@ -87,5 +88,32 @@ export class AdInsHelper {
                 return true;
             }
         }
+    }
+
+
+    public static transformAmount(element: any) {
+        var formattedAmount = "";
+        if (element.target.value != "") {
+
+            if (parseFloat(element.target.value).toLocaleString('en') != "NaN") {
+                formattedAmount = parseFloat(element.target.value).toLocaleString('en');
+            }
+            else {
+                formattedAmount = "";
+            }
+        }
+        return formattedAmount;
+    }
+
+    public static transformToDecimal(element: any) {
+        var parsedValue = 0;
+        if (element.target.value != "") {
+            if (parseFloat(element.target.value.toString().replace(/,/g, '')).toString() != "NaN") {
+                parsedValue = parseFloat(element.target.value.toString().replace(/,/g, ''));
+            } else {
+                return "";
+            }
+        }
+        return parsedValue;
     }
 }

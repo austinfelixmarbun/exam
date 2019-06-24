@@ -40,6 +40,16 @@
                 }
             ],
             "itemsUrl": []
-        }
+        },
+        {
+            "type": "numeric",
+            "name": "orgMdlLvl",
+            "id": "orgMdlLvlNoId",
+            "value": "1",
+            "label": "Level <=",
+            "restriction": "lte",
+            "placeholder": "Placeholder",
+            "datatype": "numeric"
+          }
     ]
 }
