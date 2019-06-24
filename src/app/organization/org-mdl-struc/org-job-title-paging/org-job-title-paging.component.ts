@@ -11,6 +11,7 @@ import { OrgJobTitleObj } from "app/shared/model/OrgJobTitleObj.Model";
 import { Location, DecimalPipe } from "@angular/common";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
+import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
 
 @Component({
   selector: "app-org-job-title-paging",
@@ -20,21 +21,18 @@ import { UCSearchComponent } from '@adins/ucsearch';
 export class OrgJobTitlePagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = "./assets/search/searchOrgJobTitle.json";
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
   pageSize: any;
   apiUrl: any;
   deleteUrl: any;
-  show: any;
   exportData: any;
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging: string = AdInsConstant.GetOrgJobTitlePaging;
-  urlEnviPaging : string = environment.foundationUrl;
   addCrit: CriteriaObj[];
 
   orgJobTitleObj: OrgJobTitleObj;
@@ -64,10 +62,13 @@ export class OrgJobTitlePagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("masuk");
-    this.show = AdInsConstant.showData.split(",");
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/lookup/searchOrgJobTitle.json";
+    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetOrgJobTitlePaging;
+    
     this.pageNow = 1;
-    this.pageSize = this.show[0];
+    this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitlePaging;
     this.initiateForm();
   }
@@ -109,6 +110,8 @@ export class OrgJobTitlePagingComponent implements OnInit {
     additionCrit.DataType = "numeric";
     additionCrit.restriction = AdInsConstant.RestrictionEq;
     this.addCrit.push(additionCrit);
+
+    this.inputObj.addCritInput = this.addCrit;
     /* #endregion */
   }
 

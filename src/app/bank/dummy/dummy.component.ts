@@ -3,6 +3,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-dummy',
@@ -13,10 +14,8 @@ export class DummyComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
-  urlQryPaging : string = AdInsConstant.GetBankPaging;
-  urlEnviPaging : string = environment.settingUrl;
+  inputObj : any;
 
-  urlJson: string = "./assets/search/searchDummy.json";
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -27,7 +26,14 @@ export class DummyComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   
-  constructor() { }
+
+  
+  constructor() { 
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchDummy.json";
+    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetBankPaging;
+  }
 
   ngOnInit() {
     this.apiUrl = this.settingUrl + AdInsConstant.GetBankPaging;
@@ -77,11 +83,11 @@ export class DummyComponent implements OnInit {
   onChangeType(type: any) {
     console.log(type);
     if (type == 1) {
-      this.urlJson = "./assets/search/searchDummy.json";
+      this.inputObj._url = "./assets/search/searchDummy.json";
     } else if (type == 2) {
-      this.urlJson = "./assets/search/searchOffice.json";
+      this.inputObj._url = "./assets/search/searchOffice.json";
     } else if (type == 3) {
-      this.urlJson = "./assets/search/searchBank.json";
+      this.inputObj._url = "./assets/search/searchBank.json";
     }
     this.searchComponent.initiateForm();
   }

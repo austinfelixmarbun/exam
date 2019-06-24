@@ -2,14 +2,13 @@ import { BusinessUnitObj } from "app/shared/model/BusinessUnitObj.Model";
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { OrgMdlStrucObj } from "app/shared/model/OrgMdlStrucObj";
 import { OrgMdlObj } from "app/shared/model/OrgMdlObj.Model";
-import { OrganizationObj } from "app/shared/model/OrganizationObj.Model";
 import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { NgForm } from "@angular/forms";
 import { environment } from "environments/environment";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { HttpClient } from "@angular/common/http";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 
@@ -44,12 +43,14 @@ export class OrgMdlStrucDetailComponent implements OnInit {
   jsonSelectStruct: any;
   /* #endregion */
 
+  urlJson: any = "./assets/lookup/lookupOrgMdlStruc.json";
+  urlEnviPaging: any = environment.foundationUrl;
+  urlQryPaging: any = AdInsConstant.GetOrgMdlStrucPaging;
   /* #region  Addition Criteria Lookup */
   addCrit: Array<any>;
   /* #endregion */
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
@@ -151,6 +152,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     console.log('lbu',lookupBizUnit);
 
     if (OrgMdlForm.value.orgMdlLvl > 1 && lookupMdlStruc.idSelect === undefined) {
+      this.service.typeSuccess();
       this.service.typeErrorCustom('Must Have Parent');
       this.spinner.hide();
     }

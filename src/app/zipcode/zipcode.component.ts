@@ -1,49 +1,44 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
-import { Http } from '@angular/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-zipcode',
   templateUrl: './zipcode.component.html',
   styleUrls: ['./zipcode.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe]
+  providers: [NgbPaginationConfig, DecimalPipe]
 })
 export class ZipcodeComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
+  inputObj: any;
   editUrl: any;
   zipcodeObj: RefZipcodeObj;
-  urlJson: string = "./assets/search/searchRefZipcode.json";
   resultData: string;
   pageNow: any;
   totalData: any;
   pageSize: any;
   apiUrl: any;
-  // array of all items to be paged
-  private allItems: any[];
-  // pager object
-  pager: any = {};
-  // paged items
-  pagedItems: any[];
   settingUrl: string = environment.settingUrl;
-  urlQryPaging: string = AdInsConstant.GetRefZipcodePaging;
-  urlEnviPaging : string = environment.settingUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchRefZipcode.json";
+    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefZipcodePaging;
+    
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipcodePaging;

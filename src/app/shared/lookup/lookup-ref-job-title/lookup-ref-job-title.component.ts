@@ -7,6 +7,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
+import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
 
 @Component({
   selector: "app-lookup-ref-job-title",
@@ -16,9 +17,6 @@ import { UCSearchComponent } from '@adins/ucsearch';
 export class LookupRefJobTitleComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
 
-  @Input() urlJson: string = "./assets/lookup/lookupRefJobTitle.json";
-  urlQryPaging: string = AdInsConstant.GetRefJobTitle;
-  urlEnviPaging : string = environment.foundationUrl;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
@@ -27,6 +25,7 @@ export class LookupRefJobTitleComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild("content") contentTemplate;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
+  inputObj: any;
 
   jobTitleName: any;
   refJobTitleId: any;
@@ -50,6 +49,11 @@ export class LookupRefJobTitleComponent implements OnInit {
   addCrit: Array<any>;
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/lookup/lookupRefJobTitle.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefJobTitle;
+    
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitle;
     this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
@@ -62,6 +66,7 @@ export class LookupRefJobTitleComponent implements OnInit {
         this.addCrit.push(this.addCritInput[i]);
       }
     }
+    this.inputObj.addCritInput = this.addCrit;
     /* #endregion */
   }
 
@@ -88,7 +93,6 @@ export class LookupRefJobTitleComponent implements OnInit {
   }
 
   getResult(ucgridFooter, event) {
-    console.log(this.urlQryPaging);
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
     ucgridFooter.pageNow = event.pageNow;

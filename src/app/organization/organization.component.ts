@@ -9,6 +9,7 @@ import { environment } from 'environments/environment';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',
@@ -19,7 +20,7 @@ export class OrganizationComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = "./assets/search/searchOrganization.json";
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -32,12 +33,15 @@ export class OrganizationComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging: string = AdInsConstant.GetRefOrgPaging;
-  urlEnviPaging : string = environment.foundationUrl;
 
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService) { }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchOrganization.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefOrgPaging;
+    
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrgPaging;

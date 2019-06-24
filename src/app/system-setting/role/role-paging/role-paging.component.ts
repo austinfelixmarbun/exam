@@ -8,6 +8,7 @@ import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-role-paging',
@@ -18,7 +19,7 @@ export class RolePagingComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = './assets/search/searchRole.json';
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -32,8 +33,6 @@ export class RolePagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging: string = AdInsConstant.GetRefRolePaging;
-  urlEnviPaging : string = environment.foundationUrl;
 
   constructor(
     private service: NGXToastrService,
@@ -41,6 +40,11 @@ export class RolePagingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchRole.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefRolePaging;
+    
     console.log('masuk');
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;

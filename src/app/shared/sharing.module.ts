@@ -1,17 +1,13 @@
-import { LookupOrgMdlStrucComponent } from './lookup/lookup-org-mdl-struc/lookup-org-mdl-struc.component';
-import { LookupRoleComponent } from 'app/shared/lookup/lookup-role/lookup-role.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { SearchComponent } from 'app/shared/search/search.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { LookupzipcodeComponent } from 'app/shared/lookup/lookupzipcode/lookupzipcode.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 import { LookupBizUnitComponent } from 'app/shared/lookup/lookup-biz-unit/lookup-biz-unit.component';
 import { LookupOrgJobTitleComponent } from 'app/shared/lookup/lookup-org-job-title/lookup-org-job-title.component';
 import { LookupRefJobTitleComponent } from 'app/shared/lookup/lookup-ref-job-title/lookup-ref-job-title.component';
-import { LookupRefBankComponent } from 'app/shared/lookup/lookup-ref-bank/lookup-ref-bank.component';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
@@ -22,16 +18,20 @@ import { FormEngineComponent } from './form-engine/form-engine.component';
 import { FormEngineModule } from '@adins/form-engine';
 import { LookupemployeeModule } from '@adins/lookupemployee';
 import { LookupdistrictModule } from '@adins/lookupdistrict';
+import { LookuproleModule } from '@adins/lookuprole';
+import { LookuporgmdlstrucModule } from '@adins/lookuporgmdlstruc';
+import { LookupzipcodeModule } from '@adins/lookupzipcode';
+import { LookuprefbankModule } from '@adins/lookuprefbank';
 
 @NgModule({
     exports: [
         CommonModule,
         SearchComponent,
         LookupemployeeModule,
-        LookupzipcodeComponent,
+        LookupzipcodeModule,
         NgbModule,
-        LookupRefBankComponent,
-        LookupRoleComponent,
+        LookuprefbankModule,
+        LookuproleModule,
         LookupdistrictModule,
         LookupparentformModule,
         FormEngineComponent,
@@ -40,7 +40,7 @@ import { LookupdistrictModule } from '@adins/lookupdistrict';
         UcContactInfoComponent,
         TranslateModule,
         LookupBizUnitComponent,
-        LookupOrgMdlStrucComponent,
+        LookuporgmdlstrucModule,
         LookupOrgJobTitleComponent,
         LookupRefJobTitleComponent,
         UCSearchModule,
@@ -54,19 +54,16 @@ import { LookupdistrictModule } from '@adins/lookupdistrict';
         HttpModule,
         UCSearchModule,
         UcgridfooterModule,
-        TranslateModule
+        TranslateModule,
+        LookupzipcodeModule
     ],
     declarations: [
         SearchComponent,
-        LookupzipcodeComponent,
-        LookupRefBankComponent,
-        LookupRoleComponent,
         UcAddressComponent,
         FormEngineComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
         LookupBizUnitComponent,
-        LookupOrgMdlStrucComponent,
         LookupOrgJobTitleComponent,
         LookupRefJobTitleComponent
     ]

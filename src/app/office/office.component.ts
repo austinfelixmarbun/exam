@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/OfficeObj.model';
 import { environment } from 'environments/environment';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-office',
@@ -19,7 +20,7 @@ export class OfficeComponent implements OnInit {
 
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild(UCSearchComponent) searchComponent;
-  urlJson: string = "./assets/search/searchOffice.json";
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -29,9 +30,7 @@ export class OfficeComponent implements OnInit {
   officeObj: OfficeObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  urlQryPaging : string = AdInsConstant.GetListOffice;
-  urlEnviPaging : string = environment.foundationUrl;
-  displayNone: boolean = false
+  displayNone: boolean = false;
 
   foundationUrl: string = environment.foundationUrl;
 
@@ -39,6 +38,11 @@ export class OfficeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchOffice.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetListOffice;
+    
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListOffice;

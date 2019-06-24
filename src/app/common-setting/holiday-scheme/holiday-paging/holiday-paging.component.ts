@@ -7,6 +7,7 @@ import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-holiday-paging',
@@ -18,7 +19,7 @@ export class HolidayPagingComponent implements OnInit {
 
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild(UCSearchComponent) searchComponent;
-  urlJson: string = "./assets/search/searchHoliday.json";
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -28,13 +29,16 @@ export class HolidayPagingComponent implements OnInit {
   holidayObj: HolidayObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  urlQryPaging : string = AdInsConstant.GetHolidayPaging;
-  urlEnviPaging : string = environment.foundationUrl;
   foundationUrl: string = environment.foundationUrl;
   
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchHoliday.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetHolidayPaging;
+    
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetHolidayPaging;

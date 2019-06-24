@@ -8,6 +8,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-master-paging',
@@ -18,6 +19,7 @@ export class MasterPagingComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
+  inputObj: any;
   urlJson: string = './assets/search/searchMaster.json';
   resultData: string;
   pageNow: any;
@@ -32,8 +34,6 @@ export class MasterPagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   settingUrl: string = environment.settingUrl;
-  urlQryPaging: string = AdInsConstant.GetRefMasterPaging;
-  urlEnviPaging : string = environment.settingUrl;
   addCrit: CriteriaObj[];
 
   constructor(
@@ -42,6 +42,11 @@ export class MasterPagingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchMaster.json";
+    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefMasterPaging;
+    
     console.log('masuk');
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
@@ -89,6 +94,7 @@ export class MasterPagingComponent implements OnInit {
     critIsActive.restriction = AdInsConstant.RestrictionEq;
 
     this.addCrit.push(critIsActive);
+    this.inputObj.addCritInput = this.addCrit;
   }
 
   del(id: any) {

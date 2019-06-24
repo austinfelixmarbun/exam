@@ -1,5 +1,4 @@
-<lib-UCSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-  [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></lib-UCSearch>
+<lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
 
 <div [hidden]="resultData?.data == null">
   <table class="table table-responsive-md text-center table-hover">

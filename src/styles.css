@@ -111,6 +111,14 @@ thead tr th {
 .overlay {
     position : fixed !important;
 }
+
+#toast-container > div {
+    opacity:1;
+}
+
+.toast-error {
+    background-color: #BD362F !important;
+}
 /* 
 .adInsReqMsg {
     

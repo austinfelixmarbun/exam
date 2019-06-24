@@ -7,6 +7,7 @@ import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model'
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-working-hour-paging',
@@ -18,7 +19,7 @@ export class WorkingHourPagingComponent implements OnInit {
 
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild(UCSearchComponent) searchComponent;
-  urlJson: string = "./assets/search/searchWorkingHour.json";
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -28,13 +29,16 @@ export class WorkingHourPagingComponent implements OnInit {
   workingHourSchmHObj: WorkingHourSchmHObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  urlQryPaging : string = AdInsConstant.GetWorkHourSchmHPaging;
-  urlEnviPaging : string = environment.foundationUrl;
   foundationUrl: string = environment.foundationUrl;
   
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchWorkingHour.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetWorkHourSchmHPaging;
+
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetWorkHourSchmHPaging;

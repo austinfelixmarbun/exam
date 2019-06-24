@@ -6,6 +6,5 @@
   </select>
 </form>
 <br>
-<app-search id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-  [enviromentUrl]='urlEnviPaging' (result)="getResult($event)"></app-search>
+<app-search id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></app-search>
 <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>

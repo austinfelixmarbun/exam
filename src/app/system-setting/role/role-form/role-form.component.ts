@@ -10,9 +10,9 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { environment } from "environments/environment";
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { Checkbox } from 'primeng/primeng';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-role-form',
@@ -22,7 +22,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 export class RoleFormComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = "./assets/search/searchRefForm.json";
+  inputObj: any;
   resultData: any;
   pageNow: any;
   totalData: any;
@@ -36,8 +36,6 @@ export class RoleFormComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging: string = AdInsConstant.GetRefFormPaging;
-  urlEnviPaging: string = environment.foundationUrl;
   tempListId: Array<any> = [];
   refRoleId: any;
   check: any;
@@ -71,6 +69,11 @@ export class RoleFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchRefForm.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefFormPaging;
+    
     console.log("masuk");
     this.initiateForm();
     this.show = AdInsConstant.showData.split(",");

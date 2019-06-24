@@ -9,6 +9,7 @@ import { RefUserObj } from "app/shared/model/RefUserObj.Model";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from "@angular/common";
+import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
 
 @Component({
   selector: "app-user-paging",
@@ -18,7 +19,7 @@ import { DecimalPipe } from "@angular/common";
 export class UserPagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = "./assets/search/searchUser.json";
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -30,8 +31,6 @@ export class UserPagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging: string = AdInsConstant.GetRefUserPaging;
-  urlEnviPaging : string = environment.foundationUrl;
   constructor(
     private service: NGXToastrService,
     private https: HttpClient,
@@ -39,9 +38,13 @@ export class UserPagingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.show = AdInsConstant.showData.split(",");
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchUser.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefUserPaging;
+    
     this.pageNow = 1;
-    this.pageSize = this.show[0];
+    this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefUserPaging;
 
     this.initiateForm();

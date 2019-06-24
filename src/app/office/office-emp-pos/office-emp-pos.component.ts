@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -11,6 +11,7 @@ import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-office-emp-pos',
@@ -22,9 +23,7 @@ export class OfficeEmpPosComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = "./assets/search/searchEmpList.json";
-  urlQryPaging : string = AdInsConstant.GetEmpPositionPaging;
-  urlEnviPaging : string = environment.foundationUrl;
+  inputObj: any;
   refOfficeId: any;
   officeCode: any;
   officeName: any;
@@ -41,11 +40,11 @@ export class OfficeEmpPosComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   arrCrit: any;
-  
-  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) { 
+
+  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetEmpPositionPaging;
     this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteEmpPosition;
-    
+
     this.route.queryParams.subscribe(params => {
       if (params['refOfficeId'] != null) {
         this.refOfficeId = params['refOfficeId'];
@@ -60,14 +59,20 @@ export class OfficeEmpPosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchEmpList.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetEmpPositionPaging;
+
     this.pageNow = 1;
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
-      critObj.DataType = 'Numeric'
-      critObj.restriction = AdInsConstant.RestrictionEq;
-      critObj.propName = 'refOfficeId';
-      critObj.value = this.refOfficeId
-      this.arrCrit.push(critObj);
+    critObj.DataType = 'Numeric'
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'refOfficeId';
+    critObj.value = this.refOfficeId
+    this.arrCrit.push(critObj);
+    this.inputObj.arrCritObj = this.arrCrit;
   }
   searchSort(event: any) {
     if (this.resultData != null) {
@@ -115,9 +120,9 @@ export class OfficeEmpPosComponent implements OnInit {
         });
     }
   }
-  
+
   //** Start UC Search **/
-  getResult(event){
+  getResult(event) {
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
     this.ucgridFooter.pageNow = event.pageNow;
@@ -125,8 +130,7 @@ export class OfficeEmpPosComponent implements OnInit {
     this.ucgridFooter.resultData = this.resultData;
   }
 
-  onSelect(event)
-  {
+  onSelect(event) {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);

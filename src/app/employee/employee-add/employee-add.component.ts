@@ -21,6 +21,9 @@ export class EmployeeAddComponent implements OnInit {
 
   @ViewChild(UcAddressComponent) ucAddr;
   @ViewChild(UcContactInfoComponent) ucContact;
+  urlJson: any = "./assets/lookup/lookupRefBank.json";
+  urlQryPaging: any = AdInsConstant.GetBankPaging;
+  urlEnviPaging : any = environment.settingUrl;
   pageType: string = "add";
   refEmpId: any;
   EmpBankAccId: any;
@@ -67,7 +70,7 @@ export class EmployeeAddComponent implements OnInit {
   refBankUrl: any;
   empBankUrl: any;
   bankName: string;
-  codeSelect;
+  idSelect: any;
   jsonSelect: string;
 
   foundationUrl: string = environment.foundationUrl;
@@ -144,7 +147,7 @@ export class EmployeeAddComponent implements OnInit {
                 response => {
                   this.bankName = response["returnObject"].bankName;
                   this.jsonSelect = response["returnObject"];
-                  this.codeSelect = response["returnObject"].bankCode;
+                  this.idSelect = response["returnObject"].bankCode;
                 },
                 error => {
                   console.log("Error");

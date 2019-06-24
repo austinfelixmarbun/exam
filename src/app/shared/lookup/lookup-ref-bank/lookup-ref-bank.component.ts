@@ -5,6 +5,7 @@ import { environment } from 'environments/environment';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-lookup-ref-bank',
@@ -13,15 +14,13 @@ import { DecimalPipe } from '@angular/common';
 })
 export class LookupRefBankComponent implements OnInit {
 
-  @Input() urlJson: string = "./assets/lookup/lookupRefBank.json";
-  urlQryPaging: string = AdInsConstant.GetBankPaging;
-  urlEnviPaging : string = environment.settingUrl;
   @Input() nameSelect: any = "Search ...";
   @Input() codeSelect: any;
   @Input() jsonSelect:string;
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild('content') contentTemplate;
+  inputObj: any;
 
   configuration: any;
   urlGet: string;
@@ -44,6 +43,11 @@ export class LookupRefBankComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/lookup/lookupRefBank.json";
+    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetBankPaging;
+    
     this.apiUrl = environment.settingUrl + AdInsConstant.GetBankPaging;
     this.pageSize = 10;
   }
@@ -66,7 +70,6 @@ export class LookupRefBankComponent implements OnInit {
   }
 
   getResult(ucgridFooter, event) {
-    console.log(this.urlQryPaging);
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
     ucgridFooter.pageNow = event.pageNow;

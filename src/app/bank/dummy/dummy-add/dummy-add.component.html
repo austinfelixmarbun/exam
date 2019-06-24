@@ -1,3 +1,56 @@
-<p>
-  dummy-add works!
-</p>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" name="dummyForm" #dummyForm="ngForm" novalidate
+        (ngSubmit)="dummyForm.form.valid && SaveDummyForm(dummyForm)">
+          <div class="form-body">
+            <h4 class="form-section card-title"><i class="ft-file-text"></i> Dummy Add</h4>
+            <div class="form-group row">
+              <label class="col-md-3 label-control adInsLabel" for="dummyCode">Dummy Code </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput" name="dummyCode" [(ngModel)]="dummyCode"
+                #DummyCode="ngModel" [ngClass]="{ 'is-invalid': dummyForm.submitted && DummyCode.invalid }" [required]="formSet != null && formSet.dummyCode.required">
+                <div *ngIf="dummyForm.submitted && DummyCode.invalid" class="invalid-feedback">
+                  <div *ngIf="DummyCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control adInsLabel" for="dummyName">Dummy Name </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput" name="dummyName" [(ngModel)]="dummyName"
+                #DummyName="ngModel" [ngClass]="{ 'is-invalid': dummyForm.submitted && DummyName.invalid }" required>
+                <div *ngIf="dummyForm.submitted && DummyName.invalid" class="invalid-feedback">
+                  <div *ngIf="DummyName.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 label-control adInsLabel" for="descr">Description </label>
+              <div class="col-md-9">
+                <textarea rows="5" class="form-control adInsInput" name="descr" [(ngModel)]="descr"
+                #Descr="ngModel"></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 label-control adInsLabel" for="isActive">Active Status </label>
+                <div class="col-md-9">
+                    <input class="border-primary" type="checkbox"
+                    [ngModel]="isActive" data-md-icheck (change)="toggleVisibility($event)" name="isActive">
+                </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/bank/dummy']">
+              <i class="fa fa-arrow-circle-left"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import { environment } from 'environments/environment';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-currency',
@@ -16,7 +17,7 @@ export class CurrencyComponent implements OnInit {
 
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild(UCSearchComponent) searchComponent;
-  urlJson: string = "./assets/search/searchCurrency.json";
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -26,13 +27,16 @@ export class CurrencyComponent implements OnInit {
   currObj: CurrObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  urlQryPaging : string = AdInsConstant.GetRefCurrPaging;
-  urlEnviPaging : string = environment.settingUrl;
   settingUrl: string = environment.settingUrl;
   
   constructor() { }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchCurrency.json";
+    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefCurrPaging;
+    
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.settingUrl + AdInsConstant.GetRefCurrPaging;

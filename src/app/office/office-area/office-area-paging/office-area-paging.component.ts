@@ -7,6 +7,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-office-area-paging',
@@ -17,7 +18,7 @@ export class OfficeAreaPagingComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = './assets/search/searchOfficeArea.json';
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -29,8 +30,6 @@ export class OfficeAreaPagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging: string = AdInsConstant.GetRefOfficeAreaPaging;
-  urlEnviPaging : string = environment.foundationUrl;
 
   refOfficeAreaObj: RefOfficeAreaObj;
   constructor(
@@ -39,7 +38,11 @@ export class OfficeAreaPagingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('masuk');
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchOfficeArea.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefOfficeAreaPaging;
+
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOfficeAreaPaging;

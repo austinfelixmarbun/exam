@@ -12,6 +12,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { formatDate, DecimalPipe } from '@angular/common';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 @Component({
   selector: 'app-employee-position',
   templateUrl: './employee-position.component.html',
@@ -22,9 +23,7 @@ export class EmployeePositionComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = "./assets/search/searchEmpList.json";
-  urlQryPaging : string = AdInsConstant.GetEmpPositionPaging;
-  urlEnviPaging : string = environment.foundationUrl;
+  inputObj: any;
   refEmpId: any;
   empNo: any
   empName: any
@@ -60,6 +59,11 @@ export class EmployeePositionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchEmpList.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetEmpPositionPaging;
+    
     this.pageNow = 1;
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
@@ -68,6 +72,7 @@ export class EmployeePositionComponent implements OnInit {
       critObj.propName = 'refEmpId';
       critObj.value = this.refEmpId
       this.arrCrit.push(critObj);
+      this.inputObj.arrCritObj = this.arrCrit;
   }
 
   searchSort(event: any) {

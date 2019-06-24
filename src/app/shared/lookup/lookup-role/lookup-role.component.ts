@@ -7,6 +7,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
+import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
 
 @Component({
   selector: "app-lookup-role",
@@ -16,9 +17,6 @@ import { UCSearchComponent } from '@adins/ucsearch';
 export class LookupRoleComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
-  @Input() urlJson: string = "./assets/lookup/lookupRole.json";
-  urlQryPaging: string = AdInsConstant.GetRefRolePaging;
-  urlEnviPaging: string = environment.foundationUrl;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
@@ -27,6 +25,7 @@ export class LookupRoleComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild("content") contentTemplate;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
+  inputObj: any;
 
   configuration: any;
   urlGet: string;
@@ -50,6 +49,11 @@ export class LookupRoleComponent implements OnInit {
   addCrit: Array<any>;
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/lookup/lookupRole.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefRolePaging;
+    
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
     this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
@@ -88,7 +92,6 @@ export class LookupRoleComponent implements OnInit {
   }
 
   getResult(ucgridFooter, event) {
-    console.log(this.urlQryPaging);
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
     ucgridFooter.pageNow = event.pageNow;

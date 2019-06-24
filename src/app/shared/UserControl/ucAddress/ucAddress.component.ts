@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import 'rxjs/add/operator/map';
 import { ControlContainer, NgForm } from '@angular/forms';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { environment } from 'environments/environment';
 @Component({
   selector: 'app-ucAddress',
   templateUrl: './ucAddress.component.html',
@@ -14,6 +16,9 @@ export class UcAddressComponent implements OnInit {
   ngOnInit() { }
   @Input() resultData: any;
   @Input() parentForm: any;
+  urlJson: any = "./assets/lookup/lookupZipcode.json";
+  urlQryPaging: any = AdInsConstant.GetRefZipcodePaging;
+  urlEnviPaging : any = environment.settingUrl;
   jsonData: any;
   areaCode2: any;
   areaCode1: any;

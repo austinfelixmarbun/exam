@@ -7,6 +7,7 @@ import { DecimalPipe } from '@angular/common';
 import { environment } from 'environments/environment';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
+import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
 
 
 @Component({
@@ -17,9 +18,6 @@ import { UCSearchComponent } from '@adins/ucsearch';
 export class LookupOrgMdlStrucComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
-  @Input() urlJson: string = "./assets/lookup/lookupOrgMdlStruc.json";
-  urlQryPaging: string = AdInsConstant.GetOrgMdlStrucPaging;
-  urlEnviPaging : string = environment.foundationUrl;
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
@@ -27,6 +25,7 @@ export class LookupOrgMdlStrucComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild("content") contentTemplate;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
+  inputObj: any;
 
   bizUnitName: any;
   refBizUnitId: any;
@@ -50,6 +49,11 @@ export class LookupOrgMdlStrucComponent implements OnInit {
   addCrit: Array<any>;
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/lookup/lookupOrgMdlStruc.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetOrgMdlStrucPaging;
+    
     this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlStrucPaging;
     this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
@@ -62,6 +66,7 @@ export class LookupOrgMdlStrucComponent implements OnInit {
         this.addCrit.push(this.addCritInput[i]);
       }
     }
+    this.inputObj.addCritInput = this.addCrit;
     /* #endregion */
   }
 
@@ -88,7 +93,6 @@ export class LookupOrgMdlStrucComponent implements OnInit {
   }
 
   getResult(ucgridFooter, event) {
-    console.log(this.urlQryPaging);
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
     ucgridFooter.pageNow = event.pageNow;

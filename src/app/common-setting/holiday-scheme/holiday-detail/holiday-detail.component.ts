@@ -11,6 +11,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
 import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-holiday-detail',
@@ -22,9 +23,7 @@ export class HolidayDetailComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = "./assets/search/searchHolidayDetail.json";
-  urlQryPaging : string = AdInsConstant.GetHolidayDetailPaging;
-  urlEnviPaging : string = environment.foundationUrl;
+  inputObj: any;
   pageType: string = "add";
   holidaySchmHId: any;
   holidaySchmCode: any;
@@ -68,6 +67,11 @@ export class HolidayDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchHolidayDetail.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetHolidayDetailPaging;
+    
     if (this.pageType == "edit") {
       this.isEdit = true;
       this.editDetail = 'true';
@@ -96,6 +100,8 @@ export class HolidayDetailComponent implements OnInit {
         critObj.propName = 'holidaySchmHId';
         critObj.value = this.holidaySchmHId
         this.arrCrit.push(critObj);
+
+        this.inputObj.arrCritObj = this.arrCrit;
     }
   }
 

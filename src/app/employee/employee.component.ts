@@ -1,32 +1,29 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
-import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService, ExcelService, DecimalPipe] // add NgbPaginationConfig to the component providers
+  providers: [NgbPaginationConfig, NGXToastrService] // add NgbPaginationConfig to the component providers
 })
 export class EmployeeComponent implements OnInit {
 
   //** Start Query Paging */
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlQryPaging : string = AdInsConstant.GetListEmployee;
-  urlEnviPaging : string = environment.foundationUrl;
+  inputObj : any;
   //** End Query Paging */
 
-  urlJson: string = "./assets/search/searchEmployee.json";
   resultData: string;
   ExcelData: any;
   empObj: RefEmpObj;
@@ -40,23 +37,28 @@ export class EmployeeComponent implements OnInit {
   orderByValue: boolean = true;
 
   foundationUrl: string = environment.foundationUrl;
-  constructor(private httpClient: HttpClient, private toastr: NGXToastrService, private excelService: ExcelService, private https: HttpClient) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService) { }
+
+  ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchEmployee.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetListEmployee;
+    
+    this.pageNow = 1;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetListEmployee;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefEmpAndEmpBankAcc;
+    this.initiateForm()
+  }
 
   initiateForm() {
-    this.getJSON(this.urlJson).subscribe(data => {
+    this.getJSON(this.inputObj._url).subscribe(data => {
       this.exportData = data.exportExcel;
     });
   }
 
   public getJSON(url: string): Observable<any> {
-    return this.https.get(url);
-  }
-
-  ngOnInit() {
-    this.pageNow = 1;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetListEmployee;
-    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefEmpAndEmpBankAcc;
-    this.initiateForm()
+    return this.http.get(url);
   }
 
   //** Start UC Search **/
@@ -108,7 +110,7 @@ export class EmployeeComponent implements OnInit {
     if (confirm("Are you sure to delete this record?")) {
       this.empObj = new RefEmpObj();
       this.empObj.refEmpId = refEmpId;
-      this.httpClient.post(this.deleteUrl, this.empObj).subscribe(
+      this.http.post(this.deleteUrl, this.empObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.searchPagination(this.pageNow);
@@ -124,41 +126,8 @@ export class EmployeeComponent implements OnInit {
     this.searchComponent.initiateForm();
   }
 
-  exportAsXLSX(): void {
-    this.searchComponent.search(this.apiUrl, this.pageNow, 9999, null)
-      .subscribe(
-        (response) => {
-          console.log("Success");
-          this.ExcelData = response.returnObject.data;
-          this.excelService.exportAsExcelFile(this.ExcelData, 'sample');
-          console.log(response);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
-  }
-
   addToTemp(body: any) {
     console.log(body);
     console.log(body["tbody"]);
-  }
-
-  // Success Type
-  typeSuccess() {
-    this.toastr.typeSuccess();
-  }
-
-  typeError() {
-    this.toastr.typeError();
-  }
-
-  timeout() {
-    this.toastr.timeout();
-  }
-
-  errMsg() {
-    this.toastr.errorMessage('asdasd');
   }
 }

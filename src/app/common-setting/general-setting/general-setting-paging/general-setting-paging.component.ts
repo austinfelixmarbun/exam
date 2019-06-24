@@ -5,6 +5,7 @@ import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from "@angular/common";
+import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
 
 @Component({
   selector: "app-general-setting-paging",
@@ -14,7 +15,7 @@ import { DecimalPipe } from "@angular/common";
 export class GeneralSettingPagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = "./assets/search/searchGeneralSetting.json";
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -27,11 +28,14 @@ export class GeneralSettingPagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   settingUrl: string = environment.settingUrl;
-  urlQryPaging: string = AdInsConstant.GetGeneralSettingPaging;
-  urlEnviPaging : string = environment.settingUrl;
   addCrit: CriteriaObj[];
 
-  constructor() {}
+  constructor() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchGeneralSetting.json";
+    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetGeneralSettingPaging;
+  }
 
   ngOnInit() {
     console.log("masuk");
@@ -68,13 +72,13 @@ export class GeneralSettingPagingComponent implements OnInit {
   }
 
   initiateForm() {
-    this.addCrit = new Array();
+    this.inputObj.addCritInput = new Array();
     var critIsActive = new CriteriaObj();
     critIsActive.propName = "is_Updateable";
     critIsActive.value = "1";
     critIsActive.restriction = AdInsConstant.RestrictionEq;
 
-    this.addCrit.push(critIsActive);
+    this.inputObj.addCritInput.push(critIsActive);
   }
 
   searchSort(event: any) {

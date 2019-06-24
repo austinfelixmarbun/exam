@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location, DecimalPipe } from "@angular/common";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-organization-model-paging',
@@ -21,7 +22,7 @@ export class OrganizationModelPagingComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlJson: string = './assets/search/searchOrgModel.json';
+  inputObj: any;
   resultData: string;
   pageNow: any;
   totalData: any;
@@ -37,8 +38,6 @@ export class OrganizationModelPagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   foundationUrl: string = environment.foundationUrl;
-  urlQryPaging: string = AdInsConstant.GetOrgMdlPaging;
-  urlEnviPaging : string = environment.foundationUrl;
   addCrit: CriteriaObj[];
 
   constructor(private route: ActivatedRoute, private service: NGXToastrService, private https: HttpClient, private location: Location) {
@@ -50,17 +49,16 @@ export class OrganizationModelPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('masuk');
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchOrgModel.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetOrgMdlPaging;
+    
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
     this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlPaging;
     this.initiateForm()
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
-    //   .subscribe(data => {
-    //     console.log(data);
-    //   }
-    //   )
   }
 
   getResult(event) {
@@ -109,6 +107,7 @@ export class OrganizationModelPagingComponent implements OnInit {
     additionCrit.restriction = AdInsConstant.RestrictionEq;
 
     this.addCrit.push(additionCrit);
+    this.inputObj.addCritInput = this.addCrit;
   }
 
   del(id: any) {

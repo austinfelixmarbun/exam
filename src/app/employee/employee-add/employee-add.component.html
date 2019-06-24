@@ -78,8 +78,8 @@
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" for="bankName" translate>Bank Name </label>
               <div class="col-md-9">
-                <app-lookup-ref-bank #uclRefBank [nameSelect]="bankName" [codeSelect]="codeSelect"
-                  [jsonSelect]="jsonSelect"></app-lookup-ref-bank>
+                <lib-lookuprefbank #uclRefBank [nameSelect]="bankName" [idSelect]="idSelect"
+                  [jsonSelect]="jsonSelect" [urlJson]="urlJson" [urlEnviPaging]="urlEnviPaging" [urlQryPaging]="urlQryPaging"></lib-lookuprefbank>
               </div>
             </div>
             <div class="form-group row">

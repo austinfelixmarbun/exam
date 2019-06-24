@@ -7,13 +7,13 @@ import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
-import { DecimalPipe } from '@angular/common';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-ref-job-title',
   templateUrl: './ref-job-title.component.html',
   styleUrls: ['./ref-job-title.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe] // add NgbPaginationConfig to the component providers
+  providers: [NgbPaginationConfig, NGXToastrService] // add NgbPaginationConfig to the component providers
 
 })
 export class RefJobTitleComponent implements OnInit {
@@ -21,11 +21,9 @@ export class RefJobTitleComponent implements OnInit {
   //** Start Query Paging */
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  urlQryPaging : string = AdInsConstant.GetRefJobTitle;
-  urlEnviPaging : string = environment.foundationUrl;
+  inputObj: any;
   //** End Query Paging */
 
-  urlJson: string = "./assets/search/searchJobTitle.json";
   resultData: any;
   rjtObj: RefJobTitleObj;
   pageNow: any;
@@ -36,17 +34,16 @@ export class RefJobTitleComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  // array of all items to be paged
-  private allItems: any[];
-  // pager object
-  pager: any = {};
-  // paged items
-  pagedItems: any[];
   foundationUrl: string = environment.foundationUrl;
 
-  constructor(private httpClient: HttpClient, private toastr: NGXToastrService) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchJobTitle.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefJobTitle;
+    
     this.pageNow = 1;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefJobTitle;
     this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefJobTitle;
@@ -101,28 +98,11 @@ export class RefJobTitleComponent implements OnInit {
     if (confirm("Are you sure to delete this record?")) {
       this.rjtObj = new RefJobTitleObj();
       this.rjtObj.RefJobTitleId = refJobId;
-      this.httpClient.post(this.deleteUrl, this.rjtObj).subscribe(
+      this.http.post(this.deleteUrl, this.rjtObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.searchPagination(this.pageNow);
         });
     }
   }
-  // Success Type
-  typeSuccess() {
-    this.toastr.typeSuccess();
-  }
-
-  typeError() {
-    this.toastr.typeError();
-  }
-
-  timeout() {
-    this.toastr.timeout();
-  }
-
-  errMsg() {
-    this.toastr.errorMessage('asdasd');
-  }
-
 }

@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 
 @Component({
@@ -17,20 +18,18 @@ export class LookupzipcodeComponent implements OnInit {
 
   constructor(private modalService: NgbModal) { }
 
-  @Input() urlJson: string = "./assets/lookup/lookupZipcode.json";
   @Input() nameSelect: any = "Search ...";
   @Input() idSelect: any;
   @Input() jsonSelect: string;
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
+  inputObj: any;
 
   roleName: any;
   refRoleId: any;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @Output() select : EventEmitter<any> = new EventEmitter();
 
-  urlQryPaging : any = AdInsConstant.GetRefZipcodePaging;
-  urlEnviPaging : string = environment.settingUrl;
   configuration: any;
   urlGet: string;
   countForm = 0;
@@ -51,6 +50,11 @@ export class LookupzipcodeComponent implements OnInit {
   settingUrl: string = environment.settingUrl;
 
   ngOnInit() {
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/lookup/lookupZipcode.json";
+    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefZipcodePaging;
+    
     this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipcodePaging;
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;

@@ -22,8 +22,7 @@
       </div>
     </div>
   </div>
-  <lib-UCSearch id="ucSearch" style="width:100%;" [_url]='urlJson' [apiQryPaging]='urlQryPaging'
-    [enviromentUrl]='urlEnviPaging' [arrCritObj]='arrCrit' (result)="getResult($event)"></lib-UCSearch>
+  <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
 </div>
 
 <div [hidden]="resultData?.data == null">

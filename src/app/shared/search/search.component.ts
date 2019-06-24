@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2, Eve
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { formatDate, DecimalPipe } from '@angular/common';
+import { formatDate } from '@angular/common';
 import 'rxjs/add/operator/map';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { RequestCriteriaObj } from 'app/shared/model/RequestCriteriaObj.model';
@@ -14,18 +14,14 @@ import { ExcelService } from '../excel-service/excel-service';
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  providers: [DecimalPipe, ExcelService]
+  providers: [ExcelService]
 })
 export class SearchComponent implements OnInit {
   @ViewChild('formIdSearch') myForm: ElementRef;
-  @Input() _url: string;
-  @Input() apiQryPaging: string;
-  @Input() enviromentUrl: string;
-  @Input() arrCritObj: any;
-  @Input() pageSize: any = 10;
-  @Input() pageNow: any = 1;
-  @Input() addCritInput: CriteriaObj[] = null;
+  @Input() searchInput: any;
   @Output() result: EventEmitter<any> = new EventEmitter();
+  pageSize: any = 10;
+  pageNow: any = 1;
   orderByKey: any;
   orderByValue: any;
   tempUrl: string;
@@ -49,7 +45,7 @@ export class SearchComponent implements OnInit {
 
 
   initiateForm() {
-    this.getJSON(this._url).subscribe(data => {
+    this.getJSON(this.searchInput._url).subscribe(data => {
       console.log(data);
       this.configuration = data;
       this.urlGet = data.url;
@@ -103,8 +99,8 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiUrl = this.enviromentUrl + this.apiQryPaging;
-    this.arrCrit = this.arrCritObj;
+    this.apiUrl = this.searchInput.enviromentUrl + this.searchInput.apiQryPaging;
+    this.arrCrit = this.searchInput.arrCritObj;
     let js = this._renderer2.createElement('script');
     js.text = `
           $(document).ready(function(){
@@ -200,14 +196,14 @@ export class SearchComponent implements OnInit {
       }
 
     }
-    if (addCrit !== null) {
+    if (addCrit != null) {
       for (var i = 0; i < addCrit.length; i++) {
         arrCrit.push(addCrit[i]);
       }
     }
-    else if (this.addCritInput !== null) {
-      for (var i = 0; i < this.addCritInput.length; i++) {
-        arrCrit.push(this.addCritInput[i]);
+    else if (this.searchInput.addCritInput != null || this.searchInput.addCritInput != undefined) {
+      for (var i = 0; i < this.searchInput.addCritInput.length; i++) {
+        arrCrit.push(this.searchInput.addCritInput[i]);
       }
     }
 
@@ -234,7 +230,7 @@ export class SearchComponent implements OnInit {
   }
 
   resolveObject(obj: any, url: string, crit: RequestCriteriaObj = null) {
-    const val = this.postJSON(this.enviromentUrl + url, crit);
+    const val = this.postJSON(this.searchInput.enviromentUrl + url, crit);
     val.subscribe(tempData => {
         obj.itemsUrl = tempData.returnObject;
     });
