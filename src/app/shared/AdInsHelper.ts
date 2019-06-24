@@ -1,6 +1,5 @@
 import { formatDate } from "@angular/common";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { ParsedVariable } from "@angular/compiler";
 
 export class AdInsHelper {
     //Function
