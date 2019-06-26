@@ -20,10 +20,14 @@
                 </td>
                 <td>{{item.empNo}}</td>
                 <td class="text-left">{{item.empName}}</td>
-                <td *ngIf="item.isExt === '1'">Yes</td>
-                <td *ngIf="item.isExt === '0'">No</td>
-                <td *ngIf="item.isActive === '1'">Yes</td>
-                <td *ngIf="item.isActive === '0'">No</td>
+                <td>
+                  <span *ngIf="item.isExt == '1'">Yes</span>
+                  <span *ngIf="item.isExt == '0'">No</span>
+                </td>
+                <td>
+                  <span *ngIf="item.isActive == '1'">Yes</span>
+                  <span *ngIf="item.isActive == '0'">No</span>
+                </td>
                 <td>
                     <a class="success p-0" data-original-title="" title="" [routerLink]="['/employee/employeePosition']"
                         [queryParams]="{refEmpId:item.refEmpId,empNo:item.empNo,empName:item.empName}">

@@ -31,7 +31,8 @@
                             <div class="form-group row">
                                 <label class="col-md-3  adInsLabel" translate>Active Status </label>
                                 <div class="col-md-9">
-                                    <input class="border-primary" [checked]="isActive" type="checkbox" id="projectinput5">
+                                    <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
+                                    (change)="toggleActive($event)" name="isActive" type="checkbox" id="projectinput5">
                                 </div>
                             </div>
                         </div>

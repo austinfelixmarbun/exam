@@ -32,7 +32,6 @@ export class BankAddComponent implements OnInit {
     editUrl: any;
     key: any;
     criteria: CriteriaObj[] = [];
-    afterSaveUrl = "/bank";
 
     constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient) {
         this.route.queryParams.subscribe(params => {
@@ -88,7 +87,7 @@ export class BankAddComponent implements OnInit {
             this.http.post(this.editUrl, this.bankObj).subscribe(
                 (response) => {
                     console.log(response);
-                    this.router.navigateByUrl('/bank');
+                    this.router.navigateByUrl('/bank/paging');
                     this.toastr.successMessage(response['message']);
                 },
                 (error) => {
@@ -110,7 +109,7 @@ export class BankAddComponent implements OnInit {
                 (response) => {
                     console.log(response);
                     this.toastr.successMessage(response['message']);
-                    this.router.navigateByUrl('/bank', { skipLocationChange: true }).then(() =>
+                    this.router.navigateByUrl('/bank/paging', { skipLocationChange: true }).then(() =>
                         this.router.navigate(['/bank/add']));
                 },
                 (error) => {

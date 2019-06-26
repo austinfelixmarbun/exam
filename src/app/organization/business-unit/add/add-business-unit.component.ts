@@ -68,7 +68,7 @@ export class AddBusinessUnitComponent implements OnInit {
 
     Save(BusinessUnitAddReqForm: NgForm): void {
         if (this.mode === "edit") {
-            this.editUrl = this.foundationUrl + AdInsConstant.EditRefZipcode;
+            this.editUrl = this.foundationUrl + AdInsConstant.EditRefBizUnit;
             this.bizUnitObj = new BusinessUnitObj();
             this.bizUnitObj = BusinessUnitAddReqForm.value;
             this.bizUnitObj.RefBizUnitId = this.param;
@@ -88,7 +88,7 @@ export class AddBusinessUnitComponent implements OnInit {
                 });
         }
         else {
-            this.editUrl = this.foundationUrl + AdInsConstant.AddRefZipcode;
+            this.editUrl = this.foundationUrl + AdInsConstant.AddRefBizUnit;
             this.bizUnitObj = new BusinessUnitObj();
             this.bizUnitObj = BusinessUnitAddReqForm.value;
             this.bizUnitObj.RefBizUnitId = "0";
@@ -107,8 +107,8 @@ export class AddBusinessUnitComponent implements OnInit {
                 });
         }
     }
-
-    toggleVisibility(e) {
-        this.isActive = e.target.checked;
+    
+    toggleActive(e) {
+      this.isActive = e.target.checked;
     }
 }

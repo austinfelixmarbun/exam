@@ -25,13 +25,17 @@
             <td class="text-left">{{item.officeAddr}}</td>
             <td class="text-left">{{item.city}}</td>
             <td class="text-left">{{item.orgMdlName}}</td>
-            <td *ngIf="item.isActive === '1'">Yes</td>
-            <td *ngIf="item.isActive === '0'">No</td>
+            <td>
+              <span *ngIf="item.isActive == '1'">Yes</span>
+              <span *ngIf="item.isActive == '0'">No</span>
+            </td>
             <td *ngIf="item.mrKonvenSyariah === 'KON'">Konvensional</td>
             <td *ngIf="item.mrKonvenSyariah === 'SYA'">Syariah</td>
             <td *ngIf="item.mrKonvenSyariah === ''"></td>
-            <td *ngIf="item.isVirtualOffice === '1'">Yes</td>
-            <td *ngIf="item.isVirtualOffice === '0'">No</td>
+            <td>
+              <span *ngIf="item.isVirtualOffice == '1'">Yes</span>
+              <span *ngIf="item.isVirtualOffice == '0'">No</span>
+            </td>
             <td>
                 <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/officeEmpPos']"
                 [queryParams]="{refOfficeId:item.refOfficeId,officeCode:item.officeCode,officeName:item.officeName}">

@@ -15,8 +15,8 @@
         <td>{{item.areaCode}}</td>
         <td class="text-left">{{item.areaName}}</td>
         <td>
-          <div *ngIf="item.isActive === '1'">Yes</div>
-          <div *ngIf="item.isActive === '0'">No</div>
+          <span *ngIf="item.isActive == '1'">Yes</span>
+          <span *ngIf="item.isActive == '0'">No</span>
         </td>
         <td>
           <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/officeArea/detail']"
