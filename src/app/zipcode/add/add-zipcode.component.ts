@@ -9,6 +9,7 @@ import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 
 @Component({
     selector: 'add-bank',
@@ -18,6 +19,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 export class ZipcodeAddComponent implements OnInit {
 
     param: string;
+    inputLookupObj: any;
 
     businessUnitCode: string;
     businessUnitName: string;
@@ -35,10 +37,6 @@ export class ZipcodeAddComponent implements OnInit {
     jsonSelect: string;
     provDistrictObj : RefProvDistrictObj;
     urlGetProvDistrict : string;
-    url: any = './assets/lookup/lookupDistrict.json';
-    urlQryPaging: string = AdInsConstant.GetRefProvDistrictPaging;
-    urlEnviPaging : string = environment.settingUrl;
-    crit : CriteriaObj[];
 
     constructor(private router: Router,private route: ActivatedRoute, private http: HttpClient) {
         this.route.queryParams.subscribe(params => {
@@ -48,6 +46,11 @@ export class ZipcodeAddComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.inputLookupObj = new InputLookupObj();
+        this.inputLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
+        this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefProvDistrictPaging;
+        this.inputLookupObj.urlEnviPaging = environment.settingUrl;
+        
         if (this.mode === "edit") {
             this.apiUrl = this.foundationUrl + AdInsConstant.GetRefZipCode;
             this.urlGetProvDistrict = this.foundationUrl + AdInsConstant.GetRefProvDistrictObj;
@@ -69,9 +72,9 @@ export class ZipcodeAddComponent implements OnInit {
                     this.provDistrictObj.refProvDistrictId = this.result.refProvDistrictId;
                     this.http.post(this.urlGetProvDistrict, this.provDistrictObj).subscribe(
                         (response) => {
-                            this.districtName = response["returnObject"].name;
-                            this.jsonSelect = response["returnObject"];
-                            this.idSelect = response["returnObject"].refProvDistrictId;
+                            this.inputLookupObj.nameSelect = response["returnObject"].name;
+                            this.inputLookupObj.jsonSelect = response["returnObject"];
+                            this.inputLookupObj.idSelect = response["returnObject"].refProvDistrictId;
                         })
                 },
                 (error) => {

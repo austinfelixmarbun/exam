@@ -10,6 +10,7 @@ import { formatDate } from "@angular/common";
 import { RefBankObj } from "app/shared/model/RefBankObj.Model";
 import { UcAddressComponent } from "app/shared/UserControl/ucAddress/ucAddress.component";
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
+import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
 
 @Component({
   selector: "app-employee-add",
@@ -21,9 +22,7 @@ export class EmployeeAddComponent implements OnInit {
 
   @ViewChild(UcAddressComponent) ucAddr;
   @ViewChild(UcContactInfoComponent) ucContact;
-  urlJson: any = "./assets/lookup/lookupRefBank.json";
-  urlQryPaging: any = AdInsConstant.GetBankPaging;
-  urlEnviPaging : any = environment.settingUrl;
+  inputLookupObj: any;
   pageType: string = "add";
   refEmpId: any;
   EmpBankAccId: any;
@@ -101,6 +100,11 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj.urlJson = "./assets/lookup/lookupRefBank.json";
+    this.inputLookupObj.urlQryPaging = AdInsConstant.GetBankPaging;
+    this.inputLookupObj.urlEnviPaging = environment.settingUrl;
+    
     if (this.pageType == "edit") {
       this.empObj = new RefEmpObj();
       this.empObj.refEmpId = this.refEmpId;
@@ -145,9 +149,9 @@ export class EmployeeAddComponent implements OnInit {
               this.bankObj.bankCode = response["returnObject"].bankCode;
               this.httpClient.post(this.refBankUrl, this.bankObj).subscribe(
                 response => {
-                  this.bankName = response["returnObject"].bankName;
-                  this.jsonSelect = response["returnObject"];
-                  this.idSelect = response["returnObject"].bankCode;
+                  this.inputLookupObj.nameSelect = response["returnObject"].bankName;
+                  this.inputLookupObj.jsonSelect = response["returnObject"];
+                  this.inputLookupObj.idSelect = response["returnObject"].bankCode;
                 },
                 error => {
                   console.log("Error");

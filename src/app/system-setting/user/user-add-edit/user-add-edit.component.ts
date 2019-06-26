@@ -11,6 +11,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
+import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
 
 @Component({
   selector: "app-user-add-edit",
@@ -19,6 +20,7 @@ import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
 })
 export class UserAddEditComponent implements OnInit {
   foundationUrl: string = environment.foundationUrl;
+  inputLookupObj: any;
   apiUrl: any;
   parents: string;
   refUserObj: RefUserObj;
@@ -34,9 +36,6 @@ export class UserAddEditComponent implements OnInit {
   IsActive: any;
   RefUserId: any;
   loggedInMethod: any = 'DB';
-  url: any = './assets/lookup/lookupEmp.json';
-  urlQryPaging: string = AdInsConstant.GetListEmployee;
-  urlEnviPaging : string = environment.foundationUrl;
 
   constructor(
     private router: Router,
@@ -44,7 +43,6 @@ export class UserAddEditComponent implements OnInit {
     private location: Location,
     private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
-    private toastr: NGXToastrService,
     private service: NGXToastrService
   ) {
     this.route.queryParams.subscribe(params => {
@@ -60,6 +58,11 @@ export class UserAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj.urlJson = "./assets/lookup/lookupEmp.json";
+    this.inputLookupObj.urlQryPaging = AdInsConstant.GetListEmployee;
+    this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+
     if (this.type === "edit") {
       var empObj: RefEmpObj;
       var getEmpUrl: any;
@@ -98,9 +101,9 @@ export class UserAddEditComponent implements OnInit {
           empObj.refEmpId = +this.refUserObj.refEmpId;
           this.httpClient.post(getEmpUrl, empObj).subscribe(response => {
             empObj = response["returnObject"];
-            this.nameSelect = empObj.empName;
-            this.jsonSelect = response["returnObject"];
-            this.idSelect = empObj.refEmpId;
+            this.inputLookupObj.nameSelect = empObj.empName;
+            this.inputLookupObj.jsonSelect = response["returnObject"];
+            this.inputLookupObj.idSelect = empObj.refEmpId;
           });
         },
         error => {
@@ -128,9 +131,9 @@ export class UserAddEditComponent implements OnInit {
           empObj.refEmpId = +this.refUserObj.refEmpId;
           this.httpClient.post(getEmpUrl, empObj).subscribe(response => {
             empObj = response["returnObject"];
-            this.nameSelect = empObj.empName;
-            this.jsonSelect = response["returnObject"];
-            this.idSelect = empObj.refEmpId;
+            this.inputLookupObj.nameSelect = empObj.empName;
+            this.inputLookupObj.jsonSelect = response["returnObject"];
+            this.inputLookupObj.idSelect = empObj.refEmpId;
           });
         },
         error => {

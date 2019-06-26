@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 })
 
 export class AddMenuSettingComponent implements OnInit {
+    inputLookupObj: any;
     parentId: any;
     parentTitle: any;
     formCode: any;
@@ -30,9 +32,6 @@ export class AddMenuSettingComponent implements OnInit {
     mode: string = "add";
     apiUrl: any;
     foundationUrl: string = environment.foundationUrl;
-    urlQryPaging: string = AdInsConstant.GetRefFormPaging;
-    urlEnviPaging : string = environment.foundationUrl;
-    url: any = './assets/lookup/lookupParentForm.json';
     editUrl: any;
     result: any;
     hierarchyNo: any;
@@ -47,6 +46,11 @@ export class AddMenuSettingComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.inputLookupObj = new InputLookupObj();
+        this.inputLookupObj.urlJson = "./assets/lookup/lookupParentForm.json";
+        this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefFormPaging;
+        this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+        
         var moduleApi = this.foundationUrl + AdInsConstant.GetListRefModuleKeyValue;
         var refFormObj = new RefFormObj();
         this.http.post(moduleApi, refFormObj).subscribe(
@@ -83,13 +87,13 @@ export class AddMenuSettingComponent implements OnInit {
             this.hasSub = true;
         }
         this.badgeClass = data.badgeClass;
-        this.parentId = data.parentId;
-        if (this.parentId != null) {
+        this.inputLookupObj.idSelect = data.parentId;
+        if (this.inputLookupObj.idSelect != null) {
             var formParent = new RefFormObj();
-            formParent.refFormId = this.parentId;
+            formParent.refFormId = this.inputLookupObj.idSelect;
             this.http.post(this.apiUrl, formParent).subscribe(
                 (response) => {
-                    this.parentTitle = response['returnObject'].title;
+                    this.inputLookupObj.nameSelect = response['returnObject'].title;
                 })
         }
         this.orderNo = data.orderNo;

@@ -19,14 +19,14 @@
                   <div class="form-group row">
                       <label class="col-md-3  adInsLabel" for="lookupRefJobTitle">Job Title</label>
                       <div class="col-md-9">
-                          <app-lookup-ref-job-title #lookupRefJobTitle [nameSelect] = "jobTitleName" [idSelect]="refJobTitleId" [jsonSelect]="jsonSelectRefJobTile" [addCritInput]='addCritJobTitle'> </app-lookup-ref-job-title>
+                          <lib-lookuprefjobtitle #lookupRefJobTitle [lookupInput]="inputLookupObj"> </lib-lookuprefjobtitle>
                       </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-3  adInsLabel" for="lookupBizUnit">Parent</label>
                         <div class="col-md-9">
-                            <app-lookup-org-job-title #lookupOrgJobTitle [nameSelect] = "parentJobTitleName" [idSelect]="parentOrgJobTitleId" [jsonSelect]="jsonSelectOrgJobTitle" [addCritInput]='addCritOrgJobTitle'> </app-lookup-org-job-title>
+                            <lib-lookuporgjobtitle #lookupOrgJobTitle [lookupInput]="inputLookupObj2"> </lib-lookuporgjobtitle>
                         </div>
                       </div>
 

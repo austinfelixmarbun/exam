@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 @Component({
   selector: 'app-ucAddress',
   templateUrl: './ucAddress.component.html',
@@ -11,14 +12,9 @@ import { environment } from 'environments/environment';
   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 export class UcAddressComponent implements OnInit {
-  constructor() {
-  }
-  ngOnInit() { }
   @Input() resultData: any;
   @Input() parentForm: any;
-  urlJson: any = "./assets/lookup/lookupZipcode.json";
-  urlQryPaging: any = AdInsConstant.GetRefZipcodePaging;
-  urlEnviPaging : any = environment.settingUrl;
+  inputLookupObj: any;
   jsonData: any;
   areaCode2: any;
   areaCode1: any;
@@ -39,6 +35,17 @@ export class UcAddressComponent implements OnInit {
   fax: any;
   zipcode: any;
   addrValid: boolean = false;
+  
+  constructor() {
+  }
+  
+  ngOnInit() {
+    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj.urlJson = "./assets/lookup/lookupZipcode.json";
+    this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefZipcodePaging;
+    this.inputLookupObj.urlEnviPaging = environment.settingUrl;
+  }
+  
   setData(data) {
     this.areaCode2 = data.areaCode2;
     this.areaCode1 = data.areaCode1;
@@ -58,6 +65,8 @@ export class UcAddressComponent implements OnInit {
     this.faxArea = data.faxArea;
     this.fax = data.fax;
     this.zipcode = data.zipcode;
+    this.inputLookupObj.nameSelect = this.zipcode;
+    this.inputLookupObj.idSelect = this.zipcode;
   }
 
   onSelect(event) {
@@ -66,6 +75,8 @@ export class UcAddressComponent implements OnInit {
     this.areaCode1 = event.areaCode1;
     this.city = event.city;
     this.zipcode = event.zipcode;
+    this.inputLookupObj.nameSelect = this.zipcode;
+    this.inputLookupObj.idSelect = this.zipcode;
   }
 
   // public ucAddressValid(validity): boolean {

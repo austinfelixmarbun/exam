@@ -11,6 +11,7 @@ import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
 
 @Component({
   selector: "app-org-mdl-struc-detail",
@@ -18,6 +19,8 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
   providers: [NGXToastrService]
 })
 export class OrgMdlStrucDetailComponent implements OnInit {
+  inputLookupObj: any;
+  inputLookupObj2: any;
   foundationUrl: string = environment.foundationUrl;
   apiUrl: any;
   orgModelObj: OrgMdlObj;
@@ -38,14 +41,6 @@ export class OrgMdlStrucDetailComponent implements OnInit {
   jsonSelectBizUnit: any;
   /* #endregion */
 
-  /* #region  Lookup Mdl Struc */
-  parentName: any;
-  jsonSelectStruct: any;
-  /* #endregion */
-
-  urlJson: any = "./assets/lookup/lookupOrgMdlStruc.json";
-  urlEnviPaging: any = environment.foundationUrl;
-  urlQryPaging: any = AdInsConstant.GetOrgMdlStrucPaging;
   /* #region  Addition Criteria Lookup */
   addCrit: Array<any>;
   /* #endregion */
@@ -75,6 +70,17 @@ export class OrgMdlStrucDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj.urlJson = "./assets/lookup/lookupOrgMdlStruc.json";
+    this.inputLookupObj.urlQryPaging = AdInsConstant.GetOrgMdlStrucPaging;
+    this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+    
+    this.inputLookupObj2 = new InputLookupObj();
+    this.inputLookupObj2.urlJson = "./assets/lookup/lookupBizUnit.json";
+    this.inputLookupObj2.urlQryPaging = AdInsConstant.GetBusinessUnitPaging;
+    this.inputLookupObj2.urlEnviPaging = environment.foundationUrl;
+    this.inputLookupObj2.isRequired = true;
+
     console.log("masuk");
     this.orgMdlStrucObj = new OrgMdlStrucObj();
     this.InitForm();
@@ -87,7 +93,8 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           console.log("Success Get");
           this.orgMdlStrucObj = response["returnObject"];
           this.orgMdlLvl = response["returnObject"]["orgMdlLvl"];
-          this.refBizUnitId = response["returnObject"]["refBizUnitId"];
+          this.inputLookupObj2.idSelect = response["returnObject"]["refBizUnitId"];
+          this.inputLookupObj.idSelect = response["returnObject"]["parentId"];
           this.parentId = response["returnObject"]["parentId"];
           if (response["returnObject"]["isActive"] === "1") {
             this.isActive = true;
@@ -108,13 +115,13 @@ export class OrgMdlStrucDetailComponent implements OnInit {
             .post(getOrgMdlSructUrl, orgMdlStruc)
             .subscribe(response => {
               console.log("obj", response["returnObject"]);
-              this.jsonSelectStruct = response["returnObject"];
+              this.inputLookupObj.jsonSelect = response["returnObject"];
               var bizUnit: BusinessUnitObj = new BusinessUnitObj();
               bizUnit.RefBizUnitId = response["returnObject"]["refBizUnitId"];
               this.httpClient
                 .post(getBizUnitUrl, bizUnit)
                 .subscribe(response => {
-                  this.parentName = response["returnObject"]["bizUnitName"];
+                  this.inputLookupObj.nameSelect = response["returnObject"]["bizUnitName"];
                 });
             });
           }
@@ -129,8 +136,8 @@ export class OrgMdlStrucDetailComponent implements OnInit {
             .post(getBizUnitUrl, bizUnitObj)
             .subscribe(response => {
               bizUnitObj = response["returnObject"];
-              this.bizUnitName = response["returnObject"]['bizUnitName'];
-              this.jsonSelectBizUnit = response["returnObject"];
+              this.inputLookupObj2.nameSelect = response["returnObject"]['bizUnitName'];
+              this.inputLookupObj2.jsonSelect = response["returnObject"];
             });
           /* #endregion */
         },
@@ -315,6 +322,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     this.addCrit.push(critOrgMdlId);
     this.addCrit.push(critParentId);
     this.addCrit.push(critOrgMdlStrucId);
+    this.inputLookupObj.addCritInput = this.addCrit;
 
     /* #endregion */
   }

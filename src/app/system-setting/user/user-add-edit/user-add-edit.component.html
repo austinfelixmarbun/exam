@@ -11,8 +11,7 @@
               <label class="col-md-3  adInsLabel" for="EmpName">Employee Name</label>
               <div class="col-md-9">
 
-                <lib-lookupemployee #lookupEmp [nameSelect]="nameSelect" [idSelect]="idSelect"
-                  [jsonSelect]="jsonSelect" [urlJson]="url" [urlQryPaging]="urlQryPaging" [urlEnviPaging]="urlEnviPaging"> </lib-lookupemployee>
+                <lib-lookupemployee #lookupEmp [lookupInput]="inputLookupObj"> </lib-lookupemployee>
 
                 <!--<input type="text" class="form-control adInsInput" name="EmployeeName" required [(ngModel)]="EmployeeName"
                     #employeeName="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">

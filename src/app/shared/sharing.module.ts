@@ -5,23 +5,23 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
-import { LookupBizUnitComponent } from 'app/shared/lookup/lookup-biz-unit/lookup-biz-unit.component';
-import { LookupOrgJobTitleComponent } from 'app/shared/lookup/lookup-org-job-title/lookup-org-job-title.component';
-import { LookupRefJobTitleComponent } from 'app/shared/lookup/lookup-ref-job-title/lookup-ref-job-title.component';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
-import { LookupparentformModule } from '@adins/lookupparentform';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { FormEngineComponent } from './form-engine/form-engine.component';
 import { FormEngineModule } from '@adins/form-engine';
+import { LookupparentformModule } from '@adins/lookupparentform';
 import { LookupemployeeModule } from '@adins/lookupemployee';
 import { LookupdistrictModule } from '@adins/lookupdistrict';
 import { LookuproleModule } from '@adins/lookuprole';
 import { LookuporgmdlstrucModule } from '@adins/lookuporgmdlstruc';
 import { LookupzipcodeModule } from '@adins/lookupzipcode';
 import { LookuprefbankModule } from '@adins/lookuprefbank';
+import { LookuprefjobtitleModule } from '@adins/lookuprefjobtitle';
+import { LookuporgjobtitleModule } from '@adins/lookuporgjobtitle';
+import { LookupbizunitModule } from '@adins/lookupbizunit';
 
 @NgModule({
     exports: [
@@ -39,10 +39,10 @@ import { LookuprefbankModule } from '@adins/lookuprefbank';
         UCGridFooterComponent,
         UcContactInfoComponent,
         TranslateModule,
-        LookupBizUnitComponent,
+        LookupbizunitModule,
         LookuporgmdlstrucModule,
-        LookupOrgJobTitleComponent,
-        LookupRefJobTitleComponent,
+        LookuporgjobtitleModule,
+        LookuprefjobtitleModule,
         UCSearchModule,
         UcgridfooterModule,
         FormEngineModule
@@ -62,10 +62,7 @@ import { LookuprefbankModule } from '@adins/lookuprefbank';
         UcAddressComponent,
         FormEngineComponent,
         UCGridFooterComponent,
-        UcContactInfoComponent,
-        LookupBizUnitComponent,
-        LookupOrgJobTitleComponent,
-        LookupRefJobTitleComponent
+        UcContactInfoComponent
     ]
 })
 

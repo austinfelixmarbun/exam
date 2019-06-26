@@ -45,8 +45,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3  adInsLabel" for="userinput5" translate>District </label>
                                 <div class="col-md-9">
-                                    <lib-lookupdistrict #uclDistrict [nameSelect] = "districtName" [idSelect]="idSelect" [jsonSelect]="jsonSelect" 
-                                    [urlQryPaging]="urlQryPaging" [urlJson]="url" [urlEnviPaging]="urlEnviPaging" [addCritInput]="crit"></lib-lookupdistrict>
+                                    <lib-lookupdistrict #uclDistrict [lookupInput]="inputLookupObj"></lib-lookupdistrict>
                                 </div>
                             </div>
                             <div class="form-group row">

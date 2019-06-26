@@ -43,7 +43,7 @@
         <div class="form-group row">
             <label class="col-md-3 label-control adInsLabel" for="zipcode" translate>Zipcode </label>
             <div class="col-md-3">
-                <lib-lookupzipcode (select)="onSelect($event)" [idSelect]="zipcode" [nameSelect]="zipcode" [urlJson]="urlJson" [urlEnviPaging]="urlEnviPaging" [urlQryPaging]="urlQryPaging">
+                <lib-lookupzipcode (select)="onSelect($event)" [lookupInput]="inputLookupObj">
                 </lib-lookupzipcode>
             </div>
         </div>

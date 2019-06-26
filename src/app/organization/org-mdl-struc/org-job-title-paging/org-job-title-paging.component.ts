@@ -63,8 +63,8 @@ export class OrgJobTitlePagingComponent implements OnInit {
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/lookup/searchOrgJobTitle.json";
-    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj._url = "./assets/search/searchOrgJobTitle.json";
+    this.inputObj.enviromentUrl = environment.foundationUrl;
     this.inputObj.apiQryPaging = AdInsConstant.GetOrgJobTitlePaging;
     
     this.pageNow = 1;

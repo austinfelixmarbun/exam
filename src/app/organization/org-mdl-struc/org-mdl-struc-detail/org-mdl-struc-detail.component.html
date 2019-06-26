@@ -19,7 +19,7 @@
                 <div class="form-group row">
                     <label class="col-md-3  adInsLabel" for="lookupBizUnit">Business Unit Name</label>
                     <div class="col-md-9">
-                        <app-lookup-biz-unit #lookupBizUnit [nameSelect] = "bizUnitName" [idSelect]="refBizUnitId" [jsonSelect]="jsonSelectBizUnit" [isRequired]=true> </app-lookup-biz-unit>
+                        <lib-lookupbizunit #lookupBizUnit [lookupInput]="inputLookupObj2"> </lib-lookupbizunit>
                     </div>
                   </div>
 
@@ -37,7 +37,7 @@
                   <div class="form-group row">
                       <label class="col-md-3  adInsLabel" for="lookupBizUnit">Parent</label>
                       <div class="col-md-9">
-                          <lib-lookuporgmdlstruc #lookupMdlStruc [nameSelect] = "parentName" [idSelect]="parentId" [jsonSelect]="jsonSelectStruct" [urlJson]="urlJson" [urlQryPaging]="urlQryPaging" [urlEnviPaging]="urlEnviPaging" [addCritInput]='addCrit'> </lib-lookuporgmdlstruc>
+                          <lib-lookuporgmdlstruc #lookupMdlStruc [lookupInput]="inputLookupObj"></lib-lookuporgmdlstruc>
                       </div>
                     </div>
 

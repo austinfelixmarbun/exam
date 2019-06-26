@@ -4,4 +4,10 @@ export class InputSearchObj{
     apiQryPaging: any
     arrCritObj: any
     addCritInput: any
+
+    constructor()
+    {
+        this.arrCritObj = null;
+        this.addCritInput = null;
+    }
 }

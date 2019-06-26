@@ -11,6 +11,7 @@ import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { environment } from 'environments/environment';
 import { UserTitleRoleObj } from 'app/shared/model/UserTitleRoleObj';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 export class UserRoleDetailComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
+  inputLookupObj: any;
   resultData: string;
   foundationUrl: string = environment.foundationUrl;
   apiUrl: any;
@@ -72,8 +74,12 @@ export class UserRoleDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
+    this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefUserPaging;
+    this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+    
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefUserPaging;
-
     this.initiateForm()
   }
 
@@ -92,9 +98,9 @@ export class UserRoleDetailComponent implements OnInit {
         if (response['returnObject'] !== null) {
           this.mode = 'edit';
           refRoleObj = response['returnObject'];
-          this.nameSelect = refRoleObj.roleName;
-          this.jsonSelect = response["returnObject"];
-          this.idSelect = refRoleObj.refRoleId;
+          this.inputLookupObj.nameSelect = refRoleObj.roleName;
+          this.inputLookupObj.jsonSelect = response["returnObject"];
+          this.inputLookupObj.idSelect = refRoleObj.refRoleId;
           this.userTitleRoleObj.empPositionId = this.empPositionId;
           this.userTitleRoleObj.refRoleId = refRoleObj.refRoleId;
 

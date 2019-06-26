@@ -10,8 +10,7 @@
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" for="projectinput5" translate>Parent Form </label>
                 <div class="col-md-9">
-                  <lib-lookupparentform #lookupParent (select)="onSelect($event)" [idSelect]="parentId"
-                  [urlJson]="url" [nameSelect]="parentTitle" [urlQryPaging]="urlQryPaging" [urlEnviPaging]="urlEnviPaging">
+                  <lib-lookupparentform #lookupParent [lookupInput]="inputLookupObj">
                   </lib-lookupparentform>
                 </div>
               </div>
