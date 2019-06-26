@@ -8,7 +8,7 @@ export class RequestCriteriaObj{
     orderBy:any;
     criteria:CriteriaObj[];
     isLoading : boolean;
-
+    
     constructor()
     {
         this.includeCount=true;

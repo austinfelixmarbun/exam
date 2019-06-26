@@ -211,8 +211,8 @@ export class SearchComponent implements OnInit {
     var httpRequest = new HttpRequestObj();
     this.http.post(apiUrl, request).subscribe((response) => {
       var qryPaging = {
-        response : response,
-        pageNow : pageNo
+        response: response,
+        pageNow: pageNo
       }
       console.log(qryPaging);
       this.result.emit(qryPaging);
@@ -232,20 +232,33 @@ export class SearchComponent implements OnInit {
   resolveObject(obj: any, url: string, crit: RequestCriteriaObj = null) {
     const val = this.postJSON(this.searchInput.enviromentUrl + url, crit);
     val.subscribe(tempData => {
-        obj.itemsUrl = tempData.returnObject;
+      obj.itemsUrl = tempData.returnObject;
     });
   }
 
   transformAmount(element: any) {
 
-    this.formattedAmount = parseFloat(element.target.value).toLocaleString('en');
+    console.log(parseFloat(element.target.value).toLocaleString('en'));
+    if (parseFloat(element.target.value).toLocaleString('en') != "NaN") {
+      this.formattedAmount = parseFloat(element.target.value).toLocaleString('en');
+    }
+    else {
+      this.formattedAmount = "";
+    }
     // Remove or comment this line if you dont want
     // to show the formatted amount in the textbox.
     element.target.value = this.formattedAmount;
   }
 
   transformToDecimal(element: any) {
-    element.target.value = parseFloat(element.target.value.toString().replace(/,/g, ''));
+    console.log(parseFloat(element.target.value.toString().replace(/,/g, '')));
+    if (element.target.value != "") {
+      if (parseFloat(element.target.value.toString().replace(/,/g, '')).toString() != "NaN") {
+        element.target.value = parseFloat(element.target.value.toString().replace(/,/g, ''));
+      } else {
+        element.target.value = "";
+      }
+    }
   }
 
   exportAsXLSX(): void {
@@ -254,7 +267,7 @@ export class SearchComponent implements OnInit {
     request.rowPerPage = 9999;
     request.orderBy = null;
     request.criteria = [];
-    
+
     this.http.post(this.apiUrl, request).subscribe(
       response => {
         console.log("Success");
@@ -270,7 +283,7 @@ export class SearchComponent implements OnInit {
 
   onChangeEvent(optValue, afFilter) {
     var jsonComp = this.configuration.component;
-    
+
     for (var i = 0; i < afFilter.affectedFilter.length; i++) {
       for (var j = 0; j < jsonComp.length; j++) {
         if (jsonComp[j].name == afFilter.affectedFilter[i]) {
