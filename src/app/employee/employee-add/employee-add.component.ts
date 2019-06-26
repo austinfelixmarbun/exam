@@ -298,7 +298,7 @@ export class EmployeeAddComponent implements OnInit {
           console.log("Success");
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/employee"]);
+          this.router.navigate(["/employee/paging"]);
         },
         error => {
           console.log("Error");

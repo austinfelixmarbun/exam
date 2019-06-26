@@ -173,12 +173,12 @@
                     </div>
                     <div class="col-md-4" style="border-right: 1px solid grey">
                         <input type="text" pattern="^[0-9]+$" id="phn3" class="form-control adInsInput" name="phn3"
-                            [(ngModel)]="phn3" #Phn2="ngModel"
-                            [ngClass]="{ 'is-invalid':(parentForm.submitted || Phn2.touched || Phn2.dirty) && Phn2.invalid }">
-                        <div *ngIf=" (parentForm.submitted || Phn2.touched || Phn2.dirty) && Phn2.invalid"
+                            [(ngModel)]="phn3" #Phn3="ngModel"
+                            [ngClass]="{ 'is-invalid':(parentForm.submitted || Phn3.touched || Phn3.dirty) && Phn3.invalid }">
+                        <div *ngIf=" (parentForm.submitted || Phn3.touched || Phn3.dirty) && Phn3.invalid"
                             class="invalid-feedback">
-                            <div *ngIf="Phn2.errors.required" class="adInsReqMsg" translate>This field is required</div>
-                            <div *ngIf="Phn2.errors?.pattern" translate>Number Only</div>
+                            <div *ngIf="Phn3.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                            <div *ngIf="Phn3.errors?.pattern" translate>Number Only</div>
                         </div>
                     </div>
                     <div class="col-md-2">

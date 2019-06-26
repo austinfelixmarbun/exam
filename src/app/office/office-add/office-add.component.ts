@@ -284,7 +284,7 @@ export class OfficeAddComponent implements OnInit {
           console.log("Success");
           console.log(response);
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/office"]);
+          this.router.navigate(["/office/paging"]);
         },
         (error) => {
           console.log("Error");
@@ -301,7 +301,7 @@ export class OfficeAddComponent implements OnInit {
           console.log("Success");
           console.log(response);
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/office"]);
+          this.router.navigate(["/office/paging"]);
         },
         (error) => {
           console.log("Error");
