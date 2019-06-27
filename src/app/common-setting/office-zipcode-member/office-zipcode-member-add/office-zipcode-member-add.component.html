@@ -1,0 +1,52 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Main Information</h4>
+    </div>
+    <div class="card-body">
+      <div class="px-3">
+        <div class="form-body">
+          <div class="form-group row">
+            <label class="col-md-3  adInsLabel">Office Code </label>
+            <label class="col-md-3  adInsLabel">{{officeCode}} </label>
+            <label class="col-md-3  adInsLabel">Office Name </label>
+            <label class="col-md-3  adInsLabel">{{officeName}} </label>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3  adInsLabel">City </label>
+            <label class="col-md-3  adInsLabel">{{city}} </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-header">
+      <h4 class="card-title">Zip Code Member List</h4>
+    </div>
+    <table class="table table-responsive-md text-center table-hover">
+      <thead>
+        <tr class="table-header">
+          <th><span translate class="thead-header" (click)="searchSort($event)" name='kelurahan'>Kelurahan</span></th>
+          <th><span translate class="thead-header" (click)="searchSort($event)" name='kecamatan'>Kecamatan</span></th>
+          <th><span translate class="thead-header" (click)="searchSort($event)" name='city'>City</span></th>
+          <th><span translate class="thead-header" (click)="searchSort($event)" name='zipzode'>Zipcode</span></th>
+          <th><span translate class="thead-header" (click)="searchSort($event)" name='district'>District</span></th>
+          <th translate>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of resultData?.data">
+          <td>{{item.kelurahan}}</td>
+          <td class="text-left">{{item.kecamatan}}</td>
+          <td>{{item.city}}</td>
+          <td>{{item.zipzode}}</td>
+          <td>{{item.district}}</td>
+          <td>
+            <a class="danger p-0" data-original-title="" title="" (click)="delete(item.refBankId)">
+              <i class="ft-trash-2 font-medium-3 mr-2"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

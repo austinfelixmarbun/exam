@@ -19,6 +19,8 @@ import { WorkingHourDetailComponent } from './working-hour-scheme/working-hour-d
 import { HolidayPagingComponent } from './holiday-scheme/holiday-paging/holiday-paging.component';
 import { HolidayDetailComponent } from './holiday-scheme/holiday-detail/holiday-detail.component';
 import { HolidayDetailAddComponent } from './holiday-scheme/holiday-detail-add/holiday-detail-add.component';
+import { OfficeZipcodeMemberComponent } from './office-zipcode-member/office-zipcode-member.component';
+import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-zipcode-member-add/office-zipcode-member-add.component';
 
 @NgModule({
   imports: [
@@ -43,7 +45,9 @@ import { HolidayDetailAddComponent } from './holiday-scheme/holiday-detail-add/h
     WorkingHourDetailComponent,
     HolidayPagingComponent,
     HolidayDetailComponent,
-    HolidayDetailAddComponent
+    HolidayDetailAddComponent,
+    OfficeZipcodeMemberComponent,
+    OfficeZipcodeMemberAddComponent
   ],
   providers: [
     {

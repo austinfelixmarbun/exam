@@ -1,0 +1,33 @@
+{
+    "title": "Office Zip Code Member",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "officeCode",
+        "id": "officeCode",
+        "value": "",
+        "label": "Office Code",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "textbox",
+        "name": "officeName",
+        "id": "officeName",
+        "value": "",
+        "label": "Office Name",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "textbox",
+        "name": "addr",
+        "id": "addr",
+        "value": "",
+        "label": "Address",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      }
+    ]
+  }
+  

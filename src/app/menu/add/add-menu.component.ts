@@ -133,7 +133,7 @@ export class AddMenuSettingComponent implements OnInit {
             refForm.class = "";
         }
         refForm.badgeClass = form.value.badgeClass;
-        refForm.parentId = lookupZipcode.idSelect;
+        refForm.parentId = lookupZipcode.lookupInput.idSelect;
         refForm.orderNo = form.value.orderNo;
         if (this.isHidden === true) {
             refForm.isHidden = "1";
