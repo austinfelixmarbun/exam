@@ -147,7 +147,11 @@ export class AdInsConstant {
     public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
     public static EditRefZipcode = "/RefZipcode/EditRefZipCode";
     public static AddRefZipcode = "/RefZipcode/AddRefZipCode";
-    public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode"
+    public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode";
+
+    //OFFICE ZIPCODE MEMBER
+    public static GetOfficeZipCodeMemberPaging = "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
+    
 
     //BUSINESS UNIT
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";

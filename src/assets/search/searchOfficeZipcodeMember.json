@@ -18,15 +18,6 @@
         "label": "Office Name",
         "placeholder": "Placeholder",
         "datatype": "text"
-      },
-      {
-        "type": "textbox",
-        "name": "addr",
-        "id": "addr",
-        "value": "",
-        "label": "Address",
-        "placeholder": "Placeholder",
-        "datatype": "text"
       }
     ]
   }

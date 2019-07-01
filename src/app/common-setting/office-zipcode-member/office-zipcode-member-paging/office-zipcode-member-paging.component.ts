@@ -9,11 +9,11 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-office-zipcode-member-add',
-  templateUrl: './office-zipcode-member-add.component.html',
-  styleUrls: ['./office-zipcode-member-add.component.scss']
+  selector: 'app-office-zipcode-member-paging',
+  templateUrl: './office-zipcode-member-paging.component.html',
+  styleUrls: ['./office-zipcode-member-paging.component.scss']
 })
-export class OfficeZipcodeMemberAddComponent implements OnInit {
+export class OfficeZipcodeMemberPagingComponent implements OnInit {
   //** Start UC Search **//
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
@@ -35,7 +35,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.route.queryParams.subscribe(params => {
       if (params['refOfficeId'] != null) {
         this.refOfficeId = params['refOfficeId'];
@@ -55,7 +55,17 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetOfficeZipCodeMemberPaging;
     this.officeUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
 
+    this.arrCrit = new Array();
+    var critObj = new CriteriaObj();
+    critObj.DataType = 'numeric'
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'refOfficeId';
+    critObj.value = this.refOfficeId;
+    this.arrCrit.push(critObj);
+    this.inputObj.arrCritObj = this.arrCrit;
+
     this.initiateForm();
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, null, this.arrCrit);
   }
 
   initiateForm() {

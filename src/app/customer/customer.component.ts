@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgForm } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-customer',
@@ -27,7 +28,9 @@ export class CustomerComponent implements OnInit {
   requestObject: any;
   repeaters: string[] =["","",""];
 
-  constructor(private router: Router, private spinner: NgxSpinnerService, private httpClient: HttpClient, private toastr: NGXToastrService) { 
+  constructor(private router: Router, private spinner: NgxSpinnerService, 
+    private httpClient: HttpClient, private toastr: NGXToastrService,
+    private wizard: WizardComponent) { 
     this.submitProsUrl = this.localHostUrl + AdInsConstant.addCustPersonal;
 
   }
@@ -45,6 +48,8 @@ export class CustomerComponent implements OnInit {
   }
 
   SavePros(custReqFoem: NgForm) {
+    this.wizard.navigation.goToNextStep();
+
     this.custObj = new CustPersonalObj();
     this.custObj = custReqFoem.value;
     this.custObj.token = 'asdasd';

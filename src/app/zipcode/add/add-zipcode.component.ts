@@ -8,7 +8,6 @@ import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm } from '@angular/forms';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 
 @Component({
@@ -29,7 +28,7 @@ export class ZipcodeAddComponent implements OnInit {
     mode: string = "add";
     apiUrl: any;
     isActive: boolean = false;
-    foundationUrl: string = environment.foundationUrl;
+    settingUrl: string = environment.settingUrl;
     zipcodeObj: RefZipcodeObj;
     editUrl: any;
     districtName : string;
@@ -38,7 +37,7 @@ export class ZipcodeAddComponent implements OnInit {
     provDistrictObj : RefProvDistrictObj;
     urlGetProvDistrict : string;
 
-    constructor(private router: Router,private route: ActivatedRoute, private http: HttpClient) {
+    constructor(private router: Router,private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refZipcodeId"];
             this.mode = params["mode"];
@@ -52,8 +51,8 @@ export class ZipcodeAddComponent implements OnInit {
         this.inputLookupObj.urlEnviPaging = environment.settingUrl;
         
         if (this.mode === "edit") {
-            this.apiUrl = this.foundationUrl + AdInsConstant.GetRefZipCode;
-            this.urlGetProvDistrict = this.foundationUrl + AdInsConstant.GetRefProvDistrictObj;
+            this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipCode;
+            this.urlGetProvDistrict = this.settingUrl + AdInsConstant.GetRefProvDistrictObj;
             var zipcodeObj = new RefZipcodeObj();
             this.provDistrictObj = new RefProvDistrictObj();
             zipcodeObj.refZipcodeId = this.param;
@@ -88,10 +87,10 @@ export class ZipcodeAddComponent implements OnInit {
         console.log(uclZipcode);
         console.log(ZipcodeAddReqForm);
         if (this.mode === "edit") {
-            this.editUrl = this.foundationUrl + AdInsConstant.EditRefZipcode;
+            this.editUrl = this.settingUrl + AdInsConstant.EditRefZipcode;
             this.zipcodeObj = new RefZipcodeObj();
             this.zipcodeObj = ZipcodeAddReqForm.value;
-            this.zipcodeObj.refProvDistrictId = uclZipcode.idSelect;
+            this.zipcodeObj.refProvDistrictId = uclZipcode.lookupInput.idSelect;
             this.zipcodeObj.refZipcodeId = this.param;
             if (this.isActive === false) {
                 this.zipcodeObj.isActive = "0";
@@ -111,10 +110,10 @@ export class ZipcodeAddComponent implements OnInit {
         }
         else
         {
-            this.editUrl = this.foundationUrl + AdInsConstant.AddRefZipcode;
+            this.editUrl = this.settingUrl + AdInsConstant.AddRefZipcode;
             this.zipcodeObj = new RefZipcodeObj();
             this.zipcodeObj = ZipcodeAddReqForm.value;
-            this.zipcodeObj.refProvDistrictId = uclZipcode.idSelect;
+            this.zipcodeObj.refProvDistrictId = uclZipcode.lookupInput.idSelect;
             this.zipcodeObj.refZipcodeId = "0";
             if (this.isActive === false) {
                 this.zipcodeObj.isActive = "0";
@@ -124,7 +123,8 @@ export class ZipcodeAddComponent implements OnInit {
             }
             this.http.post(this.editUrl, this.zipcodeObj).subscribe(
                 (response) => {
-                    this.router.navigateByUrl('/zipcode');
+                    this.toastr.successMessage(response['message']);
+                    this.router.navigateByUrl('/zipcode/paging');
                 },
                 (error)=>
                 {

@@ -26,17 +26,18 @@ export class UcContactInfoComponent implements OnInit {
   cntctPersonJobTitle: any;
 
   setData(data) {
+    console.log(data);
     if (this.useName) {
       this.cntctPersonName = data.cntctPersonName;
     }
     if (this.useTitle) {
       this.cntctPersonJobTitle = data.cntctPersonJobTitle;
     }
-    this.mobilePhn1 = data.mobilePhn1;
-    this.mobilePhn2 = data.mobilePhn2;
-    this.email1 = data.email1;
+    this.mobilePhn1 = data.cntctPersonMobilePhn1;
+    this.mobilePhn2 = data.cntctPersonMobilePhn2;
+    this.email1 = data.cntctPersonEmail1;
     if (this.useEmail2) {
-      this.email2 = data.email2;
+      this.email2 = data.cntctPersonEmail2;
     }
   }
 

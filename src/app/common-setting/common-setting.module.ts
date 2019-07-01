@@ -21,6 +21,7 @@ import { HolidayDetailComponent } from './holiday-scheme/holiday-detail/holiday-
 import { HolidayDetailAddComponent } from './holiday-scheme/holiday-detail-add/holiday-detail-add.component';
 import { OfficeZipcodeMemberComponent } from './office-zipcode-member/office-zipcode-member.component';
 import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-zipcode-member-add/office-zipcode-member-add.component';
+import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/office-zipcode-member-paging/office-zipcode-member-paging.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-
     HolidayDetailComponent,
     HolidayDetailAddComponent,
     OfficeZipcodeMemberComponent,
-    OfficeZipcodeMemberAddComponent
+    OfficeZipcodeMemberAddComponent,
+    OfficeZipcodeMemberPagingComponent
   ],
   providers: [
     {

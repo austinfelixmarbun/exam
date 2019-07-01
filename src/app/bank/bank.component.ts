@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-bank',
@@ -19,21 +20,31 @@ export class BankComponent implements OnInit {
   //** Start UC Search **//
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  inputObj : any;
+  inputObj: any;
   //** End UC Search **//
-  editUrl: any;
   bankObj: RefBankObj;
   resultData: string;
   pageNow: any;
   totalData: any;
   pageSize: any;
   apiUrl: any;
-  
+  editUrl: any;
+
   settingUrl: string = environment.settingUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor(private http: HttpClient) { 
+  navigationSubscription: any;
+
+  constructor(private http: HttpClient, private router: Router) {
+    // subscribe to the router events - storing the subscription so
+    // we can unsubscribe later. 
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
   }
 
   ngOnInit() {
@@ -41,14 +52,28 @@ export class BankComponent implements OnInit {
     this.inputObj._url = "./assets/search/searchBank.json";
     this.inputObj.enviromentUrl = environment.settingUrl;
     this.inputObj.apiQryPaging = AdInsConstant.GetBankPaging;
-    
+
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.settingUrl + AdInsConstant.GetBankPaging;
   }
 
+  initialiseInvites() {
+    // Set default values and re-fetch any data you need.
+    console.log("davin");
+    this.resultData = null;
+  }
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we  
+    // don't then we will continue to run our initialiseInvites()   
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
+
   //** Start UC Search **/
-  getResult(event){
+  getResult(event) {
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
     this.ucgridFooter.pageNow = event.pageNow;
@@ -56,8 +81,7 @@ export class BankComponent implements OnInit {
     this.ucgridFooter.resultData = this.resultData;
   }
 
-  onSelect(event)
-  {
+  onSelect(event) {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);
@@ -92,7 +116,7 @@ export class BankComponent implements OnInit {
   //** End UC Search **/
 
   delete(refBankId: any) {
-    if(confirm("Are you sure to delete this record?")) {
+    if (confirm("Are you sure to delete this record?")) {
       this.editUrl = this.settingUrl + AdInsConstant.DeleteRefBank;
       this.bankObj = new RefBankObj();
       this.bankObj.refBankId = refBankId;
@@ -100,8 +124,8 @@ export class BankComponent implements OnInit {
         (response) => {
           console.log(response);
         },
-        (error)=> {
-            console.log(error);
+        (error) => {
+          console.log(error);
         });
     }
   }

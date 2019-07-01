@@ -8,7 +8,6 @@
             <th><span translate class="thead-header"  (click)="searchSort($event)" name='officeCode'>Office Code</span></th>
             <th><span translate class="thead-header"  (click)="searchSort($event)" name='cntctPersonName' translate>Contact Person</span></th>
             <th><span translate class="thead-header"  (click)="searchSort($event)" name='officeAddr' translate>Address</span></th>
-            <th><span translate class="thead-header"  (click)="searchSort($event)" name='city' translate>City</span></th>
             <th><span translate class="thead-header"  (click)="searchSort($event)" name='orgMdlName'>Model Name</span></th>
             <th><span translate class="thead-header"  (click)="searchSort($event)" name='isActive'>Active Status</span></th>
             <th><span translate class="thead-header"  (click)="searchSort($event)" name='mrKonvenSyariah'>Konvensional / Syariah</span></th>
@@ -23,7 +22,6 @@
             <td>{{item.officeCode}}</td>
             <td class="text-left">{{item.cntctPersonName}}</td>
             <td class="text-left">{{item.officeAddr}}</td>
-            <td class="text-left">{{item.city}}</td>
             <td class="text-left">{{item.orgMdlName}}</td>
             <td>
               <span *ngIf="item.isActive == '1'">Yes</span>

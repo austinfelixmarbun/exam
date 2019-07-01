@@ -12,7 +12,7 @@ export class OfficeObj {
     areaCode3:             string;
     areaCode4:             string;
     city:                  string;
-    zipcode:               string;
+    zipcodeNumber:         string;
     phnArea1:              string;
     phn1:                  string;
     phnArea2:              string;

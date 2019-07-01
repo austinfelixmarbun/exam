@@ -1,78 +1,120 @@
-<div class="row text-left">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="px-3">
-                    <form class="form form-horizontal" name="BankAddReqForm" #BankAddReqForm="ngForm"
-                        (ngSubmit)="Save(BankAddReqForm, uclDistrict)">
-                        <div class="form-body">
-                            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Zipcode Information</h4>
-                            <div class="form-group row">
-                                <label class="col-md-3  adInsLabel" for="projectinput5" translate>Kelurahan </label>
-                                <div class="col-md-9">
-                                    <input type="text" id="projectinput5" class="form-control adInsInput" name="areaCode2"
-                                        [ngModel]="result?.areaCode2" #areaCode2="ngModel">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3  adInsLabel" for="projectinput5" translate>Kecamatan </label>
-                                <div class="col-md-9">
-                                    <input type="text" id="projectinput5" class="form-control adInsInput" name="areaCode1"
-                                    [ngModel]="result?.areaCode1" #areaCode1="ngModel">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3  adInsLabel" for="projectinput6" translate>City </label>
-                                <div class="col-md-9">
-                                    <textarea id="projectinput5" class="form-control adInsInput" name="city"
-                                    [ngModel]="result?.city" #city="ngModel"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3  adInsLabel" for="userinput5" translate>Zipcode </label>
-                                <div class="col-md-9">
-                                    <textarea id="projectinput5" class="form-control adInsInput" name="zipcode"
-                                    [ngModel]="result?.zipcode" #zipcode="ngModel"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3  adInsLabel" for="userinput5" translate>Sub Zipcode </label>
-                                <div class="col-md-9">
-                                    <textarea id="projectinput5" class="form-control adInsInput" name="subZipcode"
-                                    [ngModel]="result?.subZipcode" #subZipcode="ngModel"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3  adInsLabel" for="userinput5" translate>District </label>
-                                <div class="col-md-9">
-                                    <lib-lookupdistrict #uclDistrict [lookupInput]="inputLookupObj"></lib-lookupdistrict>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3  adInsLabel" for="userinput5" translate>Phone Area Number </label>
-                                <div class="col-md-9">
-                                    <textarea id="projectinput5" class="form-control adInsInput" name="phnArea"
-                                    [ngModel]="result?.phnArea" #phnArea="ngModel"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3  adInsLabel" for="userinput5" translate>Is Active </label>
-                                <div class="col-md-9">
-                                    <input class="border-primary" type="checkbox"
-                                    [ngModel]="isActive" data-md-icheck (change)="toggleVisibility($event)" id="projectinput5" name="isActive">
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="px-3">
+                <form class="form form-horizontal" name="BankAddReqForm" #BankAddReqForm="ngForm"
+                    (ngSubmit)="BankAddReqForm.form.valid && Save(BankAddReqForm, uclDistrict)">
+                    <div class="form-body">
+                        <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Zipcode Information
+                        </h4>
+                        <div class="form-group row">
+                            <label class="col-md-3  adInsLabel" translate>Kelurahan </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control adInsInput" name="areaCode2" required [ngModel]="result?.areaCode2" 
+                                #AreaCode2="ngModel"
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid }">
+                                <div *ngIf="(BankAddReqForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid"
+                                  class="invalid-feedback">
+                                  <div *ngIf="AreaCode2.errors.required" class="adInsReqMsg" translate>This field is required</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-actions right">
-                            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/zipcode']" translate>
-                                <i class="fa fa-arrow-circle-left"></i> Back
-                            </button>
-                            <button type="submit" class="btn btn-raised btn-primary" translate>
-                                <i class="fa fa-check-square-o"></i> Save
-                            </button>
+                        <div class="form-group row">
+                            <label class="col-md-3 adInsLabel" translate>Kecamatan </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control adInsInput" name="areaCode1" required [ngModel]="result?.areaCode1" 
+                                #AreaCode1="ngModel"
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid }">
+                                <div *ngIf="(BankAddReqForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid"
+                                  class="invalid-feedback">
+                                  <div *ngIf="AreaCode1.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                                </div>
+                            </div>
                         </div>
-                    </form>
-                </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 adInsLabel" translate>City </label>
+                            <div class="col-md-9">
+                                <textarea class="form-control adInsInput" name="city" required [ngModel]="result?.city" 
+                                #City="ngModel"
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || City.touched || City.dirty) && City.invalid }"></textarea>
+                                <div *ngIf="(BankAddReqForm.submitted || City.touched || City.dirty) && City.invalid"
+                                  class="invalid-feedback">
+                                  <div *ngIf="City.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 adInsLabel" translate>Zipcode </label>
+                            <div class="col-md-9">
+                                <textarea class="form-control adInsInput" name="zipcode" required [ngModel]="result?.zipcode" 
+                                #Zipcode="ngModel"
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid }"></textarea>
+                                <div *ngIf="(BankAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid"
+                                  class="invalid-feedback">
+                                  <div *ngIf="Zipcode.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 adInsLabel" translate>Sub Zipcode </label>
+                            <div class="col-md-9">
+                                <textarea class="form-control adInsInput" name="subZipcode" required [ngModel]="result?.subZipcode" 
+                                #SubZipcode="ngModel"
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid }"></textarea>
+                                <div *ngIf="(BankAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid"
+                                  class="invalid-feedback">
+                                  <div *ngIf="SubZipcode.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 adInsLabel" translate>Zipcode Number </label>
+                            <div class="col-md-9">
+                                <textarea class="form-control adInsInput" name="zipcodeNumber" required [ngModel]="result?.zipcodeNumber" 
+                                #ZipcodeNumber="ngModel"
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid }"></textarea>
+                                <div *ngIf="(BankAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid"
+                                  class="invalid-feedback">
+                                  <div *ngIf="ZipcodeNumber.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 adInsLabel" translate>District </label>
+                            <div class="col-md-9">
+                                <lib-lookupdistrict #uclDistrict [lookupInput]="inputLookupObj"></lib-lookupdistrict>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 adInsLabel" translate>Phone Area Number </label>
+                            <div class="col-md-9">
+                                <textarea class="form-control adInsInput" name="phnArea" required [ngModel]="result?.phnArea" 
+                                #PhnArea="ngModel"
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid }"></textarea>
+                                <div *ngIf="(BankAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid"
+                                  class="invalid-feedback">
+                                  <div *ngIf="PhnArea.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 adInsLabel" translate>Is Active </label>
+                            <div class="col-md-9">
+                                <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
+                                    (change)="toggleVisibility($event)" name="isActive">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions right">
+                        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/zipcode']"
+                            translate>
+                            <i class="fa fa-arrow-circle-left"></i> Back
+                        </button>
+                        <button type="submit" class="btn btn-raised btn-primary" translate>
+                            <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

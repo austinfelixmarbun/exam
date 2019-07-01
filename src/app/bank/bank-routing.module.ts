@@ -38,7 +38,8 @@ const routes: Routes = [
           title: 'Dummy'
         }
       },
-    ]
+    ],
+    runGuardsAndResolvers: 'always',
   }
 ];
 

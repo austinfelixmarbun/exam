@@ -5,6 +5,7 @@ export class RefZipcodeObj {
     areaCode2:         string;
     areaCode1:         string;
     city:              string;
+    zipcodeNumber:     string;
     zipcode:           string;
     phnArea:           string;
     isActive:          string;

@@ -22,21 +22,23 @@ export class OfficeZipcodeMemberComponent implements OnInit {
   pageSize: any;
   apiUrl: any;
 
-  settingUrl: string = environment.settingUrl;
+  foundationUrl: string = environment.foundationUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    console.log("test");
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
-    this.inputObj.enviromentUrl = environment.settingUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetBankPaging;
+    this.inputObj.enviromentUrl = this.foundationUrl;
+    this.inputObj.apiQryPaging = AdInsConstant.GetListOffice;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.settingUrl + AdInsConstant.GetBankPaging;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetListOffice;
   }
 
   //** Start UC Search **/

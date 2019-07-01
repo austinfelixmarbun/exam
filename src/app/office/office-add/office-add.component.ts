@@ -236,7 +236,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.areaCode2 = ucAddress.areaCode2;
     this.officeObj.areaCode1 = ucAddress.areaCode1;
     this.officeObj.city = ucAddress.city;
-    this.officeObj.zipcode = ucAddress.zipcode;
+    this.officeObj.zipcodeNumber = ucAddress.zipcode;
     this.officeObj.phnArea1 = ucAddress.phnArea1;
     this.officeObj.phn1 = ucAddress.phn1;
     this.officeObj.phnArea2 = ucAddress.phnArea2;
