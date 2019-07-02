@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -9,18 +8,18 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { CoyBodObj } from 'app/shared/model/CoyBodObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
-import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
+import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.component';
 
 @Component({
     selector: 'add-bod',
     templateUrl: './add-bod.component.html',
-    providers: [NgbPaginationConfig, NGXToastrService]
+    providers: [NGXToastrService]
 })
 
 export class BodAddComponent implements OnInit {
 
     @ViewChild(UcAddressComponent) ucAddr;
-    @ViewChild(UcContactInfoComponent) ucContact;
+    @ViewChild(UcInfoComponent) ucInfo;
     param: string;
     itemIdType: any;
     businessUnitCode: string;
@@ -38,11 +37,11 @@ export class BodAddComponent implements OnInit {
     idType: any;
     name: any;
     jobTitle: any;
-    npwp: any;
+    taxIdNo: any;
     idNo: any;
     refCoyId: any;
 
-    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
+    constructor(private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["coyBodId"];
             this.refCoyId = params["refCoyId"];
@@ -70,7 +69,7 @@ export class BodAddComponent implements OnInit {
                     console.log(response);
                     this.result = response['returnObject'];
                     this.ucAddr.setData(this.result);
-                    this.ucContact.setData(this.result);
+                    this.ucInfo.setData(this.result);
                     this.setData(this.result);
                 },
                 (error) => {
@@ -85,7 +84,7 @@ export class BodAddComponent implements OnInit {
         this.name = data.name;
         this.idType = data.mrIdType;
         this.jobTitle = data.jobTitle;
-        this.npwp = data.npwp;
+        this.taxIdNo = data.taxIdNo;
         this.idNo = data.idNo;
         if (this.result.isActive == "1") {
             this.isActive = true;
@@ -95,25 +94,25 @@ export class BodAddComponent implements OnInit {
         }
     }
 
-    Save(form, ucAddress, ucContactInfo) {
+    Save(form, ucAddress, ucInfo) {
             var coyAdd = new CoyBodObj();
             console.log(ucAddress);
-            console.log(ucContactInfo);
+            console.log(ucInfo);
             coyAdd.name = form.value.name;
             coyAdd.jobTitle = form.value.jobTitle;
-            coyAdd.npwp = form.value.npwp;
+            coyAdd.taxIdNo = form.value.taxIdNo;
             coyAdd.mrIdType = form.value.mrIdType;
             coyAdd.idNo = form.value.idNo;
             coyAdd.addr = ucAddress.addr;
             coyAdd.city = ucAddress.city;
-            coyAdd.email1 = ucContactInfo.email1;
-            coyAdd.email2 = ucContactInfo.email2;
+            coyAdd.email1 = ucInfo.email1;
+            coyAdd.email2 = ucInfo.email2;
             coyAdd.fax = ucAddress.fax;
             coyAdd.faxArea = ucAddress.faxArea;
             coyAdd.areaCode1 = ucAddress.areaCode1;
             coyAdd.areaCode2 = ucAddress.areaCode2;
-            coyAdd.mobilePhn1 = ucContactInfo.mobilePhn1;
-            coyAdd.mobilePhn2 = ucContactInfo.mobilePhn2;
+            coyAdd.mobilePhn1 = ucInfo.mobilePhn1;
+            coyAdd.mobilePhn2 = ucInfo.mobilePhn2;
             coyAdd.phn1 = ucAddress.phn1;
             coyAdd.phn2 = ucAddress.phn2;
             coyAdd.phn3 = ucAddress.phn3;
@@ -125,7 +124,7 @@ export class BodAddComponent implements OnInit {
             coyAdd.phnExt3 = ucAddress.phnExt3;
             coyAdd.areaCode4 = ucAddress.areaCode4;
             coyAdd.areaCode3 = ucAddress.areaCode3;
-            coyAdd.zipcode = ucAddress.zipcode;
+            coyAdd.zipcodeNumber = ucAddress.zipcodeNumber;
             coyAdd.refCoyId = this.refCoyId;
 
             console.log(coyAdd);
@@ -135,7 +134,8 @@ export class BodAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyAdd).subscribe(
                     (response) => {
                         console.log(response);
-                        this.router.navigateByUrl('/company/bod?refCoyId' + this.refCoyId);
+                        this.toastr.successMessage(response['message']);
+                        this.router.navigateByUrl('/company/bod?refCoyId=' + this.refCoyId);
                     },
                     (error) => {
                         console.log(error);
@@ -146,7 +146,8 @@ export class BodAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyAdd).subscribe(
                     (response) => {
                         console.log(response);
-                        this.router.navigateByUrl('/company/bod?refCoyId' + this.refCoyId);
+                        this.toastr.successMessage(response['message']);
+                        this.router.navigateByUrl('/company/bod?refCoyId=' + this.refCoyId);
                     },
                     (error) => {
                         console.log(error);

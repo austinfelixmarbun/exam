@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Observable } from 'rxjs';
@@ -14,7 +13,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService] // add NgbPaginationConfig to the component providers
+  providers: [NGXToastrService] // add NgbPaginationConfig to the component providers
 })
 export class EmployeeComponent implements OnInit {
 
@@ -120,14 +119,5 @@ export class EmployeeComponent implements OnInit {
           console.log(error);
         });
     }
-  }
-
-  reset(){
-    this.searchComponent.initiateForm();
-  }
-
-  addToTemp(body: any) {
-    console.log(body);
-    console.log(body["tbody"]);
   }
 }

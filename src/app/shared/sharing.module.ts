@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
+import { UcInfoComponent } from './UserControl/uc-info/uc-info.component';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { FormEngineComponent } from './form-engine/form-engine.component';
@@ -38,6 +39,7 @@ import { LookupbizunitModule } from '@adins/lookupbizunit';
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
+        UcInfoComponent,
         TranslateModule,
         LookupbizunitModule,
         LookuporgmdlstrucModule,
@@ -62,7 +64,8 @@ import { LookupbizunitModule } from '@adins/lookupbizunit';
         UcAddressComponent,
         FormEngineComponent,
         UCGridFooterComponent,
-        UcContactInfoComponent
+        UcContactInfoComponent,
+        UcInfoComponent
     ]
 })
 

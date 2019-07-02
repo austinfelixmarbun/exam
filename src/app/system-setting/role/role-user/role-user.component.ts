@@ -13,6 +13,7 @@ import { environment } from "environments/environment";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
+import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 @Component({
   selector: "app-role-user",
   templateUrl: "./role-user.component.html",
@@ -38,6 +39,7 @@ export class RoleUserComponent implements OnInit {
 
   refRoleId: any;
   check: any;
+  arrCrit: any;
 
   listSelectedId: Array<any> = [];
   listDeletedId: Array<any> = [];
@@ -58,7 +60,6 @@ export class RoleUserComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params["refRoleId"] != null) {
         this.refRoleId = params["refRoleId"];
-        console.log("RefRoleId", this.refRoleId);
       }
     });
 
@@ -79,6 +80,15 @@ export class RoleUserComponent implements OnInit {
     this.pageNow = 1;
     this.pageSize = this.show[0];
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListUserEmployee;
+    this.arrCrit = new Array();
+    var critObj = new CriteriaObj();
+      critObj.DataType = 'Numeric'
+      critObj.restriction = 'In';
+      critObj.propName = 'refRoleId';
+      critObj.listValue = [this.refRoleId, 0];
+      this.arrCrit.push(critObj);
+
+      this.inputObj.arrCritObj = this.arrCrit;
   }
 
   getResult(event) {
@@ -89,7 +99,6 @@ export class RoleUserComponent implements OnInit {
     this.ucgridFooter.resultData = this.resultData;
 
     event.response.returnObject.data.forEach(element => {
-      console.log(element);
       if (element.refRoleId === this.refRoleObj.refRoleId) {
         this.listDeletedId.push(element.empPositionId);
         if (element.isActive === '1') { this.listSelectedId.push(element.empPositionId); }
@@ -113,7 +122,7 @@ export class RoleUserComponent implements OnInit {
         value: this.orderByValue
       };
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
   }
 
   initiateForm() {
@@ -153,7 +162,7 @@ export class RoleUserComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     };
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
   }
 
   Back(): void {

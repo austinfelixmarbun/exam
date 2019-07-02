@@ -198,6 +198,16 @@ export class OfficeAddComponent implements OnInit {
           this.httpClient.post(this.holidaySchmUrl, null).subscribe(
             (response) => {
               this.allHolidaySchm = response['returnObject'];
+              
+              var notEmpty = false;
+              for (var i = 0; i < response["returnObject"].length; i++) {
+                if (this.holidaySchmHId == response["returnObject"][i].holidaySchmHId) {
+                  notEmpty = true;
+                }
+              }
+              if (notEmpty != true) {
+                this.holidaySchmHId = response['returnObject'][0]['holidaySchmHId'];
+              }
             },
             (error) => {
               console.log(error);
@@ -205,6 +215,16 @@ export class OfficeAddComponent implements OnInit {
           this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
             (response) => {
               this.allWorkingHourSchm = response['returnObject'];
+              
+              var notEmpty = false;
+              for (var i = 0; i < response["returnObject"].length; i++) {
+                if (this.workingHourSchmHId == response["returnObject"][i].workingHourSchmHId) {
+                  notEmpty = true;
+                }
+              }
+              if (notEmpty != true) {
+                this.workingHourSchmHId = response['returnObject'][0]['workingHourSchmHId'];
+              }
             },
             (error) => {
               console.log(error);

@@ -34,6 +34,7 @@ export class UcAddressComponent implements OnInit {
   faxArea: any;
   fax: any;
   zipcode: any;
+  zipcodeNumber: any;
   addrValid: boolean = false;
   
   constructor() {
@@ -65,6 +66,7 @@ export class UcAddressComponent implements OnInit {
     this.faxArea = data.faxArea;
     this.fax = data.fax;
     this.zipcode = data.zipcode;
+    this.zipcodeNumber = data.zipcodeNumber;
     this.inputLookupObj.nameSelect = this.zipcode;
     this.inputLookupObj.idSelect = this.zipcode;
   }
@@ -73,10 +75,11 @@ export class UcAddressComponent implements OnInit {
     console.log(event);
     this.areaCode2 = event.areaCode2;
     this.areaCode1 = event.areaCode1;
+    this.phnArea1 = event.phnArea;
     this.city = event.city;
-    this.zipcode = event.zipcode;
-    this.inputLookupObj.nameSelect = this.zipcode;
-    this.inputLookupObj.idSelect = this.zipcode;
+    this.zipcodeNumber = event.zipcodeNumber;
+    this.inputLookupObj.nameSelect = event.zipcode;
+    this.inputLookupObj.idSelect = event.zipcode;
   }
 
   // public ucAddressValid(validity): boolean {

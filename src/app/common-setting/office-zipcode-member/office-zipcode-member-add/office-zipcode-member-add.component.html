@@ -34,32 +34,26 @@
     </div>
     <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
     </lib-UCSearch>
-    <table class="table table-responsive-md text-center table-hover">
-      <thead>
-        <tr class="table-header">
-          <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode2'>Kelurahan</span></th>
-          <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode1'>Kecamatan</span></th>
-          <th><span translate class="thead-header" (click)="searchSort($event)" name='city'>City</span></th>
-          <th><span translate class="thead-header" (click)="searchSort($event)" name='zipzode'>Zipcode</span></th>
-          <th><span translate class="thead-header" (click)="searchSort($event)" name='district'>District</span></th>
-          <th translate>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of resultData?.data">
-          <td>{{item.kelurahan}}</td>
-          <td class="text-left">{{item.kecamatan}}</td>
-          <td>{{item.city}}</td>
-          <td>{{item.zipcode}}</td>
-          <td>{{item.district}}</td>
-          <td>
-            <a class="danger p-0" data-original-title="" title="" (click)="delete(item.officeZipcodeMemberId)">
-              <i class="ft-trash-2 font-medium-3 mr-2"></i>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
+    <div [hidden]="resultData?.data == null">
+      <table class="table table-responsive-md text-center table-hover">
+        <thead>
+          <tr class="table-header">
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode2'>Kelurahan</span></th>
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode1'>Kecamatan</span></th>
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='city'>City</span></th>
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='zipzode'>Zipcode</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of resultData?.data">
+            <td>{{item.areaCode2}}</td>
+            <td class="text-left">{{item.areaCode1}}</td>
+            <td>{{item.city}}</td>
+            <td>{{item.zipcode}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
+    </div>
   </div>
 </div>

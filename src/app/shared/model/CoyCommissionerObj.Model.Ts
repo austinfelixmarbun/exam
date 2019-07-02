@@ -6,14 +6,14 @@ export class CoyCommissionerObj {
     jobTitle:          string;
     mrIdType:          string;
     idNo:              string;
-    npwp:              string;
+    taxIdNo:           string;
     addr:              string;
     areaCode1:         string;
     areaCode2:         string;
     areaCode3:         string;
     areaCode4:         string;
     city:              string;
-    zipcode:           string;
+    zipcodeNumber:     string;
     phnArea1:          string;
     phn1:              string;
     phnArea2:          string;
