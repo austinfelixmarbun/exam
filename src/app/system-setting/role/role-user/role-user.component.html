@@ -60,7 +60,7 @@
                           </div>
                           <div *ngIf="refRoleObj.refRoleId != item.refRoleId">
                           </div>
-                          <div *ngIf="item.refRoleId === 0">
+                          <div *ngIf="item.refRoleId == 0">
                             <input type="checkbox" id="checkDiff" name="itemDiff"
                               (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
                           </div>
