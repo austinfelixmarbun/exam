@@ -8,12 +8,13 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { Router, NavigationEnd } from '@angular/router';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-bank',
   templateUrl: './bank.component.html',
   styleUrls: ['./bank.component.scss'],
-  providers: [NgbPaginationConfig]
+  providers: [NGXToastrService, NgbPaginationConfig]
 })
 export class BankComponent implements OnInit {
 
@@ -28,7 +29,7 @@ export class BankComponent implements OnInit {
   totalData: any;
   pageSize: any;
   apiUrl: any;
-  editUrl: any;
+  deleteUrl: any;
 
   settingUrl: string = environment.settingUrl;
   orderByKey: any = null;
@@ -36,7 +37,7 @@ export class BankComponent implements OnInit {
 
   navigationSubscription: any;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
     // subscribe to the router events - storing the subscription so
     // we can unsubscribe later. 
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -117,12 +118,13 @@ export class BankComponent implements OnInit {
 
   delete(refBankId: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.editUrl = this.settingUrl + AdInsConstant.DeleteRefBank;
+      this.deleteUrl = this.settingUrl + AdInsConstant.DeleteRefBank;
       this.bankObj = new RefBankObj();
       this.bankObj.refBankId = refBankId;
-      this.http.post(this.editUrl, this.bankObj).subscribe(
+      this.http.post(this.deleteUrl, this.bankObj).subscribe(
         (response) => {
-          console.log(response);
+          this.toastr.successMessage(response['message']);
+          this.searchPagination(1);
         },
         (error) => {
           console.log(error);

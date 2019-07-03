@@ -9,26 +9,40 @@
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" translate>Scheme Code </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="workingHourSchmCode" required
-                  [(ngModel)]="workingHourSchmCode" #WorkingHourSchmCode="ngModel"
-                  [ngClass]="{ 'is-invalid': (WorkingHourReqForm.submitted || WorkingHourSchmCode.touched || WorkingHourSchmCode.dirty) && WorkingHourSchmCode.invalid }">
-                <div
-                  *ngIf="(WorkingHourReqForm.submitted || WorkingHourSchmCode.touched || WorkingHourSchmCode.dirty) && WorkingHourSchmCode.invalid"
-                  class="invalid-feedback">
-                  <div *ngIf="WorkingHourSchmCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                <div *ngIf="pageType=='edit'">
+                  <label class="col-md-3  adInsLabel" translate>{{workingHourSchmCode}}</label>
+                </div>
+                <div *ngIf="pageType=='add'">
+                  <input type="text" class="form-control adInsInput" name="workingHourSchmCode" required
+                    [(ngModel)]="workingHourSchmCode" #WorkingHourSchmCode="ngModel"
+                    [ngClass]="{ 'is-invalid': (WorkingHourReqForm.submitted || WorkingHourSchmCode.touched || WorkingHourSchmCode.dirty) && WorkingHourSchmCode.invalid }">
+                  <div
+                    *ngIf="(WorkingHourReqForm.submitted || WorkingHourSchmCode.touched || WorkingHourSchmCode.dirty) && WorkingHourSchmCode.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="WorkingHourSchmCode.errors.required" class="adInsReqMsg" translate>This field is
+                      required
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" translate>Scheme Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="workingHourSchmName" required
-                  [(ngModel)]="workingHourSchmName" #WorkingHourSchmName="ngModel"
-                  [ngClass]="{ 'is-invalid': (WorkingHourReqForm.submitted || WorkingHourSchmName.touched || WorkingHourSchmName.dirty) && WorkingHourSchmName.invalid }">
-                <div
-                  *ngIf="(WorkingHourReqForm.submitted || WorkingHourSchmName.touched || WorkingHourSchmName.dirty) && WorkingHourSchmName.invalid"
-                  class="invalid-feedback">
-                  <div *ngIf="WorkingHourSchmName.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                <div *ngIf="pageType=='edit'">
+                  <label class="col-md-3  adInsLabel" translate>{{workingHourSchmName}}</label>
+                </div>
+                <div *ngIf="pageType=='add'">
+                  <input type="text" class="form-control adInsInput" name="workingHourSchmName" required
+                    [(ngModel)]="workingHourSchmName" #WorkingHourSchmName="ngModel"
+                    [ngClass]="{ 'is-invalid': (WorkingHourReqForm.submitted || WorkingHourSchmName.touched || WorkingHourSchmName.dirty) && WorkingHourSchmName.invalid }">
+                  <div
+                    *ngIf="(WorkingHourReqForm.submitted || WorkingHourSchmName.touched || WorkingHourSchmName.dirty) && WorkingHourSchmName.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="WorkingHourSchmName.errors.required" class="adInsReqMsg" translate>This field is
+                      required
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

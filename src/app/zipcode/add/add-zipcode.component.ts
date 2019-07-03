@@ -31,13 +31,13 @@ export class ZipcodeAddComponent implements OnInit {
     settingUrl: string = environment.settingUrl;
     zipcodeObj: RefZipcodeObj;
     editUrl: any;
-    districtName : string;
+    districtName: string;
     idSelect: string;
     jsonSelect: string;
-    provDistrictObj : RefProvDistrictObj;
-    urlGetProvDistrict : string;
+    provDistrictObj: RefProvDistrictObj;
+    urlGetProvDistrict: string;
 
-    constructor(private router: Router,private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refZipcodeId"];
             this.mode = params["mode"];
@@ -49,7 +49,7 @@ export class ZipcodeAddComponent implements OnInit {
         this.inputLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
         this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefProvDistrictPaging;
         this.inputLookupObj.urlEnviPaging = environment.settingUrl;
-        
+
         if (this.mode === "edit") {
             this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipCode;
             this.urlGetProvDistrict = this.settingUrl + AdInsConstant.GetRefProvDistrictObj;
@@ -71,9 +71,9 @@ export class ZipcodeAddComponent implements OnInit {
                     this.provDistrictObj.refProvDistrictId = this.result.refProvDistrictId;
                     this.http.post(this.urlGetProvDistrict, this.provDistrictObj).subscribe(
                         (response) => {
-                            this.inputLookupObj.nameSelect = response["returnObject"].name;
+                            this.inputLookupObj.nameSelect = response["name"];
                             this.inputLookupObj.jsonSelect = response["returnObject"];
-                            this.inputLookupObj.idSelect = response["returnObject"].refProvDistrictId;
+                            this.inputLookupObj.idSelect = response["refProvDistrictId"];
                         })
                 },
                 (error) => {
@@ -101,15 +101,14 @@ export class ZipcodeAddComponent implements OnInit {
             this.http.post(this.editUrl, this.zipcodeObj).subscribe(
                 (response) => {
                     console.log(response);
-                    this.router.navigateByUrl('/zipcode');
+                    this.toastr.successMessage(response["message"]);
+                    this.router.navigateByUrl('/zipcode/paging');
                 },
-                (error)=>
-                {
+                (error) => {
                     console.log(error);
                 });
         }
-        else
-        {
+        else {
             this.editUrl = this.settingUrl + AdInsConstant.AddRefZipcode;
             this.zipcodeObj = new RefZipcodeObj();
             this.zipcodeObj = ZipcodeAddReqForm.value;
@@ -126,14 +125,13 @@ export class ZipcodeAddComponent implements OnInit {
                     this.toastr.successMessage(response['message']);
                     this.router.navigateByUrl('/zipcode/paging');
                 },
-                (error)=>
-                {
+                (error) => {
                     console.log(error);
                 });
         }
     }
 
-    toggleVisibility(e){
-        this.isActive= e.target.checked;
-      }
+    toggleVisibility(e) {
+        this.isActive = e.target.checked;
+    }
 }
