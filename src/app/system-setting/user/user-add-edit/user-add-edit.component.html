@@ -49,8 +49,9 @@
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" for="RePassword">Re-Password</label>
                 <div class="col-md-9">
-                  <input type="password" class="form-control adInsInput" name="RePassword" required [(ngModel)]="RePassword"
-                    #rePassword="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && rePassword.invalid }">
+                  <input type="password" class="form-control adInsInput" name="RePassword" required
+                    [(ngModel)]="RePassword" #rePassword="ngModel"
+                    [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && rePassword.invalid }">
                   <div *ngIf="UserAddEditForm.submitted && rePassword.invalid" class="invalid-feedback">
                     <div *ngIf="rePassword.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
@@ -58,6 +59,20 @@
               </div>
             </div>
 
+
+            <div class="stat" *ngIf=" type !== 'changePassword' ">
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" for="loggedInMethod">Logged In Method </label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" name="loggedInMethod" #LoggedInMethod
+                    [(ngModel)]="loggedInMethod">
+                    <option value="DB">Database</option>
+                    <option value="LDAP">Active Directory</option>
+                    <option value="INT">Interface</option>
+                  </select>
+                </div>
+              </div>
+            </div>
             <div class="stat" *ngIf=" type !== 'changePassword' ">
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" for="IsActive">Active Status</label>
@@ -67,19 +82,6 @@
                 </div>
               </div>
             </div>
-            <div class="stat" *ngIf=" type !== 'changePassword' ">
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" for="loggedInMethod">Logged In Method </label>
-                <div class="col-md-9">
-                  <select class="form-control adInsInput" name="loggedInMethod" #LoggedInMethod [(ngModel)]="loggedInMethod">
-                    <option value="DB">Database</option>
-                    <option value="LDAP">Active Directory</option>
-                    <option value="INT">Interface</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
           </div>
           <div class="form-actions">
 
