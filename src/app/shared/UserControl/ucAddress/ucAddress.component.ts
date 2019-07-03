@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import 'rxjs/add/operator/map';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
