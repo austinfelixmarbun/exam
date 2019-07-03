@@ -152,8 +152,9 @@ export class AdInsConstant {
     //OFFICE ZIPCODE MEMBER
     public static GetOfficeZipCodeMemberPaging = "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
     public static GetRefOfficeZipcodePaging = "/OfficeZipcodeMember/GetRefOfficeZipcodePaging";
+    public static AddOfficeZipcodeMember = "/OfficeZipcodeMember/AddOfficeZipcodeMember";
+    public static DeleteOfficeZipcodeMember = "/OfficeZipcodeMember/DeleteOfficeZipcodeMember";
     
-
     //BUSINESS UNIT
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
     public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";

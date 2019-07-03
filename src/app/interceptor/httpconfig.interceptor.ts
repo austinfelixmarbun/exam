@@ -5,8 +5,7 @@ import {
     HttpResponse,
     HttpHandler,
     HttpEvent,
-    HttpErrorResponse,
-    HttpHeaders
+    HttpErrorResponse
 } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
@@ -15,10 +14,6 @@ import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { formatDate } from '@angular/common';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { format } from 'util';
-import { environment } from 'environments/environment.prod';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { AdInsErrorMessage } from 'app/shared/AdInsErrorMessage';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { Router } from '@angular/router';
 
@@ -33,11 +28,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             this.spinner.show();
         }
         this.count++;
-        var httpRequest = new HttpRequestObj();
-        console.log("HTTP Interceptor");
         //console.log(request);
         var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
-        var userAcc = JSON.parse(localStorage.getItem("UserAccess"));
         var token: string = "";
         var myObj;
         let today = new Date();

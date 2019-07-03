@@ -146,15 +146,15 @@ export class OfficeAddComponent implements OnInit {
         (response) => {
           this.resultData = response['returnObject'];
           console.log(this.resultData);
-          this.officeCode = response['returnObject']['officeCode']
-          this.officeName = response['returnObject']['officeName']
-          this.officeShortName = response['returnObject']['officeShortName']
-          this.mrOfficeClass = response['returnObject']['mrOfficeClass']
-          this.refOrgId = response['returnObject']['refOrgId']
-          this.orgMdlId = response['returnObject']['orgMdlId']
-          this.refOfficeAreaId = response['returnObject']['refOfficeAreaId']
-          this.holidaySchmHId = response['returnObject']['holidaySchmHId']
-          this.workingHourSchmHId = response['returnObject']['workingHourSchmHId']
+          this.officeCode = response['returnObject']['officeCode'];
+          this.officeName = response['returnObject']['officeName'];
+          this.officeShortName = response['returnObject']['officeShortName'];
+          this.mrOfficeClass = response['returnObject']['mrOfficeClass'];
+          this.refOrgId = response['returnObject']['refOrgId'];
+          this.orgMdlId = response['returnObject']['orgMdlId'];
+          this.refOfficeAreaId = response['returnObject']['refOfficeAreaId'];
+          this.holidaySchmHId = response['returnObject']['holidaySchmHId'];
+          this.workingHourSchmHId = response['returnObject']['workingHourSchmHId'];
           this.parentId = response['returnObject']['parentId']
 
           if (this.resultData.isAllowAppCreated == "1") {
@@ -169,7 +169,11 @@ export class OfficeAddComponent implements OnInit {
           else {
             this.isActive = false;
           }
-          this.mrKonvenSyariah = response['returnObject']['mrKonvenSyariah']
+          this.mrKonvenSyariah = response['returnObject']['mrKonvenSyariah'];
+
+          var test = {addr : response['returnObject']['officeAddr']};
+          this.resultData.push(test);
+
           this.ucAddr.setData(this.resultData);
           this.ucContact.setData(this.resultData);
           var orgMdlObj = new OrgMdlObj();
@@ -256,7 +260,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.areaCode2 = ucAddress.areaCode2;
     this.officeObj.areaCode1 = ucAddress.areaCode1;
     this.officeObj.city = ucAddress.city;
-    this.officeObj.zipcodeNumber = ucAddress.zipcode;
+    this.officeObj.zipcodeNumber = ucAddress.zipcodeNumber;
     this.officeObj.phnArea1 = ucAddress.phnArea1;
     this.officeObj.phn1 = ucAddress.phn1;
     this.officeObj.phnArea2 = ucAddress.phnArea2;
