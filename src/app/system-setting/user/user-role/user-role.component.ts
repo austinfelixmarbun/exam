@@ -70,7 +70,8 @@ export class UserRoleComponent implements OnInit {
             this.httpClient.post(urlGetListEmpPos, empObj).subscribe(
               (response) => {
                 console.log('Get Result Data');
-                this.resultData = response;
+                console.log(response);
+                this.resultData = response["returnObject"];
                 console.log('Result Data', this.resultData);
               },
               (error) => {

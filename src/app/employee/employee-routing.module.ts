@@ -24,6 +24,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'edit',
+        component: EmployeeAddComponent,
+        data: {
+          title: 'Edit Employee'
+        }
+      },
+      {
         path: 'employeePosition',
         component: EmployeePositionComponent,
         data: {

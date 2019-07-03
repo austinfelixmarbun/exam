@@ -32,9 +32,9 @@ export class EmployeePositionAddComponent implements OnInit {
     allSupervisor: any;
     superiorRefEmpId: any = '';
     allBiz: any;
-    refBizUnitId: any = 'selectOne';
+    refBizUnitId: any;
     allOrgJobTitle: any;
-    orgJobTitleId: any = 'selectOne';
+    orgJobTitleId: any;
     positionStartDt: any;
     positionFinishDt: any;
     empObj: RefEmpObj;
@@ -45,11 +45,13 @@ export class EmployeePositionAddComponent implements OnInit {
     getEditUrl: any;
     editUrl: any;
     getUrl: any;
+    refMasterUrl: any;
     refOfficeUrl: any;
     supervisorUrl: any;
     bizUrl: any;
     orgJobTitleUrl: any;
     foundationUrl: string = environment.foundationUrl;
+    settingUrl: string = environment.settingUrl;
     empPositionVisible: boolean = true;
     addEditVisible: boolean = false;
     pageNow: any;
@@ -59,12 +61,16 @@ export class EmployeePositionAddComponent implements OnInit {
     orderByKey: any = null;
     orderByValue: boolean = true;
     arrCrit: any;
+    allSkillLvl:any;
+    refMasterTypeCode:any;
+    masterCode:any;
 
     constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
         this.getUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
         this.addUrl = this.foundationUrl + AdInsConstant.AddEmpPosition;
         this.refOfficeUrl = this.foundationUrl + AdInsConstant.GetAllRefOffice;
         this.supervisorUrl = this.foundationUrl + AdInsConstant.GetEmpListByOfficeIdAndIsActive;
+        this.refMasterUrl = this.settingUrl + AdInsConstant.GetRefMasterListByTypeCode;
         this.bizUrl = this.foundationUrl + AdInsConstant.GetRefBizUnitByOffice;
         this.orgJobTitleUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitleByMdlStruc;
         this.getEditUrl = this.foundationUrl + AdInsConstant.GetEmpByEmpPositionId;
@@ -88,21 +94,35 @@ export class EmployeePositionAddComponent implements OnInit {
             }
             if (params['refBizUnitId'] != null) {
                 this.refBizUnitId = params['refBizUnitId'];
+            } else {
+                this.refBizUnitId = 0;
             }
         });
     }
 
     ngOnInit() {
         const getuserAccess = JSON.parse(localStorage.getItem('UserAccess'));
-        this.refOfficeId = getuserAccess.refOfficeId
-        this.refOfficeObj = new RefOfficeObj()
+        this.refOfficeId = getuserAccess.refOfficeId;
+        this.refOfficeObj = new RefOfficeObj();
         this.httpClient.post(this.refOfficeUrl, null).subscribe(
             (response) => {
                 this.allRefOffice = response['returnObject']
             },
             (error) => {
                 console.log(error);
-            })
+            });
+        
+        this.refMasterTypeCode = "SKILL_LVL";
+        var RefMasterObj = {RefMasterTypeCode : this.refMasterTypeCode, MasterCode:""};
+        this.httpClient.post(this.refMasterUrl, RefMasterObj).subscribe(
+            (response) => {
+                console.log(response);
+                this.allSkillLvl = response['returnObject'];
+                this.masterCode = this.allSkillLvl[0].masterCode;
+            },
+            (error) => {
+                console.log(error);
+            });
         this.refOfficeObj.refOfficeId = this.refOfficeId
         this.httpClient.post(this.supervisorUrl, this.refOfficeObj).subscribe(
             (response) => {
@@ -113,7 +133,10 @@ export class EmployeePositionAddComponent implements OnInit {
             })
         this.httpClient.post(this.bizUrl, this.refOfficeObj).subscribe(
             (response) => {
-                this.allBiz = response['returnObject']
+                this.allBiz = response['returnObject'];
+                this.refBizUnitId = this.allBiz[0].orgMdlStrucId;
+                if(this.pageType != "edit")
+                this.onChangeBiz(this.refBizUnitId);
             },
             (error) => {
                 console.log(error);
@@ -143,16 +166,13 @@ export class EmployeePositionAddComponent implements OnInit {
         }
     }
     onChangeBiz(bizValue) {
-        this.orgJobTitleId = 'selectOne';
         this.orgJobTitleObj = new OrgJobTitleObj()
-        if (bizValue == 'selectOne') {
-            bizValue = 0
-        }
         this.orgJobTitleObj.orgMdlStrucId = bizValue
         this.httpClient.post(this.orgJobTitleUrl, this.orgJobTitleObj).subscribe(
             (response) => {
                 console.log(response);
-                this.allOrgJobTitle = response['returnObject']
+                this.allOrgJobTitle = response['returnObject'];
+                this.orgJobTitleId = this.allOrgJobTitle.orgJobTitleId;
             },
             (error) => {
                 console.log(error);
@@ -162,8 +182,10 @@ export class EmployeePositionAddComponent implements OnInit {
     SaveForm(ReqForm: NgForm) {
         if (this.pageType == 'add') {
             this.empPositionObj = new EmpPositionObj();
-            this.empPositionObj = ReqForm.value
-            this.empPositionObj.refEmpId = this.refEmpId
+            this.empPositionObj = ReqForm.value;
+            this.empPositionObj.refEmpId = this.refEmpId;
+            this.empPositionObj.skillLvl = this.masterCode;
+            this.empPositionObj.superiorRefEmpId = ReqForm.value.superiorRefEmpId;
             if (this.isActive === false) {
                 this.empPositionObj.isActive = "0";
             }
@@ -192,6 +214,8 @@ export class EmployeePositionAddComponent implements OnInit {
             this.empPositionObj = ReqForm.value
             this.empPositionObj.refEmpId = this.refEmpId
             this.empPositionObj.empPositionId = this.empPositionId
+            this.empPositionObj.skillLvl = this.masterCode;
+            this.empPositionObj.superiorRefEmpId = ReqForm.value.superiorRefEmpId;
             if (this.isActive === false) {
                 this.empPositionObj.isActive = "0";
             }

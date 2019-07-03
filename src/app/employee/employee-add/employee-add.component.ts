@@ -217,7 +217,7 @@ export class EmployeeAddComponent implements OnInit {
       this.empObj.bankBranchRegRptCode = ReqForm.value.bankBranchRegRptCode;
       this.empObj.bankAccName = ReqForm.value.bankAccName;
       this.empObj.bankAccNo = ReqForm.value.bankAccNo;
-      this.empObj.bankCode = uclRefBank.codeSelect;
+      this.empObj.bankCode = uclRefBank.lookupInput.idSelect;
       if (this.isExt === false) {
         this.empObj.isExt = "0";
       } else {
@@ -279,7 +279,7 @@ export class EmployeeAddComponent implements OnInit {
       this.empObj.bankBranchRegRptCode = ReqForm.value.bankBranchRegRptCode;
       this.empObj.bankAccName = ReqForm.value.bankAccName;
       this.empObj.bankAccNo = ReqForm.value.bankAccNo;
-      this.empObj.bankCode = uclRefBank.codeSelect;
+      this.empObj.bankCode = uclRefBank.lookupInput.idSelect;
       if (this.isExt === false) {
         this.empObj.isExt = "0";
       } else {

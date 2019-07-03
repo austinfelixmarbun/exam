@@ -14,8 +14,9 @@ import { WorkingHourSchmDObj } from 'app/shared/model/WorkingHourSchmDObj.Model'
   styleUrls: ['./working-hour-detail.component.scss'],
   providers: [NGXToastrService]
 })
-export class WorkingHourDetailComponent implements OnInit {
 
+export class WorkingHourDetailComponent implements OnInit {
+  
   pageType: string = "add";
   workingHourSchmHId: any;
   workingHourSchmCode: any;
@@ -99,9 +100,13 @@ export class WorkingHourDetailComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
+      }else{
+        this.pageType = "add";
       }
       if (params["workingHourSchmHId"] != null) {
         this.workingHourSchmHId = params["workingHourSchmHId"];
+      }else{
+        this.workingHourSchmHId = 0;
       }
     });
   }
@@ -133,7 +138,7 @@ export class WorkingHourDetailComponent implements OnInit {
             var eachDayDetail = {
               label: response["returnObject"][i].workingHourSchmDay,
               workingHourSchmDay: response["returnObject"][i].workingHourSchmDay,
-              workingHourFrom1: response["returnObject"][i].workingHourFrom1,
+              workingHourFrom1:response["returnObject"][i].workingHourFrom1,
               workingHourTo1: response["returnObject"][i].workingHourTo1,
               workingHourFrom2: response["returnObject"][i].workingHourFrom2,
               workingHourTo2: response["returnObject"][i].workingHourTo2
@@ -141,6 +146,7 @@ export class WorkingHourDetailComponent implements OnInit {
             this.listOfDay.push(eachDayDetail);
           }
           console.log(this.listOfDay);
+          console.log(eachDayDetail);
         },
         error => {
           console.log(error);
@@ -148,14 +154,15 @@ export class WorkingHourDetailComponent implements OnInit {
       );
     }
   }
-
+ 
   SaveWorkingHourForm(ReqWorkingHourForm: NgForm, input: any) {
     console.log(ReqWorkingHourForm);
     console.log(input);
     console.log(ReqWorkingHourForm.value);
     console.log(this.listOfDay);
     this.workingHourSchmHObj = new WorkingHourSchmHObj();
-    this.workingHourSchmHObj = ReqWorkingHourForm.value;
+    this.workingHourSchmHObj.workingHourSchmCode = ReqWorkingHourForm.value.workingHourSchmCode;
+    this.workingHourSchmHObj.workingHourSchmName = ReqWorkingHourForm.value.workingHourSchmName;
     if (this.isActive === false) {
       this.workingHourSchmHObj.isActive = "0";
     } else {
@@ -180,17 +187,17 @@ export class WorkingHourDetailComponent implements OnInit {
         WorkingHourSchmD: arrWHSchmD
       };
       console.log(WorkingHourSchm);
-      // this.http.post(this.addUrl, WorkingHourSchm).subscribe(
-      //   response => {
-      //     console.log("Success");
-      //     console.log(response);
-      //     this.toastr.successMessage(response["message"]);
-      //     this.router.navigate(["/commonSetting/workingHour"]);
-      //   },
-      //   error => {
-      //     console.log(error);
-      //   }
-      // );
+      this.http.post(this.addUrl, WorkingHourSchm).subscribe(
+        response => {
+          console.log("Success");
+          console.log(response);
+          this.toastr.successMessage(response["message"]);
+          this.router.navigate(["/commonSetting/workingHour"]);
+        },
+        error => {
+          console.log(error);
+        }
+      );
     } else {
       this.workingHourSchmHObj.workingHourSchmHId = this.workingHourSchmHId;
       var WorkingHourSchm = {
