@@ -261,4 +261,12 @@ export class AdInsConstant {
     
     //REF MODULE
     public static GetListRefModuleKeyValue = "/RefModule/GetListRefModuleKeyValue";
+
+    //REF EMP LEAVE MANAGEMENT
+    public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
+    public static DeleteRefEmpLeaveMngmnt= "/RefEmpLeaveManagement/DeleteRefEmpLeaveMngmnt";
+    public static GetRefEmpLeaveMngmntById = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntById";
+    public static EditRefEmpLeaveMngmnt = "/RefEmpLeaveManagement/EditRefEmpLeaveMngmnt";
+    public static AddRefEmpLeaveMngmnt = "/RefEmpLeaveManagement/AddRefEmpLeaveMngmnt";
+
 }
