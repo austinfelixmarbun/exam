@@ -79,6 +79,14 @@ form label{
     padding-top:10px;
 }
 
+.light-gray{
+    background-color: lightgray;
+}
+
+.font-navbar{
+    font-size:12px;
+}
+
 #role-modal{
     background-color:white !important;
     color:black !important;
