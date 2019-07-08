@@ -1,5 +1,5 @@
 <!-- Navbar (Header) Starts -->
-<nav class="header-navbar navbar navbar-expand-lg navbar-light bg-faded">
+<nav class="header-navbar navbar navbar-expand-lg navbar-light bg-faded light-gray">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle d-lg-none float-left" data-toggle="collapse">
@@ -13,9 +13,6 @@
                     [attr.aria-expanded]="!isCollapsed" aria-controls="navbarSupportedContent">
                     <i class="ft-more-vertical"></i>
                 </a>
-            </span>
-            <span class="navbar-form navbar-right mt-1">
-                {{displayName}}
             </span>
             <!-- <form class="navbar-form navbar-right mt-1" role="search">
                 <div class="position-relative has-icon-right">
@@ -138,11 +135,18 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item d-none d-lg-block">
+                    <!-- <li class="nav-item d-none d-lg-block">
                         <a class="nav-link position-relative notification-sidebar-toggle">
                             <i class="ft-align-left font-medium-3 blue-grey darken-4"></i>
                             <p class="d-none">Notifications Sidebar</p>
                         </a>
+                    </li> -->
+                    <li class="nav-item d-none d-lg-block" style="line-height: 13px;margin-top:5px">
+                        <span class="navbar-form navbar-right font-navbar"  style="float:left;">
+                            <span>{{userAccess.userId}} | {{userAccess.roleName}}</span>
+                            <br>
+                            <span>{{userAccess.officeName}} , {{businessDate}}</span>
+                        </span>
                     </li>
                 </ul>
             </div>
