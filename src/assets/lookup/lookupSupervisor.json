@@ -1,0 +1,24 @@
+{
+    "url": "http://getSupervisor",
+    "title": "Lookup Supervisor",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "empNo",
+            "id": "empNoId",
+            "value": "",
+            "label": "Employee No",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "empName",
+            "id": "empNameId",
+            "value": "",
+            "label": "Employee Name",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        }
+    ]
+}

@@ -24,6 +24,7 @@ import { LookuprefjobtitleModule } from '@adins/lookuprefjobtitle';
 import { LookuporgjobtitleModule } from '@adins/lookuporgjobtitle';
 import { LookupbizunitModule } from '@adins/lookupbizunit';
 import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank.component';
+import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-supervisor.component';
 
 @NgModule({
     exports: [
@@ -49,7 +50,8 @@ import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank
         UCSearchModule,
         UcgridfooterModule,
         FormEngineModule,
-        LookupRefBankComponent
+        LookupRefBankComponent,
+        LookupSupervisorComponent
     ],
     imports: [
         CommonModule,
@@ -68,7 +70,8 @@ import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank
         UCGridFooterComponent,
         UcContactInfoComponent,
         UcInfoComponent,
-        LookupRefBankComponent
+        LookupRefBankComponent,
+        LookupSupervisorComponent
     ]
 })
 
