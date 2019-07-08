@@ -12,6 +12,7 @@ import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { OrgJobTitleObj } from 'app/shared/model/OrgJobTitleObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { formatDate } from '@angular/common';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 
 @Component({
     selector: 'app-employee-position',
@@ -61,9 +62,11 @@ export class EmployeePositionAddComponent implements OnInit {
     orderByKey: any = null;
     orderByValue: boolean = true;
     arrCrit: any;
-    allSkillLvl:any;
-    refMasterTypeCode:any;
-    masterCode:any;
+    allSkillLvl: any;
+    refMasterTypeCode: any;
+    masterCode: any;
+    inputLookupObj: any;
+    getEmpUrl:any;
 
     constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
         this.getUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
@@ -75,6 +78,7 @@ export class EmployeePositionAddComponent implements OnInit {
         this.orgJobTitleUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitleByMdlStruc;
         this.getEditUrl = this.foundationUrl + AdInsConstant.GetEmpByEmpPositionId;
         this.editUrl = this.foundationUrl + AdInsConstant.EditEmpPosition;
+        this.getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
 
         this.route.queryParams.subscribe(params => {
             if (params['param'] != null) {
@@ -101,6 +105,12 @@ export class EmployeePositionAddComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.inputLookupObj = new InputLookupObj();
+        this.inputLookupObj.urlJson = "./assets/lookup/lookupSupervisor.json";
+        this.inputLookupObj.urlQryPaging = AdInsConstant.GetListEmployee;
+        this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+
         const getuserAccess = JSON.parse(localStorage.getItem('UserAccess'));
         this.refOfficeId = getuserAccess.refOfficeId;
         this.refOfficeObj = new RefOfficeObj();
@@ -111,9 +121,9 @@ export class EmployeePositionAddComponent implements OnInit {
             (error) => {
                 console.log(error);
             });
-        
+
         this.refMasterTypeCode = "SKILL_LVL";
-        var RefMasterObj = {RefMasterTypeCode : this.refMasterTypeCode, MasterCode:""};
+        var RefMasterObj = { RefMasterTypeCode: this.refMasterTypeCode, MasterCode: "" };
         this.httpClient.post(this.refMasterUrl, RefMasterObj).subscribe(
             (response) => {
                 console.log(response);
@@ -123,20 +133,20 @@ export class EmployeePositionAddComponent implements OnInit {
             (error) => {
                 console.log(error);
             });
-        this.refOfficeObj.refOfficeId = this.refOfficeId
-        this.httpClient.post(this.supervisorUrl, this.refOfficeObj).subscribe(
-            (response) => {
-                this.allSupervisor = response['returnObject']
-            },
-            (error) => {
-                console.log(error);
-            })
+        // this.refOfficeObj.refOfficeId = this.refOfficeId
+        // this.httpClient.post(this.supervisorUrl, this.refOfficeObj).subscribe(
+        //     (response) => {
+        //         this.allSupervisor = response['returnObject']
+        //     },
+        //     (error) => {
+        //         console.log(error);
+        //     })
         this.httpClient.post(this.bizUrl, this.refOfficeObj).subscribe(
             (response) => {
                 this.allBiz = response['returnObject'];
                 this.refBizUnitId = this.allBiz[0].orgMdlStrucId;
-                if(this.pageType != "edit")
-                this.onChangeBiz(this.refBizUnitId);
+                if (this.pageType != "edit")
+                    this.onChangeBiz(this.refBizUnitId);
             },
             (error) => {
                 console.log(error);
@@ -154,13 +164,22 @@ export class EmployeePositionAddComponent implements OnInit {
                     this.orgJobTitleId = response['returnObject']['orgJobTitleId']
                     this.positionStartDt = formatDate(response['returnObject']['positionStartDt'], 'yyyy-MM-dd', 'en-US')
                     this.positionFinishDt = formatDate(response['returnObject']['positionFinishDt'], 'yyyy-MM-dd', 'en-US')
-                    this.superiorRefEmpId = response['returnObject']['superiorRefEmpId']
-                    if (this.resultData.isActive == "1") {
-                        this.isActive = true;
-                    }
-                    else {
-                        this.isActive = false;
-                    }
+                    //this.superiorRefEmpId = response['returnObject']['superiorRefEmpId']
+
+                    var refEmpObj = { RefEmpId: response['returnObject']['superiorRefEmpId'] };
+                    this.httpClient.post(this.getEmpUrl, refEmpObj).subscribe(
+                        (response) => {
+                            console.log(response);
+                            this.inputLookupObj.nameSelect = response["returnObject"].empName;
+                            this.inputLookupObj.jsonSelect = response["returnObject"];
+                            this.inputLookupObj.idSelect = response['returnObject'].refEmpId;
+                            if (this.resultData.isActive == "1") {
+                                this.isActive = true;
+                            }
+                            else {
+                                this.isActive = false;
+                            }
+                        });
                 })
         } else {
         }
@@ -185,7 +204,7 @@ export class EmployeePositionAddComponent implements OnInit {
             this.empPositionObj = ReqForm.value;
             this.empPositionObj.refEmpId = this.refEmpId;
             this.empPositionObj.skillLvl = this.masterCode;
-            this.empPositionObj.superiorRefEmpId = ReqForm.value.superiorRefEmpId;
+            this.empPositionObj.superiorRefEmpId = this.inputLookupObj.idSelect;
             if (this.isActive === false) {
                 this.empPositionObj.isActive = "0";
             }
@@ -201,7 +220,7 @@ export class EmployeePositionAddComponent implements OnInit {
                     console.log(response);
                     if (response['isError'] != true) {
                         this.toastr.successMessage(response['message']);
-                        this.router.navigate(["/employee"]);
+                        this.router.navigate(["/employee/employeePosition"], { queryParams: {refEmpId:this.refEmpId }});
                     }
                 },
                 (error) => {
@@ -215,7 +234,7 @@ export class EmployeePositionAddComponent implements OnInit {
             this.empPositionObj.refEmpId = this.refEmpId
             this.empPositionObj.empPositionId = this.empPositionId
             this.empPositionObj.skillLvl = this.masterCode;
-            this.empPositionObj.superiorRefEmpId = ReqForm.value.superiorRefEmpId;
+            this.empPositionObj.superiorRefEmpId = this.inputLookupObj.idSelect;
             if (this.isActive === false) {
                 this.empPositionObj.isActive = "0";
             }
@@ -229,7 +248,7 @@ export class EmployeePositionAddComponent implements OnInit {
                     console.log("Success");
                     console.log(response);
                     this.toastr.successMessage(response['message']);
-                    this.router.navigate(["/employee"]);
+                    this.router.navigate(["/employee/employeePosition"], { queryParams: {refEmpId:this.refEmpId }});
                 },
                 (error) => {
                     console.log("Error");

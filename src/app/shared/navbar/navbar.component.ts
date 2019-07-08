@@ -20,8 +20,13 @@ export class NavbarComponent implements AfterViewChecked {
     toggleClass = 'ft-maximize';
     placement = 'bottom-right'
     displayName : string;
+    userId : string;
+    roleName : string;
+    officeName : string;
+    businessDate : string;
     public isCollapsed = true;
     token : string;
+    userAccess : any;
 
     constructor(public translate: TranslateService,
         private router: Router,
@@ -33,6 +38,9 @@ export class NavbarComponent implements AfterViewChecked {
         var date = new Date(businessDate.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         businessDate = formatDate(date, 'dd-MMM-yyyy', 'en-US');
         console.log(businessDate);
+        this.businessDate = businessDate;
+        this.userId = userAccess.userId;
+        this.userAccess = userAccess;
         this.displayName = userAccess.userId + ", " + userAccess.roleName + " - " + userAccess.officeName + " - " + businessDate;
     }
 

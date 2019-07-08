@@ -40,6 +40,7 @@ export class EmployeePositionComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   arrCrit: any;
+  getEmpUrl:any;
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetEmpPositionPaging;
@@ -63,16 +64,25 @@ export class EmployeePositionComponent implements OnInit {
     this.inputObj._url = "./assets/search/searchEmpList.json";
     this.inputObj.enviromentUrl = environment.foundationUrl;
     this.inputObj.apiQryPaging = AdInsConstant.GetEmpPositionPaging;
-    
+    this.getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
+
     this.pageNow = 1;
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
-      critObj.DataType = 'Numeric'
-      critObj.restriction = AdInsConstant.RestrictionEq;
-      critObj.propName = 'refEmpId';
-      critObj.value = this.refEmpId
-      this.arrCrit.push(critObj);
-      this.inputObj.arrCritObj = this.arrCrit;
+    critObj.DataType = 'Numeric'
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'refEmpId';
+    critObj.value = this.refEmpId
+    this.arrCrit.push(critObj);
+    this.inputObj.arrCritObj = this.arrCrit;
+
+    var refEmpObj = { RefEmpId: this.refEmpId };
+    this.httpClient.post(this.getEmpUrl, refEmpObj).subscribe(
+      (response) => {
+        console.log(response);
+        this.empNo = response["returnObject"].empNo;
+        this.empName = response["returnObject"].empName;
+      });
   }
 
   searchSort(event: any) {
