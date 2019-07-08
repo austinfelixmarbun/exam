@@ -77,6 +77,7 @@ export class BankAddComponent implements OnInit {
             this.editUrl = this.settingUrl + AdInsConstant.EditRefBank;
             this.bankObj = new RefBankObj();
             this.bankObj = BankAddReqForm.value;
+            this.bankObj.bankCode = this.result.bankCode;
             this.bankObj.refBankId = this.param;
             if (this.isActive === false) {
                 this.bankObj.isActive = "0";

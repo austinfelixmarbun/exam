@@ -9,8 +9,10 @@
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" for="empNo">Employee No </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="empNo" required [(ngModel)]="empNo" #EmpNo="ngModel"
-                  [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpNo.invalid }">
+                <input type="text" class="form-control adInsInput" name="empNo" required   
+                [attr.disabled]="pageType === 'edit' ? true : null"
+                [(ngModel)]="empNo" #EmpNo="ngModel"
+                [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpNo.invalid }">
                 <div *ngIf="RefEmpForm.submitted && EmpNo.invalid" class="invalid-feedback">
                   <div *ngIf="EmpNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
@@ -78,7 +80,7 @@
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" for="bankName" translate>Bank Name </label>
               <div class="col-md-9">
-                <lib-lookuprefbank #uclRefBank [lookupInput]="inputLookupObj"></lib-lookuprefbank>
+                <lib-lookuprefbank #uclRefBank [lookupInput]="inputLookupObj" [parentForm]='RefEmpForm'></lib-lookuprefbank>
               </div>
             </div>
             <div class="form-group row">

@@ -1,0 +1,61 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" name="leaveMaintenanceForm" #LeaveMaintenanceForm="ngForm" novalidate
+          (ngSubmit)="LeaveMaintenanceForm.form.valid && SaveForm(LeaveMaintenanceForm, lookupEmp)">
+          <div class="form-body">
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Leave Maintenance Information
+            </h4>
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" for="empName">Employee Name </label>
+              <div class="col-md-9">
+                <lib-lookupemployee *ngIf="pageType!='edit'" #lookupEmp [lookupInput]="inputLookupObj">
+                </lib-lookupemployee>
+                
+                <label *ngIf="pageType=='edit'" class="adInsLabel" for="empName">{{empName}}</label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" for="startDt">Start Date </label>
+              <div class="col-md-9">
+                <input type="date" id="startDt" class="form-control adInsInput" name="startDt" required
+                  [(ngModel)]="startDt" #StartDt="ngModel"
+                  [ngClass]="{ 'is-invalid': LeaveMaintenanceForm.submitted && StartDt.invalid }">
+                <div *ngIf="LeaveMaintenanceForm.submitted && StartDt.invalid" class="invalid-feedback">
+                  <div *ngIf="StartDt.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" for="endDt">End Date </label>
+              <div class="col-md-9">
+                <input type="date" id="endDt" class="form-control adInsInput" name="endDt" required [(ngModel)]="endDt"
+                  #EndDt="ngModel" [ngClass]="{ 'is-invalid': LeaveMaintenanceForm.submitted && EndDt.invalid }">
+                <div *ngIf="LeaveMaintenanceForm.submitted && EndDt.invalid" class="invalid-feedback">
+                  <div *ngIf="EndDt.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" for="isActive">Is Passed</label>
+              <div class="col-md-9">
+                <input class="border-primary" type="checkbox" [ngModel]="isPassed" data-md-icheck
+                  (change)="toggleActive($event)" name="isPassed">
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button *ngIf="pageType !== 'add'" type="button" class="btn btn-raised btn-warning mr-1"
+              [routerLink]="['/employee/leaveMaintenance']">
+              <i class="fa fa-arrow-circle-left"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

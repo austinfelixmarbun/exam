@@ -47,6 +47,13 @@ const routes: Routes = [
         },
       },
       {
+        path: 'organization/edit',
+        component: OrgAddEditComponent,
+        data: {
+          title: 'Organization Add Edit'
+        },
+      },
+      {
         path: 'businessunit',
         component: BusinessUnitComponent,
         data: {
@@ -58,6 +65,13 @@ const routes: Routes = [
         component: AddBusinessUnitComponent,
         data: {
           title: 'Add Business Unit'
+        },
+      },
+      {
+        path: 'businessunit/edit',
+        component: AddBusinessUnitComponent,
+        data: {
+          title: 'Edit Business Unit'
         },
       },
       {

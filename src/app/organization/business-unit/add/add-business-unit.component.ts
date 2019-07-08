@@ -35,7 +35,8 @@ export class AddBusinessUnitComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private http: HttpClient,
-        private spinner: NgxSpinnerService) {
+        private spinner: NgxSpinnerService,
+        private toastr: NGXToastrService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refBizUnitId"];
             this.mode = params["mode"];
@@ -81,6 +82,7 @@ export class AddBusinessUnitComponent implements OnInit {
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     console.log(response);
+                    this.toastr.successMessage(response["message"]);
                     this.router.navigateByUrl('/organization/businessunit');
                 },
                 (error) => {
@@ -100,6 +102,7 @@ export class AddBusinessUnitComponent implements OnInit {
             }
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
+                    this.toastr.successMessage(response["message"]);
                     this.router.navigateByUrl('/organization/businessunit');
                 },
                 (error) => {

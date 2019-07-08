@@ -39,15 +39,6 @@
         },
         {
             "type": "textbox",
-            "name": "city",
-            "id": "cityId",
-            "value": "",
-            "label": "City",
-            "placeholder": "Placeholder",
-            "datatype": "text"
-        },
-        {
-            "type": "textbox",
             "name": "orgMdlName",
             "id": "modelNameId",
             "value": "",

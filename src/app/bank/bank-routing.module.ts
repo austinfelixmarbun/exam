@@ -21,7 +21,14 @@ const routes: Routes = [
         path: 'add',
         component: BankAddComponent,
         data: {
-          title: 'Add / Edit Bank'
+          title: 'Add Bank'
+        }, canActivate: [AuthGuard] 
+      },
+      {
+        path: 'edit',
+        component: BankAddComponent,
+        data: {
+          title: 'Edit Bank'
         }, canActivate: [AuthGuard] 
       },
       {

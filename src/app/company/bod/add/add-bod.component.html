@@ -28,10 +28,10 @@
                         <div class="form-group row">
                             <label class="col-md-3  adInsLabel">NPWP </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control adInsInput" name="npwp" required [(ngModel)]="npwp"
-                                    #Npwp="ngModel" [ngClass]="{ 'is-invalid': (Npwp.touched || Npwp.dirty || RefCoyBodForm.submitted) && Npwp.invalid }">
-                                    <div *ngIf="RefCoyBodForm.submitted && Npwp.invalid" class="invalid-feedback">
-                                      <div *ngIf="Npwp.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                                <input type="text" class="form-control adInsInput" name="taxIdNo" required [(ngModel)]="taxIdNo"
+                                    #TaxIdNo="ngModel" [ngClass]="{ 'is-invalid': (TaxIdNo.touched || TaxIdNo.dirty || RefCoyBodForm.submitted) && TaxIdNo.invalid }">
+                                    <div *ngIf="RefCoyBodForm.submitted && TaxIdNo.invalid" class="invalid-feedback">
+                                      <div *ngIf="TaxIdNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
                                     </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <app-ucAddress #ucAddress [parentForm]='RefCoyBodForm'></app-ucAddress>
-                    <app-ucContactInfo #ucContactInfo [parentForm]='RefCoyBodForm' [useName]=false [useTitle]=false></app-ucContactInfo>
+                    <app-uc-info #ucContactInfo [parentForm]='RefCoyBodForm' [useName]=false [useTitle]=false></app-uc-info>
                     <div class="form-actions right">
                         <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/company/bod']">
                             <i class="fa fa-arrow-circle-left"></i> Back

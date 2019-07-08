@@ -151,8 +151,10 @@ export class AdInsConstant {
 
     //OFFICE ZIPCODE MEMBER
     public static GetOfficeZipCodeMemberPaging = "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
+    public static GetRefOfficeZipcodePaging = "/OfficeZipcodeMember/GetRefOfficeZipcodePaging";
+    public static AddOfficeZipcodeMember = "/OfficeZipcodeMember/AddOfficeZipcodeMember";
+    public static DeleteOfficeZipcodeMember = "/OfficeZipcodeMember/DeleteOfficeZipcodeMember";
     
-
     //BUSINESS UNIT
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
     public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";
@@ -259,4 +261,12 @@ export class AdInsConstant {
     
     //REF MODULE
     public static GetListRefModuleKeyValue = "/RefModule/GetListRefModuleKeyValue";
+
+    //REF EMP LEAVE MANAGEMENT
+    public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
+    public static DeleteRefEmpLeaveMngmnt= "/RefEmpLeaveManagement/DeleteRefEmpLeaveMngmnt";
+    public static GetRefEmpLeaveMngmntById = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntById";
+    public static EditRefEmpLeaveMngmnt = "/RefEmpLeaveManagement/EditRefEmpLeaveMngmnt";
+    public static AddRefEmpLeaveMngmnt = "/RefEmpLeaveManagement/AddRefEmpLeaveMngmnt";
+
 }

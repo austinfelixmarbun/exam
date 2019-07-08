@@ -21,6 +21,13 @@ const routes: Routes = [
           title: 'Add / Edit Zipcode'
         }
       },
+      {
+        path: 'edit',
+        component: ZipcodeAddComponent,
+        data: {
+          title: 'Add / Edit Zipcode'
+        }
+      },
     ]
   }
 ];

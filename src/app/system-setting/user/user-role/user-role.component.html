@@ -28,7 +28,7 @@
                 <table class="table table-responsive-md text-center table-hover">
                   <thead>
                     <tr class="table-header">
-                      <th class="text-left pointer"><span class="thead-header" name='officeCode'>OfficeCode
+                      <th class="text-left pointer"><span class="thead-header" name='officeCode'>Office Code
                         </span></th>
                       <th class="text-left pointer"><span class="thead-header" name='officeName'>Office Name
                         </span></th>
@@ -40,7 +40,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of resultData?.data">
+                    <tr *ngFor="let item of resultData">
                       <td>{{item.officeCode}}</td>
                       <td align="left">{{item.officeName}}</td>
                       <td align="left">{{item.bizUnitName}}</td>

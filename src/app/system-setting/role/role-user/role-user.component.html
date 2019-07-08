@@ -50,17 +50,17 @@
                     <tbody>
                       <tr *ngFor="let item of resultData?.data;  let i = index">
                         <td>
-                          <div *ngIf="refRoleObj.refRoleId === item.refRoleId && item.isActive === '1'">
+                          <div *ngIf="refRoleObj.refRoleId == item.refRoleId && item.isActive == '1'">
                             <input type="checkbox" id="checkSame" name="itemSame"
                               (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=true>
                           </div>
-                          <div *ngIf="refRoleObj.refRoleId === item.refRoleId && item.isActive === '0'">
+                          <div *ngIf="refRoleObj.refRoleId == item.refRoleId && item.isActive == '0'">
                             <input type="checkbox" id="checkActive" name="itemActive"
                               (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
                           </div>
-                          <div *ngIf="refRoleObj.refRoleId !== item.refRoleId">
+                          <div *ngIf="refRoleObj.refRoleId != item.refRoleId">
                           </div>
-                          <div *ngIf="item.refRoleId === 0">
+                          <div *ngIf="item.refRoleId == 0">
                             <input type="checkbox" id="checkDiff" name="itemDiff"
                               (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
                           </div>

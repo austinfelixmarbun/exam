@@ -1,31 +1,32 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
-import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { UCSearchComponent } from '@adins/ucsearch';
+import { HttpClient } from '@angular/common/http';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { Observable } from 'rxjs';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { formatDate } from '@angular/common';
+import { RefEmpLeaveMngmntObj } from 'app/shared/model/RefEmpLeaveMngmntObj.Model';
 
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss'],
-  providers: [NGXToastrService] // add NgbPaginationConfig to the component providers
+  selector: 'app-leave-maintenance',
+  templateUrl: './leave-maintenance.component.html',
+  styleUrls: ['./leave-maintenance.component.scss'],
+  providers: [NGXToastrService]
 })
-export class EmployeeComponent implements OnInit {
-
+export class LeaveMaintenanceComponent implements OnInit {
   //** Start Query Paging */
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  inputObj : any;
+  inputObj: any;
   //** End Query Paging */
 
   resultData: string;
   ExcelData: any;
-  empObj: RefEmpObj;
+  refEmpLeaveMngmntObj: RefEmpLeaveMngmntObj;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
@@ -34,35 +35,25 @@ export class EmployeeComponent implements OnInit {
   exportData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
+  countForm: any;
 
   foundationUrl: string = environment.foundationUrl;
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/search/searchEmployee.json";
+    this.inputObj._url = "./assets/search/searchLeaveMaintenance.json";
     this.inputObj.enviromentUrl = environment.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetListEmployee;
-    
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefEmpLeaveMngmntPaging;
+
     this.pageNow = 1;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetListEmployee;
-    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefEmpAndEmpBankAcc;
-    this.initiateForm()
-  }
-
-  initiateForm() {
-    this.getJSON(this.inputObj._url).subscribe(data => {
-      this.exportData = data.exportExcel;
-    });
-  }
-
-  public getJSON(url: string): Observable<any> {
-    return this.http.get(url);
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefEmpLeaveMngmntPaging;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefEmpLeaveMngmnt;
   }
 
   //** Start UC Search **/
 
-  getResult(event){
+  getResult(event) {
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
     this.ucgridFooter.pageNow = event.pageNow;
@@ -70,8 +61,7 @@ export class EmployeeComponent implements OnInit {
     this.ucgridFooter.resultData = this.resultData;
   }
 
-  onSelect(event)
-  {
+  onSelect(event) {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
     this.searchPagination(this.pageNow);
@@ -105,11 +95,11 @@ export class EmployeeComponent implements OnInit {
 
   //** End UC Search **/
 
-  delete(refEmpId: any) {
+  delete(refEmpLeaveMngmntId: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.empObj = new RefEmpObj();
-      this.empObj.refEmpId = refEmpId;
-      this.http.post(this.deleteUrl, this.empObj).subscribe(
+      this.refEmpLeaveMngmntObj = new RefEmpLeaveMngmntObj();
+      this.refEmpLeaveMngmntObj.refEmpLeaveMngmntId = refEmpLeaveMngmntId;
+      this.http.post(this.deleteUrl, this.refEmpLeaveMngmntObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.searchPagination(this.pageNow);

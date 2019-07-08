@@ -1,26 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
-import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 import { CoyCommissionerObj } from 'app/shared/model/CoyCommissionerObj.Model';
+import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.component';
 
 @Component({
     selector: 'add-commissioner',
     templateUrl: './add-commissioner.component.html',
-    providers: [NgbPaginationConfig, NGXToastrService]
+    providers: [NGXToastrService]
 })
 
 export class CommissionerAddComponent implements OnInit {
 
     @ViewChild(UcAddressComponent) ucAddr;
-    @ViewChild(UcContactInfoComponent) ucContact;
+    @ViewChild(UcInfoComponent) ucInfo;
     param: string;
     itemIdType: any;
     businessUnitCode: string;
@@ -33,15 +31,16 @@ export class CommissionerAddComponent implements OnInit {
     idTypeUrl: any;
     isActive: boolean = false;
     foundationUrl: string = environment.foundationUrl;
+    settingUrl: string = environment.settingUrl;
     editUrl: any;
     idType: any;
     name: any;
     jobTitle: any;
-    npwp: any;
+    taxIdNo: any;
     idNo: any;
     refCoyId: any;
 
-    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
+    constructor(private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient) {
         this.route.queryParams.subscribe(params => {
             this.param = params["coyCommissionerId"];
             this.refCoyId = params["refCoyId"];
@@ -50,7 +49,7 @@ export class CommissionerAddComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.idTypeUrl = this.foundationUrl + AdInsConstant.GetRefMasterList;
+        this.idTypeUrl = this.settingUrl + AdInsConstant.GetRefMasterList;
         var refMasterObj = new RefMasterObj();
         refMasterObj.refMasterTypeCode = "ID_TYPE";
         this.http.post(this.idTypeUrl, refMasterObj).subscribe(
@@ -69,7 +68,7 @@ export class CommissionerAddComponent implements OnInit {
                     console.log(response);
                     this.result = response['returnObject'];
                     this.ucAddr.setData(this.result);
-                    this.ucContact.setData(this.result);
+                    this.ucInfo.setData(this.result);
                     this.setData(this.result);
                 },
                 (error) => {
@@ -84,7 +83,7 @@ export class CommissionerAddComponent implements OnInit {
         this.name = data.name;
         this.idType = data.mrIdType;
         this.jobTitle = data.jobTitle;
-        this.npwp = data.npwp;
+        this.taxIdNo = data.taxIdNo;
         this.idNo = data.idNo;
         if (this.result.isActive == "1") {
             this.isActive = true;
@@ -94,26 +93,26 @@ export class CommissionerAddComponent implements OnInit {
         }
     }
 
-    Save(form, ucAddress, ucContactInfo) {
+    Save(form, ucAddress, ucInfo) {
             var coyCommisionerObj = new CoyCommissionerObj();
             console.log(ucAddress);
-            console.log(ucContactInfo);
+            console.log(ucInfo);
             coyCommisionerObj.refCoyId = +this.refCoyId;
             coyCommisionerObj.name = form.value.name;
             coyCommisionerObj.jobTitle = form.value.jobTitle;
-            coyCommisionerObj.npwp = form.value.npwp;
+            coyCommisionerObj.taxIdNo = form.value.taxIdNo;
             coyCommisionerObj.mrIdType = form.value.mrIdType;
             coyCommisionerObj.idNo = form.value.idNo;
             coyCommisionerObj.addr = ucAddress.addr;
             coyCommisionerObj.city = ucAddress.city;
-            coyCommisionerObj.email1 = ucContactInfo.email1;
-            coyCommisionerObj.email2 = ucContactInfo.email2;
+            coyCommisionerObj.email1 = ucInfo.email1;
+            coyCommisionerObj.email2 = ucInfo.email2;
             coyCommisionerObj.fax = ucAddress.fax;
             coyCommisionerObj.faxArea = ucAddress.faxArea;
             coyCommisionerObj.areaCode1 = ucAddress.areaCode1;
             coyCommisionerObj.areaCode2 = ucAddress.areaCode2;
-            coyCommisionerObj.mobilePhn1 = ucContactInfo.mobilePhn1;
-            coyCommisionerObj.mobilePhn2 = ucContactInfo.mobilePhn2;
+            coyCommisionerObj.mobilePhn1 = ucInfo.mobilePhn1;
+            coyCommisionerObj.mobilePhn2 = ucInfo.mobilePhn2;
             coyCommisionerObj.phn1 = ucAddress.phn1;
             coyCommisionerObj.phn2 = ucAddress.phn2;
             coyCommisionerObj.phn3 = ucAddress.phn3;
@@ -125,7 +124,7 @@ export class CommissionerAddComponent implements OnInit {
             coyCommisionerObj.phnExt3 = ucAddress.phnExt3;
             coyCommisionerObj.areaCode4 = ucAddress.areaCode4;
             coyCommisionerObj.areaCode3 = ucAddress.areaCode3;
-            coyCommisionerObj.zipcode = ucAddress.zipcode;
+            coyCommisionerObj.zipcodeNumber = ucAddress.zipcodeNumber;
             coyCommisionerObj.refCoyId = this.refCoyId;
 
             console.log(coyCommisionerObj);
@@ -135,6 +134,7 @@ export class CommissionerAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
                         console.log(response);
+                        this.toastr.successMessage(response['message']);
                         this.router.navigateByUrl('/company/commissioner?refCoyId=' + this.refCoyId);
                     },
                     (error) => {
@@ -146,6 +146,7 @@ export class CommissionerAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
                         console.log(response);
+                        this.toastr.successMessage(response['message']);
                         this.router.navigateByUrl('/company/commissioner?refCoyId=' + this.refCoyId);
                     },
                     (error) => {

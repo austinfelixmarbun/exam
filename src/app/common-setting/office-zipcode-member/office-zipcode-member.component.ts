@@ -34,11 +34,11 @@ export class OfficeZipcodeMemberComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
     this.inputObj.enviromentUrl = this.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetListOffice;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefOfficeZipcodePaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetListOffice;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOfficeZipcodePaging;
   }
 
   //** Start UC Search **/

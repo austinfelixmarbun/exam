@@ -4,14 +4,16 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-office-zipcode-member-add',
   templateUrl: './office-zipcode-member-add.component.html',
-  styleUrls: ['./office-zipcode-member-add.component.scss']
+  styleUrls: ['./office-zipcode-member-add.component.scss'],
+  providers: [NGXToastrService]
 })
 export class OfficeZipcodeMemberAddComponent implements OnInit {
   //** Start UC Search **//
@@ -23,19 +25,27 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   officeName: any;
   city: any;
   //** End UC Search **//
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
   apiUrl: any;
   officeUrl: any;
+  addUrl: any;
   arrCrit: any;
 
   foundationUrl: string = environment.foundationUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  arrAddCrit = new Array<CriteriaObj>();
+  tempListId: Array<any> = [];
+  tempData: Array<any> = [];
+  listSelectedId: Array<any> = [];
+  listDeletedId: Array<any> = [];
+  data = [];
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params['refOfficeId'] != null) {
         this.refOfficeId = params['refOfficeId'];
@@ -54,12 +64,22 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetOfficeZipCodeMemberPaging;
     this.officeUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
+    this.addUrl = this.foundationUrl + AdInsConstant.AddOfficeZipcodeMember;
+
+    this.arrCrit = new Array();
+    var critObj = new CriteriaObj();
+    critObj.DataType = 'numeric'
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'refOfficeId';
+    critObj.value = this.refOfficeId;
+    this.arrCrit.push(critObj);
+    this.inputObj.arrCritObj = this.arrCrit;
 
     this.initiateForm();
   }
 
   initiateForm() {
-    var officeId = {refOfficeId: this.refOfficeId};
+    var officeId = { refOfficeId: this.refOfficeId };
     this.http.post(this.officeUrl, officeId).subscribe(
       (response) => {
         this.officeCode = response['returnObject']['officeCode'];
@@ -97,7 +117,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
   }
 
   searchPagination(event: number) {
@@ -109,6 +129,107 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
+  }
+
+  Checked(officeZipcodeMemberId: any, isChecked: any): void {
+    console.log(officeZipcodeMemberId);
+    if (isChecked) {
+      this.listSelectedId.push(officeZipcodeMemberId);
+    } else {
+      let index = this.listSelectedId.indexOf(officeZipcodeMemberId)
+      console.log(index);
+      if (index > -1) { this.listSelectedId.splice(index, 1); }
+    }
+    console.log('Sel', this.listSelectedId);
+    console.log('Del', this.listDeletedId);
+  }
+
+  AddToTemp() {
+    if (this.listSelectedId.length != 0) {
+      for (var i = 0; i < this.listSelectedId.length; i++) {
+        this.tempListId.push(this.listSelectedId[i]);
+      }
+      for (var i = 0; i < this.listSelectedId.length; i++) {
+        var object = this.resultData.data.find(x => x.officeZipcodeMemberId == this.listSelectedId[i]);
+        this.tempData.push(object);
+      }
+      this.arrAddCrit = this.arrCrit;
+      var addCrit = new CriteriaObj();
+      addCrit.DataType = "numeric";
+      addCrit.propName = "officeZipcodeMemberId";
+      addCrit.restriction = AdInsConstant.RestrictionNotIn;
+      addCrit.listValue = this.tempListId;
+      this.arrAddCrit.push(addCrit);
+      var order = null;
+      if (this.orderByKey != null) {
+        order = {
+          key: this.orderByKey,
+          value: this.orderByValue
+        };
+      }
+      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+
+      this.listSelectedId = [];
+      console.log(this.listSelectedId);
+      console.log(this.tempData);
+    } else {
+      this.toastr.typeErrorCustom("Please select at least one Zipcode");
+    }
+  }
+
+  deleteFromTemp(officeZipcodeMemberId) {
+    this.arrAddCrit = this.arrCrit;
+    var index = this.tempListId.indexOf(officeZipcodeMemberId);
+    if (index > -1) {
+      this.tempListId.splice(index, 1);
+      this.tempData.splice(index, 1);
+    }
+    var value = "";
+    var addCrit = new CriteriaObj();
+    addCrit.DataType = "numeric";
+    addCrit.propName = "officeZipcodeMemberId";
+    addCrit.restriction = AdInsConstant.RestrictionNotIn;
+    addCrit.listValue = this.tempListId;
+    if (this.tempListId.length != 0) {
+      this.arrAddCrit.push(addCrit);
+    }
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      };
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+    console.log("selectedID : " + this.listSelectedId)
+    console.log("templateID : " + this.tempListId);
+    console.log(this.tempData);
+    console.log(this.resultData.data);
+  }
+  
+  saveZipMember() {
+    var listObj = new Array();
+    for (var i = 0; i < this.tempData.length; i++) {
+      var arrZipMember = {
+        ZipcodeNumber: this.tempData[i].zipcodeNumber,
+        RefOfficeId: this.tempData[i].refOfficeId
+      }
+      
+      listObj.push(arrZipMember);
+    }
+    var zipCodeMemberList = { listOfOfficeZipcodeMember: listObj };
+    console.log(zipCodeMemberList);
+
+    this.http.post(this.addUrl, zipCodeMemberList).subscribe(
+      (response) => {
+          console.log(response);
+          this.toastr.successMessage(response['message']);
+          this.router.navigateByUrl('/commonSetting/officeZipcodeMember/paging?refOfficeId=' + this.refOfficeId);
+      },
+      (error) => {
+          console.log(error);
+      });
+
   }
 }

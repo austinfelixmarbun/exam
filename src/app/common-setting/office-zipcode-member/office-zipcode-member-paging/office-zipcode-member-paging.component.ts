@@ -7,11 +7,13 @@ import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-office-zipcode-member-paging',
   templateUrl: './office-zipcode-member-paging.component.html',
-  styleUrls: ['./office-zipcode-member-paging.component.scss']
+  styleUrls: ['./office-zipcode-member-paging.component.scss'],
+  providers: [NGXToastrService]
 })
 export class OfficeZipcodeMemberPagingComponent implements OnInit {
   //** Start UC Search **//
@@ -28,6 +30,7 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
   totalData: any;
   pageSize: any;
   apiUrl: any;
+  deleteUrl: any;
   officeUrl: any;
   arrCrit: any;
 
@@ -35,7 +38,7 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { 
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
     this.route.queryParams.subscribe(params => {
       if (params['refOfficeId'] != null) {
         this.refOfficeId = params['refOfficeId'];
@@ -54,6 +57,7 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetOfficeZipCodeMemberPaging;
     this.officeUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
+    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteOfficeZipcodeMember;
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
@@ -107,7 +111,7 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
   }
 
   searchPagination(event: number) {
@@ -119,6 +123,21 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
+  }
+  
+  delete(officeZipcodeMemberId: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      var officeZipcodeMemberObj = {officeZipcodeMemberId : officeZipcodeMemberId};
+      this.http.post(this.deleteUrl, officeZipcodeMemberObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          this.searchPagination(1);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        });
+    }
   }
 }

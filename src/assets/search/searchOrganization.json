@@ -5,7 +5,7 @@
             "type": "numeric",
             "name": "hierarchyNo",
             "id": "hierarchyNoId",
-            "value": "1",
+            "value": "10",
             "label": "Hierarchy No <=",
             "restriction": "lte",
             "placeholder": "Placeholder",

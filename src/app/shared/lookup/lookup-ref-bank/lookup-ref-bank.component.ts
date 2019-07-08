@@ -1,27 +1,25 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
-import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-lookup-ref-bank',
   templateUrl: './lookup-ref-bank.component.html',
-  providers: [NgbPaginationConfig, DecimalPipe]
+  providers: [NgbPaginationConfig],
+  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 export class LookupRefBankComponent implements OnInit {
-
-  @Input() nameSelect: any = "Search ...";
-  @Input() codeSelect: any;
-  @Input() jsonSelect:string;
+  @Input() lookupInput: any;
+  @Input() parentForm: any;
   @ViewChild(UCSearchComponent) searchComponent;
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild('content') contentTemplate;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
 
+  refBank:any;
   configuration: any;
   urlGet: string;
   countForm = 0;
@@ -44,20 +42,31 @@ export class LookupRefBankComponent implements OnInit {
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/lookup/lookupRefBank.json";
-    this.inputObj.enviromentUrl = environment.settingUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetBankPaging;
+    this.inputObj._url = this.lookupInput.urlJson;
+    this.inputObj.enviromentUrl = this.lookupInput.urlEnviPaging;
+    this.inputObj.apiQryPaging = this.lookupInput.urlQryPaging;
     
-    this.apiUrl = environment.settingUrl + AdInsConstant.GetBankPaging;
+    this.apiUrl = this.lookupInput.urlEnviPaging + this.lookupInput.urlQryPaging;
+    this.pageNow = 1;
     this.pageSize = 10;
+    /* #region   Additional Criteria*/
+    if (this.lookupInput.addCritInput != null || this.lookupInput.addCritInput != undefined) {
+      this.addCrit = new Array();
+      for (var i = 0; i < this.lookupInput.addCritInput.length; i++) {
+        this.addCrit.push(this.lookupInput.addCritInput[i]);
+      }
+    }
+    /* #endregion */
+    this.inputObj.addCritInput = this.addCrit;
   }
 
   choose(code, name,item) {
     console.log(code + " : " + name);
     console.log(item);
-    this.codeSelect = code;
-    this.nameSelect = name;
-    this.jsonSelect = JSON.stringify(item);
+    this.refBank = code;
+    this.lookupInput.idSelect = code;
+    this.lookupInput.nameSelect = name;
+    this.lookupInput.jsonSelect = JSON.stringify(item);
     this.modalService.dismissAll();
   }
 
@@ -70,6 +79,7 @@ export class LookupRefBankComponent implements OnInit {
   }
 
   getResult(ucgridFooter, event) {
+    console.log(this.lookupInput.urlQryPaging);
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
     ucgridFooter.pageNow = event.pageNow;
