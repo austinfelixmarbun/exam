@@ -7,9 +7,11 @@
           <div class="px-3">
             <form class="form form-horizontal" id="formSearch" #formIdSearch>
               <div class="form-body">
-                <h4 class="form-section"> {{configuration?.title}} <div id="flip" class="btn float-right"
-                    (click)="isHidden = !isHidden"><i class="fa"
-                      [ngClass]="isHidden ? 'fa-chevron-down' : 'fa-chevron-up'"></i></div>
+                <h4 class="form-section font-weight-bold">
+                  <div id="flip" class="btn no-padding cursor-pointer" (click)="isHidden = !isHidden">
+                    <i class="fa" style="font-size: 15px; margin: 0px 0px 5px -15px;" [ngClass]="isHidden ? 'fa-chevron-down' : 'fa-chevron-up'"></i>
+                  </div>
+                  {{configuration?.title}} 
                 </h4>
                 <!-- Ini Digunakan untuk Generate Dynamic Component -->
                 <!-- [hidden]="isHidden" -->
