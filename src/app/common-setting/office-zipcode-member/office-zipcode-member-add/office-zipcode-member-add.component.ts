@@ -58,22 +58,13 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
     this.inputObj.enviromentUrl = this.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetOfficeZipCodeMemberPaging;
+    this.inputObj.apiQryPaging = AdInsConstant.GetOfficeZipcodeMemberAddPaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetOfficeZipCodeMemberPaging;
     this.officeUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
     this.addUrl = this.foundationUrl + AdInsConstant.AddOfficeZipcodeMember;
-
-    this.arrCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.DataType = 'numeric'
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.propName = 'refOfficeId';
-    critObj.value = this.refOfficeId;
-    this.arrCrit.push(critObj);
-    this.inputObj.arrCritObj = this.arrCrit;
 
     this.initiateForm();
   }
@@ -117,7 +108,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   searchPagination(event: number) {
@@ -129,7 +120,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   Checked(officeZipcodeMemberId: any, isChecked: any): void {
