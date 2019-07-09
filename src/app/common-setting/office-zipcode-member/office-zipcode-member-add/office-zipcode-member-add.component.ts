@@ -35,6 +35,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   arrCrit: any;
 
   foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
@@ -57,14 +58,16 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     console.log("test");
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
-    this.inputObj.enviromentUrl = this.foundationUrl;
+    this.inputObj.enviromentUrl = this.settingUrl;
     this.inputObj.apiQryPaging = AdInsConstant.GetOfficeZipcodeMemberAddPaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetOfficeZipCodeMemberPaging;
+    this.apiUrl = this.settingUrl + AdInsConstant.GetOfficeZipcodeMemberAddPaging;
     this.officeUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
     this.addUrl = this.foundationUrl + AdInsConstant.AddOfficeZipcodeMember;
+
+    this.arrCrit = new Array();
 
     this.initiateForm();
   }
@@ -123,12 +126,12 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
-  Checked(officeZipcodeMemberId: any, isChecked: any): void {
-    console.log(officeZipcodeMemberId);
+  Checked(refZipcodeId: any, isChecked: any): void {
+    console.log(refZipcodeId);
     if (isChecked) {
-      this.listSelectedId.push(officeZipcodeMemberId);
+      this.listSelectedId.push(refZipcodeId);
     } else {
-      let index = this.listSelectedId.indexOf(officeZipcodeMemberId)
+      let index = this.listSelectedId.indexOf(refZipcodeId)
       console.log(index);
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
@@ -142,13 +145,13 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
         this.tempListId.push(this.listSelectedId[i]);
       }
       for (var i = 0; i < this.listSelectedId.length; i++) {
-        var object = this.resultData.data.find(x => x.officeZipcodeMemberId == this.listSelectedId[i]);
+        var object = this.resultData.data.find(x => x.refZipcodeId == this.listSelectedId[i]);
         this.tempData.push(object);
       }
       this.arrAddCrit = this.arrCrit;
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
-      addCrit.propName = "officeZipcodeMemberId";
+      addCrit.propName = "RZ.REF_ZIPCODE_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.tempListId;
       this.arrAddCrit.push(addCrit);
@@ -169,17 +172,16 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     }
   }
 
-  deleteFromTemp(officeZipcodeMemberId) {
+  deleteFromTemp(refZipcodeId) {
     this.arrAddCrit = this.arrCrit;
-    var index = this.tempListId.indexOf(officeZipcodeMemberId);
+    var index = this.tempListId.indexOf(refZipcodeId);
     if (index > -1) {
       this.tempListId.splice(index, 1);
       this.tempData.splice(index, 1);
     }
-    var value = "";
     var addCrit = new CriteriaObj();
     addCrit.DataType = "numeric";
-    addCrit.propName = "officeZipcodeMemberId";
+    addCrit.propName = "RZ.REF_ZIPCODE_ID";
     addCrit.restriction = AdInsConstant.RestrictionNotIn;
     addCrit.listValue = this.tempListId;
     if (this.tempListId.length != 0) {
@@ -204,7 +206,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     for (var i = 0; i < this.tempData.length; i++) {
       var arrZipMember = {
         ZipcodeNumber: this.tempData[i].zipcodeNumber,
-        RefOfficeId: this.tempData[i].refOfficeId
+        RefOfficeId: this.refOfficeId
       }
       
       listObj.push(arrZipMember);
