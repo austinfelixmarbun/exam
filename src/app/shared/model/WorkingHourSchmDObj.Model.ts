@@ -6,4 +6,6 @@ export class WorkingHourSchmDObj {
     workingHourTo1: any;
     workingHourFrom2: any;
     workingHourTo2: any;
+
+    constructor() { this.workingHourSchmDId = 0 }
 }

@@ -1,40 +1,42 @@
 export class RefEmpObj {
-    refEmpId: number
-    empNo: string
-    empName: string
-    joinDt: Date
-    isActive: string
-    isExt: string
-    addr: string
-    npwp: string
-    idNo: string
-    areaCode1: string
-    areaCode2: string
-    areaCode3: string
-    areaCode4: string
-    city: string
-    zipcode: string
-    phnArea1: string
-    phnArea2: string
-    phnArea3: string
-    phn1: string
-    phn2: string
-    phn3: string
-    phnExt1: string
-    phnExt2: string
-    phnExt3: string
-    faxArea: string
-    fax: string
-    mobilePhn1: string
-    mobilePhn2: string
-    email1: string
-    email2: string
-    imageLocation: string
-    EmpBankAccId : number
-    refBankId : number
-    bankBranch : string
-    bankBranchRegRptCode : string
-    bankAccNo : string
-    bankAccName : string
-    bankCode : string
+    refEmpId: any;
+    empNo: any;
+    empName: any;
+    joinDt: any;
+    isActive: any;
+    isExt: any;
+    addr: any;
+    npwp: any;
+    idNo: any;
+    areaCode1: any;
+    areaCode2: any;
+    areaCode3: any;
+    areaCode4: any;
+    city: any;
+    zipcode: any;
+    phnArea1: any;
+    phnArea2: any;
+    phnArea3: any;
+    phn1: any;
+    phn2: any;
+    phn3: any;
+    phnExt1: any;
+    phnExt2: any;
+    phnExt3: any;
+    faxArea: any;
+    fax: any;
+    mobilePhn1: any;
+    mobilePhn2: any;
+    email1: any;
+    email2: any;
+    imageLocation: any;
+    EmpBankAccId: any
+    refBankId: any
+    bankBranch: any;
+    bankBranchRegRptCode: any;
+    bankAccNo: any;
+    bankAccName: any;
+    bankCode: any;
+
+    constructor() { this.refEmpId = 0 }
 }  

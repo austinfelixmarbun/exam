@@ -3,4 +3,5 @@ export class WorkingHourSchmHObj {
     workingHourSchmCode: any;
     workingHourSchmName: any;
     isActive: any;
+    constructor() { this.workingHourSchmHId = 0 }
 }
