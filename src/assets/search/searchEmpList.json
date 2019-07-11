@@ -11,7 +11,7 @@
             "datatype": "numeric",
             "isFromURL": true,
             "isSelectOne" : false,
-            "url": "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue",
+            "url": "http://r3app-server/foundation/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue",
             "label": "Office Name",
             "itemsUrl": []
         }

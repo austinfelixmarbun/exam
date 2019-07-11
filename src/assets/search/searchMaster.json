@@ -11,7 +11,7 @@
       "datatype": "text",
       "isFromURL": true,
       "isSelectOne": true,
-      "url": "/RefMaster/GetRefMasterTypeKeyValue",
+      "url": "http://r3app-server/setting/RefMaster/GetRefMasterTypeKeyValue",
       "label": "Master Type",
       "items": [],
       "itemsUrl": []

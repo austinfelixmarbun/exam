@@ -13,7 +13,7 @@
           "isFromURL": true,
           "isSelectOne" : false,
           "affectedFilter" : ["masterCode", "is_Internal"],
-          "url": "/RefMaster/GetRefMasterTypeKeyValue",
+          "url": "http://r3app-server/setting/RefMaster/GetRefMasterTypeKeyValue",
           "label": "Ref Master Type",
           "items": [],
           "itemsUrl": []
@@ -24,7 +24,7 @@
             "id": "masterCode",
             "label" : "Ref Master",
             "value": "",
-            "url": "/RefMaster/GetRefMasterDropDown",
+            "url": "http://r3app-server/setting/RefMaster/GetRefMasterDropDown",
             "placeholder": "Placeholder",
             "isEvent": false,
             "isFromURL": true,
