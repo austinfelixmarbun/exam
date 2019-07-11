@@ -4,4 +4,6 @@ export class HolidayDObj {
     holidayDt: any;
     descr: any;
     isPublicHoliday: any;
+
+    constructor() { this.holidaySchmDId = 0; }
 }

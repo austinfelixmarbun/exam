@@ -1,14 +1,16 @@
 export class LeaveManagementObj {
-  leaveMngmtId: number;
-  transactionNo: string;
-  empName: string;
-  jobPosition: string;
-  startDt: string;
-  endDt: string;
-  status: string;
-  reason: string;
-  verifBy: string;
-  taskId: number;
-  workingDateTime: string;
-  userName: string;
+  leaveMngmtId: any;
+  transactionNo: any;
+  empName: any;
+  jobPosition: any;
+  startDt: any;
+  endDt: any;
+  status: any;
+  reason: any;
+  verifBy: any;
+  taskId: any;
+  workingDateTime: any;
+  userName: any;
+
+  constructor() { this.leaveMngmtId = 0; }
 }
