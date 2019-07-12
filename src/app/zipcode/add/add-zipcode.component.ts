@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
@@ -9,6 +9,8 @@ import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { LookupdistrictComponent } from '@adins/lookupdistrict';
+
 
 @Component({
     selector: 'add-bank',
@@ -16,7 +18,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
     providers: [NgbPaginationConfig, NGXToastrService]
 })
 export class ZipcodeAddComponent implements OnInit {
-
+    @ViewChild(LookupdistrictComponent) lookupDistrict;
     param: string;
     inputLookupObj: any;
 
@@ -71,9 +73,11 @@ export class ZipcodeAddComponent implements OnInit {
                     this.provDistrictObj.refProvDistrictId = this.result.refProvDistrictId;
                     this.http.post(this.urlGetProvDistrict, this.provDistrictObj).subscribe(
                         (response) => {
-                            this.inputLookupObj.nameSelect = response["name"];
+                            console.log(response);
+                            this.inputLookupObj.nameSelect = response["returnObject"].name;
                             this.inputLookupObj.jsonSelect = response["returnObject"];
-                            this.inputLookupObj.idSelect = response["refProvDistrictId"];
+                            this.inputLookupObj.idSelect = response["returnObject"].refProvDistrictId;
+                            this.lookupDistrict.msNewCatalogId = response["returnObject"].name;
                         })
                 },
                 (error) => {

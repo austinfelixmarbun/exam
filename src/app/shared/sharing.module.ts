@@ -15,7 +15,7 @@ import { FormEngineComponent } from './form-engine/form-engine.component';
 import { FormEngineModule } from '@adins/form-engine';
 import { LookupparentformModule } from '@adins/lookupparentform';
 import { LookupemployeeModule } from '@adins/lookupemployee';
-import { LookupdistrictModule } from '@adins/lookupdistrict';
+import { LookupdistrictModule} from '@adins/lookupdistrict';
 import { LookuproleModule } from '@adins/lookuprole';
 import { LookuporgmdlstrucModule } from '@adins/lookuporgmdlstruc';
 import { LookupzipcodeModule } from '@adins/lookupzipcode';
@@ -25,6 +25,7 @@ import { LookuporgjobtitleModule } from '@adins/lookuporgjobtitle';
 import { LookupbizunitModule } from '@adins/lookupbizunit';
 import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank.component';
 import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-supervisor.component';
+import { LookupDistrictComponent }from './lookup/lookup-district/lookup-district.component';
 
 @NgModule({
     exports: [
@@ -51,7 +52,8 @@ import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-sup
         UcgridfooterModule,
         FormEngineModule,
         LookupRefBankComponent,
-        LookupSupervisorComponent
+        LookupSupervisorComponent,
+        LookupDistrictComponent
     ],
     imports: [
         CommonModule,
@@ -71,7 +73,8 @@ import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-sup
         UcContactInfoComponent,
         UcInfoComponent,
         LookupRefBankComponent,
-        LookupSupervisorComponent
+        LookupSupervisorComponent,
+        LookupDistrictComponent
     ]
 })
 

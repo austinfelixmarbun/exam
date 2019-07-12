@@ -34,9 +34,9 @@
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel" translate>City </label>
                             <div class="col-md-9">
-                                <textarea class="form-control adInsInput" name="city" required [ngModel]="result?.city" 
+                                <input class="form-control adInsInput" name="city" required [ngModel]="result?.city" 
                                 #City="ngModel"
-                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || City.touched || City.dirty) && City.invalid }"></textarea>
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || City.touched || City.dirty) && City.invalid }">
                                 <div *ngIf="(BankAddReqForm.submitted || City.touched || City.dirty) && City.invalid"
                                   class="invalid-feedback">
                                   <div *ngIf="City.errors.required" class="adInsReqMsg" translate>This field is required</div>
@@ -46,9 +46,9 @@
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel" translate>Zipcode </label>
                             <div class="col-md-9">
-                                <textarea class="form-control adInsInput" name="zipcode" required [ngModel]="result?.zipcode" 
+                                <input class="form-control adInsInput" name="zipcode" required [ngModel]="result?.zipcode" 
                                 #Zipcode="ngModel"
-                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid }"></textarea>
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid }">
                                 <div *ngIf="(BankAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid"
                                   class="invalid-feedback">
                                   <div *ngIf="Zipcode.errors.required" class="adInsReqMsg" translate>This field is required</div>
@@ -58,9 +58,9 @@
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel" translate>Sub Zipcode </label>
                             <div class="col-md-9">
-                                <textarea class="form-control adInsInput" name="subZipcode" required [ngModel]="result?.subZipcode" 
+                                <input class="form-control adInsInput" name="subZipcode" required [ngModel]="result?.subZipcode" 
                                 #SubZipcode="ngModel"
-                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid }"></textarea>
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid }">
                                 <div *ngIf="(BankAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid"
                                   class="invalid-feedback">
                                   <div *ngIf="SubZipcode.errors.required" class="adInsReqMsg" translate>This field is required</div>
@@ -70,9 +70,9 @@
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel" translate>Zipcode Number </label>
                             <div class="col-md-9">
-                                <textarea class="form-control adInsInput" name="zipcodeNumber" required [ngModel]="result?.zipcodeNumber" 
+                                <input class="form-control adInsInput" name="zipcodeNumber" required [ngModel]="result?.zipcodeNumber" 
                                 #ZipcodeNumber="ngModel"
-                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid }"></textarea>
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid }">
                                 <div *ngIf="(BankAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid"
                                   class="invalid-feedback">
                                   <div *ngIf="ZipcodeNumber.errors.required" class="adInsReqMsg" translate>This field is required</div>
@@ -82,15 +82,15 @@
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel" translate>District </label>
                             <div class="col-md-9">
-                                <lib-lookupdistrict #uclDistrict [lookupInput]="inputLookupObj"></lib-lookupdistrict>
+                                <lib-lookupdistrict #uclDistrict [lookupInput]="inputLookupObj" [parentForm]='BankAddReqForm'></lib-lookupdistrict>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel" translate>Phone Area Number </label>
                             <div class="col-md-9">
-                                <textarea class="form-control adInsInput" name="phnArea" required [ngModel]="result?.phnArea" 
+                                <input class="form-control adInsInput" name="phnArea" required [ngModel]="result?.phnArea" 
                                 #PhnArea="ngModel"
-                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid }"></textarea>
+                                [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid }">
                                 <div *ngIf="(BankAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid"
                                   class="invalid-feedback">
                                   <div *ngIf="PhnArea.errors.required" class="adInsReqMsg" translate>This field is required</div>

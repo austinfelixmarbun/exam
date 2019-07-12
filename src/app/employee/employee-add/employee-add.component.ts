@@ -11,6 +11,7 @@ import { RefBankObj } from "app/shared/model/RefBankObj.Model";
 import { UcAddressComponent } from "app/shared/UserControl/ucAddress/ucAddress.component";
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
+import { LookuprefbankComponent } from "@adins/lookuprefbank";
 
 @Component({
   selector: "app-employee-add",
@@ -19,7 +20,7 @@ import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
   providers: [NGXToastrService]
 })
 export class EmployeeAddComponent implements OnInit {
-
+  @ViewChild(LookuprefbankComponent) lookuprefbank;
   @ViewChild(UcAddressComponent) ucAddr;
   @ViewChild(UcContactInfoComponent) ucContact;
   inputLookupObj: any;
@@ -152,6 +153,7 @@ export class EmployeeAddComponent implements OnInit {
                   this.inputLookupObj.nameSelect = response["returnObject"].bankName;
                   this.inputLookupObj.jsonSelect = response["returnObject"];
                   this.inputLookupObj.idSelect = response["returnObject"].bankCode;
+                  this.lookuprefbank.refBank = response["returnObject"].bankName;
                 },
                 error => {
                   console.log("Error");
