@@ -29,7 +29,7 @@
             "placeholder": "Placeholder",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "/OrganizationDefinition/GetListOrgParentKeyValue",
+            "url": "http://r3app-server/foundation/OrganizationDefinition/GetListOrgParentKeyValue",
             "label": "Parent",
             "items": [],
             "itemsUrl": []

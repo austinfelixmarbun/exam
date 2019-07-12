@@ -1,11 +1,13 @@
 export class EmpPositionObj {
-    empPositionId: number
-    refEmpId: number
-    refOfficeId: number
-    orgJobTitleId: number
+    empPositionId: any
+    refEmpId: any
+    refOfficeId: any
+    orgJobTitleId: any
     skillLvl: string
-    positionStartDt: Date
-    positionFinishDt: Date
-    superiorRefEmpId: number
-    isActive: string
+    positionStartDt: any
+    positionFinishDt: any
+    superiorRefEmpId: any
+    isActive: any
+
+    constructor() { this.empPositionId = 0; }
 }  

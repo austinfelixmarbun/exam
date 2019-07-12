@@ -1,8 +1,10 @@
 export class OrganizationObj {
-  refOrgId: number;
-  orgName: string;
-  hierarchyNo: string;
-  isActive: string;
-  parentId: number;
-  oldParentId: number;
+  refOrgId: any;
+  orgName: any;
+  hierarchyNo: any;
+  isActive: any;
+  parentId: any;
+  oldParentId: any;
+
+  constructor() { this.refOrgId = 0; }
 }

@@ -32,6 +32,8 @@ export class SearchComponent implements OnInit {
   exportData: any;
   ExcelData: any;
   isDataLoaded: boolean = false;
+  isHidden: boolean = false;
+
   form: FormGroup;
   payLoad = '';
   countForm = 0;
@@ -40,62 +42,6 @@ export class SearchComponent implements OnInit {
   apiUrl: string;
   arrCrit: any;
   constructor(private http: HttpClient, private excelService: ExcelService, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
-  }
-
-
-
-  initiateForm() {
-    this.getJSON(this.searchInput._url).subscribe(data => {
-      console.log(data);
-      this.configuration = data;
-      this.urlGet = data.url;
-      this.exportData = data.exportExcel;
-      this.countForm = data.component.length;
-      console.log(this.countForm);
-      this.isDataLoaded = true;
-
-      var request = new RequestCriteriaObj();
-      var arrayCrit = new Array();
-      request.criteria = arrayCrit;
-
-      for (var i = 0; i < this.countForm; i++) {
-
-        //ini kalau datanya di load dari URL
-        if (data.component[i].isFromURL == true) {
-          var _this = this;
-          var _index = i;
-          //lempar objectnya sekalian sama urlnya, nnti di bind di dalem karena masalah di asyncnya
-          //biar tiap function ada state2nya sendiri
-          this.resolveObject(data.component[i], data.component[i].url, request);
-        }
-
-        if (data.component[i].type === "numeric") {
-          data.component[i].value = parseFloat(data.component[i].value).toLocaleString('en');
-        }
-
-        //pengecekan tanggal
-        if (data.component[i].type === "datepicker") {
-          if (data.component[i].value.includes("BD")) {
-            let businessDate = new Date(JSON.parse(localStorage.getItem("UserContext")).BusinessDate);
-            var operator = data.component[i].value.charAt(2);
-            var dateShow = new Date();
-            if (operator === "-") {
-              var tempMinus = data.component[i].value.split("-", 2);
-              var numDay = parseInt(tempMinus[1]);
-              dateShow.setDate(businessDate.getDate() - numDay);
-            }
-            else if (operator === "+") {
-              var tempMinus = data.component[i].value.split("+", 2);
-              var numDay = parseInt(tempMinus[1]);
-              dateShow.setDate(businessDate.getDate() + numDay);
-            }
-            var dateText = formatDate(dateShow, 'yyyy-MM-dd', 'en-US')
-            data.component[i].value = dateText;
-          }
-        }
-      }
-    });
-
   }
 
   ngOnInit() {
@@ -113,25 +59,68 @@ export class SearchComponent implements OnInit {
     this.initiateForm();
   }
 
+  initiateForm() {
+    this.getJSON(this.searchInput._url).subscribe(data => {
+      console.log(data);
+      this.configuration = data;
+      this.urlGet = data.url;
+      this.exportData = data.exportExcel;
+      this.countForm = data.component.length;
+      this.isDataLoaded = true;
+
+      for (var i = 0; i < this.countForm; i++) {
+
+        //ini kalau datanya di load dari URL
+        if (data.component[i].isFromURL == true) {
+          var request = new RequestCriteriaObj();
+          var arrayCrit = new Array();
+          var criteriaObject = new CriteriaObj();
+          criteriaObject.DataType = "text";
+          criteriaObject.propName = data.component[i].criteriaPropName;
+          criteriaObject.value = data.component[i].criteriaPropValue;
+          criteriaObject.restriction = "eq";
+          arrayCrit.push(criteriaObject);
+          request.criteria = arrayCrit;
+          
+          //lempar objectnya sekalian sama urlnya, nnti di bind di dalem karena masalah di asyncnya
+          //biar tiap function ada state2nya sendiri
+          this.resolveObject(data.component[i], data.component[i].url, request);
+        }
+
+        if (data.component[i].type == "numeric") {
+          data.component[i].value = parseFloat(data.component[i].value).toLocaleString('en');
+        }
+
+        //pengecekan tanggal
+        if (data.component[i].type == "datepicker") {
+          if (data.component[i].value.includes("BD")) {
+            let businessDate = new Date(JSON.parse(localStorage.getItem("UserContext")).BusinessDate);
+            var operator = data.component[i].value.charAt(2);
+            var dateShow = new Date();
+            if (operator == "-") {
+              var tempMinus = data.component[i].value.split("-", 2);
+              var numDay = parseInt(tempMinus[1]);
+              dateShow.setDate(businessDate.getDate() - numDay);
+            }
+            else if (operator == "+") {
+              var tempMinus = data.component[i].value.split("+", 2);
+              var numDay = parseInt(tempMinus[1]);
+              dateShow.setDate(businessDate.getDate() + numDay);
+            }
+            var dateText = formatDate(dateShow, 'yyyy-MM-dd', 'en-US')
+            data.component[i].value = dateText;
+          }
+        }
+      }
+    });
+  }
+
   public getJSON(url: string): Observable<any> {
     return this.http.get(url);
   }
 
   public postJSON(url: string, criteria: any = null): Observable<any> {
     return this.http.post(url, criteria);
-  }
-
-  onSubmit() {
-    this.payLoad = JSON.stringify(this.form.value);
-    console.log("This is Payload:" + this.payLoad);
-  }
-
-  searchTry() {
-    console.log("This Call Search");
-    console.log(this.myForm);
-    for (var i = 0; i < this.countForm; i++) {
-      console.log(this.myForm.nativeElement[i].name + " - " + this.myForm.nativeElement[i].value);
-    }
   }
 
   searchClick() {
@@ -141,13 +130,13 @@ export class SearchComponent implements OnInit {
     this.search(this.apiUrl, this.pageNow, this.pageSize, null, this.arrCrit);
   }
 
+  reset() {
+    this.initiateForm();
+  }
+
   search(apiUrl: string, pageNo: number, rowPerPage: number, orderBy: any, addCrit: CriteriaObj[] = null) {
-    console.log(pageNo);
     var request = new RequestCriteriaObj();
     var arrCrit = new Array();
-
-
-    console.log("Search");
 
     request.pageNo = pageNo;
     request.rowPerPage = rowPerPage;
@@ -157,14 +146,13 @@ export class SearchComponent implements OnInit {
       var critObj = new CriteriaObj();
       var component = this.myForm.nativeElement[i];
       critObj.DataType = component.getAttribute('data-type');
-      console.log('component');
-      console.log(component.value);
+      console.log(component);
       //Ini khusus kalau dari Drop Down
       if (component.value != "") {
-        if (component.nodeName === 'SELECT') {
+        if (component.nodeName == 'SELECT') {
           var ddl = component.options;
           var text = ddl[ddl.selectedIndex].value;
-          if (text !== "All") {
+          if (text != "All") {
             //Kalau Dari Dropdown udah pasti pake Eq
             critObj.restriction = AdInsConstant.RestrictionEq;
             critObj.propName = component.name;
@@ -172,19 +160,14 @@ export class SearchComponent implements OnInit {
             arrCrit.push(critObj);
           }
         }
-
         else {
           //Kalau ada Percent maka yang dipake nnti adalah Restrictions Like
           critObj.propName = component.name;
           critObj.value = component.value;
-          console.log(component.type);
-          console.log(component.restriction);
           if (component.value.includes("%")) {
             critObj.restriction = AdInsConstant.RestrictionLike;
-
           }
           //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
-
           else if (component.getAttribute('data-restriction') != "" && component.getAttribute('data-restriction') != null) {
             critObj.restriction = component.getAttribute('data-restriction');
           }
@@ -208,7 +191,6 @@ export class SearchComponent implements OnInit {
     }
 
     request.criteria = arrCrit;
-    var httpRequest = new HttpRequestObj();
     this.http.post(apiUrl, request).subscribe((response) => {
       var qryPaging = {
         response: response,
@@ -230,35 +212,24 @@ export class SearchComponent implements OnInit {
   }
 
   resolveObject(obj: any, url: string, crit: RequestCriteriaObj = null) {
-    const val = this.postJSON(this.searchInput.enviromentUrl + url, crit);
+    const val = this.postJSON(url, crit);
     val.subscribe(tempData => {
       obj.itemsUrl = tempData.returnObject;
+      
+    console.log(tempData);
     });
+    console.log(crit);
   }
 
   transformAmount(element: any) {
-
-    console.log(parseFloat(element.target.value).toLocaleString('en'));
-    if (parseFloat(element.target.value).toLocaleString('en') != "NaN") {
-      this.formattedAmount = parseFloat(element.target.value).toLocaleString('en');
-    }
-    else {
-      this.formattedAmount = "";
-    }
+    this.formattedAmount = parseFloat(element.target.value).toLocaleString('en');
     // Remove or comment this line if you dont want
     // to show the formatted amount in the textbox.
     element.target.value = this.formattedAmount;
   }
 
   transformToDecimal(element: any) {
-    console.log(parseFloat(element.target.value.toString().replace(/,/g, '')));
-    if (element.target.value != "") {
-      if (parseFloat(element.target.value.toString().replace(/,/g, '')).toString() != "NaN") {
-        element.target.value = parseFloat(element.target.value.toString().replace(/,/g, ''));
-      } else {
-        element.target.value = "";
-      }
-    }
+    element.target.value = parseFloat(element.target.value.toString().replace(/,/g, ''));
   }
 
   exportAsXLSX(): void {
@@ -270,13 +241,11 @@ export class SearchComponent implements OnInit {
 
     this.http.post(this.apiUrl, request).subscribe(
       response => {
-        console.log("Success");
         this.ExcelData = response["returnObject"]["data"];
         this.excelService.exportAsExcelFile(this.ExcelData, 'sample');
         console.log(response);
       },
       (error) => {
-        console.log("Error");
         console.log(error);
       });
   }
@@ -298,12 +267,10 @@ export class SearchComponent implements OnInit {
             critObj.restriction = AdInsConstant.RestrictionEq;
             arrayCrit.push(critObj);
           }
-
           request.criteria = arrayCrit;
           this.resolveObject(jsonComp[j], jsonComp[j].url, request);
         }
       }
     }
   }
-
 }

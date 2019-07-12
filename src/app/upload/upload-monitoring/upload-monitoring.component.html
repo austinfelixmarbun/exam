@@ -1,0 +1,44 @@
+<lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
+
+<div [hidden]="resultData?.data == null">
+  <table class="table table-responsive-md text-center table-hover">
+    <thead>
+      <tr class="table-header">
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='uploadTypeName'>Upload Type
+            Name</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='uploadMonitoringNo'>Upload No</span>
+        </th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='fileName'>File Name</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='totalRecord'>Total Record</span>
+        </th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='totalRecordProcessed'>Total Record
+            Processed</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='totalRecordError'>Total Record
+            Error</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='mrUploadStatus'>Upload Status</span>
+        </th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='errorMessage'>Error Message</span>
+        </th>
+        <th translate>Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of resultData?.data">
+        <td class="text-left">{{item.uploadTypeName}}</td>
+        <td class="text-center">{{item.uploadMonitoringNo}}</td>
+        <td class="text-left">{{item.fileName}}</td>
+        <td class="text-right">{{item.totalRecord}}</td>
+        <td class="text-right">{{item.totalRecordProcessed}}</td>
+        <td class="text-right">{{item.totalRecordError}}</td>
+        <td class="text-left">{{item.mrUploadStatus}}</td>
+        <td class="text-left">{{item.errorMessage}}</td>
+        <td>
+          <a class="success p-0" data-original-title="" title="">
+            <i class="ft-download font-medium-3 mr-2"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
+</div>

@@ -1,8 +1,10 @@
-export class OrgMdlStrucObj{
-  orgMdlStrucId: number
-  orgMdlLvl: number
-  refBizUnitId: number
-  parentId: number
-  orgMdlId: number
-  isActive: string
+export class OrgMdlStrucObj {
+  orgMdlStrucId: any;
+  orgMdlLvl: any;
+  refBizUnitId: any;
+  parentId: any;
+  orgMdlId: any;
+  isActive: any;
+
+  constructor() { this.orgMdlStrucId = 0; }
 }

@@ -4,5 +4,7 @@ listDelRefFormId: Array<any>;
 formFeature: any;
 refFormId: any;
 refRoleId: any;
-autFormId: any;
+authFormId: any;
+
+constructor() { this.authFormId = 0; }
 }

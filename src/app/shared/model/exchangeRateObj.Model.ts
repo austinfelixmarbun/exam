@@ -3,4 +3,6 @@ export class ExchangeRateObj {
     refCurrId: any;
     currDt: any;
     exchangeRateAmt: any;
+
+    constructor() { this.exChangeRateId = 0; }
 }

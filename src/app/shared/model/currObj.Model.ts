@@ -9,4 +9,5 @@ export class CurrObj {
     regRptCode: any;
     lbppCode: any;
     isActive: any;
+    constructor() { this.refCurrId = 0; }
 }

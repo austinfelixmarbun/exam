@@ -270,4 +270,6 @@ export class AdInsConstant {
     public static EditRefEmpLeaveMngmnt = "/RefEmpLeaveManagement/EditRefEmpLeaveMngmnt";
     public static AddRefEmpLeaveMngmnt = "/RefEmpLeaveManagement/AddRefEmpLeaveMngmnt";
 
+    //UPLOAD MONITORING FOUNDATION
+    public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging"
 }

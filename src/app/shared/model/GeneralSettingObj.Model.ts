@@ -1,9 +1,11 @@
 export class GeneralSettingObj {
-  generalSettingId: number;
-  gsCode: string;
-  gsName: string;
-  gsValue: string;
-  gsDescr: string;
-  refModuleId: number;
-  moduleCode: string;
+  generalSettingId: any;
+  gsCode: any;
+  gsName: any;
+  gsValue: any;
+  gsDescr: any;
+  refModuleId: any;
+  moduleCode: any;
+
+  constructor() { this.generalSettingId = 0; }
 }
