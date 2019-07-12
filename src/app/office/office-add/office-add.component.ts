@@ -3,7 +3,6 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/OfficeObj.model';
-import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
@@ -170,9 +169,6 @@ export class OfficeAddComponent implements OnInit {
             this.isActive = false;
           }
           this.mrKonvenSyariah = response['returnObject']['mrKonvenSyariah'];
-
-          var test = {addr : response['returnObject']['officeAddr']};
-          this.resultData.push(test);
 
           this.ucAddr.setData(this.resultData);
           this.ucContact.setData(this.resultData);
