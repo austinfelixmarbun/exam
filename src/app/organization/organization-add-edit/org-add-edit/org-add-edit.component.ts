@@ -78,11 +78,7 @@ export class OrgAddEditComponent implements OnInit {
         this.orgObj.refOrgId = 0;
         this.orgObj.oldParentId = 0;
         this.orgObj.orgName = OrgObjectForm.value.orgName;
-        this.orgObj.hierarchyNo = OrgObjectForm.value.hierarchyNo;
-        if (
-          +OrgObjectForm.value.hierarchyNo > 1 &&
-          OrgObjectForm.value.parentId !== "None"
-        ) {
+        if (OrgObjectForm.value.parentId !== "None") {
           this.orgObj.parentId = OrgObjectForm.value.parentId;
         }
         if (OrgObjectForm.value.isActive) {
@@ -90,13 +86,17 @@ export class OrgAddEditComponent implements OnInit {
         } else {
           this.orgObj.isActive = "0";
         }
-
+        
+        this.orgObj.hierarchyNo = this.orgObj.parentId != null ? +this.orgObj.parentId : 1;
+        console.log(this.orgObj);
         //SAVE
         this.http.post(this.apiUrl, this.orgObj).subscribe(
           response => {
+            console.log(response);
+
             console.log("Success Save");
 
-            this.service.typeSave(response["message"]);
+            this.service.successMessage(response["message"]);
             this.router
               .navigateByUrl("/organization/organization", {
                 skipLocationChange: true
@@ -109,6 +109,7 @@ export class OrgAddEditComponent implements OnInit {
           error => {
             console.log("Error Save");
 
+            console.log(error);
             this.service.typeErrorCustom(error);
             this.spinner.hide();
           }
@@ -120,7 +121,7 @@ export class OrgAddEditComponent implements OnInit {
         //GENERATE OBJECT
         this.orgObj.oldParentId = this.orgObj.parentId;
         this.orgObj.orgName = OrgObjectForm.value.orgName;
-        this.orgObj.hierarchyNo = OrgObjectForm.value.hierarchyNo;
+        this.orgObj.hierarchyNo = this.hierarchyNo;
         if (
           +OrgObjectForm.value.hierarchyNo > 1 &&
           OrgObjectForm.value.parentId !== "None"
@@ -133,6 +134,7 @@ export class OrgAddEditComponent implements OnInit {
           this.orgObj.isActive = "0";
         }
 
+        console.log(this.orgObj);
         //SAVE
         this.http.post(this.apiUrl, this.orgObj).subscribe(
           response => {
@@ -186,7 +188,7 @@ export class OrgAddEditComponent implements OnInit {
           this.parentId = +this.orgObj.parentId;
         }
         this.orgName = this.orgObj.orgName;
-        this.hierarchyNo = this.orgObj.hierarchyNo;
+        this.hierarchyNo = this.orgObj.parentId != null ? this.orgObj.parentId : 1;
       },
       error => {
         console.log(error);
