@@ -191,6 +191,7 @@ export class AdInsConstant {
     public static GetRefMasterType = "/RefMaster/GetRefMasterType";
     public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
     public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
+    public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
 
     //REF PROV DISTRICT
     public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";

@@ -52,7 +52,6 @@ export class MasterPagingComponent implements OnInit {
     this.pageNow = 1;
     this.pageSize = this.show[0];
     this.apiUrl = this.settingUrl + AdInsConstant.GetRefMasterPaging;
-    this.initiateForm()
     // this.adInsService.postData(this.settingUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
@@ -84,17 +83,6 @@ export class MasterPagingComponent implements OnInit {
       }
     }
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.addCrit);
-  }
-
-  initiateForm() {
-    this.addCrit = new Array();
-    var critIsActive = new CriteriaObj();
-    critIsActive.propName = "is_System";
-    critIsActive.value = "0";
-    critIsActive.restriction = AdInsConstant.RestrictionEq;
-
-    this.addCrit.push(critIsActive);
-    this.inputObj.addCritInput = this.addCrit;
   }
 
   del(id: any) {

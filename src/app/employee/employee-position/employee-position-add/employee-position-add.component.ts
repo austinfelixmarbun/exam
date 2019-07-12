@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
 import { NgForm } from '@angular/forms';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { OrgJobTitleObj } from 'app/shared/model/OrgJobTitleObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { formatDate } from '@angular/common';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 
@@ -73,7 +71,7 @@ export class EmployeePositionAddComponent implements OnInit {
         this.addUrl = this.foundationUrl + AdInsConstant.AddEmpPosition;
         this.refOfficeUrl = this.foundationUrl + AdInsConstant.GetAllRefOffice;
         this.supervisorUrl = this.foundationUrl + AdInsConstant.GetEmpListByOfficeIdAndIsActive;
-        this.refMasterUrl = this.settingUrl + AdInsConstant.GetRefMasterListByTypeCode;
+        this.refMasterUrl = this.settingUrl + AdInsConstant.GetRefMasterListDesc;
         this.bizUrl = this.foundationUrl + AdInsConstant.GetRefBizUnitByOffice;
         this.orgJobTitleUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitleByMdlStruc;
         this.getEditUrl = this.foundationUrl + AdInsConstant.GetEmpByEmpPositionId;
@@ -114,6 +112,7 @@ export class EmployeePositionAddComponent implements OnInit {
         const getuserAccess = JSON.parse(localStorage.getItem('UserAccess'));
         this.refOfficeId = getuserAccess.refOfficeId;
         this.refOfficeObj = new RefOfficeObj();
+        this.refOfficeObj.refOfficeId = this.refOfficeId
         this.httpClient.post(this.refOfficeUrl, null).subscribe(
             (response) => {
                 this.allRefOffice = response['returnObject']
@@ -133,7 +132,6 @@ export class EmployeePositionAddComponent implements OnInit {
             (error) => {
                 console.log(error);
             });
-        // this.refOfficeObj.refOfficeId = this.refOfficeId
         // this.httpClient.post(this.supervisorUrl, this.refOfficeObj).subscribe(
         //     (response) => {
         //         this.allSupervisor = response['returnObject']
