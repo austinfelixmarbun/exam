@@ -12,8 +12,8 @@
       },
       {
         "type": "textbox",
-        "name": "districtSandiBi",
-        "id": "districtSandiBiId",
+        "name": "DISTRICT_REG_RPT_CODE",
+        "id": "districtRegRptCodeId",
         "value": "",
         "label": "District Sandi BI",
         "placeholder": "District Sandi BI"
