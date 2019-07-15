@@ -121,6 +121,7 @@ export class EmployeePositionComponent implements OnInit {
       this.httpClient.post(this.deleteUrl, this.empPositionObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
+          this.searchPagination(this.pageNow);
         },
         (error) => {
           console.log("Error");

@@ -10,12 +10,9 @@
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="projectinput5" translate>Bank Code </label>
                 <div class="col-md-9">
-                  <div *ngIf="mode=='edit'">
-                    <label class="adInsLabel" translate>{{result?.bankCode}}</label>
-                  </div>
-                  <div *ngIf="mode!='edit'">
+                  <div >
                     <input type="text" id="projectinput5" class="form-control adInsInput" name="bankCode"
-                      [ngModel]="result?.bankCode" #BankCode="ngModel" required
+                      [ngModel]="result?.bankCode" #BankCode="ngModel" required [disabled]="mode=='edit'"
                       [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || BankCode.touched || BankCode.dirty) && BankCode.invalid }">
                     <div *ngIf="(BankAddReqForm.submitted || BankCode.touched || BankCode.dirty) && BankCode.invalid"
                       class="invalid-feedback">

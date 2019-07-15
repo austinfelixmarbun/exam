@@ -143,8 +143,9 @@ export class EmployeePositionAddComponent implements OnInit {
             (response) => {
                 this.allBiz = response['returnObject'];
                 this.refBizUnitId = this.allBiz[0].orgMdlStrucId;
-                if (this.pageType != "edit")
+                if (this.pageType != "edit"){
                     this.onChangeBiz(this.refBizUnitId);
+                }
             },
             (error) => {
                 console.log(error);
@@ -190,6 +191,9 @@ export class EmployeePositionAddComponent implements OnInit {
                 console.log(response);
                 this.allOrgJobTitle = response['returnObject'];
                 this.orgJobTitleId = this.allOrgJobTitle.orgJobTitleId;
+                if (this.pageType != "edit"){
+                    this.orgJobTitleId = this.allOrgJobTitle[0].orgJobTitleId;
+                }
             },
             (error) => {
                 console.log(error);
