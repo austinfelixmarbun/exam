@@ -1,12 +1,10 @@
 import { OrganizationObj } from "app/shared/model/OrganizationObj.Model";
 import { environment } from "environments/environment";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
-import { Location } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { NgxSpinnerService } from "ngx-spinner";
 import { HttpClient } from "@angular/common/http";
 
 @Component({
@@ -29,14 +27,13 @@ export class OrgAddEditComponent implements OnInit {
   hierarchyNo: any;
   isActive: any;
   result: any;
+  GetUrl: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private service: NGXToastrService,
-    private http: HttpClient,
-    private spinner: NgxSpinnerService,
-    private location: Location
+    private http: HttpClient
   ) {
     this.route.queryParams.subscribe(params => {
       this.param = params["refOrgId"];
@@ -47,7 +44,7 @@ export class OrgAddEditComponent implements OnInit {
   ngOnInit() {
     this.GetListParents();
     this.parentId = "None";
-    if (this.mode === "edit") {
+    if (this.mode == "edit") {
       this.FillFormEdit();
     } else {
       this.mode = "add";
@@ -55,22 +52,16 @@ export class OrgAddEditComponent implements OnInit {
     }
   }
 
-  Back(): void {
-    this.location.back();
-  }
-
   Save(OrgObjectForm: NgForm): void {
-    this.spinner.show();
-
     if (
       +OrgObjectForm.value.hierarchyNo > 1 &&
-      (OrgObjectForm.value.parentId === undefined ||
-        OrgObjectForm.value.parentId === "None")
+      (OrgObjectForm.value.parentId == undefined ||
+        OrgObjectForm.value.parentId == "None")
     ) {
       this.service.typeErrorCustom("Must Have Parent");
-      this.spinner.hide();
     } else {
-      if (this.mode !== "edit") {
+      this.GetUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
+      if (this.mode != "edit") {
         this.apiUrl = this.foundationUrl + AdInsConstant.AddRefOrg;
 
         //GENERATE OBJECT
@@ -86,42 +77,41 @@ export class OrgAddEditComponent implements OnInit {
         } else {
           this.orgObj.isActive = "0";
         }
-        
-        this.orgObj.hierarchyNo = this.orgObj.parentId != null ? +this.orgObj.parentId : 1;
-        console.log(this.orgObj);
-        //SAVE
-        this.http.post(this.apiUrl, this.orgObj).subscribe(
+        var orgObjParent = { RefOrgId: OrgObjectForm.value.parentId != null ? OrgObjectForm.value.parentId : 1 }
+        this.http.post(this.GetUrl, orgObjParent).subscribe(
           response => {
+            this.orgObj.hierarchyNo = +response["returnObject"].hierarchyNo + 1;
             console.log(response);
+            console.log(this.orgObj);
+            //SAVE
+            this.http.post(this.apiUrl, this.orgObj).subscribe(
+              response => {
+                console.log(response);
 
-            console.log("Success Save");
+                console.log("Success Save");
 
-            this.service.successMessage(response["message"]);
-            this.router
-              .navigateByUrl("/organization/organization", {
-                skipLocationChange: true
-              })
-              .then(() =>
-                this.router.navigate(["/organization/organization/add"])
-              );
-            this.spinner.hide();
+                this.service.successMessage(response["message"]);
+                this.router.navigateByUrl("/organization/organization");
+              },
+              error => {
+                console.log("Error Save");
+                console.log(error);
+              }
+            );
           },
           error => {
-            console.log("Error Save");
-
             console.log(error);
-            this.service.typeErrorCustom(error);
-            this.spinner.hide();
           }
         );
+
+
       } else {
         this.apiUrl =
-          this.foundationUrl + AdInsConstant.EditRefOrgWithOldParentId;
+          this.foundationUrl + AdInsConstant.EditRefOrg;
 
         //GENERATE OBJECT
         this.orgObj.oldParentId = this.orgObj.parentId;
         this.orgObj.orgName = OrgObjectForm.value.orgName;
-        this.orgObj.hierarchyNo = this.hierarchyNo;
         if (
           +OrgObjectForm.value.hierarchyNo > 1 &&
           OrgObjectForm.value.parentId !== "None"
@@ -133,24 +123,30 @@ export class OrgAddEditComponent implements OnInit {
         } else {
           this.orgObj.isActive = "0";
         }
-
-        console.log(this.orgObj);
-        //SAVE
-        this.http.post(this.apiUrl, this.orgObj).subscribe(
+        var orgObjParent = { RefOrgId: OrgObjectForm.value.parentId != null ? OrgObjectForm.value.parentId : 1 }
+        this.http.post(this.GetUrl, orgObjParent).subscribe(
           response => {
-            console.log("Success Edit");
+            this.orgObj.hierarchyNo = +response["returnObject"].hierarchyNo + 1;
+            console.log(response);
 
-            this.service.typeSave(response["message"]);
-            this.location.back();
-            this.spinner.hide();
+            console.log(this.orgObj);
+            //SAVE
+            this.http.post(this.apiUrl, this.orgObj).subscribe(
+              response => {
+                console.log("Success Edit");
+                this.service.typeSave(response["message"]);
+                this.router.navigateByUrl("/organization/organization");
+              },
+              error => {
+                console.log("Error Edit");
+                console.log(error);
+              });
           },
           error => {
-            console.log("Error Edit");
-
-            this.service.typeErrorCustom(error);
-            this.spinner.hide();
+            console.log(error);
           }
         );
+
       }
     }
   }
@@ -164,8 +160,7 @@ export class OrgAddEditComponent implements OnInit {
       },
       error => {
         console.log(error);
-      }
-    );
+      });
   }
 
   FillFormEdit() {
@@ -188,7 +183,16 @@ export class OrgAddEditComponent implements OnInit {
           this.parentId = +this.orgObj.parentId;
         }
         this.orgName = this.orgObj.orgName;
-        this.hierarchyNo = this.orgObj.parentId != null ? this.orgObj.parentId : 1;
+
+        var orgObjParent = { RefOrgId: this.parentId }
+        this.http.post(this.apiUrl, orgObjParent).subscribe(
+          response => {
+            this.hierarchyNo = +response["returnObject"].hierarchyNo + 1;
+            console.log(response);
+          },
+          error => {
+            console.log(error);
+          });
       },
       error => {
         console.log(error);

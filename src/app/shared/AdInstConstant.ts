@@ -48,6 +48,7 @@ export class AdInsConstant {
     //ORGANIZATION
     public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
     public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
+    public static EditRefOrg = "/OrganizationDefinition/EditRefOrg";
     public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
     public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
     public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";

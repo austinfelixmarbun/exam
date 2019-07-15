@@ -48,7 +48,7 @@
 
               <div class="form-actions">
 
-                <button *ngIf=" mode === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                <button *ngIf=" mode == 'edit'" type="button" [routerLink]="['/organization/organization']" class="btn btn-raised btn-warning mr-1">
                   <i class="fa fa-arrow-circle-left"></i> Back
                 </button>
                 <button type="submit" class="btn btn-raised btn-primary">
