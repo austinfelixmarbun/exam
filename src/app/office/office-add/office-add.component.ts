@@ -25,6 +25,7 @@ export class OfficeAddComponent implements OnInit {
   pageType: string = "add";
   mrKonvenSyariah = 'KON';
   isDisabledState: boolean = false;
+  isHO: boolean = true;
   refOfficeId: any;
   allOfficeClass: any;
   allRefOrg: any;
@@ -88,8 +89,6 @@ export class OfficeAddComponent implements OnInit {
       if (params['refOfficeId'] != null) {
         this.refOfficeId = params['refOfficeId'];
       }
-      console.log(this.pageType);
-      console.log(this.refOfficeId);
     });
   }
 
@@ -198,7 +197,7 @@ export class OfficeAddComponent implements OnInit {
           this.httpClient.post(this.holidaySchmUrl, null).subscribe(
             (response) => {
               this.allHolidaySchm = response['returnObject'];
-              
+
               var notEmpty = false;
               for (var i = 0; i < response["returnObject"].length; i++) {
                 if (this.holidaySchmHId == response["returnObject"][i].holidaySchmHId) {
@@ -215,7 +214,7 @@ export class OfficeAddComponent implements OnInit {
           this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
             (response) => {
               this.allWorkingHourSchm = response['returnObject'];
-              
+
               var notEmpty = false;
               for (var i = 0; i < response["returnObject"].length; i++) {
                 if (this.workingHourSchmHId == response["returnObject"][i].workingHourSchmHId) {
@@ -230,14 +229,14 @@ export class OfficeAddComponent implements OnInit {
               console.log(error);
             })
 
-            orgMdlObj.refOrgId = this.refOrgId
-            this.httpClient.post(this.officeParentUrl, orgMdlObj).subscribe(
-              (response) => {
-                this.allOfficeParent = response['returnObject'];
-              },
-              (error) => {
-                console.log(error + ' Parent 1');
-              })
+          orgMdlObj.refOrgId = this.refOrgId
+          this.httpClient.post(this.officeParentUrl, orgMdlObj).subscribe(
+            (response) => {
+              this.allOfficeParent = response['returnObject'];
+            },
+            (error) => {
+              console.log(error);
+            })
 
         })
     }
@@ -297,34 +296,26 @@ export class OfficeAddComponent implements OnInit {
     }
 
     if (this.pageType === "add") {
-      console.log(JSON.stringify(this.officeObj))
-      console.log(this.officeObj);
       this.httpClient.post(this.addUrl, this.officeObj).subscribe(
         (response) => {
-          console.log("Success");
           console.log(response);
           this.toastr.successMessage(response['message']);
           this.router.navigate(["/office/paging"]);
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );
     }
     else {
       this.officeObj.refOfficeId = this.refOfficeId;
-      console.log(JSON.stringify(this.officeObj))
-      console.log(this.officeObj);
       this.httpClient.post(this.editUrl, this.officeObj).subscribe(
         (response) => {
-          console.log("Success");
           console.log(response);
           this.toastr.successMessage(response['message']);
           this.router.navigate(["/office/paging"]);
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );
@@ -342,6 +333,19 @@ export class OfficeAddComponent implements OnInit {
   }
 
   onChangeRefOrg(refOrgValue, edit: boolean = false) {
+    for (var i = 0; i < this.allRefOrg.length; i++) {
+      if (refOrgValue == this.allRefOrg[i].refOrgId) {
+        this.hierarchyNo = this.allRefOrg[i].hierarchyNo;
+        console.log(this.hierarchyNo);
+        if (this.hierarchyNo == 1) {
+          this.isHO = true;
+        } else {
+          this.isHO = false;
+          this.isDisabledState = false;
+        }
+      }
+    }
+
     this.orgMdlObj = new OrgMdlObj();
     this.orgMdlObj.refOrgId = refOrgValue
     this.httpClient.post(this.orgMdlUrl, this.orgMdlObj).subscribe(
@@ -359,31 +363,26 @@ export class OfficeAddComponent implements OnInit {
         this.allOfficeParent = response['returnObject'];
         if (response['returnObject']['length'] != 0) {
           if (edit == false) {
-          this.parentId = response['returnObject'][0]['refOfficeId'];
+            this.parentId = response['returnObject'][0]['refOfficeId'];
+            this.onChangeOfficeParent(response['returnObject'][0]['refOfficeId']);
+          } else {
+            this.onChangeOfficeParent(this.parentId);
           }
-        }
-        if (response['returnObject']['length'] != 0) {
-          this.httpClient.post(this.getRefOrgUrl, this.orgMdlObj).subscribe(
-            (response) => {
-              // this.allOrgMdl = response['returnObject'];
-              this.hierarchyNo = response['returnObject']['hierarchyNo'];
-              if (this.hierarchyNo <= 2) {
-                this.mrKonvenSyariah = 'KON';
-                this.isDisabledState = false;
-              } else {
-                this.isDisabledState = true;
-              }
-            },
-            (error) => {
-              console.log(error);
-            })
-        } else {
-          this.mrKonvenSyariah = 'KON';
-          this.isDisabledState = false;
         }
       },
       (error) => {
-        console.log(error + ' Parent 2');
+        console.log(error);
       })
+  }
+
+  onChangeOfficeParent(officeParentValue) {
+    if (this.hierarchyNo > 2) {
+      for (var i = 0; i < this.allOfficeParent.length; i++) {
+        if (officeParentValue == this.allOfficeParent[i].refOfficeId) {
+          this.mrKonvenSyariah = this.allOfficeParent[i].mrKonvenSyariah;
+          this.isDisabledState = true;
+        }
+      }
+    }
   }
 }

@@ -26,6 +26,7 @@ import { LookupbizunitModule } from '@adins/lookupbizunit';
 import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank.component';
 import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-supervisor.component';
 import { LookupDistrictComponent }from './lookup/lookup-district/lookup-district.component';
+import { AngularFileUploaderModule } from "angular-file-uploader";
 
 @NgModule({
     exports: [
@@ -53,7 +54,8 @@ import { LookupDistrictComponent }from './lookup/lookup-district/lookup-district
         FormEngineModule,
         LookupRefBankComponent,
         LookupSupervisorComponent,
-        LookupDistrictComponent
+        LookupDistrictComponent,
+        AngularFileUploaderModule
     ],
     imports: [
         CommonModule,
