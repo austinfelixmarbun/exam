@@ -10,7 +10,6 @@ import {
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, finalize } from 'rxjs/operators';
-import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { formatDate } from '@angular/common';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -61,7 +60,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     Ip: localStorage.getItem("LocalIp"),
                     RequestObject: request.body,
                     UserLog: JSON.parse(localStorage.getItem("PageAccess")),
-                    Token: token,
                     Method: oldPath
                 };
             }
@@ -86,8 +84,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     SendDateTime: businessDt,
                     Ip: localStorage.getItem("LocalIp"),
                     RequestObject: request.body,
-                    UserLog: JSON.parse(localStorage.getItem("PageAccess")),
-                    Token: token
+                    UserLog: JSON.parse(localStorage.getItem("PageAccess"))
                 };
             }
             else {
@@ -103,7 +100,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }
         }
 
-
         if (token != "") {
             request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
         }
@@ -118,19 +114,25 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Methods', 'POST') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
         request = request.clone({ body: myObj });
+
+        // test
+        var test = JSON.stringify(myObj);
+        request = request.clone({ body: test });
+        // test
+
         AdInsHelper.InsertLog(request.url, "API", request.body);
         console.log(JSON.stringify(request.body));
-        if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {
-            var q = "AddQueue";
-            var url = request.url;
-            var n = url.lastIndexOf("/");
-            var envi = url.substring(0,n+1);
-            var newUrl = envi.concat(q);
+        // if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {
+        //     var q = "AddQueue";
+        //     var url = request.url;
+        //     var n = url.lastIndexOf("/");
+        //     var envi = url.substring(0,n+1);
+        //     var newUrl = envi.concat(q);
 
-            var req = request.clone({url: newUrl});
-        } else {
-            var req = request;
-        }
+        //     var req = request.clone({url: newUrl});
+        // } else {
+        //     var req = request;
+        // }
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {

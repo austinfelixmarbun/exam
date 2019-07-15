@@ -125,7 +125,12 @@
             <label class="col-md-3 label-control adInsLabel" for="email2" translate>Email 2</label>
             <div class="col-md-9">
                 <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="email2"
-                    class="form-control adInsInput" name="email2" [(ngModel)]="email2" #Email2="ngModel">
+                    class="form-control adInsInput" name="email2" [(ngModel)]="email2" #Email2="ngModel"
+                    [ngClass]="{ 'is-invalid':(parentForm.submitted || Email2.touched || Email2.dirty) && Email2.invalid }">
+                    <div *ngIf=" (parentForm.submitted || Email2.touched || Email2.dirty) && Email2.invalid"
+                        class="invalid-feedback">
+                        <div *ngIf="Email2.errors?.pattern" translate>Email 2 Invalid</div>
+                    </div>
             </div>
         </div>
     </div>

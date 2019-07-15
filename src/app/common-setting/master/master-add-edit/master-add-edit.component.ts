@@ -60,7 +60,7 @@ export class MasterAddEditComponent implements OnInit {
       this.apiUrl = this.settingUrl + AdInsConstant.GetRefMaster;
       this.refMasterObj = new RefMasterObj()
       this.refMasterObj.refMasterId = +this.refMasterId
-      this.httpClient.post(this.apiUrl, this.refMasterObj).subscribe(
+      this.httpClient.post("https://localhost:4999/RefMaster/GetRefMaster", this.refMasterObj).subscribe(
         (response) => {
           console.log('Success Get');
           this.refMasterObj = response['returnObject'];

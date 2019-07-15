@@ -8,3 +8,42 @@
 <br>
 <app-search id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></app-search>
 <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+
+<br>
+<input type="file" (change)="onFileChange($event)" />
+
+<h1>File Upload Using Angular 5 and ASP.NET Core 2.1</h1>
+<input #file type="file" multiple (change)="upload(file.files)" />
+<br />
+<span style="font-weight:bold;color:green;" *ngIf="progress > 0 && progress < 100">
+  {{progress}}%
+</span>
+
+<span style="font-weight:bold;color:green;" *ngIf="message">
+  {{message}}
+</span>
+
+<div class="row" style="margin-bottom:15px;">
+  <div class="col-md-3">
+    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+  </div>
+  <div class="col-md-4">
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
+</div>
+
+<input id="myForm" type="file" name="file" (change)="postMethod($event.target.files)">
+<form #uploadForm="ngForm">
+  <input #file id="myForm" type="file" name="file">
+  <button type="submit" (click)="postMethod2(file.files)">Submit</button>
+</form>
+
+<angular-file-uploader
+      [config]="afuConfig">
+</angular-file-uploader>
