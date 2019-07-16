@@ -17,6 +17,7 @@ import { UiSwitchModule } from 'ngx-ui-switch';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { ToastrComponent } from "./extra/toastr/toastr.component";
+import { TypeaheadComponent } from './bootstrap/typeahead/typeahead.component';
 
 @NgModule({
     imports: [
@@ -38,7 +39,8 @@ import { ToastrComponent } from "./extra/toastr/toastr.component";
         NgSelectModule
     ],
     declarations: [
-        ToastrComponent
+        ToastrComponent,
+        TypeaheadComponent
     ],
     entryComponents: []
 })

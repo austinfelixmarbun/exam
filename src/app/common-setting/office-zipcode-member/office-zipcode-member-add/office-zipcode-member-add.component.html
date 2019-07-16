@@ -63,7 +63,7 @@
       <div class="card-header">
         <div class="text-right">
           <button type="button" (click)="AddToTemp()" class="btn btn-raised btn-warning mr-1">
-            <i class="fa fa-arrow-circle-left"></i> Add To Temp
+            <i class="fa fa-arrow-circle-right"></i> Add To Temp
           </button>
         </div>
       </div>
@@ -85,9 +85,9 @@
             <td>{{item.zipcode}}</td>
             <td>
               <div>
-                <a class="success p-0" data-original-title="" title=""
+                <a class="danger p-0" data-original-title="" title=""
                   (click)="deleteFromTemp(item.refZipcodeId)">
-                  <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                  <i class="ft-trash-2 font-medium-3 mr-2"></i>
                 </a></div>
             </td>
           </tr>

@@ -27,9 +27,9 @@
               <span *ngIf="item.isActive == '1'">Yes</span>
               <span *ngIf="item.isActive == '0'">No</span>
             </td>
-            <td *ngIf="item.mrKonvenSyariah === 'KON'">Konvensional</td>
-            <td *ngIf="item.mrKonvenSyariah === 'SYA'">Syariah</td>
-            <td *ngIf="item.mrKonvenSyariah === ''"></td>
+            <td *ngIf="item.mrKonvenSyariah == 'KON'">Konvensional</td>
+            <td *ngIf="item.mrKonvenSyariah == 'SYA'">Syariah</td>
+            <td *ngIf="item.mrKonvenSyariah == '' || item.mrKonvenSyariah == null"></td>
             <td>
               <span *ngIf="item.isVirtualOffice == '1'">Yes</span>
               <span *ngIf="item.isVirtualOffice == '0'">No</span>

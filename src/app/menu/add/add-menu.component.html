@@ -29,7 +29,7 @@
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" for="projectinput6" translate>Title </label>
                 <div class="col-md-9">
-                  <textarea id="projectinput5" class="form-control adInsInput" name="title" [ngModel]="title"
+                  <textarea id="projectinput5" maxlength="30" class="form-control adInsInput" name="title" [ngModel]="title"
                     #Title="ngModel" required
                     [ngClass]="{ 'is-invalid': MenuReqForm.submitted && Title.invalid }"></textarea>
                   <div *ngIf="MenuReqForm.submitted && Title.invalid" class="invalid-feedback">
