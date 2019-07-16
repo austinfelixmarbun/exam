@@ -83,7 +83,7 @@ const PARAMS = new HttpParams({
 
 @Injectable()
 // export class WikipediaService {
-//   foundationUrl: string = environment.foundationUrl;
+//   settingUrl: string = environment.settingUrl;
 //   userData: any[] = [];
 //   constructor(private http: HttpClient) { }
 
@@ -115,7 +115,7 @@ const PARAMS = new HttpParams({
 //     critObj.value = "%" + term + "%";
 //     arrCrit.push(critObj);
 //     request.criteria = arrCrit;
-//     var Url = this.foundationUrl + AdInsConstant.GetBankPaging;
+//     var Url = this.settingUrl + AdInsConstant.GetBankPaging;
 //     return this.http.post(Url, request).pipe(
 //         map(response => {
 //           var num = 0;
@@ -144,7 +144,7 @@ export class TypeaheadComponent {
   searching = false;
   searchFailed = false;
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
-  foundationUrl: string = environment.foundationUrl;
+  settingUrl: string = environment.settingUrl;
   userData: any[] = [];
   
   constructor(private http: HttpClient) { }
@@ -163,17 +163,18 @@ export class TypeaheadComponent {
     var critObj = new CriteriaObj();
     critObj.DataType = "text";
     critObj.restriction = AdInsConstant.RestrictionLike;
-    critObj.propName = "bankName";
+    critObj.propName = "bank_name";
     critObj.value = "%" + term + "%";
     arrCrit.push(critObj);
     request.criteria = arrCrit;
-    var Url = this.foundationUrl + AdInsConstant.GetBankPaging;
+    var Url = this.settingUrl + AdInsConstant.GetBankPaging;
     return this.http.post(Url, request).pipe(
         map(response => {
           var num = 0;
           for (num = 0; num < response["returnObject"].data.length; num++) {
             this.userData.push(response["returnObject"].data[num].bankName + ' ' + response["returnObject"].data[num].bankCode)
           }
+          console.log(this.userData);
           return this.userData;
         })
       );
