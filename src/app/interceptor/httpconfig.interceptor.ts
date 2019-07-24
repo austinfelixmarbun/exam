@@ -15,12 +15,13 @@ import { formatDate } from '@angular/common';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
-    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router) { }
+    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router, public toastr: ToastrService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log(request);
         if (request.method == "POST" && (request.body == null || request.body.isLoading == true)) {
@@ -43,7 +44,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
         if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {
             var n = request.url.lastIndexOf("/");
-            var oldPath = request.url.substring(n+1);
+            var oldPath = request.url.substring(n + 1);
         } else {
             var oldPath = "-";
         }
@@ -116,8 +117,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ body: myObj });
 
         // test
-        var test = JSON.stringify(myObj);
-        request = request.clone({ body: test });
+        // var test = JSON.stringify(myObj);
+        // request = request.clone({ body: test });
         // test
 
         AdInsHelper.InsertLog(request.url, "API", request.body);
@@ -161,12 +162,21 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 return event;
             }),
             catchError((error: HttpErrorResponse) => {
-                let data = {};
-                data = {
-                    reason: error && error.error.Message ? error.error.Message : '',
-                    status: error.status
-                };
-                this.errorDialogService.openDialog(data);
+                if (error.error != null) {
+                    if (error.error.errorMessages != null) {
+                        for (var i = 0; i < error.error.errorMessages.length; i++) {
+                            this.toastr.error(error.error.errorMessages[i].message, 'Status: ' + error.status, { "tapToDismiss": true});
+                        }
+                    }else {
+                        this.toastr.error(error.error.Message, 'Status: ' + error.status, { "tapToDismiss": true});
+                    }
+                }
+                // let data = {};
+                // data = {
+                //     reason: error && error.error.Message ? error.error.Message : '',
+                //     status: error.status
+                // };
+                // this.errorDialogService.openDialog(data);
                 console.log(JSON.stringify(request.body));
                 return throwError(error);
             }), finalize(() => {

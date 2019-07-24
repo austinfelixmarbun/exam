@@ -37,10 +37,14 @@ export class DummyComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
+  token = localStorage.getItem("Token");
   afuConfig = {
     formatsAllowed: ".txt, .xls, .xlsx",
     uploadAPI: {
-      url: "http://localhost/R3/FOUNDATION/UploadType/UploadFile"
+      url: "https://localhost:5000/UploadType/UploadFile",
+      headers: {
+        "Authorization" :  'Bearer ' + this.token,
+      }
     }
   };
 

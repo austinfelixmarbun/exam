@@ -9,6 +9,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BankAddComponent } from 'app/bank/add/add-bank.component';
 import { DummyComponent } from './dummy/dummy.component';
 import { DummyAddComponent } from './dummy/dummy-add/dummy-add.component';
+import { Dummy2Component } from './dummy2/dummy2.component';
+import { Dummy3Component } from './dummy3/dummy3.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { DummyAddComponent } from './dummy/dummy-add/dummy-add.component';
     BankComponent,
     BankAddComponent,
     DummyComponent,
-    DummyAddComponent
+    DummyAddComponent,
+    Dummy2Component,
+    Dummy3Component
   ]
 })
 export class BankModule { }

@@ -1,34 +1,28 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { DecimalPipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { ControlContainer, NgForm } from '@angular/forms';
 
 
 @Component({
   selector: 'app-lookupzipcode',
   templateUrl: './lookupzipcode.component.html',
-  providers: [NGXToastrService, DecimalPipe]
+  providers: [NGXToastrService],
+  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 export class LookupzipcodeComponent implements OnInit {
+  constructor(private modalService: NgbModal) {}
 
-  constructor(private modalService: NgbModal) { }
-
-  @Input() nameSelect: any = "Search ...";
-  @Input() idSelect: any;
-  @Input() jsonSelect: string;
+  @Input() lookupInput: any;
+  @Input() parentForm: any;
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
-  inputObj: any;
-
-  roleName: any;
-  refRoleId: any;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @Output() select : EventEmitter<any> = new EventEmitter();
+  inputObj: any;
 
   configuration: any;
   urlGet: string;
@@ -43,34 +37,37 @@ export class LookupzipcodeComponent implements OnInit {
   show: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-
-
   closeResult: string;
-
-  settingUrl: string = environment.settingUrl;
+  addCrit: Array<any>;
+  zipcode: any;
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/lookup/lookupZipcode.json";
-    this.inputObj.enviromentUrl = environment.settingUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetRefZipcodePaging;
+    this.inputObj._url = this.lookupInput.urlJson;
+    this.inputObj.enviromentUrl = this.lookupInput.urlEnviPaging;
+    this.inputObj.apiQryPaging = this.lookupInput.urlQryPaging;
     
-    this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipcodePaging;
-    this.show = AdInsConstant.showData.split(',');
+    this.apiUrl = this.lookupInput.urlEnviPaging + this.lookupInput.urlQryPaging;
     this.pageNow = 1;
-    this.pageSize = this.show[0];
-
+    this.pageSize = 10;
+    /* #region   Additional Criteria*/
+    if (this.lookupInput.addCritInput !== null) {
+      this.addCrit = new Array();
+      for (var i = 0; i < this.lookupInput.addCritInput.length; i++) {
+        this.addCrit.push(this.lookupInput.addCritInput[i]);
+      }
+    }
+    /* #endregion */
+    this.inputObj.addCritInput = this.addCrit;
   }
 
   choose(id, name, item) {
     console.log(id + " : " + name);
     console.log(item);
-    this.idSelect = id;
-    this.refRoleId = id;
-    this.roleName = name;
-    this.nameSelect = name;
-    this.jsonSelect = JSON.stringify(item);
-    this.select.emit(item);
+    this.zipcode = id;
+    this.lookupInput.idSelect = id;
+    this.lookupInput.nameSelect = name;
+    this.lookupInput.jsonSelect = JSON.stringify(item);
     this.modalService.dismissAll();
     this.select.emit(item);
   }
@@ -137,7 +134,6 @@ export class LookupzipcodeComponent implements OnInit {
     searchComp.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
-
   changeShowData(searchComp, value: any) {
     this.pageSize = +value;
     if (this.resultData !== null && this.resultData !== '' && this.resultData !== undefined) {
@@ -178,5 +174,4 @@ export class LookupzipcodeComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.searchPagination(searchComp, this.pageNow);
   }
-
 }

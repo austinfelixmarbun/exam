@@ -28,6 +28,7 @@ import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-sup
 import { LookupDistrictComponent }from './lookup/lookup-district/lookup-district.component';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { UcSubsectionModule } from '@adins/uc-subsection';
+import { LookupzipcodeComponent } from './lookup/lookupzipcode/lookupzipcode.component';
 
 @NgModule({
     exports: [
@@ -57,7 +58,9 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
         LookupSupervisorComponent,
         LookupDistrictComponent,
         AngularFileUploaderModule,
-        UcSubsectionModule
+        UcSubsectionModule,
+        LookupzipcodeComponent,
+        AngularFileUploaderModule
     ],
     imports: [
         CommonModule,
@@ -79,7 +82,8 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
         UcInfoComponent,
         LookupRefBankComponent,
         LookupSupervisorComponent,
-        LookupDistrictComponent
+        LookupDistrictComponent,
+        LookupzipcodeComponent
     ]
 })
 
