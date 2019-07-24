@@ -1,27 +1,28 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { SearchComponent } from 'app/shared/search/search.component';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { NgForm } from '@angular/forms';
-import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
+import { SearchComponent } from 'app/shared/search/search.component';
 import { environment } from 'environments/environment';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { UserTitleRoleObj } from 'app/shared/model/UserTitleRoleObj';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-
+import { NgForm } from '@angular/forms';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
-  selector: 'app-user-role-detail',
-  templateUrl: './user-role-detail.component.html',
+  selector: 'app-upload-setting-edit',
+  templateUrl: './upload-setting-edit.component.html',
+  styleUrls: ['./upload-setting-edit.component.scss'],
   providers: [NGXToastrService]
 })
-export class UserRoleDetailComponent implements OnInit {
-
+export class UploadSettingEditComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
+  @ViewChild("uclRole") ucLookupRole;
   inputLookupObj: any;
   resultData: string;
   foundationUrl: string = environment.foundationUrl;
@@ -32,53 +33,33 @@ export class UserRoleDetailComponent implements OnInit {
   isActive: any;
   mode: any;
 
-  userName: any;
-  officeCode: any;
-  officeName: any;
-  bizUnitName: any;
-  jobTitleName: any;
+  userTitleRoleObj: any;
   empPositionId: any;
-  userTitleRoleId: any;
+  addCritIsActive: any;
+  tempRefRole: any;
 
-  userTitleRoleObj: UserTitleRoleObj = new UserTitleRoleObj();
-
-
-
-  constructor(
-    private spinner: NgxSpinnerService,
+  constructor(private spinner: NgxSpinnerService,
     private service: NGXToastrService,
     private httpClient: HttpClient,
     private route: ActivatedRoute,
-    private location: Location,
-  ) {
-    this.route.queryParams.subscribe(params => {
-      if (params['officeCode'] != null) {
-        this.officeCode = params['officeCode'];
-      }
-      if (params['officeName'] != null) {
-        this.officeName = params['officeName'];
-      }
-      if (params['bizUnitName'] != null) {
-        this.bizUnitName = params['bizUnitName'];
-      }
-      if (params['jobTitleName'] != null) {
-        this.jobTitleName = params['jobTitleName'];
-      }
-      if (params['userName'] != null) {
-        this.userName = params['userName'];
-      }
-      if (params['empPositionId'] != null) {
-        this.empPositionId = params['empPositionId'];
-      }
-    });
-  }
+    private location: Location) { }
 
   ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefRolePaging;
     this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
-    
+
+    this.tempRefRole = new Array();
+    this.addCritIsActive = new Array();
+    var critIsActive = new CriteriaObj();
+    critIsActive.propName = "IsActive";
+    critIsActive.value = "1";
+    critIsActive.restriction = AdInsConstant.RestrictionEq;
+    critIsActive.DataType = "text";
+    this.addCritIsActive.push(critIsActive);
+    this.inputLookupObj.addCritInput = this.addCritIsActive;
+
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
     this.initiateForm()
   }
@@ -107,18 +88,18 @@ export class UserRoleDetailComponent implements OnInit {
           console.log('A', refRoleObj);
           this.httpClient.post(getUserTitleRole, this.userTitleRoleObj).subscribe(
             (response) => {
-              this.userTitleRoleObj =  response['returnObject'];
+              this.userTitleRoleObj = response['returnObject'];
               console.log('B', this.userTitleRoleObj);
 
               if (this.userTitleRoleObj.isActive === '1') { this.isActive = true } else { this.isActive = false }
               //this.userTitleRoleId = this.userTitleRoleObj.userTitleRoleId;
-          },
-          (error) => {
-            console.log('Error Get');
-            console.log(error);
-            this.spinner.hide();
-          }
-        );
+            },
+            (error) => {
+              console.log('Error Get');
+              console.log(error);
+              this.spinner.hide();
+            }
+          );
           this.spinner.hide();
         }
       },
@@ -130,21 +111,31 @@ export class UserRoleDetailComponent implements OnInit {
     );
   }
 
-
   Back(): void {
     this.location.back();
   }
 
+  add(uclRoleObj: any) {
+    var refRoleObj = JSON.parse(uclRoleObj.lookupInput.jsonSelect);
+    if (refRoleObj != null)
+    {
+      this.tempRefRole.push(refRoleObj);
+      this.ucLookupRole.lookupInput.nameSelect = "";
+      this.ucLookupRole.lookupInput.jsonSelect = null;
+    }
+    else
+      this.service.errorMessage("Please select Role First");
+  }
+
   Save(UserRoleDetailForm: NgForm, lookupRole: any): void {
     this.spinner.show();
-    if (this.mode === 'edit')
-    {
-      console.log ('edit');
+    if (this.mode === 'edit') {
+      console.log('edit');
       this.apiUrl = this.foundationUrl + AdInsConstant.EditUserTitleRole;
       //this.userTitleRoleObj.userTitleRoleId = +this.userTitleRoleId;
       this.userTitleRoleObj.empPositionId = +this.empPositionId;
       this.userTitleRoleObj.refRoleId = lookupRole.idSelect;
-      if (UserRoleDetailForm.value.isActive){this.userTitleRoleObj.isActive = '1'} else {this.userTitleRoleObj.isActive = '0'}  ;
+      if (UserRoleDetailForm.value.isActive) { this.userTitleRoleObj.isActive = '1' } else { this.userTitleRoleObj.isActive = '0' };
 
       this.httpClient.post(this.apiUrl, this.userTitleRoleObj).subscribe(
         (response) => {
@@ -161,16 +152,14 @@ export class UserRoleDetailComponent implements OnInit {
           this.spinner.hide();
         }
       );
-
     }
-    else
-    {
+    else {
       console.log("add");
       this.apiUrl = this.foundationUrl + AdInsConstant.AddUserTitleRole;
       this.userTitleRoleObj = new UserTitleRoleObj();
       this.userTitleRoleObj.empPositionId = +this.empPositionId;
       this.userTitleRoleObj.refRoleId = lookupRole.idSelect;
-      if(UserRoleDetailForm.value.isActive){this.userTitleRoleObj.isActive = '1'} else {this.userTitleRoleObj.isActive = '0'} ;
+      if (UserRoleDetailForm.value.isActive) { this.userTitleRoleObj.isActive = '1' } else { this.userTitleRoleObj.isActive = '0' };
 
       this.httpClient.post(this.apiUrl, this.userTitleRoleObj).subscribe(
         (response) => {
@@ -188,7 +177,5 @@ export class UserRoleDetailComponent implements OnInit {
         }
       );
     }
-
   }
-
 }

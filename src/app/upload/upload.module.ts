@@ -6,6 +6,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HttpModule } from "@angular/http";
 import { CommonModule } from "@angular/common";
 import { UploadRoutingModule } from "./upload-routing.module";
+import { UploadSettingPagingComponent } from './upload-setting/upload-setting/upload-setting-paging.component';
+import { UploadSettingEditComponent } from './upload-setting/upload-setting-edit/upload-setting-edit.component';
 
 @NgModule({
     imports: [
@@ -18,7 +20,9 @@ import { UploadRoutingModule } from "./upload-routing.module";
         UploadRoutingModule
     ],
     declarations: [
-        UploadMonitoringComponent
+        UploadMonitoringComponent,
+        UploadSettingPagingComponent,
+        UploadSettingEditComponent
     ],
 
 })
