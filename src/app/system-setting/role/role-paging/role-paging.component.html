@@ -4,9 +4,8 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='roleCode'>Role Code</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='roleName'>Role
-            Name</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='roleCode'>Role Code</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='roleName'>Role Name</span></th>
         <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active</span></th>
         <th translate>Users</th>
         <th translate>Forms</th>
@@ -16,8 +15,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.data">
-        <td>{{item.roleCode}}</td>
-        <td align="left">{{item.roleName}}</td>
+        <td class="text-left">{{item.roleCode}}</td>
+        <td class="text-left">{{item.roleName}}</td>
         <td>
           <span *ngIf="item.isActive == '1'">Yes</span>
           <span *ngIf="item.isActive == '0'">No</span>

@@ -41,10 +41,10 @@
         <thead>
           <tr class="table-header">
             <th translate>Select</th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode2'>Kelurahan</span></th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode1'>Kecamatan</span></th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='city'>City</span></th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='zipzode'>Zipcode</span></th>
+            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='areaCode2'>Kelurahan</span></th>
+            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='areaCode1'>Kecamatan</span></th>
+            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='city'>City</span></th>
+            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='zipzode'>Zipcode</span></th>
           </tr>
         </thead>
         <tbody>
@@ -52,10 +52,10 @@
             <td>
               <input type="checkbox" (change)="Checked(item.refZipcodeId, $event.target.checked, item.zipcodeNumber)">
             </td>
-            <td>{{item.areaCode2}}</td>
+            <td class="text-left">{{item.areaCode2}}</td>
             <td class="text-left">{{item.areaCode1}}</td>
-            <td>{{item.city}}</td>
-            <td>{{item.zipcode}}</td>
+            <td class="text-left">{{item.city}}</td>
+            <td class="text-left">{{item.zipcode}}</td>
           </tr>
         </tbody>
       </table>

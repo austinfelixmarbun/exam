@@ -4,8 +4,8 @@
     <table class="table table-responsive-md text-center table-hover">
         <thead>
             <tr class="table-header">
-                <th><span translate class="thead-header" (click)="searchSort($event)" name='empNo'>Employee No</span></th>
-                <th><span translate class="thead-header" (click)="searchSort($event)" name='empName'>Employee Name</span></th>
+                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='empNo'>Employee No</span></th>
+                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='empName'>Employee Name</span></th>
                 <th><span translate class="thead-header" (click)="searchSort($event)" name='startDt'>Start Date</span></th>
                 <th><span translate class="thead-header" (click)="searchSort($event)" name='endDt'>End Date</span></th>
                 <th><span translate class="thead-header" (click)="searchSort($event)" name='isPassed'>Is Passed</span></th>
@@ -14,10 +14,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of resultData?.data">
-                <td>{{item.empNo}}</td>
+                <td class="text-left">{{item.empNo}}</td>
                 <td class="text-left">{{item.empName}}</td>
-                <td class="text-center">{{item.startDt | date : "yyyy-MM-dd" }}</td>
-                <td class="text-center">{{item.endDt | date : "yyyy-MM-dd"}}</td>
+                <td>{{item.startDt | date : "dd MMM yyyy" }}</td>
+                <td>{{item.endDt | date : "dd MMM yyyy"}}</td>
                 <td>
                   <span *ngIf="item.isPassed == '1'">Yes</span>
                   <span *ngIf="item.isPassed == '0'">No</span>

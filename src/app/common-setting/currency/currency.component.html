@@ -4,8 +4,8 @@
 <table class="table table-responsive-md text-center table-hover">
     <thead>
         <tr class="table-header">
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='currCode'>Currency Code</span></th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='currName'>Currency</span></th>
+            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='currCode'>Currency Code</span></th>
+            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='currName'>Currency</span></th>
             <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active</span></th>
             <th>Exchange Rate</th>
             <th>Edit</th>
@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of resultData?.data">
-            <td>{{item.currCode}}</td>
+            <td class="text-left">{{item.currCode}}</td>
             <td class="text-left">{{item.currName}}</td>
             <td>
               <span *ngIf="item.isActive == '1'">Yes</span>

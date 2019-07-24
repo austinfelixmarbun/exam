@@ -26,11 +26,11 @@
                     <thead>
                       <tr class="table-header">
                         <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll" name="CheckAll"></th>
-                        <th><span translate class="thead-header" (click)="searchSort($event)" name='formCode'>Form Code
+                        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='formCode'>Form Code
                           </span></th>
-                        <th><span translate class="thead-header" (click)="searchSort($event)" name='title'>Title
+                        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='title'>Title
                           </span></th>
-                        <th><span translate class="thead-header" (click)="searchSort($event)" name='path'>Path</span>
+                        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='path'>Path</span>
                         </th>
                         <th translate>Form Feature</th>
                       </tr>
@@ -47,7 +47,7 @@
                               (change)="Checked(item.refFormId,  $event.target.checked)" [checked]=false>
                           </div>
                         </td>
-                        <td>{{item.formCode}}</td>
+                        <td class="text-left">{{item.formCode}}</td>
                         <td class="text-left">{{item.title}}</td>
                         <td class="text-left">{{item.path}}</td>
                         <td>

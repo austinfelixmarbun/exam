@@ -4,10 +4,10 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='hierarchyNo'>Hierarchy No</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)"
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='hierarchyNo'>Hierarchy No</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
             name='orgName'>Organization Name</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)"
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
             name='parentRefOrgName'>Parent Organization</span></th>
         <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active Status</span></th>
         <th translate>Models</th>
@@ -16,7 +16,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.data">
-        <td>{{item.hierarchyNo}}</td>
+        <td class="text-left">{{item.hierarchyNo}}</td>
         <td class="text-left">{{item.orgName}}</td>
         <td class="text-left">{{item.parentRefOrgName}}</td>
         <td>

@@ -4,19 +4,16 @@
     <table class="table table-responsive-md text-center table-hover">
         <thead>
             <tr class="table-header">
-                <th><span translate class="thead-header" (click)="searchSort($event)"
-                        name='bizUnitCode'>Business Unit Code</span></th>
-                <th><span translate class="thead-header" (click)="searchSort($event)"
-                        name='bizUnitName'>Business Unit Name</span></th>
-                <th><span translate class="thead-header" (click)="searchSort($event)"
-                        name='isActive'>Active Status</span></th>
+                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='bizUnitCode'>Business Unit Code</span></th>
+                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='bizUnitName'>Business Unit Name</span></th>
+                <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active Status</span></th>
                 <th translate>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of resultData?.data">
-                <td>{{item.bizUnitCode}}</td>
-                <td>{{item.bizUnitName}}</td>
+                <td class="text-left">{{item.bizUnitCode}}</td>
+                <td class="text-left">{{item.bizUnitName}}</td>
                 <td>
                   <span *ngIf="item.isActive == '1'">Yes</span>
                   <span *ngIf="item.isActive == '0'">No</span>

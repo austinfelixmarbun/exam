@@ -4,22 +4,17 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th><span class="thead-header" (click)="searchSort($event)"
-            name='refMasterTypeCode'>Master
-            Type Code</span></th>
-        <th><span class="thead-header" (click)="searchSort($event)"
-            name='descr'>Description</span></th>
-        <th><span class="thead-header" (click)="searchSort($event)" name='isSandiBi'>Sandi
-            BI</span></th>
-        <th><span class="thead-header" (click)="searchSort($event)"
-            name='isActive'>Active</span></th>
+        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='refMasterTypeCode'>Master Type Code</span></th>
+        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='descr'>Description</span></th>
+        <th><span class="thead-header" (click)="searchSort($event)" name='isSandiBi'>Sandi BI</span></th>
+        <th><span class="thead-header" (click)="searchSort($event)" name='isActive'>Active</span></th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.data">
-        <td>{{item.refMasterTypeCode}}</td>
-        <td align="left">{{item.descr}}</td>
+        <td class="text-left">{{item.refMasterTypeCode}}</td>
+        <td class="text-left">{{item.descr}}</td>
         <td>
           <span *ngIf="item.isSandiBi == '1'">Yes</span>
           <span *ngIf="item.isSandiBi == '0'">No</span>

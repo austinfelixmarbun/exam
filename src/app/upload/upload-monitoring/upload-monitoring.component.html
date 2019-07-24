@@ -4,32 +4,25 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='uploadTypeName'>Upload Type
-            Name</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='uploadMonitoringNo'>Upload No</span>
-        </th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='fileName'>File Name</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='totalRecord'>Total Record</span>
-        </th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='totalRecordProcessed'>Total Record
-            Processed</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='totalRecordError'>Total Record
-            Error</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='mrUploadStatus'>Upload Status</span>
-        </th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='errorMessage'>Error Message</span>
-        </th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='uploadTypeName'>Upload Type Name</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='uploadMonitoringNo'>Upload No</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='fileName'>File Name</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='totalRecord'>Total Record</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='totalRecordProcessed'>Total Record Processed</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='totalRecordError'>Total Record Error</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='mrUploadStatus'>Upload Status</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='errorMessage'>Error Message</span></th>
         <th translate>Download</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.data">
         <td class="text-left">{{item.uploadTypeName}}</td>
-        <td class="text-center">{{item.uploadMonitoringNo}}</td>
+        <td class="text-left">{{item.uploadMonitoringNo}}</td>
         <td class="text-left">{{item.fileName}}</td>
-        <td class="text-right">{{item.totalRecord}}</td>
-        <td class="text-right">{{item.totalRecordProcessed}}</td>
-        <td class="text-right">{{item.totalRecordError}}</td>
+        <td class="text-left">{{item.totalRecord}}</td>
+        <td class="text-left">{{item.totalRecordProcessed}}</td>
+        <td class="text-left">{{item.totalRecordError}}</td>
         <td class="text-left">{{item.mrUploadStatus}}</td>
         <td class="text-left">{{item.errorMessage}}</td>
         <td>

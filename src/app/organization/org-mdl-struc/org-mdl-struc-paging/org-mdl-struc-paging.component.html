@@ -20,11 +20,9 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='orgMdlLvl'>Level</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)"
-            name='bizUnitName'>Business Unit Name</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='parentName'>Business
-            Unit Parent Name</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='orgMdlLvl'>Level</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='bizUnitName'>Business Unit Name</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='parentName'>Business Unit Parent Name</span></th>
         <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active</span></th>
         <th translate>Org Job Title</th>
         <th translate>Action</th>
@@ -32,7 +30,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.data">
-        <td>{{item.orgMdlLvl}}</td>
+        <td class="text-left">{{item.orgMdlLvl}}</td>
         <td class="text-left">{{item.bizUnitName}}</td>
         <td class="text-left">{{item.parentName}}</td>
         <td>
