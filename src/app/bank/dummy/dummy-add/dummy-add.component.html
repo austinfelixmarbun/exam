@@ -9,7 +9,7 @@
             <div class="form-group row">
               <label class="col-md-3 label-control adInsLabel" for="dummyCode">Dummy Code </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="dummyCode" [(ngModel)]="dummyCode"
+                <input type="text" class="form-control adInsInput width-50-per" name="dummyCode" [(ngModel)]="dummyCode"
                 #DummyCode="ngModel" [ngClass]="{ 'is-invalid': dummyForm.submitted && DummyCode.invalid }" [required]="formSet != null && formSet.dummyCode.required">
                 <div *ngIf="dummyForm.submitted && DummyCode.invalid" class="invalid-feedback">
                   <div *ngIf="DummyCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
@@ -19,7 +19,7 @@
             <div class="form-group row">
               <label class="col-md-3 label-control adInsLabel" for="dummyName">Dummy Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="dummyName" [(ngModel)]="dummyName"
+                <input type="text" class="form-control adInsInput width-50-per" name="dummyName" [(ngModel)]="dummyName"
                 #DummyName="ngModel" [ngClass]="{ 'is-invalid': dummyForm.submitted && DummyName.invalid }" required>
                 <div *ngIf="dummyForm.submitted && DummyName.invalid" class="invalid-feedback">
                   <div *ngIf="DummyName.errors.required" class="adInsReqMsg" translate>This field is required</div>
@@ -29,7 +29,7 @@
             <div class="form-group row">
               <label class="col-md-3 label-control adInsLabel" for="descr">Description </label>
               <div class="col-md-9">
-                <textarea rows="5" class="form-control adInsInput" name="descr" [(ngModel)]="descr"
+                <textarea rows="5" class="form-control adInsInput width-50-per" name="descr" [(ngModel)]="descr"
                 #Descr="ngModel"></textarea>
               </div>
             </div>

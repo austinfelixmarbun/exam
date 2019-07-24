@@ -45,7 +45,8 @@
               "node_modules/font-awesome/css/font-awesome.min.css",
               "src/assets/css/demo.css",
               "src/assets/sass/app.scss",
-              "src/styles.css"
+              "src/styles.css",
+              "src/adInsStyles.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -125,7 +126,8 @@
               "node_modules/font-awesome/css/font-awesome.min.css",
               "src/assets/css/demo.css",
               "src/assets/sass/app.scss",
-              "src/styles.css"
+              "src/styles.css",
+              "src/adInsStyles.css"
             ],
             "assets": [
               "src/assets",

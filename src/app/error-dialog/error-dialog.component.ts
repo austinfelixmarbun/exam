@@ -14,9 +14,10 @@ export class ErrorDialogComponent implements OnInit, AfterViewInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: string, private toastr: NGXToastrService) {}
 
   ngOnInit() {
+    
   }
 
   ngAfterViewInit() {
-    // setTimeout(() => this.toastr.errorAPI(this.data['status'],this.data['reason']));
+    setTimeout(() => this.toastr.errorAPI(this.data['status'],this.data['reason']));
   }
 }
