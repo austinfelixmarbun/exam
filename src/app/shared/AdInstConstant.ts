@@ -134,6 +134,7 @@ export class AdInsConstant {
     public static EditRefRole = "/UserManagement/EditRefRole";
     public static DeleteRefRole = "/UserManagement/DeleteRefRole";
     public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
+    public static GetActiveRefRoleByRefRoleId = "/RefRole/GetActiveRefRoleByRefRoleId";
     public static GetRefRole = "/RefRole/GetRefRole";
     public static GetListDataCurrentUser = "/UserManagement/GetListDataCurrentUser";
     public static GetRefRoleByEmpPositionId = "/RefRole/GetRefRoleByEmpPositionId";
@@ -274,4 +275,7 @@ export class AdInsConstant {
 
     //UPLOAD MONITORING FOUNDATION
     public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging"
+
+    //UPLOAD TYPE
+    public static GetUploadTypePaging = "/UploadType/GetUploadTypePaging"
 }

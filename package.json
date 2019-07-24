@@ -23,6 +23,7 @@
     "@adins/lookuprefjobtitle": "^1.0.5",
     "@adins/lookuprole": "^1.0.5",
     "@adins/lookupzipcode": "^1.0.5",
+    "@adins/uc-subsection": "^1.0.1",
     "@adins/ucgridfooter": "^1.0.1",
     "@adins/ucsearch": "^1.0.8",
     "@agm/core": "1.0.0-beta.5",
