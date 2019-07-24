@@ -4,9 +4,8 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='uploadTypeName'>Upload Type
-            Name</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='uploadMonitoringNo'>Upload No</span>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='uploadMonitoringNo'>Upload No</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='uploadTypeName'>Upload Type Name</span>
         </th>
         <th><span translate class="thead-header" (click)="searchSort($event)" name='fileName'>File Name</span></th>
         <th><span translate class="thead-header" (click)="searchSort($event)" name='totalRecord'>Total Record</span>
@@ -24,8 +23,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.data">
-        <td class="text-left">{{item.uploadTypeName}}</td>
-        <td class="text-center">{{item.uploadMonitoringNo}}</td>
+        <td class="text-left">{{item.uploadMonitoringNo}}</td>
+        <td class="text-center">{{item.uploadTypeName}}</td>
         <td class="text-left">{{item.fileName}}</td>
         <td class="text-right">{{item.totalRecord}}</td>
         <td class="text-right">{{item.totalRecordProcessed}}</td>
