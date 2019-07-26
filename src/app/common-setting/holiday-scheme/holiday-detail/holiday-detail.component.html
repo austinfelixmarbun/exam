@@ -63,17 +63,16 @@
     <table class="table table-responsive-md text-center table-hover">
       <thead>
         <tr class="table-header">
-          <th><span translate class="thead-header" (click)="searchSort($event)" name='holidayDt'>Date</span></th>
-          <th><span translate class="thead-header" (click)="searchSort($event)" name='Descr'>Description</span></th>
-          <th><span translate class="thead-header" (click)="searchSort($event)" name='isPublicHoliday' translate>Public
-              Holiday</span></th>
+          <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='holidayDt'>Date</span></th>
+          <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='Descr'>Description</span></th>
+          <th><span translate class="thead-header" (click)="searchSort($event)" name='isPublicHoliday'>Public Holiday</span></th>
           <th translate>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of resultDataSearch?.data">
-          <td>{{item.holidayDt | date: 'dd-MMM-yyyy'}}</td>
-          <td>{{item.descr}}</td>
+          <td class="text-left">{{item.holidayDt | date: 'dd-MMM-yyyy'}}</td>
+          <td class="text-left">{{item.descr}}</td>
           <td>
             <span *ngIf="item.isPublicHoliday == '1'">Yes</span>
             <span *ngIf="item.isPublicHoliday == '0'">No</span>

@@ -19,9 +19,9 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='orgMdlCode'>Module Code</span>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='orgMdlCode'>Module Code</span>
         </th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='orgMdlName'>Module
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='orgMdlName'>Module
             Name</span></th>
         <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active</span></th>
         <th translate>Structure</th>
@@ -30,7 +30,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.data">
-        <td>{{item.orgMdlCode}}</td>
+        <td class="text-left">{{item.orgMdlCode}}</td>
         <td class="text-left">{{item.orgMdlName}}</td>
         <td>
           <span *ngIf="item.isActive == '1'">Yes</span>

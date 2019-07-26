@@ -4,15 +4,15 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode'>Area Code</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='areaName'>Area Name</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='areaCode'>Area Code</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='areaName'>Area Name</span></th>
         <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active</span></th>
         <th translate>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.data">
-        <td>{{item.areaCode}}</td>
+        <td class="text-left">{{item.areaCode}}</td>
         <td class="text-left">{{item.areaName}}</td>
         <td>
           <span *ngIf="item.isActive == '1'">Yes</span>

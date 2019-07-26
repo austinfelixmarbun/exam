@@ -3,15 +3,15 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='officeCode'>Office Code</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='officeName'>Office Name</span></th>
-        <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'># Of Zipcode Included</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='officeCode'>Office Code</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='officeName'>Office Name</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='numOfZipcode'># Of Zipcode Included</span></th>
         <th translate>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of resultData?.data">
-        <td>{{item.officeCode}}</td>
+        <td class="text-left">{{item.officeCode}}</td>
         <td class="text-left">{{item.officeName}}</td>
         <td>{{item.numOfZipcode}}</td>
         <td>

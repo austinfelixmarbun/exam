@@ -5,7 +5,8 @@
 
 export const environment = {
   production: false,
-  foundationUrl: 'https://localhost:5000',//'http://r3app-server/foundation'//, 'https://localhost:5000',
+  navbarColor:'tan',
+  foundationUrl: 'http://r3app-server/foundation', //'https://localhost:5000', //
   settingUrl: 'http://r3app-server/setting',//'https://localhost:4999',
   localHostUrl: 'http://R2AppServer/CONFINS',
   r2AppServerUrl:'http://R2AppServer/POC/api',

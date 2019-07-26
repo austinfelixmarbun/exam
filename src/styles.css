@@ -149,7 +149,11 @@ thead tr th {
 }
 
 select.form-control{
-    width: unset !important;
+    width: unset;
+}
+
+select.form-control.search-form-control{
+    width: 100%;
 }
 
 .custom-radio, input[type="checkbox"].border-primary{

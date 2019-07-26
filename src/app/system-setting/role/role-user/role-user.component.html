@@ -27,24 +27,13 @@
                     <thead>
                       <tr class="table-header">
                         <th>Action</th>
-                        <th><span translate class="thead-header" (click)="searchSort($event)" name='officeCode'>OfficeCode
-                          </span></th>
-                        <th><span translate class="thead-header" (click)="searchSort($event)"
-                            name='officeName'>Office Name
-                          </span></th>
-                        <th><span translate class="thead-header" (click)="searchSort($event)"
-                            name='bizUnitName'>Business Unit
-                            Name</span></th>
-                        <th><span translate class="thead-header" (click)="searchSort($event)"
-                            name='jobTitleName'>Job Title Name</span>
-                        </th>
-                        <th><span translate class="thead-header" (click)="searchSort($event)" name='employeeNo'>Employee No</span>
-                        </th>
-                        <th><span translate class="thead-header" (click)="searchSort($event)"
-                            name='employeeName'>Employee Name</span>
-                        </th>
-                        <th><span translate class="thead-header" (click)="searchSort($event)" name='username'>User Name</span>
-                        </th>
+                        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='officeCode'>OfficeCode </span></th>
+                        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='officeName'>Office Name </span></th>
+                        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='bizUnitName'>Business Unit Name</span></th>
+                        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='jobTitleName'>Job Title Name</span></th>
+                        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='employeeNo'>Employee No</span></th>
+                        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='employeeName'>Employee Name</span></th>
+                        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='username'>User Name</span></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -65,13 +54,13 @@
                               (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
                           </div>
                         </td>
-                        <td>{{item.officeCode}}</td>
-                        <td align="left">{{item.officeName}}</td>
-                        <td align="left">{{item.bizUnitName}}</td>
-                        <td align="left">{{item.jobTitleName}}</td>
-                        <td>{{item.employeeNo}}</td>
-                        <td align="left">{{item.employeeName}}</td>
-                        <td>{{item.username}}</td>
+                        <td class="text-left">{{item.officeCode}}</td>
+                        <td class="text-left">{{item.officeName}}</td>
+                        <td class="text-left">{{item.bizUnitName}}</td>
+                        <td class="text-left">{{item.jobTitleName}}</td>
+                        <td class="text-left">{{item.employeeNo}}</td>
+                        <td class="text-left">{{item.employeeName}}</td>
+                        <td class="text-left">{{item.username}}</td>
 
                       </tr>
                     </tbody>

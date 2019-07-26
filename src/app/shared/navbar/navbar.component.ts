@@ -27,6 +27,7 @@ export class NavbarComponent implements AfterViewChecked {
     public isCollapsed = true;
     token : string;
     userAccess : any;
+    backgroundColor = environment.navbarColor;
 
     constructor(public translate: TranslateService,
         private router: Router,
