@@ -41,6 +41,10 @@ export class OfficeEmpPosComponent implements OnInit {
   orderByValue: boolean = true;
   arrCrit: any;
 
+  refEmpId: any;
+  empNo: any;
+  empName: any;
+
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetEmpPositionPaging;
     this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteEmpPosition;

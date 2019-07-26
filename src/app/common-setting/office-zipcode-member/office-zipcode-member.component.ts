@@ -16,13 +16,13 @@ export class OfficeZipcodeMemberComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
   //** End UC Search **//
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
   apiUrl: any;
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
 

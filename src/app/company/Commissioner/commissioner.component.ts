@@ -22,8 +22,8 @@ export class CommissionerComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  urlJson: string = "./assets/search/searchCommissioner.json";
-  resultData: string;
+  urlJson: any = "./assets/search/searchCommissioner.json";
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -32,7 +32,7 @@ export class CommissionerComponent implements OnInit {
   orderByValue: boolean = true;
   editUrl: any;
   commissionerObj: CoyCommissionerObj;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
   refCoyId: any;
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {

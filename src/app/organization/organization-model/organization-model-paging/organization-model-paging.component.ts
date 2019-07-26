@@ -23,7 +23,7 @@ export class OrganizationModelPagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -37,7 +37,7 @@ export class OrganizationModelPagingComponent implements OnInit {
   orgObj: OrganizationObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
   addCrit: CriteriaObj[];
 
   constructor(private route: ActivatedRoute, private service: NGXToastrService, private https: HttpClient, private location: Location) {

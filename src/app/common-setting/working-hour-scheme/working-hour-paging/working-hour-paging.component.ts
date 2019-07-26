@@ -20,7 +20,7 @@ export class WorkingHourPagingComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild(UCSearchComponent) searchComponent;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
@@ -29,7 +29,7 @@ export class WorkingHourPagingComponent implements OnInit {
   workingHourSchmHObj: WorkingHourSchmHObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
   
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 

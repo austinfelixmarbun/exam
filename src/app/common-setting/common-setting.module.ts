@@ -9,7 +9,6 @@ import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/fo
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/lookup-employee.component';
 import { GeneralSettingAddEditComponent } from 'app/common-setting/general-setting/general-setting-add-edit/general-setting-add-edit.component';
 import { GeneralSettingPagingComponent } from 'app/common-setting/general-setting/general-setting-paging/general-setting-paging.component';
 import { CurrencyComponent } from 'app/common-setting/currency/currency.component';
@@ -22,6 +21,7 @@ import { HolidayDetailAddComponent } from './holiday-scheme/holiday-detail-add/h
 import { OfficeZipcodeMemberComponent } from './office-zipcode-member/office-zipcode-member.component';
 import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-zipcode-member-add/office-zipcode-member-add.component';
 import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/office-zipcode-member-paging/office-zipcode-member-paging.component';
+import { LookupemployeeComponent } from '@adins/lookupemployee';
 
 @NgModule({
   imports: [
@@ -54,7 +54,7 @@ import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/offi
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => LookupEmployeeComponent),
+      useExisting: forwardRef(() => LookupemployeeComponent),
       multi: true
     }
   ]

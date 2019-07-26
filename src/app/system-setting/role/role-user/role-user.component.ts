@@ -23,7 +23,7 @@ export class RoleUserComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -35,7 +35,7 @@ export class RoleUserComponent implements OnInit {
   refRoleObj: RefRoleObj = new RefRoleObj();
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
 
   refRoleId: any;
   check: any;

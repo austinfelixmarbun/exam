@@ -11,7 +11,6 @@ import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucC
 import { UcInfoComponent } from './UserControl/uc-info/uc-info.component';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
-import { FormEngineComponent } from './form-engine/form-engine.component';
 import { FormEngineModule } from '@adins/form-engine';
 import { LookupparentformModule } from '@adins/lookupparentform';
 import { LookupemployeeModule } from '@adins/lookupemployee';
@@ -23,12 +22,9 @@ import { LookuprefbankModule } from '@adins/lookuprefbank';
 import { LookuprefjobtitleModule } from '@adins/lookuprefjobtitle';
 import { LookuporgjobtitleModule } from '@adins/lookuporgjobtitle';
 import { LookupbizunitModule } from '@adins/lookupbizunit';
-import { LookupRefBankComponent } from './lookup/lookup-ref-bank/lookup-ref-bank.component';
-import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-supervisor.component';
-import { LookupDistrictComponent }from './lookup/lookup-district/lookup-district.component';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { UcSubsectionModule } from '@adins/uc-subsection';
-import { LookupzipcodeComponent } from './lookup/lookupzipcode/lookupzipcode.component';
+import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-supervisor.component';
 
 @NgModule({
     exports: [
@@ -41,7 +37,6 @@ import { LookupzipcodeComponent } from './lookup/lookupzipcode/lookupzipcode.com
         LookuproleModule,
         LookupdistrictModule,
         LookupparentformModule,
-        FormEngineComponent,
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
@@ -54,12 +49,9 @@ import { LookupzipcodeComponent } from './lookup/lookupzipcode/lookupzipcode.com
         UCSearchModule,
         UcgridfooterModule,
         FormEngineModule,
-        LookupRefBankComponent,
         LookupSupervisorComponent,
-        LookupDistrictComponent,
         AngularFileUploaderModule,
         UcSubsectionModule,
-        LookupzipcodeComponent,
         AngularFileUploaderModule
     ],
     imports: [
@@ -76,14 +68,10 @@ import { LookupzipcodeComponent } from './lookup/lookupzipcode/lookupzipcode.com
     declarations: [
         SearchComponent,
         UcAddressComponent,
-        FormEngineComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
         UcInfoComponent,
-        LookupRefBankComponent,
         LookupSupervisorComponent,
-        LookupDistrictComponent,
-        LookupzipcodeComponent
     ]
 })
 

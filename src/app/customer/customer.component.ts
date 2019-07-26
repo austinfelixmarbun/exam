@@ -17,16 +17,20 @@ import { WizardComponent } from 'angular-archwizard';
 })
 export class CustomerComponent implements OnInit {
 
-  type: string = "add";
+  type: any = "add";
   CustType = 'P';
   MrCustRating = 'INDETERMINED';
-  custPersonalNo: string = "";
+  custPersonalNo: any = "";
   newCustPersonalNo: any;
   custObj: CustPersonalObj;
   submitProsUrl: any;
-  localHostUrl: string = environment.localHostUrl;
+  localHostUrl: any = environment.localHostUrl;
   requestObject: any;
-  repeaters: string[] =["","",""];
+  repeaters: any[] =["","",""];
+  CustName: any;
+  Npwp: any;
+  IdNo: any;
+
 
   constructor(private router: Router, private spinner: NgxSpinnerService, 
     private httpClient: HttpClient, private toastr: NGXToastrService,

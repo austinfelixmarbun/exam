@@ -23,7 +23,7 @@ export class EmployeeComponent implements OnInit {
   inputObj : any;
   //** End Query Paging */
 
-  resultData: string;
+  resultData: any;
   ExcelData: any;
   empObj: RefEmpObj;
   pageNow: any;
@@ -35,7 +35,7 @@ export class EmployeeComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {

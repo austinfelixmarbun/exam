@@ -20,21 +20,22 @@ export class UploadSettingPagingComponent implements OnInit {
   //** Start Query Paging */
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
-  urlQryPaging: string;
-  urlEnviPaging: string;
+  urlQryPaging: any;
+  urlEnviPaging: any;
   //** End Query Paging */
 
-  urlJson: string;
-  resultData: string;
+  urlJson: any;
+  resultData: any;
   verficationObj: any;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
+  pageType: any;
   apiUrl: any;
   deleteUrl: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: string = environment.foundationUrl
+  foundationUrl: any = environment.foundationUrl
   inputObj: any;
   verfTrxTypeId: any;
   exportData: any;

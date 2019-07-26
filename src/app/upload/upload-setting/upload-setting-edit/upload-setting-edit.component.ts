@@ -32,6 +32,14 @@ export class UploadSettingEditComponent implements OnInit {
   jsonSelect: any;
   isActive: any;
   mode: any;
+  orderByKey: any = null;
+  orderByValue: boolean = true;
+  pageNow: any;
+  pageSize: any;
+  pageType: any;
+  uploadTypeCode: any;
+  uploadTypeName: any;
+  uploadSettingSomethingAddEdit: any;
 
   userTitleRoleObj: any;
   empPositionId: any;
@@ -45,6 +53,8 @@ export class UploadSettingEditComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit() {
+    this.pageNow = 1;
+    this.pageSize = 10;
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefRolePaging;
@@ -178,4 +188,23 @@ export class UploadSettingEditComponent implements OnInit {
       );
     }
   }
+  
+  searchSort(event: any) {
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
+    }
+    this.orderByKey = event.target.attributes.name.nodeValue
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+  }
+
+  SaveForm(){
+
+  }
+
 }

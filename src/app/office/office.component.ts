@@ -21,7 +21,7 @@ export class OfficeComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild(UCSearchComponent) searchComponent;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
@@ -32,7 +32,7 @@ export class OfficeComponent implements OnInit {
   orderByValue: boolean = true;
   displayNone: boolean = false;
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
 
   constructor(private httpClient: HttpClient, private toastr: NGXToastrService) {
   }

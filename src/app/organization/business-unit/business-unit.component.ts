@@ -21,7 +21,7 @@ export class BusinessUnitComponent implements OnInit {
   inputObj: any;
   //** End Query Paging */
 
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -29,7 +29,7 @@ export class BusinessUnitComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
 
   constructor(private service: NGXToastrService) { }
 

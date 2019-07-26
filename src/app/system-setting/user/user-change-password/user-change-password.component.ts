@@ -24,6 +24,9 @@ export class UserChangePasswordComponent implements OnInit {
   Password: any;
   RePassword: any;
   RefUserId: any;
+  NewPassword: any;
+  NewRePassword: any;
+
 
   constructor(
     private router: Router,
@@ -65,7 +68,7 @@ export class UserChangePasswordComponent implements OnInit {
     this.location.back();
   }
 
-  Save(UserAddEditForm: NgForm, lookupEmp: any): void {
+  Save(UserAddEditForm: NgForm): void {
     this.spinner.show();
     console.log(UserAddEditForm.value);
     if (

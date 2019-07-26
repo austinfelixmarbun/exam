@@ -16,16 +16,21 @@ import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 })
 export class MasterTypeAddEditComponent implements OnInit {
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
   apiUrl: any;
-  parents: string;
+  parents: any;
   refRoleObj: RefRoleObj;
-  type: string = 'Add';
+  type: any = 'Add';
   roleCodeModel: any;
   roleNameModel: any;
   isActive: any;
   refRoleId: any;
   resultData: any;
+  masterType: any;
+  masterTypeCodeModel: any;
+  descrModel: any;
+  sandiBiModel: any;
+  
 
   constructor(private route: ActivatedRoute, private location: Location, private spinner: NgxSpinnerService, private httpClient: HttpClient, private service: NGXToastrService) {
     this.route.queryParams.subscribe(params => {

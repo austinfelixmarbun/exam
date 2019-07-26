@@ -18,7 +18,7 @@ export class CurrencyComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild(UCSearchComponent) searchComponent;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
@@ -27,7 +27,7 @@ export class CurrencyComponent implements OnInit {
   currObj: CurrObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  settingUrl: string = environment.settingUrl;
+  settingUrl: any = environment.settingUrl;
   
   constructor() { }
 

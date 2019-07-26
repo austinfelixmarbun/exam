@@ -5,9 +5,9 @@ import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/fo
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/lookup-employee.component';
 import { ZipcodeRoutingComponent } from 'app/zipcode/zipcode-routing.module';
 import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+import { LookupemployeeComponent } from '@adins/lookupemployee';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => LookupEmployeeComponent),
+      useExisting: forwardRef(() => LookupemployeeComponent),
       multi: true
     }
   ]

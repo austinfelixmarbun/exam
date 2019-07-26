@@ -38,7 +38,7 @@ export class RoleFormTreeComponent implements OnInit {
   check: any;
   menu: any;
   formFeature: any;
-  refRoleObj: AuthFormObj = new AuthFormObj();
+  refRoleObj: any;
   listSelectedId: any[] = [];
   listDeletedId: any[] = [];
   listMenu: any[] = [];
@@ -109,7 +109,6 @@ export class RoleFormTreeComponent implements OnInit {
     var urlGetRefRole: any =
       this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
     var getAuthFormUrl: any = this.foundationUrl + AdInsConstant.GetAllAuthFormsByRefRoleId;
-    this.refRoleObj = new AuthFormObj();
     this.refRoleObj.refRoleId = this.refRoleId;
     console.log(urlGetRefRole);
     this.httpClient.post(urlGetRefRole, this.refRoleObj).subscribe(
