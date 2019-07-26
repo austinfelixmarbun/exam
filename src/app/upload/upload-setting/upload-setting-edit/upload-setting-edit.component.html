@@ -55,17 +55,18 @@
                     <i class="fa fa-check-square-o"></i> Add
                   </button>
                 </div>
+                <!-- <div *ngIf="uclRole.errors.required" translate>This field is required</div> -->
               </div>
             </div>
 
             <table class="table table-responsive-md text-center table-hover">
               <thead>
                 <tr class="table-header">
-                  <th><span class="thead-header" (click)="searchSort($event)" name='VerfTrxTypeCode'
-                      translate>Transaction Type Code</span>
+                  <th><span class="thead-header" (click)="searchSort($event)" name='roleCode'
+                      translate>Role Code</span>
                   </th>
-                  <th><span class="thead-header" (click)="searchSort($event)" name='VerfTrxTypeName'
-                      translate>Transaction Type Name</span>
+                  <th><span class="thead-header" (click)="searchSort($event)" name='roleName'
+                      translate>Role Name</span>
                   </th>
                   <th><span class="thead-header" (click)="searchSort($event)" name='IsActive' translate>Active
                       Status</span></th>
@@ -79,7 +80,7 @@
                   <td *ngIf="item.isActive === '1'">Yes</td>
                   <td *ngIf="item.isActive === '0'">No</td>
                   <td>
-                    <a class="danger p-0" data-original-title="" title="" (click)="delete(item.verfTrxTypeId)">
+                    <a class="danger p-0" data-original-title="" title="" (click)="delete(item.refRoleId)">
                       <i class="ft-trash-2 font-medium-3 mr-2"></i>
                     </a>
                   </td>
