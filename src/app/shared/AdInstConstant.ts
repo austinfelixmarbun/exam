@@ -277,5 +277,13 @@ export class AdInsConstant {
     public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging"
 
     //UPLOAD TYPE
+    public static GetUploadTypeByUploadTypeId = "/UploadType/GetUploadTypeByUploadTypeId"
     public static GetUploadTypePaging = "/UploadType/GetUploadTypePaging"
+
+    //UPLOAD SETTING
+    public static GetUploadSettingHIdByUploadTypeId = "/UploadSetting/GetUploadSettingHIdByUploadTypeId"
+    public static GetListUploadSettingDIdByUploadSettingHId = "/UploadSetting/GetListUploadSettingDIdByUploadSettingHId"
+    public static GetListUploadSettingDIdByUploadTypeId = "/UploadSetting/GetListUploadSettingDIdByUploadTypeId"
+    public static AssignRoleToUploadSetting = "/UploadSetting/AssignRoleToUploadSetting"
+    public static GetListRefRoleByUploadTypeId = "/UploadSetting/GetListRefRoleByUploadTypeId"
 }
