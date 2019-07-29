@@ -7,11 +7,6 @@ import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BankAddComponent } from 'app/bank/add/add-bank.component';
-import { DummyComponent } from './dummy/dummy.component';
-import { DummyAddComponent } from './dummy/dummy-add/dummy-add.component';
-import { Dummy2Component } from './dummy2/dummy2.component';
-import { Dummy3Component } from './dummy3/dummy3.component';
-
 @NgModule({
   imports: [
     BankRoutingComponent,
@@ -19,15 +14,11 @@ import { Dummy3Component } from './dummy3/dummy3.component';
     FormsModule,
     HttpModule,
     NgbModule,
-    SharingModule
+    SharingModule,
   ],
   declarations: [
     BankComponent,
-    BankAddComponent,
-    DummyComponent,
-    DummyAddComponent,
-    Dummy2Component,
-    Dummy3Component
+    BankAddComponent
   ]
 })
 export class BankModule { }

@@ -1,0 +1,20 @@
+<div [hidden]="resultData?.data == null">
+  <table class="table table-responsive-md text-center table-hover">
+    <thead>
+      <tr class="table-header">
+        <th *ngFor="let head of headerList"
+          [ngClass]="{
+            'text-left': head.position == 'left',
+            'text-right': head.position == 'right'
+          }"><span translate
+            class="thead-header" (click)="searchSort($event)" name='bankCode'>Bank Code</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='bankName'>Bank
+            Name</span></th>
+        <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='regRptCode'>BI
+            Code</span></th>
+        <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active</span></th>
+        <th translate>Action</th>
+      </tr>
+    </thead>
+  </table>
+</div>

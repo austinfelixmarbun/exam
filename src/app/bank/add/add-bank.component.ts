@@ -49,6 +49,7 @@ export class BankAddComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log("test");
         if (this.mode === "edit") {
             this.apiUrl = this.settingUrl + AdInsConstant.GetBank;
             var bankObj = new RefBankObj();
@@ -72,6 +73,30 @@ export class BankAddComponent implements OnInit {
             );
         }
     }
+
+
+     formValidate(form: any){
+        this.scrollIfFormHasErrors(form).then(() => {
+            // Run any additional functionality if you need to. 
+          });
+     }
+     
+     private async scrollIfFormHasErrors(form: NgForm): Promise <any> {
+       await form.invalid;
+       this.scrollToError();
+     }
+     
+     private scrollToError(): void {
+        const firstElementWithError = document.querySelector('.ng-invalid');
+        this.scrollTo(firstElementWithError);
+     }
+
+     private scrollTo(el: Element) {
+         if(el) { 
+             el.scrollIntoView({ behavior: 'smooth' });
+         }
+      }
+
     Save(BankAddReqForm: NgForm): void {
         if (this.mode === "edit") {
             this.editUrl = this.settingUrl + AdInsConstant.EditRefBank;
