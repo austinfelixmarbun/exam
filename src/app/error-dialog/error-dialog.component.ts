@@ -20,6 +20,6 @@ export class ErrorDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.toastr.errorAPI(this.data['status'],this.data['reason']));
+    // setTimeout(() => this.toastr.errorAPI(this.data['status'],this.data['reason']));
   }
 }
