@@ -24,7 +24,8 @@ import { LookuporgjobtitleModule } from '@adins/lookuporgjobtitle';
 import { LookupbizunitModule } from '@adins/lookupbizunit';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { UcSubsectionModule } from '@adins/uc-subsection';
-import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-supervisor.component';
+import { LookupsupervisorModule } from '@adins/lookupsupervisor';
+
 
 @NgModule({
     exports: [
@@ -49,10 +50,10 @@ import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-sup
         UCSearchModule,
         UcgridfooterModule,
         FormEngineModule,
-        LookupSupervisorComponent,
         AngularFileUploaderModule,
         UcSubsectionModule,
-        AngularFileUploaderModule
+        AngularFileUploaderModule,
+        LookupsupervisorModule
     ],
     imports: [
         CommonModule,
@@ -70,8 +71,7 @@ import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-sup
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
-        UcInfoComponent,
-        LookupSupervisorComponent,
+        UcInfoComponent
     ]
 })
 
