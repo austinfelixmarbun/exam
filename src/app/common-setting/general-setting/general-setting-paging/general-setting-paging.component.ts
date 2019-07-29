@@ -16,7 +16,7 @@ export class GeneralSettingPagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -27,7 +27,7 @@ export class GeneralSettingPagingComponent implements OnInit {
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  settingUrl: string = environment.settingUrl;
+  settingUrl: any = environment.settingUrl;
   addCrit: CriteriaObj[];
 
   constructor() {

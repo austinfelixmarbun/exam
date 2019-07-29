@@ -24,7 +24,7 @@ export class BankComponent implements OnInit {
   inputObj: any;
   //** End UC Search **//
   bankObj: RefBankObj;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;

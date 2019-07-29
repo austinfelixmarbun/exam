@@ -17,7 +17,7 @@ import { WorkingHourSchmDObj } from 'app/shared/model/WorkingHourSchmDObj.Model'
 
 export class WorkingHourDetailComponent implements OnInit {
   
-  pageType: string = "add";
+  pageType: any = "add";
   workingHourSchmHId: any;
   workingHourSchmCode: any;
   workingHourSchmName: any;
@@ -29,7 +29,7 @@ export class WorkingHourDetailComponent implements OnInit {
   api2Url: any;
   addUrl: any;
   editUrl: any;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
 
   listOfDay: any = [
     {
@@ -155,9 +155,8 @@ export class WorkingHourDetailComponent implements OnInit {
     }
   }
  
-  SaveWorkingHourForm(ReqWorkingHourForm: NgForm, input: any) {
+  SaveWorkingHourForm(ReqWorkingHourForm: NgForm) {
     console.log(ReqWorkingHourForm);
-    console.log(input);
     console.log(ReqWorkingHourForm.value);
     console.log(this.listOfDay);
     this.workingHourSchmHObj = new WorkingHourSchmHObj();

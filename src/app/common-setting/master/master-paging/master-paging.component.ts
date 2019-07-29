@@ -20,8 +20,8 @@ export class MasterPagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  urlJson: string = './assets/search/searchMaster.json';
-  resultData: string;
+  urlJson: any = './assets/search/searchMaster.json';
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -33,7 +33,7 @@ export class MasterPagingComponent implements OnInit {
   refMasterObj : RefMasterObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  settingUrl: string = environment.settingUrl;
+  settingUrl: any = environment.settingUrl;
   addCrit: CriteriaObj[];
 
   constructor(

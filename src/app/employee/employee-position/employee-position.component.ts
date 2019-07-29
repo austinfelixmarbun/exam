@@ -25,6 +25,7 @@ export class EmployeePositionComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
   refEmpId: any;
+  refOfficeId: any;
   empNo: any
   empName: any
   empObj: RefEmpObj;

@@ -9,7 +9,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SystemSettingRoutingModule } from 'app/system-setting/system-setting-routing.module';
 import { RoleAddEditComponent } from 'app/system-setting/role/role-add-edit/role-add-edit.component';
 import { RolePagingComponent } from 'app/system-setting/role/role-paging/role-paging.component';
-import { LookupEmployeeComponent } from 'app/shared/lookup/lookup-employee/lookup-employee.component';
 import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.component';
 import { UserRoleDetailComponent } from 'app/system-setting/user/user-role-detail/user-role-detail.component';
 import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.component';
@@ -19,6 +18,7 @@ import { UserChangePasswordComponent } from 'app/system-setting/user/user-change
 import { RoleFormTreeComponent } from 'app/system-setting/role/role-form-tree/role-form-tree.component';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { RoleFormFeaturePagingComponent } from './role/role-form-feature-paging/role-form-feature-paging.component';
+import { LookupemployeeComponent } from '@adins/lookupemployee';
 
 
 @NgModule({
@@ -49,7 +49,7 @@ import { RoleFormFeaturePagingComponent } from './role/role-form-feature-paging/
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => LookupEmployeeComponent),
+      useExisting: forwardRef(() =>LookupemployeeComponent),
       multi: true
     }
   ]

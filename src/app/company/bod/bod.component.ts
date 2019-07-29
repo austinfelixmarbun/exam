@@ -22,7 +22,7 @@ export class BODComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -31,7 +31,7 @@ export class BODComponent implements OnInit {
   orderByValue: boolean = true;
   editUrl: any;
   bodObj: CoyBodObj;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
   refCoyId: any;
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {

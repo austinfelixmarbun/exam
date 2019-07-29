@@ -22,12 +22,12 @@ export class ZipcodeComponent implements OnInit {
   inputObj: any;
   editUrl: any;
   zipcodeObj: RefZipcodeObj;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
   apiUrl: any;
-  settingUrl: string = environment.settingUrl;
+  settingUrl: any = environment.settingUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
 

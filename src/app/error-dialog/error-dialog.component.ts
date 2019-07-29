@@ -11,7 +11,9 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 export class ErrorDialogComponent implements OnInit, AfterViewInit {
 
   title = 'Angular-Interceptor';
-  constructor(@Inject(MAT_DIALOG_DATA) public data: string, private toastr: NGXToastrService) {}
+  status: string;
+  reason:string;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private toastr: NGXToastrService) {}
 
   ngOnInit() {
     

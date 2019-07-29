@@ -20,7 +20,7 @@ export class MenuSettingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -29,7 +29,7 @@ export class MenuSettingComponent implements OnInit {
   orderByValue: boolean = true;
   editUrl: any;
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
   refCoyId: any;
   constructor(private http: HttpClient) { }
 

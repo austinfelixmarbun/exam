@@ -8,7 +8,7 @@
       <div class="px-3">
         <div class="UploadSettingSomethingAddEdit" [hidden]="uploadSettingSomethingAddEdit">
           <form class="form form-horizontal" name="uploadTypeForm" #UploadTypeForm="ngForm" novalidate
-            (ngSubmit)="UploadTypeForm.form.valid && SaveForm(UploadTypeForm)">
+            (ngSubmit)="UploadTypeForm.form.valid && SaveForm()">
             <lib-ucSubsection [id]="'UploadTypeInfoId'" [title]="'Upload Type Information'"
               [panel]="'UploadTypeinformation'"></lib-ucSubsection>
             <div class="form-body" id="UploadTypeinformation">

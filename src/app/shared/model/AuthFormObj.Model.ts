@@ -5,6 +5,8 @@ formFeature: any;
 refFormId: any;
 refRoleId: any;
 authFormId: any;
+roleCode: any;
+roleName: any;
 
 constructor() { this.authFormId = 0; }
 }

@@ -24,7 +24,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -35,7 +35,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
   addCrit: CriteriaObj[];
 
   orgMdlObj: OrgMdlObj;

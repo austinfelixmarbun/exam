@@ -14,6 +14,9 @@ export class DummyAddComponent implements OnInit {
   formSet: any;
   isActive: boolean = false;
   reqCode: boolean = true;
+  dummyCode: any;
+  dummyName: any;
+  descr: any;
   constructor(private http: HttpClient) {
   }
 

@@ -20,7 +20,7 @@ export class RoleFormFeaturePagingComponent implements OnInit {
   resultData: any;
   apiUrl: any;
   deleteUrl: any;
-  authFormObj: AuthFormObj = new AuthFormObj();
+  authFormObj: any;
   foundationUrl: string = environment.foundationUrl;
   refRoleId: any;
   refFormId: any;
@@ -84,6 +84,10 @@ export class RoleFormFeaturePagingComponent implements OnInit {
         this.spinner.hide();
       }
     );
+  }
+
+  Save(){
+
   }
 
   Back(): void {

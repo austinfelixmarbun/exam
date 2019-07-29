@@ -23,8 +23,8 @@ export class Dummy3Component implements OnInit {
   inputObj2: any;
   //** End UC Search **//
   bankObj: RefBankObj;
-  resultData1: string;
-  resultData2: string;
+  resultData1: any;
+  resultData2: any;
   pageNow1: any;
   pageNow2: any;
   totalData1: any;
@@ -35,7 +35,7 @@ export class Dummy3Component implements OnInit {
   apiUrl2: any;
   addCrit: CriteriaObj[];
 
-  settingUrl: string = environment.settingUrl;
+  settingUrl: any = environment.settingUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
 

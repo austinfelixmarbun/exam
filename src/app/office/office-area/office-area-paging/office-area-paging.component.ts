@@ -19,7 +19,7 @@ export class OfficeAreaPagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -29,7 +29,7 @@ export class OfficeAreaPagingComponent implements OnInit {
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
 
   refOfficeAreaObj: RefOfficeAreaObj;
   constructor(

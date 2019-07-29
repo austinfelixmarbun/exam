@@ -22,7 +22,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  resultData: string;
+  resultData: any;
   pageNow: any;
   totalData: any;
   pageSize: any;
@@ -32,7 +32,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: any = environment.foundationUrl;
   addCrit: CriteriaObj[];
 
   orgJobTitleObj: OrgJobTitleObj;

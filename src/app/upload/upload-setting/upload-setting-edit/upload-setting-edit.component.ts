@@ -33,12 +33,17 @@ export class UploadSettingEditComponent implements OnInit {
   jsonSelect: any;
   isActive: any;
   mode: any;
+  orderByKey: any = null;
+  orderByValue: boolean = true;
+  pageNow: any;
+  pageSize: any;
   pageType: any;
+  uploadTypeCode: any;
+  uploadTypeName: any;
+  uploadSettingSomethingAddEdit: any;
 
   uploadTypeId: any;
   uploadTypeObject: any;
-  uploadTypeCode: any;
-  uploadTypeName: any;
   userTitleRoleObj: any;
   empPositionId: any;
   addCritLookup: any;
@@ -53,42 +58,8 @@ export class UploadSettingEditComponent implements OnInit {
     private uploadService : UploadService) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if (params["param"] != null)
-        this.pageType = params["param"];
-        if (params["uploadTypeId"] != null)
-        this.uploadTypeId = params["uploadTypeId"];
-
-        this.uploadTypeObject = { UploadTypeId: this.uploadTypeId };
-        this.uploadService.getUploadTypeByUploadTypeId(this.uploadTypeObject).subscribe(
-          response => {
-            console.log(response);
-            this.uploadTypeCode = response["returnObject"].uploadTypeCode;
-            this.uploadTypeName = response["returnObject"].uploadTypeName;
-            if (response["returnObject"].isActive == "0") {
-              this.isActive = false;
-            } else {
-              this.isActive = true;
-            }
-          },
-          error => {
-            console.log(error);
-          });
-    })
-
-    if (this.uploadTypeId != null) {
-      this.uploadTypeObject = { uploadTypeId: this.uploadTypeId }
-      this.uploadService.getListRefRoleByUploadTypeId(this.uploadTypeObject).subscribe(
-        response => {
-          console.log(response);
-          this.tempRefRole = response["returnObject"];
-
-          response["returnObject"].forEach(element => {
-            this.listRefRoleId.push(element.refRoleId);
-          });
-        });
-    }
-
+    this.pageNow = 1;
+    this.pageSize = 10;
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefRolePaging;
@@ -165,4 +136,19 @@ export class UploadSettingEditComponent implements OnInit {
         }
       );
   }
+  
+  searchSort(event: any) {
+    if (this.orderByKey == event.target.attributes.name.nodeValue) {
+      this.orderByValue = !this.orderByValue
+    } else {
+      this.orderByValue = true
+    }
+    this.orderByKey = event.target.attributes.name.nodeValue
+    var order = {
+      key: this.orderByKey,
+      value: this.orderByValue
+    }
+    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+  }
+
 }

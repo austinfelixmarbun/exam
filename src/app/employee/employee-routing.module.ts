@@ -4,8 +4,6 @@ import { EmployeeComponent } from 'app/employee/employee.component';
 import { EmployeeAddComponent } from 'app/employee/employee-add/employee-add.component';
 import { EmployeePositionComponent } from 'app/employee/employee-position/employee-position.component';
 import { EmployeePositionAddComponent } from 'app/employee/employee-position/employee-position-add/employee-position-add.component';
-import { LeaveMaintenanceComponent } from './leave-maintenance/leave-maintenance/leave-maintenance.component';
-import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-maintenance-add-edit/leave-maintenance-add-edit.component';
 
 const routes: Routes = [
   {
@@ -45,28 +43,7 @@ const routes: Routes = [
         data: {
           title: 'Employee Position Add Edit'
         }
-      },
-      {
-        path: 'leaveMaintenance',
-        component: LeaveMaintenanceComponent,
-        data: {
-          title: 'Leave Maintenance'
-        }
-      },
-      {
-        path: 'leaveMaintenanceAdd',
-        component: LeaveMaintenanceAddEditComponent,
-        data: {
-          title: 'Leave Maintenance Add'
-        }
-      },
-      {
-        path: 'leaveMaintenanceEdit',
-        component: LeaveMaintenanceAddEditComponent,
-        data: {
-          title: 'Leave Maintenance Edit'
-        }
-      },
+      }
     ]
   }
 ];
