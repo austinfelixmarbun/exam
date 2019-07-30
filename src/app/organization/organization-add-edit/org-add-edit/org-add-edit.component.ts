@@ -25,7 +25,7 @@ export class OrgAddEditComponent implements OnInit {
   parentId: any;
   orgName: any;
   hierarchyNo: any;
-  isActive: any;
+  isActive: boolean=true;
   result: any;
   GetUrl: any;
 

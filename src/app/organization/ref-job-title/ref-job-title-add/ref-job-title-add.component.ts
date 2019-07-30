@@ -24,7 +24,7 @@ export class RefJobTitleAddComponent implements OnInit {
   refOrgId: any;
   jobPosition: any;
   descr: any;
-  isInternal: boolean = false;
+  isInternal: boolean = true;
   rjtObj : RefJobTitleObj;
   apiUrl: any;
   addUrl: any;

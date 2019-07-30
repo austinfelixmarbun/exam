@@ -24,7 +24,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
   type: string = 'Add';
   areaName: any;
   areaCode: any;
-  isActive: any;
+  isActive: boolean=true;
   refOfficeAreaId: any;
   resultData: any;
 

@@ -33,7 +33,7 @@ export class UserAddEditComponent implements OnInit {
   Username: any;
   Password: any;
   RePassword: any;
-  IsActive: any;
+  IsActive: boolean=true;
   RefUserId: any;
   loggedInMethod: any = 'DB';
 

@@ -55,7 +55,7 @@ export class EmployeeAddComponent implements OnInit {
   email1: any;
   email2: any;
   imageLocation: any;
-  isActive: boolean = false;
+  isActive: boolean = true;
   isExt: boolean = false;
   bankBranch: any;
   bankBranchRegRptCode: any;

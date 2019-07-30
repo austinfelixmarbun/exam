@@ -28,7 +28,7 @@ export class HolidayDetailComponent implements OnInit {
   holidaySchmHId: any;
   holidaySchmCode: any;
   holidaySchmName: any;
-  isActive: boolean = false;
+  isActive: boolean = true;
   editDetail: any = 'false';
   holidayObj: HolidayObj;
   holidayDObj: HolidayDObj;

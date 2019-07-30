@@ -26,7 +26,7 @@ export class MasterAddEditComponent implements OnInit {
   masterCodeModel: any;
   descrModel: any;
   refMasterTypeCodeModule: any;
-  isActive: any;
+  isActive: boolean=true;
   refMasterId: any;
   resultData: any;
   sandiBI: any;
