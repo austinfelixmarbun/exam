@@ -9,6 +9,8 @@ import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/fo
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LeaveMaintenanceComponent } from './leave-maintenance/leave-maintenance/leave-maintenance.component';
+import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-maintenance-add-edit/leave-maintenance-add-edit.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EmployeePositionAddComponent,
     EmployeePositionComponent,
     EmployeeComponent,
-    EmployeeAddComponent
+    EmployeeAddComponent,
+    LeaveMaintenanceComponent,
+    LeaveMaintenanceAddEditComponent
   ],
 
 })

@@ -68,7 +68,7 @@ export class MasterAddEditComponent implements OnInit {
           console.log(this.refMasterObj);
           this.masterCodeModel = response['returnObject']['masterCode'];
           this.descrModel = response['returnObject']['descr'];
-          this.sandiBI = response['returnObject']['regRptCode'];
+          this.sandiBI = response['returnObject']['reserveField1'];
           this.seqNo = response['returnObject']['seqNo'];
           if (this.refMasterObj.isActive == '1') { this.isActive = true; } else { this.isActive = false; }
           if (this.refMasterObj.refMasterTypeCode == null) { this.refMasterTypeCodeModule = '' } else { this.refMasterTypeCodeModule = this.refMasterObj.refMasterTypeCode };
@@ -113,7 +113,7 @@ export class MasterAddEditComponent implements OnInit {
             this.refMasterObj.refMasterTypeCode = MasterAddEditForm.value.refMasterTypeCodeModule;
             this.refMasterObj.masterCode = MasterAddEditForm.value.masterCodeModel;
             this.refMasterObj.descr = MasterAddEditForm.value.descrModel;
-            this.refMasterObj.regRptCode = MasterAddEditForm.value.sandiBI;
+            this.refMasterObj.reserveField1 = MasterAddEditForm.value.sandiBI;
             this.refMasterObj.seqNo = MasterAddEditForm.value.seqNo;
             this.refMasterObj.isSystem = '0';
             if (MasterAddEditForm.value.isActive) { this.refMasterObj.isActive = '1' } else { this.refMasterObj.isActive = '0' };
@@ -152,7 +152,7 @@ export class MasterAddEditComponent implements OnInit {
       this.refMasterObj.refMasterTypeCode = MasterAddEditForm.value.refMasterTypeCodeModule;
       this.refMasterObj.masterCode = MasterAddEditForm.value.masterCodeModel;
       this.refMasterObj.descr = MasterAddEditForm.value.descrModel;
-      this.refMasterObj.regRptCode = MasterAddEditForm.value.sandiBI;
+      this.refMasterObj.reserveField1 = MasterAddEditForm.value.sandiBI;
       this.refMasterObj.seqNo = MasterAddEditForm.value.seqNo
       if (MasterAddEditForm.value.isActive) { this.refMasterObj.isActive = '1' } else { this.refMasterObj.isActive = '0' };
 
