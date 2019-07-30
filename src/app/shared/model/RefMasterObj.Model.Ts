@@ -7,5 +7,6 @@ export class RefMasterObj {
     refMasterTypeCode: any;
     isSystem: any;
     seqNo: any;
+    reserveField1: any;
     constructor() { this.refMasterId = 0 }
 }
