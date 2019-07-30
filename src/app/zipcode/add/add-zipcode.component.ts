@@ -29,7 +29,7 @@ export class ZipcodeAddComponent implements OnInit {
     result: any;
     mode: string = "add";
     apiUrl: any;
-    isActive: boolean = false;
+    isActive: boolean = true;
     settingUrl: string = environment.settingUrl;
     zipcodeObj: RefZipcodeObj;
     editUrl: any;

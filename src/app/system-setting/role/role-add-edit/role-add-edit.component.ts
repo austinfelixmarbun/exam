@@ -25,7 +25,7 @@ export class RoleAddEditComponent implements OnInit {
   type: string = 'Add';
   roleCodeModel: any;
   roleNameModel: any;
-  isActive: any;
+  isActive: boolean = true;
   refRoleId: any;
   resultData: any;
 

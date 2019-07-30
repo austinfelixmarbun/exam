@@ -27,7 +27,7 @@ export class AddBusinessUnitComponent implements OnInit {
     result: any;
     mode: string = "add";
     apiUrl: any;
-    isActive: boolean = false;
+    isActive: boolean = true;
     foundationUrl: string = environment.foundationUrl;
     editUrl: any;
 

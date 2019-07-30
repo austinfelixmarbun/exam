@@ -25,7 +25,7 @@ export class BankAddComponent implements OnInit {
     result: any;
     mode: string = "add";
     apiUrl: any;
-    isActive: boolean = false;
+    isActive: boolean = true;
     settingUrl: string = environment.settingUrl;
     urlEnviPaging : string = environment.foundationUrl;
     bankObj: RefBankObj;

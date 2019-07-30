@@ -21,7 +21,7 @@ export class WorkingHourDetailComponent implements OnInit {
   workingHourSchmHId: any;
   workingHourSchmCode: any;
   workingHourSchmName: any;
-  isActive: boolean = false;
+  isActive: boolean = true;
   workingHourSchmHObj: WorkingHourSchmHObj;
   workingHourSchmDObj: any;
   resultData: any;
