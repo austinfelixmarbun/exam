@@ -1,6 +1,19 @@
 <div class="col-md-12">
-  <div class="card">
+  <!-- <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} HOLLIDAY SCHEME
+            </h4>
+          </div>
+          <div class="col-md-4" style="text-align-last: right">
+            <button type="button" class="backButton" [routerLink]="['/commonSetting/holiday']" translate>
+              <i class="ft-arrow-left"></i> Back
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="px-3">
         <form class="form form-horizontal" name="HolidayReqForm" #HolidayReqForm="ngForm"
           (ngSubmit)="HolidayReqForm.form.valid && SaveHolidayForm(HolidayReqForm)">
@@ -15,20 +28,22 @@
                 <div
                   *ngIf="(HolidayReqForm.submitted || HolidaySchmCode.touched || HolidaySchmCode.dirty) && HolidaySchmCode.invalid"
                   class="invalid-feedback">
-                  <div *ngIf="HolidaySchmCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                  <div *ngIf="HolidaySchmCode.errors.required" class="adInsReqMsg" translate>This field is required
+                  </div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" translate>Scheme Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="holidaySchmName" required [(ngModel)]="holidaySchmName"
-                  #HolidaySchmName="ngModel"
+                <input type="text" class="form-control adInsInput" name="holidaySchmName" required
+                  [(ngModel)]="holidaySchmName" #HolidaySchmName="ngModel"
                   [ngClass]="{ 'is-invalid': (HolidayReqForm.submitted || HolidaySchmName.touched || HolidaySchmName.dirty) && HolidaySchmName.invalid }">
                 <div
                   *ngIf="(HolidayReqForm.submitted || HolidaySchmName.touched || HolidaySchmName.dirty) && HolidaySchmName.invalid"
                   class="invalid-feedback">
-                  <div *ngIf="HolidaySchmName.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                  <div *ngIf="HolidaySchmName.errors.required" class="adInsReqMsg" translate>This field is required
+                  </div>
                 </div>
               </div>
             </div>
@@ -41,10 +56,6 @@
             </div>
           </div>
           <div class="form-actions right">
-            <button *ngIf=" pageType === 'edit'" type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/commonSetting/holiday']"
-              translate>
-              <i class="fa fa-arrow-circle-left"></i> Back
-            </button>
             <button type="submit" class="btn btn-raised btn-primary" translate>
               <i class="fa fa-check-square-o"></i> Save
             </button>
@@ -52,9 +63,17 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> -->
   <div *ngIf="editDetail  === 'true'" class="holidayDetail">
-    <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
+    <div class="ucSearch-Button-Right">
+        <span class="mr-1">
+            <button type="button" class="addButton" [queryParams]="{holidaySchmHId:holidaySchmHId}" [routerLink]="['/commonSetting/holiday/detail']" translate>
+                <i class="ft-plus-circle"></i> Add
+            </button>
+        </span>
+    </div>
+    <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
+    </lib-UCSearch>
   </div>
 </div>
 
@@ -63,9 +82,12 @@
     <table class="table table-responsive-md text-center table-hover">
       <thead>
         <tr class="table-header">
-          <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='holidayDt'>Date</span></th>
-          <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='Descr'>Description</span></th>
-          <th><span translate class="thead-header" (click)="searchSort($event)" name='isPublicHoliday'>Public Holiday</span></th>
+          <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
+              name='holidayDt'>Date</span></th>
+          <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
+              name='Descr'>Description</span></th>
+          <th><span translate class="thead-header" (click)="searchSort($event)" name='isPublicHoliday'>Public
+              Holiday</span></th>
           <th translate>Action</th>
         </tr>
       </thead>

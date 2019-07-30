@@ -2,9 +2,23 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
+                <div class="card-header header-title">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} BUSINESS UNIT
+                                ORGANIZATION </h4>
+                        </div>
+                        <div class="col-md-4" style="text-align-last: right">
+                            <button type="button" class="backButton" [routerLink]="['/organization/businessunit']"
+                                translate>
+                                <i class="ft-arrow-left"></i> Back
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="px-3">
                     <form class="form form-horizontal" name="BusinessUnitAddReqForm" #BusinessUnitAddReqForm="ngForm"
-                    (ngSubmit)="BusinessUnitAddReqForm.form.valid && Save(BusinessUnitAddReqForm)">
+                        (ngSubmit)="BusinessUnitAddReqForm.form.valid && Save(BusinessUnitAddReqForm)">
                         <div class="form-body">
                             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Business Unit
                                 Information</h4>

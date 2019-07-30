@@ -1,13 +1,24 @@
+<div class="ucSearch-Button-Right">
+    <span class="mr-1">
+        <button type="button" class="addButton" [routerLink]="['/organization/refjobtitle/add']" translate>
+            <i class="ft-plus-circle"></i> Add
+        </button>
+    </span>
+</div>
 <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
 
 <div [hidden]="resultData?.data == null">
     <table class="table table-responsive-md text-center table-hover">
         <thead>
             <tr class="table-header">
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='jobTitleCode'>Job Title Code</span> </th>
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='jobTitleName'>Job Title Name</span></th>
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='descr'>Description</span></th>
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='mrJobPositionLvl'>Position Level</span></th>
+                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
+                        name='jobTitleCode'>Job Title Code</span> </th>
+                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
+                        name='jobTitleName'>Job Title Name</span></th>
+                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
+                        name='descr'>Description</span></th>
+                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
+                        name='mrJobPositionLvl'>Position Level</span></th>
                 <th translate>Action</th>
             </tr>
         </thead>

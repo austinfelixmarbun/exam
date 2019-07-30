@@ -1,16 +1,28 @@
 <div class="row text-left">
   <div class="col-md-12">
     <div class="card">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} BANK </h4>
+          </div>
+          <div class="col-md-4" style="text-align-last: right">
+            <button type="button" class="backButton" [routerLink]="['/office/paging']" translate>
+              <i class="ft-arrow-left"></i> Back
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="card-body">
         <div class="px-3">
           <form class="form form-horizontal" name="BankAddReqForm" #BankAddReqForm="ngForm"
-          (ngSubmit)="BankAddReqForm.form.valid && Save(BankAddReqForm)">
+            (ngSubmit)="BankAddReqForm.form.valid && Save(BankAddReqForm)">
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Bank Information</h4>
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="projectinput5" translate>Bank Code </label>
                 <div class="col-md-9">
-                  <div >
+                  <div>
                     <input type="text" id="projectinput5" class="form-control adInsInput" name="bankCode"
                       [ngModel]="result?.bankCode" #BankCode="ngModel" required [disabled]="mode=='edit'"
                       [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || BankCode.touched || BankCode.dirty) && BankCode.invalid }">
@@ -36,7 +48,7 @@
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="projectinput6" translate>BI Code </label>
                 <div class="col-md-9">
-                    <input type="text" id="projectinput5" class="form-control adInsInput" name="regRptCode"
+                  <input type="text" id="projectinput5" class="form-control adInsInput" name="regRptCode"
                     [ngModel]="result?.regRptCode" #RegRptCode="ngModel">
                 </div>
               </div>
@@ -53,7 +65,8 @@
                 [routerLink]="['/bank/paging']" translate>
                 <i class="fa fa-arrow-circle-left"></i> Back
               </button>
-              <button type="submit" class="btn btn-raised btn-primary" id="test" (click)=formValidate(BankAddReqForm) translate>
+              <button type="submit" class="btn btn-raised btn-primary" id="test" (click)=formValidate(BankAddReqForm)
+                translate>
                 <i class="fa fa-check-square-o"></i> Save
               </button>
             </div>
