@@ -1,5 +1,17 @@
 <div class="col-md-12">
   <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} OFFICE </h4>
+          </div>
+          <div class="col-md-4" style="text-align-last: right">
+            <button type="button" class="backButton" [routerLink]="['/office/paging']" translate>
+              <i class="ft-arrow-left"></i> Back
+            </button>
+          </div>
+        </div>
+      </div>
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="OfficeReqForm" #OfficeReqForm="ngForm"
