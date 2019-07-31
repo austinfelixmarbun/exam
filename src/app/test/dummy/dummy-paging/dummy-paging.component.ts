@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DummyPagingComponent implements OnInit {
 
+  resultData:any;
+  headerList:any;
+  searchSort:any;
+
   constructor() { }
 
   ngOnInit() {

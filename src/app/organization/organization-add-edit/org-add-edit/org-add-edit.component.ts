@@ -18,6 +18,7 @@ export class OrgAddEditComponent implements OnInit {
   apiUrl: any;
   parents: any;
   orgObj: OrganizationObj;
+  pageType:any;
 
   param: string;
   mode: string = "add";

@@ -19,7 +19,7 @@ export class AddBusinessUnitComponent implements OnInit {
 
     bizUnitObj : BusinessUnitObj;
     param: string;
-
+    pageType:any;
     businessUnitCode: string;
     businessUnitName: string;
     description: string;

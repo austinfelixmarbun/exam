@@ -115,7 +115,7 @@ export class UploadSettingEditComponent implements OnInit {
     }
   }
 
-  SaveForm(UserRoleDetailForm: NgForm, lookupRole: any): void {
+  SaveForm(): void {
     var assignRoleToUpload = { uploadTypeId: this.uploadTypeId, listRoleId: this.listRefRoleId}
     this.spinner.show();
 
