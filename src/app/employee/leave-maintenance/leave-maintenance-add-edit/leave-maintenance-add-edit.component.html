@@ -1,6 +1,18 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} LEAVE EMPLOYEE </h4>
+          </div>
+          <div class="col-md-4" style="text-align-last: right">
+            <button type="button" class="backButton" [routerLink]="['/employee/leaveMaintenance']" translate>
+              <i class="ft-arrow-left"></i> Back
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="px-3">
         <form class="form form-horizontal" name="leaveMaintenanceForm" #LeaveMaintenanceForm="ngForm" novalidate
           (ngSubmit)="LeaveMaintenanceForm.form.valid && SaveForm(LeaveMaintenanceForm, lookupEmp)">
@@ -12,7 +24,7 @@
               <div class="col-md-9">
                 <lib-lookupemployee *ngIf="pageType!='edit'" #lookupEmp [lookupInput]="inputLookupObj">
                 </lib-lookupemployee>
-                
+
                 <label *ngIf="pageType=='edit'" class="adInsLabel" for="empName">{{empName}}</label>
               </div>
             </div>

@@ -1,17 +1,17 @@
 <div class="col-md-12">
   <div class="card">
-      <div class="card-header">
-        <div class="row">
-          <div class="col-md-8">
-            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} OFFICE </h4>
-          </div>
-          <div class="col-md-4" style="text-align-last: right">
-            <button type="button" class="backButton" [routerLink]="['/office/paging']" translate>
-              <i class="ft-arrow-left"></i> Back
-            </button>
-          </div>
+    <div class="card-header header-title">
+      <div class="row">
+        <div class="col-md-8">
+          <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} OFFICE </h4>
+        </div>
+        <div class="col-md-4" style="text-align-last: right">
+          <button type="button" class="backButton" [routerLink]="['/office/paging']" translate>
+            <i class="ft-arrow-left"></i> Back
+          </button>
         </div>
       </div>
+    </div>
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" name="OfficeReqForm" #OfficeReqForm="ngForm"
@@ -21,8 +21,8 @@
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" translate>Office Code </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput width-30-per" name="officeCode" required [(ngModel)]="officeCode"
-                  #OfficeCode="ngModel"
+                <input type="text" class="form-control adInsInput width-30-per" name="officeCode" required
+                  [(ngModel)]="officeCode" #OfficeCode="ngModel"
                   [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || OfficeCode.touched || OfficeCode.dirty) && OfficeCode.invalid }">
                 <div *ngIf="(OfficeReqForm.submitted || OfficeCode.touched || OfficeCode.dirty) && OfficeCode.invalid"
                   class="invalid-feedback">
@@ -33,8 +33,8 @@
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" translate>Office Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput width-80-per" name="officeName" required [(ngModel)]="officeName"
-                  #OfficeName="ngModel"
+                <input type="text" class="form-control adInsInput width-80-per" name="officeName" required
+                  [(ngModel)]="officeName" #OfficeName="ngModel"
                   [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || OfficeName.touched || OfficeName.dirty) && OfficeName.invalid }">
                 <div *ngIf="(OfficeReqForm.submitted || OfficeName.touched || OfficeName.dirty) && OfficeName.invalid"
                   class="invalid-feedback">
@@ -45,20 +45,22 @@
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" translate>Office Short Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput width-80-per" name="officeShortName" required [(ngModel)]="officeShortName"
-                  #OfficeShortName="ngModel"
+                <input type="text" class="form-control adInsInput width-80-per" name="officeShortName" required
+                  [(ngModel)]="officeShortName" #OfficeShortName="ngModel"
                   [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || OfficeShortName.touched || OfficeShortName.dirty) && OfficeShortName.invalid }">
                 <div
                   *ngIf="(OfficeReqForm.submitted || OfficeShortName.touched || OfficeShortName.dirty) && OfficeShortName.invalid"
                   class="invalid-feedback">
-                  <div *ngIf="OfficeShortName.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                  <div *ngIf="OfficeShortName.errors.required" class="adInsReqMsg" translate>This field is required
+                  </div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" translate>Office Class </label>
               <div class="col-md-9">
-                <select class="form-control adInsInput" name="mrOfficeClass" [(ngModel)]="mrOfficeClass" #MrOfficeClass="ngModel">
+                <select class="form-control adInsInput" name="mrOfficeClass" [(ngModel)]="mrOfficeClass"
+                  #MrOfficeClass="ngModel">
                   <option *ngFor="let oc of allOfficeClass" value="{{oc.masterCode}}">{{oc.descr}}
                   </option>
                 </select>
@@ -86,8 +88,8 @@
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" translate>Office Parent </label>
               <div class="col-md-9">
-                <select class="form-control adInsInput" name="parentId" required [(ngModel)]="parentId" #ParentId="ngModel"
-                (change)="onChangeOfficeParent($event.target.value)"
+                <select class="form-control adInsInput" name="parentId" required [(ngModel)]="parentId"
+                  #ParentId="ngModel" (change)="onChangeOfficeParent($event.target.value)"
                   [ngClass]="{ 'is-invalid': (OfficeReqForm.submitted || ParentId.touched || ParentId.dirty) && ParentId.value == undefined  }">
                   <option *ngFor="let op of allOfficeParent" value="{{op.refOfficeId}}">{{op.officeName}}
                   </option>
@@ -111,7 +113,8 @@
                 <div
                   *ngIf="(OfficeReqForm.submitted || RefOfficeAreaId.touched || RefOfficeAreaId.dirty) && RefOfficeAreaId.value == undefined "
                   class="invalid-feedback">
-                  <div *ngIf="RefOfficeAreaId.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                  <div *ngIf="RefOfficeAreaId.errors.required" class="adInsReqMsg" translate>This field is required
+                  </div>
                 </div>
               </div>
             </div>
@@ -123,28 +126,31 @@
                   <option *ngFor="let hs of allHolidaySchm" value="{{hs.holidaySchmHId}}">{{hs.holidaySchmName}}
                   </option>
                 </select>
-                <div *ngIf="(OfficeReqForm.submitted || HolidaySchmHId.touched || HolidaySchmHId.dirty) && HolidaySchmHId.value == undefined "
-                    class="invalid-feedback">
-                    <div *ngIf="HolidaySchmHId.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                <div
+                  *ngIf="(OfficeReqForm.submitted || HolidaySchmHId.touched || HolidaySchmHId.dirty) && HolidaySchmHId.value == undefined "
+                  class="invalid-feedback">
+                  <div *ngIf="HolidaySchmHId.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" translate>Working Hour Scheme </label>
               <div class="col-md-9">
-                <select class="form-control adInsInput" name="workingHourSchmHId" [(ngModel)]="workingHourSchmHId" required
-                  #WorkingHourSchmHId="ngModel">
+                <select class="form-control adInsInput" name="workingHourSchmHId" [(ngModel)]="workingHourSchmHId"
+                  required #WorkingHourSchmHId="ngModel">
                   <option *ngFor="let whs of allWorkingHourSchm" value="{{whs.workingHourSchmHId}}">
                     {{whs.workingHourSchmName}}
                   </option>
                 </select>
-                <div *ngIf="(OfficeReqForm.submitted || WorkingHourSchmHId.touched || WorkingHourSchmHId.dirty) && WorkingHourSchmHId.value == undefined "
-                    class="invalid-feedback">
-                    <div *ngIf="WorkingHourSchmHId.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                <div
+                  *ngIf="(OfficeReqForm.submitted || WorkingHourSchmHId.touched || WorkingHourSchmHId.dirty) && WorkingHourSchmHId.value == undefined "
+                  class="invalid-feedback">
+                  <div *ngIf="WorkingHourSchmHId.errors.required" class="adInsReqMsg" translate>This field is required
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="form-group row"  *ngIf="isHO == false">
+            <div class="form-group row" *ngIf="isHO == false">
               <label class="col-md-3  adInsLabel" translate>Konvensional / Syariah </label>
               <div class="col-md-9">
                 <div class="custom-control custom-radio display-inline-block">

@@ -6,6 +6,12 @@
     padding-right:0px !important;
 }
 
+.header-title{
+    padding-left:0px !important;
+    padding-right:0px !important;
+    padding-bottom:0px !important;
+}
+
 .form-actions{
     padding: 0px !important;
     margin-top: 10px !important;

@@ -3,62 +3,77 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <div class="px-3">
-            <form class="form form-horizontal" name="OrgAddEditForm" #OrgAddEditForm="ngForm"
-              (ngSubmit)="OrgAddEditForm.form.valid && Save(OrgAddEditForm)">
-              <div class="form-body">
-                <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Organization Information</h4>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" for="orgName">Organization Name</label>
-                  <div class="col-md-9">
-                    <input type="text" id="orgName" class="form-control adInsInput" name="orgName" [(ngModel)]="orgName"
-                      #OrgName="ngModel" required
-                      [ngClass]="{ 'is-invalid': OrgAddEditForm.submitted && OrgName.invalid }">
-                    <div *ngIf="OrgAddEditForm.submitted && OrgName.invalid" class="invalid-feedback">
-                      <div *ngIf="OrgName.errors.required" class="adInsReqMsg" translate>This field is required</div>
+          <div class="card-body">
+            <div class="card-header header-title">
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} ORGANIZATION </h4>
+                </div>
+                <div class="col-md-4" style="text-align-last: right">
+                  <button type="button" class="backButton" [routerLink]="['/organization/organization']" translate>
+                    <i class="ft-arrow-left"></i> Back
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="px-3">
+              <form class="form form-horizontal" name="OrgAddEditForm" #OrgAddEditForm="ngForm"
+                (ngSubmit)="OrgAddEditForm.form.valid && Save(OrgAddEditForm)">
+                <div class="form-body">
+                  <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Organization Information
+                  </h4>
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel" for="orgName">Organization Name</label>
+                    <div class="col-md-9">
+                      <input type="text" id="orgName" class="form-control adInsInput" name="orgName"
+                        [(ngModel)]="orgName" #OrgName="ngModel" required
+                        [ngClass]="{ 'is-invalid': OrgAddEditForm.submitted && OrgName.invalid }">
+                      <div *ngIf="OrgAddEditForm.submitted && OrgName.invalid" class="invalid-feedback">
+                        <div *ngIf="OrgName.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="form-group row" [hidden]="true">
-                  <label class="col-md-3  adInsLabel" for="hierarchyNo">Hierarchy No</label>
-                  <div class="col-md-9">
+                  <div class="form-group row" [hidden]="true">
+                    <label class="col-md-3  adInsLabel" for="hierarchyNo">Hierarchy No</label>
+                    <div class="col-md-9">
                       <input type="text" id="hierarchyNo" class="form-control adInsInput" name="hierarchyNo"
                         [(ngModel)]="hierarchyNo" #HierarchyNo="ngModel">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" for="parentId">Parent Organization</label>
-                  <div class="col-md-9">
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel" for="parentId">Parent Organization</label>
+                    <div class="col-md-9">
                       <select id="parentId" class="form-control adInsInput" name="parentId" [(ngModel)]="parentId"
                         required>
                         <option [value]="" selected="None">None</option>
                         <option *ngFor="let item of parents?.returnObject" [value]="item.refOrgId">{{item.orgName}}
                         </option>
                       </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
+                    <div class="custom-control custom-checkbox m-0">
+                      <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
+                        [checked]="isActive">
+                    </div>
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
-                  <div class="custom-control custom-checkbox m-0">
-                    <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
-                      [checked]="isActive">
-                  </div>
+
+                <div class="form-actions">
+
+                  <button *ngIf=" mode == 'edit'" type="button" [routerLink]="['/organization/organization']"
+                    class="btn btn-raised btn-warning mr-1">
+                    <i class="fa fa-arrow-circle-left"></i> Back
+                  </button>
+                  <button type="submit" class="btn btn-raised btn-primary">
+                    <i class="fa fa-check-square-o"></i> Save
+                  </button>
                 </div>
-              </div>
 
-              <div class="form-actions">
-
-                <button *ngIf=" mode == 'edit'" type="button" [routerLink]="['/organization/organization']" class="btn btn-raised btn-warning mr-1">
-                  <i class="fa fa-arrow-circle-left"></i> Back
-                </button>
-                <button type="submit" class="btn btn-raised btn-primary">
-                  <i class="fa fa-check-square-o"></i> Save
-                </button>
-              </div>
-
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
