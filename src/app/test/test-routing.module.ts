@@ -5,6 +5,8 @@ import { DummyAddComponent } from "./dummy/dummy-add/dummy-add.component";
 import { Dummy2Component } from "./dummy2/dummy2.component";
 import { Dummy3Component } from "./dummy3/dummy3.component";
 import { DummyPagingComponent } from "./dummy/dummy-paging/dummy-paging.component";
+import { Template1Component } from "./template/template1/template1.component";
+import { TestPagingComponent } from "./test-paging/test-paging.component";
 
 const routes: Routes = [
   {
@@ -28,21 +30,35 @@ const routes: Routes = [
           path: 'dummy2',
           component: Dummy2Component,
           data: {
-            title: 'Dummy2'
+            title: 'Dummy 2'
           }
         },
         {
           path: 'dummy3',
           component: Dummy3Component,
           data: {
-            title: 'Dummy3'
+            title: 'Dummy 3'
           }
         },
         {
           path: 'dummyPaging',
           component: DummyPagingComponent,
           data: {
-            title: 'Dummy3'
+            title: 'Dummy Paging'
+          }
+        },
+        {
+          path: 'template1',
+          component: Template1Component,
+          data: {
+            title: 'template 1'
+          }
+        },
+        {
+          path: 'paging',
+          component: TestPagingComponent,
+          data: {
+            title: 'test Paging'
           }
         },
     ]

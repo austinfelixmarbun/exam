@@ -1,0 +1,79 @@
+{
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Bank Code",
+            "name": "bankCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Bank Name",
+            "name": "bankName"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "BI Code",
+            "name": "regRptCode"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "isActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "bankCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "bankName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "regRptCode"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "isActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "icon": "edit",
+                    "path": "/bank/edit",
+                    "param": [
+                        {
+                            "type": "mode",
+                            "property": "edit"
+                        },
+                        {
+                            "type": "refBankId",
+                            "property": "refBankId"
+                        }
+                    ]
+                },
+                {
+                    "icon": "delete",
+                    "property": "refBankId"
+                }
+            ]
+        }
+    ]
+}

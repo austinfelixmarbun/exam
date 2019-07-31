@@ -182,12 +182,12 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }), finalize(() => {
                 this.count--;
 
-                if (this.count == 0) {
+                // if (this.count == 0) {
                     if (request.method == "POST") {
                         AdInsHelper.ClearPageAccessLog();
                         this.spinner.hide();
                     }
-                }
+                // }
             })
         );
     }
