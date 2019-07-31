@@ -25,12 +25,17 @@ import { LookupbizunitModule } from '@adins/lookupbizunit';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { LookupsupervisorModule } from '@adins/lookupsupervisor';
+import { MatStepperModule, MatIconModule, MatExpansionModule, MatTabsModule } from '@angular/material';
+import { SearchV2Component } from './search-v2/search-v2.component';
+import { UcgridviewComponent } from './UserControl/ucgridview/ucgridview.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
     exports: [
         CommonModule,
         SearchComponent,
+        SearchV2Component,
         LookupemployeeModule,
         LookupzipcodeModule,
         NgbModule,
@@ -42,6 +47,7 @@ import { LookupsupervisorModule } from '@adins/lookupsupervisor';
         UCGridFooterComponent,
         UcContactInfoComponent,
         UcInfoComponent,
+        UcgridviewComponent,
         TranslateModule,
         LookupbizunitModule,
         LookuporgmdlstrucModule,
@@ -53,13 +59,18 @@ import { LookupsupervisorModule } from '@adins/lookupsupervisor';
         AngularFileUploaderModule,
         UcSubsectionModule,
         AngularFileUploaderModule,
-        LookupsupervisorModule
+        LookupsupervisorModule,
+        MatStepperModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatTabsModule,
     ],
     imports: [
         CommonModule,
         FormsModule,
         NgbModule,
         HttpModule,
+        RouterModule,
         UCSearchModule,
         UcgridfooterModule,
         TranslateModule,
@@ -68,10 +79,12 @@ import { LookupsupervisorModule } from '@adins/lookupsupervisor';
     ],
     declarations: [
         SearchComponent,
+        SearchV2Component,
         UcAddressComponent,
         UCGridFooterComponent,
         UcContactInfoComponent,
-        UcInfoComponent
+        UcInfoComponent,
+        UcgridviewComponent
     ]
 })
 
