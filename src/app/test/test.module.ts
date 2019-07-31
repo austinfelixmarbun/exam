@@ -12,7 +12,6 @@ import { Dummy3Component } from "./dummy3/dummy3.component";
 import { DummyPagingComponent } from "./dummy/dummy-paging/dummy-paging.component";
 import { Template1Component } from './template/template1/template1.component';
 import { TestPagingComponent } from './test-paging/test-paging.component';
-import { TestPagingV2Component } from './test-paging-v2/test-paging-v2.component';
 
 @NgModule({
     imports: [
@@ -30,8 +29,7 @@ import { TestPagingV2Component } from './test-paging-v2/test-paging-v2.component
         Dummy3Component,
         DummyPagingComponent,
         Template1Component,
-        TestPagingComponent,
-        TestPagingV2Component
+        TestPagingComponent
     ],
 
 })
