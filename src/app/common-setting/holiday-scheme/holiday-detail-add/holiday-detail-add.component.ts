@@ -19,6 +19,7 @@ export class HolidayDetailAddComponent implements OnInit {
   holidayDObj: HolidayDObj;
   foundationUrl: string = environment.foundationUrl;
   addUrl: any;
+  pageType:string;
   addYearUrl: any;
   isPublicHoliday: any = '1';
   listOfDay: any = [

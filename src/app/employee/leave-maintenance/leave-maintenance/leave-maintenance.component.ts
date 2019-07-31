@@ -24,7 +24,7 @@ export class LeaveMaintenanceComponent implements OnInit {
   inputObj: any;
   //** End Query Paging */
 
-  resultData: string;
+  resultData: any;
   ExcelData: any;
   refEmpLeaveMngmntObj: RefEmpLeaveMngmntObj;
   pageNow: any;

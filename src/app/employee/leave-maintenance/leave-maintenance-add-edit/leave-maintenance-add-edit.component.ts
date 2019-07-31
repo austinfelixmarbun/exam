@@ -30,9 +30,11 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   empName: any;
   startDt: any;
   endDt: any;
+  lookupEmp:any;
   isPassed: boolean = false;
   refEmpLeaveMngmntObj: RefEmpLeaveMngmntObj;
   resultData: any;
+  toggleActive:any;
   apiUrl: any;
   addUrl: any;
   editUrl: any;

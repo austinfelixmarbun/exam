@@ -21,6 +21,7 @@ export class ZipcodeAddComponent implements OnInit {
     @ViewChild(LookupdistrictComponent) lookupDistrict;
     param: string;
     inputLookupObj: any;
+    pageType:any;
 
     businessUnitCode: string;
     businessUnitName: string;
