@@ -29,7 +29,7 @@
                   </a>
                 </span>
                 <span *ngIf="act.icon == 'delete'">
-                  <a class="danger p-0" (click)="delete(item[act.property])">
+                  <a class="danger p-0" (click)="delete(act.property,item[act.property])">
                     <i class="ft-trash-2 font-medium-3 mr-2"></i>
                   </a>
                 </span>

@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
-import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { InputGridObj } from 'app/shared/model/inputGridObj.Model';
+import { InputGridObj } from 'app/shared/model/InputGridObj.Model';
 
 @Component({
-  selector: 'app-test-paging',
-  templateUrl: './test-paging.component.html',
-  styleUrls: ['./test-paging.component.scss']
+  selector: 'app-ucpaging',
+  templateUrl: './ucpaging.component.html',
+  styleUrls: ['./ucpaging.component.scss']
 })
-export class TestPagingComponent implements OnInit {
+export class UcpagingComponent implements OnInit {
 
+  @Input() searchObj: any;
+  
   //** Start UC Search **//
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
@@ -21,31 +21,29 @@ export class TestPagingComponent implements OnInit {
   //** End UC Search **//
 
   apiUrl: any;
-  settingUrl: string = environment.settingUrl;
   pageNow: any = 1;
   pageSize: any = 10;
   totalData: any;
-  resultData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  
+
   constructor() { }
 
   ngOnInit() {
-    this.apiUrl = this.settingUrl + AdInsConstant.GetBankPaging;
-
+    console.log("ucpaging");
+    this.apiUrl = this.searchObj.enviromentUrl + this.searchObj.apiQryPaging;
     this.gridObj = new InputGridObj();
     this.gridObj.apiUrl = this.apiUrl;
+    this.gridObj.deleteUrl = this.searchObj.enviromentUrl + this.searchObj.deleteUrl;
     this.gridObj.pageNow = this.pageNow;
     this.gridObj.pageSize = this.pageSize;
-    this.gridObj.pagingJson = "./assets/form-setting/dummyPaging.json";;
+    this.gridObj.pagingJson = this.searchObj.pagingJson;
     this.gridObj.searchComp = this.searchComponent;
-
-    this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/search/searchBank.json";
-    this.inputObj.enviromentUrl = environment.settingUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetBankPaging;
     
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = this.searchObj._url;
+    this.inputObj.enviromentUrl = this.searchObj.enviromentUrl;
+    this.inputObj.apiQryPaging = this.searchObj.apiQryPaging;
   }
 
   //** Start UC Search **/
@@ -82,9 +80,5 @@ export class TestPagingComponent implements OnInit {
     }
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
-
-
-  // genBody(item, property) {
-  //   return item[property];
-  // }
+  //** End UC Search **/
 }

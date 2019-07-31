@@ -21,7 +21,7 @@ import { LookupzipcodeModule } from '@adins/lookupzipcode';
 import { LookuprefbankModule } from '@adins/lookuprefbank';
 import { LookuprefjobtitleModule } from '@adins/lookuprefjobtitle';
 import { LookuporgjobtitleModule } from '@adins/lookuporgjobtitle';
-import { LookupbizunitModule } from '@adins/lookupbizunit';
+import { lookupbizunitmodule } from '@adins/lookupbizunit';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { LookupsupervisorModule } from '@adins/lookupsupervisor';
@@ -29,6 +29,10 @@ import { MatStepperModule, MatIconModule, MatExpansionModule, MatTabsModule } fr
 import { SearchV2Component } from './search-v2/search-v2.component';
 import { UcgridviewComponent } from './UserControl/ucgridview/ucgridview.component';
 import { RouterModule } from '@angular/router';
+import { UcpagingComponent } from './UserControl/ucpaging/ucpaging.component';
+import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-supervisor.component';
+import { UcgridviewModule } from '@adins/ucgridview';
+import { UcpagingModule } from '@adins/ucpaging';
 
 
 @NgModule({
@@ -48,13 +52,16 @@ import { RouterModule } from '@angular/router';
         UcContactInfoComponent,
         UcInfoComponent,
         UcgridviewComponent,
+        UcpagingComponent,
+        LookupSupervisorComponent,
         TranslateModule,
-        LookupbizunitModule,
+        lookupbizunitmodule,
         LookuporgmdlstrucModule,
         LookuporgjobtitleModule,
         LookuprefjobtitleModule,
         UCSearchModule,
         UcgridfooterModule,
+        UcpagingModule,
         FormEngineModule,
         AngularFileUploaderModule,
         UcSubsectionModule,
@@ -75,7 +82,9 @@ import { RouterModule } from '@angular/router';
         UcgridfooterModule,
         TranslateModule,
         LookupzipcodeModule,
-        UcSubsectionModule
+        UcSubsectionModule,
+        UcgridviewModule,
+        UcpagingModule
     ],
     declarations: [
         SearchComponent,
@@ -84,7 +93,9 @@ import { RouterModule } from '@angular/router';
         UCGridFooterComponent,
         UcContactInfoComponent,
         UcInfoComponent,
-        UcgridviewComponent
+        UcgridviewComponent,
+        UcpagingComponent,
+        LookupSupervisorComponent
     ]
 })
 

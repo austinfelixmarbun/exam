@@ -56,7 +56,7 @@
             "position": "center",
             "action": [
                 {
-                    "icon": "edit",
+                    "type": "edit",
                     "path": "/bank/edit",
                     "param": [
                         {
@@ -70,7 +70,7 @@
                     ]
                 },
                 {
-                    "icon": "delete",
+                    "type": "delete",
                     "property": "refBankId"
                 }
             ]
