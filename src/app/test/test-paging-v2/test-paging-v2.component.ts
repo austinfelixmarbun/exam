@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-test-paging-v2',
@@ -20,14 +21,12 @@ export class TestPagingV2Component implements OnInit {
   ngOnInit() {
     console.log("v2");
     //** lib-ucpaging **//
-    var test = {
-      _url : "./assets/search/searchBank.json",
-      enviromentUrl : environment.settingUrl,
-      apiQryPaging : AdInsConstant.GetBankPaging,
-      deleteUrl : AdInsConstant.DeleteRefBank,
-      pagingJson : "./assets/form-setting/dummyPaging.json"
-    }
-    this.inputObj = test;
+    this.inputPagingObj = new UcPagingObj();
+    this.inputPagingObj._url = "./assets/search/searchBank.json";
+    this.inputPagingObj.enviromentUrl = environment.settingUrl;
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetBankPaging;
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefBank;
+    this.inputPagingObj.pagingJson = "./assets/form-setting/dummyPaging.json";
     //** lib-ucpaging **//
     
     //** app-lookupgeneric **//
