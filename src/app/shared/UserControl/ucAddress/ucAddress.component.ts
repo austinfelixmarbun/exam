@@ -13,6 +13,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 export class UcAddressComponent implements OnInit {
   @Input() resultData: any;
   @Input() parentForm: any;
+  @Input() identifier: any = "";
   inputLookupObj: any;
   jsonData: any;
   areaCode2: any;

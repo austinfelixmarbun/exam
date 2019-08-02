@@ -9,14 +9,12 @@ import { NgForm, ControlContainer } from '@angular/forms';
   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 export class UcContactInfoComponent implements OnInit {
-  constructor() {
-  }
-  ngOnInit() { }
   @Input() resultData: any;
   @Input() parentForm: any;
   @Input() useName: any = true;
   @Input() useTitle: any = true;
   @Input() useEmail2: any = true;
+  @Input() identifier: any = "";
   jsonData: any;
   mobilePhn1: any;
   mobilePhn2: any;
@@ -24,6 +22,11 @@ export class UcContactInfoComponent implements OnInit {
   email2: any;
   cntctPersonName: any;
   cntctPersonJobTitle: any;
+
+  constructor() {
+  }
+  
+  ngOnInit() { }
 
   setData(data) {
     console.log(data);
