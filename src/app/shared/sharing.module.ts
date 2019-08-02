@@ -33,6 +33,8 @@ import { UcpagingComponent } from './UserControl/ucpaging/ucpaging.component';
 import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-supervisor.component';
 import { UcgridviewModule } from '@adins/ucgridview';
 import { UcpagingModule } from '@adins/ucpaging';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { LookupgenericComponent } from './UserControl/lookupgeneric/lookupgeneric.component';
 
 
 @NgModule({
@@ -53,6 +55,7 @@ import { UcpagingModule } from '@adins/ucpaging';
         UcInfoComponent,
         UcgridviewComponent,
         UcpagingComponent,
+        LookupgenericComponent,
         LookupSupervisorComponent,
         TranslateModule,
         lookupbizunitmodule,
@@ -62,6 +65,7 @@ import { UcpagingModule } from '@adins/ucpaging';
         UCSearchModule,
         UcgridfooterModule,
         UcpagingModule,
+        UclookupgenericModule,
         FormEngineModule,
         AngularFileUploaderModule,
         UcSubsectionModule,
@@ -84,7 +88,8 @@ import { UcpagingModule } from '@adins/ucpaging';
         LookupzipcodeModule,
         UcSubsectionModule,
         UcgridviewModule,
-        UcpagingModule
+        UcpagingModule,
+        UclookupgenericModule
     ],
     declarations: [
         SearchComponent,
@@ -95,6 +100,7 @@ import { UcpagingModule } from '@adins/ucpaging';
         UcInfoComponent,
         UcgridviewComponent,
         UcpagingComponent,
+        LookupgenericComponent,
         LookupSupervisorComponent
     ]
 })

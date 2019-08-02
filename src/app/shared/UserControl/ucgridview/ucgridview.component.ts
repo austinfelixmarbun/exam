@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-ucgridview',
@@ -12,6 +13,7 @@ export class UcgridviewComponent implements OnInit {
 
   @Input() gridInput: any;
   @Output() output: EventEmitter<any> = new EventEmitter();
+  @Output() select: EventEmitter<any> = new EventEmitter();
   
   pagingJson: any;
   headerList: any;
@@ -22,7 +24,7 @@ export class UcgridviewComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor(private http: HttpClient, public toastr: ToastrService) { }
+  constructor(private http: HttpClient, public toastr: ToastrService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.initiateForm();
@@ -98,5 +100,10 @@ export class UcgridviewComponent implements OnInit {
           console.log(error);
         });
     }
+  }
+
+  choose(item) {
+    this.select.emit(item);
+    this.modalService.dismissAll();
   }
 }
