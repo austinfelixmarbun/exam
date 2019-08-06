@@ -22,6 +22,9 @@ import { OfficeZipcodeMemberComponent } from './office-zipcode-member/office-zip
 import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-zipcode-member-add/office-zipcode-member-add.component';
 import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/office-zipcode-member-paging/office-zipcode-member-paging.component';
 import { LookupemployeeComponent } from '@adins/lookupemployee';
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 
 @NgModule({
   imports: [
@@ -30,7 +33,9 @@ import { LookupemployeeComponent } from '@adins/lookupemployee';
     FormsModule,
     HttpModule,
     NgbModule,
-    SharingModule,
+    UCSearchModule,
+    UcgridfooterModule,
+    SharingComponentModule,
     ReactiveFormsModule
   ],
   declarations: [

@@ -7,6 +7,10 @@ import { MenuSettingRoutingComponent } from 'app/menu/menu-setting-routing.compo
 import { SharingModule } from 'app/shared/sharing.module';
 import { MenuSettingComponent } from './menu-setting.component';
 import { AddMenuSettingComponent } from './add/add-menu.component';
+import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { UCSearchComponent, UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { LookupparentformModule } from '@adins/lookupparentform';
 
 @NgModule({
   imports: [
@@ -15,7 +19,10 @@ import { AddMenuSettingComponent } from './add/add-menu.component';
     FormsModule,
     HttpModule,
     NgbModule,
-    SharingModule
+    SharingComponentModule,
+    UCSearchModule,
+    LookupparentformModule,
+    UcgridfooterModule
   ],
   declarations: [
     MenuSettingComponent,
