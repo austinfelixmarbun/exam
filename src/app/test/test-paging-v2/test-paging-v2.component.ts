@@ -16,6 +16,8 @@ export class TestPagingV2Component implements OnInit {
   inputPagingObj: any;
   inputLookupObj: any;
   //** End UC Search **//
+
+  viewObj: any;
   constructor() { }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class TestPagingV2Component implements OnInit {
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefBank;
     this.inputPagingObj.pagingJson = "./assets/form-setting/dummyPaging.json";
     //** lib-ucpaging **//
-    
+
     //** app-lookupgeneric **//
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupRefBank.json";
@@ -36,10 +38,15 @@ export class TestPagingV2Component implements OnInit {
     this.inputLookupObj.urlEnviPaging = environment.settingUrl;
     this.inputLookupObj.pagingJson = "./assets/form-setting/dummyPaging2.json";
     this.inputLookupObj.genericJson = "./assets/form-setting/dummyGeneric.json";
-    this.inputLookupObj.jsonSelect = {refBankId:65, bankCode:"B-0009", bankName:"Bank Mandiri"};
+    this.inputLookupObj.jsonSelect = { refBankId: 65, bankCode: "B-0009", bankName: "Bank Mandiri" };
     this.inputLookupObj.nameSelect = "Bank Mandiri";
     this.inputLookupObj.idSelect = "B-0009";
     //** app-lookupgeneric **//
+
+
+    //** app-viewgeneric **//
+    this.viewObj = "./assets/form-setting/dummyView.json";
+    //** app-viewgeneric **//
   }
 
   SaveForm(form) {

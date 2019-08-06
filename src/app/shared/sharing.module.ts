@@ -34,8 +34,9 @@ import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-sup
 import { UcgridviewModule } from '@adins/ucgridview';
 import { UcpagingModule } from '@adins/ucpaging';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { LookupgenericComponent } from './UserControl/lookupgeneric/lookupgeneric.component';
-
+import { ViewgenericComponent } from './UserControl/viewgeneric/viewgeneric.component';
 
 @NgModule({
     exports: [
@@ -56,6 +57,7 @@ import { LookupgenericComponent } from './UserControl/lookupgeneric/lookupgeneri
         UcgridviewComponent,
         UcpagingComponent,
         LookupgenericComponent,
+        ViewgenericComponent,
         LookupSupervisorComponent,
         TranslateModule,
         lookupbizunitmodule,
@@ -66,6 +68,7 @@ import { LookupgenericComponent } from './UserControl/lookupgeneric/lookupgeneri
         UcgridfooterModule,
         UcpagingModule,
         UclookupgenericModule,
+        UcviewgenericModule,
         FormEngineModule,
         AngularFileUploaderModule,
         UcSubsectionModule,
@@ -89,7 +92,8 @@ import { LookupgenericComponent } from './UserControl/lookupgeneric/lookupgeneri
         UcSubsectionModule,
         UcgridviewModule,
         UcpagingModule,
-        UclookupgenericModule
+        UclookupgenericModule,
+        UcviewgenericModule
     ],
     declarations: [
         SearchComponent,
@@ -101,6 +105,7 @@ import { LookupgenericComponent } from './UserControl/lookupgeneric/lookupgeneri
         UcgridviewComponent,
         UcpagingComponent,
         LookupgenericComponent,
+        ViewgenericComponent,
         LookupSupervisorComponent
     ]
 })
