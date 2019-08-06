@@ -63,7 +63,6 @@ import { UcpagingModule } from '@adins/ucpaging';
         UcgridfooterModule,
         UcpagingModule,
         FormEngineModule,
-        AngularFileUploaderModule,
         UcSubsectionModule,
         AngularFileUploaderModule,
         LookupsupervisorModule,
