@@ -7,6 +7,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerComponent } from 'app/customer/customer.component';
 import { CustomerRoutingModule } from 'app/customer/customer-routing.module';
 import { ArchwizardModule } from 'angular-archwizard';
+import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
 
 @NgModule({
   exports: [
@@ -18,7 +21,9 @@ import { ArchwizardModule } from 'angular-archwizard';
     FormsModule,
     HttpModule,
     NgbModule,
-    SharingModule,
+    SharingComponentModule,
+    UCSearchModule,
+    UcgridfooterModule,
     ArchwizardModule
   ],
   declarations: [

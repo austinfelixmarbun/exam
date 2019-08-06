@@ -23,6 +23,9 @@ import { InputGridComponent } from './elements/input-grid/input-grid.component';
 import { ArchwizardComponent } from './archwizard/archwizard.component';
 import { SharingModule } from 'app/shared/sharing.module';
 import { CustomerModule } from 'app/customer/customer.module';
+import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
 
 @NgModule({
     imports: [
@@ -35,7 +38,9 @@ import { CustomerModule } from 'app/customer/customer.module';
         CustomFormsModule,
         MatchHeightModule,
         NgbModule,
-        SharingModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        SharingComponentModule,
         CustomerModule
     ],
     declarations: [

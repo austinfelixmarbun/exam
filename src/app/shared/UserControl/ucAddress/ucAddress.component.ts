@@ -10,6 +10,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
   providers: [DecimalPipe],
   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
+
 export class UcAddressComponent implements OnInit {
   @Input() resultData: any;
   @Input() parentForm: any;

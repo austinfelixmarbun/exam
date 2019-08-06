@@ -12,6 +12,12 @@ import { Dummy3Component } from "./dummy3/dummy3.component";
 import { DummyPagingComponent } from "./dummy/dummy-paging/dummy-paging.component";
 import { Template1Component } from './template/template1/template1.component';
 import { TestPagingComponent } from './test-paging/test-paging.component';
+import { SharingComponentModule } from "app/shared/sharingcomponent.module";
+import { AngularFileUploaderModule } from "angular-file-uploader";
+import { UCSearchModule } from "@adins/ucsearch";
+import { UcgridfooterModule } from "@adins/ucgridfooter";
+import { MatTabsModule, MatStepperModule, MatIconModule, MatExpansionModule } from "@angular/material";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     imports: [
@@ -19,7 +25,14 @@ import { TestPagingComponent } from './test-paging/test-paging.component';
         FormsModule,
         HttpModule,
         NgbModule,
-        SharingModule,
+        SharingComponentModule,
+        AngularFileUploaderModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        MatTabsModule,
+        MatStepperModule,
+        MatIconModule,
+        MatExpansionModule,
         TestRoutingModule
     ],
     declarations: [
@@ -30,7 +43,7 @@ import { TestPagingComponent } from './test-paging/test-paging.component';
         DummyPagingComponent,
         Template1Component,
         TestPagingComponent
-    ],
+    ]
 
 })
 export class TestModule { }
