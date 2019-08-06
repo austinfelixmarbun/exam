@@ -45,6 +45,8 @@ import { lookupbizunitmodule } from '@adins/lookupbizunit';
         LookuprefjobtitleModule,
         UCSearchModule,
         UcgridfooterModule,
+        UcpagingModule,
+        UclookupgenericModule,
         FormEngineModule,
         AngularFileUploaderModule,
         UcSubsectionModule,
@@ -66,7 +68,10 @@ import { lookupbizunitmodule } from '@adins/lookupbizunit';
         UcgridfooterModule,
         TranslateModule,
         LookupzipcodeModule,
-        UcSubsectionModule
+        UcSubsectionModule,
+        UcgridviewModule,
+        UcpagingModule,
+        UclookupgenericModule
     ],
     declarations: [
         SearchV2Component,

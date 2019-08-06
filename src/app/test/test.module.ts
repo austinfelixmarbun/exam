@@ -18,6 +18,7 @@ import { UCSearchModule } from "@adins/ucsearch";
 import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { MatTabsModule, MatStepperModule, MatIconModule, MatExpansionModule } from "@angular/material";
 import { RouterModule } from "@angular/router";
+import { TestPagingV2Component } from './test-paging-v2/test-paging-v2.component';
 
 @NgModule({
     imports: [
@@ -42,8 +43,9 @@ import { RouterModule } from "@angular/router";
         Dummy3Component,
         DummyPagingComponent,
         Template1Component,
-        TestPagingComponent
-    ]
+        TestPagingComponent,
+        TestPagingV2Component
+    ],
 
 })
 export class TestModule { }

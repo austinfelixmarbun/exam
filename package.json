@@ -13,7 +13,11 @@
   "private": true,
   "dependencies": {
     "@adins/form-engine": "^1.0.2",
+<<<<<<< HEAD
     "@adins/lookupbizunit": "^1.0.10",
+=======
+    "@adins/lookupbizunit": "^1.0.11",
+>>>>>>> 470a8e56e3ebcce9a080e48ab6f7a44b83bbb95c
     "@adins/lookupdistrict": "^1.0.10",
     "@adins/lookupemployee": "^1.0.7",
     "@adins/lookuporgjobtitle": "^1.0.4",

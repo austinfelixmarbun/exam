@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-ucgridview',
@@ -12,6 +13,7 @@ export class UcgridviewComponent implements OnInit {
 
   @Input() gridInput: any;
   @Output() output: EventEmitter<any> = new EventEmitter();
+  @Output() select: EventEmitter<any> = new EventEmitter();
   
   pagingJson: any;
   headerList: any;
@@ -22,16 +24,14 @@ export class UcgridviewComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public toastr: ToastrService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.pagingJson = "./assets/form-setting/dummyPaging.json";
-
     this.initiateForm();
   }
 
   initiateForm() {
-    this.getJSON(this.pagingJson).subscribe(data => {
+    this.getJSON(this.gridInput.pagingJson).subscribe(data => {
       console.log(data);
       this.headerList = data.headerList;
       this.bodyList = data.bodyList;
@@ -49,7 +49,7 @@ export class UcgridviewComponent implements OnInit {
     for (var i = 0; i < param.length; i++) {
       if (param[i].type == "mode") {
         arrList[param[i].type] = param[i].property;
-      } else if (param[i].type == "key") {
+      } else {
         arrList[param[i].type] = item[param[i].property];
       }
     }
@@ -75,19 +75,35 @@ export class UcgridviewComponent implements OnInit {
     this.gridInput.searchComp.search(this.gridInput.apiUrl, this.gridInput.pageNow, this.gridInput.pageSize, order);
   }
 
-  delete(refBankId: any) {
-    if (confirm("Are you sure to delete this record?")) {
-      // this.deleteUrl = this.settingUrl + AdInsConstant.DeleteRefBank;
-      // this.bankObj = new RefBankObj();
-      // this.bankObj.refBankId = refBankId;
-      // this.http.post(this.deleteUrl, this.bankObj).subscribe(
-      //   (response) => {
-      //     this.toastr.successMessage(response['message']);
-      //     this.searchPagination(1);
-      //   },
-      //   (error) => {
-      //     console.log(error);
-      //   });
+  searchPagination(event: number) {
+    this.pageNow = event;
+    var order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
     }
+    this.gridInput.searchComp.search(this.gridInput.apiUrl, this.pageNow, this.pageSize, order);
+  }
+
+  delete(key: any, value: any) {
+    if (confirm("Are you sure to delete this record?")) {
+      var delId = {};
+      delId[key] = value;
+      this.http.post(this.gridInput.deleteUrl, delId).subscribe(
+        (response) => {
+          this.toastr.success(response['message'], 'Success!');
+          this.searchPagination(this.pageNow);
+        },
+        (error) => {
+          console.log(error);
+        });
+    }
+  }
+
+  choose(item) {
+    this.select.emit(item);
+    this.modalService.dismissAll();
   }
 }

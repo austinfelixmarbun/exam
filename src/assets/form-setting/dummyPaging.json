@@ -37,9 +37,20 @@
             "property": "bankCode"
         },
         {
-            "type": "text",
+            "type": "link",
             "position": "left",
-            "property": "bankName"
+            "property": "bankName",
+            "path": "/bank/edit",
+            "param": [
+                {
+                    "type": "mode",
+                    "property": "edit"
+                },
+                {
+                    "type": "refBankId",
+                    "property": "refBankId"
+                }
+            ]
         },
         {
             "type": "text",
@@ -56,7 +67,7 @@
             "position": "center",
             "action": [
                 {
-                    "icon": "edit",
+                    "type": "edit",
                     "path": "/bank/edit",
                     "param": [
                         {
@@ -70,7 +81,7 @@
                     ]
                 },
                 {
-                    "icon": "delete",
+                    "type": "delete",
                     "property": "refBankId"
                 }
             ]
