@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="horz-layout-colored-controls" translate> {{ viewList.title }} </h4>
+    </div>
+    <div class="card-body">
+      <div class="px-3">
+        <lib-ucSubsection *ngIf="viewList != ''" [id]="viewList.subSectionId + 'id'" [title]="viewList.subSectionTitle" [panel]="viewList.subSectionId">
+        </lib-ucSubsection>
+        <div class="form-body" [id]='viewList.subSectionId'>
+          <div class="form-group row">
+            <div class="col-md-6" *ngFor="let mi of viewList?.mainInfo">
+              <div class="row">
+                  <div class="col-md-6">
+                    <label class="label-control" name="VendorCode" translate> {{ mi.label }} </label>
+                  </div>
+                  <div class="col-md-6">
+                      <label *ngIf="mi.type == 'text'" class="label-control" translate> {{ mainInfoObj[mi.property] }} </label>
+                      <label *ngIf="mi.type == 'currency'" class="label-control" translate> {{ mainInfoObj[mi.property] | number}} </label>
+                      <label *ngIf="mi.type == 'date'" class="label-control" translate> {{ mainInfoObj[mi.property] | date: 'dd-MMM-yyyy'}} </label>
+                      <label *ngIf="mi.type == 'link'" class="label-control" translate><a [routerLink]="[mi.path]" [queryParams]="genAction(mi.param)"> {{ mainInfoObj[mi.property] }} </a></label>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

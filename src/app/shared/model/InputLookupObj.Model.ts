@@ -8,6 +8,8 @@ export class InputLookupObj{
     jsonSelect: any
     addCritInput: any
     isRequired: any
+    pagingJson: any
+    genericJson: any
 
     constructor()
     {

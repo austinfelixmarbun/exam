@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
@@ -12,6 +12,7 @@ import { InputGridObj } from 'app/shared/model/InputGridObj.Model';
 export class UcpagingComponent implements OnInit {
 
   @Input() searchObj: any;
+  @Output() select: EventEmitter<any> = new EventEmitter();
   
   //** Start UC Search **//
   @ViewChild(UCSearchComponent) searchComponent;
@@ -58,6 +59,10 @@ export class UcpagingComponent implements OnInit {
   getOutput(event) {
     this.orderByKey = event.orderByKey;
     this.orderByValue = event.orderByValue;
+  }
+
+  getSelect(event) {
+    this.select.emit(event);
   }
 
   onSelect(event) {

@@ -37,9 +37,20 @@
             "property": "bankCode"
         },
         {
-            "type": "text",
+            "type": "link",
             "position": "left",
-            "property": "bankName"
+            "property": "bankName",
+            "path": "/bank/edit",
+            "param": [
+                {
+                    "type": "mode",
+                    "property": "edit"
+                },
+                {
+                    "type": "refBankId",
+                    "property": "refBankId"
+                }
+            ]
         },
         {
             "type": "text",

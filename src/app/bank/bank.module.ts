@@ -6,15 +6,18 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BankAddComponent } from 'app/bank/add/add-bank.component';
-import { SharingModule } from 'app/shared/sharing.module';
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
+
 @NgModule({
   imports: [
     BankRoutingComponent,
     CommonModule,
     FormsModule,
     HttpModule,
-    NgbModule,
-    SharingModule,
+    UCSearchModule,
+    UcgridfooterModule,
+    NgbModule
   ],
   declarations: [
     BankComponent,

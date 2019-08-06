@@ -4,7 +4,6 @@ import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SystemSettingRoutingModule } from 'app/system-setting/system-setting-routing.module';
 import { RoleAddEditComponent } from 'app/system-setting/role/role-add-edit/role-add-edit.component';
@@ -18,7 +17,11 @@ import { UserChangePasswordComponent } from 'app/system-setting/user/user-change
 import { RoleFormTreeComponent } from 'app/system-setting/role/role-form-tree/role-form-tree.component';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { RoleFormFeaturePagingComponent } from './role/role-form-feature-paging/role-form-feature-paging.component';
-import { LookupemployeeComponent } from '@adins/lookupemployee';
+import { LookupemployeeComponent, LookupemployeeModule } from '@adins/lookupemployee';
+import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { LookuproleModule } from '@adins/lookuprole';
 
 
 @NgModule({
@@ -28,7 +31,11 @@ import { LookupemployeeComponent } from '@adins/lookupemployee';
     FormsModule,
     HttpModule,
     NgbModule,
-    SharingModule,
+    SharingComponentModule,
+    UCSearchModule,
+    UcgridfooterModule,
+    LookupemployeeModule,
+    LookuproleModule,
     ReactiveFormsModule,
     TreeViewModule
   ],
