@@ -46,7 +46,6 @@ import { lookupbizunitmodule } from '@adins/lookupbizunit';
         UCSearchModule,
         UcgridfooterModule,
         FormEngineModule,
-        AngularFileUploaderModule,
         UcSubsectionModule,
         AngularFileUploaderModule,
         LookupsupervisorModule,
