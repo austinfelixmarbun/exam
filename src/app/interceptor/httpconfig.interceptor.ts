@@ -181,13 +181,13 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 return throwError(error);
             }), finalize(() => {
                 this.count--;
-
-                // if (this.count == 0) {
-                    if (request.method == "POST") {
-                        AdInsHelper.ClearPageAccessLog();
-                        this.spinner.hide();
-                    }
-                // }
+                
+                if (request.method == "POST") {
+                    AdInsHelper.ClearPageAccessLog();
+                }
+                if (this.count == 0) {
+                    this.spinner.hide();
+                }
             })
         );
     }
