@@ -26,18 +26,11 @@
     "@adins/lookupzipcode": "^1.0.8",
     "@adins/uc-subsection": "^1.0.4",
     "@adins/ucgridfooter": "^1.0.1",
-<<<<<<< HEAD
-    "@adins/ucgridview": "^1.0.3",
-    "@adins/uclookupgeneric": "^1.0.3",
-    "@adins/ucpaging": "^1.0.3",
-    "@adins/ucsearch": "^1.0.13",
-=======
     "@adins/ucgridview": "^2.0.0",
     "@adins/uclookupgeneric": "^2.0.0",
     "@adins/ucpaging": "^2.0.0",
     "@adins/ucsearch": "^2.0.0",
     "@adins/ucviewgeneric": "^2.0.0",
->>>>>>> 440b971840250bcab4263988ac4797c24110b1e8
     "@agm/core": "1.0.0-beta.5",
     "@angular/animations": "^7.2.15",
     "@angular/cdk": "^7.3.7",
