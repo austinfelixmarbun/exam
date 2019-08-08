@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { SharingModule } from "app/shared/sharing.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HttpModule } from "@angular/http";
 import { CommonModule } from "@angular/common";
@@ -17,11 +16,11 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
 import { UCSearchModule } from "@adins/ucsearch";
 import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { MatTabsModule, MatStepperModule, MatIconModule, MatExpansionModule } from "@angular/material";
-import { RouterModule } from "@angular/router";
 import { TestPagingV2Component } from './test-paging-v2/test-paging-v2.component';
-import { UclookupgenericModule } from "@adins/uclookupgeneric";
-import { UcpagingModule } from "@adins/ucpaging";
-import { UcgridviewModule } from "@adins/ucgridview";
+import { UcgridviewModule } from '@adins/ucgridview';
+import { UcpagingModule } from '@adins/ucpaging';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
 
 @NgModule({
     imports: [
@@ -38,9 +37,11 @@ import { UcgridviewModule } from "@adins/ucgridview";
         MatIconModule,
         UclookupgenericModule,
         MatExpansionModule,
-        UcpagingModule,
+        TestRoutingModule,
         UcgridviewModule,
-        TestRoutingModule
+        UcpagingModule,
+        UclookupgenericModule,
+        UcviewgenericModule
     ],
     declarations: [
         DummyComponent,

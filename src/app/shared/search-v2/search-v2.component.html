@@ -21,11 +21,11 @@
                     <div class="col-md-6 form-group" *ngFor="let question of configuration?.component">
                       <div class="col-md-12">
                         <div class="row">
-                          <label class="col-md-5 no-padding" for="projectinput1" translate>{{question.label}}</label>
+                          <label class="col-md-5 no-padding" for="{{question.id}}" translate>{{question.label}}</label>
                           <div class="col-md-7 no-padding">
                             <div *ngIf="question.type=='textbox'">
                               <input type="text" id="{{question.id}}" class="form-control search-form-control"
-                                name="{{question.name}}" value="{{question.value}}"
+                                name="{{question.name}}" value="{{question.value}}" [readonly]="question.readonly == true"
                                 attr.data-type="{{question.datatype}}">
                             </div>
                             <div *ngIf="question.type=='textarea'">

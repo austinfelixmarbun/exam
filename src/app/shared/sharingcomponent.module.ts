@@ -23,7 +23,8 @@ import { SearchV2Component } from './search-v2/search-v2.component';
         UCGridFooterComponent,
         SearchV2Component,
         UcgridviewComponent,
-        UcInfoComponent
+        UcInfoComponent,
+        SearchV2Component
     ],
     imports: [
         FormsModule,
@@ -40,7 +41,8 @@ import { SearchV2Component } from './search-v2/search-v2.component';
         SearchComponent,
         UCGridFooterComponent,
         UcgridviewComponent,
-        UcInfoComponent
+        UcInfoComponent,
+        SearchV2Component
     ]
 })
 

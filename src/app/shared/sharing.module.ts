@@ -48,10 +48,7 @@ import { UcgridviewModule} from '@adins/ucgridview';
         LookuprefjobtitleModule,
         UCSearchModule,
         UcgridfooterModule,
-        UcpagingModule,
-        UclookupgenericModule,
         FormEngineModule,
-        AngularFileUploaderModule,
         UcSubsectionModule,
         AngularFileUploaderModule,
         LookupsupervisorModule,
@@ -71,10 +68,7 @@ import { UcgridviewModule} from '@adins/ucgridview';
         UcgridfooterModule,
         TranslateModule,
         LookupzipcodeModule,
-        UcSubsectionModule,
-        UcgridviewModule,
-        UcpagingModule,
-        UclookupgenericModule
+        UcSubsectionModule
     ],
     declarations: [
         SearchV2Component,
