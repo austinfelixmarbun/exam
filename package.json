@@ -13,7 +13,7 @@
   "private": true,
   "dependencies": {
     "@adins/form-engine": "^1.0.2",
-    "@adins/lookupbizunit": "^1.0.10",
+    "@adins/lookupbizunit": "^1.0.11",
     "@adins/lookupdistrict": "^1.0.10",
     "@adins/lookupemployee": "^1.0.7",
     "@adins/lookuporgjobtitle": "^1.0.4",
@@ -26,6 +26,9 @@
     "@adins/lookupzipcode": "^1.0.8",
     "@adins/uc-subsection": "^1.0.4",
     "@adins/ucgridfooter": "^1.0.1",
+    "@adins/ucgridview": "^1.0.3",
+    "@adins/uclookupgeneric": "^1.0.3",
+    "@adins/ucpaging": "^1.0.3",
     "@adins/ucsearch": "^1.0.13",
     "@agm/core": "1.0.0-beta.5",
     "@angular/animations": "^7.2.15",
@@ -98,7 +101,7 @@
     "sweetalert2": "7.28.8",
     "videogular2": "6.3.0",
     "web-animations-js": "2.2.5",
-    "xlsx": "^0.14.3",
+    "xlsx": "^0.14.5",
     "zone.js": "0.8.26"
   },
   "devDependencies": {

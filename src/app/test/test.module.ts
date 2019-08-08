@@ -19,6 +19,9 @@ import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { MatTabsModule, MatStepperModule, MatIconModule, MatExpansionModule } from "@angular/material";
 import { RouterModule } from "@angular/router";
 import { TestPagingV2Component } from './test-paging-v2/test-paging-v2.component';
+import { UclookupgenericModule } from "@adins/uclookupgeneric";
+import { UcpagingModule } from "@adins/ucpaging";
+import { UcgridviewModule } from "@adins/ucgridview";
 
 @NgModule({
     imports: [
@@ -33,7 +36,10 @@ import { TestPagingV2Component } from './test-paging-v2/test-paging-v2.component
         MatTabsModule,
         MatStepperModule,
         MatIconModule,
+        UclookupgenericModule,
         MatExpansionModule,
+        UcpagingModule,
+        UcgridviewModule,
         TestRoutingModule
     ],
     declarations: [

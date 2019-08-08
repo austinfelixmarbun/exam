@@ -12,6 +12,7 @@ import { SearchComponent } from './search/search.component';
 import { UCGridFooterComponent } from './UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UcgridviewComponent } from './UserControl/ucgridview/ucgridview.component';
 import { RouterModule } from '@angular/router';
+import { SearchV2Component } from './search-v2/search-v2.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
         UcContactInfoComponent,
         SearchComponent,
         UCGridFooterComponent,
+        SearchV2Component,
         UcgridviewComponent,
         UcInfoComponent
     ],
@@ -33,6 +35,7 @@ import { RouterModule } from '@angular/router';
     ],
     declarations: [
         UcAddressComponent,
+        SearchV2Component,
         UcContactInfoComponent,
         SearchComponent,
         UCGridFooterComponent,

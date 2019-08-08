@@ -25,12 +25,15 @@ import { SearchV2Component } from './search-v2/search-v2.component';
 import { RouterModule } from '@angular/router';
 import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-supervisor.component';
 import { lookupbizunitmodule } from '@adins/lookupbizunit';
+import { UcpagingModule} from '@adins/ucpaging';
+import { UclookupgenericModule} from '@adins/uclookupgeneric';
+import { UcgridviewModule} from '@adins/ucgridview';
 
 
 @NgModule({
     exports: [
         CommonModule,
-        SearchV2Component,
+        
         LookupemployeeModule,
         LookupzipcodeModule,
         NgbModule,
