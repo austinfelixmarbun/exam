@@ -14,7 +14,7 @@ export class UcgridviewComponent implements OnInit {
   @Input() gridInput: any;
   @Output() output: EventEmitter<any> = new EventEmitter();
   @Output() select: EventEmitter<any> = new EventEmitter();
-  
+
   pagingJson: any;
   headerList: any;
   bodyList: any;
@@ -55,7 +55,21 @@ export class UcgridviewComponent implements OnInit {
     }
     return arrList;
   }
-  
+
+  switchCase(item, condList) {
+    var condition = false;
+
+    for (var i = 0; i < condList.conditions.length; i++) {
+      if (item[condList.conditions[i].property] == condList.conditions[i].value) {
+        condition = true;
+      } else {
+        condition = false;
+        break;
+      }
+    }
+    return condition;
+  }
+
   searchSort(event: any) {
     if (this.orderByKey == event.target.attributes.name.nodeValue) {
       this.orderByValue = !this.orderByValue;

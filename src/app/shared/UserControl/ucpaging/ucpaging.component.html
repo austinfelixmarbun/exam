@@ -2,4 +2,6 @@
 
 <app-ucgridview [gridInput]="gridObj" (output)="getOutput($event)" (select)="getSelect($event)"></app-ucgridview>
 
-<lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
+<div [hidden]="gridObj?.resultData?.data == null">
+    <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
+</div>
