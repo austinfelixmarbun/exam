@@ -88,7 +88,7 @@ export class BankAddComponent implements OnInit {
      }
      
      private scrollToError(): void {
-        const firstElementWithError = document.querySelector('.ng-invalid');
+        const firstElementWithError = document.querySelector('input.ng-invalid');
         this.scrollTo(firstElementWithError);
      }
 

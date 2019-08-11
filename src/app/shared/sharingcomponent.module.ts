@@ -12,6 +12,11 @@ import { SearchComponent } from './search/search.component';
 import { UCGridFooterComponent } from './UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UcgridviewComponent } from './UserControl/ucgridview/ucgridview.component';
 import { RouterModule } from '@angular/router';
+import { SearchV2Component } from './search-v2/search-v2.component';
+import { LookupgenericComponent } from './UserControl/lookupgeneric/lookupgeneric.component';
+import { UcpagingComponent } from './UserControl/ucpaging/ucpaging.component';
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
 
 
 @NgModule({
@@ -20,8 +25,12 @@ import { RouterModule } from '@angular/router';
         UcContactInfoComponent,
         SearchComponent,
         UCGridFooterComponent,
+        SearchV2Component,
         UcgridviewComponent,
-        UcInfoComponent
+        UcInfoComponent,
+        SearchV2Component,
+        LookupgenericComponent,
+        UcpagingComponent
     ],
     imports: [
         FormsModule,
@@ -29,15 +38,21 @@ import { RouterModule } from '@angular/router';
         RouterModule,
         HttpModule,
         CommonModule,
-        LookupzipcodeModule
+        LookupzipcodeModule,
+        UCSearchModule,
+        UcgridfooterModule
     ],
     declarations: [
         UcAddressComponent,
+        SearchV2Component,
         UcContactInfoComponent,
         SearchComponent,
         UCGridFooterComponent,
         UcgridviewComponent,
-        UcInfoComponent
+        UcInfoComponent,
+        SearchV2Component,
+        LookupgenericComponent,
+        UcpagingComponent
     ]
 })
 

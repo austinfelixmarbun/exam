@@ -4,7 +4,8 @@
             "type": "sort",
             "position": "left",
             "label": "Bank Code",
-            "name": "bankCode"
+            "name": "bankCode",
+            "width": "width-50-per"
         },
         {
             "type": "sort",
@@ -40,7 +41,8 @@
             "type": "link",
             "position": "left",
             "property": "bankName",
-            "path": "/bank/edit",
+            "target": "_blank",
+            "path": "/bank/view",
             "param": [
                 {
                     "type": "mode",
@@ -71,18 +73,129 @@
                     "path": "/bank/edit",
                     "param": [
                         {
-                            "type": "mode",
-                            "property": "edit"
-                        },
-                        {
                             "type": "refBankId",
                             "property": "refBankId"
                         }
-                    ]
+                    ],
+                    "icon": "ft-alert-circle"
                 },
                 {
                     "type": "delete",
                     "property": "refBankId"
+                },
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "isActive",
+                                    "value": "0"
+                                }
+                            ],
+                            "result": {
+                                "path": "/bank/code",
+                                "param": [
+                                    {
+                                        "type": "bankCode",
+                                        "property": "bankCode"
+                                    }
+                                ]
+                            },
+                            "isHide": true
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "isActive",
+                                    "value": "1"
+                                },
+                                {
+                                    "property": "regRptCode",
+                                    "value": "182"
+                                }
+                            ],
+                            "result": {
+                                "path": "/biCode/182",
+                                "param": [
+                                    {
+                                        "type": "refBankId",
+                                        "property": "refBankId"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "isActive",
+                                    "value": "1"
+                                },
+                                {
+                                    "property": "regRptCode",
+                                    "value": "183"
+                                }
+                            ],
+                            "result": {
+                                "path": "/bank/name",
+                                "param": [
+                                    {
+                                        "type": "refBankId",
+                                        "property": "refBankId"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "switch-v2",
+                    "option": [
+                        {
+                            "property": "isActive",
+                            "case": {
+                                "0": {
+                                    "isExpression": true,
+                                    "operand": "or",
+                                    "expression": {
+                                        "property": "isSystem",
+                                        "case": {
+                                            "0": {
+                                                "isExpression": false,
+                                                "path": "/bank/code",
+                                                "param": [
+                                                    {
+                                                        "type": "bankCode",
+                                                        "property": "bankCode"
+                                                    }
+                                                ]
+                                            },
+                                            "1": {
+                                                "isExpression": false,
+                                                "path": "/bank/name",
+                                                "param": [
+                                                    {
+                                                        "type": "bankName",
+                                                        "property": "bankName"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "1": {
+                                    "isExpression": false,
+                                    "path": "/bank/name",
+                                    "param": [
+                                        {
+                                            "type": "bankName",
+                                            "property": "bankName"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         }
