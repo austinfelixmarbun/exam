@@ -8,6 +8,7 @@
           "type": "link",
           "label": "Surveyor HO Code",
           "property": "vendorCode",
+          "position": "right",
           "path": "/test/paging-v2",
           "param": [
               {
@@ -18,15 +19,17 @@
         {
           "type": "text",
           "label": "Surveyor HO Name",
-          "property": "vendorName"
+          "property": "vendorName",
+          "position": "left"
         },
         {
           "type": "text",
           "label": "Tax Number",
-          "property": "taxpayerNo"
+          "property": "taxpayerNo",
+          "position": "center"
         },
         {
-          "type": "text",
+          "type": "textarea",
           "label": "Surveyor HO Type",
           "property": "mrVendorType"
         },

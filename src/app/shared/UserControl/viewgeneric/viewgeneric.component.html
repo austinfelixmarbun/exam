@@ -14,14 +14,16 @@
                   <div class="col-md-6">
                     <label class="label-control" name="VendorCode" translate> {{ mi.label }} </label>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6" [ngClass]="{ 'text-left': mi.position == 'left',
+                  'text-right': mi.position == 'right', 'text-center': mi.position == 'center' }">
                       <label *ngIf="mi.type == 'text'" class="label-control" translate> {{ mainInfoObj[mi.property] }} </label>
                       <label *ngIf="mi.type == 'currency'" class="label-control" translate> {{ mainInfoObj[mi.property] | number}} </label>
                       <label *ngIf="mi.type == 'date'" class="label-control" translate> {{ mainInfoObj[mi.property] | date: 'dd-MMM-yyyy'}} </label>
                       <label *ngIf="mi.type == 'link'" class="label-control" translate><a [routerLink]="[mi.path]" [queryParams]="genAction(mi.param)"> {{ mainInfoObj[mi.property] }} </a></label>
+                      <textarea *ngIf="mi.text == 'textarea'" class="form-control" cols="30" rows="10" readonly translate> {{ mainInfoObj[mi.property] }} </textarea>
                   </div>
                 </div>
-            </div>
+            </div> 
           </div>
         </div>
       </div>
