@@ -8,7 +8,7 @@
             <form class="form form-horizontal" id="formSearch" #formIdSearch>
               <div class="form-body">
                 <h4 class="form-section font-weight-bold">
-                  <div class="btn no-padding cursor-pointer flip" (click)="isHidden = !isHidden">
+                  <div (click)="changeState()" class="btn no-padding cursor-pointer flip">
                     <i class="fa" style="font-size: 15px; margin: 0px 0px 5px -15px;"
                       [ngClass]="isHidden ? 'fa-chevron-right' : 'fa-chevron-down'"></i>
                   </div>
@@ -16,7 +16,7 @@
                 </h4>
                 <!-- Ini Digunakan untuk Generate Dynamic Component -->
                 <!-- [hidden]="isHidden" -->
-                <div class="panel">
+                <div class="panel-active" [@changeDivSize]=currentState>
                   <div class="row">
                     <div class="col-md-6 form-group" *ngFor="let question of configuration?.component">
                       <div class="col-md-12">
