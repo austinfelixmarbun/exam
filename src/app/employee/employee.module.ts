@@ -11,6 +11,12 @@ import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeaveMaintenanceComponent } from './leave-maintenance/leave-maintenance/leave-maintenance.component';
 import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-maintenance-add-edit/leave-maintenance-add-edit.component';
+import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { LookupsupervisorModule } from '@adins/lookupsupervisor';
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { LookuprefbankModule } from '@adins/lookuprefbank';
+import { LookupemployeeModule } from '@adins/lookupemployee';
 
 
 @NgModule({
@@ -20,7 +26,12 @@ import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-main
     FormsModule,
     HttpModule,
     NgbModule,
-    SharingModule,
+    SharingComponentModule,
+    LookupsupervisorModule,
+    UCSearchModule,
+    UcgridfooterModule,
+    LookuprefbankModule,
+    LookupemployeeModule,
     ReactiveFormsModule
   ],
   declarations: [

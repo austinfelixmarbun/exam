@@ -40,9 +40,11 @@ export class RolepickComponent implements OnInit, AfterViewInit {
             currentUserContext.UserName = response["returnObject"].userId;
             currentUserContext.Office = item.officeCode;
             currentUserContext.Role = item.roleCode;
+            currentUserContext.FullName = item.fullName;
             currentUserContext.BusinessDate = item.businessDt;
             var dateParse = formatDate(item.businessDt, 'yyyy-MMM-dd', 'en-US');
             localStorage.setItem("BusinessDate", dateParse);
+            localStorage.setItem("FullName", item.fullName);
             this.currentUserContextService.addCurrentUserContext(currentUserContext);
             localStorage.setItem("RoleId", item.refRoleId);
             console.log(response);

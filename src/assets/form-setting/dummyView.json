@@ -1,0 +1,47 @@
+{
+    "title": "SUPPLIER HO INFO VIEW",
+      "subSectionId": "title",
+      "subSectionTitle": "Main Information",
+      "mainInfoUrl": "http://r3app-server/prototypes/vendor/Vendor/GetVendorAndVendorAddrByVendorIdAndAddressType",
+      "mainInfo": [
+        {
+          "type": "link",
+          "label": "Surveyor HO Code",
+          "property": "vendorCode",
+          "position": "right",
+          "path": "/test/paging-v2",
+          "param": [
+              {
+                  "property": "vendorId"
+              }
+          ]
+        },
+        {
+          "type": "text",
+          "label": "Surveyor HO Name",
+          "property": "vendorName",
+          "position": "left"
+        },
+        {
+          "type": "text",
+          "label": "Tax Number",
+          "property": "taxpayerNo",
+          "position": "center"
+        },
+        {
+          "type": "textarea",
+          "label": "Surveyor HO Type",
+          "property": "mrVendorType"
+        },
+        {
+          "type": "currency",
+          "label": "ID No",
+          "property": "idNo"
+        },
+        {
+          "type": "date",
+          "label": "Establishment Date",
+          "property": "establishmentDt"
+        }
+      ]
+}

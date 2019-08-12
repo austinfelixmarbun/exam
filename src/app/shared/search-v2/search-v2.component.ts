@@ -50,8 +50,13 @@ export class SearchV2Component implements OnInit {
     let js = this._renderer2.createElement('script');
     js.text = `
           $(document).ready(function(){
-            $("#flip").click(function(){
-              $("#panel").slideToggle("slow");
+            $(".flip").click(function(){
+              //console.log($(this).parent().next().slideToogle("slow"));
+              //var panel = $(this).parent().next()[0].slideToogle("slow");
+              //var panel = $(this).parent().next().find(".panel"); 
+              //$(this).parent().next().slideToggle("slow");
+              //panel.slideToogle("slow");
+              //console.log(panel);
             });
           });
         `;

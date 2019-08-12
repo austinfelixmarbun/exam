@@ -1,4 +1,4 @@
-<lib-UCSearch id="ucSearch1" style="width:100%;" #search1 [searchInput]='inputObj1' (result)="getResult1($event)"></lib-UCSearch>
+<app-search-v2 id="ucSearch1" style="width:100%;" #search1 [searchInput]='inputObj1' (result)="getResult1($event)"></app-search-v2>
 <div [hidden]="resultData1?.data == null">
   <table class="table table-responsive-md text-center table-hover">
     <thead>
@@ -26,7 +26,7 @@
 <br>
 <br>
 <br>
-<lib-UCSearch id="ucSearch2" style="width:100%;" #search2 [searchInput]='inputObj2' (result)="getResult2($event)"></lib-UCSearch>
+<app-search-v2 id="ucSearch2" style="width:100%;" #search2 [searchInput]='inputObj2' (result)="getResult2($event)"></app-search-v2>
 
 <div [hidden]="resultData2?.data == null">
   <table class="table table-responsive-md text-center table-hover">

@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { SharingModule } from "app/shared/sharing.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HttpModule } from "@angular/http";
 import { CommonModule } from "@angular/common";
@@ -12,7 +11,16 @@ import { Dummy3Component } from "./dummy3/dummy3.component";
 import { DummyPagingComponent } from "./dummy/dummy-paging/dummy-paging.component";
 import { Template1Component } from './template/template1/template1.component';
 import { TestPagingComponent } from './test-paging/test-paging.component';
+import { SharingComponentModule } from "app/shared/sharingcomponent.module";
+import { AngularFileUploaderModule } from "angular-file-uploader";
+import { UCSearchModule } from "@adins/ucsearch";
+import { UcgridfooterModule } from "@adins/ucgridfooter";
+import { MatTabsModule, MatStepperModule, MatIconModule, MatExpansionModule } from "@angular/material";
 import { TestPagingV2Component } from './test-paging-v2/test-paging-v2.component';
+import { UcgridviewModule } from '@adins/ucgridview';
+import { UcpagingModule } from '@adins/ucpaging';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
 
 @NgModule({
     imports: [
@@ -20,8 +28,20 @@ import { TestPagingV2Component } from './test-paging-v2/test-paging-v2.component
         FormsModule,
         HttpModule,
         NgbModule,
-        SharingModule,
-        TestRoutingModule
+        SharingComponentModule,
+        AngularFileUploaderModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        MatTabsModule,
+        MatStepperModule,
+        MatIconModule,
+        UclookupgenericModule,
+        MatExpansionModule,
+        TestRoutingModule,
+        UcgridviewModule,
+        UcpagingModule,
+        UclookupgenericModule,
+        UcviewgenericModule
     ],
     declarations: [
         DummyComponent,

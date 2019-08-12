@@ -1,4 +1,4 @@
-<fieldset ngModelGroup="contactInfo">
+<fieldset [ngModelGroup]="'contactInfo' + identifier">
     <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Contact Information</h4>
         <div class="form-group row" *ngIf="useName">

@@ -11,6 +11,9 @@ import { OfficeEmpPosComponent } from 'app/office/office-emp-pos/office-emp-pos.
 import { OfficeEmpPosAddComponent } from 'app/office/office-emp-pos/office-emp-pos-add/office-emp-pos-add.component';
 import { OfficeAreaAddEditComponent } from 'app/office/office-area/office-area-add-edit/office-area-add-edit.component';
 import { OfficeAreaPagingComponent } from 'app/office/office-area/office-area-paging/office-area-paging.component';
+import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
 
 
 @NgModule({
@@ -19,7 +22,9 @@ import { OfficeAreaPagingComponent } from 'app/office/office-area/office-area-pa
     CommonModule,
     FormsModule,
     NgbModule,
-    SharingModule
+    UCSearchModule,
+    UcgridfooterModule,
+    SharingComponentModule
   ],
   declarations: [
     OfficeComponent,

@@ -8,6 +8,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ZipcodeRoutingComponent } from 'app/zipcode/zipcode-routing.module';
 import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
 import { LookupemployeeComponent } from '@adins/lookupemployee';
+import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { LookupdistrictModule } from '@adins/lookupdistrict';
+import { lookupbizunitmodule } from '@adins/lookupbizunit';
 
 
 @NgModule({
@@ -17,7 +22,11 @@ import { LookupemployeeComponent } from '@adins/lookupemployee';
     FormsModule,
     HttpModule,
     NgbModule,
-    SharingModule,
+    SharingComponentModule,
+    lookupbizunitmodule,
+    UCSearchModule,
+    UcgridfooterModule,
+    LookupdistrictModule,
     ReactiveFormsModule
   ],
   declarations: [

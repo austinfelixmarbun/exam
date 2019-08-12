@@ -22,8 +22,9 @@ export class Template1Component implements OnInit {
   templateSelect: any = 0;
   templateNumberOnly: any;
   templateMaxLength: any;
-  TemplateLabel: any;
-  TemplateCode: any;
+  templateLabel: any;
+  templateCode: any;
+  templateEmail:any;
   isActive: any = false;
   templateRadio: any = "M";
   //** Forms **/
