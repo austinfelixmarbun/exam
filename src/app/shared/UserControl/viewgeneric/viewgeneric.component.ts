@@ -12,8 +12,8 @@ export class ViewgenericComponent implements OnInit {
 
   @Input() viewInput: any;
   viewList: any = "";
-  mainInfoObj: any = "";
   getList: any;
+  viewInfoObjList: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.route.queryParams.subscribe(params => {
@@ -30,15 +30,23 @@ export class ViewgenericComponent implements OnInit {
     this.getJSON(this.viewInput).subscribe(data => {
       console.log(data);
       this.viewList = data;
+      this.viewInfoObjList = [];
 
-      this.http.post(this.viewList.mainInfoUrl, this.getList).subscribe(
-        (response) => {
-          console.log(response);
-          this.mainInfoObj = response["returnObject"];
-        },
-        (error) => {
-          console.log(error);
-        })
+      for (var j = 0; j < this.viewList.subsection.length; j++) {
+        this.viewInfoObjList.push(j);
+      }
+
+      for (let i = 0; i < this.viewList.subsection.length; i++) {
+        this.http.post(this.viewList.subsection[i].mainInfoUrl, this.getList).subscribe(
+          (response) => {
+            console.log(response);
+            this.viewInfoObjList[i] = response["returnObject"];
+          },
+          (error) => {
+            console.log(error);
+          })
+      }
+      console.log(this.viewInfoObjList);
     })
   }
 
@@ -46,11 +54,11 @@ export class ViewgenericComponent implements OnInit {
     return this.http.get(url);
   }
   
-  genAction(param) {
+  genAction(viewObj, param) {
     var arrList = {};
 
     for (var i = 0; i < param.length; i++) {
-      arrList[param[i].property] = this.mainInfoObj[param[i].property];
+      arrList[param[i].property] = viewObj[param[i].property];
     }
     return arrList;
   }

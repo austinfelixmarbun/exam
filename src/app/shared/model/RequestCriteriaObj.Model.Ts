@@ -8,6 +8,7 @@ export class RequestCriteriaObj{
     orderBy:any;
     criteria:CriteriaObj[];
     isLoading : boolean;
+    queryString: any;
     
     constructor()
     {
