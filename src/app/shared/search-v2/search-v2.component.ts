@@ -174,6 +174,7 @@ export class SearchV2Component implements OnInit {
     request.pageNo = pageNo;
     request.rowPerPage = rowPerPage;
     request.orderBy = orderBy;
+    request.queryString = this.configuration.querystring;
 
     for (var i = 0; i < this.countForm; i++) {
       var critObj = new CriteriaObj();

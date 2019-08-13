@@ -12,8 +12,9 @@ export class RequestCriteriaObj{
     
     constructor()
     {
-        this.includeCount=true;
-        this.includeData=true;
+        this.includeCount = true;
+        this.includeData = true;
         this.isLoading = true;
+        this.queryString = '';
     }
 }
