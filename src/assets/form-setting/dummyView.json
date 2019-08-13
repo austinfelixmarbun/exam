@@ -50,7 +50,7 @@
     {
       "subSectionId": "test",
       "subSectionTitle": "Bank Info",
-      "mainInfoUrl": "http://r3app-server/prototypes/asset/AssetType/GetAssetTypeHbyAssetTypeHId",
+      "mainInfoUrl": "http://r3app.ad-ins.com/foundation/Generic/GetDataViewBySQL",
       "mainInfo": [
         {
           "type": "text",
@@ -79,7 +79,12 @@
             }
           ]
         }
-      ]
+      ],
+      "querystring": {
+        "select": "SELECT OFFICE_NAME AS OfficeName,IS_ACTIVE AS IsActive",
+        "from": "FROM REF_OFFICE WITH(NOLOCK)",
+        "where": "WHERE REF_OFFICE_ID = {0} OR OFFICE_CODE = N'{1}'"
+      }
     }
   ]
 }
