@@ -19,19 +19,19 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Leave Maintenance Information
             </h4>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="empName">Employee Name </label>
-              <div class="col-md-9">
+              <div class="col-md-7">
                 <lib-lookupemployee *ngIf="pageType!='edit'" #lookupEmp [lookupInput]="inputLookupObj">
                 </lib-lookupemployee>
 
                 <label *ngIf="pageType=='edit'" class="adInsLabel" for="empName">{{empName}}</label>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="startDt">Start Date </label>
               <div class="col-md-9">
-                <input type="date" id="startDt" class="form-control adInsInput" name="startDt" required
+                <input type="date" id="startDt" class="form-control adInsInput width-25-per" name="startDt" required
                   [(ngModel)]="startDt" #StartDt="ngModel"
                   [ngClass]="{ 'is-invalid': LeaveMaintenanceForm.submitted && StartDt.invalid }">
                 <div *ngIf="LeaveMaintenanceForm.submitted && StartDt.invalid" class="invalid-feedback">
@@ -39,17 +39,17 @@
                 </div>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="endDt">End Date </label>
               <div class="col-md-9">
-                <input type="date" id="endDt" class="form-control adInsInput" name="endDt" required [(ngModel)]="endDt"
+                <input type="date" id="endDt" class="form-control adInsInput width-25-per" name="endDt" required [(ngModel)]="endDt"
                   #EndDt="ngModel" [ngClass]="{ 'is-invalid': LeaveMaintenanceForm.submitted && EndDt.invalid }">
                 <div *ngIf="LeaveMaintenanceForm.submitted && EndDt.invalid" class="invalid-feedback">
                   <div *ngIf="EndDt.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="isActive">Is Passed</label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isPassed" data-md-icheck

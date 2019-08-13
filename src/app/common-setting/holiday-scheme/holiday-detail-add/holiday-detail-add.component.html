@@ -29,10 +29,10 @@
               </div>
             </div>
             <div *ngIf="isPublicHoliday == '1'">
-              <div class="form-group row">
+              <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Date </label>
                 <div class="col-md-9">
-                  <input type="date" class="form-control adInsInput" name="holidayDt" required [(ngModel)]="holidayDt"
+                  <input type="date" class="form-control adInsInput width-25-per" name="holidayDt" required [(ngModel)]="holidayDt"
                     #HolidayDt="ngModel"
                     [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || HolidayDt.touched || HolidayDt.dirty) && HolidayDt.invalid }">
                   <div

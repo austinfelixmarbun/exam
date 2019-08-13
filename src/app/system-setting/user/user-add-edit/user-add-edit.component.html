@@ -7,9 +7,9 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> User Information </h4>
             <br>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="EmpName">Employee Name</label>
-              <div class="col-md-9">
+              <div class="col-md-7">
 
                 <lib-lookupemployee #lookupEmp [lookupInput]="inputLookupObj"> </lib-lookupemployee>
 
@@ -21,10 +21,10 @@
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="Username">Username</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="Username" required [(ngModel)]="Username"
+                <input type="text" class="form-control adInsInput width-50-per" name="Username" required [(ngModel)]="Username"
                   #username="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }"
                   [attr.disabled]="type === 'edit' ||  type === 'changePassword' ? true : null">
                 <div *ngIf="UserAddEditForm.submitted && username.invalid" class="invalid-feedback">
@@ -34,10 +34,10 @@
             </div>
 
             <div class="oldPass" *ngIf=" type !== 'edit' ">
-              <div class="form-group row">
+              <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" for="Password">Password</label>
                 <div class="col-md-9">
-                  <input type="password" class="form-control adInsInput" name="Password" required [(ngModel)]="Password"
+                  <input type="password" class="form-control adInsInput width-75-per" name="Password" required [(ngModel)]="Password"
                     #password="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && password.invalid }">
                   <div *ngIf="UserAddEditForm.submitted && password.invalid" class="invalid-feedback">
                     <div *ngIf="password.errors.required" class="adInsReqMsg" translate>This field is required</div>
@@ -46,10 +46,10 @@
               </div>
             </div>
             <div class="rePass" *ngIf=" type !== 'edit' && type !== 'changePassword'">
-              <div class="form-group row">
+              <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" for="RePassword">Re-Password</label>
                 <div class="col-md-9">
-                  <input type="password" class="form-control adInsInput" name="RePassword" required
+                  <input type="password" class="form-control adInsInput width-75-per" name="RePassword" required
                     [(ngModel)]="RePassword" #rePassword="ngModel"
                     [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && rePassword.invalid }">
                   <div *ngIf="UserAddEditForm.submitted && rePassword.invalid" class="invalid-feedback">
@@ -61,7 +61,7 @@
 
 
             <div class="stat" *ngIf=" type !== 'changePassword' ">
-              <div class="form-group row">
+              <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" for="loggedInMethod">Logged In Method </label>
                 <div class="col-md-9">
                   <select class="form-control adInsInput" name="loggedInMethod" #LoggedInMethod
@@ -74,7 +74,7 @@
               </div>
             </div>
             <div class="stat" *ngIf=" type !== 'changePassword' ">
-              <div class="form-group row">
+              <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" for="IsActive">Active Status</label>
                 <div class="custom-control custom-checkbox m-0">
                   <input type="checkbox" value="1" id="IsActive" name="IsActive" [(ngModel)]="IsActive"

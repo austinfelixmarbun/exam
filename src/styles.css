@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+
+
 .no-padding{
     padding-left:0px !important;
     padding-right:0px !important;
@@ -233,6 +235,11 @@ form .form-section{
 
 .card .card-header{
     padding-left: 10px !important;
+}
+
+.adins-required label::after{
+    content:"*";
+    color:red;
 }
 
 /* 
