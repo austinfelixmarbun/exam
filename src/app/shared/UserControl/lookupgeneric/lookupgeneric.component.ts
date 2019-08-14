@@ -16,6 +16,8 @@ export class LookupgenericComponent implements OnInit {
 
   @Input() lookupInput: any;
   @Input() parentForm: any;
+  @Input() identifier: any = "lookupGeneric";
+  @Output() lookup: EventEmitter<any> = new EventEmitter();
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
@@ -92,6 +94,7 @@ export class LookupgenericComponent implements OnInit {
     this.value = event[this.genericJson.propertyName];
     this.lookupInput.nameSelect = event[this.genericJson.propertyName];
     this.lookupInput.idSelect = event[this.genericJson.propertyId];
+    this.lookup.emit(event);
   }
   
   private getDismissReason(reason: any): string {
