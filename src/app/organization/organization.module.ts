@@ -23,6 +23,7 @@ import { LookuporgjobtitleModule } from '@adins/lookuporgjobtitle';
 import { LookuporgmdlstrucModule } from '@adins/lookuporgmdlstruc';
 import { LookuprefjobtitleModule } from '@adins/lookuprefjobtitle';
 import { lookupbizunitmodule } from '@adins/lookupbizunit';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { lookupbizunitmodule } from '@adins/lookupbizunit';
     LookuporgjobtitleModule,
     LookuprefjobtitleModule,
     lookupbizunitmodule,
-    LookuporgmdlstrucModule
+    LookuporgmdlstrucModule,
+    UclookupgenericModule
   ],
   declarations: [
     RefJobTitleComponent,

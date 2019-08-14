@@ -19,7 +19,9 @@
                 <div class="form-group row">
                     <label class="col-md-3  adInsLabel" for="lookupBizUnit">Business Unit Name</label>
                     <div class="col-md-9">
-                        <lib-lookupbizunit #lookupBizUnit [lookupInput]="inputLookupObj2"> </lib-lookupbizunit>
+                        <!-- <lib-lookupbizunit #lookupBizUnit [lookupInput]="inputLookupObj2"> </lib-lookupbizunit> -->
+                        <lib-uclookupgeneric #lookupBizUnit [lookupInput]="inputLookupObj2"
+                          [parentForm]='OrgMdlStrucForm'></lib-uclookupgeneric>
                     </div>
                   </div>
 
@@ -37,7 +39,8 @@
                   <div class="form-group row">
                       <label class="col-md-3  adInsLabel" for="lookupBizUnit">Parent</label>
                       <div class="col-md-9">
-                          <lib-lookuporgmdlstruc #lookupMdlStruc [lookupInput]="inputLookupObj"></lib-lookuporgmdlstruc>
+                          <lib-uclookupgeneric #lookupMdlStruc [lookupInput]="inputLookupObj"
+                          [parentForm]='OrgMdlStrucForm'></lib-uclookupgeneric>
                       </div>
                     </div>
 

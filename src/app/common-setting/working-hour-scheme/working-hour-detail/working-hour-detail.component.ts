@@ -199,6 +199,8 @@ export class WorkingHourDetailComponent implements OnInit {
       );
     } else {
       this.workingHourSchmHObj.workingHourSchmHId = this.workingHourSchmHId;
+      this.workingHourSchmHObj.workingHourSchmCode = this.workingHourSchmCode;
+      this.workingHourSchmHObj.workingHourSchmName = this.workingHourSchmName;
       var WorkingHourSchm = {
         WorkingHourSchmH: this.workingHourSchmHObj,
         WorkingHourSchmD: arrWHSchmD

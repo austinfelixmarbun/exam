@@ -4,19 +4,19 @@
     "component": [
       {
         "type": "textbox",
-        "name": "formCode",
-        "id": "formCode",
+        "name": "jobTitleName",
+        "id": "jobTitleNameId",
         "value": "",
-        "label": "Form Code",
+        "label": "Job Title Name",
         "placeholder": "Placeholder",
         "datatype": "text"
       },
       {
         "type": "textbox",
-        "name": "title",
-        "id": "title",
+        "name": "parentId",
+        "id": "parentIdId",
         "value": "",
-        "label": "Form Name",
+        "label": "Parent Name",
         "placeholder": "Placeholder",
         "datatype": "text"
       }

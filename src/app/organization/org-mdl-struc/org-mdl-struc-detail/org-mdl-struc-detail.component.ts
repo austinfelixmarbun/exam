@@ -74,11 +74,15 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     this.inputLookupObj.urlJson = "./assets/lookup/lookupOrgMdlStruc.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetOrgMdlStrucPaging;
     this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
-    
+    this.inputLookupObj.pagingJson = "./assets/form-setting/orgMdlStrucDetailPaging.json";
+    this.inputLookupObj.genericJson = "./assets/form-setting/orgMdlStrucDetailGeneric.json";
+
     this.inputLookupObj2 = new InputLookupObj();
     this.inputLookupObj2.urlJson = "./assets/lookup/lookupBizUnit.json";
     this.inputLookupObj2.urlQryPaging = AdInsConstant.GetBusinessUnitPaging;
     this.inputLookupObj2.urlEnviPaging = environment.foundationUrl;
+    this.inputLookupObj2.pagingJson = "./assets/form-setting/bizUnitPaging.json";
+    this.inputLookupObj2.genericJson = "./assets/form-setting/bizUnitGeneric.json";
     this.inputLookupObj2.isRequired = true;
 
     console.log("masuk");
@@ -186,7 +190,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
                 this.orgMdlStrucObj = new OrgMdlStrucObj();
                 this.orgMdlStrucObj.orgMdlId = +this.orgMdlId;
                 this.orgMdlStrucObj.orgMdlLvl = OrgMdlForm.value.orgMdlLvl;
-                this.orgMdlStrucObj.refBizUnitId = lookupBizUnit.idSelect;
+                this.orgMdlStrucObj.refBizUnitId = lookupBizUnit.refBizUnitId;
                this.orgMdlStrucObj.parentId = lookupMdlStruc.idSelect;
                 if (OrgMdlForm.value.isActive) {
                   this.orgMdlStrucObj.isActive = "1";
@@ -241,7 +245,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           this.orgMdlStrucObj = new OrgMdlStrucObj();
           this.orgMdlStrucObj.orgMdlId = +this.orgMdlId;
           this.orgMdlStrucObj.orgMdlLvl = OrgMdlForm.value.orgMdlLvl;
-          this.orgMdlStrucObj.refBizUnitId = lookupBizUnit.idSelect;
+          this.orgMdlStrucObj.refBizUnitId = lookupBizUnit.refBizUnitId;
           if (OrgMdlForm.value.isActive) {
             this.orgMdlStrucObj.isActive = "1";
           } else {
@@ -264,7 +268,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           this.orgMdlStrucObj.orgMdlStrucId = +this.orgMdlStrucId;
           this.orgMdlStrucObj.orgMdlId = +this.orgMdlId;
           this.orgMdlStrucObj.orgMdlLvl = OrgMdlForm.value.orgMdlLvl;
-          this.orgMdlStrucObj.refBizUnitId = lookupBizUnit.idSelect;
+          this.orgMdlStrucObj.refBizUnitId = lookupBizUnit.refBizUnitId;
           if (OrgMdlForm.value.isActive) {
             this.orgMdlStrucObj.isActive = "1";
           } else {

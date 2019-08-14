@@ -2,6 +2,14 @@
     <div class="card">
         <div class="card-body">
             <div class="px-3">
+                <div class="row">
+                        <div class="col-md-12" style="text-align-last: right">
+                            <button type="button" class="backButton"  [routerLink]="['/company/commissioner']" translate>
+                            <i class="fa fa-arrow-circle-left">
+                            </i> Back
+                            </button>
+                        </div>
+                        </div>
                 <form class="form form-horizontal" name="RefCoyCommisionerForm" #RefCoyCommisionerForm="ngForm" (ngSubmit)="RefCoyCommisionerForm.form.valid && Save(RefCoyCommisionerForm, ucAddress, ucContactInfo)" novalidate>
                     <div class="form-body">
                         <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Commissioner Information</h4>
@@ -58,9 +66,6 @@
                     <app-ucAddress #ucAddress [parentForm]='RefCoyCommisionerForm'></app-ucAddress>
                     <app-uc-info #ucContactInfo [parentForm]='RefCoyCommisionerForm'  [useName]=false [useTitle]=false></app-uc-info>
                     <div class="form-actions right">
-                        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/company/commissioner']" [queryParams]="{refCoyId:refCoyId}" >
-                            <i class="fa fa-arrow-circle-left"></i> Back
-                        </button>
                         <button type="submit" class="btn btn-raised btn-primary">
                             <i class="fa fa-check-square-o"></i> Save
                         </button>

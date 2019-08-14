@@ -10,6 +10,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { LookupdistrictComponent } from '@adins/lookupdistrict';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 
 @Component({
@@ -48,11 +49,28 @@ export class ZipcodeAddComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log("test");
+        
         this.inputLookupObj = new InputLookupObj();
+        this.inputLookupObj.addCritInput = new Array();
         this.inputLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
         this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefProvDistrictPaging;
         this.inputLookupObj.urlEnviPaging = environment.settingUrl;
+        this.inputLookupObj.pagingJson = "./assets/form-setting/districtPaging.json";
+        this.inputLookupObj.genericJson = "./assets/form-setting/districtGeneric.json";
+        var critDistrictParentId = new CriteriaObj();
+        critDistrictParentId.propName = "parent_id";
+        critDistrictParentId.DataType = "numeric";
+        critDistrictParentId.value = null;
+        critDistrictParentId.restriction = AdInsConstant.RestrictionIsNull;
+        this.inputLookupObj.addCritInput.push(critDistrictParentId);
 
+        var critDistrict = new CriteriaObj();
+        critDistrict.propName = "is_active";
+        critDistrict.value = "1";
+        critDistrict.restriction = AdInsConstant.RestrictionEq;
+        this.inputLookupObj.addCritInput.push(critDistrict);
+        
         if (this.mode === "edit") {
             this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipCode;
             this.urlGetProvDistrict = this.settingUrl + AdInsConstant.GetRefProvDistrictObj;

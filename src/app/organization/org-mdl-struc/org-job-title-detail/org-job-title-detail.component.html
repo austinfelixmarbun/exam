@@ -4,12 +4,21 @@
         <div class="card">
           <div class="card-body">
             <div class="px-3">
+                <div class="row">
+                    <div class="col-md-8">
+                      <h4 class="card-title" id="horz-layout-colored-controls" translate>{{pageType}} Organization Job Title Information</h4>
+                    </div>
+                    <div class="col-md-4" style="text-align-last: right">
+                      <button type="button" class="backButton" (click)="Back()" translate>
+                        <i class="ft-x"></i> Back
+                      </button>
+                    </div>
+                  </div>
+
                 <form class="form form-horizontal" name="OrgJobTitleForm" #OrgJobTitleForm="ngForm" novalidate
                 (ngSubmit)="OrgJobTitleForm.form.valid && Save(OrgJobTitleForm, lookupRefJobTitle, lookupOrgJobTitle)" >
                 <div class="form-body">
-                  <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Organization Job Title Information</h4>
-                  <br />
-
+                  
                   <div class="form-group row">
                       <label class="col-md-3  adInsLabel">Business Unit Name</label>
                       <div class="col-md-9">
@@ -24,7 +33,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3  adInsLabel" for="lookupBizUnit">Parent</label>
+                        <label class="col-md-3  adInsLabel" for="lookupOrgJobTitle">Parent</label>
                         <div class="col-md-9">
                             <lib-lookuporgjobtitle #lookupOrgJobTitle [lookupInput]="inputLookupObj2"> </lib-lookuporgjobtitle>
                         </div>
@@ -39,9 +48,9 @@
                     </div>
                     <div class="form-actions">
 
-                        <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+                        <!-- <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
                           <i class="fa fa-arrow-circle-left"></i> Back
-                        </button>
+                        </button> -->
                         <button type="submit" class="btn btn-raised btn-primary">
                           <i class="fa fa-check-square-o"></i> Save
                         </button>

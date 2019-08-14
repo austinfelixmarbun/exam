@@ -25,6 +25,8 @@ import { LookupemployeeComponent } from '@adins/lookupemployee';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcpagingModule } from '@adins/ucpaging';
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
     UCSearchModule,
     UcgridfooterModule,
     SharingComponentModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UcpagingModule,
+    UclookupgenericModule
   ],
   declarations: [
     MasterPagingComponent,
