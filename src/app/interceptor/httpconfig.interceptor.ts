@@ -143,6 +143,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                             reason: event.body.message ? event.body.message : '',
                             status: event.body.statusCode
                         };
+                        this.toastr.error(data['reason'], 'Status: ' + data['status'], { "tapToDismiss": true});
                         //this.errorDialogService.openDialog(data);
                         //Kalau balikan dari Server error, lgsg return aja, biar g lanjut lagi
                         return;
