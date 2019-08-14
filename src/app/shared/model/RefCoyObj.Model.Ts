@@ -25,7 +25,7 @@ export class RefCoyObj {
     fax: any;
     cntctPersonName: any;
     cntctPersonJobTitle: any;
-    cntctPersonEmail1: any;
+    cntctPersonEmail: any;
     cntctPersonMobilePhn1: any;
     cntctPersonMobilePhn2: any;
     phnExt1: any;
@@ -35,6 +35,8 @@ export class RefCoyObj {
     phn3: any;
     zipcodeNumber: any;
     taxIdNo : any;
+    registrationNo: any;
+    licenseNo: any;
 
     constructor() { this.refCoyId = 0 }
 }

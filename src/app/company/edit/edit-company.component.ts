@@ -30,8 +30,10 @@ export class EditCompanyComponent implements OnInit {
     shortName : any;
     initialName : any;
     regRptCode : any;
+    taxIdno : any;
     npwp: any;
-    tdp: any;
+    licenseNo: any;
+    registrationNo: any;
 
     constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
         this.route.queryParams.subscribe(params => {
@@ -68,8 +70,10 @@ export class EditCompanyComponent implements OnInit {
         this.shortName = data.shortName;
         this.initialName = data.initialName;
         this.regRptCode = data.regRptCode;
-        this.npwp = data.npwp;
-        this.tdp = data.tdp;
+        this.ucAddr = data.ucAddr;
+        this.npwp = data.taxIdNo;
+        this.licenseNo = data.licenseNo;
+        this.registrationNo = data.registrationNo;
     }
 
     Save(form, ucAddress, ucContactInfo) {
@@ -81,8 +85,7 @@ export class EditCompanyComponent implements OnInit {
             refCoyObj.shortName = form.value.shortName;
             refCoyObj.initialName = form.value.initialName;
             refCoyObj.regRptCode = form.value.regRptCode;
-            refCoyObj.npwp = form.value.npwp;
-            refCoyObj.tdp = form.value.tdp;
+            refCoyObj.taxIdNo = form.value.npwp;
             refCoyObj.addr = ucAddress.addr;
             refCoyObj.city = ucAddress.city;
             refCoyObj.cntctPersonEmail = ucContactInfo.email1;
@@ -94,7 +97,6 @@ export class EditCompanyComponent implements OnInit {
             refCoyObj.cntctPersonJobTitle = ucContactInfo.cntctPersonJobTitle;
             refCoyObj.cntctPersonMobilePhn1 = ucContactInfo.mobilePhn1;
             refCoyObj.cntctPersonMobilePhn2 = ucContactInfo.mobilePhn2;
-            refCoyObj.cntctPersonEmail = ucContactInfo.email1;
             refCoyObj.phn1 = ucAddress.phn1;
             refCoyObj.phn2 = ucAddress.phn2;
             refCoyObj.phn3 = ucAddress.phn3;
@@ -106,7 +108,9 @@ export class EditCompanyComponent implements OnInit {
             refCoyObj.phnExt3 = ucAddress.phnExt3;
             refCoyObj.areaCode4 = ucAddress.areaCode4;
             refCoyObj.areaCode3 = ucAddress.areaCode3;
-            refCoyObj.zipcode = ucAddress.zipcode;
+            refCoyObj.zipcodeNumber = ucAddress.zipcodeNumber;
+            refCoyObj.registrationNo = form.value.registrationNo;
+            refCoyObj.licenseNo = form.value.licenseNo;
             refCoyObj.refCoyId = this.param;
 
             console.log(refCoyObj);
