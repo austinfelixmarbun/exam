@@ -115,12 +115,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Methods', 'POST') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
         request = request.clone({ body: myObj });
-
-        // test
-        // var test = JSON.stringify(myObj);
-        // request = request.clone({ body: test });
-        // test
-
         AdInsHelper.InsertLog(request.url, "API", request.body);
         console.log(JSON.stringify(request.body));
         // if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {
@@ -137,6 +131,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
+                    //Ini Error kalau sudah masuk sampai ke Back End
                     if (event.body.isError == true) {
                         let data = {};
                         data = {
@@ -144,8 +139,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                             status: event.body.statusCode
                         };
                         this.toastr.error(data['reason'], 'Status: ' + data['status'], { "tapToDismiss": true});
-                        //this.errorDialogService.openDialog(data);
-                        //Kalau balikan dari Server error, lgsg return aja, biar g lanjut lagi
                         return;
                     }
                     else {
@@ -158,10 +151,11 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                         }
 
                     }
-                    // this.errorDialogService.openDialog(event);
                 }
+                
                 return event;
             }),
+            //Ini Error kalau tidak sampai ke Back End
             catchError((error: HttpErrorResponse) => {
                 if (error.error != null) {
                     if (error.error.errorMessages != null) {
@@ -172,12 +166,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                         this.toastr.error(error.error.Message, 'Status: ' + error.status, { "tapToDismiss": true});
                     }
                 }
-                // let data = {};
-                // data = {
-                //     reason: error && error.error.Message ? error.error.Message : '',
-                //     status: error.status
-                // };
-                // this.errorDialogService.openDialog(data);
+                else{
+                    this.toastr.error(error.message, 'Status: ' + error.status, { "tapToDismiss": true});
+                }
+                
                 console.log(JSON.stringify(request.body));
                 return throwError(error);
             }), finalize(() => {
