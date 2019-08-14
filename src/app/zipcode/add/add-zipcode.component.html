@@ -17,8 +17,8 @@
                     </div>
                 </div>
                 <div class="px-3">
-                    <form class="form form-horizontal" name="BankAddReqForm" #BankAddReqForm="ngForm"
-                        (ngSubmit)="BankAddReqForm.form.valid && Save(BankAddReqForm, uclDistrict)">
+                    <form class="form form-horizontal" name="ZipcodeAddReqForm" #ZipcodeAddReqForm="ngForm"
+                        (ngSubmit)="ZipcodeAddReqForm.form.valid && Save(ZipcodeAddReqForm, uclDistrict)">
                         <div class="form-body">
                             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Zipcode
                                 Information
@@ -28,8 +28,8 @@
                                 <div class="col-md-9">
                                     <input type="text" class="form-control adInsInput width-75-per" name="areaCode2" required
                                         [ngModel]="result?.areaCode2" #AreaCode2="ngModel"
-                                        [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid }">
-                                    <div *ngIf="(BankAddReqForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid"
+                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid }">
+                                    <div *ngIf="(ZipcodeAddReqForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="AreaCode2.errors.required" class="adInsReqMsg" translate>This field
                                             is required</div>
@@ -41,8 +41,8 @@
                                 <div class="col-md-9">
                                     <input type="text" class="form-control adInsInput width-75-per" name="areaCode1" required
                                         [ngModel]="result?.areaCode1" #AreaCode1="ngModel"
-                                        [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid }">
-                                    <div *ngIf="(BankAddReqForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid"
+                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid }">
+                                    <div *ngIf="(ZipcodeAddReqForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="AreaCode1.errors.required" class="adInsReqMsg" translate>This field
                                             is required</div>
@@ -54,8 +54,8 @@
                                 <div class="col-md-9">
                                     <input class="form-control adInsInput width-75-per" name="city" required [ngModel]="result?.city"
                                         #City="ngModel"
-                                        [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || City.touched || City.dirty) && City.invalid }">
-                                    <div *ngIf="(BankAddReqForm.submitted || City.touched || City.dirty) && City.invalid"
+                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || City.touched || City.dirty) && City.invalid }">
+                                    <div *ngIf="(ZipcodeAddReqForm.submitted || City.touched || City.dirty) && City.invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="City.errors.required" class="adInsReqMsg" translate>This field is
                                             required</div>
@@ -67,8 +67,8 @@
                                 <div class="col-md-9">
                                     <input class="form-control adInsInput width-25-per" name="zipcode" required
                                         [ngModel]="result?.zipcode" #Zipcode="ngModel"
-                                        [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid }">
-                                    <div *ngIf="(BankAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid"
+                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid }">
+                                    <div *ngIf="(ZipcodeAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="Zipcode.errors.required" class="adInsReqMsg" translate>This field is
                                             required</div>
@@ -80,8 +80,8 @@
                                 <div class="col-md-9">
                                     <input class="form-control adInsInput width-25-per" name="subZipcode" required
                                         [ngModel]="result?.subZipcode" #SubZipcode="ngModel"
-                                        [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid }">
-                                    <div *ngIf="(BankAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid"
+                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid }">
+                                    <div *ngIf="(ZipcodeAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="SubZipcode.errors.required" class="adInsReqMsg" translate>This field
                                             is required</div>
@@ -93,8 +93,8 @@
                                 <div class="col-md-9">
                                     <input class="form-control adInsInput width-25-per" name="zipcodeNumber" required
                                         [ngModel]="result?.zipcodeNumber" #ZipcodeNumber="ngModel"
-                                        [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid }">
-                                    <div *ngIf="(BankAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid"
+                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid }">
+                                    <div *ngIf="(ZipcodeAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="ZipcodeNumber.errors.required" class="adInsReqMsg" translate>This
                                             field is required</div>
@@ -104,8 +104,8 @@
                             <div class="form-group row adins-required">
                                 <label class="col-md-3 adInsLabel" translate>District </label>
                                 <div class="col-md-9">
-                                    <lib-lookupdistrict #uclDistrict [lookupInput]="inputLookupObj"
-                                        [parentForm]='BankAddReqForm'></lib-lookupdistrict>
+                                    <lib-uclookupgeneric #uclDistrict [lookupInput]="inputLookupObj"
+                                        [parentForm]='ZipcodeAddReqForm'></lib-uclookupgeneric>
                                 </div>
                             </div>
                             <div class="form-group row adins-required">
@@ -113,8 +113,8 @@
                                 <div class="col-md-9">
                                     <input class="form-control adInsInput width-10-per" name="phnArea" required
                                         [ngModel]="result?.phnArea" #PhnArea="ngModel"
-                                        [ngClass]="{ 'is-invalid': (BankAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid }">
-                                    <div *ngIf="(BankAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid"
+                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid }">
+                                    <div *ngIf="(ZipcodeAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid"
                                         class="invalid-feedback">
                                         <div *ngIf="PhnArea.errors.required" class="adInsReqMsg" translate>This field is
                                             required</div>
@@ -130,10 +130,10 @@
                             </div>
                         </div>
                         <div class="form-actions right">
-                            <button *ngIf="mode=='edit'" type="button" class="btn btn-raised btn-warning mr-1"
+                            <!-- <button *ngIf="mode=='edit'" type="button" class="btn btn-raised btn-warning mr-1"
                                 [routerLink]="['/zipcode/paging']" translate>
                                 <i class="fa fa-arrow-circle-left"></i> Back
-                            </button>
+                            </button> -->
                             <button type="submit" class="btn btn-raised btn-primary" translate>
                                 <i class="fa fa-check-square-o"></i> Save
                             </button>

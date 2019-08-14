@@ -1,3 +1,14 @@
+<div class="ucSearch-Button-Right" >
+        <span class="mr-1" >
+                <button type="button" class="backButton"  [routerLink]="['/company']" translate>
+                <i class="fa fa-arrow-circle-left"> </i> Back </button></span>
+    <span class="mr-1" >
+            <button type="button" class="btn btn-raised btn-primary mr-1 btn-sm" [queryParams]="{refCoyId:refCoyId}" [routerLink]="['/company/bod/add']"
+            translate>
+            <i class="ft-plus-circle"></i> Add
+          </button>
+        </span>
+      </div>
 <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
 <div [hidden]="resultData?.data == null">
     <table class="table table-responsive-md text-center table-hover">
@@ -25,11 +36,4 @@
         </tbody>
     </table>
     <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
-</div>
-<div class="form-actions right">
-    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/company']">
-        <i class="fa fa-arrow-circle-left"></i> Back
-    </button>
-    <i class="fa fa-plus-circle" [routerLink]="['/company/bod/add']" [queryParams]="{refCoyId:refCoyId}"
-        style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
 </div>

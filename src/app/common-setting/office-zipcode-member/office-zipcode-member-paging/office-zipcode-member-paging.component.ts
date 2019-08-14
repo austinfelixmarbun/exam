@@ -51,11 +51,11 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
     this.inputObj.enviromentUrl = this.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetOfficeZipCodeMemberPaging;
+    this.inputObj.apiQryPaging = AdInsConstant.GetRefOfficeZipcodePaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetOfficeZipCodeMemberPaging;
+    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOfficeZipcodePaging;
     this.officeUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
     this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteOfficeZipcodeMember;
 
@@ -125,14 +125,24 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
     }
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
   }
-  
+  // delete(refJobId: any) {
+  //   if (confirm("Are you sure to delete this record?")) {
+  //     this.rjtObj = new RefJobTitleObj();
+  //     this.rjtObj.RefJobTitleId = refJobId;
+  //     this.http.post(this.deleteUrl, this.rjtObj).subscribe(
+  //       (response) => {
+  //         this.toastr.successMessage(response['message']);
+  //         this.searchPagination(this.pageNow);
+  //       });
+  //   }
+  // }
   delete(officeZipcodeMemberId: any) {
     if (confirm("Are you sure to delete this record?")) {
       var officeZipcodeMemberObj = {officeZipcodeMemberId : officeZipcodeMemberId};
       this.http.post(this.deleteUrl, officeZipcodeMemberObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.searchPagination(1);
+          this.searchPagination(this.pageNow);
         },
         (error) => {
           console.log("Error");

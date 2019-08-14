@@ -172,7 +172,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
       this.apiUrl = this.foundationUrl + AdInsConstant.AddOrgJobTitle;
       this.orgJobTitleObj = new OrgJobTitleObj();
       this.orgJobTitleObj.orgMdlStrucId = +this.orgMdlStrucId;
-      this.orgJobTitleObj.refJobTitleId = lookupRefJobTitle.idSelect;
+      this.orgJobTitleObj.refJobTitleId = lookupRefJobTitle.refJobTitleId;
       if (lookupOrgJobTitle.idSelect !== undefined) { this.orgJobTitleObj.parentOrgJobTitleId = lookupOrgJobTitle.idSelect; }
       if (OrgJobTitleForm.value.isActive) {
         this.orgJobTitleObj.isActive = '1';

@@ -52,6 +52,7 @@ export class RefJobTitleComponent implements OnInit {
   //** Start UC Search **/
 
   getResult(event){
+    console.log(event);
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
     this.ucgridFooter.pageNow = event.pageNow;
