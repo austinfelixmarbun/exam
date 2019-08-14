@@ -25,6 +25,7 @@ export class RefCoyObj {
     fax: any;
     cntctPersonName: any;
     cntctPersonJobTitle: any;
+    cntctPersonEmail: any;
     cntctPersonEmail1: any;
     cntctPersonMobilePhn1: any;
     cntctPersonMobilePhn2: any;
