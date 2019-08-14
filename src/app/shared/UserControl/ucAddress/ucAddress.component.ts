@@ -46,6 +46,8 @@ export class UcAddressComponent implements OnInit {
     this.inputLookupObj.urlJson = "./assets/lookup/lookupZipcode.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefZipcodePaging;
     this.inputLookupObj.urlEnviPaging = environment.settingUrl;
+    this.inputLookupObj.pagingJson = "./assets/form-setting/zipcodePaging.json";
+    this.inputLookupObj.genericJson = "./assets/form-setting/zipcodeGeneric.json";
   }
   
   setData(data) {
@@ -83,6 +85,16 @@ export class UcAddressComponent implements OnInit {
     this.inputLookupObj.idSelect = event.zipcode;
   }
 
+  getLookup(event) {
+    console.log(event);
+    this.areaCode2 = event.areaCode2;
+    this.areaCode1 = event.areaCode1;
+    this.phnArea1 = event.phnArea;
+    this.city = event.city;
+    this.zipcodeNumber = event.zipcodeNumber;
+    this.inputLookupObj.nameSelect = event.zipcode;
+    this.inputLookupObj.idSelect = event.zipcode;
+  }
   // public ucAddressValid(validity): boolean {
   //   this.addrValid = !validity;
   //   return true

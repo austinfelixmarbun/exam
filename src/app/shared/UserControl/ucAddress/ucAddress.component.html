@@ -43,8 +43,7 @@
         <div class="form-group row">
             <label class="col-md-3 label-control adInsLabel" for="zipcode" translate>Zipcode </label>
             <div class="col-md-3">
-                <lib-lookupzipcode (select)="onSelect($event)" [lookupInput]="inputLookupObj">
-                </lib-lookupzipcode>
+                <app-lookupgeneric [lookupInput]="inputLookupObj" [parentForm]='parentForm' (lookup)="getLookup($event)"></app-lookupgeneric>
             </div>
         </div>
         <div class="form-group row">
