@@ -8,11 +8,13 @@ export class RequestCriteriaObj{
     orderBy:any;
     criteria:CriteriaObj[];
     isLoading : boolean;
+    queryString: any;
     
     constructor()
     {
-        this.includeCount=true;
-        this.includeData=true;
+        this.includeCount = true;
+        this.includeData = true;
         this.isLoading = true;
+        this.queryString = '';
     }
 }

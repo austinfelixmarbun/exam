@@ -53,6 +53,7 @@ export class BankComponent implements OnInit {
     this.inputObj._url = "./assets/search/searchBank.json";
     this.inputObj.enviromentUrl = environment.settingUrl;
     this.inputObj.apiQryPaging = AdInsConstant.GetBankPaging;
+    this.inputObj.id = "test";
 
     this.pageNow = 1;
     this.pageSize = 10;

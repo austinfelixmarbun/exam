@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
-import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { InputGridObj } from 'app/shared/model/InputGridObj.Model';
+import { SearchV2Component } from 'app/shared/search-v2/search-v2.component';
 
 @Component({
   selector: 'app-ucpaging',
@@ -15,7 +15,7 @@ export class UcpagingComponent implements OnInit {
   @Output() select: EventEmitter<any> = new EventEmitter();
   
   //** Start UC Search **//
-  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(SearchV2Component) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
   gridObj: any;

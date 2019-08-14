@@ -288,4 +288,8 @@ export class AdInsConstant {
     public static GetListUploadSettingDIdByUploadTypeId = "/UploadSetting/GetListUploadSettingDIdByUploadTypeId"
     public static AssignRoleToUploadSetting = "/UploadSetting/AssignRoleToUploadSetting"
     public static GetListRefRoleByUploadTypeId = "/UploadSetting/GetListRefRoleByUploadTypeId"
+
+    // GENERIC
+    public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
+    
 }

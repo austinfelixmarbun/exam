@@ -23,10 +23,10 @@
                             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Zipcode
                                 Information
                             </h4>
-                            <div class="form-group row">
-                                <label class="col-md-3  adInsLabel" translate>Kelurahan </label>
+                            <div class="form-group row adins-required">
+                                <label class="col-md-3 adInsLabel" translate>Kelurahan </label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control adInsInput" name="areaCode2" required
+                                    <input type="text" class="form-control adInsInput width-75-per" name="areaCode2" required
                                         [ngModel]="result?.areaCode2" #AreaCode2="ngModel"
                                         [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid }">
                                     <div *ngIf="(ZipcodeAddReqForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid"
@@ -36,10 +36,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row adins-required">
                                 <label class="col-md-3 adInsLabel" translate>Kecamatan </label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control adInsInput" name="areaCode1" required
+                                    <input type="text" class="form-control adInsInput width-75-per" name="areaCode1" required
                                         [ngModel]="result?.areaCode1" #AreaCode1="ngModel"
                                         [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid }">
                                     <div *ngIf="(ZipcodeAddReqForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid"
@@ -49,10 +49,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row adins-required">
                                 <label class="col-md-3 adInsLabel" translate>City </label>
                                 <div class="col-md-9">
-                                    <input class="form-control adInsInput" name="city" required [ngModel]="result?.city"
+                                    <input class="form-control adInsInput width-75-per" name="city" required [ngModel]="result?.city"
                                         #City="ngModel"
                                         [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || City.touched || City.dirty) && City.invalid }">
                                     <div *ngIf="(ZipcodeAddReqForm.submitted || City.touched || City.dirty) && City.invalid"
@@ -62,10 +62,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row adins-required">
                                 <label class="col-md-3 adInsLabel" translate>Zipcode </label>
                                 <div class="col-md-9">
-                                    <input class="form-control adInsInput" name="zipcode" required
+                                    <input class="form-control adInsInput width-25-per" name="zipcode" required
                                         [ngModel]="result?.zipcode" #Zipcode="ngModel"
                                         [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid }">
                                     <div *ngIf="(ZipcodeAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid"
@@ -75,10 +75,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row adins-required">
                                 <label class="col-md-3 adInsLabel" translate>Sub Zipcode </label>
                                 <div class="col-md-9">
+<<<<<<< HEAD
                                     <input class="form-control adInsInput" name="subZipcode"
+=======
+                                    <input class="form-control adInsInput width-25-per" name="subZipcode" required
+>>>>>>> fbb4bda193888aa72e5dd585c0c4c9027a4e6e1b
                                         [ngModel]="result?.subZipcode" #SubZipcode="ngModel"
                                         [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid }">
                                     <div *ngIf="(ZipcodeAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid"
@@ -88,10 +92,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 adInsLabel" translate>Zipcode Number </label>
+                            <div class="form-group row adins-required">
+                                <label class="col-md-3 adInsLabel width-25-per" translate>Zipcode Number </label>
                                 <div class="col-md-9">
-                                    <input class="form-control adInsInput" name="zipcodeNumber" required
+                                    <input class="form-control adInsInput width-25-per" name="zipcodeNumber" required
                                         [ngModel]="result?.zipcodeNumber" #ZipcodeNumber="ngModel"
                                         [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid }">
                                     <div *ngIf="(ZipcodeAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid"
@@ -101,17 +105,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row adins-required">
                                 <label class="col-md-3 adInsLabel" translate>District </label>
                                 <div class="col-md-9">
                                     <lib-uclookupgeneric #uclDistrict [lookupInput]="inputLookupObj"
                                         [parentForm]='ZipcodeAddReqForm'></lib-uclookupgeneric>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row adins-required">
                                 <label class="col-md-3 adInsLabel" translate>Phone Area Number </label>
                                 <div class="col-md-9">
-                                    <input class="form-control adInsInput" name="phnArea" required
+                                    <input class="form-control adInsInput width-10-per" name="phnArea" required
                                         [ngModel]="result?.phnArea" #PhnArea="ngModel"
                                         [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid }">
                                     <div *ngIf="(ZipcodeAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid"
@@ -121,7 +125,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row adins-required">
                                 <label class="col-md-3 adInsLabel" translate>Is Active </label>
                                 <div class="col-md-9">
                                     <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
