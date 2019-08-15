@@ -21,6 +21,7 @@ import { UcgridviewModule } from '@adins/ucgridview';
 import { UcpagingModule } from '@adins/ucpaging';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
+import { TestPagingV3Component } from './test-paging-v3/test-paging-v3.component';
 
 @NgModule({
     imports: [
@@ -51,7 +52,8 @@ import { UcviewgenericModule } from '@adins/ucviewgeneric';
         DummyPagingComponent,
         Template1Component,
         TestPagingComponent,
-        TestPagingV2Component
+        TestPagingV2Component,
+        TestPagingV3Component
     ],
 
 })

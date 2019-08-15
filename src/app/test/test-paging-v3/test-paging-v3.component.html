@@ -1,0 +1,17 @@
+<app-ucpaging [searchObj]="inputPagingObj"></app-ucpaging>
+
+<button type="button" [routerLink]="['asset/paging']" translate>
+  Asset Paging
+</button>
+<br>
+<button type="button" [routerLink]="['asset/detail']" translate>
+  Asset Detail
+</button>
+<mat-tab-group>
+  <mat-tab label="Main Information">
+    MI
+  </mat-tab>
+  
+  <mat-tab label="Asset Data" [routerLink]="['paging']">
+      <router-outlet></router-outlet>
+  </mat-tab>

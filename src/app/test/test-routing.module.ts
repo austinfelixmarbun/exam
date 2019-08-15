@@ -8,6 +8,8 @@ import { DummyPagingComponent } from "./dummy/dummy-paging/dummy-paging.componen
 import { Template1Component } from "./template/template1/template1.component";
 import { TestPagingComponent } from "./test-paging/test-paging.component";
 import { TestPagingV2Component } from "./test-paging-v2/test-paging-v2.component";
+import { TestPagingV3Component } from "./test-paging-v3/test-paging-v3.component";
+import { TEST_ROUTES } from "app/shared/routes/test-layout.routes";
 
 const routes: Routes = [
   {
@@ -69,6 +71,14 @@ const routes: Routes = [
             title: 'test v2 Paging'
           }
         },
+        {
+          path: 'paging-v3',
+          component: TestPagingV3Component,
+          data: {
+            title: 'test v3 Paging'
+          },
+          children: TEST_ROUTES
+        }
     ]
   }
 ];
