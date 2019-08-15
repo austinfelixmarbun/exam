@@ -36,6 +36,8 @@ export class RefCoyObj {
     phn3: any;
     zipcodeNumber: any;
     taxIdNo : any;
+    registrationNo: any;
+    licenseNo: any;
 
     constructor() { this.refCoyId = 0 }
 }
