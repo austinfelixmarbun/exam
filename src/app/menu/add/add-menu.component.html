@@ -20,7 +20,7 @@
                   <input type="text" id="projectinput5" class="form-control adInsInput width-25-per" name="formCode"
                     [ngModel]="formCode" #FormCode="ngModel" required
                     [ngClass]="{ 'is-invalid': MenuReqForm.submitted && FormCode.invalid }"
-                    [attr.disabled]="mode === 'edit' ? true : null">
+                    [attr.disabled]="mode == 'edit' ? true : null">
                   <div *ngIf="MenuReqForm.submitted && FormCode.invalid" class="invalid-feedback">
                     <div *ngIf="FormCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                   </div>
@@ -106,7 +106,7 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button *ngIf="mode === 'edit'" type="button" class="btn btn-raised btn-warning mr-1"
+              <button *ngIf="mode == 'edit'" type="button" class="btn btn-raised btn-warning mr-1"
                 [routerLink]="['/menuSetting']" translate>
                 <i class="fa fa-arrow-circle-left"></i> Back
               </button>

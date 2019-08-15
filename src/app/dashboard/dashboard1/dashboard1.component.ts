@@ -118,14 +118,14 @@ export class Dashboard1Component implements OnInit{
                 });
             },
             draw(data: any): void {
-                if (data.type === 'bar') {
+                if (data.type == 'bar') {
                     data.element.attr({
                         style: 'stroke-width: 5px',
                         x1: data.x1 + 0.001
                     });
 
                 }
-                else if (data.type === 'label') {
+                else if (data.type == 'label') {
                     data.element.attr({
                         y: 270
                     })
@@ -155,14 +155,14 @@ export class Dashboard1Component implements OnInit{
             ['screen and (max-width: 640px) and (min-width: 381px)', {
                 axisX: {
                     labelInterpolationFnc: function (value, index) {
-                        return index % 2 === 0 ? value : null;
+                        return index % 2 == 0 ? value : null;
                     }
                 }
             }],
             ['screen and (max-width: 380px)', {
                 axisX: {
                     labelInterpolationFnc: function (value, index) {
-                        return index % 3 === 0 ? value : null;
+                        return index % 3 == 0 ? value : null;
                     }
                 }
             }]
@@ -204,7 +204,7 @@ export class Dashboard1Component implements OnInit{
             },
             draw(data: any): void {
                 var circleRadius = 4;
-                if (data.type === 'point') {
+                if (data.type == 'point') {
 
                     var circle = new Chartist.Svg('circle', {
                         cx: data.x,
@@ -214,7 +214,7 @@ export class Dashboard1Component implements OnInit{
                     });
                     data.element.replace(circle);
                 }
-                else if (data.type === 'label') {
+                else if (data.type == 'label') {
                     // adjust label position for rotation
                     const dX = data.width / 2 + (30 - data.width)
                     data.element.attr({ x: data.element.attr('x') - dX })
@@ -244,7 +244,7 @@ export class Dashboard1Component implements OnInit{
         events: {
             draw(data: any): void {
                 var circleRadius = 4;
-                if (data.type === 'point') {
+                if (data.type == 'point') {
                     var circle = new Chartist.Svg('circle', {
                         cx: data.x,
                         cy: data.y,
@@ -254,7 +254,7 @@ export class Dashboard1Component implements OnInit{
 
                     data.element.replace(circle);
                 }
-                else if (data.type === 'label') {
+                else if (data.type == 'label') {
                     // adjust label position for rotation
                     const dX = data.width / 2 + (30 - data.width)
                     data.element.attr({ x: data.element.attr('x') - dX })
@@ -281,8 +281,8 @@ export class Dashboard1Component implements OnInit{
         },
         events: {
             draw(data: any): void {
-                if (data.type === 'label') {
-                    if (data.index === 0) {
+                if (data.type == 'label') {
+                    if (data.index == 0) {
                         data.element.attr({
                             dx: data.element.root().width() / 2,
                             dy: data.element.root().height() / 2
@@ -381,7 +381,7 @@ export class Dashboard1Component implements OnInit{
             },
             draw(data: any): void {
                 var barHorizontalCenter, barVerticalCenter, label, value;
-                if (data.type === 'bar') {
+                if (data.type == 'bar') {
 
                     data.element.attr({
                         y1: 195,

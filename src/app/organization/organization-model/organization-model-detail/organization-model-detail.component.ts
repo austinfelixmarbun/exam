@@ -59,7 +59,7 @@ export class OrganizationModelDetailComponent implements OnInit {
     console.log('masuk');
     this.orgModelObj = new OrgMdlObj()
     this.GetRefOrg();
-    if (this.type === 'edit') {
+    if (this.type == 'edit') {
       this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlByOrgMdlId;
       this.orgModelObj = new OrgMdlObj();
       this.orgModelObj.orgMdlId = +this.orgMdlId;
@@ -70,7 +70,7 @@ export class OrganizationModelDetailComponent implements OnInit {
           console.log('obj',response['returnObject'])
           this.modelCode = response['returnObject']['orgMdlCode'];
           this.modelName = response['returnObject']['orgMdlName'];
-          if (response['returnObject']['isActive'] === '1') { this.isActive = true; } else { this.isActive = false; }
+          if (response['returnObject']['isActive'] == '1') { this.isActive = true; } else { this.isActive = false; }
         },
         (error) => {
           console.log('Error Get');
@@ -93,13 +93,13 @@ export class OrganizationModelDetailComponent implements OnInit {
     orgMdlObj.orgMdlCode = OrgMdlForm.value.modelCode;
 
     //MODE-ADD
-    if (this.type !== 'edit') {
+    if (this.type != 'edit') {
 
       //CHECK-DUPLICATE-CODE
       this.httpClient.post(getOrgModel, orgMdlObj).subscribe(
         (response) => {
           console.log("Success Check Duplicate");
-          if (response['returnObject'] !== null) {
+          if (response['returnObject'] != null) {
             this.service.typeErrorCustom('Code Has Been Used');
           }
           else {

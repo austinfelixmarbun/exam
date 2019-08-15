@@ -88,7 +88,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     console.log("masuk");
     this.orgMdlStrucObj = new OrgMdlStrucObj();
     this.InitForm();
-    if (this.type === "edit") {
+    if (this.type == "edit") {
       this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlStrucById;
       this.orgMdlStrucObj = new OrgMdlStrucObj();
       this.orgMdlStrucObj.orgMdlStrucId = +this.orgMdlStrucId;
@@ -100,14 +100,14 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           //this.orgMdlLvl = response["returnObject"]["orgMdlLvl"];
           this.inputLookupObj2.idSelect = response["returnObject"]["refBizUnitId"];
           this.inputLookupObj.idSelect = response["returnObject"]["parentId"];
-          if (response["returnObject"]["isActive"] === "1") {
+          if (response["returnObject"]["isActive"] == "1") {
             this.isActive = true;
           } else {
             this.isActive = false;
           }
 
           /* #region Fill Lookup Mdl Struct */
-          if(this.parentId !== 0)
+          if(this.parentId != 0)
           {
           var orgMdlStruc: OrgMdlStrucObj = new OrgMdlStrucObj();
           var getOrgMdlSructUrl =
@@ -162,14 +162,14 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     console.log('lms',lookupMdlStruc);
     console.log('lbu',lookupBizUnit);
 
-    if (OrgMdlForm.value.orgMdlLvl > 1 && this.inputLookupObj2.idSelect === undefined) {
+    if (OrgMdlForm.value.orgMdlLvl > 1 && this.inputLookupObj2.idSelect == undefined) {
       this.service.typeSuccess();
       this.service.typeErrorCustom('Must Have Parent');
       this.spinner.hide();
     }
     else {
       /* #region  Have Parent */
-      if (this.inputLookupObj2.idSelect !== undefined) {
+      if (this.inputLookupObj2.idSelect != undefined) {
         var orgMdlStrucCheck: OrgMdlStrucObj = new OrgMdlStrucObj();
         var getOrgMdlSructCheckUrl =
           this.foundationUrl + AdInsConstant.GetOrgMdlStrucById;
@@ -179,13 +179,13 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           .subscribe(response => {
             console.log(response)
             var lvlMust: number = + response['returnObject']['orgMdlLvl'] + 1;
-            if (+OrgMdlForm.value.orgMdlLvl !== lvlMust) {
+            if (+OrgMdlForm.value.orgMdlLvl != lvlMust) {
               this.service.typeErrorCustom(
                 "Level Must Be " + lvlMust
               );
             } else {
               //MODE-ADD
-              if (this.type !== "edit") {
+              if (this.type != "edit") {
                 this.apiUrl = this.foundationUrl + AdInsConstant.AddOrgMdlStruc;
                 this.orgMdlStrucObj = new OrgMdlStrucObj();
                 this.orgMdlStrucObj.orgMdlId = +this.orgMdlId;
@@ -240,7 +240,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
       /* #region  Dont Have Parent */
       else {
         //MODE-ADD
-        if (this.type !== "edit") {
+        if (this.type != "edit") {
           this.apiUrl = this.foundationUrl + AdInsConstant.AddOrgMdlStruc;
           this.orgMdlStrucObj = new OrgMdlStrucObj();
           this.orgMdlStrucObj.orgMdlId = +this.orgMdlId;

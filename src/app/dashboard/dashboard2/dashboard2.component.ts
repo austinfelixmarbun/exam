@@ -142,8 +142,8 @@ export class Dashboard2Component {
         },
         events: {
             draw(data: any): void {
-                if (data.type === 'label') {
-                    if (data.index === 0) {
+                if (data.type == 'label') {
+                    if (data.index == 0) {
                         data.element.attr({
                             dx: data.element.root().width() / 2,
                             dy: (data.element.root().height() + (data.element.height() / 4)) / 2,
@@ -174,8 +174,8 @@ export class Dashboard2Component {
         },
         events: {
             draw(data: any): void {
-                if (data.type === 'label') {
-                    if (data.index === 0) {
+                if (data.type == 'label') {
+                    if (data.index == 0) {
                         data.element.attr({
                             dx: data.element.root().width() / 2,
                             dy: (data.element.root().height() + (data.element.height() / 4)) / 2,
@@ -206,8 +206,8 @@ export class Dashboard2Component {
         },
         events: {
             draw(data: any): void {
-                if (data.type === 'label') {
-                    if (data.index === 0) {
+                if (data.type == 'label') {
+                    if (data.index == 0) {
                         data.element.attr({
                             dx: data.element.root().width() / 2,
                             dy: (data.element.root().height() + (data.element.height() / 4)) / 2,
@@ -262,7 +262,7 @@ export class Dashboard2Component {
             draw(data: any): void {
 
                 var circleRadius = 6;
-                if (data.type === 'point') {
+                if (data.type == 'point') {
                     var circle = new Chartist.Svg('circle', {
                         cx: data.x,
                         cy: data.y,
@@ -293,14 +293,14 @@ export class Dashboard2Component {
             ['screen and (max-width: 640px) and (min-width: 381px)', {
                 axisX: {
                     labelInterpolationFnc: function (value, index) {
-                        return index % 2 === 0 ? value : null;
+                        return index % 2 == 0 ? value : null;
                     }
                 }
             }],
             ['screen and (max-width: 380px)', {
                 axisX: {
                     labelInterpolationFnc: function (value, index) {
-                        return index % 3 === 0 ? value : null;
+                        return index % 3 == 0 ? value : null;
                     }
                 }
             }]
@@ -308,7 +308,7 @@ export class Dashboard2Component {
         events: {
             draw(data: any): void {
                 var circleRadius = 6;
-                if (data.type === 'point') {
+                if (data.type == 'point') {
                     var circle = new Chartist.Svg('circle', {
                         cx: data.x,
                         cy: data.y,
@@ -317,7 +317,7 @@ export class Dashboard2Component {
                     });
                     data.element.replace(circle);
                 }
-                else if (data.type === 'label') {
+                else if (data.type == 'label') {
                     // adjust label position for rotation
                     const dX = data.width / 2 + (30 - data.width)
                     data.element.attr({ x: data.element.attr('x') - dX })
@@ -343,7 +343,7 @@ export class Dashboard2Component {
         },
         events: {
             draw(data: any): void {
-                if (data.type === 'label') {
+                if (data.type == 'label') {
                     // adjust label position for rotation
                     const dX = data.width / 2 + (30 - data.width)
                     data.element.attr({ x: data.element.attr('x') - dX })

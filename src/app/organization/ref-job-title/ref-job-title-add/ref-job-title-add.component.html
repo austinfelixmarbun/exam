@@ -24,7 +24,7 @@
                 <input type="text" class="form-control adInsInput" name="jobTitleCode" [(ngModel)]="jobTitleCode"
                   #JobTitleCode="ngModel"
                   [ngClass]="{ 'is-invalid': RefJobTitleForm.submitted && JobTitleCode.invalid }"
-                  [attr.disabled]="pageType === 'edit' ? true : null" required>
+                  [attr.disabled]="pageType == 'edit' ? true : null" required>
                 <div *ngIf="RefJobTitleForm.submitted && JobTitleCode.invalid" class="invalid-feedback">
                   <div *ngIf="JobTitleCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="form-actions right">
-            <!-- <button *ngIf="pageType === 'edit'" type="button" class="btn btn-raised btn-warning mr-1"
+            <!-- <button *ngIf="pageType == 'edit'" type="button" class="btn btn-raised btn-warning mr-1"
               [routerLink]="['/organization/refjobtitle']">
               <i class="fa fa-arrow-circle-left"></i> Back
             </button> d-->

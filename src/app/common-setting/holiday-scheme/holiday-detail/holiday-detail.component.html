@@ -39,7 +39,7 @@
       </div>
     </div>
 </div>
-  <div *ngIf="editDetail  === 'true'" class="holidayDetail">
+  <div *ngIf="editDetail  == 'true'" class="holidayDetail">
     <div class="ucSearch-Button-Right">
         <span class="mr-1">
             <button type="button" class="addButton" [queryParams]="{holidaySchmHId:holidaySchmHId}" [routerLink]="['/commonSetting/holiday/detail']" translate>
@@ -52,7 +52,7 @@
   </div>
 </div>
 
-<div *ngIf="editDetail  === 'true'" class="holidayDetail">
+<div *ngIf="editDetail  == 'true'" class="holidayDetail">
   <div [hidden]="resultDataSearch?.data == null">
     <table class="table table-responsive-md text-center table-hover">
       <thead>

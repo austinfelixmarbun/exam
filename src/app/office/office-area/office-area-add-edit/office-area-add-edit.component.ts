@@ -48,7 +48,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    if (this.type === 'edit') {
+    if (this.type == 'edit') {
       this.apiUrl = this.foundationUrl + AdInsConstant.GetRefArea;
       this.refOfficeAreaObj = new RefOfficeAreaObj()
       this.refOfficeAreaObj.refOfficeAreaId = +this.refOfficeAreaId
@@ -58,7 +58,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
           this.refOfficeAreaObj = response['returnObject'];
           this.areaCode = response['returnObject']['areaCode']
           this.areaName = response['returnObject']['areaName']
-          if (this.refOfficeAreaObj.isActive === '1') {
+          if (this.refOfficeAreaObj.isActive == '1') {
             this.isActive = true;
           }
           else {
@@ -85,12 +85,12 @@ export class OfficeAreaAddEditComponent implements OnInit {
     officeAreaObj.areaCode = OffAreaForm.value.areaCode;
 
     //MODE-ADD
-    if (this.type !== 'edit') {
+    if (this.type != 'edit') {
 
       //CHECK-DUPLICATE-CODE
       this.httpClient.post(getDuplicateUrl, officeAreaObj).subscribe(
         (response) => {
-          if (response['returnObject']['isDuplicate'] === true) {
+          if (response['returnObject']['isDuplicate'] == true) {
             this.service.typeErrorCustom('Code Has Been Used');
           }
           else {

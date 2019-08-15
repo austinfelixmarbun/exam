@@ -22,7 +22,7 @@
               <label class="col-md-3  adInsLabel" for="empNo">Employee No </label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput width-25-per" name="empNo" required
-                  [attr.disabled]="pageType === 'edit' ? true : null" [(ngModel)]="empNo" #EmpNo="ngModel"
+                  [attr.disabled]="pageType == 'edit' ? true : null" [(ngModel)]="empNo" #EmpNo="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpNo.invalid }">
                 <div *ngIf="RefEmpForm.submitted && EmpNo.invalid" class="invalid-feedback">
                   <div *ngIf="EmpNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
@@ -139,7 +139,7 @@
             </div>
           </div>
           <div class="form-actions right">
-            <button *ngIf="pageType !== 'add'" type="button" class="btn btn-raised btn-warning mr-1"
+            <button *ngIf="pageType != 'add'" type="button" class="btn btn-raised btn-warning mr-1"
               [routerLink]="['/employee']">
               <i class="fa fa-arrow-circle-left"></i> Back
             </button>

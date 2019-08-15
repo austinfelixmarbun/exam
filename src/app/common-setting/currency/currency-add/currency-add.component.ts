@@ -143,7 +143,7 @@ export class CurrencyAddComponent implements OnInit {
     console.log(ReqCurrForm);
     this.currObj = new CurrObj();
     this.currObj = ReqCurrForm.value;
-    if (this.isActive === false) {
+    if (this.isActive == false) {
       this.currObj.isActive = "0";
     } else {
       this.currObj.isActive = "1";

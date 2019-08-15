@@ -162,7 +162,7 @@ export class WorkingHourDetailComponent implements OnInit {
     this.workingHourSchmHObj = new WorkingHourSchmHObj();
     this.workingHourSchmHObj.workingHourSchmCode = ReqWorkingHourForm.value.workingHourSchmCode;
     this.workingHourSchmHObj.workingHourSchmName = ReqWorkingHourForm.value.workingHourSchmName;
-    if (this.isActive === false) {
+    if (this.isActive == false) {
       this.workingHourSchmHObj.isActive = "0";
     } else {
       this.workingHourSchmHObj.isActive = "1";

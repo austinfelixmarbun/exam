@@ -40,7 +40,7 @@
                         <div class="col-lg-5 col-md-5 ">
                             <ul class="profile-menu no-list-style">
                                 <li>
-                                    <a (click)="showPage('About')" [ngClass]="currentPage === 'About' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">About</a>
+                                    <a (click)="showPage('About')" [ngClass]="currentPage == 'About' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">About</a>
                                 </li>
                             </ul>
                         </div>
@@ -51,13 +51,13 @@
                         <div class="col-lg-5 col-md-5">
                             <ul class="profile-menu no-list-style">
                                 <li>
-                                    <a (click)="showPage('TimeLine')" [ngClass]="currentPage === 'TimeLine' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">Timeline</a>
+                                    <a (click)="showPage('TimeLine')" [ngClass]="currentPage == 'TimeLine' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">Timeline</a>
                                 </li>
                                 <!-- <li>
-                                    <a (click)="showPage('Friends')" [ngClass]="currentPage === 'Friends' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">Friends</a>
+                                    <a (click)="showPage('Friends')" [ngClass]="currentPage == 'Friends' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">Friends</a>
                                 </li>
                                 <li>
-                                    <a (click)="showPage('Photos')" [ngClass]="currentPage === 'Photos' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">Photos</a>
+                                    <a (click)="showPage('Photos')" [ngClass]="currentPage == 'Photos' ? 'primary font-medium-2 font-weight-600 active' : 'primary font-medium-2 font-weight-600'">Photos</a>
                                 </li> -->
                             </ul>
                         </div>
@@ -70,7 +70,7 @@
 <!--Basic User Details Ends-->
 
 <!--About section starts-->
-<section id="about" *ngIf="currentPage === 'About'">
+<section id="about" *ngIf="currentPage == 'About'">
     <div class="row">
         <div class="col-12">
             <div class="content-header">About</div>
@@ -216,7 +216,7 @@
 <!--About section ends-->
 
 <!--User Timeline section starts-->
-<section *ngIf="currentPage === 'TimeLine'">   
+<section *ngIf="currentPage == 'TimeLine'">   
     <div class="row">
         <div class="col-12">
             <div class="content-header">User Timeline</div>
@@ -396,7 +396,7 @@
 <!--User Timeline section ends-->
 
 <!--User's friend section starts-->
-<section id="friends" *ngIf="currentPage === 'Friends'">
+<section id="friends" *ngIf="currentPage == 'Friends'">
     <div class="row">
         <div class="col-12">
             <div class="content-header">Friends</div>
@@ -570,7 +570,7 @@
 <!--User's friend section starts-->
 
 <!--User's uploaded photos section starts-->
-<section id="photos" *ngIf="currentPage === 'Photos'">
+<section id="photos" *ngIf="currentPage == 'Photos'">
     <div class="row">
         <div class="col-12">
             <div class="content-header">Photos</div>

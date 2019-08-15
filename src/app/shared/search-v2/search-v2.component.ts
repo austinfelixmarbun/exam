@@ -72,8 +72,8 @@ export class SearchV2Component implements OnInit {
   }
 
   changeState() {
-    this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
-    this.isHidden = this.isHidden === false ? true : false;
+    this.currentState = this.currentState == 'initial' ? 'final' : 'initial';
+    this.isHidden = this.isHidden == false ? true : false;
     console.log(this.currentState);
   }
 

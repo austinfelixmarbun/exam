@@ -43,7 +43,7 @@ export class EditCompanyComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.mode === "edit") {
+        if (this.mode == "edit") {
             this.apiUrl = this.foundationUrl + AdInsConstant.GetRefCoy;
             var refCoyObj = new RefCoyObj();
             refCoyObj.refCoyId = this.param;
@@ -114,7 +114,7 @@ export class EditCompanyComponent implements OnInit {
             refCoyObj.refCoyId = this.param;
 
             console.log(refCoyObj);
-            if (this.mode === "edit") {
+            if (this.mode == "edit") {
                 this.editUrl = this.foundationUrl + AdInsConstant.EditRefCoy;
                 refCoyObj.refCoyId = this.param;
                 this.http.post(this.editUrl, refCoyObj).subscribe(

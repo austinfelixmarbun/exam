@@ -133,7 +133,7 @@ export class DummyComponent implements OnInit {
   }
 
   upload(files) {
-    if (files.length === 0)
+    if (files.length == 0)
       return;
 
     const formData = new FormData();
@@ -148,14 +148,14 @@ export class DummyComponent implements OnInit {
     var test = { test: 'test' };
     this.http.post('https://localhost:5000/UploadType/UploadFile', test).subscribe((response) => {
       console.log(response);
-      // if (event.type === HttpEventType.UploadProgress)
+      // if (event.type == HttpEventType.UploadProgress)
       //   this.progress = Math.round(100 * event.loaded / event.total);
-      // else if (event.type === HttpEventType.Response)
+      // else if (event.type == HttpEventType.Response)
       //   this.message = event.body.toString();
     });
   }
   public uploadFile = (files) => {
-    if (files.length === 0) {
+    if (files.length == 0) {
       return;
     }
     let fileToUpload = <File>files[0];
@@ -165,9 +165,9 @@ export class DummyComponent implements OnInit {
 
     this.http.post('https://localhost:5000/UploadType/UploadFile', formData, { reportProgress: true, observe: 'events' }).subscribe(
       response => {
-        if (response.type === HttpEventType.UploadProgress)
+        if (response.type == HttpEventType.UploadProgress)
           this.progress = Math.round(100 * response.loaded / response.total);
-        else if (response.type === HttpEventType.Response) {
+        else if (response.type == HttpEventType.Response) {
           this.message = 'Upload success.';
         }
         console.log(response);

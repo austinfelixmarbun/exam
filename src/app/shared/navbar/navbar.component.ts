@@ -49,10 +49,10 @@ export class NavbarComponent implements AfterViewChecked {
         // setTimeout(() => {
         //     var wrapperDiv = document.getElementsByClassName("wrapper")[0];
         //     var dir = wrapperDiv.getAttribute("dir");           
-        //     if (dir === 'rtl') {
+        //     if (dir == 'rtl') {
         //         this.placement = 'bottom-left';
         //     }
-        //     else if (dir === 'ltr') {
+        //     else if (dir == 'ltr') {
         //         this.placement = 'bottom-right';
         //     }
         // }, 3000);
@@ -84,7 +84,7 @@ export class NavbarComponent implements AfterViewChecked {
     }
 
     ToggleClass() {
-        if (this.toggleClass === 'ft-maximize') {
+        if (this.toggleClass == 'ft-maximize') {
             this.toggleClass = 'ft-minimize';
         }
         else

@@ -77,8 +77,8 @@
                 <tr *ngFor="let item of tempRefRole">
                   <td>{{item.roleCode}}</td>
                   <td>{{item.roleName}}</td>
-                  <td *ngIf="item.isActive === '1'">Yes</td>
-                  <td *ngIf="item.isActive === '0'">No</td>
+                  <td *ngIf="item.isActive == '1'">Yes</td>
+                  <td *ngIf="item.isActive == '0'">No</td>
                   <td>
                     <a class="danger p-0" data-original-title="" title="" (click)="delete(item.refRoleId)">
                       <i class="ft-trash-2 font-medium-3 mr-2"></i>

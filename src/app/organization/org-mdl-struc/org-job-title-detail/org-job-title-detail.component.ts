@@ -92,7 +92,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
     console.log("masuk");
     this.orgJobTitleObj = new OrgJobTitleObj();
     this.InitForm();
-    if (this.type === "edit") {
+    if (this.type == "edit") {
       this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitleByOrgJobTitleId;
       this.orgJobTitleObj.orgJobTitleId = +this.orgJobTitleId;
       this.httpClient.post(this.apiUrl, this.orgJobTitleObj).subscribe(
@@ -102,7 +102,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
           console.log("obj", response["returnObject"]);
           this.inputLookupObj.idSelect = response["returnObject"]["refJobTitleId"];
           this.inputLookupObj2.idSelect = response["returnObject"]["parentOrgJobTitleId"];
-          if (response["returnObject"]["isActive"] === "1") {
+          if (response["returnObject"]["isActive"] == "1") {
             this.isActive = true;
           } else {
             this.isActive = false;
@@ -125,7 +125,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
 
 
           /* #region Fill Lookup OrgJobTitle */
-          if(this.parentOrgJobTitleId !== 0 && this.parentOrgJobTitleId !== null){
+          if(this.parentOrgJobTitleId != 0 && this.parentOrgJobTitleId != null){
           console.log('fill lookup OrgJobTitle',this.parentOrgJobTitleId )
 
           var job: RefJobTitleObj = new RefJobTitleObj();
@@ -168,12 +168,12 @@ export class OrgJobTitleDetailComponent implements OnInit {
     console.log('lbu', lookupOrgJobTitle);
 
     //MODE-ADD
-    if (this.type !== "edit") {
+    if (this.type != "edit") {
       this.apiUrl = this.foundationUrl + AdInsConstant.AddOrgJobTitle;
       this.orgJobTitleObj = new OrgJobTitleObj();
       this.orgJobTitleObj.orgMdlStrucId = +this.orgMdlStrucId;
       this.orgJobTitleObj.refJobTitleId = lookupRefJobTitle.refJobTitleId;
-      if (lookupOrgJobTitle.idSelect !== undefined) { this.orgJobTitleObj.parentOrgJobTitleId = lookupOrgJobTitle.idSelect; }
+      if (lookupOrgJobTitle.idSelect != undefined) { this.orgJobTitleObj.parentOrgJobTitleId = lookupOrgJobTitle.idSelect; }
       if (OrgJobTitleForm.value.isActive) {
         this.orgJobTitleObj.isActive = '1';
       } else {
@@ -196,7 +196,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
       this.orgJobTitleObj.orgJobTitleId = +this.orgJobTitleId;
       this.orgJobTitleObj.orgMdlStrucId = +this.orgMdlStrucId;
       this.orgJobTitleObj.refJobTitleId = lookupRefJobTitle.idSelect;
-      if (lookupOrgJobTitle.idSelect !== undefined) { this.orgJobTitleObj.parentOrgJobTitleId = lookupOrgJobTitle.idSelect; }
+      if (lookupOrgJobTitle.idSelect != undefined) { this.orgJobTitleObj.parentOrgJobTitleId = lookupOrgJobTitle.idSelect; }
       if (OrgJobTitleForm.value.isActive) {
         this.orgJobTitleObj.isActive = '1';
       } else {

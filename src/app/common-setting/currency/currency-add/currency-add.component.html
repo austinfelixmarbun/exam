@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
       <div class="px-3">
-        <div class="addEdit" *ngIf="exRate === 'false'">
+        <div class="addEdit" *ngIf="exRate == 'false'">
           <form class="form form-horizontal" name="CurrReqForm" #CurrReqForm="ngForm"
             (ngSubmit)="CurrReqForm.form.valid && SaveCurrForm(CurrReqForm)">
             <div class="form-body">
@@ -95,7 +95,7 @@
             </div>
           </form>
         </div>
-        <div class="exchangeRate" *ngIf="exRate === 'true'">
+        <div class="exchangeRate" *ngIf="exRate == 'true'">
             <form class="form form-horizontal" name="RateReqForm" #RateReqForm="ngForm"
               (ngSubmit)="RateReqForm.form.valid && SaveRateForm(RateReqForm)">
               <div class="form-body">

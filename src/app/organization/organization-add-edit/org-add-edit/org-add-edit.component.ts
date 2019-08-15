@@ -70,7 +70,7 @@ export class OrgAddEditComponent implements OnInit {
         this.orgObj.refOrgId = 0;
         this.orgObj.oldParentId = 0;
         this.orgObj.orgName = OrgObjectForm.value.orgName;
-        if (OrgObjectForm.value.parentId !== "None") {
+        if (OrgObjectForm.value.parentId != "None") {
           this.orgObj.parentId = OrgObjectForm.value.parentId;
         }
         if (OrgObjectForm.value.isActive) {
@@ -115,7 +115,7 @@ export class OrgAddEditComponent implements OnInit {
         this.orgObj.orgName = OrgObjectForm.value.orgName;
         if (
           +OrgObjectForm.value.hierarchyNo > 1 &&
-          OrgObjectForm.value.parentId !== "None"
+          OrgObjectForm.value.parentId != "None"
         ) {
           this.orgObj.parentId = OrgObjectForm.value.parentId;
         }
@@ -173,12 +173,12 @@ export class OrgAddEditComponent implements OnInit {
       response => {
         this.orgObj = response["returnObject"];
 
-        if (this.orgObj.isActive === "1") {
+        if (this.orgObj.isActive == "1") {
           this.isActive = true;
         } else {
           this.isActive = false;
         }
-        if (this.orgObj.parentId === null) {
+        if (this.orgObj.parentId == null) {
           this.parentId = "None";
         } else {
           this.parentId = +this.orgObj.parentId;

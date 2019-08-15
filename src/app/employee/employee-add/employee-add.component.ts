@@ -220,12 +220,12 @@ export class EmployeeAddComponent implements OnInit {
       this.empObj.bankAccName = ReqForm.value.bankAccName;
       this.empObj.bankAccNo = ReqForm.value.bankAccNo;
       this.empObj.bankCode = uclRefBank.lookupInput.idSelect;
-      if (this.isExt === false) {
+      if (this.isExt == false) {
         this.empObj.isExt = "0";
       } else {
         this.empObj.isExt = "1";
       }
-      if (this.isActive === false) {
+      if (this.isActive == false) {
         this.empObj.isActive = "0";
       } else {
         this.empObj.isActive = "1";
@@ -282,12 +282,12 @@ export class EmployeeAddComponent implements OnInit {
       this.empObj.bankAccName = ReqForm.value.bankAccName;
       this.empObj.bankAccNo = ReqForm.value.bankAccNo;
       this.empObj.bankCode = uclRefBank.lookupInput.idSelect;
-      if (this.isExt === false) {
+      if (this.isExt == false) {
         this.empObj.isExt = "0";
       } else {
         this.empObj.isExt = "1";
       }
-      if (this.isActive === false) {
+      if (this.isActive == false) {
         this.empObj.isActive = "0";
       } else {
         this.empObj.isActive = "1";

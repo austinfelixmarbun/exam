@@ -48,7 +48,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    if (this.type === 'edit') {
+    if (this.type == 'edit') {
       this.apiUrl = this.settingUrl + AdInsConstant.GetGeneralSettingById;
       this.gsObj = new GeneralSettingObj()
       this.gsObj.generalSettingId = +this.generalSettingId
@@ -80,14 +80,14 @@ export class GeneralSettingAddEditComponent implements OnInit {
     gsCheckObj = new GeneralSettingObj()
     gsCheckObj.gsCode = GSForm.value.gsCode;
     //MODE-ADD
-    if (this.type !== 'edit') {
+    if (this.type != 'edit') {
       //CHECK-DUPLICATE-CODE
       this.httpClient.post(getValueUrl, gsCheckObj).subscribe(
         (response) => {
           console.log("Success Check Duplicate");
           returnObj = response['returnObject'];
           console.log(returnObj);
-          if (returnObj !== null) {
+          if (returnObj != null) {
             this.service.typeErrorCustom('Code Has Been Used');
           }
           else {

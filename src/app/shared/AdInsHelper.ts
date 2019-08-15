@@ -79,7 +79,7 @@ export class AdInsHelper {
         var objectMenu = [];
         objectMenu = JSON.parse(temp);
         if (objectMenu != null) {
-            var exsisting = objectMenu['find'](x => x.path === formPath);
+            var exsisting = objectMenu['find'](x => x.path == formPath);
             if (exsisting == undefined) {
                 return false;
             } else {
