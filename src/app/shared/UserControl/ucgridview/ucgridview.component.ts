@@ -47,10 +47,10 @@ export class UcgridviewComponent implements OnInit {
     var arrList = {};
 
     for (var i = 0; i < param.length; i++) {
-      if (param[i].type == "mode") {
-        arrList[param[i].type] = param[i].property;
-      } else {
+      if (item[param[i].type] != undefined || item[param[i].param] != undefined) {
         arrList[param[i].type] = item[param[i].property];
+      } else {
+        arrList[param[i].type] = param[i].property;
       }
     }
     return arrList;

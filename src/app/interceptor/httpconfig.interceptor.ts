@@ -28,7 +28,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             this.spinner.show();
         }
         this.count++;
-        //console.log(request);
         var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
         var token: string = "";
         var myObj;

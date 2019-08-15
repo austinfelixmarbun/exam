@@ -8,6 +8,7 @@ import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { AdInsService } from 'app/shared/services/adIns.service';
 
 @Component({
     selector: 'add-bank',
@@ -17,7 +18,6 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 export class BankAddComponent implements OnInit {
 
     param: string;
-
     businessUnitCode: string;
     businessUnitName: string;
     description: string;
@@ -25,16 +25,17 @@ export class BankAddComponent implements OnInit {
     result: any;
     mode: string = "add";
     apiUrl: any;
-    pageType:string;
+    pageType: string;
     isActive: boolean = true;
     settingUrl: string = environment.settingUrl;
-    urlEnviPaging : string = environment.foundationUrl;
+    urlEnviPaging: string = environment.foundationUrl;
     bankObj: RefBankObj;
     editUrl: any;
     key: any;
     criteria: CriteriaObj[] = [];
 
-    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient) {
+    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient,
+        private adInsService: AdInsService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refBankId"];
             this.mode = params["mode"];
@@ -50,15 +51,13 @@ export class BankAddComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("test");
-        if (this.mode === "edit") {
+        console.log("add/edit bank");
+        if (this.mode == "edit") {
             this.apiUrl = this.settingUrl + AdInsConstant.GetBank;
             var bankObj = new RefBankObj();
             bankObj.refBankId = this.param;
             this.http.post(this.apiUrl, bankObj).subscribe(
                 (response) => {
-                    console.log("Success");
-                    console.log(response);
                     this.result = response['returnObject'];
                     if (this.result.isActive == "1") {
                         this.isActive = true;
@@ -68,44 +67,28 @@ export class BankAddComponent implements OnInit {
                     }
                 },
                 (error) => {
-                    console.log("Error");
                     console.log(error);
                 }
             );
         }
     }
 
+    toggleVisibility(e) {
+        this.isActive = e.target.checked;
+    }
 
-     formValidate(form: any){
-        this.scrollIfFormHasErrors(form).then(() => {
-            // Run any additional functionality if you need to. 
-          });
-     }
-     
-     private async scrollIfFormHasErrors(form: NgForm): Promise <any> {
-       await form.invalid;
-       this.scrollToError();
-     }
-     
-     private scrollToError(): void {
-        const firstElementWithError = document.querySelector('input.ng-invalid');
-        this.scrollTo(firstElementWithError);
-     }
+    formValidate(form: any) {
+        this.adInsService.scrollIfFormHasErrors(form);
+    }
 
-     private scrollTo(el: Element) {
-         if(el) { 
-             el.scrollIntoView({ behavior: 'smooth' });
-         }
-      }
-
-    Save(BankAddReqForm: NgForm): void {
-        if (this.mode === "edit") {
+    SaveForm(BankAddReqForm: NgForm): void {
+        if (this.mode == "edit") {
             this.editUrl = this.settingUrl + AdInsConstant.EditRefBank;
             this.bankObj = new RefBankObj();
             this.bankObj = BankAddReqForm.value;
             this.bankObj.bankCode = this.result.bankCode;
             this.bankObj.refBankId = this.param;
-            if (this.isActive === false) {
+            if (this.isActive == false) {
                 this.bankObj.isActive = "0";
             }
             else {
@@ -113,7 +96,6 @@ export class BankAddComponent implements OnInit {
             }
             this.http.post(this.editUrl, this.bankObj).subscribe(
                 (response) => {
-                    console.log(response);
                     this.router.navigateByUrl('/bank/paging');
                     this.toastr.successMessage(response['message']);
                 },
@@ -126,26 +108,20 @@ export class BankAddComponent implements OnInit {
             this.bankObj = new RefBankObj();
             this.bankObj = BankAddReqForm.value;
             this.bankObj.refBankId = "0";
-            if (this.isActive === false) {
+            if (this.isActive == false) {
                 this.bankObj.isActive = "0";
             }
             else {
                 this.bankObj.isActive = "1";
             }
-            this.http.post(this.editUrl, this.bankObj).subscribe(
-                (response) => {
-                    console.log(response);
-                    this.toastr.successMessage(response['message']);
-                    this.router.navigateByUrl('/bank/paging', { skipLocationChange: true }).then(() =>
-                        this.router.navigate(['/bank/add']));
-                },
+            this.http.post(this.editUrl, this.bankObj).subscribe((response) => {
+                this.toastr.successMessage(response['message']);
+                this.router.navigateByUrl('/bank/paging', { skipLocationChange: true }).then(() =>
+                    this.router.navigate(['/bank/add']));
+            },
                 (error) => {
                     console.log(error);
                 });
         }
-    }
-
-    toggleVisibility(e) {
-        this.isActive = e.target.checked;
     }
 }

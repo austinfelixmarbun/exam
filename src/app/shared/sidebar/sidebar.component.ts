@@ -32,15 +32,12 @@ export class SidebarComponent implements OnInit {
         // this.url = "./assets/menu.json";
         // this.getJSON(this.url).subscribe
         //     (data => {
-        //         //console.log(JSON.stringify(data));
         //         this.menuItems = data;
         //     }
         //     );
         //this.menuItems = ROUTES.filter(menuItem => menuItem);
         this.menuItems = JSON.parse(localStorage.getItem("Menu"));
         //this.menu = JSON.parse(localStorage.getItem("Menu"));
-        //console.log(localStorage.getItem("Menu"));
-        console.log(this.menuItems);
     }
 
     //NGX Wizard - skip url change

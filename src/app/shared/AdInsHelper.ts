@@ -63,7 +63,6 @@ export class AdInsHelper {
         else {
             var bsDtBefore = new Date(businessDtBefore);
             var tempDate = today.getTime() - bsDtBefore.getTime();
-            console.log(tempDate);
             if (tempDate > AdInsConstant.TimeoutSession) {
                 var data = { status: "001", reason: "Session Time Out" };
                 AdInsHelper.ClearAllLog();
