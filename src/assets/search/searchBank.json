@@ -1,6 +1,6 @@
 {
     "title": "Bank",
-    "exportExcel": true, 
+    "exportExcel": true,
     "component": [
         {
             "type": "textbox",
@@ -26,15 +26,15 @@
             "label": "BI Code",
             "placeholder": "Placeholder"
         },
-        {   
+        {
             "type": "dropdown",
             "name": "is_Active",
             "id": "activeStatusId",
-            "label" : "Active Status",
+            "label": "Active Status",
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
-            "isSelectOne" : false,
+            "isSelectOne": false,
             "items": [
                 {
                     "key": "1",
@@ -47,5 +47,9 @@
             ],
             "itemsUrl": []
         }
-    ]
+    ],
+    "querystring": {
+        "select": "SELECT BANK_CODE AS bankCode, IS_ACTIVE AS isActive, BANK_NAME AS bankName, REG_RPT_CODE AS regRptCode, REF_BANK_ID AS refBankId",
+        "from": "FROM REF_BANK WITH(NOLOCK)"
+    }
 }

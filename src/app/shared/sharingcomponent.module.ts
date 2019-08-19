@@ -17,6 +17,10 @@ import { LookupgenericComponent } from './UserControl/lookupgeneric/lookupgeneri
 import { UcpagingComponent } from './UserControl/ucpaging/ucpaging.component';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { ViewgenericComponent } from './UserControl/viewgeneric/viewgeneric.component';
+import { UcSubsectionModule } from '@adins/uc-subsection';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcpagingModule } from '@adins/ucpaging';
 
 
 @NgModule({
@@ -30,7 +34,9 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
         UcInfoComponent,
         SearchV2Component,
         LookupgenericComponent,
-        UcpagingComponent
+        UcpagingComponent,
+        ViewgenericComponent,
+        LookupgenericComponent
     ],
     imports: [
         FormsModule,
@@ -40,7 +46,10 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
         CommonModule,
         LookupzipcodeModule,
         UCSearchModule,
-        UcgridfooterModule
+        UcgridfooterModule,
+        UcSubsectionModule,
+        UclookupgenericModule,
+        UcpagingModule
     ],
     declarations: [
         UcAddressComponent,
@@ -52,7 +61,9 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
         UcInfoComponent,
         SearchV2Component,
         LookupgenericComponent,
-        UcpagingComponent
+        UcpagingComponent,
+        ViewgenericComponent,
+        LookupgenericComponent
     ]
 })
 

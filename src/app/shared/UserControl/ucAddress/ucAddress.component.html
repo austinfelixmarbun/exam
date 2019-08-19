@@ -2,7 +2,7 @@
     <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Address Information</h4>
         <div class="form-group row">
-            <label class="col-md-3 label-control adInsLabel" for="address" translate>Address </label>
+            <label class="col-md-3 adInsLabel" for="address" translate>Address </label>
             <div class="col-md-9">
                 <textarea id="address" rows="5" class="form-control adInsInput" name="addr" required [(ngModel)]="addr"
                     #Addr="ngModel"
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control adInsLabel" for="areaCode4" translate>Rt / Rw </label>
+            <label class="col-md-3 adInsLabel" for="areaCode4" translate>Rt / Rw </label>
             <div class="col-md-9">
                 <div class="form-group row">
                     <div class="col-md-2" style="border-right: 1px solid grey">
@@ -41,14 +41,13 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control adInsLabel" for="zipcode" translate>Zipcode </label>
+            <label class="col-md-3 adInsLabel" for="zipcode" translate>Zipcode </label>
             <div class="col-md-3">
-                <lib-lookupzipcode (select)="onSelect($event)" [lookupInput]="inputLookupObj">
-                </lib-lookupzipcode>
+                <app-lookupgeneric [lookupInput]="inputLookupObj" [parentForm]='parentForm' [identifier]="identifier" (lookup)="getLookup($event)"></app-lookupgeneric>
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control adInsLabel" for="areaCode2" translate>Kelurahan </label>
+            <label class="col-md-3 adInsLabel" for="areaCode2" translate>Kelurahan </label>
             <div class="col-md-9">
                 <input type="text" id="areaCode2" class="form-control adInsInput" name="areaCode2" required [(ngModel)]="areaCode2"
                     #AreaCode2="ngModel" readonly
@@ -60,7 +59,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control adInsLabel" for="areaCode1" translate>Kecamatan </label>
+            <label class="col-md-3 adInsLabel" for="areaCode1" translate>Kecamatan </label>
             <div class="col-md-9">
                 <input type="text" id="areaCode1" class="form-control adInsInput" name="areaCode1" required [(ngModel)]="areaCode1"
                     #AreaCode1="ngModel" readonly
@@ -72,7 +71,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control adInsLabel" for="city" translate>City </label>
+            <label class="col-md-3 adInsLabel" for="city" translate>City </label>
             <div class="col-md-9">
                 <input type="text" id="city" class="form-control adInsInput" name="city" required [(ngModel)]="city"
                     #City="ngModel" readonly
@@ -84,7 +83,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control adInsLabel" for="phn1" translate>Phone(Fix Line) 1 </label>
+            <label class="col-md-3 adInsLabel" for="phn1" translate>Phone(Fix Line) 1 </label>
             <div class="col-md-9">
                 <div class="form-group row">
                     <div class="col-md-2" style="border-right: 1px solid grey">
@@ -121,7 +120,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control adInsLabel" for="phn2" translate>Phone(Fix Line) 2 </label>
+            <label class="col-md-3 adInsLabel" for="phn2" translate>Phone(Fix Line) 2 </label>
             <div class="col-md-9">
                 <div class="form-group row">
                     <div class="col-md-2" style="border-right: 1px solid grey">
@@ -158,7 +157,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control adInsLabel" for="phn3" translate>Phone(Fix Line) 3 </label>
+            <label class="col-md-3 adInsLabel" for="phn3" translate>Phone(Fix Line) 3 </label>
             <div class="col-md-9">
                 <div class="form-group row">
                     <div class="col-md-2" style="border-right: 1px solid grey">
@@ -195,7 +194,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 label-control adInsLabel" for="fax" translate>Fax </label>
+            <label class="col-md-3 adInsLabel" for="fax" translate>Fax </label>
             <div class="col-md-9">
                 <div class="form-group row">
                     <div class="col-md-2" style="border-right: 1px solid grey">

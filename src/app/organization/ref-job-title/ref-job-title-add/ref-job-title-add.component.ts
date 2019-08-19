@@ -123,7 +123,7 @@ export class RefJobTitleAddComponent implements OnInit {
     if (this.pageType == 'add') {
       this.rjtObj = new RefJobTitleObj();
       this.rjtObj = ReqForm.value;
-      if (this.isInternal === false) {
+      if (this.isInternal == false) {
         this.rjtObj.IsInternal = "0";
       }
       else {
@@ -154,7 +154,7 @@ export class RefJobTitleAddComponent implements OnInit {
       formInput.JobTitleName = ReqForm.value.jobTitleName;
       formInput.Descr = ReqForm.value.descr;
       formInput.MrJobPositionLvl = ReqForm.value.mrJobPositionLvl;
-      if (this.isInternal === false) {
+      if (this.isInternal == false) {
         formInput.IsInternal = "0";
       }
       else {

@@ -88,7 +88,7 @@ const PARAMS = new HttpParams({
 //   constructor(private http: HttpClient) { }
 
 //   search(term: string) {
-//     if (term === '') {
+//     if (term == '') {
 //       return of([]);
 //     }
 
@@ -99,7 +99,7 @@ const PARAMS = new HttpParams({
 //   }
 //   searching(term: string) {
 //     this.userData = [];
-//     if (term === '') {
+//     if (term == '') {
 //       return of([]);
 //     }
 //     var request = new RequestCriteriaObj();
@@ -151,7 +151,7 @@ export class TypeaheadComponent {
 
   searched(term: string) {
     this.userData = [];
-    if (term === '') {
+    if (term == '') {
       return of([]);
     }
     var request = new RequestCriteriaObj();
@@ -184,7 +184,7 @@ export class TypeaheadComponent {
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(term => term === '' ? []
+      map(term => term == '' ? []
         : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     );
 
@@ -214,7 +214,7 @@ export class TypeaheadComponent {
   searchFlags = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
-      map(term => term === '' ? []
+      map(term => term == '' ? []
         : statesWithFlags.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     );
 

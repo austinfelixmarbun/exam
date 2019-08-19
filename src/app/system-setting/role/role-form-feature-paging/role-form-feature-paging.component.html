@@ -38,7 +38,7 @@
                         <td class="text-left">{{item.title}}</td>
                         <td class="text-left">{{item.path}}</td>
                         <td>
-                          <div *ngIf="item.path !== ''">
+                          <div *ngIf="item.path != ''">
                             <a class="success p-0" data-original-title="" title=""
                               [routerLink]="['/systemSetting/formFeature/detail']" [queryParams]="{
                               refRoleId:authFormObj.refRoleId,

@@ -18,31 +18,31 @@
           (ngSubmit)="RefEmpForm.form.valid && SaveForm(RefEmpForm, uclRefBank, ucAddress, ucContactInfo)">
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Information</h4>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="empNo">Employee No </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="empNo" required
-                  [attr.disabled]="pageType === 'edit' ? true : null" [(ngModel)]="empNo" #EmpNo="ngModel"
+                <input type="text" class="form-control adInsInput width-25-per" name="empNo" required
+                  [attr.disabled]="pageType == 'edit' ? true : null" [(ngModel)]="empNo" #EmpNo="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpNo.invalid }">
                 <div *ngIf="RefEmpForm.submitted && EmpNo.invalid" class="invalid-feedback">
                   <div *ngIf="EmpNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="empName">Employee Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="empName" required [(ngModel)]="empName"
+                <input type="text" class="form-control adInsInput width-75-per" name="empName" required [(ngModel)]="empName"
                   #EmpName="ngModel" [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpName.invalid }">
                 <div *ngIf="RefEmpForm.submitted && EmpName.invalid" class="invalid-feedback">
                   <div *ngIf="EmpName.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="joinDt">Join Date </label>
               <div class="col-md-9">
-                <input type="date" id="joinDt" class="form-control adInsInput" name="joinDt" required
+                <input type="date" id="joinDt" class="form-control adInsInput width-50-per" name="joinDt" required
                   [(ngModel)]="joinDt" #JoinDt="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && JoinDt.invalid }">
                 <div *ngIf="RefEmpForm.submitted && JoinDt.invalid" class="invalid-feedback">
@@ -50,14 +50,14 @@
                 </div>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="isExt">External Employee </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isExt" data-md-icheck
                   (change)="toggleExt($event)" name="isExt">
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="isActive">Active Status </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
@@ -90,17 +90,17 @@
             [useName]="false"></app-ucContactInfo>
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Bank Information</h4>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="bankName" translate>Bank Name </label>
               <div class="col-md-9">
                 <lib-lookuprefbank #uclRefBank [lookupInput]="inputLookupObj" [parentForm]='RefEmpForm'>
                 </lib-lookuprefbank>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="bankBranch">Bank Branch </label>
               <div class="col-md-9">
-                <input type="text" id="bankBranch" class="form-control adInsInput" name="bankBranch" required
+                <input type="text" id="bankBranch" class="form-control adInsInput width-50-per" name="bankBranch" required
                   [(ngModel)]="bankBranch" #BankBranch="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankBranch.invalid }">
                 <div *ngIf="RefEmpForm.submitted && BankBranch.invalid" class="invalid-feedback">
@@ -108,17 +108,17 @@
                 </div>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="bankBranchRegRptCode">Bank Branch BI Code </label>
               <div class="col-md-9">
-                <input type="text" id="bankBranchRegRptCode" class="form-control adInsInput" name="bankBranchRegRptCode"
+                <input type="text" id="bankBranchRegRptCode" class="form-control adInsInput width-25-per" name="bankBranchRegRptCode"
                   [(ngModel)]="bankBranchRegRptCode" #BankBranchRegRptCode="ngModel">
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="bankAccName">Account Name </label>
               <div class="col-md-9">
-                <input type="text" id="bankAccName" class="form-control adInsInput" name="bankAccName" required
+                <input type="text" id="bankAccName" class="form-control adInsInput width-75-per" name="bankAccName" required
                   [(ngModel)]="bankAccName" #BankAccName="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankAccName.invalid }">
                 <div *ngIf="RefEmpForm.submitted && BankAccName.invalid" class="invalid-feedback">
@@ -126,10 +126,10 @@
                 </div>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="bankAccNo">Account No </label>
               <div class="col-md-9">
-                <input type="text" id="bankAccNo" class="form-control adInsInput" name="bankAccNo" required
+                <input type="text" id="bankAccNo" class="form-control adInsInput width-50-per" name="bankAccNo" required
                   [(ngModel)]="bankAccNo" #BankAccNo="ngModel"
                   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && BankAccNo.invalid }">
                 <div *ngIf="RefEmpForm.submitted && BankAccNo.invalid" class="invalid-feedback">
@@ -139,7 +139,7 @@
             </div>
           </div>
           <div class="form-actions right">
-            <button *ngIf="pageType !== 'add'" type="button" class="btn btn-raised btn-warning mr-1"
+            <button *ngIf="pageType != 'add'" type="button" class="btn btn-raised btn-warning mr-1"
               [routerLink]="['/employee']">
               <i class="fa fa-arrow-circle-left"></i> Back
             </button>

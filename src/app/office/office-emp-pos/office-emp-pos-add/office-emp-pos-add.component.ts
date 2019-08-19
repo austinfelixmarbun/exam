@@ -173,7 +173,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.empPositionObj = new EmpPositionObj();
       this.empPositionObj = ReqForm.value
       this.empPositionObj.refEmpId = this.refEmpId
-      if (this.isActive === false) {
+      if (this.isActive == false) {
         this.empPositionObj.isActive = "0";
       }
       else {
@@ -201,7 +201,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.empPositionObj = ReqForm.value
       this.empPositionObj.refEmpId = this.refEmpId
       this.empPositionObj.empPositionId = this.empPositionId
-      if (this.isActive === false) {
+      if (this.isActive == false) {
         this.empPositionObj.isActive = "0";
       }
       else {

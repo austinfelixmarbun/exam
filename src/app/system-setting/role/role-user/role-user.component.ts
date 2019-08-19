@@ -99,9 +99,9 @@ export class RoleUserComponent implements OnInit {
     this.ucgridFooter.resultData = this.resultData;
 
     event.response.returnObject.data.forEach(element => {
-      if (element.refRoleId === this.refRoleObj.refRoleId) {
+      if (element.refRoleId == this.refRoleObj.refRoleId) {
         this.listDeletedId.push(element.empPositionId);
-        if (element.isActive === '1') { this.listSelectedId.push(element.empPositionId); }
+        if (element.isActive == '1') { this.listSelectedId.push(element.empPositionId); }
       }
     });
 

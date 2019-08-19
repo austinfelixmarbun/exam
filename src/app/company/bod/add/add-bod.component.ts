@@ -59,7 +59,7 @@ export class BodAddComponent implements OnInit {
                 this.idType = this.itemIdType[0].masterCode;
             }
         );
-        if (this.mode === "edit") {
+        if (this.mode == "edit") {
             this.apiUrl = this.foundationUrl + AdInsConstant.GetCoyBod;
             var coyBodObj = new CoyBodObj();
             coyBodObj.coyBodId = this.param;
@@ -128,7 +128,7 @@ export class BodAddComponent implements OnInit {
             coyAdd.refCoyId = this.refCoyId;
 
             console.log(coyAdd);
-            if (this.mode === "edit") {
+            if (this.mode == "edit") {
                 this.editUrl = this.foundationUrl + AdInsConstant.EditCoyBod;
                 coyAdd.coyBodId = this.param;
                 this.http.post(this.editUrl, coyAdd).subscribe(

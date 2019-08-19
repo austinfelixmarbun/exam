@@ -7,22 +7,22 @@
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Role Information </h4>
             <br>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="roleCodeModel">Role Code</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="roleCodeModel" required [(ngModel)]="roleCodeModel"
+                <input type="text" class="form-control adInsInput width-25-per" name="roleCodeModel" required [(ngModel)]="roleCodeModel"
                   #roleCode="ngModel" [ngClass]="{ 'is-invalid': RoleAddEditForm.submitted && roleCode.invalid }"
-                  [attr.disabled]="type === 'edit' ? true : null">
+                  [attr.disabled]="type == 'edit' ? true : null">
                 <div *ngIf="RoleAddEditForm.submitted && roleCode.invalid" class="invalid-feedback">
                   <div *ngIf="roleCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="roleNameModel">Role Name</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="roleNameModel" required [(ngModel)]="roleNameModel"
+                <input type="text" class="form-control adInsInput width-75-per" name="roleNameModel" required [(ngModel)]="roleNameModel"
                   #roleName="ngModel" [ngClass]="{ 'is-invalid': RoleAddEditForm.submitted && roleName.invalid }">
                 <div *ngIf="RoleAddEditForm.submitted && roleName.invalid" class="invalid-feedback">
                   <div *ngIf="roleName.errors.required" class="adInsReqMsg" translate>This field is required</div>
@@ -30,7 +30,7 @@
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
               <div class="custom-control custom-checkbox m-0">
                 <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
@@ -41,7 +41,7 @@
           </div>
           <div class="form-actions">
 
-              <button *ngIf=" type === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+              <button *ngIf=" type == 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
                 <i class="fa fa-arrow-circle-left"></i> Back
               </button>
             <button type="submit" class="btn btn-raised btn-primary">

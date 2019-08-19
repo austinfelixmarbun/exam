@@ -1,6 +1,18 @@
 <div class="card">
   <div class="card-body">
     <div class="px-3">
+        <div class="ucSearch-Button-Right" >
+            <span class="mr-1" >
+                    <button type="button" class="backButton"  (click)="Back()" translate>
+                    <i class="fa fa-arrow-circle-left"> </i> Back </button></span>
+            <span class="mr-1" >
+                <button type="button" class="addButton" [routerLink]="['/organization/struc/detail']"
+                [queryParams]="{orgMdlId:orgMdlId, mode:'add'}"
+                translate>
+                <i class="ft-plus-circle"></i> Add
+              </button>
+            </span>
+          </div>
       <form>
         <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Organization Model</h4>
         <div class="form-group row">
@@ -57,11 +69,11 @@
   </table>
   <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
 </div>
-<div class="form-actions">
+<!-- <div class="form-actions">
   <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
     <i class="fa fa-arrow-circle-left"></i> Back
   </button>
   <i class="fa fa-plus-circle" [routerLink]="['/organization/struc/detail']"
     [queryParams]="{orgMdlId:orgMdlId, mode:'add'}"
     style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
-</div>
+</div> -->

@@ -21,10 +21,10 @@
                 <div class="form-group row">
                   <label class="col-md-3  adInsLabel">Feature</label>
                   <div class="custom-control custom-checkbox m-0" *ngFor="let item of listFeature" >
-                    <div *ngIf="item.value === true">
+                    <div *ngIf="item.value == true">
                      <input type="checkbox" (change)="Checked(item,  $event.target.checked)" [checked]=true> {{item.formComponent}}
                     </div>
-                    <div *ngIf="item.value === false">
+                    <div *ngIf="item.value == false">
                       <input type="checkbox" (change)="Checked(item,  $event.target.checked)" [checked]=false> {{item.formComponent}}
                     </div>
                   </div>

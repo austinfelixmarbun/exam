@@ -18,14 +18,14 @@
           (ngSubmit)="WorkingHourReqForm.form.valid && SaveWorkingHourForm(WorkingHourReqForm)">
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Working Hour Information</h4>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" translate>Scheme Code </label>
               <div class="col-md-9">
                 <div *ngIf="pageType=='edit'">
                   <label class="col-md-3  adInsLabel" translate>{{workingHourSchmCode}}</label>
                 </div>
                 <div *ngIf="pageType=='add'">
-                  <input type="text" class="form-control adInsInput" name="workingHourSchmCode" required
+                  <input type="text" class="form-control adInsInput width-25-per" name="workingHourSchmCode" required
                     [(ngModel)]="workingHourSchmCode" #WorkingHourSchmCode="ngModel"
                     [ngClass]="{ 'is-invalid': (WorkingHourReqForm.submitted || WorkingHourSchmCode.touched || WorkingHourSchmCode.dirty) && WorkingHourSchmCode.invalid }">
                   <div
@@ -38,14 +38,14 @@
                 </div>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" translate>Scheme Name </label>
               <div class="col-md-9">
                 <div *ngIf="pageType=='edit'">
                   <label class="col-md-3  adInsLabel" translate>{{workingHourSchmName}}</label>
                 </div>
                 <div *ngIf="pageType=='add'">
-                  <input type="text" class="form-control adInsInput" name="workingHourSchmName" required
+                  <input type="text" class="form-control adInsInput width-75-per" name="workingHourSchmName" required
                     [(ngModel)]="workingHourSchmName" #WorkingHourSchmName="ngModel"
                     [ngClass]="{ 'is-invalid': (WorkingHourReqForm.submitted || WorkingHourSchmName.touched || WorkingHourSchmName.dirty) && WorkingHourSchmName.invalid }">
                   <div
@@ -58,7 +58,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" translate>Active </label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
@@ -70,7 +70,7 @@
               <label class="col-md-4 text-center" translate>Work Hour </label>
               <label class="col-md-4 text-center" translate>Work Hour After Break </label>
             </div>
-            <div class="form-group row" *ngFor="let item of listOfDay;let i = index;">
+            <div class="form-group row adins-required" *ngFor="let item of listOfDay;let i = index;">
               <label class="col-md-2 text-center" translate>{{item.label}} </label>
               <div class="col-md-2" style="border-right: 1px solid grey">
                 <input type="time" class="form-control" [(ngModel)]="item.workingHourFrom1"
@@ -100,10 +100,6 @@
             </div>
           </div>
           <div class="form-actions right">
-            <button *ngIf=" pageType === 'edit'" type="button" class="btn btn-raised btn-warning mr-1"
-              [routerLink]="['/commonSetting/workingHour']" translate>
-              <i class="fa fa-arrow-circle-left"></i> Back
-            </button>
             <button type="submit" class="btn btn-raised btn-primary" translate>
               <i class="fa fa-check-square-o"></i> Save
             </button>

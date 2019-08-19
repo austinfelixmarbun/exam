@@ -11,7 +11,9 @@
     <table class="table table-responsive-md text-center table-hover">
         <thead>
             <tr class="table-header">
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
+                <th class="text-center"><span translate class="thead-header" (click)="searchSort($event)"
+                    name='orgName'>ORGANIZATION NAME</span> </th>
+                <th class="text-center"><span translate class="thead-header" (click)="searchSort($event)"
                         name='jobTitleCode'>Job Title Code</span> </th>
                 <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
                         name='jobTitleName'>Job Title Name</span></th>
@@ -24,6 +26,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of resultData?.data">
+                <td class="text-left">{{item.orgName}}</td>
                 <td class="text-left">{{item.jobTitleCode}}</td>
                 <td class="text-left">{{item.jobTitleName}}</td>
                 <td class="text-left">{{item.descr}}</td>

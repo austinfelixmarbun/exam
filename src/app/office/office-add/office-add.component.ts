@@ -282,20 +282,20 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.isVirtualOffice = '0'
     this.officeObj.mrKonvenSyariah = OfficeAddReqForm.value.mrKonvenSyariah;
 
-    if (this.isAllowAppCreated === false) {
+    if (this.isAllowAppCreated == false) {
       this.officeObj.isAllowAppCreated = "0";
     }
     else {
       this.officeObj.isAllowAppCreated = "1";
     }
-    if (this.isActive === false) {
+    if (this.isActive == false) {
       this.officeObj.isActive = "0";
     }
     else {
       this.officeObj.isActive = "1";
     }
 
-    if (this.pageType === "add") {
+    if (this.pageType == "add") {
       this.httpClient.post(this.addUrl, this.officeObj).subscribe(
         (response) => {
           console.log(response);

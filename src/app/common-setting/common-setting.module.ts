@@ -7,7 +7,6 @@ import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GeneralSettingAddEditComponent } from 'app/common-setting/general-setting/general-setting-add-edit/general-setting-add-edit.component';
 import { GeneralSettingPagingComponent } from 'app/common-setting/general-setting/general-setting-paging/general-setting-paging.component';
@@ -25,6 +24,8 @@ import { LookupemployeeComponent } from '@adins/lookupemployee';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcpagingModule } from '@adins/ucpaging';
 
 @NgModule({
   imports: [
@@ -36,7 +37,9 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
     UCSearchModule,
     UcgridfooterModule,
     SharingComponentModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UcpagingModule,
+    UclookupgenericModule
   ],
   declarations: [
     MasterPagingComponent,

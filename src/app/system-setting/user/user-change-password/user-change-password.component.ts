@@ -72,7 +72,7 @@ export class UserChangePasswordComponent implements OnInit {
     this.spinner.show();
     console.log(UserAddEditForm.value);
     if (
-      UserAddEditForm.value.NewPassword !== UserAddEditForm.value.NewRePassword
+      UserAddEditForm.value.NewPassword != UserAddEditForm.value.NewRePassword
     ) {
       this.service.typeErrorCustom(
         "New Password and New Re-Password Not Valid"

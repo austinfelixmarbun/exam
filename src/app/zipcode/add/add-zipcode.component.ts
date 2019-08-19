@@ -10,6 +10,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { LookupdistrictComponent } from '@adins/lookupdistrict';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 
 @Component({
@@ -48,12 +49,29 @@ export class ZipcodeAddComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log("test");
+        
         this.inputLookupObj = new InputLookupObj();
+        this.inputLookupObj.addCritInput = new Array();
         this.inputLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
         this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefProvDistrictPaging;
         this.inputLookupObj.urlEnviPaging = environment.settingUrl;
+        this.inputLookupObj.pagingJson = "./assets/form-setting/districtPaging.json";
+        this.inputLookupObj.genericJson = "./assets/form-setting/districtGeneric.json";
+        var critDistrictParentId = new CriteriaObj();
+        critDistrictParentId.propName = "parent_id";
+        critDistrictParentId.DataType = "numeric";
+        critDistrictParentId.value = null;
+        critDistrictParentId.restriction = AdInsConstant.RestrictionIsNull;
+        this.inputLookupObj.addCritInput.push(critDistrictParentId);
 
-        if (this.mode === "edit") {
+        var critDistrict = new CriteriaObj();
+        critDistrict.propName = "is_active";
+        critDistrict.value = "1";
+        critDistrict.restriction = AdInsConstant.RestrictionEq;
+        this.inputLookupObj.addCritInput.push(critDistrict);
+        
+        if (this.mode == "edit") {
             this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipCode;
             this.urlGetProvDistrict = this.settingUrl + AdInsConstant.GetRefProvDistrictObj;
             var zipcodeObj = new RefZipcodeObj();
@@ -91,13 +109,13 @@ export class ZipcodeAddComponent implements OnInit {
     Save(ZipcodeAddReqForm: NgForm, uclZipcode): void {
         console.log(uclZipcode);
         console.log(ZipcodeAddReqForm);
-        if (this.mode === "edit") {
+        if (this.mode == "edit") {
             this.editUrl = this.settingUrl + AdInsConstant.EditRefZipcode;
             this.zipcodeObj = new RefZipcodeObj();
             this.zipcodeObj = ZipcodeAddReqForm.value;
             this.zipcodeObj.refProvDistrictId = uclZipcode.lookupInput.idSelect;
             this.zipcodeObj.refZipcodeId = this.param;
-            if (this.isActive === false) {
+            if (this.isActive == false) {
                 this.zipcodeObj.isActive = "0";
             }
             else {
@@ -119,7 +137,7 @@ export class ZipcodeAddComponent implements OnInit {
             this.zipcodeObj = ZipcodeAddReqForm.value;
             this.zipcodeObj.refProvDistrictId = uclZipcode.lookupInput.idSelect;
             this.zipcodeObj.refZipcodeId = "0";
-            if (this.isActive === false) {
+            if (this.isActive == false) {
                 this.zipcodeObj.isActive = "0";
             }
             else {

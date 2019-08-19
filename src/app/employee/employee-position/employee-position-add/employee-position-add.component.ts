@@ -207,7 +207,7 @@ export class EmployeePositionAddComponent implements OnInit {
             this.empPositionObj.refEmpId = this.refEmpId;
             this.empPositionObj.skillLvl = this.masterCode;
             this.empPositionObj.superiorRefEmpId = this.inputLookupObj.idSelect;
-            if (this.isActive === false) {
+            if (this.isActive == false) {
                 this.empPositionObj.isActive = "0";
             }
             else {
@@ -237,7 +237,7 @@ export class EmployeePositionAddComponent implements OnInit {
             this.empPositionObj.empPositionId = this.empPositionId
             this.empPositionObj.skillLvl = this.masterCode;
             this.empPositionObj.superiorRefEmpId = this.inputLookupObj.idSelect;
-            if (this.isActive === false) {
+            if (this.isActive == false) {
                 this.empPositionObj.isActive = "0";
             }
             else {

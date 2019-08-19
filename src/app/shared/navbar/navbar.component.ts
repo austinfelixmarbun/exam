@@ -38,7 +38,6 @@ export class NavbarComponent implements AfterViewChecked {
         var businessDate = localStorage.getItem("BusinessDate");
         var date = new Date(businessDate.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         businessDate = formatDate(date, 'dd-MMM-yyyy', 'en-US');
-        console.log(businessDate);
         this.businessDate = businessDate;
         this.userId = userAccess.userId;
         this.userAccess = userAccess;
@@ -50,10 +49,10 @@ export class NavbarComponent implements AfterViewChecked {
         // setTimeout(() => {
         //     var wrapperDiv = document.getElementsByClassName("wrapper")[0];
         //     var dir = wrapperDiv.getAttribute("dir");           
-        //     if (dir === 'rtl') {
+        //     if (dir == 'rtl') {
         //         this.placement = 'bottom-left';
         //     }
-        //     else if (dir === 'ltr') {
+        //     else if (dir == 'ltr') {
         //         this.placement = 'bottom-right';
         //     }
         // }, 3000);
@@ -69,9 +68,6 @@ export class NavbarComponent implements AfterViewChecked {
     }
 
     ShowRole(){
-        // var apiUrl = environment.coereUrl+AdInsConstant.GetRefRole;
-        // this.http.post(apiUrl,)
-        console.log("Show Role");
         var data = {status:"200",reason:"OK"};
         this.rolePickService.openDialog(data,"modal");
     }
@@ -88,7 +84,7 @@ export class NavbarComponent implements AfterViewChecked {
     }
 
     ToggleClass() {
-        if (this.toggleClass === 'ft-maximize') {
+        if (this.toggleClass == 'ft-maximize') {
             this.toggleClass = 'ft-minimize';
         }
         else

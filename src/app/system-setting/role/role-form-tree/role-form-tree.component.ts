@@ -20,6 +20,7 @@ import { UcgridfooterComponent } from "@adins/ucgridfooter";
 import { UCSearchComponent } from "@adins/ucsearch";
 import { elementStylingMap } from "@angular/core/src/render3";
 import { TreeItemLookup } from '@progress/kendo-angular-treeview';
+import { RefRoleObj } from "app/shared/model/RefRoleObj.Model";
 
 @Component({
   selector: "app-role-form-tree",
@@ -109,6 +110,7 @@ export class RoleFormTreeComponent implements OnInit {
     var urlGetRefRole: any =
       this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
     var getAuthFormUrl: any = this.foundationUrl + AdInsConstant.GetAllAuthFormsByRefRoleId;
+    this.refRoleObj = new RefRoleObj();
     this.refRoleObj.refRoleId = this.refRoleId;
     console.log(urlGetRefRole);
     this.httpClient.post(urlGetRefRole, this.refRoleObj).subscribe(
@@ -183,6 +185,7 @@ export class RoleFormTreeComponent implements OnInit {
 
   Save(): void {
     var assignRoleToFormsUrl = this.foundationUrl + AdInsConstant.AssignRoleToForms;
+    this.refRoleObj = new RefRoleObj();
     this.refRoleObj.refRoleId = this.refRoleId;
     this.refRoleObj.listAddRefFormId = this.listSelectedId;
     this.refRoleObj.listDelRefFormId = this.listDeletedId;

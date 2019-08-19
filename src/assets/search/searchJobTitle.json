@@ -35,6 +35,15 @@
         },
         {
             "type": "textbox",
+            "name": "descr",
+            "id": "descrId",
+            "value": "",
+            "label": "Description",
+            "placeholder": "Placeholder",
+            "datatype": "Text"
+        },
+        {
+            "type": "textbox",
             "name": "mrJobPositionLvl",
             "id": "posLevelId",
             "value": "",

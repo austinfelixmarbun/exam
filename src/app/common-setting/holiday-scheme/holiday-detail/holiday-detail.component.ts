@@ -109,7 +109,7 @@ export class HolidayDetailComponent implements OnInit {
     console.log(ReqHolidayForm.value);
     this.holidayObj = new HolidayObj();
     this.holidayObj = ReqHolidayForm.value;
-    if (this.isActive === false) {
+    if (this.isActive == false) {
       this.holidayObj.isActive = "0";
     } else {
       this.holidayObj.isActive = "1";

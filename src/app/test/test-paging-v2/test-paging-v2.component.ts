@@ -26,7 +26,7 @@ export class TestPagingV2Component implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/search/searchBank.json";
     this.inputPagingObj.enviromentUrl = environment.settingUrl;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetBankPaging;
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefBank;
     this.inputPagingObj.pagingJson = "./assets/form-setting/dummyPaging.json";
     //** lib-ucpaging **//

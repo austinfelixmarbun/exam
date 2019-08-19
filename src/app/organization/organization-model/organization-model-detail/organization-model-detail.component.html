@@ -21,7 +21,7 @@
                       <div class="col-md-9">
                         <input type="text" class="form-control adInsInput" name="modelCode" required [(ngModel)]="modelCode"
                           #ModelCode="ngModel" [ngClass]="{ 'is-invalid': OrgModelForm.submitted && ModelCode.invalid }"
-                          [attr.disabled]="type === 'edit' ? true : null">
+                          [attr.disabled]="type == 'edit' ? true : null">
                         <div *ngIf="OrgModelForm.submitted && ModelCode.invalid" class="invalid-feedback">
                           <div *ngIf="ModelCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                         </div>

@@ -47,7 +47,7 @@ export class MasterTypeAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    if (this.type === 'edit') {
+    if (this.type == 'edit') {
       this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
       this.refRoleObj = new RefRoleObj()
       this.refRoleObj.refRoleId = +this.refRoleId
@@ -58,7 +58,7 @@ export class MasterTypeAddEditComponent implements OnInit {
           console.log(this.refRoleObj);
           this.roleCodeModel = response['returnObject']['roleCode']
           this.roleNameModel = response['returnObject']['roleName']
-          if (this.refRoleObj.isActive === '1') {
+          if (this.refRoleObj.isActive == '1') {
             this.isActive = true;
           }
           else {
@@ -89,14 +89,14 @@ export class MasterTypeAddEditComponent implements OnInit {
 
 
     //MODE-ADD
-    if (this.type !== 'edit') {
+    if (this.type != 'edit') {
 
       //CHECK-DUPLICATE-CODE
       this.httpClient.post(getRoleUrl, roleObj).subscribe(
         (response) => {
           console.log("Success Check Duplicate");
           roleObj = response['returnObject'];
-          if (roleObj !== null) {
+          if (roleObj != null) {
             this.service.typeErrorCustom('Code Has Been Used');
           }
           else {

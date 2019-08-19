@@ -110,7 +110,7 @@ export class UserRoleDetailComponent implements OnInit {
               this.userTitleRoleObj =  response['returnObject'];
               console.log('B', this.userTitleRoleObj);
 
-              if (this.userTitleRoleObj.isActive === '1') { this.isActive = true } else { this.isActive = false }
+              if (this.userTitleRoleObj.isActive == '1') { this.isActive = true } else { this.isActive = false }
               //this.userTitleRoleId = this.userTitleRoleObj.userTitleRoleId;
           },
           (error) => {
@@ -137,7 +137,7 @@ export class UserRoleDetailComponent implements OnInit {
 
   Save(UserRoleDetailForm: NgForm, lookupRole: any): void {
     this.spinner.show();
-    if (this.mode === 'edit')
+    if (this.mode == 'edit')
     {
       console.log ('edit');
       this.apiUrl = this.foundationUrl + AdInsConstant.EditUserTitleRole;

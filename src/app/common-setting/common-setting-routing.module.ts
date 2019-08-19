@@ -64,7 +64,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'currency',
+        path: 'currency/paging',
         component: CurrencyComponent,
         data: {
           title: 'Currency'

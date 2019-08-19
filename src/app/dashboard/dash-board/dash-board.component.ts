@@ -41,7 +41,7 @@ export class DashBoardComponent implements OnInit {
   private contextItem: any;
 
   public onNodeClick(e: any): void {
-    if (e.type === 'contextmenu') {
+    if (e.type == 'contextmenu') {
       const originalEvent = e.originalEvent;
 
       originalEvent.preventDefault();
@@ -53,7 +53,7 @@ export class DashBoardComponent implements OnInit {
   }
 
   public onSelect({ item }): void {
-    if (item.text === 'Remove') {
+    if (item.text == 'Remove') {
       this.removeItem(this.contextItem, this.data);
     }
   }

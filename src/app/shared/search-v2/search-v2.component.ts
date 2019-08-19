@@ -8,11 +8,27 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from '../model/CriteriaObj.model';
 import { ExcelService } from '../excel-service/excel-service';
 import { RequestCriteriaObj } from '../model/RequestCriteriaObj.model';
+import { trigger, transition, style, animate, state } from '@angular/animations';
 
 @Component({
   selector: 'app-search-v2',
   templateUrl: './search-v2.component.html',
-  providers: [ExcelService]
+  providers: [ExcelService],
+  animations: [
+    trigger('changeDivSize', [
+      state('initial', style({
+        height: '*',
+        opacity: '1',
+      })),
+      state('final', style({
+        height: '0px',
+        opacity: '0',
+        overflow: 'hidden',
+      })),
+      transition('initial=>final', animate('300ms')),
+      transition('final=>initial', animate('300ms'))
+    ]),
+  ]
 })
 export class SearchV2Component implements OnInit {
 
@@ -34,6 +50,8 @@ export class SearchV2Component implements OnInit {
   isDataLoaded: boolean = false;
   isHidden: boolean = false;
 
+  currentState = 'initial';
+
   form: FormGroup;
   payLoad = '';
   countForm = 0;
@@ -44,23 +62,24 @@ export class SearchV2Component implements OnInit {
   constructor(private http: HttpClient, private excelService: ExcelService, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
   }
 
+  hide(obj:any){
+    console.log(obj);
+    var target =event.srcElement;
+    console.log(target);
+    // var idAttr = target.attributes.id;
+    // var value = idAttr.nodeValue;
+
+  }
+
+  changeState() {
+    this.currentState = this.currentState == 'initial' ? 'final' : 'initial';
+    this.isHidden = this.isHidden == false ? true : false;
+    console.log(this.currentState);
+  }
+
   ngOnInit() {
     this.apiUrl = this.searchInput.enviromentUrl + this.searchInput.apiQryPaging;
     this.arrCrit = this.searchInput.arrCritObj;
-    let js = this._renderer2.createElement('script');
-    js.text = `
-          $(document).ready(function(){
-            $(".flip").click(function(){
-              //console.log($(this).parent().next().slideToogle("slow"));
-              //var panel = $(this).parent().next()[0].slideToogle("slow");
-              //var panel = $(this).parent().next().find(".panel"); 
-              //$(this).parent().next().slideToggle("slow");
-              //panel.slideToogle("slow");
-              //console.log(panel);
-            });
-          });
-        `;
-    this._renderer2.appendChild(this._document.body, js);
     this.initiateForm();
   }
 
@@ -155,6 +174,7 @@ export class SearchV2Component implements OnInit {
     request.pageNo = pageNo;
     request.rowPerPage = rowPerPage;
     request.orderBy = orderBy;
+    request.queryString = this.configuration.querystring;
 
     for (var i = 0; i < this.countForm; i++) {
       var critObj = new CriteriaObj();

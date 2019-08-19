@@ -88,7 +88,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
           this.empName = response["returnObject"].empName;
           this.startDt = formatDate(response["returnObject"].startDt, "yyyy-MM-dd", "en-US");
           this.endDt = formatDate(response["returnObject"].endDt, "yyyy-MM-dd", "en-US");
-          if (response["returnObject"].isPassed === "0") {
+          if (response["returnObject"].isPassed == "0") {
             this.isPassed == false;
           } else {
             this.isPassed == true;
@@ -108,7 +108,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     this.refEmpLeaveMngmntObj = new RefEmpLeaveMngmntObj();
     this.refEmpLeaveMngmntObj.startDt = ReqForm.value.startDt;
     this.refEmpLeaveMngmntObj.endDt = ReqForm.value.endDt;
-    if (this.isPassed === false) {
+    if (this.isPassed == false) {
       this.refEmpLeaveMngmntObj.isPassed = "0";
     } else {
       this.refEmpLeaveMngmntObj.isPassed = "1";

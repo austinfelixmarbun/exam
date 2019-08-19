@@ -57,12 +57,12 @@
                             <div class="col-md-9">
                                 <select class="form-control" id="orgJobTitleId" name="orgJobTitleId"
                                     [(ngModel)]="orgJobTitleId" #OrgJobTitleId="ngModel" required
-                                    [ngClass]="{ 'is-invalid': (EmpPositionForm.submitted || OrgJobTitleId.touched || OrgJobTitleId.dirty) && OrgJobTitleId.value === undefined  }">
+                                    [ngClass]="{ 'is-invalid': (EmpPositionForm.submitted || OrgJobTitleId.touched || OrgJobTitleId.dirty) && OrgJobTitleId.value == undefined  }">
                                     <option *ngFor="let ojt of allOrgJobTitle" value="{{ojt.orgJobTitleId}}">
                                         {{ojt.jobTitleName}}
                                     </option>
                                 </select>
-                                <div *ngIf="(EmpPositionForm.submitted || OrgJobTitleId.touched || OrgJobTitleId.dirty) && OrgJobTitleId.value === undefined "
+                                <div *ngIf="(EmpPositionForm.submitted || OrgJobTitleId.touched || OrgJobTitleId.dirty) && OrgJobTitleId.value == undefined "
                                     class="invalid-feedback">
                                     <div *ngIf="OrgJobTitleId.errors.required" class="adInsReqMsg" translate>This field
                                         is

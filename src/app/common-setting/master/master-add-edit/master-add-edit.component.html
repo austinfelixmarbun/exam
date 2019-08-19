@@ -30,7 +30,7 @@
                 <input type="text" class="form-control adInsInput" name="masterCodeModel" required
                   [(ngModel)]="masterCodeModel" #masterCode="ngModel"
                   [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && masterCode.invalid }"
-                  [attr.disabled]="type === 'edit' ? true : null">
+                  [attr.disabled]="type == 'edit' ? true : null">
                 <div *ngIf="MasterAddEditForm.submitted && masterCode.invalid" class="invalid-feedback">
                   <div *ngIf="masterCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>

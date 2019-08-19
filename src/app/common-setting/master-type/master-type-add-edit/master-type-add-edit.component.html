@@ -13,7 +13,7 @@
                 <input type="text" class="form-control adInsInput" name="masterTypeCodeModel" required
                   [(ngModel)]="masterTypeCodeModel" #masterTypeCode="ngModel"
                   [ngClass]="{ 'is-invalid': MasterTypeAddEditForm.submitted && masterType.invalid }"
-                  [attr.disabled]="type === 'edit' ? true : null">
+                  [attr.disabled]="type == 'edit' ? true : null">
                 <div *ngIf="MasterTypeAddEditForm.submitted && masterTypeCode.invalid" class="invalid-feedback">
                   <div *ngIf="masterTypeCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
                 </div>
@@ -49,7 +49,7 @@
 
           </div>
           <div class="form-actions">
-            <button *ngIf=" type === 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+            <button *ngIf=" type == 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
               <i class="fa fa-arrow-circle-left"></i> Back
             </button>
             <button type="submit" class="btn btn-raised btn-primary">

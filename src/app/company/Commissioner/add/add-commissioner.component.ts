@@ -58,7 +58,7 @@ export class CommissionerAddComponent implements OnInit {
                 this.idType = this.itemIdType[0].masterCode;
             }
         );
-        if (this.mode === "edit") {
+        if (this.mode == "edit") {
             this.apiUrl = this.foundationUrl + AdInsConstant.GetCoyCommissioner;
             var coyCommissionerObj = new CoyCommissionerObj();
             coyCommissionerObj.coyCommissionerId = this.param;
@@ -128,7 +128,7 @@ export class CommissionerAddComponent implements OnInit {
             coyCommisionerObj.refCoyId = this.refCoyId;
 
             console.log(coyCommisionerObj);
-            if (this.mode === "edit") {
+            if (this.mode == "edit") {
                 this.editUrl = this.foundationUrl + AdInsConstant.EditCoyCommissioner;
                 coyCommisionerObj.coyCommissionerId = this.param;
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(

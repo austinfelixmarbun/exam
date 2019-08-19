@@ -18,7 +18,7 @@ export class NavbarComponent {
             filter(event => event instanceof NavigationEnd))
             .subscribe(event => {
                 let currentRoute = this.route.root;
-                while (currentRoute.children[0] !== undefined) {
+                while (currentRoute.children[0] != undefined) {
                     currentRoute = currentRoute.children[0];
                 }
                 this.page = currentRoute.snapshot.data["title"];

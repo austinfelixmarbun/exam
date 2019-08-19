@@ -56,7 +56,7 @@ export class AuthService {
     //   username,
     //   password
     // })
-    // if(username==="admin" && password==="admin"){
+    // if(username=="admin" && password=="admin"){
     //   username="Admin";
     //   password="Admin";
     //   return username,password;

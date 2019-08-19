@@ -1,5 +1,7 @@
 {
-    "title": "SUPPLIER HO INFO VIEW",
+  "title": "SUPPLIER HO INFO VIEW",
+  "subsection": [
+    {
       "subSectionId": "title",
       "subSectionTitle": "Main Information",
       "mainInfoUrl": "http://r3app-server/prototypes/vendor/Vendor/GetVendorAndVendorAddrByVendorIdAndAddressType",
@@ -8,25 +10,28 @@
           "type": "link",
           "label": "Surveyor HO Code",
           "property": "vendorCode",
+          "position": "right",
           "path": "/test/paging-v2",
           "param": [
-              {
-                  "property": "vendorId"
-              }
+            {
+              "property": "vendorId"
+            }
           ]
         },
         {
           "type": "text",
           "label": "Surveyor HO Name",
-          "property": "vendorName"
+          "property": "vendorName",
+          "position": "left"
         },
         {
           "type": "text",
           "label": "Tax Number",
-          "property": "taxpayerNo"
+          "property": "taxpayerNo",
+          "position": "center"
         },
         {
-          "type": "text",
+          "type": "textarea",
           "label": "Surveyor HO Type",
           "property": "mrVendorType"
         },
@@ -41,4 +46,45 @@
           "property": "establishmentDt"
         }
       ]
+    },
+    {
+      "subSectionId": "test",
+      "subSectionTitle": "Bank Info",
+      "mainInfoUrl": "http://r3app.ad-ins.com/foundation/Generic/GetDataViewBySQL",
+      "mainInfo": [
+        {
+          "type": "text",
+          "label": "Bank Code",
+          "property": "assetTypeCode"
+        },
+        {
+          "type": "text",
+          "label": "Bank Name",
+          "property": "assetTypeName"
+        },
+        {
+          "type": "text",
+          "label": "BI Code",
+          "property": "assetHierarchyLevel"
+        },
+        {
+          "type": "link",
+          "label": "Surveyor HO Code",
+          "property": "isMndtrySerialNo2",
+          "position": "right",
+          "path": "/test/paging-v2",
+          "param": [
+            {
+              "property": "isMndtrySerialNo2"
+            }
+          ]
+        }
+      ],
+      "querystring": {
+        "select": "SELECT OFFICE_NAME AS OfficeName,IS_ACTIVE AS IsActive",
+        "from": "FROM REF_OFFICE WITH(NOLOCK)",
+        "where": "WHERE REF_OFFICE_ID = {0} OR OFFICE_CODE = N'{1}'"
+      }
+    }
+  ]
 }

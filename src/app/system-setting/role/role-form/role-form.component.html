@@ -51,7 +51,7 @@
                         <td class="text-left">{{item.title}}</td>
                         <td class="text-left">{{item.path}}</td>
                         <td>
-                          <div *ngIf="listSelectedId.indexOf(item.refFormId) >- 1 && item.path !== ''">
+                          <div *ngIf="listSelectedId.indexOf(item.refFormId) >- 1 && item.path != ''">
                             <a class="success p-0" data-original-title="" title=""
                               [routerLink]="['/systemSetting/roleForm/feature']" [queryParams]="{
                               refRoleId:refRoleObj.refRoleId,

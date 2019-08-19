@@ -63,7 +63,7 @@ export class UserAddEditComponent implements OnInit {
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetListEmployee;
     this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
 
-    if (this.type === "edit") {
+    if (this.type == "edit") {
       var empObj: RefEmpObj;
       var getEmpUrl: any;
       var userTemp: RefUserObj;
@@ -90,7 +90,7 @@ export class UserAddEditComponent implements OnInit {
             this.loggedInMethod = this.refUserObj.loggedInMethod;
           }
 
-          if (this.refUserObj.isActive === "1") {
+          if (this.refUserObj.isActive == "1") {
             this.IsActive = true;
           } else {
             this.IsActive = false;
@@ -111,7 +111,7 @@ export class UserAddEditComponent implements OnInit {
           console.log(error);
         }
       );
-    } else if (this.type === "changePassword") {
+    } else if (this.type == "changePassword") {
       var empObj: RefEmpObj;
       var getEmpUrl: any;
 
@@ -164,9 +164,9 @@ export class UserAddEditComponent implements OnInit {
     userObj.username = UserAddEditForm.value.Username;
 
     //MODE-ADD
-    if (this.type === "add" || this.type === '' || this.type ===  undefined) {
+    if (this.type == "add" || this.type == '' || this.type ==  undefined) {
       console.log("add");
-      if (UserAddEditForm.value.Password !== UserAddEditForm.value.RePassword) {
+      if (UserAddEditForm.value.Password != UserAddEditForm.value.RePassword) {
         console.log("Password and Re-Password Not Valid");
         this.service.typeErrorCustom("Password and Re-Password Not Valid");
         this.spinner.hide();
@@ -175,7 +175,7 @@ export class UserAddEditComponent implements OnInit {
           response => {
             console.log("Success Check Duplicate");
             userObj = response["returnObject"];
-            if (userObj !== null) {
+            if (userObj != null) {
               this.service.typeErrorCustom("Username Has Been Used");
               this.spinner.hide();
             } else {
@@ -238,14 +238,14 @@ export class UserAddEditComponent implements OnInit {
       }
     }
     //MODE-EDIT
-    else if (this.type === "edit") {
+    else if (this.type == "edit") {
       console.log("edit");
       this.apiUrl = this.foundationUrl + AdInsConstant.EditRefUser;
       this.httpClient.post(getCountUserUrl, empObj).subscribe(
         response => {
           if (
             response["returnObject"] > 0 &&
-            this.refUserObj.refEmpId !== lookupEmp.idSelect
+            this.refUserObj.refEmpId != lookupEmp.idSelect
           ) {
             this.service.typeErrorCustom("Employee Already Have User");
             this.spinner.hide();
@@ -283,14 +283,14 @@ export class UserAddEditComponent implements OnInit {
         }
       );
     //CHANE PASSWORD
-    } else if (this.type === "changePassword") {
+    } else if (this.type == "changePassword") {
       console.log("changePassword");
       var validateOldPassUrl: any =
         this.foundationUrl + AdInsConstant.ValidatePwd;
       var oldUser: RefUserObj;
 
       if (
-        UserAddEditForm.value.NewPassword !==
+        UserAddEditForm.value.NewPassword !=
         UserAddEditForm.value.NewRePassword
       ) {
         console.log("New Password and New Re-Password Not Valid");

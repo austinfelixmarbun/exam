@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BankAddComponent } from 'app/bank/add/add-bank.component';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { UcpagingModule } from '@adins/ucpaging';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
     HttpModule,
     UCSearchModule,
     UcgridfooterModule,
+    UcpagingModule,
     NgbModule
   ],
   declarations: [

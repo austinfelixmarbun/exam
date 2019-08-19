@@ -38,19 +38,17 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='areaCode2'>Kelurahan</span></th>
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='areaCode1'>Kecamatan</span></th>
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='city'>City</span></th>
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='zipzode'>Zipcode</span></th>
+              <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='officeCode'>Office Code</span></th>
+              <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='officeName'>Office Name</span></th>
+              <th><span translate class="thead-header" (click)="searchSort($event)" name='numOfZipcode'># Of Zipcode Included</span></th>
             <th translate>Delete</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of resultData?.data">
-            <td class="text-left">{{item.areaCode2}}</td>
-            <td class="text-left">{{item.areaCode1}}</td>
-            <td class="text-left">{{item.city}}</td>
-            <td class="text-left">{{item.zipcode}}</td>
+              <td class="text-left">{{item.officeCode}}</td>
+              <td class="text-left">{{item.officeName}}</td>
+              <td>{{item.numOfZipcode}}</td>
             <td>
               <a class="danger p-0" data-original-title="" title="" (click)="delete(item.officeZipcodeMemberId)">
                 <i class="ft-trash-2 font-medium-3 mr-2"></i>

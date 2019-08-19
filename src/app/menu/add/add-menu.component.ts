@@ -59,7 +59,7 @@ export class AddMenuSettingComponent implements OnInit {
                 this.module = this.moduleList[0].key;
             }
         )
-        if (this.mode === "edit") {
+        if (this.mode == "edit") {
             this.apiUrl = this.foundationUrl + AdInsConstant.GetRefFormByRefFormId;
             var refFormObj = new RefFormObj();
             refFormObj.refFormId = this.param;
@@ -126,7 +126,7 @@ export class AddMenuSettingComponent implements OnInit {
         refForm.path = form.value.path;
         refForm.icon = form.value.icon;
         refForm.refModuleId = this.module;
-        if (this.hasSub === true) {
+        if (this.hasSub == true) {
             refForm.class = "has-sub";
         }
         else {
@@ -135,14 +135,14 @@ export class AddMenuSettingComponent implements OnInit {
         refForm.badgeClass = form.value.badgeClass;
         refForm.parentId = lookupZipcode.lookupInput.idSelect;
         refForm.orderNo = form.value.orderNo;
-        if (this.isHidden === true) {
+        if (this.isHidden == true) {
             refForm.isHidden = "1";
         }
         else {
             refForm.isHidden = "0";
         }
         refForm.isExternalLink = this.isExternalLink;
-        if (this.mode === "edit") {
+        if (this.mode == "edit") {
             this.editUrl = this.foundationUrl + AdInsConstant.EditRefForm;
             refForm.hierarchyNo = this.hierarchyNo;
             refForm.refFormId = this.param;

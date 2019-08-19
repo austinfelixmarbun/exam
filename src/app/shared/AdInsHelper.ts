@@ -63,7 +63,6 @@ export class AdInsHelper {
         else {
             var bsDtBefore = new Date(businessDtBefore);
             var tempDate = today.getTime() - bsDtBefore.getTime();
-            console.log(tempDate);
             if (tempDate > AdInsConstant.TimeoutSession) {
                 var data = { status: "001", reason: "Session Time Out" };
                 AdInsHelper.ClearAllLog();
@@ -80,7 +79,7 @@ export class AdInsHelper {
         var objectMenu = [];
         objectMenu = JSON.parse(temp);
         if (objectMenu != null) {
-            var exsisting = objectMenu['find'](x => x.path === formPath);
+            var exsisting = objectMenu['find'](x => x.path == formPath);
             if (exsisting == undefined) {
                 return false;
             } else {

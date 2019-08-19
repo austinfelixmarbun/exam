@@ -1,70 +1,45 @@
 <div class="col-md-12">
-  <!-- <div class="card">
+  <div class="card">
     <div class="card-body">
       <div class="card-header header-title">
-        <div class="row">
-          <div class="col-md-8">
-            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} HOLLIDAY SCHEME
-            </h4>
-          </div>
-          <div class="col-md-4" style="text-align-last: right">
-            <button type="button" class="backButton" [routerLink]="['/commonSetting/holiday']" translate>
+          <div class="row">
+              <div class="col-md-12" style="text-align-last: right">
+                <button type="button" class="backButton"  [queryParams]="{param:'edit',holidaySchmHId:holidaySchmHId}" [routerLink]="['/commonSetting/holiday']" translate>
+                  <i class="ft-x"></i> Back
+                </button>
+              </div>
+            </div>
+        <!-- <div class="row">
+          <div class="col-md-12" style="text-align-last: right">
+            <button type="button" class="backButton" [queryParams]="{param:'edit',holidaySchmHId:holidaySchmHId}" [routerLink]="['/commonSetting/holiday']" translate>
               <i class="ft-arrow-left"></i> Back
             </button>
           </div>
+        </div> -->
+      </div>
+
+      
+
+    <div class="px-3">
+<h4 class="form-section card-title" translate><i class="ft-file-text"></i> Main Information</h4>
+    <div class="form-body" id='MainInfo'>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <label class="label-control" name="HolidaySchmCode" translate>Scheme Code </label>
+        </div>
+        <div class="col-md-9">
+          <label class="label-control" name="HolidaySchmCodeValue" translate>{{holidaySchmCode}}</label>
+        </div>
+        <div class="col-md-3">
+          <label class="label-control" name="HolidaySchmName" translate>Scheme Name</label>
+        </div>
+        <div class="col-md-9">
+          <label class="label-control" name="HolidaySchmNameValue" translate>{{holidaySchmName}}</label>
         </div>
       </div>
-      <div class="px-3">
-        <form class="form form-horizontal" name="HolidayReqForm" #HolidayReqForm="ngForm"
-          (ngSubmit)="HolidayReqForm.form.valid && SaveHolidayForm(HolidayReqForm)">
-          <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday Information</h4>
-            <div class="form-group row">
-              <label class="col-md-3  adInsLabel" translate>Scheme Code </label>
-              <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="holidaySchmCode" required [readonly]="isEdit"
-                  [(ngModel)]="holidaySchmCode" #HolidaySchmCode="ngModel"
-                  [ngClass]="{ 'is-invalid': (HolidayReqForm.submitted || HolidaySchmCode.touched || HolidaySchmCode.dirty) && HolidaySchmCode.invalid }">
-                <div
-                  *ngIf="(HolidayReqForm.submitted || HolidaySchmCode.touched || HolidaySchmCode.dirty) && HolidaySchmCode.invalid"
-                  class="invalid-feedback">
-                  <div *ngIf="HolidaySchmCode.errors.required" class="adInsReqMsg" translate>This field is required
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3  adInsLabel" translate>Scheme Name </label>
-              <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="holidaySchmName" required
-                  [(ngModel)]="holidaySchmName" #HolidaySchmName="ngModel"
-                  [ngClass]="{ 'is-invalid': (HolidayReqForm.submitted || HolidaySchmName.touched || HolidaySchmName.dirty) && HolidaySchmName.invalid }">
-                <div
-                  *ngIf="(HolidayReqForm.submitted || HolidaySchmName.touched || HolidaySchmName.dirty) && HolidaySchmName.invalid"
-                  class="invalid-feedback">
-                  <div *ngIf="HolidaySchmName.errors.required" class="adInsReqMsg" translate>This field is required
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3  adInsLabel" translate>Active </label>
-              <div class="col-md-9">
-                <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
-                  (change)="toggleActive($event)" name="isActive" [readonly]="isEdit">
-              </div>
-            </div>
-          </div>
-          <div class="form-actions right">
-            <button type="submit" class="btn btn-raised btn-primary" translate>
-              <i class="fa fa-check-square-o"></i> Save
-            </button>
-          </div>
-        </form>
-      </div>
     </div>
-  </div> -->
-  <div *ngIf="editDetail  === 'true'" class="holidayDetail">
+</div>
+  <div *ngIf="editDetail  == 'true'" class="holidayDetail">
     <div class="ucSearch-Button-Right">
         <span class="mr-1">
             <button type="button" class="addButton" [queryParams]="{holidaySchmHId:holidaySchmHId}" [routerLink]="['/commonSetting/holiday/detail']" translate>
@@ -77,7 +52,7 @@
   </div>
 </div>
 
-<div *ngIf="editDetail  === 'true'" class="holidayDetail">
+<div *ngIf="editDetail  == 'true'" class="holidayDetail">
   <div [hidden]="resultDataSearch?.data == null">
     <table class="table table-responsive-md text-center table-hover">
       <thead>
@@ -109,7 +84,9 @@
     </table>
     <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
   </div>
-  <i class="fa fa-plus-circle" [routerLink]="['/commonSetting/holiday/detail']"
+  <!-- <i class="fa fa-plus-circle" [routerLink]="['/commonSetting/holiday/detail']"
     [queryParams]="{holidaySchmHId:holidaySchmHId}"
-    style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
+    style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i> -->
+</div>
+</div>
 </div>
