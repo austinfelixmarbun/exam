@@ -18,6 +18,7 @@ export class UcgridviewComponent implements OnInit {
   pagingJson: any;
   headerList: any;
   bodyList: any;
+  isSeq: any = false;
 
   pageNow: any = 1;
   pageSize: any = 10;
@@ -33,6 +34,7 @@ export class UcgridviewComponent implements OnInit {
   initiateForm() {
     this.getJSON(this.gridInput.pagingJson).subscribe(data => {
       console.log(data);
+      this.isSeq = data.isSeq;
       this.headerList = data.headerList;
       this.bodyList = data.bodyList;
 

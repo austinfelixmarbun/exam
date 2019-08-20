@@ -2,6 +2,7 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
+        <th *ngIf="isSeq == true">No</th>
         <th *ngFor="let head of headerList"
           [ngClass]="[head.position == 'left' ? 'text-left' : '', head.position == 'right' ? 'text-right' : '' , head.width == undefined || head.width == '' ? '' : head.width]">
           <span *ngIf="head.type == 'sort'" translate class="thead-header" (click)="searchSort($event)"
@@ -11,7 +12,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of gridInput?.resultData?.data">
+      <tr *ngFor="let item of gridInput?.resultData?.data; let i = index">
+        <td *ngIf="isSeq == true">{{ i+1 }}</td>
         <td *ngFor="let body of bodyList" [ngClass]="{ 'text-left': body.position == 'left',
                      'text-right': body.position == 'right' }">
           <span *ngIf="body.type == 'text'">{{ item[body.property] }}</span>
