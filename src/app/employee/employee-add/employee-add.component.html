@@ -93,8 +93,9 @@
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="bankName" translate>Bank Name </label>
               <div class="col-md-9">
-                <lib-lookuprefbank #uclRefBank [lookupInput]="inputLookupObj" [parentForm]='RefEmpForm'>
-                </lib-lookuprefbank>
+                <app-lookupgeneric [lookupInput]="inputLookupObj" [parentForm]='RefEmpForm' [identifier]="'bank001'"></app-lookupgeneric>
+                <!-- <lib-lookuprefbank #uclRefBank [lookupInput]="inputLookupObj" [parentForm]='RefEmpForm'>
+                </lib-lookuprefbank> -->
               </div>
             </div>
             <div class="form-group row adins-required">
@@ -139,10 +140,6 @@
             </div>
           </div>
           <div class="form-actions right">
-            <button *ngIf="pageType != 'add'" type="button" class="btn btn-raised btn-warning mr-1"
-              [routerLink]="['/employee']">
-              <i class="fa fa-arrow-circle-left"></i> Back
-            </button>
             <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>

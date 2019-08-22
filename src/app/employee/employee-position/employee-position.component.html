@@ -1,29 +1,39 @@
-<div class="col-md-12">
-  <div class="card">
-    <div class="card-header">
-      <h4 class="card-title">Employee Position</h4>
-    </div>
-    <div class="card-body">
-      <div class="px-3">
-        <div class="form-body">
-          <div class="form-group row" *ngIf="refEmpId != null">
-            <label class="col-md-3  adInsLabel">Employee No </label>
-            <label class="col-md-3  adInsLabel">{{empNo}} </label>
-            <label class="col-md-3  adInsLabel">Employee Name </label>
-            <label class="col-md-3  adInsLabel">{{empName}} </label>
-          </div>
-          <div class="form-group row" *ngIf="refOfficeId != null">
-            <label class="col-md-3  adInsLabel">Office Code </label>
-            <label class="col-md-3  adInsLabel">{{officeCode}} </label>
-            <label class="col-md-3  adInsLabel">Office Name </label>
-            <label class="col-md-3  adInsLabel">{{officeName}} </label>
-          </div>
+
+<div class="ucSearch-Button-Right" style="margin-top:20px">
+  <span class="mr-1">
+      <button type="button" class="backButton" [routerLink]="['/employee/paging']" translate>
+        <i class="ft-arrow-left"></i> Back
+      </button>
+      <button type="button" class="addButton" [routerLink]="['/employee/employeePositionAddEdit']"
+      [queryParams]="{refEmpId:refEmpId,empNo:empNo,empName:empName}" translate>
+          <i class="ft-plus-circle"></i> Add
+      </button>
+  </span>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title">Employee Position</h4>
+  </div>
+  <div class="card-body">
+    <div class="px-3">
+      <div class="form-body">
+        <div class="form-group row" *ngIf="refEmpId != null">
+          <label class="col-md-3  adInsLabel">Employee No </label>
+          <label class="col-md-3  adInsLabel">{{empNo}} </label>
+          <label class="col-md-3  adInsLabel">Employee Name </label>
+          <label class="col-md-3  adInsLabel">{{empName}} </label>
+        </div>
+        <div class="form-group row" *ngIf="refOfficeId != null">
+          <label class="col-md-3  adInsLabel">Office Code </label>
+          <label class="col-md-3  adInsLabel">{{officeCode}} </label>
+          <label class="col-md-3  adInsLabel">Office Name </label>
+          <label class="col-md-3  adInsLabel">{{officeName}} </label>
         </div>
       </div>
     </div>
   </div>
-  <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
 </div>
+<lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
 
 <div [hidden]="resultData?.data == null">
   <table class="table table-responsive-md text-center table-hover">
@@ -62,6 +72,3 @@
 
   <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
 </div>
-<i class="fa fa-plus-circle" [routerLink]="['/employee/employeePositionAddEdit']"
-  [queryParams]="{refEmpId:refEmpId,empNo:empNo,empName:empName}"
-  style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
