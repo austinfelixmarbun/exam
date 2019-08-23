@@ -101,10 +101,17 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.inputLookupObj = new InputLookupObj();
+    // this.inputLookupObj.urlJson = "./assets/lookup/lookupRefBank.json";
+    // this.inputLookupObj.urlQryPaging = AdInsConstant.GetBankPaging;
+    // this.inputLookupObj.urlEnviPaging = environment.settingUrl;
+
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupRefBank.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetBankPaging;
     this.inputLookupObj.urlEnviPaging = environment.settingUrl;
+    this.inputLookupObj.pagingJson = "./assets/form-setting/lookupBankPaging.json";
+    this.inputLookupObj.genericJson = "./assets/form-setting/bankGeneric.json";
     
     if (this.pageType == "edit") {
       this.empObj = new RefEmpObj();
@@ -219,7 +226,7 @@ export class EmployeeAddComponent implements OnInit {
       this.empObj.bankBranchRegRptCode = ReqForm.value.bankBranchRegRptCode;
       this.empObj.bankAccName = ReqForm.value.bankAccName;
       this.empObj.bankAccNo = ReqForm.value.bankAccNo;
-      this.empObj.bankCode = uclRefBank.lookupInput.idSelect;
+      this.empObj.bankCode = this.inputLookupObj.idSelect;
       if (this.isExt == false) {
         this.empObj.isExt = "0";
       } else {
@@ -230,6 +237,7 @@ export class EmployeeAddComponent implements OnInit {
       } else {
         this.empObj.isActive = "1";
       }
+      this.empObj.isLeave = "0";
 
       console.log(JSON.stringify(this.empObj));
       console.log(this.empObj);
