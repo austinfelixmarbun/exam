@@ -61,10 +61,6 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button *ngIf="mode == 'edit'" type="button" class="btn btn-raised btn-warning mr-1"
-                [routerLink]="['/bank/paging']" translate>
-                <i class="fa fa-arrow-circle-left"></i> Back
-              </button>
               <button type="submit" class="btn btn-raised btn-primary" id="test" (click)=formValidate(BankAddReqForm)
                 translate>
                 <i class="fa fa-check-square-o"></i> Save

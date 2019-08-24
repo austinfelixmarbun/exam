@@ -4,6 +4,7 @@ export class RefEmpObj {
     empName: any;
     joinDt: any;
     isActive: any;
+    isLeave:any;
     isExt: any;
     addr: any;
     npwp: any;

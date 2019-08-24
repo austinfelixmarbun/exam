@@ -180,7 +180,6 @@ export class SearchV2Component implements OnInit {
       var critObj = new CriteriaObj();
       var component = this.myForm.nativeElement[i];
       critObj.DataType = component.getAttribute('data-type');
-      console.log(component);
       //Ini khusus kalau dari Drop Down
       if (component.value != "") {
         if (component.nodeName == 'SELECT') {
@@ -204,6 +203,11 @@ export class SearchV2Component implements OnInit {
           //kalau componentnya Date, restrictionsnya lgsg ambil dari property JSONnya
           else if (component.getAttribute('data-restriction') != "" && component.getAttribute('data-restriction') != null) {
             critObj.restriction = component.getAttribute('data-restriction');
+            if(component.getAttribute('data-type')=='numeric')
+            {
+              component.value = parseFloat(component.value.replace(/,/g, ''));
+              console.log(component.value);
+            }
           }
           else {
             critObj.restriction = AdInsConstant.RestrictionEq

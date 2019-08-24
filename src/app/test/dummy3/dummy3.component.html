@@ -28,7 +28,7 @@
 <br>
 <app-search-v2 id="ucSearch2" style="width:100%;" #search2 [searchInput]='inputObj2' (result)="getResult2($event)"></app-search-v2>
 
-<div [hidden]="resultData2?.data == null">
+<div [hidden]="resultData2?.data == null" #resultTable>
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
