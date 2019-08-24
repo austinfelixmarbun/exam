@@ -17,11 +17,11 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class UploadMonitoringComponent implements OnInit {
 
-  //** Start Query Paging */
+  // ** Start Query Paging */
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  inputObj : any;
-  //** End Query Paging */
+  inputObj: any;
+  // ** End Query Paging */
 
   resultData: any;
   ExcelData: any;
@@ -33,17 +33,17 @@ export class UploadMonitoringComponent implements OnInit {
   deleteUrl: any;
   exportData: any;
   orderByKey: any = null;
-  orderByValue: boolean = true;
+  orderByValue = true;
 
   foundationUrl: any = environment.foundationUrl;
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/search/searchUploadMonitoring.json";
+    this.inputObj._url = './assets/search/searchUploadMonitoring.json';
     this.inputObj.enviromentUrl = environment.foundationUrl;
     this.inputObj.apiQryPaging = AdInsConstant.GetUploadMonitoringPaging;
-    
+
     this.pageNow = 1;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetUploadMonitoringPaging;
     this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefEmpAndEmpBankAcc;
@@ -59,9 +59,9 @@ export class UploadMonitoringComponent implements OnInit {
     return this.http.get(url);
   }
 
-  //** Start UC Search **/
+  // ** Start UC Search **/
 
-  getResult(event){
+  getResult(event) {
     this.resultData = event.response.returnObject;
     this.totalData = event.response.returnObject.count;
     this.ucgridFooter.pageNow = event.pageNow;
@@ -102,10 +102,10 @@ export class UploadMonitoringComponent implements OnInit {
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
-  //** End UC Search **/
+  // ** End UC Search **/
 
   delete(refEmpId: any) {
-    if (confirm("Are you sure to delete this record?")) {
+    if (confirm('Are you sure to delete this record?')) {
       this.empObj = new RefEmpObj();
       this.empObj.refEmpId = refEmpId;
       this.http.post(this.deleteUrl, this.empObj).subscribe(
@@ -114,7 +114,7 @@ export class UploadMonitoringComponent implements OnInit {
           this.searchPagination(this.pageNow);
         },
         (error) => {
-          console.log("Error");
+          console.log('Error');
           console.log(error);
         });
     }
