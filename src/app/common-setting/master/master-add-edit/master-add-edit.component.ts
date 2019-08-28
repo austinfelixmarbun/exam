@@ -179,7 +179,7 @@ export class MasterAddEditComponent implements OnInit {
   }
 
   GetListMasterType() {
-    this.apiUrl = this.settingUrl + AdInsConstant.GetRefMasterType;
+    this.apiUrl = this.settingUrl + AdInsConstant.GetRefMasterTypeKeyValueUserSetting;
     var masterObj = new RefMasterObj();
     this.httpClient.post(this.apiUrl, masterObj).subscribe(
       (response) => {
