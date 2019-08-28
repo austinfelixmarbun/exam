@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
-import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,15 +8,16 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-holiday-add',
-  templateUrl: './holiday-add.component.html',
-  styleUrls: ['./holiday-add.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService]
+  selector: 'app-copy-holiday-scheme',
+  templateUrl: './copy-holiday-scheme.component.html',
+  styleUrls: ['./copy-holiday-scheme.component.scss'],
+  providers: [NGXToastrService, DecimalPipe]
 })
-export class HolidayAddComponent implements OnInit {
+export class CopyHolidaySchemeComponent implements OnInit {
 
     param: string;
     businessUnitCode: string;
@@ -32,13 +32,25 @@ export class HolidayAddComponent implements OnInit {
     settingUrl: string = environment.settingUrl;
     urlEnviPaging: string = environment.foundationUrl;
     holidayObj: HolidayObj;
+    holidayDestObj : HolidayObj;
+    holidayDestCombine : any;
     holidaySchmHId:any;
     editUrl: any;
+    inputLookupObj:any;
     key: any;
     criteria: CriteriaObj[] = [];
+    
 
     constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient,
         private adInsService: AdInsService) {
+          //** app-lookupgeneric **//
+          this.inputLookupObj = new InputLookupObj();
+          this.inputLookupObj.urlJson = "./assets/lookup/lookupHolidaySchmH.json";
+          this.inputLookupObj.urlQryPaging = AdInsConstant.GetHolidayPaging;
+          this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+          this.inputLookupObj.pagingJson = "./assets/form-setting/holidayPaging.json";
+          this.inputLookupObj.genericJson = "./assets/form-setting/holidayGeneric.json";
+          //** app-lookupgeneric **//
           this.route.queryParams.subscribe(params => {
             if (params["param"] != null) {
               this.pageType = params["param"];
@@ -60,9 +72,6 @@ export class HolidayAddComponent implements OnInit {
             this.http.post(this.apiUrl, holidayObj).subscribe(
                 (response) => {
                     this.result = response['returnObject'];
-                    // this.holidayObj.holidaySchmCode = this.result.holidaySchmCode;
-                    // this.holidayObj.holidaySchmName = this.result.holidaySchmName;
-                    // this.holidayObj.holidaySchmHId = this.result.holidaySchmHId;
                     if (this.result.isActive == "1") {
                         this.isActive = true;
                     }
@@ -108,8 +117,9 @@ export class HolidayAddComponent implements OnInit {
                 });
         }
         else {
-            this.editUrl = this.urlEnviPaging + AdInsConstant.AddHolidaySchmH;
+            this.editUrl = this.urlEnviPaging + AdInsConstant.CopyHolidaySchm;
             this.holidayObj = new HolidayObj();
+            this.holidayDestObj = new HolidayObj();
             this.holidayObj = HolidaySchemeHReqForm.value;
             if (this.isActive == false) {
                 this.holidayObj.isActive = "0";
@@ -117,7 +127,14 @@ export class HolidayAddComponent implements OnInit {
             else {
                 this.holidayObj.isActive = "1";
             }
-            this.http.post(this.editUrl, this.holidayObj).subscribe((response) => {
+            this.holidayObj.holidaySchmHId = this.inputLookupObj.jsonSelect.holidaySchmHId;
+            this.holidayDestObj.holidaySchmHId = this.inputLookupObj.jsonSelect.holidaySchmHId;
+            this.holidayDestObj.holidaySchmCode = this.inputLookupObj.jsonSelect.holidaySchmCode;
+            this.holidayDestObj.holidaySchmName = this.inputLookupObj.jsonSelect.holidaySchmName;
+            this.holidayDestObj.isActive = this.inputLookupObj.jsonSelect.isActive;
+            var holidayDest = {"holidaySchme2":this.holidayObj,"holidaySchme1":this.holidayDestObj};
+            console.log(holidayDest);
+            this.http.post(this.editUrl, holidayDest).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
                 this.router.navigateByUrl('/commonSetting/holiday', { skipLocationChange: true }).then(() =>
                     this.router.navigate(['/commonSetting/holiday']));
@@ -127,5 +144,4 @@ export class HolidayAddComponent implements OnInit {
                 });
         }
     }
-
 }

@@ -1,0 +1,43 @@
+{
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Holiday Scheme Code",
+            "name": "holidaySchmCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Holiday Scheme Name",
+            "name": "holidaySchmName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "holidaySchmCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "holidaySchmName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "holidaySchmId"
+                }
+            ]
+        }
+    ]
+}

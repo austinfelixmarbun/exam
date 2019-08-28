@@ -27,6 +27,7 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
 import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
+import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
 
 @NgModule({
   imports: [
@@ -59,7 +60,8 @@ import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.co
     OfficeZipcodeMemberComponent,
     OfficeZipcodeMemberAddComponent,
     OfficeZipcodeMemberPagingComponent,
-    HolidayAddComponent
+    HolidayAddComponent,
+    CopyHolidaySchemeComponent
   ],
   providers: [
     {

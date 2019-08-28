@@ -232,6 +232,7 @@ export class AdInsConstant {
     public static DeleteHolidaySchmH = "/Holiday/DeleteHolidaySchmH";
     public static DeleteHolidaySchmD = "/Holiday/DeleteHolidaySchmD";
     public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
+    public static CopyHolidaySchm = "/Holiday/CopyHolidaySchm";
 
     //USER SESSION LOG
     public static SelectRole = "/UserSessionLog/SelectRole";

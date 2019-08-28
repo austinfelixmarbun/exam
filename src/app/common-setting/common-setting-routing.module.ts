@@ -17,6 +17,7 @@ import { OfficeZipcodeMemberComponent } from './office-zipcode-member/office-zip
 import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-zipcode-member-add/office-zipcode-member-add.component';
 import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/office-zipcode-member-paging/office-zipcode-member-paging.component';
 import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
+import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
 
 const routes: Routes = [
   {
@@ -111,6 +112,13 @@ const routes: Routes = [
         component: HolidayAddComponent,
         data: {
           title: 'Holiday Scehme Add Edit'
+        },
+      },
+      {
+        path: 'holiday-scheme/copy',
+        component: CopyHolidaySchemeComponent,
+        data: {
+          title: 'Holiday Scehme Copy Add Edit'
         },
       },
       {
