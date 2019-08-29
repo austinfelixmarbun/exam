@@ -13,7 +13,8 @@
       <tr class="table-header">
         <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='masterCode'>Master Code</span></th>
         <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='descr'>Description</span></th>
-        <th><span class="thead-header" (click)="searchSort($event)" name='regRptCode'>BI Code</span></th>
+        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='seqNo'>Sequence No</span></th>
+        <th><span class="thead-header" (click)="searchSort($event)" name='regRptCode'>Sandi BI</span></th>
         <th><span class="thead-header" (click)="searchSort($event)" name='isActive'>Active</span></th>
         <th>Action</th>
       </tr>
@@ -22,6 +23,7 @@
       <tr *ngFor="let item of resultData?.data">
         <td class="text-left">{{item.masterCode}}</td>
         <td class="text-left">{{item.descr}}</td>
+        <td class="text-left">{{item.seqNo}}</td>
         <td>{{item.biCode}}</td>
         <td>{{item.isActive}}</td>
         <td>

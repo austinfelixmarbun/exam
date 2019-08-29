@@ -39,6 +39,7 @@ export class OfficeObj {
     refTaxOfficeId: any;
     isVirtualOffice: any;
     mrKonvenSyariah: any;
+    mrOfficeType:any;
 
     constructor() { this.refOfficeId = 0; }
 }

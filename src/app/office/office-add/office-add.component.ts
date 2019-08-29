@@ -27,6 +27,7 @@ export class OfficeAddComponent implements OnInit {
   isDisabledState: boolean = false;
   isHO: boolean = true;
   refOfficeId: any;
+  allOfficeType : any;
   allOfficeClass: any;
   allRefOrg: any;
   allOrgMdl: any;
@@ -36,6 +37,7 @@ export class OfficeAddComponent implements OnInit {
   allWorkingHourSchm: any;
   allRefTaxOffice: any;
   mrOfficeClass: any;
+  mrOfficeType:any;
   refOrgId: any;
   orgMdlId: any;
   parentId: any;
@@ -67,6 +69,7 @@ export class OfficeAddComponent implements OnInit {
   isAllowAppCreated: boolean = true;
   officeObj: OfficeObj;
   refMasterObj: RefMasterObj;
+  refMasterOfficeType: RefMasterObj;
   orgMdlObj: OrgMdlObj
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
@@ -95,11 +98,21 @@ export class OfficeAddComponent implements OnInit {
   ngOnInit() {
     this.refMasterObj = new RefMasterObj();
     this.refMasterObj.refMasterTypeCode = 'OFFICE_CLASS';
+    this.refMasterOfficeType = new RefMasterObj();
+    this.refMasterOfficeType.refMasterTypeCode = 'OFFICE_TYPE';
     if (this.pageType == "add") {
       this.httpClient.post(this.officeClassUrl, this.refMasterObj).subscribe(
         (response) => {
           this.allOfficeClass = response['returnObject'];
           this.mrOfficeClass = response['returnObject'][0]['masterCode'];
+        },
+        (error) => {
+          console.log(error);
+        })
+      this.httpClient.post(this.officeClassUrl, this.refMasterOfficeType).subscribe(
+        (response) => {
+          this.allOfficeType = response['returnObject'];
+          this.mrOfficeType = response['returnObject'][0]['masterCode'];
         },
         (error) => {
           console.log(error);
@@ -138,6 +151,10 @@ export class OfficeAddComponent implements OnInit {
           console.log(error);
         })
     } else if (this.pageType == "edit") {
+      this.refMasterObj = new RefMasterObj();
+      this.refMasterObj.refMasterTypeCode = 'OFFICE_CLASS';
+      this.refMasterOfficeType = new RefMasterObj();
+      this.refMasterOfficeType.refMasterTypeCode = 'OFFICE_TYPE';
       this.officeObj = new OfficeObj();
       this.officeObj.refOfficeId = this.refOfficeId
       this.httpClient.post(this.apiUrl, this.officeObj).subscribe(
@@ -148,6 +165,7 @@ export class OfficeAddComponent implements OnInit {
           this.officeName = response['returnObject']['officeName'];
           this.officeShortName = response['returnObject']['officeShortName'];
           this.mrOfficeClass = response['returnObject']['mrOfficeClass'];
+          this.mrOfficeType = response['returnObject']['mrOfficeType'];
           this.refOrgId = response['returnObject']['refOrgId'];
           this.orgMdlId = response['returnObject']['orgMdlId'];
           this.refOfficeAreaId = response['returnObject']['refOfficeAreaId'];
@@ -179,6 +197,13 @@ export class OfficeAddComponent implements OnInit {
             (error) => {
               console.log(error);
             })
+            this.httpClient.post(this.officeClassUrl, this.refMasterOfficeType).subscribe(
+              (response) => {
+                this.allOfficeType = response['returnObject'];
+              },
+              (error) => {
+                console.log(error);
+              })
           this.httpClient.post(this.refOrgUrl, null).subscribe(
             (response) => {
               this.allRefOrg = response['returnObject'];
@@ -281,6 +306,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.workingHourSchmHId = OfficeAddReqForm.value.workingHourSchmHId;
     this.officeObj.isVirtualOffice = '0'
     this.officeObj.mrKonvenSyariah = OfficeAddReqForm.value.mrKonvenSyariah;
+    this.officeObj.mrOfficeType = OfficeAddReqForm.value.mrOfficeType;
 
     if (this.isAllowAppCreated == false) {
       this.officeObj.isAllowAppCreated = "0";
