@@ -8,7 +8,9 @@
               (ngSubmit)="Save(RoleUserForm)">
               <div class="form-body">
                 <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Assign User to Role</h4>
-
+                <button type="button" style="top:-3px;right:50px;position:fixed;" class="backButton" (click)="Back()" translate>
+                  <i class="ft-arrow-left"></i> Back
+                </button>
                 <div class="form-group row">
                   <label class="col-md-3  adInsLabel">Role Code</label>
                   <div class="col-md-9">
@@ -71,10 +73,7 @@
                   <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
                 </div>
               </div>
-              <div class="form-actions">
-                <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-                  <i class="fa fa-arrow-circle-left"></i> Back
-                </button>
+              <div class="form-actions right">
 
                 <button type="submit" class="btn btn-raised btn-primary">
                   <i class="fa fa-check-square-o"></i> Save
