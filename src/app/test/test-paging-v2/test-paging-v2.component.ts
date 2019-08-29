@@ -38,9 +38,6 @@ export class TestPagingV2Component implements OnInit {
     this.inputLookupObj.urlEnviPaging = environment.settingUrl;
     this.inputLookupObj.pagingJson = "./assets/form-setting/dummyPaging2.json";
     this.inputLookupObj.genericJson = "./assets/form-setting/dummyGeneric.json";
-    this.inputLookupObj.jsonSelect = { refBankId: 65, bankCode: "B-0009", bankName: "Bank Mandiri" };
-    this.inputLookupObj.nameSelect = "Bank Mandiri";
-    this.inputLookupObj.idSelect = "B-0009";
     //** app-lookupgeneric **//
 
 
