@@ -3,6 +3,7 @@ import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { InputGridObj } from 'app/shared/model/InputGridObj.Model';
 import { SearchV2Component } from 'app/shared/search-v2/search-v2.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ucpaging',
@@ -28,7 +29,7 @@ export class UcpagingComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor() { }
+  constructor(public toastr: ToastrService) { }
 
   ngOnInit() {
     console.log("ucpaging");
@@ -49,11 +50,16 @@ export class UcpagingComponent implements OnInit {
 
   //** Start UC Search **/
   getResult(event) {
-    this.gridObj.resultData = event.response.returnObject;
-    this.totalData = event.response.returnObject.count;
-    this.ucgridFooter.pageNow = event.pageNow;
-    this.ucgridFooter.totalData = this.totalData;
-    this.ucgridFooter.resultData = this.gridObj.resultData;
+    console.log(event.response.returnObject.count)
+    if (event.response.returnObject.count == 0) {
+      this.toastr.error("No Data Found");
+    }
+      this.gridObj.resultData = event.response.returnObject;
+      this.totalData = event.response.returnObject.count;
+      this.ucgridFooter.pageNow = event.pageNow;
+      this.ucgridFooter.totalData = this.totalData;
+      this.ucgridFooter.resultData = this.gridObj.resultData;
+    
   }
 
   getOutput(event) {
