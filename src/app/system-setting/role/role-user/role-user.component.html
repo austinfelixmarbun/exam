@@ -48,7 +48,10 @@
                               (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
                           </div>
                           <div *ngIf="refRoleObj.refRoleId != item.refRoleId">
+                              <input type="checkbox" id="checkSame" name="itemSame"
+                              (change)="Checked(item.empPositionId,  $event.target.checked)">
                           </div>
+                          
                           <div *ngIf="item.refRoleId == 0">
                             <input type="checkbox" id="checkDiff" name="itemDiff"
                               (change)="Checked(item.empPositionId,  $event.target.checked)" [checked]=false>
