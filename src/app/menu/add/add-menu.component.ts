@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 
 @Component({
@@ -37,19 +38,35 @@ export class AddMenuSettingComponent implements OnInit {
     hierarchyNo: any;
     module : any;
     moduleList : any; 
+    additionalCriteria: any[];
 
     constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refFormId"];
             this.mode = params["mode"];
-        })
+        });
+
+        //** app-lookupgeneric **//
+        this.inputLookupObj = new InputLookupObj();
+        this.inputLookupObj.urlJson = "./assets/lookup/lookupMenu.json";
+        this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefFormPaging;
+        this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+        this.inputLookupObj.pagingJson = "./assets/form-setting/lookupMenuPaging.json";
+        this.inputLookupObj.genericJson = "./assets/form-setting/lookupMenuPaging.json";
+        //** app-lookupgeneric **//
+
+        /* #region Additional Criteria */
+        this.additionalCriteria = new Array();
+        var critOrgId = new CriteriaObj();
+        critOrgId.propName = "class";
+        critOrgId.value = "has-sub";
+        critOrgId.restriction = AdInsConstant.RestrictionEq;
+        this.additionalCriteria.push(critOrgId);
+        this.inputLookupObj.addCritInput = this.additionalCriteria;
+        /* #endregion */
     }
 
     ngOnInit() {
-        this.inputLookupObj = new InputLookupObj();
-        this.inputLookupObj.urlJson = "./assets/lookup/lookupParentForm.json";
-        this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefFormPaging;
-        this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
         
         var moduleApi = this.foundationUrl + AdInsConstant.GetListRefModuleKeyValue;
         var refFormObj = new RefFormObj();
