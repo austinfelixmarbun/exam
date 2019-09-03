@@ -37,6 +37,10 @@ export class AdInsConstant {
     public static AddRefOffice = "/RefOffice/AddRefOffice";
     public static EditRefOffice = "/RefOffice/EditRefOffice";
     public static DeleteRefOffice = "/RefOffice/DeleteRefOffice";
+    public static GetCenterGrpByCenterGrpTypeCode = "/RefOffice/GetCenterGrpByCenterGrpCode";
+    public static GetListOfficeCenterGrp = "/RefOffice/GetListOfficeCenterGrp";
+    public static AddCenterGroupOfficeMember = "RefOffice/AddCenterGroupOfficeMember";
+    public static DeleteCenterGroupOfficeMember= "/RefOffice/DeleteCenterGroupOfficeMember";
 
     //REF OFFICE AREA
     public static GetAllListArea = "/RefOfficeArea/GetAllListArea";

@@ -36,6 +36,8 @@ export class OfficeAddComponent implements OnInit {
   allHolidaySchm: any;
   allWorkingHourSchm: any;
   allRefTaxOffice: any;
+  allCgType:any;
+  mrCgType:any;
   mrOfficeClass: any;
   mrOfficeType:any;
   refOrgId: any;
@@ -70,6 +72,7 @@ export class OfficeAddComponent implements OnInit {
   officeObj: OfficeObj;
   refMasterObj: RefMasterObj;
   refMasterOfficeType: RefMasterObj;
+  refMasterCgType:RefMasterObj;
   orgMdlObj: OrgMdlObj
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
@@ -100,7 +103,17 @@ export class OfficeAddComponent implements OnInit {
     this.refMasterObj.refMasterTypeCode = 'OFFICE_CLASS';
     this.refMasterOfficeType = new RefMasterObj();
     this.refMasterOfficeType.refMasterTypeCode = 'OFFICE_TYPE';
+    this.refMasterCgType = new RefMasterObj();
+    this.refMasterCgType.refMasterTypeCode = 'CENTER_GRP_TYPE';
     if (this.pageType == "add") {
+      this.httpClient.post(this.officeClassUrl, this.refMasterCgType).subscribe(
+        (response) => {
+          this.allCgType = response['returnObject'];
+          this.mrCgType = response['returnObject'][0]['masterCode'];
+        },
+        (error) => {
+          console.log(error);
+        })
       this.httpClient.post(this.officeClassUrl, this.refMasterObj).subscribe(
         (response) => {
           this.allOfficeClass = response['returnObject'];
@@ -267,7 +280,14 @@ export class OfficeAddComponent implements OnInit {
     }
   }
 
-  SaveForm(OfficeAddReqForm: NgForm, ucAddress, ucContactInfo): void {
+  onChangeGrpType(value)
+  {
+    console.log(value.key);
+    console.log(value.value);
+  }
+
+  SaveForm(OfficeAddReqForm: NgForm, ucAddress, ucContactInfo,mrCgType): void {
+    console.log(mrCgType);
     this.officeObj = new OfficeObj();
     this.officeObj.refOfficeId = OfficeAddReqForm.value.refOfficeId;
     this.officeObj.officeCode = OfficeAddReqForm.value.officeCode;
@@ -307,6 +327,10 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.isVirtualOffice = '0'
     this.officeObj.mrKonvenSyariah = OfficeAddReqForm.value.mrKonvenSyariah;
     this.officeObj.mrOfficeType = OfficeAddReqForm.value.mrOfficeType;
+    this.officeObj.centerGrpTypeCode = OfficeAddReqForm.value.mrCgType;
+    var temp = this.allCgType.find(x => x.masterCode==OfficeAddReqForm.value.mrCgType);
+    console.log(temp);
+    this.officeObj.centerGrpTypeName = temp.descr;
 
     if (this.isAllowAppCreated == false) {
       this.officeObj.isAllowAppCreated = "0";

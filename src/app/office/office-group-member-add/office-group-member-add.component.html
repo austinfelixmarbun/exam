@@ -1,0 +1,94 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
+        </lib-UCSearch>
+        <div class="form-actions button-right">
+            <button style="top:0% !important;right:6% !important" (click)="Back()" type="button" class="backButton adins-back-fixed" translate>
+              <i class="ft-arrow-left"></i> Back
+            </button>
+          </div>
+        <div [hidden]="resultData?.data == null|| resultData?.data.length == 0">
+          <table class="table table-responsive-md text-center table-hover">
+            <thead>
+              <tr class="table-header">
+                <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)"
+                    id="checkAll" name="CheckAll"></th>
+                <th><span class="thead-header" (click)="searchSort($event)" name='officeCode' translate>Office
+                    Code</span>
+                </th>
+                <th><span class="thead-header" (click)="searchSort($event)" name='officeName' translate>Office
+                    Name</span>
+                </th>
+                <th><span class="thead-header" (click)="searchSort($event)" name='officeAddr' translate>Office
+                    Address</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of resultData?.data">
+                <td>
+                  <div *ngIf="listSelectedId.indexOf(item.officeId) > -1">
+                    <input type="checkbox" id="checkSame" name="itemSame"
+                      (change)="Checked(item.officeId,  $event.target.checked)" [checked]="true">
+                  </div>
+                  <div *ngIf="listSelectedId.indexOf(item.officeId) < 0">
+                    <input type="checkbox" id="checkDiff" name="itemDiff"
+                      (change)="Checked(item.officeId,  $event.target.checked)" [checked]=false>
+                  </div>
+                </td>
+                <td>{{item.officeCode}}</td>
+                <td>{{item.officeName}}</td>
+                <td>{{item.addr}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <app-ucgrid-footer (select)="onSelect($event)"></app-ucgrid-footer>
+
+          <div class="button-right">
+            <button type="button" (click)="AddToTemp()" class="btn btn-raised btn-success mr-1">
+              <i class="fa fa-plus"></i> Add To Temp
+            </button>
+          </div>
+        </div>
+
+        <div [hidden]="tempData?.length == 0">
+          <table class="table table-responsive-md text-center table-hover">
+            <thead>
+              <tr class="table-header">
+                <th><span class="thead-header" (click)="searchSort($event)" name='officeCode' translate>Office
+                    Code</span>
+                </th>
+                <th><span class="thead-header" (click)="searchSort($event)" name='officeName' translate>Office
+                    Name</span>
+                </th>
+                <th><span class="thead-header" (click)="searchSort($event)" name='officeAddr' translate>Office
+                    Address</span>
+                </th>
+                <th>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of tempData;  let i = index">
+                <td>{{item.officeCode}}</td>
+                <td>{{item.officeName}}</td>
+                <td>{{item.addr}}</td>
+                <td>
+                  <a class="danger p-0" data-original-title="" title="" (click)="deleteFromTemp(item.officeId)">
+                    <i class="ft-trash-2 font-medium-3 mr-2"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button [hidden]="tempData?.length == 0" type="button" (click)="Save()" class="btn btn-raised btn-success mr-1">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

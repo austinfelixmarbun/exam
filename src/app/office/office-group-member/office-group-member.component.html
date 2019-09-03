@@ -1,0 +1,53 @@
+<div class="col-md-12 no-padding">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>Center Group Office Member</h4>
+          </div>
+          <div class="col-md-4 btn-right">
+            <div class="form-actions button-right">
+              <button type="button" class="backButton adins-back-fixed" 
+              [routerLink]="['/office/office-group-member-add']"
+              [queryParams] = "{centerGrpId:respondModel?.centerGrpId}" translate>
+                <i class="ft-arrow-left"></i> Back
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="px-3">
+            <lib-ucSubsection [id]="'MainInfoId'" [title]="'Main Information'" [panel]="'MainInfo'">
+            </lib-ucSubsection>
+            <div class="form-body" id='MainInfo'>
+              <div class="form-group row">
+                <div class="col-md-3">
+                  <label class="label-control" name="VendorCode" translate>Center Group Type </label>
+                </div>
+                <div class="col-md-3">
+                  <label class="label-control" name="VendorCodeValue" translate>{{respondModel?.centerGrpTypeName}}</label>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="ucSearch-Button-Right">
+            <span class="mr-1">
+              <button type="button" class="addButton adins-add-fixed"
+              [routerLink]="['/office/office-group-member-add']"
+              [queryParams] = "{centerGrpId:respondModel?.centerGrpId}" translate>
+                <i class="ft-plus-circle"></i> Add
+              </button>
+            </span>
+          </div>
+
+          <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

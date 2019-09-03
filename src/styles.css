@@ -242,6 +242,17 @@ form .form-section{
     color:red;
 }
 
+.adins-back-fixed{
+    position:fixed;
+    top:8px;
+    right:10%;
+}
+.adins-add-fixed{
+    position:fixed;
+    top:8px;
+    right:6%;
+}
+
 /* 
 .adInsReqMsg {
     
