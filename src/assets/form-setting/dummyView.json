@@ -44,6 +44,11 @@
           "type": "date",
           "label": "Establishment Date",
           "property": "establishmentDt"
+        },
+        {
+          "type": "boolean",
+          "label": "is Active",
+          "property": "isActive"
         }
       ]
     },

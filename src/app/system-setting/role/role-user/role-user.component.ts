@@ -82,13 +82,13 @@ export class RoleUserComponent implements OnInit {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetListUserEmployee;
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
-      critObj.DataType = 'Numeric'
-      critObj.restriction = 'In';
-      critObj.propName = 'refRoleId';
-      critObj.listValue = [this.refRoleId, 0];
-      this.arrCrit.push(critObj);
+    critObj.DataType = 'Numeric'
+    critObj.restriction = 'In';
+    critObj.propName = 'refRoleId';
+    critObj.listValue = [this.refRoleId, 0];
+    //this.arrCrit.push(critObj);
 
-      this.inputObj.arrCritObj = this.arrCrit;
+    this.inputObj.arrCritObj = this.arrCrit;
   }
 
   getResult(event) {
@@ -129,9 +129,7 @@ export class RoleUserComponent implements OnInit {
     this.spinner.show();
     /// GET INFO USER AND EMPLOYEE
     var urlGetRefRole: any =
-      this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
-
-    var urlGetRefRoleGateway: any = 'http://172.19.10.228:8280/GWFoundation/v1/RefRole/GetRefRole';
+    this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
 
     this.refRoleObj = new RefRoleObj();
     this.refRoleObj.refRoleId = this.refRoleId;
@@ -181,12 +179,16 @@ export class RoleUserComponent implements OnInit {
         this.service.typeSave(response['message']);
         this.location.back();
         this.spinner.hide();
+        this.listSelectedId = null;
+        this.listDeletedId = null;
       },
       error => {
         console.log("Error Save");
         console.log(error);
         this.service.typeErrorCustom(error);
         this.spinner.hide();
+        this.listSelectedId = null;
+        this.listDeletedId = null;
       }
     );
   }

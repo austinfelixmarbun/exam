@@ -14,6 +14,10 @@ import { OfficeAreaPagingComponent } from 'app/office/office-area/office-area-pa
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { OfficeGroupMemberComponent } from './office-group-member/office-group-member.component';
+import { UcpagingComponent, UcpagingModule } from '@adins/ucpaging';
+import { UcSubsectionModule } from '@adins/uc-subsection';
+import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-group-member-add.component';
 
 
 @NgModule({
@@ -24,6 +28,8 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
     NgbModule,
     UCSearchModule,
     UcgridfooterModule,
+    UcpagingModule,
+    UcSubsectionModule,
     SharingComponentModule
   ],
   declarations: [
@@ -33,6 +39,8 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
     OfficeEmpPosAddComponent,
     OfficeAreaAddEditComponent,
     OfficeAreaPagingComponent,
+    OfficeGroupMemberComponent,
+    OfficeGroupMemberAddComponent
   ]
 })
 export class OfficeModule { }

@@ -39,6 +39,9 @@ export class OfficeObj {
     refTaxOfficeId: any;
     isVirtualOffice: any;
     mrKonvenSyariah: any;
+    mrOfficeType:any;
+    centerGrpTypeCode:any;
+    centerGrpTypeName:any;
 
     constructor() { this.refOfficeId = 0; }
 }

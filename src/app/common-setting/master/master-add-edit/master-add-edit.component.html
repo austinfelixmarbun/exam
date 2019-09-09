@@ -2,11 +2,19 @@
   <div class="card">
     <div class="card-body">
       <div class="px-3">
+          <div class="row">
+              <div class="col-md-8">
+                  <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Master Information </h4>
+              </div>
+              <div class="col-md-4" style="text-align-last: right">
+                <button type="button" class="backButton" (click)="Back()" translate>
+                  <i class="ft-arrow-left"></i> Back
+                </button>
+              </div>
+            </div>
         <form class="form form-horizontal" name="MasterAddEditForm" #MasterAddEditForm="ngForm" novalidate
           (ngSubmit)="MasterAddEditForm.form.valid && Save(MasterAddEditForm)">
           <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Master Information </h4>
-            <br>
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="refMasterTypeCodeModule">Master Type</label>
               <div class="col-md-9">
@@ -14,8 +22,8 @@
                   [(ngModel)]="refMasterTypeCodeModule" #refMasterTypeCode="ngModel"
                   [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && refMasterTypeCode.invalid }"
                   [required]=true>
-                  <option *ngFor="let item of refMasterTypeObj?.returnObject" [value]="item.refMasterTypeCode">
-                    {{item.descr}}
+                  <option *ngFor="let item of refMasterTypeObj?.returnObject" [value]="item.key">
+                    {{item.value}}
                   </option>
                 </select>
                 <div *ngIf="MasterAddEditForm.submitted && refMasterTypeCode.invalid" class="invalid-feedback">
@@ -50,7 +58,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="descrModel">Description</label>
+              <label class="col-md-3 adInsLabel adins-required" for="descrModel">Description</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" name="descrModel" required [(ngModel)]="descrModel"
                   #descr="ngModel" [ngClass]="{ 'is-invalid': MasterAddEditForm.submitted && descr.invalid }">
@@ -63,7 +71,7 @@
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="sandiBI">Sandi BI</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="sandiBI" required [(ngModel)]="sandiBI"
+                <input type="text" class="form-control adInsInput  width-50-per" name="sandiBI" required [(ngModel)]="sandiBI"
                   #descr="ngModel">
               </div>
             </div>
@@ -77,11 +85,11 @@
             </div>
 
           </div>
-          <div class="form-actions">
+          <div class="form-actions right">
 
-            <button *ngIf=" type == 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+            <!-- <button *ngIf=" type == 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
               <i class="fa fa-arrow-circle-left"></i> Back
-            </button>
+            </button> -->
             <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>

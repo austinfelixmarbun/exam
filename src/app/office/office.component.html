@@ -27,6 +27,7 @@
                         name='mrKonvenSyariah'>Konvensional / Syariah</span></th>
                 <th><span translate class="thead-header" (click)="searchSort($event)" name='isVirtualOffice'>Virtual
                         Office</span></th>
+                <th translate>Office Group Member</th>
                 <th translate>Employee List</th>
                 <th translate>Action</th>
             </tr>
@@ -48,6 +49,12 @@
                 <td>
                     <span class="text-left" *ngIf="item.isVirtualOffice == '1'">Yes</span>
                     <span class="text-left" *ngIf="item.isVirtualOffice == '0'">No</span>
+                </td>
+                <td>
+                    <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/office-group-member']"
+                        [queryParams]="{refOfficeId:item.refOfficeId,officeCode:item.officeCode,officeName:item.officeName}">
+                        <i *ngIf="item.mrOfficeType == 'CG'" class="ft-edit-2 font-medium-3 mr-2"></i>
+                    </a>
                 </td>
                 <td>
                     <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/officeEmpPos']"

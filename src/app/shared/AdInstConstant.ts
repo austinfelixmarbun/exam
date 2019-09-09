@@ -37,6 +37,10 @@ export class AdInsConstant {
     public static AddRefOffice = "/RefOffice/AddRefOffice";
     public static EditRefOffice = "/RefOffice/EditRefOffice";
     public static DeleteRefOffice = "/RefOffice/DeleteRefOffice";
+    public static GetCenterGrpByCenterGrpTypeCode = "/RefOffice/GetCenterGrpByCenterGrpCode";
+    public static GetListOfficeCenterGrp = "/RefOffice/GetListOfficeCenterGrp";
+    public static AddCenterGroupOfficeMember = "RefOffice/AddCenterGroupOfficeMember";
+    public static DeleteCenterGroupOfficeMember= "/RefOffice/DeleteCenterGroupOfficeMember";
 
     //REF OFFICE AREA
     public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
@@ -193,6 +197,7 @@ export class AdInsConstant {
     public static AddRefMaster = "/RefMaster/AddRefMaster";
     public static EditRefMaster = "/RefMaster/EditRefMaster";
     public static GetRefMasterType = "/RefMaster/GetRefMasterType";
+    public static GetRefMasterTypeKeyValueUserSetting = "/RefMaster/GetRefMasterTypeKeyValueUserSetting";
     public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
     public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
     public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
@@ -231,6 +236,7 @@ export class AdInsConstant {
     public static DeleteHolidaySchmH = "/Holiday/DeleteHolidaySchmH";
     public static DeleteHolidaySchmD = "/Holiday/DeleteHolidaySchmD";
     public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
+    public static CopyHolidaySchm = "/Holiday/CopyHolidaySchm";
 
     //USER SESSION LOG
     public static SelectRole = "/UserSessionLog/SelectRole";

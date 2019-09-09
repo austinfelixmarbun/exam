@@ -26,6 +26,8 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
+import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
+import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
 
 @NgModule({
   imports: [
@@ -57,7 +59,9 @@ import { UcpagingModule } from '@adins/ucpaging';
     HolidayDetailAddComponent,
     OfficeZipcodeMemberComponent,
     OfficeZipcodeMemberAddComponent,
-    OfficeZipcodeMemberPagingComponent
+    OfficeZipcodeMemberPagingComponent,
+    HolidayAddComponent,
+    CopyHolidaySchemeComponent
   ],
   providers: [
     {

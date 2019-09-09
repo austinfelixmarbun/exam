@@ -115,7 +115,8 @@ export class MasterAddEditComponent implements OnInit {
             this.refMasterObj.descr = MasterAddEditForm.value.descrModel;
             this.refMasterObj.reserveField1 = MasterAddEditForm.value.sandiBI;
             this.refMasterObj.seqNo = MasterAddEditForm.value.seqNo;
-            this.refMasterObj.isSystem = '0';
+            this.refMasterObj.isSystem = '3';
+            this.refMasterObj.isDeleteable = '1';
             if (MasterAddEditForm.value.isActive) { this.refMasterObj.isActive = '1' } else { this.refMasterObj.isActive = '0' };
 
             //SAVE
@@ -179,7 +180,7 @@ export class MasterAddEditComponent implements OnInit {
   }
 
   GetListMasterType() {
-    this.apiUrl = this.settingUrl + AdInsConstant.GetRefMasterType;
+    this.apiUrl = this.settingUrl + AdInsConstant.GetRefMasterTypeKeyValueUserSetting;
     var masterObj = new RefMasterObj();
     this.httpClient.post(this.apiUrl, masterObj).subscribe(
       (response) => {

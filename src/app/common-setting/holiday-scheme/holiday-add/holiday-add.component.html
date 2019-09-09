@@ -1,0 +1,66 @@
+<div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" translate> {{mode}} Holiday Scheme </h4>
+            </div>
+            <div class="col-md-4" style="text-align-last: right">
+              <button type="button" class="backButton" [routerLink]="['/commonSetting/holiday']" translate>
+                <i class="ft-arrow-left"></i> Back
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="px-3">
+            <form class="form form-horizontal" name="HolidaySchemeHReqForm" #HolidaySchemeHReqForm="ngForm"
+              (ngSubmit)="HolidaySchemeHReqForm.form.valid && SaveForm(HolidaySchemeHReqForm)">
+              <div class="form-body">
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel" for="HolidaySchemeCode" translate>Holiday Scheme Code </label>
+                  <div class="col-md-9">
+                    <div>
+                      <input type="text" id="HolidaySchmCode" class="form-control adInsInput width-25-per" name="holidaySchmCode"
+                        [(ngModel)]="result.holidaySchmCode" #HolidaySchmCode="ngModel" required [readonly]="mode=='edit'"
+                        [ngClass]="{ 'is-invalid': (HolidaySchemeHReqForm.submitted || HolidaySchmCode.touched || HolidaySchmCode.dirty) && HolidaySchmCode.invalid }">
+                      <div *ngIf="(HolidaySchemeHReqForm.submitted || HolidaySchmCode.touched || HolidaySchmCode.dirty) && HolidaySchmCode.invalid"
+                        class="invalid-feedback">
+                        <div *ngIf="HolidaySchmCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel" for="HolidaySchemeName" translate>Holiday Scheme Name </label>
+                  <div class="col-md-9">
+                    <input type="text" id="HolidaySchmName" class="form-control adInsInput width-75-per" name="holidaySchmName"
+                      [(ngModel)]="result.holidaySchmName" #HolidaySchmName="ngModel" required
+                      [ngClass]="{ 'is-invalid': (HolidaySchemeHReqForm.submitted || HolidaySchmName.touched || HolidaySchmName.dirty) && HolidaySchmName.invalid }">
+                    <div *ngIf="(HolidaySchemeHReqForm.submitted || HolidaySchmName.touched || HolidaySchmName.dirty) && HolidaySchmName.invalid"
+                      class="invalid-feedback">
+                      <div *ngIf="HolidaySchmName.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" translate>Active Status </label>
+                  <div class="col-md-9">
+                    <input class="border-primary" type="checkbox" [ngModel]="isActive"
+                      (change)="toggleVisibility($event)" name="isActive">
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions right">
+                <button type="submit" class="btn btn-raised btn-primary" id="test" (click)=formValidate(HolidaySchemeHReqForm)
+                  translate>
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

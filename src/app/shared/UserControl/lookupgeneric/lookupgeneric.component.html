@@ -1,6 +1,6 @@
 <fieldset [ngModelGroup]="identifier">
   <div class="input-group">
-      <input type="text" class="form-control" #inputValid="ngModel" name="value" required
+      <input type="text" class="form-control" #inputValid="ngModel" name="value" [required]="isRequired"
           [(ngModel)]="lookupInput.nameSelect" readonly
           [ngClass]="{ 'is-invalid':(parentForm.submitted || inputValid.touched || inputValid.dirty) && inputValid.invalid }">
       <div class="input-group-append">

@@ -4,13 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenuSettingRoutingComponent } from 'app/menu/menu-setting-routing.component';
-import { SharingModule } from 'app/shared/sharing.module';
 import { MenuSettingComponent } from './menu-setting.component';
 import { AddMenuSettingComponent } from './add/add-menu.component';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchComponent, UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
-import { LookupparentformModule } from '@adins/lookupparentform';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
 
 @NgModule({
   imports: [
@@ -21,7 +20,7 @@ import { LookupparentformModule } from '@adins/lookupparentform';
     NgbModule,
     SharingComponentModule,
     UCSearchModule,
-    LookupparentformModule,
+    UclookupgenericModule,
     UcgridfooterModule
   ],
   declarations: [

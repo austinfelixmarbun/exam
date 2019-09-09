@@ -39,7 +39,7 @@ export class LookupgenericComponent implements OnInit {
   totalData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-
+  isRequired: boolean;
   addCrit: Array<any>;
 
   constructor(private http: HttpClient, private modalService: NgbModal){
@@ -64,8 +64,14 @@ export class LookupgenericComponent implements OnInit {
       }
     }
     /* #endregion */
+
     this.inputObj.addCritInput = this.addCrit;
     
+    /*is Required */
+    this.isRequired = this.lookupInput.isRequired;
+    console.log(this.isRequired);
+    /* #endregion */
+
     this.initiateForm();
   }
   
