@@ -23,7 +23,7 @@ import { UploadService } from 'app/shared/upload/upload.service';
 })
 export class UploadSettingEditComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
-  @ViewChild("uclRole") ucLookupRole;
+  @ViewChild('uclRole') ucLookupRole;
   inputLookupObj: any;
   resultData: string;
   foundationUrl: string = environment.foundationUrl;
@@ -34,13 +34,15 @@ export class UploadSettingEditComponent implements OnInit {
   isActive: any;
   mode: any;
   orderByKey: any = null;
-  orderByValue: boolean = true;
+  orderByValue = true;
   pageNow: any;
   pageSize: any;
   pageType: any;
   uploadTypeCode: any;
   uploadTypeName: any;
   uploadSettingSomethingAddEdit: any;
+  uploadSettingHId: any;
+  uploadSettingObj: any;
 
   uploadTypeId: any;
   uploadTypeObject: any;
@@ -48,35 +50,70 @@ export class UploadSettingEditComponent implements OnInit {
   empPositionId: any;
   addCritLookup: any;
   tempRefRole: any;
-  listRefRoleId: Array<any>=[];
+  listRefRoleId: Array<any> = [];
 
   constructor(private spinner: NgxSpinnerService,
     private service: NGXToastrService,
     private httpClient: HttpClient,
     private route: ActivatedRoute,
     private location: Location,
-    private uploadService : UploadService) { }
+    private uploadService: UploadService) { }
 
   ngOnInit() {
+    this.tempRefRole = new Array();
+    this.route.queryParams.subscribe(params => {
+    if (params['param'] != null) {
+      this.pageType = params['param'];
+    } else {
+      this.pageType = 'add';
+    }
+    if (params['uploadTypeId'] != null) {
+      this.uploadTypeId = params['uploadTypeId'];
+    }
+
+    if (this.pageType === 'edit') {
+      this.uploadTypeObject = { uploadTypeId: this.uploadTypeId };
+      this.uploadService.getUploadTypeByUploadTypeId(this.uploadTypeObject).subscribe(
+        response => {
+          console.log(response);
+          this.uploadTypeCode = response['returnObject'].uploadTypeCode;
+          this.uploadTypeName = response['returnObject'].uploadTypeName;
+          if (response['isActive']) {
+            this.isActive = true;
+          } else {
+          this.isActive = false;
+          }
+        });
+
+        this.uploadService.getListRefRoleByUploadTypeId(this.uploadTypeObject).subscribe(
+          response => {
+            this.tempRefRole = response['returnObject'];
+            console.log(this.tempRefRole);
+            for (let index = 0; index < this.tempRefRole.length; index++) {
+              this.listRefRoleId.push(this.tempRefRole[index].refRoleId);
+            }
+          });
+      }
+
     this.pageNow = 1;
     this.pageSize = 10;
     this.inputLookupObj = new InputLookupObj();
-    this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
+    this.inputLookupObj.urlJson = './assets/lookup/lookupRole.json';
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefRolePaging;
     this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
 
-    this.tempRefRole = new Array();
     this.addCritLookup = new Array();
-    var critIsActive = new CriteriaObj();
-    critIsActive.propName = "IsActive";
-    critIsActive.value = "1";
+    const critIsActive = new CriteriaObj();
+    critIsActive.propName = 'IsActive';
+    critIsActive.value = '1';
     critIsActive.restriction = AdInsConstant.RestrictionEq;
-    critIsActive.DataType = "text";
+    critIsActive.DataType = 'text';
     this.addCritLookup.push(critIsActive);
     this.inputLookupObj.addCritInput = this.addCritLookup;
 
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
-    this.initiateForm()
+    this.initiateForm();
+    });
   }
 
   initiateForm() {
@@ -88,27 +125,25 @@ export class UploadSettingEditComponent implements OnInit {
   }
 
   add(uclRoleObj: any) {
-    var refRoleObj = JSON.parse(uclRoleObj.lookupInput.jsonSelect);
+    const refRoleObj = JSON.parse(uclRoleObj.lookupInput.jsonSelect);
     if (refRoleObj != null) {
       if (this.listRefRoleId != null) {
-        if (this.listRefRoleId.includes(refRoleObj.refRoleId))
-        {
-          this.service.errorMessage("Cannot add same Role");
-        }
-        else {
+        if (this.listRefRoleId.includes(refRoleObj.refRoleId)) {
+          this.service.errorMessage('Cannot add same Role');
+        } else {
           this.tempRefRole.push(refRoleObj);
           this.listRefRoleId.push(refRoleObj.refRoleId);
         }
       }
-      this.ucLookupRole.lookupInput.nameSelect = "";
+      this.ucLookupRole.lookupInput.nameSelect = '';
       this.ucLookupRole.lookupInput.jsonSelect = null;
+    } else {
+      this.service.errorMessage('Please select Role First');
     }
-    else
-      this.service.errorMessage("Please select Role First");
   }
 
   delete(refRoleId: any) {
-    var index = this.listRefRoleId.indexOf(refRoleId);
+    const index = this.listRefRoleId.indexOf(refRoleId);
     if (index > -1) {
       this.listRefRoleId.splice(index, 1);
       this.tempRefRole.splice(index, 1);
@@ -116,7 +151,7 @@ export class UploadSettingEditComponent implements OnInit {
   }
 
   SaveForm(): void {
-    var assignRoleToUpload = { uploadTypeId: this.uploadTypeId, listRoleId: this.listRefRoleId}
+    const assignRoleToUpload = { uploadTypeId: this.uploadTypeId, listRoleId: this.listRefRoleId}
     this.spinner.show();
 
       this.apiUrl = this.foundationUrl + AdInsConstant.AssignRoleToUploadSetting;
@@ -136,7 +171,7 @@ export class UploadSettingEditComponent implements OnInit {
         }
       );
   }
-  
+
   searchSort(event: any) {
     if (this.orderByKey == event.target.attributes.name.nodeValue) {
       this.orderByValue = !this.orderByValue
@@ -144,7 +179,7 @@ export class UploadSettingEditComponent implements OnInit {
       this.orderByValue = true
     }
     this.orderByKey = event.target.attributes.name.nodeValue
-    var order = {
+    const order = {
       key: this.orderByKey,
       value: this.orderByValue
     }

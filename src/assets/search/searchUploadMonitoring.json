@@ -1,6 +1,6 @@
 {
     "title": "Upload Monitoring",
-    "exportExcel": true, 
+    "exportExcel": true,
     "component": [
         {
             "type": "dropdown",
@@ -19,7 +19,7 @@
                     "value": "Yes"
                 },
                 {
-                    "key": "0", 
+                    "key": "0",
                     "value": "No"
                 }
             ],
@@ -52,9 +52,9 @@
             "placeholder": "Placeholder",
             "isFromURL": true,
             "isSelectOne" : false,
-            "url": "http://r3app-server/setting/RefMaster/GetRefMasterDropDown",
+            "url": "http://r3app-server/setting/RefStatus/GetRefStatusKeyValuePairByCriteria",
             "criteriaPropValue":"UPLOAD_STAT",
-            "criteriaPropName":"RefMasterTypeCode",
+            "criteriaPropName":"TrxTypeCode",
             "label": "Upload Status",
             "items": [
                 {

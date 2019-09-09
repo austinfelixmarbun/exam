@@ -163,7 +163,7 @@ export class AdInsConstant {
     public static GetRefOfficeZipcodePaging = "/OfficeZipcodeMember/GetRefOfficeZipcodePaging";
     public static AddOfficeZipcodeMember = "/OfficeZipcodeMember/AddOfficeZipcodeMember";
     public static DeleteOfficeZipcodeMember = "/OfficeZipcodeMember/DeleteOfficeZipcodeMember";
-    
+
     //BUSINESS UNIT
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
     public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";
@@ -267,10 +267,10 @@ export class AdInsConstant {
     public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
     public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
     public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
-    
+
     //QUEUE
     public static AddQueue = "http://R3App-Server/FOUNDATION/RabbitMq/AddQueue";
-    
+
     //REF MODULE
     public static GetListRefModuleKeyValue = "/RefModule/GetListRefModuleKeyValue";
 
@@ -294,8 +294,9 @@ export class AdInsConstant {
     public static GetListUploadSettingDIdByUploadTypeId = "/UploadSetting/GetListUploadSettingDIdByUploadTypeId"
     public static AssignRoleToUploadSetting = "/UploadSetting/AssignRoleToUploadSetting"
     public static GetListRefRoleByUploadTypeId = "/UploadSetting/GetListRefRoleByUploadTypeId"
+    public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId'
 
     // GENERIC
     public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
-    
+
 }

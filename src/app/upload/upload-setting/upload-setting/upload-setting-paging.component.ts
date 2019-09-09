@@ -17,12 +17,12 @@ import { Observable } from 'rxjs';
   providers: [NGXToastrService]
 })
 export class UploadSettingPagingComponent implements OnInit {
-  //** Start Query Paging */
+  // ** Start Query Paging */
   @ViewChild(SearchComponent) searchComponent;
   @ViewChild(UCGridFooterComponent) ucgridFooter;
   urlQryPaging: any;
   urlEnviPaging: any;
-  //** End Query Paging */
+  // ** End Query Paging */
 
   urlJson: any;
   resultData: any;
@@ -34,7 +34,7 @@ export class UploadSettingPagingComponent implements OnInit {
   apiUrl: any;
   deleteUrl: any;
   orderByKey: any = null;
-  orderByValue: boolean = true;
+  orderByValue = true;
   foundationUrl: any = environment.foundationUrl
   inputObj: any;
   verfTrxTypeId: any;
@@ -47,7 +47,7 @@ export class UploadSettingPagingComponent implements OnInit {
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/search/searchUploadTypePaging.json";
+    this.inputObj._url = './assets/search/searchUploadTypePaging.json';
     this.inputObj.enviromentUrl = this.foundationUrl;
     this.inputObj.apiQryPaging = AdInsConstant.GetUploadTypePaging;
     this.pageNow = 1;
@@ -66,7 +66,7 @@ export class UploadSettingPagingComponent implements OnInit {
     return this.http.get(url);
   }
 
-  //** Start UC Search **/
+  // ** Start UC Search **/
 
   getResult(event) {
     this.resultData = event.response.returnObject;
@@ -88,7 +88,7 @@ export class UploadSettingPagingComponent implements OnInit {
       this.orderByValue = true
     }
     this.orderByKey = event.target.attributes.name.nodeValue
-    var order = {
+    let order = {
       key: this.orderByKey,
       value: this.orderByValue
     }
@@ -97,7 +97,7 @@ export class UploadSettingPagingComponent implements OnInit {
 
   searchPagination(event: number) {
     this.pageNow = event;
-    var order = null;
+    let order = null;
     if (this.orderByKey != null) {
       order = {
         key: this.orderByKey,
@@ -106,5 +106,5 @@ export class UploadSettingPagingComponent implements OnInit {
     }
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
-  //** End UC Search **/
+  // ** End UC Search **/
 }

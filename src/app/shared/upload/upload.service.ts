@@ -23,6 +23,7 @@ export class UploadService {
     GetListUploadSettingDIdByUploadTypeId: any;
     AssignRoleToUploadSetting: any;
     GetListRefRoleByUploadTypeId: any;
+    GetListUploadSettingDByUploadSettingHId: any;
     foundationUrl: string = environment.foundationUrl;
 
     constructor(private http: HttpClient) {
@@ -32,6 +33,7 @@ export class UploadService {
         this.GetListUploadSettingDIdByUploadTypeId = this.foundationUrl + AdInsConstant.GetListUploadSettingDIdByUploadTypeId;
         this.AssignRoleToUploadSetting = this.foundationUrl + AdInsConstant.AssignRoleToUploadSetting;
         this.GetListRefRoleByUploadTypeId = this.foundationUrl + AdInsConstant.GetListRefRoleByUploadTypeId
+        this.GetListUploadSettingDByUploadSettingHId = this.foundationUrl + AdInsConstant.GetListUploadSettingDByUploadSettingHId;
     }
 
     getUploadTypeByUploadTypeId(uploadSettingObject: any): Observable<Object> {
@@ -57,4 +59,8 @@ export class UploadService {
     getListRefRoleByUploadTypeId(uploadSettingObject: any): Observable<Object> {
         return this.http.post(this.GetListRefRoleByUploadTypeId, uploadSettingObject);
     }
+
+    getListUploadSettingDByUploadSettingHId(uploadSettingObject: any): Observable<Object> {
+      return this.http.post(this.GetListUploadSettingDByUploadSettingHId, uploadSettingObject);
+  }
 }
