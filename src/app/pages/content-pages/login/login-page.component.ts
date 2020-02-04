@@ -7,6 +7,7 @@ import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { HttpClient } from '@angular/common/http';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { environment } from 'environments/environment';
+import  *  as  data  from  'assets/login-dummy.json';
 
 @Component({
     selector: 'app-login-page',
@@ -66,24 +67,25 @@ export class LoginPageComponent implements OnInit {
         var currentUserContext = new CurrentUserContext;
         let today = new Date();
         var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US');
-        this.http.post(this.apiUrl, requestObj).subscribe(
-            (response) => {
-                console.log(response);
-                currentUserContext.UserName = username;
-                currentUserContext.BusinessDate = businessDt;
-                localStorage.setItem("Username",username);
-                var object = response["returnObject"];
-                console.log(object);
-                // if(object["isError"]==false)
-                // {
-                //     this.rolePickService.openDialog(object);
-                // }
-                this.rolePickService.openDialog(object);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
+        this.rolePickService.openDialog(data.returnObject);
+        // this.http.post(this.apiUrl, requestObj).subscribe(
+        //     (response) => {
+        //         console.log(response);
+        //         currentUserContext.UserName = username;
+        //         currentUserContext.BusinessDate = businessDt;
+        //         localStorage.setItem("Username",username);
+        //         var object = response["returnObject"];
+        //         console.log(object);
+        //         // if(object["isError"]==false)
+        //         // {
+        //         //     this.rolePickService.openDialog(object);
+        //         // }
+        //         this.rolePickService.openDialog(object);
+        //     },
+        //     (error) => {
+        //         console.log(error);
+        //     }
+        // );
 
     }
     // On Forgot password link click
