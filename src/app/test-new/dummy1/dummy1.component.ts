@@ -24,6 +24,11 @@ export class Dummy1Component implements OnInit {
     ])
   });
 
+  profileForm2 = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', [Validators.minLength(4), Validators.maxLength(24)]],
+  });
+
   // profileForm2 = new FormGroup({
   //   firstName: new FormControl(''),
   //   lastName: new FormControl(''),
@@ -63,6 +68,7 @@ export class Dummy1Component implements OnInit {
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    console.warn(this.profileForm.value);
+    console.warn(this.profileForm2.value);
+    console.warn(this.profileForm2);
   }
 }

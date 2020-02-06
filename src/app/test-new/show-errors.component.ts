@@ -7,10 +7,18 @@ import { isNull } from '@angular/compiler/src/output/output_ast';
   selector: 'show-errors',
   template: `
     <div *ngIf="shouldShowErrors()" class="invalid-feedback d-block">
-      <div *ngFor="let error of listOfErrors()">{{error}}</div>
+      <div *ngFor="let error of listOfErrors()" translate>{{error}}</div>
     </div>
   `
 })
+// <div class="col-md-9">
+// <input type="text" class="form-control adInsInput width-25-per" name="empNo" required
+//   [attr.disabled]="pageType == 'edit' ? true : null" [(ngModel)]="empNo" #EmpNo="ngModel"
+//   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpNo.invalid }">
+// <div *ngIf="RefEmpForm.submitted && EmpNo.invalid" class="invalid-feedback">
+//   <div *ngIf="EmpNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
+// </div>
+// </div>
 export class ShowErrorsComponent {
 
   private static readonly errorMessages = {
@@ -29,13 +37,13 @@ export class ShowErrorsComponent {
   @Input()
   private control: AbstractControlDirective | AbstractControl;
   @Input()
+  private submit: boolean;
+  @Input()
   private fieldName: string;
 
   shouldShowErrors(): boolean {
-    return this.control &&
-      this.control.errors &&
-      !this.control.valid &&
-      (this.control.dirty || this.control.touched);
+    return this.control && (this.submit || this.control.dirty || this.control.touched) &&
+      this.control.errors && !this.control.valid;
   }
 
   listOfErrors(): string[] {

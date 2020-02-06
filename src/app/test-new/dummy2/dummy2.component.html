@@ -1,0 +1,83 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header header-title">
+      <div class="row">
+        <div class="col-md-8">
+          <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} EMPLOYEE </h4>
+        </div>
+        <div class="col-md-4" style="text-align-last: right">
+          <button type="button" class="backButton" [routerLink]="['/employee/paging']" translate>
+            <i class="ft-arrow-left"></i> Back
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" [formGroup]="RefEmpForm" (ngSubmit)="RefEmpForm.valid && SaveForm()"
+          #enjiForm="ngForm">
+          <div class="form-body">
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Information</h4>
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel">Employee No </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput width-25-per" formControlName="EmpNo"
+                [ngClass]="{ 'is-invalid': enjiForm.submitted && !RefEmpForm.controls.EmpNo.valid }">
+                <show-errors [control]="RefEmpForm.controls.EmpNo" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel">Employee Name </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput width-75-per" formControlName="EmpName"
+                [ngClass]="{ 'is-invalid': enjiForm.submitted && !RefEmpForm.controls.EmpName.valid }">
+                <show-errors [control]="RefEmpForm.controls.EmpName" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel">Join Date </label>
+              <div class="col-md-9">
+                <input type="date" class="form-control adInsInput width-50-per" formControlName="JoinDt"
+                [ngClass]="{ 'is-invalid': enjiForm.submitted && !RefEmpForm.controls.JoinDt.valid }">
+                <show-errors [control]="RefEmpForm.controls.JoinDt" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel">External Employee </label>
+              <div class="col-md-9">
+                <input type="checkbox" class="border-primary" formControlName="IsExt">
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel">Active Status </label>
+              <div class="col-md-9">
+                <input type="checkbox" class="border-primary" formControlName="IsActive">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adInsLabel">KTP No </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput width-25-per" formControlName="IdNo"
+                [ngClass]="{ 'is-invalid': enjiForm.submitted && !RefEmpForm.controls.IdNo.valid }">
+                <show-errors [control]="RefEmpForm.controls.IdNo" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adInsLabel">NPWP </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput width-25-per" formControlName="Npwp"
+                [ngClass]="{ 'is-invalid': enjiForm.submitted && !RefEmpForm.controls.Npwp.valid }">
+                <show-errors [control]="RefEmpForm.controls.Npwp" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
