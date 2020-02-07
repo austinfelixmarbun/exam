@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
+import { UcAddressGroupComponent } from '../uc-address-group/uc-address-group.component';
 
 @Component({
   selector: 'app-dummy2',
@@ -8,22 +9,47 @@ import { Validators, FormBuilder } from '@angular/forms';
 })
 export class Dummy2Component implements OnInit {
 
+  @ViewChild(UcAddressGroupComponent) VcUcAddrGrp;
+  // @ViewChild('UcAddrGrp') VcUcAddrGrp : UcAddressGroupComponent;
+
   RefEmpForm = this.fb.group({
     EmpNo: ['', Validators.required],
     EmpName: ['', Validators.required],
     JoinDt: ['', Validators.required],
     IsExt: [false],
     IsActive: [true],
-    IdNo: ['', Validators.required],
-    Npwp: ['', Validators.required]
+    IdNo: [''],
+    Npwp: ['']
   });
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    console.log(this.RefEmpForm);
+    var test = {
+      Addr : "asdasdasd",
+      AreaCode4 : "1",
+      AreaCode3 : "2",
+      AreaCode2 : "3",
+      AreaCode1 : "4",
+      City : "1",
+      PhnArea1 : "23",
+      Phn1 : "3",
+      PhnExt1 : "4",
+      PhnArea2 : "2",
+      Phn2 : "asd",
+      PhnExt2 : "2",
+      PhnArea3 : "3",
+      Phn3 : "d",
+      PhnExt3 : "f",
+      FaxArea : "r",
+      Fax : "r"
+    };
+    this.VcUcAddrGrp.setData(test);
   }
 
-  SaveForm() {
+  SaveForm(asd) {
+    console.log(this.RefEmpForm.valid);
     console.log(this.RefEmpForm.value);
   }
 }

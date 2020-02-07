@@ -1,12 +1,12 @@
-<div formGroupName="UCAddress">
+<div formGroupName="{{identifier}}">
   <div class="form-body">
     <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Address Information</h4>
     <div class="form-group row">
       <label class="col-md-3 adInsLabel" translate>Address </label>
       <div class="col-md-9">
         <textarea rows="5" class="form-control adInsInput" formControlName="Addr"
-          [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.PhnArea2.touched || UCAddrForm.controls.UCAddress.controls.PhnArea2.dirty) && !UCAddrForm.controls.UCAddress.controls.Addr.valid }"></textarea>
-        <show-errors [control]="UCAddrForm.controls.UCAddress.controls.Addr" [submit]="enjiForm.submitted"></show-errors>
+          [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.Addr.touched || UCAddrForm.controls[identifier].controls.Addr.dirty) && !UCAddrForm.controls[identifier].controls.Addr.valid }"></textarea>
+        <show-errors [control]="UCAddrForm.controls[identifier].controls.Addr" [submit]="enjiForm.submitted"></show-errors>
       </div>
     </div>
     <div class="form-group row">
@@ -15,13 +15,13 @@
         <div class="form-group row">
           <div class="col-md-2" style="border-right: 1px solid grey">
             <input type="text" class="form-control adInsInput" formControlName="AreaCode4"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.AreaCode4.touched || UCAddrForm.controls.UCAddress.controls.AreaCode4.dirty) && !UCAddrForm.controls.UCAddress.controls.AreaCode4.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.AreaCode4" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.AreaCode4.touched || UCAddrForm.controls[identifier].controls.AreaCode4.dirty) && !UCAddrForm.controls[identifier].controls.AreaCode4.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.AreaCode4" [submit]="enjiForm.submitted"></show-errors>
           </div>
           <div class="col-md-2">
             <input type="text" class="form-control adInsInput" formControlName="AreaCode3"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.AreaCode3.touched || UCAddrForm.controls.UCAddress.controls.AreaCode3.dirty) && !UCAddrForm.controls.UCAddress.controls.AreaCode3.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.AreaCode3" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.AreaCode3.touched || UCAddrForm.controls[identifier].controls.AreaCode3.dirty) && !UCAddrForm.controls[identifier].controls.AreaCode3.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.AreaCode3" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
       </div>
@@ -29,32 +29,30 @@
     <div class="form-group row">
       <label class="col-md-3 adInsLabel" translate>Zipcode </label>
       <div class="col-md-3">
-        <!-- <app-lookupgeneric [lookupInput]="inputLookupObj" [parentForm]='parentForm' [identifier]="identifier"
-                  (lookup)="getLookup($event)"></app-lookupgeneric> -->
       </div>
     </div>
     <div class="form-group row">
       <label class="col-md-3 adInsLabel" translate>Kelurahan </label>
       <div class="col-md-9">
-        <input type="text" class="form-control adInsInput" formControlName="AreaCode2" readonly
-          [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.AreaCode2.touched || UCAddrForm.controls.UCAddress.controls.AreaCode2.dirty) && !UCAddrForm.controls.UCAddress.controls.AreaCode2.valid }">
-        <show-errors [control]="UCAddrForm.controls.UCAddress.controls.AreaCode2" [submit]="enjiForm.submitted"></show-errors>
+        <input type="text" class="form-control adInsInput" formControlName="AreaCode2"
+          [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.AreaCode2.touched || UCAddrForm.controls[identifier].controls.AreaCode2.dirty) && !UCAddrForm.controls[identifier].controls.AreaCode2.valid }">
+        <show-errors [control]="UCAddrForm.controls[identifier].controls.AreaCode2" [submit]="enjiForm.submitted"></show-errors>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-md-3 adInsLabel" translate>Kecamatan </label>
       <div class="col-md-9">
-        <input type="text" class="form-control adInsInput" formControlName="AreaCode1" readonly
-          [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.AreaCode1.touched || UCAddrForm.controls.UCAddress.controls.AreaCode1.dirty) && !UCAddrForm.controls.UCAddress.controls.AreaCode1.valid }">
-        <show-errors [control]="UCAddrForm.controls.UCAddress.controls.AreaCode1" [submit]="enjiForm.submitted"></show-errors>
+        <input type="text" class="form-control adInsInput" formControlName="AreaCode1"
+          [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.AreaCode1.touched || UCAddrForm.controls[identifier].controls.AreaCode1.dirty) && !UCAddrForm.controls[identifier].controls.AreaCode1.valid }">
+        <show-errors [control]="UCAddrForm.controls[identifier].controls.AreaCode1" [submit]="enjiForm.submitted"></show-errors>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-md-3 adInsLabel" translate>City </label>
       <div class="col-md-9">
-        <input type="text" class="form-control adInsInput" formControlName="City" readonly
-          [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.City.touched || UCAddrForm.controls.UCAddress.controls.City.dirty) && !UCAddrForm.controls.UCAddress.controls.City.valid }">
-        <show-errors [control]="UCAddrForm.controls.UCAddress.controls.City" [submit]="enjiForm.submitted"></show-errors>
+        <input type="text" class="form-control adInsInput" formControlName="City"
+          [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.City.touched || UCAddrForm.controls[identifier].controls.City.dirty) && !UCAddrForm.controls[identifier].controls.City.valid }">
+        <show-errors [control]="UCAddrForm.controls[identifier].controls.City" [submit]="enjiForm.submitted"></show-errors>
       </div>
     </div>
     <div class="form-group row">
@@ -63,18 +61,18 @@
         <div class="form-group row">
           <div class="col-md-2" style="border-right: 1px solid grey">
             <input type="text" class="form-control adInsInput" formControlName="PhnArea1"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.PhnArea1.touched || UCAddrForm.controls.UCAddress.controls.PhnArea1.dirty) && !UCAddrForm.controls.UCAddress.controls.PhnArea1.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.PhnArea1" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.PhnArea1.touched || UCAddrForm.controls[identifier].controls.PhnArea1.dirty) && !UCAddrForm.controls[identifier].controls.PhnArea1.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.PhnArea1" [submit]="enjiForm.submitted"></show-errors>
           </div>
           <div class="col-md-4" style="border-right: 1px solid grey">
             <input type="text" class="form-control adInsInput" formControlName="Phn1"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.Phn1.touched || UCAddrForm.controls.UCAddress.controls.Phn1.dirty) && !UCAddrForm.controls.UCAddress.controls.Phn1.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.Phn1" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.Phn1.touched || UCAddrForm.controls[identifier].controls.Phn1.dirty) && !UCAddrForm.controls[identifier].controls.Phn1.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.Phn1" [submit]="enjiForm.submitted"></show-errors>
           </div>
           <div class="col-md-2">
             <input type="text" class="form-control adInsInput" formControlName="PhnExt1"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.PhnExt1.touched || UCAddrForm.controls.UCAddress.controls.PhnExt1.dirty) && !UCAddrForm.controls.UCAddress.controls.PhnExt1.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.PhnExt1" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.PhnExt1.touched || UCAddrForm.controls[identifier].controls.PhnExt1.dirty) && !UCAddrForm.controls[identifier].controls.PhnExt1.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.PhnExt1" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
       </div>
@@ -85,18 +83,18 @@
         <div class="form-group row">
           <div class="col-md-2" style="border-right: 1px solid grey">
             <input type="text" class="form-control adInsInput" formControlName="PhnArea2"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.PhnArea2.touched || UCAddrForm.controls.UCAddress.controls.PhnArea2.dirty) && !UCAddrForm.controls.UCAddress.controls.PhnArea2.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.PhnArea2" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.PhnArea2.touched || UCAddrForm.controls[identifier].controls.PhnArea2.dirty) && !UCAddrForm.controls[identifier].controls.PhnArea2.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.PhnArea2" [submit]="enjiForm.submitted"></show-errors>
           </div>
           <div class="col-md-4" style="border-right: 1px solid grey">
             <input type="text" class="form-control adInsInput" formControlName="Phn2"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.Phn2.touched || UCAddrForm.controls.UCAddress.controls.Phn2.dirty) && !UCAddrForm.controls.UCAddress.controls.Phn2.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.Phn2" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.Phn2.touched || UCAddrForm.controls[identifier].controls.Phn2.dirty) && !UCAddrForm.controls[identifier].controls.Phn2.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.Phn2" [submit]="enjiForm.submitted"></show-errors>
           </div>
           <div class="col-md-2">
             <input type="text" class="form-control adInsInput" formControlName="PhnExt2"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.PhnExt2.touched || UCAddrForm.controls.UCAddress.controls.PhnExt2.dirty) && !UCAddrForm.controls.UCAddress.controls.PhnExt2.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.PhnExt2" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.PhnExt2.touched || UCAddrForm.controls[identifier].controls.PhnExt2.dirty) && !UCAddrForm.controls[identifier].controls.PhnExt2.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.PhnExt2" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
       </div>
@@ -107,18 +105,18 @@
         <div class="form-group row">
           <div class="col-md-2" style="border-right: 1px solid grey">
             <input type="text" class="form-control adInsInput" formControlName="PhnArea3"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.PhnArea3.touched || UCAddrForm.controls.UCAddress.controls.PhnArea3.dirty) && !UCAddrForm.controls.UCAddress.controls.PhnArea3.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.PhnArea3" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.PhnArea3.touched || UCAddrForm.controls[identifier].controls.PhnArea3.dirty) && !UCAddrForm.controls[identifier].controls.PhnArea3.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.PhnArea3" [submit]="enjiForm.submitted"></show-errors>
           </div>
           <div class="col-md-4" style="border-right: 1px solid grey">
             <input type="text" class="form-control adInsInput" formControlName="Phn3"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.Phn3.touched || UCAddrForm.controls.UCAddress.controls.Phn3.dirty) && !UCAddrForm.controls.UCAddress.controls.Phn3.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.Phn3" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.Phn3.touched || UCAddrForm.controls[identifier].controls.Phn3.dirty) && !UCAddrForm.controls[identifier].controls.Phn3.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.Phn3" [submit]="enjiForm.submitted"></show-errors>
           </div>
           <div class="col-md-2">
             <input type="text" class="form-control adInsInput" formControlName="PhnExt3"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.PhnExt3.touched || UCAddrForm.controls.UCAddress.controls.PhnExt3.dirty) && !UCAddrForm.controls.UCAddress.controls.PhnExt3.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.PhnExt3" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.PhnExt3.touched || UCAddrForm.controls[identifier].controls.PhnExt3.dirty) && !UCAddrForm.controls[identifier].controls.PhnExt3.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.PhnExt3" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
       </div>
@@ -129,13 +127,13 @@
         <div class="form-group row">
           <div class="col-md-2" style="border-right: 1px solid grey">
             <input type="text" class="form-control adInsInput" formControlName="FaxArea"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.FaxArea.touched || UCAddrForm.controls.UCAddress.controls.FaxArea.dirty) && !UCAddrForm.controls.UCAddress.controls.FaxArea.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.FaxArea" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.FaxArea.touched || UCAddrForm.controls[identifier].controls.FaxArea.dirty) && !UCAddrForm.controls[identifier].controls.FaxArea.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.FaxArea" [submit]="enjiForm.submitted"></show-errors>
           </div>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="Fax"
-              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls.UCAddress.controls.Fax.touched || UCAddrForm.controls.UCAddress.controls.Fax.dirty) && !UCAddrForm.controls.UCAddress.controls.Fax.valid }">
-            <show-errors [control]="UCAddrForm.controls.UCAddress.controls.Fax" [submit]="enjiForm.submitted"></show-errors>
+              [ngClass]="{ 'is-invalid':(enjiForm.submitted || UCAddrForm.controls[identifier].controls.Fax.touched || UCAddrForm.controls[identifier].controls.Fax.dirty) && !UCAddrForm.controls[identifier].controls.Fax.valid }">
+            <show-errors [control]="UCAddrForm.controls[identifier].controls.Fax" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
       </div>
