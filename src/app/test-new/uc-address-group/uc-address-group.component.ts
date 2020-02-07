@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm, FormGroupDirective, ControlContainer } from '@angular/forms';
 
 @Component({
   selector: 'app-uc-address-group',
   templateUrl: './uc-address-group.component.html',
-  styleUrls: ['./uc-address-group.component.scss']
+  styleUrls: ['./uc-address-group.component.scss'],
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class UcAddressGroupComponent implements OnInit {
 
