@@ -53,6 +53,9 @@ export class ShowErrorsComponent {
 
   private getMessage(type: string, params: any) {
     if (this.fieldName === undefined) {
+      if (type == "pattern" && params.requiredPattern == "^[0-9]+$") {
+      return "Number Only";
+      }
       return ShowErrorsComponent.errorMessages[type](params);
     } else {
       return ShowErrorsComponent.errorMessages['requiredWithField'](this.fieldName);

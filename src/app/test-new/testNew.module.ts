@@ -8,6 +8,7 @@ import { TestNewRoutingModule } from "./testNew-routing.module";
 import { ShowErrorsComponent } from "./show-errors.component";
 import { Dummy2Component } from './dummy2/dummy2.component';
 import { Dummy3Component } from './dummy3/dummy3.component';
+import { UcAddressGroupComponent } from './uc-address-group/uc-address-group.component';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { Dummy3Component } from './dummy3/dummy3.component';
         Dummy1Component,
         ShowErrorsComponent,
         Dummy2Component,
-        Dummy3Component
+        Dummy3Component,
+        UcAddressGroupComponent
     ],
 
 })
