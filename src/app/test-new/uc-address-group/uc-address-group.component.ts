@@ -12,6 +12,7 @@ export class UcAddressGroupComponent implements OnInit {
   @Input() UCAddrForm: FormGroup;
   @Input() enjiForm: NgForm;
   @Input() identifier: any;
+  @Input() default: any;
 
   constructor(private fb: FormBuilder) { }
 
@@ -36,6 +37,10 @@ export class UcAddressGroupComponent implements OnInit {
       FaxArea: ['', Validators.pattern("^[0-9]+$")],
       Fax: ['', Validators.pattern("^[0-9]+$")]
     }));
+
+    if (this.default != null) {
+      this.setData(this.default);
+    }
 
     // var asd = this.UCAddrForm.controls[this.identifier]['controls'].PhnArea2.dirty;
   }

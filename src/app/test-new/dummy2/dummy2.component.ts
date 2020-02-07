@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
-import { UcAddressGroupComponent } from '../uc-address-group/uc-address-group.component';
 
 @Component({
   selector: 'app-dummy2',
@@ -9,8 +8,10 @@ import { UcAddressGroupComponent } from '../uc-address-group/uc-address-group.co
 })
 export class Dummy2Component implements OnInit {
 
-  @ViewChild(UcAddressGroupComponent) VcUcAddrGrp;
+  // @ViewChild(UcAddressGroupComponent) VcUcAddrGrp;
   // @ViewChild('UcAddrGrp') VcUcAddrGrp : UcAddressGroupComponent;
+
+  defVal : any;
 
   RefEmpForm = this.fb.group({
     EmpNo: ['', Validators.required],
@@ -26,7 +27,7 @@ export class Dummy2Component implements OnInit {
 
   ngOnInit() {
     console.log(this.RefEmpForm);
-    var test = {
+    this.defVal = {
       Addr : "asdasdasd",
       AreaCode4 : "1",
       AreaCode3 : "2",
@@ -45,7 +46,6 @@ export class Dummy2Component implements OnInit {
       FaxArea : "r",
       Fax : "r"
     };
-    this.VcUcAddrGrp.setData(test);
   }
 
   SaveForm(asd) {
