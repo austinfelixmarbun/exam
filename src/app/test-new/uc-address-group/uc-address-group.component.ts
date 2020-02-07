@@ -33,7 +33,7 @@ export class UcAddressGroupComponent implements OnInit {
       Phn3: ['', Validators.pattern("^[0-9]+$")],
       PhnExt3: ['', Validators.pattern("^[0-9]+$")],
       FaxArea: ['', Validators.pattern("^[0-9]+$")],
-      Fax: ['', Validators.pattern("^[0-9]+$")]
+      Fax: ['', Validators.pattern("^[0-9]+$")]   
     }));
   }
 
