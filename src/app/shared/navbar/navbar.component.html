@@ -64,12 +64,20 @@
                     <li class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle>
                             <i class="ft-bell font-medium-3 blue-grey darken-4"></i>
-                            <span class="notification badge badge-pill badge-danger">4</span>
+                            <span class="notification badge badge-pill badge-danger">{{notifications.length}}</span>
                             <p class="d-none">Notifications</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown">
                             <div class="noti-list">
-                                <a
+                                <a *ngFor="let item of notifications"
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                    <i class="ft-bell info float-left d-block font-large-1 mt-1 mr-2"></i>
+                                    <span class="noti-wrapper">
+                                        <span class="noti-title line-height-1 d-block text-bold-400 info">{{item.title}}</span>
+                                        <span class="noti-text">{{item.desc}}</span>
+                                    </span>
+                                </a>
+                                <!-- <a
                                     class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
                                     <i class="ft-bell info float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
@@ -103,7 +111,7 @@
                                             Registered</span>
                                         <span class="noti-text">Lorem ipsum dolor sit ametnatus aut.</span>
                                     </span>
-                                </a>
+                                </a> -->
                             </div>
                             <a
                                 class="noti-footer primary text-center d-block border-top border-top-blue-grey border-top-lighten-4 text-bold-400 py-1">Read

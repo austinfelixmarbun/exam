@@ -1,7 +1,8 @@
 import { Component, ViewContainerRef, OnInit } from '@angular/core';
-import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+// import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Message } from 'primeng/primeng';
-import * as signalR from '@aspnet/signalr';
+// import * as signalR from '@aspnet/signalr';
 
 @Component({
     selector: 'app-root',
@@ -9,12 +10,14 @@ import * as signalR from '@aspnet/signalr';
 })
 export class AppComponent implements OnInit {
 
-    // private _hubConnection: HubConnection;
-    // msgs: Message[] = [];
+    private _hubConnection: HubConnection;
+    msgs: Message[] = [];
 
     constructor() { }
 
     ngOnInit(): void {
+        Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
+
         // this._hubConnection = new HubConnectionBuilder().withUrl('http://r3app-server/FOUNDATION/notify').build();
         // this._hubConnection
         //     .start()

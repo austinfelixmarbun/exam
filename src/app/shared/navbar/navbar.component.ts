@@ -1,4 +1,4 @@
-import { Component, AfterViewChecked } from '@angular/core';
+import { Component, AfterViewChecked, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { RolePickService} from 'app/shared/rolepick/rolepick.service'; 
 import { HttpClient } from '@angular/common/http';
@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { formatDate } from '@angular/common';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 
 @Component({
     selector: 'app-navbar',
@@ -15,7 +16,7 @@ import { formatDate } from '@angular/common';
     providers:[RolePickService]
 })
 
-export class NavbarComponent implements AfterViewChecked {
+export class NavbarComponent implements AfterViewChecked, OnInit {
     currentLang = 'en';
     toggleClass = 'ft-maximize';
     placement = 'bottom-right'
@@ -28,6 +29,8 @@ export class NavbarComponent implements AfterViewChecked {
     token : string;
     userAccess : any;
     backgroundColor = environment.navbarColor;
+
+    notifications: object[] = [];
 
     constructor(public translate: TranslateService,
         private router: Router,
@@ -42,6 +45,32 @@ export class NavbarComponent implements AfterViewChecked {
         this.userId = userAccess.userId;
         this.userAccess = userAccess;
         this.displayName = userAccess.userId + ", " + userAccess.roleName + " - " + userAccess.officeName + " - " + businessDate;
+    }
+
+    ngOnInit(){
+        var _hubConnection = new HubConnectionBuilder()
+                            .withUrl("https://localhost:5001/notification")
+                            .withAutomaticReconnect()
+                            .build();
+
+        _hubConnection.start()
+                        .then(() => console.log("Connection Started !"))
+                        .then(() => _hubConnection.invoke("SubscribeNotification", "TESTER", "ADMIN"))
+                        .catch((e) => console.log("Exception : " + e));
+
+        _hubConnection.on("GetUserNotification", (response) => {
+            console.log("Response : " + response);
+            this.notifications = JSON.parse(response);
+        });
+
+        _hubConnection.on("ReceiveNotification", (response) => {
+            console.log("Response API : " + response);
+            this.notifications.push({title: response, desc: "User " + response});
+        });
+    }
+
+    InitNotification(){
+        
     }
 
     ngAfterViewChecked() {
