@@ -63,3 +63,23 @@ export class ShowErrorsComponent {
   }
 
 }
+
+// CustCoyController.cs
+// CustCoyLegalDocController.cs
+// CustCoyShareholderController.cs
+// CustEmergencyCntctController.cs
+// CustExposureController.cs
+// CustGrpController.cs
+// CustPersonalController.cs
+// CustPersonalJobDataController.cs
+// CustScoreAttrContentController.cs
+
+// containerBuilder.RegisterType<CustCoyService>().As<ICustCoyService>();
+// containerBuilder.RegisterType<CustCoyLegalDocService>().As<ICustCoyLegalDocService>();
+// containerBuilder.RegisterType<CustCoyShareholderService>().As<ICustCoyShareholderService>();
+// containerBuilder.RegisterType<CustEmergencyCntctService>().As<ICustEmergencyCntctService>();
+// containerBuilder.RegisterType<CustExposureService>().As<ICustExposureService>();
+// containerBuilder.RegisterType<CustGrpService>().As<ICustGrpService>();
+// containerBuilder.RegisterType<CustPersonalService>().As<ICustPersonalService>();
+// containerBuilder.RegisterType<CustPersonalJobDataService>().As<ICustPersonalJobDataService>();
+// containerBuilder.RegisterType<CustScoreAttrContentService>().As<ICustScoreAttrContentService>();

@@ -38,9 +38,9 @@ export class UcAddressGroupComponent implements OnInit {
       Fax: ['', Validators.pattern("^[0-9]+$")]
     }));
 
-    if (this.default != null) {
-      this.setData(this.default);
-    }
+    // if (this.default != null) {
+    //   this.setData(this.default);
+    // }
 
     // var asd = this.UCAddrForm.controls[this.identifier]['controls'].PhnArea2.dirty;
   }
