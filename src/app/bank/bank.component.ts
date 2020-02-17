@@ -32,9 +32,9 @@ export class BankComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/search/searchBank.json";
-    this.inputPagingObj.enviromentUrl = environment.settingUrl;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefBank;
+    this.inputPagingObj.enviromentUrl = "http://r3app-server.ad-ins.com/FOUNDATION_R3";
+    this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.inputPagingObj.deleteUrl = "/RefBank/DeleteRefBank";
     this.inputPagingObj.pagingJson = "./assets/form-setting/bankPaging.json";
   }
 

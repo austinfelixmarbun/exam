@@ -1,13 +1,61 @@
-<!-- <form (ngSubmit)="onSubmit.emit(this.form.value)" [formGroup]="form" class="form-horizontal">
-  <div *ngFor="let field of fields">
-      <field-builder [field]="field" [form]="form"></field-builder>
-  </div>
-  <div class="form-row"></div>
-  <div class="form-group row">
-    <div class="col-md-3"></div>
-    <div class="col-md-9">
-      <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Save</button>
-      <strong >Saved all values</strong>
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title" translate> {{mode}} BANK </h4>
+          </div>
+          <div class="col-md-4" style="text-align-last: right">
+            <button type="button" class="backButton" [routerLink]="['/bank/paging']" translate>
+              <i class="ft-arrow-left"></i> Back
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="px-3">
+          <form class="form form-horizontal" [formGroup]="RefBankForm" (ngSubmit)="RefBankForm.valid && SaveForm()"
+            #enjiForm="ngForm">
+            <div class="form-body">
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Bank Information</h4>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel">Bank Code </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-25-per" formControlName="BankCode">
+                  <show-errors [control]="RefBankForm.controls.BankCode" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel">Bank Name </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-75-per" formControlName="BankName">
+                  <show-errors [control]="RefBankForm.controls.BankName" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel">BI Code </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-25-per" formControlName="RegRptCode">
+                  <show-errors [control]="RefBankForm.controls.RegRptCode" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel">Active Status </label>
+                <div class="col-md-9">
+                  <input type="checkbox" class="border-primary" formControlName="IsActive">
+                </div>
+              </div>
+            </div>
+            <div class="form-actions right">
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
     </div>
   </div>
-</form> -->
+</div>

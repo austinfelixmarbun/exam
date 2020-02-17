@@ -21,8 +21,7 @@
             <div class="form-group row adins-required">
               <label class="col-md-3 adInsLabel">Employee No </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput width-25-per" formControlName="EmpNo"
-                  [ngClass]="{ 'is-invalid':(enjiForm.submitted)}">
+                <input type="text" class="form-control adInsInput width-25-per" formControlName="EmpNo">
                 <show-errors [control]="RefEmpForm.controls.EmpNo" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>

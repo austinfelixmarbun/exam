@@ -20,7 +20,7 @@ export class Dummy2Component implements OnInit {
     IsExt: [false],
     IsActive: [true],
     IdNo: [''],
-    Npwp: ['']
+    Npwp: ['', [Validators.minLength(4), Validators.maxLength(10)]]
   });
 
   constructor(private fb: FormBuilder) { }
