@@ -69,12 +69,6 @@ export class Dummy3Component implements OnInit {
   SaveForm() {
     this.bankObj = new RefBankObj();
     this.bankObj = this.RefBankForm.value;
-    if (this.RefBankForm.controls.IsActive.value == false) {
-        this.bankObj.isActive = "0";
-    }
-    else {
-        this.bankObj.isActive = "1";
-    }
     console.log(this.bankObj);
     if (this.mode == "edit") {
       this.bankObj.bankCode = this.result.BankCode;
