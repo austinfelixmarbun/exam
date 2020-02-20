@@ -4,7 +4,7 @@
     "component": [
       {
         "type": "textbox",
-        "name": "rz.zipCode",
+        "name": "zipCode",
         "id": "ZipCode",
         "value": "%",
         "label": "Zip Code",
@@ -27,30 +27,34 @@
         "placeholder": "Kecamatan"
       }
     ],
+    "querystring": {
+      "select": "SELECT A.REF_ZIPCODE_ID as refZipcodeId, A.ZIPCODE_NUMBER as zipcodeNumber, A.AREA_CODE_1 as areaCode1, A.AREA_CODE_2 as areaCode2, A.ZIPCODE as zipcode, A.CITY as city, A.IS_ACTIVE as isActive",
+      "from": "FROM REF_ZIPCODE A WITH(NOLOCK)"
+    },
     "headerList": [
         {
             "type": "sort",
             "position": "left",
             "label": "City",
-            "name": "rz.city"
+            "name": "city"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Kelurahan",
-            "name": "rz.area_Code_2"
+            "name": "area_Code_2"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Kecamatan",
-            "name": "rz.area_Code_1"
+            "name": "area_Code_1"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Zipcode",
-            "name": "rz.zipcode"
+            "name": "zipcode"
         },
         {
             "type": "label",

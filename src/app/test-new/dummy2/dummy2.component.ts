@@ -27,25 +27,6 @@ export class Dummy2Component implements OnInit {
 
   ngOnInit() {
     console.log(this.RefEmpForm);
-    this.defVal = {
-      Addr : "asdasdasd",
-      AreaCode4 : "1",
-      AreaCode3 : "2",
-      AreaCode2 : "3",
-      AreaCode1 : "4",
-      City : "1",
-      PhnArea1 : "23",
-      Phn1 : "3",
-      PhnExt1 : "4",
-      PhnArea2 : "2",
-      Phn2 : "asd",
-      PhnExt2 : "2",
-      PhnArea3 : "3",
-      Phn3 : "d",
-      PhnExt3 : "f",
-      FaxArea : "r",
-      Fax : "r"
-    };
   }
 
   SaveForm(asd) {
