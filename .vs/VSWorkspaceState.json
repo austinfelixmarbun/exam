@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\UserControl",
+    "\\src\\app\\shared\\UserControl\\ucAddress",
+    "\\src\\app\\test-new",
+    "\\src\\app\\test-new\\dummy2",
+    "\\src\\app\\test-new\\dummy3",
+    "\\src\\app\\test-new\\uc-address-group"
+  ],
+  "SelectedNode": "\\src\\app\\test-new\\dummy2\\dummy2.component.ts",
+  "PreviewInSolutionExplorer": false
+}
