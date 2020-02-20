@@ -43,11 +43,11 @@ export class UcAddressGroupComponent implements OnInit {
     }));
     
     this.inputLookupObj = new InputLookupObj();
-    this.inputLookupObj.urlJson = "./assets/lookup/lookupZipcode.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefZipcodePaging;
-    this.inputLookupObj.urlEnviPaging = environment.settingUrl;
-    this.inputLookupObj.pagingJson = "./assets/form-setting/zipcodePaging.json";
-    this.inputLookupObj.genericJson = "./assets/form-setting/zipcodeGeneric.json";
+    this.inputLookupObj.urlJson = "./assets/uclookup/lookupZipcode.json";
+    this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupObj.pagingJson = "./assets/uclookup/lookupZipcode.json";
+    this.inputLookupObj.genericJson = "./assets/uclookup/lookupZipcode.json";
   }
   
   getLookup(event) {
