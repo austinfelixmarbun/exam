@@ -37,36 +37,5 @@ export class UcAddressGroupComponent implements OnInit {
       FaxArea: ['', Validators.pattern("^[0-9]+$")],
       Fax: ['', Validators.pattern("^[0-9]+$")]
     }));
-
-    // if (this.default != null) {
-    //   this.setData(this.default);
-    // }
-
-    // var asd = this.UCAddrForm.controls[this.identifier]['controls'].PhnArea2.dirty;
-  }
-
-  setData(data) {
-    this.UCAddrForm.patchValue({
-      [this.identifier]: {
-        Addr: data.Addr,
-        AreaCode4: data.AreaCode4,
-        AreaCode3: data.AreaCode3,
-        AreaCode2: data.AreaCode2,
-        AreaCode1: data.AreaCode1,
-        City: data.City,
-        PhnArea1: data.PhnArea1,
-        Phn1: data.Phn1,
-        PhnExt1: data.PhnExt1,
-        PhnArea2: data.PhnArea2,
-        Phn2: data.Phn2,
-        PhnExt2: data.PhnExt2,
-        PhnArea3: data.PhnArea3,
-        Phn3: data.Phn3,
-        PhnExt3: data.PhnExt3,
-        FaxArea: data.FaxArea,
-        Fax: data.Fax
-      }
-    });
-    
   }
 }
