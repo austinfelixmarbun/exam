@@ -10,5 +10,5 @@ export class CurrObj {
     LbppCode: any;
   IsActive: any;
   RowVersion: any;
-  constructor() { this.RefCurrId = 0; }
+  constructor() { this.RefCurrId = 0; this.RowVersion = "" }
 }
