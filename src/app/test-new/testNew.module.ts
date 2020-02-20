@@ -9,6 +9,9 @@ import { ShowErrorsComponent } from "./show-errors.component";
 import { Dummy2Component } from './dummy2/dummy2.component';
 import { Dummy3Component } from './dummy3/dummy3.component';
 import { UcAddressGroupComponent } from './uc-address-group/uc-address-group.component';
+import { UclookupgenericModule } from "@adins/uclookupgeneric";
+import { UcLookupGroupComponent } from './uc-lookup-group/uc-lookup-group.component';
+import { UcpagingModule } from "@adins/ucpaging";
 
 @NgModule({
     imports: [
@@ -16,14 +19,17 @@ import { UcAddressGroupComponent } from './uc-address-group/uc-address-group.com
         ReactiveFormsModule,
         HttpModule,
         NgbModule,
-        TestNewRoutingModule
+        TestNewRoutingModule,
+        UclookupgenericModule,
+        UcpagingModule
     ],
     declarations: [
         Dummy1Component,
         ShowErrorsComponent,
         Dummy2Component,
         Dummy3Component,
-        UcAddressGroupComponent
+        UcAddressGroupComponent,
+        UcLookupGroupComponent
     ],
 
 })
