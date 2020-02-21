@@ -1,13 +1,14 @@
 export class CurrObj {
-    refCurrId: any;
-    currName: any;
-    currCode: any;
-    roundedAmt: any;
-    minRefundAmt: any;
-    toleranceAmt: any;
-    cofId: any;
-    regRptCode: any;
-    lbppCode: any;
-    isActive: any;
-    constructor() { this.refCurrId = 0; }
+    RefCurrId: any;
+    CurrName: any;
+    CurrCode: any;
+    RoundedAmt: any;
+    MinRefundAmt: any;
+    ToleranceAmt: any;
+    CofId: any;
+    RegRptCode: any;
+    LbppCode: any;
+  IsActive: any;
+  RowVersion: any;
+  constructor() { this.RefCurrId = 0; this.RowVersion = "" }
 }

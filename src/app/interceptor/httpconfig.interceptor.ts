@@ -61,7 +61,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 }
                 myObj["Ip"] = localStorage.getItem("LocalIp");
                 myObj["RequestDateTime"] = businessDt;
-                myObj["RowVersion"] = "";
             }
             else {
                 myObj = new Object();
@@ -70,7 +69,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 }
                 myObj["Ip"] = localStorage.getItem("LocalIp");
                 myObj["RequestDateTime"] = businessDt;
-                myObj["RowVersion"] = "";
             }
         } else {
             if (currentUserContext != null) {
@@ -80,7 +78,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 }
                 myObj["Ip"] = localStorage.getItem("LocalIp");
                 myObj["RequestDateTime"] = businessDt;
-                myObj["RowVersion"] = "";
             }
             else {
                 myObj = new Object();
@@ -89,7 +86,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 }
                 myObj["Ip"] = localStorage.getItem("LocalIp");
                 myObj["RequestDateTime"] = businessDt;
-                myObj["RowVersion"] = "";
             }
         }
 

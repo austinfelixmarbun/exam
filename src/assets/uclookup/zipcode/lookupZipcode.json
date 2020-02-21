@@ -1,0 +1,99 @@
+{
+    "url": "http://getSupplier",
+    "title":"Lookup Zip Code",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "zipCode",
+        "id": "ZipCode",
+        "value": "%",
+        "label": "Zip Code",
+        "placeholder": "Zip Code"
+      },
+      {
+        "type": "textbox",
+        "name": "area_Code_2",
+        "id": "Kelurahan",
+        "value": "",
+        "label": "Kelurahan",
+        "placeholder": "Kelurahan"
+      },
+      {
+        "type": "textbox",
+        "name": "area_Code_1",
+        "id": "kecamatan",
+        "value": "",
+        "label": "Kecamatan",
+        "placeholder": "Kecamatan"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT A.REF_ZIPCODE_ID as refZipcodeId, A.ZIPCODE_NUMBER as zipcodeNumber, A.AREA_CODE_1 as areaCode1, A.AREA_CODE_2 as areaCode2, A.ZIPCODE as zipcode, A.CITY as city, A.IS_ACTIVE as isActive",
+      "from": "FROM REF_ZIPCODE A WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "City",
+            "name": "city"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Kelurahan",
+            "name": "area_Code_2"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Kecamatan",
+            "name": "area_Code_1"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Zipcode",
+            "name": "zipcode"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "city"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "areaCode2"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "areaCode1"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "zipcode"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "zipcode"
+                }
+            ]
+        }
+    ],
+    "propertyId": "zipcode",
+    "propertyName": "zipcode"
+}

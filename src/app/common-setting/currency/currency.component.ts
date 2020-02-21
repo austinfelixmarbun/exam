@@ -3,6 +3,8 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { UcpagingComponent } from '@adins/ucpaging';
+
 
 @Component({
   selector: 'app-currency',
@@ -19,8 +21,8 @@ export class CurrencyComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/search/searchCurrency.json";
-    this.inputPagingObj.enviromentUrl = environment.settingUrl;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetRefCurrPaging;
-    this.inputPagingObj.pagingJson = "./assets/form-setting/currencyPaging.json";
+    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.pagingJson = "./assets/search/searchCurrency.json";
   }
 }
