@@ -22,6 +22,27 @@ export class UcAddressGroupComponent implements OnInit {
 
   ngOnInit() {
     console.log("UcAddressForm");
+    this.default = new Array();
+    this.default = {
+      Addr: '',
+      AreaCode4: '',
+      AreaCode3: '',
+      AreaCode2: '',
+      AreaCode1: '',
+      City: '',
+      PhnArea1: '',
+      Phn1: '',
+      PhnExt1: '',
+      PhnArea2: '',
+      Phn2: '',
+      PhnExt2: '',
+      PhnArea3: '',
+      Phn3: '',
+      PhnExt3: '',
+      FaxArea: '',
+      Fax: ''
+    };
+    
     this.UCAddrForm.addControl(this.identifier, this.fb.group({
       Addr: ['', Validators.required],
       AreaCode4: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.maxLength(3)]],
@@ -41,26 +62,27 @@ export class UcAddressGroupComponent implements OnInit {
       FaxArea: ['', Validators.pattern("^[0-9]+$")],
       Fax: ['', Validators.pattern("^[0-9]+$")]
     }));
-    
+
     this.inputLookupObj = new InputLookupObj();
-    this.inputLookupObj.urlJson = "./assets/uclookup/lookupZipcode.json";
+    this.inputLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupObj.pagingJson = "./assets/uclookup/lookupZipcode.json";
-    this.inputLookupObj.genericJson = "./assets/uclookup/lookupZipcode.json";
+    this.inputLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
   }
-  
+
   getLookup(event) {
     console.log(event);
     this.UCAddrForm.controls[this.identifier].patchValue(
-      { 
-        areaCode2: event.areaCode2,
-        areaCode1: event.areaCode1,
-        phnArea1: event.phnArea,
-        city: event.city,
-        zipcodeNumber: event.zipcodeNumber
+      {
+        AreaCode2: event.areaCode2,
+        AreaCode1: event.areaCode1,
+        PhnArea1: event.phnArea,
+        City: event.city,
+        ZipcodeNumber: event.zipcodeNumber
       });
-      this.inputLookupObj.nameSelect = event.zipcode;
-      this.inputLookupObj.idSelect = event.zipcode;
+    console.log(this.UCAddrForm.controls[this.identifier]["controls"]);
+    this.inputLookupObj.nameSelect = event.zipcode;
+    this.inputLookupObj.idSelect = event.zipcode;
   }
 }
