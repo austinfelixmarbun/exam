@@ -18,6 +18,8 @@ import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-
 import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/office-zipcode-member-paging/office-zipcode-member-paging.component';
 import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
 import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
+import { EconomicSectorComponent } from './economic-sector/economic-sector-paging/economic-sector.component';
+import { EconomicSectorAddEditComponent } from './economic-sector/economic-sector-add-edit/economic-sector-add-edit.component';
 
 const routes: Routes = [
   {
@@ -147,6 +149,20 @@ const routes: Routes = [
         component: OfficeZipcodeMemberAddComponent,
         data: {
           title: 'office Zipcode Member Add'
+        },
+      },
+      {
+        path: 'economicSector/paging',
+        component: EconomicSectorComponent,
+        data: {
+          title: 'Economic Sector Paging'
+        },
+      },
+      {
+        path: 'economicSector/detail',
+        component: EconomicSectorAddEditComponent,
+        data: {
+          title: 'Economic Sector Add Edit'
         },
       }
     ]

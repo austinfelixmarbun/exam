@@ -28,6 +28,8 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
 import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
 import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
+import { EconomicSectorComponent } from './economic-sector/economic-sector-paging/economic-sector.component';
+import { EconomicSectorAddEditComponent } from './economic-sector/economic-sector-add-edit/economic-sector-add-edit.component';
 
 @NgModule({
   imports: [
@@ -61,7 +63,9 @@ import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme
     OfficeZipcodeMemberAddComponent,
     OfficeZipcodeMemberPagingComponent,
     HolidayAddComponent,
-    CopyHolidaySchemeComponent
+    CopyHolidaySchemeComponent,
+    EconomicSectorComponent,
+    EconomicSectorAddEditComponent
   ],
   providers: [
     {

@@ -253,6 +253,12 @@ export class AdInsConstant {
   public static EditRefCurr = environment.FoundationR3Url + "/RefCurr/EditRefCurr";
   public static GetRefCurrById = environment.FoundationR3Url + "/RefCurr/GetRefCurrById";
 
+  //REF ECONOMIC SECTOR
+
+  public static AddRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/AddRefEconomicSector";
+  public static EditRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/EditRefEconomicSector";
+  public static GetRefEconomicSectorById = environment.FoundationR3Url + "/RefEconomicSector/GetRefEconomicSectorById";
+
   //GENERIC
   public static GetObjectBySQL = "/Generic/GetObjectBySQL";
   public static AddObjectBySQL = "/Generic/AddObjectBySQL";
