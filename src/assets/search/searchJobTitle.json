@@ -1,55 +1,97 @@
 {
-    "title": "Job Title",
-    "component": [
+  "title": "Job Title",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "JOB_TITLE_CODE",
+      "id": "jobTitleCode",
+      "value": "",
+      "label": "Job Title Code",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "JOB_TITLE_NAME",
+      "id": "jobTitleName",
+      "label": "Job Title Name",
+      "value": "",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "DESCR",
+      "id": "descr",
+      "value": "",
+      "label": "Description",
+      "placeholder": "Placeholder"
+    }
+
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Job Title Code",
+      "name": "jobTitleCode"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Job Title Name",
+      "name": "jobTitleName"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Description",
+      "name": "descr"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT A.REF_JOB_TITLE_ID as refJobTitleId,A.JOB_TITLE_CODE as jobTitleCode,A.JOB_TITLE_NAME as jobTitleName,A.DESCR as descr",
+    "from": "FROM REF_JOB_TITLE A WITH(NOLOCK)"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "jobTitleCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "jobTitleName"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "descr"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
         {
-          "type": "dropdown",
-          "datatype": "numeric",
-          "name": "refOrgId",
-            "id": "refOrgId",
-          "value": "",
-          "placeholder": "Placeholder",
-          "isFromURL": true,
-          "isSelectOne" : false,
-          "url": "http://r3app-server/foundation/OrganizationDefinition/GetListOrgParentKeyValue",
-          "label": "Organization Name",
-          "items": [],
-          "itemsUrl": []
-        },
-        {
-            "type": "textbox",
-            "name": "jobTitleCode",
-            "id": "jobTitleCodeId",
-            "value": "",
-            "label": "Job Title Code",
-            "placeholder": "Placeholder",
-            "datatype": "Text"
-        },
-        {
-            "type": "textbox",
-            "name": "jobTitleName",
-            "id": "jobTitleNameId",
-            "label" : "Job Title Name",
-            "value": "",
-            "placeholder": "Placeholder",
-            "datatype": "Text"
-        },
-        {
-            "type": "textbox",
-            "name": "descr",
-            "id": "descrId",
-            "value": "",
-            "label": "Description",
-            "placeholder": "Placeholder",
-            "datatype": "Text"
-        },
-        {
-            "type": "textbox",
-            "name": "mrJobPositionLvl",
-            "id": "posLevelId",
-            "value": "",
-            "label": "Position Level",
-            "placeholder": "Placeholder",
-            "datatype": "Text"
+          "type": "edit",
+          "path": "/organization/refjobtitle/add",
+          "param": [
+            {
+              "type": "refJobTitleId",
+              "property": "refJobTitleId"
+            },
+            {
+              "type": "param",
+              "property": "edit"
+            }
+          ]
         }
-    ]
+      ]
+    }
+  ]
 }

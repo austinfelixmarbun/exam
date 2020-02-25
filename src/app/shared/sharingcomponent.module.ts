@@ -22,11 +22,6 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
 import { ShowErrorsComponent } from '../test-new/show-errors.component';
-<<<<<<< HEAD
-
-=======
->>>>>>> origin
-
 
 @NgModule({
     exports: [
@@ -41,13 +36,8 @@ import { ShowErrorsComponent } from '../test-new/show-errors.component';
         LookupgenericComponent,
         UcpagingComponent,
         ViewgenericComponent,
-<<<<<<< HEAD
         LookupgenericComponent,
         ShowErrorsComponent
-=======
-    LookupgenericComponent,
-    ShowErrorsComponent
->>>>>>> origin
     ],
     imports: [
         FormsModule,
@@ -74,13 +64,8 @@ import { ShowErrorsComponent } from '../test-new/show-errors.component';
         LookupgenericComponent,
         UcpagingComponent,
         ViewgenericComponent,
-<<<<<<< HEAD
         LookupgenericComponent,
         ShowErrorsComponent
-=======
-      LookupgenericComponent,
-      ShowErrorsComponent
->>>>>>> origin
     ]
 })
 

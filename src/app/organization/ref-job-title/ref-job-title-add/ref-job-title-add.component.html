@@ -1,89 +1,49 @@
+
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
-      <div class="card-header header-title">
-        <div class="row">
-          <div class="col-md-8">
-            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} JOB TITLE </h4>
-          </div>
-          <div class="col-md-4" style="text-align-last: right">
-            <button type="button" class="backButton" [routerLink]="['/organization/refjobtitle']" translate>
-              <i class="ft-arrow-left"></i> Back
-            </button>
-          </div>
-        </div>
-      </div>
       <div class="px-3">
-        <form class="form form-horizontal" name="RefJobTitleForm" #RefJobTitleForm="ngForm" novalidate
-          (ngSubmit)="RefJobTitleForm.form.valid && SaveForm(RefJobTitleForm)">
-          <div class="form-body">
-            <h4 class="form-section card-title"><i class="ft-file-text"></i> Job Title Information</h4>
-            <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="jobTitleCode">Job Title Code </label>
-              <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="jobTitleCode" [(ngModel)]="jobTitleCode"
-                  #JobTitleCode="ngModel"
-                  [ngClass]="{ 'is-invalid': RefJobTitleForm.submitted && JobTitleCode.invalid }"
-                  [attr.disabled]="pageType == 'edit' ? true : null" required>
-                <div *ngIf="RefJobTitleForm.submitted && JobTitleCode.invalid" class="invalid-feedback">
-                  <div *ngIf="JobTitleCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
+        <div class="addEdit">
+          <form class="form form-horizontal" [formGroup]="RefJobTitleForm" (ngSubmit)="RefJobTitleForm.valid && SaveForm()"
+                #enjiForm="ngForm">
+            <div class="form-body">
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Job Title Information</h4>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Job Title Code </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="JobTitleCode"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.JobTitleCode.invalid }">
+                  <show-errors [control]="RefJobTitleForm.controls.JobTitleCode" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Job Title Name </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="JobTitleName"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.JobTitleName.invalid }">
+                  <show-errors [control]="RefJobTitleForm.controls.JobTitleName" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Description </label>
+                <div class="col-md-9">
+                  <textarea type="text" class="form-control adInsInput" formControlName="Descr"
+                            [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.Descr.invalid }"></textarea>
+                  <show-errors [control]="RefJobTitleForm.controls.Descr" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="jobTitleName">Job Title Name </label>
-              <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="jobTitleName" [(ngModel)]="jobTitleName"
-                  #JobTitleName="ngModel"
-                  [ngClass]="{ 'is-invalid': RefJobTitleForm.submitted && JobTitleName.invalid }" required>
-                <div *ngIf="RefJobTitleForm.submitted && JobTitleName.invalid" class="invalid-feedback">
-                  <div *ngIf="JobTitleName.errors.required" class="adInsReqMsg" translate>This field is required</div>
-                </div>
-              </div>
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/organization/refjobtitle']"
+                      translate>
+                <i class="ft-x"></i> Back
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
             </div>
-            <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="refOrgId">Organization Level </label>
-              <div class="col-md-9">
-                <select id="refOrgId" class="form-control adInsInput" name="refOrgId" [(ngModel)]="refOrgId"
-                  #RefOrgId="ngModel" required>
-                  <option *ngFor="let ro of allRefOrg" value="{{ro.refOrgId}}">{{ro.orgName}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="mrJobPositionLvl">Position Level </label>
-              <div class="col-md-9">
-                <select id="mrJobPositionLvl" class="form-control adInsInput" name="mrJobPositionLvl"
-                  [(ngModel)]="mrJobPositionLvl" #MrJobPositionLvl="ngModel" required>
-                  <option *ngFor="let pos of allJobPosition" value="{{pos.key}}">{{pos.value}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="descr">Description </label>
-              <div class="col-md-9">
-                <textarea rows="5" class="form-control adInsInput" name="descr" [(ngModel)]="descr"
-                  #Descr="ngModel"></textarea>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="isInternal">Active Status </label>
-              <div class="col-md-9">
-                <input class="border-primary" type="checkbox" [ngModel]="isInternal" data-md-icheck
-                  (change)="toggleVisibility($event)" name="isInternal">
-              </div>
-            </div>
-          </div>
-          <div class="form-actions right">
-            <!-- <button *ngIf="pageType == 'edit'" type="button" class="btn btn-raised btn-warning mr-1"
-              [routerLink]="['/organization/refjobtitle']">
-              <i class="fa fa-arrow-circle-left"></i> Back
-            </button> d-->
-            <button type="submit" class="btn btn-raised btn-primary">
-              <i class="fa fa-check-square-o"></i> Save
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
