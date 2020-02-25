@@ -21,13 +21,10 @@ export class CurrencyAddComponent implements OnInit {
   getUrl: any;
   addUrl: any;
   editUrl: any;
-
   RefCurrForm = this.fb.group({
-    CurrCode: ['', [Validators.required, Validators.maxLength(50)]],
+    CurrCode: ['', [Validators.required, Validators.maxLength(5)]],
     CurrName: ['', [Validators.required, Validators.maxLength(100)]],
-    RoundedAmt: ['', Validators.required],
-    MinRefundAmt: ['', Validators.required],
-    RegRptCode: [''],
+    RegRptCode: ['', [Validators.required, Validators.maxLength(100)]],
     IsActive: [true]
   });
 
@@ -49,6 +46,7 @@ export class CurrencyAddComponent implements OnInit {
 
   ngOnInit() {
     if (this.pageType == "edit") {
+      this.RefCurrForm.controls["CurrCode"].disable();
       this.currObj = new CurrObj();
       this.currObj.RefCurrId = this.refCurrId;
       this.http.post(this.getUrl, this.currObj).subscribe(
@@ -58,8 +56,6 @@ export class CurrencyAddComponent implements OnInit {
           this.RefCurrForm.patchValue({
             CurrCode: this.resultData.CurrCode,
             CurrName: this.resultData.CurrName,
-            RoundedAmt: this.resultData.RoundedAmt,
-            MinRefundAmt: this.resultData.MinRefundAmt,
             RegRptCode: this.resultData.RegRptCode,
             IsActive: this.resultData.IsActive
           });
@@ -74,24 +70,36 @@ export class CurrencyAddComponent implements OnInit {
   }
 
   SaveForm() {
-    this.currObj = new CurrObj();
-    this.currObj = this.RefCurrForm.value;    
     if (this.pageType == "add") {
+      this.currObj = new CurrObj();
+      this.currObj.CurrCode = this.RefCurrForm.controls["CurrCode"].value
+      this.currObj.CurrName = this.RefCurrForm.controls["CurrName"].value;
+      this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
+      this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.http.post(this.addUrl, this.currObj).subscribe(
         response => {
-          this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/commonSetting/currency/paging"]);
+          console.log(response);
+          if(response["StatusCode"] != '200'){
+            this.toastr.errorMessage(response["Message"]);
+          }else{
+            this.toastr.successMessage(response["Message"]);
+            this.router.navigate(["/commonSetting/currency/paging"]);
+          }
         },
         error => {
           console.log(error);
         }
       );
     } else {
+      this.currObj = this.resultData;
       this.currObj.RefCurrId = this.refCurrId;
-      this.currObj.RowVersion = this.resultData.RowVersion;
+      this.currObj.CurrName = this.RefCurrForm.controls["CurrName"].value;
+      this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
+      this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.http.post(this.editUrl, this.currObj).subscribe(
         response => {
-          this.toastr.successMessage(response["message"]);
+          console.log(response);
+          this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/commonSetting/currency/paging"]);
         },
         error => {

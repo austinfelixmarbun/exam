@@ -24,7 +24,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
   resultData: any;
 
   GeneralSettingForm = this.fb.group({
-    GsCode: ['', [Validators.required, Validators.maxLength(50)]],
+    GsCode: [{disabled: true, value: ''}],
     GsName: ['', [Validators.required, Validators.maxLength(100)]],
     GsValue: ['', [Validators.required, Validators.maxLength(3000)]],
     GsDescr: ['', Validators.maxLength(4000)]
@@ -57,6 +57,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.httpClient.post(this.getUrl, this.gsObj).subscribe(
       (response) => {
         this.resultData = response;
+        console.log(this.resultData);
         this.GeneralSettingForm.patchValue({
           GsCode: this.resultData.GsCode,
           GsName: this.resultData.GsName,
@@ -70,15 +71,15 @@ export class GeneralSettingAddEditComponent implements OnInit {
     ); 
   }
 
-  Save(): void {
-    this.gsObj = new GeneralSettingObj();
-    this.gsObj = this.GeneralSettingForm.value;    
-    
+  SaveForm(): void {
+    this.gsObj = this.resultData;
     this.gsObj.GeneralSettingId = this.generalSettingId;
-    this.gsObj.RowVersion = this.resultData.RowVersion;
+    this.gsObj.GsName = this.GeneralSettingForm.controls["GsName"].value;
+    this.gsObj.GsValue = this.GeneralSettingForm.controls["GsValue"].value;
+    this.gsObj.GsDescr = this.GeneralSettingForm.controls["GsDescr"].value;
     this.httpClient.post(this.editUrl, this.gsObj).subscribe(
       response => {
-        this.service.successMessage(response["message"]);
+        this.service.successMessage(response["Message"]);
         this.router.navigate(["/commonSetting/generalSetting"]);
       },
       error => {
