@@ -23,10 +23,10 @@ export class AdInsConstant {
 
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
-  public static AddGeneralSetting = "/GeneralSetting/AddGeneralSetting";
-  public static EditGeneralSetting = "/GeneralSetting/EditGeneralSetting";
+  public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
+  public static EditGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/EditGeneralSetting";
   public static GetGeneralSettingPaging = "/GeneralSetting/GetGeneralSettingPaging";
-  public static GetGeneralSettingById = "/GeneralSetting/GetGeneralSettingById";
+  public static GetGeneralSettingById = environment.FoundationR3Url + "/GeneralSetting/GetGeneralSettingById";
   public static GetGeneralSettingValue = "/GeneralSetting/GetGeneralSettingValue";
 
 
@@ -141,6 +141,7 @@ export class AdInsConstant {
   public static EditRefRole = "/UserManagement/EditRefRole";
   public static DeleteRefRole = "/UserManagement/DeleteRefRole";
   public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
+  public static GetRefRoleByCode = environment.FoundationR3Url + "/RefRole/GetRefRoleByCode";
   public static GetActiveRefRoleByRefRoleId = "/RefRole/GetActiveRefRoleByRefRoleId";
   public static GetRefRole = "/RefRole/GetRefRole";
   public static GetListDataCurrentUser = "/UserManagement/GetListDataCurrentUser";
@@ -271,7 +272,9 @@ export class AdInsConstant {
   public static AddQueue = "http://R3App-Server/FOUNDATION/RabbitMq/AddQueue";
 
   //REF MODULE
-  public static GetListRefModuleKeyValue = "/RefModule/GetListRefModuleKeyValue";
+  public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
+  public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
+  public static GetListKeyValueById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
 
   //REF EMP LEAVE MANAGEMENT
   public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";

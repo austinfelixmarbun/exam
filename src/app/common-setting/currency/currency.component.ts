@@ -20,9 +20,9 @@ export class CurrencyComponent implements OnInit {
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/search/searchCurrency.json";
+    this.inputPagingObj._url = "./assets/ucpaging/searchCurrency.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.pagingJson = "./assets/search/searchCurrency.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCurrency.json";
   }
 }

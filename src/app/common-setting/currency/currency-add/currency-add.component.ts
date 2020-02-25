@@ -18,7 +18,7 @@ export class CurrencyAddComponent implements OnInit {
   refCurrId: any;
   currObj: CurrObj;
   resultData: any;
-  apiUrl: any;
+  getUrl: any;
   addUrl: any;
   editUrl: any;
 
@@ -32,7 +32,7 @@ export class CurrencyAddComponent implements OnInit {
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.apiUrl = AdInsConstant.GetRefCurrById;
+    this.getUrl = AdInsConstant.GetRefCurrById;
     this.addUrl = AdInsConstant.AddRefCurr;
     this.editUrl = AdInsConstant.EditRefCurr;
 
@@ -51,11 +51,9 @@ export class CurrencyAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.currObj = new CurrObj();
       this.currObj.RefCurrId = this.refCurrId;
-      this.http.post(this.apiUrl, this.currObj).subscribe(
+      this.http.post(this.getUrl, this.currObj).subscribe(
         response => {
           this.resultData = response;
-          console.log("Response: ");
-          console.log(response);
           this.refCurrId = this.resultData.RefCurrId;
           this.RefCurrForm.patchValue({
             CurrCode: this.resultData.CurrCode,
@@ -79,7 +77,6 @@ export class CurrencyAddComponent implements OnInit {
     this.currObj = new CurrObj();
     this.currObj = this.RefCurrForm.value;    
     if (this.pageType == "add") {
-      this.currObj.RowVersion = "";
       this.http.post(this.addUrl, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);

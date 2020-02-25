@@ -28,7 +28,6 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
 import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
 import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
-import { ShowErrorsComponent } from '../test-new/show-errors.component';
 
 @NgModule({
   imports: [
@@ -62,8 +61,7 @@ import { ShowErrorsComponent } from '../test-new/show-errors.component';
     OfficeZipcodeMemberAddComponent,
     OfficeZipcodeMemberPagingComponent,
     HolidayAddComponent,
-    CopyHolidaySchemeComponent,
-    ShowErrorsComponent
+    CopyHolidaySchemeComponent
   ],
   providers: [
     {

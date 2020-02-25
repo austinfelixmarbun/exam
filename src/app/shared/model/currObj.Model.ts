@@ -8,7 +8,7 @@ export class CurrObj {
     CofId: any;
     RegRptCode: any;
     LbppCode: any;
-  IsActive: any;
-  RowVersion: any;
+    IsActive: any;
+    RowVersion: any;
   constructor() { this.RefCurrId = 0; this.RowVersion = "" }
 }
