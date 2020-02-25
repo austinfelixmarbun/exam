@@ -4,7 +4,7 @@
   "component": [
     {
       "type": "textbox",
-      "name": "gsCode",
+      "name": "GS_CODE",
       "id": "gsCodeId",
       "value": "",
       "label": "General Setting Code",
@@ -13,7 +13,7 @@
     },
     {
       "type": "textbox",
-      "name": "gsName",
+      "name": "GS_NAME",
       "id": "gsNameId",
       "value": "",
       "label": "General Setting Name",
@@ -22,7 +22,7 @@
     },
     {
       "type": "textbox",
-      "name": "gsValue",
+      "name": "GS_VALUE",
       "id": "gsValueId",
       "value": "",
       "label": "General Setting Value",
@@ -32,13 +32,13 @@
     {
       "type": "dropdown",
       "datatype": "text",
-      "name": "moduleCode",
+      "name": "MODULE_CODE",
       "id": "moduleCodeId",
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": true,
       "isSelectOne": true,
-      "url": "https://localhost:5001/RefModule/GetListKeyValueByCode",
+      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefModule/GetListKeyValueByCode",
       "label": "Module Code",
       "items": [],
       "itemsUrl": []
