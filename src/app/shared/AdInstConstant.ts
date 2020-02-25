@@ -81,11 +81,11 @@ export class AdInsConstant {
 
   //REF-JOB-TITLE
   public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
-  public static AddRefJobTitle = "/OrganizationDefinition/AddRefJobTitle";
-  public static EditRefJobTitle = "/OrganizationDefinition/EditRefJobTitle";
+  public static AddRefJobTitle = environment.FoundationR3Url + "/RefJobTitle/AddRefJobTitle";
+  public static EditRefJobTitle = environment.FoundationR3Url + "/RefJobTitle/EditRefJobTitle";
   public static DeleteRefJobTitle = "/OrganizationDefinition/DeleteRefJobTitle";
   public static GetJobPositionLvl = "/OrganizationDefinition/GetJobPositionLvl";
-  public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
+  public static GetRefJobTitleById = environment.FoundationR3Url + "/RefJobTitle/GetRefJobTitleByRefJobTitleId";
 
   //ORG JOB TITLE
   public static GetOrgJobTitlePaging = "/OrganizationDefinition/GetOrgJobTitlePaging";

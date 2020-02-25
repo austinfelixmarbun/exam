@@ -21,6 +21,8 @@ import { ViewgenericComponent } from './UserControl/viewgeneric/viewgeneric.comp
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
+import { ShowErrorsComponent } from '../test-new/show-errors.component';
+
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { UcpagingModule } from '@adins/ucpaging';
         LookupgenericComponent,
         UcpagingComponent,
         ViewgenericComponent,
-        LookupgenericComponent
+        LookupgenericComponent,
+        ShowErrorsComponent
     ],
     imports: [
         FormsModule,
@@ -63,7 +66,8 @@ import { UcpagingModule } from '@adins/ucpaging';
         LookupgenericComponent,
         UcpagingComponent,
         ViewgenericComponent,
-        LookupgenericComponent
+        LookupgenericComponent,
+        ShowErrorsComponent
     ]
 })
 
