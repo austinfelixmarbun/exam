@@ -76,7 +76,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.GENERAL_SETTING_ID as generalSettingId,A.GS_CODE as gsCode,A.GS_NAME as gsName,A.GS_DESCR as gsDescr,A.GS_VALUE as gsValue, A.MODULE_CODE as moduleCode",
+    "select": "SELECT A.GS_CODE as gsCode,A.GENERAL_SETTING_ID as generalSettingId,A.GS_NAME as gsName,A.GS_DESCR as gsDescr,A.GS_VALUE as gsValue, A.MODULE_CODE as moduleCode",
     "from": "FROM GENERAL_SETTING A WITH(NOLOCK)"
   },
   "bodyList": [
