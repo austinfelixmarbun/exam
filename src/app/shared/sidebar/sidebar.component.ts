@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ContextMenuComponent } from 'ngx-contextmenu';
+import { ROUTES } from './sidebar-routes.config';
 
 declare var $: any;
 
@@ -35,8 +36,8 @@ export class SidebarComponent implements OnInit {
         //         this.menuItems = data;
         //     }
         //     );
-        //this.menuItems = ROUTES.filter(menuItem => menuItem);
-        this.menuItems = JSON.parse(localStorage.getItem("Menu"));
+        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        // this.menuItems = JSON.parse(localStorage.getItem("Menu"));
         //this.menu = JSON.parse(localStorage.getItem("Menu"));
     }
 

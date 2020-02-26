@@ -83,6 +83,7 @@ export class Dummy3Component implements OnInit {
     }
     else {
       this.bankObj.refBankId = "0";
+      this.bankObj["RowVersion"] = "";
       this.http.post("http://r3app-server.ad-ins.com/FOUNDATION_R3/RefBank/AddRefbankAsync", this.bankObj).subscribe(
         (response) => {
           console.log(response);
