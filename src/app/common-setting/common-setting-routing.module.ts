@@ -198,7 +198,6 @@ const routes: Routes = [
           title: 'District Add Edit'
         },
       },
-      },
       {
         path: 'refStatus/paging',
         component: RefStatusPagingComponent,

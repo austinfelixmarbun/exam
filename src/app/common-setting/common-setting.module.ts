@@ -76,8 +76,7 @@ import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-sta
     ProvinceComponent,
     ProvinceAddEditComponent,
     DistrictComponent,
-    DistrictAddEditComponent
-    EconomicSectorAddEditComponent,
+    DistrictAddEditComponent,
     RefStatusPagingComponent
   ],
   providers: [
