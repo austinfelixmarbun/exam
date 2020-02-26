@@ -1,11 +1,11 @@
 export class GeneralSettingObj {
-  generalSettingId: any;
-  gsCode: any;
-  gsName: any;
-  gsValue: any;
-  gsDescr: any;
-  refModuleId: any;
-  moduleCode: any;
-
-  constructor() { this.generalSettingId = 0; }
+  GeneralSettingId: any;
+  GsCode: any;
+  GsName: any;
+  GsValue: any;
+  GsDescr: any;
+  ModuleCode: any;
+  RoleCode: any;
+  RowVersion: any;
+  constructor() { this.GeneralSettingId = 0; this.RowVersion = ""}
 }

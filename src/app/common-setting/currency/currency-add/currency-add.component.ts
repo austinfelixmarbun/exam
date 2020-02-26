@@ -18,21 +18,18 @@ export class CurrencyAddComponent implements OnInit {
   refCurrId: any;
   currObj: CurrObj;
   resultData: any;
-  apiUrl: any;
+  getUrl: any;
   addUrl: any;
   editUrl: any;
-
   RefCurrForm = this.fb.group({
-    CurrCode: ['', [Validators.required, Validators.maxLength(50)]],
+    CurrCode: ['', [Validators.required, Validators.maxLength(5)]],
     CurrName: ['', [Validators.required, Validators.maxLength(100)]],
-    RoundedAmt: ['', Validators.required],
-    MinRefundAmt: ['', Validators.required],
-    RegRptCode: [''],
+    RegRptCode: ['', [Validators.required, Validators.maxLength(100)]],
     IsActive: [true]
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.apiUrl = AdInsConstant.GetRefCurrById;
+    this.getUrl = AdInsConstant.GetRefCurrById;
     this.addUrl = AdInsConstant.AddRefCurr;
     this.editUrl = AdInsConstant.EditRefCurr;
 
@@ -49,19 +46,15 @@ export class CurrencyAddComponent implements OnInit {
 
   ngOnInit() {
     if (this.pageType == "edit") {
+      this.RefCurrForm.controls["CurrCode"].disable();
       this.currObj = new CurrObj();
       this.currObj.RefCurrId = this.refCurrId;
-      this.http.post(this.apiUrl, this.currObj).subscribe(
+      this.http.post(this.getUrl, this.currObj).subscribe(
         response => {
           this.resultData = response;
-          console.log("Response: ");
-          console.log(response);
-          this.refCurrId = this.resultData.RefCurrId;
           this.RefCurrForm.patchValue({
             CurrCode: this.resultData.CurrCode,
             CurrName: this.resultData.CurrName,
-            RoundedAmt: this.resultData.RoundedAmt,
-            MinRefundAmt: this.resultData.MinRefundAmt,
             RegRptCode: this.resultData.RegRptCode,
             IsActive: this.resultData.IsActive
           });
@@ -76,25 +69,30 @@ export class CurrencyAddComponent implements OnInit {
   }
 
   SaveForm() {
-    this.currObj = new CurrObj();
-    this.currObj = this.RefCurrForm.value;    
     if (this.pageType == "add") {
-      this.currObj.RowVersion = "";
+      this.currObj = new CurrObj();
+      this.currObj.CurrCode = this.RefCurrForm.controls["CurrCode"].value
+      this.currObj.CurrName = this.RefCurrForm.controls["CurrName"].value;
+      this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
+      this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.http.post(this.addUrl, this.currObj).subscribe(
         response => {
-          this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/commonSetting/currency/paging"]);
+            this.toastr.successMessage(response["Message"]);
+            this.router.navigate(["/commonSetting/currency/paging"]);      
         },
         error => {
           console.log(error);
         }
       );
     } else {
+      this.currObj = this.resultData;
       this.currObj.RefCurrId = this.refCurrId;
-      this.currObj.RowVersion = this.resultData.RowVersion;
+      this.currObj.CurrName = this.RefCurrForm.controls["CurrName"].value;
+      this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
+      this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.http.post(this.editUrl, this.currObj).subscribe(
         response => {
-          this.toastr.successMessage(response["message"]);
+          this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/commonSetting/currency/paging"]);
         },
         error => {

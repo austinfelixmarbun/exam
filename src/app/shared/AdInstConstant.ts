@@ -23,10 +23,10 @@ export class AdInsConstant {
 
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
-  public static AddGeneralSetting = "/GeneralSetting/AddGeneralSetting";
-  public static EditGeneralSetting = "/GeneralSetting/EditGeneralSetting";
+  public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
+  public static EditGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/EditGeneralSetting";
   public static GetGeneralSettingPaging = "/GeneralSetting/GetGeneralSettingPaging";
-  public static GetGeneralSettingById = "/GeneralSetting/GetGeneralSettingById";
+  public static GetGeneralSettingById = environment.FoundationR3Url + "/GeneralSetting/GetGeneralSettingById";
   public static GetGeneralSettingValue = "/GeneralSetting/GetGeneralSettingValue";
 
 
@@ -141,6 +141,7 @@ export class AdInsConstant {
   public static EditRefRole = "/UserManagement/EditRefRole";
   public static DeleteRefRole = "/UserManagement/DeleteRefRole";
   public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
+  public static GetRefRoleByCode = environment.FoundationR3Url + "/RefRole/GetRefRoleByCode";
   public static GetActiveRefRoleByRefRoleId = "/RefRole/GetActiveRefRoleByRefRoleId";
   public static GetRefRole = "/RefRole/GetRefRole";
   public static GetListDataCurrentUser = "/UserManagement/GetListDataCurrentUser";
@@ -252,6 +253,20 @@ export class AdInsConstant {
   public static EditRefCurr = environment.FoundationR3Url + "/RefCurr/EditRefCurr";
   public static GetRefCurrById = environment.FoundationR3Url + "/RefCurr/GetRefCurrById";
 
+  //REF ECONOMIC SECTOR
+
+  public static AddRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/AddRefEconomicSector";
+  public static EditRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/EditRefEconomicSector";
+  public static DeleteRefEconomicSector = "/RefEconomicSector/DeleteRefEconomicSector";
+  public static GetRefEconomicSectorById = environment.FoundationR3Url + "/RefEconomicSector/GetRefEconomicSectorById";
+
+    //REF PROV DISTRICT
+
+    public static AddRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/AddRefProvDistrict";
+    public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
+    public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
+    public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
+
   //GENERIC
   public static GetObjectBySQL = "/Generic/GetObjectBySQL";
   public static AddObjectBySQL = "/Generic/AddObjectBySQL";
@@ -271,7 +286,9 @@ export class AdInsConstant {
   public static AddQueue = "http://R3App-Server/FOUNDATION/RabbitMq/AddQueue";
 
   //REF MODULE
-  public static GetListRefModuleKeyValue = "/RefModule/GetListRefModuleKeyValue";
+  public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
+  public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
+  public static GetListKeyValueById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
 
   //REF EMP LEAVE MANAGEMENT
   public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";

@@ -18,6 +18,12 @@ import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-
 import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/office-zipcode-member-paging/office-zipcode-member-paging.component';
 import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
 import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
+import { EconomicSectorComponent } from './economic-sector/economic-sector-paging/economic-sector.component';
+import { EconomicSectorAddEditComponent } from './economic-sector/economic-sector-add-edit/economic-sector-add-edit.component';
+import { ProvinceComponent } from './prov-district/province-paging/province.component';
+import { ProvinceAddEditComponent } from './prov-district/province-add-edit/province-add-edit.component';
+import { DistrictComponent } from './prov-district/district-paging/district.component';
+import { DistrictAddEditComponent } from './prov-district/district-add-edit/district-add-edit.component';
 
 const routes: Routes = [
   {
@@ -148,7 +154,49 @@ const routes: Routes = [
         data: {
           title: 'office Zipcode Member Add'
         },
-      }
+      },
+      {
+        path: 'economicSector/paging',
+        component: EconomicSectorComponent,
+        data: {
+          title: 'Economic Sector Paging'
+        },
+      },
+      {
+        path: 'economicSector/detail',
+        component: EconomicSectorAddEditComponent,
+        data: {
+          title: 'Economic Sector Add Edit'
+        },
+      },
+      {
+        path: 'province/paging',
+        component: ProvinceComponent,
+        data: {
+          title: 'Province Paging'
+        },
+      },
+      {
+        path: 'province/detail',
+        component: ProvinceAddEditComponent,
+        data: {
+          title: 'Province Add Edit'
+        },
+      },
+      {
+        path: 'district/paging',
+        component: DistrictComponent,
+        data: {
+          title: 'District Paging'
+        },
+      },
+      {
+        path: 'district/detail',
+        component: DistrictAddEditComponent,
+        data: {
+          title: 'District Add Edit'
+        },
+      },
     ]
   }
 ];
