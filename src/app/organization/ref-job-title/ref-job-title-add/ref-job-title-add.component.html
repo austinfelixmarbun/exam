@@ -12,7 +12,8 @@
                 <label class="col-md-3  adInsLabel" translate>Job Title Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="JobTitleCode"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.JobTitleCode.invalid }">
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.JobTitleCode.invalid }"
+                         [attr.disabled]="pageType == 'edit' ? true : null">
                   <show-errors [control]="RefJobTitleForm.controls.JobTitleCode" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>

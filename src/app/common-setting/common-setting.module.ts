@@ -66,8 +66,7 @@ import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-sta
     HolidayAddComponent,
     CopyHolidaySchemeComponent,
     EconomicSectorComponent,
-    EconomicSectorAddEditComponent
-    CopyHolidaySchemeComponent,
+    EconomicSectorAddEditComponent,
     RefStatusPagingComponent
   ],
   providers: [
