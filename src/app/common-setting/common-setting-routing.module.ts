@@ -18,6 +18,7 @@ import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-
 import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/office-zipcode-member-paging/office-zipcode-member-paging.component';
 import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
 import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
+import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 
 const routes: Routes = [
   {
@@ -147,6 +148,13 @@ const routes: Routes = [
         component: OfficeZipcodeMemberAddComponent,
         data: {
           title: 'office Zipcode Member Add'
+        },
+      },
+      {
+        path: 'refStatus/paging',
+        component: RefStatusPagingComponent,
+        data: {
+          title: 'Ref Status Paging'
         },
       }
     ]
