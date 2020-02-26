@@ -77,13 +77,8 @@ export class CurrencyAddComponent implements OnInit {
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.http.post(this.addUrl, this.currObj).subscribe(
         response => {
-          console.log(response);
-          if(response["StatusCode"] != '200'){
-            this.toastr.errorMessage(response["Message"]);
-          }else{
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/commonSetting/currency/paging"]);
-          }
+            this.router.navigate(["/commonSetting/currency/paging"]);      
         },
         error => {
           console.log(error);
@@ -97,7 +92,6 @@ export class CurrencyAddComponent implements OnInit {
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.http.post(this.editUrl, this.currObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/commonSetting/currency/paging"]);
         },

@@ -1,0 +1,38 @@
+<!-- <div class="col-md-12 no-padding">
+--><div class="card">
+        <div class="card-body">
+            <div class="px-3">
+                <lib-ucSubsection [id]="'ProvinceInfoId'" [title]="'Province Info'" [panel]="'ProvinceInfo'">
+                </lib-ucSubsection>
+                <div class="form-body" id='ProvinceInfo'>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <label class="adInsLabel" name="ProvinceCode" translate>Province Code </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="adInsLabel" name="ProvinceCodeValue" translate>{{resultData?.ProvDistrictCode}}</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="adInsLabel" name="ProvinceName" translate>Province Name </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="adInsLabel" name="ProvinceNameValue" translate>{{resultData?.ProvDistrictName}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="ucSearch-Button-Right">
+        <span class="mr-1">
+            <button type="button" class="addButton" [routerLink]="['/commonSetting/province/paging']" translate>
+                <i class="ft-x"></i> Back
+            </button>
+            <button type="button" class="addButton" [routerLink]="['/commonSetting/district/detail']" [queryParams]="{parentId:parentId}" translate>
+                <i class="ft-plus-circle"></i> Add
+            </button>
+        </span>
+    </div>
+    <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
+<!-- </div> -->
+
