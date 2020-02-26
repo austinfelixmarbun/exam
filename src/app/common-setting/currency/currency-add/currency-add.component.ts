@@ -52,7 +52,6 @@ export class CurrencyAddComponent implements OnInit {
       this.http.post(this.getUrl, this.currObj).subscribe(
         response => {
           this.resultData = response;
-          this.refCurrId = this.resultData.RefCurrId;
           this.RefCurrForm.patchValue({
             CurrCode: this.resultData.CurrCode,
             CurrName: this.resultData.CurrName,
