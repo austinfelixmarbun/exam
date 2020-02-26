@@ -12,6 +12,6 @@ export class RefZipcodeObj {
     subZipcode:        any;
     refProvDistrictId: any;
     districtName:      any;
-    
+    RowVersion: any;
   constructor() { this.refZipcodeId = 0 }
 }

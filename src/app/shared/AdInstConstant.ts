@@ -155,10 +155,11 @@ export class AdInsConstant {
   public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
   public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
   public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
-  public static EditRefZipcode = "/RefZipcode/EditRefZipCode";
-  public static AddRefZipcode = "/RefZipcode/AddRefZipCode";
+  public static EditRefZipcode = environment.FoundationR3Url +"/RefZipcode/EditRefZipCode";
+  public static AddRefZipcode = environment.FoundationR3Url +"/RefZipcode/AddRefZipCode";
   public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode";
   public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
+  public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
 
   //OFFICE ZIPCODE MEMBER
   public static GetOfficeZipCodeMemberPaging = "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";

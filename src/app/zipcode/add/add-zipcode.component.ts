@@ -7,154 +7,124 @@ import { HttpClient } from '@angular/common/http';
 import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators, FormBuilder } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { LookupdistrictComponent } from '@adins/lookupdistrict';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { UcPagingObj } from '../../shared/model/UcPagingObj.Model';
 
 
 @Component({
-    selector: 'add-bank',
-    templateUrl: './add-zipcode.component.html',
-    providers: [NgbPaginationConfig, NGXToastrService]
+  selector: 'add-zipcode',
+  templateUrl: './add-zipcode.component.html',
+  providers: [NGXToastrService]
 })
 export class ZipcodeAddComponent implements OnInit {
-    @ViewChild(LookupdistrictComponent) lookupDistrict;
-    param: string;
-    inputLookupObj: any;
-    pageType:any;
+  pageType: string = "add";
+  refZipcodeId: any;
+  rzcObj: RefZipcodeObj;
+  resultData: any;
+  apiUrl: any;
+  addUrl: any;
+  editUrl: any;
+  getRefDistrictUrl: any;
+  inputPagingObj: any;
+  inputDistrictLookupObj;
 
-    businessUnitCode: string;
-    businessUnitName: string;
-    description: string;
-    activestatus: string;
-    result: any;
-    mode: string = "add";
-    apiUrl: any;
-    isActive: boolean = true;
-    settingUrl: string = environment.settingUrl;
-    zipcodeObj: RefZipcodeObj;
-    editUrl: any;
-    districtName: string;
-    idSelect: string;
-    jsonSelect: string;
-    provDistrictObj: RefProvDistrictObj;
-    urlGetProvDistrict: string;
+  RefZipCodeForm = this.fb.group({
+    AreaCode1: ['', [Validators.required, Validators.maxLength(50)]],
+    AreaCode2: ['', [Validators.required, Validators.maxLength(50)]],
+    City: ['', [Validators.required, Validators.maxLength(50)]],
+    Zipcode: ['', [Validators.required, Validators.maxLength(10)]],
+    SubZipcode: ['', Validators.maxLength(10)],
+    PhnArea: ['', Validators.maxLength(10)],
+    IsActive: ['', Validators.required]
+  });
 
-    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
-        this.route.queryParams.subscribe(params => {
-            this.param = params["refZipcodeId"];
-            this.mode = params["mode"];
-        })
-    }
 
-    ngOnInit() {
-        console.log("test");
-        
-        this.inputLookupObj = new InputLookupObj();
-        this.inputLookupObj.addCritInput = new Array();
-        this.inputLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
-        this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefProvDistrictPaging;
-        this.inputLookupObj.urlEnviPaging = environment.settingUrl;
-        this.inputLookupObj.pagingJson = "./assets/form-setting/districtPaging.json";
-        this.inputLookupObj.genericJson = "./assets/form-setting/districtGeneric.json";
-        var critDistrictParentId = new CriteriaObj();
-        critDistrictParentId.propName = "parent_id";
-        critDistrictParentId.DataType = "numeric";
-        critDistrictParentId.value = null;
-        critDistrictParentId.restriction = AdInsConstant.RestrictionIsNull;
-        this.inputLookupObj.addCritInput.push(critDistrictParentId);
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+    this.apiUrl = AdInsConstant.GetRefZipCodeById;
+    this.addUrl = AdInsConstant.AddRefZipcode;
+    this.editUrl = AdInsConstant.EditRefZipcode;
+    this.getRefDistrictUrl = AdInsConstant.GetPagingObjectBySQL;
 
-        var critDistrict = new CriteriaObj();
-        critDistrict.propName = "is_active";
-        critDistrict.value = "1";
-        critDistrict.restriction = AdInsConstant.RestrictionEq;
-        this.inputLookupObj.addCritInput.push(critDistrict);
-        
-        if (this.mode == "edit") {
-            this.apiUrl = this.settingUrl + AdInsConstant.GetRefZipCode;
-            this.urlGetProvDistrict = this.settingUrl + AdInsConstant.GetRefProvDistrictObj;
-            var zipcodeObj = new RefZipcodeObj();
-            this.provDistrictObj = new RefProvDistrictObj();
-            zipcodeObj.refZipcodeId = this.param;
-            this.http.post(this.apiUrl, zipcodeObj).subscribe(
-                (response) => {
-                    console.log("Success");
-                    console.log(response);
-                    this.result = response['returnObject'];
-                    console.log(this.result);
-                    if (this.result.isActive == "1") {
-                        this.isActive = true;
-                    }
-                    else {
-                        this.isActive = false;
-                    }
-                    this.provDistrictObj.refProvDistrictId = this.result.refProvDistrictId;
-                    this.http.post(this.urlGetProvDistrict, this.provDistrictObj).subscribe(
-                        (response) => {
-                            console.log(response);
-                            this.inputLookupObj.nameSelect = response["returnObject"].name;
-                            this.inputLookupObj.jsonSelect = response["returnObject"];
-                            this.inputLookupObj.idSelect = response["returnObject"].refProvDistrictId;
-                            this.lookupDistrict.msNewCatalogId = response["returnObject"].name;
-                        })
-                },
-                (error) => {
-                    console.log("Error");
-                    console.log(error);
-                }
-            );
+    this.route.queryParams.subscribe(params => {
+      if (params["param"] != null) {
+        this.pageType = params["param"];
+      }
+      if (params["refZipcodeId"] != null) {
+        this.refZipcodeId = params["refZipcodeId"];
+      }
+    });
+  }
+
+  ngOnInit() {
+
+    this.inputDistrictLookupObj = new InputLookupObj();
+    this.inputDistrictLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
+    this.inputDistrictLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputDistrictLookupObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputDistrictLookupObj.pagingJson = "./assets/lookup/lookupDistrict.json";
+    this.inputDistrictLookupObj.genericJson = "./assets/lookup/lookupDistrict.json";
+
+    if (this.pageType == "edit") {
+      this.rzcObj = new RefZipcodeObj();
+      this.rzcObj.refZipcodeId = this.refZipcodeId;
+      this.http.post(this.apiUrl, this.rzcObj).subscribe(
+        response => {
+          this.resultData = response;
+          console.log("Response: ");
+          console.log(response);
+          this.refZipcodeId = this.resultData.RefZipcodeId;
+          this.inputDistrictLookupObj.idSelect = this.resultData.RefProvDistrictId;
+          this.inputDistrictLookupObj.idSelect = this.resultData.RefProvDistrictId;
+          this.RefZipCodeForm.patchValue({
+            AreaCode1: this.resultData.AreaCode1,
+            AreaCode2: this.resultData.AreaCode2,
+            City: this.resultData.City,
+            Zipcode: this.resultData.Zipcode,
+            SubZipcode: this.resultData.SubZipcode,
+            RefProvDistrictId: this.resultData.RefProvDistrictId,
+            PhnArea: this.resultData.PhnArea,
+            IsActive: this.resultData.IsActive
+          });
+
+        },
+        error => {
+          console.log(error);
         }
-    }
-    Save(ZipcodeAddReqForm: NgForm, uclZipcode): void {
-        console.log(uclZipcode);
-        console.log(ZipcodeAddReqForm);
-        if (this.mode == "edit") {
-            this.editUrl = this.settingUrl + AdInsConstant.EditRefZipcode;
-            this.zipcodeObj = new RefZipcodeObj();
-            this.zipcodeObj = ZipcodeAddReqForm.value;
-            this.zipcodeObj.refProvDistrictId = uclZipcode.lookupInput.idSelect;
-            this.zipcodeObj.refZipcodeId = this.param;
-            if (this.isActive == false) {
-                this.zipcodeObj.isActive = "0";
-            }
-            else {
-                this.zipcodeObj.isActive = "1";
-            }
-            this.http.post(this.editUrl, this.zipcodeObj).subscribe(
-                (response) => {
-                    console.log(response);
-                    this.toastr.successMessage(response["message"]);
-                    this.router.navigateByUrl('/zipcode/paging');
-                },
-                (error) => {
-                    console.log(error);
-                });
-        }
-        else {
-            this.editUrl = this.settingUrl + AdInsConstant.AddRefZipcode;
-            this.zipcodeObj = new RefZipcodeObj();
-            this.zipcodeObj = ZipcodeAddReqForm.value;
-            this.zipcodeObj.refProvDistrictId = uclZipcode.lookupInput.idSelect;
-            this.zipcodeObj.refZipcodeId = "0";
-            if (this.isActive == false) {
-                this.zipcodeObj.isActive = "0";
-            }
-            else {
-                this.zipcodeObj.isActive = "1";
-            }
-            this.http.post(this.editUrl, this.zipcodeObj).subscribe(
-                (response) => {
-                    this.toastr.successMessage(response['message']);
-                    this.router.navigateByUrl('/zipcode/paging');
-                },
-                (error) => {
-                    console.log(error);
-                });
-        }
+      );
     }
 
-    toggleVisibility(e) {
-        this.isActive = e.target.checked;
+  }
+
+  SaveForm() {
+    this.rzcObj = new RefZipcodeObj();
+    this.rzcObj = this.RefZipCodeForm.value;
+    this.rzcObj.refProvDistrictId = this.inputDistrictLookupObj.jsonSelect.RefProvDistrictId;
+    if (this.pageType == "add") {
+      this.rzcObj.RowVersion = "";
+      this.http.post(this.addUrl, this.rzcObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["message"]);
+          this.router.navigate(["/zipcode/paging"]);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.rzcObj.refZipcodeId = this.refZipcodeId;
+      this.rzcObj.RowVersion = this.resultData.RowVersion;
+      this.http.post(this.editUrl, this.rzcObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["message"]);
+          this.router.navigate(["/zipcode/paging"]);
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
+  }
 }
