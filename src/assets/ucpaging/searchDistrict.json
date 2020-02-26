@@ -1,31 +1,31 @@
 {
-  "title": "Economic Sector",
+  "title": "District",
   "exportExcel": false,
   "component": [
     {
       "type": "textbox",
-      "name": "ECONOMIC_SECTOR_CODE",
-      "id": "economicSectorCodeId",
+      "name": "PROV_DISTRICT_CODE",
+      "id": "provDistrictCodeId",
       "value": "",
-      "label": "Economic Sector Code",
+      "label": "District Code",
       "placeholder": "Placeholder",
       "datatype": "text"
     },
     {
       "type": "textbox",
-      "name": "REG_RPT_CODE",
-      "id": "regRptCodeId",
+      "name": "DISTRICT_REG_RPT_CODE",
+      "id": "districtRegRptCodeId",
       "value": "",
-      "label": "Bi Code",
+      "label": "District Bl Code",
       "placeholder": "Placeholder",
       "datatype": "text"
     },
     {
       "type": "textbox",
-      "name": "ECONOMIC_SECTOR_NAME",
-      "id": "economicSectorNameId",
+      "name": "PROV_DISTRICT_NAME",
+      "id": "provDistrictNameId",
       "value": "",
-      "label": "Economic Sector Name",
+      "label": "District Name",
       "placeholder": "Placeholder",
       "datatype": "text"
     },
@@ -56,20 +56,20 @@
     {
       "type": "sort",
       "position": "left",
-      "label": "Economic Sector Code",
-      "name": "economicSectorCode"
+      "label": "District Code",
+      "name": "provDistrictCode"
     },
     {
       "type": "sort",
       "position": "left",
-      "label": "Economic Sector Name",
-      "name": "economicSectorName"
+      "label": "District Name",
+      "name": "provDistrictName"
     },
     {
       "type": "sort",
       "position": "left",
-      "label": "Bi Code",
-      "name": "regRptCode"
+      "label": "District Bl Code",
+      "name": "districtRegRptCode"
     },
     {
       "type": "sort",
@@ -84,24 +84,24 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.REF_ECONOMIC_SECTOR_ID as refEconomicSectorId,A.ECONOMIC_SECTOR_CODE as economicSectorCode,A.ECONOMIC_SECTOR_NAME as economicSectorName,A.REG_RPT_CODE as regRptCode,A.IS_ACTIVE as isActive",
-    "from": "FROM REF_ECONOMIC_SECTOR A WITH(NOLOCK)"
-  },
+    "select": "SELECT A.REF_PROV_DISTRICT_ID as refProvDistrictId,A.PROV_DISTRICT_CODE as provDistrictCode,A.PROV_DISTRICT_NAME as provDistrictName,A.DISTRICT_REG_RPT_CODE as districtRegRptCode,A.IS_ACTIVE as isActive,A.TYPE as type,A.PARENT_ID as parentId",
+    "from": "FROM REF_PROV_DISTRICT A WITH(NOLOCK)"
+    },
   "bodyList": [
     {
       "type": "text",
       "position": "left",
-      "property": "economicSectorCode"
+      "property": "provDistrictCode"
     },
     {
       "type": "text",
       "position": "left",
-      "property": "economicSectorName"
+      "property": "provDistrictName"
     },
     {
       "type": "text",
       "position": "left",
-      "property": "regRptCode"
+      "property": "districtRegRptCode"
     },
     {
       "type": "boolean",
@@ -114,11 +114,15 @@
       "action": [
         {
           "type": "edit",
-          "path": "/commonSetting/economicSector/detail",
+          "path": "/commonSetting/district/detail",
           "param": [
             {
-              "type": "refEconomicSectorId",
-              "property": "refEconomicSectorId"
+              "type": "refProvDistrictId",
+              "property": "refProvDistrictId"
+            },
+            {
+              "type": "parentId",
+              "property": "parentId"
             },
             {
               "type": "param",
@@ -128,7 +132,7 @@
         },
         {
           "type": "delete",
-          "property": "refEconomicSectorId"
+          "property": "refProvDistrictId"
         }
       ]
     }

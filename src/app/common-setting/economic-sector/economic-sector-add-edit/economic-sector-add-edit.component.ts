@@ -76,12 +76,9 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.refEconomicSectorObj.IsActive = this.RefEconomicSectorForm.controls["IsActive"].value;
       this.http.post(this.addUrl, this.refEconomicSectorObj).subscribe(
         response => {
-          if(response["StatusCode"] != '200'){
-            this.toastr.errorMessage(response["Message"]);
-          }else{
             this.toastr.successMessage(response["Message"]);
             this.router.navigate(["/commonSetting/economicSector/paging"]);
-          }
+          
         },
         error => {
           console.log(error);

@@ -258,7 +258,15 @@ export class AdInsConstant {
 
   public static AddRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/AddRefEconomicSector";
   public static EditRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/EditRefEconomicSector";
+  public static DeleteRefEconomicSector = "/RefEconomicSector/DeleteRefEconomicSector";
   public static GetRefEconomicSectorById = environment.FoundationR3Url + "/RefEconomicSector/GetRefEconomicSectorById";
+
+    //REF PROV DISTRICT
+
+    public static AddRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/AddRefProvDistrict";
+    public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
+    public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
+    public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
 
   //GENERIC
   public static GetObjectBySQL = "/Generic/GetObjectBySQL";

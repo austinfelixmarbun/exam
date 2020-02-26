@@ -30,6 +30,11 @@ import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.co
 import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
 import { EconomicSectorComponent } from './economic-sector/economic-sector-paging/economic-sector.component';
 import { EconomicSectorAddEditComponent } from './economic-sector/economic-sector-add-edit/economic-sector-add-edit.component';
+import { ProvinceComponent } from './prov-district/province-paging/province.component';
+import { ProvinceAddEditComponent } from './prov-district/province-add-edit/province-add-edit.component';
+import { DistrictComponent } from './prov-district/district-paging/district.component';
+import { DistrictAddEditComponent } from './prov-district/district-add-edit/district-add-edit.component';
+import { UcSubsectionModule } from '@adins/uc-subsection';
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 
 @NgModule({
@@ -44,7 +49,8 @@ import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-sta
     SharingComponentModule,
     ReactiveFormsModule,
     UcpagingModule,
-    UclookupgenericModule
+    UclookupgenericModule,
+    UcSubsectionModule
   ],
   declarations: [
     MasterPagingComponent,
@@ -66,6 +72,11 @@ import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-sta
     HolidayAddComponent,
     CopyHolidaySchemeComponent,
     EconomicSectorComponent,
+    EconomicSectorAddEditComponent,
+    ProvinceComponent,
+    ProvinceAddEditComponent,
+    DistrictComponent,
+    DistrictAddEditComponent
     EconomicSectorAddEditComponent,
     RefStatusPagingComponent
   ],

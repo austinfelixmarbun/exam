@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { DecimalPipe } from "@angular/common";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
+import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 
 @Component({
   selector: "app-general-setting-paging",
@@ -11,6 +12,7 @@ import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
 })
 export class GeneralSettingPagingComponent implements OnInit {
   inputPagingObj: any;
+  arrCrit: any;
 
   constructor() { }
 
@@ -20,5 +22,13 @@ export class GeneralSettingPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchGeneralSetting.json";
+
+    this.arrCrit = new Array();
+    var critObj = new CriteriaObj();
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'IS_UPDATEABLE';
+    critObj.value = '1';
+    this.arrCrit.push(critObj);
+    this.inputPagingObj.addCritInput = this.arrCrit;
   }
 }

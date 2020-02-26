@@ -120,14 +120,16 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     //Ini Error kalau sudah masuk sampai ke Back End
-                    if (event.body.isError == true) {
-                        let data = {};
-                        data = {
-                            reason: event.body.message ? event.body.message : '',
-                            status: event.body.statusCode
-                        };
-                        this.toastr.error(data['reason'], 'Status: ' + data['status'], { "tapToDismiss": true });
-                        return;
+                    if(event.body.StatusCode != undefined) {
+                        if (event.body.StatusCode != '200') {
+                            let data = {};
+                            data = {
+                                reason: event.body.Message ? event.body.Message : '',
+                                status: event.body.StatusCode
+                            };
+                            this.toastr.error(data['reason'], 'Status: ' + data['status'], { "tapToDismiss": true });
+                            return;
+                        }
                     }
                     else {
                         //Kalau pake Http Get yang bukan ke Backend sendiri g punya token, jadi g boleh asal di replace
