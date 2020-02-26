@@ -1,6 +1,6 @@
 {
   "title": "Master",
-  "exportExcel": true,
+  "exportExcel": false,
   "component": [
     {
       "type": "dropdown",
@@ -11,7 +11,7 @@
       "datatype": "text",
       "isFromURL": true,
       "isSelectOne": true,
-      "url": "http://r3app-server/setting/RefMaster/GetRefMasterTypeKeyValueUserSetting",
+      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMasterType/GetListActiveRefMasterType",
       "label": "Master Type",
       "criteriaPropName" : "typeCode",
       "criteriaPropValue" : "TYPE_CODE",
@@ -37,15 +37,6 @@
       "datatype": "text"
     },
     {
-      "type": "textbox",
-      "name": "reg_Rpt_Code",
-      "id": "regRptCode",
-      "value": "",
-      "label": "BI Code",
-      "placeholder": "Placeholder",
-      "datatype": "text"
-    },
-    {
       "type": "dropdown",
       "name": "is_Active",
       "datatype": "text",
@@ -54,19 +45,143 @@
       "placeholder": "Placeholder",
       "isFromURL": false,
       "isSelectOne": false,
-      "url": "https://api.myjson.com/bins/ld6e8",
+      "url": "",
       "label": "Active Status",
       "items": [
         {
-          "key": "Yes",
+          "key": "1",
           "value": "Yes"
         },
         {
-          "key": "No",
+          "key": "0",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    },
+    {
+      "type": "numeric",
+      "name": "seq_No",
+      "id": "seqNoId",
+      "value": "0",
+      "label": "Sequence No",
+      "placeholder": "Placeholder",
+      "datatype": "numeric"
+    },
+    {
+      "type": "dropdown",
+      "name": "is_System",
+      "datatype": "text",
+      "id": "isSystemId",
+      "value": "",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "",
+      "label": "System",
+      "items": [
+        {
+          "key": "1",
+          "value": "Yes"
+        },
+        {
+          "key": "0",
           "value": "No"
         }
       ],
       "itemsUrl": []
     }
+  ],
+  "querystring": { 
+    "select": "SELECT REF_MASTER_ID AS refMasterId, MASTER_CODE AS masterCode, DESCR AS descr, SEQ_NO AS seqNo, IS_ACTIVE AS isActive, IS_SYSTEM AS isSystem",
+    "from": "FROM REF_MASTER WITH(NOLOCK)" 
+  },
+  "headerList" : [ 
+      {
+          "type" : "sort", 
+          "position" : "left", 
+          "label" : "Master Code",
+          "name" : "masterCode" 
+      },
+      {
+          "type" : "sort", 
+          "position" : "left", 
+          "label" : "Description", 
+          "name" : "descr" 
+      },
+      {
+          "type" : "sort", 
+          "position" : "left", 
+          "label" : "Sequence No", 
+          "name" : "seqNo" 
+      },
+      {
+          "type" : "sort", 
+          "position" : "left", 
+          "label" : "Active", 
+          "name" : "isActive"
+      },
+      {
+          "type" : "sort", 
+          "position" : "left", 
+          "label" : "System", 
+          "name" : "isSystem"
+      },
+      {
+          "type" : "label",
+          "position" : "center",
+          "label" : "Action"
+      }
+  ],
+  "bodyList" : [
+      {
+          "type" : "text", 
+          "position" : "left", 
+          "property" : "masterCode" 
+      },
+      {
+          "type" : "text", 
+          "position" : "left", 
+          "property" : "descr" 
+      },
+      {
+          "type" : "text", 
+          "position" : "left", 
+          "property" : "seqNo" 
+      },
+      {
+          "type" : "boolean", 
+          "position" : "center",
+          "property" : "isActive"
+      },
+      {
+          "type" : "boolean", 
+          "position" : "center",
+          "property" : "isSystem"
+      },
+      {
+          "type" : "action", 
+          "position" : "center",
+          "action" : [ 
+              {
+                  "type" : "edit", 
+                  "path" : "/commonSetting/master/detail", 
+                  "param" : [ 
+                      {
+                        "type" : "refMasterId", 
+                        "property" : "refMasterId" 
+                      },
+                      {
+                        "type": "param",
+                        "property": "edit"
+                      }
+                  ]
+              },
+              {
+                  "type" : "delete", 
+                  "property" : "refMasterId" 
+              }
+          ]
+      }
   ]
 }
