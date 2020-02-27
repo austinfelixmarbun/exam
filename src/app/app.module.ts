@@ -101,7 +101,7 @@ export class AppModule {
         this.http.post(url, null).subscribe(
             (response) => {
                 var datePipe = new DatePipe("en-US");
-                var value = datePipe.transform(response["returnObject"], 'dd-MM-yyyy');
+                var value = datePipe.transform(response["returnObject"], 'yyyy/MM/dd');
                 localStorage.setItem("BusinessDate", value);
             },
             (error) => {
