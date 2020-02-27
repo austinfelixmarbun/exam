@@ -7,16 +7,16 @@
                 #enjiForm="ngForm">
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Economic Sector {{this.pageType}}</h4>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel adins-required" translate>Economic Sector Code </label>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" translate>Economic Sector Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="EconomicSectorCode"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEconomicSectorForm.controls.EconomicSectorCode.invalid }">
                   <show-errors [control]="RefEconomicSectorForm.controls.EconomicSectorCode" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel adins-required" translate>Economic Sector Name </label>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Economic Sector Name </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="EconomicSectorName"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEconomicSectorForm.controls.EconomicSectorName.invalid }">
@@ -24,7 +24,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3  adInsLabel adins-required" translate>Bl Code </label>
+                <label class="col-md-3  adInsLabel" translate>Bl Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="RegRptCode">
                 </div>

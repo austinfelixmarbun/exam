@@ -6,7 +6,7 @@
         #enjiForm="ngForm">
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> General Setting Edit</h4>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="gsCode">General Setting Code</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" formControlName="GsCode"
@@ -14,7 +14,7 @@
                 <show-errors [control]="GeneralSettingForm.controls.GsCode" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="gsName">General Setting Name</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" formControlName="GsName"
@@ -23,7 +23,7 @@
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="gsValue">General Setting Value</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" formControlName="GsValue"

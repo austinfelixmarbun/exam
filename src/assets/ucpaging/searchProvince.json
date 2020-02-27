@@ -74,7 +74,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.REF_PROV_DISTRICT_ID as refProvDistrictId,A.PROV_DISTRICT_CODE as provDistrictCode,A.PROV_DISTRICT_NAME as provDistrictName,A.IS_ACTIVE as isActive,A.PARENT_ID as parentId,A.TYPE as type",
+    "select": "SELECT A.PROV_DISTRICT_CODE as provDistrictCode,A.REF_PROV_DISTRICT_ID as refProvDistrictId,A.PROV_DISTRICT_NAME as provDistrictName,A.IS_ACTIVE as isActive,A.PARENT_ID as parentId,A.TYPE as type",
     "from": "FROM REF_PROV_DISTRICT A WITH(NOLOCK)"
     },
   "bodyList": [

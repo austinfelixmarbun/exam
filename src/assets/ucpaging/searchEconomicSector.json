@@ -84,7 +84,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.REF_ECONOMIC_SECTOR_ID as refEconomicSectorId,A.ECONOMIC_SECTOR_CODE as economicSectorCode,A.ECONOMIC_SECTOR_NAME as economicSectorName,A.REG_RPT_CODE as regRptCode,A.IS_ACTIVE as isActive",
+    "select": "SELECT A.ECONOMIC_SECTOR_CODE as economicSectorCode,A.REF_ECONOMIC_SECTOR_ID as refEconomicSectorId,A.ECONOMIC_SECTOR_NAME as economicSectorName,A.REG_RPT_CODE as regRptCode,A.IS_ACTIVE as isActive",
     "from": "FROM REF_ECONOMIC_SECTOR A WITH(NOLOCK)"
   },
   "bodyList": [
