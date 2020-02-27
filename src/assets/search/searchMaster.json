@@ -63,7 +63,7 @@
       "type": "numeric",
       "name": "seq_No",
       "id": "seqNoId",
-      "value": "0",
+      "value": "1",
       "label": "Sequence No",
       "placeholder": "Placeholder",
       "datatype": "numeric"

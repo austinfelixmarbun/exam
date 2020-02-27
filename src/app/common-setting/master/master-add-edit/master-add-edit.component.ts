@@ -19,12 +19,14 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 export class MasterAddEditComponent implements OnInit {
 
   settingUrl: string = environment.FoundationR3Url;
+  refMasterObj: RefMasterObj = new RefMasterObj();
   refMasterTypeObj: any;
   type: string = 'add';
   refMasterId: any;
   resultData: any;
 
   RefMasterForm = this.fb.group({
+    RefMasterId: [0, [Validators.required]],
     RefMasterTypeCode: ['', [Validators.required]],
     MasterCode: ['', [Validators.required, Validators.maxLength(50)]],
     SeqNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -59,14 +61,15 @@ export class MasterAddEditComponent implements OnInit {
     console.log('masuk');
     this.GetListMasterType();
     if (this.type == 'edit') {
-      var refMasterObj = new RefMasterObj();
-      refMasterObj.RefMasterId = this.refMasterId;
+      this.refMasterObj.RefMasterId = this.refMasterId;
       var getRefMasterUrl = this.settingUrl + AdInsConstant.GetRefMasterByRefMasterId;
-      this.httpClient.post(getRefMasterUrl, refMasterObj).subscribe(
+      this.httpClient.post(getRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
           console.log('Success Get');
+          console.log(JSON.stringify(response));
           this.resultData = response;
           this.RefMasterForm.patchValue({
+            RefMasterId: this.resultData.RefMasterId,
             RefMasterTypeCode: this.resultData.RefMasterTypeCode,
             MasterCode: this.resultData.MasterCode,
             SeqNo: this.resultData.SeqNo,
@@ -91,13 +94,12 @@ export class MasterAddEditComponent implements OnInit {
 
   Save() {
     this.spinner.show();
-    var addRefMasterUrl = this.settingUrl + AdInsConstant.AddRefMaster;
-    var refMasterObj = new RefMasterObj();
-    refMasterObj = this.RefMasterForm.value;
+    this.refMasterObj = this.RefMasterForm.value;
 
     //MODE-ADD
     if (this.type != 'edit') {
-      this.httpClient.post(addRefMasterUrl, refMasterObj).subscribe(
+      var addRefMasterUrl = this.settingUrl + AdInsConstant.AddRefMaster;
+      this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
         //SAVE
         (response) => {
           console.log("Success Save");
@@ -113,8 +115,9 @@ export class MasterAddEditComponent implements OnInit {
     }
     //MODE-EDIT
     else {
+      var addRefMasterUrl = this.settingUrl + AdInsConstant.EditRefMaster;
       //SAVE
-      this.httpClient.post(addRefMasterUrl, refMasterObj).subscribe(
+      this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
           console.log("Success Edit");
           this.service.typeSave(response['message']);

@@ -29,7 +29,7 @@ export class MasterPagingComponent implements OnInit {
     this.inputPagingObj._url = "./assets/search/searchMaster.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObj.deleteUrl = "";
+    this.inputPagingObj.deleteUrl = "/RefMaster/DeleteRefMaster";
     this.inputPagingObj.pagingJson = "./assets/search/searchMaster.json";
   }
 
