@@ -24,5 +24,6 @@ export class RefJobTitleComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/search/searchJobTitle.json";
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefJobTitle;
   }
 }

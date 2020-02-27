@@ -83,7 +83,7 @@ export class AdInsConstant {
   public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
   public static AddRefJobTitle = environment.FoundationR3Url + "/RefJobTitle/AddRefJobTitle";
   public static EditRefJobTitle = environment.FoundationR3Url + "/RefJobTitle/EditRefJobTitle";
-  public static DeleteRefJobTitle = "/OrganizationDefinition/DeleteRefJobTitle";
+  public static DeleteRefJobTitle = environment.FoundationR3Url + "/RefJobTitle/DeleteRefJobTitle";
   public static GetJobPositionLvl = "/OrganizationDefinition/GetJobPositionLvl";
   public static GetRefJobTitleById = environment.FoundationR3Url + "/RefJobTitle/GetRefJobTitleByRefJobTitleId";
 
@@ -157,7 +157,7 @@ export class AdInsConstant {
   public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
   public static EditRefZipcode = environment.FoundationR3Url +"/RefZipcode/EditRefZipCode";
   public static AddRefZipcode = environment.FoundationR3Url +"/RefZipcode/AddRefZipCode";
-  public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode";
+  public static DeleteRefZipcode = environment.FoundationR3Url + "/RefZipcode/DeleteRefZipCode";
   public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
   public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
 

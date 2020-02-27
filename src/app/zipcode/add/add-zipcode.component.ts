@@ -30,6 +30,8 @@ export class ZipcodeAddComponent implements OnInit {
   getRefDistrictUrl: any;
   inputPagingObj: any;
   inputDistrictLookupObj;
+  refDistrict: RefProvDistrictObj;
+  resultDistrictData: any;
 
   RefZipCodeForm = this.fb.group({
     AreaCode1: ['', [Validators.required, Validators.maxLength(50)]],
@@ -46,7 +48,7 @@ export class ZipcodeAddComponent implements OnInit {
     this.apiUrl = AdInsConstant.GetRefZipCodeById;
     this.addUrl = AdInsConstant.AddRefZipcode;
     this.editUrl = AdInsConstant.EditRefZipcode;
-    this.getRefDistrictUrl = AdInsConstant.GetPagingObjectBySQL;
+    this.getRefDistrictUrl = AdInsConstant.GetRefProvDistrictById;
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -69,14 +71,13 @@ export class ZipcodeAddComponent implements OnInit {
 
     if (this.pageType == "edit") {
       this.rzcObj = new RefZipcodeObj();
-      this.rzcObj.refZipcodeId = this.refZipcodeId;
+      this.rzcObj.RefZipcodeId = this.refZipcodeId;
       this.http.post(this.apiUrl, this.rzcObj).subscribe(
         response => {
           this.resultData = response;
           console.log("Response: ");
           console.log(response);
           this.refZipcodeId = this.resultData.RefZipcodeId;
-          this.inputDistrictLookupObj.idSelect = this.resultData.RefProvDistrictId;
           this.inputDistrictLookupObj.idSelect = this.resultData.RefProvDistrictId;
           this.RefZipCodeForm.patchValue({
             AreaCode1: this.resultData.AreaCode1,
@@ -88,12 +89,25 @@ export class ZipcodeAddComponent implements OnInit {
             PhnArea: this.resultData.PhnArea,
             IsActive: this.resultData.IsActive
           });
-
+          this.refDistrict = new RefProvDistrictObj();
+          this.refDistrict.RefProvDistrictId = this.resultData.RefProvDistrictId;
+          this.http.post(this.getRefDistrictUrl, this.refDistrict).subscribe(
+            (response) => {
+              this.resultDistrictData = response;
+              this.inputDistrictLookupObj.jsonSelect = this.resultDistrictData;
+              this.inputDistrictLookupObj.nameSelect = this.resultDistrictData.ProvDistrictName;
+            },
+            (error) => {
+              console.log(error);
+            });
         },
+
         error => {
           console.log(error);
-        }
-      );
+        });
+
+      
+
     }
 
   }
@@ -101,7 +115,7 @@ export class ZipcodeAddComponent implements OnInit {
   SaveForm() {
     this.rzcObj = new RefZipcodeObj();
     this.rzcObj = this.RefZipCodeForm.value;
-    this.rzcObj.refProvDistrictId = this.inputDistrictLookupObj.jsonSelect.RefProvDistrictId;
+    this.rzcObj.RefProvDistrictId = this.inputDistrictLookupObj.jsonSelect.refProvDistrictId;
     if (this.pageType == "add") {
       this.rzcObj.RowVersion = "";
       this.http.post(this.addUrl, this.rzcObj).subscribe(
@@ -114,7 +128,7 @@ export class ZipcodeAddComponent implements OnInit {
         }
       );
     } else {
-      this.rzcObj.refZipcodeId = this.refZipcodeId;
+      this.rzcObj.RefZipcodeId = this.refZipcodeId;
       this.rzcObj.RowVersion = this.resultData.RowVersion;
       this.http.post(this.editUrl, this.rzcObj).subscribe(
         response => {

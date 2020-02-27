@@ -22,5 +22,6 @@ export class ZipcodeComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/search/searchZip.json";
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefZipcode;
   }
 }
