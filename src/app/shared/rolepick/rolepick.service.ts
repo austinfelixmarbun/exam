@@ -36,7 +36,7 @@ export class RolePickService {
                                 currentUserContext.Office = item.officeCode;
                                 currentUserContext.Role = item.roleCode;
                                 currentUserContext.BusinessDate = item.businessDt;
-                                var dateParse = formatDate(item.businessDt, 'yyyy-MM-dd', 'en-US');
+                                var dateParse = formatDate(item.businessDt, 'yyyy/MM/dd', 'en-US');
                                 localStorage.setItem("BusinessDate", dateParse);
                                 localStorage.setItem("UserAccess", JSON.stringify(item));
                                 this.currentUserContextService.addCurrentUserContext(currentUserContext);
@@ -73,7 +73,7 @@ export class RolePickService {
         } else {
             if (data.length == 1 && type == "") {
                 var item = data[0];
-                var url = environment.FoundationR3Url + AdInsConstant.LoginByRole;
+                var url = environment.FoundationR3Url + AdInsConstant.GetAllActiveRefFormByRefRoleId;
                 var roleObject = { RefRoleId: item.refRoleId, ModuleCode: "FOUNDATION" };
                 this.http.post(url, roleObject).subscribe(
                     (response) => {

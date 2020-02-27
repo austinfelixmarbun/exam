@@ -10,7 +10,7 @@ export class AdInsConstant {
   public static showData = "10,50,100";
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
-  public static Login = "/UserManagement/HTML5Login";
+  public static Login = "/Authenticate/Login";
   public static LoginToken = "/UserManagement/HTML6Login";
   public static Logout = "/UserManagement/LogOut"
   public static GetListOffice = "/RefOffice/GetRefOfficePaging";
@@ -221,8 +221,8 @@ export class AdInsConstant {
   public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
   public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
   public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
-
-
+  public static LoginByRole = "/Authenticate/LoginByRole";
+  
 
   //FORM FEATURE
   public static GetListRefFeature = "/RefFeature/GetListRefFeature";
