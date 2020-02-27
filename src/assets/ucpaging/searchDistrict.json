@@ -1,0 +1,140 @@
+{
+  "title": "District",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "PROV_DISTRICT_CODE",
+      "id": "provDistrictCodeId",
+      "value": "",
+      "label": "District Code",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "textbox",
+      "name": "DISTRICT_REG_RPT_CODE",
+      "id": "districtRegRptCodeId",
+      "value": "",
+      "label": "District Bl Code",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "textbox",
+      "name": "PROV_DISTRICT_NAME",
+      "id": "provDistrictNameId",
+      "value": "",
+      "label": "District Name",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "dropdown",
+      "name": "is_Active",
+      "id": "isActive",
+      "value": "Active Status",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Active Status",
+      "items": [
+        {
+          "key": "1",
+          "value": "Yes"
+        },
+        {
+          "key": "0",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    }
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "District Code",
+      "name": "provDistrictCode"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "District Name",
+      "name": "provDistrictName"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "District Bl Code",
+      "name": "districtRegRptCode"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Active",
+      "name": "isActive"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT A.PROV_DISTRICT_CODE as provDistrictCode,A.REF_PROV_DISTRICT_ID as refProvDistrictId,A.PROV_DISTRICT_NAME as provDistrictName,A.DISTRICT_REG_RPT_CODE as districtRegRptCode,A.IS_ACTIVE as isActive,A.TYPE as type,A.PARENT_ID as parentId",
+    "from": "FROM REF_PROV_DISTRICT A WITH(NOLOCK)"
+    },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "provDistrictCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "provDistrictName"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "districtRegRptCode"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "isActive"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "/commonSetting/district/detail",
+          "param": [
+            {
+              "type": "refProvDistrictId",
+              "property": "refProvDistrictId"
+            },
+            {
+              "type": "parentId",
+              "property": "parentId"
+            },
+            {
+              "type": "param",
+              "property": "edit"
+            }
+          ]
+        },
+        {
+          "type": "delete",
+          "property": "refProvDistrictId"
+        }
+      ]
+    }
+  ]
+}

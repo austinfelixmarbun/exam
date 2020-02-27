@@ -89,7 +89,7 @@ export class ZipcodeAddComponent implements OnInit {
                     else {
                         this.isActive = false;
                     }
-                    this.provDistrictObj.refProvDistrictId = this.result.refProvDistrictId;
+                    this.provDistrictObj.RefProvDistrictId = this.result.refProvDistrictId;
                     this.http.post(this.urlGetProvDistrict, this.provDistrictObj).subscribe(
                         (response) => {
                             console.log(response);

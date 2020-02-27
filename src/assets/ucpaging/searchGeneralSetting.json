@@ -1,0 +1,124 @@
+{
+  "title": "General Setting",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "GS_CODE",
+      "id": "gsCodeId",
+      "value": "",
+      "label": "General Setting Code",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "textbox",
+      "name": "GS_NAME",
+      "id": "gsNameId",
+      "value": "",
+      "label": "General Setting Name",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "textbox",
+      "name": "GS_VALUE",
+      "id": "gsValueId",
+      "value": "",
+      "label": "General Setting Value",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "dropdown",
+      "datatype": "text",
+      "name": "MODULE_CODE",
+      "id": "moduleCodeId",
+      "value": "",
+      "placeholder": "Placeholder",
+      "isFromURL": true,
+      "isSelectOne": true,
+      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefModule/GetListKeyValueByCode",
+      "label": "Module Code",
+      "items": [],
+      "itemsUrl": []
+    }
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "General Setting Code",
+      "name": "gsCode"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "General Setting Name",
+      "name": "gsName"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "General Setting Description",
+      "name": "gsDescr"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "General Setting Value",
+      "name": "gsValue"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT A.GS_CODE as gsCode,A.GENERAL_SETTING_ID as generalSettingId,A.GS_NAME as gsName,A.GS_DESCR as gsDescr,A.GS_VALUE as gsValue, A.MODULE_CODE as moduleCode",
+    "from": "FROM GENERAL_SETTING A WITH(NOLOCK)"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "gsCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "gsName"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "gsDescr"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "gsValue"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "/commonSetting/generalSetting/detail",
+          "param": [
+            {
+              "type": "generalSettingId",
+              "property": "generalSettingId"
+            },
+            {
+              "type": "param",
+              "property": "edit"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

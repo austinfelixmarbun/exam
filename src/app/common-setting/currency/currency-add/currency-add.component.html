@@ -6,8 +6,8 @@
           <form class="form form-horizontal" [formGroup]="RefCurrForm" (ngSubmit)="RefCurrForm.valid && SaveForm()"
                 #enjiForm="ngForm">
             <div class="form-body">
-              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Currency Information</h4>
-              <div class="form-group row">
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Currency {{this.pageType}}</h4>
+              <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Currency Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="CurrCode"
@@ -15,15 +15,15 @@
                   <show-errors [control]="RefCurrForm.controls.CurrCode" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Currency </label>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel adins-required" translate>Currency </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="CurrName"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.CurrName.invalid }">
                   <show-errors [control]="RefCurrForm.controls.CurrName" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
-              <div class="form-group row">
+              <!--<div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Rounded Amount </label>
                 <div class="col-md-9">
                   <input type="number" class="form-control adInsInput" formControlName="RoundedAmt"
@@ -38,13 +38,12 @@
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.MinRefundAmt.invalid }">
                   <show-errors [control]="RefCurrForm.controls.MinRefundAmt" [submit]="enjiForm.submitted"></show-errors>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>BI Code </label>
+              </div>!-->
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Bl Code </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="RegRptCode"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.RegRptCode.invalid }">
-
+                  <textarea class="form-control adInsInput" formControlName="RegRptCode"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.RegRptCode.invalid }"></textarea>
                   <show-errors [control]="RefCurrForm.controls.RegRptCode" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
@@ -57,7 +56,7 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/commonSetting/currency']"
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/commonSetting/currency/paging']"
                 translate>
                 <i class="ft-x"></i> Back
               </button>
