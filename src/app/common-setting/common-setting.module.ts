@@ -36,6 +36,8 @@ import { DistrictComponent } from './prov-district/district-paging/district.comp
 import { DistrictAddEditComponent } from './prov-district/district-add-edit/district-add-edit.component';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
+import { ProfessionComponent } from './profession/profession-paging/profession.component';
+import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
 
 @NgModule({
   imports: [
@@ -77,7 +79,9 @@ import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-sta
     ProvinceAddEditComponent,
     DistrictComponent,
     DistrictAddEditComponent,
-    RefStatusPagingComponent
+    RefStatusPagingComponent,
+    ProfessionComponent,
+    ProfessionAddEditComponent
   ],
   providers: [
     {
