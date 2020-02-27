@@ -6,6 +6,7 @@ export class RefJobTitleObj {
     IsInternal: any;
     MrJobPositionLvl: any;
     RefOrgId: any;
-    OrgName : any;
+    OrgName: any;
+    RowVersion: any;
     constructor() { this.RefJobTitleId = 0 }
 }

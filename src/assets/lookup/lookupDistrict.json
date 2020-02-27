@@ -1,22 +1,73 @@
 {
-    "url": "http://getDistrict",
-    "title":"Lookup District",
-    "component": [
-      {
-        "type": "textbox",
-        "name": "name",
-        "id": "nameId",
-        "value": "",
-        "label": "District Name",
-        "placeholder": "District Name"
-      },
-      {
-        "type": "textbox",
-        "name": "DISTRICT_REG_RPT_CODE",
-        "id": "districtRegRptCodeId",
-        "value": "",
-        "label": "District Sandi BI",
-        "placeholder": "District Sandi BI"
-      }
-    ]
-  }
+  "title": "Lookup District",
+  "component": [
+    {
+      "type": "textbox",
+      "name": "PROV_DISTRICT_NAME",
+      "id": "provDistrictNameId",
+      "value": "",
+      "label": "District Name",
+      "placeholder": "District Name"
+    },
+    {
+      "type": "textbox",
+      "name": "DISTRICT_REG_RPT_CODE",
+      "id": "districtRegRptCodeId",
+      "value": "",
+      "label": "District Sandi BI",
+      "placeholder": "District Sandi BI"
+    }
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "District Name",
+      "name": "provDistrictName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "District Sandi BI",
+      "name": "districtRegRptCode"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
+  ],
+
+  "querystring": {
+    "select": "SELECT A.DISTRICT_REG_RPT_CODE AS districtRegRptCode, A.REF_PROV_DISTRICT_ID AS refProvDistrictId, A.PROV_DISTRICT_NAME AS provDistrictName",
+    "from": "FROM REF_PROV_DISTRICT A WITH(NOLOCK)"
+  },
+
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "center",
+      "property": "provDistrictName"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "districtRegRptCode"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "select",
+          "property": "refProvDistrictId"
+        }
+      ]
+    }
+  ],
+
+  "propertyId": "refProvDistrictId",
+  "propertyName": "provDistrictName"
+
+
+}

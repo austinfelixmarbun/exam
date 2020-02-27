@@ -3,7 +3,7 @@ import { OrgJobTitleDetailComponent } from './org-mdl-struc/org-job-title-detail
 import { NgModule, NgModuleFactory } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrganizationRoutingModule } from 'app/organization/organization-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RefJobTitleComponent } from 'app/organization/ref-job-title/ref-job-title.component';
@@ -24,6 +24,7 @@ import { LookuporgmdlstrucModule } from '@adins/lookuporgmdlstruc';
 import { LookuprefjobtitleModule } from '@adins/lookuprefjobtitle';
 import { lookupbizunitmodule } from '@adins/lookupbizunit';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcpagingModule } from '@adins/ucpaging';
 
 
 @NgModule({
@@ -40,7 +41,9 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     LookuprefjobtitleModule,
     lookupbizunitmodule,
     LookuporgmdlstrucModule,
-    UclookupgenericModule
+    UclookupgenericModule,
+    UcpagingModule,
+    ReactiveFormsModule
   ],
   declarations: [
     RefJobTitleComponent,

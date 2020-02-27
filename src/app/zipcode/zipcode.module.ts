@@ -14,6 +14,7 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { LookupdistrictModule } from '@adins/lookupdistrict';
 import { lookupbizunitmodule } from '@adins/lookupbizunit';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcpagingModule } from '@adins/ucpaging';
 
 
 @NgModule({
@@ -29,7 +30,9 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     UcgridfooterModule,
     LookupdistrictModule,
     ReactiveFormsModule,
-    UclookupgenericModule
+    UclookupgenericModule,
+    UcpagingModule
+
   ],
   declarations: [
     ZipcodeComponent,

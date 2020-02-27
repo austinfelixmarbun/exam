@@ -81,11 +81,11 @@ export class AdInsConstant {
 
   //REF-JOB-TITLE
   public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
-  public static AddRefJobTitle = "/OrganizationDefinition/AddRefJobTitle";
-  public static EditRefJobTitle = "/OrganizationDefinition/EditRefJobTitle";
-  public static DeleteRefJobTitle = "/OrganizationDefinition/DeleteRefJobTitle";
+  public static AddRefJobTitle = environment.FoundationR3Url + "/RefJobTitle/AddRefJobTitle";
+  public static EditRefJobTitle = environment.FoundationR3Url + "/RefJobTitle/EditRefJobTitle";
+  public static DeleteRefJobTitle = environment.FoundationR3Url + "/RefJobTitle/DeleteRefJobTitle";
   public static GetJobPositionLvl = "/OrganizationDefinition/GetJobPositionLvl";
-  public static GetRefJobTitleById = "/OrganizationDefinition/GetRefJobTitleByRefJobTitleId";
+  public static GetRefJobTitleById = environment.FoundationR3Url + "/RefJobTitle/GetRefJobTitleByRefJobTitleId";
 
   //ORG JOB TITLE
   public static GetOrgJobTitlePaging = "/OrganizationDefinition/GetOrgJobTitlePaging";
@@ -155,10 +155,11 @@ export class AdInsConstant {
   public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
   public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
   public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
-  public static EditRefZipcode = "/RefZipcode/EditRefZipCode";
-  public static AddRefZipcode = "/RefZipcode/AddRefZipCode";
-  public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode";
+  public static EditRefZipcode = environment.FoundationR3Url +"/RefZipcode/EditRefZipCode";
+  public static AddRefZipcode = environment.FoundationR3Url +"/RefZipcode/AddRefZipCode";
+  public static DeleteRefZipcode = environment.FoundationR3Url + "/RefZipcode/DeleteRefZipCode";
   public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
+  public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
 
   //OFFICE ZIPCODE MEMBER
   public static GetOfficeZipCodeMemberPaging = "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
