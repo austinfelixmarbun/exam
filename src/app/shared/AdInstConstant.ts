@@ -261,12 +261,20 @@ export class AdInsConstant {
   public static DeleteRefEconomicSector = "/RefEconomicSector/DeleteRefEconomicSector";
   public static GetRefEconomicSectorById = environment.FoundationR3Url + "/RefEconomicSector/GetRefEconomicSectorById";
 
-    //REF PROV DISTRICT
+  //REF PROV DISTRICT
 
-    public static AddRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/AddRefProvDistrict";
-    public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
-    public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
-    public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
+  public static AddRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/AddRefProvDistrict";
+  public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
+  public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
+  public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
+
+  //REF PROFESSION
+
+  public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
+  public static EditRefProfession = environment.FoundationR3Url + "/RefProfession/EditRefProfession";
+  public static DeleteRefProfession = "/RefProfession/DeleteRefProfession";
+  public static GetRefProfessionById = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByRefProfessionId";
+  public static GetValueCustModel = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByCode";
 
   //GENERIC
   public static GetObjectBySQL = "/Generic/GetObjectBySQL";
