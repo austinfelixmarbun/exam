@@ -25,6 +25,9 @@ import { ProvinceAddEditComponent } from './prov-district/province-add-edit/prov
 import { DistrictComponent } from './prov-district/district-paging/district.component';
 import { DistrictAddEditComponent } from './prov-district/district-add-edit/district-add-edit.component';
 import { WorkingHourDDetailComponent } from './working-hour-scheme/working-hour-d-detail/working-hour-d-detail.component';
+import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
+import { ProfessionComponent } from './profession/profession-paging/profession.component';
+import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
 
 const routes: Routes = [
   {
@@ -205,6 +208,27 @@ const routes: Routes = [
           title: 'District Add Edit'
         },
       },
+      {
+        path: 'refStatus/paging',
+        component: RefStatusPagingComponent,
+        data: {
+          title: 'Ref Status Paging'
+        }
+      },
+      {
+        path: 'profession/paging',
+        component: ProfessionComponent,
+        data: {
+          title: 'Profession Paging'
+        },
+      },
+      {
+        path: 'profession/detail',
+        component: ProfessionAddEditComponent,
+        data: {
+          title: 'Profession Add Edit'
+        },
+      }
     ]
   }
 ];

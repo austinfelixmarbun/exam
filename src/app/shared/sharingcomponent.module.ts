@@ -23,7 +23,6 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
 import { ShowErrorsComponent } from '../test-new/show-errors.component';
 
-
 @NgModule({
     exports: [
         UcAddressComponent,
@@ -37,8 +36,8 @@ import { ShowErrorsComponent } from '../test-new/show-errors.component';
         LookupgenericComponent,
         UcpagingComponent,
         ViewgenericComponent,
-    LookupgenericComponent,
-    ShowErrorsComponent
+        LookupgenericComponent,
+        ShowErrorsComponent
     ],
     imports: [
         FormsModule,
@@ -65,8 +64,8 @@ import { ShowErrorsComponent } from '../test-new/show-errors.component';
         LookupgenericComponent,
         UcpagingComponent,
         ViewgenericComponent,
-      LookupgenericComponent,
-      ShowErrorsComponent
+        LookupgenericComponent,
+        ShowErrorsComponent
     ]
 })
 

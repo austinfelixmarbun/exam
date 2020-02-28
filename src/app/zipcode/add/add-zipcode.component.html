@@ -1,141 +1,88 @@
 <div class="col-md-12">
-    <div class="card">
-        <div class="card-body">
-            <div class="card-body">
-                <div class="card-header header-title">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} ZIP CODE
-                            </h4>
-                        </div>
-                        <div class="col-md-4" style="text-align-last: right">
-                            <button type="button" class="backButton" [routerLink]="['/zipcode/paging']"
-                                translate>
-                                <i class="ft-arrow-left"></i> Back
-                            </button>
-                        </div>
-                    </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <div class="addEdit">
+          <form class="form form-horizontal" [formGroup]="RefZipCodeForm" (ngSubmit)="RefZipCodeForm.valid && SaveForm()"
+                #enjiForm="ngForm">
+            <div class="form-body">
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> ZipCode Information</h4>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Kelurahan </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="AreaCode2"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefZipCodeForm.controls.AreaCode2.invalid }"
+                         [attr.disabled]="pageType == 'edit' ? true : null">
+                  <show-errors [control]="RefZipCodeForm.controls.AreaCode2" [submit]="enjiForm.submitted"></show-errors>
                 </div>
-                <div class="px-3">
-                    <form class="form form-horizontal" name="ZipcodeAddReqForm" #ZipcodeAddReqForm="ngForm"
-                        (ngSubmit)="ZipcodeAddReqForm.form.valid && Save(ZipcodeAddReqForm, uclDistrict)">
-                        <div class="form-body">
-                            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Zipcode
-                                Information
-                            </h4>
-                            <div class="form-group row adins-required">
-                                <label class="col-md-3 adInsLabel" translate>Kelurahan </label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control adInsInput width-75-per" name="areaCode2" required
-                                        [ngModel]="result?.areaCode2" #AreaCode2="ngModel"
-                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid }">
-                                    <div *ngIf="(ZipcodeAddReqForm.submitted || AreaCode2.touched || AreaCode2.dirty) && AreaCode2.invalid"
-                                        class="invalid-feedback">
-                                        <div *ngIf="AreaCode2.errors.required" class="adInsReqMsg" translate>This field
-                                            is required</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row adins-required">
-                                <label class="col-md-3 adInsLabel" translate>Kecamatan </label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control adInsInput width-75-per" name="areaCode1" required
-                                        [ngModel]="result?.areaCode1" #AreaCode1="ngModel"
-                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid }">
-                                    <div *ngIf="(ZipcodeAddReqForm.submitted || AreaCode1.touched || AreaCode1.dirty) && AreaCode1.invalid"
-                                        class="invalid-feedback">
-                                        <div *ngIf="AreaCode1.errors.required" class="adInsReqMsg" translate>This field
-                                            is required</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row adins-required">
-                                <label class="col-md-3 adInsLabel" translate>City </label>
-                                <div class="col-md-9">
-                                    <input class="form-control adInsInput width-75-per" name="city" required [ngModel]="result?.city"
-                                        #City="ngModel"
-                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || City.touched || City.dirty) && City.invalid }">
-                                    <div *ngIf="(ZipcodeAddReqForm.submitted || City.touched || City.dirty) && City.invalid"
-                                        class="invalid-feedback">
-                                        <div *ngIf="City.errors.required" class="adInsReqMsg" translate>This field is
-                                            required</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row adins-required">
-                                <label class="col-md-3 adInsLabel" translate>Zipcode </label>
-                                <div class="col-md-9">
-                                    <input class="form-control adInsInput width-25-per" name="zipcode" required
-                                        [ngModel]="result?.zipcode" #Zipcode="ngModel"
-                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid }">
-                                    <div *ngIf="(ZipcodeAddReqForm.submitted || Zipcode.touched || Zipcode.dirty) && Zipcode.invalid"
-                                        class="invalid-feedback">
-                                        <div *ngIf="Zipcode.errors.required" class="adInsReqMsg" translate>This field is
-                                            required</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 adInsLabel" translate>Sub Zipcode </label>
-                                <div class="col-md-9">
-                                    <input class="form-control adInsInput width-25-per" name="subZipcode"
-                                        [ngModel]="result?.subZipcode" #SubZipcode="ngModel"
-                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || SubZipcode.touched || SubZipcode.dirty) && SubZipcode.invalid }">
-                                    
-                                </div>
-                            </div>
-                            <div class="form-group row adins-required">
-                                <label class="col-md-3 adInsLabel width-25-per" translate>Zipcode Number </label>
-                                <div class="col-md-9">
-                                    <input class="form-control adInsInput width-25-per" name="zipcodeNumber" required
-                                        [ngModel]="result?.zipcodeNumber" #ZipcodeNumber="ngModel"
-                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid }">
-                                    <div *ngIf="(ZipcodeAddReqForm.submitted || ZipcodeNumber.touched || ZipcodeNumber.dirty) && ZipcodeNumber.invalid"
-                                        class="invalid-feedback">
-                                        <div *ngIf="ZipcodeNumber.errors.required" class="adInsReqMsg" translate>This
-                                            field is required</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row adins-required">
-                                <label class="col-md-3 adInsLabel" translate>District </label>
-                                <div class="col-md-9">
-                                    <lib-uclookupgeneric #uclDistrict [lookupInput]="inputLookupObj"
-                                        [parentForm]='ZipcodeAddReqForm'></lib-uclookupgeneric>
-                                </div>
-                            </div>
-                            <div class="form-group row adins-required">
-                                <label class="col-md-3 adInsLabel" translate>Phone Area Number </label>
-                                <div class="col-md-9">
-                                    <input class="form-control adInsInput width-10-per" name="phnArea" required
-                                        [ngModel]="result?.phnArea" #PhnArea="ngModel"
-                                        [ngClass]="{ 'is-invalid': (ZipcodeAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid }">
-                                    <div *ngIf="(ZipcodeAddReqForm.submitted || PhnArea.touched || PhnArea.dirty) && PhnArea.invalid"
-                                        class="invalid-feedback">
-                                        <div *ngIf="PhnArea.errors.required" class="adInsReqMsg" translate>This field is
-                                            required</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row adins-required">
-                                <label class="col-md-3 adInsLabel" translate>Is Active </label>
-                                <div class="col-md-9">
-                                    <input class="border-primary" type="checkbox" [ngModel]="isActive" data-md-icheck
-                                        (change)="toggleVisibility($event)" name="isActive">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-actions right">
-                            <!-- <button *ngIf="mode=='edit'" type="button" class="btn btn-raised btn-warning mr-1"
-                                [routerLink]="['/zipcode/paging']" translate>
-                                <i class="fa fa-arrow-circle-left"></i> Back
-                            </button> -->
-                            <button type="submit" class="btn btn-raised btn-primary" translate>
-                                <i class="fa fa-check-square-o"></i> Save
-                            </button>
-                        </div>
-                    </form>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Kecamatan </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="AreaCode1"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefZipCodeForm.controls.AreaCode1.invalid }">
+                  <show-errors [control]="RefZipCodeForm.controls.AreaCode1" [submit]="enjiForm.submitted"></show-errors>
                 </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>City </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="City"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefZipCodeForm.controls.City.invalid }">
+                  <show-errors [control]="RefZipCodeForm.controls.City" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Zipcode </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="Zipcode"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefZipCodeForm.controls.Zipcode.invalid }">
+                  <show-errors [control]="RefZipCodeForm.controls.Zipcode" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Sub Zipcode </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="SubZipcode"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefZipCodeForm.controls.SubZipcode.invalid }">
+                  <show-errors [control]="RefZipCodeForm.controls.SubZipcode" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>District </label>
+                <div class="col-md-9">
+                  <lib-uclookupgeneric width-75-per [lookupInput]="inputDistrictLookupObj" [identifier]="'RefProvDistrictId'" [enjiForm]='enjiForm' [parentForm]='RefZipCodeForm'>
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Phone Area Number </label>
+                <div class="col-md-9">
+                  <input type="number" class="form-control adInsInput" formControlName="PhnArea"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefZipCodeForm.controls.PhnArea.invalid }">
+                  <show-errors [control]="RefZipCodeForm.controls.PhnArea" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Active Status </label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck
+                         formControlName="IsActive" />
+                </div>
+              </div>
             </div>
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/zipcode/paging']"
+                      translate>
+                <i class="ft-x"></i> Back
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
 {
-    "propertyId": "refProvDistrictId",
-    "propertyName": "name"
+  "propertyId": "refProvDistrictId",
+  "propertyName": "ProvDistrictName"
 }
