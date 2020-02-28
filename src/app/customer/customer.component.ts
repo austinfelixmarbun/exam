@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { WizardComponent } from 'angular-archwizard';
+import { forEach } from '@angular/router/src/utils/collection';
+// import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-customer',
@@ -31,12 +32,31 @@ export class CustomerComponent implements OnInit {
   Npwp: any;
   IdNo: any;
 
+  CustomerForm: any;
 
   constructor(private router: Router, private spinner: NgxSpinnerService, 
     private httpClient: HttpClient, private toastr: NGXToastrService,
-    private wizard: WizardComponent) { 
+    private fb: FormBuilder) { // private wizard: WizardComponent
     this.submitProsUrl = this.localHostUrl + AdInsConstant.addCustPersonal;
 
+    let itemValidator = [];
+
+    for (let index = 0; index < this.repeaters.length; index++) {
+      itemValidator["item_"+index] = [this.repeaters[index], Validators.required];
+    }
+
+    const itemList = {
+      CustType: ['', Validators.required],
+      CustName: ['', Validators.required],
+      Npwp: ['', Validators.required],
+      IdNo: ['', Validators.required],
+      MrCustRating: ['', Validators.required],
+      ...itemValidator
+    };
+
+    this.CustomerForm = this.fb.group(itemList);
+
+    console.log(JSON.stringify(itemList));
   }
 
   Submit(custReqFoem: NgForm, lookupZip){
@@ -52,7 +72,7 @@ export class CustomerComponent implements OnInit {
   }
 
   SavePros(custReqFoem: NgForm) {
-    this.wizard.navigation.goToNextStep();
+    // this.wizard.navigation.goToNextStep();
 
     this.custObj = new CustPersonalObj();
     this.custObj = custReqFoem.value;

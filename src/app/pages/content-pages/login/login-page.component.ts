@@ -1,13 +1,12 @@
 import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { formatDate } from '@angular/common';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { HttpClient } from '@angular/common/http';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { environment } from 'environments/environment';
-import  *  as  data  from  'assets/login-dummy.json';
 
 @Component({
     selector: 'app-login-page',
@@ -20,73 +19,46 @@ export class LoginPageComponent implements OnInit {
     @ViewChild('user') userInputRef: ElementRef;
     @ViewChild('pass') userPassRef: ElementRef;
     @ViewChild('f') loginForm: NgForm;
-    private previousUrl: string;
-    private currentUrl: string;
     private apiUrl: string;
-    foundationUrl: string;
-    jstoday = '';
+    FoundationR3Url: string;
 
     constructor(private router: Router, private http: HttpClient, public rolePickService : RolePickService,
         private route: ActivatedRoute) {
-        console.log('Constructor Login');
         //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
         if(localStorage.getItem("UserContext") != null)
         {
             this.router.navigate(['dashboard/dash-board']);
         }
-
     }
 
     ngOnInit() {
         console.log("Init Login");
-        this.foundationUrl = environment.foundationUrl;
-        this.currentUrl = this.router.url;
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                console.log("Event Init");
-                
-            };
-            if (event instanceof NavigationStart) {
-                // this.user.getSomeData().subscribe(data =>{
-                //     if (!data.success) {
-                //         this.router.navigate(['pages/login'])
-                //     }
-                // });
-            }
-        });
+        this.FoundationR3Url = environment.FoundationR3Url;
     }
+    
     onSubmit(event) {
-        // this.loginForm.reset();
         event.preventDefault();
-        const target = event.target;
         const username = this.userInputRef.nativeElement.value;
         const password = this.userPassRef.nativeElement.value;
-        this.apiUrl = this.foundationUrl + AdInsConstant.Login;
+        this.apiUrl = this.FoundationR3Url + AdInsConstant.Login;
         var requestObj = { "Username": username, "Password": password };
         localStorage.setItem("Username",username);
-        var currentUserContext = new CurrentUserContext;
-        let today = new Date();
-        var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US');
-        this.rolePickService.openDialog(data.returnObject);
-        // this.http.post(this.apiUrl, requestObj).subscribe(
-        //     (response) => {
-        //         console.log(response);
-        //         currentUserContext.UserName = username;
-        //         currentUserContext.BusinessDate = businessDt;
-        //         localStorage.setItem("Username",username);
-        //         var object = response["returnObject"];
-        //         console.log(object);
-        //         // if(object["isError"]==false)
-        //         // {
-        //         //     this.rolePickService.openDialog(object);
-        //         // }
-        //         this.rolePickService.openDialog(object);
-        //     },
-        //     (error) => {
-        //         console.log(error);
-        //     }
-        // );
-
+        // this.rolePickService.openDialog(data.returnObject);
+        this.http.post(this.apiUrl, requestObj).subscribe(
+            (response) => {
+                console.log(response);
+                localStorage.setItem("Username",username);
+                const object = {
+                    response: response["ReturnObject"],
+                    user: username,
+                    pwd: password
+                };
+                this.rolePickService.openDialog(object);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
     // On Forgot password link click
     onForgotPassword() {
