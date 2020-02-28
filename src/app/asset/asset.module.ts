@@ -10,6 +10,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AssetConfigurationAddEditComponent } from "./asset-configuration/asset-configuration-add-edit/asset-configuration-add-edit.component";
 import { AssetConfigurationPagingComponent } from "./asset-configuration/asset-configuration-paging/asset-configuration-paging.component";
 import { AssetRoutingComponent } from "./asset-routing.module";
+import { AssetCategoryPagingComponent } from './asset-configuration/asset-category-paging/asset-category-paging.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { AssetRoutingComponent } from "./asset-routing.module";
   ],
   declarations: [
     AssetConfigurationAddEditComponent,
-    AssetConfigurationPagingComponent
+    AssetConfigurationPagingComponent,
+    AssetCategoryPagingComponent
   ]
 })
 export class AssetModule { }

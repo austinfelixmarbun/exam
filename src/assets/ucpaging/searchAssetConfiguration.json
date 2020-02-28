@@ -4,16 +4,16 @@
     "component": [
       {
         "type": "textbox",
-        "name": "curr_Code",
-        "id": "currCode",
+        "name": "assetTypeCode",
+        "id": "assetTypeCode",
         "value": "",
         "label": "Asset Type Code",
         "placeholder": "Placeholder"
       },
       {
         "type": "textbox",
-        "name": "curr_Name",
-        "id": "currName",
+        "name": "assetTypeName",
+        "id": "assetTypeName",
         "value": "",
         "label": "Asset Type Name",
         "placeholder": "Placeholder"
@@ -45,14 +45,14 @@
       {
         "type": "sort",
         "position": "left",
-        "label": "Currency Code",
-        "name": "currCode"
+        "label": "Asset Type Code",
+        "name": "assetTypeCode"
       },
       {
         "type": "sort",
         "position": "left",
-        "label": "Currency",
-        "name": "currName"
+        "label": "Asset Type Name",
+        "name": "assetTypeName"
       },
       {
         "type": "sort",
@@ -63,23 +63,33 @@
       {
         "type": "label",
         "position": "center",
-        "label": "Edit"
+        "label": "ASSET CATEGORY"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "ASSET DOCUMENT"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "ASSET ACCESORY"
       }
     ],
-    "querystring": {
-      "select": "SELECT A.CURR_CODE as currCode,A.REF_CURR_ID as refCurrId,A.CURR_NAME as currName,A.IS_ACTIVE as isActive",
-      "from": "FROM REF_CURR A WITH(NOLOCK)"
+    "querystring": { 
+      "select": "SELECT A.ASSET_TYPE_CODE as assetTypeCode, A.ASSET_TYPE_NAME as assetTypeName, A.IS_ACTIVE as isActive",
+      "from": "FROM ASSET_TYPE A WITH(NOLOCK)"
     },
     "bodyList": [
       {
         "type": "text",
         "position": "left",
-        "property": "currCode"
+        "property": "assetTypeCode"
       },
       {
         "type": "text",
         "position": "left",
-        "property": "currName"
+        "property": "assetTypeName"
       },
       {
         "type": "boolean",
@@ -96,16 +106,63 @@
             "param": [
               {
                 "type": "refCurrId",
-                "property": "refCurrId"
+                "property": "assetTypeName"
               },
               {
                 "type": "param",
-                "property": "edit"
+                "property": "assetTypeName"
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/commonSetting/currency/add",
+            "param": [
+              {
+                "type": "refCurrId",
+                "property": "assetTypeName"
+              },
+              {
+                "type": "param",
+                "property": "assetTypeName"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/commonSetting/currency/add",
+            "param": [
+              {
+                "type": "refCurrId",
+                "property": "assetTypeName"
+              },
+              {
+                "type": "param",
+                "property": "assetTypeName"
               }
             ]
           }
         ]
       }
+
+
+
+
+
+
     ]
   }
   
