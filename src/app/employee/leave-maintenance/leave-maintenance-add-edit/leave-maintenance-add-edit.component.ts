@@ -106,11 +106,12 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     else {
       this.relmObj = new RefEmpLeaveMngmntObj();
       this.relmObj = this.RefEmpLeaveMngmntForm.value;
-      var asd = localStorage.getItem('BusinessDate');
+      var Business_Date = localStorage.getItem('BusinessDate');
       var datePipe = new DatePipe("en-US");
-      var value = datePipe.transform(asd, "yyyy/mm/dd");
+      var value = datePipe.transform(Business_Date, "yyyy-MM-dd");
       var businessDt = new Date(value);
-      if (this.relmObj.EndDt <= businessDt) {
+      var relmObj_date = new Date(this.relmObj.EndDt);
+      if (relmObj_date <= businessDt) {
         this.relmObj.IsPassed = true
       }
       else {
