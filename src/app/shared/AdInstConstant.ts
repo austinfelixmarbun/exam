@@ -97,8 +97,10 @@ export class AdInsConstant {
   //REF-BANK
   public static GetBankPaging = "/RefBank/GetRefBankPaging";
   public static GetBank = "/RefBank/GetBank";
+  public static GetRefBankByRefBankIdAsync = "/RefBank/GetRefBankByRefBankIdAsync";
   public static EditRefBank = "/RefBank/EditRefBank";
   public static AddRefBank = "/RefBank/AddRefBank";
+  public static AddRefBankAsync= "/RefBank/AddRefBankAsync";
   public static DeleteRefBank = "/RefBank/DeleteRefBank";
   public static GetBankByBankCode = "/RefBank/GetBankByBankCode";
 
