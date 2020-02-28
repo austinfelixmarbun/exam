@@ -1,12 +1,12 @@
 export class AuthFormObj {
-listAddRefFormId: Array<any>;
-listDelRefFormId: Array<any>;
-formFeature: any;
-refFormId: any;
-refRoleId: any;
-authFormId: any;
-roleCode: any;
-roleName: any;
+ListAddRefFormId: Array<any>;
+ListDelRefFormId: Array<any>;
+FormFeature: any;
+RefFormId: any;
+RefRoleId: any;
+AuthFormId: any;
+RoleCode: any;
+RoleName: any;
 
-constructor() { this.authFormId = 0; }
+constructor() { this.AuthFormId = 0; }
 }
