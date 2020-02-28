@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
@@ -7,7 +7,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
-import { forEach } from '@angular/router/src/utils/collection';
 import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
 
 @Injectable()
@@ -37,7 +36,7 @@ export class RolePickService {
                                 currentUserContext.Office = item.officeCode;
                                 currentUserContext.Role = item.roleCode;
                                 currentUserContext.BusinessDate = item.businessDt;
-                                var dateParse = formatDate(item.businessDt, 'yyyy-MM-dd', 'en-US');
+                                var dateParse = formatDate(item.businessDt, 'yyyy/MM/dd', 'en-US');
                                 localStorage.setItem("BusinessDate", dateParse);
                                 localStorage.setItem("UserAccess", JSON.stringify(item));
                                 this.currentUserContextService.addCurrentUserContext(currentUserContext);
@@ -72,9 +71,8 @@ export class RolePickService {
             );
 
         } else {
-            var obj = data;
-            if (obj.length == 1 && type == "") {
-                var item = obj[0];
+            if (data.length == 1 && type == "") {
+                var item = data[0];
                 var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
                 var roleObject = { RefRoleId: item.refRoleId, ModuleCode: "FOUNDATION" };
                 this.http.post(url, roleObject).subscribe(
@@ -85,7 +83,7 @@ export class RolePickService {
                         currentUserContext.Office = item.officeCode;
                         currentUserContext.Role = item.roleCode;
                         currentUserContext.BusinessDate = item.businessDt;
-                        var dateParse = formatDate(item.businessDt, 'yyyy-MM-dd', 'en-US');
+                        var dateParse = formatDate(item.businessDt, 'yyyy/MM/dd', 'en-US');
                         localStorage.setItem("BusinessDate", dateParse);
                         localStorage.setItem("UserAccess", JSON.stringify(item));
                         this.currentUserContextService.addCurrentUserContext(currentUserContext);
