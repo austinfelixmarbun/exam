@@ -17,7 +17,7 @@ export class RolePickService {
     openDialog(data, type = ""): void {
         console.log("Get User Title Role");
         if (data.length == undefined) {
-            var url = environment.FoundationR3Url + AdInsConstant.GetListDataCurrentUser;
+            var url = environment.foundationUrl + AdInsConstant.GetListDataCurrentUser;
             var user = { Username: localStorage.getItem("Username") };
             this.http.post(url, user).subscribe(
                 (response) => {
@@ -26,7 +26,7 @@ export class RolePickService {
                     var obj = response["returnObject"];
                     if (obj.length == 1 && type == "") {
                         var item = obj[0];
-                        var url = environment.FoundationR3Url + AdInsConstant.GetAllActiveRefFormByRefRoleId;
+                        var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
                         var roleObject = { RefRoleId: item.refRoleId, ModuleCode: "FOUNDATION" };
                         this.http.post(url, roleObject).subscribe(
                             (response) => {
@@ -73,7 +73,7 @@ export class RolePickService {
         } else {
             if (data.length == 1 && type == "") {
                 var item = data[0];
-                var url = environment.FoundationR3Url + AdInsConstant.GetAllActiveRefFormByRefRoleId;
+                var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
                 var roleObject = { RefRoleId: item.refRoleId, ModuleCode: "FOUNDATION" };
                 this.http.post(url, roleObject).subscribe(
                     (response) => {
