@@ -38,8 +38,8 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GrowlModule } from 'primeng/primeng';
 import { environment } from 'environments/environment';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
-
-
+ 
+ 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -52,6 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
         UserMaintenanceComponent,
         ErrorDialogComponent,
         RolepickComponent
+        
     ],
     imports: [
         HttpModule,
