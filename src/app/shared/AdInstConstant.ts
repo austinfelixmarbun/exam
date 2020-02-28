@@ -97,8 +97,10 @@ export class AdInsConstant {
   //REF-BANK
   public static GetBankPaging = "/RefBank/GetRefBankPaging";
   public static GetBank = "/RefBank/GetBank";
+  public static GetRefBankByRefBankIdAsync = "/RefBank/GetRefBankByRefBankIdAsync";
   public static EditRefBank = "/RefBank/EditRefBank";
   public static AddRefBank = "/RefBank/AddRefBank";
+  public static AddRefBankAsync= "/RefBank/AddRefBankAsync";
   public static DeleteRefBank = "/RefBank/DeleteRefBank";
   public static GetBankByBankCode = "/RefBank/GetBankByBankCode";
 
@@ -204,6 +206,13 @@ export class AdInsConstant {
   public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
   public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
   public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
+  public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
+  public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
+
+  //REF INDUSTRY TYPE
+  public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
+  public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
+  public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
 
   //REF PROV DISTRICT
   public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";

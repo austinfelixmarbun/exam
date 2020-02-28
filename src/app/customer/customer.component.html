@@ -2,20 +2,20 @@
   <div class="card">
     <div class="card-body">
       <div class="px-3">
-        <form class="form form-horizontal" name="CustomerReqForm" #CustomerReqForm="ngForm" novalidate
-          (ngSubmit)="CustomerReqForm.form.valid && SavePros(CustomerReqForm)">
+        <form class="form form-horizontal" #formId="ngForm" [formGroup]="CustomerForm"
+          (ngSubmit)="CustomerForm.valid && SavePros(CustomerForm)">
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Customer Information </h4>
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" for="CustName">Type </label>
               <div class="col-md-9">
                 <div class="custom-control custom-radio display-inline-block">
-                  <input type="radio" id="Personal" value="P" checked name="CustType" [(ngModel)]="CustType"
+                  <input type="radio" id="Personal" value="P" checked formControlName="CustType"
                     class="custom-control-input">
                   <label class="custom-control-label" for="Personal">Personal</label>
                 </div>
                 <div class="custom-control custom-radio display-inline-block">
-                  <input type="radio" id="Company" value="C" name="CustType" [(ngModel)]="CustType"
+                  <input type="radio" id="Company" value="C" formControlName="CustType"
                     class="custom-control-input">
                   <label class="custom-control-label" for="Company">Company</label>
                 </div>
@@ -30,51 +30,43 @@
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" for="CustName">Customer Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" name="CustName" required [(ngModel)]="CustName"
-                  #custName="ngModel" [ngClass]="{ 'is-invalid': CustomerReqForm.submitted && custName.invalid }">
-                <div *ngIf="CustomerReqForm.submitted && custName.invalid" class="invalid-feedback">
-                  <div *ngIf="custName.errors.required" class="adInsReqMsg" translate>This field is required</div>
-                </div>
+                <input type="text" class="form-control adInsInput" formControlName="CustName" 
+                   [ngClass]="{ 'is-invalid': formId.submitted && CustomerForm.controls.CustName.invalid }">
+                   <show-errors [control]="CustomerForm.controls.CustName" [submit]="formId.submitted"></show-errors>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" for="Npwp">NPWP </label>
               <div class="col-md-9">
-                <input type="text" id="Npwp" class="form-control adInsInput" name="Npwp" required [(ngModel)]="Npwp"
-                  #npwp="ngModel" [ngClass]="{ 'is-invalid': CustomerReqForm.submitted && npwp.invalid }">
-                <div *ngIf="CustomerReqForm.submitted && npwp.invalid" class="invalid-feedback">
-                  <div *ngIf="npwp.errors.required" class="adInsReqMsg" translate>This field is required</div>
-                </div>
+                <input type="text" id="Npwp" class="form-control adInsInput" formControlName="Npwp"
+                  [ngClass]="{ 'is-invalid': formId.submitted && CustomerForm.controls.Npwp.invalid }">
+                  <show-errors [control]="CustomerForm.controls.Npwp" [submit]="formId.submitted"></show-errors>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" for="KtpNo">KTP No </label>
               <div class="col-md-9">
-                <input type="text" id="KtpNo" class="form-control adInsInput" name="IdNo" required [(ngModel)]="IdNo"
-                  #ktpNo="ngModel" [ngClass]="{ 'is-invalid': CustomerReqForm.submitted && ktpNo.invalid }">
-                <div *ngIf="CustomerReqForm.submitted && ktpNo.invalid" class="invalid-feedback">
-                  <div *ngIf="ktpNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
-                </div>
+                <input type="text" id="KtpNo" class="form-control adInsInput" formControlName="IdNo"
+                  [ngClass]="{ 'is-invalid': formId.submitted && CustomerForm.controls.IdNo.invalid }">
+                  <show-errors [control]="CustomerForm.controls.IdNo" [submit]="formId.submitted"></show-errors>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" for="MrCustRating">Customer Rating </label>
               <div class="col-md-9">
-                <select class="form-control adInsInput" name="MrCustRating" #mrCustRating [(ngModel)]="MrCustRating">
+                <select class="form-control adInsInput" formControlName="MrCustRating">
                   <option value="INDETERMINED">Indetermined</option>
                   <option value="GOLD">Gold</option>
                 </select>
               </div>
             </div>
-            <div class="form-group row" *ngFor="let item of repeaters;let index = index;trackBy:trackByIndex;">
+            <div class="form-group row" *ngFor="let item of repeaters;let idx = index;trackBy:trackByIndex;">
               <label class="col-md-3  adInsLabel">Input repeater </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" required [(ngModel)]="repeaters[index]" name="test{{index}}"
-                  #item="ngModel" [ngClass]="{ 'is-invalid': CustomerReqForm.submitted && item.invalid }">
-                <div *ngIf="CustomerReqForm.submitted && item.invalid" class="invalid-feedback">
-                  <div *ngIf="item.errors.required" class="adInsReqMsg" translate>This field is required</div>
-                </div>
-              </div>
+                <input type="text" class="form-control" formControlName="item_{{idx}}"
+                  [ngClass]="formId.submitted && CustomerForm.controls['item_'+idx].invalid ? 'is-invalid' : ''" />
+                <show-errors [control]="CustomerForm.controls['item_'+idx]" [submit]="formId.submitted"></show-errors>
+              </div>           
             </div>
             <div *ngFor="let item of repeaters">
               <label>{{item}}</label>
