@@ -277,8 +277,8 @@ export class AdInsConstant {
   public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
   public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
   public static AddWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/AddWorkingHourSchmH";
-  public static AddListWorkingHourSchmD = "https://localhost:5001" + "/WorkingHourSchm/AddListWorkingHourSchmD";
-  public static EditListWorkingHourSchmD = "https://localhost:5001" + "/WorkingHourSchm/EditListWorkingHourSchmD";
+  public static AddListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/AddListWorkingHourSchmD";
+  public static EditListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/EditListWorkingHourSchmD";
   public static EditWorkingHourSchmH = environment.FoundationR3Url +  "/WorkingHourSchm/EditWorkingHourSchmH";
   public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
   public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
