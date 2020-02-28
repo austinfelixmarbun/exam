@@ -207,6 +207,11 @@ export class AdInsConstant {
   public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
   public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
 
+  //REF INDUSTRY TYPE
+  public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
+  public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
+  public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
+
   //REF PROV DISTRICT
   public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
 
