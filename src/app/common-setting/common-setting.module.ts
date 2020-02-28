@@ -38,6 +38,8 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
+import { RefIndustryTypeComponent } from './ref-industry-type/ref-industry-type.component';
+import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
 
 @NgModule({
   imports: [
@@ -81,7 +83,9 @@ import { ProfessionAddEditComponent } from './profession/profession-add-edit/pro
     DistrictAddEditComponent,
     RefStatusPagingComponent,
     ProfessionComponent,
-    ProfessionAddEditComponent
+    ProfessionAddEditComponent,
+    RefIndustryTypeComponent, 
+    RefIndustryTypeDetailComponent
   ],
   providers: [
     {

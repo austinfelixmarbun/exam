@@ -254,6 +254,7 @@ export class AdInsConstant {
 
   //NOTIFICATION
   public static NotificationPost = "/Message/Post";
+  public static NotificationSignalR = "/notification";
 
   //REF CURR
 

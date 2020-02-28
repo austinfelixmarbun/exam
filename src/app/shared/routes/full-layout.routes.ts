@@ -48,10 +48,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: './company/company.module#CompanyModule'
   },
   {
-    path: 'industryType',
-    loadChildren: './ref-industry-type/ref-industry-type.module#RefIndustryTypeModule'
-  },
-  {
     path: 'commonSetting',
     loadChildren: './common-setting/common-setting.module#CommonSettingModule'
   },
