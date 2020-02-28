@@ -211,6 +211,7 @@ export class AdInsConstant {
   public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
   public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
   public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
+  public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
 
   //REF PROV DISTRICT
   public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";

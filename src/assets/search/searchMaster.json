@@ -94,7 +94,8 @@
   ],
   "querystring": { 
     "select": "SELECT REF_MASTER_ID AS refMasterId, MASTER_CODE AS masterCode, DESCR AS descr, SEQ_NO AS seqNo, IS_ACTIVE AS isActive, IS_SYSTEM AS isSystem",
-    "from": "FROM REF_MASTER WITH(NOLOCK)" 
+    "from": "FROM REF_MASTER WITH(NOLOCK)",
+    "where": "IS_ACTIVE = 1"
   },
   "headerList" : [ 
       {
