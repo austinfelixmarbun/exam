@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { ProductRoutingModule } from "./product-routing.module";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UCSearchModule } from "@adins/ucsearch";
 import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { UcSubsectionModule } from "@adins/uc-subsection";
@@ -14,6 +14,7 @@ import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-ad
         ProductRoutingModule,
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         UCSearchModule,
         UcgridfooterModule,
         UcSubsectionModule,
