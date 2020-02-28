@@ -75,4 +75,8 @@ export const Full_ROUTES: Routes = [
     path: 'testNew',
     loadChildren: './test-new/testNew.module#TestNewModule'
   },
+  {
+    path: 'product',
+    loadChildren: './product/product.module#ProductModule'
+  }
 ];
