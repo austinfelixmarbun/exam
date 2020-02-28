@@ -17,6 +17,7 @@ export class RolePickService {
         private router: Router) { }
     openDialog(data, type = ""): void {
         console.log("Get User Title Role");
+        console.log(data);
         if (data.length == undefined) {
             var url = environment.foundationUrl + AdInsConstant.GetListDataCurrentUser;
             var user = { Username: localStorage.getItem("Username") };
@@ -28,7 +29,7 @@ export class RolePickService {
                     if (obj.length == 1 && type == "") {
                         var item = obj[0];
                         var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
-                        var roleObject = { RefRoleId: item.refRoleId, ModuleCode: "FOUNDATION" };
+                        var roleObject = { RefRoleId: item.refRoleId };
                         this.http.post(url, roleObject).subscribe(
                             (response) => {
                                 localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
@@ -36,9 +37,11 @@ export class RolePickService {
                                 currentUserContext.UserName = localStorage.getItem("Username");
                                 currentUserContext.Office = item.officeCode;
                                 currentUserContext.Role = item.roleCode;
+                                currentUserContext.FullName = item.fullName;
                                 currentUserContext.BusinessDate = item.businessDt;
                                 var dateParse = formatDate(item.businessDt, 'yyyy-MM-dd', 'en-US');
                                 localStorage.setItem("BusinessDate", dateParse);
+                                localStorage.setItem("FullName", item.fullName);
                                 localStorage.setItem("UserAccess", JSON.stringify(item));
                                 this.currentUserContextService.addCurrentUserContext(currentUserContext);
                                 localStorage.setItem("RoleId", item.refRoleId);
@@ -76,26 +79,46 @@ export class RolePickService {
             if (obj.length == 1 && type == "") {
                 var item = obj[0];
                 var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
-                var roleObject = { RefRoleId: item.refRoleId, ModuleCode: "FOUNDATION" };
-                this.http.post(url, roleObject).subscribe(
-                    (response) => {
-                        localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
-                        var currentUserContext = new CurrentUserContext;
-                        currentUserContext.UserName = localStorage.getItem("Username");
-                        currentUserContext.Office = item.officeCode;
-                        currentUserContext.Role = item.roleCode;
-                        currentUserContext.BusinessDate = item.businessDt;
-                        var dateParse = formatDate(item.businessDt, 'yyyy-MM-dd', 'en-US');
-                        localStorage.setItem("BusinessDate", dateParse);
-                        localStorage.setItem("UserAccess", JSON.stringify(item));
-                        this.currentUserContextService.addCurrentUserContext(currentUserContext);
-                        localStorage.setItem("RoleId", item.refRoleId);
-                        this.router.navigate(['dashboard/dash-board']);
-                    },
-                    (error) => {
-                        console.log(error);
-                    }
-                )
+                var roleObject = { RefRoleId: item.refRoleId };
+
+                //jgn lupa delete
+                localStorage.setItem("Menu", "[]");//JSON.stringify(response["returnObject"]));
+                var currentUserContext = new CurrentUserContext;
+                currentUserContext.UserName = localStorage.getItem("Username");
+                currentUserContext.Office = item.officeCode;
+                currentUserContext.Role = item.roleCode;
+                currentUserContext.FullName = item.fullName;
+                currentUserContext.BusinessDate = item.businessDt;
+                var dateParse = formatDate(item.businessDt, 'yyyy-MM-dd', 'en-US');
+                localStorage.setItem("BusinessDate", dateParse);
+                localStorage.setItem("FullName", item.fullName);
+                localStorage.setItem("UserAccess", JSON.stringify(item));
+                this.currentUserContextService.addCurrentUserContext(currentUserContext);
+                localStorage.setItem("RoleId", item.refRoleId);
+                this.router.navigate(['dashboard/dash-board']);
+                //jgn lupa delete
+
+                // this.http.post(url, roleObject).subscribe(
+                //     (response) => {
+                //         localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
+                //         var currentUserContext = new CurrentUserContext;
+                //         currentUserContext.UserName = localStorage.getItem("Username");
+                //         currentUserContext.Office = item.officeCode;
+                //         currentUserContext.Role = item.roleCode;
+                //         currentUserContext.FullName = item.fullName;
+                //         currentUserContext.BusinessDate = item.businessDt;
+                //         var dateParse = formatDate(item.businessDt, 'yyyy-MM-dd', 'en-US');
+                //         localStorage.setItem("BusinessDate", dateParse);
+                //         localStorage.setItem("FullName", item.fullName);
+                //         localStorage.setItem("UserAccess", JSON.stringify(item));
+                //         this.currentUserContextService.addCurrentUserContext(currentUserContext);
+                //         localStorage.setItem("RoleId", item.refRoleId);
+                //         this.router.navigate(['dashboard/dash-board']);
+                //     },
+                //     (error) => {
+                //         console.log(error);
+                //     }
+                // )
             }
             //Ini kalau dia ada lebih dari 1 Role, maka buka modal
             else {
