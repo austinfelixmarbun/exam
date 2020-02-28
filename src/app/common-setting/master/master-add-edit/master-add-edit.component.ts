@@ -2,7 +2,7 @@
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators, FormBuilder } from '@angular/forms';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
@@ -18,19 +18,24 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class MasterAddEditComponent implements OnInit {
 
-  settingUrl: string = environment.settingUrl;
-  apiUrl: any;
-  refMasterObj: RefMasterObj;
+  settingUrl: string = environment.FoundationR3Url;
+  refMasterObj: RefMasterObj = new RefMasterObj();
   refMasterTypeObj: any;
   type: string = 'add';
-  masterCodeModel: any;
-  descrModel: any;
-  refMasterTypeCodeModule: any;
-  isActive: boolean=true;
   refMasterId: any;
   resultData: any;
-  sandiBI: any;
-  seqNo: any;
+
+  RefMasterForm = this.fb.group({
+    RefMasterId: [0, [Validators.required]],
+    RefMasterTypeCode: ['', [Validators.required]],
+    MasterCode: ['', [Validators.required, Validators.maxLength(50)]],
+    SeqNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    Descr: ['', [Validators.required]],
+    IsActive: [true],
+    RowVersion: [''],
+    IsDeletable: [true],
+    IsSystem: [false]
+  });
 
   constructor(
     private router: Router,
@@ -39,39 +44,41 @@ export class MasterAddEditComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
     private service: NGXToastrService,
+    private fb: FormBuilder
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['mode'] != null) {
-        this.type = params['mode'];
+      if (params['param'] != null) {
+        this.type = params['param'];
       }
       if (params['refMasterId'] != null) {
         this.refMasterId = params['refMasterId'];
       }
-      console.log(this.type)
-      console.log(this.refMasterId)
     });
   }
 
 
   ngOnInit() {
     console.log('masuk');
-    this.refMasterObj = new RefMasterObj()
     this.GetListMasterType();
     if (this.type == 'edit') {
-      this.apiUrl = this.settingUrl + AdInsConstant.GetRefMaster;
-      this.refMasterObj = new RefMasterObj()
-      this.refMasterObj.refMasterId = +this.refMasterId
-      this.httpClient.post(this.apiUrl, this.refMasterObj).subscribe(
+      this.refMasterObj.RefMasterId = this.refMasterId;
+      var getRefMasterUrl = this.settingUrl + AdInsConstant.GetRefMasterByRefMasterId;
+      this.httpClient.post(getRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
           console.log('Success Get');
-          this.refMasterObj = response['returnObject'];
-          console.log(this.refMasterObj);
-          this.masterCodeModel = response['returnObject']['masterCode'];
-          this.descrModel = response['returnObject']['descr'];
-          this.sandiBI = response['returnObject']['reserveField1'];
-          this.seqNo = response['returnObject']['seqNo'];
-          if (this.refMasterObj.isActive == '1') { this.isActive = true; } else { this.isActive = false; }
-          if (this.refMasterObj.refMasterTypeCode == null) { this.refMasterTypeCodeModule = '' } else { this.refMasterTypeCodeModule = this.refMasterObj.refMasterTypeCode };
+          console.log(JSON.stringify(response));
+          this.resultData = response;
+          this.RefMasterForm.patchValue({
+            RefMasterId: this.resultData.RefMasterId,
+            RefMasterTypeCode: this.resultData.RefMasterTypeCode,
+            MasterCode: this.resultData.MasterCode,
+            SeqNo: this.resultData.SeqNo,
+            Descr: this.resultData.Descr,
+            IsActive: this.resultData.IsActive,
+            RowVersion: this.resultData.RowVersion,
+            IsDeletable: this.resultData.IsDeletable,
+            IsSystem: this.resultData.IsSystem
+          });
         },
         (error) => {
           console.log('Error Get');
@@ -85,104 +92,50 @@ export class MasterAddEditComponent implements OnInit {
     this.location.back();
   }
 
-  Save(MasterAddEditForm: NgForm): void {
+  Save() {
     this.spinner.show();
-    var returnObj: Array<any> = [];
-    var getRefMasterUrl = this.settingUrl + AdInsConstant.GetRefMasterListByTypeCode;
-    var masterObj: RefMasterObj;
-    masterObj = new RefMasterObj()
-    masterObj.refMasterTypeCode = MasterAddEditForm.value.refMasterTypeCodeModule;
-    masterObj.masterCode = MasterAddEditForm.value.masterCodeModel;
+    this.refMasterObj = this.RefMasterForm.value;
 
     //MODE-ADD
     if (this.type != 'edit') {
-
-      //CHECK-DUPLICATE-CODE
-      this.httpClient.post(getRefMasterUrl, masterObj).subscribe(
+      var addRefMasterUrl = this.settingUrl + AdInsConstant.AddRefMaster;
+      this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
+        //SAVE
         (response) => {
-          console.log("Success Check Duplicate");
-          returnObj = response['returnObject'];
-          console.log(returnObj);
-          if (returnObj.length > 0) {
-            this.service.typeErrorCustom('Code Has Been Used');
-          }
-          else {
-            this.apiUrl = this.settingUrl + AdInsConstant.AddRefMaster;
-
-            this.refMasterObj = new RefMasterObj();
-            this.refMasterObj.refMasterTypeCode = MasterAddEditForm.value.refMasterTypeCodeModule;
-            this.refMasterObj.masterCode = MasterAddEditForm.value.masterCodeModel;
-            this.refMasterObj.descr = MasterAddEditForm.value.descrModel;
-            this.refMasterObj.reserveField1 = MasterAddEditForm.value.sandiBI;
-            this.refMasterObj.seqNo = MasterAddEditForm.value.seqNo;
-            this.refMasterObj.isSystem = '3';
-            this.refMasterObj.isDeleteable = '1';
-            if (MasterAddEditForm.value.isActive) { this.refMasterObj.isActive = '1' } else { this.refMasterObj.isActive = '0' };
-
-            //SAVE
-            this.httpClient.post(this.apiUrl, this.refMasterObj).subscribe(
-              (response) => {
-                console.log("Success Save");
-                //location.reload();
-                this.service.typeSave(response['message']);
-                this.router.navigateByUrl('commonSetting/master', { skipLocationChange: true }).then(() =>
-                this.router.navigate(['/commonSetting/master/detail']));
-                // this.router.navigate(['/commonSetting/master/detail']);
-
-              },
-              (error) => {
-                console.log("Error Save");
-                this.service.typeErrorCustom(error);
-              }
-            );
-          }
+          console.log("Success Save");
+          this.service.typeSave(response['message']);
+          this.router.navigateByUrl('commonSetting/master', { skipLocationChange: true }).then(() =>
+          this.router.navigate(['/commonSetting/master/detail']));
         },
         (error) => {
-          console.log("Error Check Duplicate");
+          console.log("Error Save : ");
           this.service.typeErrorCustom(error);
         }
       );
-
-
     }
     //MODE-EDIT
     else {
-      this.apiUrl = this.settingUrl + AdInsConstant.EditRefMaster;
-
-      this.refMasterObj.refMasterId = this.refMasterId;
-      this.refMasterObj.refMasterTypeCode = MasterAddEditForm.value.refMasterTypeCodeModule;
-      this.refMasterObj.masterCode = MasterAddEditForm.value.masterCodeModel;
-      this.refMasterObj.descr = MasterAddEditForm.value.descrModel;
-      this.refMasterObj.reserveField1 = MasterAddEditForm.value.sandiBI;
-      this.refMasterObj.seqNo = MasterAddEditForm.value.seqNo
-      if (MasterAddEditForm.value.isActive) { this.refMasterObj.isActive = '1' } else { this.refMasterObj.isActive = '0' };
-
+      var addRefMasterUrl = this.settingUrl + AdInsConstant.EditRefMaster;
       //SAVE
-      this.httpClient.post(this.apiUrl, this.refMasterObj).subscribe(
+      this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
           console.log("Success Edit");
-
           this.service.typeSave(response['message']);
           this.location.back();
           this.spinner.hide();
-
         },
         (error) => {
           console.log("Error Edit");
-
           this.service.typeErrorCustom(error);
           this.spinner.hide();
         }
       );
-
     }
-
   }
 
   GetListMasterType() {
-    this.apiUrl = this.settingUrl + AdInsConstant.GetRefMasterTypeKeyValueUserSetting;
-    var masterObj = new RefMasterObj();
-    this.httpClient.post(this.apiUrl, masterObj).subscribe(
+    var url = this.settingUrl + AdInsConstant.GetListActiveRefMasterType;
+    this.httpClient.post(url, null).subscribe(
       (response) => {
         this.refMasterTypeObj = response;
       },
