@@ -46,7 +46,7 @@ export class AdInsConstant {
   //REF OFFICE AREA
   public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
   public static GetRefOfficeAreaPaging = "/RefOfficeArea/GetRefOfficeAreaPaging";
-  public static GetRefArea = "/RefOfficeArea/GetRefArea";
+  public static GetRefArea = "/RefOfficeArea/GetRefOfficeAreaForUpdateByRefOfficeAreaId";
   public static AddRefOfficeArea = "/RefOfficeArea/AddRefOfficeArea";
   public static EditRefOfficeArea = "/RefOfficeArea/EditRefOfficeArea";
   public static DeleteRefOfficeArea = "/RefOfficeArea/DeleteRefOfficeArea";

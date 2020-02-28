@@ -17,7 +17,7 @@ import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 })
 export class OfficeAreaAddEditComponent implements OnInit {
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = "http://localhost/R3/Foundation";
   apiUrl: any;
   parents: string;
   refOfficeAreaObj: RefOfficeAreaObj;
@@ -55,10 +55,10 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.httpClient.post(this.apiUrl, this.refOfficeAreaObj).subscribe(
         (response) => {
           console.log('Success Get');
-          this.refOfficeAreaObj = response['returnObject'];
-          this.areaCode = response['returnObject']['areaCode']
-          this.areaName = response['returnObject']['areaName']
-          if (this.refOfficeAreaObj.isActive == '1') {
+          this.resultData = response;
+          this.areaCode = response['AreaCode']
+          this.areaName = response['AreaName']
+          if (this.resultData.IsActive == '1') {
             this.isActive = true;
           }
           else {
@@ -122,12 +122,12 @@ export class OfficeAreaAddEditComponent implements OnInit {
     //MODE-EDIT
     else {
       this.apiUrl = this.foundationUrl + AdInsConstant.EditRefOfficeArea;
-      this.refOfficeAreaObj.refOfficeAreaId = this.refOfficeAreaId;
-      this.refOfficeAreaObj.areaCode = OffAreaForm.value.areaCode;
-      this.refOfficeAreaObj.areaName = OffAreaForm.value.areaName;
-      if (OffAreaForm.value.isActive) { this.refOfficeAreaObj.isActive = '1' } else { this.refOfficeAreaObj.isActive = '0' };
+      this.resultData.RefOfficeAreaId = this.refOfficeAreaId;
+      this.resultData.AreaCode = OffAreaForm.value.areaCode;
+      this.resultData.AreaName = OffAreaForm.value.areaName;
+      this.resultData.IsActive = OffAreaForm.value.isActive;
       //SAVE
-      this.httpClient.post(this.apiUrl, this.refOfficeAreaObj).subscribe(
+      this.httpClient.post(this.apiUrl, this.resultData).subscribe(
         (response) => {
           this.service.typeSave(response['message']);
           this.location.back();

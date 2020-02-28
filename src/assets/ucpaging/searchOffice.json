@@ -1,0 +1,201 @@
+{
+    "title": "Office",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "officeCode",
+            "id": "officeCodeId",
+            "value": "",
+            "label": "Office Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "officeName",
+            "id": "officeNameId",
+            "value": "",
+            "label": "Office Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "officeParent",
+            "id": "officeParentId",
+            "value": "",
+            "label": "Office Parent",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "officeAddr",
+            "id": "addrId",
+            "value": "",
+            "label": "Address",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "isActive",
+            "id": "actStatId",
+            "value": "ActiveStat",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "url": "https://api.myjson.com/bins/ld6e8",
+            "label": "Active Status",
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        },
+        {
+            "type": "dropdown",
+            "name": "officeType",
+            "id": "officeTypeId",
+            "value": "OfficeType",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "url": "https://api.myjson.com/bins/ld6e8",
+            "label": "Active Status",
+            "items": [
+                {
+                    "key": "HO",
+                    "value": "Head Office"
+                },
+                {
+                    "key": "BRC",
+                    "value": "Branch"
+                },
+                {
+                    "key": "GRP",
+                    "value": "Center Group"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ],
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Office Code",
+            "name": "officeCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Office Name",
+            "name": "officeName"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Office Address",
+            "name": "officeAddr"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Office Parent",
+            "name": "officeParrent"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active",
+            "name": "isActive"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Office Type",
+            "name": "officeType"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Office Member",
+            "name": "officeMember"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Edit"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Delete"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "officeCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "officeName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "officeAddr"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "officeParrent"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "isActive"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "officeType"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "officeMember"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/office/add",
+                    "param": [
+                        {
+                            "type": "refOfficeId",
+                            "property": "refOfficeId"
+                        },
+                        {
+                            "type": "param",
+                            "property": "edit"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "querystring": {
+        "select": "SELECT RE.REF_OFFICE_ID AS refOfficeId,RE.OFFICE_ADDR AS officeAddr,RE.OFFICE_CODE AS officeCode,RE.OFFICE_NAME AS officeMember,RE.MR_OFFICE_TYPE_CODE AS officeType,RE.OFFICE_NAME AS officeName,RE.IS_ACTIVE AS IsActive",
+        "from": "FROM REF_OFFICE RE WITH(NOLOCK)"
+    }
+}

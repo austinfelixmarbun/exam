@@ -1,80 +1,8 @@
 <div class="ucSearch-Button-Right">
     <span class="mr-1">
-        <button type="button" class="addButton" [routerLink]="['/office/add']" translate>
+        <button type="button" class="addButton" [routerLink]="['/office/office-add']" translate>
             <i class="ft-plus-circle"></i> Add
         </button>
     </span>
 </div>
-<lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
-
-<div [hidden]="resultData?.data == null">
-    <table class="table table-responsive-md text-center table-hover table-striped">
-        <thead>
-            <tr class="table-header">
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                        name='officeName'>Office Name</span></th>
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                        name='officeCode'>Office Code</span></th>
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                        name='cntctPersonName'>Contact Person</span></th>
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                        name='officeAddr'>Address</span></th>
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                        name='orgMdlName'>Model Name</span></th>
-                <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active
-                        Status</span></th>
-                <th><span translate class="thead-header" (click)="searchSort($event)"
-                        name='mrKonvenSyariah'>Konvensional / Syariah</span></th>
-                <th><span translate class="thead-header" (click)="searchSort($event)" name='isVirtualOffice'>Virtual
-                        Office</span></th>
-                <th translate>Office Group Member</th>
-                <th translate>Employee List</th>
-                <th translate>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of resultData?.data">
-                <td class="text-left">{{item.officeName}}</td>
-                <td class="text-left">{{item.officeCode}}</td>
-                <td class="text-left">{{item.cntctPersonName}}</td>
-                <td class="text-left">{{item.officeAddr}}</td>
-                <td class="text-left">{{item.orgMdlName}}</td>
-                <td>
-                    <span class="text-left" *ngIf="item.isActive == '1'">Yes</span>
-                    <span class="text-left" *ngIf="item.isActive == '0'">No</span>
-                </td>
-                <td class="text-left" *ngIf="item.mrKonvenSyariah == 'KON'">Konvensional</td>
-                <td class="text-left" *ngIf="item.mrKonvenSyariah == 'SYA'">Syariah</td>
-                <td class="text-left" *ngIf="item.mrKonvenSyariah == '' || item.mrKonvenSyariah == null"></td>
-                <td>
-                    <span class="text-left" *ngIf="item.isVirtualOffice == '1'">Yes</span>
-                    <span class="text-left" *ngIf="item.isVirtualOffice == '0'">No</span>
-                </td>
-                <td>
-                    <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/office-group-member']"
-                        [queryParams]="{refOfficeId:item.refOfficeId,officeCode:item.officeCode,officeName:item.officeName}">
-                        <i *ngIf="item.mrOfficeType == 'CG'" class="ft-edit-2 font-medium-3 mr-2"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/officeEmpPos']"
-                        [queryParams]="{refOfficeId:item.refOfficeId,officeCode:item.officeCode,officeName:item.officeName}">
-                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/add']"
-                        [queryParams]="{param:'edit',refOfficeId:item.refOfficeId}" [ngClass]="{'d-none': displayNone}">
-                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
-                    </a>
-                    <a class="danger p-0" data-original-title="" title="" (click)="delete(item.refOfficeId)">
-                        <i class="ft-trash-2 font-medium-3 mr-2"></i>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
-    <!-- <i class="fa fa-plus-circle" [routerLink]="['/office/add']"
-    style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i> -->
-</div>
+<lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
