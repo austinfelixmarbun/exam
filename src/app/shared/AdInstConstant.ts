@@ -294,11 +294,18 @@ export class AdInsConstant {
   //WORKHOUR
   public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
   public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
-  public static AddWorkingHourSchmH = "/WorkHour/AddWorkingHourSchmH";
-  public static EditWorkingHourSchmH = "/WorkHour/EditWorkingHourSchmH";
+  public static AddWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/AddWorkingHourSchmH";
+  public static AddListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/AddListWorkingHourSchmD";
+  public static EditListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/EditListWorkingHourSchmD";
+  public static EditWorkingHourSchmH = environment.FoundationR3Url +  "/WorkingHourSchm/EditWorkingHourSchmH";
   public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
   public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
   public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
+  public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchm";
+  public static GetWorkingHourSchmHById = environment.FoundationR3Url + "/WorkingHourSchm/GetWorkingHourSchmHById";
+  public static GetListWorkingHourSchmDByWorkingHourHId = environment.FoundationR3Url + "/WorkingHourSchm/GetListWorkingHourSchmDByWorkingHourHId";
+
+
 
   //QUEUE
   public static AddQueue = "http://R3App-Server/FOUNDATION/RabbitMq/AddQueue";
