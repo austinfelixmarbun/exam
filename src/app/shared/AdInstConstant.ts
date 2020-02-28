@@ -106,7 +106,7 @@ export class AdInsConstant {
 
   //REF-EMP
   public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
-  public static GetRefEmployeeById = "/RefEmp/GetEmp"
+  public static GetRefEmployeeById = environment.FoundationR3Url +"/RefEmp/GetRefEmpByRefEmpId"
   public static AddRefEmp = "/RefEmp/AddRefEmp";
   public static EditRefEmp = "/RefEmp/EditRefEmp";
   public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";

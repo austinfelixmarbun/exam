@@ -8,6 +8,8 @@ import { UcSubsectionModule } from "@adins/uc-subsection";
 import { UcpagingModule } from "@adins/ucpaging";
 import { ProductHOPagingComponent } from './product-HO/product-ho-paging/product-ho-paging.component';
 import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-add.component';
+import { ProdOfferingPagingComponent } from 'app/product/prod-offering/prod-offering-paging/prod-offering-paging.component';
+import { ProdOfferingAddComponent } from 'app/product/prod-offering/prod-offering-add/prod-offering-add.component';
 
 @NgModule({
     imports: [
@@ -22,27 +24,9 @@ import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-ad
     ],
     declarations: [
         ProductHOPagingComponent,
-        ProductHOAddComponent
+        ProductHOAddComponent,
+        ProdOfferingPagingComponent,
+        ProdOfferingAddComponent
     ]
 })
-export class ProductModule { }
-import { NgModule } from '@angular/core';
-import { ProductRoutingModule } from 'app/product/product-routing.module';
-import { UcpagingModule } from '@adins/ucpaging';
-import { ProdOfferingPagingComponent } from 'app/product/prod-offering/prod-offering-paging/prod-offering-paging.component';
-import { ProdOfferingAddComponent } from 'app/product/prod-offering/prod-offering-add/prod-offering-add.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-@NgModule({
-    imports: [
-        ProductRoutingModule,
-        UcpagingModule,
-        ReactiveFormsModule
-    ],
-    declarations: [
-        ProdOfferingPagingComponent,
-        ProdOfferingAddComponent,
-    ]
-  })
-
 export class ProductModule { }

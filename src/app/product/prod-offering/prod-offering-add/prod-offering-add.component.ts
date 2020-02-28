@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ProdOfferingObj } from 'app/shared/model/ProdOfferingObj.Mode';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UcLookupObj }
+
 
 @Component({
   selector: 'app-prod-offering-add',
