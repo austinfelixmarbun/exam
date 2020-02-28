@@ -333,6 +333,11 @@ export class AdInsConstant {
   // GENERIC
   public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
 
+  // PRODUCT
+  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
+  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
+  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
+
   //PRODUCT OFFERING
   public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo"
   public static AddProdOffering = environment.FoundationR3Url +"/ProductOffering/AddProdOffering"
