@@ -3,7 +3,20 @@
       <button type="button" class="addButton" [routerLink]="['/commonSetting/economicSector/detail']" translate>
           <i class="ft-plus-circle"></i> Add
       </button>
+        
+
+      <button type="button" class="backButton" [routerLink]="['/commonSetting/province/paging']"
+      translate>
+      <i class="ft-x"></i> Back
+    </button>
   </span>
 </div>
+
+
+<!-- 
+<lib-ucviewgeneric [viewInput]="viewObj"></lib-ucviewgeneric> -->
+
+
+
 <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
  

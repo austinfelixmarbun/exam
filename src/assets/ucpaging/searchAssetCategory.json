@@ -1,21 +1,21 @@
 {
-    "title": "Asset Configuration",
+    "title": "Asset Category",
     "exportExcel": true,
     "component": [
       {
         "type": "textbox",
-        "name": "ASSET_TYPE_CODE",
+        "name": "ASSET_CATEGORY_CODE",
         "id": "assetTypeCode",
         "value": "",
-        "label": "Asset Type Code",
+        "label": "Asset Category Code",
         "placeholder": "Placeholder"
       },
       {
         "type": "textbox",
-        "name": "ASSET_TYPE_NAME",
+        "name": "ASSET_CATEGORY_NAME",
         "id": "assetTypeName",
         "value": "",
-        "label": "Asset Type Name",
+        "label": "Asset Category Name",
         "placeholder": "Placeholder"
       },
       {
@@ -45,51 +45,42 @@
       {
         "type": "sort",
         "position": "left",
-        "label": "Asset Type Code",
-        "name": "AssetTypeCode"
+        "label": "Asset CATEGORRY CODE",
+        "name": "AssetCategoryCode"
       },
       {
         "type": "sort",
         "position": "left",
-        "label": "Asset Type Name",
-        "name": "AssetTypeName"
+        "label": "Asset CATEGORY NAME",
+        "name": "AssetCategoryName"
       },
       {
         "type": "sort",
         "position": "center",
-        "label": "Active Status",
-        "name": "IsActive"
+        "label": "ACTIVE STATUS",
+        "name": "isActive"
       },
       {
         "type": "label",
         "position": "center",
-        "label": "ASSET CATEGORY"
-      },
-      {
-        "type": "label",
-        "position": "center",
-        "label": "ASSET DOCUMENT"
-      },
-      {
-        "type": "label",
-        "position": "center",
-        "label": "ASSET ACCESORY"
+        "label": "ACTION"
       }
+      
     ],
     "querystring": { 
-      "select": "SELECT A.ASSET_TYPE_ID as AssetTypeId,  A.ASSET_TYPE_CODE as AssetTypeCode, A.ASSET_TYPE_NAME as AssetTypeName, A.IS_ACTIVE as IsActive",
-      "from": "FROM ASSET_TYPE A WITH(NOLOCK)"
+      "select": "SELECT A.ASSET_CATEGORY_CODE as AssetCategoryCode, A.ASSET_CATEGORY_NAME as AssetCategoryName, A.IS_ACTIVE as IsActive",
+      "from": "FROM ASSET_CATEGORY A WITH(NOLOCK)"
     },
     "bodyList": [
       {
         "type": "text",
         "position": "left",
-        "property": "AssetTypeCode"
+        "property": "AssetCategoryCode"
       },
       {
         "type": "text",
         "position": "left",
-        "property": "AssetTypeName"
+        "property": "AssetCategoryName"
       },
       {
         "type": "boolean",
@@ -102,27 +93,6 @@
         "action": [
           {
             "type": "edit",
-            "path": "/asset/configuration/category",
-            "param": [
-              {
-                "type": "AssetTypeName",
-                "property": "AssetTypeName"
-              },
-              {
-                "type": "AssetTypeCode",
-                "property": "AssetTypeCode"
-              }
-            ]
-          }
-        ]
-      },
-
-      {
-        "type": "action",
-        "position": "center",
-        "action": [
-          {
-            "type": "edit",
             "path": "/commonSetting/currency/add",
             "param": [
               {
@@ -134,29 +104,14 @@
                 "property": "assetTypeName"
               }
             ]
-          }
+          },
+          
+        {
+          "type": "delete",
+          "property": "refProvDistrictId"
+        }
         ]
-      },
-      {
-        "type": "action",
-        "position": "center",
-        "action": [
-          {
-            "type": "edit",
-            "path": "/commonSetting/currency/add",
-            "param": [
-              {
-                "type": "refCurrId",
-                "property": "assetTypeName"
-              },
-              {
-                "type": "param",
-                "property": "assetTypeName"
-              }
-            ]
-          }
-        ]
-      }
+      } 
 
 
 

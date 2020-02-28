@@ -1,0 +1,26 @@
+{
+    "title": "TAXPAYER VIEW",
+    "subsection": [
+      {
+        "subSectionId": "title",
+        "subSectionTitle": "Main Information",
+        "mainInfoUrl": "http://r3app-server/Tax/Taxpayer/GetTaxPayerByTaxpayerNo",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Asset Type Code",
+            "property": "AssetTypeCode",
+            "position": "left"
+          },
+          {
+            "type": "text",
+            "label": "Asset Type Name",
+            "property": "AssetTypeName",
+            "position": "left"
+          }
+          
+        ]
+      }
+     
+    ]
+  }

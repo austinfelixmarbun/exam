@@ -2,7 +2,7 @@ import { MasterTypeAddEditComponent } from 'app/common-setting/master-type/maste
 import { MasterPagingComponent } from 'app/common-setting/master/master-paging/master-paging.component';
 import { MasterAddEditComponent } from 'app/common-setting/master/master-add-edit/master-add-edit.component';
 import { CommonSettingRoutingModule } from 'app/common-setting/common-setting-routing.module';
-import { MasterTypePagingComponent } from 'app/common-setting/master-type/master-type-paging/master-type-paging.component';
+
 import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
@@ -38,6 +38,7 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
+import { MasterTypePagingComponent } from './master-type/master-type-paging/master-type-paging.component';
 
 @NgModule({
   imports: [
