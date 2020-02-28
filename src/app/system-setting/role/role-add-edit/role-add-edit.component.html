@@ -2,53 +2,46 @@
   <div class="card">
     <div class="card-body">
       <div class="px-3">
-        <form class="form form-horizontal" name="RoleAddEditForm" #RoleAddEditForm="ngForm" novalidate
-          (ngSubmit)="RoleAddEditForm.form.valid && Save(RoleAddEditForm)">
-          <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Role Information </h4>
-            <br>
-            <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="roleCodeModel">Role Code</label>
-              <div class="col-md-9">
-                <input type="text" class="form-control adInsInput width-25-per" name="roleCodeModel" required [(ngModel)]="roleCodeModel"
-                  #roleCode="ngModel" [ngClass]="{ 'is-invalid': RoleAddEditForm.submitted && roleCode.invalid }"
-                  [attr.disabled]="type == 'edit' ? true : null">
-                <div *ngIf="RoleAddEditForm.submitted && roleCode.invalid" class="invalid-feedback">
-                  <div *ngIf="roleCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
+        <div class="addEdit">
+          <form class="form form-horizontal" [formGroup]="RefRoleForm" (ngSubmit)="RefRoleForm.valid && SaveForm()"
+                #enjiForm="ngForm">
+            <div class="form-body">
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Ref Role {{this.pageType}}</h4>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel adins-required" translate>Role Code </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="RoleCode"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefRoleForm.controls.RoleCode.invalid }">
+                  <show-errors [control]="RefRoleForm.controls.RoleCode" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel adins-required" translate>Role Name </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="RoleName"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefRoleForm.controls.RoleName.invalid }">
+                  <show-errors [control]="RefRoleForm.controls.RoleName" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Active </label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck
+                         formControlName="IsActive" />
                 </div>
               </div>
             </div>
-
-            <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="roleNameModel">Role Name</label>
-              <div class="col-md-9">
-                <input type="text" class="form-control adInsInput width-75-per" name="roleNameModel" required [(ngModel)]="roleNameModel"
-                  #roleName="ngModel" [ngClass]="{ 'is-invalid': RoleAddEditForm.submitted && roleName.invalid }">
-                <div *ngIf="RoleAddEditForm.submitted && roleName.invalid" class="invalid-feedback">
-                  <div *ngIf="roleName.errors.required" class="adInsReqMsg" translate>This field is required</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
-              <div class="custom-control custom-checkbox m-0">
-                <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
-                  [checked]="isActive">
-              </div>
-            </div>
-
-          </div>
-          <div class="form-actions">
-
-              <button *ngIf=" type == 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-                <i class="fa fa-arrow-circle-left"></i> Back
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/systemSetting/role']"
+                translate>
+                <i class="ft-x"></i> Back
               </button>
-            <button type="submit" class="btn btn-raised btn-primary">
-              <i class="fa fa-check-square-o"></i> Save
-            </button>
-          </div>
-        </form>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

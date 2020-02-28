@@ -137,10 +137,10 @@ export class AdInsConstant {
 
   //REF-ROLE
   public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
-  public static AddRefRole = "/UserManagement/AddRefRole";
-  public static EditRefRole = "/UserManagement/EditRefRole";
-  public static DeleteRefRole = "/UserManagement/DeleteRefRole";
-  public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
+  public static AddRefRole = environment.FoundationR3Url +"/RefRole/AddRefRole";
+  public static EditRefRole = environment.FoundationR3Url +"/RefRole/EditRefRole";
+  public static DeleteRefRole = "/RefRole/DeleteRefRole";
+  public static GetRefRoleByRefRoleId = environment.FoundationR3Url + "/RefRole/GetRefRoleById";
   public static GetRefRoleByCode = environment.FoundationR3Url + "/RefRole/GetRefRoleByCode";
   public static GetActiveRefRoleByRefRoleId = "/RefRole/GetActiveRefRoleByRefRoleId";
   public static GetRefRole = "/RefRole/GetRefRole";

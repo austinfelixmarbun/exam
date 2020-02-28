@@ -2,7 +2,7 @@
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
@@ -18,17 +18,21 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class RoleAddEditComponent implements OnInit {
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   parents: string;
   refRoleObj: RefRoleObj;
   type: string = 'Add';
   roleCodeModel: any;
   roleNameModel: any;
-  isActive: boolean = true;
-  refRoleId: any;
+  IsActive: boolean = true;
+  RefRoleId: any;
   resultData: any;
-
+  RefRoleForm = this.fb.group({
+    RoleCode: ['', [Validators.required, Validators.maxLength(50)]],
+    RoleName: ['', [Validators.required, Validators.maxLength(100)]],
+    IsActive: [true]
+  });
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -36,43 +40,37 @@ export class RoleAddEditComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
     private service: NGXToastrService,
+    private fb: FormBuilder
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
         this.type = params['mode'];
       }
-      if (params['refRoleId'] != null) {
-        this.refRoleId = params['refRoleId'];
+      if (params['RefRoleId'] != null) {
+        this.RefRoleId = params['RefRoleId'];
       }
       console.log(this.type)
-      console.log(this.refRoleId)
+      console.log(this.RefRoleId)
     });
   }
 
 
   ngOnInit() {
     if (this.type == 'edit') {
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
-      var abc = 'http://172.19.10.228:8280/Foundation/v1/RefRole/GetRefRoleByRefRoleId';
-      this.refRoleObj = new RefRoleObj()
-      this.refRoleObj.refRoleId = +this.refRoleId
-      this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
-        (response) => {
-          console.log('Success Get');
-          this.refRoleObj = response['returnObject'];
-          console.log(this.refRoleObj);
-          this.roleCodeModel = response['returnObject']['roleCode']
-          this.roleNameModel = response['returnObject']['roleName']
-          if (this.refRoleObj.isActive == '1') {
-            this.isActive = true;
-          }
-          else {
-            this.isActive = false;
-          }
+      this.RefRoleForm.controls["RoleCode"].disable();
+      this.refRoleObj = new RefRoleObj();
+      this.refRoleObj.RefRoleId = this.RefRoleId;
+      this.httpClient.post(AdInsConstant.GetRefRoleByRefRoleId, this.refRoleObj).subscribe(
+        response => {
+          this.resultData = response;
+          this.RefRoleForm.patchValue({
+            RoleCode: this.resultData.RoleCode,
+            RoleName: this.resultData.RoleName,
+            IsActive: this.resultData.IsActive
+          });
 
         },
-        (error) => {
-          console.log('Error Get');
+        error => {
           console.log(error);
         }
       );
@@ -83,94 +81,37 @@ export class RoleAddEditComponent implements OnInit {
     this.location.back();
   }
 
-  Save(RoleAddEditForm: NgForm): void {
-    this.spinner.show();
-    var getRoleUrl = this.foundationUrl + AdInsConstant.GetRefRole;
-    var getRoleUrlGateway = 'http://01-05-0064-0618/FOUNDATION_R3/RefRole/GetRefRole'
-    var roleObj: RefRoleObj;
-    roleObj = new RefRoleObj()
-    roleObj.roleCode = RoleAddEditForm.value.roleCodeModel;
-
-
-
-    //MODE-ADD
-    if (this.type != 'edit') {
-
-      //CHECK-DUPLICATE-CODE
-      this.httpClient.post(getRoleUrl, roleObj).subscribe(
-        (response) => {
-          console.log("Success Check Duplicate");
-          roleObj = response['returnObject'];
-          if (roleObj != null) {
-            this.service.typeErrorCustom('Code Has Been Used');
-          }
-          else {
-            this.apiUrl = this.foundationUrl + AdInsConstant.AddRefRole;
-
-            this.refRoleObj = new RefRoleObj();
-            this.refRoleObj.roleCode = RoleAddEditForm.value.roleCodeModel;
-            this.refRoleObj.roleName = RoleAddEditForm.value.roleNameModel;
-            if (RoleAddEditForm.value.isActive) { this.refRoleObj.isActive = '1' } else { this.refRoleObj.isActive = '0' };
-
-            //SAVE
-            this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
-              (response) => {
-                console.log("Success Save");
-
-                this.service.typeSave(response['message']);
-                this.router.navigateByUrl('/systemSetting/role', { skipLocationChange: true }).then(() =>
-                this.router.navigate(['/systemSetting/role/detail']));
-                this.spinner.hide();
-
-              },
-              (error) => {
-                console.log("Error Save");
-
-                this.service.typeErrorCustom(error);
-                this.spinner.hide();
-              }
-            );
-          }
+  SaveForm() {
+    if (this.type == "Add") {
+      this.refRoleObj = new RefRoleObj();
+      this.refRoleObj.RoleCode = this.RefRoleForm.controls["RoleCode"].value
+      this.refRoleObj.RoleName = this.RefRoleForm.controls["RoleName"].value;
+      this.refRoleObj.IsActive = this.RefRoleForm.controls["IsActive"].value;
+      this.httpClient.post(AdInsConstant.AddRefRole, this.refRoleObj).subscribe(
+        response => {
+            this.service.successMessage(response["Message"]);
+            this.router.navigate(["/systemSetting/role"]);
         },
-        (error) => {
-          console.log("Error Check Duplicate");
-          this.service.typeErrorCustom(error);
+        error => {
+          console.log(error);
         }
       );
-
-
-    }
-    //MODE-EDIT
-    else {
-      this.apiUrl = this.foundationUrl + AdInsConstant.EditRefRole;
-
-      this.refRoleObj.refRoleId = this.refRoleId;
-      this.refRoleObj.roleCode = RoleAddEditForm.value.roleCodeModel;
-      this.refRoleObj.roleName = RoleAddEditForm.value.roleNameModel;
-      if (RoleAddEditForm.value.isActive) { this.refRoleObj.isActive = '1' } else { this.refRoleObj.isActive = '0' };
-
-      //SAVE
-      this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
-        (response) => {
-          console.log("Success Edit");
-
-          this.service.typeSave(response['message']);
-          this.location.back();
-          this.spinner.hide();
-
+    } else {
+      this.refRoleObj = this.resultData;
+      this.refRoleObj.RefRoleId = this.RefRoleId;
+      this.refRoleObj.RoleCode = this.RefRoleForm.controls["RoleCode"].value;
+      this.refRoleObj.RoleName = this.RefRoleForm.controls["RoleName"].value;
+      this.refRoleObj.IsActive = this.RefRoleForm.controls["IsActive"].value;
+      this.httpClient.post(AdInsConstant.EditRefRole, this.refRoleObj).subscribe(
+        response => {
+          console.log(response);
+          this.service.successMessage(response["Message"]);
+          this.router.navigate(["/systemSetting/role"]);
         },
-        (error) => {
-          console.log("Error Edit");
-
-          this.service.typeErrorCustom(error);
-          this.spinner.hide();
+        error => {
+          console.log(error);
         }
       );
-
     }
-
-  }
-
-  FillFormEdit() {
   }
 }
