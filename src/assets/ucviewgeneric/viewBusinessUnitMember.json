@@ -1,0 +1,26 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "Business Unit Info",
+        "subSectionTitle": "Business Unit Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Business Unit Code",
+            "property": "BizUnitCode"
+          },
+          {
+            "type": "text",
+            "label": "Business Unit Name",
+            "property": "BizUnitName"
+          } 
+        ],
+        "querystring": {
+            "select": "SELECT BIZ_UNIT_CODE AS BizUnitCode, BIZ_UNIT_NAME AS BizUnitName",
+            "from": "FROM dbo.REF_BIZ_UNIT WITH(NOLOCK)", 
+            "where": "WHERE REF_BIZ_UNIT_ID = {0}" 
+        }
+      }
+    ]
+  }

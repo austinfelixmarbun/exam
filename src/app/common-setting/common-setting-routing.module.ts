@@ -119,30 +119,37 @@ const routes: Routes = [
       },
       {
         path: 'holiday/add',
-        component: HolidayDetailComponent,
-        data: {
-          title: 'Holiday Add Edit'
-        },
-      },
-      {
-        path: 'holiday-scheme/add',
         component: HolidayAddComponent,
         data: {
-          title: 'Holiday Scehme Add Edit'
+          title: 'Holiday Add'
         },
       },
       {
-        path: 'holiday-scheme/copy',
-        component: CopyHolidaySchemeComponent,
+        path: 'holiday/edit',
+        component: HolidayAddComponent,
         data: {
-          title: 'Holiday Scehme Copy Add Edit'
+          title: 'Holiday Edit'
         },
       },
       {
         path: 'holiday/detail',
+        component: HolidayDetailComponent,
+        data: {
+          title: 'Holiday Detail'
+        },
+      },
+      {
+        path: 'holiday/detail/add',
         component: HolidayDetailAddComponent,
         data: {
-          title: 'Holiday Detail Add Edit'
+          title: 'Holiday Detail Add'
+        },
+      },
+      {
+        path: 'holiday/detail/edit',
+        component: HolidayDetailAddComponent,
+        data: {
+          title: 'Holiday Detail Edit'
         },
       },
       {

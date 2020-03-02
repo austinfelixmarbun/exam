@@ -88,6 +88,7 @@ export class RolePickService {
                 this.http.post(url, roleObject).subscribe(
                     (response) => {
                         // localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
+                        localStorage.setItem("Token", response["Token"]);
                         var currentUserContext = new CurrentUserContext;
                         currentUserContext.UserName = localStorage.getItem("Username");
                         currentUserContext.Office = item.OfficeCode;
@@ -95,7 +96,7 @@ export class RolePickService {
                         currentUserContext.BusinessDate = item.BusinessDt;
                         var DateParse = formatDate(item.BusinessDt, 'yyyy/MM/dd', 'en-US');
                         localStorage.setItem("BusinessDate", DateParse);
-                        sessionStorage.setItem("UserAccess", JSON.stringify(item));
+                        sessionStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
                         this.currentUserContextService.addCurrentUserContext(currentUserContext);
                         this.router.navigate(['dashboard/dash-board']);
                     },

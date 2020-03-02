@@ -72,6 +72,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }
         } else {
             if (currentUserContext != null) {
+                token = localStorage.getItem("Token");
                 myObj = new Object();
                 if (request.body != null) {
                     myObj = request.body;
@@ -133,12 +134,12 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     }
                     else {
                         //Kalau pake Http Get yang bukan ke Backend sendiri g punya token, jadi g boleh asal di replace
-                        if (event.body.token == undefined) {
-                            localStorage.setItem("Token", localStorage.getItem("Token"));
-                        }
-                        else {
-                            localStorage.setItem("Token", event.body.token);
-                        }
+                        // if (event.body.token == undefined) {
+                        //     localStorage.setItem("Token", localStorage.getItem("Token"));
+                        // }
+                        // else {
+                        //     localStorage.setItem("Token", event.body.token);
+                        // }
 
                     }
                 }

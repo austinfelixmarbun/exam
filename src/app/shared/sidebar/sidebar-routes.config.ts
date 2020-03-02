@@ -69,6 +69,13 @@ export const ROUTES: RouteInfo[] = [
       }
     ]
   },
+  {
+    path: '', title: 'Holiday', icon: 'ft-airplay', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    submenu: [
+      { path: '/commonSetting/holiday', title: 'Bank Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    ]
+  },
+  
   // {
   //     path: '', title: 'LOS', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
   //     submenu: [
