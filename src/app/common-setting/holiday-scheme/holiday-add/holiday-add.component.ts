@@ -27,16 +27,12 @@ export class HolidayAddComponent implements OnInit {
 
     title : string = "Holiday Scheme-Add";
     param: string;
-    businessUnitCode: string;
-    businessUnitName: string;
     description: string;
     activestatus: string;
     result: any;
     mode: string = "add";
     apiUrl: any;
     pageType: string;
-    settingUrl: string = environment.FoundationR3Url;
-    urlEnviPaging: string = environment.foundationUrl;
     holidayObj: HolidayObj;
     holidaySchmHId:any;
     editUrl: any;
@@ -61,12 +57,11 @@ export class HolidayAddComponent implements OnInit {
       console.log("edit");
         if (this.mode == "edit") {
             this.title = "Holiday Scheme-Edit";
-            this.apiUrl = this.settingUrl + AdInsConstant.GetHolidaySchmHById;
             this.HolidaySchemeHForm.controls.HolidaySchmCode.disable();
             var holidayObj = new HolidayObj();
             holidayObj.HolidaySchmHId = this.param;
             console.log(this.param);
-            this.http.post(this.apiUrl, holidayObj).subscribe(
+            this.http.post(AdInsConstant.GetHolidaySchmHById, holidayObj).subscribe(
                 (response) => {
                     this.result = response;
                         this.HolidaySchemeHForm.patchValue({
@@ -84,15 +79,12 @@ export class HolidayAddComponent implements OnInit {
 
     SaveForm(){
         if (this.mode == "edit") {
-            this.editUrl = this.settingUrl + AdInsConstant.EditHolidaySchmH;
             this.holidayObj = new HolidayObj();
             this.holidayObj = this.HolidaySchemeHForm.value;
             this.holidayObj.HolidaySchmHId = this.param;
             this.holidayObj.HolidaySchmCode = this.result.HolidaySchmCode;
             this.holidayObj.RowVersion = this.result.RowVersion;
-            console.log("isi holidayObj");
-            console.log(this.holidayObj);
-            this.http.post(this.editUrl, this.holidayObj).subscribe(
+            this.http.post(AdInsConstant.EditHolidaySchmH, this.holidayObj).subscribe(
                 (response) => {
                     this.router.navigateByUrl('/commonSetting/holiday');
                     this.toastr.successMessage(response['message']);
@@ -102,13 +94,12 @@ export class HolidayAddComponent implements OnInit {
                 });
         }
         else {
-            this.editUrl = this.settingUrl + AdInsConstant.AddHolidaySchmH;
             this.holidayObj = new HolidayObj();
             this.holidayObj = this.HolidaySchemeHForm.value;
             this.holidayObj.HolidaySchmHId = "0";
             this.holidayObj.RowVersion = "";
 
-            this.http.post(this.editUrl, this.holidayObj).subscribe((response) => {
+            this.http.post(AdInsConstant.AddHolidaySchmH, this.holidayObj).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
                 this.router.navigateByUrl('/commonSetting/holiday', { skipLocationChange: true }).then(() =>
                     this.router.navigate(['/commonSetting/holiday']));

@@ -240,13 +240,13 @@ export class AdInsConstant {
   //HOLIDAY
   public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
   public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
-  public static AddHolidaySchmH = "/HolidaySchm/AddHolidaySchmH";
+  public static AddHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmH";
   public static AddHolidaySchmD = "/Holiday/AddHolidaySchmD";
   public static AddHolidaySchmDUntilYear = "/Holiday/AddHolidaySchmDUntilYear";
   public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
-  public static GetHolidaySchmHById = "/HolidaySchm/GetHolidaySchmHById";
+  public static GetHolidaySchmHById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmHById";
   public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
-  public static EditHolidaySchmH = "/HolidaySchm/EditHolidaySchmH";
+  public static EditHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmH";
   public static DeleteHolidaySchmH = "/HolidaySchm/DeleteHolidaySchmH";
   public static DeleteHolidaySchmD = "/Holiday/DeleteHolidaySchmD";
   public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
