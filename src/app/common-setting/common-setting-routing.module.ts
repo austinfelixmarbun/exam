@@ -62,14 +62,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'generalSetting',
+        path: 'GeneralSetting',
         component: GeneralSettingPagingComponent,
         data: {
           title: 'General Setting Maintenance Paging'
         },
       },
       {
-        path: 'generalSetting/detail',
+        path: 'GeneralSetting/detail',
         component: GeneralSettingAddEditComponent,
         data: {
           title: 'General Setting Maintenance Add Edit'
