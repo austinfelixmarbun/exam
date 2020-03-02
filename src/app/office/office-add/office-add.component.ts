@@ -3,13 +3,14 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/OfficeObj.model';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
-import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
+import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component'
+
 
 @Component({
   selector: 'app-office-add',
@@ -31,6 +32,7 @@ export class OfficeAddComponent implements OnInit {
   allOfficeClass: any;
   allRefOrg: any;
   allOrgMdl: any;
+  allKonSya: any;
   allOfficeParent: any;
   allRefOfficeArea: any;
   allHolidaySchm: any;
@@ -66,27 +68,49 @@ export class OfficeAddComponent implements OnInit {
   holidaySchmUrl: any;
   workingHourSchmUrl: any;
   foundationUrl: string = environment.foundationUrl;
-  settingUrl: string = environment.settingUrl;
+  settingUrl: string = environment.FoundationR3Url;
   isActive: boolean = true;
   isAllowAppCreated: boolean = true;
+  officeClose: boolean = true;
   officeObj: OfficeObj;
   refMasterObj: RefMasterObj;
   refMasterOfficeType: RefMasterObj;
   refMasterCgType:RefMasterObj;
   orgMdlObj: OrgMdlObj
+  
+  refMasterKonsyaType: RefMasterObj;
+  konSyaUrl: any;
+  officeTypeUrl: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
+  OfficeForm = this.fb.group({
+    OfficeCode:['', Validators.required],
+    OfficeName:['', Validators.required],
+    OfficeShortName:[''],
+    OfficeType:['', Validators.required],
+    OfficeParent:['', Validators.required],
+    KonSya:['', Validators.required],
+    OfficeClass:['', Validators.required],
+    HolidayScheme:['', Validators.required],
+    WorkingHourScheme:['', Validators.required],
+    IsActive:[''],
+    OfficeClose:[''],
+    AllowAppCreated:['']
+  })
+
+  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb:FormBuilder) {
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
     this.addUrl = this.foundationUrl + AdInsConstant.AddRefOffice;
     this.editUrl = this.foundationUrl + AdInsConstant.EditRefOffice;
-    this.officeClassUrl = this.settingUrl + AdInsConstant.GetRefMasterList;
+    this.officeClassUrl = this.settingUrl + AdInsConstant.GetRefMasterListKeyValueActiveByCode;
     this.refOrgUrl = this.foundationUrl + AdInsConstant.GetListAllRefOrg;
     this.orgMdlUrl = this.foundationUrl + AdInsConstant.GetAllActiveOrgMdlByRefOrgId;
     this.officeParentUrl = this.foundationUrl + AdInsConstant.GetListUpperHierarchyRefOfficeByRefOrgId;
     this.areaUrl = this.foundationUrl + AdInsConstant.GetAllListArea;
-    this.holidaySchmUrl = this.foundationUrl + AdInsConstant.GetAllActiveHolidaySchmH;
+    this.holidaySchmUrl = AdInsConstant.GetAllActiveHolidaySchmH;
     this.workingHourSchmUrl = this.foundationUrl + AdInsConstant.GetListOfWorkingHourSchm;
     this.getRefOrgUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
+    this.konSyaUrl = this.settingUrl + AdInsConstant.GetRefMasterListKeyValueActiveByCode
+    this.officeTypeUrl = this.settingUrl + AdInsConstant.GetRefMasterListKeyValueActiveByCode
 
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
@@ -105,27 +129,38 @@ export class OfficeAddComponent implements OnInit {
     this.refMasterOfficeType.refMasterTypeCode = 'OFFICE_TYPE';
     this.refMasterCgType = new RefMasterObj();
     this.refMasterCgType.refMasterTypeCode = 'CENTER_GRP_TYPE';
+    this.refMasterKonsyaType = new RefMasterObj();
+    this.refMasterKonsyaType.refMasterTypeCode = 'KONVEN_SYARIAH';
     if (this.pageType == "add") {
       this.httpClient.post(this.officeClassUrl, this.refMasterCgType).subscribe(
         (response) => {
+          console.log(response);
           this.allCgType = response['returnObject'];
-          this.mrCgType = response['returnObject'][0]['masterCode'];
+          //this.mrCgType = response['returnObject'][0]['masterCode'];
         },
         (error) => {
           console.log(error);
         })
       this.httpClient.post(this.officeClassUrl, this.refMasterObj).subscribe(
         (response) => {
-          this.allOfficeClass = response['returnObject'];
-          this.mrOfficeClass = response['returnObject'][0]['masterCode'];
+          this.allOfficeClass = response['ReturnObject'];
+          this.mrOfficeClass = response['ReturnObject'][0]['Key'];
         },
         (error) => {
           console.log(error);
         })
+        this.httpClient.post(this.konSyaUrl, this.refMasterKonsyaType).subscribe(
+          (response) => {
+            this.allKonSya = response['ReturnObject'];
+            this.mrKonvenSyariah = response['ReturnObject'][0]['Key'];
+          },
+          (error) => {
+            console.log(error);
+          })
       this.httpClient.post(this.officeClassUrl, this.refMasterOfficeType).subscribe(
         (response) => {
-          this.allOfficeType = response['returnObject'];
-          this.mrOfficeType = response['returnObject'][0]['masterCode'];
+          this.allOfficeType = response['ReturnObject'];
+          this.mrOfficeType = response['ReturnObject'][0]['Key'];
         },
         (error) => {
           console.log(error);
@@ -149,16 +184,17 @@ export class OfficeAddComponent implements OnInit {
         })
       this.httpClient.post(this.holidaySchmUrl, null).subscribe(
         (response) => {
-          this.allHolidaySchm = response['returnObject'];
-          this.holidaySchmHId = response['returnObject'][0]['holidaySchmHId'];
+          console.log(response);
+          this.allHolidaySchm = response['ReturnObject'];
+          this.holidaySchmHId = response['ReturnObject'][0]['Key'];
         },
         (error) => {
           console.log(error);
         })
       this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
         (response) => {
-          this.allWorkingHourSchm = response['returnObject'];
-          this.workingHourSchmHId = response['returnObject'][0]['workingHourSchmHId'];
+          this.allWorkingHourSchm = response['ReturnObject'];
+          this.workingHourSchmHId = response['ReturnObject'][0]['Key'];
         },
         (error) => {
           console.log(error);
@@ -348,7 +384,6 @@ export class OfficeAddComponent implements OnInit {
     if (this.pageType == "add") {
       this.httpClient.post(this.addUrl, this.officeObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response['message']);
           this.router.navigate(["/office/paging"]);
         },

@@ -204,6 +204,7 @@ export class AdInsConstant {
   public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
   public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
   public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
+  public static GetRefMasterListKeyValueActiveByCode = "/RefMaster/GetListKeyValueActiveByCode"
 
   //REF PROV DISTRICT
   public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
@@ -229,7 +230,7 @@ export class AdInsConstant {
   public static GetRefFeatureByComponent = "/RefFeature/GetRefFeatureByComponent";
 
   //HOLIDAY
-  public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
+  public static GetAllActiveHolidaySchmH = environment.FoundationR3Url + "/Holiday/GetAllActiveHolidaySchmH";
   public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
   public static AddHolidaySchmH = "/Holiday/AddHolidaySchmH";
   public static AddHolidaySchmD = "/Holiday/AddHolidaySchmD";
