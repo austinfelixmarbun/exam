@@ -3,10 +3,48 @@
     "component": [
         {
             "type": "textbox",
-            "name": "BIZ_UNIT_CODE",
-            "id": "businessUnitCodeId",
+            "name": "B.USERNAME",
+            "id": "UsernameId",
             "value": "",
-            "label": "Business Unit Code",
+            "label": "Username",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "A.SPV_ID",
+            "id": "SupervisorId",
+            "value": "",
+            "label": "Supervisor",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "C.EMP_NAME",
+            "id": "EmpNameId",
+            "value": "",
+            "label": "Employee Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "E.OFFICE_NAME",
+            "id": "OfficeNameId",
+            "label": "Office Name",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "criteriaPropName" : "REF_OFFICE_ID",
+            "criteriaPropValue" : "OFFICE_NAME",
+            "items": [],
+            "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "C.EMP_NO",
+            "id": "EmpNoId",
+            "value": "",
+            "label": "Employee No",
             "placeholder": "Placeholder"
         },
         {
@@ -31,107 +69,105 @@
             "itemsUrl": []
         },
         {
-            "type": "textbox",
-            "name": "BIZ_UNIT_NAME",
-            "id": "businessUnitNameId",
+            "type": "dropdown",
+            "name": "D.JOB_TITLE_CODE", 
+            "id": "JobTitleName",
             "value": "",
-            "label": "Business Unit Name",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefJobTitle/GetListKeyValueActiveByCode",
+            "label": "JOB TITLE",
+            "criteriaPropName" : "RefJobTitleId",
+            "criteriaPropValue" : "JOB_TITLE_CODE",
+            "items": [],
+            "itemsUrl": []
         }
     ],
     "querystring": {
-        "select": "SELECT REF_BIZ_UNIT_ID AS RefBizUnitId, BIZ_UNIT_CODE AS BizUnitCode, BIZ_UNIT_NAME AS BizUnitName, DESCR AS Descr, IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.REF_BIZ_UNIT"
+        "select": "SELECT B.USERNAME AS Username, A.SPV_ID AS Supervisor, A.IS_ACTIVE AS IsActive, C.EMP_NAME AS EmpName, C.EMP_NO AS EmpNo, D.JOB_TITLE_NAME AS JobTitleName, A.REF_OFFICE_ID AS OfficeId, E.OFFICE_NAME AS OfficeName, A.REF_BIZ_UNIT_ID AS RefBizUnitId",
+        "from": "FROM dbo.REF_USER_ROLE A WITH(NOLOCK) JOIN dbo.REF_USER B WITH(NOLOCK) ON B.REF_USER_ID = A.REF_USER_ID JOIN dbo.REF_EMP C WITH(NOLOCK) ON C.REF_EMP_ID = B.REF_EMP_ID JOIN dbo.REF_JOB_TITLE D WITH(NOLOCK) ON D.REF_JOB_TITLE_ID = A.REF_JOB_TITLE_ID JOIN dbo.REF_OFFICE E WITH(NOLOCK) ON E.REF_OFFICE_ID = A.REF_OFFICE_ID LEFT JOIN dbo.REF_USER_ROLE F WITH(NOLOCK) ON F.REF_USER_ID = A.SPV_ID"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "center",
-            "label": "BUSINESS UNIT CODE",
-            "name": "BizUnitCode"
+            "label": "USERNAME",
+            "name": "Username"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "BUSINESS UNIT NAME",
-            "name": "BizUnitName"
+            "label": "EMPLOYEE NAME",
+            "name": "EmployeeName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "EMPLOYEE NO",
+            "name": "EmployeeNo"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "JOB TITLE",
+            "name": "JobTitleName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "SUPERVISOR",
+            "name": "Supervisor"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE NAME",
+            "name": "OfficeName"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "ACTIVE",
             "name": "IsActive"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "BUSINESS UNIT MEMBER"
-        },
-        {
-            "type": "label",
-            "position": "center",
-            "label": "Action"
         }
     ],
     "bodyList": [
         {
             "type": "text",
             "position": "center",
-            "property": "BizUnitCode"
+            "property": "Username"
         },
         {
             "type": "text",
             "position": "center",
-            "property": "BizUnitName"
+            "property": "EmpName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "EmpNo"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "JobTitleName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "Supervisor"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeName"
         },
         {
             "type": "boolean",
             "position": "center",
             "property": "IsActive"
-        },
-        {
-            "type": "action",
-            "position": "center",
-            "action": [
-                {
-                    "type": "edit",
-                    "path": "/organization/businessunit/member",
-                    "param": [
-                        {
-                            "type": "RefBizUnitId",
-                            "property": "RefBizUnitId"
-                        },
-                        {
-                            "type": "mode",
-                            "property": "edit"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "action",
-            "position": "center",
-            "action": [
-                {
-                    "type": "edit",
-                    "path": "/organization/businessunit/add",
-                    "param": [
-                        {
-                            "type": "RefBizUnitId",
-                            "property": "RefBizUnitId"
-                        },
-                        {
-                            "type": "mode",
-                            "property": "edit"
-                        }
-                    ]
-                },
-                {
-                    "type": "delete",
-                    "property": "RefBizUnitId"
-                }
-            ]
         }
     ]
 }
