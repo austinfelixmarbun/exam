@@ -12,16 +12,14 @@ import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.c
 import { UserRoleDetailComponent } from 'app/system-setting/user/user-role-detail/user-role-detail.component';
 import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.component';
 import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
-import { RoleFormFeatureComponent } from 'app/system-setting/role/role-form-feature/role-form-feature.component';
 import { UserChangePasswordComponent } from 'app/system-setting/user/user-change-password/user-change-password.component';
-import { RoleFormTreeComponent } from 'app/system-setting/role/role-form-tree/role-form-tree.component';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
-import { RoleFormFeaturePagingComponent } from './role/role-form-feature-paging/role-form-feature-paging.component';
 import { LookupemployeeComponent, LookupemployeeModule } from '@adins/lookupemployee';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { LookuproleModule } from '@adins/lookuprole';
+import { UcpagingModule } from '@adins/ucpaging';
 
 
 @NgModule({
@@ -34,6 +32,7 @@ import { LookuproleModule } from '@adins/lookuprole';
     SharingComponentModule,
     UCSearchModule,
     UcgridfooterModule,
+    UcpagingModule,
     LookupemployeeModule,
     LookuproleModule,
     ReactiveFormsModule,
@@ -48,10 +47,7 @@ import { LookuproleModule } from '@adins/lookuprole';
     UserRoleDetailComponent,
     RoleUserComponent,
     RoleFormComponent,
-    RoleFormFeatureComponent,
-    UserChangePasswordComponent,
-    RoleFormTreeComponent,
-    RoleFormFeaturePagingComponent
+    UserChangePasswordComponent
   ],
   providers: [
     {

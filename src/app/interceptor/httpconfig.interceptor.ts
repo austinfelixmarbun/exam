@@ -90,7 +90,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         }
 
         if (token != "") {
-            request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
+            request = request.clone({ headers: request.headers.set('Authorization', token) });
         }
 
         if (!request.headers.has('Content-Type')) {

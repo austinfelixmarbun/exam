@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerComponent } from 'app/customer/customer.component';
 import { CustomerRoutingModule } from 'app/customer/customer-routing.module';
-import { ArchwizardModule } from 'angular-archwizard';
+// import { ArchwizardModule } from 'angular-archwizard';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
@@ -18,13 +18,14 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
   imports: [
     CustomerRoutingModule,
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpModule,
     NgbModule,
     SharingComponentModule,
     UCSearchModule,
     UcgridfooterModule,
-    ArchwizardModule
+    // ArchwizardModule
   ],
   declarations: [
     CustomerComponent

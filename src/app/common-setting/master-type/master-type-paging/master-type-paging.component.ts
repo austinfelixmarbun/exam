@@ -92,7 +92,7 @@ export class MasterTypePagingComponent implements OnInit {
     if (confirm("Are you sure to delete this record?")) {
       this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefRole;
       this.refRoleObj = new RefRoleObj();
-      this.refRoleObj.refRoleId = +id;
+      this.refRoleObj.RefRoleId = +id;
       console.log(this.refRoleObj);
       this.https.post(this.deleteUrl, this.refRoleObj).subscribe(
         (response) => {
