@@ -49,7 +49,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     ngOnInit(){
         var _hubConnection = new HubConnectionBuilder()
-                            .withUrl("https://localhost:5001/notification")
+                            .withUrl("http://localhost:5000/notification")
                             .withAutomaticReconnect()
                             .build();
 

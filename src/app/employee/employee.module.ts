@@ -17,7 +17,7 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { LookuprefbankModule } from '@adins/lookuprefbank';
 import { LookupemployeeModule } from '@adins/lookupemployee';
-
+import { UcpagingModule } from '@adins/ucpaging';
 
 @NgModule({
   imports: [
@@ -32,7 +32,8 @@ import { LookupemployeeModule } from '@adins/lookupemployee';
     UcgridfooterModule,
     LookuprefbankModule,
     LookupemployeeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UcpagingModule
   ],
   declarations: [
     EmployeePositionAddComponent,

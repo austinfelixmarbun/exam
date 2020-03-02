@@ -1,54 +1,39 @@
 {
     "title": "Employee",
-    "exportExcel": true, 
     "component": [
         {
             "type": "textbox",
-            "name": "empNo",
-            "id": "employeeNoId",
+            "name": "username",
+            "id": "username",
+            "value": "",
+            "label": "Username",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "employee_Name",
+            "id": "employeeName",
+            "value": "",
+            "label": "Employee Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "employee_No",
+            "id": "employeeNo",
             "value": "",
             "label": "Employee No",
             "placeholder": "Placeholder"
         },
         {
-            "type": "textbox",
-            "name": "empName",
-            "id": "employeeNameId",
-            "value": "%",
-            "label": "Employee Name",
-            "placeholder": "Placeholder"
-        },
-        {
             "type": "dropdown",
-            "name": "isExt",
-            "id": "extEmpId",
-            "value": "External Employee",
-            "placeholder": "Placeholder",
-            "isFromURL": false,
-            "isSelectOne" : false,
-            "url": "https://api.myjson.com/bins/ld6e8",
-            "label": "External Employee",
-            "items": [
-                {
-                    "key": "1",
-                    "value": "Yes"
-                },
-                {
-                    "key": "0",
-                    "value": "No"
-                }
-            ],
-            "itemsUrl": []
-        },
-        {
-            "type": "dropdown",
-            "name": "isActive",
-            "id": "actStatId",
+            "name": "is_Active",
+            "id": "isActive",
             "value": "Active Status",
             "placeholder": "Placeholder",
             "isFromURL": false,
             "isSelectOne" : false,
-            "url": "https://api.myjson.com/bins/ld6e8",
+            "url": "",
             "label": "Active Status",
             "items": [
                 {
@@ -61,6 +46,100 @@
                 }
             ],
             "itemsUrl": []
+        }
+    ],
+    "querystring": { 
+        "select": "SELECT A.REF_EMP_ID AS refEmpId, B.USERNAME AS username, A.EMP_NO AS empNo, A.EMP_NAME AS empName, A.IS_ACTIVE AS isActive",
+        "from": "FROM REF_EMP AS A INNER JOIN REF_USER AS B ON A.REF_EMP_ID = B.REF_EMP_ID",
+        "where": "A.IS_ACTIVE = 1"
+    },
+    "headerList" : [ 
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Username",
+            "name" : "username" 
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Employee No.", 
+            "name" : "empNo" 
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Employee Name", 
+            "name" : "empName" 
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Active", 
+            "name" : "isActive"
+        },
+        {
+            "type" : "label",
+            "position" : "center",
+            "label" : "Business Unit"
+        },
+        {
+            "type" : "label",
+            "position" : "center",
+            "label" : "Action"
+        }
+    ],
+    "bodyList" : [
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "username" 
+        },
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "empNo" 
+        },
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "empName" 
+        },
+        {
+            "type" : "boolean", 
+            "position" : "center",
+            "property" : "isActive"
+        },
+        {
+            "type" : "action", 
+            "position" : "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "",
+                    "param": []
+                }
+            ]
+        },
+        {
+            "type" : "action", 
+            "position" : "center",
+            "action" : [ 
+                {
+                    "type" : "edit", 
+                    "path" : "/employee/edit", 
+                    "param" : [ 
+                        {
+                            "type" : "refEmpId", 
+                            "property" : "refEmpId" 
+                        }
+                    ]
+                },
+                {
+                    "type" : "delete", 
+                    "property" : "refEmpId" 
+                }
+            ]
         }
     ]
 }

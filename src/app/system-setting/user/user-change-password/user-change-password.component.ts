@@ -52,7 +52,7 @@ export class UserChangePasswordComponent implements OnInit {
         this.refUserObj = response["returnObject"];
         this.refEmpObj = new RefEmpObj();
         getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
-        this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
+        // this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
         this.httpClient.post(getEmpUrl, this.refEmpObj).subscribe(response => {
           this.refEmpObj = response["returnObject"];
         });

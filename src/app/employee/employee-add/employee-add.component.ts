@@ -115,7 +115,7 @@ export class EmployeeAddComponent implements OnInit {
     
     if (this.pageType == "edit") {
       this.empObj = new RefEmpObj();
-      this.empObj.refEmpId = this.refEmpId;
+      // this.empObj.refEmpId = this.refEmpId;
       this.httpClient.post(this.apiUrl, this.empObj).subscribe(
         response => {
           console.log("Success");
@@ -145,7 +145,7 @@ export class EmployeeAddComponent implements OnInit {
             this.isExt = false;
           }
           this.empObj = new RefEmpObj();
-          this.empObj.refEmpId = this.refEmpId;
+          // this.empObj.refEmpId = this.refEmpId;
           this.httpClient.post(this.empBankUrl, this.empObj).subscribe(
             response => {
               this.EmpBankAccId = response["returnObject"].empBankAccId;
@@ -194,50 +194,50 @@ export class EmployeeAddComponent implements OnInit {
     console.log(uclRefBank);
     if (this.pageType == "add") {
       this.empObj = new RefEmpObj();
-      this.empObj.empNo = ReqForm.value.empNo;
-      this.empObj.empName = ReqForm.value.empName;
-      this.empObj.joinDt = ReqForm.value.joinDt;
-      this.empObj.addr = ucAddress.addr;
-      this.empObj.npwp = ReqForm.value.npwp;
-      this.empObj.idNo = ReqForm.value.idNo;
-      this.empObj.areaCode4 = ucAddress.areaCode4;
-      this.empObj.areaCode3 = ucAddress.areaCode3;
-      this.empObj.areaCode2 = ucAddress.areaCode2;
-      this.empObj.areaCode1 = ucAddress.areaCode1;
-      this.empObj.city = ucAddress.city;
-      this.empObj.zipcode = ucAddress.zipcode;
-      this.empObj.phnArea1 = ucAddress.phnArea1;
-      this.empObj.phnArea2 = ucAddress.phnArea2;
-      this.empObj.phnArea3 = ucAddress.phnArea3;
-      this.empObj.phn1 = ucAddress.phn1;
-      this.empObj.phn2 = ucAddress.phn2;
-      this.empObj.phn3 = ucAddress.phn3;
-      this.empObj.phnExt1 = ucAddress.phnExt1;
-      this.empObj.phnExt2 = ucAddress.phnExt2;
-      this.empObj.phnExt3 = ucAddress.phnExt3;
-      this.empObj.faxArea = ucAddress.faxArea;
-      this.empObj.fax = ucAddress.fax;
-      this.empObj.mobilePhn1 = ucContactInfo.mobilePhn1;
-      this.empObj.mobilePhn2 = ucContactInfo.mobilePhn2;
-      this.empObj.email1 = ucContactInfo.email1;
-      this.empObj.email2 = ucContactInfo.email2;
-      this.empObj.EmpBankAccId = this.EmpBankAccId;
-      this.empObj.bankBranch = ReqForm.value.bankBranch;
-      this.empObj.bankBranchRegRptCode = ReqForm.value.bankBranchRegRptCode;
-      this.empObj.bankAccName = ReqForm.value.bankAccName;
-      this.empObj.bankAccNo = ReqForm.value.bankAccNo;
-      this.empObj.bankCode = this.inputLookupObj.idSelect;
-      if (this.isExt == false) {
-        this.empObj.isExt = "0";
-      } else {
-        this.empObj.isExt = "1";
-      }
-      if (this.isActive == false) {
-        this.empObj.isActive = "0";
-      } else {
-        this.empObj.isActive = "1";
-      }
-      this.empObj.isLeave = "0";
+      // this.empObj.empNo = ReqForm.value.empNo;
+      // this.empObj.empName = ReqForm.value.empName;
+      // this.empObj.joinDt = ReqForm.value.joinDt;
+      // this.empObj.addr = ucAddress.addr;
+      // this.empObj.npwp = ReqForm.value.npwp;
+      // this.empObj.idNo = ReqForm.value.idNo;
+      // this.empObj.areaCode4 = ucAddress.areaCode4;
+      // this.empObj.areaCode3 = ucAddress.areaCode3;
+      // this.empObj.areaCode2 = ucAddress.areaCode2;
+      // this.empObj.areaCode1 = ucAddress.areaCode1;
+      // this.empObj.city = ucAddress.city;
+      // this.empObj.zipcode = ucAddress.zipcode;
+      // this.empObj.phnArea1 = ucAddress.phnArea1;
+      // this.empObj.phnArea2 = ucAddress.phnArea2;
+      // this.empObj.phnArea3 = ucAddress.phnArea3;
+      // this.empObj.phn1 = ucAddress.phn1;
+      // this.empObj.phn2 = ucAddress.phn2;
+      // this.empObj.phn3 = ucAddress.phn3;
+      // this.empObj.phnExt1 = ucAddress.phnExt1;
+      // this.empObj.phnExt2 = ucAddress.phnExt2;
+      // this.empObj.phnExt3 = ucAddress.phnExt3;
+      // this.empObj.faxArea = ucAddress.faxArea;
+      // this.empObj.fax = ucAddress.fax;
+      // this.empObj.mobilePhn1 = ucContactInfo.mobilePhn1;
+      // this.empObj.mobilePhn2 = ucContactInfo.mobilePhn2;
+      // this.empObj.email1 = ucContactInfo.email1;
+      // this.empObj.email2 = ucContactInfo.email2;
+      // this.empObj.EmpBankAccId = this.EmpBankAccId;
+      // this.empObj.bankBranch = ReqForm.value.bankBranch;
+      // this.empObj.bankBranchRegRptCode = ReqForm.value.bankBranchRegRptCode;
+      // this.empObj.bankAccName = ReqForm.value.bankAccName;
+      // this.empObj.bankAccNo = ReqForm.value.bankAccNo;
+      // this.empObj.bankCode = this.inputLookupObj.idSelect;
+      // if (this.isExt == false) {
+      //   this.empObj.isExt = "0";
+      // } else {
+      //   this.empObj.isExt = "1";
+      // }
+      // if (this.isActive == false) {
+      //   this.empObj.isActive = "0";
+      // } else {
+      //   this.empObj.isActive = "1";
+      // }
+      // this.empObj.isLeave = "0";
 
       console.log(JSON.stringify(this.empObj));
       console.log(this.empObj);
@@ -256,50 +256,50 @@ export class EmployeeAddComponent implements OnInit {
       );
     } else {
       this.empObj = new RefEmpObj();
-      this.empObj.refEmpId = this.refEmpId;
-      this.empObj.empNo = ReqForm.value.empNo;
-      this.empObj.empName = ReqForm.value.empName;
-      this.empObj.joinDt = ReqForm.value.joinDt;
-      this.empObj.addr = ucAddress.addr;
-      this.empObj.npwp = ReqForm.value.npwp;
-      this.empObj.idNo = ReqForm.value.idNo;
-      this.empObj.areaCode4 = ucAddress.areaCode4;
-      this.empObj.areaCode3 = ucAddress.areaCode3;
-      this.empObj.areaCode2 = ucAddress.areaCode2;
-      this.empObj.areaCode1 = ucAddress.areaCode1;
-      this.empObj.city = ucAddress.city;
-      this.empObj.zipcode = ucAddress.zipcode;
-      this.empObj.phnArea1 = ucAddress.phnArea1;
-      this.empObj.phnArea2 = ucAddress.phnArea2;
-      this.empObj.phnArea3 = ucAddress.phnArea3;
-      this.empObj.phn1 = ucAddress.phn1;
-      this.empObj.phn2 = ucAddress.phn2;
-      this.empObj.phn3 = ucAddress.phn3;
-      this.empObj.phnExt1 = ucAddress.phnExt1;
-      this.empObj.phnExt2 = ucAddress.phnExt2;
-      this.empObj.phnExt3 = ucAddress.phnExt3;
-      this.empObj.faxArea = ucAddress.faxArea;
-      this.empObj.fax = ucAddress.fax;
-      this.empObj.mobilePhn1 = ucContactInfo.mobilePhn1;
-      this.empObj.mobilePhn2 = ucContactInfo.mobilePhn2;
-      this.empObj.email1 = ucContactInfo.email1;
-      this.empObj.email2 = ucContactInfo.email2;
-      this.empObj.EmpBankAccId = this.EmpBankAccId;
-      this.empObj.bankBranch = ReqForm.value.bankBranch;
-      this.empObj.bankBranchRegRptCode = ReqForm.value.bankBranchRegRptCode;
-      this.empObj.bankAccName = ReqForm.value.bankAccName;
-      this.empObj.bankAccNo = ReqForm.value.bankAccNo;
-      this.empObj.bankCode = uclRefBank.lookupInput.idSelect;
-      if (this.isExt == false) {
-        this.empObj.isExt = "0";
-      } else {
-        this.empObj.isExt = "1";
-      }
-      if (this.isActive == false) {
-        this.empObj.isActive = "0";
-      } else {
-        this.empObj.isActive = "1";
-      }
+      // this.empObj.refEmpId = this.refEmpId;
+      // this.empObj.empNo = ReqForm.value.empNo;
+      // this.empObj.empName = ReqForm.value.empName;
+      // this.empObj.joinDt = ReqForm.value.joinDt;
+      // this.empObj.addr = ucAddress.addr;
+      // this.empObj.npwp = ReqForm.value.npwp;
+      // this.empObj.idNo = ReqForm.value.idNo;
+      // this.empObj.areaCode4 = ucAddress.areaCode4;
+      // this.empObj.areaCode3 = ucAddress.areaCode3;
+      // this.empObj.areaCode2 = ucAddress.areaCode2;
+      // this.empObj.areaCode1 = ucAddress.areaCode1;
+      // this.empObj.city = ucAddress.city;
+      // this.empObj.zipcode = ucAddress.zipcode;
+      // this.empObj.phnArea1 = ucAddress.phnArea1;
+      // this.empObj.phnArea2 = ucAddress.phnArea2;
+      // this.empObj.phnArea3 = ucAddress.phnArea3;
+      // this.empObj.phn1 = ucAddress.phn1;
+      // this.empObj.phn2 = ucAddress.phn2;
+      // this.empObj.phn3 = ucAddress.phn3;
+      // this.empObj.phnExt1 = ucAddress.phnExt1;
+      // this.empObj.phnExt2 = ucAddress.phnExt2;
+      // this.empObj.phnExt3 = ucAddress.phnExt3;
+      // this.empObj.faxArea = ucAddress.faxArea;
+      // this.empObj.fax = ucAddress.fax;
+      // this.empObj.mobilePhn1 = ucContactInfo.mobilePhn1;
+      // this.empObj.mobilePhn2 = ucContactInfo.mobilePhn2;
+      // this.empObj.email1 = ucContactInfo.email1;
+      // this.empObj.email2 = ucContactInfo.email2;
+      // this.empObj.EmpBankAccId = this.EmpBankAccId;
+      // this.empObj.bankBranch = ReqForm.value.bankBranch;
+      // this.empObj.bankBranchRegRptCode = ReqForm.value.bankBranchRegRptCode;
+      // this.empObj.bankAccName = ReqForm.value.bankAccName;
+      // this.empObj.bankAccNo = ReqForm.value.bankAccNo;
+      // this.empObj.bankCode = uclRefBank.lookupInput.idSelect;
+      // if (this.isExt == false) {
+      //   this.empObj.isExt = "0";
+      // } else {
+      //   this.empObj.isExt = "1";
+      // }
+      // if (this.isActive == false) {
+      //   this.empObj.isActive = "0";
+      // } else {
+      //   this.empObj.isActive = "1";
+      // }
 
       console.log(JSON.stringify(this.empObj));
       console.log(this.empObj);

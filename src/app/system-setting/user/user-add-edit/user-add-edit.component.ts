@@ -98,12 +98,12 @@ export class UserAddEditComponent implements OnInit {
 
           empObj = new RefEmpObj();
           getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
-          empObj.refEmpId = +this.refUserObj.refEmpId;
+          // empObj.refEmpId = +this.refUserObj.refEmpId;
           this.httpClient.post(getEmpUrl, empObj).subscribe(response => {
             empObj = response["returnObject"];
-            this.inputLookupObj.nameSelect = empObj.empName;
+            // this.inputLookupObj.nameSelect = empObj.empName;
             this.inputLookupObj.jsonSelect = response["returnObject"];
-            this.inputLookupObj.idSelect = empObj.refEmpId;
+            // this.inputLookupObj.idSelect = empObj.refEmpId;
           });
         },
         error => {
@@ -128,12 +128,12 @@ export class UserAddEditComponent implements OnInit {
 
           empObj = new RefEmpObj();
           getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
-          empObj.refEmpId = +this.refUserObj.refEmpId;
+          // empObj.refEmpId = +this.refUserObj.refEmpId;
           this.httpClient.post(getEmpUrl, empObj).subscribe(response => {
             empObj = response["returnObject"];
-            this.inputLookupObj.nameSelect = empObj.empName;
+            // this.inputLookupObj.nameSelect = empObj.empName;
             this.inputLookupObj.jsonSelect = response["returnObject"];
-            this.inputLookupObj.idSelect = empObj.refEmpId;
+            // this.inputLookupObj.idSelect = empObj.refEmpId;
           });
         },
         error => {
@@ -158,7 +158,7 @@ export class UserAddEditComponent implements OnInit {
       this.foundationUrl + AdInsConstant.GetCountRefUserByRefEmpId;
     var empObj: RefEmpObj;
     empObj = new RefEmpObj();
-    empObj.refEmpId = lookupEmp.idSelect;
+    // empObj.refEmpId = lookupEmp.idSelect;
     var userObj: RefUserObj;
     userObj = new RefUserObj();
     userObj.username = UserAddEditForm.value.Username;
