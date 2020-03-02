@@ -1,10 +1,9 @@
 export class RefRoleObj {
-  refRoleId: number;
-  roleCode: string;
-  roleName: string;
-  isActive: string;
-  listAddEmpPositionId: Array<any>;
-  listDelEmpPositionId: Array<any>;
+  RefRoleId: number;
+  RoleCode: string;
+  RoleName: string;
+  IsActive: string;
+  RowVersion: any;
 
-  constructor() { this.refRoleId = 0 }
+  constructor() { this.RefRoleId = 0, this.RowVersion = "" }
 }

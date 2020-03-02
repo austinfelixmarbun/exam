@@ -6,7 +6,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { HttpClient } from "@angular/common/http";
 import { Location, DecimalPipe } from "@angular/common";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { environment } from "environments/environment";
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
@@ -35,7 +35,7 @@ export class RoleFormComponent implements OnInit {
   refRoleObj: AuthFormObj = new AuthFormObj();
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   tempListId: Array<any> = [];
   refRoleId: any;
   check: any;
@@ -47,7 +47,11 @@ export class RoleFormComponent implements OnInit {
   arrAddCrit = new Array<CriteriaObj>();
   form: FormGroup;
   data = [];
-
+  RefRoleForm = this.formBuilder.group({
+    RoleCode: ['', [Validators.required, Validators.maxLength(50)]],
+    RoleName: ['', [Validators.required, Validators.maxLength(100)]],
+    IsActive: [true]
+  });
   constructor(
     private spinner: NgxSpinnerService,
     private service: NGXToastrService,
@@ -57,8 +61,8 @@ export class RoleFormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params["refRoleId"] != null) {
-        this.refRoleId = params["refRoleId"];
+      if (params["RefRoleId"] != null) {
+        this.refRoleId = params["RefRoleId"];
         console.log("RefRoleId", this.refRoleId);
       }
     });
@@ -69,17 +73,17 @@ export class RoleFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/search/searchRefForm.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetRefFormPaging;
+    // this.inputObj = new InputSearchObj();
+    // this.inputObj._url = "./assets/search/searchRefForm.json";
+    // this.inputObj.enviromentUrl = environment.foundationUrl;
+    // this.inputObj.apiQryPaging = AdInsConstant.GetRefFormPaging;
     
     console.log("masuk");
     this.initiateForm();
-    this.show = AdInsConstant.showData.split(",");
-    this.pageNow = 1;
-    this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefFormPaging;
+    // this.show = AdInsConstant.showData.split(",");
+    // this.pageNow = 1;
+    // this.pageSize = this.show[0];
+    // this.apiUrl = this.foundationUrl + AdInsConstant.GetRefFormPaging;
   }
 
   getResult(event) {
@@ -138,25 +142,25 @@ export class RoleFormComponent implements OnInit {
   initiateForm() {
     this.spinner.show();
     /// GET INFO USER AND EMPLOYEE
-    var urlGetRefRole: any =
-      this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
+    var urlGetRefRole: any = AdInsConstant.GetRefRoleByRefRoleId;
 
-    var urlGetRefRoleGateway: any = 'http://172.19.10.228:8280/GWFoundation/v1/RefRole/GetRefRole';
+    //var urlGetRefRoleGateway: any = 'http://172.19.10.228:8280/GWFoundation/v1/RefRole/GetRefRole';
 
     this.refRoleObj = new AuthFormObj();
-    this.refRoleObj.refRoleId = this.refRoleId;
+    this.refRoleObj.RefRoleId = this.refRoleId;
     console.log(urlGetRefRole);
-    this.httpClient.post(urlGetRefRole, this.refRoleObj).subscribe(
+    this.httpClient.post(AdInsConstant.GetRefRoleByRefRoleId, this.refRoleObj).subscribe(
       response => {
-        console.log("Success Get");
-        this.refRoleObj = response["returnObject"];
-        console.log(this.refRoleObj);
-        this.spinner.hide();
+        this.resultData = response;
+        this.RefRoleForm.patchValue({
+          RoleCode: this.resultData.RoleCode,
+          RoleName: this.resultData.RoleName,
+          IsActive: this.resultData.IsActive
+        });
+
       },
       error => {
-        console.log("Error Get");
         console.log(error);
-        this.spinner.hide();
       }
     );
 
@@ -184,9 +188,9 @@ export class RoleFormComponent implements OnInit {
 
   Save(): void {
     var assignRoleToFormsUrl = this.foundationUrl + AdInsConstant.AssignRoleToForms;
-    this.refRoleObj.refRoleId = this.refRoleId;
-    this.refRoleObj.listAddRefFormId = this.listSelectedId;
-    this.refRoleObj.listDelRefFormId = this.listDeletedId;
+    this.refRoleObj.RefRoleId = this.refRoleId;
+    this.refRoleObj.ListAddRefFormId = this.listSelectedId;
+    this.refRoleObj.ListDelRefFormId = this.listDeletedId;
     console.log(this.refRoleObj);
     this.httpClient.post(assignRoleToFormsUrl, this.refRoleObj).subscribe(
       response => {

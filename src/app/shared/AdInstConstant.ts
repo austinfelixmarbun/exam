@@ -97,8 +97,10 @@ export class AdInsConstant {
   //REF-BANK
   public static GetBankPaging = "/RefBank/GetRefBankPaging";
   public static GetBank = "/RefBank/GetBank";
+  public static GetRefBankByRefBankIdAsync = "/RefBank/GetRefBankByRefBankIdAsync";
   public static EditRefBank = "/RefBank/EditRefBank";
   public static AddRefBank = "/RefBank/AddRefBank";
+  public static AddRefBankAsync= "/RefBank/AddRefBankAsync";
   public static DeleteRefBank = "/RefBank/DeleteRefBank";
   public static GetBankByBankCode = "/RefBank/GetBankByBankCode";
 
@@ -137,10 +139,10 @@ export class AdInsConstant {
 
   //REF-ROLE
   public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
-  public static AddRefRole = "/UserManagement/AddRefRole";
-  public static EditRefRole = "/UserManagement/EditRefRole";
-  public static DeleteRefRole = "/UserManagement/DeleteRefRole";
-  public static GetRefRoleByRefRoleId = "/RefRole/GetRefRoleByRefRoleId";
+  public static AddRefRole = environment.FoundationR3Url +"/RefRole/AddRefRole";
+  public static EditRefRole = environment.FoundationR3Url +"/RefRole/EditRefRole";
+  public static DeleteRefRole = "/RefRole/DeleteRefRole";
+  public static GetRefRoleByRefRoleId = environment.FoundationR3Url + "/RefRole/GetRefRoleById";
   public static GetRefRoleByCode = environment.FoundationR3Url + "/RefRole/GetRefRoleByCode";
   public static GetActiveRefRoleByRefRoleId = "/RefRole/GetActiveRefRoleByRefRoleId";
   public static GetRefRole = "/RefRole/GetRefRole";
@@ -292,11 +294,18 @@ export class AdInsConstant {
   //WORKHOUR
   public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
   public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
-  public static AddWorkingHourSchmH = "/WorkHour/AddWorkingHourSchmH";
-  public static EditWorkingHourSchmH = "/WorkHour/EditWorkingHourSchmH";
+  public static AddWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/AddWorkingHourSchmH";
+  public static AddListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/AddListWorkingHourSchmD";
+  public static EditListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/EditListWorkingHourSchmD";
+  public static EditWorkingHourSchmH = environment.FoundationR3Url +  "/WorkingHourSchm/EditWorkingHourSchmH";
   public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
   public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
   public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
+  public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchm";
+  public static GetWorkingHourSchmHById = environment.FoundationR3Url + "/WorkingHourSchm/GetWorkingHourSchmHById";
+  public static GetListWorkingHourSchmDByWorkingHourHId = environment.FoundationR3Url + "/WorkingHourSchm/GetListWorkingHourSchmDByWorkingHourHId";
+
+
 
   //QUEUE
   public static AddQueue = "http://R3App-Server/FOUNDATION/RabbitMq/AddQueue";
