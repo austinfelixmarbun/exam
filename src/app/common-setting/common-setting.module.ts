@@ -13,7 +13,7 @@ import { GeneralSettingPagingComponent } from 'app/common-setting/general-settin
 import { CurrencyComponent } from 'app/common-setting/currency/currency.component';
 import { CurrencyAddComponent } from 'app/common-setting/currency/currency-add/currency-add.component';
 import { WorkingHourPagingComponent } from './working-hour-scheme/working-hour-paging/working-hour-paging.component';
-import { WorkingHourDetailComponent } from './working-hour-scheme/working-hour-detail/working-hour-detail.component';
+import { WorkingHourHDetailComponent } from './working-hour-scheme/working-hour-h-detail/working-hour-h-detail.component';
 import { HolidayPagingComponent } from './holiday-scheme/holiday-paging/holiday-paging.component';
 import { HolidayDetailComponent } from './holiday-scheme/holiday-detail/holiday-detail.component';
 import { HolidayDetailAddComponent } from './holiday-scheme/holiday-detail-add/holiday-detail-add.component';
@@ -35,6 +35,7 @@ import { ProvinceAddEditComponent } from './prov-district/province-add-edit/prov
 import { DistrictComponent } from './prov-district/district-paging/district.component';
 import { DistrictAddEditComponent } from './prov-district/district-add-edit/district-add-edit.component';
 import { UcSubsectionModule } from '@adins/uc-subsection';
+import { WorkingHourDDetailComponent } from './working-hour-scheme/working-hour-d-detail/working-hour-d-detail.component';
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
@@ -65,7 +66,8 @@ import { MasterTypePagingComponent } from './master-type/master-type-paging/mast
     CurrencyComponent,
     CurrencyAddComponent,
     WorkingHourPagingComponent,
-    WorkingHourDetailComponent,
+    WorkingHourHDetailComponent,
+    WorkingHourDDetailComponent,
     HolidayPagingComponent,
     HolidayDetailComponent,
     HolidayDetailAddComponent,
