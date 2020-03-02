@@ -1,0 +1,58 @@
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <div class="addEdit">
+            <form class="form form-horizontal" [formGroup]="RefProfessionForm" (ngSubmit)="RefProfessionForm.valid && SaveForm()"
+                  #enjiForm="ngForm">
+              <div class="form-body">
+                <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Profession {{this.pageType}}</h4>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel adins-required" translate>Profession Code </label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput" formControlName="ProfessionCode"
+                           [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProfessionForm.controls.ProfessionCode.invalid }">
+                    <show-errors [control]="RefProfessionForm.controls.ProfessionCode" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel adins-required" translate>Profession Name </label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput" formControlName="ProfessionName"
+                           [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProfessionForm.controls.ProfessionName.invalid }">
+                    <show-errors [control]="RefProfessionForm.controls.ProfessionName" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3  adInsLabel adins-required" translate>Customer Model Name </label>
+                    <div class="col-md-9">
+                      <select class="form-control adInsInput" formControlName="MrCustModelCode">
+                        <option *ngFor="let ram of allRefProfessionMethod" [ngValue]="ram.Key">
+                          {{ram.Value}}
+                        </option>
+                      </select>
+                      <show-errors [control]="RefProfessionForm.controls.MrCustModelCode" [submit]="enjiForm.submitted"></show-errors>
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel adins-required" translate>Bl Code </label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput" formControlName="RegRptCode">
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions right">
+                <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/commonSetting/profession/paging']"
+                  translate>
+                  <i class="ft-x"></i> Back
+                </button>
+                <button type="submit" class="btn btn-raised btn-primary" translate>
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  

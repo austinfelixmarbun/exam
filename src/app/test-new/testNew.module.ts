@@ -12,6 +12,8 @@ import { UcAddressGroupComponent } from './uc-address-group/uc-address-group.com
 import { UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcLookupGroupComponent } from './uc-lookup-group/uc-lookup-group.component';
 import { UcpagingModule } from "@adins/ucpaging";
+import { UcSubsectionModule } from "@adins/uc-subsection";
+import { UcaddressModule } from "@adins/ucaddress";
 
 @NgModule({
     imports: [
@@ -21,7 +23,9 @@ import { UcpagingModule } from "@adins/ucpaging";
         NgbModule,
         TestNewRoutingModule,
         UclookupgenericModule,
-        UcpagingModule
+        UcpagingModule,
+        UcSubsectionModule,
+        UcaddressModule
     ],
     declarations: [
         Dummy1Component,
