@@ -233,11 +233,13 @@ export class AdInsConstant {
   //HOLIDAY
   public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
   public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
-  public static AddHolidaySchmH = "/Holiday/AddHolidaySchmH";
+  public static AddHolidaySchmH = "/HolidaySchm/AddHolidaySchmH";
   public static AddHolidaySchmD = "/Holiday/AddHolidaySchmD";
   public static AddHolidaySchmDUntilYear = "/Holiday/AddHolidaySchmDUntilYear";
   public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
+  public static GetHolidaySchmHById = "/HolidaySchm/GetHolidaySchmHById";
   public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
+  public static EditHolidaySchmH = "/HolidaySchm/EditHolidaySchmH";
   public static DeleteHolidaySchmH = "/Holiday/DeleteHolidaySchmH";
   public static DeleteHolidaySchmD = "/Holiday/DeleteHolidaySchmD";
   public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";

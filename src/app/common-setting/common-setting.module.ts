@@ -38,6 +38,7 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
+import { FormModule } from 'app/forms/forms.module';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { ProfessionAddEditComponent } from './profession/profession-add-edit/pro
     UcgridfooterModule,
     SharingComponentModule,
     ReactiveFormsModule,
+    FormModule,
     UcpagingModule,
     UclookupgenericModule,
     UcSubsectionModule
