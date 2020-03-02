@@ -247,7 +247,7 @@ export class AdInsConstant {
   public static GetHolidaySchmHById = "/HolidaySchm/GetHolidaySchmHById";
   public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
   public static EditHolidaySchmH = "/HolidaySchm/EditHolidaySchmH";
-  public static DeleteHolidaySchmH = "/Holiday/DeleteHolidaySchmH";
+  public static DeleteHolidaySchmH = "/HolidaySchm/DeleteHolidaySchmH";
   public static DeleteHolidaySchmD = "/Holiday/DeleteHolidaySchmD";
   public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
   public static CopyHolidaySchm = "/Holiday/CopyHolidaySchm";

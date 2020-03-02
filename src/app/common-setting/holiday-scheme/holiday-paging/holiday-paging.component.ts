@@ -29,79 +29,38 @@ export class HolidayPagingComponent implements OnInit {
   holidayObj: HolidayObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
   
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/search/searchHoliday.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetHolidayPaging;
-    
-    this.pageNow = 1;
-    this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetHolidayPaging;
-    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteHolidaySchmH;
+    this.inputObj._url = "./assets/ucpaging/searchHoliday.json";
+    this.inputObj.enviromentUrl = "http://r3app-server.ad-ins.com/FOUNDATION_R3";
+    this.inputObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.inputObj.pagingJson = "./assets/ucpaging/searchHoliday.json";
+    this.inputObj.deleteUrl = "/HolidaySchm/DeleteHolidaySchmH";
+
   }
 
-  searchSort(event: any) {
-    if (this.resultData != null) {
-      if (this.orderByKey == event.target.attributes.name.nodeValue) {
-        this.orderByValue = !this.orderByValue
-      } else {
-        this.orderByValue = true
-      }
-      this.orderByKey = event.target.attributes.name.nodeValue
-      var order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-    }
-  }
+  // searchSort(event: any) {
+  //   if (this.resultData != null) {
+  //     if (this.orderByKey == event.target.attributes.name.nodeValue) {
+  //       this.orderByValue = !this.orderByValue
+  //     } else {
+  //       this.orderByValue = true
+  //     }
+  //     this.orderByKey = event.target.attributes.name.nodeValue
+  //     var order = {
+  //       key: this.orderByKey,
+  //       value: this.orderByValue
+  //     }
+  //     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+  //   }
+  // }
 
-  searchPagination(event: number) {
-    this.pageNow = event;
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-  }
 
-  //** Start UC Search **/
-  getResult(event){
-    this.resultData = event.response.returnObject;
-    this.totalData = event.response.returnObject.count;
-    this.ucgridFooter.pageNow = event.pageNow;
-    this.ucgridFooter.totalData = this.totalData;
-    this.ucgridFooter.resultData = this.resultData;
-  }
+ 
 
-  onSelect(event)
-  {
-    this.pageNow = event.pageNow;
-    this.pageSize = event.pageSize;
-    this.searchPagination(this.pageNow);
-  }
 
-  delete(holidaySchmHId: any) {
-    if (confirm("Are you sure to delete this record?")) {
-      this.holidayObj = new HolidayObj();
-      this.holidayObj.holidaySchmHId = holidaySchmHId;
-      this.http.post(this.deleteUrl, this.holidayObj).subscribe(
-        (response) => {
-          this.toastr.successMessage(response['message']);
-          this.searchPagination(1);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
-        });
-    }
-  }
 }

@@ -132,6 +132,27 @@ const routes: Routes = [
         },
       },
       {
+        path: 'holiday/detail',
+        component: HolidayDetailComponent,
+        data: {
+          title: 'Holiday Detail'
+        },
+      },
+      {
+        path: 'holiday/detail/add',
+        component: HolidayDetailAddComponent,
+        data: {
+          title: 'Holiday Detail Add'
+        },
+      },
+      {
+        path: 'holiday/detail/edit',
+        component: HolidayDetailAddComponent,
+        data: {
+          title: 'Holiday Detail Edit'
+        },
+      },
+      {
         path: 'officeZipcodeMember',
         component: OfficeZipcodeMemberComponent,
         data: {
