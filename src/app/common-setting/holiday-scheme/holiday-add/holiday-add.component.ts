@@ -26,41 +26,32 @@ export class HolidayAddComponent implements OnInit {
     })
 
     title : string = "Holiday Scheme-Add";
-    param: string;
-    description: string;
-    activestatus: string;
+    holidaySchmId: string;
     result: any;
     mode: string = "add";
-    apiUrl: any;
-    pageType: string;
     holidayObj: HolidayObj;
     holidaySchmHId:any;
-    editUrl: any;
-    key: any;
     criteria: CriteriaObj[] = [];
 
-    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient,
-        private adInsService: AdInsService, private fb: FormBuilder) {
+    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
           this.route.queryParams.subscribe(params => {
-            this.param = params["holidaySchmHId"];
+            this.holidaySchmId = params["holidaySchmHId"];
             this.mode = params["mode"];
             if (this.mode == "edit") {
                 var tempCrit = new CriteriaObj();
                 tempCrit.restriction = "Eq";
-                tempCrit.value = this.param;
+                tempCrit.value = this.holidaySchmId;
                 this.criteria.push(tempCrit);
             }
         });
     }
 
     ngOnInit() {
-      console.log("edit");
         if (this.mode == "edit") {
             this.title = "Holiday Scheme-Edit";
             this.HolidaySchemeHForm.controls.HolidaySchmCode.disable();
             var holidayObj = new HolidayObj();
-            holidayObj.HolidaySchmHId = this.param;
-            console.log(this.param);
+            holidayObj.HolidaySchmHId = this.holidaySchmId;
             this.http.post(AdInsConstant.GetHolidaySchmHById, holidayObj).subscribe(
                 (response) => {
                     this.result = response;
@@ -81,7 +72,7 @@ export class HolidayAddComponent implements OnInit {
         if (this.mode == "edit") {
             this.holidayObj = new HolidayObj();
             this.holidayObj = this.HolidaySchemeHForm.value;
-            this.holidayObj.HolidaySchmHId = this.param;
+            this.holidayObj.HolidaySchmHId = this.holidaySchmId;
             this.holidayObj.HolidaySchmCode = this.result.HolidaySchmCode;
             this.holidayObj.RowVersion = this.result.RowVersion;
             this.http.post(AdInsConstant.EditHolidaySchmH, this.holidayObj).subscribe(
@@ -100,9 +91,8 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.RowVersion = "";
 
             this.http.post(AdInsConstant.AddHolidaySchmH, this.holidayObj).subscribe((response) => {
+                this.router.navigateByUrl('/commonSetting/holiday');
                 this.toastr.successMessage(response['message']);
-                this.router.navigateByUrl('/commonSetting/holiday', { skipLocationChange: true }).then(() =>
-                    this.router.navigate(['/commonSetting/holiday']));
             },
                 (error) => {
                     console.log(error);

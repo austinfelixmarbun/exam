@@ -16,21 +16,8 @@ import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
   providers: [NGXToastrService, DecimalPipe]
 })
 export class HolidayPagingComponent implements OnInit {
-
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
-  @ViewChild(UCSearchComponent) searchComponent;
-  inputObj: any;
-  resultData: any;
-  pageNow: any;
-  totalData: any;
-  pageSize: any = 10;
-  apiUrl: any;
-  deleteUrl: any;
-  holidayObj: HolidayObj;
-  orderByKey: any = null;
-  orderByValue: boolean = true;
-  foundationUrl: any = environment.FoundationR3Url;
   
+  inputObj: any;
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
@@ -42,23 +29,6 @@ export class HolidayPagingComponent implements OnInit {
     this.inputObj.deleteUrl = "/HolidaySchm/DeleteHolidaySchmH";
 
   }
-
-  // searchSort(event: any) {
-  //   if (this.resultData != null) {
-  //     if (this.orderByKey == event.target.attributes.name.nodeValue) {
-  //       this.orderByValue = !this.orderByValue
-  //     } else {
-  //       this.orderByValue = true
-  //     }
-  //     this.orderByKey = event.target.attributes.name.nodeValue
-  //     var order = {
-  //       key: this.orderByKey,
-  //       value: this.orderByValue
-  //     }
-  //     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-  //   }
-  // }
-
 
  
 
