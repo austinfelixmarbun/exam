@@ -4,5 +4,6 @@ export class RefBankObj {
     bankCode: any;
     regRptCode: any;
     isActive: any;
-    constructor() { this.refBankId = 0 }
+    RowVersion : any;
+    constructor() { this.refBankId = 0, this.RowVersion="" }
 }  

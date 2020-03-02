@@ -1,27 +1,27 @@
 {
-  "title": "Currency",
+  "title": "RefRole",
   "exportExcel": false,
   "component": [
     {
       "type": "textbox",
-      "name": "curr_Code",
-      "id": "currCode",
+      "name": "Role_Code",
+      "id": "RoleCode",
       "value": "",
-      "label": "Currency Code",
+      "label": "Role Code",
       "placeholder": "Placeholder"
     },
     {
       "type": "textbox",
-      "name": "curr_Name",
-      "id": "currName",
+      "name": "Role_Name",
+      "id": "RoleName",
       "value": "",
-      "label": "Currency",
+      "label": "Role Name",
       "placeholder": "Placeholder"
     },
     {
       "type": "dropdown",
-      "name": "is_Active",
-      "id": "isActive",
+      "name": "Is_Active",
+      "id": "IsActive",
       "value": "Active Status",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -30,11 +30,11 @@
       "label": "Active Status",
       "items": [
         {
-          "key": "1",
+          "key": true,
           "value": "Yes"
         },
         {
-          "key": "0",
+          "key": false,
           "value": "No"
         }
       ],
@@ -45,46 +45,51 @@
     {
       "type": "sort",
       "position": "left",
-      "label": "Currency Code",
-      "name": "currCode"
+      "label": "Role Code",
+      "name": "RoleCode"
     },
     {
       "type": "sort",
       "position": "left",
-      "label": "Currency",
-      "name": "currName"
+      "label": "Role Name",
+      "name": "RoleName"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "Active Status",
-      "name": "isActive"
+      "name": "IsActive"
     },
     {
       "type": "label",
       "position": "center",
-      "label": "Edit"
+      "label": "Forms"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
     }
   ],
   "querystring": {
-    "select": "SELECT A.CURR_CODE as currCode,A.REF_CURR_ID as refCurrId,A.CURR_NAME as currName,A.IS_ACTIVE as isActive",
-    "from": "FROM dbo.REF_CURR A WITH(NOLOCK)"
+    "select": "SELECT A.ROLE_CODE AS RoleCode, A.REF_ROLE_ID AS RefRoleId, A.ROLE_NAME AS RoleName, A.IS_ACTIVE AS IsActive",
+    "from": "FROM dbo.REF_ROLE A WITH(NOLOCK)"
   },
   "bodyList": [
     {
       "type": "text",
       "position": "left",
-      "property": "currCode"
+      "property": "RoleCode"
     },
     {
       "type": "text",
       "position": "left",
-      "property": "currName"
+      "property": "RoleName"
     },
     {
       "type": "boolean",
       "position": "center",
-      "property": "isActive"
+      "property": "IsActive"
     },
     {
       "type": "action",
@@ -92,17 +97,37 @@
       "action": [
         {
           "type": "edit",
-          "path": "/commonSetting/currency/add",
+          "path": "/systemSetting/roleForm",
           "param": [
             {
-              "type": "refCurrId",
-              "property": "refCurrId"
+              "type": "RefRoleId",
+              "property": "RefRoleId"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "/systemSetting/role/detail",
+          "param": [
+            {
+              "type": "RefRoleId",
+              "property": "RefRoleId"
             },
             {
-              "type": "param",
+              "type": "mode",
               "property": "edit"
             }
           ]
+        },
+        {
+            "type": "delete",
+            "property": "RefRoleId"
         }
       ]
     }

@@ -37,7 +37,7 @@ export class MasterTypeAddEditComponent implements OnInit {
       if (params['mode'] != null) {
         this.type = params['mode'];
       }
-      if (params['refRoleId'] != null) {
+      if (params['efRoleId'] != null) {
         this.refRoleId = params['refRoleId'];
       }
       console.log(this.type)
@@ -50,7 +50,7 @@ export class MasterTypeAddEditComponent implements OnInit {
     if (this.type == 'edit') {
       this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
       this.refRoleObj = new RefRoleObj()
-      this.refRoleObj.refRoleId = +this.refRoleId
+      this.refRoleObj.RefRoleId = +this.refRoleId
       this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
         (response) => {
           console.log('Success Get');
@@ -58,12 +58,7 @@ export class MasterTypeAddEditComponent implements OnInit {
           console.log(this.refRoleObj);
           this.roleCodeModel = response['returnObject']['roleCode']
           this.roleNameModel = response['returnObject']['roleName']
-          if (this.refRoleObj.isActive == '1') {
-            this.isActive = true;
-          }
-          else {
-            this.isActive = false;
-          }
+          this.isActive = this.refRoleObj.IsActive;
 
         },
         (error) => {
@@ -84,7 +79,7 @@ export class MasterTypeAddEditComponent implements OnInit {
     var getRoleUrlGateway = 'http://01-05-0064-0618/FOUNDATION_R3/RefRole/GetRefRole'
     var roleObj: RefRoleObj;
     roleObj = new RefRoleObj()
-    roleObj.roleCode = RoleAddEditForm.value.roleCodeModel;
+    roleObj.RoleCode = RoleAddEditForm.value.roleCodeModel;
 
 
 
@@ -103,9 +98,9 @@ export class MasterTypeAddEditComponent implements OnInit {
             this.apiUrl = this.foundationUrl + AdInsConstant.AddRefRole;
 
             this.refRoleObj = new RefRoleObj();
-            this.refRoleObj.roleCode = RoleAddEditForm.value.roleCodeModel;
-            this.refRoleObj.roleName = RoleAddEditForm.value.roleNameModel;
-            if (RoleAddEditForm.value.isActive) { this.refRoleObj.isActive = '1' } else { this.refRoleObj.isActive = '0' };
+            this.refRoleObj.RoleCode = RoleAddEditForm.value.roleCodeModel;
+            this.refRoleObj.RoleName = RoleAddEditForm.value.roleNameModel;
+            this.refRoleObj.IsActive = RoleAddEditForm.value.isActive;
 
             //SAVE
             this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
@@ -138,10 +133,10 @@ export class MasterTypeAddEditComponent implements OnInit {
     else {
       this.apiUrl = this.foundationUrl + AdInsConstant.EditRefRole;
 
-      this.refRoleObj.refRoleId = this.refRoleId;
-      this.refRoleObj.roleCode = RoleAddEditForm.value.roleCodeModel;
-      this.refRoleObj.roleName = RoleAddEditForm.value.roleNameModel;
-      if (RoleAddEditForm.value.isActive) { this.refRoleObj.isActive = '1' } else { this.refRoleObj.isActive = '0' };
+      this.refRoleObj.RefRoleId = this.refRoleId;
+      this.refRoleObj.RoleCode = RoleAddEditForm.value.roleCodeModel;
+      this.refRoleObj.RoleName = RoleAddEditForm.value.roleNameModel;
+      this.refRoleObj.IsActive = RoleAddEditForm.value.isActive;
 
       //SAVE
       this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(

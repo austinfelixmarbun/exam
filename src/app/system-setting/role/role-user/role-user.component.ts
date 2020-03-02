@@ -99,7 +99,7 @@ export class RoleUserComponent implements OnInit {
     this.ucgridFooter.resultData = this.resultData;
 
     event.response.returnObject.data.forEach(element => {
-      if (element.refRoleId == this.refRoleObj.refRoleId) {
+      if (element.refRoleId == this.refRoleObj.RefRoleId) {
         this.listDeletedId.push(element.empPositionId);
         if (element.isActive == '1') { this.listSelectedId.push(element.empPositionId); }
       }
@@ -132,7 +132,7 @@ export class RoleUserComponent implements OnInit {
     this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
 
     this.refRoleObj = new RefRoleObj();
-    this.refRoleObj.refRoleId = this.refRoleId;
+    this.refRoleObj.RefRoleId = this.refRoleId;
     console.log(urlGetRefRole);
     this.httpClient.post(urlGetRefRole, this.refRoleObj).subscribe(
       response => {
@@ -169,9 +169,9 @@ export class RoleUserComponent implements OnInit {
 
   Save(RoleUserForm: NgForm): void {
     var urlAssignRole = this.foundationUrl + AdInsConstant.AssignRoleToUsers;
-    this.refRoleObj.refRoleId = this.refRoleId;
-    this.refRoleObj.listAddEmpPositionId = this.listSelectedId;
-    this.refRoleObj.listDelEmpPositionId = this.listDeletedId;
+    this.refRoleObj.RefRoleId = this.refRoleId;
+    // this.refRoleObj.listAddEmpPositionId = this.listSelectedId;
+    // this.refRoleObj.listDelEmpPositionId = this.listDeletedId;
     console.log(this.refRoleObj);
     this.httpClient.post(urlAssignRole, this.refRoleObj).subscribe(
       response => {

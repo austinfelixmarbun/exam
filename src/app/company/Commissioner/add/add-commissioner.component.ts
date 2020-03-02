@@ -51,7 +51,7 @@ export class CommissionerAddComponent implements OnInit {
     ngOnInit() {
         this.idTypeUrl = this.settingUrl + AdInsConstant.GetRefMasterList;
         var refMasterObj = new RefMasterObj();
-        refMasterObj.refMasterTypeCode = "ID_TYPE";
+        // refMasterObj.refMasterTypeCode = "ID_TYPE";
         this.http.post(this.idTypeUrl, refMasterObj).subscribe(
             (response) => {
                 this.itemIdType = response["returnObject"];
