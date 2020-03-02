@@ -46,7 +46,7 @@ export class UcAddressGroupComponent implements OnInit {
     this.UCAddrForm.addControl(this.identifier, this.fb.group({
       Addr: ['', Validators.required],
       AreaCode4: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.maxLength(3)]],
-      AreaCode3: ['', Validators.required],
+      AreaCode3: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.maxLength(3)]],
       AreaCode2: ['', Validators.required],
       AreaCode1: ['', Validators.required],
       City: ['', Validators.required],
