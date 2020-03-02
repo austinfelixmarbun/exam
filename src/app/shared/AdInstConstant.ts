@@ -100,7 +100,7 @@ export class AdInsConstant {
   public static GetRefBankByRefBankIdAsync = "/RefBank/GetRefBankByRefBankIdAsync";
   public static EditRefBank = "/RefBank/EditRefBank";
   public static AddRefBank = "/RefBank/AddRefBank";
-  public static AddRefBankAsync= "/RefBank/AddRefBankAsync";
+  public static AddRefBankAsync = "/RefBank/AddRefBankAsync";
   public static DeleteRefBank = "/RefBank/DeleteRefBank";
   public static GetBankByBankCode = "/RefBank/GetBankByBankCode";
 
@@ -139,8 +139,8 @@ export class AdInsConstant {
 
   //REF-ROLE
   public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
-  public static AddRefRole = environment.FoundationR3Url +"/RefRole/AddRefRole";
-  public static EditRefRole = environment.FoundationR3Url +"/RefRole/EditRefRole";
+  public static AddRefRole = environment.FoundationR3Url + "/RefRole/AddRefRole";
+  public static EditRefRole = environment.FoundationR3Url + "/RefRole/EditRefRole";
   public static DeleteRefRole = "/RefRole/DeleteRefRole";
   public static GetRefRoleByRefRoleId = environment.FoundationR3Url + "/RefRole/GetRefRoleById";
   public static GetRefRoleByCode = environment.FoundationR3Url + "/RefRole/GetRefRoleByCode";
@@ -157,8 +157,8 @@ export class AdInsConstant {
   public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
   public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
   public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
-  public static EditRefZipcode = environment.FoundationR3Url +"/RefZipcode/EditRefZipCode";
-  public static AddRefZipcode = environment.FoundationR3Url +"/RefZipcode/AddRefZipCode";
+  public static EditRefZipcode = environment.FoundationR3Url + "/RefZipcode/EditRefZipCode";
+  public static AddRefZipcode = environment.FoundationR3Url + "/RefZipcode/AddRefZipCode";
   public static DeleteRefZipcode = environment.FoundationR3Url + "/RefZipcode/DeleteRefZipCode";
   public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
   public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
@@ -206,7 +206,7 @@ export class AdInsConstant {
   public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
   public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
   public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
-  public static GetRefMasterListKeyValueActiveByCode = "/RefMaster/GetListKeyValueActiveByCode"
+  public static GetRefMasterListKeyValueActiveByCode = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode"
   public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
   public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
 
@@ -232,14 +232,15 @@ export class AdInsConstant {
   public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
   public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
   public static LoginByRole = "/Authenticate/LoginByRole";
-  
+
 
   //FORM FEATURE
   public static GetListRefFeature = "/RefFeature/GetListRefFeature";
   public static GetRefFeatureByComponent = "/RefFeature/GetRefFeatureByComponent";
 
   //HOLIDAY
-  public static GetAllActiveHolidaySchmH = environment.FoundationR3Url + "/Holiday/GetAllActiveHolidaySchmH";
+  public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
+  public static GetListActiveHolidaySchemeH = environment.FoundationR3Url + "/HolidaySchm/GetListActiveHolidaySchemeH"
   public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
   public static AddHolidaySchmH = "/Holiday/AddHolidaySchmH";
   public static AddHolidaySchmD = "/Holiday/AddHolidaySchmD";
@@ -293,12 +294,12 @@ export class AdInsConstant {
   public static DeleteObjectBySQL = "/Generic/DeleteObjectBySQL";
 
   //WORKHOUR
-  public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
+  public static GetListActiveWorkingSchmH = environment.FoundationR3Url + "/WorkingHourSchm/GetListActiveWorkingSchmH";
   public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
   public static AddWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/AddWorkingHourSchmH";
   public static AddListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/AddListWorkingHourSchmD";
   public static EditListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/EditListWorkingHourSchmD";
-  public static EditWorkingHourSchmH = environment.FoundationR3Url +  "/WorkingHourSchm/EditWorkingHourSchmH";
+  public static EditWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/EditWorkingHourSchmH";
   public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
   public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
   public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
