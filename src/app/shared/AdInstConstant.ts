@@ -169,9 +169,9 @@ export class AdInsConstant {
 
   //BUSINESS UNIT
   public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
-  public static GetRefBizUnit = "/OrganizationDefinition/GetRefBizUnit";
-  public static AddRefBizUnit = "/OrganizationDefinition/AddRefBizUnit";
-  public static EditRefBizUnit = "/OrganizationDefinition/EditRefBizUnit";
+  public static GetRefBizUnit = "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
+  public static AddRefBizUnit = "/RefBizUnit/AddRefBizUnit";
+  public static EditRefBizUnit = "/RefBizUnit/EditRefBizUnit";
 
   //REF COY
   public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
