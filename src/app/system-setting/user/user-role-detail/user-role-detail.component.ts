@@ -98,11 +98,11 @@ export class UserRoleDetailComponent implements OnInit {
         if (response['returnObject'] !== null) {
           this.mode = 'edit';
           refRoleObj = response['returnObject'];
-          this.inputLookupObj.nameSelect = refRoleObj.roleName;
+          this.inputLookupObj.nameSelect = refRoleObj.RoleName;
           this.inputLookupObj.jsonSelect = response["returnObject"];
-          this.inputLookupObj.idSelect = refRoleObj.refRoleId;
+          this.inputLookupObj.idSelect = refRoleObj.RefRoleId;
           this.userTitleRoleObj.empPositionId = this.empPositionId;
-          this.userTitleRoleObj.refRoleId = refRoleObj.refRoleId;
+          this.userTitleRoleObj.refRoleId = refRoleObj.RefRoleId;
 
           console.log('A', refRoleObj);
           this.httpClient.post(getUserTitleRole, this.userTitleRoleObj).subscribe(

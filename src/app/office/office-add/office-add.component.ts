@@ -124,9 +124,9 @@ export class OfficeAddComponent implements OnInit {
 
   ngOnInit() {
     this.refMasterObj = new RefMasterObj();
-    this.refMasterObj.refMasterTypeCode = 'OFFICE_CLASS';
+    // this.refMasterObj.refMasterTypeCode = 'OFFICE_CLASS';
     this.refMasterOfficeType = new RefMasterObj();
-    this.refMasterOfficeType.refMasterTypeCode = 'OFFICE_TYPE';
+    // this.refMasterOfficeType.refMasterTypeCode = 'OFFICE_TYPE';
     this.refMasterCgType = new RefMasterObj();
     this.refMasterCgType.refMasterTypeCode = 'CENTER_GRP_TYPE';
     this.refMasterKonsyaType = new RefMasterObj();
@@ -201,9 +201,9 @@ export class OfficeAddComponent implements OnInit {
         })
     } else if (this.pageType == "edit") {
       this.refMasterObj = new RefMasterObj();
-      this.refMasterObj.refMasterTypeCode = 'OFFICE_CLASS';
+      // this.refMasterObj.refMasterTypeCode = 'OFFICE_CLASS';
       this.refMasterOfficeType = new RefMasterObj();
-      this.refMasterOfficeType.refMasterTypeCode = 'OFFICE_TYPE';
+      // this.refMasterOfficeType.refMasterTypeCode = 'OFFICE_TYPE';
       this.officeObj = new OfficeObj();
       this.officeObj.refOfficeId = this.refOfficeId
       this.httpClient.post(this.apiUrl, this.officeObj).subscribe(
