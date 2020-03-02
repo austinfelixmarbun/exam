@@ -62,7 +62,7 @@
     "@types/d3-shape": "1.2.4",
     "@types/dragula": "2.1.33",
     "@types/jquery": "3.3.21",
-    "angular-archwizard": "3.0.0",
+    "angular-archwizard": "5.0.0",
     "angular-calendar": "0.26.3",
     "angular-file-uploader": "^5.0.2",
     "angular-webstorage-service": "^1.0.2",
