@@ -1,12 +1,12 @@
 {
-    "title": "Business Unit",
+    "title": "Office Area",
     "component": [
         {
             "type": "textbox",
-            "name": "BIZ_UNIT_CODE",
-            "id": "businessUnitCodeId",
+            "name": "AREA_CODE",
+            "id": "areaCodeId",
             "value": "",
-            "label": "Business Unit Code",
+            "label": "Area Code",
             "placeholder": "Placeholder"
         },
         {
@@ -32,29 +32,29 @@
         },
         {
             "type": "textbox",
-            "name": "BIZ_UNIT_NAME",
-            "id": "businessUnitNameId",
+            "name": "AREA_NAME",
+            "id": "areaNameId",
             "value": "",
-            "label": "Business Unit Name",
+            "label": "Area Name",
             "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "select": "SELECT REF_BIZ_UNIT_ID AS RefBizUnitId, BIZ_UNIT_CODE AS BizUnitCode, BIZ_UNIT_NAME AS BizUnitName, DESCR AS Descr, IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.REF_BIZ_UNIT WITH(NOLOCK)"
+        "select": "SELECT AREA_CODE AS AreaCode, IS_ACTIVE AS IsActive, AREA_NAME AS AreaName, REF_OFFICE_AREA_ID AS RefOfficeAreaId",
+        "from": "FROM dbo.REF_OFFICE_AREA WITH(NOLOCK)"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "center",
-            "label": "BUSINESS UNIT CODE",
-            "name": "BizUnitCode"
+            "label": "AREA CODE",
+            "name": "AreaCode"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "BUSINESS UNIT NAME",
-            "name": "BizUnitName"
+            "label": "AREA NAME",
+            "name": "AreaName"
         },
         {
             "type": "label",
@@ -65,7 +65,7 @@
         {
             "type": "label",
             "position": "center",
-            "label": "BUSINESS UNIT MEMBER"
+            "label": "AREA MEMBER"
         },
         {
             "type": "label",
@@ -77,12 +77,12 @@
         {
             "type": "text",
             "position": "center",
-            "property": "BizUnitCode"
+            "property": "AreaCode"
         },
         {
             "type": "text",
             "position": "center",
-            "property": "BizUnitName"
+            "property": "AreaName"
         },
         {
             "type": "boolean",
@@ -95,11 +95,11 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/organization/businessunit/member",
+                    "path": "/office/officeArea/member",
                     "param": [
                         {
-                            "type": "RefBizUnitId",
-                            "property": "RefBizUnitId"
+                            "type": "RefOfficeAreaId",
+                            "property": "RefOfficeAreaId"
                         }
                     ]
                 }
@@ -111,11 +111,11 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/organization/businessunit/add",
+                    "path": "/office/officeArea/detail",
                     "param": [
                         {
-                            "type": "RefBizUnitId",
-                            "property": "RefBizUnitId"
+                            "type": "RefOfficeAreaId",
+                            "property": "RefOfficeAreaId"
                         },
                         {
                             "type": "mode",
@@ -125,7 +125,7 @@
                 },
                 {
                     "type": "delete",
-                    "property": "RefBizUnitId"
+                    "property": "RefOfficeAreaId"
                 }
             ]
         }

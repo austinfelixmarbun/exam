@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OfficeComponent } from 'app/office/office.component';
 import { OfficeRoutingModule } from 'app/office/office-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { OfficeAddComponent } from 'app/office/office-add/office-add.component';
@@ -30,7 +30,8 @@ import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-
     UcgridfooterModule,
     UcpagingModule,
     UcSubsectionModule,
-    SharingComponentModule
+    SharingComponentModule,
+    ReactiveFormsModule
   ],
   declarations: [
     OfficeComponent,
