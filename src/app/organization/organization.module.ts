@@ -8,7 +8,7 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RefJobTitleComponent } from 'app/organization/ref-job-title/ref-job-title.component';
 import { BusinessUnitComponent } from 'app/organization/business-unit/business-unit.component';
-import { AddBusinessUnitComponent } from 'app/organization/business-unit/add/add-business-unit.component';
+import { AddBusinessUnitComponent } from 'app/organization/business-unit/add-business-unit/add-business-unit.component';
 import { RefJobTitleAddComponent } from 'app/organization/ref-job-title/ref-job-title-add/ref-job-title-add.component';
 import { OrganizationComponent } from 'app/organization/organization.component';
 import { OrgAddEditComponent } from 'app/organization/organization-add-edit/org-add-edit/org-add-edit.component';
@@ -25,7 +25,8 @@ import { LookuprefjobtitleModule } from '@adins/lookuprefjobtitle';
 import { lookupbizunitmodule } from '@adins/lookupbizunit';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
-
+import { MemberBusinessUnitComponent } from './business-unit/member-business-unit/member-business-unit.component';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { UcpagingModule } from '@adins/ucpaging';
     LookuporgmdlstrucModule,
     UclookupgenericModule,
     UcpagingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UcviewgenericModule
   ],
   declarations: [
     RefJobTitleComponent,
@@ -58,7 +60,8 @@ import { UcpagingModule } from '@adins/ucpaging';
     OrgMdlStrucPagingComponent,
     OrgMdlStrucDetailComponent,
     OrgJobTitleDetailComponent,
-    OrgJobTitlePagingComponent
+    OrgJobTitlePagingComponent,
+    MemberBusinessUnitComponent
 
   ]
 })

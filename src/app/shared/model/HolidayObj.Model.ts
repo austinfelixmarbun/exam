@@ -1,8 +1,8 @@
 export class HolidayObj {
-    holidaySchmHId: any;
-    holidaySchmName: any;
-    holidaySchmCode: any;
-    isActive: any;
-
-    constructor() { this.holidaySchmHId = 0; }
+    HolidaySchmHId: any;
+    HolidaySchmName: any;
+    HolidaySchmCode: any;
+    IsActive: any;
+    RowVersion : any;
+    constructor() { this.HolidaySchmHId = 0, this.RowVersion = "" }
 }
