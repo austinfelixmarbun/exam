@@ -48,14 +48,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'master',
+        path: 'Master',
         component: MasterPagingComponent,
         data: {
           title: 'Master Maintenance Paging'
         },
       },
       {
-        path: 'master/detail',
+        path: 'Master/detail',
         component: MasterAddEditComponent,
         data: {
           title: 'Master Maintenance Add Edit'

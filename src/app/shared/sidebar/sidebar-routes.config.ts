@@ -61,6 +61,7 @@ export const ROUTES: RouteInfo[] = [
     path: '', title: 'System Setting', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
       { path: '/CommonSetting/GeneralSetting', title: 'General Setting', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/Master', title: 'Ref Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       {
         
         path: '', title: 'Security', icon: '', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
