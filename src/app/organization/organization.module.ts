@@ -3,12 +3,12 @@ import { OrgJobTitleDetailComponent } from './org-mdl-struc/org-job-title-detail
 import { NgModule, NgModuleFactory } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrganizationRoutingModule } from 'app/organization/organization-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RefJobTitleComponent } from 'app/organization/ref-job-title/ref-job-title.component';
 import { BusinessUnitComponent } from 'app/organization/business-unit/business-unit.component';
-import { AddBusinessUnitComponent } from 'app/organization/business-unit/add/add-business-unit.component';
+import { AddBusinessUnitComponent } from 'app/organization/business-unit/add-business-unit/add-business-unit.component';
 import { RefJobTitleAddComponent } from 'app/organization/ref-job-title/ref-job-title-add/ref-job-title-add.component';
 import { OrganizationComponent } from 'app/organization/organization.component';
 import { OrgAddEditComponent } from 'app/organization/organization-add-edit/org-add-edit/org-add-edit.component';
@@ -24,7 +24,9 @@ import { LookuporgmdlstrucModule } from '@adins/lookuporgmdlstruc';
 import { LookuprefjobtitleModule } from '@adins/lookuprefjobtitle';
 import { lookupbizunitmodule } from '@adins/lookupbizunit';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
-
+import { UcpagingModule } from '@adins/ucpaging';
+import { MemberBusinessUnitComponent } from './business-unit/member-business-unit/member-business-unit.component';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
 
 @NgModule({
   imports: [
@@ -40,7 +42,10 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     LookuprefjobtitleModule,
     lookupbizunitmodule,
     LookuporgmdlstrucModule,
-    UclookupgenericModule
+    UclookupgenericModule,
+    UcpagingModule,
+    ReactiveFormsModule,
+    UcviewgenericModule
   ],
   declarations: [
     RefJobTitleComponent,
@@ -55,7 +60,8 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     OrgMdlStrucPagingComponent,
     OrgMdlStrucDetailComponent,
     OrgJobTitleDetailComponent,
-    OrgJobTitlePagingComponent
+    OrgJobTitlePagingComponent,
+    MemberBusinessUnitComponent
 
   ]
 })

@@ -68,7 +68,7 @@ export class CopyHolidaySchemeComponent implements OnInit {
         if (this.mode == "edit") {
             this.apiUrl = this.urlEnviPaging + AdInsConstant.GetHolidaySchmH;
             var holidayObj = new HolidayObj();
-            holidayObj.holidaySchmHId = this.holidaySchmHId;
+            holidayObj.HolidaySchmHId = this.holidaySchmHId;
             this.http.post(this.apiUrl, holidayObj).subscribe(
                 (response) => {
                     this.result = response['returnObject'];
@@ -100,12 +100,12 @@ export class CopyHolidaySchemeComponent implements OnInit {
             this.editUrl = this.urlEnviPaging + AdInsConstant.EditHolidaySchmHOnly;
             this.holidayObj = new HolidayObj();
             this.holidayObj = HolidaySchemeHReqForm.value;
-            this.holidayObj.holidaySchmHId = this.holidaySchmHId;
+            this.holidayObj.HolidaySchmHId = this.holidaySchmHId;
             if (this.isActive == false) {
-                this.holidayObj.isActive = "0";
+                this.holidayObj.IsActive = "0";
             }
             else {
-                this.holidayObj.isActive = "1";
+                this.holidayObj.IsActive = "1";
             }
             this.http.post(this.editUrl, this.holidayObj).subscribe(
                 (response) => {
@@ -122,16 +122,16 @@ export class CopyHolidaySchemeComponent implements OnInit {
             this.holidayDestObj = new HolidayObj();
             this.holidayObj = HolidaySchemeHReqForm.value;
             if (this.isActive == false) {
-                this.holidayObj.isActive = "0";
+                this.holidayObj.IsActive = "0";
             }
             else {
-                this.holidayObj.isActive = "1";
+                this.holidayObj.IsActive = "1";
             }
-            this.holidayObj.holidaySchmHId = this.inputLookupObj.jsonSelect.holidaySchmHId;
-            this.holidayDestObj.holidaySchmHId = this.inputLookupObj.jsonSelect.holidaySchmHId;
-            this.holidayDestObj.holidaySchmCode = this.inputLookupObj.jsonSelect.holidaySchmCode;
-            this.holidayDestObj.holidaySchmName = this.inputLookupObj.jsonSelect.holidaySchmName;
-            this.holidayDestObj.isActive = this.inputLookupObj.jsonSelect.isActive;
+            this.holidayObj.HolidaySchmHId = this.inputLookupObj.jsonSelect.holidaySchmHId;
+            this.holidayDestObj.HolidaySchmHId = this.inputLookupObj.jsonSelect.holidaySchmHId;
+            this.holidayDestObj.HolidaySchmCode = this.inputLookupObj.jsonSelect.holidaySchmCode;
+            this.holidayDestObj.HolidaySchmName = this.inputLookupObj.jsonSelect.holidaySchmName;
+            this.holidayDestObj.IsActive = this.inputLookupObj.jsonSelect.isActive;
             var holidayDest = {"holidaySchme2":this.holidayObj,"holidaySchme1":this.holidayDestObj};
             console.log(holidayDest);
             this.http.post(this.editUrl, holidayDest).subscribe((response) => {

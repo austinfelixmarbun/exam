@@ -80,7 +80,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.httpClient.post(this.editUrl, this.gsObj).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
-        this.router.navigate(["/commonSetting/generalSetting"]);
+        this.router.navigate(["/CommonSetting/GeneralSetting"]);
       },
       error => {
         console.log(error);

@@ -1,126 +1,31 @@
-import { ExcelService } from 'app/shared/excel-service/excel-service';
+import { Component, OnInit } from '@angular/core';
+import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { HttpClient } from '@angular/common/http';
-import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
-import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { UCSearchComponent } from '@adins/ucsearch';
-import { DecimalPipe } from '@angular/common';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-role-paging',
   templateUrl: './role-paging.component.html',
-  providers: [NGXToastrService, ExcelService, DecimalPipe]
+  styleUrls: ['./role-paging.component.scss'],
+  providers: [NGXToastrService, NgbPaginationConfig]
 })
 export class RolePagingComponent implements OnInit {
 
-  @ViewChild(UCSearchComponent) searchComponent;
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
-  inputObj: any;
-  resultData: any;
-  pageNow: any;
-  totalData: any;
-  pageSize: any;
-  apiUrl: any;
-  deleteUrl: any;
-  show: any;
-  exportData: any;
-  excelData: any;
-  refRoleObj: RefRoleObj;
-  orderByKey: any = null;
-  orderByValue: boolean = true;
-  foundationUrl: any = environment.foundationUrl;
+  inputPagingObj: any;
 
-  constructor(
-    private service: NGXToastrService,
-    private https: HttpClient
-  ) { }
+
+  constructor(private router: Router, private toastr: NGXToastrService) {
+  }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/search/searchRole.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetRefRolePaging;
-    
-    console.log('masuk');
-    this.show = AdInsConstant.showData.split(',');
-    this.pageNow = 1;
-    this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
-    this.initiateForm()
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
-    //   .subscribe(data => {
-    //     console.log(data);
-    //   }
-    //   )
+    this.inputPagingObj = new UcPagingObj();
+    this.inputPagingObj._url = "./assets/ucpaging/searchRefRole.json";
+    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefRole;
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefRole.json";
   }
-
-  getResult(event) {
-    this.resultData = event.response.returnObject;
-    this.totalData = event.response.returnObject.count;
-    this.ucgridFooter.pageNow = event.pageNow;
-    this.ucgridFooter.totalData = this.totalData;
-    this.ucgridFooter.resultData = this.resultData;
-  }
-
-  onSelect(event) {
-    this.pageNow = event.pageNow;
-    this.pageSize = event.pageSize;
-    this.searchPagination(this.pageNow);
-  }
-  searchPagination(event: number) {
-    this.pageNow = event;
-
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
-  }
-
-  initiateForm() {
-
-  }
-
-  del(id: any) {
-    if (confirm("Are you sure to delete this record?")) {
-      this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefRole;
-      this.refRoleObj = new RefRoleObj();
-      this.refRoleObj.refRoleId = +id;
-      console.log(this.refRoleObj);
-      this.https.post(this.deleteUrl, this.refRoleObj).subscribe(
-        (response) => {
-          this.service.successMessage(response['message']);
-          var order = null;
-          if (this.orderByKey != null) {
-            order = {
-              key: this.orderByKey,
-              value: this.orderByValue
-            }
-          }
-          this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
-        });
-    }
-  }
-
-  searchSort(event: any) {
-    if (this.orderByKey == event.target.attributes.name.nodeValue) {
-      this.orderByValue = !this.orderByValue
-    } else {
-      this.orderByValue = true
-    }
-    this.orderByKey = event.target.attributes.name.nodeValue
-    var order = {
-      key: this.orderByKey,
-      value: this.orderByValue
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
-  }
-
 }

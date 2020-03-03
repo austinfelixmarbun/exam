@@ -1,0 +1,105 @@
+{
+    "title": "Profession",
+    "exportExcel": false,
+    "component": [
+      {
+        "type": "textbox",
+        "name": "PROFESSION_CODE",
+        "id": "professionCodeId",
+        "value": "",
+        "label": "Profession Code",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "dropdown",
+        "datatype": "text",
+        "name": "MR_CUST_MODEL_CODE",
+        "id": "custModelNameId",
+        "value": "",
+        "placeholder": "Placeholder",
+        "isFromURL": true,
+        "isSelectOne": false,
+        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefCustModel/GetListKeyValueByCode",
+        "label": "Customer Model Name",
+        "items": [],
+        "itemsUrl": []
+      },
+      {
+        "type": "textbox",
+        "name": "PROFESSION_NAME",
+        "id": "professionNameId",
+        "value": "",
+        "label": "Profession Name",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT A.PROFESSION_CODE as professionCode,A.REF_PROFESSION_ID as refProfessionId,A.PROFESSION_NAME as professionName,A.MR_CUST_MODEL_CODE as custModelName",
+      "from": "FROM dbo.REF_PROFESSION A WITH(NOLOCK)"
+    },
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Profession Code",
+        "name": "professionCode"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Profession Name",
+        "name": "professionName"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Customer Model Name",
+        "name": "custModelName"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "left",
+        "property": "professionCode"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "professionName"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "custModelName"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/commonSetting/profession/detail",
+            "param": [
+              {
+                "type": "refProfessionId",
+                "property": "refProfessionId"
+              },
+              {
+                "type": "param",
+                "property": "edit"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

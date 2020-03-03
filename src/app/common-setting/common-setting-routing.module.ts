@@ -9,7 +9,7 @@ import { GeneralSettingPagingComponent } from 'app/common-setting/general-settin
 import { CurrencyComponent } from 'app/common-setting/currency/currency.component';
 import { CurrencyAddComponent } from 'app/common-setting/currency/currency-add/currency-add.component';
 import { WorkingHourPagingComponent } from './working-hour-scheme/working-hour-paging/working-hour-paging.component';
-import { WorkingHourDetailComponent } from './working-hour-scheme/working-hour-detail/working-hour-detail.component';
+import { WorkingHourHDetailComponent } from './working-hour-scheme/working-hour-h-detail/working-hour-h-detail.component';
 import { HolidayPagingComponent } from './holiday-scheme/holiday-paging/holiday-paging.component';
 import { HolidayDetailComponent } from './holiday-scheme/holiday-detail/holiday-detail.component';
 import { HolidayDetailAddComponent } from './holiday-scheme/holiday-detail-add/holiday-detail-add.component';
@@ -24,6 +24,10 @@ import { ProvinceComponent } from './prov-district/province-paging/province.comp
 import { ProvinceAddEditComponent } from './prov-district/province-add-edit/province-add-edit.component';
 import { DistrictComponent } from './prov-district/district-paging/district.component';
 import { DistrictAddEditComponent } from './prov-district/district-add-edit/district-add-edit.component';
+import { WorkingHourDDetailComponent } from './working-hour-scheme/working-hour-d-detail/working-hour-d-detail.component';
+import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
+import { ProfessionComponent } from './profession/profession-paging/profession.component';
+import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
 
 const routes: Routes = [
   {
@@ -58,14 +62,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'generalSetting',
+        path: 'GeneralSetting',
         component: GeneralSettingPagingComponent,
         data: {
           title: 'General Setting Maintenance Paging'
         },
       },
       {
-        path: 'generalSetting/detail',
+        path: 'GeneralSetting/detail',
         component: GeneralSettingAddEditComponent,
         data: {
           title: 'General Setting Maintenance Add Edit'
@@ -94,9 +98,16 @@ const routes: Routes = [
       },
       {
         path: 'workingHour/add',
-        component: WorkingHourDetailComponent,
+        component: WorkingHourHDetailComponent,
         data: {
           title: 'Working Hour Add Edit'
+        },
+      },
+      {
+        path: 'workingHour/detail',
+        component: WorkingHourDDetailComponent,
+        data: {
+          title: 'Working Hour Detail'
         },
       },
       {
@@ -108,30 +119,37 @@ const routes: Routes = [
       },
       {
         path: 'holiday/add',
-        component: HolidayDetailComponent,
-        data: {
-          title: 'Holiday Add Edit'
-        },
-      },
-      {
-        path: 'holiday-scheme/add',
         component: HolidayAddComponent,
         data: {
-          title: 'Holiday Scehme Add Edit'
+          title: 'Holiday Add'
         },
       },
       {
-        path: 'holiday-scheme/copy',
-        component: CopyHolidaySchemeComponent,
+        path: 'holiday/edit',
+        component: HolidayAddComponent,
         data: {
-          title: 'Holiday Scehme Copy Add Edit'
+          title: 'Holiday Edit'
         },
       },
       {
         path: 'holiday/detail',
+        component: HolidayDetailComponent,
+        data: {
+          title: 'Holiday Detail'
+        },
+      },
+      {
+        path: 'holiday/detail/add',
         component: HolidayDetailAddComponent,
         data: {
-          title: 'Holiday Detail Add Edit'
+          title: 'Holiday Detail Add'
+        },
+      },
+      {
+        path: 'holiday/detail/edit',
+        component: HolidayDetailAddComponent,
+        data: {
+          title: 'Holiday Detail Edit'
         },
       },
       {
@@ -197,6 +215,27 @@ const routes: Routes = [
           title: 'District Add Edit'
         },
       },
+      {
+        path: 'refStatus/paging',
+        component: RefStatusPagingComponent,
+        data: {
+          title: 'Ref Status Paging'
+        }
+      },
+      {
+        path: 'profession/paging',
+        component: ProfessionComponent,
+        data: {
+          title: 'Profession Paging'
+        },
+      },
+      {
+        path: 'profession/detail',
+        component: ProfessionAddEditComponent,
+        data: {
+          title: 'Profession Add Edit'
+        },
+      }
     ]
   }
 ];

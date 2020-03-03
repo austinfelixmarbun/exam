@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { AdInsService } from 'app/shared/services/adIns.service';
 
 @Component({
     selector: 'add-bank',
@@ -17,54 +15,49 @@ import { AdInsService } from 'app/shared/services/adIns.service';
 })
 export class BankAddComponent implements OnInit {
 
-    param: string;
-    businessUnitCode: string;
-    businessUnitName: string;
-    description: string;
-    activestatus: string;
+    BankAddForm = this.fb.group({
+        BankCode : ['',Validators.required],
+        BankName : ['', Validators.required],
+        RegRptCode : ['',Validators.required],
+        IsActive : [false]
+    });
+
+    refBankId: string;
     result: any;
-    mode: string = "add";
-    apiUrl: any;
-    pageType: string;
-    isActive: boolean = true;
-    settingUrl: string = environment.settingUrl;
-    urlEnviPaging: string = environment.foundationUrl;
+    mode: string;
+    title : string = "Add Bank";
     bankObj: RefBankObj;
-    editUrl: any;
-    key: any;
     criteria: CriteriaObj[] = [];
 
-    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient,
-        private adInsService: AdInsService) {
+    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
         this.route.queryParams.subscribe(params => {
-            this.param = params["refBankId"];
+            this.refBankId = params["RefBankId"];
             this.mode = params["mode"];
-            this.key = params["key"];
             if (this.mode == "edit") {
                 var tempCrit = new CriteriaObj();
-                tempCrit.propName = this.key;
                 tempCrit.restriction = "Eq";
-                tempCrit.value = this.param;
+                tempCrit.value = this.refBankId;
                 this.criteria.push(tempCrit);
             }
-        })
+        });
     }
 
     ngOnInit() {
-        console.log("add/edit bank");
         if (this.mode == "edit") {
-            this.apiUrl = this.settingUrl + AdInsConstant.GetBank;
+            this.title = "Edit Bank";
+            this.BankAddForm.controls.BankCode.disable();
             var bankObj = new RefBankObj();
-            bankObj.refBankId = this.param;
-            this.http.post(this.apiUrl, bankObj).subscribe(
+            bankObj.RefBankId = this.refBankId;
+            
+            this.http.post(AdInsConstant.GetRefBankByRefBankIdAsync, bankObj).subscribe(
                 (response) => {
-                    this.result = response['returnObject'];
-                    if (this.result.isActive == "1") {
-                        this.isActive = true;
-                    }
-                    else {
-                        this.isActive = false;
-                    }
+                    this.result = response;
+                    this.BankAddForm.patchValue({
+                        BankCode : this.result.BankCode,
+                        BankName : this.result.BankName,
+                        RegRptCode : this.result.RegRptCode,
+                        IsActive : this.result.IsActive
+                    })
                 },
                 (error) => {
                     console.log(error);
@@ -73,28 +66,15 @@ export class BankAddComponent implements OnInit {
         }
     }
 
-    toggleVisibility(e) {
-        this.isActive = e.target.checked;
-    }
-
-    formValidate(form: any) {
-        this.adInsService.scrollIfFormHasErrors(form);
-    }
-
-    SaveForm(BankAddReqForm: NgForm): void {
+    SaveForm(){
         if (this.mode == "edit") {
-            this.editUrl = this.settingUrl + AdInsConstant.EditRefBank;
             this.bankObj = new RefBankObj();
-            this.bankObj = BankAddReqForm.value;
-            this.bankObj.bankCode = this.result.bankCode;
-            this.bankObj.refBankId = this.param;
-            if (this.isActive == false) {
-                this.bankObj.isActive = "0";
-            }
-            else {
-                this.bankObj.isActive = "1";
-            }
-            this.http.post(this.editUrl, this.bankObj).subscribe(
+            this.bankObj = this.BankAddForm.value;
+            this.bankObj.BankCode = this.result.BankCode;
+            this.bankObj.RefBankId = this.refBankId;
+            this.bankObj.RowVersion  = this.result.RowVersion;
+
+            this.http.post(AdInsConstant.EditRefBank, this.bankObj).subscribe(
                 (response) => {
                     this.router.navigateByUrl('/bank/paging');
                     this.toastr.successMessage(response['message']);
@@ -104,20 +84,14 @@ export class BankAddComponent implements OnInit {
                 });
         }
         else {
-            this.editUrl = this.settingUrl + AdInsConstant.AddRefBank;
             this.bankObj = new RefBankObj();
-            this.bankObj = BankAddReqForm.value;
-            this.bankObj.refBankId = "0";
-            if (this.isActive == false) {
-                this.bankObj.isActive = "0";
-            }
-            else {
-                this.bankObj.isActive = "1";
-            }
-            this.http.post(this.editUrl, this.bankObj).subscribe((response) => {
+            this.bankObj = this.BankAddForm.value;
+            this.bankObj.RefBankId = "0";
+            this.bankObj.RowVersion = "";
+
+            this.http.post(AdInsConstant.AddRefBankAsync, this.bankObj).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
-                this.router.navigateByUrl('/bank/paging', { skipLocationChange: true }).then(() =>
-                    this.router.navigate(['/bank/add']));
+                this.router.navigateByUrl('/bank/paging');
             },
                 (error) => {
                     console.log(error);

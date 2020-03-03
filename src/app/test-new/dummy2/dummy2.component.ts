@@ -33,23 +33,8 @@ export class Dummy2Component implements OnInit {
     console.log(this.RefEmpForm.valid);
     console.log(this.RefEmpForm.value);
   }
+  
+  nextClicked() {
+    // this.wizard.goToNextStep();
+  }
 }
-
-
-        /// <summary>
-        /// Get Cust IdType Hist by Cust IdType Hist Id
-        /// </summary>
-        /// <param name="requestCustIdTypeHistObj"></param>
-        /// <returns></returns>
-
-        /// <summary>
-        /// Get list Cust IdType Hist by Cust IdType Id
-        /// </summary>
-        /// <param name="requestCustIdTypeHistObj"></param>
-        /// <returns></returns>
-
-        /// <summary>
-        /// Get last Cust IdType Hist by Cust IdType Id
-        /// </summary>
-        /// <param name="requestCustIdTypeHistObj"></param>
-        /// <returns></returns>

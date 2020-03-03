@@ -7,12 +7,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RefJobTitleComponent } from 'app/organization/ref-job-title/ref-job-title.component';
 import { BusinessUnitComponent } from 'app/organization/business-unit/business-unit.component';
-import { AddBusinessUnitComponent } from 'app/organization/business-unit/add/add-business-unit.component';
+import { AddBusinessUnitComponent } from 'app/organization/business-unit/add-business-unit/add-business-unit.component';
 import { RefJobTitleAddComponent } from 'app/organization/ref-job-title/ref-job-title-add/ref-job-title-add.component';
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 import { OrganizationModelPagingComponent } from 'app/organization/organization-model/organization-model-paging/organization-model-paging.component';
 import { OrganizationModelDetailComponent } from 'app/organization/organization-model/organization-model-detail/organization-model-detail.component';
 import { OrgMdlStrucDetailComponent } from 'app/organization/org-mdl-struc/org-mdl-struc-detail/org-mdl-struc-detail.component';
+import { MemberBusinessUnitComponent } from 'app/organization/business-unit/member-business-unit/member-business-unit.component';
+
 
 const routes: Routes = [
   {
@@ -114,6 +116,13 @@ const routes: Routes = [
         component: OrgJobTitleDetailComponent,
         data: {
           title: 'Organization Job Title Detai'
+        },
+      },
+      {
+        path: 'businessunit/member',
+        component: MemberBusinessUnitComponent,
+        data: {
+          title: 'Business Unit Member'
         },
       }
     ]
