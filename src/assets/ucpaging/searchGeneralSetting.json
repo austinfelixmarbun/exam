@@ -106,7 +106,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/commonSetting/generalSetting/detail",
+          "path": "/CommonSetting/GeneralSetting/detail",
           "param": [
             {
               "type": "generalSettingId",

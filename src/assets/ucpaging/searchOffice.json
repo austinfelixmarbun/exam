@@ -4,7 +4,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "OFFICE_CODE",
+            "name": "A.OFFICE_CODE",
             "id": "OfficeCodeId",
             "value": "",
             "label": "OFFICE CODE",
@@ -12,7 +12,7 @@
         },
         {
             "type": "textbox",
-            "name": "OFFICE_NAME",
+            "name": "B.OFFICE_NAME",
             "id": "OfficeParentId",
             "value": "",
             "label": "OFFICE PARENT",
@@ -20,7 +20,7 @@
         },
         {
             "type": "textbox",
-            "name": "OFFICE_NAME",
+            "name": "A.OFFICE_NAME",
             "id": "OfficeNameId",
             "value": "",
             "label": "OFFICE NAME",
@@ -28,7 +28,7 @@
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "A.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "ACTIVE",
             "value": "",
@@ -49,7 +49,7 @@
         },
         {
             "type": "textbox",
-            "name": "OFFICE_ADDR",
+            "name": "A.OFFICE_ADDR",
             "id": "OfficeAddrId",
             "value": "",
             "label": "OFFICE ADDRESS",
@@ -57,8 +57,8 @@
         },
         {
             "type": "dropdown",
-            "name": "MR_OFFICE_TYPE_CODE",
-            "id": "MrOfficeTypeCodeId",
+            "name": "A.OFFICE_CODE", 
+            "id": "OfficeCodeId",
             "value": "",
             "placeholder": "Placeholder",
             "datatype": "text",
@@ -67,13 +67,13 @@
             "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
             "label": "Office Type",
             "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "ID_TYPE",
+            "criteriaPropValue" : "OFFICE_TYPE",
             "items": [],
             "itemsUrl": []
           }
     ],
     "querystring": {
-        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.OFFICE_ADDR AS OfficeAddr , B.OFFICE_NAME AS OfficeParent, A.IS_ACTIVE AS IsActive, A.MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, A.REF_OFFICE_ID AS RefOfficeId",
+        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.OFFICE_ADDR AS OfficeAddr , B.OFFICE_NAME AS OfficeParent, A.IS_ACTIVE AS IsActive, A.REF_OFFICE_ID AS RefOfficeId",
         "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_ID = A.PARENT_ID "
     },
     "headerList": [
