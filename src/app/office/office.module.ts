@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OfficeComponent } from 'app/office/office.component';
 import { OfficeRoutingModule } from 'app/office/office-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
 import { OfficeAddComponent } from 'app/office/office-add/office-add.component';
@@ -18,6 +18,8 @@ import { OfficeGroupMemberComponent } from './office-group-member/office-group-m
 import { UcpagingComponent, UcpagingModule } from '@adins/ucpaging';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-group-member-add.component';
+import { UcaddressModule } from '@adins/ucaddress';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
 
 
 @NgModule({
@@ -30,7 +32,10 @@ import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-
     UcgridfooterModule,
     UcpagingModule,
     UcSubsectionModule,
-    SharingComponentModule
+    SharingComponentModule,
+    ReactiveFormsModule,
+    UcaddressModule,
+    UclookupgenericModule
   ],
   declarations: [
     OfficeComponent,
