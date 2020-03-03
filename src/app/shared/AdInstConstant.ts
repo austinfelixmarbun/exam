@@ -47,6 +47,7 @@ export class AdInsConstant {
   public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
   public static GetRefOfficeAreaPaging = "/RefOfficeArea/GetRefOfficeAreaPaging";
   public static GetRefArea = "/RefOfficeArea/GetRefArea";
+  public static GetRefOfficeAreaByRefOfficeAreaId = "/RefOfficeArea/GetRefOfficeAreaByRefOfficeAreaId";
   public static AddRefOfficeArea = "/RefOfficeArea/AddRefOfficeArea";
   public static EditRefOfficeArea = "/RefOfficeArea/EditRefOfficeArea";
   public static DeleteRefOfficeArea = "/RefOfficeArea/DeleteRefOfficeArea";
@@ -100,13 +101,13 @@ export class AdInsConstant {
   public static GetRefBankByRefBankIdAsync = environment.FoundationR3Url + "/RefBank/GetRefBankByRefBankIdAsync";
   public static EditRefBank = environment.FoundationR3Url + "/RefBank/EditRefBank";
   public static AddRefBank = "/RefBank/AddRefBank";
-  public static AddRefBankAsync= environment.FoundationR3Url + "/RefBank/AddRefBankAsync";
+  public static AddRefBankAsync = environment.FoundationR3Url + "/RefBank/AddRefBankAsync";
   public static DeleteRefBank = "/RefBank/DeleteRefBank";
   public static GetBankByBankCode = "/RefBank/GetBankByBankCode";
 
   //REF-EMP
   public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
-  public static GetRefEmployeeById = "/RefEmp/GetEmp"
+  public static GetRefEmployeeById = environment.FoundationR3Url + "/RefEmp/GetRefEmpByRefEmpId"
   public static AddRefEmp = "/RefEmp/AddRefEmp";
   public static EditRefEmp = "/RefEmp/EditRefEmp";
   public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
@@ -321,10 +322,10 @@ export class AdInsConstant {
 
   //REF EMP LEAVE MANAGEMENT
   public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
-  public static DeleteRefEmpLeaveMngmnt = "/RefEmpLeaveManagement/DeleteRefEmpLeaveMngmnt";
-  public static GetRefEmpLeaveMngmntById = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntById";
-  public static EditRefEmpLeaveMngmnt = "/RefEmpLeaveManagement/EditRefEmpLeaveMngmnt";
-  public static AddRefEmpLeaveMngmnt = "/RefEmpLeaveManagement/AddRefEmpLeaveMngmnt";
+  public static DeleteRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/DeleteRefEmpLeaveMngmnt";
+  public static GetRefEmpLeaveMngmntById = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/GetRefEmpLeaveByRefEmpLeaveId";
+  public static EditRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/EditRefEmpLeaveMngmnt";
+  public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
 
   //UPLOAD MONITORING FOUNDATION
   public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging"
@@ -344,4 +345,17 @@ export class AdInsConstant {
   // GENERIC
   public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
 
+  // PRODUCT
+  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
+  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
+  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
+  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
+
+  //PRODUCT OFFERING
+  public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo"
+  public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering"
+  public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering"
+
+  //REF REASON
+  public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
 }

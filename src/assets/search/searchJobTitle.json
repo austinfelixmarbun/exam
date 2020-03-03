@@ -4,7 +4,7 @@
   "component": [
     {
       "type": "textbox",
-      "name": "JOB_TITLE_CODE",
+      "name": "A.JOB_TITLE_CODE",
       "id": "jobTitleCode",
       "value": "",
       "label": "Job Title Code",
@@ -12,7 +12,7 @@
     },
     {
       "type": "textbox",
-      "name": "JOB_TITLE_NAME",
+      "name": "A.JOB_TITLE_NAME",
       "id": "jobTitleName",
       "label": "Job Title Name",
       "value": "",
@@ -20,7 +20,7 @@
     },
     {
       "type": "textbox",
-      "name": "DESCR",
+      "name": "A.DESCR",
       "id": "descr",
       "value": "",
       "label": "Description",
@@ -54,8 +54,8 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.REF_JOB_TITLE_ID as refJobTitleId,A.JOB_TITLE_CODE as jobTitleCode,A.JOB_TITLE_NAME as jobTitleName,A.DESCR as descr",
-    "from": "FROM REF_JOB_TITLE A WITH(NOLOCK)"
+    "select": "SELECT A.JOB_TITLE_CODE as jobTitleCode,A.REF_JOB_TITLE_ID as refJobTitleId,A.JOB_TITLE_NAME as jobTitleName,A.DESCR as descr",
+    "from": "FROM dbo.REF_JOB_TITLE A WITH(NOLOCK)"
   },
   "bodyList": [
     {
