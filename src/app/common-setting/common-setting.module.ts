@@ -39,6 +39,8 @@ import { WorkingHourDDetailComponent } from './working-hour-scheme/working-hour-
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
+import {RefIndustryTypeComponent} from './ref-industry-type/ref-industry-type.component';
+import {RefIndustryTypeDetailComponent} from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
 import { FormModule } from 'app/forms/forms.module';
 
 @NgModule({
@@ -86,8 +88,8 @@ import { FormModule } from 'app/forms/forms.module';
     RefStatusPagingComponent,
     ProfessionComponent,
     ProfessionAddEditComponent,
-    // RefIndustryTypeComponent, 
-    // RefIndustryTypeDetailComponent
+    RefIndustryTypeComponent, 
+    RefIndustryTypeDetailComponent
   ],
   providers: [
     {

@@ -36,14 +36,14 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'masterType',
+        path: 'MasterType',
         component: MasterTypePagingComponent,
         data: {
           title: 'Master Type Maintenance Paging'
         },
       },
       {
-        path: 'masterType/detail',
+        path: 'MasterType/detail',
         component: MasterTypeAddEditComponent,
         data: {
           title: 'Master Type Maintenance Add Edit'
@@ -92,63 +92,63 @@ const routes: Routes = [
         },
       },
       {
-        path: 'workingHour',
+        path: 'WorkingHour',
         component: WorkingHourPagingComponent,
         data: {
           title: 'Working Hour'
         },
       },
       {
-        path: 'workingHour/add',
+        path: 'WorkingHour/add',
         component: WorkingHourHDetailComponent,
         data: {
           title: 'Working Hour Add Edit'
         },
       },
       {
-        path: 'workingHour/detail',
+        path: 'WorkingHour/detail',
         component: WorkingHourDDetailComponent,
         data: {
           title: 'Working Hour Detail'
         },
       },
       {
-        path: 'holiday',
+        path: 'Holiday',
         component: HolidayPagingComponent,
         data: {
           title: 'Holiday'
         },
       },
       {
-        path: 'holiday/add',
+        path: 'Holiday/add',
         component: HolidayAddComponent,
         data: {
           title: 'Holiday Add'
         },
       },
       {
-        path: 'holiday/edit',
+        path: 'Holiday/edit',
         component: HolidayAddComponent,
         data: {
           title: 'Holiday Edit'
         },
       },
       {
-        path: 'holiday/detail',
+        path: 'Holiday/detail',
         component: HolidayDetailComponent,
         data: {
           title: 'Holiday Detail'
         },
       },
       {
-        path: 'holiday/detail/add',
+        path: 'Holiday/detail/add',
         component: HolidayDetailAddComponent,
         data: {
           title: 'Holiday Detail Add'
         },
       },
       {
-        path: 'holiday/detail/edit',
+        path: 'Holiday/detail/edit',
         component: HolidayDetailAddComponent,
         data: {
           title: 'Holiday Detail Edit'
@@ -239,14 +239,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'industryType',
+        path: 'IndustryType/paging',
         component: RefIndustryTypeComponent,
         data: {
           title: 'Industry Type Paging'
         },
       },
       {
-        path: 'industryType/detail',
+        path: 'IndustryType/detail',
         component: RefIndustryTypeDetailComponent,
         data: {
           title: 'Industry Type Detail'
