@@ -18,18 +18,25 @@ const routes: Routes = [
           title: 'Employee'
         },
       },
+      // {
+      //   path: 'add',
+      //   component: EmployeeAddComponent,
+      //   data: {
+      //     title: 'Add Employee'
+      //   }
+      // },
+      // {
+      //   path: 'edit',
+      //   component: EmployeeAddComponent,
+      //   data: {
+      //     title: 'Edit Employee'
+      //   }
+      // },
       {
-        path: 'add',
+        path: 'detail',
         component: EmployeeAddComponent,
         data: {
-          title: 'Add Employee'
-        }
-      },
-      {
-        path: 'edit',
-        component: EmployeeAddComponent,
-        data: {
-          title: 'Edit Employee'
+          title: 'Employee Detail'
         }
       },
       {

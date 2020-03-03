@@ -28,6 +28,8 @@ import { WorkingHourDDetailComponent } from './working-hour-scheme/working-hour-
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
+import { RefIndustryTypeComponent } from './ref-industry-type/ref-industry-type.component';
+import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
 
 const routes: Routes = [
   {
@@ -234,6 +236,20 @@ const routes: Routes = [
         component: ProfessionAddEditComponent,
         data: {
           title: 'Profession Add Edit'
+        },
+      },
+      {
+        path: 'industryType',
+        component: RefIndustryTypeComponent,
+        data: {
+          title: 'Industry Type Paging'
+        },
+      },
+      {
+        path: 'industryType/detail',
+        component: RefIndustryTypeDetailComponent,
+        data: {
+          title: 'Industry Type Detail'
         },
       }
     ]
