@@ -10,9 +10,6 @@ import { BusinessUnitComponent } from 'app/organization/business-unit/business-u
 import { AddBusinessUnitComponent } from 'app/organization/business-unit/add-business-unit/add-business-unit.component';
 import { RefJobTitleAddComponent } from 'app/organization/ref-job-title/ref-job-title-add/ref-job-title-add.component';
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
-import { OrganizationModelPagingComponent } from 'app/organization/organization-model/organization-model-paging/organization-model-paging.component';
-import { OrganizationModelDetailComponent } from 'app/organization/organization-model/organization-model-detail/organization-model-detail.component';
-import { OrgMdlStrucDetailComponent } from 'app/organization/org-mdl-struc/org-mdl-struc-detail/org-mdl-struc-detail.component';
 import { MemberBusinessUnitComponent } from 'app/organization/business-unit/member-business-unit/member-business-unit.component';
 
 
@@ -35,27 +32,6 @@ const routes: Routes = [
         },
       },
       {
-        path: 'organization',
-        component: OrganizationComponent,
-        data: {
-          title: 'Organization'
-        },
-      },
-      {
-        path: 'organization/add',
-        component: OrgAddEditComponent,
-        data: {
-          title: 'Organization Add Edit'
-        },
-      },
-      {
-        path: 'organization/edit',
-        component: OrgAddEditComponent,
-        data: {
-          title: 'Organization Add Edit'
-        },
-      },
-      {
         path: 'BusinessUnit',
         component: BusinessUnitComponent,
         data: {
@@ -74,48 +50,6 @@ const routes: Routes = [
         component: AddBusinessUnitComponent,
         data: {
           title: 'Edit Business Unit'
-        },
-      },
-      {
-        path: 'model',
-        component: OrganizationModelPagingComponent,
-        data: {
-          title: 'Organization Model'
-        },
-      },
-      {
-        path: 'model/detail',
-        component: OrganizationModelDetailComponent,
-        data: {
-          title: 'Organization Model Detail'
-        },
-      },
-      {
-        path: 'struc',
-        component: OrgMdlStrucPagingComponent,
-        data: {
-          title: 'Organization Model Structure'
-        },
-      },
-      {
-        path: 'struc/detail',
-        component: OrgMdlStrucDetailComponent,
-        data: {
-          title: 'Organization Model Structure Detail'
-        },
-      },
-      {
-        path: 'orgJob',
-        component: OrgJobTitlePagingComponent,
-        data: {
-          title: 'Organization Job Title'
-        },
-      },
-      {
-        path: 'orgJob/detail',
-        component: OrgJobTitleDetailComponent,
-        data: {
-          title: 'Organization Job Title Detai'
         },
       },
       {

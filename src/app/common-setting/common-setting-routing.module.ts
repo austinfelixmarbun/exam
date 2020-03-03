@@ -176,14 +176,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'economicSector/paging',
+        path: 'EconomicSector/paging',
         component: EconomicSectorComponent,
         data: {
           title: 'Economic Sector Paging'
         },
       },
       {
-        path: 'economicSector/detail',
+        path: 'EconomicSector/detail',
         component: EconomicSectorAddEditComponent,
         data: {
           title: 'Economic Sector Add Edit'
