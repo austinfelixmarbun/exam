@@ -48,14 +48,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'master',
+        path: 'Master',
         component: MasterPagingComponent,
         data: {
           title: 'Master Maintenance Paging'
         },
       },
       {
-        path: 'master/detail',
+        path: 'Master/detail',
         component: MasterAddEditComponent,
         data: {
           title: 'Master Maintenance Add Edit'
@@ -216,21 +216,21 @@ const routes: Routes = [
         },
       },
       {
-        path: 'refStatus/paging',
+        path: 'RefStatus/paging',
         component: RefStatusPagingComponent,
         data: {
           title: 'Ref Status Paging'
         }
       },
       {
-        path: 'profession/paging',
+        path: 'Profession/paging',
         component: ProfessionComponent,
         data: {
           title: 'Profession Paging'
         },
       },
       {
-        path: 'profession/detail',
+        path: 'Profession/detail',
         component: ProfessionAddEditComponent,
         data: {
           title: 'Profession Add Edit'

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,10 +7,11 @@ import { RefEmpLeaveMngmntObj } from 'app/shared/model/RefEmpLeaveMngmntObj.Mode
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { formatDate } from '@angular/common';
+import { formatDate, DatePipe } from '@angular/common';
 import { environment } from 'environments/environment';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { LookupemployeeComponent } from '@adins/lookupemployee';
+import { RefEmpObj } from '../../../shared/model/RefEmpObj.Model';
 
 @Component({
   selector: 'app-leave-maintenance-add-edit',
@@ -19,134 +20,129 @@ import { LookupemployeeComponent } from '@adins/lookupemployee';
   providers: [NGXToastrService]
 })
 export class LeaveMaintenanceAddEditComponent implements OnInit {
-  @ViewChild(UcAddressComponent) ucAddr;
-  @ViewChild(UcContactInfoComponent) ucContact;
-  @ViewChildren(LookupemployeeComponent) lookupemployeeComponent;
-  inputLookupObj: any;
-  refEmpLeaveMngmntId: any;
-  refEmpId: any;
   pageType: string = "add";
-  empNo: any;
-  empName: any;
-  startDt: any;
-  endDt: any;
-  lookupEmp:any;
-  isPassed: boolean = false;
-  refEmpLeaveMngmntObj: RefEmpLeaveMngmntObj;
+  refEmpLeaveMngmntId: any;
+  relmObj: RefEmpLeaveMngmntObj;
   resultData: any;
-  toggleActive:any;
   apiUrl: any;
   addUrl: any;
   editUrl: any;
-  refBankUrl: any;
-  empBankUrl: any;
-  bankName: string;
-  idSelect: any;
-  jsonSelect: string;
-  foundationUrl: any;
-  getUrl: any;
+  getRefEmpUrl: any;
+  inputPagingObj: any;
+  inputEmpLookupObj;
+  refEmp: RefEmpObj;
+  resultEmpData: any;
 
-  constructor(private router: Router,
-    private route: ActivatedRoute,
-    private httpClient: HttpClient,
-    private toastr: NGXToastrService) {
+  RefEmpLeaveMngmntForm = this.fb.group({
+    StartDt: ['', Validators.required],
+    EndDt: ['', Validators.required]
+  });
+
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+    this.apiUrl = AdInsConstant.GetRefEmpLeaveMngmntById;
+    this.addUrl = AdInsConstant.AddRefEmpLeaveMngmnt;
+    this.editUrl = AdInsConstant.EditRefEmpLeaveMngmnt;
+    this.getRefEmpUrl = AdInsConstant.GetRefEmployeeById;
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
-      }else{
-        this.pageType = "add";
       }
       if (params["refEmpLeaveMngmntId"] != null) {
         this.refEmpLeaveMngmntId = params["refEmpLeaveMngmntId"];
       }
-      console.log(this.pageType);
-      console.log(this.refEmpLeaveMngmntId);
-      this.foundationUrl = environment.foundationUrl;
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetEmpPositionPaging;
-      this.addUrl = this.foundationUrl + AdInsConstant.AddRefEmpLeaveMngmnt;
-      this.editUrl = this.foundationUrl + AdInsConstant.EditRefEmpLeaveMngmnt;
-      this.getUrl = this.foundationUrl + AdInsConstant.GetRefEmpLeaveMngmntById;
     });
   }
 
   ngOnInit() {
 
-    this.inputLookupObj = new InputLookupObj();
-    this.inputLookupObj.urlJson = "./assets/lookup/lookupEmp.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetListEmployee;
-    this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+    this.inputEmpLookupObj = new InputLookupObj();
+    this.inputEmpLookupObj.urlJson = "./assets/lookup/lookupEmp.json";
+    this.inputEmpLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputEmpLookupObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputEmpLookupObj.pagingJson = "./assets/lookup/lookupEmp.json";
+    this.inputEmpLookupObj.genericJson = "./assets/lookup/lookupEmp.json";
 
     if (this.pageType == "edit") {
-      this.refEmpLeaveMngmntObj = new RefEmpLeaveMngmntObj();
-      this.refEmpLeaveMngmntObj.refEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
-      this.httpClient.post(this.getUrl, this.refEmpLeaveMngmntObj).subscribe(
+      this.relmObj = new RefEmpLeaveMngmntObj();
+      this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
+      this.http.post(this.apiUrl, this.relmObj).subscribe(
         response => {
+          this.resultData = response;
+          console.log("Response: ");
           console.log(response);
-          this.refEmpId = response["returnObject"].refEmpId;
-          this.empNo = response["returnObject"].empNo;
-          this.empName = response["returnObject"].empName;
-          this.startDt = formatDate(response["returnObject"].startDt, "yyyy-MM-dd", "en-US");
-          this.endDt = formatDate(response["returnObject"].endDt, "yyyy-MM-dd", "en-US");
-          if (response["returnObject"].isPassed == "0") {
-            this.isPassed == false;
-          } else {
-            this.isPassed == true;
-          }
+          this.refEmpLeaveMngmntId = this.resultData.RefEmpLeaveMngmntId;
+          this.inputEmpLookupObj.idSelect = this.resultData.RefEmpId;
+          this.RefEmpLeaveMngmntForm.patchValue({
+            StartDt: formatDate(this.resultData.StartDt, 'yyyy-MM-dd', 'en-US'),
+            EndDt: formatDate(this.resultData.EndDt, 'yyyy-MM-dd', 'en-US'),
+            RefEmpId: this.resultData.RefEmpId,
+            IsPassed: this.resultData.IsPassed
+          });
+          this.refEmp = new RefEmpObj();
+          this.refEmp.refEmpId = this.resultData.RefEmpId;
+          this.http.post(this.getRefEmpUrl, this.refEmp).subscribe(
+            (response) => {
+              this.resultEmpData = response;
+              this.inputEmpLookupObj.jsonSelect = this.resultEmpData;
+              this.inputEmpLookupObj.nameSelect = this.resultEmpData.EmpName;
+            },
+            (error) => {
+              console.log(error);
+            });
         },
+
         error => {
-          console.log("Error");
           console.log(error);
-        }
-      );
+        });
     }
   }
 
-  SaveForm(ReqForm: NgForm, lookupEmp: any):void {
-    console.log(lookupEmp);
-    console.log(this.lookupemployeeComponent);
-    this.refEmpLeaveMngmntObj = new RefEmpLeaveMngmntObj();
-    this.refEmpLeaveMngmntObj.startDt = ReqForm.value.startDt;
-    this.refEmpLeaveMngmntObj.endDt = ReqForm.value.endDt;
-    if (this.isPassed == false) {
-      this.refEmpLeaveMngmntObj.isPassed = "0";
-    } else {
-      this.refEmpLeaveMngmntObj.isPassed = "1";
+  SaveForm() {
+    if (this.RefEmpLeaveMngmntForm.controls["EndDt"].value < this.RefEmpLeaveMngmntForm.controls["StartDt"].value) {
+      this.toastr.errorMessage("End Date must be equal or more than Start Date");
     }
-    if (this.pageType == "add") {
-      this.refEmpLeaveMngmntObj.refEmpId = this.lookupemployeeComponent.first.lookupInput.idSelect;
-      console.log(JSON.stringify(this.refEmpLeaveMngmntObj));
-      console.log(this.refEmpLeaveMngmntObj);
-      this.httpClient.post(this.addUrl, this.refEmpLeaveMngmntObj).subscribe(
-        response => {
-          console.log("Success");
-          console.log(response);
-          this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/employee', { skipLocationChange: true }).then(() =>
-            this.router.navigate(['/employee/leaveMaintenance']));
-        },
-        error => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
-    } else {
-      this.refEmpLeaveMngmntObj.refEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
-      this.refEmpLeaveMngmntObj.refEmpId = this.refEmpId;
-      console.log(JSON.stringify(this.refEmpLeaveMngmntObj));
-      console.log(this.refEmpLeaveMngmntObj);
-      this.httpClient.post(this.editUrl, this.refEmpLeaveMngmntObj).subscribe(
-        response => {
-          console.log("Success");
-          console.log(response);
-          this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/employee/leaveMaintenance"]);
-        },
-        error => {
-          console.log("Error");
-          console.log(error);
-        }
-      );
+    else {
+      this.relmObj = new RefEmpLeaveMngmntObj();
+      this.relmObj = this.RefEmpLeaveMngmntForm.value;
+      var Business_Date = localStorage.getItem('BusinessDate');
+      var datePipe = new DatePipe("en-US");
+      var value = datePipe.transform(Business_Date, "yyyy-MM-dd");
+      var businessDt = new Date(value);
+      var relmObj_date = new Date(this.relmObj.EndDt);
+      if (relmObj_date <= businessDt) {
+        this.relmObj.IsPassed = true
+      }
+      else {
+        this.relmObj.IsPassed = false
+      }
+      this.relmObj.RefEmpId = this.inputEmpLookupObj.jsonSelect.refEmpId;
+      if (this.pageType == "add") {
+        this.relmObj.RowVersion = "";
+        this.http.post(this.addUrl, this.relmObj).subscribe(
+          response => {
+            this.toastr.successMessage(response["message"]);
+            this.router.navigate(["employee/leaveMaintenance"]);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      } else {
+        this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
+        this.relmObj.RowVersion = this.resultData.RowVersion;
+        this.http.post(this.editUrl, this.relmObj).subscribe(
+          response => {
+            this.toastr.successMessage(response["message"]);
+            this.router.navigate(["employee/leaveMaintenance"]);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
     }
+
   }
 }
