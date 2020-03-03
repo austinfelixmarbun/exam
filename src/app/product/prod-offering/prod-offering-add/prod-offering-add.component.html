@@ -1,0 +1,73 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title" translate> {{mode}} Product Offering </h4>
+          </div>
+          <div class="col-md-4" style="text-align-last: right">
+            <button type="button" class="backButton" [routerLink]="['/product/prod-offering/prod-offering-paging']" translate>
+              <i class="ft-arrow-left"></i> Back
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="px-3">
+          <form class="form form-horizontal" [formGroup]="ProdOfferingForm" (ngSubmit)="SaveForm()"
+            #enjiForm="ngForm">
+            <div class="form-body">
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Main Information</h4>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel">Product Name </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-75-per" formControlName="ProdName">
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel">Product Offering Code </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-75-per" formControlName="ProdOfferingCode" size="50">
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel">Product Offering Name </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-75-per" formControlName="ProdOfferingName">
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel">Offering Description </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-75-per" formControlName="ProdOfferingDescr">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel">Start Active Date </label>
+                <div class="col-md-9">
+                  <input type="date" class="form-control adInsInput width-25-per" formControlName="StartDt">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel">End Date </label>
+                <div class="col-md-9">
+                  <input type="date" class="form-control adInsInput width-25-per" formControlName="EndDt">
+                </div>
+              </div>
+            </div>
+            <div class="form-actions right">
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="fa fa-check-square-o"></i> Next
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

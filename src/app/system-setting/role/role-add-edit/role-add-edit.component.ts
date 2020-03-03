@@ -1,13 +1,11 @@
 
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 
@@ -19,15 +17,13 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 export class RoleAddEditComponent implements OnInit {
 
   foundationUrl: string = environment.FoundationR3Url;
-  apiUrl: any;
-  parents: string;
+
+  
   refRoleObj: RefRoleObj;
   type: string = 'Add';
-  roleCodeModel: any;
-  roleNameModel: any;
-  IsActive: boolean = true;
   RefRoleId: any;
   resultData: any;
+  title : string = "Role-Add";
   RefRoleForm = this.fb.group({
     RoleCode: ['', [Validators.required, Validators.maxLength(50)]],
     RoleName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -36,8 +32,6 @@ export class RoleAddEditComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
-    private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
     private service: NGXToastrService,
     private fb: FormBuilder
@@ -57,6 +51,7 @@ export class RoleAddEditComponent implements OnInit {
 
   ngOnInit() {
     if (this.type == 'edit') {
+      this.title="Role-Edit";
       this.RefRoleForm.controls["RoleCode"].disable();
       this.refRoleObj = new RefRoleObj();
       this.refRoleObj.RefRoleId = this.RefRoleId;
@@ -68,17 +63,12 @@ export class RoleAddEditComponent implements OnInit {
             RoleName: this.resultData.RoleName,
             IsActive: this.resultData.IsActive
           });
-
         },
         error => {
           console.log(error);
         }
       );
     }
-  }
-
-  Back(): void {
-    this.location.back();
   }
 
   SaveForm() {

@@ -93,4 +93,8 @@ export class Dummy3Component implements OnInit {
         });
     }
   }
+  
+  nextClicked() {
+    // this.wizard.goToNextStep();
+  }
 }
