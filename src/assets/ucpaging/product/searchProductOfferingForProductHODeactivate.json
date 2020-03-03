@@ -1,7 +1,17 @@
 {
   "title": "Product Offering Summary",
   "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "B.PROD_OFFERING_CODE",
+      "id": "prodCodeId",
+      "value": "",
+      "label": "Product Code",
+      "placeholder": "Placeholder"
+    }
 
+  ],
   "headerList": [
     {
       "type": "sort",

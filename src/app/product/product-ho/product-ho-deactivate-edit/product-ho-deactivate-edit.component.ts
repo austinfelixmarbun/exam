@@ -27,12 +27,12 @@ export class ProductHODeactivateEditComponent implements OnInit {
   arrCrit: any;
   getValueReasonModel: any;
   allRefReasonMethod: any;
-
+  viewObj: any;
 
   ProdHDeactForm = this.fb.group({
-    DeactReason: [''],
-    DeactEffectiveDt: ['', Validators.required],
-    DeactNotes: ['', [Validators.required, Validators.maxLength(4000)]]
+    Reason: ['', [Validators.required, Validators.maxLength(50)]],
+    EffectiveDate: ['', Validators.required],
+    Notes: ['', [Validators.required, Validators.maxLength(4000)]]
   });
 
 
@@ -42,42 +42,22 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.getValueReasonModel = AdInsConstant.GetValueReasonModel;
 
     this.route.queryParams.subscribe(params => {
+      if (params["prodHId"] != null) {
+        this.prodHId = params["prodHId"];
+      }
       if (params["prodId"] != null) {
         this.prodId = params["prodId"];
-      }
-      if (params["prodHId"] != null) {
-        this.prodId = params["prodHId"];
       }
     });
   }
 
   ngOnInit() {
 
-/*, [Validators.required, Validators.maxLength(50)]
- *    this.prodHDeactivateObj = new ProdHDeactivateObj();
-    this.prodHDeactivateObj.ProdHId = this.prodHId;
-    this.http.post(this.apiUrl, this.prodHDeactivateObj).subscribe(
-      response => {
-        this.resultData = response;
-        console.log("Response: ");
-        console.log(response);
-        this.prodHId = this.resultData.ProdHId;
-        this.ProdHDeactForm.patchValue({
-          JobTitleCode: this.resultData.JobTitleCode,
-          JobTitleName: this.resultData.JobTitleName,
-          Descr: this.resultData.Descr
-        });
-
-      },
-      error => {
-        console.log(error);
-      }
-    );*/
     this.http.post(this.getValueReasonModel, null).subscribe(
       (response) => {
         console.log(response);
         this.allRefReasonMethod = response['ReturnObject'];
-        this.ProdHDeactForm.patchValue({ DeactReason: response['ReturnObject'][0]['Key'] });
+        this.ProdHDeactForm.patchValue({ Reason: response['ReturnObject'][0]['Key'] });
       },
       (error) => {
         console.log(error);
@@ -97,6 +77,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
 
+    this.viewObj = "./assets/ucviewgeneric/viewProduct.json";
   }
 
   SaveForm() {
@@ -107,7 +88,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.http.post(this.editUrl, this.prodHDeactivateObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/HODeactivate"]);
+        this.router.navigate(["/product/HODeactivate"]);
       },
       error => {
         console.log(error);

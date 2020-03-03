@@ -1,7 +1,6 @@
 <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Product Deactivate</h4>
-
+<lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
 <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
-
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
@@ -13,33 +12,33 @@
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Reason </label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" formControlName="DeactReason">
+                  <select class="form-control adInsInput" formControlName="Reason">
                     <option *ngFor="let ram of allRefReasonMethod" [ngValue]="ram.Key">
                       {{ram.Value}}
                     </option>
                   </select>
-                  <show-errors [control]="ProdHDeactForm.controls.DeactReason" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="ProdHDeactForm.controls.Reason" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Effective Date </label>
                 <div class="col-md-9">
-                  <input type="date" class="form-control adInsInput" formControlName="DeactEffectiveDt"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdHDeactForm.controls.DeactEffectiveDt.invalid }">
-                  <show-errors [control]="ProdHDeactForm.controls.DeactEffectiveDt" [submit]="enjiForm.submitted"></show-errors>
+                  <input type="date" class="form-control adInsInput" formControlName="EffectiveDate"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdHDeactForm.controls.EffectiveDate.invalid }">
+                  <show-errors [control]="ProdHDeactForm.controls.EffectiveDate" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Notes </label>
                 <div class="col-md-9">
-                  <textarea type="text" class="form-control adInsInput" formControlName="DeactNotes"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdHDeactForm.controls.DeactNotes.invalid }"></textarea>
-                  <show-errors [control]="ProdHDeactForm.controls.DeactNotes" [submit]="enjiForm.submitted"></show-errors>
+                  <textarea type="text" class="form-control adInsInput" formControlName="Notes"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdHDeactForm.controls.Notes.invalid }"></textarea>
+                  <show-errors [control]="ProdHDeactForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/HODeactivate']"
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/product/HODeactivate']"
                       translate>
                 <i class="ft-x"></i> Back
               </button>

@@ -14,6 +14,7 @@ import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deac
 import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
 import { SharingComponentModule } from "../shared/sharingcomponent.module";
 import { HttpModule } from "@angular/http";
+import { UcviewgenericModule } from "@adins/ucviewgeneric";
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { HttpModule } from "@angular/http";
         UcSubsectionModule,
         UcpagingModule,
         HttpModule,
-        SharingComponentModule
+        SharingComponentModule,
+        UcviewgenericModule
     ],
     declarations: [
         ProductHOPagingComponent,

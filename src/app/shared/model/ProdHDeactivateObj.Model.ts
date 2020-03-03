@@ -1,8 +1,8 @@
 export class ProdHDeactivateObj {
   ProdHId: any;
-  DeactEffectiveDt: any;
-  DeactReason: any;
-  DeactNotes: any;
+  EffectiveDate: any;
+  Reason: any;
+  Notes: any;
   RowVersion: any;
   constructor() { this.ProdHId = 0; }
 }
