@@ -18,6 +18,8 @@ import { LookuprefbankModule } from '@adins/lookuprefbank';
 import { LookupemployeeModule } from '@adins/lookupemployee';
 import { UcpagingModule } from '@adins/ucpaging';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
+import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
 
 @NgModule({
   imports: [
@@ -34,6 +36,8 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     LookuprefbankModule,
     LookupemployeeModule,
     ReactiveFormsModule,
+    EmployeeBusinessunitAddComponent,
+    EmployeeBusinessunitPagingComponent,
     UcpagingModule,
     UclookupgenericModule
   ],
