@@ -40,7 +40,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './zipcode/zipcode.module#ZipcodeModule'
   },
   {
-    path: 'systemSetting',
+    path: 'SystemSetting',
     loadChildren: './system-setting/system-setting.module#SystemSettingModule'
   },
   {
@@ -48,7 +48,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './company/company.module#CompanyModule'
   },
   {
-    path: 'commonSetting',
+    path: 'CommonSetting',
     loadChildren: './common-setting/common-setting.module#CommonSettingModule'
   },
   {
@@ -78,5 +78,10 @@ export const Full_ROUTES: Routes = [
   {
     path: 'asset',
     loadChildren: './asset/asset.module#AssetModule'
-  }
+  },
+  {
+    path: 'product',
+    loadChildren: './product/product.module#ProductModule'
+  },
+  
 ];

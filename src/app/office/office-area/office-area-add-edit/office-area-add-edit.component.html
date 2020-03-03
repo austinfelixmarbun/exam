@@ -1,61 +1,57 @@
-<div class="card">
-<div class="card-header header-title">
-    <div class="row">
-      <div class="col-md-8">
-        <h4 class="card-title" translate>OFFICE AREA </h4>
-      </div>
-      <div class="col-md-4" style="text-align-last: right">
-        <button type="button" class="backButton" [routerLink]="['/office/officeArea']" [queryParams]="{refEmpId:refEmpId}" translate>
-          <i class="ft-arrow-left"></i> Back
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="px-3">
-      <form class="form form-horizontal" name="OfficeForm" #OfficeForm="ngForm" novalidate
-        (ngSubmit)="OfficeForm.form.valid && Save(OfficeForm)">
-        <div class="form-body">
-          <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Office Area Information</h4>
-          <div class="form-group row">
-            <label class="col-md-3  adInsLabel" for="areaCode">Area Code</label>
-            <div class="col-md-9">
-              <input type="text" class="form-control adInsInput" name="areaCode" required [(ngModel)]="areaCode"
-                #AreaCode="ngModel" [ngClass]="{ 'is-invalid': OfficeForm.submitted && AreaCode.invalid }"
-                [attr.disabled]="type == 'edit' ? true : null">
-              <div *ngIf="OfficeForm.submitted && AreaCode.invalid" class="invalid-feedback">
-                <div *ngIf="AreaCode.errors.required" class="adInsReqMsg" translate>This field is required</div>
+<div class="row text-left">
+  <div class="col-md-12">
+      <div class="card">
+          <div class="card-body">
+              <div class="card-header header-title">
+                  <div class="row">
+                      <div class="col-md-8">
+                          <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} AREA </h4>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
+              <div class="px-3">
+                  <form class="form form-horizontal" [formGroup]="OfficeAreaForm"
+                  (ngSubmit)="OfficeAreaForm.valid && SaveForm()" #enjiForm="ngForm">
+                  <lib-ucSubsection [id]="'OfficeAreaId'" [title]="title" [panel]="'OfficeAreaInformation'"> </lib-ucSubsection>
 
-          <div class="form-group row">
-            <label class="col-md-3  adInsLabel" for="areaName">Area Name</label>
-            <div class="col-md-9">
-              <input type="text" class="form-control adInsInput" name="areaName" required [(ngModel)]="areaName"
-                #AreaName="ngModel" [ngClass]="{ 'is-invalid': OfficeForm.submitted && AreaName.invalid }">
-              <div *ngIf="OfficeForm.submitted && AreaName.invalid" class="invalid-feedback">
-                <div *ngIf="AreaName.errors.required" class="adInsReqMsg" translate>This field is required</div>
+                  <div class="form-body" id="OfficeAreaInformation">
+                          <div class="form-group row adins-required">
+                              <label class="col-md-3  adInsLabel" translate>Area Code</label>
+                              <div class="col-md-9">
+                                  <input type="text" class="form-control adInsInput width-75-per"
+                                      formControlName="AreaCode">
+                                  <show-errors [control]="OfficeAreaForm.controls.AreaCode" [submit]="enjiForm.submitted">
+                                  </show-errors>
+                              </div>
+                          </div>
+                          <div class="form-group row adins-required">
+                              <label class="col-md-3  adInsLabel" translate>Area Name </label>
+                              <div class="col-md-9">
+                                  <input type="text" class="form-control adInsInput width-75-per"
+                                      formControlName="AreaName" >
+                                  <show-errors [control]="OfficeAreaForm.controls.AreaName" [submit]="enjiForm.submitted">
+                                  </show-errors>
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                              <label class="col-md-3  adInsLabel" translate>Active Status </label>
+                                  <div class="col-md-9">
+                                  <input type="checkbox" class="border-primary" formControlName="IsActive">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-actions right">
+                          <button type="button" class="btn btn-raised btn-warning mr-1"
+                              [routerLink]="['/office/OfficeArea']" translate>
+                              <i class="fa fa-arrow-circle-left"></i> Cancel
+                          </button>
+                          <button type="submit" class="btn btn-raised btn-primary" translate>
+                              <i class="fa fa-check-square-o"></i> Save
+                          </button>
+                      </div>
+                  </form>
               </div>
-            </div>
           </div>
-
-          <div class="form-group row">
-            <label class="col-md-3  adInsLabel" for="isActive">Active Status</label>
-            <div class="custom-control custom-checkbox m-0">
-              <input type="checkbox" value="1" id="isActive" name="isActive" [(ngModel)]="isActive"
-                [checked]="isActive">
-            </div>
-          </div>
-
-        </div>
-        <div class="form-actions right">
-            <button type="submit" class="btn btn-raised btn-primary" id="test"
-              translate>
-              <i class="fa fa-check-square-o"></i> Save
-            </button>
-          </div>
-      </form>
-    </div>
+      </div>
   </div>
 </div>

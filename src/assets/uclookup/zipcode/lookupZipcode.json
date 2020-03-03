@@ -6,7 +6,7 @@
         "type": "textbox",
         "name": "zipCode",
         "id": "ZipCode",
-        "value": "%",
+        "value": "",
         "label": "Zip Code",
         "placeholder": "Zip Code"
       },
@@ -28,7 +28,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT A.REF_ZIPCODE_ID as refZipcodeId, A.ZIPCODE_NUMBER as zipcodeNumber, A.AREA_CODE_1 as areaCode1, A.AREA_CODE_2 as areaCode2, A.ZIPCODE as zipcode, A.CITY as city, A.IS_ACTIVE as isActive",
+      "select": "SELECT A.REF_ZIPCODE_ID as refZipcodeId, A.AREA_CODE_1 as areaCode1, A.AREA_CODE_2 as areaCode2, A.ZIPCODE as zipcode, A.CITY as city, A.IS_ACTIVE as isActive",
       "from": "FROM REF_ZIPCODE A WITH(NOLOCK)"
     },
     "headerList": [

@@ -3,7 +3,7 @@
   "component": [
     {
       "type": "textbox",
-      "name": "PROV_DISTRICT_NAME",
+      "name": "A.PROV_DISTRICT_NAME",
       "id": "provDistrictNameId",
       "value": "",
       "label": "District Name",
@@ -11,7 +11,7 @@
     },
     {
       "type": "textbox",
-      "name": "DISTRICT_REG_RPT_CODE",
+      "name": "A.DISTRICT_REG_RPT_CODE",
       "id": "districtRegRptCodeId",
       "value": "",
       "label": "District Sandi BI",
@@ -40,7 +40,7 @@
 
   "querystring": {
     "select": "SELECT A.DISTRICT_REG_RPT_CODE AS districtRegRptCode, A.REF_PROV_DISTRICT_ID AS refProvDistrictId, A.PROV_DISTRICT_NAME AS provDistrictName",
-    "from": "FROM REF_PROV_DISTRICT A WITH(NOLOCK)"
+    "from": "FROM dbo.REF_PROV_DISTRICT A WITH(NOLOCK)"
   },
 
   "bodyList": [
