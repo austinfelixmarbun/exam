@@ -20,6 +20,7 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { LookuproleModule } from '@adins/lookuprole';
 import { UcpagingModule } from '@adins/ucpaging';
+import { UcSubsectionModule } from '@adins/uc-subsection';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { UcpagingModule } from '@adins/ucpaging';
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,
+    UcSubsectionModule,
     LookupemployeeModule,
     LookuproleModule,
     ReactiveFormsModule,

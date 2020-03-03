@@ -71,4 +71,8 @@ export class Dummy1Component implements OnInit {
     console.warn(this.profileForm2.value);
     console.warn(this.profileForm2);
   }
+  
+  nextClicked() {
+    // this.wizard.goToNextStep();
+  }
 }

@@ -14,6 +14,8 @@ import { UcLookupGroupComponent } from './uc-lookup-group/uc-lookup-group.compon
 import { UcpagingModule } from "@adins/ucpaging";
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { UcaddressModule } from "@adins/ucaddress";
+import { DummyComponent } from './dummy/dummy.component';
+import { ArchwizardModule } from "angular-archwizard";
 
 @NgModule({
     imports: [
@@ -25,7 +27,8 @@ import { UcaddressModule } from "@adins/ucaddress";
         UclookupgenericModule,
         UcpagingModule,
         UcSubsectionModule,
-        UcaddressModule
+        UcaddressModule,
+        ArchwizardModule
     ],
     declarations: [
         Dummy1Component,
@@ -33,7 +36,8 @@ import { UcaddressModule } from "@adins/ucaddress";
         Dummy2Component,
         Dummy3Component,
         UcAddressGroupComponent,
-        UcLookupGroupComponent
+        UcLookupGroupComponent,
+        DummyComponent
     ],
 
 })
