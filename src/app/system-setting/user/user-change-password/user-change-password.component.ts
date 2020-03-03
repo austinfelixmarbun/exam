@@ -46,13 +46,13 @@ export class UserChangePasswordComponent implements OnInit {
 
     this.apiUrl = this.foundationUrl + AdInsConstant.GetUserByUsername;
     this.refUserObj = new RefUserObj();
-    this.refUserObj.username = this.username;
+    // this.refUserObj.username = this.username;
     this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
       response => {
         this.refUserObj = response["returnObject"];
         this.refEmpObj = new RefEmpObj();
         getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
-        this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
+        // this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
         this.httpClient.post(getEmpUrl, this.refEmpObj).subscribe(response => {
           this.refEmpObj = response["returnObject"];
         });
@@ -79,9 +79,9 @@ export class UserChangePasswordComponent implements OnInit {
       );
       this.spinner.hide();
     } else {
-      this.refUserObj.newPass = UserAddEditForm.value.NewPassword;
-      this.refUserObj.oldPass = UserAddEditForm.value.Password;
-      this.refUserObj.newPassVerif = UserAddEditForm.value.NewRePassword;
+      // this.refUserObj.newPass = UserAddEditForm.value.NewPassword;
+      // this.refUserObj.oldPass = UserAddEditForm.value.Password;
+      // this.refUserObj.newPassVerif = UserAddEditForm.value.NewRePassword;
       //SAVE
       this.apiUrl = this.foundationUrl + AdInsConstant.ChangePassword;
       this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(

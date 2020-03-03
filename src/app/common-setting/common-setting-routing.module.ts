@@ -28,6 +28,8 @@ import { WorkingHourDDetailComponent } from './working-hour-scheme/working-hour-
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
+import { RefIndustryTypeComponent } from './ref-industry-type/ref-industry-type.component';
+import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
 
 const routes: Routes = [
   {
@@ -48,14 +50,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'master',
+        path: 'Master',
         component: MasterPagingComponent,
         data: {
           title: 'Master Maintenance Paging'
         },
       },
       {
-        path: 'master/detail',
+        path: 'Master/detail',
         component: MasterAddEditComponent,
         data: {
           title: 'Master Maintenance Add Edit'
@@ -76,14 +78,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'currency/paging',
+        path: 'Currency/paging',
         component: CurrencyComponent,
         data: {
           title: 'Currency'
         },
       },
       {
-        path: 'currency/add',
+        path: 'Currency/add',
         component: CurrencyAddComponent,
         data: {
           title: 'Currency add'
@@ -216,24 +218,38 @@ const routes: Routes = [
         },
       },
       {
-        path: 'refStatus/paging',
+        path: 'RefStatus/paging',
         component: RefStatusPagingComponent,
         data: {
           title: 'Ref Status Paging'
         }
       },
       {
-        path: 'profession/paging',
+        path: 'Profession/paging',
         component: ProfessionComponent,
         data: {
           title: 'Profession Paging'
         },
       },
       {
-        path: 'profession/detail',
+        path: 'Profession/detail',
         component: ProfessionAddEditComponent,
         data: {
           title: 'Profession Add Edit'
+        },
+      },
+      {
+        path: 'industryType',
+        component: RefIndustryTypeComponent,
+        data: {
+          title: 'Industry Type Paging'
+        },
+      },
+      {
+        path: 'industryType/detail',
+        component: RefIndustryTypeDetailComponent,
+        data: {
+          title: 'Industry Type Detail'
         },
       }
     ]

@@ -4,7 +4,7 @@
   "component": [
     {
       "type": "textbox",
-      "name": "AREA_CODE_2",
+      "name": "A.AREA_CODE_2",
       "id": "areaCode2Id",
       "value": "",
       "label": "Kelurahan",
@@ -12,7 +12,7 @@
     },
     {
       "type": "textbox",
-      "name": "AREA_CODE_1",
+      "name": "A.AREA_CODE_1",
       "id": "areaCode1Id",
       "label": "Kecamatan",
       "value": "",
@@ -20,7 +20,7 @@
     },
     {
       "type": "textbox",
-      "name": "CITY",
+      "name": "A.CITY",
       "id": "cityId",
       "label": "City",
       "value": "",
@@ -28,7 +28,7 @@
     },
     {
       "type": "textbox",
-      "name": "ZIPCODE",
+      "name": "A.ZIPCODE",
       "id": "zipcodeId",
       "label": "Zipcode",
       "value": "",
@@ -36,7 +36,7 @@
     },
     {
       "type": "textbox",
-      "name": "PROV_DISTRICT_NAME",
+      "name": "B.PROV_DISTRICT_NAME",
       "id": "provDistrictNameId",
       "label": "District Name",
       "value": "",
@@ -44,7 +44,7 @@
     },
     {
       "type": "textbox",
-      "name": "SUB_ZIPCODE",
+      "name": "A.SUB_ZIPCODE",
       "id": "subZipcodeId",
       "label": "Sub Zipcode",
       "value": "",
@@ -96,8 +96,8 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.REF_ZIPCODE_ID AS refZipcodeId, A.AREA_CODE_1 AS areaCode1, A.AREA_CODE_2 AS areaCode2, A.CITY AS city, A.ZIPCODE AS zipcode, A.REF_PROV_DISTRICT_ID as refProvDistrictId, A.SUB_ZIPCODE AS subZipcode, B.PROV_DISTRICT_NAME as provDistrictName",
-    "from": "FROM REF_ZIPCODE A WITH(NOLOCK) LEFT JOIN REF_PROV_DISTRICT B WITH(NOLOCK) ON A.REF_PROV_DISTRICT_ID=B.REF_PROV_DISTRICT_ID"
+    "select": "SELECT A.AREA_CODE_2 AS areaCode2, A.REF_ZIPCODE_ID AS refZipcodeId, A.AREA_CODE_1 AS areaCode1, A.CITY AS city, A.ZIPCODE AS zipcode, A.REF_PROV_DISTRICT_ID as refProvDistrictId, A.SUB_ZIPCODE AS subZipcode, B.PROV_DISTRICT_NAME as provDistrictName",
+    "from": "FROM dbo.REF_ZIPCODE A WITH(NOLOCK) LEFT JOIN dbo.REF_PROV_DISTRICT B WITH(NOLOCK) ON A.REF_PROV_DISTRICT_ID=B.REF_PROV_DISTRICT_ID"
   },
 
   "bodyList": [

@@ -1,10 +1,11 @@
 export class EmpBankAccObj {
-    empBankAccId: any;
-    refEmpId: any;
-    refBankId: any;
-    bankBranch: any;
-    bankBranchRegRptCode: any;
-    bankAccNo: any;
-    bankAccName: any;
-    constructor() { this.empBankAccId = 0; }
+    EmpBankAccId: any;
+    RefEmpId: any;
+    RefBankId: any;
+    BankBranch: any;
+    BankBranchRegCode: any;
+    BankAccNo: any;
+    BankAccName: any;
+    RowVersion: any;
+    constructor() { this.EmpBankAccId = 0; this.RowVersion = "" }
 }  
