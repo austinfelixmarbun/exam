@@ -78,5 +78,5 @@ export const Full_ROUTES: Routes = [
   {
     path: 'asset',
     loadChildren: './asset/asset.module#AssetModule'
-  },
+  }
 ];

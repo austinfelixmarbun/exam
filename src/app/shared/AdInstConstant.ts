@@ -340,4 +340,12 @@ export class AdInsConstant {
   // GENERIC
   public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
 
+  // ASSET TYPE
+  public static AddAssetType = "/AssetType/AddAssetType"
+  public static EditAssetType = "/AssetType/EditAssetType"
+  public static GetAssetTypeByCode =  "/AssetType/GetAssetTypeByCode"
+  public static GetAssetTypeById = "/AssetType/GetAssetTypeById"
+  public static GetListAssetType = "/AssetType/GetListAssetType"
+  public static GetListActiveAssetType = "/AssetType/GetListActiveAssetType"
+  public static DeleteAssetType = "/AssetType/DeleteAssetType"
 }

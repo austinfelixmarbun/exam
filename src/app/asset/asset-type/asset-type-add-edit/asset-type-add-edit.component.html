@@ -1,0 +1,145 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+         <lib-ucSubsection [id]="'AssetType'" [title]="this.pageType+ ' Asset Type'"  [panel]="'AssetTypeId'">
+        </lib-ucSubsection>          
+          <form class="form form-horizontal" [formGroup]="AssetTypeForm" (ngSubmit)="AssetTypeForm.valid && SaveForm()"
+                #enjiForm="ngForm">
+
+            <div class="form-body" id="AssetTypeId">
+              <div class="form-group row adins-required">
+                <label class="col-md-4 adInsLabel" translate>Asset Type Code </label>
+                <div class="col-md-7">
+                  <input type="text" class="form-control adInsInput" formControlName="AssetTypeCode"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.AssetTypeCode.invalid }">
+                  <show-errors [control]="AssetTypeForm.controls.AssetTypeCode" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-4  adInsLabel" translate>Asset Type Name </label>
+                <div class="col-md-7">
+                  <input type="text" class="form-control adInsInput" formControlName="AssetTypeName"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.AssetTypeName.invalid }">
+                  <show-errors [control]="AssetTypeForm.controls.AssetTypeName" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row adins-required">
+                <label class="col-md-4  adInsLabel" translate>Serial No 1 Label / Is Mandatory </label>
+                <div class="col-md-7">
+                  <input type="text" class="form-control adInsInput" formControlName="SerialNo1Label">                  
+                  <show-errors [control]="AssetTypeForm.controls.SerialNo1Label" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+                <div class="col-md-1">
+                  <input class="border-primary" type="checkbox" data-md-icheck
+                  formControlName="IsMndtrySerialNo1" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-4  adInsLabel" translate>Serial No 2 Label / Is Mandatory </label>
+                <div class="col-md-7">
+                  <input type="text" class="form-control adInsInput" formControlName="SerialNo2Label">                  
+                  <show-errors [control]="AssetTypeForm.controls.SerialNo2Label" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+                <div class="col-md-1">
+                  <input class="border-primary" type="checkbox" data-md-icheck
+                  formControlName="IsMndtrySerialNo2" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-4  adInsLabel" translate>Serial No 3 Label / Is Mandatory </label>
+                <div class="col-md-7">
+                  <input type="text" class="form-control adInsInput" formControlName="SerialNo3Label">                  
+                  <show-errors [control]="AssetTypeForm.controls.SerialNo3Label" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+                <div class="col-md-1">
+                  <input class="border-primary" type="checkbox" data-md-icheck
+                  formControlName="IsMndtrySerialNo3" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-4  adInsLabel" translate>Serial No 4 Label / Is Mandatory </label>
+                <div class="col-md-7">
+                  <input type="text" class="form-control adInsInput" formControlName="SerialNo4Label">                  
+                  <show-errors [control]="AssetTypeForm.controls.SerialNo4Label" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+                <div class="col-md-1">
+                  <input class="border-primary" type="checkbox" data-md-icheck
+                  formControlName="IsMndtrySerialNo4" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-4  adInsLabel" translate>Serial No 5 Label / Is Mandatory </label>
+                <div class="col-md-7">
+                  <input type="text" class="form-control adInsInput" formControlName="SerialNo5Label">                  
+                  <show-errors [control]="AssetTypeForm.controls.SerialNo5Label" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+                <div class="col-md-1">
+                  <input class="border-primary" type="checkbox" data-md-icheck
+                  formControlName="IsMndtrySerialNo5" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-4  adInsLabel" translate>Loan Object Status </label>
+                <div class="col-md-7">
+                  <input class="border-primary" type="checkbox"  data-md-icheck formControlName="IsLoanObj" />
+                </div>
+              </div>
+
+
+              <div class="form-group row ">
+                <label class="col-md-4  adInsLabel" translate>Active Status</label>
+                <div class="col-md-7">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive" />
+                </div>
+              </div>
+
+            </div>
+              <lib-ucSubsection [id]="'Hierarchy'" [title]="'Hierarchy Level '" [panel]="'HierarchyId'">
+              </lib-ucSubsection>
+
+              <div id="HierarchyId">
+              <div class="form-group row adins-required">
+                <label class="col-md-4  adInsLabel" translate>Hierarchy Level</label>
+                <div class="col-md-7">
+                  <select (change)="onHierarchyLevelChanged($event)" class="form-control adInsInput" style="width: auto" formControlName="MaxHierarchyLevel"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.MaxHierarchyLevel.invalid }">
+                      <option *ngFor="let it of ItemMaxHierarchyLevelNumber" value="{{it}}">
+                          {{it}}</option>
+                  </select>
+                  <show-errors [control]="AssetTypeForm.controls.MaxHierarchyLevel" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>  
+              <div formArrayName="HierarchyArr">
+              <div *ngFor="let item of HierarchyArr.controls;let i = index;" >
+                <div class="form-group row adins-required"  [formGroupName]="i">
+                  <label class="col-md-4 adInsLabel" translate>{{item.controls.label.value}} </label>
+                  <div class="col-md-7">
+                    <input type="text" class="form-control adInsInput" formControlName="values"  required>
+                    <show-errors [control]="AssetTypeForm.controls.HierarchyArr['controls'][i]['controls'].values" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+              </div>
+            </div>
+              </div> 
+
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/asset/type/paging']"
+                translate>
+                <i class="ft-x"></i> Back
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary"  translate>
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
