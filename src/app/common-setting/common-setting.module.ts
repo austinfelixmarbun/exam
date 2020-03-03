@@ -40,6 +40,7 @@ import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-sta
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
 import { MasterTypePagingComponent } from './master-type/master-type-paging/master-type-paging.component';
+import { FormModule } from 'app/forms/forms.module';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { MasterTypePagingComponent } from './master-type/master-type-paging/mast
     UcgridfooterModule,
     SharingComponentModule,
     ReactiveFormsModule,
+    FormModule,
     UcpagingModule,
     UclookupgenericModule,
     UcSubsectionModule

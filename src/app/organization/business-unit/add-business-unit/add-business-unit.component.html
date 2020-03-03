@@ -1,0 +1,66 @@
+<div class="row text-left">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header header-title">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} BUSINESS UNIT
+                                ORGANIZATION </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <form class="form form-horizontal" [formGroup]="BizUnitForm"
+                    (ngSubmit)="BizUnitForm.valid && SaveForm()" #enjiForm="ngForm">
+                        <div class="form-body">
+                            <div class="form-group row adins-required">
+                                <label class="col-md-3  adInsLabel" translate>Business Unit Code </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control adInsInput width-75-per"
+                                        formControlName="BizUnitCode">
+                                    <show-errors [control]="BizUnitForm.controls.BizUnitCode" [submit]="enjiForm.submitted">
+                                    </show-errors>
+                                </div>
+                            </div>
+                            <div class="form-group row adins-required">
+                                <label class="col-md-3  adInsLabel" translate>Business Unit Name </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control adInsInput width-75-per"
+                                        formControlName="BizUnitName" >
+                                    <show-errors [control]="BizUnitForm.controls.BizUnitName" [submit]="enjiForm.submitted">
+                                    </show-errors>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3  adInsLabel" translate>Description </label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control adInsInput width-75-per"
+                                        formControlName="Descr"> </textarea>
+                                    <show-errors [control]="BizUnitForm.controls.Descr"
+                                        [submit]="enjiForm.submitted">
+                                    </show-errors>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3  adInsLabel" translate>Active Status </label>
+                                    <div class="col-md-9">
+                                    <input type="checkbox" class="border-primary" formControlName="IsActive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions right">
+                            <button type="button" class="btn btn-raised btn-warning mr-1"
+                                [routerLink]="['/organization/businessunit']" translate>
+                                <i class="fa fa-arrow-circle-left"></i> Back
+                            </button>
+                            <button type="submit" class="btn btn-raised btn-primary" translate>
+                                <i class="fa fa-check-square-o"></i> Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -72,7 +72,8 @@
           </div>
 
           <!-- ucAddressGroup -->
-          <app-uc-address-group #UcAddrGrp [UCAddrForm]="RefEmpForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [default]="defVal"></app-uc-address-group>
+          <lib-ucaddress [UCAddrForm]="RefEmpForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"></lib-ucaddress>
+          <!-- <app-uc-address-group #UcAddrGrp [UCAddrForm]="RefEmpForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [default]="defVal"></app-uc-address-group> -->
           <!-- ucAddressGroup -->
 
           <div class="form-actions right">
@@ -84,4 +85,9 @@
       </div>
     </div>
   </div>
+</div>
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="btn btn-info btn-raised" (click)="nextClicked()"> Save & Continue </button>
+  </span>
 </div>
