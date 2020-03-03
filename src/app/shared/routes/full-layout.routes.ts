@@ -24,7 +24,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './employee/employee.module#EmployeeModule'
   },
   {
-    path : 'organization',
+    path : 'Organization',
     loadChildren: './organization/organization.module#OrganizationModule'
   },
   {
