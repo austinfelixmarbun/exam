@@ -21,6 +21,14 @@ export class AdInsConstant {
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
 
+  //---------- ASSET -----------
+  // ASSET TYPE
+  public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListKeyValueActiveByCode";
+
+  //ASSET CATEGORY
+  public static GetActiveAssetCategoryValue = environment.FoundationR3Url + "/AssetCategory/"
+  //----------- END OF ASSET ------------
+
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
   public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
