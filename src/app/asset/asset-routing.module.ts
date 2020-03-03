@@ -9,6 +9,8 @@ import { AssetAccessoryPagingComponent } from './asset-accessory/asset-accessory
 import { AssetAccessoryInformationComponent } from './asset-accessory/asset-accessory-information/asset-accessory-information.component';
 import { AssetDocumentPagingComponent } from './asset-document/asset-document-paging/asset-document-paging.component';
 import { AssetDocumentInformationComponent } from './asset-document/asset-document-information/asset-document-information.component';
+import { AssetDocumentMasterPagingComponent } from './asset-document-master/asset-document-master-paging/asset-document-master-paging.component';
+import { AssetDocumentMasterPagingInformationComponent } from './asset-document-master/asset-document-master-paging-information/asset-document-master-paging-information.component';
  
 const routes: Routes = [
     {
@@ -60,6 +62,20 @@ const routes: Routes = [
             {
                 path: 'Document/DocumentInformation',
                 component: AssetDocumentInformationComponent,
+                data: {
+                    title: 'Asset DocumentInformation'
+                },
+            },
+            {
+                path: 'DocumentMaster/Paging',
+                component: AssetDocumentMasterPagingComponent,
+                data: {
+                    title: 'Asset Document Paging'
+                },
+            },
+            {
+                path: 'DocumentMaster/DocumentMasterInformation',
+                component: AssetDocumentMasterPagingInformationComponent,
                 data: {
                     title: 'Asset DocumentInformation'
                 },

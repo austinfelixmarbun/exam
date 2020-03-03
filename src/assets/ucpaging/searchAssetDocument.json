@@ -1,6 +1,6 @@
 {
   "title": "Asset Category",
-  "exportExcel": true,
+  "exportExcel": false,
   "component": [
     {
       "type": "textbox",
@@ -176,30 +176,57 @@
   "headerList": [
     {
       "type": "sort",
-      "position": "left",
+      "position": "center",
       "label": "ASSET DOCUMENT CODE",
-      "name": "AssetDocumentCode"
+      "name": "AssetDocCode"
     },
     {
       "type": "sort",
-      "position": "left",
+      "position": "center",
       "label": "ASSET DOCUMENT NAME",
-      "name": "AssetDocumentName"
+      "name": "AssetDocName"
     },  {
       "type": "sort",
-      "position": "left",
+      "position": "center",
       "label": "MAIN DOC",
-      "name": "isMain"
+      "name": "IsMainDoc"
     },
-
-
-
-
+      {
+      "type": "sort",
+      "position": "center",
+      "label": "VALUE NEEDED",
+      "name": "IsValueNeeded"
+    },
+      {
+      "type": "sort",
+      "position": "left",
+      "label": "Pledge",
+      "name": "IsPledge"
+    },
+     {
+      "type": "sort",
+      "position": "center",
+      "label": "Borrow",
+      "name": "IsBorrow"
+    },
+     {
+      "type": "sort",
+      "position": "center",
+      "label": "Mandatory New",
+      "name": "IsMandatoryNew"
+    },
+     {
+      "type": "sort",
+      "position": "center",
+      "label": "Mandatory Used",
+      "name": "IsMandatoryUsed"
+    },
+ 
     {
       "type": "sort",
       "position": "center",
       "label": "ACTIVE STATUS",
-      "name": "isActive"
+      "name": "IsActive"
     },
     {
       "type": "label",
@@ -208,19 +235,55 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.ASSET_DOC_CODE as AssetDocCode, A.ASSET_DOC_NAME as AssetDocName, A.IS_MAIN_DOC as IsMainDoc, A.IS_VALUE_NEEDED as IsValueNeeded, A.IS_PLEDGE as IsPledge, A.IS_BORROW as IsBorrow, A.IS_MANDATORY_NEW as isMandatoryNew, IS_MA",
-    "from": "FROM ASSET_ACCESSORY A WITH(NOLOCK)"
+    "select": "SELECT  B.REF_ASSET_DOC_ID as RefAssetDocId, A.ASSET_TYPE_ID AS AssetTypeId, B.ASSET_DOC_CODE as AssetDocCode, B.ASSET_DOC_NAME as AssetDocName, A.IS_MAIN_DOC as IsMainDoc, A.IS_VALUE_NEEDED as IsValueNeeded, A.IS_PLEDGE as IsPledge, A.IS_BORROW as IsBorrow, A.IS_MANDATORY_NEW as IsMandatoryNew, IS_MANDATORY_USED as IsMandatoryUsed, B.IS_ACTIVE as IsActive",
+    "from": "FROM dbo.ASSET_DOC_LIST A WITH(NOLOCK) JOIN REF_ASSET_DOC B WITH(NOLOCK) ON A.REF_ASSET_DOC_ID = B.REF_ASSET_DOC_ID "
+ 
   },
   "bodyList": [
     {
       "type": "text",
       "position": "left",
-      "property": "AssetAccessoryCode"
+      "property": "AssetDocCode"
     },
     {
       "type": "text",
       "position": "left",
-      "property": "AssetAccessoryName"
+      "property": "AssetDocName"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsMainDoc"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsValueNeeded"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsMainDoc"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsPledge"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsBorrow"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsMandatoryNew"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsMandatoryUsed"
     },
     {
       "type": "boolean",
@@ -233,7 +296,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/Asset/Accessory/AccessoryInformation",
+          "path": "/Asset/Document/DocumentInformation",
           "param": [
             {
               "type": "mode",

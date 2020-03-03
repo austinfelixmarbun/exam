@@ -39,10 +39,9 @@ export class AssetCategoryPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetCategory.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefEconomicSector;
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetCategory;
     
-    this.viewObj = "./assets/form-setting/assetType.json";
-
+    this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.restriction = AdInsConstant.RestrictionLike;

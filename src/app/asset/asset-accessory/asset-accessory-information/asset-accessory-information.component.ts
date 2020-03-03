@@ -19,7 +19,7 @@ export class AssetAccessoryInformationComponent implements OnInit {
   AssetAccessoryForm = this.fb.group({
     AssetAccessoryName: ['', [Validators.required, Validators.maxLength(100)]],
     AssetAccessoryCode: ['', [Validators.required, Validators.maxLength(50)]],
-   IsActive: [true]
+   IsActive: [false]
  });
 
   
@@ -108,7 +108,7 @@ export class AssetAccessoryInformationComponent implements OnInit {
       this.http.post(this.addUrl, this.acObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/Asset/Accessory/Paging"]);
+            this.router.navigate(["/Asset/Accessory/Paging"],{ queryParams: { "AssetTypeId": this.acObj.AssetTypeId   } });
           
         },
         error => {

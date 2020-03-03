@@ -21,7 +21,8 @@ import { AssetAccessoryInformationComponent } from './asset-accessory/asset-acce
 import { AssetAccessoryPagingComponent } from './asset-accessory/asset-accessory-paging/asset-accessory-paging.component';
 import { AssetDocumentPagingComponent } from './asset-document/asset-document-paging/asset-document-paging.component';
 import { AssetDocumentInformationComponent } from './asset-document/asset-document-information/asset-document-information.component';
- 
+import { AssetDocumentMasterPagingComponent } from './asset-document-master/asset-document-master-paging/asset-document-master-paging.component';
+import { AssetDocumentMasterPagingInformationComponent } from './asset-document-master/asset-document-master-paging-information/asset-document-master-paging-information.component';
  
  
  
@@ -55,7 +56,9 @@ import { AssetDocumentInformationComponent } from './asset-document/asset-docume
    AssetAccessoryPagingComponent,
    AssetDocumentPagingComponent,
    AssetDocumentInformationComponent,
-     
+   AssetDocumentMasterPagingComponent,
+   AssetDocumentMasterPagingInformationComponent,
+       
   ]
 })
 export class AssetModule { }

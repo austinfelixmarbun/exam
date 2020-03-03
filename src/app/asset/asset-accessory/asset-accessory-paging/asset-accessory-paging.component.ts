@@ -35,10 +35,9 @@ export class AssetAccessoryPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetAccessory.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefEconomicSector;
-
-    this.viewObj = "./assets/form-setting/assetType.json";
-
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetAccessory;
+    
+    this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.restriction = AdInsConstant.RestrictionLike;

@@ -114,7 +114,7 @@
           
         {
           "type": "delete",
-          "property": "refProvDistrictId"
+          "property": "AssetAccessoryId"
         }
         ]
       } 
