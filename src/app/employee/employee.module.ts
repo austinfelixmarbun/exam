@@ -17,6 +17,10 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { LookuprefbankModule } from '@adins/lookuprefbank';
 import { LookupemployeeModule } from '@adins/lookupemployee';
+import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcSubsectionModule } from '@adins/uc-subsection';
+import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
 
 
 @NgModule({
@@ -29,9 +33,11 @@ import { LookupemployeeModule } from '@adins/lookupemployee';
     SharingComponentModule,
     LookupsupervisorModule,
     UCSearchModule,
+    UclookupgenericModule,
     UcgridfooterModule,
     LookuprefbankModule,
     LookupemployeeModule,
+    UcSubsectionModule,
     ReactiveFormsModule
   ],
   declarations: [
@@ -40,7 +46,9 @@ import { LookupemployeeModule } from '@adins/lookupemployee';
     EmployeeComponent,
     EmployeeAddComponent,
     LeaveMaintenanceComponent,
-    LeaveMaintenanceAddEditComponent
+    LeaveMaintenanceAddEditComponent,
+    EmployeeBusinessunitAddComponent,
+    EmployeeBusinessunitPagingComponent
   ],
 
 })
