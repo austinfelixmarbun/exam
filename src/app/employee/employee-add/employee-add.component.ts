@@ -26,11 +26,11 @@ import { forkJoin } from "rxjs";
   providers: [NGXToastrService]
 })
 export class EmployeeAddComponent implements OnInit {
-  private getEmpUrl: string = environment.FoundationR3Url + AdInsConstant.GetRefEmployeeById;
+  private getEmpUrl: string = AdInsConstant.GetRefEmployeeById;
   private getRefUserUrl: string = environment.FoundationR3Url + AdInsConstant.GetRefUserByRefEmpId;
   private getEmpBankUrl: string = environment.FoundationR3Url + AdInsConstant.GetEmpBankAccByRefEmpId;
   private getGeneralSettingUrl : string = environment.FoundationR3Url + AdInsConstant.GetGeneralSettingByCode;
-  private getRefBankUrl: string = environment.FoundationR3Url + AdInsConstant.GetRefBankByRefBankIdAsync;
+  private getRefBankUrl: string = AdInsConstant.GetRefBankByRefBankIdAsync;
   private addUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefEmp;
   private editUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefEmp;
   private addUsrUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefUserR3;
@@ -91,7 +91,7 @@ export class EmployeeAddComponent implements OnInit {
     BankBranch: ['', [Validators.required]],
     BankBranchRegCode: ['', [Validators.required]],
     BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    BankAccName: ['', [Validators.required]],
+    BankAccName: ['', [Validators.required]]
   });
 
   constructor(
@@ -117,7 +117,6 @@ export class EmployeeAddComponent implements OnInit {
     this.generalSettingObj.GsCode = "PASSWORD_REGEX";
     httpClient.post(this.getGeneralSettingUrl, this.generalSettingObj).subscribe(
       (response) => {
-        console.log(JSON.stringify(response));
         this.resultData = response;
         this.passwordPattern = this.resultData.GsValue;
       },
@@ -141,6 +140,11 @@ export class EmployeeAddComponent implements OnInit {
     this.inputLookupBankObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
+
+    console.log("EmpUrl : " + this.getEmpUrl);
+    console.log("UsrUrl : " + this.getRefUserUrl);
+    console.log("EmpBank : " + this.getEmpBankUrl);
+    console.log("RefBank : " + this.getRefBankUrl);
     
     if (this.pageType == "edit") {
       var empObj = new RefEmpObj();
@@ -156,25 +160,35 @@ export class EmployeeAddComponent implements OnInit {
           var tempEmpBankAcc = new EmpBankAccObj();
           tempEmpBankAcc.RefEmpId = response.RefEmpId;
 
+          var tempResponse = [];
+          tempResponse.push(response);
+
           const refUserObj = this.httpClient.post(this.getRefUserUrl, tempRefUser);
           const empBankAccObj = this.httpClient.post(this.getEmpBankUrl, tempEmpBankAcc);
 
-          return forkJoin([response, refUserObj, empBankAccObj]);
+          return forkJoin([tempResponse, refUserObj, empBankAccObj]);
         }),
         mergeMap((response: any) => {
           var tempRefBank = new RefBankObj();
           tempRefBank.RefBankId = response[2].RefBankId;
 
+          var tempResponseEmp = [];
+          tempResponseEmp.push(response[0]);
+          var tempResponseUsr = [];
+          tempResponseUsr.push(response[1]);
+          var tempResponseEmpBank = [];
+          tempResponseEmpBank.push(response[2]);
+
           const refBankObj = this.httpClient.post(this.getRefBankUrl, tempRefBank);
 
-          return forkJoin([response[0], response[1], response[2], refBankObj]);
+          return forkJoin([tempResponseEmp, tempResponseUsr, tempResponseEmpBank, refBankObj]);
         })
       ).subscribe(
-        (response) => {
+        (response: any) => {
           var refEmpData = response[0];
           var refUserData = response[1];
           var empBankAccData = response[2];
-          var refBankData = response[4];
+          var refBankData = response[3];
 
           this.RefEmpForm.patchValue({
             RefUserId: refUserData.RefUserId,
@@ -223,6 +237,8 @@ export class EmployeeAddComponent implements OnInit {
             BankAccName: empBankAccData.BankAccName
           });
 
+          console.log("zipcode : " + refEmpData.Zipcode);
+          console.log("bankname: " + refBankData.BankName);
           this.inputLookupZipCodeObj.nameSelect = refEmpData.Zipcode;
           this.inputLookupBankObj.nameSelect = refBankData.BankName;
         },
@@ -235,7 +251,7 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   getLookupZipCodeResponse(e){
-    console.log(JSON.stringify(e));
+    // console.log(JSON.stringify(e));
     this.RefEmpForm.patchValue({
       AreaCode1: e.areaCode1,
       AreaCode2: e.areaCode2,

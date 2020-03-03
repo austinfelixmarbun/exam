@@ -132,6 +132,10 @@
                         {
                             "type" : "refEmpId", 
                             "property" : "refEmpId" 
+                        },
+                        {
+                            "type": "param",
+                            "property": "edit"
                         }
                     ]
                 },
