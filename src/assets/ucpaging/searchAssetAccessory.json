@@ -4,18 +4,18 @@
     "component": [
       {
         "type": "textbox",
-        "name": "ASSET_CATEGORY_CODE",
-        "id": "assetTypeCode",
+        "name": "ASSET_ACCESSORY_CODE",
+        "id": "AssetAccesoryCode",
         "value": "",
-        "label": "Asset Category Code",
+        "label": "Asset Accessory Code",
         "placeholder": "Placeholder"
       },
       {
         "type": "textbox",
-        "name": "ASSET_CATEGORY_NAME",
-        "id": "assetTypeName",
+        "name": "ASSET_ACCESSORY_NAME",
+        "id": "AssetAccessoryName",
         "value": "",
-        "label": "Asset Category Name",
+        "label": "Asset Accessory Name",
         "placeholder": "Placeholder"
       },
       {
@@ -45,14 +45,14 @@
       {
         "type": "sort",
         "position": "left",
-        "label": "ASSET CATEGORY CODE",
-        "name": "AssetCategoryCode"
+        "label": "ASSET Accessory CODE",
+        "name": "AssetAccessoryCode"
       },
       {
         "type": "sort",
         "position": "left",
-        "label": "ASSET CATEGORY NAME",
-        "name": "AssetCategoryName"
+        "label": "ASSET Accessory NAME",
+        "name": "AssetAccessoryName"
       },
       {
         "type": "sort",
@@ -67,20 +67,21 @@
       }
       
     ],
-    "querystring": { 
-      "select": "SELECT A.ASSET_TYPE_ID AS AssetTypeId, A.ASSET_CATEGORY_ID as AssetCategoryId, A.ASSET_CATEGORY_CODE as AssetCategoryCode, A.ASSET_CATEGORY_NAME as AssetCategoryName, A.IS_ACTIVE as IsActive",
-      "from": "FROM ASSET_CATEGORY A WITH(NOLOCK)" 
+    
+        "querystring": { 
+            "select": "SELECT A.ASSET_TYPE_ID AS AssetTypeId, A.ASSET_ACCESSORY_ID as AssetAccessoryId, A.ASSET_ACCESSORY_CODE as AssetAccessoryCode, A.ASSET_ACCESSORY_NAME as AssetAccessoryName, A.IS_ACTIVE as IsActive",
+          "from": "FROM ASSET_ACCESSORY A WITH(NOLOCK)" 
     },
     "bodyList": [
       {
         "type": "text",
         "position": "left",
-        "property": "AssetCategoryCode"
+        "property": "AssetAccessoryCode"
       },
       {
         "type": "text",
         "position": "left",
-        "property": "AssetCategoryName"
+        "property": "AssetAccessoryName"
       },
       {
         "type": "boolean",
@@ -93,7 +94,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Asset/Category/CategoryInformation",
+            "path": "/Asset/Accessory/AccessoryInformation",
             "param": [
               {
                 "type": "mode",
@@ -104,15 +105,16 @@
                 "property": "AssetTypeId"
               },
               {
-                "type": "AssetCategoryId",
-                "property": "AssetCategoryId"
+                "type": "AssetAccessoryId",
+                "property": "AssetAccessoryId"
               }
+
             ]
           },
           
         {
           "type": "delete",
-          "property": "AssetCategoryId"
+          "property": "refProvDistrictId"
         }
         ]
       } 
@@ -124,4 +126,5 @@
 
     ]
   }
+  
   

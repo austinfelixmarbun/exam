@@ -3,36 +3,68 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AssetConfigurationPagingComponent } from './asset-configuration/asset-configuration-paging/asset-configuration-paging.component';
-import { AssetCategoryPagingComponent } from './asset-configuration/asset-category-paging/asset-category-paging.component';
-import { AssetCategoryInformationComponent } from './asset-configuration/asset-category-information/asset-category-information.component';
-
-
+import { AssetCategoryPagingComponent } from './asset-category/asset-category-paging/asset-category-paging.component';
+import { AssetCategoryInformationComponent } from './asset-category/asset-category-information/asset-category-information.component';
+import { AssetAccessoryPagingComponent } from './asset-accessory/asset-accessory-paging/asset-accessory-paging.component';
+import { AssetAccessoryInformationComponent } from './asset-accessory/asset-accessory-information/asset-accessory-information.component';
+import { AssetDocumentPagingComponent } from './asset-document/asset-document-paging/asset-document-paging.component';
+import { AssetDocumentInformationComponent } from './asset-document/asset-document-information/asset-document-information.component';
+ 
 const routes: Routes = [
     {
         path: '',
         children: [
             {
-                path: 'configuration/paging',
+                path: 'Configuration/Paging',
                 component: AssetConfigurationPagingComponent,
                 data: {
-                    title: 'Master Type Maintenance Paging'
+                    title: 'Asset Configuration Paging'
                 },
             },
             {
-                path: 'configuration/category',
+                path: 'Category/Paging',
                 component: AssetCategoryPagingComponent,
                 data: {
-                    title: 'Master Type Maintenance Paging'
+                    title: 'Asset Cateogry Paging'
                 },
             },
 
             {
-                path: 'configuration/categoryInformation',
+                path: 'Category/CategoryInformation',
                 component: AssetCategoryInformationComponent,
                 data: {
-                    title: 'Master Type Maintenance Paging'
+                    title: 'Asset Category Information'
+                },
+            },  
+            {
+                path: 'Accessory/Paging',
+                component: AssetAccessoryPagingComponent,
+                data: {
+                    title: 'Asset Accessory Paging'
+                },
+            },
+            {
+                path: 'Accessory/AccessoryInformation',
+                component: AssetAccessoryInformationComponent,
+                data: {
+                    title: 'Asset Accessory Information'
+                },
+            },
+            {
+                path: 'Document/Paging',
+                component: AssetDocumentPagingComponent,
+                data: {
+                    title: 'Asset Document Paging'
+                },
+            },
+            {
+                path: 'Document/DocumentInformation',
+                component: AssetDocumentInformationComponent,
+                data: {
+                    title: 'Asset DocumentInformation'
                 },
             }
+
         ]
     }
 ];

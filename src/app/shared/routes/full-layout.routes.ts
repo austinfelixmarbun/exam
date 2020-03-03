@@ -76,7 +76,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './test-new/testNew.module#TestNewModule'
   }, 
   {
-    path: 'asset',
+    path: 'Asset',
     loadChildren: './asset/asset.module#AssetModule'
   }
 ];

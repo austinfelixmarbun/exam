@@ -23,6 +23,11 @@ export class AssetConfigurationPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetConfiguration.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefEconomicSector;
+
+
+
+
+
   }
 
 }

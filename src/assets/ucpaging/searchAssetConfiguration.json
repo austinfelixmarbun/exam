@@ -102,16 +102,14 @@
         "action": [
           {
             "type": "edit",
-            "path": "/asset/configuration/category",
+            "path": "/Asset/Category/Paging",
             "param": [
+             
               {
-                "type": "AssetTypeName",
-                "property": "AssetTypeName"
-              },
-              {
-                "type": "AssetTypeCode",
-                "property": "AssetTypeCode"
-              }
+                "type": "AssetTypeId",
+                "property": "AssetTypeId"
+              } 
+            
             ]
           }
         ]
@@ -123,16 +121,12 @@
         "action": [
           {
             "type": "edit",
-            "path": "/commonSetting/currency/add",
+            "path": "/Asset/Accessory/Paging",
             "param": [
               {
-                "type": "refCurrId",
-                "property": "assetTypeName"
-              },
-              {
-                "type": "param",
-                "property": "assetTypeName"
-              }
+                "type": "AssetTypeId",
+                "property": "AssetTypeId"
+              } 
             ]
           }
         ]
@@ -143,19 +137,15 @@
         "action": [
           {
             "type": "edit",
-            "path": "/commonSetting/currency/add",
+            "path": "/Asset/Accessory/Paging",
             "param": [
               {
-                "type": "refCurrId",
-                "property": "assetTypeName"
-              },
-              {
-                "type": "param",
-                "property": "assetTypeName"
-              }
+                "type": "AssetTypeId",
+                "property": "AssetTypeId"
+              } 
             ]
           }
-        ]
+        ] 
       }
 
 
