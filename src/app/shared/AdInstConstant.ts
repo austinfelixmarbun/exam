@@ -28,6 +28,7 @@ export class AdInsConstant {
   public static GetGeneralSettingPaging = "/GeneralSetting/GetGeneralSettingPaging";
   public static GetGeneralSettingById = environment.FoundationR3Url + "/GeneralSetting/GetGeneralSettingById";
   public static GetGeneralSettingValue = "/GeneralSetting/GetGeneralSettingValue";
+  public static GetGeneralSettingByCode = "/GeneralSetting/GetGeneralSettingByCode";
 
 
   //REF OFFICE
@@ -47,6 +48,7 @@ export class AdInsConstant {
   public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
   public static GetRefOfficeAreaPaging = "/RefOfficeArea/GetRefOfficeAreaPaging";
   public static GetRefArea = "/RefOfficeArea/GetRefArea";
+  public static GetRefOfficeAreaByRefOfficeAreaId = "/RefOfficeArea/GetRefOfficeAreaByRefOfficeAreaId";
   public static AddRefOfficeArea = "/RefOfficeArea/AddRefOfficeArea";
   public static EditRefOfficeArea = "/RefOfficeArea/EditRefOfficeArea";
   public static DeleteRefOfficeArea = "/RefOfficeArea/DeleteRefOfficeArea";
@@ -111,6 +113,7 @@ export class AdInsConstant {
   public static EditRefEmp = "/RefEmp/EditRefEmp";
   public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
   public static AddEmpBankAcc = "/EmpBankAcc/AddEmpBankAcc";
+  public static EditEmpBankAcc = "EmpBankAcc/EditEmpBankAcc";
   public static GetEmpBankAccByRefEmpId = "/EmpBankAcc/GetEmpBankAccByRefEmpId";
   public static AddRefEmpAndEmpBankAcc = "/RefEmp/AddRefEmpAndEmpBankAcc";
   public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
@@ -136,6 +139,8 @@ export class AdInsConstant {
   public static ValidatePwd = "/UserManagement/ValidatePwd";
   public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
   public static ResetPassword = "/UserManagement/ResetPassword";
+  public static AddRefUserR3 = "/RefUser/AddRefUser";
+  public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
 
   //REF-ROLE
   public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
@@ -213,6 +218,7 @@ export class AdInsConstant {
   public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
   public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
   public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
+  public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
 
   //REF PROV DISTRICT
   public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
@@ -257,6 +263,7 @@ export class AdInsConstant {
 
   //NOTIFICATION
   public static NotificationPost = "/Message/Post";
+  public static NotificationSignalR = "/notification";
 
   //REF CURR
 

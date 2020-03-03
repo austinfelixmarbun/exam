@@ -54,19 +54,19 @@ export class UserRoleComponent implements OnInit {
     this.refUserObj = new RefUserObj();
     this.refEmpObj = new RefEmpObj();
 
-    this.refUserObj.refUserId = this.refUserId;
+    // this.refUserObj.refUserId = this.refUserId;
 
     this.httpClient.post(urlGetUser, this.refUserObj).subscribe(
       (response) => {
         console.log('Success Get');
         this.refUserObj = response['returnObject'];
-        this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
+        // this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
         this.httpClient.post(urlGetEmp, this.refEmpObj).subscribe(
           (response) => {
             this.refEmpObj = response["returnObject"];
             console.log(this.refEmpObj);
 
-            empObj.refEmpId = this.refEmpObj.refEmpId;
+            // empObj.refEmpId = this.refEmpObj.refEmpId;
             this.httpClient.post(urlGetListEmpPos, empObj).subscribe(
               (response) => {
                 console.log('Get Result Data');

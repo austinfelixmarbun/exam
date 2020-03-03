@@ -85,7 +85,9 @@ import { FormModule } from 'app/forms/forms.module';
     DistrictAddEditComponent,
     RefStatusPagingComponent,
     ProfessionComponent,
-    ProfessionAddEditComponent
+    ProfessionAddEditComponent,
+    // RefIndustryTypeComponent, 
+    // RefIndustryTypeDetailComponent
   ],
   providers: [
     {
