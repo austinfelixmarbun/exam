@@ -81,7 +81,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
             IsPassed: this.resultData.IsPassed
           });
           this.refEmp = new RefEmpObj();
-          this.refEmp.refEmpId = this.resultData.RefEmpId;
+          // this.refEmp.refEmpId = this.resultData.RefEmpId;
           this.http.post(this.getRefEmpUrl, this.refEmp).subscribe(
             (response) => {
               this.resultEmpData = response;

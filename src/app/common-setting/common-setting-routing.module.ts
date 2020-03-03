@@ -28,20 +28,26 @@ import { WorkingHourDDetailComponent } from './working-hour-scheme/working-hour-
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
+import { RefIndustryTypeComponent } from './ref-industry-type/ref-industry-type.component';
+import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
+import { BankComponent } from 'app/bank/bank.component';
+import { BankAddComponent } from 'app/bank/add/add-bank.component';
+import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'masterType',
+        path: 'MasterType',
         component: MasterTypePagingComponent,
         data: {
           title: 'Master Type Maintenance Paging'
         },
       },
       {
-        path: 'masterType/detail',
+        path: 'MasterType/detail',
         component: MasterTypeAddEditComponent,
         data: {
           title: 'Master Type Maintenance Add Edit'
@@ -76,77 +82,77 @@ const routes: Routes = [
         },
       },
       {
-        path: 'currency/paging',
+        path: 'Currency/paging',
         component: CurrencyComponent,
         data: {
           title: 'Currency'
         },
       },
       {
-        path: 'currency/add',
+        path: 'Currency/add',
         component: CurrencyAddComponent,
         data: {
           title: 'Currency add'
         },
       },
       {
-        path: 'workingHour',
+        path: 'WorkingHour',
         component: WorkingHourPagingComponent,
         data: {
           title: 'Working Hour'
         },
       },
       {
-        path: 'workingHour/add',
+        path: 'WorkingHour/add',
         component: WorkingHourHDetailComponent,
         data: {
           title: 'Working Hour Add Edit'
         },
       },
       {
-        path: 'workingHour/detail',
+        path: 'WorkingHour/detail',
         component: WorkingHourDDetailComponent,
         data: {
           title: 'Working Hour Detail'
         },
       },
       {
-        path: 'holiday',
+        path: 'Holiday',
         component: HolidayPagingComponent,
         data: {
           title: 'Holiday'
         },
       },
       {
-        path: 'holiday/add',
+        path: 'Holiday/add',
         component: HolidayAddComponent,
         data: {
           title: 'Holiday Add'
         },
       },
       {
-        path: 'holiday/edit',
+        path: 'Holiday/edit',
         component: HolidayAddComponent,
         data: {
           title: 'Holiday Edit'
         },
       },
       {
-        path: 'holiday/detail',
+        path: 'Holiday/detail',
         component: HolidayDetailComponent,
         data: {
           title: 'Holiday Detail'
         },
       },
       {
-        path: 'holiday/detail/add',
+        path: 'Holiday/detail/add',
         component: HolidayDetailAddComponent,
         data: {
           title: 'Holiday Detail Add'
         },
       },
       {
-        path: 'holiday/detail/edit',
+        path: 'Holiday/detail/edit',
         component: HolidayDetailAddComponent,
         data: {
           title: 'Holiday Detail Edit'
@@ -174,42 +180,42 @@ const routes: Routes = [
         },
       },
       {
-        path: 'economicSector/paging',
+        path: 'EconomicSector/paging',
         component: EconomicSectorComponent,
         data: {
           title: 'Economic Sector Paging'
         },
       },
       {
-        path: 'economicSector/detail',
+        path: 'EconomicSector/detail',
         component: EconomicSectorAddEditComponent,
         data: {
           title: 'Economic Sector Add Edit'
         },
       },
       {
-        path: 'province/paging',
+        path: 'RefProvince/paging',
         component: ProvinceComponent,
         data: {
           title: 'Province Paging'
         },
       },
       {
-        path: 'province/detail',
+        path: 'RefProvince/detail',
         component: ProvinceAddEditComponent,
         data: {
           title: 'Province Add Edit'
         },
       },
       {
-        path: 'district/paging',
+        path: 'District/paging',
         component: DistrictComponent,
         data: {
           title: 'District Paging'
         },
       },
       {
-        path: 'district/detail',
+        path: 'District/detail',
         component: DistrictAddEditComponent,
         data: {
           title: 'District Add Edit'
@@ -234,6 +240,48 @@ const routes: Routes = [
         component: ProfessionAddEditComponent,
         data: {
           title: 'Profession Add Edit'
+        },
+      },
+      {
+        path: 'IndustryType/paging',
+        component: RefIndustryTypeComponent,
+        data: {
+          title: 'Industry Type Paging'
+        },
+      },
+      {
+        path: 'IndustryType/detail',
+        component: RefIndustryTypeDetailComponent,
+        data: {
+          title: 'Industry Type Detail'
+        },
+      },
+      {
+        path: 'Bank/paging',
+        component: BankComponent,
+        data: {
+          title: 'Bank Paging'
+        },
+      },
+      {
+        path: 'Bank/detail',
+        component: BankAddComponent,
+        data: {
+          title: 'Bank Detail'
+        },
+      },
+      {
+        path: 'Zipcode/paging',
+        component: ZipcodeComponent,
+        data: {
+          title: 'Zipcode Paging'
+        },
+      },
+      {
+        path: 'Zipcode/detail',
+        component: ZipcodeAddComponent,
+        data: {
+          title: 'Zipcode Detail'
         },
       }
     ]

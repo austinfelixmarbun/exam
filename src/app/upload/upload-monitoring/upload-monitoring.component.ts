@@ -107,7 +107,7 @@ export class UploadMonitoringComponent implements OnInit {
   delete(refEmpId: any) {
     if (confirm('Are you sure to delete this record?')) {
       this.empObj = new RefEmpObj();
-      this.empObj.refEmpId = refEmpId;
+      // this.empObj.refEmpId = refEmpId;
       this.http.post(this.deleteUrl, this.empObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);

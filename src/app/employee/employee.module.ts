@@ -7,7 +7,6 @@ import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeaveMaintenanceComponent } from './leave-maintenance/leave-maintenance/leave-maintenance.component';
 import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-maintenance-add-edit/leave-maintenance-add-edit.component';
@@ -17,9 +16,10 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { LookuprefbankModule } from '@adins/lookuprefbank';
 import { LookupemployeeModule } from '@adins/lookupemployee';
-import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
-
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
+import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
 
 @NgModule({
   imports: [
@@ -31,12 +31,15 @@ import { UcpagingModule } from '@adins/ucpaging';
     SharingComponentModule,
     LookupsupervisorModule,
     UCSearchModule,
+    UclookupgenericModule,
     UcgridfooterModule,
     LookuprefbankModule,
     LookupemployeeModule,
     ReactiveFormsModule,
-    UclookupgenericModule,
-    UcpagingModule
+    EmployeeBusinessunitAddComponent,
+    EmployeeBusinessunitPagingComponent,
+    UcpagingModule,
+    UclookupgenericModule
   ],
   declarations: [
     EmployeePositionAddComponent,

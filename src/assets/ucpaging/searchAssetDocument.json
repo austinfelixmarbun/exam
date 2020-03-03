@@ -1,0 +1,322 @@
+{
+  "title": "Asset Category",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "ASSET_DOC_NAME",
+      "id": "AssetDocName",
+      "value": "",
+      "label": "Asset Document Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "ASSET_CATEGORY_NAME",
+      "id": "AssetCategoryName",
+      "value": "",
+      "label": "Asset Category Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "dropdown",
+      "name": "IS_MAIN_DOC",
+      "id": "isMainDoc",
+      "value": "",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Main Doc",
+      "items": [
+        {
+          "key": "1",
+          "value": "Yes"
+        },
+        {
+          "key": "0",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    },
+    {
+      "type": "dropdown",
+      "name": "IS_VALUE_NEEDED",
+      "id": "isValueNeeded",
+      "value": "",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Value Needed",
+      "items": [
+        {
+          "key": "1",
+          "value": "Yes"
+        },
+        {
+          "key": "0",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    },
+    {
+      "type": "dropdown",
+      "name": "IS_PLEDGE",
+      "id": "isPledge",
+      "value": "",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Pledge",
+      "items": [
+        {
+          "key": "1",
+          "value": "Yes"
+        },
+        {
+          "key": "0",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    },
+    {
+      "type": "dropdown",
+      "name": "IS_BORROW",
+      "id": "isBorrow",
+      "value": "",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Borrow",
+      "items": [
+        {
+          "key": "1",
+          "value": "Yes"
+        },
+        {
+          "key": "0",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    },
+    {
+      "type": "dropdown",
+      "name": "IS_MANDATORY_NEW",
+      "id": "isMandatoryNew",
+      "value": "",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Mandatory New",
+      "items": [
+        {
+          "key": "1",
+          "value": "Yes"
+        },
+        {
+          "key": "0",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    },
+    {
+      "type": "dropdown",
+      "name": "IS_MANDATORY_USED",
+      "id": "isMandatoryUsed",
+      "value": "",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Mandatory Used",
+      "items": [
+        {
+          "key": "1",
+          "value": "Yes"
+        },
+        {
+          "key": "0",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    },
+    {
+      "type": "dropdown",
+      "name": "IS_ACTIVE",
+      "id": "isActive",
+      "value": "Active Status",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Active Status",
+      "items": [
+        {
+          "key": "1",
+          "value": "Yes"
+        },
+        {
+          "key": "0",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    }
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "ASSET DOCUMENT CODE",
+      "name": "AssetDocCode"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "ASSET DOCUMENT NAME",
+      "name": "AssetDocName"
+    },  {
+      "type": "sort",
+      "position": "center",
+      "label": "MAIN DOC",
+      "name": "IsMainDoc"
+    },
+      {
+      "type": "sort",
+      "position": "center",
+      "label": "VALUE NEEDED",
+      "name": "IsValueNeeded"
+    },
+      {
+      "type": "sort",
+      "position": "left",
+      "label": "Pledge",
+      "name": "IsPledge"
+    },
+     {
+      "type": "sort",
+      "position": "center",
+      "label": "Borrow",
+      "name": "IsBorrow"
+    },
+     {
+      "type": "sort",
+      "position": "center",
+      "label": "Mandatory New",
+      "name": "IsMandatoryNew"
+    },
+     {
+      "type": "sort",
+      "position": "center",
+      "label": "Mandatory Used",
+      "name": "IsMandatoryUsed"
+    },
+ 
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "ACTIVE STATUS",
+      "name": "IsActive"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "ACTION"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT  B.REF_ASSET_DOC_ID as RefAssetDocId, A.ASSET_TYPE_ID AS AssetTypeId, B.ASSET_DOC_CODE as AssetDocCode, B.ASSET_DOC_NAME as AssetDocName, A.IS_MAIN_DOC as IsMainDoc, A.IS_VALUE_NEEDED as IsValueNeeded, A.IS_PLEDGE as IsPledge, A.IS_BORROW as IsBorrow, A.IS_MANDATORY_NEW as IsMandatoryNew, IS_MANDATORY_USED as IsMandatoryUsed, B.IS_ACTIVE as IsActive",
+    "from": "FROM dbo.ASSET_DOC_LIST A WITH(NOLOCK) JOIN REF_ASSET_DOC B WITH(NOLOCK) ON A.REF_ASSET_DOC_ID = B.REF_ASSET_DOC_ID "
+ 
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "AssetDocCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "AssetDocName"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsMainDoc"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsValueNeeded"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsMainDoc"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsPledge"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsBorrow"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsMandatoryNew"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsMandatoryUsed"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsActive"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "/Asset/Document/DocumentInformation",
+          "param": [
+            {
+              "type": "mode",
+              "property": "edit"
+            },
+            {
+              "type": "AssetTypeId",
+              "property": "AssetTypeId"
+            },
+            {
+              "type": "AssetAccessoryId",
+              "property": "AssetAccessoryId"
+            }
+          ]
+        },
+        {
+          "type": "delete",
+          "property": "refProvDistrictId"
+        }
+      ]
+    }
+  ]
+}
