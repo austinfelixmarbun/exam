@@ -54,7 +54,7 @@ export class UserRoleComponent implements OnInit {
     this.refUserObj = new RefUserObj();
     this.refEmpObj = new RefEmpObj();
 
-    this.refUserObj.refUserId = this.refUserId;
+    // this.refUserObj.refUserId = this.refUserId;
 
     this.httpClient.post(urlGetUser, this.refUserObj).subscribe(
       (response) => {

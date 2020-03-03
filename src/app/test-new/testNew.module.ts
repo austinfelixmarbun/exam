@@ -13,7 +13,7 @@ import { UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcLookupGroupComponent } from './uc-lookup-group/uc-lookup-group.component';
 import { UcpagingModule } from "@adins/ucpaging";
 import { UcSubsectionModule } from "@adins/uc-subsection";
-import { UcaddressModule } from "@adins/ucaddress";
+// import { UcaddressModule } from "@adins/ucaddress";
 
 @NgModule({
     imports: [
@@ -25,7 +25,7 @@ import { UcaddressModule } from "@adins/ucaddress";
         UclookupgenericModule,
         UcpagingModule,
         UcSubsectionModule,
-        UcaddressModule
+        // UcaddressModule
     ],
     declarations: [
         Dummy1Component,

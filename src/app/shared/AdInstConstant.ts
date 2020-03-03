@@ -28,6 +28,7 @@ export class AdInsConstant {
   public static GetGeneralSettingPaging = "/GeneralSetting/GetGeneralSettingPaging";
   public static GetGeneralSettingById = environment.FoundationR3Url + "/GeneralSetting/GetGeneralSettingById";
   public static GetGeneralSettingValue = "/GeneralSetting/GetGeneralSettingValue";
+  public static GetGeneralSettingByCode = "/GeneralSetting/GetGeneralSettingByCode";
 
 
   //REF OFFICE
@@ -111,6 +112,7 @@ export class AdInsConstant {
   public static EditRefEmp = "/RefEmp/EditRefEmp";
   public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
   public static AddEmpBankAcc = "/EmpBankAcc/AddEmpBankAcc";
+  public static EditEmpBankAcc = "EmpBankAcc/EditEmpBankAcc";
   public static GetEmpBankAccByRefEmpId = "/EmpBankAcc/GetEmpBankAccByRefEmpId";
   public static AddRefEmpAndEmpBankAcc = "/RefEmp/AddRefEmpAndEmpBankAcc";
   public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
@@ -136,6 +138,8 @@ export class AdInsConstant {
   public static ValidatePwd = "/UserManagement/ValidatePwd";
   public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
   public static ResetPassword = "/UserManagement/ResetPassword";
+  public static AddRefUserR3 = "/RefUser/AddRefUser";
+  public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
 
   //REF-ROLE
   public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";

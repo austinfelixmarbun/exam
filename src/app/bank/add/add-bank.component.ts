@@ -55,7 +55,7 @@ export class BankAddComponent implements OnInit {
             this.apiUrl = this.settingUrl + AdInsConstant.GetRefBankByRefBankIdAsync;
             this.BankAddForm.controls.bankCode.disable();
             var bankObj = new RefBankObj();
-            bankObj.refBankId = this.param;
+            // bankObj.refBankId = this.param;
             
             this.http.post(this.apiUrl, bankObj).subscribe(
                 (response) => {
@@ -79,8 +79,8 @@ export class BankAddComponent implements OnInit {
             this.editUrl = this.settingUrl + AdInsConstant.EditRefBank;
             this.bankObj = new RefBankObj();
             this.bankObj = this.BankAddForm.value;
-            this.bankObj.bankCode = this.result.BankCode;
-            this.bankObj.refBankId = this.param;
+            // this.bankObj.bankCode = this.result.BankCode;
+            // this.bankObj.refBankId = this.param;
             this.bankObj.RowVersion  = this.result.RowVersion;
             // if (this.isActive == false) {
             //     this.bankObj.isActive = false;
@@ -101,14 +101,14 @@ export class BankAddComponent implements OnInit {
             this.editUrl = this.settingUrl + AdInsConstant.AddRefBankAsync;
             this.bankObj = new RefBankObj();
             this.bankObj = this.BankAddForm.value;
-            this.bankObj.refBankId = "0";
+            // this.bankObj.refBankId = "0";
             this.bankObj.RowVersion = "";
-            if (this.bankObj.isActive == 0 ) {
-                this.bankObj.isActive = false;
-            }
-            else {
-                this.bankObj.isActive = true;
-            }
+            // if (this.bankObj.isActive == 0 ) {
+            //     this.bankObj.isActive = false;
+            // }
+            // else {
+            //     this.bankObj.isActive = true;
+            // }
 
             this.http.post(this.editUrl, this.bankObj).subscribe((response) => {
                 this.toastr.successMessage(response['message']);

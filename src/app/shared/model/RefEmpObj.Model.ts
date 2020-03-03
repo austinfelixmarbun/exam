@@ -20,8 +20,8 @@ export class RefEmpObj {
     PhnExt3: any;
     FaxArea: any;
     Fax: any;
-    MobilePhn1: any;
-    MobilePhn2: any;
+    MobilePhnNo1: any;
+    MobilePhnNo2: any;
     Email1: any;
     Email2: any;
     IsExt: any;
