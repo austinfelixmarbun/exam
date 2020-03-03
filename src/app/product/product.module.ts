@@ -8,6 +8,10 @@ import { UcSubsectionModule } from "@adins/uc-subsection";
 import { UcpagingModule } from "@adins/ucpaging";
 import { ProductHOPagingComponent } from './product-HO/product-ho-paging/product-ho-paging.component';
 import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-add.component';
+import { ProductHoAdddetailComponent } from './product-HO/product-ho-adddetail/product-ho-adddetail.component';
+import { GeneralDataComponent } from './product-HO/product-ho-adddetail/general-data/general-data.component';
+import { ProductComponentComponent } from './product-HO/product-ho-adddetail/product-component/product-component.component';
+import { OfficeMemberComponent } from './product-HO/product-ho-adddetail/office-member/office-member.component';
 
 @NgModule({
     imports: [
@@ -22,7 +26,8 @@ import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-ad
     ],
     declarations: [
         ProductHOPagingComponent,
-        ProductHOAddComponent
+        ProductHOAddComponent,
+        ProductHoAdddetailComponent
     ]
 })
 export class ProductModule { }

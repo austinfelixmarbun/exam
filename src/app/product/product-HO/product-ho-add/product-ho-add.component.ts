@@ -142,7 +142,7 @@ export class ProductHOAddComponent implements OnInit {
         (response) => {
           var TempResp=response;
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/product/HOadddetail"], { queryParams: { "ProdHId": TempResp.DraftProdHId } });
+          this.router.navigate(["/product/HOadddetail"], { queryParams: { "ProdHId": TempResp["DraftProdHId"] } });
           console.log(response);
         },
         (error) => {
