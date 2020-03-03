@@ -3,21 +3,22 @@ import { CommonModule } from '@angular/common';
 import { OfficeComponent } from 'app/office/office.component';
 import { OfficeRoutingModule } from 'app/office/office-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { SharingModule } from 'app/shared/sharing.module';
 import { OfficeAddComponent } from 'app/office/office-add/office-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OfficeEmpPosComponent } from 'app/office/office-emp-pos/office-emp-pos.component';
 import { OfficeEmpPosAddComponent } from 'app/office/office-emp-pos/office-emp-pos-add/office-emp-pos-add.component';
-import { OfficeAreaAddEditComponent } from 'app/office/office-area/office-area-add-edit/office-area-add-edit.component';
-import { OfficeAreaPagingComponent } from 'app/office/office-area/office-area-paging/office-area-paging.component';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { OfficeGroupMemberComponent } from './office-group-member/office-group-member.component';
-import { UcpagingComponent, UcpagingModule } from '@adins/ucpaging';
+import { UcpagingModule } from '@adins/ucpaging';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-group-member-add.component';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
+import { OfficeAreaMemberAddComponent } from './office-area/office-area-member/office-area-member-add/office-area-member-add.component';
+import { OfficeAreaAddEditComponent } from './office-area/office-area-add-edit/office-area-add-edit.component';
+import { OfficeAreaPagingComponent } from './office-area/office-area-paging/office-area-paging.component';
+import { OfficeAreaMemberPagingComponent } from './office-area/office-area-member/office-area-member-paging/office-area-member-paging.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-
     UcpagingModule,
     UcSubsectionModule,
     SharingComponentModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UcviewgenericModule
   ],
   declarations: [
     OfficeComponent,
@@ -41,7 +43,9 @@ import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-
     OfficeAreaAddEditComponent,
     OfficeAreaPagingComponent,
     OfficeGroupMemberComponent,
-    OfficeGroupMemberAddComponent
+    OfficeGroupMemberAddComponent,
+    OfficeAreaMemberPagingComponent,
+    OfficeAreaMemberAddComponent
   ]
 })
 export class OfficeModule { }

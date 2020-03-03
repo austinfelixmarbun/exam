@@ -73,8 +73,8 @@
           }
     ],
     "querystring": {
-        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.OFFICE_ADDR AS OfficeAddr , B.OFFICE_NAME AS OfficeParent, A.IS_ACTIVE AS IsActive, A.REF_OFFICE_ID AS RefOfficeId",
-        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_ID = A.PARENT_ID "
+        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.OFFICE_ADDR AS OfficeAddr , B.OFFICE_NAME AS OfficeParent, A.IS_ACTIVE AS IsActive, A.MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, A.REF_OFFICE_ID AS RefOfficeId",
+        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_ID = A.PARENT_ID"
     },
     "headerList": [
         {
@@ -161,7 +161,13 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/office/add"
+                    "path": "/office/add",
+                    "param": [
+                        {
+                            "type": "RefOfficeId",
+                            "property": "RefOfficeId"
+                        }
+                    ]
                 }
             ]
         },

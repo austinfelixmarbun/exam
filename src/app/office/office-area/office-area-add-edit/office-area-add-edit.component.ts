@@ -35,7 +35,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
   OfficeAreaForm = this.fb.group({
       AreaCode: ['', Validators.required],
       AreaName:  ['', Validators.required],
-      IsActive:  [''],
+      IsActive:  [false],
       RowVersion: [''] 
   })
 
@@ -64,7 +64,6 @@ export class OfficeAreaAddEditComponent implements OnInit {
   }
 
   SaveForm(){
-      console.log("ini save formnya");
       this.refOfficeAreaObj = new RefOfficeAreaObj();
       this.refOfficeAreaObj = this.OfficeAreaForm.value;
       if (this.mode == "edit") {
@@ -75,7 +74,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
           this.http.post(this.editUrl, this.refOfficeAreaObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
-                  this.router.navigateByUrl('/office/officeArea');
+                  this.router.navigateByUrl('/office/OfficeArea');
               },
               (error) => {
                   console.log(error);
@@ -87,7 +86,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
           this.http.post(this.editUrl, this.refOfficeAreaObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
-                  this.router.navigateByUrl('/office/officeArea');
+                  this.router.navigateByUrl('/office/OfficeArea');
               },
               (error) => {
                   console.log(error);

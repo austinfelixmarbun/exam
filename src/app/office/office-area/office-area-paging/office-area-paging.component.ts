@@ -1,5 +1,4 @@
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';

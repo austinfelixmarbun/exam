@@ -36,7 +36,7 @@ export class AddBusinessUnitComponent implements OnInit {
         BizUnitCode: ['', Validators.required],
         BizUnitName:  ['', Validators.required],
         Descr:  [''],
-        IsActive:  [''],
+        IsActive:  [false],
         RowVersion: ['']    
     })
 
