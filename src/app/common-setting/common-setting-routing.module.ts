@@ -76,14 +76,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'currency/paging',
+        path: 'Currency/paging',
         component: CurrencyComponent,
         data: {
           title: 'Currency'
         },
       },
       {
-        path: 'currency/add',
+        path: 'Currency/add',
         component: CurrencyAddComponent,
         data: {
           title: 'Currency add'
