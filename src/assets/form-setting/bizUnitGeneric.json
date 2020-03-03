@@ -1,4 +1,4 @@
 {
-    "propertyId": "refBizUnitId",
-    "propertyName": "bizUnitName"
+    "propertyId": "BusinessUnitName",
+    "propertyName": "BusinessUnitName"
 }
