@@ -5,10 +5,10 @@ export const ROUTES: RouteInfo[] = [
 
   { path: '/dashboard/dash-board', title: 'Menu', icon: 'ft-home', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
   {
-    path: '', title: 'Organization Struct', icon: 'ft-bar-chart-2', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    path: '', title: 'Organization', icon: 'ft-bar-chart-2', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
-      { path: '/organization/businessunit', title: 'Business unit', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/organization/refjobtitle', title: 'Job Title', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Organization/BusinessUnit', title: 'Business unit', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Organization/JobTitle', title: 'Job Title', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/organization/organization', title: 'Organization', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
 
     ]
@@ -60,9 +60,18 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '', title: 'System Setting', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
-      { path: '/CommonSetting/GeneralSetting', title: 'General Setting', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       {
-        
+        path: '', title: 'Master Setting', icon: '', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+        submenu: [
+          { path: '/CommonSetting/GeneralSetting', title: 'General Setting', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/Master', title: 'Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/RefStatus/paging', title: 'Status', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/IndustryType/paging', title: 'Industry Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/Currency/paging', title: 'Currency', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/Profession/paging', title: 'Profession', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+        ]
+      },
+      {
         path: '', title: 'Security', icon: '', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
           { path: '/systemSetting/role', title: 'Role Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

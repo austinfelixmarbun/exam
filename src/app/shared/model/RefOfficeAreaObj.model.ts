@@ -1,8 +1,8 @@
 export class RefOfficeAreaObj {
-  refOfficeAreaId: any;
-  areaCode: any;
-  areaName: any;
-  isActive: any;
+  RefOfficeAreaId: any;
+  AreaCode: any;
+  AreaName: any;
+  IsActive: any;
 
-  constructor() { this.refOfficeAreaId = 0 }
+  constructor() { this.RefOfficeAreaId = 0 }
 }

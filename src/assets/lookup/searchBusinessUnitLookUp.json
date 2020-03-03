@@ -1,0 +1,67 @@
+{
+    "title": "LOOK UP - BUSINESS UNIT",
+    "exportExcel": false, 
+    "component": [
+        {
+            "type": "textbox",
+            "name": "BIZ_UNIT_CODE",
+            "id": "BusinessUnitCodeId",
+            "value": "",
+            "label": "Business Unit code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "BIZ_UNIT_NAME",
+            "id": "BusinessUnitCodeName",
+            "value": "",
+            "label": "Business Unit Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring" : {
+        "select" : "SELECT REF_BIZ_UNIT_ID As RefBizUnitId,BIZ_UNIT_CODE AS BusinessUnitCode, BIZ_UNIT_NAME AS BusinessUnitName",
+        "from" : "FROM dbo.REF_BIZ_UNIT WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "BUSINESS UNIT CODE",
+            "name": "BusinessUnitCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "BUSINESS UNIT NAME",
+            "name": "BusinessUnitName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "SELECT"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "BusinessUnitCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "BusinessUnitName"
+        },
+        {
+            "type" : "action",
+            "position" : "center",
+            "action" : [
+                {
+                    "type" : "select",
+                    "property" : "RefBizUnitId"
+                }
+            ]
+        }
+    ]  
+}

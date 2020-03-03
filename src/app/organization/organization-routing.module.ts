@@ -21,14 +21,14 @@ const routes: Routes = [
     path: '',canActivate: [AuthGuard] ,
     children: [
       {
-        path: 'refjobtitle',
+        path: 'JobTitle',
         component: RefJobTitleComponent,
         data: {
           title: 'Job Title'
         },
       },
       {
-        path: 'refjobtitle/add',
+        path: 'JobTitle/detail',
         component: RefJobTitleAddComponent,
         data: {
           title: 'Job Title add'

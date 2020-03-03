@@ -57,13 +57,13 @@
             "name": "BizUnitName"
         },
         {
-            "type": "sort",
+            "type": "label",
             "position": "center",
             "label": "ACTIVE",
             "name": "IsActive"
         },
         {
-            "type": "sort",
+            "type": "label",
             "position": "center",
             "label": "BUSINESS UNIT MEMBER"
         },
