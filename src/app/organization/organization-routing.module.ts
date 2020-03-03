@@ -56,14 +56,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'businessunit',
+        path: 'BusinessUnit',
         component: BusinessUnitComponent,
         data: {
           title: 'Business Unit'
         },
       },
       {
-        path: 'businessunit/add',
+        path: 'BusinessUnit/detail',
         component: AddBusinessUnitComponent,
         data: {
           title: 'Add Business Unit'
@@ -119,7 +119,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'businessunit/member',
+        path: 'BusinessUnit/member',
         component: MemberBusinessUnitComponent,
         data: {
           title: 'Business Unit Member'
