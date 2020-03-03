@@ -43,6 +43,10 @@ import { MasterTypePagingComponent } from './master-type/master-type-paging/mast
 import { FormModule } from 'app/forms/forms.module';
 import { RefIndustryTypeComponent } from './ref-industry-type/ref-industry-type.component';
 import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
+import { BankComponent } from 'app/bank/bank.component';
+import { BankAddComponent } from 'app/bank/add/add-bank.component';
+import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
 
 @NgModule({
   imports: [
@@ -90,6 +94,10 @@ import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry
     ProfessionComponent,
     ProfessionAddEditComponent,
     RefIndustryTypeComponent,
+    BankComponent,
+    BankAddComponent,
+    ZipcodeComponent,
+    ZipcodeAddComponent,
     RefIndustryTypeDetailComponent
   ],
   providers: [

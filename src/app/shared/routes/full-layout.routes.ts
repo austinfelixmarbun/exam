@@ -28,10 +28,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: './organization/organization.module#OrganizationModule'
   },
   {
-    path : 'bank',
-    loadChildren: './bank/bank.module#BankModule'
-  },
-  {
     path: 'customer',
     loadChildren: './customer/customer.module#CustomerModule'
   },

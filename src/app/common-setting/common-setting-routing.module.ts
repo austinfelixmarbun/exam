@@ -30,6 +30,10 @@ import { ProfessionComponent } from './profession/profession-paging/profession.c
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
 import { RefIndustryTypeComponent } from './ref-industry-type/ref-industry-type.component';
 import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
+import { BankComponent } from 'app/bank/bank.component';
+import { BankAddComponent } from 'app/bank/add/add-bank.component';
+import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
 
 const routes: Routes = [
   {
@@ -250,6 +254,34 @@ const routes: Routes = [
         component: RefIndustryTypeDetailComponent,
         data: {
           title: 'Industry Type Detail'
+        },
+      },
+      {
+        path: 'Bank/paging',
+        component: BankComponent,
+        data: {
+          title: 'Bank Paging'
+        },
+      },
+      {
+        path: 'Bank/detail',
+        component: BankAddComponent,
+        data: {
+          title: 'Bank Detail'
+        },
+      },
+      {
+        path: 'Zipcode/paging',
+        component: ZipcodeComponent,
+        data: {
+          title: 'Zipcode Paging'
+        },
+      },
+      {
+        path: 'Zipcode/detail',
+        component: ZipcodeAddComponent,
+        data: {
+          title: 'Zipcode Detail'
         },
       }
     ]
