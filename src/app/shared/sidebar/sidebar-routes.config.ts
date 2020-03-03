@@ -38,6 +38,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [
           { path: '/CommonSetting/GeneralSetting', title: 'General Setting', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/Bank/paging', title: 'Bank', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/RefProvince/paging', title: 'Province', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/Zipcode/paging', title: 'Zipcode', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/Master', title: 'Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/RefStatus/paging', title: 'Status', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

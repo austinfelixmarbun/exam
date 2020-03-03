@@ -194,28 +194,28 @@ const routes: Routes = [
         },
       },
       {
-        path: 'province/paging',
+        path: 'RefProvince/paging',
         component: ProvinceComponent,
         data: {
           title: 'Province Paging'
         },
       },
       {
-        path: 'province/detail',
+        path: 'RefProvince/detail',
         component: ProvinceAddEditComponent,
         data: {
           title: 'Province Add Edit'
         },
       },
       {
-        path: 'district/paging',
+        path: 'District/paging',
         component: DistrictComponent,
         data: {
           title: 'District Paging'
         },
       },
       {
-        path: 'district/detail',
+        path: 'District/detail',
         component: DistrictAddEditComponent,
         data: {
           title: 'District Add Edit'
