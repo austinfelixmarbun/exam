@@ -1,0 +1,122 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+          <div class="row">
+              <div class="col-md-8">
+                  <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Negative Asset Information</h4>
+              </div>
+              <div class="col-md-4" style="text-align-last: right">
+                <button type="button" class="backButton" (click)="Back()" translate>
+                  <i class="ft-arrow-left"></i> Back
+                </button>
+              </div>
+            </div>
+        <form class="form form-horizontal" [formGroup]="AssetNegativeForm" #enjiForm="ngForm" novalidate
+          (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
+          <div class="form-body">
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel" for="AssetTypeId">Asset Type Name</label>
+              <div class="col-md-9">
+                <select formControlName="AssetTypeId" class="form-control" (change)="assetTypeChange($event)"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.AssetTypeId.invalid }"
+                  [attr.disabled]="pageType == 'edit' ? true : null">
+                  <option *ngFor="let item of assetTypeList?.ReturnObject" [value]="item.AssetTypeId">
+                    {{item.AssetTypeName}}
+                  </option>
+                </select>
+                <show-errors [control]="AssetNegativeForm.controls.AssetTypeId" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel" for="RefEconomicSectorId" translate>Full Asset Name</label>
+              <div class="col-md-9">
+                <lib-uclookupgeneric [lookupInput]="inputLookupObj" [parentForm]='AssetNegativeForm' [enjiForm]='enjiForm' [identifier]="'FullAssetName'"
+                    (lookup)="getLookupAssetMasterResponse($event)"></lib-uclookupgeneric>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel" for="SerialNo1" translate>Serial No. 1</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput" formControlName="SerialNo1" 
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.SerialNo1.invalid }"
+                  [attr.disabled]="pageType == 'edit' ? true : null">
+                <show-errors [control]="AssetNegativeForm.controls.SerialNo1" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adInsLabel" for="SerialNo2" translate>Serial No. 2</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput" formControlName="SerialNo2" 
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.SerialNo2.invalid }"
+                  [attr.disabled]="pageType == 'edit' ? true : null">
+                <show-errors [control]="AssetNegativeForm.controls.SerialNo2" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adInsLabel" for="SerialNo3" translate>Serial No. 3</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput" formControlName="SerialNo3" 
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.SerialNo3.invalid }"
+                  [attr.disabled]="pageType == 'edit' ? true : null">
+                <show-errors [control]="AssetNegativeForm.controls.SerialNo3" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adInsLabel" for="SerialNo4" translate>Serial No. 4</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput" formControlName="SerialNo4" 
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.SerialNo4.invalid }"
+                  [attr.disabled]="pageType == 'edit' ? true : null">
+                <show-errors [control]="AssetNegativeForm.controls.SerialNo4" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adInsLabel" for="SerialNo5" translate>Serial No. 5</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput" formControlName="SerialNo5" 
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.SerialNo5.invalid }"
+                  [attr.disabled]="pageType == 'edit' ? true : null">
+                <show-errors [control]="AssetNegativeForm.controls.SerialNo5" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel" for="MrSourceTypeCode">Negative Source</label>
+              <div class="col-md-9">
+                <select formControlName="MrSourceTypeCode" class="form-control"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.MrSourceTypeCode.invalid }">
+                  <option *ngFor="let item of negativeAssetSourceList?.ReturnObject" [value]="item.Key">
+                    {{item.Value}}
+                  </option>
+                </select>
+                <show-errors [control]="AssetNegativeForm.controls.MrSourceTypeCode" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adInsLabel" for="isActive">Active Status</label>
+              <div class="col-md-9">
+                <input type="checkbox" formControlName="IsActive" [attr.disabled]="pageType == 'add' ? true : null">
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel" for="Notes">Notes</label>
+              <div class="col-md-9">
+                <textarea class="form-control adInsInput" formControlName="Notes" required 
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.Notes.invalid }"></textarea>
+                <show-errors [control]="AssetNegativeForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <!-- <button *ngIf=" type == 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
+              <i class="fa fa-arrow-circle-left"></i> Back
+            </button> -->
+            <button type="submit" class="btn btn-raised btn-primary">
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

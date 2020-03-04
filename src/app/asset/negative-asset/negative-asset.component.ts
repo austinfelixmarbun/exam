@@ -1,20 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UcpagingComponent } from '@adins/ucpaging';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
-import { DecimalPipe } from '@angular/common';
-import { UcpagingComponent } from '@adins/ucpaging';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 
 @Component({
-  selector: 'app-master-paging',
-  templateUrl: './master-paging.component.html',
-  providers: [NGXToastrService, DecimalPipe]
+  selector: 'app-negative-asset',
+  templateUrl: './negative-asset.component.html',
+  styleUrls: ['./negative-asset.component.scss'],
+  providers: [NGXToastrService]
 })
-export class MasterPagingComponent implements OnInit {
-
+export class NegativeAssetComponent implements OnInit {
   @ViewChild(UcpagingComponent) ucpaging;
   inputPagingObj: any;
   navigationSubscription: any;
@@ -26,11 +23,11 @@ export class MasterPagingComponent implements OnInit {
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/search/searchMaster.json";
+    this.inputPagingObj._url = "./assets/ucpaging/searchNegativeAsset.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObj.deleteUrl = "/RefMaster/DeleteRefMaster";
-    this.inputPagingObj.pagingJson = "./assets/search/searchMaster.json";
+    this.inputPagingObj.deleteUrl = "";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNegativeAsset.json";
   }
 
 }

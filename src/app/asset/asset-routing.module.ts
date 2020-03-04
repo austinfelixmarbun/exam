@@ -11,6 +11,8 @@ import { AssetDocumentPagingComponent } from './asset-document/asset-document-pa
 import { AssetDocumentInformationComponent } from './asset-document/asset-document-information/asset-document-information.component';
 import { AssetDocumentMasterPagingComponent } from './asset-document-master/asset-document-master-paging/asset-document-master-paging.component';
 import { AssetDocumentMasterPagingInformationComponent } from './asset-document-master/asset-document-master-paging-information/asset-document-master-paging-information.component';
+import { NegativeAssetComponent } from './negative-asset/negative-asset.component';
+import { NegativeAssetDetailComponent } from './negative-asset/negative-asset-detail/negative-asset-detail.component';
  
 const routes: Routes = [
     {
@@ -79,8 +81,21 @@ const routes: Routes = [
                 data: {
                     title: 'Asset DocumentInformation'
                 },
+            },
+            {
+                path: 'NegativeAsset/Paging',
+                component: NegativeAssetComponent,
+                data: {
+                    title: 'Negative Asset'
+                },
+            },
+            {
+                path: 'NegativeAsset/Detail',
+                component: NegativeAssetDetailComponent,
+                data: {
+                    title: 'Negative Asset'
+                },
             }
-
         ]
     }
 ];
