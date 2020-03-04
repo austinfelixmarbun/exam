@@ -79,7 +79,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/organization/refjobtitle/add",
+          "path": "/Organization/JobTitle/detail",
           "param": [
             {
               "type": "refJobTitleId",

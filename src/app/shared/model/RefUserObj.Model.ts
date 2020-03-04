@@ -1,15 +1,21 @@
 export class RefUserObj {
-  refUserId: any;
-  username: any;
-  password: any;
-  isLockedOut: any;
-  isActive: any;
-  refEmpId: any;
-  newPass: any;
-  oldPass: any;
-  newPassVerif: any;
-  isReset: boolean;
-  loggedInMethod: any;
-
-  constructor() { this.refUserId = 0 }
+  RefUserId: any;
+  Username: any;
+  Password: any;
+  RefEmpId: any;
+  FailPwdCount: any;
+  IsLockedOut: any;
+  IsActive: any;
+  IsLoggedIn: any;
+  LastIpAddress: any;
+  LastLoggedIn: any;
+  LastLoggedOut: any;
+  LoggedInMethod: any;
+  ExpiredDt: any;
+  Key: any;
+  Token: any;
+  LockedOutReason: any;
+  LockedUntil: any;
+  RowVersion: any;
+  constructor() { this.RefUserId = 0, this.RowVersion = "" }
 }
