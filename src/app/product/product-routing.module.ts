@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProdOfferingAddComponent } from './prod-offering/prod-offering-add/prod-offering-add.component';
 import { ProdOfferingPagingComponent } from './prod-offering/prod-offering-paging/prod-offering-paging.component';
 import { ProdOfferingAddDetailComponent } from './prod-offering/prod-offering-add-detail/prod-offering-add-detail.component'
+import { ProductHOPagingComponent } from './product-HO/product-ho-paging/product-ho-paging.component';
+import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-add.component';
 
 const routes: Routes = [
     {
