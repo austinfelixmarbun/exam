@@ -7,85 +7,31 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '', title: 'Organization', icon: 'ft-bar-chart-2', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
+      { path: '/Office/paging', title: 'Office', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Organization/BusinessUnit', title: 'Business unit', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Organization/JobTitle', title: 'Job Title', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/organization/organization', title: 'Organization', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/Employee/paging', title: 'Employee', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/SystemSetting/Role', title: 'Role', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
 
     ]
   },
   {
-    path: '', title: 'Customer', icon: 'ft-user-plus', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/customer', title: 'Customer Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    ]
-  },
-  {
-    path: '', title: 'Office', icon: 'ft-airplay', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/office', title: 'Office  Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    ]
-  },
-  {
-    path: '', title: 'Bank', icon: 'ft-airplay', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/bank', title: 'Bank Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    ]
-  }, {
-    path: '', title: 'Zipcode', icon: 'ft-airplay', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/zipcode', title: 'Zipcode Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    ]
-  },
-  {
-    path: '', title: 'Employee', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/employee', title: 'Employee  Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    ]
-  },
-  // {
-  //     path: '', title: 'Leave Management', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-  //     submenu: [
-  //         { path: '/leaveManagament/request', title: 'Request', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-  //         { path: '/leaveManagament/verification', title: 'Verification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-  //         { path: '/leaveManagament/inquiry', title: 'Inquiry', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
-  //     ]
-  // },
-  {
-    path: '', title: 'Marketing', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/prospect', title: 'Prospect Request', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/prospectVerif', title: 'Prospect Verification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    ]
-  },
-  {
     path: '', title: 'System Setting', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      {
-        path: '', title: 'Master Setting', icon: '', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
           { path: '/CommonSetting/GeneralSetting', title: 'General Setting', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/Holiday', title: 'Holiday Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/WorkingHour', title: 'Working Hour', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/Bank/paging', title: 'Bank', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/RefProvince/paging', title: 'Province', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/Zipcode/paging', title: 'Zipcode', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/Master', title: 'Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/RefStatus/paging', title: 'Status', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/IndustryType/paging', title: 'Industry Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/CommonSetting/EconomicSector/paging', title: 'Economic Sector', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/Currency/paging', title: 'Currency', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/Profession/paging', title: 'Profession', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
         ]
-      },
-      {
-        path: '', title: 'Security', icon: '', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-        submenu: [
-          { path: '/systemSetting/role', title: 'Role Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/systemSetting/refUser', title: 'User Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-        ]
-      }
-    ]
-  },
-  {
-    path: '', title: 'Holiday', icon: 'ft-airplay', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/commonSetting/holiday', title: 'Bank Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    ]
-  },
+  }
   
   // {
   //     path: '', title: 'LOS', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,

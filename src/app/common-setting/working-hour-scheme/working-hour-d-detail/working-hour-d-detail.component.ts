@@ -123,16 +123,16 @@ export class WorkingHourDDetailComponent implements OnInit {
     this.items = this.WorkingHourSchmDForm.get('items') as FormArray;
     this.http.post(this.getSchmDUrl, this.workingHourSchmHObj).subscribe(
         response => {
-          if(response["WorkingHourSchmD"].length > 0){
+          if(response["ReturnObject"].length > 0){
             this.isEdit = true;
-            for (var i = 0; i < response["WorkingHourSchmD"].length; i++) {
+            for (var i = 0; i < response["ReturnObject"].length; i++) {
               var eachDayDetail = this.fb.group({
-                Label: response["WorkingHourSchmD"][i].WorkingHourSchmDay,
-                WorkingHourSchmDay: response["WorkingHourSchmD"][i].WorkingHourSchmDay,
-                WorkingHourFrom1:response["WorkingHourSchmD"][i].WorkingHourFrom1,
-                WorkingHourTo1: response["WorkingHourSchmD"][i].WorkingHourTo1,
-                WorkingHourFrom2: response["WorkingHourSchmD"][i].WorkingHourFrom2,
-                WorkingHourTo2: response["WorkingHourSchmD"][i].WorkingHourTo2
+                Label: response["ReturnObject"][i].WorkingHourSchmDay,
+                WorkingHourSchmDay: response["ReturnObject"][i].WorkingHourSchmDay,
+                WorkingHourFrom1:response["ReturnObject"][i].WorkingHourFrom1,
+                WorkingHourTo1: response["ReturnObject"][i].WorkingHourTo1,
+                WorkingHourFrom2: response["ReturnObject"][i].WorkingHourFrom2,
+                WorkingHourTo2: response["ReturnObject"][i].WorkingHourTo2
               }) as FormGroup;
               this.items.push(eachDayDetail);
             }
@@ -177,7 +177,7 @@ export class WorkingHourDDetailComponent implements OnInit {
     this.http.post(this.addUrl, this.listWorkingHourSchmDObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/commonSetting/workingHour"]);
+        this.router.navigate(["/CommonSetting/WorkingHour"]);
       },
       error => {
         console.log(error);

@@ -95,7 +95,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/organization/businessunit/member",
+                    "path": "/Organization/BusinessUnit/member",
                     "param": [
                         {
                             "type": "RefBizUnitId",
@@ -111,7 +111,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/organization/businessunit/add",
+                    "path": "/Organization/BusinessUnit/detail",
                     "param": [
                         {
                             "type": "RefBizUnitId",

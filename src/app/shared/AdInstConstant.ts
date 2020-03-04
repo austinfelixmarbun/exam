@@ -333,22 +333,22 @@ export class AdInsConstant {
   public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
 
   //UPLOAD MONITORING FOUNDATION
-  public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging"
+  public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging";
 
   //UPLOAD TYPE
-  public static GetUploadTypeByUploadTypeId = "/UploadType/GetUploadTypeByUploadTypeId"
-  public static GetUploadTypePaging = "/UploadType/GetUploadTypePaging"
+  public static GetUploadTypeByUploadTypeId = "/UploadType/GetUploadTypeByUploadTypeId";
+  public static GetUploadTypePaging = "/UploadType/GetUploadTypePaging";
 
   //UPLOAD SETTING
-  public static GetUploadSettingHIdByUploadTypeId = "/UploadSetting/GetUploadSettingHIdByUploadTypeId"
-  public static GetListUploadSettingDIdByUploadSettingHId = "/UploadSetting/GetListUploadSettingDIdByUploadSettingHId"
-  public static GetListUploadSettingDIdByUploadTypeId = "/UploadSetting/GetListUploadSettingDIdByUploadTypeId"
-  public static AssignRoleToUploadSetting = "/UploadSetting/AssignRoleToUploadSetting"
-  public static GetListRefRoleByUploadTypeId = "/UploadSetting/GetListRefRoleByUploadTypeId"
-  public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId'
+  public static GetUploadSettingHIdByUploadTypeId = "/UploadSetting/GetUploadSettingHIdByUploadTypeId";
+  public static GetListUploadSettingDIdByUploadSettingHId = "/UploadSetting/GetListUploadSettingDIdByUploadSettingHId";
+  public static GetListUploadSettingDIdByUploadTypeId = "/UploadSetting/GetListUploadSettingDIdByUploadTypeId";
+  public static AssignRoleToUploadSetting = "/UploadSetting/AssignRoleToUploadSetting";
+  public static GetListRefRoleByUploadTypeId = "/UploadSetting/GetListRefRoleByUploadTypeId";
+  public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId';
 
   // GENERIC
-  public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
+  public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL";
 
 
   //asset accesory
@@ -368,18 +368,46 @@ export class AdInsConstant {
   public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory"
   public static GetActiveAssetCategoryValue = environment.FoundationR3Url + "/AssetCategory/GetListActiveAssetCategoryValue"
 
+//   public static AddNewAssetAccesory = "/AssetAccessory/AddAssetAccessory";
+//   public static EditAssetAccessory = "/AssetAccessory/EditAssetAccessory";
+//   public static GetAssetAccessorybyAssetAccesoryCode = "/AssetAccessory/GetAssetAccessoryByCode";
+//   public static GetAssetAccessorybyAssetAccessoryId = "/AssetAccessory/GetAssetAccessoryById";
+//   public static GetlistAssetAccessorybyAssetTypeId = "/AssetAccessory/GetListAssetAccessoryByAssetTypeId";
+//   public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory";
+// //asset category
+//   public static AddNewAssetCategory = "/AssetCategory/AddAssetCategory";
+//   public static EditAssetCategory = "/AssetCategory/EditAssetCategory";
+//   public static GetAssetCategoryByAssetCategoryCode = "/AssetCategory/GetAssetCategoryByCode";
+//   public static GetAssetCategorybyAssetCategoryId = "/AssetCategory/GetAssetCategoryById";
+//   public static GetlistAssetCategorybyAssetTypeId = "/AssetCategory/GetListAssetCategoryByAssetTypeId";//;
+//   public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory";
   //asset doc list
-  public static AddNewAssetDocList = "/AssetDocList/AddAssetDocList"
-  public static EditAssetDocList = "/AssetDocList/EditAssetDocList"
-  public static GetAssetDocListByAssetDocListId = "/AssetDocList/GetAssetDocListById"
-  public static GetlistAssetDocListByAssetTypeId = "/AssetDocList/GetListAssetDocListByAssetTypeId"
+  public static AddNewAssetDocList = "/AssetDocList/AddAssetDocList";
+  public static EditAssetDocList = "/AssetDocList/EditAssetDocList";
+  public static GetAssetDocListByAssetDocListId = "/AssetDocList/GetAssetDocListById";
+  public static GetlistAssetDocListByAssetTypeId = "/AssetDocList/GetListAssetDocListByAssetTypeId";
   
   //asset ref doc
-  public static AddNewRefAssetDocData = "/RefAssetDoc/AddRefAssetDoc"
-  public static EditRefAssetDocData = "/RefAssetDoc/EditRefAssetDoc"
-  public static GetRefAssetDocByAssetDocCode = "/RefAssetDoc/GetRefAssetDocByAssetDocCode"
-  public static GetRefAssetDocByRefAssetDocId = "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
-  public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc"
+  public static AddNewRefAssetDocData = "/RefAssetDoc/AddRefAssetDoc";
+  public static EditRefAssetDocData = "/RefAssetDoc/EditRefAssetDoc";
+  public static GetRefAssetDocByAssetDocCode = "/RefAssetDoc/GetRefAssetDocByAssetDocCode";
+  public static GetRefAssetDocByRefAssetDocId = "/RefAssetDoc/GetRefAssetDocByRefAssetDocId";
+  public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc";
+
+    // PRODUCT
+    public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
+    public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
+    public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
+    public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
+  
+    //PRODUCT OFFERING
+    public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
+    public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
+    public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
+
+    //REF REASON
+  public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
+  
   
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";

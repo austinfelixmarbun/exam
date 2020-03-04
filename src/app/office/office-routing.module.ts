@@ -30,14 +30,14 @@ const routes: Routes = [
         }
       },
       {
-        path: 'officeEmpPos',
+        path: 'OfficeEmpPos',
         component: OfficeEmpPosComponent,
         data: {
           title: 'Office Employee Position'
         }
       },
       {
-        path: 'officeEmpPosAdd',
+        path: 'OfficeEmpPosAdd',
         component: OfficeEmpPosAddComponent,
         data: {
           title: 'Office Employee Position Add'
@@ -51,14 +51,14 @@ const routes: Routes = [
         }
       },
       {
-        path: 'office-group-member',
+        path: 'Office-group-member',
         component: OfficeGroupMemberComponent,
         data: {
           title: 'Office Group Member'
         }
       },
       {
-        path: 'office-group-member-add',
+        path: 'Office-group-member-add',
         component: OfficeGroupMemberAddComponent,
         data: {
           title: 'Office Group Member Add'
