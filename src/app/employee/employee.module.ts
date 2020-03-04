@@ -20,6 +20,7 @@ import { UcpagingModule } from '@adins/ucpaging';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
 import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
+import { UcSubsectionModule } from '@adins/uc-subsection';
 
 @NgModule({
   imports: [
@@ -36,8 +37,7 @@ import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-pag
     LookuprefbankModule,
     LookupemployeeModule,
     ReactiveFormsModule,
-    EmployeeBusinessunitAddComponent,
-    EmployeeBusinessunitPagingComponent,
+    UcSubsectionModule,
     UcpagingModule,
     UclookupgenericModule
   ],
@@ -45,6 +45,8 @@ import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-pag
     EmployeePositionAddComponent,
     EmployeePositionComponent,
     EmployeeComponent,
+    EmployeeBusinessunitAddComponent,
+    EmployeeBusinessunitPagingComponent,
     EmployeeAddComponent,
     LeaveMaintenanceComponent,
     LeaveMaintenanceAddEditComponent

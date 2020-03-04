@@ -334,8 +334,8 @@ export class EmployeeAddComponent implements OnInit {
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/employee', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['/employee/detail']))
+          this.router.navigateByUrl('/Employee', { skipLocationChange: true }).then(() =>
+          this.router.navigate(['/Employee/detail']))
         },
         (error) => {
           console.log("Error");
@@ -351,7 +351,7 @@ export class EmployeeAddComponent implements OnInit {
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/employee/paging"]);
+          this.router.navigate(["/Employee/paging"]);
         },
         (error) => {
           console.log("Error");

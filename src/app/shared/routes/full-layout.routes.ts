@@ -20,7 +20,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './office/office.module#OfficeModule'
   },
   {
-    path: 'employee',
+    path: 'Employee',
     loadChildren: './employee/employee.module#EmployeeModule'
   },
   {
