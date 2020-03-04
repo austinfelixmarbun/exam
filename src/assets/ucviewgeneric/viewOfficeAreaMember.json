@@ -1,0 +1,26 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "Area Info",
+        "subSectionTitle": "Area Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Area Code",
+            "property": "AreaCode"
+          },
+          {
+            "type": "text",
+            "label": "Area Name",
+            "property": "AreaName"
+          } 
+        ],
+        "querystring": {
+            "select": "SELECT AREA_CODE AS AreaCode, AREA_NAME AS AreaName",
+            "from": "FROM dbo.REF_OFFICE_AREA WITH(NOLOCK) ", 
+            "where": "WHERE REF_OFFICE_AREA_ID = {0}" 
+        }
+      }
+    ]
+  }

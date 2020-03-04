@@ -41,6 +41,12 @@ import { ProfessionComponent } from './profession/profession-paging/profession.c
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
 import { MasterTypePagingComponent } from './master-type/master-type-paging/master-type-paging.component';
 import { FormModule } from 'app/forms/forms.module';
+import { RefIndustryTypeComponent } from './ref-industry-type/ref-industry-type.component';
+import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
+import { BankComponent } from 'app/bank/bank.component';
+import { BankAddComponent } from 'app/bank/add/add-bank.component';
+import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
 
 @NgModule({
   imports: [
@@ -86,7 +92,13 @@ import { FormModule } from 'app/forms/forms.module';
     DistrictAddEditComponent,
     RefStatusPagingComponent,
     ProfessionComponent,
-    ProfessionAddEditComponent
+    ProfessionAddEditComponent,
+    RefIndustryTypeComponent,
+    BankComponent,
+    BankAddComponent,
+    ZipcodeComponent,
+    ZipcodeAddComponent,
+    RefIndustryTypeDetailComponent
   ],
   providers: [
     {

@@ -1,84 +1,176 @@
 {
-    "title": "Leave Maintenance",
-    "exportExcel": true,
-    "component": [
+  "title": "Employee Leave Management",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "B.EMP_NO",
+      "id": "empNoId",
+      "value": "",
+      "label": "Employee No",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "dropdown",
+      "name": "A.isPassed",
+      "id": "isPassedId",
+      "value": "Passed",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Passed",
+      "items": [
         {
-            "type": "textbox",
-            "name": "empNo",
-            "id": "empNoId",
-            "value": "",
-            "label": "Employee No",
-            "placeholder": "Placeholder"
+          "key": "1",
+          "value": "Yes"
         },
         {
-            "type": "textbox",
-            "name": "empName",
-            "id": "empNameId",
-            "value": "",
-            "label": "Employee Name",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "datepicker",
-            "datatype": "date",
-            "name": "startDt",
-            "id": "startDtGte",
-            "value": "",
-            "restriction": "Gte",
-            "label": "Start Date From",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "datepicker",
-            "datatype": "date",
-            "name": "startDt",
-            "id": "startDtLte",
-            "value": "",
-            "restriction": "Lte",
-            "label": "Start Date To",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "datepicker",
-            "datatype": "date",
-            "name": "endDt",
-            "id": "endDtGte",
-            "value": "",
-            "restriction": "Gte",
-            "label": "End Date From",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "datepicker",
-            "datatype": "date",
-            "name": "endDt",
-            "id": "endDtLte",
-            "value": "",
-            "restriction": "Lte",
-            "label": "End Date To",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "dropdown",
-            "name": "isPassed",
-            "id": "isPassedId",
-            "value": "Is Passed",
-            "placeholder": "Placeholder",
-            "isFromURL": false,
-            "isSelectOne": false,
-            "url": "https://api.myjson.com/bins/ld6e8",
-            "label": "Is Passed",
-            "items": [
-                {
-                    "key": "1",
-                    "value": "Yes"
-                },
-                {
-                    "key": "0",
-                    "value": "No"
-                }
-            ],
-            "itemsUrl": []
+          "key": "0",
+          "value": "No"
         }
-    ]
+      ],
+      "itemsUrl": []
+    },
+    {
+      "type": "textbox",
+      "name": "B.EMP_NAME",
+      "id": "empNameId",
+      "value": "",
+      "label": "Employee Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "datepicker",
+      "datatype": "date",
+      "name": "A.END_DT",
+      "id": "endDtGte",
+      "value": "",
+      "restriction": "Gte",
+      "label": "End Date >=",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "datepicker",
+      "datatype": "date",
+      "name": "A.START_DT",
+      "id": "startDtGte",
+      "value": "",
+      "restriction": "Gte",
+      "label": "Start Date >=",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "datepicker",
+      "datatype": "date",
+      "name": "A.END_DT",
+      "id": "endDtLte",
+      "value": "",
+      "restriction": "Lte",
+      "label": "End Date <=",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "datepicker",
+      "datatype": "date",
+      "name": "A.START_DT",
+      "id": "startDtLte",
+      "value": "",
+      "restriction": "Lte",
+      "label": "Start Date <=",
+      "placeholder": "Placeholder"
+    }
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Employee No",
+      "name": "empNo"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Employee Name",
+      "name": "empName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Start Date",
+      "name": "startDt"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "End Date",
+      "name": "endDt"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Passed",
+      "name": "isPassed"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT B.EMP_NO as empNo, B.EMP_NAME as empName,A.REF_EMP_LEAVE_MNGMNT_ID as refEmpLeaveMngmntId,A.REF_EMP_ID as refEmpId,A.START_DT as startDt,A.END_DT as endDt, A.IS_PASSED as isPassed",
+    "from": "FROM dbo.REF_EMP_LEAVE_MNGMNT A WITH(NOLOCK) LEFT JOIN dbo.REF_EMP B WITH(NOLOCK) ON A.REF_EMP_ID=B.REF_EMP_ID"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "empNo"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "empName"
+    },
+    {
+      "type": "date",
+      "position": "left",
+      "property": "startDt"
+    },
+    {
+      "type": "date",
+      "position": "left",
+      "property": "endDt"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "isPassed"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "/employee/leaveMaintenanceAdd",
+          "param": [
+            {
+              "type": "refEmpLeaveMngmntId",
+              "property": "refEmpLeaveMngmntId"
+            },
+            {
+              "type": "param",
+              "property": "edit"
+            }
+          ]
+        },
+        {
+          "type": "delete",
+          "property": "refEmpLeaveMngmntId"
+        }
+      ]
+    }
+  ]
 }

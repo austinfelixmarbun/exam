@@ -121,7 +121,7 @@ export class ZipcodeAddComponent implements OnInit {
       this.http.post(this.addUrl, this.rzcObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/zipcode/paging"]);
+          this.router.navigate(["/CommonSetting/Zipcode/paging"]);
         },
         error => {
           console.log(error);
@@ -133,7 +133,7 @@ export class ZipcodeAddComponent implements OnInit {
       this.http.post(this.editUrl, this.rzcObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/zipcode/paging"]);
+          this.router.navigate(["/CommonSetting/Zipcode/paging"]);
         },
         error => {
           console.log(error);
