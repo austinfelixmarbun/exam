@@ -75,7 +75,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/commonSetting/province/paging"]);        
+            this.router.navigate(["/CommonSetting/RefProvince/paging"]);        
         },
         error => {
           console.log(error);
@@ -90,7 +90,7 @@ export class ProvinceAddEditComponent implements OnInit {
         response => {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/commonSetting/province/paging"]);
+          this.router.navigate(["/CommonSetting/RefProvince/paging"]);
         },
         error => {
           console.log(error);

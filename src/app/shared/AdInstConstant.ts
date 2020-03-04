@@ -21,6 +21,14 @@ export class AdInsConstant {
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
 
+  //---------- ASSET -----------
+  // ASSET TYPE
+  public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListKeyValueActiveByCode";
+
+  //ASSET CATEGORY
+  public static GetActiveAssetCategoryValue = environment.FoundationR3Url + "/AssetCategory/"
+  //----------- END OF ASSET ------------
+
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
   public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
@@ -332,19 +340,19 @@ export class AdInsConstant {
   public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
 
   //UPLOAD MONITORING FOUNDATION
-  public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging"
+  public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging";
 
   //UPLOAD TYPE
-  public static GetUploadTypeByUploadTypeId = "/UploadType/GetUploadTypeByUploadTypeId"
-  public static GetUploadTypePaging = "/UploadType/GetUploadTypePaging"
+  public static GetUploadTypeByUploadTypeId = "/UploadType/GetUploadTypeByUploadTypeId";
+  public static GetUploadTypePaging = "/UploadType/GetUploadTypePaging";
 
   //UPLOAD SETTING
-  public static GetUploadSettingHIdByUploadTypeId = "/UploadSetting/GetUploadSettingHIdByUploadTypeId"
-  public static GetListUploadSettingDIdByUploadSettingHId = "/UploadSetting/GetListUploadSettingDIdByUploadSettingHId"
-  public static GetListUploadSettingDIdByUploadTypeId = "/UploadSetting/GetListUploadSettingDIdByUploadTypeId"
-  public static AssignRoleToUploadSetting = "/UploadSetting/AssignRoleToUploadSetting"
-  public static GetListRefRoleByUploadTypeId = "/UploadSetting/GetListRefRoleByUploadTypeId"
-  public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId'
+  public static GetUploadSettingHIdByUploadTypeId = "/UploadSetting/GetUploadSettingHIdByUploadTypeId";
+  public static GetListUploadSettingDIdByUploadSettingHId = "/UploadSetting/GetListUploadSettingDIdByUploadSettingHId";
+  public static GetListUploadSettingDIdByUploadTypeId = "/UploadSetting/GetListUploadSettingDIdByUploadTypeId";
+  public static AssignRoleToUploadSetting = "/UploadSetting/AssignRoleToUploadSetting";
+  public static GetListRefRoleByUploadTypeId = "/UploadSetting/GetListRefRoleByUploadTypeId";
+  public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId';
 
   // GENERIC
   public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
@@ -352,7 +360,7 @@ export class AdInsConstant {
   // ASSET TYPE
   public static AddAssetType = "/AssetType/AddAssetType"
   public static EditAssetType = "/AssetType/EditAssetType"
-  public static GetAssetTypeByCode =  "/AssetType/GetAssetTypeByCode"
+  public static GetAssetTypeByCode = "/AssetType/GetAssetTypeByCode"
   public static GetAssetTypeById = "/AssetType/GetAssetTypeById"
   public static GetListAssetType = "/AssetType/GetListAssetType"
   public static GetListActiveAssetType = "/AssetType/GetListActiveAssetType"
@@ -370,4 +378,32 @@ export class AdInsConstant {
 
   //REF REASON
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
+
+  //asset accesory
+  public static AddNewAssetAccesory = "/AssetAccessory/AddAssetAccessory";
+  public static EditAssetAccessory = "/AssetAccessory/EditAssetAccessory";
+  public static GetAssetAccessorybyAssetAccesoryCode = "/AssetAccessory/GetAssetAccessoryByCode";
+  public static GetAssetAccessorybyAssetAccessoryId = "/AssetAccessory/GetAssetAccessoryById";
+  public static GetlistAssetAccessorybyAssetTypeId = "/AssetAccessory/GetListAssetAccessoryByAssetTypeId";
+  public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory";
+  //asset category
+  public static AddNewAssetCategory = "/AssetCategory/AddAssetCategory";
+  public static EditAssetCategory = "/AssetCategory/EditAssetCategory";
+  public static GetAssetCategoryByAssetCategoryCode = "/AssetCategory/GetAssetCategoryByCode";
+  public static GetAssetCategorybyAssetCategoryId = "/AssetCategory/GetAssetCategoryById";
+  public static GetlistAssetCategorybyAssetTypeId = "/AssetCategory/GetListAssetCategoryByAssetTypeId";//;
+  public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory";
+  //asset doc list
+  public static AddNewAssetDocList = "/AssetDocList/AddAssetDocList";
+  public static EditAssetDocList = "/AssetDocList/EditAssetDocList";
+  public static GetAssetDocListByAssetDocListId = "/AssetDocList/GetAssetDocListById";
+  public static GetlistAssetDocListByAssetTypeId = "/AssetDocList/GetListAssetDocListByAssetTypeId";
+
+  //asset ref doc
+  public static AddNewRefAssetDocData = "/RefAssetDoc/AddRefAssetDoc";
+  public static EditRefAssetDocData = "/RefAssetDoc/EditRefAssetDoc";
+  public static GetRefAssetDocByAssetDocCode = "/RefAssetDoc/GetRefAssetDocByAssetDocCode";
+  public static GetRefAssetDocByRefAssetDocId = "/RefAssetDoc/GetRefAssetDocByRefAssetDocId";
+  public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc";
+
 }
