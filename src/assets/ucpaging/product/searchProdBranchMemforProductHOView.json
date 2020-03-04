@@ -1,0 +1,67 @@
+{
+  "title": "List Office Member",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "C.OFFICE_CODE",
+      "id": "officeCodeId",
+      "value": "",
+      "label": "Office Code (TEMP)",
+      "placeholder": "Placeholder"
+    }
+
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Office Code",
+      "name": "officeCode"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Office Name",
+      "name": "officeName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Area Name",
+      "name": "areaName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Allowed to Create Offering",
+      "name": "isAllowedCrt"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT C.OFFICE_CODE as officeCode, C.OFFICE_NAME as officeName, D.AREA_NAME as areaName, B.IS_ALLOWED_CRT as isAllowedCrt",
+    "from": "FROM dbo.PROD_H A WITH(NOLOCK) INNER JOIN dbo.PROD_BRANCH_MBR B WITH(NOLOCK) ON A.PROD_H_ID=B.PROD_H_ID LEFT JOIN dbo.REF_OFFICE C WITH(NOLOCK) ON B.REF_OFFICE_ID=C.REF_OFFICE_ID LEFT JOIN dbo.REF_OFFICE_AREA D WITH(NOLOCK) ON C.REF_OFFICE_AREA_ID=D.REF_OFFICE_AREA_ID"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "center",
+      "property": "officeCode"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "officeName"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "areaName"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "isAllowedCrt"
+    }
+  ]
+}

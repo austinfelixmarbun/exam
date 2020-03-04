@@ -1,0 +1,23 @@
+<lib-ucviewgeneric [viewInput]="viewProdMainInfoObj"> </lib-ucviewgeneric>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="GENERAL DATA">
+    <ng-template matTabContent>
+      The First Content
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="PRODUCT COMPONENT">
+    <ng-template matTabContent>
+      The Second Content
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="OFFICE MEMBER">
+    <ng-template matTabContent>
+      <lib-ucpaging [searchObj]="prodBranchMemPagingObj"></lib-ucpaging>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="PRODUCT VERSION">
+    <ng-template matTabContent>
+      <lib-ucpaging [searchObj]="prodHPagingObj"></lib-ucpaging>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

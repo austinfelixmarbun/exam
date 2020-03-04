@@ -95,12 +95,12 @@
           "path": "/product/HODeactivate/edit",
           "param": [
             {
-              "type": "prodId",
-              "property": "prodId"
-            },
-            {
               "type": "prodHId",
               "property": "prodHId"
+            },
+            {
+              "type": "prodId",
+              "property": "prodId"
             }
           ]
         }

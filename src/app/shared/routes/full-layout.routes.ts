@@ -74,5 +74,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'Asset',
     loadChildren: './asset/asset.module#AssetModule'
+  },
+  {
+    path: 'product',
+    loadChildren: './product/product.module#ProductModule'
   }
 ];

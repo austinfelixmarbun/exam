@@ -6,6 +6,7 @@ import { ProdOfferingAddComponent } from './prod-offering/prod-offering-add/prod
 import { ProdOfferingPagingComponent } from './prod-offering/prod-offering-paging/prod-offering-paging.component';
 import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
 import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
+import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
 
 const routes: Routes = [
   {
@@ -53,6 +54,13 @@ const routes: Routes = [
           title: 'Product HO Deactivate'
         }
       },
+      {
+        path: 'HOView',
+        component: ProductHOViewComponent,
+        data: {
+          title: 'Product HO View'
+        }
+      }
     ]
   }
 ]

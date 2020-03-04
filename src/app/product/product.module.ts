@@ -15,28 +15,32 @@ import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deacti
 import { SharingComponentModule } from "../shared/sharingcomponent.module";
 import { HttpModule } from "@angular/http";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
+import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
-    imports: [
-        ProductRoutingModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        UCSearchModule,
-        UcgridfooterModule,
-        UcSubsectionModule,
-        UcpagingModule,
-        HttpModule,
-        SharingComponentModule,
-        UcviewgenericModule
-    ],
-    declarations: [
-        ProductHOPagingComponent,
-        ProductHOAddComponent,
-        ProdOfferingPagingComponent,
-        ProdOfferingAddComponent,
-        ProductHODeactivatePagingComponent,
-        ProductHODeactivateEditComponent
-    ]
+  imports: [
+    ProductRoutingModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    UCSearchModule,
+    UcgridfooterModule,
+    UcSubsectionModule,
+    UcpagingModule,
+    HttpModule,
+    SharingComponentModule,
+    UcviewgenericModule,
+    MatTabsModule
+  ],
+  declarations: [
+    ProductHOPagingComponent,
+    ProductHOAddComponent,
+    ProdOfferingPagingComponent,
+    ProdOfferingAddComponent,
+    ProductHODeactivatePagingComponent,
+    ProductHODeactivateEditComponent,
+    ProductHOViewComponent
+  ]
 })
 export class ProductModule { }

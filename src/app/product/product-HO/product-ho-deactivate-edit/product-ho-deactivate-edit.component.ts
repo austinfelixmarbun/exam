@@ -77,7 +77,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
 
-    this.viewObj = "./assets/ucviewgeneric/viewProduct.json";
+    this.viewObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
   }
 
   SaveForm() {
