@@ -14,63 +14,63 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'refUser',
+        path: 'RefUser',
         component: UserPagingComponent,
         data: {
           title: 'User Maintenance Paging'
         },
       },
       {
-        path: 'refUser/detail',
+        path: 'RefUser/detail',
         component: UserAddEditComponent,
         data: {
           title: 'User Maintenance Add Edit'
         },
       },
       {
-        path: 'role',
+        path: 'Role',
         component: RolePagingComponent,
         data: {
           title: 'User Maintenance Paging'
         },
       },
       {
-        path: 'role/detail',
+        path: 'Role/detail',
         component: RoleAddEditComponent,
         data: {
           title: 'User Maintenance Add Edit'
         },
       },
       {
-        path: 'userRole',
+        path: 'UserRole',
         component: UserRoleComponent,
         data: {
           title: 'Assign User to Role'
         },
       },
       {
-        path: 'userRole/detail',
+        path: 'UserRole/detail',
         component: UserRoleDetailComponent,
         data: {
           title: 'Assign User to Role'
         },
       },
       {
-        path: 'roleUser',
+        path: 'RoleUser',
         component: RoleUserComponent,
         data: {
           title: 'Assign Role to User'
         },
       },
       {
-        path: 'roleForm',
+        path: 'RoleForm',
         component: RoleFormComponent,
         data: {
           title: 'Assign Form to Role'
         },
       },
       {
-        path: 'changePassword',
+        path: 'ChangePassword',
         component: UserChangePasswordComponent,
         data: {
           title: 'Change Password Maintenance'

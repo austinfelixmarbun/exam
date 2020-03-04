@@ -11,26 +11,12 @@ export const ROUTES: RouteInfo[] = [
       { path: '/Organization/BusinessUnit', title: 'Business unit', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Organization/JobTitle', title: 'Job Title', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Employee/paging', title: 'Employee', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/SystemSetting/Role', title: 'Role', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
 
     ]
   },
   {
-    path: '', title: 'Customer', icon: 'ft-user-plus', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/customer', title: 'Customer Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    ]
-  },
-  {
-    path: '', title: 'Office', icon: 'ft-airplay', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/office', title: 'Office  Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    ]
-  },
-  {
     path: '', title: 'System Setting', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      {
-        path: '', title: 'Master Setting', icon: '', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
           { path: '/CommonSetting/GeneralSetting', title: 'General Setting', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/Holiday', title: 'Holiday Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
@@ -45,22 +31,7 @@ export const ROUTES: RouteInfo[] = [
           { path: '/CommonSetting/Currency/paging', title: 'Currency', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/Profession/paging', title: 'Profession', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
         ]
-      },
-      {
-        path: '', title: 'Security', icon: '', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-        submenu: [
-          { path: '/systemSetting/role', title: 'Role Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/systemSetting/refUser', title: 'User Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-        ]
-      }
-    ]
-  },
-  {
-    path: '', title: 'Holiday', icon: 'ft-airplay', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/commonSetting/holiday', title: 'Bank Maintenance', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    ]
-  },
+  }
   
   // {
   //     path: '', title: 'LOS', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
