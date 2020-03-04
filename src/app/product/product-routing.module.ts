@@ -5,6 +5,7 @@ import { ProdOfferingPagingComponent } from './prod-offering/prod-offering-pagin
 import { ProdOfferingAddDetailComponent } from './prod-offering/prod-offering-add-detail/prod-offering-add-detail.component'
 import { ProductHOPagingComponent } from './product-HO/product-ho-paging/product-ho-paging.component';
 import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-add.component';
+import { ProductHoAdddetailComponent } from "./product-HO/product-ho-adddetail/product-ho-adddetail.component";
 
 const routes: Routes = [
     {
@@ -45,6 +46,14 @@ const routes: Routes = [
               title: 'Product HO Add'
           }
       },
+      {
+        path: 'HOadddetail',
+        component: ProductHoAdddetailComponent,
+        loadChildren: "./product-HO/product-ho-adddetail/product-ho-adddetail.module#ProductHOAddDetailModule",
+        data: {
+            title: 'Product HO Add Detail'
+        }
+    },
       ]
     }
   ];

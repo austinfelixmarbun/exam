@@ -154,7 +154,7 @@ export class EmployeeAddComponent implements OnInit {
               this.bankAccName = response["returnObject"].bankAccName;
               this.bankAccNo = response["returnObject"].bankAccNo;
               this.bankObj = new RefBankObj();
-              this.bankObj.bankCode = response["returnObject"].bankCode;
+              this.bankObj.BankCode = response["returnObject"].bankCode;
               this.httpClient.post(this.refBankUrl, this.bankObj).subscribe(
                 response => {
                   this.inputLookupObj.nameSelect = response["returnObject"].bankName;

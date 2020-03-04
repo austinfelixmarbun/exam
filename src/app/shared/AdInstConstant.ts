@@ -97,10 +97,10 @@ export class AdInsConstant {
   //REF-BANK
   public static GetBankPaging = "/RefBank/GetRefBankPaging";
   public static GetBank = "/RefBank/GetBank";
-  public static GetRefBankByRefBankIdAsync = "/RefBank/GetRefBankByRefBankIdAsync";
-  public static EditRefBank = "/RefBank/EditRefBank";
+  public static GetRefBankByRefBankIdAsync = environment.FoundationR3Url + "/RefBank/GetRefBankByRefBankIdAsync";
+  public static EditRefBank = environment.FoundationR3Url + "/RefBank/EditRefBank";
   public static AddRefBank = "/RefBank/AddRefBank";
-  public static AddRefBankAsync= "/RefBank/AddRefBankAsync";
+  public static AddRefBankAsync= environment.FoundationR3Url + "/RefBank/AddRefBankAsync";
   public static DeleteRefBank = "/RefBank/DeleteRefBank";
   public static GetBankByBankCode = "/RefBank/GetBankByBankCode";
 
@@ -240,12 +240,14 @@ export class AdInsConstant {
   //HOLIDAY
   public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
   public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
-  public static AddHolidaySchmH = "/Holiday/AddHolidaySchmH";
+  public static AddHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmH";
   public static AddHolidaySchmD = "/Holiday/AddHolidaySchmD";
   public static AddHolidaySchmDUntilYear = "/Holiday/AddHolidaySchmDUntilYear";
   public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
+  public static GetHolidaySchmHById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmHById";
   public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
-  public static DeleteHolidaySchmH = "/Holiday/DeleteHolidaySchmH";
+  public static EditHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmH";
+  public static DeleteHolidaySchmH = "/HolidaySchm/DeleteHolidaySchmH";
   public static DeleteHolidaySchmD = "/Holiday/DeleteHolidaySchmD";
   public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
   public static CopyHolidaySchm = "/Holiday/CopyHolidaySchm";
@@ -338,15 +340,17 @@ export class AdInsConstant {
   public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId'
 
   // GENERIC
-  public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
+  public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL";
 
   //PRODUCT OFFERING
   public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo"
   public static AddProdOffering = environment.FoundationR3Url +"/ProductOffering/AddProdOffering"
   public static EditProdOffering = environment.FoundationR3Url +"/ProductOffering/EditProdOffering"
   // PRODUCT
-  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
-  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
-  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
+  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
+  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
+  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
 
+  // PRODUCT COMPONENT
+  public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
 }

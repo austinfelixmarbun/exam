@@ -14,7 +14,7 @@
                     <form class="form form-horizontal" [formGroup]="BizUnitForm"
                     (ngSubmit)="BizUnitForm.valid && SaveForm()" #enjiForm="ngForm">
                         <div class="form-body">
-                            <div class="form-group row">
+                            <div class="form-group row adins-required">
                                 <label class="col-md-3  adInsLabel" translate>Business Unit Code </label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control adInsInput width-75-per"
@@ -23,11 +23,11 @@
                                     </show-errors>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row adins-required">
                                 <label class="col-md-3  adInsLabel" translate>Business Unit Name </label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control adInsInput width-75-per"
-                                        formControlName="BizUnitName">
+                                        formControlName="BizUnitName" >
                                     <show-errors [control]="BizUnitForm.controls.BizUnitName" [submit]="enjiForm.submitted">
                                     </show-errors>
                                 </div>

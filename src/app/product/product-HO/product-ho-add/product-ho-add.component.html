@@ -18,7 +18,7 @@
       <div class="card-body">
         <div class="px-3">
 
-          <form class="form form-horizontal" [formGroup]="RefProductHOForm" (ngSubmit)="SaveForm()">
+          <form class="form form-horizontal" [formGroup]="RefProductHOForm" >
             <!-- Main Info -->
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Main Info </h4>
@@ -61,8 +61,11 @@
             </div>
 
             <div class="form-actions right">
-              <button type="submit" class="btn btn-raised btn-primary">
+              <button type="submit" (click)="SaveForm()" class="btn btn-raised btn-primary">
                 <i class="fa fa-check-square-o"></i> Save
+              </button>
+              <button type="submit" (click)="AddDetail()" class="btn btn-raised btn-primary">
+                <i class="fa fa-check-square-o"></i> Next
               </button>
             </div>
 

@@ -77,7 +77,7 @@ export class HolidayDetailComponent implements OnInit {
       this.editDetail = 'true';
 
       this.holidayObj = new HolidayObj();
-      this.holidayObj.holidaySchmHId = this.holidaySchmHId;
+      this.holidayObj.HolidaySchmHId = this.holidaySchmHId;
       this.http.post(this.apiUrl, this.holidayObj).subscribe(
         response => {
           this.resultData = response["returnObject"];
@@ -110,9 +110,9 @@ export class HolidayDetailComponent implements OnInit {
     this.holidayObj = new HolidayObj();
     this.holidayObj = ReqHolidayForm.value;
     if (this.isActive == false) {
-      this.holidayObj.isActive = "0";
+      this.holidayObj.IsActive = "0";
     } else {
-      this.holidayObj.isActive = "1";
+      this.holidayObj.IsActive = "1";
     }
     
     if (this.pageType == "add") {
@@ -128,7 +128,7 @@ export class HolidayDetailComponent implements OnInit {
         }
       );
     } else {
-      this.holidayObj.holidaySchmHId = this.holidaySchmHId;
+      this.holidayObj.HolidaySchmHId = this.holidaySchmHId;
       this.http.post(this.editUrl, this.holidayObj).subscribe(
         response => {
           console.log("Success");
