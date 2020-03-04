@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProdOfferingAddComponent } from './prod-offering/prod-offering-add/prod-offering-add.component';
 import { ProdOfferingPagingComponent } from './prod-offering/prod-offering-paging/prod-offering-paging.component';
+import { ProdOfferingAddDetailComponent } from './prod-offering/prod-offering-add-detail/prod-offering-add-detail.component'
 
 const routes: Routes = [
     {
@@ -19,6 +20,13 @@ const routes: Routes = [
           component: ProdOfferingAddComponent,
           data: {
             title: 'Add'
+          },
+        },
+        {
+          path: 'prod-offering/add-detail',
+          component: ProdOfferingAddDetailComponent,
+          data: {
+            title: 'Add Detail'
           },
         },
       ]
