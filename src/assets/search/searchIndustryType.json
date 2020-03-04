@@ -1,0 +1,139 @@
+{
+    "title": "Industry Type",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "industry_Type_Code",
+            "id": "industryTypeCode",
+            "value": "",
+            "label": "Industry Type Code",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "economic_Sector_Name",
+            "id": "economicSectorName",
+            "value": "",
+            "label": "Economic Sector Name",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "industry_Type_Name",
+            "id": "industryTypeName",
+            "value": "",
+            "label": "Industry Type Name",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "dropdown",
+            "name": "is_Active",
+            "datatype": "text",
+            "id": "isActive",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "url": "",
+            "label": "Active Status",
+            "items": [
+            {
+                "key": "1",
+                "value": "Yes"
+            },
+            {
+                "key": "0",
+                "value": "No"
+            }
+            ],
+            "itemsUrl": []
+        }
+    ],
+    "querystring": { 
+      "select": "SELECT A.REF_INDUSTRY_TYPE_ID AS refIndustryTypeId, A.INDUSTRY_TYPE_CODE AS industryTypeCode, A.INDUSTRY_TYPE_NAME AS industryTypeName, B.ECONOMIC_SECTOR_NAME AS economicSectorName, A.IS_ACTIVE AS isActive",
+      "from": "FROM REF_INDUSTRY_TYPE AS A WITH(NOLOCK) INNER JOIN REF_ECONOMIC_SECTOR AS B WITH(NOLOCK) ON A.REF_ECONOMIC_SECTOR_ID = B.REF_ECONOMIC_SECTOR_ID",
+      "where": "A.IS_ACTIVE = 1"
+    },
+    "headerList" : [ 
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Industry Type Code",
+            "name" : "industryTypeCode" 
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Industry Type Name", 
+            "name" : "industryTypeName" 
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Economic Sector Name", 
+            "name" : "economicSectorName" 
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Active", 
+            "name" : "isActive"
+        },
+        {
+            "type" : "label",
+            "position" : "center",
+            "label" : "Action"
+        }
+    ],
+    "bodyList" : [
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "industryTypeCode" 
+        },
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "industryTypeName" 
+        },
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "economicSectorName" 
+        },
+        {
+            "type" : "boolean", 
+            "position" : "center",
+            "property" : "isActive"
+        },
+        {
+            "type" : "action", 
+            "position" : "center",
+            "action" : [ 
+                {
+                    "type" : "edit", 
+                    "path" : "/CommonSetting/IndustryType/detail", 
+                    "param" : [ 
+                        {
+                          "type" : "refIndustryTypeId", 
+                          "property" : "refIndustryTypeId" 
+                        },
+                        {
+                          "type": "param",
+                          "property": "edit"
+                        }
+                    ]
+                },
+                {
+                    "type" : "delete", 
+                    "property" : "refIndustryTypeId" 
+                }
+            ]
+        }
+    ]
+  }
+  

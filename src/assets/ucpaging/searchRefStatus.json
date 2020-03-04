@@ -4,7 +4,7 @@
   "component": [
     {
       "type": "textbox",
-      "name": "REF_STATUS_CODE",
+      "name": "A.REF_STATUS_CODE",
       "id": "refStatusCodeId",
       "value": "",
       "label": "Status Code",
@@ -13,7 +13,7 @@
     {
       "type": "dropdown",
       "datatype": "text",
-      "name": "REF_TRX_TYPE_ID",
+      "name": "A.REF_TRX_TYPE_ID",
       "id": "refTrxTypeId",
       "value": "",
       "placeholder": "Placeholder",
@@ -26,7 +26,7 @@
     },
     {
       "type": "textbox",
-      "name": "DESCR",
+      "name": "A.DESCR",
       "id": "descrId",
       "value": "",
       "label": "Description",
@@ -35,7 +35,7 @@
     {
       "type": "dropdown",
       "datatype": "text",
-      "name": "MODULE_CODE",
+      "name": "A.MODULE_CODE",
       "id": "moduleCodeId",
       "value": "",
       "placeholder": "Placeholder",
@@ -97,8 +97,8 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.REF_STATUS_ID as refStatusId,A.REF_STATUS_CODE as refStatusCode,A.DESCR as descr, B.TRX_TYPE_NAME as trxTypeName, A.IS_ACTIVE as isActive, A.REF_TRX_TYPE_ID as refTrxTypeId, A.MODULE_CODE as moduleCode",
-    "from": "FROM REF_STATUS A WITH(NOLOCK) LEFT JOIN REF_TRX_TYPE B WITH(NOLOCK) ON A.REF_TRX_TYPE_ID=B.REF_TRX_TYPE_ID"
+    "select": "SELECT A.REF_STATUS_CODE as refStatusCode,A.REF_STATUS_ID as refStatusId,A.DESCR as descr, B.TRX_TYPE_NAME as trxTypeName, A.IS_ACTIVE as isActive, A.REF_TRX_TYPE_ID as refTrxTypeId, A.MODULE_CODE as moduleCode",
+    "from": "FROM dbo.REF_STATUS A WITH(NOLOCK) LEFT JOIN dbo.REF_TRX_TYPE B WITH(NOLOCK) ON A.REF_TRX_TYPE_ID=B.REF_TRX_TYPE_ID"
   },
   "bodyList": [
     {

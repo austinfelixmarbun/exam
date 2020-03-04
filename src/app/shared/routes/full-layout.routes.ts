@@ -20,16 +20,12 @@ export const Full_ROUTES: Routes = [
     loadChildren: './office/office.module#OfficeModule'
   },
   {
-    path: 'employee',
+    path: 'Employee',
     loadChildren: './employee/employee.module#EmployeeModule'
   },
   {
-    path : 'organization',
+    path : 'Organization',
     loadChildren: './organization/organization.module#OrganizationModule'
-  },
-  {
-    path : 'bank',
-    loadChildren: './bank/bank.module#BankModule'
   },
   {
     path: 'customer',
@@ -74,10 +70,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'testNew',
     loadChildren: './test-new/testNew.module#TestNewModule'
-  },
+  }, 
   {
-    path: 'product',
-    loadChildren: './product/product.module#ProductModule'
-  },
-  
+    path: 'Asset',
+    loadChildren: './asset/asset.module#AssetModule'
+  }
 ];

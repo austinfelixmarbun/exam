@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
@@ -18,6 +18,7 @@ export class AddBusinessUnitComponent implements OnInit {
     RefBizUnitId: string;
     pageType:any;
     result: any;
+    title:string;
     mode: string = "add";
     apiUrl: any;
     isActive: boolean = true;
@@ -35,12 +36,14 @@ export class AddBusinessUnitComponent implements OnInit {
         BizUnitCode: ['', Validators.required],
         BizUnitName:  ['', Validators.required],
         Descr:  [''],
-        IsActive:  [''],
-        RowVersion: ['']
+        IsActive:  [false],
+        RowVersion: ['']    
     })
 
     ngOnInit() {
+        this.title = "Business Unit Add";
         if (this.mode == "edit") {
+            this.title = "Business Unit Edit";
             this.apiUrl = this.foundationUrl + AdInsConstant.GetRefBizUnit;
             this.bizUnitObj = new BusinessUnitObj();
             this.bizUnitObj.RefBizUnitId = this.RefBizUnitId;
@@ -65,7 +68,6 @@ export class AddBusinessUnitComponent implements OnInit {
     }
 
     SaveForm(){
-        console.log("ini save formnya");
         this.bizUnitObj = new BusinessUnitObj();
         this.bizUnitObj = this.BizUnitForm.value;
         if (this.mode == "edit") {
@@ -83,7 +85,6 @@ export class AddBusinessUnitComponent implements OnInit {
                 });
         }
         else {
-            console.log("ini mau add");
             this.bizUnitObj.RefBizUnitId = "0";
             this.editUrl = this.foundationUrl + AdInsConstant.AddRefBizUnit;
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
