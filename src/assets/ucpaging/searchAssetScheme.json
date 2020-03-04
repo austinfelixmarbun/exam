@@ -1,0 +1,153 @@
+{
+    "title": "Asset Type",
+    "exportExcel": false,
+    "component": [
+      {
+        "type": "textbox",
+        "name": "ASSET_SCHM_CODE",
+        "id": "AssetSchmCode",
+        "value": "",
+        "label": "Asset Scheme Code",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "textbox",
+        "name": "ASSET_SCHM_NAME",
+        "id": "AssetSchmName",
+        "value": "",
+        "label": "Asset Scheme Name",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "textbox",
+        "name": "ASSET_TYPE_NAME",
+        "id": "AssetTypeName",
+        "value": "",
+        "label": "Asset Type Name",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "textbox",
+        "name": "ASSET_SCHM_D_ID",
+        "id": "NumOfAsset",
+        "value": "",
+        "label": "Num Of Asset",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "dropdown",
+        "name": "IS_ACTIVE",
+        "id": "IsActive",
+        "value": "Active Status",
+        "placeholder": "Placeholder",
+        "isFromURL": false,
+        "isSelectOne": false,
+        "url": "https://api.myjson.com/bins/ld6e8",
+        "label": "Active Status",
+        "items": [
+          {
+            "key": "1",
+            "value": "Yes"
+          },
+          {
+            "key": "0",
+            "value": "No"
+          }
+        ],
+        "itemsUrl": []
+      }
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Asset Scheme Code",
+        "name": "AssetSchemeCode"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Asset Scheme Name",
+        "name": "AssetSchemeName"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Asset Type Name",
+        "name": "AssetTypeName"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Num Of Asset",
+        "name": "NumOfAsset"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Active Status",
+        "name": "IsActive"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Edit Member"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Edit"
+      }
+
+    ],
+    "querystring": {
+      "select": "SELECT ASH.ASSET_SCHM_H_ID AS AssetSchmHId, ASH.ASSET_SCHM_NAME AS AssetSchmName, ASH.ASSET_SCHM_CODE AS AssetSchmCode, ATH.ASSET_TYPE_ID AS AssetTypeHId, ATH.ASSET_TYPE_NAME AS AssetTypeName, COUNT(ASD.ASSET_SCHM_D_ID) AS NumOfAsset, ASH.IS_ACTIVE AS IsActive",
+      "from": "FROM dbo.ASSET_SCHM_H ASH WITH(NOLOCK) JOIN dbo.ASSET_TYPE ATH WITH(NOLOCK) ON ATH.ASSET_TYPE_ID = ASH.ASSET_TYPE_ID LEFT JOIN dbo.ASSET_SCHM_D ASD WITH(NOLOCK) ON ASD.ASSET_SCHM_H_ID = ASH.ASSET_SCHM_H_ID GROUP BY ASH.ASSET_SCHM_H_ID,ASH.ASSET_SCHM_NAME,ASH.ASSET_SCHM_CODE,ATH.ASSET_TYPE_ID,ATH.ASSET_TYPE_NAME,ASH.IS_ACTIVE"
+    },
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "left",
+        "property": "AssetTypeCode"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "AssetTypeName"
+      },
+      {
+        "type": "boolean",
+        "position": "center",
+        "property": "IsActive"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/asset/type/detail",
+            "param": [
+              {
+                "type": "AssetTypeId",
+                "property": "AssetTypeId"
+              },
+              {
+                "type": "param",
+                "property": "edit"
+              }
+            ]
+          },
+          {
+            "type": "delete",
+            "property": "AssetTypeId"
+          }
+        ]
+      }
+    ]
+  }
+  

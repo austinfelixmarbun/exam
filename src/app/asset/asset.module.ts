@@ -11,6 +11,9 @@ import { AssetTypePagingComponent } from "./asset-type/asset-type-paging/asset-t
 import { NgModule } from "@angular/core";
 import { ShowErrorsComponent } from "app/test-new/show-errors.component";
 import { UcSubsectionModule } from "@adins/uc-subsection";
+import { AssetSchemePagingComponent } from './asset-scheme/asset-scheme-paging/asset-scheme-paging/asset-scheme-paging.component';
+import { AssetSchemeAddEditMemberComponent } from "./asset-scheme/asset-scheme-add-edit-member/asset-scheme-add-edit-member.component";
+import { AssetSchemeAddEditInformationComponent } from "./asset-scheme/asset-scheme-add-edit-information/asset-scheme-add-edit-information.component";
 // import { ShowErrorsComponent } from "./app/test-new/show-errors.component";
 
 @NgModule({
@@ -28,8 +31,10 @@ import { UcSubsectionModule } from "@adins/uc-subsection";
     ],
     declarations: [
         AssetTypePagingComponent,
-        AssetTypeAddEditComponent,
-        ShowErrorsComponent
+        ShowErrorsComponent,
+        AssetSchemePagingComponent,
+        AssetSchemeAddEditMemberComponent,
+        AssetSchemeAddEditInformationComponent
     ]
   })
   export class AssetModule { }
