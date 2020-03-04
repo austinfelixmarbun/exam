@@ -78,5 +78,10 @@ export const Full_ROUTES: Routes = [
   {
     path: 'product',
     loadChildren: './product/product.module#ProductModule'
+<<<<<<< HEAD
   }
+=======
+  },
+  
+>>>>>>> origin/EdwardBYGit
 ];

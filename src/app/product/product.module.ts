@@ -6,18 +6,22 @@ import { ProdOfferingAddComponent } from 'app/product/prod-offering/prod-offerin
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { ProdOfferingAddDetailComponent } from './prod-offering/prod-offering-add-detail/prod-offering-add-detail.component'
-
+import { ProductHOPagingComponent } from './product-HO/product-ho-paging/product-ho-paging.component';
+import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-add.component';
 @NgModule({
     imports: [
         ProductRoutingModule,
         UcpagingModule,
         ReactiveFormsModule,
-        UclookupgenericModule
+        UclookupgenericModule,
+        FormsModule,
     ],
     declarations: [
         ProdOfferingPagingComponent,
         ProdOfferingAddComponent,
         ProdOfferingAddDetailComponent,
+        ProductHOPagingComponent,
+        ProductHOAddComponent
     ]
   })
 

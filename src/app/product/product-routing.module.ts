@@ -29,13 +29,27 @@ const routes: Routes = [
             title: 'Add Detail'
           },
         },
+        {
+          path: 'HOpaging',
+          component: ProductHOPagingComponent,
+          data: {
+              title: 'Product HO Paging'
+          }
+      },
+      {
+          path: 'HOadd',
+          component: ProductHOAddComponent,
+          data: {
+              title: 'Product HO Add'
+          }
+      },
       ]
     }
   ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
-  })
+    exports: [RouterModule]
+})
 
-export class ProductRoutingModule{}
+export class ProductRoutingModule { }
