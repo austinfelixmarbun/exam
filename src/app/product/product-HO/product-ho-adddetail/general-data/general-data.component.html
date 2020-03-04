@@ -5,151 +5,34 @@
       <!-- Main Info -->
       <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text"></i>  </h4>
+        
+        <!-- Look Up Copy Product -->
+        <!-- <div class="form-group row">
+          <label class="col-md-3  adInsLabel" >Copy Product</label>
+          <div class="col-md-6">
+            <lib-uclookupgeneric width-75-per [lookupInput]="inputLookUpObj" [parentForm]='RefGeneralDataForm'>
+            </lib-uclookupgeneric>
+          </div>
+        </div> -->
 
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Line Of Business</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="LineOfBusiness"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.LineOfBusiness.invalid }">
-              <option *ngFor="let it of itemLineOfBusiness" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
+        <div formArrayName="items">
+          <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
+            <div class="form-group row" [formGroupName]="i">
+              <label class="col-md-3 text-left" translate> {{item.controls.ProdCompntName.value}} </label>
+              <div class="col-md-6" style="border-right: 1px solid grey" [ngSwitch]="item.controls.ProdCompntType.value">
+                <div *ngSwitchCase="'DDL'">
+                  <P>DROP DOWN LIST</P>
+                </div>
+                <div *ngSwitchCase="'AMT'">
+                  <P>AMOUNT</P>
+                </div>
+                <div *ngSwitchCase="'DATE'">
+                  <P>DATE</P>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Product Type</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="ProductType"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.ProductType.invalid }">
-              <option *ngFor="let it of itemProductType" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Purpose of Financing</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="PurposeOfFinancing"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.PurposeOfFinancing.invalid }">
-              <option *ngFor="let it of itemPurposeOfFinancing" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Currency</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="Currency"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.Currency.invalid }">
-              <option *ngFor="let it of itemCurrency" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Way of Financing</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="WayOfFinancing"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.WayOfFinancing.invalid }">
-              <option *ngFor="let it of itemWayOfFinancing" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Installment Scheme</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="InstallmentScheme"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.InstallmentScheme.invalid }">
-              <option *ngFor="let it of itemInstallmentScheme" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Interest Type</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="InterestType"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.InterestType.invalid }">
-              <option *ngFor="let it of itemInterestType" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Effective Rate Type</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="EffectiveRateType"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.EffectiveRateType.invalid }">
-              <option *ngFor="let it of itemEffectiveRateType" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Payment Frequency</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="PaymentFrequency"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.PaymentFrequency.invalid }">
-              <option *ngFor="let it of itemPaymentFrequency" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Asset Condition</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="AssetCondition"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.AssetCondition.invalid }">
-              <option *ngFor="let it of itemAssetCondition" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Asset Type</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="AssetType"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.AssetType.invalid }">
-              <option *ngFor="let it of itemAssetType" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>First Installment Type</label>
-          <div class="col-md-9">
-            <!-- <select class="form-control adInsInput" style="width: auto" formControlName="FirstInstallmentType"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && RefGeneralDataForm.controls.FirstInstallmentType.invalid }">
-              <option *ngFor="let it of itemFirstInstallmentType" value="{{it.MasterCode}}">
-                {{it.Descr}}
-              </option>
-            </select> -->
-          </div>
-        </div>
-
       </div>
 
     </form>

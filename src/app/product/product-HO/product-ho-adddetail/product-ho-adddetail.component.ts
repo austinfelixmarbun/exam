@@ -7,8 +7,6 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { RefProductHOObj } from 'app/shared/model/RefProductHOObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-product-ho-adddetail',
@@ -51,17 +49,28 @@ export class ProductHoAdddetailComponent implements OnInit {
   ResultResponse: any;
   ProdHOBj: any;
   UrlBackEnd: any;
-  inputLookupObj: any;
   ngOnInit() {
-    this.inputLookupObj=new InputLookupObj();
-    this.inputLookupObj.urlJson="./assets/lookup/lookupProduct.json";
-    this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookupObj.pagingJson = "./assets/form-setting/zipcodePaging.json";
-    this.inputLookupObj.genericJson ="./assets/form-setting/zipcodeGeneric.json" ;
+    this.ProdHOBj=new RefProductHOObj();
+    this.ProdHOBj.ProdHId=this.param;
+    this.UrlBackEnd=AdInsConstant.GetProductMainInfo;
+    this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
+      (response) => {
+        console.log(response);
+        this.ResultResponse=response;
+        this.RefProductHOForm.patchValue({
+          ProdCode: this.ResultResponse.ProdCode,
+          ProdName: this.ResultResponse.ProdName,
+          ProdDescr: this.ResultResponse.ProdDescr,
+          StatusCode: this.ResultResponse.StatusCode,
+          StartDt: formatDate(this.ResultResponse.StartDt,'yyyy-MM-dd', 'en-US'),
+          EndDt: formatDate(this.ResultResponse.EndDt,'yyyy-MM-dd', 'en-US')
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
-
   
-
 
 }

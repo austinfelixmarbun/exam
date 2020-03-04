@@ -56,18 +56,13 @@
         },
         {
             "type": "text",
-            "position": "left",
-            "property": "areaCode2"
+            "position": "center",
+            "property": "ProdName"
         },
         {
             "type": "text",
-            "position": "left",
-            "property": "areaCode1"
-        },
-        {
-            "type": "text",
-            "position": "left",
-            "property": "zipcode"
+            "position": "center",
+            "property": "ProdStat"
         },
         {
             "type": "action",
@@ -75,11 +70,11 @@
             "action": [
                 {
                     "type": "select",
-                    "property": "zipcode"
+                    "property": "ProdCode"
                 }
             ]
         }
     ],
-    "propertyId": "zipcode",
-    "propertyName": "zipcode"
+    "propertyId": "ProdCode",
+    "propertyName": "ProdCode"
 }
