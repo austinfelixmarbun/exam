@@ -4,8 +4,8 @@
     <form class="form form-horizontal" [formGroup]="RefGeneralDataForm">
       <!-- Main Info -->
       <div class="form-body">
-        <h4 class="form-section card-title" translate><i class="ft-file-text"></i>  </h4>
-        
+        <h4 class="form-section card-title" translate><i class="ft-file-text"></i> </h4>
+
         <!-- Look Up Copy Product -->
         <!-- <div class="form-group row">
           <label class="col-md-3  adInsLabel" >Copy Product</label>
@@ -19,9 +19,16 @@
           <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
             <div class="form-group row" [formGroupName]="i">
               <label class="col-md-3 text-left" translate> {{item.controls.ProdCompntName.value}} </label>
-              <div class="col-md-6" style="border-right: 1px solid grey" [ngSwitch]="item.controls.ProdCompntType.value">
+              <div class="col-md-6" style="border-right: 1px solid grey"
+                [ngSwitch]="item.controls.ProdCompntType.value">
                 <div *ngSwitchCase="'DDL'">
-                  <P>DROP DOWN LIST</P>
+                  <div>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc" (change)="clickTest($event)">
+                      <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
+                        {{it.value.Value}}
+                      </option>
+                    </select>
+                  </div>
                 </div>
                 <div *ngSwitchCase="'AMT'">
                   <P>AMOUNT</P>

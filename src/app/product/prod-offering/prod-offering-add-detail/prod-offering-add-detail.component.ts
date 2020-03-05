@@ -23,7 +23,7 @@ export class ProdOfferingAddDetailComponent implements OnInit {
         this.param = params["ProdOfferingHId"];
       }
       console.log(this.param);
-
+      this.key = params["key"];
     })
   }
 
@@ -55,8 +55,8 @@ export class ProdOfferingAddDetailComponent implements OnInit {
           ProdOfferingCode : this.resultData.ProdOfferingCode,
           ProdOfferingName : this.resultData.ProdOfferingName,
           ProdOfferingDescr : this.resultData.ProdOfferingDescr,
-          StartDt : this.resultData.StartDt,
-          EndDt : this.resultData.EndDt,
+          StartDt : formatDate(this.resultData.StartDt,'yyyy-MM-dd', 'en-US'),
+          EndDt: formatDate(this.resultData.EndDt,'yyyy-MM-dd', 'en-US'),
           ProdOfferingStat : this.resultData.ProdOfferingStat
         })
       },

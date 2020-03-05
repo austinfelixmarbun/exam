@@ -464,4 +464,4 @@ export class ProductComponentComponent implements OnInit {
     }
   }
 
-}
+ }
