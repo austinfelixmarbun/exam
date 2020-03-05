@@ -13,6 +13,7 @@ import { CustomerPagingComponent } from './customer-paging/customer-paging.compo
 import { UcpagingModule } from '@adins/ucpaging';
 import { CustomerPersonalMainInfoComponent } from './customer-personal/customer-personal-main-info/customer-personal-main-info.component';
 import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check.component';
+import { UcSubsectionModule } from '@adins/uc-subsection';
 
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 @NgModule({
@@ -33,6 +34,7 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     ReactiveFormsModule,
     UclookupgenericModule
     // ArchwizardModule
+    UcSubsectionModule
   ],
   declarations: [ 
     CustomerPagingComponent, 
