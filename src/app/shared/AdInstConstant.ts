@@ -301,7 +301,7 @@ export class  AdInsConstant {
   public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueById";
   public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById";
   public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
-  public static GetListAssetSchmH = "http://localhost:5000/AssetSchmH/GetListAssetSchmHJoinSchmD";
+  public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
 
   //REF PROFESSION
 
