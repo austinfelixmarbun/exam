@@ -64,6 +64,8 @@ export class NegativeAssetDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    var lookupNameSelect;
+
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/uclookup/NegativeAsset/lookupAssetMaster_NegAst.json";
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -101,6 +103,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       (response: any) => {
         this.assetTypeList = response[0];
         this.negativeAssetSourceList = response[1];
+        this.inputLookupObj.nameSelect = lookupNameSelect;
       }
     );
 
@@ -109,22 +112,23 @@ export class NegativeAssetDetailComponent implements OnInit {
     if(this.pageType == "edit"){
       this.httpClient.post(AdInsConstant.GetAssetNegativeByIdEditPage, negativeAsset).subscribe(
         (response: any) => {
-          console.log("Response Edit : " + JSON.stringify(response));
+          // console.log("Response Edit : " + JSON.stringify(response));
           this.AssetNegativeForm.patchValue({
-            AssetNegativeId: response.responseAssetNegativeObj.AssetNegativeId,
-            AssetMasterId: response.responseAssetNegativeObj.AssetMasterId,
-            AssetTypeId: response.responseAssetMasterObj.AssetTypeId,
-            SerialNo1: response.responseAssetNegativeObj.SerialNo1,
-            SerialNo2: response.responseAssetNegativeObj.SerialNo2,
-            SerialNo3: response.responseAssetNegativeObj.SerialNo3,
-            SerialNo4: response.responseAssetNegativeObj.SerialNo4,
-            SerialNo5: response.responseAssetNegativeObj.SerialNo5,
-            MrNegAssetSourceCode: response.responseAssetNegativeObj.MrNegAssetSourceCode,
-            Notes: response.responseAssetNegativeObj.Notes,
-            IsActive: response.responseAssetNegativeObj.IsActive,
-            RowVersion: response.responseAssetNegativeObj.RowVersion
+            AssetNegativeId: response.AssetNegativeObj.AssetNegativeId,
+            AssetMasterId: response.AssetNegativeObj.AssetMasterId,
+            AssetTypeId: response.AssetMasterObj.AssetTypeId,
+            SerialNo1: response.AssetNegativeObj.SerialNo1,
+            SerialNo2: response.AssetNegativeObj.SerialNo2,
+            SerialNo3: response.AssetNegativeObj.SerialNo3,
+            SerialNo4: response.AssetNegativeObj.SerialNo4,
+            SerialNo5: response.AssetNegativeObj.SerialNo5,
+            MrNegAssetSourceCode: response.AssetNegativeObj.MrNegAssetSourceCode,
+            Notes: response.AssetNegativeObj.Notes,
+            IsActive: response.AssetNegativeObj.IsActive,
+            RowVersion: response.AssetNegativeObj.RowVersion
           });
-          this.inputLookupObj.nameSelect = response.responseAssetMasterObj.FullAssetName
+
+          lookupNameSelect = response.AssetMasterObj.FullAssetName;
         },
         (error) => {
           console.log(error);
