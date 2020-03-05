@@ -24,7 +24,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   tempGender: any;
   tempIdType: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) { 
-    this.getUrl = environment.FoundationR3Url + AdInsConstant.GetListKeyValueRefMasterByCode;  
+    this.getUrl = environment.FoundationR3Url + AdInsConstant.GetListKeyValueByCode;  
   }
 
   ngOnInit() { 
