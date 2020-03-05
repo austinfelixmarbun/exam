@@ -9,7 +9,7 @@ import { UcpagingModule } from "@adins/ucpaging";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AssetConfigurationPagingComponent } from "./asset-configuration/asset-configuration-paging/asset-configuration-paging.component";
 import { AssetRoutingComponent } from "./asset-routing.module";
-import { ShowErrorsComponent } from "app/test-new/show-errors.component";
+// import { ShowErrorsComponent } from "app/test-new/show-errors.component";
 import { RouterModule } from "@angular/router";
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
@@ -60,7 +60,7 @@ import { AssetDocumentMasterAddEditComponent } from './asset-document-master/ass
     // AssetDocumentMasterPagingInformationComponent,
     NegativeAssetComponent,
     NegativeAssetDetailComponent,
-    ShowErrorsComponent,
+    // ShowErrorsComponent,
     AssetAccessoryPagingComponent,
     AssetDocumentPagingComponent,
     AssetDocumentMasterPagingComponent,

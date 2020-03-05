@@ -14,6 +14,7 @@ import { NegativeCustomerComponent } from './negative-customer/negative-customer
 import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
 import { UcpagingModule } from '@adins/ucpaging';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcSubsectionModule } from '@adins/uc-subsection';
 
 @NgModule({
   exports: [
@@ -31,7 +32,8 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     UcgridfooterModule,
     UcpagingModule,
     ReactiveFormsModule,
-    UclookupgenericModule
+    UclookupgenericModule,
+    UcSubsectionModule
     // ArchwizardModule
   ],
   declarations: [
