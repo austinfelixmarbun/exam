@@ -2,6 +2,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { ProductHOPagingComponent } from "./product-HO/product-ho-paging/product-ho-paging.component";
 import { ProductHOAddComponent } from "./product-HO/product-ho-add/product-ho-add.component";
+import { ProductHoAdddetailComponent } from "./product-HO/product-ho-adddetail/product-ho-adddetail.component";
 import { ProdOfferingAddComponent } from './prod-offering/prod-offering-add/prod-offering-add.component';
 import { ProdOfferingPagingComponent } from './prod-offering/prod-offering-paging/prod-offering-paging.component';
 import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
@@ -24,6 +25,14 @@ const routes: Routes = [
         component: ProductHOAddComponent,
         data: {
           title: 'Product HO Add'
+        }
+      },
+      {
+        path: 'HOadddetail',
+        component: ProductHoAdddetailComponent,
+        loadChildren: "./product-HO/product-ho-adddetail/product-ho-adddetail.module#ProductHOAddDetailModule",
+        data: {
+            title: 'Product HO Add Detail'
         }
       },
       {

@@ -357,7 +357,6 @@ export class AdInsConstant {
   // GENERIC
   public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL";
 
-
   //asset accesory
   public static AddNewAssetAccesory = "/AssetAccessory/AddAssetAccessory";
   public static EditAssetAccessory = "/AssetAccessory/EditAssetAccessory";
@@ -365,19 +364,21 @@ export class AdInsConstant {
   public static GetAssetAccessorybyAssetAccessoryId = "/AssetAccessory/GetAssetAccessoryById";
   public static GetlistAssetAccessorybyAssetTypeId = "/AssetAccessory/GetListAssetAccessoryByAssetTypeId";
   public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory";
-//asset category
+
+  //asset category
   public static AddNewAssetCategory = "/AssetCategory/AddAssetCategory";
   public static EditAssetCategory = "/AssetCategory/EditAssetCategory";
   public static GetAssetCategoryByAssetCategoryCode = "/AssetCategory/GetAssetCategoryByCode";
   public static GetAssetCategorybyAssetCategoryId = "/AssetCategory/GetAssetCategoryById";
   public static GetlistAssetCategorybyAssetTypeId = "/AssetCategory/GetListAssetCategoryByAssetTypeId";//;
   public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory";
+
   //asset doc list
   public static AddNewAssetDocList = "/AssetDocList/AddAssetDocList";
   public static EditAssetDocList = "/AssetDocList/EditAssetDocList";
   public static GetAssetDocListByAssetDocListId = "/AssetDocList/GetAssetDocListById";
   public static GetlistAssetDocListByAssetTypeId = "/AssetDocList/GetListAssetDocListByAssetTypeId";
-  
+
   //asset ref doc
   public static AddNewRefAssetDocData = "/RefAssetDoc/AddRefAssetDoc";
   public static EditRefAssetDocData = "/RefAssetDoc/EditRefAssetDoc";
@@ -385,21 +386,25 @@ export class AdInsConstant {
   public static GetRefAssetDocByRefAssetDocId = "/RefAssetDoc/GetRefAssetDocByRefAssetDocId";
   public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc";
 
-    // PRODUCT
-    public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
-    public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
-    public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
-    public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
-  
-    //PRODUCT OFFERING
-    public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
-    public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
-    public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
+  // PRODUCT
+  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
+  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
+  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
+  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
 
-    //REF REASON
+  //PRODUCT OFFERING
+  public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
+  public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
+  public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
+
+
+  // PRODUCT COMPONENT
+  public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
+
+  //REF REASON
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
-  
-  
 
- 
+
+
+
 }

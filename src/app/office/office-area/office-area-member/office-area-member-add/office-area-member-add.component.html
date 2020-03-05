@@ -2,17 +2,6 @@
   <div class="card">
     <div class="card-header row">
       <h4 class="card-title col-md-6">Office List Search</h4>
-      <div class="text-right col-md-6">
-        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/office/OfficeArea']"
-          [queryParams]="{RefOfficeId:RefOfficeId}" translate>
-          <i class="fa fa-arrow-circle-left"></i> Back
-        </button>
-        <span *ngIf="tempData.length != 0">
-          <button type="submit" (click)="saveOfficeAreaMember()" class="btn btn-raised btn-primary" translate>
-            <i class="fa fa-check-square-o"></i> Save
-          </button>
-        </span>
-      </div>
     </div>
     <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
     </lib-UCSearch>
@@ -30,21 +19,30 @@
         <tbody>
           <tr *ngFor="let item of resultData?.Data">
             <td>
-              <input type="checkbox" (change)="Checked(item.RefOfficeId, $event.target.checked, item.RefOfficeNumber)">
+              <div *ngIf="listSelectedId.indexOf(item.RefOfficeId) >- 1">
+                <input type="checkbox" id="checkSame" name="itemSame"
+                  (change)="Checked(item.RefOfficeId,  $event.target.checked)" [checked]="true">
+              </div>
+              <div *ngIf="listSelectedId.indexOf(item.RefOfficeId) < 0">
+                <input type="checkbox" id="checkDiff" name="itemDiff"
+                  (change)="Checked(item.RefOfficeId,  $event.target.checked)" [checked]=false>
+              </div>
             </td>
             <td class="text-left">{{item.OfficeCode}}</td>
             <td class="text-left">{{item.OfficeName}}</td>
           </tr>
         </tbody>
       </table>
-      <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
+      <lib-ucgridfooter (select)="onSelect($event)" ></lib-ucgridfooter>
+      
       <div class="card-header">
         <div class="text-right">
           <button type="button" (click)="AddToTemp()" class="btn btn-raised btn-warning mr-1">
-            <i class="fa fa-arrow-circle-right"></i> Add To Temp
+            <i class="fa ft-plus"></i> Add To Temp
           </button>
         </div>
       </div>
+
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
@@ -56,7 +54,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of tempData;  let i = index">
+          <tr *ngFor="let item of tempData">
             <td>{{item.OfficeCode}}</td>
             <td>{{item.OfficeName}}</td>
             <td>
@@ -68,6 +66,18 @@
           </tr>
         </tbody>
       </table>
+      <div class="card-header">
+        <div class="text-right">
+          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/office/OfficeArea']"
+          [queryParams]="{RefOfficeId:RefOfficeId}" translate>
+          <i class="fa fa-arrow-circle-left"></i> Back
+        </button>
+          <button type="submit" (click)="SaveOfficeAreaMember()" class="btn btn-raised btn-primary"
+            translate>
+            <i class="far"></i> Submit
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -8,6 +8,7 @@ import { UcSubsectionModule } from "@adins/uc-subsection";
 import { UcpagingModule } from "@adins/ucpaging";
 import { ProductHOPagingComponent } from './product-HO/product-ho-paging/product-ho-paging.component';
 import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-add.component';
+import { ProductHoAdddetailComponent } from './product-HO/product-ho-adddetail/product-ho-adddetail.component';
 import { ProdOfferingPagingComponent } from 'app/product/prod-offering/prod-offering-paging/prod-offering-paging.component';
 import { ProdOfferingAddComponent } from 'app/product/prod-offering/prod-offering-add/prod-offering-add.component';
 import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
@@ -42,5 +43,27 @@ import { MatTabsModule } from '@angular/material/tabs';
     ProductHODeactivateEditComponent,
     ProductHOViewComponent
   ]
+    imports: [
+        ProductRoutingModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcSubsectionModule,
+        UcpagingModule,
+        HttpModule,
+        SharingComponentModule,
+        UcviewgenericModule
+    ],
+    declarations: [
+        ProductHOPagingComponent,
+        ProductHOAddComponent,
+        ProductHoAdddetailComponent,
+        ProdOfferingPagingComponent,
+        ProdOfferingAddComponent,
+        ProductHODeactivatePagingComponent,
+        ProductHODeactivateEditComponent
+    ]
 })
 export class ProductModule { }
