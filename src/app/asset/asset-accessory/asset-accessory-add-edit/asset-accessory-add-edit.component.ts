@@ -1,66 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import { AnyARecord } from 'dns';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { AssetAccessoryObj } from 'app/shared/model/AssetAccesorryObj.Model';
+import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, Validators } from '@angular/forms';
-import { AssetAccessoryObj } from 'app/shared/model/AssetAccesorryObj.Model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
-  selector: 'app-asset-accessory-information',
-  templateUrl: './asset-accessory-information.component.html',
-  styleUrls: ['./asset-accessory-information.component.scss'],
+  selector: 'app-asset-accessory-add-edit',
+  templateUrl: './asset-accessory-add-edit.component.html',
+  styleUrls: ['./asset-accessory-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
-export class AssetAccessoryInformationComponent implements OnInit {
+export class AssetAccessoryAddEditComponent implements OnInit {
 
   AssetAccessoryForm = this.fb.group({
     AssetAccessoryName: ['', [Validators.required, Validators.maxLength(100)]],
     AssetAccessoryCode: ['', [Validators.required, Validators.maxLength(50)]],
-   IsActive: [false]
- });
+    IsActive: [true]
+  });
 
-  
- 
+
+
   pageType: any;
   AssetTypeId: any;
-  AssetAccessoryId:any;
+  AssetAccessoryId: any;
   apiUrl: any;
   settingUrl: string = environment.FoundationR3Url;
   urlEnviPaging: string = environment.foundationUrl;
-  result:any;
-  acObj : AssetAccessoryObj;
+  result: any;
+  acObj: AssetAccessoryObj;
   getUrl: any;
   addUrl: any;
   editUrl: any;
-
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    
-    this.addUrl = environment.FoundationR3Url+ AdInsConstant.AddNewAssetAccesory;
-    this.editUrl = environment.FoundationR3Url+AdInsConstant.EditAssetAccessory;
-     this.route.queryParams.subscribe(params => {
 
-    
+    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewAssetAccesory;
+    this.editUrl = environment.FoundationR3Url + AdInsConstant.EditAssetAccessory;
+    this.route.queryParams.subscribe(params => {
+
+
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
-      } 
-        if (params["mode"] != null) {
-          this.pageType = params["mode"];
-        }
+      }
+      if (params["mode"] != null) {
+        this.pageType = params["mode"];
+      }
 
-        if (params["AssetAccessoryId"] != null) {
-          this.AssetAccessoryId = params["AssetAccessoryId"];
-        }
-  
-    
-     
-   });
-   
+      if (params["AssetAccessoryId"] != null) {
+        this.AssetAccessoryId = params["AssetAccessoryId"];
+      }
+
+
+
+    });
+
   }
-  ngOnInit() {
 
+  ngOnInit() {
+    
 
     
     if (this.pageType == "edit") {
@@ -81,7 +80,7 @@ export class AssetAccessoryInformationComponent implements OnInit {
               this.AssetAccessoryForm.patchValue({
                 AssetAccessoryCode: this.result.AssetAccessoryCode,
                 AssetAccessoryName: this.result.AssetAccessoryName, 
-                isActive : this.result.isActive
+                IsActive : this.result.IsActive
                  
               })
           },
@@ -90,7 +89,6 @@ export class AssetAccessoryInformationComponent implements OnInit {
           }
       );
   }
-
 
   }
 

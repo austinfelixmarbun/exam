@@ -6,7 +6,7 @@
 export const environment = {
   production: true,
   navbarColor: 'lightgray',
-  foundationUrl: 'http://r3app.ad-ins.com/foundation', //'https://localhost:5000', //
+  foundationUrl: 'http://r3app.ad-ins.com/foundation', //'http://localhost:5000', //
   settingUrl: 'http://r3app.ad-ins.com/setting', //'https://localhost:4999',
   localHostUrl: 'http://R2AppServer/CONFINS',
   r2AppServerUrl: 'http://R2AppServer/POC/api',

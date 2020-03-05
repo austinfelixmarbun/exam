@@ -1,7 +1,7 @@
 import { formatDate } from "@angular/common";
 import { environment } from "../../environments/environment";
 
-export class AdInsConstant {
+export class  AdInsConstant {
   public static RestrictionLike = "Like";
   public static RestrictionEq = "Eq";
   public static RestrictionNotIn = "NotIn";
@@ -382,18 +382,22 @@ export class AdInsConstant {
 //   public static GetlistAssetCategorybyAssetTypeId = "/AssetCategory/GetListAssetCategoryByAssetTypeId";//;
 //   public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory";
   //asset doc list
-  public static AddNewAssetDocList = "/AssetDocList/AddAssetDocList";
-  public static EditAssetDocList = "/AssetDocList/EditAssetDocList";
-  public static GetAssetDocListByAssetDocListId = "/AssetDocList/GetAssetDocListById";
-  public static GetlistAssetDocListByAssetTypeId = "/AssetDocList/GetListAssetDocListByAssetTypeId";
+  public static AddNewAssetDocList = "/AssetDocList/AddAssetDocList"
+  public static EditAssetDocList = "/AssetDocList/EditAssetDocList"
+  public static GetAssetDocListByAssetDocListId = "/AssetDocList/GetAssetDocListById"
+  public static GetlistAssetDocListByAssetTypeId = "/AssetDocList/GetListAssetDocListByAssetTypeId"
+  public static DeleteAssetDocList = "/AssetDocList/DeleteAssetDocList"
   
   //asset ref doc
-  public static AddNewRefAssetDocData = "/RefAssetDoc/AddRefAssetDoc";
-  public static EditRefAssetDocData = "/RefAssetDoc/EditRefAssetDoc";
-  public static GetRefAssetDocByAssetDocCode = "/RefAssetDoc/GetRefAssetDocByAssetDocCode";
-  public static GetRefAssetDocByRefAssetDocId = "/RefAssetDoc/GetRefAssetDocByRefAssetDocId";
-  public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc";
-
+  public static AddNewRefAssetDocData = "/RefAssetDoc/AddRefAssetDoc"
+  public static EditRefAssetDocData = "/RefAssetDoc/EditRefAssetDoc"
+  public static GetRefAssetDocByAssetDocCode = "/RefAssetDoc/GetRefAssetDocByAssetDocCode"
+  public static GetRefAssetDocByRefAssetDocId = "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
+  public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc"
+  public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
+   
+  
+  
     // PRODUCT
     public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
     public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
