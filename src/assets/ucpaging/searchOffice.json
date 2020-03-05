@@ -57,7 +57,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.OFFICE_CODE", 
+            "name": "A.MR_OFFICE_TYPE_CODE", 
             "id": "OfficeCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -73,8 +73,8 @@
           }
     ],
     "querystring": {
-        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.OFFICE_ADDR AS OfficeAddr , B.OFFICE_NAME AS OfficeParent, A.IS_ACTIVE AS IsActive, A.MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, A.REF_OFFICE_ID AS RefOfficeId",
-        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_ID = A.PARENT_ID"
+        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.OFFICE_ADDR AS OfficeAddr , B.OFFICE_NAME AS OfficeParent, A.IS_ACTIVE AS IsActive, A.MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, A.REF_OFFICE_ID AS RefOfficeId, C.DESCR AS Descr",
+        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_ID = A.PARENT_ID LEFT JOIN dbo.REF_MASTER C WITH(NOLOCK) ON A.MR_OFFICE_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE = 'OFFICE_TYPE'"
     },
     "headerList": [
         {
@@ -111,7 +111,7 @@
             "type": "sort",
             "position": "left",
             "label": "Office Type",
-            "name": "MrOfficeTypeCode"
+            "name": "Descr"
         },
         {
             "type": "label",
@@ -153,19 +153,32 @@
         {
             "type": "text",
             "position": "left",
-            "property": "MrOfficeTypeCode"
+            "property": "Descr"
         },
         {
-            "type": "action",
-            "position": "center",
-            "action": [
+            "type" : "action", 
+            "position" : "center",
+            "action" : [ 
                 {
-                    "type": "edit",
-                    "path": "/office/add",
-                    "param": [
+                    "type" : "switch",
+                    "case" : [
                         {
-                            "type": "RefOfficeId",
-                            "property": "RefOfficeId"
+                            "conditions" : [
+                                {
+                                    "property" : "MrOfficeTypeCode",
+                                    "value" : "CG"
+                                }
+                            ],
+                            "result" : {
+                                "path" : "/office/add",
+                                "param" : [
+                                    {
+                                        "type" : "RefOfficeId",
+                                        "property" : "RefOfficeId"
+                                    }
+                                ]
+                            },
+                            "isHide" : false
                         }
                     ]
                 }
