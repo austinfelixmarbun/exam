@@ -1,6 +1,6 @@
 {
     "title": "LOOK UP - BUSINESS UNIT",
-    "exportExcel": false, 
+    "exportExcel": false,
     "component": [
         {
             "type": "textbox",
@@ -19,9 +19,9 @@
             "placeholder": "Placeholder"
         }
     ],
-    "querystring" : {
-        "select" : "SELECT REF_BIZ_UNIT_ID As RefBizUnitId,BIZ_UNIT_CODE AS BusinessUnitCode, BIZ_UNIT_NAME AS BusinessUnitName",
-        "from" : "FROM dbo.REF_BIZ_UNIT WITH(NOLOCK)"
+    "querystring": {
+        "select": "SELECT REF_BIZ_UNIT_ID As RefBizUnitId,BIZ_UNIT_CODE AS BusinessUnitCode, BIZ_UNIT_NAME AS BusinessUnitName",
+        "from": "FROM dbo.REF_BIZ_UNIT WITH(NOLOCK)"
     },
     "headerList": [
         {
@@ -54,14 +54,16 @@
             "property": "BusinessUnitName"
         },
         {
-            "type" : "action",
-            "position" : "center",
-            "action" : [
+            "type": "action",
+            "position": "center",
+            "action": [
                 {
-                    "type" : "select",
-                    "property" : "RefBizUnitId"
+                    "type": "select",
+                    "property": "RefBizUnitId"
                 }
             ]
         }
-    ]  
+    ],
+    "propertyId": "BusinessUnitName",
+    "propertyName": "BusinessUnitName"
 }

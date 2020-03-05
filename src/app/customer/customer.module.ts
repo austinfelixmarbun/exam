@@ -3,22 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CustomerComponent } from 'app/customer/customer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
 import { CustomerRoutingModule } from 'app/customer/customer-routing.module';
 // import { ArchwizardModule } from 'angular-archwizard';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
-import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
-import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
+import { CustomerPagingComponent } from './customer-paging/customer-paging.component';
 import { UcpagingModule } from '@adins/ucpaging';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { CustomerPersonalMainInfoComponent } from './customer-personal/customer-personal-main-info/customer-personal-main-info.component';
+import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check.component';
 import { UcSubsectionModule } from '@adins/uc-subsection';
-
 @NgModule({
-  exports: [
-    CustomerComponent
+  exports: [ 
   ],
   imports: [
     CustomerRoutingModule,
@@ -27,6 +25,7 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
     FormsModule,
     HttpModule,
     NgbModule,
+    UcpagingModule,
     SharingComponentModule,
     UCSearchModule,
     UcgridfooterModule,
@@ -36,10 +35,9 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
     UcSubsectionModule
     // ArchwizardModule
   ],
-  declarations: [
-    CustomerComponent,
-    NegativeCustomerComponent,
-    NegativeCustomerDetailComponent
+  declarations: [ 
+    CustomerPagingComponent, 
+    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent
   ]
 })
 export class CustomerModule { 

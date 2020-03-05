@@ -42,6 +42,7 @@ export class OfficeObj {
     mrOfficeType:any;
     centerGrpTypeCode:any;
     centerGrpTypeName:any;
+    RowVersion: any;
 
-    constructor() { this.refOfficeId = 0; }
+    constructor() { this.refOfficeId = 0; this.RowVersion = ""}
 }

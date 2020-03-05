@@ -1,6 +1,6 @@
 {
     "title": "LOOK UP - SUPERVISOR",
-    "exportExcel": false, 
+    "exportExcel": false,
     "component": [
         {
             "type": "textbox",
@@ -27,9 +27,9 @@
             "placeholder": "Placeholder"
         }
     ],
-    "querystring" : {
-        "select" : "SELECT u.REF_EMP_Id as RefEmpId, u.USERNAME as Username, e.EMP_NO as EmployeeNo, e.EMP_NAME as EmployeeName",
-        "from" : "FROM dbo.REF_USER u WITH(NOLOCK) JOIN dbo.REF_EMP e WITH(NOLOCK) on u.REF_EMP_ID = e.REF_EMP_ID "
+    "querystring": {
+        "select": "SELECT u.REF_USER_ID as RefUserId, u.USERNAME as Username, e.EMP_NO as EmployeeNo, e.EMP_NAME as EmployeeName",
+        "from": "FROM dbo.REF_USER u WITH(NOLOCK) LEFT JOIN dbo.REF_EMP e WITH(NOLOCK) on u.REF_EMP_ID = e.REF_EMP_ID "
     },
     "headerList": [
         {
@@ -73,14 +73,16 @@
             "property": "EmployeeName"
         },
         {
-            "type" : "action",
-            "position" : "center",
-            "action" : [
+            "type": "action",
+            "position": "center",
+            "action": [
                 {
-                    "type" : "select",
-                    "property" : "RefEmpId"
+                    "type": "select",
+                    "property": "RefEmpId"
                 }
             ]
         }
-    ]  
+    ],
+    "propertyId": "Username",
+    "propertyName": "Username"
 }

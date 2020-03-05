@@ -1,6 +1,6 @@
 {
     "title": "LOOK UP - OFFICE",
-    "exportExcel": false, 
+    "exportExcel": false,
     "component": [
         {
             "type": "textbox",
@@ -19,9 +19,9 @@
             "placeholder": "Placeholder"
         }
     ],
-    "querystring" : {
-        "select" : "SELECT REF_OFFICE_Id As RefOfficeId, OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName",
-        "from" : "FROM dbo.REF_OFFICE WITH(NOLOCK)"
+    "querystring": {
+        "select": "SELECT REF_OFFICE_ID As RefOfficeId, OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName",
+        "from": "FROM dbo.REF_OFFICE WITH(NOLOCK)"
     },
     "headerList": [
         {
@@ -54,14 +54,16 @@
             "property": "OfficeName"
         },
         {
-            "type" : "action",
-            "position" : "center",
-            "action" : [
+            "type": "action",
+            "position": "center",
+            "action": [
                 {
-                    "type" : "select",
-                    "property" : "RefOfficeId"
+                    "type": "select",
+                    "property": "RefOfficeId"
                 }
             ]
         }
-    ]  
+    ],
+    "propertyId": "OfficeName",
+    "propertyName": "OfficeName"
 }

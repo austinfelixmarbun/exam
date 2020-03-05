@@ -1,6 +1,6 @@
 {
     "title": "LOOK UP - ROLE",
-    "exportExcel": false, 
+    "exportExcel": false,
     "component": [
         {
             "type": "textbox",
@@ -19,9 +19,9 @@
             "placeholder": "Placeholder"
         }
     ],
-    "querystring" : {
-        "select" : "SELECT REF_ROLE_ID As RefRoleId, ROLE_CODE AS RoleCode, ROLE_NAME AS RoleName",
-        "from" : "FROM dbo.REF_ROLE WITH(NOLOCK)"
+    "querystring": {
+        "select": "SELECT REF_ROLE_ID As RefRoleId, ROLE_CODE AS RoleCode, ROLE_NAME AS RoleName",
+        "from": "FROM dbo.REF_ROLE WITH(NOLOCK)"
     },
     "headerList": [
         {
@@ -54,14 +54,16 @@
             "property": "RoleName"
         },
         {
-            "type" : "action",
-            "position" : "center",
-            "action" : [
+            "type": "action",
+            "position": "center",
+            "action": [
                 {
-                    "type" : "select",
-                    "property" : "RefRoleId"
+                    "type": "select",
+                    "property": "RefRoleId"
                 }
             ]
         }
-    ]  
+    ],
+    "propertyId": "RoleName",
+    "propertyName": "RoleName"
 }
