@@ -34,7 +34,7 @@ export class AssetDocumentPagingComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetDocument.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetDocList;
     
-    this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
+    this.viewObj = "./assets/ucviewgeneric/viewAssetTypeForAssetDocument.json";
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();

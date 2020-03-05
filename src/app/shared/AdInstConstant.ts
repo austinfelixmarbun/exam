@@ -243,7 +243,8 @@ export class AdInsConstant {
   public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
   public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
   public static LoginByRole = "/Authenticate/LoginByRole";
-
+  public static LoginByToken = "/Authenticate/LoginByToken";
+  public static UpdateToken = "/Authenticate/UpdateRole";
 
   //FORM FEATURE
   public static GetListRefFeature = "/RefFeature/GetListRefFeature";
@@ -291,6 +292,16 @@ export class AdInsConstant {
   public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
   public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
   public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
+
+  //ASSET MASTER
+  public static AddAssetMaster = environment.FoundationR3Url + "/AssetMaster/AddAssetMaster";
+  public static EditAssetMaster = environment.FoundationR3Url + "/AssetMaster/EditAssetMaster";
+  public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
+  public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
+  public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueById";
+  public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById";
+  public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
+  public static GetListAssetSchmH = "http://localhost:5000/AssetSchmH/GetListAssetSchmHJoinSchmD";
 
   //REF PROFESSION
 

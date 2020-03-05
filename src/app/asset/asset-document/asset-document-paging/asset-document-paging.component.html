@@ -1,17 +1,25 @@
-<div class="form-body">
-  <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Asset Document </h4>
-  <div class="ucSearch-Button-Right">
-    <button type="button" class="addButton" [routerLink]="['../Detail']"
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+   <button type="button" class="addButton" [routerLink]="['../Detail']"
       [queryParams]="{mode:'add',AssetTypeId:AssetTypeId}" translate>
       <i class="ft-plus-circle"></i> Add
     </button>
     <button type="button" class="backButton" [routerLink]="['../../Configuration/Paging']" translate>
       <i class="ft-x"></i> Back
     </button>
-
-  </div>
+  </span>
 </div>
 
+
+ 
+ 
+<form class="form form-horizontal">
+  <div class="form-body">
+    <h4 class="form-section card-title" translate>
+      <i class="ft-file-text"></i> Asset Document
+    </h4>
+  </div>
+</form>
 
 
 
