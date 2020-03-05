@@ -2,9 +2,18 @@ import { formatDate } from "@angular/common";
 import { environment } from "../../environments/environment";
 
 export class AdInsConstant {
+  public static RestrictionBetween = "Between"
   public static RestrictionLike = "Like";
   public static RestrictionEq = "Eq";
+  public static RestrictionNeq = "NEQ";
+  public static RestrictionGt = "GT";
+  public static RestrictionGte = "GTE";
+  public static RestrictionLt = "LT";
+  public static RestrictionLte = "LTE";
+  public static RestrictionIn = "IN";
   public static RestrictionNotIn = "NotIn";
+  public static RestrictionOr = "Or"; //pastikan ada 1 criteria sebelumnya
+  public static RestrictionOrNeq = "OrNeq"; //pastikan ada 1 criteria sebelumnya
   public static RestrictionIsNull = "isnull";
   public static RestrictionIsNotNull = "isnotnull";
   public static showData = "10,50,100";
@@ -187,7 +196,8 @@ export class AdInsConstant {
   public static GetRefBizUnit = "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
   public static AddRefBizUnit = "/RefBizUnit/AddRefBizUnit";
   public static EditRefBizUnit = "/RefBizUnit/EditRefBizUnit";
-
+  public static DeleteRefBizUnit = "/RefBizUnit/DeleteRefBizUnit";
+  
   //REF COY
   public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
   public static GetRefCoy = "/RefCoy/GetRefCoy";

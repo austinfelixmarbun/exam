@@ -1,0 +1,66 @@
+{
+    "title": "Office Member",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "ROCGOM.OFFICE_CODE",
+            "id": "OfficeCodeId",
+            "value": "",
+            "label": "Office Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "ROCGOM.OFFICE_NAME",
+            "id": "OfficeNameId",
+            "value": "",
+            "label": "Office Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT ROCGOM.OFFICE_CODE AS OfficeCode, ROCGOM.OFFICE_NAME AS OfficeName, RO.REF_OFFICE_ID AS RefOfficeId",
+        "from": "FROM dbo.CENTER_GRP CG WITH(NOLOCK) JOIN dbo.REF_OFFICE RO WITH(NOLOCK) ON CG.CENTER_GRP_CODE = Ro.OFFICE_CODE JOIN dbo.CENTER_GRP_OFFICE_MBR CGOM WITH(NOLOCK) ON CGOM.CENTER_GRP_ID = CG.CENTER_GRP_ID JOIN dbo.REF_OFFICE ROCGOM WITH(NOLOCK) ON CGOM.REF_OFFICE_ID = ROCGOM.REF_OFFICE_ID"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE CODE",
+            "name": "OfficeCode"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE NAME",
+            "name": "OfficeName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "ACTION"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "delete",
+                    "property": "RefOfficeId"
+                }
+            ]
+        }
+    ]
+}

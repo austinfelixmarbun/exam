@@ -63,7 +63,7 @@
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
-            "isSelectOne": true,
+            "isSelectOne": false,
             "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
             "label": "Office Type",
             "criteriaPropName" : "RefMasterTypeCode",
@@ -170,7 +170,7 @@
                                 }
                             ],
                             "result" : {
-                                "path" : "/office/add",
+                                "path" : "/office/office-group-member",
                                 "param" : [
                                     {
                                         "type" : "RefOfficeId",
