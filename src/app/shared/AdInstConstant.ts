@@ -292,6 +292,16 @@ export class  AdInsConstant {
   public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
   public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
 
+  //ASSET MASTER
+  public static AddAssetMaster = environment.FoundationR3Url + "/AssetMaster/AddAssetMaster";
+  public static EditAssetMaster = environment.FoundationR3Url + "/AssetMaster/EditAssetMaster";
+  public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
+  public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
+  public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueById";
+  public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById";
+  public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
+  public static GetListAssetSchmH = "http://localhost:5000/AssetSchmH/GetListAssetSchmHJoinSchmD";
+
   //REF PROFESSION
 
   public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
