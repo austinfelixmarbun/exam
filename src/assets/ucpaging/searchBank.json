@@ -109,7 +109,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/bank/edit",
+                    "path": "/CommonSetting/Bank/detail",
                     "param": [
                         {
                             "type": "RefBankId",

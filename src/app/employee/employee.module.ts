@@ -39,6 +39,7 @@ import { UcviewgenericModule } from '@adins/ucviewgeneric';
     LookuprefbankModule,
     LookupemployeeModule,
     ReactiveFormsModule,
+    UcSubsectionModule,
     UcpagingModule,
     UcSubsectionModule
   ],
@@ -46,6 +47,8 @@ import { UcviewgenericModule } from '@adins/ucviewgeneric';
     EmployeePositionAddComponent,
     EmployeePositionComponent,
     EmployeeComponent,
+    EmployeeBusinessunitAddComponent,
+    EmployeeBusinessunitPagingComponent,
     EmployeeAddComponent,
     LeaveMaintenanceComponent,
     LeaveMaintenanceAddEditComponent,

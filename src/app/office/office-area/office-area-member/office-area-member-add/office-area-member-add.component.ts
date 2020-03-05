@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { environment } from 'environments/environment';
@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { resultMemoize } from '@ngrx/store';
+import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 
 @Component({
   selector: 'app-office-area-member-add',
@@ -19,12 +19,13 @@ import { resultMemoize } from '@ngrx/store';
 export class OfficeAreaMemberAddComponent implements OnInit {
 
   //** Start UC Search **//
-  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UCSearchComponent) UCSearchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
   OfficeCode: any;
   OfficeName: any;
   RefOfficeId: any;
+  refOfficeAreaObj: any;
   //** End UC Search **//
   resultData: any;
   pageNow: any;
@@ -44,7 +45,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   tempData: Array<any> = [];
   listSelectedId: Array<any> = [];
   listDeletedId: Array<any> = [];
-  data = [];
+  Data = [];
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -71,10 +72,10 @@ export class OfficeAreaMemberAddComponent implements OnInit {
 
   }
 
-  getResult(event){
+  getResult(event) {
     this.resultData = event.response;
     console.log(this.resultData)
-    this.totalData = event.response.count;
+    this.totalData = event.response.Count;
     this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
@@ -83,21 +84,22 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   onSelect(event) {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
+    this.totalData = event.Count;
     this.searchPagination(this.pageNow);
   }
 
   searchSort(event: any) {
+    this.orderByKey = event.target.attributes.name.nodeValue
     if (this.orderByKey == event.target.attributes.name.nodeValue) {
       this.orderByValue = !this.orderByValue
     } else {
       this.orderByValue = true
     }
-    this.orderByKey = event.target.attributes.name.nodeValue
     var order = {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+    this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   searchPagination(event: number) {
@@ -109,7 +111,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+    this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
 
   Checked(RefOfficeId: any, isChecked: any): void {
@@ -131,10 +133,16 @@ export class OfficeAreaMemberAddComponent implements OnInit {
         this.tempListId.push(this.listSelectedId[i]);
       }
       for (var i = 0; i < this.listSelectedId.length; i++) {
-        var object = this.resultData.data.find(x => x.RefOfficeId == this.listSelectedId[i]);
+        var object = this.resultData.Data.find(x => x.RefOfficeId == this.listSelectedId[i]);
         this.tempData.push(object);
       }
-      this.arrAddCrit = this.arrCrit;
+
+      this.arrAddCrit = new Array();
+      if (this.arrCrit.length != 0) {
+        for (var i = 0; i < this.arrCrit.length; i++) {
+          this.arrAddCrit.push(this.arrCrit[i]);
+        }
+      }
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
       addCrit.propName = "REF_OFFICE_ID";
@@ -148,67 +156,90 @@ export class OfficeAreaMemberAddComponent implements OnInit {
           value: this.orderByValue
         };
       }
-      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
-
+      this.inputObj.addCritInput = this.arrAddCrit;
+      this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
       this.listSelectedId = [];
-      console.log(this.listSelectedId);
-      console.log(this.tempData);
     } else {
       this.toastr.typeErrorCustom("Please select at least one Office");
     }
   }
 
   DeleteFromTemp(RefOfficeId) {
-    this.arrAddCrit = this.arrCrit;
-    var index = this.tempListId.indexOf(RefOfficeId);
-    if (index > -1) {
-      this.tempListId.splice(index, 1);
-      this.tempData.splice(index, 1);
-    }
-    var addCrit = new CriteriaObj();
-    addCrit.DataType = "numeric";
-    addCrit.propName = "REF_OFFICE_ID";
-    addCrit.restriction = AdInsConstant.RestrictionNotIn;
-    addCrit.listValue = this.tempListId;
-    if (this.tempListId.length != 0) {
-      this.arrAddCrit.push(addCrit);
-    }
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      };
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
-    console.log("selectedID : " + this.listSelectedId)
-    console.log("templateID : " + this.tempListId);
-    console.log(this.tempData);
-    console.log(this.resultData.data);
-  }
-  
-  saveOfficeAreaMember() {
-    var listObj = new Array();
-    for (var i = 0; i < this.tempData.length; i++) {
-      var arrOfficeAreaMember = {
-        OfficeCode: this.tempData[i].OfficeCode,
-        RefOfficeId: this.RefOfficeId
+    console.log("Delete From Temp")
+    if (confirm('Are you sure to delete this record?')) {
+      this.arrAddCrit = new Array();
+      if (this.arrCrit.length != 0) {
+        for (var i = 0; i < this.arrCrit.length; i++) {
+          this.arrAddCrit.push(this.arrCrit[i]);
+        }
       }
+      var index = this.tempListId.indexOf(RefOfficeId);
+      if (index > -1) {
+        this.tempListId.splice(index, 1);
+        this.tempData.splice(index, 1);
+      }
+      var addCrit = new CriteriaObj();
+      addCrit.DataType = "numeric";
+      addCrit.propName = "REF_OFFICE_ID";
+      addCrit.restriction = AdInsConstant.RestrictionNotIn;
+      addCrit.listValue = this.tempListId;
+      if (this.tempListId.length != 0) {
+        this.arrAddCrit.push(addCrit);
+      }
+
+      var order = null;
+      if (this.orderByKey != null) {
+        order = {
+          key: this.orderByKey,
+          value: this.orderByValue
+        };
+      }
+      this.inputObj.addCritInput = this.arrAddCrit;
+
+        this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
       
-      listObj.push(arrOfficeAreaMember);
     }
-    var officeAreaMemberList = { listOfOfficeAreaMember: listObj };
-    console.log(officeAreaMemberList);
+  }
 
-    this.http.post(this.addUrl, officeAreaMemberList).subscribe(
-      (response) => {
-          console.log(response);
-          this.toastr.successMessage(response['message']);
-          this.router.navigateByUrl('/office/OfficeArea');
-      },
-      (error) => {
-          console.log(error);
-      });
+  SaveOfficeAreaMember() {
+    // this.refOfficeAreaObj = new RefOfficeAreaObj()
+    // for (let index = 0; index < this.tempData.length; index++) {
+    //   console.log(this.tempData);
+    //   var refOfficeAreaObj = {
+    //     AssetSchmDId:this.tempData[index].assetSchmDId,
+    //     AssetSchmHId: this.tempData[index].assetSchmHId,
+    //     AssetMasterId: this.tempData[index].assetMasterId
+    //   }
+    //   this.arrAssetSchmD.push(refOfficeAreaObj);
+    // }
 
+    // var AssetSchmObj = {
+    //   AssetSchmH: this.assetSchmHObj,
+    //   AssetSchmD: this.arrAssetSchmD
+    // }
+    // console.log(refOfficeAreaObj);
+    // // if (this.pageType === 'add') {
+    // //   this.assetService.addAssetSchmHAndD(AssetSchmObj).subscribe(
+    // //     response => {
+    // //       console.log(response);
+    // //       this.toastr.successMessage(response['message']);
+    // //       this.router.navigateByUrl('asset/assetSchmPaging');
+    // //     },
+    // //     error => {
+    // //       console.log(error);
+    // //     }
+    // //   );
+    // // } else {
+    //   this.assetService.editAssetSchmHAndD(AssetSchmObj).subscribe(
+    //     response => {
+    //       console.log(response);
+    //       this.toastr.successMessage(response['message']);
+    //       this.router.navigateByUrl('asset/assetSchmPaging');
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   );
+    // // }
   }
 }

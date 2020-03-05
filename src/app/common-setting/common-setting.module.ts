@@ -2,7 +2,7 @@ import { MasterTypeAddEditComponent } from 'app/common-setting/master-type/maste
 import { MasterPagingComponent } from 'app/common-setting/master/master-paging/master-paging.component';
 import { MasterAddEditComponent } from 'app/common-setting/master/master-add-edit/master-add-edit.component';
 import { CommonSettingRoutingModule } from 'app/common-setting/common-setting-routing.module';
-import { MasterTypePagingComponent } from 'app/common-setting/master-type/master-type-paging/master-type-paging.component';
+
 import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
@@ -39,9 +39,14 @@ import { WorkingHourDDetailComponent } from './working-hour-scheme/working-hour-
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
-import {RefIndustryTypeComponent} from './ref-industry-type/ref-industry-type.component';
-import {RefIndustryTypeDetailComponent} from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
+import { MasterTypePagingComponent } from './master-type/master-type-paging/master-type-paging.component';
 import { FormModule } from 'app/forms/forms.module';
+import { RefIndustryTypeComponent } from './ref-industry-type/ref-industry-type.component';
+import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
+import { BankComponent } from 'app/bank/bank.component';
+import { BankAddComponent } from 'app/bank/add/add-bank.component';
+import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
 
 @NgModule({
   imports: [
@@ -88,7 +93,11 @@ import { FormModule } from 'app/forms/forms.module';
     RefStatusPagingComponent,
     ProfessionComponent,
     ProfessionAddEditComponent,
-    RefIndustryTypeComponent, 
+    RefIndustryTypeComponent,
+    BankComponent,
+    BankAddComponent,
+    ZipcodeComponent,
+    ZipcodeAddComponent,
     RefIndustryTypeDetailComponent
   ],
   providers: [

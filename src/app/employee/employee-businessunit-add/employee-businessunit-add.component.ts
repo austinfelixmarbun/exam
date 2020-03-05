@@ -37,10 +37,6 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
   inputPagingObjOffice: InputLookupObj;
   inputPagingObjRole: InputLookupObj;
 
-  UserRoleObj: RefUserRole;
-
-
-
   RefUserId: any;
   RefUserRoleId: any;
   viewObj: string;
@@ -56,7 +52,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
   }
 
   ngOnInit() {
- 
+
     this.initLookUp();
     var critInput = new CriteriaObj();
     critInput.propName = "usr.REF_USER_ID";
@@ -93,15 +89,15 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
           var Supervisor = new RefUserObj();
           Supervisor.RefUserId = this.result["SpvId"];
-          if(this.result["SpvId"] == null){
+          if (this.result["SpvId"] == null) {
             this.inputPagingObjSupervisor.nameSelect = "";
           }
-          else{
-          this.http.post(AdInsConstant.GetRefUserById, Supervisor).subscribe(
-            (response) => {
-                this.inputPagingObjSupervisor.nameSelect = response["Username"];             
-            }
-          )
+          else {
+            this.http.post(AdInsConstant.GetRefUserById, Supervisor).subscribe(
+              (response) => {
+                this.inputPagingObjSupervisor.nameSelect = response["Username"];
+              }
+            )
           }
           var Office = new OfficeObj();
           Office.refOfficeId = this.result["RefOfficeId"];
@@ -167,25 +163,25 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
   }
   //#region getLookup
-  getBizUnitId(ev){
+  getBizUnitId(ev) {
     this.userRole.RefBizUnitId = ev.RefBizUnitId;
-    
+
   }
-  getJobTitleId(ev){
+  getJobTitleId(ev) {
     this.userRole.RefJobTitleId = ev.RefJobTitleId;
-    
+
   }
-  getSpvId(ev){
+  getSpvId(ev) {
     this.userRole.SpvId = ev.RefUserId;
-    
+
   }
-  getOfficeId(ev){
+  getOfficeId(ev) {
     this.userRole.RefOfficeId = ev.RefOfficeId;
-    
+
   }
-  getRoleId(ev){
+  getRoleId(ev) {
     this.userRole.RefRoleId = ev.RefRoleId;
-    
+
   }
   //#endregion
 
@@ -200,7 +196,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.http.post(AdInsConstant.EditRefUserRole, this.userRole).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.router.navigate(['/employee/EmployeeBusinessUnit/Paging'], { queryParams: {RefUserId:this.RefUserId} });
+          this.router.navigate(['/employee/EmployeeBusinessUnit/Paging'], { queryParams: { RefUserId: this.RefUserId } });
         },
         (error) => {
           console.log(error);
@@ -213,7 +209,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.userRole.RefUserId = this.RefUserId;
       this.http.post(AdInsConstant.AddRefUserRole, this.userRole).subscribe((response) => {
         this.toastr.successMessage(response['message']);
-        this.router.navigate(['/employee/EmployeeBusinessUnit/Paging'], { queryParams: {RefUserId:this.RefUserId} });
+        this.router.navigate(['/employee/EmployeeBusinessUnit/Paging'], { queryParams: { RefUserId: this.RefUserId } });
       },
         (error) => {
           console.log(error);
