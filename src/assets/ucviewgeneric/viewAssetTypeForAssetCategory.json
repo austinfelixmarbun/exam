@@ -1,0 +1,29 @@
+{
+  "title": "Asset Category",
+  "subsection": [
+    {
+      "subSectionId": "AssetTypeId",
+      "subSectionTitle": "Asset Type",
+      "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+      "mainInfo": [
+        {
+          "type": "text",
+          "label": "AssetTypeCode",
+          "property": "AssetTypeCode"
+        },
+        {
+          "type": "text",
+          "label": "AssetTypeName",
+          "property": "AssetTypeName"
+        } 
+        
+       
+      ],
+      "querystring": {
+        "select": "SELECT ASSET_TYPE_CODE AS AssetTypeCode , ASSET_TYPE_NAME AS AssetTypeName",
+        "from": "FROM ASSET_TYPE WITH(NOLOCK)",
+        "where": "WHERE ASSET_TYPE_ID = {0}"
+      }
+    }
+  ]
+}
