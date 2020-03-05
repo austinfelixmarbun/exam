@@ -10,11 +10,12 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AssetTypeAddEditComponent } from "./asset-type/asset-type-add-edit/asset-type-add-edit.component";
 import { AssetTypePagingComponent } from "./asset-type/asset-type-paging/asset-type-paging.component";
 import { ShowErrorsComponent } from "app/test-new/show-errors.component";
+// import { ShowErrorsComponent } from "app/test-new/show-errors.component";
+import { RouterModule } from "@angular/router";
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { AssetSchemeAddEditMemberComponent } from "./asset-scheme/asset-scheme-add-edit-member/asset-scheme-add-edit-member.component";
 import { AssetSchemeAddEditInformationComponent } from "./asset-scheme/asset-scheme-add-edit-information/asset-scheme-add-edit-information.component";
 import { AssetConfigurationPagingComponent } from "./asset-configuration/asset-configuration-paging/asset-configuration-paging.component";
-import { RouterModule } from "@angular/router";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
 import { AssetCategoryPagingComponent } from "./asset-category/asset-category-paging/asset-category-paging.component";
 // import { AssetCategoryInformationComponent } from "./asset-category/asset-category-information/asset-category-information.component";
@@ -76,6 +77,10 @@ import { AssetMasterComponent } from "./asset-master/asset-master-paging/asset-m
     // AssetDocumentMasterPagingInformationComponent,
     NegativeAssetComponent,
     NegativeAssetDetailComponent,
+    // ShowErrorsComponent,
+    AssetAccessoryPagingComponent,
+    AssetDocumentPagingComponent,
+    AssetDocumentMasterPagingComponent,
     AssetAccessoryAddEditComponent,
     AssetCategoryAddEditComponent,
     AssetDocumentAddEditComponent,

@@ -243,7 +243,8 @@ export class  AdInsConstant {
   public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
   public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
   public static LoginByRole = "/Authenticate/LoginByRole";
-
+  public static LoginByToken = "/Authenticate/LoginByToken";
+  public static UpdateToken = "/Authenticate/UpdateRole";
 
   //FORM FEATURE
   public static GetListRefFeature = "/RefFeature/GetListRefFeature";

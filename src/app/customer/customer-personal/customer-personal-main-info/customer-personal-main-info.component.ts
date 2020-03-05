@@ -44,7 +44,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   IdExpiredDt : any;
   MotherMaidenName : any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
-  this.getUrl = environment.FoundationR3Url + AdInsConstant.GetListKeyValueRefMasterByCode;  
+  this.getUrl = environment.FoundationR3Url + AdInsConstant.GetListActiveRefMaster;  
   }
 
   ngOnInit() {

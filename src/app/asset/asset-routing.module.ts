@@ -20,8 +20,8 @@ import { AssetAccessoryAddEditComponent } from './asset-accessory/asset-accessor
 import { AssetCategoryAddEditComponent } from './asset-category/asset-category-add-edit/asset-category-add-edit.component';
 import { AssetDocumentAddEditComponent } from './asset-document/asset-document-add-edit/asset-document-add-edit.component';
 import { AssetDocumentMasterAddEditComponent } from './asset-document-master/asset-document-master-add-edit/asset-document-master-add-edit.component';
-import { AssetMasterAddEditChildComponent } from './asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component';
-import { AssetMasterAddEditParentComponent } from './asset-master/asset-master-add-edit-parent/asset-master-add-edit-parent.component';
+// import { AssetMasterAddEditChildComponent } from './asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component';
+// import { AssetMasterAddEditParentComponent } from './asset-master/asset-master-add-edit-parent/asset-master-add-edit-parent.component';
 import { AssetMasterComponent } from './asset-master/asset-master-paging/asset-master.component';
  
 const routes: Routes = [
@@ -205,20 +205,20 @@ const routes: Routes = [
                   title: 'Asset Master'
                 },
               },
-              {
-                path: 'AssetMaster/Detail',
-                component: AssetMasterAddEditParentComponent,
-                data: {
-                  title: 'Asset Master Add Edit Parent'
-                },
-              },
-              {
-                path: 'AssetMaster/Child',
-                component: AssetMasterAddEditChildComponent,
-                data: {
-                  title: 'Asset Master Add Edit Child'
-                },
-              }
+            //   {
+            //     path: 'AssetMaster/Detail',
+            //     component: AssetMasterAddEditParentComponent,
+            //     data: {
+            //       title: 'Asset Master Add Edit Parent'
+            //     },
+            //   },
+            //   {
+            //     path: 'AssetMaster/Child',
+            //     component: AssetMasterAddEditChildComponent,
+            //     data: {
+            //       title: 'Asset Master Add Edit Child'
+            //     },
+            //   }
         ]
     }
 ];
