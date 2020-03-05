@@ -100,12 +100,12 @@ export class ProdOfferingAddComponent implements OnInit {
         this.prodOfferingObj.ProdOfferingCode = this.resultData.ProdOfferingCode;
         this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
         this.prodOfferingObj.ProdOfferingHId = this.resultData.ProdOfferingHId;
-        this.prodOfferingObj.ProdOfferingId ="0";
-        this.prodOfferingObj.RowVersion = "";
-        this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
+        this.prodOfferingObj.ProdOfferingId =this.param;
+        this.prodOfferingObj.RowVersion = this.prodOfferingObj.RowVersion;
+        this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/product/prod-offering/add-detail"],{queryParams :{"ProdOfferingHId" : this.prodOfferingObj.ProdOfferingHId}});
+            this.router.navigate(["/product/prod-offering/add-detail"],{queryParams :{"ProdOfferingHId" : this.resultData.ProdOfferingHId}});
           },
           error => {
             console.log(error);
@@ -118,7 +118,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/product/prod-offering/add-detail"],{queryParams :{"ProdOfferingHId" : response["ProdOfferingHId"]}});
+            this.router.navigate(["/product/prod-offering/add-detail"],{queryParams :{"ProdOfferingHId" : response["DraftProdOfferingHId"]}});
           },
           error => {
             console.log(error);

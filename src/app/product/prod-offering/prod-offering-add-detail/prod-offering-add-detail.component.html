@@ -7,7 +7,7 @@
             <h4 class="card-title" translate>Product Offering </h4>
           </div>
           <div class="col-md-4" style="text-align-last: right">
-            <button type="button" class="backButton" [routerLink]="['/product/prod-offering/prod-offering-add']" translate>
+            <button type="button" class="backButton" [routerLink]="['/product/prod-offering/add']" translate>
               <i class="ft-arrow-left"></i> Back
             </button>
           </div>
@@ -48,7 +48,7 @@
                     <i class="fa fa-check-square-o"></i> General Data
                   </button>
       
-                  <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./ProductComponent']">
+                  <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./ProductComponent']"[queryParams]="{ProdOfferingHId:ProdOfferingHId}">
                     <i class="fa fa-check-square-o"></i> Product Component
                   </button>
       
@@ -59,14 +59,14 @@
                 <router-outlet></router-outlet>
               </div>
             </div>
-            <div class="form-actions right">
+            <!-- <div class="form-actions right">
               <button type="submit" class="btn btn-raised btn-primary">
                 <i class="fa fa-check-square-o"></i> Back
               </button>
               <button type="submit" class="btn btn-raised btn-primary">
                 <i class="fa fa-check-square-o"></i> Save
               </button>
-            </div>
+            </div> -->
         </div>
       </div>
     </div>

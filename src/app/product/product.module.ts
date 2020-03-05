@@ -46,9 +46,7 @@ import { CommonModule } from '@angular/common';
         ProductHOAddComponent,
         ProductHoAdddetailComponent,
         ProductHODeactivatePagingComponent,
-        ProductHODeactivateEditComponent,
-        GeneralDataComponent,
-        ProductComponentComponent
+        ProductHODeactivateEditComponent
     ]
   })
 

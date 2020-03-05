@@ -396,6 +396,7 @@ export class AdInsConstant {
   public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
   public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
   public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
+  public static AddOrEditProdOfferingDetail = environment.FoundationR3Url + "/ProductOffering/AddOrEditProdOfferingDetail";
 
 
   // PRODUCT COMPONENT
