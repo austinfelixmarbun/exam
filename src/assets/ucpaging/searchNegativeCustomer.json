@@ -173,11 +173,11 @@
             "action" : [ 
                 {
                     "type" : "edit", 
-                    "path" : "", 
+                    "path" : "/Customer/NegativeCustomer/Detail", 
                     "param" : [ 
                         {
                             "type" : "negativeCustId", 
-                            "property" : "assetNegativeId" 
+                            "property" : "negativeCustId" 
                         },
                         {
                             "type": "param",
