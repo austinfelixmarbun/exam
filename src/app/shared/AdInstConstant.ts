@@ -33,6 +33,7 @@ export class  AdInsConstant {
 
   //REF OFFICE
   public static GetRefOfficeObj = "/RefOffice/GetRefOfficeObj";
+  public static GetRefOfficeByRefOfficeId = environment.FoundationR3Url + "/RefOffice/GetRefOfficeByRefOfficeId"
   public static GetRefOfficeActiveAndNonVirtualKeyValue = "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue";
   public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
   public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
@@ -140,8 +141,12 @@ export class  AdInsConstant {
   public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
   public static ResetPassword = "/UserManagement/ResetPassword";
   public static AddRefUserR3 = "/RefUser/AddRefUser";
+  public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
   public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
-
+  public static AddRefUserRole = environment.FoundationR3Url + "/RefUserRole/AddRefUserRole"
+  public static EditRefUserRole = environment.FoundationR3Url + "/RefUserRole/EditRefUserRole";
+  public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
+  public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
   //REF-ROLE
   public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
   public static AddRefRole = environment.FoundationR3Url + "/RefRole/AddRefRole";
@@ -176,7 +181,7 @@ export class  AdInsConstant {
 
   //BUSINESS UNIT
   public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
-  public static GetRefBizUnit = "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
+  public static GetRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
   public static AddRefBizUnit = "/RefBizUnit/AddRefBizUnit";
   public static EditRefBizUnit = "/RefBizUnit/EditRefBizUnit";
 
@@ -286,6 +291,16 @@ export class  AdInsConstant {
   public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
   public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
   public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
+
+  //ASSET MASTER
+  public static AddAssetMaster = environment.FoundationR3Url + "/AssetMaster/AddAssetMaster";
+  public static EditAssetMaster = environment.FoundationR3Url + "/AssetMaster/EditAssetMaster";
+  public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
+  public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
+  public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueById";
+  public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById";
+  public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
+  public static GetListAssetSchmH = "http://localhost:5000/AssetSchmH/GetListAssetSchmHJoinSchmD";
 
   //REF PROFESSION
 

@@ -27,7 +27,7 @@
         },
         {
             "type": "dropdown",
-            "name": "is_Active",
+            "name": "A.IS_ACTIVE",
             "id": "isActive",
             "value": "Active Status",
             "placeholder": "Placeholder",
@@ -49,7 +49,7 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT A.REF_EMP_ID AS refEmpId, B.USERNAME AS username, A.EMP_NO AS empNo, A.EMP_NAME AS empName, A.IS_ACTIVE AS isActive",
+        "select": "SELECT A.REF_EMP_ID AS refEmpId, B.USERNAME AS username, A.EMP_NO AS empNo, A.EMP_NAME AS empName, A.IS_ACTIVE AS isActive, B.REF_USER_ID AS RefUserId",
         "from": "FROM REF_EMP AS A INNER JOIN REF_USER AS B ON A.REF_EMP_ID = B.REF_EMP_ID",
         "where": "A.IS_ACTIVE = 1"
     },
@@ -116,8 +116,13 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "",
-                    "param": []
+                    "path": "/employee/EmployeeBusinessUnit/Paging",
+                    "param": [
+                        {
+                            "type" : "RefUserId",
+                            "property" : "RefUserId"
+                        }
+                    ]
                 }
             ]
         },
