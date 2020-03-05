@@ -1,28 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AssetCategoryObj } from 'app/shared/model/AssetCategoryObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { AssetCategoryObj } from 'app/shared/model/AssetCategoryObj.Model';
-
 
 @Component({
-  selector: 'app-asset-category-information',
-  templateUrl: './asset-category-information.component.html',
-  styleUrls: ['./asset-category-information.component.scss'],
+  selector: 'app-asset-category-add-edit',
+  templateUrl: './asset-category-add-edit.component.html',
+  styleUrls: ['./asset-category-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
-export class AssetCategoryInformationComponent implements OnInit {
+export class AssetCategoryAddEditComponent implements OnInit {
 
 
 
   AssetCategoryForm = this.fb.group({
     AssetCategoryName: ['', [Validators.required, Validators.maxLength(100)]],
     AssetCategoryCode: ['', [Validators.required, Validators.maxLength(50)]],
-    IsActive: [false]
+    IsActive: [true]
   });
   pageType: any;
   AssetTypeId: any;
@@ -35,9 +33,7 @@ export class AssetCategoryInformationComponent implements OnInit {
   getUrl: any;
   addUrl: any;
   editUrl: any;
-
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-
     this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewAssetCategory;
     this.editUrl = environment.FoundationR3Url + AdInsConstant.EditAssetCategory;
     this.route.queryParams.subscribe(params => {
@@ -55,10 +51,10 @@ export class AssetCategoryInformationComponent implements OnInit {
       }
 
 
-    });
-  }
+    }); }
 
   ngOnInit() {
+    
 
     if (this.pageType == "edit") {
       // this.title = "Edit Bank";
@@ -75,7 +71,7 @@ export class AssetCategoryInformationComponent implements OnInit {
           this.AssetCategoryForm.patchValue({
             AssetCategoryCode: this.result.AssetCategoryCode,
             AssetCategoryName: this.result.AssetCategoryName,
-            isActive: this.result.isActive
+            IsActive : this.result.IsActive
 
           })
         },
@@ -84,11 +80,9 @@ export class AssetCategoryInformationComponent implements OnInit {
         }
       );
     }
-
-
-
-
+ 
   }
+  
   SaveForm() {
     console.log("awd");
 
@@ -136,4 +130,5 @@ export class AssetCategoryInformationComponent implements OnInit {
 
 
   }
+
 }
