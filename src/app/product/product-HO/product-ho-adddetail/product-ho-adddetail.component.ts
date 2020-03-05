@@ -40,12 +40,13 @@ export class ProductHoAdddetailComponent implements OnInit {
     private toastr: NGXToastrService
   ) {
     this.route.queryParams.subscribe(params => {
-      console.log("Params: ");
-      console.log(params);
+      // console.log("Params: ");
+      // console.log(params);
       this.objPassing["param"] = params["ProdHId"];
       this.objPassing["mode"] = params["mode"];
-      console.log("obj passing: ");
-      console.log(this.objPassing);
+      this.objPassing["url"] = AdInsConstant.GetProductDetailComponentInfo;
+      // console.log("obj passing: ");
+      // console.log(this.objPassing);
       
       this.key = params["key"];
     })
@@ -60,7 +61,7 @@ export class ProductHoAdddetailComponent implements OnInit {
     this.UrlBackEnd=AdInsConstant.GetProductMainInfo;
     this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
         this.ResultResponse=response;
         this.RefProductHOForm.patchValue({
           ProdCode: this.ResultResponse.ProdCode,
