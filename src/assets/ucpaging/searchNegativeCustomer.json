@@ -2,88 +2,26 @@
     "title": "Negative Asset",
     "component": [
         {
-            "type" : "dropdown",
-            "label" : "Asset Type Name",
-            "name" : "asset_Type_Name",
-            "id" : "assetTypeName",
-            "value" : "",
-            "datatype" : "text",
-            "isSelectOne" : "false",
-            "items" : [],
-            "isFromURL" : "true", 
-            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetType/GetListKeyValueActiveByCode", 
-            "itemsUrl" : [], 
-            "criteriaPropName" : "",
-            "criteriaPropValue" : ""
+            "type": "textbox",
+            "name": "cust_No",
+            "id": "custNo",
+            "value": "",
+            "label": "Customer No",
+            "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
-            "name": "serial_No_1",
-            "id": "serialNo1",
+            "name": "cust_Name",
+            "id": "custName",
             "value": "",
-            "label": "Serial No 1",
+            "label": "Customer Name",
             "placeholder": "Placeholder"
         },
         {
             "type" : "dropdown",
-            "label" : "Asset Category Name",
-            "name" : "asset_Category_Name",
-            "id" : "assetCategoryName",
-            "value" : "",
-            "datatype" : "text",
-            "isSelectOne" : "false",
-            "items" : [],
-            "isFromURL" : "true", 
-            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetCategory/GetListActiveAssetCategoryValue", 
-            "itemsUrl" : [], 
-            "criteriaPropName" : "",
-            "criteriaPropValue" : ""
-        },
-        {
-            "type": "textbox",
-            "name": "serial_No_2",
-            "id": "serialNo2",
-            "value": "",
-            "label": "Serial No 2",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "full_Asset_Code",
-            "id": "fullAssetCode",
-            "value": "",
-            "label": "Full Asset Code",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "serial_No_3",
-            "id": "serialNo3",
-            "value": "",
-            "label": "Serial No 3",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "full_Asset_Name",
-            "id": "fullAssetName",
-            "value": "",
-            "label": "Full Asset Name",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "serial_No_4",
-            "id": "serialNo4",
-            "value": "",
-            "label": "Serial No 4",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type" : "dropdown",
-            "label" : "Negative Source",
-            "name" : "negative_Source",
-            "id" : "negativeSource",
+            "label" : "Customer Type",
+            "name" : "customer_Type",
+            "id" : "customerType",
             "value" : "",
             "datatype" : "text",
             "isSelectOne" : "false",
@@ -91,27 +29,19 @@
             "isFromURL" : "true", 
             "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetRefMasterByMasterCode", 
             "itemsUrl" : [], 
-            "criteriaPropName" : "MasterCode",
-            "criteriaPropValue" : "NEGATIVE_SOURCE"
-        },
-        {
-            "type": "textbox",
-            "name": "serial_No_5",
-            "id": "serialNo5",
-            "value": "",
-            "label": "Serial No 5",
-            "placeholder": "Placeholder"
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "CUST_TYPE"
         },
         {
             "type": "dropdown",
             "name": "is_Active",
             "id": "isActive",
-            "value": "Active Status",
+            "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
             "isSelectOne" : false,
             "url": "",
-            "label": "Active Status",
+            "label": "Active",
             "items": [
                 {
                     "key": "1",
@@ -123,124 +53,114 @@
                 }
             ],
             "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "id_No",
+            "id": "idNo",
+            "value": "",
+            "label": "ID No.",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type" : "dropdown",
+            "label" : "Negative Type",
+            "name" : "mr_Neg_Cust_Type_Code",
+            "id" : "negativeType",
+            "value" : "",
+            "datatype" : "text",
+            "isSelectOne" : "false",
+            "items" : [],
+            "isFromURL" : "true", 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetRefMasterByMasterCode", 
+            "itemsUrl" : [], 
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "NEG_CUST_TYPE"
         }
     ],
     "querystring": { 
-        "select": "SELECT A.ASSET_NEGATIVE_ID AS assetNegativeId, C.ASSET_TYPE_NAME AS assetTypeName, B.FULL_ASSET_CODE AS fullAssetCode, B.FULL_ASSET_NAME AS fullAssetName, A.SERIAL_NO_1 AS serialNo1, A.SERIAL_NO_2 AS serialNo2, A.SERIAL_NO_3 AS serialNo3, A.SERIAL_NO_4 AS serialNo4, A.SERIAL_NO_5 AS serialNo5, D.DESCR as descr, A.IS_ACTIVE AS isActive",
-        "from": "FROM ASSET_NEGATIVE AS A WITH(NOLOCK) INNER JOIN ASSET_MASTER AS B WITH(NOLOCK) ON A.ASSET_MASTER_ID = B.ASSET_MASTER_ID INNER JOIN ASSET_TYPE AS C WITH(NOLOCK) ON B.ASSET_TYPE_ID = C.ASSET_TYPE_ID INNER JOIN REF_MASTER AS D WITH(NOLOCK) ON A.MR_NEG_ASSET_SOURCE_CODE = D.MASTER_CODE"
+        "select": "SELECT NEGATIVE_CUST_ID AS negativeCustId, CUST_NO AS custNo, CUST_NAME AS custName, MR_CUST_TYPE_CODE AS mrCustTypeCode, ID_NO AS idNo, B.DESCR AS negCustSource, C.DESCR AS negCustType, A.IS_ACTIVE AS isActive",
+        "from": "FROM NEGATIVE_CUST AS A WITH(NOLOCK) INNER JOIN REF_MASTER AS B WITH(NOLOCK) ON A.MR_NEG_CUST_SOURCE_CODE = B.MASTER_CODE INNER JOIN REF_MASTER AS C WITH(NOLOCK) ON A.MR_NEG_CUST_TYPE_CODE = C.MASTER_CODE"
     },
     "headerList" : [ 
         {
             "type" : "sort", 
             "position" : "left", 
-            "label" : "Asset Type Name",
-            "name" : "assetTypeName" 
+            "label" : "Customer No",
+            "name" : "custNo" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
-            "label" : "Full Asset Code", 
-            "name" : "fullAssetCode" 
+            "label" : "Customer Name", 
+            "name" : "custName" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
-            "label" : "Full Asset Name", 
-            "name" : "fullAssetName" 
+            "label" : "Customer Type", 
+            "name" : "mrCustTypeCode" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
-            "label" : "Serial No. 1", 
-            "name" : "serialNo1"
+            "label" : "ID No.", 
+            "name" : "idNo"
         },
         {
             "type" : "sort", 
             "position" : "left", 
-            "label" : "Serial No. 2", 
-            "name" : "serialNo2"
+            "label" : "Negative Cause", 
+            "name" : "negCustSource"
         },
         {
             "type" : "sort", 
             "position" : "left", 
-            "label" : "Serial No. 3", 
-            "name" : "serialNo3"
+            "label" : "Negative Type", 
+            "name" : "negCustType"
         },
         {
             "type" : "sort", 
             "position" : "left", 
-            "label" : "Serial No. 4", 
-            "name" : "serialNo4"
-        },
-        {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Serial No. 5", 
-            "name" : "serialNo5"
-        },
-        {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Negative Source", 
-            "name" : "descr"
-        },
-        {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Active Status", 
+            "label" : "Active", 
             "name" : "isActive"
         },
         {
             "type" : "label",
             "position" : "center",
-            "label" : "Action"
+            "label" : "Edit"
         }
     ],
     "bodyList" : [
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "assetTypeName" 
+            "property" : "custNo" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "fullAssetCode" 
+            "property" : "custName" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "fullAssetName" 
+            "property" : "mrCustTypeCode" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "serialNo1" 
+            "property" : "idNo" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "serialNo2" 
+            "property" : "negCustSource" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "serialNo3" 
-        },
-        {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "serialNo4" 
-        },
-        {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "serialNo5" 
-        },
-        {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "descr" 
+            "property" : "negCustType" 
         },
         {
             "type" : "boolean", 
@@ -253,10 +173,10 @@
             "action" : [ 
                 {
                     "type" : "edit", 
-                    "path" : "/Asset/NegativeAsset/Detail", 
+                    "path" : "", 
                     "param" : [ 
                         {
-                            "type" : "assetNegativeId", 
+                            "type" : "negativeCustId", 
                             "property" : "assetNegativeId" 
                         },
                         {

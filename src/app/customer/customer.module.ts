@@ -10,6 +10,10 @@ import { CustomerRoutingModule } from 'app/customer/customer-routing.module';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
+import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
+import { UcpagingModule } from '@adins/ucpaging';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
 
 @NgModule({
   exports: [
@@ -25,10 +29,15 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
     SharingComponentModule,
     UCSearchModule,
     UcgridfooterModule,
+    UcpagingModule,
+    ReactiveFormsModule,
+    UclookupgenericModule
     // ArchwizardModule
   ],
   declarations: [
-    CustomerComponent
+    CustomerComponent,
+    NegativeCustomerComponent,
+    NegativeCustomerDetailComponent
   ]
 })
 export class CustomerModule { 
