@@ -7,6 +7,8 @@ import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
+import { RefProductBrancMbrObj } from "../../../shared/model/RefProductBrancMbrObj.Model";
 
 
 
@@ -16,19 +18,27 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   providers: [DecimalPipe, NGXToastrService]
 })
 export class ProductHOViewComponent implements OnInit {
+
   prodId: any;
   prodHId: any;
   viewProdMainInfoObj: any;
-  prodHPagingObj: any;
-  prodHCrit: any;
+  ProdBranchMemObj: any;
   prodBranchMemPagingObj: any;
   prodBrancMemCrit: any;
-  apiUrl: any;
+  ProdBranchUrl: any;
+  ProdDUrl: any;
+  refProductDetailObj: any;
+  GenData: any;
+  ProdCompSchm: any;
+  ProdCompScore: any;
+  ProdCompRule: any;
+  ProdCompOther: any;
+  ProdBranchMbr: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
-    this.apiUrl = AdInsConstant.GetRefZipCodeById;
-
+    this.ProdDUrl = AdInsConstant.GetProductDetailComponentInfo;
+    this.ProdBranchUrl = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {
         this.prodHId = params["prodHId"];
@@ -40,37 +50,99 @@ export class ProductHOViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    //** Main Information **//
     this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
 
-    this.prodHPagingObj = new UcPagingObj();
-    this.prodHPagingObj._url = "./assets/ucpaging/product/searchProdHforProductHOView.json";
-    this.prodHPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.prodHPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.prodHPagingObj.pagingJson = "./assets/ucpaging/product/searchProdHforProductHOView.json";
-    this.prodHCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.propName = 'A.PROD_ID';
-    critObj.value = this.prodId;
-    this.prodHCrit.push(critObj);
-    this.prodHPagingObj.addCritInput = this.prodHCrit;
-
-    this.prodBranchMemPagingObj = new UcPagingObj();
-    this.prodBranchMemPagingObj._url = "./assets/ucpaging/product/searchProdBranchMemforProductHOView.json";
-    this.prodBranchMemPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.prodBranchMemPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.prodBranchMemPagingObj.pagingJson = "./assets/ucpaging/product/searchProdBranchMemforProductHOView.json";
-    this.prodBrancMemCrit = new Array();
-    var critObj2 = new CriteriaObj();
-    critObj2.restriction = AdInsConstant.RestrictionEq;
-    critObj2.propName = 'B.PROD_H_ID';
-    critObj2.value = this.prodHId;
-    this.prodBrancMemCrit.push(critObj2);
-    this.prodBranchMemPagingObj.addCritInput = this.prodBrancMemCrit;
+    //** Product Version **//
 
 
+    //** Office Member **//
+    this.ProdBranchMemObj = new RefProductBrancMbrObj
+    this.ProdBranchMemObj.ProdHId = this.prodHId;
+    this.http.post(this.ProdBranchUrl, this.ProdBranchMemObj).subscribe(
+      response => {
+        console.log("Response: ");
+        console.log(response);
+        this.ProdBranchMbr = response['ReturnObject'];
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
+    //** General Data **//
+    this.refProductDetailObj = new RefProductDetailObj
+    this.refProductDetailObj.ProdHId = this.prodHId;
+    this.refProductDetailObj.RefProdCompntGrpCode = 'GEN';
+    this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
+      response => {
+        console.log("Response: ");
+        console.log(response);
+        this.GenData = response['ReturnObject'];
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
+    //** Product Component **//
+          //** Scheme Component **//
+    this.refProductDetailObj = new RefProductDetailObj
+    this.refProductDetailObj.ProdHId = this.prodHId;
+    this.refProductDetailObj.RefProdCompntGrpCode = 'SCHM';
+    this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
+      response => {
+        console.log("Response: ");
+        console.log(response);
+        this.ProdCompSchm = response['ReturnObject'];
+      },
+      error => {
+        console.log(error);
+      }
+    );
+          //** Score Component **//
+    this.refProductDetailObj = new RefProductDetailObj
+    this.refProductDetailObj.ProdHId = this.prodHId;
+    this.refProductDetailObj.RefProdCompntGrpCode = 'SCORE';
+    this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
+      response => {
+        console.log("Response: ");
+        console.log(response);
+        this.ProdCompScore = response['ReturnObject'];
+      },
+      error => {
+        console.log(error);
+      }
+    );
+          //** Rule Component **//
+    this.refProductDetailObj = new RefProductDetailObj
+    this.refProductDetailObj.ProdHId = this.prodHId;
+    this.refProductDetailObj.RefProdCompntGrpCode = 'RULE';
+    this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
+      response => {
+        console.log("Response: ");
+        console.log(response);
+        this.ProdCompRule = response['ReturnObject'];
+      },
+      error => {
+        console.log(error);
+      }
+    );
+          //** Other Component **//
+    this.refProductDetailObj = new RefProductDetailObj
+    this.refProductDetailObj.ProdHId = this.prodHId;
+    this.refProductDetailObj.RefProdCompntGrpCode = 'RULE';
+    this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
+      response => {
+        console.log("Response: ");
+        console.log(response);
+        this.ProdCompOther = response['ReturnObject'];
+      },
+      error => {
+        console.log(error);
+      }
+    );
 
   }
-
 
 }

@@ -391,6 +391,8 @@ export class AdInsConstant {
   public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
   public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
   public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
+  public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
+  public static GetListProdBranchOfficeMbrByProdHId = "http://localhost:5000/Product/GetListProdBranchOfficeMbrByProdHId"
 
   //PRODUCT OFFERING
   public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
@@ -400,7 +402,6 @@ export class AdInsConstant {
 
   // PRODUCT COMPONENT
   public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
-
   //REF REASON
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
 
