@@ -406,4 +406,13 @@ export class AdInsConstant {
   public static GetRefAssetDocByRefAssetDocId = "/RefAssetDoc/GetRefAssetDocByRefAssetDocId";
   public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc";
 
+  //asset scheme header
+  public static AddAssetSchmH =  "/AssetSchmH/AddAssetSchmH"
+  public static GetListActiveAssetSchmHByAssetTypeId = "/AssetSchmH/GetListActiveAssetSchmHByAssetTypeId"
+  public static GetListAssetSchmHByAssetTypeId = "/AssetSchmH/GetListAssetSchmHByAssetTypeId"
+  public static GetAssetSchmHById = "/AssetSchmH/GetAssetSchmHById"
+  public static GetAssetSchmHByCode = "/AssetSchmH/GetAssetSchmHByCode"
+  public static EditAssetSchmH = "/AssetSchmH/EditAssetSchmH"
+
+
 }

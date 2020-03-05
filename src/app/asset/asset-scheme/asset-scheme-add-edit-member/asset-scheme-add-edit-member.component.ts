@@ -1,3 +1,19 @@
+// import { Component, OnInit } from '@angular/core';
+
+// @Component({
+//   selector: 'app-asset-scheme-add-edit-member',
+//   templateUrl: './asset-scheme-add-edit-member.component.html',
+//   styleUrls: ['./asset-scheme-add-edit-member.component.scss']
+// })
+// export class AssetSchemeAddEditMemberComponent implements OnInit {
+
+//   constructor() { }
+
+//   ngOnInit() {
+//   }
+
+// }
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UCSearchComponent } from '@adins/ucsearch';
@@ -11,7 +27,7 @@ import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
-
+import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 import { Observable } from 'rxjs';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsService } from 'app/shared/services/adIns.service';
@@ -34,17 +50,15 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
   apiUrl: any;
   orderByKey: any = null;
   orderByValue = true;
-  assetUrl: string = environment.assetUrl;
   deleteUrl: any;
   inputObj: any;
   pageType: any = 'add';
-  assetSchmHId: any = 1;
-  assetSchmCode: any;
-  assetTypeName: any;
-  assetSchmName: any;
-  isActive: any;
+  AssetSchmCode: any;
+  AssetTypeName: any;
+  AssetSchmName: any;
+  IsActive: any;
   assetSchmHObj: any;
-  assetTypeHId: any;
+  AssetTypeId: any;
   exportData: any;
   arrAssetSchmD: any = new Array();
 
@@ -55,13 +69,18 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
   arrAddCrit = new Array<CriteriaObj>();
   arrCrit: any;
   checkboxAll: any = false;
+  getAssetSchmHByIdUrl = environment.FoundationR3Url + '/AssetSchmH/GetAssetSchmHById';
+  getAssetTypeByIdUrl = environment.FoundationR3Url + "/AssetType/GetAssetTypeById";
+
+  AssetSchmHId: any;
+  getListAssetMasterByAssetSchmHId = environment.FoundationR3Url + '/AssetMaster/GetListAssetMasterByAssetSchmHId';
+  getListAssetSchmDByAssetSchmHId = environment.FoundationR3Url + '/AssetSchmD/GetListAssetSchmDByAssetSchmHId';
 
   constructor(
     private http: HttpClient,
     private spinner: NgxSpinnerService,
     private toastr: NGXToastrService,
     private route: ActivatedRoute,
-    private assetService: AssetService,
     private router: Router,
     private adInsService: AdInsService,
     private toastrService: ToastrService) { }
@@ -74,49 +93,58 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
       } else {
         this.pageType = 'add';
       }
-      if (params['assetSchmHId'] != null) {
-        this.assetSchmHId = params['assetSchmHId'];
+      if (params['AssetSchmHId'] != null) {
+        this.AssetSchmHId = params['AssetSchmHId'];
       }
-      if (params['assetTypeHId'] != null) {
-        this.assetTypeHId = params['assetTypeHId'];
+      if (params['AssetTypeId'] != null) {
+        this.AssetTypeId = params['AssetTypeId'];
       }
     });
 
-    let assetSchmHObj = { AssetSchmHId: this.assetSchmHId };
-    this.assetService.getAssetSchmHByAssetSchmHId(assetSchmHObj).subscribe(
+    let assetSchmHObj = { AssetSchmHId: this.AssetSchmHId };
+    // this.assetService.getAssetSchmHByAssetSchmHId(assetSchmHObj).subscribe(
+
+    this.http.post(this.getAssetSchmHByIdUrl, assetSchmHObj).subscribe(
       response => {
+        console.log('ini respons ny')
         console.log(response);
-        this.assetSchmCode = response['returnObject'].assetSchmCode;
-        this.assetSchmName = response['returnObject'].assetSchmName;
-        this.assetTypeHId = response['returnObject'].assetTypeHId;
-        if (response['returnObject'].isActive == 0) {
-          this.isActive = 'No';
+        this.AssetSchmCode = response.AssetSchmCode;
+        this.AssetSchmName = response.AssetSchmName;
+        this.AssetTypeId = response.AssetTypeId;
+        if (response.IsActive == 0) {
+          this.IsActive = 'No';
         } else {
-          this.isActive = 'Yes';
+          this.IsActive = 'Yes';
         }
-        let assetObj = { AssetTypeHId: response['returnObject'].assetTypeHId }
-        this.assetService.getAssetTypeHbyAssetTypeHId(assetObj).subscribe(
+        let assetObj = { AssetTypeId: response.AssetTypeId };
+        // this.assetService.getAssetTypeHbyAssetTypeId(assetObj).subscribe(
+        this.http.post(this.getAssetTypeByIdUrl, assetObj).subscribe(
           response => {
-            this.assetTypeName = response['returnObject'].assetTypeName;
+            this.AssetTypeName = response.AssetTypeName;
+          },
+          error => {
+            console.log(error);
           }
-        )
+        );
       },
       error => {
         console.log(error);
       }
-    )
+    );
+    // WHERE AM.IS_ACTIVE = '1' AND AM.IS_FINAL = '1' 
 
     this.inputObj = new InputSearchObj();
-    this.inputObj._url = './assets/search/searchAssetMasterInAssetSchm.json';
-    this.inputObj.enviromentUrl = environment.assetUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetAssetMasterPaging;
-
+    this.inputObj._url = './assets/search/searchAssetMasterInAssetSchm.json'; // ini search json
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
+    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    // this.inputObj.apiQryPaging = AdInsConstant.GetAssetMasterPaging;
     this.inputObj.addCritInput = new Array();
+
     const addCritTypeHId = new CriteriaObj();
     addCritTypeHId.DataType = 'numeric';
-    addCritTypeHId.propName = 'AM.ASSET_TYPE_H_ID';
+    addCritTypeHId.propName = 'AM.ASSET_TYPE_ID';
     addCritTypeHId.restriction = AdInsConstant.RestrictionEq;
-    addCritTypeHId.value = this.assetTypeHId;
+    addCritTypeHId.value = this.AssetTypeId;
     this.arrCrit.push(addCritTypeHId);
 
     const addCritIsFinal = new CriteriaObj();
@@ -126,6 +154,14 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
     addCritIsFinal.value = '1';
     this.arrCrit.push(addCritIsFinal);
 
+    const addCritIsActive = new CriteriaObj();
+    addCritIsActive.DataType = 'text';
+    addCritIsActive.propName = 'AM.IS_ACTIVE';
+    addCritIsActive.restriction = AdInsConstant.RestrictionEq;
+    addCritIsActive.value = '1';
+    this.arrCrit.push(addCritIsActive);
+
+
     this.inputObj.addCritInput.push(addCritTypeHId);
     this.inputObj.addCritInput.push(addCritIsFinal);
 
@@ -133,15 +169,17 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.assetUrl + AdInsConstant.GetAssetMasterPaging;
+    // this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetAssetMasterPaging;
+    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
 
     if (this.pageType === 'edit') {
-      let assetSchmDObj = { AssetSchmHId: this.assetSchmHId };
-      this.assetService.getListAssetMasterByAssetSchmHId(assetSchmDObj).subscribe(
+      let assetSchmDObj = { AssetSchmHId: this.AssetSchmHId };
+      // this.assetService.getListAssetMasterByAssetSchmHId(assetSchmDObj).subscribe( //lgi buat api ny
+        this.http.post(this.getListAssetMasterByAssetSchmHId  , assetSchmHObj).subscribe(
         response => {
           console.log(response);
-          for (let index = 0; index < response['returnObject'].length; index++) {
-            this.tempData.push(response['returnObject'][index]);
+          for (let index = 0; index < response['ReturnObject'].length; index++) {
+            this.tempData.push(response['ReturnObject'][index]);
             console.log(this.tempData);
           }
           this.setTempData(assetSchmHObj, addCritTypeHId, addCritIsFinal);
@@ -151,7 +189,7 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
         }
       );
     }
-    this.deleteUrl = this.assetUrl + AdInsConstant.DeleteAssetCategory;
+    this.deleteUrl = environment.FoundationR3Url + AdInsConstant.DeleteAssetCategory;
   }
 
   searchSort(event: any) {
@@ -195,8 +233,8 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
   // ** Start UC Search **/
   getResult(event) {
     this.checkboxAll = false;
-    this.resultData = event.response.returnObject;
-    this.totalData = event.response.returnObject.count;
+    this.resultData = event.response.ReturnObject;
+    this.totalData = event.response.ReturnObject.count;
     this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
@@ -209,17 +247,18 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
   }
   setTempData(assetSchmHObj: any, addCritTypeHId: any, addCritIsFinal: any) {
     console.log(assetSchmHObj);
-    this.assetService.getListAssetSchmDByAssetSchmHId(assetSchmHObj).subscribe(
+    // this.assetService.getListAssetSchmDByAssetSchmHId(assetSchmHObj).subscribe(
+    this.http.post(this.getListAssetSchmDByAssetSchmHId, assetSchmHObj).subscribe(
       response => {
         console.log(response);
-        for (var i = 0; i < response['returnObject'].length; i++) {
-          this.tempListId.push(response['returnObject'][i].assetMasterId);
+        for (var i = 0; i < response['ReturnObject'].length; i++) {
+          this.tempListId.push(response['ReturnObject'][i].assetMasterId);
         }
         console.log(this.tempListId);
-        console.log(response['returnObject']);
+        console.log(response['ReturnObject']);
         for (var i = 0; i < this.tempListId.length; i++) {
-          if (response['returnObject'].length != 0) {
-            var object = response['returnObject'].find(x => x.assetMasterId == this.tempListId[i]);
+          if (response['ReturnObject'].length != 0) {
+            var object = response['ReturnObject'].find(x => x.assetMasterId == this.tempListId[i]);
             this.tempData.push(object);
           }
         }
@@ -248,23 +287,23 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
   }
 
   SaveForm(assetSchmForm: any) {
-    this.assetSchmHObj = new AssetSchmHObj();
-    this.assetSchmHObj.assetSchmHId = this.assetSchmHId;
-    this.assetSchmHObj.assetSchmCode = this.assetSchmCode;
-    this.assetSchmHObj.assetSchmName = this.assetSchmName;
-    this.assetSchmHObj.assetTypeHId = this.assetTypeHId;
-    if (assetSchmForm.value.isActive) {
-      this.assetSchmHObj.isActive = '1';
+    this.assetSchmHObj = new AssetSchemeHObj();
+    this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
+    this.assetSchmHObj.AssetSchmCode = this.AssetSchmCode;
+    this.assetSchmHObj.AssetSchmName = this.AssetSchmName;
+    this.assetSchmHObj.AssetTypeId = this.AssetTypeId;
+    if (assetSchmForm.value.IsActive) {
+      this.assetSchmHObj.IsActive = '1';
     } else {
-      this.assetSchmHObj.isActive = '0';
+      this.assetSchmHObj.IsActive = '0';
     }
     console.log(this.assetSchmHObj);
 
     for (let index = 0; index < this.tempData.length; index++) {
       console.log(this.tempData);
       var assetSchmDObj = {
-        AssetSchmDId:this.tempData[index].assetSchmDId,
-        AssetSchmHId: this.tempData[index].assetSchmHId,
+        AssetSchmDId: this.tempData[index].assetSchmDId,
+        AssetSchmHId: this.tempData[index].AssetSchmHId,
         AssetMasterId: this.tempData[index].assetMasterId
       }
       this.arrAssetSchmD.push(assetSchmDObj);
@@ -287,16 +326,21 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
     //     }
     //   );
     // } else {
-      this.assetService.editAssetSchmHAndD(AssetSchmObj).subscribe(
-        response => {
-          console.log(response);
-          this.toastr.successMessage(response['message']);
-          this.router.navigateByUrl('asset/assetSchmPaging');
-        },
-        error => {
-          console.log(error);
-        }
-      );
+
+
+    // ini diuncoment
+    // this.assetService.editAssetSchmHAndD(AssetSchmObj).subscribe(
+    //   response => {
+    //     console.log(response);
+    //     this.toastr.successMessage(response['message']);
+    //     this.router.navigateByUrl('asset/scheme/paging');
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   }
+    // );
+
+
     // }
   }
 
@@ -403,6 +447,3 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
 }
 
 
-// export class AssetSchmAddEditPagingComponent implements OnInit {
-
-// }
