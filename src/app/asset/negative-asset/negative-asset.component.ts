@@ -4,6 +4,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-negative-asset',
@@ -28,6 +30,20 @@ export class NegativeAssetComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputPagingObj.deleteUrl = "";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNegativeAsset.json";
+
+    var criteriaList = new Array();
+    var criteriaObj = new CriteriaObj();
+    criteriaObj.restriction = AdInsConstant.RestrictionEq;
+    criteriaObj.propName = 'A.IS_ACTIVE';
+    criteriaObj.value = "1";
+    criteriaList.push(criteriaObj);
+
+    criteriaObj = new CriteriaObj();
+    criteriaObj.restriction = AdInsConstant.RestrictionEq;
+    criteriaObj.propName = 'D.REF_MASTER_TYPE_CODE';
+    criteriaObj.value = "NEGATIVE_AST_SOURCE";
+    criteriaList.push(criteriaObj);
+    this.inputPagingObj.addCritInput = criteriaList;
   }
 
 }

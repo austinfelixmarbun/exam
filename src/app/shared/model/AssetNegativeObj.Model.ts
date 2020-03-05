@@ -6,7 +6,7 @@ export class AssetNegativeObj {
     SerialNo3: any;
     SerialNo4: any;
     SerialNo5: any;
-    MrSourceTypeCode: any;
+    MrNegAssetSourceCode: any;
     Notes: any;
     IsActive: any;
     RowVersion: any;

@@ -38,7 +38,7 @@ export class NegativeAssetDetailComponent implements OnInit {
     SerialNo3: [''],
     SerialNo4: [''],
     SerialNo5: [''],
-    MrSourceTypeCode: ['', [Validators.required]],
+    MrNegAssetSourceCode: ['', [Validators.required]],
     Notes: ['', [Validators.required]],
     IsActive: [true],
     RowVersion: ['']
@@ -73,14 +73,18 @@ export class NegativeAssetDetailComponent implements OnInit {
 
     this.criteriaList = new Array();
     this.criteriaObj = new CriteriaObj();
-
     this.criteriaObj.restriction = AdInsConstant.RestrictionEq;
     this.criteriaObj.propName = 'IS_ACTIVE';
     this.criteriaObj.value = "1";
+    this.criteriaList.push(this.criteriaObj);
+
+    this.criteriaObj = new CriteriaObj();
     this.criteriaObj.restriction = AdInsConstant.RestrictionEq;
     this.criteriaObj.propName = 'IS_FINAL';
     this.criteriaObj.value = "1";
     this.criteriaList.push(this.criteriaObj);
+
+    this.inputLookupObj.addCritInput = this.criteriaList;
 
     this.httpClient.post(AdInsConstant.GetActiveAssetTypeValue, null).pipe(
       map( (response) => {
@@ -115,7 +119,7 @@ export class NegativeAssetDetailComponent implements OnInit {
             SerialNo3: response.responseAssetNegativeObj.SerialNo3,
             SerialNo4: response.responseAssetNegativeObj.SerialNo4,
             SerialNo5: response.responseAssetNegativeObj.SerialNo5,
-            MrSourceTypeCode: response.responseAssetNegativeObj.MrSourceTypeCode,
+            MrNegAssetSourceCode: response.responseAssetNegativeObj.MrNegAssetSourceCode,
             Notes: response.responseAssetNegativeObj.Notes,
             IsActive: response.responseAssetNegativeObj.IsActive,
             RowVersion: response.responseAssetNegativeObj.RowVersion
@@ -130,6 +134,7 @@ export class NegativeAssetDetailComponent implements OnInit {
   }
 
   assetTypeChange(e){
+    this.criteriaObj = new CriteriaObj();
     this.criteriaObj.restriction = AdInsConstant.RestrictionEq;
     this.criteriaObj.propName = 'ASSET_TYPE_ID';
     this.criteriaObj.value = e.target.value;

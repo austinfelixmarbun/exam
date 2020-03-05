@@ -81,15 +81,15 @@
               </div>
             </div>
             <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="MrSourceTypeCode">Negative Source</label>
+              <label class="col-md-3 adInsLabel" for="MrNegAssetSourceCode">Negative Source</label>
               <div class="col-md-9">
-                <select formControlName="MrSourceTypeCode" class="form-control"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.MrSourceTypeCode.invalid }">
+                <select formControlName="MrNegAssetSourceCode" class="form-control"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.MrNegAssetSourceCode.invalid }">
                   <option *ngFor="let item of negativeAssetSourceList?.ReturnObject" [value]="item.Key">
                     {{item.Value}}
                   </option>
                 </select>
-                <show-errors [control]="AssetNegativeForm.controls.MrSourceTypeCode" [submit]="enjiForm.submitted"></show-errors>
+                <show-errors [control]="AssetNegativeForm.controls.MrNegAssetSourceCode" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
             <div class="form-group row">
