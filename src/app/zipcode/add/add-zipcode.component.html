@@ -11,8 +11,7 @@
                 <label class="col-md-3  adInsLabel" translate>Kelurahan </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="AreaCode2"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefZipCodeForm.controls.AreaCode2.invalid }"
-                         [attr.disabled]="pageType == 'edit' ? true : null">
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefZipCodeForm.controls.AreaCode2.invalid }">
                   <show-errors [control]="RefZipCodeForm.controls.AreaCode2" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
@@ -72,7 +71,7 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/zipcode/paging']"
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/Zipcode/paging']"
                       translate>
                 <i class="ft-x"></i> Back
               </button>

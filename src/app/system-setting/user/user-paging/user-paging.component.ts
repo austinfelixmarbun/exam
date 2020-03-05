@@ -103,7 +103,7 @@ export class UserPagingComponent implements OnInit {
     if (confirm("Are you sure to reset this password to default?")) {
       var resetPassUrl = this.foundationUrl + AdInsConstant.ResetPassword;
       var refUser = new RefUserObj();
-      refUser.refUserId = id;
+      // refUser.refUserId = id;
       this.https.post(resetPassUrl, refUser).subscribe(
         response => {
           this.service.successMessage(response["message"]);

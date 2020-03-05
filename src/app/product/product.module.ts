@@ -12,6 +12,16 @@ import { ProductHoAdddetailComponent } from './product-HO/product-ho-adddetail/p
 import { GeneralDataComponent } from './product-HO/product-ho-adddetail/general-data/general-data.component';
 import { ProductComponentComponent } from './product-HO/product-ho-adddetail/product-component/product-component.component';
 import { OfficeMemberComponent } from './product-HO/product-ho-adddetail/office-member/office-member.component';
+import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
+import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
+import { SharingComponentModule } from "../shared/sharingcomponent.module";
+import { HttpModule } from "@angular/http";
+import { UcviewgenericModule } from "@adins/ucviewgeneric";
+import { UCSearchModule } from '@adins/ucsearch';
+import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { UcSubsectionModule } from '@adins/uc-subsection';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
     imports: [
@@ -20,6 +30,13 @@ import { OfficeMemberComponent } from './product-HO/product-ho-adddetail/office-
         ReactiveFormsModule,
         UclookupgenericModule,
         FormsModule,
+        HttpModule,
+        SharingComponentModule,
+        UcviewgenericModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcSubsectionModule,
+        CommonModule
     ],
     declarations: [
         ProdOfferingPagingComponent,
@@ -27,7 +44,11 @@ import { OfficeMemberComponent } from './product-HO/product-ho-adddetail/office-
         ProdOfferingAddDetailComponent,
         ProductHOPagingComponent,
         ProductHOAddComponent,
-        ProductHoAdddetailComponent
+        ProductHoAdddetailComponent,
+        ProductHODeactivatePagingComponent,
+        ProductHODeactivateEditComponent,
+        GeneralDataComponent,
+        ProductComponentComponent
     ]
   })
 

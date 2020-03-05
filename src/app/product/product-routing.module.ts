@@ -6,7 +6,8 @@ import { ProdOfferingAddDetailComponent } from './prod-offering/prod-offering-ad
 import { ProductHOPagingComponent } from './product-HO/product-ho-paging/product-ho-paging.component';
 import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-add.component';
 import { ProductHoAdddetailComponent } from "./product-HO/product-ho-adddetail/product-ho-adddetail.component";
-
+import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
+import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
 const routes: Routes = [
     {
       path: '',
@@ -28,6 +29,7 @@ const routes: Routes = [
         {
           path: 'prod-offering/add-detail',
           component: ProdOfferingAddDetailComponent,
+          loadChildren: "./prod-offering/prod-offering-add-detail/prod-offering-add-detail.module#ProdOfferingAddDetailModule",
           data: {
             title: 'Add Detail'
           },
@@ -53,14 +55,28 @@ const routes: Routes = [
         data: {
             title: 'Product HO Add Detail'
         }
-    },
-      ]
-    }
-  ];
+      },
+      {
+        path: 'HODeactivate',
+        component: ProductHODeactivatePagingComponent,
+        data: {
+          title: 'Product HO Deactivate Paging'
+        }
+      },
+      {
+        path: 'HODeactivate/edit',
+        component: ProductHODeactivateEditComponent,
+        data: {
+          title: 'Product HO Deactivate'
+        }
+      },
+    ]
+  }
+]
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 
 export class ProductRoutingModule { }

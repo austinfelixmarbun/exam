@@ -51,7 +51,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/commonSetting/currency/add",
+                    "path": "/CommonSetting/Currency/add",
                     "param": [
                         {
                             "type": "refCurrId",
@@ -71,7 +71,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/commonSetting/currency/add",
+                    "path": "/CommonSetting/Currency/add",
                     "param": [
                         {
                             "type": "refCurrId",

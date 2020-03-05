@@ -1,29 +1,73 @@
 {
-  "url": "http://getEmployee",
-  "title":"Lookup Employee",
+  "title": "Lookup Employee",
   "component": [
     {
       "type": "textbox",
-      "name": "empName",
+      "name": "A.EMP_NAME",
       "id": "empNameId",
       "value": "",
       "label": "Employee Name",
-      "placeholder": "Placeholder",
-      "datatype": "text"
+      "placeholder": "Employee Name"
+    },
+    {
+      "type": "textbox",
+      "name": "A.EMP_NO",
+      "id": "empNoId",
+      "value": "",
+      "label": "Employee No",
+      "placeholder": "Employee No"
     }
   ],
-  "header":[
-      {
-          "label":"Employee Id",
-          "visibility":true
-      },
-      {
-          "label":"Employee Name",
-          "visibility":true
-      },
-      {
-          "label":"Employee No",
-          "visibility":true
-      }
-  ]
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Employee No",
+      "name": "empNo"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Employee Name",
+      "name": "empName"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
+  ],
+
+  "querystring": {
+    "select": "SELECT A.EMP_NO AS empNo, A.REF_EMP_ID AS refEmpId, A.EMP_NAME AS empName",
+    "from": "FROM dbo.REF_EMP A WITH(NOLOCK)"
+  },
+
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "center",
+      "property": "empNo"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "empName"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "select",
+          "property": "refEmpId"
+        }
+      ]
+    }
+  ],
+
+  "propertyId": "refEmpId",
+  "propertyName": "empName"
+
+
 }

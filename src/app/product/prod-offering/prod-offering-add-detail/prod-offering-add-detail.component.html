@@ -41,6 +41,24 @@
               </div>
               </div>
             </div>
+            <div class="card-body">
+              <div class="px-3">
+                <div class="form-actions right">
+                  <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./GeneralData']">
+                    <i class="fa fa-check-square-o"></i> General Data
+                  </button>
+      
+                  <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./ProductComponent']">
+                    <i class="fa fa-check-square-o"></i> Product Component
+                  </button>
+      
+                  <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./OfficeMember']">
+                    <i class="fa fa-check-square-o"></i> Office Member
+                  </button>
+                </div>
+                <router-outlet></router-outlet>
+              </div>
+            </div>
             <div class="form-actions right">
               <button type="submit" class="btn btn-raised btn-primary">
                 <i class="fa fa-check-square-o"></i> Back

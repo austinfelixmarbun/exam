@@ -6,7 +6,7 @@
         "type": "textbox",
         "name": "zipCode",
         "id": "ZipCode",
-        "value": "%",
+        "value": "",
         "label": "Zip Code",
         "placeholder": "Zip Code"
       },
