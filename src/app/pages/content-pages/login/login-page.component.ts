@@ -43,7 +43,8 @@ export class LoginPageComponent implements OnInit {
         this.apiUrl = this.FoundationR3Url + AdInsConstant.Login;
         var requestObj = { "Username": username, "Password": password };
         localStorage.setItem("Username",username);
-        // this.rolePickService.openDialog(data.returnObject);
+        console.log("Login Page Comp");
+        //this.rolePickService.openDialog(data.returnObject);
         this.http.post(this.apiUrl, requestObj).subscribe(
             (response) => {
                 console.log(response);
