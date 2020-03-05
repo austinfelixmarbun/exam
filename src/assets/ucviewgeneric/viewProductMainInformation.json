@@ -28,7 +28,7 @@
         {
           "type": "text",
           "label": "Product Status",
-          "property": "prodStat"
+          "property": "descr"
         },
         {
           "type": "text",
@@ -38,8 +38,8 @@
 
       ],
       "querystring": {
-        "select": "SELECT B.PROD_CODE AS prodCode, B.PROD_NAME AS prodName, B.PROD_STAT as prodStat, A.START_DT as startDt, A.END_DT as endDt, B.PROD_DESCR as prodDescr",
-        "from": "FROM dbo.PROD_H A WITH(NOLOCK) INNER JOIN dbo.PROD B WITH(NOLOCK) ON A.PROD_ID=B.PROD_ID",
+        "select": "SELECT B.PROD_CODE AS prodCode, B.PROD_NAME AS prodName, C.DESCR as descr, A.START_DT as startDt, A.END_DT as endDt, B.PROD_DESCR as prodDescr",
+        "from": "FROM dbo.PROD_H A WITH(NOLOCK) INNER JOIN dbo.PROD B WITH(NOLOCK) ON A.PROD_ID=B.PROD_ID LEFT JOIN dbo.REF_MASTER C WITH(NOLOCK) ON A.PROD_STAT=C.MASTER_CODE",
         "where": "WHERE A.PROD_H_ID = {0}"
       }
     }
