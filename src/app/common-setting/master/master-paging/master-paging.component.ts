@@ -11,7 +11,7 @@ import { environment } from 'environments/environment';
 @Component({
   selector: 'app-master-paging',
   templateUrl: './master-paging.component.html',
-  providers: [NGXToastrService, NGXToastrService, DecimalPipe]
+  providers: [NGXToastrService, DecimalPipe]
 })
 export class MasterPagingComponent implements OnInit {
 

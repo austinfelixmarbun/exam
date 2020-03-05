@@ -39,7 +39,7 @@
           }
         ],
         "itemsUrl": []
-      }
+      } 
     ],
     "headerList": [
       {
@@ -59,7 +59,12 @@
         "position": "center",
         "label": "Active Status",
         "name": "IsActive"
-      } 
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "ACTION"
+      }
     ],
     "querystring": { 
       "select": "SELECT A.REF_ASSET_DOC_ID as RefAssetDocId,  A.ASSET_DOC_CODE as AssetDocumentCode, A.ASSET_DOC_NAME as AssetDocumentName, A.IS_ACTIVE as IsActive",
@@ -87,15 +92,23 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Asset/DocumentMaster/Paging",
+            "path": "/Asset/DocumentMaster/Detail",
             "param": [
              
+              {
+                "type": "mode",
+                "property": "edit"
+              } ,
               {
                 "type": "RefAssetDocId",
                 "property": "RefAssetDocId"
               } 
             
             ]
+          },
+          {
+            "type": "delete",
+            "property": "RefAssetDocId"
           }
         ]
       } 

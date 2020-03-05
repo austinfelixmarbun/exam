@@ -1,0 +1,173 @@
+{
+    "title": "Business Unit",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "BIZ_UNIT_NAME",
+            "id": "BusinessUnitNameId",
+            "value": "",
+            "label": "Business Unit",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "OFFICE_NAME",
+            "id": "OfficeNameId",
+            "value": "",
+            "label": "Office",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "JOB_TITLE_NAME",
+            "id": "JobTitleNameId",
+            "value": "",
+            "label": "Job Title",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "ROLE_NAME",
+            "id": "RoleNameId",
+            "value": "",
+            "label": "Role",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "USERNAME",
+            "id": "UsernameId",
+            "value": "",
+            "label": "Supervisor",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "ur.IS_ACTIVE",
+            "id": "IsActiveId",
+            "label": "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "items": [
+                {
+                    "key": true,
+                    "value": "Yes"
+                },
+                {
+                    "key": false,
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ],
+    "querystring": {
+        "select": "SELECT ur.REF_USER_ROLE_ID AS RefUserRoleId, usr.REF_USER_ID AS RefUserId, bu.BIZ_UNIT_NAME AS BusinessUnitName,ussr.USERNAME AS SupervisorName, jt.JOB_TITLE_NAME AS JobTitleName, ofc.OFFICE_NAME AS OfficeName, rl.ROLE_NAME AS RoleName, ur.IS_ACTIVE AS IsActive",
+        "from": "FROM dbo.REF_USER usr WITH(NOLOCK) JOIN dbo.REF_USER_ROLE ur WITH(NOLOCK) on usr.REF_USER_ID = ur.REF_USER_ID JOIN dbo.REF_BIZ_UNIT bu WITH(NOLOCK) on bu.REF_BIZ_UNIT_ID = ur.REF_BIZ_UNIT_ID JOIN REF_OFFICE ofc WITH(NOLOCK) on ofc.REF_OFFICE_ID = ur.REF_OFFICE_ID JOIN REF_ROLE rl WITH(NOLOCK) on rl.REF_ROLE_ID = ur.REF_ROLE_ID JOIN dbo.REF_JOB_TITLE jt WITH(NOLOCK) on jt.REF_JOB_TITLE_ID = ur.REF_JOB_TITLE_ID LEFT JOIN REF_USER ussr WITH(NOLOCK) on ur.SPV_ID = ussr.REF_USER_ID"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "BUSINESS UNIT",
+            "name": "BusinessUnitName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "JOB TITLE",
+            "name": "JobTitleName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "SUPERVISOR",
+            "name": "SupervisorName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE",
+            "name": "OfficeName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "ROLE",
+            "name" : "RoleName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "ACTIVE",
+            "name" : "IsActive"
+        } ,
+        {
+            "type": "label",
+            "position": "center",
+            "label": "ACTION"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "BusinessUnitName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "JobTitleName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "SupervisorName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "RoleName"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/employee/EmployeeBusinessUnit/Add",
+                    "param": [
+                        {
+                            "type": "RefUserId",
+                            "property": "RefUserId"
+                        },
+                        {
+                            "type": "RefUserRoleId",
+                            "property": "RefUserRoleId"
+                        },
+                        {
+                            "type": "mode",
+                            "property": "edit"
+                        }
+                    ]
+                },
+                {
+                    "type": "delete",
+                    "property": "RefUserRoleId"
+                }
+            ]
+        }
+    ]
+}

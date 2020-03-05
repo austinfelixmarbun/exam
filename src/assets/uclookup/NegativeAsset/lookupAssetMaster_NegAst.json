@@ -1,0 +1,69 @@
+{
+    "title": "Lookup Asset Master",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "full_Asset_Code",
+        "id": "fullAssetCode",
+        "value": "",
+        "label": "Full Asset Code",
+        "placeholder": "Full Asset Code"
+      },
+      {
+        "type": "textbox",
+        "name": "full_Asset_Name",
+        "id": "fullAssetName",
+        "value": "",
+        "label": "Full Asset Name",
+        "placeholder": "Full Asset Name"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT ASSET_MASTER_ID AS assetMasterId, FULL_ASSET_CODE AS fullAssetCode, FULL_ASSET_NAME AS fullAssetName",
+      "from": "FROM ASSET_MASTER WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+          "type": "sort",
+          "position": "center",
+          "label": "Full Asset Code",
+          "name": "fullAssetCode"
+        },
+        {
+          "type": "sort",
+          "position": "center",
+          "label": "Full Asset Name",
+          "name": "fullAssetName"
+        },
+        {
+          "type": "label",
+          "position": "center",
+          "label": "Action"
+        }
+    ],
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "left",
+        "property": "fullAssetCode"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "fullAssetName"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "select",
+            "property": "assetMasterId"
+          }
+        ]
+      }
+    ],
+    "propertyId": "assetMasterId",
+    "propertyName": "fullAssetName"
+  }
+  
