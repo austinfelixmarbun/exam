@@ -1,7 +1,7 @@
 import { formatDate } from "@angular/common";
 import { environment } from "../../environments/environment";
 
-export class AdInsConstant {
+export class  AdInsConstant {
   public static RestrictionLike = "Like";
   public static RestrictionEq = "Eq";
   public static RestrictionNotIn = "NotIn";
@@ -21,14 +21,6 @@ export class AdInsConstant {
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
 
-  //---------- ASSET -----------
-  // ASSET TYPE
-  public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListKeyValueActiveByCode";
-
-  //ASSET CATEGORY
-  public static GetActiveAssetCategoryValue = environment.FoundationR3Url + "/AssetCategory/"
-  //----------- END OF ASSET ------------
-
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
   public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
@@ -41,6 +33,7 @@ export class AdInsConstant {
 
   //REF OFFICE
   public static GetRefOfficeObj = "/RefOffice/GetRefOfficeObj";
+  public static GetRefOfficeByRefOfficeId = environment.FoundationR3Url + "/RefOffice/GetRefOfficeByRefOfficeId"
   public static GetRefOfficeActiveAndNonVirtualKeyValue = "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue";
   public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
   public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
@@ -148,8 +141,12 @@ export class AdInsConstant {
   public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
   public static ResetPassword = "/UserManagement/ResetPassword";
   public static AddRefUserR3 = "/RefUser/AddRefUser";
+  public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
   public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
-
+  public static AddRefUserRole = environment.FoundationR3Url + "/RefUserRole/AddRefUserRole"
+  public static EditRefUserRole = environment.FoundationR3Url + "/RefUserRole/EditRefUserRole";
+  public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
+  public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
   //REF-ROLE
   public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
   public static AddRefRole = environment.FoundationR3Url + "/RefRole/AddRefRole";
@@ -184,7 +181,7 @@ export class AdInsConstant {
 
   //BUSINESS UNIT
   public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
-  public static GetRefBizUnit = "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
+  public static GetRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
   public static AddRefBizUnit = "/RefBizUnit/AddRefBizUnit";
   public static EditRefBizUnit = "/RefBizUnit/EditRefBizUnit";
 
@@ -221,6 +218,7 @@ export class AdInsConstant {
   public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
   public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
   public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
+  public static GetListActiveRefMaster = "/RefMaster/GetListKeyValueActiveByCode";
 
   //REF INDUSTRY TYPE
   public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
@@ -293,6 +291,16 @@ export class AdInsConstant {
   public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
   public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
   public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
+
+  //ASSET MASTER
+  public static AddAssetMaster = environment.FoundationR3Url + "/AssetMaster/AddAssetMaster";
+  public static EditAssetMaster = environment.FoundationR3Url + "/AssetMaster/EditAssetMaster";
+  public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
+  public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
+  public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueById";
+  public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById";
+  public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
+  public static GetListAssetSchmH = "http://localhost:5000/AssetSchmH/GetListAssetSchmHJoinSchmD";
 
   //REF PROFESSION
 
@@ -380,6 +388,7 @@ export class AdInsConstant {
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
 
   //asset accesory
+<<<<<<< HEAD
   public static AddNewAssetAccesory = "/AssetAccessory/AddAssetAccessory";
   public static EditAssetAccessory = "/AssetAccessory/EditAssetAccessory";
   public static GetAssetAccessorybyAssetAccesoryCode = "/AssetAccessory/GetAssetAccessoryByCode";
@@ -415,4 +424,74 @@ export class AdInsConstant {
   public static EditAssetSchmH = "/AssetSchmH/EditAssetSchmH"
 
 
+=======
+  public static AddNewAssetAccesory = "/AssetAccessory/AddAssetAccessory"
+  public static EditAssetAccessory = "/AssetAccessory/EditAssetAccessory"
+  public static GetAssetAccessorybyAssetAccesoryCode = "/AssetAccessory/GetAssetAccessoryByCode"
+  public static GetAssetAccessorybyAssetAccessoryId = "/AssetAccessory/GetAssetAccessoryById"
+  public static GetlistAssetAccessorybyAssetTypeId = "/AssetAccessory/GetListAssetAccessoryByAssetTypeId"
+  public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory"
+
+//asset category
+  public static AddNewAssetCategory = "/AssetCategory/AddAssetCategory"
+  public static EditAssetCategory = "/AssetCategory/EditAssetCategory"
+  public static GetAssetCategoryByAssetCategoryCode = "/AssetCategory/GetAssetCategoryByCode"
+  public static GetAssetCategorybyAssetCategoryId = "/AssetCategory/GetAssetCategoryById"
+  public static GetlistAssetCategorybyAssetTypeId = "/AssetCategory/GetListAssetCategoryByAssetTypeId"//
+  public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory"
+  public static GetActiveAssetCategoryValue = environment.FoundationR3Url + "/AssetCategory/GetListActiveAssetCategoryValue"
+
+//   public static AddNewAssetAccesory = "/AssetAccessory/AddAssetAccessory";
+//   public static EditAssetAccessory = "/AssetAccessory/EditAssetAccessory";
+//   public static GetAssetAccessorybyAssetAccesoryCode = "/AssetAccessory/GetAssetAccessoryByCode";
+//   public static GetAssetAccessorybyAssetAccessoryId = "/AssetAccessory/GetAssetAccessoryById";
+//   public static GetlistAssetAccessorybyAssetTypeId = "/AssetAccessory/GetListAssetAccessoryByAssetTypeId";
+//   public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory";
+// //asset category
+//   public static AddNewAssetCategory = "/AssetCategory/AddAssetCategory";
+//   public static EditAssetCategory = "/AssetCategory/EditAssetCategory";
+//   public static GetAssetCategoryByAssetCategoryCode = "/AssetCategory/GetAssetCategoryByCode";
+//   public static GetAssetCategorybyAssetCategoryId = "/AssetCategory/GetAssetCategoryById";
+//   public static GetlistAssetCategorybyAssetTypeId = "/AssetCategory/GetListAssetCategoryByAssetTypeId";//;
+//   public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory";
+  //asset doc list
+  public static AddNewAssetDocList = "/AssetDocList/AddAssetDocList"
+  public static EditAssetDocList = "/AssetDocList/EditAssetDocList"
+  public static GetAssetDocListByAssetDocListId = "/AssetDocList/GetAssetDocListById"
+  public static GetlistAssetDocListByAssetTypeId = "/AssetDocList/GetListAssetDocListByAssetTypeId"
+  public static DeleteAssetDocList = "/AssetDocList/DeleteAssetDocList"
+  
+  //asset ref doc
+  public static AddNewRefAssetDocData = "/RefAssetDoc/AddRefAssetDoc"
+  public static EditRefAssetDocData = "/RefAssetDoc/EditRefAssetDoc"
+  public static GetRefAssetDocByAssetDocCode = "/RefAssetDoc/GetRefAssetDocByAssetDocCode"
+  public static GetRefAssetDocByRefAssetDocId = "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
+  public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc"
+  public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
+   
+  
+  
+    // PRODUCT
+    public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
+    public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
+    public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
+    public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
+  
+    //PRODUCT OFFERING
+    public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
+    public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
+    public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
+
+    //REF REASON
+  public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
+  
+  
+  // ASSET TYPE
+  public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
+
+  // ASSET NEGATIVE
+  public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
+  public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
+  public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
+>>>>>>> origin
 }

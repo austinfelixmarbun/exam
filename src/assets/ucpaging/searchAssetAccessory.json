@@ -1,5 +1,5 @@
 {
-    "title": "Asset Category",
+    "title": "Asset Accessory",
     "exportExcel": true,
     "component": [
       {
@@ -94,7 +94,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Asset/Accessory/AccessoryInformation",
+            "path": "/Asset/Accessory/Detail",
             "param": [
               {
                 "type": "mode",

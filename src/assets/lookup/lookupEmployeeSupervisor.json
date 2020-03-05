@@ -1,0 +1,88 @@
+{
+    "title": "LOOK UP - SUPERVISOR",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "USERNAME",
+            "id": "UsernameId",
+            "value": "",
+            "label": "Username",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "EMP_NO",
+            "id": "EmpNoId",
+            "value": "",
+            "label": "Employee No",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "EMP_NAME",
+            "id": "EmpNameId",
+            "value": "",
+            "label": "Employee Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT u.REF_USER_ID as RefUserId, u.USERNAME as Username, e.EMP_NO as EmployeeNo, e.EMP_NAME as EmployeeName",
+        "from": "FROM dbo.REF_USER u WITH(NOLOCK) LEFT JOIN dbo.REF_EMP e WITH(NOLOCK) on u.REF_EMP_ID = e.REF_EMP_ID "
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "USERNAME",
+            "name": "Username"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "EMPLOYEE NO",
+            "name": "EmployeeNo"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "EMPLOYEE NAME",
+            "name": "EmployeeName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "SELECT"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Username"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "EmployeeNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "EmployeeName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "RefEmpId"
+                }
+            ]
+        }
+    ],
+    "propertyId": "Username",
+    "propertyName": "Username"
+}
