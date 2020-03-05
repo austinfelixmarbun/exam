@@ -1,6 +1,6 @@
 {
     "title": "LOOK UP - JOB TITLE",
-    "exportExcel": false, 
+    "exportExcel": false,
     "component": [
         {
             "type": "textbox",
@@ -19,9 +19,9 @@
             "placeholder": "Placeholder"
         }
     ],
-    "querystring" : {
-        "select" : "SELECT REF_JOB_TITLE_ID As RefJobTitleId, JOB_TITLE_CODE AS JobTitleCode, JOB_TITLE_NAME AS JobTitleName",
-        "from" : "FROM dbo.REF_JOB_TITLE WITH(NOLOCK)"
+    "querystring": {
+        "select": "SELECT REF_JOB_TITLE_ID As RefJobTitleId, JOB_TITLE_CODE AS JobTitleCode, JOB_TITLE_NAME AS JobTitleName",
+        "from": "FROM dbo.REF_JOB_TITLE WITH(NOLOCK)"
     },
     "headerList": [
         {
@@ -54,14 +54,16 @@
             "property": "JobTitleName"
         },
         {
-            "type" : "action",
-            "position" : "center",
-            "action" : [
+            "type": "action",
+            "position": "center",
+            "action": [
                 {
-                    "type" : "select",
-                    "property" : "RefJobTitleId"
+                    "type": "select",
+                    "property": "RefJobTitleId"
                 }
             ]
         }
-    ]  
+    ],
+    "propertyId": "JobTitleName",
+    "propertyName": "JobTitleName"
 }

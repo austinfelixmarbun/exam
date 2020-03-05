@@ -7,6 +7,7 @@ import { EmployeePositionAddComponent } from 'app/employee/employee-position/emp
 import { LeaveMaintenanceComponent } from './leave-maintenance/leave-maintenance/leave-maintenance.component';
 import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-maintenance-add-edit/leave-maintenance-add-edit.component';
 import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
+import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
 
 const routes: Routes = [
   {
@@ -79,7 +80,14 @@ const routes: Routes = [
         path: 'EmployeeBusinessUnit/Add',
         component: EmployeeBusinessunitAddComponent,
         data: {
-          title: 'Employee Business Unit'
+          title: 'Employee Business Unit Add'
+        }
+      },
+      {
+        path: 'EmployeeBusinessUnit/Paging',
+        component: EmployeeBusinessunitPagingComponent,
+        data: {
+          title: 'Employee Business Unit Paging'
         }
       },
     ]
