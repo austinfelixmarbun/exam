@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-office-member',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OfficeMemberComponent implements OnInit {
 
+  @Input() objInput: any;
+  
   constructor() { }
 
   ngOnInit() {

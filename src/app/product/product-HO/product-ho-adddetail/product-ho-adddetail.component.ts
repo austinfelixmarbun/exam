@@ -21,6 +21,8 @@ export class ProductHoAdddetailComponent implements OnInit {
   key: any;
   criteria: CriteriaObj[] = [];
 
+  objPassing: any = {};
+
   RefProductHOForm=this.fb.group({
     ProdCode: [''],
     ProdName: [''],
@@ -40,8 +42,11 @@ export class ProductHoAdddetailComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       console.log("Params: ");
       console.log(params);
-      this.param = params["ProdHId"];
-      console.log(this.param);
+      this.objPassing["param"] = params["ProdHId"];
+      this.objPassing["mode"] = params["mode"];
+      console.log("obj passing: ");
+      console.log(this.objPassing);
+      
       this.key = params["key"];
     })
   }
@@ -51,7 +56,7 @@ export class ProductHoAdddetailComponent implements OnInit {
   UrlBackEnd: any;
   ngOnInit() {
     this.ProdHOBj=new RefProductHOObj();
-    this.ProdHOBj.ProdHId=this.param;
+    this.ProdHOBj.ProdHId = this.objPassing.param;
     this.UrlBackEnd=AdInsConstant.GetProductMainInfo;
     this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
       (response) => {
@@ -71,6 +76,7 @@ export class ProductHoAdddetailComponent implements OnInit {
       }
     );
   }
+  
   
 
 }
