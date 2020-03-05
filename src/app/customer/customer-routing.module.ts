@@ -1,18 +1,27 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { CustomerComponent } from 'app/customer/customer.component';
+import { Routes, RouterModule } from '@angular/router'; 
+import { CustomerPagingComponent } from './customer-paging/customer-paging.component';
+import { CustomerPersonalMainInfoComponent } from './customer-personal/customer-personal-main-info/customer-personal-main-info.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
+       
       {
-        path: '',
-        component: CustomerComponent,
+        path: 'Paging',
+        component: CustomerPagingComponent,
         data: {
-          title: 'Customer'
-        },
+            title: 'Customer Paging'
+        }
+    },{
+      path: 'CustomerPersonal/MainInfo',
+      component: CustomerPersonalMainInfoComponent,
+      data: {
+          title: 'Customer Personal Detail  '
       }
+  },
+
     ]
   }
 ];
