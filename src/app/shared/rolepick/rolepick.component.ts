@@ -61,7 +61,8 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           localStorage.setItem("BusinessDate", DateParse);
           localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
           this.currentUserContextService.addCurrentUserContext(currentUserContext);
-          this.router.navigate(['dashboard/dash-board']);
+          window.location.reload();
+          //this.router.navigate(['dashboard/dash-board']);
         },
         (error) => {
           console.log(error);
@@ -83,7 +84,8 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           localStorage.setItem("BusinessDate", DateParse);
           localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
           this.currentUserContextService.addCurrentUserContext(currentUserContext);
-          this.router.navigate(['dashboard/dash-board']);
+          window.location.reload();
+          //this.router.navigate(['dashboard/dash-board']);
         },
         (error) => {
           console.log(error);
