@@ -30,8 +30,8 @@ import { AssetCategoryAddEditComponent } from './asset-category/asset-category-a
 import { AssetDocumentAddEditComponent } from './asset-document/asset-document-add-edit/asset-document-add-edit.component';
 import { AssetDocumentMasterAddEditComponent } from './asset-document-master/asset-document-master-add-edit/asset-document-master-add-edit.component';
 import { AssetMasterComponent } from "./asset-master/asset-master-paging/asset-master.component";
-import { AssetMasterAddEditParentComponent } from "./asset-master/asset-master-add-edit-parent/asset-master-add-edit-parent.component";
-import { AssetMasterAddEditChildComponent } from "./asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component";
+// import { AssetMasterAddEditParentComponent } from "./asset-master/asset-master-add-edit-parent/asset-master-add-edit-parent.component";
+// import { AssetMasterAddEditChildComponent } from "./asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component";
 
 @NgModule({
   imports: [
@@ -72,8 +72,8 @@ import { AssetMasterAddEditChildComponent } from "./asset-master/asset-master-ad
     AssetDocumentAddEditComponent,
     AssetDocumentMasterAddEditComponent,
     AssetMasterComponent,
-    AssetMasterAddEditParentComponent,
-    AssetMasterAddEditChildComponent
+    // AssetMasterAddEditParentComponent,
+    // AssetMasterAddEditChildComponent
   ]
 })
 export class AssetModule { }

@@ -32,7 +32,7 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     UcgridfooterModule,
     UcpagingModule,
     ReactiveFormsModule,
-    UclookupgenericModule
+    UclookupgenericModule,
     // ArchwizardModule
     UcSubsectionModule
   ],
