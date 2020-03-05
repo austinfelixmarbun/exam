@@ -53,6 +53,13 @@ export class AdInsConstant {
   public static AddCenterGroupOfficeMember = "RefOffice/AddCenterGroupOfficeMember";
   public static DeleteCenterGroupOfficeMember = "/RefOffice/DeleteCenterGroupOfficeMember";
 
+  //CENTER GROUP
+  public static AddCenterGrp = environment.FoundationR3Url +"/CenterGrp/AddCenterGrp"; 
+  public static EditCenterGrp =environment.FoundationR3Url +"/CenterGrp/EditCenterGrp";
+  public static GetCenterGrpByCode= environment.FoundationR3Url +"/CenterGrp/GetCenterGrpByCode" ;
+  public static GetCenterGrpById = environment.FoundationR3Url + "/CenterGrp/GetCenterGrpById";
+
+
   //REF OFFICE AREA
   public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
   public static GetRefOfficeAreaPaging = "/RefOfficeArea/GetRefOfficeAreaPaging";
