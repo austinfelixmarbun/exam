@@ -16,6 +16,10 @@ import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deacti
 import { SharingComponentModule } from "../shared/sharingcomponent.module";
 import { HttpModule } from "@angular/http";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
+import { ArchwizardModule } from "angular-archwizard";
+import { GeneralDataComponent } from "./product-HO/product-ho-adddetail/general-data/general-data.component";
+import { OfficeMemberComponent } from "./product-HO/product-ho-adddetail/office-member/office-member.component";
+import { ProductComponentComponent } from "./product-HO/product-ho-adddetail/product-component/product-component.component";
 
 @NgModule({
     imports: [
@@ -29,7 +33,8 @@ import { UcviewgenericModule } from "@adins/ucviewgeneric";
         UcpagingModule,
         HttpModule,
         SharingComponentModule,
-        UcviewgenericModule
+        UcviewgenericModule,
+        ArchwizardModule
     ],
     declarations: [
         ProductHOPagingComponent,
@@ -38,7 +43,10 @@ import { UcviewgenericModule } from "@adins/ucviewgeneric";
         ProdOfferingPagingComponent,
         ProdOfferingAddComponent,
         ProductHODeactivatePagingComponent,
-        ProductHODeactivateEditComponent
+        ProductHODeactivateEditComponent,
+        GeneralDataComponent,
+        ProductComponentComponent,
+        OfficeMemberComponent
     ]
 })
 export class ProductModule { }

@@ -17,7 +17,7 @@ import { formatDate } from '@angular/common';
 export class ProductHOAddComponent implements OnInit {
 
   param: any;
-  mode: string = "ADD";
+  mode: string = "add";
   key: any;
   criteria: CriteriaObj[] = [];
 
@@ -127,7 +127,7 @@ export class ProductHOAddComponent implements OnInit {
       this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": this.ResultResponse.ProdHId } });
+          this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": this.ResultResponse.ProdHId, "mode":this.mode } });
           console.log(response);
         },
         (error) => {
@@ -142,7 +142,7 @@ export class ProductHOAddComponent implements OnInit {
         (response) => {
           var TempResp=response;
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": TempResp["DraftProdHId"] } });
+          this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": TempResp["DraftProdHId"], "mode": this.mode } });
           console.log(response);
         },
         (error) => {

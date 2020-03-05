@@ -5,39 +5,32 @@ import { OfficeMemberComponent } from "./office-member/office-member.component";
 import { ProductComponentComponent } from "./product-component/product-component.component";
 
 const routes: Routes = [
-    {
-        path: '',
-        children: [
-            {
-                path: '',
-                component: GeneralDataComponent,
-                data: {
-                    title: 'General Data'
-                }
-            },
-            {
-                path: 'GeneralData',
-                component: GeneralDataComponent,
-                data: {
-                    title: 'General Data'
-                }
-            },
-            {
-                path: 'OfficeMember',
-                component: OfficeMemberComponent,
-                data: {
-                    title: 'Office Member'
-                }
-            },
-            {
-                path: 'ProductComponent',
-                component: ProductComponentComponent,
-                data: {
-                    title: 'Product Component'
-                }
-            },
-        ]
-    }
+    // {
+    //     path: '',
+    //     children: [
+    //         {
+    //             path: 'GeneralData',
+    //             component: GeneralDataComponent,
+    //             data: {
+    //                 title: 'General Data'
+    //             }
+    //         },
+    //         {
+    //             path: 'OfficeMember',
+    //             component: OfficeMemberComponent,
+    //             data: {
+    //                 title: 'Office Member'
+    //             }
+    //         },
+    //         {
+    //             path: 'ProductComponent',
+    //             component: ProductComponentComponent,
+    //             data: {
+    //                 title: 'Product Component'
+    //             }
+    //         },
+    //     ]
+    // }
 ];
 
 @NgModule({

@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
-import { map, mergeMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
+import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-general-data',
@@ -18,12 +17,15 @@ import { forkJoin } from 'rxjs';
 })
 export class GeneralDataComponent implements OnInit {
 
+  @Input() objInput: any;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
-    private toastr: NGXToastrService
+    private toastr: NGXToastrService,
+    private wizard: WizardComponent
   ) { }
 
 
@@ -43,6 +45,7 @@ export class GeneralDataComponent implements OnInit {
       ProdCompntDtaValue: [''],
       ProdCompntName: [''],
       DropDownList: this.fb.array([this.fb.group({
+        indexOf: [''],
         Key: [''],
         Value: ['']
       })])
@@ -67,57 +70,63 @@ export class GeneralDataComponent implements OnInit {
     this.inputLookUpObj.pagingJson = "./assets/uclookup/product/lookupProduct.json";
     this.inputLookUpObj.genericJson = "./assets/uclookup/product/lookupProduct.json";
 
-    // Get Data Input
-    this.UrlBackEnd = AdInsConstant.GetProductHOComponent;
-    var ProdHOComponent = {
-      GroupCodes: [
-        "VAN"
-      ],
-      RowVersion: ""
-    }
-
-    this.items = this.RefGeneralDataForm.get('items') as FormArray;
-    this.http.post(this.UrlBackEnd, ProdHOComponent).subscribe(
-      (response) => {
-        // console.log(response);
-        // console.log(response["ReturnObject"].length);
-        var lengthDataReturnObj = response["ReturnObject"].length;
-
-        if (lengthDataReturnObj) {
-          for (var i = 0; i < lengthDataReturnObj; i++) {
-            var eachDataDetail = this.fb.group({
-              ProdDId: response["ReturnObject"][i].ProdDId,
-              ProdHId: response["ReturnObject"][i].ProdHId,
-              RefProdCompntCode: response["ReturnObject"][i].RefProdCompntCode,
-              RefProdCompntGrpCode: response["ReturnObject"][i].RefProdCompntGrpCode,
-              CompntValue: response["ReturnObject"][i].CompntValue,
-              CompntValueDesc: response["ReturnObject"][i].CompntValueDesc,
-              MrProdBehaviour: response["ReturnObject"][i].BehaviourType,
-              RowVersion: response["ReturnObject"][i].RowVersion,
-              ProdCompntType: response["ReturnObject"][i].ProdCompntType,
-              ProdCompntDtaSrcApi: response["ReturnObject"][i].ProdCompntDtaSrcApi,
-              ProdCompntDtaSrc: response["ReturnObject"][i].ProdCompntDtaSrc,
-              ProdCompntDtaValue: response["ReturnObject"][i].ProdCompntDtaValue,
-              ProdCompntName: response["ReturnObject"][i].ProdCompntName,
-              DropDownList: this.fb.array([this.fb.group({
-                Key: "",
-                Value: response["ReturnObject"][i].ProdCompntName + " List"
-              })])
-            }) as FormGroup;
-            // Get DDL
-            this.resolveDDL(eachDataDetail, i);
-            // Push Data
-            this.items.push(eachDataDetail);
-          }
-        }
-        this.items.removeAt(0);
-        console.log("cek form");
-        console.log(this.RefGeneralDataForm);
-      },
-      (error) => {
-        console.log(error);
+    // Get Data Input 
+    // mode add
+    if(this.objInput.mode == "add"){
+      this.UrlBackEnd = AdInsConstant.GetProductHOComponent;
+      var ProdHOComponent = {
+        GroupCodes: [
+          "VAN"
+        ],
+        RowVersion: ""
       }
-    );
+  
+      this.items = this.RefGeneralDataForm.get('items') as FormArray;
+      this.http.post(this.UrlBackEnd, ProdHOComponent).subscribe(
+        (response) => {
+          // console.log(response);
+          // console.log(response["ReturnObject"].length);
+          var lengthDataReturnObj = response["ReturnObject"].length;
+  
+          if (lengthDataReturnObj) {
+            for (var i = 0; i < lengthDataReturnObj; i++) {
+              var eachDataDetail = this.fb.group({
+                ProdDId: response["ReturnObject"][i].ProdDId,
+                ProdHId: response["ReturnObject"][i].ProdHId,
+                RefProdCompntCode: response["ReturnObject"][i].RefProdCompntCode,
+                RefProdCompntGrpCode: response["ReturnObject"][i].RefProdCompntGrpCode,
+                CompntValue: response["ReturnObject"][i].CompntValue,
+                CompntValueDesc: response["ReturnObject"][i].CompntValueDesc,
+                MrProdBehaviour: response["ReturnObject"][i].BehaviourType,
+                RowVersion: response["ReturnObject"][i].RowVersion,
+                ProdCompntType: response["ReturnObject"][i].ProdCompntType,
+                ProdCompntDtaSrcApi: response["ReturnObject"][i].ProdCompntDtaSrcApi,
+                ProdCompntDtaSrc: response["ReturnObject"][i].ProdCompntDtaSrc,
+                ProdCompntDtaValue: response["ReturnObject"][i].ProdCompntDtaValue,
+                ProdCompntName: response["ReturnObject"][i].ProdCompntName,
+                DropDownList: this.fb.array([this.fb.group({
+                  indexOf: i,
+                  Key: "",
+                  Value: ""
+                })])
+              }) as FormGroup;
+              // Get DDL
+              this.resolveDDL(eachDataDetail, i);
+              // Push Data
+              this.items.push(eachDataDetail);
+            }
+          }
+          this.items.removeAt(0);
+          console.log("cek form");
+          console.log(this.RefGeneralDataForm);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }else{ // mode edit
+
+    }
     
   }
 
@@ -141,13 +150,16 @@ export class GeneralDataComponent implements OnInit {
           if(lengthDDL > 0){
             for (var i = 0; i < lengthDDL; i++) {
               var eachDDLDetail = this.fb.group({
+                indexOf: indexAt,
                 Key: response["ReturnObject"][i].Key,
                 Value: response["ReturnObject"][i].Value,
               }) as FormGroup;
               // console.log(eachDDLDetail);
               this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.push(eachDDLDetail);
             }
-            // this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
+            this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
+            this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList[indexAt].controls.Key; 
+            this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.CompntValue = this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList[indexAt].controls.Value;
           }
         },
         (error) => {
@@ -158,12 +170,25 @@ export class GeneralDataComponent implements OnInit {
     }
   }
 
-  clickTest(ev: any){
-    console.log(ev);
-    console.log(ev.target.value);
-    console.log(ev.target.options.selectedIndex);
-    console.log(ev.target.options.selectedIndex.text);
-    // console.log(this.RefGeneralDataForm);
+  clickTest(ev: any, idx: any){
+    // console.log(idx);
+    // console.log(ev.target.selectedOptions[0].text);
+    // console.log(ev.target.selectedOptions[0].value);
+
+    this.RefGeneralDataForm.controls.items["controls"][idx].patchValue({
+      CompntValue: ev.target.selectedOptions[0].text,
+      CompntValueDesc: ev.target.selectedOptions[0].value
+    });
+
+    console.log(this.RefGeneralDataForm);
+  }
+  
+  SaveForm(){
+    
+  }
+
+  NextDetail(){
+    this.wizard.goToNextStep();
   }
 
 }
