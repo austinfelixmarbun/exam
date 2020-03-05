@@ -7,6 +7,8 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-general-data',
@@ -38,10 +40,11 @@ export class GeneralDataComponent implements OnInit {
       ProdCompntType: [''],
       ProdCompntDtaSrcApi: [''],
       ProdCompntDtaSrc: [''],
+      ProdCompntDtaValue: [''],
       ProdCompntName: [''],
       DropDownList: this.fb.array([this.fb.group({
-        key: [''],
-        value: ['']
+        Key: [''],
+        Value: ['']
       })])
     })])
   });
@@ -68,7 +71,7 @@ export class GeneralDataComponent implements OnInit {
     this.UrlBackEnd = AdInsConstant.GetProductHOComponent;
     var ProdHOComponent = {
       GroupCodes: [
-        "GEN"
+        "VAN"
       ],
       RowVersion: ""
     }
@@ -76,8 +79,8 @@ export class GeneralDataComponent implements OnInit {
     this.items = this.RefGeneralDataForm.get('items') as FormArray;
     this.http.post(this.UrlBackEnd, ProdHOComponent).subscribe(
       (response) => {
-        console.log(response);
-        console.log(response["ReturnObject"].length);
+        // console.log(response);
+        // console.log(response["ReturnObject"].length);
         var lengthDataReturnObj = response["ReturnObject"].length;
 
         if (lengthDataReturnObj) {
@@ -94,10 +97,11 @@ export class GeneralDataComponent implements OnInit {
               ProdCompntType: response["ReturnObject"][i].ProdCompntType,
               ProdCompntDtaSrcApi: response["ReturnObject"][i].ProdCompntDtaSrcApi,
               ProdCompntDtaSrc: response["ReturnObject"][i].ProdCompntDtaSrc,
+              ProdCompntDtaValue: response["ReturnObject"][i].ProdCompntDtaValue,
               ProdCompntName: response["ReturnObject"][i].ProdCompntName,
               DropDownList: this.fb.array([this.fb.group({
-                key: [''],
-                value: ['']
+                Key: "",
+                Value: response["ReturnObject"][i].ProdCompntName + " List"
               })])
             }) as FormGroup;
             // Get DDL
@@ -114,134 +118,52 @@ export class GeneralDataComponent implements OnInit {
         console.log(error);
       }
     );
+    
   }
 
   resolveDDL(obj: any, indexAt: any) {
-    console.log("Cek Obj DDL:");
+    // console.log("Cek Obj DDL:");
     // console.log(indexAt);
 
     var urlGet = obj.controls.ProdCompntDtaSrcApi.value;
-    var masterTypeCodeAPI = obj.controls.ProdCompntDtaSrc.value;
-    var masterTypeCode = obj.controls.ProdCompntDtaSrc.value;
-    var ddlArray = this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList as FormArray;
-    var ddlObj: any;
-    var eachDDLDetail: any;
-    var lengthDDL: any;
+    var ddlObj = JSON.parse(obj.controls.ProdCompntDtaValue.value);
+    console.log("Json parse");
+    console.log(ddlObj);
     if (urlGet) {
       // console.log("cek API " + (indexAt + 1));
 
       // Make different obj passing
-      switch (masterTypeCodeAPI) {
-        case "REF_MASTER":
-          ddlObj = {
-            RefMasterTypeCode: masterTypeCode,
-            RowVersion: ""
-          };
-          this.http.post(urlGet, ddlObj).subscribe(
-            (response) => {
-              // console.log(response);
-              lengthDDL = response["ReturnObject"].length;
-              if (lengthDDL > 0) {
-                for (var i = 0; i < lengthDDL; i++) {
-                  eachDDLDetail = this.fb.group({
-                    key: response["ReturnObject"][i].MasterCode,
-                    value: response["ReturnObject"][i].Descr,
-                  }) as FormGroup;
-                  // console.log(eachDDLDetail);
-                  ddlArray.push(eachDDLDetail);
-                }
-                ddlArray.removeAt(0);
-              }
-              // console.log(ddlArray);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-          break;
-        case "REF_LOB":
-          ddlObj = {
-            RowVersion: ""
-          };
-          this.http.post(urlGet, ddlObj).subscribe(
-            (response) => {
-              // console.log(response);
-              lengthDDL = response["ReturnObject"].length;
-              if (lengthDDL > 0) {
-                for (var i = 0; i < lengthDDL; i++) {
-                  eachDDLDetail = this.fb.group({
-                    key: response["ReturnObject"][i].LobCode,
-                    value: response["ReturnObject"][i].LobName,
-                  }) as FormGroup;
-                  // console.log(eachDDLDetail);
-                  ddlArray.push(eachDDLDetail);
-                }
-                ddlArray.removeAt(0);
-              }
-              // console.log(ddlArray);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-          break;
-        case "ASSET_TYPE":
-          ddlObj = {
-            RowVersion: ""
-          };
-          this.http.post(urlGet, ddlObj).subscribe(
-            (response) => {
-              // console.log(response);
-              lengthDDL = response["ReturnObject"].length;
-              if (lengthDDL > 0) {
-                for (var i = 0; i < lengthDDL; i++) {
-                  eachDDLDetail = this.fb.group({
-                    key: response["ReturnObject"][i].AssetTypeCode,
-                    value: response["ReturnObject"][i].AssetTypeName,
-                  }) as FormGroup;
-                  // console.log(eachDDLDetail);
-                  ddlArray.push(eachDDLDetail);
-                }
-                ddlArray.removeAt(0);
-              }
-              // console.log(ddlArray);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-          break;
-          case "REF_CURR":
-            ddlObj = {
-              RowVersion: ""
-            };
-            this.http.post(urlGet, ddlObj).subscribe(
-              (response) => {
-                // console.log(response);
-                lengthDDL = response["ReturnObject"].length;
-                if (lengthDDL > 0) {
-                  for (var i = 0; i < lengthDDL; i++) {
-                    eachDDLDetail = this.fb.group({
-                      key: response["ReturnObject"][i].CurrCode,
-                      value: response["ReturnObject"][i].CurrName,
-                    }) as FormGroup;
-                    // console.log(eachDDLDetail);
-                    ddlArray.push(eachDDLDetail);
-                  }
-                  ddlArray.removeAt(0);
-                }
-                // console.log(ddlArray);
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
-            break;
-      }
 
-      // Get Drop Down List
-      
+      this.http.post(urlGet, ddlObj).subscribe(
+        (response) => {
+          // console.log(response);
+          var lengthDDL = response["ReturnObject"].length;
+          if(lengthDDL > 0){
+            for (var i = 0; i < lengthDDL; i++) {
+              var eachDDLDetail = this.fb.group({
+                Key: response["ReturnObject"][i].Key,
+                Value: response["ReturnObject"][i].Value,
+              }) as FormGroup;
+              // console.log(eachDDLDetail);
+              this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.push(eachDDLDetail);
+            }
+            // this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
     }
+  }
+
+  clickTest(ev: any){
+    console.log(ev);
+    console.log(ev.target.value);
+    console.log(ev.target.options.selectedIndex);
+    console.log(ev.target.options.selectedIndex.text);
+    // console.log(this.RefGeneralDataForm);
   }
 
 }
