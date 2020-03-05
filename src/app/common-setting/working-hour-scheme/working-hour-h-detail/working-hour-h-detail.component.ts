@@ -176,7 +176,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.http.post(this.addUrl, this.workingHourSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/commonSetting/workingHour"]);
+          this.router.navigate(["/CommonSetting/WorkingHour"]);
         },
         error => {
           console.log(error);
@@ -189,7 +189,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.http.post(this.editUrl, this.workingHourSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/commonSetting/workingHour"]);
+          this.router.navigate(["/CommonSetting/WorkingHour"]);
         },
         error => {
           console.log(error);

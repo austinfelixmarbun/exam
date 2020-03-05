@@ -16,7 +16,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './components/ui-components.module#UIComponentsModule'
   },
   {
-    path: 'office',
+    path: 'Office',
     loadChildren: './office/office.module#OfficeModule'
   },
   {
