@@ -1,0 +1,120 @@
+{
+    "title": "Customer",
+    "exportExcel": true,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "CUST_NO",
+            "id": "CustNo",
+            "value": "",
+            "label": "Customer No",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "CUST_NAME",
+            "id": "CustName",
+            "value": "",
+            "label": "Customer Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "A.MR_CUST_TYPE_CODE", 
+            "id": "CustTypeCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Type",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "CUST_TYPE",
+            "items": [],
+            "itemsUrl": []
+          },
+      {
+            "type": "textbox",
+            "name": "ID_NO",
+            "id": "IdNo",
+            "value": "",
+            "label": "Id No",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Customer No",
+            "name": "CustNo"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Customer Name",
+            "name": "CustName"
+        },  {
+            "type": "sort",
+            "position": "left",
+            "label": "Type",
+            "name": "MrCustTypeCode"
+        },  {
+            "type": "sort",
+            "position": "left",
+            "label": "Id No",
+            "name": "IdNo"
+        },
+      
+        {
+            "type": "label",
+            "position": "center",
+            "label": "EDIT  "
+        }
+    ],
+    "querystring": {
+        "select": "SELECT A.CUST_NO AS CustNo, A.CUST_NAME AS CustName, A.MR_CUST_TYPE_CODE as MrCustTypeCode, A.ID_NO as IdNo",
+        "from": "FROM CUST A WITH(NOLOCK)"
+    },
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "CustNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "CustName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrCustTypeCode"
+        }, 
+        {
+            "type": "text",
+            "position": "left",
+            "property": "IdNo"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/Asset/Accessory/Detail",
+                    "param": [
+                        {
+                            "type": "mode",
+                            "property": "edit"
+                        } 
+                    
+                    ]
+                } 
+                
+            ]
+        }
+    ]
+}
