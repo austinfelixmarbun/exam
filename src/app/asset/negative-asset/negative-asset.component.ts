@@ -41,7 +41,7 @@ export class NegativeAssetComponent implements OnInit {
     criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
     criteriaObj.propName = 'D.REF_MASTER_TYPE_CODE';
-    criteriaObj.value = "NEGATIVE_AST_SOURCE";
+    criteriaObj.value = "NEG_ASSET_SOURCE";
     criteriaList.push(criteriaObj);
     this.inputPagingObj.addCritInput = criteriaList;
   }

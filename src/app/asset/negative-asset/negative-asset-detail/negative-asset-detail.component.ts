@@ -94,7 +94,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       }),
       mergeMap( (response) => {
         var refMasterObj = new RefMasterObj();
-        refMasterObj.RefMasterTypeCode = "NEGATIVE_AST_SOURCE";
+        refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
         const negativeSource = this.httpClient.post(environment.FoundationR3Url + AdInsConstant.GetListActiveRefMaster, refMasterObj);
         var tempResponse = [response];
         return forkJoin(tempResponse, negativeSource);
