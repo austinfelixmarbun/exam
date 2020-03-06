@@ -21,6 +21,8 @@ export class ProductHoAdddetailComponent implements OnInit {
   key: any;
   criteria: CriteriaObj[] = [];
 
+  objPassing: any = {};
+
   RefProductHOForm=this.fb.group({
     ProdCode: [''],
     ProdName: [''],
@@ -38,10 +40,14 @@ export class ProductHoAdddetailComponent implements OnInit {
     private toastr: NGXToastrService
   ) {
     this.route.queryParams.subscribe(params => {
-      console.log("Params: ");
-      console.log(params);
-      this.param = params["ProdHId"];
-      console.log(this.param);
+      // console.log("Params: ");
+      // console.log(params);
+      this.objPassing["param"] = params["ProdHId"];
+      this.objPassing["mode"] = params["mode"];
+      this.objPassing["url"] = AdInsConstant.GetProductDetailComponentInfo;
+      // console.log("obj passing: ");
+      // console.log(this.objPassing);
+      
       this.key = params["key"];
     })
   }
@@ -51,11 +57,11 @@ export class ProductHoAdddetailComponent implements OnInit {
   UrlBackEnd: any;
   ngOnInit() {
     this.ProdHOBj=new RefProductHOObj();
-    this.ProdHOBj.ProdHId=this.param;
+    this.ProdHOBj.ProdHId = this.objPassing.param;
     this.UrlBackEnd=AdInsConstant.GetProductMainInfo;
     this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
         this.ResultResponse=response;
         this.RefProductHOForm.patchValue({
           ProdCode: this.ResultResponse.ProdCode,
@@ -71,6 +77,7 @@ export class ProductHoAdddetailComponent implements OnInit {
       }
     );
   }
+  
   
 
 }

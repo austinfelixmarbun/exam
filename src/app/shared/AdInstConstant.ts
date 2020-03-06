@@ -419,6 +419,22 @@ export class AdInsConstant {
   public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
   public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
   public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
+  public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
+
+
+  //PRODUCT OFFERING
+  public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
+  public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
+  public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
+
+
+
+  // PRODUCT
+  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
+  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
+  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
+  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
+  public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
   public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId"
 
   //PRODUCT OFFERING
