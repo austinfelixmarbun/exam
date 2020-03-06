@@ -29,7 +29,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   pageNow: number;
   pageSize: number;
   apiUrl: any;
-  vendorUrl: any;
   totalData: any;
   resultData: any;
   tempData: any;
@@ -39,7 +38,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   RefOfficeId: any;
   CenterGrpId: any;
   MrOfficeTypeCode: string = "CG";
-  addUrl: any;
   refOfficeobj: any;
 
   constructor(private http: HttpClient,
@@ -253,8 +251,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       RefOfficeId: this.tempListId
     }
 
-    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddCenterGrpOfficeMember;
-    this.http.post(this.addUrl, obj).subscribe(
+    this.http.post(AdInsConstant.AddCenterGrpOfficeMember, obj).subscribe(
         (response) => {
             console.log(response);
             this.router.navigate(['/Office/Office-group-member'], {queryParams: {RefOfficeId:this.RefOfficeId, CenterGrpId:this.CenterGrpId}});
@@ -270,8 +267,8 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       CenterGrpId: this.CenterGrpId,
       RefOfficeId: this.RefOfficeId
     }
-    var getListUrl = environment.FoundationR3Url + AdInsConstant.GetListCenterGrpMemberByRefOfficeId;
-    this.http.post(getListUrl, obj).subscribe(
+
+    this.http.post(AdInsConstant.GetListCenterGrpMemberByRefOfficeId, obj).subscribe(
       (response) => {
         this.refOfficeobj = response;
 
@@ -281,13 +278,15 @@ export class OfficeGroupMemberAddComponent implements OnInit {
            arrMemberList.push(this.refOfficeobj.ListCenterGrpOfficeMbr[index].RefOfficeId)
         }
         
-        const addCritListRefOffice = new CriteriaObj();
-        addCritListRefOffice.DataType = 'numeric';
-        addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
-        addCritListRefOffice.restriction = AdInsConstant.RestrictionNotIn;
-        addCritListRefOffice.listValue = arrMemberList;
-        this.arrCrit.push(addCritListRefOffice);
-        this.inputObj.addCritInput.push(addCritListRefOffice);
+        if(arrMemberList.length != 0){
+          const addCritListRefOffice = new CriteriaObj();
+          addCritListRefOffice.DataType = 'numeric';
+          addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
+          addCritListRefOffice.restriction = AdInsConstant.RestrictionNotIn;
+          addCritListRefOffice.listValue = arrMemberList;
+          this.arrCrit.push(addCritListRefOffice);
+          this.inputObj.addCritInput.push(addCritListRefOffice);
+        }
 
         console.log("ni sudah jalan get List")
       },
