@@ -35,6 +35,7 @@ export class OfficeGroupMemberComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCenterGrpMbr.json";
     this.inputPagingObj.addCritInput = new Array();
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteCenterGrpOfficeMember;
 
     var critInput = new CriteriaObj();
     critInput.propName = "RO.REF_OFFICE_ID";

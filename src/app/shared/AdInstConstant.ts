@@ -53,7 +53,9 @@ export class AdInsConstant {
   public static GetListOfficeCenterGrp = "/RefOffice/GetListOfficeCenterGrp";
   public static AddCenterGroupOfficeMember = "RefOffice/AddCenterGroupOfficeMember";
   public static AddCenterGrpOfficeMember = "/CenterGrpOfficeMbr/AddCenterGrpOfficeMember";
+  public static GetListCenterGrpMemberByRefOfficeId = "/CenterGrpOfficeMbr/GetListCenterGrpMemberByRefOfficeId"
   public static DeleteCenterGroupOfficeMember = "/RefOffice/DeleteCenterGroupOfficeMember";
+  public static DeleteCenterGrpOfficeMember = "/CenterGrpOfficeMbr/DeleteCenterGrpOfficeMember";
 
   //REF OFFICE AREA
   public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
@@ -137,7 +139,7 @@ export class AdInsConstant {
   public static GetEmpByEmpPositionId = "/EmpPosition/GetEmpByEmpPositionId";
   public static AddEmpPosition = "/EmpPosition/AddEmpPosition";
   public static EditEmpPosition = "/EmpPosition/EditEmpPosition";
-  public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
+    public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
   public static GetListUserEmployee = "/EmpPosition/GetListUserEmployee";
 
   //REF-USER

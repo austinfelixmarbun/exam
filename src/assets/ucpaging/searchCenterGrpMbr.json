@@ -19,7 +19,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT ROCGOM.OFFICE_CODE AS OfficeCode, ROCGOM.OFFICE_NAME AS OfficeName, RO.REF_OFFICE_ID AS RefOfficeId, CG.CENTER_GRP_ID AS CenterGrpId",
+        "select": "SELECT ROCGOM.OFFICE_CODE AS OfficeCode, ROCGOM.OFFICE_NAME AS OfficeName, RO.REF_OFFICE_ID AS RefOfficeId, CG.CENTER_GRP_ID AS CenterGrpId, CGOM.CENTER_GRP_OFFICE_MBR_ID AS CenterGrpOfficeMbrId",
         "from": "FROM dbo.CENTER_GRP CG WITH(NOLOCK) JOIN dbo.REF_OFFICE RO WITH(NOLOCK) ON CG.CENTER_GRP_CODE = Ro.OFFICE_CODE JOIN dbo.CENTER_GRP_OFFICE_MBR CGOM WITH(NOLOCK) ON CGOM.CENTER_GRP_ID = CG.CENTER_GRP_ID JOIN dbo.REF_OFFICE ROCGOM WITH(NOLOCK) ON CGOM.REF_OFFICE_ID = ROCGOM.REF_OFFICE_ID"
     },
     "headerList": [
@@ -58,7 +58,7 @@
             "action": [
                 {
                     "type": "delete",
-                    "property": "RefOfficeId"
+                    "property": "CenterGrpOfficeMbrId"
                 }
             ]
         }
