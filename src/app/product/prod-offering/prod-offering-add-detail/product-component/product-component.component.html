@@ -13,8 +13,7 @@
                 [ngSwitch]="item.controls.ProdCompntType.value">
                 <div *ngSwitchCase="'DDL'">
                   <div>
-                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc"
-                      (change)="clickTest($event)">
+                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc" (change)="clickTest($event, i)">
                       <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                         {{it.value.Value}}
                       </option>
@@ -44,7 +43,7 @@
     <!-- <form class="form form-horizontal" [formGroup]="RefApprovalForm">
       <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text">Approval</i> </h4>
-        <div formArrayName="items1">
+        <div formArrayName="items">
           <div *ngFor="let item1 of RefApprovalForm.controls.items.controls; let i = index;">
             <div class="form-group row" [formGroupName]="i">
               <label class="col-md-3 text-left" translate> {{item1.controls.ProdCompntName.value}} </label>
@@ -68,7 +67,7 @@
     <form class="form form-horizontal" [formGroup]="RefRuleForm">
       <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text">Rule</i> </h4>
-        <div formArrayName="items2">
+        <div formArrayName="items">
           <div *ngFor="let item2 of RefRuleForm.controls.items.controls; let i = index;">
             <div class="form-group row" [formGroupName]="i">
               <label class="col-md-3 text-left" translate> {{item2.controls.ProdCompntName.value}} </label>
@@ -92,7 +91,7 @@
     <form class="form form-horizontal" [formGroup]="RefOtherForm">
       <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text">Other</i> </h4>
-        <div formArrayName="items3">
+        <div formArrayName="items">
           <div *ngFor="let item3 of RefOtherForm.controls.items.controls; let i = index;">
             <div class="form-group row" [formGroupName]="i">
               <label class="col-md-3 text-left" translate> {{item3.controls.ProdCompntName.value}} </label>
@@ -114,11 +113,11 @@
       </div>
     </form> -->
     <div class="form-actions right">
-      <button type="submit" class="btn btn-raised btn-primary">
-        <i class="fa fa-check-square-o"></i> Back
-      </button>
-      <button type="submit" class="btn btn-raised btn-primary" (click)="AddDetail()">
+      <button type="submit" (click)="SaveForm()" class="btn btn-raised btn-primary">
         <i class="fa fa-check-square-o"></i> Save
+      </button>
+      <button type="submit" (click)="NextDetail()" class="btn btn-raised btn-primary">
+        <i class="fa fa-check-square-o"></i> Next
       </button>
     </div>
 

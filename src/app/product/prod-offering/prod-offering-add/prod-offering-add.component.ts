@@ -101,7 +101,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
         this.prodOfferingObj.ProdOfferingHId = this.resultData.ProdOfferingHId;
         this.prodOfferingObj.ProdOfferingId =this.param;
-        this.prodOfferingObj.RowVersion = this.prodOfferingObj.RowVersion;
+        this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
         this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
@@ -118,7 +118,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/product/prod-offering/add-detail"],{queryParams :{"ProdOfferingHId" : response["DraftProdOfferingHId"]}});
+            this.router.navigate(["/product/prod-offering/add-detail"],{queryParams :{"ProdOfferingHId" : response["DraftProdOfferingHId"] }});
           },
           error => {
             console.log(error);
@@ -136,7 +136,7 @@ export class ProdOfferingAddComponent implements OnInit {
       this.prodOfferingObj.ProdOfferingCode = this.resultData.ProdOfferingCode;
       this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
       this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
-      this.prodOfferingObj.RowVersion = "";
+      this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
       this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);

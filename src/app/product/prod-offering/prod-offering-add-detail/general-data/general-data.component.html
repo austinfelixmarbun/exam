@@ -1,3 +1,48 @@
-<p>
-  general-data works!
-</p>
+<div class="card-body">
+  <div class="px-3">
+
+    <form class="form form-horizontal" [formGroup]="RefGeneralDataForm">
+      <!-- Main Info -->
+      <div class="form-body">
+        <h4 class="form-section card-title" translate><i class="ft-file-text"></i> </h4>
+        <div formArrayName="items">
+          <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
+            <div class="form-group row" [formGroupName]="i">
+              <label class="col-md-3 text-left" translate> {{item.controls.ProdCompntName.value}} </label>
+              <div class="col-md-6" style="border-right: 1px solid grey"
+                [ngSwitch]="item.controls.ProdCompntType.value">
+                <div *ngSwitchCase="'DDL'">
+                  <div>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc" (change)="clickTest($event, i)">
+                      <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
+                        {{it.value.Value}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div *ngSwitchCase="'AMT'">
+                  <P>AMOUNT</P>
+                </div>
+                <div *ngSwitchCase="'DATE'">
+                  <P>DATE</P>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions right">
+          <button type="submit" (click)="SaveForm()" class="btn btn-raised btn-primary">
+            <i class="fa fa-check-square-o"></i> Save
+          </button>
+          <button type="submit" (click)="NextDetail()" class="btn btn-raised btn-primary">
+            <i class="fa fa-check-square-o"></i> Next
+          </button>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>

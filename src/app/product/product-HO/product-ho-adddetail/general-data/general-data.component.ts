@@ -72,7 +72,7 @@ export class GeneralDataComponent implements OnInit {
 
     // Get Data Input 
     // mode add
-    if(this.objInput.mode == "add"){
+    // if(this.objInput.mode == "add"){
       this.UrlBackEnd = AdInsConstant.GetProductHOComponent;
       var ProdHOComponent = {
         GroupCodes: [
@@ -124,9 +124,10 @@ export class GeneralDataComponent implements OnInit {
           console.log(error);
         }
       );
-    }else{ // mode edit
+    // }
+    // else{ // mode edit
 
-    }
+    // }
     
   }
 
@@ -158,8 +159,8 @@ export class GeneralDataComponent implements OnInit {
               this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.push(eachDDLDetail);
             }
             this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
-            this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList[indexAt].controls.Key; 
-            this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.CompntValue = this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList[indexAt].controls.Value;
+            // this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList[indexAt].controls.Key; 
+            // this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.CompntValue = this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList[indexAt].controls.Value;
           }
         },
         (error) => {

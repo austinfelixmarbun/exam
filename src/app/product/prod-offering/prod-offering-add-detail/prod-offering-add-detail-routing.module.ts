@@ -8,20 +8,20 @@ const routes: Routes = [
     {
         path: '',
         children: [
-            {
-                path: '',
-                component: GeneralDataComponent,
-                data: {
-                    title: 'General Data'
-                }
-            },
-            {
-                path: 'GeneralData',
-                component: GeneralDataComponent,
-                data: {
-                    title: 'General Data'
-                }
-            },
+            // {
+            //     path: '',
+            //     component: GeneralDataComponent,
+            //     data: {
+            //         title: 'General Data'
+            //     }
+            // },
+            // {
+            //     path: 'GeneralData',
+            //     component: GeneralDataComponent,
+            //     data: {
+            //         title: 'General Data'
+            //     }
+            // },
             // {
             //     path: 'OfficeMember',
             //     component: OfficeMemberComponent,
@@ -29,13 +29,13 @@ const routes: Routes = [
             //         title: 'Office Member'
             //     }
             // },
-            {
-                path: 'ProductComponent',
-                component: ProductComponentComponent,
-                data: {
-                    title: 'Product Component'
-                }
-            },
+            // {
+            //     path: 'ProductComponent',
+            //     component: ProductComponentComponent,
+            //     data: {
+            //         title: 'Product Component'
+            //     }
+            // },
         ]
     }
 ];

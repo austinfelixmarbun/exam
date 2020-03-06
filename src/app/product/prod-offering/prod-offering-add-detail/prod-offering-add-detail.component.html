@@ -43,20 +43,22 @@
             </div>
             <div class="card-body">
               <div class="px-3">
-                <div class="form-actions right">
-                  <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./GeneralData']">
-                    <i class="fa fa-check-square-o"></i> General Data
-                  </button>
+                <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="0">
+                  <aw-wizard-step [stepTitle]="'Product Component'" 
+                    [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+                    <app-product-component [objInput]="objPassing"></app-product-component>
+                  </aw-wizard-step>
+                
+                  <aw-wizard-step [stepTitle]="'General Data'"
+                    [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+                    <app-general-data [objInput]="objPassing"></app-general-data>
+                  </aw-wizard-step>
       
-                  <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./ProductComponent']"[queryParams]="{ProdOfferingHId:ProdOfferingHId}">
-                    <i class="fa fa-check-square-o"></i> Product Component
-                  </button>
-      
-                  <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./OfficeMember']">
-                    <i class="fa fa-check-square-o"></i> Office Member
-                  </button>
-                </div>
-                <router-outlet></router-outlet>
+                  <aw-wizard-step [stepTitle]="'Office Member'" 
+                    [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+                    <app-office-member [objInput]="objPassing"></app-office-member>
+                  </aw-wizard-step>
+                </aw-wizard>
               </div>
             </div>
             <!-- <div class="form-actions right">

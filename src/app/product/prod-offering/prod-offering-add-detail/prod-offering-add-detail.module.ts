@@ -13,6 +13,8 @@ import { UcpagingModule } from "@adins/ucpaging";
 import { SharingComponentModule } from "app/shared/sharingcomponent.module";
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { ProdOfferingAddDetailRoutingModule } from "./prod-offering-add-detail-routing.module";
+import { OfficeMemberComponent } from './office-member/office-member.component';
+import { ArchwizardModule } from "angular-archwizard";
 
 @NgModule({
     imports: [
@@ -25,13 +27,10 @@ import { ProdOfferingAddDetailRoutingModule } from "./prod-offering-add-detail-r
         UcpagingModule,
         UcSubsectionModule,
         SharingComponentModule,
-        ProdOfferingAddDetailRoutingModule
+        ProdOfferingAddDetailRoutingModule,
+        ArchwizardModule
     ],
-    declarations: [
-        GeneralDataComponent,
-        // OfficeMemberComponent,
-        ProductComponentComponent
-    ],
+    declarations: [],
     
     providers: [],
 
