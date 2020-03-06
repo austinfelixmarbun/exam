@@ -1,0 +1,27 @@
+import { Component, OnInit } from '@angular/core';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+
+@Component({
+  selector: 'app-asset-scheme-paging',
+  templateUrl: './asset-scheme-paging.component.html',
+  styleUrls: ['./asset-scheme-paging.component.scss']
+})
+export class AssetSchemePagingComponent implements OnInit {
+  inputPagingObj: any;
+
+  constructor() { }
+
+  ngOnInit() {
+    console.log('masuk ke scheme paging');
+    this.inputPagingObj = new UcPagingObj();
+    this.inputPagingObj._url = "./assets/ucpaging/searchAssetScheme.json";
+    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetScheme.json";
+    // this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetType;
+    this.inputPagingObj.deleteUrl = "";
+  }
+
+}
