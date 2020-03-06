@@ -15,12 +15,14 @@ export class AssetDocumentPagingComponent implements OnInit {
   inputPagingObj: any;
   viewObj:any;
   arrCrit:any;
+  
   constructor(private route: ActivatedRoute) { this.route.queryParams.subscribe(params => {
 
       
     if (params["AssetTypeId"] != null) {
       this.AssetTypeId = params["AssetTypeId"];
     }
+  
    
   }); }
 
@@ -30,7 +32,7 @@ export class AssetDocumentPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetDocument.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefEconomicSector;
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetDocList;
     
     this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
 

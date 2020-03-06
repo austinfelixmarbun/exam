@@ -31,8 +31,19 @@ export const ROUTES: RouteInfo[] = [
           { path: '/CommonSetting/Currency/paging', title: 'Currency', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
           { path: '/CommonSetting/Profession/paging', title: 'Profession', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
         ]
-  }
-  
+  },
+  {
+    path: '', title: 'Asset', icon: 'ft-aperture', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    submenu: [
+      { path: '/Asset/Configuration/Paging', title: 'Asset Configuration', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Asset/DocumentMaster/Paging', title: 'Asset Document Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Asset/NegativeAsset/Paging', title: 'Negative Asset', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Asset/AssetMaster/Paging', title: 'Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '', title: 'Asset Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '', title: 'Asset Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+
+    ]
+  },
   // {
   //     path: '', title: 'LOS', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
   //     submenu: [
