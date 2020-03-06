@@ -25,32 +25,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
-    imports: [
-        ProductRoutingModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        UCSearchModule,
-        UcgridfooterModule,
-        UcSubsectionModule,
-        UcpagingModule,
-        HttpModule,
-        SharingComponentModule,
-        UcviewgenericModule,
-        ArchwizardModule
-    ],
-    declarations: [
-        ProductHOPagingComponent,
-        ProductHOAddComponent,
-        ProductHoAdddetailComponent,
-        ProdOfferingPagingComponent,
-        ProdOfferingAddComponent,
-        ProductHODeactivatePagingComponent,
-        ProductHODeactivateEditComponent,
-        GeneralDataComponent,
-        ProductComponentComponent,
-        OfficeMemberComponent
-    ]
   imports: [
     ProductRoutingModule,
     CommonModule,
@@ -63,6 +37,7 @@ import { MatDividerModule } from '@angular/material/divider';
     HttpModule,
     SharingComponentModule,
     UcviewgenericModule,
+    ArchwizardModule,
     MatTabsModule,
     MatDividerModule
   ],
@@ -74,6 +49,9 @@ import { MatDividerModule } from '@angular/material/divider';
     ProdOfferingAddComponent,
     ProductHODeactivatePagingComponent,
     ProductHODeactivateEditComponent,
+    GeneralDataComponent,
+    ProductComponentComponent,
+    OfficeMemberComponent,
     ProductHOViewComponent
   ]
 
