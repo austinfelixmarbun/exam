@@ -59,7 +59,7 @@ import { AssetMasterComponent } from "./asset-master/asset-master-paging/asset-m
   declarations: [
     AssetTypePagingComponent,
     AssetTypeAddEditComponent,
-    ShowErrorsComponent,
+    // ShowErrorsComponent,
     AssetSchemePagingComponent,
     AssetSchemeAddEditMemberComponent,
     AssetSchemeAddEditInformationComponent,

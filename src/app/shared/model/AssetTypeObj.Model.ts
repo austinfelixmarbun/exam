@@ -1,13 +1,7 @@
 export class AssetTypeObj {
-    AssetTypeId: any;
+    AssetTypeId : any;
     AssetTypeCode: any;
     AssetTypeName: any;
-    MaxHierarchyLevel: any;
-    HierarchyLabelLevel1: any;
-    HierarchyLabelLevel2: any;
-    HierarchyLabelLevel3: any;
-    HierarchyLabelLevel4: any;
-    HierarchyLabelLevel5: any;
     SerialNo1Label: any;
     SerialNo2Label: any;
     SerialNo3Label: any;
@@ -20,7 +14,12 @@ export class AssetTypeObj {
     IsMndtrySerialNo5: any;
     IsLoanObj: any;
     IsActive: any;
-    RowVersion: any;
-    constructor() { this.AssetTypeId = 0, this.RowVersion = "" }
-  }
-  
+    MaxHierarchyLevel: any;
+    HierarchyLabelLevel1: any;
+    HierarchyLabelLevel2: any;
+    HierarchyLabelLevel3: any;
+    HierarchyLabelLevel4: any;
+    HierarchyLabelLevel5: any;
+    RowVersion : any;
+    constructor () { this.AssetTypeId = 0, this.RowVersion = ""}
+}

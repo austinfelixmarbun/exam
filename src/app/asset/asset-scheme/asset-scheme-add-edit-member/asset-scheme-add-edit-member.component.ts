@@ -61,6 +61,7 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
   AssetTypeId: any;
   exportData: any;
   arrAssetSchmD: any = new Array();
+  responseResultData : any;
 
   listSelectedId: Array<any> = [];
   listDeletedId: Array<any> = [];
@@ -108,19 +109,20 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
       response => {
         console.log('ini respons ny')
         console.log(response);
-        this.AssetSchmCode = response.AssetSchmCode;
-        this.AssetSchmName = response.AssetSchmName;
-        this.AssetTypeId = response.AssetTypeId;
-        if (response.IsActive == 0) {
+        this.responseResultData = response;
+        this.AssetSchmCode = this.responseResultData.AssetSchmCode;
+        this.AssetSchmName = this.responseResultData.AssetSchmName;
+        this.AssetTypeId = this.responseResultData.AssetTypeId;
+        if (this.responseResultData.IsActive == 0) {
           this.IsActive = 'No';
         } else {
           this.IsActive = 'Yes';
         }
-        let assetObj = { AssetTypeId: response.AssetTypeId };
+        let assetObj = { AssetTypeId: this.responseResultData.AssetTypeId };
         // this.assetService.getAssetTypeHbyAssetTypeId(assetObj).subscribe(
         this.http.post(this.getAssetTypeByIdUrl, assetObj).subscribe(
           response => {
-            this.AssetTypeName = response.AssetTypeName;
+            this.AssetTypeName = this.responseResultData.AssetTypeName;
           },
           error => {
             console.log(error);

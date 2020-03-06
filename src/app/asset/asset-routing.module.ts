@@ -11,7 +11,7 @@ import { AssetCategoryPagingComponent } from './asset-category/asset-category-pa
 import { AssetAccessoryPagingComponent } from './asset-accessory/asset-accessory-paging/asset-accessory-paging.component';
 import { AssetDocumentPagingComponent } from './asset-document/asset-document-paging/asset-document-paging.component';
 import { AssetDocumentMasterPagingComponent } from './asset-document-master/asset-document-master-paging/asset-document-master-paging.component';
-import { AssetDocumentMasterPagingInformationComponent } from './asset-document-master/asset-document-master-paging-information/asset-document-master-paging-information.component';
+// import { AssetDocumentMasterPagingInformationComponent } from './asset-document-master/asset-document-master-paging-information/asset-document-master-paging-information.component';
 
 // import { AssetDocumentMasterPagingInformationComponent } from './asset-document-master/asset-document-master-paging-information/asset-document-master-paging-information.component';
 import { NegativeAssetComponent } from './negative-asset/negative-asset.component';
@@ -23,7 +23,7 @@ import { AssetDocumentMasterAddEditComponent } from './asset-document-master/ass
 // import { AssetMasterAddEditChildComponent } from './asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component';
 // import { AssetMasterAddEditParentComponent } from './asset-master/asset-master-add-edit-parent/asset-master-add-edit-parent.component';
 import { AssetMasterComponent } from './asset-master/asset-master-paging/asset-master.component';
- 
+
 const routes: Routes = [
   {
     path: '',
@@ -62,12 +62,7 @@ const routes: Routes = [
         data: {
           title: 'Asset Scheme Information Add Edit'
         }
-      }
-    ]
-  },
-    {
-    path: '',
-    children: [
+      },
       {
         path: 'Configuration/Paging',
         component: AssetConfigurationPagingComponent,
@@ -82,26 +77,11 @@ const routes: Routes = [
           title: 'Asset Cateogry Paging'
         },
       },
-
-      {
-        path: 'Category/CategoryInformation',
-        component: AssetCategoryInformationComponent,
-        data: {
-          title: 'Asset Category Information'
-        },
-      },
       {
         path: 'Accessory/Paging',
         component: AssetAccessoryPagingComponent,
         data: {
           title: 'Asset Accessory Paging'
-        },
-      },
-      {
-        path: 'Accessory/AccessoryInformation',
-        component: AssetAccessoryInformationComponent,
-        data: {
-          title: 'Asset Accessory Information'
         },
       },
       {
@@ -112,10 +92,45 @@ const routes: Routes = [
         },
       },
       {
-        path: 'Document/DocumentInformation',
-        component: AssetDocumentInformationComponent,
+        path: 'DocumentMaster/Paging',
+        component: AssetDocumentMasterPagingComponent,
         data: {
-          title: 'Asset DocumentInformation'
+          title: 'Asset Document Paging'
+        },
+      },
+      {
+        path: 'Category/Detail',
+        component: AssetCategoryAddEditComponent,
+        data: {
+          title: 'Asset Category Detail'
+        },
+      },
+      {
+        path: 'Accessory/Paging',
+        component: AssetAccessoryPagingComponent,
+        data: {
+          title: 'Asset Accessory Paging'
+        },
+      },
+      {
+        path: 'Accessory/Detail',
+        component: AssetAccessoryAddEditComponent,
+        data: {
+          title: 'Asset Accessory Detail'
+        },
+      },
+      {
+        path: 'Document/Paging',
+        component: AssetDocumentPagingComponent,
+        data: {
+          title: 'Asset Document Paging'
+        },
+      },
+      {
+        path: 'Document/Detail',
+        component: AssetDocumentAddEditComponent,
+        data: {
+          title: 'Asset Document Detail'
         },
       },
       {
@@ -126,105 +141,55 @@ const routes: Routes = [
         },
       },
       {
-        path: 'DocumentMaster/DocumentMasterInformation',
-        component: AssetDocumentMasterPagingInformationComponent,
+        path: 'DocumentMaster/Detail',
+        component: AssetDocumentMasterAddEditComponent,
         data: {
-          title: 'Asset DocumentInformation'
+          title: 'Asset Document Detail'
+        },
+      },
+      {
+        path: 'NegativeAsset/Paging',
+        component: NegativeAssetComponent,
+        data: {
+          title: 'Negative Asset'
+        },
+      },
+      {
+        path: 'NegativeAsset/Detail',
+        component: NegativeAssetDetailComponent,
+        data: {
+          title: 'Negative Asset'
+        },
+      },
+      {
+        path: 'AssetMaster/Paging',
+        component: AssetMasterComponent,
+        data: {
+          title: 'Asset Master'
         },
       }
+    
+      //   {
+      //     path: 'AssetMaster/Detail',
+      //     component: AssetMasterAddEditParentComponent,
+      //     data: {
+      //       title: 'Asset Master Add Edit Parent'
+      //     },
+      //   },
+      //   {
+      //     path: 'AssetMaster/Child',
+      //     component: AssetMasterAddEditChildComponent,
+      //     data: {
+      //       title: 'Asset Master Add Edit Child'
+      //     },
+      //   }
 
     ]
   }
-            {
-                path: 'Category/Detail',
-                component: AssetCategoryAddEditComponent,
-                data: {
-                    title: 'Asset Category Detail'
-                },
-            },  
-            {
-                path: 'Accessory/Paging',
-                component: AssetAccessoryPagingComponent,
-                data: {
-                    title: 'Asset Accessory Paging'
-                },
-            },
-            {
-                path: 'Accessory/Detail',
-                component: AssetAccessoryAddEditComponent,
-                data: {
-                    title: 'Asset Accessory Detail'
-                },
-            },
-            {
-                path: 'Document/Paging',
-                component: AssetDocumentPagingComponent,
-                data: {
-                    title: 'Asset Document Paging'
-                },
-            },
-            {
-                path: 'Document/Detail',
-                component: AssetDocumentAddEditComponent,
-                data: {
-                    title: 'Asset Document Detail'
-                },
-            },
-            {
-                path: 'DocumentMaster/Paging',
-                component: AssetDocumentMasterPagingComponent,
-                data: {
-                    title: 'Asset Document Paging'
-                },
-            },
-            {
-                path: 'DocumentMaster/Detail',
-                component: AssetDocumentMasterAddEditComponent,
-                data: {
-                    title: 'Asset Document Detail'
-                },
-            },
-            {
-                path: 'NegativeAsset/Paging',
-                component: NegativeAssetComponent,
-                data: {
-                    title: 'Negative Asset'
-                },
-            },
-            {
-                path: 'NegativeAsset/Detail',
-                component: NegativeAssetDetailComponent,
-                data: {
-                    title: 'Negative Asset'
-                },
-            },
-            {
-                path: 'AssetMaster/Paging',
-                component: AssetMasterComponent,
-                data: {
-                  title: 'Asset Master'
-                },
-              },
-            //   {
-            //     path: 'AssetMaster/Detail',
-            //     component: AssetMasterAddEditParentComponent,
-            //     data: {
-            //       title: 'Asset Master Add Edit Parent'
-            //     },
-            //   },
-            //   {
-            //     path: 'AssetMaster/Child',
-            //     component: AssetMasterAddEditChildComponent,
-            //     data: {
-            //       title: 'Asset Master Add Edit Child'
-            //     },
-            //   }
-        ]
-    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
+      imports: [RouterModule.forChild(routes)],
+      exports: [RouterModule],
+    })
 export class AssetRoutingComponent { }
