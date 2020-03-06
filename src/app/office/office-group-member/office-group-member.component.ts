@@ -17,12 +17,14 @@ export class OfficeGroupMemberComponent implements OnInit {
 
   param: any;
   RefOfficeId: string;
+  CenterGrpId: string;
   viewObj: any;
-
   inputPagingObj: any;
+
   constructor(private route: ActivatedRoute){
     this.route.queryParams.subscribe(params => {
       this.RefOfficeId = params["RefOfficeId"];
+      this.CenterGrpId = params["CenterGrpId"];
   })
   }
 

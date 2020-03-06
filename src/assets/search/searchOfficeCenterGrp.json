@@ -3,7 +3,7 @@
     "component": [
       {
         "type": "textbox",
-        "name": "MEMBER.OFFICE_CODE",
+        "name": "RO.OFFICE_CODE",
         "id": "officeCodeId",
         "value": "",
         "label": "Office Code",
@@ -11,7 +11,7 @@
       },
       {
         "type": "textbox",
-        "name": "MEMBER.OFFICE_NAME",
+        "name": "RO.OFFICE_NAME",
         "id": "officeNameId",
         "value": "",
         "label": "Office Name",
@@ -19,7 +19,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT MEMBER.OFFICE_CODE AS OfficeCode, MEMBER.OFFICE_NAME AS OfficeName, MEMBER.MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, MEMBER.REF_OFFICE_ID AS RefOfficeId, MEMBER.IS_ACTIVE AS IsActive",
-      "from": "FROM dbo.REF_OFFICE RO WITH(NOLOCK) LEFT JOIN ( SELECT CGOM.REF_OFFICE_ID FROM dbo.CENTER_GRP CG WITH(NOLOCK) JOIN dbo.REF_OFFICE RO WITH(NOLOCK) ON CG.CENTER_GRP_CODE = RO.OFFICE_CODE AND RO.REF_OFFICE_ID = 1 JOIN dbo.CENTER_GRP_OFFICE_MBR CGOM WITH(NOLOCK) ON CGOM.CENTER_GRP_ID = CG.CENTER_GRP_ID ) AS MEMBER ON RO.REF_OFFICE_ID = MEMBER.REF_OFFICE_ID"
+      "select": "SELECT RO.OFFICE_CODE AS OfficeCode, RO.OFFICE_NAME AS OfficeName, RO.MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, RO.REF_OFFICE_ID AS RefOfficeId, RO.IS_ACTIVE AS IsActive",
+      "from": "FROM dbo.REF_OFFICE RO WITH(NOLOCK)"
     }
   }

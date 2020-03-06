@@ -59,6 +59,7 @@ export class AdInsConstant {
   public static GetCenterGrpByCenterGrpTypeCode = "/RefOffice/GetCenterGrpByCenterGrpCode";
   public static GetListOfficeCenterGrp = "/RefOffice/GetListOfficeCenterGrp";
   public static AddCenterGroupOfficeMember = "RefOffice/AddCenterGroupOfficeMember";
+  public static AddCenterGrpOfficeMember = "/CenterGrpOfficeMbr/AddCenterGrpOfficeMember";
   public static DeleteCenterGroupOfficeMember = "/RefOffice/DeleteCenterGroupOfficeMember";
 
   //REF OFFICE AREA

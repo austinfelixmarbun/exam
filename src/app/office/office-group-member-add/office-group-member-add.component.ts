@@ -2,13 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UCSearchComponent } from '@adins/ucsearch';
-import { Location } from '@angular/common';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
 
 @Component({
   selector: 'app-office-group-member-add',
@@ -17,11 +16,10 @@ import { Location } from '@angular/common';
   providers: [NGXToastrService]
 })
 export class OfficeGroupMemberAddComponent implements OnInit {
-  @ViewChild(UCGridFooterComponent) UCGridFooter;
+  @ViewChild(UcgridfooterComponent) UCGridFooter;
   @ViewChild(UCSearchComponent) UCSearchComponent;
 
   inputObj: any;
-  centerGrpId : any;
   arrCrit: any[];
   checkboxAll = false;
   listSelectedId: any;
@@ -39,12 +37,15 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   viewObj: any;
   Data = [];
   RefOfficeId: any;
+  CenterGrpId: any;
   MrOfficeTypeCode: string = "CG";
+  addUrl: any;
 
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private toastr:NGXToastrService) {
+    private route: ActivatedRoute, private router: Router, private toastr:NGXToastrService) {
       this.route.queryParams.subscribe(params => {
         this.RefOfficeId = params['RefOfficeId'];
+        this.CenterGrpId = params['CenterGrpId'];
       });
     }
 
@@ -68,14 +69,14 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     this.inputObj.addCritInput = new Array();
     const addCritTypeOCode = new CriteriaObj();
     addCritTypeOCode.DataType = 'text';
-    addCritTypeOCode.propName = 'MEMBER.MR_OFFICE_TYPE_CODE';
+    addCritTypeOCode.propName = 'RO.MR_OFFICE_TYPE_CODE';
     addCritTypeOCode.restriction = AdInsConstant.RestrictionNeq;
     addCritTypeOCode.value = this.MrOfficeTypeCode;
     this.arrCrit.push(addCritTypeOCode);
 
     const addCritIsActive = new CriteriaObj();
     addCritIsActive.DataType = 'boolean';
-    addCritIsActive.propName = 'MEMBER.IS_ACTIVE';
+    addCritIsActive.propName = 'RO.IS_ACTIVE';
     addCritIsActive.restriction = AdInsConstant.RestrictionEq;
     addCritIsActive.value = "true";
     this.arrCrit.push(addCritIsActive);
@@ -86,9 +87,9 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     console.log(this.inputObj);
 
     this.viewObj = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
-    // this.pageNow = 1;
-    // this.pageSize = 10;
-    // this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.pageNow = 1;
+    this.pageSize = 10;
+    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
   }
 
   searchSort(event: any) {
@@ -133,7 +134,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
   // ** Start UC Search **/
   getResult(event) {
-    this.checkboxAll = false;
     this.resultData = event.response;
     this.totalData = event.response.Count;
     this.UCGridFooter.pageNow = event.pageNow;
@@ -149,27 +149,24 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   }
 
   addToTemp() {
-    if (this.listSelectedId.length !== 0) {
-
-      this.checkboxAll = false;
+    if (this.listSelectedId.length != 0) {
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
       }
-
       for (var i = 0; i < this.listSelectedId.length; i++) {
         var object = this.resultData.Data.find(x => x.RefOfficeId == this.listSelectedId[i]);
         this.tempData.push(object);
       }
+
       this.arrAddCrit = new Array();
       if (this.arrCrit.length != 0) {
         for (var i = 0; i < this.arrCrit.length; i++) {
           this.arrAddCrit.push(this.arrCrit[i]);
         }
       }
-
       var addCrit = new CriteriaObj();
-      addCrit.DataType = "text";
-      addCrit.propName = "MEMBER.ASSET_MASTER_ID";
+      addCrit.DataType = "numeric";
+      addCrit.propName = "RO.REF_OFFICE_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.tempListId;
       this.arrAddCrit.push(addCrit);
@@ -184,9 +181,8 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       this.inputObj.addCritInput = this.arrAddCrit;
       this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
       this.listSelectedId = [];
-
     } else {
-      this.toastr.typeErrorCustom('Please select at least one Office');
+      this.toastr.typeErrorCustom("Please select at least one Office");
     }
   }
 
@@ -228,8 +224,8 @@ export class OfficeGroupMemberAddComponent implements OnInit {
         this.tempData.splice(index, 1);
       }
       var addCrit = new CriteriaObj();
-      addCrit.DataType = "text";
-      addCrit.propName = "MEMBER.REF_OFFICE_ID";
+      addCrit.DataType = "numeric";
+      addCrit.propName = "RO.REF_OFFICE_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.tempListId;
       if (this.tempListId.length != 0) {
@@ -248,6 +244,20 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   }
 
   SaveOfficeGroupMember() {
-    
+    var obj = {
+      CenterGrpId: this.CenterGrpId,
+      RefOfficeId: this.tempListId
+    }
+
+    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddCenterGrpOfficeMember;
+    this.http.post(this.addUrl, obj).subscribe(
+        (response) => {
+            console.log(response);
+            this.router.navigate(['/Office/Office-group-member'], {queryParams: {RefOfficeId:this.RefOfficeId, CenterGrpId:this.CenterGrpId}});
+        },
+        (error) => {
+            console.log(error);
+        });
+
   }
 }
