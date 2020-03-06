@@ -38,7 +38,7 @@ export const ROUTES: RouteInfo[] = [
       { path: '/Asset/Configuration/Paging', title: 'Asset Configuration', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Asset/DocumentMaster/Paging', title: 'Asset Document Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Asset/NegativeAsset/Paging', title: 'Negative Asset', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Asset/', title: 'Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Asset/AssetMaster/Paging', title: 'Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '', title: 'Asset Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '', title: 'Asset Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
 
