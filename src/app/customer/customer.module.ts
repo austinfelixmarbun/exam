@@ -14,6 +14,8 @@ import { UcpagingModule } from '@adins/ucpaging';
 import { CustomerPersonalMainInfoComponent } from './customer-personal/customer-personal-main-info/customer-personal-main-info.component';
 import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check.component';
 import { UcSubsectionModule } from '@adins/uc-subsection';
+import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
+import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
 
 @NgModule({
   exports: [ 
@@ -34,7 +36,7 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
   ],
   declarations: [ 
     CustomerPagingComponent, 
-    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent
+    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent
   ]
 })
 export class CustomerModule { 

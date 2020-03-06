@@ -19,11 +19,27 @@
                  <div class="form-group row">
                   <label class="col-md-3  adInsLabel" translate>Asset Document Name </label>
                   <div class="col-md-9">
-                    <select class="form-control adInsInput" style="width: auto" formControlName="AssetDocName"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetDocumentForm.controls.AssetDocName.invalid }">
-                        <option *ngFor="let it of tempAssetName" value="{{it.RefAssetDocId}}">
-                            {{it.AssetDocName}}</option>
-                    </select>
+
+                    <div *ngIf="this.pageType == 'add' else emptyList">
+                      <div >
+                        <select class="form-control adInsInput" style="width: auto" formControlName="AssetDocName"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetDocumentForm.controls.AssetDocName.invalid }">
+                            <option *ngFor="let it of tempAssetName" value="{{it.RefAssetDocId}}">
+                                {{it.AssetDocName}}</option>
+                        </select>
+    
+                       </div>
+                   </div>
+                    <ng-template #emptyList>
+                      <div >
+                        <label>{{this.assetDocName}} </label>
+                       </div>
+                   </ng-template>
+
+
+                   
+
+                    
                     <show-errors [control]="AssetDocumentForm.controls.AssetDocName" [submit]="enjiForm.submitted"></show-errors>
                   </div>
                 </div>
