@@ -299,7 +299,6 @@ export class AdInsConstant {
   public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
   public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
   public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueById";
-  public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById";
   public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
   public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
 
@@ -364,7 +363,35 @@ export class AdInsConstant {
   public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId';
 
   // GENERIC
-  public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL";
+  public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
+
+  // ASSET TYPE
+  public static AddAssetType = "/AssetType/AddAssetType"
+  public static EditAssetType = "/AssetType/EditAssetType"
+  public static GetAssetTypeByCode = "/AssetType/GetAssetTypeByCode"
+  public static GetAssetTypeById = "/AssetType/GetAssetTypeById"
+  public static GetListAssetType = "/AssetType/GetListAssetType"
+  public static GetListActiveAssetType = "/AssetType/GetListActiveAssetType"
+  public static DeleteAssetType = "/AssetType/DeleteAssetType"
+  // PRODUCT
+  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
+  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
+  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
+  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
+
+
+  public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
+  public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
+
+
+  //PRODUCT OFFERING
+  public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo"
+  public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering"
+  public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering"
+
+
+  //REF REASON
+  public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
 
   //asset accesory
   public static AddNewAssetAccesory = "/AssetAccessory/AddAssetAccessory"
@@ -411,7 +438,6 @@ export class AdInsConstant {
   public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc"
   public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
 
-
   // PRODUCT
   public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
   public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
@@ -427,6 +453,11 @@ export class AdInsConstant {
   public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
   public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
   public static GetListProdOfferingVersionByProdId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingVersionByProdId"
+   
+  //Asset Scheme
+  public static GetAssetSchmHById =   "/AssetSchmH/GetAssetSchmHById";
+  public static AddAssetSchmH =   "/AssetSchmH/AddAssetScyId";
+  public static EditAssetSchmH =   "/AssetSchmH/EditAssetSchmH";
 
 
   // PRODUCT COMPONENT
@@ -441,4 +472,14 @@ export class AdInsConstant {
   public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
   public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
+}
+ 
+  // // ASSET NEGATIVE
+  // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
+  // public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
+  // public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
+
+
+  // PRODUCT COMPONENT
+  public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
 }
