@@ -35,14 +35,19 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   tempIdType: any;
   
   CustName  : any;
+  indexGender:any;
   Gender : any;
+  GenderDesc:any;
+  indexMrIdTypeCode : any;
   MrIdTypeCode : any;
+  MrIdTypeCodeDesc : any;
   BirthPlace : any;
   BirthDt : any;
   IdNo : any;
   TaxIdNo : any;
   IdExpiredDt : any;
   MotherMaidenName : any;
+  
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
   this.getUrl = environment.FoundationR3Url + AdInsConstant.GetListActiveRefMaster;  
   }
@@ -57,7 +62,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       (response) => {
         this.tempGender = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
-          Gender: this.tempGender[0].Key
+          Gender: 0
 
         });
  
@@ -72,7 +77,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       (response) => {
         this.tempIdType = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
-          MrIdTypeCode: this.tempIdType[0].Key
+          MrIdTypeCode: 0 
 
         });
       }
@@ -81,12 +86,17 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
 
   }
 
-  SaveValue (){
-
- 
-    this.CustName= this.CustomerPersonalForm.controls["CustName"].value;
-    this.Gender = this.CustomerPersonalForm.controls["Gender"].value;
-    this.MrIdTypeCode= this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
+  SaveValue (){ 
+    this.CustName= this.CustomerPersonalForm.controls["CustName"].value; 
+    
+    this.indexGender = this.CustomerPersonalForm.controls["Gender"].value;
+    this.Gender = this.tempGender[this.indexGender].Key;
+    this.GenderDesc= this.tempGender[this.indexGender].Value; 
+    
+    this.indexMrIdTypeCode = this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
+    this.MrIdTypeCode= this.tempIdType[this.indexMrIdTypeCode].Key;
+    this.MrIdTypeCodeDesc = this.tempIdType[this.indexMrIdTypeCode].Value;
+    console.log(  this.MrIdTypeCode);
     this.BirthPlace = this.CustomerPersonalForm.controls["BirthPlace"].value;
     this.BirthDt= this.CustomerPersonalForm.controls["BirthDt"].value;
     this.IdNo = this.CustomerPersonalForm.controls["IdNo"].value;
@@ -94,7 +104,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.IdExpiredDt = this.CustomerPersonalForm.controls["IdExpiredDt"].value;
     this.MotherMaidenName= this.CustomerPersonalForm.controls["MotherMaidenName"].value;
    
-    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,"BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName    } });
+    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName,"GenderDesc":this.GenderDesc, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,"MrIdTypeCodeDesc" : this.MrIdTypeCodeDesc,"BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName    } });
           
   }
 }
