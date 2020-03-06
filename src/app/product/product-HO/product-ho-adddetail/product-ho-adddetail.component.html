@@ -1,0 +1,96 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-4" style="text-align-last: right">
+            <button type="button" class="backButton" [routerLink]="['/product/HOpaging']" translate>
+              <i class="ft-arrow-left"></i> Back
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="px-3">
+
+          <form class="form form-horizontal" [formGroup]="RefProductHOForm" >
+            <!-- Main Info -->
+            <div class="form-body">
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Main Info </h4>
+
+              <div class="form-group row">
+                <label class="col-md-2 adInsLabel">Product Code </label>
+                <label class="col-md-4 adInsLabel"> {{RefProductHOForm.controls.ProdCode.value}} </label>
+
+                <label class="col-md-2 adInsLabel">Start Active Date </label>
+                <label class="col-md-4 adInsLabel"> {{RefProductHOForm.controls.StartDt.value}} </label>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-2 adInsLabel">Product Name </label>
+                <label class="col-md-4 adInsLabel"> {{RefProductHOForm.controls.ProdName.value}} </label>
+
+                <label class="col-md-2 adInsLabel">End Date </label>
+                <label class="col-md-4 adInsLabel"> {{RefProductHOForm.controls.EndDt.value}} </label>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-2 adInsLabel">Status </label>
+                <label class="col-md-4 adInsLabel"> {{RefProductHOForm.controls.StatusCode.value}} </label>
+
+                <label class="col-md-2 adInsLabel">Product Description </label>
+                <label class="col-md-4 adInsLabel"> {{RefProductHOForm.controls.ProdDescr.value}} </label>
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+      <!-- <div class="card-body">
+        <div class="px-3">
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./GeneralData']" [queryParams]="{'param': param}">
+              <i class="fa fa-check-square-o"></i> General Data
+            </button>
+
+            <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./ProductComponent']">
+              <i class="fa fa-check-square-o"></i> Product Component
+            </button>
+
+            <button type="button" class="btn btn-raised btn-primary" [routerLink]="['./OfficeMember']">
+              <i class="fa fa-check-square-o"></i> Office Member
+            </button>
+          </div>
+          <router-outlet></router-outlet>
+        </div>
+      </div> -->
+
+      <div class="card-body">
+        <div class="px-3">
+          <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="0">
+            <aw-wizard-step [stepTitle]="'General Data'"
+              [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+              <app-general-data [objInput]="objPassing"></app-general-data>
+            </aw-wizard-step>
+          
+            <aw-wizard-step [stepTitle]="'Product Component'" 
+              [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+              <app-product-component [objInput]="objPassing"></app-product-component>
+            </aw-wizard-step>
+
+            <aw-wizard-step [stepTitle]="'Office Member'" 
+              [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+              <app-office-member [objInput]="objPassing"></app-office-member>
+            </aw-wizard-step>
+          </aw-wizard>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
