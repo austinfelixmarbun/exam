@@ -52,7 +52,9 @@ export function createTranslateLoader(http: HttpClient) {
         ContentLayoutComponent,
         UserMaintenanceComponent,
         ErrorDialogComponent,
-        RolepickComponent
+        RolepickComponent,
+       
+       
         
     ],
     imports: [
@@ -99,16 +101,16 @@ export class AppModule {
         // localStorage.setItem("LocalIp", window.location.origin);
         // console.log(window.location.origin); // 192.168.0.122
 
-        var url = environment.foundationUrl + AdInsConstant.GetBusinessDt;
-        this.http.post(url, null).subscribe(
-            (response) => {
-                var datePipe = new DatePipe("en-US");
-                var value = datePipe.transform(response["returnObject"], 'yyyy/MM/dd');
-                localStorage.setItem("BusinessDate", value);
-            },
-            (error) => {
+        // var url = environment.foundationUrl + AdInsConstant.GetBusinessDt;
+        // this.http.post(url, null).subscribe(
+        //     (response) => {
+        //         var datePipe = new DatePipe("en-US");
+        //         var value = datePipe.transform(response["returnObject"], 'yyyy/MM/dd');
+        //         localStorage.setItem("BusinessDate", value);
+        //     },
+        //     (error) => {
 
-            }
-        )
+        //     }
+        // )
     }
 }

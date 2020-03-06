@@ -42,6 +42,7 @@ export class AssetCategoryPagingComponent implements OnInit {
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetCategory;
     
     this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
+    
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.restriction = AdInsConstant.RestrictionLike;

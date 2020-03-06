@@ -1,0 +1,68 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <div class="addEdit">
+
+
+          <form class="form form-horizontal" [formGroup]="AssetCategoryForm"
+            (ngSubmit)="AssetCategoryForm.valid && SaveForm()" #enjiForm="ngForm">
+
+
+
+
+            <div class="form-body">
+              <h4 class="form-section card-title" translate>Asset Category Information
+              </h4>
+
+
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" translate>Asset Category Code </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="AssetCategoryCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetCategoryForm.controls.AssetCategoryCode.invalid}">
+                  <show-errors [control]="AssetCategoryForm.controls.AssetCategoryCode" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" translate>Asset Category Name </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="AssetCategoryName"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetCategoryForm.controls.AssetCategoryName.invalid}">
+                  <show-errors [control]="AssetCategoryForm.controls.AssetCategoryName" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+
+
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Active Status</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive" />
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../Paging']"
+                [queryParams]="{ AssetTypeId: this.AssetTypeId }" translate>
+                <i class="ft-x"></i> Back
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

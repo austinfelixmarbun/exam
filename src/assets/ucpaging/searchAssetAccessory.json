@@ -1,5 +1,5 @@
 {
-    "title": "Asset Category",
+    "title": "Asset Accessory",
     "exportExcel": true,
     "component": [
       {
@@ -69,7 +69,7 @@
     ],
     
         "querystring": { 
-            "select": "SELECT A.ASSET_TYPE_ID AS AssetTypeId, A.ASSET_ACCESSORY_ID as AssetAccessoryId, A.ASSET_ACCESSORY_CODE as AssetAccessoryCode, A.ASSET_ACCESSORY_NAME as AssetAccessoryName, A.IS_ACTIVE as IsActive",
+            "select": "SELECT  A.ASSET_ACCESSORY_CODE as AssetAccessoryCode,A.ASSET_ACCESSORY_NAME as AssetAccessoryName,A.ASSET_TYPE_ID AS AssetTypeId, A.ASSET_ACCESSORY_ID as AssetAccessoryId,  A.IS_ACTIVE as IsActive",
           "from": "FROM ASSET_ACCESSORY A WITH(NOLOCK)" 
     },
     "bodyList": [
@@ -94,7 +94,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Asset/Accessory/AccessoryInformation",
+            "path": "/Asset/Accessory/Detail",
             "param": [
               {
                 "type": "mode",
