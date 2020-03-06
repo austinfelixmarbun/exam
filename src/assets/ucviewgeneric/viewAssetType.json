@@ -1,5 +1,5 @@
 {
-  "title": "Asset Document",
+  "title": "",
   "subsection": [
     {
       "subSectionId": "AssetTypeId",
@@ -8,12 +8,12 @@
       "mainInfo": [
         {
           "type": "text",
-          "label": "AssetTypeCode",
+          "label": "Asset Type Code",
           "property": "AssetTypeCode"
         },
         {
           "type": "text",
-          "label": "AssetTypeName",
+          "label": "Asset Type Name",
           "property": "AssetTypeName"
         } 
         

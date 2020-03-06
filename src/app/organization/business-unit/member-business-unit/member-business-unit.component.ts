@@ -10,7 +10,6 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './member-business-unit.component.html'
 })
 export class MemberBusinessUnitComponent implements OnInit {
-  param: any;
   RefBizUnitId: string;
   viewObj: any;
 

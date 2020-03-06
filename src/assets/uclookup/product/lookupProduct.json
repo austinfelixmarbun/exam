@@ -1,0 +1,80 @@
+{
+    "url": "http://getSupplier",
+    "title":"Lookup Product",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "Prod_Code",
+        "id": "ProdCode",
+        "value": "%",
+        "label": "Prod Code",
+        "placeholder": "Prod Code"
+      },
+      {
+        "type": "textbox",
+        "name": "Prod_Name",
+        "id": "ProdName",
+        "value": "",
+        "label": "Prod Name",
+        "placeholder": "Prod Name"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT PROD_CODE AS ProdCode, PROD_NAME AS ProdName, PROD_STAT as ProdStat, DRAFT_PROD_H_ID AS DraftProdHId",
+      "from": "FROM dbo.PROD WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Prod Code",
+            "name": "ProdCode"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Prod Name",
+            "name": "ProdName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Status",
+            "name": "ProdStat"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "ProdCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "ProdName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "ProdStat"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "ProdCode"
+                }
+            ]
+        }
+    ],
+    "propertyId": "ProdCode",
+    "propertyName": "ProdCode"
+}

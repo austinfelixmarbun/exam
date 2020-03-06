@@ -4,24 +4,25 @@
   "component": [
     {
       "type": "textbox",
-      "name": "ASSET_DOC_NAME",
-      "id": "AssetDocName",
+      "name": "B.ASSET_DOC_CODE",
+      "id": "AssetDocNameId",
       "value": "",
-      "label": "Asset Document Name",
+      "label": "Asset Document Code",
       "placeholder": "Placeholder"
     },
     {
       "type": "textbox",
-      "name": "ASSET_CATEGORY_NAME",
-      "id": "AssetCategoryName",
+      "name": "B.ASSET_CATEGORY_NAME",
+      "id": "AssetCategoryNameId",
       "value": "",
       "label": "Asset Category Name",
       "placeholder": "Placeholder"
-    },
+    },  
+
     {
       "type": "dropdown",
-      "name": "IS_MAIN_DOC",
-      "id": "isMainDoc",
+      "name": "A.IS_MAIN_DOC",
+      "id": "isMainDocId",
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -42,8 +43,8 @@
     },
     {
       "type": "dropdown",
-      "name": "IS_VALUE_NEEDED",
-      "id": "isValueNeeded",
+      "name": "A.IS_VALUE_NEEDED",
+      "id": "isValueNeededId",
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -64,8 +65,8 @@
     },
     {
       "type": "dropdown",
-      "name": "IS_PLEDGE",
-      "id": "isPledge",
+      "name": "A.IS_PLEDGE",
+      "id": "isPledgeId",
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -86,8 +87,8 @@
     },
     {
       "type": "dropdown",
-      "name": "IS_BORROW",
-      "id": "isBorrow",
+      "name": "A.IS_BORROW",
+      "id": "isBorrowId",
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -108,8 +109,8 @@
     },
     {
       "type": "dropdown",
-      "name": "IS_MANDATORY_NEW",
-      "id": "isMandatoryNew",
+      "name": "A.IS_MANDATORY_NEW",
+      "id": "isMandatoryNewId",
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -130,8 +131,8 @@
     },
     {
       "type": "dropdown",
-      "name": "IS_MANDATORY_USED",
-      "id": "isMandatoryUsed",
+      "name": "A.IS_MANDATORY_USED",
+      "id": "isMandatoryUsedId",
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -152,8 +153,8 @@
     },
     {
       "type": "dropdown",
-      "name": "IS_ACTIVE",
-      "id": "isActive",
+      "name": "A.IS_ACTIVE",
+      "id": "isActiveId",
       "value": "Active Status",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -176,13 +177,13 @@
   "headerList": [
     {
       "type": "sort",
-      "position": "center",
+      "position": "left",
       "label": "ASSET DOCUMENT CODE",
       "name": "AssetDocCode"
     },
     {
       "type": "sort",
-      "position": "center",
+      "position": "left",
       "label": "ASSET DOCUMENT NAME",
       "name": "AssetDocName"
     },  {
@@ -199,7 +200,7 @@
     },
       {
       "type": "sort",
-      "position": "left",
+      "position": "center",
       "label": "Pledge",
       "name": "IsPledge"
     },
@@ -235,7 +236,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT  A.ASSET_DOC_LIST_ID as AssetDocListId, B.REF_ASSET_DOC_ID as RefAssetDocId, A.ASSET_TYPE_ID AS AssetTypeId, B.ASSET_DOC_CODE as AssetDocCode, B.ASSET_DOC_NAME as AssetDocName, A.IS_MAIN_DOC as IsMainDoc, A.IS_VALUE_NEEDED as IsValueNeeded, A.IS_PLEDGE as IsPledge, A.IS_BORROW as IsBorrow, A.IS_MANDATORY_NEW as IsMandatoryNew, IS_MANDATORY_USED as IsMandatoryUsed, B.IS_ACTIVE as IsActive",
+    "select": "SELECT B.ASSET_DOC_CODE as AssetDocCode,B.ASSET_DOC_NAME as AssetDocName, A.ASSET_DOC_LIST_ID as AssetDocListId, B.REF_ASSET_DOC_ID as RefAssetDocId, A.ASSET_TYPE_ID AS AssetTypeId,   A.IS_MAIN_DOC as IsMainDoc, A.IS_VALUE_NEEDED as IsValueNeeded, A.IS_PLEDGE as IsPledge, A.IS_BORROW as IsBorrow, A.IS_MANDATORY_NEW as IsMandatoryNew, IS_MANDATORY_USED as IsMandatoryUsed, A.IS_ACTIVE as IsActive",
     "from": "FROM dbo.ASSET_DOC_LIST A WITH(NOLOCK) JOIN REF_ASSET_DOC B WITH(NOLOCK) ON A.REF_ASSET_DOC_ID = B.REF_ASSET_DOC_ID "
  
   },

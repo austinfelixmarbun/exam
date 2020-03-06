@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
+import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 
 @Component({
   selector: 'app-asset-document-add-edit',
@@ -28,7 +29,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
   });
 
 
-
+  assetDocName: any;
   pageType: any;
   AssetTypeId: any;
   AssetDocListId: any;
@@ -40,9 +41,11 @@ export class AssetDocumentAddEditComponent implements OnInit {
   getUrl: any;
   addUrl: any;
   editUrl: any;
-  tempAssetName : any;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    
+  getRefAssetDocUrl: any;
+  tempAssetName: any;
+  temp: any;
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+
     this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewAssetDocList;
     this.editUrl = environment.FoundationR3Url + AdInsConstant.EditAssetDocList;
     this.getUrl = environment.FoundationR3Url + AdInsConstant.GetListRefAssetDoc;
@@ -70,28 +73,40 @@ export class AssetDocumentAddEditComponent implements OnInit {
     console.log("wd");
     this.http.post(this.getUrl, assetDocListObj).subscribe(
       (response) => {
-          this.tempAssetName = response["ReturnObject"];
-          this.AssetDocumentForm.patchValue({
-            AssetDocName: this.tempAssetName[0].RefAssetDocId
-          });
+        this.tempAssetName = response["ReturnObject"];
+        this.AssetDocumentForm.patchValue({
+          AssetDocName: this.tempAssetName[0].RefAssetDocId
+        });
       }
-  );
+    );
 
     if (this.pageType == "edit") {
       // this.title = "Edit Bank";
       console.log("awd");
       this.apiUrl = this.settingUrl + AdInsConstant.GetAssetDocListByAssetDocListId;
+      this.getRefAssetDocUrl = this.settingUrl + AdInsConstant.GetRefAssetDocByRefAssetDocId;
       var assetDocListObj = new AssetDocListObj();
+      var refAssetDocObj = new RefAssetDocObj();
       assetDocListObj.AssetDocListId = this.AssetDocListId;
-
-
+      console.log("awd");
 
       this.http.post(this.apiUrl, assetDocListObj).subscribe(
         (response) => {
           this.result = response;
+          refAssetDocObj.RefAssetDocId = this.result.RefAssetDocId;
+
+
+          this.http.post(this.getRefAssetDocUrl, refAssetDocObj).subscribe(
+            (response) => {
+              this.temp = response;
+              this.assetDocName = this.temp.AssetDocName;
+            });
+
+
+
+
           this.AssetDocumentForm.patchValue({
 
-            AssetDocName: this.result.RefAssetDocId,
             IsMainDoc: this.result.IsMainDoc,
             IsValueNeeded: this.result.IsValueNeeded,
             IsPledge: this.result.IsPledge,
@@ -106,6 +121,12 @@ export class AssetDocumentAddEditComponent implements OnInit {
           console.log(error);
         }
       );
+
+
+
+
+
+
     }
   }
   SaveForm() {
@@ -137,7 +158,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
     }
     else {
       this.assetDocListObj = this.result;
-      this.assetDocListObj.RefAssetDocId =  this.AssetDocumentForm.controls["AssetDocName"].value;
+    
       this.assetDocListObj.IsValueNeeded = this.AssetDocumentForm.controls["IsValueNeeded"].value;
       this.assetDocListObj.IsMainDoc = this.AssetDocumentForm.controls["IsMainDoc"].value;
       this.assetDocListObj.IsPledge = this.AssetDocumentForm.controls["IsPledge"].value;
