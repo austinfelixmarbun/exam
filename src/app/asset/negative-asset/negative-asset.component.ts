@@ -33,10 +33,6 @@ export class NegativeAssetComponent implements OnInit {
 
     var criteriaList = new Array();
     var criteriaObj = new CriteriaObj();
-    criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    criteriaObj.propName = 'A.IS_ACTIVE';
-    criteriaObj.value = "1";
-    criteriaList.push(criteriaObj);
 
     criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;

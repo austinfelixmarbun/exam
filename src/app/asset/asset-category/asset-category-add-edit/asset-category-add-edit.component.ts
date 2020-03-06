@@ -41,15 +41,14 @@ export class AssetCategoryAddEditComponent implements OnInit {
 
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
-
+      }
         if (params["mode"] != null) {
           this.pageType = params["mode"];
         }
         if (params["AssetCategoryId"] != null) {
           this.AssetCategoryId = params["AssetCategoryId"];
         }
-      }
-
+      
 
     }); }
 

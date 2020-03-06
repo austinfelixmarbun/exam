@@ -82,7 +82,7 @@
         {
             "type" : "dropdown",
             "label" : "Negative Source",
-            "name" : "negative_Source",
+            "name" : "mr_Neg_Asset_Source_Code",
             "id" : "negativeSource",
             "value" : "",
             "datatype" : "text",
@@ -91,8 +91,8 @@
             "isFromURL" : "true", 
             "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetRefMasterByMasterCode", 
             "itemsUrl" : [], 
-            "criteriaPropName" : "MasterCode",
-            "criteriaPropValue" : "NEGATIVE_SOURCE"
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "NEG_ASSET_SOURCE"
         },
         {
             "type": "textbox",
