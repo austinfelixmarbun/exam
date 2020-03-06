@@ -8,8 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
-import { RefProductBrancMbrObj } from "../../../shared/model/RefProductBrancMbrObj.Model";
 import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
+import { RefProductOfferingBrancMbrObj } from "../../../shared/model/RefProductOfferingBranchMbrObj.Model";
 
 
 
@@ -23,9 +23,9 @@ export class ProductOfferingViewComponent implements OnInit {
   prodOfferingId: any;
   prodOfferingHId: any;
   viewProdOfferMainInfoObj: any;
-  ProdBranchMemObj: any;
+  ProdOfferingBranchMemObj: any;
   ProdVersionObj: any;
-  ProdBranchUrl: any;
+  ProdOfferingBranchUrl: any;
   ProdVerUrl: any;
   ProdDUrl: any;
   refProductDetailObj: any;
@@ -34,13 +34,13 @@ export class ProductOfferingViewComponent implements OnInit {
   ProdCompScore: any;
   ProdCompRule: any;
   ProdCompOther: any;
-  ProdBranchMbr: any;
+  ProdOfferingBranchMbr: any;
   ProdVersion: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
     //this.ProdDUrl = AdInsConstant.GetProductDetailComponentInfo;
-    //this.ProdBranchUrl = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
+    this.ProdOfferingBranchUrl = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
     //this.ProdVerUrl = AdInsConstant.GetListProdHVersionByProdId;
 
     this.route.queryParams.subscribe(params => {
@@ -71,19 +71,19 @@ export class ProductOfferingViewComponent implements OnInit {
     //  }
     //);
 
-    ////** Office Member **//
-    //this.ProdBranchMemObj = new RefProductBrancMbrObj
-    //this.ProdBranchMemObj.ProdHId = this.prodOfferingHId;
-    //this.http.post(this.ProdBranchUrl, this.ProdBranchMemObj).subscribe(
-    //  response => {
-    //    console.log("Response: ");
-    //    console.log(response);
-    //    this.ProdBranchMbr = response['ReturnObject'];
-    //  },
-    //  error => {
-    //    console.log(error);
-    //  }
-    //);
+    //** Office Member **//
+    this.ProdOfferingBranchMemObj = new RefProductOfferingBrancMbrObj
+    this.ProdOfferingBranchMemObj.ProdOfferingHId = this.prodOfferingHId;
+    this.http.post(this.ProdOfferingBranchUrl, this.ProdOfferingBranchMemObj).subscribe(
+      response => {
+        console.log("Response: ");
+        console.log(response);
+        this.ProdOfferingBranchMbr = response['ReturnObject'];
+      },
+      error => {
+        console.log(error);
+      }
+    );
 
 
     ////** Product Component **//
