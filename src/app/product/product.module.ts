@@ -23,6 +23,7 @@ import { ProductComponentComponent } from "./product-HO/product-ho-adddetail/pro
 import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
+import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { MatDividerModule } from '@angular/material/divider';
     GeneralDataComponent,
     ProductComponentComponent,
     OfficeMemberComponent,
-    ProductHOViewComponent
+    ProductHOViewComponent,
+    ProductOfferingViewComponent
   ]
 
 })
