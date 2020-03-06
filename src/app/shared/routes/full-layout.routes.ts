@@ -16,7 +16,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './components/ui-components.module#UIComponentsModule'
   },
   {
-    path: 'office',
+    path: 'Office',
     loadChildren: './office/office.module#OfficeModule'
   },
   {
@@ -28,7 +28,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './organization/organization.module#OrganizationModule'
   },
   {
-    path: 'customer',
+    path: 'Customer',
     loadChildren: './customer/customer.module#CustomerModule'
   },
   {

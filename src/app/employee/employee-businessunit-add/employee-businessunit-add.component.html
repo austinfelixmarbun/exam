@@ -9,7 +9,7 @@
           </div>
         </div>
       </div>
-
+      <lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
       <div class="card-body">
         <div class="px-3">
           <form class="form form-horizontal" [formGroup]="EmployeeBusinessUnitForm" #EmployeeBusinessUnit="ngForm"
@@ -22,35 +22,35 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel">Business Unit </label>
                 <div class="col-md-9">
-                  <lib-uclookupgeneric [enjiForm]="EmployeeBusinessUnit" [lookupInput]="inputPagingObjBusinessUnit" [parentForm]="EmployeeBusinessUnitForm" [identifier]="'lookupValueBusinessUnit'" (lookup)="getBizUnit($event)"></lib-uclookupgeneric>
+                  <lib-uclookupgeneric [enjiForm]="EmployeeBusinessUnit" [lookupInput]="inputPagingObjBusinessUnit" [parentForm]="EmployeeBusinessUnitForm" [identifier]="'lookupValueBusinessUnit'" (lookup)="getBizUnitId($event)"></lib-uclookupgeneric>
                 </div>
               </div> 
 
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel">Job Title </label>
                 <div class="col-md-9">
-                  <lib-uclookupgeneric [enjiForm]="EmployeeBusinessUnit" [lookupInput]="inputPagingObjJobTitle" [parentForm]="EmployeeBusinessUnitForm" [identifier]="'lookupValueJobTitle'" (lookup)="getBizUnit($event)"></lib-uclookupgeneric>
+                  <lib-uclookupgeneric [enjiForm]="EmployeeBusinessUnit" [lookupInput]="inputPagingObjJobTitle" [parentForm]="EmployeeBusinessUnitForm" [identifier]="'lookupValueJobTitle'" (lookup)="getJobTitleId($event)"></lib-uclookupgeneric>
                 </div>
               </div> 
 
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel">Supervisor</label>
                 <div class="col-md-9">
-                  <lib-uclookupgeneric [enjiForm]="EmployeeBusinessUnit" [lookupInput]="inputPagingObjSupervisor" [parentForm]="EmployeeBusinessUnitForm" [identifier]="'lookupValueSupervisor'" (lookup)="getBizUnit($event)"></lib-uclookupgeneric>
+                  <lib-uclookupgeneric [enjiForm]="EmployeeBusinessUnit" [lookupInput]="inputPagingObjSupervisor" [parentForm]="EmployeeBusinessUnitForm" [identifier]="'lookupValueSupervisor'" (lookup)="getSpvId($event)"></lib-uclookupgeneric>
                 </div>
               </div> 
 
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel">Office</label>
                 <div class="col-md-9">
-                  <lib-uclookupgeneric [enjiForm]="EmployeeBusinessUnit" [lookupInput]="inputPagingObjOffice" [parentForm]="EmployeeBusinessUnitForm" [identifier]="'lookupValueOffice'" (lookup)="getBizUnit($event)"></lib-uclookupgeneric>
+                  <lib-uclookupgeneric [enjiForm]="EmployeeBusinessUnit" [lookupInput]="inputPagingObjOffice" [parentForm]="EmployeeBusinessUnitForm" [identifier]="'lookupValueOffice'" (lookup)="getOfficeId($event)"></lib-uclookupgeneric>
                 </div>
               </div> 
 
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel">Role</label>
                 <div class="col-md-9">
-                  <lib-uclookupgeneric [enjiForm]="EmployeeBusinessUnit" [lookupInput]="inputPagingObjRole" [parentForm]="EmployeeBusinessUnitForm" [identifier]="'lookupValueRole'" (lookup)="getBizUnit($event)"></lib-uclookupgeneric>
+                  <lib-uclookupgeneric [enjiForm]="EmployeeBusinessUnit" [lookupInput]="inputPagingObjRole" [parentForm]="EmployeeBusinessUnitForm" [identifier]="'lookupValueRole'" (lookup)="getRoleId($event)"></lib-uclookupgeneric>
                 </div>
               </div> 
 
@@ -63,7 +63,7 @@
               </div>
 
               <div class="form-actions right">
-                <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/bank/paging']" translate>
+                <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/employee/EmployeeBusinessUnit/Paging']" [queryParams]="{RefUserId:RefUserId}">
                   <i class="ft-arrow-left"></i> Back
                 </button>
                 

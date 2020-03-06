@@ -57,25 +57,25 @@ export class ProdOfferingAddComponent implements OnInit {
     if (this.mode == "edit") {
       var prodOfferingObj = new ProdOfferingObj();
       prodOfferingObj.ProdOfferingId = this.param;
-      this.http.post(AdInsConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
-        (response) => {
-          this.resultData=response;
-          console.log("response: ");
-          console.log(response);
-          // this.result.RefCurrId=this.resultData.RefCurrId;
-          this.ProdOfferingForm.patchValue({
-            ProdName : this.resultData.ProdName,
-            ProdOfferingCode : this.resultData.ProdOfferingCode,
-            ProdOfferingName : this.resultData.ProdOfferingName,
-            ProdOfferingDescr : this.resultData.ProdOfferingDescr,
-            StartDt : this.resultData.StartDt,
-            EndDt : this.resultData.EndDt
-          })
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      // this.http.post(AdInsConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
+      //   (response) => {
+      //     this.resultData=response;
+      //     console.log("response: ");
+      //     console.log(response);
+      //     // this.result.RefCurrId=this.resultData.RefCurrId;
+      //     this.ProdOfferingForm.patchValue({
+      //       ProdName : this.resultData.ProdName,
+      //       ProdOfferingCode : this.resultData.ProdOfferingCode,
+      //       ProdOfferingName : this.resultData.ProdOfferingName,
+      //       ProdOfferingDescr : this.resultData.ProdOfferingDescr,
+      //       StartDt : this.resultData.StartDt,
+      //       EndDt : this.resultData.EndDt
+      //     })
+      //   },
+      //   (error) => {
+      //     console.log(error);
+      //   }
+      // );
     }
 
   }
@@ -88,28 +88,28 @@ export class ProdOfferingAddComponent implements OnInit {
       this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
       this.prodOfferingObj.ProdOfferingId = this.param;
       this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
-      this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
-        response => {
-          this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/product/prod-offering/prod-offering-paging"]);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+      // this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
+      //   response => {
+      //     this.toastr.successMessage(response["message"]);
+      //     this.router.navigate(["/product/prod-offering/prod-offering-paging"]);
+      //   },
+      //   error => {
+      //     console.log(error);
+      //   }
+      // );
     }
     else {
       this.prodOfferingObj.ProdOfferingId = this.ProdOfferingId;
       this.prodOfferingObj.RowVersion = "";
-      this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
-        response => {
-          this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/product/prod-offering/prod-offering-paging"]);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+      // this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
+      //   response => {
+      //     this.toastr.successMessage(response["message"]);
+      //     this.router.navigate(["/product/prod-offering/prod-offering-paging"]);
+      //   },
+      //   error => {
+      //     console.log(error);
+      //   }
+      // );
     }
   }
 

@@ -1,5 +1,5 @@
 {
-  "title": "Asset Category",
+  "title": "Asset Document",
   "exportExcel": false,
   "component": [
     {
@@ -235,7 +235,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT  B.REF_ASSET_DOC_ID as RefAssetDocId, A.ASSET_TYPE_ID AS AssetTypeId, B.ASSET_DOC_CODE as AssetDocCode, B.ASSET_DOC_NAME as AssetDocName, A.IS_MAIN_DOC as IsMainDoc, A.IS_VALUE_NEEDED as IsValueNeeded, A.IS_PLEDGE as IsPledge, A.IS_BORROW as IsBorrow, A.IS_MANDATORY_NEW as IsMandatoryNew, IS_MANDATORY_USED as IsMandatoryUsed, B.IS_ACTIVE as IsActive",
+    "select": "SELECT  A.ASSET_DOC_LIST_ID as AssetDocListId, B.REF_ASSET_DOC_ID as RefAssetDocId, A.ASSET_TYPE_ID AS AssetTypeId, B.ASSET_DOC_CODE as AssetDocCode, B.ASSET_DOC_NAME as AssetDocName, A.IS_MAIN_DOC as IsMainDoc, A.IS_VALUE_NEEDED as IsValueNeeded, A.IS_PLEDGE as IsPledge, A.IS_BORROW as IsBorrow, A.IS_MANDATORY_NEW as IsMandatoryNew, IS_MANDATORY_USED as IsMandatoryUsed, B.IS_ACTIVE as IsActive",
     "from": "FROM dbo.ASSET_DOC_LIST A WITH(NOLOCK) JOIN REF_ASSET_DOC B WITH(NOLOCK) ON A.REF_ASSET_DOC_ID = B.REF_ASSET_DOC_ID "
  
   },
@@ -260,11 +260,7 @@
       "position": "center",
       "property": "IsValueNeeded"
     },
-    {
-      "type": "boolean",
-      "position": "center",
-      "property": "IsMainDoc"
-    },
+     
     {
       "type": "boolean",
       "position": "center",
@@ -296,7 +292,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/Asset/Document/DocumentInformation",
+          "path": "/Asset/Document/Detail",
           "param": [
             {
               "type": "mode",
@@ -307,14 +303,14 @@
               "property": "AssetTypeId"
             },
             {
-              "type": "AssetAccessoryId",
-              "property": "AssetAccessoryId"
+              "type": "AssetDocListId",
+              "property": "AssetDocListId"
             }
           ]
         },
         {
           "type": "delete",
-          "property": "refProvDistrictId"
+          "property": "AssetDocListId"
         }
       ]
     }
