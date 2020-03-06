@@ -41,7 +41,7 @@ export class AssetCategoryPagingComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetCategory.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetCategory;
     
-    this.viewObj = "./assets/ucviewgeneric/viewAssetTypeForAssetCategory.json";
+    this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
     
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
