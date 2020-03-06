@@ -440,7 +440,7 @@ export class  AdInsConstant {
   // ASSET NEGATIVE
   public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
-  public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
+  public static GetAssetNegativeByIdEditPage = "http://localhost:5000/AssetNegative/GetAssetNegativeByIdEditPage";
 
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";

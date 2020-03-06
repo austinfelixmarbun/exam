@@ -26,25 +26,25 @@
                   <label class="adInsLabel" name="AssetSchmCode" translate>Asset Scheme Code </label>
                 </div>
                 <div class="col-md-3">
-                  <label class="adInsLabel" name="AssetSchmCodeValue" translate>{{assetSchmCode}}</label>
+                  <label class="adInsLabel" name="AssetSchmCodeValue" translate>{{AssetSchmCode}}</label>
                 </div>
                 <div class="col-md-3">
                   <label class="adInsLabel" name="AssetSchmName" translate>Asset Scheme Name </label>
                 </div>
                 <div class="col-md-3">
-                  <label class="adInsLabel" name="AssetSchmNameValue" translate>{{assetSchmName}}</label>
+                  <label class="adInsLabel" name="AssetSchmNameValue" translate>{{AssetSchmName}}</label>
                 </div>
                 <div class="col-md-3">
                   <label class="adInsLabel" name="AssetTypeName" translate>Asset Type Name </label>
                 </div>
                 <div class="col-md-3">
-                  <label class="adInsLabel" name="AssetTypeNameValue" translate>{{assetTypeName}}</label>
+                  <label class="adInsLabel" name="AssetTypeNameValue" translate>{{AssetTypeName}}</label>
                 </div>
                 <div class="col-md-3">
                   <label class="adInsLabel" name="IsActive" translate>Active Status </label>
                 </div>
                 <div class="col-md-3">
-                  <label class="adInsLabel" name="isActiveValue" translate>{{isActive}}</label>
+                  <label class="adInsLabel" name="isActiveValue" translate>{{IsActive}}</label>
                 </div>
               </div>
             </div>
@@ -85,7 +85,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of resultData?.data">
+        <tr *ngFor="let item of resultData?.Data">
           <td>
             <div *ngIf="listSelectedId.indexOf(item.assetMasterId) >- 1">
               <input type="checkbox" id="checkSame" name="itemSame"
@@ -120,12 +120,6 @@
     <table class="table table-responsive-md text-center table-hover">
       <thead>
         <tr class="table-header">
-          <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='fullAssetCode'
-              translate>Asset Code</span>
-          </th>
-          <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='fullAssetCode'
-              translate>Asset Name</span>
-          </th>
           <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Full Asset Code</span>
           </th>
           <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Full Asset Name</span>
@@ -138,8 +132,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of tempData">
-          <td class="text-left">{{item.assetCode}}</td>
-          <td class="text-left">{{item.assetName}}</td>
           <td class="text-left">{{item.fullAssetCode}}</td>
           <td class="text-left">{{item.fullAssetName}}</td>
           <td class="text-left">{{item.assetCategoryName}}</td>
