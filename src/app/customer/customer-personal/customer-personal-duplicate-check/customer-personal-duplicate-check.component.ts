@@ -24,7 +24,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
 
   CustName  : any;
   Gender : any;
+  GenderDesc:any;
   MrIdTypeCode : any;
+  MrIdTypeCodeDesc : any;
   BirthPlace : any;
   BirthDt : any;
   IdNo : any;
@@ -40,9 +42,14 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
       }
       if (params["Gender"] != null) {
       this.Gender = params["Gender"];
-    }
+      } if (params["GenderDesc"] != null) {
+        this.GenderDesc = params["GenderDesc"];
+        }
       if (params["MrIdTypeCode"] != null) {
         this.MrIdTypeCode = params["MrIdTypeCode"];
+      }
+      if (params["MrIdTypeCodeDesc"] != null) {
+        this.MrIdTypeCodeDesc = params["MrIdTypeCodeDesc"];
       }
       if (params["BirthPlace"] != null) {
         this.BirthPlace = params["BirthPlace"];
@@ -66,11 +73,11 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
  
    }
 
-  ngOnInit() { 
+  ngOnInit() {  
     this.CustomerPersonalForm.patchValue({
       CustName: this.CustName,
-      Gender: this.Gender,
-      MrIdTypeCode: this.MrIdTypeCode,
+      Gender: this.GenderDesc,
+      MrIdTypeCode: this.MrIdTypeCodeDesc,
       BirthPlace: this.BirthPlace,
       BirthDt: this.BirthDt,
       IdNo: this.IdNo,
