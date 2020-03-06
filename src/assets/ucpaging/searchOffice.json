@@ -63,7 +63,7 @@
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
-            "isSelectOne": true,
+            "isSelectOne": false,
             "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
             "label": "Office Type",
             "criteriaPropName" : "RefMasterTypeCode",
@@ -73,8 +73,8 @@
           }
     ],
     "querystring": {
-        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.OFFICE_ADDR AS OfficeAddr , B.OFFICE_NAME AS OfficeParent, A.IS_ACTIVE AS IsActive, A.MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, A.REF_OFFICE_ID AS RefOfficeId, C.DESCR AS Descr",
-        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_ID = A.PARENT_ID LEFT JOIN dbo.REF_MASTER C WITH(NOLOCK) ON A.MR_OFFICE_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE = 'OFFICE_TYPE'"
+        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.OFFICE_ADDR AS OfficeAddr , B.OFFICE_NAME AS OfficeParent, A.IS_ACTIVE AS IsActive, A.MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, A.REF_OFFICE_ID AS RefOfficeId, C.DESCR AS Descr, D.CENTER_GRP_ID AS CenterGrpId",
+        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_ID = A.PARENT_ID LEFT JOIN dbo.REF_MASTER C WITH(NOLOCK) ON A.MR_OFFICE_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE = 'OFFICE_TYPE' LEFT JOIN dbo.CENTER_GRP D ON D.CENTER_GRP_CODE = A.OFFICE_CODE"
     },
     "headerList": [
         {
@@ -170,11 +170,15 @@
                                 }
                             ],
                             "result" : {
-                                "path" : "/office/add",
+                                "path" : "/Office/Office-group-member",
                                 "param" : [
                                     {
                                         "type" : "RefOfficeId",
                                         "property" : "RefOfficeId"
+                                    },
+                                    {
+                                        "type" : "CenterGrpId",
+                                        "property" : "CenterGrpId"
                                     }
                                 ]
                             },
@@ -190,7 +194,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/office/add",
+                    "path": "/Office/add",
                     "param": [
                         {
                             "type": "RefOfficeId",
