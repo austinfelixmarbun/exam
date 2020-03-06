@@ -9,7 +9,7 @@ export class AdInsHelper {
 
         var listPageAccess = [];
         listPageAccess = JSON.parse(localStorage.getItem("PageAccess"));
-        var userAcc = JSON.parse(sessionStorage.getItem("UserAccess"));
+        var userAcc = JSON.parse(localStorage.getItem("UserAccess"));
         var pageAccess = listPageAccess;
         if (listPageAccess == null) {
             pageAccess = [];

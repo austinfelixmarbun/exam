@@ -38,8 +38,8 @@ export class ProductHODeactivateEditComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.editUrl = AdInsConstant.RequestDeactivation;
-    this.getValueReasonModel = AdInsConstant.GetValueReasonModel;
+    // this.editUrl = AdInsConstant.RequestDeactivation;
+    // this.getValueReasonModel = AdInsConstant.GetValueReasonModel;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {

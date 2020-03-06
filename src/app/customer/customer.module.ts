@@ -17,6 +17,7 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
 import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
 
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
 @NgModule({
   exports: [ 
   ],
@@ -31,6 +32,9 @@ import { CustomerCompanyMainInfoComponent } from './customer-company/customer-co
     SharingComponentModule,
     UCSearchModule,
     UcgridfooterModule,
+    UcpagingModule,
+    ReactiveFormsModule,
+    UclookupgenericModule,
     // ArchwizardModule
     UcSubsectionModule
   ],

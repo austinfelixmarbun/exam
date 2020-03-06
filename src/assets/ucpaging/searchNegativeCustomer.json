@@ -1,0 +1,191 @@
+{
+    "title": "Negative Asset",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "cust_No",
+            "id": "custNo",
+            "value": "",
+            "label": "Customer No",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "cust_Name",
+            "id": "custName",
+            "value": "",
+            "label": "Customer Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type" : "dropdown",
+            "label" : "Customer Type",
+            "name" : "customer_Type",
+            "id" : "customerType",
+            "value" : "",
+            "datatype" : "text",
+            "isSelectOne" : "false",
+            "items" : [],
+            "isFromURL" : "true", 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetRefMasterByMasterCode", 
+            "itemsUrl" : [], 
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "CUST_TYPE"
+        },
+        {
+            "type": "dropdown",
+            "name": "is_Active",
+            "id": "isActive",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne" : false,
+            "url": "",
+            "label": "Active",
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "id_No",
+            "id": "idNo",
+            "value": "",
+            "label": "ID No.",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type" : "dropdown",
+            "label" : "Negative Type",
+            "name" : "mr_Neg_Cust_Type_Code",
+            "id" : "negativeType",
+            "value" : "",
+            "datatype" : "text",
+            "isSelectOne" : "false",
+            "items" : [],
+            "isFromURL" : "true", 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetRefMasterByMasterCode", 
+            "itemsUrl" : [], 
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "NEG_CUST_TYPE"
+        }
+    ],
+    "querystring": { 
+        "select": "SELECT NEGATIVE_CUST_ID AS negativeCustId, CUST_NO AS custNo, CUST_NAME AS custName, MR_CUST_TYPE_CODE AS mrCustTypeCode, ID_NO AS idNo, B.DESCR AS negCustSource, C.DESCR AS negCustType, A.IS_ACTIVE AS isActive",
+        "from": "FROM NEGATIVE_CUST AS A WITH(NOLOCK) INNER JOIN REF_MASTER AS B WITH(NOLOCK) ON A.MR_NEG_CUST_SOURCE_CODE = B.MASTER_CODE INNER JOIN REF_MASTER AS C WITH(NOLOCK) ON A.MR_NEG_CUST_TYPE_CODE = C.MASTER_CODE"
+    },
+    "headerList" : [ 
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Customer No",
+            "name" : "custNo" 
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Customer Name", 
+            "name" : "custName" 
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Customer Type", 
+            "name" : "mrCustTypeCode" 
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "ID No.", 
+            "name" : "idNo"
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Negative Cause", 
+            "name" : "negCustSource"
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Negative Type", 
+            "name" : "negCustType"
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Active", 
+            "name" : "isActive"
+        },
+        {
+            "type" : "label",
+            "position" : "center",
+            "label" : "Edit"
+        }
+    ],
+    "bodyList" : [
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "custNo" 
+        },
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "custName" 
+        },
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "mrCustTypeCode" 
+        },
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "idNo" 
+        },
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "negCustSource" 
+        },
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "negCustType" 
+        },
+        {
+            "type" : "boolean", 
+            "position" : "center", 
+            "property" : "isActive" 
+        },
+        {
+            "type" : "action", 
+            "position" : "center",
+            "action" : [ 
+                {
+                    "type" : "edit", 
+                    "path" : "/Customer/NegativeCustomer/Detail", 
+                    "param" : [ 
+                        {
+                            "type" : "negativeCustId", 
+                            "property" : "negativeCustId" 
+                        },
+                        {
+                            "type": "param",
+                            "property": "edit"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
