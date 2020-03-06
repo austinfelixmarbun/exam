@@ -37,16 +37,14 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         private http:HttpClient,public rolePickService: RolePickService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
-        var userAccess = JSON.parse(sessionStorage.getItem("UserAccess")); 
+        var userAccess = JSON.parse(localStorage.getItem("UserAccess")); 
         var businessDate = localStorage.getItem("BusinessDate");
         var date = new Date(businessDate.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         businessDate = formatDate(date, 'dd-MMM-yyyy', 'en-US');
         this.businessDate = businessDate;
-        this.userId = "User1";
-        // this.userId = userAccess.userId;
+        this.userId = userAccess.userId;
         this.userAccess = userAccess;
-        this.displayName = "User1";
-        // this.displayName = userAccess.userId + ", " + userAccess.roleName + " - " + userAccess.officeName + " - " + businessDate;
+        //this.displayName = userAccess.userId + ", " + userAccess.roleName + " - " + userAccess.officeName + " - " + businessDate;
     }
 
     ngOnInit(){
