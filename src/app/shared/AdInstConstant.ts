@@ -379,10 +379,16 @@ export class AdInsConstant {
   public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
   public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
 
+
+  public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
+  public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
+
+
   //PRODUCT OFFERING
   public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo"
   public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering"
   public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering"
+
 
   //REF REASON
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
@@ -439,24 +445,6 @@ export class AdInsConstant {
 
 
 
-  // PRODUCT
-  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
-  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
-  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
-  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
-  public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
-  public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
-
-
-  //PRODUCT OFFERING
-  public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
-  public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
-  public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
-
-  //REF REASON
-  public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
-
-
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
 
@@ -465,16 +453,11 @@ export class AdInsConstant {
   public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
   public static GetAssetNegativeByIdEditPage = "http://localhost:5000/AssetNegative/GetAssetNegativeByIdEditPage";
 
-  // ASSET TYPE
-  public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
-
   // // ASSET NEGATIVE
   // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   // public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
   // public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
 
-}
-  public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
 
   // PRODUCT COMPONENT
   public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
