@@ -32,19 +32,19 @@
       }
     ],
     "querystring": {
-      "select": "SELECT A.FULL_ASSET_CODE AS fullAssetCode, A.FULL_ASSET_NAME AS fullAssetName, A.ASSET_MASTER_ID AS assetMasterId",
+      "select": "SELECT A.FULL_ASSET_CODE AS fullAssetCode, A.FULL_ASSET_NAME AS fullAssetName, A.ASSET_MASTER_ID AS assetMasterId, A.ASSET_TYPE_ID AS assetTypeId",
       "from": "FROM ASSET_MASTER AS A WITH(NOLOCK) INNER JOIN ASSET_TYPE AS B WITH(NOLOCK) ON A.ASSET_TYPE_ID = B.ASSET_TYPE_ID"
     },
     "headerList": [
         {
           "type": "sort",
-          "position": "center",
+          "position": "left",
           "label": "Full Asset Code",
           "name": "fullAssetCode"
         },
         {
           "type": "sort",
-          "position": "center",
+          "position": "left",
           "label": "Full Asset Name",
           "name": "fullAssetName"
         },
