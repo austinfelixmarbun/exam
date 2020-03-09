@@ -7,6 +7,9 @@ export class  AdInsConstant {
   public static RestrictionNotIn = "NotIn";
   public static RestrictionIsNull = "isnull";
   public static RestrictionIsNotNull = "isnotnull";
+  public static RestrictionGTE = "GTE";
+  public static RestrictionLTE = "LTE";
+  
   public static showData = "10,50,100";
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
@@ -425,4 +428,7 @@ export class  AdInsConstant {
   public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
   public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
+
+  //VENDOR
+  public static DeleteVendor ="/Vendor/DeleteVendor";
 }
