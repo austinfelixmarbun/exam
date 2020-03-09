@@ -115,7 +115,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.http.post(this.addUrl, this.assetSchmHObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/asset/scheme/paging"]);
+            this.router.navigate(["/Asset/Scheme/Paging"]);
         },
         error => {
           console.log(error);
@@ -128,7 +128,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.http.post(this.editUrl, this.assetSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/asset/scheme/paging"]);
+          this.router.navigate(["/Asset/Scheme/Paging"]);
         },
         error => {
           console.log(error);

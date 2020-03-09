@@ -9,7 +9,7 @@
               </h4>
             </div>
             <div class="col-md-4" style="text-align-last: right">
-              <button type="button" class="backButton" [routerLink]="['/asset/scheme/paging']"
+              <button type="button" class="backButton" [routerLink]="['/Asset/Scheme/Paging']"
                 [queryParams]="{param:'edit',assetSchmHId:assetSchmHId}" translate>
                 <i class="ft-arrow-left"></i> Back
               </button>
@@ -44,7 +44,7 @@
                   <label class="adInsLabel" name="IsActive" translate>Active Status </label>
                 </div>
                 <div class="col-md-3">
-                  <label class="adInsLabel" name="isActiveValue" translate>{{IsActive}}</label>
+                  <label class="adInsLabel" name="IsActiveValue" translate>{{IsActive}}</label>
                 </div>
               </div>
             </div>
@@ -58,17 +58,12 @@
 <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
 <form class="form form-horizontal" name="assetSchemeForm" #AssetSchemeForm="ngForm" novalidate
 (ngSubmit)="AssetSchemeForm.form.valid && SaveForm(AssetSchemeForm)">
-  <div [hidden]="resultData?.data == null || resultData?.data.length == 0">
+  <!-- <div [hidden]="resultData?.data == null || resultData?.data.length == 0"> -->
     <table class="table table-responsive-md text-center table-hover">
       <thead>
         <tr class="table-header">
           <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll"
-              name="CheckAll"></th>
-          <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='fullAssetCode'
-              translate>Asset Code</span>
-          </th>
-          <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='fullAssetCode'
-              translate>Asset Name</span>
+              name="CheckAll">
           </th>
           <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='fullAssetCode'
               translate>Full Asset
@@ -85,22 +80,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of resultData?.Data">
+        <tr *ngFor="let item of resultData">
           <td>
-            <div *ngIf="listSelectedId.indexOf(item.assetMasterId) >- 1">
+            <div *ngIf="listSelectedId.indexOf(item.AssetMasterId) >- 1">
               <input type="checkbox" id="checkSame" name="itemSame"
-                (change)="Checked(item.assetMasterId,  $event.target.checked)" [checked]="true">
+                (change)="Checked(item.AssetMasterId,  $event.target.checked)" [checked]="true">
             </div>
-            <div *ngIf="listSelectedId.indexOf(item.assetMasterId) < 0">
+            <div *ngIf="listSelectedId.indexOf(item.AssetMasterId) < 0">
               <input type="checkbox" id="checkDiff" name="itemDiff"
-                (change)="Checked(item.assetMasterId,  $event.target.checked)" [checked]=false>
+                (change)="Checked(item.AssetMasterId,  $event.target.checked)" [checked]=false>
             </div>
           </td>
-          <td class="text-left">{{item.assetCode}}</td>
-          <td class="text-left">{{item.assetName}}</td>
-          <td class="text-left">{{item.fullAssetCode}}</td>
-          <td class="text-left">{{item.fullAssetName}}</td>
-          <td class="text-left">{{item.assetCategoryName}}</td>
+          <td class="text-left">{{item.FullAssetCode}}</td>
+          <td class="text-left">{{item.FullAssetName}}</td>
+          <td class="text-left">{{item.AssetCategoryName}}</td>
         </tr>
       </tbody>
     </table>
@@ -114,7 +107,7 @@
         </button>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 
   <div *ngIf="pageType === 'edit'" [hidden]="tempData == null || tempData.length == 0 ">
     <table class="table table-responsive-md text-center table-hover">
@@ -132,13 +125,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of tempData">
-          <td class="text-left">{{item.fullAssetCode}}</td>
-          <td class="text-left">{{item.fullAssetName}}</td>
-          <td class="text-left">{{item.assetCategoryName}}</td>
-          <td *ngIf="item.isActive === '1'">Yes</td>
-          <td *ngIf="item.isActive === '0'">No</td>
+          <td class="text-left">{{item.FullAssetCode}}</td>
+          <td class="text-left">{{item.FullAssetName}}</td>
+          <td class="text-left">{{item.AssetCategoryName}}</td>
+          <td *ngIf="item.IsActive === 'true'">Yes</td>
+          <td *ngIf="item.IsActive === 'false'">No</td>
           <td>
-            <a class="danger p-0" data-original-title="" title="" (click)="deleteFromTemp(item.assetMasterId)">
+            <a class="danger p-0" data-original-title="" title="" (click)="deleteFromTemp(item.AssetMasterId)">
               <i class="ft-trash-2 font-medium-3 mr-2"></i>
             </a>
           </td>

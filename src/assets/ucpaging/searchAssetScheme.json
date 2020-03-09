@@ -136,7 +136,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/asset/scheme/memberDetail",
+          "path": "/Asset/Scheme/MemberDetail",
           "param": [
             {
               "type": "AssetSchmHId",
@@ -156,7 +156,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/asset/scheme/informationDetail",
+          "path": "/Asset/Scheme/InformationDetail",
           "param": [
             {
               "type": "AssetSchmHId",

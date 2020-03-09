@@ -27,7 +27,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT AM.FULL_ASSET_CODE , AC.ASSET_CATEGORY_NAME,AM.FULL_ASSET_NAME ",
+        "select": "SELECT AM.FULL_ASSET_CODE AS FullAssetCode, AC.ASSET_CATEGORY_NAME AS AssetCategoryName,AM.FULL_ASSET_NAME AS FullAssetName, ASSET_MASTER_ID AS AssetMasterId",
         "from": "FROM dbo.ASSET_MASTER AM JOIN dbo.ASSET_CATEGORY AC ON AC.ASSET_CATEGORY_ID = AM.ASSET_CATEGORY_ID"
       }
 }

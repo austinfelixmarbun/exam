@@ -29,35 +29,35 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'type/paging',
+        path: 'Type/Paging',
         component: AssetTypePagingComponent,
         data: {
           title: 'Asset Type Paging'
         }
       },
       {
-        path: 'type/detail',
+        path: 'Type/Detail',
         component: AssetTypeAddEditComponent,
         data: {
           title: 'Asset Type Add Edit'
         }
       },
       {
-        path: 'scheme/paging',
+        path: 'Scheme/Paging',
         component: AssetSchemePagingComponent,
         data: {
           title: 'Asset Scheme Paging'
         }
       },
       {
-        path: 'scheme/memberDetail',
+        path: 'Scheme/MemberDetail',
         component: AssetSchemeAddEditMemberComponent,
         data: {
           title: 'Asset Scheme Member Add Edit'
         }
       },
       {
-        path: 'scheme/informationDetail',
+        path: 'Scheme/InformationDetail',
         component: AssetSchemeAddEditInformationComponent,
         data: {
           title: 'Asset Scheme Information Add Edit'

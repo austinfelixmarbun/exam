@@ -69,7 +69,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT A.ASSET_TYPE_ID as AssetTypeId, A.ASSET_TYPE_CODE AS AssetTypeCode, A.ASSET_TYPE_NAME AS AssetTypeName, A.IS_ACTIVE AS IsActive",
+      "select": "SELECT A.ASSET_TYPE_CODE AS AssetTypeCode, A.ASSET_TYPE_ID as AssetTypeId, A.ASSET_TYPE_NAME AS AssetTypeName, A.IS_ACTIVE AS IsActive",
       "from": "FROM dbo.ASSET_TYPE A WITH(NOLOCK)"
     },
     "bodyList": [

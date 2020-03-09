@@ -236,7 +236,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.assetTypeObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/asset/type/paging"]);
+            this.router.navigate(["/Asset/Type/Paging"]);
         },
         error => {
           console.log(error);
@@ -249,7 +249,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.http.post(this.editUrl, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/asset/type/paging"]);
+          this.router.navigate(["/Asset/Type/Paging"]);
         },
         error => {
           console.log(error);
