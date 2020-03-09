@@ -10,7 +10,7 @@ import { ProductHOPagingComponent } from './product-HO/product-ho-paging/product
 import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-add.component';
 import { ProductHoAdddetailComponent } from './product-HO/product-ho-adddetail/product-ho-adddetail.component';
 import { GeneralDataComponent } from './product-HO/product-ho-adddetail/general-data/general-data.component';
-import { ProductComponentComponent } from './product-HO/product-ho-adddetail/product-component/product-component.component';
+import { ProductComponentComponent } from './prod-offering/prod-offering-add-detail/product-component/product-component.component';
 import { OfficeMemberComponent } from './product-HO/product-ho-adddetail/office-member/office-member.component';
 import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
 import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";

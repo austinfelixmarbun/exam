@@ -45,6 +45,7 @@ export class ProductComponentComponent implements OnInit {
       ProdCompntDtaValue: [''],
       ProdCompntName: [''],
       DropDownList: this.fb.array([this.fb.group({
+        indexOf: [''],
         key: [''],
         value: ['']
       })]),
@@ -194,7 +195,7 @@ export class ProductComponentComponent implements OnInit {
     this.items2 = this.RefRuleForm.get('items') as FormArray;
     this.getList(ProdOfferingComponentRule,2);
 
-    this.items3= this.RefOtherForm.get('items3') as FormArray;
+    this.items3= this.RefOtherForm.get('items') as FormArray;
     this.getList(ProdOfferingComponentOther,3);
 
   }
@@ -224,34 +225,43 @@ export class ProductComponentComponent implements OnInit {
               ProdCompntDtaValue: response["ReturnObject"][i].ProdCompntDtaValue,
               ProdCompntName: response["ReturnObject"][i].ProdCompntName,
               DropDownList: this.fb.array([this.fb.group({
+                indexOf: i,
                 key: [''],
                 value: ['']
               })])
             }) as FormGroup;
             // Get DDL
             if(index == 0){
-              this.resolveDDL(eachDataDetail, i,index);
+              if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
+                this.resolveDDL(eachDataDetail, i,index);
+              }
               this.items.push(eachDataDetail);
               this.items.removeAt(0);
               console.log("cek form");
               console.log(this.RefSchemeForm);
             }
             else if(index==1){
-              this.resolveDDL(eachDataDetail, i,index);
+              if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
+                this.resolveDDL(eachDataDetail, i,index);
+              }
               this.items1.push(eachDataDetail);
               this.items1.removeAt(0);
               console.log("cek form");
               console.log(this.RefApprovalForm);
             }
             else if(index ==2){
-              this.resolveDDL(eachDataDetail, i,index);
+              if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
+                this.resolveDDL(eachDataDetail, i,index);
+              }
               this.items2.push(eachDataDetail);
               this.items2.removeAt(0);
               console.log("cek form");
               console.log(this.RefRuleForm);
             }
-            else{
-              this.resolveDDL(eachDataDetail, i,index);
+            else if(index==3){
+              if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
+                this.resolveDDL(eachDataDetail, i,index);
+              }
               this.items3.push(eachDataDetail);
               this.items3.removeAt(0);
               console.log("cek form");
@@ -305,15 +315,31 @@ export class ProductComponentComponent implements OnInit {
             }
             if(index==0){
               this.RefSchemeForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
+              this.RefSchemeForm.controls.items["controls"][indexAt].patchValue({
+                CompntValue: response["ReturnObject"][0].Value,
+                CompntValueDesc: response["ReturnObject"][0].Key
+              });
             }
             if(index==1){
               this.RefApprovalForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
+              this.RefApprovalForm.controls.items["controls"][indexAt].patchValue({
+                CompntValue: response["ReturnObject"][0].Value,
+                CompntValueDesc: response["ReturnObject"][0].Key
+              });
             }
             if(index==2){
               this.RefRuleForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
+              this.RefRuleForm.controls.items["controls"][indexAt].patchValue({
+                CompntValue: response["ReturnObject"][0].Value,
+                CompntValueDesc: response["ReturnObject"][0].Key
+              });
             }
             if(index==3){
               this.RefOtherForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
+              this.RefOtherForm.controls.items["controls"][indexAt].patchValue({
+                CompntValue: response["ReturnObject"][0].Value,
+                CompntValueDesc: response["ReturnObject"][0].Key
+              });
             }
           }
         },

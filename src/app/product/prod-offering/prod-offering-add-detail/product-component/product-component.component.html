@@ -13,7 +13,8 @@
                 [ngSwitch]="item.controls.ProdCompntType.value">
                 <div *ngSwitchCase="'DDL'">
                   <div>
-                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc" (change)="clickTest($event, i)">
+                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc"
+                      (change)="clickTest($event, i)">
                       <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                         {{it.value.Value}}
                       </option>
@@ -40,17 +41,25 @@
         </div>
       </div>
     </form>
-    <!-- <form class="form form-horizontal" [formGroup]="RefApprovalForm">
+    <form class="form form-horizontal" [formGroup]="RefApprovalForm">
+      <!-- Main Info -->
       <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text">Approval</i> </h4>
         <div formArrayName="items">
-          <div *ngFor="let item1 of RefApprovalForm.controls.items.controls; let i = index;">
+          <div *ngFor="let item of RefApprovalForm.controls.items.controls; let i = index;">
             <div class="form-group row" [formGroupName]="i">
-              <label class="col-md-3 text-left" translate> {{item1.controls.ProdCompntName.value}} </label>
+              <label class="col-md-3 text-left" translate> {{item.controls.ProdCompntName.value}} </label>
               <div class="col-md-6" style="border-right: 1px solid grey"
-                [ngSwitch]="item1.controls.ProdCompntType.value">
+                [ngSwitch]="item.controls.ProdCompntType.value">
                 <div *ngSwitchCase="'DDL'">
-                  <P>DROP DOWN LIST</P>
+                  <div>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc"
+                      (change)="clickTest($event, i)">
+                      <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
+                        {{it.value.Value}}
+                      </option>
+                    </select>
+                  </div>
                 </div>
                 <div *ngSwitchCase="'AMT'">
                   <P>AMOUNT</P>
@@ -58,6 +67,14 @@
                 <div *ngSwitchCase="'DATE'">
                   <P>DATE</P>
                 </div>
+              </div>
+              <div>
+                <select class="form-control adInsInput" style="width: auto" formControlName="DropDownList2">
+                  <option value="DEF">DEF</option>
+                  <option value="LOCK">LOCK</option>
+                  <option value="MIN">MIN</option>
+                  <option value="MAX">MAX</option>
+                </select>
               </div>
             </div>
           </div>
@@ -65,16 +82,24 @@
       </div>
     </form>
     <form class="form form-horizontal" [formGroup]="RefRuleForm">
+      <!-- Main Info -->
       <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text">Rule</i> </h4>
         <div formArrayName="items">
-          <div *ngFor="let item2 of RefRuleForm.controls.items.controls; let i = index;">
+          <div *ngFor="let item of RefRuleForm.controls.items.controls; let i = index;">
             <div class="form-group row" [formGroupName]="i">
-              <label class="col-md-3 text-left" translate> {{item2.controls.ProdCompntName.value}} </label>
+              <label class="col-md-3 text-left" translate> {{item.controls.ProdCompntName.value}} </label>
               <div class="col-md-6" style="border-right: 1px solid grey"
-                [ngSwitch]="item2.controls.ProdCompntType.value">
+                [ngSwitch]="item.controls.ProdCompntType.value">
                 <div *ngSwitchCase="'DDL'">
-                  <P>DROP DOWN LIST</P>
+                  <div>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc"
+                      (change)="clickTest($event, i)">
+                      <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
+                        {{it.value.Value}}
+                      </option>
+                    </select>
+                  </div>
                 </div>
                 <div *ngSwitchCase="'AMT'">
                   <P>AMOUNT</P>
@@ -82,6 +107,14 @@
                 <div *ngSwitchCase="'DATE'">
                   <P>DATE</P>
                 </div>
+              </div>
+              <div>
+                <select class="form-control adInsInput" style="width: auto" formControlName="DropDownList2">
+                  <option value="DEF">DEF</option>
+                  <option value="LOCK">LOCK</option>
+                  <option value="MIN">MIN</option>
+                  <option value="MAX">MAX</option>
+                </select>
               </div>
             </div>
           </div>
@@ -89,16 +122,24 @@
       </div>
     </form>
     <form class="form form-horizontal" [formGroup]="RefOtherForm">
+      <!-- Main Info -->
       <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text">Other</i> </h4>
         <div formArrayName="items">
-          <div *ngFor="let item3 of RefOtherForm.controls.items.controls; let i = index;">
+          <div *ngFor="let item of RefOtherForm.controls.items.controls; let i = index;">
             <div class="form-group row" [formGroupName]="i">
-              <label class="col-md-3 text-left" translate> {{item3.controls.ProdCompntName.value}} </label>
+              <label class="col-md-3 text-left" translate> {{item.controls.ProdCompntName.value}} </label>
               <div class="col-md-6" style="border-right: 1px solid grey"
-                [ngSwitch]="item3.controls.ProdCompntType.value">
+                [ngSwitch]="item.controls.ProdCompntType.value">
                 <div *ngSwitchCase="'DDL'">
-                  <P>DROP DOWN LIST</P>
+                  <div>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc"
+                      (change)="clickTest($event, i)">
+                      <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
+                        {{it.value.Value}}
+                      </option>
+                    </select>
+                  </div>
                 </div>
                 <div *ngSwitchCase="'AMT'">
                   <P>AMOUNT</P>
@@ -107,11 +148,20 @@
                   <P>DATE</P>
                 </div>
               </div>
+              <div>
+                <select class="form-control adInsInput" style="width: auto" formControlName="DropDownList2">
+                  <option value="DEF">DEF</option>
+                  <option value="LOCK">LOCK</option>
+                  <option value="MIN">MIN</option>
+                  <option value="MAX">MAX</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </form> -->
+    </form>
+
     <div class="form-actions right">
       <button type="submit" (click)="SaveForm()" class="btn btn-raised btn-primary">
         <i class="fa fa-check-square-o"></i> Save

@@ -99,7 +99,6 @@ export class ProdOfferingAddComponent implements OnInit {
       if(this.mode=="edit"){
         this.prodOfferingObj.ProdOfferingCode = this.resultData.ProdOfferingCode;
         this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
-        this.prodOfferingObj.ProdOfferingHId = this.resultData.ProdOfferingHId;
         this.prodOfferingObj.ProdOfferingId =this.param;
         this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
         this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(

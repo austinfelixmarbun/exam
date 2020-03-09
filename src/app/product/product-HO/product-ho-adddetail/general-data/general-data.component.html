@@ -5,16 +5,6 @@
       <!-- Main Info -->
       <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text"></i> </h4>
-
-        <!-- Look Up Copy Product -->
-        <!-- <div class="form-group row">
-          <label class="col-md-3  adInsLabel" >Copy Product</label>
-          <div class="col-md-6">
-            <lib-uclookupgeneric width-75-per [lookupInput]="inputLookUpObj" [parentForm]='RefGeneralDataForm'>
-            </lib-uclookupgeneric>
-          </div>
-        </div> -->
-
         <div formArrayName="items">
           <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
             <div class="form-group row" [formGroupName]="i">
