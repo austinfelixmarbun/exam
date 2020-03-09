@@ -1,0 +1,26 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "Office Center Group Info",
+        "subSectionTitle": "Office Center Group Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Office Code",
+            "property": "OfficeCode"
+          },
+          {
+            "type": "text",
+            "label": "Office Name",
+            "property": "OfficeName"
+          } 
+        ],
+        "querystring": {
+            "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName",
+            "from": "FROM dbo.REF_OFFICE WITH(NOLOCK)", 
+            "where": "WHERE REF_OFFICE_ID = {0}" 
+        }
+      }
+    ]
+  }
