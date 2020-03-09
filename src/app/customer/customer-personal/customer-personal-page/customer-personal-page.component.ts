@@ -1,17 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http'; 
-
-@Component({
-  selector: 'app-customer-personal-duplicate-check',
-  templateUrl: './customer-personal-duplicate-check.component.html',
-  styleUrls: ['./customer-personal-duplicate-check.component.scss']
-})
-export class CustomerPersonalDuplicateCheckComponent implements OnInit {
+import { ActivatedRoute } from '@angular/router';
  
-   
-
+@Component({
+  selector: 'app-customer-personal-page',
+  templateUrl: './customer-personal-page.component.html',
+  styleUrls: ['./customer-personal-page.component.scss']
+})
+export class CustomerPersonalPageComponent implements OnInit {
   CustName  : any;
   Gender : any;
   GenderDesc:any;
@@ -24,8 +19,8 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   IdExpiredDt : any;
   MotherMaidenName : any;
   resultData: any;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
-    this.route.queryParams.subscribe(params => {
+  constructor(private route: ActivatedRoute,) { 
+      this.route.queryParams.subscribe(params => {
    
       if (params["CustName"] != null) {
         this.CustName = params["CustName"];
@@ -60,16 +55,12 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.MotherMaidenName = params["MotherMaidenName"];
       }
     });
- 
-   }
-
-  ngOnInit() {   
-
-
-
   }
 
-
- 
+  ngOnInit() {
+     
+      
+  
+  }
 
 }

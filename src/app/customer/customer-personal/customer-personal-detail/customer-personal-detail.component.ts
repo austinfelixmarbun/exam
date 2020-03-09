@@ -1,16 +1,42 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http'; 
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { WizardComponent } from 'angular-archwizard';
 
 @Component({
-  selector: 'app-customer-personal-duplicate-check',
-  templateUrl: './customer-personal-duplicate-check.component.html',
-  styleUrls: ['./customer-personal-duplicate-check.component.scss']
+  selector: 'app-customer-personal-detail',
+  templateUrl: './customer-personal-detail.component.html',
+  styleUrls: ['./customer-personal-detail.component.scss']
 })
-export class CustomerPersonalDuplicateCheckComponent implements OnInit {
- 
-   
+export class CustomerPersonalDetailComponent implements OnInit {
+  
+  @ViewChild(WizardComponent) wizard; 
+  CustomerDetailForm = this.fb.group({
+    CustFullName: ['', [Validators.required, Validators.maxLength(100)]],
+    NickName: ['', [Validators.required, Validators.maxLength(100)]], 
+    MrSalutationCode: ['', [Validators.required]],
+    MrMaritalStatCode: ['', [Validators.required]],
+    CustPrefixName : ['', [Validators.required]],
+    IsAffiliateWithMf:  [true],
+    CustSuffixName : ['', [Validators.required]],
+    NoOfDependents : ['', [Validators.required]],
+    MrNationalityCode:  ['', [Validators.required]],
+    NoOfResidence: ['', [Validators.required]],
+    WnaCountryCode :  ['', [Validators.required]],
+    FamilyCardNo : ['', [Validators.required]],
+    MrEducationCode: ['', [Validators.required]],
+    MrReligionCode:  ['', [Validators.required]],
+    IsRestInPeace : [false],
+    IsVip  : [true],
+    VipNotes: ['', [Validators.required]],
+    MobilePhnNo1: ['', [Validators.required]],
+    MobilePhnNo2: ['', [Validators.required]],
+    Email1: ['', [Validators.required]],
+    Email2 : ['', [Validators.required]],
+    
+  }); 
+  
 
   CustName  : any;
   Gender : any;
@@ -24,7 +50,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   IdExpiredDt : any;
   MotherMaidenName : any;
   resultData: any;
+
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
+    
     this.route.queryParams.subscribe(params => {
    
       if (params["CustName"] != null) {
@@ -63,13 +92,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
  
    }
 
-  ngOnInit() {   
-
-
-
+  ngOnInit() {
   }
-
-
- 
 
 }
