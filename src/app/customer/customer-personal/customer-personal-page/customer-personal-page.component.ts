@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
  
 @Component({
   selector: 'app-customer-personal-page',
@@ -19,7 +21,10 @@ export class CustomerPersonalPageComponent implements OnInit {
   IdExpiredDt : any;
   MotherMaidenName : any;
   resultData: any;
-  constructor(private route: ActivatedRoute,) { 
+  addUrl : any;
+  constructor(private route: ActivatedRoute) { 
+    
+      this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewAssetAccesory;
       this.route.queryParams.subscribe(params => {
    
       if (params["CustName"] != null) {
