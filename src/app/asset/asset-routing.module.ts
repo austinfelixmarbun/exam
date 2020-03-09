@@ -11,18 +11,15 @@ import { AssetCategoryPagingComponent } from './asset-category/asset-category-pa
 import { AssetAccessoryPagingComponent } from './asset-accessory/asset-accessory-paging/asset-accessory-paging.component';
 import { AssetDocumentPagingComponent } from './asset-document/asset-document-paging/asset-document-paging.component';
 import { AssetDocumentMasterPagingComponent } from './asset-document-master/asset-document-master-paging/asset-document-master-paging.component';
-// import { AssetDocumentMasterPagingInformationComponent } from './asset-document-master/asset-document-master-paging-information/asset-document-master-paging-information.component';
-
-// import { AssetDocumentMasterPagingInformationComponent } from './asset-document-master/asset-document-master-paging-information/asset-document-master-paging-information.component';
 import { NegativeAssetComponent } from './negative-asset/negative-asset.component';
 import { NegativeAssetDetailComponent } from './negative-asset/negative-asset-detail/negative-asset-detail.component';
 import { AssetAccessoryAddEditComponent } from './asset-accessory/asset-accessory-add-edit/asset-accessory-add-edit.component';
 import { AssetCategoryAddEditComponent } from './asset-category/asset-category-add-edit/asset-category-add-edit.component';
 import { AssetDocumentAddEditComponent } from './asset-document/asset-document-add-edit/asset-document-add-edit.component';
 import { AssetDocumentMasterAddEditComponent } from './asset-document-master/asset-document-master-add-edit/asset-document-master-add-edit.component';
-// import { AssetMasterAddEditChildComponent } from './asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component';
-// import { AssetMasterAddEditParentComponent } from './asset-master/asset-master-add-edit-parent/asset-master-add-edit-parent.component';
 import { AssetMasterComponent } from './asset-master/asset-master-paging/asset-master.component';
+import { AssetMasterAddEditChildComponent } from './asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component';
+import { AssetMasterAddEditParentComponent } from './asset-master/asset-master-add-edit-parent/asset-master-add-edit-parent.component';
 
 const routes: Routes = [
   {
@@ -167,29 +164,27 @@ const routes: Routes = [
         data: {
           title: 'Asset Master'
         },
+      },
+      {
+        path: 'AssetMaster/Detail',
+        component: AssetMasterAddEditParentComponent,
+        data: {
+          title: 'Asset Master Add Edit Parent'
+        },
+      },
+      {
+        path: 'AssetMaster/Child',
+        component: AssetMasterAddEditChildComponent,
+        data: {
+          title: 'Asset Master Add Edit Child'
+        },
       }
-    
-      //   {
-      //     path: 'AssetMaster/Detail',
-      //     component: AssetMasterAddEditParentComponent,
-      //     data: {
-      //       title: 'Asset Master Add Edit Parent'
-      //     },
-      //   },
-      //   {
-      //     path: 'AssetMaster/Child',
-      //     component: AssetMasterAddEditChildComponent,
-      //     data: {
-      //       title: 'Asset Master Add Edit Child'
-      //     },
-      //   }
-
     ]
   }
 ];
 
 @NgModule({
-      imports: [RouterModule.forChild(routes)],
-      exports: [RouterModule],
-    })
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
 export class AssetRoutingComponent { }

@@ -17,20 +17,20 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '', title: 'System Setting', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-        submenu: [
-          { path: '/CommonSetting/GeneralSetting', title: 'General Setting', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/Holiday', title: 'Holiday Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/WorkingHour', title: 'Working Hour', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/Bank/paging', title: 'Bank', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/RefProvince/paging', title: 'Province', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/Zipcode/paging', title: 'Zipcode', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/Master', title: 'Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/RefStatus/paging', title: 'Status', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/IndustryType/paging', title: 'Industry Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/EconomicSector/paging', title: 'Economic Sector', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/Currency/paging', title: 'Currency', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/CommonSetting/Profession/paging', title: 'Profession', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
-        ]
+    submenu: [
+      { path: '/CommonSetting/GeneralSetting', title: 'General Setting', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/Holiday', title: 'Holiday Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/WorkingHour', title: 'Working Hour', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/Bank/paging', title: 'Bank', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/RefProvince/paging', title: 'Province', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/Zipcode/paging', title: 'Zipcode', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/Master', title: 'Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/RefStatus/paging', title: 'Status', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/IndustryType/paging', title: 'Industry Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/EconomicSector/paging', title: 'Economic Sector', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/Currency/paging', title: 'Currency', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/CommonSetting/Profession/paging', title: 'Profession', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+    ]
   },
   {
     path: '', title: 'Asset', icon: 'ft-aperture', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
@@ -39,8 +39,8 @@ export const ROUTES: RouteInfo[] = [
       { path: '/Asset/DocumentMaster/Paging', title: 'Asset Document Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Asset/NegativeAsset/Paging', title: 'Negative Asset', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Asset/AssetMaster/Paging', title: 'Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '', title: 'Asset Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '', title: 'Asset Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/Asset/Scheme/Paging', title: 'Asset Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Asset/Type/Paging', title: 'Asset Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
 
     ]
   },
