@@ -3,7 +3,7 @@
     "component": [
       {
         "type": "textbox",
-        "name": "full_Asset_Code",
+        "name": "A.full_Asset_Code",
         "id": "fullAssetCode",
         "value": "",
         "label": "Full Asset Code",
@@ -11,16 +11,29 @@
       },
       {
         "type": "textbox",
-        "name": "full_Asset_Name",
+        "name": "A.full_Asset_Name",
         "id": "fullAssetName",
         "value": "",
         "label": "Full Asset Name",
         "placeholder": "Full Asset Name"
+      },
+      {
+        "type" : "dropdown",
+        "label" : "Asset Type Name",
+        "name" : "asset_Type_Name",
+        "id" : "assetTypeName",
+        "value" : "",
+        "datatype" : "text",
+        "isSelectOne" : false,
+        "items" : [],
+        "isFromURL" : true, 
+        "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetType/GetListKeyValueActiveByCode", 
+        "itemsUrl" : []
       }
     ],
     "querystring": {
-      "select": "SELECT ASSET_MASTER_ID AS assetMasterId, FULL_ASSET_CODE AS fullAssetCode, FULL_ASSET_NAME AS fullAssetName",
-      "from": "FROM ASSET_MASTER WITH(NOLOCK)"
+      "select": "SELECT A.FULL_ASSET_CODE AS fullAssetCode, A.FULL_ASSET_NAME AS fullAssetName, A.ASSET_MASTER_ID AS assetMasterId",
+      "from": "FROM ASSET_MASTER AS A WITH(NOLOCK) INNER JOIN ASSET_TYPE AS B WITH(NOLOCK) ON A.ASSET_TYPE_ID = B.ASSET_TYPE_ID"
     },
     "headerList": [
         {

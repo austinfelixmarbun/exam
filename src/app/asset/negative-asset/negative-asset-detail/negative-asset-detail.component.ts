@@ -137,14 +137,14 @@ export class NegativeAssetDetailComponent implements OnInit {
     }
   }
 
-  assetTypeChange(e){
-    this.criteriaObj = new CriteriaObj();
-    this.criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    this.criteriaObj.propName = 'ASSET_TYPE_ID';
-    this.criteriaObj.value = e.target.value;
-    this.criteriaList.push(this.criteriaObj);
-    this.inputLookupObj.addCritInput = this.criteriaList;
-  }
+  // assetTypeChange(e){
+  //   this.criteriaObj = new CriteriaObj();
+  //   this.criteriaObj.restriction = AdInsConstant.RestrictionEq;
+  //   this.criteriaObj.propName = 'ASSET_TYPE_ID';
+  //   this.criteriaObj.value = e.target.value;
+  //   this.criteriaList.push(this.criteriaObj);
+  //   this.inputLookupObj.addCritInput = this.criteriaList;
+  // }
 
   getLookupAssetMasterResponse(e){
     this.AssetNegativeForm.patchValue({
