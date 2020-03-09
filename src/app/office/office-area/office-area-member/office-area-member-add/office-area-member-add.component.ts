@@ -56,7 +56,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("test");
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeAreaMember.json";
     this.inputObj.enviromentUrl = this.foundationUrl;
@@ -74,7 +73,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
 
   getResult(event) {
     this.resultData = event.response;
-    console.log(this.resultData)
     this.totalData = event.response.Count;
     this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
@@ -115,16 +113,12 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   }
 
   Checked(RefOfficeId: any, isChecked: any): void {
-    console.log(RefOfficeId);
     if (isChecked) {
       this.listSelectedId.push(RefOfficeId);
     } else {
       let index = this.listSelectedId.indexOf(RefOfficeId)
-      console.log(index);
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
-    console.log('Sel', this.listSelectedId);
-    console.log('Del', this.listDeletedId);
   }
 
   AddToTemp() {
@@ -165,7 +159,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   }
 
   DeleteFromTemp(RefOfficeId) {
-    console.log("Delete From Temp")
     if (confirm('Are you sure to delete this record?')) {
       this.arrAddCrit = new Array();
       if (this.arrCrit.length != 0) {

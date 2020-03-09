@@ -2,11 +2,23 @@ import { formatDate } from "@angular/common";
 import { environment } from "../../environments/environment";
 
 export class AdInsConstant {
+  public static RestrictionBetween = "Between"
   public static RestrictionLike = "Like";
   public static RestrictionEq = "Eq";
+  public static RestrictionNeq = "NEQ";
+  public static RestrictionGt = "GT";
+  public static RestrictionGte = "GTE";
+  public static RestrictionLt = "LT";
+  public static RestrictionLte = "LTE";
+  public static RestrictionIn = "IN";
   public static RestrictionNotIn = "NotIn";
+  public static RestrictionOr = "Or"; //pastikan ada 1 criteria sebelumnya
+  public static RestrictionOrNeq = "OrNeq"; //pastikan ada 1 criteria sebelumnya
   public static RestrictionIsNull = "isnull";
   public static RestrictionIsNotNull = "isnotnull";
+  public static RestrictionGTE = "GTE";
+  public static RestrictionLTE = "LTE";
+  
   public static showData = "10,50,100";
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
@@ -43,7 +55,10 @@ export class AdInsConstant {
   public static GetCenterGrpByCenterGrpTypeCode = "/RefOffice/GetCenterGrpByCenterGrpCode";
   public static GetListOfficeCenterGrp = "/RefOffice/GetListOfficeCenterGrp";
   public static AddCenterGroupOfficeMember = "RefOffice/AddCenterGroupOfficeMember";
+  public static AddCenterGrpOfficeMember = "/CenterGrpOfficeMbr/AddCenterGrpOfficeMember";
+  public static GetListCenterGrpMemberByRefOfficeId = "/CenterGrpOfficeMbr/GetListCenterGrpMemberByRefOfficeId"
   public static DeleteCenterGroupOfficeMember = "/RefOffice/DeleteCenterGroupOfficeMember";
+  public static DeleteCenterGrpOfficeMember = "/CenterGrpOfficeMbr/DeleteCenterGrpOfficeMember";
 
   //REF OFFICE AREA
   public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
@@ -127,7 +142,7 @@ export class AdInsConstant {
   public static GetEmpByEmpPositionId = "/EmpPosition/GetEmpByEmpPositionId";
   public static AddEmpPosition = "/EmpPosition/AddEmpPosition";
   public static EditEmpPosition = "/EmpPosition/EditEmpPosition";
-  public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
+    public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
   public static GetListUserEmployee = "/EmpPosition/GetListUserEmployee";
 
   //REF-USER
@@ -184,7 +199,8 @@ export class AdInsConstant {
   public static GetRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
   public static AddRefBizUnit = "/RefBizUnit/AddRefBizUnit";
   public static EditRefBizUnit = "/RefBizUnit/EditRefBizUnit";
-
+  public static DeleteRefBizUnit = "/RefBizUnit/DeleteRefBizUnit";
+  
   //REF COY
   public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
   public static GetRefCoy = "/RefCoy/GetRefCoy";
@@ -456,6 +472,14 @@ export class AdInsConstant {
   public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
   public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
+
+  //VENDOR
+  public static DeleteVendor ="/Vendor/DeleteVendor";
+
+  // // ASSET NEGATIVE
+  // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
+  // public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
+  // public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
 
 
 }
