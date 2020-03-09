@@ -40,6 +40,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   CenterGrpId: any;
   MrOfficeTypeCode: string = "CG";
   addUrl: any;
+  refOfficeobj: any;
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr:NGXToastrService) {
@@ -50,6 +51,8 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.GetListCenterGrpMemberByRefOfficeId();
+
     this.arrCrit = new Array();
 
     this.listSelectedId = new Array();
@@ -83,6 +86,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
     this.inputObj.addCritInput.push(addCritTypeOCode);
     this.inputObj.addCritInput.push(addCritIsActive);
+
 
     console.log(this.inputObj);
 
@@ -259,5 +263,37 @@ export class OfficeGroupMemberAddComponent implements OnInit {
             console.log(error);
         });
 
+  }
+
+  GetListCenterGrpMemberByRefOfficeId() {
+    var obj = {
+      CenterGrpId: this.CenterGrpId,
+      RefOfficeId: this.RefOfficeId
+    }
+    var getListUrl = environment.FoundationR3Url + AdInsConstant.GetListCenterGrpMemberByRefOfficeId;
+    this.http.post(getListUrl, obj).subscribe(
+      (response) => {
+        this.refOfficeobj = response;
+
+        var arrMemberList = new Array();
+
+        for (let index = 0; index < this.refOfficeobj.ListCenterGrpOfficeMbr.length; index++) {
+           arrMemberList.push(this.refOfficeobj.ListCenterGrpOfficeMbr[index].RefOfficeId)
+        }
+        
+        const addCritListRefOffice = new CriteriaObj();
+        addCritListRefOffice.DataType = 'numeric';
+        addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
+        addCritListRefOffice.restriction = AdInsConstant.RestrictionNotIn;
+        addCritListRefOffice.listValue = arrMemberList;
+        this.arrCrit.push(addCritListRefOffice);
+        this.inputObj.addCritInput.push(addCritListRefOffice);
+
+        console.log("ni sudah jalan get List")
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
