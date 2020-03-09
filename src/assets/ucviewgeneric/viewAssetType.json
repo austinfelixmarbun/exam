@@ -1,18 +1,19 @@
 {
+  "title": "",
   "subsection": [
     {
-      "subSectionId": "AssetType",
+      "subSectionId": "AssetTypeId",
       "subSectionTitle": "Asset Type",
       "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
       "mainInfo": [
         {
           "type": "text",
-          "label": "AssetTypeCode",
+          "label": "Asset Type Code",
           "property": "AssetTypeCode"
         },
         {
           "type": "text",
-          "label": "AssetTypeName",
+          "label": "Asset Type Name",
           "property": "AssetTypeName"
         } 
         

@@ -28,7 +28,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './organization/organization.module#OrganizationModule'
   },
   {
-    path: 'customer',
+    path: 'Customer',
     loadChildren: './customer/customer.module#CustomerModule'
   },
   {
@@ -78,5 +78,10 @@ export const Full_ROUTES: Routes = [
   {
     path: 'Vendor',
     loadChildren: './vendor/vendor.module#VendorModule'
+  },
+  {
+    path: 'Product',
+    loadChildren: './product/product.module#ProductModule'
   }
+  
 ];
