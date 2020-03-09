@@ -480,4 +480,11 @@ export class AdInsConstant {
 
   // PRODUCT COMPONENT
   public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
+
+
+  //Customer Personal
+  public static AddNewCustPersonal = environment.FoundationR3Url + "/CustPersonal/AddCustPersonal"
+  public static EditCustPersonal = environment.FoundationR3Url + "/CustPersonal/EditCustPersonal"
+  public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
+ 
 }
