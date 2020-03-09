@@ -226,32 +226,33 @@ export class GeneralDataComponent implements OnInit {
   }
 
   NextDetail() {
-    this.listGeneralDataObj = new ListRefProductDetailObj();
-    this.listGeneralDataObj.ProductDetails = new Array();
-    this.listGeneralDataObj.ProdHId = this.objInput["param"];
-    this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
-    for (var i = 0; i < this.lengthDataReturnObj; i++) {
-      var GeneralDataObj = new RefProductDetailObj();
-      GeneralDataObj.ProdDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdDId.value;
-      GeneralDataObj.ProdHId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdHId.value;
-      GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
-      GeneralDataObj.RefProdCompntGrpCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
-      GeneralDataObj.CompntValue = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValue.value;
-      GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
-      GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
-      GeneralDataObj.RowVersion = "";
-      this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
-    }
+    // this.listGeneralDataObj = new ListRefProductDetailObj();
+    // this.listGeneralDataObj.ProductDetails = new Array();
+    // this.listGeneralDataObj.ProdHId = this.objInput["param"];
+    // this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
+    // for (var i = 0; i < this.lengthDataReturnObj; i++) {
+    //   var GeneralDataObj = new RefProductDetailObj();
+    //   GeneralDataObj.ProdDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdDId.value;
+    //   GeneralDataObj.ProdHId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdHId.value;
+    //   GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
+    //   GeneralDataObj.RefProdCompntGrpCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
+    //   GeneralDataObj.CompntValue = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValue.value;
+    //   GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
+    //   GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
+    //   GeneralDataObj.RowVersion = "";
+    //   this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
+    // }
 
-    this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
-      (response) => {
-        this.toastr.successMessage(response["message"]);
-        this.wizard.goToNextStep();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    // this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
+    //   (response) => {
+    //     this.toastr.successMessage(response["message"]);
+    //     this.wizard.goToNextStep();
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+    this.wizard.goToNextStep();
   }
 
   indentifierTemp;
