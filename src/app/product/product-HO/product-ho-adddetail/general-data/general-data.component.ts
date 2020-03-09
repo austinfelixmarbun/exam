@@ -76,6 +76,7 @@ export class GeneralDataComponent implements OnInit {
     // if(this.objInput.mode == "add"){
     this.UrlBackEnd = AdInsConstant.GetProductHOComponent;
     var ProdHOComponent = {
+      ProdHId: this.objInput["param"],
       GroupCodes: [
         "VAN"
       ],
@@ -113,7 +114,7 @@ export class GeneralDataComponent implements OnInit {
               })])
             }) as FormGroup;
             // Get DDL
-            if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
+            if (eachDataDetail.controls.ProdCompntType.value == "DDL") {
               this.resolveDDL(eachDataDetail, i);
             }
             // Push Data
@@ -131,7 +132,7 @@ export class GeneralDataComponent implements OnInit {
     // }else{ // mode edit
 
     // }
-    
+
   }
 
   resolveDDL(obj: any, indexAt: any) {
@@ -150,7 +151,7 @@ export class GeneralDataComponent implements OnInit {
         (response) => {
           console.log(response);
           var lengthDDL = response["ReturnObject"].length;
-          if(lengthDDL > 0){
+          if (lengthDDL > 0) {
             for (var i = 0; i < lengthDDL; i++) {
               var eachDDLDetail = this.fb.group({
                 indexOf: indexAt,
@@ -175,7 +176,7 @@ export class GeneralDataComponent implements OnInit {
     }
   }
 
-  clickTest(ev: any, idx: any){
+  clickTest(ev: any, idx: any) {
     // console.log(idx);
     // console.log(ev.target.selectedOptions[0].text);
     // console.log(ev.target.selectedOptions[0].value);
@@ -187,15 +188,15 @@ export class GeneralDataComponent implements OnInit {
 
     console.log(this.RefGeneralDataForm);
   }
-  
+
   listGeneralDataObj;
-  SaveForm(){
+  SaveForm() {
     this.listGeneralDataObj = new ListRefProductDetailObj();
     this.listGeneralDataObj.ProductDetails = new Array();
     this.listGeneralDataObj.ProdHId = this.objInput["param"];
     this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
-    for(var i = 0; i < this.lengthDataReturnObj; i++){
-      var GeneralDataObj = new this.refProductDetailObj();
+    for (var i = 0; i < this.lengthDataReturnObj; i++) {
+      var GeneralDataObj = new RefProductDetailObj();
       GeneralDataObj.ProdDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdDId.value;
       GeneralDataObj.ProdHId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdHId.value;
       GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
@@ -206,26 +207,31 @@ export class GeneralDataComponent implements OnInit {
       GeneralDataObj.RowVersion = this.RefGeneralDataForm.controls.items["controls"][i].controls.RowVersion.value;
       this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
     }
+    // this.listGeneralDataObj.ProductDetails.removeAt(0);
+    console.log(this.listGeneralDataObj);
+    console.log(this.RefGeneralDataForm.controls.items["controls"][0].controls.RowVersion.value);
 
     this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
       (response) => {
+        console.log("Response save form");
         console.log(response);
         this.toastr.successMessage(response["message"]);
         this.router.navigate(["/Product/HOpaging"]);
       },
       (error) => {
+        console.log("Response save error");
         console.log(error);
       }
     );
   }
 
-  NextDetail(){
+  NextDetail() {
     this.listGeneralDataObj = new ListRefProductDetailObj();
     this.listGeneralDataObj.ProductDetails = new Array();
     this.listGeneralDataObj.ProdHId = this.objInput["param"];
     this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
-    for(var i = 0; i < this.lengthDataReturnObj; i++){
-      var GeneralDataObj = new this.refProductDetailObj();
+    for (var i = 0; i < this.lengthDataReturnObj; i++) {
+      var GeneralDataObj = new RefProductDetailObj();
       GeneralDataObj.ProdDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdDId.value;
       GeneralDataObj.ProdHId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdHId.value;
       GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
@@ -233,7 +239,7 @@ export class GeneralDataComponent implements OnInit {
       GeneralDataObj.CompntValue = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValue.value;
       GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
       GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
-      GeneralDataObj.RowVersion = this.RefGeneralDataForm.controls.items["controls"][i].controls.RowVersion.value;
+      GeneralDataObj.RowVersion = "";
       this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
     }
 
@@ -248,4 +254,44 @@ export class GeneralDataComponent implements OnInit {
     );
   }
 
+  indentifierTemp;
+  CopyProduct(ev: any) {
+    console.log("Cp Product:");
+    console.log(ev);
+    console.log(this.RefGeneralDataForm);
+
+    this.UrlBackEnd = AdInsConstant.GetProductHOComponent;
+    var tempObj = {
+      ProdHId: ev.ProdId,
+      GroupCodes: [
+        "VAN"
+      ],
+      RowVersion: ""
+    }
+
+    this.http.post(this.UrlBackEnd, tempObj).subscribe(
+      (response) => {
+        console.log(response);
+        this.lengthDataReturnObj = response["ReturnObject"].length;
+        for (var i = 0; i < this.lengthDataReturnObj; i++) {
+          this.RefGeneralDataForm.controls.items["controls"][i].patchValue({
+            ProdDId: response["ReturnObject"][i].ProdDId,
+            ProdHId: response["ReturnObject"][i].ProdHId,
+            RefProdCompntCode: response["ReturnObject"][i].RefProdCompntCode,
+            RefProdCompntGrpCode: response["ReturnObject"][i].RefProdCompntGrpCode,
+            CompntValue: response["ReturnObject"][i].CompntValue,
+            CompntValueDesc: response["ReturnObject"][i].CompntValueDesc,
+            MrProdBehaviour: response["ReturnObject"][i].BehaviourType,
+            RowVersion: response["ReturnObject"][i].RowVersion,
+          });
+        }
+        console.log("cek form");
+        console.log(this.RefGeneralDataForm);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+  }
 }

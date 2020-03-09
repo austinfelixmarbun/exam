@@ -439,10 +439,6 @@ export class AdInsConstant {
   public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
   public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
 
-<<<<<<< HEAD
-}
-=======
   // PRODUCT COMPONENT
   public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
 }
->>>>>>> 6899a61c6e360289a040aa207f3f1009dcf6cc4d

@@ -20,6 +20,7 @@ import { ArchwizardModule } from "angular-archwizard";
 import { GeneralDataComponent } from "./product-HO/product-ho-adddetail/general-data/general-data.component";
 import { OfficeMemberComponent } from "./product-HO/product-ho-adddetail/office-member/office-member.component";
 import { ProductComponentComponent } from "./product-HO/product-ho-adddetail/product-component/product-component.component";
+import { UclookupgenericModule } from "@adins/uclookupgeneric";
 
 @NgModule({
     imports: [
@@ -34,7 +35,8 @@ import { ProductComponentComponent } from "./product-HO/product-ho-adddetail/pro
         HttpModule,
         SharingComponentModule,
         UcviewgenericModule,
-        ArchwizardModule
+        ArchwizardModule,
+        UclookupgenericModule
     ],
     declarations: [
         ProductHOPagingComponent,
