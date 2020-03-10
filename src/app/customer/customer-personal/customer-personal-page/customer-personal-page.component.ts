@@ -14,6 +14,8 @@ export class CustomerPersonalPageComponent implements OnInit {
   GenderDesc:any;
   MrIdTypeCode : any;
   MrIdTypeCodeDesc : any;
+  CustModel : any;
+  CustModelDesc
   BirthPlace : any;
   BirthDt : any;
   IdNo : any;
@@ -23,8 +25,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   resultData: any;
   addUrl : any;
   constructor(private route: ActivatedRoute) { 
-    
-      this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewAssetAccesory;
+     
       this.route.queryParams.subscribe(params => {
    
       if (params["CustName"] != null) {
@@ -40,6 +41,12 @@ export class CustomerPersonalPageComponent implements OnInit {
       }
       if (params["MrIdTypeCodeDesc"] != null) {
         this.MrIdTypeCodeDesc = params["MrIdTypeCodeDesc"];
+      }
+      if (params["CustModel"] != null) {
+        this.CustModel = params["CustModel"];
+      }
+      if (params["CustModelDesc"] != null) {
+        this.CustModelDesc = params["CustModelDesc"];
       }
       if (params["BirthPlace"] != null) {
         this.BirthPlace = params["BirthPlace"];

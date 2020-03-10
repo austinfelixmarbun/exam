@@ -14,7 +14,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class CustomerPersonalMainInfoComponent implements OnInit {
 
 
-
+state: any;
   CustomerPersonalForm = this.fb.group({
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     Gender: ['', [Validators.required]],
@@ -25,7 +25,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     TaxIdNo: ['', [Validators.required]],
     IdExpiredDt: ['', [Validators.required]],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
-    CustModel : ['', [Validators.required]]
+    CustModel : ['', [Validators.required]],
+    IsVip : [true],
+    IsAffiliateWithMf: [true]
   });
 
   getUrl: any;
@@ -36,8 +38,11 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   tempCustModel : any;
   CustName  : any;
   indexGender:any;
+  indexCustModel :any;
   Gender : any;
   GenderDesc:any;
+  CustModel : any;
+  CustModelDesc:any;
   indexMrIdTypeCode : any;
   MrIdTypeCode : any;
   MrIdTypeCodeDesc : any;
@@ -47,9 +52,11 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   TaxIdNo : any;
   IdExpiredDt : any;
   MotherMaidenName : any;
-  
+  IsVip :any;
+  IsAffiliateWithMf : any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
-  this.getUrl = environment.FoundationR3Url + AdInsConstant.GetListActiveRefMaster;  
+  this.getUrl = AdInsConstant.GetListActiveRefMaster; 
+   
   }
 
   ngOnInit() {
@@ -85,6 +92,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     console.log( "awdawdwad");
     var refMasterObj2 = {
       RefMasterTypeCode: "CUST_MODEL",
+      ReserveField1: "PERSONAL",
       RowVersion: ""
     }
 
@@ -99,9 +107,23 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     );
   }
 
+  checkbox(){
+    if(this.CustomerPersonalForm.controls["IsVip"].value){
+      this.state = true;
+
+    }else{
+      this.state=false;
+    }
+  }
   SaveValue (){ 
     this.CustName= this.CustomerPersonalForm.controls["CustName"].value; 
     
+
+    this.indexCustModel = this.CustomerPersonalForm.controls["CustModel"].value;
+    this.CustModelDesc = this.tempCustModel[this.indexCustModel].Value;
+    this.CustModel = this.tempCustModel[this.indexCustModel].Key;
+    
+
     this.indexGender = this.CustomerPersonalForm.controls["Gender"].value;
     this.Gender = this.tempGender[this.indexGender].Key;
     this.GenderDesc= this.tempGender[this.indexGender].Value; 
@@ -116,8 +138,10 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.TaxIdNo= this.CustomerPersonalForm.controls["TaxIdNo"].value;
     this.IdExpiredDt = this.CustomerPersonalForm.controls["IdExpiredDt"].value;
     this.MotherMaidenName= this.CustomerPersonalForm.controls["MotherMaidenName"].value;
-   
-    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName,"GenderDesc":this.GenderDesc, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,"MrIdTypeCodeDesc" : this.MrIdTypeCodeDesc,"BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName    } });
-          
+    this.IsVip = this.CustomerPersonalForm.controls["IsVip"].value;
+    this.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value;
+    
+    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName,"GenderDesc":this.GenderDesc, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,"MrIdTypeCodeDesc" : this.MrIdTypeCodeDesc,"CustModelDesc" : this.CustModelDesc, "CustModel" : this.CustModel, "BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName,"IsVip"  : this.IsVip,"IsAffiliateWithMf": this.IsAffiliateWithMf  } });
+ 
   }
 }

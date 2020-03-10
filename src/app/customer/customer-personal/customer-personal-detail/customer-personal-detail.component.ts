@@ -5,8 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { WizardComponent } from 'angular-archwizard';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant'; 
-import { CustObj } from 'app/shared/model/CustObj.Model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';  
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -26,7 +25,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     IsAffiliateWithMf:  [true],
     CustSuffixName : ['' ],
     NoOfDependents : ['' ],
-    MrNationalityCode:  [''  ],
+    MrNationalityCode:  [''],
     NoOfResidence: [''],
     WnaCountryCode :  [''],
     FamilyCardNo : ['', ],
@@ -57,11 +56,14 @@ export class CustomerPersonalDetailComponent implements OnInit {
   MotherMaidenName : any;
   resultData: any;
   addUrl: any;
-
+  getUrl : any;
+  tempNationality : any;
+  tempSalutation : any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private toastr: NGXToastrService, private fb: FormBuilder) {
-    
-    this.route.queryParams.subscribe(params => {
     this.addUrl =  AdInsConstant.AddNewCustPersonal;
+    this.getUrl = AdInsConstant.GetListActiveRefMaster; 
+    this.route.queryParams.subscribe(params => {
+   
       if (params["CustName"] != null) {
         this.CustName = params["CustName"];
       }
@@ -99,13 +101,46 @@ export class CustomerPersonalDetailComponent implements OnInit {
    }
 
   ngOnInit() {
+    var counter = 1;
+    console.log("init"+ counter++)
+
+    var refMasterObj = {
+      RefMasterTypeCode: "NATIONALITY",
+      
+    }
+    this.http.post(this.getUrl, refMasterObj).subscribe(
+      (response) => {
+        console.log("awdawdawdwad");
+        this.tempNationality = response["ReturnObject"];
+        this.CustomerDetailForm.patchValue({
+          MrNationalityCode: this.tempNationality[0].Key
+
+        });
+ 
+      }
+    );
+
+    var refMasterObj1 = {
+      RefMasterTypeCode: "SALUTATION",
+      
+    }
+    this.http.post(this.getUrl, refMasterObj1).subscribe(
+      (response) => {
+        
+        this.tempSalutation = response["ReturnObject"];
+        this.CustomerDetailForm.patchValue({
+          MrSalutationCode: response['ReturnObject'][0]['Key']
+        });
+ 
+      }
+    );
+
+
+
+
   }
   SaveValue(){
-    
-
-    // this.custObj = new CustObj();
-    // this.custObj.CustName = this.CustName;
-    // this.custObj.MrCustTypeCode
+ 
 
 
     this.custPersonalObj = new CustPersonalObj();

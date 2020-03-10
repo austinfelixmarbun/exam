@@ -147,9 +147,34 @@
                 <show-errors [control]="CustomerPersonalForm.controls.MotherMaidenName" [submit]="enjiForm.submitted">
                 </show-errors>
               </div>
+ 
+                <label class="col-md-2 adInsLabel" translate>VIP</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"  (click)="checkbox()" />
+                </div>
 
+              
+         
 
               </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
+                </div>
+
+                
+                <!-- <div *ngIf = "state">
+                
+                  <label class="col-md-2 adInsLabel" translate>Vip</label>
+                  <div class="col-md-4">
+                    <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
+                  </div>
+                
+                  </div> -->
+
+
+                </div>
 
 
             </div>
