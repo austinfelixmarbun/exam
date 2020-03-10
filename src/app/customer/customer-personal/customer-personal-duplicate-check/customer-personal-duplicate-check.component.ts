@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http'; 
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -9,18 +9,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./customer-personal-duplicate-check.component.scss']
 })
 export class CustomerPersonalDuplicateCheckComponent implements OnInit {
-  CustomerPersonalForm = this.fb.group({
-    CustName: ['', [Validators.required, Validators.maxLength(100)]],
-    Gender: ['', [Validators.required]],
-    MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
-    BirthPlace: ['', [Validators.required]],
-    BirthDt: ['', [Validators.required]],
-    IdNo: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.required]],
-    IdExpiredDt: ['', [Validators.required]],
-    MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]]
-
-  });
+ 
+   
 
   CustName  : any;
   Gender : any;
@@ -33,7 +23,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   TaxIdNo : any;
   IdExpiredDt : any;
   MotherMaidenName : any;
-
+  resultData: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
    
@@ -73,33 +63,13 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
  
    }
 
-  ngOnInit() {  
-    this.CustomerPersonalForm.patchValue({
-      CustName: this.CustName,
-      Gender: this.GenderDesc,
-      MrIdTypeCode: this.MrIdTypeCodeDesc,
-      BirthPlace: this.BirthPlace,
-      BirthDt: this.BirthDt,
-      IdNo: this.IdNo,
-      IdExpiredDt: this.IdExpiredDt,
-      MotherMaidenName: this.MotherMaidenName,
-      TaxIdNo: this.TaxIdNo
-
-    });
-    this.CustomerPersonalForm.controls.CustName.disable();
-    this.CustomerPersonalForm.controls.Gender.disable();
-    this.CustomerPersonalForm.controls.MrIdTypeCode.disable();
-    this.CustomerPersonalForm.controls.BirthPlace.disable();
-    this.CustomerPersonalForm.controls.BirthDt.disable();
-    this.CustomerPersonalForm.controls.IdNo.disable();
-    this.CustomerPersonalForm.controls.IdExpiredDt.disable();
-    this.CustomerPersonalForm.controls.MotherMaidenName.disable();
-    this.CustomerPersonalForm.controls.TaxIdNo.disable();
-
-
+  ngOnInit() {   
 
 
 
   }
+
+
+ 
 
 }

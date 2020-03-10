@@ -21,63 +21,45 @@
           <form class="form form-horizontal" [formGroup]="CustomerCompanyForm" (ngSubmit)="CustomerCompanyForm.valid "
             #enjiForm="ngForm" id="MainInfoId">
             <div class="form-body">
-              <div class="form-group row adins-required">
+              <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>Customer Model </label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="CustModel"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.CustModel.invalid}">
-                  <show-errors [control]="CustomerCompanyForm.controls.CustModel" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <label>{{this.CustModel}}</label>
+
+                 
                 </div>
                 <label class="col-md-2  adInsLabel" translate>Customer Name </label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="CustName"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.CustName.invalid}">
-                  <show-errors [control]="CustomerCompanyForm.controls.Gender" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <label>{{this.CustName}}</label>
+              
                 </div>
 
               </div>
-              <div class="form-group row adins-required">
+              <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>Company Type</label>
                 <div class="col-md-4">
-
-
-                  <input type="text" class="form-control adInsInput" formControlName="MrCompanyTypeCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.MrCompanyTypeCode.invalid}">
-
-                  <show-errors [control]="CustomerCompanyForm.controls.MrCompanyTypeCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <label>{{this.MrCompanyTypeCode}}</label> 
                 </div>
                 <label class="col-md-2 adInsLabel" translate>ID TYPE </label>
                 <div class="col-md-4">
-
-
-                  <input type="text" class="form-control adInsInput" formControlName="MrIdTypeCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.MrIdTypeCode.invalid}">
-
-                  <show-errors [control]="CustomerCompanyForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <label>{{this.MrIdTypeCode}}</label>
+                 
                 </div>
 
               </div>
 
-              <div class="form-group row adins-required">
+              <div class="form-group row ">
 
                 <label class="col-md-2 adInsLabel" translate>NPWP </label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="IdNo"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.IdNo.invalid}">
-                  <show-errors [control]="CustomerCompanyForm.controls.IdNo" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <label>{{this.IdNo}}</label>
+               
                 </div>
 
                 <label class="col-md-2 adInsLabel" translate>NPWP</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.TaxIdNo.invalid}">
-                  <show-errors [control]="CustomerCompanyForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <label>{{this.TaxIdNo}}</label>
+               
                 </div>
               </div>
 
