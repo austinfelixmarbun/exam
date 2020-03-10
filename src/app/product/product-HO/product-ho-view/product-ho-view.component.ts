@@ -1,5 +1,5 @@
 import { environment } from "environments/environment";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { DecimalPipe } from "@angular/common";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
@@ -19,6 +19,9 @@ import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
   providers: [DecimalPipe, NGXToastrService]
 })
 export class ProductHOViewComponent implements OnInit {
+
+  @Input() inputProdId;
+  @Input() inputProdHId;
 
   prodId: any;
   prodHId: any;
@@ -42,6 +45,9 @@ export class ProductHOViewComponent implements OnInit {
     this.ProdDUrl = AdInsConstant.GetProductDetailComponentInfo;
     this.ProdBranchUrl = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
     this.ProdVerUrl = AdInsConstant.GetListProdHVersionByProdId;
+
+    this.prodHId = this.inputProdHId;
+    this.prodId = this.inputProdId;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {

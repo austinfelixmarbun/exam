@@ -1,0 +1,128 @@
+{
+    "title": "Product Approval",
+    "exportExcel": false,
+    "component": [
+      {
+        "type": "textbox",
+        "name": "PROD_CODE",
+        "id": "ProdCodeId",
+        "value": "",
+        "label": "PRODUCT CODE",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "PROD_NAME",
+        "id": "ProdNameId",
+        "value": "",
+        "label": "PRODUCT NAME",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "datepicker",
+        "name": "START_DT",
+        "id": "StartDtId",
+        "value": "",
+        "label": "START DATE",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "datepicker",
+        "name": "END_DT",
+        "id": "EndDtId",
+        "value": "",
+        "label": "END DATE",
+        "placeholder": "Placeholder"
+      }
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Product Code",
+        "name": "ProdCode"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Product Name",
+        "name": "ProdName"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Current Version",
+        "name": "CurrentVersion"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Start Date",
+        "name": "StartDt"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "End Date",
+        "name": "EndDt"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT C.PROD_CODE AS ProdCode, C.PROD_NAME AS ProdName, B.PROD_VERSION AS CurrentVersion, C.START_DT AS StartDt, C.END_DT AS EndDt,C.PROD_ID AS ProdId, B.PROD_H_ID AS ProdHId",
+      "from": "FROM dbo.APPROVAL_TASK_MAPPER A WITH(NOLOCK) JOIN dbo.PROD_H B WITH(NOLOCK) ON A.TRX_NO = B.PROD_H_ID JOIN dbo.PROD C WITH(NOLOCK) ON B.PROD_ID = C.PROD_ID"
+    },
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ProdCode"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ProdCode"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "CurrentVersion"
+      },
+      {
+        "type": "date",
+        "position": "center",
+        "property": "StartDt"
+      },
+      {
+        "type": "date",
+        "position": "center",
+        "property": "EndDt"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/Product/HOApproval/Detail",
+            "icon": "fa fa-check-square",
+            "param": [
+              {
+                "type": "ProdHId",
+                "property": "ProdHId"
+              },
+              {
+                "type": "ProdId",
+                "property": "ProdId"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

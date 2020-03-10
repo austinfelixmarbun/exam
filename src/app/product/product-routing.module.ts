@@ -9,6 +9,8 @@ import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deac
 import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
 import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
+import { ProductHOApprovalComponent } from "./product-HO/product-ho-approval/product-ho-approval.component";
+import { ProductHOApprovalDetailComponent } from "./product-HO/product-ho-approval-detail/product-ho-approval-detail.component";
 
 const routes: Routes = [
   {
@@ -76,6 +78,20 @@ const routes: Routes = [
         component: ProductOfferingViewComponent,
         data: {
           title: 'Product Offering View'
+        }
+      },
+      {
+        path: 'HOApproval',
+        component: ProductHOApprovalComponent,
+        data: {
+          title: 'Product HO Approval'
+        }
+      },
+      {
+        path: 'HOApproval/Detail',
+        component: ProductHOApprovalDetailComponent,
+        data: {
+          title: 'Product HO Approval Detail'
         }
       }
     ]
