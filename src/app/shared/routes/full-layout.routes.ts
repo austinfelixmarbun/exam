@@ -78,6 +78,10 @@ export const Full_ROUTES: Routes = [
   {
     path: 'Asset',
     loadChildren: './asset/asset.module#AssetModule'
+  }, 
+  {
+    path: 'Vendor',
+    loadChildren: './vendor/vendor.module#VendorModule'
   },
   {
     path: 'Product',

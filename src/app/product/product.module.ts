@@ -22,6 +22,10 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from "angular-archwizard";
+import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 
 @NgModule({
     imports: [
@@ -37,7 +41,9 @@ import { ArchwizardModule } from "angular-archwizard";
         UcgridfooterModule,
         UcSubsectionModule,
         CommonModule,
-        ArchwizardModule
+        ArchwizardModule,
+        MatTabsModule,
+        MatDividerModule
     ],
     declarations: [
         ProdOfferingPagingComponent,
@@ -51,6 +57,8 @@ import { ArchwizardModule } from "angular-archwizard";
         GeneralDataComponent,
         ProductComponentComponent,
         OfficeMemberComponent,
+        ProductHOViewComponent,
+        ProductOfferingViewComponent
     ]
   })
 

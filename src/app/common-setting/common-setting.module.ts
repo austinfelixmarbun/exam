@@ -47,6 +47,7 @@ import { BankComponent } from 'app/bank/bank.component';
 import { BankAddComponent } from 'app/bank/add/add-bank.component';
 import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
 import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
 
 @NgModule({
   imports: [
@@ -62,7 +63,8 @@ import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
     FormModule,
     UcpagingModule,
     UclookupgenericModule,
-    UcSubsectionModule
+    UcSubsectionModule,
+    UcviewgenericModule
   ],
   declarations: [
     MasterPagingComponent,
