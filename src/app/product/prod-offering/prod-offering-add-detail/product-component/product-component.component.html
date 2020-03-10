@@ -14,7 +14,7 @@
                 <div *ngSwitchCase="'DDL'">
                   <div>
                     <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc"
-                      (change)="clickTest($event, i)">
+                      (change)="clickTest($event, i, 1)">
                       <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                         {{it.value.Value}}
                       </option>
@@ -28,13 +28,15 @@
                   <P>DATE</P>
                 </div>
               </div>
-              <div>
-                <select class="form-control adInsInput" style="width: auto" formControlName="DropDownList2">
-                  <option value="DEF">DEF</option>
-                  <option value="LOCK">LOCK</option>
-                  <option value="MIN">MIN</option>
-                  <option value="MAX">MAX</option>
-                </select>
+              <div class="col-md-3" style="border-right: 1px solid grey" [ngSwitch]="item.controls.BehaviourType.value">
+                  <div>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrProdBehaviour"
+                      (change)="clickBehaviour($event1, i,1)">
+                      <option *ngFor="let it of item.controls.DropDownListBehaviour.controls" value="{{it.value.Key}}">
+                        {{it.value.Value}}
+                      </option>
+                    </select>
+                  </div>
               </div>
             </div>
           </div>
@@ -54,7 +56,7 @@
                 <div *ngSwitchCase="'DDL'">
                   <div>
                     <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc"
-                      (change)="clickTest($event, i)">
+                      (change)="clickTest($event, i,2)">
                       <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                         {{it.value.Value}}
                       </option>
@@ -68,13 +70,15 @@
                   <P>DATE</P>
                 </div>
               </div>
-              <div>
-                <select class="form-control adInsInput" style="width: auto" formControlName="DropDownList2">
-                  <option value="DEF">DEF</option>
-                  <option value="LOCK">LOCK</option>
-                  <option value="MIN">MIN</option>
-                  <option value="MAX">MAX</option>
-                </select>
+              <div class="col-md-3" style="border-right: 1px solid grey" [ngSwitch]="item.controls.BehaviourType.value">
+                  <div>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrProdBehaviour"
+                      (change)="clickBehaviour($event1, i,2)">
+                      <option *ngFor="let it of item.controls.DropDownListBehaviour.controls" value="{{it.value.Key}}">
+                        {{it.value.Value}}
+                      </option>
+                    </select>
+                  </div>
               </div>
             </div>
           </div>
@@ -94,7 +98,7 @@
                 <div *ngSwitchCase="'DDL'">
                   <div>
                     <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc"
-                      (change)="clickTest($event, i)">
+                      (change)="clickTest($event, i,3)">
                       <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                         {{it.value.Value}}
                       </option>
@@ -108,13 +112,15 @@
                   <P>DATE</P>
                 </div>
               </div>
-              <div>
-                <select class="form-control adInsInput" style="width: auto" formControlName="DropDownList2">
-                  <option value="DEF">DEF</option>
-                  <option value="LOCK">LOCK</option>
-                  <option value="MIN">MIN</option>
-                  <option value="MAX">MAX</option>
-                </select>
+              <div class="col-md-3" style="border-right: 1px solid grey" [ngSwitch]="item.controls.BehaviourType.value">
+                  <div>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrProdBehaviour"
+                      (change)="clickBehaviour($event1, i,3)">
+                      <option *ngFor="let it of item.controls.DropDownListBehaviour.controls" value="{{it.value.Key}}">
+                        {{it.value.Value}}
+                      </option>
+                    </select>
+                  </div>
               </div>
             </div>
           </div>
@@ -134,7 +140,7 @@
                 <div *ngSwitchCase="'DDL'">
                   <div>
                     <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc"
-                      (change)="clickTest($event, i)">
+                      (change)="clickTest($event, i,4)">
                       <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                         {{it.value.Value}}
                       </option>
@@ -148,13 +154,15 @@
                   <P>DATE</P>
                 </div>
               </div>
-              <div>
-                <select class="form-control adInsInput" style="width: auto" formControlName="DropDownList2">
-                  <option value="DEF">DEF</option>
-                  <option value="LOCK">LOCK</option>
-                  <option value="MIN">MIN</option>
-                  <option value="MAX">MAX</option>
-                </select>
+              <div class="col-md-3" style="border-right: 1px solid grey" [ngSwitch]="item.controls.BehaviourType.value">
+                  <div>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrProdBehaviour"
+                      (change)="clickBehaviour($event1, i,4)">
+                      <option *ngFor="let it of item.controls.DropDownListBehaviour.controls" value="{{it.value.Key}}">
+                        {{it.value.Value}}
+                      </option>
+                    </select>
+                  </div>
               </div>
             </div>
           </div>

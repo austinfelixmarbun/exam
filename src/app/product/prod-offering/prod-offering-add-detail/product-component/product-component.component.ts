@@ -8,6 +8,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
 import { WizardComponent } from 'angular-archwizard';
+import { ListRefProductOfferingDetailObj } from 'app/shared/model/ListRefProductOfferingDetailObj.Model'
 
 @Component({
   selector: 'app-product-component',
@@ -40,6 +41,7 @@ export class ProductComponentComponent implements OnInit {
       MrProdBehaviour: [''],
       RowVersion: [''],
       ProdCompntType: [''],
+      BehaviourType: [''],
       ProdCompntDtaSrcApi: [''],
       ProdCompntDtaSrc: [''],
       ProdCompntDtaValue: [''],
@@ -49,7 +51,7 @@ export class ProductComponentComponent implements OnInit {
         key: [''],
         value: ['']
       })]),
-      DropDownList2: this.fb.array([this.fb.group({
+      DropDownListBehaviour: this.fb.array([this.fb.group({
         key: [''],
         value: ['']
       })])
@@ -67,6 +69,7 @@ export class ProductComponentComponent implements OnInit {
       MrProdBehaviour: [''],
       RowVersion: [''],
       ProdCompntType: [''],
+      BehaviourType:[''],
       ProdCompntDtaSrcApi: [''],
       ProdCompntDtaSrc: [''],
       ProdCompntDtaValue: [''],
@@ -75,7 +78,7 @@ export class ProductComponentComponent implements OnInit {
         key: [''],
         value: ['']
       })]),
-      DropDownList2: this.fb.array([this.fb.group({
+      DropDownListBehaviour: this.fb.array([this.fb.group({
         key: [''],
         value: ['']
       })])
@@ -93,6 +96,7 @@ export class ProductComponentComponent implements OnInit {
       MrProdBehaviour: [''],
       RowVersion: [''],
       ProdCompntType: [''],
+      BehaviourType:[''],
       ProdCompntDtaSrcApi: [''],
       ProdCompntDtaSrc: [''],
       ProdCompntDtaValue: [''],
@@ -101,7 +105,7 @@ export class ProductComponentComponent implements OnInit {
         key: [''],
         value: ['']
       })]),
-      DropDownList2: this.fb.array([this.fb.group({
+      DropDownListBehaviour: this.fb.array([this.fb.group({
         key: [''],
         value: ['']
       })])
@@ -119,6 +123,7 @@ export class ProductComponentComponent implements OnInit {
       MrProdBehaviour: [''],
       RowVersion: [''],
       ProdCompntType: [''],
+      BehaviourType:[''],
       ProdCompntDtaSrcApi: [''],
       ProdCompntDtaSrc: [''],
       ProdCompntDtaValue: [''],
@@ -127,7 +132,7 @@ export class ProductComponentComponent implements OnInit {
         key: [''],
         value: ['']
       })]),
-      DropDownList2: this.fb.array([this.fb.group({
+      DropDownListBehaviour: this.fb.array([this.fb.group({
         key: [''],
         value: ['']
       })])
@@ -139,8 +144,10 @@ export class ProductComponentComponent implements OnInit {
 
   lookupEnvironment;
 
+  lengthDataReturnObj
+
   listRefProductDetailObj;
-  refProductDetailObj;
+  refProductOfferingDetailObj;
   items;
   items1;
   items2;
@@ -160,28 +167,28 @@ export class ProductComponentComponent implements OnInit {
 
     var ProdOfferingComponentScheme = {
       GroupCodes: [
-        "VAN"
+        "SCHM"
       ],
       RowVersion: ""
     }
 
     var ProdOfferingComponentApproval = {
       GroupCodes: [
-        "VAN"
+        "LOS"
       ],
       RowVersion: ""
     }
 
     var ProdOfferingComponentRule = {
       GroupCodes: [
-        "VAN"
+        "RULE"
       ],
       RowVersion: ""
     }
 
     var ProdOfferingComponentOther = {
       GroupCodes: [
-        "VAN"
+        "OTHR"
       ],
       RowVersion: ""
     }
@@ -220,11 +227,17 @@ export class ProductComponentComponent implements OnInit {
               MrProdBehaviour: response["ReturnObject"][i].BehaviourType,
               RowVersion: response["ReturnObject"][i].RowVersion,
               ProdCompntType: response["ReturnObject"][i].ProdCompntType,
+              BehaviourType: response["ReturnObject"][i].BehaviourType,
               ProdCompntDtaSrcApi: response["ReturnObject"][i].ProdCompntDtaSrcApi,
               ProdCompntDtaSrc: response["ReturnObject"][i].ProdCompntDtaSrc,
               ProdCompntDtaValue: response["ReturnObject"][i].ProdCompntDtaValue,
               ProdCompntName: response["ReturnObject"][i].ProdCompntName,
               DropDownList: this.fb.array([this.fb.group({
+                indexOf: i,
+                key: [''],
+                value: ['']
+              })]),
+              DropDownListBehaviour: this.fb.array([this.fb.group({
                 indexOf: i,
                 key: [''],
                 value: ['']
@@ -235,6 +248,7 @@ export class ProductComponentComponent implements OnInit {
               if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
                 this.resolveDDL(eachDataDetail, i,index);
               }
+              this.resolveBehaviour(eachDataDetail,i,index);
               this.items.push(eachDataDetail);
               this.items.removeAt(0);
               console.log("cek form");
@@ -244,6 +258,7 @@ export class ProductComponentComponent implements OnInit {
               if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
                 this.resolveDDL(eachDataDetail, i,index);
               }
+              this.resolveBehaviour(eachDataDetail,i,index);
               this.items1.push(eachDataDetail);
               this.items1.removeAt(0);
               console.log("cek form");
@@ -253,6 +268,7 @@ export class ProductComponentComponent implements OnInit {
               if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
                 this.resolveDDL(eachDataDetail, i,index);
               }
+              this.resolveBehaviour(eachDataDetail,i,index);
               this.items2.push(eachDataDetail);
               this.items2.removeAt(0);
               console.log("cek form");
@@ -262,6 +278,7 @@ export class ProductComponentComponent implements OnInit {
               if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
                 this.resolveDDL(eachDataDetail, i,index);
               }
+              this.resolveBehaviour(eachDataDetail,i,index);
               this.items3.push(eachDataDetail);
               this.items3.removeAt(0);
               console.log("cek form");
@@ -274,6 +291,73 @@ export class ProductComponentComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  resolveBehaviour(obj:any, indexAt: any, index:any){
+    var url = AdInsConstant.GetRefBehaviourByBehaviourTypeCode;
+    var objBehaviour =obj.controls.BehaviourType.value;
+    var requestBehaviour = {
+      BehaviourTypeCode : objBehaviour
+    }
+
+    this.http.post(url, requestBehaviour).subscribe(
+      (response) => {
+        console.log(response);
+        var lengthDDL = response["ReturnObject"].length;
+        if(lengthDDL > 0){
+          for (var i = 0; i < lengthDDL; i++) {
+            var eachDDLDetail = this.fb.group({
+              indexOf: indexAt,
+              Key: response["ReturnObject"][i].Key,
+              Value: response["ReturnObject"][i].Value,
+            }) as FormGroup;
+            // console.log("test");
+            // console.log(eachDDLDetail);
+            if(index==0){
+              this.RefSchemeForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.push(eachDDLDetail);
+            }
+            if(index==1){
+              this.RefApprovalForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.push(eachDDLDetail);
+            }
+            if(index==2){
+              this.RefRuleForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.push(eachDDLDetail);
+            }
+            if(index==3){
+              this.RefOtherForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.push(eachDDLDetail);
+            }
+          }
+          if(index==0){
+            this.RefSchemeForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.removeAt(0);
+            this.RefSchemeForm.controls.items["controls"][indexAt].patchValue({
+              MrProdBehaviour: response["ReturnObject"][0].Value
+            });
+          }
+          if(index==1){
+            this.RefApprovalForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.removeAt(0);
+            this.RefApprovalForm.controls.items["controls"][indexAt].patchValue({
+              MrProdBehaviour: response["ReturnObject"][0].Value
+            });
+          }
+          if(index==2){
+            this.RefRuleForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.removeAt(0);
+            this.RefRuleForm.controls.items["controls"][indexAt].patchValue({
+              MrProdBehaviour: response["ReturnObject"][0].Value
+            });
+          }
+          if(index==3){
+            this.RefOtherForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.removeAt(0);
+            this.RefOtherForm.controls.items["controls"][indexAt].patchValue({
+              MrProdBehaviour: response["ReturnObject"][0].Value
+            });
+          }
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    
   }
   resolveDDL(obj: any, indexAt: any, index: any) {
     // console.log("Cek Obj DDL:");
@@ -351,21 +435,131 @@ export class ProductComponentComponent implements OnInit {
     }
   }
 
-  clickTest(ev: any, idx: any){
+  clickTest(ev: any, idx: any, flag: any){
     // console.log(idx);
     // console.log(ev.target.selectedOptions[0].text);
     // console.log(ev.target.selectedOptions[0].value);
+    if(flag==1){
+      this.RefSchemeForm.controls.items["controls"][idx].patchValue({
+        CompntValue: ev.target.selectedOptions[0].text,
+        CompntValueDesc: ev.target.selectedOptions[0].value
+      });
+    }
+    if(flag==2){
+      this.RefApprovalForm.controls.items["controls"][idx].patchValue({
+        CompntValue: ev.target.selectedOptions[0].text,
+        CompntValueDesc: ev.target.selectedOptions[0].value
+      });
+    }
+    if(flag==3){
+      this.RefRuleForm.controls.items["controls"][idx].patchValue({
+        CompntValue: ev.target.selectedOptions[0].text,
+        CompntValueDesc: ev.target.selectedOptions[0].value
+      });
+    }
+    if(flag==4){
+      this.RefOtherForm.controls.items["controls"][idx].patchValue({
+        CompntValue: ev.target.selectedOptions[0].text,
+        CompntValueDesc: ev.target.selectedOptions[0].value
+      });
+    }
 
-    this.RefSchemeForm.controls.items["controls"][idx].patchValue({
-      CompntValue: ev.target.selectedOptions[0].text,
-      CompntValueDesc: ev.target.selectedOptions[0].value
-    });
+    // console.log(this.RefSchemeForm);
+  }
+  clickBehaviour(ev: any, idx: any, flag: any){
 
-    console.log(this.RefSchemeForm);
+    if(flag==1){
+      this.RefSchemeForm.controls.items["controls"][idx].patchValue({
+        MrProdBehaviour : ev.target.selectedOptions[0].value
+      });
+    }
+    if(flag==2){
+      this.RefApprovalForm.controls.items["controls"][idx].patchValue({
+        MrProdBehaviour : ev.target.selectedOptions[0].value
+      });
+    }
+    if(flag==3){
+      this.RefRuleForm.controls.items["controls"][idx].patchValue({
+        MrProdBehaviour : ev.target.selectedOptions[0].value
+      });
+    }
+    if(flag==4){
+      this.RefOtherForm.controls.items["controls"][idx].patchValue({
+        MrProdBehaviour : ev.target.selectedOptions[0].value
+      });
+    }
+
+    // console.log(this.RefSchemeForm);
   }
   
+  listProductComponentObj;
   SaveForm(){
-    
+    this.listProductComponentObj = new ListRefProductOfferingDetailObj();
+    this.listProductComponentObj.ProductOfferingDetails = new Array();
+    this.listProductComponentObj.ProdOfferingHId = this.objInput["param"];
+    this.UrlBackEnd = AdInsConstant.AddOrEditProdOfferingDetail;
+    for(var i = 0; i < 25; i++){
+      var ProductComponentObj = new this.refProductOfferingDetailObj();
+      if(i<2){
+        ProductComponentObj.ProdOfferingDId = this.RefSchemeForm.controls.items["controls"][i].controls.ProdDId.value;
+        ProductComponentObj.ProdOfferingHId = this.RefSchemeForm.controls.items["controls"][i].controls.ProdHId.value;
+        ProductComponentObj.RefProdCompntCode = this.RefSchemeForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
+        ProductComponentObj.RefProdCompntGrpCode = this.RefSchemeForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
+        ProductComponentObj.CompntValue = this.RefSchemeForm.controls.items["controls"][i].controls.CompntValue.value;
+        ProductComponentObj.CompntValueDesc = this.RefSchemeForm.controls.items["controls"][i].controls.CompntValueDesc.value;
+        ProductComponentObj.MrProdBehaviour = this.RefSchemeForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
+        ProductComponentObj.RowVersion = this.RefSchemeForm.controls.items["controls"][i].controls.RowVersion.value;
+        this.listProductComponentObj.ProductOfferingDetails.push(ProductComponentObj);
+      }
+      if(i<5){
+        ProductComponentObj.ProdOfferingDId = this.RefApprovalForm.controls.items["controls"][i].controls.ProdDId.value;
+        ProductComponentObj.ProdOfferingHId = this.RefApprovalForm.controls.items["controls"][i].controls.ProdHId.value;
+        ProductComponentObj.RefProdCompntCode = this.RefApprovalForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
+        ProductComponentObj.RefProdCompntGrpCode = this.RefApprovalForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
+        ProductComponentObj.CompntValue = this.RefApprovalForm.controls.items["controls"][i].controls.CompntValue.value;
+        ProductComponentObj.CompntValueDesc = this.RefApprovalForm.controls.items["controls"][i].controls.CompntValueDesc.value;
+        ProductComponentObj.MrProdBehaviour = this.RefApprovalForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
+        ProductComponentObj.RowVersion = this.RefApprovalForm.controls.items["controls"][i].controls.RowVersion.value;
+        this.listProductComponentObj.ProductOfferingDetails.push(ProductComponentObj);
+      }
+      if(i<20){
+        ProductComponentObj.ProdOfferingDId = this.RefRuleForm.controls.items["controls"][i].controls.ProdDId.value;
+        ProductComponentObj.ProdOfferingHId = this.RefRuleForm.controls.items["controls"][i].controls.ProdHId.value;
+        ProductComponentObj.RefProdCompntCode = this.RefRuleForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
+        ProductComponentObj.RefProdCompntGrpCode = this.RefRuleForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
+        ProductComponentObj.CompntValue = this.RefRuleForm.controls.items["controls"][i].controls.CompntValue.value;
+        ProductComponentObj.CompntValueDesc = this.RefRuleForm.controls.items["controls"][i].controls.CompntValueDesc.value;
+        ProductComponentObj.MrProdBehaviour = this.RefRuleForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
+        ProductComponentObj.RowVersion = this.RefRuleForm.controls.items["controls"][i].controls.RowVersion.value;
+        this.listProductComponentObj.ProductOfferingDetails.push(ProductComponentObj);
+      }
+      if(i<25){
+        ProductComponentObj.ProdOfferingDId = this.RefOtherForm.controls.items["controls"][i].controls.ProdDId.value;
+        ProductComponentObj.ProdOfferingHId = this.RefOtherForm.controls.items["controls"][i].controls.ProdHId.value;
+        ProductComponentObj.RefProdCompntCode = this.RefOtherForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
+        ProductComponentObj.RefProdCompntGrpCode = this.RefOtherForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
+        ProductComponentObj.CompntValue = this.RefOtherForm.controls.items["controls"][i].controls.CompntValue.value;
+        ProductComponentObj.CompntValueDesc = this.RefOtherForm.controls.items["controls"][i].controls.CompntValueDesc.value;
+        ProductComponentObj.MrProdBehaviour = this.RefOtherForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
+        ProductComponentObj.RowVersion = this.RefOtherForm.controls.items["controls"][i].controls.RowVersion.value;
+        this.listProductComponentObj.ProductOfferingDetails.push(ProductComponentObj);
+      }
+    }
+
+    this.http.post(this.UrlBackEnd, this.listProductComponentObj).subscribe(
+      (response) => {
+        console.log(response);
+        this.toastr.successMessage(response["message"]);
+        this.router.navigate(["/Product/prod-offering/paging"]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  SaveDetail(){
+
   }
 
   NextDetail(){

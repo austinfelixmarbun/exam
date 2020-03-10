@@ -8,6 +8,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
 import { WizardComponent } from 'angular-archwizard';
+import { ListRefProductOfferingDetailObj } from 'app/shared/model/ListRefProductOfferingDetailObj.Model';
 
 @Component({
   selector: 'app-general-data',
@@ -57,6 +58,7 @@ export class GeneralDataComponent implements OnInit {
 
   lookupEnvironment;
 
+  lengthDataReturnObj
   listRefProductDetailObj;
   refProductDetailObj;
   items;
@@ -72,27 +74,27 @@ export class GeneralDataComponent implements OnInit {
 
     // Get Data Input 
     // mode add
-    if(this.objInput.mode == "add"){
+    // if(this.objInput.mode == "add"){
       this.UrlBackEnd = AdInsConstant.GetProductOfferingComponent;
-      var ProdHOComponent = {
+      var ProdOfferingComponent = {
         GroupCodes: [
-          "VAN"
+          "GEN"
         ],
         RowVersion: ""
       }
   
       this.items = this.RefGeneralDataForm.get('items') as FormArray;
-      this.http.post(this.UrlBackEnd, ProdHOComponent).subscribe(
+      this.http.post(this.UrlBackEnd, ProdOfferingComponent).subscribe(
         (response) => {
           // console.log(response);
           // console.log(response["ReturnObject"].length);
-          var lengthDataReturnObj = response["ReturnObject"].length;
+          this.lengthDataReturnObj = response["ReturnObject"].length;
   
-          if (lengthDataReturnObj) {
-            for (var i = 0; i < lengthDataReturnObj; i++) {
+          if (this.lengthDataReturnObj) {
+            for (var i = 0; i < this.lengthDataReturnObj; i++) {
               var eachDataDetail = this.fb.group({
-                ProdDId: response["ReturnObject"][i].ProdDId,
-                ProdHId: response["ReturnObject"][i].ProdHId,
+                ProdOfferingDId: response["ReturnObject"][i].ProdOfferingDId,
+                ProdOfferingHId: response["ReturnObject"][i].ProdOfferingHId,
                 RefProdCompntCode: response["ReturnObject"][i].RefProdCompntCode,
                 RefProdCompntGrpCode: response["ReturnObject"][i].RefProdCompntGrpCode,
                 CompntValue: response["ReturnObject"][i].CompntValue,
@@ -100,6 +102,7 @@ export class GeneralDataComponent implements OnInit {
                 MrProdBehaviour: response["ReturnObject"][i].BehaviourType,
                 RowVersion: response["ReturnObject"][i].RowVersion,
                 ProdCompntType: response["ReturnObject"][i].ProdCompntType,
+                BehaviourType: response["ReturnObject"][i].BehaviourType,
                 ProdCompntDtaSrcApi: response["ReturnObject"][i].ProdCompntDtaSrcApi,
                 ProdCompntDtaSrc: response["ReturnObject"][i].ProdCompntDtaSrc,
                 ProdCompntDtaValue: response["ReturnObject"][i].ProdCompntDtaValue,
@@ -110,8 +113,10 @@ export class GeneralDataComponent implements OnInit {
                   Value: ""
                 })])
               }) as FormGroup;
-              // Get DDL
+            // Get DDL
+            if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
               this.resolveDDL(eachDataDetail, i);
+            }
               // Push Data
               this.items.push(eachDataDetail);
             }
@@ -124,9 +129,9 @@ export class GeneralDataComponent implements OnInit {
           console.log(error);
         }
       );
-    }else{ // mode edit
+    // }else{ // mode edit
 
-    }
+    // }
     
   }
 
@@ -158,8 +163,10 @@ export class GeneralDataComponent implements OnInit {
               this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.push(eachDDLDetail);
             }
             this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
-            // this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList[indexAt].controls.Key; 
-            // this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.CompntValue = this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList[indexAt].controls.Value;
+            this.RefGeneralDataForm.controls.items["controls"][indexAt].patchValue({
+              CompntValue: response["ReturnObject"][0].Value,
+              CompntValueDesc: response["ReturnObject"][0].Key
+            });
           }
         },
         (error) => {
@@ -183,10 +190,36 @@ export class GeneralDataComponent implements OnInit {
     console.log(this.RefGeneralDataForm);
   }
   
+  listGeneralDataObj;
   SaveForm(){
-    
+    this.listGeneralDataObj = new ListRefProductOfferingDetailObj();
+    this.listGeneralDataObj.ProductDetails = new Array();
+    this.listGeneralDataObj.ProdHId = this.objInput["param"];
+    this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
+    for(var i = 0; i < this.lengthDataReturnObj; i++){
+      var GeneralDataObj = new this.refProductDetailObj();
+      GeneralDataObj.ProdOfferingDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdOfferingDId.value;
+      GeneralDataObj.ProdOfferingHId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdOFferingHId.value;
+      GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
+      GeneralDataObj.RefProdCompntGrpCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
+      GeneralDataObj.CompntValue = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValue.value;
+      GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
+      GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
+      GeneralDataObj.RowVersion = this.RefGeneralDataForm.controls.items["controls"][i].controls.RowVersion.value;
+      this.listGeneralDataObj.ProductDetails.push(GeneralDataObj); 
   }
 
+  this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
+    (response) => {
+      console.log(response);
+      this.toastr.successMessage(response["message"]);
+      this.router.navigate(["/Product/prod-offering/paging"]);
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+}
   NextDetail(){
     this.wizard.goToNextStep();
   }

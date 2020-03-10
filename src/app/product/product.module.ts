@@ -9,7 +9,7 @@ import { ProdOfferingAddDetailComponent } from './prod-offering/prod-offering-ad
 import { ProductHOPagingComponent } from './product-HO/product-ho-paging/product-ho-paging.component';
 import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-add.component';
 import { ProductHoAdddetailComponent } from './product-HO/product-ho-adddetail/product-ho-adddetail.component';
-import { GeneralDataComponent } from './product-HO/product-ho-adddetail/general-data/general-data.component';
+import { GeneralDataComponent } from './prod-offering/prod-offering-add-detail/general-data/general-data.component';
 import { ProductComponentComponent } from './prod-offering/prod-offering-add-detail/product-component/product-component.component';
 import { OfficeMemberComponent } from './product-HO/product-ho-adddetail/office-member/office-member.component';
 import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";

@@ -77,7 +77,7 @@ export class GeneralDataComponent implements OnInit {
     this.UrlBackEnd = AdInsConstant.GetProductHOComponent;
     var ProdHOComponent = {
       GroupCodes: [
-        "VAN"
+        "GEN"
       ],
       RowVersion: ""
     }
