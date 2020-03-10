@@ -472,9 +472,12 @@ export class AdInsConstant {
   public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
   public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
+<<<<<<< HEAD
+=======
 
   //VENDOR
   public static DeleteVendor ="/Vendor/DeleteVendor";
+>>>>>>> a0f333d7c0ca00804729e13da1a1b97efaa00f8b
 
   // // ASSET NEGATIVE
   // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
