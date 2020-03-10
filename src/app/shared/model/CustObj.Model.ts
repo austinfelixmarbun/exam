@@ -12,5 +12,6 @@ export class CustObj{
     IsAffiliateWithMf :any;
     VipNotes :any;
     OriginalOfficeCode:any;
+   
 
 }

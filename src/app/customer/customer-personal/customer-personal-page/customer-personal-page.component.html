@@ -21,13 +21,12 @@
           </form>
           <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
           </lib-ucSubsection>
-          <form class="form form-horizontal" [formGroup]="CustomerPersonalForm" (ngSubmit)="CustomerPersonalForm.valid "
-            #enjiForm="ngForm" id="MainInfoId">
+          <form class="form form-horizontal"   id="MainInfoId">
             <div class="form-body">
               <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>Customer Name </label>
                 <div class="col-md-4">
-                  <label>{{this.CustName}}</label>
+                  <label>{{this.custObj.CustName}}</label>
                 </div>
 
                 <label class="col-md-2  adInsLabel" translate>Gender </label>

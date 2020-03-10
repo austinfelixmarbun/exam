@@ -6,6 +6,7 @@ import { WizardComponent } from 'angular-archwizard';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';  
+import { CustObj } from 'app/shared/model/CustObj.Model';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -59,44 +60,13 @@ export class CustomerPersonalDetailComponent implements OnInit {
   getUrl : any;
   tempNationality : any;
   tempSalutation : any;
+ 
+  
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private toastr: NGXToastrService, private fb: FormBuilder) {
     this.addUrl =  AdInsConstant.AddNewCustPersonal;
     this.getUrl = AdInsConstant.GetListActiveRefMaster; 
-    this.route.queryParams.subscribe(params => {
+ 
    
-      if (params["CustName"] != null) {
-        this.CustName = params["CustName"];
-      }
-      if (params["Gender"] != null) {
-      this.Gender = params["Gender"];
-      } if (params["GenderDesc"] != null) {
-        this.GenderDesc = params["GenderDesc"];
-        }
-      if (params["MrIdTypeCode"] != null) {
-        this.MrIdTypeCode = params["MrIdTypeCode"];
-      }
-      if (params["MrIdTypeCodeDesc"] != null) {
-        this.MrIdTypeCodeDesc = params["MrIdTypeCodeDesc"];
-      }
-      if (params["BirthPlace"] != null) {
-        this.BirthPlace = params["BirthPlace"];
-      }
-      if (params["BirthDt"] != null) {
-        this.BirthDt = params["BirthDt"];
-      }
-      if (params["IdNo"] != null) {
-        this.IdNo = params["IdNo"];
-      }
-      if (params["TaxIdNo"] != null) {
-        this.TaxIdNo = params["TaxIdNo"];
-      }
-      if (params["IdExpiredDt"] != null) {
-        this.IdExpiredDt = params["IdExpiredDt"];
-      }
-      if (params["MotherMaidenName"] != null) {
-        this.MotherMaidenName = params["MotherMaidenName"];
-      }
-    });
  
    }
 
@@ -134,6 +104,13 @@ export class CustomerPersonalDetailComponent implements OnInit {
  
       }
     );
+
+
+
+       
+   
+ 
+      
 
 
 

@@ -27,11 +27,11 @@ state: any;
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel : ['', [Validators.required]],
     IsVip : [true],
-    IsAffiliateWithMf: [true]
+    IsAffiliateWithMf: [true],
+    VipNotes : ['']
   });
 
   getUrl: any;
- 
   custPersonalObj: CustPersonalObj;
   tempGender: any;
   tempIdType: any;
@@ -54,6 +54,8 @@ state: any;
   MotherMaidenName : any;
   IsVip :any;
   IsAffiliateWithMf : any;
+  VipNotes: any;
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
   this.getUrl = AdInsConstant.GetListActiveRefMaster; 
    
@@ -107,12 +109,12 @@ state: any;
     );
   }
 
-  checkbox(){
-    if(this.CustomerPersonalForm.controls["IsVip"].value){
-      this.state = true;
-
+  checkState(){
+    if(this.CustomerPersonalForm.controls.IsVip.value === true){
+     
+      this.CustomerPersonalForm.controls.VipNotes.disable();
     }else{
-      this.state=false;
+      this.CustomerPersonalForm.controls.VipNotes.enable();
     }
   }
   SaveValue (){ 
@@ -140,8 +142,8 @@ state: any;
     this.MotherMaidenName= this.CustomerPersonalForm.controls["MotherMaidenName"].value;
     this.IsVip = this.CustomerPersonalForm.controls["IsVip"].value;
     this.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value;
-    
-    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName,"GenderDesc":this.GenderDesc, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,"MrIdTypeCodeDesc" : this.MrIdTypeCodeDesc,"CustModelDesc" : this.CustModelDesc, "CustModel" : this.CustModel, "BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName,"IsVip"  : this.IsVip,"IsAffiliateWithMf": this.IsAffiliateWithMf  } });
+    this.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
+    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName,"GenderDesc":this.GenderDesc, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,"MrIdTypeCodeDesc" : this.MrIdTypeCodeDesc,"CustModelDesc" : this.CustModelDesc, "CustModel" : this.CustModel, "BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName,"IsVip"  : this.IsVip,"IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes  } });
  
   }
 }

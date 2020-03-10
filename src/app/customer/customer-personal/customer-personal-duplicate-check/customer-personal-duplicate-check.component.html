@@ -1,6 +1,6 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="submit" class="addButton"  [routerLink]="['../Page']" (click) = SaveValue() translate>
+    <button type="submit" class="addButton"   (click) = SaveValue() translate>
       <i class="fa fa-check-square-o" ></i> Save
     </button>
     <button type="button" class="backButton" [routerLink]="['../MainInfo']" translate>
@@ -43,17 +43,21 @@
 
               <label>{{this.CustModelDesc}}</label>
               </div>
+              <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
+              <div class="col-md-4">
+                <label>{{this.StatusAffiliate}}</label>
+            
+              </div>
+               
 
+             
+              </div>
+              <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>ID Type </label>
                 <div class="col-md-4">
 
                 <label>{{this.MrIdTypeCodeDesc}}</label>
                 </div>
-
-             
-              </div>
-              <div class="form-group row ">
-
                 <label class="col-md-2 adInsLabel" translate>Birth Place/Date </label>
                 <div class="col-md-4">
                   <div class="row">
@@ -68,41 +72,36 @@
                   </div>
                 </div>
 
-                <label class="col-md-2 adInsLabel" translate>ID Number </label>
+                
+              
+              </div>
+              <div class="form-group row "><label class="col-md-2 adInsLabel" translate>ID Number </label>
                 <div class="col-md-4">
                   <label>{{this.IdNo}}</label>
                 </div>
-              
-              </div>
-              <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>NPWP</label>
                 <div class="col-md-4">
                   <label>{{this.TaxIdNo}}</label>
                 </div>
                 
-                <label class="col-md-2 adInsLabel" translate>ID Expired Date</label>
-                <div class="col-md-4">
-                  <label>{{this.IdExpiredDt}}</label>
                 
-                </div>
 
           
               </div>
 
 
               <div class="form-group row ">
-               
+                <label class="col-md-2 adInsLabel" translate>ID Expired Date</label>
+                <div class="col-md-4">
+                  <label>{{this.IdExpiredDt}}</label>
+                
+                </div>
                 <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
                 <div class="col-md-4">
                   <label>{{this.MotherMaidenName}}</label>
               
                 </div>
           
-                <label class="col-md-2 adInsLabel" translate>VIP</label>
-                <div class="col-md-4">
-                  <label>{{this.StatusIsVip}}</label>
-              
-                </div>
 
 
               </div>
@@ -110,13 +109,18 @@
               
               <div class="form-group row ">
                
-                <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
+                <label class="col-md-2 adInsLabel" translate>VIP</label>
                 <div class="col-md-4">
-                  <label>{{this.StatusAffiliate}}</label>
+                  <label>{{this.StatusIsVip}}</label>
               
                 </div>
+               
            
-
+                <label class="col-md-2 adInsLabel" translate>VIP Notes</label>
+                <div class="col-md-4">
+                  <label>{{this.VipNotes}}</label>
+              
+                </div>
               </div>
           
     
