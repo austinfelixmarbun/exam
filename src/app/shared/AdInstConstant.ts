@@ -460,19 +460,19 @@ export class AdInsConstant {
   public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
    
   //Asset Scheme
-  public static GetAssetSchmHById =  "/AssetSchmH/GetAssetSchmHById";
-  public static AddAssetSchmH =   "/AssetSchmH/AddAssetSchmH";
-  public static EditAssetSchmH =   "/AssetSchmH/EditAssetSchmH";
-  public static GetListAssetSchmDByAssetSchmHId = "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
-  public static EditAssetSchmHAndD =  "/AssetSchmH/EditAssetSchmHAndD"
-  public static EditListAssetSchmD =  "/AssetSchmD/EditListAssetSchmD"
-  public static AddListAssetSchmD =   "/AssetSchmD/AddListAssetSchmD";
+  public static GetAssetSchmHById =   environment.FoundationR3Url + "/AssetSchmH/GetAssetSchmHById";
+  public static AddAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/AddAssetSchmH";
+  public static EditAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmH";
+  public static GetListAssetSchmDByAssetSchmHId = "http://localhost:5000" + "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
+  public static EditAssetSchmHAndD = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmHAndD"
+  public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
+  public static AddListAssetSchmD =  "http://localhost:5000"  + "/AssetSchmD/AddListAssetSchmD";
   public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
 
 
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
-
+  
   // ASSET NEGATIVE
   public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
