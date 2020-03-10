@@ -11,7 +11,7 @@
       "placeholder": "Placeholder",
       "isFromURL": true,
       "isSelectOne": false,
-      "url": "http://r3app-server/FOUNDATION_R3/AssetType/GetListKeyValueByCode",
+      "url": "http://r3app-server/FOUNDATION_R3/AssetType/GetListKeyValueActiveByCode",
       "label": "Asset Type Name",
       "items": [],
       "isEvent" : "true",
@@ -139,7 +139,7 @@
     },
     {
       "type": "sort",
-      "position": "left",
+      "position": "center",
       "label": "Hierarchy Level",
       "name": "hierarchyLvl"
     },
@@ -188,11 +188,11 @@
     },
     {
       "type": "text",
-      "position": "left",
+      "position": "center",
       "property": "hierarchyLvl"
     },
     {
-      "type": "text",
+      "type": "boolean",
       "position": "left",
       "property": "isActive"
     },

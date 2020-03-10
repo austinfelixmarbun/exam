@@ -111,7 +111,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     this.http.post(this.getListAssetCategory, this.listRequest).subscribe(
       response => {
         this.resultAssetCategory = response['ReturnObject'];
-        // this.AssetMasterChildForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
         console.log();
       },
       (error) => {
