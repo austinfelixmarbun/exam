@@ -9,6 +9,7 @@ import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deac
 import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
 import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
+import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-offering-deactivate-paging/product-offering-deactivate.component";
 
 const routes: Routes = [
   {
@@ -33,7 +34,7 @@ const routes: Routes = [
         component: ProductHoAdddetailComponent,
         loadChildren: "./product-HO/product-ho-adddetail/product-ho-adddetail.module#ProductHOAddDetailModule",
         data: {
-            title: 'Product HO Add Detail'
+          title: 'Product HO Add Detail'
         }
       },
       {
@@ -76,6 +77,13 @@ const routes: Routes = [
         component: ProductOfferingViewComponent,
         data: {
           title: 'Product Offering View'
+        }
+      },
+      {
+        path: 'OfferingDeactivate',
+        component: ProductOfferingDeactivatePagingComponent,
+        data: {
+          title: 'Product Offering Deactivate'
         }
       }
     ]
