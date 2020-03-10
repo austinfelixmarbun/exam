@@ -314,7 +314,7 @@ export class AdInsConstant {
   public static EditAssetMaster = environment.FoundationR3Url + "/AssetMaster/EditAssetMaster";
   public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
   public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
-  public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueById";
+  public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueActiveById";
   public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
   public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
 
@@ -385,7 +385,7 @@ export class AdInsConstant {
   public static AddAssetType = "/AssetType/AddAssetType"
   public static EditAssetType = "/AssetType/EditAssetType"
   public static GetAssetTypeByCode = "/AssetType/GetAssetTypeByCode"
-  public static GetAssetTypeById = "/AssetType/GetAssetTypeById"
+  public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById"
   public static GetListAssetType = "/AssetType/GetListAssetType"
   public static GetListActiveAssetType = "/AssetType/GetListActiveAssetType"
   public static DeleteAssetType = "/AssetType/DeleteAssetType"
