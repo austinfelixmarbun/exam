@@ -1,21 +1,21 @@
 {
-    "title": "Product Approval",
+    "title": "Product Offering Approval",
     "exportExcel": false,
     "component": [
       {
         "type": "textbox",
-        "name": "PROD_CODE",
-        "id": "ProdCodeId",
+        "name": "PROD_OFFERING_CODE",
+        "id": "ProdOfferingCodeId",
         "value": "",
-        "label": "PRODUCT CODE",
+        "label": "PRODUCT OFFERING CODE",
         "placeholder": "Placeholder"
       },
       {
         "type": "textbox",
-        "name": "PROD_NAME",
-        "id": "ProdNameId",
+        "name": "PROD_OFFERING_NAME",
+        "id": "ProdOfferingNameId",
         "value": "",
-        "label": "PRODUCT NAME",
+        "label": "PRODUCT OFFERING NAME",
         "placeholder": "Placeholder"
       },
       {
@@ -39,14 +39,14 @@
       {
         "type": "sort",
         "position": "center",
-        "label": "Product Code",
-        "name": "ProdCode"
+        "label": "Product Offering Code",
+        "name": "ProdOfferingCode"
       },
       {
         "type": "sort",
         "position": "center",
-        "label": "Product Name",
-        "name": "ProdName"
+        "label": "Product Offering Name",
+        "name": "ProdOfferingName"
       },
       {
         "type": "sort",
@@ -85,19 +85,19 @@
       }
     ],
     "querystring": {
-      "select": "SELECT C.PROD_CODE AS ProdCode, C.PROD_NAME AS ProdName, D.PROD_VERSION AS CurrentVersion, B.PROD_VERSION AS DraftVersion, B.START_DT AS StartDt, B.END_DT AS EndDt,C.PROD_ID AS ProdId, B.PROD_H_ID AS ProdHId, B.REQUEST_DT AS RequestDt",
-      "from": "FROM dbo.APPROVAL_TASK_MAPPER A WITH(NOLOCK) JOIN dbo.PROD_H B WITH(NOLOCK) ON A.TRX_NO = B.PROD_H_ID JOIN dbo.PROD C WITH(NOLOCK) ON B.PROD_ID = C.PROD_ID LEFT JOIN dbo.PROD_H D WITH(NOLOCK) ON C.CURRENT_PROD_H_ID = D.PROD_H_ID"
+      "select": "SELECT C.PROD_OFFERING_CODE AS ProdOfferingCode, C.PROD_OFFERING_NAME AS ProdOfferingName, B.REQUEST_DT AS RequestDt, D.PROD_OFFERING_VERSION AS CurrentVersion, B.PROD_OFFERING_VERSION AS DraftVersion, B.START_DT AS StartDt, B.END_DT AS EndDt,C.PROD_OFFERING_ID AS ProdOfferingId, B.PROD_OFFERING_H_ID AS ProdOfferingHId",
+      "from": "FROM dbo.APPROVAL_TASK_MAPPER A WITH(NOLOCK) JOIN dbo.PROD_OFFERING_H B WITH(NOLOCK) ON A.TRX_NO = B.PROD_OFFERING_H_ID JOIN dbo.PROD_OFFERING C WITH(NOLOCK) ON B.PROD_OFFERING_ID = C.PROD_OFFERING_ID LEFT JOIN PROD_OFFERING_H D WITH(NOLOCK) ON C.CURRENT_PROD_OFFERING_H_ID = D.PROD_OFFERING_H_ID"
     },
     "bodyList": [
       {
         "type": "text",
         "position": "center",
-        "property": "ProdCode"
+        "property": "ProdOfferingCode"
       },
       {
         "type": "text",
         "position": "center",
-        "property": "ProdName"
+        "property": "ProdOfferingName"
       },
       {
         "type": "date",
@@ -130,16 +130,16 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Product/HOApproval/Detail",
+            "path": "/Product/OfferingApproval/Detail",
             "icon": "fa fa-check-square",
             "param": [
               {
-                "type": "ProdHId",
-                "property": "ProdHId"
+                "type": "ProdOfferingHId",
+                "property": "ProdOfferingHId"
               },
               {
-                "type": "ProdId",
-                "property": "ProdId"
+                "type": "ProdOfferingId",
+                "property": "ProdOfferingId"
               }
             ]
           }

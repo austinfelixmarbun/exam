@@ -46,9 +46,6 @@ export class ProductHOViewComponent implements OnInit {
     this.ProdBranchUrl = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
     this.ProdVerUrl = AdInsConstant.GetListProdHVersionByProdId;
 
-    this.prodHId = this.inputProdHId;
-    this.prodId = this.inputProdId;
-
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {
         this.prodHId = params["prodHId"];
@@ -60,9 +57,17 @@ export class ProductHOViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.prodHId == undefined){
+      this.prodHId = this.inputProdHId;
+    }
+
+    if(this.prodId == undefined){
+      this.prodId = this.inputProdId;
+    }
+    
     //** Main Information **//
     this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
-
+    
     //** Product Version **//
     this.ProdVersionObj = new ProdHVersionObj
     this.ProdVersionObj.ProdId = this.prodId;

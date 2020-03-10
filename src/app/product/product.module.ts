@@ -26,6 +26,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 import { ProductHOApprovalComponent } from "./product-HO/product-ho-approval/product-ho-approval.component";
 import { ProductHOApprovalDetailComponent } from "./product-HO/product-ho-approval-detail/product-ho-approval-detail.component";
+import { ProductOfferingApprovalComponent } from "./prod-offering/prod-offering-approval/product-offering-approval.component";
+import { ProductOfferingApprovalDetailComponent } from "./prod-offering/prod-offering-approval-detail/product-offering-approval-detail.component";
 
 @NgModule({
   imports: [
@@ -58,7 +60,9 @@ import { ProductHOApprovalDetailComponent } from "./product-HO/product-ho-approv
     ProductHOViewComponent,
     ProductOfferingViewComponent,
     ProductHOApprovalComponent,
-    ProductHOApprovalDetailComponent
+    ProductHOApprovalDetailComponent,
+    ProductOfferingApprovalComponent,
+    ProductOfferingApprovalDetailComponent
   ]
 
 })

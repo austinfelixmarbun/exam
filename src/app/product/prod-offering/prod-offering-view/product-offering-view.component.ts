@@ -1,5 +1,5 @@
 import { environment } from "environments/environment";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { DecimalPipe } from "@angular/common";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
@@ -19,6 +19,9 @@ import { RefProductOfferingBrancMbrObj } from "../../../shared/model/RefProductO
   providers: [DecimalPipe, NGXToastrService]
 })
 export class ProductOfferingViewComponent implements OnInit {
+
+  @Input() inputProdOfferingId;
+  @Input() inputProdOfferingHId;
 
   prodOfferingId: any;
   prodOfferingHId: any;
@@ -54,6 +57,14 @@ export class ProductOfferingViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.prodOfferingHId == undefined){
+      this.prodOfferingHId = this.inputProdOfferingHId;
+    }
+    
+    if(this.prodOfferingId == undefined){
+      this.prodOfferingId = this.inputProdOfferingId;
+    }
+
     //** Main Information **//
     this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
 

@@ -17,11 +17,11 @@ export class ProductHOApprovalDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
-      if (params["prodHId"] != null) {
-        this.prodHId = params["prodHId"];
+    if (params["ProdHId"] != null) {
+        this.prodHId = params["ProdHId"];
       }
-      if (params["prodId"] != null) {
-        this.prodId = params["prodId"];
+      if (params["ProdId"] != null) {
+        this.prodId = params["ProdId"];
       }
     });
   }
