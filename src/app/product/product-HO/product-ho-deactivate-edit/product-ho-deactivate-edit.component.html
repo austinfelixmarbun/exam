@@ -1,10 +1,32 @@
 <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Product Deactivate</h4>
 <lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
-<lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
-<div class="col-md-12">
+<div class="card">
+  <div class="card-body">
+    <br />
+    <table class="table table-responsive-md text-center table-hover">
+      <thead>
+        <tr class="table-header">
+          <th class="text-left">Product Offering Code</th>
+          <th class="text-left">Product Offering name</th>
+          <th class="text-left">Current Version</th>
+          <th class="text-left">End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ProdOfferVer">
+          <td class="text-left">{{item.ProdOfferingCode}}</td>
+          <td class="text-left">{{item.ProdOfferingName}}</td>
+          <td class="text-left">{{item.ProdOfferingVersion}}</td>
+          <td class="text-left">{{item.EndDt}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
   <div class="card">
     <div class="card-body">
       <div class="px-3">
+        <br />
         <div class="addEdit">
           <form class="form form-horizontal" [formGroup]="ProdHDeactForm" (ngSubmit)="ProdHDeactForm.valid && SaveForm()"
                 #enjiForm="ngForm">
@@ -32,7 +54,7 @@
                 <label class="col-md-3  adInsLabel" translate>Notes </label>
                 <div class="col-md-9">
                   <textarea type="text" class="form-control adInsInput" formControlName="Notes"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdHDeactForm.controls.Notes.invalid }"></textarea>
+                            [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdHDeactForm.controls.Notes.invalid }"></textarea>
                   <show-errors [control]="ProdHDeactForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
@@ -51,5 +73,5 @@
       </div>
     </div>
   </div>
-</div>
+
 
