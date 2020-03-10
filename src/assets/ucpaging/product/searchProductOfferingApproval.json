@@ -39,6 +39,18 @@
       {
         "type": "sort",
         "position": "center",
+        "label": "Request Date",
+        "name": "ReqDt"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Request Type",
+        "name": "ReqType"
+      },
+      {
+        "type": "sort",
+        "position": "center",
         "label": "Product Offering Code",
         "name": "ProdOfferingCode"
       },
@@ -47,12 +59,6 @@
         "position": "center",
         "label": "Product Offering Name",
         "name": "ProdOfferingName"
-      },
-      {
-        "type": "sort",
-        "position": "center",
-        "label": "Request Date",
-        "name": "RequestDt"
       },
       {
         "type": "sort",
@@ -79,16 +85,50 @@
         "name": "EndDt"
       },
       {
+        "type": "sort",
+        "position": "center",
+        "label": "Approval No",
+        "name": "ApvNo"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Request By",
+        "name": "ReqBy"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Task Owner",
+        "name": "TaskOwner"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Current User",
+        "name": "CurrentUser"
+      },
+      {
         "type": "label",
         "position": "center",
         "label": "Action"
       }
     ],
     "querystring": {
-      "select": "SELECT C.PROD_OFFERING_CODE AS ProdOfferingCode, C.PROD_OFFERING_NAME AS ProdOfferingName, B.REQUEST_DT AS RequestDt, D.PROD_OFFERING_VERSION AS CurrentVersion, B.PROD_OFFERING_VERSION AS DraftVersion, B.START_DT AS StartDt, B.END_DT AS EndDt,C.PROD_OFFERING_ID AS ProdOfferingId, B.PROD_OFFERING_H_ID AS ProdOfferingHId",
+      "select": "SELECT A.REQUEST_DATE AS ReqDt, C.PROD_OFFERING_CODE AS ProdOfferingCode, C.PROD_OFFERING_NAME AS ProdOfferingName, D.PROD_OFFERING_VERSION AS CurrentVersion, B.PROD_OFFERING_VERSION AS DraftVersion, B.START_DT AS StartDt, B.END_DT AS EndDt,C.PROD_OFFERING_ID AS ProdOfferingId, B.PROD_OFFERING_H_ID AS ProdOfferingHId, A.STATUS AS ReqType, A.APV_NO AS ApvNo, A.REQUEST_BY AS ReqBy, A.MAIN_USERNAME AS TaskOwner, A.USERNAME AS CurrentUser",
       "from": "FROM dbo.APPROVAL_TASK_MAPPER A WITH(NOLOCK) JOIN dbo.PROD_OFFERING_H B WITH(NOLOCK) ON A.TRX_NO = B.PROD_OFFERING_H_ID JOIN dbo.PROD_OFFERING C WITH(NOLOCK) ON B.PROD_OFFERING_ID = C.PROD_OFFERING_ID LEFT JOIN PROD_OFFERING_H D WITH(NOLOCK) ON C.CURRENT_PROD_OFFERING_H_ID = D.PROD_OFFERING_H_ID"
     },
     "bodyList": [
+      {
+        "type": "date",
+        "position": "center",
+        "property": "ReqDt"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ReqType"
+      },
       {
         "type": "text",
         "position": "center",
@@ -98,11 +138,6 @@
         "type": "text",
         "position": "center",
         "property": "ProdOfferingName"
-      },
-      {
-        "type": "date",
-        "position": "center",
-        "property": "RequestDt"
       },
       {
         "type": "text",
@@ -125,6 +160,26 @@
         "property": "EndDt"
       },
       {
+        "type": "text",
+        "position": "center",
+        "property": "ApvNo"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ReqBy"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "TaskOwner"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "CurrentUser"
+      },
+      {
         "type": "action",
         "position": "center",
         "action": [
@@ -136,10 +191,6 @@
               {
                 "type": "ProdOfferingHId",
                 "property": "ProdOfferingHId"
-              },
-              {
-                "type": "ProdOfferingId",
-                "property": "ProdOfferingId"
               }
             ]
           }

@@ -17,8 +17,6 @@ import { RefProductOfferingDetailObj } from "../../../shared/model/RefProductOff
   providers: [DecimalPipe, NGXToastrService]
 })
 export class ProductOfferingViewComponent implements OnInit {
-
-  @Input() inputProdOfferingId;
   @Input() inputProdOfferingHId;
 
   prodOfferingHId: any;

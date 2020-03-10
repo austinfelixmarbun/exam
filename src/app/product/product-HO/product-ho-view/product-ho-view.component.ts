@@ -20,7 +20,6 @@ import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
 })
 export class ProductHOViewComponent implements OnInit {
 
-  @Input() inputProdId;
   @Input() inputProdHId;
 
   prodHId: any;
