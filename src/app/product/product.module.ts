@@ -22,6 +22,8 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from "angular-archwizard";
+import { ListOfficeMemberComponent } from './product-HO/product-ho-adddetail/office-member/list-office-member/list-office-member.component';
+import { SearchOfficeComponent } from './product-HO/product-ho-adddetail/office-member/search-office/search-office.component';
 
 @NgModule({
     imports: [
@@ -51,6 +53,8 @@ import { ArchwizardModule } from "angular-archwizard";
         GeneralDataComponent,
         ProductComponentComponent,
         OfficeMemberComponent,
+        ListOfficeMemberComponent,
+        SearchOfficeComponent
     ]
   })
 

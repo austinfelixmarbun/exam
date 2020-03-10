@@ -32,11 +32,7 @@ import { SearchOfficeComponent } from './office-member/search-office/search-offi
         ProductHOAddDetailRoutingModule,
         ArchwizardModule
     ],
-    declarations: [
-        
-    ListOfficeMemberComponent,
-        
-    SearchOfficeComponent],
+    declarations: [],
     
     providers: [],
 

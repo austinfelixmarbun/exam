@@ -1,2 +1,2 @@
-<app-list-office-member></app-list-office-member>
-<app-search-office></app-search-office>
+<app-list-office-member *ngIf="isOn" [ListOfficeMemberObjInput]="ListOfficeMemberObj" (componentIsOn)="ChangeComponent($event)"></app-list-office-member>
+<app-search-office *ngIf="!isOn" [ListOfficeMemberObjInput]="ListOfficeMemberObj" (componentIsOn)="ChangeComponent($event)"></app-search-office>

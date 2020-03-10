@@ -387,10 +387,13 @@ export class AdInsConstant {
   public static GetListActiveAssetType = "/AssetType/GetListActiveAssetType"
   public static DeleteAssetType = "/AssetType/DeleteAssetType"
   // PRODUCT
-  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
-  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
-  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
-  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
+  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
+  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
+  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
+  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
+  public static AddProductOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProductOfficeMbrBatch";
+  public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId";
+  public static DeleteProductOfficeMbr = environment.FoundationR3Url + "/Product/DeleteProductOfficeMbr";
 
 
   public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
