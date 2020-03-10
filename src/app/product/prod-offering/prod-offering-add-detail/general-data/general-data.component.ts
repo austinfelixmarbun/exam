@@ -57,7 +57,7 @@ export class GeneralDataComponent implements OnInit {
   UrlBackEnd;
 
   lookupEnvironment;
-
+  resultData;
   lengthDataReturnObj
   listRefProductDetailObj;
   refProductDetailObj;
@@ -75,64 +75,110 @@ export class GeneralDataComponent implements OnInit {
     // Get Data Input 
     // mode add
     // if(this.objInput.mode == "add"){
-      this.UrlBackEnd = AdInsConstant.GetProductOfferingComponent;
-      var ProdOfferingComponent = {
-        GroupCodes: [
-          "GEN"
-        ],
-        RowVersion: ""
-      }
-  
-      this.items = this.RefGeneralDataForm.get('items') as FormArray;
-      this.http.post(this.UrlBackEnd, ProdOfferingComponent).subscribe(
-        (response) => {
-          // console.log(response);
-          // console.log(response["ReturnObject"].length);
-          this.lengthDataReturnObj = response["ReturnObject"].length;
-  
-          if (this.lengthDataReturnObj) {
-            for (var i = 0; i < this.lengthDataReturnObj; i++) {
-              var eachDataDetail = this.fb.group({
-                ProdOfferingDId: response["ReturnObject"][i].ProdOfferingDId,
-                ProdOfferingHId: response["ReturnObject"][i].ProdOfferingHId,
-                RefProdCompntCode: response["ReturnObject"][i].RefProdCompntCode,
-                RefProdCompntGrpCode: response["ReturnObject"][i].RefProdCompntGrpCode,
-                CompntValue: response["ReturnObject"][i].CompntValue,
-                CompntValueDesc: response["ReturnObject"][i].CompntValueDesc,
-                MrProdBehaviour: response["ReturnObject"][i].BehaviourType,
-                RowVersion: response["ReturnObject"][i].RowVersion,
-                ProdCompntType: response["ReturnObject"][i].ProdCompntType,
-                BehaviourType: response["ReturnObject"][i].BehaviourType,
-                ProdCompntDtaSrcApi: response["ReturnObject"][i].ProdCompntDtaSrcApi,
-                ProdCompntDtaSrc: response["ReturnObject"][i].ProdCompntDtaSrc,
-                ProdCompntDtaValue: response["ReturnObject"][i].ProdCompntDtaValue,
-                ProdCompntName: response["ReturnObject"][i].ProdCompntName,
-                DropDownList: this.fb.array([this.fb.group({
-                  indexOf: i,
-                  Key: "",
-                  Value: ""
-                })])
-              }) as FormGroup;
+    console.log('test');
+    console.log(this.objInput["param"]);
+    this.UrlBackEnd = AdInsConstant.GetProductOfferingComponent;
+    var ProdOfferingComponent = {
+      ProdOfferingHId: this.objInput["param"],
+      GroupCodes: [
+        "GEN"
+      ],
+      RowVersion: ""
+    }
+    this.items = this.RefGeneralDataForm.get('items') as FormArray;
+    this.http.post(AdInsConstant.GetProdOfferingDetailInfo, ProdOfferingComponent).subscribe(
+      (response) => {
+        // console.log(response);
+        // console.log(response["ReturnObject"].length);
+        this.lengthDataReturnObj = response["ReturnObject"].length;
+
+        if (this.lengthDataReturnObj) {
+          for (var i = 0; i < this.lengthDataReturnObj; i++) {
+            var eachDataDetail = this.fb.group({
+              ProdOfferingDId: response["ReturnObject"][i].ProdOfferingDId,
+              ProdOfferingHId: response["ReturnObject"][i].ProdOfferingHId,
+              RefProdCompntCode: response["ReturnObject"][i].RefProdCompntCode,
+              RefProdCompntGrpCode: response["ReturnObject"][i].RefProdCompntGrpCode,
+              CompntValue: response["ReturnObject"][i].CompntValue,
+              CompntValueDesc: response["ReturnObject"][i].CompntValueDesc,
+              MrProdBehaviour: response["ReturnObject"][i].BehaviourType,
+              RowVersion: response["ReturnObject"][i].RowVersion,
+              ProdCompntType: response["ReturnObject"][i].ProdCompntType,
+              BehaviourType: response["ReturnObject"][i].BehaviourType,
+              ProdCompntDtaSrcApi: response["ReturnObject"][i].ProdCompntDtaSrcApi,
+              ProdCompntDtaSrc: response["ReturnObject"][i].ProdCompntDtaSrc,
+              ProdCompntDtaValue: response["ReturnObject"][i].ProdCompntDtaValue,
+              ProdCompntName: response["ReturnObject"][i].ProdCompntName,
+              DropDownList: this.fb.array([this.fb.group({
+                indexOf: i,
+                Key: "",
+                Value: ""
+              })])
+            }) as FormGroup;
             // Get DDL
-            if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
+
+            // Push Data
+            this.items.push(eachDataDetail);
+          }
+        }
+        this.items.removeAt(0);
+        console.log("cek form");
+        console.log(this.RefGeneralDataForm);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    this.items = this.RefGeneralDataForm.get('items') as FormArray;
+    this.http.post(this.UrlBackEnd, ProdOfferingComponent).subscribe(
+      (response) => {
+        // console.log(response);
+        // console.log(response["ReturnObject"].length);
+        this.lengthDataReturnObj = response["ReturnObject"].length;
+
+        if (this.lengthDataReturnObj) {
+          for (var i = 0; i < this.lengthDataReturnObj; i++) {
+            var eachDataDetail = this.fb.group({
+              ProdOfferingDId: response["ReturnObject"][i].ProdOfferingDId,
+              ProdOfferingHId: response["ReturnObject"][i].ProdOfferingHId,
+              RefProdCompntCode: response["ReturnObject"][i].RefProdCompntCode,
+              RefProdCompntGrpCode: response["ReturnObject"][i].RefProdCompntGrpCode,
+              CompntValue: response["ReturnObject"][i].CompntValue,
+              CompntValueDesc: response["ReturnObject"][i].CompntValueDesc,
+              MrProdBehaviour: response["ReturnObject"][i].BehaviourType,
+              RowVersion: response["ReturnObject"][i].RowVersion,
+              ProdCompntType: response["ReturnObject"][i].ProdCompntType,
+              BehaviourType: response["ReturnObject"][i].BehaviourType,
+              ProdCompntDtaSrcApi: response["ReturnObject"][i].ProdCompntDtaSrcApi,
+              ProdCompntDtaSrc: response["ReturnObject"][i].ProdCompntDtaSrc,
+              ProdCompntDtaValue: response["ReturnObject"][i].ProdCompntDtaValue,
+              ProdCompntName: response["ReturnObject"][i].ProdCompntName,
+              DropDownList: this.fb.array([this.fb.group({
+                indexOf: i,
+                Key: "",
+                Value: ""
+              })])
+            }) as FormGroup;
+            // Get DDL
+            if (eachDataDetail.controls.ProdCompntType.value == "DDL") {
               this.resolveDDL(eachDataDetail, i);
             }
-              // Push Data
-              this.items.push(eachDataDetail);
-            }
+            // Push Data
+            this.items.push(eachDataDetail);
           }
-          this.items.removeAt(0);
-          console.log("cek form");
-          console.log(this.RefGeneralDataForm);
-        },
-        (error) => {
-          console.log(error);
         }
-      );
+        this.items.removeAt(0);
+        console.log("cek form");
+        console.log(this.RefGeneralDataForm);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     // }else{ // mode edit
 
     // }
-    
+
   }
 
   resolveDDL(obj: any, indexAt: any) {
@@ -152,7 +198,7 @@ export class GeneralDataComponent implements OnInit {
         (response) => {
           // console.log(response);
           var lengthDDL = response["ReturnObject"].length;
-          if(lengthDDL > 0){
+          if (lengthDDL > 0) {
             for (var i = 0; i < lengthDDL; i++) {
               var eachDDLDetail = this.fb.group({
                 indexOf: indexAt,
@@ -177,7 +223,7 @@ export class GeneralDataComponent implements OnInit {
     }
   }
 
-  clickTest(ev: any, idx: any){
+  clickTest(ev: any, idx: any) {
     // console.log(idx);
     // console.log(ev.target.selectedOptions[0].text);
     // console.log(ev.target.selectedOptions[0].value);
@@ -189,14 +235,14 @@ export class GeneralDataComponent implements OnInit {
 
     console.log(this.RefGeneralDataForm);
   }
-  
+
   listGeneralDataObj;
-  SaveForm(){
+  SaveForm() {
     this.listGeneralDataObj = new ListRefProductOfferingDetailObj();
     this.listGeneralDataObj.ProductDetails = new Array();
-    this.listGeneralDataObj.ProdHId = this.objInput["param"];
+    this.listGeneralDataObj.ProdOfferingHId = this.objInput["param"];
     this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
-    for(var i = 0; i < this.lengthDataReturnObj; i++){
+    for (var i = 0; i < this.lengthDataReturnObj; i++) {
       var GeneralDataObj = new this.refProductDetailObj();
       GeneralDataObj.ProdOfferingDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdOfferingDId.value;
       GeneralDataObj.ProdOfferingHId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdOFferingHId.value;
@@ -206,21 +252,21 @@ export class GeneralDataComponent implements OnInit {
       GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
       GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
       GeneralDataObj.RowVersion = this.RefGeneralDataForm.controls.items["controls"][i].controls.RowVersion.value;
-      this.listGeneralDataObj.ProductDetails.push(GeneralDataObj); 
-  }
-
-  this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
-    (response) => {
-      console.log(response);
-      this.toastr.successMessage(response["message"]);
-      this.router.navigate(["/Product/prod-offering/paging"]);
-    },
-    (error) => {
-      console.log(error);
+      this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
     }
-  );
-}
-  NextDetail(){
+
+    this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
+      (response) => {
+        console.log(response);
+        this.toastr.successMessage(response["message"]);
+        this.router.navigate(["/Product/prod-offering/paging"]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  NextDetail() {
     this.wizard.goToNextStep();
   }
 

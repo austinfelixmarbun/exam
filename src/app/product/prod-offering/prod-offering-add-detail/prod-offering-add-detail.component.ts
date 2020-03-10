@@ -17,12 +17,12 @@ export class ProdOfferingAddDetailComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private fb:FormBuilder, private toastr: NGXToastrService) { 
     this.route.queryParams.subscribe(params => {
-      console.log("param: ");
-      console.log(params);
-      if (params["ProdOfferingHId"] != null) {
-        this.param = params["ProdOfferingHId"];
-      }
-      console.log(this.param);
+      // console.log("param: ");
+      // console.log(params);
+      
+      this.objPassing["param"] = params["ProdOfferingHId"];
+      this.objPassing["mode"] = params["mode"];
+      this.objPassing["url"] = AdInsConstant.GetProdOfferingDetailInfo;
       this.key = params["key"];
     })
   }
@@ -32,6 +32,8 @@ export class ProdOfferingAddDetailComponent implements OnInit {
   prodOfferingObj : ProdOfferingObj;
   resultData : any;
   ProdOfferingHId: any;
+
+  objPassing: any = {};
 
   ProdOfferingForm = this.fb.group({
     ProdName: [''],
@@ -45,7 +47,7 @@ export class ProdOfferingAddDetailComponent implements OnInit {
 
   ngOnInit() {
     var prodOfferingObj = new ProdOfferingObj();
-    prodOfferingObj.ProdOfferingHId = this.param;
+    prodOfferingObj.ProdOfferingHId = this.objPassing.param;
     this.http.post(AdInsConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
       (response) => {
         this.resultData=response;
