@@ -84,13 +84,15 @@ export class ProductOfferingViewComponent implements OnInit {
     //** Product Component **//
     this.refProductDetailObj = new RefProductOfferingDetailObj;
     this.refProductDetailObj.ProdOfferingHId = this.prodOfferingHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = ['SCHM', 'SCORE', 'RULE', 'OTHR'];
+    this.refProductDetailObj.RefProdCompntGrpCode = ['GEN','SCHM', 'SCORE', 'RULE', 'OTHR'];
     this.http.post(this.ProdOfferingDUrl, this.refProductDetailObj).subscribe(
       response => {
         console.log("Response: ");
         console.log(response);
         this.ProdComp = response['ReturnObject'];
 
+        this.GenData = this.ProdComp.filter(
+          comp => comp.RefProdCompntGrpCode === 'GEN');
         this.ProdCompSchm = this.ProdComp.filter(
           comp => comp.RefProdCompntGrpCode === 'SCHM');
         this.ProdCompScore = this.ProdComp.filter(
