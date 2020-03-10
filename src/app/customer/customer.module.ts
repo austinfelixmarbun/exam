@@ -17,6 +17,9 @@ import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/cus
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
 import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
+import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
+import { ArchwizardModule } from 'angular-archwizard';
+import { CustomerPersonalDetailComponent } from './customer-personal/customer-personal-detail/customer-personal-detail.component';
 @NgModule({
   exports: [ 
   ],
@@ -34,12 +37,12 @@ import { CustomerCompanyMainInfoComponent } from './customer-company/customer-co
     UcpagingModule,
     ReactiveFormsModule,
     UclookupgenericModule,
-    UcSubsectionModule
-    // ArchwizardModule
+    UcSubsectionModule, 
+     ArchwizardModule
   ],
   declarations: [ 
     CustomerPagingComponent, 
-    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent
+    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent
   ]
 })
 export class CustomerModule { 
