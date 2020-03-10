@@ -17,34 +17,9 @@
         </div>
         <div class="card-body">
           <div class="px-3">
-            <lib-ucSubsection [id]="'MainInformationId'" [title]="'Main Information'" [panel]="'MainInformation'">
-            </lib-ucSubsection>
-            <div class="form-body" id="MainInformation">
+            <div class="form-body">
               <div class="form-group row">
-                <div class="col-md-3">
-                  <label class="adInsLabel" name="AssetSchmCode" translate>Asset Scheme Code </label>
-                </div>
-                <div class="col-md-3">
-                  <label class="adInsLabel" name="AssetSchmCodeValue" translate>{{AssetSchmCode}}</label>
-                </div>
-                <div class="col-md-3">
-                  <label class="adInsLabel" name="AssetSchmName" translate>Asset Scheme Name </label>
-                </div>
-                <div class="col-md-3">
-                  <label class="adInsLabel" name="AssetSchmNameValue" translate>{{AssetSchmName}}</label>
-                </div>
-                <div class="col-md-3">
-                  <label class="adInsLabel" name="AssetTypeName" translate>Asset Type Name </label>
-                </div>
-                <div class="col-md-3">
-                  <label class="adInsLabel" name="AssetTypeNameValue" translate>{{AssetTypeName}}</label>
-                </div>
-                <div class="col-md-3">
-                  <label class="adInsLabel" name="IsActive" translate>Active Status </label>
-                </div>
-                <div class="col-md-3">
-                  <label class="adInsLabel" name="IsActiveValue" translate>{{IsActive}}</label>
-                </div>
+                <lib-ucviewgeneric [viewInput]="viewObj"></lib-ucviewgeneric>
               </div>
             </div>
           </div>
@@ -56,7 +31,7 @@
 <form class="form form-horizontal" name="AssetSchmForm" #AssetSchmForm="ngForm" novalidate
   (ngSubmit)="SaveAssetSchmMember(AssetSchmForm)">
   <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
-  <!-- <div [hidden]="resultData?.data == null || resultData?.data.length == 0"> -->
+  <div [hidden]="resultData == null">
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
@@ -104,10 +79,7 @@
       </button>
     </div>
   </div>
-  <!-- </div> -->
 
-  <!-- <div *ngIf="pageType === 'edit'" [hidden]="tempData == null || tempData.length == 0 "> -->
-    <div>
     <table class="table table-responsive-md text-center table-hover">
       <thead>
         <tr class="table-header">
@@ -126,8 +98,8 @@
           <td class="text-left">{{item.FullAssetCode}}</td>
           <td class="text-left">{{item.FullAssetName}}</td>
           <td class="text-left">{{item.AssetCategoryName}}</td>
-          <td *ngIf="item.IsActive === 'true'">Yes</td>
-          <td *ngIf="item.IsActive === 'false'">No</td>
+          <td *ngIf="item.IsActive === true">Yes</td>
+          <td *ngIf="item.IsActive === false">No</td>
           <td>
             <a class="danger p-0" data-original-title="" title="" (click)="deleteFromTemp(item.AssetMasterId)">
               <i class="ft-trash-2 font-medium-3 mr-2"></i>
@@ -143,5 +115,5 @@
         </button>
       </div>
     </div>
-  </div>
+    </div>
 </form>

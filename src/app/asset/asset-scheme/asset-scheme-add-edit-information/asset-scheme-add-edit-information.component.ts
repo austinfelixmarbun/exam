@@ -15,10 +15,10 @@ import { environment } from 'environments/environment';
 })
 export class AssetSchemeAddEditInformationComponent implements OnInit {
   AssetSchemeInfoForm = this.fb.group({
-    AssetSchmCode : ['',Validators.required],
-    AssetSchmName : ['',Validators.required],
-    AssetTypeId  : [''],
-    IsActive : ['']
+    AssetSchmCode: ['', Validators.required],
+    AssetSchmName: ['', Validators.required],
+    AssetTypeId: [''],
+    IsActive: ['']
   });
   pageType: string = "add";
   assetSchmHObj: any;
@@ -33,10 +33,10 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
   AssetSchmCode: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getUrl = environment.FoundationR3Url + AdInsConstant.GetAssetSchmHById;
-    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddAssetSchmH;
-    this.editUrl = environment.FoundationR3Url + AdInsConstant.EditAssetSchmH;
-    this.getAssetTypeUrl = environment.FoundationR3Url + AdInsConstant.GetListActiveAssetType;
+    this.getUrl = AdInsConstant.GetAssetSchmHById;
+    this.addUrl = AdInsConstant.AddAssetSchmH;
+    this.editUrl = AdInsConstant.EditAssetSchmH;
+    this.getAssetTypeUrl = AdInsConstant.GetListActiveAssetType;
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -47,43 +47,47 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       }
     });
 
-   }
+  }
 
   ngOnInit() {
     var assetTypeObj = {
-      RefMasterTypeCode:"ASSET_TYPE_ID",
-      RowVersion:""
+      RefMasterTypeCode: "ASSET_TYPE_ID",
+      RowVersion: ""
     }
     console.log(this.AssetSchemeInfoForm);
     this.http.post(this.getAssetTypeUrl, assetTypeObj).subscribe(
       (response) => {
-          this.ItemAssetType = response["ReturnObject"];
-          console.log('isi asset obj');
-          console.log(this.ItemAssetType);
+        this.ItemAssetType = response["ReturnObject"];
+        console.log('isi asset obj');
+        console.log(this.ItemAssetType);
+
+        if (this.pageType == "add") {
           this.AssetSchemeInfoForm.patchValue({
             AssetTypeId: this.ItemAssetType[0].AssetTypeId,
-            IsActive : true
+            IsActive: true
           });
+        }
+
       }
     );
 
     if (this.pageType == "edit") {
       this.assetSchmHObj = new AssetSchemeHObj();
-      
+
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.AssetSchemeInfoForm.controls["AssetSchmCode"].disable();
-      
+
       this.http.post(this.getUrl, this.assetSchmHObj).subscribe(
         response => {
           this.resultData = response;
           this.RowVersion = this.resultData.RowVersion;
 
           this.AssetSchemeInfoForm.patchValue({
-            AssetSchmCode : this.resultData.AssetSchmCode,
-            AssetSchmName : this.resultData.AssetSchmName,
-            AssetTypeId : this.resultData.AssetTypeId,
-            IsActive : this.resultData.IsActive,
-           
+            AssetSchmCode: this.resultData.AssetSchmCode,
+            AssetSchmName: this.resultData.AssetSchmName,
+            AssetTypeId: this.resultData.AssetTypeId,
+            IsActive: this.resultData.IsActive,
+
           });
           this.AssetSchmCode = this.resultData.AssetSchmCode;
         },
@@ -92,17 +96,17 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
         }
       );
     }
-    
+
   }
 
   SaveForm() {
     this.assetSchmHObj = new AssetSchemeHObj();
     this.assetSchmHObj = this.AssetSchemeInfoForm.value;
-      
-    if(!this.assetSchmHObj.IsActive || this.assetSchmHObj.IsActive == ""){
+
+    if (!this.assetSchmHObj.IsActive || this.assetSchmHObj.IsActive == "") {
       this.assetSchmHObj.IsActive = false;
     }
-    else{
+    else {
       this.assetSchmHObj.IsActive = true;
     }
 
@@ -114,8 +118,8 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
 
       this.http.post(this.addUrl, this.assetSchmHObj).subscribe(
         response => {
-            this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/Asset/Scheme/Paging"]);
+          this.toastr.successMessage(response["Message"]);
+          this.router.navigate(["/Asset/Scheme/Paging"]);
         },
         error => {
           console.log(error);

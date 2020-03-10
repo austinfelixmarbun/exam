@@ -388,7 +388,7 @@ export class AdInsConstant {
   public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById"
   public static GetListAssetType = environment.FoundationR3Url + "/AssetType/GetListAssetType"
   public static GetListActiveAssetType = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType"
-  public static DeleteAssetType = environment.FoundationR3Url + "/AssetType/DeleteAssetType"
+  public static DeleteAssetType = "/AssetType/DeleteAssetType"
   // PRODUCT
   public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
   public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
@@ -456,13 +456,13 @@ export class AdInsConstant {
    
   //Asset Scheme
   public static GetAssetSchmHById =   environment.FoundationR3Url + "/AssetSchmH/GetAssetSchmHById";
-  public static AddAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/AddAssetScyId";
+  public static AddAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/AddAssetSchmH";
   public static EditAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmH";
   public static GetListAssetSchmDByAssetSchmHId = "http://localhost:5000" + "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
   public static EditAssetSchmHAndD = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmHAndD"
   public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
   public static AddListAssetSchmD =  "http://localhost:5000"  + "/AssetSchmD/AddListAssetSchmD";
-  
+  public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
 
