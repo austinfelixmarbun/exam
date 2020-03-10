@@ -11,12 +11,12 @@
           <tr class="table-header">
             <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll"
                 name="CheckAll"></th>
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
+            <th><span translate class="thead-header" (click)="searchSort($event)"
                 name='VendorCode'>Vendor Code</span></th>
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
+            <th><span translate class="thead-header" (click)="searchSort($event)"
                 name='VendorName'>Vendor Name</span></th>
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                name='ActiveStatus'>Active Status</span></th>
+            <th><span translate class="thead-header" (click)="searchSort($event)"
+                name='IsActive'>Active Status</span></th>
           </tr>
         </thead>
         <tbody>
@@ -31,9 +31,10 @@
                   (change)="Checked(item.VendorId,  $event.target.checked)" [checked]=false>
               </div>
             </td>
-            <td class="text-left">{{item.VendorCode}}</td>
-            <td class="text-left">{{item.VendorName}}</td>
-            <td class="text-left">{{item.IsActive}}</td>
+            <td>{{item.VendorCode}}</td>
+            <td>{{item.VendorName}}</td>
+            <td *ngIf="item.IsActive === true">Yes</td>
+            <td *ngIf="item.IsActive === false">No</td>
           </tr>
         </tbody>
       </table>
@@ -54,7 +55,7 @@
             </th>
             <th><span translate class="thead-header" (click)="searchSort($event)" name='VendorName'>Vendor Name</span>
             </th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='ActiveStatus'>Active Status</span></th>
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='IsActive'>Active Status</span></th>
             <th translate>Delete</th>
           </tr>
         </thead>
@@ -62,7 +63,8 @@
           <tr *ngFor="let item of tempData">
             <td>{{item.VendorCode}}</td>
             <td>{{item.VendorName}}</td>
-            <td>{{item.IsActive}}</td>
+            <td *ngIf="item.IsActive === true">Yes</td>
+            <td *ngIf="item.IsActive === false">No</td>
             <td>
               <div>
                 <a class="danger p-0" data-original-title="" title="" (click)="deleteFromTemp(item.VendorId)">
@@ -75,10 +77,10 @@
       <div class="card-header">
         <div class="text-right">
           <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/VendorScheme/Member']"
-            [queryParams]="{VendorSchmId:VendorSchmId}" translate>
+            [queryParams]="{VendorSchmId:VendorSchmId,MrVendorCategoryCode:MrVendorCategoryCode}" translate>
             <i class="fa fa-arrow-circle-left"></i> Back
           </button>
-          <button type="submit" (click)="SaveVendorMember()" class="btn btn-raised btn-primary" translate>
+          <button type="submit" (click)="SaveVendorSchemeMember()" class="btn btn-raised btn-primary" translate>
             <i class="far"></i> Submit
           </button>
         </div>

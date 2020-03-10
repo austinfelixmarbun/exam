@@ -56,9 +56,9 @@
         }
     ],
     "querystring": {
-        "select": "SELECT vs.VENDOR_SCHM_CODE AS VendorSchmCode, vs.VENDOR_SCHM_NAME AS VendorSchmName, vs.VENDOR_SCHM_ID AS VendorSchmId, vs.IS_ACTIVE AS IsActive, COUNT(vsm.VENDOR_SCHM_MBR_ID) AS NumMember",
-        "from": "FROM VENDOR_SCHM vs JOIN VENDOR_SCHM_MBR vsm ON vsm.VENDOR_SCHM_ID = vs.VENDOR_SCHM_ID",
-        "groupby": "GROUP BY vs.VENDOR_SCHM_CODE,  vs.VENDOR_SCHM_CODE, vs.VENDOR_SCHM_NAME, vs.IS_ACTIVE, vs.VENDOR_SCHM_ID, vsm.VENDOR_ID"
+        "select": "SELECT vs.VENDOR_SCHM_CODE AS VendorSchmCode, vs.VENDOR_SCHM_NAME AS VendorSchmName, vs.VENDOR_SCHM_ID AS VendorSchmId, vs.IS_ACTIVE AS IsActive, COUNT(vsm.VENDOR_SCHM_MBR_ID) AS NumMember, vs.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode",
+        "from": "FROM VENDOR_SCHM vs LEFT JOIN VENDOR_SCHM_MBR vsm ON vsm.VENDOR_SCHM_ID = vs.VENDOR_SCHM_ID",
+        "groupby": "GROUP BY vs.VENDOR_SCHM_CODE,  vs.VENDOR_SCHM_CODE, vs.VENDOR_SCHM_NAME, vs.IS_ACTIVE, vs.VENDOR_SCHM_ID, vsm.VENDOR_ID, vs.MR_VENDOR_CATEGORY_CODE"
     },
     "headerList": [
         {
@@ -128,6 +128,10 @@
                         {
                             "type": "VendorSchmId",
                             "property": "VendorSchmId"
+                        },
+                        {
+                            "type": "MrVendorCategoryCode",
+                            "property": "MrVendorCategoryCode"
                         }
                     ]
                 }

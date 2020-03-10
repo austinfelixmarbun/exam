@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "v.VENDOR_CODE",
+            "name": "VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
             "label": "Vendor Code",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "v.VENDOR_NAME",
+            "name": "VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
             "label": "Vendor Name",
@@ -19,7 +19,7 @@
         },
         {
             "type": "dropdown",
-            "name": "v.IS_ACTIVE",
+            "name": "IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -40,8 +40,8 @@
         }
     ],
     "querystring": {
-        "select": "SELECT v.VENDOR_CODE AS VendorCode, v.VENDOR_NAME AS VendorName, v.IS_ACTIVE AS IsActive, vsm.VENDOR_SCHM_MBR_ID AS VendorSchmMbrId, v.VENDOR_ID AS VendorId",
-        "from": "FROM dbo.VENDOR v JOIN dbo.VENDOR_SCHM_MBR vsm ON vsm.VENDOR_ID = v.VENDOR_ID LEFT JOIN dbo.VENDOR_SCHM vs ON vs.VENDOR_SCHM_ID = vsm.VENDOR_SCHM_ID"
+        "select": "SELECT VENDOR_CODE AS VendorCode, VENDOR_NAME AS VendorName, IS_ACTIVE AS IsActive, VENDOR_ID AS VendorId, MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode",
+        "from": "FROM dbo.VENDOR"
     },
     "headerList": [
         {

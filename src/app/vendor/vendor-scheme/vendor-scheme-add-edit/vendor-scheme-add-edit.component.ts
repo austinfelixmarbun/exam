@@ -61,8 +61,9 @@ export class VendorSchemeAddEditComponent implements OnInit {
       if (this.mode == "edit") {
           this.vendorSchemeObj = new VendorSchemeObj();
           this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
+          this.VendorSchmForm.controls.MrVendorCategoryCode.disable();
           this.VendorSchmForm.controls.VendorSchmCode.disable();
-          this.http.post(AdInsConstant.GetVendorScheme, this.vendorSchemeObj).subscribe(
+          this.http.post(AdInsConstant.GetVendorSchmByVendorSchmId, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.result = response;
                   this.VendorSchmForm.patchValue({
@@ -85,10 +86,11 @@ export class VendorSchemeAddEditComponent implements OnInit {
       this.vendorSchemeObj = new VendorSchemeObj();
       this.vendorSchemeObj = this.VendorSchmForm.value;
       if (this.mode == "edit") {
+          this.vendorSchemeObj.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
           this.vendorSchemeObj.VendorSchmCode = this.result.VendorSchmCode;
           this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
           
-          this.http.post(AdInsConstant.EditVendorScheme, this.vendorSchemeObj).subscribe(
+          this.http.post(AdInsConstant.EditVendorSchm, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
                   this.router.navigateByUrl('/Vendor/VendorScheme/Paging');
@@ -99,7 +101,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
       }
       else {
           this.vendorSchemeObj.VendorSchmId = "0";
-          this.http.post(AdInsConstant.AddVendorScheme, this.vendorSchemeObj).subscribe(
+          this.http.post(AdInsConstant.AddVendorSchm, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
                   this.router.navigateByUrl('/Vendor/VendorScheme/Paging');

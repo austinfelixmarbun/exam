@@ -37,16 +37,18 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   Data = [];
   VendorSchmId: any;
   vendorSchmObj: any;
+  MrVendorCategoryCode: any;
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr:NGXToastrService) {
       this.route.queryParams.subscribe(params => {
         this.VendorSchmId  = params['VendorSchmId'];
+        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       });
     }
 
   ngOnInit() {
-    //this.GetListCenterGrpMemberByRefOfficeId();
+    this.GetListVendorSchmMemberByVendorSchmId();
 
     this.arrCrit = new Array();
 
@@ -64,26 +66,15 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     this.pageSize = 10;
     this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
 
-    // this.inputObj.addCritInput = new Array();
-    // const addCritTypeOCode = new CriteriaObj();
-    // addCritTypeOCode.DataType = 'text';
-    // addCritTypeOCode.propName = 'RO.MR_OFFICE_TYPE_CODE';
-    // addCritTypeOCode.restriction = AdInsConstant.RestrictionNeq;
-    // addCritTypeOCode.value = this.MrOfficeTypeCode;
-    // this.arrCrit.push(addCritTypeOCode);
+    this.inputObj.addCritInput = new Array();
+    const addCritTypeCode = new CriteriaObj();
+    addCritTypeCode.DataType = 'text';
+    addCritTypeCode.propName = 'MR_VENDOR_CATEGORY_CODE';
+    addCritTypeCode.restriction = AdInsConstant.RestrictionEq;
+    addCritTypeCode.value = this.MrVendorCategoryCode;
+    this.arrCrit.push(addCritTypeCode);
 
-    // const addCritIsActive = new CriteriaObj();
-    // addCritIsActive.DataType = 'boolean';
-    // addCritIsActive.propName = 'RO.IS_ACTIVE';
-    // addCritIsActive.restriction = AdInsConstant.RestrictionEq;
-    // addCritIsActive.value = "true";
-    // this.arrCrit.push(addCritIsActive);
-
-    // this.inputObj.addCritInput.push(addCritTypeOCode);
-    // this.inputObj.addCritInput.push(addCritIsActive);
-
-
-    console.log(this.inputObj);
+    this.inputObj.addCritInput.push(addCritTypeCode);
 
     this.pageNow = 1;
     this.pageSize = 10;
@@ -131,7 +122,6 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   }
 
   getResult(event) {
-    console.log("Ini get Result")
     this.resultData = event.response;
     this.totalData = event.response.Count;
     this.UCGridFooter.pageNow = event.pageNow;
@@ -170,7 +160,6 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   }
 
   addToTemp() {
-    console.log("ni add to temp kepencet")
     if (this.listSelectedId.length != 0) {
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
@@ -188,7 +177,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       }
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
-      addCrit.propName = "v.VENDOR_ID";
+      addCrit.propName = "vENDOR_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.tempListId;
       this.arrAddCrit.push(addCrit);
@@ -224,7 +213,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       }
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
-      addCrit.propName = "v.VENDOR_ID";
+      addCrit.propName = "VENDOR_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.tempListId;
       if (this.tempListId.length != 0) {
@@ -240,5 +229,52 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       this.inputObj.addCritInput = this.arrAddCrit;
       this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
     }
+  }
+
+  SaveVendorSchemeMember() {
+    var obj = {
+      VendorSchmId: this.VendorSchmId,
+      VendorId: this.tempListId
+    }
+
+    this.http.post(AdInsConstant.AddVendorSchmMember, obj).subscribe(
+        (response) => {
+            console.log(response);
+            this.router.navigate(['/Vendor/VendorScheme/Member'], {queryParams: {VendorSchmId:this.VendorSchmId}});
+        },
+        (error) => {
+            console.log(error);
+        });
+
+  }
+
+  GetListVendorSchmMemberByVendorSchmId() {
+    var obj = {
+      VendorSchmId: this.VendorSchmId 
+    }
+
+    this.http.post(AdInsConstant.GetListVendorSchmMemberByVendorSchmId, obj).subscribe(
+      (response) => {
+        this.vendorSchmObj = response;
+        var arrMemberList = new Array();
+
+        for (let index = 0; index < this.vendorSchmObj.ListVendorSchmMbr.length; index++) {
+           arrMemberList.push(this.vendorSchmObj.ListVendorSchmMbr[index].VendorId)
+        }
+        
+        if(arrMemberList.length != 0){
+          const addCritListVendorId = new CriteriaObj();
+          addCritListVendorId.DataType = "numeric";
+          addCritListVendorId.propName = "VENDOR_ID";
+          addCritListVendorId.restriction = AdInsConstant.RestrictionNotIn;
+          addCritListVendorId.listValue = arrMemberList;
+          this.arrCrit.push(addCritListVendorId);
+          this.inputObj.addCritInput.push(addCritListVendorId);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
