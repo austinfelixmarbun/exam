@@ -1,6 +1,6 @@
-export class RefProductDetailObj {
-  ProdDId: any;
-  ProdHId: any;
+export class RefProductOfferingDetailObj {
+  ProdOfferingDId: any;
+  ProdOfferingHId: any;
   RefProdCompntCode: any;
   RefProdCompntGrpCode: any;
   CompntValue: any;
@@ -8,5 +8,4 @@ export class RefProductDetailObj {
   MrProdBehaviourCode: any;
   RowVersion: any;
   GroupCodes: any;
-  constructor() { this.RowVersion = "" }
 }

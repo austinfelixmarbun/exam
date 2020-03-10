@@ -100,8 +100,8 @@
         <tbody>
           <tr *ngFor="let item of ProdVersion">
             <td class="text-left">{{item.ProdVersion}}</td>
-            <td class="text-left">{{item.StarDt}}</td>
-            <td class="text-left">{{item.EndDt}}</td>
+            <td class="text-left">{{item.StarDt | date}}</td>
+            <td class="text-left">{{item.EndDt | date}}</td>
             <td class="text-left">{{item.Descr}}</td>
           </tr>
         </tbody>
