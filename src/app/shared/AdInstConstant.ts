@@ -472,6 +472,11 @@ export class AdInsConstant {
   //VENDOR
   public static DeleteVendor ="/Vendor/DeleteVendor";
 
+  //VENDOR SCHEME
+  public static AddVendorScheme = environment.FoundationR3Url + "/VendorSchm/AddVendorSchm";
+  public static EditVendorScheme = environment.FoundationR3Url + "/VendorSchm/EditVendorSchm";
+  public static GetVendorScheme = environment.FoundationR3Url + "/VendorSchm/GetVendorSchmByVendorSchmId";
+
   // // ASSET NEGATIVE
   // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   // public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";

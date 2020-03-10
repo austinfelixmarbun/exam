@@ -12,6 +12,11 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
 import { BranchComponent } from './branch/branch.component';
+import { VendorSchemeAddEditComponent } from './vendor-scheme/vendor-scheme-add-edit/vendor-scheme-add-edit.component';
+import { VendorSchemePagingComponent } from './vendor-scheme/vendor-scheme-paging/vendor-scheme-paging.component';
+import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-paging/vendor-scheme-member-paging.component';
+import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-add/vendor-scheme-member-add.component';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
 
 
 @NgModule({
@@ -27,11 +32,16 @@ import { BranchComponent } from './branch/branch.component';
     UcpagingModule,
     UcSubsectionModule,
     ReactiveFormsModule,
-    TreeViewModule
+    TreeViewModule,
+    UcviewgenericModule,
   ],
   declarations: [
     VendorComponent,
-    BranchComponent
+    BranchComponent,
+    VendorSchemeAddEditComponent,
+    VendorSchemePagingComponent,
+    VendorSchemeMemberAddComponent,
+    VendorSchemeMemberPagingComponent
   ]
 })
 export class VendorModule { }
