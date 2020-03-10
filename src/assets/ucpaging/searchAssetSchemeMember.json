@@ -1,0 +1,173 @@
+{
+    "title": "Asset Scheme",
+    "exportExcel": true,
+    "component": [
+      {
+        "type": "textbox",
+        "name": "ASH.ASSET_SCHM_CODE",
+        "id": "AssetSchmCode",
+        "value": "",
+        "label": "Asset Scheme Code",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "textbox",
+        "name": "ASH.ASSET_SCHM_NAME",
+        "id": "AssetSchmName",
+        "value": "",
+        "label": "Asset Scheme Name",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "dropdown",
+        "name": "ATH.ASSET_TYPE_ID",
+        "id": "AssetTypeName",
+        "value": "",
+        "placeholder": "Placeholder",
+        "datatype": "text",
+        "isFromURL": true,
+        "isSelectOne": false,
+        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetType/GetListKeyValueActiveById",
+        "label": "Asset Type",
+        "items": [],
+        "itemsUrl": []
+      },
+      {
+        "type": "dropdown",
+        "name": "ASH.IS_ACTIVE",
+        "id": "IsActive",
+        "value": "Active Status",
+        "placeholder": "Placeholder",
+        "isFromURL": false,
+        "isSelectOne": false,
+        "url": "https://api.myjson.com/bins/ld6e8",
+        "label": "Active Status",
+        "items": [
+          {
+            "key": "1",
+            "value": "Yes"
+          },
+          {
+            "key": "0",
+            "value": "No"
+          }
+        ],
+        "itemsUrl": []
+      }
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Asset Scheme Code",
+        "name": "AssetSchmCode"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Asset Scheme Name",
+        "name": "AssetSchmName"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Asset Type Name",
+        "name": "AssetTypeName"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Num Of Asset",
+        "name": "NumOfAsset"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Active Status",
+        "name": "IsActive"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Edit Member"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Edit"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT AM.FULL_ASSET_CODE AS FullAssetCode, AM.FULL_ASSET_NAME AS FullAssetName,AC.ASSET_CATEGORY_NAME AS AssetCategoryName ,ASD.ASSET_SCHM_D_ID AS AssetSchmDId",
+      "from": "FROM dbo.ASSET_MASTER AM WITH(NOLOCK) JOIN dbo.ASSET_CATEGORY AC WITH(NOLOCK) ON AC.ASSET_CATEGORY_ID = AM.ASSET_CATEGORY_ID JOIN dbo.ASSET_SCHM_D ASD WITH(NOLOCK) ON ASD.ASSET_MASTER_ID = AM.ASSET_MASTER_ID"
+    },
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "left",
+        "property": "AssetSchmCode"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "AssetSchmName"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "AssetTypeName"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "NumOfAsset"
+      },
+      {
+        "type": "boolean",
+        "position": "center",
+        "property": "IsActive"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/Asset/Scheme/MemberDetail",
+            "param": [
+              {
+                "type": "AssetSchmHId",
+                "property": "AssetSchmHId"
+              },
+              {
+                "type": "param",
+                "property": "edit"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/Asset/Scheme/InformationDetail",
+            "param": [
+              {
+                "type": "AssetSchmHId",
+                "property": "AssetSchmHId"
+              },
+              {
+                "type": "param",
+                "property": "edit"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

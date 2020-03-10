@@ -1,19 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-asset-scheme-add-edit-member',
-//   templateUrl: './asset-scheme-add-edit-member.component.html',
-//   styleUrls: ['./asset-scheme-add-edit-member.component.scss']
-// })
-// export class AssetSchemeAddEditMemberComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { environment } from 'environments/environment';
@@ -29,13 +13,13 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsService } from 'app/shared/services/adIns.service';
 
 @Component({
-  selector: 'app-asset-scheme-add-edit-member',
-  templateUrl: './asset-scheme-add-edit-member.component.html',
-  styleUrls: ['./asset-scheme-add-edit-member.component.scss'],
+  selector: 'app-add-asset-scheme',
+  templateUrl: './add-asset-scheme.component.html',
+  styleUrls: ['./add-asset-scheme.component.scss'],
   providers: [NgbPaginationConfig, NGXToastrService]
 })
-export class AssetSchemeAddEditMemberComponent implements OnInit {
 
+export class AddAssetSchemeComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild(UCSearchComponent) UCSearchComponent;
   resultData: any;
@@ -65,13 +49,14 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
   arrAddCrit = new Array<CriteriaObj>();
   arrCrit: any;
   checkboxAll: any = false;
-  getAssetSchmHByIdUrl = environment.FoundationR3Url + '/AssetSchmH/GetAssetSchmHById';
-  getAssetTypeByIdUrl = environment.FoundationR3Url + "/AssetType/GetAssetTypeById";
-  editAssetSchmHAndDUrl = environment.FoundationR3Url + '/AssetSchmH/EditAssetSchmHAndD';
+  getAssetSchmHByIdUrl = AdInsConstant.GetAssetSchmHById;
+  getAssetTypeByIdUrl = AdInsConstant.GetAssetTypeById;
+  addListAssetSchmDUrl = AdInsConstant.AddListAssetSchmD;  // ini masih blm diganti 
   AssetSchmHId: any;
-  getListAssetMasterByAssetSchmHId = "http://localhost:5000" + '/AssetMaster/GetListAssetMasterByAssetSchmHId';
-  getListAssetSchmDByAssetSchmHId = "http://localhost:5000" + '/AssetSchmD/GetListAssetSchmDByAssetSchmHId';
-
+  getListAssetMasterByAssetSchmHId = AdInsConstant.GetListAssetMasterByAssetSchmHId;
+  getListAssetSchmDByAssetSchmHId = AdInsConstant.GetListAssetSchmDByAssetSchmHId;
+  tempArrInAssetMaster: Array<any> = [];
+  tempArrNotInAssetMaster: Array<any> = [];
   constructor(
     private http: HttpClient,
     private toastr: NGXToastrService,
@@ -83,7 +68,6 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
 
     // this.GetListAssetMasterId();
 
-    console.log("member");
     this.arrCrit = new Array();
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
@@ -99,68 +83,18 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
       }
     });
 
-    // let assetSchmHObj = { AssetSchmHId: this.AssetSchmHId, "RowVersion": "" };
-    // // this.assetService.getAssetSchmHByAssetSchmHId(assetSchmHObj).subscribe(
-
-
-    //     if (this.responseResultData.IsActive == 0) {
-    //       this.IsActive = 'No';
-    //     } else {
-    //       this.IsActive = 'Yes';
-    //     }
-    //     let assetObj = { AssetTypeId: this.responseResultData.AssetTypeId,"RowVersion": "" };
-    //     // this.assetService.getAssetTypeHbyAssetTypeId(assetObj).subscribe(
-    //     this.http.post(this.getAssetTypeByIdUrl, assetObj).subscribe(
-    //       response => {
-    //         console.log('getassettype');
-    //         console.log(response);
-    //         this.AssetTypeName = response['AssetTypeName'];
-    //       },
-    //       error => {
-    //         console.log(error);
-    //       }
-    //     );
-
-
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
-    // WHERE AM.IS_ACTIVE = '1' AND AM.IS_FINAL = '1' 
-
     this.inputObj = new InputSearchObj();
-    this.inputObj._url = './assets/search/searchAssetMasterInAssetSchm.json'; // ini search json
+    this.inputObj._url = './assets/search/searchAssetMasterInAssetSchmForMember.json';
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    // this.inputObj.apiQryPaging = AdInsConstant.GetAssetMasterPaging;
-    
     this.inputObj.addCritInput = new Array();
 
     this.pageNow = 1;
     this.pageSize = 10;
-    // this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetAssetMasterPaging;
     this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
 
-    if (this.pageType == 'edit') {
-      let assetSchmDObj = { AssetSchmHId: this.AssetSchmHId, "RowVersion": "" };
-      // this.assetService.getListAssetMasterByAssetSchmHId(assetSchmDObj).subscribe( //lgi buat api ny
-      this.http.post(this.getListAssetMasterByAssetSchmHId, assetSchmDObj).subscribe(
-        response => {
-          console.log('masuk edittttt');
-          console.log(response);
-          for (let index = 0; index < response['ReturnObject'].length; index++) {
-            this.tempData.push(response['ReturnObject'][index]);
-            console.log(this.tempData);
-          }
-        },
-        error => {
-          console.log(error);
-        }
-      );
 
     let assetSchmHObj = { AssetSchmHId: this.AssetSchmHId, "RowVersion": "" };
-    // this.assetService.getAssetSchmHByAssetSchmHId(assetSchmHObj).subscribe(
 
     this.http.post(this.getAssetSchmHByIdUrl, assetSchmHObj).subscribe(
       response => {
@@ -169,15 +103,13 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
         this.responseResultData = response;
         this.AssetTypeId = this.responseResultData.AssetTypeId;
 
-        const addCritTypeHId = new CriteriaObj();
-        addCritTypeHId.DataType = 'numeric';
-        addCritTypeHId.propName = 'AM.ASSET_TYPE_ID';
-        addCritTypeHId.restriction = AdInsConstant.RestrictionEq;
-        addCritTypeHId.value = this.AssetTypeId;
-        this.arrCrit.push(addCritTypeHId);
-        this.inputObj.addCritInput.push(addCritTypeHId);
+        // const addCritAssetMasterId = new CriteriaObj();
+        // addCritAssetMasterId.DataType = 'numeric';
+        // addCritAssetMasterId.propName = 'AM.ASSET_MASTER_ID';
+        // addCritAssetMasterId.restriction = AdInsConstant.RestrictionNotIn;
+        // this.arrCrit.push(addCritAssetMasterId);
+        // this.inputObj.addCritInput.push(addCritAssetMasterId);
       });
-    }
 
     const addCritIsFinal = new CriteriaObj();
     addCritIsFinal.DataType = 'boolean';
@@ -193,6 +125,14 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
     addCritIsActive.value = 'true';
     this.arrCrit.push(addCritIsActive);
 
+    const addCritAssetSchmHId = new CriteriaObj();
+    addCritAssetSchmHId.DataType = 'number';
+    addCritAssetSchmHId.propName = 'ASD.ASSET_SCHM_H_ID';
+    addCritAssetSchmHId.restriction = AdInsConstant.RestrictionEq;
+    addCritAssetSchmHId.value = this.AssetSchmHId;
+    this.arrCrit.push(addCritAssetSchmHId);
+
+    this.inputObj.addCritInput.push(addCritAssetSchmHId);
     this.inputObj.addCritInput.push(addCritIsActive);
     this.inputObj.addCritInput.push(addCritIsFinal);
   }
@@ -239,9 +179,9 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
 
   // ** Start UC Search **/
   getResult(event) {
-    this.checkboxAll = false;
+
     this.resultData = event.response.Data;
-    this.totalData = event.response.Count;
+    this.totalData = this.resultData.Count;
     this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
     this.ucgridFooter.resultData = this.resultData;
@@ -253,53 +193,40 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
     this.searchPagination(this.pageNow);
   }
 
-  SaveForm(assetSchmForm: any) {
+  formValidate(form: any) {
+    this.adInsService.scrollIfFormHasErrors(form);
+  }
+
+  SaveAssetSchmMember(assetSchmForm: any) {
     this.assetSchmHObj = new AssetSchemeHObj();
     this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
     this.assetSchmHObj.AssetSchmCode = this.AssetSchmCode;
     this.assetSchmHObj.AssetSchmName = this.AssetSchmName;
     this.assetSchmHObj.AssetTypeId = this.AssetTypeId;
     if (assetSchmForm.value.IsActive) {
-      this.assetSchmHObj.IsActive = '1';
+      this.assetSchmHObj.IsActive = 'true';
     } else {
-      this.assetSchmHObj.IsActive = '0';
+      this.assetSchmHObj.IsActive = 'false';
     }
     console.log(this.assetSchmHObj);
 
     for (let index = 0; index < this.tempData.length; index++) {
       console.log(this.tempData);
       var assetSchmDObj = {
-        AssetSchmDId: this.tempData[index].assetSchmDId,
-        AssetSchmHId: this.tempData[index].AssetSchmHId,
+        // AssetSchmDId:this.tempData[index].AssetSchmDId,
+        AssetSchmHId: this.AssetSchmHId,
         AssetMasterId: this.tempData[index].AssetMasterId
       }
       this.arrAssetSchmD.push(assetSchmDObj);
     }
 
-
-
     var AssetSchmObj = {
       AssetSchmH: this.assetSchmHObj,
-      AssetSchmD: this.arrAssetSchmD
+      AssetSchmDObjs: this.arrAssetSchmD
     }
     console.log(AssetSchmObj);
-    // if (this.pageType === 'add') {
-    //   this.assetService.addAssetSchmHAndD(AssetSchmObj).subscribe(
-    //     response => {
-    //       console.log(response);
-    //       this.toastr.successMessage(response['message']);
-    //       this.router.navigateByUrl('asset/assetSchmPaging');
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   );
-    // } else {
 
-
-    // ini diuncoment
-    // this.assetService.editAssetSchmHAndD(AssetSchmObj).subscribe(
-    this.http.post(this.editAssetSchmHAndDUrl, AssetSchmObj).subscribe(
+    this.http.post(this.addListAssetSchmDUrl, AssetSchmObj).subscribe(
       response => {
         console.log(response);
         this.toastr.successMessage(response['message']);
@@ -309,19 +236,13 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
         console.log(error);
       }
     );
-
-
     // }
   }
 
-  formValidate(form: any) {
-    this.adInsService.scrollIfFormHasErrors(form);
-  }
 
   addToTemp() {
     if (this.listSelectedId.length !== 0) {
 
-      this.checkboxAll = false;
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
 
@@ -342,6 +263,9 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.tempListId;
       this.arrAddCrit.push(addCrit);
+
+      console.log('isi addcrit = ', addCrit);
+
       var order = null;
       if (this.orderByKey != null) {
         order = {
@@ -358,48 +282,23 @@ export class AssetSchemeAddEditMemberComponent implements OnInit {
     }
   }
 
-
-  GetListAssetMasterId(){
-    console.log('GetListAssetMasterId');
-    var url = environment.FoundationR3Url + '/AssetSchmD/GetListAssetSchmDByAssetSchmHId';
-    var obj = { "AssetSchmHId": this.AssetSchmHId, "RowVersion": ""};
-    // var obj = { "AssetSchmHId": 1, "RowVersion": ""}; 
-    var arr = new Array();
-    var temp;
-    this.http.post(url, obj).subscribe(
-          response => {
-            temp = response['ReturnObject'];
-
-            for(var i=0;i<temp.length;i++){
-              arr.push(temp[i]['AssetMasterId']);
-            }
-            console.log('isi arr');
-            console.log(arr);
-          },
-          error => {
-            console.log(error);
-          }
-    );
-    return arr;
-  }
-
   SelectAll(condition) {
     this.checkboxAll = condition;
     console.log(condition);
     if (condition) {
-      for (let i = 0; i < this.resultData.data.length; i++) {
-        if (this.listSelectedId.indexOf(this.resultData.data[i].AssetMasterId) < 0) {
-          this.listSelectedId.push(this.resultData.data[i].AssetMasterId);
+      for (let i = 0; i < this.resultData.length; i++) {
+        if (this.listSelectedId.indexOf(this.resultData[i].AssetMasterId) < 0) {
+          this.listSelectedId.push(this.resultData[i].AssetMasterId);
         }
       }
 
     } else {
-      for (let i = 0; i < this.resultData.data.length; i++) {
-        let index = this.listSelectedId.indexOf(this.resultData.data[i].AssetMasterId);
+      for (let i = 0; i < this.resultData.length; i++) {
+        let index = this.listSelectedId.indexOf(this.resultData[i].AssetMasterId);
         if (index > -1) {
           this.listSelectedId.splice(index, 1);
         }
-        console.log(this.resultData.data[i]);
+        console.log(this.resultData[i]);
       }
     }
     console.log(this.checkboxAll);

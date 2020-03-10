@@ -94,7 +94,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/asset/type/detail",
+            "path": "/Asset/Type/Detail",
             "param": [
               {
                 "type": "AssetTypeId",
