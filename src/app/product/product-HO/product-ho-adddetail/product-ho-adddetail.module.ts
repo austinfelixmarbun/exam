@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
-import { GeneralDataComponent } from "./general-data/general-data.component";
-import { OfficeMemberComponent } from "./office-member/office-member.component";
-import { ProductComponentComponent } from "./product-component/product-component.component";
+import { GeneralDataHOComponent } from "./general-data/general-data.component";
+import { OfficeMemberHOComponent } from "./office-member/office-member.component";
+import { ProductComponentHOComponent } from "./product-component/product-component.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "app/app-routing.module";
@@ -17,6 +17,7 @@ import { ProductHOAddDetailRoutingModule } from "./product-ho-adddetail-routing.
 import { ArchwizardModule } from "angular-archwizard";
 import { ListOfficeMemberComponent } from './office-member/list-office-member/list-office-member.component';
 import { SearchOfficeComponent } from './office-member/search-office/search-office.component';
+import { UcviewgenericModule } from "@adins/ucviewgeneric";
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import { SearchOfficeComponent } from './office-member/search-office/search-offi
         UcSubsectionModule,
         SharingComponentModule,
         ProductHOAddDetailRoutingModule,
-        ArchwizardModule
+        ArchwizardModule,
+        UcviewgenericModule
     ],
     declarations: [],
     

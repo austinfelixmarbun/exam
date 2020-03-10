@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-office-member',
+  selector: 'app-office-member-HO',
   templateUrl: './office-member.component.html',
   styleUrls: ['./office-member.component.scss']
 })
-export class OfficeMemberComponent implements OnInit {
+export class OfficeMemberHOComponent implements OnInit {
 
   isOn: any;
   @Input() objInput: any;
