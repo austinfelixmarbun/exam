@@ -13,6 +13,7 @@ import { map, mergeMap } from 'rxjs/operators';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { forkJoin } from 'rxjs';
 import { AssetNegativeObj } from 'app/shared/model/AssetNegativeObj.Model';
+import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 
 @Component({
   selector: 'app-negative-asset-detail',
@@ -28,12 +29,23 @@ export class NegativeAssetDetailComponent implements OnInit {
   criteriaObj: CriteriaObj;
   assetTypeList: any;
   negativeAssetSourceList: any;
+  fullAssetName: string = "";
+  serial1Disabled: boolean = false;
+  serial2Disabled: boolean = false;
+  serial3Disabled: boolean = false;
+  serial4Disabled: boolean = false;
+  serial5Disabled: boolean = false;
+  serial1Mandatory: boolean = false;
+  serial2Mandatory: boolean = false;
+  serial3Mandatory: boolean = false;
+  serial4Mandatory: boolean = false;
+  serial5Mandatory: boolean = false;
 
   AssetNegativeForm = this.fb.group({
     AssetNegativeId: [0, [Validators.required]],
     AssetMasterId: ['', [Validators.required]],
     AssetTypeId: ['', [Validators.required]],
-    SerialNo1: ['', [Validators.required]],
+    SerialNo1: [''],
     SerialNo2: [''],
     SerialNo3: [''],
     SerialNo4: [''],
@@ -104,7 +116,7 @@ export class NegativeAssetDetailComponent implements OnInit {
         })
       ).subscribe(
         (response: any) => {
-          console.log("Response Edit : " + JSON.stringify(response));
+          // console.log("Response Edit : " + JSON.stringify(response));
           this.AssetNegativeForm.patchValue({
             AssetNegativeId: response.AssetNegativeObj.AssetNegativeId,
             AssetMasterId: response.AssetNegativeObj.AssetMasterId,
@@ -119,7 +131,35 @@ export class NegativeAssetDetailComponent implements OnInit {
             IsActive: response.AssetNegativeObj.IsActive,
             RowVersion: response.RowVersion
           });
-          this.inputLookupObj.nameSelect = response.AssetMasterObj.FullAssetName;
+          // this.inputLookupObj.nameSelect = response.AssetMasterObj.FullAssetName;
+          this.fullAssetName = response.AssetMasterObj.FullAssetName;
+
+          if(response.AssetTypeObj.IsMndtrySerialNo1 == "1"){
+            this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);
+            this.serial1Mandatory = true;
+          }
+          if(response.AssetTypeObj.IsMndtrySerialNo2 == "1"){
+            this.AssetNegativeForm.controls['SerialNo2'].setValidators([Validators.required]);
+            this.serial2Mandatory = true;
+          }
+          if(response.AssetTypeObj.IsMndtrySerialNo3 == "1"){
+            this.AssetNegativeForm.controls['SerialNo3'].setValidators([Validators.required]);
+            this.serial3Mandatory = true;
+          }
+          if(response.AssetTypeObj.IsMndtrySerialNo4 == "1"){
+            this.AssetNegativeForm.controls['SerialNo4'].setValidators([Validators.required]);
+            this.serial4Mandatory = true;
+          }
+          if(response.AssetTypeObj.IsMndtrySerialNo5 == "1"){
+            this.AssetNegativeForm.controls['SerialNo5'].setValidators([Validators.required]);
+            this.serial5Mandatory = true;
+          }
+
+          this.serial1Disabled = response.AssetTypeObj.SerialNo1Label == "" ? true : false;
+          this.serial2Disabled = response.AssetTypeObj.SerialNo2Label == "" ? true : false;
+          this.serial3Disabled = response.AssetTypeObj.SerialNo3Label == "" ? true : false;
+          this.serial4Disabled = response.AssetTypeObj.SerialNo4Label == "" ? true : false;
+          this.serial5Disabled = response.AssetTypeObj.SerialNo5Label == "" ? true : false;
         },
         (error) => {
           console.log(error);
@@ -153,10 +193,48 @@ export class NegativeAssetDetailComponent implements OnInit {
   // }
 
   getLookupAssetMasterResponse(e){
-    this.AssetNegativeForm.patchValue({
-      AssetMasterId: e.assetMasterId,
-      AssetTypeId: e.assetTypeId
-    });
+    var assetType = new AssetTypeObj();
+    assetType.AssetTypeId = e.assetTypeId;
+    this.httpClient.post(environment.FoundationR3Url + AdInsConstant.GetAssetTypeById, assetType).subscribe(
+      (response: any) => {
+        if(response.IsMndtrySerialNo1 == "1"){
+          this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);
+          this.AssetNegativeForm.controls['SerialNo1'].updateValueAndValidity();
+          this.serial1Mandatory = true;
+        }
+        if(response.IsMndtrySerialNo2 == "1"){
+          this.AssetNegativeForm.controls['SerialNo2'].setValidators([Validators.required]);
+          this.AssetNegativeForm.controls['SerialNo2'].updateValueAndValidity();
+          this.serial2Mandatory = true;
+        }
+        if(response.IsMndtrySerialNo3 == "1"){
+          this.AssetNegativeForm.controls['SerialNo3'].setValidators([Validators.required]);
+          this.AssetNegativeForm.controls['SerialNo3'].updateValueAndValidity();
+          this.serial3Mandatory = true;
+        }
+        if(response.IsMndtrySerialNo4 == "1"){
+          this.AssetNegativeForm.controls['SerialNo4'].setValidators([Validators.required]);
+          this.AssetNegativeForm.controls['SerialNo4'].updateValueAndValidity();
+          this.serial4Mandatory = true;
+        }
+        if(response.IsMndtrySerialNo5 == "1"){
+          this.AssetNegativeForm.controls['SerialNo5'].setValidators([Validators.required]);
+          this.AssetNegativeForm.controls['SerialNo5'].updateValueAndValidity();
+          this.serial5Mandatory = true;
+        }
+
+        this.serial1Disabled = response.SerialNo1Label == "" ? true : false;
+        this.serial2Disabled = response.SerialNo2Label == "" ? true : false;
+        this.serial3Disabled = response.SerialNo3Label == "" ? true : false;
+        this.serial4Disabled = response.SerialNo4Label == "" ? true : false;
+        this.serial5Disabled = response.SerialNo5Label == "" ? true : false;
+
+        this.AssetNegativeForm.patchValue({
+          AssetMasterId: e.assetMasterId,
+          AssetTypeId: e.assetTypeId
+        });
+      }
+    );
   }
 
   Back(){
@@ -165,7 +243,7 @@ export class NegativeAssetDetailComponent implements OnInit {
 
   Save(){
     var assetNegativeObj = this.AssetNegativeForm.value;
-    console.log("Form Submit : " + JSON.stringify(AssetNegativeObj));
+    // console.log("Form Submit : " + JSON.stringify(AssetNegativeObj));
     if (this.pageType == "add") {
       this.httpClient.post(AdInsConstant.AddAssetNegative, assetNegativeObj).subscribe(
         (response) => {

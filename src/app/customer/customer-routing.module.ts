@@ -48,7 +48,20 @@ const routes: Routes = [
           title: 'Customer Company DuplicateCheck  '
         }
       },
-
+      {
+        path: 'NegativeCustomer/Paging',
+        component: NegativeCustomerComponent,
+        data: {
+          title: 'Negative Customer Paging'
+        }
+      },
+      {
+        path: 'NegativeCustomer/Detail',
+        component: NegativeCustomerDetailComponent,
+        data: {
+          title: 'Negative Customer Detail'
+        }
+      }
     ]
   }
 ];

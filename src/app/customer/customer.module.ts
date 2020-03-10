@@ -17,6 +17,8 @@ import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/cus
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
 import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
+import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
+import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
 @NgModule({
   exports: [ 
   ],
@@ -39,7 +41,12 @@ import { CustomerCompanyMainInfoComponent } from './customer-company/customer-co
   ],
   declarations: [ 
     CustomerPagingComponent, 
-    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent
+    CustomerPersonalMainInfoComponent, 
+    CustomerPersonalDuplicateCheckComponent, 
+    CustomerCompanyDuplicateCheckComponent, 
+    CustomerCompanyMainInfoComponent,
+    NegativeCustomerComponent,
+    NegativeCustomerDetailComponent
   ]
 })
 export class CustomerModule { 
