@@ -12,6 +12,8 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
 import { BranchComponent } from './branch/branch.component';
+import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
+import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { BranchComponent } from './branch/branch.component';
   ],
   declarations: [
     VendorComponent,
-    BranchComponent
+    BranchComponent,
+    VendorHoldingPagingComponent,
+    VendorHoldingAddEditComponent
   ]
 })
 export class VendorModule { }
