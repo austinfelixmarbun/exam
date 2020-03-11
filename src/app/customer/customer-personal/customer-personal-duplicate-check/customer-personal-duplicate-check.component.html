@@ -1,11 +1,12 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
+    <button type="submit" class="addButton"   (click) = SaveValue() translate>
+      <i class="fa fa-check-square-o" ></i> Save
+    </button>
     <button type="button" class="backButton" [routerLink]="['../MainInfo']" translate>
-      <i class="ft-x"></i> Cancel
+    Cancel
     </button>
-    <button type="submit" class="addButton" translate>
-      <i class="fa fa-check-square-o"></i> Next
-    </button>
+    
   </span>
 </div>
 <div class="col-md-12">
@@ -21,7 +22,7 @@
           </form>
           <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
           </lib-ucSubsection>
-          <form class="form form-horizontal" [formGroup]="CustomerPersonalForm" (ngSubmit)="CustomerPersonalForm.valid "
+          <form class="form form-horizontal"  
             #enjiForm="ngForm" id="MainInfoId">
             <div class="form-body">
               <div class="form-group row ">
@@ -40,19 +41,23 @@
               <label class="col-md-2 adInsLabel" translate>Cust Model </label>
               <div class="col-md-4">
 
-              <label>{{this.MrIdTypeCodeDesc}}</label>
+              <label>{{this.CustModelDesc}}</label>
               </div>
+              <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
+              <div class="col-md-4">
+                <label>{{this.StatusAffiliate}}</label>
+            
+              </div>
+               
 
+             
+              </div>
+              <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>ID Type </label>
                 <div class="col-md-4">
 
                 <label>{{this.MrIdTypeCodeDesc}}</label>
                 </div>
-
-             
-              </div>
-              <div class="form-group row ">
-
                 <label class="col-md-2 adInsLabel" translate>Birth Place/Date </label>
                 <div class="col-md-4">
                   <div class="row">
@@ -67,30 +72,59 @@
                   </div>
                 </div>
 
-                <label class="col-md-2 adInsLabel" translate>ID Number </label>
+                
+              
+              </div>
+              <div class="form-group row "><label class="col-md-2 adInsLabel" translate>ID Number </label>
                 <div class="col-md-4">
                   <label>{{this.IdNo}}</label>
                 </div>
-              
-              </div>
-              <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>NPWP</label>
                 <div class="col-md-4">
                   <label>{{this.TaxIdNo}}</label>
                 </div>
                 
+                
+
+          
+              </div>
+
+
+              <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>ID Expired Date</label>
                 <div class="col-md-4">
                   <label>{{this.IdExpiredDt}}</label>
                 
                 </div>
-
                 <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
                 <div class="col-md-4">
                   <label>{{this.MotherMaidenName}}</label>
               
                 </div>
+          
+
+
               </div>
+              
+              
+              <div class="form-group row ">
+               
+                <label class="col-md-2 adInsLabel" translate>VIP</label>
+                <div class="col-md-4">
+                  <label>{{this.StatusIsVip}}</label>
+              
+                </div>
+               
+           
+                <label class="col-md-2 adInsLabel" translate>VIP Notes</label>
+                <div class="col-md-4">
+                  <label>{{this.VipNotes}}</label>
+              
+                </div>
+              </div>
+          
+    
+
             </div>
           </form>
         </div>
@@ -105,12 +139,12 @@
         </form>
         <div class="d-flex justify-content-end ">
           <span class="mr-1 d-flex align-content-center ">
-            <button type="button" class="addButton" [routerLink]="['../Page']"
-              [queryParams]="{CustName: this.CustName,GenderDesc:this.GenderDesc, Gender : this.Gender, MrIdTypeCode : this.MrIdTypeCode,MrIdTypeCodeDesc : this.MrIdTypeCodeDesc,BirthPlace : this.BirthPlace, BirthDt: this.BirthDt, IdNo: this.IdNo, TaxIdNo: this.TaxIdNo,IdExpiredDt: this.IdExpiredDt, MotherMaidenName: this.MotherMaidenName}  " translate>
+            <button type="button" class="addButton" 
+              translate>
               New
             </button>
           
-
+           
 
 
 
@@ -125,7 +159,7 @@
         <table class="table table-responsive-md text-center table-hover">
           <thead>
             <tr class="table-header">
-
+<!-- 
               <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Customer No</span>
               </th>
               <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Customer Name</span>
@@ -144,7 +178,7 @@
               </th>
               <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Duplicate Item</span>
               <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Select</span>
-              </th>
+              </th> -->
             </tr>
           </thead>
           <tbody>
@@ -179,7 +213,7 @@
           <thead>
             <tr class="table-header">
 
-              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Customer No</span>
+              <!-- <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Customer No</span>
               </th>
               <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Customer Name</span>
               </th>
@@ -201,18 +235,18 @@
           </th>
               <th class="text-Justify"><span class="thead-header" name='assetCategoryName' translate>Duplicate Item</span>
               <th class="text-JustifyX"><span class="thead-header" name='assetCategoryName' translate>Select</span>
-              </th>
+              </th> -->
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of resultData?.Data">
+            <!-- <tr *ngFor="let item of resultData?.Data">
 
               <td class="text-left">{{item.assetCode}}</td>
               <td class="text-left">{{item.assetName}}</td>
               <td class="text-left">{{item.fullAssetCode}}</td>
               <td class="text-left">{{item.fullAssetName}}</td>
               <td class="text-left">{{item.assetCategoryName}}</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
 

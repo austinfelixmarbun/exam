@@ -194,7 +194,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Office/add",
+                    "path": "/Office/Add",
                     "param": [
                         {
                             "type": "RefOfficeId",

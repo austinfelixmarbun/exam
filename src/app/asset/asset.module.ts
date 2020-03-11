@@ -12,7 +12,6 @@ import { AssetTypePagingComponent } from "./asset-type/asset-type-paging/asset-t
 import { ShowErrorsComponent } from "app/test-new/show-errors.component";
 import { RouterModule } from "@angular/router";
 import { UcSubsectionModule } from "@adins/uc-subsection";
-import { AssetSchemeAddEditMemberComponent } from "./asset-scheme/asset-scheme-add-edit-member/asset-scheme-add-edit-member.component";
 import { AssetSchemeAddEditInformationComponent } from "./asset-scheme/asset-scheme-add-edit-information/asset-scheme-add-edit-information.component";
 import { AssetConfigurationPagingComponent } from "./asset-configuration/asset-configuration-paging/asset-configuration-paging.component";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
@@ -33,6 +32,8 @@ import { AssetDocumentMasterAddEditComponent } from './asset-document-master/ass
 import { AssetMasterComponent } from "./asset-master/asset-master-paging/asset-master.component";
 import { AssetMasterAddEditParentComponent } from "./asset-master/asset-master-add-edit-parent/asset-master-add-edit-parent.component";
 import { AssetMasterAddEditChildComponent } from "./asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component";
+import { AddAssetSchemeComponent } from './asset-scheme/add-asset-scheme/add-asset-scheme.component';
+import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/asset-scheme-member.component';
 // import { ShowErrorsComponent } from "./app/test-new/show-errors.component";
 
 @NgModule({
@@ -56,7 +57,6 @@ import { AssetMasterAddEditChildComponent } from "./asset-master/asset-master-ad
     AssetTypeAddEditComponent,
     // ShowErrorsComponent,
     AssetSchemePagingComponent,
-    AssetSchemeAddEditMemberComponent,
     AssetSchemeAddEditInformationComponent,
     AssetConfigurationPagingComponent,
     AssetCategoryPagingComponent,
@@ -72,7 +72,9 @@ import { AssetMasterAddEditChildComponent } from "./asset-master/asset-master-ad
     AssetDocumentMasterAddEditComponent,
     AssetMasterComponent,
     AssetMasterAddEditParentComponent,
-    AssetMasterAddEditChildComponent
+    AssetMasterAddEditChildComponent,
+    AddAssetSchemeComponent,
+    AssetSchemeMemberComponent
   ]
 })
 export class AssetModule { }
