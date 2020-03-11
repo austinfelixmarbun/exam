@@ -99,8 +99,9 @@ export class ProdOfferingAddComponent implements OnInit {
       if(this.mode=="edit"){
         this.prodOfferingObj.ProdOfferingCode = this.resultData.ProdOfferingCode;
         this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
-        this.prodOfferingObj.ProdOfferingId =this.param;
+        this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
         this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
+        this.prodOfferingObj.ProdOfferingHId = this.param;
         this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
@@ -136,6 +137,7 @@ export class ProdOfferingAddComponent implements OnInit {
       this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
       this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
       this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
+      this.prodOfferingObj.ProdOfferingHId = this.param;
       this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);

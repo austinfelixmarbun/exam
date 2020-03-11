@@ -12,6 +12,7 @@ import { ProductHoAdddetailComponent } from './product-HO/product-ho-adddetail/p
 import { GeneralDataHOComponent } from './product-HO/product-ho-adddetail/general-data/general-data.component';
 import { OfficeMemberHOComponent } from './product-HO/product-ho-adddetail/office-member/office-member.component';
 import { ProductComponentHOComponent } from './product-HO/product-ho-adddetail/product-component/product-component.component';
+import { GeneralDataComponent } from './prod-offering/prod-offering-add-detail/general-data/general-data.component';
 import { ProductComponentComponent } from './prod-offering/prod-offering-add-detail/product-component/product-component.component';
 import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
 import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
@@ -64,7 +65,8 @@ import { SearchOfficeComponent } from './product-HO/product-ho-adddetail/office-
     SearchOfficeComponent,
     GeneralDataHOComponent,
     ProductComponentHOComponent,
-    OfficeMemberHOComponent
+    OfficeMemberHOComponent,
+    GeneralDataComponent
   ]
 
 })
