@@ -17,7 +17,6 @@ import { OfficeZipcodeMemberComponent } from './office-zipcode-member/office-zip
 import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-zipcode-member-add/office-zipcode-member-add.component';
 import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/office-zipcode-member-paging/office-zipcode-member-paging.component';
 import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
-import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
 import { EconomicSectorComponent } from './economic-sector/economic-sector-paging/economic-sector.component';
 import { EconomicSectorAddEditComponent } from './economic-sector/economic-sector-add-edit/economic-sector-add-edit.component';
 import { ProvinceComponent } from './prov-district/province-paging/province.component';
@@ -34,6 +33,7 @@ import { BankComponent } from 'app/bank/bank.component';
 import { BankAddComponent } from 'app/bank/add/add-bank.component';
 import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
 import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
+import { HolidayDetailEditComponent } from './holiday-scheme/holiday-detail-edit/holiday-detail-edit.component';
 
 const routes: Routes = [
   {
@@ -124,7 +124,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'Holiday/add',
+        path: 'Holiday/Add',
         component: HolidayAddComponent,
         data: {
           title: 'Holiday Add'
@@ -138,22 +138,22 @@ const routes: Routes = [
         },
       },
       {
-        path: 'Holiday/detail',
+        path: 'Holiday/Detail',
         component: HolidayDetailComponent,
         data: {
           title: 'Holiday Detail'
         },
       },
       {
-        path: 'Holiday/detail/add',
+        path: 'Holiday/Detail/Add',
         component: HolidayDetailAddComponent,
         data: {
           title: 'Holiday Detail Add'
         },
       },
       {
-        path: 'Holiday/detail/edit',
-        component: HolidayDetailAddComponent,
+        path: 'Holiday/Detail/Edit',
+        component: HolidayDetailEditComponent,
         data: {
           title: 'Holiday Detail Edit'
         },

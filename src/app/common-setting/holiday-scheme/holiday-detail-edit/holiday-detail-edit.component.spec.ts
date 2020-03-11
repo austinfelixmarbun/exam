@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CopyHolidaySchemeComponent } from './copy-holiday-scheme.component';
+import { HolidayDetailEditComponent } from './holiday-detail-edit.component';
 
-describe('CopyHolidaySchemeComponent', () => {
-  let component: CopyHolidaySchemeComponent;
-  let fixture: ComponentFixture<CopyHolidaySchemeComponent>;
+describe('HolidayDetailEditComponent', () => {
+  let component: HolidayDetailEditComponent;
+  let fixture: ComponentFixture<HolidayDetailEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CopyHolidaySchemeComponent ]
+      declarations: [ HolidayDetailEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CopyHolidaySchemeComponent);
+    fixture = TestBed.createComponent(HolidayDetailEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
