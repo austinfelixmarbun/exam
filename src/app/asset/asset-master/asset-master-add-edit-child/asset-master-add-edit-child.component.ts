@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -111,6 +111,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     this.http.post(this.getListAssetCategory, this.listRequest).subscribe(
       response => {
         this.resultAssetCategory = response['ReturnObject'];
+        this.AssetMasterChildForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
         console.log();
       },
       (error) => {
@@ -199,6 +200,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       this.assetSchmListDObj = new AssetSchmListObj();
       this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
       this.assetSchmListDObj.AssetTypeId = this.AssetTypeId;
+      console.log("asdfgh");
       console.log(this.assetSchmListDObj);
       this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
         response => {
@@ -211,7 +213,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
   SaveForm() {
     if (this.pageType == "add") {
       this.assetMasterObj = new AssetMasterObj();
-      this.assetMasterObj.AssetCategoryId = this.AssetMasterChildForm.controls["AssetCategoryId"].value;
       this.assetMasterObj.AssetTypeId = this.AssetTypeId;
       this.assetMasterObj.AssetCode = this.AssetMasterChildForm.controls["AssetCode"].value;
       this.assetMasterObj.AssetName = this.AssetMasterChildForm.controls["AssetName"].value;
@@ -221,6 +222,16 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       this.assetMasterObj.ParentId = this.AssetMasterId;
       this.assetMasterObj.IsFinal = this.AssetMasterChildForm.controls["IsFinal"].value;
       this.assetMasterObj.IsActive = this.AssetMasterChildForm.controls["IsActive"].value;
+
+      if(this.assetMasterObj.IsFinal == true)
+      {
+        this.assetMasterObj.AssetCategoryId = this.AssetMasterChildForm.controls["AssetCategoryId"].value;
+      }
+      else
+      {
+        this.assetMasterObj.AssetCategoryId = '';
+      }
+
       this.http.post(this.addUrl, this.assetMasterObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
@@ -235,7 +246,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     } else {
       this.assetMasterObj = this.resultData;
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
-      this.assetMasterObj.AssetCategoryId = this.AssetMasterChildForm.controls["AssetCategoryId"].value
       this.assetMasterObj.AssetTypeId = this.AssetMasterChildForm.controls["AssetTypeId"].value;
       this.assetMasterObj.AssetCode = this.AssetMasterChildForm.controls["AssetCode"].value;
       this.assetMasterObj.AssetName = this.AssetMasterChildForm.controls["AssetName"].value;
@@ -245,6 +255,16 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       this.assetMasterObj.ParentId = this.AssetMasterChildForm.controls["ParentId"].value;
       this.assetMasterObj.IsFinal = this.AssetMasterChildForm.controls["IsFinal"].value;
       this.assetMasterObj.IsActive = this.AssetMasterChildForm.controls["IsActive"].value;
+
+      if(this.assetMasterObj.IsFinal == true)
+      {
+        this.assetMasterObj.AssetCategoryId = this.AssetMasterChildForm.controls["AssetCategoryId"].value;
+      }
+      else
+      {
+        this.assetMasterObj.AssetCategoryId = '';
+      }
+
       this.http.post(this.editUrl, this.assetMasterObj).subscribe(
         response => {
           console.log(response);

@@ -5,7 +5,7 @@
     {
       "type": "dropdown",
       "datatype": "text",
-      "name": "ASSET_TYPE_CODE",
+      "name": "ATH.ASSET_TYPE_CODE",
       "id": "assetTypeNameId",
       "value": "",
       "placeholder": "Placeholder",
@@ -15,13 +15,13 @@
       "label": "Asset Type Name",
       "items": [],
       "isEvent" : "true",
-      "affectedFilter" : ["ASSET_CATEGORY_NAME"],
+      "affectedFilter" : ["AC.ASSET_CATEGORY_NAME"],
       "itemsUrl": []
     },
     {
       "type": "dropdown",
       "datatype": "text",
-      "name": "ASSET_CATEGORY_NAME",
+      "name": "AC.ASSET_CATEGORY_NAME",
       "id": "assetCategoryNameId",
       "value": "",
       "placeholder": "Placeholder",
@@ -34,7 +34,7 @@
     },
     {
       "type": "textbox",
-      "name": "FULL_ASSET_CODE",
+      "name": "A.FULL_ASSET_CODE",
       "id": "fullAssetCodeId",
       "value": "",
       "label": "Full Asset Code",
@@ -43,7 +43,7 @@
     },
     {
       "type": "textbox",
-      "name": "FULL_ASSET_NAME",
+      "name": "A.FULL_ASSET_NAME",
       "id": "fullAssetNameId",
       "value": "",
       "label": "Full Asset Name",
@@ -52,7 +52,7 @@
     },
     {
       "type": "textbox",
-      "name": "HIERARCHY_LVL",
+      "name": "A.HIERARCHY_LVL",
       "id": "hierarchyLvlId",
       "value": "",
       "label": "Hierarchy Level",
@@ -61,7 +61,7 @@
     },
     {
       "type": "dropdown",
-      "name": "IS_FINAL",
+      "name": "A.IS_FINAL",
       "id": "isFinalId",
       "label": "Final Status",
       "value": "",
@@ -82,7 +82,7 @@
     },
     {
       "type": "dropdown",
-      "name": "IS_ACTIVE",
+      "name": "A.IS_ACTIVE",
       "id": "isActiveId",
       "label": "Active Status",
       "value": "",
@@ -103,21 +103,21 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.FULL_ASSET_CODE as FullAssetCode,A.ASSET_MASTER_ID as AssetMasterId,A.FULL_ASSET_NAME as FullAssetName,A.HIERARCHY_LVL as HierarchyLvl,A.IS_FINAL as IsFinal,A.IS_ACTIVE as IsActive,B.ASSET_TYPE_ID as AssetTypeId,B.ASSET_TYPE_CODE as AssetTypeCode,B.ASSET_TYPE_NAME as AssetTypeName,C.ASSET_CATEGORY_NAME as AssetCategoryName",
-    "from": "FROM dbo.ASSET_MASTER A WITH(NOLOCK) LEFT JOIN dbo.ASSET_TYPE B WITH(NOLOCK) ON B.ASSET_TYPE_ID = A.ASSET_TYPE_ID LEFT JOIN dbo.ASSET_CATEGORY C WITH(NOLOCK) ON C.ASSET_CATEGORY_ID = A.ASSET_CATEGORY_ID"
+    "select": "SELECT A.FULL_ASSET_CODE as FullAssetCode,A.ASSET_MASTER_ID as AssetMasterId,A.FULL_ASSET_NAME as FullAssetName,A.HIERARCHY_LVL as HierarchyLvl,A.IS_FINAL as IsFinal,A.IS_ACTIVE as IsActive,ATH.ASSET_TYPE_ID as AssetTypeId,ATH.ASSET_TYPE_CODE as AssetTypeCode,ATH.ASSET_TYPE_NAME as AssetTypeName,AC.ASSET_CATEGORY_NAME as AssetCategoryName, AC.IS_ACTIVE as IsActiveCategory",
+    "from": "FROM dbo.ASSET_MASTER A WITH(NOLOCK) LEFT JOIN dbo.ASSET_TYPE ATH WITH(NOLOCK) ON ATH.ASSET_TYPE_ID = A.ASSET_TYPE_ID LEFT JOIN dbo.ASSET_CATEGORY AC WITH(NOLOCK) ON AC.ASSET_CATEGORY_ID = A.ASSET_CATEGORY_ID"
   },
   "headerList": [
     {
       "type": "sort",
       "position": "left",
       "label": "Asset Type Code",
-      "name": "B.ASSET_TYPE_CODE"
+      "name": "ATH.ASSET_TYPE_CODE"
     },
     {
       "type": "sort",
       "position": "left",
       "label": "Asset Type Name",
-      "name": "B.ASSET_TYPE_NAME"
+      "name": "ATH.ASSET_TYPE_NAME"
     },
     {
       "type": "sort",
@@ -135,7 +135,7 @@
       "type": "sort",
       "position": "left",
       "label": "Asset Category Name",
-      "name": "C.ASSET_CATEGORY_NAME"
+      "name": "AC.ASSET_CATEGORY_NAME"
     },
     {
       "type": "sort",
@@ -327,6 +327,82 @@
                 {
                   "property" : "HierarchyLvl", 
                   "value" : "3"
+                }
+              ],
+                "result" : {
+                  "path" : "/Asset/AssetMaster/Child",
+                  "param" : [
+                    {
+                      "type": "AssetMasterId",
+                      "property": "AssetMasterId"
+                    },
+                    {
+                      "type": "AssetTypeId",
+                      "property": "AssetTypeId"
+                    },
+                    {
+                      "type": "AssetTypeName",
+                      "property": "AssetTypeName"
+                    },
+                    {
+                      "type": "AssetTypeCode",
+                      "property": "AssetTypeCode"
+                    },
+                    {
+                      "type": "param",
+                      "property": "edit"
+                    }
+                  ]
+                }
+              }
+          ]
+        },
+        {
+          "type" : "switch", 
+          "case" : [ 
+            {
+              "conditions" : [ 
+                {
+                  "property" : "HierarchyLvl", 
+                  "value" : "4"
+                }
+              ],
+                "result" : {
+                  "path" : "/Asset/AssetMaster/Child",
+                  "param" : [
+                    {
+                      "type": "AssetMasterId",
+                      "property": "AssetMasterId"
+                    },
+                    {
+                      "type": "AssetTypeId",
+                      "property": "AssetTypeId"
+                    },
+                    {
+                      "type": "AssetTypeName",
+                      "property": "AssetTypeName"
+                    },
+                    {
+                      "type": "AssetTypeCode",
+                      "property": "AssetTypeCode"
+                    },
+                    {
+                      "type": "param",
+                      "property": "edit"
+                    }
+                  ]
+                }
+              }
+          ]
+        },
+        {
+          "type" : "switch", 
+          "case" : [ 
+            {
+              "conditions" : [ 
+                {
+                  "property" : "HierarchyLvl", 
+                  "value" : "5"
                 }
               ],
                 "result" : {
