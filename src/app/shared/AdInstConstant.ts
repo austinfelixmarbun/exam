@@ -397,7 +397,7 @@ export class AdInsConstant {
   public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
   public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId"
   public static GetListProdHVersionByProdHId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdHId";
-  public static GetProductDetailComponentInfo = "http://localhost:5000/Product/GetProductDetailComponentInfo";
+  public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
   public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
 
 
