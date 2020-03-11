@@ -490,9 +490,15 @@ export class AdInsConstant {
   public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
  
   // Customer
-  public static AddNewCust =   environment.FoundationR3Url + "/Cust/AddCust"
-  public static  GetCustByCustId =   environment.FoundationR3Url + "/Cust/GetCustByCustId"
-  
- 
- 
+  public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust"
+  public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId"
+  public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
+
+  // NEGATIVE CUSTOMER
+  public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
+  public static EditNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/EditNegativeCust";
+  public static GetNegativeCustByNegativeCustId = environment.FoundationR3Url + "/NegativeCust/GetNegativeCustByNegativeCustId";
+  public static AddNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/AddNegativeCustChangeTrx";
+  public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
+  public static GetNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetNegativeCustChangeTrxByNegativeCustId";
 }

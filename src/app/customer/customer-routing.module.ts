@@ -50,13 +50,19 @@ const routes: Routes = [
         }
       },
       {
-        path: 'CustomerPersonal/Page',
-        component: CustomerPersonalPageComponent,
+        path: 'NegativeCustomer/Paging',
+        component: NegativeCustomerComponent,
         data: {
-          title: 'Customer Personal DuplicateCheck  '
+          title: 'Negative Customer Paging'
         }
       },
-
+      {
+        path: 'NegativeCustomer/Detail',
+        component: NegativeCustomerDetailComponent,
+        data: {
+          title: 'Negative Customer Detail'
+        }
+      }
     ]
   }
 ];
