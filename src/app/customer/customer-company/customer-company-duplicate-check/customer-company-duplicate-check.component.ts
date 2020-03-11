@@ -10,14 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CustomerCompanyDuplicateCheckComponent implements OnInit {
 
-  CustomerCompanyForm = this.fb.group({
-    CustModel: ['', [Validators.required]],
-    CustName: ['', [Validators.required, Validators.maxLength(100)]],
-    MrCompanyTypeCode: ['', [Validators.required]],
-    MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
-    IdNo: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.required]],
-  });
+   
   getUrl: any;
   tempCompanyTypeCode: any;
   tempIdType: any;
@@ -31,7 +24,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   MrIdTypeCodeDesc:any;
   IdNo: any;
   TaxIdNo: any;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       if (params["CustModel"] != null) {
         this.CustModel = params["CustModel"];
@@ -64,26 +57,8 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
-    this.CustomerCompanyForm.patchValue({
-      CustModel: this.CustModel,
-      CustName: this.CustName,
-      MrCompanyTypeCode: this.MrCompanyTypeCode,
-      MrIdTypeCode: this.MrIdTypeCode,
-      IdNo: this.IdNo,
-      TaxIdNo: this.TaxIdNo,
-
-    });
-    this.CustomerCompanyForm.controls.CustModel.disable();
-    this.CustomerCompanyForm.controls.CustName.disable();
-    this.CustomerCompanyForm.controls.MrCompanyTypeCode.disable();
-    this.CustomerCompanyForm.controls.MrIdTypeCode.disable();
-    this.CustomerCompanyForm.controls.IdNo.disable();
-    this.CustomerCompanyForm.controls.TaxIdNo.disable();
-
-
-
+ 
+    
 
   }
 
