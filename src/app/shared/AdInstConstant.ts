@@ -317,7 +317,7 @@ export class AdInsConstant {
   public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueById";
   public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
   public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
-
+  public static GetListAssetMasterByAssetSchmHId = "http://localhost:5000" + "/AssetMaster/GetListAssetMasterByAssetSchmHId"
   //REF PROFESSION
 
   public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
@@ -382,12 +382,12 @@ export class AdInsConstant {
   public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
 
   // ASSET TYPE
-  public static AddAssetType = "/AssetType/AddAssetType"
-  public static EditAssetType = "/AssetType/EditAssetType"
-  public static GetAssetTypeByCode = "/AssetType/GetAssetTypeByCode"
-  public static GetAssetTypeById = "/AssetType/GetAssetTypeById"
-  public static GetListAssetType = "/AssetType/GetListAssetType"
-  public static GetListActiveAssetType = "/AssetType/GetListActiveAssetType"
+  public static AddAssetType = environment.FoundationR3Url + "/AssetType/AddAssetType"
+  public static EditAssetType = environment.FoundationR3Url + "/AssetType/EditAssetType"
+  public static GetAssetTypeByCode = environment.FoundationR3Url + "/AssetType/GetAssetTypeByCode"
+  public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById"
+  public static GetListAssetType = environment.FoundationR3Url + "/AssetType/GetListAssetType"
+  public static GetListActiveAssetType = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType"
   public static DeleteAssetType = "/AssetType/DeleteAssetType"
 
   // PRODUCT
@@ -447,13 +447,16 @@ export class AdInsConstant {
   public static GetRefAssetDocByRefAssetDocId =environment.FoundationR3Url + "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
   public static GetListRefAssetDoc = environment.FoundationR3Url +"/RefAssetDoc/GetListRefAssetDoc"
   public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
-
-
+   
   //Asset Scheme
-  public static GetAssetSchmHById = "/AssetSchmH/GetAssetSchmHById";
-  public static AddAssetSchmH = "/AssetSchmH/AddAssetScyId";
-  public static EditAssetSchmH = "/AssetSchmH/EditAssetSchmH";
-
+  public static GetAssetSchmHById =   environment.FoundationR3Url + "/AssetSchmH/GetAssetSchmHById";
+  public static AddAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/AddAssetSchmH";
+  public static EditAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmH";
+  public static GetListAssetSchmDByAssetSchmHId = "http://localhost:5000" + "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
+  public static EditAssetSchmHAndD = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmHAndD"
+  public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
+  public static AddListAssetSchmD =  "http://localhost:5000"  + "/AssetSchmD/AddListAssetSchmD";
+  public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
 

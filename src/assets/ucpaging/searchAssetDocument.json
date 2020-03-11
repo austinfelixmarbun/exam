@@ -179,55 +179,55 @@
       "type": "sort",
       "position": "left",
       "label": "ASSET DOCUMENT CODE",
-      "name": "AssetDocCode"
+      "name": "B.ASSET_DOC_CODE"
     },
     {
       "type": "sort",
       "position": "left",
       "label": "ASSET DOCUMENT NAME",
-      "name": "AssetDocName"
+      "name": "B.ASSET_DOC_NAME"
     },  {
       "type": "sort",
       "position": "center",
       "label": "MAIN DOC",
-      "name": "IsMainDoc"
+      "name": "A.IS_MAIN_DOC"
     },
       {
       "type": "sort",
       "position": "center",
       "label": "VALUE NEEDED",
-      "name": "IsValueNeeded"
+      "name": "A.IS_VALUE_NEEDED"
     },
       {
       "type": "sort",
       "position": "center",
       "label": "Pledge",
-      "name": "IsPledge"
+      "name": "A.IS_PLEDGE"
     },
      {
       "type": "sort",
       "position": "center",
       "label": "Borrow",
-      "name": "IsBorrow"
+      "name": "A.IS_BORROW"
     },
      {
       "type": "sort",
       "position": "center",
       "label": "Mandatory New",
-      "name": "IsMandatoryNew"
+      "name": "A.IS_MANDATORY_NEW"
     },
      {
       "type": "sort",
       "position": "center",
       "label": "Mandatory Used",
-      "name": "IsMandatoryUsed"
+      "name": "A.IS_MANDATORY_USED"
     },
  
     {
       "type": "sort",
       "position": "center",
       "label": "ACTIVE STATUS",
-      "name": "IsActive"
+      "name": "A.IS_ACTIVE"
     },
     {
       "type": "label",
@@ -237,7 +237,7 @@
   ],
   "querystring": {
     "select": "SELECT B.ASSET_DOC_CODE as AssetDocCode,B.ASSET_DOC_NAME as AssetDocName, A.ASSET_DOC_LIST_ID as AssetDocListId, B.REF_ASSET_DOC_ID as RefAssetDocId, A.ASSET_TYPE_ID AS AssetTypeId,   A.IS_MAIN_DOC as IsMainDoc, A.IS_VALUE_NEEDED as IsValueNeeded, A.IS_PLEDGE as IsPledge, A.IS_BORROW as IsBorrow, A.IS_MANDATORY_NEW as IsMandatoryNew, IS_MANDATORY_USED as IsMandatoryUsed, A.IS_ACTIVE as IsActive",
-    "from": "FROM dbo.ASSET_DOC_LIST A WITH(NOLOCK) JOIN REF_ASSET_DOC B WITH(NOLOCK) ON A.REF_ASSET_DOC_ID = B.REF_ASSET_DOC_ID "
+    "from": "FROM dbo.ASSET_DOC_LIST A WITH(NOLOCK) JOIN dbo.REF_ASSET_DOC B WITH(NOLOCK) ON A.REF_ASSET_DOC_ID = B.REF_ASSET_DOC_ID "
  
   },
   "bodyList": [

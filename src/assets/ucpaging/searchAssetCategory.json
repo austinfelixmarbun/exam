@@ -46,19 +46,19 @@
         "type": "sort",
         "position": "left",
         "label": "ASSET CATEGORY CODE",
-        "name": "AssetCategoryCode"
+        "name": "ASSET_CATEGORY_CODE"
       },
       {
         "type": "sort",
         "position": "left",
         "label": "ASSET CATEGORY NAME",
-        "name": "AssetCategoryName"
+        "name": "ASSET_CATEGORY_NAME"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "ACTIVE STATUS",
-        "name": "isActive"
+        "name": "IS_ACTIVE"
       },
       {
         "type": "label",
@@ -69,7 +69,7 @@
     ],
     "querystring": { 
       "select": "SELECT  ASSET_CATEGORY_CODE as AssetCategoryCode,  ASSET_CATEGORY_NAME as AssetCategoryName, ASSET_TYPE_ID AS AssetTypeId, ASSET_CATEGORY_ID as AssetCategoryId, IS_ACTIVE as IsActive",
-      "from": "FROM ASSET_CATEGORY  WITH(NOLOCK)" 
+      "from": "FROM dbo.ASSET_CATEGORY  WITH(NOLOCK)" 
     },
     "bodyList": [
       {

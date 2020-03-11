@@ -46,19 +46,19 @@
         "type": "sort",
         "position": "left",
         "label": "Asset Document Code",
-        "name": "AssetDocumentCode"
+        "name": "ASSET_DOC_CODE"
       },
       {
         "type": "sort",
         "position": "left",
         "label": "Asset Document Name",
-        "name": "AssetDocumentName"
+        "name": "ASSET_DOC_NAME"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Active Status",
-        "name": "IsActive"
+        "name": "IS_ACTIVE"
       },
       {
         "type": "label",
@@ -68,7 +68,7 @@
     ],
     "querystring": { 
       "select": "SELECT  ASSET_DOC_CODE as AssetDocumentCode,REF_ASSET_DOC_ID as RefAssetDocId, ASSET_DOC_NAME as AssetDocumentName, IS_ACTIVE as IsActive",
-      "from": "FROM REF_ASSET_DOC A WITH(NOLOCK)"
+      "from": "FROM dbo.REF_ASSET_DOC A WITH(NOLOCK)"
     },
     "bodyList": [
       {
