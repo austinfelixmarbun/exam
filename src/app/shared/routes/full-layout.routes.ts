@@ -82,6 +82,10 @@ export const Full_ROUTES: Routes = [
   {
     path: 'Product',
     loadChildren: './product/product.module#ProductModule'
+  },
+  {
+    path: 'Error',
+    loadChildren: './error-page/error-page.module#ErrorPageModule'
   }
   
 ];
