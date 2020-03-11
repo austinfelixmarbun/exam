@@ -12,6 +12,11 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
 import { BranchComponent } from './branch/branch.component';
+import { VendorGroupComponent } from './vendor-group/vendor-group.component';
+import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
+import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
+import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmember.component';
 
 
 @NgModule({
@@ -27,11 +32,17 @@ import { BranchComponent } from './branch/branch.component';
     UcpagingModule,
     UcSubsectionModule,
     ReactiveFormsModule,
-    TreeViewModule
+    TreeViewModule,
+    UcviewgenericModule
   ],
   declarations: [
     VendorComponent,
-    BranchComponent
+    BranchComponent,
+    VendorGroupComponent,
+    VendorGroupPagingComponent,
+    VendorGroupViewComponent,
+    VendorGroupmemberComponent,
+
   ]
 })
 export class VendorModule { }
