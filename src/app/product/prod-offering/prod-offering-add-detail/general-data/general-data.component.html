@@ -1,40 +1,25 @@
 <div class="card-body">
   <div class="px-3">
 
-    <form class="form form-horizontal" [formGroup]="RefGeneralDataForm" #enjiForm="ngForm">
+    <form class="form form-horizontal" [formGroup]="RefGeneralDataForm">
       <!-- Main Info -->
       <div class="form-body">
         <h4 class="form-section card-title" translate><i class="ft-file-text"></i> </h4>
-
-        <!-- Look Up Copy Product -->
-        <!-- <div class="form-group row">
-          <label class="col-md-3  adInsLabel" >Copy Product</label>
-          <div class="col-md-6">
-            <lib-uclookupgeneric width-75-per [lookupInput]="inputLookUpObj" [parentForm]='RefGeneralDataForm' [enjiForm]="enjiForm" [identifier]="'indentifierTemp'" (lookup)="CopyProduct($event)">
-            </lib-uclookupgeneric>
-          </div>
-        </div> -->
-
         <div formArrayName="items">
           <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
             <div class="form-group row" [formGroupName]="i">
               <label class="col-md-3 text-left" translate> {{item.controls.ProdCompntName.value}} </label>
+              <!-- <label class="col-md-6 text-left" translate> {{item.controls.CompntValueDesc.value}} </label> -->
               <div class="col-md-6" style="border-right: 1px solid grey"
                 [ngSwitch]="item.controls.ProdCompntType.value">
                 <div *ngSwitchCase="'DDL'">
                   <div>
-                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValue" (change)="clickTest($event, i)">
+                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc" (change)="clickTest($event, i)">
                       <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                         {{it.value.Value}}
                       </option>
                     </select>
                   </div>
-                </div>
-                <div *ngSwitchCase="'AMT'">
-                  <P>AMOUNT</P>
-                </div>
-                <div *ngSwitchCase="'DATE'">
-                  <P>DATE</P>
                 </div>
               </div>
             </div>

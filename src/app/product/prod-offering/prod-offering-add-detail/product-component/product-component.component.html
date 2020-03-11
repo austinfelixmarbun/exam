@@ -4,13 +4,13 @@
     <!-- Scheme -->
     <lib-ucSubsection [id]="'SchemeUnitId'" [title]="'Scheme'" [panel]="'SchemeUnit'" [hidden] = "SchmData == 0" class="form-section card-title" translate><i class="ft-file-text"></i></lib-ucSubsection>
     <div class="form-body" id="SchemeUnit" >
-      <form class="form form-horizontal" [formGroup]="RefGeneralDataForm" #enjiForm="ngForm">
+      <form class="form form-horizontal" [formGroup]="RefSchemeForm" #enjiForm="ngForm">
         <!-- Main Info -->
         <div class="form-body">
           <!-- <h4 class="form-section card-title" translate><i class="ft-file-text"></i> </h4> -->
   
           <div formArrayName="items">
-            <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
+            <div *ngFor="let item of RefSchemeForm.controls.items.controls; let i = index;">
               <div [formGroupName]="i">
 
                 <div class="form-group row" *ngIf="item.controls.RefProdCompntGrpCode.value == 'SCHM'">
@@ -57,19 +57,19 @@
       </form>
     </div>
 
-    <!-- Score -->
-    <lib-ucSubsection [id]="'ScoreUnitId'" [title]="'Score'" [panel]="'ScoreUnit'" [hidden] = "ScoreData == 0" class="form-section card-title" translate><i class="ft-file-text"></i></lib-ucSubsection>
-    <div class="form-body" id="ScoreUnit">
-      <form class="form form-horizontal" [formGroup]="RefGeneralDataForm" #enjiForm="ngForm">
+    <!-- Los -->
+    <lib-ucSubsection [id]="'LosUnitId'" [title]="'Los'" [panel]="'LosUnit'" [hidden] = "LosData == 0" class="form-section card-title" translate><i class="ft-file-text"></i></lib-ucSubsection>
+    <div class="form-body" id="LosUnit">
+      <form class="form form-horizontal" [formGroup]="RefSchemeForm" #enjiForm="ngForm">
         <!-- Main Info -->
         <div class="form-body">
           <!-- <h4 class="form-section card-title" translate><i class="ft-file-text"></i> </h4> -->
   
           <div formArrayName="items">
-            <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
+            <div *ngFor="let item of RefSchemeForm.controls.items.controls; let i = index;">
               <div [formGroupName]="i">
 
-                <div class="form-group row" *ngIf="item.controls.RefProdCompntGrpCode.value == 'SCORE'">
+                <div class="form-group row" *ngIf="item.controls.RefProdCompntGrpCode.value == 'LOS'">
                   <label class="col-md-3 text-left" translate> {{item.controls.ProdCompntName.value}} </label>
                   
                   <div class="col-md-6" style="border-right: 1px solid grey"
@@ -114,13 +114,13 @@
     <!-- Rule -->
     <lib-ucSubsection [id]="'RuleUnitId'" [title]="'Rule'" [panel]="'RuleUnit'" [hidden] = "RuleData == 0" class="form-section card-title" translate><i class="ft-file-text"></i></lib-ucSubsection>
     <div class="form-body" id="RuleUnit">
-      <form class="form form-horizontal" [formGroup]="RefGeneralDataForm" #enjiForm="ngForm">
+      <form class="form form-horizontal" [formGroup]="RefSchemeForm" #enjiForm="ngForm">
         <!-- Main Info -->
         <div class="form-body">
           <!-- <h4 class="form-section card-title" translate><i class="ft-file-text"></i> </h4> -->
   
           <div formArrayName="items">
-            <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
+            <div *ngFor="let item of RefSchemeForm.controls.items.controls; let i = index;">
               <div [formGroupName]="i">
 
                 <div class="form-group row" *ngIf="item.controls.RefProdCompntGrpCode.value == 'RULE'">
@@ -170,13 +170,13 @@
     <!-- Other -->
     <lib-ucSubsection [id]="'OtherUnitId'" [title]="'Other'" [panel]="'OtherUnit'" [hidden] = "OthrData == 0" class="form-section card-title" translate><i class="ft-file-text"></i></lib-ucSubsection>
     <div class="form-body" id="OtherUnit">
-      <form class="form form-horizontal" [formGroup]="RefGeneralDataForm" #enjiForm="ngForm">
+      <form class="form form-horizontal" [formGroup]="RefSchemeForm" #enjiForm="ngForm">
         <!-- Main Info -->
         <div class="form-body">
           <!-- <h4 class="form-section card-title" translate><i class="ft-file-text"></i> </h4> -->
   
           <div formArrayName="items">
-            <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
+            <div *ngFor="let item of RefSchemeForm.controls.items.controls; let i = index;">
               <div [formGroupName]="i">
 
                 <div class="form-group row" *ngIf="item.controls.RefProdCompntGrpCode.value == 'OTHR'">
@@ -228,7 +228,7 @@
       <button type="button" (click)="SaveForm()" class="btn btn-raised btn-primary">
         <i class="fa fa-check-square-o"></i> Save
       </button>
-      <button type="button" (click)="NextDetail()" class="btn btn-raised btn-primary">
+      <button type="button" (click)="Next()" class="btn btn-raised btn-primary">
         <i class="fa fa-check-square-o"></i> Next
       </button>
     </div>

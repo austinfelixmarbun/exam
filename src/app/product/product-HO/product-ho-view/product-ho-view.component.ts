@@ -74,7 +74,7 @@ export class ProductHOViewComponent implements OnInit {
       }
     );
 
-    //** Office Member **//
+//     //** Office Member **//
     this.ProdBranchMemObj = new RefProductBrancMbrObj
     this.ProdBranchMemObj.ProdHId = this.prodHId;
     this.http.post(this.ProdBranchUrl, this.ProdBranchMemObj).subscribe(
