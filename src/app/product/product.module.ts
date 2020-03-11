@@ -25,6 +25,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-offering-deactivate-paging/product-offering-deactivate.component";
+import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-offering-deactivate-edit/product-offering-deactivate-edit.component";
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-o
     OfficeMemberComponent,
     ProductHOViewComponent,
     ProductOfferingViewComponent,
-    ProductOfferingDeactivatePagingComponent
+    ProductOfferingDeactivatePagingComponent,
+    ProductOfferingDeactivateEditComponent
   ]
 
 })
