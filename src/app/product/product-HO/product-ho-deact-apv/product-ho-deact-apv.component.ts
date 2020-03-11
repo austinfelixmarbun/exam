@@ -5,11 +5,11 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
-  selector: 'app-product-offering-approval',
-  templateUrl: './product-offering-approval.component.html',
-  styleUrls: ['./product-offering-approval.component.scss']
+  selector: 'app-product-ho-deact-apv',
+  templateUrl: './product-ho-deact-apv.component.html',
+  styleUrls: ['./product-ho-deact-apv.component.scss']
 })
-export class ProductOfferingApprovalComponent implements OnInit {
+export class ProductHODeactivateApprovalComponent implements OnInit {
 
   inputPagingObj: any;
   arrCrit: any;
@@ -18,17 +18,17 @@ export class ProductOfferingApprovalComponent implements OnInit {
 
   ngOnInit() {
     this.inputPagingObj=new UcpagingModule();
-    this.inputPagingObj._url="./assets/ucpaging/product/searchProductOfferingApproval.json";
+    this.inputPagingObj._url="./assets/ucpaging/product/searchProductHODeactivateApproval.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOfferingApproval.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductHODeactivateApproval.json";
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.DataType = 'text';
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.propName = 'TRX_TYPE';
-    critObj.value = AdInsConstant.ApvTrxTypeProductOffering;
+    critObj.value = AdInsConstant.ApvTrxTypeProductHODeact;
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }

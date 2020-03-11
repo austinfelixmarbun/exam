@@ -6,13 +6,15 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-product-ho-approval-detail',
-  templateUrl: './product-ho-approval-detail.component.html',
-  styleUrls: ['./product-ho-approval-detail.component.scss']
+  selector: 'app-product-ho-deact-apv-detail',
+  templateUrl: './product-ho-deact-apv-detail.component.html',
+  styleUrls: ['./product-ho-deact-apv-detail.component.scss']
 })
-export class ProductHOApprovalDetailComponent implements OnInit {
+export class ProductHODeactivateApprovalDetailComponent implements OnInit {
 
   prodHId: any;
+  viewProdMainInfoObj: any;
+
 
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
@@ -23,6 +25,7 @@ export class ProductHOApprovalDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
   }
 
 }

@@ -33,6 +33,46 @@
         "value": "",
         "label": "END DATE",
         "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "APV_NO",
+        "id": "ApvNoId",
+        "value": "",
+        "label": "APPROVAL NO",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "A.REQUEST_BY",
+        "id": "ReqById",
+        "value": "",
+        "label": "REQUEST BY",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "MAIN_USERNAME",
+        "id": "TaskOwnerId",
+        "value": "",
+        "label": "TASK OWNER",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "USERNAME",
+        "id": "CurrentUserId",
+        "value": "",
+        "label": "CURRENT USER",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "datepicker",
+        "name": "A.REQUEST_DATE",
+        "id": "ReqDtId",
+        "value": "",
+        "label": "REQUEST DATE",
+        "placeholder": "Placeholder"
       }
     ],
     "headerList": [
@@ -40,73 +80,73 @@
         "type": "sort",
         "position": "center",
         "label": "Request Date",
-        "name": "ReqDt"
+        "name": "A.REQUEST_DATE"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Request Type",
-        "name": "ReqType"
+        "name": "STATUS"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Product Offering Code",
-        "name": "ProdOfferingCode"
+        "name": "PROD_OFFERING_CODE"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Product Offering Name",
-        "name": "ProdOfferingName"
+        "name": "PROD_OFFERING_NAME"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Current Version",
-        "name": "CurrentVersion"
+        "name": "D.PROD_OFFERING_VERSION"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Draft Version",
-        "name": "DraftVersion"
+        "name": "B.PROD_OFFERING_VERSION"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Start Date",
-        "name": "StartDt"
+        "name": "B.START_DT"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "End Date",
-        "name": "EndDt"
+        "name": "B.END_DT"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Approval No",
-        "name": "ApvNo"
+        "name": "A.APV_NO"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Request By",
-        "name": "ReqBy"
+        "name": "A.REQUEST_BY"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Task Owner",
-        "name": "TaskOwner"
+        "name": "MAIN_USERNAME"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Current User",
-        "name": "CurrentUser"
+        "name": "USERNAME"
       },
       {
         "type": "label",

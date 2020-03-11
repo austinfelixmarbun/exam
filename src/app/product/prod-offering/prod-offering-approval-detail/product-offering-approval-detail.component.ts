@@ -13,19 +13,12 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductOfferingApprovalDetailComponent implements OnInit {
 
   prodOfferingHId: any;
-  prodOfferingId: any;
 
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdOfferingHId"] != null) {
         this.prodOfferingHId = params["ProdOfferingHId"];
       }
-      if (params["ProdOfferingId"] != null) {
-        this.prodOfferingId = params["ProdOfferingId"];
-      }
-      console.log("detail");
-      console.log(this.prodOfferingHId);
-      console.log(this.prodOfferingId);
     });
    }
 

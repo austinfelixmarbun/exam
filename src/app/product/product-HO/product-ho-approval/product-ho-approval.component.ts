@@ -28,7 +28,7 @@ export class ProductHOApprovalComponent implements OnInit {
     critObj.DataType = 'text';
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.propName = 'TRX_TYPE';
-    critObj.value = 'PROD_HO_VERIF';
+    critObj.value = AdInsConstant.ApvTrxTypeProductHO;
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }

@@ -18,6 +18,12 @@ export class AdInsConstant {
   public static RestrictionIsNotNull = "isnotnull";
   public static RestrictionGTE = "GTE";
   public static RestrictionLTE = "LTE";
+
+  //APPROVAL TASK MAPPER - TRX TYPE
+  public static ApvTrxTypeProductHO = "PROD_HO_APV";
+  public static ApvTrxTypeProductHODeact = "PROD_HO_DEACT_APV";
+  public static ApvTrxTypeProductOffering = "PROD_OFF_APV";
+  public static ApvTrxTypeProductOfferingDeact = "PROD_OFF_DEACT_APV";
   
   public static showData = "10,50,100";
   public static TimeoutSession = 6000000;
