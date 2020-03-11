@@ -103,7 +103,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       negativeAsset.AssetNegativeId = this.assetNegativeId;
       var refMasterObj = new RefMasterObj();
       refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
-      this.httpClient.post(environment.FoundationR3Url + AdInsConstant.GetListActiveRefMaster, refMasterObj).pipe(
+      this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterObj).pipe(
         map( (response: any) => {
           this.negativeAssetSourceList = response;
           this.AssetNegativeForm.patchValue({
@@ -169,7 +169,7 @@ export class NegativeAssetDetailComponent implements OnInit {
     else{
       var refMasterObj = new RefMasterObj();
       refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
-      this.httpClient.post(environment.FoundationR3Url + AdInsConstant.GetListActiveRefMaster, refMasterObj).subscribe(
+      this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterObj).subscribe(
         (response: any) => {
           this.negativeAssetSourceList = response;
           this.AssetNegativeForm.patchValue({
@@ -195,7 +195,7 @@ export class NegativeAssetDetailComponent implements OnInit {
   getLookupAssetMasterResponse(e){
     var assetType = new AssetTypeObj();
     assetType.AssetTypeId = e.assetTypeId;
-    this.httpClient.post(environment.FoundationR3Url + AdInsConstant.GetAssetTypeById, assetType).subscribe(
+    this.httpClient.post(AdInsConstant.GetAssetTypeById, assetType).subscribe(
       (response: any) => {
         if(response.IsMndtrySerialNo1 == "1"){
           this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);
