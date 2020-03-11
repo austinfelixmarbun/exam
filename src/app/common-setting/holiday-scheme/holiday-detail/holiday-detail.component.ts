@@ -1,13 +1,11 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
+import { Component, OnInit} from '@angular/core';
 import { environment } from 'environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NgForm, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { HolidayCopyObj } from 'app/shared/model/HolidayCopy.Model';
@@ -16,7 +14,7 @@ import { HolidayCopyObj } from 'app/shared/model/HolidayCopy.Model';
   selector: 'app-holiday-detail',
   templateUrl: './holiday-detail.component.html',
   styleUrls: ['./holiday-detail.component.scss'],
-  providers: [NGXToastrService, DecimalPipe]
+  providers: [NGXToastrService]
 })
 export class HolidayDetailComponent implements OnInit {
   HolidaySchmHIdCopy : string;

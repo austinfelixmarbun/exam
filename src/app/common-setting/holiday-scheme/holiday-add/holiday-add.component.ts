@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AdInsService } from 'app/shared/services/adIns.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-holiday-add',
   templateUrl: './holiday-add.component.html',
   styleUrls: ['./holiday-add.component.scss'],
-  providers: [NgbPaginationConfig, NGXToastrService]
+  providers: [NGXToastrService]
 })
 export class HolidayAddComponent implements OnInit {
 

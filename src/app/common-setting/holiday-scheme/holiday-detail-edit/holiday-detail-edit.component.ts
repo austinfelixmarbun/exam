@@ -59,11 +59,9 @@ export class HolidayDetailEditComponent implements OnInit {
 
   SaveForm(){
     var HolidayObj = new HolidayDObj;
-//dari form
     HolidayObj.Descr = this.HolidayListForm.controls.Descr.value;
     HolidayObj.IsPublicHoliday = this.HolidayListForm.controls.IsPublicHoliday.value;
     HolidayObj.HolidayDt = this.HolidayListForm.controls.Date.value;
-//dari result
     HolidayObj.HolidaySchmHId = this.result.HolidaySchmHId;
     HolidayObj.HolidaySchmDId = this.result.HolidaySchmDId;
     HolidayObj.RowVersion = this.result.RowVersion;
