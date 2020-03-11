@@ -68,8 +68,8 @@
       
     ],
     "querystring": { 
-      "select": "SELECT  A.ASSET_CATEGORY_CODE as AssetCategoryCode,  A.ASSET_CATEGORY_NAME as AssetCategoryName, A.ASSET_TYPE_ID AS AssetTypeId, A.ASSET_CATEGORY_ID as AssetCategoryId, A.IS_ACTIVE as IsActive",
-      "from": "FROM ASSET_CATEGORY A WITH(NOLOCK)" 
+      "select": "SELECT  ASSET_CATEGORY_CODE as AssetCategoryCode,  ASSET_CATEGORY_NAME as AssetCategoryName, ASSET_TYPE_ID AS AssetTypeId, ASSET_CATEGORY_ID as AssetCategoryId, IS_ACTIVE as IsActive",
+      "from": "FROM ASSET_CATEGORY  WITH(NOLOCK)" 
     },
     "bodyList": [
       {

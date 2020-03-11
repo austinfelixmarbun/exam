@@ -26,7 +26,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
   AssetTypeId: any;
   AssetCategoryId: any;
   apiUrl: any;
-  settingUrl: string = environment.FoundationR3Url;
+ 
   result: any;
   acObj: AssetCategoryObj;
 
@@ -34,8 +34,8 @@ export class AssetCategoryAddEditComponent implements OnInit {
   addUrl: any;
   editUrl: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewAssetCategory;
-    this.editUrl = environment.FoundationR3Url + AdInsConstant.EditAssetCategory;
+    this.addUrl =  AdInsConstant.AddNewAssetCategory;
+    this.editUrl =  AdInsConstant.EditAssetCategory;
     this.route.queryParams.subscribe(params => {
 
 
@@ -58,7 +58,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
     if (this.pageType == "edit") {
       // this.title = "Edit Bank";
       var acObj = new AssetCategoryObj();
-      this.apiUrl = this.settingUrl + AdInsConstant.GetAssetCategorybyAssetCategoryId;
+      this.apiUrl =   AdInsConstant.GetAssetCategorybyAssetCategoryId;
       this.AssetCategoryForm.controls.AssetCategoryCode.disable();
 
 

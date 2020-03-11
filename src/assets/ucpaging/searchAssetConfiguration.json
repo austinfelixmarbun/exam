@@ -77,8 +77,8 @@
       }
     ],
     "querystring": { 
-      "select": "SELECT A.ASSET_TYPE_ID as AssetTypeId,  A.ASSET_TYPE_CODE as AssetTypeCode, A.ASSET_TYPE_NAME as AssetTypeName, A.IS_ACTIVE as IsActive",
-      "from": "FROM ASSET_TYPE A WITH(NOLOCK)"
+      "select": "SELECT ASSET_TYPE_ID as AssetTypeId,  ASSET_TYPE_CODE as AssetTypeCode, ASSET_TYPE_NAME as AssetTypeName, IS_ACTIVE as IsActive",
+      "from": "FROM ASSET_TYPE  WITH(NOLOCK)"
     },
     "bodyList": [
       {
