@@ -7,7 +7,7 @@
           <br />
           <div *ngFor="let item of GenData">
             <label class="col-md-3">{{item.ProdCompntName}}</label>
-            <label class="col-md-9">{{item.CompntValue}}</label>
+            <label class="col-md-9">{{item.CompntValueDesc}}</label>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
             <br />
             <div *ngFor="let item of ProdCompSchm">
               <label class="col-md-4">{{item.ProdCompntName}}</label>
-              <label class="col-md-4">{{item.CompntValue}}</label>
+              <label class="col-md-4">{{item.CompntValueDesc}}</label>
             </div>
           </div>
           <div>
@@ -34,7 +34,7 @@
             <br />
             <div *ngFor="let item of ProdCompScore">
               <label class="col-md-4">{{item.ProdCompntName}}</label>
-              <label class="col-md-4">{{item.CompntValue}}</label>
+              <label class="col-md-4">{{item.CompntValueDesc}}</label>
               <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
             </div>
           </div>
@@ -45,7 +45,7 @@
             <br />
             <div *ngFor="let item of ProdCompRule">
               <label class="col-md-4">{{item.ProdCompntName}}</label>
-              <label class="col-md-4">{{item.CompntValue}}</label>
+              <label class="col-md-4">{{item.CompntValueDesc}}</label>
               <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
             </div>
           </div>
@@ -56,7 +56,8 @@
             <br />
             <div *ngFor="let item of ProdCompOther">
               <label class="col-md-4">{{item.ProdCompntName}}</label>
-              <label class="col-md-4">{{item.CompntValue}}</label>
+              <label class="col-md-4">{{item.CompntValueDesc}}</label>
+              <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
             </div>
           </div>
         </div>
