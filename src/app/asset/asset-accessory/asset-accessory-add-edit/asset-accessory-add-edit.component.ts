@@ -27,8 +27,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
   AssetTypeId: any;
   AssetAccessoryId: any;
   apiUrl: any;
-  settingUrl: string = environment.FoundationR3Url;
-  urlEnviPaging: string = environment.foundationUrl;
+  
   result: any;
   acObj: AssetAccessoryObj;
   getUrl: any;
@@ -36,8 +35,8 @@ export class AssetAccessoryAddEditComponent implements OnInit {
   editUrl: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewAssetAccesory;
-    this.editUrl = environment.FoundationR3Url + AdInsConstant.EditAssetAccessory;
+    this.addUrl =   AdInsConstant.AddNewAssetAccesory;
+    this.editUrl =  AdInsConstant.EditAssetAccessory;
     this.route.queryParams.subscribe(params => {
 
 
@@ -69,7 +68,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     
       acObj.AssetAccessoryId = this.AssetAccessoryId;
       acObj.AssetTypeId = this.AssetTypeId;
-      this.apiUrl = this.settingUrl + AdInsConstant.GetAssetAccessorybyAssetAccessoryId;
+      this.apiUrl =   AdInsConstant.GetAssetAccessorybyAssetAccessoryId;
       this.AssetAccessoryForm.controls.AssetAccessoryCode.disable();
 
       console.log("awd");

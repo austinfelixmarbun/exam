@@ -20,7 +20,7 @@
       },
       {
         "type": "dropdown",
-        "name": "is_Active",
+        "name": "IS_ACTIVE",
         "id": "isActive",
         "value": "Active Status",
         "placeholder": "Placeholder",
@@ -46,19 +46,19 @@
         "type": "sort",
         "position": "left",
         "label": "ASSET Accessory CODE",
-        "name": "AssetAccessoryCode"
+        "name": "ASSET_ACCESSORY_CODE"
       },
       {
         "type": "sort",
         "position": "left",
         "label": "ASSET Accessory NAME",
-        "name": "AssetAccessoryName"
+        "name": "ASSET_ACCESSORY_NAME"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "ACTIVE STATUS",
-        "name": "isActive"
+        "name": "IS_ACTIVE"
       },
       {
         "type": "label",
@@ -69,8 +69,8 @@
     ],
     
         "querystring": { 
-            "select": "SELECT  A.ASSET_ACCESSORY_CODE as AssetAccessoryCode,A.ASSET_ACCESSORY_NAME as AssetAccessoryName,A.ASSET_TYPE_ID AS AssetTypeId, A.ASSET_ACCESSORY_ID as AssetAccessoryId,  A.IS_ACTIVE as IsActive",
-          "from": "FROM ASSET_ACCESSORY A WITH(NOLOCK)" 
+            "select": "SELECT ASSET_ACCESSORY_CODE AS AssetAccessoryCode, ASSET_ACCESSORY_NAME AS AssetAccessoryName, ASSET_TYPE_ID AS AssetTypeId, ASSET_ACCESSORY_ID AS AssetAccessoryId, IS_ACTIVE AS IsActive",
+          "from": "FROM dbo.ASSET_ACCESSORY WITH(NOLOCK)" 
     },
     "bodyList": [
       {

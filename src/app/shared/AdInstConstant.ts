@@ -415,48 +415,37 @@ export class AdInsConstant {
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
 
   //asset accesory
-  public static AddNewAssetAccesory = "/AssetAccessory/AddAssetAccessory"
-  public static EditAssetAccessory = "/AssetAccessory/EditAssetAccessory"
-  public static GetAssetAccessorybyAssetAccesoryCode = "/AssetAccessory/GetAssetAccessoryByCode"
-  public static GetAssetAccessorybyAssetAccessoryId = "/AssetAccessory/GetAssetAccessoryById"
-  public static GetlistAssetAccessorybyAssetTypeId = "/AssetAccessory/GetListAssetAccessoryByAssetTypeId"
+  public static AddNewAssetAccesory =  environment.FoundationR3Url + "/AssetAccessory/AddAssetAccessory"
+  public static EditAssetAccessory =  environment.FoundationR3Url+"/AssetAccessory/EditAssetAccessory"
+  public static GetAssetAccessorybyAssetAccesoryCode = environment.FoundationR3Url+ "/AssetAccessory/GetAssetAccessoryByCode"
+  public static GetAssetAccessorybyAssetAccessoryId =  environment.FoundationR3Url+"/AssetAccessory/GetAssetAccessoryById"
+  public static GetlistAssetAccessorybyAssetTypeId =  environment.FoundationR3Url+"/AssetAccessory/GetListAssetAccessoryByAssetTypeId"
   public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory"
 
   //asset category
-  public static AddNewAssetCategory = "/AssetCategory/AddAssetCategory"
-  public static EditAssetCategory = "/AssetCategory/EditAssetCategory"
-  public static GetAssetCategoryByAssetCategoryCode = "/AssetCategory/GetAssetCategoryByCode"
-  public static GetAssetCategorybyAssetCategoryId = "/AssetCategory/GetAssetCategoryById"
-  public static GetlistAssetCategorybyAssetTypeId = "/AssetCategory/GetListAssetCategoryByAssetTypeId"//
+  public static AddNewAssetCategory = environment.FoundationR3Url +  "/AssetCategory/AddAssetCategory"
+  public static EditAssetCategory =  environment.FoundationR3Url+ "/AssetCategory/EditAssetCategory"
+  public static GetAssetCategoryByAssetCategoryCode = environment.FoundationR3Url+  "/AssetCategory/GetAssetCategoryByCode"
+  public static GetAssetCategorybyAssetCategoryId =  environment.FoundationR3Url+ "/AssetCategory/GetAssetCategoryById"
+  public static GetlistAssetCategorybyAssetTypeId = environment.FoundationR3Url+ "/AssetCategory/GetListAssetCategoryByAssetTypeId"//
   public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory"
   public static GetActiveAssetCategoryValue = environment.FoundationR3Url + "/AssetCategory/GetListActiveAssetCategoryValue"
 
-  //   public static AddNewAssetAccesory = "/AssetAccessory/AddAssetAccessory";
-  //   public static EditAssetAccessory = "/AssetAccessory/EditAssetAccessory";
-  //   public static GetAssetAccessorybyAssetAccesoryCode = "/AssetAccessory/GetAssetAccessoryByCode";
-  //   public static GetAssetAccessorybyAssetAccessoryId = "/AssetAccessory/GetAssetAccessoryById";
-  //   public static GetlistAssetAccessorybyAssetTypeId = "/AssetAccessory/GetListAssetAccessoryByAssetTypeId";
-  //   public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory";
-  // //asset category
-  //   public static AddNewAssetCategory = "/AssetCategory/AddAssetCategory";
-  //   public static EditAssetCategory = "/AssetCategory/EditAssetCategory";
-  //   public static GetAssetCategoryByAssetCategoryCode = "/AssetCategory/GetAssetCategoryByCode";
-  //   public static GetAssetCategorybyAssetCategoryId = "/AssetCategory/GetAssetCategoryById";
-  //   public static GetlistAssetCategorybyAssetTypeId = "/AssetCategory/GetListAssetCategoryByAssetTypeId";//;
-  //   public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory";
+  
+
   //asset doc list
-  public static AddNewAssetDocList = "/AssetDocList/AddAssetDocList"
-  public static EditAssetDocList = "/AssetDocList/EditAssetDocList"
-  public static GetAssetDocListByAssetDocListId = "/AssetDocList/GetAssetDocListById"
-  public static GetlistAssetDocListByAssetTypeId = "/AssetDocList/GetListAssetDocListByAssetTypeId"
+  public static AddNewAssetDocList = environment.FoundationR3Url + "/AssetDocList/AddAssetDocList"
+  public static EditAssetDocList = environment.FoundationR3Url +"/AssetDocList/EditAssetDocList"
+  public static GetAssetDocListByAssetDocListId = environment.FoundationR3Url + "/AssetDocList/GetAssetDocListById"
+  public static GetlistAssetDocListByAssetTypeId = environment.FoundationR3Url + "/AssetDocList/GetListAssetDocListByAssetTypeId"
   public static DeleteAssetDocList = "/AssetDocList/DeleteAssetDocList"
 
   //asset ref doc
-  public static AddNewRefAssetDocData = "/RefAssetDoc/AddRefAssetDoc"
-  public static EditRefAssetDocData = "/RefAssetDoc/EditRefAssetDoc"
-  public static GetRefAssetDocByAssetDocCode = "/RefAssetDoc/GetRefAssetDocByAssetDocCode"
-  public static GetRefAssetDocByRefAssetDocId = "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
-  public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc"
+  public static AddNewRefAssetDocData = environment.FoundationR3Url +"/RefAssetDoc/AddRefAssetDoc"
+  public static EditRefAssetDocData = environment.FoundationR3Url +"/RefAssetDoc/EditRefAssetDoc"
+  public static GetRefAssetDocByAssetDocCode = environment.FoundationR3Url +"/RefAssetDoc/GetRefAssetDocByAssetDocCode"
+  public static GetRefAssetDocByRefAssetDocId =environment.FoundationR3Url + "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
+  public static GetListRefAssetDoc = environment.FoundationR3Url +"/RefAssetDoc/GetListRefAssetDoc"
   public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
    
   //Asset Scheme
