@@ -69,7 +69,7 @@
     ],
     
         "querystring": { 
-            "select": "SELECT  ASSET_ACCESSORY_CODE as AssetAccessoryCode,ASSET_ACCESSORY_NAME as AssetAccessoryName,ASSET_TYPE_ID AS AssetTypeId, ASSET_ACCESSORY_ID as AssetAccessoryId,  IS_ACTIVE as IsActive",
+            "select": "SELECT ASSET_ACCESSORY_CODE AS AssetAccessoryCode, ASSET_ACCESSORY_NAME AS AssetAccessoryName, ASSET_TYPE_ID AS AssetTypeId, ASSET_ACCESSORY_ID AS AssetAccessoryId, IS_ACTIVE AS IsActive",
           "from": "FROM dbo.ASSET_ACCESSORY WITH(NOLOCK)" 
     },
     "bodyList": [
