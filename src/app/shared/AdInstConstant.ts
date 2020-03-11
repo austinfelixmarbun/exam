@@ -329,8 +329,8 @@ export class AdInsConstant {
   public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
   public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
   public static GetListAssetMasterByAssetSchmHId = "http://localhost:5000" + "/AssetMaster/GetListAssetMasterByAssetSchmHId"
+  
   //REF PROFESSION
-
   public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
   public static EditRefProfession = environment.FoundationR3Url + "/RefProfession/EditRefProfession";
   public static DeleteRefProfession = "/RefProfession/DeleteRefProfession";

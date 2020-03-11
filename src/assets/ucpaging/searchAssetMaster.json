@@ -145,7 +145,7 @@
     },
     {
       "type": "sort",
-      "position": "left",
+      "position": "center",
       "label": "Active Status",
       "name": "A.IS_ACTIVE"
     },
@@ -193,7 +193,7 @@
     },
     {
       "type": "boolean",
-      "position": "left",
+      "position": "center",
       "property": "IsActive"
     },
     {
@@ -432,6 +432,10 @@
                 }
               }
           ]
+        },
+        {
+          "type": "delete",
+          "property": "AssetMasterId"
         }
       ]
     }

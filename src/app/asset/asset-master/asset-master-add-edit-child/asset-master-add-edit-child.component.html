@@ -74,8 +74,8 @@
                   <table class="table table-responsive-md text-center table-hover">
                     <thead>
                       <tr class="table-header">
-                        <th><span class="thead-header" name='checkbox' translate>
-                        </span>
+                        <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll"
+                          name="CheckAll">
                         </th>
                         <th style="text-align: left;"><span class="thead-header" name='assetSchemeCode' translate>Asset Scheme Code
                         </span>

@@ -45,6 +45,8 @@ export class AssetMasterAddEditChildComponent implements OnInit {
   listRequest: any;
   listAssetScheme: any;
   isFinal: any;
+  listSelectedId: Array<any> = [];
+  checkboxAll: any = false;
   AssetMasterChildForm = this.fb.group({
     AssetCategoryId: [''],
     AssetTypeId: [0, [Validators.required]],
@@ -98,6 +100,29 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     });
   }
 
+  SelectAll(condition) {
+    this.checkboxAll = condition;
+    console.log(condition);
+    if (condition) {
+      for (let i = 0; i < this.listAssetScheme.length; i++) {
+        if (this.listSelectedId.indexOf(this.listAssetScheme[i].AssetMasterId) < 0) {
+          this.listSelectedId.push(this.listAssetScheme[i].AssetMasterId);
+        }
+      }
+
+    } else {
+      for (let i = 0; i < this.listAssetScheme.length; i++) {
+        let index = this.listSelectedId.indexOf(this.listAssetScheme[i].AssetMasterId);
+        if (index > -1) {
+          this.listSelectedId.splice(index, 1);
+        }
+        console.log(this.listAssetScheme[i]);
+      }
+    }
+    console.log(this.checkboxAll);
+    console.log(this.listSelectedId);
+  }
+
   ngOnInit() {
     var critObj = new CriteriaObj();
     critObj.DataType = 'text';
@@ -120,6 +145,8 @@ export class AssetMasterAddEditChildComponent implements OnInit {
 
 
     if (this.pageType == "edit") {
+      this.AssetMasterChildForm.controls["AssetCode"].disable();
+      this.AssetMasterChildForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.http.post(this.getUrl, this.assetMasterObj).subscribe(
@@ -200,13 +227,9 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       this.assetSchmListDObj = new AssetSchmListObj();
       this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
       this.assetSchmListDObj.AssetTypeId = this.AssetTypeId;
-      console.log("asdfgh");
-      console.log(this.assetSchmListDObj);
       this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
         response => {
           this.listAssetScheme = response['ReturnObject'];
-          console.log("coba");
-          console.log(this.listAssetScheme);
         });
   }
 
