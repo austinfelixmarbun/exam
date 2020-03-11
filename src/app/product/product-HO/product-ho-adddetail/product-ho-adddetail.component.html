@@ -4,8 +4,8 @@
 
       <div class="card-header header-title">
         <div class="row">
-          <div class="col-md-4" style="text-align-last: right">
-            <button type="button" class="backButton" [routerLink]="['/product/HOpaging']" translate>
+          <div class="col-md-4" style="text-align-last: left">
+            <button type="button" class="backButton ucSearch-Button-Left" [routerLink]="['/product/HOpaging']" translate>
               <i class="ft-arrow-left"></i> Back
             </button>
           </div>
@@ -72,7 +72,7 @@
 
       <div class="card-body">
         <div class="px-3">
-          <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="1">
+          <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="0">
             <aw-wizard-step [stepTitle]="'General Data'"
               [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
               <app-general-data-HO [objInput]="objPassing"></app-general-data-HO>

@@ -23,11 +23,13 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from "angular-archwizard";
-<<<<<<< HEAD
 import { ListOfficeMemberComponent } from './product-HO/product-ho-adddetail/office-member/list-office-member/list-office-member.component';
 import { SearchOfficeComponent } from './product-HO/product-ho-adddetail/office-member/search-office/search-office.component';
 import { GeneralDataComponent } from './prod-offering/prod-offering-add-detail/general-data/general-data.component';
 import { OfficeMemberComponent } from './prod-offering/prod-offering-add-detail/office-member/office-member.component';
+import { ProductHOViewComponent } from './product-HO/product-ho-view/product-ho-view.component';
+import { ProductOfferingViewComponent } from './prod-offering/prod-offering-view/product-offering-view.component';
+import { MatTabsModule, MatDividerModule } from '@angular/material';
 
 @NgModule({
     imports: [
@@ -43,7 +45,9 @@ import { OfficeMemberComponent } from './prod-offering/prod-offering-add-detail/
         UcgridfooterModule,
         UcSubsectionModule,
         CommonModule,
-        ArchwizardModule
+        ArchwizardModule,
+        MatTabsModule,
+        MatDividerModule
     ],
     declarations: [
         ProdOfferingPagingComponent,
@@ -61,51 +65,10 @@ import { OfficeMemberComponent } from './prod-offering/prod-offering-add-detail/
         SearchOfficeComponent,
         GeneralDataHOComponent,
         ProductComponentHOComponent,
-        OfficeMemberHOComponent
+        OfficeMemberHOComponent,
+        ProductHOViewComponent,
+        ProductOfferingViewComponent
     ]
   })
 
-=======
-import { GeneralDataComponent } from "./product-HO/product-ho-adddetail/general-data/general-data.component";
-import { OfficeMemberComponent } from "./product-HO/product-ho-adddetail/office-member/office-member.component";
-import { ProductComponentComponent } from "./product-HO/product-ho-adddetail/product-component/product-component.component";
-import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatDividerModule } from '@angular/material/divider';
-import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
-
-@NgModule({
-  imports: [
-    ProductRoutingModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcSubsectionModule,
-    UcpagingModule,
-    HttpModule,
-    SharingComponentModule,
-    UcviewgenericModule,
-    ArchwizardModule,
-    MatTabsModule,
-    MatDividerModule
-  ],
-  declarations: [
-    ProductHOPagingComponent,
-    ProductHOAddComponent,
-    ProductHoAdddetailComponent,
-    ProdOfferingPagingComponent,
-    ProdOfferingAddComponent,
-    ProductHODeactivatePagingComponent,
-    ProductHODeactivateEditComponent,
-    GeneralDataComponent,
-    ProductComponentComponent,
-    OfficeMemberComponent,
-    ProductHOViewComponent,
-    ProductOfferingViewComponent
-  ]
-
-})
->>>>>>> 896c9eef9c63df5bf623942342c30429a42bbdb2
 export class ProductModule { }

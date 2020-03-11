@@ -398,7 +398,7 @@ export class AdInsConstant {
   public static AddProductOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProductOfficeMbrBatch";
   public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId";
   public static DeleteProductOfficeMbr = environment.FoundationR3Url + "/Product/DeleteProductOfficeMbr";
-
+  public static GetListProdHVersionByProdId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdId";
 
   public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
   public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
@@ -410,9 +410,10 @@ export class AdInsConstant {
   public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering"
   public static GetListProdOfferingVersionByProdId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingVersionByProdId"
   public static GetListProdOfferingBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHId"
-
+  
   // PRODUCT COMPONENT
   public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
+  public static GetProductOfferingComponent = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponent";
 
   //REF REASON
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
@@ -487,8 +488,6 @@ export class AdInsConstant {
   // public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
   // public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
 
-<<<<<<< HEAD
-=======
   //Customer Personal
   public static AddNewCustPersonal = environment.FoundationR3Url + "/CustPersonal/AddCustPersonal"
   public static EditCustPersonal = environment.FoundationR3Url + "/CustPersonal/EditCustPersonal"
@@ -500,5 +499,4 @@ export class AdInsConstant {
   
  
  
->>>>>>> 896c9eef9c63df5bf623942342c30429a42bbdb2
 }
