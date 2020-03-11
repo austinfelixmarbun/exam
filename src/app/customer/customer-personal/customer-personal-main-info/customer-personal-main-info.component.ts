@@ -24,8 +24,8 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     IdNo: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.required]],
     IdExpiredDt: ['', [Validators.required]],
-    MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]]
-
+    MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
+    CustModel : ['', [Validators.required]]
   });
 
   getUrl: any;
@@ -33,7 +33,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   custPersonalObj: CustPersonalObj;
   tempGender: any;
   tempIdType: any;
-  
+  tempCustModel : any;
   CustName  : any;
   indexGender:any;
   Gender : any;
@@ -82,8 +82,21 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         });
       }
     );
+    console.log( "awdawdwad");
+    var refMasterObj2 = {
+      RefMasterTypeCode: "CUST_MODEL",
+      RowVersion: ""
+    }
 
+    this.http.post(this.getUrl, refMasterObj2).subscribe(
+      (response) => {
+        this.tempCustModel = response["ReturnObject"];
+        this.CustomerPersonalForm.patchValue({
+          CustModel: 0
 
+        });
+      }
+    );
   }
 
   SaveValue (){ 
@@ -96,7 +109,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.indexMrIdTypeCode = this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
     this.MrIdTypeCode= this.tempIdType[this.indexMrIdTypeCode].Key;
     this.MrIdTypeCodeDesc = this.tempIdType[this.indexMrIdTypeCode].Value;
-    console.log(  this.MrIdTypeCode);
+   
     this.BirthPlace = this.CustomerPersonalForm.controls["BirthPlace"].value;
     this.BirthDt= this.CustomerPersonalForm.controls["BirthDt"].value;
     this.IdNo = this.CustomerPersonalForm.controls["IdNo"].value;

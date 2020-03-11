@@ -20,33 +20,42 @@ import { ArchwizardModule } from "angular-archwizard";
 import { GeneralDataComponent } from "./product-HO/product-ho-adddetail/general-data/general-data.component";
 import { OfficeMemberComponent } from "./product-HO/product-ho-adddetail/office-member/office-member.component";
 import { ProductComponentComponent } from "./product-HO/product-ho-adddetail/product-component/product-component.component";
+import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 
 @NgModule({
-    imports: [
-        ProductRoutingModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        UCSearchModule,
-        UcgridfooterModule,
-        UcSubsectionModule,
-        UcpagingModule,
-        HttpModule,
-        SharingComponentModule,
-        UcviewgenericModule,
-        ArchwizardModule
-    ],
-    declarations: [
-        ProductHOPagingComponent,
-        ProductHOAddComponent,
-        ProductHoAdddetailComponent,
-        ProdOfferingPagingComponent,
-        ProdOfferingAddComponent,
-        ProductHODeactivatePagingComponent,
-        ProductHODeactivateEditComponent,
-        GeneralDataComponent,
-        ProductComponentComponent,
-        OfficeMemberComponent
-    ]
+  imports: [
+    ProductRoutingModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    UCSearchModule,
+    UcgridfooterModule,
+    UcSubsectionModule,
+    UcpagingModule,
+    HttpModule,
+    SharingComponentModule,
+    UcviewgenericModule,
+    ArchwizardModule,
+    MatTabsModule,
+    MatDividerModule
+  ],
+  declarations: [
+    ProductHOPagingComponent,
+    ProductHOAddComponent,
+    ProductHoAdddetailComponent,
+    ProdOfferingPagingComponent,
+    ProdOfferingAddComponent,
+    ProductHODeactivatePagingComponent,
+    ProductHODeactivateEditComponent,
+    GeneralDataComponent,
+    ProductComponentComponent,
+    OfficeMemberComponent,
+    ProductHOViewComponent,
+    ProductOfferingViewComponent
+  ]
+
 })
 export class ProductModule { }
