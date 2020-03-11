@@ -86,5 +86,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'Product',
     loadChildren: './product/product.module#ProductModule'
+  },
+  {
+    path: 'ApprovalScreen',
+    loadChildren: './approval-screen/approval-screen.module#ApprovalScreenModule'
   }
 ];
