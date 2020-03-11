@@ -483,60 +483,6 @@ export class OfficeAddComponent implements OnInit {
   toggleAllowAppCreated(e) {
     this.isAllowAppCreated = e.target.checked;
   }
-
-  // onChangeRefOrg(refOrgValue, edit: boolean = false) {
-  //   for (var i = 0; i < this.allRefOrg.length; i++) {
-  //     if (refOrgValue == this.allRefOrg[i].refOrgId) {
-  //       this.hierarchyNo = this.allRefOrg[i].hierarchyNo;
-  //       console.log(this.hierarchyNo);
-  //       if (this.hierarchyNo == 1) {
-  //         this.isHO = true;
-  //       } else {
-  //         this.isHO = false;
-  //         this.isDisabledState = false;
-  //       }
-  //     }
-  //   }
-
-  //   this.orgMdlObj = new OrgMdlObj();
-  //   this.orgMdlObj.refOrgId = refOrgValue
-  //   this.httpClient.post(this.orgMdlUrl, this.orgMdlObj).subscribe(
-  //     (response) => {
-  //       this.allOrgMdl = response['returnObject'];
-  //       if (edit == false) {
-  //         this.orgMdlId = response['returnObject'][0]['orgMdlId'];
-  //       }
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     })
-  //   this.httpClient.post(this.officeParentUrl, this.orgMdlObj).subscribe(
-  //     (response) => {
-  //       this.allOfficeParent = response['returnObject'];
-  //       if (response['returnObject']['length'] != 0) {
-  //         if (edit == false) {
-  //           this.parentId = response['returnObject'][0]['refOfficeId'];
-  //           this.onChangeOfficeParent(response['returnObject'][0]['refOfficeId']);
-  //         } else {
-  //           this.onChangeOfficeParent(this.parentId);
-  //         }
-  //       }
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     })
-  // }
-
-  // onChangeOfficeParent(officeParentValue) {
-  //   if (this.hierarchyNo > 2) {
-  //     for (var i = 0; i < this.allOfficeParent.length; i++) {
-  //       if (officeParentValue == this.allOfficeParent[i].RefOfficeId) {
-  //         this.mrKonvenSyariah = this.allOfficeParent[i].mrKonvenSyariah;
-  //         this.isDisabledState = true;
-  //       }
-  //     }
-  //   }
-  // }
   getLookUp(ev) {
     console.log("isi ev");
     console.log(ev);

@@ -51,7 +51,7 @@ const routes: Routes = [
           title: 'Vendor Group Member View'
         },
       },
-        
+      {
         path: 'VendorScheme/Detail',
         component: VendorSchemeAddEditComponent,
         data: {
@@ -92,8 +92,9 @@ const routes: Routes = [
         data: {
           title: 'Vendor HO Member'
         },
-      }
+      },
     ]
+
   }
 ];
 
