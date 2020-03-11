@@ -70,6 +70,20 @@ const routes: Routes = [
           title: 'Product HO Deactivate'
         }
       },
+      {
+        path: 'HOView',
+        component: ProductHOViewComponent,
+        data: {
+          title: 'Product HO View'
+        }
+      },
+      {
+        path: 'OfferingView',
+        component: ProductOfferingViewComponent,
+        data: {
+          title: 'Product Offering View'
+        }
+      }
     ]
   }
 ]

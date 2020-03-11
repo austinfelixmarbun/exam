@@ -54,9 +54,9 @@ export class AssetTypeAddEditComponent implements OnInit {
   assetTypeCode: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getUrl = environment.FoundationR3Url + AdInsConstant.GetAssetTypeById;
-    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddAssetType;
-    this.editUrl = environment.FoundationR3Url + AdInsConstant.EditAssetType;
+    this.getUrl =  AdInsConstant.GetAssetTypeById;
+    this.addUrl =  AdInsConstant.AddAssetType;
+    this.editUrl =  AdInsConstant.EditAssetType;
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -236,7 +236,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.assetTypeObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/asset/type/paging"]);
+            this.router.navigate(["/Asset/Type/Paging"]);
         },
         error => {
           console.log(error);
@@ -249,7 +249,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.http.post(this.editUrl, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/asset/type/paging"]);
+          this.router.navigate(["/Asset/Type/Paging"]);
         },
         error => {
           console.log(error);

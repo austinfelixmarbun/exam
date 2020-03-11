@@ -4,17 +4,17 @@
         {
             "type" : "dropdown",
             "label" : "Asset Type Name",
-            "name" : "asset_Type_Name",
+            "name" : "C.ASSET_TYPE_CODE",
             "id" : "assetTypeName",
             "value" : "",
             "datatype" : "text",
-            "isSelectOne" : "false",
+            "isSelectOne" : false,
             "items" : [],
-            "isFromURL" : "true", 
+            "isFromURL" : true, 
             "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetType/GetListKeyValueActiveByCode", 
-            "itemsUrl" : [], 
-            "criteriaPropName" : "",
-            "criteriaPropValue" : ""
+            "itemsUrl" : [],
+            "isEvent" : true,
+            "affectedFilter" : ["B.ASSET_CATEGORY_CODE"]
         },
         {
             "type": "textbox",
@@ -27,17 +27,15 @@
         {
             "type" : "dropdown",
             "label" : "Asset Category Name",
-            "name" : "asset_Category_Name",
+            "name" : "B.ASSET_CATEGORY_CODE",
             "id" : "assetCategoryName",
             "value" : "",
             "datatype" : "text",
-            "isSelectOne" : "false",
+            "isSelectOne" : false,
             "items" : [],
-            "isFromURL" : "true", 
-            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetCategory/GetListActiveAssetCategoryValue", 
-            "itemsUrl" : [], 
-            "criteriaPropName" : "",
-            "criteriaPropValue" : ""
+            "isFromURL" : true, 
+            "url" : "http://localhost:5000/AssetCategory/GetListAssetCategoryWithCriteriaObjNegativeAssetPage", 
+            "itemsUrl" : []
         },
         {
             "type": "textbox",
@@ -86,10 +84,10 @@
             "id" : "negativeSource",
             "value" : "",
             "datatype" : "text",
-            "isSelectOne" : "false",
+            "isSelectOne" : false,
             "items" : [],
-            "isFromURL" : "true", 
-            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetRefMasterByMasterCode", 
+            "isFromURL" : true, 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", 
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "NEG_ASSET_SOURCE"
@@ -104,7 +102,7 @@
         },
         {
             "type": "dropdown",
-            "name": "is_Active",
+            "name": "A.is_Active",
             "id": "isActive",
             "value": "Active Status",
             "placeholder": "Placeholder",
@@ -126,8 +124,8 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT A.ASSET_NEGATIVE_ID AS assetNegativeId, C.ASSET_TYPE_NAME AS assetTypeName, B.FULL_ASSET_CODE AS fullAssetCode, B.FULL_ASSET_NAME AS fullAssetName, A.SERIAL_NO_1 AS serialNo1, A.SERIAL_NO_2 AS serialNo2, A.SERIAL_NO_3 AS serialNo3, A.SERIAL_NO_4 AS serialNo4, A.SERIAL_NO_5 AS serialNo5, D.DESCR as descr, A.IS_ACTIVE AS isActive",
-        "from": "FROM ASSET_NEGATIVE AS A WITH(NOLOCK) INNER JOIN ASSET_MASTER AS B WITH(NOLOCK) ON A.ASSET_MASTER_ID = B.ASSET_MASTER_ID INNER JOIN ASSET_TYPE AS C WITH(NOLOCK) ON B.ASSET_TYPE_ID = C.ASSET_TYPE_ID INNER JOIN REF_MASTER AS D WITH(NOLOCK) ON A.MR_NEG_ASSET_SOURCE_CODE = D.MASTER_CODE"
+        "select": "SELECT C.ASSET_TYPE_NAME AS assetTypeName, B.FULL_ASSET_CODE AS fullAssetCode, B.FULL_ASSET_NAME AS fullAssetName, A.SERIAL_NO_1 AS serialNo1, A.SERIAL_NO_2 AS serialNo2, A.SERIAL_NO_3 AS serialNo3, A.SERIAL_NO_4 AS serialNo4, A.SERIAL_NO_5 AS serialNo5, D.DESCR as descr, A.IS_ACTIVE AS isActive, A.ASSET_NEGATIVE_ID AS assetNegativeId", 
+        "from": "FROM ASSET_NEGATIVE AS A WITH(NOLOCK) INNER JOIN ASSET_MASTER AS B WITH(NOLOCK) ON A.ASSET_MASTER_ID = B.ASSET_MASTER_ID INNER JOIN ASSET_TYPE AS C WITH(NOLOCK) ON B.ASSET_TYPE_ID = C.ASSET_TYPE_ID INNER JOIN REF_MASTER AS D WITH(NOLOCK) ON A.MR_NEG_ASSET_SOURCE_CODE = D.MASTER_CODE INNER JOIN ASSET_CATEGORY AS E WITH(NOLOCK) ON B.ASSET_CATEGORY_ID = E.ASSET_CATEGORY_ID"
     },
     "headerList" : [ 
         {

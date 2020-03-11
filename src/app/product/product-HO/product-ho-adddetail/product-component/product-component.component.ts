@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -66,7 +66,15 @@ export class ProductComponentHOComponent implements OnInit {
   refProductDetailObj;
   items;
   lengthDataReturnObj;
+  SchmData;
+  RuleData;
+  ScoreData;
+  OthrData;
   ngOnInit() {
+    this.SchmData = 0;
+    this.RuleData = 0;
+    this.ScoreData = 0;
+    this.OthrData = 0;
 
     this.inputLookUpObj = new InputLookupObj();
     this.inputLookUpObj.urlJson = "./assets/uclookup/product/lookupProduct.json";
@@ -97,6 +105,7 @@ export class ProductComponentHOComponent implements OnInit {
         console.log(response);
         // console.log(response["ReturnObject"].length);
         this.lengthDataReturnObj = response["ReturnObject"].length;
+        var dataTemp = response["ReturnObject"];
 
         if (this.lengthDataReturnObj) {
           for (var i = 0; i < this.lengthDataReturnObj; i++) {
@@ -124,21 +133,37 @@ export class ProductComponentHOComponent implements OnInit {
                 value: ['']
               })])
             }) as FormGroup;
-            // Get DDL
             if (eachDataDetail.controls.RowVersion.value == null) {
               eachDataDetail.patchValue({
                 RowVersion: ""
               });
+            }
+            
+            if(eachDataDetail.controls.RefProdCompntGrpCode.value == "SCHM"){
+              this.SchmData++;
+            }else if(eachDataDetail.controls.RefProdCompntGrpCode.value == "RULE"){
+              this.RuleData++;
+            }else if(eachDataDetail.controls.RefProdCompntGrpCode.value == "SCORE"){
+              this.ScoreData++;
+            }else if(eachDataDetail.controls.RefProdCompntGrpCode.value == "OTHR"){
+              this.OthrData++;
             }
 
             var flag = false;
             if (eachDataDetail.controls.ProdHId.value == 0) {
               flag = true;
             }
-
+            
+            // Get DDL
             if (eachDataDetail.controls.ProdCompntType.value == "DDL") {
               this.resolveDDL(eachDataDetail, i, flag);
+              eachDataDetail.controls.CompntValue.clearValidators();
+              eachDataDetail.controls.CompntValue.updateValueAndValidity();
+            }else if(eachDataDetail.controls.ProdCompntType.value == "AMT"){
+              eachDataDetail.controls.CompntValue.setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+              eachDataDetail.controls.CompntValue.updateValueAndValidity();
             }
+            // Get DDL Behaviour
             this.resolveDDLBehaviour(eachDataDetail, i, flag);
             // Push Data
             this.items.push(eachDataDetail);
@@ -147,6 +172,20 @@ export class ProductComponentHOComponent implements OnInit {
         this.items.removeAt(0);
         console.log("cek form");
         console.log(this.RefGeneralDataForm);
+        // this.RuleData = dataTemp.filter(comp => 
+        //   comp.RefProdCompntGrpCode == "RULE");
+        // console.log(this.RuleData);
+        // console.log(this.items);
+        // console.log("total data:")
+        // console.log(this.SchmData);
+        // console.log(this.RuleData);
+        // console.log(this.OthrData);
+        // console.log(this.ScoreData);
+
+        console.log("cek finish");
+        
+        // console.log("ruledata:");
+        // console.log(this.RuleData);
       },
       (error) => {
         console.log(error);
@@ -207,11 +246,15 @@ export class ProductComponentHOComponent implements OnInit {
       console.log("Json parse");
       console.log(ddlObj);
       // console.log("cek API " + (indexAt + 1));
-
+      // if(obj.controls.RefProdCompntGrpCode.value == "RULE"){
+      //   console.log("DDL RULE:");
+      // }
       // Make different obj passing
       this.http.post(urlGet, ddlObj).subscribe(
         (response) => {
+          // console.log("response:");
           console.log(response);
+          
           var lengthDDL = response["ReturnObject"].length;
           if (lengthDDL > 0) {
             for (var i = 0; i < lengthDDL; i++) {
