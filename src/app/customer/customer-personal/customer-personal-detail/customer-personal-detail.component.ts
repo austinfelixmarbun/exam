@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { WizardComponent } from 'angular-archwizard';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant'; 
+import { AdInsConstant } from 'app/shared/AdInstConstant';  
 import { CustObj } from 'app/shared/model/CustObj.Model';
 
 @Component({
@@ -26,7 +26,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     IsAffiliateWithMf:  [true],
     CustSuffixName : ['' ],
     NoOfDependents : ['' ],
-    MrNationalityCode:  [''  ],
+    MrNationalityCode:  [''],
     NoOfResidence: [''],
     WnaCountryCode :  [''],
     FamilyCardNo : ['', ],
@@ -57,55 +57,67 @@ export class CustomerPersonalDetailComponent implements OnInit {
   MotherMaidenName : any;
   resultData: any;
   addUrl: any;
-
+  getUrl : any;
+  tempNationality : any;
+  tempSalutation : any;
+ 
+  
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private toastr: NGXToastrService, private fb: FormBuilder) {
-    
-    this.route.queryParams.subscribe(params => {
     this.addUrl =  AdInsConstant.AddNewCustPersonal;
-      if (params["CustName"] != null) {
-        this.CustName = params["CustName"];
-      }
-      if (params["Gender"] != null) {
-      this.Gender = params["Gender"];
-      } if (params["GenderDesc"] != null) {
-        this.GenderDesc = params["GenderDesc"];
-        }
-      if (params["MrIdTypeCode"] != null) {
-        this.MrIdTypeCode = params["MrIdTypeCode"];
-      }
-      if (params["MrIdTypeCodeDesc"] != null) {
-        this.MrIdTypeCodeDesc = params["MrIdTypeCodeDesc"];
-      }
-      if (params["BirthPlace"] != null) {
-        this.BirthPlace = params["BirthPlace"];
-      }
-      if (params["BirthDt"] != null) {
-        this.BirthDt = params["BirthDt"];
-      }
-      if (params["IdNo"] != null) {
-        this.IdNo = params["IdNo"];
-      }
-      if (params["TaxIdNo"] != null) {
-        this.TaxIdNo = params["TaxIdNo"];
-      }
-      if (params["IdExpiredDt"] != null) {
-        this.IdExpiredDt = params["IdExpiredDt"];
-      }
-      if (params["MotherMaidenName"] != null) {
-        this.MotherMaidenName = params["MotherMaidenName"];
-      }
-    });
+    this.getUrl = AdInsConstant.GetListActiveRefMaster; 
+ 
+   
  
    }
 
   ngOnInit() {
+    var counter = 1;
+    console.log("init"+ counter++)
+
+    var refMasterObj = {
+      RefMasterTypeCode: "NATIONALITY",
+      
+    }
+    this.http.post(this.getUrl, refMasterObj).subscribe(
+      (response) => {
+        console.log("awdawdawdwad");
+        this.tempNationality = response["ReturnObject"];
+        this.CustomerDetailForm.patchValue({
+          MrNationalityCode: this.tempNationality[0].Key
+
+        });
+ 
+      }
+    );
+
+    var refMasterObj1 = {
+      RefMasterTypeCode: "SALUTATION",
+      
+    }
+    this.http.post(this.getUrl, refMasterObj1).subscribe(
+      (response) => {
+        
+        this.tempSalutation = response["ReturnObject"];
+        this.CustomerDetailForm.patchValue({
+          MrSalutationCode: response['ReturnObject'][0]['Key']
+        });
+ 
+      }
+    );
+
+
+
+       
+   
+ 
+      
+
+
+
+
   }
   SaveValue(){
-    
-
-    // this.custObj = new CustObj();
-    // this.custObj.CustName = this.CustName;
-    // this.custObj.MrCustTypeCode
+ 
 
 
     this.custPersonalObj = new CustPersonalObj();

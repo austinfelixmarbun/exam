@@ -16,7 +16,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'paging',
+        path: 'Paging',
         component: OfficeComponent,
         data: {
           title: 'Office'

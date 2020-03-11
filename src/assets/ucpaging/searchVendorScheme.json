@@ -1,0 +1,165 @@
+{
+    "title": "Vendor Scheme",
+    "component": [
+        {
+            "type": "dropdown",
+            "name": "vs.MR_VENDOR_CATEGORY_CODE", 
+            "id": "MrVendorCategoryCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Vendor Category",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "VENDOR_CATEGORY",
+            "items": [],
+            "itemsUrl": []
+        },
+        {
+            "type": "dropdown",
+            "name": "vs.IS_ACTIVE",
+            "id": "ActiveStatusId",
+            "label": "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "vs.VENDOR_SCHM_CODE",
+            "id": "VendorSchemeCodeId",
+            "value": "",
+            "label": "Scheme Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "vs.VENDOR_SCHM_NAME",
+            "id": "VendorSchemeNameId",
+            "value": "",
+            "label": "Scheme Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT vs.VENDOR_SCHM_CODE AS VendorSchmCode, vs.VENDOR_SCHM_NAME AS VendorSchmName, vs.VENDOR_SCHM_ID AS VendorSchmId, vs.IS_ACTIVE AS IsActive, COUNT(vsm.VENDOR_SCHM_MBR_ID) AS NumMember, vs.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode",
+        "from": "FROM VENDOR_SCHM vs LEFT JOIN VENDOR_SCHM_MBR vsm ON vsm.VENDOR_SCHM_ID = vs.VENDOR_SCHM_ID",
+        "groupby": "GROUP BY vs.VENDOR_SCHM_CODE,  vs.VENDOR_SCHM_CODE, vs.VENDOR_SCHM_NAME, vs.IS_ACTIVE, vs.VENDOR_SCHM_ID, vsm.VENDOR_ID, vs.MR_VENDOR_CATEGORY_CODE"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "SCHEME CODE",
+            "name": "VendorSchmCode"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "SCHEME NAME",
+            "name": "VendorSchmName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "ACTIVE STATUS",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "# OF MEMBER",
+            "name": "NumMember"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "MEMBER"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "ACTION"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "VendorSchmCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "VendorSchmName"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "NumMember"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/Vendor/VendorScheme/Member",
+                    "param": [
+                        {
+                            "type": "VendorSchmId",
+                            "property": "VendorSchmId"
+                        },
+                        {
+                            "type": "MrVendorCategoryCode",
+                            "property": "MrVendorCategoryCode"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/Vendor/VendorScheme/Detail",
+                    "param": [
+                        {
+                            "type": "VendorSchmId",
+                            "property": "VendorSchmId"
+                        },
+                        {
+                            "type": "mode",
+                            "property": "edit"
+                        }
+                    ]
+                },
+                {
+                    "type": "delete",
+                    "property": "VendorSchmId"
+                }
+            ]
+        }
+    ]
+}
