@@ -30,6 +30,7 @@ import { ProductOfferingApprovalComponent } from "./prod-offering/prod-offering-
 import { ProductOfferingApprovalDetailComponent } from "./prod-offering/prod-offering-approval-detail/product-offering-approval-detail.component";
 import { ProductHODeactivateApprovalComponent } from "./product-HO/product-ho-deact-apv/product-ho-deact-apv.component";
 import { ProductHODeactivateApprovalDetailComponent } from "./product-HO/product-ho-deact-apv-detail/product-ho-deact-apv-detail.component";
+import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-offering-deactivate-paging/product-offering-deactivate.component";
 
 @NgModule({
   imports: [
@@ -66,7 +67,8 @@ import { ProductHODeactivateApprovalDetailComponent } from "./product-HO/product
     ProductOfferingApprovalComponent,
     ProductOfferingApprovalDetailComponent,
     ProductHODeactivateApprovalComponent,
-    ProductHODeactivateApprovalDetailComponent
+    ProductHODeactivateApprovalDetailComponent,
+    ProductOfferingDeactivatePagingComponent
   ]
 
 })

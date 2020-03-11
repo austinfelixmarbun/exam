@@ -15,6 +15,7 @@ import { ProductOfferingApprovalComponent } from "./prod-offering/prod-offering-
 import { ProductOfferingApprovalDetailComponent } from "./prod-offering/prod-offering-approval-detail/product-offering-approval-detail.component";
 import { ProductHODeactivateApprovalComponent } from "./product-HO/product-ho-deact-apv/product-ho-deact-apv.component";
 import { ProductHODeactivateApprovalDetailComponent } from "./product-HO/product-ho-deact-apv-detail/product-ho-deact-apv-detail.component";
+import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-offering-deactivate-paging/product-offering-deactivate.component";
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
         component: ProductHoAdddetailComponent,
         loadChildren: "./product-HO/product-ho-adddetail/product-ho-adddetail.module#ProductHOAddDetailModule",
         data: {
-            title: 'Product HO Add Detail'
+          title: 'Product HO Add Detail'
         }
       },
       {
@@ -126,6 +127,13 @@ const routes: Routes = [
           title: 'Product HO Deactivate Approval Detail'
         }
       },
+      {
+        path: 'OfferingDeactivate',
+        component: ProductOfferingDeactivatePagingComponent,
+        data: {
+          title: 'Product Offering Deactivate'
+        }
+      }
     ]
   }
 ]
