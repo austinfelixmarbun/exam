@@ -390,8 +390,8 @@ export class ProductComponentComponent implements OnInit {
   // }
 
 
-  // NextDetail(){
-  //   this.wizard.goToNextStep();
-  // }
+  NextDetail(){
+    this.wizard.goToNextStep();
+  }
 
  }

@@ -196,14 +196,14 @@ export class ProductComponentComponent implements OnInit {
     this.items = this.RefSchemeForm.get('items') as FormArray;
     this.getList(ProdOfferingComponentScheme,0);
 
-    this.items1 = this.RefApprovalForm.get('items') as FormArray;
-    this.getList(ProdOfferingComponentApproval,1);
+    // this.items1 = this.RefApprovalForm.get('items') as FormArray;
+    // this.getList(ProdOfferingComponentApproval,1);
 
-    this.items2 = this.RefRuleForm.get('items') as FormArray;
-    this.getList(ProdOfferingComponentRule,2);
+    // this.items2 = this.RefRuleForm.get('items') as FormArray;
+    // this.getList(ProdOfferingComponentRule,2);
 
-    this.items3= this.RefOtherForm.get('items') as FormArray;
-    this.getList(ProdOfferingComponentOther,3);
+    // this.items3= this.RefOtherForm.get('items') as FormArray;
+    // this.getList(ProdOfferingComponentOther,3);
 
   }
 
@@ -371,7 +371,9 @@ export class ProductComponentComponent implements OnInit {
       // console.log("cek API " + (indexAt + 1));
 
       // Make different obj passing
-
+      console.log("Debug " + this.RefSchemeForm.controls);
+      console.log( this.RefSchemeForm.controls.items["controls"]);
+      return;
       this.http.post(urlGet, ddlObj).subscribe(
         (response) => {
           // console.log(response);

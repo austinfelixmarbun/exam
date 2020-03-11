@@ -15,6 +15,8 @@ import { SharingComponentModule } from "app/shared/sharingcomponent.module";
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { ProductHOAddDetailRoutingModule } from "./product-ho-adddetail-routing.module";
 import { ArchwizardModule } from "angular-archwizard";
+import { ListOfficeMemberComponent } from './office-member/list-office-member/list-office-member.component';
+import { SearchOfficeComponent } from './office-member/search-office/search-office.component';
 
 @NgModule({
     imports: [
@@ -30,9 +32,7 @@ import { ArchwizardModule } from "angular-archwizard";
         ProductHOAddDetailRoutingModule,
         ArchwizardModule
     ],
-    declarations: [
-        
-    ],
+    declarations: [],
     
     providers: [],
 

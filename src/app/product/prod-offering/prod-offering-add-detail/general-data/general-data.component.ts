@@ -121,7 +121,7 @@ export class GeneralDataComponent implements OnInit {
             this.items.push(eachDataDetail);
           }
         }
-        this.items.removeAt(0);
+        // this.items.removeAt(0);
         console.log("cek form");
         console.log(this.RefGeneralDataForm);
       },
