@@ -8,7 +8,6 @@ import { HttpClient } from '@angular/common/http';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 
 @Component({
   selector: 'app-office-area-member-add',
@@ -22,8 +21,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   @ViewChild(UCSearchComponent) UCSearchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  OfficeCode: any;
-  OfficeName: any;
   RefOfficeId: any;
   refOfficeAreaObj: any;
   //** End UC Search **//
@@ -32,8 +29,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   totalData: any;
   pageSize: any;
   apiUrl: any;
-  officeUrl: any;
-  addUrl: any;
   arrCrit: any;
 
   foundationUrl: string = environment.FoundationR3Url;
@@ -64,8 +59,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetPagingObjectBySQL;
-    this.officeUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
-    this.addUrl = this.foundationUrl + AdInsConstant.AddOfficeZipcodeMember;
 
     this.arrCrit = new Array();
 
@@ -195,44 +188,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   }
 
   SaveOfficeAreaMember() {
-    // this.refOfficeAreaObj = new RefOfficeAreaObj()
-    // for (let index = 0; index < this.tempData.length; index++) {
-    //   console.log(this.tempData);
-    //   var refOfficeAreaObj = {
-    //     AssetSchmDId:this.tempData[index].assetSchmDId,
-    //     AssetSchmHId: this.tempData[index].assetSchmHId,
-    //     AssetMasterId: this.tempData[index].assetMasterId
-    //   }
-    //   this.arrAssetSchmD.push(refOfficeAreaObj);
-    // }
-
-    // var AssetSchmObj = {
-    //   AssetSchmH: this.assetSchmHObj,
-    //   AssetSchmD: this.arrAssetSchmD
-    // }
-    // console.log(refOfficeAreaObj);
-    // // if (this.pageType === 'add') {
-    // //   this.assetService.addAssetSchmHAndD(AssetSchmObj).subscribe(
-    // //     response => {
-    // //       console.log(response);
-    // //       this.toastr.successMessage(response['message']);
-    // //       this.router.navigateByUrl('asset/assetSchmPaging');
-    // //     },
-    // //     error => {
-    // //       console.log(error);
-    // //     }
-    // //   );
-    // // } else {
-    //   this.assetService.editAssetSchmHAndD(AssetSchmObj).subscribe(
-    //     response => {
-    //       console.log(response);
-    //       this.toastr.successMessage(response['message']);
-    //       this.router.navigateByUrl('asset/assetSchmPaging');
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   );
-    // // }
+    //belum ada function save
   }
 }

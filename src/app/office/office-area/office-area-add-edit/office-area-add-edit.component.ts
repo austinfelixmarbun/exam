@@ -21,9 +21,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
   title: string = "Area-Add"
   mode: string = "add";
   apiUrl: any;
-  IsActive: boolean = true;
   foundationUrl: string = environment.FoundationR3Url;
-  editUrl: any;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
       this.route.queryParams.subscribe(params => {
@@ -67,14 +65,13 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.refOfficeAreaObj = new RefOfficeAreaObj();
       this.refOfficeAreaObj = this.OfficeAreaForm.value;
       if (this.mode == "edit") {
-          this.editUrl = this.foundationUrl + AdInsConstant.EditRefOfficeArea;
           this.refOfficeAreaObj.AreaCode = this.result.AreaCode;
           this.refOfficeAreaObj.RefOfficeAreaId = this.RefOfficeAreaId;
           
-          this.http.post(this.editUrl, this.refOfficeAreaObj).subscribe(
+          this.http.post(AdInsConstant.EditRefOfficeArea, this.refOfficeAreaObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
-                  this.router.navigateByUrl('/office/OfficeArea');
+                  this.router.navigateByUrl('/Office/OfficeArea');
               },
               (error) => {
                   console.log(error);
@@ -82,11 +79,10 @@ export class OfficeAreaAddEditComponent implements OnInit {
       }
       else {
           this.refOfficeAreaObj.RefOfficeAreaId = "0";
-          this.editUrl = this.foundationUrl + AdInsConstant.AddRefOfficeArea;
-          this.http.post(this.editUrl, this.refOfficeAreaObj).subscribe(
+          this.http.post(AdInsConstant.AddRefOfficeArea, this.refOfficeAreaObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
-                  this.router.navigateByUrl('/office/OfficeArea');
+                  this.router.navigateByUrl('/Office/OfficeArea');
               },
               (error) => {
                   console.log(error);
