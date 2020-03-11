@@ -20,7 +20,7 @@
       },
       {
         "type": "dropdown",
-        "name": "is_Active",
+        "name": "IS_ACTIVE",
         "id": "isActive",
         "value": "Active Status",
         "placeholder": "Placeholder",

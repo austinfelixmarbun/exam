@@ -20,7 +20,7 @@
       },
       {
         "type": "dropdown",
-        "name": "is_Active",
+        "name": "IS_ACTIVE",
         "id": "isActive",
         "value": "Active Status",
         "placeholder": "Placeholder",
@@ -67,7 +67,7 @@
       }
     ],
     "querystring": { 
-      "select": "SELECT   ASSET_DOC_CODE as AssetDocumentCode,REF_ASSET_DOC_ID as RefAssetDocId, ASSET_DOC_NAME as AssetDocumentName, IS_ACTIVE as IsActive",
+      "select": "SELECT  ASSET_DOC_CODE as AssetDocumentCode,REF_ASSET_DOC_ID as RefAssetDocId, ASSET_DOC_NAME as AssetDocumentName, IS_ACTIVE as IsActive",
       "from": "FROM REF_ASSET_DOC A WITH(NOLOCK)"
     },
     "bodyList": [
