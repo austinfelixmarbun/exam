@@ -43,6 +43,7 @@
                     <show-errors [control]="AssetMasterChildForm.controls.AssetName" [submit]="enjiForm.submitted"></show-errors>
                   </div>
                 </div>
+              <div *ngIf="isFinal == true">
                 <div class="form-group row">
                     <label class="col-md-3  adInsLabel adins-required" translate>Asset Category </label>
                     <div class="col-md-9">
@@ -54,6 +55,7 @@
                       <show-errors [control]="AssetMasterChildForm.controls.AssetCategoryId" [submit]="enjiForm.submitted"></show-errors>
                     </div>
                 </div>
+              </div>
                 <div class="form-group row">
                     <label class="col-md-3  adInsLabel" translate>Active Status </label>
                     <div class="col-md-9">
@@ -68,7 +70,7 @@
                              formControlName="IsFinal" disabled />
                     </div>
                   </div>
-                  <div *ngIf="isFinal == true">
+                <div *ngIf="isFinal == true">
                   <table class="table table-responsive-md text-center table-hover">
                     <thead>
                       <tr class="table-header">

@@ -18,10 +18,9 @@
           </h4>
           <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
           </lib-ucSubsection>
-          <form class="form form-horizontal" [formGroup]="CustomerCompanyForm" (ngSubmit)="CustomerCompanyForm.valid "
-            #enjiForm="ngForm" id="MainInfoId">
+          <form class="form form-horizontal" id="MainInfoId">
             <div class="form-body">
-              <div class="form-group row ">
+              <div class="form-group row">
                 <label class="col-md-2 adInsLabel" translate>Customer Model </label>
                 <div class="col-md-4">
                   <label>{{this.CustModel}}</label>
