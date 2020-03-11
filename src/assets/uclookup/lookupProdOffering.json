@@ -1,0 +1,70 @@
+{
+    "title": "Search Product",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "ProdCpde",
+            "id": "ProdCodeId",
+            "value": "",
+            "label": "Product Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "ProdName",
+            "id": "ProdNameId",
+            "value": "",
+            "label": "Product Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": " SELECT PROD_CODE AS ProdCode,PROD_NAME AS ProdName, PROD_H_ID AS ProdHId",
+        "from": "FROM PROD A WITH(NOLOCK) JOIN PROD_H B WITH(NOLOCK) ON A.PROD_ID =B.PROD_ID"
+    },
+        "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Prod Code",
+            "name": "ProdCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Prod Name",
+            "name": "ProdName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Action",
+            "name": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ProdCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ProdName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "ProdName"
+                }
+            ]
+        }
+    ],
+    "propertyId": "ProdName", 
+    "propertyName": "ProdName" 
+}
