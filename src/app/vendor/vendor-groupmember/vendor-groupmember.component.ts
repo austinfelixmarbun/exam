@@ -1,0 +1,270 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+
+@Component({
+  selector: 'app-vendor-groupmember',
+  templateUrl: './vendor-groupmember.component.html',
+  styleUrls: ['./vendor-groupmember.component.scss'],
+  providers: [NGXToastrService]
+})
+export class VendorGroupmemberComponent implements OnInit {
+  @ViewChild(UcgridfooterComponent) UCGridFooter;
+  @ViewChild(UCSearchComponent) UCSearchComponent;
+  
+  arrCrit: any[];
+  arrAddCrit: any[];
+  VendorId: any;
+  VendorGrpMbrId: any;
+  pageNow: number;
+  pageSize: number;
+  apiUrl: string;
+  viewObj: string;
+  resultData: any;
+  orderByKey: any;
+  orderByValue: boolean;
+  listSelectedId: any;
+  totalData: any;
+  VendorGrpId: any;
+  tempListId: any[];
+  tempData: any[];
+  vendorGrpMbrObj :any;
+  checkboxAll = false;
+  constructor(private http: HttpClient,
+    private route: ActivatedRoute, private router: Router, private toastr:NGXToastrService) { 
+      this.route.queryParams.subscribe(params => {
+        this.VendorId = params['VendorId'];
+        this.VendorGrpId = params['VendorGrpId'];
+      });
+    }
+    inputObj: any;
+  ngOnInit() {
+
+
+
+    this.listSelectedId = new Array();
+    this.tempListId = new Array();
+    this.tempData = new Array();
+    
+    
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/ucpaging/searchVendorGrpMember.json";
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
+    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+
+    this.pageNow = 1;
+    this.pageSize = 10;
+    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+
+
+  }
+  searchSort(event: any) {
+    if (this.resultData != null) {
+      if (this.orderByKey == event.target.attributes.name.nodeValue) {
+        this.orderByValue = !this.orderByValue
+      } else {
+        this.orderByValue = true
+      }
+      this.orderByKey = event.target.attributes.name.nodeValue
+      let order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+      this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    }
+  }
+
+  Checked(VendorId: any, isChecked: any): void {
+    console.log(VendorId);
+    if (isChecked) {
+      this.listSelectedId.push(VendorId);
+    } else {
+      const index = this.listSelectedId.indexOf(VendorId)
+      console.log(index);
+      if (index > -1) { this.listSelectedId.splice(index, 1); }
+    }
+    console.log('Sel', this.listSelectedId);
+  }
+
+  searchPagination(event: number) {
+    this.pageNow = event;
+    let order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+  }
+
+  getResult(event) {
+    this.resultData = event.response;
+    console.log(this.resultData);
+    this.totalData = event.response.Count;
+    this.UCGridFooter.pageNow = event.pageNow;
+    this.UCGridFooter.totalData = this.totalData;
+    this.UCGridFooter.resultData = this.resultData;
+  }
+
+  
+  onSelect(event) {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.totalData = event.Count;
+    this.searchPagination(this.pageNow);
+  }
+
+  // addToTemp() {
+  //   if (this.listSelectedId.length != 0) {
+  //     for (var i = 0; i < this.listSelectedId.length; i++) {
+  //       this.tempListId.push(this.listSelectedId[i]);
+  //     }
+  //     for (var i = 0; i < this.listSelectedId.length; i++) {
+  //       var object = this.resultData.Data.find(x => x.RefOfficeId == this.listSelectedId[i]);
+  //       this.tempData.push(object);
+  //     }
+
+  //     this.arrAddCrit = new Array();
+  //     if (this.arrCrit.length != 0) {
+  //       for (var i = 0; i < this.arrCrit.length; i++) {
+  //         this.arrAddCrit.push(this.arrCrit[i]);
+  //       }
+  //     }
+  //     var addCrit = new CriteriaObj();
+  //     addCrit.DataType = "numeric";
+  //     addCrit.propName = "RO.REF_OFFICE_ID";
+  //     addCrit.restriction = AdInsConstant.RestrictionNotIn;
+  //     addCrit.listValue = this.tempListId;
+  //     this.arrAddCrit.push(addCrit);
+
+  //     var order = null;
+  //     if (this.orderByKey != null) {
+  //       order = {
+  //         key: this.orderByKey,
+  //         value: this.orderByValue
+  //       };
+  //     }
+  //     this.inputObj.addCritInput = this.arrAddCrit;
+  //     this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+  //     this.listSelectedId = [];
+  //   } else {
+  //     this.toastr.typeErrorCustom("Please select at least one Office");
+  //   }
+  // }
+
+  // SelectAll(condition) {
+  //   this.checkboxAll = condition;
+  //   console.log(condition);
+  //   if (condition) {
+  //     for (let i = 0; i < this.resultData.Data.length; i++) {
+  //       if (this.listSelectedId.indexOf(this.resultData.Data[i].RefOfficeId) < 0) {
+  //         this.listSelectedId.push(this.resultData.Data[i].RefOfficeId);
+  //       }
+  //     }
+
+  //   } else {
+  //     for (let i = 0; i < this.resultData.Data.length; i++) {
+  //       let index = this.listSelectedId.indexOf(this.resultData.data[i].RefOfficeId);
+  //       if (index > -1) {
+  //         this.listSelectedId.splice(index, 1);
+  //       }
+  //       console.log(this.resultData.Data[i]);
+  //     }
+  //   }
+  //   console.log(this.checkboxAll);
+  //   console.log(this.listSelectedId);
+  // }
+
+  // deleteFromTemp(RefOfficeId: any) {
+  //   if (confirm('Are you sure to delete this record?')) {
+  //     this.arrAddCrit = new Array();
+  //     if (this.arrCrit.length != 0) {
+  //       for (var i = 0; i < this.arrCrit.length; i++) {
+  //         this.arrAddCrit.push(this.arrCrit[i]);
+  //       }
+  //     }
+
+  //     var index = this.tempListId.indexOf(RefOfficeId);
+  //     if (index > -1) {
+  //       this.tempListId.splice(index, 1);
+  //       this.tempData.splice(index, 1);
+  //     }
+  //     var addCrit = new CriteriaObj();
+  //     addCrit.DataType = "numeric";
+  //     addCrit.propName = "RO.REF_OFFICE_ID";
+  //     addCrit.restriction = AdInsConstant.RestrictionNotIn;
+  //     addCrit.listValue = this.tempListId;
+  //     if (this.tempListId.length != 0) {
+  //       this.arrAddCrit.push(addCrit);
+  //     }
+  //     var order = null;
+  //     if (this.orderByKey != null) {
+  //       order = {
+  //         key: this.orderByKey,
+  //         value: this.orderByValue
+  //       };
+  //     }
+  //     this.inputObj.addCritInput = this.arrAddCrit;
+  //     this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+  //   }
+  // }
+
+  // SaveOfficeGroupMember() {
+  //   var obj = {
+  //     CenterGrpId: this.CenterGrpId,
+  //     RefOfficeId: this.tempListId
+  //   }
+
+  //   this.addUrl = environment.FoundationR3Url + AdInsConstant.AddCenterGrpOfficeMember;
+  //   this.http.post(this.addUrl, obj).subscribe(
+  //       (response) => {
+  //           console.log(response);
+  //           this.router.navigate(['/Office/Office-group-member'], {queryParams: {RefOfficeId:this.RefOfficeId, CenterGrpId:this.CenterGrpId}});
+  //       },
+  //       (error) => {
+  //           console.log(error);
+  //       });
+
+  // }
+
+
+  GetListVendorGrpMbrByVendorGrpId() {
+    var obj = {
+      VendorGrpId: this.VendorGrpId
+    }
+    var getListUrl = environment.FoundationR3Url + AdInsConstant.GetListVendorGrpMbrByVendorId;
+    this.http.post(getListUrl, obj).subscribe(
+      (response) => {
+        this.vendorGrpMbrObj = response;
+
+        var arrMemberList = new Array();
+
+        for (let index = 0; index < this.vendorGrpMbrObj.ListVendorGrpMbr.length; index++) {
+           arrMemberList.push(this.vendorGrpMbrObj.ListVendorGrpMbr[index].VendorGrpId)
+        }
+        
+        const addCritListVendorGrp = new CriteriaObj();
+        addCritListVendorGrp.DataType = 'numeric';
+        addCritListVendorGrp.propName = 'VENDOR_CODE';
+        addCritListVendorGrp.restriction = AdInsConstant.RestrictionNotIn;
+        addCritListVendorGrp.listValue = arrMemberList;
+        this.arrCrit.push(addCritListVendorGrp);
+        this.inputObj.addCritInput.push(addCritListVendorGrp);
+        
+        console.log("ni sudah jalan get List")
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+}

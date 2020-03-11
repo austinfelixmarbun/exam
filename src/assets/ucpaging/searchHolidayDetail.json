@@ -1,0 +1,123 @@
+{
+    "title": "Holiday Scheme Detail",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "dropdown",
+            "name": "IS_PUBLIC_HOLIDAY",
+            "id": "IsPublicHolidayId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "label": "Public Holiday",
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        },
+        {
+            "type": "datepicker",
+            "name": "HOLIDAY_DT",
+            "id": "HolidayDtIdGte",
+            "value": "BD-10",
+            "label": "Date From",
+            "restriction": "gte",
+            "datatype": "date"
+        },
+        {
+            "type": "textbox",
+            "name": "DESCR",
+            "id": "DescrId",
+            "value": "",
+            "label": "Description",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "datepicker",
+            "name": "HOLIDAY_DT",
+            "id": "HolidayDtIdLte",
+            "value": "BD+10",
+            "label": "Date To",
+            "restriction": "lte",
+            "datatype": "date"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT HoliD.HOLIDAY_DT AS HolidayDt, HoliD.DESCR AS Descr, HoliD.IS_PUBLIC_HOLIDAY AS IsPublicHoliday, HoliD.HOLIDAY_SCHM_D_ID AS HolidaySchmDId, HoliH.HOLIDAY_SCHM_H_ID AS HolidaySchmHId",
+        "from": "FROM dbo.HOLIDAY_SCHM_H HoliH WITH(NOLOCK) JOIN dbo.HOLIDAY_SCHM_D HoliD WITH(NOLOCK) on HoliH.HOLIDAY_SCHM_H_ID = HoliD.HOLIDAY_SCHM_H_ID"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "DATE",
+            "name": "HolidayDt"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "DESCRIPTION",
+            "name": "Descr"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "PUBLIC HOLIDAY",
+            "name": "IsPublicHoliday"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "date",
+            "position": "left",
+            "property": "HolidayDt"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Descr"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsPublicHoliday"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/CommonSetting/Holiday/Detail/Edit",
+                    "param": [
+                        {
+                            "type": "HolidaySchmHId",
+                            "property": "HolidaySchmHId"
+                        },
+                        {
+                            "type": "HolidaySchmDId",
+                            "property": "HolidaySchmDId"
+                        }
+                    ]
+                },
+                {
+                    "type": "delete",
+                    "property": "HolidaySchmDId"
+                }
+            ]
+        }
+    ]
+}
