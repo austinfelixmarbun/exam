@@ -16,7 +16,7 @@ import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 export class AssetMasterAddEditParentComponent implements OnInit {
 
   pageType: string = "add";
-  assetMasterId: any;
+  AssetMasterId: any;
   assetMasterObj: AssetMasterObj;
   assetTypeObj: AssetTypeObj;
   resultAssetType: any;
@@ -53,8 +53,8 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       if (params["param"] != null) {
         this.pageType = params["param"];
       }
-      if (params["assetMasterId"] != null) {
-        this.assetMasterId = params["assetMasterId"];
+      if (params["AssetMasterId"] != null) {
+        this.AssetMasterId = params["AssetMasterId"];
       }
     });
   }
@@ -94,11 +94,17 @@ export class AssetMasterAddEditParentComponent implements OnInit {
 
 
     if (this.pageType == "edit") {
+      console.log("asd");
+      console.log(this.AssetMasterId);
+      this.AssetMasterParentForm.controls["AssetCode"].disable();
+      this.AssetMasterParentForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
-      this.assetMasterObj.AssetMasterId = this.assetMasterId;
+      this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.http.post(this.getUrl, this.assetMasterObj).subscribe(
         response => {
           this.resultData = response;
+          console.log("abc");
+          console.log(this.resultData);
           this.AssetMasterParentForm.patchValue({
             AssetCategoryId: this.resultData.AssetCategoryId,
             AssetTypeId: this.resultData.AssetTypeId,
@@ -135,7 +141,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       this.http.post(this.addUrl, this.assetMasterObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/CommonSetting/AssetMaster/Paging"]);
+            this.router.navigate(["/Asset/AssetMaster/Paging"]);
             console.log(response)
           
         },
@@ -145,7 +151,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       );
     } else {
       this.assetMasterObj = this.resultData;
-      this.assetMasterObj.AssetMasterId = this.assetMasterId;
+      this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.assetMasterObj.AssetCategoryId = this.AssetMasterParentForm.controls["AssetCategoryId"].value
       this.assetMasterObj.AssetTypeId = this.AssetMasterParentForm.controls["AssetTypeId"].value;
       this.assetMasterObj.AssetCode = this.AssetMasterParentForm.controls["AssetCode"].value;

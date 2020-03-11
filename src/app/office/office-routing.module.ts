@@ -23,7 +23,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'add',
+        path: 'Add',
         component: OfficeAddComponent,
         data: {
           title: 'Add Office'

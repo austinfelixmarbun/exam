@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VendorComponent } from './vendor.component';
 import { BranchComponent } from './branch/branch.component';
+import { VendorGroupComponent } from './vendor-group/vendor-group.component';
+import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
+import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
+import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmember.component';
 import { VendorSchemeAddEditComponent } from './vendor-scheme/vendor-scheme-add-edit/vendor-scheme-add-edit.component';
 import { VendorSchemePagingComponent } from './vendor-scheme/vendor-scheme-paging/vendor-scheme-paging.component';
 import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-add/vendor-scheme-member-add.component';
@@ -20,6 +24,34 @@ const routes: Routes = [
         },
       },
       {
+        path: 'Group/Add',
+        component: VendorGroupComponent,
+        data: {
+          title: 'Vendor Group Add'
+        },
+      },
+      {
+        path: 'Group/Paging',
+        component: VendorGroupPagingComponent,
+        data: {
+          title: 'Vendor Group Paging'
+        },
+      },
+      {
+        path: 'Group/View',
+        component: VendorGroupViewComponent,
+        data: {
+          title: 'Vendor Group View'
+        },
+      },
+      {
+        path: 'GroupMbr/Add',
+        component: VendorGroupmemberComponent,
+        data: {
+          title: 'Vendor Group Member View'
+        },
+      },
+        
         path: 'VendorScheme/Detail',
         component: VendorSchemeAddEditComponent,
         data: {

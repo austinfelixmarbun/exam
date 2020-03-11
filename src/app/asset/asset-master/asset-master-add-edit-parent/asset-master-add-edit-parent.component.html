@@ -7,7 +7,7 @@
                   #enjiForm="ngForm">
               <div class="form-body">
                 <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Asset Master Information {{this.pageType}}</h4>
-                <div class="form-group row">
+                  <div class="form-group row">
                     <label class="col-md-3  adInsLabel adins-required" translate>Asset Type Name </label>
                     <div class="col-md-9">
                       <select class="form-control adInsInput" formControlName="AssetTypeId"
@@ -18,8 +18,8 @@
                       </select>
                       <show-errors [control]="AssetMasterParentForm.controls.AssetTypeId" [submit]="enjiForm.submitted"></show-errors>
                     </div>
-                </div>
-                <div class="form-group row">
+                  </div>
+                  <div class="form-group row">
                     <label class="col-md-3  adInsLabel adins-required" translate>Hierarchy Level </label>
                     <div class="col-md-9">
                       <label style="font-size: larger;">
@@ -27,22 +27,22 @@
                       </label>
                     </div>
                   </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel adins-required" translate>Asset Code </label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput" formControlName="AssetCode"
-                           [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterParentForm.controls.AssetCode.invalid }">
-                    <show-errors [control]="AssetMasterParentForm.controls.AssetCode" [submit]="enjiForm.submitted"></show-errors>
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel adins-required" translate>Asset Code </label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control adInsInput" formControlName="AssetCode"
+                            [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterParentForm.controls.AssetCode.invalid }">
+                      <show-errors [control]="AssetMasterParentForm.controls.AssetCode" [submit]="enjiForm.submitted"></show-errors>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel adins-required" translate>Asset Name </label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput" formControlName="AssetName"
-                           [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterParentForm.controls.AssetName.invalid }">
-                    <show-errors [control]="AssetMasterParentForm.controls.AssetName" [submit]="enjiForm.submitted"></show-errors>
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel adins-required" translate>Asset Name </label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control adInsInput" formControlName="AssetName"
+                            [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterParentForm.controls.AssetName.invalid }">
+                      <show-errors [control]="AssetMasterParentForm.controls.AssetName" [submit]="enjiForm.submitted"></show-errors>
+                    </div>
                   </div>
-                </div>
                 <div class="form-group row">
                     <label class="col-md-3  adInsLabel" translate>Active Status </label>
                     <div class="col-md-9">
@@ -51,7 +51,7 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3  adInsLabel" translate>Is Final </label>
+                    <label class="col-md-3  adInsLabel" translate>Final Status </label>
                     <div class="col-md-9">
                       <input class="border-primary" type="checkbox" data-md-icheck
                              formControlName="IsFinal" disabled />
