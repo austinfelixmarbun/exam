@@ -95,7 +95,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/office/OfficeArea/Member",
+                    "path": "/Office/OfficeArea/Member",
                     "param": [
                         {
                             "type": "RefOfficeAreaId",
@@ -111,7 +111,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/office/OfficeArea/Detail",
+                    "path": "/Office/OfficeArea/Detail",
                     "param": [
                         {
                             "type": "RefOfficeAreaId",
