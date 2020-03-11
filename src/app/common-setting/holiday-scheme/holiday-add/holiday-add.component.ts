@@ -77,7 +77,7 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.RowVersion = this.result.RowVersion;
             this.http.post(AdInsConstant.EditHolidaySchmH, this.holidayObj).subscribe(
                 (response) => {
-                    this.router.navigateByUrl('/commonSetting/holiday');
+                    this.router.navigateByUrl('/CommonSetting/Holiday');
                     this.toastr.successMessage(response['message']);
                 },
                 (error) => {

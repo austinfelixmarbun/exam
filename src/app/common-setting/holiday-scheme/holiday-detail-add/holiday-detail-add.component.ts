@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
 import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { max } from 'rxjs/operators';
+import { HolidayDByYearObj } from 'app/shared/model/HolidayDByYearObj.Model';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-holiday-detail-add',
@@ -15,106 +17,120 @@ import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
 })
 export class HolidayDetailAddComponent implements OnInit {
 
-  holidaySchmHId: any;
-  holidayDObj: HolidayDObj;
-  foundationUrl: string = environment.foundationUrl;
-  addUrl: any;
-  pageType:string;
-  addYearUrl: any;
-  isPublicHoliday: any = '1';
-  listOfDay: any = [
-    {
-      day: 'Sunday',
-      isActive: false
-    },
-    {
-      day: 'Monday',
-      isActive: false
-    },
-    {
-      day: 'Tuesday',
-      isActive: false
-    },
-    {
-      day: 'Wednesday',
-      isActive: false
-    },
-    {
-      day: 'Thursday',
-      isActive: false
-    },
-    {
-      day: 'Friday',
-      isActive: false
-    },
-    {
-      day: 'Saturday',
-      isActive: false
-    },
-  ]
+  HolidaySchmHId: string;
+  viewObj: any;
+  title: string = "Holiday Detail";
+  holidayDetailObj: HolidayDObj;
+  holidayDetailByYearObj: HolidayDByYearObj;
+  check: boolean = false;
+  mode: any = "";
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
-    
-    this.addUrl = this.foundationUrl + AdInsConstant.AddHolidaySchmD;
-    this.addYearUrl = this.foundationUrl + AdInsConstant.AddHolidaySchmDUntilYear;
-    
+  HolidayListForm = this.fb.group({
+    IsPublicHoliday: [false, Validators.required],
+    Date: [''],
+    Descr: [''],
+    Sunday: [false],
+    Monday: [false],
+    Tuesday: [false],
+    Wednesday: [false],
+    Thursday: [false],
+    Friday: [false],
+    Saturday: [false],
+    UntilYear: ['', [Validators.required, Validators.pattern("^[0-9]+$")]]
+  })
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+
     this.route.queryParams.subscribe(params => {
-      if (params["holidaySchmHId"] != null) {
-        this.holidaySchmHId = params["holidaySchmHId"];
-      }
-    });
+      this.HolidaySchmHId = params["HolidaySchmHId"];
+    })
   }
 
   ngOnInit() {
+
+    this.viewObj = "./assets/ucviewgeneric/viewHolidayDetail.json";
+
+  }
+  SaveForm() {
+    if (this.HolidayListForm.controls.IsPublicHoliday.value) {
+      this.holidayDetailObj = new HolidayDObj;
+      this.holidayDetailObj.IsPublicHoliday = this.HolidayListForm.controls.IsPublicHoliday.value;
+      this.holidayDetailObj.HolidaySchmHId = this.HolidaySchmHId;
+      this.holidayDetailObj.RowVersion = "";
+      this.holidayDetailObj.HolidayDt = this.HolidayListForm.controls.Date.value;
+      this.holidayDetailObj.Descr = this.HolidayListForm.controls.Descr.value;
+
+      console.log(this.holidayDetailObj);
+      this.http.post(AdInsConstant.AddHolidaySchmD, this.holidayDetailObj).subscribe((response) => {
+        this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+        this.toastr.successMessage(response['message']);
+      },
+        (error) => {
+          console.log(error);
+        });
+    }
+    else {
+      this.holidayDetailByYearObj = new HolidayDByYearObj;
+      this.holidayDetailByYearObj.IsPublicHoliday = this.HolidayListForm.controls.IsPublicHoliday.value;
+      this.holidayDetailByYearObj.HolidaySchmHId = this.HolidaySchmHId;
+      this.holidayDetailByYearObj.RowVersion = "";
+      this.holidayDetailByYearObj.UntilYear = this.HolidayListForm.controls.UntilYear.value;
+
+      if (this.HolidayListForm.controls.Sunday.value) {
+        this.holidayDetailByYearObj.DictOfDays.push("Sunday");
+      }
+      if (this.HolidayListForm.controls.Monday.value) {
+        this.holidayDetailByYearObj.DictOfDays.push("Monday");
+      }
+      if (this.HolidayListForm.controls.Tuesday.value) {
+        this.holidayDetailByYearObj.DictOfDays.push("Tuesday");
+      }
+      if (this.HolidayListForm.controls.Wednesday.value) {
+        this.holidayDetailByYearObj.DictOfDays.push("Wednesday");
+      }
+      if (this.HolidayListForm.controls.Thursday.value) {
+        this.holidayDetailByYearObj.DictOfDays.push("Thursday");
+      }
+      if (this.HolidayListForm.controls.Friday.value) {
+        this.holidayDetailByYearObj.DictOfDays.push("Friday");
+      }
+      if (this.HolidayListForm.controls.Saturday.value) {
+        this.holidayDetailByYearObj.DictOfDays.push("Saturday");
+      }
+      this.http.post(AdInsConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj).subscribe((response) => {
+        this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+        this.toastr.successMessage(response['message']);
+      },
+        (error) => {
+          console.log(error);
+        });
+    }
   }
 
-  SaveHolidayDetForm(ReqHolidayDetForm: NgForm) {
-    console.log(ReqHolidayDetForm.value);
-    console.log(this.listOfDay);
-    if (ReqHolidayDetForm.value.isPublicHoliday == 1) {
-      this.holidayDObj = new HolidayDObj();
-      this.holidayDObj = ReqHolidayDetForm.value;
-      this.holidayDObj.holidaySchmHId = this.holidaySchmHId;
-      this.http.post(this.addUrl, this.holidayDObj).subscribe(
-        response => {
-          console.log("Success");
-          console.log(response);
-          this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl("/commonSetting/holiday/add?param=edit&holidaySchmHId=" + this.holidaySchmHId);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }else {
-      var arrDictDays = new Array();
-      for (var i = 0; i < this.listOfDay.length; i++) {
-        if (this.listOfDay[i].isActive == true) {
-          arrDictDays.push(this.listOfDay[i].day)
-        }
-      }
-      var holidayDTillYear = {
-        HolidaySchmDModel: 
-          {
-            HolidaySchmHId: this.holidaySchmHId,
-            IsPublicHoliday: ReqHolidayDetForm.value.isPublicHoliday
-          }
-        ,
-        UntilYear: parseInt(ReqHolidayDetForm.value.untilYear),
-        DictOfDays: arrDictDays
-      }
-      console.log(holidayDTillYear);
-      this.http.post(this.addYearUrl, holidayDTillYear).subscribe(
-        response => {
-          console.log("Success");
-          console.log(response);
-          this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl("/commonSetting/holiday/add?param=edit&holidaySchmHId=" + this.holidaySchmHId);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+  updateValueAndValidityForm() {
+    this.HolidayListForm.controls.Date.updateValueAndValidity();
+    this.HolidayListForm.controls.Descr.updateValueAndValidity();
+    this.HolidayListForm.controls.UntilYear.updateValueAndValidity();
+  }
+
+  Checkbox() {
+    if (!this.HolidayListForm.controls.IsPublicHoliday.value) {
+      this.HolidayListForm.controls.UntilYear.clearValidators();
+      this.HolidayListForm.controls.Date.setValidators(Validators.required);
+      this.HolidayListForm.controls.Descr.setValidators(Validators.required);
+      this.updateValueAndValidityForm();
+      this.check = true;
     }
+    else {
+      this.HolidayListForm.controls.UntilYear.setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+      this.HolidayListForm.controls.Date.clearValidators();
+      this.HolidayListForm.controls.Descr.clearValidators();
+      this.updateValueAndValidityForm();
+      this.check = false;
+    }
+
+  }
+  BackNavigate() {
+    this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
   }
 }

@@ -270,16 +270,18 @@ export class AdInsConstant {
   public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
   public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
   public static AddHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmH";
-  public static AddHolidaySchmD = "/Holiday/AddHolidaySchmD";
-  public static AddHolidaySchmDUntilYear = "/Holiday/AddHolidaySchmDUntilYear";
+  public static AddHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmD";
+  public static AddHolidaySchmDUntilYear = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmDUntilYear";
   public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
   public static GetHolidaySchmHById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmHById";
+  public static GetHolidaySchmDById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmDById";
   public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
   public static EditHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmH";
+  public static EditHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmD";
   public static DeleteHolidaySchmH = "/HolidaySchm/DeleteHolidaySchmH";
-  public static DeleteHolidaySchmD = "/Holiday/DeleteHolidaySchmD";
+  public static DeleteHolidaySchmD = "/HolidaySchm/DeleteHolidaySchmD";
   public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
-  public static CopyHolidaySchm = "/Holiday/CopyHolidaySchm";
+  public static CopyHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/CopyHolidaySchmH";
 
   //USER SESSION LOG
   public static SelectRole = "/UserSessionLog/SelectRole";
