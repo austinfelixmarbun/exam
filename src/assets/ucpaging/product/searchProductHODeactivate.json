@@ -92,15 +92,15 @@
       "action": [
         {
           "type": "edit",
-          "path": "/product/HODeactivate/edit",
+          "path": "./edit",
           "param": [
-            {
-              "type": "prodId",
-              "property": "prodId"
-            },
             {
               "type": "prodHId",
               "property": "prodHId"
+            },
+            {
+              "type": "prodId",
+              "property": "prodId"
             }
           ]
         }

@@ -17,8 +17,9 @@ import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/cus
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
 import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
-import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
-import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
+import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
+import { ArchwizardModule } from 'angular-archwizard';
+import { CustomerPersonalDetailComponent } from './customer-personal/customer-personal-detail/customer-personal-detail.component';
 @NgModule({
   exports: [ 
   ],
@@ -36,17 +37,12 @@ import { NegativeCustomerComponent } from './negative-customer/negative-customer
     UcpagingModule,
     ReactiveFormsModule,
     UclookupgenericModule,
-    UcSubsectionModule
-    // ArchwizardModule
+    UcSubsectionModule, 
+     ArchwizardModule
   ],
   declarations: [ 
     CustomerPagingComponent, 
-    CustomerPersonalMainInfoComponent, 
-    CustomerPersonalDuplicateCheckComponent, 
-    CustomerCompanyDuplicateCheckComponent, 
-    CustomerCompanyMainInfoComponent,
-    NegativeCustomerComponent,
-    NegativeCustomerDetailComponent
+    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent
   ]
 })
 export class CustomerModule { 
