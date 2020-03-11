@@ -12,6 +12,9 @@ import { ProductHoAdddetailComponent } from './product-HO/product-ho-adddetail/p
 import { GeneralDataComponent } from './prod-offering/prod-offering-add-detail/general-data/general-data.component';
 import { ProductComponentComponent } from './prod-offering/prod-offering-add-detail/product-component/product-component.component';
 import { OfficeMemberComponent } from './prod-offering/prod-offering-add-detail/office-member/office-member.component';
+import { GeneralDataHOComponent } from './product-HO/product-ho-adddetail/general-data/general-data.component';
+import { OfficeMemberHOComponent } from './product-HO/product-ho-adddetail/office-member/office-member.component';
+import { ProductComponentHOComponent } from './product-HO/product-ho-adddetail/product-component/product-component.component';
 import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
 import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
 import { SharingComponentModule } from "../shared/sharingcomponent.module";
@@ -26,8 +29,10 @@ import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
-import { ListOfficeMemberComponent } from './prod-offering/prod-offering-add-detail/office-member/list-office-member/list-office-member.component';
-import { SearchOfficeComponent } from './prod-offering/prod-offering-add-detail/office-member/search-office/search-office.component';
+import { ListOfficeMemberComponentOffering } from './prod-offering/prod-offering-add-detail/office-member/list-office-member/list-office-member.component';
+import { SearchOfficeComponentOffering } from './prod-offering/prod-offering-add-detail/office-member/search-office/search-office.component';
+import { ListOfficeMemberComponent } from './product-HO/product-ho-adddetail/office-member/list-office-member/list-office-member.component';
+import { SearchOfficeComponent } from './product-HO/product-ho-adddetail/office-member/search-office/search-office.component';
 
 @NgModule({
     imports: [
@@ -62,7 +67,12 @@ import { SearchOfficeComponent } from './prod-offering/prod-offering-add-detail/
         ProductHOViewComponent,
         ProductOfferingViewComponent,
         ListOfficeMemberComponent,
-        SearchOfficeComponent
+        SearchOfficeComponent,
+        GeneralDataHOComponent,
+        ProductComponentHOComponent,
+        OfficeMemberHOComponent,
+        ListOfficeMemberComponentOffering,
+        SearchOfficeComponentOffering
     ]
   })
 

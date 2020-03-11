@@ -15,8 +15,8 @@ import { UcSubsectionModule } from "@adins/uc-subsection";
 import { ProdOfferingAddDetailRoutingModule } from "./prod-offering-add-detail-routing.module";
 import { OfficeMemberComponent } from './office-member/office-member.component';
 import { ArchwizardModule } from "angular-archwizard";
-import { ListOfficeMemberComponent } from './office-member/list-office-member/list-office-member.component';
-import { SearchOfficeComponent } from './office-member/search-office/search-office.component';
+import { ListOfficeMemberComponentOffering } from './office-member/list-office-member/list-office-member.component';
+import { SearchOfficeComponentOffering } from './office-member/search-office/search-office.component';
 import { UCSearchModule } from "@adins/ucsearch";
 
 @NgModule({

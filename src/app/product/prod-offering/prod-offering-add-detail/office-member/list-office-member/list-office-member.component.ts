@@ -8,12 +8,12 @@ import { environment } from 'environments/environment';
 import { empty } from 'rxjs';
 
 @Component({
-  selector: 'app-list-office-member',
+  selector: 'app-list-office-member-offering',
   templateUrl: './list-office-member.component.html',
   styleUrls: ['./list-office-member.component.scss'],
   providers: [NGXToastrService]
 })
-export class ListOfficeMemberComponent implements OnInit {
+export class ListOfficeMemberComponentOffering implements OnInit {
 
   @ViewChild(UCSearchComponent) UCSearchComponent;
   @Input() ListOfficeMemberObjInput: any;

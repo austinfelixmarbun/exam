@@ -72,20 +72,20 @@
 
       <div class="card-body">
         <div class="px-3">
-          <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="2">
+          <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="1">
             <aw-wizard-step [stepTitle]="'General Data'"
               [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-              <app-general-data [objInput]="objPassing"></app-general-data>
+              <app-general-data-HO [objInput]="objPassing"></app-general-data-HO>
             </aw-wizard-step>
           
             <aw-wizard-step [stepTitle]="'Product Component'" 
               [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-              <app-product-component [objInput]="objPassing"></app-product-component>
+              <app-product-component-HO [objInput]="objPassing"></app-product-component-HO>
             </aw-wizard-step>
 
             <aw-wizard-step [stepTitle]="'Office Member'" 
               [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-              <app-office-member [objInput]="objPassing"></app-office-member>
+              <app-office-member-HO [objInput]="objPassing"></app-office-member-HO>
             </aw-wizard-step>
           </aw-wizard>
         </div>

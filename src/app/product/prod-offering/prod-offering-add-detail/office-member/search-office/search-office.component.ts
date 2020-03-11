@@ -10,12 +10,12 @@ import { template } from '@angular/core/src/render3';
 import { empty } from 'rxjs';
 
 @Component({
-  selector: 'app-search-office',
+  selector: 'app-search-office-offering',
   templateUrl: './search-office.component.html',
   styleUrls: ['./search-office.component.scss'],
   providers: [NGXToastrService]
 })
-export class SearchOfficeComponent implements OnInit {
+export class SearchOfficeComponentOffering implements OnInit {
   
   @ViewChild(UCSearchComponent) UCSearchComponent;
   @Output() componentIsOn: EventEmitter<any> = new EventEmitter();
