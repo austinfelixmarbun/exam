@@ -27,9 +27,6 @@ export class AssetAccessoryPagingComponent implements OnInit {
    }
  
   ngOnInit() {
-
-
-    
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetAccessory.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;

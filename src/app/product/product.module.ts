@@ -25,7 +25,7 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from "angular-archwizard";
-import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
+// import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
@@ -64,7 +64,7 @@ import { SearchOfficeComponent } from './product-HO/product-ho-adddetail/office-
         GeneralDataComponent,
         ProductComponentComponent,
         OfficeMemberComponent,
-        ProductHOViewComponent,
+        // ProductHOViewComponent,
         ProductOfferingViewComponent,
         ListOfficeMemberComponent,
         SearchOfficeComponent,

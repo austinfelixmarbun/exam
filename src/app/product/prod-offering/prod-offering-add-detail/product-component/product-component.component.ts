@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -66,11 +66,20 @@ export class ProductComponentComponent implements OnInit {
 
   lengthDataReturnObj
 
-  listRefProductDetailObj;
+  listRefProdOfferingDetailObj;
   refProductOfferingDetailObj;
   items;
+  SchmData;
+  RuleData;
+  LosData;
+  OthrData;
 
   ngOnInit() {
+    
+    this.SchmData = 0;
+    this.RuleData = 0;
+    this.LosData = 0;
+    this.OthrData = 0;
 
     this.inputLookUpObj = new InputLookupObj();
     this.inputLookUpObj.urlJson = "./assets/uclookup/product/lookupProduct.json";
@@ -109,7 +118,7 @@ export class ProductComponentComponent implements OnInit {
           for (var i = 0; i < lengthDataReturnObj; i++) {
             var eachDataDetail = this.fb.group({
               ProdOfferingDId: response["ReturnObject"][i].ProdOfferingDId,
-              ProdOFferingHId: response["ReturnObject"][i].ProdOfferingHId,
+              ProdOfferingHId: response["ReturnObject"][i].ProdOfferingHId,
               RefProdCompntCode: response["ReturnObject"][i].RefProdCompntCode,
               RefProdCompntGrpCode: response["ReturnObject"][i].RefProdCompntGrpCode,
               CompntValue: response["ReturnObject"][i].CompntValue,
@@ -137,13 +146,29 @@ export class ProductComponentComponent implements OnInit {
                 RowVersion: ""
               });
             }
+
+            if(eachDataDetail.controls.RefProdCompntGrpCode.value == "SCHM"){
+              this.SchmData++;
+            }else if(eachDataDetail.controls.RefProdCompntGrpCode.value == "RULE"){
+              this.RuleData++;
+            }else if(eachDataDetail.controls.RefProdCompntGrpCode.value == "LOS"){
+              this.LosData++;
+            }else if(eachDataDetail.controls.RefProdCompntGrpCode.value == "OTHR"){
+              this.OthrData++;
+            }
+
             var flag = false;
             if (eachDataDetail.controls.ProdOfferingHId.value == 0) {
               flag = true;
             }
-              if(eachDataDetail.controls.ProdCompntType.value == "DDL"){
-                this.resolveDDL(eachDataDetail, i,flag);
-              }
+            if (eachDataDetail.controls.ProdCompntType.value == "DDL") {
+              this.resolveDDL(eachDataDetail, i, flag);
+              eachDataDetail.controls.CompntValue.clearValidators();
+              eachDataDetail.controls.CompntValue.updateValueAndValidity();
+            }else if(eachDataDetail.controls.ProdCompntType.value == "AMT"){
+              eachDataDetail.controls.CompntValue.setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+              eachDataDetail.controls.CompntValue.updateValueAndValidity();
+            }
               this.resolveBehaviour(eachDataDetail,i,flag);
               this.items.push(eachDataDetail);
           }
@@ -221,8 +246,8 @@ export class ProductComponentComponent implements OnInit {
               this.RefSchemeForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
               if(flag){
               this.RefSchemeForm.controls.items["controls"][indexAt].patchValue({
-                CompntValue: response["ReturnObject"][0].Value,
-                CompntValueDesc: response["ReturnObject"][0].Key
+                CompntValue: response["ReturnObject"][0].Key,
+                CompntValueDesc: response["ReturnObject"][0].Value
               });
             }
           }
@@ -240,8 +265,8 @@ export class ProductComponentComponent implements OnInit {
     // console.log(ev.target.selectedOptions[0].text);
     // console.log(ev.target.selectedOptions[0].value);
       this.RefSchemeForm.controls.items["controls"][idx].patchValue({
-        CompntValue: ev.target.selectedOptions[0].text,
-        CompntValueDesc: ev.target.selectedOptions[0].value
+        CompntValue: ev.target.selectedOptions[0].value,
+        CompntValueDesc: ev.target.selectedOptions[0].text
       });
     
 
@@ -293,10 +318,10 @@ export class ProductComponentComponent implements OnInit {
   }
 
   NextDetail(){
-    this.listProductComponentObj = new ListRefProductDetailObj();
+    this.listProductComponentObj = new ListRefProductOfferingDetailObj();
     this.listProductComponentObj.ProductDetails = new Array();
     this.listProductComponentObj.ProdOfferingHId = this.objInput["param"];
-    this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
+    this.UrlBackEnd = AdInsConstant.AddOrEditProdOfferingDetail;
     for (var i = 0; i < this.lengthDataReturnObj; i++) {
       var ProductComponentObj = new RefProdOfferingDetailObj();
       ProductComponentObj.ProdOfferingDId = this.RefSchemeForm.controls.items["controls"][i].controls.ProdDId.value;
@@ -325,6 +350,10 @@ export class ProductComponentComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  Next(){
+    this.wizard.goToNextStep();
   }
 
  }

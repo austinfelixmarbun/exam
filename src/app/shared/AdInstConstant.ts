@@ -234,7 +234,7 @@ export class AdInsConstant {
   public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
   public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
   public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
-  public static GetListActiveRefMaster = "/RefMaster/GetListKeyValueActiveByCode";
+  public static GetListActiveRefMaster = environment.FoundationR3Url +"/RefMaster/GetListKeyValueActiveByCode";
 
   //REF INDUSTRY TYPE
   public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
@@ -317,7 +317,7 @@ export class AdInsConstant {
   public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueById";
   public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
   public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
-
+  public static GetListAssetMasterByAssetSchmHId = "http://localhost:5000" + "/AssetMaster/GetListAssetMasterByAssetSchmHId"
   //REF PROFESSION
 
   public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
@@ -382,23 +382,24 @@ export class AdInsConstant {
   public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
 
   // ASSET TYPE
-  public static AddAssetType = "/AssetType/AddAssetType"
-  public static EditAssetType = "/AssetType/EditAssetType"
-  public static GetAssetTypeByCode = "/AssetType/GetAssetTypeByCode"
-  public static GetAssetTypeById = "/AssetType/GetAssetTypeById"
-  public static GetListAssetType = "/AssetType/GetListAssetType"
-  public static GetListActiveAssetType = "/AssetType/GetListActiveAssetType"
+  public static AddAssetType = environment.FoundationR3Url + "/AssetType/AddAssetType"
+  public static EditAssetType = environment.FoundationR3Url + "/AssetType/EditAssetType"
+  public static GetAssetTypeByCode = environment.FoundationR3Url + "/AssetType/GetAssetTypeByCode"
+  public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById"
+  public static GetListAssetType = environment.FoundationR3Url + "/AssetType/GetListAssetType"
+  public static GetListActiveAssetType = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType"
   public static DeleteAssetType = "/AssetType/DeleteAssetType"
 
   // PRODUCT
-  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
-  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
-  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
-  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
-  public static GetListProdHVersionByProdId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdId";
+  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
+  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
+  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
+  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
   public static AddProductOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProductOfficeMbrBatch";
   public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId";
   public static DeleteProductOfficeMbr = environment.FoundationR3Url + "/Product/DeleteProductOfficeMbr";
+
+
   public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
   public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
 
@@ -415,7 +416,7 @@ export class AdInsConstant {
   public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
   public static GetProductOfferingComponent = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponent";
   public static DeleteProdOfferingOfficeMbr = environment.FoundationR3Url + "/ProductOffering/DeleteProdOfferingOfficeMbr";
-  public static AddProdOfferingOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProdOfferingOfficeMbrBatch";
+  public static AddProdOfferingOfficeMbrBatch = environment.FoundationR3Url + "/ProductOffering/AddProdOfferingOfficeMbrBatch";
 
   //REF REASON
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
@@ -464,13 +465,16 @@ export class AdInsConstant {
   public static GetRefAssetDocByRefAssetDocId = "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
   public static GetListRefAssetDoc = "/RefAssetDoc/GetListRefAssetDoc"
   public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
-
-
+   
   //Asset Scheme
-  public static GetAssetSchmHById = "/AssetSchmH/GetAssetSchmHById";
-  public static AddAssetSchmH = "/AssetSchmH/AddAssetScyId";
-  public static EditAssetSchmH = "/AssetSchmH/EditAssetSchmH";
-
+  public static GetAssetSchmHById =   environment.FoundationR3Url + "/AssetSchmH/GetAssetSchmHById";
+  public static AddAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/AddAssetSchmH";
+  public static EditAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmH";
+  public static GetListAssetSchmDByAssetSchmHId = "http://localhost:5000" + "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
+  public static EditAssetSchmHAndD = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmHAndD"
+  public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
+  public static AddListAssetSchmD =  "http://localhost:5000"  + "/AssetSchmD/AddListAssetSchmD";
+  public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
 
@@ -490,4 +494,14 @@ export class AdInsConstant {
   //REF BEHAVIOUR
   
   public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
+
+  //Customer Personal
+  public static AddNewCustPersonal = environment.FoundationR3Url + "/CustPersonal/AddCustPersonal"
+  public static EditCustPersonal = environment.FoundationR3Url + "/CustPersonal/EditCustPersonal"
+  public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
+ 
+  // Customer
+  public static AddNewCust =   environment.FoundationR3Url + "/Cust/AddCust"
+  public static  GetCustByCustId =   environment.FoundationR3Url + "/Cust/GetCustByCustId"
+  
 }
