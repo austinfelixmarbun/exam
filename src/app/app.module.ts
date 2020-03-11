@@ -56,10 +56,6 @@ export function createTranslateLoader(http: HttpClient) {
         UserMaintenanceComponent,
         ErrorDialogComponent,
         RolepickComponent,
-        
-       
-       
-        
     ],
     imports: [
         HttpModule,
