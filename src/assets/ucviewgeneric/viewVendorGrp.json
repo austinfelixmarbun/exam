@@ -1,0 +1,36 @@
+{
+    "subsection": [
+        {
+            "subSectionId": "Vendor Group Member Information",
+            "subSectionTitle": "VENDOR GROUP MEMBER",
+            "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+            "mainInfo": [
+                {
+                    "type": "text",
+                    "label": "Vendor Category",
+                    "property": "Descri"
+                },
+                {
+                    "type": "boolean",
+                    "label": "Active Status",
+                    "property": "IsActive"
+                },
+                {
+                    "type": "text",
+                    "label": "Group Code",
+                    "property": "VendorGrpCode"
+                },
+                {
+                    "type": "text",
+                    "label": "Group Name",
+                    "property": "VendorGrpName"
+                }
+            ],
+            "querystring": {
+              "select": "SELECT  C.DESCR AS Descri, A.VENDOR_GRP_CODE AS VendorGrpCode,A.VENDOR_GRP_NAME AS VendorGrpName, B.IS_ACTIVE AS IsActive",
+              "from": "FROM dbo.VENDOR_GRP A WITH(NOLOCK) JOIN dbo.VENDOR_GRP_MBR B WITH(NOLOCK) ON A.VENDOR_GRP_ID = B.VENDOR_GRP_ID JOIN dbo.REF_MASTER C WITH(NOLOCK) ON C.MASTER_CODE = A.MR_VENDOR_CATEGORY_CODE",
+              "where": "WHERE A.PROD_H_ID = {0}"
+            }
+        }
+    ]
+}

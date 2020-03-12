@@ -21,13 +21,12 @@
           </form>
           <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
           </lib-ucSubsection>
-          <form class="form form-horizontal" [formGroup]="CustomerPersonalForm" (ngSubmit)="CustomerPersonalForm.valid "
-            #enjiForm="ngForm" id="MainInfoId">
+          <form class="form form-horizontal"   id="MainInfoId">
             <div class="form-body">
               <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>Customer Name </label>
                 <div class="col-md-4">
-                  <label>{{this.CustName}}</label>
+                  <label>{{this.custObj.CustName}}</label>
                 </div>
 
                 <label class="col-md-2  adInsLabel" translate>Gender </label>
@@ -37,11 +36,21 @@
                 </div>
               </div>
               <div class="form-group row">
+                <label class="col-md-2 adInsLabel" translate>Customer Model</label>
+                <div class="col-md-4">
+
+                  <label>{{this.CustModelDesc}}</label>
+                </div>
+
                 <label class="col-md-2 adInsLabel" translate>ID Type </label>
                 <div class="col-md-4">
 
                   <label>{{this.MrIdTypeCodeDesc}}</label>
                 </div>
+
+               
+              </div>
+              <div class="form-group row ">
 
                 <label class="col-md-2 adInsLabel" translate>Birth Place/Date </label>
                 <div class="col-md-4">
@@ -56,30 +65,39 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="form-group row ">
+
+
                 <label class="col-md-2 adInsLabel" translate>ID Number </label>
                 <div class="col-md-4">
                   <label>{{this.IdNo}}</label>
                 </div>
+             
+              </div>
+              <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>NPWP</label>
                 <div class="col-md-4">
                   <label>{{this.TaxIdNo}}</label>
                 </div>
-              </div>
-              <div class="form-group row ">
+
                 <label class="col-md-2 adInsLabel" translate>ID Expired Date</label>
                 <div class="col-md-4">
                   <label>{{this.IdExpiredDt}}</label>
 
                 </div>
 
-                <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
-                <div class="col-md-4">
-                  <label>{{this.MotherMaidenName}}</label>
-
-                </div>
+               
               </div>
+
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
+              <div class="col-md-4">
+                <label>{{this.MotherMaidenName}}</label>
+
+              </div>
+
+               
+              </div>
+             
             </div>
           </form>
         </div>

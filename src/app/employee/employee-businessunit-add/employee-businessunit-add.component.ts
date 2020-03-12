@@ -100,7 +100,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
             )
           }
           var Office = new OfficeObj();
-          Office.refOfficeId = this.result["RefOfficeId"];
+          Office.RefOfficeId = this.result["RefOfficeId"];
           this.http.post(AdInsConstant.GetRefOfficeByRefOfficeId, Office).subscribe(
             (response) => {
               console.log("isi Office");

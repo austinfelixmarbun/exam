@@ -16,14 +16,14 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'paging',
+        path: 'Paging',
         component: OfficeComponent,
         data: {
           title: 'Office'
         },
       },
       {
-        path: 'add',
+        path: 'Add',
         component: OfficeAddComponent,
         data: {
           title: 'Add Office'

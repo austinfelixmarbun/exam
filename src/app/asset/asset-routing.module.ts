@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AssetTypePagingComponent } from './asset-type/asset-type-paging/asset-type-paging.component';
 import { AssetTypeAddEditComponent } from './asset-type/asset-type-add-edit/asset-type-add-edit.component';
 import { AssetSchemePagingComponent } from './asset-scheme/asset-scheme-paging/asset-scheme-paging.component';
-import { AssetSchemeAddEditMemberComponent } from './asset-scheme/asset-scheme-add-edit-member/asset-scheme-add-edit-member.component';
 import { AssetSchemeAddEditInformationComponent } from './asset-scheme/asset-scheme-add-edit-information/asset-scheme-add-edit-information.component';
 
 import { AssetConfigurationPagingComponent } from './asset-configuration/asset-configuration-paging/asset-configuration-paging.component';
@@ -20,6 +19,8 @@ import { AssetDocumentMasterAddEditComponent } from './asset-document-master/ass
 import { AssetMasterComponent } from './asset-master/asset-master-paging/asset-master.component';
 import { AssetMasterAddEditChildComponent } from './asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component';
 import { AssetMasterAddEditParentComponent } from './asset-master/asset-master-add-edit-parent/asset-master-add-edit-parent.component';
+import { AddAssetSchemeComponent } from './asset-scheme/add-asset-scheme/add-asset-scheme.component';
+import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/asset-scheme-member.component';
 
 const routes: Routes = [
   {
@@ -48,9 +49,16 @@ const routes: Routes = [
       },
       {
         path: 'Scheme/MemberDetail',
-        component: AssetSchemeAddEditMemberComponent,
+        component: AssetSchemeMemberComponent,
         data: {
-          title: 'Asset Scheme Member Add Edit'
+          title: 'Asset Scheme Member Detail'
+        }
+      },
+      {
+        path: 'Scheme/AddMember',
+        component: AddAssetSchemeComponent,
+        data: {
+          title: 'Asset Scheme Member Add'
         }
       },
       {
