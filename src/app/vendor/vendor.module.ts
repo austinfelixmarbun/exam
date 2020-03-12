@@ -14,6 +14,7 @@ import { VendorRoutingModule } from './vendor-routing.module';
 import { BranchComponent } from './branch/branch.component';
 import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
 import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
+import { BankInfoComponent } from './component/bank-info/bank-info.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-
     VendorComponent,
     BranchComponent,
     VendorHoldingPagingComponent,
-    VendorHoldingAddEditComponent
+    VendorHoldingAddEditComponent,
+    BankInfoComponent
   ]
 })
 export class VendorModule { }
