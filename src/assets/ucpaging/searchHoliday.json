@@ -97,15 +97,11 @@
             "action" : [
                 {
                     "type" : "edit",
-                    "path" : "/CommonSetting/Holiday/detail/",
+                    "path" : "/CommonSetting/Holiday/Detail/",
                     "param" : [
                         {
                             "type" : "HolidaySchmHId",
                             "property" : "HolidaySchmHId"
-                        },
-                        {
-                            "type" : "mode",
-                            "property" : "detail"
                         }
                     ]
                 }
