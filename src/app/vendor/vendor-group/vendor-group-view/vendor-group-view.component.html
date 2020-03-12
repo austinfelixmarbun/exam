@@ -1,0 +1,11 @@
+<lib-ucviewgeneric [viewInput]="inputViewObj"></lib-ucviewgeneric>
+
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="addButton" [routerLink]="['/Vendor/GroupMbr/Add']"
+      [queryParams]="{VendorGrpId:VendorGrpId}" translate>
+      <i class="ft-plus-circle"></i> Add
+    </button>
+  </span>
+</div>
+<lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>

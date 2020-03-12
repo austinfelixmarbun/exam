@@ -1,0 +1,99 @@
+{
+    "title": "Office Parent",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "A.OFFICE_CODE",
+            "id": "OfficeCodeId",
+            "value": "",
+            "label": "Office Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type" : "dropdown",
+            "label" : "Office Type",
+            "name" : "A.MR_OFFICE_TYPE_CODE",
+            "id" : "MrOfficeTypeId",
+            "value" : "",
+            "datatype":"text",
+            "isFromURL":true,
+            "isSelectOne" : false,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueOfficeTypeWithoutCg",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "OFFICE_TYPE",
+            "items" : [],
+            "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "A.OFFICE_NAME",
+            "id": "OfficeNameId",
+            "value": "",
+            "label": "Office Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.MR_OFFICE_TYPE_CODE AS MrOfficeType, REF_OFFICE_ID AS RefOfficeId, B.DESCR AS Descr, A.PARENT_ID AS ParentId",
+        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER B ON A.MR_OFFICE_TYPE_CODE = B.MASTER_CODE AND B.REF_MASTER_TYPE_CODE = 'OFFICE_TYPE'"
+    },
+
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE CODE",
+            "name": "OfficeCode"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE NAME",
+            "name": "OfficeName"
+        },
+
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE TYPE",
+            "name": " MrOfficeTypeId"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "SELECT"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "OfficeCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "OfficeName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Descr"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                     "type" : "select",
+                     "property" : "RefOfficeId"
+
+                }
+            ]
+        }
+    ],
+        "propertyId":"OfficeCode",
+        "propertyName":"OfficeCode" 
+    
+
+}

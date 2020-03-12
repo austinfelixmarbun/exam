@@ -1,0 +1,36 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "Vendor Scheme Info",
+        "subSectionTitle": "Vendor Scheme Group Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Vendor Category",
+            "property": "VendorCategory"
+          },
+          {
+            "type": "boolean",
+            "label": "Active Status",
+            "property": "IsActive"
+          },
+          {
+            "type": "text",
+            "label": "Vendor Code",
+            "property": "VendorSchmCode"
+          },
+          {
+            "type": "text",
+            "label": "Vendor Name",
+            "property": "VendorSchmName"
+          } 
+        ],
+        "querystring": {
+            "select": "SELECT rm.DESCR AS VendorCategory, vs.IS_ACTIVE AS IsActive, vs.VENDOR_SCHM_CODE AS VendorSchmCode, vs.VENDOR_SCHM_NAME AS VendorSchmName",
+            "from": "FROM dbo.VENDOR_SCHM vs WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER rm WITH(NOLOCK) ON rm.MASTER_CODE = vs.MR_VENDOR_CATEGORY_CODE", 
+            "where": "WHERE vs.VENDOR_SCHM_ID = {0}" 
+        }
+      }
+    ]
+  }
