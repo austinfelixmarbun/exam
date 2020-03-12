@@ -5,8 +5,8 @@ export class RefProductDetailObj {
   RefProdCompntGrpCode: any;
   CompntValue: any;
   CompntValueDesc: any;
-  MrProdBehaviourCode: any;
+  MrProdBehaviour: any;
   RowVersion: any;
-
+  GroupCodes: any;
   constructor() { this.RowVersion = "" }
 }
