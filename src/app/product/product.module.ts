@@ -24,13 +24,14 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from "angular-archwizard";
-// import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
+import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
 import { MatTabsModule, MatDividerModule } from '@angular/material';
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 import { ListOfficeMemberComponent } from './product-HO/product-ho-adddetail/office-member/list-office-member/list-office-member.component';
 import { SearchOfficeComponent } from './product-HO/product-ho-adddetail/office-member/search-office/search-office.component';
 import { OfficeMemberComponent } from './prod-offering/prod-offering-add-detail/office-member/office-member.component';
 import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-offering-deactivate-paging/product-offering-deactivate.component";
+import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-offering-deactivate-edit/product-offering-deactivate-edit.component";
 
 @NgModule({
   imports: [
@@ -59,7 +60,7 @@ import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-o
     ProductHODeactivatePagingComponent,
     ProductHODeactivateEditComponent,
     ProductComponentComponent,
-    // ProductHOViewComponent,
+    ProductHOViewComponent,
     ProductOfferingViewComponent,
     ProdOfferingAddDetailComponent,
     ListOfficeMemberComponent,
@@ -69,7 +70,8 @@ import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-o
     OfficeMemberHOComponent,
     GeneralDataComponent,
     ProductOfferingDeactivatePagingComponent,
-    OfficeMemberComponent
+    OfficeMemberComponent,
+    ProductOfferingDeactivateEditComponent
   ]
 
 })

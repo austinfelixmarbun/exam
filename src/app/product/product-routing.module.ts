@@ -11,6 +11,7 @@ import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deacti
 // import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-offering-deactivate-paging/product-offering-deactivate.component";
+import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-offering-deactivate-edit/product-offering-deactivate-edit.component";
 
 const routes: Routes = [
     {
@@ -92,7 +93,14 @@ const routes: Routes = [
         path: 'OfferingDeactivate',
         component: ProductOfferingDeactivatePagingComponent,
         data: {
-          title: 'Product Offering Deactivate'
+          title: 'Product Offering Deactivate Paging'
+        }
+      },
+      {
+        path: 'OfferingDeactivate/edit',
+        component: ProductOfferingDeactivateEditComponent,
+        data: {
+          title : 'Product Offering Deactivate'
         }
       }
     ]
