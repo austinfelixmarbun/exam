@@ -46,6 +46,10 @@ export class EmployeeAddComponent implements OnInit {
   isPasswordNotSame: boolean = false;
   generalSettingObj: GeneralSettingObj;
   passwordPattern: string;
+  refEmpObj: any;
+  refUserObj: any;
+  empBankAccObj: any;
+  refBankObj: any;
 
   RefEmpForm = this.fb.group({
     RefUserId: [0, [Validators.required]],
@@ -141,10 +145,10 @@ export class EmployeeAddComponent implements OnInit {
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
 
-    console.log("EmpUrl : " + this.getEmpUrl);
-    console.log("UsrUrl : " + this.getRefUserUrl);
-    console.log("EmpBank : " + this.getEmpBankUrl);
-    console.log("RefBank : " + this.getRefBankUrl);
+    // console.log("EmpUrl : " + this.getEmpUrl);
+    // console.log("UsrUrl : " + this.getRefUserUrl);
+    // console.log("EmpBank : " + this.getEmpBankUrl);
+    // console.log("RefBank : " + this.getRefBankUrl);
     
     if (this.pageType == "edit") {
       var empObj = new RefEmpObj();
@@ -190,6 +194,11 @@ export class EmployeeAddComponent implements OnInit {
           var empBankAccData = response[2];
           var refBankData = response[3];
 
+          this.refEmpObj = refEmpData;
+          this.refUserObj = refUserData;
+          this.empBankAccObj = empBankAccData;
+          this.refBankObj = refBankData;
+
           this.RefEmpForm.patchValue({
             RefUserId: refUserData.RefUserId,
             Username: refUserData.Username,
@@ -208,6 +217,7 @@ export class EmployeeAddComponent implements OnInit {
             IsActive: refEmpData.IsActive,
             IsLeave: refEmpData.IsLeave,
             Addr: refEmpData.Addr,
+            Zipcode: refEmpData.Zipcode,
             AreaCode1: refEmpData.AreaCode1,
             AreaCode2: refEmpData.AreaCode2,
             AreaCode3: refEmpData.AreaCode3,
@@ -237,8 +247,8 @@ export class EmployeeAddComponent implements OnInit {
             BankAccName: empBankAccData.BankAccName
           });
 
-          console.log("zipcode : " + refEmpData.Zipcode);
-          console.log("bankname: " + refBankData.BankName);
+          // console.log("zipcode : " + refEmpData.Zipcode);
+          // console.log("bankname: " + refBankData.BankName);
           this.inputLookupZipCodeObj.nameSelect = refEmpData.Zipcode;
           this.inputLookupBankObj.nameSelect = refBankData.BankName;
         },
@@ -344,6 +354,8 @@ export class EmployeeAddComponent implements OnInit {
       );
     }
     else {
+      empBankAccData.RowVersion = this.empBankAccObj.RowVersion;
+      refUserData.RowVersion = this.refUserObj.RowVersion;
       this.httpClient.post(this.editUrl, refEmpFormData).pipe(
         map( response => {}),
         mergeMap(() => this.httpClient.post(this.editEmpBankAcc, empBankAccData)),
