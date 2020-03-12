@@ -22,7 +22,6 @@ import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrx
   providers: [NGXToastrService]
 })
 export class NegativeCustomerDetailComponent implements OnInit {
-  @ViewChild('enjiForm') private negativeCustFormObj: NgForm;
   private refMasterByTypeUrl: string = AdInsConstant.GetListActiveRefMaster;
   pageType: string = "add";
   negativeCustId: number;
@@ -32,7 +31,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   inputLookupCustPersonalObj: InputLookupObj;
   inputLookupCustCompanyObj: InputLookupObj;
   inputLookupZipcodeObj: InputLookupObj;
-  custType: string = "P";
+  custType: string = "PERSONAL";
   custNo: string = "";
   zipcode: string = "";
   negativeDataHistoryList: any;
@@ -137,7 +136,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
     criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
-    criteriaObj.value = "P";
+    criteriaObj.value = "PERSONAL";
     criteriaList.push(criteriaObj);
     this.inputLookupCustPersonalObj.addCritInput = criteriaList;
     this.inputLookupCustPersonalObj.isRequired = false;
@@ -152,7 +151,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
     criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
-    criteriaObj.value = "C";
+    criteriaObj.value = "COMPANY";
     criteriaList.push(criteriaObj);
     this.inputLookupCustCompanyObj.addCritInput = criteriaList;
     this.inputLookupCustCompanyObj.isRequired = false;
@@ -230,7 +229,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
 
   custTypeHandler(e){
     var selected = e.target.value;
-    if(selected == "P"){
+    if(selected == "PERSONAL"){
       this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', [Validators.required]));
       this.NegativeCustForm.addControl('IdNo', new FormControl('', [Validators.required]));
       this.NegativeCustForm.addControl('BirthPlace', new FormControl('', [Validators.required]));
@@ -238,7 +237,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
       this.NegativeCustForm.addControl('MotherMaidenName', new FormControl('', [Validators.required]));
       this.NegativeCustForm.removeControl('CompanyLookup');
     }
-    else if(selected == "C"){
+    else if(selected == "COMPANY"){
       this.NegativeCustForm.removeControl('MrIdTypeCode');
       this.NegativeCustForm.removeControl('IdNo');
       this.NegativeCustForm.removeControl('BirthPlace');

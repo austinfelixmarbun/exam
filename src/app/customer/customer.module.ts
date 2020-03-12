@@ -22,6 +22,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { CustomerPersonalDetailComponent } from './customer-personal/customer-personal-detail/customer-personal-detail.component';
 import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
 import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
+import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 @NgModule({
   exports: [ 
   ],
@@ -44,7 +45,7 @@ import { NegativeCustomerComponent } from './negative-customer/negative-customer
   ],
   declarations: [ 
     CustomerPagingComponent, 
-    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent, NegativeCustomerComponent, NegativeCustomerDetailComponent
+    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent, NegativeCustomerComponent, NegativeCustomerDetailComponent, NegativeCustomerViewComponent
   ]
 })
 export class CustomerModule { 
