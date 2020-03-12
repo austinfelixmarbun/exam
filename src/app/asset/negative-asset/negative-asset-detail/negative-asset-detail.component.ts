@@ -193,6 +193,11 @@ export class NegativeAssetDetailComponent implements OnInit {
   // }
 
   getLookupAssetMasterResponse(e){
+    this.serial1Mandatory = false;
+    this.serial2Mandatory = false;
+    this.serial3Mandatory = false;
+    this.serial4Mandatory = false;
+    this.serial5Mandatory = false;
     var assetType = new AssetTypeObj();
     assetType.AssetTypeId = e.assetTypeId;
     this.httpClient.post(AdInsConstant.GetAssetTypeById, assetType).subscribe(
