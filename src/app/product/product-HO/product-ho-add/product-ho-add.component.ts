@@ -93,7 +93,7 @@ export class ProductHOAddComponent implements OnInit {
       console.log("Submited " + this.ProdHOBj);
       if (this.mode == "edit") {
         this.UrlBackEnd = AdInsConstant.EditProduct;
-        this.ProdHOBj.ProdId = this.param;
+        this.ProdHOBj.ProdId = this.ResultResponse.ProdId;
         this.ProdHOBj.ProdCode = this.ResultResponse.ProdCode;
         this.ProdHOBj.RowVersion = this.ResultResponse.RowVersion;
         this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
@@ -127,7 +127,7 @@ export class ProductHOAddComponent implements OnInit {
       console.log("Add Detail Next! " + this.ProdHOBj);
       if (this.mode == "edit") {
         this.UrlBackEnd = AdInsConstant.EditProduct;
-        this.ProdHOBj.ProdId = this.param;
+        this.ProdHOBj.ProdId = this.ResultResponse.ProdId;
         this.ProdHOBj.ProdCode = this.ResultResponse.ProdCode;
         this.ProdHOBj.RowVersion = this.ResultResponse.RowVersion;
         this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(

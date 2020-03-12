@@ -1,8 +1,6 @@
 import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { DecimalPipe } from "@angular/common";
 import { environment } from "environments/environment";
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
@@ -11,11 +9,9 @@ import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
   selector: 'app-office-group-member',
   templateUrl: './office-group-member.component.html',
   styleUrls: ['./office-group-member.component.scss'],
-  providers: [NGXToastrService, DecimalPipe]
 })
 export class OfficeGroupMemberComponent implements OnInit {
 
-  param: any;
   RefOfficeId: string;
   CenterGrpId: string;
   viewObj: any;
