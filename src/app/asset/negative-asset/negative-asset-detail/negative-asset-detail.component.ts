@@ -193,7 +193,7 @@ export class NegativeAssetDetailComponent implements OnInit {
   // }
 
   getLookupAssetMasterResponse(e){
-    this.serial1Mandatory = false;
+    
     this.serial2Mandatory = false;
     this.serial3Mandatory = false;
     this.serial4Mandatory = false;
@@ -207,25 +207,54 @@ export class NegativeAssetDetailComponent implements OnInit {
           this.AssetNegativeForm.controls['SerialNo1'].updateValueAndValidity();
           this.serial1Mandatory = true;
         }
+        else{
+          this.AssetNegativeForm.controls['SerialNo1'].clearValidators();
+          this.AssetNegativeForm.controls['SerialNo1'].updateValueAndValidity();
+          this.serial1Mandatory = false;
+        }
+
         if(response.IsMndtrySerialNo2 == "1"){
           this.AssetNegativeForm.controls['SerialNo2'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo2'].updateValueAndValidity();
           this.serial2Mandatory = true;
         }
+        else{
+          this.AssetNegativeForm.controls['SerialNo2'].clearValidators();
+          this.AssetNegativeForm.controls['SerialNo2'].updateValueAndValidity();
+          this.serial2Mandatory = false;
+        }
+
         if(response.IsMndtrySerialNo3 == "1"){
           this.AssetNegativeForm.controls['SerialNo3'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo3'].updateValueAndValidity();
           this.serial3Mandatory = true;
         }
+        else{
+          this.AssetNegativeForm.controls['SerialNo3'].clearValidators();
+          this.AssetNegativeForm.controls['SerialNo3'].updateValueAndValidity();
+          this.serial3Mandatory = false;
+        }
+
         if(response.IsMndtrySerialNo4 == "1"){
           this.AssetNegativeForm.controls['SerialNo4'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo4'].updateValueAndValidity();
           this.serial4Mandatory = true;
         }
+        else{
+          this.AssetNegativeForm.controls['SerialNo4'].clearValidators();
+          this.AssetNegativeForm.controls['SerialNo4'].updateValueAndValidity();
+          this.serial4Mandatory = false;
+        }
+
         if(response.IsMndtrySerialNo5 == "1"){
           this.AssetNegativeForm.controls['SerialNo5'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo5'].updateValueAndValidity();
           this.serial5Mandatory = true;
+        }
+        else{
+          this.AssetNegativeForm.controls['SerialNo5'].clearValidators();
+          this.AssetNegativeForm.controls['SerialNo5'].updateValueAndValidity();
+          this.serial5Mandatory = false;
         }
 
         this.serial1Disabled = response.SerialNo1Label == "" ? true : false;
