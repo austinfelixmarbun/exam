@@ -12,6 +12,7 @@ export const ROUTES: RouteInfo[] = [
       { path: '/Organization/BusinessUnit', title: 'Business unit', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Organization/JobTitle', title: 'Job Title', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Employee/paging', title: 'Employee', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Employee/Leave/Paging', title: 'Employee Leave', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/SystemSetting/Role', title: 'Role', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
 
     ]
