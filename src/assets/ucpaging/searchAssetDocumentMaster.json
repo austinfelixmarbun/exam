@@ -67,7 +67,7 @@
       }
     ],
     "querystring": { 
-      "select": "SELECT A.REF_ASSET_DOC_ID as RefAssetDocId,  A.ASSET_DOC_CODE as AssetDocumentCode, A.ASSET_DOC_NAME as AssetDocumentName, A.IS_ACTIVE as IsActive",
+      "select": "SELECT   A.ASSET_DOC_CODE as AssetDocumentCode,A.REF_ASSET_DOC_ID as RefAssetDocId, A.ASSET_DOC_NAME as AssetDocumentName, A.IS_ACTIVE as IsActive",
       "from": "FROM REF_ASSET_DOC A WITH(NOLOCK)"
     },
     "bodyList": [
