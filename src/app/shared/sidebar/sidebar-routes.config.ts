@@ -35,12 +35,37 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
+    path: '', title: 'Vendor', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    submenu: [
+      { path: '/Product/HOpaging', title: 'Vendor Holding', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/HODeactivate', title: 'Vendor Head Office', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/ProductOffering/paging', title: 'Vendor Branch', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/OfferingDeactivate', title: 'Vendor Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/OfferingDeactivate', title: 'Vendor Group', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+    ]
+  },
+  {
     path: '', title: 'Product', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
       { path: '/Product/HOpaging', title: 'Product HO', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/HODeactivate', title: 'Product HO Deactivation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/ProductOffering/paging', title: 'Product Offering', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/OfferingDeactivate', title: 'Product Offering Deactivation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+    ]
+  },
+  {
+    path: '', title: 'Survey', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    submenu: [
+      { path: '/Product/HOpaging', title: 'Survey Order', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      
+    ]
+  },
+  {
+    path: '', title: 'Verification', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    submenu: [
+      { path: '/Product/HOpaging', title: 'Question List', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/HOpaging', title: 'Question Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      
     ]
   },
   {
