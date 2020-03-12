@@ -156,7 +156,7 @@ export class AdInsConstant {
   public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
   public static AddRefUser = "/UserManagement/AddRefUser";
   public static EditRefUser = "/UserManagement/EditRefUser";
-  public static EditRefUserR3 = "/RefUser/EditRefUser";
+  public static EditRefUserForRefEmpR3 = "/RefUser/EditRefUserForRefEmp";
   public static ChangePassword = "/UserManagement/ChangePassword";
   public static GetRefUser = "/UserManagement/GetRefUser";
   public static GetUserByUsername = "/UserManagement/GetUserByUsername";

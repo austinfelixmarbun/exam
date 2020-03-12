@@ -21,7 +21,7 @@
                 <show-errors [control]="RefEmpForm.controls.Username" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row adins-required" *ngIf="pageType == 'add'">
               <label class="col-md-3  adInsLabel" for="Password">Password</label>
               <div class="col-md-9">
                 <input type="password" class="form-control adInsInput width-50-per" formControlName="Password" required
@@ -29,7 +29,7 @@
                 <show-errors [control]="RefEmpForm.controls.Password" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row adins-required" *ngIf="pageType == 'add'">
               <label class="col-md-3  adInsLabel" for="ConfirmPassword">Re-enter Password</label>
               <div class="col-md-9">
                 <input type="password" class="form-control adInsInput width-50-per" formControlName="ConfirmPassword" required

@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
 import { NgForm, FormBuilder, Validators, AbstractControl, FormGroup, FormControl } from "@angular/forms";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { formatDate } from "@angular/common";
+import { formatDate, DatePipe } from "@angular/common";
 import { RefBankObj } from "app/shared/model/RefBankObj.Model";
 import { UcAddressComponent } from "app/shared/UserControl/ucAddress/ucAddress.component";
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
@@ -34,7 +34,7 @@ export class EmployeeAddComponent implements OnInit {
   private addUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefEmp;
   private editUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefEmp;
   private addUsrUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefUserR3;
-  private editUsrUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefUser;
+  private editUsrUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefUserForRefEmpR3;
   private addEmpBankAcc: string = environment.FoundationR3Url + AdInsConstant.AddEmpBankAcc;
   private editEmpBankAcc: string = environment.FoundationR3Url + AdInsConstant.EditEmpBankAcc;
   
@@ -69,6 +69,7 @@ export class EmployeeAddComponent implements OnInit {
     IsActive: [true],
     IsLeave: [false],
     Addr: ['', [Validators.required]],
+    Zipcode: ['', [Validators.required]],
     AreaCode1: ['', [Validators.required]],
     AreaCode2: ['', [Validators.required]],
     AreaCode3: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
@@ -199,6 +200,9 @@ export class EmployeeAddComponent implements OnInit {
           this.empBankAccObj = empBankAccData;
           this.refBankObj = refBankData;
 
+          var datePipe = new DatePipe("en-US");
+          var joinDt = datePipe.transform(refEmpData.JoinDt, 'yyyy-MM-dd');
+
           this.RefEmpForm.patchValue({
             RefUserId: refUserData.RefUserId,
             Username: refUserData.Username,
@@ -209,7 +213,7 @@ export class EmployeeAddComponent implements OnInit {
             RefEmpId: refEmpData.RefEmpId,
             EmpNo: refEmpData.EmpNo,
             EmpName: refEmpData.EmpName,
-            JoinDt: refEmpData.JoinDt,
+            JoinDt: joinDt,
             MrIdTypeCode: refEmpData.MrIdTypeCode,
             IdNo: refEmpData.IdNo,
             TaxIdNo: refEmpData.TaxIdNo,
@@ -247,8 +251,6 @@ export class EmployeeAddComponent implements OnInit {
             BankAccName: empBankAccData.BankAccName
           });
 
-          // console.log("zipcode : " + refEmpData.Zipcode);
-          // console.log("bankname: " + refBankData.BankName);
           this.inputLookupZipCodeObj.nameSelect = refEmpData.Zipcode;
           this.inputLookupBankObj.nameSelect = refBankData.BankName;
         },
@@ -261,8 +263,8 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   getLookupZipCodeResponse(e){
-    // console.log(JSON.stringify(e));
     this.RefEmpForm.patchValue({
+      Zipcode: e.zipcode,
       AreaCode1: e.areaCode1,
       AreaCode2: e.areaCode2,
       City: e.city,
@@ -329,7 +331,7 @@ export class EmployeeAddComponent implements OnInit {
     empBankAccData.BankBranch = refEmpFormData.BankBranch;
     empBankAccData.BankBranchRegCode = refEmpFormData.BankBranchRegCode
     empBankAccData.BankAccNo = refEmpFormData.BankAccNo;
-    empBankAccData.BankAccName = refEmpFormData.BankAccNo;
+    empBankAccData.BankAccName = refEmpFormData.BankAccName;
     empBankAccData.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
@@ -344,8 +346,9 @@ export class EmployeeAddComponent implements OnInit {
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Employee', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['/Employee/detail']))
+          // this.router.navigateByUrl('/Employee', { skipLocationChange: true }).then(() =>
+          // this.router.navigate(['/Employee/detail']))
+          this.router.navigate(["/Employee/paging"]);
         },
         (error) => {
           console.log("Error");
