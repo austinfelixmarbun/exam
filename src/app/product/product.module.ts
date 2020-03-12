@@ -67,7 +67,7 @@ import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-o
     GeneralDataHOComponent,
     ProductComponentHOComponent,
     OfficeMemberHOComponent,
-    GeneralDataComponent
+    GeneralDataComponent,
     ProductOfferingDeactivatePagingComponent
   ]
 
