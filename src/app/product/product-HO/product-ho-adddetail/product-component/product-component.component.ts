@@ -288,8 +288,8 @@ export class ProductComponentHOComponent implements OnInit {
     // console.log(ev.target.selectedOptions[0].value);
 
     this.RefGeneralDataForm.controls.items["controls"][idx].patchValue({
-      CompntValue: ev.target.selectedOptions[0].value,
-      CompntValueDesc: ev.target.selectedOptions[0].text
+      CompntValue: ev.target.selectedOptions[0].text,
+      CompntValueDesc: ev.target.selectedOptions[0].value
     });
 
   }

@@ -20,7 +20,7 @@
                     [ngSwitch]="item.controls.ProdCompntType.value">
                     <div *ngSwitchCase="'DDL'">
                       <div>
-                        <select class="form-control adInsInput" style="width: auto" formControlName="CompntValue" (change)="clickTest($event, i)">
+                        <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc" (change)="clickTest($event, i)">
                           <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                             {{it.value.Value}}
                           </option>
@@ -76,7 +76,7 @@
                     [ngSwitch]="item.controls.ProdCompntType.value">
                     <div *ngSwitchCase="'DDL'">
                       <div>
-                        <select class="form-control adInsInput" style="width: auto" formControlName="CompntValue" (change)="clickTest($event, i)">
+                        <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc" (change)="clickTest($event, i)">
                           <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                             {{it.value.Value}}
                           </option>
@@ -99,7 +99,7 @@
                       </option>
                     </select>
                   </div>
-                  
+
                 </div>
 
               </div>
@@ -130,7 +130,7 @@
                     [ngSwitch]="item.controls.ProdCompntType.value">
                     <div *ngSwitchCase="'DDL'">
                       <div>
-                        <select class="form-control adInsInput" style="width: auto" formControlName="CompntValue" (change)="clickTest($event, i)">
+                        <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc" (change)="clickTest($event, i)">
                           <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                             {{it.value.Value}}
                           </option>
@@ -186,7 +186,7 @@
                     [ngSwitch]="item.controls.ProdCompntType.value">
                     <div *ngSwitchCase="'DDL'">
                       <div>
-                        <select class="form-control adInsInput" style="width: auto" formControlName="CompntValue" (change)="clickTest($event, i)">
+                        <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc" (change)="clickTest($event, i)">
                           <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
                             {{it.value.Value}}
                           </option>
@@ -224,7 +224,7 @@
     </div>
 
     <!-- Button -->
-    <div class="form-actions right">
+    <div class="form-actions ucSearch-Button-Right">
       <button type="button" (click)="SaveForm()" class="btn btn-raised btn-primary">
         <i class="fa fa-check-square-o"></i> Save
       </button>

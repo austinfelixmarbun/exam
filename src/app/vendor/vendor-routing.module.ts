@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VendorComponent } from './vendor.component';
 import { BranchComponent } from './branch/branch.component';
+import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
+import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
@@ -21,6 +23,20 @@ const routes: Routes = [
         component: BranchComponent,
         data: {
           title: 'Vendor Branch Paging'
+        },
+      },
+      {
+        path: 'HoldingPaging',
+        component: VendorHoldingPagingComponent,
+        data: {
+          title: 'Vendor Holding Paging'
+        },
+      },
+      {
+        path: 'HoldingAddEdit',
+        component: VendorHoldingAddEditComponent,
+        data: {
+          title: 'Vendor Holding Add Edit'
         },
       },
       {

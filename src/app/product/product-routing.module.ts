@@ -19,27 +19,28 @@ import { ProductHODeactivateApprovalDetailComponent } from "./product-HO/product
 import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-offering-deactivate-paging/product-offering-deactivate.component";
 import { ProductOfferingDeactivateApprovalComponent } from "./prod-offering/prod-offering-deact-apv/product-offering-deact-apv.component";
 import { ProductOfferingDeactivateApprovalDetailComponent } from "./prod-offering/prod-offering-deact-apv-detail/product-offering-deact-apv-detail.component";
+import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-offering-deactivate-edit/product-offering-deactivate-edit.component";
 
 const routes: Routes = [
     {
       path: '',
       children: [
         {
-          path: 'prod-offering/paging',
+          path: 'ProdOffering/paging',
           component: ProdOfferingPagingComponent,
           data: {
             title: 'Paging'
           },
         },
         {
-          path: 'prod-offering/add',
+          path: 'ProdOffering/add',
           component: ProdOfferingAddComponent,
           data: {
             title: 'Add'
           },
         },
         {
-          path: 'prod-offering/add-detail',
+          path: 'ProdOffering/AddDetail',
           component: ProdOfferingAddDetailComponent,
           loadChildren: "./prod-offering/prod-offering-add-detail/prod-offering-add-detail.module#ProdOfferingAddDetailModule",
           data: {
@@ -142,7 +143,14 @@ const routes: Routes = [
         path: 'OfferingDeactivate',
         component: ProductOfferingDeactivatePagingComponent,
         data: {
-          title: 'Product Offering Deactivate'
+          title: 'Product Offering Deactivate Paging'
+        }
+      },
+      {
+        path: 'OfferingDeactivate/edit',
+        component: ProductOfferingDeactivateEditComponent,
+        data: {
+          title : 'Product Offering Deactivate'
         }
       },
       {
