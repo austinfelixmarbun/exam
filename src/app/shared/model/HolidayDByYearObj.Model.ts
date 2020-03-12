@@ -1,9 +1,10 @@
-export class HolidayDObj {
+export class HolidayDByYearObj {
     HolidaySchmDId: any;
     HolidaySchmHId: any;
-    HolidayDt: any;
-    Descr: any;
+    DictOfDays : string[] = [];
     IsPublicHoliday: any;
+    UntilYear : any;
     RowVersion : any;
+
     constructor() { this.HolidaySchmDId = 0; this.RowVersion = ""}
 }
