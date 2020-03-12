@@ -20,7 +20,6 @@ import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
 })
 export class ProductHOViewComponent implements OnInit {
 
-  prodId: any;
   prodHId: any;
   viewProdMainInfoObj: any;
   ProdBranchMemObj: any;
@@ -30,6 +29,7 @@ export class ProductHOViewComponent implements OnInit {
   ProdDUrl: any;
   refProductDetailObj: any;
   GenData: any;
+  ProdComp: any;
   ProdCompSchm: any;
   ProdCompScore: any;
   ProdCompRule: any;
@@ -41,14 +41,11 @@ export class ProductHOViewComponent implements OnInit {
 
     this.ProdDUrl = AdInsConstant.GetProductDetailComponentInfo;
     this.ProdBranchUrl = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
-    this.ProdVerUrl = AdInsConstant.GetListProdHVersionByProdId;
+    this.ProdVerUrl = AdInsConstant.GetListProdHVersionByProdHId;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {
         this.prodHId = params["prodHId"];
-      }
-      if (params["prodId"] != null) {
-        this.prodId = params["prodId"];
       }
     });
   }
@@ -59,7 +56,7 @@ export class ProductHOViewComponent implements OnInit {
 
     //** Product Version **//
     this.ProdVersionObj = new ProdHVersionObj
-    this.ProdVersionObj.ProdId = this.prodId;
+    this.ProdVersionObj.ProdHId = this.prodHId;
     this.http.post(this.ProdVerUrl, this.ProdVersionObj).subscribe(
       response => {
         console.log("Response: ");
@@ -85,73 +82,26 @@ export class ProductHOViewComponent implements OnInit {
       }
     );
 
-    //** General Data **//
-    this.refProductDetailObj = new RefProductDetailObj
-    this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = 'GEN';
-    this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-      response => {
-        console.log("Response: ");
-        console.log(response);
-        this.GenData = response['ReturnObject'];
-      },
-      error => {
-        console.log(error);
-      }
-    );
-
     //** Product Component **//
-          //** Scheme Component **//
     this.refProductDetailObj = new RefProductDetailObj
     this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = 'SCHM';
+    this.refProductDetailObj.GroupCodes = ['GEN', 'SCHM','SCORE', 'RULE','OTHR'];
     this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdCompSchm = response['ReturnObject'];
-      },
-      error => {
-        console.log(error);
-      }
-    );
-          //** Score Component **//
-    this.refProductDetailObj = new RefProductDetailObj
-    this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = 'SCORE';
-    this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-      response => {
-        console.log("Response: ");
-        console.log(response);
-        this.ProdCompScore = response['ReturnObject'];
-      },
-      error => {
-        console.log(error);
-      }
-    );
-          //** Rule Component **//
-    this.refProductDetailObj = new RefProductDetailObj
-    this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = 'RULE';
-    this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-      response => {
-        console.log("Response: ");
-        console.log(response);
-        this.ProdCompRule = response['ReturnObject'];
-      },
-      error => {
-        console.log(error);
-      }
-    );
-          //** Other Component **//
-    this.refProductDetailObj = new RefProductDetailObj
-    this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = 'OTHR';
-    this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-      response => {
-        console.log("Response: ");
-        console.log(response);
-        this.ProdCompOther = response['ReturnObject'];
+        this.ProdComp = response['ReturnObject'];
+
+        this.GenData = this.ProdComp.filter(
+          comp => comp.RefProdCompntGrpCode === 'GEN');
+        this.ProdCompSchm = this.ProdComp.filter(
+          comp => comp.RefProdCompntGrpCode === 'SCHM');
+        this.ProdCompScore = this.ProdComp.filter(
+          comp => comp.RefProdCompntGrpCode === 'SCORE');
+        this.ProdCompRule = this.ProdComp.filter(
+          comp => comp.RefProdCompntGrpCode === 'RULE');
+        this.ProdCompOther = this.ProdComp.filter(
+          comp => comp.RefProdCompntGrpCode === 'OTHR');
       },
       error => {
         console.log(error);

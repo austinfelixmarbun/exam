@@ -30,6 +30,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 import { ListOfficeMemberComponent } from './product-HO/product-ho-adddetail/office-member/list-office-member/list-office-member.component';
 import { SearchOfficeComponent } from './product-HO/product-ho-adddetail/office-member/search-office/search-office.component';
+import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-offering-deactivate-paging/product-offering-deactivate.component";
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import { SearchOfficeComponent } from './product-HO/product-ho-adddetail/office-
     ProductComponentHOComponent,
     OfficeMemberHOComponent,
     GeneralDataComponent
+    ProductOfferingDeactivatePagingComponent
   ]
 
 })

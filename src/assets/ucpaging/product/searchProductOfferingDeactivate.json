@@ -1,0 +1,128 @@
+{
+  "title": "Product Offering Management",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "A.PROD_OFFERING_CODE",
+      "id": "prodCodeId",
+      "value": "",
+      "label": "Product Offering Code",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "A.PROD_OFFERING_NAME",
+      "id": "prodNameId",
+      "value": "",
+      "label": "Product Offering Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "datepicker",
+      "datatype": "date",
+      "name": "A.END_DT",
+      "id": "endDtLte",
+      "value": "",
+      "restriction": "Lte",
+      "label": "End Date <=",
+      "placeholder": "Placeholder"
+    }
+
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Product Code",
+      "name": "prodOfferingCode"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Product Name",
+      "name": "prodOfferingName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Current Version",
+      "name": "prodOfferingVersion"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "End Date",
+      "name": "endDt"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Deactive"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT A.PROD_OFFERING_CODE as prodOfferingCode,A.PROD_OFFERING_ID as prodOfferingId,A.PROD_OFFERING_NAME as prodOfferingName, B.PROD_OFFERING_VERSION as prodOfferingVersion, A.END_DT as endDt, A.PROD_OFFERING_STAT as prodOfferingStat, A.CURRENT_PROD_OFFERING_H_ID as prodOfferingHId, B.PROD_STAT as conditionStat",
+    "from": "FROM dbo.PROD_OFFERING A WITH(NOLOCK) LEFT JOIN dbo.PROD_OFFERING_H B WITH(NOLOCK) ON A.CURRENT_PROD_OFFERING_H_ID=B.PROD_OFFERING_H_ID"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "prodOfferingCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "prodOfferingName"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "prodOfferingVersion"
+    },
+    {
+      "type": "date",
+      "position": "center",
+      "property": "endDt"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "switch",
+          "case": [
+            {
+              "conditions": [
+                {
+                  "property": "conditionStat",
+                  "value": "REQD"
+                }
+              ],
+              "isHide": true
+            },
+            {
+              "conditions": [
+                {
+                  "property": "conditionStat",
+                  "value": "ACT"
+                }
+              ],
+              "result": {
+                "type": "edit",
+                "path": "./edit",
+                "param": [
+                  {
+                    "type": "prodOfferingHId",
+                    "property": "prodOfferingHId"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -64,8 +64,6 @@ export class NegativeAssetDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    var lookupNameSelect;
-
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/uclookup/NegativeAsset/lookupAssetMaster_NegAst.json";
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -76,43 +74,37 @@ export class NegativeAssetDetailComponent implements OnInit {
     this.criteriaList = new Array();
     this.criteriaObj = new CriteriaObj();
     this.criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    this.criteriaObj.propName = 'IS_ACTIVE';
+    this.criteriaObj.propName = 'A.IS_ACTIVE';
     this.criteriaObj.value = "1";
     this.criteriaList.push(this.criteriaObj);
 
     this.criteriaObj = new CriteriaObj();
     this.criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    this.criteriaObj.propName = 'IS_FINAL';
+    this.criteriaObj.propName = 'A.IS_FINAL';
     this.criteriaObj.value = "1";
     this.criteriaList.push(this.criteriaObj);
 
     this.inputLookupObj.addCritInput = this.criteriaList;
 
-    this.httpClient.post(AdInsConstant.GetActiveAssetTypeValue, null).pipe(
-      map( (response) => {
-        return response;
-      }),
-      mergeMap( (response) => {
-        var refMasterObj = new RefMasterObj();
-        refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
-        const negativeSource = this.httpClient.post(environment.FoundationR3Url + AdInsConstant.GetListActiveRefMaster, refMasterObj);
-        var tempResponse = [response];
-        return forkJoin(tempResponse, negativeSource);
-      })
-    ).subscribe(
-      (response: any) => {
-        this.assetTypeList = response[0];
-        this.negativeAssetSourceList = response[1];
-        this.inputLookupObj.nameSelect = lookupNameSelect;
-      }
-    );
-
-    var negativeAsset = new AssetNegativeObj();
-    negativeAsset.AssetNegativeId = this.assetNegativeId;
     if(this.pageType == "edit"){
-      this.httpClient.post(AdInsConstant.GetAssetNegativeByIdEditPage, negativeAsset).subscribe(
+      var negativeAsset = new AssetNegativeObj();
+      negativeAsset.AssetNegativeId = this.assetNegativeId;
+      var refMasterObj = new RefMasterObj();
+      refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
+      this.httpClient.post(environment.FoundationR3Url + AdInsConstant.GetListActiveRefMaster, refMasterObj).pipe(
+        map( (response: any) => {
+          this.negativeAssetSourceList = response;
+          this.AssetNegativeForm.patchValue({
+            MrNegAssetSourceCode: response.ReturnObject[0].Key
+          });
+        }),
+        mergeMap( () => {
+          const assetNegativeData = this.httpClient.post(AdInsConstant.GetAssetNegativeByIdEditPage, negativeAsset);
+          return assetNegativeData;
+        })
+      ).subscribe(
         (response: any) => {
-          // console.log("Response Edit : " + JSON.stringify(response));
+          console.log("Response Edit : " + JSON.stringify(response));
           this.AssetNegativeForm.patchValue({
             AssetNegativeId: response.AssetNegativeObj.AssetNegativeId,
             AssetMasterId: response.AssetNegativeObj.AssetMasterId,
@@ -125,10 +117,24 @@ export class NegativeAssetDetailComponent implements OnInit {
             MrNegAssetSourceCode: response.AssetNegativeObj.MrNegAssetSourceCode,
             Notes: response.AssetNegativeObj.Notes,
             IsActive: response.AssetNegativeObj.IsActive,
-            RowVersion: response.AssetNegativeObj.RowVersion
+            RowVersion: response.RowVersion
           });
-
-          lookupNameSelect = response.AssetMasterObj.FullAssetName;
+          this.inputLookupObj.nameSelect = response.AssetMasterObj.FullAssetName;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    else{
+      var refMasterObj = new RefMasterObj();
+      refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
+      this.httpClient.post(environment.FoundationR3Url + AdInsConstant.GetListActiveRefMaster, refMasterObj).subscribe(
+        (response: any) => {
+          this.negativeAssetSourceList = response;
+          this.AssetNegativeForm.patchValue({
+            MrNegAssetSourceCode: response.ReturnObject[0].Key
+          });
         },
         (error) => {
           console.log(error);
@@ -137,18 +143,19 @@ export class NegativeAssetDetailComponent implements OnInit {
     }
   }
 
-  assetTypeChange(e){
-    this.criteriaObj = new CriteriaObj();
-    this.criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    this.criteriaObj.propName = 'ASSET_TYPE_ID';
-    this.criteriaObj.value = e.target.value;
-    this.criteriaList.push(this.criteriaObj);
-    this.inputLookupObj.addCritInput = this.criteriaList;
-  }
+  // assetTypeChange(e){
+  //   this.criteriaObj = new CriteriaObj();
+  //   this.criteriaObj.restriction = AdInsConstant.RestrictionEq;
+  //   this.criteriaObj.propName = 'ASSET_TYPE_ID';
+  //   this.criteriaObj.value = e.target.value;
+  //   this.criteriaList.push(this.criteriaObj);
+  //   this.inputLookupObj.addCritInput = this.criteriaList;
+  // }
 
   getLookupAssetMasterResponse(e){
     this.AssetNegativeForm.patchValue({
-      AssetMasterId: e.assetMasterId
+      AssetMasterId: e.assetMasterId,
+      AssetTypeId: e.assetTypeId
     });
   }
 
@@ -158,12 +165,12 @@ export class NegativeAssetDetailComponent implements OnInit {
 
   Save(){
     var assetNegativeObj = this.AssetNegativeForm.value;
+    console.log("Form Submit : " + JSON.stringify(AssetNegativeObj));
     if (this.pageType == "add") {
       this.httpClient.post(AdInsConstant.AddAssetNegative, assetNegativeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Asset/NegativeAsset/Paging', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['/Asset/NegativeAsset/Detail']))
+          this.router.navigate(["/Asset/NegativeAsset/Paging"]);
         },
         (error) => {
           console.log("Error");
