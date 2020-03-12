@@ -1,50 +1,80 @@
 <lib-ucviewgeneric [viewInput]="viewProdOfferMainInfoObj"> </lib-ucviewgeneric>
 <mat-tab-group mat-align-tabs="center">
+  <mat-tab label="GENERAL DATA">
+    <ng-template matTabContent>
+      <div class="card">
+        <div class="card-body">
+          <br />
+          <div *ngFor="let item of GenData">
+            <label class="col-md-3">{{item.ProdCompntName}}</label>
+            <label class="col-md-9">{{item.CompntValueDesc}}</label>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
   <mat-tab label="PRODUCT COMPONENT">
     <ng-template matTabContent>
       <div class="card">
         <div class="card-body">
           <div>
             <br />
+            <br />
+            <div>
+              <label class="col-md-4"></label>
+              <label class="col-md-4">Product Head Office</label>
+              <label class="col-md-4">Product Offering</label>
+            </div>
+            <br />
             <h5>Scheme</h5>
             <mat-divider></mat-divider>
             <br />
-            <!--<div *ngFor="let item of ProdCompSchm">
-              <label class="col-md-3">{{item.ProdCompntName}}</label>
-              <label class="col-md-9">{{item.CompntValue}}</label>
-            </div>-->
+            <div *ngFor="let item of ProdCompSchm">
+              <label class="col-md-4">{{item.ProdCompntName}}</label>
+              <label class="col-md-2">{{item.ProdDCompntValueDesc}}</label>
+              <label class="col-md-2">{{item.ProdDMrProdBehaviourCode}}</label>
+              <label class="col-md-2">{{item.CompntValueDesc}}</label>
+              <label class="col-md-2">{{item.MrProdBehaviourCode}}</label>
+            </div>
           </div>
           <div>
             <br />
             <h5>Score</h5>
             <mat-divider></mat-divider>
             <br />
-            <!--<div *ngFor="let item of ProdCompScore">
+            <div *ngFor="let item of ProdCompScore">
               <label class="col-md-4">{{item.ProdCompntName}}</label>
-              <label class="col-md-4">{{item.CompntValue}}</label>
-              <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
-            </div>-->
+              <label class="col-md-2">{{item.ProdDCompntValueDesc}}</label>
+              <label class="col-md-2">{{item.ProdDMrProdBehaviourCode}}</label>
+              <label class="col-md-2">{{item.CompntValueDesc}}</label>
+              <label class="col-md-2">{{item.MrProdBehaviourCode}}</label>
+            </div>
           </div>
           <div>
             <br />
             <h5>Rule</h5>
             <mat-divider></mat-divider>
             <br />
-            <!--<div *ngFor="let item of ProdCompRule">
+            <div *ngFor="let item of ProdCompRule">
               <label class="col-md-4">{{item.ProdCompntName}}</label>
-              <label class="col-md-4">{{item.CompntValue}}</label>
-              <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
-            </div>-->
+              <label class="col-md-2">{{item.ProdDCompntValueDesc}}</label>
+              <label class="col-md-2">{{item.ProdDMrProdBehaviourCode}}</label>
+              <label class="col-md-2">{{item.CompntValueDesc}}</label>
+              <label class="col-md-2">{{item.MrProdBehaviourCode}}</label>
+            </div>
           </div>
           <div>
             <br />
             <h5>Other</h5>
             <mat-divider></mat-divider>
             <br />
-            <!--<div *ngFor="let item of ProdCompOther">
-              <label class="col-md-3">{{item.ProdCompntName}}</label>
-              <label class="col-md-9">{{item.CompntValue}}</label>
-            </div>-->
+            <div *ngFor="let item of ProdCompOther">
+              <label class="col-md-4">{{item.ProdCompntName}}</label>
+              <label class="col-md-2">{{item.ProdDCompntValueDesc}}</label>
+              <label class="col-md-2">{{item.ProdDMrProdBehaviourCode}}</label>
+              <label class="col-md-2">{{item.CompntValueDesc}}</label>
+              <label class="col-md-2">{{item.MrProdBehaviourCode}}</label>
+            </div>
           </div>
         </div>
       </div>
@@ -53,43 +83,43 @@
   <mat-tab label="OFFICE MEMBER">
     <ng-template matTabContent>
       <table class="table table-responsive-md text-center table-hover">
-    <thead>
-      <tr class="table-header">
-        <th class="text-left">Office Code</th>
-        <th class="text-left">Office Name</th>
-        <th class="text-left">Area Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of ProdOfferingBranchMbr">
-        <td class="text-left">{{item.OfficeCode}}</td>
-        <td class="text-left">{{item.OfficeName}}</td>
-        <td class="text-left">{{item.AreaName}}</td>
-      </tr>
-    </tbody>
-  </table>
+        <thead>
+          <tr class="table-header">
+            <th class="text-left">Office Code</th>
+            <th class="text-left">Office Name</th>
+            <th class="text-left">Area Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ProdOfferingBranchMbr">
+            <td class="text-left">{{item.OfficeCode}}</td>
+            <td class="text-left">{{item.OfficeName}}</td>
+            <td class="text-left">{{item.AreaName}}</td>
+          </tr>
+        </tbody>
+      </table>
     </ng-template>
   </mat-tab>
   <mat-tab label="OFFERING VERSION">
     <ng-template matTabContent>
-      <!--<table class="table table-responsive-md text-center table-hover">
+      <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th class="text-left">Prod Version</th>
+            <th class="text-left">Prod Offering Version</th>
             <th class="text-left">Star Date</th>
             <th class="text-left">End Date</th>
             <th class="text-left">Product Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of ProdVersion">
-            <td class="text-left">{{item.ProdVersion}}</td>
-            <td class="text-left">{{item.StarDt}}</td>
-            <td class="text-left">{{item.EndDt}}</td>
+          <tr *ngFor="let item of ProdOfferingVersion">
+            <td class="text-left">{{item.ProdOfferingVersion}}</td>
+            <td class="text-left">{{item.StarDt | date}}</td>
+            <td class="text-left">{{item.EndDt | date}}</td>
             <td class="text-left">{{item.Descr}}</td>
           </tr>
         </tbody>
-      </table>-->
+      </table>
     </ng-template>
   </mat-tab>
 </mat-tab-group>

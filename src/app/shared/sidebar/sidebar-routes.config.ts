@@ -34,6 +34,15 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
+    path: '', title: 'Product', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    submenu: [
+      { path: '/Product/HOpaging', title: 'Product HO', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/HODeactivate', title: 'Product HO Deactivation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/ProductOffering/paging', title: 'Product Offering', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/OfferingDeactivate', title: 'Product Offering Deactivation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+    ]
+  },
+  {
     path: '', title: 'Asset', icon: 'ft-aperture', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
       { path: '/Asset/Configuration/Paging', title: 'Asset Configuration', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
