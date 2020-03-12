@@ -121,7 +121,7 @@ export class GeneralDataComponent implements OnInit {
             this.items.push(eachDataDetail);
           }
         }
-        this.items.removeAt(0);
+        // this.items.removeAt(0);
         console.log("cek form");
         console.log(this.RefGeneralDataForm);
       },
@@ -210,8 +210,8 @@ export class GeneralDataComponent implements OnInit {
             }
             this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
             this.RefGeneralDataForm.controls.items["controls"][indexAt].patchValue({
-              CompntValue: response["ReturnObject"][0].Value,
-              CompntValueDesc: response["ReturnObject"][0].Key
+              CompntValue: response["ReturnObject"][0].Key,
+              CompntValueDesc: response["ReturnObject"][0].Value
             });
           }
         },
@@ -229,8 +229,8 @@ export class GeneralDataComponent implements OnInit {
     // console.log(ev.target.selectedOptions[0].value);
 
     this.RefGeneralDataForm.controls.items["controls"][idx].patchValue({
-      CompntValue: ev.target.selectedOptions[0].text,
-      CompntValueDesc: ev.target.selectedOptions[0].value
+      CompntValue: ev.target.selectedOptions[0].value,
+      CompntValueDesc: ev.target.selectedOptions[0].text
     });
 
     console.log(this.RefGeneralDataForm);

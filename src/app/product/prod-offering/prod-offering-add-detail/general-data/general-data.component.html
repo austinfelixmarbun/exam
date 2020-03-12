@@ -9,6 +9,7 @@
           <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
             <div class="form-group row" [formGroupName]="i">
               <label class="col-md-3 text-left" translate> {{item.controls.ProdCompntName.value}} </label>
+              <!-- <label class="col-md-6 text-left" translate> {{item.controls.CompntValueDesc.value}} </label> -->
               <div class="col-md-6" style="border-right: 1px solid grey"
                 [ngSwitch]="item.controls.ProdCompntType.value">
                 <div *ngSwitchCase="'DDL'">
@@ -19,12 +20,6 @@
                       </option>
                     </select>
                   </div>
-                </div>
-                <div *ngSwitchCase="'AMT'">
-                  <P>AMOUNT</P>
-                </div>
-                <div *ngSwitchCase="'DATE'">
-                  <P>DATE</P>
                 </div>
               </div>
             </div>
