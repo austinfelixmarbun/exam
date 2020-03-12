@@ -1,0 +1,59 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "AssetTypeId",
+        "subSectionTitle": "Asset Type",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Customer No",
+            "property": "CustNo"
+          },
+          {
+            "type": "text",
+            "label": "Customer Name",
+            "property": "CustName"
+          },
+          {
+            "type": "text",
+            "label": "Gender",
+            "property": "MrGenderCode"
+          },
+          {
+            "type": "text",
+            "label": "Customer Name",
+            "property": "CustName"
+          },
+          {
+            "type": "text",
+            "label": "Customer Name",
+            "property": "CustName"
+          },
+          {
+            "type": "text",
+            "label": "Customer Name",
+            "property": "CustName"
+          },
+          {
+            "type": "text",
+            "label": "Customer Name",
+            "property": "CustName"
+          },
+          {
+            "type": "text",
+            "label": "Customer Name",
+            "property": "CustName"
+          } 
+          
+         
+        ],
+        "querystring": {
+          "select": "SELECT C.CUST_ID, C.CUST_NO AS CustNo, C.CUST_NAME AS CustName, CP.MR_GENDER_CODE AS MrGenderCode, CP.BIRTH_PLACE AS BirthPlace, CP.BIRTH_DT AS BirthDt, C.MR_ID_TYPE_CODE AS MrIdTypeCode, C.ID_NO AS IdNo,  C.ID_EXPIRED_DT AS IdExpiredDt, C.TAX_ID_NO AS TaxIdNo",
+          "from": "FROM dbo.CUST AS C WITH(NOLOCK) JOIN dbo.CUST_PERSONAL AS CP WITH(NOLOCK) ON C.CUST_ID = CP.CUST_ID",
+          "where": "WHERE C.CUST_ID = {0}"
+        }
+      }
+    ]
+  }
