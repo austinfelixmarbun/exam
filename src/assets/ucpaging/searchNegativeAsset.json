@@ -132,61 +132,61 @@
             "type" : "sort", 
             "position" : "left", 
             "label" : "Asset Type Name",
-            "name" : "assetTypeName" 
+            "name" : "C.ASSET_TYPE_NAME" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Full Asset Code", 
-            "name" : "fullAssetCode" 
+            "name" : "B.FULL_ASSET_CODE" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Full Asset Name", 
-            "name" : "fullAssetName" 
+            "name" : "B.FULL_ASSET_NAME" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Serial No. 1", 
-            "name" : "serialNo1"
+            "name" : "A.SERIAL_NO_1"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Serial No. 2", 
-            "name" : "serialNo2"
+            "name" : "A.SERIAL_NO_2"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Serial No. 3", 
-            "name" : "serialNo3"
+            "name" : "A.SERIAL_NO_3"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Serial No. 4", 
-            "name" : "serialNo4"
+            "name" : "A.SERIAL_NO_4"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Serial No. 5", 
-            "name" : "serialNo5"
+            "name" : "A.SERIAL_NO_5"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Negative Source", 
-            "name" : "descr"
+            "name" : "D.DESCR"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Active Status", 
-            "name" : "isActive"
+            "name" : "A.IS_ACTIVE"
         },
         {
             "type" : "label",
