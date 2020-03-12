@@ -4,8 +4,8 @@
 
       <div class="card-header header-title">
         <div class="row">
-          <div class="col-md-4" style="text-align-last: right">
-            <button type="button" class="backButton" [routerLink]="['/product/HOpaging']" translate>
+          <div class="col-md-4" style="text-align-last: left">
+            <button type="button" class="backButton ucSearch-Button-Left" [routerLink]="['/product/HOpaging']" translate>
               <i class="ft-arrow-left"></i> Back
             </button>
           </div>
@@ -75,17 +75,17 @@
           <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="0">
             <aw-wizard-step [stepTitle]="'General Data'"
               [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-              <app-general-data [objInput]="objPassing"></app-general-data>
+              <app-general-data-HO [objInput]="objPassing"></app-general-data-HO>
             </aw-wizard-step>
           
             <aw-wizard-step [stepTitle]="'Product Component'" 
               [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-              <app-product-component [objInput]="objPassing"></app-product-component>
+              <app-product-component-HO [objInput]="objPassing"></app-product-component-HO>
             </aw-wizard-step>
 
             <aw-wizard-step [stepTitle]="'Office Member'" 
               [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-              <app-office-member [objInput]="objPassing"></app-office-member>
+              <app-office-member-HO [objInput]="objPassing"></app-office-member-HO>
             </aw-wizard-step>
           </aw-wizard>
         </div>

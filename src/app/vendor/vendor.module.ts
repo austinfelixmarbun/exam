@@ -12,6 +12,9 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
 import { BranchComponent } from './branch/branch.component';
+import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
+import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
+import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
@@ -47,6 +50,9 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
   declarations: [
     VendorComponent,
     BranchComponent,
+    VendorHoldingPagingComponent,
+    VendorHoldingAddEditComponent,
+    BankInfoComponent,
     VendorGroupComponent,
     VendorGroupPagingComponent,
     VendorGroupViewComponent,
