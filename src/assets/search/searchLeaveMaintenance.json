@@ -173,7 +173,7 @@
               ],
               "result": {
                 "type": "edit",
-                "path": "/Employee/leaveMaintenanceAdd",
+                "path": "/Employee/Leave/Add",
                 "param": [
                   {
                     "type": "refEmpLeaveMngmntId",
