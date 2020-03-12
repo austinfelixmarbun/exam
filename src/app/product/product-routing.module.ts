@@ -8,7 +8,7 @@ import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-ad
 import { ProductHoAdddetailComponent } from "./product-HO/product-ho-adddetail/product-ho-adddetail.component";
 import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
 import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
-// import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
+import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 import { ProductHOApprovalComponent } from "./product-HO/product-ho-approval/product-ho-approval.component";
 import { ProductHOApprovalDetailComponent } from "./product-HO/product-ho-approval-detail/product-ho-approval-detail.component";
@@ -82,13 +82,13 @@ const routes: Routes = [
           title: 'Product HO Deactivate'
         }
       },
-      // {
-      //   path: 'HOView',
-      //   component: ProductHOViewComponent,
-      //   data: {
-      //     title: 'Product HO View'
-      //   }
-      // },
+      {
+        path: 'HOView',
+        component: ProductHOViewComponent,
+        data: {
+          title: 'Product HO View'
+        }
+      },
       {
         path: 'OfferingView',
         component: ProductOfferingViewComponent,

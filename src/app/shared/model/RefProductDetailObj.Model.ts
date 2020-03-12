@@ -8,5 +8,6 @@ export class RefProductDetailObj {
   MrProdBehaviourCode: any;
   RowVersion: any;
   GroupCodes: any;
+  MrProdBehaviour: any;
   constructor() { this.RowVersion = "" }
 }
