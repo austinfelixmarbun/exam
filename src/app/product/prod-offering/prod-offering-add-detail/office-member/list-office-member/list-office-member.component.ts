@@ -129,6 +129,6 @@ export class ListOfficeMemberComponentOffering implements OnInit {
 
   DoneForm(){
     this.toastr.successMessage("Submitted");
-    this.router.navigate(["/product/prod-offering/paging"]);
+    this.router.navigate(["/Product/ProdOffering/paging"]);
   }
 }

@@ -308,7 +308,7 @@ export class ProductComponentComponent implements OnInit {
         console.log("Response save form");
         console.log(response);
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/Product/prod-offering/paging"]);
+        this.router.navigate(["/Product/ProdOffering/paging"]);
       },
       (error) => {
         console.log("Response save error");

@@ -32,6 +32,8 @@ import { SearchOfficeComponent } from './product-HO/product-ho-adddetail/office-
 import { OfficeMemberComponent } from './prod-offering/prod-offering-add-detail/office-member/office-member.component';
 import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-offering-deactivate-paging/product-offering-deactivate.component";
 import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-offering-deactivate-edit/product-offering-deactivate-edit.component";
+import { ListOfficeMemberComponentOffering } from './prod-offering/prod-offering-add-detail/office-member/list-office-member/list-office-member.component';
+import { SearchOfficeComponentOffering } from './prod-offering/prod-offering-add-detail/office-member/search-office/search-office.component';
 
 @NgModule({
   imports: [
@@ -71,7 +73,9 @@ import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-off
     GeneralDataComponent,
     ProductOfferingDeactivatePagingComponent,
     OfficeMemberComponent,
-    ProductOfferingDeactivateEditComponent
+    ProductOfferingDeactivateEditComponent,
+    ListOfficeMemberComponentOffering,
+    SearchOfficeComponentOffering
   ]
 
 })
