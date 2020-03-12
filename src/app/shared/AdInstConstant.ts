@@ -415,7 +415,7 @@ export class AdInsConstant {
   public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
   public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
   public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
-  public static AddOrEditProdOfferingDetail = environment.FoundationR3Url + "/ProductOffering/AddOrEditProdOfferingDetail";
+  public static AddOrEditProdOfferingDetail =  "http://localhost:5000/ProductOffering/AddOrEditProdOfferingDetail";
   public static GetProdOfferingDetailInfo = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingDetailInfo";
   public static GetListProdOfferingVersionByProdId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingVersionByProdId"
   public static GetListProdOfferingBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHId"
@@ -424,6 +424,8 @@ export class AdInsConstant {
   // PRODUCT COMPONENT
   public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
   public static GetProductOfferingComponent = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponent";
+  public static GetProductOfferingComponentGrouped = "http://localhost:5000/ProductComponent/GetProductOfferingComponentGrouped";
+
   public static DeleteProdOfferingOfficeMbr = environment.FoundationR3Url + "/ProductOffering/DeleteProdOfferingOfficeMbr";
   public static AddProdOfferingOfficeMbrBatch = environment.FoundationR3Url + "/ProductOffering/AddProdOfferingOfficeMbrBatch";
 
