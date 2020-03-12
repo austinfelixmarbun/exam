@@ -7,6 +7,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -26,7 +27,9 @@ export class VendorHoAddEditComponent implements OnInit {
   inputLookupZipcodeObj: any;
   MrVendorCategoryCode: any;
   arrCrit:any;
-  mode: any;
+  mode:any = "add";
+  vendorHoObj: any;
+
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -49,6 +52,7 @@ export class VendorHoAddEditComponent implements OnInit {
     EstablishmentDt: ['', Validators.required],
     PartnershipDt: ['', Validators.required],
     IsActive:  [true],
+    VendorParentId: [''],
     ReservedField1: [''],
     ReservedField2: [''],
     MrTaxCalcMethodCode: [''],
@@ -142,6 +146,8 @@ export class VendorHoAddEditComponent implements OnInit {
     this.arrCrit.push(critObj);
     this.inputLookupParentObj.addCritInput = this.arrCrit;
 
+    
+    this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();
     this.VendorForm.controls.AreaCode2.disable();
     this.VendorForm.controls.AreaCode1.disable();
@@ -156,14 +162,20 @@ export class VendorHoAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.genericJson   = "./assets/uclookup/zipcode/lookupZipcode.json";
   }
 
-  getLookup(event){
+  getLookupParent(event){
+    this.VendorForm.patchValue({
+      VendorParentId: event.VendorId
+    });
+  }
+
+
+  getLookupZipcode(event){
     this.VendorForm.patchValue({
       AreaCode2: event.AreaCode2,
       AreaCode1: event.AreaCode1,
       City: event.City,
       Province: event.Province
     });
-    console.log(event)
   }
 
 
@@ -174,7 +186,7 @@ export class VendorHoAddEditComponent implements OnInit {
     this.VendorForm.controls.LicenseNo.updateValueAndValidity();
   }
 
-  checkHOType(){
+  CheckHOType(){
     if(this.VendorForm.controls.MrVendorTypeCode.value != 'P'){
       this.VendorForm.controls.MrIdTypeCode.clearValidators();
       this.VendorForm.controls.IdNo.clearValidators();
@@ -187,6 +199,74 @@ export class VendorHoAddEditComponent implements OnInit {
       this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
       this.VendorForm.controls.IdNo.setValidators(Validators.required);
       this.updateValueAndValidityForm();
+    }
+  }
+
+  SaveForm(VendorForm){
+    console.log(VendorForm)
+    this.vendorHoObj = new VendorHoObj();
+    if (this.mode == "edit") {
+        // this.editUrl = this.foundationUrl + AdInsConstant.EditRefBizUnit;
+        // this.bizUnitObj.BizUnitCode = this.result.BizUnitCode;
+        // this.bizUnitObj.RefBizUnitId = this.RefBizUnitId;
+        
+        // this.http.post(this.editUrl, this.bizUnitObj).subscribe(
+        //     (response) => {
+        //         this.toastr.successMessage(response["message"]);
+        //         this.router.navigateByUrl('/organization/businessunit');
+        //     },
+        //     (error) => {
+        //         console.log(error);
+        //     });
+    }
+    else {
+        var vendorObj ={
+          MrVendorCategoryCode: this.MrVendorCategoryCode,
+          VendorCode: this.VendorForm.controls.VendorCode.value,
+          VendorName: this.VendorForm.controls.VendorName.value,
+          MrVendorTypeCode: this.VendorForm.controls.MrVendorTypeCode.value,
+          RegistrationNo: this.VendorForm.controls.RegistrationNo.value,
+          LicenseNo: this.VendorForm.controls.LicenseNo.value,
+          MrIdTypeCode: this.VendorForm.controls.MrIdTypeCode.value,
+          IdNo: this.VendorForm.controls.IdNo.value,
+          MobilePhnNo1: this.VendorForm.controls.MobilePhnNo1.value,
+          MobilePhnNo2: this.VendorForm.controls.MobilePhnNo2.value,
+          Email: this.VendorForm.controls.Email.value,
+          VendorRating: this.VendorForm.controls.VendorRating.value,
+          EstablishmentDt: this.VendorForm.controls.EstablishmentDt.value,
+          PartnershipDt: this.VendorForm.controls.PartnershipDt.value,
+          IsActive:  this.VendorForm.controls.IsActive.value,
+          VendorParentId: this.VendorForm.controls.VendorParentId.value,
+          ReservedField1: this.VendorForm.controls.ReservedField1.value,
+          ReservedField2: this.VendorForm.controls.ReservedField2.value,
+          MrTaxCalcMethodCode: this.VendorForm.controls.MrTaxCalcMethodCode.value,
+          IsVat: this.VendorForm.controls.IsVat.value,
+          TaxpayerNo: this.VendorForm.controls.TaxpayerNo.value,
+          TaxpayerName: this.VendorForm.controls.TaxpayerName.value
+        }
+
+        var vendorAddrObj = {
+          MrAddrTypeCode: "TAX",
+          Addr: this.VendorForm.controls.Addr.value,
+          Zipcode: this.VendorForm.controls["lookupZipcode"]["controls"].value.value,
+          AreaCode2: this.VendorForm.controls.AreaCode2.value,
+          AreaCode1: this.VendorForm.controls.AreaCode1.value,
+          City: this.VendorForm.controls.City.value,
+          Province: this.VendorForm.controls.Province.value,
+        }
+
+        this.vendorHoObj.VendorObj = vendorObj;
+        this.vendorHoObj.VendorAddrObj = vendorAddrObj;
+
+        this.http.post(AdInsConstant.AddVendorHO, this.vendorHoObj).subscribe(
+            (response) => {
+                console.log(response);
+                this.toastr.successMessage(response["message"]);
+                this.router.navigateByUrl('/Vendor/HO/Paging');
+            },
+            (error) => {
+                console.log(error);
+            });
     }
   }
 }

@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="px-3">
-          <form class="form form-horizontal" [formGroup]="VendorForm" (ngSubmit)="VendorForm.valid && SaveForm()"
+          <form class="form form-horizontal" [formGroup]="VendorForm" (ngSubmit)="SaveForm(VendorForm)"
             #enjiForm="ngForm">
             <lib-ucSubsection [id]="'VendorId'" [title]="'Main Info'" [panel]="'VendorInformation'">
             </lib-ucSubsection>
@@ -48,8 +48,8 @@
                   <label class="col-md-3  adInsLabel" translate>HO Type</label>
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrVendorTypeCode"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrVendorTypeCode.invalid }">
-                      <option *ngFor="let it of itemType" value="{{it.MasterCode}}" (click)="CheckHOType()">
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrVendorTypeCode.invalid }" (change)="CheckHOType()">
+                      <option *ngFor="let it of itemType" value="{{it.MasterCode}}">
                         {{it.Descr}}</option>
                     </select>
                     <show-errors [control]="VendorForm.controls.MrVendorTypeCode" [submit]="enjiForm.submitted">
@@ -165,7 +165,7 @@
                     <label class="col-md-3 adInsLabel">Supplier Holding</label>
                     <div class="col-md-9">
                       <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
-                        [enjiForm]="enjiForm" [identifier]="'lookupParent'">
+                        [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                       </lib-uclookupgeneric>
                     </div>
                   </div>
@@ -272,7 +272,7 @@
                   <label class="col-md-3 adInsLabel">Zip Code</label>
                   <div class="col-md-9">
                     <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
-                      [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookup($event)">
+                      [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookupZipcode($event)">
                     </lib-uclookupgeneric>
                   </div>
                 </div>
