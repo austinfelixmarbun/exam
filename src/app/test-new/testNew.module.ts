@@ -16,6 +16,8 @@ import { UcSubsectionModule } from "@adins/uc-subsection";
 // import { UcaddressModule } from "@adins/ucaddress";
 import { DummyComponent } from './dummy/dummy.component';
 import { ArchwizardModule } from "angular-archwizard";
+import { UcSubsectionComponent } from './uc-subsection/uc-subsection.component';
+import { Dummy4Component } from './dummy4/dummy4.component';
 
 @NgModule({
     imports: [
@@ -37,7 +39,9 @@ import { ArchwizardModule } from "angular-archwizard";
         Dummy3Component,
         UcAddressGroupComponent,
         UcLookupGroupComponent,
-        DummyComponent
+        DummyComponent,
+        UcSubsectionComponent,
+        Dummy4Component
     ],
 
 })
