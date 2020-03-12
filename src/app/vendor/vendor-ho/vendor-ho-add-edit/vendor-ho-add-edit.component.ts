@@ -3,6 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -14,14 +18,23 @@ export class VendorHoAddEditComponent implements OnInit {
   itemCategoryType: any;
   itemType: any;
   itemIdType: any;
+  itemAssignmentType: any;
+  itemCalcMethodType: any;
+
   check: any;
-
+  inputLookupParentObj: any;
+  inputLookupZipcodeObj: any;
+  MrVendorCategoryCode: any;
+  arrCrit:any;
+  mode: any;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
-
+    this.route.queryParams.subscribe(params => {
+      this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+  });
   }
   
   VendorForm = this.fb.group({
-    MrVendorCategoryCode:['', Validators.required],
+    MrVendorCategoryCode:[''],
     VendorCode: ['', Validators.required],
     VendorName: ['', Validators.required],
     MrVendorTypeCode: ['', Validators.required],
@@ -31,11 +44,24 @@ export class VendorHoAddEditComponent implements OnInit {
     IdNo: ['', Validators.required],
     MobilePhnNo1: [''],
     MobilePhnNo2: [''],
-    Email: ['', Validators.required], //Validators.pattern("^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$")
+    Email: ['', Validators.required],
     VendorRating: [''],
     EstablishmentDt: ['', Validators.required],
     PartnershipDt: ['', Validators.required],
-    IsActive:  ['1'],
+    IsActive:  [true],
+    ReservedField1: [''],
+    ReservedField2: [''],
+    MrTaxCalcMethodCode: [''],
+    IsVat: [true],
+    TaxpayerNo: [''],
+    TaxpayerName: [''],
+    MrAddrTypeCode: [''],
+    Addr: [''],
+    Zipcode: [''],
+    AreaCode2: [''], //kelurahan
+    AreaCode1: [''], //kecamatan
+    City: [''],
+    Province: [''],
     RowVersion: ['']    
   })
 
@@ -48,7 +74,7 @@ export class VendorHoAddEditComponent implements OnInit {
       (response) => {
         this.itemCategoryType = response["ReturnObject"];
         this.VendorForm.patchValue({
-          MrVendorCategoryCode: this.itemCategoryType[0].MasterCode
+          MrVendorCategoryCode: this.MrVendorCategoryCode
         });
       } 
     );
@@ -76,7 +102,70 @@ export class VendorHoAddEditComponent implements OnInit {
         });
       } 
     );
+
+    var refMasterAssignmentObj = {
+      RefMasterTypeCode: "TASK_ASSIGNMENT_TYPE",
+    }
+    this.http.post("http://r3app-server/FOUNDATION_R3/RefMaster/GetListActiveRefMaster", refMasterAssignmentObj).subscribe(
+      (response) => {
+        this.itemAssignmentType = response["ReturnObject"];
+        this.VendorForm.patchValue({
+          ReservedField1: this.itemAssignmentType[0].MasterCode
+        });
+      } 
+    );
+
+    var refMasterCalcMethodObj = {
+      RefMasterTypeCode: "TAX_CALC_METHOD",
+    }
+    this.http.post("http://r3app-server/FOUNDATION_R3/RefMaster/GetListActiveRefMaster", refMasterCalcMethodObj).subscribe(
+      (response) => {
+        this.itemCalcMethodType = response["ReturnObject"];
+        this.VendorForm.patchValue({
+          MrTaxCalcMethodCode: this.itemCalcMethodType[0].MasterCode
+        });
+      } 
+    );
+
+    this.inputLookupParentObj = new InputLookupObj();
+    this.inputLookupParentObj.urlJson       = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentObj.urlQryPaging  = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupParentObj.pagingJson    = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentObj.genericJson   = "./assets/uclookup/vendor/lookupHOParent.json";
+
+    this.arrCrit = new Array();
+    var critObj = new CriteriaObj();
+    critObj.propName = 'RM.RESERVE_FIELD_2';
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.value = this.MrVendorCategoryCode;
+    this.arrCrit.push(critObj);
+    this.inputLookupParentObj.addCritInput = this.arrCrit;
+
+    this.VendorForm.controls.MrVendorCategoryCode.disable();
+    this.VendorForm.controls.AreaCode2.disable();
+    this.VendorForm.controls.AreaCode1.disable();
+    this.VendorForm.controls.City.disable();
+    this.VendorForm.controls.Province.disable();
+
+    this.inputLookupZipcodeObj = new InputLookupObj();
+    this.inputLookupZipcodeObj.urlJson       = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.urlQryPaging  = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupZipcodeObj.pagingJson    = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.genericJson   = "./assets/uclookup/zipcode/lookupZipcode.json";
   }
+
+  getLookup(event){
+    this.VendorForm.patchValue({
+      AreaCode2: event.AreaCode2,
+      AreaCode1: event.AreaCode1,
+      City: event.City,
+      Province: event.Province
+    });
+    console.log(event)
+  }
+
 
   updateValueAndValidityForm(){
     this.VendorForm.controls.MrIdTypeCode.updateValueAndValidity();

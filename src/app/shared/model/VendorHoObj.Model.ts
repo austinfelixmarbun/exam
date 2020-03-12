@@ -15,5 +15,20 @@ export class VendorHoObj {
     EstablishmentDt: any;
     PartnershipDt: any;
     IsActive: any;
+    VendorParentId : any;
+    ReservedField1: any;
+    ReservedField2: any;
+    MrTaxCalcMethodCode: any;
+    IsVat: any;
+    TaxpayerNo: any;
+    TaxpayerName: any;
+    
+    MrAddrTypeCode: any;
+    Addr: any;
+    Zipcode: any;
+    AreaCode2: any; //kelurahan
+    AreaCode1: any; //kecamatan
+    City: any;
+    Province: any;
     constructor() { this.VendorId = 0; }
 }

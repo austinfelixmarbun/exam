@@ -55,10 +55,10 @@ const routes: Routes = [
         },
       },
       {
-        path: 'HO/Member',
+        path: 'HO/Paging',
         component: VendorHoPagingComponent,
         data: {
-          title: 'Vendor HO Member'
+          title: 'Vendor HO Paging'
         },
       }
     ]
