@@ -43,6 +43,19 @@
                       <show-errors [control]="AssetMasterParentForm.controls.AssetName" [submit]="enjiForm.submitted"></show-errors>
                     </div>
                   </div>
+                  <div *ngIf="isFinal == true">
+                    <div class="form-group row">
+                        <label class="col-md-3  adInsLabel adins-required" translate>Asset Category </label>
+                        <div class="col-md-9">
+                          <select class="form-control adInsInput" formControlName="AssetCategoryId">
+                            <option *ngFor="let ram of resultAssetCategory" [value]="ram.Key">
+                              {{ram.Value}}
+                            </option>
+                          </select>
+                          <show-errors [control]="AssetMasterParentForm.controls.AssetCategoryId" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                  </div>
                 <div class="form-group row">
                     <label class="col-md-3  adInsLabel" translate>Active Status </label>
                     <div class="col-md-9">
