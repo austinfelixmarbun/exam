@@ -41,5 +41,4 @@ export class NegativeAssetComponent implements OnInit {
     criteriaList.push(criteriaObj);
     this.inputPagingObj.addCritInput = criteriaList;
   }
-
 }

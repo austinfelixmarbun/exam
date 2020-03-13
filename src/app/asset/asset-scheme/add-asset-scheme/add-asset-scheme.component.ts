@@ -69,8 +69,6 @@ export class AddAssetSchemeComponent implements OnInit {
     private adInsService: AdInsService) { }
 
   ngOnInit() {
-    console.log('sini');
-    // this.GetListAssetMasterId();
     this.viewObj = "./assets/ucviewgeneric/viewAssetSchemeMember.json";
     this.arrCrit = new Array();
     this.route.queryParams.subscribe(params => {

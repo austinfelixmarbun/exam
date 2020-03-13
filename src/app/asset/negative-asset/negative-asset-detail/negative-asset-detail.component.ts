@@ -98,19 +98,19 @@ export class NegativeAssetDetailComponent implements OnInit {
 
     this.inputLookupObj.addCritInput = this.criteriaList;
 
-    if(this.pageType == "edit"){
+    if (this.pageType == "edit") {
       var negativeAsset = new AssetNegativeObj();
       negativeAsset.AssetNegativeId = this.assetNegativeId;
       var refMasterObj = new RefMasterObj();
       refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
       this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterObj).pipe(
-        map( (response: any) => {
+        map((response: any) => {
           this.negativeAssetSourceList = response;
           this.AssetNegativeForm.patchValue({
             MrNegAssetSourceCode: response.ReturnObject[0].Key
           });
         }),
-        mergeMap( () => {
+        mergeMap(() => {
           const assetNegativeData = this.httpClient.post(AdInsConstant.GetAssetNegativeByIdEditPage, negativeAsset);
           return assetNegativeData;
         })
@@ -134,23 +134,23 @@ export class NegativeAssetDetailComponent implements OnInit {
           // this.inputLookupObj.nameSelect = response.AssetMasterObj.FullAssetName;
           this.fullAssetName = response.AssetMasterObj.FullAssetName;
 
-          if(response.AssetTypeObj.IsMndtrySerialNo1 == "1"){
+          if (response.AssetTypeObj.IsMndtrySerialNo1 == "1") {
             this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);
             this.serial1Mandatory = true;
           }
-          if(response.AssetTypeObj.IsMndtrySerialNo2 == "1"){
+          if (response.AssetTypeObj.IsMndtrySerialNo2 == "1") {
             this.AssetNegativeForm.controls['SerialNo2'].setValidators([Validators.required]);
             this.serial2Mandatory = true;
           }
-          if(response.AssetTypeObj.IsMndtrySerialNo3 == "1"){
+          if (response.AssetTypeObj.IsMndtrySerialNo3 == "1") {
             this.AssetNegativeForm.controls['SerialNo3'].setValidators([Validators.required]);
             this.serial3Mandatory = true;
           }
-          if(response.AssetTypeObj.IsMndtrySerialNo4 == "1"){
+          if (response.AssetTypeObj.IsMndtrySerialNo4 == "1") {
             this.AssetNegativeForm.controls['SerialNo4'].setValidators([Validators.required]);
             this.serial4Mandatory = true;
           }
-          if(response.AssetTypeObj.IsMndtrySerialNo5 == "1"){
+          if (response.AssetTypeObj.IsMndtrySerialNo5 == "1") {
             this.AssetNegativeForm.controls['SerialNo5'].setValidators([Validators.required]);
             this.serial5Mandatory = true;
           }
@@ -166,7 +166,7 @@ export class NegativeAssetDetailComponent implements OnInit {
         }
       );
     }
-    else{
+    else {
       var refMasterObj = new RefMasterObj();
       refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
       this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterObj).subscribe(
@@ -182,18 +182,9 @@ export class NegativeAssetDetailComponent implements OnInit {
       );
     }
   }
+  
+  getLookupAssetMasterResponse(e) {
 
-  // assetTypeChange(e){
-  //   this.criteriaObj = new CriteriaObj();
-  //   this.criteriaObj.restriction = AdInsConstant.RestrictionEq;
-  //   this.criteriaObj.propName = 'ASSET_TYPE_ID';
-  //   this.criteriaObj.value = e.target.value;
-  //   this.criteriaList.push(this.criteriaObj);
-  //   this.inputLookupObj.addCritInput = this.criteriaList;
-  // }
-
-  getLookupAssetMasterResponse(e){
-    
     this.serial2Mandatory = false;
     this.serial3Mandatory = false;
     this.serial4Mandatory = false;
@@ -202,56 +193,56 @@ export class NegativeAssetDetailComponent implements OnInit {
     assetType.AssetTypeId = e.assetTypeId;
     this.httpClient.post(AdInsConstant.GetAssetTypeById, assetType).subscribe(
       (response: any) => {
-        if(response.IsMndtrySerialNo1 == "1"){
+        if (response.IsMndtrySerialNo1 == "1") {
           this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo1'].updateValueAndValidity();
           this.serial1Mandatory = true;
         }
-        else{
+        else {
           this.AssetNegativeForm.controls['SerialNo1'].clearValidators();
           this.AssetNegativeForm.controls['SerialNo1'].updateValueAndValidity();
           this.serial1Mandatory = false;
         }
 
-        if(response.IsMndtrySerialNo2 == "1"){
+        if (response.IsMndtrySerialNo2 == "1") {
           this.AssetNegativeForm.controls['SerialNo2'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo2'].updateValueAndValidity();
           this.serial2Mandatory = true;
         }
-        else{
+        else {
           this.AssetNegativeForm.controls['SerialNo2'].clearValidators();
           this.AssetNegativeForm.controls['SerialNo2'].updateValueAndValidity();
           this.serial2Mandatory = false;
         }
 
-        if(response.IsMndtrySerialNo3 == "1"){
+        if (response.IsMndtrySerialNo3 == "1") {
           this.AssetNegativeForm.controls['SerialNo3'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo3'].updateValueAndValidity();
           this.serial3Mandatory = true;
         }
-        else{
+        else {
           this.AssetNegativeForm.controls['SerialNo3'].clearValidators();
           this.AssetNegativeForm.controls['SerialNo3'].updateValueAndValidity();
           this.serial3Mandatory = false;
         }
 
-        if(response.IsMndtrySerialNo4 == "1"){
+        if (response.IsMndtrySerialNo4 == "1") {
           this.AssetNegativeForm.controls['SerialNo4'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo4'].updateValueAndValidity();
           this.serial4Mandatory = true;
         }
-        else{
+        else {
           this.AssetNegativeForm.controls['SerialNo4'].clearValidators();
           this.AssetNegativeForm.controls['SerialNo4'].updateValueAndValidity();
           this.serial4Mandatory = false;
         }
 
-        if(response.IsMndtrySerialNo5 == "1"){
+        if (response.IsMndtrySerialNo5 == "1") {
           this.AssetNegativeForm.controls['SerialNo5'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo5'].updateValueAndValidity();
           this.serial5Mandatory = true;
         }
-        else{
+        else {
           this.AssetNegativeForm.controls['SerialNo5'].clearValidators();
           this.AssetNegativeForm.controls['SerialNo5'].updateValueAndValidity();
           this.serial5Mandatory = false;
@@ -271,13 +262,12 @@ export class NegativeAssetDetailComponent implements OnInit {
     );
   }
 
-  Back(){
+  Back() {
     this.location.back();
   }
 
-  Save(){
+  Save() {
     var assetNegativeObj = this.AssetNegativeForm.value;
-    // console.log("Form Submit : " + JSON.stringify(AssetNegativeObj));
     if (this.pageType == "add") {
       this.httpClient.post(AdInsConstant.AddAssetNegative, assetNegativeObj).subscribe(
         (response) => {
