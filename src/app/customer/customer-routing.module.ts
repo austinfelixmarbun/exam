@@ -9,6 +9,7 @@ import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/cus
 import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
 import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
+import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 
 const routes: Routes = [
   {
@@ -62,7 +63,22 @@ const routes: Routes = [
         data: {
           title: 'Negative Customer Detail'
         }
-      }
+      },
+      {
+        path: 'NegativeCustomer/View',
+        component: NegativeCustomerViewComponent,
+        data: {
+          title: 'Negative Customer View'
+        }
+      },
+      {
+        path: 'CustomerPersonal/Page',
+        component: CustomerPersonalPageComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck  '
+        }
+      },
+
     ]
   }
 ];
