@@ -11,11 +11,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class AssetConfigurationPagingComponent implements OnInit {
 
   constructor() { }
-
-    inputPagingObj: any;
-  
-   
-
+  inputPagingObj: any;
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetConfiguration.json";

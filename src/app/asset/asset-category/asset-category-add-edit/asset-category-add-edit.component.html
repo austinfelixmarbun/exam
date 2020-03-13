@@ -3,19 +3,11 @@
     <div class="card-body">
       <div class="px-3">
         <div class="addEdit">
-
-
           <form class="form form-horizontal" [formGroup]="AssetCategoryForm"
             (ngSubmit)="AssetCategoryForm.valid && SaveForm()" #enjiForm="ngForm">
-
-
-
-
             <div class="form-body">
               <h4 class="form-section card-title" translate>Asset Category Information
               </h4>
-
-
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" translate>Asset Category Code </label>
                 <div class="col-md-9">
@@ -25,7 +17,6 @@
                   </show-errors>
                 </div>
               </div>
-
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" translate>Asset Category Name </label>
                 <div class="col-md-9">
@@ -35,20 +26,13 @@
                   </show-errors>
                 </div>
               </div>
-
-
-
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Active Status</label>
                 <div class="col-md-9">
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive" />
                 </div>
               </div>
-
-
             </div>
-
-
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../Paging']"
                 [queryParams]="{ AssetTypeId: this.AssetTypeId }" translate>
@@ -59,8 +43,6 @@
               </button>
             </div>
           </form>
-
-
         </div>
       </div>
     </div>

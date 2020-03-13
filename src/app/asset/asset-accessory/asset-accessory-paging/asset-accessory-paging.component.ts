@@ -11,21 +11,17 @@ import { environment } from 'environments/environment';
   styleUrls: ['./asset-accessory-paging.component.scss']
 })
 export class AssetAccessoryPagingComponent implements OnInit {
-  AssetTypeId:any;
+  AssetTypeId: any;
   inputPagingObj: any;
-  viewObj:any;
-  arrCrit:any;
+  viewObj: any;
+  arrCrit: any;
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
-
-      
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
       }
-     
     });
-   }
- 
+  }
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetAccessory.json";
@@ -33,7 +29,6 @@ export class AssetAccessoryPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetAccessory.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetAccessory;
-    
     this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
@@ -42,8 +37,6 @@ export class AssetAccessoryPagingComponent implements OnInit {
     critObj.value = this.AssetTypeId;
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
-
-
   }
 
 }
