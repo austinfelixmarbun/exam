@@ -11,11 +11,15 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { CustomerPagingComponent } from './customer-paging/customer-paging.component';
 import { UcpagingModule } from '@adins/ucpaging';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { CustomerPersonalMainInfoComponent } from './customer-personal/customer-personal-main-info/customer-personal-main-info.component';
 import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check.component';
 import { UcSubsectionModule } from '@adins/uc-subsection';
-
-import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
+import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
+import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
+import { ArchwizardModule } from 'angular-archwizard';
+import { CustomerPersonalDetailComponent } from './customer-personal/customer-personal-detail/customer-personal-detail.component';
 @NgModule({
   exports: [ 
   ],
@@ -33,12 +37,12 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     UcpagingModule,
     ReactiveFormsModule,
     UclookupgenericModule,
-    // ArchwizardModule
-    UcSubsectionModule
+    UcSubsectionModule, 
+     ArchwizardModule
   ],
   declarations: [ 
     CustomerPagingComponent, 
-    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent
+    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent
   ]
 })
 export class CustomerModule { 

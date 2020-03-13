@@ -5,9 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ProdHDeactivateObj } from '../../../shared/model/ProdHDeactivateObj.Model';
-import { UcPagingObj } from '../../../shared/model/UcPagingObj.Model';
-import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { environment } from '../../../../environments/environment';
+import { ProdOfferingVersionObj } from '../../../shared/model/ProdOfferingVersionObj.Mode';
 
 
 @Component({
@@ -23,11 +22,13 @@ export class ProductHODeactivateEditComponent implements OnInit {
   resultData: any;
   apiUrl: any;
   editUrl: any;
-  inputPagingObj: any;
+  ProdOfferingObj: any;
   arrCrit: any;
   getValueReasonModel: any;
   allRefReasonMethod: any;
   viewObj: any;
+  prodOfferVerUrl: any;
+  ProdOfferVer: any;
 
   ProdHDeactForm = this.fb.group({
     Reason: ['', [Validators.required, Validators.maxLength(50)]],
@@ -38,8 +39,9 @@ export class ProductHODeactivateEditComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    // this.editUrl = AdInsConstant.RequestDeactivation;
-    // this.getValueReasonModel = AdInsConstant.GetValueReasonModel;
+    this.editUrl = AdInsConstant.RequestDeactivation;
+    this.getValueReasonModel = AdInsConstant.GetValueReasonModel;
+    this.prodOfferVerUrl = AdInsConstant.GetListProdOfferingVersionByProdId;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {
@@ -63,21 +65,21 @@ export class ProductHODeactivateEditComponent implements OnInit {
         console.log(error);
       });
 
-    this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/ucpaging/product/searchProductOfferingForProductHODeactivate.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOfferingForProductHODeactivate.json";
+    this.ProdOfferingObj = new ProdOfferingVersionObj
+    this.ProdOfferingObj.ProdId = this.prodId;
+    this.ProdOfferingObj.ProdOfferingStat = 'ACT';
+    this.http.post(this.prodOfferVerUrl, this.ProdOfferingObj).subscribe(
+      response => {
+        console.log("Response: ");
+        console.log(response);
+        this.ProdOfferVer = response['ReturnObject'];
+      },
+      error => {
+        console.log(error);
+      }
+    );
 
-    this.arrCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.restriction = AdInsConstant.RestrictionLike;
-    critObj.propName = 'B.PROD_OFFERING_STAT';
-    critObj.value = 'ACT';
-    this.arrCrit.push(critObj);
-    this.inputPagingObj.addCritInput = this.arrCrit;
-
-    this.viewObj = "./assets/ucviewgeneric/viewProduct.json";
+    this.viewObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
   }
 
   SaveForm() {
@@ -88,7 +90,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.http.post(this.editUrl, this.prodHDeactivateObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/product/HODeactivate"]);
+        this.router.navigate(["/Product/HODeactivate"]);
       },
       error => {
         console.log(error);

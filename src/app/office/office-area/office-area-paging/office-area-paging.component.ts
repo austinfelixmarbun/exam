@@ -18,5 +18,6 @@ export class OfficeAreaPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchOfficeArea.json";
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefOfficeArea;
   }
 }

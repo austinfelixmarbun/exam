@@ -6,6 +6,9 @@ import { NegativeCustomerDetailComponent } from './negative-customer/negative-cu
 import { CustomerPagingComponent } from './customer-paging/customer-paging.component';
 import { CustomerPersonalMainInfoComponent } from './customer-personal/customer-personal-main-info/customer-personal-main-info.component';
 import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check.component';
+import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
+import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
+import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
 
 const routes: Routes = [
   {
@@ -22,12 +25,33 @@ const routes: Routes = [
         path: 'CustomerPersonal/MainInfo',
         component: CustomerPersonalMainInfoComponent,
         data: {
-          title: 'Customer Personal Detail  '
+          title: 'Customer Personal Main Info'
         }
       },
       {
         path: 'CustomerPersonal/DuplicateCheck',
         component: CustomerPersonalDuplicateCheckComponent,
+        data: {
+          title: 'Customer Personal Duplicate Check  '
+        }
+      },
+      {
+        path: 'CustomerCompany/MainInfo',
+        component: CustomerCompanyMainInfoComponent,
+        data: {
+          title: 'Customer Company  Main Info  '
+        }
+      },
+      {
+        path: 'CustomerCompany/DuplicateCheck',
+        component: CustomerCompanyDuplicateCheckComponent,
+        data: {
+          title: 'Customer Company DuplicateCheck  '
+        }
+      },
+      {
+        path: 'CustomerPersonal/Page',
+        component: CustomerPersonalPageComponent,
         data: {
           title: 'Customer Personal DuplicateCheck  '
         }

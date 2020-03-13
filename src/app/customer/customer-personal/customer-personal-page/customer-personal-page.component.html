@@ -1,0 +1,150 @@
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="backButton" [routerLink]="['../MainInfo']" translate>
+      <i class="ft-x"></i> Cancel
+    </button>
+    <button type="submit" class="addButton" translate>
+      <i class="fa fa-check-square-o"></i> Next
+    </button>
+  </span>
+</div>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <div class="addEdit">
+          <form class="form form-horizontal">
+            <div class="form-body">
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Customer Personal
+              </h4>
+            </div>
+          </form>
+          <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
+          </lib-ucSubsection>
+          <form class="form form-horizontal"   id="MainInfoId">
+            <div class="form-body">
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>Customer Name </label>
+                <div class="col-md-4">
+                  <label>{{this.custObj.CustName}}</label>
+                </div>
+
+                <label class="col-md-2  adInsLabel" translate>Gender </label>
+
+                <div class="col-md-4">
+                  <label>{{this.GenderDesc}}</label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 adInsLabel" translate>Customer Model</label>
+                <div class="col-md-4">
+
+                  <label>{{this.CustModelDesc}}</label>
+                </div>
+
+                <label class="col-md-2 adInsLabel" translate>ID Type </label>
+                <div class="col-md-4">
+
+                  <label>{{this.MrIdTypeCodeDesc}}</label>
+                </div>
+
+               
+              </div>
+              <div class="form-group row ">
+
+                <label class="col-md-2 adInsLabel" translate>Birth Place/Date </label>
+                <div class="col-md-4">
+                  <div class="row">
+                    <div class="col-md-6" style="border-right: 1px solid grey">
+                      <label>{{this.BirthPlace}}</label>
+
+                    </div>
+                    <div class="col-md-6">
+                      <label>{{this.BirthDt}}</label>
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <label class="col-md-2 adInsLabel" translate>ID Number </label>
+                <div class="col-md-4">
+                  <label>{{this.IdNo}}</label>
+                </div>
+             
+              </div>
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>NPWP</label>
+                <div class="col-md-4">
+                  <label>{{this.TaxIdNo}}</label>
+                </div>
+
+                <label class="col-md-2 adInsLabel" translate>ID Expired Date</label>
+                <div class="col-md-4">
+                  <label>{{this.IdExpiredDt}}</label>
+
+                </div>
+
+               
+              </div>
+
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
+              <div class="col-md-4">
+                <label>{{this.MotherMaidenName}}</label>
+
+              </div>
+
+               
+              </div>
+             
+            </div>
+          </form>
+        </div>
+
+ 
+
+
+
+        <aw-wizard #wizard navBarLayout="large-empty-symbols" [disableNavigationBar] = true [awNavigationMode] navigateBackward="allow"
+          navigateForward="allow" >
+          <aw-wizard-step [stepTitle]="'Customer Detail'" 
+            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+            <app-customer-personal-detail> </app-customer-personal-detail>
+          </aw-wizard-step>
+
+          <aw-wizard-step [stepTitle]="'Address'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+            <app-customer-personal-detail> </app-customer-personal-detail>
+          </aw-wizard-step>
+
+          <aw-wizard-step [stepTitle]="'Contact Person'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+            <app-customer-personal-detail> </app-customer-personal-detail>
+          </aw-wizard-step>
+
+          <aw-wizard-step [stepTitle]="'Customer Group'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"> 
+              <app-customer-personal-detail> </app-customer-personal-detail>
+          </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Job Data'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+            <app-customer-personal-detail> </app-customer-personal-detail>
+          </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Financial Data'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+            <app-customer-personal-detail> </app-customer-personal-detail>
+          </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Other Attribute'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+            <app-customer-personal-detail> </app-customer-personal-detail>
+          </aw-wizard-step>
+
+
+        </aw-wizard>
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+{
+    "title": "Vendor Holding",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "dropdown",
+            "name": "MR_VENDOR_CATEGORY_CODE",
+            "id": "MrVendorCategoryCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": true,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListActiveRefMasterByVendorCategoryByReserveField1",
+            "label": "Vendor Category",
+            "criteriaPropName": "ReserveField1",
+            "criteriaPropValue": "HOLDING",
+            "items": [],
+            "itemsUrl": []
+        },
+        {
+            "type": "dropdown",
+            "name": "IS_ACTIVE",
+            "id": "IsActiveId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "url": "",
+            "label": "Active Status",
+            "items": [
+                {
+                    "key": true,
+                    "value": "Yes"
+                },
+                {
+                    "key": false,
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "VENDOR_CODE",
+            "id": "HoldingCodeId",
+            "value": "",
+            "label": "Holding Code",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "VENDOR_NAME",
+            "id": "HoldingNameId",
+            "value": "",
+            "label": "Holding Name",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT VENDOR_CODE as VendorCode,VENDOR_NAME as VendorName,IS_ACTIVE as IsActive,MR_VENDOR_CATEGORY_CODE as MrVendorCategoryCode, VENDOR_ID as VendorId",
+        "from": "FROM dbo.VENDOR WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Holding Code",
+            "name": "VendorCode"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Holding Name",
+            "name": "VendorName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "VendorCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "VendorName"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/CommonSetting/Profession/detail",
+                    "param": [
+                        {
+                            "type": "VendorId",
+                            "property": "VendorId"
+                        },
+                        {
+                            "type": "param",
+                            "property": "edit"
+                        }
+                    ]
+                },
+                {
+                    "type": "delete",
+                    "property": "VendorId"
+                }
+            ]
+        }
+    ]
+}

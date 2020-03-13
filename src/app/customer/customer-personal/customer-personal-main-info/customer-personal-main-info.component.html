@@ -7,18 +7,18 @@
 
           <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Main Info
           </h4>
-        
+
           <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
           </lib-ucSubsection>
           <form class="form form-horizontal" [formGroup]="CustomerPersonalForm"
             (ngSubmit)="CustomerPersonalForm.valid && SaveValue()" #enjiForm="ngForm" id="MainInfoId">
 
 
-            <div class="form-body" >
-            
-          
-     
-               
+            <div class="form-body">
+
+
+
+
               <div class="form-group row adins-required">
                 <label class="col-md-2 adInsLabel" translate>Customer Name </label>
                 <div class="col-md-4">
@@ -29,47 +29,72 @@
                 </div>
 
                 <label class="col-md-2  adInsLabel" translate>Gender </label>
-                
+
                 <div class="col-md-4">
                   <select class="form-control adInsInput" style="width: auto" formControlName="Gender"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.Gender.invalid }">
-                      <option *ngFor="let it of tempGender" value="{{it.Key}}">
-                        {{it.Value}}</option>
-                        </select>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.Gender.invalid }">
+                    <option *ngFor="let it of tempGender, let i = index" value="{{i}}">
+                      {{it.Value}}</option>
+                  </select>
                   <show-errors [control]="CustomerPersonalForm.controls.Gender" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
 
 
-                
+
               </div>
 
               <div class="form-group row adins-required">
-                <label class="col-md-2 adInsLabel" translate>ID Type </label>
+
+
+                <label class="col-md-2 adInsLabel" translate>Customer Model </label>
                 <div class="col-md-4">
-                  <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.MrIdTypeCode.invalid }">
-                      <option *ngFor="let it of tempIdType" value="{{it.Key}}">
-                        {{it.Value}}</option>
-                        </select>
-                  
-                  <show-errors [control]="CustomerPersonalForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+
+                  <select class="form-control adInsInput" style="width: auto" formControlName="CustModel"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.CustModel.invalid }">
+                    <option *ngFor="let it of tempCustModel , let i = index" value="{{i}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <show-errors [control]="CustomerPersonalForm.controls.CustModel" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
 
+                <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
+                </div>
+
+
+
+              </div>
+
+
+              <div class="form-group row adins-required">
+
+                <label class="col-md-2 adInsLabel" translate>ID TYPE </label>
+                <div class="col-md-4">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.MrIdTypeCode.invalid }">
+                    <option *ngFor="let it of tempIdType, let i = index" value="{{i}}">
+                      {{it.Value}}</option>
+                  </select>
+
+                  <show-errors [control]="CustomerPersonalForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
                 <label class="col-md-2 adInsLabel" translate>Birth Place/Date </label>
                 <div class="col-md-4">
                   <div class="row">
-                    <div class="col-md-6"  style="border-right: 1px solid grey">
+                    <div class="col-md-6" style="border-right: 1px solid grey">
                       <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthPlace.invalid}">
                       <show-errors [control]="CustomerPersonalForm.controls.BirthPlace" [submit]="enjiForm.submitted">
                       </show-errors>
 
                     </div>
-               
 
-                    <div class="col-md-6=">
+
+                    <div class="col-md-6">
                       <input type="date" class="form-control adInsInput" formControlName="BirthDt"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthDt.invalid}">
                       <show-errors [control]="CustomerPersonalForm.controls.BirthDt " [submit]="enjiForm.submitted">
@@ -77,14 +102,20 @@
                     </div>
 
                   </div>
- 
+
                 </div>
- 
+
+
+
+
+
+
+
               </div>
 
- 
+
               <div class="form-group row adins-required">
-                <label class="col-md-2 adInsLabel" translate>ID Number </label>
+                <label class="col-md-2 adInsLabel" translate>ID NUMBER </label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="IdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdNo.invalid}">
@@ -98,13 +129,15 @@
                   <show-errors [control]="CustomerPersonalForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
+
+
+
               </div>
-
-
               <div class="form-group row adins-required">
+
                 <label class="col-md-2 adInsLabel" translate>ID Expired Date</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="IdExpiredDt"
+                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdExpiredDt.invalid}">
                   <show-errors [control]="CustomerPersonalForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
                   </show-errors>
@@ -117,6 +150,31 @@
                   <show-errors [control]="CustomerPersonalForm.controls.MotherMaidenName" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
+
+
+
+
+
+
+              </div>
+              <div class="form-group row adins-required">
+
+
+                <label class="col-md-2 adInsLabel" translate>VIP</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
+                    (click)="checkState()" />
+                </div>
+
+         
+                <label class="col-md-2 adInsLabel" translate>VIP Notes</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control adInsInput" formControlName="VipNotes"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.VipNotes.invalid}">
+                  <show-errors [control]="CustomerPersonalForm.controls.VipNotes" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+
               </div>
 
 
@@ -124,13 +182,12 @@
 
 
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1"
-               translate>
-          
- 
+              <button type="button" class="btn btn-raised btn-warning mr-1" translate>
+
+
                 <i class="ft-x"></i> Cancel
               </button>
-              <button type="submit" class="btn btn-raised btn-primary"  translate>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
                 <i class="fa fa-check-square-o"></i> Next
               </button>
             </div>

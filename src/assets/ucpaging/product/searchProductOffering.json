@@ -100,7 +100,7 @@
         "type": "sort",
         "position": "center",
         "label": "Draft Version",
-        "name": "DraftProdOfferingId"
+        "name": "ProdOfferingVersion"
       },
       {
         "type": "sort",
@@ -121,8 +121,8 @@
       }
     ],
     "querystring": {
-      "select": "SELECT C.PROD_CODE as ProdCode, C.PROD_NAME as ProdName,A.PROD_OFFERING_CODE as ProdOfferingCode, A.PROD_OFFERING_NAME as ProdOfferingName, A.CURRENT_PROD_OFFERING_H_ID AS CurrentProdOfferingHId ,A.DRAFT_PROD_OFFERING_H_ID AS DraftProdOfferingHId, A.END_DT AS EndDt, A.PROD_OFFERING_STAT AS ProdOfferingStat",
-      "from": "FROM PROD_OFFERING A WITH(NOLOCK) LEFT JOIN PROD_OFFERING_H B WITH(NOLOCK) ON A.CURRENT_PROD_OFFERING_H_ID=B.PROD_OFFERING_H_ID JOIN PROD C WITH(NOLOCK) ON A.PROD_ID = C.PROD_ID LEFT JOIN PROD_OFFERING_H D ON A.DRAFT_PROD_OFFERING_H_ID=B.PROD_OFFERING_H_ID"
+      "select": "SELECT C.PROD_CODE as ProdCode, C.PROD_NAME as ProdName,A.PROD_OFFERING_CODE as ProdOfferingCode, A.PROD_OFFERING_NAME as ProdOfferingName, A.CURRENT_PROD_OFFERING_H_ID AS CurrentProdOfferingHId ,A.DRAFT_PROD_OFFERING_H_ID AS ProdOfferingHId, A.END_DT AS EndDt, A.PROD_OFFERING_STAT AS ProdOfferingStat, E.PROD_OFFERING_VERSION AS ProdOfferingVersion",
+      "from": "FROM PROD_OFFERING A WITH(NOLOCK) LEFT JOIN PROD_OFFERING_H B WITH(NOLOCK) ON A.CURRENT_PROD_OFFERING_H_ID=B.PROD_OFFERING_H_ID JOIN PROD C WITH(NOLOCK) ON A.PROD_ID = C.PROD_ID LEFT JOIN PROD_OFFERING_H D ON A.DRAFT_PROD_OFFERING_H_ID=B.PROD_OFFERING_H_ID JOIN PROD_OFFERING_H E WITH(NOLOCK) ON A.PROD_OFFERING_ID=E.PROD_OFFERING_ID"
     },
     "bodyList": [
       {
@@ -153,10 +153,10 @@
       {
         "type": "text",
         "position": "center",
-        "property": "DraftProdOfferingId"
+        "property": "ProdOfferingVersion"
       },
       {
-        "type": "datepicker",
+        "type": "text",
         "position": "center",
         "property": "EndDt"
       },
@@ -171,14 +171,14 @@
         "action": [
           {
             "type": "edit",
-            "path": "/product/prod-offering/add",
+            "path": "/Product/ProdOffering/add",
             "param": [
               {
-                "type":"ProdOfferingCode",
-                "property": "ProdOfferingCode"
+                "type":"ProdOfferingHId",
+                "property": "ProdOfferingHId"
               },
               {
-                "type": "param",
+                "type": "mode",
                 "property": "edit"
               }
             ]

@@ -72,8 +72,16 @@ export const Full_ROUTES: Routes = [
     loadChildren: './test-new/testNew.module#TestNewModule'
   }, 
   {
+    path: 'product',
+    loadChildren: './product/product.module#ProductModule'
+  },
+  {
     path: 'Asset',
     loadChildren: './asset/asset.module#AssetModule'
+  }, 
+  {
+    path: 'Vendor',
+    loadChildren: './vendor/vendor.module#VendorModule'
   },
   {
     path: 'Product',
@@ -83,5 +91,4 @@ export const Full_ROUTES: Routes = [
     path: 'ApprovalScreen',
     loadChildren: './approval-screen/approval-screen.module#ApprovalScreenModule'
   }
-  
 ];

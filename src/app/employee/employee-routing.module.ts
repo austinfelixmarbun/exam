@@ -56,21 +56,21 @@ const routes: Routes = [
         }
       },
       {
-        path: 'leaveMaintenance',
+        path: 'Leave/Paging',
         component: LeaveMaintenanceComponent,
         data: {
           title: 'Leave Maintenance'
         }
       },
       {
-        path: 'leaveMaintenanceAdd',
+        path: 'Leave/Add',
         component: LeaveMaintenanceAddEditComponent,
         data: {
           title: 'Leave Maintenance Add'
         }
       },
       {
-        path: 'leaveMaintenanceEdit',
+        path: 'Leave/Edit',
         component: LeaveMaintenanceAddEditComponent,
         data: {
           title: 'Leave Maintenance Edit'
