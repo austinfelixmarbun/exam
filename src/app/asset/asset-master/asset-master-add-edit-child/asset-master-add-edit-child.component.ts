@@ -175,16 +175,11 @@ export class AssetMasterAddEditChildComponent implements OnInit {
             this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
               response => {
                 this.listAssetScheme = response['ReturnObject'];
-                console.log("ddd");
-                console.log(this.listAssetScheme);
-      
                 for (let i = 0; i < this.listAssetScheme.length; i++) {
                   if(this.listAssetScheme[i].AssetSchmHIdFromD != null)
                   {
                     this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
                   }
-                  console.log("ccc");
-                  console.log(this.listSelectedId);
                 }
               });
         },

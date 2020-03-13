@@ -118,7 +118,24 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           (error) => {
             console.log(error);
           });
-        });
+
+          this.assetSchmListDObj = new AssetSchmListObj();
+          this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
+          this.assetSchmListDObj.AssetTypeId = this.AssetMasterParentForm.controls['AssetTypeId'].value;
+          this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
+            response => {
+              this.listAssetScheme = response['ReturnObject'];
+              for (let i = 0; i < this.listAssetScheme.length; i++) {
+                if(this.listAssetScheme[i].AssetSchmHIdFromD != null)
+                {
+                  this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
+                }
+              }
+            });
+          },
+          (error) => {
+            console.log(error);
+          });
   }
 
   ngOnInit() {
@@ -129,32 +146,12 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           this.AssetMasterParentForm.patchValue({ 
             AssetTypeId: response['ReturnObject'][0]['Key'] 
           });
-        
-          // var critObj = new CriteriaObj();
-          // critObj.DataType = 'text';
-          // critObj.restriction = AdInsConstant.RestrictionEq;
-          // critObj.propName = 'ASSET_TYPE_CODE';
-          // critObj.value = response['ReturnObject'][0]['Value'];
-
-          // console.log("aaa");
-          // console.log(critObj);
-
-          // this.listRequest = new ListRequestCriteriaObj();
-          // this.listRequest.criteria = new Array();
-          // this.listRequest.criteria.push(critObj);
-          // this.http.post(this.getListAssetCategory, this.listRequest).subscribe(
-          //   response => {
-          //     this.resultAssetCategory = response['ReturnObject'];
-          //     this.AssetMasterParentForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
-          //     console.log();
-          // },
-          // (error) => {
-          //   console.log(error);
-          // });
 
         this.assetSchmListDObj = new AssetSchmListObj();
         this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
         this.assetSchmListDObj.AssetTypeId = response['ReturnObject'][0]['Key'];
+        console.log("rrrr");
+        console.log(this.assetSchmListDObj);
         this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
           response => {
             this.listAssetScheme = response['ReturnObject'];
@@ -195,8 +192,22 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             IsFinal: this.resultData.IsFinal,
             IsActive: this.resultData.IsActive,
           });
-
+          
           this.isFinal = this.resultData.IsFinal;
+
+          this.assetSchmListDObj = new AssetSchmListObj();
+          this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
+          this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
+          this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
+            response => {
+              this.listAssetScheme = response['ReturnObject'];
+              for (let i = 0; i < this.listAssetScheme.length; i++) {
+                if(this.listAssetScheme[i].AssetSchmHIdFromD != null)
+                {
+                  this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
+                }
+              }
+            });
         },
         error => {
           console.log(error);
@@ -335,8 +346,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             this.listAssetScheme[i].AssetMasterId = null;
           }
         }
-        console.log("aaaaa");
-        console.log(this.listAssetSchmDObj);
         this.http.post(this.editListAssetSchmD, this.listAssetSchmDObj).subscribe(
           response => {
             console.log(response['ReturnObject']);
