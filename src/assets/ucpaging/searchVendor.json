@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "VENDOR_CODE",
+            "name": "VendorCode",
             "id": "VendorCodeId",
             "value": "",
             "label": "Group Code",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "VENDOR_NAME",
+            "name": "VendorName",
             "id": "VendorNameId",
             "value": "",
             "label": "Group Name",
@@ -19,7 +19,7 @@
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "IsActive",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -39,10 +39,9 @@
             "itemsUrl": []
         }
     ],
-    "querystring": {
-       "select": "SELECT VENDOR_CODE AS VendorCode, VENDOR_NAME AS VendorName,  IS_ACTIVE IsActive",
-        "from": "FROM dbo.VENDOR WITH(NOLOCK)"
-        
+    "querystring": { 
+        "select": "SELECT C.VENDOR_CODE AS VendorCode, C.VENDOR_NAME AS VendorName, C.IS_ACTIVE IsActive, C.VENDOR_ID AS VendorId",
+        "from": "FROM dbo.VENDOR_GRP A WITH(NOLOCK) LEFT JOIN dbo.VENDOR_GRP_MBR B WITH(NOLOCK) ON A.VENDOR_GRP_ID = B.VENDOR_GRP_ID LEFT JOIN dbo.VENDOR C WITH(NOLOCK)  ON B.VENDOR_ID = C.VENDOR_ID"
     },
     "headerList": [
         {

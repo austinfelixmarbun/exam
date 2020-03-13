@@ -16,19 +16,19 @@
             <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
                 name='VendorName'>Branch Name</span></th>
             <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                name='VendorName'>Active Status</span></th>
+                name='IsActive'>Active Status</span></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of resultData?.Data">
             <td>
-              <div *ngIf="listSelectedId.indexOf(item.VendorGrpId) >- 1">
+              <div *ngIf="listSelectedId.indexOf(item.VendorId) >- 1">
                 <input type="checkbox" id="checkSame" name="itemSame"
-                  (change)="Checked(item.VendorGrpId,  $event.target.checked)" [checked]="true">
+                  (change)="Checked(item.VendorId,  $event.target.checked)" [checked]="true">
               </div>
-              <div *ngIf="listSelectedId.indexOf(item.VendorGrpId) < 0">
+              <div *ngIf="listSelectedId.indexOf(item.VendorId) < 0">
                 <input type="checkbox" id="checkDiff" name="itemDiff"
-                  (change)="Checked(item.VendorGrpId,  $event.target.checked)" [checked]=false>
+                  (change)="Checked(item.VendorId,  $event.target.checked)" [checked]=false>
               </div>
             </td>
             <td class="text-left">{{item.VendorCode}}</td>
@@ -50,38 +50,41 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='OfficeCode'>Office Code</span>
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='VendorCode'>Vendor Code</span>
             </th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='OfficeName'>Office Name</span>
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='VendorName'>Vendor Name</span>
+            </th>
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='IsActive'>Active Status</span>
             </th>
             <th translate>Delete</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of tempData">
-            <td>{{item.OfficeCode}}</td>
-            <td>{{item.OfficeName}}</td>
+            <td>{{item.VendorCode}}</td>
+            <td>{{item.VendorName}}</td>
+            <td>{{item.IsActive}}</td>
             <td>
               <div>
-                <a class="danger p-0" data-original-title="" title="" (click)="deleteFromTemp(item.RefOfficeId)">
+                <a class="danger p-0" data-original-title="" title="" (click)="deleteFromTemp(item.VendorId)">
                   <i class="ft-trash-2 font-medium-3 mr-2"></i>
                 </a></div>
             </td>
           </tr>
         </tbody>
       </table>
-      <!-- <div class="card-header">
+      <div class="card-header">
         <div class="text-right">
-          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Office/Office-group-member']"
-          [queryParams]="{RefOfficeId:RefOfficeId, CenterGrpId:CenterGrpId}" translate>
+          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Group/Paging/']"
+          [queryParams]="{MrVendorCategoryCode:MrVendorCategoryCode,VendorGrpId:VendorGrpId}" translate>
           <i class="fa fa-arrow-circle-left"></i> Back
         </button>
-          <button type="submit" (click)="SaveOfficeGroupMember()" class="btn btn-raised btn-primary"
+          <button type="submit" (click)="SaveVendorGroupMember()" class="btn btn-raised btn-primary"
             translate>
             <i class="far"></i> Submit
           </button>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </div>

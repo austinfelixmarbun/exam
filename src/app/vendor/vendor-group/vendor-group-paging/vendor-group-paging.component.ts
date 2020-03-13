@@ -3,6 +3,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 
+
 @Component({
   selector: 'app-vendor-group-paging',
   templateUrl: './vendor-group-paging.component.html',
@@ -20,7 +21,7 @@ export class VendorGroupPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
     //belum ada delete
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefOffice;
+    //this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefOffice;
   }
 
 }

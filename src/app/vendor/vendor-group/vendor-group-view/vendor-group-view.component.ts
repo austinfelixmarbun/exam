@@ -4,6 +4,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 
 @Component({
@@ -16,20 +17,21 @@ export class VendorGroupViewComponent implements OnInit {
   vendorGrpObj: VendorGroupObj;
   inputPagingObj: any;
   inputViewObj: any;
+  MrVendorCategoryCode: any;
 
   constructor(private router: Router, private route: ActivatedRoute, ) {
     this.route.queryParams.subscribe(params => {
       if (params['VendorGrpId'] != null) {
         this.VendorGrpId = params['VendorGrpId'];
       }
+      if (params['MrVendorCategoryCode'] != null) {
+        this.MrVendorCategoryCode = params['MrVendorCategoryCode'];
+      }
     });
   }
 
 
   ngOnInit() {
-
-    // this.vendorGrpObj.VendorGrpId = this.VendorGrpId;
-    // console.log(this.vendorGrpObj)
 
     this.inputViewObj = "./assets/ucviewgeneric/viewVendorGrp.json";
 
@@ -38,10 +40,20 @@ export class VendorGroupViewComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendor.json";
-    //this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefOffice;
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefOffice;
 
 
+    var critInput = new CriteriaObj();
+    critInput.propName = "A.VENDOR_GRP_ID";
+    critInput.restriction = AdInsConstant.RestrictionEq;
+    critInput.value = this.VendorGrpId;
+    this.inputPagingObj.addCritInput.push(critInput);
 
+    var critInput = new CriteriaObj();
+    critInput.propName = "A.MR_VENDOR_CATEGORY_CODE";
+    critInput.restriction = AdInsConstant.RestrictionEq;
+    critInput.value = this.MrVendorCategoryCode;
+    this.inputPagingObj.addCritInput.push(critInput);
 
 
   }

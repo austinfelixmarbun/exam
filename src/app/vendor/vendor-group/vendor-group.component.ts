@@ -71,9 +71,8 @@ export class VendorGroupComponent implements OnInit {
 
       this.httpClient.post(AdInsConstant.GetVendorGrpByVendorGrpId, this.vendorGrpObj).subscribe(
         (response) => {
+          console.log(response);
           this.resultData = response;
-
-
           this.VendorGroupFrom.patchValue({
 
             VendorGrpCode: this.resultData.VendorGrpCode,

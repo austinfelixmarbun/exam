@@ -49,7 +49,7 @@ import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-
     BranchComponent,
     VendorHoldingPagingComponent,
     VendorHoldingAddEditComponent,
-    BankInfoComponent,
+   // BankInfoComponent,
     VendorGroupComponent,
     VendorGroupPagingComponent,
     VendorGroupViewComponent,
