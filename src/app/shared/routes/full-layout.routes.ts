@@ -94,5 +94,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'Error',
     loadChildren: './error-page/error-page.module#ErrorPageModule'
+  },
+  {
+    path: 'Survey',
+    loadChildren: './survey/survey.module#SurveyModule'
   }
 ];
