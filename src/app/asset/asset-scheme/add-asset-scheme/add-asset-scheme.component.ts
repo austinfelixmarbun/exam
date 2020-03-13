@@ -69,8 +69,6 @@ export class AddAssetSchemeComponent implements OnInit {
     private adInsService: AdInsService) { }
 
   ngOnInit() {
-    console.log('sini');
-    // this.GetListAssetMasterId();
     this.viewObj = "./assets/ucviewgeneric/viewAssetSchemeMember.json";
     this.arrCrit = new Array();
     this.route.queryParams.subscribe(params => {
@@ -101,7 +99,7 @@ export class AddAssetSchemeComponent implements OnInit {
 
     var url = AdInsConstant.GetListAssetSchmDByAssetSchmHId; //pindahin env found
     var obj = { "AssetSchmHId": this.AssetSchmHId, "RowVersion": "" };
-    var arr = new Array();
+    var arr = [0];
     var temp;
     this.http.post(url, obj).subscribe(
       response => {
@@ -125,33 +123,44 @@ export class AddAssetSchemeComponent implements OnInit {
             addCritAssetMasterId.listValue = arr;
             this.arrCrit.push(addCritAssetMasterId);
             this.inputObj.addCritInput.push(addCritAssetMasterId);
+
+            const addCritIsFinal = new CriteriaObj();
+            addCritIsFinal.DataType = 'boolean';
+            addCritIsFinal.propName = 'AM.IS_FINAL';
+            addCritIsFinal.restriction = AdInsConstant.RestrictionEq;
+            addCritIsFinal.value = 'true';
+            this.arrCrit.push(addCritIsFinal);
+        
+            const addCritIsActive = new CriteriaObj();
+            addCritIsActive.DataType = 'boolean';
+            addCritIsActive.propName = 'AM.IS_ACTIVE';
+            addCritIsActive.restriction = AdInsConstant.RestrictionEq;
+            addCritIsActive.value = 'true';
+            this.arrCrit.push(addCritIsActive);
+        
+            const addCritAssetType = new CriteriaObj();
+            addCritAssetType.DataType = 'numeric';
+            addCritAssetType.propName = 'AM.ASSET_TYPE_ID';
+            addCritAssetType.restriction = AdInsConstant.RestrictionEq;
+            addCritAssetType.value = this.AssetTypeId;
+            this.arrCrit.push(addCritAssetType);
+        
+            this.inputObj.addCritInput.push(addCritIsActive);
+            this.inputObj.addCritInput.push(addCritIsFinal);
+            this.inputObj.addCritInput.push(addCritAssetType);
+
           });
 
       },
       error => {
-        console.log(error);
+        this.router.navigateByUrl('Error');
       }
     );
 
 
     /////
     
-    const addCritIsFinal = new CriteriaObj();
-    addCritIsFinal.DataType = 'boolean';
-    addCritIsFinal.propName = 'AM.IS_FINAL';
-    addCritIsFinal.restriction = AdInsConstant.RestrictionEq;
-    addCritIsFinal.value = 'true';
-    this.arrCrit.push(addCritIsFinal);
 
-    const addCritIsActive = new CriteriaObj();
-    addCritIsActive.DataType = 'boolean';
-    addCritIsActive.propName = 'AM.IS_ACTIVE';
-    addCritIsActive.restriction = AdInsConstant.RestrictionEq;
-    addCritIsActive.value = 'true';
-    this.arrCrit.push(addCritIsActive);
-
-    this.inputObj.addCritInput.push(addCritIsActive);
-    this.inputObj.addCritInput.push(addCritIsFinal);
   }
 
   searchSort(event: any) {
@@ -236,6 +245,11 @@ export class AddAssetSchemeComponent implements OnInit {
         AssetMasterId: this.tempData[index].AssetMasterId
       }
       this.arrAssetSchmD.push(assetSchmDObj);
+    }
+
+    if(this.arrAssetSchmD.length == 0){
+      this.toastr.typeErrorCustom('Please Add At Least One Data');
+      return;
     }
 
     var AssetSchmObj = {

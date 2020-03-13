@@ -43,6 +43,7 @@
                     <show-errors [control]="AssetMasterChildForm.controls.AssetName" [submit]="enjiForm.submitted"></show-errors>
                   </div>
                 </div>
+              <div *ngIf="isFinal == true">
                 <div class="form-group row">
                     <label class="col-md-3  adInsLabel adins-required" translate>Asset Category </label>
                     <div class="col-md-9">
@@ -54,6 +55,7 @@
                       <show-errors [control]="AssetMasterChildForm.controls.AssetCategoryId" [submit]="enjiForm.submitted"></show-errors>
                     </div>
                 </div>
+              </div>
                 <div class="form-group row">
                     <label class="col-md-3  adInsLabel" translate>Active Status </label>
                     <div class="col-md-9">
@@ -62,18 +64,18 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-md-3  adInsLabel" translate>Is Final </label>
+                    <label class="col-md-3  adInsLabel" translate>Final Status </label>
                     <div class="col-md-9">
                       <input class="border-primary" type="checkbox" data-md-icheck
                              formControlName="IsFinal" disabled />
                     </div>
                   </div>
-                  <div *ngIf="isFinal == true">
+                <div *ngIf="isFinal == true">
                   <table class="table table-responsive-md text-center table-hover">
                     <thead>
                       <tr class="table-header">
-                        <th><span class="thead-header" name='checkbox' translate>
-                        </span>
+                        <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll"
+                          name="CheckAll">
                         </th>
                         <th style="text-align: left;"><span class="thead-header" name='assetSchemeCode' translate>Asset Scheme Code
                         </span>
@@ -85,7 +87,16 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of listAssetScheme">
-                        <td><input [checked]="item.AssetMasterId != null" class="border-primary" type="checkbox" formControlName="AssetCheckbox"></td>
+                        <td>
+                          <div *ngIf="listSelectedId.indexOf(item.AssetSchmHId) >- 1">
+                            <input class="border-primary" type="checkbox" 
+                             (change)="Checked(item.AssetSchmHId, $event.target.checked)" [checked]="true">
+                          </div>
+                          <div *ngIf="listSelectedId.indexOf(item.AssetSchmHId) < 0">
+                            <input class="border-primary" type="checkbox" 
+                             (change)="Checked(item.AssetSchmHId, $event.target.checked)" [checked]="false">
+                          </div>
+                        </td>
                         <td style="text-align: left;">{{item.AssetSchmCode}}</td>
                         <td style="text-align: left;">{{item.AssetSchmName}}</td>
                       </tr>
