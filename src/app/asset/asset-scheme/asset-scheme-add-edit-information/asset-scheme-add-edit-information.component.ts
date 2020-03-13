@@ -46,7 +46,6 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
         this.AssetSchmHId = params["AssetSchmHId"];
       }
     });
-
   }
 
   ngOnInit() {
@@ -67,13 +66,11 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
             IsActive: true
           });
         }
-
       }
     );
 
     if (this.pageType == "edit") {
       this.assetSchmHObj = new AssetSchemeHObj();
-
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.AssetSchemeInfoForm.controls["AssetSchmCode"].disable();
 

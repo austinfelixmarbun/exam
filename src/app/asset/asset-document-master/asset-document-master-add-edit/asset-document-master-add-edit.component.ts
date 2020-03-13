@@ -20,7 +20,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
   pageType: any;
   apiUrl: any;
   RefAssetDocId: any;
-  settingUrl: string = environment.FoundationR3Url;
+   
   result: any;
   refAssetObj: RefAssetDocObj;
 
@@ -30,8 +30,8 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
     IsActive: [true]
   });
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewRefAssetDocData;
-    this.editUrl = environment.FoundationR3Url + AdInsConstant.EditRefAssetDocData;
+    this.addUrl =  AdInsConstant.AddNewRefAssetDocData;
+    this.editUrl =  AdInsConstant.EditRefAssetDocData;
     this.route.queryParams.subscribe(params => {
 
  
@@ -54,7 +54,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
     if (this.pageType == "edit") {
       // this.title = "Edit Bank";
       console.log("awd");
-      this.apiUrl = this.settingUrl + AdInsConstant.GetRefAssetDocByRefAssetDocId;
+      this.apiUrl =   AdInsConstant.GetRefAssetDocByRefAssetDocId;
       var refAssetObj = new RefAssetDocObj();
       refAssetObj.RefAssetDocId = this.RefAssetDocId; 
       this.RefAssetDocForm.controls.AssetDocCode.disable(); 

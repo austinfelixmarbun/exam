@@ -154,7 +154,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/employee/leaveMaintenanceAdd",
+          "path": "/Employee/Leave/Add",
           "param": [
             {
               "type": "refEmpLeaveMngmntId",
