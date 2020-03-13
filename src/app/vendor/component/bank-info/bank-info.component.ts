@@ -113,6 +113,14 @@ export class BankInfoComponent implements OnInit {
       this.vendorService.EditVendorBankAcc(this.VendorBankAcc).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
+            var obj = {
+              VendorId : this.VendorId
+            };
+            this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
+              response => {
+                this.ListData = response["ReturnObject"];
+              }
+              );
             this.modal.close();      
         },
         error => {
