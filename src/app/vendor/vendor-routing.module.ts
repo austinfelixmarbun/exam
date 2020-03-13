@@ -9,6 +9,12 @@ import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-
 import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 import { VendorBranchAddEditContactPersonComponent } from './vendor-branch/vendor-branch-add-edit-contact-person/vendor-branch-add-edit-contact-person.component';
+import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
+import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
+import { VendorGroupComponent } from './vendor-group/vendor-group.component';
+import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
+import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
+import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmember.component';
 const routes: Routes = [
   {
     path: '',
@@ -32,6 +38,48 @@ const routes: Routes = [
         component: VendorBranchAddEditContactPersonComponent,
         data: {
           title: 'Vendor Branch Add/Edit'
+        },
+      },
+      {
+        path: 'HoldingPaging',
+        component: VendorHoldingPagingComponent,
+        data: {
+          title: 'Vendor Holding Paging'
+        },
+      },
+      {
+        path: 'HoldingAddEdit',
+        component: VendorHoldingAddEditComponent,
+        data: {
+          title: 'Vendor Holding Add Edit'
+        },
+      },
+      {
+        path: 'Group/Add',
+        component: VendorGroupComponent,
+        data: {
+          title: 'Vendor Group Add'
+        },
+      },
+      {
+        path: 'Group/Paging',
+        component: VendorGroupPagingComponent,
+        data: {
+          title: 'Vendor Group Paging'
+        },
+      },
+      {
+        path: 'Group/View',
+        component: VendorGroupViewComponent,
+        data: {
+          title: 'Vendor Group View'
+        },
+      },
+      {
+        path: 'GroupMbr/Add',
+        component: VendorGroupmemberComponent,
+        data: {
+          title: 'Vendor Group Member View'
         },
       },
       {
@@ -75,8 +123,9 @@ const routes: Routes = [
         data: {
           title: 'Vendor HO Member'
         },
-      }
+      },
     ]
+
   }
 ];
 

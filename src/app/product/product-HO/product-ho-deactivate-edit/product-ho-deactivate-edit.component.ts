@@ -5,8 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ProdHDeactivateObj } from '../../../shared/model/ProdHDeactivateObj.Model';
-import { UcPagingObj } from '../../../shared/model/UcPagingObj.Model';
-import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { environment } from '../../../../environments/environment';
 import { ProdOfferingVersionObj } from '../../../shared/model/ProdOfferingVersionObj.Mode';
 
@@ -92,7 +90,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.http.post(this.editUrl, this.prodHDeactivateObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/product/HODeactivate"]);
+        this.router.navigate(["/Product/HODeactivate"]);
       },
       error => {
         console.log(error);

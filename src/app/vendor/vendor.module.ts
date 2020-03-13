@@ -11,11 +11,18 @@ import { UcpagingModule } from '@adins/ucpaging';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
+import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
+import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
+import { BankInfoComponent } from './component/bank-info/bank-info.component';
+import { VendorGroupComponent } from './vendor-group/vendor-group.component';
+import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
+import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
+import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmember.component';
 import { VendorSchemeAddEditComponent } from './vendor-scheme/vendor-scheme-add-edit/vendor-scheme-add-edit.component';
 import { VendorSchemePagingComponent } from './vendor-scheme/vendor-scheme-paging/vendor-scheme-paging.component';
 import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-paging/vendor-scheme-member-paging.component';
 import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-add/vendor-scheme-member-add.component';
-import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
 import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
@@ -37,10 +44,18 @@ import { VendorBranchAddEditContactPersonComponent } from './vendor-branch/vendo
     UcSubsectionModule,
     ReactiveFormsModule,
     TreeViewModule,
-    UcviewgenericModule,
+    UcviewgenericModule
   ],
   declarations: [
     VendorComponent,
+    VendorHoldingPagingComponent,
+    VendorHoldingAddEditComponent,
+    BankInfoComponent,
+    VendorGroupComponent,
+    VendorGroupPagingComponent,
+    VendorGroupViewComponent,
+    VendorGroupmemberComponent,
+
     VendorSchemeAddEditComponent,
     VendorSchemePagingComponent,
     VendorSchemeMemberAddComponent,
