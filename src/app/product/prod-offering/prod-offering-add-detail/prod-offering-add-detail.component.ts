@@ -33,6 +33,10 @@ export class ProdOfferingAddDetailComponent implements OnInit {
   resultData : any;
   ProdOfferingHId: any;
 
+  isGeneralData: boolean = true;
+  isProdCompnt: boolean = false;
+  isOfficeMbr: boolean = false;
+
   objPassing: any = {};
 
   ProdOfferingForm = this.fb.group({
@@ -66,6 +70,26 @@ export class ProdOfferingAddDetailComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  EnterTab(type){
+    if(type == "general"){
+      this.isGeneralData = true;
+      this.isProdCompnt = false;
+      this.isOfficeMbr = false;
+    }
+
+    if(type == "prodCompnt"){
+      this.isGeneralData = false;
+      this.isProdCompnt = true;
+      this.isOfficeMbr = false;
+    }
+
+    if(type == "officeMbr"){
+      this.isGeneralData = false;
+      this.isProdCompnt = false;
+      this.isOfficeMbr = true;
+    }
   }
 
 }

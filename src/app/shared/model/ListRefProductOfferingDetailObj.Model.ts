@@ -1,6 +1,6 @@
 export class ListRefProductOfferingDetailObj {
     ProdOfferingHId: any;
-    ProductOfferingDetails: any [];
+    ProdOfferingDetails: any [];
     RowVersion: any;
     constructor() { this.ProdOfferingHId="", this.RowVersion = "" }
 }
