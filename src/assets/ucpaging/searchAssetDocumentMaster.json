@@ -68,7 +68,7 @@
     ],
     "querystring": { 
       "select": "SELECT ASSET_DOC_CODE AS AssetDocumentCode, REF_ASSET_DOC_ID AS RefAssetDocId, ASSET_DOC_NAME AS AssetDocumentName, IS_ACTIVE AS IsActive",
-      "from": "FROM dbo.REF_ASSET_DOC A WITH(NOLOCK)"
+      "from": "FROM dbo.REF_ASSET_DOC WITH(NOLOCK)"
     },
     "bodyList": [
       {

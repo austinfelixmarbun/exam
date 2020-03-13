@@ -235,7 +235,9 @@ export class AdInsConstant {
   public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
   public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
   public static GetListActiveRefMaster = environment.FoundationR3Url +"/RefMaster/GetListKeyValueActiveByCode";
+  public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode"
 
+ 
   //REF INDUSTRY TYPE
   public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
   public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
@@ -477,11 +479,15 @@ export class AdInsConstant {
   public static AddNewCustPersonal = environment.FoundationR3Url + "/CustPersonal/AddCustPersonal"
   public static EditCustPersonal = environment.FoundationR3Url + "/CustPersonal/EditCustPersonal"
   public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
+  public static GetCustPersonalbyCustId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustId"
  
   // Customer
   public static AddNewCust =   environment.FoundationR3Url + "/Cust/AddCust"
   public static  GetCustByCustId =   environment.FoundationR3Url + "/Cust/GetCustByCustId"
   
+  //REF COUNTRY
+
+  public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry"
  
- 
+  
 }

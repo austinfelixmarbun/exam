@@ -40,15 +40,12 @@ export class AssetCategoryAddEditComponent implements OnInit {
       if (params["AssetCategoryId"] != null) {
         this.AssetCategoryId = params["AssetCategoryId"];
       }
-
-
     });
   }
 
   ngOnInit() {
-
     if (this.pageType == "edit") {
-      // this.title = "Edit Bank";
+
       var acObj = new AssetCategoryObj();
       this.apiUrl = AdInsConstant.GetAssetCategorybyAssetCategoryId;
       this.AssetCategoryForm.controls.AssetCategoryCode.disable();
@@ -68,13 +65,8 @@ export class AssetCategoryAddEditComponent implements OnInit {
         }
       );
     }
-
   }
-
   SaveForm() {
-    console.log("awd");
-
-
     if (this.pageType == "add") {
       this.acObj = new AssetCategoryObj();
       this.acObj.AssetCategoryCode = this.AssetCategoryForm.controls["AssetCategoryCode"].value;
@@ -84,10 +76,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-
           this.router.navigate(["/Asset/Category/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
-
-
         },
         error => {
           console.log(error);
@@ -110,8 +99,5 @@ export class AssetCategoryAddEditComponent implements OnInit {
         }
       );
     }
-
-
   }
-
 }

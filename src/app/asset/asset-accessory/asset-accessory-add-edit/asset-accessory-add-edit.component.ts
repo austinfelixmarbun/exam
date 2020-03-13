@@ -43,18 +43,12 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     });
   }
   ngOnInit() {
-    1
     if (this.pageType == "edit") {
-      console.log("awd");
-      // this.title = "Edit Bank";
       var acObj = new AssetAccessoryObj();
-
       acObj.AssetAccessoryId = this.AssetAccessoryId;
       acObj.AssetTypeId = this.AssetTypeId;
       this.apiUrl = AdInsConstant.GetAssetAccessorybyAssetAccessoryId;
       this.AssetAccessoryForm.controls.AssetAccessoryCode.disable();
-
-      console.log("awd");
 
       this.http.post(this.apiUrl, acObj).subscribe(
         (response) => {
@@ -72,10 +66,8 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     }
   }
   SaveForm() {
-
     console.log("awd");
     if (this.pageType == "add") {
-
       this.acObj = new AssetAccessoryObj();
       this.acObj.AssetAccessoryCode = this.AssetAccessoryForm.controls["AssetAccessoryCode"].value;
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
@@ -95,7 +87,6 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.acObj.AssetAccessoryCode = this.AssetAccessoryForm.controls["AssetAccessoryCode"].value;
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
-
       this.http.post(this.editUrl, this.acObj).subscribe(
         response => {
           console.log(response);

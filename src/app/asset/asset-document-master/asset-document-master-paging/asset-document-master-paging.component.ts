@@ -7,7 +7,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   selector: 'app-asset-document-master-paging',
   templateUrl: './asset-document-master-paging.component.html',
   styleUrls: ['./asset-document-master-paging.component.scss'],
-
 })
 export class AssetDocumentMasterPagingComponent implements OnInit {
   inputPagingObj: any;
