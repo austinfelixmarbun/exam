@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AssetSchemeMemberComponent } from './asset-scheme-member.component';
 
-describe('AssetSchemeMemberComponent', () => {
-  let component: AssetSchemeMemberComponent;
-  let fixture: ComponentFixture<AssetSchemeMemberComponent>;
+import { ErrorPageComponent } from './error-page.component';
+
+describe('ErrorPageComponent', () => {
+  let component: ErrorPageComponent;
+  let fixture: ComponentFixture<ErrorPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssetSchemeMemberComponent ]
+      declarations: [ ErrorPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssetSchemeMemberComponent);
+    fixture = TestBed.createComponent(ErrorPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

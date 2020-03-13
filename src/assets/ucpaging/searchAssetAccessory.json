@@ -1,130 +1,118 @@
 {
-    "title": "Asset Accessory",
-    "exportExcel": true,
-    "component": [
-      {
-        "type": "textbox",
-        "name": "ASSET_ACCESSORY_CODE",
-        "id": "AssetAccesoryCode",
-        "value": "",
-        "label": "Asset Accessory Code",
-        "placeholder": "Placeholder"
-      },
-      {
-        "type": "textbox",
-        "name": "ASSET_ACCESSORY_NAME",
-        "id": "AssetAccessoryName",
-        "value": "",
-        "label": "Asset Accessory Name",
-        "placeholder": "Placeholder"
-      },
-      {
-        "type": "dropdown",
-        "name": "is_Active",
-        "id": "isActive",
-        "value": "Active Status",
-        "placeholder": "Placeholder",
-        "isFromURL": false,
-        "isSelectOne": false,
-        "url": "https://api.myjson.com/bins/ld6e8",
-        "label": "Active Status",
-        "items": [
-          {
-            "key": "1",
-            "value": "Yes"
-          },
-          {
-            "key": "0",
-            "value": "No"
-          }
-        ],
-        "itemsUrl": []
-      }
-    ],
-    "headerList": [
-      {
-        "type": "sort",
-        "position": "left",
-        "label": "ASSET Accessory CODE",
-        "name": "AssetAccessoryCode"
-      },
-      {
-        "type": "sort",
-        "position": "left",
-        "label": "ASSET Accessory NAME",
-        "name": "AssetAccessoryName"
-      },
-      {
-        "type": "sort",
-        "position": "center",
-        "label": "ACTIVE STATUS",
-        "name": "isActive"
-      },
-      {
-        "type": "label",
-        "position": "center",
-        "label": "ACTION"
-      }
-      
-    ],
-    
-        "querystring": { 
-            "select": "SELECT  A.ASSET_ACCESSORY_CODE as AssetAccessoryCode,A.ASSET_ACCESSORY_NAME as AssetAccessoryName,A.ASSET_TYPE_ID AS AssetTypeId, A.ASSET_ACCESSORY_ID as AssetAccessoryId,  A.IS_ACTIVE as IsActive",
-          "from": "FROM ASSET_ACCESSORY A WITH(NOLOCK)" 
+  "title": "Asset Accessory",
+  "exportExcel": true,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "ASSET_ACCESSORY_CODE",
+      "id": "AssetAccesoryCode",
+      "value": "",
+      "label": "Asset Accessory Code",
+      "placeholder": "Placeholder"
     },
-    "bodyList": [
-      {
-        "type": "text",
-        "position": "left",
-        "property": "AssetAccessoryCode"
-      },
-      {
-        "type": "text",
-        "position": "left",
-        "property": "AssetAccessoryName"
-      },
-      {
-        "type": "boolean",
-        "position": "center",
-        "property": "IsActive"
-      },
-      {
-        "type": "action",
-        "position": "center",
-        "action": [
-          {
-            "type": "edit",
-            "path": "/Asset/Accessory/Detail",
-            "param": [
-              {
-                "type": "mode",
-                "property": "edit"
-              },
-              {
-                "type": "AssetTypeId",
-                "property": "AssetTypeId"
-              },
-              {
-                "type": "AssetAccessoryId",
-                "property": "AssetAccessoryId"
-              }
-
-            ]
-          },
-          
+    {
+      "type": "textbox",
+      "name": "ASSET_ACCESSORY_NAME",
+      "id": "AssetAccessoryName",
+      "value": "",
+      "label": "Asset Accessory Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "dropdown",
+      "name": "IS_ACTIVE",
+      "id": "isActive",
+      "value": "Active Status",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Active Status",
+      "items": [
+        {
+          "key": "1",
+          "value": "Yes"
+        },
+        {
+          "key": "0",
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    }
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "ASSET Accessory CODE",
+      "name": "ASSET_ACCESSORY_CODE"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "ASSET Accessory NAME",
+      "name": "ASSET_ACCESSORY_NAME"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "ACTIVE STATUS",
+      "name": "IS_ACTIVE"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "ACTION"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT ASSET_ACCESSORY_CODE AS AssetAccessoryCode, ASSET_ACCESSORY_NAME AS AssetAccessoryName, ASSET_TYPE_ID AS AssetTypeId, ASSET_ACCESSORY_ID AS AssetAccessoryId, IS_ACTIVE AS IsActive",
+    "from": "FROM dbo.ASSET_ACCESSORY WITH(NOLOCK)"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "AssetAccessoryCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "AssetAccessoryName"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsActive"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "/Asset/Accessory/Detail",
+          "param": [
+            {
+              "type": "mode",
+              "property": "edit"
+            },
+            {
+              "type": "AssetTypeId",
+              "property": "AssetTypeId"
+            },
+            {
+              "type": "AssetAccessoryId",
+              "property": "AssetAccessoryId"
+            }
+          ]
+        },
         {
           "type": "delete",
           "property": "AssetAccessoryId"
         }
-        ]
-      } 
-
-
-
-
-
-
-    ]
-  }
-  
-  
+      ]
+    }
+  ]
+}

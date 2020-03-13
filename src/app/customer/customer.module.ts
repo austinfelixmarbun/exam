@@ -45,7 +45,15 @@ import { NegativeCustomerViewComponent } from './negative-customer/negative-cust
   ],
   declarations: [ 
     CustomerPagingComponent, 
-    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent, NegativeCustomerComponent, NegativeCustomerDetailComponent, NegativeCustomerViewComponent
+    CustomerPersonalMainInfoComponent, 
+    CustomerPersonalDuplicateCheckComponent, 
+    CustomerCompanyDuplicateCheckComponent, 
+    CustomerCompanyMainInfoComponent, 
+    CustomerPersonalPageComponent, 
+    CustomerPersonalDetailComponent,
+    NegativeCustomerComponent,
+    NegativeCustomerDetailComponent,
+    NegativeCustomerViewComponent
   ]
 })
 export class CustomerModule { 

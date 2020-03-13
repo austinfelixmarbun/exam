@@ -16,19 +16,6 @@
           (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
           <div class="form-body">
             <div id="NegativeAssetSection">
-              <!-- <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel" for="AssetTypeId">Asset Type Name</label>
-                <div class="col-md-9">
-                  <select formControlName="AssetTypeId" class="form-control" (change)="assetTypeChange($event)"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.AssetTypeId.invalid }"
-                    [attr.disabled]="pageType == 'edit' ? true : null">
-                    <option *ngFor="let item of assetTypeList?.ReturnObject" [value]="item.AssetTypeId">
-                      {{item.AssetTypeName}}
-                    </option>
-                  </select>
-                  <show-errors [control]="AssetNegativeForm.controls.AssetTypeId" [submit]="enjiForm.submitted"></show-errors>
-                </div>
-              </div> -->
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="RefEconomicSectorId" translate>Full Asset Name</label>
                 <div class="col-md-9" *ngIf="pageType == 'add'">
@@ -113,9 +100,6 @@
             </div>
           </div>
           <div class="form-actions right">
-            <!-- <button *ngIf=" type == 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-              <i class="fa fa-arrow-circle-left"></i> Back
-            </button> -->
             <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>

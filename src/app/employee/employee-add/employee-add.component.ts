@@ -29,7 +29,7 @@ export class EmployeeAddComponent implements OnInit {
   private getEmpUrl: string = AdInsConstant.GetRefEmployeeById;
   private getRefUserUrl: string = environment.FoundationR3Url + AdInsConstant.GetRefUserByRefEmpId;
   private getEmpBankUrl: string = environment.FoundationR3Url + AdInsConstant.GetEmpBankAccByRefEmpId;
-  private getGeneralSettingUrl : string = environment.FoundationR3Url + AdInsConstant.GetGeneralSettingByCode;
+  private getGeneralSettingUrl : string = AdInsConstant.GetGeneralSettingByCode;
   private getRefBankUrl: string = AdInsConstant.GetRefBankByRefBankIdAsync;
   private addUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefEmp;
   private editUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefEmp;

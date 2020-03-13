@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AssetMasterObj } from 'app/shared/model/AssetMasterObj.Model';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
+import { ListRequestCriteriaObj } from 'app/shared/model/ListRequestCriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-asset-master-add-edit-parent',
@@ -16,7 +18,7 @@ import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 export class AssetMasterAddEditParentComponent implements OnInit {
 
   pageType: string = "add";
-  assetMasterId: any;
+  AssetMasterId: any;
   assetMasterObj: AssetMasterObj;
   assetTypeObj: AssetTypeObj;
   resultAssetType: any;
@@ -28,6 +30,9 @@ export class AssetMasterAddEditParentComponent implements OnInit {
   getAssetType: any;
   allAssetMasterMethod: any;
   refCustModelCode: any;
+  listRequest: any;
+  resultAssetCategory: any;
+  getListAssetCategory: any;
   AssetMasterParentForm = this.fb.group({
     AssetCategoryId: [''],
     AssetTypeId: [0, [Validators.required]],
@@ -47,14 +52,15 @@ export class AssetMasterAddEditParentComponent implements OnInit {
     this.editUrl = AdInsConstant.EditAssetMaster;
     this.getValueAssetType = AdInsConstant.GetValueAssetType;
     this.getAssetType = AdInsConstant.GetAssetTypeById;
+    this.getListAssetCategory = AdInsConstant.GetListAssetCategory;
 
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
       }
-      if (params["assetMasterId"] != null) {
-        this.assetMasterId = params["assetMasterId"];
+      if (params["AssetMasterId"] != null) {
+        this.AssetMasterId = params["AssetMasterId"];
       }
     });
   }
@@ -81,12 +87,30 @@ export class AssetMasterAddEditParentComponent implements OnInit {
   }
 
   ngOnInit() {
-    
     this.http.post(this.getValueAssetType, null).subscribe(
         (response) => {
             console.log(response);
           this.allAssetMasterMethod = response['ReturnObject'];
           this.AssetMasterParentForm.patchValue({ AssetTypeId: response['ReturnObject'][0]['Key'] });
+        
+          // var critObj = new CriteriaObj();
+          // critObj.DataType = 'text';
+          // critObj.restriction = AdInsConstant.RestrictionEq;
+          // critObj.propName = 'ASSET_TYPE_CODE';
+          // critObj.value = response['ReturnObject'][0]['Value'];
+
+          // this.listRequest = new ListRequestCriteriaObj();
+          // this.listRequest.criteria = new Array();
+          // this.listRequest.criteria.push(critObj);
+          // this.http.post(this.getListAssetCategory, this.listRequest).subscribe(
+          //   response => {
+          //     this.resultAssetCategory = response['ReturnObject'];
+          //     this.AssetMasterParentForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
+          //     console.log();
+          // },
+          // (error) => {
+          //   console.log(error);
+          // });
         },
         (error) => {
           console.log(error);
@@ -94,11 +118,15 @@ export class AssetMasterAddEditParentComponent implements OnInit {
 
 
     if (this.pageType == "edit") {
+      this.AssetMasterParentForm.controls["AssetCode"].disable();
+      this.AssetMasterParentForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
-      this.assetMasterObj.AssetMasterId = this.assetMasterId;
+      this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.http.post(this.getUrl, this.assetMasterObj).subscribe(
         response => {
           this.resultData = response;
+          console.log("abc");
+          console.log(this.resultData);
           this.AssetMasterParentForm.patchValue({
             AssetCategoryId: this.resultData.AssetCategoryId,
             AssetTypeId: this.resultData.AssetTypeId,
@@ -135,7 +163,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       this.http.post(this.addUrl, this.assetMasterObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/CommonSetting/AssetMaster/Paging"]);
+            this.router.navigate(["/Asset/AssetMaster/Paging"]);
             console.log(response)
           
         },
@@ -145,7 +173,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       );
     } else {
       this.assetMasterObj = this.resultData;
-      this.assetMasterObj.AssetMasterId = this.assetMasterId;
+      this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.assetMasterObj.AssetCategoryId = this.AssetMasterParentForm.controls["AssetCategoryId"].value
       this.assetMasterObj.AssetTypeId = this.AssetMasterParentForm.controls["AssetTypeId"].value;
       this.assetMasterObj.AssetCode = this.AssetMasterParentForm.controls["AssetCode"].value;
