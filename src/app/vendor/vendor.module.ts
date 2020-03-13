@@ -1,6 +1,6 @@
 import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
@@ -27,6 +27,9 @@ import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-me
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { AddressComponent } from './component/address/address.component';
+import { ArchwizardModule } from 'angular-archwizard';
+import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
 
 
 @NgModule({
@@ -45,7 +48,8 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     TreeViewModule,
     UcviewgenericModule,
     UclookupgenericModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    ArchwizardModule
   ],
   declarations: [
     VendorComponent,
@@ -57,13 +61,14 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     VendorGroupPagingComponent,
     VendorGroupViewComponent,
     VendorGroupmemberComponent,
-
     VendorSchemeAddEditComponent,
     VendorSchemePagingComponent,
     VendorSchemeMemberAddComponent,
     VendorSchemeMemberPagingComponent,
     VendorHoAddEditComponent,
-    VendorHoPagingComponent
+    VendorHoPagingComponent,
+    AddressComponent,
+    VendorHoRegistrationComponent
   ]
 })
 export class VendorModule { }

@@ -22,6 +22,7 @@ export class VendorObj{
     IsVat: any;
     TaxpayerNo: any;
     TaxpayerName: any;
+    RowVersion: any;
 
     constructor() { this.VendorId = 0; }
 }

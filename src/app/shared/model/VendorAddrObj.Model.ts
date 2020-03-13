@@ -7,6 +7,7 @@ export class VendorAddrObj{
     AreaCode1: any; //kecamatan
     City: any;
     Province: any;
+    RowVersion: any;
 
     constructor() { this.VendorAddrId = 0; }
 }

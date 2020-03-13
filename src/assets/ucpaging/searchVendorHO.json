@@ -57,7 +57,7 @@
     ],
     "querystring": {
         "select": "select V.VENDOR_CODE AS VendorCode, V.VENDOR_NAME AS VendorName, V.IS_ACTIVE AS IsActive, V.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, V.VENDOR_ID AS VendorId",
-        "from": "FROM dbo.VENDOR V LEFT JOIN dbo.REF_MASTER RM ON v.MR_VENDOR_CATEGORY_CODE = rm.MASTER_CODE"
+        "from": "FROM dbo.VENDOR V LEFT JOIN dbo.REF_MASTER RM ON V.MR_VENDOR_CATEGORY_CODE = RM.MASTER_CODE"
     },
     "headerList": [
         {
@@ -108,6 +108,10 @@
                     "type": "edit",
                     "path": "/Vendor/HO/Detail",
                     "param": [
+                        {
+                            "type": "MrVendorCategoryCode",
+                            "property": "MrVendorCategoryCode"
+                        },
                         {
                             "type": "VendorId",
                             "property": "VendorId"

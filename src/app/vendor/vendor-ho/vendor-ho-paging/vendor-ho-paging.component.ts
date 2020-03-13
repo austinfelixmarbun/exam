@@ -11,6 +11,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 })
 export class VendorHoPagingComponent implements OnInit {
   inputPagingObj: any;
+  arrCrit: any;
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
@@ -18,6 +19,14 @@ export class VendorHoPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHO.json";
-    //this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVendorSchm;
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVendorHO;
+
+    this.arrCrit = new Array();
+    var critObj = new CriteriaObj();
+    critObj.propName = 'RM.RESERVE_FIELD_1';
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.value = "HO";
+    this.arrCrit.push(critObj);
+    this.inputPagingObj.addCritInput = this.arrCrit;
   }
 }

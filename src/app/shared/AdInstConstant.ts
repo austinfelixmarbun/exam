@@ -503,7 +503,11 @@ export class AdInsConstant {
   //VENDOR
   public static DeleteVendor ="/Vendor/DeleteVendor";
   public static AddVendorHO = environment.FoundationR3Url + "/Vendor/AddVendorHO";
-
+  public static EditVendorHO = environment.FoundationR3Url + "/Vendor/EditVendorHO";
+  public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
+  public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
+  public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
+  
   //VENDOR GROUP
   public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
   public static EditVendorGrp = environment.FoundationR3Url + "/VendorGrp/EditVendorGrp";
