@@ -23,34 +23,27 @@
           },
           {
             "type": "text",
-            "label": "Customer Name",
-            "property": "CustName"
+            "label": "Birth Place / Date",
+            "property": "BirthPlaceDt"
           },
           {
             "type": "text",
-            "label": "Customer Name",
-            "property": "CustName"
+            "label": "ID Type / No",
+            "property": "IdTypeNo"
           },
           {
             "type": "text",
-            "label": "Customer Name",
-            "property": "CustName"
+            "label": "Id Expired Date",
+            "property": "IdExpiredDt"
           },
           {
             "type": "text",
-            "label": "Customer Name",
-            "property": "CustName"
-          },
-          {
-            "type": "text",
-            "label": "Customer Name",
-            "property": "CustName"
-          } 
-          
-         
+            "label": "NPWP",
+            "property": "TaxIdNo"
+          }
         ],
         "querystring": {
-          "select": "SELECT C.CUST_ID, C.CUST_NO AS CustNo, C.CUST_NAME AS CustName, CP.MR_GENDER_CODE AS MrGenderCode, CP.BIRTH_PLACE AS BirthPlace, CP.BIRTH_DT AS BirthDt, C.MR_ID_TYPE_CODE AS MrIdTypeCode, C.ID_NO AS IdNo,  C.ID_EXPIRED_DT AS IdExpiredDt, C.TAX_ID_NO AS TaxIdNo",
+          "select": "SELECT  C.CUST_NO AS CustNo, C.CUST_ID AS CustId, C.CUST_NAME AS CustName, CP.MR_GENDER_CODE AS MrGenderCode, CONCAT(CP.BIRTH_PLACE, ' ', CP.BIRTH_DT) AS BirthPlaceDt, CONCAT(C.MR_ID_TYPE_CODE ,' ', C.ID_NO ) AS IdTypeNo,  C.ID_EXPIRED_DT AS IdExpiredDt, C.TAX_ID_NO AS TaxIdNo",
           "from": "FROM dbo.CUST AS C WITH(NOLOCK) JOIN dbo.CUST_PERSONAL AS CP WITH(NOLOCK) ON C.CUST_ID = CP.CUST_ID",
           "where": "WHERE C.CUST_ID = {0}"
         }
