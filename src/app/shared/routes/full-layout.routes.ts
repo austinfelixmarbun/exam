@@ -90,5 +90,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'ApprovalScreen',
     loadChildren: './approval-screen/approval-screen.module#ApprovalScreenModule'
+  },
+  {
+    path: 'Error',
+    loadChildren: './error-page/error-page.module#ErrorPageModule'
   }
 ];

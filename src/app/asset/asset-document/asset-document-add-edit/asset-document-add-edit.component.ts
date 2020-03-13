@@ -46,9 +46,9 @@ export class AssetDocumentAddEditComponent implements OnInit {
   temp: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewAssetDocList;
-    this.editUrl = environment.FoundationR3Url + AdInsConstant.EditAssetDocList;
-    this.getUrl = environment.FoundationR3Url + AdInsConstant.GetListRefAssetDoc;
+    this.addUrl =  AdInsConstant.AddNewAssetDocList;
+    this.editUrl =  AdInsConstant.EditAssetDocList;
+    this.getUrl = AdInsConstant.GetListRefAssetDoc;
     this.route.queryParams.subscribe(params => {
 
 
@@ -81,14 +81,14 @@ export class AssetDocumentAddEditComponent implements OnInit {
     );
 
     if (this.pageType == "edit") {
-      // this.title = "Edit Bank";
-      console.log("awd");
-      this.apiUrl = this.settingUrl + AdInsConstant.GetAssetDocListByAssetDocListId;
-      this.getRefAssetDocUrl = this.settingUrl + AdInsConstant.GetRefAssetDocByRefAssetDocId;
+      
+      
+      this.apiUrl =   AdInsConstant.GetAssetDocListByAssetDocListId;
+      this.getRefAssetDocUrl =   AdInsConstant.GetRefAssetDocByRefAssetDocId;
       var assetDocListObj = new AssetDocListObj();
       var refAssetDocObj = new RefAssetDocObj();
+     
       assetDocListObj.AssetDocListId = this.AssetDocListId;
-      console.log("awd");
 
       this.http.post(this.apiUrl, assetDocListObj).subscribe(
         (response) => {
