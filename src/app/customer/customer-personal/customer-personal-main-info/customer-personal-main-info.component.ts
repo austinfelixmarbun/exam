@@ -37,7 +37,7 @@ state: any;
   tempIdType: any;
   tempCustModel : any;
   CustName  : any;
- 
+  tempKTPCheck:any;
   
   Gender : any;
   
@@ -88,6 +88,11 @@ state: any;
         this.CustomerPersonalForm.patchValue({
           MrIdTypeCode: this.tempIdType[0].Key
         });
+        if(this.tempIdType[0].Key == this.KTP){
+          this.tempKTPCheck=false;
+        }else{
+          this.tempKTPCheck=true;
+        }
       }
     );
     console.log( "awdawdwad");
@@ -144,14 +149,16 @@ state: any;
     this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,   "CustModel" : this.CustModel, "BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName,"IsVip"  : this.IsVip,"IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes  } });
  
   }
-  onOptionsSelected(event){    console.log(event.target.value);
+  onOptionsSelected(event){ console.log(event.target.value);
     if(event.target.value == this.KTP){
   
       this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
-      this.CustomerPersonalForm.controls.IdExpiredDt.disable();
-    
+ 
+      this.tempKTPCheck= false;
+     
     }else{
-      this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);   this.CustomerPersonalForm.controls.IdExpiredDt.disable();
+      this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);  
+      this.tempKTPCheck=true;
     }
     this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
   

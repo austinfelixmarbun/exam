@@ -554,4 +554,6 @@ export class AdInsConstant {
   public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
   public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
    
+  //ref Country 
+  public static GetListRefCountry = environment.FoundationR3Url +"/RefCountry/GetListRefCountry";
 }

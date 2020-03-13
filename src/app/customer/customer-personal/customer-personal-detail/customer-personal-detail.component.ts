@@ -25,17 +25,17 @@ export class CustomerPersonalDetailComponent implements OnInit {
     CustPrefixName : [''  ],
     IsAffiliateWithMf:  [true],
     CustSuffixName : ['' ],
-    NoOfDependents : ['', Validators ],
+    NoOfDependents : ['', [Validators.pattern("^[0-9]+$")] ],
     MrNationalityCode:  [''],
-    NoOfResidence: [''],
+    NoOfResidence: ['',Validators.pattern("^[0-9]+$")],
     WnaCountryCode :  [''],
-    FamilyCardNo : ['', ],
+    FamilyCardNo : ['', Validators.pattern("^[0-9]+$")],
     MrEducationCode: ['',],
     MrReligionCode:  ['',],
     IsRestInPeace : [false],
     IsVip  : [true],
     VipNotes: ['',],
-    MobilePhnNo1: ['', ],
+    MobilePhnNo1: ['', Validators.required ],
     MobilePhnNo2: ['',],
     EMail1: ['', ],
     EMail2 : ['',],
@@ -109,6 +109,34 @@ export class CustomerPersonalDetailComponent implements OnInit {
         
           this.tempCustPersonalObj = response;
         });
+
+
+
+        this.CustomerDetailForm.patchValue({
+         
+          NickName : this.tempCustPersonalObj.NickName,
+          MrSalutationCode : this.tempCustPersonalObj.MrSalutationCode,
+          MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode,
+          CustSuffixName: this.tempCustPersonalObj.CustSuffixName,
+          IsAffiliateWithMf: this.tempCustPersonalObj.IsAffiliateWithMf,
+         
+          CustPrefixName : this.tempCustPersonalObj.CustPrefixName,
+          NoOfDependents : this.tempCustPersonalObj.NoOfDependents,
+          MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode,
+          NoOfResidence: this.tempCustPersonalObj.NoOfResidence,
+          WnaCountryCode : this.tempCustPersonalObj.WnaCountryCode,
+          FamilyCardNo : this.tempCustPersonalObj.FamilyCardNo,
+          MrEducationCode : this.tempCustPersonalObj.MrEducationCode,
+          MrReligionCode : this.tempCustPersonalObj.WnaCountryCode,
+          IsRestInPeace : this.tempCustPersonalObj.IsRestInPeace,
+          IsVip: this.tempCustPersonalObj.IsVip,
+          MobilePhnNo1: this.tempCustPersonalObj.MobilePhnNo1,
+          MobilePhnNo2: this.tempCustPersonalObj.MobilePhnNo2,
+          EMail1: this.tempCustPersonalObj.EMail1,
+          EMail2: this.tempCustPersonalObj.EMail2,
+        });
+
+
 
 
     var refMasterObj = {
