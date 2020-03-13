@@ -24,5 +24,6 @@ export class AssetMasterComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetMaster.json";
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetMaster;
   }
 }

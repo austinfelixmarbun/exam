@@ -40,7 +40,7 @@ export class AdInsConstant {
   public static GetGeneralSettingPaging = "/GeneralSetting/GetGeneralSettingPaging";
   public static GetGeneralSettingById = environment.FoundationR3Url + "/GeneralSetting/GetGeneralSettingById";
   public static GetGeneralSettingValue = "/GeneralSetting/GetGeneralSettingValue";
-  public static GetGeneralSettingByCode = "/GeneralSetting/GetGeneralSettingByCode";
+  public static GetGeneralSettingByCode = environment.FoundationR3Url +"/GeneralSetting/GetGeneralSettingByCode";
 
 
   //REF OFFICE
@@ -49,24 +49,31 @@ export class AdInsConstant {
   public static GetRefOfficeActiveAndNonVirtualKeyValue = "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue";
   public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
   public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
-  public static AddRefOffice = "/RefOffice/AddRefOffice";
+  public static AddRefOffice = environment.FoundationR3Url + "/RefOffice/AddRefOffice";
   public static EditRefOffice = "/RefOffice/EditRefOffice";
   public static DeleteRefOffice = "/RefOffice/DeleteRefOffice";
   public static GetCenterGrpByCenterGrpTypeCode = "/RefOffice/GetCenterGrpByCenterGrpCode";
   public static GetListOfficeCenterGrp = "/RefOffice/GetListOfficeCenterGrp";
   public static AddCenterGroupOfficeMember = "RefOffice/AddCenterGroupOfficeMember";
-  public static AddCenterGrpOfficeMember = "/CenterGrpOfficeMbr/AddCenterGrpOfficeMember";
-  public static GetListCenterGrpMemberByRefOfficeId = "/CenterGrpOfficeMbr/GetListCenterGrpMemberByRefOfficeId"
+  public static AddCenterGrpOfficeMember = environment.FoundationR3Url + "/CenterGrpOfficeMbr/AddCenterGrpOfficeMember";
+  public static GetListCenterGrpMemberByRefOfficeId = environment.FoundationR3Url + "/CenterGrpOfficeMbr/GetListCenterGrpMemberByRefOfficeId"
   public static DeleteCenterGroupOfficeMember = "/RefOffice/DeleteCenterGroupOfficeMember";
   public static DeleteCenterGrpOfficeMember = "/CenterGrpOfficeMbr/DeleteCenterGrpOfficeMember";
+
+  //CENTER GROUP
+  public static AddCenterGrp = environment.FoundationR3Url +"/CenterGrp/AddCenterGrp"; 
+  public static EditCenterGrp =environment.FoundationR3Url +"/CenterGrp/EditCenterGrp";
+  public static GetCenterGrpByCode= environment.FoundationR3Url +"/CenterGrp/GetCenterGrpByCode" ;
+  public static GetCenterGrpById = environment.FoundationR3Url + "/CenterGrp/GetCenterGrpById";
+
 
   //REF OFFICE AREA
   public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
   public static GetRefOfficeAreaPaging = "/RefOfficeArea/GetRefOfficeAreaPaging";
   public static GetRefArea = "/RefOfficeArea/GetRefArea";
   public static GetRefOfficeAreaByRefOfficeAreaId = "/RefOfficeArea/GetRefOfficeAreaByRefOfficeAreaId";
-  public static AddRefOfficeArea = "/RefOfficeArea/AddRefOfficeArea";
-  public static EditRefOfficeArea = "/RefOfficeArea/EditRefOfficeArea";
+  public static AddRefOfficeArea = environment.FoundationR3Url + "/RefOfficeArea/AddRefOfficeArea";
+  public static EditRefOfficeArea = environment.FoundationR3Url + "/RefOfficeArea/EditRefOfficeArea";
   public static DeleteRefOfficeArea = "/RefOfficeArea/DeleteRefOfficeArea";
   public static CheckDuplAreaCode = "/RefOfficeArea/CheckDuplAreaCode";
 
@@ -129,7 +136,7 @@ export class AdInsConstant {
   public static EditRefEmp = "/RefEmp/EditRefEmp";
   public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
   public static AddEmpBankAcc = "/EmpBankAcc/AddEmpBankAcc";
-  public static EditEmpBankAcc = "EmpBankAcc/EditEmpBankAcc";
+  public static EditEmpBankAcc = "/EmpBankAcc/EditEmpBankAcc";
   public static GetEmpBankAccByRefEmpId = "/EmpBankAcc/GetEmpBankAccByRefEmpId";
   public static AddRefEmpAndEmpBankAcc = "/RefEmp/AddRefEmpAndEmpBankAcc";
   public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
@@ -149,6 +156,7 @@ export class AdInsConstant {
   public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
   public static AddRefUser = "/UserManagement/AddRefUser";
   public static EditRefUser = "/UserManagement/EditRefUser";
+  public static EditRefUserForRefEmpR3 = "/RefUser/EditRefUserForRefEmp";
   public static ChangePassword = "/UserManagement/ChangePassword";
   public static GetRefUser = "/UserManagement/GetRefUser";
   public static GetUserByUsername = "/UserManagement/GetUserByUsername";
@@ -232,10 +240,12 @@ export class AdInsConstant {
   public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
   public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
   public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
+  public static GetRefMasterListKeyValueActiveByCode = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode"
   public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
   public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
   public static GetListActiveRefMaster = environment.FoundationR3Url +"/RefMaster/GetListKeyValueActiveByCode";
-  public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode"
+  public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
+ 
 
  
   //REF INDUSTRY TYPE
@@ -270,18 +280,21 @@ export class AdInsConstant {
 
   //HOLIDAY
   public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
+  public static GetListActiveHolidaySchemeH = environment.FoundationR3Url + "/HolidaySchm/GetListActiveHolidaySchemeH"
   public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
   public static AddHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmH";
-  public static AddHolidaySchmD = "/Holiday/AddHolidaySchmD";
-  public static AddHolidaySchmDUntilYear = "/Holiday/AddHolidaySchmDUntilYear";
+  public static AddHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmD";
+  public static AddHolidaySchmDUntilYear = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmDUntilYear";
   public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
   public static GetHolidaySchmHById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmHById";
+  public static GetHolidaySchmDById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmDById";
   public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
   public static EditHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmH";
+  public static EditHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmD";
   public static DeleteHolidaySchmH = "/HolidaySchm/DeleteHolidaySchmH";
-  public static DeleteHolidaySchmD = "/Holiday/DeleteHolidaySchmD";
+  public static DeleteHolidaySchmD = "/HolidaySchm/DeleteHolidaySchmD";
   public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
-  public static CopyHolidaySchm = "/Holiday/CopyHolidaySchm";
+  public static CopyHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/CopyHolidaySchmH";
 
   //USER SESSION LOG
   public static SelectRole = "/UserSessionLog/SelectRole";
@@ -316,12 +329,13 @@ export class AdInsConstant {
   public static EditAssetMaster = environment.FoundationR3Url + "/AssetMaster/EditAssetMaster";
   public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
   public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
-  public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueById";
+  public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueActiveById";
   public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
   public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
-  public static GetListAssetMasterByAssetSchmHId = "http://localhost:5000" + "/AssetMaster/GetListAssetMasterByAssetSchmHId"
+  public static GetListAssetMasterByAssetSchmHId = environment.FoundationR3Url + "/AssetMaster/GetListAssetMasterByAssetSchmHId";
+  public static EditListAssetSchmDByAssetMasterId = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmDByAssetMasterId";
+  
   //REF PROFESSION
-
   public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
   public static EditRefProfession = environment.FoundationR3Url + "/RefProfession/EditRefProfession";
   public static DeleteRefProfession = "/RefProfession/DeleteRefProfession";
@@ -335,7 +349,7 @@ export class AdInsConstant {
   public static DeleteObjectBySQL = "/Generic/DeleteObjectBySQL";
 
   //WORKHOUR
-  public static GetListOfWorkingHourSchm = "/WorkHour/GetListOfWorkingHourSchm";
+  public static GetListActiveWorkingSchmH = environment.FoundationR3Url + "/WorkingHourSchm/GetListActiveWorkingSchmH";
   public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
   public static AddWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/AddWorkingHourSchmH";
   public static AddListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/AddListWorkingHourSchmD";
@@ -393,25 +407,38 @@ export class AdInsConstant {
   public static DeleteAssetType = "/AssetType/DeleteAssetType"
 
   // PRODUCT
-  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
-  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
-  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
-  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
-  public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId"
+  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo";
+  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct";
+  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct";
+  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation";
+  public static AddProductOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProductOfficeMbrBatch";
+  public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId";
+  public static DeleteProductOfficeMbr = environment.FoundationR3Url + "/Product/DeleteProductOfficeMbr";
   public static GetListProdHVersionByProdId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdId";
+  public static GetListProdHVersionByProdHId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdHId";
   public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
   public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
-
-
+  
   //PRODUCT OFFERING
   public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo"
   public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering"
   public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering"
+  public static AddOrEditProdOfferingDetail = environment.FoundationR3Url + "/ProductOffering/AddOrEditProdOfferingDetail";
   public static GetListProdOfferingVersionByProdId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingVersionByProdId"
   public static GetListProdOfferingBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHId"
+  public static GetProdOfferingDetailInfo = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingDetailInfo";
 
+
+  public static GetListProdOfferingHVersionByProdOfferingHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingHVersionByProdOfferingHId"
+  public static GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode"
+  public static RequestOfferingDeactivation = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationProdOffering"
+  public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
+  
   // PRODUCT COMPONENT
   public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
+  public static GetProductOfferingComponent = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponent";
+  public static DeleteProdOfferingOfficeMbr = environment.FoundationR3Url + "/ProductOffering/DeleteProdOfferingOfficeMbr";
+  public static AddProdOfferingOfficeMbrBatch = environment.FoundationR3Url + "/ProductOffering/AddProdOfferingOfficeMbrBatch";
 
   //REF REASON
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
@@ -454,14 +481,15 @@ export class AdInsConstant {
   public static GetAssetSchmHById =   environment.FoundationR3Url + "/AssetSchmH/GetAssetSchmHById";
   public static AddAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/AddAssetSchmH";
   public static EditAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmH";
-  public static GetListAssetSchmDByAssetSchmHId = "http://localhost:5000" + "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
+  public static GetListAssetSchmDByAssetSchmHId = environment.FoundationR3Url +  "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
   public static EditAssetSchmHAndD = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmHAndD"
   public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
-  public static AddListAssetSchmD =  "http://localhost:5000"  + "/AssetSchmD/AddListAssetSchmD";
+  public static AddListAssetSchmD =  environment.FoundationR3Url  + "/AssetSchmD/AddListAssetSchmD";
   public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
+
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
-
+  
   // ASSET NEGATIVE
   public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
@@ -470,6 +498,31 @@ export class AdInsConstant {
   //VENDOR
   public static DeleteVendor ="/Vendor/DeleteVendor";
 
+  //VENDOR GROUP
+  public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
+  public static EditVendorGrp = environment.FoundationR3Url + "/VendorGrp/EditVendorGrp";
+  public static GetVendorGrpByVendorGrpCode = environment.FoundationR3Url + "/VendorGrp/GetVendorGrpByVendorGrpCode";
+  public static GetVendorGrpByVendorGrpId =environment.FoundationR3Url  + "/VendorGrp/GetVendorGrpByVendorGrpId";
+  public static GetVendorGrpForUpdateByVendorGrpCode =environment.FoundationR3Url  + "/VendorGrp/GetVendorGrpForUpdateByVendorGrpCode";
+  public static GetVendorGrpForUpdateByVendorGrpId = environment.FoundationR3Url + "VendorGrp/GetVendorGrpForUpdateByVendorGrpId";
+
+ //VENDOR GROUP MEMBER 
+  public static AddRangeVendorGrpMbr = environment.FoundationR3Url +"/VendorGrpMbr/AddRangeVendorGrpMbr";
+  public static DeleteRangeVendorGrpMbrByIds  = environment.FoundationR3Url + "/VendorGrpMbr/DeleteRangeVendorGrpMbrByIds"
+  public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId"
+  public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId"
+
+
+
+  //VENDOR SCHEME
+  public static AddVendorSchm = environment.FoundationR3Url + "/VendorSchm/AddVendorSchm";
+  public static EditVendorSchm = environment.FoundationR3Url + "/VendorSchm/EditVendorSchm";
+  public static DeleteVendorSchm = "/VendorSchm/DeleteVendorSchm";
+  public static GetVendorSchmByVendorSchmId = environment.FoundationR3Url + "/VendorSchm/GetVendorSchmByVendorSchmId";
+  public static AddVendorSchmMember = environment.FoundationR3Url + "/VendorSchmMbr/AddVendorSchmMember";
+  public static DeleteVendorSchmMember = "/VendorSchmMbr/DeleteVendorSchmMember"
+  public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
+  
   // // ASSET NEGATIVE
   // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   // public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
@@ -482,12 +535,23 @@ export class AdInsConstant {
   public static GetCustPersonalbyCustId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustId"
  
   // Customer
-  public static AddNewCust =   environment.FoundationR3Url + "/Cust/AddCust"
-  public static  GetCustByCustId =   environment.FoundationR3Url + "/Cust/GetCustByCustId"
-  
-  //REF COUNTRY
+  public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust"
+  public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId"
+  public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
 
-  public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry"
+  // NEGATIVE CUSTOMER
+  public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
+  public static EditNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/EditNegativeCust";
+  public static GetNegativeCustByNegativeCustId = environment.FoundationR3Url + "/NegativeCust/GetNegativeCustByNegativeCustId";
+  public static AddNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/AddNegativeCustChangeTrx";
+  public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
+  public static GetNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetNegativeCustChangeTrxByNegativeCustId";   
  
+ 
+  public static GetListNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetListNegativeCustChangeTrxByNegativeCustId";
+  //REF BEHAVIOUR
   
+  public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
+  public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
+   
 }

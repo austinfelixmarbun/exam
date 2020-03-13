@@ -13,17 +13,14 @@
                  translate>
                 <i class="ft-arrow-left"></i> Back
               </button>
-
               <button type="button" class="addButton" [routerLink]="['/Asset/Scheme/AddMember']" [queryParams]="{AssetSchmHId:AssetSchmHId}" translate>
                 <i class="ft-plus-circle"></i> Add
               </button>
-
             </div>
           </div>
         </div>
         <div class="card-body">
           <lib-ucviewgeneric [viewInput]="viewObj"></lib-ucviewgeneric>
-
           <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
         </div>
       </div>

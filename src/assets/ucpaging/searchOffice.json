@@ -170,7 +170,7 @@
                                 }
                             ],
                             "result" : {
-                                "path" : "/Office/Office-group-member",
+                                "path" : "/Office/add",
                                 "param" : [
                                     {
                                         "type" : "RefOfficeId",
@@ -194,7 +194,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Office/add",
+                    "path": "/Office/Add",
                     "param": [
                         {
                             "type": "RefOfficeId",

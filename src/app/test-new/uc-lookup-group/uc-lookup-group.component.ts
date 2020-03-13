@@ -31,6 +31,7 @@ export class UcLookupGroupComponent implements OnInit {
   title: any;
   isRequired: boolean;
   addCrit: Array<any>;
+  modal : any;
 
   constructor(private http: HttpClient, private modalService: NgbModal, private fb: FormBuilder){
 
@@ -74,10 +75,13 @@ export class UcLookupGroupComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content).result.then((result) => {
+    this.modal = this.modalService.open(content);
+    this.modal.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      this.modal.close();
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.modal.close();
     });
   }
 
@@ -88,6 +92,7 @@ export class UcLookupGroupComponent implements OnInit {
     this.lookupInput.nameSelect = event[this.genericJson.propertyName];
     this.lookupInput.idSelect = event[this.genericJson.propertyId];
     this.lookup.emit(event);
+    this.modal.close();
   }
   
   private getDismissReason(reason: any): string {
