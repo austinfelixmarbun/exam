@@ -20,21 +20,21 @@
         {
             "type" : "dropdown",
             "label" : "Customer Type",
-            "name" : "customer_Type",
+            "name" : "MR_CUST_TYPE_CODE",
             "id" : "customerType",
             "value" : "",
             "datatype" : "text",
-            "isSelectOne" : "false",
+            "isSelectOne" : false,
             "items" : [],
-            "isFromURL" : "true", 
-            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetRefMasterByMasterCode", 
+            "isFromURL" : true, 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", 
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "CUST_TYPE"
         },
         {
             "type": "dropdown",
-            "name": "is_Active",
+            "name": "A.is_Active",
             "id": "isActive",
             "value": "",
             "placeholder": "Placeholder",
@@ -79,7 +79,7 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT NEGATIVE_CUST_ID AS negativeCustId, CUST_NO AS custNo, CUST_NAME AS custName, MR_CUST_TYPE_CODE AS mrCustTypeCode, ID_NO AS idNo, B.DESCR AS negCustSource, C.DESCR AS negCustType, A.IS_ACTIVE AS isActive",
+        "select": "SELECT CUST_NO AS custNo, CUST_NAME AS custName, MR_CUST_TYPE_CODE AS mrCustTypeCode, ID_NO AS idNo, B.DESCR AS negCustSource, C.DESCR AS negCustType, A.IS_ACTIVE AS isActive, NEGATIVE_CUST_ID AS negativeCustId",
         "from": "FROM NEGATIVE_CUST AS A WITH(NOLOCK) INNER JOIN REF_MASTER AS B WITH(NOLOCK) ON A.MR_NEG_CUST_SOURCE_CODE = B.MASTER_CODE INNER JOIN REF_MASTER AS C WITH(NOLOCK) ON A.MR_NEG_CUST_TYPE_CODE = C.MASTER_CODE"
     },
     "headerList" : [ 
@@ -87,43 +87,43 @@
             "type" : "sort", 
             "position" : "left", 
             "label" : "Customer No",
-            "name" : "custNo" 
+            "name" : "CUST_NO" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Customer Name", 
-            "name" : "custName" 
+            "name" : "CUST_NAME" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Customer Type", 
-            "name" : "mrCustTypeCode" 
+            "name" : "MR_CUST_TYPE_CODE" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "ID No.", 
-            "name" : "idNo"
+            "name" : "ID_NO"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Negative Cause", 
-            "name" : "negCustSource"
+            "name" : "B.DESCR"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Negative Type", 
-            "name" : "negCustType"
+            "name" : "C.DESCR"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Active", 
-            "name" : "isActive"
+            "name" : "A.IS_ACTIVE"
         },
         {
             "type" : "label",
@@ -135,12 +135,20 @@
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "custNo" 
+            "property" : "custNo"
         },
         {
-            "type" : "text", 
+            "type" : "link", 
             "position" : "left", 
-            "property" : "custName" 
+            "property" : "custName",
+            "path": "/Customer/NegativeCustomer/View",
+            "target": "_blank",
+            "param": [
+                {
+                    "type" : "negativeCustId", 
+                    "property" : "negativeCustId" 
+                }
+            ]
         },
         {
             "type" : "text", 

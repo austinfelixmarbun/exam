@@ -16,68 +16,58 @@
           (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
           <div class="form-body">
             <div id="NegativeAssetSection">
-              <!-- <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel" for="AssetTypeId">Asset Type Name</label>
-                <div class="col-md-9">
-                  <select formControlName="AssetTypeId" class="form-control" (change)="assetTypeChange($event)"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.AssetTypeId.invalid }"
-                    [attr.disabled]="pageType == 'edit' ? true : null">
-                    <option *ngFor="let item of assetTypeList?.ReturnObject" [value]="item.AssetTypeId">
-                      {{item.AssetTypeName}}
-                    </option>
-                  </select>
-                  <show-errors [control]="AssetNegativeForm.controls.AssetTypeId" [submit]="enjiForm.submitted"></show-errors>
-                </div>
-              </div> -->
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="RefEconomicSectorId" translate>Full Asset Name</label>
-                <div class="col-md-9">
+                <div class="col-md-9" *ngIf="pageType == 'add'">
                   <lib-uclookupgeneric [lookupInput]="inputLookupObj" [parentForm]='AssetNegativeForm' [enjiForm]='enjiForm' [identifier]="'FullAssetName'"
                       (lookup)="getLookupAssetMasterResponse($event)"></lib-uclookupgeneric>
                 </div>
+                <div class="col-md-9" *ngIf="pageType == 'edit'" style="padding: 0;">
+                  <div class="col-md-9 adInsLabel">{{fullAssetName}}</div>
+                </div>
               </div>
-              <div class="form-group row adins-required">
+              <div class="form-group row {{serial1Mandatory ? 'adins-required' : ''}}">
                 <label class="col-md-3 adInsLabel" for="SerialNo1" translate>Serial No. 1</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="SerialNo1" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.SerialNo1.invalid }"
-                    [attr.disabled]="pageType == 'edit' ? true : null">
+                    [attr.disabled]="pageType == 'edit' || serial1Disabled ? true : null">
                   <show-errors [control]="AssetNegativeForm.controls.SerialNo1" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row {{serial2Mandatory ? 'adins-required' : ''}}">
                 <label class="col-md-3 adInsLabel" for="SerialNo2" translate>Serial No. 2</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="SerialNo2" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.SerialNo2.invalid }"
-                    [attr.disabled]="pageType == 'edit' ? true : null">
+                    [attr.disabled]="pageType == 'edit' || serial2Disabled ? true : null">
                   <show-errors [control]="AssetNegativeForm.controls.SerialNo2" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row {{serial3Mandatory ? 'adins-required' : ''}}">
                 <label class="col-md-3 adInsLabel" for="SerialNo3" translate>Serial No. 3</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="SerialNo3" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.SerialNo3.invalid }"
-                    [attr.disabled]="pageType == 'edit' ? true : null">
+                    [attr.disabled]="pageType == 'edit' || serial3Disabled ? true : null">
                   <show-errors [control]="AssetNegativeForm.controls.SerialNo3" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row {{serial4Mandatory ? 'adins-required' : ''}}">
                 <label class="col-md-3 adInsLabel" for="SerialNo4" translate>Serial No. 4</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="SerialNo4" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.SerialNo4.invalid }"
-                    [attr.disabled]="pageType == 'edit' ? true : null">
+                    [attr.disabled]="pageType == 'edit' || serial4Disabled ? true : null">
                   <show-errors [control]="AssetNegativeForm.controls.SerialNo4" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row {{serial5Mandatory ? 'adins-required' : ''}}">
                 <label class="col-md-3 adInsLabel" for="SerialNo5" translate>Serial No. 5</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="SerialNo5" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetNegativeForm.controls.SerialNo5.invalid }"
-                    [attr.disabled]="pageType == 'edit' ? true : null">
+                    [attr.disabled]="pageType == 'edit' || serial5Disabled ? true : null">
                   <show-errors [control]="AssetNegativeForm.controls.SerialNo5" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
@@ -110,9 +100,6 @@
             </div>
           </div>
           <div class="form-actions right">
-            <!-- <button *ngIf=" type == 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-              <i class="fa fa-arrow-circle-left"></i> Back
-            </button> -->
             <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>

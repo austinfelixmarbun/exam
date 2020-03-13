@@ -66,7 +66,6 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
 
     if (this.pageType == "edit") {
       this.assetSchmHObj = new AssetSchemeHObj();
-
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.AssetSchemeInfoForm.controls["AssetSchmCode"].disable();
 
