@@ -72,6 +72,10 @@ export const Full_ROUTES: Routes = [
     loadChildren: './test-new/testNew.module#TestNewModule'
   }, 
   {
+    path: 'product',
+    loadChildren: './product/product.module#ProductModule'
+  },
+  {
     path: 'Asset',
     loadChildren: './asset/asset.module#AssetModule'
   }, 
@@ -87,5 +91,4 @@ export const Full_ROUTES: Routes = [
     path: 'Error',
     loadChildren: './error-page/error-page.module#ErrorPageModule'
   }
-  
 ];

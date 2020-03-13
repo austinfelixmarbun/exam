@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { GeneralDataComponent } from "./general-data/general-data.component";
-import { OfficeMemberComponent } from "./office-member/office-member.component";
-import { ProductComponentComponent } from "./product-component/product-component.component";
+import { GeneralDataHOComponent } from "./general-data/general-data.component";
+import { OfficeMemberHOComponent } from "./office-member/office-member.component";
+import { ProductComponentHOComponent } from "./product-component/product-component.component";
 
 const routes: Routes = [
     // {
