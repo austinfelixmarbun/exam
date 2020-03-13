@@ -21,7 +21,7 @@ import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
 })
 export class AssetMasterAddEditChildComponent implements OnInit {
 
-  pageType: string = "add";
+  pageType: string;
   AssetMasterId: any;
   AssetTypeId: any;
   AssetTypeName: any;
@@ -83,48 +83,10 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       if (params["AssetMasterId"] != null) {
         this.AssetMasterId = params["AssetMasterId"];
       }
-      if (params["AssetTypeId"] != null) {
-        this.AssetTypeId = params["AssetTypeId"];
-      }
-      if (params["AssetTypeCode"] != null) {
-        this.AssetTypeCode = params["AssetTypeCode"];
-      }
-      if (params["AssetTypeName"] != null) {
-        this.AssetTypeName = params["AssetTypeName"];
-      }
-      if (params["HierarchyLvl"] != null) {
-        this.HierarchyLvl = params["HierarchyLvl"];
-      }
-      if (params["FullAssetCode"] != null) {
-        this.FullAssetCode = params["FullAssetCode"];
-      }
-      if (params["FullAssetName"] != null) {
-        this.FullAssetName = params["FullAssetName"];
-      }
     });
   }
 
   ngOnInit() {
-    var critObj = new CriteriaObj();
-    critObj.DataType = 'text';
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.propName = 'ASSET_TYPE_CODE';
-    critObj.value = this.AssetTypeCode;
-
-    this.listRequest = new ListRequestCriteriaObj();
-    this.listRequest.criteria = new Array();
-    this.listRequest.criteria.push(critObj);
-    this.http.post(this.getListAssetCategory, this.listRequest).subscribe(
-      response => {
-        this.resultAssetCategory = response['ReturnObject'];
-        this.AssetMasterChildForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
-        console.log();
-      },
-      (error) => {
-        console.log(error);
-      });
-
-
     if (this.pageType == "edit") {
       this.AssetMasterChildForm.controls["AssetCode"].disable();
       this.AssetMasterChildForm.controls["AssetName"].disable();
@@ -146,6 +108,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
             IsActive: this.resultData.IsActive,
             AssetTypeName: this.AssetTypeName
           });
+
           this.assetMasterObj = new AssetMasterObj();
           this.assetMasterObj.AssetMasterId = this.resultData.ParentId;
           this.http.post(this.getUrl, this.assetMasterObj).subscribe(
@@ -158,11 +121,72 @@ export class AssetMasterAddEditChildComponent implements OnInit {
             this.resultData.FullAssetCode = this.resultParentMaster.FullAssetCode
             this.resultData.FullAssetName = this.resultParentMaster.FullAssetName
             this.isFinal = this.resultData.IsFinal
+            this.AssetTypeId = this.resultData.AssetTypeId;
           },
-          error => {
-            console.log(error);
-          }
-        );
+            error => {
+              console.log(error);
+            }
+          );
+
+          this.assetTypeObj = new AssetTypeObj();
+          this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
+          this.http.post(this.getAssetType, this.assetTypeObj).subscribe(
+            response => {
+              this.resultAssetType = response;
+              this.AssetMasterChildForm.patchValue({
+                AssetTypeName: this.resultAssetType.AssetTypeName
+              });
+
+              if (this.resultAssetType.MaxHierarchyLevel == (this.AssetMasterChildForm.controls["HierarchyLvl"].value))
+              {
+                this.AssetMasterChildForm.patchValue({
+                    IsFinal: true
+                });
+              }
+              else {
+                this.AssetMasterChildForm.patchValue({
+                    IsFinal: false
+                });
+              }
+              this.isFinal = this.AssetMasterChildForm.controls["IsFinal"].value
+              var critObj = new CriteriaObj();
+              critObj.DataType = 'text';
+              critObj.restriction = AdInsConstant.RestrictionEq;
+              critObj.propName = 'ASSET_TYPE_CODE';
+              critObj.value = this.resultAssetType.AssetTypeCode;
+          
+              this.listRequest = new ListRequestCriteriaObj();
+              this.listRequest.criteria = new Array();
+              this.listRequest.criteria.push(critObj);
+              this.http.post(this.getListAssetCategory, this.listRequest).subscribe(
+                response => {
+                  this.resultAssetCategory = response['ReturnObject'];
+                  this.AssetMasterChildForm.patchValue({ AssetCategoryId: this.resultData.AssetCategoryId });
+                  console.log();
+                },
+                (error) => {
+                  console.log(error);
+                });
+            });
+
+            this.assetSchmListDObj = new AssetSchmListObj();
+            this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
+            this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
+            this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
+              response => {
+                this.listAssetScheme = response['ReturnObject'];
+                console.log("ddd");
+                console.log(this.listAssetScheme);
+      
+                for (let i = 0; i < this.listAssetScheme.length; i++) {
+                  if(this.listAssetScheme[i].AssetSchmHIdFromD != null)
+                  {
+                    this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
+                  }
+                  console.log("ccc");
+                  console.log(this.listSelectedId);
+                }
+              });
         },
         error => {
           console.log(error);
@@ -170,59 +194,82 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       );
     }
 
-    if (this.pageType == "add") {
-      this.AssetMasterChildForm.patchValue({
-        AssetTypeName: this.AssetTypeName,
-        HierarchyLvl: +this.HierarchyLvl + 1,
-        FullAssetCode: this.FullAssetCode,
-        FullAssetName: this.FullAssetName,
-      });
-
-      this.assetTypeObj = new AssetTypeObj();
-      this.assetTypeObj.AssetTypeId = this.AssetTypeId;
-      this.http.post(this.getAssetType, this.assetTypeObj).subscribe(
+    if (this.pageType == "add"){
+      this.assetMasterObj = new AssetMasterObj();
+      this.assetMasterObj.AssetMasterId = this.AssetMasterId;
+      this.http.post(this.getUrl, this.assetMasterObj).subscribe(
         response => {
-          this.resultAssetType = response;
-          if (this.resultAssetType.MaxHierarchyLevel == (+this.HierarchyLvl + 1))
-          {
-            this.AssetMasterChildForm.patchValue({
-                IsFinal: true
-            });
-          }
-          else {
-            this.AssetMasterChildForm.patchValue({
-                IsFinal: false
-            });
-          }
+          this.resultData = response;
+          this.AssetMasterChildForm.patchValue({
+            AssetTypeId: this.resultData.AssetTypeId,
+            HierarchyLvl: +this.resultData.HierarchyLvl + 1,
+            FullAssetCode: this.resultData.FullAssetCode,
+            FullAssetName: this.resultData.FullAssetName,
+            ParentId: this.resultData.ParentId,
+            IsFinal: this.resultData.IsFinal,
+            IsActive: this.resultData.IsActive
+          });
 
-          if (this.resultAssetType.MaxHierarchyLevel == this.HierarchyLvl )
-          {
-              this.toastr.errorMessage(["This hierarchy reach Max Level"]);
-              this.router.navigate(["/Asset/AssetMaster/Paging"]);
-          }
+          this.assetTypeObj = new AssetTypeObj();
+          this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
+          this.http.post(this.getAssetType, this.assetTypeObj).subscribe(
+            response => {
+              this.resultAssetType = response;
+              this.AssetMasterChildForm.patchValue({
+                AssetTypeName: this.resultAssetType.AssetTypeName
+              });
 
-          this.isFinal = this.AssetMasterChildForm.controls["IsFinal"].value
-        });
+              if (this.resultAssetType.MaxHierarchyLevel == (this.AssetMasterChildForm.controls["HierarchyLvl"].value))
+              {
+                this.AssetMasterChildForm.patchValue({
+                    IsFinal: true
+                });
+              }
+              else {
+                this.AssetMasterChildForm.patchValue({
+                    IsFinal: false
+                });
+              }
+              this.isFinal = this.AssetMasterChildForm.controls["IsFinal"].value
+              var critObj = new CriteriaObj();
+              critObj.DataType = 'text';
+              critObj.restriction = AdInsConstant.RestrictionEq;
+              critObj.propName = 'ASSET_TYPE_CODE';
+              critObj.value = this.resultAssetType.AssetTypeCode;
+          
+              this.listRequest = new ListRequestCriteriaObj();
+              this.listRequest.criteria = new Array();
+              this.listRequest.criteria.push(critObj);
+              this.http.post(this.getListAssetCategory, this.listRequest).subscribe(
+                response => {
+                  this.resultAssetCategory = response['ReturnObject'];
+                  this.AssetMasterChildForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
+                  console.log();
+                },
+                (error) => {
+                  console.log(error);
+                });
+            });
+
+            this.assetSchmListDObj = new AssetSchmListObj();
+            this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
+            this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
+            this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
+              response => {
+                this.listAssetScheme = response['ReturnObject'];
+                for (let i = 0; i < this.listAssetScheme.length; i++) {
+                  if(this.listAssetScheme[i].AssetSchmHIdFromD != null)
+                  {
+                    this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
+                  }
+                }
+              });
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
-    
-      this.assetSchmListDObj = new AssetSchmListObj();
-      this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
-      this.assetSchmListDObj.AssetTypeId = this.AssetTypeId;
-      this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
-        response => {
-          this.listAssetScheme = response['ReturnObject'];
-          console.log("ddd");
-          console.log(this.listAssetScheme);
-
-          for (let i = 0; i < this.listAssetScheme.length; i++) {
-            if(this.listAssetScheme[i].AssetSchmHId != null)
-            {
-              this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHId);
-            }
-            console.log("ccc");
-            console.log(this.listSelectedId);
-          }
-        });
   }
 
   SelectAll(condition) {
@@ -230,53 +277,35 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     console.log(condition);
     if (condition) {
       for (let i = 0; i < this.listAssetScheme.length; i++) {
-        if (this.listSelectedId.indexOf(this.listAssetScheme[i].AssetSchmHId) < 0) {
-          this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHId);
+        if (this.listSelectedId.indexOf(this.listAssetScheme[i].AssetSchmHIdFromD) < 0) {
+          this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromH);
         }
       }
 
     } else {
       for (let i = 0; i < this.listAssetScheme.length; i++) {
-        let index = this.listSelectedId.indexOf(this.listAssetScheme[i].AssetSchmHId);
-        if (index >= -1) {
+        let index = this.listSelectedId.indexOf(this.listAssetScheme[i].AssetSchmHIdFromD);
+        if (index > -1) {
           this.listSelectedId.splice(index, 1);
         }
         console.log(this.listAssetScheme[i]);
       }
     }
-    console.log(this.checkboxAll);
-    console.log(this.listSelectedId);
   }
 
-  Checked(assetSchmHId: any, isChecked: any): void {
+  Checked(AssetSchmHIdFromH: any, isChecked: any): void {
     if (isChecked) {
-      this.listSelectedId.push(assetSchmHId);
+      this.listSelectedId.push(AssetSchmHIdFromH);
     } else {
-      let index = this.listSelectedId.indexOf(assetSchmHId)
+      let index = this.listSelectedId.indexOf(AssetSchmHIdFromH)
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
-    // console.log("bbbb");
-    // console.log(assetSchmHId);
-    // for (let i = 0; i < this.listAssetScheme.length; i++) {
-    //   if (isChecked) {
-    //     this.listSelectedId.push(assetSchmHId);
-    //     this.listAssetScheme[i].assetSchmHId = this.AssetMasterId;
-    //   } else {
-    //     const index = this.listSelectedId.indexOf(assetMasterId)
-    //     console.log(index);
-    //     if (index >= -1) { 
-    //       this.listSelectedId.splice(index, 1);
-    //       this.listAssetScheme[i].AssetMasterId = null
-    //     }
-    //   }
-    //   console.log('Sel', this.listSelectedId);
-    // }
   }
 
   SaveForm() {
     if (this.pageType == "add") {
       this.assetMasterObj = new AssetMasterObj();
-      this.assetMasterObj.AssetTypeId = this.AssetTypeId;
+      this.assetMasterObj.AssetTypeId = this.AssetMasterChildForm.controls["AssetTypeId"].value;
       this.assetMasterObj.AssetCode = this.AssetMasterChildForm.controls["AssetCode"].value;
       this.assetMasterObj.AssetName = this.AssetMasterChildForm.controls["AssetName"].value;
       this.assetMasterObj.HierarchyLvl = this.AssetMasterChildForm.controls["HierarchyLvl"].value;
@@ -295,14 +324,16 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         this.assetMasterObj.AssetCategoryId = '';
       }
 
+      if(this.assetMasterObj.IsFinal == true)
+      {
       this.listAssetSchmDObj = new ListAssetSchmDObj();
       this.listAssetSchmDObj.AssetMasterId = this.AssetMasterId;
       this.listAssetSchmDObj.AssetSchmHId = [];
       for (var i = 0; i < this.listAssetScheme.length; i++) {
         if(this.listSelectedId.length != 0){
           for (let j = 0; j < this.listSelectedId.length; j++) {
-            if(this.listAssetScheme[i].AssetSchmHId == this.listSelectedId[j]){
-              this.listAssetSchmDObj.AssetSchmHId.push(this.listAssetScheme[i].AssetSchmHId);
+            if(this.listAssetScheme[i].AssetSchmHIdFromH == this.listSelectedId[j]){
+              this.listAssetSchmDObj.AssetSchmHId.push(this.listAssetScheme[i].AssetSchmHIdFromH);
               break;
             }else {
               this.listAssetScheme[i].AssetMasterId = null;
@@ -312,10 +343,12 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           this.listAssetScheme[i].AssetMasterId = null;
         }
       }
-      this.http.post(this.editListAssetSchmD, this.listAssetSchmDObj).subscribe(
+
+        this.http.post(this.editListAssetSchmD, this.listAssetSchmDObj).subscribe(
         response => {
           console.log(response['ReturnObject']);
         });
+      }
 
       this.http.post(this.addUrl, this.assetMasterObj).subscribe(
         response => {
@@ -350,29 +383,31 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         this.assetMasterObj.AssetCategoryId = '';
       }
 
-      this.listAssetSchmDObj = new ListAssetSchmDObj();
-      this.listAssetSchmDObj.AssetMasterId = this.AssetMasterId;
-      this.listAssetSchmDObj.AssetSchmHId = [];
-      for (var i = 0; i < this.listAssetScheme.length; i++) {
-        if(this.listSelectedId.length != 0){
-          for (let j = 0; j < this.listSelectedId.length; j++) {
-            if(this.listAssetScheme[i].AssetSchmHId == this.listSelectedId[j]){
-              this.listAssetSchmDObj.AssetSchmHId.push(this.listAssetScheme[i].AssetSchmHId);
-              break;
-            }else {
-              this.listAssetScheme[i].AssetMasterId = null;
+      if(this.assetMasterObj.IsFinal == true){
+        this.listAssetSchmDObj = new ListAssetSchmDObj();
+        this.listAssetSchmDObj.AssetMasterId = this.AssetMasterId;
+        this.listAssetSchmDObj.AssetSchmHId = [];
+        for (var i = 0; i < this.listAssetScheme.length; i++) {
+          if(this.listSelectedId.length != 0){
+            for (let j = 0; j < this.listSelectedId.length; j++) {
+              if(this.listAssetScheme[i].AssetSchmHIdFromH == this.listSelectedId[j]){
+                this.listAssetSchmDObj.AssetSchmHId.push(this.listAssetScheme[i].AssetSchmHIdFromH);
+                break;
+              }else {
+                this.listAssetScheme[i].AssetMasterId = null;
+              }
             }
+          }else{
+            this.listAssetScheme[i].AssetMasterId = null;
           }
-        }else{
-          this.listAssetScheme[i].AssetMasterId = null;
         }
+        console.log("aaaaa");
+        console.log(this.listAssetSchmDObj);
+        this.http.post(this.editListAssetSchmD, this.listAssetSchmDObj).subscribe(
+          response => {
+            console.log(response['ReturnObject']);
+          });
       }
-      console.log("aaaaa");
-      console.log(this.listAssetSchmDObj);
-      this.http.post(this.editListAssetSchmD, this.listAssetSchmDObj).subscribe(
-        response => {
-          console.log(response['ReturnObject']);
-        });
 
       this.http.post(this.editUrl, this.assetMasterObj).subscribe(
         response => {
