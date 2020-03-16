@@ -18,7 +18,7 @@ import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
-import { UcviewgenericModule } from '@adins/ucviewgeneric';
+import { UcviewgenericModule, UcviewgenericComponent } from '@adins/ucviewgeneric';
 import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmember.component';
 import { VendorSchemeAddEditComponent } from './vendor-scheme/vendor-scheme-add-edit/vendor-scheme-add-edit.component';
 import { VendorSchemePagingComponent } from './vendor-scheme/vendor-scheme-paging/vendor-scheme-paging.component';
@@ -30,6 +30,7 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { AddressComponent } from './component/address/address.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
+import { VendorService } from './vendor.service';
 
 
 @NgModule({
@@ -69,6 +70,10 @@ import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registratio
     VendorHoPagingComponent,
     AddressComponent,
     VendorHoRegistrationComponent
+  ],
+  entryComponents : [UcviewgenericComponent],
+  providers: [
+    VendorService
   ]
 })
 export class VendorModule { }
