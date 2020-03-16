@@ -3,6 +3,9 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 
 @Component({
   selector: 'app-customer-company-duplicate-check',
@@ -29,6 +32,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   tempMrCompanyTypeCode: any;
   tempCustModel: any;
   tempMrIdTypeCode : any;
+  addCustObj : any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.urlGetDescByMasterCode =AdInsConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
@@ -41,12 +45,6 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
       if (params["MrCompanyTypeCode"] != null) {
         this.MrCompanyTypeCode = params["MrCompanyTypeCode"];
       }  
-      if (params["MrIdTypeCode"] != null) {
-        this.MrIdTypeCode = params["MrIdTypeCode"];
-      }     
-      if (params["IdNo"] != null) {
-        this.IdNo = params["IdNo"];
-      }
       if (params["TaxIdNo"] != null) {
         this.TaxIdNo = params["TaxIdNo"];
       }
@@ -74,15 +72,34 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
       }
     );
 
-    var refMasterObj3 = {
-      MasterCode: this.MrIdTypeCode,
-      RowVersion: ""
-    }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj3).subscribe(
-      (response) => {
-        this.tempMrIdTypeCode = response;
-      }
-    );
+ 
   }
+  SaveValue() { 
+  
+    console.log("awdawdawdawdaw");
+     this.addCustObj = new AddCustObj();
+     this.addCustObj.custObj = new CustObj();
+     this.addCustObj.CustCompanyObj = new CustCompanyObj();
+     this.addCustObj.custObj.CustName = this.CustName;
+     this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
+     this.addCustObj.custObj.MrCustTypeCode = "Company";
+     this.addCustObj.custObj.MrCustModelCode = this.CustModel;
+     this.addCustObj.custObj.MrIdTypeCode = "NPWP";
+     this.addCustObj.custObj.IdNo = this.TaxIdNo;
+     this.addCustObj.custObj.TaxIdNo = this.TaxIdNo;
+     
 
+    // this.http.post(this.addCustUrl, this.addCustObj).subscribe(
+    //   (response) => {
+    //     this.resultData = response;
+    //     this.IdCust = this.resultData.CustObj.CustId;
+    //     this.IdCustPersonal = this.resultData.CustPersonalObj.CustPersonalId;
+    //     this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.IdCust } });
+    //   },
+
+    //   error => {
+    //     console.log(error);
+    //   }
+    // );
+  }
 }

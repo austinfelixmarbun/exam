@@ -567,5 +567,6 @@ export class AdInsConstant {
    
   //ref Country 
   public static GetListRefCountry = environment.FoundationR3Url +"/RefCountry/GetListRefCountry";
-  public static GetRefCountryByCountryCode =  environment.FoundationR3Url +"/RefCountry/GetRefCountryForUpdateByCountryCode"
-}
+  
+  public static GetRefCountryByCountryCode = environment.FoundationR3Url + "/RefCountry/GetRefCountryByCountryCode"
+ }

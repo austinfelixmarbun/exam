@@ -23,6 +23,7 @@ import { CustomerPersonalDetailComponent } from './customer-personal/customer-pe
 import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
 import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
+import { CustomerContactPersonComponent } from './customer-personal/customer-contact-person/customer-contact-person.component';
 @NgModule({
   exports: [ 
   ],
@@ -53,7 +54,8 @@ import { NegativeCustomerViewComponent } from './negative-customer/negative-cust
     CustomerPersonalDetailComponent,
     NegativeCustomerComponent,
     NegativeCustomerDetailComponent,
-    NegativeCustomerViewComponent
+    NegativeCustomerViewComponent,
+    CustomerContactPersonComponent
   ]
 })
 export class CustomerModule { 

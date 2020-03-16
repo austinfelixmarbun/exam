@@ -14,20 +14,16 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   CustomerCompanyForm = this.fb.group({
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
-    MrCompanyTypeCode: ['', [Validators.required]],
-    MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
-    IdNo: ['', [Validators.required]],
+    MrCompanyTypeCode: ['', [Validators.required]],  
     TaxIdNo: ['', [Validators.required]],
   });
   getUrl: any;
   tempCustModel: any;
-  tempCompanyTypeCode: any;
-  tempIdType: any;
+  tempCompanyTypeCode: any; 
   CustModel: any;
   MrCompanyTypeCode: any;
   MrIdTypeCode: any;
-  CustName: any;
-  IdNo: any;
+  CustName: any; 
   TaxIdNo: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
@@ -36,21 +32,11 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    var refMasterObj = {
-      RefMasterTypeCode: "ID_TYPE",
-      RowVersion: ""
-    }
-    this.http.post(this.getUrl, refMasterObj).subscribe(
-      (response) => {
-        this.tempIdType = response["ReturnObject"];
-        this.CustomerCompanyForm.patchValue({
-          MrIdTypeCode: this.tempIdType[0].Key
-        });
-      }
-    );
+     
 
     var refMasterObj1 = {
       RefMasterTypeCode: "CUST_MODEL",
+      ReserveField1: "COMPANY",
       RowVersion: ""
     }
     this.http.post(this.getUrl, refMasterObj1).subscribe(
@@ -77,14 +63,13 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     );
   }
   SaveValue() {
-    this.CustName = this.CustomerCompanyForm.controls["CustName"].value;
-    this.IdNo = this.CustomerCompanyForm.controls["IdNo"].value;
+    this.CustName = this.CustomerCompanyForm.controls["CustName"].value; 
     this.TaxIdNo = this.CustomerCompanyForm.controls["TaxIdNo"].value;
     this.CustModel = this.CustomerCompanyForm.controls["CustModel"].value;
     this.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
-    this.MrIdTypeCode = this.CustomerCompanyForm.controls["MrIdTypeCode"].value;
-    
-    this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, } });
+   
+
+    this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, } });
 
   }
 }

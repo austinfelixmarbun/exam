@@ -1,13 +1,4 @@
-<div class="ucSearch-Button-Right">
-  <span class="mr-1">
-    <button type="submit" class="addButton" (click)=SaveValue() translate>
-      <i class="fa fa-check-square-o"></i> Save
-    </button>
-    <button type="button" class="backButton" [routerLink]="['../MainInfo']" translate>
-      Cancel
-    </button>
-  </span>
-</div>
+ 
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
@@ -15,7 +6,7 @@
         <div class="addEdit">
           <form class="form form-horizontal">
             <div class="form-body">
-              <h4 class="form-section card-title" translate> Main Info
+              <h4 class="form-section card-title" translate>Customer Personal
               </h4>
             </div>
           </form>
@@ -30,13 +21,13 @@
                 </div>
                 <label class="col-md-2  adInsLabel" translate>Gender </label>
                 <div class="col-md-4">
-                  <label>{{this.tempGender.Descr}}</label>
+                  <label>{{this.tempGender?.Descr}}</label>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-2 adInsLabel" translate>Cust Model </label>
                 <div class="col-md-4">
-                  <label>{{this.tempCustModel.Descr}}</label>
+                  <label>{{this.tempCustModel?.Descr}}</label>
                 </div>
                 <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
                 <div class="col-md-4">
@@ -46,7 +37,7 @@
               <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>ID Type </label>
                 <div class="col-md-4">
-                  <label>{{this.tempMrIdTypeCode.Descr}}</label>
+                  <label>{{this.tempMrIdTypeCode?.Descr}}</label>
                 </div>
                 <label class="col-md-2 adInsLabel" translate>Birth Place/Date </label>
                 <div class="col-md-4">
@@ -90,9 +81,7 @@
                 </div>
               </div>
             </div>
-          </form>
-        </div>
-        <!-- Match / Similar Data -->
+             <!-- Match / Similar Data -->
         <form class="form form-horizontal">
           <div class="form-body">
             <h4 class="form-section card-title" translate>
@@ -102,7 +91,7 @@
         </form>
         <div class="d-flex justify-content-end ">
           <span class="mr-1 d-flex align-content-center ">
-            <button type="button" class="addButton" translate>
+            <button type="button" class="addButton"(click)=SaveValue() translate>
               New
             </button>
             <button type="button" class="addButton" [routerLink]="['../../Configuration/Paging']" translate>
@@ -110,6 +99,9 @@
             </button>
           </span>
         </div>
+          </form>
+        </div>
+       
         <table class="table table-responsive-md text-center table-hover">
           <thead>
             <tr class="table-header">

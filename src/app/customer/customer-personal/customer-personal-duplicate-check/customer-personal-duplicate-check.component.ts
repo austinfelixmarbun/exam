@@ -136,6 +136,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   }
 
   SaveValue() {
+
     console.log("awdawdawdawdaw");
     this.addCustObj = new AddCustObj();
     this.addCustObj.custObj = new CustObj();

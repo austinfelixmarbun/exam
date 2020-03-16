@@ -1,6 +1,6 @@
 export class CustObj{
     CustId : any;
- 
+    CustNo :any;
     CustName : any;
     MrCustTypeCode :any;
     MrCustModelCode: any;
