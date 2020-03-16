@@ -38,5 +38,4 @@ export class AssetAccessoryPagingComponent implements OnInit {
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
-
 }
