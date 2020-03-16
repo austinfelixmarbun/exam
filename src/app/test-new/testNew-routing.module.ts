@@ -44,6 +44,10 @@ const routes: Routes = [
         data: {
           title: 'Dummy 4'
         }
+      },
+      {
+        path: 'test-provider',
+        loadChildren: './test-provider/testProvider.module#TestProviderModule'
       }
     ]
   }
