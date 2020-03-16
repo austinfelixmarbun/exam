@@ -13,7 +13,7 @@ import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
 import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
 import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
-import { BankInfoComponent } from './component/bank-info/bank-info.component';
+// import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
@@ -28,6 +28,7 @@ import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-
 import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 import { VendorBranchAddEditContactPersonComponent } from './vendor-branch/vendor-branch-add-edit-contact-person/vendor-branch-add-edit-contact-person.component';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { VendorBranchAddEditContactPersonComponent } from './vendor-branch/vendo
     UcgridfooterModule,
     UcpagingModule,
     UcSubsectionModule,
+    UclookupgenericModule,
     ReactiveFormsModule,
     TreeViewModule,
     UcviewgenericModule
@@ -50,7 +52,7 @@ import { VendorBranchAddEditContactPersonComponent } from './vendor-branch/vendo
     VendorComponent,
     VendorHoldingPagingComponent,
     VendorHoldingAddEditComponent,
-    BankInfoComponent,
+    // BankInfoComponent,
     VendorGroupComponent,
     VendorGroupPagingComponent,
     VendorGroupViewComponent,
