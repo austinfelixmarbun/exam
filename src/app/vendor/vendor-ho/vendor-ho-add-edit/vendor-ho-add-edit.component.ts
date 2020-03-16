@@ -33,6 +33,7 @@ export class VendorHoAddEditComponent implements OnInit {
   mode: string = "add";
   vendorHoObj: any;
   VendorId: any;
+  ButtonLbl: string = "Continue";
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -49,8 +50,8 @@ export class VendorHoAddEditComponent implements OnInit {
     MrVendorTypeCode: ['', Validators.required],
     RegistrationNo: ['', Validators.required],
     LicenseNo: ['', Validators.required],
-    MrIdTypeCode: ['', Validators.required],
-    IdNo: ['', Validators.required],
+    MrIdTypeCode: [''],
+    IdNo: [''],
     MobilePhnNo1: [''],
     MobilePhnNo2: [''],
     Email: ['', Validators.required],
@@ -88,7 +89,7 @@ export class VendorHoAddEditComponent implements OnInit {
       RefMasterTypeCode: "VENDOR_CATEGORY",
       ReserveField1: "HO"
     }
-    this.http.post("http://r3app-server/FOUNDATION_R3/RefMaster/GetListActiveRefMaster", refMasterCategoryObj).subscribe(
+    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
       (response) => {
         this.itemCategoryType = response["ReturnObject"];
         this.VendorForm.patchValue({
@@ -154,7 +155,9 @@ export class VendorHoAddEditComponent implements OnInit {
     this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
-
+    if(this.MrVendorCategoryCode != "SUPPLIER_HO"){
+      this.inputLookupParentObj.isRequired = false;
+    }
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.propName = 'RM.RESERVE_FIELD_2';
@@ -172,13 +175,13 @@ export class VendorHoAddEditComponent implements OnInit {
     this.VendorForm.controls.Province.disable();
 
     if (this.mode == "edit") {
+      this.ButtonLbl = "Submit";
       var vendorObj = new VendorObj();
-      vendorObj.VendorId = this.VendorId;
+      vendorObj.VendorId = this.VendorId; 
       this.VendorForm.controls.VendorCode.disable();
       this.http.post(AdInsConstant.GetVendorHOAndVendorAddr, vendorObj).subscribe(
         (response) => {
           this.result = response;
-          console.log(this.result)
           this.VendorForm.patchValue({
             MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
             VendorCode: this.result.VendorObj.VendorCode,
@@ -215,9 +218,8 @@ export class VendorHoAddEditComponent implements OnInit {
           var Parent = new VendorObj();
           Parent.VendorId = this.result.VendorObj.VendorParentId;
           if (this.result.VendorObj.VendorParentId == null) {
-            this.inputLookupZipcodeObj.nameSelect = "";
-          }
-          else {
+            this.inputLookupParentObj.nameSelect = "";
+          } else {
             this.http.post(AdInsConstant.GetVendorByVendorId, Parent).subscribe(
               (response) => {
                 this.inputLookupParentObj.nameSelect = response["VendorName"];
@@ -257,13 +259,13 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   checkHOType() {
-    if (this.VendorForm.controls.MrVendorTypeCode.value != 'P') {
+    if (this.VendorForm.controls.MrVendorTypeCode.value == 'C') {
       this.VendorForm.controls.MrIdTypeCode.clearValidators();
       this.VendorForm.controls.IdNo.clearValidators();
       this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
       this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
       this.updateValueAndValidityForm();
-    } else {
+    } else if (this.VendorForm.controls.MrVendorTypeCode.value == 'P') {
       this.VendorForm.controls.RegistrationNo.clearValidators();
       this.VendorForm.controls.LicenseNo.clearValidators();
       this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
@@ -275,7 +277,7 @@ export class VendorHoAddEditComponent implements OnInit {
   SaveForm() {
     this.vendorHoObj = new VendorHoObj();
     var vendorObj = {
-      MrVendorCategoryCode: this.MrVendorCategoryCode,
+      MrVendorCategoryCode: "",
       VendorCode: this.VendorForm.controls.VendorCode.value,
       VendorName: this.VendorForm.controls.VendorName.value,
       MrVendorTypeCode: this.VendorForm.controls.MrVendorTypeCode.value,
@@ -317,6 +319,7 @@ export class VendorHoAddEditComponent implements OnInit {
       this.vendorHoObj.VendorObj = vendorObj;
       this.vendorHoObj.VendorAddrObj = vendorAddrObj;
       
+      this.vendorHoObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
       this.vendorHoObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
       this.vendorHoObj.VendorObj.VendorId = this.VendorId;
       this.vendorHoObj.VendorAddrObj.VendorAddrId = this.result.VendorAddrObj.VendorAddrId;
@@ -335,11 +338,12 @@ export class VendorHoAddEditComponent implements OnInit {
     else {
       this.vendorHoObj.VendorObj = vendorObj;
       this.vendorHoObj.VendorAddrObj = vendorAddrObj;
+      this.vendorHoObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
       this.http.post(AdInsConstant.AddVendorHO, this.vendorHoObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Vendor/HO/Paging');
+          this.router.navigate(['/Vendor/HO/Registration'],{queryParams :{"VendorId" : response['VendorObj'].VendorId}});
         },
         (error) => {
           console.log(error);
