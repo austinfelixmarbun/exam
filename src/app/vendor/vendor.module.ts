@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
@@ -26,12 +26,15 @@ import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-me
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
 import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
-import { VendorService } from './vendor.service';
-import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { ContactPersonListComponent } from './component/contact-person-list/contact-person-list.component';
 import { ContactPersonAddEditComponent } from './component/contact-person-add-edit/contact-person-add-edit.component';
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { AddressComponent } from './component/address/address.component';
+import { ArchwizardModule } from 'angular-archwizard';
+import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
+import { VendorService } from './vendor.service';
 
 
 @NgModule({
@@ -50,7 +53,9 @@ import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-
     ReactiveFormsModule,
     TreeViewModule,
     UcviewgenericModule,
-    UclookupgenericModule
+    UclookupgenericModule,
+    NgbDropdownModule,
+    ArchwizardModule
   ],
   declarations: [
     VendorComponent,
@@ -71,7 +76,9 @@ import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-
     VendorHoPagingComponent,
     VendorBranchAddEditComponent,
     ContactPersonListComponent,
-    ContactPersonAddEditComponent
+    ContactPersonAddEditComponent,
+    AddressComponent,
+    VendorHoRegistrationComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

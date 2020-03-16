@@ -13,9 +13,11 @@ import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
 import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmember.component';
-import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { ContactPersonAddEditComponent } from './component/contact-person-add-edit/contact-person-add-edit.component';
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
+import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
+import { BankInfoComponent } from './component/bank-info/bank-info.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -126,10 +128,17 @@ const routes: Routes = [
         },
       },
       {
-        path: 'HO/Member',
+        path: 'HO/Paging',
         component: VendorHoPagingComponent,
         data: {
-          title: 'Vendor HO Member'
+          title: 'Vendor HO Paging'
+        },
+      },
+      {
+        path: 'HO/Registration',
+        component: VendorHoRegistrationComponent,
+        data: {
+          title: 'Vendor HO Registration'
         },
       },
       {
@@ -138,7 +147,7 @@ const routes: Routes = [
         data: {
           title: 'Vendor HO Member'
         },
-      },
+      }
     ]
 
   }

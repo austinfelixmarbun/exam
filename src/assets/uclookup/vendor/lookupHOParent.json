@@ -1,0 +1,74 @@
+{
+    "title": "Supplier Holding",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "V.VENDOR_CODE",
+            "id": "VendorCodeId",
+            "value": "",
+            "label": "VENDOR CODE",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "V.VENDOR_NAME",
+            "id": "VendorNameId",
+            "value": "",
+            "label": "VENDOR NAME",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT V.VENDOR_CODE AS VendorCode, V.VENDOR_NAME AS VendorName, V.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, V.VENDOR_ID AS VendorId, RM.RESERVE_FIELD_2 AS ReserveField2, RM.DESCR AS Descr",
+        "from": "FROM dbo.VENDOR V LEFT JOIN dbo.REF_MASTER RM ON V.MR_VENDOR_CATEGORY_CODE = RM.MASTER_CODE"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "VENDOR CODE",
+            "name": "V.VENDOR_CODE "
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "VENDOR NAME",
+            "name": "V.VENDOR_NAME"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "VendorCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "VendorName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "path": "Vendor/HO/Detail",
+                    "param": [
+                        {
+                            "type": "VendorId",
+                            "property": "VendorId"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "propertyId": "VendorId",
+    "propertyName": "VendorName"  
+}
