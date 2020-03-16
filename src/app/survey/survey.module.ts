@@ -10,6 +10,7 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { SurveyRoutingModule } from './survey-routing.module';
 import { SurveyOrderComponent } from './survey-order/survey-order.component';
+import { SurveyOrderTaskComponent } from './survey-order-task/survey-order-task.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SurveyOrderComponent } from './survey-order/survey-order.component';
     UcviewgenericModule
   ],
   declarations: [
-    SurveyOrderComponent
+    SurveyOrderComponent,
+    SurveyOrderTaskComponent
   ]
 })
 export class SurveyModule { }
