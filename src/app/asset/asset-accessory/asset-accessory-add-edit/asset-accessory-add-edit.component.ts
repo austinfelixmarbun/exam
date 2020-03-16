@@ -66,7 +66,6 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     }
   }
   SaveForm() {
-    console.log("awd");
     if (this.pageType == "add") {
       this.acObj = new AssetAccessoryObj();
       this.acObj.AssetAccessoryCode = this.AssetAccessoryForm.controls["AssetAccessoryCode"].value;

@@ -220,28 +220,8 @@
                       "property": "AssetMasterId"
                     },
                     {
-                      "type": "AssetTypeId",
-                      "property": "AssetTypeId"
-                    },
-                    {
-                      "type": "AssetTypeName",
-                      "property": "AssetTypeName"
-                    },
-                    {
-                      "type": "AssetTypeCode",
-                      "property": "AssetTypeCode"
-                    },
-                    {
-                      "type": "HierarchyLvl",
-                      "property": "HierarchyLvl"
-                    },
-                    {
-                      "type": "FullAssetCode",
-                      "property": "FullAssetCode"
-                    },
-                    {
-                      "type": "FullAssetName",
-                      "property": "FullAssetName"
+                      "type": "param",
+                      "property": "add"
                     }
                   ]
                 }
@@ -299,18 +279,6 @@
                       "property": "AssetMasterId"
                     },
                     {
-                      "type": "AssetTypeName",
-                      "property": "AssetTypeName"
-                    },
-                    {
-                      "type": "AssetTypeId",
-                      "property": "AssetTypeId"
-                    },
-                    {
-                      "type": "AssetTypeCode",
-                      "property": "AssetTypeCode"
-                    },
-                    {
                       "type": "param",
                       "property": "edit"
                     }
@@ -335,18 +303,6 @@
                     {
                       "type": "AssetMasterId",
                       "property": "AssetMasterId"
-                    },
-                    {
-                      "type": "AssetTypeId",
-                      "property": "AssetTypeId"
-                    },
-                    {
-                      "type": "AssetTypeName",
-                      "property": "AssetTypeName"
-                    },
-                    {
-                      "type": "AssetTypeCode",
-                      "property": "AssetTypeCode"
                     },
                     {
                       "type": "param",
@@ -375,18 +331,6 @@
                       "property": "AssetMasterId"
                     },
                     {
-                      "type": "AssetTypeId",
-                      "property": "AssetTypeId"
-                    },
-                    {
-                      "type": "AssetTypeName",
-                      "property": "AssetTypeName"
-                    },
-                    {
-                      "type": "AssetTypeCode",
-                      "property": "AssetTypeCode"
-                    },
-                    {
                       "type": "param",
                       "property": "edit"
                     }
@@ -411,18 +355,6 @@
                     {
                       "type": "AssetMasterId",
                       "property": "AssetMasterId"
-                    },
-                    {
-                      "type": "AssetTypeId",
-                      "property": "AssetTypeId"
-                    },
-                    {
-                      "type": "AssetTypeName",
-                      "property": "AssetTypeName"
-                    },
-                    {
-                      "type": "AssetTypeCode",
-                      "property": "AssetTypeCode"
                     },
                     {
                       "type": "param",

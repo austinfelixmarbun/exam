@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AssetCategoryAddEditComponent } from './asset-category-add-edit.component';
 
 describe('AssetCategoryAddEditComponent', () => {
