@@ -4,22 +4,35 @@
       <div class="px-3">
         <div class="addEdit">
           <form class="form form-horizontal" [formGroup]="RefCurrForm" (ngSubmit)="RefCurrForm.valid && SaveForm()"
-                #enjiForm="ngForm">
+            #enjiForm="ngForm">
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Currency {{this.pageType}}</h4>
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Currency Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="CurrCode"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.CurrCode.invalid }">
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.CurrCode.invalid }">
                   <show-errors [control]="RefCurrForm.controls.CurrCode" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
+              <!-- <div class="form-group row adins-required">
+                <label class="col-md-3 " translate>UC Number </label>
+                <div class="col-md-9">
+                  <input type="text" formControlName="UCNumber" class="form-control" [(ngModel)]="UcNumber"
+                    autocomplete="off" (keydown)="numberCheck($event)" (keyup)="CommaFormatted($event)" />
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 " translate>UC Number 2 </label>
+                <div class="col-md-9">
+                  <input type="text" formControlName="UCNumber2" class="form-control" [(ngModel)]="UcNumber2" />
+                </div>
+              </div> -->
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel adins-required" translate>Currency </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="CurrName"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.CurrName.invalid }">
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.CurrName.invalid }">
                   <show-errors [control]="RefCurrForm.controls.CurrName" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
@@ -43,21 +56,20 @@
                 <label class="col-md-3  adInsLabel" translate>Bl Code </label>
                 <div class="col-md-9">
                   <textarea class="form-control adInsInput" formControlName="RegRptCode"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.RegRptCode.invalid }"></textarea>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.RegRptCode.invalid }"></textarea>
                   <show-errors [control]="RefCurrForm.controls.RegRptCode" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Active </label>
                 <div class="col-md-9">
-                  <input class="border-primary" type="checkbox" data-md-icheck
-                         formControlName="IsActive" />
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive" />
                 </div>
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/Currency/paging']"
-                translate>
+              <button type="button" class="btn btn-raised btn-warning mr-1"
+                [routerLink]="['/CommonSetting/Currency/paging']" translate>
                 <i class="ft-x"></i> Cancel
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>

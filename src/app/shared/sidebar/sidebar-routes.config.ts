@@ -68,7 +68,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '', title: 'Survey', icon: 'ft-clipboard', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
-      { path: '/Product/HOpaging', title: 'Survey Order', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/Survey/Paging', title: 'Survey Order', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
       
     ]
   },
