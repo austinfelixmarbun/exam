@@ -25,6 +25,14 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from "angular-archwizard";
 import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
+import { ProductHOApprovalComponent } from "./product-HO/product-ho-approval/product-ho-approval.component";
+import { ProductHOApprovalDetailComponent } from "./product-HO/product-ho-approval-detail/product-ho-approval-detail.component";
+import { ProductOfferingApprovalComponent } from "./prod-offering/prod-offering-approval/product-offering-approval.component";
+import { ProductOfferingApprovalDetailComponent } from "./prod-offering/prod-offering-approval-detail/product-offering-approval-detail.component";
+import { ProductHODeactivateApprovalComponent } from "./product-HO/product-ho-deact-apv/product-ho-deact-apv.component";
+import { ProductHODeactivateApprovalDetailComponent } from "./product-HO/product-ho-deact-apv-detail/product-ho-deact-apv-detail.component";
+import { ProductOfferingDeactivateApprovalComponent } from "./prod-offering/prod-offering-deact-apv/product-offering-deact-apv.component";
+import { ProductOfferingDeactivateApprovalDetailComponent } from "./prod-offering/prod-offering-deact-apv-detail/product-offering-deact-apv-detail.component";
 import { MatTabsModule, MatDividerModule } from '@angular/material';
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 import { ListOfficeMemberComponent } from './product-HO/product-ho-adddetail/office-member/list-office-member/list-office-member.component';
@@ -54,14 +62,25 @@ import { SearchOfficeComponentOffering } from './prod-offering/prod-offering-add
     UclookupgenericModule
   ],
   declarations: [
+    ProductHOApprovalComponent,
+    ProductHOApprovalDetailComponent,
+    ProductOfferingApprovalComponent,
+    ProductOfferingApprovalDetailComponent,
+    ProductHODeactivateApprovalComponent,
+    ProductHODeactivateApprovalDetailComponent,
+    ProductOfferingDeactivatePagingComponent,
+    ProductOfferingDeactivateApprovalComponent,
+    ProductOfferingDeactivateApprovalDetailComponent,
+    ProdOfferingPagingComponent,
+    ProdOfferingAddComponent,
     ProductHOPagingComponent,
     ProductHOAddComponent,
     ProductHoAdddetailComponent,
-    ProdOfferingPagingComponent,
-    ProdOfferingAddComponent,
     ProductHODeactivatePagingComponent,
     ProductHODeactivateEditComponent,
+    GeneralDataComponent,
     ProductComponentComponent,
+    OfficeMemberComponent,
     ProductHOViewComponent,
     ProductOfferingViewComponent,
     ProdOfferingAddDetailComponent,
@@ -70,13 +89,9 @@ import { SearchOfficeComponentOffering } from './prod-offering/prod-offering-add
     GeneralDataHOComponent,
     ProductComponentHOComponent,
     OfficeMemberHOComponent,
-    GeneralDataComponent,
-    ProductOfferingDeactivatePagingComponent,
-    OfficeMemberComponent,
-    ProductOfferingDeactivateEditComponent,
     ListOfficeMemberComponentOffering,
-    SearchOfficeComponentOffering
+    SearchOfficeComponentOffering,
+    ProductOfferingDeactivateEditComponent
   ]
-
 })
 export class ProductModule { }
