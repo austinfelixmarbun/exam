@@ -5,7 +5,10 @@ export class RefProductOfferingDetailObj {
   RefProdCompntGrpCode: any;
   CompntValue: any;
   CompntValueDesc: any;
-  MrProdBehaviourCode: any;
+  MrProdBehaviour: any;
   RowVersion: any;
   GroupCodes: any;
+
+  constructor() { this.ProdOfferingDId="", this.RowVersion = "" }
+
 }

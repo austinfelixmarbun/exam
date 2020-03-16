@@ -15,6 +15,7 @@ import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
 import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmember.component';
+import { BankInfoComponent } from './component/bank-info/bank-info.component';
 const routes: Routes = [
   {
     path: '',
@@ -120,6 +121,13 @@ const routes: Routes = [
       {
         path: 'HO/Member',
         component: VendorHoPagingComponent,
+        data: {
+          title: 'Vendor HO Member'
+        },
+      },
+      {
+        path: 'BankInfo',
+        component: BankInfoComponent,
         data: {
           title: 'Vendor HO Member'
         },

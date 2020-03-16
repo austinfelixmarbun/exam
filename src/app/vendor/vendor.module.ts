@@ -17,7 +17,7 @@ import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
-import { UcviewgenericModule } from '@adins/ucviewgeneric';
+import { UcviewgenericModule, UcviewgenericComponent } from '@adins/ucviewgeneric';
 import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmember.component';
 import { VendorSchemeAddEditComponent } from './vendor-scheme/vendor-scheme-add-edit/vendor-scheme-add-edit.component';
 import { VendorSchemePagingComponent } from './vendor-scheme/vendor-scheme-paging/vendor-scheme-paging.component';
@@ -28,6 +28,7 @@ import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-
 import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 import { VendorBranchAddEditContactPersonComponent } from './vendor-branch/vendor-branch-add-edit-contact-person/vendor-branch-add-edit-contact-person.component';
+import { VendorService } from './vendor.service';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 
 
@@ -46,7 +47,8 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     UclookupgenericModule,
     ReactiveFormsModule,
     TreeViewModule,
-    UcviewgenericModule
+    UcviewgenericModule,
+    UclookupgenericModule
   ],
   declarations: [
     VendorComponent,
@@ -57,7 +59,6 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     VendorGroupPagingComponent,
     VendorGroupViewComponent,
     VendorGroupmemberComponent,
-
     VendorSchemeAddEditComponent,
     VendorSchemePagingComponent,
     VendorSchemeMemberAddComponent,
@@ -67,6 +68,11 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
     VendorBranchPagingComponent,
     VendorBranchAddEditComponent,
     VendorBranchAddEditContactPersonComponent,
+    VendorHoPagingComponent
+  ],
+  entryComponents : [UcviewgenericComponent],
+  providers: [
+    VendorService
   ]
 })
 export class VendorModule { }

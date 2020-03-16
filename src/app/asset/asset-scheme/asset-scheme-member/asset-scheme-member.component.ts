@@ -5,9 +5,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 
-// WHERE AM.IS_ACTIVE = '1' AND AM.IS_FINAL = '1' AND ASD.ASSET_SCHM_H_ID = 1
-// tambain
-
 @Component({
   selector: 'app-asset-scheme-member',
   templateUrl: './asset-scheme-member.component.html',
