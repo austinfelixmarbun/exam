@@ -43,7 +43,7 @@
           }
         ],
         "querystring": {
-          "select": "SELECT  C.CUST_NO AS CustNo, C.CUST_ID AS CustId, C.CUST_NAME AS CustName, CP.MR_GENDER_CODE AS MrGenderCode, CONCAT(CP.BIRTH_PLACE, ' ', CP.BIRTH_DT) AS BirthPlaceDt, CONCAT(C.MR_ID_TYPE_CODE ,' ', C.ID_NO ) AS IdTypeNo,  C.ID_EXPIRED_DT AS IdExpiredDt, C.TAX_ID_NO AS TaxIdNo",
+          "select": "SELECT  C.CUST_NO AS CustNo, C.CUST_ID AS CustId, C.CUST_NAME AS CustName, CP.MR_GENDER_CODE AS MrGenderCode, CONCAT(CP.BIRTH_PLACE, ' ', CONVERT(date, CP.BIRTH_DT)) AS BirthPlaceDt, CONCAT(C.MR_ID_TYPE_CODE ,' ', C.ID_NO ) AS IdTypeNo,  CONVERT(date, C.ID_EXPIRED_DT) AS IdExpiredDt, C.TAX_ID_NO AS TaxIdNo",
           "from": "FROM dbo.CUST AS C WITH(NOLOCK) JOIN dbo.CUST_PERSONAL AS CP WITH(NOLOCK) ON C.CUST_ID = CP.CUST_ID",
           "where": "WHERE C.CUST_ID = {0}"
         }

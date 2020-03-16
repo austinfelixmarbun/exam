@@ -1,0 +1,47 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "JobDataId",
+        "subSectionTitle": "Job Data",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Customer Model",
+            "property": "MrCustModelCode"
+          },
+          {
+            "type": "text",
+            "label": "Profession Name",
+            "property": "ProfessionName"
+          },
+          {
+            "type": "text",
+            "label": "Professional No",
+            "property": "ProfessionalNo"
+          },
+          {
+            "type": "text",
+            "label": "Job Title Name",
+            "property": "JobTitleName"
+          },
+          {
+            "type": "text",
+            "label": "Industry Type Name",
+            "property": "IndustryTypeName"
+          },
+          {
+            "type": "text",
+            "label": "Establishment Date",
+            "property": "EmploymentEstablishmentDt"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT CU.MR_CUST_MODEL_CODE AS MrCustModelCode , RP.PROFESSION_NAME AS ProfessionName, CPJD.PROFESSIONAL_NO AS ProfessionalNo ,CPJD.JOB_TITLE_NAME AS JobTitleName, RIT.INDUSTRY_TYPE_NAME AS IndustryTypeName, CPJD.EMPLOYMENT_ESTABLISHMENT_DT AS EmploymentEstablishmentDt",
+          "from": "FROM dbo.CUST CU WITH(NOLOCK) JOIN dbo.CUST_PERSONAL_JOB_DATA CPJD WITH(NOLOCK) ON CPJD.CUST_ID = CU.CUST_ID JOIN dbo.REF_INDUSTRY_TYPE RIT WITH(NOLOCK) ON RIT.REF_INDUSTRY_TYPE_ID = CPJD.REF_INDUSTRY_TYPE_ID JOIN dbo.REF_PROFESSION RP WITH(NOLOCK) ON RP.REF_PROFESSION_ID = CPJD.REF_PROFESSION_ID LEFT JOIN dbo.REF_MASTER AS RM WITH(NOLOCK) ON CU.MR_CUST_MODEL_CODE = RM.MASTER_CODE AND 'CUST_MODEL' = RM.REF_MASTER_TYPE_CODE",
+          "where": "WHERE CU.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

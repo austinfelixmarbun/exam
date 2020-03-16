@@ -25,6 +25,8 @@ import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
 import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
+import { CustomerViewPersonalDetailComponent } from './customer-view/customer-view-personal-detail/customer-view-personal-detail.component';
+import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
 @NgModule({
   exports: [ 
   ],
@@ -51,7 +53,9 @@ import { NegativeCustomerViewComponent } from './negative-customer/negative-cust
     CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent, CustomerViewPersonalComponent,
     NegativeCustomerComponent,
     NegativeCustomerDetailComponent,
-    NegativeCustomerViewComponent
+    NegativeCustomerViewComponent,
+    CustomerViewPersonalDetailComponent,
+    CustomerViewPersonalAddressComponent,
   ]
 })
 export class CustomerModule { 
