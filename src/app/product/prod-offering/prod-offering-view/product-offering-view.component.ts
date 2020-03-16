@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefProductOfferingBrancMbrObj } from "../../../shared/model/RefProductOfferingBranchMbrObj.Model";
 import { ProdOfferingHVersionObj } from "../../../shared/model/ProdOfferingHVersionObj.Model";
 import { RefProductOfferingDetailObj } from "../../../shared/model/RefProductOfferingDetailObj.Model";
+import { ProdOfferingCodeVersion } from "../../../shared/model/ProdOfferingCodeVersion.Model";
 
 
 
@@ -19,12 +20,16 @@ import { RefProductOfferingDetailObj } from "../../../shared/model/RefProductOff
 export class ProductOfferingViewComponent implements OnInit {
 
   prodOfferingHId: any;
+  prodOfferingCode: any;
+  prodOfferingVersion: any;
   viewProdOfferMainInfoObj: any;
   ProdOfferingBranchMemObj: any;
   ProdOfferingVersionObj: any;
+  GetProdOfferByVerCode: any;
   ProdOfferingBranchUrl: any;
   ProdOfferingVerUrl: any;
   ProdOfferingDUrl: any;
+  ProdOfferingCodeVerUrl: any
   refProductDetailObj: any;
   GenData: any;
   ProdComp: any;
@@ -34,23 +39,56 @@ export class ProductOfferingViewComponent implements OnInit {
   ProdCompOther: any;
   ProdOfferingBranchMbr: any;
   ProdOfferingVersion: any;
+  ProdOfferingCodeVersion: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
     this.ProdOfferingDUrl = AdInsConstant.GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode;
     this.ProdOfferingBranchUrl = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
     this.ProdOfferingVerUrl = AdInsConstant.GetListProdOfferingHVersionByProdOfferingHId;
+    this.ProdOfferingCodeVerUrl = AdInsConstant.GetProdOfferingHByCodeAndVerion;
 
     this.route.queryParams.subscribe(params => {
-      if (params["prodOfferingHId"] != null) {
+      if (params["prodOfferingHId"] != 0) {
+        this.prodOfferingHId = params["prodOfferingHId"];
+      }
+      else {
+        if (params["prodOfferingCode"] != "") {
+          this.prodOfferingCode = params["prodOfferingCode"];
+        }
+        if (params["prodOfferingVersion"] != "") {
+          this.prodOfferingVersion = params["prodOfferingVersion"];
+        }
         this.prodOfferingHId = params["prodOfferingHId"];
       }
     });
   }
 
-  ngOnInit() {
+  async LoadMainInfo() {
+    this.GetProdOfferByVerCode = new ProdOfferingCodeVersion;
+    this.GetProdOfferByVerCode.ProdOfferingCode = this.prodOfferingCode;
+    this.GetProdOfferByVerCode.ProdOfferingVersion = this.prodOfferingVersion;
+    await this.http.post(this.ProdOfferingCodeVerUrl, this.GetProdOfferByVerCode).toPromise().then(
+      response => {
+        console.log("Response: ");
+        console.log(response);
+        this.ProdOfferingCodeVersion = response;
+        this.prodOfferingHId = this.ProdOfferingCodeVersion.ProdOfferingHId
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+
+  async ngOnInit(): Promise<void> {
     //** Main Information **//
     this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
+
+     if (this.prodOfferingHId == 0) {
+      await this.LoadMainInfo();
+    }
 
     //** Product Offering Version **//
     this.ProdOfferingVersionObj = new ProdOfferingHVersionObj;
@@ -84,7 +122,7 @@ export class ProductOfferingViewComponent implements OnInit {
     //** Product Component **//
     this.refProductDetailObj = new RefProductOfferingDetailObj;
     this.refProductDetailObj.ProdOfferingHId = this.prodOfferingHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = ['GEN','SCHM', 'SCORE', 'RULE', 'OTHR'];
+    this.refProductDetailObj.RefProdCompntGrpCode = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR'];
     this.http.post(this.ProdOfferingDUrl, this.refProductDetailObj).subscribe(
       response => {
         console.log("Response: ");
