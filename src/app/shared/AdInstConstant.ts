@@ -490,7 +490,7 @@ export class AdInsConstant {
   public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
   public static AddListAssetSchmD =  environment.FoundationR3Url  + "/AssetSchmD/AddListAssetSchmD";
   public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
-
+  public static AddRangeAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/AddRangeAssetSchmD";
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
   
@@ -561,5 +561,12 @@ export class AdInsConstant {
   
   public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
   public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
-   
+ 
+  // CUSTOMER ADDRESS
+  public static GetListCustAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustId";
+
+  // CUSTOMER ADDRESS HISTORY
+  public static GetListCustAddrHistByCustId = environment.FoundationR3Url +  "/CustAddrHist/GetListCustAddrHistByCustId";
+
+
 }

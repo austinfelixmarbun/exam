@@ -2,8 +2,8 @@
     "title": "",
     "subsection": [
       {
-        "subSectionId": "AssetTypeId",
-        "subSectionTitle": "Asset Type",
+        "subSectionId": "CustMainInfoHeaderId",
+        "subSectionTitle": "Main Info",
         "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
@@ -32,7 +32,7 @@
             "property": "IdTypeNo"
           },
           {
-            "type": "text",
+            "type": "date",
             "label": "Id Expired Date",
             "property": "IdExpiredDt"
           },
@@ -43,8 +43,8 @@
           }
         ],
         "querystring": {
-          "select": "SELECT  C.CUST_NO AS CustNo, C.CUST_ID AS CustId, C.CUST_NAME AS CustName, CP.MR_GENDER_CODE AS MrGenderCode, CONCAT(CP.BIRTH_PLACE, ' ', CONVERT(date, CP.BIRTH_DT)) AS BirthPlaceDt, CONCAT(C.MR_ID_TYPE_CODE ,' ', C.ID_NO ) AS IdTypeNo,  CONVERT(date, C.ID_EXPIRED_DT) AS IdExpiredDt, C.TAX_ID_NO AS TaxIdNo",
-          "from": "FROM dbo.CUST AS C WITH(NOLOCK) JOIN dbo.CUST_PERSONAL AS CP WITH(NOLOCK) ON C.CUST_ID = CP.CUST_ID",
+          "select": "SELECT  C.CUST_NO AS CustNo, C.CUST_ID AS CustId, C.CUST_NAME AS CustName, RM.DESCR AS MrGenderCode, CONCAT(CP.BIRTH_PLACE, ' ', CONVERT(NVARCHAR,CP.BIRTH_DT,106)) AS BirthPlaceDt, CONCAT(RMID.DESCR ,' ', C.ID_NO ) AS IdTypeNo, CONVERT(date, C.ID_EXPIRED_DT) AS IdExpiredDt, C.TAX_ID_NO AS TaxIdNo",
+          "from": "FROM dbo.CUST AS C WITH(NOLOCK) JOIN dbo.CUST_PERSONAL AS CP WITH(NOLOCK) ON C.CUST_ID = CP.CUST_ID JOIN dbo.REF_MASTER RM ON RM.REF_MASTER_TYPE_CODE = 'GENDER' AND RM.MASTER_CODE = CP.MR_GENDER_CODE JOIN dbo.REF_MASTER RMID ON RMID.REF_MASTER_TYPE_CODE = 'ID_TYPE' AND RMID.MASTER_CODE = C.MR_ID_TYPE_CODE",
           "where": "WHERE C.CUST_ID = {0}"
         }
       }
