@@ -1,5 +1,5 @@
 import { environment } from "environments/environment";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { DecimalPipe } from "@angular/common";
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,6 +17,7 @@ import { RefProductOfferingDetailObj } from "../../../shared/model/RefProductOff
   providers: [DecimalPipe, NGXToastrService]
 })
 export class ProductOfferingViewComponent implements OnInit {
+  @Input() inputProdOfferingHId;
 
   prodOfferingHId: any;
   viewProdOfferMainInfoObj: any;
@@ -49,6 +50,10 @@ export class ProductOfferingViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.prodOfferingHId == undefined){
+      this.prodOfferingHId = this.inputProdOfferingHId;
+    }
+
     //** Main Information **//
     this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
 
