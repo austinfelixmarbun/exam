@@ -1,0 +1,64 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-header header-title">
+          <div class="row">
+          </div>
+        </div>
+        <div class="px-3">
+          <div class="form-group row">
+            <label class="col-md-3  adInsLabel" translate>Tax Address</label>
+            <div class="col-md-9">
+              <textarea class="form-control adInsInput width-75-per" formControlName="Addr"> </textarea>
+              <show-errors [control]="AddressForm.controls.Addr" [submit]="enjiForm.submitted">
+              </show-errors>
+            </div>
+          </div>
+          <div class="form-body adins-required">
+            <div class="form-group row adins-required">
+              <label class="col-md-3 adInsLabel">Zip Code</label>
+              <div class="col-md-9">
+                <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="AddressForm"
+                  [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookupZipcode($event)">
+                </lib-uclookupgeneric>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control adInsInput width-75-per" formControlName="AreaCode2">
+              <show-errors [control]="AddressForm.controls.AreaCode2" [submit]="enjiForm.submitted">
+              </show-errors>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control adInsInput width-75-per" formControlName="AreaCode1">
+              <show-errors [control]="AddressForm.controls.AreaCode1" [submit]="enjiForm.submitted">
+              </show-errors>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3  adInsLabel" translate>City</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control adInsInput width-75-per" formControlName="City">
+              <show-errors [control]="AddressForm.controls.City" [submit]="enjiForm.submitted">
+              </show-errors>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3  adInsLabel" translate>Province</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control adInsInput width-75-per" formControlName="Province">
+              <show-errors [control]="AddressForm.controls.Province" [submit]="enjiForm.submitted">
+              </show-errors>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
