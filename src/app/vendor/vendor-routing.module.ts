@@ -15,6 +15,7 @@ import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
 import { AddressComponent } from './component/address/address.component';
+import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
 const routes: Routes = [
   {
     path: '',
@@ -111,12 +112,12 @@ const routes: Routes = [
         },
       },
       {
-        path: 'Component/Address',
-        component: AddressComponent,
+        path: 'HO/Registration',
+        component: VendorHoRegistrationComponent,
         data: {
-          title: 'Vendor HO Paging'
+          title: 'Vendor HO Registration'
         },
-      },
+      }
     ]
 
   }
