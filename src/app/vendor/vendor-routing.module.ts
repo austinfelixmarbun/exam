@@ -7,8 +7,6 @@ import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
 import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
-import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
-import { VendorBranchAddEditContactPersonComponent } from './vendor-branch/vendor-branch-add-edit-contact-person/vendor-branch-add-edit-contact-person.component';
 import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
 import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
@@ -16,6 +14,8 @@ import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/v
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
 import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmember.component';
 import { BankInfoComponent } from './component/bank-info/bank-info.component';
+import { ContactPersonAddEditComponent } from './component/contact-person-add-edit/contact-person-add-edit.component';
+import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 const routes: Routes = [
   {
     path: '',
@@ -31,14 +31,21 @@ const routes: Routes = [
         path: 'Branch/Add',
         component: VendorBranchAddEditComponent,
         data: {
-          title: 'Vendor Branch Add/Edit'
+          title: 'Vendor Branch Add'
         },
       },
       {
-        path: 'Branch/Edit',
-        component: VendorBranchAddEditContactPersonComponent,
+        path: 'ContactPerson/Add',
+        component: ContactPersonAddEditComponent,
         data: {
-          title: 'Vendor Branch Add/Edit'
+          title: 'Contact Person Branch Add/Edit'
+        },
+      },
+      {
+        path: 'ContactPerson/Edit',
+        component: ContactPersonAddEditComponent,
+        data: {
+          title: 'Contact Person Add/Edit'
         },
       },
       {

@@ -10,13 +10,12 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
-  selector: 'app-vendor-branch-add-edit-contact-person',
-  templateUrl: './vendor-branch-add-edit-contact-person.component.html',
-  styleUrls: ['./vendor-branch-add-edit-contact-person.component.scss'],
+  selector: 'app-contact-person-add-edit',
+  templateUrl: './contact-person-add-edit.component.html',
+  styleUrls: ['./contact-person-add-edit.component.scss'],
   providers : [NGXToastrService]
 })
-export class VendorBranchAddEditContactPersonComponent implements OnInit {
-
+export class ContactPersonAddEditComponent implements OnInit {
 
   title : string = "Contact Person Main Info";
   title2 : string = "Contact Person Address Info";
@@ -53,7 +52,9 @@ export class VendorBranchAddEditContactPersonComponent implements OnInit {
     this.http.post("http://r3app-server/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", JobPosition).subscribe(
       (response) => {
         this.itemJobPosition = response["ReturnObject"];
-        this.ContactPersonForm.patchValue({
+        console.log("this.itemJobPosition[0].Key");
+        console.log(this.itemJobPosition[0].Key);
+        this.ContactPersonForm.patchValue({          
           JobPosition: this.itemJobPosition[0].Key
         });
       }
