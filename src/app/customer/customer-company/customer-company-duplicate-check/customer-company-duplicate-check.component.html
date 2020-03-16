@@ -1,14 +1,13 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
     <button type="button" class="backButton" [routerLink]="['../MainInfo']" translate>
-      <i class="ft-x" ></i> Cancel
+      <i class="ft-x"></i> Cancel
     </button>
     <button type="submit" class="addButton" translate>
       <i class="fa fa-check-square-o"></i> Next
     </button>
   </span>
 </div>
-
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
@@ -23,47 +22,34 @@
               <div class="form-group row">
                 <label class="col-md-2 adInsLabel" translate>Customer Model </label>
                 <div class="col-md-4">
-                  <label>{{this.CustModel}}</label>
-
-                 
+                  <label>{{this.tempCustModel.Descr}}</label>
                 </div>
                 <label class="col-md-2  adInsLabel" translate>Customer Name </label>
                 <div class="col-md-4">
                   <label>{{this.CustName}}</label>
-              
                 </div>
-
               </div>
               <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>Company Type</label>
                 <div class="col-md-4">
-                  <label>{{this.MrCompanyTypeCode}}</label> 
+                  <label>{{this.tempMrCompanyTypeCode.Descr}}</label>
                 </div>
                 <label class="col-md-2 adInsLabel" translate>ID TYPE </label>
                 <div class="col-md-4">
-                  <label>{{this.MrIdTypeCode}}</label>
-                 
+                  <label>{{this.tempMrIdTypeCode.Descr}}</label>
                 </div>
-
               </div>
-
               <div class="form-group row ">
-
                 <label class="col-md-2 adInsLabel" translate>NPWP </label>
                 <div class="col-md-4">
                   <label>{{this.IdNo}}</label>
-               
                 </div>
-
                 <label class="col-md-2 adInsLabel" translate>NPWP</label>
                 <div class="col-md-4">
                   <label>{{this.TaxIdNo}}</label>
-               
                 </div>
               </div>
-
             </div>
-
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../MainInfo']" translate>
                 <i class="ft-x"></i> Cancel
@@ -73,7 +59,6 @@
               </button>
             </div>
           </form>
-
         </div>
       </div>
     </div>

@@ -124,19 +124,9 @@ state: any;
   }
   SaveValue (){ 
     this.CustName= this.CustomerPersonalForm.controls["CustName"].value; 
-    
-
-     
     this.CustModel =  this.CustomerPersonalForm.controls["CustModel"].value;
-    
- 
     this.Gender = this.CustomerPersonalForm.controls["Gender"].value;
-    
-    
-    
     this.MrIdTypeCode= this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
-     
-   
     this.BirthPlace = this.CustomerPersonalForm.controls["BirthPlace"].value;
     this.BirthDt= this.CustomerPersonalForm.controls["BirthDt"].value;
     this.IdNo = this.CustomerPersonalForm.controls["IdNo"].value;

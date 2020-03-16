@@ -50,7 +50,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    console.log("haiii");
 
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
@@ -58,24 +58,6 @@ export class CustomerPersonalPageComponent implements OnInit {
       (response) => {
 
         this.tempCustObj = response;
-      });
-
-   
-
-    this.custPersonalObj = new CustPersonalObj();
-    this.custPersonalObj.CustId = this.IdCust;
-    this.http.post(AdInsConstant.GetCustPersonalbyCustId, this.custPersonalObj).subscribe(
-      (response) => {
-        this.tempCustPersonalObj = response;
-        var refMasterObj = {
-          MasterCode: this.tempCustPersonalObj.MrGenderCode
-        }
-
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObj).subscribe(
-          (response) => {
-            this.tempMrGenderCode = response;
-          }
-        );
         var refMasterObj1 = {
           MasterCode: this.tempCustObj.MrCustModelCode
         }
@@ -86,7 +68,6 @@ export class CustomerPersonalPageComponent implements OnInit {
           }
         );
 
-
         var refMasterObj2 = {
           MasterCode: this.tempCustObj.MrIdTypeCode
         }
@@ -96,6 +77,24 @@ export class CustomerPersonalPageComponent implements OnInit {
         
           }
         );
+      });
+
+    this.custPersonalObj = new CustPersonalObj();
+    this.custPersonalObj.CustId = this.IdCust;
+    this.http.post(AdInsConstant.GetCustPersonalbyCustId, this.custPersonalObj).subscribe(
+      (response) => {
+        this.tempCustPersonalObj = response;
+
+        var refMasterObj = {
+          MasterCode: this.tempCustPersonalObj.MrGenderCode
+        }
+
+        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObj).subscribe(
+          (response) => {
+            this.tempMrGenderCode = response;
+          }
+        );
+       
       });
 
 
