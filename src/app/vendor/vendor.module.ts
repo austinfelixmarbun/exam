@@ -18,7 +18,7 @@ import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
-import { UcviewgenericModule } from '@adins/ucviewgeneric';
+import { UcviewgenericModule, UcviewgenericComponent } from '@adins/ucviewgeneric';
 import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmember.component';
 import { VendorSchemeAddEditComponent } from './vendor-scheme/vendor-scheme-add-edit/vendor-scheme-add-edit.component';
 import { VendorSchemePagingComponent } from './vendor-scheme/vendor-scheme-paging/vendor-scheme-paging.component';
@@ -26,6 +26,8 @@ import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme
 import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-add/vendor-scheme-member-add.component';
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
+import { VendorService } from './vendor.service';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
 
 
 @NgModule({
@@ -42,7 +44,8 @@ import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-
     UcSubsectionModule,
     ReactiveFormsModule,
     TreeViewModule,
-    UcviewgenericModule
+    UcviewgenericModule,
+    UclookupgenericModule
   ],
   declarations: [
     VendorComponent,
@@ -54,13 +57,16 @@ import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-
     VendorGroupPagingComponent,
     VendorGroupViewComponent,
     VendorGroupmemberComponent,
-
     VendorSchemeAddEditComponent,
     VendorSchemePagingComponent,
     VendorSchemeMemberAddComponent,
     VendorSchemeMemberPagingComponent,
     VendorHoAddEditComponent,
     VendorHoPagingComponent
+  ],
+  entryComponents : [UcviewgenericComponent],
+  providers: [
+    VendorService
   ]
 })
 export class VendorModule { }

@@ -14,6 +14,7 @@ import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-me
 import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-paging/vendor-scheme-member-paging.component';
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
+import { BankInfoComponent } from './component/bank-info/bank-info.component';
 const routes: Routes = [
   {
     path: '',
@@ -105,6 +106,13 @@ const routes: Routes = [
       {
         path: 'HO/Member',
         component: VendorHoPagingComponent,
+        data: {
+          title: 'Vendor HO Member'
+        },
+      },
+      {
+        path: 'BankInfo',
+        component: BankInfoComponent,
         data: {
           title: 'Vendor HO Member'
         },

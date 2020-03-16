@@ -1,0 +1,245 @@
+{
+    "title": "Survey Order",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "RE.OFFICE_NAME",
+            "id": "OfficeNameId",
+            "value": "",
+            "label": "Office Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "SO.TRX_REF_NO",
+            "id": "TrxRefNoId",
+            "value": "",
+            "label": "Transaction Number",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "SO.SRVY_ORDER_NO",
+            "id": "SrvyOrderNoId",
+            "value": "",
+            "label": "Survey Order No",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "SO.MR_SRVY_STAT_CODE",
+            "id": "MrSrvyStatCodeId",
+            "value": "",
+            "label": "Survey Order Status",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "SO.MR_SRVY_SOURCE_CODE",
+            "id": "MrSrvySourceCodeId",
+            "value": "",
+            "label": "Survey Type",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "SO.REQ_BY_USER",
+            "id": "ReqByUserId",
+            "value": "",
+            "label": "Request By",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "datepicker",
+            "datatype" : "date",
+            "name": "SO.REQ_DT",
+            "id": "ReqDtGT",
+            "value": "",
+            "label": "Request Date >=",
+            "restriction" : "lte",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "datepicker",
+            "datatype" : "date",
+            "name": "SO.REQ_DT",
+            "id": "ReqDtLT",
+            "value": "",
+            "label": "Request Date <=",
+            "restriction" : "lte",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "SO.NOTES",
+            "id": "NotesId",
+            "value": "",
+            "label": "Notes",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT RE.OFFICE_NAME AS OfficeName, SO.TRX_REF_NO AS TrxRefNo, SO.SRVY_ORDER_NO AS SrvyOrderNo, SO.MR_SRVY_STAT_CODE AS MrSrvyStatCode, SO.MR_SRVY_SOURCE_CODE AS MrSrvySourceCode, SO.REQ_BY_USER AS ReqByUser, SO.NOTES AS Notes, SO.REQ_DT AS ReqDt, SO.TASK_TOTAL AS TaskTotal, SO.SRVY_ORDER_ID AS SrvyOrderId",
+        "from": "FROM dbo.SRVY_ORDER SO WITH(NOLOCK) JOIN dbo.REF_OFFICE RE WITH(NOLOCK) ON RE.REF_OFFICE_ID = SO.REF_OFFICE_ID"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Office Name",
+            "name": "RE.OFFICE_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Survey Order No",
+            "name": "SO.SRVY_ORDER_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Survey Type",
+            "name": "SO.MR_SRVY_SOURCE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Transaction Number",
+            "name": "SO.TRX_REF_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Notes",
+            "name": "SO.NOTES"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Request Date",
+            "name": "SO.REQ_DT"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Request By",
+            "name": "SO.REQ_BY_USER"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Status",
+            "name": "SO.MR_SRVY_STAT_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "# of Survey Task",
+            "name": "SO.TASK_TOTAL"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Task"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Send"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "OfficeName"
+        },
+        {
+            "type": "link",
+            "position": "center",
+            "property": "SrvyOrderNo",
+            "path" : "/Survey/View",
+            "param" : [
+                {
+                    "type" : "SrvyOrderId",
+                    "property" : "SrvyOrderId"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrSrvySourceCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "TrxRefNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Notes"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ReqDt"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ReqByUser"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrSrvyStatCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "TaskTotal"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/Survey/Profession/detail",
+                    "param": [
+                      {
+                        "type": "refProfessionId",
+                        "property": "refProfessionId"
+                      },
+                      {
+                        "type": "param",
+                        "property": "edit"
+                      }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/Survey/Profession/detail",
+                    "param": [
+                      {
+                        "type": "refProfessionId",
+                        "property": "refProfessionId"
+                      },
+                      {
+                        "type": "param",
+                        "property": "edit"
+                      }
+                    ]
+                }
+            ]
+        }
+    ]
+}
