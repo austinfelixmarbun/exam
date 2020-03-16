@@ -1,11 +1,13 @@
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" (click)="open(bankContent)" class="btn btn-raised btn-primary" translate>
+      <i class="fa fa-check-square-o"></i> Add
+    </button>
+  </span>
+</div>
 <lib-ucSubsection [id]="'bankListId'" [title]="'Bank List'" [panel]="bankList"></lib-ucSubsection>
 <!-- <h4 class="form-section" translate><i class="ft-file-text"></i>Contact Information</h4> -->
 <div id="bankList">
-  <div class="form-actions right">
-    <button type="button" (click)="open(content)" class="btn btn-raised btn-primary" translate>
-      <i class="fa fa-check-square-o"></i> Add
-    </button>
-  </div>
   <div id="gridBankAcc" [hidden]="ListData?.length < 1">
     <table class="table table-responsive-md text-center table-hover">
       <thead>
@@ -23,14 +25,14 @@
       <tbody>
         <tr *ngFor="let item of ListData; let i = index">
           <td>{{item.BankName}}</td>
-          <td>{{item.AccountNo}}</td>
-          <td>{{item.AccountName}}</td>
+          <td>{{item.BankAccountNo}}</td>
+          <td>{{item.BankAccountName}}</td>
           <td>{{item.IsDefault}}</td>
           <td>
-            <a class="success p-0" data-original-title="" title="" (click)="editBank(item.BankId,content)">
+            <a class="success p-0" data-original-title="" title="" (click)="editBank(item.VendorBankAccId,bankContent)">
               <i class="ft-edit-2 font-medium-3 mr-2"></i>
             </a>
-            <a class="danger p-0" data-original-title="" title="" (click)="deleteBank(item.BankId)">
+            <a class="danger p-0" data-original-title="" title="" (click)="deleteBank(item.VendorBankAccId)">
               <i class="ft-trash-2 font-medium-3 mr-2"></i>
             </a>
           </td>
@@ -38,7 +40,7 @@
       </tbody>
     </table>
   </div>
-  <ng-template #content let-c="close" let-d="dismiss">
+  <ng-template #bankContent let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title">{{title}}</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -47,8 +49,8 @@
     </div>
     <div class="modal-body">
       <div class="px-3">
-        <form class="form form-horizontal" #enjiForm="ngForm" [formGroup]="BankkRegisForm"
-          (ngSubmit)="BankkRegisForm.valid && SaveForm()">
+        <form class="form form-horizontal" #enjiForm="ngForm" [formGroup]="BankRegisForm"
+          (ngSubmit)="BankRegisForm.valid && SaveForm()">
           <!-- (ngSubmit)="prodHOForm.form.valid && SaveForm(prodHOForm) -->
           <lib-ucSubsection [id]="'addBankAccountId'" [title]="'Add Bank Account'" [panel]="'addBankAccount'">
           </lib-ucSubsection>
@@ -56,26 +58,32 @@
             <div class="form-group row">
               <label class="col-md-2 label-control" for="name" translate>Bank</label>
               <div class="col-md-4">
-                <lib-uclookupgeneric [lookupInput]="inputLookupBankObj" [parentForm]='BankAccountForm' [enjiForm]='enjiForm' [identifier]="'BankName'"
-                    (lookup)="getLookupBankResponse($event)"></lib-uclookupgeneric>
+                <lib-uclookupgeneric [lookupInput]="inputLookupBankObj" [parentForm]='BankRegisForm'
+                  [enjiForm]='enjiForm' [identifier]="'BankName'" (lookup)="getLookupBankResponse($event)">
+                </lib-uclookupgeneric>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-2 label-control" for="AccNumber" translate>Account Number</label>
               <div class="col-md-4">
-                <input type="text" class="form-control" id="AccNumber" nam  e="AccNumber">
+                <input type="text" class="form-control adInsInput"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && BankRegisForm.controls.AccNumber.invalid }"
+                  formControlName="AccNumber">
+                <show-errors [control]="BankRegisForm.controls.AccNumber" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-2 label-control" for="AccName" translate>Account Name</label>
               <div class="col-md-4">
-                <input type="text" class="form-control" id="AccName" name="AccName">
+                <input type="text" class="form-control adInsInput"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && BankRegisForm.controls.AccName.invalid }"
+                  formControlName="AccName">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-2 label-control" for="IsDefault" translate>Default</label>
               <div class="col-md-4">
-                <input type="checkbox" class="form-control" name="IsDefault" id="IsDefault">
+                <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsDefault">
               </div>
             </div>
           </div>

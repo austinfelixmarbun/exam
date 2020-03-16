@@ -20,7 +20,7 @@
       },
       {
         "type": "dropdown",
-        "name": "is_Active",
+        "name": "IS_ACTIVE",
         "id": "isActive",
         "value": "Active Status",
         "placeholder": "Placeholder",
@@ -46,19 +46,19 @@
         "type": "sort",
         "position": "left",
         "label": "Asset Document Code",
-        "name": "AssetDocumentCode"
+        "name": "ASSET_DOC_CODE"
       },
       {
         "type": "sort",
         "position": "left",
         "label": "Asset Document Name",
-        "name": "AssetDocumentName"
+        "name": "ASSET_DOC_NAME"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Active Status",
-        "name": "IsActive"
+        "name": "IS_ACTIVE"
       },
       {
         "type": "label",
@@ -67,8 +67,8 @@
       }
     ],
     "querystring": { 
-      "select": "SELECT   A.ASSET_DOC_CODE as AssetDocumentCode,A.REF_ASSET_DOC_ID as RefAssetDocId, A.ASSET_DOC_NAME as AssetDocumentName, A.IS_ACTIVE as IsActive",
-      "from": "FROM REF_ASSET_DOC A WITH(NOLOCK)"
+      "select": "SELECT ASSET_DOC_CODE AS AssetDocumentCode, REF_ASSET_DOC_ID AS RefAssetDocId, ASSET_DOC_NAME AS AssetDocumentName, IS_ACTIVE AS IsActive",
+      "from": "FROM dbo.REF_ASSET_DOC WITH(NOLOCK)"
     },
     "bodyList": [
       {
