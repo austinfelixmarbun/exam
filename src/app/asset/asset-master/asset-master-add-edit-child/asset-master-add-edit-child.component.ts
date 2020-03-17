@@ -275,6 +275,8 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         if (this.listSelectedId.indexOf(this.listAssetScheme[i].AssetSchmHIdFromD) < 0) {
           this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromH);
         }
+        console.log("aaa")
+        console.log(this.listSelectedId)
       }
 
     } else {
@@ -295,6 +297,8 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       let index = this.listSelectedId.indexOf(AssetSchmHIdFromH)
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
+    console.log("bbb")
+        console.log(this.listSelectedId)
   }
 
   SaveForm() {

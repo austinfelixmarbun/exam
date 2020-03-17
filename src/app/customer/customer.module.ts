@@ -28,9 +28,10 @@ import { NegativeCustomerViewComponent } from './negative-customer/negative-cust
 import { CustomerViewPersonalDetailComponent } from './customer-view/customer-view-personal-detail/customer-view-personal-detail.component';
 import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
 import { CustomerViewPersonalJobDataComponent } from './customer-view/customer-view-personal-job-data/customer-view-personal-job-data.component';
+import { CustGroupTabComponent } from './cust-group-tab/cust-group-tab.component';
+import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-detail/cust-group-tab-detail.component';
 @NgModule({
-  exports: [ 
-  ],
+  exports: [],
   imports: [
     CustomerRoutingModule,
     CommonModule,
@@ -58,7 +59,10 @@ import { CustomerViewPersonalJobDataComponent } from './customer-view/customer-v
     CustomerViewPersonalDetailComponent,
     CustomerViewPersonalAddressComponent,
     CustomerViewPersonalJobDataComponent,
-  ]
+    CustGroupTabComponent,
+    CustGroupTabDetailComponent
+  ],
+  entryComponents: [CustGroupTabDetailComponent]
 })
 export class CustomerModule { 
   constructor(){

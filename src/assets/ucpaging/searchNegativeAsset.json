@@ -4,7 +4,7 @@
         {
             "type" : "dropdown",
             "label" : "Asset Type Name",
-            "name" : "C.ASSET_TYPE_CODE",
+            "name" : "ASSET_TYPE_CODE",
             "id" : "assetTypeName",
             "value" : "",
             "datatype" : "text",
@@ -34,7 +34,7 @@
             "isSelectOne" : false,
             "items" : [],
             "isFromURL" : true, 
-            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetCategory/GetListAssetCategoryWithCriteriaObjNegativeAssetPage", 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetCategory/GetListAssetCategoryByCodeWithCriteriaObj", 
             "itemsUrl" : []
         },
         {
