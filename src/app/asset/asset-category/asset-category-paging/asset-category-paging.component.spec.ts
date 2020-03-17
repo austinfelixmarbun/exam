@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AssetCategoryPagingComponent } from './asset-category-paging.component';
 
 describe('AssetCategoryPagingComponent', () => {
