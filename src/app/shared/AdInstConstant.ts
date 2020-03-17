@@ -506,6 +506,7 @@ export class AdInsConstant {
   //VENDOR GROUP
   public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
   public static EditVendorGrp = environment.FoundationR3Url + "/VendorGrp/EditVendorGrp";
+  public static DeleteVendorGrp = "/VendorGrp/DeleteVendorGrp";
   public static GetVendorGrpByVendorGrpCode = environment.FoundationR3Url + "/VendorGrp/GetVendorGrpByVendorGrpCode";
   public static GetVendorGrpByVendorGrpId =environment.FoundationR3Url  + "/VendorGrp/GetVendorGrpByVendorGrpId";
   public static GetVendorGrpForUpdateByVendorGrpCode =environment.FoundationR3Url  + "/VendorGrp/GetVendorGrpForUpdateByVendorGrpCode";
@@ -517,6 +518,7 @@ export class AdInsConstant {
   public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId";
   public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId";
   public static AddVendorGrpMbr = environment.FoundationR3Url + "/VendorGrpMbr/AddVendorGrpMbr";
+  public static DeleteVendorGrpMemberById = "/VendorGrpMbr/DeleteVendorGrpMbrById"
 
 
 

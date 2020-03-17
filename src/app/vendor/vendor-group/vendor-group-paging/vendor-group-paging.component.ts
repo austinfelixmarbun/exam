@@ -20,8 +20,7 @@ export class VendorGroupPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
-    //belum ada delete
-    //this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefOffice;
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVendorGrp;
   }
 
 }

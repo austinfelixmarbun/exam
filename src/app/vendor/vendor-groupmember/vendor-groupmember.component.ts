@@ -55,6 +55,13 @@ export class VendorGroupmemberComponent implements OnInit {
   inputObj: any;
   ngOnInit() {
 
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/ucpaging/searchVendorGrpMember.json";
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
+    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+
+    this.GetListVendorGrpMbrByVendorGrpId();
+
     // var critInput = new CriteriaObj();
     // critInput.propName = "A.MR_VENDOR_CATEGORY_CODE";
     // critInput.restriction = AdInsConstant.RestrictionEq;
@@ -71,12 +78,6 @@ export class VendorGroupmemberComponent implements OnInit {
     this.listSelectedId = new Array();
     this.tempListId = new Array();
     this.tempData = new Array();
-
-
-    this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/ucpaging/searchVendorGrpMember.json";
-    this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
 
     this.pageNow = 1;
     this.pageSize = 10;
@@ -258,18 +259,21 @@ export class VendorGroupmemberComponent implements OnInit {
 
   GetListVendorGrpMbrByVendorGrpId() {
     var obj = {
-      VendorGrpId: this.VendorGrpId
+      VendorGrpId: this.VendorGrpId,
     }
+    this.inputObj.addCritInput = new Array();
     var getListUrl = AdInsConstant.GetListVendorGrpMbrByVendorGrpId;
     this.http.post(getListUrl, obj).subscribe(
       (response) => {
+        console.log(response);
         this.vendorGrpMbrObj = response;
 
         var arrMemberList = new Array();
 
-        for (let index = 0; index < this.vendorGrpMbrObj.ListVendorGrpMbr.length; index++) {
-          arrMemberList.push(this.vendorGrpMbrObj.ListVendorGrpMbr[index].VendorGrpId)
+        for (let index = 0; index < this.vendorGrpMbrObj.ReturnObject.length; index++) {
+          arrMemberList.push(this.vendorGrpMbrObj.ReturnObject[index].VendorId)
         }
+        
 
         const addCritListVendorGrp = new CriteriaObj();
         addCritListVendorGrp.DataType = 'numeric';

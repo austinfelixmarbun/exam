@@ -40,7 +40,8 @@ export class VendorGroupViewComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendor.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefOffice;
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVendorGrpMemberById;
+    this.inputPagingObj.addCritInput = new Array();
 
 
     var critInput = new CriteriaObj();
