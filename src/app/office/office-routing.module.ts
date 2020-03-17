@@ -8,6 +8,7 @@ import { OfficeEmpPosAddComponent } from 'app/office/office-emp-pos/office-emp-p
 import { OfficeAreaPagingComponent } from 'app/office/office-area/office-area-paging/office-area-paging.component';
 import { OfficeGroupMemberComponent } from './office-group-member/office-group-member.component';
 import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-group-member-add.component';
+import { OfficeAreaMemberPagingComponent } from './office-area-member/office-area-member-paging.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,13 @@ const routes: Routes = [
         component: OfficeAreaAddEditComponent,
         data: {
           title: 'Office Area Add Edit'
+        }
+      },
+      {
+        path: 'officeAreaMember/paging',
+        component: OfficeAreaMemberPagingComponent,
+        data: {
+          title: 'Office Area Member'
         }
       }
     ]

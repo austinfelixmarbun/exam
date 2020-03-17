@@ -18,6 +18,7 @@ import { OfficeGroupMemberComponent } from './office-group-member/office-group-m
 import { UcpagingComponent, UcpagingModule } from '@adins/ucpaging';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-group-member-add.component';
+import { OfficeAreaMemberPagingComponent } from './office-area-member/office-area-member-paging.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-
     OfficeAreaAddEditComponent,
     OfficeAreaPagingComponent,
     OfficeGroupMemberComponent,
-    OfficeGroupMemberAddComponent
+    OfficeGroupMemberAddComponent,
+    OfficeAreaMemberPagingComponent
   ]
 })
 export class OfficeModule { }
