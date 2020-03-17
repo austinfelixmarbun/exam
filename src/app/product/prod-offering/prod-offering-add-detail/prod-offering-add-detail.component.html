@@ -45,18 +45,18 @@
               <div class="px-3">
                 <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="0">
                   <aw-wizard-step [stepTitle]="'General Data'"
-                    [navigationSymbol]="{ symbol: '1', fontFamily: 'FontAwesome' }">
-                    <app-general-data [objInput]="objPassing"></app-general-data>
+                    [navigationSymbol]="{ symbol: '1', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('general')">
+                    <app-general-data *ngIf="isGeneralData == true" [objInput]="objPassing"></app-general-data>
                   </aw-wizard-step>
                   
                   <aw-wizard-step [stepTitle]="'Product Component'" 
-                    [navigationSymbol]="{ symbol: '2', fontFamily: 'FontAwesome' }">
-                    <app-product-component [objInput]="objPassing"></app-product-component>
+                    [navigationSymbol]="{ symbol: '2', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('prodCompnt')">
+                    <app-product-component *ngIf="isProdCompnt == true" [objInput]="objPassing"></app-product-component>
                   </aw-wizard-step>
       
                   <aw-wizard-step [stepTitle]="'Office Member'" 
-                    [navigationSymbol]="{ symbol: '3', fontFamily: 'FontAwesome' }">
-                    <app-office-member [objInput]="objPassing"></app-office-member>
+                    [navigationSymbol]="{ symbol: '3', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('officeMbr')">
+                    <app-office-member *ngIf="isOfficeMbr == true" [objInput]="objPassing"></app-office-member>
                   </aw-wizard-step>
                 </aw-wizard>
               </div>

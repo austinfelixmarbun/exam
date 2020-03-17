@@ -2,13 +2,8 @@
   <div class="card">
     <div class="card-header header-title">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <h4 class="card-title" id="horz-layout-colored-controls" translate> EMPLOYEE {{pageType}} </h4>
-        </div>
-        <div class="col-md-4" style="text-align-last: right">
-          <button type="button" class="backButton" [routerLink]="['/Employee/paging']" translate>
-            <i class="ft-arrow-left"></i> Back
-          </button>
         </div>
       </div>
     </div>
@@ -16,8 +11,8 @@
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="RefEmpForm" #enjiForm="ngForm"
           (ngSubmit)="enjiForm.form.valid && SaveForm(enjiForm)">
-          <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i>User - {{pageType}}</h4>
+          <lib-ucSubsection [id]="'UserPanelId'" [title]="'User - Detail'" [panel]="'UserPanel'"></lib-ucSubsection>
+          <div class="form-body" id="UserPanel">
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="Username">Username</label>
               <div class="col-md-9">
@@ -26,7 +21,7 @@
                 <show-errors [control]="RefEmpForm.controls.Username" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row adins-required" *ngIf="pageType == 'add'">
               <label class="col-md-3  adInsLabel" for="Password">Password</label>
               <div class="col-md-9">
                 <input type="password" class="form-control adInsInput width-50-per" formControlName="Password" required
@@ -34,7 +29,7 @@
                 <show-errors [control]="RefEmpForm.controls.Password" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row adins-required" *ngIf="pageType == 'add'">
               <label class="col-md-3  adInsLabel" for="ConfirmPassword">Re-enter Password</label>
               <div class="col-md-9">
                 <input type="password" class="form-control adInsInput width-50-per" formControlName="ConfirmPassword" required
@@ -52,8 +47,8 @@
               </div>
             </div>
           </div>
-          <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Employee - {{pageType}}</h4>
+          <lib-ucSubsection [id]="'EmployeePanelId'" [title]="'Employee - Detail'" [panel]="'EmployeePanel'"></lib-ucSubsection>
+          <div class="form-body" id="EmployeePanel">
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="EmpNo">Employee No </label>
               <div class="col-md-9">
@@ -124,8 +119,8 @@
               </div>
             </div>
           </div>
-          <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Address</h4>
+          <lib-ucSubsection [id]="'AddressPanelId'" [title]="'Address'" [panel]="'AddressPanel'"></lib-ucSubsection>
+          <div class="form-body" id="AddressPanel">
             <div class="form-group row adins-required">
               <label class="col-md-3 adInsLabel" for="Address">Address</label>
               <div class="col-md-9">
@@ -154,7 +149,7 @@
               <label class="col-md-3 adInsLabel" for="Zipcode">Zipcode</label>
               <div class="col-md-9">
                 <div class="width-75-per">
-                <lib-uclookupgeneric [lookupInput]="inputLookupZipCodeObj" [parentForm]='RefEmpForm' [enjiForm]='enjiForm' [identifier]="'Zipcode'"
+                <lib-uclookupgeneric [lookupInput]="inputLookupZipCodeObj" [parentForm]='RefEmpForm' [enjiForm]='enjiForm' [identifier]="'ZipcodeLookup'"
                     (lookup)="getLookupZipCodeResponse($event)"></lib-uclookupgeneric>
                 </div>
               </div>
@@ -184,8 +179,8 @@
               </div>
             </div>
           </div>
-          <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Contact Information</h4>
+          <lib-ucSubsection [id]="'ContactInformationPanelId'" [title]="'Contact Information'" [panel]="'ContactInformationPanel'"></lib-ucSubsection>
+          <div class="form-body" id="ContactInformationPanel">
             <div class="form-group row adins-required">
               <label class="col-md-3 adInsLabel" for="Phone1Area">Phone 1</label>
               <div class="col-md-2">
@@ -284,8 +279,8 @@
               </div>
             </div>
           </div>
-          <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Bank Information</h4>
+          <lib-ucSubsection [id]="'BankPanelId'" [title]="'Bank Information'" [panel]="'BankPanel'"></lib-ucSubsection>
+          <div class="form-body" id="BankPanel">
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="BankName" translate>Bank Name </label>
               <div class="col-md-9">
@@ -327,6 +322,9 @@
             </div>
           </div>
           <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Employee/paging']" translate>
+              <i class="ft-arrow-left"></i> Cancel
+            </button>
             <button type="submit" class="btn btn-raised btn-primary" (click)="SaveForm()">
               <i class="fa fa-check-square-o"></i> Save
             </button>

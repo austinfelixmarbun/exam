@@ -1,0 +1,241 @@
+{
+    "title": "Product Approval",
+    "exportExcel": false,
+    "component": [
+      {
+        "type": "textbox",
+        "name": "PROD_CODE",
+        "id": "ProdCodeId",
+        "value": "",
+        "label": "PRODUCT CODE",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "PROD_NAME",
+        "id": "ProdNameId",
+        "value": "",
+        "label": "PRODUCT NAME",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "datepicker",
+        "name": "B.START_DT",
+        "id": "StartDtId",
+        "value": "",
+        "label": "START DATE",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "datepicker",
+        "name": "B.END_DT",
+        "id": "EndDtId",
+        "value": "",
+        "label": "END DATE",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "APV_NO",
+        "id": "ApvNoId",
+        "value": "",
+        "label": "APPROVAL NO",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "A.REQUEST_BY",
+        "id": "ReqById",
+        "value": "",
+        "label": "REQUEST BY",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "MAIN_USERNAME",
+        "id": "TaskOwnerId",
+        "value": "",
+        "label": "TASK OWNER",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "USERNAME",
+        "id": "CurrentUserId",
+        "value": "",
+        "label": "CURRENT USER",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "datepicker",
+        "name": "A.REQUEST_DATE",
+        "id": "ReqDtId",
+        "value": "",
+        "label": "REQUEST DATE",
+        "placeholder": "Placeholder"
+      }
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Request Date",
+        "name": "A.REQUEST_DATE"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Request Type",
+        "name": "STATUS"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Product Code",
+        "name": "PROD_CODE"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Product Name",
+        "name": "PROD_NAME"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Current Version",
+        "name": "D.PROD_VERSION"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Draft Version",
+        "name": "B.PROD_VERSION"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Start Date",
+        "name": "B.START_DT"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "End Date",
+        "name": "B.END_DT"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Approval No",
+        "name": "A.APV_NO"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Request By",
+        "name": "A.REQUEST_BY"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Task Owner",
+        "name": "MAIN_USERNAME"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Current User",
+        "name": "USERNAME"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT A.REQUEST_DATE AS ReqDt, C.PROD_CODE AS ProdCode, C.PROD_NAME AS ProdName, D.PROD_VERSION AS CurrentVersion, B.PROD_VERSION AS DraftVersion, B.START_DT AS StartDt, B.END_DT AS EndDt,C.PROD_ID AS ProdId, B.PROD_H_ID AS ProdHId, A.STATUS AS ReqType, A.APV_NO AS ApvNo, A.REQUEST_BY AS ReqBy, A.MAIN_USERNAME AS TaskOwner, A.USERNAME AS CurrentUser",
+      "from": "FROM dbo.APPROVAL_TASK_MAPPER A WITH(NOLOCK) JOIN dbo.PROD_H B WITH(NOLOCK) ON A.TRX_NO = B.PROD_H_ID JOIN dbo.PROD C WITH(NOLOCK) ON B.PROD_ID = C.PROD_ID LEFT JOIN dbo.PROD_H D WITH(NOLOCK) ON C.CURRENT_PROD_H_ID = D.PROD_H_ID"
+    },
+    "bodyList": [
+      {
+        "type": "date",
+        "position": "center",
+        "property": "ReqDt"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ReqType"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ProdCode"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ProdName"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "CurrentVersion"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "DraftVersion"
+      },
+      {
+        "type": "date",
+        "position": "center",
+        "property": "StartDt"
+      },
+      {
+        "type": "date",
+        "position": "center",
+        "property": "EndDt"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ApvNo"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ReqBy"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "TaskOwner"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "CurrentUser"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/Product/HOApproval/Detail",
+            "icon": "fa fa-check-square",
+            "param": [
+              {
+                "type": "ProdHId",
+                "property": "ProdHId"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

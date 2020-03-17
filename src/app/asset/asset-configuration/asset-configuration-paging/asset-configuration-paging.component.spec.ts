@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AssetConfigurationPagingComponent } from './asset-configuration-paging.component';
 
 describe('AssetConfigurationPagingComponent', () => {

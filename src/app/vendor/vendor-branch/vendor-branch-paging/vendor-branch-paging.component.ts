@@ -7,22 +7,21 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
-  selector: 'app-branch',
-  templateUrl: './branch.component.html',
-  styleUrls: ['./branch.component.scss'],
+  selector: 'app-vendor-branch-paging',
+  templateUrl: './vendor-branch-paging.component.html',
+  styleUrls: ['./vendor-branch-paging.component.scss'],
   providers: [NGXToastrService]
 })
-export class BranchComponent implements OnInit {
+export class VendorBranchPagingComponent implements OnInit {
 
-  inputPagingObj: any;
-
-
+  inputPagingObj : any;
 
   constructor(private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
+
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchBranch.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
@@ -31,15 +30,12 @@ export class BranchComponent implements OnInit {
     this.inputPagingObj.deleteUrl = "/Vendor/DeleteVendor";
     this.inputPagingObj.addCritInput = new Array();
 
-    // var critObj = new CriteriaObj();
-    // critObj.propName = "vdr.MR_VENDOR_CLASS";
-    // critObj.restriction = AdInsConstant.RestrictionEq;
-    // critObj.value = "BRANCH";
-    // this.inputPagingObj.addCritInput.push(critObj);
-
-
-
-
+    var critObj = new CriteriaObj();
+    critObj.propName = "vdr.MR_VENDOR_CLASS";
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.value = "BRANCH";
+    
+    this.inputPagingObj.addCritInput.push(critObj);
 
   }
 

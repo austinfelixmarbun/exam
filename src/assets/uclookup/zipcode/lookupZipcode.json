@@ -1,10 +1,9 @@
 {
-    "url": "http://getSupplier",
     "title":"Lookup Zip Code",
     "component": [
       {
         "type": "textbox",
-        "name": "zipCode",
+        "name": "RZ.ZIPCODE",
         "id": "ZipCode",
         "value": "",
         "label": "Zip Code",
@@ -12,7 +11,7 @@
       },
       {
         "type": "textbox",
-        "name": "area_Code_2",
+        "name": "RZ.AREA_CODE_2",
         "id": "Kelurahan",
         "value": "",
         "label": "Kelurahan",
@@ -20,7 +19,7 @@
       },
       {
         "type": "textbox",
-        "name": "area_Code_1",
+        "name": "RZ.AREA_CODE_1",
         "id": "kecamatan",
         "value": "",
         "label": "Kecamatan",
@@ -28,33 +27,33 @@
       }
     ],
     "querystring": {
-      "select": "SELECT A.REF_ZIPCODE_ID as refZipcodeId, A.AREA_CODE_1 as areaCode1, A.AREA_CODE_2 as areaCode2, A.ZIPCODE as zipcode, A.CITY as city, A.IS_ACTIVE as isActive",
-      "from": "FROM REF_ZIPCODE A WITH(NOLOCK)"
+      "select": "SELECT RZ.AREA_CODE_1 AS AreaCode1, RZ.AREA_CODE_2 AS AreaCode2, RZ.ZIPCODE AS Zipcode, RZ.CITY AS City, RPD.PROV_DISTRICT_NAME AS Province, RZ.REF_ZIPCODE_ID AS RefZipcodeId, RZ.IS_ACTIVE AS IsActive",
+      "from": "FROM REF_ZIPCODE RZ WITH(NOLOCK) LEFT JOIN dbo.REF_PROV_DISTRICT RPD WITH(NOLOCK) ON RZ.REF_PROV_DISTRICT_ID = RPD.REF_PROV_DISTRICT_ID"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "left",
             "label": "City",
-            "name": "city"
+            "name": "RZ.CITY"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Kelurahan",
-            "name": "area_Code_2"
+            "name": "RZ.AREA_CODE_2"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Kecamatan",
-            "name": "area_Code_1"
+            "name": "RZ.AREA_CODE_1"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Zipcode",
-            "name": "zipcode"
+            "name": "RZ.ZIPCODE"
         },
         {
             "type": "label",
@@ -66,22 +65,22 @@
         {
             "type": "text",
             "position": "left",
-            "property": "city"
+            "property": "City"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "areaCode2"
+            "property": "AreaCode2"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "areaCode1"
+            "property": "AreaCode1"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "zipcode"
+            "property": "Zipcode"
         },
         {
             "type": "action",
@@ -89,11 +88,11 @@
             "action": [
                 {
                     "type": "select",
-                    "property": "zipcode"
+                    "property": "Zipcode"
                 }
             ]
         }
     ],
-    "propertyId": "zipcode",
-    "propertyName": "zipcode"
+    "propertyId": "Zipcode",
+    "propertyName": "Zipcode"
 }

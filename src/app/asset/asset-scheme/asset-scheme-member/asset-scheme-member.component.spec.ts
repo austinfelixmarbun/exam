@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AssetSchemeMemberComponent } from './asset-scheme-member.component';
 
 describe('AssetSchemeMemberComponent', () => {

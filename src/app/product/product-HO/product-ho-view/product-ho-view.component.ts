@@ -1,5 +1,5 @@
 import { environment } from "environments/environment";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { DecimalPipe } from "@angular/common";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
@@ -10,6 +10,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
 import { RefProductBrancMbrObj } from "../../../shared/model/RefProductBrancMbrObj.Model";
 import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
+import { getComponent } from "@angular/core/src/linker/component_factory_resolver";
 
 
 
@@ -19,6 +20,8 @@ import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
   providers: [DecimalPipe, NGXToastrService]
 })
 export class ProductHOViewComponent implements OnInit {
+
+  @Input() inputProdHId;
 
   prodId: any;
   prodHId: any;
@@ -41,19 +44,20 @@ export class ProductHOViewComponent implements OnInit {
 
     this.ProdDUrl = AdInsConstant.GetProductDetailComponentInfo;
     this.ProdBranchUrl = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
-    this.ProdVerUrl = AdInsConstant.GetListProdHVersionByProdId;
+    this.ProdVerUrl = AdInsConstant.GetListProdHVersionByProdHId;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {
         this.prodHId = params["prodHId"];
       }
-      if (params["prodId"] != null) {
-        this.prodId = params["prodId"];
-      }
     });
   }
 
   ngOnInit() {
+    if(this.prodHId == undefined){
+      this.prodHId = this.inputProdHId;
+    }
+    
     //** Main Information **//
     this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
 
@@ -100,8 +104,7 @@ export class ProductHOViewComponent implements OnInit {
       }
     );
 
-    //** Product Component **//
-          //** Scheme Component **//
+    //** Scheme Component **//
     this.refProductDetailObj = new RefProductDetailObj
     this.refProductDetailObj.ProdHId = this.prodHId;
     this.refProductDetailObj.RefProdCompntGrpCode = 'SCHM';
@@ -115,7 +118,7 @@ export class ProductHOViewComponent implements OnInit {
         console.log(error);
       }
     );
-          //** Score Component **//
+    //** Score Component **//
     this.refProductDetailObj = new RefProductDetailObj
     this.refProductDetailObj.ProdHId = this.prodHId;
     this.refProductDetailObj.RefProdCompntGrpCode = 'SCORE';
@@ -143,6 +146,7 @@ export class ProductHOViewComponent implements OnInit {
         console.log(error);
       }
     );
+    
           //** Other Component **//
     this.refProductDetailObj = new RefProductDetailObj
     this.refProductDetailObj.ProdHId = this.prodHId;
