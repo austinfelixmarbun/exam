@@ -15,4 +15,3 @@ export const environment = {
   FoundationR3Url: 'http://localhost:5000', 
 };
 
-

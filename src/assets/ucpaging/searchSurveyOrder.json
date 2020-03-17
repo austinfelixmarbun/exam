@@ -51,22 +51,22 @@
         },
         {
             "type": "datepicker",
-            "datatype" : "date",
+            "datatype": "date",
             "name": "SO.REQ_DT",
             "id": "ReqDtGT",
             "value": "",
             "label": "Request Date >=",
-            "restriction" : "lte",
+            "restriction": "lte",
             "placeholder": "Placeholder"
         },
         {
             "type": "datepicker",
-            "datatype" : "date",
+            "datatype": "date",
             "name": "SO.REQ_DT",
             "id": "ReqDtLT",
             "value": "",
             "label": "Request Date <=",
-            "restriction" : "lte",
+            "restriction": "lte",
             "placeholder": "Placeholder"
         },
         {
@@ -103,7 +103,7 @@
         },
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "Transaction Number",
             "name": "SO.TRX_REF_NO"
         },
@@ -158,11 +158,11 @@
             "type": "link",
             "position": "center",
             "property": "SrvyOrderNo",
-            "path" : "/Survey/View",
-            "param" : [
+            "path": "/Survey/View",
+            "param": [
                 {
-                    "type" : "SrvyOrderId",
-                    "property" : "SrvyOrderId"
+                    "type": "SrvyOrderId",
+                    "property": "SrvyOrderId"
                 }
             ]
         },
@@ -172,9 +172,16 @@
             "property": "MrSrvySourceCode"
         },
         {
-            "type": "text",
-            "position": "left",
-            "property": "TrxRefNo"
+            "type": "link",
+            "position": "center",
+            "property": "TrxRefNo",
+            "path": "/Survey/View",
+            "param": [
+                {
+                    "type": "SrvyOrderId",
+                    "property": "SrvyOrderId"
+                }
+            ]
         },
         {
             "type": "text",
@@ -206,17 +213,47 @@
             "position": "center",
             "action": [
                 {
-                    "type": "edit",
-                    "path": "/Survey/Profession/detail",
-                    "param": [
-                      {
-                        "type": "refProfessionId",
-                        "property": "refProfessionId"
-                      },
-                      {
-                        "type": "param",
-                        "property": "edit"
-                      }
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrSrvyStatCode",
+                                    "value": "DONE",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result" : {
+                                "type": "url",
+                                "path" : "/Survey/Task",
+                                "param" : [
+                                    {
+                                        "type" : "SrvyOrderId",
+                                        "property" : "SrvyOrderId"
+                                    }
+                                ]
+                            },
+                            "isHide" : true
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrSrvyStatCode",
+                                    "value": "DONE",
+                                    "restriction": "NEQ"
+                                }
+                            ],
+                            "result" : {
+                                "type": "url",
+                                "path" : "/Survey/Task",
+                                "param" : [
+                                    {
+                                        "type" : "SrvyOrderId",
+                                        "property" : "SrvyOrderId"
+                                    }
+                                ]
+                            }
+                        }
                     ]
                 }
             ]
@@ -226,17 +263,35 @@
             "position": "center",
             "action": [
                 {
-                    "type": "edit",
-                    "path": "/Survey/Profession/detail",
-                    "param": [
-                      {
-                        "type": "refProfessionId",
-                        "property": "refProfessionId"
-                      },
-                      {
-                        "type": "param",
-                        "property": "edit"
-                      }
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrSrvyStatCode",
+                                    "value": "DONE",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result" : {
+                                "type": "callback",
+                                "property" : "SrvyOrderId"
+                            },
+                            "isHide" : true
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrSrvyStatCode",
+                                    "value": "DONE",
+                                    "restriction": "NEQ"
+                                }
+                            ],
+                            "result" : {
+                                "type": "callback",
+                                "property" : "SrvyOrderId"
+                            }
+                        }
                     ]
                 }
             ]

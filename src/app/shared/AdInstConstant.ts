@@ -251,7 +251,9 @@ export class AdInsConstant {
   public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
   public static GetListActiveRefMaster = environment.FoundationR3Url +"/RefMaster/GetListKeyValueActiveByCode";
   public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
+ 
 
+ 
   //REF INDUSTRY TYPE
   public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
   public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
@@ -501,6 +503,12 @@ export class AdInsConstant {
 
   //VENDOR
   public static DeleteVendor ="/Vendor/DeleteVendor";
+  public static AddVendorHO = environment.FoundationR3Url + "/Vendor/AddVendorHO";
+  public static EditVendorHO = environment.FoundationR3Url + "/Vendor/EditVendorHO";
+  public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
+  public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
+  public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
+  
   public static GetListVendorBankAccByVendorId = environment.localHostUrl + "/VendorBankAcc/GetListVendorBankAccByVendorId";
   public static AddVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/AddVendorBankAcc";
   public static EditVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/EditVendorBankAcc";
@@ -541,6 +549,7 @@ export class AdInsConstant {
   public static AddNewCustPersonal = environment.FoundationR3Url + "/CustPersonal/AddCustPersonal"
   public static EditCustPersonal = environment.FoundationR3Url + "/CustPersonal/EditCustPersonal"
   public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
+  public static GetCustPersonalbyCustId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustId"
  
   // Customer
   public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust"
