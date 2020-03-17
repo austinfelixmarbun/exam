@@ -30,22 +30,22 @@ state: any;
     IsAffiliateWithMf: [true],
     VipNotes : ['']
   });
-
+  KTP = "KTP";
   getUrl: any;
   custPersonalObj: CustPersonalObj;
   tempGender: any;
   tempIdType: any;
   tempCustModel : any;
   CustName  : any;
-  indexGender:any;
-  indexCustModel :any;
+ 
+  
   Gender : any;
-  GenderDesc:any;
+  
   CustModel : any;
-  CustModelDesc:any;
-  indexMrIdTypeCode : any;
+ 
+  
   MrIdTypeCode : any;
-  MrIdTypeCodeDesc : any;
+ 
   BirthPlace : any;
   BirthDt : any;
   IdNo : any;
@@ -71,7 +71,7 @@ state: any;
       (response) => {
         this.tempGender = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
-          Gender: 0
+          Gender: this.tempGender[0].Key
 
         });
  
@@ -86,8 +86,7 @@ state: any;
       (response) => {
         this.tempIdType = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
-          MrIdTypeCode: 0 
-
+          MrIdTypeCode: this.tempIdType[0].Key
         });
       }
     );
@@ -102,7 +101,8 @@ state: any;
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
-          CustModel: 0
+          
+          CustModel: this.tempCustModel[0].Key
 
         });
       }
@@ -121,18 +121,16 @@ state: any;
     this.CustName= this.CustomerPersonalForm.controls["CustName"].value; 
     
 
-    this.indexCustModel = this.CustomerPersonalForm.controls["CustModel"].value;
-    this.CustModelDesc = this.tempCustModel[this.indexCustModel].Value;
-    this.CustModel = this.tempCustModel[this.indexCustModel].Key;
+     
+    this.CustModel =  this.CustomerPersonalForm.controls["CustModel"].value;
     
-
-    this.indexGender = this.CustomerPersonalForm.controls["Gender"].value;
-    this.Gender = this.tempGender[this.indexGender].Key;
-    this.GenderDesc= this.tempGender[this.indexGender].Value; 
+ 
+    this.Gender = this.CustomerPersonalForm.controls["Gender"].value;
     
-    this.indexMrIdTypeCode = this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
-    this.MrIdTypeCode= this.tempIdType[this.indexMrIdTypeCode].Key;
-    this.MrIdTypeCodeDesc = this.tempIdType[this.indexMrIdTypeCode].Value;
+    
+    
+    this.MrIdTypeCode= this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
+     
    
     this.BirthPlace = this.CustomerPersonalForm.controls["BirthPlace"].value;
     this.BirthDt= this.CustomerPersonalForm.controls["BirthDt"].value;
@@ -143,7 +141,22 @@ state: any;
     this.IsVip = this.CustomerPersonalForm.controls["IsVip"].value;
     this.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value;
     this.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
-    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName,"GenderDesc":this.GenderDesc, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,"MrIdTypeCodeDesc" : this.MrIdTypeCodeDesc,"CustModelDesc" : this.CustModelDesc, "CustModel" : this.CustModel, "BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName,"IsVip"  : this.IsVip,"IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes  } });
+    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,   "CustModel" : this.CustModel, "BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName,"IsVip"  : this.IsVip,"IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes  } });
  
   }
+  onOptionsSelected(event){    console.log(event.target.value);
+    if(event.target.value == this.KTP){
+  
+      this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
+      this.CustomerPersonalForm.controls.IdExpiredDt.disable();
+    
+    }else{
+      this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);   this.CustomerPersonalForm.controls.IdExpiredDt.disable();
+    }
+    this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
+  
+   
+  }
+
 }
+

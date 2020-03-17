@@ -11,38 +11,26 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
   styleUrls: ['./asset-category-paging.component.scss']
 })
 export class AssetCategoryPagingComponent implements OnInit {
-
-  AssetTypeId:any;
+  AssetTypeId: any;
   inputPagingObj: any;
-  viewObj:any;
-  arrCrit:any;
+  viewObj: any;
+  arrCrit: any;
   constructor(private route: ActivatedRoute) {
-    
-
     this.route.queryParams.subscribe(params => {
-
-      
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
       }
-     
     });
-   }
-  
+  }
+
   ngOnInit() {
-
-   
-
-
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetCategory.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetCategory.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetCategory;
-    
     this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
-    
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.restriction = AdInsConstant.RestrictionLike;
@@ -51,5 +39,4 @@ export class AssetCategoryPagingComponent implements OnInit {
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
-  
 }

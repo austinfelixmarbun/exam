@@ -9,7 +9,8 @@
               </h4>
             </div>
             <div class="col-md-4" style="text-align-last: right">
-              <button type="button" class="backButton" [routerLink]="['/Asset/Scheme/MemberDetail']" [queryParams]="{AssetSchmHId: this.AssetSchmHId}" translate>
+              <button type="button" class="backButton" [routerLink]="['/Asset/Scheme/MemberDetail']"
+                [queryParams]="{AssetSchmHId: this.AssetSchmHId}" translate>
                 <i class="ft-arrow-left"></i> Back
               </button>
             </div>
@@ -32,54 +33,50 @@
   (ngSubmit)="SaveAssetSchmMember(AssetSchmForm)">
   <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
   <div [hidden]="resultData == null">
-  <table class="table table-responsive-md text-center table-hover">
-    <thead>
-      <tr class="table-header">
-        <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll"
-            name="CheckAll">
-        </th>
-        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='fullAssetCode'
-            translate>Full Asset
-            Code</span>
-        </th>
-        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='fullAssetName'
-            translate>Full Asset
-            Name</span>
-        </th>
-        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='assetCategoryName'
-            translate>Asset Category
-            Name</span>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of resultData">
-        <td>
-          <div *ngIf="listSelectedId.indexOf(item.AssetMasterId) >- 1">
-            <input type="checkbox" id="checkSame" name="itemSame"
-              (change)="Checked(item.AssetMasterId,  $event.target.checked)" [checked]="true">
-          </div>
-          <div *ngIf="listSelectedId.indexOf(item.AssetMasterId) < 0">
-            <input type="checkbox" id="checkDiff" name="itemDiff"
-              (change)="Checked(item.AssetMasterId,  $event.target.checked)" [checked]=false>
-          </div>
-        </td>
-        <td class="text-left">{{item.FullAssetCode}}</td>
-        <td class="text-left">{{item.FullAssetName}}</td>
-        <td class="text-left">{{item.AssetCategoryName}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
+    <table class="table table-responsive-md text-center table-hover">
+      <thead>
+        <tr class="table-header">
+          <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll"
+              name="CheckAll">
+          </th>
+          <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='fullAssetCode'
+              translate>Full Asset Code</span>
+          </th>
+          <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='fullAssetName'
+              translate>Full Asset Name</span>
+          </th>
+          <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='assetCategoryName'
+              translate>Asset Category Name</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of resultData">
+          <td>
+            <div *ngIf="listSelectedId.indexOf(item.AssetMasterId) >- 1">
+              <input type="checkbox" id="checkSame" name="itemSame"
+                (change)="Checked(item.AssetMasterId,  $event.target.checked)" [checked]="true">
+            </div>
+            <div *ngIf="listSelectedId.indexOf(item.AssetMasterId) < 0">
+              <input type="checkbox" id="checkDiff" name="itemDiff"
+                (change)="Checked(item.AssetMasterId,  $event.target.checked)" [checked]=false>
+            </div>
+          </td>
+          <td class="text-left">{{item.FullAssetCode}}</td>
+          <td class="text-left">{{item.FullAssetName}}</td>
+          <td class="text-left">{{item.AssetCategoryName}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
 
-  <div class="form-body">
-    <div class="form-actions right">
-      <button type="button" class="btn btn-raised btn-primary mr-1" (click)="addToTemp()" translate>
-        <i class="fa ft-plus"></i> Add To Temp
-      </button>
+    <div class="form-body">
+      <div class="form-actions right">
+        <button type="button" class="btn btn-raised btn-primary mr-1" (click)="addToTemp()" translate>
+          <i class="fa ft-plus"></i> Add To Temp
+        </button>
+      </div>
     </div>
-  </div>
-
     <table class="table table-responsive-md text-center table-hover">
       <thead>
         <tr class="table-header">
@@ -115,5 +112,5 @@
         </button>
       </div>
     </div>
-    </div>
+  </div>
 </form>

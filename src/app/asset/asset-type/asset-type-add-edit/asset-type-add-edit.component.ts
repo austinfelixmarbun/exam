@@ -17,7 +17,6 @@ import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 export class AssetTypeAddEditComponent implements OnInit {
   ItemMaxHierarchyLevelNumber = [1, 2, 3, 4, 5];
   HierarchyNumber: any;
-
   AssetTypeForm = this.fb.group({
     AssetTypeCode: ['', Validators.required],
     AssetTypeName: ['', Validators.required],
@@ -34,16 +33,13 @@ export class AssetTypeAddEditComponent implements OnInit {
     IsLoanObj: [''],
     IsActive: [''],
     MaxHierarchyLevel: [''],
-
     HierarchyArr: this.fb.array([
       this.fb.group({
         label: ['Hierarchy Level 1 Label'],
         values: [''],
       })
     ])
-
   });
-
   getUrl: string;
   addUrl: string;
   editUrl: string;
@@ -59,7 +55,6 @@ export class AssetTypeAddEditComponent implements OnInit {
     this.getUrl = AdInsConstant.GetAssetTypeById;
     this.addUrl = AdInsConstant.AddAssetType;
     this.editUrl = AdInsConstant.EditAssetType;
-
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -68,7 +63,6 @@ export class AssetTypeAddEditComponent implements OnInit {
         this.assetTypeId = params["AssetTypeId"];
       }
     });
-
   }
 
   get HierarchyArr() {
@@ -87,26 +81,21 @@ export class AssetTypeAddEditComponent implements OnInit {
 
   public onHierarchyLevelChanged(valuesArr = []) {
     this.HierarchyNumber = this.AssetTypeForm.controls.MaxHierarchyLevel.value;
-
     this.clearHierarchyArr();
-
     for (let i = 1; i <= this.HierarchyNumber; i++) {
       this.HierarchyArr.push(this.fb.group({
         label: ['Hierarchy Level ' + i + ' Label'],
         values: [valuesArr[i - 1]]
       }));
     }
-    console.log(this.AssetTypeForm.controls.HierarchyArr["controls"][0]['controls'].values);
   }
 
   ngOnInit() {
-    console.log('sini');
     var gsObj = new GeneralSettingObj();
     gsObj.GsCode = 'MAXASSETTYPELVL';
     this.http.post(this.getGeneralSettingUrl, gsObj).subscribe(
       response => {
         this.ItemMaxHierarchyLevelNumber = this.ItemMaxHierarchyLevelNumber.slice(0, parseInt(response['GsValue']) );
-
         this.AssetTypeForm.patchValue({
           MaxHierarchyLevel: this.ItemMaxHierarchyLevelNumber[0],
           IsLoanObj: true,
@@ -114,10 +103,8 @@ export class AssetTypeAddEditComponent implements OnInit {
         });
         if (this.pageType == "edit") {
           this.assetTypeObj = new AssetTypeObj();
-
           this.assetTypeObj.AssetTypeId = this.assetTypeId;
           this.AssetTypeForm.controls["AssetTypeCode"].disable();
-
           this.http.post(this.getUrl, this.assetTypeObj).subscribe(
             response => {
               this.resultData = response;
@@ -130,7 +117,6 @@ export class AssetTypeAddEditComponent implements OnInit {
                 SerialNo3Label: this.resultData.SerialNo3Label,
                 SerialNo4Label: this.resultData.SerialNo4Label,
                 SerialNo5Label: this.resultData.SerialNo5Label,
-
                 IsMndtrySerialNo1: this.resultData.IsMndtrySerialNo1,
                 IsMndtrySerialNo2: this.resultData.IsMndtrySerialNo2,
                 IsMndtrySerialNo3: this.resultData.IsMndtrySerialNo3,
@@ -141,14 +127,10 @@ export class AssetTypeAddEditComponent implements OnInit {
                 MaxHierarchyLevel: this.resultData.MaxHierarchyLevel
               });
               this.assetTypeCode = this.resultData.AssetTypeCode;
-
               this.clearHierarchyArr();
               this.HierarchyNumber = this.resultData.MaxHierarchyLevel;
-
               var tempArr = [this.resultData.HierarchyLabelLevel1, this.resultData.HierarchyLabelLevel2, this.resultData.HierarchyLabelLevel3, this.resultData.HierarchyLabelLevel4, this.resultData.HierarchyLabelLevel5];
-
               this.onHierarchyLevelChanged(tempArr);
-
             },
             error => {
               console.log(error);
@@ -160,79 +142,65 @@ export class AssetTypeAddEditComponent implements OnInit {
         console.log(error);
       }
     );
-
-
   }
 
   SaveForm() {
-
     this.assetTypeObj = new AssetTypeObj();
     this.assetTypeObj = this.AssetTypeForm.value;
     var tempArr = [];
-
     for (var i = 0; i < this.assetTypeObj.MaxHierarchyLevel; i++) {
       tempArr[i] = this.AssetTypeForm.value.HierarchyArr[i].values;
     }
-
     this.assetTypeObj.HierarchyLabelLevel1 = tempArr[0];
     this.assetTypeObj.HierarchyLabelLevel2 = tempArr[1];
     this.assetTypeObj.HierarchyLabelLevel3 = tempArr[2];
     this.assetTypeObj.HierarchyLabelLevel4 = tempArr[3];
     this.assetTypeObj.HierarchyLabelLevel5 = tempArr[4];
-
     if (!this.assetTypeObj.IsMndtrySerialNo1 || this.assetTypeObj.IsMndtrySerialNo1 == "") {
       this.assetTypeObj.IsMndtrySerialNo1 = false;
     }
     else {
       this.assetTypeObj.IsMndtrySerialNo1 = true;
     }
-
     if (!this.assetTypeObj.IsMndtrySerialNo2 || this.assetTypeObj.IsMndtrySerialNo2 == "") {
       this.assetTypeObj.IsMndtrySerialNo2 = false;
     }
     else {
       this.assetTypeObj.IsMndtrySerialNo2 = true;
     }
-
     if (!this.assetTypeObj.IsMndtrySerialNo3 || this.assetTypeObj.IsMndtrySerialNo3 == "") {
       this.assetTypeObj.IsMndtrySerialNo3 = false;
     }
     else {
       this.assetTypeObj.IsMndtrySerialNo3 = true;
     }
-
     if (!this.assetTypeObj.IsMndtrySerialNo4 || this.assetTypeObj.IsMndtrySerialNo4 == "") {
       this.assetTypeObj.IsMndtrySerialNo4 = false;
     }
     else {
       this.assetTypeObj.IsMndtrySerialNo4 = true;
     }
-
     if (!this.assetTypeObj.IsMndtrySerialNo5 || this.assetTypeObj.IsMndtrySerialNo5 == "") {
       this.assetTypeObj.IsMndtrySerialNo5 = false;
     }
     else {
       this.assetTypeObj.IsMndtrySerialNo5 = true;
     }
-
     if (!this.assetTypeObj.IsLoanObj || this.assetTypeObj.IsLoanObj == "") {
       this.assetTypeObj.IsLoanObj = false;
     }
     else {
       this.assetTypeObj.IsLoanObj = true;
     }
-
     if (!this.assetTypeObj.IsActive || this.assetTypeObj.IsActive == "") {
       this.assetTypeObj.IsActive = false;
     }
     else {
       this.assetTypeObj.IsActive = true;
     }
-
     if (this.assetTypeObj.SerialNo2Label == "") {
       this.assetTypeObj.SerialNo2Label = null;
     }
-
     if (this.assetTypeObj.SerialNo3Label == "") {
       this.assetTypeObj.SerialNo3Label = null;
     }
@@ -242,13 +210,8 @@ export class AssetTypeAddEditComponent implements OnInit {
     if (this.assetTypeObj.SerialNo5Label == "") {
       this.assetTypeObj.SerialNo5Label = null;
     }
-
-    console.log(this.assetTypeObj);
-
     if (this.pageType == "add") {
       this.assetTypeObj.RowVersion = "";
-      console.log('masuk add');
-
       this.http.post(this.addUrl, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
@@ -273,5 +236,4 @@ export class AssetTypeAddEditComponent implements OnInit {
       );
     }
   }
-
 }
