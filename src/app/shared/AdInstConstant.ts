@@ -252,6 +252,9 @@ export class AdInsConstant {
     public static GetListActiveRefMaster = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode";
     public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
 
+    //REF COUNTRY
+    public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
+
 
 
     //REF INDUSTRY TYPE
