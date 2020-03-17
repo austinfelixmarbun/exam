@@ -34,6 +34,7 @@ import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-o
 import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-offering-deactivate-edit/product-offering-deactivate-edit.component";
 import { ListOfficeMemberComponentOffering } from './prod-offering/prod-offering-add-detail/office-member/list-office-member/list-office-member.component';
 import { SearchOfficeComponentOffering } from './prod-offering/prod-offering-add-detail/office-member/search-office/search-office.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { SearchOfficeComponentOffering } from './prod-offering/prod-offering-add
     ArchwizardModule,
     MatTabsModule,
     MatDividerModule,
-    UclookupgenericModule
+    UclookupgenericModule,
+    UcShowErrorsModule,
   ],
   declarations: [
     ProductHOPagingComponent,

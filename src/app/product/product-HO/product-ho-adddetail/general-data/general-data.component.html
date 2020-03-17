@@ -1,58 +1,43 @@
 <div class="card-body">
   <div class="px-3">
-
-    <form class="form form-horizontal" [formGroup]="RefGeneralDataForm" #enjiForm="ngForm">
-      <!-- Main Info -->
-      <div class="form-body">
-        <h4 class="form-section card-title" translate><i class="ft-file-text"></i> </h4>
-
-        <!-- Look Up Copy Product -->
-        <!-- <div class="form-group row">
-          <label class="col-md-3  adInsLabel" >Copy Product</label>
-          <div class="col-md-6">
-            <lib-uclookupgeneric width-75-per [lookupInput]="inputLookUpObj" [parentForm]='RefGeneralDataForm' [enjiForm]="enjiForm" [identifier]="'indentifierTemp'" (lookup)="CopyProduct($event)">
-            </lib-uclookupgeneric>
+    <form class="form form-horizontal" [formGroup]="FormProdComp" #enjiForm="ngForm" (ngSubmit)="FormProdComp.valid && SubmitForm()">
+      <div class="col-md-12" formArrayName="groups"
+        *ngFor="let type of FormProdComp.controls['groups'].controls; let j = index">
+        <div class="form-group row" [formGroupName]="j">
+          <div class="col-md-12">
+            <h4 class="form-section">{{FormProdComp.controls['groups'].value[j].groupName}}</h4>
           </div>
-        </div> -->
-
-        <div formArrayName="items">
-          <div *ngFor="let item of RefGeneralDataForm.controls.items.controls; let i = index;">
-            <div class="form-group row" [formGroupName]="i">
-              <label class="col-md-3 text-left" translate> {{item.controls.ProdCompntName.value}} </label>
-              <div class="col-md-6" style="border-right: 1px solid grey"
-                [ngSwitch]="item.controls.ProdCompntType.value">
-                <div *ngSwitchCase="'DDL'">
-                  <div>
-                    <select class="form-control adInsInput" style="width: auto" formControlName="CompntValueDesc" (change)="clickTest($event, i)">
-                      <option *ngFor="let it of item.controls.DropDownList.controls" value="{{it.value.Key}}">
-                        {{it.value.Value}}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div *ngSwitchCase="'AMT'">
-                  <P>AMOUNT</P>
-                </div>
-                <div *ngSwitchCase="'DATE'">
-                  <P>DATE</P>
-                </div>
+          <div class="col-md-12" formArrayName="components"
+            *ngFor="let node of type.controls['components'].controls; let l = index">
+            <div class="form-group row" [formGroupName]="l">
+              <label class="col-md-4 ">{{type.controls['components'].value[l].ProdCompntName}}</label>
+              <div class="col-md-8" *ngIf="type.controls['components'].value[l].ProdCompntType == 'DDL'">
+                <select formControlName="CompntValue" class="form-control width-50-per" id="CompntValue"
+                  name="CompntValue"
+                  (change)="onChangeEvent(type.controls['components'].value[l].RefProdCompntCode,$event,l,j);">
+                  <option *ngFor="let m of dictOptions[type.controls['components'].value[l].RefProdCompntCode]"
+                    value={{m.Key}}>{{m.Value}}</option>
+                </select>
+                <lib-uc-show-errors [control]="node.controls.CompntValue" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+              <div class="col-md-8" *ngIf="type.controls['components'].value[l].ProdCompntType == 'AMT'">
+                <input type="text" class="form-control adInsInput width-25-per" formControlName="CompntValue">
+                <lib-uc-show-errors [control]="node.controls.CompntValue" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="form-actions right">
-          <button type="submit" (click)="SaveForm()" class="btn btn-raised btn-primary">
-            <i class="fa fa-check-square-o"></i> Save
-          </button>
-          <button type="submit" (click)="NextDetail()" class="btn btn-raised btn-primary">
-            <i class="fa fa-check-square-o"></i> Next
-          </button>
-        </div>
-
       </div>
-
+      <div class="form-actions right">
+        <button type="submit" (click)="ClickSave('save')" class="btn btn-raised btn-primary margin-r-5">
+          <i class="fa fa-check-square-o"></i> Save
+        </button>
+        <button type="submit" (click)="ClickSave('next')" class="btn btn-raised btn-primary">
+          <i class="fa fa-check-square-o"></i> Next
+        </button>
+      </div>
     </form>
-
   </div>
 </div>

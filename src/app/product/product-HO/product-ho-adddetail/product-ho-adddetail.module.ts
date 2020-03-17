@@ -32,7 +32,7 @@ import { UcviewgenericModule } from "@adins/ucviewgeneric";
         SharingComponentModule,
         ProductHOAddDetailRoutingModule,
         ArchwizardModule,
-        UcviewgenericModule
+        UcviewgenericModule,
     ],
     declarations: [],
     
