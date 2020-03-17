@@ -245,6 +245,8 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       let index = this.listSelectedId.indexOf(AssetSchmHIdFromH)
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
+    console.log("bbb")
+        console.log(this.listSelectedId)
   }
 
   SaveForm() {
