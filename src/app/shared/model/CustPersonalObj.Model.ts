@@ -13,7 +13,7 @@ export class CustPersonalObj {
   MrEducationCode : any;
   MrNationalityCode: any;
   WnaCountryCode: any;
-  MrMartialStatCode: any;
+  MrMaritalStatCode: any;
   MobilePhnNo1: any;
   MobilePhnNo2: any;
   EMail1 : any;
@@ -23,4 +23,5 @@ export class CustPersonalObj {
   NoOfResidence: any;
   IsRestInPeace: any;
   MrSalutationCode:any; 
+  RowVersion:any;
 }

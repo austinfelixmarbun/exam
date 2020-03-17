@@ -10,7 +10,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 })
 export class AssetSchemePagingComponent implements OnInit {
   inputPagingObj: any;
-
   constructor() { }
 
   ngOnInit() {
@@ -22,5 +21,4 @@ export class AssetSchemePagingComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetScheme.json";
     this.inputPagingObj.deleteUrl = "";
   }
-
 }

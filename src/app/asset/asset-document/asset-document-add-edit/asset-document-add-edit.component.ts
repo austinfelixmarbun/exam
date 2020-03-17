@@ -27,8 +27,6 @@ export class AssetDocumentAddEditComponent implements OnInit {
     IsActive: [true],
 
   });
-
-
   assetDocName: any;
   pageType: any;
   AssetTypeId: any;
@@ -50,25 +48,18 @@ export class AssetDocumentAddEditComponent implements OnInit {
     this.editUrl =  AdInsConstant.EditAssetDocList;
     this.getUrl = AdInsConstant.GetListRefAssetDoc;
     this.route.queryParams.subscribe(params => {
-
-
+      
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
       }
       if (params["mode"] != null) {
         this.pageType = params["mode"];
       }
-
       if (params["AssetDocListId"] != null) {
         this.AssetDocListId = params["AssetDocListId"];
       }
-
-
-
     });
-
   }
-
   ngOnInit() {
     console.log("wd");
     this.http.post(this.getUrl, assetDocListObj).subscribe(
@@ -81,13 +72,10 @@ export class AssetDocumentAddEditComponent implements OnInit {
     );
 
     if (this.pageType == "edit") {
-      
-      
-      this.apiUrl =   AdInsConstant.GetAssetDocListByAssetDocListId;
-      this.getRefAssetDocUrl =   AdInsConstant.GetRefAssetDocByRefAssetDocId;
+      this.apiUrl = AdInsConstant.GetAssetDocListByAssetDocListId;
+      this.getRefAssetDocUrl = AdInsConstant.GetRefAssetDocByRefAssetDocId;
       var assetDocListObj = new AssetDocListObj();
       var refAssetDocObj = new RefAssetDocObj();
-     
       assetDocListObj.AssetDocListId = this.AssetDocListId;
 
       this.http.post(this.apiUrl, assetDocListObj).subscribe(
@@ -95,18 +83,13 @@ export class AssetDocumentAddEditComponent implements OnInit {
           this.result = response;
           refAssetDocObj.RefAssetDocId = this.result.RefAssetDocId;
 
-
           this.http.post(this.getRefAssetDocUrl, refAssetDocObj).subscribe(
             (response) => {
               this.temp = response;
               this.assetDocName = this.temp.AssetDocName;
             });
 
-
-
-
           this.AssetDocumentForm.patchValue({
-
             IsMainDoc: this.result.IsMainDoc,
             IsValueNeeded: this.result.IsValueNeeded,
             IsPledge: this.result.IsPledge,
@@ -114,25 +97,16 @@ export class AssetDocumentAddEditComponent implements OnInit {
             IsMandatoryNew: this.result.IsMandatoryNew,
             IsMandatoryUsed: this.result.IsMandatoryUsed,
             IsActive: this.result.IsActive,
-
           })
         },
         (error) => {
           console.log(error);
         }
       );
-
-
-
-
-
-
     }
   }
   SaveForm() {
-
     if (this.pageType == "add") {
-
       this.assetDocListObj = new AssetDocListObj();
       this.assetDocListObj.RefAssetDocId = this.AssetDocumentForm.controls["AssetDocName"].value;
       this.assetDocListObj.IsValueNeeded = this.AssetDocumentForm.controls["IsValueNeeded"].value;
@@ -148,8 +122,6 @@ export class AssetDocumentAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });
-
-
         },
         error => {
           console.log(error);
@@ -158,7 +130,6 @@ export class AssetDocumentAddEditComponent implements OnInit {
     }
     else {
       this.assetDocListObj = this.result;
-    
       this.assetDocListObj.IsValueNeeded = this.AssetDocumentForm.controls["IsValueNeeded"].value;
       this.assetDocListObj.IsMainDoc = this.AssetDocumentForm.controls["IsMainDoc"].value;
       this.assetDocListObj.IsPledge = this.AssetDocumentForm.controls["IsPledge"].value;
@@ -167,21 +138,16 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsMandatoryUsed = this.AssetDocumentForm.controls["IsMandatoryUsed"].value;
       this.assetDocListObj.IsActive = this.AssetDocumentForm.controls["IsActive"].value;
 
-
       this.http.post(this.editUrl, this.assetDocListObj).subscribe(
         response => {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });
-
-
         },
         error => {
           console.log(error);
         }
       );
     }
-
   }
-
 }

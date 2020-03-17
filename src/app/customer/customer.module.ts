@@ -20,12 +20,15 @@ import { CustomerCompanyMainInfoComponent } from './customer-company/customer-co
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { CustomerPersonalDetailComponent } from './customer-personal/customer-personal-detail/customer-personal-detail.component';
+import { CustomerViewPersonalComponent } from './customer-view/customer-view-personal/customer-view-personal.component';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
 import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
+import { CustGroupTabComponent } from './cust-group-tab/cust-group-tab.component';
+import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-detail/cust-group-tab-detail.component';
 @NgModule({
-  exports: [ 
-  ],
+  exports: [],
   imports: [
     CustomerRoutingModule,
     CommonModule,
@@ -41,20 +44,19 @@ import { NegativeCustomerViewComponent } from './negative-customer/negative-cust
     ReactiveFormsModule,
     UclookupgenericModule,
     UcSubsectionModule, 
-     ArchwizardModule
+     ArchwizardModule,
+     UcviewgenericModule
   ],
   declarations: [ 
     CustomerPagingComponent, 
-    CustomerPersonalMainInfoComponent, 
-    CustomerPersonalDuplicateCheckComponent, 
-    CustomerCompanyDuplicateCheckComponent, 
-    CustomerCompanyMainInfoComponent, 
-    CustomerPersonalPageComponent, 
-    CustomerPersonalDetailComponent,
+    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent, CustomerViewPersonalComponent,
     NegativeCustomerComponent,
     NegativeCustomerDetailComponent,
-    NegativeCustomerViewComponent
-  ]
+    NegativeCustomerViewComponent,
+    CustGroupTabComponent,
+    CustGroupTabDetailComponent
+  ],
+  entryComponents: [CustGroupTabDetailComponent]
 })
 export class CustomerModule { 
   constructor(){
