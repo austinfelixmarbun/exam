@@ -12,7 +12,7 @@ export class CustomerViewPersonalDetailComponent implements OnInit {
 
   ngOnInit() {
     this.viewCustMainDataMainInfo =  "./assets/ucviewgeneric/viewCustMainDataMainInfo.json";
-    this.viewCustMainDataContactInformation = "./assets/ucviewgeneric/viewCustMainDataContactInformation.json"
+    this.viewCustMainDataContactInformation = "./assets/ucviewgeneric/viewCustMainDataContactInformation.json";
   }
 
 }

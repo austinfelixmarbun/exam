@@ -577,5 +577,6 @@ export class AdInsConstant {
   // CUSTOMER ADDRESS HISTORY
   public static GetListCustAddrHistByCustId = environment.FoundationR3Url +  "/CustAddrHist/GetListCustAddrHistByCustId";
 
-
+  // REF COUNTRY
+  public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
 }

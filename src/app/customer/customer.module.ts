@@ -27,6 +27,7 @@ import { NegativeCustomerComponent } from './negative-customer/negative-customer
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 import { CustomerViewPersonalDetailComponent } from './customer-view/customer-view-personal-detail/customer-view-personal-detail.component';
 import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
+import { CustomerViewPersonalJobDataComponent } from './customer-view/customer-view-personal-job-data/customer-view-personal-job-data.component';
 @NgModule({
   exports: [ 
   ],
@@ -56,6 +57,7 @@ import { CustomerViewPersonalAddressComponent } from './customer-view/customer-v
     NegativeCustomerViewComponent,
     CustomerViewPersonalDetailComponent,
     CustomerViewPersonalAddressComponent,
+    CustomerViewPersonalJobDataComponent,
   ]
 })
 export class CustomerModule { 
