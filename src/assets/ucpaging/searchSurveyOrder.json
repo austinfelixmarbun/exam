@@ -159,6 +159,7 @@
             "position": "center",
             "property": "SrvyOrderNo",
             "path": "/Survey/View",
+            "target": "_blank",
             "param": [
                 {
                     "type": "SrvyOrderId",
@@ -176,6 +177,7 @@
             "position": "center",
             "property": "TrxRefNo",
             "path": "/Survey/View",
+            "target": "_blank",
             "param": [
                 {
                     "type": "SrvyOrderId",
@@ -189,7 +191,7 @@
             "property": "Notes"
         },
         {
-            "type": "text",
+            "type": "date",
             "position": "left",
             "property": "ReqDt"
         },

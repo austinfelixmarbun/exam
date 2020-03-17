@@ -26,7 +26,7 @@ export class SurveyOrderTaskComponent implements OnInit {
 
   ngOnInit() {
     this.SurveyTaskList = new Array();
-    this.viewObj = "./assets/ucviewgeneric/viewSurveyOrder.json";
+    this.viewObj = "./assets/ucviewgeneric/viewSurveyOrderTask.json";
   }
 
   AddModal(content)

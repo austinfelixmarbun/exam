@@ -1,8 +1,8 @@
 {
-  "title": "Survey Order View",
+  "title": "Survey Order Task",
   "subsection": [
     {
-      "subSectionId": "SurveyOrderId",
+      "subSectionId": "SurveyOrderTaskId",
       "subSectionTitle": "Main Information",
       "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
       "mainInfo": [
@@ -57,20 +57,10 @@
           "type": "text",
           "label": "Request By",
           "property": "ReqByUser"
-        },
-        {
-          "type": "date",
-          "label": "Assign Date",
-          "property": "AssignDt"
-        },
-        {
-          "type": "text",
-          "label": "Assign By",
-          "property": "AssignByUser"
         }
       ],
       "querystring": {
-        "select": "SELECT RE.OFFICE_NAME AS OfficeName, SO.TRX_REF_NO AS TrxRefNo, SO.SRVY_ORDER_NO AS SrvyOrderNo, SO.MR_SRVY_STAT_CODE AS MrSrvyStatCode, SO.MR_SRVY_SOURCE_CODE AS MrSrvySourceCode, SO.REQ_BY_USER AS ReqByUser, SO.NOTES AS Notes, SO.REQ_DT AS ReqDt, SO.ASSIGN_DT AS AssignDt, SO.ASSIGN_BY_USER AS AssignByUser, SO.TASK_TOTAL AS TaskTotal, SO.SRVY_ORDER_ID AS SrvyOrderId",
+        "select": "SELECT RE.OFFICE_NAME AS OfficeName, SO.TRX_REF_NO AS TrxRefNo, SO.SRVY_ORDER_NO AS SrvyOrderNo, SO.MR_SRVY_STAT_CODE AS MrSrvyStatCode, SO.MR_SRVY_SOURCE_CODE AS MrSrvySourceCode, SO.REQ_BY_USER AS ReqByUser, SO.NOTES AS Notes, SO.REQ_DT AS ReqDt, SO.TASK_TOTAL AS TaskTotal, SO.SRVY_ORDER_ID AS SrvyOrderId",
         "from": "FROM dbo.SRVY_ORDER SO WITH(NOLOCK) JOIN dbo.REF_OFFICE RE WITH(NOLOCK) ON RE.REF_OFFICE_ID = SO.REF_OFFICE_ID",
         "where": "WHERE SO.SRVY_ORDER_ID = {0}"
       }

@@ -576,4 +576,9 @@ export class AdInsConstant {
     public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
     public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
 
+
+    // SURVEY TASK
+    public static GetListSrvyTaskBySrvyOrderId = "http://localhost:5000/SrvyTask/GetListSrvyTaskBySrvyOrderId";
+
+    
 }
