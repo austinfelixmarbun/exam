@@ -1,0 +1,74 @@
+<form class="form form-horizontal" [formGroup]="CustGrpForm" #enjiForm="ngForm" novalidate
+  (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
+  <div class="modal-header">
+    <h4 class="modal-title">Add Customer Group Member</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="col-md-12">
+      <div class="">
+        <div class="">
+          <div class="px-3">
+            <div class="form-body">
+              <div id="NegativeAssetSection">
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel" for="CustNo" translate>Customer No.</label>
+                  <div class="col-md-9" *ngIf="MrCustTypeCode == 'PERSONAL'">
+                    <lib-uclookupgeneric [lookupInput]="inputLookupCustPersonalObj" [parentForm]='CustGrpForm' [enjiForm]='enjiForm' [identifier]="'CustPersonalLookup'"
+                      (lookup)="getLookupCustPersonalResponse($event)"></lib-uclookupgeneric>
+                  </div>
+                  <div class="col-md-9" *ngIf="MrCustTypeCode == 'COMPANY'">
+                    <lib-uclookupgeneric [lookupInput]="inputLookupCustCompanyObj" [parentForm]='CustGrpForm' [enjiForm]='enjiForm' [identifier]="'CustCompanyLookup'"
+                      (lookup)="getLookupCustCompanyResponse($event)"></lib-uclookupgeneric>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="CustName" translate>Customer Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput" formControlName="CustName" 
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustGrpForm.controls.CustName.invalid }"
+                      [attr.disabled]="isCustPicked ? true : null">
+                    <show-errors [control]="CustGrpForm.controls.CustName" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="MrCustRelationshipCode" translate>Relationship</label>
+                  <div class="col-md-9">
+                    <select type="text" class="form-control adInsInput" formControlName="MrCustRelationshipCode" 
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustGrpForm.controls.MrCustRelationshipCode.invalid }">
+                      <option *ngFor="let item of relationshipList?.ReturnObject" [value]="item.Key">{{item.Value}}</option>
+                    </select>
+                    <show-errors [control]="CustGrpForm.controls.MrCustRelationshipCode" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="CustGrpNotes" translate>Notes</label>
+                  <div class="col-md-9">
+                    <textarea type="text" class="form-control adInsInput" formControlName="CustGrpNotes" 
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustGrpForm.controls.CustGrpNotes.invalid }"></textarea>
+                    <show-errors [control]="CustGrpForm.controls.CustGrpNotes" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="IsBothWays" translate>Both Ways</label>
+                  <div class="col-md-9">
+                    <input type="checkbox" formControlName="IsBothWays" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-raised btn-primary">
+      <i class="fa fa-check-square-o"></i> Save
+    </button>
+    <button type="button" class="btn btn-warning btn-raised" (click)="activeModal.close()">Cancel</button>
+  </div>
+</form>
+

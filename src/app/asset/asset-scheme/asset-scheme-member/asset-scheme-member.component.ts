@@ -48,11 +48,10 @@ export class AssetSchemeMemberComponent implements OnInit {
     critObjIsFinal.restriction = AdInsConstant.RestrictionEq;
     critObjIsFinal.propName = 'AM.IS_FINAL';
     critObjIsFinal.value = "true";
-
+    
     this.arrCrit.push(critObj);
     this.arrCrit.push(critObjIsActive);
     this.arrCrit.push(critObjIsFinal);
-
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 }
