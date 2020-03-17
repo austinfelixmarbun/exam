@@ -195,6 +195,36 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           
           this.isFinal = this.resultData.IsFinal;
 
+          this.assetTypeObj = new AssetTypeObj();
+          this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
+          this.http.post(this.getAssetType, this.assetTypeObj).subscribe(
+              response => {
+                this.resultAssetType = response;
+
+                var critObj = new CriteriaObj();
+                critObj.DataType = 'text';
+                critObj.restriction = AdInsConstant.RestrictionEq;
+                critObj.propName = 'ASSET_TYPE_CODE';
+                critObj.value = this.resultAssetType.AssetTypeCode;
+        
+                this.listRequest = new ListRequestCriteriaObj();
+                this.listRequest.criteria = new Array();
+                this.listRequest.criteria.push(critObj);
+                this.http.post(this.getListAssetCategory, this.listRequest).subscribe(
+                  response => {
+                    this.resultAssetCategory = response['ReturnObject'];
+                    console.log(this.resultAssetCategory);
+                    if(this.resultAssetCategory.length == 0) {
+                      this.AssetMasterParentForm.patchValue({ AssetCategoryId: null });
+                    } else {
+                      this.AssetMasterParentForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
+                    }
+                  },
+                (error) => {
+                  console.log(error);
+                });
+              });
+
           this.assetSchmListDObj = new AssetSchmListObj();
           this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
           this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
