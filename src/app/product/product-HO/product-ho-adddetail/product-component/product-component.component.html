@@ -22,9 +22,14 @@
                 </lib-uc-show-errors>
               </div>
               <div class="col-md-6" *ngIf="type.controls['components'].value[l].ProdCompntType == 'AMT'">
-                <input type="text" class="form-control adInsInput width-50-per" formControlName="CompntValue">
+                <input type="text" class="form-control adInsInput width-75-per" formControlName="CompntValue">
                 <lib-uc-show-errors [control]="node.controls.CompntValue" [submit]="enjiForm.submitted">
                 </lib-uc-show-errors>
+              </div>
+              <div class="col-md-2">
+                <select formControlName="MrProdBehaviour" class="form-control" id="MrProdBehaviour" name="MrProdBehaviour">
+                  <option *ngFor="let m of dictBehaviour[type.controls['components'].value[l].BehaviourType]" value={{m.Key}} >{{m.Value}}</option>
+                </select>
               </div>
             </div>
           </div>

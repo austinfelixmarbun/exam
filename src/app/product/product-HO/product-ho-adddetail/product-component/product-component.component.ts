@@ -34,8 +34,7 @@ export class ProductComponentHOComponent implements OnInit {
   UrlPostAddEditProdD: string;
   ProdHId: number;
   StateSave : string;
-
-  inputLookUpObj: any;
+  dictBehaviour: {[key: string]: any;} = {};
 
   ngOnInit() {
     this.UrlGetProdCompGrouped = AdInsConstant.GetProductHOComponentGrouped;
@@ -84,6 +83,17 @@ export class ProductComponentHOComponent implements OnInit {
       compDescr = obj.CompntValueDesc;
     }
 
+    var mrProdBehaviour = obj.MrProdBehaviour;
+
+    if(mrProdBehaviour == "")
+    {
+      if(this.dictBehaviour[obj.BehaviourType] != undefined){
+        if(this.dictBehaviour[obj.BehaviourType].length > 0){
+          mrProdBehaviour = this.dictBehaviour[obj.BehaviourType][0].Key;
+        }
+      }  
+    }
+
     return this.fb.group({
       RefProdCompntId: obj.RefProdCompntId,
       RefProdCompntCode: obj.RefProdCompntCode,
@@ -95,7 +105,7 @@ export class ProductComponentHOComponent implements OnInit {
       ProdDId: obj.ProdDId,
       CompntValue: [compCode,Validators.required],
       CompntValueDesc: compDescr,
-      MrProdBehaviour: obj.MrProdBehaviour
+      MrProdBehaviour: mrProdBehaviour
     })
   }
 
@@ -115,6 +125,22 @@ export class ProductComponentHOComponent implements OnInit {
     }
   }
 
+  async PopulateRefBehaviour(obj) {
+    var bhvrTypeCode = obj.BehaviourType;
+    if(this.dictBehaviour[bhvrTypeCode] == undefined)
+    {
+      var url = "http://r3app-server/Foundation_R3/RefBehaviour/GetRefBehaviourByBehaviourTypeCode"
+      await this.http.post(url, { RowVersion : "", BehaviourTypeCode : bhvrTypeCode}).toPromise().then(
+        (response) => {
+          this.dictBehaviour[bhvrTypeCode] = response["ReturnObject"];
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
   LoadProdComponent(ProdHId, CompGroups) {
     var ProdHOComponent = {
       ProdHId: ProdHId,
@@ -123,8 +149,6 @@ export class ProductComponentHOComponent implements OnInit {
     }
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
-        console.log("AAA")
-        console.log(response)
         for (var i = 0; i < response["ReturnObject"].length; i++) {
           var group = response["ReturnObject"][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
@@ -133,10 +157,16 @@ export class ProductComponentHOComponent implements OnInit {
           for (var j = 0; j < group.Components.length; j++) {
             var comp = group.Components[j];
             if (comp.ProdCompntType == "DDL") {
-              await this.PopulateDDL(comp)
+              await this.PopulateDDL(comp);
+              
             }
-           
+            if(comp.BehaviourType != "")
+            {
+              await this.PopulateRefBehaviour(comp);
+            }
           }
+          console.log("Behaviour")
+          console.log(this.dictBehaviour)
 
           for (var j = 0; j < group.Components.length; j++) {
             var comp = group.Components[j];
@@ -160,7 +190,6 @@ export class ProductComponentHOComponent implements OnInit {
     this.dictOptions["COMP3"] = [{ "key": "oeoe", "value": "oeoe" }];
   }
 
-
   onChangeEvent(val, event, index, indexparent) {
     this.FormProdComp.controls["groups"].controls[indexparent].controls["components"].controls[index].patchValue({
       CompntValueDesc: this.dictOptions[val].find(f => f.Key == event.target.value).Value
@@ -176,6 +205,10 @@ export class ProductComponentHOComponent implements OnInit {
     }
 
     for (let i = 0; i < list.length; i++) {
+      if(list[i].ProdCompntType == "AMT")
+      {
+        list[i].CompntValueDesc = list[i].CompntValue;
+      }
       list[i].RowVersion = "";
     }
 
