@@ -1,5 +1,6 @@
 export class VendorAddrObj{
     VendorAddrId: any;
+    VendorId: any;
     MrAddrTypeCode: any;
     Addr: any;
     Zipcode: any;
@@ -7,6 +8,8 @@ export class VendorAddrObj{
     AreaCode1: any; //kecamatan
     City: any;
     Province: any;
+    Latitude: any;
+    Longitude: any;
     RowVersion: any;
 
     constructor() { this.VendorAddrId = 0; }

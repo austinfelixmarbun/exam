@@ -16,6 +16,7 @@ import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
 import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
 import { BankInfoComponent } from './component/bank-info/bank-info.component';
+import { AddressComponent } from './component/address/address.component';
 
 const routes: Routes = [
   {
@@ -122,6 +123,13 @@ const routes: Routes = [
       {
         path: 'BankInfo',
         component: BankInfoComponent,
+        data: {
+          title: 'Vendor HO Member'
+        },
+      },
+      {
+        path: 'Address',
+        component: AddressComponent,
         data: {
           title: 'Vendor HO Member'
         },

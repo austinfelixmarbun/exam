@@ -51,14 +51,14 @@ const routes: Routes = [
         }
       },
       {
-        path: 'Office-group-member',
+        path: 'Group/Member',
         component: OfficeGroupMemberComponent,
         data: {
           title: 'Office Group Member'
         }
       },
       {
-        path: 'Office-group-member-add',
+        path: 'Group/Member/Add',
         component: OfficeGroupMemberAddComponent,
         data: {
           title: 'Office Group Member Add'

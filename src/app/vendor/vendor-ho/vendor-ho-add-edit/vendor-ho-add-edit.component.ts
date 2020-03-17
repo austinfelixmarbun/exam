@@ -122,7 +122,7 @@ export class VendorHoAddEditComponent implements OnInit {
       }
     );
 
-    if (this.MrVendorCategoryCode == "SURVEYOR_HO" || this.MrVendorCategoryCode == "ASSET_INSCO_HO") {
+    if (this.MrVendorCategoryCode == "SURVEYOR_HO") {
       var refMasterAssignmentObj = {
         RefMasterTypeCode: "TASK_ASSIGNMENT_TYPE",
       }
