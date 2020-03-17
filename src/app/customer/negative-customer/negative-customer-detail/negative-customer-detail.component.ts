@@ -1,23 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroupDirective, NgForm, FormControl } from '@angular/forms';
+import { Location, DatePipe } from '@angular/common';
+import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
+import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
 
 @Component({
   selector: 'app-negative-customer-detail',
   templateUrl: './negative-customer-detail.component.html',
-  styleUrls: ['./negative-customer-detail.component.scss']
+  styleUrls: ['./negative-customer-detail.component.scss'],
+  providers: [NGXToastrService]
 })
 export class NegativeCustomerDetailComponent implements OnInit {
+  private refMasterByTypeUrl: string = AdInsConstant.GetListActiveRefMaster;
   pageType: string = "add";
   negativeCustId: number;
+  refMasterIdType: any;
+  negativeTypeList: any;
+  negativeSourceList: any;
+  inputLookupCustPersonalObj: InputLookupObj;
+  inputLookupCustCompanyObj: InputLookupObj;
+  inputLookupZipcodeObj: InputLookupObj;
+  custType: string = "PERSONAL";
+  custNo: string = "";
+  zipcode: string = "";
+  negativeDataHistoryList: any;
+  isFromLookup: boolean = false;
 
   NegativeCustForm = this.fb.group({
     NegativeCustId: [0, [Validators.required]],
     CustId: [0, [Validators.required]],
-    MrCustTypeCode: ['', [Validators.required]],
+    MrCustTypeCode: ['P', [Validators.required]],
     CustNo: [''],
     CustName: ['', [Validators.required]],
     MrIdTypeCode: ['', [Validators.required]],
@@ -29,6 +52,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     MrGenderCode: [''],
     MotherMaidenName: ['', [Validators.required]],
     LegalAddr: ['', [Validators.required]],
+    Zipcode: ['', [Validators.required]],
     AreaCode1: ['', [Validators.required]],
     AreaCode2: ['', [Validators.required]],
     AreaCode3: ['', [Validators.required]],
@@ -37,22 +61,21 @@ export class NegativeCustomerDetailComponent implements OnInit {
     PhnArea1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     Phn1: ['', [Validators.required, Validators.pattern]],
     PhnExt1: ['', [Validators.required]],
-    PhnArea2: ['', [Validators.pattern("^[0-9]+$")]]
-    // Phn2: any;
-    // PhnExt2: any;
-    // PhnArea3: any;
-    // Phn3: any;
-    // PhnExt3: any;
-    // FaxArea: any;
-    // Fax: any;
-    // MobilePhn: any;
-    // MrNegCustTypeCode: any;
-    // MrNegCustSourceCode: any;
-    // NegCustCause: any;
-    // Notes: any;
-    // IsActive: any;
-    // RowVersion: any;
-    // AssetNegativeId: [0, [Validators.required]],
+    PhnArea2: ['', [Validators.pattern("^[0-9]+$")]],
+    Phn2: ['', [Validators.pattern("^[0-9]+$")]],
+    PhnExt2: ['', [Validators.pattern("^[0-9]+$")]],
+    PhnArea3: ['', [Validators.pattern("^[0-9]+$")]],
+    Phn3: ['', [Validators.pattern("^[0-9]+$")]],
+    PhnExt3: ['', [Validators.pattern("^[0-9]+$")]],
+    FaxArea: ['', [Validators.pattern("^[0-9]+$")]],
+    Fax: ['', [Validators.pattern("^[0-9]+$")]],
+    MobilePhn: ['', [Validators.pattern("^[0-9]+$")]],
+    MrNegCustTypeCode: ['', [Validators.required]],
+    MrNegCustSourceCode: ['', [Validators.required]],
+    NegCustCause: [''],
+    Notes: [''],
+    IsActive: [true],
+    RowVersion: ['']
   });
 
   constructor(
@@ -68,13 +91,287 @@ export class NegativeCustomerDetailComponent implements OnInit {
       if (params['param'] != null) {
         this.pageType = params['param'];
       }
-      if (params['assetNegativeId'] != null) {
-        // this.assetNegativeId = params['assetNegativeId'];
+      if (params['negativeCustId'] != null) {
+        this.negativeCustId = params['negativeCustId'];
       }
     });
+
+    var refMasterIdTypeObj = new RefMasterObj();
+    refMasterIdTypeObj.RefMasterTypeCode = "ID_TYPE";
+    var refMasterNegativeCustTypeObj = new RefMasterObj();
+    refMasterNegativeCustTypeObj.RefMasterTypeCode = "NEG_CUST_TYPE";
+    var refMasterNegativeSourceObj = new RefMasterObj();
+    refMasterNegativeSourceObj.RefMasterTypeCode = "NEG_CUST_SOURCE";
+    let requestIdType = this.httpClient.post(this.refMasterByTypeUrl, refMasterIdTypeObj);
+    let requestNegativeCustType = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeCustTypeObj);
+    let requestNegativeSource = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeSourceObj);
+    forkJoin([requestIdType, requestNegativeCustType, requestNegativeSource]).subscribe(
+      (response) => {
+        this.refMasterIdType = response[0],
+        this.negativeTypeList = response[1],
+        this.negativeSourceList = response[2]
+      }
+    );
   }
 
   ngOnInit() {
+    var datePipe = new DatePipe("en-US");
+    var criteriaList;
+    var criteriaObj;
+    
+    this.inputLookupZipcodeObj = new InputLookupObj();
+    this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+
+    this.inputLookupCustPersonalObj = new InputLookupObj();
+    this.inputLookupCustPersonalObj.urlJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Personal.json";
+    this.inputLookupCustPersonalObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.inputLookupCustPersonalObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupCustPersonalObj.pagingJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Personal.json";
+    this.inputLookupCustPersonalObj.genericJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Personal.json";
+    criteriaList = new Array();
+    criteriaObj = new CriteriaObj();
+    criteriaObj.restriction = AdInsConstant.RestrictionEq;
+    criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
+    criteriaObj.value = "PERSONAL";
+    criteriaList.push(criteriaObj);
+    this.inputLookupCustPersonalObj.addCritInput = criteriaList;
+    this.inputLookupCustPersonalObj.isRequired = false;
+
+    this.inputLookupCustCompanyObj = new InputLookupObj();
+    this.inputLookupCustCompanyObj.urlJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Company.json";
+    this.inputLookupCustCompanyObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.inputLookupCustCompanyObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupCustCompanyObj.pagingJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Company.json";
+    this.inputLookupCustCompanyObj.genericJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Company.json";
+    criteriaList = new Array();
+    criteriaObj = new CriteriaObj();
+    criteriaObj.restriction = AdInsConstant.RestrictionEq;
+    criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
+    criteriaObj.value = "COMPANY";
+    criteriaList.push(criteriaObj);
+    this.inputLookupCustCompanyObj.addCritInput = criteriaList;
+    this.inputLookupCustCompanyObj.isRequired = false;
+
+    if(this.pageType == "edit"){
+      var negativeCustObj = new NegativeCustObj();
+      negativeCustObj.NegativeCustId = this.negativeCustId;
+      this.httpClient.post(AdInsConstant.GetNegativeCustByNegativeCustId, negativeCustObj).pipe(
+        map( (response) => {
+          return response;
+        }),
+        mergeMap( (response: any) => {
+          var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
+          negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
+          const negativeCustChangeTrx = this.httpClient.post(AdInsConstant.GetListNegativeCustChangeTrxByNegativeCustId, negativeCustChangeTrxObj);
+          var tempResponse = [response];
+          return forkJoin([tempResponse, negativeCustChangeTrx]);
+        })
+      ).subscribe(
+        (response: any) => {
+          var negativeCustData = response[0];
+          var expiredDt = datePipe.transform(negativeCustData.IdExpiredDt, 'yyyy-MM-dd');
+          var birthDt = datePipe.transform(negativeCustData.BirthDt, 'yyyy-MM-dd');
+          this.custNo = negativeCustData.CustNo;
+          this.zipcode = negativeCustData.Zipcode;
+          this.custType = negativeCustData.MrCustTypeCode;
+          this.NegativeCustForm.patchValue({
+            NegativeCustId: negativeCustData.NegativeCustId,
+            CustId: negativeCustData.CustId,
+            MrCustTypeCode: negativeCustData.MrCustTypeCode,
+            CustNo: negativeCustData.CustNo,
+            CustName: negativeCustData.CustName,
+            MrIdTypeCode: negativeCustData.MrIdTypeCode,
+            IdNo: negativeCustData.IdNo,
+            IdExpiredDt: expiredDt,
+            TaxIdNo: negativeCustData.TaxIdNo,
+            BirthPlace: negativeCustData.BirthPlace,
+            BirthDt: birthDt,
+            MrGenderCode: negativeCustData.MrGenderCode,
+            MotherMaidenName: negativeCustData.MotherMaidenName,
+            LegalAddr: negativeCustData.LegalAddr,
+            AreaCode1: negativeCustData.AreaCode1,
+            AreaCode2: negativeCustData.AreaCode2,
+            AreaCode3: negativeCustData.AreaCode3,
+            AreaCode4: negativeCustData.AreaCode4,    
+            City: negativeCustData.City,
+            PhnArea1: negativeCustData.PhnArea1,
+            Phn1: negativeCustData.Phn1,
+            PhnExt1: negativeCustData.PhnExt1,
+            PhnArea2: negativeCustData.PhnArea2,
+            Phn2: negativeCustData.Phn2,
+            PhnExt2: negativeCustData.PhnExt2,
+            PhnArea3: negativeCustData.PhnArea3,
+            Phn3: negativeCustData.Phn3,
+            PhnExt3: negativeCustData.PhnExt3,
+            FaxArea: negativeCustData.FaxArea,
+            Fax: negativeCustData.Fax,
+            MobilePhn: negativeCustData.MobilePhn,
+            MrNegCustTypeCode: negativeCustData.MrNegCustTypeCode,
+            MrNegCustSourceCode: negativeCustData.MrNegCustSourceCode,
+            NegCustCause: negativeCustData.NegCustCause,
+            Notes: negativeCustData.Notes,
+            IsActive: negativeCustData.IsActive,
+            RowVersion: negativeCustData.RowVersion
+          });
+          this.negativeDataHistoryList = response[1].ReturnObject;
+        }
+      );
+    }
   }
 
+  Back(): void {
+    this.location.back();
+  }
+
+  custTypeHandler(e){
+    var selected = e.target.value;
+    if(selected == "PERSONAL"){
+      this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', [Validators.required]));
+      this.NegativeCustForm.addControl('IdNo', new FormControl('', [Validators.required]));
+      this.NegativeCustForm.addControl('BirthPlace', new FormControl('', [Validators.required]));
+      this.NegativeCustForm.addControl('BirthDt', new FormControl('', [Validators.required]));
+      this.NegativeCustForm.addControl('MotherMaidenName', new FormControl('', [Validators.required]));
+      this.NegativeCustForm.removeControl('CompanyLookup');
+    }
+    else if(selected == "COMPANY"){
+      this.NegativeCustForm.removeControl('MrIdTypeCode');
+      this.NegativeCustForm.removeControl('IdNo');
+      this.NegativeCustForm.removeControl('BirthPlace');
+      this.NegativeCustForm.removeControl('BirthDt');
+      this.NegativeCustForm.removeControl('MotherMaidenName');
+      this.NegativeCustForm.removeControl('PersonalLookup');
+    }
+
+    this.NegativeCustForm.reset();
+    this.NegativeCustForm.patchValue({
+      NegativeCustId: 0,
+      CustId: 0,
+      MrCustTypeCode: selected,
+      IsActive: true
+    });
+
+    this.inputLookupCustPersonalObj.nameSelect = "";
+    this.inputLookupCustCompanyObj.nameSelect = "";
+    this.custType = e.target.value;
+  }
+
+  getLookupCustPersonalResponse(e){
+    var datePipe = new DatePipe("en-US");
+    var expiredDt = datePipe.transform(e.idExpiredDate, 'yyyy-MM-dd');
+    var birthDt = datePipe.transform(e.birthDate, 'yyyy-MM-dd');
+    this.NegativeCustForm.patchValue({
+      CustId: e.custId,
+      CustNo: e.custNo,
+      CustName: e.custName,
+      MrIdTypeCode: e.idType,
+      IdNo: e.idNo,
+      IdExpiredDt: expiredDt,
+      BirthPlace: e.birthPlace,
+      BirthDt: birthDt,
+      MotherMaidenName: e.motherMaidenName,
+      TaxIdNo: e.taxIdNo,
+      MrGenderCode: e.gender,
+      MobilePhn: e.mobilePhone
+    });
+    this.isFromLookup = true;
+  }
+
+  getLookupCustCompanyResponse(e){
+    this.NegativeCustForm.patchValue({
+      CustId: e.custId,
+      CustNo: e.custNo,
+      CustName: e.custName,
+      TaxIdNo: e.taxIdNo
+    });
+    this.isFromLookup = true;
+  }
+
+  getLookupZipcodeResponse(e){
+    this.NegativeCustForm.patchValue({
+      Zipcode: e.zipcode,
+      AreaCode1: e.areaCode1,
+      AreaCode2: e.areaCode2,
+      City: e.city
+    });
+  }
+
+  SaveForm(){
+    var negativeCustFormData = this.NegativeCustForm.value;
+
+    // This Code Is Temporary Due to Negative Customer Approval Is Not Ready At The Moment
+    if(this.pageType == "add"){ 
+      this.httpClient.post(AdInsConstant.AddNegativeCustomer, negativeCustFormData).pipe(
+        map( (response) => {
+          return response;
+        }),
+        mergeMap( (response: any) => {
+          var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
+          negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
+          negativeCustChangeTrxObj.TrxNo = "DUMMY_TRX_NO";
+          negativeCustChangeTrxObj.MrTrxStatCode = "EXE";
+          negativeCustChangeTrxObj.MrNegCustTypeCode = negativeCustFormData.MrCustTypeCode;
+          negativeCustChangeTrxObj.MrNegCustSourceCode = negativeCustFormData.MrNegCustSourceCode;
+          negativeCustChangeTrxObj.NegCustCause = negativeCustFormData.NegCustCause;
+          negativeCustChangeTrxObj.Notes = negativeCustFormData.Notes;
+          negativeCustChangeTrxObj.RfaNo = "DUMMY_RFA";
+          negativeCustChangeTrxObj.ReqDt = new Date();
+          negativeCustChangeTrxObj.ApvDt = new Date();
+          negativeCustChangeTrxObj.ExeDt = new Date();
+
+          const addNegativeCustChangeTrx = this.httpClient.post(AdInsConstant.AddNegativeCustChangeTrx, negativeCustChangeTrxObj);
+          var tempResponse = [response];
+          return forkJoin([tempResponse, addNegativeCustChangeTrx]);
+        })
+      ).subscribe(
+        (response) => {
+          var responseNegativeCust = response[0];
+          this.toastr.successMessage(responseNegativeCust["message"]);
+          this.router.navigate(['/Customer/NegativeCustomer/Paging']);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+    }
+    else if(this.pageType == "edit"){
+      this.httpClient.post(AdInsConstant.EditNegativeCustomer, negativeCustFormData).pipe(
+        map( (response) => {
+          return response;
+        }),
+        mergeMap( (response) => {
+          var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
+          negativeCustChangeTrxObj.NegativeCustId = negativeCustFormData.NegativeCustId;
+          negativeCustChangeTrxObj.TrxNo = "DUMMY_TRX_NO";
+          negativeCustChangeTrxObj.MrTrxStatCode = "EXE";
+          negativeCustChangeTrxObj.MrNegCustTypeCode = negativeCustFormData.MrCustTypeCode;
+          negativeCustChangeTrxObj.MrNegCustSourceCode = negativeCustFormData.MrNegCustSourceCode;
+          negativeCustChangeTrxObj.NegCustCause = negativeCustFormData.NegCustCause;
+          negativeCustChangeTrxObj.Notes = negativeCustFormData.Notes;
+          negativeCustChangeTrxObj.RfaNo = "DUMMY_RFA";
+          negativeCustChangeTrxObj.ReqDt = new Date();
+          negativeCustChangeTrxObj.ApvDt = new Date();
+          negativeCustChangeTrxObj.ExeDt = new Date();
+
+          const addNegativeCustChangeTrx = this.httpClient.post(AdInsConstant.AddNegativeCustChangeTrx, negativeCustChangeTrxObj);
+          var tempResponse = [response];
+          return forkJoin([tempResponse, addNegativeCustChangeTrx]);
+        })
+      ).subscribe(
+        (response) => {
+          var responseNegativeCust = response[0];
+          this.toastr.successMessage(responseNegativeCust["message"]);
+          this.router.navigate(['/Customer/NegativeCustomer/Paging']);
+        },
+        (error) => {
+          console.log("Error");
+          console.log(error);
+        }
+      );
+    }
+  }
 }

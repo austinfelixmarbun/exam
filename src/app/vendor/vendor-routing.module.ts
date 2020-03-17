@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VendorComponent } from './vendor.component';
 import { BranchComponent } from './branch/branch.component';
+import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
+import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
@@ -12,6 +14,9 @@ import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-me
 import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-paging/vendor-scheme-member-paging.component';
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
+import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
+import { BankInfoComponent } from './component/bank-info/bank-info.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -21,6 +26,20 @@ const routes: Routes = [
         component: BranchComponent,
         data: {
           title: 'Vendor Branch Paging'
+        },
+      },
+      {
+        path: 'HoldingPaging',
+        component: VendorHoldingPagingComponent,
+        data: {
+          title: 'Vendor Holding Paging'
+        },
+      },
+      {
+        path: 'HoldingAddEdit',
+        component: VendorHoldingAddEditComponent,
+        data: {
+          title: 'Vendor Holding Add Edit'
         },
       },
       {
@@ -87,12 +106,26 @@ const routes: Routes = [
         },
       },
       {
-        path: 'HO/Member',
+        path: 'HO/Paging',
         component: VendorHoPagingComponent,
+        data: {
+          title: 'Vendor HO Paging'
+        },
+      },
+      {
+        path: 'HO/Registration',
+        component: VendorHoRegistrationComponent,
+        data: {
+          title: 'Vendor HO Registration'
+        },
+      },
+      {
+        path: 'BankInfo',
+        component: BankInfoComponent,
         data: {
           title: 'Vendor HO Member'
         },
-      },
+      }
     ]
 
   }

@@ -78,7 +78,7 @@
     },
     {
       "type": "sort",
-      "position": "left",
+      "position": "right",
       "label": "Num Of Asset",
       "name": "NumOfAsset"
     },
@@ -100,7 +100,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT ASH.ASSET_SCHM_H_ID AS AssetSchmHId, ASH.ASSET_SCHM_NAME AS AssetSchmName, ASH.ASSET_SCHM_CODE AS AssetSchmCode, ATH.ASSET_TYPE_ID AS AssetTypeId, ATH.ASSET_TYPE_NAME AS AssetTypeName, COUNT(ASD.ASSET_SCHM_D_ID) AS NumOfAsset, ASH.IS_ACTIVE AS IsActive",
+    "select": "SELECT ASH.ASSET_SCHM_CODE AS AssetSchmCode, ASH.ASSET_SCHM_H_ID AS AssetSchmHId, ASH.ASSET_SCHM_NAME AS AssetSchmName, ATH.ASSET_TYPE_ID AS AssetTypeId, ATH.ASSET_TYPE_NAME AS AssetTypeName, COUNT(ASD.ASSET_SCHM_D_ID) AS NumOfAsset, ASH.IS_ACTIVE AS IsActive",
     "from": "FROM dbo.ASSET_SCHM_H ASH WITH(NOLOCK) JOIN dbo.ASSET_TYPE ATH WITH(NOLOCK) ON ATH.ASSET_TYPE_ID = ASH.ASSET_TYPE_ID LEFT JOIN dbo.ASSET_SCHM_D ASD WITH(NOLOCK) ON ASD.ASSET_SCHM_H_ID = ASH.ASSET_SCHM_H_ID",
     "groupby" : "GROUP BY ASH.ASSET_SCHM_H_ID,ASH.ASSET_SCHM_NAME,ASH.ASSET_SCHM_CODE,ATH.ASSET_TYPE_ID,ATH.ASSET_TYPE_NAME,ASH.IS_ACTIVE"
   },
@@ -122,7 +122,7 @@
     },
     {
       "type": "text",
-      "position": "left",
+      "position": "right",
       "property": "NumOfAsset"
     },
     {
@@ -141,10 +141,6 @@
             {
               "type": "AssetSchmHId",
               "property": "AssetSchmHId"
-            },
-            {
-              "type": "param",
-              "property": "edit"
             }
           ]
         }
