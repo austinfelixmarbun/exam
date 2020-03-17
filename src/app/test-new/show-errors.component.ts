@@ -11,14 +11,7 @@ import { isNull } from '@angular/compiler/src/output/output_ast';
     </div>
   `
 })
-// <div class="col-md-9">
-// <input type="text" class="form-control adInsInput width-25-per" name="empNo" required
-//   [attr.disabled]="pageType == 'edit' ? true : null" [(ngModel)]="empNo" #EmpNo="ngModel"
-//   [ngClass]="{ 'is-invalid': RefEmpForm.submitted && EmpNo.invalid }">
-// <div *ngIf="RefEmpForm.submitted && EmpNo.invalid" class="invalid-feedback">
-//   <div *ngIf="EmpNo.errors.required" class="adInsReqMsg" translate>This field is required</div>
-// </div>
-// </div>
+
 export class ShowErrorsComponent {
 
   private static readonly errorMessages = {
@@ -53,7 +46,7 @@ export class ShowErrorsComponent {
 
   private getMessage(type: string, params: any) {
     if (this.fieldName === undefined) {
-      if (type == "pattern" && params.requiredPattern == "^[0-9]+$") {
+      if (type == "pattern" && params.requiredPattern == "^[0-9]+$" || params.requiredPattern == "^[0-9]*$") {
       return "Number Only";
       }
       return ShowErrorsComponent.errorMessages[type](params);
@@ -63,23 +56,3 @@ export class ShowErrorsComponent {
   }
 
 }
-
-// CustCoyController.cs
-// CustCoyLegalDocController.cs
-// CustCoyShareholderController.cs
-// CustEmergencyCntctController.cs
-// CustExposureController.cs
-// CustGrpController.cs
-// CustPersonalController.cs
-// CustPersonalJobDataController.cs
-// CustScoreAttrContentController.cs
-
-// containerBuilder.RegisterType<CustCoyService>().As<ICustCoyService>();
-// containerBuilder.RegisterType<CustCoyLegalDocService>().As<ICustCoyLegalDocService>();
-// containerBuilder.RegisterType<CustCoyShareholderService>().As<ICustCoyShareholderService>();
-// containerBuilder.RegisterType<CustEmergencyCntctService>().As<ICustEmergencyCntctService>();
-// containerBuilder.RegisterType<CustExposureService>().As<ICustExposureService>();
-// containerBuilder.RegisterType<CustGrpService>().As<ICustGrpService>();
-// containerBuilder.RegisterType<CustPersonalService>().As<ICustPersonalService>();
-// containerBuilder.RegisterType<CustPersonalJobDataService>().As<ICustPersonalJobDataService>();
-// containerBuilder.RegisterType<CustScoreAttrContentService>().As<ICustScoreAttrContentService>();

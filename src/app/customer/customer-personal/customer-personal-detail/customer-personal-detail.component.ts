@@ -25,7 +25,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     CustPrefixName : [''  ],
     IsAffiliateWithMf:  [true],
     CustSuffixName : ['' ],
-    NoOfDependents : ['' ],
+    NoOfDependents : ['', Validators ],
     MrNationalityCode:  [''],
     NoOfResidence: [''],
     WnaCountryCode :  [''],
@@ -37,11 +37,11 @@ export class CustomerPersonalDetailComponent implements OnInit {
     VipNotes: ['',],
     MobilePhnNo1: ['', ],
     MobilePhnNo2: ['',],
-    Email1: ['', ],
-    Email2 : ['',],
+    EMail1: ['', ],
+    EMail2 : ['',],
     
   }); 
-  
+  CountryCodeIndonesia = "COUNTRY101";
   custPersonalObj : any;
   custObj : any;
   CustName  : any;
@@ -56,34 +56,71 @@ export class CustomerPersonalDetailComponent implements OnInit {
   IdExpiredDt : any;
   MotherMaidenName : any;
   resultData: any;
-  addUrl: any;
-  getUrl : any;
+  
   tempNationality : any;
   tempSalutation : any;
- 
+  tempEducation : any;
+  tempReligion : any;
+  IdCust : any;
+  tempCustPersonalObj : any;
+  tempMrMaritalStatCode : any;
+  tempWnaCountryCode : any;
+  getListCountryUrl: any;
+  tempCustObj : any;
   
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.addUrl =  AdInsConstant.AddNewCustPersonal;
-    this.getUrl = AdInsConstant.GetListActiveRefMaster; 
  
-   
+  GetUrl : any;
+  GetCustByCustIdUrl:any;
+  GetCustPersonalbyCustIdUrl : any;
+  EditCustPersonalUrl : any;
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private toastr: NGXToastrService, private fb: FormBuilder) {
+     
+    this.GetUrl = AdInsConstant.GetListActiveRefMaster; 
+    this.getListCountryUrl = AdInsConstant.GetListRefCountry;
+    this.GetCustByCustIdUrl=AdInsConstant.GetCustByCustId;
+    this.EditCustPersonalUrl = AdInsConstant.EditCustPersonal;
+    this.route.queryParams.subscribe(params => {
+      this.GetCustPersonalbyCustIdUrl=AdInsConstant.GetCustPersonalbyCustId;
+      if (params["IdCust"] != null) {
+        this.IdCust = params["IdCust"];
+      }
+     
+     });
  
    }
 
   ngOnInit() {
-    var counter = 1;
-    console.log("init"+ counter++)
+    
+ 
+    this.custObj = new CustObj()
+    this.custObj.CustId = this.IdCust;
+
+    this.http.post(this.GetCustByCustIdUrl, this.custObj).subscribe(
+      (response) => {
+        
+          this.tempCustObj = response;
+        });
+        
+    this.custPersonalObj = new CustPersonalObj();
+    this.custPersonalObj.CustId = this.IdCust;
+    this.http.post(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).subscribe(
+      (response) => {
+        
+          this.tempCustPersonalObj = response;
+        });
+
 
     var refMasterObj = {
       RefMasterTypeCode: "NATIONALITY",
       
     }
-    this.http.post(this.getUrl, refMasterObj).subscribe(
+    this.http.post(this.GetUrl, refMasterObj).subscribe(
       (response) => {
-        console.log("awdawdawdwad");
+         
         this.tempNationality = response["ReturnObject"];
         this.CustomerDetailForm.patchValue({
-          MrNationalityCode: this.tempNationality[0].Key
+          MrNationalityCode: "WNI"
 
         });
  
@@ -94,7 +131,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
       RefMasterTypeCode: "SALUTATION",
       
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.GetUrl, refMasterObj1).subscribe(
       (response) => {
         
         this.tempSalutation = response["ReturnObject"];
@@ -105,12 +142,64 @@ export class CustomerPersonalDetailComponent implements OnInit {
       }
     );
 
-
+    var refMasterObj2 = {
+      RefMasterTypeCode: "EDUCATION",
+      
+    }
+    this.http.post(this.GetUrl, refMasterObj2).subscribe(
+      (response) => {
+        
+        this.tempEducation = response["ReturnObject"];
+        this.CustomerDetailForm.patchValue({
+          MrEducationCode: response['ReturnObject'][0]['Key']
+        });
+ 
+      }
+    );
 
        
-   
+    var refMasterObj3 = {
+      RefMasterTypeCode: "RELIGION",
+      
+    }
+    this.http.post(this.GetUrl, refMasterObj3).subscribe(
+      (response) => {
+        
+        this.tempReligion = response["ReturnObject"];
+        this.CustomerDetailForm.patchValue({
+          MrReligionCode: response['ReturnObject'][0]['Key']
+        });
+ 
+      }
+    );
  
       
+    var refMasterObj4 = {
+      RefMasterTypeCode: "MARITAL_STAT",
+      
+    }
+    this.http.post(this.GetUrl, refMasterObj4).subscribe(
+      (response) => {
+        console.log("awdawd")
+        this.tempMrMaritalStatCode = response["ReturnObject"];
+        this.CustomerDetailForm.patchValue({
+          MrMaritalStatCode: response['ReturnObject'][0]['Key']
+        });
+ 
+      }
+    );
+    var refMasterObj5 ;
+
+    this.http.post(this.getListCountryUrl,refMasterObj5).subscribe(
+      (response) => {
+        
+        this.tempWnaCountryCode = response["ReturnObject"];
+        this.CustomerDetailForm.patchValue({
+          WnaCountryCode: this.CountryCodeIndonesia
+        });
+        this.CustomerDetailForm.controls.WnaCountryCode.disable();
+      }
+    );
 
 
 
@@ -119,9 +208,11 @@ export class CustomerPersonalDetailComponent implements OnInit {
   SaveValue(){
  
 
-
+console.log("bisa");
     this.custPersonalObj = new CustPersonalObj();
-      this.custPersonalObj.CustFullName = this.CustomerDetailForm.controls["CustFullName"].value;
+    this.custPersonalObj = this.tempCustPersonalObj;
+ 
+      this.custPersonalObj.CustFullName = this.tempCustObj.CustName;
       this.custPersonalObj.NickName = this.CustomerDetailForm.controls["NickName"].value;
       this.custPersonalObj.MrSalutationCode = this.CustomerDetailForm.controls["MrSalutationCode"].value;
       this.custPersonalObj.MrMaritalStatCode = this.CustomerDetailForm.controls["MrMaritalStatCode"].value;
@@ -129,8 +220,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
       this.custPersonalObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
       this.custPersonalObj.CustSuffixName = this.CustomerDetailForm.controls["CustSuffixName"].value;
       this.custPersonalObj.NoOfDependents = this.CustomerDetailForm.controls["NoOfDependents"].value;
-      this.custPersonalObj.MotherMaidenName= this.MotherMaidenName;
-      this.custPersonalObj.MrGenderCode = this.Gender;
+      this.custPersonalObj.MotherMaidenName= this.tempCustPersonalObj.MotherMaidenName;
+      this.custPersonalObj.MrGenderCode = this.tempCustPersonalObj.MrGenderCode;
       this.custPersonalObj.MrNationalityCode = this.CustomerDetailForm.controls["MrNationalityCode"].value;
       this.custPersonalObj.NoOfResidence = this.CustomerDetailForm.controls["NoOfResidence"].value;
       this.custPersonalObj.WnaCountryCode = this.CustomerDetailForm.controls["WnaCountryCode"].value;
@@ -142,24 +233,34 @@ export class CustomerPersonalDetailComponent implements OnInit {
       this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
       this.custPersonalObj.MobilePhnNo1 = this.CustomerDetailForm.controls["MobilePhnNo1"].value;
       this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
-      this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
-      this.custPersonalObj.Email2 = this.CustomerDetailForm.controls["Email2"].value;
+      this.custPersonalObj.EMail1 = this.CustomerDetailForm.controls["EMail1"].value;
+      this.custPersonalObj.EMail2 = this.CustomerDetailForm.controls["EMail2"].value;
   
-  
+    
 
+ 
 
-
-
-
-
-      this.http.post(this.addUrl, this.custPersonalObj).subscribe(
+      this.http.post(this.EditCustPersonalUrl, this.custPersonalObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/CommonSetting/RefProvince/paging"]);        
+                 
         },
         error => {
           console.log(error);
         }
       );
+  }
+  onOptionsSelected(event){
+    if(event.target.value == "WNI"){
+      this.CustomerDetailForm.controls.WnaCountryCode.disable();
+      this.CustomerDetailForm.patchValue({
+        WnaCountryCode: this.CountryCodeIndonesia
+  
+      });
+    }else{
+      this.CustomerDetailForm.controls.WnaCountryCode.enable();
+    }
+  
+   
   }
 }

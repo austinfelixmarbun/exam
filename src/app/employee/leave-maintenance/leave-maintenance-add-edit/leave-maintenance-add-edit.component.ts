@@ -32,6 +32,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   inputEmpLookupObj;
   refEmp: RefEmpObj;
   resultEmpData: any;
+  empName: any;
 
   RefEmpLeaveMngmntForm = this.fb.group({
     StartDt: ['', Validators.required],
@@ -81,10 +82,11 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
             IsPassed: this.resultData.IsPassed
           });
           this.refEmp = new RefEmpObj();
-          // this.refEmp.refEmpId = this.resultData.RefEmpId;
+          this.refEmp.RefEmpId = this.resultData.RefEmpId;
           this.http.post(this.getRefEmpUrl, this.refEmp).subscribe(
             (response) => {
               this.resultEmpData = response;
+              this.empName = this.resultEmpData.EmpName;
               this.inputEmpLookupObj.jsonSelect = this.resultEmpData;
               this.inputEmpLookupObj.nameSelect = this.resultEmpData.EmpName;
             },
@@ -123,7 +125,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.http.post(this.addUrl, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["employee/leaveMaintenance"]);
+            this.router.navigate(["Employee/leaveMaintenance"]);
           },
           error => {
             console.log(error);
@@ -135,7 +137,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.http.post(this.editUrl, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["employee/leaveMaintenance"]);
+            this.router.navigate(["Employee/leaveMaintenance"]);
           },
           error => {
             console.log(error);

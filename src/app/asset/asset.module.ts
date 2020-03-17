@@ -34,7 +34,6 @@ import { AssetMasterAddEditParentComponent } from "./asset-master/asset-master-a
 import { AssetMasterAddEditChildComponent } from "./asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component";
 import { AddAssetSchemeComponent } from './asset-scheme/add-asset-scheme/add-asset-scheme.component';
 import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/asset-scheme-member.component';
-// import { ShowErrorsComponent } from "./app/test-new/show-errors.component";
 
 @NgModule({
   imports: [
@@ -55,7 +54,6 @@ import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/a
   declarations: [
     AssetTypePagingComponent,
     AssetTypeAddEditComponent,
-    // ShowErrorsComponent,
     AssetSchemePagingComponent,
     AssetSchemeAddEditInformationComponent,
     AssetConfigurationPagingComponent,
