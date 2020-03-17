@@ -1,0 +1,131 @@
+{
+    "title": "Bank",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "BANK_CODE",
+            "id": "bankCodeId",
+            "value": "",
+            "label": "Bank Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "REG_RPT_CODE",
+            "id": "regRptCode",
+            "value": "",
+            "label": "BI Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "BANK_NAME",
+            "id": "bankNameId",
+            "value": "",
+            "label": "Bank Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "IS_ACTIVE",
+            "id": "activeStatusId",
+            "label": "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ],
+    "querystring": {
+        "select": "SELECT BANK_CODE AS BankCode, IS_ACTIVE AS IsActive, BANK_NAME AS BankName, REG_RPT_CODE AS RegRptCode, REF_BANK_ID AS RefBankId",
+        "from": "FROM REF_BANK WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Bank Code",
+            "name": "BankCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Bank Name",
+            "name": "BankName"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "BI Code",
+            "name": "RegRptCode"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "BankCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "BankName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "RegRptCode"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/CommonSetting/Bank/detail",
+                    "param": [
+                        {
+                            "type": "RefBankId",
+                            "property": "RefBankId"
+                        },
+                        {
+                            "type": "mode",
+                            "property": "edit"
+                        }
+                    ]
+                },
+                {
+                    "type": "delete",
+                    "property": "RefBankId"
+                }
+            ]
+        }
+    ]
+}

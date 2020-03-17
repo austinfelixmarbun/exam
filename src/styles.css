@@ -148,6 +148,13 @@ thead tr th {
     text-decoration-line: underline;
 }
 
+.Button-Add{
+    z-index:1 ;
+    position:absolute;
+    right: 93px;
+    text-decoration-line: underline;
+}
+
 .overlay {
     position : fixed !important;
 }
@@ -238,6 +245,11 @@ form .form-section{
 }
 
 .adins-required label::after{
+    content:"*";
+    color:red;
+}
+
+.adins-required-label::after{
     content:"*";
     color:red;
 }

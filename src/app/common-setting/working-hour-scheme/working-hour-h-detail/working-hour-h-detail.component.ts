@@ -1,0 +1,200 @@
+import { Component, OnInit } from '@angular/core';
+import { environment } from 'environments/environment';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
+
+@Component({
+  selector: 'app-working-hour-h-detail',
+  templateUrl: './working-hour-h-detail.component.html',
+  styleUrls: ['./working-hour-h-detail.component.scss'],
+  providers: [NGXToastrService]
+})
+
+export class WorkingHourHDetailComponent implements OnInit {
+  
+  pageType: any = "add";
+  workingHourSchmHId: any;
+  workingHourSchmHObj: WorkingHourSchmHObj;
+  resultData: any;
+  getUrl: any;
+  addUrl: any;
+  editUrl: any;
+
+  WorkingHourSchmHForm = this.fb.group({
+    WorkingHourSchmCode: ['', [Validators.required, Validators.maxLength(50)]],
+    WorkingHourSchmName: ['', [Validators.required, Validators.maxLength(100)]],
+    IsActive: [true]
+  });
+
+  listOfDay: any = [
+    {
+      label: 'Sunday',
+      workingHourSchmDay: 'Sunday',
+      workingHourFrom1: '',
+      workingHourTo1: '',
+      workingHourFrom2: '',
+      workingHourTo2: ''
+    },
+    {
+      label: 'Monday',
+      workingHourSchmDay: 'Monday',
+      workingHourFrom1: '',
+      workingHourTo1: '',
+      workingHourFrom2: '',
+      workingHourTo2: ''
+    },
+    {
+      label: 'Tuesday',
+      workingHourSchmDay: 'Tuesday',
+      workingHourFrom1: '',
+      workingHourTo1: '',
+      workingHourFrom2: '',
+      workingHourTo2: ''
+    },
+    {
+      label: 'Wednesday',
+      workingHourSchmDay: 'Wednesday',
+      workingHourFrom1: '',
+      workingHourTo1: '',
+      workingHourFrom2: '',
+      workingHourTo2: ''
+    },
+    {
+      label: 'Thursday',
+      workingHourSchmDay: 'Thursday',
+      workingHourFrom1: '',
+      workingHourTo1: '',
+      workingHourFrom2: '',
+      workingHourTo2: ''
+    },
+    {
+      label: 'Friday',
+      workingHourSchmDay: 'Friday',
+      workingHourFrom1: '',
+      workingHourTo1: '',
+      workingHourFrom2: '',
+      workingHourTo2: ''
+    },
+    {
+      label: 'Saturday',
+      workingHourSchmDay: 'Saturday',
+      workingHourFrom1: '',
+      workingHourTo1: '',
+      workingHourFrom2: '',
+      workingHourTo2: ''
+    }
+  ]
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+    
+    this.getUrl = AdInsConstant.GetWorkingHourSchmHById;
+    // this.api2Url = this.foundationUrl + AdInsConstant.GetWorkingHourSchmD;
+    this.addUrl = AdInsConstant.AddWorkingHourSchmH;
+    this.editUrl = AdInsConstant.EditWorkingHourSchmH;
+    
+    this.route.queryParams.subscribe(params => {
+      if (params["param"] != null) {
+        this.pageType = params["param"];
+      }else{
+        this.pageType = "add";
+      }
+      if (params["workingHourSchmHId"] != null) {
+        this.workingHourSchmHId = params["workingHourSchmHId"];
+      }
+    });
+  }
+
+  ngOnInit() {
+    if (this.pageType == "edit") {
+      this.WorkingHourSchmHForm.controls["WorkingHourSchmCode"].disable();
+      this.workingHourSchmHObj = new WorkingHourSchmHObj();
+      this.workingHourSchmHObj.WorkingHourSchmHId = this.workingHourSchmHId;
+      this.http.post(this.getUrl, this.workingHourSchmHObj).subscribe(
+        response => {
+          this.resultData = response;
+          this.WorkingHourSchmHForm.patchValue({
+            WorkingHourSchmCode: this.resultData.WorkingHourSchmCode,
+            WorkingHourSchmName: this.resultData.WorkingHourSchmName,
+            IsActive: this.resultData.IsActive
+          });
+        },
+        error => {
+          console.log(error);
+        }
+      );
+      // this.http.post(this.api2Url, this.workingHourSchmHObj).subscribe(
+      //   response => {
+      //     console.log(response["returnObject"]);
+      //     this.listOfDay = new Array();
+      //     for (var i = 0; i < response["returnObject"].length; i++) {
+      //       var eachDayDetail = {
+      //         label: response["returnObject"][i].workingHourSchmDay,
+      //         workingHourSchmDay: response["returnObject"][i].workingHourSchmDay,
+      //         workingHourFrom1:response["returnObject"][i].workingHourFrom1,
+      //         workingHourTo1: response["returnObject"][i].workingHourTo1,
+      //         workingHourFrom2: response["returnObject"][i].workingHourFrom2,
+      //         workingHourTo2: response["returnObject"][i].workingHourTo2
+      //       }
+      //       this.listOfDay.push(eachDayDetail);
+      //     }
+      //     console.log(this.listOfDay);
+      //     console.log(eachDayDetail);
+      //   },
+      //   error => {
+      //     console.log(error);
+      //   }
+      // );
+    }
+  }
+ 
+  SaveForm() {
+    // var arrWHSchmD = new Array();
+    // for (var i = 0; i < this.listOfDay.length; i++) {
+    //     var listworkingHourSchmD = new WorkingHourSchmDObj();
+    //     listworkingHourSchmD.workingHourSchmHId = this.workingHourSchmHId;
+    //     listworkingHourSchmD.workingHourSchmDay = this.listOfDay[i].workingHourSchmDay;
+    //     listworkingHourSchmD.workingHourFrom1 = this.listOfDay[i].workingHourFrom1;
+    //     listworkingHourSchmD.workingHourTo1 = this.listOfDay[i].workingHourTo1;
+    //     listworkingHourSchmD.workingHourFrom2 = this.listOfDay[i].workingHourFrom2;
+    //     listworkingHourSchmD.workingHourTo2 = this.listOfDay[i].workingHourTo2;
+    //     arrWHSchmD.push(listworkingHourSchmD);
+    // }
+
+    if (this.pageType == "add") {
+      // var WorkingHourSchm = {
+      //   WorkingHourSchmH: this.workingHourSchmHObj,
+      //   WorkingHourSchmD: arrWHSchmD
+      // };
+      this.workingHourSchmHObj = new WorkingHourSchmHObj();
+      this.workingHourSchmHObj.WorkingHourSchmCode = this.WorkingHourSchmHForm.controls["WorkingHourSchmCode"].value;
+      this.workingHourSchmHObj.WorkingHourSchmName = this.WorkingHourSchmHForm.controls["WorkingHourSchmName"].value;
+      this.workingHourSchmHObj.IsActive = this.WorkingHourSchmHForm.controls["IsActive"].value;
+      this.http.post(this.addUrl, this.workingHourSchmHObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["message"]);
+          this.router.navigate(["/CommonSetting/WorkingHour"]);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.workingHourSchmHObj = this.resultData;
+      this.workingHourSchmHObj.WorkingHourSchmName = this.WorkingHourSchmHForm.controls["WorkingHourSchmName"].value;
+      this.workingHourSchmHObj.IsActive = this.WorkingHourSchmHForm.controls["IsActive"].value;
+      this.http.post(this.editUrl, this.workingHourSchmHObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["message"]);
+          this.router.navigate(["/CommonSetting/WorkingHour"]);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+  }
+}

@@ -12,6 +12,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StoreModule } from '@ngrx/store';
 import { DragulaModule } from 'ng2-dragula';
+import {  ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from 'app/app.component';
 import { ContentLayoutComponent } from "app/layouts/content/content-layout.component";
@@ -40,6 +41,9 @@ import { environment } from 'environments/environment';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 
 
+
+ 
+ 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -51,7 +55,7 @@ export function createTranslateLoader(http: HttpClient) {
         ContentLayoutComponent,
         UserMaintenanceComponent,
         ErrorDialogComponent,
-        RolepickComponent
+        RolepickComponent,
     ],
     imports: [
         HttpModule,
@@ -97,16 +101,16 @@ export class AppModule {
         // localStorage.setItem("LocalIp", window.location.origin);
         // console.log(window.location.origin); // 192.168.0.122
 
-        var url = environment.foundationUrl + AdInsConstant.GetBusinessDt;
-        this.http.post(url, null).subscribe(
-            (response) => {
-                var datePipe = new DatePipe("en-US");
-                var value = datePipe.transform(response["returnObject"], 'yyyy/MM/dd');
-                localStorage.setItem("BusinessDate", value);
-            },
-            (error) => {
+        // var url = environment.foundationUrl + AdInsConstant.GetBusinessDt;
+        // this.http.post(url, null).subscribe(
+        //     (response) => {
+        //         var datePipe = new DatePipe("en-US");
+        //         var value = datePipe.transform(response["returnObject"], 'yyyy/MM/dd');
+        //         localStorage.setItem("BusinessDate", value);
+        //     },
+        //     (error) => {
 
-            }
-        )
+        //     }
+        // )
     }
 }

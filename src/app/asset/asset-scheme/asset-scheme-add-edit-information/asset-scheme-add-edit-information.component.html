@@ -1,0 +1,57 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <lib-ucSubsection [id]="'AssetScheme'" [title]="this.pageType+ ' Asset Scheme Information'"
+          [panel]="'AssetSchemeId'">
+        </lib-ucSubsection>
+        <form class="form form-horizontal" [formGroup]="AssetSchemeInfoForm"
+          (ngSubmit)="AssetSchemeInfoForm.valid && SaveForm()" #enjiForm="ngForm">
+          <div class="form-body" id="AssetSchemeId">
+            <div class="form-group row adins-required">
+              <label class="col-md-4 adInsLabel" translate>Asset Scheme Code </label>
+              <div class="col-md-7">
+                <input type="text" class="form-control adInsInput" formControlName="AssetSchmCode"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetSchemeInfoForm.controls.AssetSchmCode.invalid }">
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-4  adInsLabel" translate>Asset Scheme Name </label>
+              <div class="col-md-7">
+                <input type="text" class="form-control adInsInput" formControlName="AssetSchmName"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetSchemeInfoForm.controls.AssetSchmName.invalid }">
+                <show-errors [control]="AssetSchemeInfoForm.controls.AssetSchmName" [submit]="enjiForm.submitted">
+                </show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-4  adInsLabel" translate>Asset Type Name</label>
+              <div class="col-md-7">
+                <select class="form-control adInsInput" style="width: auto" formControlName="AssetTypeId"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetSchemeInfoForm.controls.AssetTypeId.invalid }">
+                  <option *ngFor="let it of ItemAssetType" value="{{it.AssetTypeId}}">
+                    {{it.AssetTypeName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row ">
+              <label class="col-md-4  adInsLabel" translate>Active Status</label>
+              <div class="col-md-7">
+                <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive" />
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Asset/Scheme/Paging']"
+              translate>
+              <i class="ft-x"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

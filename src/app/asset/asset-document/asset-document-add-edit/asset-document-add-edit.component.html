@@ -1,0 +1,88 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <div class="addEdit">
+          <form class="form form-horizontal" [formGroup]="AssetDocumentForm"
+            (ngSubmit)="AssetDocumentForm.valid && SaveForm()" #enjiForm="ngForm">
+            <div class="form-body">
+              <h4 class="form-section card-title" translate> Asset Document</h4>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Asset Document Name </label>
+                <div class="col-md-9">
+                  <div *ngIf="this.pageType == 'add' else emptyList">
+                    <div>
+                      <select class="form-control adInsInput" style="width: auto" formControlName="AssetDocName"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetDocumentForm.controls.AssetDocName.invalid }">
+                        <option *ngFor="let it of tempAssetName" value="{{it.RefAssetDocId}}">
+                          {{it.AssetDocName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <ng-template #emptyList>
+                    <div>
+                      <label>{{this.assetDocName}} </label>
+                    </div>
+                  </ng-template>
+                  <show-errors [control]="AssetDocumentForm.controls.AssetDocName" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Main Doc</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMainDoc" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Value Needed</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsValueNeeded" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Pledge</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsPledge" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Borrow</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsBorrow" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Mandatory New</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMandatoryNew" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Mandatory Used</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMandatoryUsed" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Active Status</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive" />
+                </div>
+              </div>
+            </div>
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../Paging']"
+                [queryParams]="{ AssetTypeId: this.AssetTypeId }" translate>
+                <i class="ft-x"></i> Back
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

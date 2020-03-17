@@ -2,7 +2,7 @@ import { MasterTypeAddEditComponent } from 'app/common-setting/master-type/maste
 import { MasterPagingComponent } from 'app/common-setting/master/master-paging/master-paging.component';
 import { MasterAddEditComponent } from 'app/common-setting/master/master-add-edit/master-add-edit.component';
 import { CommonSettingRoutingModule } from 'app/common-setting/common-setting-routing.module';
-import { MasterTypePagingComponent } from 'app/common-setting/master-type/master-type-paging/master-type-paging.component';
+
 import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +13,7 @@ import { GeneralSettingPagingComponent } from 'app/common-setting/general-settin
 import { CurrencyComponent } from 'app/common-setting/currency/currency.component';
 import { CurrencyAddComponent } from 'app/common-setting/currency/currency-add/currency-add.component';
 import { WorkingHourPagingComponent } from './working-hour-scheme/working-hour-paging/working-hour-paging.component';
-import { WorkingHourDetailComponent } from './working-hour-scheme/working-hour-detail/working-hour-detail.component';
+import { WorkingHourHDetailComponent } from './working-hour-scheme/working-hour-h-detail/working-hour-h-detail.component';
 import { HolidayPagingComponent } from './holiday-scheme/holiday-paging/holiday-paging.component';
 import { HolidayDetailComponent } from './holiday-scheme/holiday-detail/holiday-detail.component';
 import { HolidayDetailAddComponent } from './holiday-scheme/holiday-detail-add/holiday-detail-add.component';
@@ -27,7 +27,6 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
 import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
-import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
 import { EconomicSectorComponent } from './economic-sector/economic-sector-paging/economic-sector.component';
 import { EconomicSectorAddEditComponent } from './economic-sector/economic-sector-add-edit/economic-sector-add-edit.component';
 import { ProvinceComponent } from './prov-district/province-paging/province.component';
@@ -35,9 +34,20 @@ import { ProvinceAddEditComponent } from './prov-district/province-add-edit/prov
 import { DistrictComponent } from './prov-district/district-paging/district.component';
 import { DistrictAddEditComponent } from './prov-district/district-add-edit/district-add-edit.component';
 import { UcSubsectionModule } from '@adins/uc-subsection';
+import { WorkingHourDDetailComponent } from './working-hour-scheme/working-hour-d-detail/working-hour-d-detail.component';
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
+import { MasterTypePagingComponent } from './master-type/master-type-paging/master-type-paging.component';
+import { FormModule } from 'app/forms/forms.module';
+import { RefIndustryTypeComponent } from './ref-industry-type/ref-industry-type.component';
+import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
+import { BankComponent } from 'app/bank/bank.component';
+import { BankAddComponent } from 'app/bank/add/add-bank.component';
+import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
+import { UcviewgenericModule } from '@adins/ucviewgeneric';
+import { HolidayDetailEditComponent } from './holiday-scheme/holiday-detail-edit/holiday-detail-edit.component';
 
 @NgModule({
   imports: [
@@ -50,9 +60,11 @@ import { ProfessionAddEditComponent } from './profession/profession-add-edit/pro
     UcgridfooterModule,
     SharingComponentModule,
     ReactiveFormsModule,
+    FormModule,
     UcpagingModule,
     UclookupgenericModule,
-    UcSubsectionModule
+    UcSubsectionModule,
+    UcviewgenericModule
   ],
   declarations: [
     MasterPagingComponent,
@@ -64,7 +76,8 @@ import { ProfessionAddEditComponent } from './profession/profession-add-edit/pro
     CurrencyComponent,
     CurrencyAddComponent,
     WorkingHourPagingComponent,
-    WorkingHourDetailComponent,
+    WorkingHourHDetailComponent,
+    WorkingHourDDetailComponent,
     HolidayPagingComponent,
     HolidayDetailComponent,
     HolidayDetailAddComponent,
@@ -72,7 +85,6 @@ import { ProfessionAddEditComponent } from './profession/profession-add-edit/pro
     OfficeZipcodeMemberAddComponent,
     OfficeZipcodeMemberPagingComponent,
     HolidayAddComponent,
-    CopyHolidaySchemeComponent,
     EconomicSectorComponent,
     EconomicSectorAddEditComponent,
     ProvinceComponent,
@@ -81,7 +93,14 @@ import { ProfessionAddEditComponent } from './profession/profession-add-edit/pro
     DistrictAddEditComponent,
     RefStatusPagingComponent,
     ProfessionComponent,
-    ProfessionAddEditComponent
+    ProfessionAddEditComponent,
+    RefIndustryTypeComponent,
+    BankComponent,
+    BankAddComponent,
+    ZipcodeComponent,
+    ZipcodeAddComponent,
+    RefIndustryTypeDetailComponent,
+    HolidayDetailEditComponent
   ],
   providers: [
     {

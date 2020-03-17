@@ -1,0 +1,110 @@
+{
+  "title": "Product Management",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "A.PROD_CODE",
+      "id": "prodCodeId",
+      "value": "",
+      "label": "Product Code",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "A.PROD_NAME",
+      "id": "prodNameId",
+      "value": "",
+      "label": "Product Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "datepicker",
+      "datatype": "date",
+      "name": "A.END_DT",
+      "id": "endDtLte",
+      "value": "",
+      "restriction": "Lte",
+      "label": "End Date <=",
+      "placeholder": "Placeholder"
+    }
+
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Product Code",
+      "name": "prodCode"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Product Name",
+      "name": "prodName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Current Version",
+      "name": "prodVersion"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "End Date",
+      "name": "endDt"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Deactivate"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT A.PROD_CODE as prodCode,A.PROD_ID as prodId,A.PROD_NAME as prodName, B.PROD_VERSION as prodVersion, A.END_DT as endDt, A.PROD_STAT as prodStat, A.CURRENT_PROD_H_ID as prodHId",
+    "from": "FROM dbo.PROD A WITH(NOLOCK) LEFT JOIN dbo.PROD_H B WITH(NOLOCK) ON A.CURRENT_PROD_H_ID=B.PROD_H_ID"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "prodCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "prodName"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "prodVersion"
+    },
+    {
+      "type": "date",
+      "position": "left",
+      "property": "endDt"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "./edit",
+          "param": [
+            {
+              "type": "prodHId",
+              "property": "prodHId"
+            },
+            {
+              "type": "prodId",
+              "property": "prodId"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

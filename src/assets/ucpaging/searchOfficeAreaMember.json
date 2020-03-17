@@ -1,136 +1,66 @@
 {
-    "title": "Office Area",
-    "exportExcel": false,
+    "title": "Office Member",
     "component": [
-      {
-        "type": "textbox",
-        "name": "areaCode",
-        "id": "areaCodeId",
-        "value": "",
-        "label": "Area Code",
-        "placeholder": "Placeholder"
-      },
-      {
-        "type": "textbox",
-        "name": "areaName",
-        "id": "areaNameId",
-        "value": "",
-        "label": "Area Name",
-        "placeholder": "Placeholder"
-      },
-      {
-        "type": "dropdown",
-        "name": "isActive",
-        "datatype": "text",
-        "id": "isActiveId",
-        "value": "",
-        "placeholder": "Placeholder",
-        "isFromURL": false,
-        "isSelectOne": false,
-        "url": "https://api.myjson.com/bins/ld6e8",
-        "label": "Active Status",
-        "items": [
-          {
-            "key": "1",
-            "value": "Yes"
-          },
-          {
-            "key": "0",
-            "value": "No"
-          }
-        ],
-        "itemsUrl": []
-      }
-    ],
-    "headerList": [
-      {
-        "type": "sort",
-        "position": "left",
-        "label": "Area Code",
-        "name": "areaCode"
-      },
-      {
-        "type": "sort",
-        "position": "left",
-        "label": "Area name",
-        "name": "areaName"
-      },
-      {
-        "type": "sort",
-        "position": "center",
-        "label": "Active",
-        "name": "isActive"
-      },
-      {
-        "type": "label",
-        "position": "center",
-        "label": "Area Member"
-      },
-      {
-        "type": "label",
-        "position": "center",
-        "label": "Action"
-      }
-    ],
-    "bodyList": [
-      {
-        "type": "text",
-        "position": "left",
-        "property": "areaCode"
-      },
-      {
-        "type": "text",
-        "position": "left",
-        "property": "areaName"
-      },
-      {
-        "type": "text",
-        "position": "center",
-        "property": "isActive"
-      },
-      {
-        "type": "action",
-        "position": "center",
-        "action": [
-          {
-            "type": "edit",
-            "path": "office/office-group-member-add",
-            "param": [
-              {
-                "type": "refOfficeAreaId",
-                "property": "refOfficeAreaId"
-              },
-              {
-                "type": "param",
-                "property": "edit"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "type": "action",
-        "position": "center",
-        "action": [
-          {
-            "type": "edit",
-            "path": "detail",
-            "param": [
-              {
-                "type": "refOfficeAreaId",
-                "property": "refOfficeAreaId"
-              },
-              {
-                "type": "mode",
-                "property": "edit"
-              }
-            ]
-          }
-        ]
-      }
+        {
+            "type": "textbox",
+            "name": "B.OFFICE_CODE",
+            "id": "OfficeCodeId",
+            "value": "",
+            "label": "Office Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "B.OFFICE_NAME",
+            "id": "OfficeNameId",
+            "value": "",
+            "label": "Office Name",
+            "placeholder": "Placeholder"
+        }
     ],
     "querystring": {
-      "select": "SELECT REA.REF_OFFICE_AREA_ID AS refOfficeAreaId,REA.AREA_CODE AS areaCode,REA.AREA_NAME AS areaName,REA.IS_ACTIVE AS isActive",
-      "from": "FROM REF_OFFICE_AREA REA WITH(NOLOCK)"
-    }
-  }
+        "select": "SELECT A.AREA_CODE AS AreaCode, A.REF_OFFICE_AREA_ID AS RefOfficeAreaId, B.OFFICE_CODE AS OfficeCode, B.OFFICE_NAME AS OfficeName",
+        "from": "FROM dbo.REF_OFFICE_AREA A WITH(NOLOCK) JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_AREA_ID = A.REF_OFFICE_AREA_ID"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE CODE",
+            "name": "OfficeCode"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE NAME",
+            "name": "OfficeName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "delete",
+                    "property": "RefOfficeAreaId"
+                }
+            ]
+        }
+    ]
+}

@@ -16,23 +16,19 @@ export const Full_ROUTES: Routes = [
     loadChildren: './components/ui-components.module#UIComponentsModule'
   },
   {
-    path: 'office',
+    path: 'Office',
     loadChildren: './office/office.module#OfficeModule'
   },
   {
-    path: 'employee',
+    path: 'Employee',
     loadChildren: './employee/employee.module#EmployeeModule'
   },
   {
-    path : 'organization',
+    path : 'Organization',
     loadChildren: './organization/organization.module#OrganizationModule'
   },
   {
-    path : 'bank',
-    loadChildren: './bank/bank.module#BankModule'
-  },
-  {
-    path: 'customer',
+    path: 'Customer',
     loadChildren: './customer/customer.module#CustomerModule'
   },
   {
@@ -40,7 +36,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './zipcode/zipcode.module#ZipcodeModule'
   },
   {
-    path: 'systemSetting',
+    path: 'SystemSetting',
     loadChildren: './system-setting/system-setting.module#SystemSettingModule'
   },
   {
@@ -48,7 +44,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './company/company.module#CompanyModule'
   },
   {
-    path: 'commonSetting',
+    path: 'CommonSetting',
     loadChildren: './common-setting/common-setting.module#CommonSettingModule'
   },
   {
@@ -74,5 +70,33 @@ export const Full_ROUTES: Routes = [
   {
     path: 'testNew',
     loadChildren: './test-new/testNew.module#TestNewModule'
+  }, 
+  {
+    path: 'product',
+    loadChildren: './product/product.module#ProductModule'
   },
+  {
+    path: 'Asset',
+    loadChildren: './asset/asset.module#AssetModule'
+  }, 
+  {
+    path: 'Vendor',
+    loadChildren: './vendor/vendor.module#VendorModule'
+  },
+  {
+    path: 'Product',
+    loadChildren: './product/product.module#ProductModule'
+  },
+  {
+    path: 'ApprovalScreen',
+    loadChildren: './approval-screen/approval-screen.module#ApprovalScreenModule'
+  },
+  {
+    path: 'Error',
+    loadChildren: './error-page/error-page.module#ErrorPageModule'
+  },
+  {
+    path: 'Survey',
+    loadChildren: './survey/survey.module#SurveyModule'
+  }
 ];

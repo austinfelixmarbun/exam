@@ -1,0 +1,89 @@
+{
+  "title": "Asset Scheme Member",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "AM.FULL_ASSET_CODE",
+      "id": "FullAssetCode",
+      "value": "",
+      "label": "Asset Full Code",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "textbox",
+      "name": "AM.FULL_ASSET_NAME",
+      "id": "FullAssetName",
+      "value": "",
+      "label": "Asset Full Name",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    },
+    {
+      "type": "textbox",
+      "name": "AC.ASSET_CATEGORY_NAME",
+      "id": "AssetCategoryName",
+      "value": "",
+      "label": "Asset Category Name",
+      "placeholder": "Placeholder",
+      "datatype": "text"
+    }
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Full Asset Code",
+      "name": "FullAssetCode"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Full Asset Name",
+      "name": "FullAssetName"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Asset Category Name",
+      "name": "AssetCategoryName"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT AM.FULL_ASSET_CODE AS FullAssetCode, AM.FULL_ASSET_NAME AS FullAssetName,AC.ASSET_CATEGORY_NAME AS AssetCategoryName ,ASD.ASSET_SCHM_D_ID AS AssetSchmDId",
+    "from": "FROM dbo.ASSET_MASTER AM WITH(NOLOCK) JOIN dbo.ASSET_CATEGORY AC WITH(NOLOCK) ON AC.ASSET_CATEGORY_ID = AM.ASSET_CATEGORY_ID JOIN dbo.ASSET_SCHM_D ASD WITH(NOLOCK) ON ASD.ASSET_MASTER_ID = AM.ASSET_MASTER_ID"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "FullAssetCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "FullAssetName"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "AssetCategoryName"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "delete",
+          "property": "AssetSchmDId"
+        }
+      ]
+    }
+  ]
+}

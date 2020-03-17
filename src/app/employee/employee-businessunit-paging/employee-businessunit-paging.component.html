@@ -1,0 +1,22 @@
+<div class="card-header header-title">
+  <div class="row">
+    <div class="col-md-8">
+      <h4 class="card-title" translate>Employee Business Unit</h4>
+    </div>
+  </div>
+</div>
+<lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
+
+<div class="ucSearch-Button-Right">
+    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/employee/paging']">
+      <i class=""></i> Back
+    </button>
+
+    <button type="submit" class="btn btn-raised btn-primary mr-1" [routerLink]="['/employee/EmployeeBusinessUnit/Add']" [queryParams]="{RefUserId:RefUserId}">
+      <i class="fa fa-check-square-o"></i> Add
+    </button>
+</div>
+<br>
+<br>
+<br>
+<lib-ucpaging id="memberUcPaging" [searchObj]="inputPagingObj"></lib-ucpaging>

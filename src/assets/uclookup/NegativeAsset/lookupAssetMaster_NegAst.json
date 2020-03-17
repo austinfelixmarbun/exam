@@ -1,0 +1,82 @@
+{
+    "title": "Lookup Asset Master",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "A.full_Asset_Code",
+        "id": "fullAssetCode",
+        "value": "",
+        "label": "Full Asset Code",
+        "placeholder": "Full Asset Code"
+      },
+      {
+        "type": "textbox",
+        "name": "A.full_Asset_Name",
+        "id": "fullAssetName",
+        "value": "",
+        "label": "Full Asset Name",
+        "placeholder": "Full Asset Name"
+      },
+      {
+        "type" : "dropdown",
+        "label" : "Asset Type Name",
+        "name" : "asset_Type_Name",
+        "id" : "assetTypeName",
+        "value" : "",
+        "datatype" : "text",
+        "isSelectOne" : false,
+        "items" : [],
+        "isFromURL" : true, 
+        "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetType/GetListKeyValueActiveByCode", 
+        "itemsUrl" : []
+      }
+    ],
+    "querystring": {
+      "select": "SELECT A.FULL_ASSET_CODE AS fullAssetCode, A.FULL_ASSET_NAME AS fullAssetName, A.ASSET_MASTER_ID AS assetMasterId, A.ASSET_TYPE_ID AS assetTypeId",
+      "from": "FROM ASSET_MASTER AS A WITH(NOLOCK) INNER JOIN ASSET_TYPE AS B WITH(NOLOCK) ON A.ASSET_TYPE_ID = B.ASSET_TYPE_ID"
+    },
+    "headerList": [
+        {
+          "type": "sort",
+          "position": "left",
+          "label": "Full Asset Code",
+          "name": "fullAssetCode"
+        },
+        {
+          "type": "sort",
+          "position": "left",
+          "label": "Full Asset Name",
+          "name": "fullAssetName"
+        },
+        {
+          "type": "label",
+          "position": "center",
+          "label": "Action"
+        }
+    ],
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "left",
+        "property": "fullAssetCode"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "fullAssetName"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "select",
+            "property": "assetMasterId"
+          }
+        ]
+      }
+    ],
+    "propertyId": "assetMasterId",
+    "propertyName": "fullAssetName"
+  }
+  

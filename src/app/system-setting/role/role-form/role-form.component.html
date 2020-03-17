@@ -19,9 +19,9 @@
                     <label>{{refRoleObj.roleName}}</label></div>
                 </div>
 
-                <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
+                <!-- <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch> -->
 
-                <div [hidden]="resultData?.data == null">
+                <!-- <div [hidden]="resultData?.data == null">
                   <table class="table table-responsive-md text-center table-hover">
                     <thead>
                       <tr class="table-header">
@@ -67,11 +67,11 @@
                   </table>
                   <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
                 </div>
-              </div>
+              </div> -->
               <div class="form-actions">
-                <button type="button" (click)="AddToTemp()" class="btn btn-raised btn-warning mr-1">
+                <!-- <button type="button" (click)="AddToTemp()" class="btn btn-raised btn-warning mr-1">
                   <i class="fa fa-arrow-circle-left"></i> Add To Temp
-                </button>
+                </button> -->
                 <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
                   <i class="fa fa-arrow-circle-left"></i> Back
                 </button>
@@ -79,7 +79,7 @@
                   <i class="fa fa-check-square-o"></i> Save
                 </button>
               </div>
-              <div [hidden]="resultData?.data == null">
+              <!-- <div [hidden]="resultData?.data == null">
                 <table class="table table-responsive-md text-center table-hover">
                   <thead>
                     <tr class="table-header">
@@ -106,8 +106,8 @@
                       </td>
                     </tr>
                   </tbody>
-                </table>
-              </div>
+                </table>-->
+              </div> 
             </form>
           </div>
         </div>

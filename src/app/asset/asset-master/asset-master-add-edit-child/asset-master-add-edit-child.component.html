@@ -1,0 +1,127 @@
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <div class="addEdit">
+            <form class="form form-horizontal" [formGroup]="AssetMasterChildForm" (ngSubmit)="AssetMasterChildForm.valid && SaveForm()"
+                  #enjiForm="ngForm">
+              <div class="form-body">
+                <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Asset Master Information {{this.pageType}}</h4>
+                <div class="form-group row" hidden>
+                  <label class="col-md-3  adInsLabel adins-required" translate>Asset Type ID </label>
+                  <div class="col-md-9">
+                      <input type="text" class="form-control adInsInput" formControlName="AssetTypeId">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel adins-required" translate>Asset Type Name </label>
+                  <div class="col-md-9">
+                      <input type="text" class="form-control adInsInput" formControlName="AssetTypeName" disabled>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3  adInsLabel adins-required" translate>Hierarchy Level </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control adInsInput" formControlName="HierarchyLvl"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.HierarchyLvl.invalid }" disabled>
+                    <show-errors [control]="AssetMasterChildForm.controls.HierarchyLvl" [submit]="enjiForm.submitted"></show-errors>
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel adins-required" translate>Asset Code </label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control adInsInput" formControlName="FullAssetCode" disabled>
+                  </div>
+                  <div class="col-md-5">
+                    <input type="text" class="form-control adInsInput" formControlName="AssetCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetCode.invalid }">
+                    <show-errors [control]="AssetMasterChildForm.controls.AssetCode" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel adins-required" translate>Asset Name </label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control adInsInput" formControlName="FullAssetName" disabled>
+                  </div>
+                  <div class="col-md-5">
+                    <input type="text" class="form-control adInsInput" formControlName="AssetName"
+                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetName.invalid }">
+                    <show-errors [control]="AssetMasterChildForm.controls.AssetName" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+              <div *ngIf="isFinal == true">
+                <div class="form-group row">
+                    <label class="col-md-3  adInsLabel adins-required" translate>Asset Category </label>
+                    <div class="col-md-9">
+                      <select class="form-control adInsInput" formControlName="AssetCategoryId">
+                        <option *ngFor="let ram of resultAssetCategory" [value]="ram.Key">
+                          {{ram.Value}}
+                        </option>
+                      </select>
+                      <show-errors [control]="AssetMasterChildForm.controls.AssetCategoryId" [submit]="enjiForm.submitted"></show-errors>
+                    </div>
+                </div>
+              </div>
+                <div class="form-group row">
+                    <label class="col-md-3  adInsLabel" translate>Active Status </label>
+                    <div class="col-md-9">
+                      <input class="border-primary" type="checkbox" data-md-icheck
+                             formControlName="IsActive" />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel" translate>Final Status </label>
+                    <div class="col-md-9">
+                      <input class="border-primary" type="checkbox" data-md-icheck
+                             formControlName="IsFinal" disabled />
+                    </div>
+                  </div>
+                <div *ngIf="isFinal == true">
+                  <table class="table table-responsive-md text-center table-hover">
+                    <thead>
+                      <tr class="table-header">
+                        <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll"
+                          name="CheckAll" hidden>
+                        </th>
+                        <th style="text-align: left;"><span class="thead-header" name='assetSchemeCode' translate>Asset Scheme Code
+                        </span>
+                        </th>
+                        <th style="text-align: left;"><span class="thead-header" name='assetSchemeName' translate>Asset Scheme Name
+                        </span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of listAssetScheme">
+                        <td>
+                          <div *ngIf="listSelectedId.indexOf(item.AssetSchmHIdFromD) > -1">
+                            <input class="border-primary" type="checkbox" 
+                             (change)="Checked(item.AssetSchmHIdFromH, $event.target.checked)" [checked]="true">
+                          </div>
+                          <div *ngIf="listSelectedId.indexOf(item.AssetSchmHIdFromD) < 0">
+                            <input class="border-primary" type="checkbox" 
+                             (change)="Checked(item.AssetSchmHIdFromH, $event.target.checked)" [checked]="false">
+                          </div>
+                        </td>
+                        <td style="text-align: left;">{{item.AssetSchmCode}}</td>
+                        <td style="text-align: left;">{{item.AssetSchmName}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="form-actions right">
+                <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Asset/AssetMaster/Paging']"
+                  translate>
+                  <i class="ft-x"></i> Back
+                </button>
+                <button type="submit" class="btn btn-raised btn-primary" translate>
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  

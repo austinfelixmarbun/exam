@@ -1,0 +1,13 @@
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="backButton" [routerLink]="['/Asset/Scheme/Paging']" translate>
+      <i class="ft-arrow-left"></i> Back
+    </button>
+    <button type="button" class="addButton" [routerLink]="['/Asset/Scheme/AddMember']"
+      [queryParams]="{AssetSchmHId:AssetSchmHId}" translate>
+      <i class="ft-plus-circle"></i> Add
+    </button>
+  </span>
+</div>
+<lib-ucviewgeneric [viewInput]="viewObj"></lib-ucviewgeneric>
+<lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>

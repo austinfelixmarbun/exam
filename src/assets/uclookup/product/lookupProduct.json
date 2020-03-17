@@ -1,0 +1,68 @@
+{
+    "url": "http://getSupplier",
+    "title":"Lookup Product",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "Prod_Code",
+        "id": "ProdCode",
+        "label": "Prod Code",
+        "placeholder": "Product Code"
+      },
+      {
+        "type": "textbox",
+        "name": "Prod_Name",
+        "id": "ProdName",
+        "label": "Prod Name",
+        "placeholder": "Product Name"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT P.PROD_CODE AS ProdCode, P.PROD_NAME AS ProdName, MAX(PH.PROD_VERSION), P.PROD_ID AS ProdId",
+      "from": "FROM dbo.PROD P WITH(NOLOCK) JOIN dbo.PROD_H PH WITH(NOLOCK) ON P.PROD_ID = PH.PROD_ID",
+      "groupby": "GROUP BY P.PROD_CODE, P.PROD_NAME, P.PROD_ID"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Prod Code",
+            "name": "ProdCode"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Prod Name",
+            "name": "ProdName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "ProdCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "ProdName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "ProdName"
+                }
+            ]
+        }
+    ],
+    "propertyId": "ProdName",
+    "propertyName": "ProdName"
+}

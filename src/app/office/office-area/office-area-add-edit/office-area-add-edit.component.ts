@@ -1,12 +1,10 @@
 
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { Location } from '@angular/common';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 
@@ -16,54 +14,45 @@ import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
   providers: [NGXToastrService]
 })
 export class OfficeAreaAddEditComponent implements OnInit {
-
-  foundationUrl: string = "http://localhost/R3/Foundation";
-  apiUrl: any;
-  parents: string;
   refOfficeAreaObj: RefOfficeAreaObj;
-  type: string = 'Add';
-  areaName: any;
-  areaCode: any;
-  isActive: boolean=true;
-  refOfficeAreaId: any;
-  resultData: any;
+  RefOfficeAreaId: string;
+  pageType: any;
+  result: any;
+  title: string = "Area-Add"
+  mode: string = "add";
+  apiUrl: any;
+  foundationUrl: string = environment.FoundationR3Url;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private location: Location,
-    private spinner: NgxSpinnerService,
-    private httpClient: HttpClient,
-    private service: NGXToastrService,
-  ) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
-      if (params['mode'] != null) {
-        this.type = params['mode'];
-      }
-      if (params['refOfficeAreaId'] != null) {
-        this.refOfficeAreaId = params['refOfficeAreaId'];
-      }
-    });
+      this.RefOfficeAreaId = params["RefOfficeAreaId"];
+      this.mode = params["mode"];
+    })
   }
 
+  OfficeAreaForm = this.fb.group({
+    AreaCode: ['', Validators.required],
+    AreaName: ['', Validators.required],
+    IsActive: [false],
+    RowVersion: ['']
+  })
 
   ngOnInit() {
-    if (this.type == 'edit') {
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetRefArea;
-      this.refOfficeAreaObj = new RefOfficeAreaObj()
-      this.refOfficeAreaObj.refOfficeAreaId = +this.refOfficeAreaId
-      this.httpClient.post(this.apiUrl, this.refOfficeAreaObj).subscribe(
+    if (this.mode == "edit") {
+      this.title = "Area-Edit";
+      this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOfficeAreaByRefOfficeAreaId;
+      this.refOfficeAreaObj = new RefOfficeAreaObj();
+      this.refOfficeAreaObj.RefOfficeAreaId = this.RefOfficeAreaId;
+      this.OfficeAreaForm.controls.AreaCode.disable();
+      this.http.post(this.apiUrl, this.refOfficeAreaObj).subscribe(
         (response) => {
-          console.log('Success Get');
-          this.resultData = response;
-          this.areaCode = response['AreaCode']
-          this.areaName = response['AreaName']
-          if (this.resultData.IsActive == '1') {
-            this.isActive = true;
-          }
-          else {
-            this.isActive = false;
-          }
+          this.result = response;
+          this.OfficeAreaForm.patchValue({
+            AreaCode: this.result.AreaCode,
+            AreaName: this.result.AreaName,
+            IsActive: this.result.IsActive,
+            RowVersion: this.result.RowVersion,
+          });
         },
         (error) => {
           console.log(error);
@@ -72,75 +61,32 @@ export class OfficeAreaAddEditComponent implements OnInit {
     }
   }
 
-  Back(): void {
-    this.location.back();
-  }
+  SaveForm() {
+    this.refOfficeAreaObj = new RefOfficeAreaObj();
+    this.refOfficeAreaObj = this.OfficeAreaForm.value;
+    if (this.mode == "edit") {
+      this.refOfficeAreaObj.AreaCode = this.result.AreaCode;
+      this.refOfficeAreaObj.RefOfficeAreaId = this.RefOfficeAreaId;
 
-  Save(OffAreaForm: NgForm): void {
-    this.spinner.show();
-    var getDuplicateUrl = this.foundationUrl + AdInsConstant.CheckDuplAreaCode;
-    var getRoleUrlGateway = 'http://01-05-0064-0618/FOUNDATION_R3/RefRole/GetRefRole'
-    var officeAreaObj: RefOfficeAreaObj;
-    officeAreaObj = new RefOfficeAreaObj()
-    officeAreaObj.areaCode = OffAreaForm.value.areaCode;
-
-    //MODE-ADD
-    if (this.type != 'edit') {
-
-      //CHECK-DUPLICATE-CODE
-      this.httpClient.post(getDuplicateUrl, officeAreaObj).subscribe(
+      this.http.post(AdInsConstant.EditRefOfficeArea, this.refOfficeAreaObj).subscribe(
         (response) => {
-          if (response['returnObject']['isDuplicate'] == true) {
-            this.service.typeErrorCustom('Code Has Been Used');
-          }
-          else {
-            this.apiUrl = this.foundationUrl + AdInsConstant.AddRefOfficeArea;
-            this.refOfficeAreaObj = new RefOfficeAreaObj();
-            this.refOfficeAreaObj.areaCode = OffAreaForm.value.areaCode;
-            this.refOfficeAreaObj.areaName = OffAreaForm.value.areaName;
-            if (OffAreaForm.value.isActive) { this.refOfficeAreaObj.isActive = '1' } else { this.refOfficeAreaObj.isActive = '0' };
-            //SAVE
-            this.httpClient.post(this.apiUrl, this.refOfficeAreaObj).subscribe(
-              (response) => {
-                this.service.typeSave(response['message']);
-                this.router.navigateByUrl('/office/officeArea', { skipLocationChange: true }).then(() =>
-                this.router.navigate(['/office/officeArea/detail']));
-                this.spinner.hide();
-              },
-              (error) => {
-                this.service.typeErrorCustom(error);
-                this.spinner.hide();
-              }
-            );
-          }
+          this.toastr.successMessage(response["message"]);
+          this.router.navigateByUrl('/Office/OfficeArea');
         },
         (error) => {
-          this.service.typeErrorCustom(error);
-        }
-      );
+          console.log(error);
+        });
     }
-    //MODE-EDIT
     else {
-      this.apiUrl = this.foundationUrl + AdInsConstant.EditRefOfficeArea;
-      this.resultData.RefOfficeAreaId = this.refOfficeAreaId;
-      this.resultData.AreaCode = OffAreaForm.value.areaCode;
-      this.resultData.AreaName = OffAreaForm.value.areaName;
-      this.resultData.IsActive = OffAreaForm.value.isActive;
-      //SAVE
-      this.httpClient.post(this.apiUrl, this.resultData).subscribe(
+      this.refOfficeAreaObj.RefOfficeAreaId = "0";
+      this.http.post(AdInsConstant.AddRefOfficeArea, this.refOfficeAreaObj).subscribe(
         (response) => {
-          this.service.typeSave(response['message']);
-          this.location.back();
-          this.spinner.hide();
+          this.toastr.successMessage(response["message"]);
+          this.router.navigateByUrl('/Office/OfficeArea');
         },
         (error) => {
-          this.service.typeErrorCustom(error);
-          this.spinner.hide();
-        }
-      );
+          console.log(error);
+        });
     }
-  }
-
-  FillFormEdit() {
   }
 }

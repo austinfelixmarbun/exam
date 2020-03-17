@@ -1,0 +1,117 @@
+{
+    "title": "Asset Type",
+    "exportExcel": false,
+    "component": [
+      {
+        "type": "textbox",
+        "name": "ASSET_TYPE_CODE",
+        "id": "AssetTypeCodeId",
+        "value": "",
+        "label": "Asset Type Code",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "textbox",
+        "name": "ASSET_TYPE_NAME",
+        "id": "AssetTypeNameId",
+        "value": "",
+        "label": "Asset Type Name",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "dropdown",
+        "name": "is_Active",
+        "id": "IsActive",
+        "value": "Active Status",
+        "placeholder": "Placeholder",
+        "isFromURL": false,
+        "isSelectOne": false,
+        "url": "https://api.myjson.com/bins/ld6e8",
+        "label": "Active Status",
+        "items": [
+          {
+            "key": "1",
+            "value": "Yes"
+          },
+          {
+            "key": "0",
+            "value": "No"
+          }
+        ],
+        "itemsUrl": []
+      }
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Asset Type Code",
+        "name": "AssetTypeCode"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Asset Type Name",
+        "name": "AssetTypeName"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Active Status",
+        "name": "IsActive"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT ASSET_TYPE_CODE AS AssetTypeCode, ASSET_TYPE_ID AS AssetTypeId, ASSET_TYPE_NAME AS AssetTypeName, IS_ACTIVE AS IsActive",
+      "from": "FROM dbo.ASSET_TYPE WITH(NOLOCK)"
+    },
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "left",
+        "property": "AssetTypeCode"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "AssetTypeName"
+      },
+      {
+        "type": "boolean",
+        "position": "center",
+        "property": "IsActive"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/Asset/Type/Detail",
+            "param": [
+              {
+                "type": "AssetTypeId",
+                "property": "AssetTypeId"
+              },
+              {
+                "type": "param",
+                "property": "edit"
+              }
+            ]
+          },
+          {
+            "type": "delete",
+            "property": "AssetTypeId"
+          }
+        ]
+      }
+    ]
+  }
+  

@@ -1,7 +1,8 @@
 export class WorkingHourSchmHObj {
-    workingHourSchmHId: any;
-    workingHourSchmCode: any;
-    workingHourSchmName: any;
-    isActive: any;
-    constructor() { this.workingHourSchmHId = 0 }
+    WorkingHourSchmHId: any;
+    WorkingHourSchmCode: any;
+    WorkingHourSchmName: any;
+    IsActive: any;
+    RowVersion: any;
+    constructor() { this.WorkingHourSchmHId = 0, this.RowVersion = ""}
 }

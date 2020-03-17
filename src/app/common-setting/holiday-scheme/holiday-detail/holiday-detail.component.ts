@@ -1,209 +1,93 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
+import { Component, OnInit} from '@angular/core';
 import { environment } from 'environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NgForm } from '@angular/forms';
-import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { UCSearchComponent } from '@adins/ucsearch';
+import { FormBuilder } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
-import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { HolidayCopyObj } from 'app/shared/model/HolidayCopy.Model';
 
 @Component({
   selector: 'app-holiday-detail',
   templateUrl: './holiday-detail.component.html',
   styleUrls: ['./holiday-detail.component.scss'],
-  providers: [NGXToastrService, DecimalPipe]
+  providers: [NGXToastrService]
 })
 export class HolidayDetailComponent implements OnInit {
+  HolidaySchmHIdCopy : string;
+  HolidaySchmHId : string;
+  inputPagingObjHolidayScheme : InputLookupObj;
+  inputPagingObjHolidayDetail : any;
+  copyHoliday : any;
+  viewObj : any;
+  title : string = "Holiday Scheme Info";
 
-  @ViewChild(UCSearchComponent) searchComponent;
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
-  inputObj: any;
-  pageType: string = "add";
-  holidaySchmHId: any;
-  holidaySchmCode: any;
-  holidaySchmName: any;
-  isActive: boolean = true;
-  editDetail: any = 'false';
-  holidayObj: HolidayObj;
-  holidayDObj: HolidayDObj;
-  resultData: any;
-  apiUrl: any;
-  addUrl: any;
-  editUrl: any;
-  deleteUrl: any;
-  searchUrl: any;
-  foundationUrl: string = environment.foundationUrl;
-  isEdit: boolean = false;
-  pageNow: any;
-  totalData: any;
-  pageSize: any = 10;
-  resultDataSearch: any;
-  orderByKey: any = null;
-  orderByValue: boolean = true;
-  arrCrit: any;
+  HolidayManagementForm = this.fb.group({
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
-    
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetHolidaySchmH;
-    this.addUrl = this.foundationUrl + AdInsConstant.AddHolidaySchmH;
-    this.editUrl = this.foundationUrl + AdInsConstant.EditHolidaySchmHOnly;
-    this.searchUrl = this.foundationUrl + AdInsConstant.GetHolidayDetailPaging;
-    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteHolidaySchmD;
+  });
 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
-      }
-      if (params["holidaySchmHId"] != null) {
-        this.holidaySchmHId = params["holidaySchmHId"];
-      }
-    });
+      this.HolidaySchmHId = params["HolidaySchmHId"];
+    })
+  }
+
+  AddNavigate(){
+    this.router.navigate(['/CommonSetting/Holiday/Detail/Add'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/search/searchHolidayDetail.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetHolidayDetailPaging;
+    this.inputPagingObjHolidayScheme = new InputLookupObj;
+    var critInputNotIn = new CriteriaObj();
+    critInputNotIn.propName = "HOLIDAY_SCHM_H_ID";
+    critInputNotIn.restriction = AdInsConstant.RestrictionNeq;
+    critInputNotIn.value = this.HolidaySchmHId;
+
+    this.inputPagingObjHolidayScheme.addCritInput = new Array();
+    this.inputPagingObjHolidayScheme.addCritInput.push(critInputNotIn);
+    this.inputPagingObjHolidayScheme.urlJson = "./assets/lookup/lookupHolidayScheme.json";
+    this.inputPagingObjHolidayScheme.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.inputPagingObjHolidayScheme.urlEnviPaging = environment.FoundationR3Url;
+    this.inputPagingObjHolidayScheme.pagingJson = "./assets/lookup/lookupHolidayScheme.json";
+    this.inputPagingObjHolidayScheme.genericJson = "./assets/lookup/lookupHolidayScheme.json";
+    this.inputPagingObjHolidayScheme.isRequired = false;
+    this.inputPagingObjHolidayDetail = new InputSearchObj();
+    this.inputPagingObjHolidayDetail._url = "./assets/ucpaging/searchHolidayDetail.json";
+    this.inputPagingObjHolidayDetail.enviromentUrl = environment.FoundationR3Url;
+    this.inputPagingObjHolidayDetail.apiQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.inputPagingObjHolidayDetail.pagingJson = "./assets/ucpaging/searchHolidayDetail.json";
+    this.inputPagingObjHolidayDetail.deleteUrl = AdInsConstant.DeleteHolidaySchmD;
+    this.inputPagingObjHolidayDetail.addCritInput = new Array();
     
-    if (this.pageType == "edit") {
-      this.isEdit = true;
-      this.editDetail = 'true';
-
-      this.holidayObj = new HolidayObj();
-      this.holidayObj.holidaySchmHId = this.holidaySchmHId;
-      this.http.post(this.apiUrl, this.holidayObj).subscribe(
-        response => {
-          this.resultData = response["returnObject"];
-          this.holidaySchmCode = response["returnObject"]["holidaySchmCode"];
-          this.holidaySchmName = response['returnObject']['holidaySchmName'];
-          if (this.resultData.isActive == "1") {
-            this.isActive = true;
-          } else {
-            this.isActive = false;
-          }
-        },
-        error => {
-          console.log(error);
-        }
-      );
-      this.arrCrit = new Array();
-      var critObj = new CriteriaObj();
-        critObj.DataType = 'Numeric'
-        critObj.restriction = AdInsConstant.RestrictionEq;
-        critObj.propName = 'holidaySchmHId';
-        critObj.value = this.holidaySchmHId
-        this.arrCrit.push(critObj);
-
-        this.inputObj.arrCritObj = this.arrCrit;
-    }
-  }
-
-  SaveHolidayForm(ReqHolidayForm: NgForm) {
-    console.log(ReqHolidayForm.value);
-    this.holidayObj = new HolidayObj();
-    this.holidayObj = ReqHolidayForm.value;
-    if (this.isActive == false) {
-      this.holidayObj.isActive = "0";
-    } else {
-      this.holidayObj.isActive = "1";
-    }
+    var critInput = new CriteriaObj();
+    critInput.propName = "HoliH.HOLIDAY_SCHM_H_ID";
+    critInput.restriction = AdInsConstant.RestrictionEq;
+    critInput.value = this.HolidaySchmHId;
+    this.inputPagingObjHolidayDetail.addCritInput.push(critInput);
+    this.viewObj = "./assets/ucviewgeneric/viewHolidayDetail.json";
     
-    if (this.pageType == "add") {
-      this.http.post(this.addUrl, this.holidayObj).subscribe(
-        response => {
-          console.log("Success");
-          console.log(response);
-          this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/commonSetting/holiday"]);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    } else {
-      this.holidayObj.holidaySchmHId = this.holidaySchmHId;
-      this.http.post(this.editUrl, this.holidayObj).subscribe(
-        response => {
-          console.log("Success");
-          console.log(response);
-          this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/commonSetting/holiday"]);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
-  }
-  
-  toggleActive(e) {
-    this.isActive = e.target.checked;
-  }
-  
-  searchSort(event: any) {
-    if (this.resultData != null) {
-      if (this.orderByKey == event.target.attributes.name.nodeValue) {
-        this.orderByValue = !this.orderByValue
-      } else {
-        this.orderByValue = true
-      }
-      this.orderByKey = event.target.attributes.name.nodeValue
-      var order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-      this.searchComponent.search(this.searchUrl, this.pageNow, this.pageSize, order, this.arrCrit);
-    }
   }
 
-  searchPagination(event: number) {
-    this.pageNow = event;
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    this.searchComponent.search(this.searchUrl, this.pageNow, this.pageSize, order, this.arrCrit);
+  getHolidaySchmHId(ev){
+    this.HolidaySchmHIdCopy = ev.HolidaySchmHId;
   }
 
-  delete(holidaySchmDId: any) {
-    if (confirm("Are you sure to delete this record?")) {
-      this.holidayDObj = new HolidayDObj();
-      this.holidayDObj.holidaySchmDId = holidaySchmDId;
-      this.http.post(this.deleteUrl, this.holidayDObj).subscribe(
-        (response) => {
-          this.toastr.successMessage(response['message']);
-          this.searchPagination(1);
-        },
+  Copy(key: any, value: any) {
+    if (confirm("The copy will replace all existing holiday listings")) {
+      this.copyHoliday = new HolidayCopyObj();
+      this.copyHoliday.HolidaySchmHId = this.HolidaySchmHId;
+      this.copyHoliday.HolidaySchmHIdCopy = this.HolidaySchmHIdCopy;
+
+      this.http.post(AdInsConstant.CopyHolidaySchmH, this.copyHoliday).subscribe((response) => {
+        this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+        this.toastr.successMessage(response['message']);
+    },
         (error) => {
-          console.log("Error");
-          console.log(error);
+            console.log(error);
         });
     }
-  }
-
-  //** Start UC Search **/
-  getResult(event){
-    this.resultDataSearch = event.response.returnObject;
-    this.totalData = event.response.returnObject.count;
-    this.ucgridFooter.pageNow = event.pageNow;
-    this.ucgridFooter.totalData = this.totalData;
-    this.ucgridFooter.resultData = this.resultData;
-  }
-
-  onSelect(event)
-  {
-    this.pageNow = event.pageNow;
-    this.pageSize = event.pageSize;
-    this.searchPagination(this.pageNow);
   }
 }

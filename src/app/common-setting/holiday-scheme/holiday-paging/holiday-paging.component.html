@@ -1,50 +1,8 @@
 <div class="ucSearch-Button-Right">
     <span class="mr-1">
-        <button type="button" class="addButton" [routerLink]="['/commonSetting/holiday-scheme/add']" translate>
-            <i class="ft-plus-circle"></i> Add
-        </button>
+      <button type="button" class="addButton" [routerLink]="['/CommonSetting/Holiday/Add']" translate>
+        <i class="ft-plus-circle"></i> Add
+      </button>
     </span>
-</div>
-<lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
-
-<div [hidden]="resultData?.data == null">
-    <table class="table table-responsive-md text-center table-hover">
-        <thead>
-            <tr class="table-header">
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                        name='holidaySchmCode'>Scheme Code</span></th>
-                <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                        name='holidaySchmName'>Scheme Name</span></th>
-                <th><span translate class="thead-header" (click)="searchSort($event)" name='isActive'>Active</span></th>
-                <th translate>Scheme Detail</th>
-                <th translate>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of resultData?.data">
-                <td class="text-left">{{item.holidaySchmCode}}</td>
-                <td class="text-left">{{item.holidaySchmName}}</td>
-                <td>
-                    <span *ngIf="item.isActive == '1'">Yes</span>
-                    <span *ngIf="item.isActive == '0'">No</span>
-                </td>
-                <td class="text-center">
-                    <a class="success p-0" data-original-title="" title="" [routerLink]="['/commonSetting/holiday/add']"
-                        [queryParams]="{param:'edit',holidaySchmHId:item.holidaySchmHId}">
-                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="success p-0" data-original-title="" title="" [routerLink]="['/commonSetting/holiday-scheme/add']"
-                        [queryParams]="{param:'edit',holidaySchmHId:item.holidaySchmHId}">
-                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
-                    </a>
-                    <a class="danger p-0" data-original-title="" title="" (click)="delete(item.holidaySchmHId)">
-                        <i class="ft-trash-2 font-medium-3 mr-2"></i>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
-</div>
+  </div>
+  <lib-ucpaging [searchObj]="inputObj"></lib-ucpaging>

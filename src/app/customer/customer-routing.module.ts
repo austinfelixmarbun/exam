@@ -1,18 +1,98 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CustomerComponent } from 'app/customer/customer.component';
+// import { CustomerComponent } from 'app/customer/customer.component';
+import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
+import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
+import { CustomerPagingComponent } from './customer-paging/customer-paging.component';
+import { CustomerPersonalMainInfoComponent } from './customer-personal/customer-personal-main-info/customer-personal-main-info.component';
+import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check.component';
+import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
+import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
+import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
+import { CustomerViewPersonalComponent } from './customer-view/customer-view-personal/customer-view-personal.component';
+import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
+
       {
-        path: '',
-        component: CustomerComponent,
+        path: 'Paging',
+        component: CustomerPagingComponent,
         data: {
-          title: 'Customer'
-        },
-      }
+          title: 'Customer Paging'
+        }
+      }, {
+        path: 'CustomerPersonal/MainInfo',
+        component: CustomerPersonalMainInfoComponent,
+        data: {
+          title: 'Customer Personal Main Info'
+        }
+      },
+      {
+        path: 'CustomerPersonal/DuplicateCheck',
+        component: CustomerPersonalDuplicateCheckComponent,
+        data: {
+          title: 'Customer Personal Duplicate Check  '
+        }
+      },
+      {
+        path: 'CustomerCompany/MainInfo',
+        component: CustomerCompanyMainInfoComponent,
+        data: {
+          title: 'Customer Company  Main Info  '
+        }
+      },
+      {
+        path: 'CustomerCompany/DuplicateCheck',
+        component: CustomerCompanyDuplicateCheckComponent,
+        data: {
+          title: 'Customer Company DuplicateCheck  '
+        }
+      },
+      {
+        path: 'NegativeCustomer/Paging',
+        component: NegativeCustomerComponent,
+        data: {
+          title: 'Negative Customer Paging'
+        }
+      },
+      {
+        path: 'NegativeCustomer/Detail',
+        component: NegativeCustomerDetailComponent,
+        data: {
+          title: 'Negative Customer Detail'
+        }
+      },
+      {
+        path: 'NegativeCustomer/View',
+        component: NegativeCustomerViewComponent,
+        data: {
+          title: 'Negative Customer View'
+        }
+      },
+      {
+        path: 'CustomerPersonal/Page',
+        component: CustomerPersonalPageComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck  '
+        }
+      },
+      {
+        path: 'CustomerPersonal/Page',
+        component: CustomerPersonalPageComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck  '
+        }
+      },
+      {
+        path: 'CustomerView/Page',
+        component: CustomerViewPersonalComponent,
+        data: {
+          title: 'Customer View Personal Component'
+        }
+      },
     ]
   }
 ];

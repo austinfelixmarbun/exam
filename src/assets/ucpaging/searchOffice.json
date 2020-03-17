@@ -4,46 +4,37 @@
     "component": [
         {
             "type": "textbox",
-            "name": "officeCode",
-            "id": "officeCodeId",
+            "name": "A.OFFICE_CODE",
+            "id": "OfficeCodeId",
             "value": "",
-            "label": "Office Code",
+            "label": "OFFICE CODE",
             "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
-            "name": "officeName",
-            "id": "officeNameId",
+            "name": "B.OFFICE_NAME",
+            "id": "OfficeParentId",
             "value": "",
-            "label": "Office Name",
+            "label": "OFFICE PARENT",
             "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
-            "name": "officeParent",
-            "id": "officeParentId",
+            "name": "A.OFFICE_NAME",
+            "id": "OfficeNameId",
             "value": "",
-            "label": "Office Parent",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "officeAddr",
-            "id": "addrId",
-            "value": "",
-            "label": "Address",
+            "label": "OFFICE NAME",
             "placeholder": "Placeholder"
         },
         {
             "type": "dropdown",
-            "name": "isActive",
-            "id": "actStatId",
-            "value": "ActiveStat",
+            "name": "A.IS_ACTIVE",
+            "id": "ActiveStatusId",
+            "label": "ACTIVE",
+            "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
             "isSelectOne": false,
-            "url": "https://api.myjson.com/bins/ld6e8",
-            "label": "Active Status",
             "items": [
                 {
                     "key": "1",
@@ -57,121 +48,145 @@
             "itemsUrl": []
         },
         {
+            "type": "textbox",
+            "name": "A.OFFICE_ADDR",
+            "id": "OfficeAddrId",
+            "value": "",
+            "label": "OFFICE ADDRESS",
+            "placeholder": "Placeholder"
+        },
+        {
             "type": "dropdown",
-            "name": "officeType",
-            "id": "officeTypeId",
-            "value": "OfficeType",
+            "name": "A.MR_OFFICE_TYPE_CODE", 
+            "id": "OfficeCodeId",
+            "value": "",
             "placeholder": "Placeholder",
-            "isFromURL": false,
+            "datatype": "text",
+            "isFromURL": true,
             "isSelectOne": false,
-            "url": "https://api.myjson.com/bins/ld6e8",
-            "label": "Active Status",
-            "items": [
-                {
-                    "key": "HO",
-                    "value": "Head Office"
-                },
-                {
-                    "key": "BRC",
-                    "value": "Branch"
-                },
-                {
-                    "key": "GRP",
-                    "value": "Center Group"
-                }
-            ],
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Office Type",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "OFFICE_TYPE",
+            "items": [],
             "itemsUrl": []
-        }
+          }
     ],
+    "querystring": {
+        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.OFFICE_ADDR AS OfficeAddr , B.OFFICE_NAME AS OfficeParent, A.IS_ACTIVE AS IsActive, A.MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, A.REF_OFFICE_ID AS RefOfficeId, C.DESCR AS Descr, D.CENTER_GRP_ID AS CenterGrpId",
+        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_ID = A.PARENT_ID LEFT JOIN dbo.REF_MASTER C WITH(NOLOCK) ON A.MR_OFFICE_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE = 'OFFICE_TYPE' LEFT JOIN dbo.CENTER_GRP D ON D.CENTER_GRP_CODE = A.OFFICE_CODE"
+    },
     "headerList": [
         {
             "type": "sort",
             "position": "left",
             "label": "Office Code",
-            "name": "officeCode"
+            "name": "OfficeCode"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Office Name",
-            "name": "officeName"
+            "name": "OfficeName"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Office Address",
-            "name": "officeAddr"
+            "name": "OfficeAddr"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Office Parent",
-            "name": "officeParrent"
+            "name": "OfficeParent"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "Active",
-            "name": "isActive"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Office Type",
-            "name": "officeType"
+            "label": "Active Status",
+            "name": "IsActive"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Office Member",
-            "name": "officeMember"
+            "label": "Office Type",
+            "name": "Descr"
         },
         {
             "type": "label",
             "position": "center",
-            "label": "Edit"
+            "label": "Office Member"
         },
         {
             "type": "label",
             "position": "center",
-            "label": "Delete"
+            "label": "Action"
         }
     ],
     "bodyList": [
         {
             "type": "text",
             "position": "left",
-            "property": "officeCode"
+            "property": "OfficeCode"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "officeName"
+            "property": "OfficeName"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "officeAddr"
+            "property": "OfficeAddr"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "officeParrent"
+            "property": "OfficeParent"
         },
         {
             "type": "boolean",
             "position": "center",
-            "property": "isActive"
-        },
-        {
-            "type": "text",
-            "position": "center",
-            "property": "officeType"
+            "property": "IsActive"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "officeMember"
+            "property": "Descr"
+        },
+        {
+            "type" : "action", 
+            "position" : "center",
+            "action" : [ 
+                {
+                    "type" : "switch",
+                    "case" : [
+                        {
+                            "conditions" : [
+                                {
+                                    "property" : "MrOfficeTypeCode",
+                                    "value" : "CG"
+                                }
+                            ],
+                            "result" : {
+                                "path" : "/Office/add",
+                                "param" : [
+                                    {
+                                        "type" : "RefOfficeId",
+                                        "property" : "RefOfficeId"
+                                    },
+                                    {
+                                        "type" : "CenterGrpId",
+                                        "property" : "CenterGrpId"
+                                    }
+                                ]
+                            },
+                            "isHide" : false
+                        }
+                    ]
+                }
+            ]
         },
         {
             "type": "action",
@@ -179,23 +194,23 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/office/add",
+                    "path": "/Office/Add",
                     "param": [
                         {
-                            "type": "refOfficeId",
-                            "property": "refOfficeId"
+                            "type": "RefOfficeId",
+                            "property": "RefOfficeId"
                         },
                         {
-                            "type": "param",
+                            "type": "mode",
                             "property": "edit"
                         }
                     ]
+                },
+                {
+                    "type": "delete",
+                    "property": "RefOfficeId"
                 }
             ]
         }
-    ],
-    "querystring": {
-        "select": "SELECT RE.REF_OFFICE_ID AS refOfficeId,RE.OFFICE_ADDR AS officeAddr,RE.OFFICE_CODE AS officeCode,RE.OFFICE_NAME AS officeMember,RE.MR_OFFICE_TYPE_CODE AS officeType,RE.OFFICE_NAME AS officeName,RE.IS_ACTIVE AS IsActive",
-        "from": "FROM REF_OFFICE RE WITH(NOLOCK)"
-    }
+    ]
 }

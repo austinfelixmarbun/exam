@@ -9,7 +9,7 @@ import { GeneralSettingPagingComponent } from 'app/common-setting/general-settin
 import { CurrencyComponent } from 'app/common-setting/currency/currency.component';
 import { CurrencyAddComponent } from 'app/common-setting/currency/currency-add/currency-add.component';
 import { WorkingHourPagingComponent } from './working-hour-scheme/working-hour-paging/working-hour-paging.component';
-import { WorkingHourDetailComponent } from './working-hour-scheme/working-hour-detail/working-hour-detail.component';
+import { WorkingHourHDetailComponent } from './working-hour-scheme/working-hour-h-detail/working-hour-h-detail.component';
 import { HolidayPagingComponent } from './holiday-scheme/holiday-paging/holiday-paging.component';
 import { HolidayDetailComponent } from './holiday-scheme/holiday-detail/holiday-detail.component';
 import { HolidayDetailAddComponent } from './holiday-scheme/holiday-detail-add/holiday-detail-add.component';
@@ -17,124 +17,145 @@ import { OfficeZipcodeMemberComponent } from './office-zipcode-member/office-zip
 import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-zipcode-member-add/office-zipcode-member-add.component';
 import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/office-zipcode-member-paging/office-zipcode-member-paging.component';
 import { HolidayAddComponent } from './holiday-scheme/holiday-add/holiday-add.component';
-import { CopyHolidaySchemeComponent } from './holiday-scheme/copy-holiday-scheme/copy-holiday-scheme.component';
 import { EconomicSectorComponent } from './economic-sector/economic-sector-paging/economic-sector.component';
 import { EconomicSectorAddEditComponent } from './economic-sector/economic-sector-add-edit/economic-sector-add-edit.component';
 import { ProvinceComponent } from './prov-district/province-paging/province.component';
 import { ProvinceAddEditComponent } from './prov-district/province-add-edit/province-add-edit.component';
 import { DistrictComponent } from './prov-district/district-paging/district.component';
 import { DistrictAddEditComponent } from './prov-district/district-add-edit/district-add-edit.component';
+import { WorkingHourDDetailComponent } from './working-hour-scheme/working-hour-d-detail/working-hour-d-detail.component';
 import { RefStatusPagingComponent } from './ref-status/ref-status-paging/ref-status-paging.component';
 import { ProfessionComponent } from './profession/profession-paging/profession.component';
 import { ProfessionAddEditComponent } from './profession/profession-add-edit/profession-add-edit.component';
+import { RefIndustryTypeComponent } from './ref-industry-type/ref-industry-type.component';
+import { RefIndustryTypeDetailComponent } from './ref-industry-type/ref-industry-type-detail/ref-industry-type-detail.component';
+import { BankComponent } from 'app/bank/bank.component';
+import { BankAddComponent } from 'app/bank/add/add-bank.component';
+import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
+import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
+import { HolidayDetailEditComponent } from './holiday-scheme/holiday-detail-edit/holiday-detail-edit.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'masterType',
+        path: 'MasterType',
         component: MasterTypePagingComponent,
         data: {
           title: 'Master Type Maintenance Paging'
         },
       },
       {
-        path: 'masterType/detail',
+        path: 'MasterType/detail',
         component: MasterTypeAddEditComponent,
         data: {
           title: 'Master Type Maintenance Add Edit'
         },
       },
       {
-        path: 'master',
+        path: 'Master',
         component: MasterPagingComponent,
         data: {
           title: 'Master Maintenance Paging'
         },
       },
       {
-        path: 'master/detail',
+        path: 'Master/detail',
         component: MasterAddEditComponent,
         data: {
           title: 'Master Maintenance Add Edit'
         },
       },
       {
-        path: 'generalSetting',
+        path: 'GeneralSetting',
         component: GeneralSettingPagingComponent,
         data: {
           title: 'General Setting Maintenance Paging'
         },
       },
       {
-        path: 'generalSetting/detail',
+        path: 'GeneralSetting/detail',
         component: GeneralSettingAddEditComponent,
         data: {
           title: 'General Setting Maintenance Add Edit'
         },
       },
       {
-        path: 'currency/paging',
+        path: 'Currency/paging',
         component: CurrencyComponent,
         data: {
           title: 'Currency'
         },
       },
       {
-        path: 'currency/add',
+        path: 'Currency/add',
         component: CurrencyAddComponent,
         data: {
           title: 'Currency add'
         },
       },
       {
-        path: 'workingHour',
+        path: 'WorkingHour',
         component: WorkingHourPagingComponent,
         data: {
           title: 'Working Hour'
         },
       },
       {
-        path: 'workingHour/add',
-        component: WorkingHourDetailComponent,
+        path: 'WorkingHour/add',
+        component: WorkingHourHDetailComponent,
         data: {
           title: 'Working Hour Add Edit'
         },
       },
       {
-        path: 'holiday',
+        path: 'WorkingHour/detail',
+        component: WorkingHourDDetailComponent,
+        data: {
+          title: 'Working Hour Detail'
+        },
+      },
+      {
+        path: 'Holiday',
         component: HolidayPagingComponent,
         data: {
           title: 'Holiday'
         },
       },
       {
-        path: 'holiday/add',
-        component: HolidayDetailComponent,
-        data: {
-          title: 'Holiday Add Edit'
-        },
-      },
-      {
-        path: 'holiday-scheme/add',
+        path: 'Holiday/Add',
         component: HolidayAddComponent,
         data: {
-          title: 'Holiday Scehme Add Edit'
+          title: 'Holiday Add'
         },
       },
       {
-        path: 'holiday-scheme/copy',
-        component: CopyHolidaySchemeComponent,
+        path: 'Holiday/edit',
+        component: HolidayAddComponent,
         data: {
-          title: 'Holiday Scehme Copy Add Edit'
+          title: 'Holiday Edit'
         },
       },
       {
-        path: 'holiday/detail',
+        path: 'Holiday/Detail',
+        component: HolidayDetailComponent,
+        data: {
+          title: 'Holiday Detail'
+        },
+      },
+      {
+        path: 'Holiday/Detail/Add',
         component: HolidayDetailAddComponent,
         data: {
-          title: 'Holiday Detail Add Edit'
+          title: 'Holiday Detail Add'
+        },
+      },
+      {
+        path: 'Holiday/Detail/Edit',
+        component: HolidayDetailEditComponent,
+        data: {
+          title: 'Holiday Detail Edit'
         },
       },
       {
@@ -159,66 +180,108 @@ const routes: Routes = [
         },
       },
       {
-        path: 'economicSector/paging',
+        path: 'EconomicSector/paging',
         component: EconomicSectorComponent,
         data: {
           title: 'Economic Sector Paging'
         },
       },
       {
-        path: 'economicSector/detail',
+        path: 'EconomicSector/detail',
         component: EconomicSectorAddEditComponent,
         data: {
           title: 'Economic Sector Add Edit'
         },
       },
       {
-        path: 'province/paging',
+        path: 'RefProvince/paging',
         component: ProvinceComponent,
         data: {
           title: 'Province Paging'
         },
       },
       {
-        path: 'province/detail',
+        path: 'RefProvince/detail',
         component: ProvinceAddEditComponent,
         data: {
           title: 'Province Add Edit'
         },
       },
       {
-        path: 'district/paging',
+        path: 'District/paging',
         component: DistrictComponent,
         data: {
           title: 'District Paging'
         },
       },
       {
-        path: 'district/detail',
+        path: 'District/detail',
         component: DistrictAddEditComponent,
         data: {
           title: 'District Add Edit'
         },
       },
       {
-        path: 'refStatus/paging',
+        path: 'RefStatus/paging',
         component: RefStatusPagingComponent,
         data: {
           title: 'Ref Status Paging'
         }
       },
       {
-        path: 'profession/paging',
+        path: 'Profession/paging',
         component: ProfessionComponent,
         data: {
           title: 'Profession Paging'
         },
       },
       {
-        path: 'profession/detail',
+        path: 'Profession/detail',
         component: ProfessionAddEditComponent,
         data: {
           title: 'Profession Add Edit'
+        },
+      },
+      {
+        path: 'IndustryType/paging',
+        component: RefIndustryTypeComponent,
+        data: {
+          title: 'Industry Type Paging'
+        },
+      },
+      {
+        path: 'IndustryType/detail',
+        component: RefIndustryTypeDetailComponent,
+        data: {
+          title: 'Industry Type Detail'
+        },
+      },
+      {
+        path: 'Bank/paging',
+        component: BankComponent,
+        data: {
+          title: 'Bank Paging'
+        },
+      },
+      {
+        path: 'Bank/detail',
+        component: BankAddComponent,
+        data: {
+          title: 'Bank Detail'
+        },
+      },
+      {
+        path: 'Zipcode/paging',
+        component: ZipcodeComponent,
+        data: {
+          title: 'Zipcode Paging'
+        },
+      },
+      {
+        path: 'Zipcode/detail',
+        component: ZipcodeAddComponent,
+        data: {
+          title: 'Zipcode Detail'
         },
       }
     ]

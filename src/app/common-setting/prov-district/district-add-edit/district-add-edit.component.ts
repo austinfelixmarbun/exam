@@ -94,7 +94,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigateByUrl("/commonSetting/district/paging?refProvDistrictId=" + this.parentId);        
+            this.router.navigateByUrl("/CommonSetting/District/paging?refProvDistrictId=" + this.parentId);        
         },
         error => {
           console.log(error);
@@ -110,7 +110,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigateByUrl("/commonSetting/district/paging?refProvDistrictId=" + this.parentId);        
+          this.router.navigateByUrl("/CommonSetting/District/paging?refProvDistrictId=" + this.parentId);        
         },
         error => {
           console.log(error);

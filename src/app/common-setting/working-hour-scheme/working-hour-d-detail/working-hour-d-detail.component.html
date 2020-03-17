@@ -1,0 +1,53 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title" id="horz-layout-colored-controls" translate> WORKING HOUR MANAGEMENT </h4>
+          </div>
+        </div>
+      </div>
+      <div class="px-3">
+        <form class="form form-horizontal"  [formGroup]="WorkingHourSchmDForm" (ngSubmit)="WorkingHourSchmDForm.valid && SaveForm()"
+        #enjiForm="ngForm" >
+          <div class="form-body">
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Working Hour</h4>
+            <div class="form-group row">
+              <label class="col-md-2 text-center" translate>Day </label>
+              <label class="col-md-4 text-center" translate>Working Hour </label>
+              <label class="col-md-4 text-center" translate>Working Hour After Break </label>
+            </div>
+            <div formArrayName="items">
+              <div *ngFor="let item of WorkingHourSchmDForm.controls.items.controls;let i = index;">
+                <div class="form-group row" [formGroupName]="i">
+                  <label class="col-md-2 text-center" translate>{{item.controls.Label.value}}</label>
+                  <div class="col-md-2" style="border-right: 1px solid grey">
+                    <input type="time" class="form-control" formControlName="WorkingHourFrom1">
+                  </div>
+                  <div class="col-md-2">
+                    <input type="time" class="form-control" formControlName="WorkingHourTo1">
+                  </div>
+                  <div class="col-md-2" style="border-right: 1px solid grey">
+                    <input type="time" class="form-control" formControlName="WorkingHourFrom2">
+                  </div>
+                  <div class="col-md-2">
+                    <input type="time" class="form-control" formControlName="WorkingHourTo2">
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/WorkingHour']" translate>
+            <i class="ft-x"></i> Cancel
+          </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

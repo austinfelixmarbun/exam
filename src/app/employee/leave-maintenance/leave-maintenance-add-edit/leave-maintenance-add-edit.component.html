@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<!--<div class="col-md-12">
   <div class="card">
     <div class="card-body">
       <div class="card-header header-title">
@@ -67,6 +67,59 @@
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <div class="addEdit">
+          <form class="form form-horizontal" [formGroup]="RefEmpLeaveMngmntForm" (ngSubmit)="RefEmpLeaveMngmntForm.valid && SaveForm()"
+                #enjiForm="ngForm">
+            <div class="form-body">
+              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Leave Management</h4>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Employee Name </label>
+                <div class="col-md-9" *ngIf="this.pageType == 'add'">
+                  <lib-uclookupgeneric width-75-per [lookupInput]="inputEmpLookupObj" [identifier]="'RefEmpId'" [enjiForm]='enjiForm' [parentForm]='RefEmpLeaveMngmntForm'>
+                  </lib-uclookupgeneric>
+                </div>
+                <div class="col-md-9" *ngIf="this.pageType == 'edit'">
+                  <label>{{empName}}</label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Start Date </label>
+                <div class="col-md-9">
+                  <input type="date" class="form-control adInsInput" formControlName="StartDt"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpLeaveMngmntForm.controls.StartDt.invalid }">
+                  <show-errors [control]="RefEmpLeaveMngmntForm.controls.StartDt" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>End Date </label>
+                <div class="col-md-9">
+                  <input type="date" class="form-control adInsInput" formControlName="EndDt"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpLeaveMngmntForm.controls.EndDt.invalid }">
+                  <show-errors [control]="RefEmpLeaveMngmntForm.controls.EndDt" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+
+            </div>
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Employee/Leave/Paging']"
+                      translate>
+                <i class="ft-x"></i> Back
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,43 @@
+import { NgModule } from "@angular/core";
+import { GeneralDataHOComponent } from "./general-data/general-data.component";
+import { OfficeMemberHOComponent } from "./office-member/office-member.component";
+import { ProductComponentHOComponent } from "./product-component/product-component.component";
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AppRoutingModule } from "app/app-routing.module";
+import { RouterModule, Routes } from "@angular/router";
+import { ProductHoAdddetailComponent } from "./product-ho-adddetail.component";
+import { CommonModule } from "@angular/common";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { UclookupgenericModule } from "@adins/uclookupgeneric";
+import { UcpagingModule } from "@adins/ucpaging";
+import { SharingComponentModule } from "app/shared/sharingcomponent.module";
+import { UcSubsectionModule } from "@adins/uc-subsection";
+import { ProductHOAddDetailRoutingModule } from "./product-ho-adddetail-routing.module";
+import { ArchwizardModule } from "angular-archwizard";
+import { ListOfficeMemberComponent } from './office-member/list-office-member/list-office-member.component';
+import { SearchOfficeComponent } from './office-member/search-office/search-office.component';
+import { UcviewgenericModule } from "@adins/ucviewgeneric";
+
+@NgModule({
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        CommonModule,
+        NgbModule,
+        UclookupgenericModule,
+        UcpagingModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        ProductHOAddDetailRoutingModule,
+        ArchwizardModule,
+        UcviewgenericModule
+    ],
+    declarations: [],
+    
+    providers: [],
+
+})
+
+export class ProductHOAddDetailModule { }

@@ -3,11 +3,20 @@ import { RouterModule, Routes } from "@angular/router";
 import { Dummy1Component } from "./dummy1/dummy1.component";
 import { Dummy2Component } from "./dummy2/dummy2.component";
 import { Dummy3Component } from "./dummy3/dummy3.component";
+import { DummyComponent } from "./dummy/dummy.component";
+import { Dummy4Component } from "./dummy4/dummy4.component";
 
 const routes: Routes = [
   {
     path: '',
     children: [
+      {
+        path: 'dummy',
+        component: DummyComponent,
+        data: {
+          title: 'Dummy'
+        }
+      },
       {
         path: 'dummy1',
         component: Dummy1Component,
@@ -28,6 +37,17 @@ const routes: Routes = [
         data: {
           title: 'Dummy 3'
         }
+      },
+      {
+        path: 'dummy4',
+        component: Dummy4Component,
+        data: {
+          title: 'Dummy 4'
+        }
+      },
+      {
+        path: 'test-provider',
+        loadChildren: './test-provider/testProvider.module#TestProviderModule'
       }
     ]
   }

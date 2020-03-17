@@ -1,0 +1,135 @@
+{
+  "title": "Ref Role Registration",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "Role_Code",
+      "id": "RoleCode",
+      "value": "",
+      "label": "Role Code",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "Role_Name",
+      "id": "RoleName",
+      "value": "",
+      "label": "Role Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "dropdown",
+      "name": "Is_Active",
+      "id": "IsActive",
+      "value": "Active Status",
+      "placeholder": "Placeholder",
+      "isFromURL": false,
+      "isSelectOne": false,
+      "url": "https://api.myjson.com/bins/ld6e8",
+      "label": "Active Status",
+      "items": [
+        {
+          "key": true,
+          "value": "Yes"
+        },
+        {
+          "key": false,
+          "value": "No"
+        }
+      ],
+      "itemsUrl": []
+    }
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Role Code",
+      "name": "RoleCode"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Role Name",
+      "name": "RoleName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Active Status",
+      "name": "IsActive"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Forms"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT A.ROLE_CODE AS RoleCode, A.REF_ROLE_ID AS RefRoleId, A.ROLE_NAME AS RoleName, A.IS_ACTIVE AS IsActive",
+    "from": "FROM dbo.REF_ROLE A WITH(NOLOCK)"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "RoleCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "RoleName"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "IsActive"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "/SystemSetting/RoleForm",
+          "param": [
+            {
+              "type": "RefRoleId",
+              "property": "RefRoleId"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "/SystemSetting/Role/detail",
+          "param": [
+            {
+              "type": "RefRoleId",
+              "property": "RefRoleId"
+            },
+            {
+              "type": "mode",
+              "property": "edit"
+            }
+          ]
+        },
+        {
+            "type": "delete",
+            "property": "RefRoleId"
+        }
+      ]
+    }
+  ]
+}

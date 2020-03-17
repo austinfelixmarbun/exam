@@ -2,13 +2,6 @@
 <div class="row text-left">
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header header-title">
-        <div class="row">
-          <div class="col-md-8">
-            <h4 class="card-title" translate>BANK</h4>
-          </div>
-        </div>
-      </div>
 
       <div class="card-body">
         <div class="px-3">
@@ -23,37 +16,37 @@
                 <label class="col-md-3 adInsLabel" for="bankCode" translate>Bank Code </label>
                 <div class="col-md-9">
                   <input type="text" id="bankCode" class="form-control adInsInput width-25-per"
-                    formControlName="bankCode">
-                  <show-errors [control]="BankAddForm.controls.bankCode" [submit]="BankAddReqForm.submitted"></show-errors>
+                    formControlName="BankCode">
+                  <show-errors [control]="BankAddForm.controls.BankCode" [submit]="BankAddReqForm.submitted"></show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="bankName" translate>Bank Name </label>
                 <div class="col-md-9">
                   <input type="text" id="bankName" class="form-control adInsInput width-25-per"
-                    formControlName="bankName">
-                  <show-errors [control]="BankAddForm.controls.bankName" [submit]="BankAddReqForm.submitted"></show-errors>
+                    formControlName="BankName">
+                  <show-errors [control]="BankAddForm.controls.BankName" [submit]="BankAddReqForm.submitted"></show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="regRptCode" translate>BI Code </label>
                 <div class="col-md-9">
                   <input type="text" id="regRptCode" class="form-control adInsInput width-25-per"
-                    formControlName="regRptCode">
-                    <show-errors [control]="BankAddForm.controls.regRptCode" [submit]="BankAddReqForm.submitted"></show-errors>
+                    formControlName="RegRptCode">
+                    <show-errors [control]="BankAddForm.controls.RegRptCode" [submit]="BankAddReqForm.submitted"></show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" translate>Active Status </label>
                 <div class="col-md-9">
                   <input class="border-primary" type="checkbox" 
-                    formControlName="isActive">
+                    formControlName="IsActive">
                 </div>
               </div>
             </div>
           
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/bank/paging']" translate>
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/Bank/paging']" translate>
                 <i class="ft-arrow-left"></i> Back
               </button>
               

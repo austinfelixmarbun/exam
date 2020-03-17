@@ -6,12 +6,18 @@
           <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} EMPLOYEE </h4>
         </div>
         <div class="col-md-4" style="text-align-last: right">
+          <button type="button" class="addButton" (click)="openModal(content)" translate>
+            <i class="ft-arrow-left"></i> Add
+          </button>
           <button type="button" class="backButton" [routerLink]="['/employee/paging']" translate>
             <i class="ft-arrow-left"></i> Back
           </button>
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <ng-template #content let-c="close" let-d="dismiss">
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="RefEmpForm" (ngSubmit)="RefEmpForm.valid && SaveForm()"
@@ -72,6 +78,7 @@
           </div>
 
           <!-- ucAddressGroup -->
+          <!-- <lib-ucaddress [UCAddrForm]="RefEmpForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [default]="defVal"></lib-ucaddress> -->
           <app-uc-address-group #UcAddrGrp [UCAddrForm]="RefEmpForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [default]="defVal"></app-uc-address-group>
           <!-- ucAddressGroup -->
 
@@ -83,5 +90,11 @@
         </form>
       </div>
     </div>
+  </ng-template>
   </div>
+</div>
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="btn btn-info btn-raised" (click)="nextClicked()"> Save & Continue </button>
+  </span>
 </div>
