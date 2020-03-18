@@ -7,7 +7,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '', title: 'Organization', icon: 'ft-bar-chart-2', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
-      { path: '/Office/paging', title: 'Office', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Office/Paging', title: 'Office', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Office/OfficeArea', title: 'Office Area', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Organization/BusinessUnit', title: 'Business unit', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Organization/JobTitle', title: 'Job Title', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
@@ -75,9 +75,10 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '', title: 'Verification', icon: 'ft-layers', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
-      { path: '/Product/HOpaging', title: 'Question List', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Product/HOpaging', title: 'Question Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
-      
+      { path: '/Verification/QuestionAnswerPaging', title: 'Verification Question Answer', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Verification/QuestionSchemePaging', title: 'Verification Question Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Verification/QuestionGroupPaging', title: 'Verification Question Group', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Verification/QuestionGroupMemberPaging', title: 'Verification Question Group Member', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
     ]
   },
   {    path: '', title: 'Vendor', icon: 'ft-aperture', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,

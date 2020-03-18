@@ -2,21 +2,17 @@
   <div class="card">
     <div class="card-body">
       <div class="px-3">
-          <div class="row">
-              <div class="col-md-8">
-                  <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Master Information </h4>
-              </div>
-              <div class="col-md-4" style="text-align-last: right">
-                <button type="button" class="backButton" (click)="Back()" translate>
-                  <i class="ft-arrow-left"></i> Back
-                </button>
-              </div>
-            </div>
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Master Information </h4>
+          </div>
+
+        </div>
         <form class="form form-horizontal" name="enjiForm" [formGroup]="RefMasterForm" #enjiForm="ngForm" novalidate
           (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
           <div class="form-body">
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="refMasterTypeCodeModule">Master Type</label>
+              <label class="col-md-3 adInsLabel adins-required-label" for="refMasterTypeCodeModule">Master Type</label>
               <div class="col-md-9">
                 <select id="refMasterTypeCodeModule" formControlName="RefMasterTypeCode" class="form-control"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefMasterForm.controls.RefMasterTypeCode.invalid }">
@@ -24,22 +20,24 @@
                     {{item.Value}}
                   </option>
                 </select>
-                <show-errors [control]="RefMasterForm.controls.RefMasterTypeCode" [submit]="enjiForm.submitted"></show-errors>
+                <show-errors [control]="RefMasterForm.controls.RefMasterTypeCode" [submit]="enjiForm.submitted">
+                </show-errors>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="masterCodeModel">Master Code</label>
+              <label class="col-md-3 adInsLabel adins-required-label" for="masterCodeModel">Master Code</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" formControlName="MasterCode" 
+                <input type="text" class="form-control adInsInput code" formControlName="MasterCode"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefMasterForm.controls.MasterCode.invalid }"
                   [attr.disabled]="type == 'edit' ? true : null">
                 <show-errors [control]="RefMasterForm.controls.MasterCode" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel adins-required" for="descrModel">Description</label>
+              <label class="col-md-3 adInsLabel adins-required adins-required-label"
+                for="descrModel">Description</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" formControlName="Descr" 
+                <input type="text" class="form-control adInsInput" formControlName="Descr"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefMasterForm.controls.Descr.invalid }">
                 <show-errors [control]="RefMasterForm.controls.Descr" [submit]="enjiForm.submitted"></show-errors>
               </div>
@@ -47,13 +45,13 @@
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="seqNo" translate>Seq No </label>
               <div class="col-md-9">
-                <input type="text" pattern="^[0-9]+$" class="form-control adInsInput" formControlName="SeqNo" 
+                <input type="text" pattern="^[0-9]+$" class="form-control adInsInput" formControlName="SeqNo"
                   [ngClass]="{ 'is-invalid':(enjiForm.submitted || RefMasterForm.controls.SeqNo.touched || RefMasterForm.controls.SeqNo.dirty) && RefMasterForm.controls.SeqNo.invalid }">
                 <show-errors [control]="RefMasterForm.controls.SeqNo" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="isActive">Active Status</label>
+              <label class="col-md-3 adInsLabel adins-required-label" for="isActive">Active Status</label>
               <div class="custom-control custom-checkbox m-0">
                 <input type="checkbox" value="1" id="isActive" formControlName="IsActive">
               </div>
@@ -61,9 +59,10 @@
 
           </div>
           <div class="form-actions right">
-            <!-- <button *ngIf=" type == 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-              <i class="fa fa-arrow-circle-left"></i> Back
-            </button> -->
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/Master']"
+              translate>
+              <i class="ft-x"></i> Back
+            </button>
             <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>

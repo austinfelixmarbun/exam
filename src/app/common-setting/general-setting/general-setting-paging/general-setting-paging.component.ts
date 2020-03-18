@@ -28,7 +28,7 @@ export class GeneralSettingPagingComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.propName = 'IS_UPDATEABLE';
     critObj.value = '1';
-    this.arrCrit.push(critObj);
+    //this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 }
