@@ -6,7 +6,6 @@ import { FormBuilder } from '@angular/forms';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
 import { WizardComponent } from 'angular-archwizard';
 
 @Component({
@@ -22,7 +21,7 @@ export class AddressComponent implements OnInit {
   result: any;
   VendorAddrId: any;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) { 
+  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) { 
 
   }
 

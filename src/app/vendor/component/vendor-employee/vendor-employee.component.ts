@@ -10,6 +10,7 @@ import { VendorBranchEmpObj } from 'app/shared/model/VendorBranchEmpObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorEmpObj } from 'app/shared/model/VendorEmpObj.Model';
 import { formatDate } from '@angular/common';
+import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-vendor-employee',
@@ -57,7 +58,7 @@ export class VendorEmployeeComponent implements OnInit {
     TaxpayerName: ['']
   });
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent) {
     this.route.queryParams.subscribe(params => {
       if (params["VendorEmpId"] != null) {
         this.VendorEmpId = params["VendorEmpId"];
@@ -108,7 +109,7 @@ export class VendorEmployeeComponent implements OnInit {
       this.VendorEmpForm.controls["VendorEmpCode"].disable();
       this.VendorEmpForm.controls["VendorEmpName"].disable();
       var vendorEmpObj = new VendorEmpObj();
-      vendorEmpObj.VendorEmpId = this.VendorEmpId; 
+      vendorEmpObj.VendorEmpId = this.VendorEmpId;
       this.http.post(AdInsConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, vendorEmpObj).subscribe(
         (response) => {
           this.result = response;
@@ -124,7 +125,7 @@ export class VendorEmployeeComponent implements OnInit {
             MobilePhnNo1: this.result.VendorEmpObj.MobilePhnNo1,
             MobilePhnNo2: this.result.VendorEmpObj.MobilePhnNo2,
             Email: this.result.VendorEmpObj.Email,
-            JoinDt:  formatDate(this.result.VendorEmpObj['JoinDt'], 'yyyy-MM-dd', 'en-US'),
+            JoinDt: formatDate(this.result.VendorEmpObj['JoinDt'], 'yyyy-MM-dd', 'en-US'),
             VendorEmpRating: this.result.VendorEmpObj.VendorEmpRating,
             Zipcode: this.result.VendorEmpObj.Zipcode,
             Addr: this.result.VendorAddrObj.Addr,
@@ -143,7 +144,7 @@ export class VendorEmployeeComponent implements OnInit {
         (error) => {
           console.log(error);
         }
-      );        
+      );
     }
   }
 
@@ -243,6 +244,7 @@ export class VendorEmployeeComponent implements OnInit {
       this.http.post(AdInsConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
+          this.wizard.goToNextStep();
         },
         (error) => {
           console.log(error);
@@ -256,6 +258,7 @@ export class VendorEmployeeComponent implements OnInit {
       this.http.post(AdInsConstant.EditVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
+          this.wizard.goToNextStep();
         },
         (error) => {
           console.log(error);
