@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { environment } from 'environments/environment';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-verification-question-group-paging',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerificationQuestionGroupPagingComponent implements OnInit {
 
-  constructor() { }
+  inputPagingObj: any;
 
   ngOnInit() {
+    this.inputPagingObj = new UcPagingObj();
+    this.inputPagingObj._url = "./assets/ucpaging/verification/searchVerificationQuestionGroup.json";
+    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchVerificationQuestionGroup.json";
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefOffice;
   }
-
 }

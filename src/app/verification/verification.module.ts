@@ -19,6 +19,9 @@ import { VerificationQuestionAnswerAddEditComponent } from './verification-quest
 import { VerificationQuestionGroupAddEditComponent } from './verification-question-group/verification-question-group-add-edit/verification-question-group-add-edit.component';
 import { VerificationQuestionGroupPagingComponent } from './verification-question-group/verification-question-group-paging/verification-question-group-paging.component';
 import { VerificationService } from './verification.service';
+import { VerificationQuestionGroupMemberPagingComponent } from './verification-question-group-member/verification-question-group-member-paging/verification-question-group-member-paging.component';
+import { VerificationQuestionGroupMemberEditComponent } from './verification-question-group-member/verification-question-group-member-edit/verification-question-group-member-edit.component';
+import { VerificationQuestionGroupMemberAddComponent } from './verification-question-group-member/verification-question-group-member-add/verification-question-group-member-add.component';
 
 @NgModule({
   imports: [
@@ -46,6 +49,9 @@ import { VerificationService } from './verification.service';
     VerificationQuestionAnswerAddEditComponent,
     VerificationQuestionGroupAddEditComponent,
     VerificationQuestionGroupPagingComponent,
+    VerificationQuestionGroupMemberPagingComponent,
+    VerificationQuestionGroupMemberEditComponent,
+    VerificationQuestionGroupMemberAddComponent,
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

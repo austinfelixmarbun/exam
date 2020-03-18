@@ -5,6 +5,9 @@ import { VerificationQuestionAnswerPagingComponent } from './verification-questi
 import { VerificationQuestionAnswerAddEditComponent } from './verification-question-answer/verification-question-answer-add-edit/verification-question-answer-add-edit.component';
 import { VerificationQuestionGroupAddEditComponent } from './verification-question-group/verification-question-group-add-edit/verification-question-group-add-edit.component';
 import { VerificationQuestionGroupPagingComponent } from './verification-question-group/verification-question-group-paging/verification-question-group-paging.component';
+import { VerificationQuestionGroupMemberPagingComponent } from './verification-question-group-member/verification-question-group-member-paging/verification-question-group-member-paging.component';
+import { VerificationQuestionGroupMemberEditComponent } from './verification-question-group-member/verification-question-group-member-edit/verification-question-group-member-edit.component';
+import { VerificationQuestionGroupMemberAddComponent } from './verification-question-group-member/verification-question-group-member-add/verification-question-group-member-add.component';
 
 const routes: Routes = [
   {
@@ -31,8 +34,49 @@ const routes: Routes = [
           title: 'Verification Question Answer Edit'
         },
       },
+      {
+        path: 'QuestionGroupPaging',
+        component: VerificationQuestionGroupPagingComponent,
+        data: {
+          title: 'Verification Question Group Paging'
+        },
+      },
+      {
+        path: 'QuestionGroup/Add',
+        component: VerificationQuestionGroupAddEditComponent,
+        data: {
+          title: 'Verification Question Group Edit'
+        },
+      },
+      {
+        path: 'QuestionGroup/Edit',
+        component: VerificationQuestionGroupAddEditComponent,
+        data: {
+          title: 'Verification Question Group Edit'
+        },
+      },
+      {
+        path: 'QuestionGroupMemberPaging',
+        component: VerificationQuestionGroupMemberPagingComponent,
+        data: {
+          title: 'Verification Question Group Member Paging'
+        },
+      },
+      {
+        path: 'QuestionGroupMember/Add',
+        component: VerificationQuestionGroupMemberAddComponent,
+        data: {
+          title: 'Verification Question Group Member Add'
+        },
+      },
+      {
+        path: 'QuestionGroupMember/Edit',
+        component: VerificationQuestionGroupMemberEditComponent,
+        data: {
+          title: 'Verification Question Group Member Edit'
+        },
+      }
     ]
-
   }
 ];
 
