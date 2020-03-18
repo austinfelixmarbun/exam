@@ -76,7 +76,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.GS_CODE as gsCode,A.GENERAL_SETTING_ID as generalSettingId,A.GS_NAME as gsName,A.GS_DESCR as gsDescr,A.GS_VALUE as gsValue, A.MODULE_CODE as moduleCode",
+    "select": "SELECT A.GS_CODE as gsCode,A.GENERAL_SETTING_ID as generalSettingId,A.GS_NAME as gsName,A.GS_DESCR as gsDescr,A.GS_VALUE as gsValue, A.MODULE_CODE as moduleCode, A.IS_UPDATEABLE as isUpdateable",
     "from": "FROM dbo.GENERAL_SETTING A WITH(NOLOCK)"
   },
   "bodyList": [
@@ -105,16 +105,26 @@
       "position": "center",
       "action": [
         {
-          "type": "edit",
-          "path": "/CommonSetting/GeneralSetting/detail",
-          "param": [
+          "type": "switch",
+          "case": [
             {
-              "type": "generalSettingId",
-              "property": "generalSettingId"
-            },
-            {
-              "type": "param",
-              "property": "edit"
+              "conditions": [
+                {
+                  "property": "isUpdateable",
+                  "value": "1",
+                  "restriction": "EQ"
+                }
+              ],
+              "result": {
+                "type": "url",
+                "path": "/CommonSetting/GeneralSetting/detail",
+                "param": [
+                  {
+                    "type": "generalSettingId",
+                    "property": "generalSettingId"
+                  }
+                ]
+              }
             }
           ]
         }
