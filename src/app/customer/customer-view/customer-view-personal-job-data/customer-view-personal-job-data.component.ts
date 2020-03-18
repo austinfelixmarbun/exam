@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-customer-view-personal-job-data',
@@ -7,25 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerViewPersonalJobDataComponent implements OnInit {
   viewCustJobData: string;
+  getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
+  CustId: any;
+  custResultData: any;
+  custModel: any;
 
-  constructor() { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.viewCustJobData =  "./assets/ucviewgeneric/viewCustJobData.json";
 
-    // var assetTypeObj = {
-    //   RefMasterTypeCode: "ASSET_TYPE_ID",
-    //   RowVersion: ""
-    // }
-    // this.http.post(this.getAssetTypeUrl, assetTypeObj).subscribe(
+    this.route.queryParams.subscribe(params => {
+      if (params['CustId'] != null) {
+        this.CustId = params['CustId'];
+      }
+    });
+
+    var custObj = {
+      CustId: this.CustId
+    }
+    // this.http.post(this.getCustByCustIdUrl, custObj).subscribe(
     //   (response) => {
-    //     this.ItemAssetType = response["ReturnObject"];
-    //     if (this.pageType == "add") {
-    //       this.AssetSchemeInfoForm.patchValue({
-    //         AssetTypeId: this.ItemAssetType[0].AssetTypeId,
-    //         IsActive: true
-    //       });
-    //     }
+    //     this.custResultData = response["ReturnObject"];
+    //     this.custModel = this.custResultData['CustModel']
     //   }
     // );
 
