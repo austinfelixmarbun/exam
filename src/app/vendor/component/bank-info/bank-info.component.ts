@@ -17,7 +17,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class BankInfoComponent implements OnInit {
   title : any;
-  @Input() VendorId : any;
+  @Input() objInput : any;
   modal : any;
   closeResult : any;
   inputLookupBankObj: InputLookupObj;
@@ -30,7 +30,7 @@ export class BankInfoComponent implements OnInit {
     AccName: ['', [Validators.required]],
     IsDefault: [],
     RefBankId : [],
-    BankBranchRegCode : []
+    BankBranchRegCode : [],
   });
   objEdit : any;
 
@@ -42,15 +42,16 @@ export class BankInfoComponent implements OnInit {
         this.mode = params["mode"];
       }
     });
-    
+
     var obj = {
-      VendorId : this.VendorId
+      VendorId : this.objInput.VendorId
     }
+
     this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
       response => {
         this.ListData = response["ReturnObject"];
       }
-      );
+      );   
 
     this.inputLookupBankObj = new InputLookupObj();
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
@@ -87,34 +88,45 @@ export class BankInfoComponent implements OnInit {
   {
     if (this.mode == "add") {
       this.VendorBankAcc = new VendorBankAccObj();
-      this.VendorBankAcc.VendorId = this.VendorId;
-      this.VendorBankAcc.RefBankId = this.BankRegisForm.controls["RefBankId"].value
-      this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls["AccNumber"].value;
-      this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls["AccName"].value;
-      this.VendorBankAcc.IsDefault = this.BankRegisForm.controls["IsDefault"].value;
+      this.VendorBankAcc.VendorId = this.objInput.VendorId;
+      this.VendorBankAcc.RefBankId = this.BankRegisForm.controls.RefBankId.value
+      this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls.AccNumber.value;
+      this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls.AccName.value;
+      this.VendorBankAcc.IsDefault = this.BankRegisForm.controls.IsDefault.value;
       this.vendorService.AddVendorBankAcc(this.VendorBankAcc).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.modal.close();      
+            this.modal.close();
+            var obj = {
+              VendorId : this.objInput.VendorId
+            }
+        
+            this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
+              response => {
+                this.ListData = response["ReturnObject"];
+              }
+              );    
         },
         error => {
           console.log(error);
         }
       );
+
+
     } else {
       this.VendorBankAcc = this.objEdit;
-      this.VendorBankAcc.RefBankId = this.BankRegisForm.controls["RefBankId"].value
-      this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls["AccNumber"].value;
-      this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls["AccName"].value;
-      this.VendorBankAcc.IsDefault = this.BankRegisForm.controls["IsDefault"].value;
-      this.VendorBankAcc.VendorId = this.VendorId;
+      this.VendorBankAcc.RefBankId = this.BankRegisForm.controls.RefBankId.value
+      this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls.AccNumber.value;
+      this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls.AccName.value;
+      this.VendorBankAcc.IsDefault = this.BankRegisForm.controls.IsDefault.value;
+      this.VendorBankAcc.VendorId = this.objInput.VendorId;
       this.VendorBankAcc.VendorBankAccId = this.VendorBankAccId;
       this.VendorBankAcc.RowVersion = this.objEdit.RowVersion;
       this.vendorService.EditVendorBankAcc(this.VendorBankAcc).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
             var obj = {
-              VendorId : this.VendorId
+              VendorId : this.objInput.VendorId
             };
             this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
               response => {
@@ -146,11 +158,13 @@ export class BankInfoComponent implements OnInit {
     };
     this.vendorService.GetVendorBankAccByVendorBankAccId(obj).subscribe(response => {
       this.objEdit = response;
+      console.log("ini bagian edit")
       this.BankRegisForm.patchValue({
         AccNumber : response["BankAccountNo"],
         AccName : response["BankAccountName"],
         RefBankId : response["RefBankId"],
-        IsDefault : response["IsDefault"]
+        IsDefault : response["IsDefault"],
+        RowVersion: response["RowVersion"]
       });
       this.inputLookupBankObj.nameSelect = response["BankName"]
     })

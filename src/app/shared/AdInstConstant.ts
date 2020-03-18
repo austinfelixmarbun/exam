@@ -514,7 +514,9 @@ export class AdInsConstant {
     public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
     public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
     public static AddVendorAddr = environment.FoundationR3Url + "/VendorAddr/AddVendorAddr"
-    
+    public static EditVendorAddr = environment.FoundationR3Url + "/VendorAddr/EditVendorAddr"  
+    public static GetVendorAddrByVendorId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorIdMrAddrType"
+
     public static GetListVendorBankAccByVendorId = environment.localHostUrl + "/VendorBankAcc/GetListVendorBankAccByVendorId";
     public static AddVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/AddVendorBankAcc";
     public static EditVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/EditVendorBankAcc";

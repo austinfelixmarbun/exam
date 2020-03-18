@@ -18,6 +18,7 @@ export class VendorHoRegistrationComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
+      this.objPassing["mode"] = params['mode'];
     });
   }
 

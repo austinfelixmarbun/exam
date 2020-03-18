@@ -106,12 +106,8 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Vendor/HO/Detail",
+                    "path": "/Vendor/HO/Registration",
                     "param": [
-                        {
-                            "type": "MrVendorCategoryCode",
-                            "property": "MrVendorCategoryCode"
-                        },
                         {
                             "type": "VendorId",
                             "property": "VendorId"
@@ -122,7 +118,7 @@
                         }
                     ]
                 },
-                {
+                {   
                     "type": "delete",
                     "property": "VendorId"
                 }
