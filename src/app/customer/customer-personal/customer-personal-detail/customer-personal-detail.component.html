@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
       <div class="px-3">
-        <div class="addEdit"> 
+        <div class="addEdit">  
           <form class="form form-horizontal" [formGroup]="CustomerDetailForm"
             (ngSubmit)="CustomerDetailForm.valid && SaveValue()"  #enjiForm="ngForm">
             <div class="form-body">
@@ -98,10 +98,10 @@
                 <div class="form-group row ">
                   <label class="col-md-2 adins-required-label" translate>Country</label>
                   <div class="col-md-4">
-                    <div *ngIf="flag">
-                      Indonesia
-                    </div>
-                    <div *ngIf="!flag">
+                      <div *ngIf="flag">
+                        Indonesia
+                      </div>
+                      <div [hidden]="flag">
                       <lib-uclookupgeneric [lookupInput]="lookUpObj" [parentForm]="CustomerDetailForm"
                         [enjiForm]="enjiForm" [identifier]="'WnaCountryCode'" (lookup)=getLookUp($event)>
                       </lib-uclookupgeneric>

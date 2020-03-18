@@ -1,4 +1,4 @@
-<app-customer-contact-check *ngIf="isAdd == false"  (outputValue)="terimaValue($event)"> </app-customer-contact-check>
+<app-customer-contact-check *ngIf="isAdd == false" [inputValue] ="this.inputValue"  (outputValue)="terimaValue($event)"> </app-customer-contact-check>
 <app-customer-contact-add  *ngIf="isAdd == true"[inputValue] ="this.inputValue" (outputValues)="terimaValue($event)" > </app-customer-contact-add>
 
 

@@ -81,9 +81,9 @@ state: any;
           MrIdTypeCode: this.tempIdType[0].Key
         });
         if(this.tempIdType[0].Key == this.KTP){
-          this.tempKTPCheck=false;
-        }else{
           this.tempKTPCheck=true;
+        }else{
+          this.tempKTPCheck=false;
         }
       }
     );
@@ -134,10 +134,10 @@ state: any;
   onOptionsSelected(event){  
     if(event.target.value == this.KTP){
       this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
-      this.tempKTPCheck= false;
+      this.tempKTPCheck= true;
     }else{
       this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);  
-      this.tempKTPCheck=true;
+      this.tempKTPCheck=false;
     }
     this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
   }

@@ -9,6 +9,8 @@ import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-customer-contact-add',
@@ -39,16 +41,12 @@ export class CustomerContactAddComponent implements OnInit {
     MobilePhnNo1: [''],
     MobilePhnNo2: [''],
     Email: [''],
-    // Addr: [''],
-    // AreaCode1: [''],
-    // AreaCode2: [''],
-    // AreaCode3: [''],
-    // AreaCode4: [''],
-    // City: [''],
-    // SubZipcode: [''],
-    // Zipcode : [''],
     ContactPersonCustNo: [''],
   });
+  flag : any;
+  KTP = "KTP";
+  CountryIndonesia = "Indonesia";
+  tempKTPCheck:any;
   getUrl: any;
   tempIdType: any;
   tempNationality: any;
@@ -59,20 +57,27 @@ export class CustomerContactAddComponent implements OnInit {
   tempMrGenderCode : any;
   professionLookUpObj: any;
   lookUpObj: any;
+  existingCustomerLookUpObj: any;
   criteriaList: any;
   criteriaObj: any;
   addressObj: any;
   custPersonaContactPersonObj: any;
   tempCountryCode: any;
   tempProfession: any;
+  tempCustId : any;
+  tempCustPersonal: any;
+  tempCust : any;
+  tempCountry : any;
+  tempCustAddress : any;
   addCustPersonalContactPersonUrl: any;
+  custObj : any;
+
   constructor(private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
     this.getUrl = AdInsConstant.GetListActiveRefMaster;
     this.addCustPersonalContactPersonUrl = AdInsConstant.AddNewCustPersonalContactPerson ;
   }
   isAdd: any;
   ngOnInit() {
-
     console.log("aa" + this.inputValue);
     this.addressObj = new UcAddressObj();
     this.lookUpObj = new InputLookupObj();
@@ -81,7 +86,6 @@ export class CustomerContactAddComponent implements OnInit {
     this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
-
     this.criteriaList = new Array();
     this.criteriaObj = new CriteriaObj();
     this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
@@ -89,13 +93,22 @@ export class CustomerContactAddComponent implements OnInit {
     this.criteriaObj.value = "IDN";
     this.criteriaList.push(this.criteriaObj);
     this.lookUpObj.addCritInput = this.criteriaList;
-
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.professionLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
+
+    this.existingCustomerLookUpObj = new InputLookupObj();
+    this.existingCustomerLookUpObj.urlJson = "./assets/lookup/lookupExistingCustomer.json";
+    this.existingCustomerLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.existingCustomerLookUpObj.urlEnviPaging = environment.FoundationR3Url;
+    this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
+    this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
+    this.existingCustomerLookUpObj.isRequired = false;
+
+
     var refMasterObj1 = {
       RefMasterTypeCode: "ID_TYPE"
     }
@@ -106,7 +119,11 @@ export class CustomerContactAddComponent implements OnInit {
         this.CustomerContactForm.patchValue({
           MrIdTypeCode: this.tempIdType[0].Key
         });
-
+        if(this.tempIdType[0].Key == this.KTP){
+          this.tempKTPCheck=true;
+        }else{
+          this.tempKTPCheck=false;
+        }
       }
     );
 
@@ -118,16 +135,15 @@ export class CustomerContactAddComponent implements OnInit {
         console.log("awd");
         this.tempNationality = response["ReturnObject"];
         this.CustomerContactForm.patchValue({
-          MrNationalityCode: this.tempNationality[0].Key
+          MrNationalityCode: "WNI"
         });
-
+        this.flag = true;
       });
     var refMasterObj3 = {
       RefMasterTypeCode: "MARITAL_STAT"
     }
     this.http.post(this.getUrl, refMasterObj3).subscribe(
       (response) => {
-
         this.tempMrMaritalStatCode = response["ReturnObject"];
         this.CustomerContactForm.patchValue({
           MrMaritalStatCode: this.tempMrMaritalStatCode[0].Key
@@ -139,7 +155,6 @@ export class CustomerContactAddComponent implements OnInit {
     }
     this.http.post(this.getUrl, refMasterObj4).subscribe(
       (response) => {
-
         this.tempMrEducationCode = response["ReturnObject"];
         this.CustomerContactForm.patchValue({
           MrEducationCode: this.tempMrEducationCode[0].Key
@@ -150,20 +165,17 @@ export class CustomerContactAddComponent implements OnInit {
     }
     this.http.post(this.getUrl, refMasterObj5).subscribe(
       (response) => {
-
         this.tempMrReligionCode = response["ReturnObject"];
         this.CustomerContactForm.patchValue({
           MrReligionCode: this.tempMrReligionCode[0].Key
         });
       });
 
-
     var refMasterObj6 = {
       RefMasterTypeCode: "CUST_RELATIONSHIP"
     }
     this.http.post(this.getUrl, refMasterObj6).subscribe(
       (response) => {
-
         this.tempMrCustRelationshipCode = response["ReturnObject"];
         this.CustomerContactForm.patchValue({
           MrCustRelationshipCode: this.tempMrCustRelationshipCode[0].Key
@@ -182,13 +194,11 @@ export class CustomerContactAddComponent implements OnInit {
           });
         }
       );
-
-  }
+  } 
 
   SaveValue() {
     // this.isAdd = false; 
     // this.outputValues.emit(this.isAdd);
-
     console.log("awdawdawd");
     this.custPersonaContactPersonObj = new CustPersonalContactPersonObj();
     this.custPersonaContactPersonObj.CustId = this.inputValue;
@@ -235,7 +245,6 @@ export class CustomerContactAddComponent implements OnInit {
        console.log(response);
         this.toastr.successMessage(response["Message"]);
         // this.wizard.goToNextStep();
-    
       },
       error => {
         console.log(error);
@@ -243,7 +252,75 @@ export class CustomerContactAddComponent implements OnInit {
     );
   }
 
+  getLookUpCustomer(event) {
+    console.log("aaaaa")
+    this.tempCustId = event.CustId;
+    var datePipe = new DatePipe("en-US");
+    // this.expiredDt = datePipe.transform(this.response.IdExpiredDt, 'yyyy-MM-dd');
+    this.custObj = new CustObj();
+    this.custObj.CustId = this.tempCustId;
+    this.http.post(AdInsConstant.GetCustPersonalbyCustId, this.custObj).subscribe(
+      (response) => {
+        this.tempCustPersonal = response;
 
+        this.CustomerContactForm.patchValue({
+          MotherMaidenName: this.tempCustPersonal.MotherMaidenName,    
+          MrNationalityCode: this.tempCustPersonal.MrNationalityCode,
+          MrReligionCode: this.tempCustPersonal.MrReligionCode,
+          BirthPlace: this.tempCustPersonal.BirthPlace,
+          BirthDt: datePipe.transform(this.tempCustPersonal.BirthDt, 'yyyy-MM-dd'),
+          MrMaritalStatCode: this.tempCustPersonal.MrMaritalStatCode,
+ 
+
+        });
+        if( this.tempCustPersonal.MrNationalityCode!= "WNI"){
+          this.flag = false;  
+          var countryCode = {
+            CountryCode: this.tempCustPersonal.WnaCountryCode
+          };
+          this.http.post(AdInsConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+            (response) => {
+               
+              this.tempCountry = response;
+              this.lookUpObj.nameSelect = this.tempCountry.CountryName;;
+            });
+     
+          
+        }else{
+          this.flag=true; 
+        }
+      }
+     
+    ); console.log(this.tempCustPersonal);
+    this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
+      (response) => {
+        this.tempCust = response ;
+        this.CustomerContactForm.patchValue({
+          ContactPersonName: this.tempCust.CustName,
+          MrIdTypeCode: this.tempCust.MrIdTypeCode,       
+          IdNo: this.tempCust.IdNo,
+          IdExpiredDt : datePipe.transform(this.tempCust.IdExpiredDt, 'yyyy-MM-dd'),
+          TaxIdNo: this.tempCust.TaxIdNo
+        });
+      }
+
+    );
+
+    // this.http.post(AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView, custIdObj).subscribe(
+    //   (response) => {
+    //     this.tempCustAddress = response;
+    //   }
+    // );
+    // this.CustomerContactForm.patchValue({
+    //   ContactPersonName: this.tempCust.CustName,
+    //   MotherMaidenName: this.tempCustPersonal.MotherMaidenName,
+    //   MrIdTypeCode: this.tempCust.MrIdTypeCode,
+    //   MrNationalityCode: this.tempCustPersonal.MrNationalityCode,
+    //   IdNo: this.tempCust.IdNo
+    // });
+   
+  }
+   
   getLookUpCountry(event) {
     this.tempCountryCode = event.CountryCode;
   }
@@ -251,5 +328,24 @@ export class CustomerContactAddComponent implements OnInit {
     this.tempProfession = event.ProfessionCode;
   }
 
-  
+  onOptionIdTypeSelected(event){  
+    if(event.target.value == this.KTP){
+      this.CustomerContactForm.controls.IdExpiredDt.clearValidators();
+      this.tempKTPCheck= true;
+    }else{
+      this.CustomerContactForm.controls.IdExpiredDt.setValidators(Validators.required);  
+      this.tempKTPCheck=false;
+    }
+    this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
+  }
+  onOptionsNationalitySelected(event){
+    if (event.target.value == "WNI") {    
+      
+      this.lookUpObj.isRequired = false;
+      this.flag=true;
+    } else {
+      this.flag = false;
+      this.lookUpObj.isRequired = true;
+    }
+  }
 }
