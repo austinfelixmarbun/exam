@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-ho-registration',
@@ -6,12 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vendor-ho-registration.component.scss']
 })
 export class VendorHoRegistrationComponent implements OnInit {
-  viewObj: any;
+  VendorId: any; 
+  objPassing: any = {};
+  HiddenState: boolean = true;
 
-  constructor() { }
-
-  ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewVendorHO.json"
+  constructor(private route: ActivatedRoute) { 
+    this.route.queryParams.subscribe(params => {
+      this.objPassing["VendorId"] = params['VendorId'];
+      this.objPassing["mode"] = params['mode'];
+    });
   }
 
+  ngOnInit() {
+    this.VendorId = this.objPassing["VendorId"];
+  }
+
+  outputValue(ev){
+    this.HiddenState = ev;
+  }
 }

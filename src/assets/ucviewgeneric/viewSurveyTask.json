@@ -1,0 +1,47 @@
+{
+  "title": "Survey Task View",
+  "subsection": [
+    {
+      "subSectionId": "SurveyTaskId",
+      "subSectionTitle": "Main Information",
+      "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+      "mainInfo": [
+        {
+          "type": "text",
+          "label": "Survey Task No",
+          "property": "SrvyTaskNo"
+        },
+        {
+          "type": "text",
+          "label": "Form Scheme",
+          "property": "SrvyFormSchmName"
+        },
+        {
+          "type": "text",
+          "label": "Survey Subject",
+          "property": "MrSrvySubjCode"
+        },
+        {
+          "type": "text",
+          "label": "Survey Object",
+          "property": "MrSrvyObjCode"
+        },
+        {
+          "type": "text",
+          "label": "Surveyor Name",
+          "property": "SrvyTaskId"
+        },
+        {
+          "type": "text",
+          "label": "Survey Status",
+          "property": "MrSrvyStatCode"
+        }
+      ],
+      "querystring": {
+        "select": "SELECT ST.SRVY_TASK_NO AS SrvyTaskNo, SFS.SRVY_FORM_SCHM_NAME AS SrvyFormSchmName, ST.MR_SRVY_SUBJ_CODE AS MrSrvySubjCode, ST.MR_SRVY_OBJ_CODE AS MrSrvyObjCode, ST.MR_SRVY_STAT_CODE AS MrSrvyStatCode, ST.SRVY_TASK_ID AS SrvyTaskId",
+        "from": "FROM dbo.SRVY_TASK ST JOIN dbo.SRVY_FORM_SCHM SFS ON SFS.SRVY_FORM_SCHM_ID = ST.SRVY_FORM_SCHM_ID",
+        "where": "WHERE ST.SRVY_TASK_ID = {0}"
+      }
+    }
+  ]
+}

@@ -21,6 +21,7 @@ import { OfficeAreaMemberAddComponent } from './office-area/office-area-member/o
 import { OfficeAreaAddEditComponent } from './office-area/office-area-add-edit/office-area-add-edit.component';
 import { OfficeAreaPagingComponent } from './office-area/office-area-paging/office-area-paging.component';
 import { OfficeAreaMemberPagingComponent } from './office-area/office-area-member/office-area-member-paging/office-area-member-paging.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { OfficeAreaMemberPagingComponent } from './office-area/office-area-membe
     ReactiveFormsModule,
     UcaddressModule,
     UclookupgenericModule,
+    UcShowErrorsModule,
     UcviewgenericModule
   ],
   declarations: [

@@ -1,0 +1,136 @@
+{
+    "title": "Branch Employee",
+    "exportExcel": false,
+    "component": [
+      {
+        "type": "textbox",
+        "name": "VENDOR_EMP_NO",
+        "id": "VendorEmpNoId",
+        "value": "",
+        "label": "Employee Code",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "VENDOR_EMP_NAME",
+        "id": "VendorEmpNameId",
+        "value": "",
+        "label": "Employee Name",
+        "placeholder": "Placeholder"
+      },
+      {
+          "type": "numeric",
+          "name": "VENDOR_EMP_RATING",
+          "id": "VendorEmpRatingGteId",
+          "value": "0",
+          "label": "Rating >=",
+          "restriction": "gte",
+          "placeholder": "Placeholder",
+          "datatype": "numeric"
+      },
+      {
+          "type": "numeric",
+          "name": "VENDOR_EMP_RATING",
+          "id": "VendorEmpRatingLteId",
+          "value": "5",
+          "label": "Rating <=",
+          "restriction": "lte",
+          "placeholder": "Placeholder",
+          "datatype": "numeric"
+      },
+      {
+          "type": "dropdown",
+          "name": "IS_ACTIVE",
+          "id": "IsActiveId",
+          "value": "",
+          "placeholder": "Placeholder",
+          "isFromURL": false,
+          "isSelectOne": false,
+          "label": "Active Status",
+          "items": [
+              {
+                  "key": "true",
+                  "value": "Yes"
+              },
+              {
+                  "key": "false",
+                  "value": "No"
+              }
+          ],
+          "itemsUrl": []
+      }
+    ],
+    "querystring": {
+      "select": "SELECT VENDOR_EMP_NO AS VendorEmpNo, VENDOR_EMP_NAME AS VendorEmpName, MOBILE_PHN_NO_1 AS MobilePhnNo1, VENDOR_EMP_RATING AS VendorEmpRating, IS_ACTIVE AS IsActive, VENDOR_EMP_ID AS VendorEmpId, VENDOR_ID AS VendorId",
+      "from": "FROM dbo.VENDOR_EMP"
+    },
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Employee Code",
+        "name": "VENDOR_EMP_NO"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Employee Name",
+        "name": "VENDOR_EMP_NAME"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Employee Phone",
+        "name": "MOBILE_PHN_NO_1"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Rating",
+        "name": "VENDOR_EMP_RATING"
+      },
+      {
+        "type": "boolean",
+        "position": "center",
+        "label": "Active Status",
+        "name": "IS_ACTIVE"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "left",
+        "property": "VendorEmpNo"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "VendorEmpName"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "VendorEmpRating"
+      },
+      {
+        "type": "boolean",
+        "position": "center",
+        "property": "IsActive"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "select",
+            "property": "VendorEmpId"
+          }
+        ]
+      }
+    ]
+  }

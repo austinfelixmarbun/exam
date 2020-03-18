@@ -255,8 +255,6 @@ export class AdInsConstant {
   //REF COUNTRY
   public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
 
-
-
   //REF INDUSTRY TYPE
   public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
   public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
@@ -513,12 +511,14 @@ export class AdInsConstant {
   public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
   public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
   public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
+  public static AddVendorAddr = environment.FoundationR3Url + "/VendorAddr/AddVendorAddr"
+  public static EditVendorAddr = environment.FoundationR3Url + "/VendorAddr/EditVendorAddr"
+  public static GetVendorAddrByVendorId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorIdMrAddrType"
 
-  public static GetListVendorBankAccByVendorId = environment.localHostUrl + "/VendorBankAcc/GetListVendorBankAccByVendorId";
-  public static AddVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/AddVendorBankAcc";
-  public static EditVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/EditVendorBankAcc";
-  public static GetVendorBankAccByVendorBankAccId = environment.localHostUrl + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
-
+  public static GetListVendorBankAccByVendorId = environment.FoundationR3Url + "/VendorBankAcc/GetListVendorBankAccByVendorId";
+  public static AddVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/AddVendorBankAcc";
+  public static EditVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/EditVendorBankAcc";
+  public static GetVendorBankAccByVendorBankAccId = environment.FoundationR3Url + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
 
   //VENDOR GROUP
   public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
@@ -534,7 +534,11 @@ export class AdInsConstant {
   public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId"
   public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId"
 
-
+  //VENDOR EMP
+  public static AddVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/AddVendorBranchEmp"
+  public static GetVendorEmpByVendorEmpId = environment.FoundationR3Url + "/VendorEmp/GetVendorEmpByVendorEmpId"
+  public static GetVendorEmpAndVendorTaxAddrByVendorEmpId = environment.FoundationR3Url + "/VendorEmp/GetVendorEmpAndVendorTaxAddrByVendorEmpId"
+  public static EditVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/EditVendorBranchEmp"
 
   //VENDOR SCHEME
   public static AddVendorSchm = environment.FoundationR3Url + "/VendorSchm/AddVendorSchm";
@@ -544,6 +548,72 @@ export class AdInsConstant {
   public static AddVendorSchmMember = environment.FoundationR3Url + "/VendorSchmMbr/AddVendorSchmMember";
   public static DeleteVendorSchmMember = "/VendorSchmMbr/DeleteVendorSchmMember"
   public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
+
+
+  // VERIFICATION
+
+  // REF VERF ANSWER TYPE
+  public static AddRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/AddRefVerfAnswerType";
+  public static EditRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/EditRefVerfAnswerType";
+  public static GetActiveRefVerfAnswerTypes = environment.FoundationR3Url + "/RefVerfAnswerType/GetActiveRefVerfAnswerTypes";
+  public static GetRefVerfAnswerTypeByCode = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypeByCode";
+  public static GetRefVerfAnswerTypeById = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypeById";
+  public static GetRefVerfAnswerTypes = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypes";
+  public static GetRefVerfAnswerTypeForUpdateById = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypeForUpdateById";
+  public static GetRefVerfAnswerTypeForUpdateByCode = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypeForUpdateByCode";
+
+  // VERF QUESTION ANSWER
+  public static AddVerfQuestionAnswer = environment.FoundationR3Url + "/VerfQuestionAnswer/AddVerfQuestionAnswer";
+  public static EditVerfQuestionAnswer = environment.FoundationR3Url + "/VerfQuestionAnswer/EditVerfQuestionAnswer";
+  public static GetVerfQuestionAnswerByRefVerfAnswerTypeId = environment.FoundationR3Url + "/VerfQuestionAnswer/GetVerfQuestionAnswerByRefVerfAnswerTypeId";
+
+  // VERF QUESTION GRP H
+  public static AddVerfQuestionGrpH = environment.FoundationR3Url + "/VerfQuestionGrpH/AddVerfQuestionGrpH";
+  public static EditVerfQuestionGrpH = environment.FoundationR3Url + "/VerfQuestionGrpH/EditVerfQuestionGrpH";
+  public static GetActiveVerfQuestionGrpHs = environment.FoundationR3Url + "/VerfQuestionGrpH/GetActiveVerfQuestionGrpHs";
+  public static GetVerfQuestionGrpHs = environment.FoundationR3Url + "/VerfQuestionGrpH/GetVerfQuestionGrpHs";
+  public static GetQuestionGrpHById = environment.FoundationR3Url + "/VerfQuestionGrpH/GetQuestionGrpHById";
+  public static GetQuestionGrpHByCode = environment.FoundationR3Url + "/VerfQuestionGrpH/GetQuestionGrpHByCode";
+
+  // VERF QUESTION GRP D
+  public static AddVerfQuestionGrpD = environment.FoundationR3Url + "/VerfQuestionGrpD/AddVerfQuestionGrpD";
+  public static EditVerfQuestionGrpD = environment.FoundationR3Url + "/VerfQuestionGrpD/EditVerfQuestionGrpD";
+  public static GetActiveVerfQuestionGrpDsByGrpHId = environment.FoundationR3Url + "/VerfQuestionGrpD/GetActiveVerfQuestionGrpDsByGrpHId";
+  public static GetVerfQuestionGrpDById = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDById";
+
+  // VERF RESULT
+  public static AddVerfResult = environment.FoundationR3Url + "/VerfResult/AddVerfResult";
+  public static EditVerfResult = environment.FoundationR3Url + "/VerfResult/EditVerfResult";
+  public static GetVerfResultsByTrxRefNo = environment.FoundationR3Url + "/VerfResult/GetVerfResultsByTrxRefNo";
+  public static GetVerfResultById = environment.FoundationR3Url + "/VerfResult/GetVerfResultById";
+  public static GetVerfResultByResultNo = environment.FoundationR3Url + "/VerfResult/GetVerfResultByResultNo";
+
+  // VERF RESULT H
+  public static AddVerfResultH = environment.FoundationR3Url + "/VerfResultH/AddVerfResultH";
+  public static EditVerfResultH = environment.FoundationR3Url + "/VerfResultH/EditVerfResultH";
+  public static GetVerfResultHsByVerfResultId = environment.FoundationR3Url + "/VerfResultH/GetVerfResultHsByVerfResultId";
+  public static GetVerfResultHById = environment.FoundationR3Url + "/VerfResultH/GetVerfResultHById";
+
+  // VERF RESULT D
+  public static AddVerfResultD = environment.FoundationR3Url + "/VerfResultD/AddVerfResultD";
+  public static EditVerfResultD = environment.FoundationR3Url + "/VerfResultD/EditVerfResultD";
+  public static GetVerfResultDsByVerfResultHId = environment.FoundationR3Url + "/VerfResultD/GetVerfResultDsByVerfResultHId";
+  public static GetVerfResultDById = environment.FoundationR3Url + "/VerfResultD/GetVerfResultDById";
+
+  // VERF SCHEME H
+  public static AddVerfSchemeH = environment.FoundationR3Url + "/VerfSchemeH/AddVerfSchemeH";
+  public static EditVerfSchemeH = environment.FoundationR3Url + "/VerfSchemeH/EditVerfSchemeH";
+  public static GetActiveVerfSchemeHs = environment.FoundationR3Url + "/VerfSchemeH/GetActiveVerfSchemeHs";
+  public static GetVerfSchemeHs = environment.FoundationR3Url + "/VerfSchemeH/GetVerfSchemeHs";
+  public static GetVerfSchemeHById = environment.FoundationR3Url + "/VerfSchemeH/GetVerfSchemeHById";
+  public static GetVerfSchemeHByCode = environment.FoundationR3Url + "/VerfSchemeH/GetVerfSchemeHByCode";
+
+  // VERF SCHEME H
+  public static AddVerfSchemeD = environment.FoundationR3Url + "/VerfSchemeD/AddVerfSchemeD";
+  public static EditVerfSchemeD = environment.FoundationR3Url + "/VerfSchemeD/EditVerfSchemeD";
+  public static GetVerfSchemeDsByVerfSchemeHId = environment.FoundationR3Url + "/VerfSchemeD/GetVerfSchemeDsByVerfSchemeHId";
+  public static GetVerfSchemeDById = environment.FoundationR3Url + "/VerfSchemeD/GetVerfSchemeDById";
+
 
   // // ASSET NEGATIVE
   // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
@@ -576,9 +646,13 @@ export class AdInsConstant {
   public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
   public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
 
+
+  // SURVEY TASK
+  public static GetListSrvyTaskBySrvyOrderId = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderId";
+
   // CUSTOMER ADDRESS
   public static GetListCustAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustId";
-  public static GetListCustAddrByCustIdForCustomerPersonalView =  "http://localhost:5000" + "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
+  public static GetListCustAddrByCustIdForCustomerPersonalView = "http://localhost:5000" + "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
   // CUSTOMER ADDRESS HISTORY
   public static GetListCustAddrHistByCustId = environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustId";
   public static GetListCustAddrHistByCustIdForCustomerPersonalView = "http://localhost:5000" + "/CustAddrHist/GetListCustAddrHistByCustIdForCustomerPersonalView";

@@ -5,7 +5,7 @@
         <div class="card-header header-title">
           <div class="row">
             <div class="col-md-8">
-              <h4 class="card-title" id="horz-layout-colored-controls" translate> VENDOR SCHEME </h4>
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> HO Registration </h4>
             </div>
           </div>
         </div>
@@ -193,31 +193,6 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="MrVendorCategoryCode=='ASSET_INSCO_HO'">
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>Assignment Type</label>
-                  <div class="col-md-9">
-                    <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField1"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField1.invalid }">
-                      <option *ngFor="let it of itemAssignmentType" value="{{it.Key}}">
-                        {{it.Value}}</option>
-                    </select>
-                    <show-errors [control]="VendorForm.controls.ReservedField1" [submit]="enjiForm.submitted">
-                    </show-errors>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Maximum Task Load</label>
-                  <div class="col-md-9">
-                    <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField2">
-                    <show-errors [control]="VendorForm.controls.ReservedField2" [submit]="enjiForm.submitted">
-                    </show-errors>
-                  </div>
-                </div>
-              </div>
-              <div *ngIf="MrVendorCategoryCode=='LIFE_INSCO_HO'">
-                <p>ini buat Life Insurance HO</p>
-              </div>
             </div>
             <lib-ucSubsection [id]="'TaxInfo'" [title]="'Tax Info'" [panel]="'TaxInformation'">
             </lib-ucSubsection>
@@ -311,8 +286,8 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/HO/Paging']"
-                translate>
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/HO/Registration']"
+              [queryParams]="{VendorId: this.VendorId, mode:'edit'}" translate>
                 <i class="fa fa-arrow-circle-left"></i> Back
               </button>
               <button type="submit" class="btn btn-raised btn-primary">

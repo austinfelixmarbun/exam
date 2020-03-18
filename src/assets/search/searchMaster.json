@@ -11,10 +11,8 @@
       "datatype": "text",
       "isFromURL": true,
       "isSelectOne": true,
-      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMasterType/GetListActiveRefMasterType",
+      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMasterType/GetListActiveRefMasterTypeKeyValue",
       "label": "Master Type",
-      "criteriaPropName" : "typeCode",
-      "criteriaPropValue" : "TYPE_CODE",
       "items": [],
       "itemsUrl": []
     },
@@ -60,15 +58,6 @@
       "itemsUrl": []
     },
     {
-      "type": "numeric",
-      "name": "seq_No",
-      "id": "seqNoId",
-      "value": "1",
-      "label": "Sequence No",
-      "placeholder": "Placeholder",
-      "datatype": "numeric"
-    },
-    {
       "type": "dropdown",
       "name": "is_System",
       "datatype": "text",
@@ -92,96 +81,125 @@
       "itemsUrl": []
     }
   ],
-  "querystring": { 
+  "querystring": {
     "select": "SELECT REF_MASTER_ID AS refMasterId, MASTER_CODE AS masterCode, DESCR AS descr, SEQ_NO AS seqNo, IS_ACTIVE AS isActive, IS_SYSTEM AS isSystem",
     "from": "FROM REF_MASTER WITH(NOLOCK)"
   },
-  "headerList" : [ 
-      {
-          "type" : "sort", 
-          "position" : "left", 
-          "label" : "Master Code",
-          "name" : "masterCode" 
-      },
-      {
-          "type" : "sort", 
-          "position" : "left", 
-          "label" : "Description", 
-          "name" : "descr" 
-      },
-      {
-          "type" : "sort", 
-          "position" : "left", 
-          "label" : "Sequence No", 
-          "name" : "seqNo" 
-      },
-      {
-          "type" : "sort", 
-          "position" : "left", 
-          "label" : "Active", 
-          "name" : "isActive"
-      },
-      {
-          "type" : "sort", 
-          "position" : "left", 
-          "label" : "System", 
-          "name" : "isSystem"
-      },
-      {
-          "type" : "label",
-          "position" : "center",
-          "label" : "Action"
-      }
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Master Code",
+      "name": "masterCode"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Description",
+      "name": "descr"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Sequence No",
+      "name": "seqNo"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Active",
+      "name": "isActive"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "System",
+      "name": "isSystem"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
   ],
-  "bodyList" : [
-      {
-          "type" : "text", 
-          "position" : "left", 
-          "property" : "masterCode" 
-      },
-      {
-          "type" : "text", 
-          "position" : "left", 
-          "property" : "descr" 
-      },
-      {
-          "type" : "text", 
-          "position" : "left", 
-          "property" : "seqNo" 
-      },
-      {
-          "type" : "boolean", 
-          "position" : "center",
-          "property" : "isActive"
-      },
-      {
-          "type" : "boolean", 
-          "position" : "center",
-          "property" : "isSystem"
-      },
-      {
-          "type" : "action", 
-          "position" : "center",
-          "action" : [ 
-              {
-                  "type" : "edit", 
-                  "path" : "/CommonSetting/Master/detail", 
-                  "param" : [ 
-                      {
-                        "type" : "refMasterId", 
-                        "property" : "refMasterId" 
-                      },
-                      {
-                        "type": "param",
-                        "property": "edit"
-                      }
-                  ]
-              },
-              {
-                  "type" : "delete", 
-                  "property" : "refMasterId" 
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "masterCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "descr"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "seqNo"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "isActive"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "isSystem"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "switch",
+          "case": [
+            {
+              "conditions": [
+                {
+                  "property": "isSystem",
+                  "value": "0",
+                  "restriction": "EQ"
+                }
+              ],
+              "result": {
+                "type": "url",
+                "path": "/CommonSetting/Master/detail",
+                "param": [
+                  {
+                    "type": "refMasterId",
+                    "property": "refMasterId"
+                  }
+                ]
               }
+            }
           ]
-      }
+        },
+        {
+          "type": "switch",
+          "case": [
+            {
+              "conditions": [
+                {
+                  "property": "isSystem",
+                  "value": "0",
+                  "restriction": "EQ"
+                }
+              ],
+              "result": {
+                "type": "delete",
+                "param": [
+                  {
+                    "type": "refMasterId",
+                    "property": "refMasterId"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
   ]
 }
