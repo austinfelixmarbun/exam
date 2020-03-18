@@ -11,10 +11,9 @@ import { UcpagingModule } from '@adins/ucpaging';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
-import { BranchComponent } from './branch/branch.component';
 import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
 import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
-import { BankInfoComponent } from './component/bank-info/bank-info.component';
+// import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
@@ -26,6 +25,11 @@ import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme
 import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-add/vendor-scheme-member-add.component';
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
+import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
+import { BankInfoComponent } from './component/bank-info/bank-info.component';
+import { ContactPersonListComponent } from './component/contact-person-list/contact-person-list.component';
+import { ContactPersonAddEditComponent } from './component/contact-person-add-edit/contact-person-add-edit.component';
+import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { AddressComponent } from './component/address/address.component';
 import { ArchwizardModule } from 'angular-archwizard';
@@ -45,6 +49,7 @@ import { VendorService } from './vendor.service';
     UcgridfooterModule,
     UcpagingModule,
     UcSubsectionModule,
+    UclookupgenericModule,
     ReactiveFormsModule,
     TreeViewModule,
     UcviewgenericModule,
@@ -54,7 +59,6 @@ import { VendorService } from './vendor.service';
   ],
   declarations: [
     VendorComponent,
-    BranchComponent,
     VendorHoldingPagingComponent,
     VendorHoldingAddEditComponent,
     BankInfoComponent,
@@ -68,6 +72,11 @@ import { VendorService } from './vendor.service';
     VendorSchemeMemberPagingComponent,
     VendorHoAddEditComponent,
     VendorHoPagingComponent,
+    VendorBranchPagingComponent,
+    VendorHoPagingComponent,
+    VendorBranchAddEditComponent,
+    ContactPersonListComponent,
+    ContactPersonAddEditComponent,
     AddressComponent,
     VendorHoRegistrationComponent
   ],
