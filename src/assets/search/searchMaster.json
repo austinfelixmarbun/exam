@@ -11,10 +11,8 @@
       "datatype": "text",
       "isFromURL": true,
       "isSelectOne": true,
-      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMasterType/GetListActiveRefMasterType",
+      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
       "label": "Master Type",
-      "criteriaPropName" : "typeCode",
-      "criteriaPropValue" : "TYPE_CODE",
       "items": [],
       "itemsUrl": []
     },
@@ -58,15 +56,6 @@
         }
       ],
       "itemsUrl": []
-    },
-    {
-      "type": "numeric",
-      "name": "seq_No",
-      "id": "seqNoId",
-      "value": "1",
-      "label": "Sequence No",
-      "placeholder": "Placeholder",
-      "datatype": "numeric"
     },
     {
       "type": "dropdown",
