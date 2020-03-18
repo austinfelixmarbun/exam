@@ -39,6 +39,12 @@ import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info
 import { MainHoInfoComponent } from './vendor-ho/vendor-ho-info/main-ho-info/main-ho-info.component';
 import { MatTabsModule } from '@angular/material';
 import { MainInfoViewComponent } from './component/main-info-view/main-info-view.component';
+import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
+import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
+import { VendorEmployeeComponent } from './component/vendor-employee/vendor-employee.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { UcaddressModule } from '@adins/ucaddress';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 
 @NgModule({
@@ -60,7 +66,9 @@ import { MainInfoViewComponent } from './component/main-info-view/main-info-view
     UclookupgenericModule,
     NgbDropdownModule,
     ArchwizardModule,
-    MatTabsModule
+    MatTabsModule,
+    UcShowErrorsModule,
+    UcaddressModule
   ],
   declarations: [
     VendorComponent,
@@ -86,11 +94,15 @@ import { MainInfoViewComponent } from './component/main-info-view/main-info-view
     VendorHoRegistrationComponent,
     VendorHoInfoComponent,
     MainHoInfoComponent,
-    MainInfoViewComponent
+    MainInfoViewComponent,
+    VendorBranchEmployeePagingComponent,
+    VendorBranchEmployeeAddEditComponent,
+    VendorEmployeeComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [
-    VendorService
+    VendorService,
+    NGXToastrService
   ]
 })
 export class VendorModule { }

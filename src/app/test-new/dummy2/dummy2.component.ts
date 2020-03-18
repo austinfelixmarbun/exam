@@ -15,6 +15,9 @@ export class Dummy2Component implements OnInit {
   defVal: any;
   modal: any;
   closeResult: any;
+  UcNumber: any;
+  UcNumber2: any;
+  UcNumber3: any;
 
   RefEmpForm = this.fb.group({
     EmpNo: ['', Validators.required],
@@ -23,6 +26,8 @@ export class Dummy2Component implements OnInit {
     IsExt: [false],
     IsActive: [true],
     IdNo: [''],
+    UCNumber: [''],
+    UCNumber2: [''],
     Npwp: ['', [Validators.minLength(4), Validators.maxLength(10)]]
   });
 
@@ -35,6 +40,29 @@ export class Dummy2Component implements OnInit {
   SaveForm(asd) {
     console.log(this.RefEmpForm.valid);
     console.log(this.RefEmpForm.value);
+  }
+
+  CommaFormatted(event) {
+    // skip for arrow keys
+    if (event.which >= 37 && event.which <= 40) return;
+
+    // format number
+    if (this.UcNumber) {
+      this.UcNumber = this.UcNumber.replace(/\D/g, "")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  }
+
+  numberCheck(args) {
+    if (args.key === 'e' || args.key === '+' || args.key === '-') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  enterTrigger() {
+    console.log("ENTER");
   }
 
   nextClicked() {

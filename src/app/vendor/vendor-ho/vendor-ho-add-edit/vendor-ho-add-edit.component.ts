@@ -274,7 +274,7 @@ export class VendorHoAddEditComponent implements OnInit {
     this.vendorHoObj = new VendorHoObj();
     var vendorObj = {
       MrVendorCategoryCode: "",
-      VendorCode: this.VendorForm.controls.VendorCode.value,
+      VendorCode: this.VendorForm.controls.VendorNo.value,
       VendorName: this.VendorForm.controls.VendorName.value,
       MrVendorTypeCode: this.VendorForm.controls.MrVendorTypeCode.value,
       RegistrationNo: this.VendorForm.controls.RegistrationNo.value,

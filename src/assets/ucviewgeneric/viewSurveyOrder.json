@@ -1,0 +1,79 @@
+{
+  "title": "Survey Order View",
+  "subsection": [
+    {
+      "subSectionId": "SurveyOrderId",
+      "subSectionTitle": "Main Information",
+      "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+      "mainInfo": [
+        {
+          "type": "text",
+          "label": "Office Name",
+          "property": "OfficeName"
+        },
+        {
+          "type": "link",
+          "label": "Transaction Number",
+          "property": "TrxRefNo",
+          "path": "/Vendor/View",
+          "param": [
+            {
+              "property": "TrxRefNo"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Survey Order No",
+          "property": "SrvyOrderNo",
+          "path": "/Vendor/View",
+          "param": [
+            {
+              "property": "SrvyOrderNo"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "label": "Survey Order Status",
+          "property": "AssetTypeName"
+        },
+        {
+          "type": "text",
+          "label": "Survey Type",
+          "property": "MrSrvySourceCode"
+        },
+        {
+          "type": "text",
+          "label": "Notes",
+          "property": "Notes"
+        },
+        {
+          "type": "date",
+          "label": "Request Date",
+          "property": "ReqDt"
+        },
+        {
+          "type": "text",
+          "label": "Request By",
+          "property": "ReqByUser"
+        },
+        {
+          "type": "date",
+          "label": "Assign Date",
+          "property": "AssignDt"
+        },
+        {
+          "type": "text",
+          "label": "Assign By",
+          "property": "AssignByUser"
+        }
+      ],
+      "querystring": {
+        "select": "SELECT RE.OFFICE_NAME AS OfficeName, SO.TRX_REF_NO AS TrxRefNo, SO.SRVY_ORDER_NO AS SrvyOrderNo, SO.MR_SRVY_STAT_CODE AS MrSrvyStatCode, SO.MR_SRVY_SOURCE_CODE AS MrSrvySourceCode, SO.REQ_BY_USER AS ReqByUser, SO.NOTES AS Notes, SO.REQ_DT AS ReqDt, SO.ASSIGN_DT AS AssignDt, SO.ASSIGN_BY_USER AS AssignByUser, SO.TASK_TOTAL AS TaskTotal, SO.SRVY_ORDER_ID AS SrvyOrderId",
+        "from": "FROM dbo.SRVY_ORDER SO WITH(NOLOCK) JOIN dbo.REF_OFFICE RE WITH(NOLOCK) ON RE.REF_OFFICE_ID = SO.REF_OFFICE_ID",
+        "where": "WHERE SO.SRVY_ORDER_ID = {0}"
+      }
+    }
+  ]
+}
