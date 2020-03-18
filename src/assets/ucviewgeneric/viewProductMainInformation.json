@@ -1,9 +1,10 @@
 {
+  "title": "",
   "subsection": [
     {
-      "subSectionId": "Product Information",
+      "subSectionId": "ProductInformation",
       "subSectionTitle": "Main Information",
-      "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+      "mainInfoUrl": "http://r3app-server.ad-ins.com/Generic/GetDataViewBySQL",
       "mainInfo": [
         {
           "type": "text",
@@ -37,7 +38,7 @@
         },
         {
           "type": "text",
-          "label": "Product Offering Version",
+          "label": "Product HO Version",
           "property": "versionName"
         }
 
