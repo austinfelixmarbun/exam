@@ -22,6 +22,11 @@ import { VerificationService } from './verification.service';
 import { VerificationQuestionGroupMemberPagingComponent } from './verification-question-group-member/verification-question-group-member-paging/verification-question-group-member-paging.component';
 import { VerificationQuestionGroupMemberEditComponent } from './verification-question-group-member/verification-question-group-member-edit/verification-question-group-member-edit.component';
 import { VerificationQuestionGroupMemberAddComponent } from './verification-question-group-member/verification-question-group-member-add/verification-question-group-member-add.component';
+import { VerificationQuestionSchemePagingComponent } from './verification-question-scheme/verification-question-scheme-paging/verification-question-scheme-paging.component';
+import { VerificationQuestionSchemeAddEditComponent } from './verification-question-scheme/verification-question-scheme-add-edit/verification-question-scheme-add-edit.component';
+import { VerificationQuestionSchemeMemberPagingComponent } from './verification-question-scheme-member/verification-question-scheme-member-paging/verification-question-scheme-member-paging.component';
+import { VerificationQuestionSchemeMemberAddComponent } from './verification-question-scheme-member/verification-question-scheme-member-add/verification-question-scheme-member-add.component';
+import { VerificationQuestionSchemeMemberEditComponent } from './verification-question-scheme-member/verification-question-scheme-member-edit/verification-question-scheme-member-edit.component';
 
 @NgModule({
   imports: [
@@ -52,6 +57,11 @@ import { VerificationQuestionGroupMemberAddComponent } from './verification-ques
     VerificationQuestionGroupMemberPagingComponent,
     VerificationQuestionGroupMemberEditComponent,
     VerificationQuestionGroupMemberAddComponent,
+    VerificationQuestionSchemePagingComponent,
+    VerificationQuestionSchemeAddEditComponent,
+    VerificationQuestionSchemeMemberPagingComponent,
+    VerificationQuestionSchemeMemberAddComponent,
+    VerificationQuestionSchemeMemberEditComponent,
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [
