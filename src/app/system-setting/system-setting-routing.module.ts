@@ -35,7 +35,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'Role/detail',
+        path: 'Role/Detail',
         component: RoleAddEditComponent,
         data: {
           title: 'User Maintenance Add Edit'

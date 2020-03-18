@@ -84,6 +84,10 @@ export const Full_ROUTES: Routes = [
     loadChildren: './vendor/vendor.module#VendorModule'
   },
   {
+    path: 'Verification',
+    loadChildren: './verification/verification.module#VerificationModule'
+  },
+  {
     path: 'Product',
     loadChildren: './product/product.module#ProductModule'
   },
