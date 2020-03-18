@@ -153,16 +153,38 @@
       "position": "center",
       "action": [
         {
-          "type": "edit",
-          "path": "/Employee/Leave/Add",
-          "param": [
+          "type": "switch",
+          "case": [
             {
-              "type": "refEmpLeaveMngmntId",
-              "property": "refEmpLeaveMngmntId"
+              "conditions": [
+                {
+                  "property": "isPassed",
+                  "value": "1"
+                }
+              ],
+              "isHide": true
             },
             {
-              "type": "param",
-              "property": "edit"
+              "conditions": [
+                {
+                  "property": "isPassed",
+                  "value": "0"
+                }
+              ],
+              "result": {
+                "type": "edit",
+                "path": "/Employee/Leave/Add",
+                "param": [
+                  {
+                    "type": "refEmpLeaveMngmntId",
+                    "property": "refEmpLeaveMngmntId"
+                  },
+                  {
+                    "type": "param",
+                    "property": "edit"
+                  }
+                ]
+              }
             }
           ]
         },

@@ -50,7 +50,9 @@ export class AddAssetSchemeComponent implements OnInit {
   checkboxAll: any = false;
   getAssetSchmHByIdUrl = AdInsConstant.GetAssetSchmHById;
   getAssetTypeByIdUrl = AdInsConstant.GetAssetTypeById;
-  addListAssetSchmDUrl = AdInsConstant.AddListAssetSchmD;
+  // addListAssetSchmDUrl = AdInsConstant.AddListAssetSchmD;
+  addListAssetSchmDUrl = AdInsConstant.AddRangeAssetSchmD;
+
   AssetSchmHId: any;
   getListAssetMasterByAssetSchmHId = AdInsConstant.GetListAssetMasterByAssetSchmHId;
   getListAssetSchmDByAssetSchmHId = AdInsConstant.GetListAssetSchmDByAssetSchmHId;
@@ -169,10 +171,8 @@ export class AddAssetSchemeComponent implements OnInit {
       this.listSelectedId.push(assetSchmDId);
     } else {
       const index = this.listSelectedId.indexOf(assetSchmDId)
-      console.log(index);
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
-    console.log('Sel', this.listSelectedId);
   }
 
   searchPagination(event: number) {
@@ -219,7 +219,6 @@ export class AddAssetSchemeComponent implements OnInit {
     }
 
     for (let index = 0; index < this.tempData.length; index++) {
-      console.log(this.tempData);
       var assetSchmDObj = {
         AssetSchmHId: this.AssetSchmHId,
         AssetMasterId: this.tempData[index].AssetMasterId
@@ -286,7 +285,6 @@ export class AddAssetSchemeComponent implements OnInit {
 
   SelectAll(condition) {
     this.checkboxAll = condition;
-    console.log(condition);
     if (condition) {
       for (let i = 0; i < this.resultData.length; i++) {
         if (this.listSelectedId.indexOf(this.resultData[i].AssetMasterId) < 0) {

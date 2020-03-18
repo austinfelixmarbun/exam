@@ -29,9 +29,16 @@ import { CustomerContactPersonComponent } from './customer-personal/customer-con
 import { CustomerContactAddComponent } from './customer-personal/customer-contact-person/customer-contact-add/customer-contact-add.component';
 import { CustomerContactCheckComponent } from './customer-personal/customer-contact-person/customer-contact-check/customer-contact-check.component';
 import { UcaddressModule } from '@adins/ucaddress';
+import { CustomerViewPersonalDetailComponent } from './customer-view/customer-view-personal-detail/customer-view-personal-detail.component';
+import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
+import { CustomerViewPersonalJobDataComponent } from './customer-view/customer-view-personal-job-data/customer-view-personal-job-data.component';
+import { CustGroupTabComponent } from './cust-group-tab/cust-group-tab.component';
+import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-detail/cust-group-tab-detail.component';
+import { CustomerViewPersonalContactPersonComponent } from './customer-view/customer-view-personal-contact-person/customer-view-personal-contact-person.component';
+import { CustomerViewPersonalFinancialDataComponent } from './customer-view/customer-view-personal-financial-data/customer-view-personal-financial-data.component';
+import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
 @NgModule({
-  exports: [ 
-  ],
+  exports: [],
   imports: [
     CustomerRoutingModule,
     CommonModule,
@@ -59,8 +66,17 @@ import { UcaddressModule } from '@adins/ucaddress';
     NegativeCustomerViewComponent,
     CustomerContactPersonComponent, 
     CustomerContactAddComponent,
-    CustomerContactCheckComponent
-  ]
+    CustomerContactCheckComponent,
+    CustomerViewPersonalDetailComponent,
+    CustomerViewPersonalAddressComponent,
+    CustomerViewPersonalJobDataComponent,
+    CustGroupTabComponent,
+    CustGroupTabDetailComponent,
+    CustomerViewPersonalContactPersonComponent,
+    CustomerViewPersonalCustomerGroupComponent,
+    CustomerViewPersonalFinancialDataComponent
+  ],
+  entryComponents: [CustGroupTabDetailComponent]
 })
 export class CustomerModule { 
   constructor(){
