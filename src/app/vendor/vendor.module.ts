@@ -26,6 +26,7 @@ import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme
 import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-add/vendor-scheme-member-add.component';
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
+import { VendorHoldingViewComponent } from './vendor-holding-view/vendor-holding-view.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-
     VendorSchemeMemberAddComponent,
     VendorSchemeMemberPagingComponent,
     VendorHoAddEditComponent,
-    VendorHoPagingComponent
+    VendorHoPagingComponent,
+    VendorHoldingViewComponent
   ]
 })
 export class VendorModule { }

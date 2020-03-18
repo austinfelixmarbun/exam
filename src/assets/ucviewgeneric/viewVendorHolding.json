@@ -1,0 +1,43 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "Holding View Information",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Vendor Categoy",
+            "property": "VendorCategory"
+          },
+          {
+            "type": "boolean",
+            "label": "Active Status",
+            "property": "AciveStatus"
+          },
+          {
+            "type": "text",
+            "label": "Holding Code",
+            "property": "HoldingCode"
+          },
+          {
+            "type": "text",
+            "label": "Tax Number",
+            "property": "TaxNumber"
+          },
+          {
+            "type": "text",
+            "label": "Holding Name",
+            "property": "HoldingName"
+          }
+
+        ],
+        "querystring": {
+            "select" :"SELECT B.DESCR AS VendorCategory,A.IS_ACTIVE AS AciveStatus,A.VENDOR_CODE As HoldingCode,A.TAX_ID_NO AS TaxNumber,A.VENDOR_NAME AS HoldingName,A.VENDOR_ID AS VendorId",
+            "from" :"FROM dbo.VENDOR A WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER B WITH(NOLOCK) ON  A.MR_VENDOR_CATEGORY_CODE = B.MASTER_CODE",
+            "where":"WHERE VendorId = {0}"
+        }
+      }
+    ]
+  }
+  

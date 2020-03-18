@@ -502,6 +502,8 @@ export class AdInsConstant {
 
   //VENDOR
   public static DeleteVendor ="/Vendor/DeleteVendor";
+  public static GetVendorByVendorId = "/Vendor/GetVendorByVendorId";
+
 
   //VENDOR GROUP
   public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
