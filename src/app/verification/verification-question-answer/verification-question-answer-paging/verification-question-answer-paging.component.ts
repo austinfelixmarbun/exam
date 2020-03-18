@@ -4,21 +4,20 @@ import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
-  selector: 'app-office',
-  templateUrl: './office.component.html',
-  styleUrls: ['./office.component.scss']
+  selector: 'app-verification-question-answer-paging',
+  templateUrl: './verification-question-answer-paging.component.html',
+  styleUrls: ['./verification-question-answer-paging.component.scss']
 })
-
-export class OfficeComponent implements OnInit {
+export class VerificationQuestionAnswerPagingComponent implements OnInit {
 
   inputPagingObj: any;
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/ucpaging/searchOffice.json";
+    this.inputPagingObj._url = "./assets/ucpaging/verification/searchVerificationQuestionAnswer.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchOffice.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchVerificationQuestionAnswer.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefOffice;
   }
 }
