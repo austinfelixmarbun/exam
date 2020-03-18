@@ -35,6 +35,7 @@ export class GeneralDataHOComponent implements OnInit {
   UrlPostAddEditProdD: string;
   ProdHId: number;
   StateSave : string;
+  LOBSelected : string;
 
   inputLookUpObj: any;
 
@@ -102,16 +103,89 @@ export class GeneralDataHOComponent implements OnInit {
   }
 
   async PopulateDDL(obj) {
-    var url = obj.ProdCompntDtaSrcApi;
-    var payload = JSON.parse(obj.ProdCompntDtaValue);
-    await this.http.post(url, payload).toPromise().then(
-      (response) => {
-        this.dictOptions[obj.RefProdCompntCode] = response["ReturnObject"];
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
+    if(url != "")
+    {
+      var url = obj.ProdCompntDtaSrcApi;
+      var payload = JSON.parse(obj.ProdCompntDtaValue);
+      await this.http.post(url, payload).toPromise().then(
+        (response) => {
+          this.dictOptions[obj.RefProdCompntCode] = response["ReturnObject"];
+          var compValue ;
+          if (obj.CompntValue == "") {
+            compValue = this.dictOptions[obj.RefProdCompntCode][0].Key;
+          }
+          else {
+            compValue = obj.CompntValue;
+          }
+
+          if(obj.RefProdCompntCode == "LOB")
+          {
+              this.LOBSelected = compValue
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  async PopulateFinMapFromLOB()
+  {
+    var url = AdInsConstant.GetKvpRefFinMapByLobCode;
+      await this.http.post(url, {LobCode : this.LOBSelected, RowVersion : ""}).toPromise().then(
+        (response) => {
+          this.dictOptions["WAY_OF_FINANCING"] = response["RefWayOfFin"]
+          this.dictOptions["PURPOSE_OF_FINANCING"] = response["RefPurposeOfFin"]
+          this.dictOptions["PROD_TYPE"] = response["RefProdType"]
+
+          for (var i = 0; i < this.FormProdComp.controls["groups"].controls.length; i++) {
+            for (var j = 0; j < this.FormProdComp.controls["groups"].controls[i].controls["components"].length; j++) {
+              var comp = this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j] as FormGroup;
+              var compCode = comp.value["RefProdCompntCode"];
+              if(compCode == "PURPOSE_OF_FINANCING")
+              {
+                comp.patchValue({ CompntValueDesc : this.dictOptions["PURPOSE_OF_FINANCING"][0].Value, CompntValue : this.dictOptions["PURPOSE_OF_FINANCING"][0].Key})
+              }
+              else if (compCode == "WAY_OF_FINANCING")
+              {
+                comp.patchValue({ CompntValueDesc : this.dictOptions["WAY_OF_FINANCING"][0].Value, CompntValue : this.dictOptions["WAY_OF_FINANCING"][0].Key})
+              }
+              else if(compCode == "PROD_TYPE")
+              {
+                comp.patchValue({ CompntValueDesc : this.dictOptions["PROD_TYPE"][0].Value, CompntValue : this.dictOptions["PROD_TYPE"][0].Key})
+              }
+            }
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+  }
+
+  async PopulateInstallmentSchedule()
+  {
+    var url = AdInsConstant.GetListKvpInstSchmByLobCode;
+      await this.http.post(url, {LobCode : this.LOBSelected, RowVersion : ""}).toPromise().then(
+        (response) => {
+          this.dictOptions["INSTSCHM"] = response["ReturnObject"]
+
+          for (var i = 0; i < this.FormProdComp.controls["groups"].controls.length; i++) {
+            for (var j = 0; j < this.FormProdComp.controls["groups"].controls[i].controls["components"].length; j++) {
+              var comp = this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j] as FormGroup;
+              var compCode = comp.value["RefProdCompntCode"];
+              if(compCode == "INSTSCHM")
+              {
+                comp.patchValue({ CompntValueDesc : this.dictOptions["INSTSCHM"][0].Value, CompntValue : this.dictOptions["INSTSCHM"][0].Key})
+              }
+            }
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
   }
 
   LoadProdComponent(ProdHId, CompGroups) {
@@ -122,7 +196,6 @@ export class GeneralDataHOComponent implements OnInit {
     }
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
-        console.log("AAA")
         console.log(response)
         for (var i = 0; i < response["ReturnObject"].length; i++) {
           var group = response["ReturnObject"][i];
@@ -132,10 +205,12 @@ export class GeneralDataHOComponent implements OnInit {
           for (var j = 0; j < group.Components.length; j++) {
             var comp = group.Components[j];
             if (comp.ProdCompntType == "DDL") {
-              await this.PopulateDDL(comp)
+              await this.PopulateDDL(comp);
             }
           }
-
+          await this.PopulateFinMapFromLOB();
+          await this.PopulateInstallmentSchedule();
+          
           for (var j = 0; j < group.Components.length; j++) {
             var comp = group.Components[j];
             var fa_comp = (<FormArray>this.FormProdComp.controls['groups']).at(i).get('components') as FormArray;
@@ -150,11 +225,18 @@ export class GeneralDataHOComponent implements OnInit {
   }
 
   ChangeDropdown() {
-    this.dictOptions["COMP3"] = [{ "key": "oeoe", "value": "oeoe" }];
+    
+    // this.dictOptions["COMP3"] = [{ "key": "oeoe", "value": "oeoe" }];
   }
 
 
   onChangeEvent(val, event, index, indexparent) {
+    if(val == "LOB")
+    {
+      this.LOBSelected = event.target.value;
+      this.PopulateFinMapFromLOB()
+      this.PopulateInstallmentSchedule();
+    }
     this.FormProdComp.controls["groups"].controls[indexparent].controls["components"].controls[index].patchValue({
       CompntValueDesc: this.dictOptions[val].find(f => f.Key == event.target.value).Value
     })

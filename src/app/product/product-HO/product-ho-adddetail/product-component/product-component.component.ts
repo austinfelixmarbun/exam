@@ -129,7 +129,7 @@ export class ProductComponentHOComponent implements OnInit {
     var bhvrTypeCode = obj.BehaviourType;
     if(this.dictBehaviour[bhvrTypeCode] == undefined)
     {
-      var url = "http://r3app-server/Foundation_R3/RefBehaviour/GetRefBehaviourByBehaviourTypeCode"
+      var url = AdInsConstant.GetRefBehaviourByBehaviourTypeCode;
       await this.http.post(url, { RowVersion : "", BehaviourTypeCode : bhvrTypeCode}).toPromise().then(
         (response) => {
           this.dictBehaviour[bhvrTypeCode] = response["ReturnObject"];

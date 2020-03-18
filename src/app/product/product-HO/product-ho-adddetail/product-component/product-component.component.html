@@ -12,8 +12,7 @@
             <div class="form-group row" [formGroupName]="l">
               <label class="col-md-4 ">{{type.controls['components'].value[l].ProdCompntName}}</label>
               <div class="col-md-6" style="border-right: 1px solid grey" *ngIf="type.controls['components'].value[l].ProdCompntType == 'DDL'">
-                <select formControlName="CompntValue" class="form-control width-75-per" id="CompntValue"
-                  name="CompntValue"
+                <select formControlName="CompntValue" class="form-control width-75-per"
                   (change)="onChangeEvent(type.controls['components'].value[l].RefProdCompntCode,$event,l,j);">
                   <option *ngFor="let m of dictOptions[type.controls['components'].value[l].RefProdCompntCode]"
                     value={{m.Key}}>{{m.Value}}</option>
@@ -27,7 +26,7 @@
                 </lib-uc-show-errors>
               </div>
               <div class="col-md-2">
-                <select formControlName="MrProdBehaviour" class="form-control" id="MrProdBehaviour" name="MrProdBehaviour">
+                <select formControlName="MrProdBehaviour" class="form-control">
                   <option *ngFor="let m of dictBehaviour[type.controls['components'].value[l].BehaviourType]" value={{m.Key}} >{{m.Value}}</option>
                 </select>
               </div>
