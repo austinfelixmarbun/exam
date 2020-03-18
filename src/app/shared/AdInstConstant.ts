@@ -534,6 +534,12 @@ export class AdInsConstant {
     public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId"
     public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId"
 
+    //VENDOR EMP
+    public static AddVendorBranchEmp = "http://localhost:5000/VendorEmp/AddVendorBranchEmp"
+    public static GetVendorEmpByVendorEmpId = "http://localhost:5000/VendorEmp/GetVendorEmpByVendorEmpId"
+    public static GetVendorEmpAndVendorTaxAddrByVendorEmpId = "http://localhost:5000/VendorEmp/GetVendorEmpAndVendorTaxAddrByVendorEmpId"
+    public static EditVendorBranchEmp = "http://localhost:5000/VendorEmp/EditVendorBranchEmp"
+
 
 
     //VENDOR SCHEME
@@ -578,7 +584,7 @@ export class AdInsConstant {
 
 
     // SURVEY TASK
-    public static GetListSrvyTaskBySrvyOrderId = "http://localhost:5000/SrvyTask/GetListSrvyTaskBySrvyOrderId";
+    public static GetListSrvyTaskBySrvyOrderId = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderId";
 
     
 }

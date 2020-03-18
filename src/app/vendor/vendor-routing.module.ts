@@ -17,6 +17,9 @@ import { ContactPersonAddEditComponent } from './component/contact-person-add-ed
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
 import { BankInfoComponent } from './component/bank-info/bank-info.component';
+import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
+import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
+import { VendorEmployeeComponent } from './component/vendor-employee/vendor-employee.component';
 
 const routes: Routes = [
   {
@@ -146,6 +149,27 @@ const routes: Routes = [
         component: BankInfoComponent,
         data: {
           title: 'Vendor HO Member'
+        },
+      },
+      {
+        path: 'Branch/Employee/Paging',
+        component: VendorBranchEmployeePagingComponent,
+        data: {
+          title: 'Vendor Branch Employee Paging'
+        },
+      },
+      {
+        path: 'Branch/Employee/Detail',
+        component: VendorBranchEmployeeAddEditComponent,
+        data: {
+          title: 'Vendor Branch Employee Detail'
+        },
+      },
+      {
+        path: 'Branch/Employee/EmpInfo',
+        component: VendorEmployeeComponent,
+        data: {
+          title: 'Vendor Employee Info'
         },
       }
     ]

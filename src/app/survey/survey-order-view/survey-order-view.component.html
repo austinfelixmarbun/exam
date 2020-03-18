@@ -40,12 +40,12 @@
                       <a [target]="_blank" [routerLink]="['/Survey/View/Task']"
                         [queryParams]="{ SrvyTaskId: item.SrvyTaskId }">{{item.SrvyTaskNo}}</a>
                     </td>
-                    <td>{{item.mrSrvySubjCode}}</td>
-                    <td>{{item.mrSrvyObjCode}}</td>
+                    <td>{{item.MrSrvySubjCode}}</td>
+                    <td>{{item.MrSrvyObjCode}}</td>
                     <td>{{item.SrvyFormSchmName}}</td>
                     <td>{{item.SurveyorCode}}</td>
-                    <td>{{item.mrSrvyStatCode}}</td>
-                    <td>{{item.AssignDt}}</td>
+                    <td>{{item.MrSrvyStatCode}}</td>
+                    <td>{{item.AssignDt | date: 'dd-MMM-yyyy'}}</td>
                   </tr>
                 </tbody>
               </table>
