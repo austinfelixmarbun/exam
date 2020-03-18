@@ -630,6 +630,11 @@ export class AdInsConstant {
     public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId"
     public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
 
+    
+    // CUSTOMER ADDRESS
+    public static GetListCustAddr = environment.FoundationR3Url + "/CustAddr/GetListCustAddr";
+
+
     // NEGATIVE CUSTOMER
     public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
     public static EditNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/EditNegativeCust";

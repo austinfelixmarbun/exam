@@ -27,6 +27,10 @@ import { NegativeCustomerComponent } from './negative-customer/negative-customer
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 import { CustGroupTabComponent } from './cust-group-tab/cust-group-tab.component';
 import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-detail/cust-group-tab-detail.component';
+import { CustomerPersonalAddressComponent } from './customer-personal/customer-personal-address/customer-personal-address.component';
+import { CustomerPersonalAddressAddComponent } from './customer-personal/customer-personal-address/customer-personal-address-add/customer-personal-address-add.component';
+import { UcaddressModule } from '@adins/ucaddress';
+
 @NgModule({
   exports: [],
   imports: [
@@ -45,7 +49,8 @@ import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-det
     UclookupgenericModule,
     UcSubsectionModule, 
      ArchwizardModule,
-     UcviewgenericModule
+     UcviewgenericModule,
+     UcaddressModule
   ],
   declarations: [ 
     CustomerPagingComponent, 
@@ -54,7 +59,9 @@ import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-det
     NegativeCustomerDetailComponent,
     NegativeCustomerViewComponent,
     CustGroupTabComponent,
-    CustGroupTabDetailComponent
+    CustGroupTabDetailComponent,
+    CustomerPersonalAddressComponent,
+    CustomerPersonalAddressAddComponent
   ],
   entryComponents: [CustGroupTabDetailComponent]
 })

@@ -1,0 +1,55 @@
+<div class="ucSearch-Button-Right">
+    <span class="mr-1">
+        <button type="button" class="addButton" [routerLink]="['/Customer/CustomerPersonal/Address/Add']" translate>
+            <i class="ft-plus-circle"></i> Add
+        </button>
+    </span>
+</div>
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <div class="addEdit">
+            <table class="table table-responsive-md text-center table-hover">
+                <thead>
+                  <tr class="table-header">
+                    <th style="text-align: left;"><span class="thead-header" name='assetTypeName' translate>Address Type Name
+                    </span>
+                    </th>
+                    <th style="text-align: left;"><span class="thead-header" name='fullAddress' translate>Address
+                    </span>
+                    </th>
+                    <th style="text-align: left;"><span class="thead-header" name='buildingOwnership' translate>Building Ownership
+                    </span>
+                    </th>
+                    <th style="text-align: left;"><span class="thead-header" name='phone1' translate>Phone (Fix Line) 1
+                    </span>
+                    </th>
+                    <th style="text-align: left;"><span class="thead-header" name='phone2' translate>Phone (Fix Line) 2
+                    </span>
+                    </th>
+                    <th style="text-align: left;"><span class="thead-header" name='notes' translate>Notes
+                    </span>
+                    </th>
+                    <th style="text-align: left;"><span class="thead-header" translate>Edit
+                    </span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of listCustAddr">
+                    <td style="text-align: left;">{{item.MrCustAddrTypeCode}}</td>
+                    <td style="text-align: left;">{{item.FullAddr}}</td>
+                    <td style="text-align: left;">{{item.MrBuildingOwnershipCode}}</td>
+                    <td style="text-align: left;">{{item.Phn1}}</td>
+                    <td style="text-align: left;">{{item.Phn2}}</td>
+                    <td style="text-align: left;">{{item.Notes}}</td>
+                    <td style="text-align: left;">Edit</td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>  

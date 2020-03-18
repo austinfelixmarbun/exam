@@ -11,6 +11,8 @@ import { CustomerCompanyDuplicateCheckComponent } from './customer-company/custo
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
 import { CustomerViewPersonalComponent } from './customer-view/customer-view-personal/customer-view-personal.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
+import { CustomerPersonalAddressComponent } from './customer-personal/customer-personal-address/customer-personal-address.component';
+import { CustomerPersonalAddressAddComponent } from './customer-personal/customer-personal-address/customer-personal-address-add/customer-personal-address-add.component';
 
 const routes: Routes = [
   {
@@ -91,6 +93,20 @@ const routes: Routes = [
         component: CustomerViewPersonalComponent,
         data: {
           title: 'Customer View Personal Component'
+        }
+      },
+      {
+        path: 'CustomerPersonal/Address',
+        component: CustomerPersonalAddressComponent,
+        data: {
+          title: 'Customer Personal Address'
+        }
+      },
+      {
+        path: 'CustomerPersonal/Address/Add',
+        component: CustomerPersonalAddressAddComponent,
+        data: {
+          title: 'Customer Personal Address Add'
         }
       },
     ]
