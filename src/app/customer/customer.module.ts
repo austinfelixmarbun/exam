@@ -30,6 +30,9 @@ import { CustomerViewPersonalAddressComponent } from './customer-view/customer-v
 import { CustomerViewPersonalJobDataComponent } from './customer-view/customer-view-personal-job-data/customer-view-personal-job-data.component';
 import { CustGroupTabComponent } from './cust-group-tab/cust-group-tab.component';
 import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-detail/cust-group-tab-detail.component';
+import { CustomerViewPersonalContactPersonComponent } from './customer-view/customer-view-personal-contact-person/customer-view-personal-contact-person.component';
+import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
+import { CustomerViewPersonalFinancialDataComponent } from './customer-view/customer-view-personal-financial-data/customer-view-personal-financial-data.component';
 @NgModule({
   exports: [],
   imports: [
@@ -60,7 +63,10 @@ import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-det
     CustomerViewPersonalAddressComponent,
     CustomerViewPersonalJobDataComponent,
     CustGroupTabComponent,
-    CustGroupTabDetailComponent
+    CustGroupTabDetailComponent,
+    CustomerViewPersonalContactPersonComponent,
+    CustomerViewPersonalCustomerGroupComponent,
+    CustomerViewPersonalFinancialDataComponent
   ],
   entryComponents: [CustGroupTabDetailComponent]
 })

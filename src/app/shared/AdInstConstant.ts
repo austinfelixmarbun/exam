@@ -579,8 +579,8 @@ export class AdInsConstant {
 
   // CUSTOMER ADDRESS
   public static GetListCustAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustId";
-
+  public static GetListCustAddrByCustIdForCustomerPersonalView =  "http://localhost:5000" + "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
   // CUSTOMER ADDRESS HISTORY
   public static GetListCustAddrHistByCustId = environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustId";
-
+  public static GetListCustAddrHistByCustIdForCustomerPersonalView = "http://localhost:5000" + "/CustAddrHist/GetListCustAddrHistByCustIdForCustomerPersonalView";
 }
