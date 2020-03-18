@@ -12,7 +12,6 @@ export class AssetTypePagingComponent implements OnInit {
   inputPagingObj: any;
 
   constructor() { }
-
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetType.json";
@@ -21,5 +20,4 @@ export class AssetTypePagingComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetType.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetType;
   }
-
 }

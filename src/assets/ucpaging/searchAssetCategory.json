@@ -20,7 +20,7 @@
       },
       {
         "type": "dropdown",
-        "name": "is_Active",
+        "name": "IS_ACTIVE",
         "id": "isActive",
         "value": "Active Status",
         "placeholder": "Placeholder",
@@ -46,19 +46,19 @@
         "type": "sort",
         "position": "left",
         "label": "ASSET CATEGORY CODE",
-        "name": "AssetCategoryCode"
+        "name": "ASSET_CATEGORY_CODE"
       },
       {
         "type": "sort",
         "position": "left",
         "label": "ASSET CATEGORY NAME",
-        "name": "AssetCategoryName"
+        "name": "ASSET_CATEGORY_NAME"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "ACTIVE STATUS",
-        "name": "isActive"
+        "name": "IS_ACTIVE"
       },
       {
         "type": "label",
@@ -68,8 +68,8 @@
       
     ],
     "querystring": { 
-      "select": "SELECT  A.ASSET_CATEGORY_CODE as AssetCategoryCode,  A.ASSET_CATEGORY_NAME as AssetCategoryName, A.ASSET_TYPE_ID AS AssetTypeId, A.ASSET_CATEGORY_ID as AssetCategoryId, A.IS_ACTIVE as IsActive",
-      "from": "FROM ASSET_CATEGORY A WITH(NOLOCK)" 
+      "select": "SELECT ASSET_CATEGORY_CODE AS AssetCategoryCode, ASSET_CATEGORY_NAME AS AssetCategoryName, ASSET_TYPE_ID AS AssetTypeId, ASSET_CATEGORY_ID AS AssetCategoryId, IS_ACTIVE AS IsActive",
+      "from": "FROM dbo.ASSET_CATEGORY WITH(NOLOCK)" 
     },
     "bodyList": [
       {

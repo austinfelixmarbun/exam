@@ -26,26 +26,26 @@
               <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>Customer Name </label>
                 <div class="col-md-4">
-                  <label>{{this.custObj.CustName}}</label>
+                  <label>{{this.tempCustObj?.CustName}}</label>
                 </div>
 
                 <label class="col-md-2  adInsLabel" translate>Gender </label>
 
                 <div class="col-md-4">
-                  <label>{{this.GenderDesc}}</label>
+                  <label>{{this.tempMrGenderCode?.Descr}} </label>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-2 adInsLabel" translate>Customer Model</label>
                 <div class="col-md-4">
 
-                  <label>{{this.CustModelDesc}}</label>
+                  <label>{{this.tempMrCustModelCode?.Descr}} </label>
                 </div>
 
                 <label class="col-md-2 adInsLabel" translate>ID Type </label>
                 <div class="col-md-4">
 
-                  <label>{{this.MrIdTypeCodeDesc}}</label>
+                  <label>{{this.tempMrIdTypeCode?.Descr}} </label>
                 </div>
 
                
@@ -56,11 +56,11 @@
                 <div class="col-md-4">
                   <div class="row">
                     <div class="col-md-6" style="border-right: 1px solid grey">
-                      <label>{{this.BirthPlace}}</label>
+                      <label>{{this.tempCustPersonalObj?.BirthPlace}}</label>
 
                     </div>
                     <div class="col-md-6">
-                      <label>{{this.BirthDt}}</label>
+                      <label>{{this.tempCustPersonalObj?.BirthDt   | date: 'dd-MMM-yyyy'  }}</label>
 
                     </div>
                   </div>
@@ -69,19 +69,19 @@
 
                 <label class="col-md-2 adInsLabel" translate>ID Number </label>
                 <div class="col-md-4">
-                  <label>{{this.IdNo}}</label>
+                  <label>{{this.tempCustObj?.IdNo}}</label>
                 </div>
              
               </div>
               <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>NPWP</label>
                 <div class="col-md-4">
-                  <label>{{this.TaxIdNo}}</label>
+                  <label>{{this.tempCustObj?.TaxIdNo}}</label>
                 </div>
 
                 <label class="col-md-2 adInsLabel" translate>ID Expired Date</label>
                 <div class="col-md-4">
-                  <label>{{this.IdExpiredDt}}</label>
+                  <label>{{this.tempCustObj?.IdExpiredDt  | date: 'dd-MMM-yyyy' }}</label>
 
                 </div>
 
@@ -91,7 +91,7 @@
               <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
               <div class="col-md-4">
-                <label>{{this.MotherMaidenName}}</label>
+                <label>{{this.tempCustPersonalObj?.MotherMaidenName}}</label>
 
               </div>
 
@@ -102,46 +102,46 @@
           </form>
         </div>
 
- 
-
-
-
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [disableNavigationBar] = true [awNavigationMode] navigateBackward="allow"
-          navigateForward="allow" >
-          <aw-wizard-step [stepTitle]="'Customer Detail'" 
-            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-            <app-customer-personal-detail> </app-customer-personal-detail>
-          </aw-wizard-step>
+        navigateForward="allow" >
+        <aw-wizard-step [stepTitle]="'Customer Detail'" 
+          [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+          <app-customer-personal-detail> </app-customer-personal-detail>
+        </aw-wizard-step>
 
-          <aw-wizard-step [stepTitle]="'Address'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-personal-detail> </app-customer-personal-detail>
-          </aw-wizard-step>
+        <!-- <aw-wizard-step [stepTitle]="'Address'"
+          [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+          <app-customer-personal-detail> </app-customer-personal-detail>
+        </aw-wizard-step>
 
-          <aw-wizard-step [stepTitle]="'Contact Person'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-personal-detail> </app-customer-personal-detail>
-          </aw-wizard-step>
+        <aw-wizard-step [stepTitle]="'Contact Person'"
+          [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+        <app-customer-personal-detail> </app-customer-personal-detail>
+        </aw-wizard-step>
 
-          <aw-wizard-step [stepTitle]="'Customer Group'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"> 
-              <app-customer-personal-detail> </app-customer-personal-detail>
-          </aw-wizard-step>
-          <aw-wizard-step [stepTitle]="'Job Data'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-personal-detail> </app-customer-personal-detail>
-          </aw-wizard-step>
-          <aw-wizard-step [stepTitle]="'Financial Data'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-personal-detail> </app-customer-personal-detail>
-          </aw-wizard-step>
-          <aw-wizard-step [stepTitle]="'Other Attribute'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-personal-detail> </app-customer-personal-detail>
-          </aw-wizard-step>
+        <aw-wizard-step [stepTitle]="'Customer Group'"
+          [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"> 
+     <app-customer-personal-detail> </app-customer-personal-detail>
+        </aw-wizard-step>
+        <aw-wizard-step [stepTitle]="'Job Data'"
+          [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+        <app-customer-personal-detail> </app-customer-personal-detail>
+        </aw-wizard-step>
+        <aw-wizard-step [stepTitle]="'Financial Data'"
+          [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+         <app-customer-personal-detail> </app-customer-personal-detail>
+        </aw-wizard-step>
+        <aw-wizard-step [stepTitle]="'Other Attribute'"
+          [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+         <app-customer-personal-detail> </app-customer-personal-detail>
+        </aw-wizard-step>
+ -->
+
+      </aw-wizard>
 
 
-        </aw-wizard>
+
+      
 
 
       </div>
