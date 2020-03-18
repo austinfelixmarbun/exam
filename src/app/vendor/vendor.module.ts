@@ -35,6 +35,10 @@ import { AddressComponent } from './component/address/address.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
 import { VendorService } from './vendor.service';
+import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info.component';
+import { MainHoInfoComponent } from './vendor-ho/vendor-ho-info/main-ho-info/main-ho-info.component';
+import { MatTabsModule } from '@angular/material';
+import { MainInfoViewComponent } from './component/main-info-view/main-info-view.component';
 
 
 @NgModule({
@@ -55,7 +59,8 @@ import { VendorService } from './vendor.service';
     UcviewgenericModule,
     UclookupgenericModule,
     NgbDropdownModule,
-    ArchwizardModule
+    ArchwizardModule,
+    MatTabsModule
   ],
   declarations: [
     VendorComponent,
@@ -78,7 +83,10 @@ import { VendorService } from './vendor.service';
     ContactPersonListComponent,
     ContactPersonAddEditComponent,
     AddressComponent,
-    VendorHoRegistrationComponent
+    VendorHoRegistrationComponent,
+    VendorHoInfoComponent,
+    MainHoInfoComponent,
+    MainInfoViewComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

@@ -10,10 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   providers: [NGXToastrService]
 })
 export class VendorHoRegistrationComponent implements OnInit {
-  viewObj: any;
-  VendorId: any;
   mode: string = "add";
+  VendorId: any; 
   objPassing: any = {};
+  HiddenState: boolean = true;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
     this.route.queryParams.subscribe(params => {
@@ -23,7 +23,10 @@ export class VendorHoRegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewVendorHO.json"
+    this.VendorId = this.objPassing["VendorId"];
   }
 
+  outputValue(ev){
+    this.HiddenState = ev;
+  }
 }

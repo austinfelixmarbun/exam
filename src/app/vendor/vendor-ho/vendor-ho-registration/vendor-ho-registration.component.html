@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
+        <app-main-info-view></app-main-info-view>
         <div class="ucSearch-Button-Right">
           <span class="mr-1">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/HO/Paging']"
@@ -23,6 +23,12 @@
         </aw-wizard-step>
         <aw-wizard-step [stepTitle]="'Contact Person'" 
         [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+        <div *ngIf="HiddenState==true">
+          <app-contact-person-list (objOutput)="outputValue($event)"> </app-contact-person-list>
+        </div>
+        <div *ngIf="HiddenState==false">
+          <app-contact-person-add-edit (objOutput)="outputValue($event)"> </app-contact-person-add-edit>
+        </div>
       </aw-wizard-step>
         <aw-wizard-step [stepTitle]="'Bank Info'" 
         [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">

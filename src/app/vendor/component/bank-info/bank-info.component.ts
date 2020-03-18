@@ -37,6 +37,7 @@ export class BankInfoComponent implements OnInit {
   constructor(private toastr: NGXToastrService, private route: ActivatedRoute, private modalService: NgbModal,private fb: FormBuilder, private vendorService : VendorService) { }
 
   ngOnInit() {
+    console.log("BANK INFO COm")
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
         this.mode = params["mode"];
@@ -105,7 +106,7 @@ export class BankInfoComponent implements OnInit {
               response => {
                 this.ListData = response["ReturnObject"];
               }
-              );    
+            );    
         },
         error => {
           console.log(error);
@@ -125,6 +126,7 @@ export class BankInfoComponent implements OnInit {
       this.vendorService.EditVendorBankAcc(this.VendorBankAcc).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
+            this.modal.close();
             var obj = {
               VendorId : this.objInput.VendorId
             };
@@ -132,8 +134,7 @@ export class BankInfoComponent implements OnInit {
               response => {
                 this.ListData = response["ReturnObject"];
               }
-              );
-            this.modal.close();      
+            );
         },
         error => {
           console.log(error);

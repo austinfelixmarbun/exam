@@ -5,7 +5,7 @@
         <div class="card-header header-title">
           <div class="row">
             <div class="col-md-8">
-              <h4 class="card-title" id="horz-layout-colored-controls" translate> VENDOR SCHEME </h4>
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> HO Registration </h4>
             </div>
           </div>
         </div>
@@ -193,12 +193,6 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="MrVendorCategoryCode=='ASSET_INSCO_HO'">
-                  <p>Ini buat Asset Insurance HO</p>
-              </div>
-              <div *ngIf="MrVendorCategoryCode=='LIFE_INSCO_HO'">
-                <p>ini buat Life Insurance HO</p>
-              </div>
             </div>
             <lib-ucSubsection [id]="'TaxInfo'" [title]="'Tax Info'" [panel]="'TaxInformation'">
             </lib-ucSubsection>
@@ -292,8 +286,8 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/HO/Paging']"
-                translate>
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/HO/Registration']"
+              [queryParams]="{VendorId: this.VendorId, mode:'edit'}" translate>
                 <i class="fa fa-arrow-circle-left"></i> Back
               </button>
               <button type="submit" class="btn btn-raised btn-primary">

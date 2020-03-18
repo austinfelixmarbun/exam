@@ -1,35 +1,61 @@
-<table class="table table-responsive-md text-center table-hover">
-  <thead>
-    <tr class="table-header">
-      <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Name'
-          translate>Name
-          Code</span>
-      </th>
-      <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Position'
-          translate>Position
-          Name</span>
-      </th>
-      <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Phone 1'
-          translate>Phone 1
-          Name</span>
-      </th>
-      <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Owner'
-        translate>Owner
-        Name</span>
-    </th>
-    <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Action'
-      translate>Action
-      Name</span>
-  </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of resultData">
-      <td class="text-left">{{item.FullAssetCode}}</td>
-      <td class="text-left">{{item.FullAssetName}}</td>
-      <td class="text-left">{{item.AssetCategoryName}}</td>
-      <td class="text-left">{{item.FullAssetName}}</td>
-      <td class="text-left">{{item.AssetCategoryName}}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <form>
+            <div class="form-actions right">
+              <span class="mr-1">
+                <button type="button" class="btn btn-raised btn-warning mr-1" (click)="HiddenCheck()">
+                  <i class=""></i> Add
+                </button>
+              </span>
+            </div>
+            <div>
+              <table class="table table-responsive-md text-center table-hover">
+                <thead>
+                  <tr class="table-header">
+                    <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Name'
+                        translate>Name
+                        Code</span>
+                    </th>
+                    <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Position'
+                        translate>Position
+                        Name</span>
+                    </th>
+                    <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Phone 1'
+                        translate>Phone 1
+                        Name</span>
+                    </th>
+                    <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Owner'
+                        translate>Owner
+                        Name</span>
+                    </th>
+                    <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Action'
+                        translate>Action
+                        Name</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of resultData">
+                    <td class="text-left">{{item.FullAssetCode}}</td>
+                    <td class="text-left">{{item.FullAssetName}}</td>
+                    <td class="text-left">{{item.AssetCategoryName}}</td>
+                    <td class="text-left">{{item.FullAssetName}}</td>
+                    <td class="text-left">{{item.AssetCategoryName}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="form-actions right">
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="far"></i> Continue
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
