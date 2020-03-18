@@ -1,0 +1,56 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "MainInfoId",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Registration Number",
+            "property": "RegistrationNo"
+          },
+          {
+            "type": "text",
+            "label": "Rating",
+            "property":"VendorRating"
+          }, 
+          {
+            "type": "text",
+            "label": "License Number",
+            "property": "LicenseNo"
+          },
+          {
+            "type": "text",
+            "label": "E-mail",
+            "property": "Email"
+          },
+          {
+            "type": "text",
+            "label": "Establishment Date",
+            "property": "EstablishmentDt"
+          },
+          {
+            "type": "text",
+            "label": "Mobile Phone 1",
+            "property": "MobilePhnNo1"
+          },
+          {
+            "type": "text",
+            "label": "Partnership date",
+            "property": "PartnershipDt"
+          },
+          {
+            "type": "text",
+            "label": "Mobile Phone 2",
+            "property": "MobilePhnNo2"
+          }
+        ],
+        "querystring": {
+            "select": "SELECT REGISTRATION_NO AS RegistrationNo, VENDOR_RATING AS VendorRating, LICENSE_NO AS LicenseNo, EMAIL AS Email, ESTABLISHMENT_DT AS EstablishmentDt, MOBILE_PHN_NO_1 AS MobilePhnNo1, PARTNERSHIP_DT AS PartnershipDt, MOBILE_PHN_NO_2 AS MobilePhnNo2",
+            "from": "FROM DBO.VENDOR", 
+            "where": "WHERE VENDOR_ID = {0}" 
+        }
+      }
+    ]
+  }

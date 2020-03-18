@@ -110,8 +110,8 @@ export class OfficeAddComponent implements OnInit {
     // Fax:  ['',Validators.max(4)],
     CntctPersonEmail1: ['', Validators.required],
     CntctPersonEmail2: [''],
-    CntctPersonMobilePhnNo1: ['', [Validators.required, Validators.max(15),Validators.pattern('^[0-9]+$')]],
-    CntctPersonMobilePhnNo2: ['', [Validators.max(15),Validators.pattern('^[0-9]+$')]],
+    CntctPersonMobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    CntctPersonMobilePhnNo2: ['', [Validators.pattern('^[0-9]+$')]],
     IsActive: false,
     OfficeClose: false,
     AllowAppCreated: false
@@ -404,7 +404,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.AreaCode2 = this.OfficeForm.value.UcAddress.AreaCode2;
     this.officeObj.AreaCode1 = this.OfficeForm.value.UcAddress.AreaCode1;
     this.officeObj.City = this.OfficeForm.value.UcAddress.City;
-    this.officeObj.ZipCode = this.OfficeForm.value.UcZipcode.value;
+    this.officeObj.ZipCode = this.OfficeForm.value.UcAddressZipcode.value;
     this.officeObj.PhnArea1 = this.OfficeForm.value.UcAddress.PhnArea1;
     this.officeObj.Phn1 = this.OfficeForm.value.UcAddress.Phn1;
     this.officeObj.PhnExt1 = this.OfficeForm.value.UcAddress.PhnExt1;

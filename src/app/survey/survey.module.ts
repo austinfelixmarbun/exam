@@ -11,6 +11,9 @@ import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { SurveyRoutingModule } from './survey-routing.module';
 import { SurveyOrderComponent } from './survey-order/survey-order.component';
 import { SurveyOrderTaskComponent } from './survey-order-task/survey-order-task.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { SurveyOrderViewComponent } from './survey-order-view/survey-order-view.component';
+import { SurveyTaskViewComponent } from './survey-task-view/survey-task-view.component';
 
 
 @NgModule({
@@ -25,11 +28,14 @@ import { SurveyOrderTaskComponent } from './survey-order-task/survey-order-task.
     ReactiveFormsModule,
     UcaddressModule,
     UclookupgenericModule,
-    UcviewgenericModule
+    UcviewgenericModule,
+    UcShowErrorsModule
   ],
   declarations: [
     SurveyOrderComponent,
-    SurveyOrderTaskComponent
+    SurveyOrderTaskComponent,
+    SurveyOrderViewComponent,
+    SurveyTaskViewComponent
   ]
 })
 export class SurveyModule { }

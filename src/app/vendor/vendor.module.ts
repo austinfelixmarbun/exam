@@ -35,6 +35,16 @@ import { AddressComponent } from './component/address/address.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
 import { VendorService } from './vendor.service';
+import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info.component';
+import { MainHoInfoComponent } from './vendor-ho/vendor-ho-info/main-ho-info/main-ho-info.component';
+import { MatTabsModule } from '@angular/material';
+import { MainInfoViewComponent } from './component/main-info-view/main-info-view.component';
+import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
+import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
+import { VendorEmployeeComponent } from './component/vendor-employee/vendor-employee.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { UcaddressModule } from '@adins/ucaddress';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 
 @NgModule({
@@ -55,7 +65,10 @@ import { VendorService } from './vendor.service';
     UcviewgenericModule,
     UclookupgenericModule,
     NgbDropdownModule,
-    ArchwizardModule
+    ArchwizardModule,
+    MatTabsModule,
+    UcShowErrorsModule,
+    UcaddressModule
   ],
   declarations: [
     VendorComponent,
@@ -78,11 +91,18 @@ import { VendorService } from './vendor.service';
     ContactPersonListComponent,
     ContactPersonAddEditComponent,
     AddressComponent,
-    VendorHoRegistrationComponent
+    VendorHoRegistrationComponent,
+    VendorHoInfoComponent,
+    MainHoInfoComponent,
+    MainInfoViewComponent,
+    VendorBranchEmployeePagingComponent,
+    VendorBranchEmployeeAddEditComponent,
+    VendorEmployeeComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [
-    VendorService
+    VendorService,
+    NGXToastrService
   ]
 })
 export class VendorModule { }
