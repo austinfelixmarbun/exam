@@ -13,29 +13,8 @@
           },
           {
             "type": "text",
-            "label": "Phone1",
-            "property": "Phone1"
-          },
-          {
-            "type": "text",
-            "label": "RT / RW",
-            "property": "RtRw"
-          },
-          {
-            "type": "text",
-            "label": "Phone2",
-            "property": "Phone2"
-          },
-
-          {
-            "type": "text",
             "label": "Zip Code",
             "property": "ZipCode"
-          },
-          {
-            "type": "text",
-            "label": "Phone3",
-            "property": "Phone3"
           },
           {
             "type": "text",
@@ -44,8 +23,8 @@
           },
           {
             "type": "text",
-            "label": "Fax",
-            "property": "Fax"
+            "label": "Phone1",
+            "property": "Phone1"
           },
           {
             "type": "text",
@@ -54,13 +33,33 @@
           },
           {
             "type": "text",
-            "label": "Building Ownership",
-            "property": "BuildingOwn"
+            "label": "Phone2",
+            "property": "Phone2"
+          },
+          {
+            "type": "text",
+            "label": "RT / RW",
+            "property": "RtRw"
+          },
+          {
+            "type": "text",
+            "label": "Phone3",
+            "property": "Phone3"
           },
           {
             "type": "text",
             "label": "City",
             "property": "City"
+          },
+          {
+            "type": "text",
+            "label": "Fax",
+            "property": "Fax"
+          },
+          {
+            "type": "text",
+            "label": "Building Ownership",
+            "property": "BuildingOwn"
           }
         ],
         "querystring": {

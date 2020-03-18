@@ -33,6 +33,9 @@ import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-det
 import { CustomerViewPersonalContactPersonComponent } from './customer-view/customer-view-personal-contact-person/customer-view-personal-contact-person.component';
 import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
 import { CustomerViewPersonalFinancialDataComponent } from './customer-view/customer-view-personal-financial-data/customer-view-personal-financial-data.component';
+import { CustomerViewPersonalJobDataNonProfComponent } from './customer-view/customer-view-personal-job-data-non-prof/customer-view-personal-job-data-non-prof.component';
+import { CustomerViewPersonalJobDataEmpComponent } from './customer-view/customer-view-personal-job-data-emp/customer-view-personal-job-data-emp.component';
+import { CustomerViewPersonalJobDataSmeComponent } from './customer-view/customer-view-personal-job-data-sme/customer-view-personal-job-data-sme.component';
 @NgModule({
   exports: [],
   imports: [
@@ -66,7 +69,10 @@ import { CustomerViewPersonalFinancialDataComponent } from './customer-view/cust
     CustGroupTabDetailComponent,
     CustomerViewPersonalContactPersonComponent,
     CustomerViewPersonalCustomerGroupComponent,
-    CustomerViewPersonalFinancialDataComponent
+    CustomerViewPersonalFinancialDataComponent,
+    CustomerViewPersonalJobDataNonProfComponent,
+    CustomerViewPersonalJobDataEmpComponent,
+    CustomerViewPersonalJobDataSmeComponent
   ],
   entryComponents: [CustGroupTabDetailComponent]
 })

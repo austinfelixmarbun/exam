@@ -31,7 +31,10 @@
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Job Data'"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-job-data> </app-customer-view-personal-job-data>
+								<app-customer-view-personal-job-data *ngIf="custModel == 'PROF'"> </app-customer-view-personal-job-data>
+								<app-customer-view-personal-job-data-non-prof *ngIf="custModel == 'NONPROF'"></app-customer-view-personal-job-data-non-prof>
+								<app-customer-view-personal-job-data-emp *ngIf="custModel == 'EMP'"></app-customer-view-personal-job-data-emp>
+								<app-customer-view-personal-job-data-sme *ngIf="custModel == 'SME'"></app-customer-view-personal-job-data-sme>
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Financial Data'"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
