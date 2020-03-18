@@ -1,0 +1,68 @@
+{
+    "title": "Employee",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "EMP_NO",
+            "id": "EmpCodeId",
+            "value": "",
+            "label": "Employee No",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "EMP_NAME",
+            "id": "EmpNameId",
+            "value": "",
+            "label": "Employee Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT EMP_NO AS EmpNo, EMP_NAME AS EmpName, REF_EMP_ID AS RefEmpId",
+        "from": "FROM dbo.REF_EMP"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "VENDOR CODE",
+            "name": "EMP_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "VENDOR NAME",
+            "name": "EMP_NAME"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "EmpNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "EmpName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "RefEmpId"
+                }
+            ]
+        }
+    ],
+    "propertyId": "RefEmpId",
+    "propertyName": "EmpName"  
+}

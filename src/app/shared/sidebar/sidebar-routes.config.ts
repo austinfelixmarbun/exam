@@ -7,7 +7,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '', title: 'Organization', icon: 'ft-bar-chart-2', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
-      { path: '/Office/paging', title: 'Office', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Office/Paging', title: 'Office', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Office/OfficeArea', title: 'Office Area', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Organization/BusinessUnit', title: 'Business unit', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Organization/JobTitle', title: 'Job Title', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
@@ -68,7 +68,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '', title: 'Survey', icon: 'ft-clipboard', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
-      { path: '/Product/HOpaging', title: 'Survey Order', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/Survey/Paging', title: 'Survey Order', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
       
     ]
   },

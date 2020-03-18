@@ -69,10 +69,10 @@ export class VendorHoAddEditComponent implements OnInit {
     MrAddrTypeCode: [''],
     Addr: [''],
     Zipcode: [''],
-    AreaCode2: [''], //kelurahan
-    AreaCode1: [''], //kecamatan
-    City: [''],
-    Province: [''],
+    AreaCode2: [{value: '', disabled: true}], //kelurahan
+    AreaCode1: [{value: '', disabled: true}], //kecamatan
+    City: [{value: '', disabled: true}],
+    Province: [{value: '', disabled: true}],
     RowVersionVendor: [''],
     RowVersionVendorAddr: ['']
   })
@@ -122,7 +122,7 @@ export class VendorHoAddEditComponent implements OnInit {
       }
     );
 
-    if (this.MrVendorCategoryCode == "SURVEYOR_HO" || this.MrVendorCategoryCode == "ASSET_INSCO_HO") {
+    if (this.MrVendorCategoryCode == "SURVEYOR_HO") {
       var refMasterAssignmentObj = {
         RefMasterTypeCode: "TASK_ASSIGNMENT_TYPE",
       }
@@ -169,10 +169,6 @@ export class VendorHoAddEditComponent implements OnInit {
 
     this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();
-    this.VendorForm.controls.AreaCode2.disable();
-    this.VendorForm.controls.AreaCode1.disable();
-    this.VendorForm.controls.City.disable();
-    this.VendorForm.controls.Province.disable();
 
     if (this.mode == "edit") {
       this.ButtonLbl = "Submit";
@@ -278,7 +274,7 @@ export class VendorHoAddEditComponent implements OnInit {
     this.vendorHoObj = new VendorHoObj();
     var vendorObj = {
       MrVendorCategoryCode: "",
-      VendorCode: this.VendorForm.controls.VendorCode.value,
+      VendorCode: this.VendorForm.controls.VendorNo.value,
       VendorName: this.VendorForm.controls.VendorName.value,
       MrVendorTypeCode: this.VendorForm.controls.MrVendorTypeCode.value,
       RegistrationNo: this.VendorForm.controls.RegistrationNo.value,

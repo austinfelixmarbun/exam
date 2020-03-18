@@ -8,9 +8,9 @@
               <div class="form-body">
                 <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Profession {{this.pageType}}</h4>
                 <div class="form-group row">
-                  <label class="col-md-3  adInsLabel adins-required" translate>Profession Code </label>
+                  <label class="col-md-3  adInsLabel adins-required adins-required-label" translate>Profession Code </label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput" formControlName="ProfessionCode"
+                    <input type="text" class="form-control adInsInput code" formControlName="ProfessionCode"
                            [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProfessionForm.controls.ProfessionCode.invalid }">
                     <show-errors [control]="RefProfessionForm.controls.ProfessionCode" [submit]="enjiForm.submitted"></show-errors>
                   </div>
@@ -24,7 +24,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3  adInsLabel adins-required" translate>Customer Model Name </label>
+                    <label class="col-md-3  adInsLabel adins-required adins-required-label" translate>Customer Model Name </label>
                     <div class="col-md-9">
                       <select class="form-control adInsInput" formControlName="MrCustModelCode">
                         <option *ngFor="let ram of allRefProfessionMethod" [ngValue]="ram.Key">

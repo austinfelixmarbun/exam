@@ -510,13 +510,15 @@ export class AdInsConstant {
     public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
     public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
     public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
+    public static AddVendorAddr = environment.FoundationR3Url + "/VendorAddr/AddVendorAddr"
+    public static EditVendorAddr = environment.FoundationR3Url + "/VendorAddr/EditVendorAddr"  
+    public static GetVendorAddrByVendorId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorIdMrAddrType"
 
-    public static GetListVendorBankAccByVendorId = environment.localHostUrl + "/VendorBankAcc/GetListVendorBankAccByVendorId";
-    public static AddVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/AddVendorBankAcc";
-    public static EditVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/EditVendorBankAcc";
-    public static GetVendorBankAccByVendorBankAccId = environment.localHostUrl + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
-
-
+    public static GetListVendorBankAccByVendorId = environment.FoundationR3Url + "/VendorBankAcc/GetListVendorBankAccByVendorId";
+    public static AddVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/AddVendorBankAcc";
+    public static EditVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/EditVendorBankAcc";
+    public static GetVendorBankAccByVendorBankAccId = environment.FoundationR3Url + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
+    
     //VENDOR GROUP
     public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
     public static EditVendorGrp = environment.FoundationR3Url + "/VendorGrp/EditVendorGrp";
@@ -531,7 +533,11 @@ export class AdInsConstant {
     public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId"
     public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId"
 
-
+    //VENDOR EMP
+    public static AddVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/AddVendorBranchEmp"
+    public static GetVendorEmpByVendorEmpId = environment.FoundationR3Url + "/VendorEmp/GetVendorEmpByVendorEmpId"
+    public static GetVendorEmpAndVendorTaxAddrByVendorEmpId = environment.FoundationR3Url + "/VendorEmp/GetVendorEmpAndVendorTaxAddrByVendorEmpId"
+    public static EditVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/EditVendorBranchEmp"
 
     //VENDOR SCHEME
     public static AddVendorSchm = environment.FoundationR3Url + "/VendorSchm/AddVendorSchm";
@@ -644,4 +650,9 @@ export class AdInsConstant {
     public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
     public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
 
+
+    // SURVEY TASK
+    public static GetListSrvyTaskBySrvyOrderId = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderId";
+
+    
 }
