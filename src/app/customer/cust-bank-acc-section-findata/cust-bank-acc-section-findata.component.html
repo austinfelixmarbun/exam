@@ -1,0 +1,61 @@
+<lib-ucSubsection [id]="'CustBankAccId'" [title]="'Customer Bank Account'" [panel]="'CustBankAccSection'"></lib-ucSubsection>
+<div id="CustBankAccSection">
+  <div class="col-md-12" style="padding: 0; text-align: right;">
+    <span class="mr-1">
+      <button type="button" class="addButton" (click)="" translate>
+        <i class="ft-plus-circle"></i> Add
+      </button>
+    </span>
+  </div>
+  <div class="col-md-12" style="padding: 0;">
+    <div class="col-md-12" *ngFor="let item of cbaFinDataList">
+      <div class="col-md-12">
+        <h4 class="col-md-6">
+          {{item.BankName}} - {{item.BankBranch}} - {{item.BankAccNo}} - {{item.BankAccName}}
+        </h4>
+        <div class="col-md-6">
+          <button type="button" class="addButton" (click)="" translate>
+             Add Bank Statement
+          </button>
+          <button type="button" class="addButton" (click)="" translate>
+            Edit Bank Account
+         </button>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <table class="table table-responsive-md text-center table-hover">
+            <thead>
+              <tr class="table-header">
+                <th style="text-align: left;">
+                  <span class="thead-header" name='month' translate>Month</span>
+                </th>
+                <th style="text-align: left;">
+                  <span class="thead-header" name='year' translate>Year</span>
+                </th>
+                <th style="text-align: left;">
+                  <span class="thead-header" name='debit' translate>Debit (-)</span>
+                </th>
+                <th style="text-align: center;">
+                  <span class="thead-header" name='credit' translate>Credit (+)</span>
+                </th>
+                <th style="text-align: center;">
+                  <span class="thead-header" name='endingBalance' translate>Ending Balance</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of CustGrpList">
+                <td style="text-align: left;">{{item.Month}}</td>
+                <td style="text-align: left;">{{item.Year}}</td>
+                <td style="text-align: left;">{{item.DebitAmt}}</td>
+                <td style="text-align: left;">{{item.CreditAmt}}</td>
+                <td style="text-align: left;">{{item.BalanceAmt}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

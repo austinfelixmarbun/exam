@@ -27,6 +27,9 @@ import { NegativeCustomerComponent } from './negative-customer/negative-customer
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 import { CustGroupTabComponent } from './cust-group-tab/cust-group-tab.component';
 import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-detail/cust-group-tab-detail.component';
+import { CustFinDataTabComponent } from './cust-fin-data-tab/cust-fin-data-tab.component';
+import { CustBankAccSectionFindataComponent } from './cust-bank-acc-section-findata/cust-bank-acc-section-findata.component';
+import { CustBankAccDetailSectionFindataComponent } from './cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata.component';
 @NgModule({
   exports: [],
   imports: [
@@ -54,7 +57,10 @@ import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-det
     NegativeCustomerDetailComponent,
     NegativeCustomerViewComponent,
     CustGroupTabComponent,
-    CustGroupTabDetailComponent
+    CustGroupTabDetailComponent,
+    CustFinDataTabComponent,
+    CustBankAccSectionFindataComponent,
+    CustBankAccDetailSectionFindataComponent,
   ],
   entryComponents: [CustGroupTabDetailComponent]
 })

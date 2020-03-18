@@ -1,0 +1,131 @@
+<form class="form form-horizontal" [formGroup]="CustBankAccForm" #enjiForm="ngForm" novalidate
+  (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
+  <div class="modal-header">
+    <h4 class="modal-title">{{modalTitle}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('dismissed')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="col-md-12">
+      <div class="">
+        <div class="">
+          <div class="px-3">
+            <div class="form-body">
+              <div id="CustBankAccSection">
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel adins-required-label" for="BankName" translate>Bank Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput" formControlName="BankName" 
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.BankName.invalid }" />
+                    <show-errors [control]="CustBankAccForm.controls.BankName" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel adins-required-label" for="BankBranch" translate>Bank Branch</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput" formControlName="BankBranch" 
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.BankBranch.invalid }" />
+                    <show-errors [control]="CustBankAccForm.controls.BankBranch" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel adins-required-label" for="BankAccName" translate>Account Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput" formControlName="BankBranch" 
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.BankBranch.invalid }" />
+                    <show-errors [control]="CustBankAccForm.controls.BankBranch" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel adins-required-label" for="BankAccNo" translate>Account No</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput" formControlName="BankBranch" 
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.BankBranch.invalid }" />
+                    <show-errors [control]="CustBankAccForm.controls.BankBranch" [submit]="enjiForm.submitted"></show-errors>
+                  </div>
+                </div>
+                <div class="form-group row" *ngIf="isAddBankStatement">
+                  <div class="col-md-12 right" style="padding: 0;">
+                    <button type="submit" class="btn btn-raised btn-primary">
+                      Add New Row
+                    </button>
+                  </div>
+                  <div class="col-md-12">
+                    <table class="table table-responsive-md text-center table-hover">
+                      <thead>
+                        <tr class="table-header">
+                          <th style="text-align: left;">
+                            <span class="thead-header" name='month' translate>Month</span>
+                          </th>
+                          <th style="text-align: left;">
+                            <span class="thead-header" name='year' translate>Year</span>
+                          </th>
+                          <th style="text-align: left;">
+                            <span class="thead-header" name='debit' translate>Debit (-)</span>
+                          </th>
+                          <th style="text-align: left;">
+                            <span class="thead-header" name='credit' translate>Credit (+)</span>
+                          </th>
+                          <th style="text-align: left;">
+                            <span class="thead-header" name='endingBalance' translate>Ending Balance</span>
+                          </th>
+                          <th style="text-align: center;">
+                            <span class="thead-header" name='action' translate>Delete</span>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let stmntControl of CustBankAccForm.controls.CustBankStmnts.controls; index as i">
+                          <td style="text-align: left;">
+                            <select class="form-control adInsInput" formControlName="CustBankAccForm.controls.CustBankStmnts.controls[i].Month" 
+                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.CustBankStmnts.controls[i].Month.invalid }">
+                              <option *ngFor="let monthItem of monthOfYear; index as j" [value]="j">{{monthItem}}</option>
+                            </select>
+                            <show-errors [control]="CustBankAccForm.controls.CustBankStmnts.controls[i].Month" [submit]="enjiForm.submitted"></show-errors>
+                          </td>
+                          <td style="text-align: left;">
+                            <input type="text" class="form-control adInsInput" formControlName="CustBankAccForm.controls.CustBankStmnts.controls[i].Year" 
+                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.CustBankStmnts.controls[i].Year.invalid }" />
+                            <show-errors [control]="CustBankAccForm.controls.CustBankStmnts.controls[i].Year" [submit]="enjiForm.submitted"></show-errors>
+                          </td>
+                          <td style="text-align: left;">
+                            <input type="text" class="form-control adInsInput" formControlName="CustBankAccForm.controls.CustBankStmnts.controls[i].DebitAmt" 
+                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.CustBankStmnts.controls[i].DebitAmt.invalid }" />
+                            <show-errors [control]="CustBankAccForm.controls.CustBankStmnts.controls[i].DebitAmt" [submit]="enjiForm.submitted"></show-errors>
+                          </td>
+                          <td style="text-align: left;">
+                            <input type="text" class="form-control adInsInput" formControlName="CustBankAccForm.controls.CustBankStmnts.controls[i].CreditAmt" 
+                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.CustBankStmnts.controls[i].CreditAmt.invalid }" />
+                            <show-errors [control]="CustBankAccForm.controls.CustBankStmnts.controls[i].CreditAmt" [submit]="enjiForm.submitted"></show-errors>
+                          </td>
+                          <td style="text-align: left;">
+                            <input type="text" class="form-control adInsInput" formControlName="CustBankAccForm.controls.CustBankStmnts.controls[i].BalanceAmt" 
+                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.CustBankStmnts.controls[i].BalanceAmt.invalid }" />
+                            <show-errors [control]="CustBankAccForm.controls.CustBankStmnts.controls[i].BalanceAmt" [submit]="enjiForm.submitted"></show-errors>
+                          </td>
+                          <td style="text-align: center;">
+                            <a (click)="">
+                              <i class="fas fa-trash"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-raised btn-primary">
+      <i class="fa fa-check-square-o"></i> Save
+    </button>
+    <button type="button" class="btn btn-warning btn-raised" (click)="activeModal.dismiss('dismissed')">Cancel</button>
+  </div>
+</form>
+
