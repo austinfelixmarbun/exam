@@ -2,19 +2,19 @@
     "title": "BRANCH",
     "component": [
         {
-            "type" : "dropdown",
-            "label" : "Vendor Category",
-            "name" : "MR_VENDOR_CATEGORY_CODE",
-            "id" : "VendorCategoryId",
-            "value" : "",
-            "datatype" : "text",
-            "isSelectOne" : false,
-            "items" : [],
-            "isFromURL" : true, 
-            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", 
-            "itemsUrl" : [], 
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "VENDOR_CATEGORY"
+            "type": "dropdown",
+            "label": "Vendor Category",
+            "name": "MR_VENDOR_CATEGORY_CODE",
+            "id": "VendorCategoryId",
+            "value": "",
+            "datatype": "text",
+            "isSelectOne": false,
+            "items": [],
+            "isFromURL": true,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+            "itemsUrl": [],
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "VENDOR_CATEGORY"
         },
         {
             "type": "dropdown",
@@ -59,8 +59,8 @@
             "id": "VendorRatingGteId",
             "value": 0,
             "label": "Rating >=",
-            "restriction" : "gte",
-            "datatype" : "numeric",
+            "restriction": "gte",
+            "datatype": "numeric",
             "placeholder": "Placeholder"
         },
         {
@@ -69,13 +69,13 @@
             "id": "VendorRatingLteId",
             "value": 100,
             "label": "Rating <=",
-            "restriction" : "lte",
-            "datatype" : "numeric",
+            "restriction": "lte",
+            "datatype": "numeric",
             "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "select": "SELECT vdr.MR_VENDOR_CLASS AS MrVendorClass, vdr.VENDOR_ID AS VendorId, MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, VENDOR_CODE AS BranchCode, VENDOR_NAME AS BranchName, ADDR AS BranchAddress, VENDOR_RATING AS BranchRating, IS_ACTIVE AS IsActive",
+        "select": "SELECT vdr.MR_VENDOR_CLASS AS MrVendorClass, vdr.VENDOR_ID AS VendorId, vdr.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, VENDOR_CODE AS BranchCode, VENDOR_NAME AS BranchName, ADDR AS BranchAddress, VENDOR_RATING AS BranchRating, IS_ACTIVE AS IsActive",
         "from": "FROM dbo.VENDOR vdr WITH(NOLOCK) LEFT JOIN dbo.VENDOR_ADDR vaddr WITH(NOLOCK) on vdr.VENDOR_ID = vaddr.VENDOR_ID"
     },
     "headerList": [
@@ -107,12 +107,12 @@
             "type": "label",
             "position": "center",
             "label": "Active Status",
-            "name" : "IsActive"
+            "name": "IsActive"
         },
         {
-            "type" : "label",
-            "position" : "center",
-            "label" : "OFFICE MEMBER"
+            "type": "label",
+            "position": "center",
+            "label": "OFFICE MEMBER"
         },
         {
             "type": "sort",
@@ -135,11 +135,11 @@
             "type": "link",
             "position": "center",
             "property": "BranchName",
-            "path" : "/Vendor/Branch/Paging",
-            "param" : [
+            "path": "/Vendor/Branch/Paging",
+            "param": [
                 {
-                    "type" : "VendorId",
-                    "property" : "VendorId"
+                    "type": "VendorId",
+                    "property": "VendorId"
                 }
             ]
         },
@@ -159,39 +159,45 @@
             "property": "IsActive"
         },
         {
-            "type" : "switch",
-            "case" : [ 
-                {
-                    "conditions" : [
-                        {
-                            "property" : "MrVendorCategoryCode",
-                            "value" : "" 
-                        }
-                    ],
-                     "result" : {
-                        "path" : "/office/add",
-                        "param" : [
-                            {
-                            "type" : "asd",
-                            "property" : "asd"
-                            }
-                        ]
-                        },
-                    "isHide" : true 
-                }
-            ]
-        },
-        {
-            "type" : "action", 
-            "position" : "center",
+            "type": "action",
+            "position": "center",
             "action": [
                 {
                     "type": "edit",
                     "path": "/employee/EmployeeBusinessUnit/Paging",
                     "param": [
                         {
-                            "type" : "RefUserId",
-                            "property" : "RefUserId"
+                            "type": "RefUserId",
+                            "property": "RefUserId"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrVendorCategoryCode",
+                                    "value": "AGENCY_PERSONAL"
+                                }
+                            ],
+                            "result": {
+                                "path": "/Vendor/Branch",
+                                "param": [
+                                    {
+                                        "type": "MrVendorCategoryCode",
+                                        "property": "MrVendorCategoryCode"
+                                    }
+                                ]
+                            },
+                            "isHide": false
                         }
                     ]
                 }

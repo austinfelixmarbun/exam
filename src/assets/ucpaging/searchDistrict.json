@@ -114,7 +114,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/commonSetting/district/detail",
+          "path": "/CommonSetting/District/detail",
           "param": [
             {
               "type": "refProvDistrictId",

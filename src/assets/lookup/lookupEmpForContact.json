@@ -1,0 +1,68 @@
+{
+    "title": "Lookup Employee",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "emp.EMP_NAME",
+            "id": "EmpNameId",
+            "value": "",
+            "label": "Employee Name",
+            "placeholder": "Employee Name"
+        },
+        {
+            "type": "textbox",
+            "name": "emp.EMP_NO",
+            "id": "EmpNoId",
+            "value": "",
+            "label": "Employee No",
+            "placeholder": "Employee No"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT emp.EMP_NO AS EmpNo, emp.EMP_NAME AS EmpName, jtl.JOB_TITLE_NAME AS JobTitleName, PHN_1 AS Phn1, PHN_2 AS Phn2, EMAIL_1 AS Email, JOIN_DT AS JoinDt, emp.REF_EMP_ID AS RefEmpId",
+        "from": "FROM REF_EMP emp WITH(NOLOCK) LEFT JOIN REF_USER usr WITH(NOLOCK) ON emp.REF_EMP_ID = usr.REF_EMP_ID LEFT JOIN dbo.REF_USER_ROLE usrr WITH(NOLOCK) ON usr.REF_USER_ID = usrr.REF_USER_ID LEFT JOIN dbo.REF_JOB_TITLE jtl WITH(NOLOCK) ON usrr.REF_JOB_TITLE_ID = jtl.REF_JOB_TITLE_ID"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Employee No",
+            "name": "EmpNo"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Employee Name",
+            "name": "EmpName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "EmpNo"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "EmpName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "RefEmpId"
+                }
+            ]
+        }
+    ],
+    "propertyId": "EmpNo",
+    "propertyName": "EmpNo"
+}

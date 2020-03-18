@@ -1,0 +1,191 @@
+<form class="form form-horizontal" [formGroup]="ContactPersonForm" #ContactPersonReqForm="ngForm"
+  (ngSubmit)="ContactPersonForm.valid && SaveForm()">
+  <div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="card-title" translate>BRANCH REGISTRATION</h4>
+              <hr>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="px-3">
+            <lib-ucSubsection [id]="'ContactPersonFormId'" [title]="title" [panel]="'ContactPersonForm'">
+            </lib-ucSubsection>
+            <div class="form-body" id="ContactPersonForm">
+
+              <!-- <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" for="EmpNo" translate>Employee Number</label>
+                <div class="col-md-3">
+                  <lib-uclookupgeneric [lookupInput]="inputEmpLookupObj" [identifier]="'RefEmpId'" [enjiForm]="ContactPersonReqForm" [parentForm]="ContactPersonForm" (lookup)="getEmpData($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div> -->
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" for="EmpName" translate>Name</label>
+                <div class="col-md-9">
+                  <input type="EmpName" id="EmpName" class="form-control adInsInput width-25-per"
+                    formControlName="EmpName">
+                  <show-errors [control]="ContactPersonForm.controls.EmpName" [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+
+              <div class="form-group row ">
+                <label class="col-md-3 adins-required-label" for="JobPosition" translate>JobPosition</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="JobPosition"
+                    [ngClass]="{ 'is-invalid': ContactPersonForm.submitted && ContactPersonForm.controls.JobPosition.invalid }">
+                    <option *ngFor="let it of itemJobPosition" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <show-errors [control]="ContactPersonForm.controls.JobPosition"
+                    [submit]="ContactPersonForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel" for="Supervisor" translate>Supervisor</label>
+                <div class="col-md-3">
+                  <lib-uclookupgeneric [enjiForm]="ContactPersonReqForm" [lookupInput]="inputPagingObjSupervisor"
+                    [parentForm]="ContactPersonForm" [identifier]="'lookupValueSupervisor'" (lookup)="getSpvId($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" for="Phn1" translate>Phone 1</label>
+                <div class="col-md-9">
+                  <input type="text" id="Phn1" class="form-control adInsInput width-25-per" formControlName="Phn1">
+                  <show-errors [control]="ContactPersonForm.controls.Phn1" [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel" for="Phn2" translate>Phone 2</label>
+                <div class="col-md-9">
+                  <input type="text" id="Phn2" class="form-control adInsInput width-25-per" formControlName="Phn2">
+                  <show-errors [control]="ContactPersonForm.controls.Phn2" [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" for="E-mail" translate>E-mail</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-25-per"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="E-mail" formControlName="Email">
+                  <show-errors [control]="ContactPersonForm.controls.Email" [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" for="JoinDt" translate>Join Date</label>
+                <div class="col-md-9">
+                  <input type="date" id="JoinDt" class="form-control adInsInput width-25-per" formControlName="JoinDt">
+                  <show-errors [control]="ContactPersonForm.controls.JoinDt" [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" for="Owner" translate>Owner</label>
+                <div class="col-md-9">
+                  <input type="text" id="Owner" class="form-control adInsInput width-25-per" formControlName="Owner">
+                  <show-errors [control]="ContactPersonForm.controls.Owner" [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+            </div>
+
+            <lib-ucSubsection [id]="'ContactPersonAddressInfoId'" [title]="title2" [panel]="'ContactPersonAddressInfo'">
+            </lib-ucSubsection>
+            <div class="form-body" id="ContactPersonAddressInfo">
+
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel" for="Addr" translate>Address</label>
+                <div class="col-md-9">
+                  <textarea id="Addr" class="form-control adInsInput width-25-per" formControlName="Addr"></textarea>
+                  <show-errors [control]="ContactPersonForm.controls.Addr" [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" for="Zipcode" translate>Zip Code</label>
+                <div class="col-md-3">
+                  <!-- lookup -->
+                  <lib-uclookupgeneric [lookupInput]="inputZipcodeLookupObj" [identifier]="'RefZipcodeId'"
+                    [enjiForm]="ContactPersonReqForm" [parentForm]="ContactPersonForm"
+                    (lookup)="getZipcodeData($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" for="AreaCode2" translate>Kelurahan</label>
+                <div class="col-md-9">
+                  <input type="text" id="AreaCode2" class="form-control adInsInput width-25-per"
+                    formControlName="AreaCode2">
+                  <show-errors [control]="ContactPersonForm.controls.AreaCode2"
+                    [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" for="AreaCode1" translate>Kecamatan</label>
+                <div class="col-md-9">
+                  <input type="text" id="AreaCode1" class="form-control adInsInput width-25-per"
+                    formControlName="AreaCode1">
+                  <show-errors [control]="ContactPersonForm.controls.AreaCode1"
+                    [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" for="City" translate>City</label>
+                <div class="col-md-9">
+                  <input type="text" id="City" class="form-control adInsInput width-25-per" formControlName="City">
+                  <show-errors [control]="ContactPersonForm.controls.City" [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" for="ProvDistrictName" translate>Province</label>
+                <div class="col-md-9">
+                  <input type="text" id="ProvDistrictName" class="form-control adInsInput width-25-per"
+                    formControlName="ProvDistrictName">
+                  <show-errors [control]="ContactPersonForm.controls.ProvDistrictName"
+                    [submit]="ContactPersonReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="ucSearch-Button-Right">
+        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch']">
+          <i class=""></i> Back
+        </button>
+    
+        <button type="submit" class="btn btn-raised btn-primary mr-1" [routerLink]="['/employee/EmployeeBusinessUnit/Add']" [queryParams]="{RefUserId:RefUserId}">
+          <i class="fa fa-check-square-o"></i> Add
+        </button>
+    </div>
+    </div>
+  </div>
+</form>
