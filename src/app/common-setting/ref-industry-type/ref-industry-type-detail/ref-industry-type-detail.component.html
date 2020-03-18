@@ -6,11 +6,6 @@
               <div class="col-md-8">
                   <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Industry Type </h4>
               </div>
-              <div class="col-md-4" style="text-align-last: right">
-                <button type="button" class="backButton" (click)="Back()" translate>
-                  <i class="ft-arrow-left"></i> Back
-                </button>
-              </div>
             </div>
         <form class="form form-horizontal" [formGroup]="RefIndustryTypeForm" #enjiForm="ngForm" novalidate
           (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
@@ -18,7 +13,7 @@
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="IndustryTypeCode">Industry Type Code</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" formControlName="IndustryTypeCode" 
+                <input type="text" class="form-control adInsInput adins-required-label code" formControlName="IndustryTypeCode" 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefIndustryTypeForm.controls.IndustryTypeCode.invalid }"
                   [attr.disabled]="type == 'edit' ? true : null">
                 <show-errors [control]="RefIndustryTypeForm.controls.IndustryTypeCode" [submit]="enjiForm.submitted"></show-errors>
@@ -27,29 +22,30 @@
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="IndustryTypeName">Industry Type Name</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput" formControlName="IndustryTypeName" 
+                <input type="text" class="form-control adInsInput adins-required-label" formControlName="IndustryTypeName" 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefIndustryTypeForm.controls.IndustryTypeName.invalid }">
                 <show-errors [control]="RefIndustryTypeForm.controls.IndustryTypeName" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="RefEconomicSectorId" translate>Economic Sector Code </label>
+              <label class="col-md-3 adInsLabel" for="RefEconomicSectorId adins-required-label" translate>Economic Sector Code </label>
               <div class="col-md-3">
                 <lib-uclookupgeneric [lookupInput]="inputLookupObj" [parentForm]='RefIndustryTypeForm' [enjiForm]='enjiForm' [identifier]="'EconomicSectorCode'"
                   (lookup)="getLookupResponse($event)"></lib-uclookupgeneric>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="isActive">Active Status</label>
+              <label class="col-md-3 adInsLabel adins-required-label" for="isActive">Active Status</label>
               <div class="custom-control custom-checkbox m-0">
                 <input type="checkbox" value="1" id="isActive" formControlName="IsActive">
               </div>
             </div>
           </div>
           <div class="form-actions right">
-            <!-- <button *ngIf=" type == 'edit'" type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
-              <i class="fa fa-arrow-circle-left"></i> Back
-            </button> -->
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/IndustryType/paging']"
+                translate>
+                <i class="ft-x"></i> Back
+              </button>
             <button type="submit" class="btn btn-raised btn-primary">
               <i class="fa fa-check-square-o"></i> Save
             </button>
