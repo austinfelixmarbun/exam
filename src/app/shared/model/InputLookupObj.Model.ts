@@ -17,6 +17,6 @@ export class InputLookupObj{
         this.idSelect = "";
         this.nameSelect = "";
         this.addCritInput = null;
-        this.isRequired = false;
+        this.isRequired = true;
     }
 }

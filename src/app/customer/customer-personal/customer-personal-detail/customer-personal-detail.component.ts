@@ -39,15 +39,12 @@ export class CustomerPersonalDetailComponent implements OnInit {
     VipNotes: ['',],
     MobilePhnNo1: ['', Validators.required],
     MobilePhnNo2: ['',],
-    EMail1: ['',],
-    EMail2: ['',],
+    Email1: ['',],
+    Email2: ['',],
   });
   CountryIndonesia = "Indonesia";
   custPersonalObj: any;
   custObj: any;
-    
- 
-   
   tempCountry : any;
   tempNationality: any;
   tempSalutation: any;
@@ -84,16 +81,14 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-//console.log("awdawdwadaaaaaaaaaaaaaaaaaaaaaaaaa");
 
     this.lookUpObj = new InputLookupObj();
- 
     this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.genericJson ="./assets/lookup/lookupCustomerCountry.json";
-
+    this.lookUpObj.isRequired = false;
     this.criteriaList = new Array();
     this.criteriaObj = new CriteriaObj();
     this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
@@ -115,12 +110,12 @@ export class CustomerPersonalDetailComponent implements OnInit {
       (response) => {
         this.tempCustPersonalObj = response;
 
-        var refMasterObj = {
-          RefMasterTypeCode: "NATIONALITY"
-        }
-        this.http.post(this.GetUrl, refMasterObj).subscribe(
-          (response) => {
-            this.tempNationality = response["ReturnObject"];
+          var refMasterObj = {
+            RefMasterTypeCode: "NATIONALITY"
+          }
+          this.http.post(this.GetUrl, refMasterObj).subscribe(
+            (response) => {
+              this.tempNationality = response["ReturnObject"];
 
             if (this.tempCustPersonalObj.MrNationalityCode != null) {
               this.CustomerDetailForm.patchValue({
@@ -237,8 +232,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
       IsVip: this.tempCustPersonalObj.IsVip,
       MobilePhnNo1: this.tempCustPersonalObj.MobilePhnNo1,
       MobilePhnNo2: this.tempCustPersonalObj.MobilePhnNo2,
-      EMail1: this.tempCustPersonalObj.EMail1,
-      EMail2: this.tempCustPersonalObj.EMail2
+      Email1: this.tempCustPersonalObj.Email1,
+      Email2: this.tempCustPersonalObj.Email1
     });
       });  console.log("Awdawd");
   }
@@ -270,8 +265,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
     this.custPersonalObj.MobilePhnNo1 = this.CustomerDetailForm.controls["MobilePhnNo1"].value;
     this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
-    this.custPersonalObj.EMail1 = this.CustomerDetailForm.controls["EMail1"].value;
-    this.custPersonalObj.EMail2 = this.CustomerDetailForm.controls["EMail2"].value;
+    this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
+    this.custPersonalObj.Email2 = this.CustomerDetailForm.controls["Email2"].value;
     this.http.post(this.EditCustPersonalUrl, this.custPersonalObj).subscribe(
       response => {
        

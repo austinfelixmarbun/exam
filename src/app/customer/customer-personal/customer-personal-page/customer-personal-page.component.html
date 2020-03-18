@@ -1,11 +1,13 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
+  
+    <!-- <button type="submit" class="addButton" translate>
+      <i class="fa fa-check-square-o"></i> Save
+    </button>
     <button type="button" class="backButton" [routerLink]="['../MainInfo']" translate>
-      <i class="ft-x"></i> Cancel
-    </button>
-    <button type="submit" class="addButton" translate>
-      <i class="fa fa-check-square-o"></i> Next
-    </button>
+       Cancel
+    </button> -->
+   
   </span>
 </div>
 <div class="col-md-12">
@@ -88,7 +90,7 @@
           </aw-wizard-step>
 
           <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Address')">
-          <app-customer-contact-person *ngIf="isAddress == true" > </app-customer-contact-person>
+          <app-customer-contact-person [inputValue] ="this.IdCust" *ngIf="isAddress == true" > </app-customer-contact-person>
         </aw-wizard-step>
 
         <aw-wizard-step [stepTitle]="'Contact Person'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Contact')">

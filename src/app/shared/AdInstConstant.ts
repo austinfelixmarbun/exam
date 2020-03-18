@@ -551,6 +551,9 @@ export class AdInsConstant {
   public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
   public static GetCustPersonalbyCustId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustId"
  
+  // Customer Personal Contact Person
+  public static AddNewCustPersonalContactPerson = environment.FoundationR3Url + "/CustPersonalContactPerson/AddCustPersonalContactPerson"
+
   // Customer
   public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust"
   public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId"
@@ -573,6 +576,6 @@ export class AdInsConstant {
    
   //ref Country 
   public static GetListRefCountry = environment.FoundationR3Url +"/RefCountry/GetListRefCountry";
-  
+
   public static GetRefCountryByCountryCode = environment.FoundationR3Url + "/RefCountry/GetRefCountryByCountryCode"
  }

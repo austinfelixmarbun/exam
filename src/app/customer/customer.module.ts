@@ -26,6 +26,9 @@ import { NegativeCustomerDetailComponent } from './negative-customer/negative-cu
 import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 import { CustomerContactPersonComponent } from './customer-personal/customer-contact-person/customer-contact-person.component';
+import { CustomerContactAddComponent } from './customer-personal/customer-contact-person/customer-contact-add/customer-contact-add.component';
+import { CustomerContactCheckComponent } from './customer-personal/customer-contact-person/customer-contact-check/customer-contact-check.component';
+import { UcaddressModule } from '@adins/ucaddress';
 @NgModule({
   exports: [ 
   ],
@@ -45,7 +48,8 @@ import { CustomerContactPersonComponent } from './customer-personal/customer-con
     UclookupgenericModule,
     UcSubsectionModule, 
      ArchwizardModule,
-     UcviewgenericModule
+     UcviewgenericModule,
+     UcaddressModule  
   ],
   declarations: [ 
     CustomerPagingComponent, 
@@ -53,7 +57,9 @@ import { CustomerContactPersonComponent } from './customer-personal/customer-con
     NegativeCustomerComponent,
     NegativeCustomerDetailComponent,
     NegativeCustomerViewComponent,
-    CustomerContactPersonComponent
+    CustomerContactPersonComponent, 
+    CustomerContactAddComponent,
+    CustomerContactCheckComponent
   ]
 })
 export class CustomerModule { 
