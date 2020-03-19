@@ -3,14 +3,15 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { WizardComponent } from 'angular-archwizard';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+ 
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
-import { DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common'; 
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-customer-contact-add',
@@ -306,18 +307,18 @@ export class CustomerContactAddComponent implements OnInit {
 
     );
 
-    // this.http.post(AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView, custIdObj).subscribe(
-    //   (response) => {
-    //     this.tempCustAddress = response;
-    //   }
-    // );
-    // this.CustomerContactForm.patchValue({
-    //   ContactPersonName: this.tempCust.CustName,
-    //   MotherMaidenName: this.tempCustPersonal.MotherMaidenName,
-    //   MrIdTypeCode: this.tempCust.MrIdTypeCode,
-    //   MrNationalityCode: this.tempCustPersonal.MrNationalityCode,
-    //   IdNo: this.tempCust.IdNo
-    // });
+    this.http.post(AdInsConstant.GetCustAddrLegalAddrByCustId, this.custIdObj).subscribe(
+      (response) => {
+        this.tempCustAddress = response;
+      }
+    );
+    this.CustomerContactForm.patchValue({
+      ContactPersonName: this.tempCust.CustName,
+      MotherMaidenName: this.tempCustPersonal.MotherMaidenName,
+      MrIdTypeCode: this.tempCust.MrIdTypeCode,
+      MrNationalityCode: this.tempCustPersonal.MrNationalityCode,
+      IdNo: this.tempCust.IdNo
+    });
    
   }
    
