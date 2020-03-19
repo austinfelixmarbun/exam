@@ -50,6 +50,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     });
 
     var custAddrObj = { "CustId": this.CustId };
+    console.log('debug sini');
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
         this.responseResultCustAddr = response['ReturnObject'];

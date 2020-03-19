@@ -1,0 +1,57 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "FinDataId",
+        "subSectionTitle": "Financial Data",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Nett Profit Monthly",
+            "property": "NettProfitMonth"
+          },
+          {
+            "type": "text",
+            "label": "OTHER MONTHLY INSTALLMENT",
+            "property": "OthMonthIns"
+          },
+          {
+            "type": "text",
+            "label": "Other Income",
+            "property": "OthIncome"
+          },
+          {
+            "type": "text",
+            "label": "ASSET MAINTENANCE",
+            "property": "AssetMain"
+          },
+          {
+            "type": "text",
+            "label": "Source Of Other Income",
+            "property": "SrcOthIncome"
+          },
+          {
+            "type": "text",
+            "label": "Nett Income",
+            "property": "NettIncome"
+          },
+          {
+            "type": "text",
+            "label": "Total Income",
+            "property": "TotalIncome"
+          },
+          {
+            "type": "boolean",
+            "label": "Join Income",
+            "property": "JoinIncome"
+          }
+        ],
+        "querystring": {
+          "select": "",
+          "from": "",
+          "where": ""
+        }
+      }
+    ]
+  }
