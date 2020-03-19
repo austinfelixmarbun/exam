@@ -17,6 +17,7 @@ import { ContactPersonAddEditComponent } from './component/contact-person-add-ed
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
 import { BankInfoComponent } from './component/bank-info/bank-info.component';
+import { ContactPersonListComponent } from './component/contact-person-list/contact-person-list.component';
 import { AddressComponent } from './component/address/address.component';
 import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info.component';
 import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
@@ -53,6 +54,13 @@ const routes: Routes = [
         component: ContactPersonAddEditComponent,
         data: {
           title: 'Contact Person Add/Edit'
+        },
+      },
+      {
+        path: 'ContactPerson/List',
+        component: ContactPersonListComponent,
+        data: {
+          title: 'Contact Person List'
         },
       },
       {

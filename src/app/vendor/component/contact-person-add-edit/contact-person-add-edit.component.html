@@ -12,7 +12,8 @@
               <div class="form-group row">
                 <label class="col-md-3 adins-required-label" for="Name" translate>Name</label>
                 <div class="col-md-9">
-                  <input type="Name" id="Name" class="form-control adInsInput width-25-per" formControlName="Name">
+                  <input type="Name" id="Name" class="form-control adInsInput width-25-per"
+                    formControlName="Name">
                   <show-errors [control]="ContactPersonForm.controls.Name" [submit]="ContactPersonReqForm.submitted">
                   </show-errors>
                 </div>
@@ -30,8 +31,9 @@
                   </show-errors>
                 </div>
               </div>
+
               <div class="form-group row">
-                <label class="col-md-3 adins-required-label" for="Phone1" translate>Phone 1</label>
+                <label class="col-md-3 adins-required-label" for="Phn1" translate>Phone 1</label>
                 <div class="col-md-9">
                   <input type="text" id="Phone1" class="form-control adInsInput width-25-per" formControlName="Phone1">
                   <show-errors [control]="ContactPersonForm.controls.Phone1" [submit]="ContactPersonReqForm.submitted">
@@ -68,8 +70,9 @@
               <div class="form-group row">
                 <label class="col-md-3 adins-required-label" for="IsOwner" translate>Owner</label>
                 <div class="col-md-9">
-                  <input type="checkbox" class="border-primary" formControlName="IsOwner">
-                  <show-errors [control]="ContactPersonForm.controls.IsOwner" [submit]="ContactPersonReqForm.submitted">
+                  <input type="checkbox" id="Owner" class="form-control adInsInput width-25-per"
+                    formControlName="Owner">
+                  <show-errors [control]="ContactPersonForm.controls.Owner" [submit]="ContactPersonReqForm.submitted">
                   </show-errors>
                 </div>
               </div>
@@ -144,7 +147,18 @@
             </div>
           </form>
         </div>
+
+      </div>
+      <div class="ucSearch-Button-Right">
+        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch']">
+          <i class=""></i> Back
+        </button>
+
+        <button type="submit" class="btn btn-raised btn-primary mr-1"
+          [routerLink]="['/Vendor/Branch/List']" [queryParams]="{VendorId:VendorId}">
+          <i class="fa fa-check-square-o"></i> Add
+        </button>
       </div>
     </div>
   </div>
-</div>
+</form>
