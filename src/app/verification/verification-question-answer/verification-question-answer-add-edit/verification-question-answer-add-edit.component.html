@@ -5,9 +5,77 @@
         <div class="card-header header-title">
           <div class="row">
             <div class="col-md-8">
-              <h4 class="card-title" id="horz-layout-colored-controls" translate> VERIFICATION QUESTION ANSWER ADD </h4>
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> VERIFICATION QUESTION ANSWER {{mode}}
+              </h4>
             </div>
           </div>
+        </div>
+        <div class="px-3">
+          <form class="form form-horizontal" [formGroup]="QuestionAnswerForm"
+            (ngSubmit)="QuestionAnswerForm.valid && SaveForm()" #enjiForm="ngForm">
+            <lib-ucSubsection [id]="'QuestionAnswerId'" [title]="'Verification Question Answer'"
+              [panel]="'QuestionAnswer'">
+            </lib-ucSubsection>
+            <div class="form-body" id="QuestionAnswer">
+
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Verification Question Code </label>
+                <div class="col-md-3">
+                  <input type="text" class="form-control adInsInput width-75-per" [attr.disabled]="mode == 'edit' ? true : null" formControlName="VerfQuestionCode">
+                  <show-errors [control]="QuestionAnswerForm.controls.VerfQuestionCode" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Verification Question Text </label>
+                <div class="col-md-3">
+                  <input type="text" class="form-control adInsInput width-75-per" formControlName="VerfQuestionText">
+                  <show-errors [control]="QuestionAnswerForm.controls.VerfQuestionText" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" translate>Verification Answer Type </label>
+                <div class="col-md-3">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="RefVerfAnswerTypeId" (change)="AnswerTypeChanged($event.target.value)"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && QuestionAnswerForm.controls.RefVerfAnswerTypeId.invalid }">
+                    <option *ngFor="let it of itemVerfQuestionAnswer" value="{{it.RefVerfAnswerTypeId}}">
+                      {{it.VerfAnswerTypeCode}}</option>
+                  </select>
+                  <show-errors [control]="QuestionAnswerForm.controls.RefVerfAnswerTypeId" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div *ngIf="answerTypeValue == 'DDL'" class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Verification Answer </label>
+                <div class="col-md-3">
+                  <input type="text" class="form-control adInsInput width-75-per" formControlName="VerfAnswer">
+                  <show-errors [control]="QuestionAnswerForm.controls.VerfAnswer" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Active Status </label>
+                <div class="col-md-9">
+                  <input type="checkbox" class="border-primary" formControlName="IsActive">
+                </div>
+              </div>
+
+              <div class="form-actions right">
+                <button type="button" class="btn btn-raised btn-warning mr-1"
+                  [routerLink]="['/Verification/QuestionAnswerPaging']" translate>
+                  <i class="fa fa-arrow-circle-left"></i> Back
+                </button>
+                <button type="submit" class="btn btn-raised btn-primary" translate>
+                  <i class="fa fa-check"></i> Submit
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

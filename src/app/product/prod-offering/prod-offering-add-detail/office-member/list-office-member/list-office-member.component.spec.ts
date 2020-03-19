@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListOfficeMemberComponent } from './list-office-member.component';
+import { ListOfficeMemberComponentOffering } from './list-office-member.component';
 
-describe('ListOfficeMemberComponent', () => {
-  let component: ListOfficeMemberComponent;
-  let fixture: ComponentFixture<ListOfficeMemberComponent>;
+describe('ListOfficeMemberComponentOffering', () => {
+  let component: ListOfficeMemberComponentOffering;
+  let fixture: ComponentFixture<ListOfficeMemberComponentOffering>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListOfficeMemberComponent ]
+      declarations: [ ListOfficeMemberComponentOffering ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListOfficeMemberComponent);
+    fixture = TestBed.createComponent(ListOfficeMemberComponentOffering);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
