@@ -220,7 +220,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.arrCritSurHo.push(critObjSurveyor);
     this.inputLookupParentSurveyorObj.addCritInput = this.arrCritSurHo;
 
-
     var critObjAssetInsurance = new CriteriaObj();
     critObjAssetInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
     critObjAssetInsurance.restriction = AdInsConstant.RestrictionEq;
@@ -242,9 +241,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     critObjAgencyPersonal.value = "AGENCY_PERSONAL";
     this.arrCritAgP.push(critObjAgencyPersonal);
     this.inputLookupAgencyPersonal.addCritInput = this.arrCritAgP;
-
-
-    
 
     this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();
@@ -422,7 +418,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.AddVendorHO, this.vendorHoObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/Vendor/HO/Registration'],{queryParams :{"VendorId" : response['VendorObj'].VendorId}});
+          this.router.navigate(['/Vendor/Branch/Registration'],{queryParams :{"VendorId" : response['VendorObj'].VendorId}});
         },
         (error) => {
           console.log(error);
