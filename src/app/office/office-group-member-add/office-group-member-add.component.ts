@@ -85,9 +85,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     this.inputObj.addCritInput.push(addCritTypeOCode);
     this.inputObj.addCritInput.push(addCritIsActive);
 
-
-    console.log(this.inputObj);
-
     this.viewObj = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
     this.pageNow = 1;
     this.pageSize = 10;
@@ -111,15 +108,12 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   }
 
   Checked(RefOfficeId: any, isChecked: any): void {
-    console.log(RefOfficeId);
     if (isChecked) {
       this.listSelectedId.push(RefOfficeId);
     } else {
       const index = this.listSelectedId.indexOf(RefOfficeId)
-      console.log(index);
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
-    console.log('Sel', this.listSelectedId);
   }
   
   searchPagination(event: number) {
@@ -190,7 +184,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
   SelectAll(condition) {
     this.checkboxAll = condition;
-    console.log(condition);
     if (condition) {
       for (let i = 0; i < this.resultData.Data.length; i++) {
         if (this.listSelectedId.indexOf(this.resultData.Data[i].RefOfficeId) < 0) {
@@ -204,11 +197,8 @@ export class OfficeGroupMemberAddComponent implements OnInit {
         if (index > -1) {
           this.listSelectedId.splice(index, 1);
         }
-        console.log(this.resultData.Data[i]);
       }
     }
-    console.log(this.checkboxAll);
-    console.log(this.listSelectedId);
   }
 
   deleteFromTemp(RefOfficeId: any) {
@@ -253,7 +243,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
     this.http.post(AdInsConstant.AddCenterGrpOfficeMember, obj).subscribe(
         (response) => {
-            console.log(response);
             this.router.navigate(['/Office/Office-group-member'], {queryParams: {RefOfficeId:this.RefOfficeId, CenterGrpId:this.CenterGrpId}});
         },
         (error) => {
@@ -286,8 +275,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
           this.arrCrit.push(addCritListRefOffice);
           this.inputObj.addCritInput.push(addCritListRefOffice);
         }
-
-        console.log("ni sudah jalan get List")
       },
       (error) => {
         console.log(error);

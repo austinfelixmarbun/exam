@@ -156,841 +156,502 @@ export class AdInsConstant {
     public static AddEmpPosition = "/EmpPosition/AddEmpPosition";
     public static EditEmpPosition = "/EmpPosition/EditEmpPosition";
     public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
-  public static GetListUserEmployee = "/EmpPosition/GetListUserEmployee";
-
-  //REF-USER
-  public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
-  public static AddRefUser = "/UserManagement/AddRefUser";
-  public static EditRefUser = "/UserManagement/EditRefUser";
-  public static EditRefUserForRefEmpR3 = "/RefUser/EditRefUserForRefEmp";
-  public static ChangePassword = "/UserManagement/ChangePassword";
-  public static GetRefUser = "/UserManagement/GetRefUser";
-  public static GetUserByUsername = "/UserManagement/GetUserByUsername";
-  public static ValidatePwd = "/UserManagement/ValidatePwd";
-  public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
-  public static ResetPassword = "/UserManagement/ResetPassword";
-  public static AddRefUserR3 = "/RefUser/AddRefUser";
-  public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
-  public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
-  public static AddRefUserRole = environment.FoundationR3Url + "/RefUserRole/AddRefUserRole"
-  public static EditRefUserRole = environment.FoundationR3Url + "/RefUserRole/EditRefUserRole";
-  public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
-  public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
-  //REF-ROLE
-  public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
-  public static AddRefRole = environment.FoundationR3Url + "/RefRole/AddRefRole";
-  public static EditRefRole = environment.FoundationR3Url + "/RefRole/EditRefRole";
-  public static DeleteRefRole = "/RefRole/DeleteRefRole";
-  public static GetRefRoleByRefRoleId = environment.FoundationR3Url + "/RefRole/GetRefRoleById";
-  public static GetRefRoleByCode = environment.FoundationR3Url + "/RefRole/GetRefRoleByCode";
-  public static GetActiveRefRoleByRefRoleId = "/RefRole/GetActiveRefRoleByRefRoleId";
-  public static GetRefRole = "/RefRole/GetRefRole";
-  public static GetListDataCurrentUser = "/UserManagement/GetListDataCurrentUser";
-  public static GetRefRoleByEmpPositionId = "/RefRole/GetRefRoleByEmpPositionId";
-  public static EditUserTitleRole = "/UserManagement/EditUserTitleRole";
-  public static AddUserTitleRole = "/UserManagement/AddUserTitleRole";
-  public static AssignRoleToUsers = "/UserManagement/AssignRoleToUsers";
-  public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
-
-  //ZIPCODE
-  public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
-  public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
-  public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
-  public static EditRefZipcode = environment.FoundationR3Url + "/RefZipcode/EditRefZipCode";
-  public static AddRefZipcode = environment.FoundationR3Url + "/RefZipcode/AddRefZipCode";
-  public static DeleteRefZipcode = environment.FoundationR3Url + "/RefZipcode/DeleteRefZipCode";
-  public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
-  public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
-
-  //OFFICE ZIPCODE MEMBER
-  public static GetOfficeZipCodeMemberPaging = "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
-  public static GetRefOfficeZipcodePaging = "/OfficeZipcodeMember/GetRefOfficeZipcodePaging";
-  public static AddOfficeZipcodeMember = "/OfficeZipcodeMember/AddOfficeZipcodeMember";
-  public static DeleteOfficeZipcodeMember = "/OfficeZipcodeMember/DeleteOfficeZipcodeMember";
-
-  //BUSINESS UNIT
-  public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
-  public static GetRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
-  public static AddRefBizUnit = "/RefBizUnit/AddRefBizUnit";
-  public static EditRefBizUnit = "/RefBizUnit/EditRefBizUnit";
-  public static DeleteRefBizUnit = "/RefBizUnit/DeleteRefBizUnit";
-  
-  //REF COY
-  public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
-  public static GetRefCoy = "/RefCoy/GetRefCoy";
-  public static EditRefCoy = "/RefCoy/EditRefCoy";
-  public static GetCoyBodPaging = "/CoyBod/GetCoyBodPaging";
-  public static AddCoyBod = "/CoyBod/AddCoyBOD";
-  public static EditCoyBod = "/CoyBod/EditCoyBOD";
-  public static DeleteCoyBod = "/CoyBod/DeleteCoyBOD";
-  public static GetCoyBod = "/CoyBod/GetCoyBod";
-  public static GetCommissionerPaging = "/CoyCommissioner/GetCoyCommissionerPaging";
-  public static AddCoyCommissioner = "/CoyCommissioner/AddCoyCommissioner";
-  public static EditCoyCommissioner = "/CoyCommissioner/EditCoyCommissioner";
-  public static DeleteCoyCommissioner = "/CoyCommissioner/DeleteCoyCommissioner";
-  public static GetCoyCommissioner = "/CoyCommissioner/GetCoyCommissioner";
-
-  //REF TAX OFFICE
-  public static GetAllActiveRefTaxOffice = "/RefTaxOffice/GetAllActiveRefTaxOffice";
-
-  //REF MASTER
-  public static GetRefMasterList = "/RefMaster/GetRefMasterList";
-  public static GetRefMastersByCriteria = "/RefMaster/GetRefMastersByCriteria";
-  public static GetRefMaster = "/RefMaster/GetRefMaster";
-  public static GetRefMasterListByTypeCode = "/RefMaster/GetRefMasterListByTypeCode";
-  public static GetRefMasterListKeyValuePair = "/RefMaster/GetRefMasterListKeyValuePair";
-  public static AddRefMaster = "/RefMaster/AddRefMaster";
-  public static EditRefMaster = "/RefMaster/EditRefMaster";
-  public static GetRefMasterType = "/RefMaster/GetRefMasterType";
-  public static GetRefMasterTypeKeyValueUserSetting = "/RefMaster/GetRefMasterTypeKeyValueUserSetting";
-  public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
-  public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
-  public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
-  public static GetRefMasterListKeyValueActiveByCode = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode"
-  public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
-  public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
-  public static GetListActiveRefMaster = environment.FoundationR3Url +"/RefMaster/GetListKeyValueActiveByCode";
-  public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
-
-  //REF INDUSTRY TYPE
-  public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
-  public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
-  public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
-  public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
-
-  //REF PROV DISTRICT
-  public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
-
-  //MENU
-  public static GetRefFormPaging = "/MenuManagement/GetRefFormPaging";
-  public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
-  public static GetRefFormByRefFormId = "/MenuManagement/GetRefFormByRefFormId";
-  public static EditRefForm = "/MenuManagement/EditRefForm";
-  public static AddRefForm = "/MenuManagement/AddRefForm";
-  public static DeleteRefForm = "/MenuManagement/DeleteRefForm";
-  public static AssignRoleToForms = "/MenuManagement/AssignRoleToForms";
-  public static GetAllAuthFormsByRefRoleId = "/MenuManagement/GetAllAuthFormsByRefRoleId";
-  public static GetAuthByRefFormIdAndRefRoleId = "/MenuManagement/GetAuthByRefFormIdAndRefRoleId";
-  public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
-  public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
-  public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
-  public static LoginByRole = "/Authenticate/LoginByRole";
-  public static LoginByToken = "/Authenticate/LoginByToken";
-  public static UpdateToken = "/Authenticate/UpdateRole";
-
-  //FORM FEATURE
-  public static GetListRefFeature = "/RefFeature/GetListRefFeature";
-  public static GetRefFeatureByComponent = "/RefFeature/GetRefFeatureByComponent";
-
-  //HOLIDAY
-  public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
-  public static GetListActiveHolidaySchemeH = environment.FoundationR3Url + "/HolidaySchm/GetListActiveHolidaySchemeH"
-  public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
-  public static AddHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmH";
-  public static AddHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmD";
-  public static AddHolidaySchmDUntilYear = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmDUntilYear";
-  public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
-  public static GetHolidaySchmHById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmHById";
-  public static GetHolidaySchmDById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmDById";
-  public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
-  public static EditHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmH";
-  public static EditHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmD";
-  public static DeleteHolidaySchmH = "/HolidaySchm/DeleteHolidaySchmH";
-  public static DeleteHolidaySchmD = "/HolidaySchm/DeleteHolidaySchmD";
-  public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
-  public static CopyHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/CopyHolidaySchmH";
-
-  //USER SESSION LOG
-  public static SelectRole = "/UserSessionLog/SelectRole";
-
-  //NOTIFICATION
-  public static NotificationPost = "/Message/Post";
-  public static NotificationSignalR = "/notification";
-
-  //REF CURR
-
-  public static GetRefCurrPaging = "/RefCurr/GetRefCurrPaging";
-  public static AddRefCurr = environment.FoundationR3Url + "/RefCurr/AddRefCurr";
-  public static EditRefCurr = environment.FoundationR3Url + "/RefCurr/EditRefCurr";
-  public static GetRefCurrById = environment.FoundationR3Url + "/RefCurr/GetRefCurrById";
-
-  //REF ECONOMIC SECTOR
-
-  public static AddRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/AddRefEconomicSector";
-  public static EditRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/EditRefEconomicSector";
-  public static DeleteRefEconomicSector = "/RefEconomicSector/DeleteRefEconomicSector";
-  public static GetRefEconomicSectorById = environment.FoundationR3Url + "/RefEconomicSector/GetRefEconomicSectorById";
-
-  //REF PROV DISTRICT
-
-  public static AddRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/AddRefProvDistrict";
-  public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
-  public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
-  public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
-
-  //ASSET MASTER
-  public static AddAssetMaster = environment.FoundationR3Url + "/AssetMaster/AddAssetMaster";
-  public static EditAssetMaster = environment.FoundationR3Url + "/AssetMaster/EditAssetMaster";
-  public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
-  public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
-  public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueActiveById";
-  public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
-  public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
-  public static GetListAssetMasterByAssetSchmHId = environment.FoundationR3Url + "/AssetMaster/GetListAssetMasterByAssetSchmHId";
-  public static EditListAssetSchmDByAssetMasterId = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmDByAssetMasterId";
-  
-  //REF PROFESSION
-  public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
-  public static EditRefProfession = environment.FoundationR3Url + "/RefProfession/EditRefProfession";
-  public static DeleteRefProfession = "/RefProfession/DeleteRefProfession";
-  public static GetRefProfessionById = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByRefProfessionId";
-  public static GetValueCustModel = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByCode";
-
-  //GENERIC
-  public static GetObjectBySQL = "/Generic/GetObjectBySQL";
-  public static AddObjectBySQL = "/Generic/AddObjectBySQL";
-  public static UpdateObjectBySQL = "/Generic/UpdateObjectBySQL";
-  public static DeleteObjectBySQL = "/Generic/DeleteObjectBySQL";
-
-  //WORKHOUR
-  public static GetListActiveWorkingSchmH = environment.FoundationR3Url + "/WorkingHourSchm/GetListActiveWorkingSchmH";
-  public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
-  public static AddWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/AddWorkingHourSchmH";
-  public static AddListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/AddListWorkingHourSchmD";
-  public static EditListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/EditListWorkingHourSchmD";
-  public static EditWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/EditWorkingHourSchmH";
-  public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
-  public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
-  public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
-  public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchm";
-  public static GetWorkingHourSchmHById = environment.FoundationR3Url + "/WorkingHourSchm/GetWorkingHourSchmHById";
-  public static GetListWorkingHourSchmDByWorkingHourHId = environment.FoundationR3Url + "/WorkingHourSchm/GetListWorkingHourSchmDByWorkingHourHId";
-
-
-
-  //QUEUE
-  public static AddQueue = "http://R3App-Server/FOUNDATION/RabbitMq/AddQueue";
-
-  //REF MODULE
-  public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
-  public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
-  public static GetListKeyValueById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
-
-  //REF EMP LEAVE MANAGEMENT
-  public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
-  public static DeleteRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/DeleteRefEmpLeaveMngmnt";
-  public static GetRefEmpLeaveMngmntById = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/GetRefEmpLeaveByRefEmpLeaveId";
-  public static EditRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/EditRefEmpLeaveMngmnt";
-  public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
-
-  //UPLOAD MONITORING FOUNDATION
-  public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging";
-
-  //UPLOAD TYPE
-  public static GetUploadTypeByUploadTypeId = "/UploadType/GetUploadTypeByUploadTypeId";
-  public static GetUploadTypePaging = "/UploadType/GetUploadTypePaging";
-
-  //UPLOAD SETTING
-  public static GetUploadSettingHIdByUploadTypeId = "/UploadSetting/GetUploadSettingHIdByUploadTypeId";
-  public static GetListUploadSettingDIdByUploadSettingHId = "/UploadSetting/GetListUploadSettingDIdByUploadSettingHId";
-  public static GetListUploadSettingDIdByUploadTypeId = "/UploadSetting/GetListUploadSettingDIdByUploadTypeId";
-  public static AssignRoleToUploadSetting = "/UploadSetting/AssignRoleToUploadSetting";
-  public static GetListRefRoleByUploadTypeId = "/UploadSetting/GetListRefRoleByUploadTypeId";
-  public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId';
-
-  // GENERIC
-  public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
-
-  // ASSET TYPE
-  public static AddAssetType = environment.FoundationR3Url + "/AssetType/AddAssetType"
-  public static EditAssetType = environment.FoundationR3Url + "/AssetType/EditAssetType"
-  public static GetAssetTypeByCode = environment.FoundationR3Url + "/AssetType/GetAssetTypeByCode"
-  public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById"
-  public static GetListAssetType = environment.FoundationR3Url + "/AssetType/GetListAssetType"
-  public static GetListActiveAssetType = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType"
-  public static DeleteAssetType = "/AssetType/DeleteAssetType"
-
-  // PRODUCT
-  public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
-  public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
-  public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
-  public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
-  public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId"
-  public static GetListProdHVersionByProdHId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdHId";
-  public static AddProductOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProductOfficeMbrBatch";
-  public static DeleteProductOfficeMbr = environment.FoundationR3Url + "/Product/DeleteProductOfficeMbr";
-  public static GetListProdHVersionByProdId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdId";
-  public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
-  public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
-  
-  //PRODUCT OFFERING
-  public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
-  public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
-  public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
-  public static AddOrEditProdOfferingDetail = environment.FoundationR3Url + "/ProductOffering/AddOrEditProdOfferingDetail";
-  public static GetProdOfferingDetailInfo = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingDetailInfo";
-  public static GetListProdOfferingVersionByProdId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingVersionByProdId"
-  public static GetListProdOfferingBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHId"
-  public static GetListProdOfferingHVersionByProdOfferingHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingHVersionByProdOfferingHId"
-  public static GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode"
-  public static RequestOfferingDeactivation = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationProdOffering"
-  public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
-  public static GetProdOfferingHByCodeAndVerion = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingHByCodeAndVerion";
-  
-  // PRODUCT COMPONENT
-  public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
-  public static GetProductOfferingComponent = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponent";
-  public static GetProductOfferingComponentGrouped = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponentGrouped";
-
-  public static DeleteProdOfferingOfficeMbr = environment.FoundationR3Url + "/ProductOffering/DeleteProdOfferingOfficeMbr";
-  public static AddProdOfferingOfficeMbrBatch = environment.FoundationR3Url + "/ProductOffering/AddProdOfferingOfficeMbrBatch";
-
-  //REF REASON
-  public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
-
-  //asset accesory
-  public static AddNewAssetAccesory =  environment.FoundationR3Url + "/AssetAccessory/AddAssetAccessory"
-  public static EditAssetAccessory =  environment.FoundationR3Url+"/AssetAccessory/EditAssetAccessory"
-  public static GetAssetAccessorybyAssetAccesoryCode = environment.FoundationR3Url+ "/AssetAccessory/GetAssetAccessoryByCode"
-  public static GetAssetAccessorybyAssetAccessoryId =  environment.FoundationR3Url+"/AssetAccessory/GetAssetAccessoryById"
-  public static GetlistAssetAccessorybyAssetTypeId =  environment.FoundationR3Url+"/AssetAccessory/GetListAssetAccessoryByAssetTypeId"
-  public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory"
-
-  //asset category
-  public static AddNewAssetCategory = environment.FoundationR3Url +  "/AssetCategory/AddAssetCategory"
-  public static EditAssetCategory =  environment.FoundationR3Url+ "/AssetCategory/EditAssetCategory"
-  public static GetAssetCategoryByAssetCategoryCode = environment.FoundationR3Url+  "/AssetCategory/GetAssetCategoryByCode"
-  public static GetAssetCategorybyAssetCategoryId =  environment.FoundationR3Url+ "/AssetCategory/GetAssetCategoryById"
-  public static GetlistAssetCategorybyAssetTypeId = environment.FoundationR3Url+ "/AssetCategory/GetListAssetCategoryByAssetTypeId"//
-  public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory"
-  public static GetActiveAssetCategoryValue = environment.FoundationR3Url + "/AssetCategory/GetListActiveAssetCategoryValue"
-
-  
-
-  //asset doc list
-  public static AddNewAssetDocList = environment.FoundationR3Url + "/AssetDocList/AddAssetDocList"
-  public static EditAssetDocList = environment.FoundationR3Url +"/AssetDocList/EditAssetDocList"
-  public static GetAssetDocListByAssetDocListId = environment.FoundationR3Url + "/AssetDocList/GetAssetDocListById"
-  public static GetlistAssetDocListByAssetTypeId = environment.FoundationR3Url + "/AssetDocList/GetListAssetDocListByAssetTypeId"
-  public static DeleteAssetDocList = "/AssetDocList/DeleteAssetDocList"
-
-  //asset ref doc
-  public static AddNewRefAssetDocData = environment.FoundationR3Url +"/RefAssetDoc/AddRefAssetDoc"
-  public static EditRefAssetDocData = environment.FoundationR3Url +"/RefAssetDoc/EditRefAssetDoc"
-  public static GetRefAssetDocByAssetDocCode = environment.FoundationR3Url +"/RefAssetDoc/GetRefAssetDocByAssetDocCode"
-  public static GetRefAssetDocByRefAssetDocId =environment.FoundationR3Url + "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
-  public static GetListRefAssetDoc = environment.FoundationR3Url +"/RefAssetDoc/GetListRefAssetDoc"
-  public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
-   
-  //Asset Scheme
-  public static GetAssetSchmHById =   environment.FoundationR3Url + "/AssetSchmH/GetAssetSchmHById";
-  public static AddAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/AddAssetSchmH";
-  public static EditAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmH";
-  public static GetListAssetSchmDByAssetSchmHId = environment.FoundationR3Url +  "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
-  public static EditAssetSchmHAndD = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmHAndD"
-  public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
-  public static AddListAssetSchmD =  environment.FoundationR3Url  + "/AssetSchmD/AddListAssetSchmD";
-  public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
-
-  // ASSET TYPE
-  public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
-  
-  // ASSET NEGATIVE
-  public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
-  public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
-  public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
-
-  //VENDOR
-  public static DeleteVendor ="/Vendor/DeleteVendor";
-  public static AddVendorHO = environment.FoundationR3Url + "/Vendor/AddVendorHO";
-  public static EditVendorHO = environment.FoundationR3Url + "/Vendor/EditVendorHO";
-  public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
-  public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
-  public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
-  
-  public static GetListVendorBankAccByVendorId = environment.localHostUrl + "/VendorBankAcc/GetListVendorBankAccByVendorId";
-  public static AddVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/AddVendorBankAcc";
-  public static EditVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/EditVendorBankAcc";
-  public static GetVendorBankAccByVendorBankAccId = environment.localHostUrl + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
-  
-
-  //VENDOR GROUP
-  public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
-  public static EditVendorGrp = environment.FoundationR3Url + "/VendorGrp/EditVendorGrp";
-  public static GetVendorGrpByVendorGrpCode = environment.FoundationR3Url + "/VendorGrp/GetVendorGrpByVendorGrpCode";
-  public static GetVendorGrpByVendorGrpId =environment.FoundationR3Url  + "/VendorGrp/GetVendorGrpByVendorGrpId";
-  public static GetVendorGrpForUpdateByVendorGrpCode =environment.FoundationR3Url  + "/VendorGrp/GetVendorGrpForUpdateByVendorGrpCode";
-  public static GetVendorGrpForUpdateByVendorGrpId = environment.FoundationR3Url + "VendorGrp/GetVendorGrpForUpdateByVendorGrpId";
-
- //VENDOR GROUP MEMBER 
-  public static AddRangeVendorGrpMbr = environment.FoundationR3Url +"/VendorGrpMbr/AddRangeVendorGrpMbr";
-  public static DeleteRangeVendorGrpMbrByIds  = environment.FoundationR3Url + "/VendorGrpMbr/DeleteRangeVendorGrpMbrByIds"
-  public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId"
-  public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId"
-
-
-
-  //VENDOR SCHEME
-  public static AddVendorSchm = environment.FoundationR3Url + "/VendorSchm/AddVendorSchm";
-  public static EditVendorSchm = environment.FoundationR3Url + "/VendorSchm/EditVendorSchm";
-  public static DeleteVendorSchm = "/VendorSchm/DeleteVendorSchm";
-  public static GetVendorSchmByVendorSchmId = environment.FoundationR3Url + "/VendorSchm/GetVendorSchmByVendorSchmId";
-  public static AddVendorSchmMember = environment.FoundationR3Url + "/VendorSchmMbr/AddVendorSchmMember";
-  public static DeleteVendorSchmMember = "/VendorSchmMbr/DeleteVendorSchmMember"
-  public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
-
-  //Customer Personal
-  public static AddNewCustPersonal = environment.FoundationR3Url + "/CustPersonal/AddCustPersonal"
-  public static EditCustPersonal = environment.FoundationR3Url + "/CustPersonal/EditCustPersonal"
-  public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
-  public static GetCustPersonalbyCustId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustId"
- 
-  // Customer
-  public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust"
-  public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId"
-  public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
-  public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
-
-  // CUSTOMER GROUP
-  public static AddCustGrpBothWays = environment.FoundationR3Url + "/CustGrp/AddCustGrpBothWays";
-  public static AddCustGrp = environment.FoundationR3Url + "/CustGrp/AddCustGrp";
-  public static DeleteCustGrp = environment.FoundationR3Url + "/CustGrp/DeleteCustGrp";
-
-  // CUSTOMER FIN DATA
-  public static GetCBAForCustFinDataByCustId = environment.FoundationR3Url + "/CustBankAcc/GetCBAForCustFinDataByCustId";
-
-  // NEGATIVE CUSTOMER
-  public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
-  public static EditNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/EditNegativeCust";
-  public static GetNegativeCustByNegativeCustId = environment.FoundationR3Url + "/NegativeCust/GetNegativeCustByNegativeCustId";
-  public static AddNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/AddNegativeCustChangeTrx";
-  public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
-  public static GetNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetNegativeCustChangeTrxByNegativeCustId";   
- 
- 
-  public static GetListNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetListNegativeCustChangeTrxByNegativeCustId";
-  //REF BEHAVIOUR
-  
-  public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
-  public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
-
-  //REF COUNTRY
-  public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
-   
-    // public static GetListUserEmployee = "/EmpPosition/GetListUserEmployee";
-
-    // //REF-USER
-    // public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
-    // public static AddRefUser = "/UserManagement/AddRefUser";
-    // public static EditRefUser = "/UserManagement/EditRefUser";
-    // public static EditRefUserForRefEmpR3 = "/RefUser/EditRefUserForRefEmp";
-    // public static ChangePassword = "/UserManagement/ChangePassword";
-    // public static GetRefUser = "/UserManagement/GetRefUser";
-    // public static GetUserByUsername = "/UserManagement/GetUserByUsername";
-    // public static ValidatePwd = "/UserManagement/ValidatePwd";
-    // public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
-    // public static ResetPassword = "/UserManagement/ResetPassword";
-    // public static AddRefUserR3 = "/RefUser/AddRefUser";
-    // public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
-    // public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
-    // public static AddRefUserRole = environment.FoundationR3Url + "/RefUserRole/AddRefUserRole"
-    // public static EditRefUserRole = environment.FoundationR3Url + "/RefUserRole/EditRefUserRole";
-    // public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
-    // public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
-    // //REF-ROLE
-    // public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
-    // public static AddRefRole = environment.FoundationR3Url + "/RefRole/AddRefRole";
-    // public static EditRefRole = environment.FoundationR3Url + "/RefRole/EditRefRole";
-    // public static DeleteRefRole = "/RefRole/DeleteRefRole";
-    // public static GetRefRoleByRefRoleId = environment.FoundationR3Url + "/RefRole/GetRefRoleById";
-    // public static GetRefRoleByCode = environment.FoundationR3Url + "/RefRole/GetRefRoleByCode";
-    // public static GetActiveRefRoleByRefRoleId = "/RefRole/GetActiveRefRoleByRefRoleId";
-    // public static GetRefRole = "/RefRole/GetRefRole";
-    // public static GetListDataCurrentUser = "/UserManagement/GetListDataCurrentUser";
-    // public static GetRefRoleByEmpPositionId = "/RefRole/GetRefRoleByEmpPositionId";
-    // public static EditUserTitleRole = "/UserManagement/EditUserTitleRole";
-    // public static AddUserTitleRole = "/UserManagement/AddUserTitleRole";
-    // public static AssignRoleToUsers = "/UserManagement/AssignRoleToUsers";
-    // public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
-
-    // //ZIPCODE
-    // public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
-    // public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
-    // public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
-    // public static EditRefZipcode = environment.FoundationR3Url + "/RefZipcode/EditRefZipCode";
-    // public static AddRefZipcode = environment.FoundationR3Url + "/RefZipcode/AddRefZipCode";
-    // public static DeleteRefZipcode = environment.FoundationR3Url + "/RefZipcode/DeleteRefZipCode";
-    // public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
-    // public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
-
-    // //OFFICE ZIPCODE MEMBER
-    // public static GetOfficeZipCodeMemberPaging = "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
-    // public static GetRefOfficeZipcodePaging = "/OfficeZipcodeMember/GetRefOfficeZipcodePaging";
-    // public static AddOfficeZipcodeMember = "/OfficeZipcodeMember/AddOfficeZipcodeMember";
-    // public static DeleteOfficeZipcodeMember = "/OfficeZipcodeMember/DeleteOfficeZipcodeMember";
-
-    // //BUSINESS UNIT
-    // public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
-    // public static GetRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
-    // public static AddRefBizUnit = "/RefBizUnit/AddRefBizUnit";
-    // public static EditRefBizUnit = "/RefBizUnit/EditRefBizUnit";
-    // public static DeleteRefBizUnit = "/RefBizUnit/DeleteRefBizUnit";
-
-    // //REF COY
-    // public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
-    // public static GetRefCoy = "/RefCoy/GetRefCoy";
-    // public static EditRefCoy = "/RefCoy/EditRefCoy";
-    // public static GetCoyBodPaging = "/CoyBod/GetCoyBodPaging";
-    // public static AddCoyBod = "/CoyBod/AddCoyBOD";
-    // public static EditCoyBod = "/CoyBod/EditCoyBOD";
-    // public static DeleteCoyBod = "/CoyBod/DeleteCoyBOD";
-    // public static GetCoyBod = "/CoyBod/GetCoyBod";
-    // public static GetCommissionerPaging = "/CoyCommissioner/GetCoyCommissionerPaging";
-    // public static AddCoyCommissioner = "/CoyCommissioner/AddCoyCommissioner";
-    // public static EditCoyCommissioner = "/CoyCommissioner/EditCoyCommissioner";
-    // public static DeleteCoyCommissioner = "/CoyCommissioner/DeleteCoyCommissioner";
-    // public static GetCoyCommissioner = "/CoyCommissioner/GetCoyCommissioner";
-
-    // //REF TAX OFFICE
-    // public static GetAllActiveRefTaxOffice = "/RefTaxOffice/GetAllActiveRefTaxOffice";
-
-    // //REF MASTER
-    // public static GetRefMasterList = "/RefMaster/GetRefMasterList";
-    // public static GetRefMastersByCriteria = "/RefMaster/GetRefMastersByCriteria";
-    // public static GetRefMaster = "/RefMaster/GetRefMaster";
-    // public static GetRefMasterListByTypeCode = "/RefMaster/GetRefMasterListByTypeCode";
-    // public static GetRefMasterListKeyValuePair = "/RefMaster/GetRefMasterListKeyValuePair";
-    // public static AddRefMaster = "/RefMaster/AddRefMaster";
-    // public static EditRefMaster = "/RefMaster/EditRefMaster";
-    // public static GetRefMasterType = "/RefMaster/GetRefMasterType";
-    // public static GetRefMasterTypeKeyValueUserSetting = "/RefMaster/GetRefMasterTypeKeyValueUserSetting";
-    // public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
-    // public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
-    // public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
-    // public static GetRefMasterListKeyValueActiveByCode = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode"
-    // public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
-    // public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
-    // public static GetListActiveRefMaster = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode";
-    // public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";    
-
-
-    // //REF INDUSTRY TYPE
-    // public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
-    // public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
-    // public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
-    // public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
-
-    // //REF PROV DISTRICT
-    // public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
-
-    // //MENU
-    // public static GetRefFormPaging = "/MenuManagement/GetRefFormPaging";
-    // public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
-    // public static GetRefFormByRefFormId = "/MenuManagement/GetRefFormByRefFormId";
-    // public static EditRefForm = "/MenuManagement/EditRefForm";
-    // public static AddRefForm = "/MenuManagement/AddRefForm";
-    // public static DeleteRefForm = "/MenuManagement/DeleteRefForm";
-    // public static AssignRoleToForms = "/MenuManagement/AssignRoleToForms";
-    // public static GetAllAuthFormsByRefRoleId = "/MenuManagement/GetAllAuthFormsByRefRoleId";
-    // public static GetAuthByRefFormIdAndRefRoleId = "/MenuManagement/GetAuthByRefFormIdAndRefRoleId";
-    // public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
-    // public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
-    // public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
-    // public static LoginByRole = "/Authenticate/LoginByRole";
-    // public static LoginByToken = "/Authenticate/LoginByToken";
-    // public static UpdateToken = "/Authenticate/UpdateRole";
-
-    // //FORM FEATURE
-    // public static GetListRefFeature = "/RefFeature/GetListRefFeature";
-    // public static GetRefFeatureByComponent = "/RefFeature/GetRefFeatureByComponent";
-
-    // //HOLIDAY
-    // public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
-    // public static GetListActiveHolidaySchemeH = environment.FoundationR3Url + "/HolidaySchm/GetListActiveHolidaySchemeH"
-    // public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
-    // public static AddHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmH";
-    // public static AddHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmD";
-    // public static AddHolidaySchmDUntilYear = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmDUntilYear";
-    // public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
-    // public static GetHolidaySchmHById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmHById";
-    // public static GetHolidaySchmDById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmDById";
-    // public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
-    // public static EditHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmH";
-    // public static EditHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmD";
-    // public static DeleteHolidaySchmH = "/HolidaySchm/DeleteHolidaySchmH";
-    // public static DeleteHolidaySchmD = "/HolidaySchm/DeleteHolidaySchmD";
-    // public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
-    // public static CopyHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/CopyHolidaySchmH";
-
-    // //USER SESSION LOG
-    // public static SelectRole = "/UserSessionLog/SelectRole";
-
-    // //NOTIFICATION
-    // public static NotificationPost = "/Message/Post";
-    // public static NotificationSignalR = "/notification";
-
-    // //REF CURR
-
-    // public static GetRefCurrPaging = "/RefCurr/GetRefCurrPaging";
-    // public static AddRefCurr = environment.FoundationR3Url + "/RefCurr/AddRefCurr";
-    // public static EditRefCurr = environment.FoundationR3Url + "/RefCurr/EditRefCurr";
-    // public static GetRefCurrById = environment.FoundationR3Url + "/RefCurr/GetRefCurrById";
-
-    // //REF ECONOMIC SECTOR
-
-    // public static AddRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/AddRefEconomicSector";
-    // public static EditRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/EditRefEconomicSector";
-    // public static DeleteRefEconomicSector = "/RefEconomicSector/DeleteRefEconomicSector";
-    // public static GetRefEconomicSectorById = environment.FoundationR3Url + "/RefEconomicSector/GetRefEconomicSectorById";
-
-    // //REF PROV DISTRICT
-
-    // public static AddRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/AddRefProvDistrict";
-    // public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
-    // public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
-    // public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
-
-    // //ASSET MASTER
-    // public static AddAssetMaster = environment.FoundationR3Url + "/AssetMaster/AddAssetMaster";
-    // public static EditAssetMaster = environment.FoundationR3Url + "/AssetMaster/EditAssetMaster";
-    // public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
-    // public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
-    // public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueActiveById";
-    // public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
-    // public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
-    // public static GetListAssetMasterByAssetSchmHId = environment.FoundationR3Url + "/AssetMaster/GetListAssetMasterByAssetSchmHId";
-    // public static EditListAssetSchmDByAssetMasterId = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmDByAssetMasterId";
-
-    // //REF PROFESSION
-    // public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
-    // public static EditRefProfession = environment.FoundationR3Url + "/RefProfession/EditRefProfession";
-    // public static DeleteRefProfession = "/RefProfession/DeleteRefProfession";
-    // public static GetRefProfessionById = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByRefProfessionId";
-    // public static GetValueCustModel = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByCode";
-
-    // //GENERIC
-    // public static GetObjectBySQL = "/Generic/GetObjectBySQL";
-    // public static AddObjectBySQL = "/Generic/AddObjectBySQL";
-    // public static UpdateObjectBySQL = "/Generic/UpdateObjectBySQL";
-    // public static DeleteObjectBySQL = "/Generic/DeleteObjectBySQL";
-
-    // //WORKHOUR
-    // public static GetListActiveWorkingSchmH = environment.FoundationR3Url + "/WorkingHourSchm/GetListActiveWorkingSchmH";
-    // public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
-    // public static AddWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/AddWorkingHourSchmH";
-    // public static AddListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/AddListWorkingHourSchmD";
-    // public static EditListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/EditListWorkingHourSchmD";
-    // public static EditWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/EditWorkingHourSchmH";
-    // public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
-    // public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
-    // public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
-    // public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchm";
-    // public static GetWorkingHourSchmHById = environment.FoundationR3Url + "/WorkingHourSchm/GetWorkingHourSchmHById";
-    // public static GetListWorkingHourSchmDByWorkingHourHId = environment.FoundationR3Url + "/WorkingHourSchm/GetListWorkingHourSchmDByWorkingHourHId";
-
-
-
-    // //QUEUE
-    // public static AddQueue = "http://R3App-Server/FOUNDATION/RabbitMq/AddQueue";
-
-    // //REF MODULE
-    // public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
-    // public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
-    // public static GetListKeyValueById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
-
-    // //REF EMP LEAVE MANAGEMENT
-    // public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
-    // public static DeleteRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/DeleteRefEmpLeaveMngmnt";
-    // public static GetRefEmpLeaveMngmntById = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/GetRefEmpLeaveByRefEmpLeaveId";
-    // public static EditRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/EditRefEmpLeaveMngmnt";
-    // public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
-
-    // //UPLOAD MONITORING FOUNDATION
-    // public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging";
-
-    // //UPLOAD TYPE
-    // public static GetUploadTypeByUploadTypeId = "/UploadType/GetUploadTypeByUploadTypeId";
-    // public static GetUploadTypePaging = "/UploadType/GetUploadTypePaging";
-
-    // //UPLOAD SETTING
-    // public static GetUploadSettingHIdByUploadTypeId = "/UploadSetting/GetUploadSettingHIdByUploadTypeId";
-    // public static GetListUploadSettingDIdByUploadSettingHId = "/UploadSetting/GetListUploadSettingDIdByUploadSettingHId";
-    // public static GetListUploadSettingDIdByUploadTypeId = "/UploadSetting/GetListUploadSettingDIdByUploadTypeId";
-    // public static AssignRoleToUploadSetting = "/UploadSetting/AssignRoleToUploadSetting";
-    // public static GetListRefRoleByUploadTypeId = "/UploadSetting/GetListRefRoleByUploadTypeId";
-    // public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId';
-
-    // // GENERIC
-    // public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
-
-    // // ASSET TYPE
-    // public static AddAssetType = environment.FoundationR3Url + "/AssetType/AddAssetType"
-    // public static EditAssetType = environment.FoundationR3Url + "/AssetType/EditAssetType"
-    // public static GetAssetTypeByCode = environment.FoundationR3Url + "/AssetType/GetAssetTypeByCode"
-    // public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById"
-    // public static GetListAssetType = environment.FoundationR3Url + "/AssetType/GetListAssetType"
-    // public static GetListActiveAssetType = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType"
-    // public static DeleteAssetType = "/AssetType/DeleteAssetType"
-
-    // // PRODUCT
-    // public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
-    // public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
-    // public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
-    // public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
-    // public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId"
-    // public static GetListProdHVersionByProdHId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdHId";
-    // public static AddProductOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProductOfficeMbrBatch";
-    // public static DeleteProductOfficeMbr = environment.FoundationR3Url + "/Product/DeleteProductOfficeMbr";
-    // public static GetListProdHVersionByProdId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdId";
-    // public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
-    // public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
-
-    // //PRODUCT OFFERING
-    // public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
-    // public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
-    // public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
-    // public static AddOrEditProdOfferingDetail = environment.FoundationR3Url + "/ProductOffering/AddOrEditProdOfferingDetail";
-    // public static GetProdOfferingDetailInfo = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingDetailInfo";
-    // public static GetListProdOfferingVersionByProdId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingVersionByProdId"
-    // public static GetListProdOfferingBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHId"
-    // public static GetProdOfferingHByCodeAndVerion = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingHByCodeAndVerion";
-
-    // public static GetListProdOfferingHVersionByProdOfferingHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingHVersionByProdOfferingHId"
-    // public static GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode"
-    // public static RequestOfferingDeactivation = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationProdOffering"
-    // public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
-
-    // // PRODUCT COMPONENT
-    // public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
-    // public static GetProductOfferingComponent = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponent";
-    // public static GetProductOfferingComponentGrouped = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponentGrouped";
-
-    // public static DeleteProdOfferingOfficeMbr = environment.FoundationR3Url + "/ProductOffering/DeleteProdOfferingOfficeMbr";
-    // public static AddProdOfferingOfficeMbrBatch = environment.FoundationR3Url + "/ProductOffering/AddProdOfferingOfficeMbrBatch";
-
-    // //REF REASON
-    // public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
-
-    // //asset accesory
-    // public static AddNewAssetAccesory = environment.FoundationR3Url + "/AssetAccessory/AddAssetAccessory"
-    // public static EditAssetAccessory = environment.FoundationR3Url + "/AssetAccessory/EditAssetAccessory"
-    // public static GetAssetAccessorybyAssetAccesoryCode = environment.FoundationR3Url + "/AssetAccessory/GetAssetAccessoryByCode"
-    // public static GetAssetAccessorybyAssetAccessoryId = environment.FoundationR3Url + "/AssetAccessory/GetAssetAccessoryById"
-    // public static GetlistAssetAccessorybyAssetTypeId = environment.FoundationR3Url + "/AssetAccessory/GetListAssetAccessoryByAssetTypeId"
-    // public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory"
-
-    // //asset category
-    // public static AddNewAssetCategory = environment.FoundationR3Url + "/AssetCategory/AddAssetCategory"
-    // public static EditAssetCategory = environment.FoundationR3Url + "/AssetCategory/EditAssetCategory"
-    // public static GetAssetCategoryByAssetCategoryCode = environment.FoundationR3Url + "/AssetCategory/GetAssetCategoryByCode"
-    // public static GetAssetCategorybyAssetCategoryId = environment.FoundationR3Url + "/AssetCategory/GetAssetCategoryById"
-    // public static GetlistAssetCategorybyAssetTypeId = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByAssetTypeId"//
-    // public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory"
-    // public static GetActiveAssetCategoryValue = environment.FoundationR3Url + "/AssetCategory/GetListActiveAssetCategoryValue"
-
-
-
-    // //asset doc list
-    // public static AddNewAssetDocList = environment.FoundationR3Url + "/AssetDocList/AddAssetDocList"
-    // public static EditAssetDocList = environment.FoundationR3Url + "/AssetDocList/EditAssetDocList"
-    // public static GetAssetDocListByAssetDocListId = environment.FoundationR3Url + "/AssetDocList/GetAssetDocListById"
-    // public static GetlistAssetDocListByAssetTypeId = environment.FoundationR3Url + "/AssetDocList/GetListAssetDocListByAssetTypeId"
-    // public static DeleteAssetDocList = "/AssetDocList/DeleteAssetDocList"
-
-    // //asset ref doc
-    // public static AddNewRefAssetDocData = environment.FoundationR3Url + "/RefAssetDoc/AddRefAssetDoc"
-    // public static EditRefAssetDocData = environment.FoundationR3Url + "/RefAssetDoc/EditRefAssetDoc"
-    // public static GetRefAssetDocByAssetDocCode = environment.FoundationR3Url + "/RefAssetDoc/GetRefAssetDocByAssetDocCode"
-    // public static GetRefAssetDocByRefAssetDocId = environment.FoundationR3Url + "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
-    // public static GetListRefAssetDoc = environment.FoundationR3Url + "/RefAssetDoc/GetListRefAssetDoc"
-    // public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
-
-    // //Asset Scheme
-    // public static GetAssetSchmHById = environment.FoundationR3Url + "/AssetSchmH/GetAssetSchmHById";
-    // public static AddAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/AddAssetSchmH";
-    // public static EditAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmH";
-    // public static GetListAssetSchmDByAssetSchmHId = environment.FoundationR3Url + "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
-    // public static EditAssetSchmHAndD = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmHAndD"
-    // public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
-    // public static AddListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/AddListAssetSchmD";
-    // public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
-
-    // // ASSET TYPE
-    // public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
-
-    // // ASSET NEGATIVE
-    // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
-    // public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
-    // public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
-
-    // //VENDOR
-    // public static DeleteVendor = "/Vendor/DeleteVendor";
-    // public static AddVendorHO = environment.FoundationR3Url + "/Vendor/AddVendorHO";
-    // public static EditVendorHO = environment.FoundationR3Url + "/Vendor/EditVendorHO";
-    // public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
-    // public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
-    // public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
-
-    // public static GetListVendorBankAccByVendorId = environment.localHostUrl + "/VendorBankAcc/GetListVendorBankAccByVendorId";
-    // public static AddVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/AddVendorBankAcc";
-    // public static EditVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/EditVendorBankAcc";
-    // public static GetVendorBankAccByVendorBankAccId = environment.localHostUrl + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
-
-
-    // //VENDOR GROUP
-    // public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
-    // public static EditVendorGrp = environment.FoundationR3Url + "/VendorGrp/EditVendorGrp";
-    // public static GetVendorGrpByVendorGrpCode = environment.FoundationR3Url + "/VendorGrp/GetVendorGrpByVendorGrpCode";
-    // public static GetVendorGrpByVendorGrpId = environment.FoundationR3Url + "/VendorGrp/GetVendorGrpByVendorGrpId";
-    // public static GetVendorGrpForUpdateByVendorGrpCode = environment.FoundationR3Url + "/VendorGrp/GetVendorGrpForUpdateByVendorGrpCode";
-    // public static GetVendorGrpForUpdateByVendorGrpId = environment.FoundationR3Url + "VendorGrp/GetVendorGrpForUpdateByVendorGrpId";
-
-    // //VENDOR GROUP MEMBER 
-    // public static AddRangeVendorGrpMbr = environment.FoundationR3Url + "/VendorGrpMbr/AddRangeVendorGrpMbr";
-    // public static DeleteRangeVendorGrpMbrByIds = environment.FoundationR3Url + "/VendorGrpMbr/DeleteRangeVendorGrpMbrByIds"
-    // public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId"
-    // public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId"
-
-
-
-    // //VENDOR SCHEME
-    // public static AddVendorSchm = environment.FoundationR3Url + "/VendorSchm/AddVendorSchm";
-    // public static EditVendorSchm = environment.FoundationR3Url + "/VendorSchm/EditVendorSchm";
-    // public static DeleteVendorSchm = "/VendorSchm/DeleteVendorSchm";
-    // public static GetVendorSchmByVendorSchmId = environment.FoundationR3Url + "/VendorSchm/GetVendorSchmByVendorSchmId";
-    // public static AddVendorSchmMember = environment.FoundationR3Url + "/VendorSchmMbr/AddVendorSchmMember";
-    // public static DeleteVendorSchmMember = "/VendorSchmMbr/DeleteVendorSchmMember"
-    // public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
-
-    // // // ASSET NEGATIVE
-    // // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
-    // // public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
-    // // public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
-
-    // //Customer Personal
-    // public static AddNewCustPersonal = environment.FoundationR3Url + "/CustPersonal/AddCustPersonal"
-    // public static EditCustPersonal = environment.FoundationR3Url + "/CustPersonal/EditCustPersonal"
-    // public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
-    // public static GetCustPersonalbyCustId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustId"
-
-    // // Customer
-    // public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust"
-    // public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId"
-    // public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
-
-    // // NEGATIVE CUSTOMER
-    // public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
-    // public static EditNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/EditNegativeCust";
-    // public static GetNegativeCustByNegativeCustId = environment.FoundationR3Url + "/NegativeCust/GetNegativeCustByNegativeCustId";
-    // public static AddNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/AddNegativeCustChangeTrx";
-    // public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
-    // public static GetNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetNegativeCustChangeTrxByNegativeCustId";
-    // public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
-
-    // public static GetListNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetListNegativeCustChangeTrxByNegativeCustId";
-    // //REF BEHAVIOUR
-
-    // public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
-    // public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
-
+    public static GetListUserEmployee = "/EmpPosition/GetListUserEmployee";
+
+    //REF-USER
+    public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
+    public static AddRefUser = "/UserManagement/AddRefUser";
+    public static EditRefUser = "/UserManagement/EditRefUser";
+    public static EditRefUserForRefEmpR3 = "/RefUser/EditRefUserForRefEmp";
+    public static ChangePassword = "/UserManagement/ChangePassword";
+    public static GetRefUser = "/UserManagement/GetRefUser";
+    public static GetUserByUsername = "/UserManagement/GetUserByUsername";
+    public static ValidatePwd = "/UserManagement/ValidatePwd";
+    public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
+    public static ResetPassword = "/UserManagement/ResetPassword";
+    public static AddRefUserR3 = "/RefUser/AddRefUser";
+    public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
+    public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
+    public static AddRefUserRole = environment.FoundationR3Url + "/RefUserRole/AddRefUserRole"
+    public static EditRefUserRole = environment.FoundationR3Url + "/RefUserRole/EditRefUserRole";
+    public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
+    public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
+
+    //REF-ROLE
+    public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
+    public static AddRefRole = environment.FoundationR3Url + "/RefRole/AddRefRole";
+    public static EditRefRole = environment.FoundationR3Url + "/RefRole/EditRefRole";
+    public static DeleteRefRole = "/RefRole/DeleteRefRole";
+    public static GetRefRoleByRefRoleId = environment.FoundationR3Url + "/RefRole/GetRefRoleById";
+    public static GetRefRoleByCode = environment.FoundationR3Url + "/RefRole/GetRefRoleByCode";
+    public static GetActiveRefRoleByRefRoleId = "/RefRole/GetActiveRefRoleByRefRoleId";
+    public static GetRefRole = "/RefRole/GetRefRole";
+    public static GetListDataCurrentUser = "/UserManagement/GetListDataCurrentUser";
+    public static GetRefRoleByEmpPositionId = "/RefRole/GetRefRoleByEmpPositionId";
+    public static EditUserTitleRole = "/UserManagement/EditUserTitleRole";
+    public static AddUserTitleRole = "/UserManagement/AddUserTitleRole";
+    public static AssignRoleToUsers = "/UserManagement/AssignRoleToUsers";
+    public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
+
+    //ZIPCODE
+    public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
+    public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
+    public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
+    public static EditRefZipcode = environment.FoundationR3Url + "/RefZipcode/EditRefZipCode";
+    public static AddRefZipcode = environment.FoundationR3Url + "/RefZipcode/AddRefZipCode";
+    public static DeleteRefZipcode = environment.FoundationR3Url + "/RefZipcode/DeleteRefZipCode";
+    public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
+    public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
+
+    //OFFICE ZIPCODE MEMBER
+    public static GetOfficeZipCodeMemberPaging = "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
+    public static GetRefOfficeZipcodePaging = "/OfficeZipcodeMember/GetRefOfficeZipcodePaging";
+    public static AddOfficeZipcodeMember = "/OfficeZipcodeMember/AddOfficeZipcodeMember";
+    public static DeleteOfficeZipcodeMember = "/OfficeZipcodeMember/DeleteOfficeZipcodeMember";
+
+    //BUSINESS UNIT
+    public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
+    public static GetRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
+    public static AddRefBizUnit = "/RefBizUnit/AddRefBizUnit";
+    public static EditRefBizUnit = "/RefBizUnit/EditRefBizUnit";
+    public static DeleteRefBizUnit = "/RefBizUnit/DeleteRefBizUnit";
+    
+    //REF COY
+    public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
+    public static GetRefCoy = "/RefCoy/GetRefCoy";
+    public static EditRefCoy = "/RefCoy/EditRefCoy";
+    public static GetCoyBodPaging = "/CoyBod/GetCoyBodPaging";
+    public static AddCoyBod = "/CoyBod/AddCoyBOD";
+    public static EditCoyBod = "/CoyBod/EditCoyBOD";
+    public static DeleteCoyBod = "/CoyBod/DeleteCoyBOD";
+    public static GetCoyBod = "/CoyBod/GetCoyBod";
+    public static GetCommissionerPaging = "/CoyCommissioner/GetCoyCommissionerPaging";
+    public static AddCoyCommissioner = "/CoyCommissioner/AddCoyCommissioner";
+    public static EditCoyCommissioner = "/CoyCommissioner/EditCoyCommissioner";
+    public static DeleteCoyCommissioner = "/CoyCommissioner/DeleteCoyCommissioner";
+    public static GetCoyCommissioner = "/CoyCommissioner/GetCoyCommissioner";
+
+    //REF TAX OFFICE
+    public static GetAllActiveRefTaxOffice = "/RefTaxOffice/GetAllActiveRefTaxOffice";
+
+    //REF MASTER
+    public static GetRefMasterList = "/RefMaster/GetRefMasterList";
+    public static GetRefMastersByCriteria = "/RefMaster/GetRefMastersByCriteria";
+    public static GetRefMaster = "/RefMaster/GetRefMaster";
+    public static GetRefMasterListByTypeCode = "/RefMaster/GetRefMasterListByTypeCode";
+    public static GetRefMasterListKeyValuePair = "/RefMaster/GetRefMasterListKeyValuePair";
+    public static AddRefMaster = "/RefMaster/AddRefMaster";
+    public static EditRefMaster = "/RefMaster/EditRefMaster";
+    public static GetRefMasterType = "/RefMaster/GetRefMasterType";
+    public static GetRefMasterTypeKeyValueUserSetting = "/RefMaster/GetRefMasterTypeKeyValueUserSetting";
+    public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
+    public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
+    public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
+    public static GetRefMasterListKeyValueActiveByCode = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode"
+    public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
+    public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
+    public static GetListActiveRefMaster = environment.FoundationR3Url +"/RefMaster/GetListKeyValueActiveByCode";
+    public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
+
+    //REF INDUSTRY TYPE
+    public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
+    public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
+    public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
+    public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
+
+    //REF PROV DISTRICT
+    public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
+
+    //MENU
+    public static GetRefFormPaging = "/MenuManagement/GetRefFormPaging";
+    public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
+    public static GetRefFormByRefFormId = "/MenuManagement/GetRefFormByRefFormId";
+    public static EditRefForm = "/MenuManagement/EditRefForm";
+    public static AddRefForm = "/MenuManagement/AddRefForm";
+    public static DeleteRefForm = "/MenuManagement/DeleteRefForm";
+    public static AssignRoleToForms = "/MenuManagement/AssignRoleToForms";
+    public static GetAllAuthFormsByRefRoleId = "/MenuManagement/GetAllAuthFormsByRefRoleId";
+    public static GetAuthByRefFormIdAndRefRoleId = "/MenuManagement/GetAuthByRefFormIdAndRefRoleId";
+    public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
+    public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
+    public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
+    public static LoginByRole = "/Authenticate/LoginByRole";
+    public static LoginByToken = "/Authenticate/LoginByToken";
+    public static UpdateToken = "/Authenticate/UpdateRole";
+
+    //FORM FEATURE
+    public static GetListRefFeature = "/RefFeature/GetListRefFeature";
+    public static GetRefFeatureByComponent = "/RefFeature/GetRefFeatureByComponent";
+
+    //HOLIDAY
+    public static GetAllActiveHolidaySchmH = "/Holiday/GetAllActiveHolidaySchmH";
+    public static GetListActiveHolidaySchemeH = environment.FoundationR3Url + "/HolidaySchm/GetListActiveHolidaySchemeH"
+    public static GetHolidayPaging = "/Holiday/GetHolidayPaging";
+    public static AddHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmH";
+    public static AddHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmD";
+    public static AddHolidaySchmDUntilYear = environment.FoundationR3Url + "/HolidaySchm/AddHolidaySchmDUntilYear";
+    public static GetHolidaySchmH = "/Holiday/GetHolidaySchmH";
+    public static GetHolidaySchmHById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmHById";
+    public static GetHolidaySchmDById = environment.FoundationR3Url + "/HolidaySchm/GetHolidaySchmDById";
+    public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
+    public static EditHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmH";
+    public static EditHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmD";
+    public static DeleteHolidaySchmH = "/HolidaySchm/DeleteHolidaySchmH";
+    public static DeleteHolidaySchmD = "/HolidaySchm/DeleteHolidaySchmD";
+    public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
+    public static CopyHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/CopyHolidaySchmH";
+
+    //USER SESSION LOG
+    public static SelectRole = "/UserSessionLog/SelectRole";
+
+    //NOTIFICATION
+    public static NotificationPost = "/Message/Post";
+    public static NotificationSignalR = "/notification";
+
+    //REF CURR
+
+    public static GetRefCurrPaging = "/RefCurr/GetRefCurrPaging";
+    public static AddRefCurr = environment.FoundationR3Url + "/RefCurr/AddRefCurr";
+    public static EditRefCurr = environment.FoundationR3Url + "/RefCurr/EditRefCurr";
+    public static GetRefCurrById = environment.FoundationR3Url + "/RefCurr/GetRefCurrById";
+
+    //REF ECONOMIC SECTOR
+
+    public static AddRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/AddRefEconomicSector";
+    public static EditRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/EditRefEconomicSector";
+    public static DeleteRefEconomicSector = "/RefEconomicSector/DeleteRefEconomicSector";
+    public static GetRefEconomicSectorById = environment.FoundationR3Url + "/RefEconomicSector/GetRefEconomicSectorById";
+
+    //REF PROV DISTRICT
+
+    public static AddRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/AddRefProvDistrict";
+    public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
+    public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
+    public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
+
+    //ASSET MASTER
+    public static AddAssetMaster = environment.FoundationR3Url + "/AssetMaster/AddAssetMaster";
+    public static EditAssetMaster = environment.FoundationR3Url + "/AssetMaster/EditAssetMaster";
+    public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
+    public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
+    public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueActiveById";
+    public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
+    public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
+    public static GetListAssetMasterByAssetSchmHId = environment.FoundationR3Url + "/AssetMaster/GetListAssetMasterByAssetSchmHId";
+    public static EditListAssetSchmDByAssetMasterId = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmDByAssetMasterId";
+    
+    //REF PROFESSION
+    public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
+    public static EditRefProfession = environment.FoundationR3Url + "/RefProfession/EditRefProfession";
+    public static DeleteRefProfession = "/RefProfession/DeleteRefProfession";
+    public static GetRefProfessionById = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByRefProfessionId";
+    public static GetValueCustModel = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByCode";
+
+    //GENERIC
+    public static GetObjectBySQL = "/Generic/GetObjectBySQL";
+    public static AddObjectBySQL = "/Generic/AddObjectBySQL";
+    public static UpdateObjectBySQL = "/Generic/UpdateObjectBySQL";
+    public static DeleteObjectBySQL = "/Generic/DeleteObjectBySQL";
+
+    //WORKHOUR
+    public static GetListActiveWorkingSchmH = environment.FoundationR3Url + "/WorkingHourSchm/GetListActiveWorkingSchmH";
+    public static GetWorkHourSchmHPaging = "/WorkHour/GetWorkHourSchmHPaging";
+    public static AddWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/AddWorkingHourSchmH";
+    public static AddListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/AddListWorkingHourSchmD";
+    public static EditListWorkingHourSchmD = environment.FoundationR3Url + "/WorkingHourSchm/EditListWorkingHourSchmD";
+    public static EditWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/EditWorkingHourSchmH";
+    public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
+    public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
+    public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
+    public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchm";
+    public static GetWorkingHourSchmHById = environment.FoundationR3Url + "/WorkingHourSchm/GetWorkingHourSchmHById";
+    public static GetListWorkingHourSchmDByWorkingHourHId = environment.FoundationR3Url + "/WorkingHourSchm/GetListWorkingHourSchmDByWorkingHourHId";
+
+    //QUEUE
+    public static AddQueue = "http://R3App-Server/FOUNDATION/RabbitMq/AddQueue";
+
+    //REF MODULE
+    public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
+    public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
+    public static GetListKeyValueById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
+
+    //REF EMP LEAVE MANAGEMENT
+    public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
+    public static DeleteRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/DeleteRefEmpLeaveMngmnt";
+    public static GetRefEmpLeaveMngmntById = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/GetRefEmpLeaveByRefEmpLeaveId";
+    public static EditRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/EditRefEmpLeaveMngmnt";
+    public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
+
+    //UPLOAD MONITORING FOUNDATION
+    public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging";
+
+    //UPLOAD TYPE
+    public static GetUploadTypeByUploadTypeId = "/UploadType/GetUploadTypeByUploadTypeId";
+    public static GetUploadTypePaging = "/UploadType/GetUploadTypePaging";
+
+    //UPLOAD SETTING
+    public static GetUploadSettingHIdByUploadTypeId = "/UploadSetting/GetUploadSettingHIdByUploadTypeId";
+    public static GetListUploadSettingDIdByUploadSettingHId = "/UploadSetting/GetListUploadSettingDIdByUploadSettingHId";
+    public static GetListUploadSettingDIdByUploadTypeId = "/UploadSetting/GetListUploadSettingDIdByUploadTypeId";
+    public static AssignRoleToUploadSetting = "/UploadSetting/AssignRoleToUploadSetting";
+    public static GetListRefRoleByUploadTypeId = "/UploadSetting/GetListRefRoleByUploadTypeId";
+    public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId';
+
+    // GENERIC
+    public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"
+
+    // ASSET TYPE
+    public static AddAssetType = environment.FoundationR3Url + "/AssetType/AddAssetType"
+    public static EditAssetType = environment.FoundationR3Url + "/AssetType/EditAssetType"
+    public static GetAssetTypeByCode = environment.FoundationR3Url + "/AssetType/GetAssetTypeByCode"
+    public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById"
+    public static GetListAssetType = environment.FoundationR3Url + "/AssetType/GetListAssetType"
+    public static GetListActiveAssetType = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType"
+    public static DeleteAssetType = "/AssetType/DeleteAssetType"
+
+    // PRODUCT
+    public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
+    public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
+    public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
+    public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
+    public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId"
+    public static GetListProdHVersionByProdHId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdHId";
+    public static AddProductOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProductOfficeMbrBatch";
+    public static DeleteProductOfficeMbr = environment.FoundationR3Url + "/Product/DeleteProductOfficeMbr";
+    public static GetListProdHVersionByProdId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdId";
+    public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
+    public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
+    
+    //PRODUCT OFFERING
+    public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
+    public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
+    public static EditProdOffering = environment.FoundationR3Url + "/ProductOffering/EditProdOffering";
+    public static AddOrEditProdOfferingDetail = environment.FoundationR3Url + "/ProductOffering/AddOrEditProdOfferingDetail";
+    public static GetProdOfferingDetailInfo = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingDetailInfo";
+    public static GetListProdOfferingVersionByProdId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingVersionByProdId"
+    public static GetListProdOfferingBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHId"
+    public static GetListProdOfferingHVersionByProdOfferingHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingHVersionByProdOfferingHId"
+    public static GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode"
+    public static RequestOfferingDeactivation = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationProdOffering"
+    public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
+    public static GetProdOfferingHByCodeAndVerion = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingHByCodeAndVerion";
+    
+    // PRODUCT COMPONENT
+    public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
+    public static GetProductOfferingComponent = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponent";
+    public static GetProductOfferingComponentGrouped = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponentGrouped";
+
+    public static DeleteProdOfferingOfficeMbr = environment.FoundationR3Url + "/ProductOffering/DeleteProdOfferingOfficeMbr";
+    public static AddProdOfferingOfficeMbrBatch = environment.FoundationR3Url + "/ProductOffering/AddProdOfferingOfficeMbrBatch";
+
+    //REF REASON
+    public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
+
+    //asset accesory
+    public static AddNewAssetAccesory =  environment.FoundationR3Url + "/AssetAccessory/AddAssetAccessory"
+    public static EditAssetAccessory =  environment.FoundationR3Url+"/AssetAccessory/EditAssetAccessory"
+    public static GetAssetAccessorybyAssetAccesoryCode = environment.FoundationR3Url+ "/AssetAccessory/GetAssetAccessoryByCode"
+    public static GetAssetAccessorybyAssetAccessoryId =  environment.FoundationR3Url+"/AssetAccessory/GetAssetAccessoryById"
+    public static GetlistAssetAccessorybyAssetTypeId =  environment.FoundationR3Url+"/AssetAccessory/GetListAssetAccessoryByAssetTypeId"
+    public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory"
+
+    //asset category
+    public static AddNewAssetCategory = environment.FoundationR3Url +  "/AssetCategory/AddAssetCategory"
+    public static EditAssetCategory =  environment.FoundationR3Url+ "/AssetCategory/EditAssetCategory"
+    public static GetAssetCategoryByAssetCategoryCode = environment.FoundationR3Url+  "/AssetCategory/GetAssetCategoryByCode"
+    public static GetAssetCategorybyAssetCategoryId =  environment.FoundationR3Url+ "/AssetCategory/GetAssetCategoryById"
+    public static GetlistAssetCategorybyAssetTypeId = environment.FoundationR3Url+ "/AssetCategory/GetListAssetCategoryByAssetTypeId"//
+    public static DeleteAssetCategory = "/AssetCategory/DeleteAssetCategory"
+    public static GetActiveAssetCategoryValue = environment.FoundationR3Url + "/AssetCategory/GetListActiveAssetCategoryValue"
+
+    
+
+    //asset doc list
+    public static AddNewAssetDocList = environment.FoundationR3Url + "/AssetDocList/AddAssetDocList"
+    public static EditAssetDocList = environment.FoundationR3Url +"/AssetDocList/EditAssetDocList"
+    public static GetAssetDocListByAssetDocListId = environment.FoundationR3Url + "/AssetDocList/GetAssetDocListById"
+    public static GetlistAssetDocListByAssetTypeId = environment.FoundationR3Url + "/AssetDocList/GetListAssetDocListByAssetTypeId"
+    public static DeleteAssetDocList = "/AssetDocList/DeleteAssetDocList"
+
+    //asset ref doc
+    public static AddNewRefAssetDocData = environment.FoundationR3Url +"/RefAssetDoc/AddRefAssetDoc"
+    public static EditRefAssetDocData = environment.FoundationR3Url +"/RefAssetDoc/EditRefAssetDoc"
+    public static GetRefAssetDocByAssetDocCode = environment.FoundationR3Url +"/RefAssetDoc/GetRefAssetDocByAssetDocCode"
+    public static GetRefAssetDocByRefAssetDocId =environment.FoundationR3Url + "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
+    public static GetListRefAssetDoc = environment.FoundationR3Url +"/RefAssetDoc/GetListRefAssetDoc"
+    public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
+    
+    //Asset Scheme
+    public static GetAssetSchmHById =   environment.FoundationR3Url + "/AssetSchmH/GetAssetSchmHById";
+    public static AddAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/AddAssetSchmH";
+    public static EditAssetSchmH =   environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmH";
+    public static GetListAssetSchmDByAssetSchmHId = environment.FoundationR3Url +  "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
+    public static EditAssetSchmHAndD = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmHAndD"
+    public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
+    public static AddListAssetSchmD =  environment.FoundationR3Url  + "/AssetSchmD/AddListAssetSchmD";
+    public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
+
+    // ASSET TYPE
+    public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
+    
+    // ASSET NEGATIVE
+    public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
+    public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
+    public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
+
+    //VENDOR
+    public static DeleteVendor ="/Vendor/DeleteVendor";
+    public static AddVendorHO = environment.FoundationR3Url + "/Vendor/AddVendorHO";
+    public static EditVendorHO = environment.FoundationR3Url + "/Vendor/EditVendorHO";
+    public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
+    public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
+    public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
+    public static AddVendorAddr = environment.FoundationR3Url + "/VendorAddr/AddVendorAddr"
+    public static EditVendorAddr = environment.FoundationR3Url + "/VendorAddr/EditVendorAddr"  
+    public static GetVendorAddrByVendorId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorIdMrAddrType"
+    
+    public static GetListVendorBankAccByVendorId = environment.localHostUrl + "/VendorBankAcc/GetListVendorBankAccByVendorId";
+    public static AddVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/AddVendorBankAcc";
+    public static EditVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/EditVendorBankAcc";
+    public static GetVendorBankAccByVendorBankAccId = environment.localHostUrl + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
+    
+
+    //VENDOR GROUP
+    public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
+    public static EditVendorGrp = environment.FoundationR3Url + "/VendorGrp/EditVendorGrp";
+    public static GetVendorGrpByVendorGrpCode = environment.FoundationR3Url + "/VendorGrp/GetVendorGrpByVendorGrpCode";
+    public static GetVendorGrpByVendorGrpId =environment.FoundationR3Url  + "/VendorGrp/GetVendorGrpByVendorGrpId";
+    public static GetVendorGrpForUpdateByVendorGrpCode =environment.FoundationR3Url  + "/VendorGrp/GetVendorGrpForUpdateByVendorGrpCode";
+    public static GetVendorGrpForUpdateByVendorGrpId = environment.FoundationR3Url + "VendorGrp/GetVendorGrpForUpdateByVendorGrpId";
+
+    //VENDOR GROUP MEMBER 
+    public static AddRangeVendorGrpMbr = environment.FoundationR3Url +"/VendorGrpMbr/AddRangeVendorGrpMbr";
+    public static DeleteRangeVendorGrpMbrByIds  = environment.FoundationR3Url + "/VendorGrpMbr/DeleteRangeVendorGrpMbrByIds"
+    public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId"
+    public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId"
+
+    //VENDOR EMP
+    public static AddVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/AddVendorBranchEmp"
+    public static GetVendorEmpByVendorEmpId = environment.FoundationR3Url + "/VendorEmp/GetVendorEmpByVendorEmpId"
+    public static GetVendorEmpAndVendorTaxAddrByVendorEmpId = environment.FoundationR3Url + "/VendorEmp/GetVendorEmpAndVendorTaxAddrByVendorEmpId"
+    public static EditVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/EditVendorBranchEmp"
+
+    //VENDOR SCHEME
+    public static AddVendorSchm = environment.FoundationR3Url + "/VendorSchm/AddVendorSchm";
+    public static EditVendorSchm = environment.FoundationR3Url + "/VendorSchm/EditVendorSchm";
+    public static DeleteVendorSchm = "/VendorSchm/DeleteVendorSchm";
+    public static GetVendorSchmByVendorSchmId = environment.FoundationR3Url + "/VendorSchm/GetVendorSchmByVendorSchmId";
+    public static AddVendorSchmMember = environment.FoundationR3Url + "/VendorSchmMbr/AddVendorSchmMember";
+    public static DeleteVendorSchmMember = "/VendorSchmMbr/DeleteVendorSchmMember"
+    public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
+
+    // VERIFICATION
+
+    // REF VERF ANSWER TYPE
+    public static AddRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/AddRefVerfAnswerType";
+    public static EditRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/EditRefVerfAnswerType";
+    public static GetActiveRefVerfAnswerTypes = environment.FoundationR3Url + "/RefVerfAnswerType/GetActiveRefVerfAnswerTypes";
+    public static GetRefVerfAnswerTypeByCode = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypeByCode";
+    public static GetRefVerfAnswerTypeById = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypeById";
+    public static GetRefVerfAnswerTypes = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypes";
+    public static GetRefVerfAnswerTypeForUpdateById = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypeForUpdateById";
+    public static GetRefVerfAnswerTypeForUpdateByCode = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypeForUpdateByCode";
+
+    // VERF QUESTION ANSWER
+    public static AddVerfQuestionAnswer = environment.FoundationR3Url + "/VerfQuestionAnswer/AddVerfQuestionAnswer";
+    public static EditVerfQuestionAnswer = environment.FoundationR3Url + "/VerfQuestionAnswer/EditVerfQuestionAnswer";
+    public static GetVerfQuestionAnswerByRefVerfAnswerTypeId = environment.FoundationR3Url + "/VerfQuestionAnswer/GetVerfQuestionAnswerByRefVerfAnswerTypeId";
+    public static GetVerfQuestionAnswerForUpdateById = environment.FoundationR3Url + "/VerfQuestionAnswer/GetVerfQuestionAnswerForUpdateById";
+
+    // VERF QUESTION GRP H
+    public static AddVerfQuestionGrpH = environment.FoundationR3Url + "/VerfQuestionGrpH/AddVerfQuestionGrpH";
+    public static EditVerfQuestionGrpH = environment.FoundationR3Url + "/VerfQuestionGrpH/EditVerfQuestionGrpH";
+    public static GetActiveVerfQuestionGrpHs = environment.FoundationR3Url + "/VerfQuestionGrpH/GetActiveVerfQuestionGrpHs";
+    public static GetVerfQuestionGrpHs = environment.FoundationR3Url + "/VerfQuestionGrpH/GetVerfQuestionGrpHs";
+    public static GetQuestionGrpHById = environment.FoundationR3Url + "/VerfQuestionGrpH/GetQuestionGrpHById";
+    public static GetQuestionGrpHForUpdateById = environment.FoundationR3Url + "/VerfQuestionGrpH/GetQuestionGrpHForUpdateById";
+    
+    public static GetQuestionGrpHByCode = environment.FoundationR3Url + "/VerfQuestionGrpH/GetQuestionGrpHByCode";
+
+    // VERF QUESTION GRP D
+    public static AddVerfQuestionGrpD = environment.FoundationR3Url + "/VerfQuestionGrpD/AddVerfQuestionGrpD";
+    public static EditVerfQuestionGrpD = environment.FoundationR3Url + "/VerfQuestionGrpD/EditVerfQuestionGrpD";
+    public static GetActiveVerfQuestionGrpDsByGrpHId = environment.FoundationR3Url + "/VerfQuestionGrpD/GetActiveVerfQuestionGrpDsByGrpHId";
+    public static GetVerfQuestionGrpDById = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDById";
+    public static GetVerfQuestionGrpDByGrpHId = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDByGrpHId";
+    public static GetVerfQuestionGrpDForUpdateById = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDForUpdateById";
+    
+    // VERF RESULT
+    public static AddVerfResult = environment.FoundationR3Url + "/VerfResult/AddVerfResult";
+    public static EditVerfResult = environment.FoundationR3Url + "/VerfResult/EditVerfResult";
+    public static GetVerfResultsByTrxRefNo = environment.FoundationR3Url + "/VerfResult/GetVerfResultsByTrxRefNo";
+    public static GetVerfResultById = environment.FoundationR3Url + "/VerfResult/GetVerfResultById";
+    public static GetVerfResultByResultNo = environment.FoundationR3Url + "/VerfResult/GetVerfResultByResultNo";
+
+    // VERF RESULT H
+    public static AddVerfResultH = environment.FoundationR3Url + "/VerfResultH/AddVerfResultH";
+    public static EditVerfResultH = environment.FoundationR3Url + "/VerfResultH/EditVerfResultH";
+    public static GetVerfResultHsByVerfResultId = environment.FoundationR3Url + "/VerfResultH/GetVerfResultHsByVerfResultId";
+    public static GetVerfResultHById = environment.FoundationR3Url + "/VerfResultH/GetVerfResultHById";
+
+    // VERF RESULT D
+    public static AddVerfResultD = environment.FoundationR3Url + "/VerfResultD/AddVerfResultD";
+    public static EditVerfResultD = environment.FoundationR3Url + "/VerfResultD/EditVerfResultD";
+    public static GetVerfResultDsByVerfResultHId = environment.FoundationR3Url + "/VerfResultD/GetVerfResultDsByVerfResultHId";
+    public static GetVerfResultDById = environment.FoundationR3Url + "/VerfResultD/GetVerfResultDById";
+
+    // VERF SCHEME H
+    public static AddVerfSchemeH = environment.FoundationR3Url + "/VerfSchemeH/AddVerfSchemeH";
+    public static EditVerfSchemeH = environment.FoundationR3Url + "/VerfSchemeH/EditVerfSchemeH";
+    public static GetActiveVerfSchemeHs = environment.FoundationR3Url + "/VerfSchemeH/GetActiveVerfSchemeHs";
+    public static GetVerfSchemeHs = environment.FoundationR3Url + "/VerfSchemeH/GetVerfSchemeHs";
+    public static GetVerfSchemeHById = environment.FoundationR3Url + "/VerfSchemeH/GetVerfSchemeHById";
+    public static GetVerfSchemeHByCode = environment.FoundationR3Url + "/VerfSchemeH/GetVerfSchemeHByCode";
+
+    // VERF SCHEME H
+    public static AddVerfSchemeD = environment.FoundationR3Url + "/VerfSchemeD/AddVerfSchemeD";
+    public static EditVerfSchemeD = environment.FoundationR3Url + "/VerfSchemeD/EditVerfSchemeD";
+    public static GetVerfSchemeDsByVerfSchemeHId = environment.FoundationR3Url + "/VerfSchemeD/GetVerfSchemeDsByVerfSchemeHId";
+    public static GetVerfSchemeDById = environment.FoundationR3Url + "/VerfSchemeD/GetVerfSchemeDById";
+
+    //Customer Personal
+    public static AddNewCustPersonal = environment.FoundationR3Url + "/CustPersonal/AddCustPersonal"
+    public static EditCustPersonal = environment.FoundationR3Url + "/CustPersonal/EditCustPersonal"
+    public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
+    public static GetCustPersonalbyCustId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustId"
+    
+    // Customer
+    public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust"
+    public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId"
+    public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
+    public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
+
+    // CUSTOMER GROUP
+    public static AddCustGrpBothWays = environment.FoundationR3Url + "/CustGrp/AddCustGrpBothWays";
+    public static AddCustGrp = environment.FoundationR3Url + "/CustGrp/AddCustGrp";
+    public static DeleteCustGrp = environment.FoundationR3Url + "/CustGrp/DeleteCustGrp";
+
+    // CUSTOMER FIN DATA
+    public static GetCBAForCustFinDataByCustId = environment.FoundationR3Url + "/CustBankAcc/GetCBAForCustFinDataByCustId";
+
+    // NEGATIVE CUSTOMER
+    public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
+    public static EditNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/EditNegativeCust";
+    public static GetNegativeCustByNegativeCustId = environment.FoundationR3Url + "/NegativeCust/GetNegativeCustByNegativeCustId";
+    public static AddNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/AddNegativeCustChangeTrx";
+    public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
+    public static GetNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetNegativeCustChangeTrxByNegativeCustId";   
+    
+    
+    public static GetListNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetListNegativeCustChangeTrxByNegativeCustId";
+    //REF BEHAVIOUR
+    
+    public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
+    public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
+
+    //REF COUNTRY
+    public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
+
+    // SURVEY TASK
+    public static GetListSrvyTaskBySrvyOrderId = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderId";
 }
