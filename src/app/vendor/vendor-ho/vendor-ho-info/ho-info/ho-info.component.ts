@@ -4,16 +4,16 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
-  selector: 'app-main-ho-info',
-  templateUrl: './main-ho-info.component.html',
-  styleUrls: ['./main-ho-info.component.scss']
+  selector: 'app-ho-info',
+  templateUrl: './ho-info.component.html',
+  styleUrls: ['./ho-info.component.scss']
 })
-export class MainHoInfoComponent implements OnInit {
-  viewCObj: any;
-  viewPObj: any;
-  VendorId: any;
-  MrVendorTypeCode: any;
-  viewObj12345: any;
+export class HoInfoComponent implements OnInit {
+  MrVendorCategoryCode:any;
+  VendorId:any;
+  viewSupplierObj:any;
+  viewSurveyorObj:any;
+
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       this.VendorId = params['VendorId'];
@@ -27,13 +27,12 @@ export class MainHoInfoComponent implements OnInit {
 
     this.http.post(AdInsConstant.GetVendorByVendorId, obj).subscribe(
       (response) => {
-        this.MrVendorTypeCode = response["MrVendorTypeCode"];
+        this.MrVendorCategoryCode = response["MrVendorCategoryCode"];
       }
     )
-
-    this.viewCObj = "./assets/ucviewgeneric/viewHOInfoCompany.json";
-    this.viewPObj = "./assets/ucviewgeneric/viewHOInfoPersonal.json";
-
+    
+    this.viewSupplierObj = "./assets/ucviewgeneric/viewHOInfoSupplier.json";
+    this.viewSurveyorObj = "./assets/ucviewgeneric/viewHOInfoSurveyor.json";
   }
 
 }

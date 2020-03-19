@@ -10,10 +10,17 @@ export class VendorContactPersonObj {
     IsOwner: any;
     Addr: any;
     Zipcode: any;
+    SubZipcode: any;
+    PhnArea1: any;
+    PhnArea2: any;
+    PhnExt1: any;
+    PhnExt2: any;
     AreaCode1: any;
     AreaCode2: any;
+    AreaCode3: any;
+    AreaCode4: any;
     City: any;
     Province: any;
     RowVersion: any;
-    constructor() { this.VendorContactPersonId = 0}
+    constructor() { this.VendorContactPersonId = 0;}
 }
