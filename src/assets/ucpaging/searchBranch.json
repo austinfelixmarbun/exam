@@ -165,11 +165,11 @@
                 {
                     "type": "edit",
                     "icon": "fa fa-sitemap",
-                    "path": "/employee/EmployeeBusinessUnit/Paging",
+                    "path": "/Vendor/Branch/Member/Paging",
                     "param": [
                         {
-                            "type": "RefUserId",
-                            "property": "RefUserId"
+                            "type": "VendorId",
+                            "property": "VendorId"
                         }
                     ]
                 }

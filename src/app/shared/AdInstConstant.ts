@@ -523,8 +523,10 @@ export class AdInsConstant {
     public static EditVendorAddr = environment.FoundationR3Url + "/VendorAddr/EditVendorAddr"  
     public static GetVendorAddrByVendorId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorIdMrAddrType"
 
-    
-
+    //VENDOR OFFICE MEMBER
+    public static AddListVendorOfficeMember = environment.FoundationR3Url + "/VendorOfficeMbr/AddListVendorOfficeMember"
+    public static GetListVendorOfficeMbrByVendorId = environment.FoundationR3Url + "/VendorOfficeMbr/GetListVendorOfficeMbrByVendorId"
+    public static DeleteVendorOfficeMember = environment.FoundationR3Url + "/VendorOfficeMbr/DeleteVendorOfficeMember"
     
     
     //VENDOR GROUP

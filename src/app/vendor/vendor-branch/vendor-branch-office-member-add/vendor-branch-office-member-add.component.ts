@@ -3,19 +3,19 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
-  selector: 'app-vendor-scheme-member-add',
-  templateUrl: './vendor-scheme-member-add.component.html',
-  styleUrls: ['./vendor-scheme-member-add.component.scss'],
-  providers:[NGXToastrService]
+  selector: 'app-vendor-branch-office-member-add',
+  templateUrl: './vendor-branch-office-member-add.component.html',
+  styleUrls: ['./vendor-branch-office-member-add.component.scss']
 })
-export class VendorSchemeMemberAddComponent implements OnInit {
+
+export class VendorBranchOfficeMemberAddComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) UCGridFooter;
   @ViewChild(UCSearchComponent) UCSearchComponent;
 
@@ -33,48 +33,45 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   resultData: any;
   tempData: any;
   arrAddCrit: any[];
-  viewObj: any;
   Data = [];
-  VendorSchmId: any;
-  vendorSchmObj: any;
-  MrVendorCategoryCode: any;
+  VendorId: any;
+  CenterGrpId: any;
+  VendorOfficeMbrObj: any;
 
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private router: Router, private toastr:NGXToastrService) {
-      this.route.queryParams.subscribe(params => {
-        this.VendorSchmId  = params['VendorSchmId'];
-        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
-      });
-    }
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
+    this.route.queryParams.subscribe(params => {
+      this.VendorId = params['VendorId'];
+    });
+  }
 
   ngOnInit() {
-    this.GetListVendorSchmMemberByVendorSchmId();
+    this.GetListVendorOfficeMbrByVendorId();
 
     this.arrCrit = new Array();
-
     this.listSelectedId = new Array();
     this.tempListId = new Array();
     this.tempData = new Array();
     this.arrCrit = new Array();
-    
+
     this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/search/searchVendorSchemeMbr.json";
+    this.inputObj._url = "./assets/ucpaging/searchRefOffice.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.addCritInput = new Array();
 
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
 
-    this.inputObj.addCritInput = new Array();
-    const addCritTypeCode = new CriteriaObj();
-    addCritTypeCode.DataType = 'text';
-    addCritTypeCode.propName = 'MR_VENDOR_CATEGORY_CODE';
-    addCritTypeCode.restriction = AdInsConstant.RestrictionEq;
-    addCritTypeCode.value = this.MrVendorCategoryCode;
-    this.arrCrit.push(addCritTypeCode);
+    const addCritIsActive = new CriteriaObj();
+    addCritIsActive.DataType = 'boolean';
+    addCritIsActive.propName = 'RO.IS_ACTIVE';
+    addCritIsActive.restriction = AdInsConstant.RestrictionEq;
+    addCritIsActive.value = "true";
+    this.arrCrit.push(addCritIsActive);
 
-    this.inputObj.addCritInput.push(addCritTypeCode);
+    this.inputObj.addCritInput.push(addCritIsActive);
 
     this.pageNow = 1;
     this.pageSize = 10;
@@ -97,18 +94,15 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     }
   }
 
-  Checked(VendorId: any, isChecked: any): void {
-    console.log(VendorId);
+  Checked(RefOfficeId: any, isChecked: any): void {
     if (isChecked) {
-      this.listSelectedId.push(VendorId);
+      this.listSelectedId.push(RefOfficeId);
     } else {
-      const index = this.listSelectedId.indexOf(VendorId)
-      console.log(index);
+      const index = this.listSelectedId.indexOf(RefOfficeId)
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
-    console.log('Sel', this.listSelectedId);
   }
-  
+
   searchPagination(event: number) {
     this.pageNow = event;
     let order = null;
@@ -121,6 +115,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
   }
 
+  // ** Start UC Search **/
   getResult(event) {
     this.resultData = event.response;
     this.totalData = event.response.Count;
@@ -136,36 +131,13 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     this.searchPagination(this.pageNow);
   }
 
-  SelectAll(condition) {
-    this.checkboxAll = condition;
-    console.log(condition);
-    if (condition) {
-      for (let i = 0; i < this.resultData.Data.length; i++) {
-        if (this.listSelectedId.indexOf(this.resultData.Data[i].VendorId) < 0) {
-          this.listSelectedId.push(this.resultData.Data[i].VendorId);
-        }
-      }
-
-    } else {
-      for (let i = 0; i < this.resultData.Data.length; i++) {
-        let index = this.listSelectedId.indexOf(this.resultData.Data[i].VendorId);
-        if (index > -1) {
-          this.listSelectedId.splice(index, 1);
-        }
-        console.log(this.resultData.Data[i]);
-      }
-    }
-    console.log(this.checkboxAll);
-    console.log(this.listSelectedId);
-  }
-
   addToTemp() {
     if (this.listSelectedId.length != 0) {
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
       }
       for (var i = 0; i < this.listSelectedId.length; i++) {
-        var object = this.resultData.Data.find(x => x.VendorId == this.listSelectedId[i]);
+        var object = this.resultData.Data.find(x => x.RefOfficeId == this.listSelectedId[i]);
         this.tempData.push(object);
       }
 
@@ -177,7 +149,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       }
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
-      addCrit.propName = "vENDOR_ID";
+      addCrit.propName = "RO.REF_OFFICE_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.tempListId;
       this.arrAddCrit.push(addCrit);
@@ -193,11 +165,30 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
       this.listSelectedId = [];
     } else {
-      this.toastr.typeErrorCustom("Please select at least one Vendor");
+      this.toastr.typeErrorCustom("Please select at least one Office");
     }
   }
 
-  deleteFromTemp(VendorId: any) {
+  SelectAll(condition) {
+    this.checkboxAll = condition;
+    if (condition) {
+      for (let i = 0; i < this.resultData.Data.length; i++) {
+        if (this.listSelectedId.indexOf(this.resultData.Data[i].RefOfficeId) < 0) {
+          this.listSelectedId.push(this.resultData.Data[i].RefOfficeId);
+        }
+      }
+
+    } else {
+      for (let i = 0; i < this.resultData.Data.length; i++) {
+        let index = this.listSelectedId.indexOf(this.resultData.Data[i].RefOfficeId);
+        if (index > -1) {
+          this.listSelectedId.splice(index, 1);
+        }
+      }
+    }
+  }
+
+  deleteFromTemp(RefOfficeId: any) {
     if (confirm('Are you sure to delete this record?')) {
       this.arrAddCrit = new Array();
       if (this.arrCrit.length != 0) {
@@ -206,14 +197,14 @@ export class VendorSchemeMemberAddComponent implements OnInit {
         }
       }
 
-      var index = this.tempListId.indexOf(VendorId);
+      var index = this.tempListId.indexOf(RefOfficeId);
       if (index > -1) {
         this.tempListId.splice(index, 1);
         this.tempData.splice(index, 1);
       }
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
-      addCrit.propName = "VENDOR_ID";
+      addCrit.propName = "RO.REF_OFFICE_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.tempListId;
       if (this.tempListId.length != 0) {
@@ -231,50 +222,49 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     }
   }
 
-  SaveVendorSchemeMember() {
+  SaveVendorOfficeMember() {
     if (this.tempListId.length == 0) {
       this.toastr.typeErrorCustom('Please Add At Least One Data');
       return;
     }
 
     var obj = {
-      VendorSchmId: this.VendorSchmId,
-      VendorId: this.tempListId
+      VendorId: this.VendorId,
+      RefOfficeId: this.tempListId
     }
 
-    this.http.post(AdInsConstant.AddVendorSchmMember, obj).subscribe(
-        (response) => {
-            console.log(response);
-            this.router.navigate(['/Vendor/VendorScheme/Member'], {queryParams: {VendorSchmId:this.VendorSchmId}});
-        },
-        (error) => {
-            console.log(error);
-        });
+    this.http.post(AdInsConstant.AddListVendorOfficeMember, obj).subscribe(
+      (response) => {
+        this.router.navigate(['/Vendor/Branch/Member/Paging'], { queryParams: { VendorId: this.VendorId } });
+      },
+      (error) => {
+        console.log(error);
+      });
 
   }
 
-  GetListVendorSchmMemberByVendorSchmId() {
+  GetListVendorOfficeMbrByVendorId() {
     var obj = {
-      VendorSchmId: this.VendorSchmId 
+      VendorId: this.VendorId
     }
 
-    this.http.post(AdInsConstant.GetListVendorSchmMemberByVendorSchmId, obj).subscribe(
+    this.http.post(AdInsConstant.GetListVendorOfficeMbrByVendorId, obj).subscribe(
       (response) => {
-        this.vendorSchmObj = response;
+        this.VendorOfficeMbrObj = response;
         var arrMemberList = new Array();
 
-        for (let index = 0; index < this.vendorSchmObj.ListVendorSchmMbr.length; index++) {
-           arrMemberList.push(this.vendorSchmObj.ListVendorSchmMbr[index].VendorId)
+        for (let index = 0; index < this.VendorOfficeMbrObj.ReturnObject.length; index++) {
+          arrMemberList.push(this.VendorOfficeMbrObj.ReturnObject[index].RefOfficeId)
         }
-        
-        if(arrMemberList.length != 0){
-          const addCritListVendorId = new CriteriaObj();
-          addCritListVendorId.DataType = "numeric";
-          addCritListVendorId.propName = "VENDOR_ID";
-          addCritListVendorId.restriction = AdInsConstant.RestrictionNotIn;
-          addCritListVendorId.listValue = arrMemberList;
-          this.arrCrit.push(addCritListVendorId);
-          this.inputObj.addCritInput.push(addCritListVendorId);
+
+        if (arrMemberList.length != 0) {
+          const addCritListRefOffice = new CriteriaObj();
+          addCritListRefOffice.DataType = 'numeric';
+          addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
+          addCritListRefOffice.restriction = AdInsConstant.RestrictionNotIn;
+          addCritListRefOffice.listValue = arrMemberList;
+          this.arrCrit.push(addCritListRefOffice);
+          this.inputObj.addCritInput.push(addCritListRefOffice);
         }
       },
       (error) => {
