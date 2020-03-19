@@ -39,7 +39,6 @@ export class AddressComponent implements OnInit {
   });
 
   ngOnInit() {
-    console.log("Address");
     this.inputLookupZipcodeObj = new InputLookupObj();
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;

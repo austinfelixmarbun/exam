@@ -249,7 +249,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.VendorForm.controls.City.disable();
     this.VendorForm.controls.Province.disable();
 
-    console.log("Reynard");
     if (this.mode == "edit") {
       this.ButtonLbl = "Submit";
       var vendorObj = new VendorObj();
