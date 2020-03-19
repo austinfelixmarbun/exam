@@ -144,7 +144,7 @@
               "property": "refZipcodeId"
             },
             {
-              "type": "param",
+              "type": "mode",
               "property": "edit"
             }
           ]

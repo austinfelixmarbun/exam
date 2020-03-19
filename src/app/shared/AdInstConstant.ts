@@ -210,7 +210,7 @@ export class AdInsConstant {
 
     //BUSINESS UNIT
     public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
-    public static GetRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
+    public static GetRefBizUnit = "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
     public static AddRefBizUnit = "/RefBizUnit/AddRefBizUnit";
     public static EditRefBizUnit = "/RefBizUnit/EditRefBizUnit";
     public static DeleteRefBizUnit = "/RefBizUnit/DeleteRefBizUnit";
