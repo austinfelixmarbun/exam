@@ -38,9 +38,9 @@ export class ZipcodeAddComponent implements OnInit {
     AreaCode2: ['', [Validators.required, Validators.maxLength(50)]],
     City: ['', [Validators.required, Validators.maxLength(50)]],
     Zipcode: ['', [Validators.required, Validators.maxLength(10)]],
-    SubZipcode: ['', Validators.maxLength(10)],
+    SubZipcode: [' ', Validators.maxLength(10)],
     PhnArea: ['', Validators.maxLength(10)],
-    IsActive: ['', Validators.required]
+    IsActive: [true, Validators.required]
   });
 
 
@@ -115,7 +115,11 @@ export class ZipcodeAddComponent implements OnInit {
   SaveForm() {
     this.rzcObj = new RefZipcodeObj();
     this.rzcObj = this.RefZipCodeForm.value;
-    this.rzcObj.RefProvDistrictId = this.inputDistrictLookupObj.jsonSelect.refProvDistrictId;
+    this.rzcObj.RefProvDistrictId = this.inputDistrictLookupObj.jsonSelect.RefProvDistrictId;
+    if(this.rzcObj.SubZipcode=="")
+    {
+      this.rzcObj.SubZipcode = " ";
+    }
     if (this.pageType == "add") {
       this.rzcObj.RowVersion = "";
       this.http.post(this.addUrl, this.rzcObj).subscribe(

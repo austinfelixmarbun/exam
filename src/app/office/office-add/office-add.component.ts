@@ -13,6 +13,7 @@ import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucC
 import { Console } from '@angular/core/src/console';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class OfficeAddComponent implements OnInit {
   allWorkingHourSchm: any;
   allRefTaxOffice: any;
   allCgType: any;
+  lookupOfficeType: any;
   mrCgType: any;
   MrOfficeClassCode: any;
   mrOfficeType: any;
@@ -77,9 +79,11 @@ export class OfficeAddComponent implements OnInit {
   officeObj: OfficeObj;
   centerGrpObj: OfficeObj;
   refMasterObj: RefMasterObj;
+  lookUpRefMasterOfficeObj : RefMasterObj;
   refMasterOfficeType: RefMasterObj;
   refMasterCgType: RefMasterObj;
   orgMdlObj: OrgMdlObj
+  arrCrit:any;
 
   refMasterKonsyaType: RefMasterObj;
   konSyaUrl: any;
@@ -160,6 +164,39 @@ export class OfficeAddComponent implements OnInit {
     this.refMasterCgType.RefMasterTypeCode = 'CENTER_GRP_TYPE';
     this.refMasterKonsyaType = new RefMasterObj();
     this.refMasterKonsyaType.RefMasterTypeCode = 'KONVEN_SYARIAH';
+
+    this.lookUpRefMasterOfficeObj = new RefMasterObj();
+    this.lookUpRefMasterOfficeObj.RefMasterTypeCode = "OFFICE_TYPE";
+
+    
+
+
+
+
+    this.httpClient.post(AdInsConstant.GetRefMasterTypeOfficeWithoutCG, this.lookUpRefMasterOfficeObj).subscribe(
+      (response) => {
+        console.log(response);
+        this.lookupOfficeType = response['ReturnObject'];
+
+        
+
+        this.arrCrit = new Array();
+        var critObj = new CriteriaObj();
+        critObj.restriction = AdInsConstant.RestrictionIn;
+        critObj.propName = 'MR_OFFICE_TYPE_CODE';
+        critObj.listValue = new Array();
+        this.lookupOfficeType.forEach(element => {
+          critObj.listValue.push(element.Key);
+        });
+        
+        this.arrCrit.push(critObj);
+        this.InputLookupObj.addCritInput = this.arrCrit;
+        //this.lookUpRefMasterOfficeObj.addCritInput = this.arrCrit;
+      },
+      (error) => {
+        console.log(error);
+      });
+
     if (this.pageType == "add") {
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
         (response) => {
@@ -171,7 +208,8 @@ export class OfficeAddComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-        })
+        });
+      
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
         (response) => {
           console.log(response);
@@ -183,7 +221,7 @@ export class OfficeAddComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-        })
+        });
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterKonsyaType).subscribe(
         (response) => {
           console.log(response);
