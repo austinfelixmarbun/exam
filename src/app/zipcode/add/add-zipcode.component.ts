@@ -51,8 +51,8 @@ export class ZipcodeAddComponent implements OnInit {
     this.getRefDistrictUrl = AdInsConstant.GetRefProvDistrictById;
 
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      if (params["mode"] != null) {
+        this.pageType = params["mode"];
       }
       if (params["refZipcodeId"] != null) {
         this.refZipcodeId = params["refZipcodeId"];

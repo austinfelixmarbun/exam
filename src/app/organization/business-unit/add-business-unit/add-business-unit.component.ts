@@ -78,7 +78,7 @@ export class AddBusinessUnitComponent implements OnInit {
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
-                    this.router.navigateByUrl('/organization/businessunit');
+                    this.router.navigateByUrl('/Organization/BusinessUnit');
                 },
                 (error) => {
                     console.log(error);
@@ -90,7 +90,7 @@ export class AddBusinessUnitComponent implements OnInit {
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
-                    this.router.navigateByUrl('/organization/businessunit');
+                    this.router.navigateByUrl('/Organization/BusinessUnit');
                 },
                 (error) => {
                     console.log(error);
