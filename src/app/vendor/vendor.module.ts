@@ -48,6 +48,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HoInfoComponent } from './vendor-ho/vendor-ho-info/ho-info/ho-info.component';
 import { HoAddressInfoComponent } from './vendor-ho/vendor-ho-info/ho-address-info/ho-address-info.component';
 import { HoTaxInfoComponent } from './vendor-ho/vendor-ho-info/ho-tax-info/ho-tax-info.component';
+import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
 
 
 @NgModule({
@@ -103,7 +104,8 @@ import { HoTaxInfoComponent } from './vendor-ho/vendor-ho-info/ho-tax-info/ho-ta
     VendorEmployeeComponent,
     HoInfoComponent,
     HoTaxInfoComponent,
-    HoAddressInfoComponent
+    HoAddressInfoComponent,
+    VendorBranchRegistrationComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

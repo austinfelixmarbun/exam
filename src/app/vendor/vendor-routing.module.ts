@@ -23,6 +23,7 @@ import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info
 import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
 import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
 import { VendorEmployeeComponent } from './component/vendor-employee/vendor-employee.component';
+import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,13 @@ const routes: Routes = [
         component: VendorBranchAddEditComponent,
         data: {
           title: 'Vendor Branch Add'
+        },
+      },
+      {
+        path: 'Branch/Registration',
+        component: VendorBranchRegistrationComponent,
+        data: {
+          title: 'Vendor Branch Registration'
         },
       },
       {
