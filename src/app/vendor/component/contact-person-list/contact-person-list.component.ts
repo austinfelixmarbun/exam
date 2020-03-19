@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -17,6 +17,9 @@ export class ContactPersonListComponent implements OnInit {
   VendorContactPerson: VendorContactPersonObj;
   VendorIdParam: any;
   resultData : any = new Array();
+  @Output() objOutput: EventEmitter<any> = new EventEmitter();
+  HiddenState: boolean;
+  
 
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -49,4 +52,8 @@ export class ContactPersonListComponent implements OnInit {
     this.router.navigate(['/Vendor/ContactPerson/Add'], { queryParams: { VendorContactPersonId: id, 'mode' : 'edit', VendorId : this.VendorIdParam}  });
   }
 
+  HiddenCheck(){
+    this.HiddenState = false;
+    this.objOutput.emit(this.HiddenState);
+  }
 }

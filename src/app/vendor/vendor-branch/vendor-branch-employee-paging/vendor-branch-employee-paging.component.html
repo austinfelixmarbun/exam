@@ -1,0 +1,11 @@
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="backButton" [routerLink]="['/Vendor/Branch']" translate>
+      <i class="ft-x"></i> Back
+    </button>
+    <button type="button" class="addButton" [routerLink]="['/Vendor/Branch/Employee/Paging']" [queryParams]="{VendorId: VendorId}" translate>
+      <i class="ft-plus-circle"></i> Add
+    </button>
+  </span>
+</div>
+<lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
