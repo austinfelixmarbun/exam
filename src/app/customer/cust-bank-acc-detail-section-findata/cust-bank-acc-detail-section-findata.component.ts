@@ -13,6 +13,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class CustBankAccDetailSectionFindataComponent implements OnInit {
   monthOfYear: Array<string>;
   monthOfYearExclude: Array<string>;
+  rowCustBankStmnt: number;
 
   CustBankAccForm = this.fb.group({
     CustBankAccId: [0, [Validators.required]],
@@ -38,10 +39,15 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     moment.locale('en');
     this.monthOfYear = new Array(...moment.months());
     this.monthOfYearExclude = new Array(12);
+    this.rowCustBankStmnt = 0;
   }
 
   ngOnInit() {
     
+  }
+
+  addRowCustBankStmnt(){
+    this.CustBankAccForm.controls['CustBankStmnts']
   }
 
 }
