@@ -27,15 +27,24 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   result: any;
   check: any;
+  inputLookupParentSurveyorObj : any;
+  inputLookupParentAssetInsurance : any;
   inputLookupParentObj: any;
+  inputLookupParentLifeInsurance : any;
   inputLookupZipcodeObj: any;
+  inputLookupAgencyPersonal : any;
+
   MrVendorCategoryCode: any;
   arrCrit: any;
   mode: string = "add";
   vendorHoObj: any;
   VendorId: any;
   ButtonLbl: string = "Continue";
-
+  arrCritSuHo: any[];
+  arrCritSurHo : any[];
+  arrCritAsIn: any[];
+  arrCritLiIn: any[];
+  arrCritAgP: any[];
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -86,9 +95,10 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
+ 
+
     var refMasterCategoryObj = {
-      RefMasterTypeCode: "VENDOR_CATEGORY",
-      ReserveField1: "HO"
+      RefMasterTypeCode: "VENDOR_CATEGORY"
     }
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
       (response) => {
@@ -157,18 +167,84 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
 
+
+    this.inputLookupParentSurveyorObj = new InputLookupObj();
+    this.inputLookupParentSurveyorObj.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentSurveyorObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupParentSurveyorObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupParentSurveyorObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentSurveyorObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    
+    this.inputLookupParentAssetInsurance = new InputLookupObj();
+    this.inputLookupParentAssetInsurance.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentAssetInsurance.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupParentAssetInsurance.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupParentAssetInsurance.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentAssetInsurance.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+
+    this.inputLookupParentLifeInsurance = new InputLookupObj();
+    this.inputLookupParentLifeInsurance.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentLifeInsurance.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupParentLifeInsurance.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupParentLifeInsurance.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentLifeInsurance.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    
+    this.inputLookupAgencyPersonal = new InputLookupObj();
+    this.inputLookupAgencyPersonal.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupAgencyPersonal.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupAgencyPersonal.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupAgencyPersonal.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupAgencyPersonal.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+
     if(this.MrVendorCategoryCode != "SUPPLIER_HO"){
       this.inputLookupParentObj.isRequired = false;
     }
     
-    this.arrCrit = new Array();
+    this.arrCritSuHo = new Array();
+    this.arrCritSurHo = new Array();
+    this.arrCritAsIn = new Array();
+    this.arrCritLiIn = new Array();
+    this.arrCritAgP = new Array();
+    
     var critObj = new CriteriaObj();
-    critObj.propName = 'RM.RESERVE_FIELD_2';
+    critObj.propName = 'V.MR_VENDOR_CATEGORY_CODE';
     critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.value = this.MrVendorCategoryCode;
-    this.arrCrit.push(critObj);
-    this.inputLookupParentObj.addCritInput = this.arrCrit;
+    critObj.value = "SUPPLIER_HO";
+    this.arrCritSuHo.push(critObj);
+    this.inputLookupParentObj.addCritInput = this.arrCritSuHo;
 
+    var critObjSurveyor = new CriteriaObj();
+    critObjSurveyor.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+    critObjSurveyor.restriction = AdInsConstant.RestrictionEq;
+    critObjSurveyor.value = "SURVEYOR_HO";
+    this.arrCritSurHo.push(critObjSurveyor);
+    this.inputLookupParentSurveyorObj.addCritInput = this.arrCritSurHo;
+
+
+    var critObjAssetInsurance = new CriteriaObj();
+    critObjAssetInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+    critObjAssetInsurance.restriction = AdInsConstant.RestrictionEq;
+    critObjAssetInsurance.value = "ASSET_INSCO_HO";
+    this.arrCritAsIn.push(critObjAssetInsurance);
+    this.inputLookupParentAssetInsurance.addCritInput = this.arrCritAsIn;
+
+
+    var critObjLifeInsurance = new CriteriaObj();
+    critObjLifeInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+    critObjLifeInsurance.restriction = AdInsConstant.RestrictionEq;
+    critObjLifeInsurance.value = "LIFE_INSCO_HO";
+    this.arrCritLiIn.push(critObjLifeInsurance);
+    this.inputLookupParentLifeInsurance.addCritInput = this.arrCritLiIn;
+
+    var critObjAgencyPersonal = new CriteriaObj();
+    critObjAgencyPersonal.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+    critObjAgencyPersonal.restriction = AdInsConstant.RestrictionEq;
+    critObjAgencyPersonal.value = "AGENCY_PERSONAL";
+    this.arrCritAgP.push(critObjAgencyPersonal);
+    this.inputLookupAgencyPersonal.addCritInput = this.arrCritAgP;
+
+
+    
 
     this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();

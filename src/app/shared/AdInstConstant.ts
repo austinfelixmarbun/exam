@@ -519,6 +519,8 @@ export class AdInsConstant {
     public static EditVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/EditVendorBankAcc";
     public static GetVendorBankAccByVendorBankAccId = environment.localHostUrl + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
 
+    public static GetVendorContactPersonById = environment.FoundationR3Url + "/VendorContactPerson/GetVendorContactPersonById";
+    public static EditVendorContactPerson = environment.FoundationR3Url + "/VendorContactPerson/EditVendorContactPerson";
 
     //VENDOR GROUP
     public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
@@ -534,7 +536,8 @@ export class AdInsConstant {
     public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId"
     public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId"
 
-
+    //VENDOR BRANCH
+    public static GetListVendorContactPersonByVendorId = environment.FoundationR3Url + "/VendorContactPerson/GetListVendorContactPersonByVendorId"
 
     //VENDOR SCHEME
     public static AddVendorSchm = environment.FoundationR3Url + "/VendorSchm/AddVendorSchm";
