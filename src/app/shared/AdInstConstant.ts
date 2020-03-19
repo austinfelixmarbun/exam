@@ -661,3 +661,5 @@ export class AdInsConstant {
   // CUSTOMER ADDRESS HISTORY
   public static GetListCustAddrHistByCustId = environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustId";
   public static GetListCustAddrHistByCustIdForCustomerPersonalView = "http://localhost:5000" + "/CustAddrHist/GetListCustAddrHistByCustIdForCustomerPersonalView";
+
+}
