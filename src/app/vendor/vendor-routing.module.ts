@@ -28,7 +28,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'Branch',
+        path: 'Branch/Paging',
         component: VendorBranchPagingComponent,
         data: {
           title: 'Vendor Branch Paging'
