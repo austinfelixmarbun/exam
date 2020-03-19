@@ -1,0 +1,65 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> VERIFICATION QUESTION GROUP Edit Seq No
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="px-3">
+          <form class="form form-horizontal" [formGroup]="QuestionGroupForm" (ngSubmit)="QuestionGroupForm.valid  && SaveForm()"
+            #enjiForm="ngForm">
+            <lib-ucSubsection [id]="'QuestionGroupId'" [title]="'Verification Question Answer'"
+              [panel]="'QuestionGroup'">
+            </lib-ucSubsection>
+            <div class="form-body" id="QuestionGroup">
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Sequence No </label>
+              <div class="col-md-3">
+                <input type="text" class="form-control adInsInput width-75-per" formControlName="SeqNo">
+                <show-errors [control]="QuestionGroupForm.controls.SeqNo" [submit]="enjiForm.submitted">
+                </show-errors>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Question Code </label>
+              <label class="col-md-3">{{VerfQuestionCode}}</label>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Question Text </label>
+              <label class="col-md-3">{{VerfQuestionText}}</label>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Answer Type </label>
+              <label class="col-md-3">{{VerfAnswerTypeDescr}}</label>
+            </div>
+
+            <div *ngIf="answerTypeValue == 'DDL'" class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Answer </label>
+              <label class="col-md-3">{{VerfAnswer}}</label>
+            </div>
+
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1"
+                [routerLink]="['/Verification/QuestionGroupMemberPaging']" translate>
+                <i class="fa fa-arrow-circle-left"></i> Back
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="fa fa-check"></i> Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

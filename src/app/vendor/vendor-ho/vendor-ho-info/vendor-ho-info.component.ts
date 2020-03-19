@@ -8,7 +8,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./vendor-ho-info.component.scss']
 })
 export class VendorHoInfoComponent implements OnInit {
-  viewObj: any;
   VendorId: any;
   
   constructor(private route: ActivatedRoute, private http: HttpClient) {
@@ -18,7 +17,7 @@ export class VendorHoInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewVendorHO.json"
+    
   }
 
 }

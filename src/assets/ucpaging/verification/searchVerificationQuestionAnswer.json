@@ -23,7 +23,7 @@
             "type": "dropdown",
             "name": "IS_ACTIVE",
             "id": "ActiveStatusId",
-            "label": "ACTIVE",
+            "label": "ACTIVE STATUS",
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
@@ -48,7 +48,7 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "Question Code",
             "name": "VerfQuestionCode"
         },
@@ -79,7 +79,7 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "left",
+            "position": "center",
             "property": "VerfQuestionCode"
         },
         {

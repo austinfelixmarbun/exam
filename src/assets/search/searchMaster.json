@@ -170,6 +170,10 @@
                   {
                     "type": "refMasterId",
                     "property": "refMasterId"
+                  },
+                  {
+                    "type":"mode",
+                    "property":"edit"
                   }
                 ]
               }

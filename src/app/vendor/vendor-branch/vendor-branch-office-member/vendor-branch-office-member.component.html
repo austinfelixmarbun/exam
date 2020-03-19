@@ -1,0 +1,22 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <app-main-info-view></app-main-info-view>
+        <form>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch/Paging']"
+              translate>
+              Back
+            </button>
+            <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Branch/Member/Add']"
+            [queryParams]="{VendorId: VendorId}">
+              <i class="ft-plus-circle"></i> Add
+            </button>
+          </div>
+        </form>
+        <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
+      </div>
+    </div>
+  </div>
+</div>
