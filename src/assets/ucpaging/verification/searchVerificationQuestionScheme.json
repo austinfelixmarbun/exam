@@ -1,6 +1,6 @@
 
 {
-    "title": "verification Question Answer",
+    "title": "verification Question Scheme",
     "exportExcel": false,
     "component": [
         {
@@ -42,33 +42,32 @@
         }
     ],
     "querystring": {
-        "select": "SELECT VQA.VERF_QUESTION_ANSWER_ID AS VerfQuestionAnswerId,VQA.REF_VERF_ANSWER_TYPE_ID AS RefAnswerTypeId,VQA.VERF_QUESTION_CODE AS VerfQuestionCode, VQA.VERF_QUESTION_TEXT AS VerfQuestionText, VAT.VERF_ANSWER_TYPE_DESCR AS VerfAnswerTypeDescr, VQA.IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.VERF_QUESTION_ANSWER VQA WITH(NOLOCK) JOIN dbo.REF_VERF_ANSWER_TYPE VAT WITH(NOLOCK) ON VAT.REF_VERF_ANSWER_TYPE_ID = VQA.REF_VERF_ANSWER_TYPE_ID"
+        "select": "SELECT VERF_SCHEME_H_ID AS VerfSchemeHId, VERF_SCHEME_CODE AS VerfSchemeCode, VERF_SCHEME_NAME AS VerfSchemeName, IS_ACTIVE AS IsActive",
+        "from": "FROM dbo.VERF_SCHEME_H WITH(NOLOCK)"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "center",
-            "label": "Question Code",
-            "name": "VerfQuestionCode"
+            "label": "Scheme Code",
+            "name": "VerfSchemeCode"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Question Text",
-            "name": "VerfQuestionText"
-        },
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "Answer Type",
-            "name": "VerfAnswerTypeDescr"
+            "label": "Scheme Name",
+            "name": "VerfSchemeName"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Active",
             "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Question Answer"
         },
         {
             "type": "label",
@@ -80,17 +79,12 @@
         {
             "type": "text",
             "position": "center",
-            "property": "VerfQuestionCode"
+            "property": "VerfSchemeCode"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "VerfQuestionText"
-        },
-        {
-            "type": "text",
-            "position": "left",
-            "property": "VerfAnswerTypeDescr"
+            "property": "VerfSchemeName"
         },
         {
             "type": "boolean",
@@ -103,11 +97,31 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Verification/QuestionAnswer/Edit",
+                    "path": "/Verification/QuestionSchemeMemberPaging",
                     "param": [
                         {
-                            "type": "VerfQuestionAnswerId",
-                            "property": "VerfQuestionAnswerId"
+                            "type": "VerfSchemeHId",
+                            "property": "VerfSchemeHId"
+                        },
+                        {
+                            "type": "mode",
+                            "property": "edit"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/Verification/QuestionScheme/Edit",
+                    "param": [
+                        {
+                            "type": "VerfSchemeHId",
+                            "property": "VerfSchemeHId"
                         },
                         {
                             "type": "mode",
@@ -117,7 +131,7 @@
                 },
                 {
                     "type": "delete",
-                    "property": "VerfQuestionAnswerId"
+                    "property": "VerfSchemeHId"
                 }
             ]
         }
