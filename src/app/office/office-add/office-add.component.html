@@ -32,16 +32,16 @@
                       <label class="col-md-3  adInsLabel" translate>Office Code </label>
                       <div class="col-md-9">
                         <input type="text" class="form-control adInsInput width-30-per" formControlName="OfficeCode">
-                        <show-errors [control]="OfficeForm.controls.OfficeCode" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="OfficeForm.controls.OfficeCode" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <div class="form-group row adins-required">
                       <label class="col-md-3  adInsLabel" translate>Office Name </label>
                       <div class="col-md-9">
                         <input type="text" class="form-control adInsInput width-30-per" formControlName="OfficeName">
-                        <show-errors [control]="OfficeForm.controls.OfficeName" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="OfficeForm.controls.OfficeName" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -49,8 +49,8 @@
                       <div class="col-md-9">
                         <input type="text" class="form-control adInsInput width-30-per"
                           formControlName="OfficeShortName">
-                        <show-errors [control]="OfficeForm.controls.OfficeShortName" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="OfficeForm.controls.OfficeShortName" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <div class="form-group row adins-required">
@@ -61,8 +61,8 @@
                           <option *ngFor="let ot of allOfficeType" value="{{ot.Key}}">
                             {{ot.Value}}</option>
                         </select>
-                        <show-errors [control]="OfficeForm.controls.OfficeType" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="OfficeForm.controls.OfficeType" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <ng-container *ngIf="OfficeForm.controls.OfficeType.value == 'CG'">
@@ -75,9 +75,9 @@
                             <option *ngFor="let ct of allCgType" value="{{ct.Key}}">
                               {{ct.Value}}</option>
                           </select>
-                          <show-errors [control]="OfficeForm.controls.MrCenterGrpTypeCode"
+                          <lib-uc-show-errors [control]="OfficeForm.controls.MrCenterGrpTypeCode"
                             [submit]="enjiForm.submitted">
-                          </show-errors>
+                          </lib-uc-show-errors>
                         </div>
                       </div>
                     </ng-container>
@@ -98,8 +98,8 @@
                           <option *ngFor="let ky of allKonSya" value="{{ky.Key}}">
                             {{ky.Value}}</option>
                         </select>
-                        <show-errors [control]="OfficeForm.controls.KonSya" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="OfficeForm.controls.KonSya" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <div class="form-group row row adins-required">
@@ -110,8 +110,8 @@
                           <option *ngFor="let oc of allOfficeClass" value="{{oc.Key}}">
                             {{oc.Value}}</option>
                         </select>
-                        <show-errors [control]="OfficeForm.controls.MrOfficeClassCode" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="OfficeForm.controls.MrOfficeClassCode" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <div class="form-group row row adins-required">
@@ -122,8 +122,8 @@
                           <option *ngFor="let hs of allHolidaySchm" value="{{hs.HolidaySchmHId}}">
                             {{hs.HolidaySchmName}}</option>
                         </select>
-                        <show-errors [control]="OfficeForm.controls.HolidayScheme" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="OfficeForm.controls.HolidayScheme" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <div class="form-group row row adins-required">
@@ -134,8 +134,8 @@
                           <option *ngFor="let oc of allWorkingHourSchm" value="{{oc.WorkingHourSchmHId}}">
                             {{oc.WorkingHourSchmName}}</option>
                         </select>
-                        <show-errors [control]="OfficeForm.controls.WorkingHourScheme" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="OfficeForm.controls.WorkingHourScheme" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -171,8 +171,8 @@
                         <div class="col-md-9">
                           <input type="text" class="form-control adInsInput width-30-per" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                             formControlName="CntctPersonEmail1">
-                          <show-errors [control]="OfficeForm.controls.CntctPersonEmail1" [submit]="enjiForm.submitted">
-                          </show-errors>
+                          <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonEmail1" [submit]="enjiForm.submitted">
+                          </lib-uc-show-errors>
                         </div>
                       </div>
                       <div class="form-group row">
@@ -180,8 +180,8 @@
                         <div class="col-md-9">
                           <input type="text" class="form-control adInsInput width-30-per" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                             formControlName="CntctPersonEmail2">
-                          <show-errors [control]="OfficeForm.controls.CntctPersonEmail2" [submit]="enjiForm.submitted">
-                          </show-errors>
+                          <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonEmail2" [submit]="enjiForm.submitted">
+                          </lib-uc-show-errors>
                         </div>
                       </div>
                       <div class="form-group row adins-required">
@@ -189,9 +189,9 @@
                         <div class="col-md-9">
                           <input type="text" class="form-control adInsInput width-30-per"
                             formControlName="CntctPersonMobilePhnNo1">
-                          <show-errors [control]="OfficeForm.controls.CntctPersonMobilePhnNo1"
+                          <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonMobilePhnNo1"
                             [submit]="enjiForm.submitted">
-                          </show-errors>
+                          </lib-uc-show-errors>
                         </div>
                       </div>
                       <div class="form-group row">
@@ -199,9 +199,9 @@
                         <div class="col-md-9">
                           <input type="text" class="form-control adInsInput width-30-per"
                             formControlName="CntctPersonMobilePhnNo2">
-                          <show-errors [control]="OfficeForm.controls.CntctPersonMobilePhnNo2"
+                          <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonMobilePhnNo2"
                             [submit]="enjiForm.submitted">
-                          </show-errors>
+                          </lib-uc-show-errors>
                         </div>
                       </div>
                     </div>
