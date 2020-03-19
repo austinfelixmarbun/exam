@@ -131,6 +131,10 @@
           "path": "/Vendor/Branch/Employee/Detail",
           "param": [
             {
+              "type": "VendorId",
+              "property": "VendorId"
+            },
+            {
               "type": "VendorEmpId",
               "property": "VendorEmpId"
             }

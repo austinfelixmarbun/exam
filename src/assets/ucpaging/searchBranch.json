@@ -164,6 +164,7 @@
             "action": [
                 {
                     "type": "edit",
+                    "icon": "fa fa-sitemap",
                     "path": "/employee/EmployeeBusinessUnit/Paging",
                     "param": [
                         {
@@ -185,15 +186,23 @@
                             "conditions": [
                                 {
                                     "property": "MrVendorCategoryCode",
-                                    "value": "AGENCY_PERSONAL"
+                                    "value": "AGENCY_PERSONAL",
+                                    "restriction": "NEQ"
+                                },
+                                {
+                                    "property": "MrVendorType",
+                                    "value": "P",
+                                    "restriction": "NEQ"
                                 }
                             ],
                             "result": {
-                                "path": "/Vendor/Branch",
+                                "type": "url",
+                                "icon": "ft-users",
+                                "path": "/Vendor/Branch/Employee/Paging",
                                 "param": [
                                     {
-                                        "type": "MrVendorCategoryCode",
-                                        "property": "MrVendorCategoryCode"
+                                        "type": "VendorId",
+                                        "property": "VendorId"
                                     }
                                 ]
                             },
@@ -209,11 +218,11 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/office/add",
+                    "path": "/Vendor/Branch/Registration",
                     "param": [
                         {
-                            "type": "RefOfficeId",
-                            "property": "RefOfficeId"
+                            "type": "VendorId",
+                            "property": "VendorId"
                         },
                         {
                             "type": "mode",
