@@ -9,8 +9,34 @@
                 <lib-ucSubsection [id]="'custAddrId'" [title]="'Customer Address'" [panel]="'customerAddr'">
                 </lib-ucSubsection>
                 <div id="customerAddr">
+                    <div class="form-group row">
+                      <label class="col-md-2  adInsLabel adins-required" translate>Address Type Name </label>
+                      <div class="col-md-4">
+                        <select class="form-control adInsInput" formControlName="MrCustAddrTypeCode">
+                          <option *ngFor="let ram of listAddressType" [value]="ram.Key">
+                            {{ram.Value}}
+                          </option>
+                        </select>
+                        <show-errors [control]="CustDataPersonalForm.controls.MrCustAddrTypeCode" [submit]="enjiForm.submitted"></show-errors>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-md-2  adInsLabel" translate>Copy Address From </label>
+                      <div class="col-md-3">
+                        <select class="form-control adInsInput" formControlName="CopyAddrFrom">
+                          <option *ngFor="let ram of listCustAddr" [value]="ram.CustAddrId">
+                            {{ram.MrCustAddrTypeCode}}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-2">
+                        <button type="button" class="btn btn-raised btn-primary" (click)="copyAddress()">
+                          <i class="fa fa-check-square-o"></i> Copy
+                        </button>
+                      </div>
+                    </div>
                     <div id="CustMainDataPersonal"> 
-                        <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Customer Address'" [UCAddrForm]="CustDataPersonalForm" [enjiForm]="enjiForm" [identifier]="'Address'" [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"></lib-ucaddress>
+                        <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Customer Address'" [UCAddrForm]="CustDataPersonalForm" [enjiForm]="enjiForm" [identifier]="'custAddress'" [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"></lib-ucaddress>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>

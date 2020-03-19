@@ -650,9 +650,12 @@ export class AdInsConstant {
 
     
     // CUSTOMER ADDRESS
-    public static GetListCustAddr = environment.FoundationR3Url + "/CustAddr/GetListCustAddr";
+    public static GetListCustAddr = "http://localhost:5000" + "/CustAddr/GetListCustAddr";
+    public static AddCustAddr = environment.FoundationR3Url + "/CustAddr/AddCustAddr";
+    public static EditCustAddr = environment.FoundationR3Url + "/CustAddr/EditCustAddr";
+    public static GetCustAddr = environment.FoundationR3Url + "/CustAddr/GetCustAddrByCustAddrId";
 
-
+    
     // NEGATIVE CUSTOMER
     public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
     public static EditNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/EditNegativeCust";

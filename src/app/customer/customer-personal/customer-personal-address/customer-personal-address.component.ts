@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
  
 @Component({
   selector: 'app-customer-personal-address',
@@ -32,6 +33,7 @@ export class CustomerPersonalAddressComponent implements OnInit {
   IdCust : any;
   IdCustPersonal : any;
   custObj : any;
+  custAddrObj : any;
   listCustAddr: any;
   getCustById: any;
   getListCustAddr: any;
@@ -59,9 +61,12 @@ export class CustomerPersonalAddressComponent implements OnInit {
           this.custObj = response;
       });
 
-      this.custObj = new CustObj();
-      this.custObj.CustId = this.IdCust;
-      this.http.post(this.getListCustAddr, this.custObj).subscribe(
+      this.custAddrObj = new CustAddrObj();
+      this.custAddrObj.CustId = this.IdCust;
+      this.custAddrObj.MrCustAddrTypeCode = "-";
+      console.log("bbb");
+      console.log(this.custAddrObj);
+      this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
             this.listCustAddr = response["ReturnObject"];
 
