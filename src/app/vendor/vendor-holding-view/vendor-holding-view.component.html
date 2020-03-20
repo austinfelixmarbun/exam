@@ -1,152 +1,104 @@
 <lib-ucviewgeneric [viewInput]="viewVendorHoldingObj"></lib-ucviewgeneric>
-<!-- <mat-tab-group mat-align-tabs="center"> -->
-  <!-- <mat-tab label="Main Information">
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Main Information">
     <ng-template matTabContent>
       <div class="card">
         <div class="card-body">
-          <br/>
-          <div *ngFor="let item of MainInfo">
-            <label class="text-left">{{item.RegistrationNo}}</label>
-            <label class="text-left">{{item.LicenseNo}}</label>
-            <label class="text-left">{{item.EstablishmentDt}}</label>
-            <label class="text-left">{{item.PartnershipDt}}</label>
-            <label class="text-left">{{item.VendorRating}}</label>
-            <label class="text-left">{{item.MobilePhnNo1}}</label>
-            <label class="text-left">{{item.MobilePhnNo2}}</label>
+          <br>
+          <div>
+            <ng-container *ngIf="MrVendorTypeCode == 'P'">
+              <lib-ucviewgeneric [viewInput]="viewVendorHoldingMainPObj"></lib-ucviewgeneric>
+            </ng-container>
+
+            <ng-container *ngIf="MrVendorTypeCode == 'C'">
+              <lib-ucviewgeneric [viewInput]="viewVendorHoldingMainCObj"></lib-ucviewgeneric>
+            </ng-container>
           </div>
         </div>
       </div>
     </ng-template>
-  </mat-tab> -->
-  
-  <!-- <mat-tab label="Tax">
+  </mat-tab>
+
+  <mat-tab label="Tax">
     <ng-template matTabContent>
       <div class="card">
         <div class="card-body">
           <div>
-            <br />
-            <br />
-            <div>
-              <label class="col-md-4"></label>
-              <label class="col-md-4">Product Head Office</label>
-              <label class="col-md-4">Product Offering</label>
-            </div>
-            <br />
-            <h5>Scheme</h5>
-            <mat-divider></mat-divider>
-            <br />
-            <div *ngFor="let item of ProdCompSchm">
-              <label class="col-md-4">{{item.ProdCompntName}}</label>
-              <label class="col-md-2">{{item.ProdDCompntValueDesc}}</label>
-              <label class="col-md-2">{{item.ProdDMrProdBehaviourCode}}</label>
-              <label class="col-md-2">{{item.CompntValueDesc}}</label>
-              <label class="col-md-2">{{item.MrProdBehaviourCode}}</label>
-            </div>
-          </div>
-          <div>
-            <br />
-            <h5>Score</h5>
-            <mat-divider></mat-divider>
-            <br />
-            <div *ngFor="let item of ProdCompScore">
-              <label class="col-md-4">{{item.ProdCompntName}}</label>
-              <label class="col-md-2">{{item.ProdDCompntValueDesc}}</label>
-              <label class="col-md-2">{{item.ProdDMrProdBehaviourCode}}</label>
-              <label class="col-md-2">{{item.CompntValueDesc}}</label>
-              <label class="col-md-2">{{item.MrProdBehaviourCode}}</label>
-            </div>
-          </div>
-          <div>
-            <br />
-            <h5>Rule</h5>
-            <mat-divider></mat-divider>
-            <br />
-            <div *ngFor="let item of ProdCompRule">
-              <label class="col-md-4">{{item.ProdCompntName}}</label>
-              <label class="col-md-2">{{item.ProdDCompntValueDesc}}</label>
-              <label class="col-md-2">{{item.ProdDMrProdBehaviourCode}}</label>
-              <label class="col-md-2">{{item.CompntValueDesc}}</label>
-              <label class="col-md-2">{{item.MrProdBehaviourCode}}</label>
-            </div>
-          </div>
-          <div>
-            <br />
-            <h5>Other</h5>
-            <mat-divider></mat-divider>
-            <br />
-            <div *ngFor="let item of ProdCompOther">
-              <label class="col-md-4">{{item.ProdCompntName}}</label>
-              <label class="col-md-2">{{item.ProdDCompntValueDesc}}</label>
-              <label class="col-md-2">{{item.ProdDMrProdBehaviourCode}}</label>
-              <label class="col-md-2">{{item.CompntValueDesc}}</label>
-              <label class="col-md-2">{{item.MrProdBehaviourCode}}</label>
-            </div>
+            <lib-ucviewgeneric [viewInput]="viewVendorHoldingTaxObj"></lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewInput]="viewVendorHoldingTaxAddrObj"></lib-ucviewgeneric>
           </div>
         </div>
       </div>
     </ng-template>
-  </mat-tab> -->
-  <!-- <mat-tab label="Address">
+  </mat-tab>
+  <mat-tab label="Address">
+    <ng-template matTabContent>
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <lib-ucviewgeneric [viewInput]="viewVendorHoldingAddrObj"></lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewInput]="viewVendorHoldingLtLgObj"></lib-ucviewgeneric>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Contact Person">
     <ng-template matTabContent>
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th class="text-left">Office Code</th>
-            <th class="text-left">Office Name</th>
-            <th class="text-left">Area Name</th>
+            <th class="text-left"><span translate class="thead-header" name='Name'>Name</span></th>
+            <th class="text-left"><span translate class="thead-header" name='MrEmployeePosition'>Position</span></th>
+            <th class="text-left"><span translate class="thead-header" name='Phone1'>Phone 1</span></th>
+            <th class="text-left"><span translate class="thead-header" name='Phone2'>Phone 2</span></th>
+            <th class="text-left"><span translate class="thead-header" name='Email'>E-mail</span></th>
+            <th class="text-left"><span translate class="thead-header" name='JoinDate'>Join Date</span></th>
+            <th class="text-left"><span translate class="thead-header" name='IsOwner'>Owner</span></th>
+            <th class="text-left"><span translate class="thead-header" name='Addr'>Address</span></th>
+            <th class="text-left"><span translate class="thead-header" name='Zipcode'>Zip Code</span></th>
+            <th class="text-left"><span translate class="thead-header" name='AreaCode2'>Kelurahan</span></th>
+            <th class="text-left"><span translate class="thead-header" name='AreaCode1'>Kecamatan</span></th>
+            <th class="text-left"><span translate class="thead-header" name='City'>City</span></th>
+            <th class="text-left"><span translate class="thead-header" name='Province'>Provice</span></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of ProdOfferingBranchMbr">
-            <td class="text-left">{{item.OfficeCode}}</td>
-            <td class="text-left">{{item.OfficeName}}</td>
-            <td class="text-left">{{item.AreaName}}</td>
+          <tr *ngFor="let item of vendorContactPerson">
+            <td class="text-left">{{item.Name}}</td>
+            <td class="text-left">{{item.MrEmployeePosition}}</td>
+            <td class="text-left">{{item.Phone1}}</td>
+            <td class="text-left">{{item.Phone2}}</td>
+            <td class="text-left">{{item.Email}}</td>
+            <td class="text-left">{{item.JoinDate}}</td>
+            <td class="text-left">{{item.IsOwner}}</td>
+            <td class="text-left">{{item.Addr}}</td>
+            <td class="text-left">{{item.Zipcode}}</td>
+            <td class="text-left">{{item.AreaCode2}}</td>
+            <td class="text-left">{{item.AreaCode1}}</td>
+            <td class="text-left">{{item.City}}</td>
+            <td class="text-left">{{item.Province}}</td>
           </tr>
         </tbody>
       </table>
     </ng-template>
-  </mat-tab> -->
+  </mat-tab>
 
-  <!-- <mat-tab label="Contact Person">
+  <mat-tab label="Group Info">
     <ng-template matTabContent>
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th class="text-left">Prod Offering Version</th>
-            <th class="text-left">Star Date</th>
-            <th class="text-left">End Date</th>
-            <th class="text-left">Product Status</th>
+            <th class="text-left">GROUP CODE</th>
+            <th class="text-left">GROUP NAME</th>
+            <th class="text-left">ACTIVE STATUS</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of ProdOfferingVersion">
-            <td class="text-left">{{item.ProdOfferingVersion}}</td>
-            <td class="text-left">{{item.StarDt | date}}</td>
-            <td class="text-left">{{item.EndDt | date}}</td>
-            <td class="text-left">{{item.Descr}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </ng-template>
-  </mat-tab> -->
-
-  <!-- <mat-tab label="Group Info">
-    <ng-template matTabContent>
-      <table class="table table-responsive-md text-center table-hover">
-        <thead>
-          <tr class="table-header">
-            <th class="text-left">Prod Offering Version</th>
-            <th class="text-left">Star Date</th>
-            <th class="text-left">End Date</th>
-            <th class="text-left">Product Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of ProdOfferingVersion">
-            <td class="text-left">{{item.ProdOfferingVersion}}</td>
-            <td class="text-left">{{item.StarDt | date}}</td>
-            <td class="text-left">{{item.EndDt | date}}</td>
-            <td class="text-left">{{item.Descr}}</td>
+          <tr *ngFor="let item of VendorGrp">
+            <td class="text-left">{{item.VendorGrpCode}}</td>
+            <td class="text-left">{{item.VendorGrpName}}</td>
+            <td class="text-left">{{item.IsActive}}</td>
           </tr>
         </tbody>
       </table>
@@ -157,21 +109,21 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th class="text-left">Prod Offering Version</th>
-            <th class="text-left">Star Date</th>
-            <th class="text-left">End Date</th>
-            <th class="text-left">Product Status</th>
+            <th class="text-left">HO CODE</th>
+            <th class="text-left">HO NAME</th>
+            <th class="text-left">HO ADDRESS</th>
+            <th class="text-left">ACTIVE STATUS</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of ProdOfferingVersion">
-            <td class="text-left">{{item.ProdOfferingVersion}}</td>
-            <td class="text-left">{{item.StarDt | date}}</td>
-            <td class="text-left">{{item.EndDt | date}}</td>
-            <td class="text-left">{{item.Descr}}</td>
+          <tr *ngFor="let item of Vendor">
+            <td class="text-left">{{item.VendorCode}}</td>
+            <td class="text-left">{{item.VendorName}}</td>
+            <td class="text-left">{{item.Addr}}</td>
+            <td class="text-left">{{item.IsActive}}</td>
           </tr>
         </tbody>
       </table>
     </ng-template>
-  </mat-tab> -->
-<!-- </mat-tab-group> -->
+  </mat-tab>
+</mat-tab-group>

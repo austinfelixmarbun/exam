@@ -1,41 +1,47 @@
 {
+  "title":"",
     "subsection": [
       {
-        "subSectionId": "Holding View Information",
+        "subSectionId": "HoldingViewInformationId",
         "subSectionTitle": "Main Info",
         "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
-            "label": "Vendor Categoy",
+            "label": "Vendor Categoy:",
             "property": "VendorCategory"
           },
           {
             "type": "boolean",
-            "label": "Active Status",
+            "label": "Active Status:",
             "property": "AciveStatus"
           },
           {
             "type": "text",
-            "label": "Holding Code",
+            "label": "Holding Code:",
             "property": "HoldingCode"
           },
           {
             "type": "text",
-            "label": "Tax Number",
+            "label": "Tax Number:",
             "property": "TaxNumber"
           },
           {
             "type": "text",
-            "label": "Holding Name",
+            "label": "Holding Name:",
             "property": "HoldingName"
+          },
+          {
+            "type": "text",
+            "label": "Holding Type:",
+            "property": "HoldingType"
           }
 
         ],
         "querystring": {
-            "select" :"SELECT B.DESCR AS VendorCategory,A.IS_ACTIVE AS AciveStatus,A.VENDOR_CODE As HoldingCode,A.TAX_ID_NO AS TaxNumber,A.VENDOR_NAME AS HoldingName,A.VENDOR_ID AS VendorId",
-            "from" :"FROM dbo.VENDOR A WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER B WITH(NOLOCK) ON  A.MR_VENDOR_CATEGORY_CODE = B.MASTER_CODE",
-            "where":"WHERE VendorId = {0}"
+"select":"SELECT B.DESCR AS VendorCategory,A.IS_ACTIVE AS AciveStatus,A.VENDOR_CODE As HoldingCode,A.TAX_ID_NO AS TaxNumber,A.VENDOR_NAME AS HoldingName,A.VENDOR_ID AS VendorId,C.DESCR AS HoldingType, A.MR_VENDOR_CLASS AS VendorClass",
+"from":  "FROM dbo.VENDOR A WITH(NOLOCK)LEFT JOIN dbo.REF_MASTER B WITH(NOLOCK) ON  A.MR_VENDOR_CATEGORY_CODE = B.MASTER_CODE LEFT JOIN dbo.REF_MASTER C WITH (NOLOCK) ON a.MR_VENDOR_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE LIKE '%VENDOR_TYPE%'",
+"where": "WHERE A.MR_VENDOR_CLASS = 'HOLDING' AND A.VENDOR_ID = {0}"
         }
       }
     ]

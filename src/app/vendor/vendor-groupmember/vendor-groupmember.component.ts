@@ -74,11 +74,6 @@ export class VendorGroupmemberComponent implements OnInit {
     this.tempData = new Array();
     this.arrCrit = new Array();
 
-
-    this.listSelectedId = new Array();
-    this.tempListId = new Array();
-    this.tempData = new Array();
-
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;

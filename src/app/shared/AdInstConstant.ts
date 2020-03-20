@@ -251,6 +251,7 @@ export class AdInsConstant {
   public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
   public static GetListActiveRefMaster = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode";
   public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
+  public static GetRefMasterTypeOfficeWithoutCG = environment.FoundationR3Url + "/RefMaster/GetRefMasterTypeOfficeWithoutCG"
   //REF INDUSTRY TYPE
   public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
   public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
@@ -444,7 +445,7 @@ export class AdInsConstant {
   public static GetProductOfferingComponent = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponent";
   public static DeleteProdOfferingOfficeMbr = environment.FoundationR3Url + "/ProductOffering/DeleteProdOfferingOfficeMbr";
   public static AddProdOfferingOfficeMbrBatch = environment.FoundationR3Url + "/ProductOffering/AddProdOfferingOfficeMbrBatch";
-
+  public static GetProductHOComponentGrouped = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponentGrouped";
   //REF REASON
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
 
@@ -512,7 +513,7 @@ export class AdInsConstant {
 
   //VENDOR
   public static DeleteVendor = "/Vendor/DeleteVendor";
-  public static GetVendorByVendorId = "/Vendor/GetVendorByVendorId";
+  public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
 
 
   //VENDOR GROUP
@@ -607,10 +608,13 @@ export class AdInsConstant {
 
 
 
-
+//VENDOR CONTACT PERSON
   public static GetVendorContactPersonById = environment.FoundationR3Url + "/VendorContactPerson/GetVendorContactPersonById";
   public static EditVendorContactPerson = environment.FoundationR3Url + "/VendorContactPerson/EditVendorContactPerson";
+  public static GetListVendorContactPersonByVendorId = environment.FoundationR3Url + "/VendorContactPerson/GetListVendorContactPersonByVendorId";
 
+
+  //VENDOR ADDRESS
   public static AddVendorAddr = environment.FoundationR3Url + "/VendorAddr/AddVendorAddr"
   public static EditVendorAddr = environment.FoundationR3Url + "/VendorAddr/EditVendorAddr"
   public static GetVendorAddrByVendorId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorIdMrAddrType"
@@ -625,7 +629,7 @@ export class AdInsConstant {
 
 
   //VENDOR BRANCH
-  public static GetListVendorContactPersonByVendorId = environment.FoundationR3Url + "/VendorContactPerson/GetListVendorContactPersonByVendorId"
+
   //VENDOR EMP
   public static AddVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/AddVendorBranchEmp"
   public static GetVendorEmpByVendorEmpId = environment.FoundationR3Url + "/VendorEmp/GetVendorEmpByVendorEmpId"
