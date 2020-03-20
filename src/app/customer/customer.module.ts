@@ -62,7 +62,7 @@ import { CustBankAccDetailSectionFindataComponent } from './cust-bank-acc-detail
     CustBankAccSectionFindataComponent,
     CustBankAccDetailSectionFindataComponent,
   ],
-  entryComponents: [CustGroupTabDetailComponent]
+  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent]
 })
 export class CustomerModule { 
   constructor(){

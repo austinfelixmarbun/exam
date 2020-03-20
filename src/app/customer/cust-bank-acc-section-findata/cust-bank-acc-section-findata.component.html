@@ -2,7 +2,7 @@
 <div id="CustBankAccSection">
   <div class="col-md-12" style="padding: 0; text-align: right;">
     <span class="mr-1">
-      <button type="button" class="addButton" (click)="" translate>
+      <button type="button" class="addButton" (click)="addCustBankAcc()" translate>
         <i class="ft-plus-circle"></i> Add
       </button>
     </span>
@@ -14,10 +14,10 @@
           {{item.BankName}} - {{item.BankBranch}} - {{item.BankAccNo}} - {{item.BankAccName}}
         </h4>
         <div class="col-md-6">
-          <button type="button" class="addButton" (click)="" translate>
+          <button type="button" class="addButton" translate>
              Add Bank Statement
           </button>
-          <button type="button" class="addButton" (click)="" translate>
+          <button type="button" class="addButton" translate>
             Edit Bank Account
          </button>
         </div>

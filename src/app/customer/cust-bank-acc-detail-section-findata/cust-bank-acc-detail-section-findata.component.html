@@ -16,9 +16,8 @@
                 <div class="form-group row">
                   <label class="col-md-3 adInsLabel adins-required-label" for="BankName" translate>Bank Name</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput" formControlName="BankName" 
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.BankName.invalid }" />
-                    <show-errors [control]="CustBankAccForm.controls.BankName" [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uclookupgeneric [lookupInput]="inputLookupBank" [parentForm]='CustBankAccForm' [enjiForm]='enjiForm' [identifier]="'RefBankLookup'"
+                      (lookup)="getLookupRefBankResponse($event)"></lib-uclookupgeneric>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -45,9 +44,9 @@
                     <show-errors [control]="CustBankAccForm.controls.BankBranch" [submit]="enjiForm.submitted"></show-errors>
                   </div>
                 </div>
-                <div class="form-group row" *ngIf="isAddBankStatement">
-                  <div class="col-md-12 right" style="padding: 0;">
-                    <button type="submit" class="btn btn-raised btn-primary">
+                <div class="form-group row"> <!-- *ngIf="isAddBankStatement" -->
+                  <div class="col-md-12" style="padding: 0; text-align: right; margin-top: 10px;">
+                    <button type="button" class="btn btn-raised btn-primary" (click)="addRowCustBankStmnt()" [disabled]="rowCustBankStmnt >= '12'">
                       Add New Row
                     </button>
                   </div>
@@ -75,37 +74,37 @@
                           </th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr *ngFor="let stmntControl of CustBankAccForm.controls.CustBankStmnts.controls; index as i">
+                      <tbody formArrayName="CustBankStmnts">
+                        <tr *ngFor="let stmntControl of CustBankAccForm.get('CustBankStmnts').controls; index as i" [formGroupName]="i">
                           <td style="text-align: left;">
-                            <select class="form-control adInsInput" formControlName="CustBankAccForm.controls.CustBankStmnts.controls[i].Month" 
-                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.CustBankStmnts.controls[i].Month.invalid }">
-                              <option *ngFor="let monthItem of monthOfYear; index as j" [value]="j">{{monthItem}}</option>
+                            <select class="form-control adInsInput" formControlName="Month"
+                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.Month.invalid }">
+                              <option *ngFor="let monthItem of monthOfYearInclude; index as j" [value]="monthItem">{{monthOfYear[monthItem]}}</option>
                             </select>
-                            <show-errors [control]="CustBankAccForm.controls.CustBankStmnts.controls[i].Month" [submit]="enjiForm.submitted"></show-errors>
+                            <show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.Month" [submit]="enjiForm.submitted"></show-errors>
                           </td>
                           <td style="text-align: left;">
-                            <input type="text" class="form-control adInsInput" formControlName="CustBankAccForm.controls.CustBankStmnts.controls[i].Year" 
-                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.CustBankStmnts.controls[i].Year.invalid }" />
-                            <show-errors [control]="CustBankAccForm.controls.CustBankStmnts.controls[i].Year" [submit]="enjiForm.submitted"></show-errors>
+                            <input type="text" class="form-control adInsInput" formControlName="Year" 
+                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.Year.invalid }" />
+                            <show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.Year" [submit]="enjiForm.submitted"></show-errors>
                           </td>
                           <td style="text-align: left;">
-                            <input type="text" class="form-control adInsInput" formControlName="CustBankAccForm.controls.CustBankStmnts.controls[i].DebitAmt" 
-                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.CustBankStmnts.controls[i].DebitAmt.invalid }" />
-                            <show-errors [control]="CustBankAccForm.controls.CustBankStmnts.controls[i].DebitAmt" [submit]="enjiForm.submitted"></show-errors>
+                            <input type="text" class="form-control adInsInput" formControlName="DebitAmt" 
+                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitAmt.invalid }" />
+                            <show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitAmt" [submit]="enjiForm.submitted"></show-errors>
                           </td>
                           <td style="text-align: left;">
-                            <input type="text" class="form-control adInsInput" formControlName="CustBankAccForm.controls.CustBankStmnts.controls[i].CreditAmt" 
-                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.CustBankStmnts.controls[i].CreditAmt.invalid }" />
-                            <show-errors [control]="CustBankAccForm.controls.CustBankStmnts.controls[i].CreditAmt" [submit]="enjiForm.submitted"></show-errors>
+                            <input type="text" class="form-control adInsInput" formControlName="CreditAmt" 
+                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditAmt.invalid }" />
+                            <show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditAmt" [submit]="enjiForm.submitted"></show-errors>
                           </td>
                           <td style="text-align: left;">
-                            <input type="text" class="form-control adInsInput" formControlName="CustBankAccForm.controls.CustBankStmnts.controls[i].BalanceAmt" 
-                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.CustBankStmnts.controls[i].BalanceAmt.invalid }" />
-                            <show-errors [control]="CustBankAccForm.controls.CustBankStmnts.controls[i].BalanceAmt" [submit]="enjiForm.submitted"></show-errors>
+                            <input type="text" class="form-control adInsInput" formControlName="BalanceAmt" 
+                              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.BalanceAmt.invalid }" />
+                            <show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.BalanceAmt" [submit]="enjiForm.submitted"></show-errors>
                           </td>
-                          <td style="text-align: center;">
-                            <a (click)="">
+                          <td style="text-align: center; vertical-align: middle;">
+                            <a (click)="removeCustBankStmnt(i)">
                               <i class="fas fa-trash"></i>
                             </a>
                           </td>
