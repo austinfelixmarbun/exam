@@ -45,6 +45,7 @@ import { VendorEmployeeComponent } from './component/vendor-employee/vendor-empl
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { UcaddressModule } from '@adins/ucaddress';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { VendorHoldingRegistrationComponent } from './vendor-holding-registration/vendor-holding-registration.component';
 import { HoInfoComponent } from './vendor-ho/vendor-ho-info/ho-info/ho-info.component';
 import { HoAddressInfoComponent } from './vendor-ho/vendor-ho-info/ho-address-info/ho-address-info.component';
 import { HoTaxInfoComponent } from './vendor-ho/vendor-ho-info/ho-tax-info/ho-tax-info.component';
@@ -105,6 +106,7 @@ import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch
     VendorBranchEmployeePagingComponent,
     VendorBranchEmployeeAddEditComponent,
     VendorEmployeeComponent,
+    VendorHoldingRegistrationComponent,
     HoInfoComponent,
     HoTaxInfoComponent,
     HoAddressInfoComponent,
