@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
+import { VerfSchemeDObj } from 'app/shared/model/VerfSchemeDObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
@@ -38,7 +38,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
   viewObj: any;
   Data = [];
 
-  verfQuestionGrpHObj: VerfQuestionGrpHObj;
+  verfSchemeDObj: VerfSchemeDObj;
   VerfSchemeHId: any;
   VerfSchemeCode: any;
   VerfSchemeName: any;
@@ -244,11 +244,10 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     }
   }
 
-
   GetListVerfQuestionGrpHByVerfSchemeDId()
   {
     var verfGroupObj = { VerfSchemeHId: this.VerfSchemeHId }
-    this.http.post(AdInsConstant.GetActiveVerfQuestionGrpDForUpdateByGrpHId, verfGroupObj).subscribe(
+    this.http.post(AdInsConstant.GetVerfSchemeDsByVerfSchemeHId, verfGroupObj).subscribe(
       (response) => {
         this.listVerfQuestionGrpD = response;
         var arrMemberList = new Array();
@@ -268,6 +267,36 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
         }
       },
       (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  SaveVendorSchemeMember(verfSchemeDObj: any) {
+    this.verfSchemeDObj = new VerfSchemeDObj();
+    this.verfSchemeDObj.VerfSchemeHId = this.VerfSchemeHId;
+    this.verfSchemeDObj.VerfSchemeDId = "0";
+    this.verfSchemeDObj.ListVerfQuestionGrpHId = new Array();
+
+    for (let index = 0; index < this.tempData.length; index++) {
+      console.log(this.tempData);
+      var verfDObj = {
+        VerfQuestionGrpHId: this.tempData[index].VerfQuestionGrpHId
+      }
+      this.verfSchemeDObj.ListVerfQuestionGrpHId.push(verfDObj.VerfQuestionGrpHId);
+    }
+
+    if (this.verfSchemeDObj.ListVerfQuestionGrpHId.length == 0) {
+      this.toastr.typeErrorCustom('Please Add At Least One Data');
+      return;
+    }
+
+    this.http.post(AdInsConstant.AddListVerfSchemeD, this.verfSchemeDObj).subscribe(
+      response => {
+        this.toastr.successMessage(response['message']);
+        this.router.navigate(["/Verification/QuestionSchemeMemberPaging"], { queryParams: { "VerfSchemeHId": this.VerfSchemeHId } });
+      },
+      error => {
         console.log(error);
       }
     );

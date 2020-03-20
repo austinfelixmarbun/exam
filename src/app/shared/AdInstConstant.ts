@@ -632,6 +632,7 @@ export class AdInsConstant {
     public static GetVerfSchemeDataByVerfSchemeHId =environment.FoundationR3Url + "/VerfSchemeH/GetVerfSchemeDataByVerfSchemeHId";
     // VERF SCHEME D
     public static AddVerfSchemeD = environment.FoundationR3Url + "/VerfSchemeD/AddVerfSchemeD";
+    public static AddListVerfSchemeD = environment.FoundationR3Url + "/VerfSchemeD/AddListVerfSchemeD";
     public static EditVerfSchemeD = environment.FoundationR3Url + "/VerfSchemeD/EditVerfSchemeD";
     public static GetVerfSchemeDsByVerfSchemeHId = environment.FoundationR3Url + "/VerfSchemeD/GetVerfSchemeDsByVerfSchemeHId";
     public static GetVerfSchemeDById = environment.FoundationR3Url + "/VerfSchemeD/GetVerfSchemeDById";
