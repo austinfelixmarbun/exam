@@ -723,4 +723,11 @@ export class AdInsConstant {
   public static GetKvpRefFinMapByLobCode = environment.FoundationR3Url + "/RefFinMap/GetKvpRefFinMapByLobCode";
 
 
+
+    // // ASSET NEGATIVE
+    // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
+    // public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
+    // public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
+
+    
 }

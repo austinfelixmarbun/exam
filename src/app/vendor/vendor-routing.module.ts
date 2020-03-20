@@ -24,6 +24,7 @@ import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info
 import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
 import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
 import { VendorEmployeeComponent } from './component/vendor-employee/vendor-employee.component';
+import { VendorHoldingRegistrationComponent } from './vendor-holding-registration/vendor-holding-registration.component';
 import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
 import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
 import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
@@ -75,17 +76,24 @@ const routes: Routes = [
         },
       },
       {
-        path: 'HoldingPaging',
+        path: 'Holding/Paging',
         component: VendorHoldingPagingComponent,
         data: {
           title: 'Vendor Holding Paging'
         },
       },
       {
-        path: 'HoldingAddEdit',
+        path: 'Holding/Detail',
         component: VendorHoldingAddEditComponent,
         data: {
           title: 'Vendor Holding Add Edit'
+        },
+      },
+      {
+        path: 'Holding/Registration',
+        component: VendorHoldingRegistrationComponent,
+        data: {
+          title: 'Vendor Registration'
         },
       },
       {
