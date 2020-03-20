@@ -24,10 +24,10 @@
           <aw-wizard-step [stepTitle]="'Contact Person'"
             [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
             <div *ngIf="HiddenState==true">
-              <app-contact-person-list (objOutput)="outputValue($event)"> </app-contact-person-list>
+              <app-contact-person-list (objOutput)="outputValue($event)" [objInput] = "objPassing" [show]="show"> </app-contact-person-list>
             </div>
             <div *ngIf="HiddenState==false">
-              <app-contact-person-add-edit (objOutput)="outputValue($event)"> </app-contact-person-add-edit>
+              <app-contact-person-add-edit (objOutput)="outputValue($event)" [objInput] = "objPassingCP"> </app-contact-person-add-edit>
             </div>
           </aw-wizard-step>
         </aw-wizard>
