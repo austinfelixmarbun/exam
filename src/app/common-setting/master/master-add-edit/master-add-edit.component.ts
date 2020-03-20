@@ -47,8 +47,8 @@ export class MasterAddEditComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['param'] != null) {
-        this.type = params['param'];
+      if (params['mode'] != null) {
+        this.type = params['mode'];
       }
       if (params['refMasterId'] != null) {
         this.refMasterId = params['refMasterId'];
@@ -104,8 +104,8 @@ export class MasterAddEditComponent implements OnInit {
         (response) => {
           console.log("Success Save");
           this.service.typeSave(response['message']);
-          this.router.navigateByUrl('commonSetting/master', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['/commonSetting/master/detail']));
+          this.router.navigateByUrl('CommonSetting/Master', { skipLocationChange: true }).then(() =>
+          this.router.navigate(['/CommonSetting/Master/detail']));
         },
         (error) => {
           console.log("Error Save : ");

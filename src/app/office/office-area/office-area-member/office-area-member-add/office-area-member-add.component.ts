@@ -3,6 +3,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
@@ -42,7 +43,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   listDeletedId: Array<any> = [];
   Data = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location,) {
     this.route.queryParams.subscribe(params => {
       if (params['RefOfficeAreaId'] != null) {
         this.RefOfficeId = params['RefOfficeAreaId'];
@@ -185,6 +186,10 @@ export class OfficeAreaMemberAddComponent implements OnInit {
         this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
       
     }
+  }
+
+  Back() {
+    this.location.back();
   }
 
   SaveOfficeAreaMember() {

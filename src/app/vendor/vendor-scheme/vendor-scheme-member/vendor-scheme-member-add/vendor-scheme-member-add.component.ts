@@ -232,6 +232,11 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   }
 
   SaveVendorSchemeMember() {
+    if (this.tempListId.length == 0) {
+      this.toastr.typeErrorCustom('Please Add At Least One Data');
+      return;
+    }
+
     var obj = {
       VendorSchmId: this.VendorSchmId,
       VendorId: this.tempListId
