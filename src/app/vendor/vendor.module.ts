@@ -13,7 +13,7 @@ import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
 import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
 import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
-// import { BankInfoComponent } from './component/bank-info/bank-info.component';
+import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
@@ -25,8 +25,8 @@ import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme
 import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-add/vendor-scheme-member-add.component';
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
+import { VendorHoldingViewComponent } from './vendor-holding-view/vendor-holding-view.component';
 import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
-import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { ContactPersonListComponent } from './component/contact-person-list/contact-person-list.component';
 import { ContactPersonAddEditComponent } from './component/contact-person-add-edit/contact-person-add-edit.component';
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
@@ -71,7 +71,6 @@ import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch
     ReactiveFormsModule,
     TreeViewModule,
     UcviewgenericModule,
-    UclookupgenericModule,
     NgbDropdownModule,
     ArchwizardModule,
     MatTabsModule,
@@ -82,7 +81,7 @@ import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch
     VendorComponent,
     VendorHoldingPagingComponent,
     VendorHoldingAddEditComponent,
-    BankInfoComponent,
+   BankInfoComponent,
     VendorGroupComponent,
     VendorGroupPagingComponent,
     VendorGroupViewComponent,
@@ -93,8 +92,8 @@ import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch
     VendorSchemeMemberPagingComponent,
     VendorHoAddEditComponent,
     VendorHoPagingComponent,
+    VendorHoldingViewComponent,
     VendorBranchPagingComponent,
-    VendorHoPagingComponent,
     VendorBranchAddEditComponent,
     ContactPersonListComponent,
     ContactPersonAddEditComponent,

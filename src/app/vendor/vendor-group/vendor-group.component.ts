@@ -23,7 +23,6 @@ export class VendorGroupComponent implements OnInit {
     VendorGrpName: ['', Validators.required],
     VenderGrpDesc: [''],
     MrVendorCategoryCode: ['', Validators.required],
-    //MrVendorTypeCode:['',Validators.required],
     IsActive: false,
   })
   refMasterObj: RefMasterObj;
@@ -31,7 +30,6 @@ export class VendorGroupComponent implements OnInit {
   allVendorCategory: any;
   vendorGrpObj: VendorGroupObj;
   resultData: any;
-  //, private toastr: NGXToastrService
 
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -71,9 +69,8 @@ export class VendorGroupComponent implements OnInit {
 
       this.httpClient.post(AdInsConstant.GetVendorGrpByVendorGrpId, this.vendorGrpObj).subscribe(
         (response) => {
+          console.log(response);
           this.resultData = response;
-
-
           this.VendorGroupFrom.patchValue({
 
             VendorGrpCode: this.resultData.VendorGrpCode,
