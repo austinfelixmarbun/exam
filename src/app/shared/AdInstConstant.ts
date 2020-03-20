@@ -633,8 +633,12 @@ export class AdInsConstant {
   public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
   public static GetCustPersonalbyCustId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustId"
 
+  //Custsomer Personal Contact Person
   public static AddNewCustPersonalContactPerson = environment.FoundationR3Url + "/CustPersonalContactPerson/AddCustPersonalContactPerson" 
-  // Customer
+  public static GetListCustPersonalContactPersonByCustId = environment.FoundationR3Url+ "/CustPersonalContactPerson/GetListCustPersonalContactPersonByCustId"
+  public static DeleteCustPersonalContactPerson = environment.FoundationR3Url+ "/CustPersonalContactPerson/DeleteCustPersonalContactPerson"
+
+   // Customer
   public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust"
   public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId"
   public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
@@ -661,7 +665,7 @@ export class AdInsConstant {
   // CUSTOMER ADDRESS
   public static GetListCustAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustId";
   public static GetListCustAddrByCustIdForCustomerPersonalView =  environment.FoundationR3Url+ "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
-  public static GetCustAddrLegalAddrByCustId = "http://localhost:5000/CustAddr/GetCustAddrLegalAddrByCustId"
+  public static GetCustAddrLegalAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetCustAddrLegalAddrByCustId"
   // CUSTOMER ADDRESS HISTORY
   public static GetListCustAddrHistByCustId = environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustId";
   public static GetListCustAddrHistByCustIdForCustomerPersonalView = environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustIdForCustomerPersonalView";

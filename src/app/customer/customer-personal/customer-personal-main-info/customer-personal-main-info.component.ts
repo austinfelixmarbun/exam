@@ -23,7 +23,7 @@ state: any;
     BirthDt: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.required]],
-    IdExpiredDt: ['', [Validators.required]],
+    IdExpiredDt:  [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel : ['', [Validators.required]],
     IsVip : [true],

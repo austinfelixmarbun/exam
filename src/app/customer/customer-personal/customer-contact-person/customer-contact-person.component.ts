@@ -17,9 +17,9 @@ export class CustomerContactPersonComponent implements OnInit {
   }
 
   terimaValue(ev : any){
-     
+    console.log(ev);
      this.isAdd = ev;
      
-    console.log(this.isAdd);
+  
   }
 }
