@@ -1,3 +1,55 @@
-<p>
-  verification-question-scheme-add-edit works!
-</p>
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> VERIFICATION QUESTION SCHEME {{mode}}
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="px-3">
+          <form class="form form-horizontal" [formGroup]="QuestionSchemeForm"
+            (ngSubmit)="QuestionSchemeForm.valid && SaveForm()" #enjiForm="ngForm">
+            <lib-ucSubsection [id]="'QuestionSchemeId'" [title]="'Verification Question Scheme'"
+              [panel]="'QuestionScheme'">
+            </lib-ucSubsection>
+            <div class="form-body" id="QuestionScheme">
+
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Scheme Code </label>
+                <div class="col-md-3">
+                  <input type="text" class="form-control adInsInput width-75-per"
+                    [attr.disabled]="mode == 'edit' ? true : null" formControlName="VerfSchemeCode">
+                  <show-errors [control]="QuestionSchemeForm.controls.VerfSchemeCode" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Scheme Name </label>
+                <div class="col-md-3">
+                  <input type="text" class="form-control adInsInput width-75-per" formControlName="VerfSchemeName">
+                  <show-errors [control]="QuestionSchemeForm.controls.VerfSchemeName" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-actions right">
+                <button type="button" class="btn btn-raised btn-warning mr-1"
+                  [routerLink]="['/Verification/QuestionSchemePaging']" translate>
+                  <i class="fa fa-arrow-circle-left"></i> Back
+                </button>
+                <button type="submit" class="btn btn-raised btn-primary" translate>
+                  <i class="fa fa-check"></i> Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

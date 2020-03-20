@@ -23,6 +23,9 @@ import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info
 import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
 import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
 import { VendorEmployeeComponent } from './component/vendor-employee/vendor-employee.component';
+import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
+import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
+import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
 
 const routes: Routes = [
   {
@@ -40,6 +43,13 @@ const routes: Routes = [
         component: VendorBranchAddEditComponent,
         data: {
           title: 'Vendor Branch Add'
+        },
+      },
+      {
+        path: 'Branch/Registration',
+        component: VendorBranchRegistrationComponent,
+        data: {
+          title: 'Vendor Branch Registration'
         },
       },
       {
@@ -176,10 +186,17 @@ const routes: Routes = [
         },
       },
       {
-        path: 'Branch/Employee/EmpInfo',
-        component: VendorEmployeeComponent,
+        path: 'Branch/Member/Paging',
+        component: VendorBranchOfficeMemberComponent,
         data: {
-          title: 'Vendor Employee Info'
+          title: 'Vendor Branch Member Paging'
+        },
+      },
+      {
+        path: 'Branch/Member/Add',
+        component: VendorBranchOfficeMemberAddComponent,
+        data: {
+          title: 'Vendor Branch Member Add'
         },
       }
     ]
