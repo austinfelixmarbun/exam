@@ -118,16 +118,8 @@
                         {
                             "type": "VendorId",
                             "property": "VendorId"
-                        },
-                        {
-                            "type": "mode",
-                            "property": "edit"
                         }
                     ]
-                },
-                {   
-                    "type": "delete",
-                    "property": "VendorId"
                 }
             ]
         }
