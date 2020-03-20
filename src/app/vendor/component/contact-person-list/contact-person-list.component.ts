@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { WizardComponent } from 'angular-archwizard';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -15,32 +15,26 @@ import { FormBuilder } from '@angular/forms';
   providers: [NGXToastrService]
 })
 export class ContactPersonListComponent implements OnInit {
-
+  VendorContactPersonId: any;
   VendorContactPerson: VendorContactPersonObj;
-  VendorIdParam: any;
   resultData: any = new Array();
+  @Input() objInput: any;
   @Output() objOutput: EventEmitter<any> = new EventEmitter();
   HiddenState: boolean;
-
+  mode: string = "add";
+  
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
-    this.route.queryParams.subscribe(params => {
-      this.VendorIdParam = params["VendorId"];
-
-    });
   }
 
-  ngOnInit(): void {
-    if(this.VendorIdParam != null){
+  ngOnInit(){
+    if(this.objInput["VendorId"] != null){
       this.loadTableListData();
-
     }
-    
-
   }
 
   loadTableListData(){
     this.VendorContactPerson = new VendorContactPersonObj;
-    this.VendorContactPerson.VendorId = this.VendorIdParam;
+    this.VendorContactPerson.VendorId = this.objInput["VendorId"];
 
     this.http.post(AdInsConstant.GetListVendorContactPersonByVendorId, this.VendorContactPerson).subscribe(
       (response) => {
@@ -53,11 +47,9 @@ export class ContactPersonListComponent implements OnInit {
   }
 
   editVendorContactPerson(id) {
-    this.router.navigate(['/Vendor/ContactPerson/Add'], { queryParams: { VendorContactPersonId: id, 'mode': 'edit', VendorId: this.VendorIdParam } });
-  }
-
-  Add(){
-    this.router.navigate(['/Vendor/ContactPerson/Add'], { queryParams: {VendorId: this.VendorIdParam } });
+    this.VendorContactPersonId = id; 
+    this.mode = "edit";
+    this.HiddenCheck();
   }
 
   deleteVendorContactPerson(id){
@@ -65,7 +57,7 @@ export class ContactPersonListComponent implements OnInit {
       this.VendorContactPerson = new VendorContactPersonObj;
       this.VendorContactPerson.VendorContactPersonId = id;
       this.http.post(AdInsConstant.DeleteVendorContactPerson, this.VendorContactPerson).subscribe((response) => {
-        this.router.navigate(['/Vendor/ContactPerson/List'], { queryParams: { VendorId: this.VendorIdParam } });
+        this.HiddenCheck();
         this.toastr.successMessage(response['message']);
         this.loadTableListData();
     },
@@ -77,8 +69,13 @@ export class ContactPersonListComponent implements OnInit {
   }
 
   HiddenCheck() {
-    this.HiddenState = false;
-    this.objOutput.emit(this.HiddenState);
+    var obj={
+      HiddenState: false,
+      VendorId: this.objInput.VendorId,
+      mode: this.mode,
+      VendorContactPersonId: this.VendorContactPersonId
+    }
+    this.objOutput.emit(obj);
   }
 
   NextStep(){

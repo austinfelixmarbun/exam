@@ -9,7 +9,10 @@ import { ActivatedRoute } from '@angular/router';
 export class VendorHoRegistrationComponent implements OnInit {
   VendorId: any; 
   objPassing: any = {};
+  objPassingCP: any = {};
   HiddenState: boolean = true;
+  mode: string;
+  VendorContactPersonId:any;
 
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
@@ -22,6 +25,12 @@ export class VendorHoRegistrationComponent implements OnInit {
   }
 
   outputValue(ev){
-    this.HiddenState = ev;
+    this.HiddenState = ev.HiddenState;
+    this.mode = ev.mode;
+    this.VendorContactPersonId = ev.VendorContactPersonId;
+
+    this.objPassingCP.VendorContactPersonId = this.VendorContactPersonId;
+    this.objPassingCP.mode = this.mode;
+    this.objPassingCP.VendorId = this.VendorId;
   }
 }
