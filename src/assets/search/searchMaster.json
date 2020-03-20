@@ -58,16 +58,6 @@
       "itemsUrl": []
     },
     {
-      "type" : "numeric", 
-      "position" : "left", 
-      "label" : "Sequence No", 
-      "name" : "seq_No",
-      "id": "seqNoId",
-      "value": "",
-      "placeholder": "Placeholder",
-      "datatype": "numeric"
-    },
-    {
       "type": "dropdown",
       "name": "is_System",
       "datatype": "text",
