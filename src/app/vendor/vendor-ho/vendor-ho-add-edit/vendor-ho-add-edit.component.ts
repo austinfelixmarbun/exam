@@ -138,6 +138,7 @@ export class VendorHoAddEditComponent implements OnInit {
     this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+
     if (this.MrVendorCategoryCode != "SUPPLIER_HO") {
       this.inputLookupParentObj.isRequired = false;
     }
@@ -148,7 +149,6 @@ export class VendorHoAddEditComponent implements OnInit {
     critObj.value = this.MrVendorCategoryCode;
     this.arrCrit.push(critObj);
     this.inputLookupParentObj.addCritInput = this.arrCrit;
-
 
     this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();
@@ -205,6 +205,8 @@ export class VendorHoAddEditComponent implements OnInit {
               }
             )
           }
+
+          this.checkHOType();
         },
         (error) => {
           console.log(error);
@@ -228,7 +230,6 @@ export class VendorHoAddEditComponent implements OnInit {
     });
   }
 
-
   updateValueAndValidityForm() {
     this.VendorForm.controls.MrIdTypeCode.updateValueAndValidity();
     this.VendorForm.controls.IdNo.updateValueAndValidity();
@@ -237,13 +238,13 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   checkHOType() {
-    if (this.VendorForm.controls.MrVendorTypeCode.value == 'C') {
+    if (this.VendorForm.controls.MrVendorTypeCode.value != 'P') {
       this.VendorForm.controls.MrIdTypeCode.clearValidators();
       this.VendorForm.controls.IdNo.clearValidators();
       this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
       this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
       this.updateValueAndValidityForm();
-    } else if (this.VendorForm.controls.MrVendorTypeCode.value == 'P') {
+    } else {
       this.VendorForm.controls.RegistrationNo.clearValidators();
       this.VendorForm.controls.LicenseNo.clearValidators();
       this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
