@@ -166,11 +166,14 @@
                             "conditions" : [
                                 {
                                     "property" : "MrOfficeTypeCode",
-                                    "value" : "CG"
+                                    "value" : "CG",
+                                    "restriction" : "EQ"
                                 }
                             ],
                             "result" : {
-                                "path" : "/Office/add",
+                                "type": "url",
+                                "path" : "/Office/Group/Member",
+                                "icon" : "ft-users",
                                 "param" : [
                                     {
                                         "type" : "RefOfficeId",

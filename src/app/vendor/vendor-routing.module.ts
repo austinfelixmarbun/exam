@@ -18,13 +18,22 @@ import { ContactPersonAddEditComponent } from './component/contact-person-add-ed
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
 import { BankInfoComponent } from './component/bank-info/bank-info.component';
+import { ContactPersonListComponent } from './component/contact-person-list/contact-person-list.component';
+import { AddressComponent } from './component/address/address.component';
+import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info.component';
+import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
+import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
+import { VendorEmployeeComponent } from './component/vendor-employee/vendor-employee.component';
+import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
+import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
+import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'Branch',
+        path: 'Branch/Paging',
         component: VendorBranchPagingComponent,
         data: {
           title: 'Vendor Branch Paging'
@@ -35,6 +44,13 @@ const routes: Routes = [
         component: VendorBranchAddEditComponent,
         data: {
           title: 'Vendor Branch Add'
+        },
+      },
+      {
+        path: 'Branch/Registration',
+        component: VendorBranchRegistrationComponent,
+        data: {
+          title: 'Vendor Branch Registration'
         },
       },
       {
@@ -49,6 +65,13 @@ const routes: Routes = [
         component: ContactPersonAddEditComponent,
         data: {
           title: 'Contact Person Add/Edit'
+        },
+      },
+      {
+        path: 'ContactPerson/List',
+        component: ContactPersonListComponent,
+        data: {
+          title: 'Contact Person List'
         },
       },
       {
@@ -151,10 +174,38 @@ const routes: Routes = [
         },
       },
       {
-        path: 'BankInfo',
-        component: BankInfoComponent,
+        path: 'HO/View',
+        component: VendorHoInfoComponent,
         data: {
-          title: 'Vendor HO Member'
+          title: 'Vendor HO View'
+        },
+      },
+      {
+        path: 'Branch/Employee/Paging',
+        component: VendorBranchEmployeePagingComponent,
+        data: {
+          title: 'Vendor Branch Employee Paging'
+        },
+      },
+      {
+        path: 'Branch/Employee/Detail',
+        component: VendorBranchEmployeeAddEditComponent,
+        data: {
+          title: 'Vendor Branch Employee Detail'
+        },
+      },
+      {
+        path: 'Branch/Member/Paging',
+        component: VendorBranchOfficeMemberComponent,
+        data: {
+          title: 'Vendor Branch Member Paging'
+        },
+      },
+      {
+        path: 'Branch/Member/Add',
+        component: VendorBranchOfficeMemberAddComponent,
+        data: {
+          title: 'Vendor Branch Member Add'
         },
       }
     ]

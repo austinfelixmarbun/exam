@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "username",
+            "name": "B.USERNAME",
             "id": "username",
             "value": "",
             "label": "Username",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "employee_Name",
+            "name": "A.EMP_NAME",
             "id": "employeeName",
             "value": "",
             "label": "Employee Name",
@@ -19,7 +19,7 @@
         },
         {
             "type": "textbox",
-            "name": "employee_No",
+            "name": "A.EMP_NO",
             "id": "employeeNo",
             "value": "",
             "label": "Employee No",
@@ -116,7 +116,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/employee/EmployeeBusinessUnit/Paging",
+                    "path": "/Employee/EmployeeBusinessUnit/Paging",
                     "param": [
                         {
                             "type" : "RefUserId",
