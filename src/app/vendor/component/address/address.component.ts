@@ -54,13 +54,13 @@ export class AddressComponent implements OnInit {
 
     this.mode = this.objInput.mode;
 
-    if (this.mode == "edit") {
       var vendorAddrObj = new VendorAddrObj();
       vendorAddrObj.VendorId = this.objInput.VendorId; 
       vendorAddrObj.MrAddrTypeCode = "LEGAL";
       this.http.post(AdInsConstant.GetVendorAddrByVendorId, vendorAddrObj).subscribe(
         (response) => {
           this.result = response;
+          this.mode = "edit";
           this.AddressForm.patchValue({
             MrAddrTypeCode: this.result.MrAddrTypeCode,
             Addr: this.result.Addr,
@@ -79,7 +79,6 @@ export class AddressComponent implements OnInit {
           console.log(error);
         }
       );
-    }
   }
 
   getLookupZipcode(event) {

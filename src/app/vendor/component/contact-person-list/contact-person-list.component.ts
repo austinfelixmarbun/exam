@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-contact-person-list',
@@ -8,7 +9,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class ContactPersonListComponent implements OnInit {
   @Output() objOutput: EventEmitter<any> = new EventEmitter();
   HiddenState: boolean;
-  constructor() { }
+  constructor(private wizard: WizardComponent) { }
 
   ngOnInit() {
   }
@@ -16,5 +17,9 @@ export class ContactPersonListComponent implements OnInit {
   HiddenCheck(){
     this.HiddenState = false;
     this.objOutput.emit(this.HiddenState);
+  }
+
+  NextStep(){
+    this.wizard.goToNextStep();
   }
 }
