@@ -45,6 +45,7 @@ import { VendorEmployeeComponent } from './component/vendor-employee/vendor-empl
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { UcaddressModule } from '@adins/ucaddress';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { VendorHoldingRegistrationComponent } from './vendor-holding-registration/vendor-holding-registration.component';
 
 
 @NgModule({
@@ -97,7 +98,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
     MainInfoViewComponent,
     VendorBranchEmployeePagingComponent,
     VendorBranchEmployeeAddEditComponent,
-    VendorEmployeeComponent
+    VendorEmployeeComponent,
+    VendorHoldingRegistrationComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

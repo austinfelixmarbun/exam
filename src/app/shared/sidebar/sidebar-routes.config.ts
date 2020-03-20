@@ -49,7 +49,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '', title: 'Vendor', icon: 'ft-briefcase', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
-      { path: '/Product/HOpaging', title: 'Vendor Holding', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Vendor/Holding/Paging', title: 'Vendor Holding', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/HODeactivate', title: 'Vendor Head Office', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/ProductOffering/paging', title: 'Vendor Branch', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/OfferingDeactivate', title: 'Vendor Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

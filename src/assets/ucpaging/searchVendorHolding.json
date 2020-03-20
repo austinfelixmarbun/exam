@@ -110,14 +110,14 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/CommonSetting/Profession/detail",
+                    "path": "/Vendor/Holding/Registration",
                     "param": [
                         {
                             "type": "VendorId",
                             "property": "VendorId"
                         },
                         {
-                            "type": "param",
+                            "type": "mode",
                             "property": "edit"
                         }
                     ]
