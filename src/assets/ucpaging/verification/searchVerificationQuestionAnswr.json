@@ -5,7 +5,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "VERF_QUESTION_ANSWER_CODE",
+            "name": "VQA.VERF_QUESTION_ANSWER_CODE",
             "id": "SchemeCodeId",
             "value": "",
             "label": "QUESTION CODE",
@@ -13,7 +13,7 @@
         },
         {
             "type": "textbox",
-            "name": "VERF_QUESTION_ANSWER_TEXT",
+            "name": "VQA.VERF_QUESTION_ANSWER_TEXT",
             "id": "SchemeNameId",
             "value": "",
             "label": "QUESTION TEXT",
@@ -32,28 +32,7 @@
             "label": "Answer Type",
             "items": [],
             "itemsUrl": []
-        },
-        {
-            "type": "dropdown",
-            "name": "IS_ACTIVE",
-            "id": "ActiveStatusId",
-            "label": "ACTIVE STATUS",
-            "value": "",
-            "placeholder": "Placeholder",
-            "isFromURL": false,
-            "isSelectOne": false,
-            "items": [
-                {
-                    "key": "1",
-                    "value": "Yes"
-                },
-                {
-                    "key": "0",
-                    "value": "No"
-                }
-            ],
-            "itemsUrl": []
-        }
+          }
     ],
     "querystring": {
         "select": "SELECT VQA.VERF_QUESTION_ANSWER_ID AS VerfQuestionAnswerId,VQA.REF_VERF_ANSWER_TYPE_ID AS RefAnswerTypeId,VQA.VERF_QUESTION_CODE AS VerfQuestionCode, VQA.VERF_QUESTION_TEXT AS VerfQuestionText, VAT.VERF_ANSWER_TYPE_DESCR AS VerfAnswerTypeDescr, VQA.IS_ACTIVE AS IsActive",
