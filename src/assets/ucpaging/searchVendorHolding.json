@@ -121,10 +121,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "VendorId"
                 }
             ]
         }
