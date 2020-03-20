@@ -49,7 +49,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '', title: 'Vendor', icon: 'ft-briefcase', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
-      { path: '/Product/HOpaging', title: 'Vendor Holding', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Vendor/Holding/Paging', title: 'Vendor Holding', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/HODeactivate', title: 'Vendor Head Office', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/ProductOffering/paging', title: 'Vendor Branch', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/OfferingDeactivate', title: 'Vendor Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
@@ -84,6 +84,7 @@ export const ROUTES: RouteInfo[] = [
   {    path: '', title: 'Vendor', icon: 'ft-aperture', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
       { path: '/Vendor/HO/Paging', title: 'Vendor HO Paging', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Vendor/Branch/Paging', title: 'Vendor Branch Paging', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Vendor/VendorScheme/Paging', title: 'Vendor Scheme Paging', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     ]
   },

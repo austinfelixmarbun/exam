@@ -43,12 +43,12 @@ export class MasterAddEditComponent implements OnInit {
     private location: Location,
     private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
-    private service: NGXToastrService,
+    private toastr: NGXToastrService,
     private fb: FormBuilder
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['param'] != null) {
-        this.type = params['param'];
+      if (params['mode'] != null) {
+        this.type = params['mode'];
       }
       if (params['refMasterId'] != null) {
         this.refMasterId = params['refMasterId'];
@@ -103,13 +103,12 @@ export class MasterAddEditComponent implements OnInit {
         //SAVE
         (response) => {
           console.log("Success Save");
-          this.service.typeSave(response['message']);
-          this.router.navigateByUrl('commonSetting/master', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['/commonSetting/master/detail']));
+          this.toastr.successMessage(response["Message"]);
+          this.router.navigate(['/CommonSetting/Master']);
         },
         (error) => {
           console.log("Error Save : ");
-          this.service.typeErrorCustom(error);
+          this.toastr.typeErrorCustom(error);
         }
       );
     }
@@ -120,13 +119,13 @@ export class MasterAddEditComponent implements OnInit {
       this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
           console.log("Success Edit");
-          this.service.typeSave(response['message']);
+          this.toastr.successMessage(response["Message"]);
           this.location.back();
           this.spinner.hide();
         },
         (error) => {
           console.log("Error Edit");
-          this.service.typeErrorCustom(error);
+          this.toastr.typeErrorCustom(error);
           this.spinner.hide();
         }
       );

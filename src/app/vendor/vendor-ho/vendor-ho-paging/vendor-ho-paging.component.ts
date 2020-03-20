@@ -19,7 +19,6 @@ export class VendorHoPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHO.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVendorHO;
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
