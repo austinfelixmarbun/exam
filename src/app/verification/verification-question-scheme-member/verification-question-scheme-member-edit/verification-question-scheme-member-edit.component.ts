@@ -54,7 +54,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
 
   ngOnInit() {
     var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
-    this.http.post(AdInsConstant.GetQuestionGrpHForUpdateById, verfGroupObj).subscribe(
+    this.http.post(AdInsConstant.GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById, verfGroupObj).subscribe(
       (response) => {
         console.log(response);
         this.verfQuestionGroup = response["ReturnObject"];
@@ -62,7 +62,8 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
           VerfQuestionGrpDId: this.verfQuestionGroup.VerfQuestionGrpDId,
           VerfQuestionGrpHId: this.verfQuestionGroup.VerfQuestionGrpHId,
           VerfQuestionAnswerId: this.verfQuestionGroup.VerfQuestionAnswerId,
-          SeqNo: this.SeqNo
+          SeqNo: this.verfQuestionGroup.SeqNo,
+          RowVersion: this.verfQuestionGroup.RowVersion
         });
         this.VerfQuestionGrpCode = this.verfQuestionGroup.VerfQuestionGrpCode;
         this.VerfQuestionGrpName = this.verfQuestionGroup.VerfQuestionGrpName;
@@ -74,6 +75,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     this.verfSchemeDObj = new VerfSchemeDObj();
     this.verfSchemeDObj = this.QuestionGroupForm.value;
     this.verfSchemeDObj.VerfSchemeHId = this.VerfSchemeHId;
+    this.verfSchemeDObj.VerfSchemeDId = this.VerfSchemeDId;
     console.log(this.verfSchemeDObj);
     this.http.post(AdInsConstant.EditVerfSchemeD, this.verfSchemeDObj).subscribe(
       (response) => {
