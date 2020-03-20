@@ -1,0 +1,117 @@
+{
+    "title": "Branch Office Member Search",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "RO.OFFICE_CODE",
+            "id": "OfficeCodeId",
+            "value": "",
+            "label": "Office Code",
+            "placeholder": "Office Code"
+        },
+        {
+            "type": "textbox",
+            "name": "RO.OFFICE_NAME",
+            "id": "OfficeNameId",
+            "value": "",
+            "label": "Office Name",
+            "placeholder": "Office Name"
+        },
+        {
+            "type": "textbox",
+            "name": "RO.OFFICE_ADDR",
+            "id": "OfficeAddrId",
+            "value": "",
+            "label": "Office Addr",
+            "placeholder": "Office Addr"
+        },
+        {
+            "type": "dropdown",
+            "name": "RO.IS_ACTIVE",
+            "id": "ActiveStatusId",
+            "label": "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "items": [
+                {
+                    "key": "true",
+                    "value": "Yes"
+                },
+                {
+                    "key": "false",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ],
+    "querystring": {
+        "select": "SELECT RO.OFFICE_CODE AS OfficeCode, RO.OFFICE_NAME AS OfficeName, RO.OFFICE_ADDR AS OfficeAddr, RO.IS_ACTIVE AS IsActive, RO.REF_OFFICE_ID AS RefOfficeId",
+        "from": "FROM dbo.REF_OFFICE RO WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Office Code",
+            "name": "RO.OFFICE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Office Name",
+            "name": "RO.OFFICE_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Office Addr",
+            "name": "RO.OFFICE_ADDR"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "ACTIVE STATUS",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeAddr"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "RefOfficeId"
+                }
+            ]
+        }
+    ]
+}

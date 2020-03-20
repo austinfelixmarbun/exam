@@ -164,11 +164,12 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/employee/EmployeeBusinessUnit/Paging",
+                    "icon": "fa fa-sitemap",
+                    "path": "/Vendor/Branch/Member/Paging",
                     "param": [
                         {
-                            "type": "RefUserId",
-                            "property": "RefUserId"
+                            "type": "VendorId",
+                            "property": "VendorId"
                         }
                     ]
                 }
@@ -185,15 +186,23 @@
                             "conditions": [
                                 {
                                     "property": "MrVendorCategoryCode",
-                                    "value": "AGENCY_PERSONAL"
+                                    "value": "AGENCY_PERSONAL",
+                                    "restriction": "NEQ"
+                                },
+                                {
+                                    "property": "MrVendorType",
+                                    "value": "P",
+                                    "restriction": "NEQ"
                                 }
                             ],
                             "result": {
-                                "path": "/Vendor/Branch",
+                                "type": "url",
+                                "icon": "ft-users",
+                                "path": "/Vendor/Branch/Employee/Paging",
                                 "param": [
                                     {
-                                        "type": "MrVendorCategoryCode",
-                                        "property": "MrVendorCategoryCode"
+                                        "type": "VendorId",
+                                        "property": "VendorId"
                                     }
                                 ]
                             },
@@ -209,21 +218,17 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/office/add",
+                    "path": "/Vendor/Branch/Registration",
                     "param": [
                         {
-                            "type": "RefOfficeId",
-                            "property": "RefOfficeId"
+                            "type": "VendorId",
+                            "property": "VendorId"
                         },
                         {
                             "type": "mode",
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "VendorId"
                 }
             ]
         }

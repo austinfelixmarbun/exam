@@ -19,7 +19,7 @@
                                 <div class="form-group row adins-required">
                                     <label class="col-md-3  adInsLabel" translate>Business Unit Code </label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control adInsInput width-75-per"
+                                        <input type="text" class="form-control adInsInput code"
                                             formControlName="BizUnitCode">
                                         <show-errors [control]="BizUnitForm.controls.BizUnitCode"
                                             [submit]="enjiForm.submitted">
@@ -29,7 +29,7 @@
                                 <div class="form-group row adins-required">
                                     <label class="col-md-3  adInsLabel" translate>Business Unit Name </label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control adInsInput width-75-per"
+                                        <input type="text" class="form-control adInsInput name"
                                             formControlName="BizUnitName">
                                         <show-errors [control]="BizUnitForm.controls.BizUnitName"
                                             [submit]="enjiForm.submitted">
@@ -39,7 +39,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3  adInsLabel" translate>Description </label>
                                     <div class="col-md-9">
-                                        <textarea class="form-control adInsInput width-75-per"
+                                        <textarea class="form-control adInsInput name"
                                             formControlName="Descr"> </textarea>
                                         <show-errors [control]="BizUnitForm.controls.Descr"
                                             [submit]="enjiForm.submitted">
@@ -55,7 +55,7 @@
                             </div>
                         <div class="form-actions right">
                             <button type="button" class="btn btn-raised btn-warning mr-1"
-                                [routerLink]="['/organization/businessunit']" translate>
+                                [routerLink]="['/Organization/BusinessUnit']" translate>
                                 <i class="fa fa-arrow-circle-left"></i> Back
                             </button>
                             <button type="submit" class="btn btn-raised btn-primary" translate>

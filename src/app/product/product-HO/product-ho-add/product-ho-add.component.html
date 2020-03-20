@@ -29,8 +29,8 @@
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-25-per" formControlName="ProdCode"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.ProdCode.invalid }">
+                  <show-errors [control]="RefProductHOForm.controls.ProdCode" [submit]="enjiForm.submitted"></show-errors>
                 </div>
-                <show-errors [control]="RefProductHOForm.controls.ProdCode" [submit]="enjiForm.submitted"></show-errors>
               </div>
 
               <div class="form-group row adins-required">
@@ -72,7 +72,7 @@
             </div>
 
             <div class="form-actions right">
-              <button type="submit" (click)="ClickSave('save')" class="btn btn-raised btn-primary">
+              <button type="submit" (click)="ClickSave('save')" class="btn btn-raised btn-primary margin-r-5">
                 <i class="fa fa-check-square-o"></i> Save
               </button>
               <button type="submit" (click)="ClickSave('next')" class="btn btn-raised btn-primary">

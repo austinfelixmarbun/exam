@@ -105,24 +105,28 @@ export class UcProdCompComponent implements OnInit {
 
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
+        console.log("AAA")
+        console.log(response)
+
+
         for (var i = 0; i < response["ReturnObject"].length; i++) {
           var group = response["ReturnObject"][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
           fa_group.push(this.addGroup(group.GroupCode, group.GroupName));
 
-          for (var j = 0; j < group.Components.length; j++) {
-            var comp = group.Components[j];
-            if(comp.ProdCompntType=="DDL")
-            {
-              await this.PopulateDDL(comp)
-            }
-          }
+          // for (var j = 0; j < group.Components.length; j++) {
+          //   var comp = group.Components[j];
+          //   if(comp.ProdCompntType=="DDL")
+          //   {
+          //     await this.PopulateDDL(comp)
+          //   }
+          // }
 
-          for (var j = 0; j < group.Components.length; j++) {
-            var comp = group.Components[j];
-            var fa_comp = (<FormArray>this.FormProdComp.controls['groups']).at(i).get('components') as FormArray;
-            fa_comp.push(this.addComponent(comp));
-          }
+          // for (var j = 0; j < group.Components.length; j++) {
+          //   var comp = group.Components[j];
+          //   var fa_comp = (<FormArray>this.FormProdComp.controls['groups']).at(i).get('components') as FormArray;
+          //   fa_comp.push(this.addComponent(comp));
+          // }
         }
       },
       (error) => {

@@ -1,0 +1,29 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "HOInfoId",
+        "subSectionTitle": "HO Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Assignment Type",
+            "property": "AssignmentType"
+          },
+          {
+
+          },
+          {
+            "type": "text",
+            "label": "Maximum Task Load",
+            "property": "MaxTaskLoad"
+          }
+        ],
+        "querystring": {
+            "select": "SELECT RESERVED_FIELD_1 AS AssignmentType, RESERVED_FIELD_2 AS MaxTaskLoad",
+            "from": "FROM DBO.VENDOR", 
+            "where": "WHERE VENDOR_ID = {0}" 
+        }
+      }
+    ]
+  }

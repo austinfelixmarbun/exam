@@ -12,7 +12,7 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Role Code </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="RoleCode"
+                  <input type="text" class="form-control adInsInput code" formControlName="RoleCode"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefRoleForm.controls.RoleCode.invalid }">
                   <show-errors [control]="RefRoleForm.controls.RoleCode" [submit]="enjiForm.submitted"></show-errors>
                 </div>
@@ -20,7 +20,7 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel " translate>Role Name </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="RoleName"
+                  <input type="text" class="form-control adInsInput name" formControlName="RoleName"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefRoleForm.controls.RoleName.invalid }">
                   <show-errors [control]="RefRoleForm.controls.RoleName" [submit]="enjiForm.submitted"></show-errors>
                 </div>
@@ -34,7 +34,7 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/systemSetting/role']"
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/SystemSetting/Role']"
                 translate>
                 <i class=""></i> Cancel
               </button>

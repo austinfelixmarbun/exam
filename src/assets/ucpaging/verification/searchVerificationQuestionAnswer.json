@@ -5,19 +5,33 @@
     "component": [
         {
             "type": "textbox",
-            "name": "SCHEME_CODE",
+            "name": "VERF_QUESTION_ANSWER_CODE",
             "id": "SchemeCodeId",
             "value": "",
-            "label": "SCHEME CODE",
+            "label": "QUESTION CODE",
             "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
-            "name": "SCHEME_NAME",
+            "name": "VERF_QUESTION_ANSWER_TEXT",
             "id": "SchemeNameId",
             "value": "",
-            "label": "SCHEME NAME",
+            "label": "QUESTION TEXT",
             "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "VQA.REF_VERF_ANSWER_TYPE_ID", 
+            "id": "RefVerfAnswerTypeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "http://localhost:5000/RefVerfAnswerType/GetListKeyValueActiveByCode",
+            "label": "Answer Type",
+            "items": [],
+            "itemsUrl": []
         },
         {
             "type": "dropdown",
