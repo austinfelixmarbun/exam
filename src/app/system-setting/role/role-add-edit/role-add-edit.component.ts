@@ -80,7 +80,7 @@ export class RoleAddEditComponent implements OnInit {
       this.httpClient.post(AdInsConstant.AddRefRole, this.refRoleObj).subscribe(
         response => {
             this.service.successMessage(response["Message"]);
-            this.router.navigate(["/systemSetting/role"]);
+            this.router.navigate(["/SystemSetting/Role"]);
         },
         error => {
           console.log(error);
@@ -96,7 +96,7 @@ export class RoleAddEditComponent implements OnInit {
         response => {
           console.log(response);
           this.service.successMessage(response["Message"]);
-          this.router.navigate(["/systemSetting/role"]);
+          this.router.navigate(["/SystemSetting/Role"]);
         },
         error => {
           console.log(error);

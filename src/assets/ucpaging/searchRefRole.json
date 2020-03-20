@@ -113,7 +113,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/SystemSetting/Role/detail",
+          "path": "/SystemSetting/Role/Detail",
           "param": [
             {
               "type": "RefRoleId",

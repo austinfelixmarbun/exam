@@ -6,7 +6,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-product-ho-paging',
   templateUrl: './product-ho-paging.component.html',
-  styleUrls: ['./product-ho-paging.component.scss']
 })
 export class ProductHOPagingComponent implements OnInit {
 

@@ -84,6 +84,7 @@ export const ROUTES: RouteInfo[] = [
   {    path: '', title: 'Vendor', icon: 'ft-aperture', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
       { path: '/Vendor/HO/Paging', title: 'Vendor HO Paging', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Vendor/Branch/Paging', title: 'Vendor Branch Paging', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Vendor/VendorScheme/Paging', title: 'Vendor Scheme Paging', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     ]
   },

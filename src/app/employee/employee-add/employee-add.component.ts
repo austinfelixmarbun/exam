@@ -263,11 +263,13 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   getLookupZipCodeResponse(e){
+    console.log("Test Lookup");
+    console.log(e);
     this.RefEmpForm.patchValue({
-      Zipcode: e.zipcode,
-      AreaCode1: e.areaCode1,
-      AreaCode2: e.areaCode2,
-      City: e.city,
+      Zipcode: e.Zipcode,
+      AreaCode1: e.AreaCode1,
+      AreaCode2: e.AreaCode2,
+      City: e.City,
     });
   }
 
