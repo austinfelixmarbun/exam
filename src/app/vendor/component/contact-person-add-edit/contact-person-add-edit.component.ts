@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { DISABLED } from '@angular/forms/src/model';
 import { formatDate } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -27,7 +26,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     Phn2: [''],
     Email: ['', Validators.required],
     JoinDt: ['', Validators.required],
-    Owner: [false, Validators.required],
+    IsOwner: [false],
     Addr: [''],
     AreaCode2: [{ value: '', disabled: true }, Validators.required],
     AreaCode1: [{ value: '', disabled: true }, Validators.required],
@@ -38,15 +37,14 @@ export class ContactPersonAddEditComponent implements OnInit {
   inputEmpLookupObj: InputLookupObj;
   inputZipcodeLookupObj: InputLookupObj;
 
-  contactPersonObj : VendorContactPersonObj;
+  contactPersonObj: VendorContactPersonObj;
 
   itemJobPosition: any;
   VendorContactPersonId: any;
   VendorId: any;
   mode: any;
   result: any;
-  zipcodee : any;
-
+  zipcodee: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
@@ -65,8 +63,6 @@ export class ContactPersonAddEditComponent implements OnInit {
     this.http.post("http://r3app-server/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", JobPosition).subscribe(
       (response) => {
         this.itemJobPosition = response["ReturnObject"];
-        console.log("this.itemJobPosition[0].Key");
-        console.log(this.itemJobPosition[0].Key);
         this.ContactPersonForm.patchValue({
           JobPosition: this.itemJobPosition[0].Key
         });
@@ -86,7 +82,6 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.GetVendorContactPersonById, contactPerson).subscribe(
         (response) => {
           this.result = response;
-          
           this.ContactPersonForm.patchValue({
             Name: this.result.Name,
             JobPosition: this.result.MrEmployeePosition,
@@ -94,16 +89,15 @@ export class ContactPersonAddEditComponent implements OnInit {
             Phn2: this.result.Phone2,
             Email: this.result.Email,
             JoinDt: formatDate(this.result.JoinDate, 'yyyy-MM-dd', 'en-US'),
-            Owner: this.result.IsOwner,
+            IsOwner: this.result.IsOwner,
             Addr: this.result.Addr,
             AreaCode1: this.result.AreaCode1,
             AreaCode2: this.result.AreaCode2,
-            City: this.result.AreaCode3,
-            ProvDistrictName: this.result.AreaCode4
+            City: this.result.City,
+            ProvDistrictName: this.result.Province
           })
           this.inputZipcodeLookupObj.nameSelect = this.result.Zipcode;
           this.zipcodee = this.result.Zipcode;
-          
         },
         (error) => {
           console.log(error);
@@ -113,7 +107,6 @@ export class ContactPersonAddEditComponent implements OnInit {
   }
 
   getEmpData(ev) {
-    console.log("ketrigger gan");
     this.ContactPersonForm.patchValue({
       EmpName: ev.EmpName,
       Phn1: ev.Phn1,
@@ -127,33 +120,72 @@ export class ContactPersonAddEditComponent implements OnInit {
       AreaCode1: ev.AreaCode1,
       AreaCode2: ev.AreaCode2,
       City: ev.City,
-      ProvDistrictName: ev.Province
+      ProvDistrictName: ev.Province,
+
     })
-  }
-  SaveForm(){
-    if (this.mode == "edit") {
-      this.contactPersonObj = new VendorContactPersonObj();
-      this.contactPersonObj = this.ContactPersonForm.value;
-      this.contactPersonObj.AreaCode1 = this.ContactPersonForm.controls.AreaCode1.value,
-      this.contactPersonObj.AreaCode2 = this.ContactPersonForm.controls.AreaCode2.value,
-      this.contactPersonObj.City = this.ContactPersonForm.controls.City.value,
-      this.contactPersonObj.Province = this.ContactPersonForm.controls.ProvDistrictName.value,
-      this.contactPersonObj.VendorContactPersonId = this.result.VendorContactPersonId;
-      this.contactPersonObj.Zipcode =  this.zipcodee;
-      this.contactPersonObj.VendorId = this.VendorId;
-      this.contactPersonObj.RowVersion  = this.result.RowVersion;
-      console.log(this.contactPersonObj);
-      this.http.post(AdInsConstant.EditVendorContactPerson, this.contactPersonObj).subscribe(
-          (response) => {
-            console.log("isi yang di edit");
-            console.log(this.contactPersonObj);
-              this.router.navigateByUrl('/bank/paging');
-              this.toastr.successMessage(response['message']);
-          },
-          (error) => {
-              console.log(error);
-          });
+    this.zipcodee = ev.Zipcode;
   }
 
+  SaveForm() {
+    if (this.mode == "edit") {
+      this.contactPersonObj = new VendorContactPersonObj();
+      this.contactPersonObj.VendorContactPersonId = this.VendorContactPersonId;
+      this.contactPersonObj.VendorId = this.VendorId;
+      this.contactPersonObj.Name = this.ContactPersonForm.controls.Name.value;
+      this.contactPersonObj.MrEmployeePosition = this.ContactPersonForm.controls.JobPosition.value;
+      this.contactPersonObj.VendorId = this.VendorId;
+      this.contactPersonObj.Email = this.ContactPersonForm.controls.Email.value;
+      this.contactPersonObj.Phone1 = this.ContactPersonForm.controls.Phn1.value;
+      this.contactPersonObj.Phone2 = this.ContactPersonForm.controls.Phn2.value;
+      this.contactPersonObj.JoinDate = this.ContactPersonForm.controls.JoinDt.value;
+      this.contactPersonObj.IsOwner = this.ContactPersonForm.controls.IsOwner.value;
+      this.contactPersonObj.Addr = this.ContactPersonForm.controls.Addr.value;
+      this.contactPersonObj.AreaCode1 = this.ContactPersonForm.controls.AreaCode1.value;
+      this.contactPersonObj.AreaCode2 = this.ContactPersonForm.controls.AreaCode2.value;
+      this.contactPersonObj.City = this.ContactPersonForm.controls.City.value;
+      this.contactPersonObj.Province = this.ContactPersonForm.controls.ProvDistrictName.value;
+      this.contactPersonObj.Zipcode = this.zipcodee;
+      this.contactPersonObj.RowVersion = this.result.RowVersion;
+      this.http.post(AdInsConstant.EditVendorContactPerson, this.contactPersonObj).subscribe(
+        (response) => {
+          this.router.navigate(['/Vendor/ContactPerson/List'], { queryParams: { VendorId: this.VendorId } });
+          this.toastr.successMessage(response['message']);
+        },
+        (error) => {
+          console.log(error);
+        });
+    }
+    else {
+      this.contactPersonObj = new VendorContactPersonObj();
+      this.contactPersonObj.Name = this.ContactPersonForm.controls.Name.value;
+      this.contactPersonObj.MrEmployeePosition = this.ContactPersonForm.controls.JobPosition.value;
+      this.contactPersonObj.VendorId = this.VendorId;
+      this.contactPersonObj.Email = this.ContactPersonForm.controls.Email.value;
+      this.contactPersonObj.Phone1 = this.ContactPersonForm.controls.Phn1.value;
+      this.contactPersonObj.Phone2 = this.ContactPersonForm.controls.Phn2.value;
+      this.contactPersonObj.JoinDate = this.ContactPersonForm.controls.JoinDt.value;
+      this.contactPersonObj.IsOwner = this.ContactPersonForm.controls.IsOwner.value;
+      this.contactPersonObj.Addr = this.ContactPersonForm.controls.Addr.value;
+      this.contactPersonObj.AreaCode1 = this.ContactPersonForm.controls.AreaCode1.value;
+      this.contactPersonObj.AreaCode2 = this.ContactPersonForm.controls.AreaCode2.value;
+      this.contactPersonObj.City = this.ContactPersonForm.controls.City.value;
+      this.contactPersonObj.Province = this.ContactPersonForm.controls.ProvDistrictName.value;
+      this.contactPersonObj.Zipcode = this.zipcodee;
+
+      this.contactPersonObj.VendorContactPersonId = "0";
+      this.contactPersonObj.RowVersion = "";
+      this.http.post(AdInsConstant.AddVendorContactPerson, this.contactPersonObj).subscribe((response) => {
+
+        this.toastr.successMessage(response['message']);
+        this.router.navigate(['/Vendor/ContactPerson/Add'], { queryParams: { VendorContactPersonId: this.VendorContactPersonId, VendorId: this.VendorId } });
+      },
+        (error) => {
+          console.log(error);
+        });
+    }
+  }
+
+  Back(){
+    this.router.navigate(['/Vendor/ContactPerson/List'], { queryParams: { VendorId: this.VendorId } });
   }
 }

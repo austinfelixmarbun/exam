@@ -45,6 +45,8 @@ export class VendorBranchAddEditComponent implements OnInit {
   arrCritAsIn: any[];
   arrCritLiIn: any[];
   arrCritAgP: any[];
+  MRSupplierUpCalcMethod: any;
+  itemTypeUpCalcMethod: any;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -69,6 +71,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     EstablishmentDt: ['', Validators.required],
     PartnershipDt: ['', Validators.required],
     IsActive: [true],
+    MRSupplierUpCalcMethod : [''],
     VendorParentId: [''],
     ReservedField1: [''],
     ReservedField2: [''],
@@ -105,6 +108,19 @@ export class VendorBranchAddEditComponent implements OnInit {
         this.itemCategoryType = response["ReturnObject"];
         this.VendorForm.patchValue({
           MrVendorCategoryCode: this.MrVendorCategoryCode
+        });
+      }
+    );
+
+
+    var refMRSupplierUpCalcMethod = {
+      RefMasterTypeCode: "SUPPLIER_UP_CALC_METHOD"
+    }
+    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).subscribe(
+      (response) => {
+        this.itemCategoryType = response["ReturnObject"];
+        this.VendorForm.patchValue({
+          MRSupplierUpCalcMethod: this.itemTypeUpCalcMethod[0].Key
         });
       }
     );
