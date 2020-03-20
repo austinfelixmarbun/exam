@@ -120,10 +120,6 @@
                             "property": "VendorId"
                         }
                     ]
-                },
-                {   
-                    "type": "delete",
-                    "property": "VendorId"
                 }
             ]
         }

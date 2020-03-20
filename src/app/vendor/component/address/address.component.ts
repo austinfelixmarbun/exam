@@ -118,6 +118,7 @@ export class AddressComponent implements OnInit {
       this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
       this.http.post(AdInsConstant.AddVendorAddr, this.vendorAddrObj).subscribe(
         (response) => {
+          this.mode="edit";
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
         },
