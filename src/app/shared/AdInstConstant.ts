@@ -350,7 +350,7 @@ export class AdInsConstant {
   public static DeleteRefProfession = "/RefProfession/DeleteRefProfession";
   public static GetRefProfessionById = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByRefProfessionId";
   public static GetValueCustModel = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByCode";
-
+  public static GetRefProfessionByProfessionCode = environment.FoundationR3Url +"/RefProfession/GetRefProfessionByProfessionCode"
   //GENERIC
   public static GetObjectBySQL = "/Generic/GetObjectBySQL";
   public static AddObjectBySQL = "/Generic/AddObjectBySQL";
@@ -637,7 +637,11 @@ export class AdInsConstant {
   public static AddNewCustPersonalContactPerson = environment.FoundationR3Url + "/CustPersonalContactPerson/AddCustPersonalContactPerson" 
   public static GetListCustPersonalContactPersonByCustId = environment.FoundationR3Url+ "/CustPersonalContactPerson/GetListCustPersonalContactPersonByCustId"
   public static DeleteCustPersonalContactPerson = environment.FoundationR3Url+ "/CustPersonalContactPerson/DeleteCustPersonalContactPerson"
+  public static EditCustPersonalContactPerson = environment.FoundationR3Url + "​/CustPersonalContactPerson/EditCustPersonalContactPerson"
 
+ 
+  
+  public static GetCustPersonalContactPersonByCustPersonalContactPersonId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetCustPersonalContactPersonByCustPersonalContactPersonId"
    // Customer
   public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust"
   public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId"

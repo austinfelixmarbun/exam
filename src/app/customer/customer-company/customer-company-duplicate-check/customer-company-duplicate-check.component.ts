@@ -18,14 +18,10 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   getUrl: any;
   tempCompanyTypeCode: any;
   tempIdType: any;
-  
   CustModel: any;
-   
   CustName: any;
   MrCompanyTypeCode: any;
-  
   MrIdTypeCode: any;
- 
   IdNo: any;
   TaxIdNo: any;
   urlGetDescByMasterCode : any;

@@ -36,10 +36,8 @@ export class CustomerContactCheckComponent implements OnInit {
   }
 
   keluarinValue(){
-  
     this.isAdd = true;
-    
-    this.outputValue.emit({mode : this.isAdd});
+    this.outputValue.emit({isAdd : this.isAdd});
  
 }
 deleteItem(custId : any){
@@ -55,9 +53,9 @@ deleteItem(custId : any){
     );
 }
 
-editItem(custId : any){
+editItem(custPersonalContactPersonId : any){
   this.isAdd = true;
-  this.outputValue.emit({mode : this.isAdd, custId : custId});
+  this.outputValue.emit({isAdd : this.isAdd, custPersonalContactPersonId : custPersonalContactPersonId});
 }
 
 }

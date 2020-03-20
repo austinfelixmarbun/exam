@@ -10,7 +10,7 @@ export class CustomerContactPersonComponent implements OnInit {
    
   constructor() { }
   isAdd : any;
-   
+  custPersonalContactPersonId : any;
   ngOnInit() {
       this.isAdd =false;
      
@@ -18,8 +18,8 @@ export class CustomerContactPersonComponent implements OnInit {
 
   terimaValue(ev : any){
     console.log(ev);
-     this.isAdd = ev;
-     
-  
+     this.isAdd = ev.isAdd;
+     this.custPersonalContactPersonId =  ev.custPersonalContactPersonId;
+    
   }
 }
