@@ -34,7 +34,7 @@
     {
       "type": "label",
       "position": "center",
-      "label": "Action"
+      "label": "Select"
     }
   ],
 
@@ -47,7 +47,7 @@
     {
       "type": "text",
       "position": "center",
-      "property": "empNo"
+      "property": "empNo" 
     },
     {
       "type": "text",

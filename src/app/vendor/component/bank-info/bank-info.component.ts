@@ -13,28 +13,28 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   selector: 'app-bank-info',
   templateUrl: './bank-info.component.html',
   styleUrls: ['./bank-info.component.scss'],
-  providers:[VendorService,NGXToastrService]
+  providers: [VendorService, NGXToastrService]
 })
 export class BankInfoComponent implements OnInit {
-  title : any;
-  @Input() objInput : any;
-  modal : any;
-  closeResult : any;
+  title: any;
+  @Input() objInput: any;
+  modal: any;
+  closeResult: any;
   inputLookupBankObj: InputLookupObj;
-  mode : any = "add";
-  VendorBankAcc : any;
-  VendorBankAccId : any;
-  ListData : any = new Array();
+  mode: any = "add";
+  VendorBankAcc: any;
+  VendorBankAccId: any;
+  ListData: any = new Array();
   BankRegisForm = this.fb.group({
     AccNumber: ['', [Validators.required]],
     AccName: ['', [Validators.required]],
-    IsDefault: [],
-    RefBankId : [],
-    BankBranchRegCode : [],
+    IsDefault: [false],
+    RefBankId: [],
+    BankBranchRegCode: [],
   });
-  objEdit : any;
+  objEdit: any;
 
-  constructor(private toastr: NGXToastrService, private route: ActivatedRoute, private modalService: NgbModal,private fb: FormBuilder, private vendorService : VendorService) { }
+  constructor(private toastr: NGXToastrService, private route: ActivatedRoute, private modalService: NgbModal, private fb: FormBuilder, private vendorService: VendorService) { }
 
   ngOnInit() {
     console.log("BANK INFO COm")
@@ -45,14 +45,14 @@ export class BankInfoComponent implements OnInit {
     });
 
     var obj = {
-      VendorId : this.objInput.VendorId
+      VendorId: this.objInput.VendorId
     }
 
     this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
       response => {
         this.ListData = response["ReturnObject"];
       }
-      );   
+    );
 
     this.inputLookupBankObj = new InputLookupObj();
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
@@ -63,8 +63,7 @@ export class BankInfoComponent implements OnInit {
     this.inputLookupBankObj.isRequired = true;
   }
 
-  open(content)
-  {
+  open(content) {
     this.modal = this.modalService.open(content);
     this.modal.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -73,6 +72,9 @@ export class BankInfoComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       this.modal.close();
     });
+    
+    this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
+    this.BankRegisForm.controls.AccName.updateValueAndValidity();
   }
 
   private getDismissReason(reason: any): string {
@@ -85,8 +87,7 @@ export class BankInfoComponent implements OnInit {
     }
   }
 
-  SaveForm()
-  {
+  SaveForm() {
     if (this.mode == "add") {
       this.VendorBankAcc = new VendorBankAccObj();
       this.VendorBankAcc.VendorId = this.objInput.VendorId;
@@ -96,17 +97,27 @@ export class BankInfoComponent implements OnInit {
       this.VendorBankAcc.IsDefault = this.BankRegisForm.controls.IsDefault.value;
       this.vendorService.AddVendorBankAcc(this.VendorBankAcc).subscribe(
         response => {
-            this.toastr.successMessage(response["Message"]);
-            this.modal.close();
-            var obj = {
-              VendorId : this.objInput.VendorId
+          this.toastr.successMessage(response["Message"]);
+          this.modal.close();
+          var obj = {
+            VendorId: this.objInput.VendorId
+          }
+
+          this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
+            response => {
+              this.ListData = response["ReturnObject"];
             }
-        
-            this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
-              response => {
-                this.ListData = response["ReturnObject"];
-              }
-            );    
+          );
+
+          this.BankRegisForm.patchValue({
+            AccNumber: "",
+            AccName: "",
+            RefBankId: "",
+            IsDefault: false
+          });
+          this.inputLookupBankObj.nameSelect = "";
+          this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
+          this.BankRegisForm.controls.AccName.updateValueAndValidity();
         },
         error => {
           console.log(error);
@@ -125,51 +136,53 @@ export class BankInfoComponent implements OnInit {
       this.VendorBankAcc.RowVersion = this.objEdit.RowVersion;
       this.vendorService.EditVendorBankAcc(this.VendorBankAcc).subscribe(
         response => {
-            this.toastr.successMessage(response["Message"]);
-            this.modal.close();
-            var obj = {
-              VendorId : this.objInput.VendorId
-            };
-            this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
-              response => {
-                this.ListData = response["ReturnObject"];
-              }
-            );
+          this.toastr.successMessage(response["Message"]);
+          this.modal.close();
+          var obj = {
+            VendorId: this.objInput.VendorId
+          };
+          this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
+            response => {
+              this.ListData = response["ReturnObject"];
+            }
+          );
+          this.BankRegisForm.patchValue({
+            AccNumber: "",
+            AccName: "",
+            RefBankId: "",
+            IsDefault: false
+          });
+          this.inputLookupBankObj.nameSelect = "";
+          this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
+          this.BankRegisForm.controls.AccName.updateValueAndValidity();
         },
         error => {
           console.log(error);
         }
       );
     }
-    this.BankRegisForm.patchValue({
-      AccNumber : "",
-      AccName : "",
-      RefBankId : "",
-      IsDefault : ""
-    });
+
     this.mode = "add";
   }
 
-  editBank(id, content)
-  {
+  editBank(id, content) {
     this.mode = "edit";
     this.VendorBankAccId = id;
     var obj = {
-      VendorBankAccId : this.VendorBankAccId
+      VendorBankAccId: this.VendorBankAccId
     };
     this.vendorService.GetVendorBankAccByVendorBankAccId(obj).subscribe(response => {
       this.objEdit = response;
-      console.log("ini bagian edit")
       this.BankRegisForm.patchValue({
-        AccNumber : response["BankAccountNo"],
-        AccName : response["BankAccountName"],
-        RefBankId : response["RefBankId"],
-        IsDefault : response["IsDefault"],
+        AccNumber: response["BankAccountNo"],
+        AccName: response["BankAccountName"],
+        RefBankId: response["RefBankId"],
+        IsDefault: response["IsDefault"],
         RowVersion: response["RowVersion"]
       });
       this.inputLookupBankObj.nameSelect = response["BankName"]
     })
-    
+
     this.modal = this.modalService.open(content);
     this.modal.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -180,15 +193,36 @@ export class BankInfoComponent implements OnInit {
     });
   }
 
-  Back()
-  {
+  Back() {
     this.modal.close();
   }
 
-  getLookupBankResponse(e){
+  getLookupBankResponse(e) {
     this.BankRegisForm.patchValue({
       RefBankId: e.refBankId,
       BankBranchRegCode: e.regRptCode
     });
+  }
+  deleteBank(vendorBankAccId) {
+    if (confirm("Are you sure to delete this record?")) {
+      var obj = {
+        VendorBankAccId: vendorBankAccId
+      };
+
+      this.vendorService.DeleteVendorBankAcc(obj).subscribe(response => {
+        this.toastr.successMessage(response["Message"]);
+        var obj = {
+          VendorId: this.objInput.VendorId
+        };
+        this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
+          response => {
+            this.ListData = response["ReturnObject"];
+          }
+        );
+      },
+        error => {
+          console.log(error);
+        });
+    }
   }
 }

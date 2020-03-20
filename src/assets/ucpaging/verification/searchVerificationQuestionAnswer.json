@@ -28,7 +28,7 @@
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://localhost:5000/RefVerfAnswerType/GetListKeyValueActiveByCode",
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefVerfAnswerType/GetListKeyValueActiveByCode",
             "label": "Answer Type",
             "items": [],
             "itemsUrl": []
