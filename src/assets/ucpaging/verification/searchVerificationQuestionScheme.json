@@ -1,6 +1,6 @@
 
 {
-    "title": "verification Question Scheme",
+    "title": "Verification Question Scheme",
     "exportExcel": false,
     "component": [
         {
@@ -67,7 +67,7 @@
         {
             "type": "label",
             "position": "center",
-            "label": "Question Answer"
+            "label": "Question Group"
         },
         {
             "type": "label",

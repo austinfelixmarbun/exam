@@ -52,7 +52,7 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
 
   Edit(item)
   {
-    this.router.navigateByUrl('/Verification/QuestionGroupMember/Edit?VerfQuestionGrpDId=' + item.VerfQuestionGrpDId);
+    this.router.navigateByUrl('/Verification/QuestionGroupMember/Edit?VerfQuestionGrpDId=' + item.VerfQuestionGrpDId + '&VerfQuestionGrpHId=' + this.VerfQuestionGrpHId);
   }
 
 }

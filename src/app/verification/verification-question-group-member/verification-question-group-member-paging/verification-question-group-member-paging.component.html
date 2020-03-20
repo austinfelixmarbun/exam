@@ -3,6 +3,17 @@
     <div class="card">
       <div class="card-body">
         <div class="card-header header-title">
+          <div class="ucSearch-Button-Right">
+            <span class="mr-1">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Verification/QuestionGroupPaging']" translate>
+                <i class="ft-arrow-left"></i> Back
+              </button>
+              <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Verification/QuestionGroupMember/Add']"
+              [queryParams]="{VerfQuestionGrpHId: this.VerfQuestionGrpHId}">
+                <i class="ft-plus-circle"></i> Add
+              </button>
+            </span>
+          </div>
           <div class="row">
             <div class="col-md-8">
               <h4 class="card-title" id="horz-layout-colored-controls" translate> VERIFICATION QUESTION GROUP {{mode}}
