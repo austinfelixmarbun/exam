@@ -30,7 +30,11 @@ export class ContactPersonListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadTableListData();
+    if(this.VendorIdParam != null){
+      this.loadTableListData();
+
+    }
+    
 
   }
 
