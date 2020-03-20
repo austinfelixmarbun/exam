@@ -193,7 +193,7 @@ export class CustomerViewComponent implements OnInit {
       this.isManagement = false;
       this.isContact = false;
       this.isFinData = false;
-      this.isLegal = bypassSanitizationTrustResourceUrl;
+      this.isLegal = true;
     }
   }
 

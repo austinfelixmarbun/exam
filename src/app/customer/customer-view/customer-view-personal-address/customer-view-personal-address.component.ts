@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsService } from 'app/shared/services/adIns.service';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
@@ -30,6 +26,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
   CustForm = this.fb.group({
     DdlAddress: ['']
   });
+  viewCustFinData: string;
 
   // WHERE CA.CUST_ID = 16
 
@@ -43,6 +40,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];

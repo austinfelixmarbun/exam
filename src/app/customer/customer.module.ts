@@ -49,6 +49,7 @@ import { CustomerViewCoyExposureComponent } from './customer-view/customer-view-
 import { CustomerViewCoyCustScoreComponent } from './customer-view/customer-view-coy-cust-score/customer-view-coy-cust-score.component';
 import { CustomerViewCoyCustAddColateralComponent } from './customer-view/customer-view-coy-cust-add-colateral/customer-view-coy-cust-add-colateral.component';
 import { CustomerViewComponent } from './customer-view/customer-view.component';
+import { CustomerViewCoyDetailComponent } from './customer-view/customer-view-coy-detail/customer-view-coy-detail.component';
 @NgModule({
   exports: [],
   imports: [
@@ -98,7 +99,8 @@ import { CustomerViewComponent } from './customer-view/customer-view.component';
     CustomerViewCoyExposureComponent,
     CustomerViewCoyCustScoreComponent,
     CustomerViewCoyCustAddColateralComponent,
-    CustomerViewComponent
+    CustomerViewComponent,
+    CustomerViewCoyDetailComponent
   ],
   entryComponents: [CustGroupTabDetailComponent]
 })

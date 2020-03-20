@@ -12,17 +12,15 @@
             "property": "IndTypeName"
           },
           {
-            "type": "text",
+            "type": "date",
             "label": "Establishment Date",
             "property": "EstDt"
           },
           {
             "type": "text",
             "label": "Number Of Employee",
-            "property": "NoOfEmp"
+            "property": "NumOfEmp"
           },
-
-          
           {
             "type": "text",
             "label": "Tanda Daftar Perusahaan (TDP)",
@@ -34,60 +32,13 @@
             "property": "LisNo"
           },
           {
-            "type": "text",
+            "type": "boolean",
             "label": "Affiliation with Multifinance",
-            "property": "NoOfResidence"
+            "property": "IsAff"
           },
+      
           {
-            "type": "text",
-            "label": "Gelar Belakang Nama",
-            "property": "CustSuffixName"
-          },
-          {
-            "type": "text",
-            "label": "Num Of Residence (Last 3 Years)",
-            "property": "NoOfResidence"
-          },
-          {
-            "type": "text",
-            "label": "Nationality",
-            "property": "MrNationalityCode"
-          },
-          {
-            "type": "text",
-            "label": "Family Card Num",
-            "property": "FamilyCardNo"
-          },
-          {
-            "type": "text",
-            "label": "Country",
-            "property": "CountryName"
-          },
-          {
-            "type": "text",
-            "label": "Mother Maiden Name",
-            "property": "MotherMaidenName"
-          },
-          {
-            "type": "text",
-            "label": "Education",
-            "property": "MrEducationCode"
-          },
-          {
-            "type": "text",
-            "label": "Affiliation with Multifinance",
-            "property": "IsAffiliateWithMf"
-          },
-          {
-            "type": "text",
-            "label": "Religion",
-            "property": "MrReligionCode"
-          },          {
-            "type": "text",
-            "label": "Rest In Peace",
-            "property": "IsRestInPeace"
-          },          {
-            "type": "text",
+            "type": "boolean",
             "label": "VIP",
             "property": "IsVip"
           },

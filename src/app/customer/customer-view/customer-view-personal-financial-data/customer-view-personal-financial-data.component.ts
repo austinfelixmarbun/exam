@@ -11,6 +11,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class CustomerViewPersonalFinancialDataComponent implements OnInit {
   CustId: any;
   GetCBAForCustFinDataByCustIdUrl = AdInsConstant.GetCBAForCustFinDataByCustId;
+  viewCustFinData =   "./assets/ucviewgeneric/viewCustFinData.json";
   responseCBAObj: any;
   allBankStmntList : any;
 

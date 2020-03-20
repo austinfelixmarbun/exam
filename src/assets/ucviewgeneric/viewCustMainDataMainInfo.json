@@ -24,7 +24,7 @@
           {
             "type": "text",
             "label": "Marital Status",
-            "property": "MrSalutationCode"
+            "property": "MrMaritalStatCode"
           },
           {
             "type": "text",
