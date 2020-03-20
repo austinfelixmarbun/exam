@@ -1,0 +1,24 @@
+<fieldset>
+  <div class="input-group no-margin-all" style="width: 100%">
+    <div class="input-group-append">
+      <span class="input-group-btn">
+        <button class="btn btn-raised btn-primary" type="button" (click)="open(content)"><i
+            class="ft-search"></i></button>
+      </span>
+    </div>
+  </div>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">{{title}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- <div class="modal-body"> -->
+      <span class="input-group-btn">
+        <button class="btn btn-raised btn-primary" type="button" (click)="choose()">Select</button>
+      </span>
+    <!-- </div> -->
+  </ng-template>
+  </fieldset>
+  

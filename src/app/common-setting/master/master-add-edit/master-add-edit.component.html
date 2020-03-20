@@ -45,7 +45,7 @@
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="seqNo" translate>Seq No </label>
               <div class="col-md-9">
-                <input type="text" pattern="^[0-9]+$" class="form-control adInsInput" formControlName="SeqNo"
+                <input type="text" pattern="^[0-9]+$" class="form-control adInsInput number" formControlName="SeqNo"
                   [ngClass]="{ 'is-invalid':(enjiForm.submitted || RefMasterForm.controls.SeqNo.touched || RefMasterForm.controls.SeqNo.dirty) && RefMasterForm.controls.SeqNo.invalid }">
                 <show-errors [control]="RefMasterForm.controls.SeqNo" [submit]="enjiForm.submitted"></show-errors>
               </div>

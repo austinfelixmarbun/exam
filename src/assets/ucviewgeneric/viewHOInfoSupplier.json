@@ -1,0 +1,21 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "HOInfoId",
+        "subSectionTitle": "HO Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Supplier Holding",
+            "property": "Parent"
+          }
+        ],
+        "querystring": {
+            "select": "SELECT P.VENDOR_NAME AS Parent",
+            "from": "FROM DBO.VENDOR C JOIN DBO.VENDOR P ON C.VENDOR_PARENT_ID = P.VENDOR_ID", 
+            "where": "WHERE C.VENDOR_ID = {0}" 
+        }
+      }
+    ]
+  }

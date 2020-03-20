@@ -19,7 +19,7 @@ export class HolidayAddComponent implements OnInit {
     HolidaySchemeHForm = this.fb.group({
         HolidaySchmCode : ['', Validators.required],
         HolidaySchmName : ['', Validators.required],
-        IsActive : [false]
+        IsActive : [true]
     })
 
     title : string = "Holiday Scheme-Add";

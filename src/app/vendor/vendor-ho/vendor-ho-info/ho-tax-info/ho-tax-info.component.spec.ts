@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductHOPagingComponent } from './product-ho-paging.component';
+import { HoTaxInfoComponent } from './ho-tax-info.component';
 
-describe('ProductHOPagingComponent', () => {
-  let component: ProductHOPagingComponent;
-  let fixture: ComponentFixture<ProductHOPagingComponent>;
+describe('HoTaxInfoComponent', () => {
+  let component: HoTaxInfoComponent;
+  let fixture: ComponentFixture<HoTaxInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductHOPagingComponent ]
+      declarations: [ HoTaxInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductHOPagingComponent);
+    fixture = TestBed.createComponent(HoTaxInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

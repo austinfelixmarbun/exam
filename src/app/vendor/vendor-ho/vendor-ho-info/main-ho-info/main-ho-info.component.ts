@@ -24,15 +24,15 @@ export class MainHoInfoComponent implements OnInit {
     var obj={
       VendorId: this.VendorId
     }
-    this.viewObj12345 =
+
     this.http.post(AdInsConstant.GetVendorByVendorId, obj).subscribe(
       (response) => {
         this.MrVendorTypeCode = response["MrVendorTypeCode"];
       }
     )
 
-    this.viewCObj = "./assets/ucviewgeneric/viewHOInfoC.json";
-    this.viewPObj = "./assets/ucviewgeneric/viewHOInfoP.json";
+    this.viewCObj = "./assets/ucviewgeneric/viewHOInfoCompany.json";
+    this.viewPObj = "./assets/ucviewgeneric/viewHOInfoPersonal.json";
 
   }
 

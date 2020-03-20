@@ -1,0 +1,39 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+
+@Component({
+  selector: 'app-vendor-branch-office-member',
+  templateUrl: './vendor-branch-office-member.component.html',
+  styleUrls: ['./vendor-branch-office-member.component.scss']
+})
+export class VendorBranchOfficeMemberComponent implements OnInit {
+
+  inputPagingObj: any;
+  VendorId: string;
+  constructor(private route: ActivatedRoute) { 
+    this.route.queryParams.subscribe(params => {
+      this.VendorId = params['VendorId'];
+    });
+  }
+
+  ngOnInit() {
+    this.inputPagingObj = new UcPagingObj();
+    this.inputPagingObj._url = "./assets/ucpaging/searchVendorOfficeMember.json";
+    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorOfficeMember.json";
+    this.inputPagingObj.deleteUrl = "/VendorOfficeMbr/DeleteVendorOfficeMember";
+
+    this.inputPagingObj.addCritInput = new Array();
+    var critObj = new CriteriaObj();
+    critObj.propName = "VOM.VENDOR_ID";
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.value = this.VendorId;
+    this.inputPagingObj.addCritInput.push(critObj);
+  }
+
+}

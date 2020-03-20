@@ -2,6 +2,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 
+.number{
+    width:30%;
+}
 
 .code{
     width:50%;
@@ -271,6 +274,11 @@ form .form-section{
     position:fixed;
     top:8px;
     right:6%;
+}
+
+.margin-r-5
+{
+    margin-right: 5px;
 }
 
 /* 
