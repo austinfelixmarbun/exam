@@ -11,24 +11,24 @@
           (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
           <div class="form-body">
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="IndustryTypeCode">Industry Type Code</label>
+              <label class="col-md-3 adInsLabel  adins-required-label" for="IndustryTypeCode">Industry Type Code</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput adins-required-label code" formControlName="IndustryTypeCode" 
+                <input type="text" class="form-control adInsInput code" formControlName="IndustryTypeCode" 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefIndustryTypeForm.controls.IndustryTypeCode.invalid }"
                   [attr.disabled]="type == 'edit' ? true : null">
                 <show-errors [control]="RefIndustryTypeForm.controls.IndustryTypeCode" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="IndustryTypeName">Industry Type Name</label>
+              <label class="col-md-3 adInsLabel   adins-required-label" for="IndustryTypeName">Industry Type Name</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput adins-required-label" formControlName="IndustryTypeName" 
+                <input type="text" class="form-control adInsInput" formControlName="IndustryTypeName" 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefIndustryTypeForm.controls.IndustryTypeName.invalid }">
                 <show-errors [control]="RefIndustryTypeForm.controls.IndustryTypeName" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="RefEconomicSectorId adins-required-label" translate>Economic Sector Code </label>
+              <label class="col-md-3 adInsLabel  adins-required-label" for="RefEconomicSectorId" translate>Economic Sector Code </label>
               <div class="col-md-3">
                 <lib-uclookupgeneric [lookupInput]="inputLookupObj" [parentForm]='RefIndustryTypeForm' [enjiForm]='enjiForm' [identifier]="'EconomicSectorCode'"
                   (lookup)="getLookupResponse($event)"></lib-uclookupgeneric>

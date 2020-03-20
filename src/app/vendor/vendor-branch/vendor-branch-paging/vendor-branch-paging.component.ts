@@ -27,7 +27,6 @@ export class VendorBranchPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
-    this.inputPagingObj.deleteUrl = "/Vendor/DeleteVendor";
     this.inputPagingObj.addCritInput = new Array();
 
     var critObj = new CriteriaObj();

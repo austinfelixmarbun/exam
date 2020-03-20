@@ -1,10 +1,12 @@
-
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { WizardComponent } from 'angular-archwizard';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-contact-person-list',
@@ -20,17 +22,19 @@ export class ContactPersonListComponent implements OnInit {
   @Output() objOutput: EventEmitter<any> = new EventEmitter();
   HiddenState: boolean;
 
-
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
     this.route.queryParams.subscribe(params => {
-
       this.VendorIdParam = params["VendorId"];
 
     });
   }
 
   ngOnInit(): void {
-    this.loadTableListData();
+    if(this.VendorIdParam != null){
+      this.loadTableListData();
+
+    }
+    
 
   }
 
@@ -75,5 +79,9 @@ export class ContactPersonListComponent implements OnInit {
   HiddenCheck() {
     this.HiddenState = false;
     this.objOutput.emit(this.HiddenState);
+  }
+
+  NextStep(){
+    this.wizard.goToNextStep();
   }
 }
