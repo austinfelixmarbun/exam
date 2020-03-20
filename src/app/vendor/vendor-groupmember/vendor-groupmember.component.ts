@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
@@ -62,12 +61,6 @@ export class VendorGroupmemberComponent implements OnInit {
 
     this.GetListVendorGrpMbrByVendorGrpId();
 
-    // var critInput = new CriteriaObj();
-    // critInput.propName = "A.MR_VENDOR_CATEGORY_CODE";
-    // critInput.restriction = AdInsConstant.RestrictionEq;
-    // critInput.value = this.MrVendorCategoryCode;
-    // this.inputObj.addCritInput.push(critInput);
-    // this.arrCrit = new Array();
 
     this.listSelectedId = new Array();
     this.tempListId = new Array();
@@ -277,8 +270,6 @@ export class VendorGroupmemberComponent implements OnInit {
         addCritListVendorGrp.listValue = arrMemberList;
         this.arrCrit.push(addCritListVendorGrp);
         this.inputObj.addCritInput.push(addCritListVendorGrp);
-
-        console.log("ni sudah jalan get List")
       },
       (error) => {
         console.log(error);

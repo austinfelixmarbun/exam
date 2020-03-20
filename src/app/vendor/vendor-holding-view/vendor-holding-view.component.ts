@@ -2,10 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { DecimalPipe } from '@angular/common';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
-import { VendorGroupMemberObj } from 'app/shared/model/VendorGroupMemberObj.Model';
 import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
@@ -16,7 +14,7 @@ import { environment } from 'environments/environment';
   selector: 'app-vendor-holding-view',
   templateUrl: './vendor-holding-view.component.html',
   styleUrls: ['./vendor-holding-view.component.scss'],
-  providers: [DecimalPipe, NGXToastrService]
+  providers: [NGXToastrService]
 })
 export class VendorHoldingViewComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) UCGridFooter;
@@ -56,10 +54,6 @@ export class VendorHoldingViewComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
-    // this.ProdOfferingDUrl = AdInsConstant.GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode;
-    // this.ProdOfferingBranchUrl = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
-    // this.ProdOfferingVerUrl = AdInsConstant.GetListProdOfferingHVersionByProdOfferingHId;
-
     this.route.queryParams.subscribe(params => {
       if (params["VendorId"] != null) {
         this.VendorId = params["VendorId"];
@@ -69,13 +63,11 @@ export class VendorHoldingViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    //** Main Information **//
     var vendorObj = {
       VendorId: this.VendorId
     }
     this.http.post(AdInsConstant.GetVendorByVendorId, vendorObj).subscribe(
       response => {
-        console.log("Response: ");
         console.log(response);
         this.MrVendorTypeObj = response;
         this.MrVendorTypeCode = this.MrVendorTypeObj.MrVendorTypeCode;
@@ -108,7 +100,6 @@ export class VendorHoldingViewComponent implements OnInit {
 
     this.http.post(AdInsConstant.GetListVendorGrpByVendorId, this.GroupListObj).subscribe(
       response => {
-        console.log("Response: ");
         console.log(response);
         this.VendorGrp = response['ReturnObject']
 
@@ -122,7 +113,6 @@ export class VendorHoldingViewComponent implements OnInit {
 
     this.http.post(AdInsConstant.GetListHoByVendorId, this.HoListObj).subscribe(
       response => {
-        console.log("Response: ");
         console.log(response);
         this.Vendor = response['ReturnObject']
 
@@ -172,7 +162,6 @@ export class VendorHoldingViewComponent implements OnInit {
         console.log(response);
         this.vendorContactPerson = response['ReturnObject'];
         
-        console.log("ni sudah jalan get List")
       },
       (error) => {
         console.log(error);
