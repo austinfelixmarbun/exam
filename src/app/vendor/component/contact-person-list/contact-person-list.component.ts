@@ -2,7 +2,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
@@ -22,7 +21,7 @@ export class ContactPersonListComponent implements OnInit {
   HiddenState: boolean;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
 
       this.VendorIdParam = params["VendorId"];
