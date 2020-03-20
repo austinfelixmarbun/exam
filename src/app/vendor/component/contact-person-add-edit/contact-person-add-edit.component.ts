@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { DISABLED } from '@angular/forms/src/model';
 import { formatDate } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -64,8 +63,6 @@ export class ContactPersonAddEditComponent implements OnInit {
     this.http.post("http://r3app-server/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", JobPosition).subscribe(
       (response) => {
         this.itemJobPosition = response["ReturnObject"];
-        console.log("this.itemJobPosition[0].Key");
-        console.log(this.itemJobPosition[0].Key);
         this.ContactPersonForm.patchValue({
           JobPosition: this.itemJobPosition[0].Key
         });
@@ -82,13 +79,9 @@ export class ContactPersonAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       var contactPerson = new VendorContactPersonObj();
       contactPerson.VendorContactPersonId = this.VendorContactPersonId;
-      console.log("isi contactperson");
-      console.log(contactPerson.VendorContactPersonId);
       this.http.post(AdInsConstant.GetVendorContactPersonById, contactPerson).subscribe(
         (response) => {
           this.result = response;
-          console.log("isi result");
-          console.log(response);
           this.ContactPersonForm.patchValue({
             Name: this.result.Name,
             JobPosition: this.result.MrEmployeePosition,
@@ -105,7 +98,6 @@ export class ContactPersonAddEditComponent implements OnInit {
           })
           this.inputZipcodeLookupObj.nameSelect = this.result.Zipcode;
           this.zipcodee = this.result.Zipcode;
-          console.log(this.ContactPersonForm);
         },
         (error) => {
           console.log(error);
@@ -115,7 +107,6 @@ export class ContactPersonAddEditComponent implements OnInit {
   }
 
   getEmpData(ev) {
-    console.log("ketrigger gan");
     this.ContactPersonForm.patchValue({
       EmpName: ev.EmpName,
       Phn1: ev.Phn1,
@@ -155,7 +146,6 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.contactPersonObj.Province = this.ContactPersonForm.controls.ProvDistrictName.value;
       this.contactPersonObj.Zipcode = this.zipcodee;
       this.contactPersonObj.RowVersion = this.result.RowVersion;
-      console.log(this.contactPersonObj);
       this.http.post(AdInsConstant.EditVendorContactPerson, this.contactPersonObj).subscribe(
         (response) => {
           this.router.navigate(['/Vendor/ContactPerson/List'], { queryParams: { VendorId: this.VendorId } });
