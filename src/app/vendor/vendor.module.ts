@@ -48,6 +48,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HoInfoComponent } from './vendor-ho/vendor-ho-info/ho-info/ho-info.component';
 import { HoAddressInfoComponent } from './vendor-ho/vendor-ho-info/ho-address-info/ho-address-info.component';
 import { HoTaxInfoComponent } from './vendor-ho/vendor-ho-info/ho-tax-info/ho-tax-info.component';
+import { HoBankInfoComponent } from './vendor-ho/vendor-ho-info/ho-bank-info/ho-bank-info.component';
 import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
 import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
 import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
@@ -107,6 +108,7 @@ import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch
     HoInfoComponent,
     HoTaxInfoComponent,
     HoAddressInfoComponent,
+    HoBankInfoComponent,
     VendorBranchRegistrationComponent,
     VendorBranchOfficeMemberAddComponent,
     VendorBranchOfficeMemberComponent
