@@ -15,6 +15,7 @@ import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model'
 })
 export class VerificationQuestionGroupMemberEditComponent implements OnInit {
   verfQuestionGrpDObj: VerfQuestionGrpDObj;
+  VerfQuestionGrpHId: any;
   VerfQuestionGrpDId: any;
   pageType: any;
   result: any;
@@ -35,6 +36,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionGrpDId = params["VerfQuestionGrpDId"];
+      this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
       this.mode = params["mode"];
       if (this.mode != "edit")
         this.mode = "Add";
@@ -82,7 +84,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
       this.http.post(AdInsConstant.EditVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Verification/QuestionGroupMemberPaging');
+          this.router.navigateByUrl('/Verification/QuestionGroupMemberPaging?VerfQuestionGrpHId=' + this.VerfQuestionGrpHId);
         },
         (error) => {
           console.log(error);

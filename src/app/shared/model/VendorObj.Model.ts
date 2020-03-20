@@ -16,13 +16,11 @@ export class VendorObj{
     PartnershipDt: any;
     IsActive: any;
     VendorParentId : any;
-    ReservedField1: any;
-    ReservedField2: any;
     MrTaxCalcMethodCode: any;
     IsVat: any;
     TaxpayerNo: any;
     TaxpayerName: any;
+    MrVendorClass: any;
     RowVersion: any;
-
     constructor() { this.VendorId = 0; }
 }

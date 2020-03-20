@@ -5,7 +5,7 @@
         <div class="card-header header-title">
           <div class="row">
             <div class="col-md-8">
-              <h4 class="card-title" id="horz-layout-colored-controls" translate> VERIFICATION QUESTION GROUP Edit Seq No
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> VERIFICATION QUESTION GROUP MEMBER Edit Seq No
               </h4>
             </div>
           </div>
@@ -50,7 +50,8 @@
 
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1"
-                [routerLink]="['/Verification/QuestionGroupMemberPaging']" translate>
+                [routerLink]="['/Verification/QuestionGroupMemberPaging']"
+                [queryParams]="{VerfQuestionGrpHId: this.VerfQuestionGrpHId}">
                 <i class="fa fa-arrow-circle-left"></i> Back
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
