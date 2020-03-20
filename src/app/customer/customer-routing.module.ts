@@ -9,8 +9,8 @@ import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/cus
 import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
 import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
-import { CustomerViewPersonalComponent } from './customer-view/customer-view-personal/customer-view-personal.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
+import { CustomerViewComponent } from './customer-view/customer-view.component';
 
 const routes: Routes = [
   {
@@ -88,9 +88,9 @@ const routes: Routes = [
       },
       {
         path: 'CustomerView/Page',
-        component: CustomerViewPersonalComponent,
+        component: CustomerViewComponent,
         data: {
-          title: 'Customer View Personal Component'
+          title: 'Customer View Component'
         }
       },
     ]

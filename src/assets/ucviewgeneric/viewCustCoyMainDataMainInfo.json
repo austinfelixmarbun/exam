@@ -1,0 +1,107 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "viewCustCoyMainDataMainInfoId1",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Industry Type Name",
+            "property": "IndTypeName"
+          },
+          {
+            "type": "text",
+            "label": "Establishment Date",
+            "property": "EstDt"
+          },
+          {
+            "type": "text",
+            "label": "Number Of Employee",
+            "property": "NoOfEmp"
+          },
+
+          
+          {
+            "type": "text",
+            "label": "Tanda Daftar Perusahaan (TDP)",
+            "property": "RegNo"
+          },
+          {
+            "type": "text",
+            "label": "Surat Izin Usaha Perdagangan (SIUP)",
+            "property": "LisNo"
+          },
+          {
+            "type": "text",
+            "label": "Affiliation with Multifinance",
+            "property": "NoOfResidence"
+          },
+          {
+            "type": "text",
+            "label": "Gelar Belakang Nama",
+            "property": "CustSuffixName"
+          },
+          {
+            "type": "text",
+            "label": "Num Of Residence (Last 3 Years)",
+            "property": "NoOfResidence"
+          },
+          {
+            "type": "text",
+            "label": "Nationality",
+            "property": "MrNationalityCode"
+          },
+          {
+            "type": "text",
+            "label": "Family Card Num",
+            "property": "FamilyCardNo"
+          },
+          {
+            "type": "text",
+            "label": "Country",
+            "property": "CountryName"
+          },
+          {
+            "type": "text",
+            "label": "Mother Maiden Name",
+            "property": "MotherMaidenName"
+          },
+          {
+            "type": "text",
+            "label": "Education",
+            "property": "MrEducationCode"
+          },
+          {
+            "type": "text",
+            "label": "Affiliation with Multifinance",
+            "property": "IsAffiliateWithMf"
+          },
+          {
+            "type": "text",
+            "label": "Religion",
+            "property": "MrReligionCode"
+          },          {
+            "type": "text",
+            "label": "Rest In Peace",
+            "property": "IsRestInPeace"
+          },          {
+            "type": "text",
+            "label": "VIP",
+            "property": "IsVip"
+          },
+          {
+            "type": "text",
+            "label": "VIP Note",
+            "property": "VipNotes"
+          }
+        ],
+        "querystring": {
+        "select": "SELECT RIT.INDUSTRY_TYPE_NAME AS IndTypeName, CP.NUM_OF_EMP AS NumOfEmp, CP.ESTABLISHMENT_DT AS EstDt,CP.LICENSE_NO AS LisNo, CP.REGISTRATION_NO AS RegNo, C.IS_AFFILIATE_WITH_MF AS IsAff, C.IS_VIP AS IsVip, C.VIP_NOTES AS VipNotes",
+          "from": "FROM dbo.CUST AS C WITH(NOLOCK) JOIN dbo.CUST_COMPANY CP WITH(NOLOCK) ON C.CUST_ID = CP.CUST_ID  LEFT JOIN dbo.REF_INDUSTRY_TYPE RIT WITH(NOLOCK) ON CP.REF_INDUSTRY_TYPE_ID = RIT.REF_INDUSTRY_TYPE_ID",
+          "where": "WHERE C.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

@@ -36,6 +36,19 @@ import { CustomerViewPersonalFinancialDataComponent } from './customer-view/cust
 import { CustomerViewPersonalJobDataNonProfComponent } from './customer-view/customer-view-personal-job-data-non-prof/customer-view-personal-job-data-non-prof.component';
 import { CustomerViewPersonalJobDataEmpComponent } from './customer-view/customer-view-personal-job-data-emp/customer-view-personal-job-data-emp.component';
 import { CustomerViewPersonalJobDataSmeComponent } from './customer-view/customer-view-personal-job-data-sme/customer-view-personal-job-data-sme.component';
+import { CustomerViewPersonalOtherAttrComponent } from './customer-view/customer-view-personal-other-attr/customer-view-personal-other-attr.component';
+import { CustomerViewPersonalAppListingComponent } from './customer-view/customer-view-personal-app-listing/customer-view-personal-app-listing.component';
+import { CustomerViewCoyAddressComponent } from './customer-view/customer-view-coy-address/customer-view-coy-address.component';
+import { CustomerViewCoyManagementComponent } from './customer-view/customer-view-coy-management/customer-view-coy-management.component';
+import { CustomerViewCoyContactComponent } from './customer-view/customer-view-coy-contact/customer-view-coy-contact.component';
+import { CustomerViewCoyFinancialComponent } from './customer-view/customer-view-coy-financial/customer-view-coy-financial.component';
+import { CustomerViewCoyLegalComponent } from './customer-view/customer-view-coy-legal/customer-view-coy-legal.component';
+import { CustomerViewCoyOtherComponent } from './customer-view/customer-view-coy-other/customer-view-coy-other.component';
+import { CustomerViewCoyAppListingComponent } from './customer-view/customer-view-coy-app-listing/customer-view-coy-app-listing.component';
+import { CustomerViewCoyExposureComponent } from './customer-view/customer-view-coy-exposure/customer-view-coy-exposure.component';
+import { CustomerViewCoyCustScoreComponent } from './customer-view/customer-view-coy-cust-score/customer-view-coy-cust-score.component';
+import { CustomerViewCoyCustAddColateralComponent } from './customer-view/customer-view-coy-cust-add-colateral/customer-view-coy-cust-add-colateral.component';
+import { CustomerViewComponent } from './customer-view/customer-view.component';
 @NgModule({
   exports: [],
   imports: [
@@ -72,7 +85,20 @@ import { CustomerViewPersonalJobDataSmeComponent } from './customer-view/custome
     CustomerViewPersonalFinancialDataComponent,
     CustomerViewPersonalJobDataNonProfComponent,
     CustomerViewPersonalJobDataEmpComponent,
-    CustomerViewPersonalJobDataSmeComponent
+    CustomerViewPersonalJobDataSmeComponent,
+    CustomerViewPersonalOtherAttrComponent,
+    CustomerViewPersonalAppListingComponent,
+    CustomerViewCoyAddressComponent,
+    CustomerViewCoyManagementComponent,
+    CustomerViewCoyContactComponent,
+    CustomerViewCoyFinancialComponent,
+    CustomerViewCoyLegalComponent,
+    CustomerViewCoyOtherComponent,
+    CustomerViewCoyAppListingComponent,
+    CustomerViewCoyExposureComponent,
+    CustomerViewCoyCustScoreComponent,
+    CustomerViewCoyCustAddColateralComponent,
+    CustomerViewComponent
   ],
   entryComponents: [CustGroupTabDetailComponent]
 })

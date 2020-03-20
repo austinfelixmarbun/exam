@@ -1,0 +1,42 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "CustMainInfoHeaderId",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Customer No",
+            "property": "CustNo"
+          },
+          {
+            "type": "text",
+            "label": "NPWP",
+            "property": "Npwp"
+          },
+          {
+            "type": "text",
+            "label": "Customer Name",
+            "property": "CustName"
+          },
+          {
+            "type": "text",
+            "label": "Company Type",
+            "property": "CoyType"
+          },
+          {
+            "type": "text",
+            "label": "Customer Model",
+            "property": "CustModel"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT C.CUST_NO AS CustNo, C.CUST_NAME AS CustName, RMMOD.DESCR AS CustModel,  C.TAX_ID_NO AS Npwp, RMTYPE.DESCR AS CoyType",
+          "from": "FROM dbo.CUST AS C WITH(NOLOCK) JOIN dbo.CUST_COMPANY CP WITH(NOLOCK) ON C.CUST_ID = CP.CUST_ID   LEFT JOIN dbo.REF_MASTER RMID WITH(NOLOCK) ON RMID.REF_MASTER_TYPE_CODE = 'ID_TYPE' AND RMID.MASTER_CODE = C.MR_ID_TYPE_CODE LEFT JOIN dbo.REF_MASTER RMMOD WITH(NOLOCK) ON RMMOD.REF_MASTER_TYPE_CODE='CUST_MODEL' AND C.MR_CUST_MODEL_CODE = RMMOD.MASTER_CODE LEFT JOIN dbo.REF_MASTER RMTYPE WITH(NOLOCK) ON RMTYPE.REF_MASTER_TYPE_CODE='COMPANY_TYPE' AND CP.MR_COMPANY_TYPE_CODE = RMTYPE.MASTER_CODE",
+          "where": "WHERE C.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

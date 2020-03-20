@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-customer-view-personal-financial-data',
@@ -6,10 +9,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer-view-personal-financial-data.component.scss']
 })
 export class CustomerViewPersonalFinancialDataComponent implements OnInit {
+  CustId: any;
+  GetCBAForCustFinDataByCustIdUrl = AdInsConstant.GetCBAForCustFinDataByCustId;
+  responseCBAObj: any;
+  allBankStmntList : any;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router,
+    // private adInsService: AdInsService,
+    // private fb: FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['CustId'] != null) {
+        this.CustId = params['CustId'];
+      }
+    });
+
+    var custAddrObj = { "CustId": this.CustId };
+    console.log('debug sini');
+    this.http.post(this.GetCBAForCustFinDataByCustIdUrl, custAddrObj).subscribe(
+      response => {
+        this.responseCBAObj = response['ListCBAForCustFinData'];
+        console.log('isi get list = ', this.responseCBAObj);
+
+        // for(var temp in this.responseCBAObj){
+        //   this.allBankStmntList.push(temp['BankStmntList'])
+        // }
+
+      },
+      error => {
+        this.router.navigateByUrl('Error');
+      }
+    );
+
   }
 
 }

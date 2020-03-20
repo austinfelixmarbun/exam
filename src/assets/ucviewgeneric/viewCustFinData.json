@@ -8,49 +8,39 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "Nett Profit Monthly",
-            "property": "NettProfitMonth"
-          },
-          {
-            "type": "text",
-            "label": "OTHER MONTHLY INSTALLMENT",
-            "property": "OthMonthIns"
-          },
-          {
-            "type": "text",
-            "label": "Other Income",
-            "property": "OthIncome"
-          },
-          {
-            "type": "text",
-            "label": "ASSET MAINTENANCE",
-            "property": "AssetMain"
+            "label": "Monthly Income Ammount",
+            "property": "MthIncAmt"
           },
           {
             "type": "text",
             "label": "Source Of Other Income",
-            "property": "SrcOthIncome"
+            "property": "SrcOthInc"
           },
           {
             "type": "text",
-            "label": "Nett Income",
-            "property": "NettIncome"
+            "label": "Monthly Expense Ammount",
+            "property": "MthExpAmt"
           },
           {
             "type": "text",
-            "label": "Total Income",
-            "property": "TotalIncome"
+            "label": "Spouse Monthly Income Ammount",
+            "property": "SpsMthIncAmt"
+          },
+          {
+            "type": "text",
+            "label": "Monthly Installment Ammount",
+            "property": "MthInsAmt"
           },
           {
             "type": "boolean",
             "label": "Join Income",
-            "property": "JoinIncome"
+            "property": "IsJoinInc"
           }
         ],
         "querystring": {
-          "select": "",
-          "from": "",
-          "where": ""
+          "select": "SELECT  CPFD.MONTHLY_INCOME_AMT AS MthIncAmt, CPFD.MONTHLY_EXPENSE_AMT AS MthExpAmt, CPFD.MONTHLY_INSTALLMENT_AMT AS MthInsAmt,RMINC.DESCR AS SrcOthInc, CPFD.SPOUSE_MONTHLY_INCOME_AMT AS SpsMthIncAmt, CPFD.IS_JOIN_INCOME AS IsJoinInc",
+          "from": "FROM dbo.CUST_PERSONAL_FIN_DATA CPFD JOIN dbo.CUST_PERSONAL CP ON CP.CUST_PERSONAL_ID = CPFD.CUST_PERSONAL_ID LEFT JOIN dbo.REF_MASTER RMINC ON RMINC.REF_MASTER_TYPE_CODE = 'SOURCE_INCOME' AND RMINC.MASTER_CODE = CPFD.MR_SOURCE_OF_INCOME_CODE",
+          "where": "WHERE CP.CUST_ID = {0}"
         }
       }
     ]
