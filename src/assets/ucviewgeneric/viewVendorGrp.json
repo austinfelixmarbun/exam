@@ -27,9 +27,9 @@
                 }
             ],
             "querystring": {
-              "select": "SELECT  C.DESCR AS Descri, A.VENDOR_GRP_CODE AS VendorGrpCode,A.VENDOR_GRP_NAME AS VendorGrpName, B.IS_ACTIVE AS IsActive",
-              "from": "FROM dbo.VENDOR_GRP A WITH(NOLOCK) JOIN dbo.VENDOR_GRP_MBR B WITH(NOLOCK) ON A.VENDOR_GRP_ID = B.VENDOR_GRP_ID JOIN dbo.REF_MASTER C WITH(NOLOCK) ON C.MASTER_CODE = A.MR_VENDOR_CATEGORY_CODE",
-              "where": "WHERE A.PROD_H_ID = {0}"
+                "select":"SELECT  C.DESCR AS Descri, A.VENDOR_GRP_CODE AS VendorGrpCode,A.VENDOR_GRP_NAME AS VendorGrpName, B.IS_ACTIVE AS IsActive",
+               "from": "FROM dbo.VENDOR_GRP A WITH(NOLOCK) LEFT JOIN dbo.VENDOR_GRP_MBR B WITH(NOLOCK) ON A.VENDOR_GRP_ID = B.VENDOR_GRP_ID LEFT JOIN dbo.REF_MASTER C WITH(NOLOCK) ON C.MASTER_CODE = A.MR_VENDOR_CATEGORY_CODE",
+                "where":"WHERE A.VENDOR_GRP_ID = {0}"
             }
         }
     ]
