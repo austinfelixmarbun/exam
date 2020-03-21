@@ -12,6 +12,7 @@
         {
             "type" : "dropdown",
             "label" : "Office Type",
+            "isQueryIn":"true",
             "name" : "A.MR_OFFICE_TYPE_CODE",
             "id" : "MrOfficeTypeId",
             "value" : "",
