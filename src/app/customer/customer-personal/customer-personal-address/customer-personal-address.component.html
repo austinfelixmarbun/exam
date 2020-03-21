@@ -9,6 +9,8 @@
 <br>
 <br>
 <br>
+<br>
+<br>
 <div class="col-md-12">
     <div class="card">
       <div class="card-body">
@@ -50,13 +52,16 @@
                     <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}</td>
                     <td style="text-align: left;">{{item.Notes}}</td>
                     <td style="text-align: left;">
-                      <span *ngIf="item.MrCustAddrTypeCode != 'Job Address'" class="material-icons" [routerLink]="['/Customer/CustomerPersonal/Address/Form']" 
+                      <span *ngIf="item.MrCustAddrTypeCode != 'Legal Address'" class="material-icons" [routerLink]="['/Customer/CustomerPersonal/Address/Form']" 
                       [queryParams]="{mode:'edit', IdCust: this.IdCust, AddrId: item.CustAddrId }">edit</span>
                     </td>
                   </tr>
                 </tbody>
             </table>
           </div>
+          <br>
+          <br>
+          <br>
           <div class="form-actions right" style="text-align: right;" >
             <button type="submit" class="btn btn-raised btn-primary" translate>
               <i class="fa fa-check-square-o"></i> Save and Continue

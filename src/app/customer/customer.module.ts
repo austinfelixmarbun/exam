@@ -32,6 +32,7 @@ import { CustomerPersonalAddressAddComponent } from './customer-personal/custome
 import { UcaddressModule } from '@adins/ucaddress';
 import { CustomerCompanyAddressComponent } from './customer-company/customer-company-address/customer-company-address.component';
 import { CustomerCompanyAddressAddComponent } from './customer-company/customer-company-address/customer-company-address-add/customer-company-address-add.component';
+import { CustomerPersonalJobDataComponent } from './customer-personal/customer-personal-job-data/customer-personal-job-data.component';
 
 @NgModule({
   exports: [],
@@ -65,7 +66,8 @@ import { CustomerCompanyAddressAddComponent } from './customer-company/customer-
     CustomerPersonalAddressComponent,
     CustomerPersonalAddressAddComponent,
     CustomerCompanyAddressComponent,
-    CustomerCompanyAddressAddComponent
+    CustomerCompanyAddressAddComponent,
+    CustomerPersonalJobDataComponent
   ],
   entryComponents: [CustGroupTabDetailComponent]
 })

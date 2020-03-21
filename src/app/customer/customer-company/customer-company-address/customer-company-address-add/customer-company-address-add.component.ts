@@ -51,7 +51,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   listCustAddr: any;
   copyCustomerAddr: any;
   CustDataCompanyForm = this.fb.group({
-    //MrCustTypeCode: ['', [Validators.required, Validators.maxLength(50)]]
     Notes: [''],
     LuasBangunan: [''],
     LuasTanah: [''],
@@ -144,12 +143,12 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
               this.addressObj.Phn2 = this.copyCustomerAddr.Phn2;
               this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
               this.addressObj.PhnExt2 = this.copyCustomerAddr.PhnExt2;
+              this.addressObj.PhnArea3 = this.copyCustomerAddr.PhnArea3;
+              this.addressObj.Phn3 = this.copyCustomerAddr.Phn3;
+              this.addressObj.PhnExt3 = this.copyCustomerAddr.PhnExt3;
               this.addressObj.FaxArea = this.copyCustomerAddr.FaxArea;
               this.addressObj.Fax = this.copyCustomerAddr.Fax;
               this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddr.MrBuildingOwnershipCode;
-              this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
-              this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
-              this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
 
               this.inputFieldAddressObj = new InputFieldObj();
               this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
@@ -182,14 +181,13 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           this.addressObj.PhnExt1 = this.copyCustomerAddr.PhnExt1;
           this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
           this.addressObj.Phn2 = this.copyCustomerAddr.Phn2;
-          this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
           this.addressObj.PhnExt2 = this.copyCustomerAddr.PhnExt2;
+          this.addressObj.PhnArea3 = this.copyCustomerAddr.PhnArea3;
+          this.addressObj.Phn3 = this.copyCustomerAddr.Phn3;
+          this.addressObj.PhnExt3 = this.copyCustomerAddr.PhnExt3;
           this.addressObj.FaxArea = this.copyCustomerAddr.FaxArea;
           this.addressObj.Fax = this.copyCustomerAddr.Fax;
           this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddr.MrBuildingOwnershipCode;
-          this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
-          this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
-          this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
 
           this.inputFieldAddressObj = new InputFieldObj();
           this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
@@ -218,6 +216,9 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.custAddressObj.PhnArea2 = this.CustDataCompanyForm.controls["custAddress"]["controls"].PhnArea2.value;
     this.custAddressObj.Phn2 = this.CustDataCompanyForm.controls["custAddress"]["controls"].Phn2.value;
     this.custAddressObj.PhnExt2 = this.CustDataCompanyForm.controls["custAddress"]["controls"].PhnExt2.value;
+    this.custAddressObj.PhnArea3 = this.CustDataCompanyForm.controls["custAddress"]["controls"].PhnArea3.value;
+    this.custAddressObj.Phn3 = this.CustDataCompanyForm.controls["custAddress"]["controls"].Phn3.value;
+    this.custAddressObj.PhnExt3 = this.CustDataCompanyForm.controls["custAddress"]["controls"].PhnExt3.value;
     this.custAddressObj.FaxArea = this.CustDataCompanyForm.controls["custAddress"]["controls"].FaxArea.value;
     this.custAddressObj.Fax = this.CustDataCompanyForm.controls["custAddress"]["controls"].Fax.value;
     this.custAddressObj.MrBuildingOwnershipCode = this.CustDataCompanyForm.controls["custAddress"]["controls"].MrHouseOwnershipCode.value;
@@ -235,7 +236,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           console.log(response);
           this.toastr.successMessage(response["message"]);
           this.router.navigate(
-            ["/Customer/CustomerPersonal/Address"], 
+            ["/Customer/CustomerCompany/Address"], 
             { queryParams: { "IdCust": this.IdCust }}
             );
           console.log(response)
@@ -252,7 +253,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           console.log(response);
           this.toastr.successMessage(response["message"]);
           this.router.navigate(
-            ["/Customer/CustomerPersonal/Address"], 
+            ["/Customer/CustomerCompany/Address"], 
             { queryParams: { "IdCust": this.IdCust }}
             );
           console.log(response)
