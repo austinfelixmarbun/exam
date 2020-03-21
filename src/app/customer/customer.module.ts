@@ -30,6 +30,8 @@ import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-det
 import { CustomerPersonalAddressComponent } from './customer-personal/customer-personal-address/customer-personal-address.component';
 import { CustomerPersonalAddressAddComponent } from './customer-personal/customer-personal-address/customer-personal-address-add/customer-personal-address-add.component';
 import { UcaddressModule } from '@adins/ucaddress';
+import { CustomerCompanyAddressComponent } from './customer-company/customer-company-address/customer-company-address.component';
+import { CustomerCompanyAddressAddComponent } from './customer-company/customer-company-address/customer-company-address-add/customer-company-address-add.component';
 
 @NgModule({
   exports: [],
@@ -61,7 +63,9 @@ import { UcaddressModule } from '@adins/ucaddress';
     CustGroupTabComponent,
     CustGroupTabDetailComponent,
     CustomerPersonalAddressComponent,
-    CustomerPersonalAddressAddComponent
+    CustomerPersonalAddressAddComponent,
+    CustomerCompanyAddressComponent,
+    CustomerCompanyAddressAddComponent
   ],
   entryComponents: [CustGroupTabDetailComponent]
 })

@@ -12,12 +12,12 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
  
 @Component({
-  selector: 'app-customer-personal-address-add',
-  templateUrl: './customer-personal-address-add.component.html',
-  styleUrls: ['./customer-personal-address-add.component.scss'],
+  selector: 'app-customer-company-address-add',
+  templateUrl: './customer-company-address-add.component.html',
+  styleUrls: ['./customer-company-address-add.component.scss'],
   providers: [NGXToastrService]
 })
-export class CustomerPersonalAddressAddComponent implements OnInit {
+export class CustomerCompanyAddressAddComponent implements OnInit {
   pageType: any;
   AddrId: any;
   CustName  : any;
@@ -50,8 +50,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   getListCustAddr: any;
   listCustAddr: any;
   copyCustomerAddr: any;
-  getCustomerAddr: any;
-  CustDataPersonalForm = this.fb.group({
+  CustDataCompanyForm = this.fb.group({
+    //MrCustTypeCode: ['', [Validators.required, Validators.maxLength(50)]]
     Notes: [''],
     LuasBangunan: [''],
     LuasTanah: [''],
@@ -100,7 +100,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.listAddressType = response['ReturnObject'];
           console.log("aaaa");
           console.log(this.listAddressType);
-          this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
+          this.CustDataCompanyForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
       });
     
       this.custAddrObj = new CustAddrObj();
@@ -111,7 +111,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
             this.listCustAddr = response["ReturnObject"];
-            this.CustDataPersonalForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] });
+            this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] });
 
             console.log("aaa")
             console.log(this.listCustAddr)
@@ -122,38 +122,39 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
         this.custAddrObj.CustAddrId = this.AddrId;
         this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
           (response) => {
-              this.getCustomerAddr = response;
+              this.copyCustomerAddr = response;
               console.log("ggg")
-              console.log(this.getCustomerAddr)
-              this.CustDataPersonalForm.patchValue({
-                  Notes: this.getCustomerAddr.Notes,
-                  MrCustAddrTypeCode: this.getCustomerAddr.MrCustAddrTypeCode
+              console.log(this.copyCustomerAddr)
+              this.CustDataCompanyForm.patchValue({
+                  Notes: this.copyCustomerAddr.Notes,
+                  MrCustAddrTypeCode: this.copyCustomerAddr.MrCustAddrTypeCode
               });
               
               this.addressObj = new CustAddrObj();
-              this.addressObj.Addr = this.getCustomerAddr.Addr;
-              this.addressObj.AreaCode3 = this.getCustomerAddr.AreaCode3;
-              this.addressObj.AreaCode4 = this.getCustomerAddr.AreaCode4;
-              this.addressObj.AreaCode1 = this.getCustomerAddr.AreaCode1;
-              this.addressObj.AreaCode2 = this.getCustomerAddr.AreaCode2;
-              this.addressObj.City = this.getCustomerAddr.City;
-              this.addressObj.PhnArea1 = this.getCustomerAddr.PhnArea1;
-              this.addressObj.Phn1 = this.getCustomerAddr.Phn1;
-              this.addressObj.PhnExt1 = this.getCustomerAddr.PhnExt1;
-              this.addressObj.PhnArea2 = this.getCustomerAddr.PhnArea2;
-              this.addressObj.Phn2 = this.getCustomerAddr.Phn2;
-              this.addressObj.PhnExt2 = this.getCustomerAddr.PhnExt2;
-              this.addressObj.PhnArea3 = this.getCustomerAddr.PhnArea3;
-              this.addressObj.Phn3 = this.getCustomerAddr.Phn3;
-              this.addressObj.PhnExt3 = this.getCustomerAddr.PhnExt3;
-              this.addressObj.FaxArea = this.getCustomerAddr.FaxArea;
-              this.addressObj.Fax = this.getCustomerAddr.Fax;
-              this.addressObj.MrHouseOwnershipCode = this.getCustomerAddr.MrBuildingOwnershipCode;
+              this.addressObj.Addr = this.copyCustomerAddr.Addr;
+              this.addressObj.AreaCode3 = this.copyCustomerAddr.AreaCode3;
+              this.addressObj.AreaCode4 = this.copyCustomerAddr.AreaCode4;
+              this.addressObj.AreaCode1 = this.copyCustomerAddr.AreaCode1;
+              this.addressObj.AreaCode2 = this.copyCustomerAddr.AreaCode2;
+              this.addressObj.City = this.copyCustomerAddr.City;
+              this.addressObj.PhnArea1 = this.copyCustomerAddr.PhnArea1;
+              this.addressObj.Phn1 = this.copyCustomerAddr.Phn1;
+              this.addressObj.PhnExt1 = this.copyCustomerAddr.PhnExt1;
+              this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
+              this.addressObj.Phn2 = this.copyCustomerAddr.Phn2;
+              this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
+              this.addressObj.PhnExt2 = this.copyCustomerAddr.PhnExt2;
+              this.addressObj.FaxArea = this.copyCustomerAddr.FaxArea;
+              this.addressObj.Fax = this.copyCustomerAddr.Fax;
+              this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddr.MrBuildingOwnershipCode;
+              this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
+              this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
+              this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
 
               this.inputFieldAddressObj = new InputFieldObj();
               this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
-              this.inputFieldAddressObj.inputLookupObj.nameSelect = this.getCustomerAddr.Zipcode;
-              this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.getCustomerAddr.Zipcode};
+              this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddr.Zipcode;
+              this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.copyCustomerAddr.Zipcode};
               
           });
       }
@@ -161,11 +162,11 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   copyAddress(){
     this.custAddrObj = new CustAddrObj();
-    this.custAddrObj.CustAddrId = this.CustDataPersonalForm.controls["CopyAddrFrom"].value;
+    this.custAddrObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
     this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
       (response) => {
           this.copyCustomerAddr = response;
-          this.CustDataPersonalForm.patchValue({
+          this.CustDataCompanyForm.patchValue({
               Notes: this.copyCustomerAddr.Notes
           });
           
@@ -181,13 +182,14 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.addressObj.PhnExt1 = this.copyCustomerAddr.PhnExt1;
           this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
           this.addressObj.Phn2 = this.copyCustomerAddr.Phn2;
+          this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
           this.addressObj.PhnExt2 = this.copyCustomerAddr.PhnExt2;
-          this.addressObj.PhnArea3 = this.copyCustomerAddr.PhnArea3;
-          this.addressObj.Phn3 = this.copyCustomerAddr.Phn3;
-          this.addressObj.PhnExt3 = this.copyCustomerAddr.PhnExt3;
           this.addressObj.FaxArea = this.copyCustomerAddr.FaxArea;
           this.addressObj.Fax = this.copyCustomerAddr.Fax;
           this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddr.MrBuildingOwnershipCode;
+          this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
+          this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
+          this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
 
           this.inputFieldAddressObj = new InputFieldObj();
           this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
@@ -196,33 +198,30 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           
       });
       console.log("vvv")
-      console.log(this.CustDataPersonalForm)
+      console.log(this.CustDataCompanyForm)
   }
 
   setCustAddr(){
     this.custAddressObj.CustId = this.IdCust;
-    this.custAddressObj.MrCustAddrTypeCode = this.CustDataPersonalForm.controls["MrCustAddrTypeCode"].value;
-    this.custAddressObj.Addr = this.CustDataPersonalForm.controls["custAddress"]["controls"].Addr.value;
-    this.custAddressObj.FullAddr = this.CustDataPersonalForm.controls["custAddress"]["controls"].Addr.value;
-    this.custAddressObj.AreaCode3 = this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode3.value;
-    this.custAddressObj.AreaCode4 = this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode4.value;
-    this.custAddressObj.Zipcode = this.CustDataPersonalForm.controls["custAddressZipcode"]["controls"].value.value;
-    this.custAddressObj.AreaCode1 = this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode1.value;
-    this.custAddressObj.AreaCode2 = this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode2.value;
-    this.custAddressObj.City = this.CustDataPersonalForm.controls["custAddress"]["controls"].City.value;
-    this.custAddressObj.PhnArea1 = this.CustDataPersonalForm.controls["custAddress"]["controls"].PhnArea1.value;
-    this.custAddressObj.Phn1 = this.CustDataPersonalForm.controls["custAddress"]["controls"].Phn1.value;
-    this.custAddressObj.PhnExt1 = this.CustDataPersonalForm.controls["custAddress"]["controls"].PhnExt1.value;
-    this.custAddressObj.PhnArea2 = this.CustDataPersonalForm.controls["custAddress"]["controls"].PhnArea2.value;
-    this.custAddressObj.Phn2 = this.CustDataPersonalForm.controls["custAddress"]["controls"].Phn2.value;
-    this.custAddressObj.PhnExt2 = this.CustDataPersonalForm.controls["custAddress"]["controls"].PhnExt2.value;
-    this.custAddressObj.PhnArea3 = this.CustDataPersonalForm.controls["custAddress"]["controls"].PhnArea3.value;
-    this.custAddressObj.Phn3 = this.CustDataPersonalForm.controls["custAddress"]["controls"].Phn3.value;
-    this.custAddressObj.PhnExt3 = this.CustDataPersonalForm.controls["custAddress"]["controls"].PhnExt3.value;
-    this.custAddressObj.FaxArea = this.CustDataPersonalForm.controls["custAddress"]["controls"].FaxArea.value;
-    this.custAddressObj.Fax = this.CustDataPersonalForm.controls["custAddress"]["controls"].Fax.value;
-    this.custAddressObj.MrBuildingOwnershipCode = this.CustDataPersonalForm.controls["custAddress"]["controls"].MrHouseOwnershipCode.value;
-    this.custAddressObj.Notes = this.CustDataPersonalForm.controls["Notes"].value;
+    this.custAddressObj.MrCustAddrTypeCode = this.CustDataCompanyForm.controls["MrCustAddrTypeCode"].value;
+    this.custAddressObj.Addr = this.CustDataCompanyForm.controls["custAddress"]["controls"].Addr.value;
+    this.custAddressObj.FullAddr = this.CustDataCompanyForm.controls["custAddress"]["controls"].Addr.value;
+    this.custAddressObj.AreaCode3 = this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode3.value;
+    this.custAddressObj.AreaCode4 = this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode4.value;
+    this.custAddressObj.Zipcode = this.CustDataCompanyForm.controls["custAddressZipcode"]["controls"].value.value;
+    this.custAddressObj.AreaCode1 = this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode1.value;
+    this.custAddressObj.AreaCode2 = this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode2.value;
+    this.custAddressObj.City = this.CustDataCompanyForm.controls["custAddress"]["controls"].City.value;
+    this.custAddressObj.PhnArea1 = this.CustDataCompanyForm.controls["custAddress"]["controls"].PhnArea1.value;
+    this.custAddressObj.Phn1 = this.CustDataCompanyForm.controls["custAddress"]["controls"].Phn1.value;
+    this.custAddressObj.PhnExt1 = this.CustDataCompanyForm.controls["custAddress"]["controls"].PhnExt1.value;
+    this.custAddressObj.PhnArea2 = this.CustDataCompanyForm.controls["custAddress"]["controls"].PhnArea2.value;
+    this.custAddressObj.Phn2 = this.CustDataCompanyForm.controls["custAddress"]["controls"].Phn2.value;
+    this.custAddressObj.PhnExt2 = this.CustDataCompanyForm.controls["custAddress"]["controls"].PhnExt2.value;
+    this.custAddressObj.FaxArea = this.CustDataCompanyForm.controls["custAddress"]["controls"].FaxArea.value;
+    this.custAddressObj.Fax = this.CustDataCompanyForm.controls["custAddress"]["controls"].Fax.value;
+    this.custAddressObj.MrBuildingOwnershipCode = this.CustDataCompanyForm.controls["custAddress"]["controls"].MrHouseOwnershipCode.value;
+    this.custAddressObj.Notes = this.CustDataCompanyForm.controls["Notes"].value;
   }
 
   SaveForm(){
@@ -247,7 +246,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
       );
     } else {
       this.custAddressObj.CustAddrId = this.AddrId;
-      this.custAddressObj.RowVersion = this.getCustomerAddr.RowVersion;
+      this.custAddressObj.RowVersion = this.copyCustomerAddr.RowVersion;
       this.http.post(this.editCustAddr, this.custAddressObj).subscribe(
         (response) => {
           console.log(response);

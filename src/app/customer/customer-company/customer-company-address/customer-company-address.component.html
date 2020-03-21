@@ -1,6 +1,6 @@
 <div class="ucSearch-Button-Right">
     <span class="mr-1">
-        <button type="button" class="addButton" [routerLink]="['/Customer/CustomerPersonal/Address/Form']" 
+        <button type="button" class="addButton" [routerLink]="['/Customer/CustomerCompany/Address/Form']" 
         [queryParams]="{mode:'add', IdCust: this.IdCust }" translate>
             <i class="ft-plus-circle"></i> Add
         </button>
@@ -50,14 +50,14 @@
                     <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}</td>
                     <td style="text-align: left;">{{item.Notes}}</td>
                     <td style="text-align: left;">
-                      <span *ngIf="item.MrCustAddrTypeCode != 'Job Address'" class="material-icons" [routerLink]="['/Customer/CustomerPersonal/Address/Form']" 
+                      <span class="material-icons" [routerLink]="['/Customer/CustomerCompany/Address/Form']" 
                       [queryParams]="{mode:'edit', IdCust: this.IdCust, AddrId: item.CustAddrId }">edit</span>
                     </td>
                   </tr>
                 </tbody>
             </table>
           </div>
-          <div class="form-actions right" style="text-align: right;" >
+          <div class="form-actions right" style="text-align: right;">
             <button type="submit" class="btn btn-raised btn-primary" translate>
               <i class="fa fa-check-square-o"></i> Save and Continue
             </button>

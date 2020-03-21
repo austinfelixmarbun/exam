@@ -13,6 +13,8 @@ import { CustomerViewPersonalComponent } from './customer-view/customer-view-per
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 import { CustomerPersonalAddressComponent } from './customer-personal/customer-personal-address/customer-personal-address.component';
 import { CustomerPersonalAddressAddComponent } from './customer-personal/customer-personal-address/customer-personal-address-add/customer-personal-address-add.component';
+import { CustomerCompanyAddressComponent } from './customer-company/customer-company-address/customer-company-address.component';
+import { CustomerCompanyAddressAddComponent } from './customer-company/customer-company-address/customer-company-address-add/customer-company-address-add.component';
 
 const routes: Routes = [
   {
@@ -103,10 +105,24 @@ const routes: Routes = [
         }
       },
       {
-        path: 'CustomerPersonal/Address/Add',
+        path: 'CustomerPersonal/Address/Form',
         component: CustomerPersonalAddressAddComponent,
         data: {
-          title: 'Customer Personal Address Add'
+          title: 'Customer Personal Address Add Edit'
+        }
+      },
+      {
+        path: 'CustomerCompany/Address',
+        component: CustomerCompanyAddressComponent,
+        data: {
+          title: 'Customer Company Address'
+        }
+      },
+      {
+        path: 'CustomerCompany/Address/Form',
+        component: CustomerCompanyAddressAddComponent,
+        data: {
+          title: 'Customer Company Address Add Edit'
         }
       },
     ]
