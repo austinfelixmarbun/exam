@@ -40,34 +40,53 @@ export class CustBankAccSectionFindataComponent implements OnInit {
     );
   }
 
-  addCustBankAcc(){
+  custBankHandler(type, custBankAccId){
     const modalCustBank = this.modalService.open(CustBankAccDetailSectionFindataComponent);
+    modalCustBank.componentInstance.CustId = this.CustId;
+    modalCustBank.componentInstance.pageType = type;
+    modalCustBank.componentInstance.CustBankAccId = custBankAccId;
+    modalCustBank.componentInstance.isAddBankStatement = type == "edit" || type == "editStmnt" ? true : false;
+    switch (type) {
+      case "add":
+        modalCustBank.componentInstance.modalTitle = "Add New Customer Bank Account";
+        break;
+
+      case "editStmnt":
+        modalCustBank.componentInstance.modalTitle = "Add New Customer Bank Statement";
+        break;
+
+      case "edit":
+        modalCustBank.componentInstance.modalTitle = "Edit Customer Bank Account";
+        break;
+    
+      default:
+        break;
+    }
+    
     modalCustBank.result.then(
       (response) => {
-
+        this.spinner.show();
+        var custBankAccObj = new CustBankAccObj();
+        custBankAccObj.CustId = this.CustId;
+        this.httpClient.post(AdInsConstant.GetCBAForCustFinDataByCustId, custBankAccObj).subscribe(
+          (response: any) => {
+            this.cbaFinDataList = response.ListCBAForCustFinData;
+          },
+          (error) => {
+            console.log("ERROR");
+            console.log(error);
+          }
+        );
+        this.spinner.hide();
+        this.toastr.successMessage(response["message"]);
       }
     ).catch(
       (error) => {
-        console.log("ERROR MODAL");
-        console.log(error);
+        if(error != 0){
+          console.log("ERROR MODAL");
+          console.log(error);
+        }
       }
     );
-    // modalCustBank.componentInstance.MrCustTypeCode = this.MrCustTypeCode;
-    // modalCustBank.componentInstance.CustId = this.CustId;
-    // modalCustBank.result.then(
-    //   (response) => {
-    //     this.spinner.show();
-    //     var custGrp = new CustGrpObj();
-    //     custGrp.CustId = this.CustId;
-    //     this.httpClient.post(AdInsConstant.GetListCustGrpByCustIdForCustGrpTab, custGrp).subscribe(
-    //       (response: any) => {
-    //         this.CustGrpList = response.CustGrpObjForCustGrpTabs;
-    //       }
-    //     );
-    //     this.spinner.hide();
-    //     this.toastr.successMessage(response["message"]);
-    //   }
-    // );
   }
-
 }

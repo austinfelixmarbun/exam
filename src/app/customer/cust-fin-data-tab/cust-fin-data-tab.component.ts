@@ -5,6 +5,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 
+// Implementation : <app-cust-fin-data-tab [CustId]="'2'" [MrCustTypeCode]="'PERSONAL'" (CustFinDataResponse)="getResponse($event)"></app-cust-fin-data-tab>
+
 @Component({
   selector: 'app-cust-fin-data-tab',
   templateUrl: './cust-fin-data-tab.component.html',
@@ -13,16 +15,17 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
   @Input() CustId: number;
+  @Output() CustFinDataResponse: EventEmitter<any> = new EventEmitter();
   sourceOfIncomeList: any;
 
   CustPersonalFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0, [Validators.required]],
     CustPersonalId: [0, [Validators.required]],
-    MonthlyIncomeAmt: [0, [Validators.pattern('^[0-9]+$')]],
-    MonthlyExpenseAmt: [0, [Validators.pattern('^[0-9]+$')]],
-    MonthlyInstallmentAmt: [0, [Validators.pattern('^[0-9]+$')]],
+    MonthlyIncomeAmt: ['', [Validators.pattern('^[0-9]+$')]],
+    MonthlyExpenseAmt: ['', [Validators.pattern('^[0-9]+$')]],
+    MonthlyInstallmentAmt: ['', [Validators.pattern('^[0-9]+$')]],
     MrSourceOfIncomeCode: [''],
-    SpouseMonthlyIncomeAmt: [0, [Validators.pattern('^[0-9]+$')]],
+    SpouseMonthlyIncomeAmt: ['', [Validators.pattern('^[0-9]+$')]],
     IsJoinIncome: [false],
     RowVersion: ['']
   });
@@ -30,30 +33,30 @@ export class CustFinDataTabComponent implements OnInit {
   CustCompanyFinDataForm = this.fb.group({
     CustCompanyFinDataId: [0, [Validators.required]],
     CustCompanyId: [0, [Validators.required]],
-    GrossMonthlyIncomeAmt: [0, [Validators.pattern('^[0-9]+$')]], 
-    GrossProfitAmt: [0, [Validators.pattern('^[0-9]+$')]],
-    ReturnOfInvestmentPrcnt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    ReturnOfEquityPrcnt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    ReturnOfAssetPrcnt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    ProfitMarginPrcnt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    CurrentRatioPrcnt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    DebtEquityRatioPrcnt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    InvTurnOverPrcnt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    ArTurnOverPrcnt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    GrowthPrcnt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    WorkingCapitalAmt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    OthMonthlyInstAmt: [0, [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    GrossMonthlyIncomeAmt: ['', [Validators.pattern('^[0-9]+$')]], 
+    GrossProfitAmt: ['', [Validators.pattern('^[0-9]+$')]],
+    ReturnOfInvestmentPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    ReturnOfEquityPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    ReturnOfAssetPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    ProfitMarginPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    CurrentRatioPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    DebtEquityRatioPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    InvTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    ArTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    GrowthPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    WorkingCapitalAmt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    OthMonthlyInstAmt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
     DateAsOf: ['', [Validators.required]],
-    Revenue: [0, [Validators.pattern('^[0-9]+$')]],
-    OprCost: [0, [Validators.pattern('^[0-9]+$')]],
-    ProfitBeforeTax: [0, [Validators.pattern('^[0-9]+$')]],
-    CurrAsset: [0, [Validators.pattern('^[0-9]+$')]],
-    NetFixedAsset: [0, [Validators.pattern('^[0-9]+$')]],
-    TotalAsset: [0, [Validators.pattern('^[0-9]+$')]],
-    CurrLiablts: [0, [Validators.pattern('^[0-9]+$')]],
-    LongTemrLiablts: [0, [Validators.pattern('^[0-9]+$')]],
-    ShareholderEquity: [0, [Validators.pattern('^[0-9]+$')]],
-    CurrRatio: [0, [Validators.pattern('^[0-9]+$')]],
+    Revenue: ['', [Validators.pattern('^[0-9]+$')]],
+    OprCost: ['', [Validators.pattern('^[0-9]+$')]],
+    ProfitBeforeTax: ['', [Validators.pattern('^[0-9]+$')]],
+    CurrAsset: ['', [Validators.pattern('^[0-9]+$')]],
+    NetFixedAsset: ['', [Validators.pattern('^[0-9]+$')]],
+    TotalAsset: ['', [Validators.pattern('^[0-9]+$')]],
+    CurrLiablts: ['', [Validators.pattern('^[0-9]+$')]],
+    LongTemrLiablts: ['', [Validators.pattern('^[0-9]+$')]],
+    ShareholderEquity: ['', [Validators.pattern('^[0-9]+$')]],
+    CurrRatio: ['', [Validators.pattern('^[0-9]+$')]],
     RowVersion: ['']
   });
 
@@ -80,7 +83,7 @@ export class CustFinDataTabComponent implements OnInit {
   }
 
   getCustFinData(){
-    var response = {};
+    var response;
 
     if(this.MrCustTypeCode == "PERSONAL"){
       response = this.CustPersonalFinDataForm.value;
@@ -89,7 +92,7 @@ export class CustFinDataTabComponent implements OnInit {
       response = this.CustCompanyFinDataForm.value;
     }
 
-    return response;
+    this.CustFinDataResponse.emit(response);
   }
 
 }

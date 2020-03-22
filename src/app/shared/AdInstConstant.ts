@@ -560,7 +560,6 @@ export class AdInsConstant {
     public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
 
     // VERIFICATION
-
     // REF VERF ANSWER TYPE
     public static AddRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/AddRefVerfAnswerType";
     public static EditRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/EditRefVerfAnswerType";
@@ -650,6 +649,12 @@ export class AdInsConstant {
 
     // CUSTOMER FIN DATA
     public static GetCBAForCustFinDataByCustId = environment.FoundationR3Url + "/CustBankAcc/GetCBAForCustFinDataByCustId";
+    public static AddCBAForCustFinData = environment.FoundationR3Url + "/CustBankAcc/AddCBAForCustFinData";
+    public static EditCBAForCustFinData = environment.FoundationR3Url + "/CustBankAcc/EditCBAForCustFinData";
+    public static GetCustBankAccByCustBankAccId = environment.FoundationR3Url + "/CustBankAcc/GetCustBankAccByCustBankAccId";
+    public static GetCBAForCustFinDataEditModeByCustBankAccId = environment.FoundationR3Url + "/CustBankAcc/GetCBAForCustFinDataEditModeByCustBankAccId";
+    public static GetCustBankAccByCustBankAccIdWithRefBank = environment.FoundationR3Url + "/CustBankAcc/GetCustBankAccByCustBankAccIdWithRefBank";
+    public static AddCustBankAcc = environment.FoundationR3Url + "/CustBankAcc/AddCustBankAcc";
 
     // NEGATIVE CUSTOMER
     public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
