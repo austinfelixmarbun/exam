@@ -1,0 +1,38 @@
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <div class="customerData">
+            <form class="form form-horizontal" [formGroup]="JobDataNonProForm" (ngSubmit)="JobDataNonProForm.valid && SaveForm()"
+                #enjiForm="ngForm">
+              <div class="form-body">
+                <div id="jobData">
+                    <div class="form-group row">
+                        <label class="col-md-2 adInsLabel adins-required" translate>Profession Name </label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput" formControlName="ProfessionName"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataNonProForm.controls.ProfessionName.invalid }">
+                          <show-errors [control]="JobDataNonProForm.controls.ProfessionName" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 adInsLabel adins-required" translate>Job Title Name </label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput" formControlName="JobTitleName"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataNonProForm.controls.JobTitleName.invalid }">
+                          <show-errors [control]="JobDataNonProForm.controls.JobTitleName" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="form-actions right" style="text-align: right;" >
+                <button type="submit" class="btn btn-raised btn-primary" translate>
+                  <i class="fa fa-check-square-o"></i> Save and Continue
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

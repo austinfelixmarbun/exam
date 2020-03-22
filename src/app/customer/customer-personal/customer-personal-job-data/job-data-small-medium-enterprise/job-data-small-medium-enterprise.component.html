@@ -1,0 +1,216 @@
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <div class="customerData">
+            <form class="form form-horizontal" [formGroup]="JobDataSmeForm" (ngSubmit)="JobDataSmeForm.valid && SaveForm()"
+                #enjiForm="ngForm">
+              <div class="form-body">
+                <div id="jobData">
+                    <div class="form-group row">
+                        <label class="col-md-2 adInsLabel adins-required" translate>Profession Name </label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput" formControlName="ProfessionName"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.ProfessionName.invalid }">
+                          <show-errors [control]="JobDataSmeForm.controls.ProfessionName" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 adInsLabel adins-required" translate>Job Position </label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput" formControlName="JobPosition"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.JobPosition.invalid }">
+                          <show-errors [control]="JobDataSmeForm.controls.JobPosition" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 adInsLabel adins-required" translate>Job Title Name </label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput" formControlName="JobTitleName"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.JobTitleName.invalid }">
+                          <show-errors [control]="JobDataSmeForm.controls.JobTitleName" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 adInsLabel adins-required" translate>Nama Perusahaan/Usaha </label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput" formControlName="IndustryName"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.IndustryName.invalid }">
+                          <show-errors [control]="JobDataSmeForm.controls.IndustryName" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 adInsLabel adins-required" translate>Industry Type Name </label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput" formControlName="IndustryTypeName"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.IndustryTypeName.invalid }">
+                          <show-errors [control]="JobDataSmeForm.controls.IndustryTypeName" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 adInsLabel adins-required" translate>Company Scale </label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput" formControlName="CompanyScale"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.CompanyScale.invalid }">
+                          <show-errors [control]="JobDataSmeForm.controls.CompanyScale" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 adInsLabel adins-required" translate>Number of Employee </label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput" formControlName="NumberEmployee"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.NumberEmployee.invalid }">
+                          <show-errors [control]="JobDataSmeForm.controls.NumberEmployee" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 adInsLabel adins-required" translate>Employment Establishment Date </label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput" formControlName="EmpEstablishmentDate"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.EmpEstablishmentDate.invalid }">
+                          <show-errors [control]="JobDataSmeForm.controls.EmpEstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                    </div>
+                    <lib-ucSubsection [id]="'jobAddrId'" [title]="'Job Address'" [panel]="'jobAddr'">
+                    </lib-ucSubsection>
+                    <div id="jobAddr">
+                        <div id="CustMainDataPersonal"> 
+                            <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataSmeForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"></lib-ucaddress>
+                        </div>
+                    </div>
+                    <lib-ucSubsection [id]="'jobAddrAttrId'" [title]="'Job Address Info'" [panel]="'jobAddrAttribute'">
+                    </lib-ucSubsection>
+                    <div id="jobAddrAttribute">
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Building Location Class </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="LocationClass"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.Notes.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Building Price Estimates </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="PriceEstimates"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.Notes.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Building Stay Length </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="StayLength"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.Notes.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
+                            <div class="col-md-4">
+                            <textarea type="text" class="form-control adInsInput" formControlName="Notes"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.Notes.invalid }"></textarea>
+                            <show-errors [control]="JobDataSmeForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                    </div>
+                    <lib-ucSubsection [id]="'otherBusinessId'" [title]="'Other Business'" [panel]="'otherBusiness'">
+                    </lib-ucSubsection>
+                    <div id="otherBusiness">
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Other Business Name </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="OtherBusinessName"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherBusinessName.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.OtherBusinessName" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Other Business Type </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="OtherBusinessType"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherBusinessType.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.OtherBusinessType" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Other Business Industry Type </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="OtherBusinessIndustry"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherBusinessIndustry.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.OtherBusinessIndustry" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Other Job Position </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="OtherJobPosition"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherJobPosition.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.OtherJobPosition" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Establishment Date </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="EstablishmentDate"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.EstablishmentDate.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.EstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                    </div>
+                    <lib-ucSubsection [id]="'otherAddrId'" [title]="'Other Business Address'" [panel]="'otherBusinessAddr'">
+                    </lib-ucSubsection>
+                    <div id="otherBusinessAddr">
+                        <div id="CustMainDataPersonal"> 
+                            <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Other Business Address'" [UCAddrForm]="JobDataSmeForm" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [default]="otherAddrObj" [inputField]="inputOtherAddressObj" [showOwnership]="true"></lib-ucaddress>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
+                            <div class="col-md-4">
+                            <textarea type="text" class="form-control adInsInput" formControlName="Notes"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.Notes.invalid }"></textarea>
+                            <show-errors [control]="JobDataSmeForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                    </div>
+                    <lib-ucSubsection [id]="'otherAddrAttrId'" [title]="'Other Business Address Attribute'" [panel]="'otherAddrAttribute'">
+                    </lib-ucSubsection>
+                    <div id="otherAddrAttribute">
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Building Location Class </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="OtherLocationClass"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherLocationClass.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.OtherLocationClass" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Building Price Estimates </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="OtherPriceEstimates"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherPriceEstimates.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.OtherPriceEstimates" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 adInsLabel adins-required" translate>Building Stay Length </label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control adInsInput" formControlName="OtherStayLength"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherStayLength.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.OtherStayLength" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="form-actions right" style="text-align: right;" >
+                <button type="submit" class="btn btn-raised btn-primary" translate>
+                  <i class="fa fa-check-square-o"></i> Save and Continue
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

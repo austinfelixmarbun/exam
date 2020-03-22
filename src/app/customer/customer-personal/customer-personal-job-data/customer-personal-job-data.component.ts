@@ -7,6 +7,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
  
 @Component({
   selector: 'app-customer-personal-job-data',
@@ -33,14 +34,17 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   IdCust : any;
   IdCustPersonal : any;
   custObj : any;
-  custAddrObj : any;
-  listCustAddr: any;
+  getListActiveRefMaster: any;
   getCustById: any;
-  getListCustAddr: any;
+  jobType: any;
+  listJobType: any;
+  CustJobDataForm = this.fb.group({
+    JobDataType: [''],
+  });
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
-    this.getListCustAddr = AdInsConstant.GetListCustAddr;
+    this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
 
 
     this.route.queryParams.subscribe(params => {
@@ -61,17 +65,14 @@ export class CustomerPersonalJobDataComponent implements OnInit {
           this.custObj = response;
       });
 
-      this.custAddrObj = new CustAddrObj();
-      this.custAddrObj.CustId = this.IdCust;
-      this.custAddrObj.MrCustAddrTypeCode = "-";
-      console.log("bbb");
-      console.log(this.custAddrObj);
-      this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
-        (response) => {
-            this.listCustAddr = response["ReturnObject"];
-
-            console.log("aaa")
-            console.log(this.listCustAddr)
-        });
+    this.jobType = new RefMasterObj();
+    this.jobType.RefMasterTypeCode = "CUST_MODEL";
+    this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
+      (response) => {
+          this.listJobType = response['ReturnObject'];
+          console.log("aaaa");
+          console.log(this.listJobType);
+          this.CustJobDataForm.patchValue({ JobDataType: response['ReturnObject'][0]['Key'] });
+      });
   }
 }
