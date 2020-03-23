@@ -54,7 +54,7 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="form-actions right">
+              <div class="form-actions right" *ngIf="show">
                 <button type="submit" class="btn btn-raised btn-primary" (click)="NextStep()">
                   <i class="far"></i> Continue
                 </button>
