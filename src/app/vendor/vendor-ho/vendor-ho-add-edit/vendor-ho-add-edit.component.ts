@@ -60,8 +60,6 @@ export class VendorHoAddEditComponent implements OnInit {
     PartnershipDt: ['', Validators.required],
     IsActive: [true],
     VendorParentId: [''],
-    ReservedField1: [''],
-    ReservedField2: [''],
     MrTaxCalcMethodCode: [''],
     IsVat: [true],
     TaxpayerNo: [''],
@@ -122,20 +120,6 @@ export class VendorHoAddEditComponent implements OnInit {
       }
     );
 
-      var refMasterAssignmentObj = {
-        RefMasterTypeCode: "TASK_ASSIGNMENT_TYPE",
-      }
-      this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterAssignmentObj).subscribe(
-        (response) => {
-          this.itemAssignmentType = response["ReturnObject"];
-          if(this.mode != "edit"){
-            this.VendorForm.patchValue({
-              ReservedField1: this.itemAssignmentType[0].Key
-            });
-          }
-        }
-      );
-
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: "TAX_CALC_METHOD",
     }
@@ -154,6 +138,7 @@ export class VendorHoAddEditComponent implements OnInit {
     this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+
     if (this.MrVendorCategoryCode != "SUPPLIER_HO") {
       this.inputLookupParentObj.isRequired = false;
     }
@@ -164,7 +149,6 @@ export class VendorHoAddEditComponent implements OnInit {
     critObj.value = this.MrVendorCategoryCode;
     this.arrCrit.push(critObj);
     this.inputLookupParentObj.addCritInput = this.arrCrit;
-
 
     this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();
@@ -195,8 +179,6 @@ export class VendorHoAddEditComponent implements OnInit {
             PartnershipDt: formatDate(this.result.VendorObj['PartnershipDt'], 'yyyy-MM-dd', 'en-US'),
             IsActive: this.result.VendorObj.IsActive,
             VendorParentId: this.result.VendorObj.VendorParentId,
-            ReservedField1: this.result.VendorObj.ReservedField1,
-            ReservedField2: this.result.VendorObj.ReservedField2,
             MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
             IsVat: this.result.VendorObj.IsVat,
             TaxpayerNo: this.result.VendorObj.TaxpayerNo,
@@ -223,6 +205,8 @@ export class VendorHoAddEditComponent implements OnInit {
               }
             )
           }
+
+          this.checkHOType();
         },
         (error) => {
           console.log(error);
@@ -246,7 +230,6 @@ export class VendorHoAddEditComponent implements OnInit {
     });
   }
 
-
   updateValueAndValidityForm() {
     this.VendorForm.controls.MrIdTypeCode.updateValueAndValidity();
     this.VendorForm.controls.IdNo.updateValueAndValidity();
@@ -255,18 +238,26 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   checkHOType() {
-    if (this.VendorForm.controls.MrVendorTypeCode.value == 'C') {
+    if (this.VendorForm.controls.MrVendorTypeCode.value != 'P') {
       this.VendorForm.controls.MrIdTypeCode.clearValidators();
       this.VendorForm.controls.IdNo.clearValidators();
       this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
       this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
       this.updateValueAndValidityForm();
-    } else if (this.VendorForm.controls.MrVendorTypeCode.value == 'P') {
+    } else {
       this.VendorForm.controls.RegistrationNo.clearValidators();
       this.VendorForm.controls.LicenseNo.clearValidators();
       this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
       this.VendorForm.controls.IdNo.setValidators(Validators.required);
       this.updateValueAndValidityForm();
+    }
+  }
+
+  CheckMode(){
+    if(this.mode == "edit"){
+      this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": this.VendorId} });
+    }else{
+      this.router.navigate(['/Vendor/HO/Paging']);
     }
   }
 
@@ -289,21 +280,15 @@ export class VendorHoAddEditComponent implements OnInit {
       PartnershipDt: this.VendorForm.controls.PartnershipDt.value,
       IsActive: this.VendorForm.controls.IsActive.value,
       VendorParentId: this.VendorForm.controls.VendorParentId.value,
-      ReservedField1: "",
-      ReservedField2: "",
       MrTaxCalcMethodCode: this.VendorForm.controls.MrTaxCalcMethodCode.value,
       IsVat: this.VendorForm.controls.IsVat.value,
       TaxpayerNo: this.VendorForm.controls.TaxpayerNo.value,
-      TaxpayerName: this.VendorForm.controls.TaxpayerName.value
+      TaxpayerName: this.VendorForm.controls.TaxpayerName.value,
+      MrVendorClass: "HO"
     }
 
     if (vendorObj.MrVendorTypeCode == "P") {
       vendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value;
-    }
-
-    if(this.MrVendorCategoryCode == "SURVEYOR_HO"){
-      vendorObj.ReservedField1 = this.VendorForm.controls.ReservedField1.value;
-      vendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
     }
 
     var vendorAddrObj = {
@@ -319,7 +304,6 @@ export class VendorHoAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       this.vendorHoObj.VendorObj = vendorObj;
       this.vendorHoObj.VendorAddrObj = vendorAddrObj;
-
       this.vendorHoObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
       this.vendorHoObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
       this.vendorHoObj.VendorObj.VendorId = this.VendorId;

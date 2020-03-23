@@ -66,7 +66,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
 
   Edit(item)
   {
-    this.router.navigateByUrl('/Verification/QuestionSchemeMember/Edit?VerfSchemeHId=' + this.VerfSchemeHId + '&VerfSchemeDId=' + item.VerfSchemeDId + '&VerfQuestionGrpHId=' + item.VerfQuestionGrpHId + '&SeqNo=' + item.SeqNo);
+    this.router.navigateByUrl('/Verification/QuestionSchemeMember/Edit?VerfSchemeHId=' + this.VerfSchemeHId + '&VerfSchemeDId=' + item.VerfSchemeDId + '&VerfQuestionGrpHId=' + item.VerfQuestionGrpHId);
   }
 
 }
