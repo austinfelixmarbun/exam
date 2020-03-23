@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
@@ -16,6 +16,10 @@ import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.
   providers: [NGXToastrService]
 })
 export class ContactPersonAddEditComponent implements OnInit {
+  @Input() objInput: any;
+  @Output() objOutput: EventEmitter<any> = new EventEmitter();
+  HiddenState: boolean = false;
+  mode: string;
 
   title: string = "Contact Person Main Info";
   title2: string = "Contact Person Address Info";
@@ -41,21 +45,17 @@ export class ContactPersonAddEditComponent implements OnInit {
 
   itemJobPosition: any;
   VendorContactPersonId: any;
-  VendorId: any;
-  mode: any;
   result: any;
   zipcodee: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.route.queryParams.subscribe(params => {
-      this.VendorContactPersonId = params["VendorContactPersonId"];
-      this.mode = params["mode"];
-      this.VendorId = params["VendorId"];
-    });
 
   }
 
   ngOnInit() {
+    this.mode = this.objInput["mode"];
+    this.VendorContactPersonId = this.objInput["VendorContactPersonId"];
+
     var JobPosition = {
       RefMasterTypeCode: "JOB_POSITION",
       RowVersion: ""
@@ -126,14 +126,13 @@ export class ContactPersonAddEditComponent implements OnInit {
     this.zipcodee = ev.Zipcode;
   }
 
-  SaveForm() {
+  SaveForm() {    
     if (this.mode == "edit") {
       this.contactPersonObj = new VendorContactPersonObj();
       this.contactPersonObj.VendorContactPersonId = this.VendorContactPersonId;
-      this.contactPersonObj.VendorId = this.VendorId;
+      this.contactPersonObj.VendorId = this.objInput["VendorId"];
       this.contactPersonObj.Name = this.ContactPersonForm.controls.Name.value;
       this.contactPersonObj.MrEmployeePosition = this.ContactPersonForm.controls.JobPosition.value;
-      this.contactPersonObj.VendorId = this.VendorId;
       this.contactPersonObj.Email = this.ContactPersonForm.controls.Email.value;
       this.contactPersonObj.Phone1 = this.ContactPersonForm.controls.Phn1.value;
       this.contactPersonObj.Phone2 = this.ContactPersonForm.controls.Phn2.value;
@@ -148,7 +147,7 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.contactPersonObj.RowVersion = this.result.RowVersion;
       this.http.post(AdInsConstant.EditVendorContactPerson, this.contactPersonObj).subscribe(
         (response) => {
-          this.router.navigate(['/Vendor/ContactPerson/List'], { queryParams: { VendorId: this.VendorId } });
+          this.HiddenCheck();
           this.toastr.successMessage(response['message']);
         },
         (error) => {
@@ -159,7 +158,7 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.contactPersonObj = new VendorContactPersonObj();
       this.contactPersonObj.Name = this.ContactPersonForm.controls.Name.value;
       this.contactPersonObj.MrEmployeePosition = this.ContactPersonForm.controls.JobPosition.value;
-      this.contactPersonObj.VendorId = this.VendorId;
+      this.contactPersonObj.VendorId = this.objInput["VendorId"];
       this.contactPersonObj.Email = this.ContactPersonForm.controls.Email.value;
       this.contactPersonObj.Phone1 = this.ContactPersonForm.controls.Phn1.value;
       this.contactPersonObj.Phone2 = this.ContactPersonForm.controls.Phn2.value;
@@ -177,7 +176,7 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.AddVendorContactPerson, this.contactPersonObj).subscribe((response) => {
 
         this.toastr.successMessage(response['message']);
-        this.router.navigate(['/Vendor/ContactPerson/Add'], { queryParams: { VendorContactPersonId: this.VendorContactPersonId, VendorId: this.VendorId } });
+        this.HiddenCheck();
       },
         (error) => {
           console.log(error);
@@ -185,7 +184,10 @@ export class ContactPersonAddEditComponent implements OnInit {
     }
   }
 
-  Back(){
-    this.router.navigate(['/Vendor/ContactPerson/List'], { queryParams: { VendorId: this.VendorId } });
+  HiddenCheck(){
+    var obj={
+      HiddenState: true
+    }
+    this.objOutput.emit(obj);
   }
 }
