@@ -28,7 +28,7 @@ export class BankInfoComponent implements OnInit {
   BankRegisForm = this.fb.group({
     AccNumber: ['', [Validators.required]],
     AccName: ['', [Validators.required]],
-    IsDefault: [],
+    IsDefault: [false],
     RefBankId: [],
     BankBranchRegCode: [],
   });
@@ -72,6 +72,9 @@ export class BankInfoComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       this.modal.close();
     });
+    
+    this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
+    this.BankRegisForm.controls.AccName.updateValueAndValidity();
   }
 
   private getDismissReason(reason: any): string {
@@ -110,8 +113,11 @@ export class BankInfoComponent implements OnInit {
             AccNumber: "",
             AccName: "",
             RefBankId: "",
-            IsDefault: ""
+            IsDefault: false
           });
+          this.inputLookupBankObj.nameSelect = "";
+          this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
+          this.BankRegisForm.controls.AccName.updateValueAndValidity();
         },
         error => {
           console.log(error);
@@ -144,8 +150,11 @@ export class BankInfoComponent implements OnInit {
             AccNumber: "",
             AccName: "",
             RefBankId: "",
-            IsDefault: ""
+            IsDefault: false
           });
+          this.inputLookupBankObj.nameSelect = "";
+          this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
+          this.BankRegisForm.controls.AccName.updateValueAndValidity();
         },
         error => {
           console.log(error);
@@ -164,7 +173,6 @@ export class BankInfoComponent implements OnInit {
     };
     this.vendorService.GetVendorBankAccByVendorBankAccId(obj).subscribe(response => {
       this.objEdit = response;
-      console.log("ini bagian edit")
       this.BankRegisForm.patchValue({
         AccNumber: response["BankAccountNo"],
         AccName: response["BankAccountName"],
@@ -203,6 +211,14 @@ export class BankInfoComponent implements OnInit {
 
       this.vendorService.DeleteVendorBankAcc(obj).subscribe(response => {
         this.toastr.successMessage(response["Message"]);
+        var obj = {
+          VendorId: this.objInput.VendorId
+        };
+        this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
+          response => {
+            this.ListData = response["ReturnObject"];
+          }
+        );
       },
         error => {
           console.log(error);

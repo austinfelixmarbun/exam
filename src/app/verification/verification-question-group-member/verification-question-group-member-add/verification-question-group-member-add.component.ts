@@ -10,6 +10,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model';
 
 @Component({
   selector: 'app-verification-question-group-member-add',
@@ -39,6 +40,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   Data = [];
   
   verfQuestionGrpHObj: VerfQuestionGrpHObj;
+  verfQuestionGrpDObj: VerfQuestionGrpDObj;
   VerfQuestionGrpHId: any;
   verfQuestionGroup: any;
   listVerfQuestionGrpD: any;
@@ -259,6 +261,36 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         }
       },
       (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  SaveQuestionGroupMember(verfQuestionGrpDObj: any) {
+    this.verfQuestionGrpDObj = new VerfQuestionGrpDObj();
+    this.verfQuestionGrpDObj.VerfQuestionGrpHId = this.VerfQuestionGrpHId;
+    this.verfQuestionGrpDObj.VerfQuestionGrpDId = "0";
+    this.verfQuestionGrpDObj.ListVerfQuestionAnswerId = new Array();
+
+    for (let index = 0; index < this.tempData.length; index++) {
+      console.log(this.tempData);
+      var verfDObj = {
+        VerfQuestionGrpHId: this.tempData[index].VerfQuestionGrpHId
+      }
+      this.verfQuestionGrpDObj.VerfQuestionAnswerId.push(verfDObj.VerfQuestionGrpHId);
+    }
+
+    if (this.verfQuestionGrpDObj.ListVerfQuestionAnswerId.length == 0) {
+      this.toastr.typeErrorCustom('Please Add At Least One Data');
+      return;
+    }
+
+    this.http.post(AdInsConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
+      response => {
+        this.toastr.successMessage(response['message']);
+        this.router.navigate(["/Verification/QuestionGroupMemberPaging"], { queryParams: { "VerfQuestionGrpHId": this.VerfQuestionGrpHId } });
+      },
+      error => {
         console.log(error);
       }
     );

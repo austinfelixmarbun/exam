@@ -1,47 +1,49 @@
 {
-    "title": "Holding Registration",
+  "title":"",
     "subsection": [
       {
-        "subSectionId": "Main Info",
+        "subSectionId": "HoldingViewInformationId",
         "subSectionTitle": "Main Info",
         "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
-            "label": "Vendor Category",
+            "label": "Vendor Categoy:",
             "property": "VendorCategory"
           },
           {
             "type": "boolean",
-            "label": "Active Status",
-            "property": "IsActive"
+            "label": "Active Status:",
+            "property": "AciveStatus"
           },
           {
             "type": "text",
-            "label": "Holding Code",
-            "property": "VendorCode"
+            "label": "Holding Code:",
+            "property": "HoldingCode"
           },
           {
             "type": "text",
-            "label": "Tax Number",
-            "property": "TaxpayerNo"
+            "label": "Tax Number:",
+            "property": "TaxNumber"
           },
           {
             "type": "text",
-            "label": "Holding Name",
-            "property": "VendorName"
+            "label": "Holding Name:",
+            "property": "HoldingName"
           },
           {
             "type": "text",
-            "label": "Holding Type",
-            "property": "VendorType"
+            "label": "Holding Type:",
+            "property": "HoldingType"
           }
+
         ],
         "querystring": {
-            "select": "SELECT RMC.DESCR AS VendorCategory, V.IS_ACTIVE AS IsActive, V.VENDOR_CODE AS VendorCode, V.TAXPAYER_NO AS TaxpayerNo,V.VENDOR_NAME AS VendorName, V.MR_VENDOR_TYPE_CODE AS MrVendorTypeCode, RMT.DESCR AS VendorType",
-            "from": "FROM dbo.VENDOR V LEFT JOIN REF_MASTER RMC ON V.MR_VENDOR_CATEGORY_CODE = RMC.MASTER_CODE AND RMC.REF_MASTER_TYPE_CODE = 'VENDOR_CATEGORY' LEFT JOIN REF_MASTER RMT ON V.MR_VENDOR_TYPE_CODE = RMT.MASTER_CODE AND RMT.REF_MASTER_TYPE_CODE = 'VENDOR_TYPE'", 
-            "where": "WHERE V.VENDOR_ID = {0}" 
+"select":"SELECT B.DESCR AS VendorCategory,A.IS_ACTIVE AS AciveStatus,A.VENDOR_CODE As HoldingCode,A.TAX_ID_NO AS TaxNumber,A.VENDOR_NAME AS HoldingName,A.VENDOR_ID AS VendorId,C.DESCR AS HoldingType, A.MR_VENDOR_CLASS AS VendorClass",
+"from":  "FROM dbo.VENDOR A WITH(NOLOCK)LEFT JOIN dbo.REF_MASTER B WITH(NOLOCK) ON  A.MR_VENDOR_CATEGORY_CODE = B.MASTER_CODE LEFT JOIN dbo.REF_MASTER C WITH (NOLOCK) ON a.MR_VENDOR_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE LIKE '%VENDOR_TYPE%'",
+"where": "WHERE A.MR_VENDOR_CLASS = 'HOLDING' AND A.VENDOR_ID = {0}"
         }
       }
     ]
   }
+  
