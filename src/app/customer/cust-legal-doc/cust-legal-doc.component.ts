@@ -7,6 +7,8 @@ import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
 
+// Implementation : <app-cust-legal-doc [CustCompanyId]="'2'"></app-cust-legal-doc>
+
 @Component({
   selector: 'app-cust-legal-doc',
   templateUrl: './cust-legal-doc.component.html',

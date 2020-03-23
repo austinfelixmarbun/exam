@@ -41,6 +41,7 @@ export class CustLegalDocDetailComponent implements OnInit {
       (response: any) => {
         this.legalDocTypeList = response;
         this.CustCompanyLegalDocForm.patchValue({
+          CustCompanyId: this.CustCompanyId,
           MrLegalDocTypeCode: response.ReturnObject[0].Key
         });
       },
