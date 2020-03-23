@@ -30,6 +30,8 @@ import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-det
 import { CustFinDataTabComponent } from './cust-fin-data-tab/cust-fin-data-tab.component';
 import { CustBankAccSectionFindataComponent } from './cust-bank-acc-section-findata/cust-bank-acc-section-findata.component';
 import { CustBankAccDetailSectionFindataComponent } from './cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata.component';
+import { CustLegalDocComponent } from './cust-legal-doc/cust-legal-doc.component';
+import { CustLegalDocDetailComponent } from './cust-legal-doc/cust-legal-doc-detail/cust-legal-doc-detail.component';
 @NgModule({
   exports: [],
   imports: [
@@ -61,8 +63,10 @@ import { CustBankAccDetailSectionFindataComponent } from './cust-bank-acc-detail
     CustFinDataTabComponent,
     CustBankAccSectionFindataComponent,
     CustBankAccDetailSectionFindataComponent,
+    CustLegalDocComponent,
+    CustLegalDocDetailComponent,
   ],
-  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent]
+  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
 export class CustomerModule { 
   constructor(){

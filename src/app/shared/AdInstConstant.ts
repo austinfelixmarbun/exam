@@ -654,6 +654,11 @@ export class AdInsConstant {
   public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
   public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
 
+  // CUSTOMER COMPANY
+  public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
+  public static DeleteCustCompanyLegalDoc = environment.FoundationR3Url + "/CustCompanyLegalDoc/DeleteCustCompanyLegalDoc";
+  public static AddCustCompanyLegalDoc = environment.FoundationR3Url + "/CustCompanyLegalDoc/AddCustCompanyLegalDoc";
+
   // CUSTOMER GROUP
   public static AddCustGrpBothWays = environment.FoundationR3Url + "/CustGrp/AddCustGrpBothWays";
   public static AddCustGrp = environment.FoundationR3Url + "/CustGrp/AddCustGrp";
