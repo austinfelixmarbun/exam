@@ -178,12 +178,12 @@
                   <div class="form-group row adins-required">
                     <label class="col-md-3 adInsLabel">Supplier Upping Calculation Method</label>
                     <div class="col-md-9">
-                      <select class="form-control adInsInput" style="width: auto" formControlName="MRSupplierUpCalcMethod"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MRSupplierUpCalcMethod.invalid }">
+                      <select class="form-control adInsInput" style="width: inherit" formControlName="ReservedField3"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField3.invalid }">
                         <option *ngFor="let it of itemTypeUpCalcMethod" value="{{it.Key}}">
                           {{it.Value}}</option>
                       </select>
-                      <show-errors [control]="VendorForm.controls.MRSupplierUpCalcMethod" [submit]="enjiForm.submitted">
+                      <show-errors [control]="VendorForm.controls.ReservedField3" [submit]="enjiForm.submitted">
                       </show-errors>
                     </div>
                   </div>
@@ -191,21 +191,21 @@
                   <div class="form-group row adins-required">
                     <label class="col-md-3 adInsLabel">Supplier Class</label>
                     <div class="col-md-9">
-                      <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrIdTypeCode.invalid }">
-                        <option *ngFor="let it of itemIdType" value="{{it.Key}}">
+                      <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField4"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField4.invalid }">
+                        <option *ngFor="let it of itemSupplierClass" value="{{it.Key}}">
                           {{it.Value}}</option>
                       </select>
-                      <show-errors [control]="VendorForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                      <show-errors [control]="VendorForm.controls.ReservedField4" [submit]="enjiForm.submitted">
                       </show-errors>
                     </div>
                   </div>
 
-                  <div class="form-group row adins-required">
+                  <div class="form-group row">
                     <label class="col-md-3 adInsLabel">Bpkb Aging</label>
                     <div class="col-md-9">
-                      <input type="text" class="form-control adInsInput width-50-per" formControlName="BpkbAging">
-                      <show-errors [control]="VendorForm.controls.BpkbAging" [submit]="enjiForm.submitted">
+                      <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField5">
+                      <show-errors [control]="VendorForm.controls.ReservedField5" [submit]="enjiForm.submitted">
                       </show-errors>
                     </div>
                   </div>
@@ -213,9 +213,9 @@
                   <div class="form-group row adins-required">
                     <label class="col-md-3 adInsLabel">Days A/P Payment Due after Go Live</label>
                     <div class="col-md-9">
-                      <input type="text" class="form-control adInsInput width-50-per"
-                        formControlName="DaysPAfterGoLive">
-                      <show-errors [control]="VendorForm.controls.DaysPAfterGoLive" [submit]="enjiForm.submitted">
+                      <input type="number" class="form-control adInsInput width-50-per"
+                        formControlName="ReservedField6">
+                      <show-errors [control]="VendorForm.controls.ReservedField6" [submit]="enjiForm.submitted">
                       </show-errors>
                     </div>
                   </div>
@@ -223,12 +223,12 @@
                   <div class="form-group row adins-required">
                     <label class="col-md-3 adInsLabel">Max Refund Type</label>
                     <div class="col-md-9">
-                      <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrIdTypeCode.invalid }">
-                        <option *ngFor="let it of itemIdType" value="{{it.Key}}">
+                      <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField7"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField7.invalid }">
+                        <option *ngFor="let it of itemMaxRefundType" value="{{it.Key}}">
                           {{it.Value}}</option>
                       </select>
-                      <show-errors [control]="VendorForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                      <show-errors [control]="VendorForm.controls.ReservedField7" [submit]="enjiForm.submitted">
                       </show-errors>
                     </div>
                   </div>
@@ -236,8 +236,8 @@
                   <div class="form-group row adins-required">
                     <label class="col-md-3 adInsLabel">Max Refund Value </label>
                     <div class="col-md-9">
-                      <input type="text" class="form-control adInsInput width-50-per" formControlName="MaxRefundValue">
-                      <show-errors [control]="VendorForm.controls.MaxRefundValue" [submit]="enjiForm.submitted">
+                      <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField8">
+                      <show-errors [control]="VendorForm.controls.ReservedField8" [submit]="enjiForm.submitted">
                       </show-errors>
                     </div>
                   </div>
@@ -248,25 +248,25 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel">Surveyor HO</label>
                 <div class="col-md-3">
-                  <lib-uclookupgeneric [lookupInput]="inputLookupParentSurveyorObj" [parentForm]="VendorForm"
-                    [enjiForm]="enjiForm" [identifier]="'lookupParentSurveyor'" (lookup)="GetLookupSurveyorHo($event)">
+                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
+                    [enjiForm]="enjiForm" [identifier]="'lookupParentSurveyor'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" translate>Assignment Type</label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField1"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField1.invalid }">
-                    <option *ngFor="let it of itemAssignmentType" value="{{it.Key}}">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField9"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField9.invalid }">
+                    <option *ngFor="let it of itemAssignmentTypeTele" value="{{it.Key}}">
                       {{it.Value}}</option>
                   </select>
-                  <show-errors [control]="VendorForm.controls.ReservedField1" [submit]="enjiForm.submitted">
+                  <show-errors [control]="VendorForm.controls.ReservedField9" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
 
-              <div class="form-group row adins-required">
+              <div class="form-group row">
                 <label class="col-md-3 adInsLabel" translate>Maximum Task Load</label>
                 <div class="col-md-9">
                   <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField2">
@@ -281,18 +281,18 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel">Asset Insurance HO</label>
                 <div class="col-md-3">
-                  <lib-uclookupgeneric [lookupInput]="inputLookupParentAssetInsurance" [parentForm]="VendorForm"
-                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="GetLookupAssetInsHo($event)">
+                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
+                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
                 </div>
               </div>
             </div>
-            <div *ngIf="MrVendorCategoryCode=='LIFE_INSCO_HO'">
+            <div *ngIf="MrVendorCategoryCode=='LIFE_INSCO_BRANCH'">
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel">Life Insurance HO</label>
                 <div class="col-md-3">
-                  <lib-uclookupgeneric [lookupInput]="inputLookupParentLifeInsurance" [parentForm]="VendorForm"
-                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="GetLookupLifeInsHo($event)">
+                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
+                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
                 </div>
               </div>
@@ -301,8 +301,8 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel">Agent Recuiter</label>
                 <div class="col-md-3">
-                  <lib-uclookupgeneric [lookupInput]="inputLookupAgencyPersonal" [parentForm]="VendorForm"
-                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="GetLookupAgentRec($event)">
+                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
+                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
                 </div>
               </div>
