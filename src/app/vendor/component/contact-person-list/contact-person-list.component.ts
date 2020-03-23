@@ -19,6 +19,7 @@ export class ContactPersonListComponent implements OnInit {
   VendorContactPerson: VendorContactPersonObj;
   resultData: any = new Array();
   @Input() objInput: any;
+  @Input() show = true;
   @Output() objOutput: EventEmitter<any> = new EventEmitter();
   HiddenState: boolean;
   mode: string = "add";
