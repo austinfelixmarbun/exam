@@ -1,3 +1,41 @@
-<p>
-  customer-view-coy-management works!
-</p>
+<lib-ucSubsection [id]="'ShareId'" [title]="'Management / Shareholder Listing'"
+[panel]="'MngmntId'">
+</lib-ucSubsection>
+
+
+<div id="MngmntId">
+  <br>
+  <table class="table table-responsive-md text-center table-hover" >
+    <thead>
+      <tr class="table-header">
+        <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Status</span>
+        </th>
+        <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Shareholder Name</span>
+        </th>
+        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Type</span>
+        </th>
+        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Customer Model</span>
+        </th>
+        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>NPWP</span>
+        </th>
+        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Share (%)</span>
+        </th>
+        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Is Signer</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of responseObj">
+        <tr>
+          <td></td>
+          <td class="text-left">{{item.ShrholderName}}</td>
+          <td class="text-left">{{item.Type}}</td>
+          <td class="text-left">{{item.CustModel}}</td>
+          <td class="text-left">{{item.TaxIdNo}}</td>
+          <td class="text-left">{{item.SharePrcnt}}</td>
+          <td class="text-left">{{item.IsSigner}}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

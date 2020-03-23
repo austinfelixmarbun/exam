@@ -22,7 +22,6 @@ export class CustomerViewCoyAddressComponent implements OnInit {
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
   ddlItem: any;
-
   CustForm = this.fb.group({
     DdlAddress: ['']
   });
@@ -33,8 +32,7 @@ export class CustomerViewCoyAddressComponent implements OnInit {
     private router: Router,
     private adInsService: AdInsService,
     private fb: FormBuilder
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -42,20 +40,18 @@ export class CustomerViewCoyAddressComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-
     var custAddrObj = { "CustId": this.CustId };
     console.log('debug sini');
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
         this.responseResultCustAddr = response['ReturnObject'];
         console.log('isi get list = ', this.responseResultCustAddr);
-
       },
       error => {
         this.router.navigateByUrl('Error');
       }
     );
-
+    console.log('debug sini');
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
         this.responseResultCustAddrHist = response['ReturnObject'];
@@ -65,13 +61,11 @@ export class CustomerViewCoyAddressComponent implements OnInit {
         this.router.navigateByUrl('Error');
       }
     );
-
     var refMasterObj = new RefMasterObj();
     refMasterObj.RefMasterTypeCode = "ADDR_TYPE";
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
-      response =>{
+      response => {
         this.ddlItem = response['ReturnObject'];
-
         this.CustForm.patchValue({
           DdlAddress: this.ddlItem[0].Value
         });

@@ -686,4 +686,13 @@ export class AdInsConstant {
 
   // CUSTOMER BANK ACCOUNT
   public static GetCBAForCustFinDataByCustId = "http://localhost:5000" + "/CustBankAcc/GetCBAForCustFinDataByCustId";
+
+  //Customer Company Legal Doc
+  public static GetCustCompanyLegalDocForCustViewByCustId = "http://localhost:5000" + "/CustCompanyLegalDoc/GetCustCompanyLegalDocForCustViewByCustId";
+
+  public static GetListCustPersonalContactPersonForCustViewByCustId = "http://localhost:5000" + "/CustPersonalContactPerson/GetListCustPersonalContactPersonForCustViewByCustId";
+
+  // Cust Company Management Shareholder
+  public static GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderId = "http://localhost:5000" + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderId";
+
 }

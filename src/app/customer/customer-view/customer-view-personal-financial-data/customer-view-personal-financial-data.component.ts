@@ -19,8 +19,6 @@ export class CustomerViewPersonalFinancialDataComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    // private adInsService: AdInsService,
-    // private fb: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -29,24 +27,16 @@ export class CustomerViewPersonalFinancialDataComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-
     var custAddrObj = { "CustId": this.CustId };
     console.log('debug sini');
     this.http.post(this.GetCBAForCustFinDataByCustIdUrl, custAddrObj).subscribe(
       response => {
         this.responseCBAObj = response['ListCBAForCustFinData'];
         console.log('isi get list = ', this.responseCBAObj);
-
-        // for(var temp in this.responseCBAObj){
-        //   this.allBankStmntList.push(temp['BankStmntList'])
-        // }
-
       },
       error => {
         this.router.navigateByUrl('Error');
       }
     );
-
   }
-
 }

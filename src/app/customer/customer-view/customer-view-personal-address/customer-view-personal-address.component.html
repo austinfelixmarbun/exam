@@ -3,13 +3,9 @@
     <div class="card-body">
       <div class="px-3">
         <div class="form-body">
-
-
-          
         <lib-ucSubsection [id]="'AssetType'" [title]="'Customer Address Listing'" [panel]="'CustAddressListingPanel'">
         </lib-ucSubsection>
         <div id="CustAddressListingPanel">
-
           <table class="table table-responsive-md text-center table-hover">
             <thead>
               <tr class="table-header">
@@ -45,14 +41,11 @@
             </tbody>
           </table>
         </div>
-
         <lib-ucSubsection [id]="'AssetType'" [title]="'Customer Address History Listing'"
           [panel]="'CustAddressHistListingPanel'">
         </lib-ucSubsection>
         <div id="CustAddressHistListingPanel">
-
           <label class="col-md-4  adInsLabel" translate>Address Type</label>
-
           <div class="col-md-7">
             <form class="form form-horizontal" [formGroup]="CustForm">
               <select class="form-control" [(ngModel)]="selectedOption" formControlName="DdlAddress">
@@ -62,7 +55,6 @@
               </select>
             </form>
           </div>
-
           <table class="table table-responsive-md text-center table-hover">
             <thead>
               <tr class="table-header">
@@ -87,7 +79,6 @@
               </tr>
             </thead>
             <tbody>
-
               <ng-container *ngFor="let item of responseResultCustAddrHist">
                 <tr *ngIf="item.AddressTypeName == selectedOption">
                   <td class="text-left">{{item.AddressTypeName}}</td>

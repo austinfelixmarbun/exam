@@ -10,8 +10,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 })
 export class CustomerViewComponent implements OnInit {
   viewCustMainInfoHeaderObj : any;
-  
-
   CustId: any;
   viewCustJobData: string;
   getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
@@ -43,7 +41,6 @@ export class CustomerViewComponent implements OnInit {
         this.CustId = params["CustId"];
       }
     });
-
     var custObj = {
       CustId: this.CustId
     }
@@ -61,7 +58,6 @@ export class CustomerViewComponent implements OnInit {
         console.log(error);
       }
     );
-    
   }
   EnterTab(type){
     if(type == "mainData"){
@@ -145,7 +141,6 @@ export class CustomerViewComponent implements OnInit {
       this.isAppListing = true;
     }
   }
-
   EnterTabCoy(type){
     if(type == "mainData"){
       this.isMainData = true;
@@ -196,5 +191,4 @@ export class CustomerViewComponent implements OnInit {
       this.isLegal = true;
     }
   }
-
 }
