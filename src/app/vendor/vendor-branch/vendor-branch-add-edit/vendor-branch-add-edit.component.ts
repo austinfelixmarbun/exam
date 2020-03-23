@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { Validators, FormBuilder } from '@angular/forms';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { formatDate } from '@angular/common';
@@ -10,12 +9,14 @@ import { environment } from 'environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { VendorBranchObj } from 'app/shared/model/VendorBranchObj.Model';
+import { VendorBranchMainObj } from 'app/shared/model/VendorBranchMainObj.Model';
 
 @Component({
   selector: 'app-vendor-branch-add-edit',
   templateUrl: './vendor-branch-add-edit.component.html',
   styleUrls: ['./vendor-branch-add-edit.component.scss'],
-  providers : [NGXToastrService]
+  providers: [NGXToastrService]
 })
 export class VendorBranchAddEditComponent implements OnInit {
 
@@ -27,26 +28,31 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   result: any;
   check: any;
-  inputLookupParentSurveyorObj : any;
-  inputLookupParentAssetInsurance : any;
+  inputLookupParentSurveyorObj: any;
+  inputLookupParentAssetInsurance: any;
   inputLookupParentObj: any;
-  inputLookupParentLifeInsurance : any;
+  inputLookupParentLifeInsurance: any;
   inputLookupZipcodeObj: any;
-  inputLookupAgencyPersonal : any;
+  inputLookupAgencyPersonal: any;
 
   MrVendorCategoryCode: any;
   arrCrit: any;
   mode: string = "add";
-  vendorHoObj: any;
+  vendorBranchObj: any;
   VendorId: any;
   ButtonLbl: string = "Continue";
   arrCritSuHo: any[];
-  arrCritSurHo : any[];
+  arrCritSurHo: any[];
   arrCritAsIn: any[];
   arrCritLiIn: any[];
   arrCritAgP: any[];
+
   MRSupplierUpCalcMethod: any;
   itemTypeUpCalcMethod: any;
+  itemSupplierClass: any;
+  itemMaxRefundType: any;
+  itemAssignmentTypeTele: any;
+
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -56,7 +62,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   VendorForm = this.fb.group({
-    MrVendorCategoryCode: [''],
+    MrVendorCategoryCode: [{ value: '', disabled: true }, Validators.required],
     VendorCode: ['', Validators.required],
     VendorName: ['', Validators.required],
     MrVendorTypeCode: ['', Validators.required],
@@ -67,25 +73,31 @@ export class VendorBranchAddEditComponent implements OnInit {
     MobilePhnNo1: [''],
     MobilePhnNo2: [''],
     Email: ['', Validators.required],
-    VendorRating: [''],
+    VendorRating: [{ value: '', disabled: true }],
     EstablishmentDt: ['', Validators.required],
     PartnershipDt: ['', Validators.required],
     IsActive: [true],
-    MRSupplierUpCalcMethod : [''],
     VendorParentId: [''],
-    ReservedField1: [''],
-    ReservedField2: [''],
+    ReservedField2: [''], //Maximum Task load
+    ReservedField3: [''],//Supplier calc up method
+    ReservedField4: [''], //Supplier Class
+    ReservedField5: [''], //BPKBAging
+    ReservedField6: [''], //DaysPAfterGolive
+    ReservedField7: [''], //MaxRefundType
+    ReservedField8: [''], //MaxRefundValue
+    ReservedField9: [''], //ASSGMNT_TYPE tele, field
+
     MrTaxCalcMethodCode: [''],
     IsVat: [true],
-    TaxpayerNo: [''],
-    TaxpayerName: [''],
+    TaxpayerNo: ['', Validators.required],
+    TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
     Addr: [''],
     Zipcode: [''],
-    AreaCode2: [''], //kelurahan
-    AreaCode1: [''], //kecamatan
-    City: [''],
-    Province: [''],
+    AreaCode2: [{ value: '', disabled: true }], //kelurahan
+    AreaCode1: [{ value: '', disabled: true }], //kecamatan
+    City: [{ value: '', disabled: true }],
+    Province: [{ value: '', disabled: true }],
     RowVersionVendor: [''],
     RowVersionVendorAddr: ['']
   })
@@ -98,7 +110,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
- 
+
 
     var refMasterCategoryObj = {
       RefMasterTypeCode: "VENDOR_CATEGORY"
@@ -112,18 +124,56 @@ export class VendorBranchAddEditComponent implements OnInit {
       }
     );
 
-
-    var refMRSupplierUpCalcMethod = {
-      RefMasterTypeCode: "SUPPLIER_UP_CALC_METHOD"
+    var refMaxRefundType = {
+      RefMasterTypeCode: "MAX_REFUND_TYPE"
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).subscribe(
+    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMaxRefundType).subscribe(
       (response) => {
-        this.itemCategoryType = response["ReturnObject"];
+        this.itemMaxRefundType = response["ReturnObject"];
         this.VendorForm.patchValue({
-          MRSupplierUpCalcMethod: this.itemTypeUpCalcMethod[0].Key
+          ReservedField7: this.itemMaxRefundType[0].Key
         });
       }
     );
+
+    var refAssignmentType = {
+      RefMasterTypeCode: "ASSGMNT_TYPE"
+    }
+    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refAssignmentType).subscribe(
+      (response) => {
+        this.itemAssignmentTypeTele = response["ReturnObject"];
+        this.VendorForm.patchValue({
+          ReservedField9: this.itemAssignmentTypeTele[0].Key
+        });
+      }
+    );
+
+    var refMrSupplierClass = {
+      RefMasterTypeCode: "SUPPLIER_CLASS"
+    }
+    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMrSupplierClass).subscribe(
+      (response) => {
+        this.itemSupplierClass = response["ReturnObject"];
+        this.VendorForm.patchValue({
+          ReservedField4: this.itemSupplierClass[0].Key
+        });
+      }
+    );
+
+    var refMRSupplierUpCalcMethod = {
+      RefMasterTypeCode: "SUPPLIER_UP_CALC_METHOD",
+    }
+    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).subscribe(
+      (response) => {
+        this.itemTypeUpCalcMethod = response["ReturnObject"];
+        this.VendorForm.patchValue({
+          ReservedField3: this.itemTypeUpCalcMethod[0].Key
+        });
+      }
+    );
+
+
+
 
     var refMasterTypeObj = {
       RefMasterTypeCode: "VENDOR_TYPE",
@@ -182,97 +232,82 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentObj.isRequired = true;
 
 
-    this.inputLookupParentSurveyorObj = new InputLookupObj();
-    this.inputLookupParentSurveyorObj.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupParentSurveyorObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookupParentSurveyorObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupParentSurveyorObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupParentSurveyorObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    
-    this.inputLookupParentAssetInsurance = new InputLookupObj();
-    this.inputLookupParentAssetInsurance.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupParentAssetInsurance.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookupParentAssetInsurance.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupParentAssetInsurance.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupParentAssetInsurance.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
-
-    this.inputLookupParentLifeInsurance = new InputLookupObj();
-    this.inputLookupParentLifeInsurance.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupParentLifeInsurance.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookupParentLifeInsurance.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupParentLifeInsurance.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupParentLifeInsurance.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    
-    this.inputLookupAgencyPersonal = new InputLookupObj();
-    this.inputLookupAgencyPersonal.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupAgencyPersonal.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookupAgencyPersonal.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupAgencyPersonal.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupAgencyPersonal.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
-
-    if(this.MrVendorCategoryCode != "SUPPLIER_HO"){
-      this.inputLookupParentObj.isRequired = false;
-    }
-    
     this.arrCritSuHo = new Array();
     this.arrCritSurHo = new Array();
     this.arrCritAsIn = new Array();
     this.arrCritLiIn = new Array();
     this.arrCritAgP = new Array();
-    
-    var critObj = new CriteriaObj();
-    critObj.propName = 'V.MR_VENDOR_CATEGORY_CODE';
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.value = "SUPPLIER_HO";
-    this.arrCritSuHo.push(critObj);
-    this.inputLookupParentObj.addCritInput = this.arrCritSuHo;
-
-    var critObjSurveyor = new CriteriaObj();
-    critObjSurveyor.propName = 'V.MR_VENDOR_CATEGORY_CODE';
-    critObjSurveyor.restriction = AdInsConstant.RestrictionEq;
-    critObjSurveyor.value = "SURVEYOR_HO";
-    this.arrCritSurHo.push(critObjSurveyor);
-    this.inputLookupParentSurveyorObj.addCritInput = this.arrCritSurHo;
-
-    var critObjAssetInsurance = new CriteriaObj();
-    critObjAssetInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
-    critObjAssetInsurance.restriction = AdInsConstant.RestrictionEq;
-    critObjAssetInsurance.value = "ASSET_INSCO_HO";
-    this.arrCritAsIn.push(critObjAssetInsurance);
-    this.inputLookupParentAssetInsurance.addCritInput = this.arrCritAsIn;
 
 
-    var critObjLifeInsurance = new CriteriaObj();
-    critObjLifeInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
-    critObjLifeInsurance.restriction = AdInsConstant.RestrictionEq;
-    critObjLifeInsurance.value = "LIFE_INSCO_HO";
-    this.arrCritLiIn.push(critObjLifeInsurance);
-    this.inputLookupParentLifeInsurance.addCritInput = this.arrCritLiIn;
+    if (this.MrVendorCategoryCode == "SUPPLIER_HO") {
+      var critObj = new CriteriaObj();
+      critObj.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+      critObj.restriction = AdInsConstant.RestrictionEq;
+      critObj.value = "SUPPLIER_HO";
+      this.arrCritSuHo.push(critObj);
+      this.inputLookupParentObj.addCritInput = this.arrCritSuHo;
 
-    var critObjAgencyPersonal = new CriteriaObj();
-    critObjAgencyPersonal.propName = 'V.MR_VENDOR_CATEGORY_CODE';
-    critObjAgencyPersonal.restriction = AdInsConstant.RestrictionEq;
-    critObjAgencyPersonal.value = "AGENCY_PERSONAL";
-    this.arrCritAgP.push(critObjAgencyPersonal);
-    this.inputLookupAgencyPersonal.addCritInput = this.arrCritAgP;
+    this.VendorForm.controls.ReservedField2.setValidators(Validators.required);
+    this.VendorForm.controls.ReservedField3.setValidators(Validators.required);
+    this.VendorForm.controls.ReservedField4.setValidators(Validators.required);
+    this.VendorForm.controls.ReservedField6.setValidators(Validators.required);
+    this.VendorForm.controls.ReservedField7.setValidators(Validators.required);
+    this.VendorForm.controls.ReservedField8.setValidators(Validators.required);
 
-    this.VendorForm.controls.VendorRating.disable();
-    this.VendorForm.controls.MrVendorCategoryCode.disable();
-    this.VendorForm.controls.AreaCode2.disable();
-    this.VendorForm.controls.AreaCode1.disable();
-    this.VendorForm.controls.City.disable();
-    this.VendorForm.controls.Province.disable();
+    this.VendorForm.controls.ReservedField2.updateValueAndValidity();
+    this.VendorForm.controls.ReservedField3.updateValueAndValidity();
+    this.VendorForm.controls.ReservedField4.updateValueAndValidity();
+    this.VendorForm.controls.ReservedField6.updateValueAndValidity();
+    this.VendorForm.controls.ReservedField7.updateValueAndValidity();
+    this.VendorForm.controls.ReservedField8.updateValueAndValidity();
+    }
+     if (this.MrVendorCategoryCode == "SURVEYOR_HO") {
+      var critObjSurveyor = new CriteriaObj();
+      critObjSurveyor.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+      critObjSurveyor.restriction = AdInsConstant.RestrictionEq;
+      critObjSurveyor.value = "SURVEYOR_HO";
+      this.arrCritSurHo.push(critObjSurveyor);
+      this.inputLookupParentObj.addCritInput = this.arrCritSurHo;
+    }
+     if (this.MrVendorCategoryCode == "ASSET_INSCO_HO") {
+      var critObjAssetInsurance = new CriteriaObj();
+      critObjAssetInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+      critObjAssetInsurance.restriction = AdInsConstant.RestrictionEq;
+      critObjAssetInsurance.value = "ASSET_INSCO_HO";
+      this.arrCritAsIn.push(critObjAssetInsurance);
+      this.inputLookupParentObj.addCritInput = this.arrCritAsIn;
+    }
+     if (this.MrVendorCategoryCode == "LIFE_INSCO_HO") {
+      var critObjLifeInsurance = new CriteriaObj();
+      critObjLifeInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+      critObjLifeInsurance.restriction = AdInsConstant.RestrictionEq;
+      critObjLifeInsurance.value = "LIFE_INSCO_HO";
+      this.arrCritLiIn.push(critObjLifeInsurance);
+      this.inputLookupParentObj.addCritInput = this.arrCritLiIn;
+    }
+     if (this.MrVendorCategoryCode == "AGENCY_PERSONAL") {
+      var critObjAgencyPersonal = new CriteriaObj();
+      critObjAgencyPersonal.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+      critObjAgencyPersonal.restriction = AdInsConstant.RestrictionEq;
+      critObjAgencyPersonal.value = "AGENCY_PERSONAL";
+      this.arrCritAgP.push(critObjAgencyPersonal);
+      this.inputLookupParentObj.addCritInput = this.arrCritAgP;
+    }
+  
+  
 
     if (this.mode == "edit") {
       this.ButtonLbl = "Submit";
-      var vendorObj = new VendorObj();
-      vendorObj.VendorId = this.VendorId; 
+      var vendorObj = new VendorBranchMainObj();
+      vendorObj.VendorId = this.VendorId;
       this.VendorForm.controls.VendorCode.disable();
-      this.http.post(AdInsConstant.GetVendorHOAndVendorAddr, vendorObj).subscribe(
+      this.http.post(AdInsConstant.GetVendorBranchAndVendorTaxAddrByVendorId, vendorObj).subscribe(
         (response) => {
           this.result = response;
+          this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
           this.VendorForm.patchValue({
             MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
             VendorCode: this.result.VendorObj.VendorCode,
@@ -290,8 +325,14 @@ export class VendorBranchAddEditComponent implements OnInit {
             PartnershipDt: formatDate(this.result.VendorObj['PartnershipDt'], 'yyyy-MM-dd', 'en-US'),
             IsActive: this.result.VendorObj.IsActive,
             VendorParentId: this.result.VendorObj.VendorParentId,
-            ReservedField1: this.result.VendorObj.ReservedField1,
             ReservedField2: this.result.VendorObj.ReservedField2,
+            ReservedField3: this.result.VendorObj.ReservedField3,
+            ReservedField4: this.result.VendorObj.ReservedField4,
+            ReservedField5: this.result.VendorObj.ReservedField5,
+            ReservedField6: this.result.VendorObj.ReservedField6,
+            ReservedField7: this.result.VendorObj.ReservedField7,
+            ReservedField8: this.result.VendorObj.ReservedField8,
+            ReservedField9: this.result.VendorObj.ReservedField9,
             MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
             IsVat: this.result.VendorObj.IsVat,
             TaxpayerNo: this.result.VendorObj.TaxpayerNo,
@@ -323,6 +364,7 @@ export class VendorBranchAddEditComponent implements OnInit {
           console.log(error);
         }
       );
+
     }
   }
 
@@ -366,15 +408,15 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   SaveForm() {
-    this.vendorHoObj = new VendorHoObj();
+    this.vendorBranchObj = new VendorBranchObj();
     var vendorObj = {
-      MrVendorCategoryCode: "",
+      MrVendorCategoryCode: this.VendorForm.controls.MrVendorCategoryCode.value,
       VendorCode: this.VendorForm.controls.VendorCode.value,
       VendorName: this.VendorForm.controls.VendorName.value,
       MrVendorTypeCode: this.VendorForm.controls.MrVendorTypeCode.value,
       RegistrationNo: this.VendorForm.controls.RegistrationNo.value,
       LicenseNo: this.VendorForm.controls.LicenseNo.value,
-      MrIdTypeCode: "",
+      MrIdTypeCode: this.VendorForm.controls.MrIdTypeCode.value,
       IdNo: this.VendorForm.controls.IdNo.value,
       MobilePhnNo1: this.VendorForm.controls.MobilePhnNo1.value,
       MobilePhnNo2: this.VendorForm.controls.MobilePhnNo2.value,
@@ -384,16 +426,31 @@ export class VendorBranchAddEditComponent implements OnInit {
       PartnershipDt: this.VendorForm.controls.PartnershipDt.value,
       IsActive: this.VendorForm.controls.IsActive.value,
       VendorParentId: this.VendorForm.controls.VendorParentId.value,
-      ReservedField1: this.VendorForm.controls.ReservedField1.value,
-      ReservedField2: this.VendorForm.controls.ReservedField2.value,
+      ReservedField2: "",
+      ReservedField3: "",
+      ReservedField4: "",
+      ReservedField5: "",
+      ReservedField6: "",
+      ReservedField7: "",
+      ReservedField8: "",
+      ReservedField9: "",
       MrTaxCalcMethodCode: this.VendorForm.controls.MrTaxCalcMethodCode.value,
       IsVat: this.VendorForm.controls.IsVat.value,
       TaxpayerNo: this.VendorForm.controls.TaxpayerNo.value,
       TaxpayerName: this.VendorForm.controls.TaxpayerName.value
     }
 
-    if (vendorObj.MrVendorTypeCode == "P") {
-      vendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value
+    if (vendorObj.MrVendorCategoryCode == "SUPPLIER_HO" || vendorObj.MrVendorCategoryCode == "SUPPLIER_BRANCH") {
+      vendorObj.ReservedField3 = this.VendorForm.controls.ReservedField3.value;
+      vendorObj.ReservedField4 = this.VendorForm.controls.ReservedField4.value;
+      vendorObj.ReservedField5 = this.VendorForm.controls.ReservedField5.value;
+      vendorObj.ReservedField6 = this.VendorForm.controls.ReservedField6.value;
+      vendorObj.ReservedField7 = this.VendorForm.controls.ReservedField7.value;
+      vendorObj.ReservedField8 = this.VendorForm.controls.ReservedField8.value;
+    }
+    if (vendorObj.MrVendorCategoryCode == "SURVEYOR_HO") {
+      vendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
+      vendorObj.ReservedField9 = this.VendorForm.controls.ReservedField9.value;
     }
 
     var vendorAddrObj = {
@@ -407,34 +464,34 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
 
     if (this.mode == "edit") {
-      this.vendorHoObj.VendorObj = vendorObj;
-      this.vendorHoObj.VendorAddrObj = vendorAddrObj;
-      
-      this.vendorHoObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
-      this.vendorHoObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
-      this.vendorHoObj.VendorObj.VendorId = this.VendorId;
-      this.vendorHoObj.VendorAddrObj.VendorAddrId = this.result.VendorAddrObj.VendorAddrId;
-      this.vendorHoObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
-      this.vendorHoObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
+      this.vendorBranchObj.VendorObj = vendorObj;
+      this.vendorBranchObj.VendorAddrObj = vendorAddrObj;
 
-      this.http.post(AdInsConstant.EditVendorHO, this.vendorHoObj).subscribe(
+      this.vendorBranchObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
+      this.vendorBranchObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
+      this.vendorBranchObj.VendorObj.VendorId = this.VendorId;
+      this.vendorBranchObj.VendorAddrObj.VendorAddrId = this.result.VendorAddrObj.VendorAddrId;
+      this.vendorBranchObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
+      this.vendorBranchObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
+
+      this.http.post(AdInsConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Vendor/HO/Paging');
+          this.router.navigateByUrl('/Vendor/Branch/Paging');
         },
         (error) => {
           console.log(error);
         });
     }
     else {
-      this.vendorHoObj.VendorObj = vendorObj;
-      this.vendorHoObj.VendorAddrObj = vendorAddrObj;
-      this.vendorHoObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
+      this.vendorBranchObj.VendorObj = vendorObj;
+      this.vendorBranchObj.VendorAddrObj = vendorAddrObj;
+      this.vendorBranchObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
-      this.http.post(AdInsConstant.AddVendorHO, this.vendorHoObj).subscribe(
+      this.http.post(AdInsConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/Vendor/Branch/Registration'],{queryParams :{"VendorId" : response['VendorObj'].VendorId}});
+          this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
         },
         (error) => {
           console.log(error);
