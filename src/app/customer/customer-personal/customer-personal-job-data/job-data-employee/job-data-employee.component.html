@@ -8,23 +8,26 @@
               <div class="form-body">
                 <div id="jobData">
                     <div class="form-group row">
-                        <label class="col-md-2 adInsLabel adins-required" translate>Profession Name </label>
+                        <label class="col-md-3 adInsLabel" translate>Profession Name</label>
                         <div class="col-md-4">
-                          <input type="text" class="form-control adInsInput" formControlName="ProfessionName"
-                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.ProfessionName.invalid }">
-                          <show-errors [control]="JobDataEmpForm.controls.ProfessionName" [submit]="enjiForm.submitted"></show-errors>
+                          <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="JobDataEmpForm"
+                            [enjiForm]="enjiForm" [identifier]="'MrJobProfessionCode'" (lookup)=getLookUpProfession($event)>
+                          </lib-uclookupgeneric>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 adInsLabel adins-required" translate>Job Position </label>
+                        <label class="col-md-3 adInsLabel adins-required" translate>Job Position </label>
                         <div class="col-md-4">
-                          <input type="text" class="form-control adInsInput" formControlName="JobPosition"
-                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.JobPosition.invalid }">
+                          <select class="form-control adInsInput" formControlName="JobPosition">
+                            <option *ngFor="let ram of listJobPosition" [value]="ram.Key">
+                              {{ram.Value}}
+                            </option>
+                          </select>
                           <show-errors [control]="JobDataEmpForm.controls.JobPosition" [submit]="enjiForm.submitted"></show-errors>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 adInsLabel adins-required" translate>Job Title Name </label>
+                        <label class="col-md-3 adInsLabel adins-required" translate>Job Title Name </label>
                         <div class="col-md-4">
                           <input type="text" class="form-control adInsInput" formControlName="JobTitleName"
                                 [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.JobTitleName.invalid }">
@@ -32,15 +35,18 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 adInsLabel adins-required" translate>Job Status </label>
+                        <label class="col-md-3 adInsLabel adins-required" translate>Job Status </label>
                         <div class="col-md-4">
-                          <input type="text" class="form-control adInsInput" formControlName="JobStatus"
-                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.JobStatus.invalid }">
+                          <select class="form-control adInsInput" formControlName="JobStatus">
+                            <option *ngFor="let ram of listJobStatus" [value]="ram.Key">
+                              {{ram.Value}}
+                            </option>
+                          </select>
                           <show-errors [control]="JobDataEmpForm.controls.JobStatus" [submit]="enjiForm.submitted"></show-errors>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 adInsLabel adins-required" translate>Nama Perusahaan/Usaha </label>
+                        <label class="col-md-3 adInsLabel adins-required" translate>Nama Perusahaan/Usaha </label>
                         <div class="col-md-4">
                           <input type="text" class="form-control adInsInput" formControlName="IndustryName"
                                 [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.IndustryName.invalid }">
@@ -48,48 +54,59 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3  adInsLabel" translate>Internal Employee </label>
+                        <label class="col-md-3 adInsLabel" translate>Internal Employee </label>
                         <div class="col-md-9">
                           <input class="border-primary" type="checkbox" data-md-icheck
                                  formControlName="InternalEmployee" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 adInsLabel adins-required" translate>Industry Type Name </label>
+                        <label class="col-md-3 adInsLabel adins-required" translate>Industry Type Name </label>
                         <div class="col-md-4">
-                          <input type="text" class="form-control adInsInput" formControlName="IndustryTypeName"
-                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.IndustryTypeName.invalid }">
-                          <show-errors [control]="JobDataEmpForm.controls.IndustryTypeName" [submit]="enjiForm.submitted"></show-errors>
+                          <lib-uclookupgeneric [lookupInput]="industryLookUpObj" [parentForm]="JobDataEmpForm"
+                          [enjiForm]="enjiForm" [identifier]="'IndustryTypeCode'" (lookup)=getLookUpIndustry($event)>
+                          </lib-uclookupgeneric>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 adInsLabel adins-required" translate>Company Scale </label>
+                        <label class="col-md-3 adInsLabel adins-required" translate>Company Scale </label>
                         <div class="col-md-4">
-                          <input type="text" class="form-control adInsInput" formControlName="CompanyScale"
-                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.CompanyScale.invalid }">
+                          <select class="form-control adInsInput" formControlName="CompanyScale">
+                            <option *ngFor="let ram of listCompanyScale" [value]="ram.Key">
+                              {{ram.Value}}
+                            </option>
+                          </select>
                           <show-errors [control]="JobDataEmpForm.controls.CompanyScale" [submit]="enjiForm.submitted"></show-errors>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 adInsLabel adins-required" translate>Employment Establishment Date </label>
-                        <div class="col-md-4">
-                          <input type="text" class="form-control adInsInput" formControlName="EmpEstablishmentDate"
-                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.EmpEstablishmentDate.invalid }">
+                        <label class="col-md-3 adInsLabel adins-required" translate>Employment Establishment Date </label>
+                        <div class="col-md-3">
+                          <select class="form-control adInsInput" formControlName="EmpEstablishmentDate">
+                            <option *ngFor="let ram of listEstablishmentDt" [value]="ram.Key">
+                              {{ram.Value}}
+                            </option>
+                          </select>
                           <show-errors [control]="JobDataEmpForm.controls.EmpEstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
+                        </div>
+                        <div class="col-md-3">
+                          <input type="text" class="form-control adInsInput" formControlName="EmpEstablishmentDateYear"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.EmpEstablishmentDateYear.invalid }">
+                          <show-errors [control]="JobDataEmpForm.controls.EmpEstablishmentDateYear" [submit]="enjiForm.submitted"></show-errors>
                         </div>
                     </div>
                     <lib-ucSubsection [id]="'jobAddrId'" [title]="'Address'" [panel]="'jobAddr'">
                     </lib-ucSubsection>
                     <div id="jobAddr">
                         <div id="CustMainDataPersonal"> 
-                            <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"></lib-ucaddress>
+                            <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputJobAddressObj" [showOwnership]="true"></lib-ucaddress>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
                             <div class="col-md-4">
-                            <textarea type="text" class="form-control adInsInput" formControlName="Notes"
-                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.Notes.invalid }"></textarea>
-                            <show-errors [control]="JobDataEmpForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                            <textarea type="text" class="form-control adInsInput" formControlName="NotesJob"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.NotesJob.invalid }"></textarea>
+                            <show-errors [control]="JobDataEmpForm.controls.NotesJob" [submit]="enjiForm.submitted"></show-errors>
                             </div>
                         </div>
                     </div>
@@ -97,7 +114,7 @@
                     </lib-ucSubsection>
                     <div id="jobAddrAttribute">
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Building Location Class </label>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Building Location Class </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="LocationClass"
                                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.Notes.invalid }">
@@ -105,7 +122,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Building Price Estimates </label>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Building Price Estimates </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="PriceEstimates"
                                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.Notes.invalid }">
@@ -113,7 +130,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Building Stay Length </label>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Building Stay Length </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="StayLength"
                                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.Notes.invalid }">
@@ -125,7 +142,7 @@
                     </lib-ucSubsection>
                     <div id="otherBusiness">
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Other Business Name </label>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Other Business Name </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="OtherBusinessName"
                                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.OtherBusinessName.invalid }">
@@ -133,7 +150,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Other Business Type </label>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Other Business Type </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="OtherBusinessType"
                                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.OtherBusinessType.invalid }">
@@ -141,7 +158,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Other Business Industry Type </label>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Other Business Industry Type </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="OtherBusinessIndustry"
                                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.OtherBusinessIndustry.invalid }">
@@ -149,7 +166,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Other Job Position </label>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Other Job Position </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="OtherJobPosition"
                                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.OtherJobPosition.invalid }">
@@ -157,11 +174,19 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Establishment Date </label>
-                            <div class="col-md-4">
-                            <input type="text" class="form-control adInsInput" formControlName="EstablishmentDate"
-                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.EstablishmentDate.invalid }">
-                            <show-errors [control]="JobDataEmpForm.controls.EstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Establishment Date </label>
+                            <div class="col-md-3">
+                              <select class="form-control adInsInput" formControlName="EstablishmentDate">
+                                <option *ngFor="let ram of listEstablishmentDt" [value]="ram.Key">
+                                  {{ram.Value}}
+                                </option>
+                              </select>
+                              <show-errors [control]="JobDataEmpForm.controls.EstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
+                            </div>
+                            <div class="col-md-3">
+                            <input type="text" class="form-control adInsInput" formControlName="EstablishmentDateYear"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.EstablishmentDateYear.invalid }">
+                            <show-errors [control]="JobDataEmpForm.controls.EstablishmentDateYear" [submit]="enjiForm.submitted"></show-errors>
                             </div>
                         </div>
                     </div>
@@ -174,9 +199,9 @@
                         <div class="form-group row">
                             <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
                             <div class="col-md-4">
-                            <textarea type="text" class="form-control adInsInput" formControlName="Notes"
-                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.Notes.invalid }"></textarea>
-                            <show-errors [control]="JobDataEmpForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                            <textarea type="text" class="form-control adInsInput" formControlName="NotesOther"
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.NotesOther.invalid }"></textarea>
+                            <show-errors [control]="JobDataEmpForm.controls.NotesOther" [submit]="enjiForm.submitted"></show-errors>
                             </div>
                         </div>
                     </div>
@@ -184,7 +209,7 @@
                     </lib-ucSubsection>
                     <div id="otherAddrAttribute">
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Building Location Class </label>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Building Location Class </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="OtherLocationClass"
                                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.OtherLocationClass.invalid }">
@@ -192,7 +217,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Building Price Estimates </label>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Building Price Estimates </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="OtherPriceEstimates"
                                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.OtherPriceEstimates.invalid }">
@@ -200,7 +225,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 adInsLabel adins-required" translate>Building Stay Length </label>
+                            <label class="col-md-3 adInsLabel adins-required" translate>Building Stay Length </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="OtherStayLength"
                                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.OtherStayLength.invalid }">

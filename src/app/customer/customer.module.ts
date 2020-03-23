@@ -33,6 +33,10 @@ import { UcaddressModule } from '@adins/ucaddress';
 import { CustomerCompanyAddressComponent } from './customer-company/customer-company-address/customer-company-address.component';
 import { CustomerCompanyAddressAddComponent } from './customer-company/customer-company-address/customer-company-address-add/customer-company-address-add.component';
 import { CustomerPersonalJobDataComponent } from './customer-personal/customer-personal-job-data/customer-personal-job-data.component';
+import { JobDataNonProfessionalComponent } from './customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional.component';
+import { JobDataProfessionalComponent } from './customer-personal/customer-personal-job-data/job-data-professional/job-data-professional.component';
+import { JobDataEmployeeComponent } from './customer-personal/customer-personal-job-data/job-data-employee/job-data-employee.component';
+import { JobDataSmeComponent } from './customer-personal/customer-personal-job-data/job-data-small-medium-enterprise/job-data-small-medium-enterprise.component';
 
 @NgModule({
   exports: [],
@@ -67,7 +71,11 @@ import { CustomerPersonalJobDataComponent } from './customer-personal/customer-p
     CustomerPersonalAddressAddComponent,
     CustomerCompanyAddressComponent,
     CustomerCompanyAddressAddComponent,
-    CustomerPersonalJobDataComponent
+    CustomerPersonalJobDataComponent,
+    JobDataNonProfessionalComponent,
+    JobDataProfessionalComponent,
+    JobDataEmployeeComponent,
+    JobDataSmeComponent
   ],
   entryComponents: [CustGroupTabDetailComponent]
 })

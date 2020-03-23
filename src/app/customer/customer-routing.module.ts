@@ -16,6 +16,7 @@ import { CustomerPersonalAddressAddComponent } from './customer-personal/custome
 import { CustomerCompanyAddressComponent } from './customer-company/customer-company-address/customer-company-address.component';
 import { CustomerCompanyAddressAddComponent } from './customer-company/customer-company-address/customer-company-address-add/customer-company-address-add.component';
 import { CustomerPersonalJobDataComponent } from './customer-personal/customer-personal-job-data/customer-personal-job-data.component';
+import { JobDataNonProfessionalComponent } from './customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional.component';
 
 const routes: Routes = [
   {
@@ -129,6 +130,13 @@ const routes: Routes = [
       {
         path: 'CustomerPersonal/JobData',
         component: CustomerPersonalJobDataComponent,
+        data: {
+          title: 'Customer Personal Job Data'
+        }
+      },
+      {
+        path: 'CustomerPersonal/JobData/NonPro',
+        component: JobDataNonProfessionalComponent,
         data: {
           title: 'Customer Personal Job Data'
         }

@@ -8,12 +8,12 @@
               <div class="form-body">
                 <div id="jobData">
                     <div class="form-group row">
-                        <label class="col-md-2 adInsLabel adins-required" translate>Profession Name </label>
-                        <div class="col-md-4">
-                          <input type="text" class="form-control adInsInput" formControlName="ProfessionName"
-                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataNonProForm.controls.ProfessionName.invalid }">
-                          <show-errors [control]="JobDataNonProForm.controls.ProfessionName" [submit]="enjiForm.submitted"></show-errors>
-                        </div>
+                      <label class="col-md-2 adInsLabel" translate>Profession Name</label>
+                      <div class="col-md-4">
+                        <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="JobDataNonProForm"
+                          [enjiForm]="enjiForm" [identifier]="'MrJobProfessionCode'" (lookup)=getLookUpProfession($event)>
+                        </lib-uclookupgeneric>
+                      </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2 adInsLabel adins-required" translate>Job Title Name </label>

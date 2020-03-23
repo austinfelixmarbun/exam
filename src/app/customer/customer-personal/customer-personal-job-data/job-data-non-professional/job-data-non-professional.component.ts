@@ -2,11 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
  
 @Component({
   selector: 'app-job-data-non-professional',
@@ -37,15 +39,20 @@ export class JobDataNonProfessionalComponent implements OnInit {
   getCustById: any;
   jobType: any;
   listJobType: any;
+  tempProfession: any;
+  professionLookUpObj: any;
+  custPersonalJobDataObj: any;
+  addJobData: any;
   JobDataNonProForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
     JobTitleName: ['']
   });
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
+    this.addJobData = AdInsConstant.AddCustPersonalJobData;
 
 
     this.route.queryParams.subscribe(params => {
@@ -58,22 +65,46 @@ export class JobDataNonProfessionalComponent implements OnInit {
     });
   }
 
+  getLookUpProfession(event) {
+    this.tempProfession = event.RefProfessionId;
+  }
+
   ngOnInit() {
+    this.professionLookUpObj = new InputLookupObj();
+    this.professionLookUpObj.isRequired = false;
+    this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
+    this.professionLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.professionLookUpObj.urlEnviPaging = environment.FoundationR3Url;
+    this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
+    this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
+    
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
     this.http.post(this.getCustById, this.custObj).subscribe(
       (response) => {
           this.custObj = response;
       });
+  }
 
-    this.jobType = new RefMasterObj();
-    this.jobType.RefMasterTypeCode = "CUST_MODEL";
-    this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
+  SaveForm(){
+    this.custPersonalJobDataObj = new CustPersonalJobDataObj();
+    this.custPersonalJobDataObj.CustId = this.IdCust;
+    this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
+    this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
+
+    this.http.post(this.addJobData, this.custPersonalJobDataObj).subscribe(
       (response) => {
-          this.listJobType = response['ReturnObject'];
-          console.log("aaaa");
-          console.log(this.listJobType);
-          this.JobDataNonProForm.patchValue({ JobDataType: response['ReturnObject'][0]['Key'] });
-      });
+        console.log(response);
+        this.toastr.successMessage(response["message"]);
+        this.router.navigate(
+          ["/Customer/CustomerPersonal/Address"], 
+          { queryParams: { "IdCust": this.IdCust }}
+          );
+        console.log(response)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
