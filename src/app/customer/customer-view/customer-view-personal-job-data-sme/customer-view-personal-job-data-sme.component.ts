@@ -19,5 +19,4 @@ export class CustomerViewPersonalJobDataSmeComponent implements OnInit {
     this.viewCustJobDataEmpOthBiz =  "./assets/ucviewgeneric/viewCustJobDataEmpOthBiz.json";
     this.viewCustJobDataOthBizAdress =  "./assets/ucviewgeneric/viewCustJobDataOthBizAdress.json";
   }
-
 }

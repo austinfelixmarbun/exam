@@ -9,17 +9,16 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./customer-view-coy-financial.component.scss']
 })
 export class CustomerViewCoyFinancialComponent implements OnInit {
-  viewCustCoyFinData =  "./assets/ucviewgeneric/viewCustCoyFinData.json";
+  viewCustCoyFinData = "./assets/ucviewgeneric/viewCustCoyFinData.json";
   CustId: any;
   GetCBAForCustFinDataByCustIdUrl = AdInsConstant.GetCBAForCustFinDataByCustId;
   responseCBAObj: any;
-  
-  constructor(    
+
+  constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router,) {
-
-   }
+    private router: Router, ) {
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -28,16 +27,13 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
       }
     });
     var custAddrObj = { "CustId": this.CustId };
-    console.log('debug sini');
     this.http.post(this.GetCBAForCustFinDataByCustIdUrl, custAddrObj).subscribe(
       response => {
         this.responseCBAObj = response['ListCBAForCustFinData'];
-        console.log('isi get list = ', this.responseCBAObj);
       },
       error => {
         this.router.navigateByUrl('Error');
       }
     );
   }
-
 }

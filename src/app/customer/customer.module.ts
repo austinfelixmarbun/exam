@@ -20,7 +20,6 @@ import { CustomerCompanyMainInfoComponent } from './customer-company/customer-co
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { CustomerPersonalDetailComponent } from './customer-personal/customer-personal-detail/customer-personal-detail.component';
-import { CustomerViewPersonalComponent } from './customer-view/customer-view-personal/customer-view-personal.component';
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
 import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
@@ -72,7 +71,7 @@ import { CustomerViewCoyDetailComponent } from './customer-view/customer-view-co
   ],
   declarations: [ 
     CustomerPagingComponent, 
-    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent, CustomerViewPersonalComponent,
+    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent,
     NegativeCustomerComponent,
     NegativeCustomerDetailComponent,
     NegativeCustomerViewComponent,

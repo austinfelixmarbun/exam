@@ -503,6 +503,7 @@ export class AdInsConstant {
   public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
   public static AddListAssetSchmD = "http://localhost:5000" + "/AssetSchmD/AddListAssetSchmD";
   public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
+  public static AddRangeAssetSchmD = "http://localhost:5000" + "/AssetSchmD/AddRangeAssetSchmD";
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
 
@@ -757,4 +758,13 @@ export class AdInsConstant {
   // Cust Company Management Shareholder
   public static GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderId = "http://localhost:5000" + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderId";
 
+
+  // Cust Attr Content
+  public static GetCustAttrContentForCustViewByCustId = "http://localhost:5000" + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
+
+  // 
+  public static GetCustCompanyContactPersonForCustViewByCustId = "http://localhost:5000" + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";
+  
+  // Cust Group
+  public static GetListCustGrpForCustViewByCustId =  "http://localhost:5000" + "/CustGrp/GetListCustGrpForCustViewByCustId";
 }

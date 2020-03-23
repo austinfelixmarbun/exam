@@ -72,7 +72,7 @@
             "property": "MrEducationCode"
           },
           {
-            "type": "text",
+            "type": "boolean",
             "label": "Affiliation with Multifinance",
             "property": "IsAffiliateWithMf"
           },
@@ -81,11 +81,11 @@
             "label": "Religion",
             "property": "MrReligionCode"
           },          {
-            "type": "text",
+            "type": "boolean",
             "label": "Rest In Peace",
             "property": "IsRestInPeace"
           },          {
-            "type": "text",
+            "type": "boolean",
             "label": "VIP",
             "property": "IsVip"
           },

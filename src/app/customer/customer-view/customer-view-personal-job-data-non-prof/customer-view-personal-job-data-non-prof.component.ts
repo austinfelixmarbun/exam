@@ -9,9 +9,7 @@ export class CustomerViewPersonalJobDataNonProfComponent implements OnInit {
   viewCustJobData: string;
 
   constructor() { }
-
   ngOnInit() {
     this.viewCustJobData =  "./assets/ucviewgeneric/viewCustJobDataNonProf.json";
   }
-
 }

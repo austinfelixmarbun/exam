@@ -20,9 +20,10 @@ export class CustomerViewCoyLegalComponent implements OnInit {
   responseResultCustAddrHist: any;
   ddlItem: any;
   CustForm = this.fb.group({
-  DdlAddress: ['']
+    DdlAddress: ['']
   });
   GetCustCompanyLegalDocForCustViewByCustIdUrl = AdInsConstant.GetCustCompanyLegalDocForCustViewByCustId;
+  responseResultLegal: any;
 
   constructor(
     private http: HttpClient,
@@ -39,11 +40,9 @@ export class CustomerViewCoyLegalComponent implements OnInit {
       }
     });
     var custObj = { "CustId": this.CustId };
-    console.log('debug sini');
     this.http.post(this.GetCustCompanyLegalDocForCustViewByCustIdUrl, custObj).subscribe(
       response => {
-        this.responseResultCustAddr = response['ReturnObject'];
-        console.log('isi get list = ', this.responseResultCustAddr);
+        this.responseResultLegal = response['ReturnObject'];
       },
       error => {
         this.router.navigateByUrl('Error');

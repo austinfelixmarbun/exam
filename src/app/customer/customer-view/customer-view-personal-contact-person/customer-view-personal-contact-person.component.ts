@@ -25,7 +25,6 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetListCustPersonalContactPersonForCustViewByCustIdUrl, custAddrObj).subscribe(
       response => {
@@ -35,7 +34,5 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
         this.router.navigateByUrl('Error');
       }
     );
-
   }
-
 }

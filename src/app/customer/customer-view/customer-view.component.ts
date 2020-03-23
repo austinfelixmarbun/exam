@@ -30,10 +30,10 @@ export class CustomerViewComponent implements OnInit {
   isManagement: boolean;
   isContact: boolean;
   isLegal: boolean;
+  isOther: boolean;
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log('sini');
     this.viewCustMainInfoHeaderObj =  "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
     this.viewCustCoyMainInfoHeader =  "./assets/ucviewgeneric/viewCustCoyMainInfoHeader.json";
     this.route.queryParams.subscribe(params => {
@@ -49,12 +49,10 @@ export class CustomerViewComponent implements OnInit {
         this.custResultData = response;
         this.custModel = this.custResultData['MrCustModelCode'];
         this.custType  = this.custResultData['MrCustTypeCode'];
-        console.log('cust model = ', this.custModel);
       },
       (error) =>{
         this.custModel = "";
         this.custType = "";
-        console.log('error');
         console.log(error);
       }
     );
@@ -149,6 +147,7 @@ export class CustomerViewComponent implements OnInit {
       this.isContact = false;
       this.isFinData = false;
       this.isLegal = false;
+      this.isOther = false;
     }
     else if(type == "address"){
       this.isMainData = false;
@@ -157,6 +156,7 @@ export class CustomerViewComponent implements OnInit {
       this.isContact = false;
       this.isFinData = false;
       this.isLegal = false;
+      this.isOther = false;
     }
     else if(type == "management"){
       this.isMainData = false;
@@ -165,6 +165,7 @@ export class CustomerViewComponent implements OnInit {
       this.isContact = false;
       this.isFinData = false;
       this.isLegal = false;
+      this.isOther = false;
     }
     else if(type == "contact"){
       this.isMainData = false;
@@ -173,6 +174,7 @@ export class CustomerViewComponent implements OnInit {
       this.isContact = true;
       this.isFinData = false;
       this.isLegal = false;
+      this.isOther = false;
     }
     else if(type == "finData"){
       this.isMainData = false;
@@ -181,6 +183,7 @@ export class CustomerViewComponent implements OnInit {
       this.isContact = false;
       this.isFinData = true;
       this.isLegal = false;
+      this.isOther = false;
     }
     else if(type == "legal"){
       this.isMainData = false;
@@ -189,6 +192,16 @@ export class CustomerViewComponent implements OnInit {
       this.isContact = false;
       this.isFinData = false;
       this.isLegal = true;
+      this.isOther = false;
+    }
+    else if(type == "other"){
+      this.isMainData = false;
+      this.isAddress = false;
+      this.isManagement = false;
+      this.isContact = false;
+      this.isFinData = false;
+      this.isLegal = false;
+      this.isOther = true;
     }
   }
 }

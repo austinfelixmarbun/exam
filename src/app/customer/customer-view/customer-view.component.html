@@ -94,6 +94,10 @@
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
 								<app-customer-view-coy-legal *ngIf="isLegal == true"> </app-customer-view-coy-legal>
 							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Other Attribute'" (stepEnter)="EnterTabCoy('other')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-coy-other *ngIf="isOther == true"> </app-customer-view-coy-other>
+							</aw-wizard-step>
 						</aw-wizard>
 					</div>
 				</div>

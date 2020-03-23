@@ -28,8 +28,6 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
   });
   viewCustFinData: string;
 
-  // WHERE CA.CUST_ID = 16
-
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -40,30 +38,23 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
   }
 
   ngOnInit() {
-    
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
       }
     });
-
     var custAddrObj = { "CustId": this.CustId };
-    console.log('debug sini');
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
         this.responseResultCustAddr = response['ReturnObject'];
-        console.log('isi get list = ', this.responseResultCustAddr);
-
       },
       error => {
         this.router.navigateByUrl('Error');
       }
     );
-
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
         this.responseResultCustAddrHist = response['ReturnObject'];
-        console.log('isi get hist list = ', this.responseResultCustAddr);
       },
       error => {
         this.router.navigateByUrl('Error');
@@ -73,9 +64,8 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     var refMasterObj = new RefMasterObj();
     refMasterObj.RefMasterTypeCode = "ADDR_TYPE";
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
-      response =>{
+      response => {
         this.ddlItem = response['ReturnObject'];
-
         this.CustForm.patchValue({
           DdlAddress: this.ddlItem[0].Value
         });

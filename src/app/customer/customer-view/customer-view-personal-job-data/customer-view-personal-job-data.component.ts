@@ -13,10 +13,8 @@ export class CustomerViewPersonalJobDataComponent implements OnInit {
   viewCustJobDataAddress: string;
 
   constructor() { }
-
   ngOnInit() {
     this.viewCustJobData =  "./assets/ucviewgeneric/viewCustJobData.json";
     this.viewCustJobDataAddress = "./assets/ucviewgeneric/viewCustJobDataAddress.json";
   }
-
 }

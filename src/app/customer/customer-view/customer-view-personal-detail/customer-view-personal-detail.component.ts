@@ -14,5 +14,4 @@ export class CustomerViewPersonalDetailComponent implements OnInit {
     this.viewCustMainDataMainInfo =  "./assets/ucviewgeneric/viewCustMainDataMainInfo.json";
     this.viewCustMainDataContactInformation = "./assets/ucviewgeneric/viewCustMainDataContactInformation.json";
   }
-
 }

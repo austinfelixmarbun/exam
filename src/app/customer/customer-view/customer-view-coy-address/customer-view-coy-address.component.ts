@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsService } from 'app/shared/services/adIns.service';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
-
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-view-coy-address',
@@ -41,28 +41,25 @@ export class CustomerViewCoyAddressComponent implements OnInit {
       }
     });
     var custAddrObj = { "CustId": this.CustId };
-    console.log('debug sini');
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
         this.responseResultCustAddr = response['ReturnObject'];
-        console.log('isi get list = ', this.responseResultCustAddr);
       },
       error => {
         this.router.navigateByUrl('Error');
       }
     );
-    console.log('debug sini');
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
         this.responseResultCustAddrHist = response['ReturnObject'];
-        console.log('isi get hist list = ', this.responseResultCustAddr);
       },
       error => {
         this.router.navigateByUrl('Error');
       }
     );
     var refMasterObj = new RefMasterObj();
-    refMasterObj.RefMasterTypeCode = "ADDR_TYPE";
+    console.log('bugde');
+    refMasterObj.RefMasterTypeCode = RefMasterConstant.AddrType;
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
       response => {
         this.ddlItem = response['ReturnObject'];

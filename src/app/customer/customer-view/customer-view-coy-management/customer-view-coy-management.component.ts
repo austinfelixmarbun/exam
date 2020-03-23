@@ -27,7 +27,6 @@ export class CustomerViewCoyManagementComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderIdUrl, custAddrObj).subscribe(
       response => {
@@ -37,7 +36,5 @@ export class CustomerViewCoyManagementComponent implements OnInit {
         this.router.navigateByUrl('Error');
       }
     );
-
   }
-
 }

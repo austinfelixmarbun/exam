@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let item of responseResultCustAddrHist ; let i = index">
+      <ng-container *ngFor="let item of responseResultLegal ; let i = index">
         <tr *ngIf="item.AddressTypeName == selectedOption">
           <td class="text-left">{{i+1}}</td>
           <td class="text-left">{{item.LegalDocType}}</td>
