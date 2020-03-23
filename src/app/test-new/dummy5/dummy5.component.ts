@@ -19,6 +19,16 @@ export class Dummy5Component implements OnInit {
     this.inputObj._url = "./assets/ucpaging/searchTest.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "A.MR_OFFICE_TYPE_CODE",
+        environment: environment.localHostUrl
+      },
+      {
+        name: "A.MR_OFFICE_CLASS_CODE",
+        environment: environment.localHostUrl
+      }
+    ];
   }
 
   // ** Start UC Search **/

@@ -57,7 +57,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.MR_OFFICE_TYPE_CODE", 
+            "name": "A.MR_OFFICE_TYPE_CODE",
             "id": "OfficeCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -66,12 +66,30 @@
             "isFromURL": true,
             "isSelectOne": false,
             "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Office Type",
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "OFFICE_TYPE",
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "OFFICE_TYPE",
             "items": [],
             "itemsUrl": []
-          }
+        },
+        {
+            "type": "dropdown",
+            "name": "A.MR_OFFICE_CLASS_CODE",
+            "id": "OfficeCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isQueryIn": true,
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Office Class",
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "OFFICE_CLASS",
+            "items": [],
+            "itemsUrl": []
+        }
     ],
     "querystring": {
         "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.OFFICE_ADDR AS OfficeAddr , B.OFFICE_NAME AS OfficeParent, A.IS_ACTIVE AS IsActive, A.MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, A.REF_OFFICE_ID AS RefOfficeId, C.DESCR AS Descr, D.CENTER_GRP_ID AS CenterGrpId",

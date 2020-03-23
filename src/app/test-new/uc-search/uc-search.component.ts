@@ -111,9 +111,25 @@ export class UcSearchComponent implements OnInit {
           request.criteria = arrayCrit;
           request[data.component[i].criteriaPropName] = data.component[i].criteriaPropValue;
 
+          // Pengecekan penggunaan url atau path
+          if (data.component[i].path != undefined && data.component[i].path != "") {
+            if (this.searchInput.ddlEnvironments != undefined && this.searchInput.ddlEnvironments.length != 0) {
+              for (let y = 0; y < this.searchInput.ddlEnvironments.length; y++) {
+                if (data.component[i].name == this.searchInput.ddlEnvironments[y].name) {
+                  data.component[i].fullpath = this.searchInput.ddlEnvironments[y].environment + data.component[i].path;
+                  break;
+                }
+              }
+            } else {
+              data.component[i].fullpath = data.component[i].url;
+            }
+
+          } else {
+            data.component[i].fullpath = data.component[i].url;
+          }
           //lempar objectnya sekalian sama urlnya, nnti di bind di dalem karena masalah di asyncnya
           //biar tiap function ada state2nya sendiri
-          this.resolveObject(data.component[i], data.component[i].url, request);
+          this.resolveObject(data.component[i], data.component[i].fullpath, request);
         }
 
         if (data.component[i].type == "numeric") {
@@ -270,6 +286,7 @@ export class UcSearchComponent implements OnInit {
   resolveObject(obj: any, url: string, crit: RequestCriteriaObj = null) {
     const val = this.postJSON(url, crit);
     val.subscribe(tempData => {
+      obj.itemsUrl = new Array();
       obj.itemsUrl = tempData.ReturnObject;
     });
   }
@@ -320,6 +337,21 @@ export class UcSearchComponent implements OnInit {
             arrayCrit.push(critObj);
           }
           request.criteria = arrayCrit;
+          if (jsonComp[j].path != undefined && jsonComp[j].path != "") {
+            if (this.searchInput.ddlEnvironments != undefined && this.searchInput.ddlEnvironments.length != 0) {
+              for (let y = 0; y < this.searchInput.ddlEnvironments.length; y++) {
+                if (jsonComp[j].name == this.searchInput.ddlEnvironments[y].name) {
+                  jsonComp[j].fullpath = this.searchInput.ddlEnvironments[y].environment + jsonComp[j].path;
+                  break;
+                }
+              }
+            } else {
+              jsonComp[j].fullpath = jsonComp[j].url;
+            }
+
+          } else {
+            jsonComp[j].fullpath = jsonComp[j].url;
+          }
           this.resolveObject(jsonComp[j], jsonComp[j].url, request);
         }
       }
