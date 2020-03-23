@@ -28,12 +28,8 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   result: any;
   check: any;
-  inputLookupParentSurveyorObj: any;
-  inputLookupParentAssetInsurance: any;
   inputLookupParentObj: any;
-  inputLookupParentLifeInsurance: any;
   inputLookupZipcodeObj: any;
-  inputLookupAgencyPersonal: any;
 
   MrVendorCategoryCode: any;
   arrCrit: any;
@@ -264,7 +260,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.VendorForm.controls.ReservedField7.updateValueAndValidity();
     this.VendorForm.controls.ReservedField8.updateValueAndValidity();
     }
-     if (this.MrVendorCategoryCode == "SURVEYOR_HO") {
+     if (this.MrVendorCategoryCode == "SURVEYOR_BRANCH") {
       var critObjSurveyor = new CriteriaObj();
       critObjSurveyor.propName = 'V.MR_VENDOR_CATEGORY_CODE';
       critObjSurveyor.restriction = AdInsConstant.RestrictionEq;
@@ -272,7 +268,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.arrCritSurHo.push(critObjSurveyor);
       this.inputLookupParentObj.addCritInput = this.arrCritSurHo;
     }
-     if (this.MrVendorCategoryCode == "ASSET_INSCO_HO") {
+     if (this.MrVendorCategoryCode == "ASSET_INSCO_BRANCH") {
       var critObjAssetInsurance = new CriteriaObj();
       critObjAssetInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
       critObjAssetInsurance.restriction = AdInsConstant.RestrictionEq;
@@ -280,7 +276,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.arrCritAsIn.push(critObjAssetInsurance);
       this.inputLookupParentObj.addCritInput = this.arrCritAsIn;
     }
-     if (this.MrVendorCategoryCode == "LIFE_INSCO_HO") {
+     if (this.MrVendorCategoryCode == "LIFE_INSCO_BRANCH") {
       var critObjLifeInsurance = new CriteriaObj();
       critObjLifeInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
       critObjLifeInsurance.restriction = AdInsConstant.RestrictionEq;
@@ -440,7 +436,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       TaxpayerName: this.VendorForm.controls.TaxpayerName.value
     }
 
-    if (vendorObj.MrVendorCategoryCode == "SUPPLIER_HO" || vendorObj.MrVendorCategoryCode == "SUPPLIER_BRANCH") {
+    if (vendorObj.MrVendorCategoryCode == "SUPPLIER_BRANCH") {
       vendorObj.ReservedField3 = this.VendorForm.controls.ReservedField3.value;
       vendorObj.ReservedField4 = this.VendorForm.controls.ReservedField4.value;
       vendorObj.ReservedField5 = this.VendorForm.controls.ReservedField5.value;
@@ -448,7 +444,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       vendorObj.ReservedField7 = this.VendorForm.controls.ReservedField7.value;
       vendorObj.ReservedField8 = this.VendorForm.controls.ReservedField8.value;
     }
-    if (vendorObj.MrVendorCategoryCode == "SURVEYOR_HO") {
+    if (vendorObj.MrVendorCategoryCode == "SURVEYOR_BRANCH") {
       vendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
       vendorObj.ReservedField9 = this.VendorForm.controls.ReservedField9.value;
     }
