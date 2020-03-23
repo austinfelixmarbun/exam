@@ -53,6 +53,8 @@ import { HoBankInfoComponent } from './vendor-ho/vendor-ho-info/ho-bank-info/ho-
 import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
 import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
 import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
+import { HoContactPersonInfoComponent } from './vendor-ho/vendor-ho-info/ho-contact-person-info/ho-contact-person-info.component';
+import { HoGroupInfoComponent } from './vendor-ho/vendor-ho-info/ho-group-info/ho-group-info.component';
 
 
 @NgModule({
@@ -113,7 +115,9 @@ import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch
     HoBankInfoComponent,
     VendorBranchRegistrationComponent,
     VendorBranchOfficeMemberAddComponent,
-    VendorBranchOfficeMemberComponent
+    VendorBranchOfficeMemberComponent,
+    HoContactPersonInfoComponent,
+    HoGroupInfoComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [
