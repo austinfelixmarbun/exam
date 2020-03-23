@@ -50,6 +50,12 @@
                     <show-errors [control]="CustBankAccForm.controls.BankAccNo" [submit]="enjiForm.submitted"></show-errors>
                   </div>
                 </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel adins-required-label" for="IsDefault" translate>Is Default</label>
+                  <div class="col-md-9">
+                    <input type="checkbox" formControlName="IsDefault" [attr.disabled]="pageType == 'editStmnt' ? '' : null" />
+                  </div>
+                </div>
                 <div class="form-group row" *ngIf="isAddBankStatement"> 
                   <div class="col-md-12" style="text-align: right; margin-top: 10px;">
                     <button type="button" class="btn btn-raised btn-primary" (click)="addRowCustBankStmnt()" [disabled]="rowCustBankStmnt >= '12'">
