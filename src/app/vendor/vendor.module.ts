@@ -13,7 +13,7 @@ import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
 import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
 import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
-// import { BankInfoComponent } from './component/bank-info/bank-info.component';
+import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { VendorGroupComponent } from './vendor-group/vendor-group.component';
 import { VendorGroupPagingComponent } from './vendor-group/vendor-group-paging/vendor-group-paging.component';
 import { VendorGroupViewComponent } from './vendor-group/vendor-group-view/vendor-group-view.component';
@@ -25,8 +25,8 @@ import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme
 import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-add/vendor-scheme-member-add.component';
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
+import { VendorHoldingViewComponent } from './vendor-holding-view/vendor-holding-view.component';
 import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
-import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { ContactPersonListComponent } from './component/contact-person-list/contact-person-list.component';
 import { ContactPersonAddEditComponent } from './component/contact-person-add-edit/contact-person-add-edit.component';
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
@@ -45,6 +45,14 @@ import { VendorEmployeeComponent } from './component/vendor-employee/vendor-empl
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { UcaddressModule } from '@adins/ucaddress';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { VendorHoldingRegistrationComponent } from './vendor-holding-registration/vendor-holding-registration.component';
+import { HoInfoComponent } from './vendor-ho/vendor-ho-info/ho-info/ho-info.component';
+import { HoAddressInfoComponent } from './vendor-ho/vendor-ho-info/ho-address-info/ho-address-info.component';
+import { HoTaxInfoComponent } from './vendor-ho/vendor-ho-info/ho-tax-info/ho-tax-info.component';
+import { HoBankInfoComponent } from './vendor-ho/vendor-ho-info/ho-bank-info/ho-bank-info.component';
+import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
+import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
+import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
 
 
 @NgModule({
@@ -63,7 +71,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
     ReactiveFormsModule,
     TreeViewModule,
     UcviewgenericModule,
-    UclookupgenericModule,
     NgbDropdownModule,
     ArchwizardModule,
     MatTabsModule,
@@ -74,7 +81,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
     VendorComponent,
     VendorHoldingPagingComponent,
     VendorHoldingAddEditComponent,
-    BankInfoComponent,
+   BankInfoComponent,
     VendorGroupComponent,
     VendorGroupPagingComponent,
     VendorGroupViewComponent,
@@ -85,8 +92,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
     VendorSchemeMemberPagingComponent,
     VendorHoAddEditComponent,
     VendorHoPagingComponent,
+    VendorHoldingViewComponent,
     VendorBranchPagingComponent,
-    VendorHoPagingComponent,
     VendorBranchAddEditComponent,
     ContactPersonListComponent,
     ContactPersonAddEditComponent,
@@ -97,7 +104,15 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
     MainInfoViewComponent,
     VendorBranchEmployeePagingComponent,
     VendorBranchEmployeeAddEditComponent,
-    VendorEmployeeComponent
+    VendorEmployeeComponent,
+    VendorHoldingRegistrationComponent,
+    HoInfoComponent,
+    HoTaxInfoComponent,
+    HoAddressInfoComponent,
+    HoBankInfoComponent,
+    VendorBranchRegistrationComponent,
+    VendorBranchOfficeMemberAddComponent,
+    VendorBranchOfficeMemberComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

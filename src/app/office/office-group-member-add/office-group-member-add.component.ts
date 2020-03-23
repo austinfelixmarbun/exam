@@ -193,7 +193,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
     } else {
       for (let i = 0; i < this.resultData.Data.length; i++) {
-        let index = this.listSelectedId.indexOf(this.resultData.data[i].RefOfficeId);
+        let index = this.listSelectedId.indexOf(this.resultData.Data[i].RefOfficeId);
         if (index > -1) {
           this.listSelectedId.splice(index, 1);
         }
@@ -236,12 +236,17 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   }
 
   SaveOfficeGroupMember() {
+    if (this.tempListId.length == 0) {
+      this.toastr.typeErrorCustom('Please Add At Least One Data');
+      return;
+    }
+
     var obj = {
       CenterGrpId: this.CenterGrpId,
       RefOfficeId: this.tempListId
     }
 
-    this.http.post(AdInsConstant.AddCenterGrpOfficeMember, obj).subscribe(
+    this.http.post(AdInsConstant.AddVendorGrpMbr, obj).subscribe(
         (response) => {
             this.router.navigate(['/Office/Office-group-member'], {queryParams: {RefOfficeId:this.RefOfficeId, CenterGrpId:this.CenterGrpId}});
         },

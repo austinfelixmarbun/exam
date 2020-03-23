@@ -24,4 +24,25 @@ export class VendorService {
     GetVendorBankAccByVendorBankAccId(Obj: any): Observable<Object> {
         return this.http.post(AdInsConstant.GetVendorBankAccByVendorBankAccId, Obj);
     }
+
+    DeleteVendorBankAcc(Obj: any):Observable<Object> {
+        return this.http.post(AdInsConstant.DeleteVendorBankAcc, Obj);
+    }
+
+    GetRefMasterListKeyValuePair(Obj : any) : Observable<Object> {
+        return this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, Obj);
+    }
+
+    GetVendorHOAndVendorAddrByVendorId(Obj : any) : Observable<Object> {
+        return this.http.post(AdInsConstant.GetVendorHOAndVendorAddr, Obj);
+    }
+
+    EditVendor(Obj : any) :  Observable<Object> {
+        return this.http.post(AdInsConstant.EditVendorHO, Obj);
+    }
+    
+    AddVendor(Obj : any) :  Observable<Object> {
+        return this.http.post(AdInsConstant.AddVendorHO, Obj);
+    }
+    
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductHoAdddetailComponent } from './product-ho-adddetail.component';
+import { HoBankInfoComponent } from './ho-bank-info.component';
 
-describe('ProductHoAdddetailComponent', () => {
-  let component: ProductHoAdddetailComponent;
-  let fixture: ComponentFixture<ProductHoAdddetailComponent>;
+describe('HoBankInfoComponent', () => {
+  let component: HoBankInfoComponent;
+  let fixture: ComponentFixture<HoBankInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductHoAdddetailComponent ]
+      declarations: [ HoBankInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductHoAdddetailComponent);
+    fixture = TestBed.createComponent(HoBankInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

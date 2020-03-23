@@ -6,6 +6,7 @@ import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-me
 import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-paging/vendor-scheme-member-paging.component';
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
+import { VendorHoldingViewComponent } from './vendor-holding-view/vendor-holding-view.component';
 import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
 import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
 import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
@@ -17,18 +18,23 @@ import { ContactPersonAddEditComponent } from './component/contact-person-add-ed
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
 import { BankInfoComponent } from './component/bank-info/bank-info.component';
+import { ContactPersonListComponent } from './component/contact-person-list/contact-person-list.component';
 import { AddressComponent } from './component/address/address.component';
 import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info.component';
 import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
 import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
 import { VendorEmployeeComponent } from './component/vendor-employee/vendor-employee.component';
+import { VendorHoldingRegistrationComponent } from './vendor-holding-registration/vendor-holding-registration.component';
+import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
+import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
+import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'Branch',
+        path: 'Branch/Paging',
         component: VendorBranchPagingComponent,
         data: {
           title: 'Vendor Branch Paging'
@@ -39,6 +45,13 @@ const routes: Routes = [
         component: VendorBranchAddEditComponent,
         data: {
           title: 'Vendor Branch Add'
+        },
+      },
+      {
+        path: 'Branch/Registration',
+        component: VendorBranchRegistrationComponent,
+        data: {
+          title: 'Vendor Branch Registration'
         },
       },
       {
@@ -56,17 +69,31 @@ const routes: Routes = [
         },
       },
       {
-        path: 'HoldingPaging',
+        path: 'ContactPerson/List',
+        component: ContactPersonListComponent,
+        data: {
+          title: 'Contact Person List'
+        },
+      },
+      {
+        path: 'Holding/Paging',
         component: VendorHoldingPagingComponent,
         data: {
           title: 'Vendor Holding Paging'
         },
       },
       {
-        path: 'HoldingAddEdit',
+        path: 'Holding/Detail',
         component: VendorHoldingAddEditComponent,
         data: {
           title: 'Vendor Holding Add Edit'
+        },
+      },
+      {
+        path: 'Holding/Registration',
+        component: VendorHoldingRegistrationComponent,
+        data: {
+          title: 'Vendor Registration'
         },
       },
       {
@@ -140,6 +167,14 @@ const routes: Routes = [
         },
       },
       {
+        path: 'Holding/View',
+        component: VendorHoldingViewComponent,
+        data: {
+          title: 'Vendor Holding View'
+        },
+      },
+
+      {
         path: 'HO/Registration',
         component: VendorHoRegistrationComponent,
         data: {
@@ -168,10 +203,17 @@ const routes: Routes = [
         },
       },
       {
-        path: 'Branch/Employee/EmpInfo',
-        component: VendorEmployeeComponent,
+        path: 'Branch/Member/Paging',
+        component: VendorBranchOfficeMemberComponent,
         data: {
-          title: 'Vendor Employee Info'
+          title: 'Vendor Branch Member Paging'
+        },
+      },
+      {
+        path: 'Branch/Member/Add',
+        component: VendorBranchOfficeMemberAddComponent,
+        data: {
+          title: 'Vendor Branch Member Add'
         },
       }
     ]

@@ -9,6 +9,7 @@
           <label class="col-md-4 ">{{type.controls['components'].value[l].ProdCompntName}}</label>
           <div class="col-md-8" *ngIf="type.controls['components'].value[l].ProdCompntType == 'DDL'">
             <select formControlName="CompntValue" class="form-control width-25-per" id="CompntValue" name="CompntValue" (change)="onChangeEvent(type.controls['components'].value[l].RefProdCompntCode,$event,l,j);">
+              <option value="">--Change if necessary--</option>
               <option *ngFor="let m of dictOptions[type.controls['components'].value[l].RefProdCompntCode]" value={{m.Key}} >{{m.Value}}</option>
             </select>
           </div>

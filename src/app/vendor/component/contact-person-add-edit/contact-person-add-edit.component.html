@@ -12,37 +12,39 @@
               <div class="form-group row">
                 <label class="col-md-3 adins-required-label" for="Name" translate>Name</label>
                 <div class="col-md-9">
-                  <input type="Name" id="Name" class="form-control adInsInput width-25-per" formControlName="Name">
+                  <input type="Name" id="Name" class="form-control adInsInput width-25-per"
+                    formControlName="Name">
                   <show-errors [control]="ContactPersonForm.controls.Name" [submit]="ContactPersonReqForm.submitted">
                   </show-errors>
                 </div>
               </div>
               <div class="form-group row ">
-                <label class="col-md-3 adins-required-label" for="MrEmployeePosition" translate>JobPosition</label>
+                <label class="col-md-3 adins-required-label" for="JobPosition" translate>JobPosition</label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" style="width: auto" formControlName="MrEmployeePosition"
-                    [ngClass]="{ 'is-invalid': ContactPersonForm.submitted && ContactPersonForm.controls.MrEmployeePosition.invalid }">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="JobPosition"
+                    [ngClass]="{ 'is-invalid': ContactPersonForm.submitted && ContactPersonForm.controls.JobPosition.invalid }">
                     <option *ngFor="let it of itemJobPosition" value="{{it.Key}}">
                       {{it.Value}}</option>
                   </select>
-                  <show-errors [control]="ContactPersonForm.controls.MrEmployeePosition"
+                  <show-errors [control]="ContactPersonForm.controls.JobPosition"
                     [submit]="ContactPersonForm.submitted">
                   </show-errors>
                 </div>
               </div>
+
               <div class="form-group row">
-                <label class="col-md-3 adins-required-label" for="Phone1" translate>Phone 1</label>
+                <label class="col-md-3 adins-required-label" for="Phn1" translate>Phone 1</label>
                 <div class="col-md-9">
-                  <input type="text" id="Phone1" class="form-control adInsInput width-25-per" formControlName="Phone1">
-                  <show-errors [control]="ContactPersonForm.controls.Phone1" [submit]="ContactPersonReqForm.submitted">
+                  <input type="text" id="Phn1" class="form-control adInsInput width-25-per" formControlName="Phn1">
+                  <show-errors [control]="ContactPersonForm.controls.Phn1" [submit]="ContactPersonReqForm.submitted">
                   </show-errors>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 adInsLabel" for="Phone2" translate>Phone 2</label>
+                <label class="col-md-3 adInsLabel" for="Phn2" translate>Phone 2</label>
                 <div class="col-md-9">
-                  <input type="text" id="Phone2" class="form-control adInsInput width-25-per" formControlName="Phone2">
-                  <show-errors [control]="ContactPersonForm.controls.Phone2" [submit]="ContactPersonReqForm.submitted">
+                  <input type="text" id="Phn2" class="form-control adInsInput width-25-per" formControlName="Phn2">
+                  <show-errors [control]="ContactPersonForm.controls.Phn2" [submit]="ContactPersonReqForm.submitted">
                   </show-errors>
                 </div>
               </div>
@@ -56,19 +58,20 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 adins-required-label" for="JoinDate" translate>Join Date</label>
+                <label class="col-md-3 adins-required-label" for="JoinDt" translate>Join Date</label>
                 <div class="col-md-9">
-                  <input type="date" id="JoinDate" class="form-control adInsInput width-25-per"
-                    formControlName="JoinDate">
-                  <show-errors [control]="ContactPersonForm.controls.JoinDate"
+                  <input type="date" id="JoinDt" class="form-control adInsInput width-25-per"
+                    formControlName="JoinDt">
+                  <show-errors [control]="ContactPersonForm.controls.JoinDt"
                     [submit]="ContactPersonReqForm.submitted">
                   </show-errors>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 adins-required-label" for="IsOwner" translate>Owner</label>
+                <label class="col-md-3" for="IsOwner" translate>Owner</label>
                 <div class="col-md-9">
-                  <input type="checkbox" class="border-primary" formControlName="IsOwner">
+                  <input type="checkbox" id="IsOwner" class=""
+                    formControlName="IsOwner">
                   <show-errors [control]="ContactPersonForm.controls.IsOwner" [submit]="ContactPersonReqForm.submitted">
                   </show-errors>
                 </div>
@@ -126,19 +129,20 @@
               <div class="form-group row">
                 <label class="col-md-3" translate>Province</label>
                 <div class="col-md-9">
-                  <input type="text" id="Province" class="form-control adInsInput width-25-per"
-                    formControlName="Province">
-                  <show-errors [control]="ContactPersonForm.controls.Province"
+                  <input type="text" id="ProvDistrictName" class="form-control adInsInput width-25-per"
+                    formControlName="ProvDistrictName">
+                  <show-errors [control]="ContactPersonForm.controls.ProvDistrictName"
                     [submit]="ContactPersonReqForm.submitted">
                   </show-errors>
                 </div>
               </div>
-              <div class="form-actions right">
-                <button type="button" class="btn btn-raised btn-warning mr-1" translate (click)="HiddenCheck()">
-                  <i class="fa fa-arrow-circle-left"></i> Back
+              <div class="ucSearch-Button-Right">
+                <button type="button" class="btn btn-raised btn-warning mr-1" (click)="HiddenCheck()">
+                  <i class=""></i> Back
                 </button>
-                <button type="submit" class="btn btn-raised btn-primary">
-                  <i class="far"></i>Submit
+        
+                <button type="submit" class="btn btn-raised btn-primary mr-1">
+                  <i class="fa fa-check-square-o"></i> Submit
                 </button>
               </div>
             </div>

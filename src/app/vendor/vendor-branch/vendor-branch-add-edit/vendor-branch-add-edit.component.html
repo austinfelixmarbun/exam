@@ -1,3 +1,416 @@
-<p>
-  vendor-branch-add-edit works!
-</p>
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> BRANCH REGISTRATION </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="px-3">
+          <form class="form form-horizontal" [formGroup]="VendorForm" (ngSubmit)="VendorForm.valid && SaveForm()"
+            #enjiForm="ngForm">
+            <lib-ucSubsection [id]="'VendorInfoId'" [title]="'Main Info'" [panel]="'VendorInformation'">
+            </lib-ucSubsection>
+
+            <div class="form-body" id="VendorInformation">
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Vendor Category</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrVendorCategoryCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrVendorCategoryCode.invalid }">
+                    <option *ngFor="let it of itemCategoryType" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <show-errors [control]="VendorForm.controls.MrVendorCategoryCode" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Branch Code</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorCode">
+                  <show-errors [control]="VendorForm.controls.VendorCode" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Branch Name</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorName">
+                  <show-errors [control]="VendorForm.controls.VendorName" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-body">
+                <div class="form-group row adins-required">
+                  <label class="col-md-3  adInsLabel" translate>Branch Type</label>
+                  <div class="col-md-9">
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrVendorTypeCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrVendorTypeCode.invalid }"
+                      (change)="checkHOType()">
+                      <option *ngFor="let it of itemType" value="{{it.Key}}">
+                        {{it.Value}}</option>
+                    </select>
+                    <show-errors [control]="VendorForm.controls.MrVendorTypeCode" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+              </div>
+              <div [hidden]="VendorForm.controls.MrVendorTypeCode.value != 'C'">
+                <div class="form-group row adins-required">
+                  <label class="col-md-3  adInsLabel" translate>Registration Number</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="RegistrationNo">
+                    <show-errors [control]="VendorForm.controls.RegistrationNo" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+                <div class="form-group row adins-required">
+                  <label class="col-md-3  adInsLabel" translate>License Number</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="LicenseNo">
+                    <show-errors [control]="VendorForm.controls.LicenseNo" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+              </div>
+              <div [hidden]="VendorForm.controls.MrVendorTypeCode.value != 'P'">
+                <div class="form-group row adins-required">
+                  <label class="col-md-3  adInsLabel" translate>ID Type</label>
+                  <div class="col-md-9">
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrIdTypeCode.invalid }">
+                      <option *ngFor="let it of itemIdType" value="{{it.Key}}">
+                        {{it.Value}}</option>
+                    </select>
+                    <show-errors [control]="VendorForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+                <div class="form-group row adins-required">
+                  <label class="col-md-3  adInsLabel" translate>ID Number</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="IdNo">
+                    <show-errors [control]="VendorForm.controls.IdNo" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Mobile Phone 1</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="MobilePhnNo1">
+                  <show-errors [control]="VendorForm.controls.MobilePhnNo1" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Mobile Phone 2</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="MobilePhnNo2">
+                  <show-errors [control]="VendorForm.controls.MobilePhnNo2" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Email</label>
+                <div class="col-md-9">
+                  <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                    class="form-control adInsInput width-50-per" formControlName="Email">
+                  <show-errors [control]="VendorForm.controls.Email" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Rating</label>
+                <div class="col-md-9">
+                  <input type="number" class="form-control adInsInput width-50-per" formControlName="VendorRating">
+                  <show-errors [control]="VendorForm.controls.VendorRating" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Establishment Date</label>
+                <div class="col-md-9">
+                  <input type="date" class="form-control adInsInput width-50-per" formControlName="EstablishmentDt">
+                  <show-errors [control]="VendorForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Partnership Date</label>
+                <div class="col-md-9">
+                  <input type="date" class="form-control adInsInput width-50-per" formControlName="PartnershipDt">
+                  <show-errors [control]="VendorForm.controls.PartnershipDt" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel">Active Status</label>
+                <div class="col-md-9">
+                  <select class="form-control" formControlName="IsActive">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <lib-ucSubsection [id]="'HOIdOne'" [title]="'HO Info'" [panel]="'HOInformation'">
+            </lib-ucSubsection>
+            <div id="HOInformation">
+              <div
+                *ngIf="MrVendorCategoryCode=='SUPPLIER_HO' || MrVendorCategoryCode=='SUPPLIER_HOLDING' || MrVendorCategoryCode=='SUPPLIER_BRANCH'">
+                <div class="form-body">
+                  <div class="form-group row adins-required">
+                    <label class="col-md-3 adInsLabel">Supplier HO</label>
+                    <div class="col-md-3">
+                      <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
+                        [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
+                      </lib-uclookupgeneric>
+                    </div>
+                  </div>
+
+                  <div class="form-group row adins-required">
+                    <label class="col-md-3 adInsLabel">Supplier Upping Calculation Method</label>
+                    <div class="col-md-9">
+                      <select class="form-control adInsInput" style="width: inherit" formControlName="ReservedField3"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField3.invalid }">
+                        <option *ngFor="let it of itemTypeUpCalcMethod" value="{{it.Key}}">
+                          {{it.Value}}</option>
+                      </select>
+                      <show-errors [control]="VendorForm.controls.ReservedField3" [submit]="enjiForm.submitted">
+                      </show-errors>
+                    </div>
+                  </div>
+
+                  <div class="form-group row adins-required">
+                    <label class="col-md-3 adInsLabel">Supplier Class</label>
+                    <div class="col-md-9">
+                      <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField4"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField4.invalid }">
+                        <option *ngFor="let it of itemSupplierClass" value="{{it.Key}}">
+                          {{it.Value}}</option>
+                      </select>
+                      <show-errors [control]="VendorForm.controls.ReservedField4" [submit]="enjiForm.submitted">
+                      </show-errors>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-md-3 adInsLabel">Bpkb Aging</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField5">
+                      <show-errors [control]="VendorForm.controls.ReservedField5" [submit]="enjiForm.submitted">
+                      </show-errors>
+                    </div>
+                  </div>
+
+                  <div class="form-group row adins-required">
+                    <label class="col-md-3 adInsLabel">Days A/P Payment Due after Go Live</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control adInsInput width-50-per"
+                        formControlName="ReservedField6">
+                      <show-errors [control]="VendorForm.controls.ReservedField6" [submit]="enjiForm.submitted">
+                      </show-errors>
+                    </div>
+                  </div>
+
+                  <div class="form-group row adins-required">
+                    <label class="col-md-3 adInsLabel">Max Refund Type</label>
+                    <div class="col-md-9">
+                      <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField7"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField7.invalid }">
+                        <option *ngFor="let it of itemMaxRefundType" value="{{it.Key}}">
+                          {{it.Value}}</option>
+                      </select>
+                      <show-errors [control]="VendorForm.controls.ReservedField7" [submit]="enjiForm.submitted">
+                      </show-errors>
+                    </div>
+                  </div>
+
+                  <div class="form-group row adins-required">
+                    <label class="col-md-3 adInsLabel">Max Refund Value </label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField8">
+                      <show-errors [control]="VendorForm.controls.ReservedField8" [submit]="enjiForm.submitted">
+                      </show-errors>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="MrVendorCategoryCode=='SURVEYOR_HO' || MrVendorCategoryCode=='SURVEYOR_BRANCH' ">
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel">Surveyor HO</label>
+                <div class="col-md-3">
+                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
+                    [enjiForm]="enjiForm" [identifier]="'lookupParentSurveyor'" (lookup)="getLookupParent($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" translate>Assignment Type</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField9"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField9.invalid }">
+                    <option *ngFor="let it of itemAssignmentTypeTele" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <show-errors [control]="VendorForm.controls.ReservedField9" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel" translate>Maximum Task Load</label>
+                <div class="col-md-9">
+                  <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField2">
+                  <show-errors [control]="VendorForm.controls.ReservedField2" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+
+            </div>
+
+            <div *ngIf="MrVendorCategoryCode=='ASSET_INSCO_HO' || MrVendorCategoryCode=='ASSET_INSCO_BRANCH'">
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel">Asset Insurance HO</label>
+                <div class="col-md-3">
+                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
+                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="MrVendorCategoryCode=='LIFE_INSCO_BRANCH'">
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel">Life Insurance HO</label>
+                <div class="col-md-3">
+                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
+                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="MrVendorCategoryCode=='AGENCY_PERSONAL'">
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel">Agent Recuiter</label>
+                <div class="col-md-3">
+                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
+                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+            </div>
+
+            <lib-ucSubsection [id]="'TaxInfo'" [title]="'Tax Info'" [panel]="'TaxInformation'">
+            </lib-ucSubsection>
+            <div id="TaxInformation">
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Tax Calculation Method</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrTaxCalcMethodCode.invalid }">
+                    <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <show-errors [control]="VendorForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel">VAT</label>
+                <div class="col-md-9">
+                  <select class="form-control" formControlName="IsActive">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Tax Payer Number</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerNo">
+                  <show-errors [control]="VendorForm.controls.TaxpayerNo" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Tax Payer Name</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerName">
+                  <show-errors [control]="VendorForm.controls.TaxpayerName" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Tax Address</label>
+                <div class="col-md-9">
+                  <textarea class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
+                  <show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-body adins-required">
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel">Zip Code</label>
+                  <div class="col-md-3">
+                    <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
+                      [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookupZipcode($event)">
+                    </lib-uclookupgeneric>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode2">
+                  <show-errors [control]="VendorForm.controls.AreaCode2" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode1">
+                  <show-errors [control]="VendorForm.controls.AreaCode1" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>City</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="City">
+                  <show-errors [control]="VendorForm.controls.City" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Province</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Province">
+                  <show-errors [control]="VendorForm.controls.Province" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-actions right">
+                <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch/Paging']"
+                  translate>
+                  <i class="fa fa-arrow-circle-left"></i> Back
+                </button>
+                <button type="submit" class="btn btn-raised btn-primary">
+                  <i class="far"></i> {{this.ButtonLbl}}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,14 @@
       },
       {
         "type": "textbox",
+        "name": "RZ.CITY",
+        "id": "Kota",
+        "value": "",
+        "label": "Kota",
+        "placeholder": "Kota"
+      },
+      {
+        "type": "textbox",
         "name": "RZ.AREA_CODE_2",
         "id": "Kelurahan",
         "value": "",
@@ -34,7 +42,7 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "City",
+            "label": "Kota",
             "name": "RZ.CITY"
         },
         {

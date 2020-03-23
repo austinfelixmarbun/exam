@@ -4,7 +4,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "industry_Type_Code",
+            "name": "INDUSTRY_TYPE_CODE",
             "id": "industryTypeCode",
             "value": "",
             "label": "Industry Type Code",
@@ -13,7 +13,7 @@
         },
         {
             "type": "textbox",
-            "name": "economic_Sector_Name",
+            "name": "ECONOMIC_SECTOR_NAME",
             "id": "economicSectorName",
             "value": "",
             "label": "Economic Sector Name",
@@ -22,7 +22,7 @@
         },
         {
             "type": "textbox",
-            "name": "industry_Type_Name",
+            "name": "INDUSTRY_TYPE_NAME",
             "id": "industryTypeName",
             "value": "",
             "label": "Industry Type Name",
@@ -31,7 +31,7 @@
         },
         {
             "type": "dropdown",
-            "name": "is_Active",
+            "name": "A.IS_ACTIVE",
             "datatype": "text",
             "id": "isActive",
             "value": "",

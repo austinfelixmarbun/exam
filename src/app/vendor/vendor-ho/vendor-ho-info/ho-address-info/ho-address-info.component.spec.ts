@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeneralDataComponent } from './general-data.component';
+import { HoAddressInfoComponent } from './ho-address-info.component';
 
-describe('GeneralDataComponent', () => {
-  let component: GeneralDataComponent;
-  let fixture: ComponentFixture<GeneralDataComponent>;
+describe('AddressInfoComponent', () => {
+  let component: HoAddressInfoComponent;
+  let fixture: ComponentFixture<HoAddressInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeneralDataComponent ]
+      declarations: [ HoAddressInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GeneralDataComponent);
+    fixture = TestBed.createComponent(HoAddressInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
