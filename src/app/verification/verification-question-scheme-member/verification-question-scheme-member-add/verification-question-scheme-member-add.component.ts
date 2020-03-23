@@ -272,7 +272,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     );
   }
 
-  SaveVendorSchemeMember(verfSchemeDObj: any) {
+  SaveQuestionSchemeMember(verfSchemeDObj: any) {
     this.verfSchemeDObj = new VerfSchemeDObj();
     this.verfSchemeDObj.VerfSchemeHId = this.VerfSchemeHId;
     this.verfSchemeDObj.VerfSchemeDId = "0";
