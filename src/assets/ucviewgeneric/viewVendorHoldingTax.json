@@ -1,0 +1,38 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "TaxInfoId",
+        "subSectionTitle": "Tax Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Tax Payer Calculation Method:",
+            "property": "TaxCalculationMethod"
+          },
+          {
+            "type": "boolean",
+            "label": "VAT:",
+            "property": "Vat"
+          },
+          {
+            "type": "text",
+            "label": "Tax Payer Number :",
+            "property": "TaxNo"
+          },
+          {
+            "type": "text",
+            "label": "Tax Payer Name :",
+            "property": "TaxName"
+          }
+        ],
+        "querystring": {
+         "select":   "SELECT MR_TAX_CALC_METHOD_CODE AS TaxCalculationMethod,IS_VAT AS Vat,TAXPAYER_NO AS TaxNo,TAXPAYER_NAME AS TaxName",
+           "from": "FROM dbo.VENDOR WITH(NOLOCK)",
+           "where": "WHERE MR_VENDOR_CLASS = 'HOLDING' AND VENDOR_ID = {0}"
+        }
+      }
+    ]
+  }
+  

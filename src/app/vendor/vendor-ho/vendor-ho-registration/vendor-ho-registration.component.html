@@ -7,7 +7,7 @@
           <span class="mr-1">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/HO/Paging']"
               translate>
-              Back
+              Finish
             </button>
             <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/HO/Detail']"
               [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
@@ -19,15 +19,15 @@
         navigateForward="allow" >
         <aw-wizard-step [stepTitle]="'Address'" 
           [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-          <app-address  [objInput] = "objPassing"> </app-address>
+          <app-address [objInput] = "objPassing"> </app-address>
         </aw-wizard-step>
         <aw-wizard-step [stepTitle]="'Contact Person'" 
         [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
         <div *ngIf="HiddenState==true">
-          <app-contact-person-list (objOutput)="outputValue($event)"> </app-contact-person-list>
+          <app-contact-person-list (objOutput)="outputValue($event)" [objInput] = "objPassing"> </app-contact-person-list>
         </div>
         <div *ngIf="HiddenState==false">
-          <app-contact-person-add-edit (objOutput)="outputValue($event)"> </app-contact-person-add-edit>
+          <app-contact-person-add-edit (objOutput)="outputValue($event)" [objInput] = "objPassingCP"> </app-contact-person-add-edit>
         </div>
       </aw-wizard-step>
         <aw-wizard-step [stepTitle]="'Bank Info'" 
