@@ -21,24 +21,19 @@ export class CustomerContactCheckComponent implements OnInit {
   getCustomerPersonalContactPersonUrl : any;
   deleteCustomerPersonalContactPersonUrl
   custPersonContactPersonObj: any;
+  isReload : any;
   constructor(private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
     this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
     this.deleteCustomerPersonalContactPersonUrl = AdInsConstant.DeleteCustPersonalContactPerson;
   }
-  ngOnInit() {
-      this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
-      this.custPersonContactPersonObj.CustId = this.inputValue;
-      this.http.post(this.getCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
-        (response) => {
-          this.tempCustomerPersonalContactPerson = response["ReturnObject"];
-          console.log(  this.tempCustomerPersonalContactPerson);
-        });
+  ngOnInit() {      
+      this.getList();
+       
   }
 
   keluarinValue(){
     this.isAdd = true;
     this.outputValue.emit({isAdd : this.isAdd});
- 
 }
 deleteItem(custId : any){
   this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
@@ -46,6 +41,9 @@ deleteItem(custId : any){
     this.http.post(this.deleteCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj  ).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
+      
+        console.log("aaaa");
+        this.getList();
       },
       error => {
         console.log(error);
@@ -57,5 +55,13 @@ editItem(custPersonalContactPersonId : any){
   this.isAdd = true;
   this.outputValue.emit({isAdd : this.isAdd, custPersonalContactPersonId : custPersonalContactPersonId});
 }
-
+getList(){
+  this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
+  this.custPersonContactPersonObj.CustId = this.inputValue;
+  this.http.post(this.getCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
+    (response) => {
+      this.tempCustomerPersonalContactPerson = response["ReturnObject"];
+      console.log( "aaaa" +  this.tempCustomerPersonalContactPerson);
+    });
+}
 }

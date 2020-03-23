@@ -11,6 +11,7 @@ import { CustomerCompanyDuplicateCheckComponent } from './customer-company/custo
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
 import { CustomerViewPersonalComponent } from './customer-view/customer-view-personal/customer-view-personal.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
+import { CustomerCompanyPageComponent } from './customer-company/customer-company-page/customer-company-page.component';
 
 const routes: Routes = [
   {
@@ -80,22 +81,20 @@ const routes: Routes = [
         }
       },
       {
-        path: 'CustomerPersonal/Page',
-        component: CustomerPersonalPageComponent,
-        data: {
-          title: 'Customer Personal DuplicateCheck  '
-        }
-      },
-      {
         path: 'CustomerView/Page',
         component: CustomerViewPersonalComponent,
         data: {
           title: 'Customer View Personal Component'
         }
       },
-     
-
-
+      {
+        path: 'CustomerCompany/Page',
+        component: CustomerCompanyPageComponent,
+        data: {
+          title: 'Customer Company Page'
+        }
+      },
+    
 
     ]
   }

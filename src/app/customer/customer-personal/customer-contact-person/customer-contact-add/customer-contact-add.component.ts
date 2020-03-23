@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { WizardComponent } from 'angular-archwizard';
 import { HttpClient } from '@angular/common/http';
-
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
@@ -80,7 +79,7 @@ export class CustomerContactAddComponent implements OnInit {
   editCustPersonalContactPersonUrl : any;
   custObj: any;
   custAddrObj: any;
-  inputFieldMailingObj: any;
+  inputFieldObj: any;
   tempProfessionCodeObj;
   constructor(private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
     this.getUrl = AdInsConstant.GetListActiveRefMaster;
@@ -121,12 +120,8 @@ export class CustomerContactAddComponent implements OnInit {
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
 
-
-
-    this.inputFieldMailingObj = new InputFieldObj();
-    this.inputFieldMailingObj.inputLookupObj = new InputLookupObj();
-
-
+    this.inputFieldObj = new InputFieldObj();
+    this.inputFieldObj.inputLookupObj = new InputLookupObj();
 
     var refMasterObj1 = {
       RefMasterTypeCode: "ID_TYPE"
@@ -239,11 +234,8 @@ export class CustomerContactAddComponent implements OnInit {
             Email: this.tempCustPersonalContactPerson.Email,
             IsFamily: this.tempCustPersonalContactPerson.IsFamily,
             IsEmergencyContact: this.tempCustPersonalContactPerson.IsEmergencyContact,
-
             MrCustRelationshipCode: this.tempCustPersonalContactPerson.MrCustRelationshipCode,
           });
-
-
           if (this.tempCustPersonalContactPerson.MrJobProfessionCode != null) {
             var ProfessionCodeObj = {
               ProfessionCode: this.tempCustPersonalContactPerson.MrJobProfessionCode,
@@ -257,10 +249,24 @@ export class CustomerContactAddComponent implements OnInit {
               }
             );
           }
-
-
-          this.inputFieldMailingObj.inputLookupObj.nameSelect = this.tempCustPersonalContactPerson.Zipcode;
-          this.inputFieldMailingObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustPersonalContactPerson.Zipcode };
+          if (this.tempCustPersonalContactPerson.MrNationalityCode != "WNI") {
+            this.flag = false;
+            var countryCode = {
+              CountryCode: this.tempCustPersonalContactPerson.NationalityCountryCode
+            };
+            this.http.post(AdInsConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+              (response) => {
+  
+                this.tempCountry = response;
+                this.lookUpObj.nameSelect = this.tempCountry.CountryName;;
+              });
+  
+          } else {
+            this.flag = true;
+          }
+          
+          this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustPersonalContactPerson.Zipcode;
+          this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustPersonalContactPerson.Zipcode };
           this.UcAddressObj.AreaCode1 = this.tempCustPersonalContactPerson.AreaCode1;
           this.UcAddressObj.AreaCode2 = this.tempCustPersonalContactPerson.AreaCode2;
           this.UcAddressObj.AreaCode3 = this.tempCustPersonalContactPerson.AreaCode3;
@@ -269,14 +275,15 @@ export class CustomerContactAddComponent implements OnInit {
           this.UcAddressObj.City = this.tempCustPersonalContactPerson.City;
         });
     }
-
   }
-
   SaveValue() {
-    // this.isAdd = false; 
-    // this.outputValues.emit(this.isAdd);
+
     console.log("awdawdawd");
     this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
+    // if(this.custPersonalContactPersonId !=null){
+    //   this.custPersonalContactPersonObj= this.tempCustPersonalContactPerson;
+    // }
+
     this.custPersonalContactPersonObj.CustId = this.inputValue;
     this.custPersonalContactPersonObj.ContactPersonName = this.CustomerContactForm.controls["ContactPersonName"].value;
     this.custPersonalContactPersonObj.MotherMaidenName = this.CustomerContactForm.controls["MotherMaidenName"].value;
@@ -316,11 +323,10 @@ export class CustomerContactAddComponent implements OnInit {
       this.custPersonalContactPersonObj.NationalityCountryCode = this.tempCountryCode;
     }
 
-
     if(this.tempCustPersonalContactPerson !=null){
       
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.tempCustPersonalContactPerson.CustPersonalContactPersonId;
-           
+    
       this.custPersonalContactPersonObj.RowVersion = this.tempCustPersonalContactPerson.RowVersion;
       console.log(this.editCustPersonalContactPersonUrl);
       this.http.post(this.editCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
@@ -328,16 +334,21 @@ export class CustomerContactAddComponent implements OnInit {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
           // this.wizard.goToNextStep();
-        },
+          this.isAdd = false; 
+          this.outputValues.emit({isAdd : this.isAdd});
+        }, 
         error => {
           console.log(error);
         }
       );
     }else{
+
       this.http.post(this.addCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
         response => {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
+          this.isAdd = false;
+          this.outputValues.emit({isAdd : this.isAdd});
           // this.wizard.goToNextStep();
         },
         error => {
@@ -346,9 +357,6 @@ export class CustomerContactAddComponent implements OnInit {
       );
 
     }
-
-   
-
   }
 
   getLookUpCustomer(event) {
@@ -388,7 +396,7 @@ export class CustomerContactAddComponent implements OnInit {
         }
       }
 
-    ); console.log(this.tempCustPersonal);
+    );  
     this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
       (response) => {
         this.tempCust = response;
@@ -400,7 +408,6 @@ export class CustomerContactAddComponent implements OnInit {
           TaxIdNo: this.tempCust.TaxIdNo
         });
       }
-
     );
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.tempCustId;
@@ -415,11 +422,10 @@ export class CustomerContactAddComponent implements OnInit {
         this.UcAddressObj.AreaCode4 = this.tempCustAddress.AreaCode4;
         this.UcAddressObj.Addr = this.tempCustAddress.Addr;
         this.UcAddressObj.City = this.tempCustAddress.City;
-        this.inputFieldMailingObj.inputLookupObj.nameSelect = this.tempCustAddress.Zipcode;
-        this.inputFieldMailingObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddress.Zipcode };
+        this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddress.Zipcode;
+        this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddress.Zipcode };
       }
     );
-
     this.CustomerContactForm.controls.ContactPersonName.disable();
     this.CustomerContactForm.controls.MotherMaidenName.disable();
     this.CustomerContactForm.controls.MrIdTypeCode.disable();
@@ -455,7 +461,6 @@ export class CustomerContactAddComponent implements OnInit {
   }
   onOptionsNationalitySelected(event) {
     if (event.target.value == "WNI") {
-
       this.lookUpObj.isRequired = false;
       this.flag = true;
     } else {

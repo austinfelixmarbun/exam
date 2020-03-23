@@ -108,7 +108,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.http.post(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
-
         var refMasterObj = {
           RefMasterTypeCode: "NATIONALITY"
         }
@@ -279,7 +278,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
   onOptionsSelected(event) {
     if (event.target.value == "WNI") {
-
       this.flag = true;
       this.lookUpObj.isRequired = false;
     } else {

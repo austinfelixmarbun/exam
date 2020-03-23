@@ -11,6 +11,13 @@
             (ngSubmit)="CustomerCompanyForm.valid && SaveValue() " #enjiForm="ngForm" id="MainInfoId">
             <div class="form-body">
               <div class="form-group row adins-required">
+                <label class="col-md-2  adInsLabel" translate>Customer Name </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control adInsInput" formControlName="CustName"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.CustName.invalid}">
+                  <show-errors [control]="CustomerCompanyForm.controls.Gender" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
                 <label class="col-md-2 adInsLabel" translate>Customer Model </label>
                 <div class="col-md-4">
                     <select class="form-control adInsInput" style="width: auto" formControlName="CustModel"
@@ -19,13 +26,6 @@
                       {{it.Value}}</option>
                   </select>
                   <show-errors [control]="CustomerCompanyForm.controls.CustModel" [submit]="enjiForm.submitted">
-                  </show-errors>
-                </div>
-                <label class="col-md-2  adInsLabel" translate>Customer Name </label>
-                <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="CustName"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.CustName.invalid}">
-                  <show-errors [control]="CustomerCompanyForm.controls.Gender" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
@@ -48,7 +48,6 @@
                   </show-errors>
                 </div>
               </div>
-              
             </div>
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1" translate>

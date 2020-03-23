@@ -1,0 +1,24 @@
+export class CustCompanyMgmntShrholderObj {
+    CustCompanyId: any;
+    MgmntShrholderName: any;
+    MrJobPositionCode: any;
+    SharePrcnt: any;
+    IsSigner: any;
+    MrIdTypeCode: any;
+    IdNo: any;
+    IdExpiredDt: any;
+    BirthPlace: any;
+    BirthDt: any;
+    MrGenderCode: any;
+    MrNationalityCode: any;
+    NationalityCountryCode: any;
+    TaxIdNo: any;
+    MobilePhnNo: any;
+    Email: any;
+    MrIndustryTypeCode: any;
+    EstablishmentDt: any;
+    MrCompanyTypeCode: any;
+    MrCustTypeCode: any;
+    ShareholderCustNo: any;
+    RowVersion: any;
+}

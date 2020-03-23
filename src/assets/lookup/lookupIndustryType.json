@@ -1,0 +1,74 @@
+{
+    "title": "Industry Type",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "INDUSTRY_TYPE_CODE",
+        "id": "industryTypeCodeId",
+        "value": "",
+        "label": "Industry Code",
+        "placeholder": "Industry Codes"
+      },
+      {
+        "type": "textbox",
+        "name": "INDUSTRY_TYPE_NAME",
+        "id": "industryTypeNameId",
+        "value": "",
+        "label": "Industry Name",
+        "placeholder": "Industry Names"
+      }
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Industry Code",
+        "name": "INDUSTRY_TYPE_CODE"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Industry Name",
+        "name": "INDUSTRY_TYPE_NAME"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+  
+    "querystring": {
+      "select": "SELECT INDUSTRY_TYPE_CODE AS IndustryTypeCode,INDUSTRY_TYPE_NAME AS IndustryTypeName ,REF_INDUSTRY_TYPE_ID as RefIndustryTypeId",
+      "from": "FROM dbo.REF_INDUSTRY_TYPE WITH(NOLOCK)"
+    },
+  
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "center",
+        "property": "IndustryTypeCode"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "IndustryTypeName"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "select",
+            "property": "RefIndustryTypeId"
+          }
+        ]
+      }
+    ],
+  
+    "propertyId": "IndustryTypeName",
+    "propertyName": "IndustryTypeName"
+  
+  
+  }
+  

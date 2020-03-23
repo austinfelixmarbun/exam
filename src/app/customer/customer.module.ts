@@ -37,6 +37,13 @@ import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-det
 import { CustomerViewPersonalContactPersonComponent } from './customer-view/customer-view-personal-contact-person/customer-view-personal-contact-person.component';
 import { CustomerViewPersonalFinancialDataComponent } from './customer-view/customer-view-personal-financial-data/customer-view-personal-financial-data.component';
 import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
+import { CustomerCompanyPageComponent } from './customer-company/customer-company-page/customer-company-page.component';
+import { CustomerCompanyDetailComponent } from './customer-company/customer-company-detail/customer-company-detail.component';
+import { CustomerCompanyContactInformationComponent } from './customer-company/customer-company-contact-information/customer-company-contact-information.component';
+import { CustomerCompanyManagementShareholderComponent } from './customer-company/customer-company-management-shareholder/customer-company-management-shareholder.component';
+import { CustomerCompanyManagementShareholderCheckComponent } from './customer-company/customer-company-management-shareholder/customer-company-management-shareholder-check/customer-company-management-shareholder-check.component';
+import { CustomerCompanyManagementShareholderPersonalComponent } from './customer-company/customer-company-management-shareholder/customer-company-management-shareholder-personal/customer-company-management-shareholder-personal.component';
+import { CustomerCompanyManagementShareholderCompanyComponent } from './customer-company/customer-company-management-shareholder/customer-company-management-shareholder-company/customer-company-management-shareholder-company.component';
 @NgModule({
   exports: [],
   imports: [
@@ -74,7 +81,14 @@ import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/cust
     CustGroupTabDetailComponent,
     CustomerViewPersonalContactPersonComponent,
     CustomerViewPersonalCustomerGroupComponent,
-    CustomerViewPersonalFinancialDataComponent
+    CustomerViewPersonalFinancialDataComponent,
+    CustomerCompanyPageComponent,
+    CustomerCompanyDetailComponent,
+    CustomerCompanyContactInformationComponent,
+    CustomerCompanyManagementShareholderComponent, 
+    CustomerCompanyManagementShareholderCheckComponent,
+    CustomerCompanyManagementShareholderPersonalComponent,
+    CustomerCompanyManagementShareholderCompanyComponent
   ],
   entryComponents: [CustGroupTabDetailComponent]
 })

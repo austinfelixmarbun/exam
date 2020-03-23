@@ -43,6 +43,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   isJob:any;
   isFinancial : any;
   isOther :any;
+ 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
@@ -55,8 +56,6 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("haiii");
-
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
     this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
@@ -125,7 +124,7 @@ export class CustomerPersonalPageComponent implements OnInit {
       this.isFinancial = false;
       this.isOther  = false;
     }
-
+   
     if(type == "Contact"){
       this.isDetail = false;
       this.isAddress = false;
@@ -175,4 +174,5 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
 
 
+   
 }

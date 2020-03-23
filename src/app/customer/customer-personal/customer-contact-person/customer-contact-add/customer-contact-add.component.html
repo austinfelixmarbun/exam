@@ -71,9 +71,7 @@
                     </show-errors>
                   </div>
                   <label class="col-md-2 adInsLabel" translate>Country</label>
-                  <div class="col-md-4">
-                    
-                    
+                  <div class="col-md-4"> 
                     <div *ngIf="flag">
                       Indonesia
                     </div>
@@ -89,9 +87,7 @@
                   <label class="col-md-2 adInsLabel"[ngClass]="{'adins-required-label' : tempKTPCheck==false} " translate>Id Expired Date</label>
                   <div class="col-md-4">
                     <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.IdExpiredDt.invalid}">
-
-                      
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.IdExpiredDt.invalid}">  
                     <show-errors [control]="CustomerContactForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
@@ -107,7 +103,6 @@
                     </show-errors>
                   </div>
                 </div>
-
                 <div class="form-group row">
                   <label class="col-md-2 adInsLabel" translate>Gender</label>
                   <div class="col-md-4">
@@ -132,10 +127,7 @@
                     </show-errors>
                   </div>
                 </div>
-
-
                 <div class="form-group row">
-
                   <label class="col-md-2 adInsLabel" translate>Birth Place/Date </label>
                   <div class="col-md-4">
                     <div class="row">
@@ -153,7 +145,6 @@
                       </div>
                     </div>
                   </div>
-
                   <label class="col-md-2 adInsLabel" translate>Marital Status </label>
                   <div class="col-md-4">
                     <select class="form-control adInsInput"  style="width: auto"
@@ -167,8 +158,6 @@
                     </show-errors>
                   </div>
                 </div>
-
-
                 <div class="form-group row">
                   <label class="col-md-2 adInsLabel" translate>NPWP</label>
                   <div class="col-md-4">
@@ -185,7 +174,6 @@
                     </lib-uclookupgeneric>
                   </div>
                 </div>
-
                 <div class="form-group row">
                   <label class="col-md-2 adins-required-label" translate>Customer Relationship</label>
                   <div class="col-md-4">
@@ -199,7 +187,6 @@
                       [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
-
                 </div>
                 <div class="form-group row">
                   <label class="col-md-2  adInsLabel" translate>Family</label>
@@ -214,7 +201,6 @@
                   </div>
                 </div>
               </div>
-
               <!-- Contact Information -->
               <lib-ucSubsection [id]="'ContactInformation'" [title]="'Contact Information'"
                 [panel]="'ContactInfromationId'">
@@ -249,20 +235,16 @@
                 </div>
 
               </div>
-
               <!-- Contact Person Address -->
-
               <!-- <lib-ucSubsection [id]="'ContactPersonAddress'" [title]="'Contact Person Address'"
                 [panel]="'ContactPersonAddressId'">
               </lib-ucSubsection> -->
               <div id="ContactPersonAddressId">
                 <lib-ucaddress [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
-                [default]="UcAddressObj"  [inputField]="inputFieldMailingObj"  [showAllPhn]="false" >
+                [default]="UcAddressObj"  [inputField]="inputFieldObj"  [showAllPhn]="false" >
               </lib-ucaddress>
 
               </div>
-
- 
 
             </div>
             <div class="form-actions right">

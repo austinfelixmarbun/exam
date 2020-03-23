@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+ 
 
 @Component({
   selector: 'app-customer-contact-person',
@@ -7,10 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CustomerContactPersonComponent implements OnInit {
   @Input () inputValue : any ;
-   
+  @Output () OutputDelete : EventEmitter<any>= new EventEmitter();
+  
   constructor() { }
   isAdd : any;
   custPersonalContactPersonId : any;
+  isDelete : any;
   ngOnInit() {
       this.isAdd =false;
      
@@ -20,6 +23,5 @@ export class CustomerContactPersonComponent implements OnInit {
     console.log(ev);
      this.isAdd = ev.isAdd;
      this.custPersonalContactPersonId =  ev.custPersonalContactPersonId;
-    
   }
 }

@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 
-
 @Component({
   selector: 'app-customer-company-main-info',
   templateUrl: './customer-company-main-info.component.html',
@@ -28,12 +27,9 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.getUrl = AdInsConstant.GetListActiveRefMaster;
-    
   }
 
-  ngOnInit() {
-     
-
+  ngOnInit() { 
     var refMasterObj1 = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "COMPANY",
@@ -67,8 +63,6 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.TaxIdNo = this.CustomerCompanyForm.controls["TaxIdNo"].value;
     this.CustModel = this.CustomerCompanyForm.controls["CustModel"].value;
     this.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
-   
-
     this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, } });
 
   }

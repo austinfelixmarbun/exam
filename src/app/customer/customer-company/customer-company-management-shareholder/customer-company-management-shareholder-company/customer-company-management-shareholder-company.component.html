@@ -1,0 +1,87 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <div class="addEdit">
+          <form class="form form-horizontal" [formGroup]="ManagementShareholderForm"
+            (ngSubmit)="ManagementShareholderForm.valid && SaveValue()" #enjiForm="ngForm">
+            <div class="form-body">
+              <lib-ucSubsection [id]="'ManagementShareholder'" [title]="'Management / Shareholder Data'"
+                [panel]="'ManagementShareholderId'">
+              </lib-ucSubsection>
+              <div id="ManagementShareholderId">
+                <div class="form-group row  ">
+                  <label class="col-md-2 adins-required-label" translate>Full Name</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control adInsInput" formControlName="MgmntShrholderName"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MgmntShrholderName.invalid}">
+                    <show-errors [control]="ManagementShareholderForm.controls.MgmntShrholderName"
+                      [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+                <div class="form-group row adins">
+                  <label class="col-md-2 adInsLabel" translate>Customer Model</label>
+                  <div class="col-md-4">
+                    <select class="form-control adInsInput" (change)="onOptionsSelected($event)" style="width: auto"
+                      formControlName="MrCustModelCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MrCustModelCode.invalid }">
+                      <option *ngFor="let it of tempMrCustModelCode " [value]="it.Key">
+                        {{it.Value}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row  ">
+                  <label class="col-md-2 adInsLabel" translate>Company Type</label>
+                  <div class="col-md-4">
+                    <select class="form-control adInsInput" (change)="onOptionsSelected($event)" style="width: auto"
+                      formControlName="MrCompanyTypeCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MrCompanyTypeCode.invalid }">
+                      <option *ngFor="let it of tempMrCompanyTypeCode " [value]="it.Key">
+                        {{it.Value}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row  ">
+                  <label class="col-md-2 adInsLabel" translate>NPWP</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.TaxIdNo.invalid}">
+                    <show-errors [control]="ManagementShareholderForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+                <div class="form-group row  ">
+                  <label class="col-md-2 adInsLabel" translate>Share (%)</label>
+                  <div class="col-md-4">
+                    <input type="number" min="1" max="100" step="0.01" class="form-control adInsInput"
+                      formControlName="SharePrcnt"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.SharePrcnt.invalid}">
+                    <show-errors [control]="ManagementShareholderForm.controls.SharePrcnt"
+                      [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
+                  %
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-2 adInsLabel" translate>Default Signer</label>
+                  <div class="col-md-4">
+                    <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsSigner" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" translate>
+                <i class="fa fa-check-square-o"></i> Cancel
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="fa fa-check-square-o"></i> Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

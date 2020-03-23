@@ -633,11 +633,13 @@ export class AdInsConstant {
   public static GetCustPersonalbyCustPersonalId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustPersonalId"
   public static GetCustPersonalbyCustId = environment.FoundationR3Url + "/CustPersonal/GetCustPersonalByCustId"
 
+
+
   //Custsomer Personal Contact Person
   public static AddNewCustPersonalContactPerson = environment.FoundationR3Url + "/CustPersonalContactPerson/AddCustPersonalContactPerson" 
   public static GetListCustPersonalContactPersonByCustId = environment.FoundationR3Url+ "/CustPersonalContactPerson/GetListCustPersonalContactPersonByCustId"
   public static DeleteCustPersonalContactPerson = environment.FoundationR3Url+ "/CustPersonalContactPerson/DeleteCustPersonalContactPerson"
-  public static EditCustPersonalContactPerson = environment.FoundationR3Url + "​/CustPersonalContactPerson/EditCustPersonalContactPerson"
+  public static EditCustPersonalContactPerson = environment.FoundationR3Url + "/CustPersonalContactPerson/EditCustPersonalContactPerson"
 
  
   
@@ -645,8 +647,8 @@ export class AdInsConstant {
    // Customer
   public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust"
   public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId"
-  public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
-
+  public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust"
+  public static EditCust = environment.FoundationR3Url + "/Cust/EditCust"
   // NEGATIVE CUSTOMER
   public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
   public static EditNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/EditNegativeCust";
@@ -674,4 +676,10 @@ export class AdInsConstant {
   public static GetListCustAddrHistByCustId = environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustId";
   public static GetListCustAddrHistByCustIdForCustomerPersonalView = environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustIdForCustomerPersonalView";
 
+  //CUSTOMER COMPANY 
+  public static  GetCustCompanyByCustId = environment.FoundationR3Url +  "/CustCompany/GetCustCompanyByCustId"
+  public static EditCustCompany = environment.FoundationR3Url + "/CustCompany/EditCustCompany"
+
+  // CUSTOMER COMPANY MANAGEMENT SHAREHOLDER
+  public static AddCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholder" 
 }

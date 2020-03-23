@@ -161,8 +161,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.http.post(this.addCustUrl, this.addCustObj).subscribe(
       (response) => {
         this.resultData = response;
-        this.IdCust = this.resultData.CustObj.CustId;
-        this.IdCustPersonal = this.resultData.CustPersonalObj.CustPersonalId;
+        this.IdCust = this.resultData.CustObj.CustId; 
         this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.IdCust } });
       },
 

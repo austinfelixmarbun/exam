@@ -1,17 +1,17 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="addButton" (click)="keluarinValue()"  translate>
-      <i class="ft-plus-circle"></i> Add
+    <button type="button" class="addButton" (click)="addPersonal()"  translate>
+      <i class="ft-plus-circle"></i> Add Personal
     </button>
-    
+    <button type="button" class="addButton" (click)="addCompany()"  translate>
+      <i class="ft-plus-circle"></i> Add Company
+    </button>
   </span>
 </div>
- 
-
 <form class="form form-horizontal">
   <div class="form-body">
     <h4 class="form-section card-title" translate>
-      Match / Similar Data
+      Management / Shareholder Listing
     </h4>
   </div>
 </form>
@@ -19,14 +19,16 @@
   <thead>
     <tr class="table-header">
       <th class="text-left"><span class="thead-header" name='Status' translate>Status</span></th>
-      <th class="text-left"><span class="thead-header" name='CustNo' translate>Customer No</span></th>
-      <th class="text-left"><span class="thead-header" name='Name' translate>Name</span></th>
-      <th class="text-left"><span class="thead-header" name='Gender' translate>Gender</span></th>
-      <th class="text-left"><span class="thead-header" name='CustomerRelationship' translate>Customer Relationship</span></th>
-      <th class="text-left"><span class="thead-header" name='IdType' translate>ID Type</span></th>
-      <th class="text-left"><span class="thead-header" name='IdNo' translate>ID No</span></th>
-      <th class="text-left"><span class="thead-header" name='BirthDate' translate>Birth Date</span></th>
-      <th translate>Action</th>
+      <th class="text-left"><span class="thead-header" name='CustNo' translate>Shareholder Name</span></th>
+      <th class="text-left"><span class="thead-header" name='Name' translate>Type</span></th>
+      <th class="text-left"><span class="thead-header" name='Gender' translate>Customer Model</span></th>
+      <th class="text-left"><span class="thead-header" name='CustomerRelationship' translate>NPWP</span></th>
+      <th class="text-left"><span class="thead-header" name='IdType' translate>Share(%)</span></th>
+      <th class="text-left"><span class="thead-header" name='IdNo' translate>Is Signer 1</span></th>
+      <th class="text-left"><span class="thead-header" name='BirthDate' translate>Is Signer 2</span></th>
+      <th class="text-left"><span class="thead-header" name='BirthDate' translate>Is Signer 3</span></th>
+      <th translate>Edit</th>
+      <th translate>Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -46,8 +48,6 @@
         <a class="danger p-0" data-original-title="" title=""(click)="deleteItem(item.CustPersonalContactPersonId)" >
           <i class="ft-trash-2 font-medium-3 mr-2"></i>
         </a>
-  
-
     </tr>
   </tbody>
 </table>
