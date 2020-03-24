@@ -4,6 +4,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
+import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
 
 // Implementation : <app-cust-fin-data-tab [CustId]="'2'" [MrCustTypeCode]="'PERSONAL'" (CustFinDataResponse)="getResponse($event)"></app-cust-fin-data-tab>
 
@@ -15,8 +17,11 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
   @Input() CustId: number;
+  @Input() Mode: string;
+  @Input() CustModeId: number;
   @Output() CustFinDataResponse: EventEmitter<any> = new EventEmitter();
   sourceOfIncomeList: any;
+  isCalculated: boolean;
 
   CustPersonalFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0, [Validators.required]],
@@ -27,6 +32,11 @@ export class CustFinDataTabComponent implements OnInit {
     MrSourceOfIncomeCode: [''],
     SpouseMonthlyIncomeAmt: ['', [Validators.pattern('^[0-9]+$')]],
     IsJoinIncome: [false],
+    TotalIncomeAmt: [0],
+    NettIncomeAmt: [0],
+    NettProfitMonthlyAmt: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    OtherIncomeAmt: ['', [Validators.pattern('^[0-9]+$')]],
+    OtherMonthlyInstAmt: ['', [Validators.pattern('^[0-9]+$')]],
     RowVersion: ['']
   });
 
@@ -46,7 +56,7 @@ export class CustFinDataTabComponent implements OnInit {
     GrowthPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
     WorkingCapitalAmt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
     OthMonthlyInstAmt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    DateAsOf: ['', [Validators.required]],
+    DateAsOf: [''],
     Revenue: ['', [Validators.pattern('^[0-9]+$')]],
     OprCost: ['', [Validators.pattern('^[0-9]+$')]],
     ProfitBeforeTax: ['', [Validators.pattern('^[0-9]+$')]],
@@ -64,7 +74,9 @@ export class CustFinDataTabComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder
-  ) { }
+  ) { 
+    this.isCalculated = false;
+  }
 
   ngOnInit() {
     if(this.MrCustTypeCode == "PERSONAL"){
@@ -80,16 +92,118 @@ export class CustFinDataTabComponent implements OnInit {
         }
       );
     }
+
+    if(this.Mode == "edit"){
+      if(this.MrCustTypeCode == "PERSONAL"){
+        var custPersonalFinData = new CustPersonalFinDataObj();
+        custPersonalFinData.CustPersonalId = this.CustModeId;
+        this.httpClient.post(AdInsConstant.GetCustPersonalFinDataByCustPersonalId, custPersonalFinData).subscribe(
+          (response: any) => {
+            this.CustPersonalFinDataForm.patchValue({
+              CustPersonalFinDataId: response.CustPersonalFinDataId,
+              CustPersonalId: response.CustPersonalId,
+              MonthlyIncomeAmt: response.MonthlyIncomeAmt,
+              MonthlyExpenseAmt: response.MonthlyExpenseAmt,
+              MonthlyInstallmentAmt: response.MonthlyInstallmentAmt,
+              MrSourceOfIncomeCode: response.MrSourceOfIncomeCode,
+              SpouseMonthlyIncomeAmt: response.SpouseMonthlyIncomeAmt,
+              IsJoinIncome: response.IsJoinIncome,
+              TotalIncomeAmt: response.TotalIncomeAmt,
+              NettIncomeAmt: response.NettIncomeAmt,
+              NettProfitMonthlyAmt: response.NettProfitMonthlyAmt,
+              OtherIncomeAmt: response.OtherIncomeAmt,
+              OtherMonthlyInstAmt: response.OtherMonthlyInstAmt,
+              RowVersion: response.RowVersion
+            });
+          },
+          (error) => {
+            console.log("ERROR");
+            console.log(error);
+          }
+        );
+      }
+      else if(this.MrCustTypeCode == "COMPANY"){
+        var custCompanyFinData = new CustCompanyFinDataObj();
+        custCompanyFinData.CustCompanyId = this.CustModeId;
+        this.httpClient.post(AdInsConstant.GetCustCompanyFinDataByCustCompanyId, custCompanyFinData).subscribe(
+          (response: any) => {
+            this.CustCompanyFinDataForm.patchValue({
+              CustCompanyFinDataId: response.CustCompanyFinDataId,
+              CustCompanyId: response.CustCompanyId,
+              GrossMonthlyIncomeAmt: response.GrossMonthlyIncomeAmt,
+              GrossProfitAmt: response.GrossProfitAmt,
+              ReturnOfInvestmentPrcnt: response.ReturnOfInvestmentPrcnt,
+              ReturnOfEquityPrcnt: response.ReturnOfEquityPrcnt,
+              ReturnOfAssetPrcnt: response.ReturnOfAssetPrcnt,
+              ProfitMarginPrcnt: response.ProfitMarginPrcnt,
+              CurrentRatioPrcnt: response.CurrentRatioPrcnt,
+              DebtEquityRatioPrcnt: response.DebtEquityRatioPrcnt,
+              InvTurnOverPrcnt: response.InvTurnOverPrcnt,
+              ArTurnOverPrcnt: response.ArTurnOverPrcnt,
+              GrowthPrcnt: response.GrowthPrcnt,
+              WorkingCapitalAmt: response.WorkingCapitalAmt,
+              OthMonthlyInstAmt: response.OthMonthlyInstAmt,
+              DateAsOf: response.DateAsOf,
+              Revenue: response.Revenue,
+              OprCost: response.OprCost,
+              ProfitBeforeTax: response.ProfitBeforeTax,
+              CurrAsset: response.CurrAsset,
+              NetFixedAsset: response.NetFixedAsset,
+              TotalAsset: response.TotalAsset,
+              CurrLiablts: response.CurrLiablts,
+              LongTemrLiablts: response.LongTemrLiablts,
+              ShareholderEquity: response.ShareholderEquity,
+              CurrRatio: response.CurrRatio,
+              RowVersion: response.RowVersion,
+            });
+          },
+          (error) => {
+            console.log("ERROR");
+            console.log(error);
+          }
+        );
+      }
+    }
+  }
+
+  calculatePersonalFinData(){
+    if(this.CustPersonalFinDataForm.valid){
+      var formData = this.CustPersonalFinDataForm.value;
+      var monthlyIncomeAmt = formData.MonthlyIncomeAmt == "" ? 0 : parseInt(formData.MonthlyIncomeAmt);
+      var spouseMonthlyIncomeAmt = formData.SpouseMonthlyIncomeAmt == "" ? 0 : parseInt(formData.SpouseMonthlyIncomeAmt);
+      var totalIncomeAmt = formData.TotalIncomeAmt == "" ? 0 : parseInt(formData.TotalIncomeAmt);
+      var nettIncomeAmt = formData.NettIncomeAmt == "" ? 0 : parseInt(formData.NettIncomeAmt);
+      var nettProfitMonthlyAmt = formData.NettProfitMonthlyAmt == "" ? 0 : parseInt(formData.NettProfitMonthlyAmt);
+      var otherIncomeAmt = formData.OtherIncomeAmt == "" ? 0 : parseInt(formData.OtherIncomeAmt);
+      var monthlyExpenseAmt = formData.MonthlyExpenseAmt == "" ? 0 : parseInt(formData.MonthlyExpenseAmt);
+      var monthlyInstallmentAmt = formData.MonthlyInstallmentAmt == "" ? 0 : parseInt(formData.MonthlyInstallmentAmt);
+      var otherMonthlyInstAmt = formData.OtherMonthlyInstAmt == "" ? 0 : parseInt(formData.OtherMonthlyInstAmt);
+
+      var totalAmt = monthlyIncomeAmt + spouseMonthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
+      var netIncomeAmt = totalAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt);
+
+      this.CustPersonalFinDataForm.patchValue({
+        TotalIncomeAmt: totalAmt,
+        NettIncomeAmt: netIncomeAmt
+      });
+    }
   }
 
   getCustFinData(){
-    var response;
+    var response = {};
 
     if(this.MrCustTypeCode == "PERSONAL"){
-      response = this.CustPersonalFinDataForm.value;
+      response["formData"] = this.CustPersonalFinDataForm.value;
     }
     else if(this.MrCustTypeCode == "COMPANY"){
-      response = this.CustCompanyFinDataForm.value;
+      response["formData"] = this.CustCompanyFinDataForm.value;
+    }
+
+    if(this.isCalculated){
+      response["status"] = {"code": 200, "message": "Success"};
+    }
+    else{
+      response["status"] = {"code": 500, "message": "Please Calculate First"};
     }
 
     this.CustFinDataResponse.emit(response);

@@ -109,18 +109,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       this.httpClient.post(AdInsConstant.GetCBAForCustFinDataEditModeByCustBankAccId, custBankAcc).subscribe(
         (response: any) => {
           this.inputLookupBank.nameSelect = response.RefBankObj.BankName;
-          var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
-          this.custBankStmntH = new CustBankStmntHObj();
-          this.custBankStmntH.CustBankStmntHId = response.CustBankStmntHObj.CustBankStmntHId;
-          this.custBankStmntH.CustId = response.CustBankStmntHObj.CustId;
-          this.custBankStmntH.CustBankAccId = response.CustBankStmntHObj.CustBankAccId;
-          this.custBankStmntH.InputDt = response.CustBankStmntHObj.InputDt;
-          this.custBankStmntH.InputBy = response.CustBankStmntHObj.InputBy;
-          this.custBankStmntH.StartPeriod = response.CustBankStmntHObj.StartPeriod;
-          this.custBankStmntH.EndPeriod = response.CustBankStmntHObj.EndPeriod;
-          this.custBankStmntH.BalanceAmt = response.CustBankStmntHObj.BalanceAmt;
-          this.custBankStmntH.RowVersion = response.CustBankStmntHObj.RowVersion;
-
           this.CustBankAccForm.patchValue({
             CustBankAccId: response.CustBankAccObj.CustBankAccId,
             CustId: response.CustBankAccObj.CustId,
@@ -135,19 +123,33 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             RowVersion: response.CustBankAccObj.RowVersion
           });
 
-          for (const item of response.CustBankStmntDObjs) {
-            var formGroup = this.fb.group({
-              CustBankStmntDId: [item.CustBankStmntDId, [Validators.required]],
-              CustBankStmntHId: [item.CustBankStmntHId, [Validators.required]],
-              Month: [this.monthOfYear.indexOf(item.Month), [Validators.required]],
-              Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$"), Validators.max(this.maxYear)]],
-              DebitAmt: [item.DebitAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
-              CreditAmt: [item.CreditAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
-              BalanceAmt: [item.BalanceAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
-              RowVersion: [item.RowVersion]
-            });
-            formArray.push(formGroup);
-            this.rowCustBankStmnt++;
+          if(response.CustBankAccObj.IsBankStmnt){
+            var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+            this.custBankStmntH = new CustBankStmntHObj();
+            this.custBankStmntH.CustBankStmntHId = response.CustBankStmntHObj.CustBankStmntHId;
+            this.custBankStmntH.CustId = response.CustBankStmntHObj.CustId;
+            this.custBankStmntH.CustBankAccId = response.CustBankStmntHObj.CustBankAccId;
+            this.custBankStmntH.InputDt = response.CustBankStmntHObj.InputDt;
+            this.custBankStmntH.InputBy = response.CustBankStmntHObj.InputBy;
+            this.custBankStmntH.StartPeriod = response.CustBankStmntHObj.StartPeriod;
+            this.custBankStmntH.EndPeriod = response.CustBankStmntHObj.EndPeriod;
+            this.custBankStmntH.BalanceAmt = response.CustBankStmntHObj.BalanceAmt;
+            this.custBankStmntH.RowVersion = response.CustBankStmntHObj.RowVersion;
+  
+            for (const item of response.CustBankStmntDObjs) {
+              var formGroup = this.fb.group({
+                CustBankStmntDId: [item.CustBankStmntDId, [Validators.required]],
+                CustBankStmntHId: [item.CustBankStmntHId, [Validators.required]],
+                Month: [this.monthOfYear.indexOf(item.Month), [Validators.required]],
+                Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$"), Validators.max(this.maxYear)]],
+                DebitAmt: [item.DebitAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
+                CreditAmt: [item.CreditAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
+                BalanceAmt: [item.BalanceAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
+                RowVersion: [item.RowVersion]
+              });
+              formArray.push(formGroup);
+              this.rowCustBankStmnt++;
+            }
           }
         },
         (error) => {
