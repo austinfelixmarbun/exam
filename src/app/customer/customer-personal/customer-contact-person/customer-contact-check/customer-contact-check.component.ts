@@ -41,8 +41,7 @@ deleteItem(custId : any){
     this.http.post(this.deleteCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj  ).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-      
-        console.log("aaaa");
+       
         this.getList();
       },
       error => {

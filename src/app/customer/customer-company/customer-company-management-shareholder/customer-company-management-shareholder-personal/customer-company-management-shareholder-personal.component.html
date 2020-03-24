@@ -9,6 +9,13 @@
               <lib-ucSubsection [id]="'ManagementShareholder'" [title]="'Management / Shareholder Data'" [panel]="'ManagementShareholderId'">
               </lib-ucSubsection>
               <div id="ManagementShareholderId">
+                <div class="form-group row  ">
+                  <label class="col-md-2 adins-required-label" translate>Select Existing Cust Personal</label>
+                  <div class="col-md-4">
+                    <lib-uclookupgeneric [lookupInput]="inputLookupCustPersonalObj" [parentForm]='ManagementShareholderForm' [enjiForm]='enjiForm' [identifier]="'CustPersonalLookup'"
+                    (lookup)="getLookUpCustomer($event)"></lib-uclookupgeneric>
+                  </div>
+                </div>
                 <div class="form-group row">
                   <label class="col-md-2 adins-required-label" translate>Full Name</label>
                   <div class="col-md-4">
@@ -123,7 +130,7 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" translate>
+              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
                 <i class="fa fa-check-square-o"></i> Cancel
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>

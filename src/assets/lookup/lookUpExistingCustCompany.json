@@ -1,5 +1,5 @@
-  {
-    "title": "Customer",
+{
+    "title": "Cust Company",
     "component": [
       {
         "type": "textbox",
@@ -39,10 +39,11 @@
     ],
   
     "querystring": {
-      "select": "SELECT CUST_NO AS CustNo, CUST_NAME AS CustName , CUST_ID as CustId",
-      "from": "FROM dbo.Cust WITH(NOLOCK)"
+      "select": "select c.CUST_NO as CustNo, c.CUST_NAME AS CustName, c.MR_CUST_MODEL_CODE as MrCustModelCode, cc.MR_COMPANY_TYPE_CODE as MrCompanyTypeCode, c.TAX_ID_NO as TaxIdNo ",
+      "from": "from dbo.CUST_COMPANY cc WITH(NOLOCK) join CUST c  WITH(NOLOCK) on cc.CUST_ID = c.CUST_ID"
     },
   
+       
     "bodyList": [
       {
         "type": "text",

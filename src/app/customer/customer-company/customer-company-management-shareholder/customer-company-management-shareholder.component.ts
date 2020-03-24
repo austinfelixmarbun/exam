@@ -10,7 +10,7 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
   @Input () custCompanyId : any ;
   
   mode : any;  
-
+  CustCompanyMgmntShrholderId : any;
   constructor() {  
   }
 
@@ -20,6 +20,8 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
   }
   terimaValue(ev : any){
     console.log(ev);
+    console.log("cobadong");
     this.mode = ev.mode; 
+    this.CustCompanyMgmntShrholderId =  ev.CustCompanyMgmntShrholderId;
   }
 }

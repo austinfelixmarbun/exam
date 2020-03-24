@@ -1,4 +1,5 @@
 export class CustCompanyMgmntShrholderObj {
+    CustCompanyMgmntShrholderId : any;
     CustCompanyId: any;
     MgmntShrholderName: any;
     MrJobPositionCode: any;
@@ -20,5 +21,6 @@ export class CustCompanyMgmntShrholderObj {
     MrCompanyTypeCode: any;
     MrCustTypeCode: any;
     ShareholderCustNo: any;
+    MrCustModelCode : any;
     RowVersion: any;
 }

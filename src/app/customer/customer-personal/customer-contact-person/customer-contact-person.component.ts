@@ -16,7 +16,6 @@ export class CustomerContactPersonComponent implements OnInit {
   isDelete : any;
   ngOnInit() {
       this.isAdd =false;
-     
   }
 
   terimaValue(ev : any){

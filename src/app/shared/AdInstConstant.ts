@@ -743,6 +743,10 @@ export class AdInsConstant {
 
   // CUSTOMER COMPANY MANAGEMENT SHAREHOLDER
   public static AddCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholder"
+  public static GetListCustCompanyMgmntShrholderByCustCompanyId = environment.FoundationR3Url +"/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderByCustCompanyId"
+  public static DeleteCustCompanyMgmntShrholder = environment.FoundationR3Url +"/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholder"
+  public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId"
+  public static EditCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholder"
   //LOB
   public static GetListKvpInstSchmByLobCode = environment.FoundationR3Url + "/InstSchmMap/GetListKvpInstSchmByLobCode";
   public static GetKvpRefFinMapByLobCode = environment.FoundationR3Url + "/RefFinMap/GetKvpRefFinMapByLobCode";

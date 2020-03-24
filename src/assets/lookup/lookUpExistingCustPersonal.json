@@ -1,5 +1,5 @@
-  {
-    "title": "Customer",
+{
+    "title": "Cust Personal",
     "component": [
       {
         "type": "textbox",
@@ -39,8 +39,8 @@
     ],
   
     "querystring": {
-      "select": "SELECT CUST_NO AS CustNo, CUST_NAME AS CustName , CUST_ID as CustId",
-      "from": "FROM dbo.Cust WITH(NOLOCK)"
+      "select": "select c.CUST_NO as CustNo, c.CUST_NAME AS CustName, c.MR_CUST_MODEL_CODE as MrCustModelCode, c.MR_ID_TYPE_CODE as MrIdTypeCode, c.ID_NO as IdNo, c.ID_EXPIRED_DT as IdExpiredDt, cp.MR_GENDER_CODE as MrGenderCode, cp.BIRTH_DT as BirthDt, cp.BIRTH_PLACE as BirthPlace,c.TAX_ID_NO as TaxIdNo",
+      "from": "from dbo.CUST_Personal cp  WITH(NOLOCK) join CUST c WITH(NOLOCK) on cp.CUST_ID = c.CUST_ID"
     },
   
     "bodyList": [
@@ -68,7 +68,6 @@
   
     "propertyId": "CustName",
     "propertyName": "CustName"
-  
-  
+
   }
   
