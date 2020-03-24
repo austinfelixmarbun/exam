@@ -498,12 +498,12 @@ export class AdInsConstant {
   public static GetAssetSchmHById = environment.FoundationR3Url + "/AssetSchmH/GetAssetSchmHById";
   public static AddAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/AddAssetSchmH";
   public static EditAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmH";
-  public static GetListAssetSchmDByAssetSchmHId = "http://localhost:5000" + "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
+  public static GetListAssetSchmDByAssetSchmHId =  environment.FoundationR3Url + "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
   public static EditAssetSchmHAndD = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmHAndD"
   public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
-  public static AddListAssetSchmD = "http://localhost:5000" + "/AssetSchmD/AddListAssetSchmD";
+  public static AddListAssetSchmD =  environment.FoundationR3Url + "/AssetSchmD/AddListAssetSchmD";
   public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";
-  public static AddRangeAssetSchmD = "http://localhost:5000" + "/AssetSchmD/AddRangeAssetSchmD";
+  public static AddRangeAssetSchmD =  environment.FoundationR3Url + "/AssetSchmD/AddRangeAssetSchmD";
   // ASSET TYPE
   public static GetActiveAssetTypeValue = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType";
 
@@ -757,29 +757,29 @@ export class AdInsConstant {
 
       // CUSTOMER ADDRESS
   public static GetListCustAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustId";
-  public static GetListCustAddrByCustIdForCustomerPersonalView = "http://localhost:5000" + "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
+  public static GetListCustAddrByCustIdForCustomerPersonalView =  environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
   // CUSTOMER ADDRESS HISTORY
   public static GetListCustAddrHistByCustId = environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustId";
-  public static GetListCustAddrHistByCustIdForCustomerPersonalView = "http://localhost:5000" + "/CustAddrHist/GetListCustAddrHistByCustIdForCustomerPersonalView";
+  public static GetListCustAddrHistByCustIdForCustomerPersonalView =  environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustIdForCustomerPersonalView";
 
   // CUSTOMER BANK ACCOUNT
-  public static GetCBAForCustFinDataByCustId = "http://localhost:5000" + "/CustBankAcc/GetCBAForCustFinDataByCustId";
+  public static GetCBAForCustFinDataByCustId =  environment.FoundationR3Url + "/CustBankAcc/GetCBAForCustFinDataByCustId";
 
   //Customer Company Legal Doc
-  public static GetCustCompanyLegalDocForCustViewByCustId = "http://localhost:5000" + "/CustCompanyLegalDoc/GetCustCompanyLegalDocForCustViewByCustId";
+  public static GetCustCompanyLegalDocForCustViewByCustId =  environment.FoundationR3Url + "/CustCompanyLegalDoc/GetCustCompanyLegalDocForCustViewByCustId";
 
-  public static GetListCustPersonalContactPersonForCustViewByCustId = "http://localhost:5000" + "/CustPersonalContactPerson/GetListCustPersonalContactPersonForCustViewByCustId";
+  public static GetListCustPersonalContactPersonForCustViewByCustId =  environment.FoundationR3Url + "/CustPersonalContactPerson/GetListCustPersonalContactPersonForCustViewByCustId";
 
   // Cust Company Management Shareholder
-  public static GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderId = "http://localhost:5000" + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderId";
+  public static GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderId =  environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderId";
 
 
   // Cust Attr Content
-  public static GetCustAttrContentForCustViewByCustId = "http://localhost:5000" + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
+  public static GetCustAttrContentForCustViewByCustId =  environment.FoundationR3Url + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
 
   // 
-  public static GetCustCompanyContactPersonForCustViewByCustId = "http://localhost:5000" + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";
+  public static GetCustCompanyContactPersonForCustViewByCustId =  environment.FoundationR3Url + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";
   
   // Cust Group
-  public static GetListCustGrpForCustViewByCustId =  "http://localhost:5000" + "/CustGrp/GetListCustGrpForCustViewByCustId";
+  public static GetListCustGrpForCustViewByCustId =   environment.FoundationR3Url + "/CustGrp/GetListCustGrpForCustViewByCustId";
 }
