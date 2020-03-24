@@ -54,10 +54,16 @@ export class CustomerPersonalJobDataComponent implements OnInit {
        if (params["IdCustPersonal"] != null) {
         this.IdCustPersonal = params["IdCustPersonal"];
       }
+      if (params["CustModel"] != null) {
+        this.CustModel = params["CustModel"];
+      }
      });
   }
 
   ngOnInit() {
+
+    this.CustModel = "SME"
+
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
     this.http.post(this.getCustById, this.custObj).subscribe(
@@ -72,7 +78,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
           this.listJobType = response['ReturnObject'];
           console.log("aaaa");
           console.log(this.listJobType);
-          this.CustJobDataForm.patchValue({ JobDataType: response['ReturnObject'][0]['Key'] });
+          this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
       });
   }
 }

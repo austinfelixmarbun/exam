@@ -11,6 +11,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
  
 @Component({
   selector: 'app-job-data-sme',
@@ -59,19 +60,17 @@ export class JobDataSmeComponent implements OnInit {
   industryLookUpObj: any;
   custPersonalJobDataObj: any;
   addJobData: any;
+  reqCustPersonalJobDataObj: any;
   JobDataSmeForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
     JobPosition: [''],
     JobTitleName: [''],
-    JobStatus: [''],
     IndustryName: [''],
-    InternalEmployee: [''],
     IndustryTypeName: [''],
     CompanyScale: [''],
     NumberEmployee: [''],
     EmpEstablishmentDate: [''],
-    EmpEstablishmentDateYear: [''],
     NotesJob: [''],
     LocationClass: [''],
     PriceEstimates: [''],
@@ -81,7 +80,6 @@ export class JobDataSmeComponent implements OnInit {
     OtherBusinessIndustry: [''],
     OtherJobPosition: [''],
     EstablishmentDate: [''],
-    EstablishmentDateYear: [''],
     NotesOther: [''],
     OtherLocationClass: [''],
     OtherPriceEstimates: [''],
@@ -140,17 +138,6 @@ export class JobDataSmeComponent implements OnInit {
       (response) => {
           this.custObj = response;
       });
-    
-    this.establishmentDt = new RefMasterObj();
-    this.establishmentDt.RefMasterTypeCode = "MONTH";
-    this.http.post(this.getListActiveRefMaster, this.establishmentDt).subscribe(
-    (response) => {
-        this.listEstablishmentDt = response['ReturnObject'];
-        this.JobDataSmeForm.patchValue({ 
-            EmpEstablishmentDate: response['ReturnObject'][0]['Key'],
-            EstablishmentDate: response['ReturnObject'][0]['Key']
-        });
-    });
 
     this.jobPosition = new RefMasterObj();
     this.jobPosition.RefMasterTypeCode = "JOB_POSITION";
@@ -184,7 +171,7 @@ export class JobDataSmeComponent implements OnInit {
     this.jobAddressObj.FullAddr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value;
     this.jobAddressObj.AreaCode3 = this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value;
     this.jobAddressObj.AreaCode4 = this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode4.value;
-    this.jobAddressObj.Zipcode = this.JobDataSmeForm.controls["custAddressZipcode"]["controls"].value.value;
+    this.jobAddressObj.Zipcode = this.JobDataSmeForm.controls["jobAddressZipcode"]["controls"].value.value;
     this.jobAddressObj.AreaCode1 = this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode1.value;
     this.jobAddressObj.AreaCode2 = this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode2.value;
     this.jobAddressObj.City = this.JobDataSmeForm.controls["jobAddress"]["controls"].City.value;
@@ -203,7 +190,7 @@ export class JobDataSmeComponent implements OnInit {
     this.jobAddressObj.Notes = this.JobDataSmeForm.controls["NotesJob"].value;
   }
 
-  setOtherAddr(){
+  setOthBizAddr(){
     this.otherAddressObj.CustId = this.IdCust;
     this.otherAddressObj.MrCustAddrTypeCode = 'OTH_BIZ';
     this.otherAddressObj.Addr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value;
@@ -229,19 +216,47 @@ export class JobDataSmeComponent implements OnInit {
     this.otherAddressObj.Notes = this.JobDataSmeForm.controls["NotesOther"].value;
   }
 
-  SaveForm(){
-    this.custPersonalJobDataObj = new CustPersonalJobDataObj();
+  setCustJobData(){
+    this.custPersonalJobDataObj.CustId = this.IdCust;
     this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
+    this.custPersonalJobDataObj.MrJobPositionCode = this.JobDataSmeForm.controls["JobPosition"].value;
     this.custPersonalJobDataObj.JobTitleName = this.JobDataSmeForm.controls["JobTitleName"].value;
+    this.custPersonalJobDataObj.CoyName = this.JobDataSmeForm.controls["IndustryName"].value;
+    this.custPersonalJobDataObj.RefIndustryTypeId = this.tempRefIndustryType;
+    this.custPersonalJobDataObj.MrCoyScaleCode = this.JobDataSmeForm.controls["CompanyScale"].value;
+    this.custPersonalJobDataObj.NoOfEmploy = this.JobDataSmeForm.controls["NumberEmployee"].value;
+    this.custPersonalJobDataObj.EmploymentEstablishmentDt = this.JobDataSmeForm.controls["EmpEstablishmentDate"].value;
+    this.custPersonalJobDataObj.OthBizName = this.JobDataSmeForm.controls["OtherBusinessName"].value;
+    this.custPersonalJobDataObj.OthBizType = this.JobDataSmeForm.controls["OtherBusinessType"].value;
+    this.custPersonalJobDataObj.OthBizIndustryTypeCode = this.JobDataSmeForm.controls["OtherBusinessIndustry"].value;
+    this.custPersonalJobDataObj.OthBizJobPosition = this.JobDataSmeForm.controls["OtherJobPosition"].value;
+    this.custPersonalJobDataObj.OthBizEstablishmentDt = this.JobDataSmeForm.controls["EstablishmentDate"].value;
+  }
 
-    this.http.post(this.addJobData, this.custPersonalJobDataObj).subscribe(
+  SaveForm(){
+    console.log("bbb");
+    this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
+    this.custPersonalJobDataObj = new CustPersonalJobDataObj();
+    this.setCustJobData();
+    this.jobAddressObj = new CustAddrObj;
+    this.setJobAddr();
+    this.otherAddressObj = new CustAddrObj;
+    this.setOthBizAddr();
+    this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
+    this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
+    this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
+
+    console.log("ccc");
+    console.log(this.reqCustPersonalJobDataObj)
+
+    this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
       (response) => {
         console.log(response);
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(
-          ["/Customer/CustomerPersonal/Address"], 
-          { queryParams: { "IdCust": this.IdCust }}
-          );
+        // this.router.navigate(
+        //   ["/Customer/CustomerPersonal/Address"], 
+        //   { queryParams: { "IdCust": this.IdCust }}
+        //   );
         console.log(response)
       },
       (error) => {
