@@ -8,39 +8,29 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "Monthly Income Ammount",
-            "property": "MthIncAmt"
+            "label": "Mobile Phone 1",
+            "property": "Mp1"
           },
           {
             "type": "text",
-            "label": "Source Of Other Income",
-            "property": "SrcOthInc"
+            "label": "Email 1",
+            "property": "E1"
           },
           {
             "type": "text",
-            "label": "Monthly Expense Ammount",
-            "property": "MthExpAmt"
+            "label": "Mobile Phone 2",
+            "property": "Mp2"
           },
           {
             "type": "text",
-            "label": "Spouse Monthly Income Ammount",
-            "property": "SpsMthIncAmt"
-          },
-          {
-            "type": "text",
-            "label": "Monthly Installment Ammount",
-            "property": "MthInsAmt"
-          },
-          {
-            "type": "boolean",
-            "label": "Join Income",
-            "property": "IsJoinInc"
+            "label": "Email 2",
+            "property": "E2"
           }
         ],
         "querystring": {
-          "select": "SELECT  CPFD.MONTHLY_INCOME_AMT AS MthIncAmt, CPFD.MONTHLY_EXPENSE_AMT AS MthExpAmt, CPFD.MONTHLY_INSTALLMENT_AMT AS MthInsAmt,RMINC.DESCR AS SrcOthInc, CPFD.SPOUSE_MONTHLY_INCOME_AMT AS SpsMthIncAmt, CPFD.IS_JOIN_INCOME AS IsJoinInc",
-          "from": "FROM dbo.CUST_PERSONAL_FIN_DATA CPFD JOIN dbo.CUST_PERSONAL CP ON CP.CUST_PERSONAL_ID = CPFD.CUST_PERSONAL_ID LEFT JOIN dbo.REF_MASTER RMINC ON RMINC.REF_MASTER_TYPE_CODE = 'SOURCE_INCOME' AND RMINC.MASTER_CODE = CPFD.MR_SOURCE_OF_INCOME_CODE",
-          "where": "WHERE CP.CUST_ID = {0}"
+          "select": "SELECT  CCCP.MOBILE_PHN_NO_1 AS Mp1, CCCP.MOBILE_PHN_NO_2 AS Mp2, CCCP.EMAIL_1 AS E1, CCCP.EMAIL_2 AS E2",
+          "from": "FROM dbo.CUST_COMPANY_CONTACT_PERSON CCCP JOIN dbo.CUST_COMPANY CC ON CC.CUST_COMPANY_ID = CCCP.CUST_COMPANY_ID",
+          "where": "WHERE CC.CUST_ID = {0}"
         }
       }
     ]

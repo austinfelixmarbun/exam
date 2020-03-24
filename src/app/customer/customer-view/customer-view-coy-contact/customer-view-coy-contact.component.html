@@ -1,27 +1,3 @@
-<table class="table table-responsive-md text-center table-hover">
-  <thead>
-    <tr class="table-header">
-      <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Status</span> </th>
-      <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Family Name</span> </th>
-      <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Gender</span> </th>
-      <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Customer Relationship</span></th>
-      <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>ID Type</span> </th>
-      <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>ID No</span> </th>
-      <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Birth Date</span> </th>
-      <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Mobile Phone No</span> </th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngFor="let item of responseResult">
-      <tr>
-        <td class="text-left"></td>
-        <td class="text-left">{{item.FamilyName}}</td>
-        <td class="text-left">{{item.Gender}}</td>
-        <td class="text-left">{{item.CustRelationship}}</td>
-        <td class="text-left">{{item.IdType}}</td>
-        <td class="text-left">{{item.BirthDate}}</td>
-        <td class="text-left">{{item.MobilePhone}}</td>
-      </tr>
-    </ng-container>
-  </tbody>
-</table>
+<lib-ucviewgeneric [viewInput]="viewCustCoyViewContactAddress"></lib-ucviewgeneric>
+<lib-ucviewgeneric [viewInput]="viewCustCoyViewContactData"></lib-ucviewgeneric>
+<lib-ucviewgeneric [viewInput]="viewCustCoyViewContactInformation"></lib-ucviewgeneric>

@@ -14,6 +14,9 @@ export class CustomerViewCoyContactComponent implements OnInit {
   GetCustCompanyContactPersonForCustViewByCustIdUrl = AdInsConstant.GetCustCompanyContactPersonForCustViewByCustId;
   responseResult: any;
   CustId: any;
+  viewCustCoyViewContactData: string;
+  viewCustCoyViewContactAddress: string;
+  viewCustCoyViewContactInformation: string;
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -22,19 +25,9 @@ export class CustomerViewCoyContactComponent implements OnInit {
     private fb: FormBuilder
   ) { }
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
-      }
-    });
-    var custObj = { "CustId": this.CustId };
-    this.http.post(this.GetCustCompanyContactPersonForCustViewByCustIdUrl, custObj).subscribe(
-      response => {
-        this.responseResult = response['ReturnObject'];
-      },
-      error => {
-        this.router.navigateByUrl('Error');
-      }
-    );
+    // viewCustCoyContactAddress.json
+    this.viewCustCoyViewContactData =  "./assets/ucviewgeneric/viewCustCoyViewContactData.json";
+    this.viewCustCoyViewContactInformation = "./assets/ucviewgeneric/viewCustCoyViewContactInformation.json";
+    this.viewCustCoyViewContactAddress =  "./assets/ucviewgeneric/viewCustCoyViewContactAddress.json";
   }
 }
