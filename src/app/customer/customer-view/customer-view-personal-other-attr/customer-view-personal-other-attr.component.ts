@@ -17,8 +17,6 @@ export class CustomerViewPersonalOtherAttrComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    // private adInsService: AdInsService,
-    // private fb: FormBuilder
   ) { }
 
   ngOnInit() {

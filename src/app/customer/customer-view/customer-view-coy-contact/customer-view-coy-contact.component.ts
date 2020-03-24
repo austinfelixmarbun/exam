@@ -11,7 +11,6 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./customer-view-coy-contact.component.scss']
 })
 export class CustomerViewCoyContactComponent implements OnInit {
-  GetCustCompanyContactPersonForCustViewByCustIdUrl = AdInsConstant.GetCustCompanyContactPersonForCustViewByCustId;
   responseResult: any;
   CustId: any;
   viewCustCoyViewContactData: string;
@@ -25,7 +24,6 @@ export class CustomerViewCoyContactComponent implements OnInit {
     private fb: FormBuilder
   ) { }
   ngOnInit() {
-    // viewCustCoyContactAddress.json
     this.viewCustCoyViewContactData =  "./assets/ucviewgeneric/viewCustCoyViewContactData.json";
     this.viewCustCoyViewContactInformation = "./assets/ucviewgeneric/viewCustCoyViewContactInformation.json";
     this.viewCustCoyViewContactAddress =  "./assets/ucviewgeneric/viewCustCoyViewContactAddress.json";
