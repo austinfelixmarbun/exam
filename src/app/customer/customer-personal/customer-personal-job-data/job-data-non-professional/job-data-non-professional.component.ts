@@ -9,6 +9,8 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
+import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
  
 @Component({
   selector: 'app-job-data-non-professional',
@@ -42,7 +44,10 @@ export class JobDataNonProfessionalComponent implements OnInit {
   tempProfession: any;
   professionLookUpObj: any;
   custPersonalJobDataObj: any;
+  jobAddrObj: any;
+  othBizAddrObj: any;
   addJobData: any;
+  reqCustPersonalJobDataObj: any;
   JobDataNonProForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
@@ -87,19 +92,30 @@ export class JobDataNonProfessionalComponent implements OnInit {
   }
 
   SaveForm(){
-    this.custPersonalJobDataObj = new CustPersonalJobDataObj();
+    console.log("bbb")
+    this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
+    this.custPersonalJobDataObj = new CustPersonalJobDataObj;
+    this.jobAddrObj = new CustAddrObj;
+    this.othBizAddrObj = new CustAddrObj;
     this.custPersonalJobDataObj.CustId = this.IdCust;
     this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
     this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
+    this.jobAddrObj.MrCustAddrTypeCode = "JOB";
+    this.othBizAddrObj.MrCustAddrTypeCode = "OTH_BIZ";
+    this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
+    this.reqCustPersonalJobDataObj.JobAddr = this.jobAddrObj;
+    this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
 
-    this.http.post(this.addJobData, this.custPersonalJobDataObj).subscribe(
+    console.log("ccc");
+    console.log(this.reqCustPersonalJobDataObj)
+    this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
       (response) => {
         console.log(response);
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(
-          ["/Customer/CustomerPersonal/Address"], 
-          { queryParams: { "IdCust": this.IdCust }}
-          );
+        // this.router.navigate(
+        //   ["/Customer/CustomerPersonal/Address"], 
+        //   { queryParams: { "IdCust": this.IdCust }}
+        //   );
         console.log(response)
       },
       (error) => {

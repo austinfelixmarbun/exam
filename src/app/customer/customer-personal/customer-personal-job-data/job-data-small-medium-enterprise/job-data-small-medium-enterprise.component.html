@@ -72,17 +72,9 @@
                     <div class="form-group row">
                         <label class="col-md-3 adInsLabel adins-required" translate>Employment Establishment Date </label>
                         <div class="col-md-3">
-                          <select class="form-control adInsInput" formControlName="EmpEstablishmentDate">
-                            <option *ngFor="let ram of listEstablishmentDt" [value]="ram.Key">
-                              {{ram.Value}}
-                            </option>
-                          </select>
+                          <input type="date" id="empEstablishmentDt" class="form-control adInsInput" formControlName="EmpEstablishmentDate" required
+                            [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.EmpEstablishmentDate.invalid }">
                           <show-errors [control]="JobDataSmeForm.controls.EmpEstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
-                        </div>
-                        <div class="col-md-3">
-                          <input type="text" class="form-control adInsInput" formControlName="EmpEstablishmentDateYear"
-                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.EmpEstablishmentDateYear.invalid }">
-                          <show-errors [control]="JobDataSmeForm.controls.EmpEstablishmentDateYear" [submit]="enjiForm.submitted"></show-errors>
                         </div>
                     </div>
                     <lib-ucSubsection [id]="'jobAddrId'" [title]="'Job Address'" [panel]="'jobAddr'">
@@ -99,24 +91,24 @@
                             <label class="col-md-3 adInsLabel adins-required" translate>Building Location Class </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="LocationClass"
-                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.Notes.invalid }">
-                            <show-errors [control]="JobDataSmeForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.LocationClass.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.LocationClass" [submit]="enjiForm.submitted"></show-errors>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel adins-required" translate>Building Price Estimates </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="PriceEstimates"
-                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.Notes.invalid }">
-                            <show-errors [control]="JobDataSmeForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.PriceEstimates.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.PriceEstimates" [submit]="enjiForm.submitted"></show-errors>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel adins-required" translate>Building Stay Length </label>
                             <div class="col-md-4">
                             <input type="text" class="form-control adInsInput" formControlName="StayLength"
-                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.Notes.invalid }">
-                            <show-errors [control]="JobDataSmeForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.StayLength.invalid }">
+                            <show-errors [control]="JobDataSmeForm.controls.StayLength" [submit]="enjiForm.submitted"></show-errors>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -165,18 +157,10 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel adins-required" translate>Establishment Date </label>
-                            <div class="col-md-3">
-                              <select class="form-control adInsInput" formControlName="EstablishmentDate">
-                                <option *ngFor="let ram of listEstablishmentDt" [value]="ram.Key">
-                                  {{ram.Value}}
-                                </option>
-                              </select>
+                            <div class="col-md-4">
+                              <input type="date" id="establishmentDt" class="form-control adInsInput" formControlName="EstablishmentDate" required
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.EstablishmentDate.invalid }">
                               <show-errors [control]="JobDataSmeForm.controls.EstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
-                            </div>
-                            <div class="col-md-3">
-                              <input type="text" class="form-control adInsInput" formControlName="EstablishmentDateYear"
-                                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.EstablishmentDateYear.invalid }">
-                              <show-errors [control]="JobDataSmeForm.controls.EstablishmentDateYear" [submit]="enjiForm.submitted"></show-errors>
                             </div>
                         </div>
                     </div>

@@ -11,6 +11,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
  
 @Component({
   selector: 'app-job-data-professional',
@@ -44,14 +45,17 @@ export class JobDataProfessionalComponent implements OnInit {
   establishmentDt: any;
   listEstablishmentDt: any;
   inputFieldAddressObj: InputFieldObj;
-  jobAddressObj: CustAddrObj;
   tempProfession: any;
   tempRefIndustryType: any;
   professionLookUpObj: any;
   industryLookUpObj: any;
   custPersonalJobDataObj: any;
+  jobAddressObj: any;
+  jobAddrObj: any;
+  othBizAddrObj: any;
   addJobData: any;
   addCustAddr : any;
+  reqCustPersonalJobDataObj: any;
  JobDataProForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
@@ -59,7 +63,6 @@ export class JobDataProfessionalComponent implements OnInit {
     JobTitleName: [''],
     IndustryTypeName: [''],
     EstablishmentDate: [''],
-    EstablishmentDateYear: [''],
     Notes:[''],
     LuasBangunan: [''],
     LuasTanah: [''],
@@ -120,80 +123,72 @@ export class JobDataProfessionalComponent implements OnInit {
       (response) => {
           this.custObj = response;
       });
-    
-    this.establishmentDt = new RefMasterObj();
-    this.establishmentDt.RefMasterTypeCode = "MONTH";
-    this.http.post(this.getListActiveRefMaster, this.establishmentDt).subscribe(
-    (response) => {
-        this.listEstablishmentDt = response['ReturnObject'];
-        console.log("aaaa");
-        console.log(this.listEstablishmentDt);
-        this.JobDataProForm.patchValue({ EstablishmentDate: response['ReturnObject'][0]['Key'] });
-    });
   }
 
   setJobAddr(){
     this.jobAddressObj.CustId = this.IdCust;
     this.jobAddressObj.MrCustAddrTypeCode = 'JOB';
-    this.jobAddressObj.Addr = this.JobDataProForm.controls["custAddress"]["controls"].Addr.value;
-    this.jobAddressObj.FullAddr = this.JobDataProForm.controls["custAddress"]["controls"].Addr.value;
-    this.jobAddressObj.AreaCode3 = this.JobDataProForm.controls["custAddress"]["controls"].AreaCode3.value;
-    this.jobAddressObj.AreaCode4 = this.JobDataProForm.controls["custAddress"]["controls"].AreaCode4.value;
-    this.jobAddressObj.Zipcode = this.JobDataProForm.controls["custAddressZipcode"]["controls"].value.value;
-    this.jobAddressObj.AreaCode1 = this.JobDataProForm.controls["custAddress"]["controls"].AreaCode1.value;
-    this.jobAddressObj.AreaCode2 = this.JobDataProForm.controls["custAddress"]["controls"].AreaCode2.value;
-    this.jobAddressObj.City = this.JobDataProForm.controls["custAddress"]["controls"].City.value;
-    this.jobAddressObj.PhnArea1 = this.JobDataProForm.controls["custAddress"]["controls"].PhnArea1.value;
-    this.jobAddressObj.Phn1 = this.JobDataProForm.controls["custAddress"]["controls"].Phn1.value;
-    this.jobAddressObj.PhnExt1 = this.JobDataProForm.controls["custAddress"]["controls"].PhnExt1.value;
-    this.jobAddressObj.PhnArea2 = this.JobDataProForm.controls["custAddress"]["controls"].PhnArea2.value;
-    this.jobAddressObj.Phn2 = this.JobDataProForm.controls["custAddress"]["controls"].Phn2.value;
-    this.jobAddressObj.PhnExt2 = this.JobDataProForm.controls["custAddress"]["controls"].PhnExt2.value;
-    this.jobAddressObj.PhnArea3 = this.JobDataProForm.controls["custAddress"]["controls"].PhnArea3.value;
-    this.jobAddressObj.Phn3 = this.JobDataProForm.controls["custAddress"]["controls"].Phn3.value;
-    this.jobAddressObj.PhnExt3 = this.JobDataProForm.controls["custAddress"]["controls"].PhnExt3.value;
-    this.jobAddressObj.FaxArea = this.JobDataProForm.controls["custAddress"]["controls"].FaxArea.value;
-    this.jobAddressObj.Fax = this.JobDataProForm.controls["custAddress"]["controls"].Fax.value;
-    this.jobAddressObj.MrBuildingOwnershipCode = this.JobDataProForm.controls["custAddress"]["controls"].MrHouseOwnershipCode.value;
+    this.jobAddressObj.Addr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value;
+    this.jobAddressObj.FullAddr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value;
+    this.jobAddressObj.AreaCode3 = this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode3.value;
+    this.jobAddressObj.AreaCode4 = this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode4.value;
+    this.jobAddressObj.Zipcode = this.JobDataProForm.controls["jobAddressZipcode"]["controls"].value.value;
+    this.jobAddressObj.AreaCode1 = this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode1.value;
+    this.jobAddressObj.AreaCode2 = this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode2.value;
+    this.jobAddressObj.City = this.JobDataProForm.controls["jobAddress"]["controls"].City.value;
+    this.jobAddressObj.PhnArea1 = this.JobDataProForm.controls["jobAddress"]["controls"].PhnArea1.value;
+    this.jobAddressObj.Phn1 = this.JobDataProForm.controls["jobAddress"]["controls"].Phn1.value;
+    this.jobAddressObj.PhnExt1 = this.JobDataProForm.controls["jobAddress"]["controls"].PhnExt1.value;
+    this.jobAddressObj.PhnArea2 = this.JobDataProForm.controls["jobAddress"]["controls"].PhnArea2.value;
+    this.jobAddressObj.Phn2 = this.JobDataProForm.controls["jobAddress"]["controls"].Phn2.value;
+    this.jobAddressObj.PhnExt2 = this.JobDataProForm.controls["jobAddress"]["controls"].PhnExt2.value;
+    this.jobAddressObj.PhnArea3 = this.JobDataProForm.controls["jobAddress"]["controls"].PhnArea3.value;
+    this.jobAddressObj.Phn3 = this.JobDataProForm.controls["jobAddress"]["controls"].Phn3.value;
+    this.jobAddressObj.PhnExt3 = this.JobDataProForm.controls["jobAddress"]["controls"].PhnExt3.value;
+    this.jobAddressObj.FaxArea = this.JobDataProForm.controls["jobAddress"]["controls"].FaxArea.value;
+    this.jobAddressObj.Fax = this.JobDataProForm.controls["jobAddress"]["controls"].Fax.value;
+    this.jobAddressObj.MrBuildingOwnershipCode = this.JobDataProForm.controls["jobAddress"]["controls"].MrHouseOwnershipCode.value;
     this.jobAddressObj.Notes = this.JobDataProForm.controls["Notes"].value;
   }
 
-  SaveForm(){
-    this.custPersonalJobDataObj = new CustPersonalJobDataObj();
+  setCustJobData(){
     this.custPersonalJobDataObj.CustId = this.IdCust;
     this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
+    this.custPersonalJobDataObj.ProfessionalNo = this.JobDataProForm.controls["ProfessionalNo"].value;
     this.custPersonalJobDataObj.JobTitleName = this.JobDataProForm.controls["JobTitleName"].value;
+    this.custPersonalJobDataObj.RefIndustryTypeId = this.tempRefIndustryType;
+    this.custPersonalJobDataObj.EmploymentEstablishmentDt = this.JobDataProForm.controls["EstablishmentDate"].value;
+  }
 
-    this.http.post(this.addJobData, this.custPersonalJobDataObj).subscribe(
+  SaveForm(){
+    console.log("bbb")
+    this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
+    this.custPersonalJobDataObj = new CustPersonalJobDataObj;
+    this.setCustJobData();
+    this.jobAddressObj = new CustAddrObj;
+    this.setJobAddr();
+    this.othBizAddrObj = new CustAddrObj;
+    this.othBizAddrObj.MrCustAddrTypeCode = "OTH_BIZ";
+    this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
+    this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
+    this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
+
+    console.log("ccc");
+    console.log(this.reqCustPersonalJobDataObj)
+
+    this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
       (response) => {
         console.log(response);
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(
-          ["/Customer/CustomerPersonal/Address"], 
-          { queryParams: { "IdCust": this.IdCust }}
-          );
+        // this.router.navigate(
+        //   ["/Customer/CustomerPersonal/Address"], 
+        //   { queryParams: { "IdCust": this.IdCust }}
+        //   );
         console.log(response)
       },
       (error) => {
         console.log(error);
       }
     );
-
-    this.jobAddressObj = new CustAddrObj();
-    this.setJobAddr();
-    this.http.post(this.addCustAddr, this.jobAddressObj).subscribe(
-        (response) => {
-          console.log(response);
-          this.toastr.successMessage(response["message"]);
-          this.router.navigate(
-            ["/Customer/CustomerPersonal/Address"], 
-            { queryParams: { "IdCust": this.IdCust }}
-            );
-          console.log(response)
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
   }
 }
