@@ -338,7 +338,7 @@ export class AdInsConstant {
   public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
   public static GetListAssetMasterByAssetSchmHId = "http://localhost:5000" + "/AssetMaster/GetListAssetMasterByAssetSchmHId";
   public static EditListAssetSchmDByAssetMasterId = + "/AssetMaster/EditListAssetSchmDByAssetMasterId";
-
+ 
   //REF PROFESSION
 
   public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
