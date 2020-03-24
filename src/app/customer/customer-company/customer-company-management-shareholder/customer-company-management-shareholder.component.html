@@ -1,0 +1,13 @@
+<app-customer-company-management-shareholder-check *ngIf="mode == 'check'" [inputValue] ="this.inputValue" (outputValue)="terimaValue($event)"> </app-customer-company-management-shareholder-check>
+<app-customer-company-management-shareholder-company *ngIf="mode == 'addCompany'" [inputValue] ="this.inputValue"[custCompanyId] ="this.custCompanyId"  [CustCompanyMgmntShrholderId] = "this.CustCompanyMgmntShrholderId" (outputValue)="terimaValue($event)"> </app-customer-company-management-shareholder-company>
+<app-customer-company-management-shareholder-personal *ngIf="mode == 'addPersonal'" [inputValue] ="this.inputValue" [custCompanyId] ="this.custCompanyId"  [CustCompanyMgmntShrholderId] = "this.CustCompanyMgmntShrholderId "(outputValue)="terimaValue($event)"> </app-customer-company-management-shareholder-personal>
+<!-- (outputValue)="terimaValue($event)" -->
+<!-- <app-customer-contact-add  *ngIf="isAdd == true" [inputValue] ="this.inputValue" [custPersonalContactPersonId] = this.custPersonalContactPersonId (outputValues)="terimaValue($event)" > </app-customer-contact-add> -->
+
+
+ 
+ 
+ 
+ 
+ 
+ 
