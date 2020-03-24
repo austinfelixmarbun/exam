@@ -577,13 +577,13 @@ export class AdInsConstant {
   public static EditVendorHO = environment.FoundationR3Url + "/Vendor/EditVendorHO";
   public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
   public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
-  public static GetListHoByVendorId = environment.localHostUrl + "/Vendor/GetListHoByVendorId";
+  public static GetListHoByVendorId = environment.FoundationR3Url + "/Vendor/GetListHoByVendorId";
 
 
-  public static GetListVendorBankAccByVendorId = environment.localHostUrl + "/VendorBankAcc/GetListVendorBankAccByVendorId";
-  public static AddVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/AddVendorBankAcc";
-  public static EditVendorBankAcc = environment.localHostUrl + "/VendorBankAcc/EditVendorBankAcc";
-  public static GetVendorBankAccByVendorBankAccId = environment.localHostUrl + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
+  public static GetListVendorBankAccByVendorId = environment.FoundationR3Url + "/VendorBankAcc/GetListVendorBankAccByVendorId";
+  public static AddVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/AddVendorBankAcc";
+  public static EditVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/EditVendorBankAcc";
+  public static GetVendorBankAccByVendorBankAccId = environment.FoundationR3Url + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
   public static DeleteVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/DeleteVendorBankAcc";
 
 
@@ -730,17 +730,17 @@ export class AdInsConstant {
 
   // SURVEY TASK
   public static GetListSrvyTaskBySrvyOrderId = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderId";
-  public static AddSrvyTask = environment.localHostUrl + "/SrvyTask/AddSrvyTask";
-  public static EditSrvyTask = environment.localHostUrl + "/SrvyTask/EditSrvyTask";
-  public static DeleteSrvyTask = environment.localHostUrl + "/SrvyTask/DeleteSrvyTask";
-  public static GetSrvyTaskBySrvyTaskId = environment.localHostUrl + "/SrvyTask/GetSrvyTaskBySrvyTaskId";
+  public static AddSrvyTask = environment.FoundationR3Url + "/SrvyTask/AddSrvyTask";
+  public static EditSrvyTask = environment.FoundationR3Url + "/SrvyTask/EditSrvyTask";
+  public static DeleteSrvyTask = environment.FoundationR3Url + "/SrvyTask/DeleteSrvyTask";
+  public static GetSrvyTaskBySrvyTaskId = environment.FoundationR3Url + "/SrvyTask/GetSrvyTaskBySrvyTaskId";
   
   // SURVEY ORDER
-  public static GetSrvyOrderBySrvyOrderId = environment.localHostUrl + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
+  public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
   public static GetListSryvObject = environment.FoundationR3Url + "/SrvyOrder/GetListSryvObject";
 
   // SURVEY FORM SCHM
-  public static GetListAllSrvyFormSchm = environment.localHostUrl + "/SrvyFormSchm/GetListAllSrvyFormSchm";
+  public static GetListAllSrvyFormSchm = environment.FoundationR3Url + "/SrvyFormSchm/GetListAllSrvyFormSchm";
 
 
   //LOB

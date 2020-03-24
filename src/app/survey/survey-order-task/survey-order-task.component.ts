@@ -98,20 +98,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   onChange(ev) {
     for (let i = 0; i < this.resultData.length; i++) {
       if (this.resultData[i].SurveySubject == ev) {
-        this.SrvyObjList = [];
-        this.SurveyTaskForm.patchValue({
-          MrSrvyObjCode: ""
-        });
-
-        if (this.resultData[i].ListAddrArr != null && this.resultData[i].ListAddrArr.length != 0) {
-          for (let j = 0; j < this.resultData[i].ListAddrArr.length; j++) {
-            this.SrvyObjList.push(this.resultData[i].ListAddrArr[j]);
-          }
-          this.SurveyTaskForm.patchValue({
-            MrSrvyObjCode: this.SrvyObjList[0].Key
-          });
-        }
-        console.log(this.SurveyTaskForm.controls.MrSrvyObjCode.value);
+        this.setSrvyObjList(i);
         break;
       }
     }
@@ -135,15 +122,7 @@ export class SurveyOrderTaskComponent implements OnInit {
       SrvyFormSchmId: this.FormSchmList[0].SrvyFormSchmId
     });
 
-    this.SrvyObjList = [];
-    if (this.resultData[0].ListAddrArr.length != 0) {
-      for (let j = 0; j < this.resultData[0].ListAddrArr.length; j++) {
-        this.SrvyObjList.push(this.resultData[0].ListAddrArr[j]);
-      }
-      this.SurveyTaskForm.patchValue({
-        MrSrvyObjCode: this.SrvyObjList[0].Key
-      });
-    }
+    this.setSrvyObjList();
   }
 
   private getDismissReason(reason: any): string {
@@ -153,6 +132,59 @@ export class SurveyOrderTaskComponent implements OnInit {
       return 'by clicking on a backdrop';
     } else {
       return `with: ${reason}`;
+    }
+  }
+
+  Back() {
+    this.modal.close();
+  }
+
+  editData(content, ev) {
+    this.modal = this.modalService.open(content);
+    this.modal.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.modal.close();
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.modal.close();
+    });
+
+    var TaskObj = {
+      SrvyTaskId: ev
+    }
+    this.http.post(AdInsConstant.GetSrvyTaskBySrvyTaskId, TaskObj).subscribe(
+      response => {
+        this.SrvyTaskObj = response;
+        this.onChange(this.SrvyTaskObj.MrSrvySubjCode);
+        this.SurveyTaskForm.patchValue({
+          SrvyTaskId: this.SrvyTaskObj.SrvyTaskId,
+          SrvyTaskNo: this.SrvyTaskObj.SrvyTaskNo,
+          MrSrvySubjCode: this.SrvyTaskObj.MrSrvySubjCode,
+          MrSrvyObjCode: this.SrvyTaskObj.MrSrvyObjCode,
+          SrvyFormSchmId: this.SrvyTaskObj.SrvyFormSchmId,
+          SurveyorCode: this.SrvyTaskObj.SurveyorCode,
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  deleteData(ev) {
+    if (confirm("Are you sure to delete this record?")) {
+      var TaskObj = {
+        SrvyTaskId: ev
+      }
+      this.http.post(AdInsConstant.DeleteSrvyTask, TaskObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["Message"]);
+          this.generateSurveyTaskList();
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
   }
 
@@ -193,8 +225,20 @@ export class SurveyOrderTaskComponent implements OnInit {
     }
   }
 
-  Back() {
-    this.modal.close();
+  setSrvyObjList(arr = 0) {
+    this.SrvyObjList = [];
+    this.SurveyTaskForm.patchValue({
+      MrSrvyObjCode: ""
+    });
+
+    if (this.resultData[arr].ListAddrArr != null && this.resultData[arr].ListAddrArr.length != 0) {
+      for (let j = 0; j < this.resultData[arr].ListAddrArr.length; j++) {
+        this.SrvyObjList.push(this.resultData[arr].ListAddrArr[j]);
+      }
+      this.SurveyTaskForm.patchValue({
+        MrSrvyObjCode: this.SrvyObjList[0].Key
+      });
+    }
   }
 
   generateListSrvyObject() {
@@ -211,14 +255,7 @@ export class SurveyOrderTaskComponent implements OnInit {
           this.SurveyTaskForm.patchValue({
             MrSrvySubjCode: this.SrvySubjList[0]
           });
-          if (this.resultData[0].ListAddrArr.length != 0) {
-            for (let j = 0; j < this.resultData[0].ListAddrArr.length; j++) {
-              this.SrvyObjList.push(this.resultData[0].ListAddrArr[j]);
-            }
-            this.SurveyTaskForm.patchValue({
-              MrSrvyObjCode: this.SrvyObjList[0].Key
-            });
-          }
+          this.setSrvyObjList();
         }
       },
       error => {
@@ -241,54 +278,4 @@ export class SurveyOrderTaskComponent implements OnInit {
       }
     );
   }
-  editData(content, ev) {
-    this.modal = this.modalService.open(content);
-    this.modal.result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      this.modal.close();
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      this.modal.close();
-    });
-
-    var TaskObj = {
-      SrvyTaskId: ev
-    }
-    this.http.post(AdInsConstant.GetSrvyTaskBySrvyTaskId, TaskObj).subscribe(
-      response => {
-        this.SrvyTaskObj = response;
-        this.onChange(this.SrvyTaskObj.MrSrvySubjCode);
-        this.SurveyTaskForm.patchValue({
-          SrvyTaskId: this.SrvyTaskObj.SrvyTaskId,
-          SrvyTaskNo: this.SrvyTaskObj.SrvyTaskNo,
-          MrSrvySubjCode: this.SrvyTaskObj.MrSrvySubjCode,
-          MrSrvyObjCode: this.SrvyTaskObj.MrSrvyObjCode,
-          SrvyFormSchmId: this.SrvyTaskObj.SrvyFormSchmId,
-          SurveyorCode: this.SrvyTaskObj.SurveyorCode,
-        });
-      },
-      error => {
-        console.log(error);
-      }
-    );
-
-  }
-
-  deleteData(ev) {
-    if (confirm("Are you sure to delete this record?")) {
-      var TaskObj = {
-        SrvyTaskId: ev
-      }
-      this.http.post(AdInsConstant.DeleteSrvyTask, TaskObj).subscribe(
-        response => {
-          this.toastr.successMessage(response["Message"]);
-          this.generateSurveyTaskList();
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
-  }
-
 }
