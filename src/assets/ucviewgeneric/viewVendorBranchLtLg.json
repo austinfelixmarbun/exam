@@ -1,0 +1,29 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "LatLongId",
+        "subSectionTitle": "Lat Long Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Latitude:",
+            "property": "Latitude"
+          },
+          {
+            "type": "text",
+            "label": "Longitude:",
+            "property": "Longitude"
+          }
+        ],
+        "querystring": {
+          "select":  "SELECT A.LATITUDE AS Latitude,A.LONGITUDE Longitude",
+          "from":"FROM dbo.VENDOR_ADDR A WITH (NOLOCK) LEFT JOIN dbo.VENDOR B WITH(NOLOCK) ON B.VENDOR_ID = A.VENDOR_ID",
+          "where":"WHERE B.MR_VENDOR_CLASS = 'BRANCH' AND B.VENDOR_ID = {0}"
+            
+        }
+      }
+    ]
+  }
+  

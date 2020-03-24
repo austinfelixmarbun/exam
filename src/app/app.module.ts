@@ -42,6 +42,7 @@ import { TreeViewModule } from '@progress/kendo-angular-treeview';
 
 
 
+
  
  
 export function createTranslateLoader(http: HttpClient) {
@@ -56,6 +57,7 @@ export function createTranslateLoader(http: HttpClient) {
         UserMaintenanceComponent,
         ErrorDialogComponent,
         RolepickComponent,
+
     ],
     imports: [
         HttpModule,

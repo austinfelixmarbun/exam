@@ -17,6 +17,7 @@ export class VendorEmpObj {
     TaxpayerNo: any;
     MrVendorEmpPositionCode: any;
     IsContactPerson: boolean;
+    IsOwner: boolean;
     VendorEmpRating: any;
     RowVersion: any;
 

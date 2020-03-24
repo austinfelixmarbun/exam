@@ -1,0 +1,34 @@
+{
+    "title":"",
+    "subsection": [
+      {
+        "subSectionId": "BranchInformationLifeId",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Life Insurance HO:",
+            "property": "LifeHo"
+          },
+          {
+            "type": "text",
+            "label": "Assignment Type:",
+            "property": "Atype"
+          },
+          {
+            "type": "text",
+            "label": "Maximum Task Load",
+            "property": "MaxTaskLoad"
+          }
+        ],
+        "querystring": {
+           "select":" SELECT VENDOR_NAME AS LifeHo,RESERVED_FIELD_9 AS Atype,RESERVED_FIELD_2 AS MaxTaskLoad",
+            "from":"FROM dbo.VENDOR A WITH(NOLOCK)",
+           "where":"WHERE MR_VENDOR_CLASS = 'BRANCH'  AND MR_VENDOR_CATEGORY_CODE LIKE 'LIFE_INSCO%' AND MR_VENDOR_CATEGORY_CODE NOT LIKE '%HO' AND VENDOR_ID = {0}"
+            
+        }
+      }
+    ]
+  }
+  
