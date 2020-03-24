@@ -94,10 +94,6 @@ export class CurrencyAddComponent implements OnInit {
   }
 
   SaveForm() {
-    var value = this.RefCurrForm.controls["UCNumber"].value.replace(/\D/g, "");
-    console.log(value);
-    return true;
-
     if (this.pageType == "add") {
       this.currObj = new CurrObj();
       this.currObj.CurrCode = this.RefCurrForm.controls["CurrCode"].value

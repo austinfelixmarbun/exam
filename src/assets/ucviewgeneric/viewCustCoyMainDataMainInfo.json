@@ -1,0 +1,58 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "viewCustCoyMainDataMainInfoId1",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Industry Type Name",
+            "property": "IndTypeName"
+          },
+          {
+            "type": "date",
+            "label": "Establishment Date",
+            "property": "EstDt"
+          },
+          {
+            "type": "text",
+            "label": "Number Of Employee",
+            "property": "NumOfEmp"
+          },
+          {
+            "type": "text",
+            "label": "Tanda Daftar Perusahaan (TDP)",
+            "property": "RegNo"
+          },
+          {
+            "type": "text",
+            "label": "Surat Izin Usaha Perdagangan (SIUP)",
+            "property": "LisNo"
+          },
+          {
+            "type": "boolean",
+            "label": "Affiliation with Multifinance",
+            "property": "IsAff"
+          },
+      
+          {
+            "type": "boolean",
+            "label": "VIP",
+            "property": "IsVip"
+          },
+          {
+            "type": "text",
+            "label": "VIP Note",
+            "property": "VipNotes"
+          }
+        ],
+        "querystring": {
+        "select": "SELECT RIT.INDUSTRY_TYPE_NAME AS IndTypeName, CP.NUM_OF_EMP AS NumOfEmp, CP.ESTABLISHMENT_DT AS EstDt,CP.LICENSE_NO AS LisNo, CP.REGISTRATION_NO AS RegNo, C.IS_AFFILIATE_WITH_MF AS IsAff, C.IS_VIP AS IsVip, C.VIP_NOTES AS VipNotes",
+          "from": "FROM dbo.CUST AS C WITH(NOLOCK) JOIN dbo.CUST_COMPANY CP WITH(NOLOCK) ON C.CUST_ID = CP.CUST_ID  LEFT JOIN dbo.REF_INDUSTRY_TYPE RIT WITH(NOLOCK) ON CP.REF_INDUSTRY_TYPE_ID = RIT.REF_INDUSTRY_TYPE_ID",
+          "where": "WHERE C.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

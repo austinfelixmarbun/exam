@@ -1,0 +1,38 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+
+@Component({
+  selector: 'app-customer-view-personal-customer-group',
+  templateUrl: './customer-view-personal-customer-group.component.html',
+  styleUrls: ['./customer-view-personal-customer-group.component.scss']
+})
+export class CustomerViewPersonalCustomerGroupComponent implements OnInit {
+  CustId: any;
+  GetListCustGrpForCustViewByCustIdUrl = AdInsConstant.GetListCustGrpForCustViewByCustId;
+  responseObj: any;
+
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) { }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['CustId'] != null) {
+        this.CustId = params['CustId'];
+      }
+    });
+    var custObj = { "CustId": this.CustId };
+    this.http.post(this.GetListCustGrpForCustViewByCustIdUrl, custObj).subscribe(
+      response => {
+        this.responseObj = response['ReturnObject'];
+      },
+      error => {
+        this.router.navigateByUrl('Error');
+      }
+    );
+  }
+}

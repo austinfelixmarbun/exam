@@ -12,8 +12,7 @@ export class CustomerPagingComponent implements OnInit {
   inputPagingObj : any;
   constructor() { }
 
-  ngOnInit() {
-    
+  ngOnInit() {    
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchCustomer.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
