@@ -6,4 +6,4 @@
   </span>
 </div>
 <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
-<app-cust-group-tab [CustId]="testCustId"></app-cust-group-tab>
+<app-cust-fin-data-tab [CustId]="'16'" [MrCustTypeCode]="'PERSONAL'" [Mode]="'edit'" [CustModeId]="'6'" (CustFinDataResponse)="getResponse($event)"></app-cust-fin-data-tab>

@@ -1,0 +1,62 @@
+<lib-ucSubsection [id]="'CustLegalDocSectionId'" [title]="'Legal Doc Listing'" [panel]="'CustLegalDocSection'"></lib-ucSubsection>
+<div id="CustLegalDocSection">
+  <div class="col-md-12" style="padding: 0; text-align: right;">
+    <span class="mr-1">
+      <button type="button" class="addButton" (click)="openCustLegalDocDetail()" translate>
+        <i class="ft-plus-circle"></i> Add
+      </button>
+    </span>
+  </div>
+  <div class="col-md-12" style="padding: 0; text-align: right;">
+    <table class="table table-responsive-md text-center table-hover">
+      <thead>
+        <tr class="table-header">
+          <th style="text-align: center;">
+            <span class="thead-header" name='no' translate>No.</span>
+          </th>
+          <th style="text-align: left;">
+            <span class="thead-header" name='legalDocType' translate>Legal Doc Type</span>
+          </th>
+          <th style="text-align: left;">
+            <span class="thead-header" name='documentNo' translate>Document No.</span>
+          </th>
+          <th style="text-align: left;">
+            <span class="thead-header" name='dateIssued' translate>Date Issued</span>
+          </th>
+          <th style="text-align: left;">
+            <span class="thead-header" name='expiredDate' translate>Expired Date</span>
+          </th>
+          <th style="text-align: left;">
+            <span class="thead-header" name='notes' translate>Notes</span>
+          </th>
+          <th style="text-align: left;">
+            <span class="thead-header" name='notaryName' translate>Notary Name</span>
+          </th>
+          <th style="text-align: left;">
+            <span class="thead-header" name='notaryLocation' translate>Notary Location</span>
+          </th>
+          <th style="text-align: center;">
+            <span class="thead-header" name='delete' translate>Delete</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of custLegalDocs; let i = index">
+          <td style="text-align: center;">{{i+1}}</td>
+          <td style="text-align: left;">{{item.MrLegalDocTypeCode}}</td>
+          <td style="text-align: left;">{{item.DocNo}}</td>
+          <td style="text-align: left;">{{item.DocDt | date:'yyyy-MM-dd'}}</td>
+          <td style="text-align: left;">{{item.DocExpiredDt | date:'yyyy-MM-dd'}}</td>
+          <td style="text-align: left;">{{item.DocNotes}}</td>
+          <td style="text-align: left;">{{item.NotaryName}}</td>
+          <td style="text-align: left;">{{item.NotaryLocation}}</td>
+          <td style="text-align: center;">
+            <a (click)="deleteCustLegalDoc(item.CustCompanyLegalDocId, i)">
+              <i class="fas fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

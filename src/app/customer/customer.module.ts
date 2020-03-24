@@ -37,7 +37,11 @@ import { JobDataNonProfessionalComponent } from './customer-personal/customer-pe
 import { JobDataProfessionalComponent } from './customer-personal/customer-personal-job-data/job-data-professional/job-data-professional.component';
 import { JobDataEmployeeComponent } from './customer-personal/customer-personal-job-data/job-data-employee/job-data-employee.component';
 import { JobDataSmeComponent } from './customer-personal/customer-personal-job-data/job-data-small-medium-enterprise/job-data-small-medium-enterprise.component';
-
+import { CustFinDataTabComponent } from './cust-fin-data-tab/cust-fin-data-tab.component';
+import { CustBankAccSectionFindataComponent } from './cust-bank-acc-section-findata/cust-bank-acc-section-findata.component';
+import { CustBankAccDetailSectionFindataComponent } from './cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata.component';
+import { CustLegalDocComponent } from './cust-legal-doc/cust-legal-doc.component';
+import { CustLegalDocDetailComponent } from './cust-legal-doc/cust-legal-doc-detail/cust-legal-doc-detail.component';
 @NgModule({
   exports: [],
   imports: [
@@ -75,9 +79,14 @@ import { JobDataSmeComponent } from './customer-personal/customer-personal-job-d
     JobDataNonProfessionalComponent,
     JobDataProfessionalComponent,
     JobDataEmployeeComponent,
-    JobDataSmeComponent
+    JobDataSmeComponent,
+    CustFinDataTabComponent,
+    CustBankAccSectionFindataComponent,
+    CustBankAccDetailSectionFindataComponent,
+    CustLegalDocComponent,
+    CustLegalDocDetailComponent,
   ],
-  entryComponents: [CustGroupTabDetailComponent]
+  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
 export class CustomerModule { 
   constructor(){

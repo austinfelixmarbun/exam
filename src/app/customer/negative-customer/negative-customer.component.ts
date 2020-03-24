@@ -14,7 +14,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class NegativeCustomerComponent implements OnInit {
   @ViewChild(UcpagingComponent) ucpaging;
   inputPagingObj: any;
-  testCustId: number = 2;
 
   constructor() { }
 
