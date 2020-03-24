@@ -2,7 +2,7 @@
   (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
   <div class="modal-header">
     <h4 class="modal-title">Add Customer Group Member</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('dismissed')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -68,7 +68,7 @@
     <button type="submit" class="btn btn-raised btn-primary">
       <i class="fa fa-check-square-o"></i> Save
     </button>
-    <button type="button" class="btn btn-warning btn-raised" (click)="activeModal.close()">Cancel</button>
+    <button type="button" class="btn btn-warning btn-raised" (click)="activeModal.dismiss('dismissed')">Cancel</button>
   </div>
 </form>
 
