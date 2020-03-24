@@ -730,6 +730,18 @@ export class AdInsConstant {
 
   // SURVEY TASK
   public static GetListSrvyTaskBySrvyOrderId = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderId";
+  public static AddSrvyTask = environment.localHostUrl + "/SrvyTask/AddSrvyTask";
+  public static EditSrvyTask = environment.localHostUrl + "/SrvyTask/EditSrvyTask";
+  public static DeleteSrvyTask = environment.localHostUrl + "/SrvyTask/DeleteSrvyTask";
+  public static GetSrvyTaskBySrvyTaskId = environment.localHostUrl + "/SrvyTask/GetSrvyTaskBySrvyTaskId";
+  
+  // SURVEY ORDER
+  public static GetSrvyOrderBySrvyOrderId = environment.localHostUrl + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
+  public static GetListSryvObject = environment.FoundationR3Url + "/SrvyOrder/GetListSryvObject";
+
+  // SURVEY FORM SCHM
+  public static GetListAllSrvyFormSchm = environment.localHostUrl + "/SrvyFormSchm/GetListAllSrvyFormSchm";
+
 
   //LOB
   public static GetListKvpInstSchmByLobCode = environment.FoundationR3Url + "/InstSchmMap/GetListKvpInstSchmByLobCode";
