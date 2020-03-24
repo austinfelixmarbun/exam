@@ -1,5 +1,5 @@
 import { InputLookupObj } from "./InputLookupObj.Model";
-
+ 
 export class InputFieldObj{
     addr: any;
     areaCode4: any;

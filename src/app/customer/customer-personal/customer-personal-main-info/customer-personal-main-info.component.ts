@@ -23,7 +23,7 @@ state: any;
     BirthDt: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.required]],
-    IdExpiredDt: ['', [Validators.required]],
+    IdExpiredDt:  [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel : ['', [Validators.required]],
     IsVip : [true],
@@ -37,15 +37,10 @@ state: any;
   tempIdType: any;
   tempCustModel : any;
   CustName  : any;
- 
-  
+  tempKTPCheck:any;
   Gender : any;
-  
   CustModel : any;
- 
-  
   MrIdTypeCode : any;
- 
   BirthPlace : any;
   BirthDt : any;
   IdNo : any;
@@ -58,11 +53,10 @@ state: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
   this.getUrl = AdInsConstant.GetListActiveRefMaster; 
-   
   }
 
   ngOnInit() {
-    console.log("Awd");
+    
     var refMasterObj = {
       RefMasterTypeCode: "GENDER",
       RowVersion: ""
@@ -72,9 +66,7 @@ state: any;
         this.tempGender = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
           Gender: this.tempGender[0].Key
-
         });
- 
       }
     );
     var refMasterObj1 = {
@@ -88,6 +80,11 @@ state: any;
         this.CustomerPersonalForm.patchValue({
           MrIdTypeCode: this.tempIdType[0].Key
         });
+        if(this.tempIdType[0].Key == this.KTP){
+          this.tempKTPCheck=true;
+        }else{
+          this.tempKTPCheck=false;
+        }
       }
     );
     console.log( "awdawdwad");
@@ -119,19 +116,9 @@ state: any;
   }
   SaveValue (){ 
     this.CustName= this.CustomerPersonalForm.controls["CustName"].value; 
-    
-
-     
     this.CustModel =  this.CustomerPersonalForm.controls["CustModel"].value;
-    
- 
     this.Gender = this.CustomerPersonalForm.controls["Gender"].value;
-    
-    
-    
     this.MrIdTypeCode= this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
-     
-   
     this.BirthPlace = this.CustomerPersonalForm.controls["BirthPlace"].value;
     this.BirthDt= this.CustomerPersonalForm.controls["BirthDt"].value;
     this.IdNo = this.CustomerPersonalForm.controls["IdNo"].value;
@@ -144,18 +131,15 @@ state: any;
     this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,   "CustModel" : this.CustModel, "BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName,"IsVip"  : this.IsVip,"IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes  } });
  
   }
-  onOptionsSelected(event){    console.log(event.target.value);
+  onOptionsSelected(event){  
     if(event.target.value == this.KTP){
-  
       this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
-      this.CustomerPersonalForm.controls.IdExpiredDt.disable();
-    
+      this.tempKTPCheck= true;
     }else{
-      this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);   this.CustomerPersonalForm.controls.IdExpiredDt.disable();
+      this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);  
+      this.tempKTPCheck=false;
     }
     this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
-  
-   
   }
 
 }

@@ -17,6 +17,7 @@ import { CustomerCompanyAddressAddComponent } from './customer-company/customer-
 import { CustomerPersonalJobDataComponent } from './customer-personal/customer-personal-job-data/customer-personal-job-data.component';
 import { JobDataNonProfessionalComponent } from './customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional.component';
 import { CustomerViewComponent } from './customer-view/customer-view.component';
+import { CustomerCompanyPageComponent } from './customer-company/customer-company-page/customer-company-page.component';
 
 const routes: Routes = [
   {
@@ -86,13 +87,6 @@ const routes: Routes = [
         }
       },
       {
-        path: 'CustomerPersonal/Page',
-        component: CustomerPersonalPageComponent,
-        data: {
-          title: 'Customer Personal DuplicateCheck  '
-        }
-      },
-      {
         path: 'CustomerView/Page',
         component: CustomerViewComponent,
         data: {
@@ -141,6 +135,14 @@ const routes: Routes = [
           title: 'Customer Personal Job Data'
         }
       },
+      {
+        path: 'CustomerCompany/Page',
+        component: CustomerCompanyPageComponent,
+        data: {
+          title: 'Customer Company Page'
+        }
+      },   
+
     ]
   }
 ];
