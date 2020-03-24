@@ -20,11 +20,13 @@ import { CustomerCompanyMainInfoComponent } from './customer-company/customer-co
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { CustomerPersonalDetailComponent } from './customer-personal/customer-personal-detail/customer-personal-detail.component';
-import { CustomerViewPersonalComponent } from './customer-view/customer-view-personal/customer-view-personal.component';
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
 import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
+import { CustomerViewPersonalDetailComponent } from './customer-view/customer-view-personal-detail/customer-view-personal-detail.component';
+import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
+import { CustomerViewPersonalJobDataComponent } from './customer-view/customer-view-personal-job-data/customer-view-personal-job-data.component';
 import { CustGroupTabComponent } from './cust-group-tab/cust-group-tab.component';
 import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-detail/cust-group-tab-detail.component';
 import { CustomerPersonalAddressComponent } from './customer-personal/customer-personal-address/customer-personal-address.component';
@@ -42,6 +44,26 @@ import { CustBankAccSectionFindataComponent } from './cust-bank-acc-section-find
 import { CustBankAccDetailSectionFindataComponent } from './cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata.component';
 import { CustLegalDocComponent } from './cust-legal-doc/cust-legal-doc.component';
 import { CustLegalDocDetailComponent } from './cust-legal-doc/cust-legal-doc-detail/cust-legal-doc-detail.component';
+import { CustomerViewPersonalContactPersonComponent } from './customer-view/customer-view-personal-contact-person/customer-view-personal-contact-person.component';
+import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
+import { CustomerViewPersonalFinancialDataComponent } from './customer-view/customer-view-personal-financial-data/customer-view-personal-financial-data.component';
+import { CustomerViewPersonalJobDataNonProfComponent } from './customer-view/customer-view-personal-job-data-non-prof/customer-view-personal-job-data-non-prof.component';
+import { CustomerViewPersonalJobDataEmpComponent } from './customer-view/customer-view-personal-job-data-emp/customer-view-personal-job-data-emp.component';
+import { CustomerViewPersonalJobDataSmeComponent } from './customer-view/customer-view-personal-job-data-sme/customer-view-personal-job-data-sme.component';
+import { CustomerViewPersonalOtherAttrComponent } from './customer-view/customer-view-personal-other-attr/customer-view-personal-other-attr.component';
+import { CustomerViewPersonalAppListingComponent } from './customer-view/customer-view-personal-app-listing/customer-view-personal-app-listing.component';
+import { CustomerViewCoyAddressComponent } from './customer-view/customer-view-coy-address/customer-view-coy-address.component';
+import { CustomerViewCoyManagementComponent } from './customer-view/customer-view-coy-management/customer-view-coy-management.component';
+import { CustomerViewCoyContactComponent } from './customer-view/customer-view-coy-contact/customer-view-coy-contact.component';
+import { CustomerViewCoyFinancialComponent } from './customer-view/customer-view-coy-financial/customer-view-coy-financial.component';
+import { CustomerViewCoyLegalComponent } from './customer-view/customer-view-coy-legal/customer-view-coy-legal.component';
+import { CustomerViewCoyOtherComponent } from './customer-view/customer-view-coy-other/customer-view-coy-other.component';
+import { CustomerViewCoyAppListingComponent } from './customer-view/customer-view-coy-app-listing/customer-view-coy-app-listing.component';
+import { CustomerViewCoyExposureComponent } from './customer-view/customer-view-coy-exposure/customer-view-coy-exposure.component';
+import { CustomerViewCoyCustScoreComponent } from './customer-view/customer-view-coy-cust-score/customer-view-coy-cust-score.component';
+import { CustomerViewCoyCustAddColateralComponent } from './customer-view/customer-view-coy-cust-add-colateral/customer-view-coy-cust-add-colateral.component';
+import { CustomerViewComponent } from './customer-view/customer-view.component';
+import { CustomerViewCoyDetailComponent } from './customer-view/customer-view-coy-detail/customer-view-coy-detail.component';
 @NgModule({
   exports: [],
   imports: [
@@ -65,10 +87,13 @@ import { CustLegalDocDetailComponent } from './cust-legal-doc/cust-legal-doc-det
   ],
   declarations: [ 
     CustomerPagingComponent, 
-    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent, CustomerViewPersonalComponent,
+    CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent,
     NegativeCustomerComponent,
     NegativeCustomerDetailComponent,
     NegativeCustomerViewComponent,
+    CustomerViewPersonalDetailComponent,
+    CustomerViewPersonalAddressComponent,
+    CustomerViewPersonalJobDataComponent,
     CustGroupTabComponent,
     CustGroupTabDetailComponent,
     CustomerPersonalAddressComponent,
@@ -85,6 +110,26 @@ import { CustLegalDocDetailComponent } from './cust-legal-doc/cust-legal-doc-det
     CustBankAccDetailSectionFindataComponent,
     CustLegalDocComponent,
     CustLegalDocDetailComponent,
+    CustomerViewPersonalContactPersonComponent,
+    CustomerViewPersonalCustomerGroupComponent,
+    CustomerViewPersonalFinancialDataComponent,
+    CustomerViewPersonalJobDataNonProfComponent,
+    CustomerViewPersonalJobDataEmpComponent,
+    CustomerViewPersonalJobDataSmeComponent,
+    CustomerViewPersonalOtherAttrComponent,
+    CustomerViewPersonalAppListingComponent,
+    CustomerViewCoyAddressComponent,
+    CustomerViewCoyManagementComponent,
+    CustomerViewCoyContactComponent,
+    CustomerViewCoyFinancialComponent,
+    CustomerViewCoyLegalComponent,
+    CustomerViewCoyOtherComponent,
+    CustomerViewCoyAppListingComponent,
+    CustomerViewCoyExposureComponent,
+    CustomerViewCoyCustScoreComponent,
+    CustomerViewCoyCustAddColateralComponent,
+    CustomerViewComponent,
+    CustomerViewCoyDetailComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

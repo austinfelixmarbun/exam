@@ -9,7 +9,6 @@ import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/cus
 import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
 import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
-import { CustomerViewPersonalComponent } from './customer-view/customer-view-personal/customer-view-personal.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 import { CustomerPersonalAddressComponent } from './customer-personal/customer-personal-address/customer-personal-address.component';
 import { CustomerPersonalAddressAddComponent } from './customer-personal/customer-personal-address/customer-personal-address-add/customer-personal-address-add.component';
@@ -17,6 +16,7 @@ import { CustomerCompanyAddressComponent } from './customer-company/customer-com
 import { CustomerCompanyAddressAddComponent } from './customer-company/customer-company-address/customer-company-address-add/customer-company-address-add.component';
 import { CustomerPersonalJobDataComponent } from './customer-personal/customer-personal-job-data/customer-personal-job-data.component';
 import { JobDataNonProfessionalComponent } from './customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional.component';
+import { CustomerViewComponent } from './customer-view/customer-view.component';
 
 const routes: Routes = [
   {
@@ -94,9 +94,9 @@ const routes: Routes = [
       },
       {
         path: 'CustomerView/Page',
-        component: CustomerViewPersonalComponent,
+        component: CustomerViewComponent,
         data: {
-          title: 'Customer View Personal Component'
+          title: 'Customer View Component'
         }
       },
       {
