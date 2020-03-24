@@ -659,6 +659,7 @@ export class AdInsConstant {
 
   // Customer
   public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust";
+  public static EditCust = environment.FoundationR3Url + "/Cust/EditCust";
   public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId";
   public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
   public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
