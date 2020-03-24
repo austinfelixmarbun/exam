@@ -583,27 +583,7 @@ export class AdInsConstant {
 
 
 
-  //REF COUNTRY
-  public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
-
-
-
-
-
-  //VENDOR
-  public static AddVendorHO = environment.FoundationR3Url + "/Vendor/AddVendorHO";
-  public static EditVendorHO = environment.FoundationR3Url + "/Vendor/EditVendorHO";
-  public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
-  public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
-  public static GetListHoByVendorId = environment.FoundationR3Url + "/Vendor/GetListHoByVendorId";
-
-
-  public static GetListVendorBankAccByVendorId = environment.FoundationR3Url + "/VendorBankAcc/GetListVendorBankAccByVendorId";
-  public static AddVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/AddVendorBankAcc";
-  public static EditVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/EditVendorBankAcc";
-  public static GetVendorBankAccByVendorBankAccId = environment.FoundationR3Url + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
-  public static DeleteVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/DeleteVendorBankAcc";
-
+  
 
   // // ASSET NEGATIVE
   // public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
