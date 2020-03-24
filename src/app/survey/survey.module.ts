@@ -14,6 +14,7 @@ import { SurveyOrderTaskComponent } from './survey-order-task/survey-order-task.
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { SurveyOrderViewComponent } from './survey-order-view/survey-order-view.component';
 import { SurveyTaskViewComponent } from './survey-task-view/survey-task-view.component';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 
 @NgModule({
@@ -36,6 +37,9 @@ import { SurveyTaskViewComponent } from './survey-task-view/survey-task-view.com
     SurveyOrderTaskComponent,
     SurveyOrderViewComponent,
     SurveyTaskViewComponent
+  ],
+  providers: [
+    NGXToastrService
   ]
 })
 export class SurveyModule { }
