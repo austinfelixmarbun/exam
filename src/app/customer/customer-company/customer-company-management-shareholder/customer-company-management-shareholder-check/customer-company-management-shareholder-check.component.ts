@@ -87,7 +87,6 @@ getList(){
     }
   );
 }
-
 next(){
   this.wizard.goToNextStep();
 }

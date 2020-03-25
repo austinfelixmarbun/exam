@@ -40,13 +40,15 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   AddNewCustAddr :any;
   tempMrGenderCode : any;
   getUrl : any;
+  tempMrJobPostitionCode : any;
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder ) { 
     this.route.queryParams.subscribe(params => { 
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
     });
-    this.AddNewCustAddr = AdInsConstant.AddNewCustAddr;
+    this.AddNewCustAddr = AdInsConstant.AddCustAddr;
     this.AddCustCompanyContactPerson = AdInsConstant.AddCustCompanyContactPerson;
     this.getUrl = AdInsConstant.GetListActiveRefMaster;
   }
@@ -62,6 +64,19 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       RowVersion: ""
     }
     this.http.post(this.getUrl, refMasterObj1).subscribe(
+      (response) => {
+        this.tempMrJobPostitionCode = response["ReturnObject"];
+        this.ContactInformationForm.patchValue({
+          MrJobPostitionCode: this.tempMrJobPostitionCode[0].Key
+        });
+      }
+    );
+    
+    var refMasterObj2 = {
+      RefMasterTypeCode: "JOB_POSITION",
+      RowVersion: ""
+    }
+    this.http.post(this.getUrl, refMasterObj2).subscribe(
       (response) => {
         this.tempMrGenderCode = response["ReturnObject"];
         this.ContactInformationForm.patchValue({

@@ -42,7 +42,6 @@ export class CustomerCompanyPageComponent implements OnInit {
       }
     });
   }
-
   ngOnInit() {
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
@@ -159,7 +158,6 @@ export class CustomerCompanyPageComponent implements OnInit {
     }
   }
   terimaValue(ev: any) {
-  
     console.log(ev);
     this.CustCompanyId = ev.CustCompanyId;
   }

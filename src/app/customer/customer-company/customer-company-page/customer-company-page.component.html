@@ -44,7 +44,7 @@
           </aw-wizard-step>
 
           <!-- <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Address')">
-          <app-customer-company-detail  *ngIf="isAddress == true" > </app-customer-company-detail>
+          <app-customer-company-address  *ngIf="isAddress == true" > </app-customer-company-address>
         </aw-wizard-step> -->
 
         <!-- <aw-wizard-step [stepTitle]="'Management /  Shareholder'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Management')">
@@ -55,12 +55,12 @@
      <app-customer-company-detail *ngIf="isGroup == true" > </app-customer-company-detail>
         </aw-wizard-step> -->
 
-        <aw-wizard-step [stepTitle]="'Contact Information'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Contact')">
+        <!-- <aw-wizard-step [stepTitle]="'Contact Information'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Contact')">
         <app-customer-company-contact-information *ngIf="isContact == true" [custCompanyId] ="this.CustCompanyId"> </app-customer-company-contact-information>
-        </aw-wizard-step>
+        </aw-wizard-step> -->
 
         <aw-wizard-step [stepTitle]="'Financial Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Financial')">
-         <app-customer-company-detail *ngIf="isFinancial == true"> </app-customer-company-detail>
+         <app-cust-bank-acc-section-findata  *ngIf="isFinancial == true" [CustId] ="this.IdCust"> </app-cust-bank-acc-section-findata>
         </aw-wizard-step>
 
         <aw-wizard-step [stepTitle]="'Legal Data'"[navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Legal')">

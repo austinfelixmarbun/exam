@@ -12,8 +12,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./customer-personal-main-info.component.scss']
 })
 export class CustomerPersonalMainInfoComponent implements OnInit {
-
-
 state: any;
   CustomerPersonalForm = this.fb.group({
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -50,13 +48,11 @@ state: any;
   IsVip :any;
   IsAffiliateWithMf : any;
   VipNotes: any;
-
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
   this.getUrl = AdInsConstant.GetListActiveRefMaster; 
   }
 
   ngOnInit() {
-    
     var refMasterObj = {
       RefMasterTypeCode: "GENDER",
       RowVersion: ""
@@ -73,7 +69,6 @@ state: any;
       RefMasterTypeCode: "ID_TYPE",
       RowVersion: ""
     }
-
     this.http.post(this.getUrl, refMasterObj1).subscribe(
       (response) => {
         this.tempIdType = response["ReturnObject"];
@@ -87,7 +82,6 @@ state: any;
         }
       }
     );
-    console.log( "awdawdwad");
     var refMasterObj2 = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "PERSONAL",
@@ -98,17 +92,13 @@ state: any;
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
-          
           CustModel: this.tempCustModel[0].Key
-
         });
       }
     );
   }
-
   checkState(){
     if(this.CustomerPersonalForm.controls.IsVip.value === true){
-     
       this.CustomerPersonalForm.controls.VipNotes.disable();
     }else{
       this.CustomerPersonalForm.controls.VipNotes.enable();
@@ -128,8 +118,7 @@ state: any;
     this.IsVip = this.CustomerPersonalForm.controls["IsVip"].value;
     this.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value;
     this.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
-    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode,   "CustModel" : this.CustModel, "BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName,"IsVip"  : this.IsVip,"IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes  } });
- 
+    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"],{ queryParams: { "CustName": this.CustName, "Gender" : this.Gender, "MrIdTypeCode" : this.MrIdTypeCode, "CustModel" : this.CustModel, "BirthPlace" : this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo,"IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName,"IsVip"  : this.IsVip,"IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes  } });
   }
   onOptionsSelected(event){  
     if(event.target.value == this.KTP){

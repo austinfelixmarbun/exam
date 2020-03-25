@@ -3,8 +3,7 @@
     <div class="card-body">
       <div class="px-3">
         <div class="addEdit">
-          <h4 class="form-section card-title" translate> Customer Personal
-          </h4>
+          <h4 class="form-section card-title" translate> Customer Personal</h4>
           <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
           </lib-ucSubsection>
           <form class="form form-horizontal" [formGroup]="CustomerPersonalForm"
@@ -122,7 +121,7 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" translate>
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../Paging']" translate>
                <i class="ft-x"></i> Cancel
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
@@ -134,4 +133,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> 

@@ -103,8 +103,8 @@
 
         <aw-wizard-step [stepTitle]="'Customer Group'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Group')"> 
         <app-customer-personal-detail *ngIf="isGroup == true" > </app-customer-personal-detail>
-         
-        <!-- <aw-wizard-step [stepTitle]="'Contact Person'"
+      </aw-wizard-step>
+          <!-- <aw-wizard-step [stepTitle]="'Contact Person'"
           [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
         <app-customer-personal-detail> </app-customer-personal-detail>
         </aw-wizard-step>

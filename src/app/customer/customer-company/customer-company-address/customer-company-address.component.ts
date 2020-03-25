@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ActivatedRoute } from '@angular/router';
-import { environment } from 'environments/environment';
+import { ActivatedRoute } from '@angular/router'; 
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { WizardComponent } from 'angular-archwizard';
  
 @Component({
   selector: 'app-customer-company-address',
@@ -37,12 +37,9 @@ export class CustomerCompanyAddressComponent implements OnInit {
   listCustAddr: any;
   getCustById: any;
   getListCustAddr: any;
-
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListCustAddr = AdInsConstant.GetListCustAddr;
-
-
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
          this.IdCust = params["IdCust"];
@@ -60,7 +57,6 @@ export class CustomerCompanyAddressComponent implements OnInit {
       (response) => {
           this.custObj = response;
       });
-
       this.custAddrObj = new CustAddrObj();
       this.custAddrObj.CustId = this.IdCust;
       this.custAddrObj.MrCustAddrTypeCode = "-";
@@ -73,5 +69,8 @@ export class CustomerCompanyAddressComponent implements OnInit {
             console.log("aaa")
             console.log(this.listCustAddr)
         });
+  }
+  next(){
+    this.wizard.goToNextStep();
   }
 }
