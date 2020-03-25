@@ -9,8 +9,14 @@ import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/cus
 import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
 import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
-import { CustomerViewPersonalComponent } from './customer-view/customer-view-personal/customer-view-personal.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
+import { CustomerPersonalAddressComponent } from './customer-personal/customer-personal-address/customer-personal-address.component';
+import { CustomerPersonalAddressAddComponent } from './customer-personal/customer-personal-address/customer-personal-address-add/customer-personal-address-add.component';
+import { CustomerCompanyAddressComponent } from './customer-company/customer-company-address/customer-company-address.component';
+import { CustomerCompanyAddressAddComponent } from './customer-company/customer-company-address/customer-company-address-add/customer-company-address-add.component';
+import { CustomerPersonalJobDataComponent } from './customer-personal/customer-personal-job-data/customer-personal-job-data.component';
+import { JobDataNonProfessionalComponent } from './customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional.component';
+import { CustomerViewComponent } from './customer-view/customer-view.component';
 import { CustomerCompanyPageComponent } from './customer-company/customer-company-page/customer-company-page.component';
 
 const routes: Routes = [
@@ -82,9 +88,51 @@ const routes: Routes = [
       },
       {
         path: 'CustomerView/Page',
-        component: CustomerViewPersonalComponent,
+        component: CustomerViewComponent,
         data: {
-          title: 'Customer View Personal Component'
+          title: 'Customer View Component'
+        }
+      },
+      {
+        path: 'CustomerPersonal/Address',
+        component: CustomerPersonalAddressComponent,
+        data: {
+          title: 'Customer Personal Address'
+        }
+      },
+      {
+        path: 'CustomerPersonal/Address/Form',
+        component: CustomerPersonalAddressAddComponent,
+        data: {
+          title: 'Customer Personal Address Add Edit'
+        }
+      },
+      {
+        path: 'CustomerCompany/Address',
+        component: CustomerCompanyAddressComponent,
+        data: {
+          title: 'Customer Company Address'
+        }
+      },
+      {
+        path: 'CustomerCompany/Address/Form',
+        component: CustomerCompanyAddressAddComponent,
+        data: {
+          title: 'Customer Company Address Add Edit'
+        }
+      },
+      {
+        path: 'CustomerPersonal/JobData',
+        component: CustomerPersonalJobDataComponent,
+        data: {
+          title: 'Customer Personal Job Data'
+        }
+      },
+      {
+        path: 'CustomerPersonal/JobData/NonPro',
+        component: JobDataNonProfessionalComponent,
+        data: {
+          title: 'Customer Personal Job Data'
         }
       },
       {
@@ -93,8 +141,7 @@ const routes: Routes = [
         data: {
           title: 'Customer Company Page'
         }
-      },
-    
+      },   
 
     ]
   }

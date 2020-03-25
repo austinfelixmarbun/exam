@@ -1,5 +1,4 @@
 import { InputLookupObj } from "./InputLookupObj.Model";
-
  
 export class InputFieldObj{
     addr: any;

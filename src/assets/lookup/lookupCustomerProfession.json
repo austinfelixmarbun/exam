@@ -1,5 +1,5 @@
 {
-    "title": "Lookup ",
+    "title": "Profession Lookup ",
     "component": [
       {
         "type": "textbox",
@@ -65,10 +65,7 @@
         ]
       }
     ],
-  
     "propertyId": "ProfessionName",
     "propertyName": "ProfessionName"
-  
-  
   }
   

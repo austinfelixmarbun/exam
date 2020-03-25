@@ -1,13 +1,13 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-  
+
     <!-- <button type="submit" class="addButton" translate>
       <i class="fa fa-check-square-o"></i> Save
     </button>
     <button type="button" class="backButton" [routerLink]="['../MainInfo']" translate>
        Cancel
     </button> -->
-   
+
   </span>
 </div>
 <div class="col-md-12">
@@ -84,21 +84,29 @@
         </div>
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [disableNavigationBar]=true [awNavigationMode]
           navigateBackward="allow" navigateForward="allow">
-       
-          <aw-wizard-step [stepTitle]="'Customer Detail'" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Detail')" >
+
+          <aw-wizard-step [stepTitle]="'Customer Detail'"
+            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Detail')">
             <app-customer-personal-detail *ngIf="isDetail == true"> </app-customer-personal-detail>
           </aw-wizard-step>
 
-          <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Address')">
-          <app-customer-contact-person   [inputValue] ="this.IdCust" *ngIf="isAddress == true" > </app-customer-contact-person>
-        </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"
+            (stepEnter)="EnterTab('Address')">
+            <app-customer-contact-person [inputValue]="this.IdCust" *ngIf="isAddress == true">
+            </app-customer-contact-person>
+          </aw-wizard-step>
 
-        <aw-wizard-step [stepTitle]="'Contact Person'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Contact')">
-        <app-customer-personal-detail *ngIf="isContact == true" > </app-customer-personal-detail>
-        </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Address'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+            <app-customer-personal-address> </app-customer-personal-address>
+          </aw-wizard-step>
 
         <aw-wizard-step [stepTitle]="'Customer Group'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Group')"> 
         <app-customer-personal-detail *ngIf="isGroup == true" > </app-customer-personal-detail>
+         
+        <!-- <aw-wizard-step [stepTitle]="'Contact Person'"
+          [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+        <app-customer-personal-detail> </app-customer-personal-detail>
         </aw-wizard-step>
 
         <aw-wizard-step [stepTitle]="'Job Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Job')">
@@ -111,7 +119,7 @@
 
         <aw-wizard-step [stepTitle]="'Other Attribute'"[navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Other')">
          <app-customer-personal-detail *ngIf="isOther == true"> </app-customer-personal-detail>
-        </aw-wizard-step>
+        </aw-wizard-step>-->
 
         </aw-wizard>
       </div>

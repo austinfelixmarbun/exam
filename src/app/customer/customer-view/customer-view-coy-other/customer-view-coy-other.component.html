@@ -1,0 +1,14 @@
+<lib-ucSubsection [id]="'OthAttr'" [title]="'Other Attribute'" [panel]="'OthAttrId'">
+</lib-ucSubsection>
+<div id="OthAttrId">
+  <table>
+    <tbody>
+      <ng-container *ngFor="let item of responseCustAttr">
+        <tr>
+          <td class="text-left">{{item.AttrName}}</td>
+          <td class="text-center">{{item.AttrValue}}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

@@ -50,7 +50,6 @@ export class AddAssetSchemeComponent implements OnInit {
   checkboxAll: any = false;
   getAssetSchmHByIdUrl = AdInsConstant.GetAssetSchmHById;
   getAssetTypeByIdUrl = AdInsConstant.GetAssetTypeById;
-  // addListAssetSchmDUrl = AdInsConstant.AddListAssetSchmD;
   addListAssetSchmDUrl = AdInsConstant.AddRangeAssetSchmD;
 
   AssetSchmHId: any;

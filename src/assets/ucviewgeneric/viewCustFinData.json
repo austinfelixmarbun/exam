@@ -1,0 +1,47 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "FinDataId",
+        "subSectionTitle": "Financial Data",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Monthly Income Ammount",
+            "property": "MthIncAmt"
+          },
+          {
+            "type": "text",
+            "label": "Source Of Other Income",
+            "property": "SrcOthInc"
+          },
+          {
+            "type": "text",
+            "label": "Monthly Expense Ammount",
+            "property": "MthExpAmt"
+          },
+          {
+            "type": "text",
+            "label": "Spouse Monthly Income Ammount",
+            "property": "SpsMthIncAmt"
+          },
+          {
+            "type": "text",
+            "label": "Monthly Installment Ammount",
+            "property": "MthInsAmt"
+          },
+          {
+            "type": "boolean",
+            "label": "Join Income",
+            "property": "IsJoinInc"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT  CPFD.MONTHLY_INCOME_AMT AS MthIncAmt, CPFD.MONTHLY_EXPENSE_AMT AS MthExpAmt, CPFD.MONTHLY_INSTALLMENT_AMT AS MthInsAmt,RMINC.DESCR AS SrcOthInc, CPFD.SPOUSE_MONTHLY_INCOME_AMT AS SpsMthIncAmt, CPFD.IS_JOIN_INCOME AS IsJoinInc",
+          "from": "FROM dbo.CUST_PERSONAL_FIN_DATA CPFD WITH(NOLOCK) JOIN dbo.CUST_PERSONAL CP WITH(NOLOCK) ON CP.CUST_PERSONAL_ID = CPFD.CUST_PERSONAL_ID LEFT JOIN dbo.REF_MASTER RMINC WITH(NOLOCK) ON RMINC.REF_MASTER_TYPE_CODE = 'SOURCE_INCOME' AND RMINC.MASTER_CODE = CPFD.MR_SOURCE_OF_INCOME_CODE",
+          "where": "WHERE CP.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

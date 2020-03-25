@@ -24,4 +24,7 @@ export class CustAddrObj{
     FaxArea : any;
     Fax : any;
     Notes : any;
+    MrHouseOwnershipCode: any;
+    RowVersion: any;
+    constructor(){this.CustAddrId = 0, this.RowVersion = ""}
 }

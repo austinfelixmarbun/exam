@@ -2,45 +2,71 @@
     "title": "",
     "subsection": [
       {
-        "subSectionId": "JobDataId",
-        "subSectionTitle": "Job Data",
+        "subSectionId": "AddressId",
+        "subSectionTitle": "Address",
         "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
-            "label": "Customer Model",
-            "property": "MrCustModelCode"
+            "label": "Address",
+            "property": "Addr"
           },
           {
             "type": "text",
-            "label": "Profession Name",
-            "property": "ProfessionName"
+            "label": "Phone1",
+            "property": "Phone1"
           },
           {
             "type": "text",
-            "label": "Professional No",
-            "property": "ProfessionalNo"
+            "label": "RT / RW",
+            "property": "RtRw"
           },
           {
             "type": "text",
-            "label": "Job Title Name",
-            "property": "JobTitleName"
+            "label": "Phone2",
+            "property": "Phone2"
+          },
+
+          {
+            "type": "text",
+            "label": "Zip Code",
+            "property": "ZipCode"
           },
           {
             "type": "text",
-            "label": "Industry Type Name",
-            "property": "IndustryTypeName"
+            "label": "Phone3",
+            "property": "Phone3"
           },
           {
             "type": "text",
-            "label": "Establishment Date",
-            "property": "EmploymentEstablishmentDt"
+            "label": "Kelurahan",
+            "property": "Kelurahan"
+          },
+          {
+            "type": "text",
+            "label": "Fax",
+            "property": "Fax"
+          },
+          {
+            "type": "text",
+            "label": "Kecamatan",
+            "property": "Kecamatan"
+          },
+          {
+            "type": "text",
+            "label": "Building Ownership",
+            "property": "BuildingOwn"
+          },
+          {
+            "type": "text",
+            "label": "City",
+            "property": "City"
           }
         ],
         "querystring": {
-          "select": "SELECT CU.MR_CUST_MODEL_CODE AS MrCustModelCode , RP.PROFESSION_NAME AS ProfessionName, CPJD.PROFESSIONAL_NO AS ProfessionalNo ,CPJD.JOB_TITLE_NAME AS JobTitleName, RIT.INDUSTRY_TYPE_NAME AS IndustryTypeName, CPJD.EMPLOYMENT_ESTABLISHMENT_DT AS EmploymentEstablishmentDt",
-          "from": "FROM dbo.CUST CU WITH(NOLOCK) JOIN dbo.CUST_PERSONAL_JOB_DATA CPJD WITH(NOLOCK) ON CPJD.CUST_ID = CU.CUST_ID JOIN dbo.REF_INDUSTRY_TYPE RIT WITH(NOLOCK) ON RIT.REF_INDUSTRY_TYPE_ID = CPJD.REF_INDUSTRY_TYPE_ID JOIN dbo.REF_PROFESSION RP WITH(NOLOCK) ON RP.REF_PROFESSION_ID = CPJD.REF_PROFESSION_ID LEFT JOIN dbo.REF_MASTER AS RM WITH(NOLOCK) ON CU.MR_CUST_MODEL_CODE = RM.MASTER_CODE AND 'CUST_MODEL' = RM.REF_MASTER_TYPE_CODE",
-          "where": "WHERE CU.CUST_ID = {0}"
+          "select": "SELECT RMBOW.DESCR AS BuildingOwn, CA.FULL_ADDR AS Addr, CONCAT(CA.AREA_CODE_4, '/', CA.AREA_CODE_3) AS RtRw, CA.ZIPCODE AS ZipCode, CA.AREA_CODE_2 AS Kelurahan, CA.AREA_CODE_1 AS Kecamatan, CA.CITY AS City, CONCAT(CA.PHN_AREA_1,' ',CA.PHN_1, '-',CA.PHN_EXT_1) AS Phone1, CONCAT(CA.PHN_AREA_2,' ',CA.PHN_2, '-',CA.PHN_EXT_2) AS Phone2, CONCAT(CA.PHN_AREA_3,' ',CA.PHN_3, '-',CA.PHN_EXT_3) AS Phone3,CONCAT(CA.FAX_AREA,'-', CA.FAX) AS Fax",
+          "from": "FROM dbo.CUST_ADDR CA WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER RMBOW WITH(NOLOCK) ON RMBOW.REF_MASTER_TYPE_CODE = 'BUILDING_OWNERSHIP' AND RMBOW.MASTER_CODE = CA.MR_BUILDING_OWNERSHIP_CODE",
+          "where": "WHERE MR_CUST_ADDR_TYPE_CODE = 'JOB' AND CUST_ID={0}"
         }
       }
     ]
