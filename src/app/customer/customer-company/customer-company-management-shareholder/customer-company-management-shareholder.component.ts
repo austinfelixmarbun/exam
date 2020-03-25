@@ -20,7 +20,6 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
   }
   terimaValue(ev : any){
     console.log(ev);
-    console.log("cobadong");
     this.mode = ev.mode; 
     this.CustCompanyMgmntShrholderId =  ev.CustCompanyMgmntShrholderId;
   }

@@ -159,8 +159,9 @@ export class CustomerCompanyPageComponent implements OnInit {
     }
   }
   terimaValue(ev: any) {
-    console.log("aaaas");
+  
     console.log(ev);
     this.CustCompanyId = ev.CustCompanyId;
   }
 }
+  

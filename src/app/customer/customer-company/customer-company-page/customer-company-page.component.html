@@ -47,16 +47,16 @@
           <app-customer-company-detail  *ngIf="isAddress == true" > </app-customer-company-detail>
         </aw-wizard-step> -->
 
-        <aw-wizard-step [stepTitle]="'Management /  Shareholder'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Management')">
+        <!-- <aw-wizard-step [stepTitle]="'Management /  Shareholder'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Management')">
         <app-customer-company-management-shareholder *ngIf="isManagement == true" [inputValue] ="this.IdCust" [custCompanyId] ="this.CustCompanyId" > </app-customer-company-management-shareholder>
-        </aw-wizard-step>
+        </aw-wizard-step> -->
     <!-- 
         <aw-wizard-step [stepTitle]="'Customer Group'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Group')"> 
      <app-customer-company-detail *ngIf="isGroup == true" > </app-customer-company-detail>
         </aw-wizard-step> -->
 
         <aw-wizard-step [stepTitle]="'Contact Information'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Contact')">
-        <app-customer-company-contact-information *ngIf="isContact == true" > </app-customer-company-contact-information>
+        <app-customer-company-contact-information *ngIf="isContact == true" [custCompanyId] ="this.CustCompanyId"> </app-customer-company-contact-information>
         </aw-wizard-step>
 
         <aw-wizard-step [stepTitle]="'Financial Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Financial')">

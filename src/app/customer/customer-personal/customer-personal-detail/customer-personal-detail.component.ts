@@ -34,9 +34,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     FamilyCardNo: ['', Validators.pattern("^[0-9]+$")],
     MrEducationCode: ['',],
     MrReligionCode: ['',],
-    IsRestInPeace: [false],
-    IsVip: [true],
-    VipNotes: ['',],
+    IsRestInPeace: [false],  
     MobilePhnNo1: ['', Validators.required],
     MobilePhnNo2: ['',],
     Email1: ['',],
@@ -228,8 +226,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
           NoOfDependents: this.tempCustPersonalObj.NoOfDependents,
           NoOfResidence: this.tempCustPersonalObj.NoOfResidence,
           FamilyCardNo: this.tempCustPersonalObj.FamilyCardNo,
-          IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
-          IsVip: this.tempCustPersonalObj.IsVip,
+          IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace, 
           MobilePhnNo1: this.tempCustPersonalObj.MobilePhnNo1,
           MobilePhnNo2: this.tempCustPersonalObj.MobilePhnNo2,
           Email1: this.tempCustPersonalObj.Email1,
@@ -259,9 +256,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.FamilyCardNo = this.CustomerDetailForm.controls["FamilyCardNo"].value;
     this.custPersonalObj.MrEducationCode = this.CustomerDetailForm.controls["MrEducationCode"].value;
     this.custPersonalObj.MrReligionCode = this.CustomerDetailForm.controls["MrReligionCode"].value;
-    this.custPersonalObj.IsRestInPeace = this.CustomerDetailForm.controls["IsRestInPeace"].value;
-    this.custPersonalObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
-    this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
+    this.custPersonalObj.IsRestInPeace = this.CustomerDetailForm.controls["IsRestInPeace"].value;  
     this.custPersonalObj.MobilePhnNo1 = this.CustomerDetailForm.controls["MobilePhnNo1"].value;
     this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
     this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
