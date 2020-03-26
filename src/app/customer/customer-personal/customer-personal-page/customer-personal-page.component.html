@@ -1,15 +1,3 @@
-<div class="ucSearch-Button-Right">
-  <span class="mr-1">
-
-    <!-- <button type="submit" class="addButton" translate>
-      <i class="fa fa-check-square-o"></i> Save
-    </button>
-    <button type="button" class="backButton" [routerLink]="['../MainInfo']" translate>
-       Cancel
-    </button> -->
-
-  </span>
-</div>
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
@@ -84,41 +72,40 @@
         </div>
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [disableNavigationBar]=true [awNavigationMode]
           navigateBackward="allow" navigateForward="allow">
-
           <aw-wizard-step [stepTitle]="'Customer Detail'"
             [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Detail')">
-            <app-customer-personal-detail *ngIf="isDetail == true" (outputValue)="terimaValue($event)"> </app-customer-personal-detail>
+            <app-customer-personal-detail *ngIf="isDetail == true" (outputValue)="terimaValue($event)">
+            </app-customer-personal-detail>
           </aw-wizard-step>
-
           <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"
             (stepEnter)="EnterTab('Address')">
-            <app-customer-personal-address [CustId] ="this.IdCust" *ngIf="isAddress == true">
+            <app-customer-personal-address [CustId]="this.IdCust" *ngIf="isAddress == true">
             </app-customer-personal-address>
           </aw-wizard-step>
-
-<!--     
-
           <aw-wizard-step [stepTitle]="'Contact Person'"
-          [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-          <app-customer-contact-person [inputValue]="this.IdCust" *ngIf="isAddress == true">
-          </app-customer-contact-person>
-        </aw-wizard-step>
-
-        <aw-wizard-step [stepTitle]="'Customer Group'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Group')"> 
-          <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="PERSONAL" [CustId]="this.IdCust"> </app-cust-group-tab>
-        </aw-wizard-step> -->
-        <!-- <aw-wizard-step [stepTitle]="'Job Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Job')">
-        <app-customer-personal-job-data *ngIf="isJob == true" > </app-customer-personal-job-datal>
-        </aw-wizard-step> -->
-
-        <aw-wizard-step [stepTitle]="'Financial Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Financial')">
-          <app-cust-fin-data-tab  *ngIf="isFinancial == true" [CustId] ="this.IdCust"[CustModeId] ="this.CustPersonalId" [MrCustTypeCode]="'COMPANY'"> </app-cust-fin-data-tab>
-        </aw-wizard-step>
-
-        <aw-wizard-step [stepTitle]="'Other Attribute'"[navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Other')">
-         <app-customer-personal-detail *ngIf="isOther == true"> </app-customer-personal-detail>
-        </aw-wizard-step>
-
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+            <app-customer-contact-person [inputValue]="this.IdCust" *ngIf="isAddress == true">
+            </app-customer-contact-person>
+          </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Customer Group'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Group')">
+            <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="PERSONAL" [CustId]="this.IdCust">
+            </app-cust-group-tab>
+          </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Job Data'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Job')">
+            <app-customer-personal-job-data *ngIf="isJob == true"> </app-customer-personal-job-data>
+          </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Financial Data'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Financial')">
+            <app-cust-fin-data-tab *ngIf="isFinancial == true" [CustId]="this.IdCust" [CustModeId]="this.CustPersonalId"
+              [MrCustTypeCode]="'PERSONAL'"> </app-cust-fin-data-tab>
+          </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Other Attribute'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Other')">
+            other
+            <!-- <app-customer-personal-detail *ngIf="isOther == true"> </app-customer-personal-detail> -->
+          </aw-wizard-step>
         </aw-wizard>
       </div>
     </div>

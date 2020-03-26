@@ -5,11 +5,13 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-customer-personal-page',
   templateUrl: './customer-personal-page.component.html',
-  styleUrls: ['./customer-personal-page.component.scss']
+  styleUrls: ['./customer-personal-page.component.scss'],
+  providers: [NGXToastrService],
 })
 export class CustomerPersonalPageComponent implements OnInit {
 
@@ -47,12 +49,10 @@ export class CustomerPersonalPageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
-
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
     });
-
   }
 
   ngOnInit() {
@@ -60,18 +60,15 @@ export class CustomerPersonalPageComponent implements OnInit {
     this.custObj.CustId = this.IdCust;
     this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
       (response) => {
-
         this.tempCustObj = response;
         var refMasterObj1 = {
           MasterCode: this.tempCustObj.MrCustModelCode
         }
-
         this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObj1).subscribe(
           (response) => {
             this.tempMrCustModelCode = response;
           }
         );
-
         var refMasterObj2 = {
           MasterCode: this.tempCustObj.MrIdTypeCode
         }
