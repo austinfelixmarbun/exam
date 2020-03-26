@@ -73,14 +73,22 @@
         }
     ],
     "querystring": {
-        "select": "SELECT c.CUST_NO AS CustNo, c.CUST_NAME AS CustName, c.MR_CUST_TYPE_CODE as MrCustTypeCode, c.ID_NO as IdNo, CUST_ID as CustId",
+        "select": "SELECT c.CUST_NO AS CustNo, c.CUST_NAME AS CustName, c.MR_CUST_TYPE_CODE as MrCustTypeCode, c.ID_NO as IdNo, c.CUST_ID as CustId",
         "from": "FROM dbo.CUST c WITH(NOLOCK) join dbo.REF_MASTER rm WITH(NOLOCK) on c.MR_CUST_TYPE_CODE = rm.MASTER_CODE AND rm.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
     },
     "bodyList": [
-        {
-            "type": "text",
-            "position": "left",
-            "property": "CustNo"
+       {
+            "type" : "link", 
+            "position" : "left", 
+            "property" : "CustNo",
+            "path": "../CustomerView/Page",
+            "target": "_blank",
+            "param": [
+                {
+                    "type" : "CustId", 
+                    "property" : "CustId" 
+                }
+            ]
         },
         {
             "type": "text",
