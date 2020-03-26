@@ -78,8 +78,8 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       { path: '/Verification/QuestionAnswerPaging', title: 'Question Answer', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Verification/QuestionSchemePaging', title: 'Question Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Verification/QuestionGroupPaging', title: 'Question Group', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Verification/QuestionGroupMemberPaging', title: 'Question Group Member', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/Verification/QuestionGroupPaging', title: 'Question Group', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      
     ]
   },
   
