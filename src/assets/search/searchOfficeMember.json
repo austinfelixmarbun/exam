@@ -26,7 +26,7 @@
         "label": "Area Name",
         "placeholder": "Area Name",
         "isFromURL": true,
-        "url": "http://localhost:5000/RefOfficeArea/GetListKvpActiveRefOfficeArea",
+        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefOfficeArea/GetListKvpActiveRefOfficeArea",
         "itemsUrl": [],
         "items": [],
         "isSelectOne": false

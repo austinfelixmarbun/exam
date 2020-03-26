@@ -130,7 +130,7 @@ export class ListOfficeMemberComponent implements OnInit {
   }
 
   DoneForm(){
-    this.http.post("http://localhost:5000/Product/SubmitProduct", {ProdHId : this.ProdHId}).subscribe(
+    this.http.post("http://r3app-server.ad-ins.com/FOUNDATION_R3/Product/SubmitProduct", {ProdHId : this.ProdHId}).subscribe(
       (response) => {
         console.log(response);
         
