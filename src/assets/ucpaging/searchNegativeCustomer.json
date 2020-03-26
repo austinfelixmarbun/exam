@@ -79,8 +79,8 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT A.CUST_NO, A.CUST_NAME, D.DESCR, A.ID_NO, B.DESCR, C.DESCR, A.IS_ACTIVE, A.NEGATIVE_CUST_ID",
-        "from": "FROM dbo.NEGATIVE_CUST AS A WITH(NOLOCK) INNER JOIN dbo.REF_MASTER AS B WITH(NOLOCK) ON A.MR_NEG_CUST_SOURCE_CODE = B.MASTER_CODE AND B.REF_MASTER_TYPE_CODE = 'NEG_CUST_SOURCE' INNER JOIN dbo.REF_MASTER AS C WITH(NOLOCK) ON A.MR_NEG_CUST_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE = 'NEG_CUST_TYPE' INNER JOIN dbo.REF_MASTER AS D WITH(NOLOCK) ON A.MR_CUST_TYPE_CODE = D.MASTER_CODE AND D.REF_MASTER_TYPE_ID = 'CUST_TYPE'"
+        "select": "SELECT A.CUST_NO AS custNo, A.CUST_NAME AS custName, D.DESCR AS mrCustTypeCode, A.ID_NO AS idNo, B.DESCR AS mrNegCustSource, C.DESCR AS mrNegCustType, A.IS_ACTIVE AS isActive, A.NEGATIVE_CUST_ID AS negativeCustId",
+        "from": "FROM dbo.NEGATIVE_CUST AS A WITH(NOLOCK) INNER JOIN dbo.REF_MASTER AS B WITH(NOLOCK) ON A.MR_NEG_CUST_SOURCE_CODE = B.MASTER_CODE AND B.REF_MASTER_TYPE_CODE = 'NEG_CUST_SOURCE' INNER JOIN dbo.REF_MASTER AS C WITH(NOLOCK) ON A.MR_NEG_CUST_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE = 'NEG_CUST_TYPE' INNER JOIN dbo.REF_MASTER AS D WITH(NOLOCK) ON A.MR_CUST_TYPE_CODE = D.MASTER_CODE AND D.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
     },
     "headerList" : [ 
         {
@@ -135,7 +135,7 @@
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "A.CUST_NO"
+            "property" : "custNo"
         },
         {
             "type" : "link", 
@@ -146,34 +146,34 @@
             "param": [
                 {
                     "type" : "negativeCustId", 
-                    "property" : "A.NEGATIVE_CUST_ID" 
+                    "property" : "negativeCustId" 
                 }
             ]
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "D.DESCR" 
+            "property" : "mrCustTypeCode" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "A.ID_NO" 
+            "property" : "idNo" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "B.DESCR" 
+            "property" : "mrNegCustSource" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "C.DESCR" 
+            "property" : "mrNegCustType" 
         },
         {
             "type" : "boolean", 
             "position" : "center", 
-            "property" : "A.IS_ACTIVE" 
+            "property" : "isActive" 
         },
         {
             "type" : "action", 
@@ -185,7 +185,7 @@
                     "param" : [ 
                         {
                             "type" : "negativeCustId", 
-                            "property" : "A.NEGATIVE_CUST_ID" 
+                            "property" : "negativeCustId" 
                         },
                         {
                             "type": "param",
