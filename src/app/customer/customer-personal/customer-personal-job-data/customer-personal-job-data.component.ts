@@ -61,14 +61,15 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.CustModel = "SME"
-
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
     this.http.post(this.getCustById, this.custObj).subscribe(
       (response) => {
           this.custObj = response;
+          this.CustModel = this.custObj.MrCustModelCode;
+      },
+      (error) => {
+        console.log(error);
       });
 
     this.jobType = new RefMasterObj();
@@ -76,8 +77,6 @@ export class CustomerPersonalJobDataComponent implements OnInit {
     this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
       (response) => {
           this.listJobType = response['ReturnObject'];
-          console.log("aaaa");
-          console.log(this.listJobType);
           this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
       });
   }
