@@ -1,6 +1,25 @@
 <div class="card-body">
   <div class="px-3">
-    <form class="form form-horizontal" [formGroup]="FormProdComp" #enjiForm="ngForm" (ngSubmit)="FormProdComp.valid && SubmitForm()">
+    <!-- Look Up Copy Product -->
+   
+    <form class="form form-horizontal" [formGroup]="FormProdComp" #enjiForm="ngForm"
+      (ngSubmit)="FormProdComp.valid && SubmitForm()">
+     
+      <div class="col-md-12">
+        <div class="form-group row">
+          <label class="col-md-4  adInsLabel">Copy Product</label>
+          <div class="col-md-4">
+            <lib-uclookupgeneric width-75-per [lookupInput]="inputLookUpObj" [parentForm]='FormProdComp'
+              [enjiForm]="enjiForm" [identifier]="'indentifierTemp'" >
+            </lib-uclookupgeneric>
+          </div>
+          <div class="col-md-4">
+            <button type="button" (click)="reload()" class="btn btn-raised btn-primary margin-r-5">
+              <i class="fa fa-check-square-o"></i> Copy
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="col-md-12" formArrayName="groups"
         *ngFor="let type of FormProdComp.controls['groups'].controls; let j = index">
         <div class="form-group row" [formGroupName]="j">
@@ -37,6 +56,7 @@
         <button type="submit" (click)="ClickSave('next')" class="btn btn-raised btn-primary">
           <i class="fa fa-check-square-o"></i> Next
         </button>
+        
       </div>
     </form>
   </div>

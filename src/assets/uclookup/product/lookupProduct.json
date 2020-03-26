@@ -18,9 +18,8 @@
       }
     ],
     "querystring": {
-      "select": "SELECT P.PROD_CODE AS ProdCode, P.PROD_NAME AS ProdName, MAX(PH.PROD_VERSION), P.PROD_ID AS ProdId",
-      "from": "FROM dbo.PROD P WITH(NOLOCK) JOIN dbo.PROD_H PH WITH(NOLOCK) ON P.PROD_ID = PH.PROD_ID",
-      "groupby": "GROUP BY P.PROD_CODE, P.PROD_NAME, P.PROD_ID"
+      "select": "SELECT P.PROD_CODE AS ProdCode, P.PROD_NAME AS ProdName, P.PROD_ID AS ProdId",
+      "from": "FROM dbo.PROD P WITH(NOLOCK)"
     },
     "headerList": [
         {

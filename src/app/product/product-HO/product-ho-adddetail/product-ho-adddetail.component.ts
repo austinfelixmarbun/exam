@@ -42,6 +42,7 @@ export class ProductHoAdddetailComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       // console.log("Params: ");
       // console.log(params);
+      this.objPassing["ProdId"] = params["ProdId"];
       this.objPassing["param"] = params["ProdHId"];
       this.objPassing["mode"] = params["mode"];
       this.objPassing["url"] = AdInsConstant.GetProductDetailComponentInfo;

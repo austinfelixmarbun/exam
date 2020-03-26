@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -35,6 +35,7 @@ export class ProductHOAddComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: NGXToastrService
   ) {
+    
     this.route.queryParams.subscribe(params => {
       this.param = params["ProdHId"];
       this.mode = params["mode"];
@@ -155,7 +156,7 @@ export class ProductHOAddComponent implements OnInit {
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
-              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": this.ResultResponse.ProdHId, "mode": this.mode } });
+              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": this.ResultResponse.ProdHId, "ProdId" : this.ResultResponse.ProdId, "mode": this.mode } });
               console.log(response);
             },
             (error) => {
@@ -171,7 +172,7 @@ export class ProductHOAddComponent implements OnInit {
             (response) => {
               var TempResp = response;
               this.toastr.successMessage(response["message"]);
-              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": TempResp["DraftProdHId"], "mode": this.mode } });
+              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": TempResp["DraftProdHId"],"ProdId" : TempResp["ProdId"], "mode": this.mode } });
               console.log(response);
             },
             (error) => {
