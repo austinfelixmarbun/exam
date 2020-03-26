@@ -42,7 +42,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     VerfQuestionText: ['', Validators.required],
     RefVerfAnswerTypeId: ['', Validators.required],
     VerfAnswer: ['', Validators.required],
-    IsActive: [false],
+    IsActive: [true],
     RowVersion: ['']
   })
 
@@ -85,7 +85,19 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
 
   AnswerTypeChanged(selectedvalue)
   {
-    var refAnswerObj = { RefVerfAnswerTypeId: selectedvalue }
+    var refAnswerObj = { RefVerfAnswerTypeId: selectedvalue };
+    if(selectedvalue!="DDL")
+    {
+      this.QuestionAnswerForm.controls.VerfAnswer.clearValidators();
+      
+    }
+    else
+    {
+      this.QuestionAnswerForm.controls.VerfAnswer.setValidators([Validators.required]);
+    }
+    this.QuestionAnswerForm.controls.VerfAnswer.updateValueAndValidity();
+    
+    
     this.http.post(AdInsConstant.GetRefVerfAnswerTypeById, refAnswerObj).subscribe(
       (respond) => {
         this.answerTypeValue = respond["VerfAnswerTypeCode"];
