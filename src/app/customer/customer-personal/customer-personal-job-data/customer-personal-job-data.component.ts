@@ -54,6 +54,9 @@ export class CustomerPersonalJobDataComponent implements OnInit {
        if (params["IdCustPersonal"] != null) {
         this.IdCustPersonal = params["IdCustPersonal"];
       }
+      if (params["CustModel"] != null) {
+        this.CustModel = params["CustModel"];
+      }
      });
   }
 
@@ -63,6 +66,10 @@ export class CustomerPersonalJobDataComponent implements OnInit {
     this.http.post(this.getCustById, this.custObj).subscribe(
       (response) => {
           this.custObj = response;
+          this.CustModel = this.custObj.MrCustModelCode;
+      },
+      (error) => {
+        console.log(error);
       });
 
     this.jobType = new RefMasterObj();
@@ -70,9 +77,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
     this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
       (response) => {
           this.listJobType = response['ReturnObject'];
-          console.log("aaaa");
-          console.log(this.listJobType);
-          this.CustJobDataForm.patchValue({ JobDataType: response['ReturnObject'][0]['Key'] });
+          this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
       });
   }
 }

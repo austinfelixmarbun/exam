@@ -411,7 +411,7 @@ export class CustomerContactAddComponent implements OnInit {
     );
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.tempCustId;
-    this.custAddrObj.MrCustAddrTypeCode = RefMasterConstant.LegalAddr;
+    //this.custAddrObj.MrCustAddrTypeCode = RefMasterConstant.LegalAddr;
 
     this.http.post(AdInsConstant.GetCustAddrLegalAddrByCustId, this.custAddrObj).subscribe(
       (response) => {
