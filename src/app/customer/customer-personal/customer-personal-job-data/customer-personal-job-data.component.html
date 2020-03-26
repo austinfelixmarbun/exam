@@ -1,0 +1,33 @@
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3">
+          <div class="customerData">
+            <form class="form form-horizontal" [formGroup]="CustJobDataForm" (ngSubmit)="CustJobDataForm.valid && SaveForm()"
+                #enjiForm="ngForm">
+              <div class="form-body">
+                <lib-ucSubsection [id]="'custAddrId'" [title]="'Job Data'" [panel]="'jobData'">
+                </lib-ucSubsection>
+                <div id="jobData">
+                    <div class="form-group row">
+                      <label class="col-md-2  adInsLabel adins-required" translate>Address Type Name </label>
+                      <div class="col-md-4">
+                        <select class="form-control adInsInput" formControlName="JobDataType">
+                          <option *ngFor="let ram of listJobType" [value]="ram.Key">
+                            {{ram.Value}}
+                          </option>
+                        </select>
+                        <show-errors [control]="CustJobDataForm.controls.JobDataType" [submit]="enjiForm.submitted"></show-errors>
+                      </div>
+                    </div>
+                    <div>
+                      <app-job-data-employee></app-job-data-employee>
+                    </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

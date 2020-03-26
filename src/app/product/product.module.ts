@@ -43,6 +43,7 @@ import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-off
 import { ListOfficeMemberComponentOffering } from './prod-offering/prod-offering-add-detail/office-member/list-office-member/list-office-member.component';
 import { SearchOfficeComponentOffering } from './prod-offering/prod-offering-add-detail/office-member/search-office/search-office.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { UcapprovalModule } from '@adins/ucapproval';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     MatDividerModule,
     UclookupgenericModule,
     UcShowErrorsModule,
+    UcapprovalModule
   ],
   declarations: [
     ProductHOApprovalComponent,

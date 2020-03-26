@@ -1,0 +1,68 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "AddressId",
+        "subSectionTitle": "Other Business Address",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Address",
+            "property": "Addr"
+          },
+          {
+            "type": "text",
+            "label": "Phone1",
+            "property": "Phone1"
+          },
+          {
+            "type": "text",
+            "label": "RT / RW",
+            "property": "RtRw"
+          },
+          {
+            "type": "text",
+            "label": "Phone2",
+            "property": "Phone2"
+          },
+
+          {
+            "type": "text",
+            "label": "Zip Code",
+            "property": "ZipCode"
+          },
+          {
+            "type": "text",
+            "label": "Phone3",
+            "property": "Phone3"
+          },
+          {
+            "type": "text",
+            "label": "Kelurahan",
+            "property": "Kelurahan"
+          },
+          {
+            "type": "text",
+            "label": "Fax",
+            "property": "Fax"
+          },
+          {
+            "type": "text",
+            "label": "Kecamatan",
+            "property": "Kecamatan"
+          },
+          {
+            "type": "text",
+            "label": "City",
+            "property": "City"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT  CA.FULL_ADDR AS Addr, CONCAT(CA.AREA_CODE_4, '/', CA.AREA_CODE_3) AS RtRw, CA.ZIPCODE AS ZipCode, CA.AREA_CODE_2 AS Kelurahan, CA.AREA_CODE_1 AS Kecamatan, CA.CITY AS City, CONCAT(CA.PHN_AREA_1,' ',CA.PHN_1, '-',CA.PHN_EXT_1) AS Phone1, CONCAT(CA.PHN_AREA_2,' ',CA.PHN_2, '-',CA.PHN_EXT_2) AS Phone2, CONCAT(CA.PHN_AREA_3,' ',CA.PHN_3, '-',CA.PHN_EXT_3) AS Phone3,CONCAT(CA.FAX_AREA,'-', CA.FAX) AS Fax",
+          "from": "FROM dbo.CUST_ADDR CA WITH(NOLOCK) JOIN dbo.CUST_PERSONAL_JOB_DATA CPJD WITH(NOLOCK) ON CPJD.CUST_ID = CA.CUST_ID",
+          "where": "WHERE CA.CUST_ADDR_ID = CPJD.OTH_BIZ_ADDR_ID AND CA.CUST_ID = {0}"
+        }
+      }
+    ]
+  }
