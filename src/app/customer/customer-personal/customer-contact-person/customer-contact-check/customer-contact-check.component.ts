@@ -63,4 +63,8 @@ getList(){
       console.log( "aaaa" +  this.tempCustomerPersonalContactPerson);
     });
 }
+next() {
+  this.wizard.goToNextStep();
+}
+
 }

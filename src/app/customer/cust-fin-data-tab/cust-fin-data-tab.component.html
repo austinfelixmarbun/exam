@@ -296,4 +296,12 @@
     </form>
   </div>
 </div>
-<app-cust-bank-acc-section-findata [CustId]="CustId"></app-cust-bank-acc-section-findata>
+<app-cust-bank-acc-section-findata [CustId]="this.CustId"></app-cust-bank-acc-section-findata>
+<br>
+<br>
+<br>
+<div class="form-actions right" style="text-align: right;">
+  <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
+    <i class="fa fa-check-square-o"></i> Save and Continue
+  </button>
+</div>

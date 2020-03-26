@@ -76,7 +76,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     this.addCustObj.CustCompanyObj = new CustCompanyObj();
     this.addCustObj.custObj.CustName = this.CustName;
     this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-    this.addCustObj.custObj.MrCustTypeCode = "Company";
+    this.addCustObj.custObj.MrCustTypeCode = "COMPANY";
     this.addCustObj.custObj.MrCustModelCode = this.CustModel;
     this.addCustObj.custObj.MrIdTypeCode = "NPWP";
     this.addCustObj.custObj.IdNo = this.TaxIdNo;

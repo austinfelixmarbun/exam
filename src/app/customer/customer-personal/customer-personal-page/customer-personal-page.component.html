@@ -87,36 +87,37 @@
 
           <aw-wizard-step [stepTitle]="'Customer Detail'"
             [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Detail')">
-            <app-customer-personal-detail *ngIf="isDetail == true"> </app-customer-personal-detail>
+            <app-customer-personal-detail *ngIf="isDetail == true" (outputValue)="terimaValue($event)"> </app-customer-personal-detail>
           </aw-wizard-step>
 
           <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"
             (stepEnter)="EnterTab('Address')">
-            <app-customer-contact-person [inputValue]="this.IdCust" *ngIf="isAddress == true">
-            </app-customer-contact-person>
+            <app-customer-personal-address [CustId] ="this.IdCust" *ngIf="isAddress == true">
+            </app-customer-personal-address>
           </aw-wizard-step>
 
-          <aw-wizard-step [stepTitle]="'Address'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-personal-address> </app-customer-personal-address>
-          </aw-wizard-step>
+<!--     
 
-          <!-- <aw-wizard-step [stepTitle]="'Contact Person'"
+          <aw-wizard-step [stepTitle]="'Contact Person'"
           [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-        <app-customer-personal-detail> </app-customer-personal-detail>
+          <app-customer-contact-person [inputValue]="this.IdCust" *ngIf="isAddress == true">
+          </app-customer-contact-person>
         </aw-wizard-step>
 
-        <aw-wizard-step [stepTitle]="'Job Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Job')">
-        <app-customer-personal-detail *ngIf="isJob == true" > </app-customer-personal-detail>
-        </aw-wizard-step>
+        <aw-wizard-step [stepTitle]="'Customer Group'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Group')"> 
+          <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="PERSONAL" [CustId]="this.IdCust"> </app-cust-group-tab>
+        </aw-wizard-step> -->
+        <!-- <aw-wizard-step [stepTitle]="'Job Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Job')">
+        <app-customer-personal-job-data *ngIf="isJob == true" > </app-customer-personal-job-datal>
+        </aw-wizard-step> -->
 
         <aw-wizard-step [stepTitle]="'Financial Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Financial')">
-         <app-customer-personal-detail *ngIf="isFinancial == true"> </app-customer-personal-detail>
+          <app-cust-fin-data-tab  *ngIf="isFinancial == true" [CustId] ="this.IdCust"[CustModeId] ="this.CustPersonalId" [MrCustTypeCode]="'COMPANY'"> </app-cust-fin-data-tab>
         </aw-wizard-step>
 
         <aw-wizard-step [stepTitle]="'Other Attribute'"[navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Other')">
          <app-customer-personal-detail *ngIf="isOther == true"> </app-customer-personal-detail>
-        </aw-wizard-step>-->
+        </aw-wizard-step>
 
         </aw-wizard>
       </div>

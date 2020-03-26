@@ -43,7 +43,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   isJob:any;
   isFinancial : any;
   isOther :any;
- 
+  CustPersonalId : any;
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
@@ -173,6 +173,9 @@ export class CustomerPersonalPageComponent implements OnInit {
     }
   }
 
-
+  terimaValue(ev: any) {
+    console.log(ev);
+    this.CustPersonalId = ev.CustPersonalId;
+  }
    
 }

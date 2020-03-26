@@ -1,0 +1,65 @@
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="addButton" (click)="addAddr()" translate>
+      <i class="ft-plus-circle"></i> Add
+    </button>
+  </span>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="addEdit">
+  <table class="table table-responsive-md text-center table-hover">
+    <thead>
+      <tr class="table-header">
+        <th style="text-align: left;"><span class="thead-header" name='assetTypeName' translate>Address Type Name
+          </span>
+        </th>
+        <th style="text-align: left;"><span class="thead-header" name='fullAddress' translate>Address
+          </span>
+        </th>
+        <th style="text-align: left;"><span class="thead-header" name='buildingOwnership' translate>Building Ownership
+          </span>
+        </th>
+        <th style="text-align: left;"><span class="thead-header" name='phone1' translate>Phone (Fix Line) 1
+          </span>
+        </th>
+        <th style="text-align: left;"><span class="thead-header" name='phone2' translate>Phone (Fix Line) 2
+          </span>
+        </th>
+        <th style="text-align: left;"><span class="thead-header" name='notes' translate>Notes
+          </span>
+        </th>
+        <th style="text-align: left;"><span class="thead-header" translate>Edit
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listCustAddr">
+        <td style="text-align: left;" hidden>{{item.CustAddrId}}</td>
+        <td style="text-align: left;">{{item.MrCustAddrTypeCode}}</td>
+        <td style="text-align: left;">{{item.FullAddr}}</td>
+        <td style="text-align: left;">{{item.MrBuildingOwnershipCode}}</td>
+        <td style="text-align: left;">{{item.PhnArea1}}-{{item.Phn1}}</td>
+        <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}</td>
+        <td style="text-align: left;">{{item.Notes}}</td>
+        <td style="text-align: left;">
+          <span *ngIf="item.MrCustAddrTypeCode != 'Legal Address'" (click)="editItem(item)" class="material-icons"
+           >edit</span> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<br>
+<br>
+<div class="form-actions right" style="text-align: right;">
+  <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
+    <i class="fa fa-check-square-o"></i> Save and Continue
+  </button>
+</div>

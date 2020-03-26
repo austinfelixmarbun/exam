@@ -107,7 +107,5 @@ export class CustomerCompanyDetailComponent implements OnInit {
   getLookUp(event) {
     this.tempRefIndustryTypeId  = event.RefIndustryTypeId;
   }
-  
-  
   }
  
