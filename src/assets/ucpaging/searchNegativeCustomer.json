@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "cust_No",
+            "name": "A.CUST_NO",
             "id": "custNo",
             "value": "",
             "label": "Customer No",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "cust_Name",
+            "name": "A.CUST_NAME",
             "id": "custName",
             "value": "",
             "label": "Customer Name",
@@ -20,7 +20,7 @@
         {
             "type" : "dropdown",
             "label" : "Customer Type",
-            "name" : "MR_CUST_TYPE_CODE",
+            "name" : "A.MR_CUST_TYPE_CODE",
             "id" : "customerType",
             "value" : "",
             "datatype" : "text",
@@ -34,7 +34,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.is_Active",
+            "name": "A.IS_ACTIVE",
             "id": "isActive",
             "value": "",
             "placeholder": "Placeholder",
@@ -56,7 +56,7 @@
         },
         {
             "type": "textbox",
-            "name": "id_No",
+            "name": "A.ID_NO",
             "id": "idNo",
             "value": "",
             "label": "ID No.",
@@ -65,47 +65,47 @@
         {
             "type" : "dropdown",
             "label" : "Negative Type",
-            "name" : "mr_Neg_Cust_Type_Code",
+            "name" : "A.MR_NEG_CUST_TYPE_CODE",
             "id" : "negativeType",
             "value" : "",
             "datatype" : "text",
-            "isSelectOne" : "false",
+            "isSelectOne" : false,
             "items" : [],
-            "isFromURL" : "true", 
-            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetRefMasterByMasterCode", 
+            "isFromURL" : true, 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", 
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "NEG_CUST_TYPE"
         }
     ],
     "querystring": { 
-        "select": "SELECT CUST_NO AS custNo, CUST_NAME AS custName, MR_CUST_TYPE_CODE AS mrCustTypeCode, ID_NO AS idNo, B.DESCR AS negCustSource, C.DESCR AS negCustType, A.IS_ACTIVE AS isActive, NEGATIVE_CUST_ID AS negativeCustId",
-        "from": "FROM NEGATIVE_CUST AS A WITH(NOLOCK) INNER JOIN REF_MASTER AS B WITH(NOLOCK) ON A.MR_NEG_CUST_SOURCE_CODE = B.MASTER_CODE INNER JOIN REF_MASTER AS C WITH(NOLOCK) ON A.MR_NEG_CUST_TYPE_CODE = C.MASTER_CODE"
+        "select": "SELECT A.CUST_NO, A.CUST_NAME, D.DESCR, A.ID_NO, B.DESCR, C.DESCR, A.IS_ACTIVE, A.NEGATIVE_CUST_ID",
+        "from": "FROM dbo.NEGATIVE_CUST AS A WITH(NOLOCK) INNER JOIN dbo.REF_MASTER AS B WITH(NOLOCK) ON A.MR_NEG_CUST_SOURCE_CODE = B.MASTER_CODE AND B.REF_MASTER_TYPE_CODE = 'NEG_CUST_SOURCE' INNER JOIN dbo.REF_MASTER AS C WITH(NOLOCK) ON A.MR_NEG_CUST_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE = 'NEG_CUST_TYPE' INNER JOIN dbo.REF_MASTER AS D WITH(NOLOCK) ON A.MR_CUST_TYPE_CODE = D.MASTER_CODE AND D.REF_MASTER_TYPE_ID = 'CUST_TYPE'"
     },
     "headerList" : [ 
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Customer No",
-            "name" : "CUST_NO" 
+            "name" : "A.CUST_NO" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Customer Name", 
-            "name" : "CUST_NAME" 
+            "name" : "A.CUST_NAME" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Customer Type", 
-            "name" : "MR_CUST_TYPE_CODE" 
+            "name" : "D.DESCR" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "ID No.", 
-            "name" : "ID_NO"
+            "name" : "A.ID_NO"
         },
         {
             "type" : "sort", 
@@ -135,7 +135,7 @@
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "custNo"
+            "property" : "A.CUST_NO"
         },
         {
             "type" : "link", 
@@ -146,34 +146,34 @@
             "param": [
                 {
                     "type" : "negativeCustId", 
-                    "property" : "negativeCustId" 
+                    "property" : "A.NEGATIVE_CUST_ID" 
                 }
             ]
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "mrCustTypeCode" 
+            "property" : "D.DESCR" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "idNo" 
+            "property" : "A.ID_NO" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "negCustSource" 
+            "property" : "B.DESCR" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "negCustType" 
+            "property" : "C.DESCR" 
         },
         {
             "type" : "boolean", 
             "position" : "center", 
-            "property" : "isActive" 
+            "property" : "A.IS_ACTIVE" 
         },
         {
             "type" : "action", 
@@ -185,7 +185,7 @@
                     "param" : [ 
                         {
                             "type" : "negativeCustId", 
-                            "property" : "negativeCustId" 
+                            "property" : "A.NEGATIVE_CUST_ID" 
                         },
                         {
                             "type": "param",
