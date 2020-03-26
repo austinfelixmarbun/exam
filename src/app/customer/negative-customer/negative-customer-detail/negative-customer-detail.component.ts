@@ -14,6 +14,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
 import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 
 @Component({
   selector: 'app-negative-customer-detail',
@@ -36,11 +37,13 @@ export class NegativeCustomerDetailComponent implements OnInit {
   zipcode: string = "";
   negativeDataHistoryList: any;
   isFromLookup: boolean = false;
+  businessDate: any;
+  businessDateIdExp: any;
 
   NegativeCustForm = this.fb.group({
     NegativeCustId: [0, [Validators.required]],
     CustId: [0, [Validators.required]],
-    MrCustTypeCode: ['P', [Validators.required]],
+    MrCustTypeCode: ['PERSONAL', [Validators.required]],
     CustNo: [''],
     CustName: ['', [Validators.required]],
     MrIdTypeCode: ['', [Validators.required]],
@@ -107,9 +110,14 @@ export class NegativeCustomerDetailComponent implements OnInit {
     let requestNegativeSource = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeSourceObj);
     forkJoin([requestIdType, requestNegativeCustType, requestNegativeSource]).subscribe(
       (response) => {
-        this.refMasterIdType = response[0],
-        this.negativeTypeList = response[1],
-        this.negativeSourceList = response[2]
+        this.refMasterIdType = response[0];
+        this.negativeTypeList = response[1];
+        this.negativeSourceList = response[2];
+        this.NegativeCustForm.patchValue({
+          MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key,
+          MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key,
+          MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key
+        });
       }
     );
   }
@@ -118,6 +126,11 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     var criteriaList;
     var criteriaObj;
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDate = new Date(context["BusinessDt"]);
+    this.businessDate.setDate(this.businessDate.getDate() - 1);
+    this.businessDateIdExp = new Date(context["BusinessDt"]);
+    this.businessDateIdExp.setDate(this.businessDateIdExp.getDate() + 1);
     
     this.inputLookupZipcodeObj = new InputLookupObj();
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
@@ -263,39 +276,99 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     var expiredDt = datePipe.transform(e.idExpiredDate, 'yyyy-MM-dd');
     var birthDt = datePipe.transform(e.birthDate, 'yyyy-MM-dd');
-    this.NegativeCustForm.patchValue({
-      CustId: e.custId,
-      CustNo: e.custNo,
-      CustName: e.custName,
-      MrIdTypeCode: e.idType,
-      IdNo: e.idNo,
-      IdExpiredDt: expiredDt,
-      BirthPlace: e.birthPlace,
-      BirthDt: birthDt,
-      MotherMaidenName: e.motherMaidenName,
-      TaxIdNo: e.taxIdNo,
-      MrGenderCode: e.gender,
-      MobilePhn: e.mobilePhone
-    });
-    this.isFromLookup = true;
+    var custAddr = new CustAddrObj();
+    custAddr.CustId = e.custId;
+    custAddr.MrCustAddrTypeCode = "LEGAL";
+    this.httpClient.post(AdInsConstant.GetCustAddrLegalAddrByCustId, custAddr).subscribe(
+      (response: any) => {
+        this.NegativeCustForm.patchValue({
+          CustId: e.custId,
+          CustNo: e.custNo,
+          CustName: e.custName,
+          MrIdTypeCode: e.idType,
+          IdNo: e.idNo,
+          IdExpiredDt: expiredDt,
+          BirthPlace: e.birthPlace,
+          BirthDt: birthDt,
+          MotherMaidenName: e.motherMaidenName,
+          TaxIdNo: e.taxIdNo,
+          MrGenderCode: e.gender,
+          LegalAddr: response.Addr,
+          Zipcode: response.Zipcode,
+          AreaCode1: response.AreaCode1,
+          AreaCode2: response.AreaCode2,
+          AreaCode3: response.AreaCode3,
+          AreaCode4: response.AreaCode4,    
+          City: response.City,
+          PhnArea1: response.PhnArea1,
+          Phn1: response.Phn1,
+          PhnExt1: response.PhnExt1,
+          PhnArea2: response.PhnArea2,
+          Phn2: response.Phn2,
+          PhnExt2: response.PhnExt2,
+          PhnArea3: response.PhnArea3,
+          Phn3: response.Phn3,
+          PhnExt3: response.PhnExt3,
+          FaxArea: response.FaxArea,
+          Fax: response.Fax,
+          MobilePhn: e.mobilePhone
+        });
+        this.isFromLookup = true;
+        this.inputLookupZipcodeObj.nameSelect = response.Zipcode;
+      },
+      (error) => {
+        console.log("ERROR");
+        console.log(error);
+      }
+    );
   }
 
   getLookupCustCompanyResponse(e){
-    this.NegativeCustForm.patchValue({
-      CustId: e.custId,
-      CustNo: e.custNo,
-      CustName: e.custName,
-      TaxIdNo: e.taxIdNo
-    });
-    this.isFromLookup = true;
+    var custAddr = new CustAddrObj();
+    custAddr.CustId = e.custId;
+    custAddr.MrCustAddrTypeCode = "LEGAL";
+    this.httpClient.post(AdInsConstant.GetCustAddrLegalAddrByCustId, custAddr).subscribe(
+      (response: any) => {
+        this.NegativeCustForm.patchValue({
+          CustId: e.custId,
+          CustNo: e.custNo,
+          CustName: e.custName,
+          TaxIdNo: e.taxIdNo,
+          LegalAddr: response.Addr,
+          Zipcode: response.Zipcode,
+          AreaCode1: response.AreaCode1,
+          AreaCode2: response.AreaCode2,
+          AreaCode3: response.AreaCode3,
+          AreaCode4: response.AreaCode4,    
+          City: response.City,
+          PhnArea1: response.PhnArea1,
+          Phn1: response.Phn1,
+          PhnExt1: response.PhnExt1,
+          PhnArea2: response.PhnArea2,
+          Phn2: response.Phn2,
+          PhnExt2: response.PhnExt2,
+          PhnArea3: response.PhnArea3,
+          Phn3: response.Phn3,
+          PhnExt3: response.PhnExt3,
+          FaxArea: response.FaxArea,
+          Fax: response.Fax,
+        });
+        this.isFromLookup = true;
+        this.inputLookupZipcodeObj.nameSelect = response.Zipcode;
+      },
+      (error) => {
+        console.log("ERROR");
+        console.log(error);
+      }
+    );
   }
 
   getLookupZipcodeResponse(e){
     this.NegativeCustForm.patchValue({
-      Zipcode: e.zipcode,
-      AreaCode1: e.areaCode1,
-      AreaCode2: e.areaCode2,
-      City: e.city
+      Zipcode: e.Zipcode,
+      AreaCode1: e.AreaCode1,
+      AreaCode2: e.AreaCode2,
+      City: e.City
     });
   }
 

@@ -13,7 +13,8 @@ import { WizardComponent } from 'angular-archwizard';
 @Component({
   selector: 'app-cust-fin-data-tab',
   templateUrl: './cust-fin-data-tab.component.html',
-  styleUrls: ['./cust-fin-data-tab.component.scss']
+  styleUrls: ['./cust-fin-data-tab.component.scss'],
+  providers: [NGXToastrService]
 })
 export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
