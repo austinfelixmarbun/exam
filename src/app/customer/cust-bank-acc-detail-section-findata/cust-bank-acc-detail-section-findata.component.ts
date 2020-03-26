@@ -141,7 +141,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
                 CustBankStmntDId: [item.CustBankStmntDId, [Validators.required]],
                 CustBankStmntHId: [item.CustBankStmntHId, [Validators.required]],
                 Month: [this.monthOfYear.indexOf(item.Month), [Validators.required]],
-                Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$"), Validators.max(this.maxYear)]],
+                Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$")]],
                 DebitAmt: [item.DebitAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
                 CreditAmt: [item.CreditAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
                 BalanceAmt: [item.BalanceAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -168,7 +168,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
     var formGroup = this.fb.group({
       Month: ['', [Validators.required]],
-      Year: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.max(this.maxYear)]],
+      Year: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       DebitAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       CreditAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       BalanceAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
