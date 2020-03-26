@@ -55,9 +55,9 @@
      <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="COMPANY" [CustId]="this.IdCust"> </app-cust-group-tab>
         </aw-wizard-step> 
 
-        <!-- <aw-wizard-step [stepTitle]="'Contact Information'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Contact')">
+        <aw-wizard-step [stepTitle]="'Contact Information'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Contact')">
         <app-customer-company-contact-information *ngIf="isContact == true" [custCompanyId] ="this.CustCompanyId"> </app-customer-company-contact-information>
-        </aw-wizard-step> -->
+        </aw-wizard-step>
 
         <aw-wizard-step [stepTitle]="'Financial Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Financial')">
          <app-cust-fin-data-tab  *ngIf="isFinancial == true" [CustId] ="this.IdCust"[CustModeId] ="this.CustCompanyId" [MrCustTypeCode]="'COMPANY'"> </app-cust-fin-data-tab>
