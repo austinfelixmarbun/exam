@@ -87,7 +87,8 @@ export const ROUTES: RouteInfo[] = [
     path: '', title: 'Customer', icon: 'ft-user', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
       { path: '/Customer/Paging', title: 'Customer', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Customer/NegativeCustomer/Paging', title: 'Negative Customer', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },     
+      { path: '/Customer/EditMainData/Paging', title: 'Edit Main Data Customer', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },  
+      { path: '/Customer/NegativeCustomer/Paging', title: 'Negative Customer', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },      
     ]
   },
   // {
