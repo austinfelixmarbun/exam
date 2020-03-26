@@ -29,11 +29,13 @@ export class ListOfficeMemberComponent implements OnInit {
   pageNow;
   pageSize;
   apiUrl;
+  ProdHId ;
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
 
+    this.ProdHId = this.ListOfficeMemberObjInput["param"];
     var obj={
       ProdHId: this.ListOfficeMemberObjInput["param"],
       RowVersion: ""
@@ -128,6 +130,16 @@ export class ListOfficeMemberComponent implements OnInit {
   }
 
   DoneForm(){
+    this.http.post("http://localhost:5000/Product/SubmitProduct", {ProdHId : this.ProdHId}).subscribe(
+      (response) => {
+        console.log(response);
+        
+        this.toastr.successMessage(response["message"]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     this.toastr.successMessage("Submitted");
     this.router.navigate(["/product/HOpaging"]);
   }

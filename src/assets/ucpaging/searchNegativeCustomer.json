@@ -99,7 +99,7 @@
             "type" : "sort", 
             "position" : "left", 
             "label" : "Customer Type", 
-            "name" : "D.DESCR" 
+            "name" : "D.DESCR"
         },
         {
             "type" : "sort", 

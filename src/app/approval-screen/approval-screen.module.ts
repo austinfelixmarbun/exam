@@ -9,11 +9,11 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { TestComponent } from './test/test.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LookupTestComponent } from './lookup-test/lookup-test.component';
-import { UcApprovalComponent } from './uc-approval/uc-approval.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { UcapprovalModule } from '@adins/ucapproval'
 
 @NgModule({
-  declarations: [ApprovalScreenComponent,UcProdCompComponent, TestComponent, LookupTestComponent, UcApprovalComponent],
+  declarations: [ApprovalScreenComponent,UcProdCompComponent, TestComponent, LookupTestComponent],
   imports: [
     CommonModule,
     ApprovalScreenRoutingModule,
@@ -21,6 +21,7 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     FormsModule,
     SharingComponentModule,
     UcShowErrorsModule,
+    UcapprovalModule
   ],
   entryComponents : [TestComponent,LookupTestComponent],
   providers: [
