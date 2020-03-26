@@ -11,7 +11,7 @@
 <form class="form form-horizontal">
   <div class="form-body">
     <h4 class="form-section card-title" translate>
-      Match / Similar Data
+        Contact Person Listing
     </h4>
   </div>
 </form>
@@ -45,9 +45,15 @@
       </a>  
         <a class="danger p-0" data-original-title="" title=""(click)="deleteItem(item.CustPersonalContactPersonId)" >
           <i class="ft-trash-2 font-medium-3 mr-2"></i>
-        </a>
-  
-
+        </a> 
     </tr>
   </tbody>
 </table>
+<br>
+<br>
+<br>
+<div class="form-actions right" style="text-align: right;">
+  <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
+    <i class="fa fa-check-square-o"></i> Save and Continue
+  </button>
+</div>

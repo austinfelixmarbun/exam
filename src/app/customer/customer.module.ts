@@ -77,7 +77,9 @@ import { CustomerCompanyManagementShareholderCompanyComponent } from './customer
 import { EditMainDataPagingComponent } from './edit-main-data/edit-main-data-paging/edit-main-data-paging.component';
 import { EditMainDataCompanyComponent } from './edit-main-data/edit-main-data-company/edit-main-data-company.component';
 import { EditMainDataPersonalComponent } from './edit-main-data/edit-main-data-personal/edit-main-data-personal.component';
-@NgModule({
+import { CustomerCompanyAddressCheckComponent } from './customer-company/customer-company-address/customer-company-address-check/customer-company-address-check.component';
+import { CustomerPersonalAddressCheckComponent } from './customer-personal/customer-personal-address/customer-personal-address-check/customer-personal-address-check.component';
+ @NgModule({
   exports: [],
   imports: [
     CustomerRoutingModule,
@@ -155,7 +157,9 @@ import { EditMainDataPersonalComponent } from './edit-main-data/edit-main-data-p
     CustomerCompanyManagementShareholderCompanyComponent, 
     EditMainDataPagingComponent,
     EditMainDataCompanyComponent,
-    EditMainDataPersonalComponent
+    EditMainDataPersonalComponent,
+    CustomerCompanyAddressCheckComponent,  
+    CustomerPersonalAddressCheckComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

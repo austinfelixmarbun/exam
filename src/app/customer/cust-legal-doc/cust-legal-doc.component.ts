@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
+import { WizardComponent } from 'angular-archwizard';
 
 // Implementation : <app-cust-legal-doc [CustCompanyId]="'2'"></app-cust-legal-doc>
 
@@ -23,7 +24,7 @@ export class CustLegalDocComponent implements OnInit {
     private httpClient: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,private wizard: WizardComponent
   ) { }
 
   ngOnInit() {
@@ -84,5 +85,7 @@ export class CustLegalDocComponent implements OnInit {
       }
     );
   }
-
+  next() {
+    this.wizard.goToNextStep();
+  }
 }

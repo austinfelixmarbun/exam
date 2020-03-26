@@ -27,6 +27,7 @@ export class CustBankAccSectionFindataComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("aaaa");
     var custBankAccObj = new CustBankAccObj();
     custBankAccObj.CustId = this.CustId;
     this.httpClient.post(AdInsConstant.GetCBAForCustFinDataByCustId, custBankAccObj).subscribe(

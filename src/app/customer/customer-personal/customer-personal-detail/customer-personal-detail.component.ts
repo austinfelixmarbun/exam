@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -63,6 +63,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
   criteriaList: any;
   criteriaObj: any;
   flag: any;
+  @Output () outputValue : EventEmitter<object>= new EventEmitter(); 
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
 
     this.GetUrl = AdInsConstant.GetListActiveRefMaster;
@@ -264,7 +266,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.http.post(this.EditCustPersonalUrl, this.custPersonalObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
+        
+      this.outputValue.emit({CustCompanyId : this.tempCustPersonalObj.CustPersonalId});
         this.wizard.goToNextStep();
+        
       },
       error => {
         console.log(error);

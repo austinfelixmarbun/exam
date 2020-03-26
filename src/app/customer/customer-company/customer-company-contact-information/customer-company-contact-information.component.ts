@@ -9,6 +9,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustCompanyContactPersonObj } from 'app/shared/model/CustCompanyContactPersonObj.model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-customer-company-contact-information',
@@ -29,8 +30,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     Email1: [''], 
     Email2: [''], 
   });
-  
-  
+
   custAddrObj: any;
   IdCust: any;
   custCompanyContactPersonObj  : any;
@@ -42,7 +42,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   getUrl : any;
   tempMrJobPostitionCode : any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder ) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent ) { 
     this.route.queryParams.subscribe(params => { 
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -85,8 +85,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       }
     );
   }
-  SaveValue(){
-    console.log("aaa");
+  SaveValue(){ 
     this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
     this.custCompanyContactPersonObj.CustCompanyId = this.custCompanyId;
     this.custCompanyContactPersonObj.ContactPersonName = this.ContactInformationForm.controls["ContactPersonName"].value;
@@ -117,24 +116,25 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custAddrObj.PhnArea2 = this.ContactInformationForm.value.UcAddress.PhnArea2;
     this.custAddrObj.PhnExt1 = this.ContactInformationForm.value.UcAddress.PhnExt1;
     this.custAddrObj.PhnExt2 = this.ContactInformationForm.value.UcAddress.PhnExt1;
-   
-    console.log("aaa"+this.custCompanyId);
-    this.http.post(this.AddCustCompanyContactPerson, this.custCompanyContactPersonObj).subscribe(
-      (response) => { 
-        this.toastr.successMessage(response["Message"]); 
+    
+    this.http.post(this.AddNewCustAddr, this.custAddrObj).subscribe(
+      (response) => {
+
+        this.http.post(this.AddCustCompanyContactPerson, this.custCompanyContactPersonObj).subscribe(
+          (response) => { 
+            this.toastr.successMessage(response["Message"]); 
+            this.wizard.goToNextStep();
+          },
+          error => {
+            console.log(error);
+          }
+        );
       },
       error => {
         console.log(error);
       }
     );
-    // this.http.post(this.AddNewCustAddr, this.custAddrObj).subscribe(
-    //   (response) => {
-    //     this.toastr.successMessage(response["Message"]); 
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
+ 
      
   }
 

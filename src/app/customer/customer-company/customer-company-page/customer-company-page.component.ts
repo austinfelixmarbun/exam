@@ -4,11 +4,13 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-customer-company-page',
   templateUrl: './customer-company-page.component.html',
-  styleUrls: ['./customer-company-page.component.scss']
+  styleUrls: ['./customer-company-page.component.scss'],
+  providers: [NGXToastrService],
 })
 export class CustomerCompanyPageComponent implements OnInit {
   IdCust: any;
