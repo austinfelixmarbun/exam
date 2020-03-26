@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
@@ -11,7 +11,6 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-product-ho-add',
   templateUrl: './product-ho-add.component.html',
-  styleUrls: ['./product-ho-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class ProductHOAddComponent implements OnInit {
@@ -22,9 +21,9 @@ export class ProductHOAddComponent implements OnInit {
   criteria: CriteriaObj[] = [];
 
   RefProductHOForm = this.fb.group({
-    ProdCode: [''],
-    ProdName: [''],
-    ProdDescr: [''],
+    ProdCode: ['', Validators.required],
+    ProdName: ['',Validators.required],
+    ProdDescr: ['',Validators.required],
     StartDt: [''],
     EndDt: ['']
   });
@@ -36,6 +35,7 @@ export class ProductHOAddComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: NGXToastrService
   ) {
+    
     this.route.queryParams.subscribe(params => {
       this.param = params["ProdHId"];
       this.mode = params["mode"];
@@ -84,41 +84,63 @@ export class ProductHOAddComponent implements OnInit {
 
   ProdHOBj: any;
   UrlBackEnd: any;
+
+  ValidateDate() {
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    let businessDate = new Date(context["BusinessDt"]);
+    let startDate = new Date(this.RefProductHOForm.get("StartDt").value);
+    let endDate = new Date(this.RefProductHOForm.get("EndDt").value);
+
+
+
+    if (startDate > endDate) {
+      this.toastr.errorMessage("Start Date Must be Less than End Date");
+      return false;
+    }
+
+    if (endDate <= businessDate) {
+      this.toastr.errorMessage("End Date Must be Greater than Business Date");
+      return false;
+    }
+    return true;
+  }
+
   SaveForm() {
-    console.log("save form");
     if (this.SaveMode == "save") {
-      console.log("save mode");
       this.ProdHOBj = new RefProductHOObj();
       this.ProdHOBj = this.RefProductHOForm.value;
-      console.log("Submited " + this.ProdHOBj);
+
       if (this.mode == "edit") {
-        this.UrlBackEnd = AdInsConstant.EditProduct;
-        this.ProdHOBj.ProdId = this.param;
-        this.ProdHOBj.ProdCode = this.ResultResponse.ProdCode;
-        this.ProdHOBj.RowVersion = this.ResultResponse.RowVersion;
-        this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/product/HOpaging"]);
-            console.log(response);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        if (this.ValidateDate()) {
+          this.UrlBackEnd = AdInsConstant.EditProduct;
+          this.ProdHOBj.ProdId = this.ResultResponse.ProdId;
+          this.ProdHOBj.ProdCode = this.ResultResponse.ProdCode;
+          this.ProdHOBj.RowVersion = this.ResultResponse.RowVersion;
+          this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
+            (response) => {
+              this.toastr.successMessage(response["message"]);
+              this.router.navigate(["/product/HOpaging"]);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
       } else {
-        this.UrlBackEnd = AdInsConstant.AddProduct;
-        this.ProdHOBj.RowVersion = "";
-        this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/product/HOpaging"]);
-            console.log(response);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        if (this.ValidateDate()) {
+          this.UrlBackEnd = AdInsConstant.AddProduct;
+          this.ProdHOBj.RowVersion = "";
+          this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
+            (response) => {
+              this.toastr.successMessage(response["message"]);
+              this.router.navigate(["/product/HOpaging"]);
+              console.log(response);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
       }
     } else { //next
       console.log("next mode");
@@ -126,36 +148,39 @@ export class ProductHOAddComponent implements OnInit {
       this.ProdHOBj = this.RefProductHOForm.value;
       console.log("Add Detail Next! " + this.ProdHOBj);
       if (this.mode == "edit") {
-        this.UrlBackEnd = AdInsConstant.EditProduct;
-        this.ProdHOBj.ProdId = this.param;
-        this.ProdHOBj.ProdCode = this.ResultResponse.ProdCode;
-        this.ProdHOBj.RowVersion = this.ResultResponse.RowVersion;
-        this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": this.ResultResponse.ProdHId, "mode": this.mode } });
-            console.log(response);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        if (this.ValidateDate()) {
+          this.UrlBackEnd = AdInsConstant.EditProduct;
+          this.ProdHOBj.ProdId = this.ResultResponse.ProdId;
+          this.ProdHOBj.ProdCode = this.ResultResponse.ProdCode;
+          this.ProdHOBj.RowVersion = this.ResultResponse.RowVersion;
+          this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
+            (response) => {
+              this.toastr.successMessage(response["message"]);
+              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": this.ResultResponse.ProdHId, "ProdId" : this.ResultResponse.ProdId, "mode": this.mode } });
+              console.log(response);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
       } else {
-        this.UrlBackEnd = AdInsConstant.AddProduct;
-        this.ProdHOBj.RowVersion = "";
-        this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
-          (response) => {
-            var TempResp = response;
-            this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": TempResp["DraftProdHId"], "mode": this.mode } });
-            console.log(response);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        if (this.ValidateDate()) {
+          this.UrlBackEnd = AdInsConstant.AddProduct;
+          this.ProdHOBj.RowVersion = "";
+          this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
+            (response) => {
+              var TempResp = response;
+              this.toastr.successMessage(response["message"]);
+              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": TempResp["DraftProdHId"],"ProdId" : TempResp["ProdId"], "mode": this.mode } });
+              console.log(response);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
       }
-
     }
   }
 

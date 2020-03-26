@@ -4,7 +4,7 @@
         {
             "type" : "dropdown",
             "label" : "Asset Type Name",
-            "name" : "C.ASSET_TYPE_CODE",
+            "name" : "ATH.ASSET_TYPE_CODE",
             "id" : "assetTypeName",
             "value" : "",
             "datatype" : "text",
@@ -14,11 +14,11 @@
             "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetType/GetListKeyValueActiveByCode", 
             "itemsUrl" : [],
             "isEvent" : true,
-            "affectedFilter" : ["B.ASSET_CATEGORY_CODE"]
+            "affectedFilter" : ["AC.ASSET_CATEGORY_CODE"]
         },
         {
             "type": "textbox",
-            "name": "serial_No_1",
+            "name": "A.SERIAL_NO_1",
             "id": "serialNo1",
             "value": "",
             "label": "Serial No 1",
@@ -27,19 +27,19 @@
         {
             "type" : "dropdown",
             "label" : "Asset Category Name",
-            "name" : "B.ASSET_CATEGORY_CODE",
+            "name" : "AC.ASSET_CATEGORY_CODE",
             "id" : "assetCategoryName",
             "value" : "",
             "datatype" : "text",
             "isSelectOne" : false,
             "items" : [],
             "isFromURL" : true, 
-            "url" : "http://localhost:5000/AssetCategory/GetListAssetCategoryWithCriteriaObjNegativeAssetPage", 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetCategory/GetListAssetCategoryByCodeWithCriteriaObj", 
             "itemsUrl" : []
         },
         {
             "type": "textbox",
-            "name": "serial_No_2",
+            "name": "A.SERIAL_NO_2",
             "id": "serialNo2",
             "value": "",
             "label": "Serial No 2",
@@ -47,7 +47,7 @@
         },
         {
             "type": "textbox",
-            "name": "full_Asset_Code",
+            "name": "B.FULL_ASSET_CODE",
             "id": "fullAssetCode",
             "value": "",
             "label": "Full Asset Code",
@@ -55,7 +55,7 @@
         },
         {
             "type": "textbox",
-            "name": "serial_No_3",
+            "name": "A.SERIAL_NO_3",
             "id": "serialNo3",
             "value": "",
             "label": "Serial No 3",
@@ -63,7 +63,7 @@
         },
         {
             "type": "textbox",
-            "name": "full_Asset_Name",
+            "name": "B.FULL_ASSET_NAME",
             "id": "fullAssetName",
             "value": "",
             "label": "Full Asset Name",
@@ -71,7 +71,7 @@
         },
         {
             "type": "textbox",
-            "name": "serial_No_4",
+            "name": "A.SERIAL_NO_4",
             "id": "serialNo4",
             "value": "",
             "label": "Serial No 4",
@@ -80,7 +80,7 @@
         {
             "type" : "dropdown",
             "label" : "Negative Source",
-            "name" : "mr_Neg_Asset_Source_Code",
+            "name" : "A.MR_NEG_ASSET_SOURCE_CODE",
             "id" : "negativeSource",
             "value" : "",
             "datatype" : "text",
@@ -94,7 +94,7 @@
         },
         {
             "type": "textbox",
-            "name": "serial_No_5",
+            "name": "A.SERIAL_NO_5",
             "id": "serialNo5",
             "value": "",
             "label": "Serial No 5",
@@ -102,7 +102,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.is_Active",
+            "name": "A.IS_ACTIVE",
             "id": "isActive",
             "value": "Active Status",
             "placeholder": "Placeholder",
@@ -124,69 +124,69 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT C.ASSET_TYPE_NAME AS assetTypeName, B.FULL_ASSET_CODE AS fullAssetCode, B.FULL_ASSET_NAME AS fullAssetName, A.SERIAL_NO_1 AS serialNo1, A.SERIAL_NO_2 AS serialNo2, A.SERIAL_NO_3 AS serialNo3, A.SERIAL_NO_4 AS serialNo4, A.SERIAL_NO_5 AS serialNo5, D.DESCR as descr, A.IS_ACTIVE AS isActive, A.ASSET_NEGATIVE_ID AS assetNegativeId", 
-        "from": "FROM ASSET_NEGATIVE AS A WITH(NOLOCK) INNER JOIN ASSET_MASTER AS B WITH(NOLOCK) ON A.ASSET_MASTER_ID = B.ASSET_MASTER_ID INNER JOIN ASSET_TYPE AS C WITH(NOLOCK) ON B.ASSET_TYPE_ID = C.ASSET_TYPE_ID INNER JOIN REF_MASTER AS D WITH(NOLOCK) ON A.MR_NEG_ASSET_SOURCE_CODE = D.MASTER_CODE INNER JOIN ASSET_CATEGORY AS E WITH(NOLOCK) ON B.ASSET_CATEGORY_ID = E.ASSET_CATEGORY_ID"
+        "select": "SELECT ATH.ASSET_TYPE_NAME AS assetTypeName, B.FULL_ASSET_CODE AS fullAssetCode, B.FULL_ASSET_NAME AS fullAssetName, A.SERIAL_NO_1 AS serialNo1, A.SERIAL_NO_2 AS serialNo2, A.SERIAL_NO_3 AS serialNo3, A.SERIAL_NO_4 AS serialNo4, A.SERIAL_NO_5 AS serialNo5, D.DESCR as descr, A.IS_ACTIVE AS isActive, A.ASSET_NEGATIVE_ID AS assetNegativeId", 
+        "from": "FROM dbo.ASSET_NEGATIVE AS A WITH(NOLOCK) INNER JOIN dbo.ASSET_MASTER AS B WITH(NOLOCK) ON A.ASSET_MASTER_ID = B.ASSET_MASTER_ID INNER JOIN dbo.ASSET_TYPE AS ATH WITH(NOLOCK) ON B.ASSET_TYPE_ID = ATH.ASSET_TYPE_ID INNER JOIN dbo.REF_MASTER AS D WITH(NOLOCK) ON A.MR_NEG_ASSET_SOURCE_CODE = D.MASTER_CODE AND D.REF_MASTER_TYPE_CODE = 'NEG_ASSET_SOURCE' INNER JOIN dbo.ASSET_CATEGORY AS AC WITH(NOLOCK) ON B.ASSET_CATEGORY_ID = AC.ASSET_CATEGORY_ID"
     },
     "headerList" : [ 
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Asset Type Name",
-            "name" : "assetTypeName" 
+            "name" : "ATH.ASSET_TYPE_NAME" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Full Asset Code", 
-            "name" : "fullAssetCode" 
+            "name" : "B.FULL_ASSET_CODE" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Full Asset Name", 
-            "name" : "fullAssetName" 
+            "name" : "B.FULL_ASSET_NAME" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Serial No. 1", 
-            "name" : "serialNo1"
+            "name" : "A.SERIAL_NO_1"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Serial No. 2", 
-            "name" : "serialNo2"
+            "name" : "A.SERIAL_NO_2"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Serial No. 3", 
-            "name" : "serialNo3"
+            "name" : "A.SERIAL_NO_3"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Serial No. 4", 
-            "name" : "serialNo4"
+            "name" : "A.SERIAL_NO_4"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Serial No. 5", 
-            "name" : "serialNo5"
+            "name" : "A.SERIAL_NO_5"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Negative Source", 
-            "name" : "descr"
+            "name" : "D.DESCR"
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Active Status", 
-            "name" : "isActive"
+            "name" : "A.IS_ACTIVE"
         },
         {
             "type" : "label",

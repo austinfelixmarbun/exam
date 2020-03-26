@@ -1,126 +1,127 @@
 {
-  "title": "Ref Status",
-  "exportExcel": false,
-  "component": [
-    {
-      "type": "textbox",
-      "name": "A.REF_STATUS_CODE",
-      "id": "refStatusCodeId",
-      "value": "",
-      "label": "Status Code",
-      "placeholder": "Placeholder"
+    "title": "Status",
+    "exportExcel": false,
+    "component": [
+      {
+        "type": "textbox",
+        "name": "REF_STATUS_CODE",
+        "id": "refStatusCodeId",
+        "value": "",
+        "label": "Status Code",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "dropdown",
+        "datatype": "text",
+        "name": "REF_TRX_TYPE_ID",
+        "id": "refTrxTypeId",
+        "value": "",
+        "placeholder": "Placeholder",
+        "isFromURL": true,
+        "isSelectOne": false,
+        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefTrxType/GetListKeyValueActiveById",
+        "label": "Transaction Type",
+        "items": [],
+        "itemsUrl": []
+      },
+      {
+        "type": "textbox",
+        "name": "DESCR",
+        "id": "descrId",
+        "value": "",
+        "label": "Description",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "dropdown",
+        "datatype": "text",
+        "name": "MODULE_CODE",
+        "id": "moduleCodeId",
+        "value": "",
+        "placeholder": "Placeholder",
+        "isFromURL": true,
+        "isSelectOne": true,
+        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefModule/GetListKeyValueByCode",
+        "label": "Module Code",
+        "items": [],
+        "itemsUrl": []
+      },
+      {
+        "type": "dropdown",
+        "name": "A.IS_ACTIVE",
+        "id": "isActiveId",
+        "value": "Active Status",
+        "placeholder": "Placeholder",
+        "isFromURL": false,
+        "isSelectOne": false,
+        "url": "https://api.myjson.com/bins/ld6e8",
+        "label": "Active Status",
+        "items": [
+          {
+            "key": "1",
+            "value": "Yes"
+          },
+          {
+            "key": "0",
+            "value": "No"
+          }
+        ],
+        "itemsUrl": []
+      }
+  
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Status Code",
+        "name": "refStatusCode"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Description",
+        "name": "descr"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Transaction Type",
+        "name": "trxTypeName"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Active Status",
+        "name": "isActive"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT A.REF_STATUS_ID as refStatusId,A.REF_STATUS_CODE as refStatusCode,A.DESCR as descr, B.TRX_TYPE_NAME as trxTypeName, A.IS_ACTIVE as isActive, A.REF_TRX_TYPE_ID as refTrxTypeId, A.MODULE_CODE as moduleCode",
+      "from": "FROM REF_STATUS A WITH(NOLOCK) LEFT JOIN REF_TRX_TYPE B WITH(NOLOCK) ON A.REF_TRX_TYPE_ID=B.REF_TRX_TYPE_ID"
     },
-    {
-      "type": "dropdown",
-      "datatype": "text",
-      "name": "A.REF_TRX_TYPE_ID",
-      "id": "refTrxTypeId",
-      "value": "",
-      "placeholder": "Placeholder",
-      "isFromURL": true,
-      "isSelectOne": false,
-      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefTrxType/GetListKeyValueActiveById",
-      "label": "Transaction Type",
-      "items": [],
-      "itemsUrl": []
-    },
-    {
-      "type": "textbox",
-      "name": "A.DESCR",
-      "id": "descrId",
-      "value": "",
-      "label": "Description",
-      "placeholder": "Placeholder"
-    },
-    {
-      "type": "dropdown",
-      "datatype": "text",
-      "name": "A.MODULE_CODE",
-      "id": "moduleCodeId",
-      "value": "",
-      "placeholder": "Placeholder",
-      "isFromURL": true,
-      "isSelectOne": true,
-      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefModule/GetListKeyValueByCode",
-      "label": "Module Code",
-      "items": [],
-      "itemsUrl": []
-    },
-    {
-      "type": "dropdown",
-      "name": "A.IS_ACTIVE",
-      "id": "isActiveId",
-      "value": "Active Status",
-      "placeholder": "Placeholder",
-      "isFromURL": false,
-      "isSelectOne": false,
-      "url": "https://api.myjson.com/bins/ld6e8",
-      "label": "Active Status",
-      "items": [
-        {
-          "key": "1",
-          "value": "Yes"
-        },
-        {
-          "key": "0",
-          "value": "No"
-        }
-      ],
-      "itemsUrl": []
-    }
-
-  ],
-  "headerList": [
-    {
-      "type": "sort",
-      "position": "left",
-      "label": "Status Code",
-      "name": "refStatusCode"
-    },
-    {
-      "type": "sort",
-      "position": "left",
-      "label": "Description",
-      "name": "descr"
-    },
-    {
-      "type": "sort",
-      "position": "center",
-      "label": "Transaction Type",
-      "name": "trxTypeName"
-    },
-    {
-      "type": "sort",
-      "position": "center",
-      "label": "Active Status",
-      "name": "isActive"
-    }
-  ],
-  "querystring": {
-    "select": "SELECT A.REF_STATUS_CODE as refStatusCode,A.REF_STATUS_ID as refStatusId,A.DESCR as descr, B.TRX_TYPE_NAME as trxTypeName, A.IS_ACTIVE as isActive, A.REF_TRX_TYPE_ID as refTrxTypeId, A.MODULE_CODE as moduleCode",
-    "from": "FROM dbo.REF_STATUS A WITH(NOLOCK) LEFT JOIN dbo.REF_TRX_TYPE B WITH(NOLOCK) ON A.REF_TRX_TYPE_ID=B.REF_TRX_TYPE_ID"
-  },
-  "bodyList": [
-    {
-      "type": "text",
-      "position": "left",
-      "property": "refStatusCode"
-    },
-    {
-      "type": "text",
-      "position": "left",
-      "property": "descr"
-    },
-    {
-      "type": "text",
-      "position": "center",
-      "property": "trxTypeName"
-    },
-    {
-      "type": "text",
-      "position": "center",
-      "property": "isActive"
-    }
-
-  ]
-}
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "left",
+        "property": "refStatusCode"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "descr"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "trxTypeName"
+      },
+      {
+        "type": "boolean",
+        "position": "center",
+        "property": "isActive"
+      }
+  
+    ]
+  }
+  

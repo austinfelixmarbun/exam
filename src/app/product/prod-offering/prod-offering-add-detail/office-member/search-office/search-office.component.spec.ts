@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchOfficeComponent } from './search-office.component';
+import { SearchOfficeComponentOffering } from './search-office.component';
 
 describe('SearchOfficeComponent', () => {
-  let component: SearchOfficeComponent;
-  let fixture: ComponentFixture<SearchOfficeComponent>;
+  let component: SearchOfficeComponentOffering;
+  let fixture: ComponentFixture<SearchOfficeComponentOffering>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchOfficeComponent ]
+      declarations: [ SearchOfficeComponentOffering ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchOfficeComponent);
+    fixture = TestBed.createComponent(SearchOfficeComponentOffering);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

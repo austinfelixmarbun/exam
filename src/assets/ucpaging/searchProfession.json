@@ -93,7 +93,7 @@
                 "property": "refProfessionId"
               },
               {
-                "type": "param",
+                "type": "mode",
                 "property": "edit"
               }
             ]

@@ -37,7 +37,6 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
     this.addUrl = AdInsConstant.AddAssetSchmH;
     this.editUrl = AdInsConstant.EditAssetSchmH;
     this.getAssetTypeUrl = AdInsConstant.GetListActiveAssetType;
-
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -46,7 +45,6 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
         this.AssetSchmHId = params["AssetSchmHId"];
       }
     });
-
   }
 
   ngOnInit() {
@@ -54,26 +52,20 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       RefMasterTypeCode: "ASSET_TYPE_ID",
       RowVersion: ""
     }
-    console.log(this.AssetSchemeInfoForm);
     this.http.post(this.getAssetTypeUrl, assetTypeObj).subscribe(
       (response) => {
         this.ItemAssetType = response["ReturnObject"];
-        console.log('isi asset obj');
-        console.log(this.ItemAssetType);
-
         if (this.pageType == "add") {
           this.AssetSchemeInfoForm.patchValue({
             AssetTypeId: this.ItemAssetType[0].AssetTypeId,
             IsActive: true
           });
         }
-
       }
     );
 
     if (this.pageType == "edit") {
       this.assetSchmHObj = new AssetSchemeHObj();
-
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.AssetSchemeInfoForm.controls["AssetSchmCode"].disable();
 
@@ -81,13 +73,11 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
         response => {
           this.resultData = response;
           this.RowVersion = this.resultData.RowVersion;
-
           this.AssetSchemeInfoForm.patchValue({
             AssetSchmCode: this.resultData.AssetSchmCode,
             AssetSchmName: this.resultData.AssetSchmName,
             AssetTypeId: this.resultData.AssetTypeId,
             IsActive: this.resultData.IsActive,
-
           });
           this.AssetSchmCode = this.resultData.AssetSchmCode;
         },
@@ -96,26 +86,18 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
         }
       );
     }
-
   }
-
   SaveForm() {
     this.assetSchmHObj = new AssetSchemeHObj();
     this.assetSchmHObj = this.AssetSchemeInfoForm.value;
-
     if (!this.assetSchmHObj.IsActive || this.assetSchmHObj.IsActive == "") {
       this.assetSchmHObj.IsActive = false;
     }
     else {
       this.assetSchmHObj.IsActive = true;
     }
-
-    console.log(this.assetSchmHObj);
-
     if (this.pageType == "add") {
       this.assetSchmHObj.RowVersion = "";
-      console.log('masuk add');
-
       this.http.post(this.addUrl, this.assetSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
@@ -125,7 +107,8 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
           console.log(error);
         }
       );
-    } else {
+    } 
+    else {
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.assetSchmHObj.RowVersion = this.RowVersion;
       this.assetSchmHObj.AssetSchmCode = this.AssetSchmCode;
@@ -140,7 +123,4 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       );
     }
   }
-
 }
-
-

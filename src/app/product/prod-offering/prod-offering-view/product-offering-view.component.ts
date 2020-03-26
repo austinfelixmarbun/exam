@@ -1,149 +1,154 @@
 import { environment } from "environments/environment";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { DecimalPipe } from "@angular/common";
-import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
-import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
 import { RefProductOfferingBrancMbrObj } from "../../../shared/model/RefProductOfferingBranchMbrObj.Model";
+import { ProdOfferingHVersionObj } from "../../../shared/model/ProdOfferingHVersionObj.Model";
+import { RefProductOfferingDetailObj } from "../../../shared/model/RefProductOfferingDetailObj.Model";
+import { ProdOfferingCodeVersion } from "../../../shared/model/ProdOfferingCodeVersion.Model";
 
 
 
 @Component({
-  selector: "app-product-offering-view",
-  templateUrl: "./product-offering-view.component.html",
-  providers: [DecimalPipe, NGXToastrService]
+    selector: "app-product-offering-view",
+    templateUrl: "./product-offering-view.component.html",
+    providers: [DecimalPipe, NGXToastrService]
 })
 export class ProductOfferingViewComponent implements OnInit {
+    @Input() inputProdOfferingHId;
 
-  prodOfferingId: any;
-  prodOfferingHId: any;
-  viewProdOfferMainInfoObj: any;
-  ProdOfferingBranchMemObj: any;
-  ProdVersionObj: any;
-  ProdOfferingBranchUrl: any;
-  ProdVerUrl: any;
-  ProdDUrl: any;
-  refProductDetailObj: any;
-  GenData: any;
-  ProdCompSchm: any;
-  ProdCompScore: any;
-  ProdCompRule: any;
-  ProdCompOther: any;
-  ProdOfferingBranchMbr: any;
-  ProdVersion: any;
+    prodOfferingHId: any;
+    prodOfferingCode: any;
+    prodOfferingVersion: any;
+    viewProdOfferMainInfoObj: any;
+    ProdOfferingBranchMemObj: any;
+    ProdOfferingVersionObj: any;
+    GetProdOfferByVerCode: any;
+    ProdOfferingBranchUrl: any;
+    ProdOfferingVerUrl: any;
+    ProdOfferingDUrl: any;
+    ProdOfferingCodeVerUrl: any
+    refProductDetailObj: any;
+    GenData: any;
+    ProdComp: any;
+    ProdCompSchm: any;
+    ProdCompScore: any;
+    ProdCompRule: any;
+    ProdCompOther: any;
+    ProdOfferingBranchMbr: any;
+    ProdOfferingVersion: any;
+    ProdOfferingCodeVersion: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
-    //this.ProdDUrl = AdInsConstant.GetProductDetailComponentInfo;
-    this.ProdOfferingBranchUrl = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
-    //this.ProdVerUrl = AdInsConstant.GetListProdHVersionByProdId;
+        this.ProdOfferingDUrl = AdInsConstant.GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode;
+        this.ProdOfferingBranchUrl = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
+        this.ProdOfferingVerUrl = AdInsConstant.GetListProdOfferingHVersionByProdOfferingHId;
+        this.ProdOfferingCodeVerUrl = AdInsConstant.GetProdOfferingHByCodeAndVerion;
 
-    this.route.queryParams.subscribe(params => {
-      if (params["prodOfferingHId"] != null) {
-        this.prodOfferingHId = params["prodOfferingHId"];
-      }
-      if (params["prodOfferingId"] != null) {
-        this.prodOfferingId = params["prodOfferingId"];
-      }
-    });
-  }
+        this.route.queryParams.subscribe(params => {
+            if (params["prodOfferingHId"] != 0) {
+                this.prodOfferingHId = params["prodOfferingHId"];
+            }
+            else {
+                if (params["prodOfferingCode"] != "") {
+                    this.prodOfferingCode = params["prodOfferingCode"];
+                }
+                if (params["prodOfferingVersion"] != "") {
+                    this.prodOfferingVersion = params["prodOfferingVersion"];
+                }
+                this.prodOfferingHId = params["prodOfferingHId"];
+            }
+        });
+    }
 
-  ngOnInit() {
-    //** Main Information **//
-    this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
-
-    ////** Product Version **//
-    //this.ProdVersionObj = new ProdHVersionObj
-    //this.ProdVersionObj.ProdId = this.prodOfferingId;
-    //this.http.post(this.ProdVerUrl, this.ProdVersionObj).subscribe(
-    //  response => {
-    //    console.log("Response: ");
-    //    console.log(response);
-    //    this.ProdVersion = response['ReturnObject'];
-    //  },
-    //  error => {
-    //    console.log(error);
-    //  }
-    //);
-
-    //** Office Member **//
-    this.ProdOfferingBranchMemObj = new RefProductOfferingBrancMbrObj
-    this.ProdOfferingBranchMemObj.ProdOfferingHId = this.prodOfferingHId;
-    this.http.post(this.ProdOfferingBranchUrl, this.ProdOfferingBranchMemObj).subscribe(
-      response => {
-        console.log("Response: ");
-        console.log(response);
-        this.ProdOfferingBranchMbr = response['ReturnObject'];
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    async LoadMainInfo() {
+        this.GetProdOfferByVerCode = new ProdOfferingCodeVersion;
+        this.GetProdOfferByVerCode.ProdOfferingCode = this.prodOfferingCode;
+        this.GetProdOfferByVerCode.ProdOfferingVersion = this.prodOfferingVersion;
+        await this.http.post(this.ProdOfferingCodeVerUrl, this.GetProdOfferByVerCode).toPromise().then(
+            response => {
+                console.log("Response: ");
+                console.log(response);
+                this.ProdOfferingCodeVersion = response;
+                this.prodOfferingHId = this.ProdOfferingCodeVersion.ProdOfferingHId
+            },
+            error => {
+                console.log(error);
+            }
+        );
+    }
 
 
-    ////** Product Component **//
-    //      //** Scheme Component **//
-    //this.refProductDetailObj = new RefProductDetailObj
-    //this.refProductDetailObj.ProdHId = this.prodOfferingHId;
-    //this.refProductDetailObj.RefProdCompntGrpCode = 'SCHM';
-    //this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-    //  response => {
-    //    console.log("Response: ");
-    //    console.log(response);
-    //    this.ProdCompSchm = response['ReturnObject'];
-    //  },
-    //  error => {
-    //    console.log(error);
-    //  }
-    //);
-    //      //** Score Component **//
-    //this.refProductDetailObj = new RefProductDetailObj
-    //this.refProductDetailObj.ProdHId = this.prodOfferingHId;
-    //this.refProductDetailObj.RefProdCompntGrpCode = 'SCORE';
-    //this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-    //  response => {
-    //    console.log("Response: ");
-    //    console.log(response);
-    //    this.ProdCompScore = response['ReturnObject'];
-    //  },
-    //  error => {
-    //    console.log(error);
-    //  }
-    //);
-    //      //** Rule Component **//
-    //this.refProductDetailObj = new RefProductDetailObj
-    //this.refProductDetailObj.ProdHId = this.prodOfferingHId;
-    //this.refProductDetailObj.RefProdCompntGrpCode = 'RULE';
-    //this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-    //  response => {
-    //    console.log("Response: ");
-    //    console.log(response);
-    //    this.ProdCompRule = response['ReturnObject'];
-    //  },
-    //  error => {
-    //    console.log(error);
-    //  }
-    //);
-    //      //** Other Component **//
-    //this.refProductDetailObj = new RefProductDetailObj
-    //this.refProductDetailObj.ProdHId = this.prodOfferingHId;
-    //this.refProductDetailObj.RefProdCompntGrpCode = 'OTHR';
-    //this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-    //  response => {
-    //    console.log("Response: ");
-    //    console.log(response);
-    //    this.ProdCompOther = response['ReturnObject'];
-    //  },
-    //  error => {
-    //    console.log(error);
-    //  }
-    //);
+    async ngOnInit(): Promise<void> {
+        if (this.prodOfferingHId == undefined) {
+            this.prodOfferingHId = this.inputProdOfferingHId;
+        }
+        //** Main Information **//
+        this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
 
-  }
+        if (this.prodOfferingHId == 0) {
+            await this.LoadMainInfo();
+        }
+
+        //** Product Offering Version **//
+        this.ProdOfferingVersionObj = new ProdOfferingHVersionObj;
+        this.ProdOfferingVersionObj.ProdOfferingHId = this.prodOfferingHId;
+        this.http.post(this.ProdOfferingVerUrl, this.ProdOfferingVersionObj).subscribe(
+            response => {
+                console.log("Response: ");
+                console.log(response);
+                this.ProdOfferingVersion = response['ReturnObject'];
+            },
+            error => {
+                console.log(error);
+            }
+        );
+
+        //** Office Member **//
+        this.ProdOfferingBranchMemObj = new RefProductOfferingBrancMbrObj;
+        this.ProdOfferingBranchMemObj.ProdOfferingHId = this.prodOfferingHId;
+        this.http.post(this.ProdOfferingBranchUrl, this.ProdOfferingBranchMemObj).subscribe(
+            response => {
+                console.log("Response: ");
+                console.log(response);
+                this.ProdOfferingBranchMbr = response['ReturnObject'];
+            },
+            error => {
+                console.log(error);
+            }
+        );
+
+
+        //** Product Component **//
+        this.refProductDetailObj = new RefProductOfferingDetailObj;
+        this.refProductDetailObj.ProdOfferingHId = this.prodOfferingHId;
+        this.refProductDetailObj.RefProdCompntGrpCode = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR'];
+        this.http.post(this.ProdOfferingDUrl, this.refProductDetailObj).subscribe(
+            response => {
+                console.log("Response: ");
+                console.log(response);
+                this.ProdComp = response['ReturnObject'];
+
+                this.GenData = this.ProdComp.filter(
+                    comp => comp.RefProdCompntGrpCode === 'GEN');
+                this.ProdCompSchm = this.ProdComp.filter(
+                    comp => comp.RefProdCompntGrpCode === 'SCHM');
+                this.ProdCompScore = this.ProdComp.filter(
+                    comp => comp.RefProdCompntGrpCode === 'SCORE');
+                this.ProdCompRule = this.ProdComp.filter(
+                    comp => comp.RefProdCompntGrpCode === 'RULE');
+                this.ProdCompOther = this.ProdComp.filter(
+                    comp => comp.RefProdCompntGrpCode === 'OTHR');
+            },
+            error => {
+                console.log(error);
+            }
+        );
+
+    }
 
 }

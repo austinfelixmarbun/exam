@@ -1,0 +1,56 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "MainInfoId",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "ID Type",
+            "property": "IdType"
+          },
+          {
+            "type": "text",
+            "label": "Rating",
+            "property":"VendorRating"
+          }, 
+          {
+            "type": "text",
+            "label": "ID Number",
+            "property": "IdNo"
+          },
+          {
+            "type": "text",
+            "label": "E-mail",
+            "property": "Email"
+          },
+          {
+            "type": "text",
+            "label": "Establishment Date",
+            "property": "EstablishmentDt"
+          },
+          {
+            "type": "text",
+            "label": "Mobile Phone 1",
+            "property": "MobilePhnNo1"
+          },
+          {
+            "type": "text",
+            "label": "Partnership date",
+            "property": "PartnershipDt"
+          },
+          {
+            "type": "text",
+            "label": "Mobile Phone 2",
+            "property": "MobilePhnNo2"
+          }
+        ],
+        "querystring": {
+            "select": "SELECT RM.DESCR AS IdType, V.VENDOR_RATING AS VendorRating, V.ID_NO AS IdNo, V.EMAIL AS Email, V.ESTABLISHMENT_DT AS EstablishmentDt, V.MOBILE_PHN_NO_1 AS MobilePhnNo1, V.PARTNERSHIP_DT AS PartnershipDt, V.MOBILE_PHN_NO_2 AS MobilePhnNo2",
+            "from": "FROM DBO.VENDOR V JOIN DBO.REF_MASTER RM ON V.MR_ID_TYPE_CODE = RM.MASTER_CODE AND RM.REF_MASTER_TYPE_CODE='ID_TYPE_VENDOR'", 
+            "where": "WHERE V.VENDOR_ID = {0}" 
+        }
+      }
+    ]
+  }

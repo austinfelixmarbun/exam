@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
@@ -22,6 +22,7 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
 import { ShowErrorsComponent } from '../test-new/show-errors.component';
+import { UcProdOfferingCompComponent } from './UserControl/uc-prod-offering-compnt/uc-prod-offering-comp.component';
 
 @NgModule({
     exports: [
@@ -37,7 +38,8 @@ import { ShowErrorsComponent } from '../test-new/show-errors.component';
         UcpagingComponent,
         ViewgenericComponent,
         LookupgenericComponent,
-        ShowErrorsComponent
+        ShowErrorsComponent,
+        UcProdOfferingCompComponent
     ],
     imports: [
         FormsModule,
@@ -50,7 +52,8 @@ import { ShowErrorsComponent } from '../test-new/show-errors.component';
         UcgridfooterModule,
         UcSubsectionModule,
         UclookupgenericModule,
-        UcpagingModule
+        UcpagingModule,
+        ReactiveFormsModule
     ],
     declarations: [
         UcAddressComponent,
@@ -65,7 +68,8 @@ import { ShowErrorsComponent } from '../test-new/show-errors.component';
         UcpagingComponent,
         ViewgenericComponent,
         LookupgenericComponent,
-        ShowErrorsComponent
+        ShowErrorsComponent,
+        UcProdOfferingCompComponent
     ]
 })
 

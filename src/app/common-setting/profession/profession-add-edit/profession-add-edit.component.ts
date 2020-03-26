@@ -39,8 +39,8 @@ export class ProfessionAddEditComponent implements OnInit {
 
 
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      if (params["mode"] != null) {
+        this.pageType = params["mode"];
       }
       if (params["refProfessionId"] != null) {
         this.refProfessionId = params["refProfessionId"];
@@ -91,7 +91,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.refProfessionObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/commonSetting/profession/paging"]);
+            this.router.navigate(["/CommonSetting/Profession/paging"]);
           
         },
         error => {
@@ -108,7 +108,7 @@ export class ProfessionAddEditComponent implements OnInit {
         response => {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/commonSetting/profession/paging"]);
+          this.router.navigate(["/CommonSetting/Profession/paging"]);
         },
         error => {
           console.log(error);

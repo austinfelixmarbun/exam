@@ -2,6 +2,17 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 
+.number{
+    width:30%;
+}
+
+.code{
+    width:50%;
+}
+
+.name{
+    width:80%;
+}
 
 .no-padding{
     padding-left:0px !important;
@@ -148,6 +159,13 @@ thead tr th {
     text-decoration-line: underline;
 }
 
+.Button-Add{
+    z-index:1 ;
+    position:absolute;
+    right: 93px;
+    text-decoration-line: underline;
+}
+
 .overlay {
     position : fixed !important;
 }
@@ -242,6 +260,11 @@ form .form-section{
     color:red;
 }
 
+.adins-required-label::after{
+    content:"*";
+    color:red;
+}
+
 .adins-back-fixed{
     position:fixed;
     top:8px;
@@ -251,6 +274,11 @@ form .form-section{
     position:fixed;
     top:8px;
     right:6%;
+}
+
+.margin-r-5
+{
+    margin-right: 5px;
 }
 
 /* 

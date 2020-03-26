@@ -13,7 +13,6 @@ import { ListRefProductDetailObj } from 'app/shared/model/ListRefProductDetailOb
 @Component({
   selector: 'app-product-component-HO',
   templateUrl: './product-component.component.html',
-  styleUrls: ['./product-component.component.scss'],
   providers: [NGXToastrService]
 })
 export class ProductComponentHOComponent implements OnInit {
@@ -29,173 +28,240 @@ export class ProductComponentHOComponent implements OnInit {
     private wizard: WizardComponent
   ) { }
 
+  FormProdComp: any;
+  dictOptions: { [key: string]: any; } = {};
+  UrlGetProdCompGrouped: string;
+  UrlPostAddEditProdD: string;
+  ProdHId: number;
+  StateSave : string;
+  dictBehaviour: {[key: string]: any;} = {};
 
-  RefGeneralDataForm = this.fb.group({
-    items: this.fb.array([this.fb.group({
-      ProdDId: [''],
-      ProdHId: [''],
-      RefProdCompntCode: [''],
-      RefProdCompntGrpCode: [''],
-      CompntValue: [''],
-      CompntValueDesc: [''],
-      MrProdBehaviour: [''],
-      RowVersion: [''],
-      ProdCompntType: [''],
-      ProdCompntDtaSrcApi: [''],
-      ProdCompntDtaSrc: [''],
-      ProdCompntDtaValue: [''],
-      ProdCompntName: [''],
-      BehaviourType: [''],
-      DropDownList: this.fb.array([this.fb.group({
-        Key: [''],
-        Value: ['']
-      })]),
-      DropDownListBehaviour: this.fb.array([this.fb.group({
-        key: [''],
-        value: ['']
-      })])
-    })])
-  });
-
-  inputLookUpObj;
-  UrlBackEnd;
-
-  lookupEnvironment;
-
-  listRefProductDetailObj;
-  refProductDetailObj;
-  items;
-  lengthDataReturnObj;
-  SchmData;
-  RuleData;
-  ScoreData;
-  OthrData;
   ngOnInit() {
-    this.SchmData = 0;
-    this.RuleData = 0;
-    this.ScoreData = 0;
-    this.OthrData = 0;
+    this.UrlGetProdCompGrouped = AdInsConstant.GetProductHOComponentGrouped;
+    this.UrlPostAddEditProdD = AdInsConstant.AddOrEditProductDetail;
 
-    this.inputLookUpObj = new InputLookupObj();
-    this.inputLookUpObj.urlJson = "./assets/uclookup/product/lookupProduct.json";
-    this.inputLookUpObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookUpObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookUpObj.pagingJson = "./assets/uclookup/product/lookupProduct.json";
-    this.inputLookUpObj.genericJson = "./assets/uclookup/product/lookupProduct.json";
+    this.FormProdComp = this.fb.group(
+      {
+        groups: this.fb.array([])
+      }
+    );
 
-    // Get Data Input 
-    // mode add
-    // if(this.objInput.mode == "add"){
-    this.UrlBackEnd = AdInsConstant.GetProductHOComponent;
-    var ProdHOComponent = {
-      ProdHId: this.objInput["param"],
-      GroupCodes: [
-        "SCHM",
-        "SCORE",
-        "RULE",
-        "OTHR"
-      ],
-      RowVersion: ""
+    this.ProdHId = this.objInput["param"];
+    this.LoadProdComponent(this.ProdHId, "SCORE,RULE,OTHR");
+  }
+
+
+  addGroup(groupCode, groupName) {
+    return this.fb.group({
+      groupCode: groupCode,
+      groupName: groupName,
+      components: this.fb.array([])
+    })
+  }
+
+  addComponent(obj) {
+    var compCode, compDescr;
+
+    console.log(this.dictOptions);
+
+    if (obj.ProdCompntType == "DDL") {
+      if (obj.CompntValue == "") {
+        var dict = this.dictOptions[obj.RefProdCompntCode];
+        if(dict != undefined)
+        {
+          compCode = this.dictOptions[obj.RefProdCompntCode][0].Key;
+          compDescr = this.dictOptions[obj.RefProdCompntCode][0].Value;
+        }
+      }
+      else {
+        compCode = obj.CompntValue;
+        compDescr = obj.CompntValueDesc;
+      }
+    }
+    else {
+      compCode = obj.CompntValue;
+      compDescr = obj.CompntValueDesc;
     }
 
-    this.items = this.RefGeneralDataForm.get('items') as FormArray;
-    this.http.post(this.UrlBackEnd, ProdHOComponent).subscribe(
-      (response) => {
-        console.log("Response dynamic data 1");
-        console.log(response);
-        // console.log(response["ReturnObject"].length);
-        this.lengthDataReturnObj = response["ReturnObject"].length;
-        var dataTemp = response["ReturnObject"];
+    var mrProdBehaviour = obj.MrProdBehaviour;
 
-        if (this.lengthDataReturnObj) {
-          for (var i = 0; i < this.lengthDataReturnObj; i++) {
-            var eachDataDetail = this.fb.group({
-              ProdDId: response["ReturnObject"][i].ProdDId,
-              ProdHId: response["ReturnObject"][i].ProdHId,
-              RefProdCompntCode: response["ReturnObject"][i].RefProdCompntCode,
-              RefProdCompntGrpCode: response["ReturnObject"][i].RefProdCompntGrpCode,
-              CompntValue: response["ReturnObject"][i].CompntValue,
-              CompntValueDesc: response["ReturnObject"][i].CompntValueDesc,
-              MrProdBehaviour: response["ReturnObject"][i].MrProdBehaviour,
-              RowVersion: response["ReturnObject"][i].RowVersion,
-              ProdCompntType: response["ReturnObject"][i].ProdCompntType,
-              ProdCompntDtaSrcApi: response["ReturnObject"][i].ProdCompntDtaSrcApi,
-              ProdCompntDtaSrc: response["ReturnObject"][i].ProdCompntDtaSrc,
-              ProdCompntDtaValue: response["ReturnObject"][i].ProdCompntDtaValue,
-              ProdCompntName: response["ReturnObject"][i].ProdCompntName,
-              BehaviourType: response["ReturnObject"][i].BehaviourType,
-              DropDownList: this.fb.array([this.fb.group({
-                Key: "",
-                Value: ""
-              })]),
-              DropDownListBehaviour: this.fb.array([this.fb.group({
-                key: [''],
-                value: ['']
-              })])
-            }) as FormGroup;
-            if (eachDataDetail.controls.RowVersion.value == null) {
-              eachDataDetail.patchValue({
-                RowVersion: ""
-              });
-            }
-            
-            if(eachDataDetail.controls.RefProdCompntGrpCode.value == "SCHM"){
-              this.SchmData++;
-            }else if(eachDataDetail.controls.RefProdCompntGrpCode.value == "RULE"){
-              this.RuleData++;
-            }else if(eachDataDetail.controls.RefProdCompntGrpCode.value == "SCORE"){
-              this.ScoreData++;
-            }else if(eachDataDetail.controls.RefProdCompntGrpCode.value == "OTHR"){
-              this.OthrData++;
-            }
+    if(mrProdBehaviour == "")
+    {
+      if(this.dictBehaviour[obj.BehaviourType] != undefined){
+        if(this.dictBehaviour[obj.BehaviourType].length > 0){
+          mrProdBehaviour = this.dictBehaviour[obj.BehaviourType][0].Key;
+        }
+      }  
+    }
 
-            var flag = false;
-            if (eachDataDetail.controls.ProdHId.value == 0) {
-              flag = true;
+    return this.fb.group({
+      RefProdCompntId: obj.RefProdCompntId,
+      RefProdCompntCode: obj.RefProdCompntCode,
+      ProdCompntName: obj.ProdCompntName,
+      RefProdCompntGrpCode: obj.RefProdCompntGrpCode,
+      ProdCompntType: obj.ProdCompntType,
+      BehaviourType: obj.BehaviourType,
+      ProdHId: obj.ProdHId,
+      ProdDId: obj.ProdDId,
+      CompntValue: [compCode,Validators.required],
+      CompntValueDesc: compDescr,
+      MrProdBehaviour: mrProdBehaviour
+    })
+  }
+
+  async PopulateDDL(obj) {
+    var url = obj.ProdCompntDtaSrcApi;
+    if(url != "")
+    {
+      var payload = JSON.parse(obj.ProdCompntDtaValue);
+      await this.http.post(url, payload).toPromise().then(
+        (response) => {
+          this.dictOptions[obj.RefProdCompntCode] = response["ReturnObject"];
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  async PopulateRefBehaviour(obj) {
+    var bhvrTypeCode = obj.BehaviourType;
+    if(this.dictBehaviour[bhvrTypeCode] == undefined)
+    {
+      var url = AdInsConstant.GetRefBehaviourByBehaviourTypeCode;
+      await this.http.post(url, { RowVersion : "", BehaviourTypeCode : bhvrTypeCode}).toPromise().then(
+        (response) => {
+          this.dictBehaviour[bhvrTypeCode] = response["ReturnObject"];
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  LoadProdComponent(ProdHId, CompGroups) {
+    var ProdHOComponent = {
+      ProdHId: ProdHId,
+      GroupCodes: CompGroups.split(","),
+      RowVersion: ""
+    }
+    this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
+      async (response) => {
+        for (var i = 0; i < response["ReturnObject"].length; i++) {
+          var group = response["ReturnObject"][i];
+          var fa_group = this.FormProdComp.controls['groups'] as FormArray;
+          fa_group.push(this.addGroup(group.GroupCode, group.GroupName));
+
+          for (var j = 0; j < group.Components.length; j++) {
+            var comp = group.Components[j];
+            if (comp.ProdCompntType == "DDL") {
+              await this.PopulateDDL(comp);
+              
             }
-            
-            // Get DDL
-            if (eachDataDetail.controls.ProdCompntType.value == "DDL") {
-              this.resolveDDL(eachDataDetail, i, flag);
-              eachDataDetail.controls.CompntValue.clearValidators();
-              eachDataDetail.controls.CompntValue.updateValueAndValidity();
-            }else if(eachDataDetail.controls.ProdCompntType.value == "AMT"){
-              eachDataDetail.controls.CompntValue.setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
-              eachDataDetail.controls.CompntValue.updateValueAndValidity();
+            if(comp.BehaviourType != "")
+            {
+              await this.PopulateRefBehaviour(comp);
             }
-            // Get DDL Behaviour
-            this.resolveDDLBehaviour(eachDataDetail, i, flag);
-            // Push Data
-            this.items.push(eachDataDetail);
+          }
+          console.log("Behaviour")
+          console.log(this.dictBehaviour)
+
+          for (var j = 0; j < group.Components.length; j++) {
+            var comp = group.Components[j];
+            var fa_comp = (<FormArray>this.FormProdComp.controls['groups']).at(i).get('components') as FormArray;
+            var comp_group = this.addComponent(comp) as FormGroup;
+            if (comp.ProdCompntType == "AMT")
+            {
+              comp_group.controls['CompntValue'].setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+            }
+            fa_comp.push(comp_group);
           }
         }
-        this.items.removeAt(0);
-        console.log("cek form");
-        console.log(this.RefGeneralDataForm);
-        // this.RuleData = dataTemp.filter(comp => 
-        //   comp.RefProdCompntGrpCode == "RULE");
-        // console.log(this.RuleData);
-        // console.log(this.items);
-        // console.log("total data:")
-        // console.log(this.SchmData);
-        // console.log(this.RuleData);
-        // console.log(this.OthrData);
-        // console.log(this.ScoreData);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
 
-        console.log("cek finish");
-        
-        // console.log("ruledata:");
-        // console.log(this.RuleData);
+  ChangeDropdown() {
+    this.dictOptions["COMP3"] = [{ "key": "oeoe", "value": "oeoe" }];
+  }
+
+  onChangeEvent(val, event, index, indexparent) {
+    this.FormProdComp.controls["groups"].controls[indexparent].controls["components"].controls[index].patchValue({
+      CompntValueDesc: this.dictOptions[val].find(f => f.Key == event.target.value).Value
+    })
+  }
+
+  BuildReqProdDetail() {
+    var list = new Array();
+    for (let i = 0; i < this.FormProdComp.controls.groups.length; i++) {
+      for (let j = 0; j < this.FormProdComp.controls.groups.controls[i].controls["components"].length; j++) {
+        list.push(Object.assign({}, ...this.FormProdComp.controls.groups.controls[i].controls["components"].controls[j].value));
+      }
+    }
+
+    for (let i = 0; i < list.length; i++) {
+      if(list[i].ProdCompntType == "AMT")
+      {
+        list[i].CompntValueDesc = list[i].CompntValue;
+      }
+      list[i].RowVersion = "";
+    }
+
+    var objPost = {
+      ProdHId: this.ProdHId,
+      ProductDetails: list
+    }
+
+    return objPost;
+  }
+
+  SaveForm() {
+    var objPost = this.BuildReqProdDetail();
+    this.http.post(this.UrlPostAddEditProdD, objPost).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["message"]);
+        this.router.navigate(["/Product/HOpaging"]);
       },
       (error) => {
         console.log(error);
       }
     );
-    // }else{ // mode edit
-
-    // }
-
   }
+
+  NextDetail() {
+    var objPost = this.BuildReqProdDetail();
+    this.http.post(this.UrlPostAddEditProdD, objPost).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["message"]);
+        this.wizard.goToNextStep();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  ClickSave(state) {
+    this.StateSave = state;
+  }
+
+  SubmitForm()
+  {
+    if(this.StateSave == "save")
+    {
+      this.SaveForm();
+    }
+    else
+    {
+      this.NextDetail();
+    }
+  }
+
 
   resolveDDLBehaviour(obj: any, indexAt: any, flag: any){
     console.log("Behaviour DDL");
@@ -210,23 +276,23 @@ export class ProductComponentHOComponent implements OnInit {
       this.http.post(urlGet, ddlObj).subscribe(
         (response) => {
           console.log(response);
-          var lengthDDL = response["ReturnObject"].length;
-          if (lengthDDL > 0) {
-            for (var i = 0; i < lengthDDL; i++) {
-              var eachDDLDetail = this.fb.group({
-                Key: response["ReturnObject"][i].Key,
-                Value: response["ReturnObject"][i].Value,
-              }) as FormGroup;
-              // console.log(eachDDLDetail);
-              this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.push(eachDDLDetail);
-            }
-            this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.removeAt(0);
-            if (flag) {
-              this.RefGeneralDataForm.controls.items["controls"][indexAt].patchValue({
-                MrProdBehaviour: response["ReturnObject"][0].Value
-              });
-            }
-          }
+          // var lengthDDL = response["ReturnObject"].length;
+          // if (lengthDDL > 0) {
+          //   for (var i = 0; i < lengthDDL; i++) {
+          //     var eachDDLDetail = this.fb.group({
+          //       Key: response["ReturnObject"][i].Key,
+          //       Value: response["ReturnObject"][i].Value,
+          //     }) as FormGroup;
+          //     // console.log(eachDDLDetail);
+          //     this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.push(eachDDLDetail);
+          //   }
+          //   this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.removeAt(0);
+          //   if (flag) {
+          //     this.RefGeneralDataForm.controls.items["controls"][indexAt].patchValue({
+          //       MrProdBehaviour: response["ReturnObject"][0].Value
+          //     });
+          //   }
+          // }
         },
         (error) => {
           console.log(error);
@@ -236,140 +302,76 @@ export class ProductComponentHOComponent implements OnInit {
     }
   }
 
-  resolveDDL(obj: any, indexAt: any, flag: any) {
-    console.log("Cek Obj DDL:");
-    // console.log(indexAt);
-    console.log(obj);
-    var urlGet = obj.controls.ProdCompntDtaSrcApi.value;
-    if (urlGet) {
-      var ddlObj = JSON.parse(obj.controls.ProdCompntDtaValue.value);
-      console.log("Json parse");
-      console.log(ddlObj);
-      // console.log("cek API " + (indexAt + 1));
-      // if(obj.controls.RefProdCompntGrpCode.value == "RULE"){
-      //   console.log("DDL RULE:");
-      // }
-      // Make different obj passing
-      this.http.post(urlGet, ddlObj).subscribe(
-        (response) => {
-          // console.log("response:");
-          console.log(response);
-          
-          var lengthDDL = response["ReturnObject"].length;
-          if (lengthDDL > 0) {
-            for (var i = 0; i < lengthDDL; i++) {
-              var eachDDLDetail = this.fb.group({
-                Key: response["ReturnObject"][i].Key,
-                Value: response["ReturnObject"][i].Value,
-              }) as FormGroup;
-              // console.log(eachDDLDetail);
-              this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.push(eachDDLDetail);
-            }
-            this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownList.removeAt(0);
-            if (flag) {
-              this.RefGeneralDataForm.controls.items["controls"][indexAt].patchValue({
-                CompntValue: response["ReturnObject"][0].Value,
-                CompntValueDesc: response["ReturnObject"][0].Key
-              });
-            }
-          }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+  
+  // SaveForm() {
+  //   this.listGeneralDataObj = new ListRefProductDetailObj();
+  //   this.listGeneralDataObj.ProductDetails = new Array();
+  //   this.listGeneralDataObj.ProdHId = this.objInput["param"];
+  //   this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
+  //   for (var i = 0; i < this.lengthDataReturnObj; i++) {
+  //     var GeneralDataObj = new RefProductDetailObj();
+  //     GeneralDataObj.ProdDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdDId.value;
+  //     GeneralDataObj.ProdHId = this.objInput["param"];
+  //     GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
+  //     GeneralDataObj.RefProdCompntGrpCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
+  //     GeneralDataObj.CompntValue = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValue.value;
+  //     GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
+  //     GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
+  //     GeneralDataObj.RowVersion = this.RefGeneralDataForm.controls.items["controls"][i].controls.RowVersion.value;
+  //     this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
+  //   }
+  //   // this.listGeneralDataObj.ProductDetails.removeAt(0);
+  //   console.log(this.listGeneralDataObj);
+  //   console.log(this.RefGeneralDataForm.controls.items["controls"][0].controls.RowVersion.value);
 
-    }
-  }
+  //   this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
+  //     (response) => {
+  //       console.log("Response save form");
+  //       console.log(response);
+  //       this.toastr.successMessage(response["message"]);
+  //       this.router.navigate(["/Product/HOpaging"]);
+  //     },
+  //     (error) => {
+  //       console.log("Response save error");
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
-  clickTest(ev: any, idx: any) {
-    // console.log(idx);
-    // console.log(ev.target.selectedOptions[0].text);
-    // console.log(ev.target.selectedOptions[0].value);
+  // NextDetail() {
+  //   this.listGeneralDataObj = new ListRefProductDetailObj();
+  //   this.listGeneralDataObj.ProductDetails = new Array();
+  //   this.listGeneralDataObj.ProdHId = this.objInput["param"];
+  //   this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
+  //   for (var i = 0; i < this.lengthDataReturnObj; i++) {
+  //     var GeneralDataObj = new RefProductDetailObj();
+  //     GeneralDataObj.ProdDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdDId.value;
+  //     GeneralDataObj.ProdHId = this.objInput["param"];
+  //     GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
+  //     GeneralDataObj.RefProdCompntGrpCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
+  //     GeneralDataObj.CompntValue = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValue.value;
+  //     GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
+  //     GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
+  //     GeneralDataObj.RowVersion = this.RefGeneralDataForm.controls.items["controls"][i].controls.RowVersion.value;
+  //     this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
+  //   }
+  //   // this.listGeneralDataObj.ProductDetails.removeAt(0);
+  //   console.log(this.listGeneralDataObj);
+  //   console.log(this.RefGeneralDataForm.controls.items["controls"][0].controls.RowVersion.value);
 
-    this.RefGeneralDataForm.controls.items["controls"][idx].patchValue({
-      CompntValue: ev.target.selectedOptions[0].value,
-      CompntValueDesc: ev.target.selectedOptions[0].text
-    });
-
-  }
-
-  clickTestBehaviour(ev: any, idx: any){
-    this.RefGeneralDataForm.controls.items["controls"][idx].patchValue({
-      MrProdBehaviour: ev.target.selectedOptions[0].value,
-    });
-  }
-
-  listGeneralDataObj;
-  SaveForm() {
-    this.listGeneralDataObj = new ListRefProductDetailObj();
-    this.listGeneralDataObj.ProductDetails = new Array();
-    this.listGeneralDataObj.ProdHId = this.objInput["param"];
-    this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
-    for (var i = 0; i < this.lengthDataReturnObj; i++) {
-      var GeneralDataObj = new RefProductDetailObj();
-      GeneralDataObj.ProdDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdDId.value;
-      GeneralDataObj.ProdHId = this.objInput["param"];
-      GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
-      GeneralDataObj.RefProdCompntGrpCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
-      GeneralDataObj.CompntValue = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValue.value;
-      GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
-      GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
-      GeneralDataObj.RowVersion = this.RefGeneralDataForm.controls.items["controls"][i].controls.RowVersion.value;
-      this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
-    }
-    // this.listGeneralDataObj.ProductDetails.removeAt(0);
-    console.log(this.listGeneralDataObj);
-    console.log(this.RefGeneralDataForm.controls.items["controls"][0].controls.RowVersion.value);
-
-    this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
-      (response) => {
-        console.log("Response save form");
-        console.log(response);
-        this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/Product/HOpaging"]);
-      },
-      (error) => {
-        console.log("Response save error");
-        console.log(error);
-      }
-    );
-  }
-
-  NextDetail() {
-    this.listGeneralDataObj = new ListRefProductDetailObj();
-    this.listGeneralDataObj.ProductDetails = new Array();
-    this.listGeneralDataObj.ProdHId = this.objInput["param"];
-    this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
-    for (var i = 0; i < this.lengthDataReturnObj; i++) {
-      var GeneralDataObj = new RefProductDetailObj();
-      GeneralDataObj.ProdDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdDId.value;
-      GeneralDataObj.ProdHId = this.objInput["param"];
-      GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
-      GeneralDataObj.RefProdCompntGrpCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
-      GeneralDataObj.CompntValue = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValue.value;
-      GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
-      GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
-      GeneralDataObj.RowVersion = this.RefGeneralDataForm.controls.items["controls"][i].controls.RowVersion.value;
-      this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
-    }
-    // this.listGeneralDataObj.ProductDetails.removeAt(0);
-    console.log(this.listGeneralDataObj);
-    console.log(this.RefGeneralDataForm.controls.items["controls"][0].controls.RowVersion.value);
-
-    this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
-      (response) => {
-        console.log("Response next form");
-        console.log(response);
-        this.toastr.successMessage(response["message"]);
-        this.wizard.goToNextStep();
-      },
-      (error) => {
-        console.log("Response save error");
-        console.log(error);
-      }
-    );
-  }
+  //   this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
+  //     (response) => {
+  //       console.log("Response next form");
+  //       console.log(response);
+  //       this.toastr.successMessage(response["message"]);
+  //       this.wizard.goToNextStep();
+  //     },
+  //     (error) => {
+  //       console.log("Response save error");
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
 
  }

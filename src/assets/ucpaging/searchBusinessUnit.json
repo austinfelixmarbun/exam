@@ -95,6 +95,7 @@
             "action": [
                 {
                     "type": "edit",
+                    "icon":"ft-users",
                     "path": "/Organization/BusinessUnit/member",
                     "param": [
                         {

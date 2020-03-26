@@ -1,0 +1,127 @@
+{
+    "title": "Head Office",
+    "component": [
+        {
+            "type": "dropdown",
+            "name": "V.MR_VENDOR_CATEGORY_CODE", 
+            "id": "MrVendorCategoryCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListActiveRefMasterByVendorCategoryByReserveField1",
+            "label": "Vendor Category",
+            "criteriaPropName" : "ReserveField1",
+            "criteriaPropValue" : "HO",
+            "items": [],
+            "itemsUrl": []
+        },
+        {
+            "type": "dropdown",
+            "name": "V.IS_ACTIVE",
+            "id": "ActiveStatusId",
+            "label": "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "V.VENDOR_CODE",
+            "id": "VendorCodeId",
+            "value": "",
+            "label": "HO Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "V.VENDOR_NAME",
+            "id": "VendorNameId",
+            "value": "",
+            "label": "HO Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "select V.VENDOR_CODE AS VendorCode, V.VENDOR_NAME AS VendorName, V.IS_ACTIVE AS IsActive, V.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, V.VENDOR_ID AS VendorId",
+        "from": "FROM dbo.VENDOR V LEFT JOIN dbo.REF_MASTER RM ON V.MR_VENDOR_CATEGORY_CODE = RM.MASTER_CODE"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "SCHEME CODE",
+            "name": "VendorCode"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "SCHEME NAME",
+            "name": "VendorName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "ACTIVE STATUS",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "ACTION"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "VendorCode"
+        },
+        {
+            "type" : "link",
+            "property" : "VendorName",
+            "path" : "/Vendor/HO/View",
+            "param" :
+            [
+                {
+                    "type" : "VendorId",
+                    "property" : "VendorId"
+                }
+            ]
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/Vendor/HO/Registration",
+                    "param": [
+                        {
+                            "type": "VendorId",
+                            "property": "VendorId"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+  }

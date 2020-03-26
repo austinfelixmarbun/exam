@@ -23,7 +23,7 @@
         "name": "sandi_Bi",
         "id": "sandiBi",
         "value": "",
-        "label": "Sandi BI",
+        "label": "BI Code",
         "placeholder": ""
       }
     ],
@@ -85,5 +85,5 @@
         }
     ],
     "propertyId": "refEconomicSectorId",
-    "propertyName": "economicSectorCode"
+    "propertyName": "economicSectorName"
 }

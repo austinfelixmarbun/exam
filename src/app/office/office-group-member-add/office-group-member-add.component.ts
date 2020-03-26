@@ -29,7 +29,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   pageNow: number;
   pageSize: number;
   apiUrl: any;
-  vendorUrl: any;
   totalData: any;
   resultData: any;
   tempData: any;
@@ -39,7 +38,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   RefOfficeId: any;
   CenterGrpId: any;
   MrOfficeTypeCode: string = "CG";
-  addUrl: any;
   refOfficeobj: any;
 
   constructor(private http: HttpClient,
@@ -87,9 +85,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     this.inputObj.addCritInput.push(addCritTypeOCode);
     this.inputObj.addCritInput.push(addCritIsActive);
 
-
-    console.log(this.inputObj);
-
     this.viewObj = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
     this.pageNow = 1;
     this.pageSize = 10;
@@ -113,15 +108,12 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   }
 
   Checked(RefOfficeId: any, isChecked: any): void {
-    console.log(RefOfficeId);
     if (isChecked) {
       this.listSelectedId.push(RefOfficeId);
     } else {
       const index = this.listSelectedId.indexOf(RefOfficeId)
-      console.log(index);
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
-    console.log('Sel', this.listSelectedId);
   }
   
   searchPagination(event: number) {
@@ -192,7 +184,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
   SelectAll(condition) {
     this.checkboxAll = condition;
-    console.log(condition);
     if (condition) {
       for (let i = 0; i < this.resultData.Data.length; i++) {
         if (this.listSelectedId.indexOf(this.resultData.Data[i].RefOfficeId) < 0) {
@@ -202,15 +193,12 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
     } else {
       for (let i = 0; i < this.resultData.Data.length; i++) {
-        let index = this.listSelectedId.indexOf(this.resultData.data[i].RefOfficeId);
+        let index = this.listSelectedId.indexOf(this.resultData.Data[i].RefOfficeId);
         if (index > -1) {
           this.listSelectedId.splice(index, 1);
         }
-        console.log(this.resultData.Data[i]);
       }
     }
-    console.log(this.checkboxAll);
-    console.log(this.listSelectedId);
   }
 
   deleteFromTemp(RefOfficeId: any) {
@@ -248,15 +236,18 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   }
 
   SaveOfficeGroupMember() {
+    if (this.tempListId.length == 0) {
+      this.toastr.typeErrorCustom('Please Add At Least One Data');
+      return;
+    }
+
     var obj = {
       CenterGrpId: this.CenterGrpId,
       RefOfficeId: this.tempListId
     }
 
-    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddCenterGrpOfficeMember;
-    this.http.post(this.addUrl, obj).subscribe(
+    this.http.post(AdInsConstant.AddVendorGrpMbr, obj).subscribe(
         (response) => {
-            console.log(response);
             this.router.navigate(['/Office/Office-group-member'], {queryParams: {RefOfficeId:this.RefOfficeId, CenterGrpId:this.CenterGrpId}});
         },
         (error) => {
@@ -270,26 +261,25 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       CenterGrpId: this.CenterGrpId,
       RefOfficeId: this.RefOfficeId
     }
-    var getListUrl = environment.FoundationR3Url + AdInsConstant.GetListCenterGrpMemberByRefOfficeId;
-    this.http.post(getListUrl, obj).subscribe(
+
+    this.http.post(AdInsConstant.GetListCenterGrpMemberByRefOfficeId, obj).subscribe(
       (response) => {
         this.refOfficeobj = response;
-
         var arrMemberList = new Array();
 
         for (let index = 0; index < this.refOfficeobj.ListCenterGrpOfficeMbr.length; index++) {
            arrMemberList.push(this.refOfficeobj.ListCenterGrpOfficeMbr[index].RefOfficeId)
         }
         
-        const addCritListRefOffice = new CriteriaObj();
-        addCritListRefOffice.DataType = 'numeric';
-        addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
-        addCritListRefOffice.restriction = AdInsConstant.RestrictionNotIn;
-        addCritListRefOffice.listValue = arrMemberList;
-        this.arrCrit.push(addCritListRefOffice);
-        this.inputObj.addCritInput.push(addCritListRefOffice);
-
-        console.log("ni sudah jalan get List")
+        if(arrMemberList.length != 0){
+          const addCritListRefOffice = new CriteriaObj();
+          addCritListRefOffice.DataType = 'numeric';
+          addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
+          addCritListRefOffice.restriction = AdInsConstant.RestrictionNotIn;
+          addCritListRefOffice.listValue = arrMemberList;
+          this.arrCrit.push(addCritListRefOffice);
+          this.inputObj.addCritInput.push(addCritListRefOffice);
+        }
       },
       (error) => {
         console.log(error);
