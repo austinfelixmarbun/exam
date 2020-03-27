@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditMainDataPagingComponent } from './edit-main-data-paging.component';
 
 describe('EditMainDataPagingComponent', () => {
