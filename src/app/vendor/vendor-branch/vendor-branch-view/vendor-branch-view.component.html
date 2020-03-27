@@ -1,0 +1,163 @@
+<lib-ucviewgeneric [viewInput]="viewVendorBranchObj"></lib-ucviewgeneric>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Main Information">
+    <ng-template matTabContent>
+      <div class="card">
+        <div class="card-body">
+          <br>
+          <div>
+            <ng-container *ngIf="MrVendorTypeCode == 'P'">
+              <lib-ucviewgeneric [viewInput]="viewVendorBranchMainPObj"></lib-ucviewgeneric>
+            </ng-container>
+
+            <ng-container *ngIf="MrVendorTypeCode == 'C'">
+              <lib-ucviewgeneric [viewInput]="viewVendorBranchMainCObj"></lib-ucviewgeneric>
+            </ng-container>
+
+            <ng-container *ngIf="MrVendorCategoryCode =='SUPPLIER_BRANCH'">
+              <lib-ucviewgeneric [viewInput]="viewBranchInfoSuppObj"></lib-ucviewgeneric>
+            </ng-container>
+
+            <ng-container *ngIf="MrVendorCategoryCode =='SURVEYOR_BRANCH'">
+              <lib-ucviewgeneric [viewInput]="viewBranchInfoSurObj"></lib-ucviewgeneric>
+            </ng-container>
+
+            <ng-container *ngIf="MrVendorCategoryCode =='ASSET_INSCO_BRANCH'">
+              <lib-ucviewgeneric [viewInput]="viewBranchInfoAssetObj"></lib-ucviewgeneric>
+            </ng-container>
+
+            <ng-container *ngIf="MrVendorCategoryCode =='LIFE_INSCO_BRANCH'">
+              <lib-ucviewgeneric [viewInput]="viewBranchInfoLifeObj"></lib-ucviewgeneric>
+            </ng-container>
+
+            <ng-container *ngIf="MrVendorCategoryCode == 'AGENCY_COMPANY'">
+              <lib-ucviewgeneric [viewInput]="viewBranchAgencyPObj"></lib-ucviewgeneric>
+            </ng-container>
+
+            <ng-container *ngIf="MrVendorCategoryCode == 'AGENCY_PERSONAL'">
+              <lib-ucviewgeneric [viewInput]="viewBranchAgencyCObj"></lib-ucviewgeneric>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="Tax">
+    <ng-template matTabContent>
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <lib-ucviewgeneric [viewInput]="viewVendorBranchTaxObj"></lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewInput]="viewVendorBranchTaxAddrObj"></lib-ucviewgeneric>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Address">
+    <ng-template matTabContent>
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <lib-ucviewgeneric [viewInput]="viewVendorBranchAddrObj"></lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewInput]="viewVendorBranchLtLgObj"></lib-ucviewgeneric>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Bank Info">
+    <ng-template matTabContent>
+      <table class="table table-responsive-md text-center table-hover">
+        <thead>
+          <tr class="table-header">
+            <th class="text-center">BANK</th>
+            <th class="text-center">ACCOUNT NUMBER</th>
+            <th class="text-center">ACCOUNT NAME</th>
+            <th class="text-center">DEFAULT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of VendorBankAcc">
+            <td class="text-left">{{item.BankName}}</td>
+            <td class="text-left">{{item.BankAccountNo}}</td>
+            <td class="text-left">{{item.BankAccountName}}</td>
+            <td class="text-left">{{item.IsDefault}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="Employee">
+    <ng-template matTabContent>
+      <table class="table table-responsive-md text-center table-hover">
+        <thead>
+          <tr class="table-header">
+            <th class="text-center">EMPLOYEE CODE</th>
+            <th class="text-center">EMPLOYEE NAME</th>
+            <th class="text-center">EMPLOYEE PHONE</th>
+            <th class="text-center">RATING</th>
+            <th class="text-center">CONTANCT PERSON</th>
+            <th class="text-center">OWNER</th>
+            <th class="text-center">ACTIVE STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of VendorEmp">
+            <td class="text-left">{{item.VendorEmpNo}}</td>
+            <td class="text-left">{{item.VendorEmpName}}</td>
+            <td class="text-left">{{item.MobilePhnNo1}}</td>
+            <td class="text-left">{{item.VendorEmpRating}}</td>
+            <td class="text-left">{{item.IsContactPerson}}</td>
+            <td class="text-left">{{item.IsOwner}}</td>
+            <td class="text-left">{{item.IsActive}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Group Info">
+    <ng-template matTabContent>
+      <table class="table table-responsive-md text-center table-hover">
+        <thead>
+          <tr class="table-header">
+            <th class="text-left">GROUP CODE</th>
+            <th class="text-left">GROUP NAME</th>
+            <th class="text-left">ACTIVE STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of VendorGrp">
+            <td class="text-left">{{item.VendorGrpCode}}</td>
+            <td class="text-left">{{item.VendorGrpName}}</td>
+            <td class="text-left">{{item.IsActive}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Office Info">
+    <ng-template matTabContent>
+      <table class="table table-responsive-md text-center table-hover">
+        <thead>
+          <tr class="table-header">
+            <th class="text-left">OFFICE CODE</th>
+            <th class="text-left">OFFICE NAME</th>
+            <th class="text-left">OFFICE ADDRESS</th>
+            <th class="text-left">ACTIVE STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of VendorOfficeMbr">
+            <td class="text-left">{{item.OfficeCode}}</td>
+            <td class="text-left">{{item.OfficeName}}</td>
+            <td class="text-left">{{item.OfficeAddr}}</td>
+            <td class="text-left">{{item.IsActive}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

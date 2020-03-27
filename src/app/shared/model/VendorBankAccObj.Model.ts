@@ -7,6 +7,7 @@ export class VendorBankAccObj {
     BankAccountName: any;
     IsDefault: any;
     RowVersion : any;
+    BankName:any;
     
     constructor() {this.RowVersion = "";}
 }

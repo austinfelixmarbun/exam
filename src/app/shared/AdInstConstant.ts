@@ -561,7 +561,8 @@ export class AdInsConstant {
   public static AddVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/AddVendorBranchEmp"
   public static GetVendorEmpByVendorEmpId = environment.FoundationR3Url + "/VendorEmp/GetVendorEmpByVendorEmpId"
   public static GetVendorEmpAndVendorTaxAddrByVendorEmpId = environment.FoundationR3Url + "/VendorEmp/GetVendorEmpAndVendorTaxAddrByVendorEmpId"
-  public static EditVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/EditVendorBranchEmp"
+  public static EditVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/EditVendorBranchEmp";
+  public static GetListVendorEmpByVendorId = environment.FoundationR3Url +  "/VendorEmp/GetListVendorEmpByVendorId";
 
   //VENDOR SCHEME
   public static AddVendorSchm = environment.FoundationR3Url + "/VendorSchm/AddVendorSchm";
