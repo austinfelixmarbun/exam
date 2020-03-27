@@ -8,9 +8,6 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-
 <div class="addEdit">
   <table class="table table-responsive-md text-center table-hover">
     <thead>
@@ -48,8 +45,8 @@
         <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}</td>
         <td style="text-align: left;">{{item.Notes}}</td>
         <td style="text-align: left;">
-          <span *ngIf="item.MrCustAddrTypeCode != 'Legal Address'" (click)="editItem(item)" class="material-icons"
-           >edit</span> 
+          <span *ngIf="item.MrCustAddrTypeCode != 'Legal Address'" (click)="editItem(item)"
+            class="material-icons">edit</span>
         </td>
       </tr>
     </tbody>

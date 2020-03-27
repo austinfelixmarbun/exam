@@ -20,7 +20,7 @@
                 </div>
                 <label class="col-md-2 adInsLabel" translate>Customer Model </label>
                 <div class="col-md-4">
-                    <select class="form-control adInsInput" style="width: auto" formControlName="CustModel"
+                  <select class="form-control adInsInput" style="width: auto" formControlName="CustModel"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.CustModel.invalid }">
                     <option *ngFor="let it of tempCustModel  " [value]="it.Key">
                       {{it.Value}}</option>
@@ -29,7 +29,7 @@
                   </show-errors>
                 </div>
               </div>
-            <div class="form-group row adins-required">
+              <div class="form-group row adins-required">
                 <label class="col-md-2 adInsLabel" translate>Company Type</label>
                 <div class="col-md-4">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrCompanyTypeCode"

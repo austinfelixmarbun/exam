@@ -164,4 +164,3 @@ export class CustomerCompanyPageComponent implements OnInit {
     this.CustCompanyId = ev.CustCompanyId;
   }
 }
-  

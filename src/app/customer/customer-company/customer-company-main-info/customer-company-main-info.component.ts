@@ -13,23 +13,23 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   CustomerCompanyForm = this.fb.group({
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
-    MrCompanyTypeCode: ['', [Validators.required]],  
+    MrCompanyTypeCode: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.required]],
   });
   getUrl: any;
   tempCustModel: any;
-  tempCompanyTypeCode: any; 
+  tempCompanyTypeCode: any;
   CustModel: any;
   MrCompanyTypeCode: any;
   MrIdTypeCode: any;
-  CustName: any; 
+  CustName: any;
   TaxIdNo: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.getUrl = AdInsConstant.GetListActiveRefMaster;
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     var refMasterObj1 = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "COMPANY",
@@ -58,11 +58,10 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     );
   }
   SaveValue() {
-    this.CustName = this.CustomerCompanyForm.controls["CustName"].value; 
+    this.CustName = this.CustomerCompanyForm.controls["CustName"].value;
     this.TaxIdNo = this.CustomerCompanyForm.controls["TaxIdNo"].value;
     this.CustModel = this.CustomerCompanyForm.controls["CustModel"].value;
     this.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
     this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, } });
-
   }
 }

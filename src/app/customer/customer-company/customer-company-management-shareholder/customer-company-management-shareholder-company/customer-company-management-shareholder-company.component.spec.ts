@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CustomerCompanyManagementShareholderCompanyComponent } from './customer-company-management-shareholder-company.component';
 
 describe('CustomerCompanyManagementShareholderCompanyComponent', () => {

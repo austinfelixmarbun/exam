@@ -1,6 +1,5 @@
 <lib-ucSubsection [id]="'CustFinDataId'" [title]="'Financial Data'" [panel]="'CustFinData'"></lib-ucSubsection>
-<div id="CustFinData">
- 
+<div id="CustFinData"> 
     <form class="form form-horizontal" [formGroup]="CustPersonalFinDataForm" #enjiForm="ngForm" novalidate
       (ngSubmit)="enjiForm.form.valid" *ngIf="MrCustTypeCode == 'PERSONAL'">
       <div class="form-body">

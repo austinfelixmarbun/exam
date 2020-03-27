@@ -48,7 +48,6 @@ export class CustGroupTabDetailComponent implements OnInit {
     var criteriaList;
     var criteriaObj;
     var refMasterRelationship = new RefMasterObj();
-
     this.CustGrpForm.patchValue({
       CustId: this.CustId
     });
@@ -120,7 +119,6 @@ export class CustGroupTabDetailComponent implements OnInit {
           this.activeModal.close(response);
         },
         (error) => {
-          console.log("ERROR");
           console.log(error);
         }
       );
@@ -131,7 +129,6 @@ export class CustGroupTabDetailComponent implements OnInit {
           this.activeModal.close(response);
         },
         (error) => {
-          console.log("ERROR");
           console.log(error);
         }
       );
