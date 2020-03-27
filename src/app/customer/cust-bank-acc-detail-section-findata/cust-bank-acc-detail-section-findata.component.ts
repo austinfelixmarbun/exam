@@ -39,7 +39,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     BankAccNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     BankAccName: ['', [Validators.required]],
     IsBankStmnt: [false],
-    BankBranchRegRptCode: [0, [Validators.required]],
+    BankBranchRegRptCode: [''],
     BalanceAmt: [0],
     IsDefault: [false],
     IsActive: [false],
