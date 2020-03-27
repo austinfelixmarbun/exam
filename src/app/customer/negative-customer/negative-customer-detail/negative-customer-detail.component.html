@@ -2,42 +2,42 @@
   <div class="card">
     <div class="card-body">
       <div class="px-3">
-          <div class="row">
-              <div class="col-md-8">
-                  <h4 class="form-section card-title" translate><i class="ft-file-text"></i>NEGATIVE CUSTOMER</h4>
-              </div>
-              <!-- <div class="col-md-4" style="text-align-last: right">
-                <button type="button" class="backButton" (click)="Back()" translate>
-                  <i class="ft-arrow-left"></i> Back
-                </button>
-              </div> -->
-            </div>
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i>NEGATIVE CUSTOMER</h4>
+          </div>
+        </div>
         <form class="form form-horizontal" [formGroup]="NegativeCustForm" #enjiForm="ngForm" novalidate
           (ngSubmit)="enjiForm.form.valid && SaveForm(enjiForm)">
           <div class="form-body">
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="MrCustTypeCode" translate>Customer Type</label>
               <div class="col-md-9">
-                <select class="form-control adInsInput" formControlName="MrCustTypeCode" (change)="custTypeHandler($event)"
+                <select class="form-control adInsInput" formControlName="MrCustTypeCode"
+                  (change)="custTypeHandler($event)"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MrCustTypeCode.invalid }"
                   [attr.disabled]="pageType == 'edit' ? true : null">
                   <option value="PERSONAL">Personal</option>
                   <option value="COMPANY">Company</option>
                 </select>
-                <show-errors [control]="NegativeCustForm.controls.MrCustTypeCode" [submit]="enjiForm.submitted"></show-errors>
+                <show-errors [control]="NegativeCustForm.controls.MrCustTypeCode" [submit]="enjiForm.submitted">
+                </show-errors>
               </div>
             </div>
-            <lib-ucSubsection [id]="'MainInformationId'" [title]="'Main Information'" [panel]="'MainInformationPersonal'"></lib-ucSubsection>
+            <lib-ucSubsection [id]="'MainInformationId'" [title]="'Main Information'"
+              [panel]="'MainInformationPersonal'"></lib-ucSubsection>
             <div id="MainInformationPersonal">
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="CustLookup" translate>Find From Existing Customer</label>
                 <div class="col-md-9" *ngIf="pageType == 'add'">
                   <div *ngIf="custType == 'PERSONAL'">
-                    <lib-uclookupgeneric [lookupInput]="inputLookupCustPersonalObj" [parentForm]='NegativeCustForm' [enjiForm]='enjiForm' [identifier]="'PersonalLookup'"
+                    <lib-uclookupgeneric [lookupInput]="inputLookupCustPersonalObj" [parentForm]='NegativeCustForm'
+                      [enjiForm]='enjiForm' [identifier]="'PersonalLookup'"
                       (lookup)="getLookupCustPersonalResponse($event)"></lib-uclookupgeneric>
                   </div>
                   <div *ngIf="custType == 'COMPANY'">
-                    <lib-uclookupgeneric [lookupInput]="inputLookupCustCompanyObj" [parentForm]='NegativeCustForm' [enjiForm]='enjiForm' [identifier]="'CompanyLookup'"
+                    <lib-uclookupgeneric [lookupInput]="inputLookupCustCompanyObj" [parentForm]='NegativeCustForm'
+                      [enjiForm]='enjiForm' [identifier]="'CompanyLookup'"
                       (lookup)="getLookupCustCompanyResponse($event)"></lib-uclookupgeneric>
                   </div>
                 </div>
@@ -48,27 +48,30 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="CustName" translate>Customer Name</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="CustName" 
+                  <input type="text" class="form-control adInsInput" formControlName="CustName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.CustName.invalid }"
                     [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.CustName" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.CustName" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required" *ngIf="custType == 'PERSONAL'">
                 <label class="col-md-3 adInsLabel" for="MrIdTypeCode" translate>ID Type</label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" formControlName="MrIdTypeCode" 
+                  <select class="form-control adInsInput" formControlName="MrIdTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MrIdTypeCode.invalid }"
                     [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
-                    <option *ngFor="let item of refMasterIdType?.ReturnObject" [value]="item.Key">{{item.Value}}</option>
+                    <option *ngFor="let item of refMasterIdType?.ReturnObject" [value]="item.Key">{{item.Value}}
+                    </option>
                   </select>
-                  <show-errors [control]="NegativeCustForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required" *ngIf="custType == 'PERSONAL'">
                 <label class="col-md-3 adInsLabel" for="IdNo" translate>ID Number</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="IdNo" 
+                  <input type="text" class="form-control adInsInput" formControlName="IdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.IdNo.invalid }"
                     [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
                   <show-errors [control]="NegativeCustForm.controls.IdNo" [submit]="enjiForm.submitted"></show-errors>
@@ -77,10 +80,12 @@
               <div class="form-group row" *ngIf="custType == 'PERSONAL'">
                 <label class="col-md-3 adInsLabel" for="IdExpiredDt" translate>ID Expired Date</label>
                 <div class="col-md-9">
-                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt" 
+                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.IdExpiredDt.invalid }"
-                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null" [min]="businessDateIdExp | date: 'yyyy-MM-dd'">
-                  <show-errors [control]="NegativeCustForm.controls.IdExpiredDt" [submit]="enjiForm.submitted"></show-errors>
+                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null"
+                    [min]="businessDateIdExp | date: 'yyyy-MM-dd'">
+                  <show-errors [control]="NegativeCustForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row" *ngIf="custType == 'PERSONAL'">
@@ -95,85 +100,97 @@
                 </div>
               </div>
               <div class="form-group row" *ngIf="custType == 'PERSONAL'">
-                <label class="col-md-3 adInsLabel adins-required-label" for="BirthPlaceDate" translate>Birth Place / Date</label>
+                <label class="col-md-3 adInsLabel adins-required-label" for="BirthPlaceDate" translate>Birth Place /
+                  Date</label>
                 <div class="col-md-5">
-                  <input type="text" class="form-control adInsInput" formControlName="BirthPlace" 
+                  <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.BirthPlace.invalid }"
                     [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.BirthPlace" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.BirthPlace" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
                 <div class="col-md-1">
                   /
                 </div>
                 <div class="col-md-3">
-                  <input type="date" class="form-control adInsInput" formControlName="BirthDt" 
+                  <input type="date" class="form-control adInsInput" formControlName="BirthDt"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && (NegativeCustForm.controls.BirthDt.invalid || errBirthDate) }"
-                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null" [max]="businessDate | date: 'yyyy-MM-dd'" />
-                  <show-errors [control]="NegativeCustForm.controls.BirthDt" [submit]="enjiForm.submitted"></show-errors>
+                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null"
+                    [max]="businessDate | date: 'yyyy-MM-dd'" />
+                  <show-errors [control]="NegativeCustForm.controls.BirthDt" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="TaxIdNo" translate>NPWP</label>
                 <div class="col-md-5">
-                  <input type="text" class="form-control adInsInput" formControlName="TaxIdNo" 
+                  <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.TaxIdNo.invalid }"
                     [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.TaxIdNo" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required" *ngIf="custType == 'PERSONAL'">
                 <label class="col-md-3 adInsLabel" for="MotherMaidenName" translate>Mother Maiden Name</label>
                 <div class="col-md-5">
-                  <input type="text" class="form-control adInsInput" formControlName="MotherMaidenName" 
+                  <input type="text" class="form-control adInsInput" formControlName="MotherMaidenName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MotherMaidenName.invalid }"
                     [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.MotherMaidenName" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.MotherMaidenName" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row" *ngIf="custType == 'PERSONAL'">
                 <label class="col-md-3 adInsLabel" for="MobilePhn" translate>Mobile Phone</label>
                 <div class="col-md-5">
-                  <input type="text" class="form-control adInsInput" formControlName="MobilePhn" 
+                  <input type="text" class="form-control adInsInput" formControlName="MobilePhn"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MobilePhn.invalid }"
                     [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.MobilePhn" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.MobilePhn" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
             </div>
-            <lib-ucSubsection [id]="'LegalAddressSectionId'" [title]="'Legal Address'" [panel]="'LegalAddressSection'"></lib-ucSubsection>
+            <lib-ucSubsection [id]="'LegalAddressSectionId'" [title]="'Legal Address'" [panel]="'LegalAddressSection'">
+            </lib-ucSubsection>
             <div id="LegalAddressSection">
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="LegalAddr" translate>Legal Address</label>
                 <div class="col-md-9">
-                  <textarea class="form-control adInsInput" formControlName="LegalAddr" required 
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.LegalAddr.invalid }"
-                      [attr.disabled]="pageType == 'edit' ? true : null"></textarea>
-                  <show-errors [control]="NegativeCustForm.controls.LegalAddr" [submit]="enjiForm.submitted"></show-errors>                      
+                  <textarea class="form-control adInsInput" formControlName="LegalAddr" required
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.LegalAddr.invalid }"
+                    [attr.disabled]="pageType == 'edit' ? true : null"></textarea>
+                  <show-errors [control]="NegativeCustForm.controls.LegalAddr" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="RT/RW" translate>RT/RW</label>
                 <div class="col-md-3">
-                  <input type="text" class="form-control adInsInput" formControlName="AreaCode4" 
+                  <input type="text" class="form-control adInsInput" formControlName="AreaCode4"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.AreaCode4.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.AreaCode4" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.AreaCode4" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
                 <div class="col-md-1">
                   /
                 </div>
                 <div class="col-md-3">
-                  <input type="text" class="form-control adInsInput" formControlName="AreaCode3" 
+                  <input type="text" class="form-control adInsInput" formControlName="AreaCode3"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.AreaCode3.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.AreaCode3" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.AreaCode3" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="Zipcode" translate>Zipcode</label>
                 <div class="col-md-9" *ngIf="pageType == 'add'">
-                  <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]='NegativeCustForm' [enjiForm]='enjiForm' [identifier]="'ZipcodeLookup'"
-                    (lookup)="getLookupZipcodeResponse($event)"></lib-uclookupgeneric>
+                  <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]='NegativeCustForm'
+                    [enjiForm]='enjiForm' [identifier]="'ZipcodeLookup'" (lookup)="getLookupZipcodeResponse($event)">
+                  </lib-uclookupgeneric>
                 </div>
                 <div class="col-md-9" style="padding: 0;" *ngIf="pageType == 'edit'">
                   <div class="col-md-9">{{zipcode}}</div>
@@ -182,25 +199,27 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="AreaCode2" translate>Kelurahan</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="AreaCode2" 
+                  <input type="text" class="form-control adInsInput" formControlName="AreaCode2"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.AreaCode2.invalid }"
                     [attr.disabled]="true">
-                  <show-errors [control]="NegativeCustForm.controls.AreaCode2" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.AreaCode2" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="AreaCode1" translate>Kecamatan</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="AreaCode1" 
+                  <input type="text" class="form-control adInsInput" formControlName="AreaCode1"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.AreaCode1.invalid }"
                     [attr.disabled]="true">
-                  <show-errors [control]="NegativeCustForm.controls.AreaCode1" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.AreaCode1" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="City" translate>City</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="City" 
+                  <input type="text" class="form-control adInsInput" formControlName="City"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.City.invalid }"
                     [attr.disabled]="true">
                   <show-errors [control]="NegativeCustForm.controls.City" [submit]="enjiForm.submitted"></show-errors>
@@ -209,90 +228,98 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="Phn1" translate>Phone No (Fix Line) 1</label>
                 <div class="col-md-2">
-                  <input type="text" class="form-control adInsInput" formControlName="PhnArea1" 
+                  <input type="text" class="form-control adInsInput" formControlName="PhnArea1"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.PhnArea1.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.PhnArea1" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.PhnArea1" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
                 <div class="col-md-1">-</div>
                 <div class="col-md-3">
-                  <input type="text" class="form-control adInsInput" formControlName="Phn1" 
+                  <input type="text" class="form-control adInsInput" formControlName="Phn1"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.Phn1.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
                   <show-errors [control]="NegativeCustForm.controls.Phn1" [submit]="enjiForm.submitted"></show-errors>
                 </div>
                 <div class="col-md-1">-</div>
                 <div class="col-md-2">
-                  <input type="text" class="form-control adInsInput" formControlName="PhnExt1" 
+                  <input type="text" class="form-control adInsInput" formControlName="PhnExt1"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.PhnExt1.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.PhnExt1" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.PhnExt1" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="Phn1" translate>Phone No (Fix Line) 2</label>
                 <div class="col-md-2">
-                  <input type="text" class="form-control adInsInput" formControlName="PhnArea2" 
+                  <input type="text" class="form-control adInsInput" formControlName="PhnArea2"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.PhnArea2.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.PhnArea2" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.PhnArea2" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
                 <div class="col-md-1">-</div>
                 <div class="col-md-3">
-                  <input type="text" class="form-control adInsInput" formControlName="Phn2" 
+                  <input type="text" class="form-control adInsInput" formControlName="Phn2"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.Phn2.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
                   <show-errors [control]="NegativeCustForm.controls.Phn2" [submit]="enjiForm.submitted"></show-errors>
                 </div>
                 <div class="col-md-1">-</div>
                 <div class="col-md-2">
-                  <input type="text" class="form-control adInsInput" formControlName="PhnExt2" 
+                  <input type="text" class="form-control adInsInput" formControlName="PhnExt2"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.PhnExt2.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.PhnExt2" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.PhnExt2" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="Phn1" translate>Phone No (Fix Line) 3</label>
                 <div class="col-md-2">
-                  <input type="text" class="form-control adInsInput" formControlName="PhnArea3" 
+                  <input type="text" class="form-control adInsInput" formControlName="PhnArea3"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.PhnArea3.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.PhnArea3" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.PhnArea3" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
                 <div class="col-md-1">-</div>
                 <div class="col-md-3">
-                  <input type="text" class="form-control adInsInput" formControlName="Phn3" 
+                  <input type="text" class="form-control adInsInput" formControlName="Phn3"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.Phn3.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
                   <show-errors [control]="NegativeCustForm.controls.Phn3" [submit]="enjiForm.submitted"></show-errors>
                 </div>
                 <div class="col-md-1">-</div>
                 <div class="col-md-2">
-                  <input type="text" class="form-control adInsInput" formControlName="PhnExt3" 
+                  <input type="text" class="form-control adInsInput" formControlName="PhnExt3"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.PhnExt3.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.PhnExt3" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.PhnExt3" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="Fax" translate>Fax</label>
                 <div class="col-md-2">
-                  <input type="text" class="form-control adInsInput" formControlName="FaxArea" 
+                  <input type="text" class="form-control adInsInput" formControlName="FaxArea"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.FaxArea.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
-                  <show-errors [control]="NegativeCustForm.controls.FaxArea" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.FaxArea" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
                 <div class="col-md-1">-</div>
                 <div class="col-md-3">
-                  <input type="text" class="form-control adInsInput" formControlName="Fax" 
+                  <input type="text" class="form-control adInsInput" formControlName="Fax"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.Fax.invalid }"
                     [attr.disabled]="pageType == 'edit' ? true : null">
                   <show-errors [control]="NegativeCustForm.controls.Fax" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
             </div>
-            <lib-ucSubsection [id]="'NegativeDataSectionId'" [title]="'Negative Data'" [panel]="'NegativeDataSection'"></lib-ucSubsection>
+            <lib-ucSubsection [id]="'NegativeDataSectionId'" [title]="'Negative Data'" [panel]="'NegativeDataSection'">
+            </lib-ucSubsection>
             <div id="NegativeDataSection">
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="IsActive" translate>Active</label>
@@ -303,34 +330,39 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="MrNegCustTypeCode" translate>Negative Type</label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" formControlName="MrNegCustTypeCode" 
+                  <select class="form-control adInsInput" formControlName="MrNegCustTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MrNegCustTypeCode.invalid }">
-                    <option *ngFor="let item of negativeTypeList?.ReturnObject" [value]="item.Key">{{item.Value}}</option>
+                    <option *ngFor="let item of negativeTypeList?.ReturnObject" [value]="item.Key">{{item.Value}}
+                    </option>
                   </select>
-                  <show-errors [control]="NegativeCustForm.controls.MrNegCustTypeCode" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.MrNegCustTypeCode" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="MrNegCustSourceCode" translate>Negative Customer Source</label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" formControlName="MrNegCustSourceCode" 
+                  <select class="form-control adInsInput" formControlName="MrNegCustSourceCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MrNegCustSourceCode.invalid }">
-                    <option *ngFor="let item of negativeSourceList?.ReturnObject" [value]="item.Key">{{item.Value}}</option>
+                    <option *ngFor="let item of negativeSourceList?.ReturnObject" [value]="item.Key">{{item.Value}}
+                    </option>
                   </select>
-                  <show-errors [control]="NegativeCustForm.controls.MrNegCustSourceCode" [submit]="enjiForm.submitted"></show-errors>
+                  <show-errors [control]="NegativeCustForm.controls.MrNegCustSourceCode" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="Notes" translate>Notes</label>
                 <div class="col-md-9">
-                  <textarea class="form-control adInsInput" formControlName="Notes" 
+                  <textarea class="form-control adInsInput" formControlName="Notes"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.Notes.invalid }"></textarea>
                   <show-errors [control]="NegativeCustForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
             </div>
             <div *ngIf="pageType == 'edit'">
-              <lib-ucSubsection [id]="'NegativeDataHistorySectionId'" [title]="'Negative Data History'" [panel]="'NegativeDataHistorySection'"></lib-ucSubsection>
+              <lib-ucSubsection [id]="'NegativeDataHistorySectionId'" [title]="'Negative Data History'"
+                [panel]="'NegativeDataHistorySection'"></lib-ucSubsection>
               <div id="NegativeDataHistorySection">
                 <table class="table table-responsive-md text-center table-hover">
                   <thead>
@@ -339,7 +371,8 @@
                         <span class="thead-header" name='transactionNo' translate>Transaction No</span>
                       </th>
                       <th style="text-align: left;">
-                        <span class="thead-header" name='negativeCustomerSource' translate>Negative Customer Source</span>
+                        <span class="thead-header" name='negativeCustomerSource' translate>Negative Customer
+                          Source</span>
                       </th>
                       <th style="text-align: left;">
                         <span class="thead-header" name='negativeType' translate>Negative Type</span>

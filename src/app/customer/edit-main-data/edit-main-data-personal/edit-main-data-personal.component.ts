@@ -146,7 +146,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custPersonalObj = new CustPersonalObj();
     this.custObj = this.tempCustObj;
     this.custPersonalObj = this.tempCustPersonalObj;
-
     this.custObj.CustName = this.CustomerPersonalForm.controls["CustName"].value;
     this.custObj.MrCustModelCode = this.CustomerPersonalForm.controls["CustModel"].value;
     this.custObj.MrIdTypeCode = this.CustomerPersonalForm.controls["MrIdTypeCode"].value;

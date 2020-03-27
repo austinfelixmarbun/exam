@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerRoutingModule } from 'app/customer/customer-routing.module';
 // import { ArchwizardModule } from 'angular-archwizard';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
@@ -79,7 +79,8 @@ import { EditMainDataCompanyComponent } from './edit-main-data/edit-main-data-co
 import { EditMainDataPersonalComponent } from './edit-main-data/edit-main-data-personal/edit-main-data-personal.component';
 import { CustomerCompanyAddressCheckComponent } from './customer-company/customer-company-address/customer-company-address-check/customer-company-address-check.component';
 import { CustomerPersonalAddressCheckComponent } from './customer-personal/customer-personal-address/customer-personal-address-check/customer-personal-address-check.component';
- @NgModule({
+
+@NgModule({
   exports: [],
   imports: [
     CustomerRoutingModule,
@@ -95,18 +96,18 @@ import { CustomerPersonalAddressCheckComponent } from './customer-personal/custo
     UcpagingModule,
     ReactiveFormsModule,
     UclookupgenericModule,
-    UcSubsectionModule, 
-     ArchwizardModule,
-     UcviewgenericModule,
-     UcaddressModule
+    UcSubsectionModule,
+    ArchwizardModule,
+    UcviewgenericModule,
+    UcaddressModule
   ],
-  declarations: [ 
-    CustomerPagingComponent, 
+  declarations: [
+    CustomerPagingComponent,
     CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent,
     NegativeCustomerComponent,
     NegativeCustomerDetailComponent,
     NegativeCustomerViewComponent,
-    CustomerContactPersonComponent, 
+    CustomerContactPersonComponent,
     CustomerContactAddComponent,
     CustomerContactCheckComponent,
     CustomerViewPersonalDetailComponent,
@@ -151,21 +152,20 @@ import { CustomerPersonalAddressCheckComponent } from './customer-personal/custo
     CustomerCompanyPageComponent,
     CustomerCompanyDetailComponent,
     CustomerCompanyContactInformationComponent,
-    CustomerCompanyManagementShareholderComponent, 
+    CustomerCompanyManagementShareholderComponent,
     CustomerCompanyManagementShareholderCheckComponent,
     CustomerCompanyManagementShareholderPersonalComponent,
-    CustomerCompanyManagementShareholderCompanyComponent, 
+    CustomerCompanyManagementShareholderCompanyComponent,
     EditMainDataPagingComponent,
     EditMainDataCompanyComponent,
     EditMainDataPersonalComponent,
-    CustomerCompanyAddressCheckComponent,  
+    CustomerCompanyAddressCheckComponent,
     CustomerPersonalAddressCheckComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
-export class CustomerModule { 
-  constructor(){
-    
+export class CustomerModule {
+  constructor() {
+
   }
 }
- 
