@@ -260,7 +260,7 @@ export class AdInsConstant {
   public static GetRefCountryByCountryCode = environment.FoundationR3Url + "/RefCountry/GetRefCountryByCountryCode";
 
   //REF INDUSTRY TYPE
-  public static GetRefIndustryTypeById = "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
+  public static GetRefIndustryTypeById =  environment.FoundationR3Url + "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
   public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
   public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
   public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";

@@ -16,11 +16,11 @@ import { environment } from 'environments/environment';
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderCompanyComponent implements OnInit {
-  @Input() inputValue: any;
+  
   @Input() custCompanyId: any;
   @Output () outputValue : EventEmitter<object>= new EventEmitter();
   @Input() CustCompanyMgmntShrholderId : any;
-  getUrl: any;
+  getListActiveRefMasterUrl: any;
   tempMrCustModelCode: any;
   tempMrCompanyTypeCode: any;
   custCompanyMgmntShrholderObj: any;
@@ -34,11 +34,11 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     MrCustModelCode: [''],
     MrCompanyTypeCode: [''],
     TaxIdNo: [''],
-    SharePrcnt: ['0'],
+    SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     IsSigner: [false],
   });
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
-    this.getUrl = AdInsConstant.GetListActiveRefMaster;
+    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
     this.getCustCompanyMgmntShrholderUrl = AdInsConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
     this.editManagementShareholderUrl = AdInsConstant.EditCustCompanyMgmntShrholder;
@@ -52,11 +52,11 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.inputLookupCustCompanyObj.pagingJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.genericJson = "./assets/lookup/lookUpExistingCustCompany.json";
 
-    var refMasterObj1 = {
+    var refMasterObjMrCompanyTypeCode = {
       RefMasterTypeCode: "COMPANY_TYPE",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempMrCompanyTypeCode = response["ReturnObject"];
         this.ManagementShareholderForm.patchValue({
@@ -64,12 +64,12 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         });
       }
     );
-    var refMasterObj2 = {
+    var refMasterObjMrCustModelCode = {
       RefMasterTypeCode: "CUST_MODEL",
       Reservefield1: "COMPANY",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj2).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCustModelCode).subscribe(
       (response) => {
         this.tempMrCustModelCode = response["ReturnObject"];
         console.log(this.tempMrCustModelCode);
@@ -78,9 +78,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         });
       }
     );
-
-      
-
+ 
     if(this.CustCompanyMgmntShrholderId!=null){
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId  = this.CustCompanyMgmntShrholderId;

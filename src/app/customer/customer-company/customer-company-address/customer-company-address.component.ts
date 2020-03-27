@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';   
+import { Component, OnInit} from '@angular/core';   
  
 @Component({
   selector: 'app-customer-company-address',
@@ -8,10 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class CustomerCompanyAddressComponent implements OnInit {
-  @Input () CustId : any ;
+  
   mode: any;
   AddrId:any;
-  constructor( ) {     
+  constructor( ) {    
+    
   }
 
   ngOnInit() {

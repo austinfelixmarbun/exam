@@ -29,7 +29,7 @@ state: any;
     VipNotes : ['']
   });
   KTP = "KTP";
-  getUrl: any;
+  getListActiveRefMasterUrl: any;
   custPersonalObj: CustPersonalObj;
   tempGender: any;
   tempIdType: any;
@@ -49,7 +49,7 @@ state: any;
   IsAffiliateWithMf : any;
   VipNotes: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
-  this.getUrl = AdInsConstant.GetListActiveRefMaster; 
+  this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster; 
   }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ state: any;
       RefMasterTypeCode: "GENDER",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObj).subscribe(
       (response) => {
         this.tempGender = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
@@ -65,11 +65,11 @@ state: any;
         });
       }
     );
-    var refMasterObj1 = {
+    var refMasterObjMrIdTypeCode = {
       RefMasterTypeCode: "ID_TYPE",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempIdType = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
@@ -82,13 +82,13 @@ state: any;
         }
       }
     );
-    var refMasterObj2 = {
+    var refMasterObjCustModel = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "PERSONAL",
       RowVersion: ""
     }
 
-    this.http.post(this.getUrl, refMasterObj2).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({

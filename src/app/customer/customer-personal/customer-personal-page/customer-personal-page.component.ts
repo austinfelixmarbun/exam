@@ -61,18 +61,18 @@ export class CustomerPersonalPageComponent implements OnInit {
     this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
       (response) => {
         this.tempCustObj = response;
-        var refMasterObj1 = {
+        var refMasterObjMrCustModelCode = {
           MasterCode: this.tempCustObj.MrCustModelCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObj1).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrCustModelCode).subscribe(
           (response) => {
             this.tempMrCustModelCode = response;
           }
         );
-        var refMasterObj2 = {
+        var refMasterObjMrIdTypeCode = {
           MasterCode: this.tempCustObj.MrIdTypeCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObj2).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrIdTypeCode).subscribe(
           (response) => {
             this.tempMrIdTypeCode = response;
         
@@ -86,19 +86,17 @@ export class CustomerPersonalPageComponent implements OnInit {
       (response) => {
         this.tempCustPersonalObj = response;
 
-        var refMasterObj = {
+        var refMasterObjMrGenderCode = {
           MasterCode: this.tempCustPersonalObj.MrGenderCode
         }
 
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObj).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrGenderCode).subscribe(
           (response) => {
             this.tempMrGenderCode = response;
           }
         );
        
       });
-
-
   }
 
   EnterTab(type){

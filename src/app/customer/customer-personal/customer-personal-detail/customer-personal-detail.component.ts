@@ -36,9 +36,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
     MrReligionCode: ['',],
     IsRestInPeace: [false],
     MobilePhnNo1: ['', Validators.required],
-    MobilePhnNo2: ['',],
-    Email1: ['',],
-    Email2: ['',],
+    MobilePhnNo2: [''],
+    Email1: [''],
+    Email2: [''],
   });
   CountryIndonesia = "Indonesia";
   custPersonalObj: any;
@@ -55,7 +55,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   getListCountryUrl: any;
   tempCustObj: any;
   tempCountryCode: any;
-  GetUrl: any;
+  getListActiveRefMasterUrl: any;
   GetCustByCustIdUrl: any;
   GetCustPersonalbyCustIdUrl: any;
   EditCustPersonalUrl: any;
@@ -67,7 +67,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
 
-    this.GetUrl = AdInsConstant.GetListActiveRefMaster;
+    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getListCountryUrl = AdInsConstant.GetListRefCountry;
     this.GetCustByCustIdUrl = AdInsConstant.GetCustByCustId;
     this.EditCustPersonalUrl = AdInsConstant.EditCustPersonal;
@@ -108,10 +108,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.http.post(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
-        var refMasterObj = {
+        var refMasterObjMrNationalityCode = {
           RefMasterTypeCode: "NATIONALITY"
         }
-        this.http.post(this.GetUrl, refMasterObj).subscribe(
+        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrNationalityCode).subscribe(
           (response) => {
             this.tempNationality = response["ReturnObject"];
 
@@ -143,10 +143,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
           }
         );
 
-        var refMasterObj1 = {
+        var refMasterObjMrSalutationCode = {
           RefMasterTypeCode: "SALUTATION"
         }
-        this.http.post(this.GetUrl, refMasterObj1).subscribe(
+        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrSalutationCode).subscribe(
           (response) => {
             this.tempSalutation = response["ReturnObject"];
 
@@ -161,10 +161,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
             }
           }
         );
-        var refMasterObj2 = {
+        var refMasterObjMrEducationCode = {
           RefMasterTypeCode: "EDUCATION"
         }
-        this.http.post(this.GetUrl, refMasterObj2).subscribe(
+        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrEducationCode).subscribe(
           (response) => {
             this.tempEducation = response["ReturnObject"];
             if (this.tempCustPersonalObj.MrEducationCode != null) {
@@ -178,10 +178,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
             }
           }
         );
-        var refMasterObj3 = {
+        var refMasterObjMrReligionCode = {
           RefMasterTypeCode: "RELIGION"
         }
-        this.http.post(this.GetUrl, refMasterObj3).subscribe(
+        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrReligionCode).subscribe(
           (response) => {
             this.tempReligion = response["ReturnObject"];
             if (this.tempCustPersonalObj.MrReligionCode != null) {
@@ -195,10 +195,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
             }
           }
         );
-        var refMasterObj4 = {
+        var refMasterObjMrMaritalStatCode = {
           RefMasterTypeCode: "MARITAL_STAT"
         }
-        this.http.post(this.GetUrl, refMasterObj4).subscribe(
+        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
           (response) => {
             this.tempMrMaritalStatCode = response["ReturnObject"];
             if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
@@ -213,8 +213,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
           }
         );
 
-        var refMasterObj5;
-        this.http.post(this.getListCountryUrl, refMasterObj5).subscribe(
+        var refMasterObj;
+        this.http.post(this.getListCountryUrl, refMasterObj).subscribe(
           (response) => {
             this.tempWnaCountryCode = response["ReturnObject"];
           }
@@ -261,6 +261,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.IsRestInPeace = this.CustomerDetailForm.controls["IsRestInPeace"].value;
     this.custPersonalObj.MobilePhnNo1 = this.CustomerDetailForm.controls["MobilePhnNo1"].value;
     this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
+    console.log("aaaawdawd"+ this.custPersonalObj.MobilePhnNo2);
     this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
     this.custPersonalObj.Email2 = this.CustomerDetailForm.controls["Email2"].value;
     this.http.post(this.EditCustPersonalUrl, this.custPersonalObj).subscribe(

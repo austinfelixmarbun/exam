@@ -16,7 +16,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     MrCompanyTypeCode: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.required]],
   });
-  getUrl: any;
+  GetListActiveRefMasterUrl: any;
   tempCustModel: any;
   tempCompanyTypeCode: any;
   CustModel: any;
@@ -26,16 +26,16 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   TaxIdNo: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
-    this.getUrl = AdInsConstant.GetListActiveRefMaster;
+    this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
   }
 
   ngOnInit() {
-    var refMasterObj1 = {
+    var refMasterObjCustModel = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "COMPANY",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
@@ -44,11 +44,11 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       }
     );
 
-    var refMasterObj2 = {
+    var refMasterObjMrCompanyTypeCode = {
       RefMasterTypeCode: "COMPANY_TYPE",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj2).subscribe(
+    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempCompanyTypeCode = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({

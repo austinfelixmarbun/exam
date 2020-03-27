@@ -23,8 +23,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
   AssetAccessoryId: any;
   apiUrl: any;
   result: any;
-  acObj: AssetAccessoryObj;
-  getUrl: any;
+  acObj: AssetAccessoryObj; 
   addUrl: any;
   editUrl: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {

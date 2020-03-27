@@ -17,7 +17,7 @@ export class EditMainDataCompanyComponent implements OnInit {
   getCustCompanyByCustIdUrl : any;
   getCustByCustIdUrl : any;
   tempCustModel : any;
-  getUrl : any;
+  getListActiveRefMasterUrl : any;
   tempCompanyTypeCode : any; 
   custCompanyObj : any;
   custObj : any
@@ -28,7 +28,7 @@ export class EditMainDataCompanyComponent implements OnInit {
   editCustCompanyUrl : any;
   From : any;
   constructor( private route: ActivatedRoute, private fb: FormBuilder,  private http: HttpClient,private router: Router,private toastr: NGXToastrService) {
-    this.getUrl = AdInsConstant.GetListActiveRefMaster;
+    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;
     this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
     this.editCustUrl = AdInsConstant.EditCust;
@@ -50,12 +50,12 @@ export class EditMainDataCompanyComponent implements OnInit {
   });
  
   ngOnInit() {
-    var refMasterObj1 = {
+    var refMasterObjCustModel = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "COMPANY",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
@@ -63,11 +63,11 @@ export class EditMainDataCompanyComponent implements OnInit {
         });
       }
     );
-    var refMasterObj2 = {
+    var refMasterObjMrCompanyTypeCode = {
       RefMasterTypeCode: "COMPANY_TYPE",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj2).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempCompanyTypeCode = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({

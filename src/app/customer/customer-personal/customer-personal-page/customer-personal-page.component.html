@@ -79,16 +79,16 @@
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"
             (stepEnter)="EnterTab('Address')">
-            <app-customer-personal-address [CustId]="this.IdCust" *ngIf="isAddress == true">
+            <app-customer-personal-address   *ngIf="isAddress == true">
             </app-customer-personal-address>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Contact Person'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-contact-person [inputValue]="this.IdCust" *ngIf="isAddress == true">
+            <app-customer-contact-person   *ngIf="isAddress == true">
             </app-customer-contact-person>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Customer Group'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Group')">
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome'}" (stepEnter)="EnterTab('Group')">
             <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="PERSONAL" [CustId]="this.IdCust">
             </app-cust-group-tab>
           </aw-wizard-step>
@@ -98,7 +98,7 @@
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Financial Data'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Financial')">
-            <app-cust-fin-data-tab *ngIf="isFinancial == true" [CustId]="this.IdCust" [CustModeId]="this.CustPersonalId"
+            <app-cust-fin-data-tab *ngIf="isFinancial == true"  [CustModeId]="this.CustPersonalId"
               [MrCustTypeCode]="'PERSONAL'"> </app-cust-fin-data-tab>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Other Attribute'"

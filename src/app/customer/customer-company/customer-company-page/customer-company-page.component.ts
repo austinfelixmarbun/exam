@@ -51,10 +51,10 @@ export class CustomerCompanyPageComponent implements OnInit {
       (response) => {
 
         this.tempCustObj = response;
-        var refMasterObj1 = {
+        var refMasterObjMrCustModelCode = {
           MasterCode: this.tempCustObj.MrCustModelCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObj1).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrCustModelCode).subscribe(
           (response) => {
             this.tempMrCustModelCode = response;
           }

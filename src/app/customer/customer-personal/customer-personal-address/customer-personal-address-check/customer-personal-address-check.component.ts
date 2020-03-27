@@ -15,9 +15,8 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 })
 export class CustomerPersonalAddressCheckComponent implements OnInit {
 
-
-  @Input() IdCust: any;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  IdCust: any;
   CustName  : any;
   Gender : any;
   GenderDesc:any;
@@ -43,14 +42,11 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListCustAddr = AdInsConstant.GetListCustAddr;
-    // this.route.queryParams.subscribe(params => {
-    //   if (params["IdCust"] != null) {
-    //      this.IdCust = params["IdCust"];
-    //    }
-    //    if (params["IdCustPersonal"] != null) {
-    //     this.IdCustPersonal = params["IdCustPersonal"];
-    //   }
-    //  });
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+         this.IdCust = params["IdCust"];
+       }
+     });
   }
 
   ngOnInit() {

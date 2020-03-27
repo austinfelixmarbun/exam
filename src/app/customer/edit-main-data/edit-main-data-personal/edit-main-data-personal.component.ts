@@ -31,7 +31,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     VipNotes: ['']
   });
   KTP = "KTP"
-  getUrl: any;
+  getListActiveRefMasterUrl: any;
   tempKTPCheck: any;
   tempGender: any;
   tempIdType: any;
@@ -47,7 +47,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   custPersonalObj: any;
   From:any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
-    this.getUrl = AdInsConstant.GetListActiveRefMaster;
+    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = AdInsConstant.GetCustPersonalbyCustId;
     this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
     this.editCustUrl = AdInsConstant.EditCust;
@@ -63,11 +63,11 @@ export class EditMainDataPersonalComponent implements OnInit {
   }
 
   ngOnInit() {
-    var refMasterObj = {
+    var refMasterObjGender = {
       RefMasterTypeCode: "GENDER",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjGender).subscribe(
       (response) => {
         this.tempGender = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
@@ -75,11 +75,11 @@ export class EditMainDataPersonalComponent implements OnInit {
         });
       }
     );
-    var refMasterObj1 = {
+    var refMasterObjMrIdTypeCode = {
       RefMasterTypeCode: "ID_TYPE",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempIdType = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
@@ -92,13 +92,13 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       }
     );
-    var refMasterObj2 = {
+    var refMasterObjCustModel = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "PERSONAL",
       RowVersion: ""
     }
 
-    this.http.post(this.getUrl, refMasterObj2).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({

@@ -6,7 +6,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./customer-contact-person.component.scss']
 })
 export class CustomerContactPersonComponent implements OnInit {
-  @Input () inputValue : any ;
+  
   @Output () OutputDelete : EventEmitter<any>= new EventEmitter();
   
   constructor() { }

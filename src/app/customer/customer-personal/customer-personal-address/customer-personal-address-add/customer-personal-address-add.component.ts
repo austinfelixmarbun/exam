@@ -19,11 +19,10 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class CustomerPersonalAddressAddComponent implements OnInit {
   @Input () AddrId : any ;
-  @Input() IdCust: any;
   @Input() mode: any; 
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  IdCust: any;
   pageType: any;
-  
   CustName  : any;
   Gender : any;
   GenderDesc:any;
@@ -73,21 +72,11 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.editCustAddr = AdInsConstant.EditCustAddr;
     this.getCustAddr = AdInsConstant.GetCustAddr;
 
-    // this.route.queryParams.subscribe(params => {
-   
-    //   if (params["IdCust"] != null) {
-    //      this.IdCust = params["IdCust"];
-    //    }
-    //    if (params["IdCustPersonal"] != null) {
-    //     this.IdCustPersonal = params["IdCustPersonal"];
-    //   }
-    //   if (params["mode"] != null) {
-    //     this.pageType = params["mode"];
-    //   }
-    //   if (params["AddrId"] != null) {
-    //     this.AddrId = params["AddrId"];
-    //   }
-    //  });
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+         this.IdCust = params["IdCust"];
+       }
+     });
   }
 
   ngOnInit() {

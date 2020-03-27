@@ -21,10 +21,10 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   
   @Input() custCompanyId : any ;
   ContactInformationForm = this.fb.group({
-    ContactPersonName: ['', [Validators.maxLength(100)]],
+    ContactPersonName: ['', [Validators.maxLength(100),Validators.required]],
     MrGenderCode: ['', [Validators.maxLength(100)]],
-    MrJobPostitionCode: [''],
-    JobTitleName: [''], 
+    MrJobPostitionCode: ['',[Validators.required]],
+    JobTitleName: ['',[Validators.required]], 
     MobilePhnNo1:[''],
     MobilePhnNo2:[''],
     Email1: [''], 
@@ -34,12 +34,12 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   custAddrObj: any;
   IdCust: any;
   custCompanyContactPersonObj  : any;
-  AddCustCompanyContactPerson : any;
+  addCustCompanyContactPersonUrl : any;
   UcAddressObj :  any;
   inputFieldObj : any;
-  AddNewCustAddr :any;
+  addNewCustAddrUrl :any;
   tempMrGenderCode : any;
-  getUrl : any;
+  getListActiveRefMasterUrl : any;
   tempMrJobPostitionCode : any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent ) { 
@@ -48,22 +48,21 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.IdCust = params["IdCust"];
       }
     });
-    this.AddNewCustAddr = AdInsConstant.AddCustAddr;
-    this.AddCustCompanyContactPerson = AdInsConstant.AddCustCompanyContactPerson;
-    this.getUrl = AdInsConstant.GetListActiveRefMaster;
+    this.addNewCustAddrUrl = AdInsConstant.AddCustAddr;
+    this.addCustCompanyContactPersonUrl = AdInsConstant.AddCustCompanyContactPerson;
+    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
   }
 
-  ngOnInit() {
-    console.log("aaaa"+this.custCompanyId);
+  ngOnInit() {  
     this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
 
-    var refMasterObj1 = {
-      RefMasterTypeCode: "GENDER",
+    var refMasterObjMrJobPostitionCode = {
+      RefMasterTypeCode: "JOB_POSITION",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPostitionCode).subscribe(
       (response) => {
         this.tempMrJobPostitionCode = response["ReturnObject"];
         this.ContactInformationForm.patchValue({
@@ -72,11 +71,11 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       }
     );
     
-    var refMasterObj2 = {
-      RefMasterTypeCode: "JOB_POSITION",
+    var refMasterObjMrGenderCode = {
+      RefMasterTypeCode: "GENDER",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj2).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
         this.tempMrGenderCode = response["ReturnObject"];
         this.ContactInformationForm.patchValue({
@@ -117,10 +116,10 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custAddrObj.PhnExt1 = this.ContactInformationForm.value.UcAddress.PhnExt1;
     this.custAddrObj.PhnExt2 = this.ContactInformationForm.value.UcAddress.PhnExt1;
     
-    this.http.post(this.AddNewCustAddr, this.custAddrObj).subscribe(
+    this.http.post(this.addNewCustAddrUrl, this.custAddrObj).subscribe(
       (response) => {
 
-        this.http.post(this.AddCustCompanyContactPerson, this.custCompanyContactPersonObj).subscribe(
+        this.http.post(this.addCustCompanyContactPersonUrl, this.custCompanyContactPersonObj).subscribe(
           (response) => { 
             this.toastr.successMessage(response["Message"]); 
             this.wizard.goToNextStep();

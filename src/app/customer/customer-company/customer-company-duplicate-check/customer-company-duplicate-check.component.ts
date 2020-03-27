@@ -15,14 +15,14 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   getUrl: any;
   tempCompanyTypeCode: any;
-  tempIdType: any;
-  CustModel: any;
-  CustName: any;
-  MrCompanyTypeCode: any;
-  MrIdTypeCode: any;
+  tempIdType: string;
+  CustModel: string;
+  CustName: string;
+  MrCompanyTypeCode: string;
+  MrIdTypeCode: string;
   IdNo: any;
-  TaxIdNo: any;
-  urlGetDescByMasterCode: any;
+  TaxIdNo: string;
+  urlGetDescByMasterCode: string;
   tempMrCompanyTypeCode: any;
   tempCustModel: any;
   tempMrIdTypeCode: any;
@@ -48,21 +48,21 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   }
 
   ngOnInit() {
-    var refMasterObj1 = {
+    var refMasterObjCustModel = {
       MasterCode: this.CustModel,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj1).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }
     );
 
-    var refMasterObj2 = {
+    var refMasterObjMrCompanyTypeCode = {
       MasterCode: this.MrCompanyTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj2).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempMrCompanyTypeCode = response;
       }

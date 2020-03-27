@@ -95,31 +95,31 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   }
 
   ngOnInit() {
-    var refMasterObj1 = {
+    var refMasterObjGender = {
       MasterCode: this.Gender,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj1).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjGender).subscribe(
       (response) => {
         this.tempGender = response;
       }
     );
 
-    var refMasterObj2 = {
+    var refMasterObjMrIdTypeCode = {
       MasterCode: this.MrIdTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj2).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempMrIdTypeCode = response;
       }
     );
 
-    var refMasterObj3 = {
+    var refMasterObjCustModel = {
       MasterCode: this.CustModel,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj3).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }

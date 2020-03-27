@@ -47,13 +47,13 @@
 
           <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"
             (stepEnter)="EnterTab('Address')">
-            <app-customer-company-address *ngIf="isAddress == true" [CustId]="this.IdCust">
+            <app-customer-company-address *ngIf="isAddress == true" >
             </app-customer-company-address>
           </aw-wizard-step>
 
           <aw-wizard-step [stepTitle]="'Management /  Shareholder'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Management')">
-            <app-customer-company-management-shareholder *ngIf="isManagement == true" [inputValue]="this.IdCust"
+            <app-customer-company-management-shareholder *ngIf="isManagement == true" 
               [custCompanyId]="this.CustCompanyId"> </app-customer-company-management-shareholder>
           </aw-wizard-step>
 
@@ -71,7 +71,7 @@
 
           <aw-wizard-step [stepTitle]="'Financial Data'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Financial')">
-            <app-cust-fin-data-tab *ngIf="isFinancial == true" [CustId]="this.IdCust" [CustModeId]="this.CustCompanyId"
+            <app-cust-fin-data-tab *ngIf="isFinancial == true"  [CustModeId]="this.CustCompanyId"
               [MrCustTypeCode]="'COMPANY'"> </app-cust-fin-data-tab>
           </aw-wizard-step>
 
