@@ -6,11 +6,13 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { DatePipe } from '@angular/common';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-edit-main-data-personal',
   templateUrl: './edit-main-data-personal.component.html',
-  styleUrls: ['./edit-main-data-personal.component.scss']
+  styleUrls: ['./edit-main-data-personal.component.scss'],
+  providers: [NGXToastrService]
 })
 export class EditMainDataPersonalComponent implements OnInit {
   CustomerPersonalForm = this.fb.group({
@@ -43,7 +45,8 @@ export class EditMainDataPersonalComponent implements OnInit {
   CustId: any;
   custObj: any;
   custPersonalObj: any;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
+  From:any;
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
     this.getUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = AdInsConstant.GetCustPersonalbyCustId;
     this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
@@ -52,6 +55,9 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
+      }
+      if (params["From"] != null) {
+        this.From = params["From"];
       }
     });
   }
@@ -159,13 +165,15 @@ export class EditMainDataPersonalComponent implements OnInit {
       (response) => {
         this.http.post(this.editCustPersonalUrl, this.custPersonalObj).subscribe(
           (response) => {
-            this.router.navigate(["/Customer/EditMainData/Paging"]);
+            console.log(this.custObj.CustNo);
+            this.toastr.successMessage(response["Message"]);
+              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId } }); 
           },
           error => {
             console.log(error);
           }
         );
-      },
+      },  
       error => {
         console.log(error);
       }
@@ -181,4 +189,12 @@ export class EditMainDataPersonalComponent implements OnInit {
     }
     this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
   }
+  back(){
+    if(this.From =="CustPaging"){
+      this.router.navigate(["/Customer/Paging"]); 
+    }
+    else if(this.From = "EditMainData"){
+      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    }
+}
 }

@@ -27,7 +27,7 @@
       },
       {
         "type": "sort",
-        "position": "center",
+        "position": "left",
         "label": "Industry Name",
         "name": "INDUSTRY_TYPE_NAME"
       },
@@ -51,7 +51,7 @@
       },
       {
         "type": "text",
-        "position": "center",
+        "position": "left",
         "property": "IndustryTypeName"
       },
       {
