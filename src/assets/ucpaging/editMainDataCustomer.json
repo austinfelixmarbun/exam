@@ -1,0 +1,155 @@
+{
+    "title": "Customer",
+    "exportExcel": true,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "CUST_NO",
+            "id": "CustNo",
+            "value": "",
+            "label": "Customer No",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "CUST_NAME",
+            "id": "CustName",
+            "value": "",
+            "label": "Customer Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "A.MR_CUST_TYPE_CODE", 
+            "id": "CustTypeCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Type",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "CUST_TYPE",
+            "items": [],
+            "itemsUrl": []
+          },
+      {
+            "type": "textbox",
+            "name": "ID_NO",
+            "id": "IdNo",
+            "value": "",
+            "label": "Id No",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Customer No",
+            "name": "CUST_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Customer Name",
+            "name": "CUST_NAME"
+        },  {
+            "type": "sort",
+            "position": "left",
+            "label": "Type",
+            "name": "MR_CUST_TYPE_CODE"
+        },  {
+            "type": "sort",
+            "position": "left",
+            "label": "Id No",
+            "name": "ID_NO"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "EDIT  "
+        }
+    ],
+    "querystring": {
+        "select": "SELECT c.CUST_NO AS CustNo, c.CUST_NAME AS CustName, c.MR_CUST_TYPE_CODE as MrCustTypeCode, c.ID_NO as IdNo, CUST_ID as CustId",
+        "from": "FROM dbo.CUST c WITH(NOLOCK) join dbo.REF_MASTER rm WITH(NOLOCK) on c.MR_CUST_TYPE_CODE = rm.MASTER_CODE AND rm.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
+    },
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "CustNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "CustName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrCustTypeCode"
+        }, 
+        {
+            "type": "text",
+            "position": "left",
+            "property": "IdNo"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "PERSONAL",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "url",
+                                "path": "/Customer/EditMainData/Personal",
+                                "icon": "ft-edit-2",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "COMPANY",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "url",
+                                "path": "/Customer/EditMainData/Company",
+                                "icon": "ft-edit-2",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        }
+                    ]
+                }
+            ]
+        }
+                
+    ]
+}

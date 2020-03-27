@@ -1,0 +1,2 @@
+<app-customer-personal-address-check *ngIf="mode == 'check'" [IdCust] ="this.CustId" (outputValue)="terimaValue($event)"> </app-customer-personal-address-check>
+<app-customer-personal-address-add *ngIf="mode == 'add' || mode =='edit'" [mode] = "this.mode"[IdCust] ="this.CustId" [AddrId] = "this.AddrId" (outputValue)="terimaValue($event)"> </app-customer-personal-address-add>

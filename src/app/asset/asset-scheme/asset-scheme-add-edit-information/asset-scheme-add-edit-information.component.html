@@ -2,12 +2,11 @@
   <div class="card">
     <div class="card-body">
       <div class="px-3">
-        <lib-ucSubsection [id]="'AssetScheme'" [title]="this.pageType+ ' Asset Scheme Information'"
-          [panel]="'AssetSchemeId'">
-        </lib-ucSubsection>
         <form class="form form-horizontal" [formGroup]="AssetSchemeInfoForm"
           (ngSubmit)="AssetSchemeInfoForm.valid && SaveForm()" #enjiForm="ngForm">
-          <div class="form-body" id="AssetSchemeId">
+          <div class="form-body">
+            <h4 class="form-section card-title" translate>Asset Scheme Information
+            </h4>
             <div class="form-group row adins-required">
               <label class="col-md-4 adInsLabel" translate>Asset Scheme Code </label>
               <div class="col-md-7">
@@ -44,7 +43,7 @@
           <div class="form-actions right">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Asset/Scheme/Paging']"
               translate>
-              <i class="ft-x"></i> Back
+              Back
             </button>
             <button type="submit" class="btn btn-raised btn-primary" translate>
               <i class="fa fa-check-square-o"></i> Save

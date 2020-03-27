@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HttpModule } from "@angular/http";
 import { CommonModule } from "@angular/common";
@@ -18,11 +18,14 @@ import { DummyComponent } from './dummy/dummy.component';
 import { ArchwizardModule } from "angular-archwizard";
 import { UcSubsectionComponent } from './uc-subsection/uc-subsection.component';
 import { Dummy4Component } from './dummy4/dummy4.component';
+import { UcSearchComponent } from './uc-search/uc-search.component';
+import { Dummy5Component } from './dummy5/dummy5.component';
 
 @NgModule({
     imports: [
         CommonModule,
         ReactiveFormsModule,
+        FormsModule,
         HttpModule,
         NgbModule,
         TestNewRoutingModule,
@@ -41,7 +44,9 @@ import { Dummy4Component } from './dummy4/dummy4.component';
         UcLookupGroupComponent,
         DummyComponent,
         UcSubsectionComponent,
-        Dummy4Component
+        Dummy4Component,
+        UcSearchComponent,
+        Dummy5Component
     ],
 
 })
