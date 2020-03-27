@@ -60,9 +60,13 @@ export const ROUTES: RouteInfo[] = [
     path: '', title: 'Product', icon: 'ft-package', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
       { path: '/Product/HOpaging', title: 'Product HO', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/HOApproval', title: 'Product HO Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/HODeactivate', title: 'Product HO Deactivation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Product/ProductOffering/paging', title: 'Product Offering', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Product/OfferingDeactivate', title: 'Product Offering Deactivation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/Product/HODeactivateApproval', title: 'Product HO Deactivate Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/ProdOffering/paging', title: 'Product Offering', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/OfferingApproval', title: 'Product Offering Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/OfferingDeactivate', title: 'Product Offering Deactivation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/OfferingDeactivateApproval', title: 'Product Offering Deactivate Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
     ]
   },
   {

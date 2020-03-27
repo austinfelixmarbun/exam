@@ -202,7 +202,6 @@ export class GeneralDataHOComponent implements OnInit {
     }
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
-        console.log(response)
         for (var i = 0; i < response["ReturnObject"].length; i++) {
           var group = response["ReturnObject"][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
