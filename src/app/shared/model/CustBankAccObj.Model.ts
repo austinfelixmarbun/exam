@@ -9,6 +9,7 @@ export class CustBankAccObj {
     BankBranchRegRptCode: any;
     BalanceAmt: any;
     IsDefault: any;
+    IsActive: any;
     RowVersion: any;
     constructor(){this.CustBankAccId = 0, this.RowVersion = ""}
 }

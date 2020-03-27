@@ -37,6 +37,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   tempMrGenderCode: any;
   tempMrIdTypeCode;
   tempMrCustModelCode: any;
+  mrMaritalStatCode: string;
  
   isDetail: any;
   isAddress : any;
@@ -96,6 +97,7 @@ export class CustomerPersonalPageComponent implements OnInit {
           }
         );
        
+        this.mrMaritalStatCode = this.tempCustPersonalObj.MrMaritalStatCode;
       });
 
 

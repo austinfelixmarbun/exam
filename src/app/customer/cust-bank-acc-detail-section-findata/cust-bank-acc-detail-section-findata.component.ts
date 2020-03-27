@@ -42,6 +42,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     BankBranchRegRptCode: [0, [Validators.required]],
     BalanceAmt: [0],
     IsDefault: [false],
+    IsActive: [false],
     RowVersion: [''],
     CustBankStmnts: this.fb.array([])
   });
@@ -94,6 +95,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             BankBranchRegRptCode: response.CustBankAccObj.BankBranchRegRptCode,
             BalanceAmt: response.CustBankAccObj.BalanceAmt,
             IsDefault: response.CustBankAccObj.IsDefault,
+            IsActive: response.CustBankAccObj.IsActive,
             RowVersion: response.CustBankAccObj.RowVersion
           });
         },
