@@ -42,7 +42,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   urlGetDescByMasterCode: any;
   tempGender: any;
   tempMrIdTypeCode: any;
-  tempCustModel: any;
+  tempCustModel: any; 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.addCustUrl = AdInsConstant.AddNewCust;
     this.addCustPersonalUrl = AdInsConstant.AddNewCustPersonal;
@@ -88,6 +88,8 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
       if (params["VipNotes"] != null) {
         this.VipNotes = params["VipNotes"];
       }
+     
+   
     });
 
   }

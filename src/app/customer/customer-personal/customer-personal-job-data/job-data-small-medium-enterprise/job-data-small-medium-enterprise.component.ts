@@ -238,10 +238,10 @@ export class JobDataSmeComponent implements OnInit {
       (response) => {
         console.log(response);
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(
-          ["/Customer/CustomerPersonal/Address"], 
-          { queryParams: { "IdCust": this.IdCust }}
-          );
+        // this.router.navigate(
+        //   ["/Customer/CustomerPersonal/Address"], 
+        //   { queryParams: { "IdCust": this.IdCust }}
+        //   );
         console.log(response)
       },
       (error) => {
