@@ -11,7 +11,6 @@ import { WizardComponent } from 'angular-archwizard';
   selector: 'app-customer-company-management-shareholder-check',
   templateUrl: './customer-company-management-shareholder-check.component.html',
   styleUrls: ['./customer-company-management-shareholder-check.component.scss'],
-  
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderCheckComponent implements OnInit {
@@ -87,7 +86,6 @@ getList(){
     }
   );
 }
-
 next(){
   this.wizard.goToNextStep();
 }

@@ -66,12 +66,13 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     );
     var refMasterObj2 = {
       RefMasterTypeCode: "CUST_MODEL",
-      Reservefield1: "PERSONAL",
+      Reservefield1: "COMPANY",
       RowVersion: ""
     }
     this.http.post(this.getUrl, refMasterObj2).subscribe(
       (response) => {
         this.tempMrCustModelCode = response["ReturnObject"];
+        console.log(this.tempMrCustModelCode);
         this.ManagementShareholderForm.patchValue({
           MrCustModelCode: this.tempMrCustModelCode[0].Key
         });
@@ -147,22 +148,17 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.outputValue.emit({mode : 'check'});
   }
   getLookUpCustomer(event) {
-    console.log(event);
+    console.log(event); 
     this.ManagementShareholderForm.patchValue({
       MgmntShrholderName: event.CustName,
-      MrCustModelCode: event.MrCompanyTypeCode, 
+      MrCustModelCode: event.MrCustModelCode,
       MrCompanyTypeCode: event.MrCompanyTypeCode,
       TaxIdNo : event.TaxIdNo,
     });
  
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
-    this.ManagementShareholderForm.controls.MrCustModelCode.disable();
-    this.ManagementShareholderForm.controls.MrIdTypeCode.disable();
-    this.ManagementShareholderForm.controls.IdExpiredDt.disable();
-    this.ManagementShareholderForm.controls.IdNo.disable();
-    this.ManagementShareholderForm.controls.BirthPlace.disable();
-    this.ManagementShareholderForm.controls.BirthDt.disable();
-    this.ManagementShareholderForm.controls.MrGenderCode.disable();
+    this.ManagementShareholderForm.controls.MrCustModelCode.disable();  
+    this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable(); 
     this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
   }
 }

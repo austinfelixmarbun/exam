@@ -38,6 +38,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
     VerfSchemeHId: [''],
     VerfSchemeCode: ['', Validators.required],
     VerfSchemeName: ['', Validators.required],
+    IsActive : [true],
     RowVersion: ['']
   })
 
@@ -52,6 +53,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
             VerfSchemeHId: this.verfQuestionScheme.VerfSchemeHId,
             VerfSchemeCode: this.verfQuestionScheme.VerfSchemeCode,
             VerfSchemeName: this.verfQuestionScheme.VerfSchemeName,
+            IsActive : this.verfQuestionScheme.IsActive,
             RowVersion: this.verfQuestionScheme.RowVersion
           });
         }

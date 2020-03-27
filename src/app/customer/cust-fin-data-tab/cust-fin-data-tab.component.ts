@@ -6,18 +6,20 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
 import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
+import { WizardComponent } from 'angular-archwizard';
 
 // Implementation : <app-cust-fin-data-tab [CustId]="'2'" [MrCustTypeCode]="'PERSONAL'" (CustFinDataResponse)="getResponse($event)"></app-cust-fin-data-tab>
 
 @Component({
   selector: 'app-cust-fin-data-tab',
   templateUrl: './cust-fin-data-tab.component.html',
-  styleUrls: ['./cust-fin-data-tab.component.scss']
+  styleUrls: ['./cust-fin-data-tab.component.scss'],
+  providers: [NGXToastrService]
 })
 export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
   @Input() CustId: number;
-  @Input() Mode: string;
+  // @Input() Mode: string;
   @Input() CustModeId: number;
   @Output() CustFinDataResponse: EventEmitter<any> = new EventEmitter();
   sourceOfIncomeList: any;
@@ -73,12 +75,13 @@ export class CustFinDataTabComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,private wizard: WizardComponent
   ) { 
     this.isCalculated = false;
   }
 
   ngOnInit() {
+    console.log("aaa"+this.CustModeId);
     if(this.MrCustTypeCode == "PERSONAL"){
       var refMasterSourceIncome = new RefMasterObj();
       refMasterSourceIncome.RefMasterTypeCode = 'SOURCE_INCOME';
@@ -93,7 +96,7 @@ export class CustFinDataTabComponent implements OnInit {
       );
     }
 
-    if(this.Mode == "edit"){
+    // if(this.Mode == "edit"){
       if(this.MrCustTypeCode == "PERSONAL"){
         var custPersonalFinData = new CustPersonalFinDataObj();
         custPersonalFinData.CustPersonalId = this.CustModeId;
@@ -162,7 +165,7 @@ export class CustFinDataTabComponent implements OnInit {
             console.log(error);
           }
         );
-      }
+      // }
     }
   }
 
@@ -208,5 +211,7 @@ export class CustFinDataTabComponent implements OnInit {
 
     this.CustFinDataResponse.emit(response);
   }
-
+  next() {
+    this.wizard.goToNextStep();
+  }
 }

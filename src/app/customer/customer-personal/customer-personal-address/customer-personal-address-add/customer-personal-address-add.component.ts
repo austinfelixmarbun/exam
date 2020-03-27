@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -18,8 +18,12 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   providers: [NGXToastrService]
 })
 export class CustomerPersonalAddressAddComponent implements OnInit {
+  @Input () AddrId : any ;
+  @Input() IdCust: any;
+  @Input() mode: any; 
+  @Output() outputValue: EventEmitter<object> = new EventEmitter();
   pageType: any;
-  AddrId: any;
+  
   CustName  : any;
   Gender : any;
   GenderDesc:any;
@@ -36,8 +40,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   resultData: any;
   addCustAddr : any;
   editCustAddr : any;
-  getCustAddr : any;
-  IdCust : any;
+  getCustAddr : any; 
   IdCustPersonal : any;
   custObj : any;
   inputFieldAddressObj: InputFieldObj;
@@ -70,24 +73,25 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.editCustAddr = AdInsConstant.EditCustAddr;
     this.getCustAddr = AdInsConstant.GetCustAddr;
 
-    this.route.queryParams.subscribe(params => {
+    // this.route.queryParams.subscribe(params => {
    
-      if (params["IdCust"] != null) {
-         this.IdCust = params["IdCust"];
-       }
-       if (params["IdCustPersonal"] != null) {
-        this.IdCustPersonal = params["IdCustPersonal"];
-      }
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
-      }
-      if (params["AddrId"] != null) {
-        this.AddrId = params["AddrId"];
-      }
-     });
+    //   if (params["IdCust"] != null) {
+    //      this.IdCust = params["IdCust"];
+    //    }
+    //    if (params["IdCustPersonal"] != null) {
+    //     this.IdCustPersonal = params["IdCustPersonal"];
+    //   }
+    //   if (params["mode"] != null) {
+    //     this.pageType = params["mode"];
+    //   }
+    //   if (params["AddrId"] != null) {
+    //     this.AddrId = params["AddrId"];
+    //   }
+    //  });
   }
 
   ngOnInit() {
+    this.pageType = this.mode;
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
@@ -235,10 +239,11 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
         (response) => {
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(
-            ["/Customer/CustomerPersonal/Address"], 
-            { queryParams: { "IdCust": this.IdCust }}
-            );
+          // this.router.navigate(
+          //   ["/Customer/CustomerPersonal/Address"], 
+          //   { queryParams: { "IdCust": this.IdCust }}
+          //   );
+          this.outputValue.emit({mode : 'check'});
           console.log(response)
         },
         (error) => {
@@ -252,17 +257,20 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
         (response) => {
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(
-            ["/Customer/CustomerPersonal/Address"], 
-            { queryParams: { "IdCust": this.IdCust }}
-            );
+          // this.router.navigate(
+          //   ["/Customer/CustomerPersonal/Address"], 
+          //   { queryParams: { "IdCust": this.IdCust }}
+          //   );
+          this.outputValue.emit({mode : 'check'});
           console.log(response)
         },
         (error) => {
           console.log(error);
         }
       );
-    }
-    
+    } 
+  }
+  back(){
+    this.outputValue.emit({mode : 'check'});
   }
 }

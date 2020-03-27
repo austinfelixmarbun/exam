@@ -52,7 +52,6 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       (response) => {
         this.tempCompanyTypeCode = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
-
           MrCompanyTypeCode: this.tempCompanyTypeCode[0].Key
         });
       }

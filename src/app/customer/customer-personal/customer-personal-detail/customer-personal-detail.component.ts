@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { WizardComponent } from 'angular-archwizard';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -35,8 +35,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
     MrEducationCode: ['',],
     MrReligionCode: ['',],
     IsRestInPeace: [false],
-    IsVip: [true],
-    VipNotes: ['',],
     MobilePhnNo1: ['', Validators.required],
     MobilePhnNo2: ['',],
     Email1: ['',],
@@ -65,6 +63,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
   criteriaList: any;
   criteriaObj: any;
   flag: any;
+  @Output() outputValue: EventEmitter<object> = new EventEmitter();
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
 
     this.GetUrl = AdInsConstant.GetListActiveRefMaster;
@@ -229,7 +229,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
           NoOfResidence: this.tempCustPersonalObj.NoOfResidence,
           FamilyCardNo: this.tempCustPersonalObj.FamilyCardNo,
           IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
-          IsVip: this.tempCustPersonalObj.IsVip,
           MobilePhnNo1: this.tempCustPersonalObj.MobilePhnNo1,
           MobilePhnNo2: this.tempCustPersonalObj.MobilePhnNo2,
           Email1: this.tempCustPersonalObj.Email1,
@@ -260,8 +259,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.MrEducationCode = this.CustomerDetailForm.controls["MrEducationCode"].value;
     this.custPersonalObj.MrReligionCode = this.CustomerDetailForm.controls["MrReligionCode"].value;
     this.custPersonalObj.IsRestInPeace = this.CustomerDetailForm.controls["IsRestInPeace"].value;
-    this.custPersonalObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
-    this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
     this.custPersonalObj.MobilePhnNo1 = this.CustomerDetailForm.controls["MobilePhnNo1"].value;
     this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
     this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
@@ -269,6 +266,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.http.post(this.EditCustPersonalUrl, this.custPersonalObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
+        this.outputValue.emit({ CustPersonalId: this.tempCustPersonalObj.CustPersonalId });
         this.wizard.goToNextStep();
       },
       error => {
