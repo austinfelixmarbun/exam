@@ -74,7 +74,12 @@ import { CustomerCompanyManagementShareholderComponent } from './customer-compan
 import { CustomerCompanyManagementShareholderCheckComponent } from './customer-company/customer-company-management-shareholder/customer-company-management-shareholder-check/customer-company-management-shareholder-check.component';
 import { CustomerCompanyManagementShareholderPersonalComponent } from './customer-company/customer-company-management-shareholder/customer-company-management-shareholder-personal/customer-company-management-shareholder-personal.component';
 import { CustomerCompanyManagementShareholderCompanyComponent } from './customer-company/customer-company-management-shareholder/customer-company-management-shareholder-company/customer-company-management-shareholder-company.component';
-@NgModule({
+import { EditMainDataPagingComponent } from './edit-main-data/edit-main-data-paging/edit-main-data-paging.component';
+import { EditMainDataCompanyComponent } from './edit-main-data/edit-main-data-company/edit-main-data-company.component';
+import { EditMainDataPersonalComponent } from './edit-main-data/edit-main-data-personal/edit-main-data-personal.component';
+import { CustomerCompanyAddressCheckComponent } from './customer-company/customer-company-address/customer-company-address-check/customer-company-address-check.component';
+import { CustomerPersonalAddressCheckComponent } from './customer-personal/customer-personal-address/customer-personal-address-check/customer-personal-address-check.component';
+ @NgModule({
   exports: [],
   imports: [
     CustomerRoutingModule,
@@ -149,7 +154,12 @@ import { CustomerCompanyManagementShareholderCompanyComponent } from './customer
     CustomerCompanyManagementShareholderComponent, 
     CustomerCompanyManagementShareholderCheckComponent,
     CustomerCompanyManagementShareholderPersonalComponent,
-    CustomerCompanyManagementShareholderCompanyComponent
+    CustomerCompanyManagementShareholderCompanyComponent, 
+    EditMainDataPagingComponent,
+    EditMainDataCompanyComponent,
+    EditMainDataPersonalComponent,
+    CustomerCompanyAddressCheckComponent,  
+    CustomerPersonalAddressCheckComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

@@ -70,7 +70,7 @@
                 {{response.TaxIdNo}}
               </div>
             </div>
-            <div class="form-group row adins-required" *ngIf="custType == 'PERSONAL'">
+            <div class="form-group row " *ngIf="custType == 'PERSONAL'">
               <label class="col-md-3 adInsLabel" for="MotherMaidenName" translate>Mother Maiden Name</label>
               <div class="col-md-9">
                 {{response.MotherMaidenName}}
@@ -85,13 +85,13 @@
           </div>
           <lib-ucSubsection [id]="'LegalAddressSectionId'" [title]="'Legal Address'" [panel]="'LegalAddressSection'"></lib-ucSubsection>
           <div id="LegalAddressSection">
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="LegalAddr" translate>Legal Address</label>
               <div class="col-md-9">
                 {{response.LegalAddr}}
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="RT/RW" translate>RT/RW</label>
               <div class="col-md-2">
                 {{response.AreaCode4}}
@@ -103,31 +103,31 @@
                 {{response.AreaCode3}}
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="Zipcode" translate>Zipcode</label>
               <div class="col-md-9">
                 {{response.Zipcode}}
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="AreaCode2" translate>Kelurahan</label>
               <div class="col-md-9">
                 {{response.AreaCode2}}
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="AreaCode1" translate>Kecamatan</label>
               <div class="col-md-9">
                 {{response.AreaCode1}}
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="City" translate>City</label>
               <div class="col-md-9">
                 {{response.City}}
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="Phn1" translate>Phone No (Fix Line) 1</label>
               <div class="col-md-1">
                 {{response.PhnArea1}}
@@ -141,7 +141,7 @@
                 {{response.PhnExt1}}
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="Phn2" translate>Phone No (Fix Line) 2</label>
               <div class="col-md-1">
                 {{response.PhnArea2}}
@@ -155,7 +155,7 @@
                 {{response.PhnExt2}}
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="Phn3" translate>Phone No (Fix Line) 3</label>
               <div class="col-md-1">
                 {{response.PhnArea3}}
@@ -188,13 +188,13 @@
                 {{response.IsActive == '1' ? 'Yes' : 'No'}}
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="MrNegCustTypeCode" translate>Negative Type</label>
               <div class="col-md-9">
                 {{response.MrNegCustTypeCode}}
               </div>
             </div>
-            <div class="form-group row adins-required">
+            <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="MrNegCustSourceCode" translate>Negative Customer Source</label>
               <div class="col-md-9">
                 {{response.MrNegCustSourceCode}}
@@ -239,7 +239,7 @@
                   <td style="text-align: left;">{{item.MrNegCustTypeCode}}</td>
                   <td style="text-align: left;">{{item.Notes}}</td>
                   <td style="text-align: left;">{{item.MrTrxStatCode}}</td>
-                  <td style="text-align: left;">{{item.ExeDt}}</td>
+                  <td style="text-align: left;">{{item.ExeDt | date:'yyyy-MM-dd'}}</td>
                 </tr>
               </tbody>
             </table>

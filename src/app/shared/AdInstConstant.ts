@@ -705,6 +705,7 @@ export class AdInsConstant {
   public static GetCustCompanyLegalDocForCustViewByCustId =  environment.FoundationR3Url + "/CustCompanyLegalDoc/GetCustCompanyLegalDocForCustViewByCustId";
   
   //CUSTOMER COMPANY 
+  public static AddCustCompanyContactPerson = environment.FoundationR3Url+ "/CustCompanyContactPerson/AddCustCompanyContactPerson"
   public static GetCustCompanyByCustId = environment.FoundationR3Url + "/CustCompany/GetCustCompanyByCustId"
   public static EditCustCompany = environment.FoundationR3Url + "/CustCompany/EditCustCompany"
 
@@ -760,8 +761,7 @@ export class AdInsConstant {
 
   // SURVEY FORM SCHM
   public static GetListAllSrvyFormSchm = environment.FoundationR3Url + "/SrvyFormSchm/GetListAllSrvyFormSchm";
-
- //LOB
+  //LOB
   public static GetListKvpInstSchmByLobCode = environment.FoundationR3Url + "/InstSchmMap/GetListKvpInstSchmByLobCode";
   public static GetKvpRefFinMapByLobCode = environment.FoundationR3Url + "/RefFinMap/GetKvpRefFinMapByLobCode";
   

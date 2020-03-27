@@ -1,6 +1,6 @@
 <lib-ucSubsection [id]="'CustFinDataId'" [title]="'Financial Data'" [panel]="'CustFinData'"></lib-ucSubsection>
-<div class="col-md-12" id="CustFinData">
-  <div class="px-3">
+<div id="CustFinData">
+ 
     <form class="form form-horizontal" [formGroup]="CustPersonalFinDataForm" #enjiForm="ngForm" novalidate
       (ngSubmit)="enjiForm.form.valid" *ngIf="MrCustTypeCode == 'PERSONAL'">
       <div class="form-body">
@@ -294,6 +294,13 @@
         </div>
       </div>
     </form>
-  </div>
 </div>
-<app-cust-bank-acc-section-findata [CustId]="CustId"></app-cust-bank-acc-section-findata>
+<app-cust-bank-acc-section-findata [CustId]="this.CustId"></app-cust-bank-acc-section-findata>
+<br>
+<br>
+<br>
+<div class="form-actions right" style="text-align: right;">
+  <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
+    <i class="fa fa-check-square-o"></i> Save and Continue
+  </button>
+</div>

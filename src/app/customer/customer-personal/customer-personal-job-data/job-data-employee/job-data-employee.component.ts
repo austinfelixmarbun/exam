@@ -12,6 +12,7 @@ import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
+import { WizardComponent } from 'angular-archwizard';
  
 @Component({
   selector: 'app-job-data-employee',
@@ -87,7 +88,7 @@ export class JobDataEmployeeComponent implements OnInit {
     OtherStayLength: ['']
   });
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
     this.addJobData = AdInsConstant.AddCustPersonalJobData;
@@ -259,7 +260,8 @@ export class JobDataEmployeeComponent implements OnInit {
         //   ["/Customer/CustomerPersonal/Address"], 
         //   { queryParams: { "IdCust": this.IdCust }}
         //   );
-        console.log(response)
+        // console.log(response);
+        this.wizard.goToNextStep();
       },
       (error) => {
         console.log(error);

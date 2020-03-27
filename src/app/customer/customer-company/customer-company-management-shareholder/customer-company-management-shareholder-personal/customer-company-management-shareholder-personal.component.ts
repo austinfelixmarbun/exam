@@ -142,9 +142,6 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             TaxIdNo:  this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner
-
-
-           
           });
         }
       );

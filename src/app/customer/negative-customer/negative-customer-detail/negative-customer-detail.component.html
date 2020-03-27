@@ -79,7 +79,7 @@
                 <div class="col-md-9">
                   <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.IdExpiredDt.invalid }"
-                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
+                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null" [min]="businessDateIdExp | date: 'yyyy-MM-dd'">
                   <show-errors [control]="NegativeCustForm.controls.IdExpiredDt" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
@@ -95,7 +95,7 @@
                 </div>
               </div>
               <div class="form-group row" *ngIf="custType == 'PERSONAL'">
-                <label class="col-md-3 adInsLabel" for="BirthPlaceDate" translate>Birth Place / Date</label>
+                <label class="col-md-3 adInsLabel adins-required-label" for="BirthPlaceDate" translate>Birth Place / Date</label>
                 <div class="col-md-5">
                   <input type="text" class="form-control adInsInput" formControlName="BirthPlace" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.BirthPlace.invalid }"
@@ -107,8 +107,8 @@
                 </div>
                 <div class="col-md-3">
                   <input type="date" class="form-control adInsInput" formControlName="BirthDt" 
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.BirthDt.invalid }"
-                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && (NegativeCustForm.controls.BirthDt.invalid || errBirthDate) }"
+                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null" [max]="businessDate | date: 'yyyy-MM-dd'" />
                   <show-errors [control]="NegativeCustForm.controls.BirthDt" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>

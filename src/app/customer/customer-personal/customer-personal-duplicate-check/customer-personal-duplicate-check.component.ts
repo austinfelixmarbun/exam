@@ -142,7 +142,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.addCustObj.custObj = new CustObj();
     this.addCustObj.CustPersonalObj = new CustPersonalObj();
     this.addCustObj.custObj.CustName = this.CustName;
-    this.addCustObj.custObj.MrCustTypeCode = "Personal";
+    this.addCustObj.custObj.MrCustTypeCode = "PERSONAL";
     this.addCustObj.custObj.MrCustModelCode = this.CustModel;
     this.addCustObj.custObj.MrIdTypeCode = this.MrIdTypeCode;
     this.addCustObj.custObj.IdNo = this.IdNo;
@@ -164,7 +164,6 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.IdCust = this.resultData.CustObj.CustId; 
         this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.IdCust } });
       },
-
       error => {
         console.log(error);
       }

@@ -11,7 +11,7 @@
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://localhost:5000/RefMaster/GetListKeyValueActiveByCode",
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
             "label": "Vendor Category",
             "criteriaPropName": "RefMasterTypeCode",
             "criteriaPropValue": "VENDOR_CATEGORY",

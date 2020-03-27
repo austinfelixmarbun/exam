@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -16,6 +16,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
   providers: [NGXToastrService]
 })
 export class CustomerPersonalJobDataComponent implements OnInit {
+ 
   CustName  : any;
   Gender : any;
   GenderDesc:any;
@@ -51,18 +52,25 @@ export class CustomerPersonalJobDataComponent implements OnInit {
       if (params["IdCust"] != null) {
          this.IdCust = params["IdCust"];
        }
-       if (params["IdCustPersonal"] != null) {
-        this.IdCustPersonal = params["IdCustPersonal"];
-      }
+      //  if (params["IdCustPersonal"] != null) {
+      //   this.IdCustPersonal = params["IdCustPersonal"];
+      // }
+      // if (params["CustModel"] != null) {
+      //   this.CustModel = params["CustModel"];
+      // }
      });
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
     this.http.post(this.getCustById, this.custObj).subscribe(
       (response) => {
           this.custObj = response;
+          this.CustModel = this.custObj.MrCustModelCode;
+      },
+      (error) => {
+        console.log(error);
       });
 
     this.jobType = new RefMasterObj();
@@ -70,9 +78,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
     this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
       (response) => {
           this.listJobType = response['ReturnObject'];
-          console.log("aaaa");
-          console.log(this.listJobType);
-          this.CustJobDataForm.patchValue({ JobDataType: response['ReturnObject'][0]['Key'] });
+          this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
       });
   }
 }

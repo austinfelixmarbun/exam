@@ -37,7 +37,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
   QuestionGroupForm = this.fb.group({
     VerfQuestionGrpCode: ['', Validators.required],
     VerfQuestionGrpName: ['', Validators.required],
-    IsActive: [false],
+    IsActive: [true],
     RowVersion: ['']
   })
 
