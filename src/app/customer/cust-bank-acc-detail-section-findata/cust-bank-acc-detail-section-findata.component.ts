@@ -51,7 +51,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     public activeModal: NgbActiveModal
-  ) { 
+  ) {
     moment.locale('en');
     this.monthOfYear = new Array(...moment.months());
     this.rowCustBankStmnt = 0;
@@ -77,11 +77,11 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       CustId: this.CustId
     });
 
-    if(this.pageType == "editStmnt"){
+    if (this.pageType == "editStmnt") {
       var custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
       this.httpClient.post(AdInsConstant.GetCustBankAccByCustBankAccIdWithRefBank, custBankAcc).subscribe(
-        (response: any) => {          
+        (response: any) => {
           this.bankName = response.RefBankObj.BankName;
           this.CustBankAccForm.patchValue({
             CustBankAccId: response.CustBankAccObj.CustBankAccId,
@@ -98,12 +98,11 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
           });
         },
         (error) => {
-          console.log("ERROR");
           console.log(error);
         }
       );
     }
-    else if(this.pageType == "edit"){
+    else if (this.pageType == "edit") {
       var custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
       this.httpClient.post(AdInsConstant.GetCBAForCustFinDataEditModeByCustBankAccId, custBankAcc).subscribe(
@@ -123,7 +122,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             RowVersion: response.CustBankAccObj.RowVersion
           });
 
-          if(response.CustBankAccObj.IsBankStmnt){
+          if (response.CustBankAccObj.IsBankStmnt) {
             var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
             this.custBankStmntH = new CustBankStmntHObj();
             this.custBankStmntH.CustBankStmntHId = response.CustBankStmntHObj.CustBankStmntHId;
@@ -135,7 +134,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             this.custBankStmntH.EndPeriod = response.CustBankStmntHObj.EndPeriod;
             this.custBankStmntH.BalanceAmt = response.CustBankStmntHObj.BalanceAmt;
             this.custBankStmntH.RowVersion = response.CustBankStmntHObj.RowVersion;
-  
+
             for (const item of response.CustBankStmntDObjs) {
               var formGroup = this.fb.group({
                 CustBankStmntDId: [item.CustBankStmntDId, [Validators.required]],
@@ -153,15 +152,14 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
           }
         },
         (error) => {
-          console.log("ERROR");
           console.log(error);
         }
       );
     }
   }
 
-  addRowCustBankStmnt(){
-    if(this.rowCustBankStmnt == 12){
+  addRowCustBankStmnt() {
+    if (this.rowCustBankStmnt == 12) {
       return false;
     }
 
@@ -178,20 +176,20 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     this.rowCustBankStmnt++;
   }
 
-  removeCustBankStmnt(i){
+  removeCustBankStmnt(i) {
     var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
     formArray.removeAt(i);
     this.rowCustBankStmnt--;
   }
 
-  getLookupRefBankResponse(e){
+  getLookupRefBankResponse(e) {
     this.CustBankAccForm.patchValue({
       RefBankId: e.refBankId,
       BankBranchRegRptCode: e.regRptCode
     });
   }
 
-  Save(enjiForm){
+  Save(enjiForm) {
     var formData = this.CustBankAccForm.value;
     var custBankAccObj = new CustBankAccObj();
     custBankAccObj.CustBankAccId = formData.CustBankAccId;
@@ -206,18 +204,17 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     custBankAccObj.IsDefault = formData.IsDefault;
     custBankAccObj.RowVersion = formData.RowVersion;
 
-    if(this.pageType == "add"){
+    if (this.pageType == "add") {
       this.httpClient.post(AdInsConstant.AddCustBankAcc, custBankAccObj).subscribe(
         (response) => {
           this.activeModal.close(response);
         },
         (error) => {
-          console.log("ERROR");
           console.log(error);
         }
       );
     }
-    else{
+    else {
       var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
       var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
       var listCustBankStmntD = new Array<CustBankStmntDObj>();
@@ -225,7 +222,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       for (var i = 0; i < formArray.length; i++) {
         const bankStmnt = formArray.at(i).value;
         var custBankStmntD = new CustBankStmntDObj();
-        if(this.pageType == "edit"){
+        if (this.pageType == "edit") {
           custBankStmntD.CustBankStmntHId = bankStmnt.CustBankStmntHId;
           custBankStmntD.RowVersion = bankStmnt.RowVersion;
         }
@@ -239,7 +236,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       }
 
       var custBankStmntH = new CustBankStmntHObj();
-      if(this.pageType == "edit"){
+      if (this.pageType == "edit") {
         custBankStmntH.CustBankStmntHId = this.custBankStmntH.CustBankStmntHId;
         custBankStmntH.RowVersion = this.custBankStmntH.RowVersion;
       }
@@ -251,20 +248,16 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       custBankStmntH.EndPeriod = new Date();
       custBankStmntH.BalanceAmt = totalBalance;
 
-      custBankAccObj.BalanceAmt = totalBalance;
-
-      var reqObj = {"custBankAccObj": custBankAccObj, "custBankStmntH": custBankStmntH, "custBankStmntDObjs": listCustBankStmntD};
+      var reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntH": custBankStmntH, "custBankStmntDObjs": listCustBankStmntD };
 
       this.httpClient.post(AdInsConstant.EditCBAForCustFinData, reqObj).subscribe(
         (response) => {
           this.activeModal.close(response);
         },
         (error) => {
-          console.log("ERROR");
           console.log(error);
         }
       );
     }
   }
-
 }

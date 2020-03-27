@@ -88,7 +88,7 @@ export class CustomerContactAddComponent implements OnInit {
   }
   isAdd: any;
   ngOnInit() {
-    console.log("aaaaa" + this.custPersonalContactPersonId);
+    //console.log("aaaaa" + this.custPersonalContactPersonId);
     this.UcAddressObj = new UcAddressObj();
     this.lookUpObj = new InputLookupObj();
     this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";

@@ -34,7 +34,6 @@ export class CustBankAccSectionFindataComponent implements OnInit {
         this.cbaFinDataList = response.ListCBAForCustFinData;
       },
       (error) => {
-        console.log("ERROR");
         console.log(error);
       }
     );
@@ -73,7 +72,6 @@ export class CustBankAccSectionFindataComponent implements OnInit {
             this.cbaFinDataList = response.ListCBAForCustFinData;
           },
           (error) => {
-            console.log("ERROR");
             console.log(error);
           }
         );
@@ -83,7 +81,6 @@ export class CustBankAccSectionFindataComponent implements OnInit {
     ).catch(
       (error) => {
         if(error != 0){
-          console.log("ERROR MODAL");
           console.log(error);
         }
       }

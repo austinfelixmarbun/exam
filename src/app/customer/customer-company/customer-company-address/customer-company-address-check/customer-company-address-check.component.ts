@@ -32,7 +32,6 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   MotherMaidenName: any;
   resultData: any;
   addUrl: any;
-
   IdCustPersonal: any;
   custObj: any;
   custAddrObj: any;
@@ -60,12 +59,9 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.IdCust;
     this.custAddrObj.MrCustAddrTypeCode = "-";
-    console.log("bbb");
-    console.log(this.custAddrObj);
     this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
       (response) => {
         this.listCustAddr = response["ReturnObject"];
-        console.log(this.listCustAddr)
       });
   }
 
@@ -73,12 +69,9 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
     this.outputValue.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId });
   }
   addAddr() {
-    this.outputValue.emit({ mode: 'add' });
-    
+    this.outputValue.emit({ mode: 'add' });    
   }
   next() {
     this.wizard.goToNextStep();
   }
-
-
 }

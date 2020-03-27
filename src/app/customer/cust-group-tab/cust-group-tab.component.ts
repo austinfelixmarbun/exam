@@ -8,8 +8,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { WizardComponent } from 'angular-archwizard';
 
-// <app-cust-group-tab [CustId]="'2'" [MrCustTypeCode]="'PERSONAL'"></app-cust-group-tab>
-
 @Component({
   selector: 'app-cust-group-tab',
   templateUrl: './cust-group-tab.component.html',
@@ -67,7 +65,6 @@ export class CustGroupTabComponent implements OnInit {
         this.toastr.successMessage(response["message"]);
       },
       (error) => {
-        console.log("ERROR");
         console.log(error);
       }
     );

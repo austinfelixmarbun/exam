@@ -46,13 +46,12 @@ export class CustLegalDocDetailComponent implements OnInit {
         });
       },
       (error) => {
-        console.log("ERROR");
         console.log(error);
       }
     );
   }
 
-  Save(enjiForm){
+  Save(enjiForm) {
     var custCompanyLegalDocData = this.CustCompanyLegalDocForm.value;
 
     this.httpClient.post(AdInsConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
@@ -60,10 +59,8 @@ export class CustLegalDocDetailComponent implements OnInit {
         this.activeModal.close(response);
       },
       (error) => {
-        console.log("ERROR");
         console.log(error);
       }
     );
   }
-
 }

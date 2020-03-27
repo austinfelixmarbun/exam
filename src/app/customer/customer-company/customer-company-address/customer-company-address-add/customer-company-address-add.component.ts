@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router'; 
-import { AdInsConstant } from 'app/shared/AdInstConstant'; 
+import { ActivatedRoute, Router } from '@angular/router';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -8,7 +8,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
- 
+
 @Component({
   selector: 'app-customer-company-address-add',
   templateUrl: './customer-company-address-add.component.html',
@@ -16,37 +16,37 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   providers: [NGXToastrService]
 })
 export class CustomerCompanyAddressAddComponent implements OnInit {
-  @Input () AddrId : any ;
+  @Input() AddrId: any;
   @Input() IdCust: any;
-  @Input() mode: any; 
+  @Input() mode: any;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  pageType: any; 
-  CustName  : any;
-  Gender : any;
-  GenderDesc:any;
-  MrIdTypeCode : any;
-  MrIdTypeCodeDesc : any;
-  CustModel : any;
+  pageType: any;
+  CustName: any;
+  Gender: any;
+  GenderDesc: any;
+  MrIdTypeCode: any;
+  MrIdTypeCodeDesc: any;
+  CustModel: any;
   CustModelDesc
-  BirthPlace : any;
-  BirthDt : any;
-  IdNo : any;
-  TaxIdNo : any;
-  IdExpiredDt : any;
-  MotherMaidenName : any;
+  BirthPlace: any;
+  BirthDt: any;
+  IdNo: any;
+  TaxIdNo: any;
+  IdExpiredDt: any;
+  MotherMaidenName: any;
   resultData: any;
-  addCustAddr : any;
-  editCustAddr : any;
-  getCustAddr : any;
-  IdCustPersonal : any;
-  custObj : any;
+  addCustAddr: any;
+  editCustAddr: any;
+  getCustAddr: any;
+  IdCustPersonal: any;
+  custObj: any;
   inputFieldAddressObj: InputFieldObj;
   custAddressObj: CustAddrObj;
   getListActiveRefMaster: any;
   addressType: any;
   addressObj: any;
   listAddressType: any;
-  custAddrObj : any;
+  custAddrObj: any;
   getListCustAddr: any;
   listCustAddr: any;
   copyCustomerAddr: any;
@@ -58,118 +58,66 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     LocationClass: [''],
     PriceEstimates: [''],
     StayLength: [''],
-    MrCustAddrTypeCode:[''],
-    CopyAddrFrom:['']
+    MrCustAddrTypeCode: [''],
+    CopyAddrFrom: ['']
   });
 
-  constructor(private route: ActivatedRoute,private router: Router,private http: HttpClient,private fb: FormBuilder,private toastr: NGXToastrService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
     this.getListCustAddr = AdInsConstant.GetListCustAddr;
     this.addCustAddr = AdInsConstant.AddCustAddr;
     this.editCustAddr = AdInsConstant.EditCustAddr;
     this.getCustAddr = AdInsConstant.GetCustAddr;
 
-    // this.route.queryParams.subscribe(params => {
-   
-    //   if (params["IdCust"] != null) {
-    //      this.IdCust = params["IdCust"];
-    //    }
-    //    if (params["IdCustPersonal"] != null) {
-    //     this.IdCustPersonal = params["IdCustPersonal"];
-    //   }
-    //   if (params["mode"] != null) {
-    //     this.pageType = params["mode"];
-    //   }
-    //   if (params["AddrId"] != null) {
-    //     this.AddrId = params["AddrId"];
-    //   }
-    //  });
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+        this.IdCust = params["IdCust"];
+      }
+      // if (params["IdCustPersonal"] != null) {
+      //   this.IdCustPersonal = params["IdCustPersonal"];
+      // }
+      // if (params["mode"] != null) {
+      //   this.pageType = params["mode"];
+      // }
+      // if (params["AddrId"] != null) {
+      //   this.AddrId = params["AddrId"];
+      // }
+    });
   }
 
   ngOnInit() {
     this.pageType = this.mode;
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
-
-    console.log("nnn");
-    console.log(this.AddrId)
     this.addressType = new RefMasterObj();
     this.addressType.RefMasterTypeCode = "CUST_ADDR_TYPE";
     this.http.post(this.getListActiveRefMaster, this.addressType).subscribe(
       (response) => {
-          this.listAddressType = response['ReturnObject'];
-          console.log("aaaa");
-          console.log(this.listAddressType);
-          this.CustDataCompanyForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
+        this.listAddressType = response['ReturnObject'];
+        this.CustDataCompanyForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
       });
-    
-      this.custAddrObj = new CustAddrObj();
-      this.custAddrObj.CustId = this.IdCust;
-      this.custAddrObj.MrCustAddrTypeCode = "-";
-      console.log("bbb");
-      console.log(this.custAddrObj);
-      this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
-        (response) => {
-            this.listCustAddr = response["ReturnObject"];
-            this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] });
 
-            console.log("aaa")
-            console.log(this.listCustAddr)
-        });
-      
-      if(this.pageType == "edit"){
-        this.custAddrObj = new CustAddrObj();
-        this.custAddrObj.CustAddrId = this.AddrId;
-        this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
-          (response) => {
-              this.copyCustomerAddr = response;
-              console.log("ggg")
-              console.log(this.copyCustomerAddr)
-              this.CustDataCompanyForm.patchValue({
-                  Notes: this.copyCustomerAddr.Notes,
-                  MrCustAddrTypeCode: this.copyCustomerAddr.MrCustAddrTypeCode
-              });
-              
-              this.addressObj = new CustAddrObj();
-              this.addressObj.Addr = this.copyCustomerAddr.Addr;
-              this.addressObj.AreaCode3 = this.copyCustomerAddr.AreaCode3;
-              this.addressObj.AreaCode4 = this.copyCustomerAddr.AreaCode4;
-              this.addressObj.AreaCode1 = this.copyCustomerAddr.AreaCode1;
-              this.addressObj.AreaCode2 = this.copyCustomerAddr.AreaCode2;
-              this.addressObj.City = this.copyCustomerAddr.City;
-              this.addressObj.PhnArea1 = this.copyCustomerAddr.PhnArea1;
-              this.addressObj.Phn1 = this.copyCustomerAddr.Phn1;
-              this.addressObj.PhnExt1 = this.copyCustomerAddr.PhnExt1;
-              this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
-              this.addressObj.Phn2 = this.copyCustomerAddr.Phn2;
-              this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
-              this.addressObj.PhnExt2 = this.copyCustomerAddr.PhnExt2;
-              this.addressObj.PhnArea3 = this.copyCustomerAddr.PhnArea3;
-              this.addressObj.Phn3 = this.copyCustomerAddr.Phn3;
-              this.addressObj.PhnExt3 = this.copyCustomerAddr.PhnExt3;
-              this.addressObj.FaxArea = this.copyCustomerAddr.FaxArea;
-              this.addressObj.Fax = this.copyCustomerAddr.Fax;
-              this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddr.MrBuildingOwnershipCode;
-
-              this.inputFieldAddressObj = new InputFieldObj();
-              this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
-              this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddr.Zipcode;
-              this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.copyCustomerAddr.Zipcode};
-              
-          });
-      }
-  }
-
-  copyAddress(){
     this.custAddrObj = new CustAddrObj();
-    this.custAddrObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
-    this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
+    this.custAddrObj.CustId = this.IdCust;
+    this.custAddrObj.MrCustAddrTypeCode = "-";
+    this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
       (response) => {
+        this.listCustAddr = response["ReturnObject"];
+        this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] });
+        console.log(this.listCustAddr)
+      });
+
+    if (this.pageType == "edit") {
+      this.custAddrObj = new CustAddrObj();
+      this.custAddrObj.CustAddrId = this.AddrId;
+      this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
+        (response) => {
           this.copyCustomerAddr = response;
           this.CustDataCompanyForm.patchValue({
-              Notes: this.copyCustomerAddr.Notes
+            Notes: this.copyCustomerAddr.Notes,
+            MrCustAddrTypeCode: this.copyCustomerAddr.MrCustAddrTypeCode
           });
-          
+
           this.addressObj = new CustAddrObj();
           this.addressObj.Addr = this.copyCustomerAddr.Addr;
           this.addressObj.AreaCode3 = this.copyCustomerAddr.AreaCode3;
@@ -182,6 +130,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           this.addressObj.PhnExt1 = this.copyCustomerAddr.PhnExt1;
           this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
           this.addressObj.Phn2 = this.copyCustomerAddr.Phn2;
+          this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
           this.addressObj.PhnExt2 = this.copyCustomerAddr.PhnExt2;
           this.addressObj.PhnArea3 = this.copyCustomerAddr.PhnArea3;
           this.addressObj.Phn3 = this.copyCustomerAddr.Phn3;
@@ -193,14 +142,50 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           this.inputFieldAddressObj = new InputFieldObj();
           this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
           this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddr.Zipcode;
-          this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.copyCustomerAddr.Zipcode};
-          
-      });
-      console.log("vvv")
-      console.log(this.CustDataCompanyForm)
+          this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddr.Zipcode };
+
+        });
+    }
   }
 
-  setCustAddr(){
+  copyAddress() {
+    this.custAddrObj = new CustAddrObj();
+    this.custAddrObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
+    this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
+      (response) => {
+        this.copyCustomerAddr = response;
+        this.CustDataCompanyForm.patchValue({
+          Notes: this.copyCustomerAddr.Notes
+        });
+
+        this.addressObj = new CustAddrObj();
+        this.addressObj.Addr = this.copyCustomerAddr.Addr;
+        this.addressObj.AreaCode3 = this.copyCustomerAddr.AreaCode3;
+        this.addressObj.AreaCode4 = this.copyCustomerAddr.AreaCode4;
+        this.addressObj.AreaCode1 = this.copyCustomerAddr.AreaCode1;
+        this.addressObj.AreaCode2 = this.copyCustomerAddr.AreaCode2;
+        this.addressObj.City = this.copyCustomerAddr.City;
+        this.addressObj.PhnArea1 = this.copyCustomerAddr.PhnArea1;
+        this.addressObj.Phn1 = this.copyCustomerAddr.Phn1;
+        this.addressObj.PhnExt1 = this.copyCustomerAddr.PhnExt1;
+        this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
+        this.addressObj.Phn2 = this.copyCustomerAddr.Phn2;
+        this.addressObj.PhnExt2 = this.copyCustomerAddr.PhnExt2;
+        this.addressObj.PhnArea3 = this.copyCustomerAddr.PhnArea3;
+        this.addressObj.Phn3 = this.copyCustomerAddr.Phn3;
+        this.addressObj.PhnExt3 = this.copyCustomerAddr.PhnExt3;
+        this.addressObj.FaxArea = this.copyCustomerAddr.FaxArea;
+        this.addressObj.Fax = this.copyCustomerAddr.Fax;
+        this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddr.MrBuildingOwnershipCode;
+
+        this.inputFieldAddressObj = new InputFieldObj();
+        this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddr.Zipcode;
+        this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddr.Zipcode };
+      });
+  }
+
+  setCustAddr() {
     this.custAddressObj.CustId = this.IdCust;
     this.custAddressObj.MrCustAddrTypeCode = this.CustDataCompanyForm.controls["MrCustAddrTypeCode"].value;
     this.custAddressObj.Addr = this.CustDataCompanyForm.controls["custAddress"]["controls"].Addr.value;
@@ -226,21 +211,14 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.custAddressObj.Notes = this.CustDataCompanyForm.controls["Notes"].value;
   }
 
-  SaveForm(){
+  SaveForm() {
     this.custAddressObj = new CustAddrObj();
-    this.setCustAddr(); 
-    console.log(this.custAddressObj);
-    if(this.pageType == "add"){
+    this.setCustAddr();
+    if (this.pageType == "add") {
       this.http.post(this.addCustAddr, this.custAddressObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
-          // this.router.navigate(
-          //   ["/Customer/CustomerCompany/Address"], 
-          //   { queryParams: { "IdCust": this.IdCust }}
-          //   ); 
-          this.outputValue.emit({mode : 'check'});
-          console.log(response)
+          this.outputValue.emit({ mode: 'check' });
         },
         (error) => {
           console.log(error);
@@ -251,23 +229,16 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       this.custAddressObj.RowVersion = this.copyCustomerAddr.RowVersion;
       this.http.post(this.editCustAddr, this.custAddressObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
-          // this.router.navigate(
-          //   ["/Customer/CustomerCompany/Address"], 
-          //   { queryParams: { "IdCust": this.IdCust }}
-          //   );
-          this.outputValue.emit({mode : 'check'});
-          console.log(response)
+          this.outputValue.emit({ mode: 'check' });
         },
         (error) => {
           console.log(error);
         }
       );
     }
-    
   }
-  back(){
-    this.outputValue.emit({mode : 'check'});
+  back() {
+    this.outputValue.emit({ mode: 'check' });
   }
 }

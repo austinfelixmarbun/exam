@@ -5,11 +5,13 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-edit-main-data-company',
   templateUrl: './edit-main-data-company.component.html',
-  styleUrls: ['./edit-main-data-company.component.scss']
+  styleUrls: ['./edit-main-data-company.component.scss'],
+  providers: [NGXToastrService]
 })
 export class EditMainDataCompanyComponent implements OnInit {
   getCustCompanyByCustIdUrl : any;
@@ -24,7 +26,8 @@ export class EditMainDataCompanyComponent implements OnInit {
   CustId : any;
   editCustUrl : any;
   editCustCompanyUrl : any;
-  constructor( private route: ActivatedRoute, private fb: FormBuilder,  private http: HttpClient,private router: Router) {
+  From : any;
+  constructor( private route: ActivatedRoute, private fb: FormBuilder,  private http: HttpClient,private router: Router,private toastr: NGXToastrService) {
     this.getUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;
     this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
@@ -34,6 +37,9 @@ export class EditMainDataCompanyComponent implements OnInit {
       if (params["CustId"] != null) {
          this.CustId = params["CustId"];
        }
+       if (params["From"] != null) {
+        this.From = params["From"];
+      }
      });
    }
   CustomerCompanyForm = this.fb.group({
@@ -110,7 +116,8 @@ export class EditMainDataCompanyComponent implements OnInit {
       (response) => {
         this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
           (response) => {
-            this.router.navigate(["/Customer/EditMainData/Paging"]);
+            this.toastr.successMessage(response["Message"]);
+            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId } }); 
           },
           error => {
             console.log(error);
@@ -123,4 +130,12 @@ export class EditMainDataCompanyComponent implements OnInit {
     );
   }
 
+  back(){
+    if(this.From =="CustPaging"){
+      this.router.navigate(["/Customer/Paging"]); 
+    }
+    else if(this.From = "EditMainData"){
+      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    }
+  }
 }
