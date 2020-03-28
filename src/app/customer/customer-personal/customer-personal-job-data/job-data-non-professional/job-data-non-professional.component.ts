@@ -39,6 +39,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
   custObj : any;
   getListActiveRefMaster: any;
   getCustById: any;
+  getJobDataByCustId: any
   jobType: any;
   listJobType: any;
   tempProfession: any;
@@ -47,6 +48,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
   jobAddrObj: any;
   othBizAddrObj: any;
   addJobData: any;
+  editJobData: any;
   reqCustPersonalJobDataObj: any;
   JobDataNonProForm = this.fb.group({
     JobDataType: [''],
@@ -58,7 +60,8 @@ export class JobDataNonProfessionalComponent implements OnInit {
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
     this.addJobData = AdInsConstant.AddCustPersonalJobData;
-
+    this.editJobData = AdInsConstant.EditCustPersonalJobData;
+    this.getJobDataByCustId = AdInsConstant.GetCustPersonalJobDataByCustId;
 
     this.route.queryParams.subscribe(params => {
         if (params["IdCust"] != null) {

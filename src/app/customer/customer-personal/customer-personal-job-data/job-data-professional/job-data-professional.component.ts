@@ -54,7 +54,8 @@ export class JobDataProfessionalComponent implements OnInit {
   jobAddrObj: any;
   othBizAddrObj: any;
   addJobData: any;
-  addCustAddr : any;
+  editJobData: any;
+  getJobDataByCustId: any;
   reqCustPersonalJobDataObj: any;
  JobDataProForm = this.fb.group({
     JobDataType: [''],
@@ -76,8 +77,8 @@ export class JobDataProfessionalComponent implements OnInit {
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
     this.addJobData = AdInsConstant.AddCustPersonalJobData;
-    this.addCustAddr = AdInsConstant.AddCustAddr;
-
+    this.editJobData = AdInsConstant.EditCustPersonalJobData;
+    this.getJobDataByCustId = AdInsConstant.GetCustPersonalJobDataByCustId;
 
     this.route.queryParams.subscribe(params => {
         if (params["IdCust"] != null) {

@@ -17,23 +17,8 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 })
 export class CustomerPersonalJobDataComponent implements OnInit {
  
-  CustName  : any;
-  Gender : any;
-  GenderDesc:any;
-  MrIdTypeCode : any;
-  MrIdTypeCodeDesc : any;
   CustModel : any;
-  CustModelDesc
-  BirthPlace : any;
-  BirthDt : any;
-  IdNo : any;
-  TaxIdNo : any;
-  IdExpiredDt : any;
-  MotherMaidenName : any;
-  resultData: any;
-  addUrl : any; 
   IdCust : any;
-  IdCustPersonal : any;
   custObj : any;
   getListActiveRefMaster: any;
   getCustById: any;
@@ -67,7 +52,8 @@ export class CustomerPersonalJobDataComponent implements OnInit {
     this.http.post(this.getCustById, this.custObj).subscribe(
       (response) => {
           this.custObj = response;
-          this.CustModel = this.custObj.MrCustModelCode;
+          //this.CustModel = this.custObj.MrCustModelCode;
+          this.CustModel = "NONPROF";
       },
       (error) => {
         console.log(error);

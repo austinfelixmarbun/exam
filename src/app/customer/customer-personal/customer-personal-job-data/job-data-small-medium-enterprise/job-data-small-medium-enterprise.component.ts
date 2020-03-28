@@ -60,6 +60,8 @@ export class JobDataSmeComponent implements OnInit {
   industryLookUpObj: any;
   custPersonalJobDataObj: any;
   addJobData: any;
+  editJobData: any;
+  getJobDataByCustId: any;
   reqCustPersonalJobDataObj: any;
   JobDataSmeForm = this.fb.group({
     JobDataType: [''],
@@ -90,7 +92,8 @@ export class JobDataSmeComponent implements OnInit {
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
     this.addJobData = AdInsConstant.AddCustPersonalJobData;
-
+    this.editJobData = AdInsConstant.EditCustPersonalJobData;
+    this.getJobDataByCustId = AdInsConstant.GetCustPersonalJobDataByCustId;
 
     this.route.queryParams.subscribe(params => {
         if (params["IdCust"] != null) {
