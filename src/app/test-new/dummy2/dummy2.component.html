@@ -34,8 +34,10 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 " translate>UC Number </label>
                 <div class="col-md-9">
-                  <input type="text" formControlName="UCNumber" class="form-control" [(ngModel)]="UcNumber"
-                    autocomplete="off" (keydown)="numberCheck($event)" (keyup)="CommaFormatted($event)" />
+                  <lib-ucinputnumber [parentForm]="RefEmpForm" [identifier]="'MataUangRupiah'" [enjiForm]="enjiForm" [isRequired]="false" [ucNumber]="'sd45f56g'"></lib-ucinputnumber>
+                  <!-- <app-uc-input-number [parentForm]="RefEmpForm" [identifier]="'MataUangRupiah'" [enjiForm]="enjiForm" [isRequired]="false" [ucNumber]="'sd45f56g'"></app-uc-input-number> -->
+                  <!-- <input type="text" formControlName="UCNumber" class="form-control" [(ngModel)]="UcNumber"
+                    autocomplete="off" (keydown)="numberCheck($event)" (keyup)="CommaFormatted($event)" /> -->
                 </div>
               </div>
               <input type="text" (keyup.enter)="enterTrigger()">
