@@ -440,7 +440,7 @@ export class AdInsConstant {
   public static GetProdOfferingDetailInfo = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingDetailInfo";
   public static GetListProdOfferingVersionByProdId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingVersionByProdId"
   public static GetListProdOfferingBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHId"
-  public static GetProductOfferingComponentGrouped = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingComponentGrouped";
+  public static GetProductOfferingComponentGrouped = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponentGrouped";
   public static GetProdOfferingHByCodeAndVerion = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingHByCodeAndVerion";
   public static GetListProdOfferingHVersionByProdOfferingHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingHVersionByProdOfferingHId"
   public static GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode"
