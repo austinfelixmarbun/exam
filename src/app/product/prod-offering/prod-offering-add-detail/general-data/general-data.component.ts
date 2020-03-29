@@ -14,7 +14,6 @@ import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOffering
 @Component({
   selector: 'app-general-data',
   templateUrl: './general-data.component.html',
-  styleUrls: ['./general-data.component.scss'],
   providers: [NGXToastrService]
 })
 export class GeneralDataComponent implements OnInit {

@@ -12,7 +12,6 @@ import { empty } from 'rxjs';
 @Component({
   selector: 'app-search-office',
   templateUrl: './search-office.component.html',
-  styleUrls: ['./search-office.component.scss'],
   providers: [NGXToastrService]
 })
 export class SearchOfficeComponent implements OnInit {
@@ -40,8 +39,6 @@ export class SearchOfficeComponent implements OnInit {
       addCrit.propName = "ro.REF_OFFICE_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.ListOfficeMemberObjInput["result"];
-      // console.log(addCrit);
-      // console.log(this.arrAddCrit);
       this.arrAddCrit.push(addCrit);
     }
     
@@ -66,17 +63,12 @@ export class SearchOfficeComponent implements OnInit {
 
   resultData;
   getResult(ev){
-    // console.log(ev);
     this.resultData=ev["response"];
-    console.log(this.resultData);
-    console.log(this.tempData);
-
-    
-
+    // console.log(this.resultData);
+    // console.log(this.tempData);
   }
 
   searchSort(ev: any){
-    console.log(ev);
     if (this.resultData != null) {
       if (this.orderByKey == ev.target.attributes.name.nodeValue) {
         this.orderByValue = !this.orderByValue
@@ -139,7 +131,6 @@ export class SearchOfficeComponent implements OnInit {
   orderByValue;
   
   addToTemp(){
-    console.log("ADD to TEMP");
     if(this.listSelectedId.length != 0){
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
@@ -167,7 +158,6 @@ export class SearchOfficeComponent implements OnInit {
       for(var i=0;i<this.ListOfficeMemberObjInput["result"].length;i++){
         tempList.push(this.ListOfficeMemberObjInput["result"][i]);
       }
-      // console.log(tempList);
       addCrit.listValue = tempList;
       this.arrAddCrit.push(addCrit);
 
@@ -181,20 +171,15 @@ export class SearchOfficeComponent implements OnInit {
       this.inputObj.addCritInput = this.arrAddCrit;
       this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
       this.listSelectedId = [];
-      // console.log("temp data");
-      // console.log(this.tempData);
       this.checkboxAll = false;
     }else{
       this.toastr.typeErrorCustom("Please select at least one Office");
     }
   }
 
-  ClickTest(ev: any, item: any){
-    console.log(ev);
-    console.log(item);
+  IsAllowedCrtClicked(ev: any, item: any){
     var idx = this.tempData.findIndex(x => x.RefOfficeId == item.RefOfficeId);
     if(idx > -1) this.tempData[idx].IsAllowedCrt =  ev.returnValue;
-    // console.log(this.tempData);
   }
 
   deleteFromTemp(RefOfficeId: any){

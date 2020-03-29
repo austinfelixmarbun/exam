@@ -7,7 +7,6 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 @Component({
   selector: 'app-product-offering-approval',
   templateUrl: './product-offering-approval.component.html',
-  styleUrls: ['./product-offering-approval.component.scss']
 })
 export class ProductOfferingApprovalComponent implements OnInit {
 
@@ -27,8 +26,8 @@ export class ProductOfferingApprovalComponent implements OnInit {
     var critObj = new CriteriaObj();
     critObj.DataType = 'text';
     critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.propName = 'TRX_TYPE';
-    critObj.value = AdInsConstant.ApvTrxTypeProductOffering;
+    critObj.propName = 'CATEGORY_CODE';
+    critObj.value = 'PRD_OFR_APV';
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
