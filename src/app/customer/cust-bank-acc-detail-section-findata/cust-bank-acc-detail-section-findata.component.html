@@ -51,9 +51,15 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 adInsLabel adins-required-label" for="IsDefault" translate>Is Default</label>
+                  <label class="col-md-3 adInsLabel" for="IsDefault" translate>Is Default</label>
                   <div class="col-md-9">
                     <input type="checkbox" formControlName="IsDefault" [attr.disabled]="pageType == 'editStmnt' ? '' : null" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="IsActive" translate>Is Active</label>
+                  <div class="col-md-9">
+                    <input type="checkbox" formControlName="IsActive" [attr.disabled]="pageType == 'editStmnt' ? '' : null" />
                   </div>
                 </div>
                 <div class="form-group row" *ngIf="isAddBankStatement"> 

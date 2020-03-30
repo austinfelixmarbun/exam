@@ -23,6 +23,7 @@ export class CustGroupTabDetailComponent implements OnInit {
   inputLookupCustPersonalObj: InputLookupObj;
   inputLookupCustCompanyObj: InputLookupObj;
   relationshipList: any;
+  isCustPicked: boolean;
 
   CustGrpForm = this.fb.group({
     CustGrpId: [0, [Validators.required]],
@@ -95,6 +96,7 @@ export class CustGroupTabDetailComponent implements OnInit {
   }
 
   getLookupCustPersonalResponse(e){
+    this.isCustPicked = true;
     this.CustGrpForm.patchValue({
       MemberCustId: e.custId,
       CustNo: e.custNo,
@@ -103,6 +105,7 @@ export class CustGroupTabDetailComponent implements OnInit {
   }
 
   getLookupCustCompanyResponse(e){
+    this.isCustPicked = true;
     this.CustGrpForm.patchValue({
       MemberCustId: e.custId,
       CustNo: e.custNo,
