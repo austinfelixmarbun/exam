@@ -53,19 +53,19 @@ export class CustomerPersonalJobDataComponent implements OnInit {
       (response) => {
           this.custObj = response;
           this.CustModel = this.custObj.MrCustModelCode;
-          this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
+          //this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
           //this.CustModel = "NONPROF";
       },
       (error) => {
         console.log(error);
       });
 
-    this.jobType = new RefMasterObj();
-    this.jobType.RefMasterTypeCode = "CUST_MODEL";
-    this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
-      (response) => {
-          this.listJobType = response['ReturnObject'];
-          //this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
-      });
+    // this.jobType = new RefMasterObj();
+    // this.jobType.RefMasterTypeCode = "CUST_MODEL";
+    // this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
+    //   (response) => {
+    //       this.listJobType = response['ReturnObject'];
+    //       //this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
+    //   });
   }
 }
