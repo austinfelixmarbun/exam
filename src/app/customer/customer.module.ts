@@ -79,6 +79,8 @@ import { EditMainDataCompanyComponent } from './edit-main-data/edit-main-data-co
 import { EditMainDataPersonalComponent } from './edit-main-data/edit-main-data-personal/edit-main-data-personal.component';
 import { CustomerCompanyAddressCheckComponent } from './customer-company/customer-company-address/customer-company-address-check/customer-company-address-check.component';
 import { CustomerPersonalAddressCheckComponent } from './customer-personal/customer-personal-address/customer-personal-address-check/customer-personal-address-check.component';
+import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-view-header-personal/customer-view-header-personal.component';
+import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
  @NgModule({
   exports: [],
   imports: [
@@ -159,7 +161,7 @@ import { CustomerPersonalAddressCheckComponent } from './customer-personal/custo
     EditMainDataCompanyComponent,
     EditMainDataPersonalComponent,
     CustomerCompanyAddressCheckComponent,  
-    CustomerPersonalAddressCheckComponent
+    CustomerPersonalAddressCheckComponent, CustomerViewHeaderPersonalComponent, CustomerViewHeaderCompanyComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
