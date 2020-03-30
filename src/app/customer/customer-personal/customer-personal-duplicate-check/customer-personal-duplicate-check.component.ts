@@ -130,7 +130,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     } else {
       this.StatusAffiliate = "No";
     }
-    if (this.IsVip === true) {
+    if (this.IsVip === "true") {
       this.StatusIsVip = "Yes";
     } else {
       this.StatusIsVip = "No";
@@ -150,8 +150,16 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.addCustObj.custObj.IdNo = this.IdNo;
     this.addCustObj.custObj.IdExpiredDt = this.IdExpiredDt;
     this.addCustObj.custObj.TaxIdNo = this.TaxIdNo;
-    this.addCustObj.custObj.IsVip = this.IsVip;
-    this.addCustObj.custObj.IsAffiliateWithMf = this.IsAffiliateWithMf;
+    if(this.IsVip === "true"){
+      this.addCustObj.custObj.IsVip = true;
+    }else{
+      this.addCustObj.custObj.IsVip = false;
+    }
+    if(this.IsAffiliateWithMf === "true"){
+      this.addCustObj.custObj.IsAffiliateWithMf = true;
+    }else{
+      this.addCustObj.custObj.IsAffiliateWithMf = false;
+    } 
     this.addCustObj.custObj.VipNotes = this.VipNotes;
     this.addCustObj.CustPersonalObj.CustFullName = this.CustName;
     this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;

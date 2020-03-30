@@ -20,14 +20,15 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   @Input() custCompanyId: any;
   @Output () outputValue : EventEmitter<object>= new EventEmitter();
   @Input() CustCompanyMgmntShrholderId : any;
-  getListActiveRefMasterUrl: any;
+  getListActiveRefMasterUrl: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl : string;
   tempMrCustModelCode: any;
   tempMrCompanyTypeCode: any;
   custCompanyMgmntShrholderObj: any;
   addManagementShareholderUrl: any;
   getCustCompanyMgmntShrholderUrl : any;
   tempCustCompanyMgmntShrholderObj : any;
-  editManagementShareholderUrl : any;
+  editManagementShareholderUrl : string;
   inputLookupCustCompanyObj : any;
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.maxLength(100) ,Validators.required]],
@@ -41,7 +42,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
     this.getCustCompanyMgmntShrholderUrl = AdInsConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
-    this.editManagementShareholderUrl = AdInsConstant.EditCustCompanyMgmntShrholder;
+    this.editManagementShareholderUrl = AdInsConstant.EditCustCompanyMgmntShrholder; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {  
@@ -51,7 +53,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.inputLookupCustCompanyObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupCustCompanyObj.pagingJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.genericJson = "./assets/lookup/lookUpExistingCustCompany.json";
-
+    this.inputLookupCustCompanyObj.isRequired = false;
     var refMasterObjMrCompanyTypeCode = {
       RefMasterTypeCode: "COMPANY_TYPE",
       RowVersion: ""
@@ -69,7 +71,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       Reservefield1: "COMPANY",
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCustModelCode).subscribe(
+    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
       (response) => {
         this.tempMrCustModelCode = response["ReturnObject"];
         console.log(this.tempMrCustModelCode);

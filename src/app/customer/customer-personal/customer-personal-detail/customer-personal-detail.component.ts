@@ -64,7 +64,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   criteriaObj: any;
   flag: any;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-
+  Page : String;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
 
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
@@ -75,6 +75,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
       this.GetCustPersonalbyCustIdUrl = AdInsConstant.GetCustPersonalbyCustId;
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
+      }
+      if (params["Page"] != null) {
+        this.Page = params["Page"];
       }
     });
 
@@ -286,5 +289,12 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
   getLookUp(event) {
     this.tempCountryCode = event.CountryCode;
+  }
+  back(){
+    if(this.Page!=null){
+      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    }else{
+      this.router.navigate(["/Customer/Paging"]);
+    }
   }
 }

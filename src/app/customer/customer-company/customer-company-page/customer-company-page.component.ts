@@ -32,7 +32,8 @@ export class CustomerCompanyPageComponent implements OnInit {
   isFinancial: any;
   isOther: any;
   CustCompanyId: any;
-
+  StatusIsVip : string;
+  StatusAffiliate : string;
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
     this.getCustCompanyUrl = AdInsConstant.GetCustCompanyByCustId;
@@ -59,6 +60,16 @@ export class CustomerCompanyPageComponent implements OnInit {
             this.tempMrCustModelCode = response;
           }
         );
+        if (this.tempCustObj.IsVip === true) {
+          this.StatusIsVip = "Yes";
+        } else {
+          this.StatusIsVip = "No";
+        } 
+        if (this.tempCustObj.IsAffiliateWithMf === true) {
+          this.StatusAffiliate = "Yes";
+        } else {
+          this.StatusAffiliate = "No";
+        } 
       });
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj.CustId = this.IdCust;
@@ -74,6 +85,7 @@ export class CustomerCompanyPageComponent implements OnInit {
           }
         );
       });
+      
   }
 
   EnterTab(type) {

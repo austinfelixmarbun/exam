@@ -30,8 +30,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   addManagementShareholderUrl : any;
   tempKTPCheck: any;
   KTP = "KTP";
-  getCustCompanyMgmntShrholderUrl : any;
-  editManagementShareholderUrl : any;
+  getCustCompanyMgmntShrholderUrl : string;
+  editManagementShareholderUrl : string;
+  GetListActiveRefMasterWithReserveFieldAllUrl : string;
   tempCustCompanyMgmntShrholderObj : any;
   inputLookupCustPersonalObj : any;
   ManagementShareholderForm = this.fb.group({
@@ -52,7 +53,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
     this.getCustCompanyMgmntShrholderUrl = AdInsConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
-    this.editManagementShareholderUrl = AdInsConstant.EditCustCompanyMgmntShrholder;
+    this.editManagementShareholderUrl = AdInsConstant.EditCustCompanyMgmntShrholder; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
@@ -63,7 +65,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.inputLookupCustPersonalObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupCustPersonalObj.pagingJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.genericJson = "./assets/lookup/lookUpExistingCustPersonal.json";
-
+    this.inputLookupCustPersonalObj.isRequired = false;
     var refMasterObjMrGenderCode= {
       RefMasterTypeCode: "GENDER",
       RowVersion: ""
@@ -111,7 +113,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       Reservefield1: "PERSONAL",
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCustModelCode).subscribe(
+    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
       (response) => {
         this.tempMrCustModelCode = response["ReturnObject"];
         this.ManagementShareholderForm.patchValue({

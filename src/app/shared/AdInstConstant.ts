@@ -254,7 +254,7 @@ export class AdInsConstant {
   public static GetListActiveRefMaster = environment.FoundationR3Url +"/RefMaster/GetListKeyValueActiveByCode";
   public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
   public static GetRefMasterTypeOfficeWithoutCG = environment.FoundationR3Url + "/RefMaster/GetListKeyValueOfficeTypeWithoutCg";
-
+  public static GetListActiveRefMasterWithReserveFieldAll  = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterWithReserveFieldAll"
   //REF COUNTRY
   public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
   public static GetRefCountryByCountryCode = environment.FoundationR3Url + "/RefCountry/GetRefCountryByCountryCode";

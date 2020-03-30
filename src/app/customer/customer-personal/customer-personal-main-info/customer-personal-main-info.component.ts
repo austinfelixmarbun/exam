@@ -19,8 +19,8 @@ state: any;
     MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
-    IdNo: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.required]],
+    IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    TaxIdNo: ['',[Validators.pattern("^[0-9]+$")]],
     IdExpiredDt:  [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel : ['', [Validators.required]],
@@ -29,7 +29,8 @@ state: any;
     VipNotes : ['']
   });
   KTP = "KTP";
-  getListActiveRefMasterUrl: any;
+  getListActiveRefMasterUrl: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl :string; 
   custPersonalObj: CustPersonalObj;
   tempGender: any;
   tempIdType: any;
@@ -49,7 +50,8 @@ state: any;
   IsAffiliateWithMf : any;
   VipNotes: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
-  this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster; 
+  this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;  
+  this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
@@ -88,7 +90,7 @@ state: any;
       RowVersion: ""
     }
 
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjCustModel).subscribe(
+    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({

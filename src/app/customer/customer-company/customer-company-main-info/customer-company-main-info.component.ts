@@ -15,8 +15,12 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.required]],
+    IsVip : [true],
+    IsAffiliateWithMf: [true],
+    VipNotes : ['']
   });
-  GetListActiveRefMasterUrl: any;
+  GetListActiveRefMasterUrl: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl : string;
   tempCustModel: any;
   tempCompanyTypeCode: any;
   CustModel: any;
@@ -24,9 +28,13 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   MrIdTypeCode: any;
   CustName: any;
   TaxIdNo: any;
+  IsVip: any;
+  VipNotes : string;
+  IsAffiliateWithMf: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
@@ -35,7 +43,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       ReserveField1: "COMPANY",
       RowVersion: ""
     }
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjCustModel).subscribe(
+    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
@@ -62,6 +70,18 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.TaxIdNo = this.CustomerCompanyForm.controls["TaxIdNo"].value;
     this.CustModel = this.CustomerCompanyForm.controls["CustModel"].value;
     this.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
-    this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, } });
+    this.IsVip =  this.CustomerCompanyForm.controls["IsVip"].value;
+    this.IsAffiliateWithMf =  this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value;
+    this.VipNotes =  this.CustomerCompanyForm.controls["VipNotes"].value;
+    
+    this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, "IsAffiliateWithMf":this.IsAffiliateWithMf,"IsVip": this.IsVip,"VipNotes": this.VipNotes} });
+  }
+   
+  checkState(){
+    if(this.CustomerCompanyForm.controls.IsVip.value === true){
+      this.CustomerCompanyForm.controls.VipNotes.disable();
+    }else{
+      this.CustomerCompanyForm.controls.VipNotes.enable();
+    }
   }
 }
