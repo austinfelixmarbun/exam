@@ -16,7 +16,6 @@ import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOffering
 @Component({
   selector: 'app-product-component',
   templateUrl: './product-component.component.html',
-  styleUrls: ['./product-component.component.scss'],
   providers: [NGXToastrService]
 })
 export class ProductComponentComponent implements OnInit {

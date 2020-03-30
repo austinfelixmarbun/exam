@@ -61,9 +61,6 @@ export class ProductComponentHOComponent implements OnInit {
 
   addComponent(obj) {
     var compCode, compDescr;
-
-    console.log(this.dictOptions);
-
     if (obj.ProdCompntType == "DDL") {
       if (obj.CompntValue == "") {
         var dict = this.dictOptions[obj.RefProdCompntCode];
@@ -186,10 +183,6 @@ export class ProductComponentHOComponent implements OnInit {
     )
   }
 
-  ChangeDropdown() {
-    this.dictOptions["COMP3"] = [{ "key": "oeoe", "value": "oeoe" }];
-  }
-
   onChangeEvent(val, event, index, indexparent) {
     this.FormProdComp.controls["groups"].controls[indexparent].controls["components"].controls[index].patchValue({
       CompntValueDesc: this.dictOptions[val].find(f => f.Key == event.target.value).Value
@@ -261,117 +254,4 @@ export class ProductComponentHOComponent implements OnInit {
       this.NextDetail();
     }
   }
-
-
-  resolveDDLBehaviour(obj: any, indexAt: any, flag: any){
-    console.log("Behaviour DDL");
-    var urlGet = AdInsConstant.GetRefBehaviourByBehaviourTypeCode;
-    if (urlGet) {
-      var ddlObj = {
-        BehaviourTypeCode: obj.controls.BehaviourType.value
-      };
-      // console.log("cek API " + (indexAt + 1));
-
-      // Make different obj passing
-      this.http.post(urlGet, ddlObj).subscribe(
-        (response) => {
-          console.log(response);
-          // var lengthDDL = response["ReturnObject"].length;
-          // if (lengthDDL > 0) {
-          //   for (var i = 0; i < lengthDDL; i++) {
-          //     var eachDDLDetail = this.fb.group({
-          //       Key: response["ReturnObject"][i].Key,
-          //       Value: response["ReturnObject"][i].Value,
-          //     }) as FormGroup;
-          //     // console.log(eachDDLDetail);
-          //     this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.push(eachDDLDetail);
-          //   }
-          //   this.RefGeneralDataForm.controls.items["controls"][indexAt].controls.DropDownListBehaviour.removeAt(0);
-          //   if (flag) {
-          //     this.RefGeneralDataForm.controls.items["controls"][indexAt].patchValue({
-          //       MrProdBehaviour: response["ReturnObject"][0].Value
-          //     });
-          //   }
-          // }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-
-    }
-  }
-
-  
-  // SaveForm() {
-  //   this.listGeneralDataObj = new ListRefProductDetailObj();
-  //   this.listGeneralDataObj.ProductDetails = new Array();
-  //   this.listGeneralDataObj.ProdHId = this.objInput["param"];
-  //   this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
-  //   for (var i = 0; i < this.lengthDataReturnObj; i++) {
-  //     var GeneralDataObj = new RefProductDetailObj();
-  //     GeneralDataObj.ProdDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdDId.value;
-  //     GeneralDataObj.ProdHId = this.objInput["param"];
-  //     GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
-  //     GeneralDataObj.RefProdCompntGrpCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
-  //     GeneralDataObj.CompntValue = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValue.value;
-  //     GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
-  //     GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
-  //     GeneralDataObj.RowVersion = this.RefGeneralDataForm.controls.items["controls"][i].controls.RowVersion.value;
-  //     this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
-  //   }
-  //   // this.listGeneralDataObj.ProductDetails.removeAt(0);
-  //   console.log(this.listGeneralDataObj);
-  //   console.log(this.RefGeneralDataForm.controls.items["controls"][0].controls.RowVersion.value);
-
-  //   this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
-  //     (response) => {
-  //       console.log("Response save form");
-  //       console.log(response);
-  //       this.toastr.successMessage(response["message"]);
-  //       this.router.navigate(["/Product/HOpaging"]);
-  //     },
-  //     (error) => {
-  //       console.log("Response save error");
-  //       console.log(error);
-  //     }
-  //   );
-  // }
-
-  // NextDetail() {
-  //   this.listGeneralDataObj = new ListRefProductDetailObj();
-  //   this.listGeneralDataObj.ProductDetails = new Array();
-  //   this.listGeneralDataObj.ProdHId = this.objInput["param"];
-  //   this.UrlBackEnd = AdInsConstant.AddOrEditProductDetail;
-  //   for (var i = 0; i < this.lengthDataReturnObj; i++) {
-  //     var GeneralDataObj = new RefProductDetailObj();
-  //     GeneralDataObj.ProdDId = this.RefGeneralDataForm.controls.items["controls"][i].controls.ProdDId.value;
-  //     GeneralDataObj.ProdHId = this.objInput["param"];
-  //     GeneralDataObj.RefProdCompntCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntCode.value;
-  //     GeneralDataObj.RefProdCompntGrpCode = this.RefGeneralDataForm.controls.items["controls"][i].controls.RefProdCompntGrpCode.value;
-  //     GeneralDataObj.CompntValue = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValue.value;
-  //     GeneralDataObj.CompntValueDesc = this.RefGeneralDataForm.controls.items["controls"][i].controls.CompntValueDesc.value;
-  //     GeneralDataObj.MrProdBehaviour = this.RefGeneralDataForm.controls.items["controls"][i].controls.MrProdBehaviour.value;
-  //     GeneralDataObj.RowVersion = this.RefGeneralDataForm.controls.items["controls"][i].controls.RowVersion.value;
-  //     this.listGeneralDataObj.ProductDetails.push(GeneralDataObj);
-  //   }
-  //   // this.listGeneralDataObj.ProductDetails.removeAt(0);
-  //   console.log(this.listGeneralDataObj);
-  //   console.log(this.RefGeneralDataForm.controls.items["controls"][0].controls.RowVersion.value);
-
-  //   this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
-  //     (response) => {
-  //       console.log("Response next form");
-  //       console.log(response);
-  //       this.toastr.successMessage(response["message"]);
-  //       this.wizard.goToNextStep();
-  //     },
-  //     (error) => {
-  //       console.log("Response save error");
-  //       console.log(error);
-  //     }
-  //   );
-  // }
-
-
  }
