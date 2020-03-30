@@ -32,7 +32,7 @@
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Customer Group'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome'}" (stepEnter)="EnterTab('Group')">
-            <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="PERSONAL" [CustId]="this.IdCust">
+            <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="'PERSONAL'" [CustId]="this.IdCust">
             </app-cust-group-tab>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Job Data'"
