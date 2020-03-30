@@ -36,7 +36,7 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
     var obj = {
       taskId: this.taskId,
       instanceId: this.instanceId,
-      approvalBaseUrl: "http://r3app-server/APPROVAL"
+      approvalBaseUrl: environment.ApprovalURL
     }
     console.log("OBEJE")
     console.log(obj);
