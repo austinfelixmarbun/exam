@@ -14,7 +14,7 @@ import { WizardComponent } from 'angular-archwizard';
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderCheckComponent implements OnInit {
-  @Input() inputValue: any;
+  
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
   getCustCompanyIdUrl: any;
   IdCust: any;

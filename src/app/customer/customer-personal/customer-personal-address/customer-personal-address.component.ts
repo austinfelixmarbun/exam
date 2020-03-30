@@ -9,7 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   providers: [NGXToastrService]
 })
 export class CustomerPersonalAddressComponent implements OnInit {
-  @Input () CustId : any ;
+ 
   mode: any;
   AddrId:any;
   constructor( ) {  

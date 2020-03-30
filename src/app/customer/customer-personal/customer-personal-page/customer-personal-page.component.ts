@@ -37,18 +37,17 @@ export class CustomerPersonalPageComponent implements OnInit {
   tempMrGenderCode: any;
   tempMrIdTypeCode;
   tempMrCustModelCode: any;
-  mrMaritalStatCode: string;
- 
+  mrMaritalStatCode: string; 
+  StatusIsVip : any;
   isDetail: any;
-  isAddress : any;
-  isContact : any;
-  isGroup : any;
-  isJob:any;
-  isFinancial : any;
-  isOther :any;
-  CustPersonalId : any;
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
-    this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
+  isAddress: any;
+  isContact: any;
+  isGroup: any;
+  isJob: any;
+  isFinancial: any;
+  isOther: any;
+  CustPersonalId: any;
+  constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -99,76 +98,74 @@ export class CustomerPersonalPageComponent implements OnInit {
        
         this.mrMaritalStatCode = this.tempCustPersonalObj.MrMaritalStatCode;
       });
-
-
   }
 
-  EnterTab(type){
-    if(type == "Detail"){
+  EnterTab(type) {
+    if (type == "Detail") {
       this.isDetail = true;
       this.isAddress = false;
-      this.isContact  = false;
-      this.isGroup  = false;
+      this.isContact = false;
+      this.isGroup = false;
       this.isJob = false;
       this.isFinancial = false;
-      this.isOther  = false;
+      this.isOther = false;
     }
 
-    if(type == "Address"){
+    if (type == "Address") {
       this.isDetail = false;
       this.isAddress = true;
-      this.isContact  = false;
-      this.isGroup  = false;
+      this.isContact = false;
+      this.isGroup = false;
       this.isJob = false;
       this.isFinancial = false;
-      this.isOther  = false;
-    }
-   
-    if(type == "Contact"){
-      this.isDetail = false;
-      this.isAddress = false;
-      this.isContact  = true;
-      this.isGroup  = false;
-      this.isJob = false;
-      this.isFinancial = false;
-      this.isOther  = false;
-    }
-    if(type == "Group"){
-      this.isDetail = false;
-      this.isAddress = false;
-      this.isContact  = false;
-      this.isGroup  = true;
-      this.isJob = false;
-      this.isFinancial = false;
-      this.isOther  = false;
-    }
-    if(type == "Job"){
-      this.isDetail = false;
-      this.isAddress = false;
-      this.isContact  = false;
-      this.isGroup  = false;
-      this.isJob = true;
-      this.isFinancial = false;
-      this.isOther  = false;
-    }
-    if(type == "Financial"){
-      this.isDetail = false;
-      this.isAddress = false;
-      this.isContact  = false;
-      this.isGroup  = false;
-      this.isJob = false;
-      this.isFinancial = true;
-      this.isOther  = false;
+      this.isOther = false;
     }
 
-    if(type == "Other"){
+    if (type == "Contact") {
       this.isDetail = false;
       this.isAddress = false;
-      this.isContact  = false;
-      this.isGroup  = false;
+      this.isContact = true;
+      this.isGroup = false;
       this.isJob = false;
       this.isFinancial = false;
-      this.isOther  = true;
+      this.isOther = false;
+    }
+    if (type == "Group") {
+      this.isDetail = false;
+      this.isAddress = false;
+      this.isContact = false;
+      this.isGroup = true;
+      this.isJob = false;
+      this.isFinancial = false;
+      this.isOther = false;
+    }
+    if (type == "Job") {
+      this.isDetail = false;
+      this.isAddress = false;
+      this.isContact = false;
+      this.isGroup = false;
+      this.isJob = true;
+      this.isFinancial = false;
+      this.isOther = false;
+    }
+    if (type == "Financial") {
+      this.isDetail = false;
+      this.isAddress = false;
+      this.isContact = false;
+      this.isGroup = false;
+      this.isJob = false;
+      this.isFinancial = true;
+      this.isOther = false;
+    }
+
+    if (type == "Other") {
+      this.isDetail = false;
+      this.isAddress = false;
+      this.isContact = false;
+      this.isGroup = false;
+      this.isJob = false;
+      this.isFinancial = false;
+      this.isOther = true;
     }
   }
 
@@ -176,5 +173,5 @@ export class CustomerPersonalPageComponent implements OnInit {
     console.log(ev);
     this.CustPersonalId = ev.CustPersonalId;
   }
-   
+
 }

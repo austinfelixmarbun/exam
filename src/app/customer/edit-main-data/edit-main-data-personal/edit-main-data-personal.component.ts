@@ -31,15 +31,16 @@ export class EditMainDataPersonalComponent implements OnInit {
     VipNotes: ['']
   });
   KTP = "KTP"
-  getUrl: any;
+  getListActiveRefMasterUrl: string;
   tempKTPCheck: any;
   tempGender: any;
   tempIdType: any;
   tempCustModel: any;
   editCustUrl: any;
-  editCustPersonalUrl: any;
-  getCustPersonalByCustIdUrl: any;
-  getCustByCustIdUrl: any;
+  editCustPersonalUrl: string;
+  getCustPersonalByCustIdUrl: string;
+  getCustByCustIdUrl: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl  :string;
   tempCustPersonalObj: any;
   tempCustObj: any;
   CustId: any;
@@ -47,11 +48,12 @@ export class EditMainDataPersonalComponent implements OnInit {
   custPersonalObj: any;
   From:any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
-    this.getUrl = AdInsConstant.GetListActiveRefMaster;
+    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = AdInsConstant.GetCustPersonalbyCustId;
     this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
     this.editCustUrl = AdInsConstant.EditCust;
-    this.editCustPersonalUrl = AdInsConstant.EditCustPersonal;
+    this.editCustPersonalUrl = AdInsConstant.EditCustPersonal; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -63,11 +65,11 @@ export class EditMainDataPersonalComponent implements OnInit {
   }
 
   ngOnInit() {
-    var refMasterObj = {
+    var refMasterObjGender = {
       RefMasterTypeCode: "GENDER",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjGender).subscribe(
       (response) => {
         this.tempGender = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
@@ -75,11 +77,11 @@ export class EditMainDataPersonalComponent implements OnInit {
         });
       }
     );
-    var refMasterObj1 = {
+    var refMasterObjMrIdTypeCode = {
       RefMasterTypeCode: "ID_TYPE",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempIdType = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
@@ -92,13 +94,13 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       }
     );
-    var refMasterObj2 = {
+    var refMasterObjCustModel = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "PERSONAL",
       RowVersion: ""
     }
 
-    this.http.post(this.getUrl, refMasterObj2).subscribe(
+    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
@@ -166,7 +168,12 @@ export class EditMainDataPersonalComponent implements OnInit {
           (response) => {
             console.log(this.custObj.CustNo);
             this.toastr.successMessage(response["Message"]);
-              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId } }); 
+            
+            if (this.From == "EditMainData") {
+              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit' } });
+            } else {
+              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId } });
+            } 
           },
           error => {
             console.log(error);

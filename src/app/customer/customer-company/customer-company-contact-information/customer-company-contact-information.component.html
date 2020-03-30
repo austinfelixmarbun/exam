@@ -6,7 +6,7 @@
       </lib-ucSubsection>
       <div id="MainInfoId">
         <div class="form-group row  ">
-          <label class="col-md-2 adInsLabel" translate>Name</label>
+          <label class="col-md-2 adins-required-label" translate>Name</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="ContactPersonName"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.ContactPersonName.invalid}">
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="form-group row  ">
-          <label class="col-md-2 adInsLabel" translate>Job Position</label>
+          <label class="col-md-2  adins-required-label" translate>Job Position</label>
           <div class="col-md-4">
             <select class="form-control adInsInput" style="width: auto" formControlName="MrJobPostitionCode"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.MrJobPostitionCode.invalid }">
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="form-group row  ">
-          <label class="col-md-2 adInsLabel" translate>Job Title</label>
+          <label class="col-md-2 adins-required-label" translate>Job Title</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="JobTitleName"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.JobTitleName.invalid}">

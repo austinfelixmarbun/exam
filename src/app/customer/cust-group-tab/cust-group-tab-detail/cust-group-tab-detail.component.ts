@@ -5,8 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
-import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
+import { environment } from 'environments/environment'; 
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 

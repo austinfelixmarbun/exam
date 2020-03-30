@@ -15,20 +15,25 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   getUrl: any;
   tempCompanyTypeCode: any;
-  tempIdType: any;
-  CustModel: any;
-  CustName: any;
-  MrCompanyTypeCode: any;
-  MrIdTypeCode: any;
+  tempIdType: string;
+  CustModel: string;
+  CustName: string;
+  MrCompanyTypeCode: string;
+  MrIdTypeCode: string;
   IdNo: any;
-  TaxIdNo: any;
-  urlGetDescByMasterCode: any;
+  TaxIdNo: string;
+  urlGetDescByMasterCode: string;
   tempMrCompanyTypeCode: any;
   tempCustModel: any;
   tempMrIdTypeCode: any;
   addCustObj: any;
   resultData: any;
   IdCust: any;
+  IsAffiliateWithMf : any
+  IsVip : any;
+  VipNotes : any;
+  StatusAffiliate : string;
+  StatusIsVip : string;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.urlGetDescByMasterCode = AdInsConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
@@ -44,31 +49,48 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
       if (params["TaxIdNo"] != null) {
         this.TaxIdNo = params["TaxIdNo"];
       }
+      if (params["IsAffiliateWithMf"] != null) {
+        this.IsAffiliateWithMf = params["IsAffiliateWithMf"];
+      }
+      if (params["IsVip"] != null) {
+        this.IsVip = params["IsVip"];
+      }
+      if (params["VipNotes"] != null) {
+        this.VipNotes = params["VipNotes"];
+      }
     });
   }
 
   ngOnInit() {
-    var refMasterObj1 = {
+    var refMasterObjCustModel = {
       MasterCode: this.CustModel,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj1).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }
     );
 
-    var refMasterObj2 = {
+    var refMasterObjMrCompanyTypeCode = {
       MasterCode: this.MrCompanyTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj2).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempMrCompanyTypeCode = response;
       }
     );
-
-
+    if (this.IsAffiliateWithMf === "true") {
+      this.StatusAffiliate = "Yes";
+    } else {
+      this.StatusAffiliate = "No";
+    }
+    if (this.IsVip === "true") {
+      this.StatusIsVip = "Yes";
+    } else {
+      this.StatusIsVip = "No";
+    }
   }
   SaveValue() {
     this.addCustObj = new AddCustObj();
@@ -81,7 +103,17 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     this.addCustObj.custObj.MrIdTypeCode = "NPWP";
     this.addCustObj.custObj.IdNo = this.TaxIdNo;
     this.addCustObj.custObj.TaxIdNo = this.TaxIdNo;
-
+    if(this.IsVip === "true"){
+      this.addCustObj.custObj.IsVip = true;
+    }else{
+      this.addCustObj.custObj.IsVip = false;
+    }
+    if(this.IsAffiliateWithMf === "true"){
+      this.addCustObj.custObj.IsAffiliateWithMf = true;
+    }else{
+      this.addCustObj.custObj.IsAffiliateWithMf = false;
+    } 
+    this.addCustObj.custObj.VipNotes = this.VipNotes;
     this.http.post(AdInsConstant.AddNewCust, this.addCustObj).subscribe(
       (response) => {
         this.resultData = response;
