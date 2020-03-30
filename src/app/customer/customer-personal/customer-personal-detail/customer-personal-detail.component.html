@@ -48,12 +48,6 @@
             <show-errors [control]="CustomerDetailForm.controls.CustPrefixName" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
-          <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
-          <div class="col-md-4">
-            <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
-          </div>
-        </div>
-        <div class="form-group row  ">
           <label class="col-md-2 adInsLabel" translate>Gelar Belakang Nama</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="CustSuffixName"
@@ -61,6 +55,9 @@
             <show-errors [control]="CustomerDetailForm.controls.CustSuffixName" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
+        </div>
+        <div class="form-group row  ">
+          
           <label class="col-md-2 adInsLabel" translate>Num Of Dependents</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="NoOfDependents"
@@ -68,8 +65,6 @@
             <show-errors [control]="CustomerDetailForm.controls.NoOfDependents" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
-        </div>
-        <div class="form-group row">
           <label class="col-md-2 adins-required-label" translate>Nationality</label>
           <div class="col-md-4">
             <select (change)="onOptionsSelected($event)" class="form-control adInsInput" style="width: auto"
@@ -81,6 +76,8 @@
             <show-errors [control]="CustomerDetailForm.controls.MrNationalityCode" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
+        </div>
+        <div class="form-group row"> 
           <label class="col-md-2" translate>Num Of Residence (Last 3 Years)</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="NoOfResidence"
@@ -88,8 +85,6 @@
             <show-errors [control]="CustomerDetailForm.controls.NoOfResidence" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
-        </div>
-        <div class="form-group row ">
           <label class="col-md-2 adins-required-label" translate>Country</label>
           <div class="col-md-4">
             <div *ngIf="flag">
@@ -99,17 +94,10 @@
               <lib-uclookupgeneric [lookupInput]="lookUpObj" [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm"
                 [identifier]="'WnaCountryCode'" (lookup)=getLookUp($event)>
               </lib-uclookupgeneric>
-            </div>
-            <!-- <select class="form-control adInsInput" style="width: inherit" formControlName="WnaCountryCode"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.WnaCountryCode.invalid }">
-                      <option *ngFor="let it of tempWnaCountryCode" [value]="it.CountryCode">
-                        {{it.CountryName}}</option>
-                    </select> -->
-            <!-- <lib-uclookupgeneric [lookupInput]= "lookUpObj" [parentForm]="CustomerDetailForm" [enjiForm] ="enjiForm" [identifier]="'WnaCountryCode'"(lookup)= getLookUp($event)> </lib-uclookupgeneric> -->
-
-            <!-- <show-errors [control]="CustomerDetailForm.controls.WnaCountryCode" [submit]="enjiForm.submitted">
-                    </show-errors> -->
+            </div> 
           </div>
+        </div>
+        <div class="form-group row "> 
           <label class="col-md-2 adInsLabel" translate>Family Card Num</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="FamilyCardNo"
@@ -117,8 +105,6 @@
             <show-errors [control]="CustomerDetailForm.controls.FamilyCardNo" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
-        </div>
-        <div class="form-group row ">
           <label class="col-md-2 adins-required-label" translate>Education</label>
           <div class="col-md-4">
             <select class="form-control adInsInput" style="width: auto" formControlName="MrEducationCode"
@@ -129,12 +115,12 @@
             <show-errors [control]="CustomerDetailForm.controls.MrEducationCode" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
+        </div>
+        <div class="form-group row "> 
           <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
           <div class="col-md-4">
             <label>{{this.tempCustPersonalObj?.MotherMaidenName}}</label>
           </div>
-        </div>
-        <div class="form-group row  ">
           <label class="col-md-2 adins-required-label" translate>Religion</label>
           <div class="col-md-4">
             <select class="form-control adInsInput" style="width: auto" formControlName="MrReligionCode"
@@ -145,6 +131,8 @@
             <show-errors [control]="CustomerDetailForm.controls.MrReligionCode" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
+        </div>
+        <div class="form-group row  "> 
           <label class="col-md-2 adInsLabel" translate>Rest In Peace</label>
           <div class="col-md-4">
             <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsRestInPeace" />

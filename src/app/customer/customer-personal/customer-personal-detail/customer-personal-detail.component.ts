@@ -25,8 +25,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     NickName: ['', [Validators.maxLength(100)]],
     MrSalutationCode: [''],
     MrMaritalStatCode: [''],
-    CustPrefixName: [''],
-    IsAffiliateWithMf: [true],
+    CustPrefixName: [''], 
     CustSuffixName: [''],
     NoOfDependents: ['', [Validators.pattern("^[0-9]+$")]],
     MrNationalityCode: [''],
@@ -35,8 +34,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
     MrEducationCode: ['',],
     MrReligionCode: ['',],
     IsRestInPeace: [false],
-    MobilePhnNo1: ['', Validators.required],
-    MobilePhnNo2: [''],
+    MobilePhnNo1: ['',[ Validators.required, Validators.pattern("^[0-9]+$")]],
+    MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
     Email1: [''],
     Email2: [''],
   });
@@ -225,8 +224,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         this.CustomerDetailForm.patchValue({
           NickName: this.tempCustPersonalObj.NickName,
           MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode,
-          CustSuffixName: this.tempCustPersonalObj.CustSuffixName,
-          IsAffiliateWithMf: this.tempCustPersonalObj.IsAffiliateWithMf,
+          CustSuffixName: this.tempCustPersonalObj.CustSuffixName, 
           CustPrefixName: this.tempCustPersonalObj.CustPrefixName,
           NoOfDependents: this.tempCustPersonalObj.NoOfDependents,
           NoOfResidence: this.tempCustPersonalObj.NoOfResidence,
@@ -246,8 +244,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.NickName = this.CustomerDetailForm.controls["NickName"].value;
     this.custPersonalObj.MrSalutationCode = this.CustomerDetailForm.controls["MrSalutationCode"].value;
     this.custPersonalObj.MrMaritalStatCode = this.CustomerDetailForm.controls["MrMaritalStatCode"].value;
-    this.custPersonalObj.CustPrefixName = this.CustomerDetailForm.controls["CustPrefixName"].value;
-    this.custPersonalObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
+    this.custPersonalObj.CustPrefixName = this.CustomerDetailForm.controls["CustPrefixName"].value; 
     this.custPersonalObj.CustSuffixName = this.CustomerDetailForm.controls["CustSuffixName"].value;
     this.custPersonalObj.NoOfDependents = this.CustomerDetailForm.controls["NoOfDependents"].value;
     this.custPersonalObj.MotherMaidenName = this.tempCustPersonalObj.MotherMaidenName;
