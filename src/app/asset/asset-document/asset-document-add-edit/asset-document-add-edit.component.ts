@@ -36,17 +36,17 @@ export class AssetDocumentAddEditComponent implements OnInit {
   urlEnviPaging: string = environment.foundationUrl;
   result: any;
   assetDocListObj: AssetDocListObj;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
+  GetListRefAssetDocUrl: any;
+  AddNewAssetDocListUrl: any;
+  EditAssetDocListUrl: any;
   getRefAssetDocUrl: any;
   tempAssetName: any;
   temp: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.addUrl =  AdInsConstant.AddNewAssetDocList;
-    this.editUrl =  AdInsConstant.EditAssetDocList;
-    this.getUrl = AdInsConstant.GetListRefAssetDoc;
+    this.AddNewAssetDocListUrl =  AdInsConstant.AddNewAssetDocList;
+    this.EditAssetDocListUrl =  AdInsConstant.EditAssetDocList;
+    this.GetListRefAssetDocUrl = AdInsConstant.GetListRefAssetDoc;
     this.route.queryParams.subscribe(params => {
       
       if (params["AssetTypeId"] != null) {
@@ -62,7 +62,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
   }
   ngOnInit() {
     console.log("wd");
-    this.http.post(this.getUrl, assetDocListObj).subscribe(
+    this.http.post(this.GetListRefAssetDocUrl, assetDocListObj).subscribe(
       (response) => {
         this.tempAssetName = response["ReturnObject"];
         this.AssetDocumentForm.patchValue({
@@ -118,7 +118,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsActive = this.AssetDocumentForm.controls["IsActive"].value;
       this.assetDocListObj.AssetTypeId = this.AssetTypeId;
 
-      this.http.post(this.addUrl, this.assetDocListObj).subscribe(
+      this.http.post(this.AddNewAssetDocListUrl, this.assetDocListObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });
@@ -138,7 +138,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsMandatoryUsed = this.AssetDocumentForm.controls["IsMandatoryUsed"].value;
       this.assetDocListObj.IsActive = this.AssetDocumentForm.controls["IsActive"].value;
 
-      this.http.post(this.editUrl, this.assetDocListObj).subscribe(
+      this.http.post(this.EditAssetDocListUrl, this.assetDocListObj).subscribe(
         response => {
           console.log(response);
           this.toastr.successMessage(response["Message"]);

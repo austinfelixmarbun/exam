@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./customer-company-management-shareholder.component.scss']
 })
 export class CustomerCompanyManagementShareholderComponent implements OnInit {
-  @Input () inputValue : any ;
+ 
   @Input () custCompanyId : any ;
   
   mode : any;  

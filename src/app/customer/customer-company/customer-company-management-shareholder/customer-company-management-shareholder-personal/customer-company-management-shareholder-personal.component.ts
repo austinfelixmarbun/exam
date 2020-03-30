@@ -17,11 +17,11 @@ import { environment } from 'environments/environment';
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderPersonalComponent implements OnInit {
-  @Input() inputValue: any;
+   
   @Input() custCompanyId : any;
   @Input() CustCompanyMgmntShrholderId : any;
   @Output () outputValue : EventEmitter<object>= new EventEmitter();
-  getUrl: any;
+  getListActiveRefMasterUrl: any;
   tempMrGenderCode: any;
   tempIdType: any;
   tempMrJobPositionCode : any;
@@ -30,8 +30,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   addManagementShareholderUrl : any;
   tempKTPCheck: any;
   KTP = "KTP";
-  getCustCompanyMgmntShrholderUrl : any;
-  editManagementShareholderUrl : any;
+  getCustCompanyMgmntShrholderUrl : string;
+  editManagementShareholderUrl : string;
+  GetListActiveRefMasterWithReserveFieldAllUrl : string;
   tempCustCompanyMgmntShrholderObj : any;
   inputLookupCustPersonalObj : any;
   ManagementShareholderForm = this.fb.group({
@@ -39,20 +40,21 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     MrCustModelCode: [''],
     MrIdTypeCode: [''],
     IdNo: [''],
-    IdExpiredDt: [''],
+    IdExpiredDt: ['',[Validators.required]],
     MrGenderCode: [''],
     BirthPlace: [''],
     BirthDt: [''],
     TaxIdNo: [''],
     MrJobPositionCode: [''],
-    SharePrcnt: ['0'],
+    SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     IsSigner: [false], 
   });
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
-    this.getUrl = AdInsConstant.GetListActiveRefMaster;
+    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
     this.getCustCompanyMgmntShrholderUrl = AdInsConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
-    this.editManagementShareholderUrl = AdInsConstant.EditCustCompanyMgmntShrholder;
+    this.editManagementShareholderUrl = AdInsConstant.EditCustCompanyMgmntShrholder; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
@@ -63,12 +65,12 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.inputLookupCustPersonalObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupCustPersonalObj.pagingJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.genericJson = "./assets/lookup/lookUpExistingCustPersonal.json";
-
-    var refMasterObj1 = {
+    this.inputLookupCustPersonalObj.isRequired = false;
+    var refMasterObjMrGenderCode= {
       RefMasterTypeCode: "GENDER",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
         this.tempMrGenderCode = response["ReturnObject"];
         this.ManagementShareholderForm.patchValue({
@@ -77,10 +79,10 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       }
     );
 	
-	   var refMasterObj2 = {
+	   var refMasterObjMrIdTypeCode = {
       RefMasterTypeCode: "ID_TYPE"
     }
-    this.http.post(this.getUrl, refMasterObj2).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempIdType = response["ReturnObject"];
         this.ManagementShareholderForm.patchValue({
@@ -94,11 +96,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       }
     );
    
-    var refMasterObj3 = {
+    var refMasterObjMrJobPositionCode = {
       RefMasterTypeCode: "JOB_POSITION",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj3).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
         this.tempMrJobPositionCode = response["ReturnObject"];
         this.ManagementShareholderForm.patchValue({
@@ -106,12 +108,12 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         });
       }
     );
-    var refMasterObj4 = {
+    var refMasterObjMrCustModelCode = {
       RefMasterTypeCode: "CUST_MODEL",
       Reservefield1: "PERSONAL",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj4).subscribe(
+    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
       (response) => {
         this.tempMrCustModelCode = response["ReturnObject"];
         this.ManagementShareholderForm.patchValue({

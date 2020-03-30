@@ -17,7 +17,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class CustomerCompanyAddressAddComponent implements OnInit {
   @Input() AddrId: any;
-  @Input() IdCust: any;
+  IdCust: string;
   @Input() mode: any;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
   pageType: any;

@@ -95,31 +95,31 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   }
 
   ngOnInit() {
-    var refMasterObj1 = {
+    var refMasterObjGender = {
       MasterCode: this.Gender,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj1).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjGender).subscribe(
       (response) => {
         this.tempGender = response;
       }
     );
 
-    var refMasterObj2 = {
+    var refMasterObjMrIdTypeCode = {
       MasterCode: this.MrIdTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj2).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempMrIdTypeCode = response;
       }
     );
 
-    var refMasterObj3 = {
+    var refMasterObjCustModel = {
       MasterCode: this.CustModel,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj3).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }
@@ -130,7 +130,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     } else {
       this.StatusAffiliate = "No";
     }
-    if (this.IsVip === true) {
+    if (this.IsVip === "true") {
       this.StatusIsVip = "Yes";
     } else {
       this.StatusIsVip = "No";
@@ -150,8 +150,16 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.addCustObj.custObj.IdNo = this.IdNo;
     this.addCustObj.custObj.IdExpiredDt = this.IdExpiredDt;
     this.addCustObj.custObj.TaxIdNo = this.TaxIdNo;
-    this.addCustObj.custObj.IsVip = this.IsVip;
-    this.addCustObj.custObj.IsAffiliateWithMf = this.IsAffiliateWithMf;
+    if(this.IsVip === "true"){
+      this.addCustObj.custObj.IsVip = true;
+    }else{
+      this.addCustObj.custObj.IsVip = false;
+    }
+    if(this.IsAffiliateWithMf === "true"){
+      this.addCustObj.custObj.IsAffiliateWithMf = true;
+    }else{
+      this.addCustObj.custObj.IsAffiliateWithMf = false;
+    } 
     this.addCustObj.custObj.VipNotes = this.VipNotes;
     this.addCustObj.CustPersonalObj.CustFullName = this.CustName;
     this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;
