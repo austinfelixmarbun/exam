@@ -4,15 +4,7 @@
       (ngSubmit)="enjiForm.form.valid" *ngIf="MrCustTypeCode == 'PERSONAL'">
       <div class="form-body">
         <div class="form-group row">
-          <label class="col-md-3 adInsLabel adins-required-label" for="NettProfitMonthlyAmt" translate>Net Profit Monthly</label>
-          <div class="col-md-9">
-            <input type="text" class="form-control adInsInput" formControlName="NettProfitMonthlyAmt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.NettProfitMonthlyAmt.invalid }" />
-            <show-errors [control]="CustPersonalFinDataForm.controls.NettProfitMonthlyAmt" [submit]="enjiForm.submitted"></show-errors>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 adInsLabel" for="MonthlyIncomeAmt" translate>Monthly Income Amount</label>
+          <label class="col-md-3 adInsLabel" for="MonthlyIncomeAmt" translate>Monthly Income</label>
           <div class="col-md-9">
             <input type="text" class="form-control adInsInput" formControlName="MonthlyIncomeAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.MonthlyIncomeAmt.invalid }" />
@@ -20,7 +12,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-3 adInsLabel" for="OtherIncomeAmt" translate>Other Income Amount</label>
+          <label class="col-md-3 adInsLabel" for="OtherIncomeAmt" translate>Other Income</label>
           <div class="col-md-9">
             <input type="text" class="form-control adInsInput" formControlName="OtherIncomeAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.OtherIncomeAmt.invalid }" />
@@ -38,17 +30,25 @@
           </div>
         </div>
         <div class="form-group row" *ngIf="MrMaritalStatCode == 'MAR'">
-          <label class="col-md-3 adInsLabel" for="IsJoinIncome" translate>Is Join Income</label>
-          <div class="col-md-9">
-            <input type="checkbox" formControlName="IsJoinIncome" />
-          </div>
-        </div>
-        <div class="form-group row" *ngIf="MrMaritalStatCode == 'MAR'">
           <label class="col-md-3 adInsLabel" for="SpouseMonthlyIncomeAmt" translate>Spouse Monthly Income Amount</label>
           <div class="col-md-9">
             <input type="text" class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt.invalid }" />
             <show-errors [control]="CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt" [submit]="enjiForm.submitted"></show-errors>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 adInsLabel" for="TotalIncomeAmt" translate>Total Income Amount</label>
+          <div class="col-md-9">
+            {{CustPersonalFinDataForm.controls.TotalIncomeAmt.value}}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 adInsLabel" for="MonthlyInstallmentAmt" translate>Monthly Installment Amount</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control adInsInput" formControlName="MonthlyInstallmentAmt" 
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.MonthlyInstallmentAmt.invalid }" />
+            <show-errors [control]="CustPersonalFinDataForm.controls.MonthlyInstallmentAmt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
@@ -60,31 +60,15 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-3 adInsLabel" for="MonthlyInstallmentAmt" translate>Monthly Installment Amount</label>
-          <div class="col-md-9">
-            <input type="text" class="form-control adInsInput" formControlName="MonthlyInstallmentAmt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.MonthlyInstallmentAmt.invalid }" />
-            <show-errors [control]="CustPersonalFinDataForm.controls.MonthlyInstallmentAmt" [submit]="enjiForm.submitted"></show-errors>
-          </div>
-        </div>
-        <!-- <div class="form-group row">
-          <label class="col-md-3 adInsLabel" for="OtherMonthlyInstAmt" translate>Other Monthly Installment Amount</label>
-          <div class="col-md-9">
-            <input type="text" class="form-control adInsInput" formControlName="OtherMonthlyInstAmt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.OtherMonthlyInstAmt.invalid }" />
-            <show-errors [control]="CustPersonalFinDataForm.controls.OtherMonthlyInstAmt" [submit]="enjiForm.submitted"></show-errors>
-          </div>
-        </div> -->
-        <div class="form-group row">
-          <label class="col-md-3 adInsLabel" for="TotalIncomeAmt" translate>Total Income Amount</label>
-          <div class="col-md-9">
-            {{CustPersonalFinDataForm.controls.TotalIncomeAmt.value}}
-          </div>
-        </div>
-        <div class="form-group row">
           <label class="col-md-3 adInsLabel" for="NettIncomeAmt" translate>Net Income Amount</label>
           <div class="col-md-9">
             {{CustPersonalFinDataForm.controls.NettIncomeAmt.value}}
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="MrMaritalStatCode == 'MAR'">
+          <label class="col-md-3 adInsLabel" for="IsJoinIncome" translate>Is Join Income</label>
+          <div class="col-md-9">
+            <input type="checkbox" formControlName="IsJoinIncome" />
           </div>
         </div>
         <div class="form-group row">
