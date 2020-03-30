@@ -34,7 +34,7 @@ export class CustFinDataTabComponent implements OnInit {
     IsJoinIncome: [false],
     TotalIncomeAmt: [0],
     NettIncomeAmt: [0],
-    NettProfitMonthlyAmt: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    NettProfitMonthlyAmt: [0],
     OtherIncomeAmt: ['', [Validators.pattern('^[0-9]+$')]],
     OtherMonthlyInstAmt: [0],
     RowVersion: ['']
@@ -74,7 +74,7 @@ export class CustFinDataTabComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder, 
-    private wizard: WizardComponent
+    // private wizard: WizardComponent
   ) {
     if(this.MrCustTypeCode == "PERSONAL"){
       this.isCalculated = false;
@@ -180,8 +180,8 @@ export class CustFinDataTabComponent implements OnInit {
       var formData = this.CustPersonalFinDataForm.value;
       var monthlyIncomeAmt = formData.MonthlyIncomeAmt == "" ? 0 : parseInt(formData.MonthlyIncomeAmt);
       var spouseMonthlyIncomeAmt = formData.SpouseMonthlyIncomeAmt == "" ? 0 : parseInt(formData.SpouseMonthlyIncomeAmt);
-      var totalIncomeAmt = formData.TotalIncomeAmt == "" ? 0 : parseInt(formData.TotalIncomeAmt);
-      var nettIncomeAmt = formData.NettIncomeAmt == "" ? 0 : parseInt(formData.NettIncomeAmt);
+      var totalIncomeAmt = 0;
+      var nettIncomeAmt = 0;
       var nettProfitMonthlyAmt = formData.NettProfitMonthlyAmt == "" ? 0 : parseInt(formData.NettProfitMonthlyAmt);
       var otherIncomeAmt = formData.OtherIncomeAmt == "" ? 0 : parseInt(formData.OtherIncomeAmt);
       var monthlyExpenseAmt = formData.MonthlyExpenseAmt == "" ? 0 : parseInt(formData.MonthlyExpenseAmt);
@@ -242,7 +242,7 @@ export class CustFinDataTabComponent implements OnInit {
       this.httpClient.post(url, response).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.wizard.goToNextStep();
+          // this.wizard.goToNextStep();
         },
         (error) => {
           console.log(error);
