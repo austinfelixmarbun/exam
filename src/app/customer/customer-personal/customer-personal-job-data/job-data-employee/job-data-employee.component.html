@@ -3,7 +3,7 @@
       #enjiForm="ngForm">
     <div class="form-body">
       <div id="jobData">
-          <div class="form-group row">
+          <div class="form-group row adins-required">
               <label class="col-md-3 adInsLabel adins-required-label" translate>Profession Name</label>
               <div class="col-md-4">
                 <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="JobDataEmpForm"
@@ -11,7 +11,7 @@
                 </lib-uclookupgeneric>
               </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row adins-required">
               <label class="col-md-3 adInsLabel adins-required-label" translate>Job Position </label>
               <div class="col-md-4">
                 <select class="form-control adInsInput" formControlName="JobPosition">
@@ -30,7 +30,7 @@
                 <show-errors [control]="JobDataEmpForm.controls.JobTitleName" [submit]="enjiForm.submitted"></show-errors>
               </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row adins-required">
               <label class="col-md-3 adInsLabel adins-required-label" translate>Job Status </label>
               <div class="col-md-4">
                 <select class="form-control adInsInput" formControlName="JobStatus">
@@ -41,10 +41,10 @@
                 <show-errors [control]="JobDataEmpForm.controls.JobStatus" [submit]="enjiForm.submitted"></show-errors>
               </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row adins-required">
               <label class="col-md-3 adInsLabel adins-required-label" translate>Nama Perusahaan/Usaha </label>
               <div class="col-md-4">
-                <input type="text" class="form-control adInsInput" formControlName="IndustryName"
+                <input type="text" class="form-control adInsInput" formControlName="IndustryName" required
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.IndustryName.invalid }">
                 <show-errors [control]="JobDataEmpForm.controls.IndustryName" [submit]="enjiForm.submitted"></show-errors>
               </div>
@@ -56,7 +56,7 @@
                         formControlName="InternalEmployee" />
               </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row adins-required">
               <label class="col-md-3 adInsLabel adins-required-label" translate>Industry Type Name </label>
               <div class="col-md-4">
                 <lib-uclookupgeneric [lookupInput]="industryLookUpObj" [parentForm]="JobDataEmpForm"
@@ -75,7 +75,7 @@
                 <show-errors [control]="JobDataEmpForm.controls.CompanyScale" [submit]="enjiForm.submitted"></show-errors>
               </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row adins-required">
               <label class="col-md-3 adInsLabel adins-required-label" translate>Employment Establishment Date </label>
               <div class="col-md-4">
                 <input type="date" id="empEstablishmentDt" class="form-control adInsInput" formControlName="EmpEstablishmentDate" required
