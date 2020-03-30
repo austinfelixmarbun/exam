@@ -10,7 +10,6 @@ import { empty } from 'rxjs';
 @Component({
   selector: 'app-list-office-member-offering',
   templateUrl: './list-office-member.component.html',
-  styleUrls: ['./list-office-member.component.scss'],
   providers: [NGXToastrService]
 })
 export class ListOfficeMemberComponentOffering implements OnInit {

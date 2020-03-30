@@ -68,7 +68,7 @@
               <td>{{item.OfficeCode}}</td>
               <td>{{item.OfficeName}}</td>
               <td>{{item.AreaName}}</td>
-              <td><input type="checkbox" name="item.IsAllowedCrt" (change)="ClickTest($event, item)"></td>
+              <td><input type="checkbox" name="item.IsAllowedCrt" (change)="IsAllowedCrtClicked($event, item)"></td>
               <td>
                 <div>
                   <a class="danger p-0" data-original-title="" title="" (click)="deleteFromTemp(item.RefOfficeId)">

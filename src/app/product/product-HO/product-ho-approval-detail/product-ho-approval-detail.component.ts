@@ -3,20 +3,22 @@ import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-product-ho-approval-detail',
   templateUrl: './product-ho-approval-detail.component.html',
+  providers: [NGXToastrService]
 })
 export class ProductHOApprovalDetailComponent implements OnInit {
 
-  prodHId: any;
-  taskId: any;
-  instanceId: any;
+  prodHId: number;
+  taskId: number;
+  instanceId: number;
   inputObj: any;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService,) {
 
     this.route.queryParams.subscribe(params => {
 
@@ -35,5 +37,16 @@ export class ProductHOApprovalDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onAvailableNextTask(event)
+  {
+    
+  }
+
+  onApprovalSubmited(event)
+  {
+    this.toastr.successMessage("Success");
+    this.router.navigate(["/Product/HOApproval"]);
   }
 }

@@ -18,22 +18,6 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
 
   @Input() IdCust: any;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  CustName  : any;
-  Gender : any;
-  GenderDesc:any;
-  MrIdTypeCode : any;
-  MrIdTypeCodeDesc : any;
-  CustModel : any;
-  CustModelDesc
-  BirthPlace : any;
-  BirthDt : any;
-  IdNo : any;
-  TaxIdNo : any;
-  IdExpiredDt : any;
-  MotherMaidenName : any;
-  resultData: any;
-  addUrl : any;  
-  IdCustPersonal : any;
   custObj : any;
   custAddrObj : any;
   listCustAddr: any;
@@ -65,14 +49,9 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
       this.custAddrObj = new CustAddrObj();
       this.custAddrObj.CustId = this.IdCust;
       this.custAddrObj.MrCustAddrTypeCode = "-";
-      console.log("bbb");
-      console.log(this.custAddrObj);
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
             this.listCustAddr = response["ReturnObject"];
-
-            console.log("aaa")
-            console.log(this.listCustAddr)
         });
   }
   editItem(custAddrObj: any) {

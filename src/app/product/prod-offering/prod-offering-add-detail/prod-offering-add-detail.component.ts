@@ -10,7 +10,6 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-prod-offering-add-detail',
   templateUrl: './prod-offering-add-detail.component.html',
-  styleUrls: ['./prod-offering-add-detail.component.scss'],
   providers: [NGXToastrService]
 })
 export class ProdOfferingAddDetailComponent implements OnInit {
