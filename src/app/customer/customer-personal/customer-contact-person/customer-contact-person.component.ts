@@ -10,7 +10,7 @@ export class CustomerContactPersonComponent implements OnInit {
   @Output () OutputDelete : EventEmitter<any>= new EventEmitter();
   
   constructor() { }
-  isAdd : any;
+  isAdd : any = false;
   custPersonalContactPersonId : any;
   isDelete : any;
   ngOnInit() {

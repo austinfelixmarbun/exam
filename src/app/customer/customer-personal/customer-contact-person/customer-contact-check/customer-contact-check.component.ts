@@ -73,4 +73,7 @@ export class CustomerContactCheckComponent implements OnInit {
   next() {
     this.wizard.goToNextStep();
   }
+  back(){
+    this.wizard.goToPreviousStep();
+  }
 }

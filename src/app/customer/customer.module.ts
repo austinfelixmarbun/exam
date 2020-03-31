@@ -80,6 +80,7 @@ import { CustomerCompanyAddressCheckComponent } from './customer-company/custome
 import { CustomerPersonalAddressCheckComponent } from './customer-personal/customer-personal-address/customer-personal-address-check/customer-personal-address-check.component';
 import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-view-header-personal/customer-view-header-personal.component';
 import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
+import { UcinputnumberModule } from '@adins/ucinputnumber';
 import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/customer-view-personal-financial-section/customer-view-personal-financial-section.component';
  @NgModule({
   exports: [],
@@ -100,7 +101,8 @@ import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/c
     UcSubsectionModule,
     ArchwizardModule,
     UcviewgenericModule,
-    UcaddressModule
+    UcaddressModule,
+    UcinputnumberModule
   ],
   declarations: [
     CustomerPagingComponent,
