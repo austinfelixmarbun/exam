@@ -54,6 +54,8 @@ export class CustomerViewAddressComponent implements OnInit {
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
         this.responseResultCustAddrHist = response['ReturnObject'];
+        console.log('custaddr');
+        console.log(this.responseResultCustAddrHist);
       },
       error => {
         this.router.navigateByUrl('Error');
@@ -61,7 +63,7 @@ export class CustomerViewAddressComponent implements OnInit {
     );
 
     var refMasterObj = new RefMasterObj();
-    refMasterObj.RefMasterTypeCode = "ADDR_TYPE";
+    refMasterObj.RefMasterTypeCode = "CUST_ADDR_TYPE";
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
       response => {
         this.ddlItem = response['ReturnObject'];

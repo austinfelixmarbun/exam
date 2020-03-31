@@ -697,12 +697,12 @@ export class AdInsConstant {
   public static EditCustAddr = environment.FoundationR3Url + "/CustAddr/EditCustAddr";
   public static GetCustAddr = environment.FoundationR3Url + "/CustAddr/GetCustAddrByCustAddrId";
   public static GetListCustAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustId";
-  public static GetListCustAddrByCustIdForCustomerPersonalView =  environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
+  public static GetListCustAddrByCustIdForCustomerPersonalView =  "http://localhost:5000" + "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
   public static GetCustAddrLegalAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetCustAddrLegalAddrByCustId"
   public static GetCustAddrByMrCustAddrType = environment.FoundationR3Url +"/CustAddr/GetCustAddrByMrCustAddrType"
   // CUSTOMER ADDRESS HISTORY
   public static GetListCustAddrHistByCustId = environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustId";
-  public static GetListCustAddrHistByCustIdForCustomerPersonalView =  environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustIdForCustomerPersonalView";
+  public static GetListCustAddrHistByCustIdForCustomerPersonalView =  "http://localhost:5000" + "/CustAddrHist/GetListCustAddrHistByCustIdForCustomerPersonalView";
   
   // CUSTOMER JOB DATA
   public static AddCustPersonalJobData = environment.FoundationR3Url + "/CustPersonalJobData/AddCustPersonalJobData";

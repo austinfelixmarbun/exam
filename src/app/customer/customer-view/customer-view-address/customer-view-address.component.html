@@ -38,20 +38,12 @@
             [panel]="'CustAddressHistListingPanel'">
           </lib-ucSubsection>
           <div id="CustAddressHistListingPanel">
-
-            <!-- <label class="col-md-4  adInsLabel" translate>Serial No 1 Label / Is Mandatory </label>
-            <div class="col-md-7">
-              <input type="text" class="form-control adInsInput" formControlName="SerialNo1Label">
-              <show-errors [control]="AssetTypeForm.controls.SerialNo1Label" [submit]="enjiForm.submitted">
-              </show-errors>
-            </div> -->
             <div class="form-group row">
               <label class="col-md-2  adInsLabel" translate>Address Type</label>
               <form class="form form-horizontal" [formGroup]="CustForm">
               <div class="col-md-3">
                 <select class="form-control" [(ngModel)]="selectedOption" formControlName="DdlAddress">
                   <option *ngFor="let item of ddlItem" [value]="item.Value">
-                    {{item.Value}}
                   </option>
                 </select>
               </div>
@@ -74,9 +66,10 @@
                 </tr>
               </thead>
               <tbody>
+                {{selectedOption}}
                 <ng-container *ngFor="let item of responseResultCustAddrHist">
-                  <tr *ngIf="item.AddressTypeName == selectedOption">
-                    <td class="text-left">{{item.AddressTypeName}}</td>
+                  <tr *ngIf="item.CustAddressTypeName == selectedOption">
+                    <td class="text-left">{{item.CustAddressTypeName}}</td>
                     <td class="text-left">{{item.Address}}</td>
                     <td class="text-left">{{item.BuildingOwnership}}</td>
                     <td class="text-left">{{item.Phone1}}</td>
