@@ -44,7 +44,7 @@ export class CustBankAccSectionFindataComponent implements OnInit {
     modalCustBank.componentInstance.CustId = this.CustId;
     modalCustBank.componentInstance.pageType = type;
     modalCustBank.componentInstance.CustBankAccId = custBankAccId;
-    modalCustBank.componentInstance.isAddBankStatement = type == "edit" || type == "editStmnt" ? true : false;
+    modalCustBank.componentInstance.isAddBankStatement = type == "editStmnt" ? true : false;
     switch (type) {
       case "add":
         modalCustBank.componentInstance.modalTitle = "Add New Customer Bank Account";

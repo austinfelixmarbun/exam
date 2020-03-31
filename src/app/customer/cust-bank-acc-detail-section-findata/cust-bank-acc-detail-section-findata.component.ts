@@ -57,6 +57,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     this.monthOfYear = new Array(...moment.months());
     this.rowCustBankStmnt = 0;
     this.maxYear = moment().year();
+    this.custBankStmntH = new CustBankStmntHObj();
   }
 
   ngOnInit() {
@@ -78,12 +79,13 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       CustId: this.CustId
     });
 
-    if (this.pageType == "editStmnt") {
+    if (this.pageType == "edit") {
       var custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
       this.httpClient.post(AdInsConstant.GetCustBankAccByCustBankAccIdWithRefBank, custBankAcc).subscribe(
         (response: any) => {
-          this.bankName = response.RefBankObj.BankName;
+          this.inputLookupBank.nameSelect = response.RefBankObj.BankName;
+          this.inputLookupBank.jsonSelect = response.RefBankObj;
           this.CustBankAccForm.patchValue({
             CustBankAccId: response.CustBankAccObj.CustBankAccId,
             CustId: response.CustBankAccObj.CustId,
@@ -104,12 +106,12 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         }
       );
     }
-    else if (this.pageType == "edit") {
+    else if (this.pageType == "editStmnt") {
       var custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
       this.httpClient.post(AdInsConstant.GetCBAForCustFinDataEditModeByCustBankAccId, custBankAcc).subscribe(
         (response: any) => {
-          this.inputLookupBank.nameSelect = response.RefBankObj.BankName;
+          this.bankName = response.RefBankObj.BankName;
           this.CustBankAccForm.patchValue({
             CustBankAccId: response.CustBankAccObj.CustBankAccId,
             CustId: response.CustBankAccObj.CustId,
@@ -168,6 +170,8 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
 
     var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
     var formGroup = this.fb.group({
+      CustBankStmntDId: [0, [Validators.required]],
+      CustBankStmntHId: [this.custBankStmntH.CustBankStmntHId, [Validators.required]],
       Month: ['', [Validators.required]],
       Year: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       DebitAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -219,58 +223,69 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       );
     }
     else {
-      var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
-      var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
-      var listCustBankStmntD = new Array<CustBankStmntDObj>();
-      var totalBalance = 0;
-      for (var i = 0; i < formArray.length; i++) {
-        const bankStmnt = formArray.at(i).value;
-        for (var j = 0; j < formArray.length; j++){
-          if(i == j){
-            continue;
+      var url;
+
+      if (this.pageType == "edit") {
+        var custBankData = this.CustBankAccForm.value;
+        this.httpClient.post(AdInsConstant.EditCustBankAcc, custBankData).subscribe(
+          (response) => {
+            this.activeModal.close(response);
+          },
+          (error) => {
+            console.log(error);
           }
-          const bankStmntCompare = formArray.at(j).value;
-          if(bankStmnt.Month == bankStmntCompare.Month && bankStmnt.Year == bankStmntCompare.Year){
-            this.toastr.errorMessage("Cannot Input Statement With The Same Month and Year");
-            return false;
+        );
+      }
+      else if(this.pageType == "editStmnt"){
+        var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+        var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+        var listCustBankStmntD = new Array<CustBankStmntDObj>();
+        var totalBalance = 0;
+        for (var i = 0; i < formArray.length; i++) {
+          const bankStmnt = formArray.at(i).value;
+          for (var j = 0; j < formArray.length; j++){
+            if(i == j){
+              continue;
+            }
+            const bankStmntCompare = formArray.at(j).value;
+            if(bankStmnt.Month == bankStmntCompare.Month && bankStmnt.Year == bankStmntCompare.Year){
+              this.toastr.errorMessage("Cannot Input Statement With The Same Month and Year");
+              return false;
+            }
           }
-        }
-        var custBankStmntD = new CustBankStmntDObj();
-        if (this.pageType == "edit" && custBankAccObj.IsBankStmnt) {
+          var custBankStmntD = new CustBankStmntDObj();
           custBankStmntD.CustBankStmntHId = bankStmnt.CustBankStmntHId;
           custBankStmntD.RowVersion = bankStmnt.RowVersion;
+          custBankStmntD.Month = this.monthOfYear[bankStmnt.Month];
+          custBankStmntD.Year = bankStmnt.Year;
+          custBankStmntD.DebitAmt = bankStmnt.DebitAmt;
+          custBankStmntD.CreditAmt = bankStmnt.CreditAmt;
+          custBankStmntD.BalanceAmt = bankStmnt.BalanceAmt;
+          listCustBankStmntD.push(custBankStmntD);
+          totalBalance += bankStmnt.BalanceAmt;
         }
-        custBankStmntD.Month = this.monthOfYear[bankStmnt.Month];
-        custBankStmntD.Year = bankStmnt.Year;
-        custBankStmntD.DebitAmt = bankStmnt.DebitAmt;
-        custBankStmntD.CreditAmt = bankStmnt.CreditAmt;
-        custBankStmntD.BalanceAmt = bankStmnt.BalanceAmt;
-        listCustBankStmntD.push(custBankStmntD);
-        totalBalance += bankStmnt.BalanceAmt;
-      }
 
-      var custBankStmntH = new CustBankStmntHObj();
-      if (this.pageType == "edit" && custBankAccObj.IsBankStmnt) {
+        var custBankStmntH = new CustBankStmntHObj();
         custBankStmntH.CustBankStmntHId = this.custBankStmntH.CustBankStmntHId;
         custBankStmntH.RowVersion = this.custBankStmntH.RowVersion;
-      }
-      custBankStmntH.CustId = formData.CustId;
-      custBankStmntH.CustBankAccId = formData.CustBankAccId;
-      custBankStmntH.InputDt = new Date();
-      custBankStmntH.InputBy = currentUserContext.UserName;
-      custBankStmntH.StartPeriod = new Date();
-      custBankStmntH.EndPeriod = new Date();
-      custBankStmntH.BalanceAmt = totalBalance;
+        custBankStmntH.CustId = formData.CustId;
+        custBankStmntH.CustBankAccId = formData.CustBankAccId;
+        custBankStmntH.InputDt = new Date();
+        custBankStmntH.InputBy = currentUserContext.UserName;
+        custBankStmntH.StartPeriod = new Date();
+        custBankStmntH.EndPeriod = new Date();
+        custBankStmntH.BalanceAmt = totalBalance;
 
-      var reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntH": custBankStmntH, "custBankStmntDObjs": listCustBankStmntD };
-      this.httpClient.post(AdInsConstant.EditCBAForCustFinData, reqObj).subscribe(
-        (response) => {
-          this.activeModal.close(response);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        var reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntH": custBankStmntH, "custBankStmntDObjs": listCustBankStmntD };
+        this.httpClient.post(AdInsConstant.EditCBAForCustFinData, reqObj).subscribe(
+          (response) => {
+            this.activeModal.close(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
     }
   }
 }

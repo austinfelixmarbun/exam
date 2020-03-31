@@ -43,12 +43,12 @@
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Financial')">
             <app-cust-fin-data-tab *ngIf="isFinancial == true" [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'"> </app-cust-fin-data-tab>
           </aw-wizard-step>
-          <aw-wizard-step [stepTitle]="'Other Attribute'"
+          <!-- <aw-wizard-step [stepTitle]="'Other Attribute'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Other')">
             other
-            <!-- <app-customer-personal-detail *ngIf="isOther == true"> </app-customer-personal-detail> -->
+            <app-customer-personal-detail *ngIf="isOther == true"> </app-customer-personal-detail>
       
-          </aw-wizard-step>
+          </aw-wizard-step> -->
         </aw-wizard>
       </div>
     </div>

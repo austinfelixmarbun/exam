@@ -7,6 +7,7 @@ import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
 import { WizardComponent } from 'angular-archwizard';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cust-legal-doc',
@@ -19,6 +20,7 @@ export class CustLegalDocComponent implements OnInit {
   custLegalDocs: any;
 
   constructor(
+    private router: Router,
     private httpClient: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
@@ -80,6 +82,9 @@ export class CustLegalDocComponent implements OnInit {
     );
   }
   next() {
-    this.wizard.goToNextStep();
+    this.router.navigate(['/Customer/Paging']);
+  }
+  back(){
+    this.wizard.goToPreviousStep();
   }
 }
