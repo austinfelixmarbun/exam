@@ -25,7 +25,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     MrGenderCode: ['', [Validators.maxLength(100)]],
     MrJobPositionCode: ['',[Validators.required]],
     JobTitleName: ['',[Validators.required]], 
-    MobilePhnNo1:['', [Validators.maxLength(100),Validators.required]],
+    MobilePhnNo1:['', [ Validators.pattern("^[0-9]+$"),Validators.maxLength(100),Validators.required]],
     MobilePhnNo2:['', Validators.pattern("^[0-9]+$")],
     Email1: [''], 
     Email2: [''], 

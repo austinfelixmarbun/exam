@@ -82,6 +82,7 @@ import { UcinputnumberModule } from '@adins/ucinputnumber';
 import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/customer-view-personal-financial-section/customer-view-personal-financial-section.component';
 import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
 import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
  @NgModule({
   exports: [],
   imports: [
@@ -102,7 +103,8 @@ import { CustomerViewAddressComponent } from './customer-view/customer-view-addr
     ArchwizardModule,
     UcviewgenericModule,
     UcaddressModule,
-    UcinputnumberModule
+    UcinputnumberModule,
+    UcShowErrorsModule
   ],
   declarations: [
     CustomerPagingComponent,
