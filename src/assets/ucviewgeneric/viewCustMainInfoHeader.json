@@ -53,7 +53,7 @@
           "property": "BirthPlace"
         },
         {
-          "type": "text",
+          "type": "date",
           "label": "Birth Date",
           "property": "BirthDt"
         }
