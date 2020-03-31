@@ -5,13 +5,13 @@
     <div class="form-group row ">
       <label class="col-md-2 adInsLabel" translate>Monthly Income Ammount</label>
       <div class="col-md-4">
-        <label>{{this.tempCustObj?.MonthlyIncomeAmt | currency : "Rp. "}}</label>
+        <label>{{this.tempCustObj?.MonthlyIncomeAmt | number}}</label>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-md-2  adInsLabel" translate>Monthly Expense Ammount</label>
       <div class="col-md-4">
-        <label>{{this.tempCustObj?.MonthlyExpenseAmt | currency : "Rp. "}} </label>
+        <label>{{this.tempCustObj?.MonthlyExpenseAmt | number}} </label>
       </div>
     </div>
     <div class="form-group row">
@@ -23,14 +23,14 @@
     <div class="form-group row ">
       <label class="col-md-2 adInsLabel" translate>Monthly Installment Ammount</label>
       <div class="col-md-4">
-        <label>{{this.tempCustObj?.MonthlyInstallmentAmt | currency : "Rp. "}} </label>
+        <label>{{this.tempCustObj?.MonthlyInstallmentAmt | number}} </label>
       </div>
     </div>
     <div class="form-group row">
       <label *ngIf="this.tempCustObj?.MaritalStat == 'MAR'" class="col-md-2 adInsLabel" translate>Spouse Monthly Income
         Ammount</label>
       <div *ngIf="this.tempCustObj?.MaritalStat == 'MAR'" class="col-md-4">
-        <label>{{this.tempCustObj?.SpouseMonthlyIncomeAmt | currency : "Rp. "}} </label>
+        <label>{{this.tempCustObj?.SpouseMonthlyIncomeAmt | number}} </label>
       </div>
     </div>
     <div *ngIf="this.tempCustObj?.MaritalStat == 'MAR'" class="form-group row ">
