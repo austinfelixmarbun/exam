@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -23,16 +23,24 @@ export class CustomerCompanyPageComponent implements OnInit {
   isFinancial: any;
   isOther: any;
   CustCompanyId: any;
-
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  Page:any;
+  constructor(private router: Router,private route: ActivatedRoute, private http: HttpClient) {
      
     this.route.queryParams.subscribe(params => { 
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
+      if (params["Page"] != null) {
+        this.Page = params["Page"];
+      }
     });
   }
   ngOnInit() {
+    console.log(this.IdCust);
+    if(this.IdCust == null ){
+      this.router.navigate(["/Customer/Paging"] );  
+    } 
+   
   }
 
   EnterTab(type) {

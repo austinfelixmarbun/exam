@@ -34,7 +34,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     MgmntShrholderName: ['', [Validators.maxLength(100) ,Validators.required]],
     MrCustModelCode: [''],
     MrCompanyTypeCode: [''],
-    TaxIdNo: [''],
+    TaxIdNo: ['',Validators.pattern("^[0-9]+$")],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     IsSigner: [false],
   });
