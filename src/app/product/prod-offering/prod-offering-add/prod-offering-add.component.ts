@@ -12,27 +12,25 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-prod-offering-add',
   templateUrl: './prod-offering-add.component.html',
-  styleUrls: ['./prod-offering-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class ProdOfferingAddComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private fb:FormBuilder, private toastr: NGXToastrService) { 
     this.route.queryParams.subscribe(params => {
-      this.param = params["ProdOfferingHId"];
+      this.ProdOfferingHId = params["ProdOfferingHId"];
       console.log(params);
       this.mode = params["mode"];
       if (this.mode == "edit") {
         var tempCrit = new CriteriaObj();
         tempCrit.propName = this.key;
         tempCrit.restriction = "Eq";
-        tempCrit.value = this.param;
+        tempCrit.value = this.ProdOfferingHId.toString();
         this.criteria.push(tempCrit);
       }
     })
    }
 
-   param: string;
    mode: string = "add";
    key: any;
    criteria: CriteriaObj[] = [];
@@ -40,7 +38,7 @@ export class ProdOfferingAddComponent implements OnInit {
    resultData : any;
    ProdOfferingId: any;
    inputLookupObj : any;
-   ProdOfferingHId: any;
+   ProdOfferingHId: number;
 
    ProdOfferingForm = this.fb.group({
     ProdName: [''],
@@ -69,7 +67,7 @@ export class ProdOfferingAddComponent implements OnInit {
       
       this.ProdOfferingForm.controls.ProdOfferingCode.disable();
       var prodOfferingObj = new ProdOfferingObj();
-      prodOfferingObj.ProdOfferingHId = this.param;
+      prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
       this.http.post(AdInsConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
         (response) => {
           console.log("response: ");
@@ -101,7 +99,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
         this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
         this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
-        this.prodOfferingObj.ProdOfferingHId = this.param;
+        this.prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
         this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
@@ -137,7 +135,7 @@ export class ProdOfferingAddComponent implements OnInit {
       this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
       this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
       this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
-      this.prodOfferingObj.ProdOfferingHId = this.param;
+      this.prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
       this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);

@@ -4,7 +4,7 @@
       <div class="px-3">
         <div class="row">
           <div class="col-md-8">
-              <h4 class="form-section card-title" translate><i class="ft-file-text"></i>NEGATIVE CUSTOMER</h4>
+            <h4 class="form-section card-title" translate><i class="ft-file-text"></i>NEGATIVE CUSTOMER</h4>
           </div>
         </div>
         <div class="form-body">
@@ -14,7 +14,8 @@
               {{response.MrCustTypeCode == 'PERSONAL' ? 'Personal' : 'Company'}}
             </div>
           </div>
-          <lib-ucSubsection [id]="'MainInformationId'" [title]="'Main Information'" [panel]="'MainInformationPersonal'"></lib-ucSubsection>
+          <lib-ucSubsection [id]="'MainInformationId'" [title]="'Main Information'" [panel]="'MainInformationPersonal'">
+          </lib-ucSubsection>
           <div id="MainInformationPersonal">
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="CustLookup" translate>Find From Existing Customer</label>
@@ -83,7 +84,8 @@
               </div>
             </div>
           </div>
-          <lib-ucSubsection [id]="'LegalAddressSectionId'" [title]="'Legal Address'" [panel]="'LegalAddressSection'"></lib-ucSubsection>
+          <lib-ucSubsection [id]="'LegalAddressSectionId'" [title]="'Legal Address'" [panel]="'LegalAddressSection'">
+          </lib-ucSubsection>
           <div id="LegalAddressSection">
             <div class="form-group row ">
               <label class="col-md-3 adInsLabel" for="LegalAddr" translate>Legal Address</label>
@@ -180,7 +182,8 @@
               </div>
             </div>
           </div>
-          <lib-ucSubsection [id]="'NegativeDataSectionId'" [title]="'Negative Data'" [panel]="'NegativeDataSection'"></lib-ucSubsection>
+          <lib-ucSubsection [id]="'NegativeDataSectionId'" [title]="'Negative Data'" [panel]="'NegativeDataSection'">
+          </lib-ucSubsection>
           <div id="NegativeDataSection">
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="IsActive" translate>Active</label>
@@ -207,7 +210,8 @@
               </div>
             </div>
           </div>
-          <lib-ucSubsection [id]="'NegativeDataHistorySectionId'" [title]="'Negative Data History'" [panel]="'NegativeDataHistorySection'"></lib-ucSubsection>
+          <lib-ucSubsection [id]="'NegativeDataHistorySectionId'" [title]="'Negative Data History'"
+            [panel]="'NegativeDataHistorySection'"></lib-ucSubsection>
           <div id="NegativeDataHistorySection">
             <table class="table table-responsive-md text-center table-hover">
               <thead>

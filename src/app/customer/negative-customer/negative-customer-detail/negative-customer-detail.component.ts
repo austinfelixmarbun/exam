@@ -317,7 +317,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
         this.inputLookupZipcodeObj.nameSelect = response.Zipcode;
       },
       (error) => {
-        console.log("ERROR");
         console.log(error);
       }
     );
@@ -357,7 +356,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
         this.inputLookupZipcodeObj.nameSelect = response.Zipcode;
       },
       (error) => {
-        console.log("ERROR");
         console.log(error);
       }
     );
@@ -406,7 +404,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
           this.router.navigate(['/Customer/NegativeCustomer/Paging']);
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );
@@ -441,7 +438,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
           this.router.navigate(['/Customer/NegativeCustomer/Paging']);
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );

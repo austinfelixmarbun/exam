@@ -35,7 +35,7 @@
 
           <aw-wizard-step [stepTitle]="'Customer Group'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Group')">
-            <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="COMPANY" [CustId]="this.IdCust">
+            <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="'COMPANY'" [CustId]="IdCust">
             </app-cust-group-tab>
           </aw-wizard-step>
 
@@ -56,11 +56,11 @@
             <app-cust-legal-doc *ngIf="isLegal == true" [CustCompanyId]="this.CustCompanyId"> </app-cust-legal-doc>
           </aw-wizard-step>
 
-          <aw-wizard-step [stepTitle]="'Other Attribute'"
+          <!-- <aw-wizard-step [stepTitle]="'Other Attribute'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Other')">
             other
-            <!-- <app-customer-company-detail *ngIf="isOther == true"> </app-customer-company-detail> -->
-          </aw-wizard-step>
+            <app-customer-company-detail *ngIf="isOther == true"> </app-customer-company-detail>
+          </aw-wizard-step> -->
         </aw-wizard>
       </div>
     </div>

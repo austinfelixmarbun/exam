@@ -12,7 +12,6 @@ import { empty } from 'rxjs';
 @Component({
   selector: 'app-search-office-offering',
   templateUrl: './search-office.component.html',
-  styleUrls: ['./search-office.component.scss'],
   providers: [NGXToastrService]
 })
 export class SearchOfficeComponentOffering implements OnInit {

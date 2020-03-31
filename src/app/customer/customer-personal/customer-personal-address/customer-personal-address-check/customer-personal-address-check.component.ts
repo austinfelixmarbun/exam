@@ -61,14 +61,9 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
       this.custAddrObj = new CustAddrObj();
       this.custAddrObj.CustId = this.IdCust;
       this.custAddrObj.MrCustAddrTypeCode = "-";
-      console.log("bbb");
-      console.log(this.custAddrObj);
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
             this.listCustAddr = response["ReturnObject"];
-
-            console.log("aaa")
-            console.log(this.listCustAddr)
         });
   }
   editItem(custAddrObj: any) {

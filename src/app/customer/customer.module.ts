@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SharingModule } from 'app/shared/sharing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerRoutingModule } from 'app/customer/customer-routing.module';
 // import { ArchwizardModule } from 'angular-archwizard';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
@@ -97,18 +97,18 @@ import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-vie
     UcpagingModule,
     ReactiveFormsModule,
     UclookupgenericModule,
-    UcSubsectionModule, 
-     ArchwizardModule,
-     UcviewgenericModule,
-     UcaddressModule
+    UcSubsectionModule,
+    ArchwizardModule,
+    UcviewgenericModule,
+    UcaddressModule
   ],
-  declarations: [ 
-    CustomerPagingComponent, 
+  declarations: [
+    CustomerPagingComponent,
     CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent,
     NegativeCustomerComponent,
     NegativeCustomerDetailComponent,
     NegativeCustomerViewComponent,
-    CustomerContactPersonComponent, 
+    CustomerContactPersonComponent,
     CustomerContactAddComponent,
     CustomerContactCheckComponent,
     CustomerViewPersonalDetailComponent,
@@ -153,21 +153,22 @@ import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-vie
     CustomerCompanyPageComponent,
     CustomerCompanyDetailComponent,
     CustomerCompanyContactInformationComponent,
-    CustomerCompanyManagementShareholderComponent, 
+    CustomerCompanyManagementShareholderComponent,
     CustomerCompanyManagementShareholderCheckComponent,
     CustomerCompanyManagementShareholderPersonalComponent,
-    CustomerCompanyManagementShareholderCompanyComponent, 
+    CustomerCompanyManagementShareholderCompanyComponent,
     EditMainDataPagingComponent,
     EditMainDataCompanyComponent,
     EditMainDataPersonalComponent,
     CustomerCompanyAddressCheckComponent,  
-    CustomerPersonalAddressCheckComponent, CustomerViewHeaderPersonalComponent, CustomerViewHeaderCompanyComponent
+    CustomerPersonalAddressCheckComponent, 
+    CustomerViewHeaderPersonalComponent, 
+    CustomerViewHeaderCompanyComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
-export class CustomerModule { 
-  constructor(){
-    
+export class CustomerModule {
+  constructor() {
+
   }
 }
- 

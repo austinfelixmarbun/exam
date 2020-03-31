@@ -25,5 +25,4 @@ export class NegativeCustomerComponent implements OnInit {
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteNegativeCustomer;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNegativeCustomer.json";
   }
-
 }

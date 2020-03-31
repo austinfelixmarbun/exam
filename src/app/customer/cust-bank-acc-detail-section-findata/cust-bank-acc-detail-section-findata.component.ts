@@ -39,9 +39,10 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     BankAccNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     BankAccName: ['', [Validators.required]],
     IsBankStmnt: [false],
-    BankBranchRegRptCode: [0, [Validators.required]],
+    BankBranchRegRptCode: [''],
     BalanceAmt: [0],
     IsDefault: [false],
+    IsActive: [false],
     RowVersion: [''],
     CustBankStmnts: this.fb.array([])
   });
@@ -94,6 +95,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             BankBranchRegRptCode: response.CustBankAccObj.BankBranchRegRptCode,
             BalanceAmt: response.CustBankAccObj.BalanceAmt,
             IsDefault: response.CustBankAccObj.IsDefault,
+            IsActive: response.CustBankAccObj.IsActive,
             RowVersion: response.CustBankAccObj.RowVersion
           });
         },
@@ -119,6 +121,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             BankBranchRegRptCode: response.CustBankAccObj.BankBranchRegRptCode,
             BalanceAmt: response.CustBankAccObj.BalanceAmt,
             IsDefault: response.CustBankAccObj.IsDefault,
+            IsActive: response.CustBankAccObj.IsActive,
             RowVersion: response.CustBankAccObj.RowVersion
           });
 
@@ -203,6 +206,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     custBankAccObj.BalanceAmt = formData.BalanceAmt;
     custBankAccObj.IsDefault = formData.IsDefault;
     custBankAccObj.RowVersion = formData.RowVersion;
+    custBankAccObj.IsActive = formData.IsActive;
 
     if (this.pageType == "add") {
       this.httpClient.post(AdInsConstant.AddCustBankAcc, custBankAccObj).subscribe(
@@ -221,8 +225,18 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       var totalBalance = 0;
       for (var i = 0; i < formArray.length; i++) {
         const bankStmnt = formArray.at(i).value;
+        for (var j = 0; j < formArray.length; j++){
+          if(i == j){
+            continue;
+          }
+          const bankStmntCompare = formArray.at(j).value;
+          if(bankStmnt.Month == bankStmntCompare.Month && bankStmnt.Year == bankStmntCompare.Year){
+            this.toastr.errorMessage("Cannot Input Statement With The Same Month and Year");
+            return false;
+          }
+        }
         var custBankStmntD = new CustBankStmntDObj();
-        if (this.pageType == "edit") {
+        if (this.pageType == "edit" && custBankAccObj.IsBankStmnt) {
           custBankStmntD.CustBankStmntHId = bankStmnt.CustBankStmntHId;
           custBankStmntD.RowVersion = bankStmnt.RowVersion;
         }
@@ -236,7 +250,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       }
 
       var custBankStmntH = new CustBankStmntHObj();
-      if (this.pageType == "edit") {
+      if (this.pageType == "edit" && custBankAccObj.IsBankStmnt) {
         custBankStmntH.CustBankStmntHId = this.custBankStmntH.CustBankStmntHId;
         custBankStmntH.RowVersion = this.custBankStmntH.RowVersion;
       }
@@ -249,7 +263,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       custBankStmntH.BalanceAmt = totalBalance;
 
       var reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntH": custBankStmntH, "custBankStmntDObjs": listCustBankStmntD };
-
       this.httpClient.post(AdInsConstant.EditCBAForCustFinData, reqObj).subscribe(
         (response) => {
           this.activeModal.close(response);

@@ -21,28 +21,13 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   @Input() mode: any;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
   pageType: any;
-  CustName: any;
-  Gender: any;
-  GenderDesc: any;
-  MrIdTypeCode: any;
-  MrIdTypeCodeDesc: any;
-  CustModel: any;
-  CustModelDesc
-  BirthPlace: any;
-  BirthDt: any;
-  IdNo: any;
-  TaxIdNo: any;
-  IdExpiredDt: any;
-  MotherMaidenName: any;
-  resultData: any;
   addCustAddr: any;
   editCustAddr: any;
   getCustAddr: any;
-  IdCustPersonal: any;
-  custObj: any;
   inputFieldAddressObj: InputFieldObj;
   custAddressObj: CustAddrObj;
   getListActiveRefMaster: any;
+  getRefMasterWithReserveField: any;
   addressType: any;
   addressObj: any;
   listAddressType: any;
@@ -64,6 +49,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
+    this.getRefMasterWithReserveField = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
     this.getListCustAddr = AdInsConstant.GetListCustAddr;
     this.addCustAddr = AdInsConstant.AddCustAddr;
     this.editCustAddr = AdInsConstant.EditCustAddr;
@@ -89,12 +75,14 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.pageType = this.mode;
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+
     this.addressType = new RefMasterObj();
     this.addressType.RefMasterTypeCode = "CUST_ADDR_TYPE";
-    this.http.post(this.getListActiveRefMaster, this.addressType).subscribe(
+    this.addressType.ReserveField1 = "COMPANY";
+    this.http.post(this.getRefMasterWithReserveField, this.addressType).subscribe(
       (response) => {
         this.listAddressType = response['ReturnObject'];
-        this.CustDataCompanyForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
+        //this.CustDataCompanyForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
       });
 
     this.custAddrObj = new CustAddrObj();

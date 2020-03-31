@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-product-offering-approval-detail',
   templateUrl: './product-offering-approval-detail.component.html',
-  styleUrls: ['./product-offering-approval-detail.component.scss']
 })
 export class ProductOfferingApprovalDetailComponent implements OnInit {
 

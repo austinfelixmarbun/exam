@@ -21,12 +21,11 @@ import { CustomerCompanyPageComponent } from './customer-company/customer-compan
 import { EditMainDataPagingComponent } from './edit-main-data/edit-main-data-paging/edit-main-data-paging.component';
 import { EditMainDataPersonalComponent } from './edit-main-data/edit-main-data-personal/edit-main-data-personal.component';
 import { EditMainDataCompanyComponent } from './edit-main-data/edit-main-data-company/edit-main-data-company.component';
- 
+
 const routes: Routes = [
   {
     path: '',
     children: [
-
       {
         path: 'Paging',
         component: CustomerPagingComponent,
@@ -39,7 +38,7 @@ const routes: Routes = [
         data: {
           title: 'Customer Personal Main Info'
         }
-      }, 
+      },
       {
         path: 'CustomerPersonal/DuplicateCheck',
         component: CustomerPersonalDuplicateCheckComponent,
@@ -144,28 +143,28 @@ const routes: Routes = [
         data: {
           title: 'Customer Company Page'
         }
-      },  
+      },
       {
         path: 'EditMainData/Paging',
         component: EditMainDataPagingComponent,
         data: {
           title: 'Edit Main Data Page'
         }
-      },   
+      },
       {
         path: 'EditMainData/Personal',
         component: EditMainDataPersonalComponent,
         data: {
           title: 'Edit Main Data Personal Page'
         }
-      },  
+      },
       {
         path: 'EditMainData/Company',
         component: EditMainDataCompanyComponent,
         data: {
           title: 'Edit Main Data Company Page'
         }
-      }, 
+      },
     ]
   }
 ];

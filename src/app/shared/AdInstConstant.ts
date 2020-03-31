@@ -254,13 +254,14 @@ export class AdInsConstant {
   public static GetListActiveRefMaster = environment.FoundationR3Url +"/RefMaster/GetListKeyValueActiveByCode";
   public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
   public static GetRefMasterTypeOfficeWithoutCG = environment.FoundationR3Url + "/RefMaster/GetListKeyValueOfficeTypeWithoutCg";
-  public static GetListActiveRefMasterWithReserveFieldAll  = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterWithReserveFieldAll"
+  public static GetListActiveRefMasterWithReserveFieldAll = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterWithReserveFieldAll";
+  
   //REF COUNTRY
   public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
   public static GetRefCountryByCountryCode = environment.FoundationR3Url + "/RefCountry/GetRefCountryByCountryCode";
 
   //REF INDUSTRY TYPE
-  public static GetRefIndustryTypeById =  environment.FoundationR3Url + "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
+  public static GetRefIndustryTypeById = environment.FoundationR3Url + "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
   public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
   public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
   public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
@@ -685,6 +686,10 @@ export class AdInsConstant {
   public static AddCustBankAcc = environment.FoundationR3Url + "/CustBankAcc/AddCustBankAcc";
   public static GetCustPersonalFinDataByCustPersonalId = environment.FoundationR3Url + "/CustPersonalFinData/GetCustPersonalFinDataByCustPersonalId";
   public static GetCustCompanyFinDataByCustCompanyId = environment.FoundationR3Url + "/CustomerCompanyFinData/GetCustCompanyFinDataByCustCompanyId";
+  public static AddCustCompanyFinData = environment.FoundationR3Url + "/CustomerCompanyFinData/AddCustCompanyFinData";
+  public static EditCustCompanyFinData = environment.FoundationR3Url + "/CustomerCompanyFinData/EditCustCompanyFinData";
+  public static AddCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/AddCustPersonalFinData";
+  public static EditCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/EditCustPersonalFinData";
 
   // CUSTOMER ADDRESS
   public static GetListCustAddr = environment.FoundationR3Url + "/CustAddr/GetListCustAddr";
@@ -701,7 +706,9 @@ export class AdInsConstant {
   
   // CUSTOMER JOB DATA
   public static AddCustPersonalJobData = environment.FoundationR3Url + "/CustPersonalJobData/AddCustPersonalJobData";
-    
+  public static EditCustPersonalJobData = environment.FoundationR3Url + "/CustPersonalJobData/EditCustPersonalJobData";
+  public static GetCustPersonalJobDataByCustId = environment.FoundationR3Url + "/CustPersonalJobData/GetCustPersonalJobDataByCustId";
+      
   //Customer Company Legal Doc
   public static GetCustCompanyLegalDocForCustViewByCustId =  environment.FoundationR3Url + "/CustCompanyLegalDoc/GetCustCompanyLegalDocForCustViewByCustId";
   
