@@ -160,7 +160,10 @@ import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/c
     EditMainDataCompanyComponent,
     EditMainDataPersonalComponent,
     CustomerCompanyAddressCheckComponent,  
-    CustomerPersonalAddressCheckComponent, CustomerViewHeaderPersonalComponent, CustomerViewHeaderCompanyComponent, CustomerViewPersonalFinancialSectionComponent
+    CustomerPersonalAddressCheckComponent, 
+    CustomerViewHeaderPersonalComponent, 
+    CustomerViewHeaderCompanyComponent,
+    CustomerViewPersonalFinancialSectionComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
