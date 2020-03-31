@@ -65,9 +65,9 @@
                     <input type="number" min="1" max="100" step="0.01" class="form-control adInsInput"
                       formControlName="SharePrcnt"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.SharePrcnt.invalid}">
-                    <show-errors [control]="ManagementShareholderForm.controls.SharePrcnt"
+                    <lib-uc-show-errors [control]="ManagementShareholderForm.controls.SharePrcnt"
                       [submit]="enjiForm.submitted">
-                    </show-errors>
+                    </lib-uc-show-errors>  
                   </div>
                   <div><h4 class="d-flex justify-content-center align-items-center">%</h4></div>
                 </div>

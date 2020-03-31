@@ -5,8 +5,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
-import { CustObj } from 'app/shared/model/CustObj.Model';
+import { environment } from 'environments/environment'; 
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
@@ -121,5 +120,5 @@ export class CustomerCompanyDetailComponent implements OnInit {
       this.router.navigate(["/Customer/Paging"]);
     }
   }
-}
+  }
 
