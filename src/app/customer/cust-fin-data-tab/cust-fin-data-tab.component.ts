@@ -74,7 +74,7 @@ export class CustFinDataTabComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder, 
-    // private wizard: WizardComponent
+    private wizard: WizardComponent
   ) {
     if(this.MrCustTypeCode == "PERSONAL"){
       this.isCalculated = false;
@@ -201,10 +201,61 @@ export class CustFinDataTabComponent implements OnInit {
         TotalIncomeAmt: totalAmt,
         NettIncomeAmt: netIncomeAmt
       });
+      this.isCalculated = true;
     }
   }
 
-  getCustFinData() {
+  // getCustFinData() {
+  //   var response;
+  //   var url;
+
+  //   if (this.MrCustTypeCode == "PERSONAL") {
+  //     var tempResponse = this.CustPersonalFinDataForm.value;
+  //     if(this.MrMaritalStatCode != "MAR"){
+  //       tempResponse.SpouseMonthlyIncomeAmt = 0;
+  //     }
+  //     else{
+  //       if(tempResponse.SpouseMonthlyIncomeAmt = ''){
+  //         tempResponse.SpouseMonthlyIncomeAmt = 0;
+  //       }
+  //     }
+  //     response = tempResponse;
+
+  //     if(response.CustPersonalFinDataId > 0){
+  //       url = AdInsConstant.EditCustPersonalFinData;
+  //     }
+  //     else{
+  //       url = AdInsConstant.AddCustPersonalFinData
+  //     }
+  //   }
+  //   else if (this.MrCustTypeCode == "COMPANY") {
+  //     response = this.CustCompanyFinDataForm.value;
+
+  //     if(response.CustCompanyFinDataId > 0){
+  //       url = AdInsConstant.EditCustCompanyFinData;
+  //     }
+  //     else{
+  //       url = AdInsConstant.AddCustCompanyFinData;
+  //     }
+  //   }
+
+  //   if (this.isCalculated) {
+  //     this.httpClient.post(url, response).subscribe(
+  //       (response) => {
+  //         this.toastr.successMessage(response["Message"]);
+  //         this.wizard.goToNextStep();
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   }
+  //   else {
+  //     this.toastr.errorMessage("Please Calculate First");
+  //   }
+  // }
+
+  next() {
     var response;
     var url;
 
@@ -214,7 +265,7 @@ export class CustFinDataTabComponent implements OnInit {
         tempResponse.SpouseMonthlyIncomeAmt = 0;
       }
       else{
-        if(tempResponse.SpouseMonthlyIncomeAmt = ''){
+        if(tempResponse.SpouseMonthlyIncomeAmt = ""){
           tempResponse.SpouseMonthlyIncomeAmt = 0;
         }
       }
@@ -242,7 +293,7 @@ export class CustFinDataTabComponent implements OnInit {
       this.httpClient.post(url, response).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          // this.wizard.goToNextStep();
+          this.wizard.goToNextStep();
         },
         (error) => {
           console.log(error);
@@ -253,7 +304,4 @@ export class CustFinDataTabComponent implements OnInit {
       this.toastr.errorMessage("Please Calculate First");
     }
   }
-  // next() {
-  //   this.wizard.goToNextStep();
-  // }
 }
