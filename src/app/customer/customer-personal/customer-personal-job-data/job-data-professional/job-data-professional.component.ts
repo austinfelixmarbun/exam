@@ -154,42 +154,44 @@ export class JobDataProfessionalComponent implements OnInit {
                   this.industryLookUpObj.jsonSelect = this.returnIndustryTypeObj;
                   this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
               });
-
-            this.custAddrObj = new CustAddrObj();
-            this.custAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
-            this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
-              (response) => {
-                  this.getCustomerAddr = response;
-                  this.JobDataProForm.patchValue({
-                      Notes: this.getCustomerAddr.Notes
-                  });
-                  
-                  this.addressObj = new CustAddrObj();
-                  this.addressObj.Addr = this.getCustomerAddr.Addr;
-                  this.addressObj.AreaCode3 = this.getCustomerAddr.AreaCode3;
-                  this.addressObj.AreaCode4 = this.getCustomerAddr.AreaCode4;
-                  this.addressObj.AreaCode1 = this.getCustomerAddr.AreaCode1;
-                  this.addressObj.AreaCode2 = this.getCustomerAddr.AreaCode2;
-                  this.addressObj.City = this.getCustomerAddr.City;
-                  this.addressObj.PhnArea1 = this.getCustomerAddr.PhnArea1;
-                  this.addressObj.Phn1 = this.getCustomerAddr.Phn1;
-                  this.addressObj.PhnExt1 = this.getCustomerAddr.PhnExt1;
-                  this.addressObj.PhnArea2 = this.getCustomerAddr.PhnArea2;
-                  this.addressObj.Phn2 = this.getCustomerAddr.Phn2;
-                  this.addressObj.PhnExt2 = this.getCustomerAddr.PhnExt2;
-                  this.addressObj.PhnArea3 = this.getCustomerAddr.PhnArea3;
-                  this.addressObj.Phn3 = this.getCustomerAddr.Phn3;
-                  this.addressObj.PhnExt3 = this.getCustomerAddr.PhnExt3;
-                  this.addressObj.FaxArea = this.getCustomerAddr.FaxArea;
-                  this.addressObj.Fax = this.getCustomerAddr.Fax;
-                  this.addressObj.MrHouseOwnershipCode = this.getCustomerAddr.MrBuildingOwnershipCode;
-    
-                  this.inputFieldAddressObj = new InputFieldObj();
-                  this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
-                  this.inputFieldAddressObj.inputLookupObj.nameSelect = this.getCustomerAddr.Zipcode;
-                  this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.getCustomerAddr.Zipcode};
-                  
-              });
+            
+            if(this.returnCustJobDataObj.JobAddrId != null) {
+              this.custAddrObj = new CustAddrObj();
+              this.custAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
+              this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
+                (response) => {
+                    this.getCustomerAddr = response;
+                    this.JobDataProForm.patchValue({
+                        Notes: this.getCustomerAddr.Notes
+                    });
+                    
+                    this.addressObj = new CustAddrObj();
+                    this.addressObj.Addr = this.getCustomerAddr.Addr;
+                    this.addressObj.AreaCode3 = this.getCustomerAddr.AreaCode3;
+                    this.addressObj.AreaCode4 = this.getCustomerAddr.AreaCode4;
+                    this.addressObj.AreaCode1 = this.getCustomerAddr.AreaCode1;
+                    this.addressObj.AreaCode2 = this.getCustomerAddr.AreaCode2;
+                    this.addressObj.City = this.getCustomerAddr.City;
+                    this.addressObj.PhnArea1 = this.getCustomerAddr.PhnArea1;
+                    this.addressObj.Phn1 = this.getCustomerAddr.Phn1;
+                    this.addressObj.PhnExt1 = this.getCustomerAddr.PhnExt1;
+                    this.addressObj.PhnArea2 = this.getCustomerAddr.PhnArea2;
+                    this.addressObj.Phn2 = this.getCustomerAddr.Phn2;
+                    this.addressObj.PhnExt2 = this.getCustomerAddr.PhnExt2;
+                    this.addressObj.PhnArea3 = this.getCustomerAddr.PhnArea3;
+                    this.addressObj.Phn3 = this.getCustomerAddr.Phn3;
+                    this.addressObj.PhnExt3 = this.getCustomerAddr.PhnExt3;
+                    this.addressObj.FaxArea = this.getCustomerAddr.FaxArea;
+                    this.addressObj.Fax = this.getCustomerAddr.Fax;
+                    this.addressObj.MrHouseOwnershipCode = this.getCustomerAddr.MrBuildingOwnershipCode;
+      
+                    this.inputFieldAddressObj = new InputFieldObj();
+                    this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+                    this.inputFieldAddressObj.inputLookupObj.nameSelect = this.getCustomerAddr.Zipcode;
+                    this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.getCustomerAddr.Zipcode};
+                    
+                });
+            }
             
             this.jobAddrId = this.returnCustJobDataObj.JobAddrId;
             this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
