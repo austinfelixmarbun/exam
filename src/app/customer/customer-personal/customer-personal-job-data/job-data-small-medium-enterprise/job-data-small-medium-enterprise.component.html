@@ -79,8 +79,16 @@
               <div id="CustMainDataPersonal"> 
                   <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataSmeForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputJobAddressObj" [showOwnership]="true"></lib-ucaddress>
               </div>
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel adins-required" translate>Notes </label>
+                <div class="col-md-4">
+                <textarea type="text" class="form-control adInsInput" formControlName="NotesJob"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.NotesJob.invalid }"></textarea>
+                <show-errors [control]="JobDataSmeForm.controls.NotesJob" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+            </div>
           </div>
-          <lib-ucSubsection [id]="'jobAddrAttrId'" [title]="'Job Address Info'" [panel]="'jobAddrAttribute'">
+          <!-- <lib-ucSubsection [id]="'jobAddrAttrId'" [title]="'Job Address Info'" [panel]="'jobAddrAttribute'">
           </lib-ucSubsection>
           <div id="jobAddrAttribute">
               <div class="form-group row">
@@ -107,15 +115,7 @@
                   <show-errors [control]="JobDataSmeForm.controls.StayLength" [submit]="enjiForm.submitted"></show-errors>
                   </div>
               </div>
-              <div class="form-group row">
-                  <label class="col-md-3 adInsLabel adins-required" translate>Notes </label>
-                  <div class="col-md-4">
-                  <textarea type="text" class="form-control adInsInput" formControlName="NotesJob"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.NotesJob.invalid }"></textarea>
-                  <show-errors [control]="JobDataSmeForm.controls.NotesJob" [submit]="enjiForm.submitted"></show-errors>
-                  </div>
-              </div>
-          </div>
+          </div> -->
           <lib-ucSubsection [id]="'otherBusinessId'" [title]="'Other Business'" [panel]="'otherBusiness'">
           </lib-ucSubsection>
           <div id="otherBusiness">
@@ -175,7 +175,7 @@
                   </div>
               </div>
           </div>
-          <lib-ucSubsection [id]="'otherAddrAttrId'" [title]="'Other Business Address Attribute'" [panel]="'otherAddrAttribute'">
+          <!-- <lib-ucSubsection [id]="'otherAddrAttrId'" [title]="'Other Business Address Attribute'" [panel]="'otherAddrAttribute'">
           </lib-ucSubsection>
           <div id="otherAddrAttribute">
               <div class="form-group row">
@@ -202,7 +202,7 @@
                   <show-errors [control]="JobDataSmeForm.controls.OtherStayLength" [submit]="enjiForm.submitted"></show-errors>
                   </div>
               </div>
-          </div>
+          </div> -->
       </div>
     </div>
     <div class="form-actions right" style="text-align: right;" >

@@ -15,6 +15,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { ActivatedRoute } from '@angular/router';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 
 @Component({
   selector: 'app-customer-contact-add',
@@ -78,6 +79,7 @@ export class CustomerContactAddComponent implements OnInit {
   addCustPersonalContactPersonUrl: any;
   editCustPersonalContactPersonUrl : any;
   custObj: any;
+  custPersonalObj : any;
   custAddrObj: any;
   inputFieldObj: any;
   tempProfessionCodeObj;
@@ -368,7 +370,9 @@ export class CustomerContactAddComponent implements OnInit {
     this.tempCustId = event.CustId;
     var datePipe = new DatePipe("en-US");
     this.custObj = new CustObj();
+    this.custPersonalObj = new CustPersonalObj();
     this.custObj.CustId = this.tempCustId;
+    this.custPersonalObj.CustId = this.tempCustId;
     this.http.post(AdInsConstant.GetCustPersonalbyCustId, this.custObj).subscribe(
       (response) => {
         this.tempCustPersonal = response;
@@ -397,6 +401,12 @@ export class CustomerContactAddComponent implements OnInit {
         } else {
           this.flag = true;
         }
+        
+    if(this.tempCustPersonal.MobilePhnNo1!=null){
+      this.CustomerContactForm.controls.MobilePhnNo1.disable();
+      this.CustomerContactForm.controls.MobilePhnNo2.disable();
+      this.CustomerContactForm.controls.Email.disable();
+      }
       }
 
     );  
@@ -429,11 +439,6 @@ export class CustomerContactAddComponent implements OnInit {
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddress.Zipcode };
       }
     );
-    if(this.tempCustPersonal.MobilePhnNo1!=null){
-    this.CustomerContactForm.controls.MobilePhnNo1.disable();
-    this.CustomerContactForm.controls.MobilePhnNo2.disable();
-    this.CustomerContactForm.controls.Email.disable();
-    }
     this.CustomerContactForm.controls.ContactPersonName.disable();
     this.CustomerContactForm.controls.MotherMaidenName.disable();
     this.CustomerContactForm.controls.MrIdTypeCode.disable();
