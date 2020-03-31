@@ -37,7 +37,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   tempMrGenderCode: any;
   tempMrIdTypeCode;
   tempMrCustModelCode: any;
-  mrMaritalStatCode: string = ""; 
+  mrMaritalStatCode: string; 
   StatusIsVip : any;
   isDetail: any;
   isAddress: any;
