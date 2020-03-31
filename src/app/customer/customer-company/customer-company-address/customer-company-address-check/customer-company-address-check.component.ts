@@ -75,4 +75,7 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   next() {
     this.wizard.goToNextStep();
   }
+  back(){
+    this.wizard.goToPreviousStep();
+  }
 }

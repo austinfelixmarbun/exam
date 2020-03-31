@@ -22,12 +22,12 @@
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"
             (stepEnter)="EnterTab('Address')">
-            <app-customer-personal-address   *ngIf="isAddress == true">
+            <app-customer-personal-address >
             </app-customer-personal-address>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Contact Person'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-contact-person   *ngIf="isAddress == true">
+            <app-customer-contact-person >
             </app-customer-contact-person>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Customer Group'"
