@@ -132,6 +132,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
                   (response) => {
                     this.tempCountry = response;
                     this.lookUpObj.nameSelect = this.tempCountry.CountryName;
+                    this.lookUpObj.jsonSelect = response;
                   });
                 this.lookUpObj.isRequired = true;
               }
@@ -215,12 +216,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
           }
         );
 
-        var refMasterObj;
-        this.http.post(this.getListCountryUrl, refMasterObj).subscribe(
-          (response) => {
-            this.tempWnaCountryCode = response["ReturnObject"];
-          }
-        );
+    
         this.CustomerDetailForm.patchValue({
           NickName: this.tempCustPersonalObj.NickName,
           MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode,

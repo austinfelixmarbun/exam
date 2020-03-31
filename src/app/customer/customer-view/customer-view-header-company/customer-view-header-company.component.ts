@@ -21,6 +21,9 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
+      else if (params["CustId"] != null) {
+        this.IdCust = params["CustId"];
+      }
     });
   }
   custObj: any;

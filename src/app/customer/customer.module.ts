@@ -54,7 +54,6 @@ import { CustomerViewPersonalJobDataEmpComponent } from './customer-view/custome
 import { CustomerViewPersonalJobDataSmeComponent } from './customer-view/customer-view-personal-job-data-sme/customer-view-personal-job-data-sme.component';
 import { CustomerViewPersonalOtherAttrComponent } from './customer-view/customer-view-personal-other-attr/customer-view-personal-other-attr.component';
 import { CustomerViewPersonalAppListingComponent } from './customer-view/customer-view-personal-app-listing/customer-view-personal-app-listing.component';
-import { CustomerViewCoyAddressComponent } from './customer-view/customer-view-coy-address/customer-view-coy-address.component';
 import { CustomerViewCoyManagementComponent } from './customer-view/customer-view-coy-management/customer-view-coy-management.component';
 import { CustomerViewCoyContactComponent } from './customer-view/customer-view-coy-contact/customer-view-coy-contact.component';
 import { CustomerViewCoyFinancialComponent } from './customer-view/customer-view-coy-financial/customer-view-coy-financial.component';
@@ -82,6 +81,7 @@ import { CustomerPersonalAddressCheckComponent } from './customer-personal/custo
 import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-view-header-personal/customer-view-header-personal.component';
 import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
 import { UcinputnumberModule } from '@adins/ucinputnumber';
+import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/customer-view-personal-financial-section/customer-view-personal-financial-section.component';
  @NgModule({
   exports: [],
   imports: [
@@ -140,7 +140,6 @@ import { UcinputnumberModule } from '@adins/ucinputnumber';
     CustomerViewPersonalJobDataSmeComponent,
     CustomerViewPersonalOtherAttrComponent,
     CustomerViewPersonalAppListingComponent,
-    CustomerViewCoyAddressComponent,
     CustomerViewCoyManagementComponent,
     CustomerViewCoyContactComponent,
     CustomerViewCoyFinancialComponent,
@@ -165,7 +164,8 @@ import { UcinputnumberModule } from '@adins/ucinputnumber';
     CustomerCompanyAddressCheckComponent,  
     CustomerPersonalAddressCheckComponent, 
     CustomerViewHeaderPersonalComponent, 
-    CustomerViewHeaderCompanyComponent
+    CustomerViewHeaderCompanyComponent,
+    CustomerViewPersonalFinancialSectionComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

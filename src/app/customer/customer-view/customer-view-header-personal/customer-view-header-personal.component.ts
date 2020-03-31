@@ -18,6 +18,9 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
+      else if (params["CustId"] != null) {
+        this.IdCust = params["CustId"];
+      }
     });
    }
   Gender: any;
@@ -65,7 +68,6 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrIdTypeCode).subscribe(
           (response) => {
             this.tempMrIdTypeCode = response;
-
           }
         );
         if (this.tempCustObj.IsVip === true) {
@@ -85,19 +87,15 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
     this.http.post(AdInsConstant.GetCustPersonalbyCustId, this.custPersonalObj).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
-
         var refMasterObjMrGenderCode = {
           MasterCode: this.tempCustPersonalObj.MrGenderCode
         }
-
         this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrGenderCode).subscribe(
           (response) => {
             this.tempMrGenderCode = response;
-            console.log(this.tempMrGenderCode);
+         
           }
         );
-
       });
   }
-
 }
