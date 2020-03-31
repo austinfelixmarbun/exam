@@ -24,12 +24,12 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of responseResultCustAddr">
-                  <td class="text-center">{{item.AddressTypeName}}</td>
-                  <td class="text-center">{{item.Address}}</td>
-                  <td class="text-center">{{item.BuildingOwnership}}</td>
-                  <td class="text-center">{{item.Phone1}}</td>
-                  <td class="text-center">{{item.Phone2}}</td>
-                  <td class="text-center">{{item.Notes}}</td>
+                  <td class="text-left">{{item.AddressTypeName}}</td>
+                  <td class="text-left">{{item.Address}}</td>
+                  <td class="text-left">{{item.BuildingOwnership}}</td>
+                  <td class="text-left">{{item.Phone1}}</td>
+                  <td class="text-left">{{item.Phone2}}</td>
+                  <td class="text-left">{{item.Notes}}</td>
                 </tr>
               </tbody>
             </table>
@@ -38,14 +38,25 @@
             [panel]="'CustAddressHistListingPanel'">
           </lib-ucSubsection>
           <div id="CustAddressHistListingPanel">
-            <label class="col-md-4  adInsLabel" translate>Address Type</label>
-            <form class="form form-horizontal" [formGroup]="CustForm">
-              <select class="form-control" [(ngModel)]="selectedOption" formControlName="DdlAddress">
-                <option *ngFor="let item of ddlItem" [value]="item.Value">
-                  {{item.Value}}
-                </option>
-              </select>
+
+            <!-- <label class="col-md-4  adInsLabel" translate>Serial No 1 Label / Is Mandatory </label>
+            <div class="col-md-7">
+              <input type="text" class="form-control adInsInput" formControlName="SerialNo1Label">
+              <show-errors [control]="AssetTypeForm.controls.SerialNo1Label" [submit]="enjiForm.submitted">
+              </show-errors>
+            </div> -->
+            <div class="form-group row">
+              <label class="col-md-2  adInsLabel" translate>Address Type</label>
+              <form class="form form-horizontal" [formGroup]="CustForm">
+              <div class="col-md-3">
+                <select class="form-control" [(ngModel)]="selectedOption" formControlName="DdlAddress">
+                  <option *ngFor="let item of ddlItem" [value]="item.Value">
+                    {{item.Value}}
+                  </option>
+                </select>
+              </div>
             </form>
+            </div>
             <table class="table table-responsive-md text-center table-hover">
               <thead>
                 <tr class="table-header">
@@ -65,12 +76,12 @@
               <tbody>
                 <ng-container *ngFor="let item of responseResultCustAddrHist">
                   <tr *ngIf="item.AddressTypeName == selectedOption">
-                    <td class="text-center">{{item.AddressTypeName}}</td>
-                    <td class="text-center">{{item.Address}}</td>
-                    <td class="text-center">{{item.BuildingOwnership}}</td>
-                    <td class="text-center">{{item.Phone1}}</td>
-                    <td class="text-center">{{item.Phone2}}</td>
-                    <td class="text-center">{{item.Notes}}</td>
+                    <td class="text-left">{{item.AddressTypeName}}</td>
+                    <td class="text-left">{{item.Address}}</td>
+                    <td class="text-left">{{item.BuildingOwnership}}</td>
+                    <td class="text-left">{{item.Phone1}}</td>
+                    <td class="text-left">{{item.Phone2}}</td>
+                    <td class="text-left">{{item.Notes}}</td>
                   </tr>
                 </ng-container>
               </tbody>

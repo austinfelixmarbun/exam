@@ -43,39 +43,39 @@
   <tbody>
     <ng-container *ngFor="let item of responseObj">
       <tr>
-        <td class="text-center">{{item.IdType}}</td>
-        <td class="text-center">{{item.ContactPersonName}}</td>
-        <td class="text-center">{{item.IdNo}}</td>
-        <td class="text-center">{{item.BirthPlace}}</td>
-        <td class="text-center">{{item.BirthDt}}</td>
-        <td class="text-center">{{item.MotherMaidenName}}</td>
-        <td class="text-center">{{item.Gender}}</td>
-        <td class="text-center">{{item.Religion}}</td>
-        <td class="text-center">{{item.Education}}</td>
-        <td class="text-center">{{item.JobProfession}}</td>
-        <td class="text-center">{{item.MaritalStat}}</td>
-        <td class="text-center">{{item.Nationality}}</td>
-        <td class="text-center">{{item.NationalityCountry}}</td>
-        <td class="text-center">{{item.CustRelationship}}</td>
-        <td class="text-center" *ngIf="item.IsEmergencyContact == true">Yes</td>
-        <td class="text-center" *ngIf="item.IsEmergencyContact == false">No</td>
-        <td class="text-center" *ngIf="item.IsFamily == true">Yes</td>
-        <td class="text-center" *ngIf="item.IsFamily == false">No</td>
-        <td class="text-center">{{item.MobilePhnNo1}}</td>
-        <td class="text-center">{{item.MobilePhnNo2}}</td>
-        <td class="text-center">{{item.Email}}</td>
-        <td class="text-center">{{item.Addr}}</td>
-        <td class="text-center">{{item.AreaCode1}}</td>
-        <td class="text-center">{{item.AreaCode2}}</td>
-        <td class="text-center">{{item.AreaCode3}}</td>
-        <td class="text-center">{{item.AreaCode4}}</td>
-        <td class="text-center">{{item.City}}</td>
-        <td class="text-center">{{item.Zipcode}}</td>
-        <td class="text-center">{{item.SubZipcode}}</td>
-        <td class="text-center">{{item.ContactPersonCustNo}}</td>
-        <td class="text-center">{{item.IdExpiredDt}}</td>
-        <td class="text-center">{{item.TaxIdNo}}</td>
-        <td class="text-center">{{item.NegCustType}}</td>
+        <td class="text-left">{{item.IdType}}</td>
+        <td class="text-left">{{item.ContactPersonName}}</td>
+        <td class="text-left">{{item.IdNo}}</td>
+        <td class="text-left">{{item.BirthPlace}}</td>
+        <td class="text-left">{{item.BirthDt  | date: 'dd-MMM-yyyy'}}</td>
+        <td class="text-left">{{item.MotherMaidenName}}</td>
+        <td class="text-left">{{item.Gender}}</td>
+        <td class="text-left">{{item.Religion}}</td>
+        <td class="text-left">{{item.Education}}</td>
+        <td class="text-left">{{item.JobProfession}}</td>
+        <td class="text-left">{{item.MaritalStat}}</td>
+        <td class="text-left">{{item.Nationality}}</td>
+        <td class="text-left">{{item.NationalityCountry}}</td>
+        <td class="text-left">{{item.CustRelationship}}</td>
+        <td class="text-left" *ngIf="item.IsEmergencyContact == true">Yes</td>
+        <td class="text-left" *ngIf="item.IsEmergencyContact == false">No</td>
+        <td class="text-left" *ngIf="item.IsFamily == true">Yes</td>
+        <td class="text-left" *ngIf="item.IsFamily == false">No</td>
+        <td class="text-left">{{item.MobilePhnNo1}}</td>
+        <td class="text-left">{{item.MobilePhnNo2}}</td>
+        <td class="text-left">{{item.Email}}</td>
+        <td class="text-left">{{item.Addr}}</td>
+        <td class="text-left">{{item.AreaCode1}}</td>
+        <td class="text-left">{{item.AreaCode2}}</td>
+        <td class="text-left">{{item.AreaCode3}}</td>
+        <td class="text-left">{{item.AreaCode4}}</td>
+        <td class="text-left">{{item.City}}</td>
+        <td class="text-left">{{item.Zipcode}}</td>
+        <td class="text-left">{{item.SubZipcode}}</td>
+        <td class="text-left">{{item.ContactPersonCustNo}}</td>
+        <td class="text-left">{{item.IdExpiredDt | date: 'dd-MMM-yyyy'}}</td>
+        <td class="text-left">{{item.TaxIdNo}}</td>
+        <td class="text-left">{{item.NegCustType}}</td>
       </tr>
     </ng-container>
   </tbody>

@@ -6,7 +6,8 @@
 					<h4 class="form-section card-title" *ngIf="custType == 'PERSONAL'" translate>CUSTOMER PERSONAL</h4>
 					<h4 class="form-section card-title" *ngIf="custType == 'COMPANY'" translate>CUSTOMER COMPANY</h4>
 					<div *ngIf="custType == 'PERSONAL'">
-						<lib-ucviewgeneric [viewInput]="viewCustMainInfoHeaderObj"></lib-ucviewgeneric>
+						<!-- <lib-ucviewgeneric [viewInput]="viewCustMainInfoHeaderObj"></lib-ucviewgeneric> -->
+						<app-customer-view-header-personal></app-customer-view-header-personal>
 						<aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode]
 							navigateBackward="allow" navigateForward="allow" [defaultStepIndex]="0">
 							<aw-wizard-step [stepTitle]="'Main Data'" (stepEnter)="EnterTab('mainData')"
@@ -53,15 +54,16 @@
 								<app-customer-view-personal-other-attr *ngIf="isOtherAttr == true">
 								</app-customer-view-personal-other-attr>
 							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Application Listing'" (stepEnter)="EnterTab('appListing')"
+							<!-- <aw-wizard-step [stepTitle]="'Application Listing'" (stepEnter)="EnterTab('appListing')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
 								<app-customer-view-personal-app-listing *ngIf="isAppListing == true">
 								</app-customer-view-personal-app-listing>
-							</aw-wizard-step>
+							</aw-wizard-step> -->
 						</aw-wizard>
 					</div>
 					<div *ngIf="custType == 'COMPANY'">
-						<lib-ucviewgeneric [viewInput]="viewCustCoyMainInfoHeader"></lib-ucviewgeneric>
+						<!-- <lib-ucviewgeneric [viewInput]="viewCustCoyMainInfoHeader"></lib-ucviewgeneric> -->
+						<app-customer-view-header-company></app-customer-view-header-company>
 						<aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode]
 							navigateBackward="allow" navigateForward="allow" [defaultStepIndex]="0">
 							<aw-wizard-step [stepTitle]="'Main Data'" (stepEnter)="EnterTabCoy('mainData')"
@@ -71,14 +73,19 @@
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Address'" (stepEnter)="EnterTab('address')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-coy-address *ngIf="isAddress == true">
-								</app-customer-view-coy-address>
+								<app-customer-view-personal-address *ngIf="isAddress == true">
+								</app-customer-view-personal-address>
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Management / Shareholder'"
 								(stepEnter)="EnterTabCoy('management')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
 								<app-customer-view-coy-management *ngIf="isManagement == true">
 								</app-customer-view-coy-management>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Customer Group'" (stepEnter)="EnterTab('custGroup')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-personal-customer-group *ngIf="isCustGroup == true">
+								</app-customer-view-personal-customer-group>
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Contact Information'" (stepEnter)="EnterTabCoy('contact')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
@@ -94,10 +101,10 @@
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
 								<app-customer-view-coy-legal *ngIf="isLegal == true"> </app-customer-view-coy-legal>
 							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Other Attribute'" (stepEnter)="EnterTabCoy('other')"
+							<!-- <aw-wizard-step [stepTitle]="'Other Attribute'" (stepEnter)="EnterTabCoy('other')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
 								<app-customer-view-coy-other *ngIf="isOther == true"> </app-customer-view-coy-other>
-							</aw-wizard-step>
+							</aw-wizard-step> -->
 						</aw-wizard>
 					</div>
 				</div>
