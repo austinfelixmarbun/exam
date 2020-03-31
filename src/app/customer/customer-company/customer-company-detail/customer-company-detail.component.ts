@@ -82,6 +82,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
             (response) => {
               this.tempRefIndustryObj = response; 
               this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName; 
+              this.lookUpObj.jsonSelect = response;
             });
         }
       });

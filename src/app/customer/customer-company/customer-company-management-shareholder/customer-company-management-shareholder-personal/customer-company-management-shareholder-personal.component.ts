@@ -39,14 +39,16 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     MgmntShrholderName: ['', [Validators.required,Validators.maxLength(100)]],
     MrCustModelCode: [''],
     MrIdTypeCode: [''],
-    IdNo: [''],
+    IdNo: ['',Validators.pattern("^[0-9]+$")],
     IdExpiredDt: ['',[Validators.required]],
     MrGenderCode: [''],
     BirthPlace: [''],
     BirthDt: [''],
-    TaxIdNo: [''],
+    TaxIdNo: ['',Validators.pattern("^[0-9]+$")],
     MrJobPositionCode: [''],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
+    
+    // SharePrcnt: new FormControl('1', Validators.compose([ Validators.min(0), Validators.max(100)])),
     IsSigner: [false], 
   });
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
