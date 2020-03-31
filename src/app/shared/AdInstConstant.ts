@@ -690,7 +690,7 @@ export class AdInsConstant {
   public static EditCustCompanyFinData = environment.FoundationR3Url + "/CustomerCompanyFinData/EditCustCompanyFinData";
   public static AddCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/AddCustPersonalFinData";
   public static EditCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/EditCustPersonalFinData";
-  public static GetCustPersonalFinDataForCustViewByCustId = "http://localhost:5000"+"/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
+  public static GetCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url+"/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
   // CUSTOMER ADDRESS
   public static GetListCustAddr = environment.FoundationR3Url + "/CustAddr/GetListCustAddr";
   public static AddCustAddr = environment.FoundationR3Url + "/CustAddr/AddCustAddr";
@@ -739,7 +739,7 @@ export class AdInsConstant {
   public static GetListCustPersonalContactPersonForCustViewByCustId =  environment.FoundationR3Url + "/CustPersonalContactPerson/GetListCustPersonalContactPersonForCustViewByCustId";
 
   // Cust Group
-  public static GetListCustGrpForCustViewByCustId =   "http://localhost:5000" + "/CustGrp/GetListCustGrpForCustViewByCustId";
+  public static GetListCustGrpForCustViewByCustId =   environment.FoundationR3Url + "/CustGrp/GetListCustGrpForCustViewByCustId";
 
   // NEGATIVE CUSTOMER
   public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
