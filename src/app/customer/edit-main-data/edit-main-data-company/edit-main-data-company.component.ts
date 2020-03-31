@@ -49,6 +49,9 @@ export class EditMainDataCompanyComponent implements OnInit {
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.required]],
+    IsVip : [true],
+    IsAffiliateWithMf: [true],
+    VipNotes : ['']
   });
 
   ngOnInit() {
@@ -88,7 +91,10 @@ export class EditMainDataCompanyComponent implements OnInit {
         this.CustomerCompanyForm.patchValue({
           CustName: this.tempCustObj.CustName,
           TaxIdNo: this.tempCustObj.TaxIdNo,
-          MrCustModelCode: this.tempCustObj.MrCustModelCode
+          MrCustModelCode: this.tempCustObj.MrCustModelCode, 
+          IsVip :this.tempCustObj.IsVip,
+          IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
+          VipNotes :this.tempCustObj.VipNotes
         });
       }
     );
@@ -113,7 +119,11 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.IdNo = this.CustomerCompanyForm.controls["TaxIdNo"].value;
     this.custObj.MrCustModelCode = this.CustomerCompanyForm.controls["CustModel"].value;
     this.custCompanyObj.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
+    this.custObj.IsVip = this.CustomerCompanyForm.controls["IsVip"].value;
+    this.custObj.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value;
+    this.custObj.VipNotes = this.CustomerCompanyForm.controls["VipNotes"].value;
 
+   
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(

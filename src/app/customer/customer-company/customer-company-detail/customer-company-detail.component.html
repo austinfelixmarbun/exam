@@ -12,12 +12,6 @@
               [identifier]="'RefIndustryTypeId'" (lookup)=getLookUp($event)>
             </lib-uclookupgeneric>
           </div>
-          <label class="col-md-2  adInsLabel" translate>Affiliation With Multifinance</label>
-          <div class="col-md-4">
-            <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
-          </div>
-        </div>
-        <div class="form-group row adins">
           <label class="col-md-2 adins-required-label" translate> Number Of Employee</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="NumOfEmp"
@@ -25,10 +19,9 @@
             <show-errors [control]="CustomerDetailForm.controls.NumOfEmp" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
-          <label class="col-md-2 adInsLabel" translate>Vip</label>
-          <div class="col-md-4">
-            <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip" />
-          </div>
+        </div>
+        <div class="form-group row adins">
+        
         </div>
         <div class="form-group row  ">
           <label class="col-md-2 adins-required-label" translate>Establishment Date</label>
@@ -37,11 +30,7 @@
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.EstablishmentDt.invalid}">
             <show-errors [control]="CustomerDetailForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
             </show-errors>
-          </div>
-          <label class="col-md-2 adInsLabel" translate>Vip Note</label>
-          <div class="col-md-4">
-            <textarea class="form-control adInsInput" formControlName="VipNotes"></textarea>
-          </div>
+          </div> 
         </div>
       </div>
     </div>
