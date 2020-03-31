@@ -20,7 +20,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.MR_CUST_TYPE_CODE", 
+            "name": "C.MR_CUST_TYPE_CODE", 
             "id": "CustTypeCodeId",
             "value": "",
             "placeholder": "Placeholder",

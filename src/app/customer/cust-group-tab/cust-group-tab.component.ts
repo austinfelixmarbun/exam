@@ -53,7 +53,11 @@ export class CustGroupTabComponent implements OnInit {
         this.spinner.hide();
         this.toastr.successMessage(response["message"]);
       }
-    );
+    ).catch((error) => {
+      if(error != 0){
+        console.log(error);
+      }
+    });
   }
 
   deleteCustGrp(CustGrpId, i) {
@@ -71,5 +75,8 @@ export class CustGroupTabComponent implements OnInit {
   }
   next() {
     this.wizard.goToNextStep();
+  }
+  back(){
+    this.wizard.goToPreviousStep();
   }
 }

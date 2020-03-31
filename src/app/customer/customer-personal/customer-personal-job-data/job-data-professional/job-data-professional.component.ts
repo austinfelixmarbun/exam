@@ -236,6 +236,10 @@ export class JobDataProfessionalComponent implements OnInit {
     this.custPersonalJobDataObj.EmploymentEstablishmentDt = this.JobDataProForm.controls["EstablishmentDate"].value;
   }
 
+  back(){
+    this.wizard.goToPreviousStep();
+  }
+
   SaveForm(){
     if(this.typePage == "edit") {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
