@@ -739,7 +739,7 @@ export class AdInsConstant {
   public static GetListCustPersonalContactPersonForCustViewByCustId =  environment.FoundationR3Url + "/CustPersonalContactPerson/GetListCustPersonalContactPersonForCustViewByCustId";
 
   // Cust Group
-  public static GetListCustGrpForCustViewByCustId =   environment.FoundationR3Url + "/CustGrp/GetListCustGrpForCustViewByCustId";
+  public static GetListCustGrpForCustViewByCustId =   "http://localhost:5000" + "/CustGrp/GetListCustGrpForCustViewByCustId";
 
   // NEGATIVE CUSTOMER
   public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";

@@ -17,8 +17,8 @@
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Address'" (stepEnter)="EnterTab('address')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-address *ngIf="isAddress == true">
-								</app-customer-view-personal-address>
+								<app-customer-view-address *ngIf="isAddress == true">
+								</app-customer-view-address>
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Contact Person'" (stepEnter)="EnterTab('contactPerson')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
@@ -27,8 +27,8 @@
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Customer Group'" (stepEnter)="EnterTab('custGroup')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-customer-group *ngIf="isCustGroup == true">
-								</app-customer-view-personal-customer-group>
+								<app-customer-view-customer-group *ngIf="isCustGroup == true">
+								</app-customer-view-customer-group>
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Job Data'" (stepEnter)="EnterTab('jobData')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
@@ -73,8 +73,8 @@
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Address'" (stepEnter)="EnterTab('address')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-address *ngIf="isAddress == true">
-								</app-customer-view-personal-address>
+								<app-customer-view-address *ngIf="isAddress == true">
+								</app-customer-view-address>
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Management / Shareholder'"
 								(stepEnter)="EnterTabCoy('management')"
@@ -84,8 +84,8 @@
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Customer Group'" (stepEnter)="EnterTab('custGroup')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-customer-group *ngIf="isCustGroup == true">
-								</app-customer-view-personal-customer-group>
+								<app-customer-view-customer-group *ngIf="isCustGroup == true">
+								</app-customer-view-customer-group>
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Contact Information'" (stepEnter)="EnterTabCoy('contact')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
