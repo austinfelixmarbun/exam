@@ -88,4 +88,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   next() {
     this.wizard.goToNextStep();
   }
+  back(){
+    this.wizard.goToPreviousStep();
+  }
 }

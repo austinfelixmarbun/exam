@@ -146,6 +146,11 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         });
  
   }
+
+  back(){
+    this.wizard.goToPreviousStep();
+  }
+
   SaveValue(){ 
     this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
     this.custAddrObj = new CustAddrObj();
