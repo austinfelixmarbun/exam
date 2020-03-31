@@ -120,6 +120,10 @@ export class JobDataNonProfessionalComponent implements OnInit {
       });
   }
 
+  back(){
+    this.wizard.goToPreviousStep();
+  }
+
   SaveForm(){
     if(this.typePage == "edit"){
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;

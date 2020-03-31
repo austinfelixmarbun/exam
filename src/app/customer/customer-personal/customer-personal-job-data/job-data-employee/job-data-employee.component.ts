@@ -371,6 +371,10 @@ export class JobDataEmployeeComponent implements OnInit {
     this.custPersonalJobDataObj.OthBizEstablishmentDt = this.JobDataEmpForm.controls["EstablishmentDate"].value;
   }
 
+  back(){
+    this.wizard.goToPreviousStep();
+  }
+
   SaveForm(){
     if(this.typePage == "edit") {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
