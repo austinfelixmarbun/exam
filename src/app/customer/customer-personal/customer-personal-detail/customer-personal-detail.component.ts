@@ -247,17 +247,21 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.MrGenderCode = this.tempCustPersonalObj.MrGenderCode;
     this.custPersonalObj.MrNationalityCode = this.CustomerDetailForm.controls["MrNationalityCode"].value;
     this.custPersonalObj.NoOfResidence = this.CustomerDetailForm.controls["NoOfResidence"].value;
-    this.custPersonalObj.WnaCountryCode = this.tempCountryCode;
+    
     if (this.custPersonalObj.MrNationalityCode == "WNI") {
       this.custPersonalObj.WnaCountryCode = "IDN";
+    }
+  if(this.tempCustPersonalObj.WnaCountryCode!=null && this.tempCountryCode ==null){
+      this.custPersonalObj.WnaCountryCode =this.tempCustPersonalObj.WnaCountryCode;
+    }else{
+      this.custPersonalObj.WnaCountryCode = this.tempCountryCode;
     }
     this.custPersonalObj.FamilyCardNo = this.CustomerDetailForm.controls["FamilyCardNo"].value;
     this.custPersonalObj.MrEducationCode = this.CustomerDetailForm.controls["MrEducationCode"].value;
     this.custPersonalObj.MrReligionCode = this.CustomerDetailForm.controls["MrReligionCode"].value;
     this.custPersonalObj.IsRestInPeace = this.CustomerDetailForm.controls["IsRestInPeace"].value;
     this.custPersonalObj.MobilePhnNo1 = this.CustomerDetailForm.controls["MobilePhnNo1"].value;
-    this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
-    console.log("aaaawdawd"+ this.custPersonalObj.MobilePhnNo2);
+    this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value; 
     this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
     this.custPersonalObj.Email2 = this.CustomerDetailForm.controls["Email2"].value;
     this.http.post(this.EditCustPersonalUrl, this.custPersonalObj).subscribe(
