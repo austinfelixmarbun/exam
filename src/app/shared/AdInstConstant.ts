@@ -694,7 +694,7 @@ export class AdInsConstant {
   public static GetListCustAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustId";
   public static GetListCustAddrByCustIdForCustomerPersonalView =  environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
   public static GetCustAddrLegalAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetCustAddrLegalAddrByCustId"
-  
+  public static GetCustAddrByMrCustAddrType = environment.FoundationR3Url +"/CustAddr/GetCustAddrByMrCustAddrType"
   // CUSTOMER ADDRESS HISTORY
   public static GetListCustAddrHistByCustId = environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustId";
   public static GetListCustAddrHistByCustIdForCustomerPersonalView =  environment.FoundationR3Url + "/CustAddrHist/GetListCustAddrHistByCustIdForCustomerPersonalView";
@@ -706,10 +706,16 @@ export class AdInsConstant {
   public static GetCustCompanyLegalDocForCustViewByCustId =  environment.FoundationR3Url + "/CustCompanyLegalDoc/GetCustCompanyLegalDocForCustViewByCustId";
   
   //CUSTOMER COMPANY 
-  public static AddCustCompanyContactPerson = environment.FoundationR3Url+ "/CustCompanyContactPerson/AddCustCompanyContactPerson"
+
   public static GetCustCompanyByCustId = environment.FoundationR3Url + "/CustCompany/GetCustCompanyByCustId"
   public static EditCustCompany = environment.FoundationR3Url + "/CustCompany/EditCustCompany"
 
+  
+  //CUSTOMER COMPANY CONTACT PERSON
+  public static AddCustCompanyContactPerson = environment.FoundationR3Url+ "/CustCompanyContactPerson/AddCustCompanyContactPerson"
+  public static GetCustCompanyContactPersonByCustCompanyContactPersonId =  environment.FoundationR3Url+ "/CustCompanyContactPerson/GetCustCompanyContactPersonByCustCompanyContactPersonId"
+  public static GetCustCompanyContactPersonByCustCompanyId =   environment.FoundationR3Url+ "/CustCompanyContactPerson/GetCustCompanyContactPersonByCustCompanyId"
+  public static EditCustCompanyContactPersonByCustCompanyId =  environment.FoundationR3Url+ "/CustCompanyContactPerson/EditCustCompanyContactPersonByCustCompanyId"
   // CUSTOMER COMPANY MANAGEMENT SHAREHOLDER
   public static AddCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholder"
   public static GetListCustCompanyMgmntShrholderByCustCompanyId = environment.FoundationR3Url +"/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderByCustCompanyId"

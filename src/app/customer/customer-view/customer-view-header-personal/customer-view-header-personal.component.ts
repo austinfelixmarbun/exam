@@ -93,6 +93,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrGenderCode).subscribe(
           (response) => {
             this.tempMrGenderCode = response;
+            console.log(this.tempMrGenderCode);
           }
         );
 
