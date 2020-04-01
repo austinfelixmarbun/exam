@@ -15,22 +15,15 @@
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <div class="px-3">
-            <div class="form-body">
-              <div class="form-group row">
-                <lib-ucviewgeneric [viewInput]="viewObj"></lib-ucviewgeneric>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </section>
+<lib-ucviewgeneric [viewInput]="viewObj"></lib-ucviewgeneric>
 <form class="form form-horizontal" name="AssetSchmForm" #AssetSchmForm="ngForm" novalidate
   (ngSubmit)="SaveAssetSchmMember(AssetSchmForm)">
-  <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></lib-UCSearch>
+  <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
+  </lib-UCSearch>
   <div [hidden]="resultData == null">
     <table class="table table-responsive-md text-center table-hover">
       <thead>
@@ -68,7 +61,6 @@
       </tbody>
     </table>
     <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
-
     <div class="form-body">
       <div class="form-actions right">
         <button type="button" class="btn btn-raised btn-primary mr-1" (click)="addToTemp()" translate>
@@ -83,7 +75,8 @@
           </th>
           <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Full Asset Name</span>
           </th>
-          <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Asset Category Name</span>
+          <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Asset Category
+              Name</span>
           </th>
           <th translate>Active Status</th>
           <th translate>Action</th>

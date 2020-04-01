@@ -1,31 +1,41 @@
-<lib-ucSubsection [id]="'LegalDoc'" [title]="'Legal Doc Listing'" [panel]="'LegalDocId'"></lib-ucSubsection>
-<div id="LegalDocId">
-  <table class="table table-responsive-md text-center table-hover">
-    <thead>
-      <tr class="table-header">
-        <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>No</span></th>
-        <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Legal Doc Type</span></th>
-        <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Document No</span></th>
-        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Date Issued</span></th>
-        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Expired Date</span></th>
-        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Notes</span></th>
-        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Notary Name</span></th>
-        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Notary Location</span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let item of responseResultLegal ; let i = index">
-        <tr *ngIf="item.AddressTypeName == selectedOption">
-          <td class="text-left">{{i+1}}</td>
-          <td class="text-left">{{item.LegalDocType}}</td>
-          <td class="text-left">{{item.DocumentNo}}</td>
-          <td class="text-left">{{item.DateIssued | date:'dd-MMM-yyyy'}}</td>
-          <td class="text-left">{{item.ExpiredDate | date:'dd-MMM-yyyy'}}</td>
-          <td class="text-left">{{item.Notes}}</td>
-          <td class="text-left">{{item.NotaryName}}</td>
-          <td class="text-left">{{item.NotaryLocation}}</td>
-        </tr>
-      </ng-container>
-    </tbody>
-  </table>
+<div class="card">
+  <div class="card-body">
+    <div class="px-3">
+      <lib-ucSubsection [id]="'LegalDoc'" [title]="'Legal Doc Listing'" [panel]="'LegalDocId'"></lib-ucSubsection>
+      <div id="LegalDocId">
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>No</span></th>
+              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Legal Doc Type</span></th>
+              <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Document No</span></th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Date Issued</span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Expired Date</span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Notes</span></th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Notary Name</span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Notary Location</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of responseResultLegal ; let i = index">
+              <tr *ngIf="item.AddressTypeName == selectedOption">
+                <td class="text-left">{{i+1}}</td>
+                <td class="text-left">{{item.LegalDocType}}</td>
+                <td class="text-left">{{item.DocumentNo}}</td>
+                <td class="text-left">{{item.DateIssued | date:'dd-MMM-yyyy'}}</td>
+                <td class="text-left">{{item.ExpiredDate | date:'dd-MMM-yyyy'}}</td>
+                <td class="text-left">{{item.Notes}}</td>
+                <td class="text-left">{{item.NotaryName}}</td>
+                <td class="text-left">{{item.NotaryLocation}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
