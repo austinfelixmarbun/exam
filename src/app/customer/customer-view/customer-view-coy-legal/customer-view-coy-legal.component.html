@@ -6,7 +6,7 @@
         <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>No</span></th>
         <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Legal Doc Type</span></th>
         <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Document No</span></th>
-        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Data Issued</span></th>
+        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Date Issued</span></th>
         <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Expired Date</span></th>
         <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Notes</span></th>
         <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Notary Name</span></th>
@@ -19,8 +19,8 @@
           <td class="text-left">{{i+1}}</td>
           <td class="text-left">{{item.LegalDocType}}</td>
           <td class="text-left">{{item.DocumentNo}}</td>
-          <td class="text-left">{{item.DateIssued}}</td>
-          <td class="text-left">{{item.ExpiredDate}}</td>
+          <td class="text-left">{{item.DateIssued | date:'dd-MMM-yyyy'}}</td>
+          <td class="text-left">{{item.ExpiredDate | date:'dd-MMM-yyyy'}}</td>
           <td class="text-left">{{item.Notes}}</td>
           <td class="text-left">{{item.NotaryName}}</td>
           <td class="text-left">{{item.NotaryLocation}}</td>

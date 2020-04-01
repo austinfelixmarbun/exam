@@ -14,7 +14,7 @@ import { FormBuilder } from '@angular/forms';
 export class CustomerViewAddressComponent implements OnInit {
   GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
   GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
+  GetListKeyValueActiveByCodeUrl = AdInsConstant.GetRefMasterListKeyValueActiveByCode;
   arrCrit: any;
   inputObj: any;
   CustId: any;
@@ -51,20 +51,9 @@ export class CustomerViewAddressComponent implements OnInit {
         this.router.navigateByUrl('Error');
       }
     );
-    this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
-      response => {
-        this.responseResultCustAddrHist = response['ReturnObject'];
-        console.log('custaddr');
-        console.log(this.responseResultCustAddrHist);
-      },
-      error => {
-        this.router.navigateByUrl('Error');
-      }
-    );
-
     var refMasterObj = new RefMasterObj();
     refMasterObj.RefMasterTypeCode = "CUST_ADDR_TYPE";
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
+    this.http.post(this.GetListKeyValueActiveByCodeUrl, refMasterObj).subscribe(
       response => {
         this.ddlItem = response['ReturnObject'];
         this.CustForm.patchValue({
@@ -72,5 +61,15 @@ export class CustomerViewAddressComponent implements OnInit {
         });
       }
     );
+    this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
+      response => {
+        this.responseResultCustAddrHist = response['ReturnObject'];
+      },
+      error => {
+        this.router.navigateByUrl('Error');
+      }
+    );
+
+
   }
 }

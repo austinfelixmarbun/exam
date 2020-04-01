@@ -7,13 +7,13 @@
         "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
-            "type": "text",
-            "label": "Gross Monthly Income Ammount",
+            "type": "currency",
+            "label": "Gross Monthly Income Amount",
             "property": "GmiA"
           },
           {
-            "type": "text",
-            "label": "Gross Profit Ammount",
+            "type": "currency",
+            "label": "Gross Profit Amount",
             "property": "GpA"
           },
           {
@@ -63,13 +63,13 @@
             "property": "GP"
           },
           {
-            "type": "text",
-            "label": "Working Capital Ammount",
+            "type": "currency",
+            "label": "Working Capital Amount",
             "property": "WcA"
           },
           {
-            "type": "text",
-            "label": "Other Monthly Installment Ammount",
+            "type": "currency",
+            "label": "Other Monthly Installment Amount",
             "property": "OmiA"
           },
           {
@@ -78,47 +78,47 @@
             "property": "Dtao"
           },
           {
-            "type": "text",
+            "type": "currency",
             "label": "Revenue",
             "property": "R"
           },
           {
-            "type": "text",
+            "type": "currency",
             "label": "Operation Cost",
             "property": "Oc"
           },
           {
-            "type": "text",
+            "type": "currency",
             "label": "Profit Before Tax",
             "property": "Pbt"
           },
           {
-            "type": "text",
+            "type": "currency",
             "label": "Current Asset",
             "property": "Ca"
           },
           {
-            "type": "text",
+            "type": "currency",
             "label": "Nett Fixed Asset",
             "property": "Nfa"
           },
           {
-            "type": "text",
+            "type": "currency",
             "label": "Total Asset",
             "property": "Ta"
           },
           {
-            "type": "text",
+            "type": "currency",
             "label": "Current Liabilities",
             "property": "Cl"
           },
           {
-            "type": "text",
+            "type": "currency",
             "label": "Long Term Liabilities",
             "property": "Ltl"
           },
           {
-            "type": "text",
+            "type": "currency",
             "label": "Shareholder Equity",
             "property": "Se"
           },
