@@ -14,7 +14,7 @@ import { FormBuilder } from '@angular/forms';
 export class CustomerViewAddressComponent implements OnInit {
   GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
   GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
+  GetListKeyValueActiveByCodeUrl = AdInsConstant.GetRefMasterListKeyValueActiveByCode;
   arrCrit: any;
   inputObj: any;
   CustId: any;
@@ -51,6 +51,16 @@ export class CustomerViewAddressComponent implements OnInit {
         this.router.navigateByUrl('Error');
       }
     );
+    var refMasterObj = new RefMasterObj();
+    refMasterObj.RefMasterTypeCode = "CUST_ADDR_TYPE";
+    this.http.post(this.GetListKeyValueActiveByCodeUrl, refMasterObj).subscribe(
+      response => {
+        this.ddlItem = response['ReturnObject'];
+        this.CustForm.patchValue({
+          DdlAddress: this.ddlItem[0].Value
+        });
+      }
+    );
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
         this.responseResultCustAddrHist = response['ReturnObject'];
@@ -60,15 +70,6 @@ export class CustomerViewAddressComponent implements OnInit {
       }
     );
 
-    var refMasterObj = new RefMasterObj();
-    refMasterObj.RefMasterTypeCode = "ADDR_TYPE";
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
-      response => {
-        this.ddlItem = response['ReturnObject'];
-        this.CustForm.patchValue({
-          DdlAddress: this.ddlItem[0].Value
-        });
-      }
-    );
+
   }
 }

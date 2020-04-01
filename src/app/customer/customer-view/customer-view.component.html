@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<!-- <div class="col-md-12"> -->
 	<div class="card">
 		<div class="card-body">
 			<div class="px-3">
@@ -31,7 +31,8 @@
 							</aw-wizard-step>
 							<aw-wizard-step [stepTitle]="'Job Data'" (stepEnter)="EnterTab('jobData')"
 								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-job-data *ngIf="isJobData == true && custModel == 'PROF'">
+								<app-customer-view-personal-job-data
+									*ngIf="isJobData == true && custModel == 'PROF'">
 								</app-customer-view-personal-job-data>
 								<app-customer-view-personal-job-data-non-prof
 									*ngIf="isJobData == true && custModel == 'NONPROF'">
@@ -109,4 +110,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+<!-- </div> -->

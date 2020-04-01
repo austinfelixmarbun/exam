@@ -12,7 +12,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 export class CustomerViewCoyManagementComponent implements OnInit {
   CustId: any;
-  GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderIdUrl = AdInsConstant.GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderId;
+  GetCustCompanyMgmntShrholderForCustViewByCustIdUrl = AdInsConstant.GetCustCompanyMgmntShrholderForCustViewByCustId;
   responseObj: any;
 
   constructor(
@@ -28,7 +28,7 @@ export class CustomerViewCoyManagementComponent implements OnInit {
       }
     });
     var custAddrObj = { "CustId": this.CustId };
-    this.http.post(this.GetCustCompanyMgmntShrholderForCustViewByCustCompanyMgmntShrholderIdUrl, custAddrObj).subscribe(
+    this.http.post(this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl, custAddrObj).subscribe(
       response => {
         this.responseObj = response['ReturnObject'];
       },

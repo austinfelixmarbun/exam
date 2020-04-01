@@ -1,60 +1,73 @@
 <lib-ucviewgeneric [viewInput]="viewCustCoyFinData"></lib-ucviewgeneric>
-<lib-ucSubsection [id]="'BankId'" [title]="'Customer Bank Account'" [panel]="'CustBankAccId'">
-</lib-ucSubsection>
-<div id="CustBankAccId">
-  <table class="table table-responsive-md text-center table-hover">
-    <thead>
-      <tr class="table-header">
-        <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Bank Name</span> </th>
-        <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Bank Branch</span> </th>
-        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Bank Branch BI Code</span></th>
-        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Account Name</span> </th>
-        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Account No</span> </th>
-        <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Balance</span> </th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let item of responseCBAObj">
-          <tr>
-            <td class="text-left">{{item.BankName}}</td>
-            <td class="text-left">{{item.BankBranch}}</td>
-            <td class="text-left">{{item.BankBranchRegRptCode}}</td>
-            <td class="text-left">{{item.BankAccName}}</td>
-            <td class="text-left">{{item.BankAccNo}}</td>
-            <td class="text-left">{{item.Balance  | number}}</td>
-          </tr>
-      </ng-container>
-    </tbody>
-  </table>
-  <div *ngFor="let item of responseCBAObj">
-    <br>
-    <table class="table table-responsive-md text-center table-hover" *ngIf="item.BankStmntList.length > 0">
-      <thead>
-        <tr class="table-header">
-          <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Bank Name</span> </th>
-          <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Account Name</span> </th>
-          <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Account No</span> </th>
-          <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Month</span> </th>
-          <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Year</span> </th>
-          <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Debit (-)</span> </th>
-          <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Credit (+)</span> </th>
-          <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Balance</span> </th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let temp of item.BankStmntList">
-          <tr>
-            <td class="text-left">{{item.BankName}}</td>
-            <td class="text-left">{{item.BankAccName}}</td>
-            <td class="text-left">{{item.BankAccNo}}</td>
-            <td class="text-left">{{temp.Month}}</td>
-            <td class="text-left">{{temp.Year}}</td>
-            <td class="text-left">{{temp.DebitAmt | number}}</td>
-            <td class="text-left">{{temp.CreditAmt | number}}</td>
-            <td class="text-left">{{temp.BalanceAmt | number}}</td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
+<div class="card">
+  <div class="card-body">
+    <div class="px-3">
+      <lib-ucSubsection [id]="'BankId'" [title]="'Customer Bank Account'" [panel]="'CustBankAccId'">
+      </lib-ucSubsection>
+      <div id="CustBankAccId">
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Bank Name</span> </th>
+              <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Bank Branch</span> </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Bank Branch BI
+                  Code</span></th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Account Name</span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Account No</span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Balance</span> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of responseCBAObj">
+              <tr>
+                <td class="text-left">{{item.BankName}}</td>
+                <td class="text-left">{{item.BankBranch}}</td>
+                <td class="text-left">{{item.BankBranchRegRptCode}}</td>
+                <td class="text-left">{{item.BankAccName}}</td>
+                <td class="text-left">{{item.BankAccNo}}</td>
+                <td class="text-left">{{item.Balance  | number}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <div *ngFor="let item of responseCBAObj">
+          <br>
+          <table class="table table-responsive-md text-center table-hover" *ngIf="item.BankStmntList.length > 0">
+            <thead>
+              <tr class="table-header">
+                <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Bank Name</span> </th>
+                <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Account Name</span>
+                </th>
+                <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Account No</span>
+                </th>
+                <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Month</span> </th>
+                <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Year</span> </th>
+                <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Debit (-)</span>
+                </th>
+                <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Credit (+)</span>
+                </th>
+                <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Balance</span> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let temp of item.BankStmntList">
+                <tr>
+                  <td class="text-left">{{item.BankName}}</td>
+                  <td class="text-left">{{item.BankAccName}}</td>
+                  <td class="text-left">{{item.BankAccNo}}</td>
+                  <td class="text-left">{{temp.Month}}</td>
+                  <td class="text-left">{{temp.Year}}</td>
+                  <td class="text-left">{{temp.DebitAmt | number}}</td>
+                  <td class="text-left">{{temp.CreditAmt | number}}</td>
+                  <td class="text-left">{{temp.BalanceAmt | number}}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
