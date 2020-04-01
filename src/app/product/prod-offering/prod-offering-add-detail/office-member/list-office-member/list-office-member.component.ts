@@ -28,13 +28,15 @@ export class ListOfficeMemberComponentOffering implements OnInit {
   pageNow;
   pageSize;
   apiUrl;
+  ProdOfferingHId : number;
+
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
-
+    this.ProdOfferingHId = this.ListOfficeMemberObjInput["param"];
     var obj={
-      ProdOfferingHId: this.ListOfficeMemberObjInput["param"],
+      ProdOfferingHId: this.ProdOfferingHId,
       RowVersion: ""
     }
 
@@ -127,6 +129,15 @@ export class ListOfficeMemberComponentOffering implements OnInit {
   }
 
   DoneForm(){
+    this.http.post(environment.FoundationR3Url + "/ProductOffering/SubmitProdOffering", {ProdOfferingHId : this.ProdOfferingHId}).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["message"]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    this.toastr.successMessage("Submitted");
     this.toastr.successMessage("Submitted");
     this.router.navigate(["/Product/ProdOffering/paging"]);
   }
