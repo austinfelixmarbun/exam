@@ -14,7 +14,6 @@ import { FormBuilder } from '@angular/forms';
 export class CustomerViewAddressComponent implements OnInit {
   GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
   GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListKeyValueActiveByCodeUrl = AdInsConstant.GetRefMasterListKeyValueActiveByCode;
   arrCrit: any;
   inputObj: any;
   CustId: any;
@@ -26,6 +25,7 @@ export class CustomerViewAddressComponent implements OnInit {
     DdlAddress: ['']
   });
   viewCustFinData: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
 
   constructor(
     private http: HttpClient,
@@ -53,7 +53,8 @@ export class CustomerViewAddressComponent implements OnInit {
     );
     var refMasterObj = new RefMasterObj();
     refMasterObj.RefMasterTypeCode = "CUST_ADDR_TYPE";
-    this.http.post(this.GetListKeyValueActiveByCodeUrl, refMasterObj).subscribe(
+    refMasterObj.ReserveField1 = "PERSONAL";
+    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObj).subscribe(
       response => {
         this.ddlItem = response['ReturnObject'];
         this.CustForm.patchValue({
