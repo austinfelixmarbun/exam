@@ -50,8 +50,7 @@ export class CustomerContactAddComponent implements OnInit {
     ContactPersonCustNo: [''],
   });
   flag: any;
-  KTP = "KTP";
-  CountryIndonesia = "Indonesia";
+  KTP = "KTP"; 
   tempKTPCheck: any;
   GetListActiveRefMasterUrl: any;
   tempIdType: any;
@@ -83,10 +82,14 @@ export class CustomerContactAddComponent implements OnInit {
   custAddrObj: any;
   inputFieldObj: any;
   tempProfessionCodeObj;
+  GetGeneralSettingByCodeUrl : string;
+  Country : any;
+
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
     this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addCustPersonalContactPersonUrl = AdInsConstant.AddNewCustPersonalContactPerson;
     this.editCustPersonalContactPersonUrl = AdInsConstant.EditCustPersonalContactPerson;
+    this.GetGeneralSettingByCodeUrl = AdInsConstant.GetGeneralSettingByCode;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
          this.IdCust = params["IdCust"];
@@ -94,8 +97,7 @@ export class CustomerContactAddComponent implements OnInit {
      });
   }
   isAdd: any;
-  ngOnInit() {
-    //console.log("aaaaa" + this.custPersonalContactPersonId);
+  ngOnInit() { 
     this.UcAddressObj = new UcAddressObj();
     this.lookUpObj = new InputLookupObj();
     this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
@@ -103,13 +105,24 @@ export class CustomerContactAddComponent implements OnInit {
     this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
-    this.criteriaList = new Array();
-    this.criteriaObj = new CriteriaObj();
-    this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
-    this.criteriaObj.propName = 'COUNTRY_CODE';
-    this.criteriaObj.value = "IDN";
-    this.criteriaList.push(this.criteriaObj);
-    this.lookUpObj.addCritInput = this.criteriaList;
+ 
+    var generalSettingObjDefLocalNationality = {
+      GsCode: "DEF_LOCAL_NATIONALITY"
+    }
+    this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
+      (response) => {
+        this.Country = response;
+        this.criteriaList = new Array();
+        this.criteriaObj = new CriteriaObj();
+        this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
+        this.criteriaObj.propName = 'COUNTRY_CODE';
+        this.criteriaObj.value = this.Country.GsValue;
+        this.criteriaList.push(this.criteriaObj);
+        this.lookUpObj.addCritInput = this.criteriaList;
+      });
+
+
+
 
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = false;
@@ -155,7 +168,7 @@ export class CustomerContactAddComponent implements OnInit {
         console.log("awd");
         this.tempNationality = response["ReturnObject"];
         this.CustomerContactForm.patchValue({
-          MrNationalityCode: "WNI"
+          MrNationalityCode: "LOCAL"
         });
         this.lookUpObj.isRequired = false;
         this.flag = true;
@@ -256,7 +269,7 @@ export class CustomerContactAddComponent implements OnInit {
               }
             );
           }
-          if (this.tempCustPersonalContactPerson.MrNationalityCode != "WNI") {
+          if (this.tempCustPersonalContactPerson.MrNationalityCode != "LOCAL") {
             this.flag = false;
             var countryCode = {
               CountryCode: this.tempCustPersonalContactPerson.NationalityCountryCode
@@ -387,7 +400,7 @@ export class CustomerContactAddComponent implements OnInit {
           MobilePhnNo2: this.tempCustPersonal.MobilePhnNo2,
           Email: this.tempCustPersonal.Email1
         });
-        if (this.tempCustPersonal.MrNationalityCode != "WNI") {
+        if (this.tempCustPersonal.MrNationalityCode != "LOCAL") {
           this.flag = false;
           var countryCode = {
             CountryCode: this.tempCustPersonal.WnaCountryCode
@@ -470,7 +483,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
   }
   onOptionsNationalitySelected(event) {
-    if (event.target.value == "WNI") {
+    if (event.target.value == "LOCAL") {
       this.lookUpObj.isRequired = false;
       this.flag = true;
     } else {
