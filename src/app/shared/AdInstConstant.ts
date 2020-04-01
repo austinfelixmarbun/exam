@@ -690,7 +690,7 @@ export class AdInsConstant {
   public static EditCustCompanyFinData = environment.FoundationR3Url + "/CustomerCompanyFinData/EditCustCompanyFinData";
   public static AddCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/AddCustPersonalFinData";
   public static EditCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/EditCustPersonalFinData";
-  public static GetCustPersonalFinDataForCustViewByCustId = "http://localhost:5000"+"/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
+  public static GetCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url +"/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
   public static EditCustBankAcc = environment.FoundationR3Url + "/CustBankAcc/EditCustBankAcc";
   // CUSTOMER ADDRESS
   public static GetListCustAddr = environment.FoundationR3Url + "/CustAddr/GetListCustAddr";

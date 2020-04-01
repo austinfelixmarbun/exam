@@ -80,9 +80,9 @@ import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-vi
 import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
 import { UcinputnumberModule } from '@adins/ucinputnumber';
 import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/customer-view-personal-financial-section/customer-view-personal-financial-section.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
 import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
-import { UcShowErrorsModule } from '@adins/uc-show-errors';
  @NgModule({
   exports: [],
   imports: [
@@ -103,8 +103,8 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     ArchwizardModule,
     UcviewgenericModule,
     UcaddressModule,
-    UcinputnumberModule,
-    UcShowErrorsModule
+    UcShowErrorsModule,
+    UcinputnumberModule
   ],
   declarations: [
     CustomerPagingComponent,
