@@ -3,27 +3,56 @@ import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-product-offering-deact-apv-detail',
   templateUrl: './product-offering-deact-apv-detail.component.html',
+  providers: [NGXToastrService]
 })
 export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit {
 
   prodOfferingHId: any;
   viewProdOfferMainInfoObj: any;
+  taskId: number;
+  instanceId: number;
+  inputObj: any;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdOfferingHId"] != null) {
         this.prodOfferingHId = params["ProdOfferingHId"];
+        this.taskId = params["TaskId"];
+        this.instanceId = params["InstanceId"];
+
+        
       }
     });
    }
 
   ngOnInit() {
     this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
+    var obj = {
+      taskId: this.taskId,
+      instanceId: this.instanceId,
+      approvalBaseUrl: environment.ApprovalURL
+    }
+    console.log("OBEJE")
+    console.log(obj);
+
+    this.inputObj = obj;
+  }
+
+  onAvailableNextTask(event)
+  {
+    
+  }
+
+  onApprovalSubmited(event)
+  {
+    this.toastr.successMessage("Success");
+    this.router.navigate(["/Product/OfferingDeactivateApproval"]);
   }
 
 }
