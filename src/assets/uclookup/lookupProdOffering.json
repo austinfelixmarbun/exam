@@ -4,7 +4,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "ProdCpde",
+            "name": "ProdCode",
             "id": "ProdCodeId",
             "value": "",
             "label": "Product Code",
@@ -20,8 +20,8 @@
         }
     ],
     "querystring": {
-        "select": " SELECT PROD_CODE AS ProdCode,PROD_NAME AS ProdName, PROD_H_ID AS ProdHId",
-        "from": "FROM PROD A WITH(NOLOCK) JOIN PROD_H B WITH(NOLOCK) ON A.PROD_ID =B.PROD_ID"
+        "select": "SELECT PROD_CODE AS ProdCode,PROD_NAME AS ProdName, CURRENT_PROD_H_ID AS CurrentProdHId",
+        "from": "FROM PROD A WITH(NOLOCK)"
     },
         "headerList": [
         {
