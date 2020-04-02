@@ -36,6 +36,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   GetListActiveRefMasterWithReserveFieldAllUrl : string;
   tempCustCompanyMgmntShrholderObj : any;
   inputLookupCustPersonalObj : any;
+  tempShareholderCustNo : any;
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.required,Validators.maxLength(100)]],
     MrCustModelCode: [''],
@@ -140,17 +141,30 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             IdNo : this.tempCustCompanyMgmntShrholderObj.IdNo,
             IdExpiredDt: datePipe.transform(this.tempCustCompanyMgmntShrholderObj.IdExpiredDt, 'yyyy-MM-dd'),
             MrGenderCode : this.tempCustCompanyMgmntShrholderObj.MrGenderCode,
-            BirthPlace : this.tempCustCompanyMgmntShrholderObj.BirthPlace,
-            BirthDt : this.tempCustCompanyMgmntShrholderObj.BirthDt,
+            BirthPlace : this.tempCustCompanyMgmntShrholderObj.BirthPlace,   
+            BirthDt: datePipe.transform(this.tempCustCompanyMgmntShrholderObj.BirthDt, 'yyyy-MM-dd'),
             MrJobPositionCode : this.tempCustCompanyMgmntShrholderObj.MrJobPositionCode,
             MrCompanyTypeCode: this.tempCustCompanyMgmntShrholderObj.MrCompanyTypeCode ,
             TaxIdNo:  this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner
           });
+          if(this.tempCustCompanyMgmntShrholderObj.ShareholderCustNo!=null){ 
+            this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
+            this.ManagementShareholderForm.controls.MrCustModelCode.disable();
+            this.ManagementShareholderForm.controls.MrIdTypeCode.disable();
+            this.ManagementShareholderForm.controls.IdExpiredDt.disable();
+            this.ManagementShareholderForm.controls.IdNo.disable();
+            this.ManagementShareholderForm.controls.BirthPlace.disable();
+            this.ManagementShareholderForm.controls.BirthDt.disable();
+            this.ManagementShareholderForm.controls.MrGenderCode.disable();
+            this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
+          }
         }
       );
-    }
+      
+    } 
+  
 
   }
   SaveValue(){ 
@@ -181,6 +195,10 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         }
       );
     }else{
+
+      if(this.tempShareholderCustNo!=null){
+        this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
+      }
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;
       this.custCompanyMgmntShrholderObj.MrIdTypeCode = this.ManagementShareholderForm.controls["MrIdTypeCode"].value;
@@ -222,18 +240,22 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   
 
   getLookUpCustomer(event) {
+    
+    var datePipe = new DatePipe("en-US");
     this.ManagementShareholderForm.patchValue({
       MgmntShrholderName: event.CustName,
       MrCustModelCode: event.MrCustModelCode,
       MrIdTypeCode : event.MrIdTypeCode,
-      IdNo: event.IdNo,
-      IdExpiredDt: event.IdExpiredDt,
+      IdNo: event.IdNo, 
+      IdExpiredDt: datePipe.transform(event.IdExpiredDt, 'yyyy-MM-dd'),
+      BirthDt: datePipe.transform(event.BirthDt, 'yyyy-MM-dd'),
       MrGenderCode : event.MrGenderCode,
-      BirthPlace: event.BirthPlace,
-      BirthDt: event.BirthDt,
+      BirthPlace: event.BirthPlace, 
       TaxIdNo : event.TaxIdNo,
-    });
- 
+    }); 
+    this.tempShareholderCustNo = event.CustNo;
+    
+    console.log(this.tempShareholderCustNo);
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
     this.ManagementShareholderForm.controls.MrCustModelCode.disable();
     this.ManagementShareholderForm.controls.MrIdTypeCode.disable();
