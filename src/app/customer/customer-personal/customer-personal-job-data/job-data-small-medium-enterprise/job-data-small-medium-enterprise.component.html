@@ -14,7 +14,7 @@
           <div class="form-group row">
               <label class="col-md-3 adInsLabel adins-required-label" translate>Job Position </label>
               <div class="col-md-4">
-                <select class="form-control adInsInput" formControlName="JobPosition">
+                <select class="form-control adInsInput" formControlName="JobPosition" required>
                   <option *ngFor="let ram of listJobPosition" [value]="ram.Key">
                     {{ram.Value}}
                   </option>
@@ -49,7 +49,7 @@
           <div class="form-group row">
               <label class="col-md-3 adInsLabel adins-required" translate>Company Scale </label>
               <div class="col-md-4">
-                <select class="form-control adInsInput" formControlName="CompanyScale">
+                <select class="form-control adInsInput" formControlName="CompanyScale" required>
                   <option *ngFor="let ram of listCompanyScale" [value]="ram.Key">
                     {{ram.Value}}
                   </option>
