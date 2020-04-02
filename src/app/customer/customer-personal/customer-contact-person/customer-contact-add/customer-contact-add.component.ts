@@ -129,7 +129,7 @@ export class CustomerContactAddComponent implements OnInit {
         this.criteriaObj.value = this.Country.GsValue;
         this.criteriaList.push(this.criteriaObj);
         this.lookUpObj.addCritInput = this.criteriaList;
-        console.log(this.Country.GsValue);
+      
         var countryCode = {
           CountryCode: this.Country.GsValue
         };
