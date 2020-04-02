@@ -59,9 +59,9 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
                     (click)="checkState()" />
                 </div>         
-                <label class="col-md-2 adInsLabel" translate>VIP Notes</label>
+                <label class="col-md-2 adInsLabel " [ngClass]="{'adins-required-label' : VipNotesRequired==true}" translate>VIP Notes</label>
                 <div class="col-md-4">
-                    <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"  
+                    <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"   
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.VipNotes.invalid }"></textarea>
 
                     <show-errors [control]="CustomerCompanyForm.controls.VipNotes" [submit]="enjiForm.submitted">

@@ -96,7 +96,7 @@
                 </div>
                 <label class="col-md-2 adins-required-label" translate>Mother Maiden Name</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="MotherMaidenName"
+                  <input type="text" class="form-control adInsInput " formControlName="MotherMaidenName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.MotherMaidenName.invalid}">
                   <show-errors [control]="CustomerPersonalForm.controls.MotherMaidenName" [submit]="enjiForm.submitted">
                   </show-errors>
@@ -108,13 +108,13 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
                 </div>
               </div>
-              <div class="form-group row adins-required">
+              <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>VIP</label>
                 <div class="col-md-4">
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
                     (click)="checkState()" />
                 </div>
-                <label class="col-md-2 adInsLabel" translate>VIP Notes</label>
+                <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : VipNotesRequired==true}"translate>VIP Notes</label>
                 <div class="col-md-4">
                   <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes" required
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.VipNotes.invalid }"></textarea>
