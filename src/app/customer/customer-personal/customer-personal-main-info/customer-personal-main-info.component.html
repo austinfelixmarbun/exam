@@ -61,7 +61,8 @@
                 </div>
                 <label class="col-md-2 adins-required-label" translate>Birth Date</label>
                 <div class="col-md-4">
-                  <input type="date" class="form-control adInsInput" formControlName="BirthDt"
+                  <input type="date" class="form-control adInsInput" formControlName="BirthDt" 
+                  [max]="businessDtMin | date: 'yyyy-MM-dd'"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthDt.invalid}">
                   <show-errors [control]="CustomerPersonalForm.controls.BirthDt" [submit]="enjiForm.submitted">
                   </show-errors>
@@ -86,7 +87,8 @@
               <div class="form-group row">
                 <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : tempKTPCheck==false}" translate>ID Expired Date</label>
                 <div class="col-md-4">
-                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
+                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt" 
+                  [min]="businessDtMax | date: 'yyyy-MM-dd'"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdExpiredDt.invalid } " >
                   <show-errors [control]="CustomerPersonalForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
                   </show-errors>

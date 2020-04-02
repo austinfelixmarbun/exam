@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -28,7 +29,7 @@ state: any;
     IsAffiliateWithMf: [true],
     VipNotes : ['']
   });
-  KTP = "KTP";
+  KTP =  RefMasterConstant.EKtp;   
   getListActiveRefMasterUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl :string; 
   custPersonalObj: CustPersonalObj;
@@ -49,12 +50,25 @@ state: any;
   IsVip :any;
   IsAffiliateWithMf : any;
   VipNotes: any;
+  businessDtMin : any;
+  businessDtMax : any;
+
+
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
   this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;  
   this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
+      
+  var context = JSON.parse(localStorage.getItem("UserAccess"));
+  this.businessDtMin = new Date(context["BusinessDt"]);
+  this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+  this.businessDtMax = new Date(context["BusinessDt"]);
+  this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+
+  
     var refMasterObj = {
       RefMasterTypeCode: "GENDER",
       RowVersion: ""

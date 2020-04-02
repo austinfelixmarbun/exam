@@ -50,7 +50,7 @@ export class CustomerContactAddComponent implements OnInit {
     ContactPersonCustNo: [''],
   });
   flag: any;
-  KTP = "KTP"; 
+  KTP = RefMasterConstant.EKtp; 
   tempKTPCheck: any;
   GetListActiveRefMasterUrl: any;
   tempIdType: any;
@@ -84,7 +84,8 @@ export class CustomerContactAddComponent implements OnInit {
   tempProfessionCodeObj;
   GetGeneralSettingByCodeUrl : string;
   Country : any;
-
+  businessDtMin : any;
+  businessDtMax : any;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
     this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addCustPersonalContactPersonUrl = AdInsConstant.AddNewCustPersonalContactPerson;
@@ -98,6 +99,12 @@ export class CustomerContactAddComponent implements OnInit {
   }
   isAdd: any;
   ngOnInit() { 
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDtMin = new Date(context["BusinessDt"]);
+    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+
     this.UcAddressObj = new UcAddressObj();
     this.lookUpObj = new InputLookupObj();
     this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
@@ -119,11 +126,7 @@ export class CustomerContactAddComponent implements OnInit {
         this.criteriaObj.value = this.Country.GsValue;
         this.criteriaList.push(this.criteriaObj);
         this.lookUpObj.addCritInput = this.criteriaList;
-      });
-
-
-
-
+      }); 
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = false;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -283,8 +286,7 @@ export class CustomerContactAddComponent implements OnInit {
   
           } else {
             this.flag = true;
-          }
-          
+          } 
           this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustPersonalContactPerson.Zipcode;
           this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustPersonalContactPerson.Zipcode };
           this.UcAddressObj.AreaCode1 = this.tempCustPersonalContactPerson.AreaCode1;
@@ -297,13 +299,8 @@ export class CustomerContactAddComponent implements OnInit {
     }
   }
   SaveValue() {
-
-    console.log("awdawdawd");
-    this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
-    // if(this.custPersonalContactPersonId !=null){
-    //   this.custPersonalContactPersonObj= this.tempCustPersonalContactPerson;
-    // }
-
+ 
+    this.custPersonalContactPersonObj = new CustPersonalContactPersonObj(); 
     this.custPersonalContactPersonObj.CustId = this.IdCust;
     this.custPersonalContactPersonObj.ContactPersonName = this.CustomerContactForm.controls["ContactPersonName"].value;
     this.custPersonalContactPersonObj.MotherMaidenName = this.CustomerContactForm.controls["MotherMaidenName"].value;

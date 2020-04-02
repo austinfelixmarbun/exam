@@ -7,6 +7,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { DatePipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -30,7 +31,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     IsAffiliateWithMf: [true],
     VipNotes: ['']
   });
-  KTP = "KTP"
+  KTP = RefMasterConstant.EKtp;
   getListActiveRefMasterUrl: string;
   tempKTPCheck: any;
   tempGender: any;
@@ -47,6 +48,8 @@ export class EditMainDataPersonalComponent implements OnInit {
   custObj: any;
   custPersonalObj: any;
   From:any;
+  businessDtMin : any;
+  businessDtMax: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = AdInsConstant.GetCustPersonalbyCustId;
@@ -65,6 +68,12 @@ export class EditMainDataPersonalComponent implements OnInit {
   }
 
   ngOnInit() {
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDtMin = new Date(context["BusinessDt"]);
+    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+  
     var refMasterObjGender = {
       RefMasterTypeCode: "GENDER",
       RowVersion: ""

@@ -9,6 +9,7 @@ import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntS
 import { DatePipe } from '@angular/common';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-personal',
@@ -29,7 +30,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   custCompanyMgmntShrholderObj : any;
   addManagementShareholderUrl : any;
   tempKTPCheck: any;
-  KTP = "KTP";
+  KTP = RefMasterConstant.EKtp;
   getCustCompanyMgmntShrholderUrl : string;
   editManagementShareholderUrl : string;
   GetListActiveRefMasterWithReserveFieldAllUrl : string;
