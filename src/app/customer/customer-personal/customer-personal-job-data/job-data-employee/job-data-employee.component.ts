@@ -181,9 +181,9 @@ export class JobDataEmployeeComponent implements OnInit {
       (response: any) => {
           this.returnCustJobDataObj = response;
           console.log("aaa")
-          console.log(this.returnRefProfessionObj)
+          console.log(this.returnCustJobDataObj)
 
-          if(this.returnCustJobDataObj != undefined) {
+          if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
             this.JobDataEmpForm.patchValue({ 
               JobPosition: this.returnCustJobDataObj.MrJobPositionCode,
               JobTitleName: this.returnCustJobDataObj.JobTitleName,

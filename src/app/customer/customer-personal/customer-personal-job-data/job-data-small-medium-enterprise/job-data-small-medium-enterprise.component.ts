@@ -174,7 +174,7 @@ export class JobDataSmeComponent implements OnInit {
           console.log("ddd")
           console.log(this.returnCustJobDataObj)
 
-          if(this.returnCustJobDataObj != undefined) {
+          if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
             this.JobDataSmeForm.patchValue({ 
               JobPosition: this.returnCustJobDataObj.MrJobPositionCode,
               JobTitleName: this.returnCustJobDataObj.JobTitleName,
