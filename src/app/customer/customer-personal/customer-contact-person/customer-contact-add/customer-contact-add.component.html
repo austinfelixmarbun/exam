@@ -74,9 +74,9 @@
                   <label class="col-md-2 adInsLabel" translate>Country</label>
                   <div class="col-md-4">
                     <div *ngIf="flag">
-                      {{this.Country.GsValue}}
+                      {{this.LocalCountry?.CountryName}}
                     </div>
-                    <div [hidden]="flag">
+                    <div [hidden]="flag" *ngIf="lookUpObj != undefined">
                       <lib-uclookupgeneric [lookupInput]="lookUpObj" [parentForm]="CustomerContactForm"
                         [enjiForm]="enjiForm" [identifier]="'NationalityCountryCode'" (lookup)=getLookUpCountry($event)>
                       </lib-uclookupgeneric>
@@ -229,7 +229,7 @@
                     </show-errors>
                   </div>
                 </div> 
-              </div>
+              </div>  
    
               <div id="ContactPersonAddressId">
                 <lib-ucaddress [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"

@@ -17,7 +17,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     TaxIdNo: ['', [Validators.required]],
     IsVip : [true],
     IsAffiliateWithMf: [true],
-    VipNotes : ['']
+    VipNotes : ['', [Validators.required]]
   });
   GetListActiveRefMasterUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl : string;
@@ -31,13 +31,14 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   IsVip: any;
   VipNotes : string;
   IsAffiliateWithMf: any;
-
+  VipNotesRequired : any; 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
+    this.VipNotesRequired = true;
     var refMasterObjCustModel = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "COMPANY",
@@ -72,16 +73,25 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
     this.IsVip =  this.CustomerCompanyForm.controls["IsVip"].value;
     this.IsAffiliateWithMf =  this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value;
-    this.VipNotes =  this.CustomerCompanyForm.controls["VipNotes"].value;
-    
+
+    if(this.IsVip==true){
+      this.VipNotes =  this.CustomerCompanyForm.controls["VipNotes"].value;
+    } 
     this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, "IsAffiliateWithMf":this.IsAffiliateWithMf,"IsVip": this.IsVip,"VipNotes": this.VipNotes} });
   }
    
-  checkState(){
-    if(this.CustomerCompanyForm.controls.IsVip.value === true){
+  checkState() {
+    if (this.CustomerCompanyForm.controls.IsVip.value === true) {
       this.CustomerCompanyForm.controls.VipNotes.disable();
-    }else{
+      this.VipNotesRequired = false;
+      this.CustomerCompanyForm.controls.IdExpiredDt.clearValidators();
+      
+    } else {
       this.CustomerCompanyForm.controls.VipNotes.enable();
+      this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
+      this.VipNotesRequired = true;
+       
     }
+    this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
   }
 }
