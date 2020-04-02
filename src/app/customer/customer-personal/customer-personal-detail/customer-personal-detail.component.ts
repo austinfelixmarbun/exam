@@ -65,6 +65,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   Page: String;
   GetGeneralSettingByCodeUrl: string;
   Country: any;
+  LocalCountry : any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
 
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
@@ -85,18 +86,19 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.lookUpObj = new InputLookupObj();
-    this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
-    this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
-    this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
-    this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
+
     var generalSettingObjDefLocalNationality = {
       GsCode: "DEF_LOCAL_NATIONALITY"
     }
     this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
       (response) => {
         this.Country = response;
+        this.lookUpObj = new InputLookupObj();
+        this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
+        this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+        this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
+        this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
+        this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
         this.criteriaList = new Array();
         this.criteriaObj = new CriteriaObj();
         this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
@@ -104,6 +106,17 @@ export class CustomerPersonalDetailComponent implements OnInit {
         this.criteriaObj.value = this.Country.GsValue;
         this.criteriaList.push(this.criteriaObj);
         this.lookUpObj.addCritInput = this.criteriaList;
+
+
+        var countryCode = {
+          CountryCode: this.Country.GsValue
+        };
+        this.http.post(AdInsConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+          (response) => {
+            this.LocalCountry = response;
+            console.log(this.LocalCountry.CountryName);
+          });
+
       });
 
 

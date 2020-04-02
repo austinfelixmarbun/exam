@@ -115,9 +115,13 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   }
   checkState() {
     if (this.CustomerPersonalForm.controls.IsVip.value === true) {
+      this.CustomerPersonalForm.patchValue({
+        VipNotes: null
+      });
       this.CustomerPersonalForm.controls.VipNotes.disable();
       this.VipNotesRequired = false;
       this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
+  
     } else {
       this.CustomerPersonalForm.controls.VipNotes.enable();
       this.CustomerPersonalForm.controls.VipNotes.setValidators(Validators.required);

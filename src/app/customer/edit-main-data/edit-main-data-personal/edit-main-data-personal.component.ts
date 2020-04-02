@@ -24,7 +24,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.required]],
+    TaxIdNo: ['' ],
     IdExpiredDt: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel: ['', [Validators.required]],
@@ -229,10 +229,13 @@ export class EditMainDataPersonalComponent implements OnInit {
 }
 checkState() {
   if (this.CustomerPersonalForm.controls.IsVip.value === true) {
+    this.CustomerPersonalForm.patchValue({
+      VipNotes: null
+    });
     this.CustomerPersonalForm.controls.VipNotes.disable();
     this.VipNotesRequired = false;
     this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
-    console.log(this.VipNotesRequired);
+     
   } else {
     this.CustomerPersonalForm.controls.VipNotes.enable();
     this.CustomerPersonalForm.controls.VipNotes.setValidators(Validators.required);

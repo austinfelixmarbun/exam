@@ -49,7 +49,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.required]],
+    TaxIdNo: [''],
     IsVip : [true],
     IsAffiliateWithMf: [true],
     VipNotes : ['']
@@ -167,10 +167,13 @@ export class EditMainDataCompanyComponent implements OnInit {
   }
   checkState() {
     if (this.CustomerCompanyForm.controls.IsVip.value === true) {
+      this.CustomerCompanyForm.patchValue({
+        VipNotes: null
+      });
       this.CustomerCompanyForm.controls.VipNotes.disable();
       this.VipNotesRequired = false;
       this.CustomerCompanyForm.controls.IdExpiredDt.clearValidators();
-      
+     
     } else {
       this.CustomerCompanyForm.controls.VipNotes.enable();
       this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
