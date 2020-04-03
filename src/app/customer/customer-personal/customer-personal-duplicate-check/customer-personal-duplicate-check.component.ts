@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -144,7 +145,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.addCustObj.custObj = new CustObj();
     this.addCustObj.CustPersonalObj = new CustPersonalObj();
     this.addCustObj.custObj.CustName = this.CustName;
-    this.addCustObj.custObj.MrCustTypeCode = "PERSONAL";
+    this.addCustObj.custObj.MrCustTypeCode = RefMasterConstant.Personal;
     this.addCustObj.custObj.MrCustModelCode = this.CustModel;
     this.addCustObj.custObj.MrIdTypeCode = this.MrIdTypeCode;
     this.addCustObj.custObj.IdNo = this.IdNo;

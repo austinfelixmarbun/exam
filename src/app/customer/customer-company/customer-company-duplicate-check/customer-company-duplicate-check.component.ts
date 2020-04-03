@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-company-duplicate-check',
@@ -98,7 +99,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     this.addCustObj.CustCompanyObj = new CustCompanyObj();
     this.addCustObj.custObj.CustName = this.CustName;
     this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-    this.addCustObj.custObj.MrCustTypeCode = "COMPANY";
+    this.addCustObj.custObj.MrCustTypeCode =  RefMasterConstant.Company;
     this.addCustObj.custObj.MrCustModelCode = this.CustModel;
     this.addCustObj.custObj.MrIdTypeCode = "NPWP";
     this.addCustObj.custObj.IdNo = this.TaxIdNo;
