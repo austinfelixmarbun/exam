@@ -30,6 +30,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   tempCustCompanyMgmntShrholderObj : any;
   editManagementShareholderUrl : string;
   inputLookupCustCompanyObj : any;
+  tempShareholderCustNo : any;
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.maxLength(100) ,Validators.required]],
     MrCustModelCode: [''],
@@ -97,10 +98,15 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner
           });
+          if(this.tempCustCompanyMgmntShrholderObj.ShareholderCustNo!=null){ 
+            this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
+            this.ManagementShareholderForm.controls.MrCustModelCode.disable();  
+            this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable(); 
+            this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
+          }
         }
       );
-    }
-
+    } 
   }
 
   SaveValue() { 
@@ -125,6 +131,9 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         }
       );
     }else{
+      if(this.tempShareholderCustNo!=null){
+        this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
+      }
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;   
       this.custCompanyMgmntShrholderObj.MrCompanyTypeCode = this.ManagementShareholderForm.controls["MrCompanyTypeCode"].value;  
@@ -156,6 +165,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       TaxIdNo : event.TaxIdNo,
     });
  
+    this.tempShareholderCustNo = event.CustNo;
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
     this.ManagementShareholderForm.controls.MrCustModelCode.disable();  
     this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable(); 
