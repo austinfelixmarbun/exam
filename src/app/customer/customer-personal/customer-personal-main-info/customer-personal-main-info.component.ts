@@ -93,10 +93,11 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         });
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
-          this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);  
-          this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
+        
         } else {
           this.tempKTPCheck = false;
+          this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);  
+          this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
         }
       }
     );

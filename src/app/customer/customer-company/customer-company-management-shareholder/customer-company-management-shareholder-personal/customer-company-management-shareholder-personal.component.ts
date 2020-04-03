@@ -93,11 +93,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
           MrIdTypeCode: this.tempIdType[0].Key
         });
         if (this.tempIdType[0].Key == this.KTP) {
-          this.tempKTPCheck = true;
-          this.ManagementShareholderForm.controls.IdExpiredDt.setValidators(Validators.required);  
-          this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
+          this.tempKTPCheck = true; 
         } else {
           this.tempKTPCheck = false;
+          this.ManagementShareholderForm.controls.IdExpiredDt.setValidators(Validators.required);  
+          this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
         }
       }
     );
