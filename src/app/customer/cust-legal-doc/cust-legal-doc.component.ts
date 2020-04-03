@@ -69,17 +69,20 @@ export class CustLegalDocComponent implements OnInit {
   }
 
   deleteCustLegalDoc(custCompanyLegalDocId, idx) {
-    var custCompanyLegalDoc = new CustCompanyLegalDocObj();
-    custCompanyLegalDoc.CustCompanyLegalDocId = custCompanyLegalDocId;
-    this.httpClient.post(AdInsConstant.DeleteCustCompanyLegalDoc, custCompanyLegalDoc).subscribe(
-      (response: any) => {
-        this.custLegalDocs.splice(idx, 1);
-        this.toastr.successMessage(response["message"]);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    var confirmation = confirm("Are you sure to delete this data ?");
+    if(confirmation == true){
+      var custCompanyLegalDoc = new CustCompanyLegalDocObj();
+      custCompanyLegalDoc.CustCompanyLegalDocId = custCompanyLegalDocId;
+      this.httpClient.post(AdInsConstant.DeleteCustCompanyLegalDoc, custCompanyLegalDoc).subscribe(
+        (response: any) => {
+          this.custLegalDocs.splice(idx, 1);
+          this.toastr.successMessage(response["message"]);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
   next() {
     this.router.navigate(['/Customer/Paging']);
