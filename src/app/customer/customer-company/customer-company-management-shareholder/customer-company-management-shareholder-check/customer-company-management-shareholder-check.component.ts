@@ -6,6 +6,7 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { WizardComponent } from 'angular-archwizard';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-check',
@@ -69,9 +70,9 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   
   }
   editItem(custCompanyMgmntShrholderObj: any) {
-    if (custCompanyMgmntShrholderObj.MrCustTypeCode == "Personal") {
+    if (custCompanyMgmntShrholderObj.MrCustTypeCode == RefMasterConstant.Personal) {
       this.outputValue.emit({ mode: 'addPersonal', CustCompanyMgmntShrholderId: custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId });
-    } else if (custCompanyMgmntShrholderObj.MrCustTypeCode == "Company") {
+    } else if (custCompanyMgmntShrholderObj.MrCustTypeCode == RefMasterConstant.Company) {
       this.outputValue.emit({ mode: 'addCompany', CustCompanyMgmntShrholderId: custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId });
     }
   }
