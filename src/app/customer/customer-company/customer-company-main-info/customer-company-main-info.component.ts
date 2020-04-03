@@ -94,8 +94,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     } else {
       this.CustomerCompanyForm.controls.VipNotes.enable();
       this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
-      this.VipNotesRequired = true;
-
+      this.VipNotesRequired = true; 
     }
     this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
   }
