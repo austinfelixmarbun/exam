@@ -42,7 +42,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     MrCustModelCode: [''],
     MrIdTypeCode: ['',[Validators.required]],
     IdNo: ['',Validators.pattern("^[0-9]+$")],
-    IdExpiredDt: ['',[Validators.required]],
+    IdExpiredDt: [''],
     MrGenderCode: [''],
     BirthPlace: [''],
     BirthDt: [''],
@@ -94,6 +94,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         });
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
+          this.ManagementShareholderForm.controls.IdExpiredDt.setValidators(Validators.required);  
+          this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
         } else {
           this.tempKTPCheck = false;
         }
