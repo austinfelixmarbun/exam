@@ -31,7 +31,7 @@ export class CustomerContactAddComponent implements OnInit {
     ContactPersonName: ['', [Validators.maxLength(100), Validators.required]],
     MotherMaidenName: ['', [Validators.maxLength(100)]],
     MrIdTypeCode: [''],
-    IdExpiredDt: ['', Validators.required],
+    IdExpiredDt: [''],
     IdNo: [''],
     BirthPlace: [''],
     BirthDt: [''],
@@ -173,6 +173,8 @@ export class CustomerContactAddComponent implements OnInit {
           this.tempKTPCheck = true;
         } else {
           this.tempKTPCheck = false;
+          this.CustomerContactForm.controls.IdExpiredDt.setValidators(Validators.required);
+          this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
         }
       }
     );
