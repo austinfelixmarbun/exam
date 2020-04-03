@@ -186,7 +186,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.MrJobPositionCode = this.ManagementShareholderForm.controls["MrJobPositionCode"].value;
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
-      this.custCompanyMgmntShrholderObj.MrCustTypeCode = "Personal";
+      this.custCompanyMgmntShrholderObj.MrCustTypeCode = "PERSONAL";
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);

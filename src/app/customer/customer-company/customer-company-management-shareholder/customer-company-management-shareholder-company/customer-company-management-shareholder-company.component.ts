@@ -120,7 +120,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value; 
-      this.custCompanyMgmntShrholderObj.MrCustTypeCode = "Company";
+      this.custCompanyMgmntShrholderObj.MrCustTypeCode = "COMPANY";
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
