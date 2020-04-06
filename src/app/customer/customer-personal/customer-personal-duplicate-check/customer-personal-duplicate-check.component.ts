@@ -104,6 +104,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.DuplicateCustObj.CustName = this.CustName;
     this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Personal;
     this.DuplicateCustObj.IdNo = this.IdNo;
+    this.DuplicateCustObj.TaxIdNo = this.TaxIdNo;
+    this.DuplicateCustObj.MotherMaidenName = this.MotherMaidenName;
+    this.DuplicateCustObj.BirthDt = this.BirthDt;
     console.log(this.DuplicateCustObj);
     this.http.post(AdInsConstant.GetCustomerAndNegativeCustDuplicateCheck, this.DuplicateCustObj).subscribe(
       (response) => {
