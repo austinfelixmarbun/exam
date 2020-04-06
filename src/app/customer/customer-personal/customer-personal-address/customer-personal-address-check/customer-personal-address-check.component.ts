@@ -38,10 +38,13 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   listCustAddr: any;
   getCustById: any;
   getListCustAddr: any;
+  deleteCustAddr:any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListCustAddr = AdInsConstant.GetListCustAddr;
+    this.deleteCustAddr = AdInsConstant.DeleteCustAddr;
+
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
          this.IdCust = params["IdCust"];
@@ -66,9 +69,25 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
             this.listCustAddr = response["ReturnObject"];
         });
   }
+
   editItem(custAddrObj: any) {
     this.outputValue.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId });
   }
+
+  // deleteItem(custAddrObj: any) {
+  //   var custAddr = new CustAddrObj();
+  //   custAddr.CustAddrId = custAddrObj.CustAddrId;
+  //   this.http.post(this.deleteCustAddr, custAddr).subscribe(
+  //     (response: any) => {
+  //       this.toastr.successMessage(response["message"]);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  //   //this.outputValue.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId });
+  // }
+
   addAddr() {
     this.outputValue.emit({ mode: 'add' });
     

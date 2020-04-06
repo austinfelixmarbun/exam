@@ -184,9 +184,12 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   }
 
   removeCustBankStmnt(i) {
-    var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
-    formArray.removeAt(i);
-    this.rowCustBankStmnt--;
+    var confirmation = confirm("Are you sure to delete this data ?");
+    if(confirmation == true){
+      var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+      formArray.removeAt(i);
+      this.rowCustBankStmnt--;
+    }
   }
 
   getLookupRefBankResponse(e) {

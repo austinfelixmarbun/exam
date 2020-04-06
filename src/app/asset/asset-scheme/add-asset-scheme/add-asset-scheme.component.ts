@@ -33,7 +33,6 @@ export class AddAssetSchemeComponent implements OnInit {
   inputObj: any;
   pageType: any = 'add';
   AssetSchmCode: any;
-  AssetTypeName: any;
   AssetSchmName: any;
   IsActive: any;
   assetSchmHObj: any;
@@ -42,22 +41,16 @@ export class AddAssetSchemeComponent implements OnInit {
   arrAssetSchmD: any = new Array();
   responseResultData: any;
   listSelectedId: Array<any> = [];
-  listDeletedId: Array<any> = [];
   tempListId: Array<any> = [];
   tempData: Array<any> = [];
   arrAddCrit = new Array<CriteriaObj>();
   arrCrit: any;
   checkboxAll: any = false;
   getAssetSchmHByIdUrl = AdInsConstant.GetAssetSchmHById;
-  getAssetTypeByIdUrl = AdInsConstant.GetAssetTypeById;
   addListAssetSchmDUrl = AdInsConstant.AddRangeAssetSchmD;
 
   AssetSchmHId: any;
-  getListAssetMasterByAssetSchmHId = AdInsConstant.GetListAssetMasterByAssetSchmHId;
   getListAssetSchmDByAssetSchmHId = AdInsConstant.GetListAssetSchmDByAssetSchmHId;
-  tempArrInAssetMaster: Array<any> = [];
-  tempArrNotInAssetMaster: Array<any> = [];
-  assetMasterIdList = new Array();
   viewObj: string;
   constructor(
     private http: HttpClient,
@@ -244,7 +237,6 @@ export class AddAssetSchemeComponent implements OnInit {
       }
     );
   }
-
 
   addToTemp() {
     if (this.listSelectedId.length !== 0) {

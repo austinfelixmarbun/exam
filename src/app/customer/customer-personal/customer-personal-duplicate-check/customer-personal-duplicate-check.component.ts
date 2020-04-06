@@ -8,6 +8,7 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -101,7 +102,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   ngOnInit() {
     this.DuplicateCustObj = new DuplicateCustObj();
     this.DuplicateCustObj.CustName = this.CustName;
-    this.DuplicateCustObj.MrCustTypeCode = "PERSONAL";
+    this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Personal;
     this.DuplicateCustObj.IdNo = this.IdNo;
     console.log(this.DuplicateCustObj);
     this.http.post(AdInsConstant.GetCustomerAndNegativeCustDuplicateCheck, this.DuplicateCustObj).subscribe(
@@ -165,7 +166,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.addCustObj.custObj = new CustObj();
     this.addCustObj.CustPersonalObj = new CustPersonalObj();
     this.addCustObj.custObj.CustName = this.CustName;
-    this.addCustObj.custObj.MrCustTypeCode = "PERSONAL";
+    this.addCustObj.custObj.MrCustTypeCode = RefMasterConstant.Personal;
     this.addCustObj.custObj.MrCustModelCode = this.CustModel;
     this.addCustObj.custObj.MrIdTypeCode = this.MrIdTypeCode;
     this.addCustObj.custObj.IdNo = this.IdNo;
@@ -210,7 +211,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.addCustObj.custObj = response['CustObj'];
         this.addCustObj.custPersonalObj = response['CustPersonalObj'];
         this.addCustObj.custObj.CustName = this.CustName;
-        this.addCustObj.custObj.MrCustTypeCode = "PERSONAL";
+        this.addCustObj.custObj.MrCustTypeCode = RefMasterConstant.Personal;
         this.addCustObj.custObj.MrCustModelCode = this.CustModel;
         this.addCustObj.custObj.MrIdTypeCode = this.MrIdTypeCode;
         this.addCustObj.custObj.IdNo = this.IdNo;

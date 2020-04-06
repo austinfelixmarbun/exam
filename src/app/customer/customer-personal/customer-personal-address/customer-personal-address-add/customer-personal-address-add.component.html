@@ -5,10 +5,10 @@
       <lib-ucSubsection [id]="'custAddrId'" [title]="'Customer Address'" [panel]="'customerAddr'">
       </lib-ucSubsection>
       <div id="customerAddr">
-        <div class="form-group row">
-          <label class="col-md-2  adInsLabel adins-required" translate>Address Type Name </label>
+        <div class="form-group row adins-required">
+          <label class="col-md-2  adInsLabel adins-required adins-required-label" translate>Address Type Name </label>
           <div class="col-md-4">
-            <select class="form-control adInsInput" formControlName="MrCustAddrTypeCode">
+            <select class="form-control adInsInput" formControlName="MrCustAddrTypeCode" required>
               <option *ngFor="let ram of listAddressType" [value]="ram.Key">
                 {{ram.Value}}
               </option>
