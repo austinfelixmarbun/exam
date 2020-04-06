@@ -653,6 +653,11 @@ export class AdInsConstant {
   public static GetVerfSchemeDsByVerfSchemeHId = environment.FoundationR3Url + "/VerfSchemeD/GetVerfSchemeDsByVerfSchemeHId";
   public static GetVerfSchemeDById = environment.FoundationR3Url + "/VerfSchemeD/GetVerfSchemeDById";
 
+  // Cust Duplicate Checking
+  public static GetCustomerDuplicateCheck = environment.FoundationR3Url + "/CustDuplicateCheck/GetCustomerDuplicateCheck";
+  public static GetNegativeCustomerDuplicateCheck = environment.FoundationR3Url + "/CustDuplicateCheck/GetNegativeCustomerDuplicateCheck";
+  public static GetCustomerAndNegativeCustDuplicateCheck = environment.FoundationR3Url + "/CustDuplicateCheck/GetCustomerAndNegativeCustDuplicateCheck";
+
   //Customer Personal
   public static AddNewCustPersonal = environment.FoundationR3Url + "/CustPersonal/AddCustPersonal"
   public static EditCustPersonal = environment.FoundationR3Url + "/CustPersonal/EditCustPersonal"
@@ -662,7 +667,10 @@ export class AdInsConstant {
   // Customer
   public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust";
   public static EditCust = environment.FoundationR3Url + "/Cust/EditCust";
+  public static EditDuplicateCust = environment.FoundationR3Url + "/Cust/EditDuplicateCust";
   public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId";
+  public static GetCustPersonalForUpdateByCustNameAndIdNo = environment.FoundationR3Url + "/Cust/GetCustPersonalForUpdateByCustNameAndIdNo";
+  public static GetCustCompanyForUpdateByCustNameAndTaxIdNo = environment.FoundationR3Url + "/Cust/GetCustCompanyForUpdateByCustNameAndTaxIdNo";
   public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
   public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
 
