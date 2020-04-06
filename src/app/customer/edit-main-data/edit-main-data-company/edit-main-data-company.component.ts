@@ -28,6 +28,7 @@ export class EditMainDataCompanyComponent implements OnInit {
   editCustUrl: any;
   editCustCompanyUrl: any;
   From: any;
+  VipNotesRequired : any;
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;
@@ -48,7 +49,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.required]],
+    TaxIdNo: [''],
     IsVip : [true],
     IsAffiliateWithMf: [true],
     VipNotes : ['']
@@ -96,6 +97,14 @@ export class EditMainDataCompanyComponent implements OnInit {
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
           VipNotes :this.tempCustObj.VipNotes
         });
+        if(this.tempCustObj.VipNotes!= null){
+          this.VipNotesRequired = true;
+        }else{
+          this.VipNotesRequired = false;
+        }
+        if(this.tempCustObj.IsVip==false){ 
+        this.CustomerCompanyForm.controls.VipNotes.disable();
+        }
       }
     );
     this.http.post(this.getCustCompanyByCustIdUrl, this.custCompanyObj).subscribe(
@@ -120,10 +129,12 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.MrCustModelCode = this.CustomerCompanyForm.controls["CustModel"].value;
     this.custCompanyObj.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
     this.custObj.IsVip = this.CustomerCompanyForm.controls["IsVip"].value;
-    this.custObj.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value;
-    this.custObj.VipNotes = this.CustomerCompanyForm.controls["VipNotes"].value;
-
-   
+    this.custObj.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value; 
+    if(this.custObj.IsVip==true){
+      this.custObj.VipNotes = this.CustomerCompanyForm.controls["VipNotes"].value;
+    }else{
+      this.custObj.VipNotes = null;
+    }
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
@@ -153,5 +164,22 @@ export class EditMainDataCompanyComponent implements OnInit {
     else if (this.From = "EditMainData") {
       this.router.navigate(["/Customer/EditMainData/Paging"]);
     }
+  }
+  checkState() {
+    if (this.CustomerCompanyForm.controls.IsVip.value === true) {
+      this.CustomerCompanyForm.patchValue({
+        VipNotes: null
+      });
+      this.CustomerCompanyForm.controls.VipNotes.disable();
+      this.VipNotesRequired = false;
+      this.CustomerCompanyForm.controls.IdExpiredDt.clearValidators();
+     
+    } else {
+      this.CustomerCompanyForm.controls.VipNotes.enable();
+      this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
+      this.VipNotesRequired = true;
+       
+    }
+    this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
   }
 }

@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
-  selector: 'app-customer-view-personal-customer-group',
-  templateUrl: './customer-view-personal-customer-group.component.html',
-  styleUrls: ['./customer-view-personal-customer-group.component.scss']
+  selector: 'app-customer-view-customer-group',
+  templateUrl: './customer-view-customer-group.component.html',
+  styleUrls: ['./customer-view-customer-group.component.scss']
 })
-export class CustomerViewPersonalCustomerGroupComponent implements OnInit {
+export class CustomerViewCustomerGroupComponent implements OnInit {
   CustId: any;
   GetListCustGrpForCustViewByCustIdUrl = AdInsConstant.GetListCustGrpForCustViewByCustId;
   responseObj: any;

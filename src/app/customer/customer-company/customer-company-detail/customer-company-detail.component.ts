@@ -120,5 +120,5 @@ export class CustomerCompanyDetailComponent implements OnInit {
       this.router.navigate(["/Customer/Paging"]);
     }
   }
-}
+  }
 

@@ -32,7 +32,7 @@
         <th style="text-align: left;"><span class="thead-header" name='notes' translate>Notes
           </span>
         </th>
-        <th style="text-align: left;"><span class="thead-header" translate>Edit
+        <th style="text-align: left;"><span class="thead-header" translate>Action
           </span>
         </th>
       </tr>
@@ -46,9 +46,16 @@
         <td style="text-align: left;">{{item.PhnArea1}}-{{item.Phn1}}</td>
         <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}</td>
         <td style="text-align: left;">{{item.Notes}}</td>
-        <td style="text-align: left;">
-          <span *ngIf="item.MrCustAddrTypeCode != 'Legal Address'" class="material-icons"
-            (click)="editItem(item)">edit</span>
+        <td style="text-align: center;">
+          <a *ngIf="item.MrCustAddrTypeCode != 'Legal Address'"
+            (click)="editItem(item)">
+            <i class="fa fa-pen"></i>
+          </a>
+          <!-- &nbsp;&nbsp;&nbsp;
+          <a *ngIf="item.MrCustAddrTypeCode != 'Legal Address'"
+            (click)="deleteItem(item)">
+            <i class="fa fa-trash"></i>
+          </a> -->
         </td>
       </tr>
     </tbody>

@@ -1,10 +1,10 @@
 {
-    "title": "Customer",
+    "title": "Edit Main Data Customer",
     "exportExcel": true,
     "component": [
         {
             "type": "textbox",
-            "name": "CUST_NO",
+            "name": "C.CUST_NO",
             "id": "CustNo",
             "value": "",
             "label": "Customer No",
@@ -12,7 +12,7 @@
         },
         {
             "type": "textbox",
-            "name": "CUST_NAME",
+            "name": "C.CUST_NAME",
             "id": "CustName",
             "value": "",
             "label": "Customer Name",
@@ -20,7 +20,7 @@
         },
         {
             "type": "dropdown",
-            "name": "C.MR_CUST_TYPE_CODE", 
+            "name": "C.MR_CUST_TYPE_CODE",
             "id": "CustTypeCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -29,12 +29,12 @@
             "isSelectOne": false,
             "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
             "label": "Type",
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "CUST_TYPE",
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "CUST_TYPE",
             "items": [],
             "itemsUrl": []
-          },
-      {
+        },
+        {
             "type": "textbox",
             "name": "ID_NO",
             "id": "IdNo",
@@ -48,23 +48,25 @@
             "type": "sort",
             "position": "left",
             "label": "Customer No",
-            "name": "CUST_NO"
+            "name": "C.CUST_NO"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Customer Name",
-            "name": "CUST_NAME"
-        },  {
+            "name": "C.CUST_NAME"
+        },
+        {
             "type": "sort",
             "position": "left",
             "label": "Type",
-            "name": "MR_CUST_TYPE_CODE"
-        },  {
+            "name": "C.MR_CUST_TYPE_CODE"
+        },
+        {
             "type": "sort",
             "position": "left",
             "label": "Id No",
-            "name": "ID_NO"
+            "name": "C.ID_NO"
         },
         {
             "type": "label",
@@ -73,14 +75,22 @@
         }
     ],
     "querystring": {
-        "select": "SELECT c.CUST_NO AS CustNo, c.CUST_NAME AS CustName, c.MR_CUST_TYPE_CODE as MrCustTypeCode, c.ID_NO as IdNo, CUST_ID as CustId",
-        "from": "FROM dbo.CUST c WITH(NOLOCK) join dbo.REF_MASTER rm WITH(NOLOCK) on c.MR_CUST_TYPE_CODE = rm.MASTER_CODE AND rm.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
+        "select": "SELECT C.CUST_NO AS CustNo, C.CUST_NAME AS CustName, C.MR_CUST_TYPE_CODE as MrCustTypeCode, C.ID_NO as IdNo, C.CUST_ID as CustId",
+        "from": "FROM dbo.CUST C WITH(NOLOCK) INNER JOIN dbo.REF_MASTER RM WITH(NOLOCK) on C.MR_CUST_TYPE_CODE = RM.MASTER_CODE AND RM.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
     },
     "bodyList": [
         {
-            "type": "text",
+            "type": "link",
             "position": "left",
-            "property": "CustNo"
+            "property": "CustNo",
+            "path": "../CustomerView/Page",
+            "target": "_blank",
+            "param": [
+                {
+                    "type": "CustId",
+                    "property": "CustId"
+                }
+            ]
         },
         {
             "type": "text",

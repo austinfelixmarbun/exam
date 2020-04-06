@@ -61,6 +61,7 @@ export class CustGroupTabComponent implements OnInit {
   }
 
   deleteCustGrp(CustGrpId, i) {
+    if(confirm('Are you sure to delete this record?')){
     var custGrp = new CustGrpObj();
     custGrp.CustGrpId = CustGrpId;
     this.httpClient.post(AdInsConstant.DeleteCustGrp, custGrp).subscribe(
@@ -72,6 +73,8 @@ export class CustGroupTabComponent implements OnInit {
         console.log(error);
       }
     );
+    }
+
   }
   next() {
     this.wizard.goToNextStep();

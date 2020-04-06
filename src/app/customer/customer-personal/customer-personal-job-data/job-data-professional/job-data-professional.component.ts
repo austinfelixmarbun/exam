@@ -127,7 +127,7 @@ export class JobDataProfessionalComponent implements OnInit {
       (response: any) => {
           this.returnCustJobDataObj = response;
 
-          if(this.returnCustJobDataObj != undefined) {
+          if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
             this.JobDataProForm.patchValue({ 
               ProfessionalNo: this.returnCustJobDataObj.ProfessionalNo,
               JobTitleName: this.returnCustJobDataObj.JobTitleName,

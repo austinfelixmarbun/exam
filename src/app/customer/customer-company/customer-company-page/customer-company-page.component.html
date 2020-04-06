@@ -50,7 +50,7 @@
             <app-cust-fin-data-tab *ngIf="isFinancial == true" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"> </app-cust-fin-data-tab>
           </aw-wizard-step>
 
-          <aw-wizard-step [stepTitle]="'Legal Data'"
+          <aw-wizard-step [stepTitle]="'Legal Document'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Legal')">
             <app-cust-legal-doc *ngIf="isLegal == true" [CustCompanyId]="this.CustCompanyId"> </app-cust-legal-doc>
           </aw-wizard-step>

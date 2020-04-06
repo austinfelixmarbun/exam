@@ -5,17 +5,16 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsService } from 'app/shared/services/adIns.service';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
-
+import { CustObj } from 'app/shared/model/CustObj.Model';
 
 @Component({
-  selector: 'app-customer-view-personal-address',
-  templateUrl: './customer-view-personal-address.component.html',
-  styleUrls: ['./customer-view-personal-address.component.scss']
+  selector: 'app-customer-view-address',
+  templateUrl: './customer-view-address.component.html',
+  styleUrls: ['./customer-view-address.component.scss']
 })
-export class CustomerViewPersonalAddressComponent implements OnInit {
+export class CustomerViewAddressComponent implements OnInit {
   GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
   GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
   arrCrit: any;
   inputObj: any;
   CustId: any;
@@ -27,15 +26,16 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     DdlAddress: ['']
   });
   viewCustFinData: string;
-
+  GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+  GetCustByCustIdUrl = AdInsConstant.GetCustByCustId;
+  CustType: any;
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
     private adInsService: AdInsService,
     private fb: FormBuilder
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -52,23 +52,29 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         this.router.navigateByUrl('Error');
       }
     );
+    var custObj = new CustObj();
+    custObj.CustId = this.CustId;
+    this.http.post(this.GetCustByCustIdUrl, custObj).subscribe(
+      response => {
+        this.CustType = response['MrCustTypeCode'];
+        var refMasterObj = new RefMasterObj();
+        refMasterObj.RefMasterTypeCode = "CUST_ADDR_TYPE";
+        refMasterObj.ReserveField1 = this.CustType;
+        this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObj).subscribe(
+          response => {
+            this.ddlItem = response['ReturnObject'];
+            this.CustForm.patchValue({
+              DdlAddress: this.ddlItem[0].Value
+            });
+          }
+        );
+      });
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
         this.responseResultCustAddrHist = response['ReturnObject'];
       },
       error => {
         this.router.navigateByUrl('Error');
-      }
-    );
-
-    var refMasterObj = new RefMasterObj();
-    refMasterObj.RefMasterTypeCode = "ADDR_TYPE";
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
-      response => {
-        this.ddlItem = response['ReturnObject'];
-        this.CustForm.patchValue({
-          DdlAddress: this.ddlItem[0].Value
-        });
       }
     );
   }

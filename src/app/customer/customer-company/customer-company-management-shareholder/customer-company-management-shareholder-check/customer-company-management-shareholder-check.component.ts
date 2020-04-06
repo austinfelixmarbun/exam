@@ -50,19 +50,23 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
 
   deleteItem(CustCompanyMgmntShrholderId: any) {
-    this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-    this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
+    if(confirm('Are you sure to delete this record?')){
+      this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
+      this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
+  
+      console.log(CustCompanyMgmntShrholderId);
+      this.http.post(this.DeleteCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["Message"]);
+          this.getList();
+        },
+        error => {
+          console.log(error);
+        }
+      );
 
-    console.log(CustCompanyMgmntShrholderId);
-    this.http.post(this.DeleteCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
-      response => {
-        this.toastr.successMessage(response["Message"]);
-        this.getList();
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    }
+  
   }
   editItem(custCompanyMgmntShrholderObj: any) {
     if (custCompanyMgmntShrholderObj.MrCustTypeCode == "Personal") {
@@ -87,5 +91,8 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
   next() {
     this.wizard.goToNextStep();
+  }
+  back(){
+    this.wizard.goToPreviousStep();
   }
 }

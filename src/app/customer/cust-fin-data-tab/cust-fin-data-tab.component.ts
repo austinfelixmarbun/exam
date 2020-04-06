@@ -12,6 +12,7 @@ import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -91,6 +92,7 @@ export class CustFinDataTabComponent implements OnInit {
   }
 
   ngOnInit() {
+    var datePipe = new DatePipe("en-US");
     if (this.MrCustTypeCode == "PERSONAL") {
       var custPersonalData;
       var custPersonal = new CustPersonalObj();
@@ -153,6 +155,7 @@ export class CustFinDataTabComponent implements OnInit {
         })
       ).subscribe(
         (response: any) => {
+          this.isCalculated = true;
           this.CustCompanyFinDataForm.patchValue({
             CustCompanyFinDataId: response.CustCompanyFinDataId,
             CustCompanyId: custCompanyData.CustCompanyId,
@@ -169,7 +172,7 @@ export class CustFinDataTabComponent implements OnInit {
             GrowthPrcnt: response.GrowthPrcnt,
             WorkingCapitalAmt: response.WorkingCapitalAmt,
             OthMonthlyInstAmt: response.OthMonthlyInstAmt,
-            DateAsOf: response.DateAsOf,
+            DateAsOf: datePipe.transform(response.DateAsOf, 'yyyy-MM-dd'),
             Revenue: response.Revenue,
             OprCost: response.OprCost,
             ProfitBeforeTax: response.ProfitBeforeTax,
@@ -347,7 +350,13 @@ export class CustFinDataTabComponent implements OnInit {
       this.httpClient.post(url, response).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(['/Customer/Paging']);
+          if(this.MrCustTypeCode == "PERSONAL"){
+            this.router.navigate(['/Customer/Paging']);
+          }
+          else if(this.MrCustTypeCode == "COMPANY"){
+            this.wizard.goToNextStep();
+          }
+          
           // this.wizard.goToNextStep();
         },
         (error) => {

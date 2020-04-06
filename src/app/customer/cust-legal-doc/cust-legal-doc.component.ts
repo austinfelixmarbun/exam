@@ -7,6 +7,7 @@ import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
 import { WizardComponent } from 'angular-archwizard';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cust-legal-doc',
@@ -19,6 +20,7 @@ export class CustLegalDocComponent implements OnInit {
   custLegalDocs: any;
 
   constructor(
+    private router: Router,
     private httpClient: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
@@ -67,19 +69,25 @@ export class CustLegalDocComponent implements OnInit {
   }
 
   deleteCustLegalDoc(custCompanyLegalDocId, idx) {
-    var custCompanyLegalDoc = new CustCompanyLegalDocObj();
-    custCompanyLegalDoc.CustCompanyLegalDocId = custCompanyLegalDocId;
-    this.httpClient.post(AdInsConstant.DeleteCustCompanyLegalDoc, custCompanyLegalDoc).subscribe(
-      (response: any) => {
-        this.custLegalDocs.splice(idx, 1);
-        this.toastr.successMessage(response["message"]);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    var confirmation = confirm("Are you sure to delete this data ?");
+    if(confirmation == true){
+      var custCompanyLegalDoc = new CustCompanyLegalDocObj();
+      custCompanyLegalDoc.CustCompanyLegalDocId = custCompanyLegalDocId;
+      this.httpClient.post(AdInsConstant.DeleteCustCompanyLegalDoc, custCompanyLegalDoc).subscribe(
+        (response: any) => {
+          this.custLegalDocs.splice(idx, 1);
+          this.toastr.successMessage(response["message"]);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
   next() {
-    this.wizard.goToNextStep();
+    this.router.navigate(['/Customer/Paging']);
+  }
+  back(){
+    this.wizard.goToPreviousStep();
   }
 }

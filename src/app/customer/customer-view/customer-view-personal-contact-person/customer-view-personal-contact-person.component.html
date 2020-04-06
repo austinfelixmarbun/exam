@@ -1,82 +1,97 @@
-<table class="table table-responsive-md text-center table-hover">
-  <thead>
-    <tr class="table-header">
-      <th class="text-center"><span class="thead-header" name='fullAssetCode' translate>Id Type</span> </th>
-      <th class="text-center"><span class="thead-header" name='fullAssetName' translate>Contact Person Name</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Id No</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Birth Place</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Birth Date</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Mother Maiden Name</span>
-      </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Gender</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Religion</span> </th>
-      <th class="text-center"><span class="thead-header" name='fullAssetCode' translate>Education</span> </th>
-      <th class="text-center"><span class="thead-header" name='fullAssetName' translate>Job Profession</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Marital Status</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Nationality</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Nationality Country</span>
-      </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Customer Relationship</span>
-      </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Is Emergency Contact</span>
-      </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Is Family</span> </th>
-      <th class="text-center"><span class="thead-header" name='fullAssetCode' translate>Mobile Phone 1</span> </th>
-      <th class="text-center"><span class="thead-header" name='fullAssetName' translate>Mobile Phone 2</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Email</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Address</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Kecamatan</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Kelurahan</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>RW</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>RT</span> </th>
-      <th class="text-center"><span class="thead-header" name='fullAssetCode' translate>City</span> </th>
-      <th class="text-center"><span class="thead-header" name='fullAssetName' translate>Zip Code</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Sub Zip Code</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Contact Person Cust
-          No</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Id Expired Date</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>NPWP</span> </th>
-      <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>Negative Cust Type</span>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngFor="let item of responseObj">
-      <tr>
-        <td class="text-left">{{item.IdType}}</td>
-        <td class="text-left">{{item.ContactPersonName}}</td>
-        <td class="text-left">{{item.IdNo}}</td>
-        <td class="text-left">{{item.BirthPlace}}</td>
-        <td class="text-left">{{item.BirthDt  | date: 'dd-MMM-yyyy'}}</td>
-        <td class="text-left">{{item.MotherMaidenName}}</td>
-        <td class="text-left">{{item.Gender}}</td>
-        <td class="text-left">{{item.Religion}}</td>
-        <td class="text-left">{{item.Education}}</td>
-        <td class="text-left">{{item.JobProfession}}</td>
-        <td class="text-left">{{item.MaritalStat}}</td>
-        <td class="text-left">{{item.Nationality}}</td>
-        <td class="text-left">{{item.NationalityCountry}}</td>
-        <td class="text-left">{{item.CustRelationship}}</td>
-        <td class="text-left" *ngIf="item.IsEmergencyContact == true">Yes</td>
-        <td class="text-left" *ngIf="item.IsEmergencyContact == false">No</td>
-        <td class="text-left" *ngIf="item.IsFamily == true">Yes</td>
-        <td class="text-left" *ngIf="item.IsFamily == false">No</td>
-        <td class="text-left">{{item.MobilePhnNo1}}</td>
-        <td class="text-left">{{item.MobilePhnNo2}}</td>
-        <td class="text-left">{{item.Email}}</td>
-        <td class="text-left">{{item.Addr}}</td>
-        <td class="text-left">{{item.AreaCode1}}</td>
-        <td class="text-left">{{item.AreaCode2}}</td>
-        <td class="text-left">{{item.AreaCode3}}</td>
-        <td class="text-left">{{item.AreaCode4}}</td>
-        <td class="text-left">{{item.City}}</td>
-        <td class="text-left">{{item.Zipcode}}</td>
-        <td class="text-left">{{item.SubZipcode}}</td>
-        <td class="text-left">{{item.ContactPersonCustNo}}</td>
-        <td class="text-left">{{item.IdExpiredDt | date: 'dd-MMM-yyyy'}}</td>
-        <td class="text-left">{{item.TaxIdNo}}</td>
-        <td class="text-left">{{item.NegCustType}}</td>
-      </tr>
-    </ng-container>
-  </tbody>
-</table>
+<div class="card">
+  <div class="card-body">
+    <div class="px-3 table-responsive">
+      <table class="table table-responsive-md text-center table-hover">
+        <thead>
+          <tr class="table-header">
+            <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Id Type</span> </th>
+            <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Contact Person Name</span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Id No</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Birth Place</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Birth Date</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Mother Maiden
+                Name</span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Gender</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Religion</span> </th>
+            <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Education</span> </th>
+            <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Job Profession</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Marital Status</span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Nationality</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Nationality
+                Country</span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Customer
+                Relationship</span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Is Emergency
+                Contact</span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Is Family</span> </th>
+            <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Mobile Phone 1</span> </th>
+            <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Mobile Phone 2</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Email</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Address</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Kecamatan</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Kelurahan</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>RW</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>RT</span> </th>
+            <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>City</span> </th>
+            <th class="text-left"><span class="thead-header" name='fullAssetName' translate>Zip Code</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Sub Zip Code</span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Contact Person Cust
+                No</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Id Expired Date</span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>NPWP</span> </th>
+            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Negative Cust
+                Type</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of responseObj">
+            <tr>
+              <td class="text-left">{{item.IdType}}</td>
+              <td class="text-left">{{item.ContactPersonName}}</td>
+              <td class="text-left">{{item.IdNo}}</td>
+              <td class="text-left">{{item.BirthPlace}}</td>
+              <td class="text-left">{{item.BirthDt  | date: 'dd-MMM-yyyy'}}</td>
+              <td class="text-left">{{item.MotherMaidenName}}</td>
+              <td class="text-left">{{item.Gender}}</td>
+              <td class="text-left">{{item.Religion}}</td>
+              <td class="text-left">{{item.Education}}</td>
+              <td class="text-left">{{item.JobProfession}}</td>
+              <td class="text-left">{{item.MaritalStat}}</td>
+              <td class="text-left">{{item.Nationality}}</td>
+              <td class="text-left">{{item.NationalityCountry}}</td>
+              <td class="text-left">{{item.CustRelationship}}</td>
+              <td class="text-left" *ngIf="item.IsEmergencyContact == true">Yes</td>
+              <td class="text-left" *ngIf="item.IsEmergencyContact == false">No</td>
+              <td class="text-left" *ngIf="item.IsFamily == true">Yes</td>
+              <td class="text-left" *ngIf="item.IsFamily == false">No</td>
+              <td class="text-left">{{item.MobilePhnNo1}}</td>
+              <td class="text-left">{{item.MobilePhnNo2}}</td>
+              <td class="text-left">{{item.Email}}</td>
+              <td class="text-left">{{item.Addr}}</td>
+              <td class="text-left">{{item.AreaCode1}}</td>
+              <td class="text-left">{{item.AreaCode2}}</td>
+              <td class="text-left">{{item.AreaCode3}}</td>
+              <td class="text-left">{{item.AreaCode4}}</td>
+              <td class="text-left">{{item.City}}</td>
+              <td class="text-left">{{item.Zipcode}}</td>
+              <td class="text-left">{{item.SubZipcode}}</td>
+              <td class="text-left">{{item.ContactPersonCustNo}}</td>
+              <td class="text-left">{{item.IdExpiredDt | date: 'dd-MMM-yyyy'}}</td>
+              <td class="text-left">{{item.TaxIdNo}}</td>
+              <td class="text-left">{{item.NegCustType}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

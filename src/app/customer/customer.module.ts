@@ -29,7 +29,6 @@ import { CustomerContactAddComponent } from './customer-personal/customer-contac
 import { CustomerContactCheckComponent } from './customer-personal/customer-contact-person/customer-contact-check/customer-contact-check.component';
 import { UcaddressModule } from '@adins/ucaddress';
 import { CustomerViewPersonalDetailComponent } from './customer-view/customer-view-personal-detail/customer-view-personal-detail.component';
-import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
 import { CustomerViewPersonalJobDataComponent } from './customer-view/customer-view-personal-job-data/customer-view-personal-job-data.component';
 import { CustGroupTabComponent } from './cust-group-tab/cust-group-tab.component';
 import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-detail/cust-group-tab-detail.component';
@@ -65,7 +64,6 @@ import { CustomerViewCoyCustScoreComponent } from './customer-view/customer-view
 import { CustomerViewCoyCustAddColateralComponent } from './customer-view/customer-view-coy-cust-add-colateral/customer-view-coy-cust-add-colateral.component';
 import { CustomerViewComponent } from './customer-view/customer-view.component';
 import { CustomerViewCoyDetailComponent } from './customer-view/customer-view-coy-detail/customer-view-coy-detail.component';
-import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
 import { CustomerCompanyPageComponent } from './customer-company/customer-company-page/customer-company-page.component';
 import { CustomerCompanyDetailComponent } from './customer-company/customer-company-detail/customer-company-detail.component';
 import { CustomerCompanyContactInformationComponent } from './customer-company/customer-company-contact-information/customer-company-contact-information.component';
@@ -82,6 +80,9 @@ import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-vi
 import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
 import { UcinputnumberModule } from '@adins/ucinputnumber';
 import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/customer-view-personal-financial-section/customer-view-personal-financial-section.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
+import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
  @NgModule({
   exports: [],
   imports: [
@@ -90,7 +91,7 @@ import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/c
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
-    NgbModule,
+    NgbModule, 
     UcpagingModule,
     SharingComponentModule,
     UCSearchModule,
@@ -102,6 +103,7 @@ import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/c
     ArchwizardModule,
     UcviewgenericModule,
     UcaddressModule,
+    UcShowErrorsModule,
     UcinputnumberModule
   ],
   declarations: [
@@ -114,7 +116,6 @@ import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/c
     CustomerContactAddComponent,
     CustomerContactCheckComponent,
     CustomerViewPersonalDetailComponent,
-    CustomerViewPersonalAddressComponent,
     CustomerViewPersonalJobDataComponent,
     CustGroupTabComponent,
     CustGroupTabDetailComponent,
@@ -133,7 +134,6 @@ import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/c
     CustLegalDocComponent,
     CustLegalDocDetailComponent,
     CustomerViewPersonalContactPersonComponent,
-    CustomerViewPersonalCustomerGroupComponent,
     CustomerViewPersonalFinancialDataComponent,
     CustomerViewPersonalJobDataNonProfComponent,
     CustomerViewPersonalJobDataEmpComponent,
@@ -165,7 +165,9 @@ import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/c
     CustomerPersonalAddressCheckComponent, 
     CustomerViewHeaderPersonalComponent, 
     CustomerViewHeaderCompanyComponent,
-    CustomerViewPersonalFinancialSectionComponent
+    CustomerViewPersonalFinancialSectionComponent,
+    CustomerViewCustomerGroupComponent,
+    CustomerViewAddressComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
