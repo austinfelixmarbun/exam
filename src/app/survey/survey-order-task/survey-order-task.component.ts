@@ -28,7 +28,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   closeResult: any;
   SurveyTaskList: any;
   resultData: any;
-  SrvyOrderId: any;
+  SrvyOrderId: number;
   SrvySubjList = [];
   SrvyObjList = [];
   FormSchmList = [];
