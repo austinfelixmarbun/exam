@@ -314,6 +314,7 @@ export class AdInsConstant {
   //NOTIFICATION
   public static NotificationPost = "/Message/Post";
   public static NotificationSignalR = "/notification";
+  public static GetListNotificationHByRefUserId = "http://localhost:5000" + "/NotificationH/GetListNotificationHByRefUserId";
 
   //REF CURR
 
