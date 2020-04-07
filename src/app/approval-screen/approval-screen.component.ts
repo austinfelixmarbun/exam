@@ -20,11 +20,7 @@ export class ApprovalScreenComponent implements OnInit {
     var obj = {
       taskId : 65529,
       instanceId : 60369,
-      approvalBaseUrl : "http://r3app-server/APPROVAL"
-    }
-
-    this.inputObj = obj;
-  }
+      approvalBaseUrl : environment.ApprovalURL
 
   onApprovalSubmited(event)
   {

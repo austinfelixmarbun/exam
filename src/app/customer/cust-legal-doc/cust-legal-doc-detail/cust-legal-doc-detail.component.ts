@@ -14,6 +14,8 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class CustLegalDocDetailComponent implements OnInit {
   @Input() CustCompanyId: number;
   legalDocTypeList: any;
+  businessDtMin: any;
+  businessDtMax: any;
 
   CustCompanyLegalDocForm = this.fb.group({
     CustCompanyLegalDocId: [0, [Validators.required]],
@@ -35,6 +37,13 @@ export class CustLegalDocDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    console.log(context);
+    this.businessDtMin = new Date(context["BusinessDt"]);
+    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+
     var refMasterDocType = new RefMasterObj();
     refMasterDocType.RefMasterTypeCode = "LEGAL_DOC_TYPE";
     this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterDocType).subscribe(

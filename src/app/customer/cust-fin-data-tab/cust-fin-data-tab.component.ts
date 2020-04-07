@@ -7,6 +7,12 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
 import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
 import { WizardComponent } from 'angular-archwizard';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -17,101 +23,116 @@ import { WizardComponent } from 'angular-archwizard';
 export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
   @Input() CustId: number;
-  @Input() CustModeId: number;
-  @Output() CustFinDataResponse: EventEmitter<any> = new EventEmitter();
+  // @Output() CustFinDataResponse: EventEmitter<any> = new EventEmitter();
   sourceOfIncomeList: any;
   isCalculated: boolean;
+  spouseMonthlyIncomeAmt: number;
+  mrMaritalStatCode: string;
 
   CustPersonalFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0, [Validators.required]],
     CustPersonalId: [0, [Validators.required]],
-    MonthlyIncomeAmt: ['', [Validators.pattern('^[0-9]+$')]],
-    MonthlyExpenseAmt: ['', [Validators.pattern('^[0-9]+$')]],
-    MonthlyInstallmentAmt: ['', [Validators.pattern('^[0-9]+$')]],
+    MonthlyIncomeAmt: [''],
+    MonthlyExpenseAmt: [''],
+    MonthlyInstallmentAmt: [''],
     MrSourceOfIncomeCode: [''],
-    SpouseMonthlyIncomeAmt: ['', [Validators.pattern('^[0-9]+$')]],
+    SpouseMonthlyIncomeAmt: [''],
     IsJoinIncome: [false],
     TotalIncomeAmt: [0],
     NettIncomeAmt: [0],
-    NettProfitMonthlyAmt: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    OtherIncomeAmt: ['', [Validators.pattern('^[0-9]+$')]],
-    OtherMonthlyInstAmt: ['', [Validators.pattern('^[0-9]+$')]],
+    NettProfitMonthlyAmt: [0],
+    OtherIncomeAmt: [''],
+    OtherMonthlyInstAmt: [0],
     RowVersion: ['']
   });
 
   CustCompanyFinDataForm = this.fb.group({
     CustCompanyFinDataId: [0, [Validators.required]],
     CustCompanyId: [0, [Validators.required]],
-    GrossMonthlyIncomeAmt: ['', [Validators.pattern('^[0-9]+$')]],
-    GrossProfitAmt: ['', [Validators.pattern('^[0-9]+$')]],
-    ReturnOfInvestmentPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    ReturnOfEquityPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    ReturnOfAssetPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    ProfitMarginPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    CurrentRatioPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    DebtEquityRatioPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    InvTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    ArTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    GrowthPrcnt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    WorkingCapitalAmt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
-    OthMonthlyInstAmt: ['', [Validators.pattern('^[0-9]+$'), Validators.max(100)]],
+    GrossMonthlyIncomeAmt: [''],
+    GrossProfitAmt: [''],
+    ReturnOfInvestmentPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ReturnOfEquityPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ReturnOfAssetPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ProfitMarginPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    CurrentRatioPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    DebtEquityRatioPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    InvTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ArTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    GrowthPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    WorkingCapitalAmt: [''],
+    OthMonthlyInstAmt: [''],
     DateAsOf: [''],
-    Revenue: ['', [Validators.pattern('^[0-9]+$')]],
-    OprCost: ['', [Validators.pattern('^[0-9]+$')]],
-    ProfitBeforeTax: ['', [Validators.pattern('^[0-9]+$')]],
-    CurrAsset: ['', [Validators.pattern('^[0-9]+$')]],
-    NetFixedAsset: ['', [Validators.pattern('^[0-9]+$')]],
-    TotalAsset: ['', [Validators.pattern('^[0-9]+$')]],
-    CurrLiablts: ['', [Validators.pattern('^[0-9]+$')]],
-    LongTemrLiablts: ['', [Validators.pattern('^[0-9]+$')]],
-    ShareholderEquity: ['', [Validators.pattern('^[0-9]+$')]],
-    CurrRatio: ['', [Validators.pattern('^[0-9]+$')]],
+    Revenue: [''],
+    OprCost: [''],
+    ProfitBeforeTax: [''],
+    CurrAsset: [''],
+    NetFixedAsset: [''],
+    TotalAsset: [''],
+    CurrLiablts: [''],
+    LongTemrLiablts: [''],
+    ShareholderEquity: [''],
+    CurrRatio: [''],
     RowVersion: ['']
   });
 
   constructor(
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder, private wizard: WizardComponent
+    private fb: FormBuilder, 
+    private wizard: WizardComponent,
+    private router: Router
   ) {
-    this.isCalculated = false;
+    if(this.MrCustTypeCode == "PERSONAL"){
+      this.isCalculated = false;
+    }
+    else if(this.MrCustTypeCode == "COMPANY"){
+      this.isCalculated = true;
+    }
   }
 
   ngOnInit() {
+    var datePipe = new DatePipe("en-US");
     if (this.MrCustTypeCode == "PERSONAL") {
-      var refMasterSourceIncome = new RefMasterObj();
-      refMasterSourceIncome.RefMasterTypeCode = 'SOURCE_INCOME';
-      this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterSourceIncome).subscribe(
-        (response) => {
-          this.sourceOfIncomeList = response;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
-
-    if (this.MrCustTypeCode == "PERSONAL") {
-      var custPersonalFinData = new CustPersonalFinDataObj();
-      custPersonalFinData.CustPersonalId = this.CustModeId;
-      this.httpClient.post(AdInsConstant.GetCustPersonalFinDataByCustPersonalId, custPersonalFinData).subscribe(
+      var custPersonalData;
+      var custPersonal = new CustPersonalObj();
+      custPersonal.CustId = this.CustId;
+      this.httpClient.post(AdInsConstant.GetCustPersonalbyCustId, custPersonal).pipe(
+        map((response: CustPersonalObj) => {
+          this.mrMaritalStatCode = response.MrMaritalStatCode;
+          custPersonalData = response;
+          return response;
+        }),
+        mergeMap((response: CustPersonalObj) => {
+          var custPersonalFinData = new CustPersonalFinDataObj();
+          custPersonalFinData.CustPersonalId = response.CustPersonalId;
+          let custFinData = this.httpClient.post(AdInsConstant.GetCustPersonalFinDataByCustPersonalId, custPersonalFinData);
+          var refMasterSourceIncome = new RefMasterObj();
+          refMasterSourceIncome.RefMasterTypeCode = 'SOURCE_INCOME';
+          let sourceIncomeList = this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterSourceIncome);
+          return forkJoin([custFinData, sourceIncomeList]);
+        })
+      ).subscribe(
         (response: any) => {
+          var custFinData = response[0];
+          var sourceIncome = response[1];
           this.CustPersonalFinDataForm.patchValue({
-            CustPersonalFinDataId: response.CustPersonalFinDataId,
-            CustPersonalId: response.CustPersonalId,
-            MonthlyIncomeAmt: response.MonthlyIncomeAmt,
-            MonthlyExpenseAmt: response.MonthlyExpenseAmt,
-            MonthlyInstallmentAmt: response.MonthlyInstallmentAmt,
-            MrSourceOfIncomeCode: response.MrSourceOfIncomeCode,
-            SpouseMonthlyIncomeAmt: response.SpouseMonthlyIncomeAmt,
-            IsJoinIncome: response.IsJoinIncome,
-            TotalIncomeAmt: response.TotalIncomeAmt,
-            NettIncomeAmt: response.NettIncomeAmt,
-            NettProfitMonthlyAmt: response.NettProfitMonthlyAmt,
-            OtherIncomeAmt: response.OtherIncomeAmt,
-            OtherMonthlyInstAmt: response.OtherMonthlyInstAmt,
-            RowVersion: response.RowVersion
+            CustPersonalFinDataId: custFinData.CustPersonalFinDataId,
+            CustPersonalId: custPersonalData.CustPersonalId,
+            MonthlyIncomeAmt: custFinData.MonthlyIncomeAmt,
+            MonthlyExpenseAmt: custFinData.MonthlyExpenseAmt,
+            MonthlyInstallmentAmt: custFinData.MonthlyInstallmentAmt,
+            MrSourceOfIncomeCode: custFinData.MrSourceOfIncomeCode,
+            SpouseMonthlyIncomeAmt: custFinData.SpouseMonthlyIncomeAmt,
+            IsJoinIncome: custFinData.IsJoinIncome,
+            TotalIncomeAmt: this.currencyFormatter(custFinData.TotalIncomeAmt.toString()),
+            NettIncomeAmt: this.currencyFormatter(custFinData.NettIncomeAmt.toString()),
+            NettProfitMonthlyAmt: custFinData.NettProfitMonthlyAmt,
+            OtherIncomeAmt: custFinData.OtherIncomeAmt,
+            OtherMonthlyInstAmt: custFinData.OtherMonthlyInstAmt,
+            RowVersion: custFinData.RowVersion
           });
+          this.sourceOfIncomeList = sourceIncome;
         },
         (error) => {
           console.log(error);
@@ -119,13 +140,25 @@ export class CustFinDataTabComponent implements OnInit {
       );
     }
     else if (this.MrCustTypeCode == "COMPANY") {
-      var custCompanyFinData = new CustCompanyFinDataObj();
-      custCompanyFinData.CustCompanyId = this.CustModeId;
-      this.httpClient.post(AdInsConstant.GetCustCompanyFinDataByCustCompanyId, custCompanyFinData).subscribe(
+      var custCompanyData;
+      var custCompany = new CustCompanyObj();
+      custCompany.CustId = this.CustId;
+      this.httpClient.post(AdInsConstant.GetCustCompanyByCustId, custCompany).pipe(
+        map((response: CustCompanyObj) => {
+          custCompanyData = response;
+          return response;
+        }),
+        mergeMap((response: CustCompanyObj) => {
+          var custCompanyFinData = new CustCompanyFinDataObj();
+          custCompanyFinData.CustCompanyId = response.CustCompanyId;
+          return this.httpClient.post(AdInsConstant.GetCustCompanyFinDataByCustCompanyId, custCompanyFinData);
+        })
+      ).subscribe(
         (response: any) => {
+          this.isCalculated = true;
           this.CustCompanyFinDataForm.patchValue({
             CustCompanyFinDataId: response.CustCompanyFinDataId,
-            CustCompanyId: response.CustCompanyId,
+            CustCompanyId: custCompanyData.CustCompanyId,
             GrossMonthlyIncomeAmt: response.GrossMonthlyIncomeAmt,
             GrossProfitAmt: response.GrossProfitAmt,
             ReturnOfInvestmentPrcnt: response.ReturnOfInvestmentPrcnt,
@@ -139,7 +172,7 @@ export class CustFinDataTabComponent implements OnInit {
             GrowthPrcnt: response.GrowthPrcnt,
             WorkingCapitalAmt: response.WorkingCapitalAmt,
             OthMonthlyInstAmt: response.OthMonthlyInstAmt,
-            DateAsOf: response.DateAsOf,
+            DateAsOf: datePipe.transform(response.DateAsOf, 'yyyy-MM-dd'),
             Revenue: response.Revenue,
             OprCost: response.OprCost,
             ProfitBeforeTax: response.ProfitBeforeTax,
@@ -163,45 +196,176 @@ export class CustFinDataTabComponent implements OnInit {
   calculatePersonalFinData() {
     if (this.CustPersonalFinDataForm.valid) {
       var formData = this.CustPersonalFinDataForm.value;
-      var monthlyIncomeAmt = formData.MonthlyIncomeAmt == "" ? 0 : parseInt(formData.MonthlyIncomeAmt);
-      var spouseMonthlyIncomeAmt = formData.SpouseMonthlyIncomeAmt == "" ? 0 : parseInt(formData.SpouseMonthlyIncomeAmt);
-      var totalIncomeAmt = formData.TotalIncomeAmt == "" ? 0 : parseInt(formData.TotalIncomeAmt);
-      var nettIncomeAmt = formData.NettIncomeAmt == "" ? 0 : parseInt(formData.NettIncomeAmt);
-      var nettProfitMonthlyAmt = formData.NettProfitMonthlyAmt == "" ? 0 : parseInt(formData.NettProfitMonthlyAmt);
-      var otherIncomeAmt = formData.OtherIncomeAmt == "" ? 0 : parseInt(formData.OtherIncomeAmt);
-      var monthlyExpenseAmt = formData.MonthlyExpenseAmt == "" ? 0 : parseInt(formData.MonthlyExpenseAmt);
-      var monthlyInstallmentAmt = formData.MonthlyInstallmentAmt == "" ? 0 : parseInt(formData.MonthlyInstallmentAmt);
-      var otherMonthlyInstAmt = formData.OtherMonthlyInstAmt == "" ? 0 : parseInt(formData.OtherMonthlyInstAmt);
-      var totalAmt = monthlyIncomeAmt + spouseMonthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
+      var monthlyIncomeAmt = formData.MonthlyIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyIncomeAmt.toString()));
+      var spouseMonthlyIncomeAmt = formData.SpouseMonthlyIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.SpouseMonthlyIncomeAmt.toString()));
+      var totalIncomeAmt = 0;
+      var nettIncomeAmt = 0;
+      var nettProfitMonthlyAmt = formData.NettProfitMonthlyAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.NettProfitMonthlyAmt.toString()));
+      var otherIncomeAmt = formData.OtherIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherIncomeAmt.toString()));
+      var monthlyExpenseAmt = formData.MonthlyExpenseAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyExpenseAmt.toString()));
+      var monthlyInstallmentAmt = formData.MonthlyInstallmentAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyInstallmentAmt.toString()));
+      var otherMonthlyInstAmt = formData.OtherMonthlyInstAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherMonthlyInstAmt.toString()));
+      var totalAmt = 0;
+
+      if(formData.IsJoinIncome){
+        totalAmt = monthlyIncomeAmt + spouseMonthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
+      }
+      else{
+        totalAmt = monthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
+      }
       var netIncomeAmt = totalAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt);
 
       this.CustPersonalFinDataForm.patchValue({
-        TotalIncomeAmt: totalAmt,
-        NettIncomeAmt: netIncomeAmt
+        TotalIncomeAmt: this.currencyFormatter(totalAmt.toString()),
+        NettIncomeAmt: this.currencyFormatter(netIncomeAmt.toString())
       });
+      this.isCalculated = true;
+      this.spouseMonthlyIncomeAmt = this.CustPersonalFinDataForm.controls["SpouseMonthlyIncomeAmt"].value;
     }
   }
 
-  getCustFinData() {
-    var response = {};
+  currencyFormatter(value: string){
+    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  currencyToNumber(value: string){
+    return value.replace(/,/g, "");
+  }
+
+  back(){
+    this.wizard.goToPreviousStep();
+  }
+
+  // getCustFinData() {
+  //   var response;
+  //   var url;
+
+  //   if (this.MrCustTypeCode == "PERSONAL") {
+  //     var tempResponse = this.CustPersonalFinDataForm.value;
+  //     if(this.MrMaritalStatCode != "MAR"){
+  //       tempResponse.SpouseMonthlyIncomeAmt = 0;
+  //     }
+  //     else{
+  //       if(tempResponse.SpouseMonthlyIncomeAmt = ''){
+  //         tempResponse.SpouseMonthlyIncomeAmt = 0;
+  //       }
+  //     }
+  //     response = tempResponse;
+
+  //     if(response.CustPersonalFinDataId > 0){
+  //       url = AdInsConstant.EditCustPersonalFinData;
+  //     }
+  //     else{
+  //       url = AdInsConstant.AddCustPersonalFinData
+  //     }
+  //   }
+  //   else if (this.MrCustTypeCode == "COMPANY") {
+  //     response = this.CustCompanyFinDataForm.value;
+
+  //     if(response.CustCompanyFinDataId > 0){
+  //       url = AdInsConstant.EditCustCompanyFinData;
+  //     }
+  //     else{
+  //       url = AdInsConstant.AddCustCompanyFinData;
+  //     }
+  //   }
+
+  //   if (this.isCalculated) {
+  //     this.httpClient.post(url, response).subscribe(
+  //       (response) => {
+  //         this.toastr.successMessage(response["Message"]);
+  //         this.wizard.goToNextStep();
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   }
+  //   else {
+  //     this.toastr.errorMessage("Please Calculate First");
+  //   }
+  // }
+
+  next() {
+    var response;
+    var url;
 
     if (this.MrCustTypeCode == "PERSONAL") {
-      response["formData"] = this.CustPersonalFinDataForm.value;
+      var tempResponse = this.CustPersonalFinDataForm.value;
+      if(this.mrMaritalStatCode != "MAR"){
+        tempResponse.SpouseMonthlyIncomeAmt = 0;
+      }
+      else{
+        if(tempResponse.SpouseMonthlyIncomeAmt = ""){
+          tempResponse.SpouseMonthlyIncomeAmt = 0;
+        }
+      }
+      response = tempResponse;
+      response.MonthlyIncomeAmt = this.currencyToNumber(response.MonthlyIncomeAmt.toString());
+      response.MonthlyExpenseAmt = this.currencyToNumber(response.MonthlyExpenseAmt.toString());
+      response.MonthlyInstallmentAmt = this.currencyToNumber(response.MonthlyInstallmentAmt.toString());
+      response.SpouseMonthlyIncomeAmt = this.currencyToNumber(response.SpouseMonthlyIncomeAmt.toString());
+      response.TotalIncomeAmt = this.currencyToNumber(response.TotalIncomeAmt.toString());
+      response.NettIncomeAmt = this.currencyToNumber(response.NettIncomeAmt.toString());
+      response.NettProfitMonthlyAmt = this.currencyToNumber(response.NettProfitMonthlyAmt.toString());
+      response.OtherIncomeAmt = this.currencyToNumber(response.OtherIncomeAmt.toString());
+      response.OtherMonthlyInstAmt = this.currencyToNumber(response.OtherMonthlyInstAmt.toString());
+
+      if(response.CustPersonalFinDataId > 0){
+        url = AdInsConstant.EditCustPersonalFinData;
+      }
+      else{
+        url = AdInsConstant.AddCustPersonalFinData
+      }
     }
     else if (this.MrCustTypeCode == "COMPANY") {
-      response["formData"] = this.CustCompanyFinDataForm.value;
+      response = this.CustCompanyFinDataForm.value;
+      response.GrossMonthlyIncomeAmt = this.currencyToNumber(response.GrossMonthlyIncomeAmt.toString());
+      response.GrossProfitAmt = this.currencyToNumber(response.GrossProfitAmt.toString());
+      response.WorkingCapitalAmt = this.currencyToNumber(response.WorkingCapitalAmt.toString());
+      response.OthMonthlyInstAmt = this.currencyToNumber(response.OthMonthlyInstAmt.toString());
+      response.Revenue = this.currencyToNumber(response.Revenue.toString());
+      response.OprCost = this.currencyToNumber(response.OprCost.toString());
+      response.ProfitBeforeTax = this.currencyToNumber(response.ProfitBeforeTax.toString());
+      response.CurrAsset = this.currencyToNumber(response.CurrAsset.toString());
+      response.NetFixedAsset = this.currencyToNumber(response.NetFixedAsset.toString());
+      response.TotalAsset = this.currencyToNumber(response.TotalAsset.toString());
+      response.CurrLiablts = this.currencyToNumber(response.CurrLiablts.toString());
+      response.LongTemrLiablts = this.currencyToNumber(response.LongTemrLiablts.toString());
+      response.ShareholderEquity = this.currencyToNumber(response.ShareholderEquity.toString());
+
+      if(response.CustCompanyFinDataId > 0){
+        url = AdInsConstant.EditCustCompanyFinData;
+      }
+      else{
+        url = AdInsConstant.AddCustCompanyFinData;
+      }
     }
 
     if (this.isCalculated) {
-      response["status"] = { "code": 200, "message": "Success" };
+      if(response.SpouseMonthlyIncomeAmt == ""){
+        response.SpouseMonthlyIncomeAmt = this.spouseMonthlyIncomeAmt;
+      }
+      console.log(response);
+      this.httpClient.post(url, response).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          if(this.MrCustTypeCode == "PERSONAL"){
+            this.router.navigate(['/Customer/Paging']);
+          }
+          else if(this.MrCustTypeCode == "COMPANY"){
+            this.wizard.goToNextStep();
+          }
+          
+          // this.wizard.goToNextStep();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
     else {
-      response["status"] = { "code": 500, "message": "Please Calculate First" };
+      this.toastr.errorMessage("Please Calculate First");
     }
-
-    this.CustFinDataResponse.emit(response);
-  }
-  next() {
-    this.wizard.goToNextStep();
   }
 }

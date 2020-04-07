@@ -27,7 +27,7 @@
       },
       {
         "type": "sort",
-        "position": "center",
+        "position": "left",
         "label": "Profession Name",
         "name": "PROFESSION_NAME"
       },
@@ -51,7 +51,7 @@
       },
       {
         "type": "text",
-        "position": "center",
+        "position": "left",
         "property": "ProfessionName"
       },
       {

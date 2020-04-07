@@ -14,48 +14,54 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   providers: [NGXToastrService]
 })
 export class EditMainDataCompanyComponent implements OnInit {
-  getCustCompanyByCustIdUrl : any;
-  getCustByCustIdUrl : any;
-  tempCustModel : any;
-  getUrl : any;
-  tempCompanyTypeCode : any; 
-  custCompanyObj : any;
-  custObj : any
-  tempCustCompanyObj : any;
-  tempCustObj : any
-  CustId : any;
-  editCustUrl : any;
-  editCustCompanyUrl : any;
-  From : any;
-  constructor( private route: ActivatedRoute, private fb: FormBuilder,  private http: HttpClient,private router: Router,private toastr: NGXToastrService) {
-    this.getUrl = AdInsConstant.GetListActiveRefMaster;
+  getCustCompanyByCustIdUrl: string;
+  getCustByCustIdUrl: string;
+  tempCustModel: any;
+  getListActiveRefMasterUrl: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl : string;
+  tempCompanyTypeCode: any;
+  custCompanyObj: any;
+  custObj: any
+  tempCustCompanyObj: any;
+  tempCustObj: any
+  CustId: any;
+  editCustUrl: any;
+  editCustCompanyUrl: any;
+  From: any;
+  VipNotesRequired : any;
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
+    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;
     this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
     this.editCustUrl = AdInsConstant.EditCust;
-    this.editCustCompanyUrl = AdInsConstant.EditCustCompany;
+    this.editCustCompanyUrl = AdInsConstant.EditCustCompany; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
-         this.CustId = params["CustId"];
-       }
-       if (params["From"] != null) {
+        this.CustId = params["CustId"];
+      }
+      if (params["From"] != null) {
         this.From = params["From"];
       }
-     });
-   }
+    });
+  }
   CustomerCompanyForm = this.fb.group({
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
-    MrCompanyTypeCode: ['', [Validators.required]],  
-    TaxIdNo: ['', [Validators.required]],
+    MrCompanyTypeCode: ['', [Validators.required]],
+    TaxIdNo: [''],
+    IsVip : [true],
+    IsAffiliateWithMf: [true],
+    VipNotes : ['']
   });
- 
+
   ngOnInit() {
-    var refMasterObj1 = {
+    var refMasterObjCustModel = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "COMPANY",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
@@ -63,11 +69,11 @@ export class EditMainDataCompanyComponent implements OnInit {
         });
       }
     );
-    var refMasterObj2 = {
+    var refMasterObjMrCompanyTypeCode = {
       RefMasterTypeCode: "COMPANY_TYPE",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj2).subscribe(
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempCompanyTypeCode = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
@@ -82,42 +88,63 @@ export class EditMainDataCompanyComponent implements OnInit {
 
     this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
       (response) => {
-        this.tempCustObj = response ;
+        this.tempCustObj = response;
         this.CustomerCompanyForm.patchValue({
           CustName: this.tempCustObj.CustName,
           TaxIdNo: this.tempCustObj.TaxIdNo,
-          MrCustModelCode : this.tempCustObj.MrCustModelCode
+          MrCustModelCode: this.tempCustObj.MrCustModelCode, 
+          IsVip :this.tempCustObj.IsVip,
+          IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
+          VipNotes :this.tempCustObj.VipNotes
         });
+        if(this.tempCustObj.VipNotes!= null){
+          this.VipNotesRequired = true;
+        }else{
+          this.VipNotesRequired = false;
+        }
+        if(this.tempCustObj.IsVip==false){ 
+        this.CustomerCompanyForm.controls.VipNotes.disable();
+        }
       }
     );
     this.http.post(this.getCustCompanyByCustIdUrl, this.custCompanyObj).subscribe(
       (response) => {
-        this.tempCustCompanyObj = response ;
+        this.tempCustCompanyObj = response;
         this.CustomerCompanyForm.patchValue({
-          MrCompanyTypeCode: this.tempCustCompanyObj.MrCompanyTypeCode 
+          MrCompanyTypeCode: this.tempCustCompanyObj.MrCompanyTypeCode
         });
       }
     );
   }
 
-  SaveValue(){
+  SaveValue() {
     this.custObj = new CustObj();
     this.custCompanyObj = new CustCompanyObj();
     this.custObj = this.tempCustObj;
     this.custCompanyObj = this.tempCustCompanyObj;
-    
-    this.custObj.CustName = this.CustomerCompanyForm.controls["CustName"].value; 
-    this.custObj.TaxIdNo = this.CustomerCompanyForm.controls["TaxIdNo"].value; 
+
+    this.custObj.CustName = this.CustomerCompanyForm.controls["CustName"].value;
+    this.custObj.TaxIdNo = this.CustomerCompanyForm.controls["TaxIdNo"].value;
     this.custObj.IdNo = this.CustomerCompanyForm.controls["TaxIdNo"].value;
     this.custObj.MrCustModelCode = this.CustomerCompanyForm.controls["CustModel"].value;
     this.custCompanyObj.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
-
+    this.custObj.IsVip = this.CustomerCompanyForm.controls["IsVip"].value;
+    this.custObj.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value; 
+    if(this.custObj.IsVip==true){
+      this.custObj.VipNotes = this.CustomerCompanyForm.controls["VipNotes"].value;
+    }else{
+      this.custObj.VipNotes = null;
+    }
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId } }); 
+            if (this.From == "EditMainData") {
+              this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit' } });
+            } else {
+              this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId } });
+            }
           },
           error => {
             console.log(error);
@@ -130,12 +157,29 @@ export class EditMainDataCompanyComponent implements OnInit {
     );
   }
 
-  back(){
-    if(this.From =="CustPaging"){
-      this.router.navigate(["/Customer/Paging"]); 
+  back() {
+    if (this.From == "CustPaging") {
+      this.router.navigate(["/Customer/Paging"]);
     }
-    else if(this.From = "EditMainData"){
+    else if (this.From = "EditMainData") {
       this.router.navigate(["/Customer/EditMainData/Paging"]);
     }
+  }
+  checkState() {
+    if (this.CustomerCompanyForm.controls.IsVip.value === true) {
+      this.CustomerCompanyForm.patchValue({
+        VipNotes: null
+      });
+      this.CustomerCompanyForm.controls.VipNotes.disable();
+      this.VipNotesRequired = false;
+      this.CustomerCompanyForm.controls.IdExpiredDt.clearValidators();
+     
+    } else {
+      this.CustomerCompanyForm.controls.VipNotes.enable();
+      this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
+      this.VipNotesRequired = true;
+       
+    }
+    this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
   }
 }

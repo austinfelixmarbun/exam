@@ -15,9 +15,8 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 })
 export class CustomerPersonalAddressCheckComponent implements OnInit {
 
-
-  @Input() IdCust: any;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  IdCust: any;
   CustName  : any;
   Gender : any;
   GenderDesc:any;
@@ -39,18 +38,18 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   listCustAddr: any;
   getCustById: any;
   getListCustAddr: any;
+  deleteCustAddr:any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListCustAddr = AdInsConstant.GetListCustAddr;
-    // this.route.queryParams.subscribe(params => {
-    //   if (params["IdCust"] != null) {
-    //      this.IdCust = params["IdCust"];
-    //    }
-    //    if (params["IdCustPersonal"] != null) {
-    //     this.IdCustPersonal = params["IdCustPersonal"];
-    //   }
-    //  });
+    this.deleteCustAddr = AdInsConstant.DeleteCustAddr;
+
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+         this.IdCust = params["IdCust"];
+       }
+     });
   }
 
   ngOnInit() {
@@ -65,25 +64,39 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
       this.custAddrObj = new CustAddrObj();
       this.custAddrObj.CustId = this.IdCust;
       this.custAddrObj.MrCustAddrTypeCode = "-";
-      console.log("bbb");
-      console.log(this.custAddrObj);
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
             this.listCustAddr = response["ReturnObject"];
-
-            console.log("aaa")
-            console.log(this.listCustAddr)
         });
   }
+
   editItem(custAddrObj: any) {
     this.outputValue.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId });
   }
+
+  // deleteItem(custAddrObj: any) {
+  //   var custAddr = new CustAddrObj();
+  //   custAddr.CustAddrId = custAddrObj.CustAddrId;
+  //   this.http.post(this.deleteCustAddr, custAddr).subscribe(
+  //     (response: any) => {
+  //       this.toastr.successMessage(response["message"]);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  //   //this.outputValue.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId });
+  // }
+
   addAddr() {
     this.outputValue.emit({ mode: 'add' });
     
   }
   next() {
     this.wizard.goToNextStep();
+  }
+  back(){
+    this.wizard.goToPreviousStep();
   }
 
 }

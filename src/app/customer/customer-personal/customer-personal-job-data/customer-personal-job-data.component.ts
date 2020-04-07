@@ -17,23 +17,8 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 })
 export class CustomerPersonalJobDataComponent implements OnInit {
  
-  CustName  : any;
-  Gender : any;
-  GenderDesc:any;
-  MrIdTypeCode : any;
-  MrIdTypeCodeDesc : any;
   CustModel : any;
-  CustModelDesc
-  BirthPlace : any;
-  BirthDt : any;
-  IdNo : any;
-  TaxIdNo : any;
-  IdExpiredDt : any;
-  MotherMaidenName : any;
-  resultData: any;
-  addUrl : any; 
   IdCust : any;
-  IdCustPersonal : any;
   custObj : any;
   getListActiveRefMaster: any;
   getCustById: any;
@@ -68,17 +53,19 @@ export class CustomerPersonalJobDataComponent implements OnInit {
       (response) => {
           this.custObj = response;
           this.CustModel = this.custObj.MrCustModelCode;
+          //this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
+          //this.CustModel = "NONPROF";
       },
       (error) => {
         console.log(error);
       });
 
-    this.jobType = new RefMasterObj();
-    this.jobType.RefMasterTypeCode = "CUST_MODEL";
-    this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
-      (response) => {
-          this.listJobType = response['ReturnObject'];
-          this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
-      });
+    // this.jobType = new RefMasterObj();
+    // this.jobType.RefMasterTypeCode = "CUST_MODEL";
+    // this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
+    //   (response) => {
+    //       this.listJobType = response['ReturnObject'];
+    //       //this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
+    //   });
   }
 }

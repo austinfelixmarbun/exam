@@ -15,8 +15,9 @@ import { WizardComponent } from 'angular-archwizard';
   providers: [NGXToastrService]
 })
 export class CustomerCompanyAddressCheckComponent implements OnInit {
-  @Input() IdCust: any;
+ 
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  IdCust: any;
   CustName: any;
   Gender: any;
   GenderDesc: any;
@@ -73,5 +74,8 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   }
   next() {
     this.wizard.goToNextStep();
+  }
+  back(){
+    this.wizard.goToPreviousStep();
   }
 }

@@ -1,9 +1,17 @@
 {
-    "title": "Bank",
+    "title": "Lookup - Bank",
     "component": [
         {
             "type": "textbox",
-            "name": "bank_Name",
+            "name": "BANK_CODE",
+            "id": "bankCode",
+            "value": "",
+            "label": "Bank Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "BANK_NAME",
             "id": "bankName",
             "value": "",
             "label": "Bank Name",
@@ -11,15 +19,21 @@
         }
     ],
     "querystring": {
-        "select": "SELECT REF_BANK_ID AS refBankId, BANK_NAME AS bankName, REG_RPT_CODE AS regRptCode",
-        "from": "FROM REF_BANK WITH(NOLOCK)"
+        "select": "SELECT BANK_CODE AS bankCode, BANK_NAME AS bankName, REG_RPT_CODE AS regRptCode, REF_BANK_ID AS refBankId",
+        "from": "FROM dbo.REF_BANK WITH(NOLOCK)"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "left",
+            "label": "Bank Code",
+            "name": "BANK_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
             "label": "Bank Name",
-            "name": "bankName"
+            "name": "BANK_NAME"
         },
         {
             "type": "label",
@@ -28,6 +42,11 @@
         }
     ],
     "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "bankCode"
+        },
         {
             "type": "text",
             "position": "left",

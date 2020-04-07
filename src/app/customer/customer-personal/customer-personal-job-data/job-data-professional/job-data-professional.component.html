@@ -4,7 +4,7 @@
     <div class="form-body">
       <div id="jobData">
           <div class="form-group row">
-            <label class="col-md-3 adInsLabel" translate>Profession Name</label>
+            <label class="col-md-3 adInsLabel adins-required-label" translate>Profession Name</label>
             <div class="col-md-4">
               <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="JobDataProForm"
                 [enjiForm]="enjiForm" [identifier]="'MrJobProfessionCode'" (lookup)=getLookUpProfession($event)>
@@ -28,7 +28,7 @@
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-3 adInsLabel adins-required" translate>Industry Type Name </label>
+              <label class="col-md-3 adInsLabel adins-required-label" translate>Industry Type Name </label>
               <div class="col-md-4">
                 <lib-uclookupgeneric [lookupInput]="industryLookUpObj" [parentForm]="JobDataProForm"
                 [enjiForm]="enjiForm" [identifier]="'IndustryTypeCode'" (lookup)=getLookUpIndustry($event)>
@@ -36,9 +36,9 @@
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-3 adInsLabel adins-required" translate>Establishment Date </label>
+              <label class="col-md-3 adInsLabel adins-required-label" translate>Establishment Date </label>
               <div class="col-md-4">
-                <input type="date" id="establishmentDt" class="form-control adInsInput" formControlName="EstablishmentDate" required
+                <input type="date" id="establishmentDt" class="form-control adInsInput" formControlName="EstablishmentDate"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.EstablishmentDate.invalid }">
                 <show-errors [control]="JobDataProForm.controls.EstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
               </div>
@@ -58,7 +58,7 @@
                   </div>
               </div>
           </div>
-          <lib-ucSubsection [id]="'addrAttrId'" [title]="'Job Address Attribute'" [panel]="'addrAttribute'">
+          <!-- <lib-ucSubsection [id]="'addrAttrId'" [title]="'Job Address Attribute'" [panel]="'addrAttribute'">
           </lib-ucSubsection>
           <div id="addrAttribute">
               <div class="form-group row">
@@ -109,10 +109,13 @@
                   <show-errors [control]="JobDataProForm.controls.StayLength" [submit]="enjiForm.submitted"></show-errors>
                   </div>
               </div>
-          </div>
+          </div> -->
       </div>
     </div>
     <div class="form-actions right" style="text-align: right;" >
+      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+        <i class="ft-x"></i> Back
+      </button>
       <button type="submit" class="btn btn-raised btn-primary" translate>
         <i class="fa fa-check-square-o"></i> Save and Continue
       </button>

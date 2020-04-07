@@ -29,7 +29,6 @@ import { CustomerContactAddComponent } from './customer-personal/customer-contac
 import { CustomerContactCheckComponent } from './customer-personal/customer-contact-person/customer-contact-check/customer-contact-check.component';
 import { UcaddressModule } from '@adins/ucaddress';
 import { CustomerViewPersonalDetailComponent } from './customer-view/customer-view-personal-detail/customer-view-personal-detail.component';
-import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
 import { CustomerViewPersonalJobDataComponent } from './customer-view/customer-view-personal-job-data/customer-view-personal-job-data.component';
 import { CustGroupTabComponent } from './cust-group-tab/cust-group-tab.component';
 import { CustGroupTabDetailComponent } from './cust-group-tab/cust-group-tab-detail/cust-group-tab-detail.component';
@@ -54,7 +53,6 @@ import { CustomerViewPersonalJobDataEmpComponent } from './customer-view/custome
 import { CustomerViewPersonalJobDataSmeComponent } from './customer-view/customer-view-personal-job-data-sme/customer-view-personal-job-data-sme.component';
 import { CustomerViewPersonalOtherAttrComponent } from './customer-view/customer-view-personal-other-attr/customer-view-personal-other-attr.component';
 import { CustomerViewPersonalAppListingComponent } from './customer-view/customer-view-personal-app-listing/customer-view-personal-app-listing.component';
-import { CustomerViewCoyAddressComponent } from './customer-view/customer-view-coy-address/customer-view-coy-address.component';
 import { CustomerViewCoyManagementComponent } from './customer-view/customer-view-coy-management/customer-view-coy-management.component';
 import { CustomerViewCoyContactComponent } from './customer-view/customer-view-coy-contact/customer-view-coy-contact.component';
 import { CustomerViewCoyFinancialComponent } from './customer-view/customer-view-coy-financial/customer-view-coy-financial.component';
@@ -66,7 +64,6 @@ import { CustomerViewCoyCustScoreComponent } from './customer-view/customer-view
 import { CustomerViewCoyCustAddColateralComponent } from './customer-view/customer-view-coy-cust-add-colateral/customer-view-coy-cust-add-colateral.component';
 import { CustomerViewComponent } from './customer-view/customer-view.component';
 import { CustomerViewCoyDetailComponent } from './customer-view/customer-view-coy-detail/customer-view-coy-detail.component';
-import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
 import { CustomerCompanyPageComponent } from './customer-company/customer-company-page/customer-company-page.component';
 import { CustomerCompanyDetailComponent } from './customer-company/customer-company-detail/customer-company-detail.component';
 import { CustomerCompanyContactInformationComponent } from './customer-company/customer-company-contact-information/customer-company-contact-information.component';
@@ -79,8 +76,14 @@ import { EditMainDataCompanyComponent } from './edit-main-data/edit-main-data-co
 import { EditMainDataPersonalComponent } from './edit-main-data/edit-main-data-personal/edit-main-data-personal.component';
 import { CustomerCompanyAddressCheckComponent } from './customer-company/customer-company-address/customer-company-address-check/customer-company-address-check.component';
 import { CustomerPersonalAddressCheckComponent } from './customer-personal/customer-personal-address/customer-personal-address-check/customer-personal-address-check.component';
-
-@NgModule({
+import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-view-header-personal/customer-view-header-personal.component';
+import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
+import { UcinputnumberModule } from '@adins/ucinputnumber';
+import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/customer-view-personal-financial-section/customer-view-personal-financial-section.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
+import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
+ @NgModule({
   exports: [],
   imports: [
     CustomerRoutingModule,
@@ -88,7 +91,7 @@ import { CustomerPersonalAddressCheckComponent } from './customer-personal/custo
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
-    NgbModule,
+    NgbModule, 
     UcpagingModule,
     SharingComponentModule,
     UCSearchModule,
@@ -99,7 +102,9 @@ import { CustomerPersonalAddressCheckComponent } from './customer-personal/custo
     UcSubsectionModule,
     ArchwizardModule,
     UcviewgenericModule,
-    UcaddressModule
+    UcaddressModule,
+    UcShowErrorsModule,
+    UcinputnumberModule
   ],
   declarations: [
     CustomerPagingComponent,
@@ -111,7 +116,6 @@ import { CustomerPersonalAddressCheckComponent } from './customer-personal/custo
     CustomerContactAddComponent,
     CustomerContactCheckComponent,
     CustomerViewPersonalDetailComponent,
-    CustomerViewPersonalAddressComponent,
     CustomerViewPersonalJobDataComponent,
     CustGroupTabComponent,
     CustGroupTabDetailComponent,
@@ -130,14 +134,12 @@ import { CustomerPersonalAddressCheckComponent } from './customer-personal/custo
     CustLegalDocComponent,
     CustLegalDocDetailComponent,
     CustomerViewPersonalContactPersonComponent,
-    CustomerViewPersonalCustomerGroupComponent,
     CustomerViewPersonalFinancialDataComponent,
     CustomerViewPersonalJobDataNonProfComponent,
     CustomerViewPersonalJobDataEmpComponent,
     CustomerViewPersonalJobDataSmeComponent,
     CustomerViewPersonalOtherAttrComponent,
     CustomerViewPersonalAppListingComponent,
-    CustomerViewCoyAddressComponent,
     CustomerViewCoyManagementComponent,
     CustomerViewCoyContactComponent,
     CustomerViewCoyFinancialComponent,
@@ -159,8 +161,13 @@ import { CustomerPersonalAddressCheckComponent } from './customer-personal/custo
     EditMainDataPagingComponent,
     EditMainDataCompanyComponent,
     EditMainDataPersonalComponent,
-    CustomerCompanyAddressCheckComponent,
-    CustomerPersonalAddressCheckComponent
+    CustomerCompanyAddressCheckComponent,  
+    CustomerPersonalAddressCheckComponent, 
+    CustomerViewHeaderPersonalComponent, 
+    CustomerViewHeaderCompanyComponent,
+    CustomerViewPersonalFinancialSectionComponent,
+    CustomerViewCustomerGroupComponent,
+    CustomerViewAddressComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

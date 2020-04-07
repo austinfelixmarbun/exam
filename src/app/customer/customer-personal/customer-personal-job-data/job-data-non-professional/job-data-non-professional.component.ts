@@ -11,7 +11,11 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
- 
+import { formatDate } from '@angular/common';
+import { WizardComponent } from 'angular-archwizard';
+import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
+import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+
 @Component({
   selector: 'app-job-data-non-professional',
   templateUrl: './job-data-non-professional.component.html',
@@ -19,46 +23,41 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
   providers: [NGXToastrService]
 })
 export class JobDataNonProfessionalComponent implements OnInit {
-  CustName  : any;
-  Gender : any;
-  GenderDesc:any;
-  MrIdTypeCode : any;
-  MrIdTypeCodeDesc : any;
-  CustModel : any;
-  CustModelDesc
-  BirthPlace : any;
-  BirthDt : any;
-  IdNo : any;
-  TaxIdNo : any;
-  IdExpiredDt : any;
-  MotherMaidenName : any;
-  resultData: any;
-  addUrl : any; 
+  jobDataId: any;
+  typePage: string;
+  rowVersion: string
   IdCust : any;
   IdCustPersonal : any;
   custObj : any;
   getListActiveRefMaster: any;
   getCustById: any;
-  jobType: any;
-  listJobType: any;
+  getJobDataByCustId: any;
+  getRefProfession: any;
   tempProfession: any;
   professionLookUpObj: any;
   custPersonalJobDataObj: any;
+  custJobDataObj: any;
+  returnCustJobDataObj: any;
   jobAddrObj: any;
   othBizAddrObj: any;
   addJobData: any;
+  editJobData: any;
   reqCustPersonalJobDataObj: any;
+  refProfessionObj: any;
+  returnRefProfessionObj: any;
   JobDataNonProForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
     JobTitleName: ['']
   });
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
     this.addJobData = AdInsConstant.AddCustPersonalJobData;
-
+    this.editJobData = AdInsConstant.EditCustPersonalJobData;
+    this.getJobDataByCustId = AdInsConstant.GetCustPersonalJobDataByCustId;
+    this.getRefProfession = AdInsConstant.GetRefProfessionById;
 
     this.route.queryParams.subscribe(params => {
         if (params["IdCust"] != null) {
@@ -89,38 +88,104 @@ export class JobDataNonProfessionalComponent implements OnInit {
       (response) => {
           this.custObj = response;
       });
+
+    this.custJobDataObj = new CustPersonalJobDataObj();
+    this.custJobDataObj.CustId = this.IdCust;
+    this.http.post(this.getJobDataByCustId, this.custJobDataObj).subscribe(
+      (response: any) => {
+          this.returnCustJobDataObj = response;
+          console.log("ccc")
+          console.log(this.returnCustJobDataObj)
+          
+          if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
+            this.JobDataNonProForm.patchValue({ 
+              JobTitleName: this.returnCustJobDataObj.JobTitleName,
+            });
+
+            this.refProfessionObj = new RefProfessionObj();
+            this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
+            this.http.post(this.getRefProfession, this.refProfessionObj).subscribe(
+              (response) => {
+                  this.returnRefProfessionObj = response;
+
+                  this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
+                  this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
+                  this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
+              });
+
+
+            this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
+            this.rowVersion = this.returnCustJobDataObj.RowVersion;
+            this.typePage = "edit";
+          }
+      });
+  }
+
+  back(){
+    this.wizard.goToPreviousStep();
   }
 
   SaveForm(){
-    console.log("bbb")
-    this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
-    this.custPersonalJobDataObj = new CustPersonalJobDataObj;
-    this.jobAddrObj = new CustAddrObj;
-    this.othBizAddrObj = new CustAddrObj;
-    this.custPersonalJobDataObj.CustId = this.IdCust;
-    this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
-    this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
-    this.jobAddrObj.MrCustAddrTypeCode = "JOB";
-    this.othBizAddrObj.MrCustAddrTypeCode = "OTH_BIZ";
-    this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
-    this.reqCustPersonalJobDataObj.JobAddr = this.jobAddrObj;
-    this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
+    if(this.typePage == "edit"){
+      this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
+      this.custPersonalJobDataObj = new CustPersonalJobDataObj;
+      this.jobAddrObj = new CustAddrObj;
+      this.othBizAddrObj = new CustAddrObj;
+      this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
+      this.custPersonalJobDataObj.CustId = this.IdCust;
+      this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
+      this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
+      this.custPersonalJobDataObj.RowVersion = this.rowVersion;
+      this.jobAddrObj.MrCustAddrTypeCode = "JOB";
+      this.othBizAddrObj.MrCustAddrTypeCode = "OTH_BIZ";
+      this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
+      this.reqCustPersonalJobDataObj.JobAddr = this.jobAddrObj;
+      this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
 
-    console.log("ccc");
-    console.log(this.reqCustPersonalJobDataObj)
-    this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
-      (response) => {
-        console.log(response);
-        this.toastr.successMessage(response["message"]);
-        // this.router.navigate(
-        //   ["/Customer/CustomerPersonal/Address"], 
-        //   { queryParams: { "IdCust": this.IdCust }}
-        //   );
-        console.log(response)
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      this.http.post(this.editJobData, this.reqCustPersonalJobDataObj).subscribe(
+        (response) => {
+          console.log(response);
+          this.toastr.successMessage(response["message"]);
+          // this.router.navigate(
+          //   ["/Customer/CustomerPersonal/Address"], 
+          //   { queryParams: { "IdCust": this.IdCust }}
+          //   );
+          // console.log(response)
+          this.wizard.goToNextStep();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
+      this.custPersonalJobDataObj = new CustPersonalJobDataObj;
+      this.jobAddrObj = new CustAddrObj;
+      this.othBizAddrObj = new CustAddrObj;
+      this.custPersonalJobDataObj.CustId = this.IdCust;
+      this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
+      this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
+      this.jobAddrObj.MrCustAddrTypeCode = "JOB";
+      this.othBizAddrObj.MrCustAddrTypeCode = "OTH_BIZ";
+      this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
+      this.reqCustPersonalJobDataObj.JobAddr = this.jobAddrObj;
+      this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
+
+      this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
+        (response) => {
+          console.log(response);
+          this.toastr.successMessage(response["message"]);
+          // this.router.navigate(
+          //   ["/Customer/CustomerPersonal/Address"], 
+          //   { queryParams: { "IdCust": this.IdCust }}
+          //   );
+          // console.log(response)
+          this.wizard.goToNextStep();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 }

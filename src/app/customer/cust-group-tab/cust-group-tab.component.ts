@@ -53,10 +53,15 @@ export class CustGroupTabComponent implements OnInit {
         this.spinner.hide();
         this.toastr.successMessage(response["message"]);
       }
-    );
+    ).catch((error) => {
+      if(error != 0){
+        console.log(error);
+      }
+    });
   }
 
   deleteCustGrp(CustGrpId, i) {
+    if(confirm('Are you sure to delete this record?')){
     var custGrp = new CustGrpObj();
     custGrp.CustGrpId = CustGrpId;
     this.httpClient.post(AdInsConstant.DeleteCustGrp, custGrp).subscribe(
@@ -68,8 +73,13 @@ export class CustGroupTabComponent implements OnInit {
         console.log(error);
       }
     );
+    }
+
   }
   next() {
     this.wizard.goToNextStep();
+  }
+  back(){
+    this.wizard.goToPreviousStep();
   }
 }

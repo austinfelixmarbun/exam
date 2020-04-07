@@ -14,8 +14,8 @@
                   <label class="col-md-2 adInsLabel" translate>Find Existing Customer</label>
                   <div class="col-md-4">
                     <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerContactForm"
-                    [enjiForm]="enjiForm" [identifier]="'ExistingCustomer'" (lookup)=getLookUpCustomer($event)>
-                  </lib-uclookupgeneric>  
+                      [enjiForm]="enjiForm" [identifier]="'ExistingCustomer'" (lookup)=getLookUpCustomer($event)>
+                    </lib-uclookupgeneric>
                   </div>
                 </div>
 
@@ -41,7 +41,8 @@
                 <div class="form-group row  ">
                   <label class="col-md-2 adInsLabel" translate>ID TYPE </label>
                   <div class="col-md-4">
-                    <select class="form-control adInsInput"  (change)="onOptionIdTypeSelected($event)" style="width: auto" formControlName="MrIdTypeCode"
+                    <select class="form-control adInsInput" (change)="onOptionIdTypeSelected($event)"
+                      style="width: auto" formControlName="MrIdTypeCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrIdTypeCode.invalid }">
                       <option *ngFor="let it of tempIdType" [value]="it.Key">
                         {{it.Value}}</option>
@@ -51,8 +52,8 @@
                   </div>
                   <label class="col-md-2 adins-required-label" translate>Nationality</label>
                   <div class="col-md-4">
-                    <select   (change)="onOptionsNationalitySelected($event)" class="form-control adInsInput" style="width: auto"
-                      formControlName="MrNationalityCode"
+                    <select (change)="onOptionsNationalitySelected($event)" class="form-control adInsInput"
+                      style="width: auto" formControlName="MrNationalityCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrNationalityCode.invalid }">
                       <option *ngFor="let it of tempNationality" [value]="it.Key">
                         {{it.Value}}</option>
@@ -71,30 +72,31 @@
                     </show-errors>
                   </div>
                   <label class="col-md-2 adInsLabel" translate>Country</label>
-                  <div class="col-md-4"> 
+                  <div class="col-md-4">
                     <div *ngIf="flag">
-                      Indonesia
+                      {{this.LocalCountry?.CountryName}}
                     </div>
-                    <div [hidden]="flag">
-                    <lib-uclookupgeneric [lookupInput]="lookUpObj" [parentForm]="CustomerContactForm"
-                      [enjiForm]="enjiForm" [identifier]="'NationalityCountryCode'" (lookup)=getLookUpCountry($event)>
-                    </lib-uclookupgeneric>
+                    <div [hidden]="flag" *ngIf="lookUpObj != undefined">
+                      <lib-uclookupgeneric [lookupInput]="lookUpObj" [parentForm]="CustomerContactForm"
+                        [enjiForm]="enjiForm" [identifier]="'NationalityCountryCode'" (lookup)=getLookUpCountry($event)>
+                      </lib-uclookupgeneric>
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-md-2 adInsLabel"[ngClass]="{'adins-required-label' : tempKTPCheck==false} " translate>Id Expired Date</label>
+                  <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : tempKTPCheck==false} "
+                    translate>Id Expired Date</label>
                   <div class="col-md-4">
                     <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.IdExpiredDt.invalid}">  
+                      [min]="businessDtMax | date: 'yyyy-MM-dd'"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.IdExpiredDt.invalid}">
                     <show-errors [control]="CustomerContactForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
                   <label class="col-md-2 adInsLabel" translate>Education</label>
                   <div class="col-md-4">
-                    <select   class="form-control adInsInput" style="width: auto"
-                      formControlName="MrEducationCode"
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrEducationCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrEducationCode.invalid }">
                       <option *ngFor="let it of tempMrEducationCode" [value]="it.Key">
                         {{it.Value}}</option>
@@ -106,19 +108,17 @@
                 <div class="form-group row">
                   <label class="col-md-2 adInsLabel" translate>Gender</label>
                   <div class="col-md-4">
-                    <select class="form-control adInsInput" style="width: auto"
-                    formControlName="MrGenderCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrGenderCode.invalid }">
-                    <option *ngFor="let it of tempMrGenderCode" [value]="it.Key">
-                      {{it.Value}}</option>
-                  </select>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrGenderCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrGenderCode.invalid }">
+                      <option *ngFor="let it of tempMrGenderCode" [value]="it.Key">
+                        {{it.Value}}</option>
+                    </select>
                     <show-errors [control]="CustomerContactForm.controls.MrGenderCode" [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
                   <label class="col-md-2 adInsLabel" translate>Religion</label>
                   <div class="col-md-4">
-                    <select   class="form-control adInsInput" style="width: auto"
-                      formControlName="MrReligionCode"
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrReligionCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrReligionCode.invalid }">
                       <option *ngFor="let it of tempMrReligionCode" [value]="it.Key">
                         {{it.Value}}</option>
@@ -128,27 +128,16 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-2 adInsLabel" translate>Birth Place/Date </label>
+                  <label class="col-md-2 adInsLabel" translate>Birth Place </label>
                   <div class="col-md-4">
-                    <div class="row">
-                      <div class="col-md-6" style="border-right: 1px solid grey">
-                        <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.BirthPlace.invalid}">
-                        <show-errors [control]="CustomerContactForm.controls.BirthPlace" [submit]="enjiForm.submitted">
-                        </show-errors>
-                      </div>
-                      <div class="col-md-6">
-                        <input type="date" class="form-control adInsInput" formControlName="BirthDt"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.BirthDt.invalid}">
-                        <show-errors [control]="CustomerContactForm.controls.BirthDt " [submit]="enjiForm.submitted">
-                        </show-errors>
-                      </div>
-                    </div>
+                    <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.BirthPlace.invalid}">
+                    <show-errors [control]="CustomerContactForm.controls.BirthPlace" [submit]="enjiForm.submitted">
+                    </show-errors>
                   </div>
                   <label class="col-md-2 adInsLabel" translate>Marital Status </label>
                   <div class="col-md-4">
-                    <select class="form-control adInsInput"  style="width: auto"
-                      formControlName="MrMaritalStatCode"
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrMaritalStatCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrMaritalStatCode.invalid }">
                       <option *ngFor="let it of tempMrMaritalStatCode " [value]="it.Key">
                         {{it.Value}}</option>
@@ -159,11 +148,12 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-2 adInsLabel" translate>NPWP</label>
+                  <label class="col-md-2 adInsLabel" translate>Birth Date</label>
                   <div class="col-md-4">
-                    <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.TaxIdNo.invalid}">
-                    <show-errors [control]="CustomerContactForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                    <input type="date" class="form-control adInsInput" formControlName="BirthDt"
+                      [max]="businessDtMin | date: 'yyyy-MM-dd'"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.BirthDt.invalid}">
+                    <show-errors [control]="CustomerContactForm.controls.BirthDt " [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
                   <label class="col-md-2 adInsLabel" translate>Profession Name</label>
@@ -175,14 +165,20 @@
                   </div>
                 </div>
                 <div class="form-group row">
+                  <label class="col-md-2 adInsLabel" translate>NPWP</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.TaxIdNo.invalid}">
+                    <show-errors [control]="CustomerContactForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
                   <label class="col-md-2 adins-required-label" translate>Customer Relationship</label>
                   <div class="col-md-4">
-                    <select class="form-control adInsInput"   style="width: auto"
-                    formControlName="MrCustRelationshipCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrCustRelationshipCode.invalid }">
-                    <option *ngFor="let it of tempMrCustRelationshipCode " [value]="it.Key">
-                      {{it.Value}}</option>
-                  </select>
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrCustRelationshipCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrCustRelationshipCode.invalid }">
+                      <option *ngFor="let it of tempMrCustRelationshipCode " [value]="it.Key">
+                        {{it.Value}}</option>
+                    </select>
                     <show-errors [control]="CustomerContactForm.controls.MrCustRelationshipCode"
                       [submit]="enjiForm.submitted">
                     </show-errors>
@@ -232,22 +228,20 @@
                     <show-errors [control]="CustomerContactForm.controls.Email" [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
-                </div>
-
-              </div>
-              <!-- Contact Person Address -->
-              <!-- <lib-ucSubsection [id]="'ContactPersonAddress'" [title]="'Contact Person Address'"
-                [panel]="'ContactPersonAddressId'">
-              </lib-ucSubsection> -->
+                </div> 
+              </div>  
+   
               <div id="ContactPersonAddressId">
                 <lib-ucaddress [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
-                [default]="UcAddressObj"  [inputField]="inputFieldObj"  [showAllPhn]="false" >
-              </lib-ucaddress>
-
-              </div>
-
+                  [default]="UcAddressObj" [inputField]="inputFieldObj" [showAllPhn]="false">
+                </lib-ucaddress> 
+              </div> 
             </div>
+
             <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+                <i class="ft-x"></i> Cancel
+              </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
                 <i class="fa fa-check-square-o"></i> Save & Continue
               </button>
@@ -258,7 +252,3 @@
     </div>
   </div>
 </div>
-
-<!-- </div><button type="button" class="addButton" (click)="keluarinValue()"  translate>
-  <i class="ft-plus-circle"></i> Add
-</button> -->

@@ -31,7 +31,6 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   orderByValue: any;
   pageNow: number;
   pageSize: number;
-  apiUrl: any;
   totalData: any;
   resultData: any;
   tempData: any;
@@ -74,7 +73,6 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
     this.inputObj.addCritInput = new Array();
 
     var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
@@ -99,20 +97,17 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         key: this.orderByKey,
         value: this.orderByValue
       }
-      this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+      this.UCSearchComponent.search(AdInsConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order)
     }
   }
 
   Checked(VerfQuestionAnswerId: any, isChecked: any): void {
-    console.log(VerfQuestionAnswerId);
     if (isChecked) {
       this.listSelectedId.push(VerfQuestionAnswerId);
     } else {
       const index = this.listSelectedId.indexOf(VerfQuestionAnswerId)
-      console.log(index);
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
-    console.log('Sel', this.listSelectedId);
   }
   
   searchPagination(event: number) {
@@ -124,7 +119,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    this.UCSearchComponent.search(AdInsConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order)
   }
 
   getResult(event) {
@@ -144,7 +139,6 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
 
   SelectAll(condition) {
     this.checkboxAll = condition;
-    console.log(condition);
     if (condition) {
       for (let i = 0; i < this.resultData.Data.length; i++) {
         if (this.listSelectedId.indexOf(this.resultData.Data[i].VerfQuestionAnswerId) < 0) {
@@ -158,11 +152,8 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         if (index > -1) {
           this.listSelectedId.splice(index, 1);
         }
-        console.log(this.resultData.Data[i]);
       }
     }
-    console.log(this.checkboxAll);
-    console.log(this.listSelectedId);
   }
 
   addToTemp() {
@@ -196,7 +187,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         };
       }
       this.inputObj.addCritInput = this.arrAddCrit;
-      this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+      this.UCSearchComponent.search(AdInsConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order, this.arrAddCrit);
       this.listSelectedId = [];
       this.checkboxAll = false;
     } else {
@@ -234,7 +225,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         };
       }
       this.inputObj.addCritInput = this.arrAddCrit;
-      this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+      this.UCSearchComponent.search(AdInsConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order, this.arrAddCrit);
     }
   }
 
@@ -266,18 +257,14 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     );
   }
 
-  SaveQuestionGroupMember(verfQuestionGrpDObj: any) {
+  SaveQuestionGroupMember() {
     this.verfQuestionGrpDObj = new VerfQuestionGrpDObj();
     this.verfQuestionGrpDObj.VerfQuestionGrpHId = this.VerfQuestionGrpHId;
     this.verfQuestionGrpDObj.VerfQuestionGrpDId = "0";
     this.verfQuestionGrpDObj.ListVerfQuestionAnswerId = new Array();
 
     for (let index = 0; index < this.tempData.length; index++) {
-      console.log(this.tempData);
-      var verfDObj = {
-        VerfQuestionGrpHId: this.tempData[index].VerfQuestionGrpHId
-      }
-      this.verfQuestionGrpDObj.VerfQuestionAnswerId.push(verfDObj.VerfQuestionGrpHId);
+      this.verfQuestionGrpDObj.ListVerfQuestionAnswerId.push(this.tempData[index].VerfQuestionAnswerId);
     }
 
     if (this.verfQuestionGrpDObj.ListVerfQuestionAnswerId.length == 0) {

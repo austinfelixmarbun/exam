@@ -4,7 +4,7 @@
     <div class="form-body">
       <div id="jobData">
           <div class="form-group row">
-              <label class="col-md-3 adInsLabel" translate>Profession Name</label>
+              <label class="col-md-3 adInsLabel adins-required-label" translate>Profession Name</label>
               <div class="col-md-4">
                 <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="JobDataSmeForm"
                   [enjiForm]="enjiForm" [identifier]="'MrJobProfessionCode'" (lookup)=getLookUpProfession($event)>
@@ -12,9 +12,9 @@
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-3 adInsLabel adins-required" translate>Job Position </label>
+              <label class="col-md-3 adInsLabel adins-required-label" translate>Job Position </label>
               <div class="col-md-4">
-                <select class="form-control adInsInput" formControlName="JobPosition">
+                <select class="form-control adInsInput" formControlName="JobPosition" required>
                   <option *ngFor="let ram of listJobPosition" [value]="ram.Key">
                     {{ram.Value}}
                   </option>
@@ -31,15 +31,15 @@
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-3 adInsLabel adins-required" translate>Nama Perusahaan/Usaha </label>
+              <label class="col-md-3 adInsLabel adins-required-label" translate>Nama Perusahaan/Usaha </label>
               <div class="col-md-4">
-                <input type="text" class="form-control adInsInput" formControlName="IndustryName"
+                <input type="text" class="form-control adInsInput" formControlName="IndustryName" required
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.IndustryName.invalid }">
                 <show-errors [control]="JobDataSmeForm.controls.IndustryName" [submit]="enjiForm.submitted"></show-errors>
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-3 adInsLabel adins-required" translate>Industry Type Name </label>
+              <label class="col-md-3 adInsLabel adins-required-label" translate>Industry Type Name </label>
               <div class="col-md-4">
                 <lib-uclookupgeneric [lookupInput]="industryLookUpObj" [parentForm]="JobDataSmeForm"
                 [enjiForm]="enjiForm" [identifier]="'IndustryTypeCode'" (lookup)=getLookUpIndustry($event)>
@@ -49,7 +49,7 @@
           <div class="form-group row">
               <label class="col-md-3 adInsLabel adins-required" translate>Company Scale </label>
               <div class="col-md-4">
-                <select class="form-control adInsInput" formControlName="CompanyScale">
+                <select class="form-control adInsInput" formControlName="CompanyScale" required>
                   <option *ngFor="let ram of listCompanyScale" [value]="ram.Key">
                     {{ram.Value}}
                   </option>
@@ -68,7 +68,7 @@
           <div class="form-group row">
               <label class="col-md-3 adInsLabel adins-required" translate>Employment Establishment Date </label>
               <div class="col-md-3">
-                <input type="date" id="empEstablishmentDt" class="form-control adInsInput" formControlName="EmpEstablishmentDate" required
+                <input type="date" id="empEstablishmentDt" class="form-control adInsInput" formControlName="EmpEstablishmentDate"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.EmpEstablishmentDate.invalid }">
                 <show-errors [control]="JobDataSmeForm.controls.EmpEstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
               </div>
@@ -79,8 +79,16 @@
               <div id="CustMainDataPersonal"> 
                   <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataSmeForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputJobAddressObj" [showOwnership]="true"></lib-ucaddress>
               </div>
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel adins-required" translate>Notes </label>
+                <div class="col-md-4">
+                <textarea type="text" class="form-control adInsInput" formControlName="NotesJob"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.NotesJob.invalid }"></textarea>
+                <show-errors [control]="JobDataSmeForm.controls.NotesJob" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+            </div>
           </div>
-          <lib-ucSubsection [id]="'jobAddrAttrId'" [title]="'Job Address Info'" [panel]="'jobAddrAttribute'">
+          <!-- <lib-ucSubsection [id]="'jobAddrAttrId'" [title]="'Job Address Info'" [panel]="'jobAddrAttribute'">
           </lib-ucSubsection>
           <div id="jobAddrAttribute">
               <div class="form-group row">
@@ -107,15 +115,7 @@
                   <show-errors [control]="JobDataSmeForm.controls.StayLength" [submit]="enjiForm.submitted"></show-errors>
                   </div>
               </div>
-              <div class="form-group row">
-                  <label class="col-md-3 adInsLabel adins-required" translate>Notes </label>
-                  <div class="col-md-4">
-                  <textarea type="text" class="form-control adInsInput" formControlName="NotesJob"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.NotesJob.invalid }"></textarea>
-                  <show-errors [control]="JobDataSmeForm.controls.NotesJob" [submit]="enjiForm.submitted"></show-errors>
-                  </div>
-              </div>
-          </div>
+          </div> -->
           <lib-ucSubsection [id]="'otherBusinessId'" [title]="'Other Business'" [panel]="'otherBusiness'">
           </lib-ucSubsection>
           <div id="otherBusiness">
@@ -175,7 +175,7 @@
                   </div>
               </div>
           </div>
-          <lib-ucSubsection [id]="'otherAddrAttrId'" [title]="'Other Business Address Attribute'" [panel]="'otherAddrAttribute'">
+          <!-- <lib-ucSubsection [id]="'otherAddrAttrId'" [title]="'Other Business Address Attribute'" [panel]="'otherAddrAttribute'">
           </lib-ucSubsection>
           <div id="otherAddrAttribute">
               <div class="form-group row">
@@ -202,10 +202,13 @@
                   <show-errors [control]="JobDataSmeForm.controls.OtherStayLength" [submit]="enjiForm.submitted"></show-errors>
                   </div>
               </div>
-          </div>
+          </div> -->
       </div>
     </div>
     <div class="form-actions right" style="text-align: right;" >
+      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+        <i class="ft-x"></i> Back
+      </button>
       <button type="submit" class="btn btn-raised btn-primary" translate>
         <i class="fa fa-check-square-o"></i> Save and Continue
       </button>

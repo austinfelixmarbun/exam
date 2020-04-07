@@ -29,6 +29,22 @@
                   <label>{{this.TaxIdNo}}</label>
                 </div>
               </div>
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
+                <div class="col-md-4">
+                  <label>{{this.StatusAffiliate}}</label>
+                </div>
+              </div>
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>VIP</label>
+                <div class="col-md-4">
+                  <label>{{this.StatusIsVip}}</label>
+                </div>
+                <label class="col-md-2 adInsLabel" translate>VIP Notes</label>
+                <div class="col-md-4">
+                  <label>{{this.VipNotes}}</label>
+                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -42,38 +58,45 @@
         </form>
         <div class="d-flex justify-content-end ">
           <span class="mr-1 d-flex align-content-center ">
-            <button type="button" class="addButton" translate (click)=SaveValue()>
+            <button type="button" *ngIf="DuplicateStatus != 'LOCK'" class="addButton" translate (click)=SaveValue()>
               New
-            </button>
-            <button type="button" class="addButton" [routerLink]="['../../Configuration/Paging']" translate>
-              Select
             </button>
           </span>
         </div>
         <table class="table table-responsive-md text-center table-hover">
           <thead>
             <tr class="table-header">
-
-              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Customer No</span>
+              <th><span class="thead-header" name='No' translate>No</span>
               </th>
-              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Customer Name</span>
+              <th><span class="thead-header" name='CustName' translate>Customer Name</span>
               </th>
-              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Npwp
+              <!-- <th><span class="thead-header" name='IdNo' translate>ID No
+                </span>
+              </th> -->
+              <th><span class="thead-header" name='TaxIdNo' translate>Npwp
                 </span>
               </th>
-              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Duplicate Item</span>
+              <th><span class="thead-header" name='Status' translate>Status</span>
               </th>
-              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Select</span>
+              <th><span class="thead-header" name='DuplicateItem' translate>Duplicate Item</span>
+              </th>
+              <th><span class="thead-header" name='Select' translate>Select</span>
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let item of resultData?.Data">
-              <td class="text-left">{{item.assetCode}}</td>
-              <td class="text-left">{{item.assetName}}</td>
-              <td class="text-left">{{item.fullAssetCode}}</td>
-              <td class="text-left">{{item.fullAssetName}}</td>
-              <td class="text-left">{{item.assetCategoryName}}</td>
+          <tbody *ngIf="DuplicateStatus == 'LOCK'">
+            <tr *ngFor="let item of ResultDuplicate; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{item.CustName}}</td>
+              <!-- <td>{{item.IdNo}}</td> -->
+              <td>{{item.TaxIdNo}}</td>
+              <td>{{DuplicateStatus}}</td>
+              <td>{{item.DuplicateItem}}</td>
+              <td>
+                <a class="success p-0" data-original-title="" title="" (click)="EditCustCompany(item)">
+                  <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -88,32 +111,37 @@
         <table class="table table-responsive-md text-center table-hover">
           <thead>
             <tr class="table-header">
-              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Customer No</span>
-              </th>
-              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Customer Name</span>
-              </th>
-              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Address </span>
-              </th>
-              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>NPWP</span>
-              </th>
-              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Status</span>
-              </th>
-              <th class="text-Justify"><span class="thead-header" name='fullAssetName' translate>Data Source</span>
-              </th>
-              <th class="text-Justify"><span class="thead-header" name='assetCategoryName' translate>Duplicate
-                  Item</span>
+              <th class="text-left"><span class="thead-header" name='No' translate>No</span>
               </th>
 
+              <th><span class="thead-header" name='CustName' translate>Customer Name</span>
+              </th>
+              <!-- <th><span class="thead-header" name='IdNo' translate>ID No </span>
+              </th> -->
+              <th><span class="thead-header" name='TaxIdNo' translate>NPWP</span>
+              </th>
+              <th><span class="thead-header" name='Status' translate>Status</span>
+              </th>
+              <th><span class="thead-header" name='assetCategoryName' translate>Duplicate
+                  Item</span>
+              </th>
+              <th><span class="thead-header" name='Select' translate>Select</span>
             </tr>
           </thead>
-          <tbody>
-            <!-- <tr *ngFor="let item of resultData?.Data">
-                <td class="text-left">{{item.assetCode}}</td>
-                <td class="text-left">{{item.assetName}}</td>
-                <td class="text-left">{{item.fullAssetCode}}</td>
-                <td class="text-left">{{item.fullAssetName}}</td>
-                <td class="text-left">{{item.assetCategoryName}}</td>
-              </tr> -->
+          <tbody *ngIf="DuplicateStatus == 'LOCK'">
+            <tr *ngFor="let item of ResultDuplicateNegative; let i = index">
+              <td>{{i+1}}</td>
+              <td class="text-left">{{item.CustName}}</td>
+              <!-- <td class="text-left">{{item.IdNo}}</td> -->
+              <td class="text-left">{{item.TaxIdNo}}</td>
+              <td>{{DuplicateStatus}}</td>
+              <td class="text-left">{{item.DuplicateItem}}</td>
+              <td>
+                <a class="success p-0" data-original-title="" title="" (click)="EditCustCompany(item)">
+                  <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                </a>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

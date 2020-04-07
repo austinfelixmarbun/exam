@@ -4,7 +4,7 @@
     <div class="form-body">
       <div id="jobData">
           <div class="form-group row">
-            <label class="col-md-3 adInsLabel" translate>Profession Name</label>
+            <label class="col-md-3 adInsLabel adins-required-label" translate>Profession Name</label>
             <div class="col-md-4">
               <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="JobDataNonProForm"
                 [enjiForm]="enjiForm" [identifier]="'MrJobProfessionCode'" (lookup)=getLookUpProfession($event)>
@@ -22,6 +22,9 @@
       </div>
     </div>
     <div class="form-actions right" style="text-align: right;" >
+      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+        <i class="ft-x"></i> Back
+      </button>
       <button type="submit" class="btn btn-raised btn-primary" translate>
         <i class="fa fa-check-square-o"></i> Save and Continue
       </button>

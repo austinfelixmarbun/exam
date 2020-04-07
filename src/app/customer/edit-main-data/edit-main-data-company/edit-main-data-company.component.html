@@ -28,8 +28,8 @@
                   </show-errors>
                 </div>
               </div>
-            <div class="form-group row adins-required">
-                <label class="col-md-2 adInsLabel" translate>Company Type</label>
+            <div class="form-group row ">
+                <label class="col-md-2 adins-required-label" translate>Company Type</label>
                 <div class="col-md-4">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrCompanyTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.MrCompanyTypeCode.invalid }">
@@ -44,6 +44,27 @@
                   <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.TaxIdNo.invalid}">
                   <show-errors [control]="CustomerCompanyForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
+                </div>
+              </div>            
+              <div class="form-group row">
+                <label class="col-md-2 adInsLabel" translate>VIP</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
+                    (click)="checkState()" />
+                </div>         
+                <label class="col-md-2 adInsLabel " [ngClass]="{'adins-required-label' : VipNotesRequired==true}" translate>VIP Notes</label>
+                <div class="col-md-4">
+                    <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"   
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.VipNotes.invalid }"></textarea>
+
+                    <show-errors [control]="CustomerCompanyForm.controls.VipNotes" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>

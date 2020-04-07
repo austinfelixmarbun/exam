@@ -68,7 +68,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     if (this.type == 'edit') {
       this.refIndustryType = new RefIndustryTypeObj();
       this.refIndustryType.RefIndustryTypeId = this.refIndustryTypeId;
-      var getRefIndustryUrl = this.settingUrl + AdInsConstant.GetRefIndustryTypeById;
+      var getRefIndustryUrl =  AdInsConstant.GetRefIndustryTypeById;
       var getRefEconomicSectorById = AdInsConstant.GetRefEconomicSectorById;
       this.httpClient.post(getRefIndustryUrl, this.refIndustryType).pipe(
         map( response => {

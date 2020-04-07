@@ -14,9 +14,13 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.required]],
+    TaxIdNo: [''],
+    IsVip: [true],
+    IsAffiliateWithMf: [true],
+    VipNotes: ['', [Validators.required]]
   });
-  getUrl: any;
+  GetListActiveRefMasterUrl: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl: string;
   tempCustModel: any;
   tempCompanyTypeCode: any;
   CustModel: any;
@@ -24,18 +28,23 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   MrIdTypeCode: any;
   CustName: any;
   TaxIdNo: any;
-
+  IsVip: any;
+  VipNotes: string;
+  IsAffiliateWithMf: any;
+  VipNotesRequired: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
-    this.getUrl = AdInsConstant.GetListActiveRefMaster;
+    this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
-    var refMasterObj1 = {
+    this.VipNotesRequired = true;
+    var refMasterObjCustModel = {
       RefMasterTypeCode: "CUST_MODEL",
       ReserveField1: "COMPANY",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj1).subscribe(
+    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
@@ -44,11 +53,11 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       }
     );
 
-    var refMasterObj2 = {
+    var refMasterObjMrCompanyTypeCode = {
       RefMasterTypeCode: "COMPANY_TYPE",
       RowVersion: ""
     }
-    this.http.post(this.getUrl, refMasterObj2).subscribe(
+    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempCompanyTypeCode = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
@@ -62,6 +71,31 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.TaxIdNo = this.CustomerCompanyForm.controls["TaxIdNo"].value;
     this.CustModel = this.CustomerCompanyForm.controls["CustModel"].value;
     this.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
-    this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, } });
+    this.IsVip = this.CustomerCompanyForm.controls["IsVip"].value;
+    this.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value;
+
+    if (this.IsVip == true) {
+      this.VipNotes = this.CustomerCompanyForm.controls["VipNotes"].value;
+    }
+    this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, "IsAffiliateWithMf": this.IsAffiliateWithMf, "IsVip": this.IsVip, "VipNotes": this.VipNotes } });
+  }
+
+  checkState() {
+    if (this.CustomerCompanyForm.controls.IsVip.value === true) {
+      this.CustomerCompanyForm.patchValue({
+        VipNotes: null
+      });
+      this.CustomerCompanyForm.controls.VipNotes.disable();
+      this.VipNotesRequired = false;
+      this.CustomerCompanyForm.controls.IdExpiredDt.clearValidators();
+    
+      
+
+    } else {
+      this.CustomerCompanyForm.controls.VipNotes.enable();
+      this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
+      this.VipNotesRequired = true; 
+    }
+    this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
   }
 }
