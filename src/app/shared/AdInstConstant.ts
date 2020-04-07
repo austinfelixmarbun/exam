@@ -511,7 +511,7 @@ export class AdInsConstant {
   public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
 
   //VENDOR
-  public static DeleteVendor ="/Vendor/DeleteVendor";
+  public static DeleteVendor = "/Vendor/DeleteVendor";
   public static AddVendorHO = environment.FoundationR3Url + "/Vendor/AddVendorHO";
   public static EditVendorHO = environment.FoundationR3Url + "/Vendor/EditVendorHO";
   public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
