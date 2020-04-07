@@ -43,7 +43,7 @@
             "name": "V.VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
-            "label": "HO Code",
+            "label": "Head Office Code",
             "placeholder": "Placeholder"
         },
         {
@@ -51,7 +51,7 @@
             "name": "V.VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
-            "label": "HO Name",
+            "label": "Head Office Name",
             "placeholder": "Placeholder"
         }
     ],
@@ -63,13 +63,13 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "SCHEME CODE",
+            "label": "HEAD OFFICE CODE",
             "name": "VendorCode"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "SCHEME NAME",
+            "label": "HEAD OFFICE NAME",
             "name": "VendorName"
         },
         {

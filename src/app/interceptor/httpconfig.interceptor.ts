@@ -25,9 +25,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router, public toastr: ToastrService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log(request);
-        var asdasd = new RequestCriteriaObj();
-        console.log(asdasd);
-        if (request.method == "POST" && (request.body == null || request.body.isLoading == true)) {
+        if (request.method == "POST" && (request.body == null || request.body.isLoading == undefined || request.body.isLoading == true)) {
             this.spinner.show();
         }
         this.count++;
