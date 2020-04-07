@@ -1,0 +1,73 @@
+{
+    "title": "Cust Personal",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "CUST_NO",
+        "id": "custNoId",
+        "value": "",
+        "label": "Cust No",
+        "placeholder": "Cust No"
+      },
+      {
+        "type": "textbox",
+        "name": "CUST_NAME",
+        "id": "custNameId",
+        "value": "",
+        "label": "Cust Name",
+        "placeholder": "Cust Name"
+      }
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Cust No",
+        "name": "CUST_NO"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Cust Name",
+        "name": "CUST_NAME"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+  
+    "querystring": {
+      "select": "select c.CUST_NO as CustNo, c.CUST_NAME AS CustName, c.MR_CUST_MODEL_CODE as MrCustModelCode, c.MR_ID_TYPE_CODE as MrIdTypeCode, c.ID_NO as IdNo, c.ID_EXPIRED_DT as IdExpiredDt, cp.MR_GENDER_CODE as MrGenderCode, cp.BIRTH_DT as BirthDt, cp.BIRTH_PLACE as BirthPlace,c.TAX_ID_NO as TaxIdNo",
+      "from": "from dbo.CUST_Personal cp  WITH(NOLOCK) join dbo.CUST c WITH(NOLOCK) on cp.CUST_ID = c.CUST_ID"
+    },
+  
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "center",
+        "property": "CustNo"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "CustName"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "select",
+            "property": "CustId"
+          }
+        ]
+      }
+    ],
+  
+    "propertyId": "CustName",
+    "propertyName": "CustName"
+
+  }
+  

@@ -16,18 +16,18 @@ import { ProdOfferingVersionObj } from '../../../shared/model/ProdOfferingVersio
 })
 export class ProductHODeactivateEditComponent implements OnInit {
 
-  prodId: any;
-  prodHId: any;
+  prodId: number;
+  prodHId: number;
   prodHDeactivateObj: ProdHDeactivateObj;
   resultData: any;
-  apiUrl: any;
-  editUrl: any;
+  apiUrl: string;
+  requestDeactURL: string;
   ProdOfferingObj: any;
   arrCrit: any;
   getValueReasonModel: any;
   allRefReasonMethod: any;
   viewObj: any;
-  prodOfferVerUrl: any;
+  prodOfferVerUrl: string;
   ProdOfferVer: any;
 
   ProdHDeactForm = this.fb.group({
@@ -39,7 +39,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.editUrl = AdInsConstant.RequestDeactivation;
+    this.requestDeactURL = AdInsConstant.RequestDeactivation;
     this.getValueReasonModel = AdInsConstant.GetValueReasonModel;
     this.prodOfferVerUrl = AdInsConstant.GetListProdOfferingVersionByProdId;
 
@@ -87,7 +87,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.prodHDeactivateObj = this.ProdHDeactForm.value;
     this.prodHDeactivateObj.ProdHId = this.prodHId;
     this.prodHDeactivateObj.RowVersion = "";
-    this.http.post(this.editUrl, this.prodHDeactivateObj).subscribe(
+    this.http.post(this.requestDeactURL, this.prodHDeactivateObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate(["/Product/HODeactivate"]);

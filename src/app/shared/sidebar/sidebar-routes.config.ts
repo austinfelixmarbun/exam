@@ -49,20 +49,25 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '', title: 'Vendor', icon: 'ft-briefcase', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
+      
       { path: '/Vendor/Holding/Paging', title: 'Vendor Holding', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Product/HODeactivate', title: 'Vendor Head Office', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Product/ProductOffering/paging', title: 'Vendor Branch', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Product/OfferingDeactivate', title: 'Vendor Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Product/OfferingDeactivate', title: 'Vendor Group', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/Vendor/HO/Paging', title: 'Vendor Head Office', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Vendor/Branch/Paging', title: 'Vendor Branch', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Vendor/VendorScheme/Paging', title: 'Vendor Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Vendor/Group/Paging', title: 'Vendor Group', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
     ]
   },
   {
     path: '', title: 'Product', icon: 'ft-package', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
     submenu: [
       { path: '/Product/HOpaging', title: 'Product HO', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/HOApproval', title: 'Product HO Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Product/HODeactivate', title: 'Product HO Deactivation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Product/ProductOffering/paging', title: 'Product Offering', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Product/OfferingDeactivate', title: 'Product Offering Deactivation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/Product/HODeactivateApproval', title: 'Product HO Deactivate Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/ProdOffering/paging', title: 'Product Offering', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/OfferingApproval', title: 'Product Offering Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/OfferingDeactivate', title: 'Product Offering Deactivation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Product/OfferingDeactivateApproval', title: 'Product Offering Deactivate Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
     ]
   },
   {
@@ -77,18 +82,19 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       { path: '/Verification/QuestionAnswerPaging', title: 'Question Answer', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Verification/QuestionSchemePaging', title: 'Question Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Verification/QuestionGroupPaging', title: 'Question Group', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Verification/QuestionGroupMemberPaging', title: 'Question Group Member', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
-    ]
-  },
-  {    path: '', title: 'Vendor', icon: 'ft-aperture', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
-    submenu: [
-      { path: '/Vendor/HO/Paging', title: 'Vendor HO Paging', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Vendor/Branch/Paging', title: 'Vendor Branch Paging', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Vendor/VendorScheme/Paging', title: 'Vendor Scheme Paging', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Verification/QuestionGroupPaging', title: 'Question Group', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      
     ]
   },
   
+  {
+    path: '', title: 'Customer', icon: 'ft-user', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    submenu: [
+      { path: '/Customer/Paging', title: 'Customer', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Customer/EditMainData/Paging', title: 'Edit Main Data Customer', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },  
+      { path: '/Customer/NegativeCustomer/Paging', title: 'Negative Customer', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },      
+    ]
+  },
   // {
   //     path: '', title: 'LOS', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
   //     submenu: [

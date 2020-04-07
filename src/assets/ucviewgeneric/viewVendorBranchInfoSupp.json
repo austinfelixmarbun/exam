@@ -1,0 +1,53 @@
+{
+    "title":"",
+    "subsection": [
+      {
+        "subSectionId": "BranchInformationSuppId",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Supplier HO:",
+            "property": "SupplierHo"
+          },
+          {
+            "type": "text",
+            "label": "Supplier Upping Calcuation Method:",
+            "property": "SuppCalc"
+          },
+          {
+            "type": "text",
+            "label": "Supplier Class",
+            "property": "SupplierClass"
+          },
+          {
+            "type": "text",
+            "label": "Bpkb Aging:",
+            "property": "BpkbAging"
+          },
+          {
+            "type": "text",
+            "label": "Days A/P Payment Due after Go Live:",
+            "property": "DAP"
+          },
+          {
+            "type": "text",
+            "label": "Max Refund Type:",
+            "property": "MaxRefundType"
+          },
+          {
+            "type": "text",
+            "label": "Max Refund Value:",
+            "property": "MaxRefundValue"
+          }
+        ],
+        "querystring": {
+           "select":"SELECT VENDOR_NAME AS SupplierHo,RESERVED_FIELD_3 AS SuppCalc,MR_VENDOR_CLASS AS SupplierClass,RESERVED_FIELD_5 AS BpkbAging, RESERVED_FIELD_6 AS DAP,RESERVED_FIELD_7 AS MaxRefundType,RESERVED_FIELD_8 AS MaxRefundValue",
+            "from":"FROM dbo.VENDOR A WITH(NOLOCK)",
+            "where":"WHERE MR_VENDOR_CLASS = 'BRANCH'  AND MR_VENDOR_CATEGORY_CODE LIKE 'SUPPLIER%' AND MR_VENDOR_CATEGORY_CODE NOT LIKE '%HO' AND VENDOR_ID = {0}"
+        }
+      }
+    ]
+  }
+  

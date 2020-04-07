@@ -28,6 +28,7 @@ import { VendorHoldingRegistrationComponent } from './vendor-holding-registratio
 import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
 import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
 import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
+import { VendorBranchViewComponent } from './vendor-branch/vendor-branch-view/vendor-branch-view.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,13 @@ const routes: Routes = [
         component: VendorBranchRegistrationComponent,
         data: {
           title: 'Vendor Branch Registration'
+        },
+      },
+      {
+        path: 'Branch/View',
+        component: VendorBranchViewComponent,
+        data: {
+          title: 'Vendor Branch View'
         },
       },
       {

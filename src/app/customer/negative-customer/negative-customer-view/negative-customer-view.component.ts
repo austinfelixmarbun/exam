@@ -41,17 +41,17 @@ export class NegativeCustomerViewComponent implements OnInit {
     negativeCustObj.NegativeCustId = this.negativeCustId;
 
     this.httpClient.post(AdInsConstant.GetNegativeCustByNegativeCustId, negativeCustObj).pipe(
-      map( (response) => {
+      map((response) => {
         return response;
       }),
-      mergeMap( (response: any) => {
+      mergeMap((response: any) => {
         var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
         negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
         const negativeCustChangeTrx = this.httpClient.post(AdInsConstant.GetListNegativeCustChangeTrxByNegativeCustId, negativeCustChangeTrxObj);
         var tempResponse = [response];
         return forkJoin([tempResponse, negativeCustChangeTrx]);
       }),
-      mergeMap( (response: any) => {
+      mergeMap((response: any) => {
         var refMasterIdTypeObj = new RefMasterObj();
         refMasterIdTypeObj.MasterCode = response[0].MrIdTypeCode;
         var refMasterNegativeCustTypeObj = new RefMasterObj();

@@ -63,11 +63,9 @@ export class ProductHOViewComponent implements OnInit {
 
     //** Product Version **//
     this.ProdVersionObj = new ProdHVersionObj
-    this.ProdVersionObj.ProdId = this.prodId;
+    this.ProdVersionObj.ProdHId = this.prodHId;
     this.http.post(this.ProdVerUrl, this.ProdVersionObj).subscribe(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdVersion = response['ReturnObject'];
       },
       error => {
@@ -80,8 +78,6 @@ export class ProductHOViewComponent implements OnInit {
     this.ProdBranchMemObj.ProdHId = this.prodHId;
     this.http.post(this.ProdBranchUrl, this.ProdBranchMemObj).subscribe(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdBranchMbr = response['ReturnObject'];
       },
       error => {
@@ -92,11 +88,9 @@ export class ProductHOViewComponent implements OnInit {
     //** General Data **//
     this.refProductDetailObj = new RefProductDetailObj
     this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = 'GEN';
+    this.refProductDetailObj.GroupCodes = ['GEN'];
     this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.GenData = response['ReturnObject'];
       },
       error => {
@@ -107,11 +101,9 @@ export class ProductHOViewComponent implements OnInit {
     //** Scheme Component **//
     this.refProductDetailObj = new RefProductDetailObj
     this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = 'SCHM';
+    this.refProductDetailObj.GroupCodes = ['SCHM'];
     this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdCompSchm = response['ReturnObject'];
       },
       error => {
@@ -121,11 +113,9 @@ export class ProductHOViewComponent implements OnInit {
     //** Score Component **//
     this.refProductDetailObj = new RefProductDetailObj
     this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = 'SCORE';
+    this.refProductDetailObj.GroupCodes = ['SCORE'];
     this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdCompScore = response['ReturnObject'];
       },
       error => {
@@ -135,11 +125,9 @@ export class ProductHOViewComponent implements OnInit {
           //** Rule Component **//
     this.refProductDetailObj = new RefProductDetailObj
     this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = 'RULE';
+    this.refProductDetailObj.GroupCodes = ['RULE'];
     this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdCompRule = response['ReturnObject'];
       },
       error => {
@@ -150,11 +138,9 @@ export class ProductHOViewComponent implements OnInit {
           //** Other Component **//
     this.refProductDetailObj = new RefProductDetailObj
     this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = 'OTHR';
+    this.refProductDetailObj.GroupCodes = ['OTHR'];
     this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdCompOther = response['ReturnObject'];
       },
       error => {

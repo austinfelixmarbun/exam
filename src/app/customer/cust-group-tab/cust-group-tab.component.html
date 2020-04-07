@@ -1,6 +1,6 @@
 <lib-ucSubsection [id]="'CustGrpSectionId'" [title]="'Customer Group'" [panel]="'CustGrpSection'"></lib-ucSubsection>
 <div id="CustGrpSection">
-  <div class="col-md-12" style="padding: 0;">
+  <div class="col-md-12" style="padding: 0; text-align: right;">
     <span class="mr-1">
       <button type="button" class="addButton" (click)="openModalAddCustGroup()" translate>
         <i class="ft-plus-circle"></i> Add
@@ -20,19 +20,31 @@
           <th style="text-align: left;">
             <span class="thead-header" name='relationship' translate>Relationship</span>
           </th>
-          <th style="text-align: left;">
+          <th style="text-align: center;">
             <span class="thead-header" name='action' translate>Action</span>
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of CustGrpList">
+        <tr *ngFor="let item of CustGrpList; let i = index">
           <td style="text-align: left;">{{item.CustNo}}</td>
           <td style="text-align: left;">{{item.CustName}}</td>
           <td style="text-align: left;">{{item.Relationship}}</td>
-          <td style="text-align: left;"></td>
+          <td style="text-align: center;">
+            <a (click)="deleteCustGrp(item.CustGrpId, i)">
+              <i class="fas fa-trash"></i>
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
+<br>
+<br>
+<br>
+<div class="form-actions right" style="text-align: right;">
+  <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
+    <i class="fa fa-check-square-o"></i> Save and Continue
+  </button>
 </div>

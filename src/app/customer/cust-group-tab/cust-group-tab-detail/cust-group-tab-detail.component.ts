@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -18,14 +18,15 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 })
 export class CustGroupTabDetailComponent implements OnInit {
   @Input() MrCustTypeCode: string;
-  @Input() CustId: number;
+  @Input() CustId: any;
+  @Output() AddCustGroupResponse = new EventEmitter<any>();
   inputLookupCustPersonalObj: InputLookupObj;
   inputLookupCustCompanyObj: InputLookupObj;
   relationshipList: any;
 
   CustGrpForm = this.fb.group({
     CustGrpId: [0, [Validators.required]],
-    CustId: [this.CustId ? this.CustId : 0, [Validators.required]],
+    CustId: [0, [Validators.required]],
     MemberCustId: [0, [Validators.required]],
     MrCustRelationshipCode: [''],
     CustGrpNotes: [''],
@@ -47,6 +48,9 @@ export class CustGroupTabDetailComponent implements OnInit {
     var criteriaList;
     var criteriaObj;
     var refMasterRelationship = new RefMasterObj();
+    this.CustGrpForm.patchValue({
+      CustId: this.CustId
+    });
     
     if(this.MrCustTypeCode == "PERSONAL"){
       this.inputLookupCustPersonalObj = new InputLookupObj();
@@ -109,6 +113,25 @@ export class CustGroupTabDetailComponent implements OnInit {
   Save(){
     var custGrpData = this.CustGrpForm.value;
     
-    // this.httpClient.post();
+    if(custGrpData.IsBothWays){
+      this.httpClient.post(AdInsConstant.AddCustGrpBothWays, custGrpData).subscribe(
+        (response) => {
+          this.activeModal.close(response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    else{
+      this.httpClient.post(AdInsConstant.AddCustGrp, custGrpData).subscribe(
+        (response) => {
+          this.activeModal.close(response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 }

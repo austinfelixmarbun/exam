@@ -14,7 +14,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class NegativeCustomerComponent implements OnInit {
   @ViewChild(UcpagingComponent) ucpaging;
   inputPagingObj: any;
-  testCustId: number = 2;
 
   constructor() { }
 
@@ -26,5 +25,4 @@ export class NegativeCustomerComponent implements OnInit {
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteNegativeCustomer;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNegativeCustomer.json";
   }
-
 }

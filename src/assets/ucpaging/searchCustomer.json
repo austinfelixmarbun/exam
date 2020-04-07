@@ -48,25 +48,24 @@
             "type": "sort",
             "position": "left",
             "label": "Customer No",
-            "name": "CustNo"
+            "name": "CUST_NO"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Customer Name",
-            "name": "CustName"
+            "name": "CUST_NAME"
         },  {
             "type": "sort",
             "position": "left",
             "label": "Type",
-            "name": "MrCustTypeCode"
+            "name": "MR_CUST_TYPE_CODE"
         },  {
             "type": "sort",
             "position": "left",
             "label": "Id No",
-            "name": "IdNo"
+            "name": "ID_NO"
         },
-      
         {
             "type": "label",
             "position": "center",
@@ -74,14 +73,22 @@
         }
     ],
     "querystring": {
-        "select": "SELECT A.CUST_NO AS CustNo, A.CUST_NAME AS CustName, A.MR_CUST_TYPE_CODE as MrCustTypeCode, A.ID_NO as IdNo",
-        "from": "FROM CUST A WITH(NOLOCK)"
+        "select": "SELECT c.CUST_NO AS CustNo, c.CUST_NAME AS CustName, c.MR_CUST_TYPE_CODE as MrCustTypeCode, c.ID_NO as IdNo, c.CUST_ID as CustId",
+        "from": "FROM dbo.CUST c WITH(NOLOCK) join dbo.REF_MASTER rm WITH(NOLOCK) on c.MR_CUST_TYPE_CODE = rm.MASTER_CODE AND rm.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
     },
     "bodyList": [
-        {
-            "type": "text",
-            "position": "left",
-            "property": "CustNo"
+       {
+            "type" : "link", 
+            "position" : "left", 
+            "property" : "CustNo",
+            "path": "../CustomerView/Page",
+            "target": "_blank",
+            "param": [
+                {
+                    "type" : "CustId", 
+                    "property" : "CustId" 
+                }
+            ]
         },
         {
             "type": "text",
@@ -103,18 +110,62 @@
             "position": "center",
             "action": [
                 {
-                    "type": "edit",
-                    "path": "/Asset/Accessory/Detail",
-                    "param": [
+                    "type": "switch",
+                    "case": [
                         {
-                            "type": "mode",
-                            "property": "edit"
-                        } 
-                    
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "PERSONAL",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "url",
+                                "path": "/Customer/EditMainData/Personal",
+                                "icon": "ft-edit-2",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    },
+                                    {
+                                        "type": "From",
+                                        "property": "CustPaging"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "COMPANY",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "url",
+                                "path": "/Customer/EditMainData/Company",
+                                "icon": "ft-edit-2",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    },
+                                    {
+                                        "type": "From",
+                                        "property": "CustPaging"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        }
                     ]
-                } 
-                
+                }
             ]
         }
+                
     ]
 }

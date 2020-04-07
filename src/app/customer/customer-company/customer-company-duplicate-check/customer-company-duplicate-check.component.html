@@ -1,14 +1,3 @@
-<div class="ucSearch-Button-Right">
-  <span class="mr-1">
-    <button type="button" class="backButton" [routerLink]="['../MainInfo']" translate>
-      <i class="ft-x" ></i> Cancel
-    </button>
-    <button type="submit" class="addButton" translate>
-      <i class="fa fa-check-square-o"></i> Next
-    </button>
-  </span>
-</div>
-
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
@@ -21,60 +10,112 @@
           <form class="form form-horizontal" id="MainInfoId">
             <div class="form-body">
               <div class="form-group row">
-                <label class="col-md-2 adInsLabel" translate>Customer Model </label>
-                <div class="col-md-4">
-                  <label>{{this.CustModel}}</label>
-
-                 
-                </div>
                 <label class="col-md-2  adInsLabel" translate>Customer Name </label>
                 <div class="col-md-4">
                   <label>{{this.CustName}}</label>
-              
                 </div>
-
+                <label class="col-md-2 adInsLabel" translate>Customer Model </label>
+                <div class="col-md-4">
+                  <label>{{this.tempCustModel?.Descr}}</label>
+                </div>
               </div>
               <div class="form-group row ">
                 <label class="col-md-2 adInsLabel" translate>Company Type</label>
                 <div class="col-md-4">
-                  <label>{{this.MrCompanyTypeCode}}</label> 
+                  <label>{{this.tempMrCompanyTypeCode?.Descr}}</label>
                 </div>
-                <label class="col-md-2 adInsLabel" translate>ID TYPE </label>
-                <div class="col-md-4">
-                  <label>{{this.MrIdTypeCode}}</label>
-                 
-                </div>
-
-              </div>
-
-              <div class="form-group row ">
-
-                <label class="col-md-2 adInsLabel" translate>NPWP </label>
-                <div class="col-md-4">
-                  <label>{{this.IdNo}}</label>
-               
-                </div>
-
                 <label class="col-md-2 adInsLabel" translate>NPWP</label>
                 <div class="col-md-4">
                   <label>{{this.TaxIdNo}}</label>
-               
                 </div>
               </div>
-
-            </div>
-
-            <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../MainInfo']" translate>
-                <i class="ft-x"></i> Cancel
-              </button>
-              <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="fa fa-check-square-o"></i> Next
-              </button>
             </div>
           </form>
-
         </div>
+        <!-- Match / Similar Data -->
+        <form class="form form-horizontal">
+          <div class="form-body">
+            <h4 class="form-section card-title" translate>
+              Match / Similar Data
+            </h4>
+          </div>
+        </form>
+        <div class="d-flex justify-content-end ">
+          <span class="mr-1 d-flex align-content-center ">
+            <button type="button" class="addButton" translate (click)=SaveValue()>
+              New
+            </button>
+            <button type="button" class="addButton" [routerLink]="['../../Configuration/Paging']" translate>
+              Select
+            </button>
+          </span>
+        </div>
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+
+              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Customer No</span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Customer Name</span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Npwp
+                </span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>Duplicate Item</span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>Select</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of resultData?.Data">
+              <td class="text-left">{{item.assetCode}}</td>
+              <td class="text-left">{{item.assetName}}</td>
+              <td class="text-left">{{item.fullAssetCode}}</td>
+              <td class="text-left">{{item.fullAssetName}}</td>
+              <td class="text-left">{{item.assetCategoryName}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Negative Customer Match / Similar Data -->
+        <form class="form form-horizontal" style="margin-top: 10px;">
+          <div class="form-body">
+            <h4 class="form-section card-title" translate>
+              Negative Customer Match / Similar Data
+            </h4>
+          </div>
+        </form>
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Customer No</span>
+              </th>
+              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Customer Name</span>
+              </th>
+              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Address </span>
+              </th>
+              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>NPWP</span>
+              </th>
+              <th class="text-Justify"><span class="thead-header" name='fullAssetCode' translate>Status</span>
+              </th>
+              <th class="text-Justify"><span class="thead-header" name='fullAssetName' translate>Data Source</span>
+              </th>
+              <th class="text-Justify"><span class="thead-header" name='assetCategoryName' translate>Duplicate
+                  Item</span>
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr *ngFor="let item of resultData?.Data">
+                <td class="text-left">{{item.assetCode}}</td>
+                <td class="text-left">{{item.assetName}}</td>
+                <td class="text-left">{{item.fullAssetCode}}</td>
+                <td class="text-left">{{item.fullAssetName}}</td>
+                <td class="text-left">{{item.assetCategoryName}}</td>
+              </tr> -->
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

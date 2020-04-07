@@ -1,0 +1,107 @@
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-body">
+			<div class="px-3">
+				<div class="form-body">
+					<h4 class="form-section card-title" *ngIf="custType == 'PERSONAL'" translate>CUSTOMER PERSONAL</h4>
+					<h4 class="form-section card-title" *ngIf="custType == 'COMPANY'" translate>CUSTOMER COMPANY</h4>
+					<div *ngIf="custType == 'PERSONAL'">
+						<lib-ucviewgeneric [viewInput]="viewCustMainInfoHeaderObj"></lib-ucviewgeneric>
+						<aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode]
+							navigateBackward="allow" navigateForward="allow" [defaultStepIndex]="0">
+							<aw-wizard-step [stepTitle]="'Main Data'" (stepEnter)="EnterTab('mainData')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-personal-detail *ngIf="isMainData == true">
+								</app-customer-view-personal-detail>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Address'" (stepEnter)="EnterTab('address')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-personal-address *ngIf="isAddress == true">
+								</app-customer-view-personal-address>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Contact Person'" (stepEnter)="EnterTab('contactPerson')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-personal-contact-person *ngIf="isContactPerson == true">
+								</app-customer-view-personal-contact-person>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Customer Group'" (stepEnter)="EnterTab('custGroup')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-personal-customer-group *ngIf="isCustGroup == true">
+								</app-customer-view-personal-customer-group>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Job Data'" (stepEnter)="EnterTab('jobData')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-personal-job-data *ngIf="isJobData == true && custModel == 'PROF'">
+								</app-customer-view-personal-job-data>
+								<app-customer-view-personal-job-data-non-prof
+									*ngIf="isJobData == true && custModel == 'NONPROF'">
+								</app-customer-view-personal-job-data-non-prof>
+								<app-customer-view-personal-job-data-emp
+									*ngIf="isJobData == true && custModel == 'EMP'">
+								</app-customer-view-personal-job-data-emp>
+								<app-customer-view-personal-job-data-sme
+									*ngIf="isJobData == true && custModel == 'SME'">
+								</app-customer-view-personal-job-data-sme>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Financial Data'" (stepEnter)="EnterTab('finData')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-personal-financial-data *ngIf="isFinData == true">
+								</app-customer-view-personal-financial-data>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Other Attribute'" (stepEnter)="EnterTab('otherAttr')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-personal-other-attr *ngIf="isOtherAttr == true">
+								</app-customer-view-personal-other-attr>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Application Listing'" (stepEnter)="EnterTab('appListing')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-personal-app-listing *ngIf="isAppListing == true">
+								</app-customer-view-personal-app-listing>
+							</aw-wizard-step>
+						</aw-wizard>
+					</div>
+					<div *ngIf="custType == 'COMPANY'">
+						<lib-ucviewgeneric [viewInput]="viewCustCoyMainInfoHeader"></lib-ucviewgeneric>
+						<aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode]
+							navigateBackward="allow" navigateForward="allow" [defaultStepIndex]="0">
+							<aw-wizard-step [stepTitle]="'Main Data'" (stepEnter)="EnterTabCoy('mainData')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-coy-detail *ngIf="isMainData == true">
+								</app-customer-view-coy-detail>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Address'" (stepEnter)="EnterTab('address')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-coy-address *ngIf="isAddress == true">
+								</app-customer-view-coy-address>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Management / Shareholder'"
+								(stepEnter)="EnterTabCoy('management')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-coy-management *ngIf="isManagement == true">
+								</app-customer-view-coy-management>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Contact Information'" (stepEnter)="EnterTabCoy('contact')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-coy-contact *ngIf="isContact == true">
+								</app-customer-view-coy-contact>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Financial Data'" (stepEnter)="EnterTabCoy('finData')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-coy-financial *ngIf="isFinData == true">
+								</app-customer-view-coy-financial>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Legal Document'" (stepEnter)="EnterTabCoy('legal')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-coy-legal *ngIf="isLegal == true"> </app-customer-view-coy-legal>
+							</aw-wizard-step>
+							<aw-wizard-step [stepTitle]="'Other Attribute'" (stepEnter)="EnterTabCoy('other')"
+								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+								<app-customer-view-coy-other *ngIf="isOther == true"> </app-customer-view-coy-other>
+							</aw-wizard-step>
+						</aw-wizard>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

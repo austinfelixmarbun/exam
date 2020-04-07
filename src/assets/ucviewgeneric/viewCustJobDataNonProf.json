@@ -1,0 +1,32 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "AddressId",
+        "subSectionTitle": "Job Data",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Customer Model",
+            "property": "CustModel"
+          },
+          {
+            "type": "text",
+            "label": "Job Title Name",
+            "property": "JobTitleName"
+          },
+          {
+            "type": "text",
+            "label": "Profession Name",
+            "property": "ProfessionName"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT RMMOD.DESCR  AS CustModel, CPJD.JOB_TITLE_NAME AS JobTitleName, RP.PROFESSION_NAME AS ProfessionName",
+          "from": "FROM dbo.CUST C WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER RMMOD WITH(NOLOCK) ON RMMOD.REF_MASTER_TYPE_CODE='CUST_MODEL' AND C.MR_CUST_MODEL_CODE = RMMOD.MASTER_CODE LEFT JOIN dbo.CUST_PERSONAL_JOB_DATA CPJD WITH(NOLOCK) ON C.CUST_ID = CPJD.CUST_ID LEFT JOIN dbo.REF_PROFESSION RP WITH(NOLOCK) ON RP.REF_PROFESSION_ID = CPJD.REF_PROFESSION_ID",
+          "where": "WHERE C.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

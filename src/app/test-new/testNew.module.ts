@@ -20,6 +20,9 @@ import { UcSubsectionComponent } from './uc-subsection/uc-subsection.component';
 import { Dummy4Component } from './dummy4/dummy4.component';
 import { UcSearchComponent } from './uc-search/uc-search.component';
 import { Dummy5Component } from './dummy5/dummy5.component';
+import { UcInputNumberComponent } from './uc-input-number/uc-input-number.component';
+import { UcShowErrorsModule } from "@adins/uc-show-errors";
+import { UcinputnumberModule } from "@adins/ucinputnumber";
 
 @NgModule({
     imports: [
@@ -33,7 +36,9 @@ import { Dummy5Component } from './dummy5/dummy5.component';
         UcpagingModule,
         UcSubsectionModule,
         // UcaddressModule,
-        ArchwizardModule
+        ArchwizardModule,
+        UcShowErrorsModule,
+        UcinputnumberModule
     ],
     declarations: [
         Dummy1Component,
@@ -46,7 +51,8 @@ import { Dummy5Component } from './dummy5/dummy5.component';
         UcSubsectionComponent,
         Dummy4Component,
         UcSearchComponent,
-        Dummy5Component
+        Dummy5Component,
+        UcInputNumberComponent
     ],
 
 })
