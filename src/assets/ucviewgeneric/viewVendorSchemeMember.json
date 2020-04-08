@@ -1,4 +1,5 @@
 {
+    "title": "Vendor Scheme Member",
     "subsection": [
       {
         "subSectionId": "Vendor Scheme Info",
@@ -17,14 +18,14 @@
           },
           {
             "type": "text",
-            "label": "Vendor Code",
+            "label": "Scheme Code",
             "property": "VendorSchmCode"
           },
           {
             "type": "text",
-            "label": "Vendor Name",
+            "label": "Scheme Name",
             "property": "VendorSchmName"
-          } 
+          }
         ],
         "querystring": {
             "select": "SELECT rm.DESCR AS VendorCategory, vs.IS_ACTIVE AS IsActive, vs.VENDOR_SCHM_CODE AS VendorSchmCode, vs.VENDOR_SCHM_NAME AS VendorSchmName",
