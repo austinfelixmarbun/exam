@@ -158,17 +158,6 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
       }
     );
   }
-  SaveValue() {
-    this.addCustObj = new AddCustObj();
-    this.addCustObj.custObj = new CustObj();
-    this.addCustObj.CustCompanyObj = new CustCompanyObj();
-    this.addCustObj.custObj.CustName = this.CustName;
-    this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-    this.addCustObj.custObj.MrCustTypeCode = "COMPANY";
-    this.addCustObj.custObj.MrCustModelCode = this.CustModel;
-    this.addCustObj.custObj.MrIdTypeCode = "NPWP";
-    this.addCustObj.custObj.IdNo = this.TaxIdNo;
-    this.addCustObj.custObj.TaxIdNo = this.TaxIdNo;
 
   EditCustCompany()
   {

@@ -2,7 +2,7 @@
     "title": "Vendor Scheme Member",
     "subsection": [
       {
-        "subSectionId": "Vendor Scheme Info",
+        "subSectionId": "VendorSchemeGroupInfoId",
         "subSectionTitle": "Vendor Scheme Group Info",
         "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [

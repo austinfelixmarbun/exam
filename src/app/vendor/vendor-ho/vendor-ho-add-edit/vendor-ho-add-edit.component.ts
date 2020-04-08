@@ -200,8 +200,8 @@ export class VendorHoAddEditComponent implements OnInit {
           } else {
             this.http.post(AdInsConstant.GetVendorByVendorId, Parent).subscribe(
               (response) => {
-                this.inputLookupParentObj.nameSelect = response["VendorName"];
-                this.inputLookupZipcodeObj.nameSelect = this.result["VendorAddrObj"].Zipcode;
+                this.inputLookupParentObj.jsonSelect = {VendorName: response["VendorName"]};
+                this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.result.Zipcode};
               }
             )
           }
