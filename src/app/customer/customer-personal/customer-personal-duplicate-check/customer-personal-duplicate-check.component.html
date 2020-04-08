@@ -107,17 +107,17 @@
                 </th>
                 <th><span style="float: left;" class="thead-header" name='CustNo' translate>Customer No</span>
                 </th>
-                <th><span style="float: left; width: 150px;" class="thead-header" name='CustName' translate>Customer Name</span>
+                <th><span style="float: left;" class="thead-header" name='CustName' translate>Customer Name</span>
                 </th>
-                <th><span style="float: left; text-align: left; width: 150px" class="thead-header" name='MrIdType' translate>ID Type</span>
+                <th><span style="float: left;" class="thead-header" name='MrIdType' translate>ID Type</span>
                 </th>
                 <th><span style="float: left;" class="thead-header" name='IdNo' translate>ID No</span>
                 </th>
                 <th><span style="float: left;" class="thead-header" name='TaxIdNo' translate>NPWP</span>
                 </th>
-                <th><span style="float: left; width: 150px;" class="thead-header" name='BirthDt' translate>Birth Date</span>
+                <th><span style="float: left;" class="thead-header" name='BirthDt' translate>Birth Date</span>
                 </th>
-                <th><span style="float: left; width: 150px;" class="thead-header" name='MotherMaidenName' translate>Mother Maiden
+                <th><span style="float: left;" class="thead-header" name='MotherMaidenName' translate>Mother Maiden
                     Name</span>
                 </th>
                 <th><span style="float: left;" class="thead-header" name='MobilePhnNo1' translate>Mobile Phone</span>
@@ -184,9 +184,13 @@
                 </th>
                 <th><span style="float: left;" class="thead-header" name='MobilePhnNo1' translate>Mobile Phone</span>
                 </th>
+                <th><span style="float: left;" class="thead-header" name='MrNegCustSource' translate>Negative Source</span>
+                </th>
+                <th><span style="float: left;" class="thead-header" name='MrNegCustType' translate>Negative Type</span>
+                </th>
                 <th><span class="thead-header" name='Status' translate>Status</span>
                 </th>
-                <th><span style="float: left;" class="thead-header" name='assetCategoryName' translate>Duplicate
+                <th><span style="float: left;" class="thead-header" name='DuplicateItem' translate>Duplicate
                     Item</span>
                 </th>
                 <th><span class="thead-header" name='Select' translate>Select</span>
@@ -203,6 +207,8 @@
                 <td>{{item.BirthDt | date}}</td>
                 <td align="left">{{item.MotherMaidenName}}</td>
                 <td align="left">{{item.MobilePhnNo1}}</td>
+                <td align="left">{{item.MrNegCustSource}}</td>
+                <td align="left">{{item.MrNegCustType}}</td>
                 <td>{{DuplicateStatus}}</td>
                 <td class="text-left">{{item.DuplicateItem}}</td>
                 <td>
