@@ -50,26 +50,28 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     ngOnInit() {
-        this.GetListNotifH();
-        // var _hubConnection = new HubConnectionBuilder()
-        //     .withUrl(environment.FoundationR3Url)
-        //     .withAutomaticReconnect()
-        //     .build();
+        //this.GetListNotifH();
 
-        // _hubConnection.start()
-        //     .then(() => console.log("Connection Started !"))
-        //     .then(() => _hubConnection.invoke("SubscribeNotification", "TESTER", "ADMIN"))
-        //     .catch((e) => console.log("Exception : " + e));
+        var _hubConnection = new HubConnectionBuilder()
+            .withUrl(AdInsConstant.WebSocketUrl)
+            //.withUrl("Http://localhost:5000/Notificationhub")
+            .withAutomaticReconnect()
+            .build();
 
-        // _hubConnection.on("GetUserNotification", (response) => {
-        //     console.log("Response : " + response);
-        //     this.notifications = JSON.parse(response);
-        // });
+        _hubConnection.start()
+            .then(() => console.log("Connection Started !"))
+            .then(() => _hubConnection.invoke("SubscribeNotification", "user1", "SUPUSR"))
+            .catch((e) => console.log("Exception : " + e));
 
-        // _hubConnection.on("ReceiveNotification", (response) => {
-        //     console.log("Response API : " + response);
-        //     this.notifications.push({ title: response, desc: "User " + response });
-        // });
+        _hubConnection.on("GetUserNotification", (response) => {
+            console.log("Response : " + response);
+            this.notifications = JSON.parse(response);
+        });
+
+        _hubConnection.on("ReceiveNotification", (response) => {
+            console.log("Response API : " + response);
+            this.notifications.push({ title: response, desc: "User " + response });
+        });
     }
 
     GetListNotifH() {
