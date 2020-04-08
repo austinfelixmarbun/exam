@@ -9,12 +9,13 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { formatDate } from '@angular/common';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { NotificationHObj } from '../model/NotificationH/NotificationHObj.model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss'],
-    providers: [RolePickService]
+    providers: [RolePickService,NGXToastrService]
 })
 
 export class NavbarComponent implements AfterViewChecked, OnInit {
@@ -36,7 +37,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     constructor(public translate: TranslateService,
         private router: Router,
-        private http: HttpClient, public rolePickService: RolePickService) {
+        private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
         var userAccess = JSON.parse(localStorage.getItem("UserAccess"));
@@ -52,25 +53,30 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     ngOnInit() {
         //this.GetListNotifH();
 
+        console.log(this.userAccess.UserName);
         var _hubConnection = new HubConnectionBuilder()
-            .withUrl(AdInsConstant.WebSocketUrl)
-            //.withUrl("Http://localhost:5000/Notificationhub")
+            //.withUrl(AdInsConstant.WebSocketUrl)
+            .withUrl("Http://localhost:5000/Notificationhub")
             .withAutomaticReconnect()
             .build();
 
         _hubConnection.start()
             .then(() => console.log("Connection Started !"))
-            .then(() => _hubConnection.invoke("SubscribeNotification", "user1", "SUPUSR"))
+            .then(() => _hubConnection.invoke("SubscribeNotification", this.userAccess.UserName, this.userAccess.RoleCode))
             .catch((e) => console.log("Exception : " + e));
 
         _hubConnection.on("GetUserNotification", (response) => {
             console.log("Response : " + response);
+            //this.toastr.successMessageTitle(response.Title,response.Message);
+            //this.GetListNotifH();
             this.notifications = JSON.parse(response);
         });
 
         _hubConnection.on("ReceiveNotification", (response) => {
             console.log("Response API : " + response);
-            this.notifications.push({ title: response, desc: "User " + response });
+            this.toastr.successMessageTitle(response.title,response.messages);
+            this.GetListNotifH();
+            //this.notifications.push({ title: response, desc: "User " + response });
         });
     }
 
