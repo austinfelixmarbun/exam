@@ -37,12 +37,6 @@ export class BankInfoComponent implements OnInit {
   constructor(private toastr: NGXToastrService, private route: ActivatedRoute, private modalService: NgbModal, private fb: FormBuilder, private vendorService: VendorService) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.mode = params["mode"];
-      }
-    });
-
     var obj = {
       VendorId: this.objInput.VendorId
     }
