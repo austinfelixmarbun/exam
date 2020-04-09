@@ -102,10 +102,6 @@
                         {
                             "type": "VerfSchemeHId",
                             "property": "VerfSchemeHId"
-                        },
-                        {
-                            "type": "mode",
-                            "property": "edit"
                         }
                     ]
                 }

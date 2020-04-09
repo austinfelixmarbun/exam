@@ -14,16 +14,11 @@ import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model'
   providers: [NGXToastrService]
 })
 export class VerificationQuestionGroupAddEditComponent implements OnInit {
-  verfQuestionGrpHObj: VerfQuestionGrpHObj;
-  VerfQuestionGrpHId: any;
-  pageType: any;
-  result: any;
-  title: string;
+  verfQuestionGrpHObj: VerfQuestionGrpHObj = new VerfQuestionGrpHObj();
+  VerfQuestionGrpHId: number;
   mode: string = "add";
-  apiUrl: any;
   isActive: boolean = true;
   foundationUrl: string = environment.FoundationR3Url;
-  verfQuestionGroup: any;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -42,17 +37,18 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
+    console.log("test");
     if (this.mode == "edit") {
       var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
-      this.http.post(AdInsConstant.GetQuestionGrpHForUpdateById, verfGroupObj).subscribe(
+      this.http.post<VerfQuestionGrpHObj>(AdInsConstant.GetQuestionGrpHById, verfGroupObj).subscribe(
         (response) => {
-          this.verfQuestionGroup = response["ReturnObject"];
+          this.verfQuestionGrpHObj = response;
           this.QuestionGroupForm.patchValue({
-            VerfQuestionGrpHId: this.verfQuestionGroup.VerfQuestionGrpHId,
-            VerfQuestionGrpCode: this.verfQuestionGroup.VerfQuestionGrpCode,
-            VerfQuestionGrpName: this.verfQuestionGroup.VerfQuestionGrpName,
-            IsActive: this.verfQuestionGroup.IsActive,
-            RowVersion: this.verfQuestionGroup.RowVersion
+            VerfQuestionGrpHId: this.verfQuestionGrpHObj.VerfQuestionGrpHId,
+            VerfQuestionGrpCode: this.verfQuestionGrpHObj.VerfQuestionGrpCode,
+            VerfQuestionGrpName: this.verfQuestionGrpHObj.VerfQuestionGrpName,
+            IsActive: this.verfQuestionGrpHObj.IsActive,
+            RowVersion: this.verfQuestionGrpHObj.RowVersion
           });
         }
       );
@@ -60,13 +56,10 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
   }
 
   SaveForm() {
-    this.verfQuestionGrpHObj = new VerfQuestionGrpHObj();
-    this.verfQuestionGrpHObj = this.QuestionGroupForm.value;
-    this.verfQuestionGrpHObj.VerfQuestionGrpCode = this.verfQuestionGrpHObj.VerfQuestionGrpCode;
-    this.verfQuestionGrpHObj.VerfQuestionGrpName = this.verfQuestionGrpHObj.VerfQuestionGrpName;
-    this.verfQuestionGrpHObj.IsActive = this.verfQuestionGrpHObj.IsActive;
+    this.verfQuestionGrpHObj.VerfQuestionGrpCode = this.QuestionGroupForm.value.VerfQuestionGrpCode;
+    this.verfQuestionGrpHObj.VerfQuestionGrpName = this.QuestionGroupForm.value.VerfQuestionGrpName;
+    this.verfQuestionGrpHObj.IsActive = this.QuestionGroupForm.value.IsActive;
     if (this.mode == "edit") {
-      this.verfQuestionGrpHObj.RowVersion = this.verfQuestionGrpHObj.RowVersion;
       this.http.post(AdInsConstant.EditVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
