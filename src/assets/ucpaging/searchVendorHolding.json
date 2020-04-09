@@ -95,9 +95,16 @@
             "property": "VendorCode"
         },
         {
-            "type": "text",
-            "position": "left",
-            "property": "VendorName"
+            "type" : "link",
+            "property" : "VendorName",
+            "path" : "/Vendor/Holding/View",
+            "param" :
+            [
+                {
+                    "type" : "VendorId",
+                    "property" : "VendorId"
+                }
+            ]
         },
         {
             "type": "boolean",

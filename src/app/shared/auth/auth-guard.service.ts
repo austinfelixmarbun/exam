@@ -22,7 +22,8 @@ export class AuthGuard implements CanActivate {
 
     AdInsHelper.InsertLog(this.currentUrl,"PAGE");
 
-    console.log("pengecekan menu dihilangkan dulu, karna belum get menu dari backend");
+    // pengecekan menu dihilangkan dulu, karna belum get menu dari backend
+
     // if(!AdInsHelper.IsGrantAccess(this.currentUrl))
     // {
     //   // this.errorDialogService.openDialog(AdInsErrorMessage.PageNotAuthorized);
