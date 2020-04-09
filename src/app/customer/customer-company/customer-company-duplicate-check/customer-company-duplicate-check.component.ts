@@ -159,21 +159,62 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     );
   }
 
-  EditCustCompany()
+  EditCustCompany(item)
   {
-    var CustObj = {CustName: this.CustName, TaxIdNo: this.TaxIdNo};
-    this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNameAndTaxIdNo, CustObj).subscribe(
+    var CustObj = {CustName: item.CustName, TaxIdNo: item.TaxIdNo};
+    this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNo, CustObj).subscribe(
       (response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.custObj = response['CustObj'];
         this.addCustObj.CustCompanyObj = response['CustCompanyObj'];
-        this.addCustObj.custObj.CustName = this.CustName;
+        this.addCustObj.custObj.CustName = item.CustName;
         this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
         this.addCustObj.custObj.MrCustTypeCode = RefMasterConstant.Company;
         this.addCustObj.custObj.MrCustModelCode = this.CustModel;
         this.addCustObj.custObj.MrIdTypeCode = RefMasterConstant.Npwp;
-        this.addCustObj.custObj.IdNo = this.TaxIdNo;
-        this.addCustObj.custObj.TaxIdNo = this.TaxIdNo;
+        this.addCustObj.custObj.IdNo = item.TaxIdNo;
+        this.addCustObj.custObj.TaxIdNo = item.TaxIdNo;
+        if(this.IsVip === "true"){
+          this.addCustObj.custObj.IsVip = true;
+        }else{
+          this.addCustObj.custObj.IsVip = false;
+        }
+        if(this.IsAffiliateWithMf === "true"){
+          this.addCustObj.custObj.IsAffiliateWithMf = true;
+        }else{
+          this.addCustObj.custObj.IsAffiliateWithMf = false;
+        } 
+        this.addCustObj.custObj.VipNotes = this.VipNotes;
+        this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
+          () => {
+            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.custObj.CustId } });
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  EditNegativeCustCompany(item)
+  {
+    var CustObj = {CustName: item.CustName, TaxIdNo: item.TaxIdNo};
+    this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNo, CustObj).subscribe(
+      (response) => {
+        this.addCustObj = new AddCustObj();
+        this.addCustObj.custObj = response['CustObj'];
+        this.addCustObj.CustCompanyObj = response['CustCompanyObj'];
+        this.addCustObj.custObj.CustName = item.CustName;
+        this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
+        this.addCustObj.custObj.MrCustTypeCode = RefMasterConstant.Company;
+        this.addCustObj.custObj.MrCustModelCode = this.CustModel;
+        this.addCustObj.custObj.MrIdTypeCode = RefMasterConstant.Npwp;
+        this.addCustObj.custObj.IdNo = item.TaxIdNo;
+        this.addCustObj.custObj.TaxIdNo = item.TaxIdNo;
         if(this.IsVip === "true"){
           this.addCustObj.custObj.IsVip = true;
         }else{
