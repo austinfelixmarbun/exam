@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
@@ -18,23 +18,22 @@ import { WizardComponent } from 'angular-archwizard';
   styleUrls: ['./vendor-employee.component.scss']
 })
 export class VendorEmployeeComponent implements OnInit {
-
+  @Input() objInput: any;
   VendorEmpId: string;
   VendorId: string;
   MrVendorCategoryCode: string;
   mode: string = "add";
-  VendorBranchEmpObj: any;
+  VendorBranchEmpObj: any = new VendorBranchEmpObj();
   result: any;
   inputLookupInternalEmpObj: any;
   inputLookupSpvObj: any;
   inputLookupZipcodeObj: any;
   VendorPositionList = new Array();
   IdTypeList = new Array();
-
+  
   VendorEmpForm = this.fb.group({
     VendorEmpCode: ['', [Validators.required]],
     VendorEmpName: ['', [Validators.required]],
-    SupervisorId: [''],
     MrVendorEmpPositionCode: ['', [Validators.required]],
     MrIdTypeCode: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
@@ -54,25 +53,16 @@ export class VendorEmployeeComponent implements OnInit {
     IsActive: [false],
     IsContactPerson: [false],
     IsOwner: [false],
-    TaxIdNo: [''],
+    TaxpayerNo: [''],
     TaxpayerName: ['']
   });
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,private toastr: NGXToastrService, private wizard: WizardComponent) {
     this.route.queryParams.subscribe(params => {
-      if (params["VendorEmpId"] != null) {
-        this.VendorEmpId = params["VendorEmpId"];
-      }
-      if (params["VendorId"] != null) {
-        this.VendorId = params["VendorId"];
-      }
-      if (params["MrVendorCategoryCode"] != null) {
-        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
-      }
-      if (params["mode"] != null) {
+      if(params["mode"]=="edit"){
         this.mode = params["mode"];
       }
-    });
+  })
   }
 
   ngOnInit() {
@@ -84,7 +74,7 @@ export class VendorEmployeeComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, RefMasterVendorPosition).subscribe(
       (response) => {
         this.VendorPositionList = response["ReturnObject"];
-        if (this.mode == "edit") {
+        if (this.mode != "edit") {
           this.VendorEmpForm.patchValue({
             MrVendorEmpPositionCode: this.VendorPositionList[0].Key
           });
@@ -97,7 +87,7 @@ export class VendorEmployeeComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
         this.IdTypeList = response["ReturnObject"];
-        if (this.mode == "edit") {
+        if (this.mode != "edit") {
           this.VendorEmpForm.patchValue({
             MrIdTypeCode: this.IdTypeList[0].Key
           });
@@ -109,7 +99,7 @@ export class VendorEmployeeComponent implements OnInit {
       this.VendorEmpForm.controls["VendorEmpCode"].disable();
       this.VendorEmpForm.controls["VendorEmpName"].disable();
       var vendorEmpObj = new VendorEmpObj();
-      vendorEmpObj.VendorEmpId = this.VendorEmpId;
+      vendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
       this.http.post(AdInsConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, vendorEmpObj).subscribe(
         (response) => {
           this.result = response;
@@ -136,7 +126,7 @@ export class VendorEmployeeComponent implements OnInit {
             IsActive: this.result.VendorEmpObj.IsActive,
             IsContactPerson: this.result.VendorEmpObj.IsContactPerson,
             IsOwner: this.result.VendorEmpObj.IsOwner,
-            TaxIdNo: this.result.VendorEmpObj.TaxIdNo,
+            TaxpayerNo: this.result.VendorEmpObj.TaxpayerNo,
             TaxpayerName: this.result.VendorEmpObj.TaxpayerName,
           });
           this.inputLookupZipcodeObj.nameSelect = this.result["VendorAddrObj"].Zipcode;
@@ -184,9 +174,7 @@ export class VendorEmployeeComponent implements OnInit {
   }
 
   getLookupSupervisor(ev) {
-    this.VendorEmpForm.patchValue({
-      SupervisorId: ev.VendorId
-    });
+    this.VendorBranchEmpObj.VendorEmpObj.SupervisorId = ev.VendorEmpId;
   }
 
   getLookupZipcode(ev) {
@@ -199,17 +187,15 @@ export class VendorEmployeeComponent implements OnInit {
         City: ev.City,
         Province: ev.Province
       });
-    this.inputLookupZipcodeObj.nameSelect = ev.Zipcode;
+    this.inputLookupZipcodeObj.jsonSelect = {Zipcode: ev.Zipcode};
     this.inputLookupZipcodeObj.idSelect = ev.Zipcode;
   }
 
   SaveForm() {
-    this.VendorBranchEmpObj = new VendorBranchEmpObj();
     var vendorEmpObj = {
       VendorEmpNo: this.VendorEmpForm.controls.VendorEmpCode.value,
       VendorEmpName: this.VendorEmpForm.controls.VendorEmpName.value,
-      VendorId: this.VendorId,
-      SupervisorId: this.VendorEmpForm.controls.SupervisorId.value,
+      VendorId: this.objInput.VendorId,
       MobilePhnNo1: this.VendorEmpForm.controls.MobilePhnNo1.value,
       MobilePhnNo2: this.VendorEmpForm.controls.MobilePhnNo2.value,
       Email: this.VendorEmpForm.controls.Email.value,
@@ -219,12 +205,13 @@ export class VendorEmployeeComponent implements OnInit {
       BirthDate: this.VendorEmpForm.controls.BirthDate.value,
       IsActive: this.VendorEmpForm.controls.IsActive.value,
       JoinDt: this.VendorEmpForm.controls.JoinDt.value,
-      TaxIdNo: this.VendorEmpForm.controls.TaxIdNo.value,
-      TaxpayerNo: "",
+      TaxpayerNo: this.VendorEmpForm.controls.TaxpayerNo.value,
+      TaxpayerName: this.VendorEmpForm.controls.TaxpayerName.value,
       MrVendorEmpPositionCode: this.VendorEmpForm.controls.MrVendorEmpPositionCode.value,
       IsContactPerson: this.VendorEmpForm.controls.IsContactPerson.value,
       VendorEmpRating: this.VendorEmpForm.controls.VendorEmpRating.value,
       RowVersion: "",
+      SupervisorId: this.VendorBranchEmpObj.VendorEmpObj.SupervisorId
     };
 
     var vendorAddrObj = {
@@ -237,12 +224,14 @@ export class VendorEmployeeComponent implements OnInit {
       Province: this.VendorEmpForm.controls.Province.value,
       RowVersion: ""
     };
+
     this.VendorBranchEmpObj.VendorEmpObj = vendorEmpObj;
     this.VendorBranchEmpObj.VendorAddrObj = vendorAddrObj;
 
     if (this.mode == "add") {
       this.http.post(AdInsConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
+          this.mode = "edit";
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
         },

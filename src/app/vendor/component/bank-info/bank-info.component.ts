@@ -22,7 +22,7 @@ export class BankInfoComponent implements OnInit {
   closeResult: any;
   inputLookupBankObj: InputLookupObj;
   mode: any = "add";
-  VendorBankAcc: any;
+  VendorBankAcc: any = new VendorBankAccObj();
   VendorBankAccId: any;
   ListData: any = new Array();
   BankRegisForm = this.fb.group({
@@ -37,15 +37,7 @@ export class BankInfoComponent implements OnInit {
   constructor(private toastr: NGXToastrService, private route: ActivatedRoute, private modalService: NgbModal, private fb: FormBuilder, private vendorService: VendorService) { }
 
   ngOnInit() {
-    var obj = {
-      VendorId: this.objInput.VendorId
-    }
-
-    this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
-      response => {
-        this.ListData = response["ReturnObject"];
-      }
-    );
+    this.getListData();
 
     this.inputLookupBankObj = new InputLookupObj();
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
@@ -88,9 +80,9 @@ export class BankInfoComponent implements OnInit {
   }
 
   SaveForm(enjiForm:NgForm) {
+    this.VendorBankAcc.VendorId = this.objInput.VendorId;
+    this.VendorBankAcc.VendorEmpId = this.objInput.VendorEmpId;
     if (this.mode == "add") {
-      this.VendorBankAcc = new VendorBankAccObj();
-      this.VendorBankAcc.VendorId = this.objInput.VendorId;
       this.VendorBankAcc.RefBankId = this.BankRegisForm.controls.RefBankId.value
       this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls.AccNumber.value;
       this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls.AccName.value;
@@ -100,14 +92,7 @@ export class BankInfoComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           this.modal.close();
 
-          var obj = {
-            VendorId: this.objInput.VendorId
-          }
-          this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
-            response => {
-              this.ListData = response["ReturnObject"];
-            }
-          );
+          this.getListData();
 
           this.BankRegisForm.patchValue({
             AccNumber: "",
@@ -126,7 +111,7 @@ export class BankInfoComponent implements OnInit {
       );
     } else {
       this.VendorBankAcc = this.objEdit;
-      this.VendorBankAcc.RefBankId = this.BankRegisForm.controls.RefBankId.value
+      this.VendorBankAcc.RefBankId = this.BankRegisForm.controls.RefBankId.value;
       this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls.AccNumber.value;
       this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls.AccName.value;
       this.VendorBankAcc.IsDefault = this.BankRegisForm.controls.IsDefault.value;
@@ -137,14 +122,7 @@ export class BankInfoComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.modal.close();
-          var obj = {
-            VendorId: this.objInput.VendorId
-          };
-          this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
-            response => {
-              this.ListData = response["ReturnObject"];
-            }
-          );
+          this.getListData();
           this.BankRegisForm.patchValue({
             AccNumber: "",
             AccName: "",
@@ -212,18 +190,32 @@ export class BankInfoComponent implements OnInit {
 
       this.vendorService.DeleteVendorBankAcc(obj).subscribe(response => {
         this.toastr.successMessage(response["Message"]);
-        var obj = {
-          VendorId: this.objInput.VendorId
-        };
-        this.vendorService.GetListVendorBankAccIdByVendorId(obj).subscribe(
-          response => {
-            this.ListData = response["ReturnObject"];
-          }
-        );
+        this.getListData();
       },
         error => {
           console.log(error);
         });
+    }
+  }
+
+  getListData(){
+    var obj = {
+      VendorId: this.objInput.VendorId,
+      VendorEmpId: this.objInput.VendorEmpId
+    }
+
+    if(this.objInput.VendorEmpId==null){
+      this.vendorService.GetListVendorBankAccByVendorId(obj).subscribe(
+        response => {
+          this.ListData = response["ReturnObject"];
+        }
+      );
+    }else{
+      this.vendorService.GetListVendorBankAccByVendorEmpId(obj).subscribe(
+        response => {
+          this.ListData = response["ReturnObject"];
+        }
+      );
     }
   }
 }
