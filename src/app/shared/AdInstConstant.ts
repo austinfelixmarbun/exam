@@ -788,7 +788,8 @@ export class AdInsConstant {
   // SURVEY ORDER
   public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
   public static GetListSryvObject = environment.FoundationR3Url + "/SrvyOrder/GetListSryvObject";
-
+  public static SendSrvyOrder = environment.FoundationR3Url + "/SrvyOrder/SendSrvyOrder";
+  
   // SURVEY FORM SCHM
   public static GetListAllSrvyFormSchm = environment.FoundationR3Url + "/SrvyFormSchm/GetListAllSrvyFormSchm";
   //LOB
