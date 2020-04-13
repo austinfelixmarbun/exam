@@ -2,12 +2,17 @@
     "title": "Survey Order",
     "component": [
         {
-            "type": "textbox",
-            "name": "RE.OFFICE_NAME",
+            "type": "dropdown",
+            "name": "RE.REF_OFFICE_ID",
             "id": "OfficeNameId",
             "value": "",
             "label": "Office Name",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "numeric",
+            "isFromURL": true,
+            "isSelectOne" : true,
+            "url": "http://r3app-server/FOUNDATION_R3/RefOffice/GetListKvpActiveRefOfficeIdForPaging",
+            "itemsUrl": []
         },
         {
             "type": "textbox",
@@ -79,8 +84,9 @@
         }
     ],
     "querystring": {
-        "select": "SELECT RE.OFFICE_NAME AS OfficeName, SO.TRX_REF_NO AS TrxRefNo, SO.SRVY_ORDER_NO AS SrvyOrderNo, SO.MR_SRVY_STAT_CODE AS MrSrvyStatCode, SO.MR_SRVY_SOURCE_CODE AS MrSrvySourceCode, SO.REQ_BY_USER AS ReqByUser, SO.NOTES AS Notes, SO.REQ_DT AS ReqDt, SO.TASK_TOTAL AS TaskTotal, SO.SRVY_ORDER_ID AS SrvyOrderId",
-        "from": "FROM dbo.SRVY_ORDER SO WITH(NOLOCK) JOIN dbo.REF_OFFICE RE WITH(NOLOCK) ON RE.REF_OFFICE_ID = SO.REF_OFFICE_ID"
+        "select": "SELECT RE.OFFICE_NAME AS OfficeName, SO.TRX_REF_NO AS TrxRefNo, SO.SRVY_ORDER_NO AS SrvyOrderNo, SO.MR_SRVY_STAT_CODE AS MrSrvyStatCode, SO.MR_SRVY_SOURCE_CODE AS MrSrvySourceCode, SO.REQ_BY_USER AS ReqByUser, SO.NOTES AS Notes, SO.REQ_DT AS ReqDt, COUNT(ST.SRVY_TASK_ID) AS TaskTotal, SO.SRVY_ORDER_ID AS SrvyOrderId",
+        "from": "FROM dbo.SRVY_ORDER SO WITH(NOLOCK) JOIN dbo.REF_OFFICE RE WITH(NOLOCK) ON RE.REF_OFFICE_ID = SO.REF_OFFICE_ID LEFT JOIN dbo.SRVY_TASK ST WITH(NOLOCK) ON ST.SRVY_ORDER_ID = SO.SRVY_ORDER_ID",
+        "groupby": "GROUP BY SO.SRVY_ORDER_ID, RE.OFFICE_NAME, SO.TRX_REF_NO, SO.SRVY_ORDER_NO, SO.MR_SRVY_STAT_CODE, SO.MR_SRVY_SOURCE_CODE, SO.REQ_BY_USER, SO.NOTES, SO.REQ_DT, SO.TASK_TOTAL"
     },
     "headerList": [
         {
