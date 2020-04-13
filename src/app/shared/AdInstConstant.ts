@@ -39,6 +39,8 @@ export class AdInsConstant {
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
 
+  public static WebSocketUrl = environment.FoundationR3Url+"/Notificationhub";
+
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
   public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
@@ -314,6 +316,7 @@ export class AdInsConstant {
   //NOTIFICATION
   public static NotificationPost = "/Message/Post";
   public static NotificationSignalR = "/notification";
+  public static GetListNotificationHByRefUserId = environment.FoundationR3Url+"/NotificationH/GetListNotificationHByRefUserId";
 
   //REF CURR
 
@@ -671,9 +674,10 @@ export class AdInsConstant {
   public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust";
   public static EditCust = environment.FoundationR3Url + "/Cust/EditCust";
   public static EditDuplicateCust = environment.FoundationR3Url + "/Cust/EditDuplicateCust";
+  public static EditNegativeDuplicateCust = environment.FoundationR3Url + "/Cust/EditNegativeDuplicateCust";
   public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId";
-  public static GetCustPersonalForUpdateByCustNameAndIdNo = environment.FoundationR3Url + "/Cust/GetCustPersonalForUpdateByCustNameAndIdNo";
-  public static GetCustCompanyForUpdateByCustNameAndTaxIdNo = environment.FoundationR3Url + "/Cust/GetCustCompanyForUpdateByCustNameAndTaxIdNo";
+  public static GetCustPersonalForUpdateByCustNo = environment.FoundationR3Url + "/Cust/GetCustPersonalForUpdateByCustNo";
+  public static GetCustCompanyForUpdateByCustNo = environment.FoundationR3Url + "/Cust/GetCustCompanyForUpdateByCustNo";
   public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
   public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
 
@@ -786,7 +790,8 @@ export class AdInsConstant {
   // SURVEY ORDER
   public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
   public static GetListSryvObject = environment.FoundationR3Url + "/SrvyOrder/GetListSryvObject";
-
+  public static SendSrvyOrder = environment.FoundationR3Url + "/SrvyOrder/SendSrvyOrder";
+  
   // SURVEY FORM SCHM
   public static GetListAllSrvyFormSchm = environment.FoundationR3Url + "/SrvyFormSchm/GetListAllSrvyFormSchm";
   //LOB
