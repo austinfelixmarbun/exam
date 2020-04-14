@@ -7,8 +7,8 @@
           <lib-ucSubsection [id]="'VendorEmpInfo'" [title]="'Employee Information'" [panel]="'VendorEmpInfoId'">
           </lib-ucSubsection>
           <div class="form-body" id="VendorEmpInfoId">
-            <div class="form-group row" *ngIf="MrVendorCategoryCode=='SURVEYOR'">
-              <label class="col-md-3" translate>Internal Employee </label>
+            <div class="form-group row" *ngIf="MrVendorCategoryCode=='SURVEYOR_BRANCH'">
+              <label class="col-md-3" translate>Internal Employee</label>
               <div class="col-md-9">
                 <lib-uclookupgeneric [lookupInput]="inputLookupInternalEmpObj" [parentForm]='VendorEmpForm'
                   [enjiForm]='enjiForm' [identifier]="'InteralEmployee'" (lookup)="getLookupInternal($event)">
@@ -152,13 +152,25 @@
           </div>
           <lib-ucSubsection [id]="'EmpTaxInfo'" [title]="'Employee Tax Information'" [panel]="'EmpTaxInfoId'">
           </lib-ucSubsection>
+          <div class="form-group row">
+            <label class="col-md-3  adInsLabel" translate>Tax Calculation Method</label>
+            <div class="col-md-9">
+              <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
+                [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.MrTaxCalcMethodCode.invalid }">
+                <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
+                  {{it.Value}}</option>
+              </select>
+              <show-errors [control]="VendorEmpForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
+              </show-errors>
+            </div>
+          </div>
           <div class="form-body" id="EmpTaxInfoId">
             <div class="form-group row">
               <label class="col-md-3" translate>Tax Number </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" formControlName="TaxpayerNo"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.TaxpayerNo.invalid }">
-                <lib-uc-show-errors [control]="VendorEmpForm.controls.TaxpayerNo" [submit]="enjiForm.submitted">
+                <input type="text" class="form-control" formControlName="TaxIdNo"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.TaxIdNo.invalid }">
+                <lib-uc-show-errors [control]="VendorEmpForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
                 </lib-uc-show-errors>
               </div>
             </div>

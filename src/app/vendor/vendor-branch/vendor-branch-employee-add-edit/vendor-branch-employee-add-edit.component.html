@@ -15,7 +15,7 @@
         navigateForward="allow" >
         <aw-wizard-step [stepTitle]="'Employee'"
           [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-          <app-vendor-employee [objInput]="objPassing"></app-vendor-employee>
+          <app-vendor-employee [objInput]="objPassing" (objOutput)="outputValue($event)"></app-vendor-employee>
         </aw-wizard-step>
         <aw-wizard-step [stepTitle]="'Address'"
           [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">

@@ -7,6 +7,7 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-address',
@@ -24,7 +25,12 @@ export class AddressComponent implements OnInit {
   resultAddr: any;
   getUrl: string;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent) {
+    this.route.queryParams.subscribe(params => {
+      if(params["mode"]=="edit"){
+        this.mode = params["mode"];
+      }
+  })
   }
 
   AddressForm = this.fb.group({
@@ -52,10 +58,16 @@ export class AddressComponent implements OnInit {
     this.AddressForm.controls.City.disable();
     this.AddressForm.controls.Province.disable();
 
-    if(this.objInput.VendorEmpId==null){
+    if (this.objInput.Type == "Vendor") {
       this.getUrl = AdInsConstant.GetVendorAddrByVendorId;
-    }else{
+      this.vendorAddrObj.VendorId = this.objInput.VendorId;
+      this.vendorAddrObj.VendorEmpId = null;
+      this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
+    } else if (this.objInput.Type == "VendorEmployee") {
       this.getUrl = AdInsConstant.GetVendorAddrByVendorEmpId;
+      this.vendorAddrObj.VendorId = null;
+      this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
+      this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
     }
 
     var vendorObj = {
@@ -68,17 +80,6 @@ export class AddressComponent implements OnInit {
         this.refreshVendorAddress();
       }
     );
-    // var obj = {
-    //   VendorId: this.objInput.VendorId,
-    //   VendorEmpId: this.objInput.VendorEmpId
-    // }
-    // await this.http.post(AdInsConstant.GetVendorEmpByVendorEmpId, obj).toPromise().then(
-    //   (response) => {
-    //     this.result = response;
-    //     this.MrVendorClass = this.result.MrVendorClass;
-
-    //   }
-    // );
   }
 
   getLookupZipcode(event) {
@@ -103,6 +104,10 @@ export class AddressComponent implements OnInit {
     this.vendorAddrObj.VendorAddrId = this.VendorAddrId;
     this.vendorAddrObj.VendorId = this.objInput.VendorId;
     this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
+    this.vendorAddrObj.Phn1 = "";
+    this.vendorAddrObj.PhnArea1 = "";
+    this.vendorAddrObj.Phn2 = "";
+    this.vendorAddrObj.PhnArea2 = "";
 
     if (this.mode == "edit") {
       this.http.post(AdInsConstant.EditVendorAddr, this.vendorAddrObj).subscribe(
@@ -132,31 +137,32 @@ export class AddressComponent implements OnInit {
     }
   }
 
-  refreshVendorAddress(){
-      var vendorAddrObj = {
-        VendorId: this.objInput.VendorId,
-        VendorEmpId: this.objInput.VendorEmpId,
-        MrAddrTypeCode: "LEGAL"
+  refreshVendorAddress() {
+    if(this.VendorAddrId!=null){
+      this.vendorAddrObj.VendorAddrId = this.VendorAddrId;
+      this.getUrl = AdInsConstant.GetVendorAddrByVendorAddrId;
+    }
+    
+    this.http.post<VendorAddrObj>(this.getUrl, this.vendorAddrObj).subscribe(
+      (response) => {
+        this.vendorAddrObj = response;
+        this.AddressForm.patchValue({
+          MrAddrTypeCode: this.vendorAddrObj.MrAddrTypeCode,
+          Addr: this.vendorAddrObj.Addr,
+          AreaCode2: this.vendorAddrObj.AreaCode2,
+          AreaCode1: this.vendorAddrObj.AreaCode1,
+          City: this.vendorAddrObj.City,
+          Province: this.vendorAddrObj.Province,
+          Latitude: this.vendorAddrObj.Latitude,
+          Longitude: this.vendorAddrObj.Longitude,
+        });
+        this.mode = "edit";
+        this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.vendorAddrObj.Zipcode };
+        this.VendorAddrId = this.vendorAddrObj.VendorAddrId;
+      },
+      (error) => {
+        console.log(error);
       }
-  
-      this.http.post<VendorAddrObj>(this.getUrl, vendorAddrObj).subscribe(
-        (response) => {
-          this.mode = "edit";
-          this.vendorAddrObj = response;
-          this.AddressForm.patchValue({
-            MrAddrTypeCode: this.vendorAddrObj.MrAddrTypeCode,
-            Addr: this.vendorAddrObj.Addr,
-            AreaCode2: this.vendorAddrObj.AreaCode2,
-            AreaCode1: this.vendorAddrObj.AreaCode1,
-            City: this.vendorAddrObj.City,
-            Province: this.vendorAddrObj.Province
-          });
-          this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.vendorAddrObj.Zipcode};
-          this.VendorAddrId = this.vendorAddrObj.VendorAddrId;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    );
   }
 }

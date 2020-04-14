@@ -25,6 +25,7 @@ export class VendorHoldingRegistrationComponent implements OnInit {
   ngOnInit() {
     this.viewObj = "./assets/ucviewgeneric/viewVendorHolding.json";
     this.VendorId = this.objPassing["VendorId"];
+    this.objPassing["Type"]="Vendor";
   }
 
   outputValue(ev){

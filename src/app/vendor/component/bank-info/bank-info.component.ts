@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { VendorService } from 'app/vendor/vendor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-bank-info',
@@ -89,11 +90,9 @@ export class BankInfoComponent implements OnInit {
       this.VendorBankAcc.IsDefault = this.BankRegisForm.controls.IsDefault.value;
       this.vendorService.AddVendorBankAcc(this.VendorBankAcc).subscribe(
         response => {
+          this.getListData();
           this.toastr.successMessage(response["Message"]);
           this.modal.close();
-
-          this.getListData();
-
           this.BankRegisForm.patchValue({
             AccNumber: "",
             AccName: "",
@@ -120,9 +119,9 @@ export class BankInfoComponent implements OnInit {
       this.VendorBankAcc.RowVersion = this.objEdit.RowVersion;
       this.vendorService.EditVendorBankAcc(this.VendorBankAcc).subscribe(
         response => {
+          this.getListData();
           this.toastr.successMessage(response["Message"]);
           this.modal.close();
-          this.getListData();
           this.BankRegisForm.patchValue({
             AccNumber: "",
             AccName: "",
@@ -199,18 +198,21 @@ export class BankInfoComponent implements OnInit {
   }
 
   getListData(){
-    var obj = {
-      VendorId: this.objInput.VendorId,
-      VendorEmpId: this.objInput.VendorEmpId
-    }
-
-    if(this.objInput.VendorEmpId==null){
+    if (this.objInput.Type == "Vendor") {
+      var obj = {
+        VendorId: this.objInput.VendorId,
+        VendorEmpId: null
+      }
       this.vendorService.GetListVendorBankAccByVendorId(obj).subscribe(
         response => {
           this.ListData = response["ReturnObject"];
         }
       );
-    }else{
+    } else if (this.objInput.Type == "VendorEmployee") {
+      var obj = {
+        VendorId: null,
+        VendorEmpId: this.objInput.VendorEmpId
+      }
       this.vendorService.GetListVendorBankAccByVendorEmpId(obj).subscribe(
         response => {
           this.ListData = response["ReturnObject"];
