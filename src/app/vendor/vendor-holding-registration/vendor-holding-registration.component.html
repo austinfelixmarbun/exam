@@ -7,7 +7,7 @@
           <span class="mr-1">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Holding/Paging']"
               translate>
-              Back
+              {{ButtonText}}
             </button>
             <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Holding/Detail']"
               [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
@@ -22,7 +22,7 @@
             <app-address [objInput]="objPassing"> </app-address>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Contact Person'"
-            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="OnEnter()" (stepExit)="OnExit()">
             <div *ngIf="HiddenState==true">
               <app-contact-person-list (objOutput)="outputValue($event)" [objInput] = "objPassing" [show]="show"> </app-contact-person-list>
             </div>
