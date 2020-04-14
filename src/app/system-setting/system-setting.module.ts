@@ -21,6 +21,13 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { LookuproleModule } from '@adins/lookuprole';
 import { UcpagingModule } from '@adins/ucpaging';
 import { UcSubsectionModule } from '@adins/uc-subsection';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NotificationPagingComponent } from 'app/system-setting/notification/notification-paging/notification-paging.component';
+import { NotificationAddEditComponent } from 'app/system-setting/notification/notification-add-edit/notification-add-edit.component';
+import { NotificationApprovalPagingComponent } from 'app/system-setting/notification/notification-approval-paging/notification-approval-paging.component';
+import { NotificationApprovalDetailComponent } from 'app/system-setting/notification/notification-approval-detail/notification-approval-detail.component';
+import { UcviewgenericModule, UcviewgenericComponent } from '@adins/ucviewgeneric';
+import { UcgridviewModule} from '@adins/ucgridview'
 
 
 @NgModule({
@@ -38,7 +45,10 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
     LookupemployeeModule,
     LookuproleModule,
     ReactiveFormsModule,
-    TreeViewModule
+    TreeViewModule,
+    NgMultiSelectDropDownModule,
+    UcviewgenericModule,
+    UcgridviewModule
   ],
   declarations: [
     UserPagingComponent,
@@ -49,8 +59,13 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
     UserRoleDetailComponent,
     RoleUserComponent,
     RoleFormComponent,
-    UserChangePasswordComponent
+    UserChangePasswordComponent,
+    NotificationPagingComponent,
+    NotificationAddEditComponent,
+    NotificationApprovalPagingComponent,
+    NotificationApprovalDetailComponent
   ],
+  entryComponents : [UcviewgenericComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
