@@ -14,7 +14,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'paging',
+        path: 'Paging',
         component: EmployeeComponent,
         data: {
           title: 'Employee'
@@ -49,7 +49,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'employeePositionAddEdit',
+        path: 'EmployeePositionAddEdit',
         component: EmployeePositionAddComponent,
         data: {
           title: 'Employee Position Add Edit'

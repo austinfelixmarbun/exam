@@ -1,0 +1,50 @@
+{
+    "title":"",
+      "subsection": [
+        {
+          "subSectionId": "NotificationInfoId",
+          "subSectionTitle": "Notification Info",
+          "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+          "mainInfo": [
+            {
+              "type": "text",
+              "label": "Notification Type:",
+              "property": "NotificationTypeDescr"
+            },
+            {
+              "type": "text",
+              "label": "Notification Method:",
+              "property": "NotificationMethodDescr"
+            },
+            {
+              "type": "text",
+              "label": "Title:",
+              "property": "Title"
+            },
+            {
+              "type": "text",
+              "label": "Short Description:",
+              "property": "ShortDesc"
+            },
+            {
+              "type": "text",
+              "label": "Long Description:",
+              "property": "LongDesc"
+            },
+            {
+              "type": "date",
+              "label": "Publish Date:",
+              "property": "PublishDt"
+            }
+  
+          ],
+          "querystring": {
+            "select": "SELECT RM1.DESCR AS NotificationTypeDescr, RM2.DESCR AS NotificationMethodDescr,NH.TITLE AS Title, NH.SHORT_DESC AS ShortDesc, NH.LONG_DESC AS LongDesc, NH.PUBLISH_DT AS PublishDt",
+            "from": "FROM dbo.NOTIFICATION_H NH WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER RM1 WITH(NOLOCK) ON NH.MR_NOTIFICATION_TYPE_CODE = RM1.MASTER_CODE AND RM1.REF_MASTER_TYPE_CODE = 'NOTIFICATION_TYPE' LEFT JOIN dbo.REF_MASTER RM2 WITH(NOLOCK) ON NH.MR_NOTIFICATION_METHOD_CODE = RM2.MASTER_CODE AND RM2.REF_MASTER_TYPE_CODE = 'NOTIFICATION_METHOD'",
+            "where": " WHERE NH.NOTIFICATION_H_ID = {0}"            
+          }
+        }
+      ]
+    }
+    
+  

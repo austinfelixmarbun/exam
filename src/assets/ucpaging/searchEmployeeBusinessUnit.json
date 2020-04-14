@@ -147,7 +147,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/employee/EmployeeBusinessUnit/Add",
+                    "path": "/Employee/EmployeeBusinessUnit/Add",
                     "param": [
                         {
                             "type": "RefUserId",

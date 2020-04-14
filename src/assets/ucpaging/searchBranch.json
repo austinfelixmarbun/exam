@@ -135,7 +135,7 @@
             "type": "link",
             "position": "center",
             "property": "BranchName",
-            "path": "/Vendor/Branch/Paging",
+            "path": "/Vendor/Branch/View",
             "param": [
                 {
                     "type": "VendorId",
