@@ -67,6 +67,7 @@ export class AdInsConstant {
   public static GetListCenterGrpMemberByRefOfficeId = environment.FoundationR3Url + "/CenterGrpOfficeMbr/GetListCenterGrpMemberByRefOfficeId"
   public static DeleteCenterGroupOfficeMember = "/RefOffice/DeleteCenterGroupOfficeMember";
   public static DeleteCenterGrpOfficeMember = "/CenterGrpOfficeMbr/DeleteCenterGrpOfficeMember";
+  public static GetListActiveRefOffice = "/RefOffice/GetListActiveRefOffice";
 
   //CENTER GROUP
   public static AddCenterGrp = environment.FoundationR3Url + "/CenterGrp/AddCenterGrp";
@@ -195,7 +196,7 @@ export class AdInsConstant {
   public static AddUserTitleRole = "/UserManagement/AddUserTitleRole";
   public static AssignRoleToUsers = "/UserManagement/AssignRoleToUsers";
   public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
-
+  public static GetListActiveRefRole = "/RefRole/GetListActiveRefRole"
   //ZIPCODE
   public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
   public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
@@ -316,6 +317,12 @@ export class AdInsConstant {
   //NOTIFICATION
   public static NotificationPost = "/Message/Post";
   public static NotificationSignalR = "/notification";
+  public static GetNotificationHByNotificationHId = "/NotificationH/GetNotificationHByNotificationHId";
+  public static GetListUsernameAndEmpNameByNotificationHId = "/NotificationD/GetListUsernameAndEmpNameByNotificationHId"
+  public static AddNotificationHAndD = "/NotificationH/AddNotificationHAndD"
+  public static EditNotificationH = "/NotificationH/EditNotificationH"
+  public static DeleteNotificationD = "/NotificationD/DeleteNotificationD"
+  
   public static GetListNotificationHByRefUserId = environment.FoundationR3Url+"/NotificationH/GetListNotificationHByRefUserId";
 
   //REF CURR
@@ -517,6 +524,8 @@ export class AdInsConstant {
   public static AddVendorHO = environment.FoundationR3Url + "/Vendor/AddVendorHO";
   public static EditVendorHO = environment.FoundationR3Url + "/Vendor/EditVendorHO";
   public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
+  public static AddVendorHolding = environment.FoundationR3Url + "/Vendor/AddVendorHolding";
+  public static EditVendorHolding = environment.FoundationR3Url + "/Vendor/EditVendorHolding";
   public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
   public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
   public static AddVendorAddr = environment.FoundationR3Url + "/VendorAddr/AddVendorAddr";

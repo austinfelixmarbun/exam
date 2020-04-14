@@ -1,6 +1,10 @@
 import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NotificationPagingComponent } from 'app/system-setting/notification/notification-paging/notification-paging.component';
+import { NotificationAddEditComponent } from 'app/system-setting/notification/notification-add-edit/notification-add-edit.component';
+import { NotificationApprovalPagingComponent } from 'app/system-setting/notification/notification-approval-paging/notification-approval-paging.component';
+import { NotificationApprovalDetailComponent } from 'app/system-setting/notification/notification-approval-detail/notification-approval-detail.component';
 import { UserPagingComponent } from 'app/system-setting/user/user-paging/user-paging.component';
 import { UserAddEditComponent } from 'app/system-setting/user/user-add-edit/user-add-edit.component';
 import { RoleAddEditComponent } from 'app/system-setting/role/role-add-edit/role-add-edit.component';
@@ -13,6 +17,34 @@ const routes: Routes = [
   {
     path: '',
     children: [
+      {
+        path: 'Notification',
+        component: NotificationPagingComponent,
+        data: {
+          title: 'Notification Paging'
+        }
+      },
+      {
+        path: 'Notification/Detail',
+        component: NotificationAddEditComponent,
+        data: {
+          title: 'Notification Add Edit'
+        }
+      },
+      {
+        path: 'NotificationApproval',
+        component: NotificationApprovalPagingComponent,
+        data: {
+          title: 'Notification Approval Paging'
+        }
+      },
+      {
+        path: 'NotificationApproval/Detail',
+        component: NotificationApprovalDetailComponent,
+        data: {
+          title: 'Notification Add Edit'
+        }
+      },
       {
         path: 'RefUser',
         component: UserPagingComponent,
