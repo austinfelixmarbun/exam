@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "dropdown",
-            "name": "V.MR_VENDOR_CATEGORY_CODE", 
+            "name": "V.MR_VENDOR_CATEGORY_CODE",
             "id": "MrVendorCategoryCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -13,8 +13,8 @@
             "isQueryIn": true,
             "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListActiveRefMasterByVendorCategoryByReserveField1",
             "label": "Vendor Category",
-            "criteriaPropName" : "ReserveField1",
-            "criteriaPropValue" : "HO",
+            "criteriaPropName": "ReserveField1",
+            "criteriaPropValue": "HO",
             "items": [],
             "itemsUrl": []
         },
@@ -98,14 +98,13 @@
             "property": "VendorCode"
         },
         {
-            "type" : "link",
-            "property" : "VendorName",
-            "path" : "/Vendor/HO/View",
-            "param" :
-            [
+            "type": "link",
+            "property": "VendorName",
+            "path": "/Vendor/HO/View",
+            "param": [
                 {
-                    "type" : "VendorId",
-                    "property" : "VendorId"
+                    "type": "VendorId",
+                    "property": "VendorId"
                 }
             ]
         },
@@ -140,4 +139,4 @@
             ]
         }
     ]
-  }
+}

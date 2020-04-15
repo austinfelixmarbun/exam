@@ -46,13 +46,6 @@ export class AddressComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.inputLookupZipcodeObj = new InputLookupObj();
-    this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-
     this.AddressForm.controls.AreaCode2.disable();
     this.AddressForm.controls.AreaCode1.disable();
     this.AddressForm.controls.City.disable();
@@ -80,6 +73,19 @@ export class AddressComponent implements OnInit {
         this.refreshVendorAddress();
       }
     );
+  }
+
+  setLookup(){
+    this.inputLookupZipcodeObj = new InputLookupObj();
+    this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+
+    if(this.vendorAddrObj!=null){
+      this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.vendorAddrObj.Zipcode};
+    }
   }
 
   getLookupZipcode(event) {
@@ -157,7 +163,7 @@ export class AddressComponent implements OnInit {
           Longitude: this.vendorAddrObj.Longitude,
         });
         this.mode = "edit";
-        this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.vendorAddrObj.Zipcode };
+        this.setLookup();
         this.VendorAddrId = this.vendorAddrObj.VendorAddrId;
       },
       (error) => {

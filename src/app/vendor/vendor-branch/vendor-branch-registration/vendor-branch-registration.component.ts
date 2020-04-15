@@ -13,6 +13,9 @@ export class VendorBranchRegistrationComponent implements OnInit {
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
+      if(!params['VendorEmpId']){
+      this.objPassing["VendorEmpId"] = params['VendorEmpId'];
+      }
     });
   }
 

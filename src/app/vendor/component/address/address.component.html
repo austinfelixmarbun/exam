@@ -16,8 +16,8 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel">Zip Code</label>
+              <div class="form-group row" *ngIf="inputLookupZipcodeObj!=null">
+                <label class="col-md-3 adins-required-label">Zip Code</label>
                 <div class="col-md-3">
                   <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="AddressForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookupZipcode($event)">

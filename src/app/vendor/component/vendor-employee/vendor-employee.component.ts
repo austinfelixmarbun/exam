@@ -21,7 +21,7 @@ export class VendorEmployeeComponent implements OnInit {
   @Input() objInput: any;
   @Output() objOutput: EventEmitter<any> = new EventEmitter();
   VendorEmpId: number;
-  VendorId: number;
+  VendorId: any;
   MrVendorCategoryCode: string;
   mode: string = "add";
   VendorBranchEmpObj: any = new VendorBranchEmpObj();
@@ -69,8 +69,6 @@ export class VendorEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setUcLookupGeneric();
-
     var RefMasterVendorPosition = {
       RefMasterTypeCode: "VENDOR_POSITION",
     }
@@ -156,16 +154,18 @@ export class VendorEmployeeComponent implements OnInit {
             TaxpayerName: this.result.VendorEmpObj.TaxpayerName,
             MrTaxCalcMethodCode: this.result.VendorEmpObj.MrTaxCalcMethodCode
           });
-          this.inputLookupZipcodeObj.nameSelect = this.result["VendorAddrObj"].Zipcode;
+          this.setLookup();
         },
         (error) => {
           console.log(error);
         }
       );
+    }else{
+      this.setLookup();
     }
   }
 
-  setUcLookupGeneric() {
+  setLookup() {
     this.inputLookupInternalEmpObj = new InputLookupObj();
     this.inputLookupInternalEmpObj.urlJson = "./assets/uclookup/vendor/lookupRefEmp.json";
     this.inputLookupInternalEmpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -181,6 +181,13 @@ export class VendorEmployeeComponent implements OnInit {
     this.inputLookupSpvObj.pagingJson = "./assets/uclookup/vendor/lookupVendorEmp.json";
     this.inputLookupSpvObj.genericJson = "./assets/uclookup/vendor/lookupVendorEmp.json";
     this.inputLookupSpvObj.isRequired = false;
+    this.inputLookupSpvObj.addCritInput = new Array();
+
+    var critObj = new CriteriaObj();
+    critObj.propName = 'VENDOR_ID';
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.value = this.objInput.VendorId;
+    this.inputLookupSpvObj.addCritInput.push(critObj);
 
     this.inputLookupZipcodeObj = new InputLookupObj();
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
@@ -188,6 +195,11 @@ export class VendorEmployeeComponent implements OnInit {
     this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+
+    if(this.result!=null){
+      this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.result["VendorAddrObj"].Zipcode};
+      this.inputLookupSpvObj.jsonSelect = {VendorEmpName: this.result["VendorEmpObj"].SupervisorName};
+    }
   }
 
   getLookupInternal(ev) {
@@ -268,10 +280,10 @@ export class VendorEmployeeComponent implements OnInit {
           console.log(error);
         });
     } else {
-      this.VendorBranchEmpObj.VendorEmpObj.VendorEmpId = this.VendorEmpId;
-      this.VendorBranchEmpObj.VendorAddrObj.VendorAddrId = this.result.VendorAddrObj.VendorAddrId;
-      this.VendorBranchEmpObj.VendorEmpObj.RowVersion = this.result.VendorEmpObj.RowVersion;
-      this.VendorBranchEmpObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
+      this.VendorBranchEmpObj.VendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
+      this.VendorBranchEmpObj.VendorAddrObj.VendorAddrId = this.result["VendorAddrObj"].VendorAddrId;
+      this.VendorBranchEmpObj.VendorEmpObj.RowVersion = this.result["VendorEmpObj"].RowVersion;
+      this.VendorBranchEmpObj.VendorAddrObj.RowVersion = this.result["VendorAddrObj"].RowVersion;
 
       this.http.post(AdInsConstant.EditVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
