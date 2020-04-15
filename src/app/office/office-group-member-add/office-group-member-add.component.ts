@@ -246,9 +246,9 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       RefOfficeId: this.tempListId
     }
 
-    this.http.post(AdInsConstant.AddVendorGrpMbr, obj).subscribe(
+    this.http.post(AdInsConstant.AddCenterGrpOfficeMember, obj).subscribe(
         (response) => {
-            this.router.navigate(['/Office/Office-group-member'], {queryParams: {RefOfficeId:this.RefOfficeId, CenterGrpId:this.CenterGrpId}});
+            this.router.navigate(['/Office/Group/Member'], {queryParams: {RefOfficeId:this.RefOfficeId, CenterGrpId:this.CenterGrpId}});
         },
         (error) => {
             console.log(error);
