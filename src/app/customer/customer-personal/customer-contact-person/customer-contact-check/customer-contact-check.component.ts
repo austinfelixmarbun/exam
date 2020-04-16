@@ -5,7 +5,8 @@ import { FormBuilder } from '@angular/forms';
 import { WizardComponent } from 'angular-archwizard';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
- 
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-customer-contact-check',
   templateUrl: './customer-contact-check.component.html',
@@ -13,54 +14,63 @@ import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalConta
   providers: [NGXToastrService],
 })
 export class CustomerContactCheckComponent implements OnInit {
-  isAdd:any;
-  @Output () outputValue : EventEmitter<object>= new EventEmitter();
-  
-  @Input() inputValue: any;
+  isAdd: any;
+  @Output() outputValue: EventEmitter<object> = new EventEmitter();
+ 
+  IdCust : any;
   tempCustomerPersonalContactPerson;
-  getCustomerPersonalContactPersonUrl : any;
+  getCustomerPersonalContactPersonUrl: any;
   deleteCustomerPersonalContactPersonUrl
   custPersonContactPersonObj: any;
-  isReload : any;
-  constructor(private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+  isReload: any;
+  constructor(private route: ActivatedRoute,private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
     this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
     this.deleteCustomerPersonalContactPersonUrl = AdInsConstant.DeleteCustPersonalContactPerson;
-  }
-  ngOnInit() {      
-      this.getList();
-       
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+         this.IdCust = params["IdCust"];
+       }
+     });
   }
 
-  keluarinValue(){
+  ngOnInit() {
+    this.getList();
+  }
+
+  keluarinValue() {
     this.isAdd = true;
-    this.outputValue.emit({isAdd : this.isAdd});
-}
-deleteItem(custId : any){
-  this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
-  this.custPersonContactPersonObj.CustPersonalContactPersonId = custId;
-    this.http.post(this.deleteCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj  ).subscribe(
+    this.outputValue.emit({ isAdd: this.isAdd });
+  }
+  deleteItem(custId: any) {
+    this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
+    this.custPersonContactPersonObj.CustPersonalContactPersonId = custId;
+    this.http.post(this.deleteCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-       
         this.getList();
       },
       error => {
         console.log(error);
       }
     );
-}
+  }
 
-editItem(custPersonalContactPersonId : any){
-  this.isAdd = true;
-  this.outputValue.emit({isAdd : this.isAdd, custPersonalContactPersonId : custPersonalContactPersonId});
-}
-getList(){
-  this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
-  this.custPersonContactPersonObj.CustId = this.inputValue;
-  this.http.post(this.getCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
-    (response) => {
-      this.tempCustomerPersonalContactPerson = response["ReturnObject"];
-      console.log( "aaaa" +  this.tempCustomerPersonalContactPerson);
-    });
-}
+  editItem(custPersonalContactPersonId: any) {
+    this.isAdd = true;
+    this.outputValue.emit({ isAdd: this.isAdd, custPersonalContactPersonId: custPersonalContactPersonId });
+  }
+
+  getList() {
+    this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
+    this.custPersonContactPersonObj.CustId = this.IdCust;
+    this.http.post(this.getCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
+      (response) => {
+        this.tempCustomerPersonalContactPerson = response["ReturnObject"];
+        // console.log("aaaa" + this.tempCustomerPersonalContactPerson);
+      });
+  }
+
+  next() {
+    this.wizard.goToNextStep();
+  }
 }

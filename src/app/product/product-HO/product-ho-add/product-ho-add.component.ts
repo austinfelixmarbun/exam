@@ -60,7 +60,6 @@ export class ProductHOAddComponent implements OnInit {
       this.UrlBackEnd = AdInsConstant.GetProductMainInfo;
       this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
         (response) => {
-          console.log(response);
           this.ResultResponse = response;
           this.RefProductHOForm.patchValue({
             ProdCode: this.ResultResponse.ProdCode,
@@ -134,7 +133,6 @@ export class ProductHOAddComponent implements OnInit {
             (response) => {
               this.toastr.successMessage(response["message"]);
               this.router.navigate(["/product/HOpaging"]);
-              console.log(response);
             },
             (error) => {
               console.log(error);
@@ -143,10 +141,8 @@ export class ProductHOAddComponent implements OnInit {
         }
       }
     } else { //next
-      console.log("next mode");
       this.ProdHOBj = new RefProductHOObj();
       this.ProdHOBj = this.RefProductHOForm.value;
-      console.log("Add Detail Next! " + this.ProdHOBj);
       if (this.mode == "edit") {
         if (this.ValidateDate()) {
           this.UrlBackEnd = AdInsConstant.EditProduct;
@@ -157,7 +153,6 @@ export class ProductHOAddComponent implements OnInit {
             (response) => {
               this.toastr.successMessage(response["message"]);
               this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": this.ResultResponse.ProdHId, "ProdId" : this.ResultResponse.ProdId, "mode": this.mode } });
-              console.log(response);
             },
             (error) => {
               console.log(error);
@@ -170,10 +165,8 @@ export class ProductHOAddComponent implements OnInit {
           this.ProdHOBj.RowVersion = "";
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {
-              var TempResp = response;
               this.toastr.successMessage(response["message"]);
-              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": TempResp["DraftProdHId"],"ProdId" : TempResp["ProdId"], "mode": this.mode } });
-              console.log(response);
+              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": response["DraftProdHId"],"ProdId" : response["ProdId"], "mode": this.mode } });
             },
             (error) => {
               console.log(error);

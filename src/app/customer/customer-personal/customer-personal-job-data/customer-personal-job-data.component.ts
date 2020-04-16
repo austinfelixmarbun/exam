@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -16,23 +16,9 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
   providers: [NGXToastrService]
 })
 export class CustomerPersonalJobDataComponent implements OnInit {
-  CustName  : any;
-  Gender : any;
-  GenderDesc:any;
-  MrIdTypeCode : any;
-  MrIdTypeCodeDesc : any;
+ 
   CustModel : any;
-  CustModelDesc
-  BirthPlace : any;
-  BirthDt : any;
-  IdNo : any;
-  TaxIdNo : any;
-  IdExpiredDt : any;
-  MotherMaidenName : any;
-  resultData: any;
-  addUrl : any; 
   IdCust : any;
-  IdCustPersonal : any;
   custObj : any;
   getListActiveRefMaster: any;
   getCustById: any;
@@ -51,28 +37,35 @@ export class CustomerPersonalJobDataComponent implements OnInit {
       if (params["IdCust"] != null) {
          this.IdCust = params["IdCust"];
        }
-       if (params["IdCustPersonal"] != null) {
-        this.IdCustPersonal = params["IdCustPersonal"];
-      }
+      //  if (params["IdCustPersonal"] != null) {
+      //   this.IdCustPersonal = params["IdCustPersonal"];
+      // }
+      // if (params["CustModel"] != null) {
+      //   this.CustModel = params["CustModel"];
+      // }
      });
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
     this.http.post(this.getCustById, this.custObj).subscribe(
       (response) => {
           this.custObj = response;
+          this.CustModel = this.custObj.MrCustModelCode;
+          //this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
+          //this.CustModel = "NONPROF";
+      },
+      (error) => {
+        console.log(error);
       });
 
-    this.jobType = new RefMasterObj();
-    this.jobType.RefMasterTypeCode = "CUST_MODEL";
-    this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
-      (response) => {
-          this.listJobType = response['ReturnObject'];
-          console.log("aaaa");
-          console.log(this.listJobType);
-          this.CustJobDataForm.patchValue({ JobDataType: response['ReturnObject'][0]['Key'] });
-      });
+    // this.jobType = new RefMasterObj();
+    // this.jobType.RefMasterTypeCode = "CUST_MODEL";
+    // this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
+    //   (response) => {
+    //       this.listJobType = response['ReturnObject'];
+    //       //this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
+    //   });
   }
 }

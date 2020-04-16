@@ -6,8 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustGroupTabDetailComponent } from './cust-group-tab-detail/cust-group-tab-detail.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-
-// <app-cust-group-tab [CustId]="'2'" [MrCustTypeCode]="'PERSONAL'"></app-cust-group-tab>
+import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-cust-group-tab',
@@ -24,7 +23,7 @@ export class CustGroupTabComponent implements OnInit {
     private httpClient: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService, private wizard: WizardComponent
   ) { }
 
   ngOnInit() {
@@ -37,7 +36,7 @@ export class CustGroupTabComponent implements OnInit {
     );
   }
 
-  openModalAddCustGroup(){
+  openModalAddCustGroup() {
     const modalCustGrp = this.modalService.open(CustGroupTabDetailComponent);
     modalCustGrp.componentInstance.MrCustTypeCode = this.MrCustTypeCode;
     modalCustGrp.componentInstance.CustId = this.CustId;
@@ -57,7 +56,7 @@ export class CustGroupTabComponent implements OnInit {
     );
   }
 
-  deleteCustGrp(CustGrpId, i){
+  deleteCustGrp(CustGrpId, i) {
     var custGrp = new CustGrpObj();
     custGrp.CustGrpId = CustGrpId;
     this.httpClient.post(AdInsConstant.DeleteCustGrp, custGrp).subscribe(
@@ -66,9 +65,11 @@ export class CustGroupTabComponent implements OnInit {
         this.toastr.successMessage(response["message"]);
       },
       (error) => {
-        console.log("ERROR");
         console.log(error);
       }
     );
+  }
+  next() {
+    this.wizard.goToNextStep();
   }
 }

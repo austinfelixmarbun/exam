@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -18,8 +18,11 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   providers: [NGXToastrService]
 })
 export class CustomerPersonalAddressAddComponent implements OnInit {
+  @Input () AddrId : any ;
+  @Input() mode: any; 
+  @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  IdCust: any;
   pageType: any;
-  AddrId: any;
   CustName  : any;
   Gender : any;
   GenderDesc:any;
@@ -37,16 +40,17 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   addCustAddr : any;
   editCustAddr : any;
   getCustAddr : any;
-  IdCust : any;
-  IdCustPersonal : any;
-  custObj : any;
+  getCustByCustId: any;
   inputFieldAddressObj: InputFieldObj;
   custAddressObj: CustAddrObj;
   getListActiveRefMaster: any;
+  getRefMasterWithReserveField: any;
   addressType: any;
   addressObj: any;
   listAddressType: any;
   custAddrObj : any;
+  custObj: any;
+  tempCustObj: any;
   getListCustAddr: any;
   listCustAddr: any;
   copyCustomerAddr: any;
@@ -65,66 +69,50 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,private router: Router,private http: HttpClient,private fb: FormBuilder,private toastr: NGXToastrService) { 
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
+    this.getRefMasterWithReserveField = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
     this.getListCustAddr = AdInsConstant.GetListCustAddr;
     this.addCustAddr = AdInsConstant.AddCustAddr;
     this.editCustAddr = AdInsConstant.EditCustAddr;
     this.getCustAddr = AdInsConstant.GetCustAddr;
+    this.getCustByCustId = AdInsConstant.GetCustByCustId;
 
     this.route.queryParams.subscribe(params => {
-   
       if (params["IdCust"] != null) {
          this.IdCust = params["IdCust"];
        }
-       if (params["IdCustPersonal"] != null) {
-        this.IdCustPersonal = params["IdCustPersonal"];
-      }
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
-      }
-      if (params["AddrId"] != null) {
-        this.AddrId = params["AddrId"];
-      }
      });
   }
 
   ngOnInit() {
+    this.pageType = this.mode;
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
-    console.log("nnn");
-    console.log(this.AddrId)
     this.addressType = new RefMasterObj();
     this.addressType.RefMasterTypeCode = "CUST_ADDR_TYPE";
-    this.http.post(this.getListActiveRefMaster, this.addressType).subscribe(
+    this.addressType.ReserveField1 = "PERSONAL";
+    this.http.post(this.getRefMasterWithReserveField, this.addressType).subscribe(
       (response) => {
           this.listAddressType = response['ReturnObject'];
-          console.log("aaaa");
-          console.log(this.listAddressType);
-          this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
+          //this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
       });
     
       this.custAddrObj = new CustAddrObj();
       this.custAddrObj.CustId = this.IdCust;
       this.custAddrObj.MrCustAddrTypeCode = "-";
-      console.log("bbb");
-      console.log(this.custAddrObj);
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
             this.listCustAddr = response["ReturnObject"];
             this.CustDataPersonalForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] });
-
-            console.log("aaa")
-            console.log(this.listCustAddr)
         });
-      
+
+
       if(this.pageType == "edit"){
         this.custAddrObj = new CustAddrObj();
         this.custAddrObj.CustAddrId = this.AddrId;
         this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
           (response) => {
               this.getCustomerAddr = response;
-              console.log("ggg")
-              console.log(this.getCustomerAddr)
               this.CustDataPersonalForm.patchValue({
                   Notes: this.getCustomerAddr.Notes,
                   MrCustAddrTypeCode: this.getCustomerAddr.MrCustAddrTypeCode
@@ -228,17 +216,16 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   SaveForm(){
     this.custAddressObj = new CustAddrObj();
     this.setCustAddr();
-    console.log("ccc");
-    console.log(this.custAddressObj);
     if(this.pageType == "add"){
       this.http.post(this.addCustAddr, this.custAddressObj).subscribe(
         (response) => {
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(
-            ["/Customer/CustomerPersonal/Address"], 
-            { queryParams: { "IdCust": this.IdCust }}
-            );
+          // this.router.navigate(
+          //   ["/Customer/CustomerPersonal/Address"], 
+          //   { queryParams: { "IdCust": this.IdCust }}
+          //   );
+          this.outputValue.emit({mode : 'check'});
           console.log(response)
         },
         (error) => {
@@ -252,17 +239,20 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
         (response) => {
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(
-            ["/Customer/CustomerPersonal/Address"], 
-            { queryParams: { "IdCust": this.IdCust }}
-            );
+          // this.router.navigate(
+          //   ["/Customer/CustomerPersonal/Address"], 
+          //   { queryParams: { "IdCust": this.IdCust }}
+          //   );
+          this.outputValue.emit({mode : 'check'});
           console.log(response)
         },
         (error) => {
           console.log(error);
         }
       );
-    }
-    
+    } 
+  }
+  back(){
+    this.outputValue.emit({mode : 'check'});
   }
 }

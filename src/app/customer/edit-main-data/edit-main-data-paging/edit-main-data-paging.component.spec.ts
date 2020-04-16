@@ -1,20 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { EditMainDataPagingComponent } from './edit-main-data-paging.component';
 
-import { ListOfficeMemberComponent } from './list-office-member.component';
-
-describe('ListOfficeMemberComponent', () => {
-  let component: ListOfficeMemberComponent;
-  let fixture: ComponentFixture<ListOfficeMemberComponent>;
+describe('EditMainDataPagingComponent', () => {
+  let component: EditMainDataPagingComponent;
+  let fixture: ComponentFixture<EditMainDataPagingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListOfficeMemberComponent ]
+      declarations: [ EditMainDataPagingComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListOfficeMemberComponent);
+    fixture = TestBed.createComponent(EditMainDataPagingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

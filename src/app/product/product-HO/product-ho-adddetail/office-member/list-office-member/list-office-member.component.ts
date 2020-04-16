@@ -10,7 +10,6 @@ import { empty } from 'rxjs';
 @Component({
   selector: 'app-list-office-member',
   templateUrl: './list-office-member.component.html',
-  styleUrls: ['./list-office-member.component.scss'],
   providers: [NGXToastrService]
 })
 export class ListOfficeMemberComponent implements OnInit {
@@ -44,12 +43,7 @@ export class ListOfficeMemberComponent implements OnInit {
     var url = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
     this.http.post(url, obj).subscribe(
       (response) => {
-        console.log("list member");
-        // console.log(response);
         this.resultData = response["ReturnObject"];
-        console.log("result data");
-        console.log(this.resultData);
-        
       },
       (error) => {
         console.log(error);
@@ -58,8 +52,6 @@ export class ListOfficeMemberComponent implements OnInit {
   }
 
   addOfficeMember(){
-    console.log("add office member");
-    // var tempIsOn = false;
     var temp = [];
     var obj;
     if(this.resultData == empty){
@@ -78,13 +70,11 @@ export class ListOfficeMemberComponent implements OnInit {
     }
     
     this.componentIsOn.emit(obj);
-    // console.log(this.ListOfficeMemberObjInput);
   }
 
   orderByKey;
   orderByValue
   searchSort(ev: any){
-    console.log(ev);
     if (this.resultData != null) {
       if (this.orderByKey == ev.target.attributes.name.nodeValue) {
         this.orderByValue = !this.orderByValue
@@ -101,7 +91,6 @@ export class ListOfficeMemberComponent implements OnInit {
   }
 
   deleteFromList(ev: any){
-    // console.log(ev);
     if (confirm('Are you sure to delete this record?')) {
       var url = AdInsConstant.DeleteProductOfficeMbr;
       var obj = {
@@ -113,11 +102,8 @@ export class ListOfficeMemberComponent implements OnInit {
         ]
       };
 
-      // console.log(obj);
       this.http.post(url, obj).subscribe(
         (response) => {
-          console.log("delete member");
-          console.log(response);
           var idx = this.resultData.findIndex(x=>x.ProdBranchMbrId == ev.ProdBranchMbrId);
           if(idx > -1) this.resultData.splice(idx, 1);
           this.toastr.successMessage(response["message"]);
@@ -130,10 +116,8 @@ export class ListOfficeMemberComponent implements OnInit {
   }
 
   DoneForm(){
-    this.http.post("http://localhost:5000/Product/SubmitProduct", {ProdHId : this.ProdHId}).subscribe(
+    this.http.post(environment.FoundationR3Url + "/Product/SubmitProduct", {ProdHId : this.ProdHId}).subscribe(
       (response) => {
-        console.log(response);
-        
         this.toastr.successMessage(response["message"]);
       },
       (error) => {

@@ -6,8 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
-
-// Implementation : <app-cust-legal-doc [CustCompanyId]="'2'"></app-cust-legal-doc>
+import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-cust-legal-doc',
@@ -23,7 +22,7 @@ export class CustLegalDocComponent implements OnInit {
     private httpClient: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService, private wizard: WizardComponent
   ) { }
 
   ngOnInit() {
@@ -34,13 +33,12 @@ export class CustLegalDocComponent implements OnInit {
         this.custLegalDocs = response.ListCustCompanyLegalDoc;
       },
       (error) => {
-        console.log("ERROR");
         console.log(error);
       }
     );
   }
 
-  openCustLegalDocDetail(){
+  openCustLegalDocDetail() {
     const modalCustLegalDoc = this.modalService.open(CustLegalDocDetailComponent);
     modalCustLegalDoc.componentInstance.CustCompanyId = this.CustCompanyId;
     modalCustLegalDoc.result.then(
@@ -53,7 +51,6 @@ export class CustLegalDocComponent implements OnInit {
             this.custLegalDocs = response.ListCustCompanyLegalDoc;
           },
           (error) => {
-            console.log("ERROR");
             console.log(error);
           }
         );
@@ -62,15 +59,14 @@ export class CustLegalDocComponent implements OnInit {
       }
     ).catch(
       (error) => {
-        if(error != 0){
-          console.log("ERROR");
+        if (error != 0) {
           console.log(error);
         }
       }
     );
   }
 
-  deleteCustLegalDoc(custCompanyLegalDocId, idx){
+  deleteCustLegalDoc(custCompanyLegalDocId, idx) {
     var custCompanyLegalDoc = new CustCompanyLegalDocObj();
     custCompanyLegalDoc.CustCompanyLegalDocId = custCompanyLegalDocId;
     this.httpClient.post(AdInsConstant.DeleteCustCompanyLegalDoc, custCompanyLegalDoc).subscribe(
@@ -79,10 +75,11 @@ export class CustLegalDocComponent implements OnInit {
         this.toastr.successMessage(response["message"]);
       },
       (error) => {
-        console.log("ERROR");
         console.log(error);
       }
     );
   }
-
+  next() {
+    this.wizard.goToNextStep();
+  }
 }

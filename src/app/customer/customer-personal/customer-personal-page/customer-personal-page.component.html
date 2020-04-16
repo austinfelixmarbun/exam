@@ -1,15 +1,3 @@
-<div class="ucSearch-Button-Right">
-  <span class="mr-1">
-
-    <!-- <button type="submit" class="addButton" translate>
-      <i class="fa fa-check-square-o"></i> Save
-    </button>
-    <button type="button" class="backButton" [routerLink]="['../MainInfo']" translate>
-       Cancel
-    </button> -->
-
-  </span>
-</div>
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
@@ -21,103 +9,46 @@
               </h4>
             </div>
           </form>
-          <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
-          </lib-ucSubsection>
-          <form class="form form-horizontal" id="MainInfoId">
-            <div class="form-body">
-              <div class="form-group row ">
-                <label class="col-md-2 adInsLabel" translate>Customer Name </label>
-                <div class="col-md-4">
-                  <label>{{this.tempCustObj?.CustName}}</label>
-                </div>
-                <label class="col-md-2  adInsLabel" translate>Gender </label>
-                <div class="col-md-4">
-                  <label>{{this.tempMrGenderCode?.Descr}} </label>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-2 adInsLabel" translate>Customer Model</label>
-                <div class="col-md-4">
-                  <label>{{this.tempMrCustModelCode?.Descr}} </label>
-                </div>
-                <label class="col-md-2 adInsLabel" translate>ID Type </label>
-                <div class="col-md-4">
-                  <label>{{this.tempMrIdTypeCode?.Descr}} </label>
-                </div>
-              </div>
-              <div class="form-group row ">
-                <label class="col-md-2 adInsLabel" translate>Birth Place/Date </label>
-                <div class="col-md-4">
-                  <div class="row">
-                    <div class="col-md-6" style="border-right: 1px solid grey">
-                      <label>{{this.tempCustPersonalObj?.BirthPlace}}</label>
-                    </div>
-                    <div class="col-md-6">
-                      <label>{{this.tempCustPersonalObj?.BirthDt   | date: 'dd-MMM-yyyy'  }}</label>
-
-                    </div>
-                  </div>
-                </div>
-                <label class="col-md-2 adInsLabel" translate>ID Number </label>
-                <div class="col-md-4">
-                  <label>{{this.tempCustObj?.IdNo}}</label>
-                </div>
-              </div>
-              <div class="form-group row ">
-                <label class="col-md-2 adInsLabel" translate>NPWP</label>
-                <div class="col-md-4">
-                  <label>{{this.tempCustObj?.TaxIdNo}}</label>
-                </div>
-                <label class="col-md-2 adInsLabel" translate>ID Expired Date</label>
-                <div class="col-md-4">
-                  <label>{{this.tempCustObj?.IdExpiredDt  | date: 'dd-MMM-yyyy' }}</label>
-                </div>
-              </div>
-              <div class="form-group row ">
-                <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
-                <div class="col-md-4">
-                  <label>{{this.tempCustPersonalObj?.MotherMaidenName}}</label>
-                </div>
-              </div>
-            </div>
-          </form>
+          
+           <app-customer-view-header-personal> </app-customer-view-header-personal>
+       
         </div>
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [disableNavigationBar]=true [awNavigationMode]
           navigateBackward="allow" navigateForward="allow">
-
           <aw-wizard-step [stepTitle]="'Customer Detail'"
             [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Detail')">
-            <app-customer-personal-detail *ngIf="isDetail == true"> </app-customer-personal-detail>
+            <app-customer-personal-detail *ngIf="isDetail == true" (outputValue)="terimaValue($event)">
+            </app-customer-personal-detail>
           </aw-wizard-step>
-
           <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"
             (stepEnter)="EnterTab('Address')">
-            <app-customer-contact-person [inputValue]="this.IdCust" *ngIf="isAddress == true">
+            <app-customer-personal-address   *ngIf="isAddress == true">
+            </app-customer-personal-address>
+          </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Contact Person'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+            <app-customer-contact-person   *ngIf="isAddress == true">
             </app-customer-contact-person>
           </aw-wizard-step>
-
-          <aw-wizard-step [stepTitle]="'Address'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-personal-address> </app-customer-personal-address>
+          <aw-wizard-step [stepTitle]="'Customer Group'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome'}" (stepEnter)="EnterTab('Group')">
+            <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="'PERSONAL'" [CustId]="this.IdCust">
+            </app-cust-group-tab>
           </aw-wizard-step>
-
-          <!-- <aw-wizard-step [stepTitle]="'Contact Person'"
-          [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-        <app-customer-personal-detail> </app-customer-personal-detail>
-        </aw-wizard-step>
-
-        <aw-wizard-step [stepTitle]="'Job Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Job')">
-        <app-customer-personal-detail *ngIf="isJob == true" > </app-customer-personal-detail>
-        </aw-wizard-step>
-
-        <aw-wizard-step [stepTitle]="'Financial Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Financial')">
-         <app-customer-personal-detail *ngIf="isFinancial == true"> </app-customer-personal-detail>
-        </aw-wizard-step>
-
-        <aw-wizard-step [stepTitle]="'Other Attribute'"[navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Other')">
-         <app-customer-personal-detail *ngIf="isOther == true"> </app-customer-personal-detail>
-        </aw-wizard-step>-->
-
+          <aw-wizard-step [stepTitle]="'Job Data'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Job')">
+            <app-customer-personal-job-data *ngIf="isJob == true"> </app-customer-personal-job-data>
+          </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Financial Data'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Financial')">
+            <app-cust-fin-data-tab *ngIf="isFinancial == true"  [CustModeId]="this.CustPersonalId"
+              [MrCustTypeCode]="'PERSONAL'"> </app-cust-fin-data-tab>
+          </aw-wizard-step>
+          <!-- <aw-wizard-step [stepTitle]="'Other Attribute'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Other')">
+            other
+            <app-customer-personal-detail *ngIf="isOther == true"> </app-customer-personal-detail>
+          </aw-wizard-step> -->
         </aw-wizard>
       </div>
     </div>

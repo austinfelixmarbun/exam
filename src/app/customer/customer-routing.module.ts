@@ -18,12 +18,14 @@ import { CustomerPersonalJobDataComponent } from './customer-personal/customer-p
 import { JobDataNonProfessionalComponent } from './customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional.component';
 import { CustomerViewComponent } from './customer-view/customer-view.component';
 import { CustomerCompanyPageComponent } from './customer-company/customer-company-page/customer-company-page.component';
+import { EditMainDataPagingComponent } from './edit-main-data/edit-main-data-paging/edit-main-data-paging.component';
+import { EditMainDataPersonalComponent } from './edit-main-data/edit-main-data-personal/edit-main-data-personal.component';
+import { EditMainDataCompanyComponent } from './edit-main-data/edit-main-data-company/edit-main-data-company.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-
       {
         path: 'Paging',
         component: CustomerPagingComponent,
@@ -41,14 +43,14 @@ const routes: Routes = [
         path: 'CustomerPersonal/DuplicateCheck',
         component: CustomerPersonalDuplicateCheckComponent,
         data: {
-          title: 'Customer Personal Duplicate Check  '
+          title: 'Customer Personal Duplicate Check'
         }
       },
       {
         path: 'CustomerCompany/MainInfo',
         component: CustomerCompanyMainInfoComponent,
         data: {
-          title: 'Customer Company  Main Info  '
+          title: 'Customer Company Main Info'
         }
       },
       {
@@ -141,8 +143,28 @@ const routes: Routes = [
         data: {
           title: 'Customer Company Page'
         }
-      },   
-
+      },
+      {
+        path: 'EditMainData/Paging',
+        component: EditMainDataPagingComponent,
+        data: {
+          title: 'Edit Main Data Page'
+        }
+      },
+      {
+        path: 'EditMainData/Personal',
+        component: EditMainDataPersonalComponent,
+        data: {
+          title: 'Edit Main Data Personal Page'
+        }
+      },
+      {
+        path: 'EditMainData/Company',
+        component: EditMainDataCompanyComponent,
+        data: {
+          title: 'Edit Main Data Company Page'
+        }
+      },
     ]
   }
 ];

@@ -42,7 +42,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   urlGetDescByMasterCode: any;
   tempGender: any;
   tempMrIdTypeCode: any;
-  tempCustModel: any;
+  tempCustModel: any; 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.addCustUrl = AdInsConstant.AddNewCust;
     this.addCustPersonalUrl = AdInsConstant.AddNewCustPersonal;
@@ -88,36 +88,38 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
       if (params["VipNotes"] != null) {
         this.VipNotes = params["VipNotes"];
       }
+     
+   
     });
 
   }
 
   ngOnInit() {
-    var refMasterObj1 = {
+    var refMasterObjGender = {
       MasterCode: this.Gender,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj1).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjGender).subscribe(
       (response) => {
         this.tempGender = response;
       }
     );
 
-    var refMasterObj2 = {
+    var refMasterObjMrIdTypeCode = {
       MasterCode: this.MrIdTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj2).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempMrIdTypeCode = response;
       }
     );
 
-    var refMasterObj3 = {
+    var refMasterObjCustModel = {
       MasterCode: this.CustModel,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObj3).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }
@@ -128,7 +130,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     } else {
       this.StatusAffiliate = "No";
     }
-    if (this.IsVip === true) {
+    if (this.IsVip === "true") {
       this.StatusIsVip = "Yes";
     } else {
       this.StatusIsVip = "No";
@@ -142,14 +144,22 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.addCustObj.custObj = new CustObj();
     this.addCustObj.CustPersonalObj = new CustPersonalObj();
     this.addCustObj.custObj.CustName = this.CustName;
-    this.addCustObj.custObj.MrCustTypeCode = "Personal";
+    this.addCustObj.custObj.MrCustTypeCode = "PERSONAL";
     this.addCustObj.custObj.MrCustModelCode = this.CustModel;
     this.addCustObj.custObj.MrIdTypeCode = this.MrIdTypeCode;
     this.addCustObj.custObj.IdNo = this.IdNo;
     this.addCustObj.custObj.IdExpiredDt = this.IdExpiredDt;
     this.addCustObj.custObj.TaxIdNo = this.TaxIdNo;
-    this.addCustObj.custObj.IsVip = this.IsVip;
-    this.addCustObj.custObj.IsAffiliateWithMf = this.IsAffiliateWithMf;
+    if(this.IsVip === "true"){
+      this.addCustObj.custObj.IsVip = true;
+    }else{
+      this.addCustObj.custObj.IsVip = false;
+    }
+    if(this.IsAffiliateWithMf === "true"){
+      this.addCustObj.custObj.IsAffiliateWithMf = true;
+    }else{
+      this.addCustObj.custObj.IsAffiliateWithMf = false;
+    } 
     this.addCustObj.custObj.VipNotes = this.VipNotes;
     this.addCustObj.CustPersonalObj.CustFullName = this.CustName;
     this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;
@@ -164,7 +174,6 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.IdCust = this.resultData.CustObj.CustId; 
         this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.IdCust } });
       },
-
       error => {
         console.log(error);
       }

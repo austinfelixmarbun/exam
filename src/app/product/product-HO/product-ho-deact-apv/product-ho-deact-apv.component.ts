@@ -7,7 +7,6 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 @Component({
   selector: 'app-product-ho-deact-apv',
   templateUrl: './product-ho-deact-apv.component.html',
-  styleUrls: ['./product-ho-deact-apv.component.scss']
 })
 export class ProductHODeactivateApprovalComponent implements OnInit {
 
@@ -27,10 +26,9 @@ export class ProductHODeactivateApprovalComponent implements OnInit {
     var critObj = new CriteriaObj();
     critObj.DataType = 'text';
     critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.propName = 'TRX_TYPE';
-    critObj.value = AdInsConstant.ApvTrxTypeProductHODeact;
+    critObj.propName = 'CATEGORY_CODE';
+    critObj.value = 'PRD_HO_DEACT_APV';
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
-
 }

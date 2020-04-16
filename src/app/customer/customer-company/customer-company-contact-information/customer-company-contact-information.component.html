@@ -6,7 +6,7 @@
       </lib-ucSubsection>
       <div id="MainInfoId">
         <div class="form-group row  ">
-          <label class="col-md-2 adInsLabel" translate>Name</label>
+          <label class="col-md-2 adins-required-label" translate>Name</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="ContactPersonName"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.ContactPersonName.invalid}">
@@ -17,23 +17,29 @@
         <div class="form-group row  ">
           <label class="col-md-2 adInsLabel" translate>Gender</label>
           <div class="col-md-4">
-            <input type="text" class="form-control adInsInput" formControlName="MrGenderCode"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.MrGenderCode.invalid}">
+            <select class="form-control adInsInput" style="width: auto" formControlName="MrGenderCode"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.MrGenderCode.invalid }">
+              <option *ngFor="let it of tempMrGenderCode" [value]="it.Key">
+                {{it.Value}}</option>
+            </select>
             <show-errors [control]="ContactInformationForm.controls.MrGenderCode" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
         </div>
         <div class="form-group row  ">
-          <label class="col-md-2 adInsLabel" translate>Job Position</label>
+          <label class="col-md-2  adins-required-label" translate>Job Position</label>
           <div class="col-md-4">
-            <input type="text" class="form-control adInsInput" formControlName="MrJobPostitionCode"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.MrJobPostitionCode.invalid}">
+            <select class="form-control adInsInput" style="width: auto" formControlName="MrJobPostitionCode"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.MrJobPostitionCode.invalid }">
+              <option *ngFor="let it of tempMrJobPostitionCode" [value]="it.Key">
+                {{it.Value}}</option>
+            </select>
             <show-errors [control]="ContactInformationForm.controls.MrJobPostitionCode" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
         </div>
         <div class="form-group row  ">
-          <label class="col-md-2 adInsLabel" translate>Job Title</label>
+          <label class="col-md-2 adins-required-label" translate>Job Title</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="JobTitleName"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.JobTitleName.invalid}">
@@ -82,16 +88,11 @@
           </div>
         </div>
       </div>
-
-
       <div id="ContactPersonAddressId">
         <lib-ucaddress [UCAddrForm]="ContactInformationForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
-        [default]="UcAddressObj"  [inputField]="inputFieldObj"  [showPhn3]="false" >
-      </lib-ucaddress>
-
+          [default]="UcAddressObj" [inputField]="inputFieldObj" [showPhn3]="false">
+        </lib-ucaddress>
       </div>
-
-
     </div>
     <div class="form-actions right">
       <button type="submit" class="btn btn-raised btn-primary" translate>

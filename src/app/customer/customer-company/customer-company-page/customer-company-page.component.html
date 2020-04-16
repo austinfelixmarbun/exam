@@ -5,72 +5,62 @@
         <div class="addEdit">
           <form class="form form-horizontal">
             <div class="form-body">
-              <h4 class="form-section card-title" translate> Customer Personal
+              <h4 class="form-section card-title" translate> Customer Company
               </h4>
             </div>
           </form>
-          <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
-          </lib-ucSubsection>
-          <form class="form form-horizontal" id="MainInfoId">
-            <div class="form-body">
-              <div class="form-group row ">
-                <label class="col-md-2 adInsLabel" translate>Customer Name </label>
-                <div class="col-md-4">
-                  <label>{{this.tempCustObj?.CustName}}</label>
-                </div>
-                <label class="col-md-2  adInsLabel" translate>Customer Model  </label>
-                <div class="col-md-4">
-                  <label>{{this.tempMrCustModelCode?.Descr}} </label>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-2 adInsLabel" translate>Company Type</label>
-                <div class="col-md-4">
-                  <label>{{this.tempMrCompanyTypeCode?.Descr}} </label>
-                </div>
-                <label class="col-md-2 adInsLabel" translate>NPWP </label>
-                <div class="col-md-4">
-                  <label>{{this.tempCustObj?.TaxIdNo}} </label>
-                </div>
-              </div> 
-            </div>
-          </form>
+        
+          <app-customer-view-header-company> </app-customer-view-header-company>
         </div>
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [disableNavigationBar]=true [awNavigationMode]
           navigateBackward="allow" navigateForward="allow">
-       
-          <aw-wizard-step [stepTitle]="'Customer Detail'" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Detail')" >
-            <app-customer-company-detail *ngIf="isDetail == true"(outputValue)="terimaValue($event)"> </app-customer-company-detail>
+
+          <aw-wizard-step [stepTitle]="'Customer Detail'"
+            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Detail')">
+            <app-customer-company-detail *ngIf="isDetail == true" (outputValue)="terimaValue($event)">
+            </app-customer-company-detail>
           </aw-wizard-step>
 
-          <!-- <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Address')">
-          <app-customer-company-detail  *ngIf="isAddress == true" > </app-customer-company-detail>
-        </aw-wizard-step> -->
+          <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"
+            (stepEnter)="EnterTab('Address')">
+            <app-customer-company-address *ngIf="isAddress == true">
+            </app-customer-company-address>
+          </aw-wizard-step>
 
-        <aw-wizard-step [stepTitle]="'Management /  Shareholder'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Management')">
-        <app-customer-company-management-shareholder *ngIf="isManagement == true" [inputValue] ="this.IdCust" [custCompanyId] ="this.CustCompanyId" > </app-customer-company-management-shareholder>
-        </aw-wizard-step>
-    <!-- 
-        <aw-wizard-step [stepTitle]="'Customer Group'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Group')"> 
-     <app-customer-company-detail *ngIf="isGroup == true" > </app-customer-company-detail>
-        </aw-wizard-step> -->
+          <aw-wizard-step [stepTitle]="'Management /  Shareholder'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Management')">
+            <app-customer-company-management-shareholder *ngIf="isManagement == true"
+              [custCompanyId]="this.CustCompanyId"> </app-customer-company-management-shareholder>
+          </aw-wizard-step>
 
-        <aw-wizard-step [stepTitle]="'Contact Information'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Contact')">
-        <app-customer-company-contact-information *ngIf="isContact == true" > </app-customer-company-contact-information>
-        </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Customer Group'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Group')">
+            <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="'COMPANY'" [CustId]="IdCust">
+            </app-cust-group-tab>
+          </aw-wizard-step>
 
-        <aw-wizard-step [stepTitle]="'Financial Data'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Financial')">
-         <app-customer-company-detail *ngIf="isFinancial == true"> </app-customer-company-detail>
-        </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Contact Information'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Contact')">
+            <app-customer-company-contact-information *ngIf="isContact == true" [custCompanyId]="this.CustCompanyId">
+            </app-customer-company-contact-information>
+          </aw-wizard-step>
 
-        <aw-wizard-step [stepTitle]="'Legal Data'"[navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Legal')">
-         <app-customer-company-detail *ngIf="isLegal == true"> </app-customer-company-detail>
-        </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Financial Data'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Financial')">
+            <app-cust-fin-data-tab *ngIf="isFinancial == true" [CustModeId]="this.CustCompanyId"
+              [MrCustTypeCode]="'COMPANY'"> </app-cust-fin-data-tab>
+          </aw-wizard-step>
 
-        <aw-wizard-step [stepTitle]="'Other Attribute'"[navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"(stepEnter)="EnterTab('Other')">
-         <app-customer-company-detail *ngIf="isOther == true"> </app-customer-company-detail>
-        </aw-wizard-step>
+          <aw-wizard-step [stepTitle]="'Legal Data'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Legal')">
+            <app-cust-legal-doc *ngIf="isLegal == true" [CustCompanyId]="this.CustCompanyId"> </app-cust-legal-doc>
+          </aw-wizard-step>
 
+          <!-- <aw-wizard-step [stepTitle]="'Other Attribute'"
+            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Other')">
+            other
+            <app-customer-company-detail *ngIf="isOther == true"> </app-customer-company-detail>
+          </aw-wizard-step> -->
         </aw-wizard>
       </div>
     </div>

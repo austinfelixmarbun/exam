@@ -20,7 +20,7 @@
                 </div>
                 <label class="col-md-2 adInsLabel" translate>Customer Model </label>
                 <div class="col-md-4">
-                    <select class="form-control adInsInput" style="width: auto" formControlName="CustModel"
+                  <select class="form-control adInsInput" style="width: auto" formControlName="CustModel"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.CustModel.invalid }">
                     <option *ngFor="let it of tempCustModel  " [value]="it.Key">
                       {{it.Value}}</option>
@@ -29,7 +29,7 @@
                   </show-errors>
                 </div>
               </div>
-            <div class="form-group row adins-required">
+              <div class="form-group row adins-required">
                 <label class="col-md-2 adInsLabel" translate>Company Type</label>
                 <div class="col-md-4">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrCompanyTypeCode"
@@ -48,9 +48,30 @@
                   </show-errors>
                 </div>
               </div>
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
+                </div>
+              </div>            
+              <div class="form-group row  ">
+                <label class="col-md-2 adInsLabel" translate>VIP</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
+                    (click)="checkState()" />
+                </div>         
+                <label class="col-md-2 adInsLabel" translate>VIP Notes</label>
+                <div class="col-md-4">
+                    <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"  
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.VipNotes.invalid }"></textarea>
+
+                    <show-errors [control]="CustomerCompanyForm.controls.VipNotes" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" translate>
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../../Paging']" translate>
                 <i class="ft-x"></i> Cancel
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>

@@ -11,11 +11,10 @@ import { WizardComponent } from 'angular-archwizard';
   selector: 'app-customer-company-management-shareholder-check',
   templateUrl: './customer-company-management-shareholder-check.component.html',
   styleUrls: ['./customer-company-management-shareholder-check.component.scss'],
-  
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderCheckComponent implements OnInit {
-  @Input() inputValue: any;
+  
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
   getCustCompanyIdUrl: any;
   IdCust: any;
@@ -23,9 +22,9 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   tempCustCompanyObj: any;
   getListCompanyManagementShareholderByCustCompanyId: any;
   tempListCompanyManagementShareholder: any;
-  custCompanyMgmntShrholderObj : any;
-  DeleteCustCompanyMgmntShrholderUrl : any;
-  constructor(private route: ActivatedRoute, private http: HttpClient,private toastr: NGXToastrService,private wizard: WizardComponent) {
+  custCompanyMgmntShrholderObj: any;
+  DeleteCustCompanyMgmntShrholderUrl: any;
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
     this.getCustCompanyIdUrl = AdInsConstant.GetCustCompanyByCustId;
     this.getListCompanyManagementShareholderByCustCompanyId = AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
     this.DeleteCustCompanyMgmntShrholderUrl = AdInsConstant.DeleteCustCompanyMgmntShrholder;
@@ -50,12 +49,11 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
     this.outputValue.emit({ mode: 'addCompany' });
   }
 
-  
-  deleteItem(CustCompanyMgmntShrholderId : any){
-  this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-  this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
+  deleteItem(CustCompanyMgmntShrholderId: any) {
+    this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
+    this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
 
-  console.log(CustCompanyMgmntShrholderId);
+    console.log(CustCompanyMgmntShrholderId);
     this.http.post(this.DeleteCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
@@ -65,30 +63,29 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
         console.log(error);
       }
     );
-}
-editItem(custCompanyMgmntShrholderObj : any){
-    if(custCompanyMgmntShrholderObj.MrCustTypeCode == "Personal"){
-      this.outputValue.emit({ mode: 'addPersonal' , CustCompanyMgmntShrholderId : custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId});
-    }else if(custCompanyMgmntShrholderObj.MrCustTypeCode == "Company"){
-      this.outputValue.emit({ mode: 'addCompany' , CustCompanyMgmntShrholderId : custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId});
+  }
+  editItem(custCompanyMgmntShrholderObj: any) {
+    if (custCompanyMgmntShrholderObj.MrCustTypeCode == "Personal") {
+      this.outputValue.emit({ mode: 'addPersonal', CustCompanyMgmntShrholderId: custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId });
+    } else if (custCompanyMgmntShrholderObj.MrCustTypeCode == "Company") {
+      this.outputValue.emit({ mode: 'addCompany', CustCompanyMgmntShrholderId: custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId });
     }
-}
-getList(){
-  this.custCompanyObj = new CustCompanyObj;
-  this.custCompanyObj.CustId = this.IdCust;
-  this.http.post(this.getCustCompanyIdUrl, this.custCompanyObj).subscribe(
-    (response) => {
-      this.tempCustCompanyObj = response;
-      this.http.post(this.getListCompanyManagementShareholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
-        (response) => {
-          this.tempListCompanyManagementShareholder = response["ReturnObject"];
-          console.log(this.tempListCompanyManagementShareholder);
-        });
-    }
-  );
-}
-
-next(){
-  this.wizard.goToNextStep();
-}
+  }
+  getList() {
+    this.custCompanyObj = new CustCompanyObj;
+    this.custCompanyObj.CustId = this.IdCust;
+    this.http.post(this.getCustCompanyIdUrl, this.custCompanyObj).subscribe(
+      (response) => {
+        this.tempCustCompanyObj = response;
+        this.http.post(this.getListCompanyManagementShareholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
+          (response) => {
+            this.tempListCompanyManagementShareholder = response["ReturnObject"];
+            console.log(this.tempListCompanyManagementShareholder);
+          });
+      }
+    );
+  }
+  next() {
+    this.wizard.goToNextStep();
+  }
 }

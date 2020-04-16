@@ -4,23 +4,16 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-customer-company-page',
   templateUrl: './customer-company-page.component.html',
-  styleUrls: ['./customer-company-page.component.scss']
+  styleUrls: ['./customer-company-page.component.scss'],
+  providers: [NGXToastrService],
 })
 export class CustomerCompanyPageComponent implements OnInit {
-  IdCust: any;
-  custObj: any;
-  custCompanyObj: any;
-  tempCustObj: any;
-  tempCustCompanyObj: any;
-  getRefMasterByMasterCodeUrl: any;
-  getCustCompanyUrl: any;
-  getCustUrl: any;
-  tempMrCustModelCode: any;
-  tempMrCompanyTypeCode: any;
+  IdCust: any; 
   isDetail: any;
   isAddress: any;
   isContact: any;
@@ -32,47 +25,14 @@ export class CustomerCompanyPageComponent implements OnInit {
   CustCompanyId: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
-    this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
-    this.getCustCompanyUrl = AdInsConstant.GetCustCompanyByCustId;
-    this.getCustUrl = AdInsConstant.GetCustByCustId;
-    this.route.queryParams.subscribe(params => {
-
+     
+    this.route.queryParams.subscribe(params => { 
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
     });
   }
-
   ngOnInit() {
-    this.custObj = new CustObj();
-    this.custObj.CustId = this.IdCust;
-    this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
-      (response) => {
-
-        this.tempCustObj = response;
-        var refMasterObj1 = {
-          MasterCode: this.tempCustObj.MrCustModelCode
-        }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObj1).subscribe(
-          (response) => {
-            this.tempMrCustModelCode = response;
-          }
-        );
-      });
-    this.custCompanyObj = new CustCompanyObj();
-    this.custCompanyObj.CustId = this.IdCust;
-    this.http.post(this.getCustCompanyUrl, this.custCompanyObj).subscribe(
-      (response) => {
-        this.tempCustCompanyObj = response;
-        var refMasterObj = {
-          MasterCode: this.tempCustCompanyObj.MrCompanyTypeCode
-        }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObj).subscribe(
-          (response) => {
-            this.tempMrCompanyTypeCode = response;
-          }
-        );
-      });
   }
 
   EnterTab(type) {
@@ -159,7 +119,6 @@ export class CustomerCompanyPageComponent implements OnInit {
     }
   }
   terimaValue(ev: any) {
-    console.log("aaaas");
     console.log(ev);
     this.CustCompanyId = ev.CustCompanyId;
   }

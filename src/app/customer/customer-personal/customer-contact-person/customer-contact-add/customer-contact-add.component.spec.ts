@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CustomerContactAddComponent } from './customer-contact-add.component';
 
 describe('CustomerContactAddComponent', () => {
