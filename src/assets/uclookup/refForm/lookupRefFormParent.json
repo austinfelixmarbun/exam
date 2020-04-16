@@ -1,0 +1,55 @@
+{
+    "title": "Supplier Holding",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "TITLE",
+            "id": "TitleId",
+            "value": "",
+            "label": "Form Title",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT TITLE AS Title, REF_FORM_ID AS RefFormId",
+        "from": "FROM REF_FORM WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Form Title",
+            "name": "TITLE"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Select"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Title"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "path": "RefForm/Detail",
+                    "param": [
+                        {
+                            "type": "RefFormId",
+                            "property": "RefFormId"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "propertyId": "RefFormId",
+    "propertyName": "Title"  
+}
