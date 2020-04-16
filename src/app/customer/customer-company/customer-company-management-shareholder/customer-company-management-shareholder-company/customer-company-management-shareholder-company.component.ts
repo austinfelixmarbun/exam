@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-company',
@@ -30,11 +31,12 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   tempCustCompanyMgmntShrholderObj : any;
   editManagementShareholderUrl : string;
   inputLookupCustCompanyObj : any;
+  tempShareholderCustNo : any;
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.maxLength(100) ,Validators.required]],
     MrCustModelCode: [''],
-    MrCompanyTypeCode: [''],
-    TaxIdNo: [''],
+    MrCompanyTypeCode: ['',[Validators.required]],
+    TaxIdNo: ['',Validators.pattern("^[0-9]+$")],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     IsSigner: [false],
   });
@@ -97,10 +99,15 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner
           });
+          if(this.tempCustCompanyMgmntShrholderObj.ShareholderCustNo!=null){ 
+            this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
+            this.ManagementShareholderForm.controls.MrCustModelCode.disable();  
+            this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable(); 
+            this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
+          }
         }
       );
-    }
-
+    } 
   }
 
   SaveValue() { 
@@ -114,7 +121,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value; 
-      this.custCompanyMgmntShrholderObj.MrCustTypeCode = "Company";
+      this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -125,13 +132,16 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         }
       );
     }else{
+      if(this.tempShareholderCustNo!=null){
+        this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
+      }
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;   
       this.custCompanyMgmntShrholderObj.MrCompanyTypeCode = this.ManagementShareholderForm.controls["MrCompanyTypeCode"].value;  
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value; 
-      this.custCompanyMgmntShrholderObj.MrCustTypeCode = "Company";
+      this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -156,6 +166,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       TaxIdNo : event.TaxIdNo,
     });
  
+    this.tempShareholderCustNo = event.CustNo;
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
     this.ManagementShareholderForm.controls.MrCustModelCode.disable();  
     this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable(); 

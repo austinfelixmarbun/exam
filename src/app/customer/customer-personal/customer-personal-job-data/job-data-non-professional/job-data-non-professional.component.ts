@@ -96,7 +96,8 @@ export class JobDataNonProfessionalComponent implements OnInit {
           this.returnCustJobDataObj = response;
           console.log("ccc")
           console.log(this.returnCustJobDataObj)
-          if(this.returnCustJobDataObj != undefined) {
+          
+          if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
             this.JobDataNonProForm.patchValue({ 
               JobTitleName: this.returnCustJobDataObj.JobTitleName,
             });
@@ -118,6 +119,10 @@ export class JobDataNonProfessionalComponent implements OnInit {
             this.typePage = "edit";
           }
       });
+  }
+
+  back(){
+    this.wizard.goToPreviousStep();
   }
 
   SaveForm(){

@@ -29,8 +29,8 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-2 adInsLabel" translate>Company Type</label>
+              <div class="form-group row ">
+                <label class="col-md-2 adins-required-label" translate>Company Type</label>
                 <div class="col-md-4">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrCompanyTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.MrCompanyTypeCode.invalid }">
@@ -54,13 +54,13 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
                 </div>
               </div>            
-              <div class="form-group row  ">
+              <div class="form-group row">
                 <label class="col-md-2 adInsLabel" translate>VIP</label>
                 <div class="col-md-4">
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
                     (click)="checkState()" />
                 </div>         
-                <label class="col-md-2 adInsLabel" translate>VIP Notes</label>
+                <label class="col-md-2 adInsLabel"  [ngClass]="{'adins-required-label' : VipNotesRequired==true}" translate>VIP Notes</label>
                 <div class="col-md-4">
                     <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"  
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.VipNotes.invalid }"></textarea>

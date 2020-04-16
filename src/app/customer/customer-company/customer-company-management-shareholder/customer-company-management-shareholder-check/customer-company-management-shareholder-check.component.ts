@@ -6,6 +6,7 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { WizardComponent } from 'angular-archwizard';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-check',
@@ -50,24 +51,28 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
 
   deleteItem(CustCompanyMgmntShrholderId: any) {
-    this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-    this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
+    if(confirm('Are you sure to delete this record?')){
+      this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
+      this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
+  
+      console.log(CustCompanyMgmntShrholderId);
+      this.http.post(this.DeleteCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["Message"]);
+          this.getList();
+        },
+        error => {
+          console.log(error);
+        }
+      );
 
-    console.log(CustCompanyMgmntShrholderId);
-    this.http.post(this.DeleteCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
-      response => {
-        this.toastr.successMessage(response["Message"]);
-        this.getList();
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    }
+  
   }
   editItem(custCompanyMgmntShrholderObj: any) {
-    if (custCompanyMgmntShrholderObj.MrCustTypeCode == "Personal") {
+    if (custCompanyMgmntShrholderObj.MrCustTypeCode == RefMasterConstant.Personal) {
       this.outputValue.emit({ mode: 'addPersonal', CustCompanyMgmntShrholderId: custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId });
-    } else if (custCompanyMgmntShrholderObj.MrCustTypeCode == "Company") {
+    } else if (custCompanyMgmntShrholderObj.MrCustTypeCode == RefMasterConstant.Company) {
       this.outputValue.emit({ mode: 'addCompany', CustCompanyMgmntShrholderId: custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId });
     }
   }
@@ -87,5 +92,8 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
   next() {
     this.wizard.goToNextStep();
+  }
+  back(){
+    this.wizard.goToPreviousStep();
   }
 }

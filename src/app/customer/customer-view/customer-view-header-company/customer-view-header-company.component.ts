@@ -21,6 +21,9 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
+      else if (params["CustId"] != null) {
+        this.IdCust = params["CustId"];
+      }
     });
   }
   custObj: any;
@@ -67,12 +70,13 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
     this.http.post(this.getCustCompanyUrl, this.custCompanyObj).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
-        var refMasterObj = {
+        var refMasterObjMrCompanyTypeCode = {
           MasterCode: this.tempCustCompanyObj.MrCompanyTypeCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObj).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrCompanyTypeCode).subscribe(
           (response) => {
             this.tempMrCompanyTypeCode = response;
+            console.log(this.tempMrCompanyTypeCode);
           }
         );
       });

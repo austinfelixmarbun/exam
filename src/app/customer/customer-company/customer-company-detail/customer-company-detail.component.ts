@@ -5,8 +5,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
-import { CustObj } from 'app/shared/model/CustObj.Model';
+import { environment } from 'environments/environment'; 
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
@@ -21,16 +20,12 @@ import { DatePipe } from '@angular/common';
 export class CustomerCompanyDetailComponent implements OnInit {
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
-    IsAffiliateWithMf: [false],
-    IsVip: [false],
-    VipNotes: [''],
     EstablishmentDt: ['', [Validators.required]]
   });
-  lookUpObj: any;
-  custObj: any;
+  lookUpObj: any; 
   custCompanyObj: any;
   tempRefIndustryTypeId: any;
-  editCustUrl: any;
+ 
   editCustCompanyUrl: any;
   IdCust: any;
   getCustCompanyByCustIdUrl: any;
@@ -44,7 +39,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
-    this.editCustUrl = AdInsConstant.EditCust;
+ 
     this.editCustCompanyUrl = AdInsConstant.EditCustCompany;
     this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;
     this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
@@ -57,8 +52,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
         this.Page = params["Page"];
       }
     });
-  }
-
+  } 
   ngOnInit() {
 
     var datePipe = new DatePipe("en-US");
@@ -68,20 +62,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
-
-
-    this.custObj = new CustObj()
-    this.custObj.CustId = this.IdCust;
-
-    this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
-      (response) => {
-        this.tempCustObj = response;
-        this.CustomerDetailForm.patchValue({
-          IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
-          IsVip: this.tempCustObj.IsVip,
-          VipNotes: this.tempCustObj.VipNotes,
-        });
-      }); this.custCompanyObj = new CustCompanyObj();
+ 
+    this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj.CustId = this.IdCust;
     this.http.post(this.getCustCompanyByCustIdUrl, this.custCompanyObj).subscribe(
       (response) => {
@@ -90,26 +72,26 @@ export class CustomerCompanyDetailComponent implements OnInit {
           NumOfEmp: this.tempCustCompanyObj.NumOfEmp,
           EstablishmentDt: datePipe.transform(this.tempCustCompanyObj.EstablishmentDt, 'yyyy-MM-dd'),
         });
+        
+        console.log(this.tempCustCompanyObj.EstablishmentDt);
         if (this.tempCustCompanyObj.RefIndustryTypeId != null) {
           this.refIndustryTypeObj = new RefIndustryTypeObj();
           this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
           this.http.post(this.getRefIndustryTypeByIndustryTypeIdUrl, this.refIndustryTypeObj).subscribe(
             (response) => {
-              this.tempRefIndustryObj = response;
+              this.tempRefIndustryObj = response; 
               this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName; 
+              this.lookUpObj.jsonSelect = response;
             });
         }
       });
 
   }
-  SaveValue() {
-    this.custObj = new CustObj();
+  SaveValue() { 
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj = this.tempCustCompanyObj;
-    this.custObj = this.tempCustObj;
-    this.custObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
-    this.custObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
-    this.custObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
+  
+  
     this.custCompanyObj.NumOfEmp = this.CustomerDetailForm.controls["NumOfEmp"].value;
     this.custCompanyObj.EstablishmentDt = this.CustomerDetailForm.controls["EstablishmentDt"].value;
     if( this.tempRefIndustryObj != null && this.tempRefIndustryTypeId ==null){
@@ -117,11 +99,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
     }else{ 
       this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
     }
-
-    this.http.post(this.editCustUrl, this.custObj).subscribe(
-      (response) => {
         this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
-          (response) => {
+          (response) => { 
             this.toastr.successMessage(response["Message"]);
             this.outputValue.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId });
             this.wizard.goToNextStep();
@@ -129,12 +108,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
           error => {
             console.log(error);
           }
-        );
-      },
-      error => {
-        console.log(error);
-      }
-    );
+        );  
   }
   getLookUp(event) {
     this.tempRefIndustryTypeId = event.RefIndustryTypeId;
@@ -146,5 +120,5 @@ export class CustomerCompanyDetailComponent implements OnInit {
       this.router.navigate(["/Customer/Paging"]);
     }
   }
-}
+  }
 

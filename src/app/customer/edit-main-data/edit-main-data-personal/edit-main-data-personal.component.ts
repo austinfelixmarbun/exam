@@ -7,6 +7,8 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { DatePipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
+import { ifStmt } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -22,7 +24,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.required]],
+    TaxIdNo: ['' ],
     IdExpiredDt: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel: ['', [Validators.required]],
@@ -30,7 +32,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     IsAffiliateWithMf: [true],
     VipNotes: ['']
   });
-  KTP = "KTP"
+  KTP = RefMasterConstant.EKtp;
   getListActiveRefMasterUrl: string;
   tempKTPCheck: any;
   tempGender: any;
@@ -47,6 +49,9 @@ export class EditMainDataPersonalComponent implements OnInit {
   custObj: any;
   custPersonalObj: any;
   From:any;
+  businessDtMin : any;
+  businessDtMax: any;
+  VipNotesRequired : any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = AdInsConstant.GetCustPersonalbyCustId;
@@ -65,6 +70,12 @@ export class EditMainDataPersonalComponent implements OnInit {
   }
 
   ngOnInit() {
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDtMin = new Date(context["BusinessDt"]);
+    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+  
     var refMasterObjGender = {
       RefMasterTypeCode: "GENDER",
       RowVersion: ""
@@ -128,6 +139,14 @@ export class EditMainDataPersonalComponent implements OnInit {
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
           VipNotes: this.tempCustObj.VipNotes,
         });
+        if(this.tempCustObj.VipNotes!= null){
+          this.VipNotesRequired = true;
+        }else{
+          this.VipNotesRequired = false;
+        }
+        if(this.tempCustObj.IsVip==false){ 
+        this.CustomerPersonalForm.controls.VipNotes.disable();
+        }
       }
     );
     this.http.post(this.getCustPersonalByCustIdUrl, this.custPersonalObj).subscribe(
@@ -144,6 +163,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     );
   }
   SaveValue() {
+    
     this.custObj = new CustObj();
     this.custPersonalObj = new CustPersonalObj();
     this.custObj = this.tempCustObj;
@@ -155,8 +175,12 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.IdExpiredDt = this.CustomerPersonalForm.controls["IdExpiredDt"].value;;
     this.custObj.TaxIdNo = this.CustomerPersonalForm.controls["TaxIdNo"].value;
     this.custObj.IsVip = this.CustomerPersonalForm.controls["IsVip"].value;
-    this.custObj.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value;
-    this.custObj.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
+    this.custObj.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value; 
+    if(this.custObj.IsVip==true){
+      this.custObj.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
+    }else{
+      this.custObj.VipNotes = null;
+    }
     this.custPersonalObj.CustFullName = this.CustomerPersonalForm.controls["CustName"].value;
     this.custPersonalObj.MrGenderCode = this.CustomerPersonalForm.controls["Gender"].value;
     this.custPersonalObj.BirthPlace = this.CustomerPersonalForm.controls["BirthPlace"].value;
@@ -202,5 +226,22 @@ export class EditMainDataPersonalComponent implements OnInit {
     else if(this.From = "EditMainData"){
       this.router.navigate(["/Customer/EditMainData/Paging"]);
     }
+}
+checkState() {
+  if (this.CustomerPersonalForm.controls.IsVip.value === true) {
+    this.CustomerPersonalForm.patchValue({
+      VipNotes: null
+    });
+    this.CustomerPersonalForm.controls.VipNotes.disable();
+    this.VipNotesRequired = false;
+    this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
+     
+  } else {
+    this.CustomerPersonalForm.controls.VipNotes.enable();
+    this.CustomerPersonalForm.controls.VipNotes.setValidators(Validators.required);
+    this.VipNotesRequired = true;
+    console.log(this.VipNotesRequired);
+  }
+  this.CustomerPersonalForm.controls.VipNotes.updateValueAndValidity();
 }
 }

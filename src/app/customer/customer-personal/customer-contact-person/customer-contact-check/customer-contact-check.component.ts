@@ -42,17 +42,20 @@ export class CustomerContactCheckComponent implements OnInit {
     this.outputValue.emit({ isAdd: this.isAdd });
   }
   deleteItem(custId: any) {
-    this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
-    this.custPersonContactPersonObj.CustPersonalContactPersonId = custId;
-    this.http.post(this.deleteCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
-      response => {
-        this.toastr.successMessage(response["Message"]);
-        this.getList();
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    if(confirm('Are you sure to delete this record?')){
+      this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
+      this.custPersonContactPersonObj.CustPersonalContactPersonId = custId;
+      this.http.post(this.deleteCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["Message"]);
+          this.getList();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+ 
   }
 
   editItem(custPersonalContactPersonId: any) {
@@ -72,5 +75,8 @@ export class CustomerContactCheckComponent implements OnInit {
 
   next() {
     this.wizard.goToNextStep();
+  }
+  back(){
+    this.wizard.goToPreviousStep();
   }
 }

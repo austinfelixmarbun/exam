@@ -8,6 +8,7 @@ import { ProdOfferingObj } from 'app/shared/model/ProdOfferingObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcLookupObj } from 'app/shared/model/UcLookupObj.Model';
 import { formatDate } from '@angular/common';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-prod-offering-add',
@@ -16,7 +17,7 @@ import { formatDate } from '@angular/common';
 })
 export class ProdOfferingAddComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private fb:FormBuilder, private toastr: NGXToastrService) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.ProdOfferingHId = params["ProdOfferingHId"];
       console.log(params);
@@ -29,18 +30,18 @@ export class ProdOfferingAddComponent implements OnInit {
         this.criteria.push(tempCrit);
       }
     })
-   }
+  }
 
-   mode: string = "add";
-   key: any;
-   criteria: CriteriaObj[] = [];
-   prodOfferingObj : ProdOfferingObj;
-   resultData : any;
-   ProdOfferingId: any;
-   inputLookupObj : any;
-   ProdOfferingHId: number;
+  mode: string = "add";
+  key: any;
+  criteria: CriteriaObj[] = [];
+  prodOfferingObj: ProdOfferingObj;
+  resultData: any;
+  ProdOfferingId: any;
+  inputLookupObj: any;
+  ProdOfferingHId: number;
 
-   ProdOfferingForm = this.fb.group({
+  ProdOfferingForm = this.fb.group({
     ProdName: [''],
     ProdOfferingCode: [''],
     ProdOfferingName: [''],
@@ -52,19 +53,13 @@ export class ProdOfferingAddComponent implements OnInit {
   ngOnInit() {
     this.inputLookupObj = new UcLookupObj();
     this.inputLookupObj.urlJson = "./assets/uclookup/lookupProdOffering.json";
-    this.inputLookupObj.urlEnviPaging = "http://r3app-server.ad-ins.com/FOUNDATION_R3";
+    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupObj.deleteUrl = "/RefBank/DeleteRefBank";
     this.inputLookupObj.pagingJson = "./assets/uclookup/lookupProdOffering.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/lookupProdOffering.json";
 
-    var refMasterObj = {
-      RefMasterTypeCode:"ID_TYPE",
-      RowVersion:""
-    }
-
     if (this.mode == "edit") {
-      
+
       this.ProdOfferingForm.controls.ProdOfferingCode.disable();
       var prodOfferingObj = new ProdOfferingObj();
       prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
@@ -72,15 +67,15 @@ export class ProdOfferingAddComponent implements OnInit {
         (response) => {
           console.log("response: ");
           console.log(response);
-          this.resultData=response;
+          this.resultData = response;
           this.inputLookupObj.nameSelect = this.resultData.ProdName;
           prodOfferingObj.ProdHId = this.resultData.ProdHId;
           this.ProdOfferingForm.patchValue({
-            ProdOfferingCode : this.resultData.ProdOfferingCode,
-            ProdOfferingName : this.resultData.ProdOfferingName,
-            ProdOfferingDescr : this.resultData.ProdOfferingDescr,
-            StartDt : formatDate(this.resultData['StartDt'],'yyyy-MM-dd','en-US'),
-            EndDt : formatDate(this.resultData['EndDt'], 'yyyy-MM-dd', 'en-US')
+            ProdOfferingCode: this.resultData.ProdOfferingCode,
+            ProdOfferingName: this.resultData.ProdOfferingName,
+            ProdOfferingDescr: this.resultData.ProdOfferingDescr,
+            StartDt: formatDate(this.resultData['StartDt'], 'yyyy-MM-dd', 'en-US'),
+            EndDt: formatDate(this.resultData['EndDt'], 'yyyy-MM-dd', 'en-US')
           })
         },
         (error) => {
@@ -91,38 +86,38 @@ export class ProdOfferingAddComponent implements OnInit {
 
   }
 
-  AddDetail(){
-      this.prodOfferingObj = new ProdOfferingObj();
-      this.prodOfferingObj = this.ProdOfferingForm.value;
-      if(this.mode=="edit"){
-        this.prodOfferingObj.ProdOfferingCode = this.resultData.ProdOfferingCode;
-        this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
-        this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
-        this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
-        this.prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
-        this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
-          response => {
-            this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/Product/ProdOffering/add-detail"],{queryParams :{"ProdOfferingHId" : this.resultData.ProdOfferingHId}});
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }else{
-        this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.ProdHId;
-        this.prodOfferingObj.ProdOfferingId ="0";
-        this.prodOfferingObj.RowVersion = "";
-        this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
-          response => {
-            this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/Product/ProdOffering/AddDetail"],{queryParams :{"ProdOfferingHId" : response["DraftProdOfferingHId"] }});
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }
+  AddDetail() {
+    this.prodOfferingObj = new ProdOfferingObj();
+    this.prodOfferingObj = this.ProdOfferingForm.value;
+    if (this.mode == "edit") {
+      this.prodOfferingObj.ProdOfferingCode = this.resultData.ProdOfferingCode;
+      this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
+      this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
+      this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
+      this.prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
+      this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["message"]);
+          this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingHId": this.resultData.ProdOfferingHId } });
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
+      this.prodOfferingObj.ProdOfferingId = "0";
+      this.prodOfferingObj.RowVersion = "";
+      this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["message"]);
+          this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingHId": response["DraftProdOfferingHId"] } });
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
   }
 
 
@@ -147,8 +142,8 @@ export class ProdOfferingAddComponent implements OnInit {
       );
     }
     else {
-      this.prodOfferingObj.ProdOfferingId ="0";
-      this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.ProdHId;
+      this.prodOfferingObj.ProdOfferingId = "0";
+      this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
       this.prodOfferingObj.RowVersion = "";
       this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
         response => {
@@ -162,16 +157,8 @@ export class ProdOfferingAddComponent implements OnInit {
     }
   }
 
-  ProdName="";
-  handleOutput(event){
-    console.log(event);
-    this.ProdOfferingForm.patchValue(
-      {
-        ProdName: event.ProdName
-      }
-    );
-    console.log(this.ProdOfferingForm);
-    this.inputLookupObj.nameSelect = event.ProdName;
-    this.inputLookupObj.idSelect = event.ProdName;
+  ProdName = "";
+  handleOutput(event) {
+    console.log(this.inputLookupObj.CurrentProdHId)
   }
 }

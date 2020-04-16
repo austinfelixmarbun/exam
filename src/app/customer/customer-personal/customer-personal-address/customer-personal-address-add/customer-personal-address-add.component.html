@@ -5,10 +5,10 @@
       <lib-ucSubsection [id]="'custAddrId'" [title]="'Customer Address'" [panel]="'customerAddr'">
       </lib-ucSubsection>
       <div id="customerAddr">
-        <div class="form-group row">
-          <label class="col-md-2  adInsLabel adins-required" translate>Address Type Name </label>
+        <div class="form-group row adins-required">
+          <label class="col-md-2  adInsLabel adins-required adins-required-label" translate>Address Type Name </label>
           <div class="col-md-4">
-            <select class="form-control adInsInput" formControlName="MrCustAddrTypeCode">
+            <select class="form-control adInsInput" formControlName="MrCustAddrTypeCode" required>
               <option *ngFor="let ram of listAddressType" [value]="ram.Key">
                 {{ram.Value}}
               </option>
@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <lib-ucSubsection [id]="'addrAttrId'" [title]="'Customer Address Attribute'" [panel]="'addrAttribute'">
+      <!-- <lib-ucSubsection [id]="'addrAttrId'" [title]="'Customer Address Attribute'" [panel]="'addrAttribute'">
       </lib-ucSubsection>
       <div id="addrAttribute">
         <div class="form-group row">
@@ -97,7 +97,7 @@
             <show-errors [control]="CustDataPersonalForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="form-actions right">
       <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>

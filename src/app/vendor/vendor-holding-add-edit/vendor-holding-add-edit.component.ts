@@ -255,7 +255,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.vendorObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
       this.vendorObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
-      this.vendorService.EditVendor(this.vendorObj).subscribe(
+      this.vendorService.EditVendorHolding(this.vendorObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigateByUrl('/Vendor/Holding/Paging');
@@ -269,7 +269,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.vendorObj.VendorAddrObj = vendorAddrObj;
       this.vendorObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
-      this.vendorService.AddVendor(this.vendorObj).subscribe(
+      this.vendorService.AddVendorHolding(this.vendorObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Vendor/Holding/Registration'],{queryParams :{"VendorId" : response['VendorObj'].VendorId}});

@@ -22,17 +22,17 @@
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"
             (stepEnter)="EnterTab('Address')">
-            <app-customer-personal-address   *ngIf="isAddress == true">
+            <app-customer-personal-address >
             </app-customer-personal-address>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Contact Person'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-contact-person   *ngIf="isAddress == true">
+            <app-customer-contact-person >
             </app-customer-contact-person>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Customer Group'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome'}" (stepEnter)="EnterTab('Group')">
-            <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="'PERSONAL'" [CustId]="this.IdCust">
+            <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="'PERSONAL'" [CustId]="IdCust">
             </app-cust-group-tab>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Job Data'"
@@ -41,13 +41,13 @@
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Financial Data'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Financial')">
-            <app-cust-fin-data-tab *ngIf="isFinancial == true"  [CustModeId]="this.CustPersonalId"
-              [MrCustTypeCode]="'PERSONAL'"> </app-cust-fin-data-tab>
+            <app-cust-fin-data-tab *ngIf="isFinancial == true" [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'"> </app-cust-fin-data-tab>
           </aw-wizard-step>
           <!-- <aw-wizard-step [stepTitle]="'Other Attribute'"
             [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Other')">
             other
             <app-customer-personal-detail *ngIf="isOther == true"> </app-customer-personal-detail>
+      
           </aw-wizard-step> -->
         </aw-wizard>
       </div>

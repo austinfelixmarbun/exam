@@ -29,7 +29,7 @@ export class ProductHOApprovalDetailComponent implements OnInit {
       var obj = {
         taskId: params["TaskId"],
         instanceId: params["InstanceId"],
-        approvalBaseUrl: "http://r3app-server/APPROVAL"
+        approvalBaseUrl: environment.ApprovalURL
       }
 
       this.inputObj = obj;

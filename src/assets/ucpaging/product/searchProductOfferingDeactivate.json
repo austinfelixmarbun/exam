@@ -58,6 +58,11 @@
     {
       "type": "label",
       "position": "center",
+      "label": "Stat"
+    },
+    {
+      "type": "label",
+      "position": "center",
       "label": "Deactive"
     }
   ],
@@ -87,38 +92,21 @@
       "property": "endDt"
     },
     {
+      "type": "text",
+      "position": "center",
+      "property": "conditionStat"
+    },
+    {
       "type": "action",
       "position": "center",
       "action": [
         {
-          "type": "switch",
-          "case": [
+          "type": "edit",
+          "path": "./edit",
+          "param": [
             {
-              "conditions": [
-                {
-                  "property": "conditionStat",
-                  "value": "REQD"
-                }
-              ],
-              "isHide": true
-            },
-            {
-              "conditions": [
-                {
-                  "property": "conditionStat",
-                  "value": "ACT"
-                }
-              ],
-              "result": {
-                "type": "edit",
-                "path": "./edit",
-                "param": [
-                  {
-                    "type": "prodOfferingHId",
-                    "property": "prodOfferingHId"
-                  }
-                ]
-              }
+              "type": "prodOfferingHId",
+              "property": "prodOfferingHId"
             }
           ]
         }

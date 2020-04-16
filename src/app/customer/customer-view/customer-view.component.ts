@@ -148,6 +148,7 @@ export class CustomerViewComponent implements OnInit {
       this.isFinData = false;
       this.isLegal = false;
       this.isOther = false;
+      this.isCustGroup = false;
     }
     else if(type == "address"){
       this.isMainData = false;
@@ -157,6 +158,7 @@ export class CustomerViewComponent implements OnInit {
       this.isFinData = false;
       this.isLegal = false;
       this.isOther = false;
+      this.isCustGroup = false;
     }
     else if(type == "management"){
       this.isMainData = false;
@@ -166,6 +168,7 @@ export class CustomerViewComponent implements OnInit {
       this.isFinData = false;
       this.isLegal = false;
       this.isOther = false;
+      this.isCustGroup = false;
     }
     else if(type == "contact"){
       this.isMainData = false;
@@ -175,6 +178,7 @@ export class CustomerViewComponent implements OnInit {
       this.isFinData = false;
       this.isLegal = false;
       this.isOther = false;
+      this.isCustGroup = false;
     }
     else if(type == "finData"){
       this.isMainData = false;
@@ -184,6 +188,7 @@ export class CustomerViewComponent implements OnInit {
       this.isFinData = true;
       this.isLegal = false;
       this.isOther = false;
+      this.isCustGroup = false;
     }
     else if(type == "legal"){
       this.isMainData = false;
@@ -193,6 +198,7 @@ export class CustomerViewComponent implements OnInit {
       this.isFinData = false;
       this.isLegal = true;
       this.isOther = false;
+      this.isCustGroup = false;
     }
     else if(type == "other"){
       this.isMainData = false;
@@ -202,6 +208,17 @@ export class CustomerViewComponent implements OnInit {
       this.isFinData = false;
       this.isLegal = false;
       this.isOther = true;
+      this.isCustGroup = false;
+    }
+    else if(type == "custGroup"){
+      this.isMainData = false;
+      this.isAddress = false;
+      this.isManagement = false;
+      this.isContact = false;
+      this.isFinData = false;
+      this.isLegal = false;
+      this.isOther = false;
+      this.isCustGroup = true;
     }
   }
 }

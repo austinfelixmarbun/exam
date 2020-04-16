@@ -29,9 +29,9 @@
         <div class="form-group row  ">
           <label class="col-md-2  adins-required-label" translate>Job Position</label>
           <div class="col-md-4">
-            <select class="form-control adInsInput" style="width: auto" formControlName="MrJobPostitionCode"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.MrJobPostitionCode.invalid }">
-              <option *ngFor="let it of tempMrJobPostitionCode" [value]="it.Key">
+            <select class="form-control adInsInput" style="width: auto" formControlName="MrJobPositionCode"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.MrJobPositionCode.invalid }">
+              <option *ngFor="let it of tempMrJobPositionCode" [value]="it.Key">
                 {{it.Value}}</option>
             </select>
             <show-errors [control]="ContactInformationForm.controls.MrJobPostitionCode" [submit]="enjiForm.submitted">
@@ -95,6 +95,9 @@
       </div>
     </div>
     <div class="form-actions right">
+      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+        <i class="ft-x"></i> Back
+      </button>
       <button type="submit" class="btn btn-raised btn-primary" translate>
         <i class="fa fa-check-square-o"></i> Save & Continue
       </button>

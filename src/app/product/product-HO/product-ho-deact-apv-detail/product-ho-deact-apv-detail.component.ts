@@ -36,7 +36,7 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
     var obj = {
       taskId: this.taskId,
       instanceId: this.instanceId,
-      approvalBaseUrl: "http://r3app-server/APPROVAL"
+      approvalBaseUrl: environment.ApprovalURL
     }
 
     this.inputObj = obj;

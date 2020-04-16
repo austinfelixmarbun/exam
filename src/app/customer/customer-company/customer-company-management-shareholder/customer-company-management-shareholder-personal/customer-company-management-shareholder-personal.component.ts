@@ -9,6 +9,7 @@ import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntS
 import { DatePipe } from '@angular/common';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-personal',
@@ -29,24 +30,27 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   custCompanyMgmntShrholderObj : any;
   addManagementShareholderUrl : any;
   tempKTPCheck: any;
-  KTP = "KTP";
+  KTP = RefMasterConstant.EKtp;
   getCustCompanyMgmntShrholderUrl : string;
   editManagementShareholderUrl : string;
   GetListActiveRefMasterWithReserveFieldAllUrl : string;
   tempCustCompanyMgmntShrholderObj : any;
   inputLookupCustPersonalObj : any;
+  tempShareholderCustNo : any;
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.required,Validators.maxLength(100)]],
     MrCustModelCode: [''],
-    MrIdTypeCode: [''],
-    IdNo: [''],
-    IdExpiredDt: ['',[Validators.required]],
+    MrIdTypeCode: ['',[Validators.required]],
+    IdNo: ['',Validators.pattern("^[0-9]+$")],
+    IdExpiredDt: [''],
     MrGenderCode: [''],
     BirthPlace: [''],
     BirthDt: [''],
-    TaxIdNo: [''],
-    MrJobPositionCode: [''],
+    TaxIdNo: ['',Validators.pattern("^[0-9]+$")],
+    MrJobPositionCode: ['',[Validators.required]],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
+    
+    // SharePrcnt: new FormControl('1', Validators.compose([ Validators.min(0), Validators.max(100)])),
     IsSigner: [false], 
   });
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
@@ -89,9 +93,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
           MrIdTypeCode: this.tempIdType[0].Key
         });
         if (this.tempIdType[0].Key == this.KTP) {
-          this.tempKTPCheck = true;
+          this.tempKTPCheck = true; 
         } else {
           this.tempKTPCheck = false;
+          this.ManagementShareholderForm.controls.IdExpiredDt.setValidators(Validators.required);  
+          this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
         }
       }
     );
@@ -137,17 +143,30 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             IdNo : this.tempCustCompanyMgmntShrholderObj.IdNo,
             IdExpiredDt: datePipe.transform(this.tempCustCompanyMgmntShrholderObj.IdExpiredDt, 'yyyy-MM-dd'),
             MrGenderCode : this.tempCustCompanyMgmntShrholderObj.MrGenderCode,
-            BirthPlace : this.tempCustCompanyMgmntShrholderObj.BirthPlace,
-            BirthDt : this.tempCustCompanyMgmntShrholderObj.BirthDt,
+            BirthPlace : this.tempCustCompanyMgmntShrholderObj.BirthPlace,   
+            BirthDt: datePipe.transform(this.tempCustCompanyMgmntShrholderObj.BirthDt, 'yyyy-MM-dd'),
             MrJobPositionCode : this.tempCustCompanyMgmntShrholderObj.MrJobPositionCode,
             MrCompanyTypeCode: this.tempCustCompanyMgmntShrholderObj.MrCompanyTypeCode ,
             TaxIdNo:  this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner
           });
+          if(this.tempCustCompanyMgmntShrholderObj.ShareholderCustNo!=null){ 
+            this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
+            this.ManagementShareholderForm.controls.MrCustModelCode.disable();
+            this.ManagementShareholderForm.controls.MrIdTypeCode.disable();
+            this.ManagementShareholderForm.controls.IdExpiredDt.disable();
+            this.ManagementShareholderForm.controls.IdNo.disable();
+            this.ManagementShareholderForm.controls.BirthPlace.disable();
+            this.ManagementShareholderForm.controls.BirthDt.disable();
+            this.ManagementShareholderForm.controls.MrGenderCode.disable();
+            this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
+          }
         }
       );
-    }
+      
+    } 
+  
 
   }
   SaveValue(){ 
@@ -167,7 +186,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.MrJobPositionCode = this.ManagementShareholderForm.controls["MrJobPositionCode"].value;
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
-      this.custCompanyMgmntShrholderObj.MrCustTypeCode = "Personal";
+      this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Personal;
+      
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -178,6 +198,10 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         }
       );
     }else{
+
+      if(this.tempShareholderCustNo!=null){
+        this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
+      }
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;
       this.custCompanyMgmntShrholderObj.MrIdTypeCode = this.ManagementShareholderForm.controls["MrIdTypeCode"].value;
@@ -190,7 +214,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.MrJobPositionCode = this.ManagementShareholderForm.controls["MrJobPositionCode"].value;
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
-      this.custCompanyMgmntShrholderObj.MrCustTypeCode = "Personal";
+      this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Personal;
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -219,18 +243,22 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   
 
   getLookUpCustomer(event) {
+    
+    var datePipe = new DatePipe("en-US");
     this.ManagementShareholderForm.patchValue({
       MgmntShrholderName: event.CustName,
       MrCustModelCode: event.MrCustModelCode,
       MrIdTypeCode : event.MrIdTypeCode,
-      IdNo: event.IdNo,
-      IdExpiredDt: event.IdExpiredDt,
+      IdNo: event.IdNo, 
+      IdExpiredDt: datePipe.transform(event.IdExpiredDt, 'yyyy-MM-dd'),
+      BirthDt: datePipe.transform(event.BirthDt, 'yyyy-MM-dd'),
       MrGenderCode : event.MrGenderCode,
-      BirthPlace: event.BirthPlace,
-      BirthDt: event.BirthDt,
+      BirthPlace: event.BirthPlace, 
       TaxIdNo : event.TaxIdNo,
-    });
- 
+    }); 
+    this.tempShareholderCustNo = event.CustNo;
+    
+    console.log(this.tempShareholderCustNo);
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
     this.ManagementShareholderForm.controls.MrCustModelCode.disable();
     this.ManagementShareholderForm.controls.MrIdTypeCode.disable();

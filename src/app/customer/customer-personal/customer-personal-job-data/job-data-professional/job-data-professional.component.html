@@ -58,7 +58,7 @@
                   </div>
               </div>
           </div>
-          <lib-ucSubsection [id]="'addrAttrId'" [title]="'Job Address Attribute'" [panel]="'addrAttribute'">
+          <!-- <lib-ucSubsection [id]="'addrAttrId'" [title]="'Job Address Attribute'" [panel]="'addrAttribute'">
           </lib-ucSubsection>
           <div id="addrAttribute">
               <div class="form-group row">
@@ -109,10 +109,13 @@
                   <show-errors [control]="JobDataProForm.controls.StayLength" [submit]="enjiForm.submitted"></show-errors>
                   </div>
               </div>
-          </div>
+          </div> -->
       </div>
     </div>
     <div class="form-actions right" style="text-align: right;" >
+      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+        <i class="ft-x"></i> Back
+      </button>
       <button type="submit" class="btn btn-raised btn-primary" translate>
         <i class="fa fa-check-square-o"></i> Save and Continue
       </button>

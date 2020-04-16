@@ -20,7 +20,7 @@
         },
         {
             "type": "dropdown",
-            "name": "C.MR_CUST_TYPE_CODE", 
+            "name": "C.MR_CUST_TYPE_CODE",
             "id": "CustTypeCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -29,12 +29,12 @@
             "isSelectOne": false,
             "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
             "label": "Type",
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "CUST_TYPE",
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "CUST_TYPE",
             "items": [],
             "itemsUrl": []
-          },
-      {
+        },
+        {
             "type": "textbox",
             "name": "ID_NO",
             "id": "IdNo",
@@ -55,12 +55,14 @@
             "position": "left",
             "label": "Customer Name",
             "name": "C.CUST_NAME"
-        },  {
+        },
+        {
             "type": "sort",
             "position": "left",
             "label": "Type",
             "name": "C.MR_CUST_TYPE_CODE"
-        },  {
+        },
+        {
             "type": "sort",
             "position": "left",
             "label": "Id No",
@@ -77,16 +79,16 @@
         "from": "FROM dbo.CUST C WITH(NOLOCK) INNER JOIN dbo.REF_MASTER RM WITH(NOLOCK) on C.MR_CUST_TYPE_CODE = RM.MASTER_CODE AND RM.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
     },
     "bodyList": [
-       {
-            "type" : "link", 
-            "position" : "left", 
-            "property" : "CustNo",
+        {
+            "type": "link",
+            "position": "left",
+            "property": "CustNo",
             "path": "../CustomerView/Page",
             "target": "_blank",
             "param": [
                 {
-                    "type" : "CustId", 
-                    "property" : "CustId" 
+                    "type": "CustId",
+                    "property": "CustId"
                 }
             ]
         },
@@ -99,7 +101,7 @@
             "type": "text",
             "position": "left",
             "property": "MrCustTypeCode"
-        }, 
+        },
         {
             "type": "text",
             "position": "left",
@@ -166,6 +168,5 @@
                 }
             ]
         }
-                
     ]
 }

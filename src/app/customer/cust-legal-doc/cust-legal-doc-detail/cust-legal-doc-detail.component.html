@@ -38,17 +38,16 @@
                 <div class="form-group row">
                   <label class="col-md-3 adInsLabel adins-required-label" for="DocDt" translate>Date Issued</label>
                   <div class="col-md-9">
-                    <input type="date" class="form-control adInsInput" formControlName="DocDt"
+                    <input type="date" class="form-control adInsInput" formControlName="DocDt" [max]="businessDtMin | date: 'yyyy-MM-dd'"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyLegalDocForm.controls.DocDt.invalid }" />
                     <show-errors [control]="CustCompanyLegalDocForm.controls.DocDt" [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 adInsLabel adins-required-label" for="DocExpiredDt" translate>Expired
-                    Date</label>
+                  <label class="col-md-3 adInsLabel adins-required-label" for="DocExpiredDt" translate>Expired Date</label>
                   <div class="col-md-9">
-                    <input type="date" class="form-control adInsInput" formControlName="DocExpiredDt"
+                    <input type="date" class="form-control adInsInput" formControlName="DocExpiredDt" [min]="businessDtMax | date: 'yyyy-MM-dd'"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyLegalDocForm.controls.DocExpiredDt.invalid }">
                     <show-errors [control]="CustCompanyLegalDocForm.controls.DocExpiredDt"
                       [submit]="enjiForm.submitted"></show-errors>
