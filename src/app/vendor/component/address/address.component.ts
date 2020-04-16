@@ -147,6 +147,9 @@ export class AddressComponent implements OnInit {
     if(this.VendorAddrId!=null){
       this.vendorAddrObj.VendorAddrId = this.VendorAddrId;
       this.getUrl = AdInsConstant.GetVendorAddrByVendorAddrId;
+      this.mode = "edit";
+    }else{
+      this.mode = "add";
     }
     
     this.http.post<VendorAddrObj>(this.getUrl, this.vendorAddrObj).subscribe(
@@ -162,7 +165,6 @@ export class AddressComponent implements OnInit {
           Latitude: this.vendorAddrObj.Latitude,
           Longitude: this.vendorAddrObj.Longitude,
         });
-        this.mode = "edit";
         this.setLookup();
         this.VendorAddrId = this.vendorAddrObj.VendorAddrId;
       },
