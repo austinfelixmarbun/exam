@@ -2,6 +2,13 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> Ref Form </h4>
+            </div>
+          </div>
+        </div>
         <div class="px-3">
           <form class="form form-horizontal" [formGroup]="RefForm" (ngSubmit)="RefForm.valid && SaveForm()"
             #enjiForm="ngForm">
@@ -102,6 +109,9 @@
               </div>
             </div>
             <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/RefForm/Paging']" translate>
+                <i class="fa fa-arrow-circle-left"></i> Cancel
+              </button>
               <button type="submit" class="btn btn-raised btn-primary">
                 <i class="far"></i> Save
               </button>

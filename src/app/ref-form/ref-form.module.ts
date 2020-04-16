@@ -14,6 +14,7 @@ import { CommonModule } from "@angular/common";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { UCSearchModule } from "@adins/ucsearch";
+import { UcviewgenericModule } from "@adins/ucviewgeneric";
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { UCSearchModule } from "@adins/ucsearch";
         NgbModule,
         CommonModule,
         UCSearchModule,
-        UcgridfooterModule
+        UcgridfooterModule,
+        UcviewgenericModule
     ],
     declarations: [
         RefFormDetailComponent,

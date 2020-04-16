@@ -46,6 +46,8 @@ export class RefFormRoleMappingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewObj = "./assets/ucviewgeneric/viewRefForm.json";
+
     this.GetListRefFormRoleByRefFormId();
 
     this.listSelectedId = new Array();
