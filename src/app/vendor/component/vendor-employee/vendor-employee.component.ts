@@ -62,15 +62,13 @@ export class VendorEmployeeComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params["VendorEmpId"] != null) {
         this.VendorEmpId = params["VendorEmpId"];
+        this.mode = "edit";
       }
       if (params["VendorId"] != null) {
         this.VendorId = params["VendorId"];
       }
       if (params["MrVendorCategoryCode"] != null) {
         this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
-      }
-      if (params["mode"] != null) {
-        this.mode = params["mode"];
       }
     });
   }

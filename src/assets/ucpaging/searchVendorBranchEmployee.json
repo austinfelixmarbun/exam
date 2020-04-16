@@ -32,7 +32,7 @@
         "type": "numeric",
         "name": "VENDOR_EMP_RATING",
         "id": "VendorEmpRatingLteId",
-        "value": "5",
+        "value": "0",
         "label": "Rating <=",
         "restriction": "lte",
         "placeholder": "Placeholder",
@@ -90,7 +90,7 @@
       "name": "VENDOR_EMP_RATING"
     },
     {
-      "type": "boolean",
+      "type": "sort",
       "position": "center",
       "label": "Active Status",
       "name": "IS_ACTIVE"
@@ -111,6 +111,11 @@
       "type": "text",
       "position": "left",
       "property": "VendorEmpName"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "MobilePhnNo1"
     },
     {
       "type": "text",
