@@ -21,11 +21,13 @@ export class VendorHoPagingComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHO.json";
 
     this.arrCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.propName = 'RM.RESERVE_FIELD_1';
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.value = "HO";
-    this.arrCrit.push(critObj);
+
+    var crit1Obj = new CriteriaObj();
+    crit1Obj.propName = "V.MR_VENDOR_CLASS";
+    crit1Obj.restriction = AdInsConstant.RestrictionEq;
+    crit1Obj.value = "HO";
+    this.arrCrit.push(crit1Obj);
+
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 }

@@ -1,16 +1,16 @@
 {
     "title": "Vendor Holding",
-    "exportExcel": false,
     "component": [
         {
             "type": "dropdown",
-            "name": "MR_VENDOR_CATEGORY_CODE",
+            "name": "V.MR_VENDOR_CATEGORY_CODE",
             "id": "MrVendorCategoryCodeId",
             "value": "",
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
-            "isSelectOne": true,
+            "isSelectOne": false,
+            "isQueryIn": true,
             "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListActiveRefMasterByVendorCategoryByReserveField1",
             "label": "Vendor Category",
             "criteriaPropName": "ReserveField1",
@@ -20,7 +20,7 @@
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "V.IS_ACTIVE",
             "id": "IsActiveId",
             "value": "",
             "placeholder": "Placeholder",
@@ -42,7 +42,7 @@
         },
         {
             "type": "textbox",
-            "name": "VENDOR_CODE",
+            "name": "V.VENDOR_CODE",
             "id": "HoldingCodeId",
             "value": "",
             "label": "Holding Code",
@@ -51,7 +51,7 @@
         },
         {
             "type": "textbox",
-            "name": "VENDOR_NAME",
+            "name": "V.VENDOR_NAME",
             "id": "HoldingNameId",
             "value": "",
             "label": "Holding Name",
@@ -60,27 +60,33 @@
         }
     ],
     "querystring": {
-        "select": "SELECT VENDOR_CODE as VendorCode,VENDOR_NAME as VendorName,IS_ACTIVE as IsActive,MR_VENDOR_CATEGORY_CODE as MrVendorCategoryCode, VENDOR_ID as VendorId",
-        "from": "FROM dbo.VENDOR WITH(NOLOCK)"
+        "select": "select V.VENDOR_CODE AS VendorCode, V.VENDOR_NAME AS VendorName, V.IS_ACTIVE AS IsActive, V.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, V.VENDOR_ID AS VendorId, VA.ADDR AS VendorAddr",
+        "from": "FROM dbo.VENDOR V JOIN dbo.VENDOR_ADDR VA WITH(NOLOCK) on V.VENDOR_ID = VA.VENDOR_ID"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "center",
             "label": "Holding Code",
-            "name": "VendorCode"
+            "name": "V.VENDOR_CODE"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Holding Name",
-            "name": "VendorName"
+            "name": "V.VENDOR_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Holding Name",
+            "name": "VA.ADDR"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Active Status",
-            "name": "IsActive"
+            "name": "V.IS_ACTIVE"
         },
         {
             "type": "label",
@@ -98,6 +104,7 @@
             "type" : "link",
             "property" : "VendorName",
             "path" : "/Vendor/Holding/View",
+            "target": "_blank",
             "param" :
             [
                 {
@@ -105,6 +112,11 @@
                     "property" : "VendorId"
                 }
             ]
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "VendorAddr"
         },
         {
             "type": "boolean",
