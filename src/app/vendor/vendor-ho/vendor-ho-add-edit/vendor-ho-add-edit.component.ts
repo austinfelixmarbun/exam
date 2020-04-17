@@ -60,10 +60,10 @@ export class VendorHoAddEditComponent implements OnInit {
     PartnershipDt: ['', Validators.required],
     IsActive: [true],
     VendorParentId: [''],
-    MrTaxCalcMethodCode: [''],
-    IsVat: [true],
-    TaxpayerNo: [''],
-    TaxpayerName: [''],
+    MrTaxCalcMethodCode: ['', Validators.required],
+    IsVat: [true, Validators.required],
+    TaxpayerNo: ['', Validators.required],
+    TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
     Addr: [''],
     Zipcode: [''],
@@ -76,13 +76,6 @@ export class VendorHoAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.inputLookupZipcodeObj = new InputLookupObj();
-    this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-
     var refMasterCategoryObj = {
       RefMasterTypeCode: "VENDOR_CATEGORY",
       ReserveField1: "HO"
@@ -132,24 +125,6 @@ export class VendorHoAddEditComponent implements OnInit {
       }
     );
 
-    this.inputLookupParentObj = new InputLookupObj();
-    this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupParentObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
-
-    if (this.MrVendorCategoryCode != "SUPPLIER_HO") {
-      this.inputLookupParentObj.isRequired = false;
-    }
-    this.arrCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.propName = 'RM.RESERVE_FIELD_2';
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.value = this.MrVendorCategoryCode;
-    this.arrCrit.push(critObj);
-    this.inputLookupParentObj.addCritInput = this.arrCrit;
-
     this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();
 
@@ -160,6 +135,7 @@ export class VendorHoAddEditComponent implements OnInit {
       this.VendorForm.controls.VendorCode.disable();
       this.http.post(AdInsConstant.GetVendorHOAndVendorAddr, vendorObj).subscribe(
         (response) => {
+          this.setLookup();
           this.result = response;
           this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
           this.VendorForm.patchValue({
@@ -196,22 +172,23 @@ export class VendorHoAddEditComponent implements OnInit {
           var Parent = new VendorObj();
           Parent.VendorId = this.result.VendorObj.VendorParentId;
           if (this.result.VendorObj.VendorParentId == null) {
-            this.inputLookupParentObj.nameSelect = "";
+            this.inputLookupParentObj.jsonSelect = {VendorName: ""};
           } else {
             this.http.post(AdInsConstant.GetVendorByVendorId, Parent).subscribe(
               (response) => {
-                this.inputLookupParentObj.nameSelect = response["VendorName"];
-                this.inputLookupZipcodeObj.nameSelect = this.result["VendorAddrObj"].Zipcode;
+                this.inputLookupParentObj.jsonSelect = {VendorName: response["VendorName"]};
               }
             )
           }
-
+          this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.result["VendorAddrObj"].Zipcode};
           this.checkHOType();
         },
         (error) => {
           console.log(error);
         }
       );
+    }else{
+      this.setLookup();
     }
   }
 
@@ -259,6 +236,33 @@ export class VendorHoAddEditComponent implements OnInit {
     }else{
       this.router.navigate(['/Vendor/HO/Paging']);
     }
+  }
+
+  setLookup(){
+    this.inputLookupZipcodeObj = new InputLookupObj();
+    this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+
+    this.inputLookupParentObj = new InputLookupObj();
+    this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+
+    if (this.MrVendorCategoryCode != "SUPPLIER_HO") {
+      this.inputLookupParentObj.isRequired = false;
+    }
+    this.arrCrit = new Array();
+    var critObj = new CriteriaObj();
+    critObj.propName = 'RM.RESERVE_FIELD_2';
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.value = this.MrVendorCategoryCode;
+    this.arrCrit.push(critObj);
+    this.inputLookupParentObj.addCritInput = this.arrCrit;
   }
 
   SaveForm() {

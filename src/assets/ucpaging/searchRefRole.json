@@ -11,14 +11,6 @@
       "placeholder": "Placeholder"
     },
     {
-      "type": "textbox",
-      "name": "Role_Name",
-      "id": "RoleName",
-      "value": "",
-      "label": "Role Name",
-      "placeholder": "Placeholder"
-    },
-    {
       "type": "dropdown",
       "name": "Is_Active",
       "id": "IsActive",
@@ -39,6 +31,14 @@
         }
       ],
       "itemsUrl": []
+    },
+    {
+      "type": "textbox",
+      "name": "Role_Name",
+      "id": "RoleName",
+      "value": "",
+      "label": "Role Name",
+      "placeholder": "Placeholder"
     }
   ],
   "headerList": [

@@ -22,6 +22,7 @@ export class VendorHoRegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.VendorId = this.objPassing["VendorId"];
+    this.objPassing["Type"]="Vendor";
   }
 
   outputValue(ev){
