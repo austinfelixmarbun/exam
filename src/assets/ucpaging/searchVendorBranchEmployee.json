@@ -90,7 +90,7 @@
       "name": "VENDOR_EMP_RATING"
     },
     {
-      "type": "label",
+      "type": "sort",
       "position": "center",
       "label": "Active Status",
       "name": "IS_ACTIVE"
@@ -111,6 +111,11 @@
       "type": "text",
       "position": "center",
       "property": "VendorEmpName"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "MobilePhnNo1"
     },
     {
       "type": "text",
