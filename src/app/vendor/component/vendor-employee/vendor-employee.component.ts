@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
@@ -60,12 +60,22 @@ export class VendorEmployeeComponent implements OnInit {
     MrTaxCalcMethodCode: ['']
   });
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,private toastr: NGXToastrService, private wizard: WizardComponent) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent) {
     this.route.queryParams.subscribe(params => {
-      if(params["mode"]=="edit"){
+      if (params["mode"] == "edit") {
         this.mode = params["mode"];
       }
-  })
+      if (params["VendorEmpId"] != null) {
+        this.VendorEmpId = params["VendorEmpId"];
+        this.mode = "edit";
+      }
+      if (params["VendorId"] != null) {
+        this.VendorId = params["VendorId"];
+      }
+      if (params["MrVendorCategoryCode"] != null) {
+        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      }
+    });
   }
 
   ngOnInit() {
@@ -95,7 +105,7 @@ export class VendorEmployeeComponent implements OnInit {
         }
       }
     );
-    
+
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: "TAX_CALC_METHOD",
     }
@@ -160,7 +170,7 @@ export class VendorEmployeeComponent implements OnInit {
           console.log(error);
         }
       );
-    }else{
+    } else {
       this.setLookup();
     }
   }
@@ -196,9 +206,9 @@ export class VendorEmployeeComponent implements OnInit {
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
-    if(this.result!=null){
-      this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.result["VendorAddrObj"].Zipcode};
-      this.inputLookupSpvObj.jsonSelect = {VendorEmpName: this.result["VendorEmpObj"].SupervisorName};
+    if (this.result != null) {
+      this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
+      this.inputLookupSpvObj.jsonSelect = { VendorEmpName: this.result["VendorEmpObj"].SupervisorName };
     }
   }
 
@@ -226,7 +236,7 @@ export class VendorEmployeeComponent implements OnInit {
         City: ev.City,
         Province: ev.Province
       });
-    this.inputLookupZipcodeObj.jsonSelect = {Zipcode: ev.Zipcode};
+    this.inputLookupZipcodeObj.jsonSelect = { Zipcode: ev.Zipcode };
     this.inputLookupZipcodeObj.idSelect = ev.Zipcode;
   }
 
