@@ -804,8 +804,17 @@ export class AdInsConstant {
   
   // SURVEY FORM SCHM
   public static GetListAllSrvyFormSchm = environment.FoundationR3Url + "/SrvyFormSchm/GetListAllSrvyFormSchm";
+  
   //LOB
   public static GetListKvpInstSchmByLobCode = environment.FoundationR3Url + "/InstSchmMap/GetListKvpInstSchmByLobCode";
   public static GetKvpRefFinMapByLobCode = environment.FoundationR3Url + "/RefFinMap/GetKvpRefFinMapByLobCode";
   
+  //REF FORM
+  public static EditRefFormData = environment.FoundationR3Url + "/RefForm/EditRefForm";
+  public static AddRefFormData = environment.FoundationR3Url + "/RefForm/AddRefForm";
+  public static GetRefFormDataByRefFormId = environment.FoundationR3Url + "/RefForm/GetRefFormByRefFormId"
+
+  //AUTH FORM
+  public static AddListAuthForm = environment.FoundationR3Url + "/AuthForm/AddListAuthForm";
+  public static GetListAuthFormByRefFormId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefFormId";
 }

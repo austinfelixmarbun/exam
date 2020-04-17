@@ -1,0 +1,22 @@
+{
+    "title": "Role Form Mapping",
+    "subsection": [
+      {
+        "subSectionId": "",
+        "subSectionTitle": "",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Title",
+            "property": "Title"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT TITLE AS Title",
+          "from": "FROM dbo.REF_FORM WITH(NOLOCK)",
+          "where": "WHERE REF_FORM_ID = {0}"
+        }
+      }
+    ]
+  }

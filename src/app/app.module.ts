@@ -41,10 +41,6 @@ import { environment } from 'environments/environment';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
-
-
- 
- 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
