@@ -16,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddressComponent implements OnInit {
   inputLookupZipcodeObj: any;
-  vendorAddrObj: any = new VendorAddrObj();
+  vendorAddrObj: VendorAddrObj = new VendorAddrObj();
   mode: string = "add";
   @Input() objInput: any;
   result: any;
@@ -25,7 +25,7 @@ export class AddressComponent implements OnInit {
   resultAddr: any;
   getUrl: string;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
   }
 
   AddressForm = this.fb.group({

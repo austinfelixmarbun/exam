@@ -21,7 +21,7 @@ export class VendorEmployeeComponent implements OnInit {
   @Input() objInput: any;
   @Output() objOutput: EventEmitter<any> = new EventEmitter();
   VendorEmpId: number;
-  VendorId: any;
+  VendorId: number;
   MrVendorCategoryCode: string;
   mode: string = "add";
   VendorBranchEmpObj: any = new VendorBranchEmpObj();
@@ -112,9 +112,11 @@ export class VendorEmployeeComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
-        this.VendorEmpForm.patchValue({
-          MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
-        });
+        if (this.mode != "edit") {
+          this.VendorEmpForm.patchValue({
+            MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
+          });
+        }
       }
     );
 
