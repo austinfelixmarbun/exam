@@ -9,6 +9,7 @@
         </div>
       </div>
       <div class="px-3">
+        <lib-ucviewgeneric [viewInput]="viewObj"></lib-ucviewgeneric>
         <form class="form form-horizontal"  [formGroup]="WorkingHourSchmDForm" (ngSubmit)="WorkingHourSchmDForm.valid && SaveForm()"
         #enjiForm="ngForm" >
           <div class="form-body">
