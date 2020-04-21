@@ -3,7 +3,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
@@ -28,7 +28,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   closeResult: any;
   SurveyTaskList: any;
   resultData: any;
-  SrvyOrderId: any;
+  SrvyOrderId: number;
   SrvySubjList = [];
   SrvyObjList = [];
   FormSchmList = [];
@@ -37,7 +37,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   VendorObj: any;
 
   constructor(private fb: FormBuilder, private modalService: NgbModal,
-    private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
+    private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["SrvyOrderId"] != null) {
         this.SrvyOrderId = params["SrvyOrderId"];
@@ -59,7 +59,6 @@ export class SurveyOrderTaskComponent implements OnInit {
     this.http.post(AdInsConstant.GetSrvyOrderBySrvyOrderId, SrvyObj).subscribe(
       response => {
         this.SrvyOrderObj = response;
-        console.log(this.SrvyOrderObj);
         var VendorObj = {
           VendorId: this.SrvyOrderObj.VendorId
         };
@@ -88,6 +87,18 @@ export class SurveyOrderTaskComponent implements OnInit {
         this.SurveyTaskForm.patchValue({
           SrvyFormSchmId: this.FormSchmList[0].SrvyFormSchmId
         });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  SendSrvyOrder() {
+    this.http.post(AdInsConstant.SendSrvyOrder, this.SrvyOrderObj).subscribe(
+      response => {
+        this.toastr.successMessage(response["Message"]);
+        this.router.navigate(["/Survey/Paging"]);
       },
       error => {
         console.log(error);

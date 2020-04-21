@@ -1,0 +1,21 @@
+<lib-ucviewgeneric [viewInput]="viewNotificationOnApprovalObj"></lib-ucviewgeneric>
+<lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
+<form>
+  <div class="form-actions right">
+    <button type="button" style="margin-right: 20px;" class="btn btn-raised btn-warning mr-1" [routerLink]="['/SystemSetting/NotificationApproval']" translate>
+      <i class=""></i> Cancel
+    </button>
+
+    <button id="btnReturn" (click) = "SaveForm($event)" class="btn btn-raised btn-primary" style="margin-right: 10px;" translate>
+      <i class="fa fa-check-square-o"></i> Return
+    </button>
+
+    <button id="btnReject" (click) = "SaveForm($event)" class="btn btn-raised btn-primary" style="margin-right: 10px;" translate>
+      <i class="fa fa-check-square-o"></i> Reject
+    </button>
+
+    <button id="btnApprove" (click) = "SaveForm($event)" class="btn btn-raised btn-primary" translate>
+      <i class="fa fa-check-square-o"></i> Approve
+    </button>
+  </div>
+</form>

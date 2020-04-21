@@ -58,7 +58,6 @@ export class ContactPersonListComponent implements OnInit {
       this.VendorContactPerson = new VendorContactPersonObj;
       this.VendorContactPerson.VendorContactPersonId = id;
       this.http.post(AdInsConstant.DeleteVendorContactPerson, this.VendorContactPerson).subscribe((response) => {
-        this.HiddenCheck();
         this.toastr.successMessage(response['message']);
         this.loadTableListData();
     },

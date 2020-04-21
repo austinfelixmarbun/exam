@@ -7,6 +7,7 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-address',
@@ -15,14 +16,21 @@ import { WizardComponent } from 'angular-archwizard';
 })
 export class AddressComponent implements OnInit {
   inputLookupZipcodeObj: any;
-  vendorAddrObj: any;
+  vendorAddrObj: VendorAddrObj = new VendorAddrObj();
   mode: string = "add";
   @Input() objInput: any;
   result: any;
-  VendorAddrId: any;
+  VendorAddrId: number;
+  MrVendorClass: string;
+  resultAddr: any;
+  getUrl: string;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
-
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent) {
+    this.route.queryParams.subscribe(params => {
+      if(params["mode"]=="edit"){
+        this.mode = params["mode"];
+      }
+  })
   }
 
   AddressForm = this.fb.group({
@@ -34,11 +42,40 @@ export class AddressComponent implements OnInit {
     City: [''],
     Province: [''],
     Latitude: [''],
-    Longitude: [''],
-    RowVersion: ['']
+    Longitude: ['']
   });
 
   ngOnInit() {
+    this.AddressForm.controls.AreaCode2.disable();
+    this.AddressForm.controls.AreaCode1.disable();
+    this.AddressForm.controls.City.disable();
+    this.AddressForm.controls.Province.disable();
+
+    if (this.objInput.Type == "Vendor") {
+      this.getUrl = AdInsConstant.GetVendorAddrByVendorId;
+      this.vendorAddrObj.VendorId = this.objInput.VendorId;
+      this.vendorAddrObj.VendorEmpId = null;
+      this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
+    } else if (this.objInput.Type == "VendorEmployee") {
+      this.getUrl = AdInsConstant.GetVendorAddrByVendorEmpId;
+      this.vendorAddrObj.VendorId = null;
+      this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
+      this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
+    }
+
+    var vendorObj = {
+      VendorId: this.objInput.VendorId
+    }
+    this.http.post(AdInsConstant.GetVendorByVendorId, vendorObj).subscribe(
+      (response) => {
+        this.result = response;
+        this.MrVendorClass = this.result.MrVendorClass;
+        this.refreshVendorAddress();
+      }
+    );
+  }
+
+  setLookup(){
     this.inputLookupZipcodeObj = new InputLookupObj();
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
@@ -46,38 +83,9 @@ export class AddressComponent implements OnInit {
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
-    this.AddressForm.controls.AreaCode2.disable();
-    this.AddressForm.controls.AreaCode1.disable();
-    this.AddressForm.controls.City.disable();
-    this.AddressForm.controls.Province.disable();
-
-    this.mode = this.objInput.mode;
-
-      var vendorAddrObj = new VendorAddrObj();
-      vendorAddrObj.VendorId = this.objInput.VendorId;
-      vendorAddrObj.MrAddrTypeCode = "LEGAL";
-      this.http.post(AdInsConstant.GetVendorAddrByVendorId, vendorAddrObj).subscribe(
-        (response) => {
-          this.result = response;
-          this.mode = "edit";
-          this.AddressForm.patchValue({
-            MrAddrTypeCode: this.result.MrAddrTypeCode,
-            Addr: this.result.Addr,
-            AreaCode2: this.result.AreaCode2,
-            AreaCode1: this.result.AreaCode1,
-            City: this.result.City,
-            Province: this.result.Province,
-            Latitude: this.result.Latitude,
-            Longitude: this.result.Longitude,
-            RowVersion: this.result.RowVersion
-          });
-          this.inputLookupZipcodeObj.nameSelect = this.result.Zipcode;
-          this.VendorAddrId = this.result.VendorAddrId;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    if(this.vendorAddrObj!=null){
+      this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.vendorAddrObj.Zipcode};
+    }
   }
 
   getLookupZipcode(event) {
@@ -90,25 +98,29 @@ export class AddressComponent implements OnInit {
   }
 
   SaveForm() {
-    this.vendorAddrObj = new VendorAddrObj();
     this.vendorAddrObj.MrAddrTypeCode = this.AddressForm.controls.MrAddrTypeCode.value;
     this.vendorAddrObj.AreaCode2 = this.AddressForm.controls.AreaCode2.value;
     this.vendorAddrObj.AreaCode1 = this.AddressForm.controls.AreaCode1.value;
     this.vendorAddrObj.City = this.AddressForm.controls.City.value;
-    this.vendorAddrObj.Zipcode = this.AddressForm.controls["lookupZipcode"]["controls"].value.value,
-      this.vendorAddrObj.Addr = this.AddressForm.controls.Addr.value;
+    this.vendorAddrObj.Zipcode = this.AddressForm.controls["lookupZipcode"]["controls"].value.value;
+    this.vendorAddrObj.Addr = this.AddressForm.controls.Addr.value;
     this.vendorAddrObj.Province = this.AddressForm.controls.Province.value;
-    this.vendorAddrObj.VendorId = this.objInput.VendorId;
     this.vendorAddrObj.Latitude = this.AddressForm.controls.Latitude.value;
     this.vendorAddrObj.Longitude = this.AddressForm.controls.Longitude.value;
-    this.vendorAddrObj.RowVersion = this.AddressForm.controls.RowVersion.value;
-
     this.vendorAddrObj.VendorAddrId = this.VendorAddrId;
+    this.vendorAddrObj.VendorId = this.objInput.VendorId;
+    this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
+    this.vendorAddrObj.Phn1 = "";
+    this.vendorAddrObj.PhnArea1 = "";
+    this.vendorAddrObj.Phn2 = "";
+    this.vendorAddrObj.PhnArea2 = "";
+
     if (this.mode == "edit") {
       this.http.post(AdInsConstant.EditVendorAddr, this.vendorAddrObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
+          this.refreshVendorAddress();
         },
         (error) => {
           console.log(error);
@@ -116,15 +128,49 @@ export class AddressComponent implements OnInit {
     }
     else {
       this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
-      this.http.post(AdInsConstant.AddVendorAddr, this.vendorAddrObj).subscribe(
+      this.http.post<VendorAddrObj>(AdInsConstant.AddVendorAddr, this.vendorAddrObj).subscribe(
         (response) => {
-          this.mode="edit";
+          this.vendorAddrObj = response;
+          this.mode = "edit";
+          this.VendorAddrId = this.vendorAddrObj.VendorAddrId;
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
+          this.refreshVendorAddress();
         },
         (error) => {
           console.log(error);
         });
     }
+  }
+
+  refreshVendorAddress() {
+    if(this.VendorAddrId!=null){
+      this.vendorAddrObj.VendorAddrId = this.VendorAddrId;
+      this.getUrl = AdInsConstant.GetVendorAddrByVendorAddrId;
+      this.mode = "edit";
+    }else{
+      this.mode = "add";
+    }
+    
+    this.http.post<VendorAddrObj>(this.getUrl, this.vendorAddrObj).subscribe(
+      (response) => {
+        this.vendorAddrObj = response;
+        this.AddressForm.patchValue({
+          MrAddrTypeCode: this.vendorAddrObj.MrAddrTypeCode,
+          Addr: this.vendorAddrObj.Addr,
+          AreaCode2: this.vendorAddrObj.AreaCode2,
+          AreaCode1: this.vendorAddrObj.AreaCode1,
+          City: this.vendorAddrObj.City,
+          Province: this.vendorAddrObj.Province,
+          Latitude: this.vendorAddrObj.Latitude,
+          Longitude: this.vendorAddrObj.Longitude,
+        });
+        this.setLookup();
+        this.VendorAddrId = this.vendorAddrObj.VendorAddrId;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

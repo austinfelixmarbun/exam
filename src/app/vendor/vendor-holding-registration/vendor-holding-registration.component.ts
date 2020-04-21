@@ -15,7 +15,7 @@ export class VendorHoldingRegistrationComponent implements OnInit {
   mode: string;
   HiddenState: boolean = true;
   show : boolean = false;
-
+  ButtonText : string = "Back";
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
@@ -25,6 +25,7 @@ export class VendorHoldingRegistrationComponent implements OnInit {
   ngOnInit() {
     this.viewObj = "./assets/ucviewgeneric/viewVendorHolding.json";
     this.VendorId = this.objPassing["VendorId"];
+    this.objPassing["Type"]="Vendor";
   }
 
   outputValue(ev){
@@ -37,4 +38,13 @@ export class VendorHoldingRegistrationComponent implements OnInit {
     this.objPassingCP.VendorId = this.VendorId;
   }
 
+  OnEnter()
+  {
+    this.ButtonText = "Finish";
+  }
+
+  OnExit()
+  {
+    this.ButtonText = "Back";
+  }
 }

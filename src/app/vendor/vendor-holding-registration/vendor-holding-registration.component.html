@@ -1,13 +1,21 @@
 <div class="row text-left">
   <div class="col-md-12">
     <div class="card">
+      <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> Holding Registration </h4>
+            </div>
+          </div>
+      </div>
+      <br>
       <div class="card-body">
         <lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
         <div class="ucSearch-Button-Right">
           <span class="mr-1">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Holding/Paging']"
               translate>
-              Back
+              {{ButtonText}}
             </button>
             <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Holding/Detail']"
               [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
@@ -22,7 +30,7 @@
             <app-address [objInput]="objPassing"> </app-address>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Contact Person'"
-            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="OnEnter()" (stepExit)="OnExit()">
             <div *ngIf="HiddenState==true">
               <app-contact-person-list (objOutput)="outputValue($event)" [objInput] = "objPassing" [show]="show"> </app-contact-person-list>
             </div>

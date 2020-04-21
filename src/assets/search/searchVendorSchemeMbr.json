@@ -6,7 +6,7 @@
             "name": "VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
-            "label": "Vendor Code",
+            "label": "Branch Code",
             "placeholder": "Placeholder"
         },
         {
@@ -14,7 +14,7 @@
             "name": "VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
-            "label": "Vendor Name",
+            "label": "Branch Name",
             "placeholder": "Placeholder"
         },
         {
@@ -47,13 +47,13 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "VENDOR CODE",
+            "label": "Branch CODE",
             "name": "VendorCode"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "VENDOR NAME",
+            "label": "Branch NAME",
             "name": "VendorName"
         },
         {

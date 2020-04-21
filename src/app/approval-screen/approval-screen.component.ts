@@ -13,29 +13,26 @@ import { TestComponent } from './test/test.component';
 })
 export class ApprovalScreenComponent implements OnInit {
 
-  inputObj : any;
+  inputObj: any;
   constructor() { }
 
   ngOnInit() {
     var obj = {
-      taskId : 65529,
-      instanceId : 60369,
-      approvalBaseUrl : environment.ApprovalURL
+      taskId: 65529,
+      instanceId: 60369,
+      approvalBaseUrl: environment.ApprovalURL,
+    }
+  }
+    onApprovalSubmited(event)
+    {
+      console.log("AAAAA");
+      console.log(event)
     }
 
-    this.inputObj = obj;
-  }
-
-  onApprovalSubmited(event)
-  {
-    console.log("AAAAA");
-    console.log(event)
-  }
-
-  onAvailableNextTask(event)
-  {
-    console.log("BBBBB");
-    console.log(event)
-  }
+    onAvailableNextTask(event)
+    {
+      console.log("BBBBB");
+      console.log(event)
+    }
 }
 

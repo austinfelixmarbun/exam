@@ -32,6 +32,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     userAccess: any;
     backgroundColor = environment.navbarColor;
     NotificationHListObj = new Array<NotificationHObj>();
+    TotalUnread: number = 0;
 
     notifications: object[] = [];
 
@@ -83,7 +84,8 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     GetListNotifH() {
         this.http.post(AdInsConstant.GetListNotificationHByRefUserId, {}).subscribe(
             (response) => {
-                this.NotificationHListObj = response["ResponseNotificationHObjs"];
+                this.TotalUnread = response["TotalUnreadNotification"];
+                this.NotificationHListObj = response["ResponseNotificationHCustomObjs"];
             },
             (error) => {
                 console.log(error);
