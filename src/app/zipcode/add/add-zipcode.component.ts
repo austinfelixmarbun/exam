@@ -113,9 +113,10 @@ export class ZipcodeAddComponent implements OnInit {
   }
 
   SaveForm() {
+    console.log("a");
     this.rzcObj = new RefZipcodeObj();
     this.rzcObj = this.RefZipCodeForm.value;
-    this.rzcObj.RefProvDistrictId = this.inputDistrictLookupObj.jsonSelect.RefProvDistrictId;
+    this.rzcObj.RefProvDistrictId = this.inputDistrictLookupObj.jsonSelect.refProvDistrictId;
     if(this.rzcObj.SubZipcode=="")
     {
       this.rzcObj.SubZipcode = " ";
