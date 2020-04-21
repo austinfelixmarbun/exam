@@ -61,7 +61,9 @@
     ],
     "querystring": {
         "select": "select V.VENDOR_CODE AS VendorCode, V.VENDOR_NAME AS VendorName, V.IS_ACTIVE AS IsActive, V.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, V.VENDOR_ID AS VendorId, VA.ADDR AS VendorAddr",
-        "from": "FROM dbo.VENDOR V JOIN dbo.VENDOR_ADDR VA WITH(NOLOCK) on V.VENDOR_ID = VA.VENDOR_ID"
+        "from": "FROM dbo.VENDOR V JOIN dbo.VENDOR_ADDR VA WITH(NOLOCK) on V.VENDOR_ID = VA.VENDOR_ID",
+        "where": "WHERE VA.MR_ADDR_TYPE_CODE ='TAX'"
+        
     },
     "headerList": [
         {
@@ -79,7 +81,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Holding Name",
+            "label": "Holding Address",
             "name": "VA.ADDR"
         },
         {
