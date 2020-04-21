@@ -26,6 +26,7 @@ export class VendorEmployeeComponent implements OnInit {
   mode: string = "add";
   VendorBranchEmpObj: any = new VendorBranchEmpObj();
   result: any;
+  resultVendorEmpAndAddr: any;
   inputLookupInternalEmpObj: any;
   inputLookupSpvObj: any;
   inputLookupZipcodeObj: any;
@@ -133,45 +134,7 @@ export class VendorEmployeeComponent implements OnInit {
     if (this.mode == "edit") {
       this.VendorEmpForm.controls["VendorEmpCode"].disable();
       this.VendorEmpForm.controls["VendorEmpName"].disable();
-      var vendorEmpObj = new VendorEmpObj();
-      vendorEmpObj.VendorId = null;
-      vendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
-      this.http.post(AdInsConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, vendorEmpObj).subscribe(
-        (response) => {
-          this.result = response;
-          this.VendorEmpForm.patchValue({
-            VendorEmpCode: this.result.VendorEmpObj.VendorEmpNo,
-            VendorEmpName: this.result.VendorEmpObj.VendorEmpName,
-            SupervisorId: this.result.VendorEmpObj.SupervisorId,
-            MrVendorEmpPositionCode: this.result.VendorEmpObj.MrVendorEmpPositionCode,
-            MrIdTypeCode: this.result.VendorEmpObj.MrIdTypeCode,
-            IdNo: this.result.VendorEmpObj.IdNo,
-            BirthPlace: this.result.VendorEmpObj.BirthPlace,
-            BirthDate: formatDate(this.result.VendorEmpObj['BirthDate'], 'yyyy-MM-dd', 'en-US'),
-            MobilePhnNo1: this.result.VendorEmpObj.MobilePhnNo1,
-            MobilePhnNo2: this.result.VendorEmpObj.MobilePhnNo2,
-            Email: this.result.VendorEmpObj.Email,
-            JoinDt: formatDate(this.result.VendorEmpObj['JoinDt'], 'yyyy-MM-dd', 'en-US'),
-            VendorEmpRating: this.result.VendorEmpObj.VendorEmpRating,
-            Zipcode: this.result.VendorEmpObj.Zipcode,
-            Addr: this.result.VendorAddrObj.Addr,
-            AreaCode1: this.result.VendorAddrObj.AreaCode1,
-            AreaCode2: this.result.VendorAddrObj.AreaCode2,
-            City: this.result.VendorAddrObj.City,
-            Province: this.result.VendorAddrObj.Province,
-            IsActive: this.result.VendorEmpObj.IsActive,
-            IsContactPerson: this.result.VendorEmpObj.IsContactPerson,
-            IsOwner: this.result.VendorEmpObj.IsOwner,
-            TaxIdNo: this.result.VendorEmpObj.TaxIdNo,
-            TaxpayerName: this.result.VendorEmpObj.TaxpayerName,
-            MrTaxCalcMethodCode: this.result.VendorEmpObj.MrTaxCalcMethodCode
-          });
-          this.setLookup();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      this.getData();
     } else {
       this.setLookup();
     }
@@ -208,9 +171,9 @@ export class VendorEmployeeComponent implements OnInit {
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
-    if (this.result != null) {
-      this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
-      this.inputLookupSpvObj.jsonSelect = { VendorEmpName: this.result["VendorEmpObj"].SupervisorName };
+    if (this.resultVendorEmpAndAddr != null) {
+      this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.resultVendorEmpAndAddr["VendorAddrObj"].Zipcode };
+      this.inputLookupSpvObj.jsonSelect = { VendorEmpName: this.resultVendorEmpAndAddr["VendorEmpObj"].SupervisorName };
     }
   }
 
@@ -229,9 +192,9 @@ export class VendorEmployeeComponent implements OnInit {
   }
 
   getLookupZipcode(ev) {
+    this.VendorBranchEmpObj.VendorAddrObj.Zipcode = ev.Zipcode;
     this.VendorEmpForm.patchValue(
       {
-        Zipcode: ev.Zipcode,
         AreaCode2: ev.AreaCode2,
         AreaCode1: ev.AreaCode1,
         PhnArea1: ev.PhnArea,
@@ -239,9 +202,51 @@ export class VendorEmployeeComponent implements OnInit {
         Province: ev.Province
       });
     this.inputLookupZipcodeObj.jsonSelect = { Zipcode: ev.Zipcode };
-    this.inputLookupZipcodeObj.idSelect = ev.Zipcode;
   }
 
+  async getData(){
+    var vendorEmpObj = new VendorEmpObj();
+    vendorEmpObj.VendorId = null;
+    vendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
+    this.http.post(AdInsConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, vendorEmpObj).subscribe(
+      (response) => {
+        this.resultVendorEmpAndAddr = response;
+        this.VendorBranchEmpObj.VendorEmpObj.SupervisorId = this.resultVendorEmpAndAddr.VendorEmpObj.SupervisorId;
+        this.VendorBranchEmpObj.VendorAddrObj.Zipcode = this.resultVendorEmpAndAddr.VendorAddrObj.Zipcode;
+        this.VendorEmpForm.patchValue({
+          VendorEmpCode: this.resultVendorEmpAndAddr.VendorEmpObj.VendorEmpNo,
+          VendorEmpName: this.resultVendorEmpAndAddr.VendorEmpObj.VendorEmpName,
+          SupervisorId: this.resultVendorEmpAndAddr.VendorEmpObj.SupervisorId,
+          MrVendorEmpPositionCode: this.resultVendorEmpAndAddr.VendorEmpObj.MrVendorEmpPositionCode,
+          MrIdTypeCode: this.resultVendorEmpAndAddr.VendorEmpObj.MrIdTypeCode,
+          IdNo: this.resultVendorEmpAndAddr.VendorEmpObj.IdNo,
+          BirthPlace: this.resultVendorEmpAndAddr.VendorEmpObj.BirthPlace,
+          BirthDate: formatDate(this.resultVendorEmpAndAddr.VendorEmpObj['BirthDate'], 'yyyy-MM-dd', 'en-US'),
+          MobilePhnNo1: this.resultVendorEmpAndAddr.VendorEmpObj.MobilePhnNo1,
+          MobilePhnNo2: this.resultVendorEmpAndAddr.VendorEmpObj.MobilePhnNo2,
+          Email: this.resultVendorEmpAndAddr.VendorEmpObj.Email,
+          JoinDt: formatDate(this.resultVendorEmpAndAddr.VendorEmpObj['JoinDt'], 'yyyy-MM-dd', 'en-US'),
+          VendorEmpRating: this.resultVendorEmpAndAddr.VendorEmpObj.VendorEmpRating,
+          Addr: this.resultVendorEmpAndAddr.VendorAddrObj.Addr,
+          AreaCode1: this.resultVendorEmpAndAddr.VendorAddrObj.AreaCode1,
+          AreaCode2: this.resultVendorEmpAndAddr.VendorAddrObj.AreaCode2,
+          City: this.resultVendorEmpAndAddr.VendorAddrObj.City,
+          Province: this.resultVendorEmpAndAddr.VendorAddrObj.Province,
+          IsActive: this.resultVendorEmpAndAddr.VendorEmpObj.IsActive,
+          IsContactPerson: this.resultVendorEmpAndAddr.VendorEmpObj.IsContactPerson,
+          IsOwner: this.resultVendorEmpAndAddr.VendorEmpObj.IsOwner,
+          TaxIdNo: this.resultVendorEmpAndAddr.VendorEmpObj.TaxIdNo,
+          TaxpayerName: this.resultVendorEmpAndAddr.VendorEmpObj.TaxpayerName,
+          MrTaxCalcMethodCode: this.resultVendorEmpAndAddr.VendorEmpObj.MrTaxCalcMethodCode
+        });
+        this.setLookup();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  
   SaveForm() {
     var vendorEmpObj = {
       VendorEmpNo: this.VendorEmpForm.controls.VendorEmpCode.value,
@@ -266,10 +271,10 @@ export class VendorEmployeeComponent implements OnInit {
       MrTaxCalcMethodCode: this.VendorEmpForm.controls.MrTaxCalcMethodCode.value
     };
 
-    var vendorAddrObj = {
+    var vendorAddrObj = { 
       MrAddrTypeCode: "TAX",
+      Zipcode: this.VendorBranchEmpObj.VendorAddrObj.Zipcode,
       Addr: this.VendorEmpForm.controls.Addr.value,
-      Zipcode: this.VendorEmpForm.controls.Zipcode.value,
       AreaCode2: this.VendorEmpForm.controls.AreaCode2.value,
       AreaCode1: this.VendorEmpForm.controls.AreaCode1.value,
       City: this.VendorEmpForm.controls.City.value,
@@ -284,6 +289,7 @@ export class VendorEmployeeComponent implements OnInit {
       this.http.post(AdInsConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
           this.mode = "edit";
+          this.getData();
           this.objOutput.emit(response["VendorEmpId"]);
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
@@ -293,14 +299,15 @@ export class VendorEmployeeComponent implements OnInit {
         });
     } else {
       this.VendorBranchEmpObj.VendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
-      this.VendorBranchEmpObj.VendorAddrObj.VendorAddrId = this.result["VendorAddrObj"].VendorAddrId;
-      this.VendorBranchEmpObj.VendorEmpObj.RowVersion = this.result["VendorEmpObj"].RowVersion;
-      this.VendorBranchEmpObj.VendorAddrObj.RowVersion = this.result["VendorAddrObj"].RowVersion;
+      this.VendorBranchEmpObj.VendorAddrObj.VendorAddrId = this.resultVendorEmpAndAddr.VendorAddrObj.VendorAddrId;
+      this.VendorBranchEmpObj.VendorEmpObj.RowVersion = this.resultVendorEmpAndAddr.VendorEmpObj.RowVersion;
+      this.VendorBranchEmpObj.VendorAddrObj.RowVersion = this.resultVendorEmpAndAddr.VendorAddrObj.RowVersion;
+      this.VendorBranchEmpObj.VendorEmpObj.TaxpayerNo = this.resultVendorEmpAndAddr.VendorEmpObj.TaxpayerNo;
 
       this.http.post(AdInsConstant.EditVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.wizard.goToNextStep();
+          this.getData();
         },
         (error) => {
           console.log(error);
