@@ -21,7 +21,8 @@
     ],
     "querystring": {
         "select": "SELECT HOLIDAY_SCHM_H_ID AS HolidaySchmHId, HOLIDAY_SCHM_CODE As HolidaySchmCode, HOLIDAY_SCHM_NAME AS HolidaySchmName",
-        "from": "FROM dbo.HOLIDAY_SCHM_H WITH(NOLOCK)"
+        "from": "FROM dbo.HOLIDAY_SCHM_H WITH(NOLOCK)",
+        "where":"WHERE IS_ACTIVE = 1"
     },
     "headerList": [
         {
