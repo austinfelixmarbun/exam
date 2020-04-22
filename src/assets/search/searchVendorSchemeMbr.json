@@ -1,5 +1,5 @@
 {
-    "title": "Vendor Scheme Member",
+    "title": "Branch Search",
     "component": [
         {
             "type": "textbox",
@@ -47,13 +47,13 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Branch CODE",
+            "label": "BRANCH CODE",
             "name": "VendorCode"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "Branch NAME",
+            "label": "BRANCH NAME",
             "name": "VendorName"
         },
         {
