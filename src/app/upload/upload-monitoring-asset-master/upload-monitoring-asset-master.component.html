@@ -1,0 +1,59 @@
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="addButton" [routerLink]="['/Asset/Type/Detail']" translate>
+      <i class="ft-plus-circle"></i> Upload File
+    </button>
+  </span>
+</div>
+<lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
+</lib-UCSearch>
+<div [hidden]="resultData == null" class="px-3 table-responsive">
+  <table class="table table-responsive-md text-center table-hover">
+    <thead>
+      <tr class="table-header">
+        <th class="text-center"><span class="thead-header" (click)="searchSort($event)" name='UploadMonitoringNo'
+            translate>UPLOAD NO</span>
+        </th>
+        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='FileName' translate>FILE
+            NAME</span>
+        </th>
+        <th class="text-right"><span class="thead-header" (click)="searchSort($event)" name='TotalRecord'
+            translate>TOTAL RECORD</span>
+        </th>
+        <th class="text-right"><span class="thead-header" (click)="searchSort($event)" name='TotalRecordProcessed'
+            translate>TOTAL RECORD PROCESSED</span>
+        </th>
+        <th class="text-right"><span class="thead-header" (click)="searchSort($event)" name='TotalRecordError'
+            translate>TOTAL RECORD ERROR</span>
+        </th>
+        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='UploadStatus'
+            translate>UPLOAD STATUS</span>
+        </th>
+        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='ErrorMessage'
+            translate>ERROR MESSAGE</span>
+        </th>
+        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='Download'
+            translate>DOWNLOAD</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of resultData">
+        <td class="text-center">{{item.UploadMonitoringNo}}</td>
+        <td class="text-left">{{item.FileName}}</td>
+        <td class="text-right">{{item.TotalRecord}}</td>
+      <td class="text-right">{{item.TotalRecordProcessed}}</td>
+      <td class="text-right">{{item.TotalRecordError}}</td>
+      <td class="text-left">{{item.UploadStatus}}</td>
+        <td class="text-left">{{item.ErrorMessage}}</td>
+        <td class="text-center"
+          *ngIf="item.UploadStatusCode == 'ERR' || item.UploadStatusCode == 'EXE' || item.UploadStatusCode == 'RJC'">
+          <button class="btn btn-primary btn-raised" (click)=downloadFile(item.UploadMonitoringNo)>
+            <i class="fa fa-file-download"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
+</div>

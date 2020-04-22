@@ -13,6 +13,7 @@ import { UCSearchModule } from "@adins/ucsearch";
 import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { LookuproleModule } from "@adins/lookuprole";
 import { UcSubsectionModule } from "@adins/uc-subsection";
+import { UploadMonitoringAssetMasterComponent } from './upload-monitoring-asset-master/upload-monitoring-asset-master.component';
 
 @NgModule({
     imports: [
@@ -31,7 +32,8 @@ import { UcSubsectionModule } from "@adins/uc-subsection";
     declarations: [
         UploadMonitoringComponent,
         UploadSettingPagingComponent,
-        UploadSettingEditComponent
+        UploadSettingEditComponent,
+        UploadMonitoringAssetMasterComponent
     ],
 
 })
