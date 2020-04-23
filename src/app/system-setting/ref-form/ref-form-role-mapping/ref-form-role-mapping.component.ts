@@ -13,7 +13,8 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 @Component({
   selector: 'app-ref-form-role-mapping',
   templateUrl: './ref-form-role-mapping.component.html',
-  styleUrls: ['./ref-form-role-mapping.component.scss']
+  styleUrls: ['./ref-form-role-mapping.component.scss'],
+  providers: [NGXToastrService]
 })
 export class RefFormRoleMappingComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) UCGridFooter;
@@ -222,7 +223,7 @@ export class RefFormRoleMappingComponent implements OnInit {
 
     this.http.post(AdInsConstant.AddListAuthForm, obj).subscribe(
       (response) => {
-        this.router.navigate(['/RefForm/Paging']);
+        this.router.navigate(['/SystemSetting/RefForm/Paging']);
       },
       (error) => {
         console.log(error);

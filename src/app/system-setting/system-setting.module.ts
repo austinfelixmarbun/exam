@@ -28,6 +28,11 @@ import { NotificationApprovalPagingComponent } from 'app/system-setting/notifica
 import { NotificationApprovalDetailComponent } from 'app/system-setting/notification/notification-approval-detail/notification-approval-detail.component';
 import { UcviewgenericModule, UcviewgenericComponent } from '@adins/ucviewgeneric';
 import { UcgridviewModule} from '@adins/ucgridview'
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { RefFormPagingComponent } from './ref-form/ref-form-paging/ref-form-paging.component';
+import { RefFormDetailComponent } from './ref-form/ref-form-detail/ref-form-detail.component';
+import { RefFormRoleMappingComponent } from './ref-form/ref-form-role-mapping/ref-form-role-mapping.component';
 
 
 @NgModule({
@@ -48,7 +53,9 @@ import { UcgridviewModule} from '@adins/ucgridview'
     TreeViewModule,
     NgMultiSelectDropDownModule,
     UcviewgenericModule,
-    UcgridviewModule
+    UcgridviewModule,
+    UclookupgenericModule,
+    UcShowErrorsModule
   ],
   declarations: [
     UserPagingComponent,
@@ -63,7 +70,10 @@ import { UcgridviewModule} from '@adins/ucgridview'
     NotificationPagingComponent,
     NotificationAddEditComponent,
     NotificationApprovalPagingComponent,
-    NotificationApprovalDetailComponent
+    NotificationApprovalDetailComponent,
+    RefFormPagingComponent,
+    RefFormDetailComponent,
+    RefFormRoleMappingComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

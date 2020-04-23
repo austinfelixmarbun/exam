@@ -4,7 +4,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "workingHourSchmCode",
+            "name": "A.WORKING_HOUR_SCHM_CODE",
             "id": "workingHourSchmCodeId",
             "value": "",
             "label": "Working Hour Scheme Code",
@@ -12,7 +12,7 @@
         },
         {
             "type": "dropdown",
-            "name": "isActive",
+            "name": "A.IS_ACTIVE",
             "id": "isActive",
             "value": "Active Status",
             "placeholder": "Placeholder",
@@ -34,7 +34,7 @@
         },
         {
             "type": "textbox",
-            "name": "workingHourSchmName",
+            "name": "A.WORKING_HOUR_SCHM_NAME",
             "id": "workingHourSchmNameId",
             "value": "",
             "label": "Working Hour Scheme Name",
@@ -46,19 +46,19 @@
           "type": "sort",
           "position": "left",
           "label": "Working Hour Scheme Code",
-          "name": "workingHourSchmCode"
+          "name": "A.WORKING_HOUR_SCHM_CODE"
         },
         {
           "type": "sort",
           "position": "left",
           "label": "Wokring Hour Scheme Name",
-          "name": "workingHourSchmName"
+          "name": "A.WORKING_HOUR_SCHM_NAME"
         },
         {
           "type": "sort",
           "position": "center",
           "label": "Active",
-          "name": "isActive"
+          "name": "A.IS_ACTIVE"
         },
         {
           "type": "label",

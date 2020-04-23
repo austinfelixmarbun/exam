@@ -208,32 +208,32 @@ export class AdInsConstant {
   public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
 
   //OFFICE ZIPCODE MEMBER
-  public static GetOfficeZipCodeMemberPaging = "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
-  public static GetRefOfficeZipcodePaging = "/OfficeZipcodeMember/GetRefOfficeZipcodePaging";
-  public static AddOfficeZipcodeMember = "/OfficeZipcodeMember/AddOfficeZipcodeMember";
-  public static DeleteOfficeZipcodeMember = "/OfficeZipcodeMember/DeleteOfficeZipcodeMember";
+  public static GetOfficeZipCodeMemberPaging = environment.FoundationR3Url + "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
+  public static GetRefOfficeZipcodePaging = environment.FoundationR3Url + "/OfficeZipcodeMember/GetRefOfficeZipcodePaging";
+  public static AddOfficeZipcodeMember = environment.FoundationR3Url + "/OfficeZipcodeMember/AddOfficeZipcodeMember";
+  public static DeleteOfficeZipcodeMember = environment.FoundationR3Url + "/OfficeZipcodeMember/DeleteOfficeZipcodeMember";
 
   //BUSINESS UNIT
-  public static GetBusinessUnitPaging = "/OrganizationDefinition/GetRefBizUnitPaging";
-  public static GetRefBizUnit = "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
-  public static AddRefBizUnit = "/RefBizUnit/AddRefBizUnit";
-  public static EditRefBizUnit = "/RefBizUnit/EditRefBizUnit";
-  public static DeleteRefBizUnit = "/RefBizUnit/DeleteRefBizUnit";
+  public static GetBusinessUnitPaging = environment.FoundationR3Url + "/OrganizationDefinition/GetRefBizUnitPaging";
+  public static GetRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
+  public static AddRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/AddRefBizUnit";
+  public static EditRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/EditRefBizUnit";
+  public static DeleteRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/DeleteRefBizUnit";
   
   //REF COY
-  public static GetRefCoyPaging = "/RefCoy/GetRefCoyPaging";
-  public static GetRefCoy = "/RefCoy/GetRefCoy";
-  public static EditRefCoy = "/RefCoy/EditRefCoy";
-  public static GetCoyBodPaging = "/CoyBod/GetCoyBodPaging";
-  public static AddCoyBod = "/CoyBod/AddCoyBOD";
-  public static EditCoyBod = "/CoyBod/EditCoyBOD";
-  public static DeleteCoyBod = "/CoyBod/DeleteCoyBOD";
-  public static GetCoyBod = "/CoyBod/GetCoyBod";
-  public static GetCommissionerPaging = "/CoyCommissioner/GetCoyCommissionerPaging";
-  public static AddCoyCommissioner = "/CoyCommissioner/AddCoyCommissioner";
-  public static EditCoyCommissioner = "/CoyCommissioner/EditCoyCommissioner";
-  public static DeleteCoyCommissioner = "/CoyCommissioner/DeleteCoyCommissioner";
-  public static GetCoyCommissioner = "/CoyCommissioner/GetCoyCommissioner";
+  public static GetRefCoyPaging = environment.FoundationR3Url + "/RefCoy/GetRefCoyPaging";
+  public static GetRefCoy = environment.FoundationR3Url + "/RefCoy/GetRefCoy";
+  public static EditRefCoy = environment.FoundationR3Url + "/RefCoy/EditRefCoy";
+  public static GetCoyBodPaging = environment.FoundationR3Url + "/CoyBod/GetCoyBodPaging";
+  public static AddCoyBod = environment.FoundationR3Url + "/CoyBod/AddCoyBOD";
+  public static EditCoyBod = environment.FoundationR3Url + "/CoyBod/EditCoyBOD";
+  public static DeleteCoyBod = environment.FoundationR3Url + "/CoyBod/DeleteCoyBOD";
+  public static GetCoyBod = environment.FoundationR3Url + "/CoyBod/GetCoyBod";
+  public static GetCommissionerPaging = environment.FoundationR3Url + "/CoyCommissioner/GetCoyCommissionerPaging";
+  public static AddCoyCommissioner = environment.FoundationR3Url + "/CoyCommissioner/AddCoyCommissioner";
+  public static EditCoyCommissioner = environment.FoundationR3Url + "/CoyCommissioner/EditCoyCommissioner";
+  public static DeleteCoyCommissioner = environment.FoundationR3Url + "/CoyCommissioner/DeleteCoyCommissioner";
+  public static GetCoyCommissioner = environment.FoundationR3Url + "/CoyCommissioner/GetCoyCommissioner";
 
   //REF TAX OFFICE
   public static GetAllActiveRefTaxOffice = "/RefTaxOffice/GetAllActiveRefTaxOffice";

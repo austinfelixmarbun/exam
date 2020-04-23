@@ -17,14 +17,13 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   providers: [VendorService, NGXToastrService]
 })
 export class BankInfoComponent implements OnInit {
-  title: any;
   @Input() objInput: any;
   modal: any;
   closeResult: any;
   inputLookupBankObj: InputLookupObj;
-  mode: any = "add";
-  VendorBankAcc: any = new VendorBankAccObj();
-  VendorBankAccId: any;
+  mode: string = "add";
+  VendorBankAcc: VendorBankAccObj = new VendorBankAccObj();
+  VendorBankAccId: number;
   ListData: any = new Array();
   BankRegisForm = this.fb.group({
     AccNumber: ['', [Validators.required]],
@@ -39,24 +38,17 @@ export class BankInfoComponent implements OnInit {
 
   ngOnInit() {
     this.getListData();
-
-    this.inputLookupBankObj = new InputLookupObj();
-    this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
-    this.inputLookupBankObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupBankObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
-    this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
-    this.inputLookupBankObj.isRequired = true;
+    this.setLookup();
   }
 
   open(content) {
+    this.setLookup();
     this.BankRegisForm.patchValue({
       AccNumber: "",
       AccName: "",
       RefBankId: "",
       IsDefault: false
     });
-    this.inputLookupBankObj.jsonSelect = { bankName: "" };
     this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
     this.BankRegisForm.controls.AccName.updateValueAndValidity();
 
@@ -81,16 +73,23 @@ export class BankInfoComponent implements OnInit {
   }
 
   SaveForm(enjiForm:NgForm) {
-    this.VendorBankAcc.VendorId = this.objInput.VendorId;
+    if (this.objInput.Type == "Vendor") {
+      this.VendorBankAcc.VendorId = this.objInput.VendorId;
+      this.VendorBankAcc.VendorEmpId = null;
+    } else if (this.objInput.Type == "VendorEmployee") {
+    this.VendorBankAcc.VendorId = null;
     this.VendorBankAcc.VendorEmpId = this.objInput.VendorEmpId;
+    }
+    this.VendorBankAcc.RefBankId = this.BankRegisForm.controls.RefBankId.value
+    this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls.AccNumber.value;
+    this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls.AccName.value;
+    this.VendorBankAcc.IsDefault = this.BankRegisForm.controls.IsDefault.value;
+
     if (this.mode == "add") {
-      this.VendorBankAcc.RefBankId = this.BankRegisForm.controls.RefBankId.value
-      this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls.AccNumber.value;
-      this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls.AccName.value;
-      this.VendorBankAcc.IsDefault = this.BankRegisForm.controls.IsDefault.value;
       this.vendorService.AddVendorBankAcc(this.VendorBankAcc).subscribe(
         response => {
           this.getListData();
+          this.setLookup();
           this.toastr.successMessage(response["Message"]);
           this.modal.close();
           this.BankRegisForm.patchValue({
@@ -109,17 +108,12 @@ export class BankInfoComponent implements OnInit {
         }
       );
     } else {
-      this.VendorBankAcc = this.objEdit;
-      this.VendorBankAcc.RefBankId = this.BankRegisForm.controls.RefBankId.value;
-      this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls.AccNumber.value;
-      this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls.AccName.value;
-      this.VendorBankAcc.IsDefault = this.BankRegisForm.controls.IsDefault.value;
-      this.VendorBankAcc.VendorId = this.objInput.VendorId;
       this.VendorBankAcc.VendorBankAccId = this.VendorBankAccId;
       this.VendorBankAcc.RowVersion = this.objEdit.RowVersion;
       this.vendorService.EditVendorBankAcc(this.VendorBankAcc).subscribe(
         response => {
           this.getListData();
+          this.setLookup();
           this.toastr.successMessage(response["Message"]);
           this.modal.close();
           this.BankRegisForm.patchValue({
@@ -138,8 +132,6 @@ export class BankInfoComponent implements OnInit {
         }
       );
     }
-
-    this.mode = "add";
   }
 
   async editBank(id, content) {
@@ -157,7 +149,7 @@ export class BankInfoComponent implements OnInit {
         IsDefault: response["IsDefault"],
         RowVersion: response["RowVersion"]
       });
-      this.inputLookupBankObj.jsonSelect = { bankName: this.objEdit.BankName };
+      this.setLookup();
     })
 
     this.modal = this.modalService.open(content);
@@ -218,6 +210,22 @@ export class BankInfoComponent implements OnInit {
           this.ListData = response["ReturnObject"];
         }
       );
+    }
+  }
+
+  setLookup(){
+    this.inputLookupBankObj = new InputLookupObj();
+    this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
+    this.inputLookupBankObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.inputLookupBankObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
+    this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
+    this.inputLookupBankObj.isRequired = true;
+    
+    if(this.objEdit!=null && this.mode=="edit"){
+      this.inputLookupBankObj.jsonSelect = { bankName: this.objEdit.BankName };
+    }else{
+      this.inputLookupBankObj.jsonSelect = { bankName: "" };
     }
   }
 }

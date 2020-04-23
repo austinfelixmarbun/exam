@@ -49,32 +49,32 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT A.REF_EMP_ID AS refEmpId, B.USERNAME AS username, A.EMP_NO AS empNo, A.EMP_NAME AS empName, A.IS_ACTIVE AS isActive, B.REF_USER_ID AS RefUserId",
+        "select": "SELECT A.REF_EMP_ID AS RefEmpId, B.USERNAME AS username, A.EMP_NO AS empNo, A.EMP_NAME AS empName, A.IS_ACTIVE AS isActive, B.REF_USER_ID AS RefUserId",
         "from": "FROM REF_EMP AS A INNER JOIN REF_USER AS B ON A.REF_EMP_ID = B.REF_EMP_ID",
-        "where": "A.IS_ACTIVE = 1"
+        "where": "WHERE A.IS_ACTIVE = 1"
     },
     "headerList" : [ 
         {
             "type" : "sort", 
-            "position" : "left", 
+            "position" : "center", 
             "label" : "Username",
             "name" : "username" 
         },
         {
             "type" : "sort", 
-            "position" : "left", 
+            "position" : "center", 
             "label" : "Employee No.", 
             "name" : "empNo" 
         },
         {
             "type" : "sort", 
-            "position" : "left", 
+            "position" : "center", 
             "label" : "Employee Name", 
             "name" : "empName" 
         },
         {
             "type" : "sort", 
-            "position" : "left", 
+            "position" : "center", 
             "label" : "Active", 
             "name" : "isActive"
         },
@@ -97,7 +97,7 @@
         },
         {
             "type" : "text", 
-            "position" : "left", 
+            "position" : "center", 
             "property" : "empNo" 
         },
         {
@@ -135,18 +135,18 @@
                     "path" : "/Employee/detail", 
                     "param" : [ 
                         {
-                            "type" : "refEmpId", 
-                            "property" : "refEmpId" 
+                            "type" : "RefEmpId", 
+                            "property" : "RefEmpId" 
                         },
                         {
-                            "type": "param",
+                            "type": "mode",
                             "property": "edit"
                         }
                     ]
                 },
                 {
                     "type" : "delete", 
-                    "property" : "refEmpId" 
+                    "property" : "RefEmpId" 
                 }
             ]
         }
