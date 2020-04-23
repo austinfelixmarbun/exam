@@ -12,9 +12,9 @@
             <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll"
                 name="CheckAll"></th>
             <th><span translate class="thead-header" (click)="searchSort($event)"
-                name='VendorCode'>Vendor Code</span></th>
+                name='BranchCode'>Branch Code</span></th>
             <th><span translate class="thead-header" (click)="searchSort($event)"
-                name='VendorName'>Vendor Name</span></th>
+                name='BranchName'>Branch Name</span></th>
             <th><span translate class="thead-header" (click)="searchSort($event)"
                 name='IsActive'>Active Status</span></th>
           </tr>
@@ -51,9 +51,9 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='VendorCode'>Vendor Code</span>
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='BranchCode'>Branch Code</span>
             </th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='VendorName'>Vendor Name</span>
+            <th><span translate class="thead-header" (click)="searchSort($event)" name='BranchName'>Branch Name</span>
             </th>
             <th><span translate class="thead-header" (click)="searchSort($event)" name='IsActive'>Active Status</span></th>
             <th translate>Delete</th>

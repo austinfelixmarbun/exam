@@ -26,6 +26,7 @@ export class VendorBranchMainObj{
     ReservedField9: any;
     MrTaxCalcMethodCode: any;
     IsVat: any;
+    TaxIdNo: any;
     TaxpayerNo: any;
     TaxpayerName: any;
     RowVersion: any;

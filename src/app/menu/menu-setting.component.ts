@@ -102,7 +102,7 @@ export class MenuSettingComponent implements OnInit {
     if (confirm("Are you sure to delete this record?")) {
       this.editUrl = this.foundationUrl + AdInsConstant.DeleteRefForm;
       var refFormObj = new RefFormObj();
-      refFormObj.refFormId = refFormId;
+      refFormObj.RefFormId = refFormId;
       this.http.post(this.editUrl, refFormObj).subscribe(
         (response) => {
           console.log(response);

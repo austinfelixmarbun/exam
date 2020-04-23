@@ -23,6 +23,8 @@ import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
 import { ShowErrorsComponent } from '../test-new/show-errors.component';
 import { UcProdOfferingCompComponent } from './UserControl/uc-prod-offering-compnt/uc-prod-offering-comp.component';
+import { ThingsToDoComponent } from './things-to-do/things-to-do.component';
+import { UcthingstodoModule } from '@adins/ucthingstodo';
 
 @NgModule({
     exports: [
@@ -39,7 +41,9 @@ import { UcProdOfferingCompComponent } from './UserControl/uc-prod-offering-comp
         ViewgenericComponent,
         LookupgenericComponent,
         ShowErrorsComponent,
-        UcProdOfferingCompComponent
+        UcProdOfferingCompComponent,
+        ThingsToDoComponent,
+        UcthingstodoModule
     ],
     imports: [
         FormsModule,
@@ -53,7 +57,8 @@ import { UcProdOfferingCompComponent } from './UserControl/uc-prod-offering-comp
         UcSubsectionModule,
         UclookupgenericModule,
         UcpagingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        UcthingstodoModule
     ],
     declarations: [
         UcAddressComponent,
@@ -69,7 +74,8 @@ import { UcProdOfferingCompComponent } from './UserControl/uc-prod-offering-comp
         ViewgenericComponent,
         LookupgenericComponent,
         ShowErrorsComponent,
-        UcProdOfferingCompComponent
+        UcProdOfferingCompComponent,
+        ThingsToDoComponent
     ]
 })
 
