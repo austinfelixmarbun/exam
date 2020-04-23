@@ -4,6 +4,9 @@ import { UploadMonitoringComponent } from "./upload-monitoring/upload-monitoring
 import { UploadSettingPagingComponent } from "./upload-setting/upload-setting/upload-setting-paging.component";
 import { UploadSettingEditComponent } from "./upload-setting/upload-setting-edit/upload-setting-edit.component";
 import { UploadMonitoringAssetMasterComponent } from "./upload-monitoring-asset-master/upload-monitoring-asset-master.component";
+import { UploadAssetMasterComponent } from "./upload-asset-master/upload-asset-master.component";
+import { ReviewUploadAssetMasterPagingComponent } from "./review-upload-asset-master/review-upload-asset-master-paging/review-upload-asset-master-paging.component";
+import { ReviewUploadAssetMasterDetailComponent } from "./review-upload-asset-master/review-upload-asset-master-detail/review-upload-asset-master-detail.component";
 
 const routes: Routes = [
   {
@@ -37,6 +40,27 @@ const routes: Routes = [
           title: 'Upload Monitoring Asset Master'
         }
       }, 
+      {
+        path: 'UploadAssetMaster',
+        component: UploadAssetMasterComponent,
+        data: {
+          title: 'Upload Asset Master'
+        }
+      },
+      {
+        path: 'ReviewUploadAssetMaster/Paging',
+        component: ReviewUploadAssetMasterPagingComponent,
+        data: {
+          title: 'Review Upload Asset Master Paging'
+        }
+      },
+      {
+        path: 'ReviewUploadAssetMaster/Detail',
+        component: ReviewUploadAssetMasterDetailComponent,
+        data: {
+          title: 'Review Upload Asset Master Detail'
+        }
+      },
     ]
   }
 ];

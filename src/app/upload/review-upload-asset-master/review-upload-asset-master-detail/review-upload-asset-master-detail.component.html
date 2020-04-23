@@ -1,0 +1,9 @@
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="backButton" [routerLink]="['/Upload/ReviewUploadAssetMaster/Paging']" translate>Cancel</button>
+    <button type="button" class="backButton" (click)="cancel()" translate>Reject</button>
+    <button type="button" class="addButton" (click)="cancel()" translate>Process</button>
+  </span>
+</div>
+<lib-ucviewgeneric [viewInput]="viewUpload"></lib-ucviewgeneric>
+<lib-ucpaging [searchObj]="inputPagingObj" ></lib-ucpaging>

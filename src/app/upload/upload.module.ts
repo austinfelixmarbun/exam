@@ -14,6 +14,11 @@ import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { LookuproleModule } from "@adins/lookuprole";
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { UploadMonitoringAssetMasterComponent } from './upload-monitoring-asset-master/upload-monitoring-asset-master.component';
+import { UploadAssetMasterComponent } from './upload-asset-master/upload-asset-master.component';
+import { ReviewUploadAssetMasterPagingComponent } from './review-upload-asset-master/review-upload-asset-master-paging/review-upload-asset-master-paging.component';
+import { ReviewUploadAssetMasterDetailComponent } from './review-upload-asset-master/review-upload-asset-master-detail/review-upload-asset-master-detail.component';
+import { UcpagingModule } from "@adins/ucpaging";
+import { UcviewgenericModule } from "@adins/ucviewgeneric";
 
 @NgModule({
     imports: [
@@ -27,13 +32,18 @@ import { UploadMonitoringAssetMasterComponent } from './upload-monitoring-asset-
         ReactiveFormsModule,
         LookuproleModule,
         UcSubsectionModule,
-        UploadRoutingModule
+        UploadRoutingModule,
+        UcpagingModule,
+        UcviewgenericModule
     ],
     declarations: [
         UploadMonitoringComponent,
         UploadSettingPagingComponent,
         UploadSettingEditComponent,
-        UploadMonitoringAssetMasterComponent
+        UploadMonitoringAssetMasterComponent,
+        UploadAssetMasterComponent,
+        ReviewUploadAssetMasterPagingComponent,
+        ReviewUploadAssetMasterDetailComponent
     ],
 
 })
