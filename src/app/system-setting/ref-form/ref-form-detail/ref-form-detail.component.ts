@@ -11,7 +11,8 @@ import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
 @Component({
   selector: 'app-ref-form-detail',
   templateUrl: './ref-form-detail.component.html',
-  styleUrls: ['./ref-form-detail.component.scss']
+  styleUrls: ['./ref-form-detail.component.scss'],
+  providers: [NGXToastrService]
 })
 export class RefFormDetailComponent implements OnInit {
   itemModuleType: any;
@@ -133,7 +134,7 @@ export class RefFormDetailComponent implements OnInit {
       this.http.post(AdInsConstant.EditRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/RefForm/Paging');
+          this.router.navigateByUrl('/SystemSetting/RefForm/Paging');
         },
         (error) => {
           console.log(error);
@@ -142,7 +143,7 @@ export class RefFormDetailComponent implements OnInit {
       this.http.post(AdInsConstant.AddRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/RefForm/Paging']);
+          this.router.navigate(['/SystemSetting/RefForm/Paging']);
         },
         (error) => {
           console.log(error);

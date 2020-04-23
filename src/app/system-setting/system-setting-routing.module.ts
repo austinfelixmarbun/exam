@@ -13,6 +13,9 @@ import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.c
 import { UserRoleDetailComponent } from 'app/system-setting/user/user-role-detail/user-role-detail.component';
 import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
 import { UserChangePasswordComponent } from 'app/system-setting/user/user-change-password/user-change-password.component';
+import { RefFormPagingComponent } from './ref-form/ref-form-paging/ref-form-paging.component';
+import { RefFormDetailComponent } from './ref-form/ref-form-detail/ref-form-detail.component';
+import { RefFormRoleMappingComponent } from './ref-form/ref-form-role-mapping/ref-form-role-mapping.component';
 const routes: Routes = [
   {
     path: '',
@@ -106,6 +109,27 @@ const routes: Routes = [
         component: UserChangePasswordComponent,
         data: {
           title: 'Change Password Maintenance'
+        },
+      },
+      {
+        path: 'RefForm/Paging',
+        component: RefFormPagingComponent,
+        data: {
+          title: 'Ref Form Paging'
+        },
+      },
+      {
+        path: 'RefForm/Detail',
+        component: RefFormDetailComponent,
+        data: {
+          title: 'Ref Form Detail'
+        },
+      },
+      {
+        path: 'RefForm/RoleMapping',
+        component: RefFormRoleMappingComponent,
+        data: {
+          title: 'Ref Form Role Mapping'
         },
       }
     ]

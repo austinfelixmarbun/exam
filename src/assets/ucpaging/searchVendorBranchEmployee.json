@@ -114,14 +114,9 @@
     },
     {
       "type": "text",
-      "position": "left",
-      "property": "MobilePhnNo1"
-    },
-    {
-      "type": "text",
       "position": "center",
       "property": "MobilePhnNo1"
-    },    
+    }, 
     {
       "type": "text",
       "position": "center",

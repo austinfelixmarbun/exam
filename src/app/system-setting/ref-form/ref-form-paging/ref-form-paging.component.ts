@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-ref-form-paging',
   templateUrl: './ref-form-paging.component.html',
-  styleUrls: ['./ref-form-paging.component.scss']
+  styleUrls: ['./ref-form-paging.component.scss'],
+  providers: [NGXToastrService]
 })
 export class RefFormPagingComponent implements OnInit {
   inputPagingObj: any;

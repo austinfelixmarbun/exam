@@ -3,8 +3,8 @@
     <div class="card">
       <div class="card-body">
         <div class="px-3">
-          <lib-ucSubsection [id]="'bankListId'" [title]="'Bank List'" [panel]="bankList"></lib-ucSubsection>
-          <div id="bankList">
+          <h4 class="card-title" translate>Contact Person List</h4>
+          <hr>
             <div id="gridBankAcc" [hidden]="ListData?.length < 1">
               <table class="table table-responsive-md text-center table-hover">
                 <thead>
@@ -30,7 +30,6 @@
                 </tbody>
               </table>
             </div>
-          </div>
         </div>
       </div>
     </div>

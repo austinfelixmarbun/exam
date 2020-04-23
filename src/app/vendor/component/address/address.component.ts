@@ -25,12 +25,7 @@ export class AddressComponent implements OnInit {
   resultAddr: any;
   getUrl: string;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent) {
-    this.route.queryParams.subscribe(params => {
-      if(params["mode"]=="edit"){
-        this.mode = params["mode"];
-      }
-  })
+  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
   }
 
   AddressForm = this.fb.group({
@@ -98,7 +93,7 @@ export class AddressComponent implements OnInit {
   }
 
   SaveForm() {
-    this.vendorAddrObj.MrAddrTypeCode = this.AddressForm.controls.MrAddrTypeCode.value;
+    this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
     this.vendorAddrObj.AreaCode2 = this.AddressForm.controls.AreaCode2.value;
     this.vendorAddrObj.AreaCode1 = this.AddressForm.controls.AreaCode1.value;
     this.vendorAddrObj.City = this.AddressForm.controls.City.value;
@@ -108,8 +103,13 @@ export class AddressComponent implements OnInit {
     this.vendorAddrObj.Latitude = this.AddressForm.controls.Latitude.value;
     this.vendorAddrObj.Longitude = this.AddressForm.controls.Longitude.value;
     this.vendorAddrObj.VendorAddrId = this.VendorAddrId;
-    this.vendorAddrObj.VendorId = this.objInput.VendorId;
-    this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
+    if (this.objInput.Type == "Vendor") {
+      this.vendorAddrObj.VendorId = this.objInput.VendorId;
+      this.vendorAddrObj.VendorEmpId = null;
+    } else if (this.objInput.Type == "VendorEmployee") {
+      this.vendorAddrObj.VendorId = null;
+      this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
+    }
     this.vendorAddrObj.Phn1 = "";
     this.vendorAddrObj.PhnArea1 = "";
     this.vendorAddrObj.Phn2 = "";
@@ -127,7 +127,6 @@ export class AddressComponent implements OnInit {
         });
     }
     else {
-      this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
       this.http.post<VendorAddrObj>(AdInsConstant.AddVendorAddr, this.vendorAddrObj).subscribe(
         (response) => {
           this.vendorAddrObj = response;
@@ -143,15 +142,7 @@ export class AddressComponent implements OnInit {
     }
   }
 
-  refreshVendorAddress() {
-    if(this.VendorAddrId!=null){
-      this.vendorAddrObj.VendorAddrId = this.VendorAddrId;
-      this.getUrl = AdInsConstant.GetVendorAddrByVendorAddrId;
-      this.mode = "edit";
-    }else{
-      this.mode = "add";
-    }
-    
+  refreshVendorAddress() { 
     this.http.post<VendorAddrObj>(this.getUrl, this.vendorAddrObj).subscribe(
       (response) => {
         this.vendorAddrObj = response;
@@ -167,6 +158,12 @@ export class AddressComponent implements OnInit {
         });
         this.setLookup();
         this.VendorAddrId = this.vendorAddrObj.VendorAddrId;
+
+        if(this.VendorAddrId==0){
+          this.mode = "add";
+        }else{
+          this.mode = "edit";
+        }
       },
       (error) => {
         console.log(error);
