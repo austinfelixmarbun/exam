@@ -6,7 +6,7 @@
             "name": "VendorCode",
             "id": "VendorCodeId",
             "value": "",
-            "label": "Group Code",
+            "label": "Branch Code",
             "placeholder": "Placeholder"
         },
         {
@@ -14,7 +14,7 @@
             "name": "VendorName",
             "id": "VendorNameId",
             "value": "",
-            "label": "Group Name",
+            "label": "Branch Name",
             "placeholder": "Placeholder"
         },
         {
@@ -40,8 +40,8 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT C.VENDOR_CODE AS VendorCode, C.VENDOR_NAME AS VendorName, C.IS_ACTIVE IsActive, C.VENDOR_ID AS VendorId",
-        "from": "FROM dbo.VENDOR_GRP A WITH(NOLOCK) LEFT JOIN dbo.VENDOR_GRP_MBR B WITH(NOLOCK) ON A.VENDOR_GRP_ID = B.VENDOR_GRP_ID LEFT JOIN dbo.VENDOR C WITH(NOLOCK)  ON B.VENDOR_ID = C.VENDOR_ID"
+        "select": "SELECT A.VENDOR_CODE AS VendorCode, A.VENDOR_NAME AS VendorName, A.IS_ACTIVE IsActive, A.VENDOR_ID AS VendorId",
+        "from": "FROM dbo.VENDOR A WITH(NOLOCK) LEFT JOIN dbo.VENDOR_GRP_MBR B WITH(NOLOCK) ON A.VENDOR_ID = B.VENDOR_ID LEFT JOIN dbo.VENDOR_GRP C WITH(NOLOCK) ON B.VENDOR_GRP_ID = C.VENDOR_GRP_ID"
     },
     "headerList": [
         {
