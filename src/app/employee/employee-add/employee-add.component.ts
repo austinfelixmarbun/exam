@@ -301,7 +301,7 @@ export class EmployeeAddComponent implements OnInit {
     refEmpData.AreaCode2 = refEmpFormData.AreaCode2;
     refEmpData.AreaCode3 = refEmpFormData.AreaCode3;
     refEmpData.AreaCode4 = refEmpFormData.AreaCode4;
-    // refEmpData.City = refEmpData.City;
+    refEmpData.City = refEmpData.City;
     refEmpData.PhnArea1 = refEmpFormData.PhnArea1;
     refEmpData.Phn1 = refEmpFormData.Phn1;
     refEmpData.PhnExt1 = refEmpFormData.PhnExt1;
