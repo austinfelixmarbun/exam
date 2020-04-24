@@ -58,7 +58,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   VendorForm = this.fb.group({
-    MrVendorCategoryCode: [{ value: '', disabled: true }, Validators.required],
+    MrVendorCategoryCode: [{ value: '', disabled: true }],
     VendorCode: ['', Validators.required],
     VendorName: ['', Validators.required],
     MrVendorTypeCode: ['', Validators.required],
@@ -82,10 +82,9 @@ export class VendorBranchAddEditComponent implements OnInit {
     ReservedField7: [''], //MaxRefundType
     ReservedField8: [''], //MaxRefundValue
     ReservedField9: [''], //ASSGMNT_TYPE tele, field
-
     MrTaxCalcMethodCode: [''],
     IsVat: [true],
-    TaxpayerNo: ['', Validators.required],
+    TaxIdNo: ['', Validators.required],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
     Addr: [''],
@@ -99,6 +98,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
+    console.log("nih save form")
     var refMasterCategoryObj = {
       RefMasterTypeCode: "VENDOR_CATEGORY"
     }
@@ -246,7 +246,7 @@ export class VendorBranchAddEditComponent implements OnInit {
             ReservedField9: this.result.VendorObj.ReservedField9,
             MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
             IsVat: this.result.VendorObj.IsVat,
-            TaxpayerNo: this.result.VendorObj.TaxpayerNo,
+            TaxIdNo: this.result.VendorObj.TaxIdNo,
             TaxpayerName: this.result.VendorObj.TaxpayerName,
             RowVersionVendor: this.result.VendorObj.RowVersion,
             MrAddrTypeCode: this.result.VendorObj.MrAddrTypeCode,
@@ -335,7 +335,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
     this.inputLookupParentObj.isRequired = true;
-
+    this.inputLookupParentObj.addCritInput = new Array();
 
     this.arrCritSuHo = new Array();
     this.arrCritSurHo = new Array();
@@ -344,13 +344,12 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.arrCritAgP = new Array();
 
 
-    if (this.MrVendorCategoryCode == "SUPPLIER_HO") {
-      var critObj = new CriteriaObj();
-      critObj.propName = 'V.MR_VENDOR_CATEGORY_CODE';
-      critObj.restriction = AdInsConstant.RestrictionEq;
-      critObj.value = "SUPPLIER_HO";
-      this.arrCritSuHo.push(critObj);
-      this.inputLookupParentObj.addCritInput = this.arrCritSuHo;
+    if (this.MrVendorCategoryCode == "SUPPLIER_BRANCH") {
+      var critInput = new CriteriaObj();
+      critInput.propName = "MR_VENDOR_CATEGORY_CODE";
+      critInput.restriction = AdInsConstant.RestrictionEq;
+      critInput.value = "SUPPLIER_HO";
+      this.inputLookupParentObj.addCritInput.push(critInput);
 
     this.VendorForm.controls.ReservedField2.setValidators(Validators.required);
     this.VendorForm.controls.ReservedField3.setValidators(Validators.required);
@@ -368,39 +367,35 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
      if (this.MrVendorCategoryCode == "SURVEYOR_BRANCH") {
       var critObjSurveyor = new CriteriaObj();
-      critObjSurveyor.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+      critObjSurveyor.propName = 'MR_VENDOR_CATEGORY_CODE';
       critObjSurveyor.restriction = AdInsConstant.RestrictionEq;
       critObjSurveyor.value = "SURVEYOR_HO";
-      this.arrCritSurHo.push(critObjSurveyor);
-      this.inputLookupParentObj.addCritInput = this.arrCritSurHo;
+      this.inputLookupParentObj.addCritInput.push(critObjSurveyor);
     }
      if (this.MrVendorCategoryCode == "ASSET_INSCO_BRANCH") {
       var critObjAssetInsurance = new CriteriaObj();
-      critObjAssetInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+      critObjAssetInsurance.propName = 'MR_VENDOR_CATEGORY_CODE';
       critObjAssetInsurance.restriction = AdInsConstant.RestrictionEq;
       critObjAssetInsurance.value = "ASSET_INSCO_HO";
-      this.arrCritAsIn.push(critObjAssetInsurance);
-      this.inputLookupParentObj.addCritInput = this.arrCritAsIn;
+      this.inputLookupParentObj.addCritInput.push(critObjAssetInsurance);
     }
      if (this.MrVendorCategoryCode == "LIFE_INSCO_BRANCH") {
       var critObjLifeInsurance = new CriteriaObj();
-      critObjLifeInsurance.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+      critObjLifeInsurance.propName = 'MR_VENDOR_CATEGORY_CODE';
       critObjLifeInsurance.restriction = AdInsConstant.RestrictionEq;
       critObjLifeInsurance.value = "LIFE_INSCO_HO";
-      this.arrCritLiIn.push(critObjLifeInsurance);
-      this.inputLookupParentObj.addCritInput = this.arrCritLiIn;
+      this.inputLookupParentObj.addCritInput.push(critObjLifeInsurance);
     }
      if (this.MrVendorCategoryCode == "AGENCY_PERSONAL") {
       var critObjAgencyPersonal = new CriteriaObj();
-      critObjAgencyPersonal.propName = 'V.MR_VENDOR_CATEGORY_CODE';
+      critObjAgencyPersonal.propName = 'MR_VENDOR_CATEGORY_CODE';
       critObjAgencyPersonal.restriction = AdInsConstant.RestrictionEq;
       critObjAgencyPersonal.value = "AGENCY_PERSONAL";
-      this.arrCritAgP.push(critObjAgencyPersonal);
-      this.inputLookupParentObj.addCritInput = this.arrCritAgP;
+      this.inputLookupParentObj.addCritInput.push(critObjAgencyPersonal);
     }
   }
 
-  SaveForm() {
+  SaveForm(){
     this.vendorBranchObj = new VendorBranchObj();
     var vendorObj = {
       MrVendorCategoryCode: this.VendorForm.controls.MrVendorCategoryCode.value,
@@ -429,7 +424,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       ReservedField9: "",
       MrTaxCalcMethodCode: this.VendorForm.controls.MrTaxCalcMethodCode.value,
       IsVat: this.VendorForm.controls.IsVat.value,
-      TaxpayerNo: this.VendorForm.controls.TaxpayerNo.value,
+      TaxIdNo: this.VendorForm.controls.TaxIdNo.value,
       TaxpayerName: this.VendorForm.controls.TaxpayerName.value
     }
 
