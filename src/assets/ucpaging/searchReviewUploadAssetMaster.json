@@ -124,7 +124,7 @@
       "property": "FileName"
     },
     {
-      "type": "text",
+      "type": "date",
       "position": "center",
       "property": "UploadDt"
     },
@@ -168,7 +168,8 @@
       "action": [
         {
           "type": "callback",
-          "property": "UploadId"
+          "property": "UploadId",
+          "icon" : "ft-x"
         }
       ]
     }
