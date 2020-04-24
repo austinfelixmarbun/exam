@@ -5,9 +5,11 @@
     </button>
   </span>
 </div>
-<lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
-</lib-UCSearch>
-<div [hidden]="resultData.length == 0" class="px-3 table-responsive">
+<lib-ucpaging [searchObj]="inputPagingObj" (callback)="download($event)" ></lib-ucpaging>
+
+<!-- <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
+</lib-UCSearch> -->
+<!-- <div [hidden]="resultData.length == 0" class="px-3 table-responsive">
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
@@ -56,4 +58,4 @@
     </tbody>
   </table>
   <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
-</div>
+</div> -->

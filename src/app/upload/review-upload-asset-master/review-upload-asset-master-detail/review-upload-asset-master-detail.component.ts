@@ -5,29 +5,40 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 
 @Component({
   selector: 'app-review-upload-asset-master-detail',
   templateUrl: './review-upload-asset-master-detail.component.html',
-  styleUrls: ['./review-upload-asset-master-detail.component.scss']
+  styleUrls: ['./review-upload-asset-master-detail.component.scss'],
+  providers: [NGXToastrService]
 })
 export class ReviewUploadAssetMasterDetailComponent implements OnInit {
   uploadNo: string;
   viewUpload: string;
   inputPagingObj: any;
   arrCrit = new Array();
+  taskListId: any;
+  UploadReview: string;
+  CancelUpload: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["UploadNo"] != null) {
         this.uploadNo = params["UploadNo"];
       }
+      if (params["TaskListId"] != null) {
+        this.taskListId = params["TaskListId"];
+      }
     });
     this.viewUpload = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
   }
-
-
   ngOnInit() {
+    this.claimTask();
+    this.UploadReview = AdInsConstant.UploadReview;
+    this.CancelUpload = AdInsConstant.CancelUpload;
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadAssetMasterDetail.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
@@ -43,4 +54,27 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
     this.inputPagingObj.addCritInput.push(addCritAssetMasterId);
   }
 
+  uploadReview(status) {
+    var uploadObj = new UploadReviewCustomObj();
+    uploadObj.MrUploadStatusCode = status;
+    uploadObj.TaskListId = this.taskListId;
+    uploadObj.UploadMonitoringNo = this.uploadNo;
+    this.http.post(this.UploadReview, uploadObj).subscribe(
+      response => {
+        this.toastr.successMessage(response["Message"]);
+        this.router.navigate(["/Upload/ReviewUploadAssetMaster/Paging"]);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  claimTask() {
+    var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+    var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: currentUserContext["UserName"] };
+    console.log(wfClaimObj);
+    this.http.post(AdInsConstant.ClaimTask, wfClaimObj).subscribe(
+      (response) => {
+      });
+  }
 }

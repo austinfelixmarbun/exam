@@ -22,17 +22,17 @@
             "property": "FileName"
           },
           {
-            "type": "text",
+            "type": "date",
             "label": "Upload Date",
             "property": "UploadDt"
           },
           {
-            "type": "decimal",
+            "type": "text",
             "label": "Total Record",
             "property": "TotalRecord"
           },
           {
-            "type": "decimal",
+            "type": "text",
             "label": "Total Record Processed",
             "property": "TotalRecordProcessed"
           }
