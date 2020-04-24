@@ -62,7 +62,7 @@ export class VendorHoAddEditComponent implements OnInit {
     VendorParentId: [''],
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [true, Validators.required],
-    TaxpayerNo: ['', Validators.required],
+    TaxIdNo: ['', Validators.required],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
     Addr: [''],
@@ -157,7 +157,7 @@ export class VendorHoAddEditComponent implements OnInit {
             VendorParentId: this.result.VendorObj.VendorParentId,
             MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
             IsVat: this.result.VendorObj.IsVat,
-            TaxpayerNo: this.result.VendorObj.TaxpayerNo,
+            TaxIdNo: this.result.VendorObj.TaxIdNo,
             TaxpayerName: this.result.VendorObj.TaxpayerName,
             RowVersionVendor: this.result.VendorObj.RowVersion,
             MrAddrTypeCode: this.result.VendorObj.MrAddrTypeCode,
@@ -286,7 +286,7 @@ export class VendorHoAddEditComponent implements OnInit {
       VendorParentId: this.VendorForm.controls.VendorParentId.value,
       MrTaxCalcMethodCode: this.VendorForm.controls.MrTaxCalcMethodCode.value,
       IsVat: this.VendorForm.controls.IsVat.value,
-      TaxpayerNo: this.VendorForm.controls.TaxpayerNo.value,
+      TaxIdNo: this.VendorForm.controls.TaxIdNo.value,
       TaxpayerName: this.VendorForm.controls.TaxpayerName.value,
       MrVendorClass: "HO"
     }

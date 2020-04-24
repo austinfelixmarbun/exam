@@ -64,7 +64,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     ReservedField2: [''],
     MrTaxCalcMethodCode: [''],
     IsVat: [true],
-    TaxpayerNo: [''],
+    TaxIdNo: [''],
     TaxpayerName: [''],
     MrAddrTypeCode: [''],
     Addr: [''],
@@ -157,7 +157,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
             ReservedField2: this.result.VendorObj.ReservedField2,
             MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
             IsVat: this.result.VendorObj.IsVat,
-            TaxpayerNo: this.result.VendorObj.TaxpayerNo,
+            TaxIdNo: this.result.VendorObj.TaxIdNo,
             TaxpayerName: this.result.VendorObj.TaxpayerName,
             RowVersionVendor: this.result.VendorObj.RowVersion,
             MrAddrTypeCode: this.result.VendorObj.MrAddrTypeCode,
@@ -220,7 +220,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       ReservedField2: this.VendorForm.controls.ReservedField2.value,
       MrTaxCalcMethodCode: this.VendorForm.controls.MrTaxCalcMethodCode.value,
       IsVat: this.VendorForm.controls.IsVat.value,
-      TaxpayerNo: this.VendorForm.controls.TaxpayerNo.value,
+      TaxIdNo: this.VendorForm.controls.TaxIdNo.value,
       TaxpayerName: this.VendorForm.controls.TaxpayerName.value,
       MrVendorClass : "HOLDING"
     }
