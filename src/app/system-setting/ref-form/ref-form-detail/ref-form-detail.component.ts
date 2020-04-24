@@ -20,8 +20,8 @@ export class RefFormDetailComponent implements OnInit {
   inputLookupParentObj: any;
   mode: string="add";
   refFormObj: RefFormObj = new RefFormObj;
+  resultRefForm: any;
   RefFormId: number;
-  result: any;
 
   constructor(private fb: FormBuilder,  private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -47,7 +47,7 @@ export class RefFormDetailComponent implements OnInit {
     var refMasterModuleObj = {
     }
 
-    this.http.post(AdInsConstant.GetListKeyValueById, refMasterModuleObj).subscribe(
+    this.http.post(AdInsConstant.GetListKeyValueRefModuleById, refMasterModuleObj).subscribe(
       (response) => {
         this.itemModuleType = response["ReturnObject"];
         this.RefForm.patchValue({
@@ -73,23 +73,22 @@ export class RefFormDetailComponent implements OnInit {
       var refFormObj = {
           RefFormId: this.RefFormId
       }
-      this.http.post(AdInsConstant.GetRefFormDataByRefFormId, refFormObj).subscribe(
+      this.http.post<RefFormObj>(AdInsConstant.GetRefFormDataByRefFormId, refFormObj).subscribe(
         (response) => {
-          this.result = response;
+          this.resultRefForm = response;
+          this.refFormObj = response;
           this.refFormObj.RefFormId = this.RefFormId;
-          this.refFormObj.ParentId = this.result.ParentId;
-          this.refFormObj.RowVersion = this.result.RowVersion;
           this.RefForm.patchValue({
-            RefModuleId: this.result.RefModuleId,
-            Class: this.result.Class,
-            FormCode: this.result.FormCode,
-            Title: this.result.Title,
-            Path: this.result.Path,
-            Icon: this.result.Icon,
-            OrderNo: this.result.OrderNo,
-            HierarchyNo: this.result.HierarchyNo,
-            IsHidden: this.result.IsHidden,
-            IsExternalLink: this.result.IsExternalLink
+            RefModuleId: this.refFormObj.RefModuleId,
+            Class: this.refFormObj.Class,
+            FormCode: this.refFormObj.FormCode,
+            Title: this.refFormObj.Title,
+            Path: this.refFormObj.Path,
+            Icon: this.refFormObj.Icon,
+            OrderNo: this.refFormObj.OrderNo,
+            HierarchyNo: this.refFormObj.HierarchyNo,
+            IsHidden: this.refFormObj.IsHidden,
+            IsExternalLink: this.refFormObj.IsExternalLink
           });
           this.RefForm.controls.FormCode.disable();
           this.setLookup();
@@ -109,8 +108,8 @@ export class RefFormDetailComponent implements OnInit {
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
 
-    if(this.result!=null){
-      this.inputLookupParentObj.jsonSelect = {Title: this.result.ParentTitle}
+    if(this.resultRefForm!=null){
+      this.inputLookupParentObj.jsonSelect = {Title: this.resultRefForm.ParentTitle}
     }
   }
 

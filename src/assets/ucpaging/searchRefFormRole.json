@@ -1,0 +1,66 @@
+{
+    "title": "Ref Form Role",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "RR.ROLE_CODE",
+            "id": "RoleCodeId",
+            "value": "",
+            "label": "Role Code",
+            "placeholder": "RoleCode"
+        },
+        {
+            "type": "textbox",
+            "name": "RR.ROLE_NAME",
+            "id": "RoleNameId",
+            "value": "",
+            "label": "Role Name",
+            "placeholder": "RoleName"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT RR.ROLE_CODE AS RoleCode, RR.ROLE_NAME AS RoleName, AF.AUTH_FORM_ID AS AuthFormId, AF.REF_FORM_ID AS RefFormId",
+        "from": "FROM DBO.AUTH_FORM AF WITH(NOLOCK) JOIN DBO.REF_FORM RF WITH(NOLOCK) ON AF.REF_FORM_ID = RF.REF_FORM_ID JOIN DBO.REF_ROLE RR WITH(NOLOCK) ON AF.REF_ROLE_ID = RR.REF_ROLE_ID"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Role Code",
+            "name": "RR.ROLE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Role Name",
+            "name": "RR.ROLE_NAME"
+        },
+        {
+          "type": "label",
+          "position": "center",
+          "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "RoleCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "RoleName"
+        },
+        {
+          "type": "action",
+          "position": "center",
+          "action": [
+            {
+                "type": "delete",
+                "property": "AuthFormId"
+            }
+          ]
+        }
+    ]
+}
