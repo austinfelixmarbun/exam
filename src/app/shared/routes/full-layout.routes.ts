@@ -102,9 +102,5 @@ export const Full_ROUTES: Routes = [
   {
     path: 'Survey',
     loadChildren: './survey/survey.module#SurveyModule'
-  },
-  {
-    path: 'RefForm',
-    loadChildren: './ref-form/ref-form.module#RefFormModule'
   }
 ];

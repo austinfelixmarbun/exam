@@ -19,7 +19,7 @@ import { ListWorkingHourSchmDObj } from 'app/shared/model/ListWorkingHourSchmDOb
 })
 
 export class WorkingHourDDetailComponent implements OnInit {
-  
+  viewObj: any;
   workingHourSchmHId: any;
   isActive: boolean = true;
   workingHourSchmHObj: WorkingHourSchmHObj;
@@ -118,6 +118,7 @@ export class WorkingHourDDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewObj = "./assets/ucviewgeneric/viewWorkingHourScheme.json";
     this.workingHourSchmHObj = new WorkingHourSchmHObj();
     this.workingHourSchmHObj.WorkingHourSchmHId = this.workingHourSchmHId;
     this.items = this.WorkingHourSchmDForm.get('items') as FormArray;

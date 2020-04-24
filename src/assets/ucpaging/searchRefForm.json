@@ -132,7 +132,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/RefForm/RoleMapping",
+                    "path": "/SystemSetting/RefForm/RoleMapping",
                     "param": [
                         {
                             "type": "RefFormId",
@@ -148,7 +148,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/RefForm/Detail",
+                    "path": "/SystemSetting/RefForm/Detail",
                     "param": [
                         {
                             "type": "RefFormId",

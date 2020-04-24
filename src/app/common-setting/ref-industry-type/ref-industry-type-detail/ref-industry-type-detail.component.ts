@@ -121,7 +121,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       this.httpClient.post(addRefIndustryType, this.refIndustryType).subscribe(
         //SAVE
         (response) => {
-          this.service.typeSave(response['message']);
+          this.service.successMessage(response["Message"]);
           this.router.navigateByUrl('industryType', { skipLocationChange: true }).then(() =>
           this.router.navigate(['/industryType/detail']));
         },
@@ -136,7 +136,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       //SAVE
       this.httpClient.post(editRefIndustryType, this.refIndustryType).subscribe(
         (response) => {
-          this.service.typeSave(response['message']);
+          this.service.successMessage(response["Message"]);
           this.location.back();
           this.spinner.hide();
         },
