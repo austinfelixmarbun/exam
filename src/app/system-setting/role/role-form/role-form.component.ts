@@ -1,9 +1,7 @@
-import { AuthFormObj } from 'app/shared/model/AuthFormObj.Model';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { NgxSpinnerService } from "ngx-spinner";
 import { HttpClient } from "@angular/common/http";
 import { Location, DecimalPipe } from "@angular/common";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -13,6 +11,8 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { AuthFormObj } from "app/shared/model/AuthFormObj.Model";
+import { ListAuthFormObj } from "app/shared/model/ListAuthFormObj.Model";
 
 @Component({
   selector: 'app-role-form',
@@ -20,284 +20,259 @@ import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
   providers: [NGXToastrService, ExcelService, DecimalPipe]
 })
 export class RoleFormComponent implements OnInit {
-  @ViewChild(UCSearchComponent) searchComponent;
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
-  inputObj: any;
-  resultData: any;
-  pageNow: any;
-  totalData: any;
-  pageSize: any;
-  apiUrl: any;
-  deleteUrl: any;
-  show: any;
-  exportData: any;
-  excelData: any;
-  refRoleObj: AuthFormObj = new AuthFormObj();
-  orderByKey: any = null;
-  orderByValue: boolean = true;
-  foundationUrl: string = environment.FoundationR3Url;
-  tempListId: Array<any> = [];
-  refRoleId: any;
-  check: any;
-  tempData: Array<any> = [];
-  listSelectedId: Array<any> = [];
-  listDeletedId: Array<any> = [];
-  checkboxAll = false;
-  
-  arrAddCrit = new Array<CriteriaObj>();
-  form: FormGroup;
-  data = [];
-  RefRoleForm = this.formBuilder.group({
-    RoleCode: ['', [Validators.required, Validators.maxLength(50)]],
-    RoleName: ['', [Validators.required, Validators.maxLength(100)]],
-    IsActive: [true]
-  });
-  constructor(
-    private spinner: NgxSpinnerService,
-    private service: NGXToastrService,
-    private httpClient: HttpClient,
-    private location: Location,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder
-  ) {
-    this.route.queryParams.subscribe(params => {
-      if (params["RefRoleId"] != null) {
-        this.refRoleId = params["RefRoleId"];
-        console.log("RefRoleId", this.refRoleId);
-      }
-    });
+  @ViewChild(UcgridfooterComponent) UCGridFooter;
+  @ViewChild(UCSearchComponent) UCSearchComponent;
 
-    this.form = this.formBuilder.group({
-      data: []
+  inputObj: any;
+  arrCrit: any[];
+  checkboxAll = false;
+  listSelectedId: any;
+  tempListId: any;
+  orderByKey: any;
+  orderByValue: any;
+  pageNow: number;
+  pageSize: number;
+  apiUrl: any;
+  totalData: any;
+  resultData: any;
+  tempData: any;
+  arrAddCrit: any[] = new Array();
+  viewObj: any;
+  Data = [];
+  RefRoleId: any;
+  AuthFormObj: AuthFormObj = new AuthFormObj();
+  listAuthFormObj: ListAuthFormObj;
+  
+  constructor(private http: HttpClient,
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
+    this.route.queryParams.subscribe(params => {
+      this.RefRoleId = params['RefRoleId'];
     });
   }
 
   ngOnInit() {
-    // this.inputObj = new InputSearchObj();
-    // this.inputObj._url = "./assets/search/searchRefForm.json";
-    // this.inputObj.enviromentUrl = environment.foundationUrl;
-    // this.inputObj.apiQryPaging = AdInsConstant.GetRefFormPaging;
-    
-    console.log("masuk");
-    this.initiateForm();
-    // this.show = AdInsConstant.showData.split(",");
-    // this.pageNow = 1;
-    // this.pageSize = this.show[0];
-    // this.apiUrl = this.foundationUrl + AdInsConstant.GetRefFormPaging;
+    this.viewObj = "./assets/ucviewgeneric/viewRefRole.json";
+
+    this.GetListRefFormRoleByRefRoleId();
+
+    this.listSelectedId = new Array();
+    this.tempListId = new Array();
+    this.tempData = new Array();
+    this.arrCrit = new Array();
+
+    this.inputObj = new InputSearchObj();
+    this.inputObj._url = "./assets/search/searchRoleRefForm.json";
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
+    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.addCritInput = new Array();
+
+    this.pageNow = 1;
+    this.pageSize = 10;
+    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+
+    this.pageNow = 1;
+    this.pageSize = 10;
+    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+  }
+
+  searchSort(event: any) {
+    if (this.resultData != null) {
+      if (this.orderByKey == event.target.attributes.name.nodeValue) {
+        this.orderByValue = !this.orderByValue
+      } else {
+        this.orderByValue = true
+      }
+      this.orderByKey = event.target.attributes.name.nodeValue
+      let order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+      this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    }
+  }
+
+  Checked(RefFormId: any, isChecked: any): void {
+    if (isChecked) {
+      this.listSelectedId.push(RefFormId);
+      console.log(this.listSelectedId)
+    } else {
+      const index = this.listSelectedId.indexOf(RefFormId)
+      if (index > -1) { this.listSelectedId.splice(index, 1); }
+    }
+  }
+
+  searchPagination(event: number) {
+    this.pageNow = event;
+    let order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
   }
 
   getResult(event) {
-    this.checkboxAll = false;
-    console.log(event);
-    var getAuthFormUrl: any = this.foundationUrl + AdInsConstant.GetAllAuthFormsByRefRoleId;
-    var arrayPaging: Array<any> = [];
-    this.resultData = event.response.returnObject;
-    this.totalData = event.response.returnObject.count;
-    this.ucgridFooter.pageNow = event.pageNow;
-    this.ucgridFooter.totalData = this.totalData;
-    this.ucgridFooter.resultData = this.resultData;
-    console.log(this.refRoleObj);
-
-    this.httpClient.post(getAuthFormUrl, this.refRoleObj).subscribe(
-      response => {
-        this.listDeletedId = [];
-        this.listSelectedId = [];
-        arrayPaging = event.response.returnObject.data;
-        console.log(arrayPaging);
-        response['returnObject'].forEach(element => {
-          this.listSelectedId.push(element.refFormId);
-          this.listDeletedId.push(element.refFormId);
-        });
-        console.log('Sel', this.listSelectedId);
-        console.log('Del', this.listDeletedId);
-      },
-      error => {
-        console.log(error);
-        this.spinner.hide();
-
-
-
-      }
-    );
+    this.resultData = event.response;
+    this.totalData = event.response.Count;
+    this.UCGridFooter.pageNow = event.pageNow;
+    this.UCGridFooter.totalData = this.totalData;
+    this.UCGridFooter.resultData = this.resultData;
+    this.listSelectedId = [];
   }
 
   onSelect(event) {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
+    this.totalData = event.Count;
     this.searchPagination(this.pageNow);
-  }
-  searchPagination(event: number) {
-    this.pageNow = event;
-
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      };
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
-  }
-
-  initiateForm() {
-    this.spinner.show();
-    /// GET INFO USER AND EMPLOYEE
-    var urlGetRefRole: any = AdInsConstant.GetRefRoleByRefRoleId;
-
-    //var urlGetRefRoleGateway: any = 'http://172.19.10.228:8280/GWFoundation/v1/RefRole/GetRefRole';
-
-    this.refRoleObj = new AuthFormObj();
-    this.refRoleObj.RefRoleId = this.refRoleId;
-    console.log(urlGetRefRole);
-    this.httpClient.post(AdInsConstant.GetRefRoleByRefRoleId, this.refRoleObj).subscribe(
-      response => {
-        this.resultData = response;
-        this.RefRoleForm.patchValue({
-          RoleCode: this.resultData.RoleCode,
-          RoleName: this.resultData.RoleName,
-          IsActive: this.resultData.IsActive
-        });
-
-      },
-      error => {
-        console.log(error);
-      }
-    );
-
-
-
-  }
-
-  searchSort(event: any) {
-    if (this.orderByKey == event.target.attributes.name.nodeValue) {
-      this.orderByValue = !this.orderByValue;
-    } else {
-      this.orderByValue = true;
-    }
-    this.orderByKey = event.target.attributes.name.nodeValue;
-    var order = {
-      key: this.orderByKey,
-      value: this.orderByValue
-    };
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
-  }
-
-  Back(): void {
-    this.location.back();
-  }
-
-  Save(): void {
-    var assignRoleToFormsUrl = this.foundationUrl + AdInsConstant.AssignRoleToForms;
-    this.refRoleObj.RefRoleId = this.refRoleId;
-    this.refRoleObj.ListAddRefFormId = this.listSelectedId;
-    this.refRoleObj.ListDelRefFormId = this.listDeletedId;
-    console.log(this.refRoleObj);
-    this.httpClient.post(assignRoleToFormsUrl, this.refRoleObj).subscribe(
-      response => {
-        this.service.typeSave(response['message']);
-        this.location.back();
-        this.spinner.hide();
-      },
-      error => {
-        console.log(error);
-        this.service.typeErrorCustom(error);
-        this.spinner.hide();
-      }
-    );
-  }
-
-  Checked(refFormId: any, isChecked: any): void {
-    console.log(refFormId);
-    if (isChecked) {
-      this.listSelectedId.push(refFormId);
-    } else {
-      let index = this.listSelectedId.indexOf(refFormId)
-      console.log(index);
-      if (index > -1) { this.listSelectedId.splice(index, 1); }
-    }
-    console.log('Sel', this.listSelectedId);
-    console.log('Del', this.listDeletedId);
   }
 
   SelectAll(condition) {
     this.checkboxAll = condition;
-    console.log(condition);
     if (condition) {
-      for (var i = 0; i < this.resultData.data.length; i++) {
-        if (this.listSelectedId.indexOf(this.resultData.data[i].refFormId) < 0) {
-          this.listSelectedId.push(this.resultData.data[i].refFormId);
+      for (let i = 0; i < this.resultData.Data.length; i++) {
+        if (this.listSelectedId.indexOf(this.resultData.Data[i].RefFormId) < 0) {
+          this.listSelectedId.push(this.resultData.Data[i].RefFormId);
         }
       }
 
     } else {
-      for (var i = 0; i < this.resultData.data.length; i++) {
-        var index = this.listSelectedId.indexOf(this.resultData.data[i].refFormId);
+      for (let i = 0; i < this.resultData.Data.length; i++) {
+        let index = this.listSelectedId.indexOf(this.resultData.Data[i].RefFormId);
         if (index > -1) {
           this.listSelectedId.splice(index, 1);
         }
       }
     }
-    console.log(this.checkboxAll);
-    console.log(this.listSelectedId);
   }
 
-  AddToTemp() {
-    this.checkboxAll = false;
-    console.log(this.resultData);
-    var value = "";
-    for(var i = 0; i < this.listSelectedId.length;i++){
-      this.tempListId.push(this.listSelectedId[i]);
-      
-    }
-    for (var i = 0; i < this.listSelectedId.length; i++) {
-      var object = this.resultData.data.find(x => x.refFormId == this.listSelectedId[i]);
-      this.tempData.push(object);
-    }
-    this.arrAddCrit = new Array<CriteriaObj>();
-    var addCrit = new CriteriaObj();
-    addCrit.DataType = "numeric";
-    addCrit.propName = "refFormId";
-    addCrit.restriction = AdInsConstant.RestrictionNotIn;
-    addCrit.listValue = this.tempListId;
-    this.arrAddCrit.push(addCrit);
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      };
-    }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+  addToTemp() {
+    if (this.listSelectedId.length != 0) {
+      for (var i = 0; i < this.listSelectedId.length; i++) {
+        this.tempListId.push(this.listSelectedId[i]);
+      }
+      for (var i = 0; i < this.listSelectedId.length; i++) {
+        var object = this.resultData.Data.find(x => x.RefFormId == this.listSelectedId[i]);
+        this.tempData.push(object);
+      }
 
-    this.listSelectedId = [];
-    console.log(this.listSelectedId);
-    console.log(this.tempData);
+      this.arrAddCrit = new Array();
+      if (this.arrCrit.length != 0) {
+        for (var i = 0; i < this.arrCrit.length; i++) {
+          this.arrAddCrit.push(this.arrCrit[i]);
+        }
+      }
+
+      var addCrit = new CriteriaObj();
+      addCrit.DataType = "numeric";
+      addCrit.propName = "REF_FORM_ID";
+      addCrit.restriction = AdInsConstant.RestrictionNotIn;
+      addCrit.listValue = this.tempListId;
+      this.arrAddCrit.push(addCrit);
+
+      var order = null;
+      if (this.orderByKey != null) {
+        order = {
+          key: this.orderByKey,
+          value: this.orderByValue
+        };
+      }
+      this.inputObj.addCritInput = this.arrAddCrit;
+      this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+      this.listSelectedId = [];
+    } else {
+      this.toastr.typeErrorCustom("Please select at least one Role");
+    }
   }
 
-  deleteFromTemp(refFormId) {
-    var index = this.tempListId.indexOf(refFormId);
-    if (index > -1) {
-      this.tempListId.splice(index, 1);
-      this.tempData.splice(index, 1);
+  deleteFromTemp(RefFormId: any) {
+    if (confirm('Are you sure to delete this record?')) {
+      this.arrAddCrit = new Array();
+      if (this.arrCrit.length != 0) {
+        for (var i = 0; i < this.arrCrit.length; i++) {
+          this.arrAddCrit.push(this.arrCrit[i]);
+        }
+      }
+
+      var index = this.tempListId.indexOf(RefFormId);
+      if (index > -1) {
+        this.tempListId.splice(index, 1);
+        this.tempData.splice(index, 1);
+      }
+      var addCrit = new CriteriaObj();
+      addCrit.DataType = "numeric";
+      addCrit.propName = "REF_FORM_ID";
+      addCrit.restriction = AdInsConstant.RestrictionNotIn;
+      addCrit.listValue = this.tempListId;
+      if (this.tempListId.length != 0) {
+        this.arrAddCrit.push(addCrit);
+      }
+      var order = null;
+      if (this.orderByKey != null) {
+        order = {
+          key: this.orderByKey,
+          value: this.orderByValue
+        };
+      }
+      this.inputObj.addCritInput = this.arrAddCrit;
+      this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
     }
-    var value = "";
-    var addCrit = new CriteriaObj();
-    addCrit.DataType = "numeric";
-    addCrit.propName = "refFormId";
-    addCrit.restriction = AdInsConstant.RestrictionNotIn;
-    addCrit.listValue = this.tempListId;
-    this.arrAddCrit.push(addCrit);
-    var order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      };
+  }
+
+  SaveListAuthForm() {
+    if (this.tempListId.length == 0) {
+      this.toastr.typeErrorCustom('Please Add At Least One Data');
+      return;
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
-    console.log("selectedID : " + this.listSelectedId)
-    console.log("templateID : " + this.tempListId);
-    console.log(this.tempData);
-    console.log(this.resultData.data);
+
+    this.listAuthFormObj = new ListAuthFormObj();
+    this.listAuthFormObj.ListAuthFormObj = new Array();
+
+
+    for (var i = 0; i < this.tempListId.length; i++) {
+      this.AuthFormObj = new AuthFormObj();
+      this.AuthFormObj.RefRoleId = this.RefRoleId;
+      this.AuthFormObj.RefFormId = this.tempListId[i]
+      this.listAuthFormObj.ListAuthFormObj.push(this.AuthFormObj);
+    }
+
+    this.http.post(AdInsConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
+      (response) => {
+        this.router.navigate(['/SystemSetting/RoleForm'], { queryParams: { "RefRoleId": this.RefRoleId} });
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+
+  GetListRefFormRoleByRefRoleId() {
+    var obj = {
+      RefRoleId: this.RefRoleId
+    }
+
+    this.http.post(AdInsConstant.GetListAuthFormByRefRoleId, obj).subscribe(
+      (response) => {
+        var arrMemberList = new Array();
+
+        for (let index = 0; index < response["ReturnObject"].length; index++) {
+          arrMemberList.push(response["ReturnObject"][index].RefFormId)
+        }
+
+        if (arrMemberList.length != 0) {
+          var addCritListRefFormId = new CriteriaObj();
+          addCritListRefFormId.DataType = "numeric";
+          addCritListRefFormId.propName = "REF_FORM_ID";
+          addCritListRefFormId.restriction = AdInsConstant.RestrictionNotIn;
+          addCritListRefFormId.listValue = arrMemberList;
+          this.arrCrit.push(addCritListRefFormId);
+          this.inputObj.addCritInput.push(addCritListRefFormId);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

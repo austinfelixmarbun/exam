@@ -30,7 +30,7 @@
     "querystring": {
       "select": "SELECT REF_ECONOMIC_SECTOR_ID AS refEconomicSectorId, ECONOMIC_SECTOR_CODE AS economicSectorCode, ECONOMIC_SECTOR_NAME AS economicSectorName, REG_RPT_CODE AS regRptCode",
       "from": "FROM REF_ECONOMIC_SECTOR WITH(NOLOCK)",
-      "where": "IS_ACTIVE = 1"
+      "where": "WHERE IS_ACTIVE = 1"
     },
     "headerList": [
         {

@@ -1,0 +1,13 @@
+<lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/SystemSetting/RefForm/Paging']" translate>
+      Back
+    </button>
+    <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/SystemSetting/RefForm/RoleMapping/Add']"
+    [queryParams]="{RefFormId: this.RefFormId}">
+      <i class="ft-plus-circle"></i> Add
+    </button>
+  </span>
+</div>
+<lib-ucpaging id="memberUcPaging" [searchObj]="inputPagingObj"></lib-ucpaging>

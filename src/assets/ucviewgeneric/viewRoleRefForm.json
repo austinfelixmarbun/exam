@@ -1,0 +1,27 @@
+{
+    "title": "Role Form Mapping",
+    "subsection": [
+      {
+        "subSectionId": "RoleFormId",
+        "subSectionTitle": "Role Form",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Role Code",
+            "property": "RoleCode"
+          },
+          {
+            "type": "text",
+            "label": "Role Name",
+            "property": "RoleName"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT ROLE_CODE AS RoleCode, ROLE_NAME AS RoleName, REF_ROLE_ID AS RefRoleId",
+          "from": "FROM DBO.REF_ROLE WITH(NOLOCK)",
+          "where": "WHERE REF_ROLE_ID = {0}"
+        }
+      }
+    ]
+  }

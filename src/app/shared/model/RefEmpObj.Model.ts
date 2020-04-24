@@ -9,7 +9,7 @@ export class RefEmpObj {
     AreaCode2: any;
     AreaCode3: any;
     AreaCode4: any;
-    City : any;
+    City: any;
     PhnArea1: any;
     Phn1: any;
     PhnExt1: any;
