@@ -21,7 +21,7 @@
         {
             "type": "dropdown",
             "datatype": "text",
-            "name": "MR_UPLOAD_STATUS_CODE",
+            "name": "UPLOAD_STATUS",
             "id": "MrUploadStatusId",
             "value": "",
             "placeholder": "Placeholder",
@@ -36,7 +36,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT UPLOAD_MONITORING_NO AS UploadMonitoringNo, OFFICE_CODE AS OfficeCode, [FILE_NAME] AS [FileName], TOTAL_RECORD AS TotalRecord, TOTAL_RECORD_PROCESSED AS TotalRecordProcessed, TOTAL_RECORD_ERROR AS TotalRecordError, MR_UPLOAD_STATUS_CODE AS MrUploadStatusCode, IS_EXECUTED AS IsExecuted, IS_ALREADY_CREATE_WF AS IsAlreadyCreateWf, [ERROR_MESSAGE] AS ErrorMessage",
+        "select": "SELECT UPLOAD_MONITORING_NO AS UploadMonitoringNo, OFFICE_CODE AS OfficeCode, [FILE_NAME] AS [FileName], TOTAL_RECORD AS TotalRecord, TOTAL_RECORD_PROCESSED AS TotalRecordProcessed, TOTAL_RECORD_ERROR AS TotalRecordError, UPLOAD_STATUS AS UploadStatus, IS_EXECUTED AS IsExecuted, [ERROR_MESSAGE] AS ErrorMessage",
         "from": "FROM dbo.UPLOAD_MONITORING_H WITH(NOLOCK)"
     },
     "headerList": [
