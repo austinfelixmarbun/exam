@@ -57,10 +57,6 @@
         "type": "action",
         "position": "center",
         "action": [
-            {
-                "type": "delete",
-                "property": "NotificationDId"
-            }
         ]
       }
     ]

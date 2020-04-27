@@ -143,10 +143,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type" : "delete", 
-                    "property" : "RefEmpId" 
                 }
             ]
         }
