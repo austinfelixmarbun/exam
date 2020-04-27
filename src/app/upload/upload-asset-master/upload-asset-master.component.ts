@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UcUploadObj } from 'app/shared/model/UcUploadObj.Model';
 import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-upload-asset-master',
@@ -9,28 +10,22 @@ import { environment } from 'environments/environment';
 })
 export class UploadAssetMasterComponent implements OnInit {
   uploadInputObj: UcUploadObj;
+  uploadUrl: any;
 
   constructor() { }
 
   ngOnInit() {
+    this.uploadUrl = AdInsConstant.UploadFile;
     this.uploadInputObj = new UcUploadObj();
-    // this.uploadInputObj.title = "UPLOAD ASSET MASTER";
-    this.uploadInputObj.subsectionId = "uploadId";
+    this.uploadInputObj.title = "UPLOAD ASSET MASTER";
+    this.uploadInputObj.subsectionId = "UcUploadFile";
     this.uploadInputObj.environmentUrl = environment.FoundationR3Url;
     this.uploadInputObj.formatsAllowed = '.txt, .xls, .xlsx, .csv';
     this.uploadInputObj.searchUploadName = 'searchUploadMaster';
-    this.uploadInputObj.pagingJson = 'assets/ucupload/searchUploadMaster.json';
+    this.uploadInputObj.pagingJson = 'assets/search/searchUploadMaster.json';
+    this.uploadInputObj.url = this.uploadUrl;
+    this.uploadInputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL; 
 
-    // searchUploadName: 'searchTestUpload',
-    // pagingJson: "./assets/search/searchTestUpload.json",
-    // this.uploadInputObj.searchUploadName = 'searchUploadMaster';
-    // - environmentUrl  : environment Url, not mandatory, default: 'http://R3App-Server/Foundation'
-    // - apiQryPaging    : Upload Monitoring Paging Url, not mandatory, default: '/UploadMonitoring/GetUploadMonitoringPaging'
-    // - searchUploadName: Your searchUpload.json name without '.json'. ex: 'searchUploadGenericPaging' 
-    // - title           : Title of page and Subsection
-    // - subsectionId    : Id of the subsection
-    // - formatsAllowed  : .txt, .xls, .xlsx, .csv
-    // - url             : Full url of Backend Upload API ex: Environment Url + Url Constant
+    
   }
-
 }

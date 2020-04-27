@@ -407,6 +407,7 @@ export class AdInsConstant {
   public static UploadReview = environment.FoundationR3Url + "/Upload/UploadReview";
   public static UpdateUploadMonitoringHStatActivity = environment.FoundationR3Url + "/Upload/UpdateUploadMonitoringHStatActivity";
   public static CancelUpload = environment.FoundationR3Url + "/Upload/CancelUpload";
+  public static UploadFile = environment.FoundationR3Url + "/Upload/UploadFile";
   
   //UPLOAD MONITORING FOUNDATION
   public static GetUploadMonitoringPaging = "/UploadMonitoring/GetUploadMonitoringPaging";
