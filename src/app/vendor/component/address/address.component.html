@@ -16,8 +16,8 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel">Zip Code</label>
+              <div class="form-group row" *ngIf="inputLookupZipcodeObj!=undefined">
+                <label class="col-md-3 adins-required-label">Zip Code</label>
                 <div class="col-md-3">
                   <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="AddressForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookupZipcode($event)">
@@ -57,23 +57,25 @@
                 </div>
               </div>
             </div>
-            <lib-ucSubsection [id]="'LatLongInfoId'" [title]="'Lat Long Info'" [panel]="'LatLongInformation'">
-            </lib-ucSubsection>
-            <div class="form-body" id="LatLongInformation">
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Latitude</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Latitude">
-                  <show-errors [control]="AddressForm.controls.Latitude" [submit]="enjiForm.submitted">
-                  </show-errors>
+            <div *ngIf="MrVendorClass!='BRANCH'">
+              <lib-ucSubsection [id]="'LatLongInfoId'" [title]="'Lat Long Info'" [panel]="'LatLongInformation'">
+              </lib-ucSubsection>
+              <div class="form-body" id="LatLongInformation">
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Latitude</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="Latitude">
+                    <show-errors [control]="AddressForm.controls.Latitude" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Longitude</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Longitude">
-                  <show-errors [control]="AddressForm.controls.Longitude" [submit]="enjiForm.submitted">
-                  </show-errors>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Longitude</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="Longitude">
+                    <show-errors [control]="AddressForm.controls.Longitude" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
                 </div>
               </div>
             </div>

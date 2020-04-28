@@ -14,6 +14,7 @@ import { Console } from '@angular/core/src/console';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class OfficeAddComponent implements OnInit {
   // @ViewChild(UcAddressComponent) ucAddr;
   // @ViewChild(UcContactInfoComponent) ucContact;
   // @ViewChild('ParentId') test: ElementRef;
+  inputFieldAddr : InputFieldObj = new InputFieldObj();
   pageType: string = "add";
   mrKonvenSyariah = 'KON';
   isDisabledState: boolean = false;
@@ -280,6 +282,7 @@ export class OfficeAddComponent implements OnInit {
       // console.log(this.centerGrpObj.RefOfficeId); 
       this.httpClient.post(AdInsConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
         (response) => {
+          console.log(response);
           this.resultData = response;
           this.InputLookupObj.nameSelect = this.resultData["ParentOfficeCode"];
 
@@ -300,7 +303,7 @@ export class OfficeAddComponent implements OnInit {
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
           })
-          this.addressObj.Addr = this.resultData.Addr;
+          this.addressObj.Addr = this.resultData.OfficeAddr;
           this.addressObj.AreaCode4 = this.resultData.AreaCode4;
           this.addressObj.AreaCode3 = this.resultData.AreaCode3;
           this.addressObj.AreaCode2 = this.resultData.AreaCode2;
@@ -317,7 +320,9 @@ export class OfficeAddComponent implements OnInit {
           this.addressObj.PhnExt3 = this.resultData.PhnExt3
           this.addressObj.FaxArea = this.resultData.FaxArea
           this.addressObj.Fax = this.resultData.Fax
-
+          this.inputFieldAddr.inputLookupObj = new InputLookupObj();
+          this.inputFieldAddr.inputLookupObj.jsonSelect = {Zipcode: this.resultData.Zipcode};
+          this.inputFieldAddr.inputLookupObj.nameSelect = this.resultData.Zipcode;
 
           this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
             (response) => {
@@ -404,11 +409,11 @@ export class OfficeAddComponent implements OnInit {
     this.centerGrpObj = new OfficeObj();
     //this.officeObj = this.OfficeForm.value;
     this.officeObj.RowVersion = "";
+    console.log(this.OfficeForm);
     console.log(this.OfficeForm.value);
-    console.log(this.officeObj);
 
     // this.officeObj.RefOfficeId = this.OfficeForm.value.RefOfficeId;
-    this.officeObj.OfficeCode = this.OfficeForm.value.OfficeCode;
+    this.officeObj.OfficeCode = this.resultData.OfficeCode;
     this.officeObj.OfficeShortName = this.OfficeForm.value.OfficeShortName;
     this.officeObj.OfficeName = this.OfficeForm.value.OfficeName;
     this.officeObj.MrOfficeClassCode = this.OfficeForm.value.MrOfficeClassCode;
@@ -418,7 +423,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.HolidaySchmHId = this.OfficeForm.value.HolidayScheme;
     this.officeObj.WorkingHourSchmHId = this.OfficeForm.value.WorkingHourScheme;
     this.officeObj.MrKonvenSyariahCode = this.OfficeForm.value.KonSya;
-    this.officeObj.MrOfficeTypeCode = this.OfficeForm.value.OfficeType;
+    this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode;
     this.officeObj.IsOfficeClose = this.OfficeForm.value.OfficeClose;
 
 
@@ -457,6 +462,8 @@ export class OfficeAddComponent implements OnInit {
 
     this.officeObj.CntctPersonName = "asd"
     this.officeObj.CntctPersonJobTitle = "asd"
+
+    console.log(this.officeObj);
 
     if (this.pageType == "add") {
       if (this.officeObj.MrOfficeTypeCode == "CG") {

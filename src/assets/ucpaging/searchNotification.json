@@ -1,0 +1,118 @@
+{
+    "title": "Notification",
+    "exportExcel": false,
+    "component": [
+      {
+        "type": "dropdown",
+        "name": "NH.MR_NOTIFICATION_TYPE_CODE", 
+        "id": "NotificationTypeCode",
+        "value": "",
+        "placeholder": "Placeholder",
+        "datatype": "text",
+        "isFromURL": true,
+        "isSelectOne": false,
+        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+        "label": "Notification Type",
+        "criteriaPropName" : "RefMasterTypeCode",
+        "criteriaPropValue" : "NOTIFICATION_TYPE",
+        "items": [],
+        "itemsUrl": []
+      },
+      {
+        "type": "textbox",
+        "name": "NH.REQ_BY",
+        "id": "ReqBy",
+        "value": "",
+        "label": "Request By",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "NH.TITLE",
+        "id": "Title",
+        "value": "",
+        "label": "Title",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "dropdown",
+        "name": "NH.STATUS", 
+        "id": "Status",
+        "value": "",
+        "placeholder": "Placeholder",
+        "datatype": "text",
+        "isFromURL": true,
+        "isSelectOne": false,
+        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefStatus/GetListKeyValueActiveGrpCodeByCode",
+        "label": "Status",
+        "criteriaPropName" : "StatusGrpCode",
+        "criteriaPropValue" : "NOTIFICATION_STAT",
+        "items": [],
+        "itemsUrl": []
+      }
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Notification Type",
+        "name": "NotificationTypeDescr"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Title",
+        "name": "Title"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Short Description",
+        "name": "ShortDesc"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Request By",
+        "name": "ReqBy"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Status",
+        "name": "StatusDescr"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT RM.DESCR AS NotificationTypeDescr,NH.TITLE AS Title, NH.SHORT_DESC AS ShortDesc, NH.REQ_BY AS ReqBy, RS.DESCR AS StatusDescr, NH.MR_NOTIFICATION_TYPE_CODE, NH.NOTIFICATION_H_ID as NotificationHId",
+      "from": "FROM dbo.NOTIFICATION_H NH WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER RM WITH(NOLOCK) ON NH.MR_NOTIFICATION_TYPE_CODE = RM.MASTER_CODE AND RM.REF_MASTER_TYPE_CODE = 'NOTIFICATION_TYPE' LEFT JOIN dbo.REF_STATUS RS WITH(NOLOCK) ON RS.REF_STATUS_CODE = NH.[STATUS] AND RS.STATUS_GRP_CODE = 'NOTIFICATION_STAT'"
+    },
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "center",
+        "property": "NotificationTypeDescr"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "Title"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ShortDesc"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ReqBy"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "StatusDescr"
+      }
+    ]
+  }
+  

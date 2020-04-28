@@ -9,7 +9,7 @@ import { AdInsConstant } from "app/shared/AdInstConstant";
 export class VendorService {
     constructor(private http: HttpClient) { }
 
-    GetListVendorBankAccIdByVendorId(Obj: any): Observable<Object> {
+    GetListVendorBankAccByVendorId(Obj: any): Observable<Object> {
         return this.http.post(AdInsConstant.GetListVendorBankAccByVendorId, Obj);
     }
 
@@ -37,12 +37,15 @@ export class VendorService {
         return this.http.post(AdInsConstant.GetVendorHOAndVendorAddr, Obj);
     }
 
-    EditVendor(Obj : any) :  Observable<Object> {
-        return this.http.post(AdInsConstant.EditVendorHO, Obj);
+    EditVendorHolding(Obj : any) :  Observable<Object> {
+        return this.http.post(AdInsConstant.EditVendorHolding, Obj);
     }
     
-    AddVendor(Obj : any) :  Observable<Object> {
-        return this.http.post(AdInsConstant.AddVendorHO, Obj);
+    AddVendorHolding(Obj : any) :  Observable<Object> {
+        return this.http.post(AdInsConstant.AddVendorHolding, Obj);
     }
     
+    GetListVendorBankAccByVendorEmpId(Obj: any): Observable<Object> {
+        return this.http.post(AdInsConstant.GetListVendorBankAccByVendorEmpId, Obj);
+    }
 }

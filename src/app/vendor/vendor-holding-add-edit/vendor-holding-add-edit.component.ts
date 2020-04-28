@@ -79,13 +79,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    this.inputLookupZipcodeObj = new InputLookupObj();
-    this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-
     var refMasterCategoryObj = {
       RefMasterTypeCode: "VENDOR_CATEGORY",
       ReserveField1: "HOLDING"
@@ -142,6 +135,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.VendorForm.controls.VendorCode.disable();
       this.vendorService.GetVendorHOAndVendorAddrByVendorId(vendorObj).subscribe(
         (response) => {
+          this.setLookup();
           this.result = response;
           this.VendorForm.patchValue({
             MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
@@ -175,14 +169,15 @@ export class VendorHoldingAddEditComponent implements OnInit {
             Zipcode: this.result.VendorAddrObj.Zipcode,
             RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion
           });
-          this.inputLookupZipcodeObj.nameSelect = this.result.VendorAddrObj.Zipcode;
-          this.inputLookupZipcodeObj.idSelect = this.result.VendorAddrObj.Zipcode;
+          this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.result["VendorAddrObj"].Zipcode};
           this.checkType();
         },
         (error) => {
           console.log(error);
         }
       );
+    }else{
+      this.setLookup();
     }
 
   }
@@ -255,7 +250,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.vendorObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
       this.vendorObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
-      this.vendorService.EditVendor(this.vendorObj).subscribe(
+      this.vendorService.EditVendorHolding(this.vendorObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigateByUrl('/Vendor/Holding/Paging');
@@ -269,7 +264,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.vendorObj.VendorAddrObj = vendorAddrObj;
       this.vendorObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
-      this.vendorService.AddVendor(this.vendorObj).subscribe(
+      this.vendorService.AddVendorHolding(this.vendorObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Vendor/Holding/Registration'],{queryParams :{"VendorId" : response['VendorObj'].VendorId}});
@@ -278,6 +273,15 @@ export class VendorHoldingAddEditComponent implements OnInit {
           console.log(error);
         });
     }
+  }
+
+  setLookup(){
+    this.inputLookupZipcodeObj = new InputLookupObj();
+    this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
   }
 
   checkType() {

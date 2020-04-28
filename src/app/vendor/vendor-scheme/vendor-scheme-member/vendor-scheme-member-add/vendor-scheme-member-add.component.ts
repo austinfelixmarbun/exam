@@ -177,7 +177,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       }
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
-      addCrit.propName = "vENDOR_ID";
+      addCrit.propName = "VENDOR_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.tempListId;
       this.arrAddCrit.push(addCrit);
