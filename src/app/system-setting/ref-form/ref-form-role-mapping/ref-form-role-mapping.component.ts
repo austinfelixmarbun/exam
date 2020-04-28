@@ -37,7 +37,7 @@ export class RefFormRoleMappingComponent implements OnInit {
   arrAddCrit: any[] = new Array();
   viewObj: any;
   Data = [];
-  RefFormId: any;
+  RefFormId: number;
   AuthFormObj: AuthFormObj;
   listAuthFormObj: ListAuthFormObj;
 
@@ -246,6 +246,7 @@ export class RefFormRoleMappingComponent implements OnInit {
 
     this.http.post(AdInsConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
       (response) => {
+        this.toastr.successMessage(response["message"]);
         this.router.navigate(['/SystemSetting/RefForm/RoleMapping'], { queryParams: { "RefFormId": this.RefFormId} });
       },
       (error) => {

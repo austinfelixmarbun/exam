@@ -39,8 +39,9 @@ export class RoleFormComponent implements OnInit {
   arrAddCrit: any[] = new Array();
   viewObj: any;
   Data = [];
-  RefRoleId: any;
-  AuthFormObj: AuthFormObj = new AuthFormObj();
+  member: AuthFormObj[];
+  RefRoleId: number;
+  AuthFormObj: AuthFormObj;
   listAuthFormObj: ListAuthFormObj;
   
   constructor(private http: HttpClient,
@@ -240,6 +241,7 @@ export class RoleFormComponent implements OnInit {
 
     this.http.post(AdInsConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
       (response) => {
+        this.toastr.successMessage(response["message"]);
         this.router.navigate(['/SystemSetting/RoleForm'], { queryParams: { "RefRoleId": this.RefRoleId} });
       },
       (error) => {
@@ -252,15 +254,17 @@ export class RoleFormComponent implements OnInit {
       RefRoleId: this.RefRoleId
     }
 
-    this.http.post(AdInsConstant.GetListAuthFormByRefRoleId, obj).subscribe(
+    this.http.post<Array<AuthFormObj>>(AdInsConstant.GetListAuthFormByRefRoleId, obj).subscribe(
       (response) => {
+        this.member = response["ReturnObject"];
+
         var arrMemberList = new Array();
 
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-          arrMemberList.push(response["ReturnObject"][index].RefFormId)
+        for (let index = 0; index < this.member.length; index++) {
+          arrMemberList.push(this.member[index].RefFormId)
         }
 
-        if (arrMemberList.length != 0) {
+        if (this.member.length != 0) {
           var addCritListRefFormId = new CriteriaObj();
           addCritListRefFormId.DataType = "numeric";
           addCritListRefFormId.propName = "REF_FORM_ID";
