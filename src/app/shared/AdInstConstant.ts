@@ -711,7 +711,6 @@ export class AdInsConstant {
   public static GetCustAddr = environment.FoundationR3Url + "/CustAddr/GetCustAddrByCustAddrId";
   public static GetListCustAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustId";
   public static GetListCustAddrByCustIdForCustomerPersonalView =  environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
-  public static GetCustAddrLegalAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetCustAddrLegalAddrByCustId"
   public static GetCustAddrByMrCustAddrType = environment.FoundationR3Url +"/CustAddr/GetCustAddrByMrCustAddrType"
   public static DeleteCustAddr = environment.FoundationR3Url +"/CustAddr/DeleteCustAddr"
 

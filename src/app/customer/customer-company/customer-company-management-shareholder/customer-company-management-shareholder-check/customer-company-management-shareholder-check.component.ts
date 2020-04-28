@@ -29,8 +29,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
     this.getCustCompanyIdUrl = AdInsConstant.GetCustCompanyByCustId;
     this.getListCompanyManagementShareholderByCustCompanyId = AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
     this.DeleteCustCompanyMgmntShrholderUrl = AdInsConstant.DeleteCustCompanyMgmntShrholder;
-    this.route.queryParams.subscribe(params => {
-
+    this.route.queryParams.subscribe(params => { 
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }

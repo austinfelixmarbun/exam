@@ -452,7 +452,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.custAddrObj.CustId = this.tempCustId;
     console.log(this.tempCustId);
     this.custAddrObj.MrCustAddrTypeCode = RefMasterConstant.LegalAddr;
-    this.http.post(AdInsConstant.GetCustAddrLegalAddrByCustId, this.custAddrObj).subscribe(
+    this.http.post(AdInsConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
       (response) => {
         this.tempCustAddress = response;
         this.UcAddressObj.AreaCode1 = this.tempCustAddress.AreaCode1;
