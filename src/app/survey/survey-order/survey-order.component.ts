@@ -29,7 +29,7 @@ export class SurveyOrderComponent implements OnInit {
 
   event(ev){
     var SrvyOrderObj = {
-      SrvyOrderId: ev.SrvyOrderId
+      SrvyOrderId: ev.RowObj.SrvyOrderId
     }
     this.http.post(AdInsConstant.SendSrvyOrder, SrvyOrderObj).subscribe(
       response => {
@@ -39,6 +39,5 @@ export class SurveyOrderComponent implements OnInit {
         console.log(error);
       }
     );
-    console.log(ev);
   }
 }
