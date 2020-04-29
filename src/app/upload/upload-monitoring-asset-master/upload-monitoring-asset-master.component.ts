@@ -33,43 +33,8 @@ export class UploadMonitoringAssetMasterComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/search/searchUploadMonitoringAssetMaster.json";
-    // this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetType;
-
-    // this.inputObj = new InputSearchObj();
-    // this.inputObj._url = "./assets/search/searchUploadMonitoringAssetMaster.json";
-    // this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    // this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    // this.inputObj.addCritInput = new Array();
   }
-
-  // getResult(event) {
-  //   console.log(this.resultData);
-  //   this.resultData = event.response.Data;
-  //   this.totalData = event.response.Count;
-  //   this.ucgridFooter.pageNow = event.pageNow;
-  //   this.ucgridFooter.totalData = this.totalData;
-  //   this.ucgridFooter.resultData = this.resultData;
-  // }
   download(ev){
     console.log('masuk download');
   }
-  // searchPagination(event: number) {
-  //   this.pageNow = event;
-  //   let order = null;
-  //   if (this.orderByKey != null) {
-  //     order = {
-  //       key: this.orderByKey,
-  //       value: this.orderByValue
-  //     }
-  //   }
-  //   this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-  // }
-  // onSelect(event) {
-  //   this.pageNow = event.pageNow;
-  //   this.pageSize = event.pageSize;
-  //   this.searchPagination(this.pageNow);
-  //   this.totalData = event.Count;
-  // }
-
-  
 }
