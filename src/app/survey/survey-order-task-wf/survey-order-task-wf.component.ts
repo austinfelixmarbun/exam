@@ -22,7 +22,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     SrvyFormSchmId: ['', [Validators.required]],
     SurveyorCode: ['', [Validators.required]]
   });
-
+  arrValue = [];
   viewObj: string;
   modal: any;
   closeResult: any;
@@ -35,9 +35,9 @@ export class SurveyOrderTaskWfComponent implements OnInit {
   SrvyOrderObj: any;
   SrvyTaskObj: any;
   VendorObj: any;
-  TrxNo : string;
-  TrxType : string;
-
+  TrxNo: string;
+  TrxType: string;
+  isDataAlreadyLoaded: boolean = false;
   constructor(private fb: FormBuilder, private modalService: NgbModal,
     private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -58,14 +58,17 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     this.generateSurveyTaskList();
     this.generateListSrvyObject();
 
+
     var SrvyObj = {
       TrxRefNo: this.TrxNo,
-      MrSrvySourceCode : this.TrxType
+      MrSrvySourceCode: this.TrxType
     }
     this.http.post(AdInsConstant.GetSrvyOrderByTrxRefNoAndSrvySourceCode, SrvyObj).subscribe(
       response => {
         this.SrvyOrderObj = response;
         this.SrvyOrderId = this.SrvyOrderObj["SrvyOrderId"];
+        this.arrValue.push(this.SrvyOrderId);
+        this.isDataAlreadyLoaded = true;
         var VendorObj = {
           VendorId: this.SrvyOrderObj.VendorId
         };
@@ -82,23 +85,30 @@ export class SurveyOrderTaskWfComponent implements OnInit {
           }
         );
 
+        var GetListSrvey = {
+          SrvyOrderId: this.SrvyOrderId
+        }
+        
+        this.http.post(AdInsConstant.GetListAllSrvyFormSchm, GetListSrvey).subscribe(
+          response => {
+            this.FormSchmList = response["ReturnObject"];
+            this.SurveyTaskForm.patchValue({
+              SrvyFormSchmId: this.FormSchmList[0].SrvyFormSchmId
+            });
+          },
+          error => {
+            console.log(error);
+          }
+        );
+
       },
       error => {
         console.log(error);
       }
     );
 
-    this.http.post(AdInsConstant.GetListAllSrvyFormSchm, SrvyObj).subscribe(
-      response => {
-        this.FormSchmList = response["ReturnObject"];
-        this.SurveyTaskForm.patchValue({
-          SrvyFormSchmId: this.FormSchmList[0].SrvyFormSchmId
-        });
-      },
-      error => {
-        console.log(error);
-      }
-    );
+
+
   }
 
   SendSrvyOrder() {
