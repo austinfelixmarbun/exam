@@ -4,6 +4,7 @@ import { SurveyOrderComponent } from './survey-order/survey-order.component';
 import { SurveyOrderTaskComponent } from './survey-order-task/survey-order-task.component';
 import { SurveyOrderViewComponent } from './survey-order-view/survey-order-view.component';
 import { SurveyTaskViewComponent } from './survey-task-view/survey-task-view.component';
+import { SurveyOrderTaskWfComponent } from './survey-order-task-wf/survey-order-task-wf.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,13 @@ const routes: Routes = [
       {
         path: 'Task',
         component: SurveyOrderTaskComponent,
+        data: {
+          title: 'Survey Order Task'
+        },
+      },
+      {
+        path: 'TaskWF',
+        component: SurveyOrderTaskWfComponent,
         data: {
           title: 'Survey Order Task'
         },
