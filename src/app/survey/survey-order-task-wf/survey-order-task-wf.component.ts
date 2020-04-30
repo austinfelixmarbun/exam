@@ -55,10 +55,6 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     this.viewObj = "./assets/ucviewgeneric/viewSurveyOrderTask.json";
     this.SrvyTaskObj = new SrvyTaskObj();
 
-    this.generateSurveyTaskList();
-    this.generateListSrvyObject();
-
-
     var SrvyObj = {
       TrxRefNo: this.TrxNo,
       MrSrvySourceCode: this.TrxType
@@ -72,6 +68,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
         var VendorObj = {
           VendorId: this.SrvyOrderObj.VendorId
         };
+        console.log("WOIII");
         this.http.post(AdInsConstant.GetVendorByVendorId, VendorObj).subscribe(
           response => {
             this.VendorObj = response;
@@ -88,7 +85,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
         var GetListSrvey = {
           SrvyOrderId: this.SrvyOrderId
         }
-        
+
         this.http.post(AdInsConstant.GetListAllSrvyFormSchm, GetListSrvey).subscribe(
           response => {
             this.FormSchmList = response["ReturnObject"];
@@ -100,6 +97,9 @@ export class SurveyOrderTaskWfComponent implements OnInit {
             console.log(error);
           }
         );
+
+        this.generateSurveyTaskList();
+        this.generateListSrvyObject();
 
       },
       error => {
