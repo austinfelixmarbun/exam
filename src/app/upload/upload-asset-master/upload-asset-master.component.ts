@@ -24,7 +24,7 @@ export class UploadAssetMasterComponent implements OnInit {
     this.uploadInputObj.searchUploadName = 'searchUploadMaster';
     this.uploadInputObj.pagingJson = 'assets/search/searchUploadMaster.json';
     this.uploadInputObj.url = this.uploadUrl;
-    this.uploadInputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL; 
+    this.uploadInputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
 
     
   }

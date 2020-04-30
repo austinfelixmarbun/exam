@@ -35,7 +35,7 @@
     "@adins/ucpaging": "^2.0.15",
     "@adins/ucsearch": "^2.0.16",
     "@adins/ucthingstodo": "^1.0.1",
-    "@adins/ucupload": "^1.3.2",
+    "@adins/ucupload": "^1.6.4",
     "@adins/ucviewgeneric": "^2.0.8",
     "@agm/core": "1.0.0-beta.5",
     "@angular/animations": "^7.2.16",

@@ -20,6 +20,7 @@ import { ReviewUploadAssetMasterDetailComponent } from './review-upload-asset-ma
 import { UcpagingModule } from "@adins/ucpaging";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcuploadModule } from '@adins/ucupload';
+import { UploadNegativeAssetComponent } from './upload-negative-asset/upload-negative-asset.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -44,7 +45,8 @@ import { UcuploadModule } from '@adins/ucupload';
         UploadMonitoringAssetMasterComponent,
         UploadAssetMasterComponent,
         ReviewUploadAssetMasterPagingComponent,
-        ReviewUploadAssetMasterDetailComponent
+        ReviewUploadAssetMasterDetailComponent,
+        UploadNegativeAssetComponent
     ],
 
 })
