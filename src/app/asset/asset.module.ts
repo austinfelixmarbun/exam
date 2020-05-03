@@ -36,6 +36,8 @@ import { AssetMasterAddEditChildComponent } from "./asset-master/asset-master-ad
 import { AddAssetSchemeComponent } from './asset-scheme/add-asset-scheme/add-asset-scheme.component';
 import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/asset-scheme-member.component';
 import { UploadAssetMasterComponent } from './asset-master/upload-asset-master/upload-asset-master.component';
+import { ReviewUploadAssetMasterDetailComponent } from "./asset-master/review-upload-asset-master/review-upload-asset-master-detail/review-upload-asset-master-detail.component";
+import { ReviewUploadAssetMasterPagingComponent } from "./asset-master/review-upload-asset-master/review-upload-asset-master-paging/review-upload-asset-master-paging.component";
 
 @NgModule({
   imports: [
@@ -76,7 +78,9 @@ import { UploadAssetMasterComponent } from './asset-master/upload-asset-master/u
     AssetMasterAddEditChildComponent,
     AddAssetSchemeComponent,
     AssetSchemeMemberComponent,
-    UploadAssetMasterComponent
+    UploadAssetMasterComponent,
+    ReviewUploadAssetMasterDetailComponent,
+    ReviewUploadAssetMasterPagingComponent
   ]
 })
 export class AssetModule { }

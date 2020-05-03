@@ -22,6 +22,8 @@ import { AssetMasterAddEditParentComponent } from './asset-master/asset-master-a
 import { AddAssetSchemeComponent } from './asset-scheme/add-asset-scheme/add-asset-scheme.component';
 import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/asset-scheme-member.component';
 import { UploadAssetMasterComponent } from './asset-master/upload-asset-master/upload-asset-master.component';
+import { ReviewUploadAssetMasterPagingComponent } from './asset-master/review-upload-asset-master/review-upload-asset-master-paging/review-upload-asset-master-paging.component';
+import { ReviewUploadAssetMasterDetailComponent } from './asset-master/review-upload-asset-master/review-upload-asset-master-detail/review-upload-asset-master-detail.component';
 
 const routes: Routes = [
   {
@@ -191,6 +193,20 @@ const routes: Routes = [
       {
         path: 'AssetMaster/Upload',
         component: UploadAssetMasterComponent,
+        data: {
+          title: 'Upload Asset Master'
+        },
+      },
+      {
+        path: 'AssetMaster/ReviewUploadPaging',
+        component: ReviewUploadAssetMasterPagingComponent,
+        data: {
+          title: 'Upload Asset Master'
+        },
+      },
+      {
+        path: 'AssetMaster/ReviewUploadDetail',
+        component: ReviewUploadAssetMasterDetailComponent,
         data: {
           title: 'Upload Asset Master'
         },

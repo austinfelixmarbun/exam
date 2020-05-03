@@ -36,6 +36,7 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
     this.viewUpload = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
   }
   ngOnInit() {
+    console.log('test');
     this.claimTask();
     this.UploadReview = AdInsConstant.UploadReview;
     this.CancelUpload = AdInsConstant.CancelUpload;
@@ -62,7 +63,7 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
     this.http.post(this.UploadReview, uploadObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        this.router.navigate(["/Upload/ReviewUploadAssetMaster/Paging"]);
+        this.router.navigate(["/Asset/AssetMaster/ReviewUploadPaging"]);
       },
       error => {
         console.log(error);

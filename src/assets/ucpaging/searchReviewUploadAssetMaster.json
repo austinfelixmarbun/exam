@@ -144,7 +144,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/Upload/ReviewUploadAssetMaster/Detail",
+          "path": "/Asset/AssetMaster/ReviewUploadDetail",
           "param": [
             {
               "type": "UploadId",

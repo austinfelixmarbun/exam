@@ -44,9 +44,6 @@ export class AdInsConstant {
   // DOWNLOAD
   public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';
 
-  // UPLOAD
-  public static UploadFile = environment.FoundationR3Url + "/Upload/UploadFile";
-
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
   public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
