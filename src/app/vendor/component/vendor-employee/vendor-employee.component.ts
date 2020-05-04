@@ -307,6 +307,7 @@ export class VendorEmployeeComponent implements OnInit {
       this.http.post(AdInsConstant.EditVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
+          this.wizard.goToNextStep();
           this.getData();
         },
         (error) => {
