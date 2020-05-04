@@ -30,15 +30,13 @@ export class VendorBranchEmployeePagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorBranchEmployee.json";
-    // this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetDocList;
+    this.inputPagingObj.addCritInput = new Array();
 
-    this.arrCrit = new Array();
     var critObj = new CriteriaObj();
-    critObj.restriction = AdInsConstant.RestrictionLike;
     critObj.propName = 'VENDOR_ID';
+    critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = this.VendorId;
-    this.arrCrit.push(critObj);
-    this.inputPagingObj.addCritInput = this.arrCrit;
+    this.inputPagingObj.addCritInput.push(critObj);
   }
 
 }

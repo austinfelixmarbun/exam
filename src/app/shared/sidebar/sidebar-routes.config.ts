@@ -11,7 +11,7 @@ export const ROUTES: RouteInfo[] = [
       { path: '/Office/OfficeArea', title: 'Office Area', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Organization/BusinessUnit', title: 'Business unit', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Organization/JobTitle', title: 'Job Title', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Employee/paging', title: 'Employee', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Employee/Paging', title: 'Employee', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Employee/Leave/Paging', title: 'Employee Leave', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/SystemSetting/Role', title: 'Role', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
 
@@ -31,7 +31,10 @@ export const ROUTES: RouteInfo[] = [
       { path: '/CommonSetting/IndustryType/paging', title: 'Industry Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/CommonSetting/EconomicSector/paging', title: 'Economic Sector', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/CommonSetting/Currency/paging', title: 'Currency', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/CommonSetting/Profession/paging', title: 'Profession', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/CommonSetting/Profession/paging', title: 'Profession', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/SystemSetting/Notification', title: 'Notification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/SystemSetting/NotificationApproval', title: 'Notification Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/SystemSetting/RefForm/Paging', title: 'Ref Form', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
     ]
   },
   {
@@ -42,8 +45,8 @@ export const ROUTES: RouteInfo[] = [
       { path: '/Asset/NegativeAsset/Paging', title: 'Negative Asset', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Asset/AssetMaster/Paging', title: 'Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Asset/Scheme/Paging', title: 'Asset Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Asset/Type/Paging', title: 'Asset Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
-
+      { path: '/Asset/Type/Paging', title: 'Asset Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Asset/AssetMaster/Upload', title: 'Upload Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
     ]
   },
   {

@@ -65,16 +65,16 @@ export class ApprovalScreenComponent implements OnInit {
     console.log(this.FormApv.value);
   }
 
-  onApprovalSubmited(event)
-  {
-    console.log("AAAAA");
-    console.log(event)
-  }
+    onApprovalSubmited(event)
+    {
+      console.log("AAAAA");
+      console.log(event)
+    }
 
-  onAvailableNextTask(event)
-  {
-    console.log("BBBBB");
-    console.log(event)
-  }
+    onAvailableNextTask(event)
+    {
+      console.log("BBBBB");
+      console.log(event)
+    }
 }
 

@@ -1,0 +1,27 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "WorkingHourSchemeInfoId",
+        "subSectionTitle": "Working Hour Scheme Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Working Hour Scheme Code",
+            "property": "WorkingHourSchmCode"
+          },
+          {
+            "type": "text",
+            "label": "Working Hour Scheme Name",
+            "property": "WorkingHourSchmName"
+          }
+        ],
+        "querystring": {
+            "select": "SELECT WORKING_HOUR_SCHM_CODE AS WorkingHourSchmCode, WORKING_HOUR_SCHM_NAME AS WorkingHourSchmName, WORKING_HOUR_SCHM_H_ID AS WorkingHourSchmHId",
+            "from": "FROM WORKING_HOUR_SCHM_H WITH(NOLOCK)", 
+            "where": "WHERE WORKING_HOUR_SCHM_H_ID = {0}" 
+        }
+      }
+    ]
+  }

@@ -1,0 +1,24 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> Ref Form </h4>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="ucSearch-Button-Right">
+          <span class="mr-1">
+            <button type="button" class="addButton" [routerLink]="['/SystemSetting/RefForm/Detail']" translate>
+              <i class="ft-plus-circle"></i> Add
+            </button>
+          </span>
+        </div>
+        <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
+      </div>
+    </div>
+  </div>
+</div>

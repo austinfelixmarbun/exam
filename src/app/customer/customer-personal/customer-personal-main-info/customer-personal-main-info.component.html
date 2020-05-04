@@ -61,7 +61,8 @@
                 </div>
                 <label class="col-md-2 adins-required-label" translate>Birth Date</label>
                 <div class="col-md-4">
-                  <input type="date" class="form-control adInsInput" formControlName="BirthDt"
+                  <input type="date" class="form-control adInsInput" formControlName="BirthDt" 
+                  [max]="businessDtMin | date: 'yyyy-MM-dd'"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthDt.invalid}">
                   <show-errors [control]="CustomerPersonalForm.controls.BirthDt" [submit]="enjiForm.submitted">
                   </show-errors>
@@ -86,7 +87,8 @@
               <div class="form-group row">
                 <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : tempKTPCheck==false}" translate>ID Expired Date</label>
                 <div class="col-md-4">
-                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
+                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt" 
+                  [min]="businessDtMax | date: 'yyyy-MM-dd'"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdExpiredDt.invalid } " >
                   <show-errors [control]="CustomerPersonalForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
                   </show-errors>
@@ -111,7 +113,7 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
                     (click)="checkState()" />
                 </div>         
-                <label class="col-md-2 adInsLabel" translate>VIP Notes</label>
+                <label class="col-md-2 adInsLabel" translate [ngClass]="{'adins-required-label' : VipNotesRequired==true}">VIP Notes</label>
                 <div class="col-md-4">
                     <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"  
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.VipNotes.invalid }"></textarea>
@@ -126,7 +128,7 @@
                <i class="ft-x"></i> Cancel
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="fa fa-check-square-o"></i> Next
+                <i class="fa fa-check"></i> Next
               </button>
             </div>
           </form>

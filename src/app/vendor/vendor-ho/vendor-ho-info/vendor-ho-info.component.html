@@ -1,4 +1,13 @@
 <app-main-info-view></app-main-info-view>
+<form>
+  <div class="form-actions right">
+    <span class="mr-1">
+        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/HO/Paging']" translate>
+          <i class="fa fa-arrow-circle-left"></i> Back
+        </button>
+    </span>
+  </div>
+</form>
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Main Information">
     <ng-template matTabContent>
@@ -41,7 +50,7 @@
       <div class="card">
         <div class="card-body">
           <div>
-
+            <app-ho-contact-person-info></app-ho-contact-person-info>
           </div>
         </div>
       </div>
@@ -63,7 +72,7 @@
       <div class="card">
         <div class="card-body">
           <div>
-
+            <app-ho-group-info></app-ho-group-info>
           </div>
         </div>
       </div>
@@ -74,7 +83,7 @@
       <div class="card">
         <div class="card-body">
           <div>
-
+            <app-ho-branch-info></app-ho-branch-info>
           </div>
         </div>
       </div>

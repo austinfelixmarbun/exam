@@ -94,7 +94,9 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.http.post(this.getRefMasterWithReserveField, this.addressType).subscribe(
       (response) => {
           this.listAddressType = response['ReturnObject'];
-          //this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
+          console.log("ccc")
+          console.log(this.listAddressType)
+          this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
       });
     
       this.custAddrObj = new CustAddrObj();

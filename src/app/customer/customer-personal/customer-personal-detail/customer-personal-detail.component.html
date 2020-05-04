@@ -85,12 +85,12 @@
             <show-errors [control]="CustomerDetailForm.controls.NoOfResidence" [submit]="enjiForm.submitted">
             </show-errors>
           </div>
-          <label class="col-md-2 adins-required-label" translate>Country</label>
+          <label class="col-md-2 adins-required-label"  translate>Country</label>
           <div class="col-md-4">
             <div *ngIf="flag">
-              {{this.Country.GsValue}}
+              {{this.LocalCountry?.CountryName}}
             </div>
-            <div [hidden]="flag">
+            <div [hidden]="flag" *ngIf="lookUpObj != undefined">
               <lib-uclookupgeneric [lookupInput]="lookUpObj" [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm"
                 [identifier]="'WnaCountryCode'" (lookup)=getLookUp($event)>
               </lib-uclookupgeneric>

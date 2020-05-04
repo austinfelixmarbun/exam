@@ -74,9 +74,9 @@
                   <label class="col-md-2 adInsLabel" translate>Country</label>
                   <div class="col-md-4">
                     <div *ngIf="flag">
-                      {{this.Country.GsValue}}
+                      {{this.LocalCountry?.CountryName}}
                     </div>
-                    <div [hidden]="flag">
+                    <div [hidden]="flag" *ngIf="lookUpObj != undefined">
                       <lib-uclookupgeneric [lookupInput]="lookUpObj" [parentForm]="CustomerContactForm"
                         [enjiForm]="enjiForm" [identifier]="'NationalityCountryCode'" (lookup)=getLookUpCountry($event)>
                       </lib-uclookupgeneric>
@@ -89,6 +89,7 @@
                     translate>Id Expired Date</label>
                   <div class="col-md-4">
                     <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
+                      [min]="businessDtMax | date: 'yyyy-MM-dd'"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.IdExpiredDt.invalid}">
                     <show-errors [control]="CustomerContactForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
                     </show-errors>
@@ -150,6 +151,7 @@
                   <label class="col-md-2 adInsLabel" translate>Birth Date</label>
                   <div class="col-md-4">
                     <input type="date" class="form-control adInsInput" formControlName="BirthDt"
+                      [max]="businessDtMin | date: 'yyyy-MM-dd'"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.BirthDt.invalid}">
                     <show-errors [control]="CustomerContactForm.controls.BirthDt " [submit]="enjiForm.submitted">
                     </show-errors>
@@ -226,20 +228,14 @@
                     <show-errors [control]="CustomerContactForm.controls.Email" [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
-                </div>
-
-              </div>
-              <!-- Contact Person Address -->
-              <!-- <lib-ucSubsection [id]="'ContactPersonAddress'" [title]="'Contact Person Address'"
-                [panel]="'ContactPersonAddressId'">
-              </lib-ucSubsection> -->
+                </div> 
+              </div>  
+   
               <div id="ContactPersonAddressId">
                 <lib-ucaddress [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
                   [default]="UcAddressObj" [inputField]="inputFieldObj" [showAllPhn]="false">
-                </lib-ucaddress>
-
-              </div>
-
+                </lib-ucaddress> 
+              </div> 
             </div>
 
             <div class="form-actions right">

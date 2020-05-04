@@ -1,0 +1,124 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> Ref Form </h4>
+            </div>
+          </div>
+        </div>
+        <div class="px-3">
+          <form class="form form-horizontal" [formGroup]="RefForm" (ngSubmit)="RefForm.valid && SaveForm()"
+            #enjiForm="ngForm">
+            <lib-ucSubsection [id]="'FormAddId'" [title]="'Form Add'" [panel]="'FormAdd'">
+            </lib-ucSubsection>
+            <div class="form-body" id="FormAdd">
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Module</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="RefModuleId"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.RefModuleId.invalid }">
+                    <option *ngFor="let it of itemModuleType" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="RefForm.controls.RefModuleId" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Class</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="Class"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.Class.invalid }">
+                    <option *ngFor="let it of itemClassType" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="RefForm.controls.Class" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="inputLookupParentObj!=null">
+                <label class="col-md-3">Parent Form</label>
+                <div class="col-md-3">
+                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="RefForm"
+                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Form Code</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="FormCode">
+                  <lib-uc-show-errors [control]="RefForm.controls.FormCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Title</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Title">
+                  <lib-uc-show-errors [control]="RefForm.controls.Title" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Path</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Path">
+                  <lib-uc-show-errors [control]="RefForm.controls.Path" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Icon</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Icon">
+                  <lib-uc-show-errors [control]="RefForm.controls.Icon" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>OrderNo</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="OrderNo">
+                  <lib-uc-show-errors [control]="RefForm.controls.OrderNo" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Hierarchy No</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="HierarchyNo">
+                  <lib-uc-show-errors [control]="RefForm.controls.HierarchyNo" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Is Hidden</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsHidden"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Is External Link</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsExternalLink"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/SystemSetting/RefForm/Paging']" translate>
+                <i class="fa fa-arrow-circle-left"></i> Cancel
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="far"></i> Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

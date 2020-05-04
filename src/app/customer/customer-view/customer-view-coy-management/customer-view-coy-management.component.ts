@@ -27,8 +27,8 @@ export class CustomerViewCoyManagementComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    var custAddrObj = { "CustId": this.CustId };
-    this.http.post(this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl, custAddrObj).subscribe(
+    var custObj = { "CustId": this.CustId };
+    this.http.post(this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl, custObj).subscribe(
       response => {
         this.responseObj = response['ReturnObject'];
       },
