@@ -23,6 +23,16 @@ import { Dummy5Component } from './dummy5/dummy5.component';
 import { UcInputNumberComponent } from './uc-input-number/uc-input-number.component';
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { UcinputnumberModule } from "@adins/ucinputnumber";
+import { Dummy6Component } from './dummy6/dummy6.component';
+import { Step1Component } from './dummy6/step1/step1.component';
+import { Step2Component } from './dummy6/step2/step2.component';
+import { Step3Component } from './dummy6/step3/step3.component';
+import { Step4Component } from './dummy6/step4/step4.component';
+import { Step5Component } from './dummy6/step5/step5.component';
+import { NgxStepperModule } from 'ngx-stepper';
+import { ArchwizardComponent } from "app/forms/archwizard/archwizard.component";
+import { Step7Component } from './dummy6/step7/step7.component';
+import { Step8Component } from './dummy6/step8/step8.component';
 
 @NgModule({
     imports: [
@@ -38,7 +48,8 @@ import { UcinputnumberModule } from "@adins/ucinputnumber";
         // UcaddressModule,
         ArchwizardModule,
         UcShowErrorsModule,
-        UcinputnumberModule
+        UcinputnumberModule,
+        NgxStepperModule
     ],
     declarations: [
         Dummy1Component,
@@ -52,8 +63,19 @@ import { UcinputnumberModule } from "@adins/ucinputnumber";
         Dummy4Component,
         UcSearchComponent,
         Dummy5Component,
-        UcInputNumberComponent
+        UcInputNumberComponent,
+        Dummy6Component,
+        Step1Component,
+        Step2Component,
+        Step3Component,
+        Step4Component,
+        Step5Component,
+        Step7Component,
+        Step8Component
     ],
-
+    providers: [
+        ArchwizardComponent,
+        ArchwizardModule
+    ]
 })
 export class TestNewModule { }
