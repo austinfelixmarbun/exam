@@ -6,38 +6,38 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
-  selector: 'app-office-area-member-paging',
-  templateUrl: './office-area-member-paging.component.html',
-  styleUrls: ['./office-area-member-paging.component.scss']
+  selector: 'app-role-form-paging',
+  templateUrl: './role-form-paging.component.html',
+  styleUrls: ['./role-form-paging.component.scss']
 })
-export class OfficeAreaMemberPagingComponent implements OnInit {
-
-  param: any;
-  RefOfficeAreaId: string;
+export class RoleFormPagingComponent implements OnInit {
+  RefRoleId: string;
   viewObj: any;
-
   inputPagingObj: any;
+
   constructor(private route: ActivatedRoute){
     this.route.queryParams.subscribe(params => {
-      this.RefOfficeAreaId = params["RefOfficeAreaId"];
+      this.RefRoleId = params["RefRoleId"];
   })
   }
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/ucpaging/searchOfficeAreaMember.json";
+    this.inputPagingObj._url = "./assets/ucpaging/searchRoleRefForm.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchOfficeAreaMember.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRoleRefForm.json";
     this.inputPagingObj.addCritInput = new Array();
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAuthForm;
 
     var critInput = new CriteriaObj();
-    critInput.propName = "A.REF_OFFICE_AREA_ID";
+    critInput.DataType = "numeric";
+    critInput.propName = "AF.REF_ROLE_ID";
     critInput.restriction = AdInsConstant.RestrictionEq;
-    critInput.value = this.RefOfficeAreaId;
+    critInput.value = this.RefRoleId;
     this.inputPagingObj.addCritInput.push(critInput);
 
-    this.viewObj = "./assets/ucviewgeneric/viewOfficeAreaMember.json";
+    this.viewObj = "./assets/ucviewgeneric/viewRoleRefForm.json";
   }
 
 }

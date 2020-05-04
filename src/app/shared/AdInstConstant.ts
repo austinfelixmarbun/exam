@@ -396,7 +396,7 @@ export class AdInsConstant {
   //REF MODULE
   public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
   public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
-  public static GetListKeyValueById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
+  public static GetListKeyValueRefModuleById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
 
   //REF EMP LEAVE MANAGEMENT
   public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
@@ -831,4 +831,6 @@ export class AdInsConstant {
 
   // Workflow Engine
   public static ClaimTask = environment.FoundationR3Url + "/Workflow/ClaimTask";
+  public static DeleteAuthForm = "/AuthForm/DeleteAuthForm";
+  public static GetListAuthFormByRefRoleId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefRoleId";
 }
