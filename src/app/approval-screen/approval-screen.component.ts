@@ -11,19 +11,58 @@ import { TestComponent } from './test/test.component';
   selector: 'app-approval-screen',
   templateUrl: './approval-screen.component.html',
 })
+
 export class ApprovalScreenComponent implements OnInit {
 
   inputObj : any;
-  constructor() { }
+  FormApv : FormGroup;
+  apvBaseUrl : string;
+  instanceHistObj : any;
+  taskHistObj : any;
+
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit() {
     var obj = {
-      taskId : 65529,
-      instanceId : 60369,
+      taskId : 65548,
+      instanceId : 60388,
       approvalBaseUrl : environment.ApprovalURL
     }
 
     this.inputObj = obj;
+
+    this.instanceHistObj = {
+      approvalBaseUrl : environment.ApprovalURL,
+      type : 'instance',
+      refId : 60388
+    }
+
+    this.taskHistObj = {
+      approvalBaseUrl : environment.ApprovalURL,
+      type : 'task',
+      refId : 60473
+    }
+
+    this.FormApv = this.fb.group(
+      {
+        approveById : [''],
+        recommendations : this.fb.array([]),
+      }
+    )
+
+    this.apvBaseUrl = environment.ApprovalURL;
+  }
+
+  onChange(event)
+  {
+    console.log(event.target.value);
+  }
+
+  Test()
+  {
+    console.log(this.FormApv.value);
   }
 
   onApprovalSubmited(event)
