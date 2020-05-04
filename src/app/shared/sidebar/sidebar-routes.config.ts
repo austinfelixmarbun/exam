@@ -47,7 +47,9 @@ export const ROUTES: RouteInfo[] = [
       { path: '/Asset/Scheme/Paging', title: 'Asset Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Asset/Type/Paging', title: 'Asset Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Asset/AssetMaster/Upload', title: 'Upload Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Asset/AssetMaster/ReviewUploadPaging', title: 'Review Upload Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/Asset/AssetMaster/ReviewUploadPaging', title: 'Review Upload Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Asset/NegativeAsset/Upload', title: 'Upload Negative Asset', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Asset/NegativeAsset/ReviewUploadPaging', title: 'Review Upload Negative Asset', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
     ]
   },
   {

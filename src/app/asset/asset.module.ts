@@ -38,6 +38,9 @@ import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/a
 import { UploadAssetMasterComponent } from './asset-master/upload-asset-master/upload-asset-master.component';
 import { ReviewUploadAssetMasterDetailComponent } from "./asset-master/review-upload-asset-master/review-upload-asset-master-detail/review-upload-asset-master-detail.component";
 import { ReviewUploadAssetMasterPagingComponent } from "./asset-master/review-upload-asset-master/review-upload-asset-master-paging/review-upload-asset-master-paging.component";
+import { NegativeAssetUploadComponent } from './negative-asset/negative-asset-upload/negative-asset-upload.component';
+import { ReviewUploadNegativeAssetPagingComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-paging/review-upload-negative-asset-paging.component';
+import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-detail/review-upload-negative-asset-detail.component';
 
 @NgModule({
   imports: [
@@ -80,7 +83,10 @@ import { ReviewUploadAssetMasterPagingComponent } from "./asset-master/review-up
     AssetSchemeMemberComponent,
     UploadAssetMasterComponent,
     ReviewUploadAssetMasterDetailComponent,
-    ReviewUploadAssetMasterPagingComponent
+    ReviewUploadAssetMasterPagingComponent,
+    NegativeAssetUploadComponent,
+    ReviewUploadNegativeAssetPagingComponent,
+    ReviewUploadNegativeAssetDetailComponent
   ]
 })
 export class AssetModule { }

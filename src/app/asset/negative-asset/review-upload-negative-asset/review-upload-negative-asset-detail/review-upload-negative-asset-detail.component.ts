@@ -10,12 +10,12 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 
 @Component({
-  selector: 'app-review-upload-asset-master-detail',
-  templateUrl: './review-upload-asset-master-detail.component.html',
-  styleUrls: ['./review-upload-asset-master-detail.component.scss'],
+  selector: 'app-review-upload-negative-asset-detail',
+  templateUrl: './review-upload-negative-asset-detail.component.html',
+  styleUrls: ['./review-upload-negative-asset-detail.component.scss'],
   providers: [NGXToastrService]
 })
-export class ReviewUploadAssetMasterDetailComponent implements OnInit {
+export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
   uploadNo: string;
   viewUpload: string;
   inputPagingObj: any;
@@ -41,10 +41,10 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
     this.UploadReviewUrl = AdInsConstant.UploadReview;
     this.CancelUpload = AdInsConstant.CancelUpload;
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadAssetMasterDetail.json";
+    this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeAssetDetail.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadAssetMasterDetail.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeAssetDetail.json";
     this.inputPagingObj.addCritInput = new Array();
     const addCritAssetMasterId = new CriteriaObj();
     addCritAssetMasterId.DataType = 'text';
