@@ -62,7 +62,7 @@ export class VendorHoAddEditComponent implements OnInit {
     VendorParentId: [''],
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [true, Validators.required],
-    TaxpayerNo: ['', Validators.required],
+    TaxIdNo: ['', Validators.required],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
     Addr: [''],
@@ -157,7 +157,7 @@ export class VendorHoAddEditComponent implements OnInit {
             VendorParentId: this.result.VendorObj.VendorParentId,
             MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
             IsVat: this.result.VendorObj.IsVat,
-            TaxpayerNo: this.result.VendorObj.TaxpayerNo,
+            TaxIdNo: this.result.VendorObj.TaxIdNo,
             TaxpayerName: this.result.VendorObj.TaxpayerName,
             RowVersionVendor: this.result.VendorObj.RowVersion,
             MrAddrTypeCode: this.result.VendorObj.MrAddrTypeCode,
@@ -252,17 +252,16 @@ export class VendorHoAddEditComponent implements OnInit {
     this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentObj.addCritInput = new Array();
 
     if (this.MrVendorCategoryCode != "SUPPLIER_HO") {
       this.inputLookupParentObj.isRequired = false;
     }
-    this.arrCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.propName = 'RM.RESERVE_FIELD_2';
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.value = this.MrVendorCategoryCode;
-    this.arrCrit.push(critObj);
-    this.inputLookupParentObj.addCritInput = this.arrCrit;
+    var critInput = new CriteriaObj();
+    critInput.propName = "MR_VENDOR_CATEGORY_CODE";
+    critInput.restriction = AdInsConstant.RestrictionEq;
+    critInput.value = "SUPPLIER_HOLDING";
+    this.inputLookupParentObj.addCritInput.push(critInput);
   }
 
   SaveForm() {
@@ -286,7 +285,7 @@ export class VendorHoAddEditComponent implements OnInit {
       VendorParentId: this.VendorForm.controls.VendorParentId.value,
       MrTaxCalcMethodCode: this.VendorForm.controls.MrTaxCalcMethodCode.value,
       IsVat: this.VendorForm.controls.IsVat.value,
-      TaxpayerNo: this.VendorForm.controls.TaxpayerNo.value,
+      TaxIdNo: this.VendorForm.controls.TaxIdNo.value,
       TaxpayerName: this.VendorForm.controls.TaxpayerName.value,
       MrVendorClass: "HO"
     }

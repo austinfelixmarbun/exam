@@ -1,51 +1,51 @@
 {
-    "title": "Ref Role",
+    "title": "Form Search",
     "component": [
         {
             "type": "textbox",
-            "name": "ROLE_CODE",
-            "id": "RoleCodeId",
+            "name": "FORM_CODE",
+            "id": "FormCodeId",
             "value": "",
-            "label": "Role Code",
+            "label": "Form Code",
             "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
-            "name": "ROLE_NAME",
-            "id": "RoleNameId",
+            "name": "TITLE",
+            "id": "TitleId",
             "value": "",
-            "label": "Role Name",
+            "label": "Title",
             "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "select": "SELECT ROLE_CODE AS RoleCode, ROLE_NAME AS RoleName, REF_ROLE_ID AS RefRoleId",
-        "from": "FROM dbo.REF_ROLE WITH(NOLOCK)"
+        "select": "SELECT FORM_CODE AS FormCode, TITLE AS Title, REF_FORM_ID AS RefFormId",
+        "from": "FROM dbo.REF_FORM WITH(NOLOCK)"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "center",
             "label": "Branch CODE",
-            "name": "ROLE_CODE"
+            "name": "FORM_CODE"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Branch NAME",
-            "name": "ROLE_NAME"
+            "name": "TITLE"
         }
     ],
     "bodyList": [
         {
             "type": "text",
             "position": "center",
-            "property": "RoleCode"
+            "property": "FormCode"
         },
         {
             "type": "text",
             "position": "center",
-            "property": "RoleName"
+            "property": "Title"
         }
     ]
 }

@@ -23,17 +23,18 @@ export class UcLookupGroupComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  
+
   inputObj: any;
   genericJson: any;
   searchObj: any;
   closeResult: string;
   title: any;
-  isRequired: boolean;
+  // isRequired: boolean;
+  // isReadonly: boolean;
   addCrit: Array<any>;
-  modal : any;
+  modal: any;
 
-  constructor(private http: HttpClient, private modalService: NgbModal, private fb: FormBuilder){
+  constructor(private http: HttpClient, private modalService: NgbModal, private fb: FormBuilder) {
 
   }
 
@@ -53,16 +54,22 @@ export class UcLookupGroupComponent implements OnInit {
     /* #region   Additional Criteria*/
     this.setAddCritInput();
     /* #endregion */
-    
+
     this.inputObj = this.searchObj;
-    
+    // this.lookupInput.isRequired = false;
+    // this.lookupInput.isReadonly = false;
+
     /*#region is Required */
-    this.isRequired = this.lookupInput.isRequired;
+    // this.isRequired = this.lookupInput.isRequired;
+    /* #endregion */
+
+    /*#region is Readonly */
+    // this.isReadonly = this.lookupInput.isReadonly;
     /* #endregion */
 
     this.initiateForm();
   }
-  
+
   initiateForm() {
     this.getJSON(this.lookupInput.genericJson).subscribe(data => {
       this.genericJson = data;
@@ -94,7 +101,7 @@ export class UcLookupGroupComponent implements OnInit {
     this.lookup.emit(event);
     this.modal.close();
   }
-  
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
