@@ -52,12 +52,12 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     ngOnInit() {
-        //this.GetListNotifH();
+        this.GetListNotifH();
 
         console.log(this.userAccess.UserName);
         var _hubConnection = new HubConnectionBuilder()
-            //.withUrl(AdInsConstant.WebSocketUrl)
-            .withUrl("Http://localhost:5000/Notificationhub")
+            .withUrl(AdInsConstant.WebSocketUrl)
+            //.withUrl("Http://localhost:5000/Notificationhub")
             .withAutomaticReconnect()
             .build();
 
@@ -75,14 +75,17 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
         _hubConnection.on("ReceiveNotification", (response) => {
             console.log("Response API : " + response);
-            this.toastr.successMessageTitle(response.title,response.messages);
+            this.toastr.successMessageTitle(response.title,response.message);
             this.GetListNotifH();
             //this.notifications.push({ title: response, desc: "User " + response });
         });
     }
 
     GetListNotifH() {
-        this.http.post(AdInsConstant.GetListNotificationHByRefUserId, {}).subscribe(
+        var requestObj = {
+            isLoading : false
+        };
+        this.http.post(AdInsConstant.GetListNotificationHByRefUserId, {isLoading:false}).subscribe(
             (response) => {
                 this.TotalUnread = response["TotalUnreadNotification"];
                 this.NotificationHListObj = response["ResponseNotificationHCustomObjs"];
