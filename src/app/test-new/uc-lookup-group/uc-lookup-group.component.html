@@ -1,7 +1,7 @@
 <div formGroupName="{{identifier}}">
   <div class="input-group">
       <input type="text" class="form-control" formControlName="value" 
-      [(ngModel)]="lookupInput.nameSelect" [readonly]="lookupInput.isReadonly" [required]="lookupInput.isRequired">
+      [(ngModel)]="inputValue" [readonly]="lookupInput.isReadonly" [required]="lookupInput.isRequired">
       <div class="input-group-append">
           <span class="input-group-btn">
               <button class="btn btn-raised btn-primary" type="button" (click)="open(content)">

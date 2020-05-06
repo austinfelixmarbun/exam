@@ -64,9 +64,9 @@ export class DummyComponent implements OnInit {
 
     var empObj = new RefEmpObj();
     empObj.RefEmpId = 13;
-    
+
     this.httpClient.post(this.getEmpUrl, empObj).pipe(
-      map( response => {
+      map(response => {
         return response;
       }),
       mergeMap((response: any) => {
@@ -105,8 +105,9 @@ export class DummyComponent implements OnInit {
         var empBankAccData = response[2];
         var refBankData = response[3];
 
-        this.inputLookupObj.nameSelect = refEmpData.Zipcode;
-        this.inputLookupObj2.nameSelect = refBankData.BankName;
+        this.inputLookupObj.jsonSelect = { Zipcode: refEmpData.Zipcode };
+        this.inputLookupObj2.jsonSelect = { Zipcode: refBankData.BankName };
+
       },
       (error) => {
         console.log(error);

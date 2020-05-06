@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit, AfterContentInit, OnChanges } from '@angular/core';
 import { ControlContainer, FormGroupDirective, NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { Observable } from 'rxjs';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 
 @Component({
   selector: 'app-uc-lookup-group',
@@ -13,12 +14,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./uc-lookup-group.component.scss'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class UcLookupGroupComponent implements OnInit {
+export class UcLookupGroupComponent implements OnInit, OnChanges {
 
-  @Input() lookupInput: any;
+  @Input() lookupInput: InputLookupObj = new InputLookupObj();
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Input() identifier: any = "lookupGeneric";
+  @Input() inputValue: string = "";
   @Output() lookup: EventEmitter<any> = new EventEmitter();
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild('content') contentTemplate;
@@ -66,7 +68,10 @@ export class UcLookupGroupComponent implements OnInit {
     /*#region is Readonly */
     // this.isReadonly = this.lookupInput.isReadonly;
     /* #endregion */
-
+    // this.initiateForm();
+  }
+  
+  ngOnChanges(){
     this.initiateForm();
   }
 
@@ -94,6 +99,7 @@ export class UcLookupGroupComponent implements OnInit {
 
   getSelect(event) {
     console.log(event);
+    console.log(this.inputValue);
     this.lookupInput.jsonSelect = event;
     this.parentForm.controls[this.identifier].patchValue({ value: event[this.genericJson.propertyName] });
     this.lookupInput.nameSelect = event[this.genericJson.propertyName];
