@@ -13,7 +13,7 @@ export const environment = {
     losUrl : 'http://r3web.ad-ins.com/LOSR3/pages/login',
     FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
     //FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3', 
-    ApprovalURL : 'http://r3app-server/APPROVAL'
+    ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL'
   };
   
   
