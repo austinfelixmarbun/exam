@@ -526,7 +526,7 @@ export class AdInsConstant {
   public static AddAssetNegative = environment.FoundationR3Url + "/AssetNegative/AddAssetNegative";
   public static EditAssetNegative = environment.FoundationR3Url + "/AssetNegative/EditAssetNegative";
   public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/AssetNegative/GetAssetNegativeByIdEditPage";
-
+  public static GetUploadAssetNegativeByUploadMonitoringNoAndTrxType =environment.FoundationR3Url + "/AssetNegative/GetUploadAssetNegativeByUploadMonitoringNoAndTrxType";
   //VENDOR
   public static DeleteVendor = "/Vendor/DeleteVendor";
   public static AddVendorHO = environment.FoundationR3Url + "/Vendor/AddVendorHO";

@@ -18,7 +18,7 @@ export class NegativeAssetUploadComponent implements OnInit {
       subsectionId: 'UcUploadFile', // Ga perlu diubah
       formatsAllowed: '.xls, .xlsx', // File yang bisa di upload
       UploadTypeCode: 'UPL_NAS', // UploadTypeCode berdasarkan keperluan
-      ErrorDownloadUrl: AdInsConstant.GetUploadAssetMasterByUploadMonitoringNoAndTrxType, // URL untuk Download Error File
+      ErrorDownloadUrl: AdInsConstant.GetUploadAssetNegativeByUploadMonitoringNoAndTrxType, // URL untuk Download Error File
       TemplateUrl: AdInsConstant.DownloadTemplate, // URL untuk Download Template File
       TemplateName: 'Upload_Negative_Asset_Template', // Nama Excel Template File
       FileErrorName: "Upload_Negative_Asset_ErrorDownload", // Nama Excel Download Error File
