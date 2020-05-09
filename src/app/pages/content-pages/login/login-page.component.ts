@@ -20,11 +20,14 @@ export class LoginPageComponent implements OnInit {
     @ViewChild('pass') userPassRef: ElementRef;
     @ViewChild('f') loginForm: NgForm;
     private apiUrl: string;
+    IsNeedUpdate : boolean;
     FoundationR3Url: string;
+    result: any;
 
     constructor(private router: Router, private http: HttpClient, public rolePickService : RolePickService,
         private route: ActivatedRoute) {
         //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
+      
         if(localStorage.getItem("UserContext") != null)
         {
             this.router.navigate(['dashboard/dash-board']);
@@ -54,7 +57,20 @@ export class LoginPageComponent implements OnInit {
                     user: username,
                     pwd: password
                 };
-                this.rolePickService.openDialog(object);
+                this.http.post(AdInsConstant.GetRefUserByUsername, requestObj).subscribe(
+                (response) => {
+                   this.result = response;
+                   if(this.result.IsNeedUpdatePassword){
+                    this.router.navigate(['/pages/ChangePassword'], { queryParams: { "Username": username } });
+                   }
+                   else{
+                    this.rolePickService.openDialog(object);
+
+                   }
+                },
+                (error) => {
+
+                })
             },
             (error) => {
                 console.log(error);

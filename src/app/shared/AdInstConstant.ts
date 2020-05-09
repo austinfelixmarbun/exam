@@ -181,10 +181,12 @@ export class AdInsConstant {
   public static ResetPassword = "/UserManagement/ResetPassword";
   public static AddRefUserR3 = "/RefUser/AddRefUser";
   public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
+  public static GetRefUserByUsername = environment.FoundationR3Url + "/RefUser/GetRefUserByUsername";
   public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
   public static AddRefUserRole = environment.FoundationR3Url + "/RefUserRole/AddRefUserRole"
   public static EditRefUserRole = environment.FoundationR3Url + "/RefUserRole/EditRefUserRole";
   public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
+  public static ChangePasswordRefUserByUsername = environment.FoundationR3Url + "/RefUser/ChangePasswordRefUserByUsername";
   public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
 
   //REF-ROLE

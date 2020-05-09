@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginPageComponent } from "app/pages/content-pages/login/login-page.component";
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,13 @@ const routes: Routes = [
         component: LoginPageComponent,
         data: {
           title: 'Login Page'
+        }
+      },
+      {
+        path: 'ChangePassword',
+        component: ChangePasswordComponent,
+        data: {
+          title: 'Change Password Page'
         }
       }
     ]
