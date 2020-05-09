@@ -77,7 +77,7 @@
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefJobTitle/GetListKeyValueActiveByCode",
+            "url": "http://r3impl-appsvr.ad-ins.com/Foundation/RefJobTitle/GetListKeyValueActiveByCode",
             "label": "JOB TITLE",
             "criteriaPropName" : "RefJobTitleId",
             "criteriaPropValue" : "JOB_TITLE_CODE",
