@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -12,11 +12,12 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 @Component({
   selector: 'app-customer-personal-job-data',
   templateUrl: './customer-personal-job-data.component.html',
-  styleUrls: ['./customer-personal-job-data.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class CustomerPersonalJobDataComponent implements OnInit {
- 
+  // @Output() outputTab: EventEmitter<object> = new EventEmitter();
+  
   CustModel : any;
   IdCust : any;
   custObj : any;

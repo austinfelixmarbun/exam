@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -13,17 +13,17 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
 import { formatDate } from '@angular/common';
-import { WizardComponent } from 'angular-archwizard';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 
 @Component({
   selector: 'app-job-data-professional',
   templateUrl: './job-data-professional.component.html',
-  styleUrls: ['./job-data-professional.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class JobDataProfessionalComponent implements OnInit {
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
   jobDataId: any;
   jobAddrId: any;
   rowVersion: any;
@@ -73,7 +73,7 @@ export class JobDataProfessionalComponent implements OnInit {
     StayLength: ['']
   });
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
     this.addJobData = AdInsConstant.AddCustPersonalJobData;
@@ -237,7 +237,7 @@ export class JobDataProfessionalComponent implements OnInit {
   }
 
   back(){
-    this.wizard.goToPreviousStep();
+    this.outputTab.emit({ stepMode: "previous"});
   }
 
   SaveForm(){
@@ -268,7 +268,7 @@ export class JobDataProfessionalComponent implements OnInit {
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
           // console.log(response)
-          this.wizard.goToNextStep();
+          this.outputTab.emit({ stepMode: "next"});
         },
         (error) => {
           console.log(error);
@@ -295,7 +295,7 @@ export class JobDataProfessionalComponent implements OnInit {
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
           // console.log(response)
-          this.wizard.goToNextStep();
+          this.outputTab.emit({ stepMode: "next"});
         },
         (error) => {
           console.log(error);

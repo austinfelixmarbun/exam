@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { WizardComponent } from 'angular-archwizard';
 import { HttpClient } from '@angular/common/http';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
@@ -20,11 +19,11 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 @Component({
   selector: 'app-customer-contact-add',
   templateUrl: './customer-contact-add.component.html',
-  styleUrls: ['./customer-contact-add.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class CustomerContactAddComponent implements OnInit {
-  @Output() outputValues: EventEmitter<any> = new EventEmitter();
+  @Output() outputTab: EventEmitter<any> = new EventEmitter();
   @Input() custPersonalContactPersonId: any;
   IdCust: any;
   CustomerContactForm = this.fb.group({
@@ -87,7 +86,7 @@ export class CustomerContactAddComponent implements OnInit {
   businessDtMin: any;
   businessDtMax: any;
   LocalCountry: any;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addCustPersonalContactPersonUrl = AdInsConstant.AddNewCustPersonalContactPerson;
     this.editCustPersonalContactPersonUrl = AdInsConstant.EditCustPersonalContactPerson;
@@ -368,7 +367,8 @@ export class CustomerContactAddComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           // this.wizard.goToNextStep();
           this.isAdd = false;
-          this.outputValues.emit({ isAdd: this.isAdd });
+          this.outputTab.emit({ isAdd: this.isAdd });
+          // this.outputTab.emit({ stepMode: "next"});
         },
         error => {
           console.log(error);
@@ -381,7 +381,7 @@ export class CustomerContactAddComponent implements OnInit {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.isAdd = false;
-          this.outputValues.emit({ isAdd: this.isAdd });
+          this.outputTab.emit({ isAdd: this.isAdd });
           // this.wizard.goToNextStep();
         },
         error => {
@@ -506,6 +506,6 @@ export class CustomerContactAddComponent implements OnInit {
   }
   back() {
     this.isAdd = false;
-    this.outputValues.emit({ isAdd: this.isAdd });
+    this.outputTab.emit({ isAdd: this.isAdd });
   }
 }

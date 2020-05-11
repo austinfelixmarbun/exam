@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder } from '@angular/forms';
-import { WizardComponent } from 'angular-archwizard';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { ActivatedRoute } from '@angular/router';
@@ -23,7 +22,7 @@ export class CustomerContactCheckComponent implements OnInit {
   deleteCustomerPersonalContactPersonUrl
   custPersonContactPersonObj: any;
   isReload: any;
-  constructor(private route: ActivatedRoute,private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+  constructor(private route: ActivatedRoute,private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
     this.deleteCustomerPersonalContactPersonUrl = AdInsConstant.DeleteCustPersonalContactPerson;
     this.route.queryParams.subscribe(params => {
@@ -71,12 +70,5 @@ export class CustomerContactCheckComponent implements OnInit {
         this.tempCustomerPersonalContactPerson = response["ReturnObject"];
         // console.log("aaaa" + this.tempCustomerPersonalContactPerson);
       });
-  }
-
-  next() {
-    this.wizard.goToNextStep();
-  }
-  back(){
-    this.wizard.goToPreviousStep();
   }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/cor
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { WizardComponent } from 'angular-archwizard';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
@@ -14,11 +13,13 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-customer-personal-detail',
   templateUrl: './customer-personal-detail.component.html',
-  styleUrls: ['./customer-personal-detail.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 
 })
 export class CustomerPersonalDetailComponent implements OnInit {
+
+  @Output() outputTab: EventEmitter<any> = new EventEmitter();
 
   CustomerDetailForm = this.fb.group({
     CustFullName: ['', [Validators.maxLength(100)]],
@@ -61,12 +62,11 @@ export class CustomerPersonalDetailComponent implements OnInit {
   criteriaList: any;
   criteriaObj: any;
   flag: any;
-  @Output() outputValue: EventEmitter<object> = new EventEmitter();
   Page: String;
   GetGeneralSettingByCodeUrl: string;
   Country: any;
   LocalCountry : any;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getListCountryUrl = AdInsConstant.GetListRefCountry;
@@ -290,8 +290,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.http.post(this.EditCustPersonalUrl, this.custPersonalObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        this.outputValue.emit({ CustPersonalId: this.tempCustPersonalObj.CustPersonalId });
-        this.wizard.goToNextStep();
+        // this.wizard.goToNextStep();
+        this.outputTab.emit({ CustPersonalId: this.tempCustPersonalObj.CustPersonalId, stepMode: "next" });
       },
       error => {
         console.log(error);

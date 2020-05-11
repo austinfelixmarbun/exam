@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -12,7 +12,6 @@ import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
-import { WizardComponent } from 'angular-archwizard';
 import { formatDate } from '@angular/common';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
@@ -20,10 +19,12 @@ import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 @Component({
   selector: 'app-job-data-employee',
   templateUrl: './job-data-employee.component.html',
-  styleUrls: ['./job-data-employee.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class JobDataEmployeeComponent implements OnInit {
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
+  
   jobAddrId: any;
   othBizAddrId: any;
   jobDataId: any;
@@ -94,7 +95,7 @@ export class JobDataEmployeeComponent implements OnInit {
     OtherStayLength: ['']
   });
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
     this.addJobData = AdInsConstant.AddCustPersonalJobData;
@@ -376,7 +377,7 @@ export class JobDataEmployeeComponent implements OnInit {
   }
 
   back(){
-    this.wizard.goToPreviousStep();
+    this.outputTab.emit({ stepMode: "previous"});
   }
 
   SaveForm(){
@@ -408,7 +409,7 @@ export class JobDataEmployeeComponent implements OnInit {
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
           // console.log(response);
-          this.wizard.goToNextStep();
+          this.outputTab.emit({ stepMode: "next"});
         },
         (error) => {
           console.log(error);
@@ -438,7 +439,7 @@ export class JobDataEmployeeComponent implements OnInit {
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
           // console.log(response);
-          this.wizard.goToNextStep();
+          this.outputTab.emit({ stepMode: "next"});
         },
         (error) => {
           console.log(error);

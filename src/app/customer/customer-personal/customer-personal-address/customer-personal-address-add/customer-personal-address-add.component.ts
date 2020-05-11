@@ -14,7 +14,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-customer-personal-address-add',
   templateUrl: './customer-personal-address-add.component.html',
-  styleUrls: ['./customer-personal-address-add.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class CustomerPersonalAddressAddComponent implements OnInit {
@@ -85,6 +85,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   ngOnInit() {
     this.pageType = this.mode;
+    console.log(this.pageType);
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
@@ -245,7 +246,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          this.outputValue.emit({mode : 'check'});
+          this.outputValue.emit({mode : 'check', stepMode: "next"});
           console.log(response)
         },
         (error) => {
@@ -255,6 +256,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     } 
   }
   back(){
-    this.outputValue.emit({mode : 'check'});
+    this.outputValue.emit({mode : 'check', stepMode: "previous"});
   }
 }
