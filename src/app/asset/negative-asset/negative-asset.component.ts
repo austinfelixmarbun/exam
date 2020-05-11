@@ -15,8 +15,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 })
 export class NegativeAssetComponent implements OnInit {
   @ViewChild(UcpagingComponent) ucpaging;
-  inputPagingObj: any;
-  navigationSubscription: any;
+  inputPagingObj: UcPagingObj;
 
   constructor(
     private service: NGXToastrService,
