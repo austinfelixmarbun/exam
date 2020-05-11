@@ -11,14 +11,19 @@
       <br>
       <div class="card-body">
         <lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
-        <div class="ucSearch-Button-Right">
-          <span class="mr-1">
-            <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Holding/Detail']"
+        <form>
+          <div class="form-actions right">
+            <span class="mr-1">
+              <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Holding/Detail']"
               [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
               <i class="ft-plus-circle"></i> Edit Main Info
             </button>
-          </span>
-        </div>
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Holding/Paging']"
+            translate> Finish
+            </button>
+            </span>
+          </div>
+        </form>
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode] navigateBackward="allow"
           navigateForward="allow">
           <aw-wizard-step [stepTitle]="'Address'"
