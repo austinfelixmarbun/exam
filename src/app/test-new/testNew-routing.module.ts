@@ -7,6 +7,7 @@ import { DummyComponent } from "./dummy/dummy.component";
 import { Dummy4Component } from "./dummy4/dummy4.component";
 import { Dummy5Component } from "./dummy5/dummy5.component";
 import { Dummy6Component } from "./dummy6/dummy6.component";
+import { Dummy7Component } from "./dummy7/dummy7.component";
 
 const routes: Routes = [
   {
@@ -59,6 +60,13 @@ const routes: Routes = [
         component: Dummy6Component,
         data: {
           title: 'Dummy 6'
+        }
+      },
+      {
+        path: 'dummy7',
+        component: Dummy7Component,
+        data: {
+          title: 'Dummy 7'
         }
       },
       {
