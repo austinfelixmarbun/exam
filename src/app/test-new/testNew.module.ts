@@ -32,6 +32,7 @@ import { ArchwizardComponent } from "app/forms/archwizard/archwizard.component";
 import { Step7Component } from './dummy6/step7/step7.component';
 import { Step8Component } from './dummy6/step8/step8.component';
 import { SharingComponentModule } from "app/shared/sharingcomponent.module";
+import { Dummy7Component } from './dummy7/dummy7.component';
 
 @NgModule({
     imports: [
@@ -69,7 +70,8 @@ import { SharingComponentModule } from "app/shared/sharingcomponent.module";
         Step4Component,
         Step5Component,
         Step7Component,
-        Step8Component
+        Step8Component,
+        Dummy7Component
     ],
     providers: [
         ArchwizardComponent,
