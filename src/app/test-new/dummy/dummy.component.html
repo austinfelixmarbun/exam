@@ -1,20 +1,47 @@
-<p>
-  dummy works!
-</p>
-<br><br><br><br><br><br>
+<form class="form form-horizontal" [formGroup]="RefEmpForm" (ngSubmit)="RefEmpForm.valid && SaveForm()"
+  #enjiForm="ngForm">
+  <div class="form-body">
+    <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Information</h4>
+    <div class="form-group row adins-required">
+      <label class="col-md-3 adInsLabel">Employee No </label>
+      <div class="col-md-9">
+        <input type="text" class="form-control adInsInput width-25-per" formControlName="EmpNo">
+        <show-errors [control]="RefEmpForm.controls.EmpNo" [submit]="enjiForm.submitted"></show-errors>
+      </div>
+    </div>
+    <div class="form-group row adins-required">
+      <label class="col-md-3 adInsLabel">Employee Name </label>
+      <div class="col-md-9">
+        <input type="text" class="form-control adInsInput width-75-per" formControlName="EmpName"
+          [ngClass]="{ 'is-invalid':(enjiForm.submitted || RefEmpForm.controls.EmpName.touched || RefEmpForm.controls.EmpName.dirty) && !RefEmpForm.controls.EmpName.valid }">
+        <show-errors [control]="RefEmpForm.controls.EmpName" [submit]="enjiForm.submitted"></show-errors>
+      </div>
+    </div>
+    <div class="form-group row adins-required">
+      <label class="col-md-3 adInsLabel">Active Status </label>
+      <div class="col-md-9">
+        <input type="checkbox" class="border-primary" formControlName="IsActive">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-3 adInsLabel" for="zipcode" translate>Zipcode </label>
+      <div class="col-md-3">
+        <app-uc-lookup-group [lookupInput]="inputLookupObj" [parentForm]='RefEmpForm' [enjiForm]='enjiForm'
+          [identifier]="'UcZipcode'" (lookup)="getLookup($event)"></app-uc-lookup-group>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-3 adInsLabel" for="zipcode" translate>RT </label>
+      <div class="col-md-3">
+        <app-uc-lookup-group [lookupInput]="inputLookupObj2" [parentForm]='RefEmpForm' [enjiForm]='enjiForm'
+          [identifier]="'UcZipcode2'" (lookup)="getLookup($event)"></app-uc-lookup-group>
+      </div>
+    </div>
+  </div>
 
-<!-- 
-<aw-wizard #wizard navBarLayout="large-empty-symbols">
-  <aw-wizard-step [stepTitle]="'General Setting'" 
-  [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-<app-dummy1></app-dummy1>
-  </aw-wizard-step>
-  <aw-wizard-step [stepTitle]="'Product'" 
-  [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-  <app-dummy2></app-dummy2>
-  </aw-wizard-step>
-  <aw-wizard-step [stepTitle]="'Setting'" 
-  [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-  <app-dummy3></app-dummy3>
-  </aw-wizard-step>
-</aw-wizard> -->
+  <div class="form-actions right">
+    <button type="submit" class="btn btn-raised btn-primary">
+      <i class="fa fa-check-square-o"></i> Save
+    </button>
+  </div>
+</form>

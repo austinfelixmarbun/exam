@@ -252,17 +252,16 @@ export class VendorHoAddEditComponent implements OnInit {
     this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentObj.addCritInput = new Array();
 
     if (this.MrVendorCategoryCode != "SUPPLIER_HO") {
       this.inputLookupParentObj.isRequired = false;
     }
-    this.arrCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.propName = 'RM.RESERVE_FIELD_2';
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.value = this.MrVendorCategoryCode;
-    this.arrCrit.push(critObj);
-    this.inputLookupParentObj.addCritInput = this.arrCrit;
+    var critInput = new CriteriaObj();
+    critInput.propName = "MR_VENDOR_CATEGORY_CODE";
+    critInput.restriction = AdInsConstant.RestrictionEq;
+    critInput.value = "SUPPLIER_HOLDING";
+    this.inputLookupParentObj.addCritInput.push(critInput);
   }
 
   SaveForm() {

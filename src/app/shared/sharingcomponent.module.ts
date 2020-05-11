@@ -25,6 +25,7 @@ import { ShowErrorsComponent } from '../test-new/show-errors.component';
 import { UcProdOfferingCompComponent } from './UserControl/uc-prod-offering-compnt/uc-prod-offering-comp.component';
 import { ThingsToDoComponent } from './things-to-do/things-to-do.component';
 import { UcthingstodoModule } from '@adins/ucthingstodo';
+import { UcLookupGroupComponent } from 'app/test-new/uc-lookup-group/uc-lookup-group.component';
 
 @NgModule({
     exports: [
@@ -43,7 +44,8 @@ import { UcthingstodoModule } from '@adins/ucthingstodo';
         ShowErrorsComponent,
         UcProdOfferingCompComponent,
         ThingsToDoComponent,
-        UcthingstodoModule
+        UcthingstodoModule,        
+        UcLookupGroupComponent,
     ],
     imports: [
         FormsModule,
@@ -75,7 +77,8 @@ import { UcthingstodoModule } from '@adins/ucthingstodo';
         LookupgenericComponent,
         ShowErrorsComponent,
         UcProdOfferingCompComponent,
-        ThingsToDoComponent
+        ThingsToDoComponent,        
+        UcLookupGroupComponent,
     ]
 })
 
