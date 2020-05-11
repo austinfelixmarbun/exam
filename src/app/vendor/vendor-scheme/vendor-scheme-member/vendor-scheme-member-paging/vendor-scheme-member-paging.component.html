@@ -3,11 +3,12 @@
 </div>
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/VendorScheme/Paging']" translate>
-      Back
+    <button type="button" class="backButton" [routerLink]="['/Vendor/VendorScheme/Paging']"
+      translate>
+      <i class="fa fa-arrow-circle-left"></i> Back
     </button>
-    <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/VendorScheme/Member/Add']"
-    [queryParams]="{VendorSchmId: this.VendorSchmId, MrVendorCategoryCode:this.MrVendorCategoryCode}">
+    <button type="button" class="addButton" [routerLink]="['/Vendor/VendorScheme/Member/Add']"
+      [queryParams]="{VendorSchmId: this.VendorSchmId, MrVendorCategoryCode:this.MrVendorCategoryCode}">
       <i class="ft-plus-circle"></i> Add
     </button>
   </span>
