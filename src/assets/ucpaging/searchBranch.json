@@ -3,22 +3,24 @@
     "component": [
         {
             "type": "dropdown",
-            "label": "Vendor Category",
-            "name": "MR_VENDOR_CATEGORY_CODE",
-            "id": "VendorCategoryId",
+            "name": "vdr.MR_VENDOR_CATEGORY_CODE", 
+            "id": "MrVendorCategoryCodeId",
             "value": "",
+            "placeholder": "Placeholder",
             "datatype": "text",
-            "isSelectOne": false,
-            "items": [],
             "isFromURL": true,
-            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
-            "itemsUrl": [],
-            "criteriaPropName": "RefMasterTypeCode",
-            "criteriaPropValue": "VENDOR_CATEGORY"
+            "isSelectOne": false,
+            "isQueryIn": true,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListActiveRefMasterByVendorCategoryByReserveField1",
+            "label": "Vendor Category",
+            "criteriaPropName" : "ReserveField1",
+            "criteriaPropValue" : "BRANCH",
+            "items": [],
+            "itemsUrl": []
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "vdr.IS_ACTIVE",
             "id": "activeStatusId",
             "label": "Active Status",
             "value": "",
@@ -39,7 +41,7 @@
         },
         {
             "type": "textbox",
-            "name": "VENDOR_CODE",
+            "name": "vdr.VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
             "label": "Branch Code",
@@ -47,7 +49,7 @@
         },
         {
             "type": "textbox",
-            "name": "VENDOR_NAME",
+            "name": "vdr.VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
             "label": "Branch Name",
@@ -55,7 +57,7 @@
         },
         {
             "type": "numeric",
-            "name": "VENDOR_RATING",
+            "name": "vdr.VENDOR_RATING",
             "id": "VendorRatingGteId",
             "value": 0,
             "label": "Rating >=",
@@ -65,7 +67,7 @@
         },
         {
             "type": "numeric",
-            "name": "VENDOR_RATING",
+            "name": "vdr.VENDOR_RATING",
             "id": "VendorRatingLteId",
             "value": 100,
             "label": "Rating <=",
@@ -75,8 +77,9 @@
         }
     ],
     "querystring": {
-        "select": "SELECT vdr.MR_VENDOR_CLASS AS MrVendorClass, vdr.VENDOR_ID AS VendorId, vdr.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, VENDOR_CODE AS BranchCode, VENDOR_NAME AS BranchName, ADDR AS BranchAddress, VENDOR_RATING AS BranchRating, IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.VENDOR vdr WITH(NOLOCK) LEFT JOIN dbo.VENDOR_ADDR vaddr WITH(NOLOCK) on vdr.VENDOR_ID = vaddr.VENDOR_ID"
+        "select": "SELECT vdr.MR_VENDOR_CLASS AS MrVendorClass, vdr.VENDOR_ID AS VendorId, vdr.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, vdr.VENDOR_CODE AS BranchCode, vdr.VENDOR_NAME AS BranchName, ADDR AS BranchAddress, vdr.VENDOR_RATING AS BranchRating, vdr.IS_ACTIVE AS IsActive",
+        "from": "FROM dbo.VENDOR vdr WITH(NOLOCK) LEFT JOIN dbo.VENDOR_ADDR vaddr WITH(NOLOCK) on vdr.VENDOR_ID = vaddr.VENDOR_ID",
+        "where":"WHERE vaddr.MR_ADDR_TYPE_CODE ='TAX'"
     },
     "headerList": [
         {

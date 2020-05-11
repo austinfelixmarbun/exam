@@ -5,14 +5,8 @@
         <div class="col-md-8">
           <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} OFFICE </h4>
         </div>
-        <div class="col-md-4" style="text-align-last: right">
-          <button type="button" class="backButton" [routerLink]="['/Office/Paging']" translate>
-            <i class="ft-arrow-left"></i> Back
-          </button>
-        </div>
       </div>
     </div>
-
 
     <div class="row text-left">
       <div class="card-body">
@@ -24,9 +18,6 @@
               <div class="row text-left">
                 <div class="card-body">
                   <div class="px-3">
-                    <!-- <form class="form form-horizontal" [formGroup]="OfficeForm" (ngSubmit)="SaveForm()"
-                      #enjiForm="ngForm">
-                      <div class="form-body"> -->
                     <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Office-Add/Edit</h4>
                     <div class="form-group row adins-required">
                       <label class="col-md-3  adInsLabel" translate>Office Code </label>
@@ -158,7 +149,7 @@
                     </div>
                     <!-- <app-ucAddress #ucAddress [parentForm]='OfficeReqForm'></app-ucAddress> -->
                     <lib-ucaddress [UCAddrForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
-                      [default]="UcAddressObj">
+                      [default]="addressObj" [inputField]="inputFieldAddr">
                     </lib-ucaddress>
                     <!-- <app-ucContactInfo #ucContactInfo [parentForm]='OfficeReqForm'></app-ucContactInfo> -->
 
@@ -207,6 +198,9 @@
                     </div>
 
                     <div class="form-actions right">
+                      <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Office/Paging']" translate>
+                        <i class="ft-x"></i> Cancel
+                      </button>
                       <button type="submit" class="btn btn-raised btn-primary" translate>
                         <i class="fa fa-check-square-o"></i> Save
                       </button>

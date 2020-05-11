@@ -1,17 +1,18 @@
-<div class="row text-left">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="px-3">
-          <div class="ucSearch-Button-Right">
-            <span class="mr-1">
-              <button type="button" (click)="open(bankContent)" class="btn btn-raised btn-primary" translate>
-                <i class="fa fa-check-square-o"></i> Add
-              </button>
-            </span>
-          </div>
-          <lib-ucSubsection [id]="'bankListId'" [title]="'Bank List'" [panel]="bankList"></lib-ucSubsection>
-          <div id="bankList">
+<div class="card-header header-title">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="px-3">
+            <div class="ucSearch-Button-Right">
+              <span class="mr-1">
+                <button type="button" (click)="open(bankContent)" class="btn btn-raised btn-primary" translate>
+                  <i class="ft-plus-circle"></i> Add
+                </button>
+              </span>
+            </div>
+            <h4 class="card-title" translate>Bank List</h4>
+            <hr>
             <div id="gridBankAcc" [hidden]="ListData?.length < 1">
               <table class="table table-responsive-md text-center table-hover">
                 <thead>
@@ -33,7 +34,8 @@
                     <td>{{item.BankName}}</td>
                     <td>{{item.BankAccountNo}}</td>
                     <td>{{item.BankAccountName}}</td>
-                    <td>{{item.IsDefault}}</td>
+                    <td *ngIf="item.IsDefault === true">Yes</td>
+                    <td *ngIf="item.IsDefault === false">No</td>
                     <td>
                       <a class="success p-0" data-original-title="" title=""
                         (click)="editBank(item.VendorBankAccId,bankContent)">
@@ -57,12 +59,11 @@
               <div class="modal-body">
                 <div class="px-3">
                   <form class="form form-horizontal" #enjiForm="ngForm" [formGroup]="BankRegisForm"
-                    (ngSubmit)="BankRegisForm.valid && SaveForm()">
-                    <!-- (ngSubmit)="prodHOForm.form.valid && SaveForm(prodHOForm) -->
+                    (ngSubmit)="BankRegisForm.valid && SaveForm(enjiForm)">
                     <lib-ucSubsection [id]="'addBankAccountId'" [title]="'Add Bank Account'" [panel]="'addBankAccount'">
                     </lib-ucSubsection>
                     <div id="addBankAccount">
-                      <div class="form-group row">
+                      <div class="form-group row" *ngIf="inputLookupBankObj!=undefined">
                         <label class="col-md-2 label-control" for="name" translate>Bank</label>
                         <div class="col-md-4">
                           <lib-uclookupgeneric [lookupInput]="inputLookupBankObj" [parentForm]='BankRegisForm'
@@ -76,8 +77,9 @@
                           <input type="text" class="form-control adInsInput"
                             [ngClass]="{ 'is-invalid': enjiForm.submitted && BankRegisForm.controls.AccNumber.invalid }"
                             formControlName="AccNumber">
-                          <show-errors [control]="BankRegisForm.controls.AccNumber" [submit]="enjiForm.submitted">
-                          </show-errors>
+                          <lib-uc-show-errors [control]="BankRegisForm.controls.AccNumber"
+                            [submit]="enjiForm.submitted">
+                          </lib-uc-show-errors>
                         </div>
                       </div>
                       <div class="form-group row">
@@ -86,6 +88,9 @@
                           <input type="text" class="form-control adInsInput"
                             [ngClass]="{ 'is-invalid': enjiForm.submitted && BankRegisForm.controls.AccName.invalid }"
                             formControlName="AccName">
+                          <lib-uc-show-errors [control]="BankRegisForm.controls.AccNumber"
+                            [submit]="enjiForm.submitted">
+                          </lib-uc-show-errors>
                         </div>
                       </div>
                       <div class="form-group row">

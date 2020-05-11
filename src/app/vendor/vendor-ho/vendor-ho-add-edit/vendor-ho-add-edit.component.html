@@ -15,8 +15,8 @@
             <lib-ucSubsection [id]="'VendorInfoId'" [title]="'Main Info'" [panel]="'VendorInformation'">
             </lib-ucSubsection>
             <div class="form-body" id="VendorInformation">
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Vendor Category</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Vendor Category</label>
                 <div class="col-md-9">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrVendorCategoryCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrVendorCategoryCode.invalid }">
@@ -27,16 +27,16 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>HO Code</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>HO Code</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorCode">
                   <show-errors [control]="VendorForm.controls.VendorCode" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>HO Name</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>HO Name</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorName">
                   <show-errors [control]="VendorForm.controls.VendorName" [submit]="enjiForm.submitted">
@@ -44,8 +44,8 @@
                 </div>
               </div>
               <div class="form-body">
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>HO Type</label>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>HO Type</label>
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrVendorTypeCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrVendorTypeCode.invalid }"
@@ -59,16 +59,16 @@
                 </div>
               </div>
               <div [hidden]="VendorForm.controls.MrVendorTypeCode.value != 'C'">
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>Registration Number</label>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>Registration Number</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per" formControlName="RegistrationNo">
                     <show-errors [control]="VendorForm.controls.RegistrationNo" [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
                 </div>
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>License Number</label>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>License Number</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per" formControlName="LicenseNo">
                     <show-errors [control]="VendorForm.controls.LicenseNo" [submit]="enjiForm.submitted">
@@ -77,8 +77,8 @@
                 </div>
               </div>
               <div [hidden]="VendorForm.controls.MrVendorTypeCode.value != 'P'">
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>ID Type</label>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>ID Type</label>
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrIdTypeCode.invalid }">
@@ -89,8 +89,8 @@
                     </show-errors>
                   </div>
                 </div>
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>ID Number</label>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>ID Number</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per" formControlName="IdNo">
                     <show-errors [control]="VendorForm.controls.IdNo" [submit]="enjiForm.submitted">
@@ -114,8 +114,8 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Email</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Email</label>
                 <div class="col-md-9">
                   <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                     class="form-control adInsInput width-50-per" formControlName="Email">
@@ -131,24 +131,24 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Establishment Date</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Establishment Date</label>
                 <div class="col-md-9">
                   <input type="date" class="form-control adInsInput width-50-per" formControlName="EstablishmentDt">
                   <show-errors [control]="VendorForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Partnership Date</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Partnership Date</label>
                 <div class="col-md-9">
                   <input type="date" class="form-control adInsInput width-50-per" formControlName="PartnershipDt">
                   <show-errors [control]="VendorForm.controls.PartnershipDt" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel">Active Status</label>
+              <div class="form-group row">
+                <label class="col-md-3">Active Status</label>
                 <div class="col-md-9">
                   <select class="form-control" formControlName="IsActive">
                     <option value="true">Yes</option>
@@ -162,8 +162,8 @@
                 <lib-ucSubsection [id]="'HOIdOne'" [title]="'HO Info'" [panel]="'HOInformation'">
                 </lib-ucSubsection>
                 <div class="form-body">
-                  <div class="form-group row adins-required">
-                    <label class="col-md-3 adInsLabel">Supplier Holding</label>
+                  <div class="form-group row">
+                    <label class="col-md-3 adins-required-label">Supplier Holding</label>
                     <div class="col-md-3">
                       <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                         [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
@@ -176,8 +176,8 @@
             <lib-ucSubsection [id]="'TaxInfo'" [title]="'Tax Info'" [panel]="'TaxInformation'">
             </lib-ucSubsection>
             <div id="TaxInformation">
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Tax Calculation Method</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
                 <div class="col-md-9">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrTaxCalcMethodCode.invalid }">
@@ -188,25 +188,25 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel">VAT</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label">VAT</label>
                 <div class="col-md-9">
-                  <select class="form-control" formControlName="IsActive">
+                  <select class="form-control" formControlName="IsVAT">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                   </select>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Tax Payer Number</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerNo">
-                  <show-errors [control]="VendorForm.controls.TaxpayerNo" [submit]="enjiForm.submitted">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo">
+                  <show-errors [control]="VendorForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Tax Payer Name</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Tax Payer Name</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerName">
                   <show-errors [control]="VendorForm.controls.TaxpayerName" [submit]="enjiForm.submitted">
@@ -221,16 +221,14 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-body adins-required">
-                <div class="form-group row adins-required">
-                  <label class="col-md-3 adInsLabel">Zip Code</label>
+                <div class="form-group row" *ngIf="inputLookupZipcodeObj!=undefined">
+                  <label class="col-md-3 adins-required-label">Zip Code</label>
                   <div class="col-md-3">
                     <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
                       [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookupZipcode($event)">
                     </lib-uclookupgeneric>
                   </div>
                 </div>
-              </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
                 <div class="col-md-9">

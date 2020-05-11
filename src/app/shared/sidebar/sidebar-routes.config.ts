@@ -33,7 +33,8 @@ export const ROUTES: RouteInfo[] = [
       { path: '/CommonSetting/Currency/paging', title: 'Currency', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/CommonSetting/Profession/paging', title: 'Profession', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/SystemSetting/Notification', title: 'Notification', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/SystemSetting/NotificationApproval', title: 'Notification Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+      { path: '/SystemSetting/NotificationApproval', title: 'Notification Approval', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/SystemSetting/RefForm/Paging', title: 'Ref Form', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
     ]
   },
   {
@@ -44,8 +45,8 @@ export const ROUTES: RouteInfo[] = [
       { path: '/Asset/NegativeAsset/Paging', title: 'Negative Asset', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Asset/AssetMaster/Paging', title: 'Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/Asset/Scheme/Paging', title: 'Asset Scheme', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-      { path: '/Asset/Type/Paging', title: 'Asset Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
-
+      { path: '/Asset/Type/Paging', title: 'Asset Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/Asset/AssetMaster/Upload', title: 'Upload Asset Master', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
     ]
   },
   {

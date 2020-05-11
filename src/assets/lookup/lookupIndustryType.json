@@ -40,7 +40,8 @@
   
     "querystring": {
       "select": "SELECT INDUSTRY_TYPE_CODE AS IndustryTypeCode,INDUSTRY_TYPE_NAME AS IndustryTypeName ,REF_INDUSTRY_TYPE_ID as RefIndustryTypeId",
-      "from": "FROM dbo.REF_INDUSTRY_TYPE WITH(NOLOCK)"
+      "from": "FROM dbo.REF_INDUSTRY_TYPE WITH(NOLOCK)",
+      "where":"WHERE IS_ACTIVE = 1"
     },
   
     "bodyList": [

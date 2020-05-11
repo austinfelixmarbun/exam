@@ -21,7 +21,7 @@ export class VendorGroupComponent implements OnInit {
   VendorGroupFrom = this.fb.group({
     VendorGrpCode: ['', Validators.required],
     VendorGrpName: ['', Validators.required],
-    VenderGrpDesc: [''],
+    VendorGrpDesc: [''],
     MrVendorCategoryCode: ['', Validators.required],
     IsActive: false,
   })
@@ -75,7 +75,7 @@ export class VendorGroupComponent implements OnInit {
 
             VendorGrpCode: this.resultData.VendorGrpCode,
             VendorGrpName: this.resultData.VendorGrpName,
-            VenderGrpDesc: this.resultData.VenderGrpDesc,
+            VendorGrpDesc: this.resultData.VendorGrpDesc,
             MrVendorCategoryCode: this.resultData.MrVendorCategoryCode,
             IsActive: this.resultData.IsActive
           })

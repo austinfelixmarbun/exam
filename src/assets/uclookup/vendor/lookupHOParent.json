@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "V.VENDOR_CODE",
+            "name": "VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
             "label": "VENDOR CODE",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "V.VENDOR_NAME",
+            "name": "VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
             "label": "VENDOR NAME",
@@ -19,21 +19,21 @@
         }
     ],
     "querystring": {
-        "select": "SELECT V.VENDOR_CODE AS VendorCode, V.VENDOR_NAME AS VendorName, V.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, V.VENDOR_ID AS VendorId, RM.RESERVE_FIELD_2 AS ReserveField2, RM.DESCR AS Descr",
-        "from": "FROM dbo.VENDOR V LEFT JOIN dbo.REF_MASTER RM ON V.MR_VENDOR_CATEGORY_CODE = RM.MASTER_CODE"
+        "select": "SELECT VENDOR_CODE AS VendorCode, VENDOR_NAME AS VendorName, MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, VENDOR_ID AS VendorId",
+        "from": "FROM dbo.VENDOR WITH(NOLOCK)"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "left",
             "label": "VENDOR CODE",
-            "name": "V.VENDOR_CODE "
+            "name": "VENDOR_CODE "
         },
         {
             "type": "sort",
             "position": "left",
             "label": "VENDOR NAME",
-            "name": "V.VENDOR_NAME"
+            "name": "VENDOR_NAME"
         },
         {
             "type": "label",

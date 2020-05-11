@@ -11,12 +11,14 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
   styleUrls: ['./vendor-branch-office-member.component.scss']
 })
 export class VendorBranchOfficeMemberComponent implements OnInit {
-
   inputPagingObj: any;
   VendorId: string;
+  objPassing: any = {};
+
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
-      this.VendorId = params['VendorId'];
+      this.objPassing["VendorId"] = params['VendorId'];
+      this.objPassing["VendorEmpId"] = params['VendorEmpId'];
     });
   }
 

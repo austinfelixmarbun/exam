@@ -18,8 +18,8 @@
             </lib-ucSubsection>
 
             <div class="form-body" id="VendorInformation">
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Vendor Category</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Vendor Category</label>
                 <div class="col-md-9">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrVendorCategoryCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrVendorCategoryCode.invalid }">
@@ -30,16 +30,16 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Branch Code</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Branch Code</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorCode">
                   <show-errors [control]="VendorForm.controls.VendorCode" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Branch Name</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Branch Name</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorName">
                   <show-errors [control]="VendorForm.controls.VendorName" [submit]="enjiForm.submitted">
@@ -47,8 +47,8 @@
                 </div>
               </div>
               <div class="form-body">
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>Branch Type</label>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>Branch Type</label>
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrVendorTypeCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrVendorTypeCode.invalid }"
@@ -62,16 +62,16 @@
                 </div>
               </div>
               <div [hidden]="VendorForm.controls.MrVendorTypeCode.value != 'C'">
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>Registration Number</label>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>Registration Number</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per" formControlName="RegistrationNo">
                     <show-errors [control]="VendorForm.controls.RegistrationNo" [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
                 </div>
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>License Number</label>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>License Number</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per" formControlName="LicenseNo">
                     <show-errors [control]="VendorForm.controls.LicenseNo" [submit]="enjiForm.submitted">
@@ -80,8 +80,8 @@
                 </div>
               </div>
               <div [hidden]="VendorForm.controls.MrVendorTypeCode.value != 'P'">
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>ID Type</label>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>ID Type</label>
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrIdTypeCode.invalid }">
@@ -92,8 +92,8 @@
                     </show-errors>
                   </div>
                 </div>
-                <div class="form-group row adins-required">
-                  <label class="col-md-3  adInsLabel" translate>ID Number</label>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>ID Number</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per" formControlName="IdNo">
                     <show-errors [control]="VendorForm.controls.IdNo" [submit]="enjiForm.submitted">
@@ -117,8 +117,8 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Email</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Email</label>
                 <div class="col-md-9">
                   <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                     class="form-control adInsInput width-50-per" formControlName="Email">
@@ -134,24 +134,24 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Establishment Date</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Establishment Date</label>
                 <div class="col-md-9">
                   <input type="date" class="form-control adInsInput width-50-per" formControlName="EstablishmentDt">
                   <show-errors [control]="VendorForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Partnership Date</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Partnership Date</label>
                 <div class="col-md-9">
                   <input type="date" class="form-control adInsInput width-50-per" formControlName="PartnershipDt">
                   <show-errors [control]="VendorForm.controls.PartnershipDt" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel">Active Status</label>
+              <div class="form-group row">
+                <label class="col-md-3">Active Status</label>
                 <div class="col-md-9">
                   <select class="form-control" formControlName="IsActive">
                     <option value="true">Yes</option>
@@ -165,9 +165,9 @@
             <div id="HOInformation">
               <div
                 *ngIf="MrVendorCategoryCode=='SUPPLIER_HO' || MrVendorCategoryCode=='SUPPLIER_HOLDING' || MrVendorCategoryCode=='SUPPLIER_BRANCH'">
-                <div class="form-body">
-                  <div class="form-group row adins-required">
-                    <label class="col-md-3 adInsLabel">Supplier HO</label>
+                <div class="form-body" *ngIf="inputLookupParentObj!=undefined">
+                  <div class="form-group row">
+                    <label class="col-md-3 adins-required-label">Supplier HO</label>
                     <div class="col-md-3">
                       <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                         [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
@@ -175,8 +175,8 @@
                     </div>
                   </div>
 
-                  <div class="form-group row adins-required">
-                    <label class="col-md-3 adInsLabel">Supplier Upping Calculation Method</label>
+                  <div class="form-group row">
+                    <label class="col-md-3 adins-required-label">Supplier Upping Calculation Method</label>
                     <div class="col-md-9">
                       <select class="form-control adInsInput" style="width: inherit" formControlName="ReservedField3"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField3.invalid }">
@@ -188,8 +188,8 @@
                     </div>
                   </div>
 
-                  <div class="form-group row adins-required">
-                    <label class="col-md-3 adInsLabel">Supplier Class</label>
+                  <div class="form-group row">
+                    <label class="col-md-3">Supplier Class</label>
                     <div class="col-md-9">
                       <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField4"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField4.invalid }">
@@ -202,7 +202,7 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-md-3 adInsLabel">Bpkb Aging</label>
+                    <label class="col-md-3 adins-required-label">Bpkb Aging</label>
                     <div class="col-md-9">
                       <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField5">
                       <show-errors [control]="VendorForm.controls.ReservedField5" [submit]="enjiForm.submitted">
@@ -210,8 +210,8 @@
                     </div>
                   </div>
 
-                  <div class="form-group row adins-required">
-                    <label class="col-md-3 adInsLabel">Days A/P Payment Due after Go Live</label>
+                  <div class="form-group row">
+                    <label class="col-md-3 adins-required-label">Days A/P Payment Due after Go Live</label>
                     <div class="col-md-9">
                       <input type="number" class="form-control adInsInput width-50-per"
                         formControlName="ReservedField6">
@@ -220,8 +220,8 @@
                     </div>
                   </div>
 
-                  <div class="form-group row adins-required">
-                    <label class="col-md-3 adInsLabel">Max Refund Type</label>
+                  <div class="form-group row">
+                    <label class="col-md-3 adins-required-label">Max Refund Type</label>
                     <div class="col-md-9">
                       <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField7"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField7.invalid }">
@@ -233,8 +233,8 @@
                     </div>
                   </div>
 
-                  <div class="form-group row adins-required">
-                    <label class="col-md-3 adInsLabel">Max Refund Value </label>
+                  <div class="form-group row">
+                    <label class="col-md-3 adins-required-label">Max Refund Value </label>
                     <div class="col-md-9">
                       <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField8">
                       <show-errors [control]="VendorForm.controls.ReservedField8" [submit]="enjiForm.submitted">
@@ -245,16 +245,16 @@
               </div>
             </div>
             <div *ngIf="MrVendorCategoryCode=='SURVEYOR_HO' || MrVendorCategoryCode=='SURVEYOR_BRANCH' ">
-              <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel">Surveyor HO</label>
-                <div class="col-md-3">
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Surveyor HO</label>
+                <div class="col-md-3" *ngIf="inputLookupParentObj!=undefined">
                   <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupParentSurveyor'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel" translate>Assignment Type</label>
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label" translate>Assignment Type</label>
                 <div class="col-md-9">
                   <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField9"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField9.invalid }">
@@ -265,7 +265,6 @@
                   </show-errors>
                 </div>
               </div>
-
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" translate>Maximum Task Load</label>
                 <div class="col-md-9">
@@ -274,13 +273,12 @@
                   </show-errors>
                 </div>
               </div>
-
             </div>
 
             <div *ngIf="MrVendorCategoryCode=='ASSET_INSCO_HO' || MrVendorCategoryCode=='ASSET_INSCO_BRANCH'">
-              <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel">Asset Insurance HO</label>
-                <div class="col-md-3">
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Asset Insurance HO</label>
+                <div class="col-md-3" *ngIf="inputLookupParentObj!=undefined">
                   <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
@@ -288,9 +286,9 @@
               </div>
             </div>
             <div *ngIf="MrVendorCategoryCode=='LIFE_INSCO_BRANCH'">
-              <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel">Life Insurance HO</label>
-                <div class="col-md-3">
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Life Insurance HO</label>
+                <div class="col-md-3" *ngIf="inputLookupParentObj!=undefined">
                   <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
@@ -298,9 +296,9 @@
               </div>
             </div>
             <div *ngIf="MrVendorCategoryCode=='AGENCY_PERSONAL'">
-              <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel">Agent Recuiter</label>
-                <div class="col-md-3">
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Agent Recuiter</label>
+                <div class="col-md-3" *ngIf="inputLookupParentObj!=undefined">
                   <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
@@ -311,8 +309,8 @@
             <lib-ucSubsection [id]="'TaxInfo'" [title]="'Tax Info'" [panel]="'TaxInformation'">
             </lib-ucSubsection>
             <div id="TaxInformation">
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Tax Calculation Method</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
                 <div class="col-md-9">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrTaxCalcMethodCode.invalid }">
@@ -323,25 +321,25 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel">VAT</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label">VAT</label>
                 <div class="col-md-9">
-                  <select class="form-control" formControlName="IsActive">
+                  <select class="form-control" formControlName="IsVat">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                   </select>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Tax Payer Number</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerNo">
-                  <show-errors [control]="VendorForm.controls.TaxpayerNo" [submit]="enjiForm.submitted">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo">
+                  <show-errors [control]="VendorForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Tax Payer Name</label>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Tax Payer Name</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerName">
                   <show-errors [control]="VendorForm.controls.TaxpayerName" [submit]="enjiForm.submitted">
@@ -356,10 +354,10 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-body adins-required">
-                <div class="form-group row adins-required">
-                  <label class="col-md-3 adInsLabel">Zip Code</label>
-                  <div class="col-md-3">
+              <div class="form-body">
+                <div class="form-group row">
+                  <label class="col-md-3 adins-required-label">Zip Code</label>
+                  <div class="col-md-3" *ngIf="inputLookupParentObj!=undefined">
                     <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
                       [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookupZipcode($event)">
                     </lib-uclookupgeneric>

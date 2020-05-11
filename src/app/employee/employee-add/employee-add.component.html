@@ -73,17 +73,15 @@
                 <show-errors [control]="RefEmpForm.controls.JoinDt" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
-            <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="IdType">ID Type</label>
+            <div class="form-group row">
+              <label class="col-md-3 adins-required-label" translate>ID Type </label>
               <div class="col-md-9">
-                <select formControlName="MrIdTypeCode" class="form-control"
+                <select class="form-control" style="width: auto" formControlName="MrIdTypeCode"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.MrIdTypeCode.invalid }">
-                  <option [value]="KTP">KTP</option>
+                  <option *ngFor="let vp of IdTypeList" [value]="vp.Key">
+                    {{vp.Value}}
+                  </option>
                 </select>
-                <show-errors [control]="RefEmpForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted"></show-errors>
-                <!-- <input type="text" class="form-control adInsInput width-75-per" formControlName="MrIdTypeCode" required 
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.MrIdTypeCode.invalid }">
-                <show-errors [control]="RefEmpForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted"></show-errors> -->
               </div>
             </div>
             <div class="form-group row adins-required">
@@ -136,7 +134,7 @@
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.AreaCode4.invalid }" />
                 <show-errors [control]="RefEmpForm.controls.AreaCode4" [submit]="enjiForm.submitted"></show-errors>
               </div>
-              <div class="col-md-1" style="padding: 0; text-align: center;">
+              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
                 /
               </div>
               <div class="col-md-2">
@@ -188,17 +186,17 @@
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.PhnArea1.invalid }" />
                 <show-errors [control]="RefEmpForm.controls.PhnArea1" [submit]="enjiForm.submitted"></show-errors>
               </div>
-              <div class="col-md-1" style="padding: 0; text-align: center;">
+              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
                 -
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <input class="form-control adInsInput" formControlName="Phn1" required 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.Phn1.invalid }" />
                 <show-errors [control]="RefEmpForm.controls.Phn1" [submit]="enjiForm.submitted"></show-errors>
               </div>
-              <div class="col-md-1" style="padding: 0; text-align: center;">
-                ext.
-              </div>
+              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
+                /
+              </div> 
               <div class="col-md-2">
                 <input class="form-control adInsInput" formControlName="PhnExt1" required 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.PhnExt1.invalid }" />
@@ -210,14 +208,14 @@
               <div class="col-md-2">
                 <input class="form-control adInsInput" formControlName="PhnArea2" required />
               </div>
-              <div class="col-md-1" style="padding: 0; text-align: center;">
+              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
                 -
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <input class="form-control adInsInput" formControlName="Phn2" required />
               </div>
-              <div class="col-md-1" style="padding: 0; text-align: center;">
-                ext.
+              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
+                /
               </div>
               <div class="col-md-2">
                 <input class="form-control adInsInput" formControlName="PhnExt2" required />
@@ -228,14 +226,14 @@
               <div class="col-md-2">
                 <input class="form-control adInsInput" formControlName="PhnArea3" required />
               </div>
-              <div class="col-md-1" style="padding: 0; text-align: center;">
+              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
                 -
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <input class="form-control adInsInput" formControlName="Phn3" required />
               </div>
-              <div class="col-md-1" style="padding: 0; text-align: center;">
-                ext.
+              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
+                /
               </div>
               <div class="col-md-2">
                 <input class="form-control adInsInput" formControlName="PhnExt3" required />
@@ -246,7 +244,10 @@
               <div class="col-md-2">
                 <input class="form-control adInsInput" formControlName="FaxArea" required />
               </div>
-              <div class="col-md-7">
+              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
+                -
+              </div>
+              <div class="col-md-2">
                 <input class="form-control adInsInput" formControlName="Fax" required />
               </div>
             </div>

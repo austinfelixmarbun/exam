@@ -47,7 +47,8 @@
               "src/assets/sass/app.scss",
               "src/styles.css",
               "src/adInsStyles.css",
-              "node_modules/angular-archwizard/archwizard.css"
+              "node_modules/angular-archwizard/archwizard.css",
+              "node_modules/bs-stepper/dist/css/bs-stepper.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
