@@ -26,9 +26,12 @@ export class AssetAccessoryAddEditComponent implements OnInit {
   acObj: AssetAccessoryObj; 
   addUrl: any;
   editUrl: any;
+  GetAssetTypeById: string;
+  assetTypeName: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.addUrl = AdInsConstant.AddNewAssetAccesory;
     this.editUrl = AdInsConstant.EditAssetAccessory;
+    this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -42,6 +45,13 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     });
   }
   ngOnInit() {
+    console.log('test');
+    var assetTypeReq = {"AssetTypeId": this.AssetTypeId};
+    this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
+      (response) => {
+        this.assetTypeName = response['AssetTypeName'];
+      }
+    );
     if (this.pageType == "edit") {
       var acObj = new AssetAccessoryObj();
       acObj.AssetAccessoryId = this.AssetAccessoryId;
