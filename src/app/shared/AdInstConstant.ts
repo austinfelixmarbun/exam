@@ -323,6 +323,7 @@ export class AdInsConstant {
   public static SelectRole = "/UserSessionLog/SelectRole";
 
   //NOTIFICATION
+  public static SendNotificationRemainingPasswordExpirationDaysToUser = environment.FoundationR3Url + "/Notification/SendNotificationRemainingPasswordExpirationDaysToUser";
   public static NotificationPost = "/Message/Post";
   public static NotificationSignalR = "/notification";
   public static GetNotificationHByNotificationHId = "/NotificationH/GetNotificationHByNotificationHId";

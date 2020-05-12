@@ -37,6 +37,8 @@ export class LoginPageComponent implements OnInit {
     ngOnInit() {
         console.log("Init Login");
         this.FoundationR3Url = environment.FoundationR3Url;
+
+        
     }
     
     onSubmit(event) {
@@ -65,10 +67,18 @@ export class LoginPageComponent implements OnInit {
                    }
                    else{
                     this.rolePickService.openDialog(object);
-
+                    const object2 = {
+                        Usernames: [
+                            username
+                        ],
+                        Role: "",
+                        Message: "",
+                        Title: "Password Expiration",
+                        Type: "Notification"
+                    };
+                    this.http.post(AdInsConstant.SendNotificationRemainingPasswordExpirationDaysToUser, object2).subscribe();
                    }
-                },
-                (error) => {
+               
 
                 })
             },
