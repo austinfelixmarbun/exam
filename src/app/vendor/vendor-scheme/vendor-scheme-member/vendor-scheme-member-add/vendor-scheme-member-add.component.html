@@ -24,7 +24,7 @@
             <td>
               <div *ngIf="listSelectedId.indexOf(item.VendorId) >- 1">
                 <input type="checkbox" id="checkSame" name="itemSame"
-                  (change)="Checked(item.VendorSchmId,  $event.target.checked)" [checked]="true">
+                  (change)="Checked(item.VendorId,  $event.target.checked)" [checked]="true">
               </div>
               <div *ngIf="listSelectedId.indexOf(item.VendorId) < 0">
                 <input type="checkbox" id="checkDiff" name="itemDiff"
