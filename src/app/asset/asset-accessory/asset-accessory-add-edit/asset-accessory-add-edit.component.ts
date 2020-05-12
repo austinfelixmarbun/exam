@@ -18,14 +18,14 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     AssetAccessoryCode: ['', [Validators.required, Validators.maxLength(50)]],
     IsActive: [true]
   });
-  pageType: any;
-  AssetTypeId: any;
-  AssetAccessoryId: any;
-  apiUrl: any;
-  result: any;
+  pageType: string;
+  AssetTypeId: number;
+  AssetAccessoryId: number;
+  apiUrl: string;
+  result: AssetAccessoryObj;
   acObj: AssetAccessoryObj; 
-  addUrl: any;
-  editUrl: any;
+  addUrl: string;
+  editUrl: string;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.addUrl = AdInsConstant.AddNewAssetAccesory;
     this.editUrl = AdInsConstant.EditAssetAccessory;
@@ -50,7 +50,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.AssetAccessoryForm.controls.AssetAccessoryCode.disable();
 
       this.http.post(this.apiUrl, acObj).subscribe(
-        (response) => {
+        (response: AssetAccessoryObj) => {
           this.result = response;
           this.AssetAccessoryForm.patchValue({
             AssetAccessoryCode: this.result.AssetAccessoryCode,

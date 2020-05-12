@@ -27,7 +27,6 @@ export class NegativeAssetDetailComponent implements OnInit {
   inputLookupObj: InputLookupObj;
   criteriaList: Array<CriteriaObj>;
   criteriaObj: CriteriaObj;
-  assetTypeList: Array<Object>;
   negativeAssetSourceList: Array<Object>;
   fullAssetName: string = "";
   serial1Disabled: boolean = false;

@@ -11,6 +11,7 @@ import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsService } from 'app/shared/services/adIns.service';
+import { AssetSchmDObj } from 'app/shared/model/AssetSchmDObj.Model';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -23,31 +24,31 @@ export class AddAssetSchemeComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   @ViewChild(UCSearchComponent) UCSearchComponent;
   resultData: any;
-  pageNow: any;
-  totalData: any;
-  pageSize: any = 10;
-  apiUrl: any;
-  orderByKey: any = null;
-  orderByValue = true;
-  deleteUrl: any;
-  inputObj: any;
-  pageType: any = 'add';
-  AssetSchmCode: any;
-  AssetSchmName: any;
-  IsActive: any;
-  assetSchmHObj: any;
-  AssetTypeId: any;
-  exportData: any;
-  arrAssetSchmD: any = new Array();
-  responseResultData: any;
-  listSelectedId: Array<any> = [];
-  tempListId: Array<any> = [];
-  tempData: Array<any> = [];
-  arrAddCrit = new Array<CriteriaObj>();
-  arrCrit: any;
-  checkboxAll: any = false;
-  getAssetSchmHByIdUrl = AdInsConstant.GetAssetSchmHById;
-  addListAssetSchmDUrl = AdInsConstant.AddRangeAssetSchmD;
+  pageNow: number;
+  totalData: number;
+  pageSize: number = 10;
+  apiUrl: string;
+  orderByKey: string = null;
+  orderByValue: boolean = true;
+  deleteUrl: string;
+  inputObj: InputSearchObj;
+  pageType: string = 'add';
+  AssetSchmCode: string;
+  AssetSchmName: string;
+  IsActive: string;
+  assetSchmHObj: AssetSchemeHObj;
+  AssetTypeId: number;
+  // exportData: any;
+  arrAssetSchmD: Array<AssetSchmDObj> = new Array<AssetSchmDObj>();
+  responseResultData: AssetSchemeHObj;
+  listSelectedId: Array<number> = new Array<number>();
+  tempListId: Array<number> = new Array<number>();
+  tempData: Array<any> = new Array<any>();
+  arrAddCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
+  arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
+  checkboxAll: boolean = false;
+  getAssetSchmHByIdUrl: string = AdInsConstant.GetAssetSchmHById;
+  addListAssetSchmDUrl: string = AdInsConstant.AddRangeAssetSchmD;
 
   AssetSchmHId: any;
   getListAssetSchmDByAssetSchmHId = AdInsConstant.GetListAssetSchmDByAssetSchmHId;
@@ -98,7 +99,7 @@ export class AddAssetSchemeComponent implements OnInit {
         }
 
         this.http.post(this.getAssetSchmHByIdUrl, assetSchmHObj).subscribe(
-          response => {
+          (response: AssetSchemeHObj) => {
             this.responseResultData = response;
             this.AssetTypeId = this.responseResultData.AssetTypeId;
 
@@ -128,7 +129,7 @@ export class AddAssetSchemeComponent implements OnInit {
             addCritAssetType.DataType = 'numeric';
             addCritAssetType.propName = 'AM.ASSET_TYPE_ID';
             addCritAssetType.restriction = AdInsConstant.RestrictionEq;
-            addCritAssetType.value = this.AssetTypeId;
+            addCritAssetType.value = this.AssetTypeId.toString();
             this.arrCrit.push(addCritAssetType);
 
             this.inputObj.addCritInput.push(addCritIsActive);
@@ -158,7 +159,7 @@ export class AddAssetSchemeComponent implements OnInit {
     }
   }
 
-  Checked(assetSchmDId: any, isChecked: any): void {
+  Checked(assetSchmDId: number, isChecked: boolean): void {
     if (isChecked) {
       this.listSelectedId.push(assetSchmDId);
     } else {
@@ -211,10 +212,13 @@ export class AddAssetSchemeComponent implements OnInit {
     }
 
     for (let index = 0; index < this.tempData.length; index++) {
-      var assetSchmDObj = {
-        AssetSchmHId: this.AssetSchmHId,
-        AssetMasterId: this.tempData[index].AssetMasterId
-      }
+      // var assetSchmDObj = {
+      //   AssetSchmHId: this.AssetSchmHId,
+      //   AssetMasterId: this.tempData[index].AssetMasterId
+      // }
+      var assetSchmDObj = new AssetSchmDObj();
+      assetSchmDObj.AssetSchmHId = this.AssetSchmHId;
+      assetSchmDObj.AssetMasterId = this.tempData[index].AssetMasterId;
       this.arrAssetSchmD.push(assetSchmDObj);
     }
 
