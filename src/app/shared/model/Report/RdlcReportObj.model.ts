@@ -12,7 +12,7 @@ export class RdlcReportObj {
     constructor() {
         this.RequestUserId = 0;
         this.RequesterEmail = "";
-        this.ReportProcessorSelector = "";
+        this.ReportProcessorSelector = "RdlcReportProcessor";
         this.ExportFormat = "";
         this.ReportName = "";
         this.ExportFile = "";
@@ -29,8 +29,6 @@ export class MainReportObj {
     SystemDate: Date;
     CoyName: string;
     OfficeName: string;
-    From: string;
-    To: string;
 
     constructor() {
         this.FilterBy = "";
@@ -38,18 +36,17 @@ export class MainReportObj {
         this.SystemDate = new Date();
         this.CoyName = "";
         this.OfficeName = "";
-        this.From = "";
-        this.To = "";
     }
 }
 
 export class MainReportDetailObj {
     ReportDataProviderName: string;
-    ReportDataProviderParameter: any;
+    ReportDataProviderParameter: Object;
     ReportTemplateName: string;
 
     constructor() {
-        this.ReportDataProviderName = "";
+        this.ReportDataProviderName = "DefaultDataRDLCProvider";
+        this.ReportDataProviderParameter = new Object();
         this.ReportTemplateName = "";
     }
 
