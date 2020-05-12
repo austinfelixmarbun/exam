@@ -21,6 +21,7 @@ import { AssetMasterAddEditChildComponent } from './asset-master/asset-master-ad
 import { AssetMasterAddEditParentComponent } from './asset-master/asset-master-add-edit-parent/asset-master-add-edit-parent.component';
 import { AddAssetSchemeComponent } from './asset-scheme/add-asset-scheme/add-asset-scheme.component';
 import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/asset-scheme-member.component';
+import { UploadAssetMasterComponent } from './asset-master/upload-asset-master/upload-asset-master.component';
 
 const routes: Routes = [
   {
@@ -185,6 +186,13 @@ const routes: Routes = [
         component: AssetMasterAddEditChildComponent,
         data: {
           title: 'Asset Master Add Edit Child'
+        },
+      },
+      {
+        path: 'AssetMaster/Upload',
+        component: UploadAssetMasterComponent,
+        data: {
+          title: 'Upload Asset Master'
         },
       }
     ]

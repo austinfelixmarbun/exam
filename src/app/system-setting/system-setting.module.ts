@@ -32,7 +32,8 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { RefFormPagingComponent } from './ref-form/ref-form-paging/ref-form-paging.component';
 import { RefFormDetailComponent } from './ref-form/ref-form-detail/ref-form-detail.component';
 import { RefFormRoleMappingComponent } from './ref-form/ref-form-role-mapping/ref-form-role-mapping.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { RefFormRolePagingComponent } from './ref-form/ref-form-role-paging/ref-form-role-paging.component';
+import { RoleFormPagingComponent } from './role/role-form-paging/role-form-paging.component';
 
 
 @NgModule({
@@ -73,7 +74,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NotificationApprovalDetailComponent,
     RefFormPagingComponent,
     RefFormDetailComponent,
-    RefFormRoleMappingComponent
+    RefFormRoleMappingComponent,
+    RefFormRolePagingComponent,
+    RoleFormPagingComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

@@ -1,0 +1,80 @@
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { RolePickService } from 'app/shared/rolepick/rolepick.service';
+import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { fromEvent } from 'rxjs';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { text } from '@angular/core/src/render3';
+
+@Component({
+  selector: 'app-change-password',
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.scss'],
+  providers: [NGXToastrService]
+})
+export class ChangePasswordComponent implements OnInit {
+
+  @ViewChild('password') userPasswordRef: ElementRef;
+  @ViewChild('newpassword') userNewPasswordRef: ElementRef;
+  @ViewChild('confirmenwpassword') userConfirmNewPasswordRef: ElementRef;
+  @ViewChild('changepasswordform') changePasswordForm: NgForm;
+
+  isMatch = true;
+  username: string;
+  private apiUrl: string;
+  FoundationR3Url: string;
+
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
+    this.route.queryParams.subscribe(params => {
+      this.username = params['Username'];
+    });
+  }
+
+  ngOnInit() {
+   this.eventValidatePassword(this.userConfirmNewPasswordRef.nativeElement);
+   this.eventValidatePassword(this.userNewPasswordRef.nativeElement);
+  }
+
+  eventValidatePassword(any){
+    fromEvent(any, 'keyup').pipe(debounceTime(1000), distinctUntilChanged(), tap((text) => {
+      if (this.userConfirmNewPasswordRef.nativeElement.value != this.userNewPasswordRef.nativeElement.value) {
+        this.isMatch = false;
+      }
+      else {
+        this.isMatch = true;
+      }
+    })).subscribe();
+  }
+
+  onSubmit(event) {
+    if (this.isMatch) {
+      const password = this.userPasswordRef.nativeElement.value;
+      const newpassword = this.userNewPasswordRef.nativeElement.value;
+
+      var requestObj = { "Username": this.username, "Password": password, "NewPassword": newpassword };
+      this.http.post(AdInsConstant.ChangePasswordRefUserByUsername, requestObj).subscribe(
+        (response) => {
+          console.log(response);
+          if (response["Message"] == "Success") {
+            this.toastr.successMessage(response["message"]);
+            this.router.navigateByUrl('/dashboard/dash-board');
+          }
+          else {
+            this.toastr.errorMessage("Invalid Password.");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    else
+      this.toastr.errorMessage("Password Mismatch.");
+    
+  }
+
+}

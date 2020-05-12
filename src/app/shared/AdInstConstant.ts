@@ -41,6 +41,12 @@ export class AdInsConstant {
 
   public static WebSocketUrl = environment.FoundationR3Url+"/Notificationhub";
 
+  // DOWNLOAD
+  public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';
+
+  // UPLOAD
+  public static UploadFile = environment.FoundationR3Url + "/Upload/UploadFile";
+
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
   public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
@@ -175,10 +181,12 @@ export class AdInsConstant {
   public static ResetPassword = "/UserManagement/ResetPassword";
   public static AddRefUserR3 = "/RefUser/AddRefUser";
   public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
+  public static GetRefUserByUsername = environment.FoundationR3Url + "/RefUser/GetRefUserByUsername";
   public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
   public static AddRefUserRole = environment.FoundationR3Url + "/RefUserRole/AddRefUserRole"
   public static EditRefUserRole = environment.FoundationR3Url + "/RefUserRole/EditRefUserRole";
   public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
+  public static ChangePasswordRefUserByUsername = environment.FoundationR3Url + "/RefUser/ChangePasswordRefUserByUsername";
   public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
 
   //REF-ROLE
@@ -356,8 +364,7 @@ export class AdInsConstant {
   public static GetListAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
   public static GetListAssetMasterByAssetSchmHId = environment.FoundationR3Url + "/AssetMaster/GetListAssetMasterByAssetSchmHId";
   public static EditListAssetSchmDByAssetMasterId = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmDByAssetMasterId";
-
-
+  public static GetUploadAssetMasterByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + '/AssetMaster/GetUploadAssetMasterByUploadMonitoringNoAndTrxType';
 
   //REF PROFESSION
 
@@ -394,7 +401,7 @@ export class AdInsConstant {
   //REF MODULE
   public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
   public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
-  public static GetListKeyValueById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
+  public static GetListKeyValueRefModuleById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
 
   //REF EMP LEAVE MANAGEMENT
   public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
@@ -800,6 +807,7 @@ export class AdInsConstant {
   
   // SURVEY ORDER
   public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
+  public static GetSrvyOrderByTrxRefNoAndSrvySourceCode = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderByTrxRefNoAndSrvySourceCode";
   public static GetListSryvObject = environment.FoundationR3Url + "/SrvyOrder/GetListSryvObject";
   public static SendSrvyOrder = environment.FoundationR3Url + "/SrvyOrder/SendSrvyOrder";
   
@@ -818,4 +826,6 @@ export class AdInsConstant {
   //AUTH FORM
   public static AddListAuthForm = environment.FoundationR3Url + "/AuthForm/AddListAuthForm";
   public static GetListAuthFormByRefFormId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefFormId";
+  public static DeleteAuthForm = "/AuthForm/DeleteAuthForm";
+  public static GetListAuthFormByRefRoleId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefRoleId";
 }

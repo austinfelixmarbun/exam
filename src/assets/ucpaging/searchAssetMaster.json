@@ -207,13 +207,15 @@
               "conditions" : [ 
                 {
                   "property" : "IsFinal", 
-                  "value" : "0"
+                  "value" : "0",
+                  "restriction": "EQ"
                 }
               ],
                 "result" : 
                 {
-                  "type": "edit",
+                  "type": "url",
                   "path": "/Asset/AssetMaster/Child",
+                  "icon": "ft-edit-2",
                   "param": [
                     {
                       "type": "AssetMasterId",
