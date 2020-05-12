@@ -15,10 +15,8 @@ import { FormBuilder } from '@angular/forms';
 export class CustomerViewPersonalAddressComponent implements OnInit {
   GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
   GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-  arrCrit: any;
-  inputObj: any;
-  CustId: any;
+  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;  
+  CustId: number;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
   ddlItem: any;

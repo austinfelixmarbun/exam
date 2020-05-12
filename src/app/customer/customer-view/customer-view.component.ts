@@ -9,13 +9,11 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./customer-view.component.scss']
 })
 export class CustomerViewComponent implements OnInit {
-  viewCustMainInfoHeaderObj : any;
-  CustId: any;
-  viewCustJobData: string;
+  viewCustMainInfoHeaderObj : string;
+  CustId: number; 
   getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
   custResultData: any;
-  custModel: any;
-  viewCustJobDataAddress: string;
+  custModel: string; 
   isMainData: boolean;
   isAddress: boolean;
   isJobData: boolean;
@@ -25,8 +23,8 @@ export class CustomerViewComponent implements OnInit {
   isCustGroup: any;
   isOtherAttr: boolean;
   isAppListing: boolean;
-  custType: any;
-  viewCustCoyMainInfoHeader: any;
+  custType: string;
+  viewCustCoyMainInfoHeader: string;
   isManagement: boolean;
   isContact: boolean;
   isLegal: boolean;

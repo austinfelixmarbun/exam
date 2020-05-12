@@ -14,10 +14,8 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 })
 export class CustomerViewAddressComponent implements OnInit {
   GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
-  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  arrCrit: any;
-  inputObj: any;
-  CustId: any;
+  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView; 
+  CustId: number;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
   ddlItem: any;

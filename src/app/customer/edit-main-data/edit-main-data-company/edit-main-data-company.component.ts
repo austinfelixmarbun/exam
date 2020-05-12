@@ -20,15 +20,15 @@ export class EditMainDataCompanyComponent implements OnInit {
   getListActiveRefMasterUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl : string;
   tempCompanyTypeCode: any;
-  custCompanyObj: any;
-  custObj: any
+  custCompanyObj: CustCompanyObj;
+  custObj: CustObj;
   tempCustCompanyObj: any;
   tempCustObj: any
-  CustId: any;
-  editCustUrl: any;
-  editCustCompanyUrl: any;
-  From: any;
-  VipNotesRequired : any;
+  CustId: number;
+  editCustUrl: string;
+  editCustCompanyUrl: string;
+  From: string;
+  VipNotesRequired : boolean;
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;

@@ -12,10 +12,8 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./customer-view-coy-legal.component.scss']
 })
 
-export class CustomerViewCoyLegalComponent implements OnInit {
-  arrCrit: any;
-  inputObj: any;
-  CustId: any;
+export class CustomerViewCoyLegalComponent implements OnInit { 
+  CustId: number;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
   ddlItem: any;

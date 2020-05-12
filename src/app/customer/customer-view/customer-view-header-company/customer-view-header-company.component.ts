@@ -26,18 +26,18 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
       }
     });
   }
-  custObj: any;
+  custObj: CustObj;
   custCompanyObj: any;
   tempCustObj: any;
   tempCustCompanyObj: any;
-  getRefMasterByMasterCodeUrl: any;
-  getCustCompanyUrl: any;
-  getCustUrl: any;
+  getRefMasterByMasterCodeUrl: string;
+  getCustCompanyUrl: string;
+  getCustUrl: string;
   tempMrCustModelCode: any;
   tempMrCompanyTypeCode: any;
   StatusIsVip : string;
   StatusAffiliate : string;
-  IdCust: any; 
+  IdCust: number; 
   ngOnInit() {
     
     this.custObj = new CustObj();

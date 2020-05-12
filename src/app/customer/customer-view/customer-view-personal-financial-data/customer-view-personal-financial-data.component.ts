@@ -9,7 +9,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./customer-view-personal-financial-data.component.scss']
 })
 export class CustomerViewPersonalFinancialDataComponent implements OnInit {
-  CustId: any;
+  CustId: number;
   GetCBAForCustFinDataByCustIdUrl = AdInsConstant.GetCBAForCustFinDataByCustId;
   viewCustFinData =   "./assets/ucviewgeneric/viewCustFinData.json";
   responseCBAObj: any;

@@ -23,31 +23,17 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
       }
     });
    }
-  Gender: any;
-  GenderDesc: any;
-  MrIdTypeCode: any;
-  MrIdTypeCodeDesc: any;
-  CustModel: any;
-  CustModelDesc
-  BirthPlace: any;
-  BirthDt: any;
-  IdNo: any;
-  TaxIdNo: any;
-  IdExpiredDt: any;
-  MotherMaidenName: any;
-  resultData: any;
-  addUrl: any; IdCust: any;
-  custObj: any;
+  IdCust: number;
+  custObj: CustObj;
   tempCustPersonalObj: any;
-  custPersonalObj: any;
+  custPersonalObj: CustPersonalObj;
   tempCustObj: any;
-  getRefMasterByMasterCodeUrl: any;
+  getRefMasterByMasterCodeUrl: string;
   tempMrGenderCode: any;
   tempMrIdTypeCode;
   tempMrCustModelCode: any;
-  StatusIsVip : any;
-  StatusAffiliate : any;
-  viewCustMainInfoHeaderObj : any;
+  StatusIsVip : string;
+  StatusAffiliate : string; 
   ngOnInit() {
       this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
@@ -92,8 +78,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         }
         this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrGenderCode).subscribe(
           (response) => {
-            this.tempMrGenderCode = response;
-         
+            this.tempMrGenderCode = response; 
           }
         );
       });

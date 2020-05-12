@@ -11,7 +11,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 export class CustomerViewCoyManagementComponent implements OnInit {
-  CustId: any;
+  CustId: number;
   GetCustCompanyMgmntShrholderForCustViewByCustIdUrl = AdInsConstant.GetCustCompanyMgmntShrholderForCustViewByCustId;
   responseObj: any;
 

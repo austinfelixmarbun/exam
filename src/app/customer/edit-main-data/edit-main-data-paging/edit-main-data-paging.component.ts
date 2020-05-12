@@ -11,7 +11,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class EditMainDataPagingComponent implements OnInit {
 
   constructor() { }
-  inputPagingObj:any;
+  inputPagingObj:UcPagingObj;
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/editMainDataCustomer.json";
