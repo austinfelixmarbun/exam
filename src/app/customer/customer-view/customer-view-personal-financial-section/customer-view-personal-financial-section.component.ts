@@ -14,7 +14,7 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
   GetCustPersonalFinDataForCustViewByCustIdUrl = AdInsConstant.GetCustPersonalFinDataForCustViewByCustId;
   custObj: CustObj;
   tempCustObj: Object;
-  IdCust: any;
+  IdCust: number;
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {

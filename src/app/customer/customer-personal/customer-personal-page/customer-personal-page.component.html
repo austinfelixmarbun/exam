@@ -70,7 +70,7 @@
           <div class="bs-stepper-content">
             <!-- your steps content here -->
             <div id="customer-detail-tab" class="content" role="tabpanel" aria-labelledby="customer-detail-tab-trigger">
-              <app-customer-personal-detail *ngIf="isDetail == true" (outputTab)="terimaValue($event)">
+              <app-customer-personal-detail (outputTab)="terimaValue($event)">
               </app-customer-personal-detail>
             </div>
             <div id="address-tab" class="content" role="tabpanel" aria-labelledby="address-tab-trigger">

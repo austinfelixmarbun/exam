@@ -18,25 +18,29 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderPersonalComponent implements OnInit {
-   
-  @Input() custCompanyId : any;
-  @Input() CustCompanyMgmntShrholderId : any;
+  @Input() custCompanyId : number;
+  @Input() CustCompanyMgmntShrholderId : number;
   @Output () outputValue : EventEmitter<object>= new EventEmitter();
-  getListActiveRefMasterUrl: any;
-  tempMrGenderCode: any;
+
   tempIdType: any;
-  tempMrJobPositionCode : any;
+  tempMrGenderCode: any;
   tempMrCustModelCode : any;
-  custCompanyMgmntShrholderObj : any;
-  addManagementShareholderUrl : any;
-  tempKTPCheck: any;
-  KTP = RefMasterConstant.EKtp;
-  getCustCompanyMgmntShrholderUrl : string;
-  editManagementShareholderUrl : string;
-  GetListActiveRefMasterWithReserveFieldAllUrl : string;
+  tempMrJobPositionCode : any;
   tempCustCompanyMgmntShrholderObj : any;
-  inputLookupCustPersonalObj : any;
-  tempShareholderCustNo : any;
+
+  inputLookupCustPersonalObj : InputLookupObj;
+  custCompanyMgmntShrholderObj : CustCompanyMgmntShrholderObj;
+
+  tempKTPCheck: boolean;
+
+  KTP: string;
+  tempShareholderCustNo: string;
+  getListActiveRefMasterUrl: string;
+  addManagementShareholderUrl : string;
+  editManagementShareholderUrl : string;
+  getCustCompanyMgmntShrholderUrl : string;
+  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.required,Validators.maxLength(100)]],
     MrCustModelCode: [''],
@@ -49,11 +53,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     TaxIdNo: ['',Validators.pattern("^[0-9]+$")],
     MrJobPositionCode: ['',[Validators.required]],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
-    
-    // SharePrcnt: new FormControl('1', Validators.compose([ Validators.min(0), Validators.max(100)])),
     IsSigner: [false], 
   });
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+    this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
     this.getCustCompanyMgmntShrholderUrl = AdInsConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
@@ -171,7 +175,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
   SaveValue(){ 
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-    this.custCompanyMgmntShrholderObj.custCompanyId = this.custCompanyId;
+    this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
       this.custCompanyMgmntShrholderObj = this.tempCustCompanyMgmntShrholderObj;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;

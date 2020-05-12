@@ -9,27 +9,28 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-customer-contact-check',
   templateUrl: './customer-contact-check.component.html',
-  styleUrls: ['./customer-contact-check.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class CustomerContactCheckComponent implements OnInit {
-  isAdd: any;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
- 
-  IdCust : any;
-  tempCustomerPersonalContactPerson;
-  getCustomerPersonalContactPersonUrl: any;
-  deleteCustomerPersonalContactPersonUrl
-  custPersonContactPersonObj: any;
-  isReload: any;
-  constructor(private route: ActivatedRoute,private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+
+  isAdd: boolean;
+  IdCust: number;
+  tempCustomerPersonalContactPerson: any;
+  getCustomerPersonalContactPersonUrl: string;
+  deleteCustomerPersonalContactPersonUrl: string;
+  custPersonContactPersonObj: CustPersonalContactPersonObj;
+
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
     this.deleteCustomerPersonalContactPersonUrl = AdInsConstant.DeleteCustPersonalContactPerson;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
-         this.IdCust = params["IdCust"];
-       }
-     });
+        this.IdCust = params["IdCust"];
+      }
+    });
   }
 
   ngOnInit() {
@@ -41,7 +42,7 @@ export class CustomerContactCheckComponent implements OnInit {
     this.outputValue.emit({ isAdd: this.isAdd });
   }
   deleteItem(custId: any) {
-    if(confirm('Are you sure to delete this record?')){
+    if (confirm('Are you sure to delete this record?')) {
       this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonContactPersonObj.CustPersonalContactPersonId = custId;
       this.http.post(this.deleteCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
@@ -54,7 +55,6 @@ export class CustomerContactCheckComponent implements OnInit {
         }
       );
     }
- 
   }
 
   editItem(custPersonalContactPersonId: any) {

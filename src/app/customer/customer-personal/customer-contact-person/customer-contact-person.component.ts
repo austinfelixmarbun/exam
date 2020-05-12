@@ -8,13 +8,14 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 export class CustomerContactPersonComponent implements OnInit {
   @Output () OutputDelete : EventEmitter<any>= new EventEmitter();
   @Output () outputTab : EventEmitter<any>= new EventEmitter();
+  
+  isAdd : boolean;
+  isDelete : boolean;
+  custPersonalContactPersonId : number;
 
-  constructor() { }
-  isAdd : any = false;
-  custPersonalContactPersonId : any;
-  isDelete : any;
+  constructor() { this.isAdd = false }
+
   ngOnInit() {
-      this.isAdd =false;
   }
 
   terimaValue(ev : any){

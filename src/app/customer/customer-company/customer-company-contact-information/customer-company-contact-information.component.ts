@@ -19,7 +19,7 @@ import { WizardComponent } from 'angular-archwizard';
 })
 export class CustomerCompanyContactInformationComponent implements OnInit {
   
-  @Input() custCompanyId : any ;
+  @Input() custCompanyId : number ;
   ContactInformationForm = this.fb.group({
     ContactPersonName: ['', [Validators.maxLength(100),Validators.required]],
     MrGenderCode: ['', [Validators.maxLength(100)]],
@@ -31,24 +31,26 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     Email2: [''], 
   });
 
-  custAddrObj: any;
-  IdCust: any;
-  custCompanyContactPersonObj  : any;
-  addCustCompanyContactPersonUrl : any;
-  UcAddressObj :  any;
-  inputFieldObj : any;
-  addNewCustAddrUrl :any;
-  tempMrGenderCode : any;
-  getListActiveRefMasterUrl : any;
-  tempMrJobPositionCode : any;
-  getCustCompanyByCustIdUrl : any;
-  tempCustCompanyContactPersonObj : any;
-  tempCustAddrObj : any;
-  getCustAddrUrl : any;
-  getCustAddrByMrCustAddrTypeUrl : any;
-  getCustCompanyContactPersonByCustCompanyIdUrl : any;
-  editCustAddrUrl : any;
-  editCustCompanyContactPersonByCustCompanyIdUrl : any;
+  tempCustAddrObj: any;
+  tempMrGenderCode: any;
+  tempMrJobPositionCode: any;
+  tempCustCompanyContactPersonObj: any;
+
+  custAddrObj: CustAddrObj;
+  UcAddressObj:  UcAddressObj;
+  inputFieldObj: InputFieldObj;
+  custCompanyContactPersonObj: CustCompanyContactPersonObj;
+
+  IdCust: number;
+  getCustAddrUrl: string;
+  editCustAddrUrl: string;
+  addNewCustAddrUrl: string;
+  getListActiveRefMasterUrl: string;
+  getCustCompanyByCustIdUrl : string;
+  addCustCompanyContactPersonUrl: string;
+  getCustAddrByMrCustAddrTypeUrl: string;
+  editCustCompanyContactPersonByCustCompanyIdUrl: string;
+  getCustCompanyContactPersonByCustCompanyIdUrl: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent ) { 
     this.route.queryParams.subscribe(params => { 
@@ -177,7 +179,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custAddrObj.AreaCode3 = this.ContactInformationForm.value.UcAddress.AreaCode3;
     this.custAddrObj.AreaCode4 = this.ContactInformationForm.value.UcAddress.AreaCode4;
     this.custAddrObj.City = this.ContactInformationForm.value.UcAddress.City;
-    this.custAddrObj.ZipCode = this.ContactInformationForm.value.UcAddressZipcode.value;
+    this.custAddrObj.Zipcode = this.ContactInformationForm.value.UcAddressZipcode.value;
     this.custAddrObj.SubZipcode = this.ContactInformationForm.value.UcAddressZipcode.value;
     this.custAddrObj.Fax = this.ContactInformationForm.value.UcAddress.Fax;
     this.custAddrObj.FaxArea = this.ContactInformationForm.value.UcAddress.FaxArea;

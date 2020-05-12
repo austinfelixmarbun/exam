@@ -15,16 +15,19 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderCheckComponent implements OnInit {
-  
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  getCustCompanyIdUrl: any;
-  IdCust: any;
-  custCompanyObj: any;
+
   tempCustCompanyObj: any;
-  getListCompanyManagementShareholderByCustCompanyId: any;
   tempListCompanyManagementShareholder: any;
-  custCompanyMgmntShrholderObj: any;
-  DeleteCustCompanyMgmntShrholderUrl: any;
+
+  custCompanyObj: CustCompanyObj;
+  custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
+
+  IdCust: number;
+  getCustCompanyIdUrl: string;
+  DeleteCustCompanyMgmntShrholderUrl: string;
+  getListCompanyManagementShareholderByCustCompanyId: string;
+
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
     this.getCustCompanyIdUrl = AdInsConstant.GetCustCompanyByCustId;
     this.getListCompanyManagementShareholderByCustCompanyId = AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;

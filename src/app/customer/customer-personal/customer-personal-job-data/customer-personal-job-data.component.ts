@@ -18,13 +18,13 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 export class CustomerPersonalJobDataComponent implements OnInit {
   // @Output() outputTab: EventEmitter<object> = new EventEmitter();
   
-  CustModel : any;
-  IdCust : any;
   custObj : any;
-  getListActiveRefMaster: any;
-  getCustById: any;
-  jobType: any;
-  listJobType: any;
+  IdCust : number;
+
+  CustModel : string;
+  getCustById: string;
+  getListActiveRefMaster: string;
+  
   CustJobDataForm = this.fb.group({
     JobDataType: [''],
   });
@@ -38,12 +38,6 @@ export class CustomerPersonalJobDataComponent implements OnInit {
       if (params["IdCust"] != null) {
          this.IdCust = params["IdCust"];
        }
-      //  if (params["IdCustPersonal"] != null) {
-      //   this.IdCustPersonal = params["IdCustPersonal"];
-      // }
-      // if (params["CustModel"] != null) {
-      //   this.CustModel = params["CustModel"];
-      // }
      });
   }
 
@@ -54,19 +48,9 @@ export class CustomerPersonalJobDataComponent implements OnInit {
       (response) => {
           this.custObj = response;
           this.CustModel = this.custObj.MrCustModelCode;
-          //this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
-          //this.CustModel = "NONPROF";
       },
       (error) => {
         console.log(error);
       });
-
-    // this.jobType = new RefMasterObj();
-    // this.jobType.RefMasterTypeCode = "CUST_MODEL";
-    // this.http.post(this.getListActiveRefMaster, this.jobType).subscribe(
-    //   (response) => {
-    //       this.listJobType = response['ReturnObject'];
-    //       //this.CustJobDataForm.patchValue({ JobDataType: this.CustModel });
-    //   });
   }
 }

@@ -15,7 +15,7 @@ import { FormBuilder } from '@angular/forms';
 export class CustomerViewCoyLegalComponent implements OnInit {
   arrCrit: any;
   inputObj: any;
-  CustId: any;
+  CustId: number;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
   ddlItem: any;

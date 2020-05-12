@@ -18,7 +18,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
   GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
   arrCrit: any;
   inputObj: any;
-  CustId: any;
+  CustId: number;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
   ddlItem: any;

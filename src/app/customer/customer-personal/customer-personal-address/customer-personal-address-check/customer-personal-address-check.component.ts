@@ -13,31 +13,36 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
   styleUrls: []
 })
 export class CustomerPersonalAddressCheckComponent implements OnInit {
+  @Output() outputValue: EventEmitter<object> = new EventEmitter();
 
-  @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  IdCust: any;
-  CustName  : any;
-  Gender : any;
-  GenderDesc:any;
-  MrIdTypeCode : any;
-  MrIdTypeCodeDesc : any;
-  CustModel : any;
-  CustModelDesc
-  BirthPlace : any;
-  BirthDt : any;
-  IdNo : any;
-  TaxIdNo : any;
-  IdExpiredDt : any;
-  MotherMaidenName : any;
+  custObj: any;
   resultData: any;
-  addUrl : any;  
-  IdCustPersonal : any;
-  custObj : any;
-  custAddrObj : any;
   listCustAddr: any;
-  getCustById: any;
-  getListCustAddr: any;
-  deleteCustAddr:any;
+
+  custAddrObj: CustAddrObj;
+
+  BirthDt: Date;
+  IdExpiredDt: Date;
+
+  IdCust: number;
+  IdCustPersonal: number;
+
+  IdNo: string;
+  addUrl: string;  
+  Gender: string;
+  TaxIdNo: string;
+  CustName: string;
+  GenderDesc: string;
+  CustModel: string;
+  BirthPlace: string;
+  MrIdTypeCode: string;
+  CustModelDesc: string;
+  MrIdTypeCodeDesc: string;
+  MotherMaidenName: string;
+
+  getCustById: string;
+  deleteCustAddr: string;
+  getListCustAddr: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
@@ -70,7 +75,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   }
 
   editItem(custAddrObj: any) {
-    this.outputTab.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId});
+    this.outputValue.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId});
   }
 
   // deleteItem(custAddrObj: any) {
@@ -88,13 +93,12 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   // }
 
   addAddr() {
-    this.outputTab.emit({ mode: 'add' });
+    this.outputValue.emit({ mode: 'add' });
   }
   next() {
-    this.outputTab.emit({ stepMode: "next" });
+    this.outputValue.emit({ stepMode: 'next' });
   }
   back(){
-    this.outputTab.emit({ stepMode: "previous" });
+    this.outputValue.emit({ stepMode: "previous" });
   }
-
 }

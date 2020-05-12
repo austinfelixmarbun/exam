@@ -17,28 +17,28 @@ import { WizardComponent } from 'angular-archwizard';
 export class CustomerCompanyAddressCheckComponent implements OnInit {
  
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  IdCust: any;
-  CustName: any;
-  Gender: any;
-  GenderDesc: any;
-  MrIdTypeCode: any;
-  MrIdTypeCodeDesc: any;
-  CustModel: any;
+  IdCust: number;
+  CustName: string;
+  Gender: string;
+  GenderDesc: string;
+  MrIdTypeCode: string;
+  MrIdTypeCodeDesc: string;
+  CustModel: string;
   CustModelDesc
-  BirthPlace: any;
-  BirthDt: any;
-  IdNo: any;
-  TaxIdNo: any;
-  IdExpiredDt: any;
-  MotherMaidenName: any;
+  BirthPlace: string;
+  BirthDt: Date;
+  IdNo: string;
+  TaxIdNo: string;
+  IdExpiredDt: Date;
+  MotherMaidenName: string;
   resultData: any;
-  addUrl: any;
-  IdCustPersonal: any;
+  addUrl: string;
+  IdCustPersonal: number;
   custObj: any;
-  custAddrObj: any;
+  custAddrObj: CustAddrObj;
   listCustAddr: any;
-  getCustById: any;
-  getListCustAddr: any;
+  getCustById: string;
+  getListCustAddr: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
     this.getCustById = AdInsConstant.GetCustByCustId;

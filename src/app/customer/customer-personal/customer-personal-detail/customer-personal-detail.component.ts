@@ -18,8 +18,37 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 })
 export class CustomerPersonalDetailComponent implements OnInit {
-
   @Output() outputTab: EventEmitter<any> = new EventEmitter();
+
+  IdCust: number;
+  flag: boolean;
+
+  criteriaObj: CriteriaObj;
+  lookUpObj: InputLookupObj;
+  criteriaList: Array<CriteriaObj>;
+  
+  custObj: CustObj;
+  custPersonalObj: CustPersonalObj;
+  
+  Country: any;
+  tempCustObj: any;
+  tempCountry: any;
+  tempReligion: any;
+  LocalCountry: any;
+  tempEducation: any;
+  tempSalutation: any;
+  tempCountryCode: any;
+  tempNationality: any;
+  tempCustPersonalObj: any;
+  tempMrMaritalStatCode: any;
+
+  Page: String;
+  getListCountryUrl: string;
+  GetCustByCustIdUrl: string;
+  EditCustPersonalUrl: string;
+  GetCustPersonalbyCustIdUrl: string;
+  GetGeneralSettingByCodeUrl: string;
+  getListActiveRefMasterUrl: string;
 
   CustomerDetailForm = this.fb.group({
     CustFullName: ['', [Validators.maxLength(100)]],
@@ -40,32 +69,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     Email1: [''],
     Email2: [''],
   }); 
-  custPersonalObj: any;
-  custObj: any;
-  tempCountry: any;
-  tempNationality: any;
-  tempSalutation: any;
-  tempEducation: any;
-  tempReligion: any;
-  IdCust: any;
-  tempCustPersonalObj: any;
-  tempMrMaritalStatCode: any;
-  tempWnaCountryCode: any;
-  getListCountryUrl: any;
-  tempCustObj: any;
-  tempCountryCode: any;
-  getListActiveRefMasterUrl: any;
-  GetCustByCustIdUrl: any;
-  GetCustPersonalbyCustIdUrl: any;
-  EditCustPersonalUrl: any;
-  lookUpObj: any;
-  criteriaList: any;
-  criteriaObj: any;
-  flag: any;
-  Page: String;
-  GetGeneralSettingByCodeUrl: string;
-  Country: any;
-  LocalCountry : any;
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;

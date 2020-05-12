@@ -16,17 +16,19 @@ import Stepper from 'bs-stepper';
 })
 export class CustomerPersonalPageComponent implements OnInit {
   private stepper: Stepper;
-  IdCust: any;
+
+  IdCust: number;
+  CustPersonalId: number;
+  CustStepIndex: number;
  
-  isDetail: any;
-  isAddress: any;
-  isContact: any;
-  isGroup: any;
-  isJob: any;
-  isFinancial: any;
-  isOther: any;
-  CustPersonalId: any;
-  CustStepIndex: number = 6;
+  isJob: boolean;
+  isGroup: boolean;
+  isOther: boolean;
+  isDetail: boolean;
+  isAddress: boolean;
+  isContact: boolean;
+  isFinancial: boolean;
+
   constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -52,83 +54,85 @@ export class CustomerPersonalPageComponent implements OnInit {
     })
     console.log(this.stepper);
     this.EnterTab("Detail");
+    this.CustStepIndex = 1;
     this.stepper.to(1);
   }
 
   EnterTab(type) {
     if (type == "Detail") {
-      this.isDetail = true;
-      this.isAddress = false;
-      this.isContact = false;
-      this.isGroup = false;
-      this.isJob = false;
-      this.isFinancial = false;
-      this.isOther = false;
+      // this.isDetail = true;
+      // this.isAddress = false;
+      // this.isContact = false;
+      // this.isGroup = false;
+      // this.isJob = false;
+      // this.isFinancial = false;
+      // this.isOther = false;
       this.CustStepIndex = 1;
     }
 
     if (type == "Address") {
-      this.isDetail = false;
-      this.isAddress = true;
-      this.isContact = false;
-      this.isGroup = false;
-      this.isJob = false;
-      this.isFinancial = false;
-      this.isOther = false;
+      // this.isDetail = false;
+      // this.isAddress = true;
+      // this.isContact = false;
+      // this.isGroup = false;
+      // this.isJob = false;
+      // this.isFinancial = false;
+      // this.isOther = false;
       this.CustStepIndex = 2;
     }
 
     if (type == "Contact") {
-      this.isDetail = false;
-      this.isAddress = false;
-      this.isContact = true;
-      this.isGroup = false;
-      this.isJob = false;
-      this.isFinancial = false;
-      this.isOther = false;
+      // this.isDetail = false;
+      // this.isAddress = false;
+      // this.isContact = true;
+      // this.isGroup = false;
+      // this.isJob = false;
+      // this.isFinancial = false;
+      // this.isOther = false;
       this.CustStepIndex = 3;
     }
     if (type == "Group") {
-      this.isDetail = false;
-      this.isAddress = false;
-      this.isContact = false;
-      this.isGroup = true;
-      this.isJob = false;
-      this.isFinancial = false;
-      this.isOther = false;
+      // this.isDetail = false;
+      // this.isAddress = false;
+      // this.isContact = false;
+      // this.isGroup = true;
+      // this.isJob = false;
+      // this.isFinancial = false;
+      // this.isOther = false;
       this.CustStepIndex = 4;
     }
     if (type == "Job") {
-      this.isDetail = false;
-      this.isAddress = false;
-      this.isContact = false;
-      this.isGroup = false;
-      this.isJob = true;
-      this.isFinancial = false;
-      this.isOther = false;
+      // this.isDetail = false;
+      // this.isAddress = false;
+      // this.isContact = false;
+      // this.isGroup = false;
+      // this.isJob = true;
+      // this.isFinancial = false;
+      // this.isOther = false;
       this.CustStepIndex = 5;
     }
     if (type == "Financial") {
-      this.isDetail = false;
-      this.isAddress = false;
-      this.isContact = false;
-      this.isGroup = false;
-      this.isJob = false;
-      this.isFinancial = true;
-      this.isOther = false;
+      // this.isDetail = false;
+      // this.isAddress = false;
+      // this.isContact = false;
+      // this.isGroup = false;
+      // this.isJob = false;
+      // this.isFinancial = true;
+      // this.isOther = false;
       this.CustStepIndex = 6;
     }
 
     if (type == "Other") {
-      this.isDetail = false;
-      this.isAddress = false;
-      this.isContact = false;
-      this.isGroup = false;
-      this.isJob = false;
-      this.isFinancial = false;
-      this.isOther = true;
+      // this.isDetail = false;
+      // this.isAddress = false;
+      // this.isContact = false;
+      // this.isGroup = false;
+      // this.isJob = false;
+      // this.isFinancial = false;
+      // this.isOther = true;
       this.CustStepIndex = 7;
     }
+    this.stepper.to(this.CustStepIndex);
   }
 
   terimaValue(ev: any) {
