@@ -14,15 +14,14 @@ import { ActivatedRoute } from '@angular/router';
   providers: [NGXToastrService],
 })
 export class CustomerContactCheckComponent implements OnInit {
-  isAdd: any;
+  isAdd: boolean;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
  
   IdCust : any;
   tempCustomerPersonalContactPerson;
-  getCustomerPersonalContactPersonUrl: any;
-  deleteCustomerPersonalContactPersonUrl
-  custPersonContactPersonObj: any;
-  isReload: any;
+  getCustomerPersonalContactPersonUrl: string;
+  deleteCustomerPersonalContactPersonUrl: string;
+  custPersonContactPersonObj: CustPersonalContactPersonObj; 
   constructor(private route: ActivatedRoute,private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
     this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
     this.deleteCustomerPersonalContactPersonUrl = AdInsConstant.DeleteCustPersonalContactPerson;

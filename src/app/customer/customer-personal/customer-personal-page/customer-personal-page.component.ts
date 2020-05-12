@@ -14,22 +14,16 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   providers: [NGXToastrService],
 })
 export class CustomerPersonalPageComponent implements OnInit {
-
  
- 
- 
- 
-  IdCust: any;
- 
- 
-  isDetail: any;
-  isAddress: any;
-  isContact: any;
-  isGroup: any;
-  isJob: any;
-  isFinancial: any;
-  isOther: any;
-  CustPersonalId: any;
+  IdCust: string; 
+  isDetail: boolean;
+  isAddress: boolean;
+  isContact: boolean;
+  isGroup: boolean;
+  isJob: boolean;
+  isFinancial: boolean;
+  isOther: boolean;
+  CustPersonalId: number;
   constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {

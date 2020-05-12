@@ -22,21 +22,21 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   @Input() custCompanyId : any;
   @Input() CustCompanyMgmntShrholderId : any;
   @Output () outputValue : EventEmitter<object>= new EventEmitter();
-  getListActiveRefMasterUrl: any;
+  getListActiveRefMasterUrl: string;
   tempMrGenderCode: any;
   tempIdType: any;
   tempMrJobPositionCode : any;
   tempMrCustModelCode : any;
-  custCompanyMgmntShrholderObj : any;
-  addManagementShareholderUrl : any;
-  tempKTPCheck: any;
+  custCompanyMgmntShrholderObj : CustCompanyMgmntShrholderObj;
+  addManagementShareholderUrl : string;
+  tempKTPCheck: boolean;
   KTP = RefMasterConstant.EKtp;
   getCustCompanyMgmntShrholderUrl : string;
   editManagementShareholderUrl : string;
   GetListActiveRefMasterWithReserveFieldAllUrl : string;
   tempCustCompanyMgmntShrholderObj : any;
-  inputLookupCustPersonalObj : any;
-  tempShareholderCustNo : any;
+  inputLookupCustPersonalObj : InputLookupObj;
+  tempShareholderCustNo : string;
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.required,Validators.maxLength(100)]],
     MrCustModelCode: [''],
@@ -171,7 +171,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
   SaveValue(){ 
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-    this.custCompanyMgmntShrholderObj.custCompanyId = this.custCompanyId;
+    this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
       this.custCompanyMgmntShrholderObj = this.tempCustCompanyMgmntShrholderObj;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;

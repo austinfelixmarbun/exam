@@ -16,23 +16,22 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   providers: [NGXToastrService]
 })
 export class CustomerCompanyAddressAddComponent implements OnInit {
-  @Input() AddrId: any;
-  IdCust: string;
-  @Input() mode: any;
+  @Input() AddrId: number;
+  IdCust: number;
+  @Input() mode: string;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  pageType: any;
-  addCustAddr: any;
-  editCustAddr: any;
-  getCustAddr: any;
+  pageType: string;
+  addCustAddrUrl: string;
+  editCustAddrUrl: string;
+  getCustAddrUrl: string;
   inputFieldAddressObj: InputFieldObj;
-  custAddressObj: CustAddrObj;
-  getListActiveRefMaster: any;
-  getRefMasterWithReserveField: any;
-  addressType: any;
-  addressObj: any;
+  custAddressObj: CustAddrObj; 
+  getRefMasterWithReserveFieldUrl: string;
+  addressType: RefMasterObj;
+  addressObj: CustAddrObj;
   listAddressType: any;
-  custAddrObj: any;
-  getListCustAddr: any;
+  custAddrObj: CustAddrObj;
+  getListCustAddrUrl: string;
   listCustAddr: any;
   copyCustomerAddr: any;
   CustDataCompanyForm = this.fb.group({
@@ -48,12 +47,11 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   });
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
-    this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
-    this.getRefMasterWithReserveField = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
-    this.getListCustAddr = AdInsConstant.GetListCustAddr;
-    this.addCustAddr = AdInsConstant.AddCustAddr;
-    this.editCustAddr = AdInsConstant.EditCustAddr;
-    this.getCustAddr = AdInsConstant.GetCustAddr;
+    this.getRefMasterWithReserveFieldUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListCustAddrUrl = AdInsConstant.GetListCustAddr;
+    this.addCustAddrUrl = AdInsConstant.AddCustAddr;
+    this.editCustAddrUrl = AdInsConstant.EditCustAddr;
+    this.getCustAddrUrl = AdInsConstant.GetCustAddr;
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -79,7 +77,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.addressType = new RefMasterObj();
     this.addressType.RefMasterTypeCode = "CUST_ADDR_TYPE";
     this.addressType.ReserveField1 = "COMPANY";
-    this.http.post(this.getRefMasterWithReserveField, this.addressType).subscribe(
+    this.http.post(this.getRefMasterWithReserveFieldUrl, this.addressType).subscribe(
       (response) => {
         this.listAddressType = response['ReturnObject'];
         //this.CustDataCompanyForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
@@ -88,17 +86,16 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.IdCust;
     this.custAddrObj.MrCustAddrTypeCode = "-";
-    this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
+    this.http.post(this.getListCustAddrUrl, this.custAddrObj).subscribe(
       (response) => {
         this.listCustAddr = response["ReturnObject"];
-        this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] });
-        console.log(this.listCustAddr)
+        this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] }); 
       });
 
     if (this.pageType == "edit") {
       this.custAddrObj = new CustAddrObj();
       this.custAddrObj.CustAddrId = this.AddrId;
-      this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
+      this.http.post(this.getCustAddrUrl, this.custAddrObj).subscribe(
         (response) => {
           this.copyCustomerAddr = response;
           this.CustDataCompanyForm.patchValue({
@@ -139,7 +136,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   copyAddress() {
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
-    this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
+    this.http.post(this.getCustAddrUrl, this.custAddrObj).subscribe(
       (response) => {
         this.copyCustomerAddr = response;
         this.CustDataCompanyForm.patchValue({
@@ -203,7 +200,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.custAddressObj = new CustAddrObj();
     this.setCustAddr();
     if (this.pageType == "add") {
-      this.http.post(this.addCustAddr, this.custAddressObj).subscribe(
+      this.http.post(this.addCustAddrUrl, this.custAddressObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputValue.emit({ mode: 'check' });
@@ -215,7 +212,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     } else {
       this.custAddressObj.CustAddrId = this.AddrId;
       this.custAddressObj.RowVersion = this.copyCustomerAddr.RowVersion;
-      this.http.post(this.editCustAddr, this.custAddressObj).subscribe(
+      this.http.post(this.editCustAddrUrl, this.custAddressObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputValue.emit({ mode: 'check' });

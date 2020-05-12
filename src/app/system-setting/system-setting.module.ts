@@ -34,6 +34,7 @@ import { RefFormDetailComponent } from './ref-form/ref-form-detail/ref-form-deta
 import { RefFormRoleMappingComponent } from './ref-form/ref-form-role-mapping/ref-form-role-mapping.component';
 import { RefFormRolePagingComponent } from './ref-form/ref-form-role-paging/ref-form-role-paging.component';
 import { RoleFormPagingComponent } from './role/role-form-paging/role-form-paging.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({

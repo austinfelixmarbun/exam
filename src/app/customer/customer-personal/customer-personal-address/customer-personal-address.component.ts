@@ -10,8 +10,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class CustomerPersonalAddressComponent implements OnInit {
  
-  mode: any;
-  AddrId:any;
+  mode: string;
+  AddrId:number;
   constructor( ) {  
   }
 

@@ -10,9 +10,9 @@ export class CustomerContactPersonComponent implements OnInit {
   @Output () OutputDelete : EventEmitter<any>= new EventEmitter();
   
   constructor() { }
-  isAdd : any = false;
-  custPersonalContactPersonId : any;
-  isDelete : any;
+  isAdd : boolean = false;
+  custPersonalContactPersonId : number;
+  isDelete : boolean;
   ngOnInit() {
       this.isAdd =false;
   }

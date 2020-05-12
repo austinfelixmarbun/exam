@@ -23,15 +23,15 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   GetListActiveRefMasterWithReserveFieldAllUrl: string;
   tempCustModel: any;
   tempCompanyTypeCode: any;
-  CustModel: any;
-  MrCompanyTypeCode: any;
-  MrIdTypeCode: any;
-  CustName: any;
-  TaxIdNo: any;
-  IsVip: any;
+  CustModel: string;
+  MrCompanyTypeCode: string;
+  MrIdTypeCode: string;
+  CustName: string;
+  TaxIdNo: string;
+  IsVip: boolean;
   VipNotes: string;
-  IsAffiliateWithMf: any;
-  VipNotesRequired: any;
+  IsAffiliateWithMf: boolean;
+  VipNotesRequired: boolean;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;

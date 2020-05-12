@@ -25,8 +25,8 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 })
 export class CustomerContactAddComponent implements OnInit {
   @Output() outputValues: EventEmitter<any> = new EventEmitter();
-  @Input() custPersonalContactPersonId: any;
-  IdCust: any;
+  @Input() custPersonalContactPersonId: number;
+  IdCust: number;
   CustomerContactForm = this.fb.group({
     ContactPersonName: ['', [Validators.maxLength(100), Validators.required]],
     MotherMaidenName: ['', [Validators.maxLength(100)]],
@@ -49,10 +49,10 @@ export class CustomerContactAddComponent implements OnInit {
     Email: [''],
     ContactPersonCustNo: [''],
   });
-  flag: any;
+  flag: boolean;
   KTP = RefMasterConstant.EKtp;
-  tempKTPCheck: any;
-  GetListActiveRefMasterUrl: any;
+  tempKTPCheck: boolean;
+  GetListActiveRefMasterUrl: string;
   tempIdType: any;
   tempNationality: any;
   tempMrMaritalStatCode: any;
@@ -60,28 +60,28 @@ export class CustomerContactAddComponent implements OnInit {
   tempMrReligionCode: any;
   tempMrCustRelationshipCode: any;
   tempMrGenderCode: any;
-  professionLookUpObj: any;
-  lookUpObj: any;
-  existingCustomerLookUpObj: any;
+  professionLookUpObj: InputLookupObj;
+  lookUpObj: InputLookupObj;
+  existingCustomerLookUpObj: InputLookupObj;
   criteriaList: any;
   criteriaObj: any;
-  UcAddressObj: any;
-  custPersonalContactPersonObj: any;
-  tempCountryCode: any;
-  tempProfession: any;
-  tempCustId: any;
+  UcAddressObj: UcAddressObj;
+  custPersonalContactPersonObj: CustPersonalContactPersonObj;
+  tempCountryCode: string;
+  tempProfession: string;
+  tempCustId: number;
   tempCustPersonal: any;
   tempCust: any;
   tempCountry: any;
   tempCustAddress: any;
   tempCustPersonalContactPerson: any;
-  addCustPersonalContactPersonUrl: any;
-  editCustPersonalContactPersonUrl: any;
-  custObj: any;
-  custPersonalObj: any;
-  custAddrObj: any;
-  inputFieldObj: any;
-  tempProfessionCodeObj;
+  addCustPersonalContactPersonUrl: string;
+  editCustPersonalContactPersonUrl: string;
+  custObj: CustObj;
+  custPersonalObj: CustPersonalObj;
+  custAddrObj: CustAddrObj;
+  inputFieldObj: InputFieldObj;
+  tempProfessionCodeObj: any;
   GetGeneralSettingByCodeUrl: string;
   Country: any;
   businessDtMin: any;
@@ -250,7 +250,7 @@ export class CustomerContactAddComponent implements OnInit {
 
     if (this.custPersonalContactPersonId != null) {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
-      this.custPersonalContactPersonObj.custPersonalContactPersonId = this.custPersonalContactPersonId;
+      this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.custPersonalContactPersonId;
       console.log("aaaaaa");
       this.http.post(AdInsConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
         (response) => {
@@ -344,7 +344,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.custPersonalContactPersonObj.AreaCode3 = this.CustomerContactForm.value.UcAddress.AreaCode3;
     this.custPersonalContactPersonObj.AreaCode4 = this.CustomerContactForm.value.UcAddress.AreaCode4;
     this.custPersonalContactPersonObj.City = this.CustomerContactForm.value.UcAddress.City;
-    this.custPersonalContactPersonObj.ZipCode = this.CustomerContactForm.value.UcAddressZipcode.value;
+    this.custPersonalContactPersonObj.Zipcode = this.CustomerContactForm.value.UcAddressZipcode.value;
     this.custPersonalContactPersonObj.SubZipcode = this.CustomerContactForm.value.UcAddressZipcode.value;
     if (this.tempCust != null) {
       this.custPersonalContactPersonObj.ContactPersonCustNo = this.tempCust.CustNo;

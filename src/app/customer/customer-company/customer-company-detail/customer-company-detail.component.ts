@@ -22,18 +22,17 @@ export class CustomerCompanyDetailComponent implements OnInit {
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
     EstablishmentDt: ['', [Validators.required]]
   });
-  lookUpObj: any; 
-  custCompanyObj: any;
-  tempRefIndustryTypeId: any;
- 
-  editCustCompanyUrl: any;
-  IdCust: any;
-  getCustCompanyByCustIdUrl: any;
+  lookUpObj: InputLookupObj; 
+  custCompanyObj: CustCompanyObj;
+  tempRefIndustryTypeId: number; 
+  editCustCompanyUrl: string;
+  IdCust: number;
+  getCustCompanyByCustIdUrl: string;
   tempCustCompanyObj: any;
-  getCustByCustIdUrl: any;
+  getCustByCustIdUrl: string;
   tempCustObj: any;
-  refIndustryTypeObj: any;
-  getRefIndustryTypeByIndustryTypeIdUrl: any;
+  refIndustryTypeObj: RefIndustryTypeObj;
+  getRefIndustryTypeByIndustryTypeIdUrl: string;
   tempRefIndustryObj: any;
   Page: String;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();

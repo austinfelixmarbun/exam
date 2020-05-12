@@ -17,17 +17,17 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 export class CustomerCompanyManagementShareholderCheckComponent implements OnInit {
   
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  getCustCompanyIdUrl: any;
-  IdCust: any;
-  custCompanyObj: any;
+  getCustCompanyIdUrl: string;
+  IdCust: number;
+  custCompanyObj: CustCompanyObj;
   tempCustCompanyObj: any;
-  getListCompanyManagementShareholderByCustCompanyId: any;
+  getListCompanyManagementShareholderByCustCompanyIdUrl: string;
   tempListCompanyManagementShareholder: any;
-  custCompanyMgmntShrholderObj: any;
-  DeleteCustCompanyMgmntShrholderUrl: any;
+  custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
+  DeleteCustCompanyMgmntShrholderUrl: string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
     this.getCustCompanyIdUrl = AdInsConstant.GetCustCompanyByCustId;
-    this.getListCompanyManagementShareholderByCustCompanyId = AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
+    this.getListCompanyManagementShareholderByCustCompanyIdUrl = AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
     this.DeleteCustCompanyMgmntShrholderUrl = AdInsConstant.DeleteCustCompanyMgmntShrholder;
     this.route.queryParams.subscribe(params => { 
       if (params["IdCust"] != null) {
@@ -81,7 +81,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
     this.http.post(this.getCustCompanyIdUrl, this.custCompanyObj).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
-        this.http.post(this.getListCompanyManagementShareholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
+        this.http.post(this.getListCompanyManagementShareholderByCustCompanyIdUrl, this.tempCustCompanyObj).subscribe(
           (response) => {
             this.tempListCompanyManagementShareholder = response["ReturnObject"];
             console.log(this.tempListCompanyManagementShareholder);

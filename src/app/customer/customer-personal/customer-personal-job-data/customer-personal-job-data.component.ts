@@ -17,13 +17,12 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 })
 export class CustomerPersonalJobDataComponent implements OnInit {
  
-  CustModel : any;
-  IdCust : any;
+  CustModel : string;
+  IdCust : number;
   custObj : any;
+  objCust : CustObj;
   getListActiveRefMaster: any;
-  getCustById: any;
-  jobType: any;
-  listJobType: any;
+  getCustById: string;  
   CustJobDataForm = this.fb.group({
     JobDataType: [''],
   });
@@ -47,9 +46,9 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   }
 
   ngOnInit() { 
-    this.custObj = new CustObj();
-    this.custObj.CustId = this.IdCust;
-    this.http.post(this.getCustById, this.custObj).subscribe(
+    this.objCust = new CustObj();
+    this.objCust.CustId = this.IdCust;
+    this.http.post(this.getCustById, this.objCust).subscribe(
       (response) => {
           this.custObj = response;
           this.CustModel = this.custObj.MrCustModelCode;

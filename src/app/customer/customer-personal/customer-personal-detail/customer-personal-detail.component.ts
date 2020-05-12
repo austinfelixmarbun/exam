@@ -39,28 +39,28 @@ export class CustomerPersonalDetailComponent implements OnInit {
     Email1: [''],
     Email2: [''],
   }); 
-  custPersonalObj: any;
-  custObj: any;
+  custPersonalObj: CustPersonalObj;
+  custObj: CustObj;
   tempCountry: any;
   tempNationality: any;
   tempSalutation: any;
   tempEducation: any;
   tempReligion: any;
-  IdCust: any;
+  IdCust: number;
   tempCustPersonalObj: any;
   tempMrMaritalStatCode: any;
   tempWnaCountryCode: any;
-  getListCountryUrl: any;
+  getListCountryUrl: string;
   tempCustObj: any;
   tempCountryCode: any;
-  getListActiveRefMasterUrl: any;
-  GetCustByCustIdUrl: any;
-  GetCustPersonalbyCustIdUrl: any;
-  EditCustPersonalUrl: any;
-  lookUpObj: any;
+  getListActiveRefMasterUrl: string;
+  GetCustByCustIdUrl: string;
+  GetCustPersonalbyCustIdUrl: string;
+  EditCustPersonalUrl: string;
+  lookUpObj: InputLookupObj;
   criteriaList: any;
   criteriaObj: any;
-  flag: any;
+  flag: boolean;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
   Page: String;
   GetGeneralSettingByCodeUrl: string;

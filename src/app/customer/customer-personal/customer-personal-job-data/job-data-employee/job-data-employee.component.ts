@@ -24,50 +24,51 @@ import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
   providers: [NGXToastrService]
 })
 export class JobDataEmployeeComponent implements OnInit {
-  jobAddrId: any;
-  othBizAddrId: any;
-  jobDataId: any;
-  rowVersion: any;
+  jobAddrId: number;
+  othBizAddrId: number;
+  jobDataId: number;
+  rowVersion: string;
   typePage: string;
-  IdCust: any;
-  IdCustPersonal: any;
+  IdCust: number;
+  IdCustPersonal: number;
   custObj: any;
-  getListActiveRefMaster: any;
-  getCustById: any;
+  objCust : CustObj;
+  getListActiveRefMaster: string;
+  getCustById: string;
   jobAddressObj: CustAddrObj;
   otherAddressObj: CustAddrObj;
   inputJobAddressObj: InputFieldObj;
   inputOtherAddressObj: InputFieldObj;
-  jobStatus: any;
+  jobStatus: RefMasterObj;
   listJobStatus: any;
-  jobPosition: any;
+  jobPosition: RefMasterObj;
   listJobPosition: any;
-  companyScale: any;
+  companyScale: RefMasterObj;
   listCompanyScale: any;
   tempProfession: any;
   tempRefIndustryType: any;
-  professionLookUpObj: any;
-  industryLookUpObj: any;
-  custPersonalJobDataObj: any;
-  custJobDataObj: any;
+  professionLookUpObj: InputLookupObj;
+  industryLookUpObj: InputLookupObj;
+  custPersonalJobDataObj: CustPersonalJobDataObj;
+  custJobDataObj: CustPersonalJobDataObj;
   returnCustJobDataObj: any;
-  addJobData: any;
-  editJobData: any;
-  getJobDataByCustId: any;
-  getCustAddr: any;
-  getRefProfession: any;
-  getRefIndustryType: any;
-  refProfessionObj: any;
+  addJobData: string;
+  editJobData: string;
+  getJobDataByCustId: string;
+  getCustAddr: string;
+  getRefProfession: string;
+  getRefIndustryType: string;
+  refProfessionObj: RefProfessionObj;
   returnRefProfessionObj: any;
-  reqCustPersonalJobDataObj: any;
-  refIndustryTypeObj: any;
+  reqCustPersonalJobDataObj: RequestCustPersonalJobDataObj;
+  refIndustryTypeObj: RefIndustryTypeObj;
   returnIndustryTypeObj: any;
-  custJobAddrObj: any;
-  custOthBizAddrObj;
+  custJobAddrObj: CustAddrObj;
+  custOthBizAddrObj: CustAddrObj;
   getJobAddr: any;
   getOthBizAddr: any;
-  addressObj: any;
-  otherAddrObj: any;
+  addressObj: CustAddrObj;
+  otherAddrObj: CustAddrObj;
   JobDataEmpForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
@@ -168,8 +169,8 @@ export class JobDataEmployeeComponent implements OnInit {
         this.JobDataEmpForm.patchValue({ CompanyScale: response['ReturnObject'][0]['Key'] });
     });
     
-    this.custObj = new CustObj();
-    this.custObj.CustId = this.IdCust;
+    this.objCust = new CustObj();
+    this.objCust.CustId = this.IdCust;
     this.http.post(this.getCustById, this.custObj).subscribe(
       (response) => {
           this.custObj = response;

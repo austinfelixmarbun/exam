@@ -16,29 +16,14 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 export class CustomerPersonalAddressCheckComponent implements OnInit {
 
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  IdCust: any;
-  CustName  : any;
-  Gender : any;
-  GenderDesc:any;
-  MrIdTypeCode : any;
-  MrIdTypeCodeDesc : any;
-  CustModel : any;
-  CustModelDesc
-  BirthPlace : any;
-  BirthDt : any;
-  IdNo : any;
-  TaxIdNo : any;
-  IdExpiredDt : any;
-  MotherMaidenName : any;
-  resultData: any;
-  addUrl : any;  
-  IdCustPersonal : any;
+  IdCust: number;   
   custObj : any;
+  objCust : CustObj;
   custAddrObj : any;
   listCustAddr: any;
-  getCustById: any;
-  getListCustAddr: any;
-  deleteCustAddr:any;
+  getCustById: string;
+  getListCustAddr: string;
+  deleteCustAddr:string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
@@ -54,9 +39,9 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.IdCust);
-    this.custObj = new CustObj();
-    this.custObj.CustId = this.IdCust;
-    this.http.post(this.getCustById, this.custObj).subscribe(
+    this.objCust = new CustObj();
+    this.objCust.CustId = this.IdCust;
+    this.http.post(this.getCustById, this.objCust).subscribe(
       (response) => {
           this.custObj = response;
       });

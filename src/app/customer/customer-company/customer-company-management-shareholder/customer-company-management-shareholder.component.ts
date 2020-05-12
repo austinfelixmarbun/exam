@@ -7,10 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CustomerCompanyManagementShareholderComponent implements OnInit {
  
-  @Input () custCompanyId : any ;
+  @Input () custCompanyId : number ;
   
-  mode : any;  
-  CustCompanyMgmntShrholderId : any;
+  mode : string;  
+  CustCompanyMgmntShrholderId : number;
   constructor() {  
   }
 

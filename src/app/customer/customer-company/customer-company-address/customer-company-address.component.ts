@@ -9,8 +9,8 @@ import { Component, OnInit} from '@angular/core';
 
 export class CustomerCompanyAddressComponent implements OnInit {
   
-  mode: any;
-  AddrId:any;
+  mode: string;
+  AddrId:number;
   constructor( ) {    
     
   }

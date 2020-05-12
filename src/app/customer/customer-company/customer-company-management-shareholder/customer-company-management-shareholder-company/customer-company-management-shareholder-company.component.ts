@@ -18,20 +18,20 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 })
 export class CustomerCompanyManagementShareholderCompanyComponent implements OnInit {
   
-  @Input() custCompanyId: any;
+  @Input() custCompanyId: number;
   @Output () outputValue : EventEmitter<object>= new EventEmitter();
-  @Input() CustCompanyMgmntShrholderId : any;
+  @Input() CustCompanyMgmntShrholderId : number;
   getListActiveRefMasterUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl : string;
   tempMrCustModelCode: any;
   tempMrCompanyTypeCode: any;
-  custCompanyMgmntShrholderObj: any;
-  addManagementShareholderUrl: any;
-  getCustCompanyMgmntShrholderUrl : any;
+  custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
+  addManagementShareholderUrl: string;
+  getCustCompanyMgmntShrholderUrl : string;
   tempCustCompanyMgmntShrholderObj : any;
   editManagementShareholderUrl : string;
-  inputLookupCustCompanyObj : any;
-  tempShareholderCustNo : any;
+  inputLookupCustCompanyObj : InputLookupObj;
+  tempShareholderCustNo : string;
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.maxLength(100) ,Validators.required]],
     MrCustModelCode: [''],
@@ -112,7 +112,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
   SaveValue() { 
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-    this.custCompanyMgmntShrholderObj.custCompanyId = this.custCompanyId;
+    this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
       this.custCompanyMgmntShrholderObj = this.tempCustCompanyMgmntShrholderObj;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
