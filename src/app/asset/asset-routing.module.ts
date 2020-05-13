@@ -22,6 +22,11 @@ import { AssetMasterAddEditParentComponent } from './asset-master/asset-master-a
 import { AddAssetSchemeComponent } from './asset-scheme/add-asset-scheme/add-asset-scheme.component';
 import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/asset-scheme-member.component';
 import { UploadAssetMasterComponent } from './asset-master/upload-asset-master/upload-asset-master.component';
+import { ReviewUploadAssetMasterPagingComponent } from './asset-master/review-upload-asset-master/review-upload-asset-master-paging/review-upload-asset-master-paging.component';
+import { ReviewUploadAssetMasterDetailComponent } from './asset-master/review-upload-asset-master/review-upload-asset-master-detail/review-upload-asset-master-detail.component';
+import { NegativeAssetUploadComponent } from './negative-asset/negative-asset-upload/negative-asset-upload.component';
+import { ReviewUploadNegativeAssetPagingComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-paging/review-upload-negative-asset-paging.component';
+import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-detail/review-upload-negative-asset-detail.component';
 
 const routes: Routes = [
   {
@@ -168,6 +173,27 @@ const routes: Routes = [
         },
       },
       {
+        path: 'NegativeAsset/Upload',
+        component: NegativeAssetUploadComponent,
+        data: {
+          title: 'Negative Asset'
+        },
+      },
+      {
+        path: 'NegativeAsset/ReviewUploadPaging',
+        component: ReviewUploadNegativeAssetPagingComponent,
+        data: {
+          title: 'Negative Asset'
+        },
+      },
+      {
+        path: 'NegativeAsset/ReviewUploadDetail',
+        component: ReviewUploadNegativeAssetDetailComponent,
+        data: {
+          title: 'Negative Asset'
+        },
+      },
+      {
         path: 'AssetMaster/Paging',
         component: AssetMasterComponent,
         data: {
@@ -191,6 +217,20 @@ const routes: Routes = [
       {
         path: 'AssetMaster/Upload',
         component: UploadAssetMasterComponent,
+        data: {
+          title: 'Upload Asset Master'
+        },
+      },
+      {
+        path: 'AssetMaster/ReviewUploadPaging',
+        component: ReviewUploadAssetMasterPagingComponent,
+        data: {
+          title: 'Upload Asset Master'
+        },
+      },
+      {
+        path: 'AssetMaster/ReviewUploadDetail',
+        component: ReviewUploadAssetMasterDetailComponent,
         data: {
           title: 'Upload Asset Master'
         },

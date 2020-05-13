@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core'; 
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core'; 
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service'; 
  
  
 @Component({
@@ -10,6 +10,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class CustomerPersonalAddressComponent implements OnInit {
  
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
   mode: string;
   AddrId: number;
   
@@ -23,5 +24,13 @@ export class CustomerPersonalAddressComponent implements OnInit {
     console.log(ev);
     this.mode = ev.mode; 
     this.AddrId =  ev.AddrId;
+    console.log("testing");
+  
+  }
+  next() {
+    this.outputTab.emit({ stepMode: "next"});
+  }
+  back(){
+    this.outputTab.emit({ stepMode: "previous"});
   }
 }

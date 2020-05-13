@@ -7,7 +7,7 @@ import { environment } from 'environments/environment';
   templateUrl: './upload-asset-master.component.html'
 })
 export class UploadAssetMasterComponent implements OnInit {
-  uploadObj: any;
+  uploadObj: Object;
   constructor() { }
 
   ngOnInit() {
@@ -20,7 +20,6 @@ export class UploadAssetMasterComponent implements OnInit {
       TemplateUrl: AdInsConstant.DownloadTemplate, // URL untuk Download Template File
       TemplateName: 'Upload_Asset_Master_Template', // Nama Excel Template File
       FileErrorName: "Upload_Asset_Master_ErrorDownload", // Nama Excel Download Error File
-      // SheetName: 'TemplateGan',
 
       environmentUrl: environment.FoundationR3Url,
       apiQryPaging: AdInsConstant.GetPagingObjectBySQL,

@@ -236,7 +236,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          this.outputValue.emit({mode : 'check', stepMode: 'next' });
+          this.outputValue.emit({mode : 'check'});
           console.log(response)
         },
         (error) => {
@@ -254,7 +254,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          this.outputValue.emit({mode : 'check', stepMode: "next"});
+          this.outputValue.emit({mode : 'check'});
           console.log(response)
         },
         (error) => {
@@ -264,6 +264,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     } 
   }
   back(){
-    this.outputValue.emit({mode : 'check', stepMode: "previous"});
+    this.outputValue.emit({mode : 'check'});
   }
 }

@@ -9,7 +9,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-asset-category-add-edit',
   templateUrl: './asset-category-add-edit.component.html',
-  styleUrls: ['./asset-category-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetCategoryAddEditComponent implements OnInit {
@@ -18,18 +17,21 @@ export class AssetCategoryAddEditComponent implements OnInit {
     AssetCategoryCode: ['', [Validators.required, Validators.maxLength(50)]],
     IsActive: [true]
   });
-  pageType: any;
-  AssetTypeId: any;
-  AssetCategoryId: any;
-  apiUrl: any;
-  result: any;
+  pageType: string;
+  AssetTypeId: number;
+  AssetCategoryId: number;
+  apiUrl: string;
+  result: AssetCategoryObj;
   acObj: AssetCategoryObj;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
+  getUrl: string;
+  addUrl: string;
+  editUrl: string;
+  GetAssetTypeById: string;
+  assetTypeName: string;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.addUrl = AdInsConstant.AddNewAssetCategory;
     this.editUrl = AdInsConstant.EditAssetCategory;
+    this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -44,6 +46,12 @@ export class AssetCategoryAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    var assetTypeReq = { "AssetTypeId": this.AssetTypeId };
+    this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
+      (response) => {
+        this.assetTypeName = response['AssetTypeName'];
+      }
+    );
     if (this.pageType == "edit") {
 
       var acObj = new AssetCategoryObj();
@@ -52,7 +60,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       acObj.AssetTypeId = this.AssetTypeId;
       acObj.AssetCategoryId = this.AssetCategoryId;
       this.http.post(this.apiUrl, acObj).subscribe(
-        (response) => {
+        (response: AssetCategoryObj) => {
           this.result = response;
           this.AssetCategoryForm.patchValue({
             AssetCategoryCode: this.result.AssetCategoryCode,
