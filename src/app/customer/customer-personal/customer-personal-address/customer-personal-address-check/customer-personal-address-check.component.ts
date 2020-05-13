@@ -19,6 +19,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   resultData: any;
   listCustAddr: any;
 
+  objCust: CustObj;
   custAddrObj: CustAddrObj;
 
   BirthDt: Date;
@@ -58,9 +59,9 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.IdCust);
-    this.custObj = new CustObj();
-    this.custObj.CustId = this.IdCust;
-    this.http.post(this.getCustById, this.custObj).subscribe(
+    this.objCust = new CustObj();
+    this.objCust.CustId = this.IdCust;
+    this.http.post(this.getCustById, this.objCust).subscribe(
       (response) => {
           this.custObj = response;
       });

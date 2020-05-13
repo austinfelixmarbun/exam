@@ -123,8 +123,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
 
       });
 
-
-
     this.custObj = new CustObj()
     this.custObj.CustId = this.IdCust;
 
