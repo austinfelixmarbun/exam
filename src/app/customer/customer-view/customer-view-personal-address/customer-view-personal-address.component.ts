@@ -15,7 +15,9 @@ import { FormBuilder } from '@angular/forms';
 export class CustomerViewPersonalAddressComponent implements OnInit {
   GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
   GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;  
+  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
+  arrCrit: any;
+  inputObj: any;
   CustId: number;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
@@ -24,6 +26,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
   CustForm = this.fb.group({
     DdlAddress: ['']
   });
+  
   viewCustFinData: string;
 
   constructor(

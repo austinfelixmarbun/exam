@@ -18,8 +18,30 @@ import { WizardComponent } from 'angular-archwizard';
   providers: [NGXToastrService],
 })
 export class CustomerCompanyContactInformationComponent implements OnInit {
+  @Input() custCompanyId : number ;
 
-  @Input() custCompanyId: any;
+
+  tempCustAddrObj: any;
+  tempMrGenderCode: any;
+  tempMrJobPositionCode: any;
+  tempCustCompanyContactPersonObj: any;
+
+  custAddrObj: CustAddrObj;
+  UcAddressObj:  UcAddressObj;
+  inputFieldObj: InputFieldObj;
+  custCompanyContactPersonObj: CustCompanyContactPersonObj;
+
+  IdCust: number;
+  getCustAddrUrl: string;
+  editCustAddrUrl: string;
+  addNewCustAddrUrl: string;
+  getListActiveRefMasterUrl: string;
+  getCustCompanyByCustIdUrl : string;
+  addCustCompanyContactPersonUrl: string;
+  getCustAddrByMrCustAddrTypeUrl: string;
+  editCustCompanyContactPersonByCustCompanyIdUrl: string;
+  getCustCompanyContactPersonByCustCompanyIdUrl: string;
+
   ContactInformationForm = this.fb.group({
     ContactPersonName: ['', [Validators.maxLength(100), Validators.required]],
     MrGenderCode: ['', [Validators.maxLength(100)]],
@@ -30,28 +52,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     Email1: [''],
     Email2: [''],
   });
-
-  custAddrObj: CustAddrObj;
-  IdCust: number;
-  custCompanyContactPersonObj: CustCompanyContactPersonObj;
-  addCustCompanyContactPersonUrl: string;
-  UcAddressObj: UcAddressObj;
-  inputFieldObj: InputFieldObj;
-  addNewCustAddrUrl: string;
-  tempMrGenderCode: any;
-  getListActiveRefMasterUrl: string;
-  tempMrJobPositionCode: any;
-  getCustCompanyByCustIdUrl: string;
-  tempCustCompanyContactPersonObj: any;
-  tempCustAddrObj: any;
-  getCustAddrUrl: string;
-  getCustAddrByMrCustAddrTypeUrl: string;
-  getCustCompanyContactPersonByCustCompanyIdUrl: string;
-  editCustAddrUrl: string;
-  editCustCompanyContactPersonByCustCompanyIdUrl: string;
-
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
-    this.route.queryParams.subscribe(params => {
+  
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent ) { 
+    this.route.queryParams.subscribe(params => { 
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }

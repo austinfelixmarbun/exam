@@ -17,23 +17,27 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class CustomerCompanyAddressAddComponent implements OnInit {
   @Input() AddrId: number;
-  IdCust: number;
   @Input() mode: string;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  
+  listCustAddr: any;
+  listAddressType: any;
+  copyCustomerAddr: any;
+
+  addressObj: CustAddrObj;
+  custAddrObj: CustAddrObj;
+  addressType: RefMasterObj;
+  custAddressObj: CustAddrObj; 
+  inputFieldAddressObj: InputFieldObj;
+  
+  IdCust: number;
   pageType: string;
   addCustAddrUrl: string;
-  editCustAddrUrl: string;
   getCustAddrUrl: string;
-  inputFieldAddressObj: InputFieldObj;
-  custAddressObj: CustAddrObj; 
-  getRefMasterWithReserveFieldUrl: string;
-  addressType: RefMasterObj;
-  addressObj: CustAddrObj;
-  listAddressType: any;
-  custAddrObj: CustAddrObj;
+  editCustAddrUrl: string;
   getListCustAddrUrl: string;
-  listCustAddr: any;
-  copyCustomerAddr: any;
+  getRefMasterWithReserveFieldUrl: string;
+  
   CustDataCompanyForm = this.fb.group({
     Notes: [''],
     LuasBangunan: [''],

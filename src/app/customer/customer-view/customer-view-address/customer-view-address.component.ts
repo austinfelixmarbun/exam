@@ -13,12 +13,16 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
   styleUrls: ['./customer-view-address.component.scss']
 })
 export class CustomerViewAddressComponent implements OnInit {
-  GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
-  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView; 
   CustId: number;
+  
+  ddlItem: any;
+  arrCrit: any;
+  inputObj: any;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
-  ddlItem: any;
+
+  GetListCustAddrByCustIdForCustomerPersonalViewUrl: string;
+  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl: string;
 
   CustForm = this.fb.group({
     DdlAddress: ['']
@@ -33,7 +37,10 @@ export class CustomerViewAddressComponent implements OnInit {
     private router: Router,
     private adInsService: AdInsService,
     private fb: FormBuilder
-  ) { }
+  ) { 
+  this.GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
+  this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

@@ -13,43 +13,47 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 @Component({
   selector: 'app-customer-personal-duplicate-check',
   templateUrl: './customer-personal-duplicate-check.component.html',
-  styleUrls: ['./customer-personal-duplicate-check.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class CustomerPersonalDuplicateCheckComponent implements OnInit {
-  CustName: any;
-  Gender: any;
-  MrIdTypeCode: any;
-  CustModel: any;
-  BirthPlace: any;
-  BirthDt: any;
-  IdNo: any;
-  TaxIdNo: any;
-  IdExpiredDt: any;
-  MotherMaidenName: any;
-  IsVip: any;
-  IsAffiliateWithMf: any;
+  
   resultData: any;
-  custObj: any;
-  addCustObj: any;
-  custPersonalObj: any;
-  StatusIsVip: any;
-  StatusAffiliate: any;
-  VipNotes: any;
-  addCustUrl: any;
-  addCustPersonalUrl: any;
-  resultPersonalUrl: any;
-  IdCust: any;
-  IdCustPersonal: any;
-  urlGetDescByMasterCode: any;
   tempGender: any;
-  tempMrIdTypeCode: any;
   tempCustModel: any; 
-
-  DuplicateCustObj: DuplicateCustObj;
   ResultDuplicate: any;
+  tempMrIdTypeCode: any;
   ResultDuplicateNegative: any;
+
+  IdCust: number;
+  BirthDt: Date;
+  IdExpiredDt: Date;
+
+  custObj: CustObj;
+  addCustObj: AddCustObj;
+  custPersonalObj: CustPersonalObj;
+  DuplicateCustObj: DuplicateCustObj;
+
+  IdNo: string;
+  IsVip: string;
+  Gender: string;
+  TaxIdNo: string;
+  CustName: string;
+  VipNotes: string;
+  CustModel: string;
+  BirthPlace: string;
+  StatusIsVip: string;
+  MrIdTypeCode: string;
+  IdCustPersonal: string;
+  StatusAffiliate: string;
   DuplicateStatus: string;
+  MotherMaidenName: string;
+  IsAffiliateWithMf: string;
+
+  addCustUrl: string;
+  resultPersonalUrl: string;
+  addCustPersonalUrl: string;
+  urlGetDescByMasterCode: string;
   
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.addCustUrl = AdInsConstant.AddNewCust;
@@ -166,26 +170,26 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   SaveValue() {
 
     this.addCustObj = new AddCustObj();
-    this.addCustObj.custObj = new CustObj();
+    this.addCustObj.CustObj = new CustObj();
     this.addCustObj.CustPersonalObj = new CustPersonalObj();
-    this.addCustObj.custObj.CustName = this.CustName;
-    this.addCustObj.custObj.MrCustTypeCode = RefMasterConstant.Personal;
-    this.addCustObj.custObj.MrCustModelCode = this.CustModel;
-    this.addCustObj.custObj.MrIdTypeCode = this.MrIdTypeCode;
-    this.addCustObj.custObj.IdNo = this.IdNo;
-    this.addCustObj.custObj.IdExpiredDt = this.IdExpiredDt;
-    this.addCustObj.custObj.TaxIdNo = this.TaxIdNo;
+    this.addCustObj.CustObj.CustName = this.CustName;
+    this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
+    this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+    this.addCustObj.CustObj.MrIdTypeCode = this.MrIdTypeCode;
+    this.addCustObj.CustObj.IdNo = this.IdNo;
+    this.addCustObj.CustObj.IdExpiredDt = this.IdExpiredDt;
+    this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
     if(this.IsVip === "true"){
-      this.addCustObj.custObj.IsVip = true;
+      this.addCustObj.CustObj.IsVip = true;
     }else{
-      this.addCustObj.custObj.IsVip = false;
+      this.addCustObj.CustObj.IsVip = false;
     }
     if(this.IsAffiliateWithMf === "true"){
-      this.addCustObj.custObj.IsAffiliateWithMf = true;
+      this.addCustObj.CustObj.IsAffiliateWithMf = true;
     }else{
-      this.addCustObj.custObj.IsAffiliateWithMf = false;
+      this.addCustObj.CustObj.IsAffiliateWithMf = false;
     } 
-    this.addCustObj.custObj.VipNotes = this.VipNotes;
+    this.addCustObj.CustObj.VipNotes = this.VipNotes;
     this.addCustObj.CustPersonalObj.CustFullName = this.CustName;
     this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;
     this.addCustObj.CustPersonalObj.BirthPlace = this.BirthPlace;
@@ -211,35 +215,35 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.http.post(AdInsConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
       (response) => {
         this.addCustObj = new AddCustObj();
-        this.addCustObj.custObj = response['CustObj'];
-        this.addCustObj.custPersonalObj = response['CustPersonalObj'];
-        this.addCustObj.custObj.CustName = item.CustName;
-        this.addCustObj.custObj.MrCustTypeCode = RefMasterConstant.Personal;
-        this.addCustObj.custObj.MrCustModelCode = this.CustModel;
-        this.addCustObj.custObj.MrIdTypeCode = this.MrIdTypeCode;
-        this.addCustObj.custObj.IdNo = item.IdNo;
-        this.addCustObj.custObj.IdExpiredDt = this.IdExpiredDt;
-        this.addCustObj.custObj.TaxIdNo = item.TaxIdNo;
+        this.addCustObj.CustObj = response['CustObj'];
+        this.addCustObj.CustPersonalObj = response['CustPersonalObj'];
+        this.addCustObj.CustObj.CustName = item.CustName;
+        this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
+        this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+        this.addCustObj.CustObj.MrIdTypeCode = this.MrIdTypeCode;
+        this.addCustObj.CustObj.IdNo = item.IdNo;
+        this.addCustObj.CustObj.IdExpiredDt = this.IdExpiredDt;
+        this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
         if(this.IsVip === "true"){
-          this.addCustObj.custObj.IsVip = true;
+          this.addCustObj.CustObj.IsVip = true;
         }else{
-          this.addCustObj.custObj.IsVip = false;
+          this.addCustObj.CustObj.IsVip = false;
         }
         if(this.IsAffiliateWithMf === "true"){
-          this.addCustObj.custObj.IsAffiliateWithMf = true;
+          this.addCustObj.CustObj.IsAffiliateWithMf = true;
         }else{
-          this.addCustObj.custObj.IsAffiliateWithMf = false;
+          this.addCustObj.CustObj.IsAffiliateWithMf = false;
         } 
-        this.addCustObj.custObj.VipNotes = this.VipNotes;
-        this.addCustObj.custPersonalObj.custFullName = item.CustName;
-        this.addCustObj.custPersonalObj.MrGenderCode = this.Gender;
-        this.addCustObj.custPersonalObj.BirthPlace = this.BirthPlace;
-        this.addCustObj.custPersonalObj.BirthDt = item.BirthDt;
-        this.addCustObj.custPersonalObj.MotherMaidenName = item.MotherMaidenName;
-        this.addCustObj.custPersonalObj.IsRestInPeace = false;
+        this.addCustObj.CustObj.VipNotes = this.VipNotes;
+        this.addCustObj.CustPersonalObj.CustFullName = item.CustName;
+        this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;
+        this.addCustObj.CustPersonalObj.BirthPlace = this.BirthPlace;
+        this.addCustObj.CustPersonalObj.BirthDt = item.BirthDt;
+        this.addCustObj.CustPersonalObj.MotherMaidenName = item.MotherMaidenName;
+        this.addCustObj.CustPersonalObj.IsRestInPeace = false;
         this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
-            this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.custObj.CustId } });
+            this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId } });
           },
           error => {
             console.log(error);
@@ -258,35 +262,35 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.http.post(AdInsConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
       (response) => {
         this.addCustObj = new AddCustObj();
-        this.addCustObj.custObj = response['CustObj'];
-        this.addCustObj.custPersonalObj = response['CustPersonalObj'];
-        this.addCustObj.custObj.CustName = item.CustName;
-        this.addCustObj.custObj.MrCustTypeCode = RefMasterConstant.Personal;
-        this.addCustObj.custObj.MrCustModelCode = this.CustModel;
-        this.addCustObj.custObj.MrIdTypeCode = this.MrIdTypeCode;
-        this.addCustObj.custObj.IdNo = item.IdNo;
-        this.addCustObj.custObj.IdExpiredDt = this.IdExpiredDt;
-        this.addCustObj.custObj.TaxIdNo = item.TaxIdNo;
+        this.addCustObj.CustObj = response['CustObj'];
+        this.addCustObj.CustPersonalObj = response['CustPersonalObj'];
+        this.addCustObj.CustObj.CustName = item.CustName;
+        this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
+        this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+        this.addCustObj.CustObj.MrIdTypeCode = this.MrIdTypeCode;
+        this.addCustObj.CustObj.IdNo = item.IdNo;
+        this.addCustObj.CustObj.IdExpiredDt = this.IdExpiredDt;
+        this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
         if(this.IsVip === "true"){
-          this.addCustObj.custObj.IsVip = true;
+          this.addCustObj.CustObj.IsVip = true;
         }else{
-          this.addCustObj.custObj.IsVip = false;
+          this.addCustObj.CustObj.IsVip = false;
         }
         if(this.IsAffiliateWithMf === "true"){
-          this.addCustObj.custObj.IsAffiliateWithMf = true;
+          this.addCustObj.CustObj.IsAffiliateWithMf = true;
         }else{
-          this.addCustObj.custObj.IsAffiliateWithMf = false;
+          this.addCustObj.CustObj.IsAffiliateWithMf = false;
         } 
-        this.addCustObj.custObj.VipNotes = this.VipNotes;
-        this.addCustObj.custPersonalObj.custFullName = item.CustName;
-        this.addCustObj.custPersonalObj.MrGenderCode = this.Gender;
-        this.addCustObj.custPersonalObj.BirthPlace = this.BirthPlace;
-        this.addCustObj.custPersonalObj.BirthDt = item.BirthDt;
-        this.addCustObj.custPersonalObj.MotherMaidenName = item.MotherMaidenName;
-        this.addCustObj.custPersonalObj.IsRestInPeace = false;
+        this.addCustObj.CustObj.VipNotes = this.VipNotes;
+        this.addCustObj.CustPersonalObj.CustFullName = item.CustName;
+        this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;
+        this.addCustObj.CustPersonalObj.BirthPlace = this.BirthPlace;
+        this.addCustObj.CustPersonalObj.BirthDt = item.BirthDt;
+        this.addCustObj.CustPersonalObj.MotherMaidenName = item.MotherMaidenName;
+        this.addCustObj.CustPersonalObj.IsRestInPeace = false;
         this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
-            this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.custObj.CustId } });
+            this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId } });
           },
           error => {
             console.log(error);

@@ -10,6 +10,23 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./customer-company-main-info.component.scss']
 })
 export class CustomerCompanyMainInfoComponent implements OnInit {
+
+  tempCustModel: any;
+  tempCompanyTypeCode: any;
+
+  IsVip: boolean;
+  VipNotesRequired: boolean;
+
+  TaxIdNo: string;
+  VipNotes: string;
+  CustName: string;
+  CustModel: string;
+  MrIdTypeCode: string;
+  IsAffiliateWithMf: string;
+  MrCompanyTypeCode: string;
+  GetListActiveRefMasterUrl: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+
   CustomerCompanyForm = this.fb.group({
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -19,19 +36,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     IsAffiliateWithMf: [true],
     VipNotes: ['', [Validators.required]]
   });
-  GetListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl: string;
-  tempCustModel: any;
-  tempCompanyTypeCode: any;
-  CustModel: string;
-  MrCompanyTypeCode: string;
-  MrIdTypeCode: string;
-  CustName: string;
-  TaxIdNo: string;
-  IsVip: boolean;
-  VipNotes: string;
-  IsAffiliateWithMf: boolean;
-  VipNotesRequired: boolean;
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;

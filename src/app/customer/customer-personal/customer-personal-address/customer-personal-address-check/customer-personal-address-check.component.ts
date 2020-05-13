@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder } from '@angular/forms';
-import { WizardComponent } from 'angular-archwizard';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
@@ -11,21 +10,42 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 @Component({
   selector: 'app-customer-personal-address-check',
   templateUrl: './customer-personal-address-check.component.html',
-  styleUrls: ['./customer-personal-address-check.component.scss']
+  styleUrls: []
 })
 export class CustomerPersonalAddressCheckComponent implements OnInit {
-
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  IdCust: number;   
-  custObj : any;
-  objCust : CustObj;
-  custAddrObj : any;
-  listCustAddr: any;
-  getCustById: string;
-  getListCustAddr: string;
-  deleteCustAddr:string;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent) { 
+  custObj: any;
+  resultData: any;
+  listCustAddr: any;
+
+  objCust: CustObj;
+  custAddrObj: CustAddrObj;
+
+  BirthDt: Date;
+  IdExpiredDt: Date;
+
+  IdCust: number;
+  IdCustPersonal: number;
+
+  IdNo: string;
+  addUrl: string;  
+  Gender: string;
+  TaxIdNo: string;
+  CustName: string;
+  GenderDesc: string;
+  CustModel: string;
+  BirthPlace: string;
+  MrIdTypeCode: string;
+  CustModelDesc: string;
+  MrIdTypeCodeDesc: string;
+  MotherMaidenName: string;
+
+  getCustById: string;
+  deleteCustAddr: string;
+  getListCustAddr: string;
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListCustAddr = AdInsConstant.GetListCustAddr;
     this.deleteCustAddr = AdInsConstant.DeleteCustAddr;
@@ -56,7 +76,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   }
 
   editItem(custAddrObj: any) {
-    this.outputValue.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId });
+    this.outputValue.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId});
   }
 
   // deleteItem(custAddrObj: any) {
@@ -70,18 +90,16 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   //       console.log(error);
   //     }
   //   );
-  //   //this.outputValue.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId });
+  //   //this.outputTab.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId });
   // }
 
   addAddr() {
     this.outputValue.emit({ mode: 'add' });
-    
   }
   next() {
-    this.wizard.goToNextStep();
+    this.outputValue.emit({ stepMode: 'next' });
   }
   back(){
-    this.wizard.goToPreviousStep();
+    this.outputValue.emit({ stepMode: "previous" });
   }
-
 }

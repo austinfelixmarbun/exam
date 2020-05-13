@@ -5,20 +5,21 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-customer-personal-address',
   templateUrl: './customer-personal-address.component.html',
-  styleUrls: ['./customer-personal-address.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class CustomerPersonalAddressComponent implements OnInit {
  
   mode: string;
-  AddrId:number;
+  AddrId: number;
+  
   constructor( ) {  
   }
 
   ngOnInit() { 
     this.mode = "check";
   }
-  terimaValue(ev : any){
+  terimaValue(ev){
     console.log(ev);
     this.mode = ev.mode; 
     this.AddrId =  ev.AddrId;
