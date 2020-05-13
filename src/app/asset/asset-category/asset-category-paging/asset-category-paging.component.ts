@@ -7,8 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-asset-category-paging',
-  templateUrl: './asset-category-paging.component.html',
-  styleUrls: ['./asset-category-paging.component.scss']
+  templateUrl: './asset-category-paging.component.html'
 })
 export class AssetCategoryPagingComponent implements OnInit {
   AssetTypeId: number;

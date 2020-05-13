@@ -11,7 +11,6 @@ import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 @Component({
   selector: 'app-asset-document-add-edit',
   templateUrl: './asset-document-add-edit.component.html',
-  styleUrls: ['./asset-document-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetDocumentAddEditComponent implements OnInit {
@@ -27,6 +26,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
     IsActive: [true],
 
   });
+  assetTypeName:string;
   assetDocName: string;
   pageType: string;
   AssetTypeId: number;
@@ -42,11 +42,13 @@ export class AssetDocumentAddEditComponent implements OnInit {
   getRefAssetDocUrl: string;
   tempAssetName: any;
   temp: RefAssetDocObj;
+  GetAssetTypeById : string;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
     this.AddNewAssetDocListUrl =  AdInsConstant.AddNewAssetDocList;
     this.EditAssetDocListUrl =  AdInsConstant.EditAssetDocList;
     this.GetListRefAssetDocUrl = AdInsConstant.GetListRefAssetDoc;
+    this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
     this.route.queryParams.subscribe(params => {
       
       if (params["AssetTypeId"] != null) {
@@ -68,6 +70,12 @@ export class AssetDocumentAddEditComponent implements OnInit {
         this.AssetDocumentForm.patchValue({
           AssetDocName: this.tempAssetName[0].RefAssetDocId
         });
+      }
+    );
+    var assetTypeReq = {"AssetTypeId": this.AssetTypeId};
+    this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
+      (response) => {
+        this.assetTypeName = response['AssetTypeName'];
       }
     );
 

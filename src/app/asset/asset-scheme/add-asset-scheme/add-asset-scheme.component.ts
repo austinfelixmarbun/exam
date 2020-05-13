@@ -16,7 +16,6 @@ import { AssetSchmDObj } from 'app/shared/model/AssetSchmDObj.Model';
 @Component({
   selector: 'app-add-asset-scheme',
   templateUrl: './add-asset-scheme.component.html',
-  styleUrls: ['./add-asset-scheme.component.scss'],
   providers: [NgbPaginationConfig, NGXToastrService]
 })
 

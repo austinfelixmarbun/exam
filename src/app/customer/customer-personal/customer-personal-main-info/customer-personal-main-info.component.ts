@@ -13,7 +13,37 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
   styleUrls: ['./customer-personal-main-info.component.scss']
 })
 export class CustomerPersonalMainInfoComponent implements OnInit {
-  state: any;
+
+  Gender: any;
+  tempGender: any;
+  tempIdType: any;
+  tempCustModel: any;
+
+  custPersonalObj: CustPersonalObj;
+
+  BirthDt: Date;
+  IdExpiredDt: Date;
+  businessDtMin: Date;
+  businessDtMax: Date;
+
+  IsVip: boolean;
+  tempKTPCheck: boolean;
+  VipNotesRequired: boolean;
+
+  KTP: string;
+  IdNo: string;
+  state: string;
+  TaxIdNo: string;
+  VipNotes: string;
+  CustName: string;
+  CustModel: string;
+  BirthPlace: string;
+  MrIdTypeCode: string;
+  MotherMaidenName: string;
+  IsAffiliateWithMf: string;
+  getListActiveRefMasterUrl: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+
   CustomerPersonalForm = this.fb.group({
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     Gender: ['', [Validators.required]],
@@ -29,33 +59,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     IsAffiliateWithMf: [true],
     VipNotes: ['', [Validators.required]]
   });
-  KTP = RefMasterConstant.EKtp;
-  getListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl: string;
-  custPersonalObj: CustPersonalObj;
-  tempGender: any;
-  tempIdType: any;
-  tempCustModel: any;
-  CustName: any;
-  tempKTPCheck: any;
-  Gender: any;
-  CustModel: any;
-  MrIdTypeCode: any;
-  BirthPlace: any;
-  BirthDt: any;
-  IdNo: any;
-  TaxIdNo: any;
-  IdExpiredDt: any;
-  MotherMaidenName: any;
-  IsVip: any;
-  IsAffiliateWithMf: any;
-  VipNotes: any;
-  businessDtMin: any;
-  businessDtMax: any;
-  VipNotesRequired: boolean;
-
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
+    this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
@@ -145,7 +151,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.MotherMaidenName = this.CustomerPersonalForm.controls["MotherMaidenName"].value;
     this.IsVip = this.CustomerPersonalForm.controls["IsVip"].value;
     this.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value;
-    if(this.IsVip==true){
+    if(this.IsVip){
       this.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
     } 
     this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"], { queryParams: { "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes } });

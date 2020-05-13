@@ -45,13 +45,13 @@ export class EditMainDataPersonalComponent implements OnInit {
   GetListActiveRefMasterWithReserveFieldAllUrl  :string;
   tempCustPersonalObj: any;
   tempCustObj: any;
-  CustId: any;
-  custObj: any;
+  CustId: number;
+  custObj: CustObj;
   custPersonalObj: any;
-  From:any;
+  From:string;
   businessDtMin : any;
   businessDtMax: any;
-  VipNotesRequired : any;
+  VipNotesRequired : boolean;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = AdInsConstant.GetCustPersonalbyCustId;

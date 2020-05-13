@@ -12,7 +12,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class CustomerViewCoyContactComponent implements OnInit {
   responseResult: any;
-  CustId: any;
+  CustId: number;
   viewCustCoyViewContactData: string;
   viewCustCoyViewContactAddress: string;
   viewCustCoyViewContactInformation: string;

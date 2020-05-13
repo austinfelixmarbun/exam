@@ -16,7 +16,6 @@ import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
 @Component({
   selector: 'app-asset-master-add-edit-child',
   templateUrl: './asset-master-add-edit-child.component.html',
-  styleUrls: ['./asset-master-add-edit-child.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetMasterAddEditChildComponent implements OnInit {

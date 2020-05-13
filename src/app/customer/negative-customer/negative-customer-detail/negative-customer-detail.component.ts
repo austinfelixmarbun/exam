@@ -279,7 +279,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var custAddr = new CustAddrObj();
     custAddr.CustId = e.custId;
     custAddr.MrCustAddrTypeCode = "LEGAL";
-    this.httpClient.post(AdInsConstant.GetCustAddrLegalAddrByCustId, custAddr).subscribe(
+    this.httpClient.post(AdInsConstant.GetCustAddrByMrCustAddrType, custAddr).subscribe(
       (response: any) => {
         this.NegativeCustForm.patchValue({
           CustId: e.custId,
@@ -326,7 +326,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var custAddr = new CustAddrObj();
     custAddr.CustId = e.custId;
     custAddr.MrCustAddrTypeCode = "LEGAL";
-    this.httpClient.post(AdInsConstant.GetCustAddrLegalAddrByCustId, custAddr).subscribe(
+    this.httpClient.post(AdInsConstant.GetCustAddrByMrCustAddrType, custAddr).subscribe(
       (response: any) => {
         this.NegativeCustForm.patchValue({
           CustId: e.custId,

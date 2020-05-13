@@ -10,7 +10,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-negative-asset',
   templateUrl: './negative-asset.component.html',
-  styleUrls: ['./negative-asset.component.scss'],
   providers: [NGXToastrService]
 })
 export class NegativeAssetComponent implements OnInit {

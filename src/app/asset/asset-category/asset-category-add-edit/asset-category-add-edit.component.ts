@@ -9,7 +9,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-asset-category-add-edit',
   templateUrl: './asset-category-add-edit.component.html',
-  styleUrls: ['./asset-category-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetCategoryAddEditComponent implements OnInit {
@@ -27,9 +26,12 @@ export class AssetCategoryAddEditComponent implements OnInit {
   getUrl: string;
   addUrl: string;
   editUrl: string;
+  GetAssetTypeById: string;
+  assetTypeName: string;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.addUrl = AdInsConstant.AddNewAssetCategory;
     this.editUrl = AdInsConstant.EditAssetCategory;
+    this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -44,6 +46,12 @@ export class AssetCategoryAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    var assetTypeReq = { "AssetTypeId": this.AssetTypeId };
+    this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
+      (response) => {
+        this.assetTypeName = response['AssetTypeName'];
+      }
+    );
     if (this.pageType == "edit") {
 
       var acObj = new AssetCategoryObj();
