@@ -11,7 +11,6 @@ import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 @Component({
   selector: 'app-asset-document-add-edit',
   templateUrl: './asset-document-add-edit.component.html',
-  styleUrls: ['./asset-document-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetDocumentAddEditComponent implements OnInit {

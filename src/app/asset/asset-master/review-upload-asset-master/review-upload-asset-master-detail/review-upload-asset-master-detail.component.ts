@@ -12,7 +12,6 @@ import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 @Component({
   selector: 'app-review-upload-asset-master-detail',
   templateUrl: './review-upload-asset-master-detail.component.html',
-  styleUrls: ['./review-upload-asset-master-detail.component.scss'],
   providers: [NGXToastrService]
 })
 export class ReviewUploadAssetMasterDetailComponent implements OnInit {

@@ -20,7 +20,6 @@ export class UploadAssetMasterComponent implements OnInit {
       TemplateUrl: AdInsConstant.DownloadTemplate, // URL untuk Download Template File
       TemplateName: 'Upload_Asset_Master_Template', // Nama Excel Template File
       FileErrorName: "Upload_Asset_Master_ErrorDownload", // Nama Excel Download Error File
-      // SheetName: 'TemplateGan',
 
       environmentUrl: environment.FoundationR3Url,
       apiQryPaging: AdInsConstant.GetPagingObjectBySQL,

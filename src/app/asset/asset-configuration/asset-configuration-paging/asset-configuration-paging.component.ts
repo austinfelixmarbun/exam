@@ -5,8 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-asset-configuration-paging',
-  templateUrl: './asset-configuration-paging.component.html',
-  styleUrls: ['./asset-configuration-paging.component.scss']
+  templateUrl: './asset-configuration-paging.component.html'
 })
 export class AssetConfigurationPagingComponent implements OnInit {
 

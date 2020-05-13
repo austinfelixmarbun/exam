@@ -18,7 +18,6 @@ import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 @Component({
   selector: 'app-negative-asset-detail',
   templateUrl: './negative-asset-detail.component.html',
-  styleUrls: ['./negative-asset-detail.component.scss'],
   providers: [NGXToastrService]
 })
 export class NegativeAssetDetailComponent implements OnInit {

@@ -7,8 +7,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-asset-scheme-member',
-  templateUrl: './asset-scheme-member.component.html',
-  styleUrls: ['./asset-scheme-member.component.scss']
+  templateUrl: './asset-scheme-member.component.html'
 })
 
 export class AssetSchemeMemberComponent implements OnInit {

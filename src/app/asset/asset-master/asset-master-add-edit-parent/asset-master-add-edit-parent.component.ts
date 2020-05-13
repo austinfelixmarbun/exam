@@ -15,7 +15,6 @@ import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 @Component({
   selector: 'app-asset-master-add-edit-parent',
   templateUrl: './asset-master-add-edit-parent.component.html',
-  styleUrls: ['./asset-master-add-edit-parent.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetMasterAddEditParentComponent implements OnInit {
