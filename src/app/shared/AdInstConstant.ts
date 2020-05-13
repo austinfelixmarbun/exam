@@ -181,10 +181,12 @@ export class AdInsConstant {
   public static ResetPassword = "/UserManagement/ResetPassword";
   public static AddRefUserR3 = "/RefUser/AddRefUser";
   public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
+  public static GetRefUserByUsername = environment.FoundationR3Url + "/RefUser/GetRefUserByUsername";
   public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
   public static AddRefUserRole = environment.FoundationR3Url + "/RefUserRole/AddRefUserRole"
   public static EditRefUserRole = environment.FoundationR3Url + "/RefUserRole/EditRefUserRole";
   public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
+  public static ChangePasswordRefUserByUsername = environment.FoundationR3Url + "/RefUser/ChangePasswordRefUserByUsername";
   public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
 
   //REF-ROLE
@@ -399,7 +401,7 @@ export class AdInsConstant {
   //REF MODULE
   public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
   public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
-  public static GetListKeyValueById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
+  public static GetListKeyValueRefModuleById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
 
   //REF EMP LEAVE MANAGEMENT
   public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
@@ -731,7 +733,6 @@ export class AdInsConstant {
   public static GetCustAddr = environment.FoundationR3Url + "/CustAddr/GetCustAddrByCustAddrId";
   public static GetListCustAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustId";
   public static GetListCustAddrByCustIdForCustomerPersonalView =  environment.FoundationR3Url + "/CustAddr/GetListCustAddrByCustIdForCustomerPersonalView";
-  public static GetCustAddrLegalAddrByCustId = environment.FoundationR3Url + "/CustAddr/GetCustAddrLegalAddrByCustId"
   public static GetCustAddrByMrCustAddrType = environment.FoundationR3Url +"/CustAddr/GetCustAddrByMrCustAddrType"
   public static DeleteCustAddr = environment.FoundationR3Url +"/CustAddr/DeleteCustAddr"
 
@@ -825,4 +826,6 @@ export class AdInsConstant {
   //AUTH FORM
   public static AddListAuthForm = environment.FoundationR3Url + "/AuthForm/AddListAuthForm";
   public static GetListAuthFormByRefFormId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefFormId";
+  public static DeleteAuthForm = "/AuthForm/DeleteAuthForm";
+  public static GetListAuthFormByRefRoleId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefRoleId";
 }

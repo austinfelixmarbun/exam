@@ -17,21 +17,24 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderCompanyComponent implements OnInit {
-  
-  @Input() custCompanyId: any;
-  @Output () outputValue : EventEmitter<object>= new EventEmitter();
-  @Input() CustCompanyMgmntShrholderId : any;
-  getListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl : string;
+  @Input() custCompanyId: number;
+  @Input() CustCompanyMgmntShrholderId: number;
+  @Output () outputValue : EventEmitter<object> = new EventEmitter();
+
+  inputLookupCustCompanyObj : InputLookupObj;
+  custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
+
   tempMrCustModelCode: any;
   tempMrCompanyTypeCode: any;
-  custCompanyMgmntShrholderObj: any;
-  addManagementShareholderUrl: any;
-  getCustCompanyMgmntShrholderUrl : any;
   tempCustCompanyMgmntShrholderObj : any;
-  editManagementShareholderUrl : string;
-  inputLookupCustCompanyObj : any;
-  tempShareholderCustNo : any;
+
+  tempShareholderCustNo : string;
+  getListActiveRefMasterUrl: string;
+  addManagementShareholderUrl: string;
+  editManagementShareholderUrl: string;
+  getCustCompanyMgmntShrholderUrl: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.maxLength(100) ,Validators.required]],
     MrCustModelCode: [''],
@@ -40,6 +43,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     IsSigner: [false],
   });
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
@@ -112,7 +116,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
   SaveValue() { 
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-    this.custCompanyMgmntShrholderObj.custCompanyId = this.custCompanyId;
+    this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
       this.custCompanyMgmntShrholderObj = this.tempCustCompanyMgmntShrholderObj;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;

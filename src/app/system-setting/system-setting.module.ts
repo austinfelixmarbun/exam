@@ -20,8 +20,7 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { LookuproleModule } from '@adins/lookuprole';
 import { UcpagingModule } from '@adins/ucpaging';
-import { UcSubsectionModule } from '@adins/uc-subsection';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { UcSubsectionModule } from '@adins/uc-subsection'; 
 import { NotificationPagingComponent } from 'app/system-setting/notification/notification-paging/notification-paging.component';
 import { NotificationAddEditComponent } from 'app/system-setting/notification/notification-add-edit/notification-add-edit.component';
 import { NotificationApprovalPagingComponent } from 'app/system-setting/notification/notification-approval-paging/notification-approval-paging.component';
@@ -33,6 +32,9 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { RefFormPagingComponent } from './ref-form/ref-form-paging/ref-form-paging.component';
 import { RefFormDetailComponent } from './ref-form/ref-form-detail/ref-form-detail.component';
 import { RefFormRoleMappingComponent } from './ref-form/ref-form-role-mapping/ref-form-role-mapping.component';
+import { RefFormRolePagingComponent } from './ref-form/ref-form-role-paging/ref-form-role-paging.component';
+import { RoleFormPagingComponent } from './role/role-form-paging/role-form-paging.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -73,7 +75,9 @@ import { RefFormRoleMappingComponent } from './ref-form/ref-form-role-mapping/re
     NotificationApprovalDetailComponent,
     RefFormPagingComponent,
     RefFormDetailComponent,
-    RefFormRoleMappingComponent
+    RefFormRoleMappingComponent,
+    RefFormRolePagingComponent,
+    RoleFormPagingComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

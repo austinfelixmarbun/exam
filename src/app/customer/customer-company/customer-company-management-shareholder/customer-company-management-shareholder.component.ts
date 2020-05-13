@@ -6,11 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./customer-company-management-shareholder.component.scss']
 })
 export class CustomerCompanyManagementShareholderComponent implements OnInit {
- 
-  @Input () custCompanyId : any ;
+  @Input () custCompanyId: number;
+  mode: string;  
+  CustCompanyMgmntShrholderId: number;
   
-  mode : any;  
-  CustCompanyMgmntShrholderId : any;
   constructor() {  
   }
 
@@ -18,7 +17,7 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
      this.mode = "check";
     console.log(this.custCompanyId);
   }
-  terimaValue(ev : any){
+  terimaValue(ev){
     console.log(ev);
     this.mode = ev.mode; 
     this.CustCompanyMgmntShrholderId =  ev.CustCompanyMgmntShrholderId;

@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CustomerContactAddComponent } from './customer-contact-add.component';
 
-describe('CustomerContactAddComponent', () => {
-  let component: CustomerContactAddComponent;
-  let fixture: ComponentFixture<CustomerContactAddComponent>;
+import { RefFormRolePagingComponent } from './ref-form-role-paging.component';
+
+describe('RefFormRolePagingComponent', () => {
+  let component: RefFormRolePagingComponent;
+  let fixture: ComponentFixture<RefFormRolePagingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomerContactAddComponent ]
+      declarations: [ RefFormRolePagingComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CustomerContactAddComponent);
+    fixture = TestBed.createComponent(RefFormRolePagingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

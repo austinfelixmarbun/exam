@@ -10,51 +10,59 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AddrObj } from 'app/shared/model/AddrObj.Model';
  
 @Component({
   selector: 'app-customer-personal-address-add',
   templateUrl: './customer-personal-address-add.component.html',
-  styleUrls: ['./customer-personal-address-add.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class CustomerPersonalAddressAddComponent implements OnInit {
-  @Input () AddrId : any ;
-  @Input() mode: any; 
+  @Input () AddrId: number;
+  @Input() mode: string; 
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  IdCust: any;
-  pageType: any;
-  CustName  : any;
-  Gender : any;
-  GenderDesc:any;
-  MrIdTypeCode : any;
-  MrIdTypeCodeDesc : any;
-  CustModel : any;
-  CustModelDesc
-  BirthPlace : any;
-  BirthDt : any;
-  IdNo : any;
-  TaxIdNo : any;
-  IdExpiredDt : any;
-  MotherMaidenName : any;
+
   resultData: any;
-  addCustAddr : any;
-  editCustAddr : any;
-  getCustAddr : any;
-  getCustByCustId: any;
-  inputFieldAddressObj: InputFieldObj;
-  custAddressObj: CustAddrObj;
-  getListActiveRefMaster: any;
-  getRefMasterWithReserveField: any;
-  addressType: any;
-  addressObj: any;
-  listAddressType: any;
-  custAddrObj : any;
-  custObj: any;
   tempCustObj: any;
-  getListCustAddr: any;
   listCustAddr: any;
-  copyCustomerAddr: any;
+  listAddressType: any;
+  getListCustAddr: any;
   getCustomerAddr: any;
+  copyCustomerAddr: any;
+
+  inputFieldAddressObj: InputFieldObj;
+
+  custObj: CustObj;
+  addressObj: AddrObj;
+  addressType: RefMasterObj;
+  custAddrObj : CustAddrObj;
+  custAddressObj: CustAddrObj;
+
+  BirthDt: Date;
+  IdExpiredDt: Date;
+
+  IdCust: number;
+
+  IdNo: string;
+  Gender: string;
+  TaxIdNo: string;
+  pageType: string;
+  CustName: string;
+  GenderDesc:string;
+  CustModel: string;
+  BirthPlace: string;
+  getCustAddr: string;
+  addCustAddr: string;
+  editCustAddr: string;
+  MrIdTypeCode: string;
+  CustModelDesc: string;
+  getCustByCustId: string;
+  MrIdTypeCodeDesc: string;
+  MotherMaidenName: string;
+  getListActiveRefMaster: string;
+  getRefMasterWithReserveField: string;
+
   CustDataPersonalForm = this.fb.group({
     Notes: [''],
     LuasBangunan: [''],
@@ -85,6 +93,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   ngOnInit() {
     this.pageType = this.mode;
+    console.log(this.pageType);
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
@@ -227,7 +236,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          this.outputValue.emit({mode : 'check'});
+          this.outputValue.emit({mode : 'check', stepMode: 'next' });
           console.log(response)
         },
         (error) => {
@@ -245,7 +254,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          this.outputValue.emit({mode : 'check'});
+          this.outputValue.emit({mode : 'check', stepMode: "next"});
           console.log(response)
         },
         (error) => {
@@ -255,6 +264,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     } 
   }
   back(){
-    this.outputValue.emit({mode : 'check'});
+    this.outputValue.emit({mode : 'check', stepMode: "previous"});
   }
 }

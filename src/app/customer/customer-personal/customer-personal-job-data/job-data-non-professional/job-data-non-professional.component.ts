@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -12,38 +12,40 @@ import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.
 import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { formatDate } from '@angular/common';
-import { WizardComponent } from 'angular-archwizard';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 
 @Component({
   selector: 'app-job-data-non-professional',
   templateUrl: './job-data-non-professional.component.html',
-  styleUrls: ['./job-data-non-professional.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class JobDataNonProfessionalComponent implements OnInit {
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
+
   jobDataId: any;
   typePage: string;
   rowVersion: string
-  IdCust : any;
-  IdCustPersonal : any;
+  IdCust : number;
+  IdCustPersonal : number;
   custObj : any;
-  getListActiveRefMaster: any;
-  getCustById: any;
-  getJobDataByCustId: any;
-  getRefProfession: any;
+  objCust : CustObj;
+  getListActiveRefMaster: string;
+  getCustById: string;
+  getJobDataByCustId: string;
+  getRefProfession: string;
   tempProfession: any;
-  professionLookUpObj: any;
-  custPersonalJobDataObj: any;
-  custJobDataObj: any;
+  professionLookUpObj: InputLookupObj;
+  custPersonalJobDataObj: CustPersonalJobDataObj;
+  custJobDataObj: CustPersonalJobDataObj;
   returnCustJobDataObj: any;
-  jobAddrObj: any;
+  jobAddrObj: CustAddrObj;
   othBizAddrObj: any;
-  addJobData: any;
-  editJobData: any;
-  reqCustPersonalJobDataObj: any;
-  refProfessionObj: any;
+  addJobData: string;
+  editJobData: string;
+  reqCustPersonalJobDataObj: RequestCustPersonalJobDataObj;
+  refProfessionObj: RefProfessionObj;
   returnRefProfessionObj: any;
   JobDataNonProForm = this.fb.group({
     JobDataType: [''],
@@ -51,7 +53,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
     JobTitleName: ['']
   });
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
     this.addJobData = AdInsConstant.AddCustPersonalJobData;
@@ -82,9 +84,9 @@ export class JobDataNonProfessionalComponent implements OnInit {
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
     
-    this.custObj = new CustObj();
-    this.custObj.CustId = this.IdCust;
-    this.http.post(this.getCustById, this.custObj).subscribe(
+    this.objCust = new CustObj();
+    this.objCust.CustId = this.IdCust;
+    this.http.post(this.getCustById, this.objCust).subscribe(
       (response) => {
           this.custObj = response;
       });
@@ -122,7 +124,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
   }
 
   back(){
-    this.wizard.goToPreviousStep();
+    this.outputTab.emit({ stepMode: "previous"});
   }
 
   SaveForm(){
@@ -151,7 +153,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
           // console.log(response)
-          this.wizard.goToNextStep();
+          this.outputTab.emit({ stepMode: "next"});
         },
         (error) => {
           console.log(error);
@@ -180,7 +182,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
           // console.log(response)
-          this.wizard.goToNextStep();
+          this.outputTab.emit({ stepMode: "next"});
         },
         (error) => {
           console.log(error);
