@@ -19,10 +19,11 @@ import { UcApprovebyComponent } from './uc-approveby/uc-approveby.component';
 import { UcApprovalhistComponent } from './uc-approvalhist/uc-approvalhist.component';
 import { UcApprovalrecommendationComponent } from './uc-approvalrecommendation/uc-approvalrecommendation.component';
 import { UcApprovalsummaryComponent } from './uc-approvalsummary/uc-approvalsummary.component'
+import { UcApprovalComponent } from './uc-approval/uc-approval.component';
 
 @NgModule({
   declarations: [ApprovalScreenComponent,UcProdCompComponent, TestComponent, LookupTestComponent, 
-    UcApprovebyComponent, UcApprovalhistComponent, UcApprovalrecommendationComponent, UcApprovalsummaryComponent],
+    UcApprovebyComponent, UcApprovalhistComponent, UcApprovalrecommendationComponent, UcApprovalsummaryComponent,UcApprovalComponent],
   imports: [
     CommonModule,
     ApprovalScreenRoutingModule,
@@ -34,7 +35,8 @@ import { UcApprovalsummaryComponent } from './uc-approvalsummary/uc-approvalsumm
     UcapprovebyModule,
     UcapprovalhistModule,
     UcapprovalrecommendationModule,
-    UcapprovalsummaryModule
+    UcapprovalsummaryModule,
+    
   ],
   entryComponents : [TestComponent,LookupTestComponent],
   providers: [
