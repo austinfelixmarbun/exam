@@ -12,31 +12,39 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 @Component({
   selector: 'app-customer-company-duplicate-check',
   templateUrl: './customer-company-duplicate-check.component.html',
-  styleUrls: ['./customer-company-duplicate-check.component.scss'],
+  styleUrls: [],
 })
-export class CustomerCompanyDuplicateCheckComponent implements OnInit {   
-  CustId: number;
-  CustModel: string;
-  CustName: string;
-  MrCompanyTypeCode: string;
-  MrIdTypeCode: string; 
-  TaxIdNo: string;
-  urlGetDescByMasterCode: string;
-  tempMrCompanyTypeCode: any;
-  tempCustModel: any; 
-  addCustObj: AddCustObj;
+export class CustomerCompanyDuplicateCheckComponent implements OnInit {
+
   resultData: any;
-  IsAffiliateWithMf : any;
-  IsVip : any;
-  VipNotes : string;
-  StatusAffiliate : string;
-  StatusIsVip : string;
-  DuplicateCustObj: DuplicateCustObj;
+  tempCustModel: any;
   ResultDuplicate: any;
+  tempMrIdTypeCode: any;
+  tempCompanyTypeCode: any;
+  tempMrCompanyTypeCode: any;
   ResultDuplicateNegative: any;
-  DuplicateStatus: string; 
-  
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { 
+
+  addCustObj: AddCustObj;
+  DuplicateCustObj: DuplicateCustObj;
+
+  CustId: number;
+
+  IdNo: string;
+  IsVip: string;
+  TaxIdNo: string;
+  VipNotes: string;
+  CustName: string;
+  CustModel: string;
+  tempIdType: string;
+  StatusIsVip: string;
+  MrIdTypeCode: string;
+  StatusAffiliate: string;
+  DuplicateStatus: string;
+  MrCompanyTypeCode: string;
+  IsAffiliateWithMf: string;
+  urlGetDescByMasterCode: string;
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.urlGetDescByMasterCode = AdInsConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
       if (params["CustModel"] != null) {
@@ -122,26 +130,26 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   
   SaveValue() {
     this.addCustObj = new AddCustObj();
-    this.addCustObj.custObj = new CustObj();
-    this.addCustObj.custCompanyObj = new CustCompanyObj();
-    this.addCustObj.custObj.CustName = this.CustName;
-    this.addCustObj.custCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-    this.addCustObj.custObj.MrCustTypeCode =  RefMasterConstant.Company;
-    this.addCustObj.custObj.MrCustModelCode = this.CustModel;
-    this.addCustObj.custObj.MrIdTypeCode = RefMasterConstant.Npwp;
-    this.addCustObj.custObj.IdNo = this.TaxIdNo;
-    this.addCustObj.custObj.TaxIdNo = this.TaxIdNo;
+    this.addCustObj.CustObj = new CustObj();
+    this.addCustObj.CustCompanyObj = new CustCompanyObj();
+    this.addCustObj.CustObj.CustName = this.CustName;
+    this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
+    this.addCustObj.CustObj.MrCustTypeCode =  RefMasterConstant.Company;
+    this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+    this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
+    this.addCustObj.CustObj.IdNo = this.TaxIdNo;
+    this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
     if(this.IsVip === "true"){
-      this.addCustObj.custObj.IsVip = true;
+      this.addCustObj.CustObj.IsVip = true;
     }else{
-      this.addCustObj.custObj.IsVip = false;
+      this.addCustObj.CustObj.IsVip = false;
     }
     if(this.IsAffiliateWithMf === "true"){
-      this.addCustObj.custObj.IsAffiliateWithMf = true;
+      this.addCustObj.CustObj.IsAffiliateWithMf = true;
     }else{
-      this.addCustObj.custObj.IsAffiliateWithMf = false;
+      this.addCustObj.CustObj.IsAffiliateWithMf = false;
     } 
-    this.addCustObj.custObj.VipNotes = this.VipNotes;
+    this.addCustObj.CustObj.VipNotes = this.VipNotes;
     this.http.post(AdInsConstant.AddNewCust, this.addCustObj).subscribe(
       (response) => {
         this.resultData = response;
@@ -160,29 +168,29 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNo, custObj).subscribe(
       (response) => {
         this.addCustObj = new AddCustObj();
-        this.addCustObj.custObj = response['CustObj'];
-        this.addCustObj.custCompanyObj = response['CustCompanyObj'];
-        this.addCustObj.custObj.CustName = item.CustName;
-        this.addCustObj.custCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-        this.addCustObj.custObj.MrCustTypeCode = RefMasterConstant.Company;
-        this.addCustObj.custObj.MrCustModelCode = this.CustModel;
-        this.addCustObj.custObj.MrIdTypeCode = RefMasterConstant.Npwp;
-        this.addCustObj.custObj.IdNo = item.TaxIdNo;
-        this.addCustObj.custObj.TaxIdNo = item.TaxIdNo;
+        this.addCustObj.CustObj = response['CustObj'];
+        this.addCustObj.CustCompanyObj = response['CustCompanyObj'];
+        this.addCustObj.CustObj.CustName = item.CustName;
+        this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
+        this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;
+        this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+        this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
+        this.addCustObj.CustObj.IdNo = item.TaxIdNo;
+        this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
         if(this.IsVip === "true"){
-          this.addCustObj.custObj.IsVip = true;
+          this.addCustObj.CustObj.IsVip = true;
         }else{
-          this.addCustObj.custObj.IsVip = false;
+          this.addCustObj.CustObj.IsVip = false;
         }
         if(this.IsAffiliateWithMf === "true"){
-          this.addCustObj.custObj.IsAffiliateWithMf = true;
+          this.addCustObj.CustObj.IsAffiliateWithMf = true;
         }else{
-          this.addCustObj.custObj.IsAffiliateWithMf = false;
+          this.addCustObj.CustObj.IsAffiliateWithMf = false;
         } 
-        this.addCustObj.custObj.VipNotes = this.VipNotes;
+        this.addCustObj.CustObj.VipNotes = this.VipNotes;
         this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
-            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.custObj.CustId } });
+            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId } });
           },
           error => {
             console.log(error);
@@ -201,29 +209,29 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNo, custObj).subscribe(
       (response) => {
         this.addCustObj = new AddCustObj();
-        this.addCustObj.custObj = response['CustObj'];
-        this.addCustObj.custCompanyObj = response['CustCompanyObj'];
-        this.addCustObj.custObj.CustName = item.CustName;
-        this.addCustObj.custCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-        this.addCustObj.custObj.MrCustTypeCode = RefMasterConstant.Company;
-        this.addCustObj.custObj.MrCustModelCode = this.CustModel;
-        this.addCustObj.custObj.MrIdTypeCode = RefMasterConstant.Npwp;
-        this.addCustObj.custObj.IdNo = item.TaxIdNo;
-        this.addCustObj.custObj.TaxIdNo = item.TaxIdNo;
+        this.addCustObj.CustObj = response['CustObj'];
+        this.addCustObj.CustCompanyObj = response['CustCompanyObj'];
+        this.addCustObj.CustObj.CustName = item.CustName;
+        this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
+        this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;
+        this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+        this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
+        this.addCustObj.CustObj.IdNo = item.TaxIdNo;
+        this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
         if(this.IsVip === "true"){
-          this.addCustObj.custObj.IsVip = true;
+          this.addCustObj.CustObj.IsVip = true;
         }else{
-          this.addCustObj.custObj.IsVip = false;
+          this.addCustObj.CustObj.IsVip = false;
         }
         if(this.IsAffiliateWithMf === "true"){
-          this.addCustObj.custObj.IsAffiliateWithMf = true;
+          this.addCustObj.CustObj.IsAffiliateWithMf = true;
         }else{
-          this.addCustObj.custObj.IsAffiliateWithMf = false;
+          this.addCustObj.CustObj.IsAffiliateWithMf = false;
         } 
-        this.addCustObj.custObj.VipNotes = this.VipNotes;
+        this.addCustObj.CustObj.VipNotes = this.VipNotes;
         this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
-            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.custObj.CustId } });
+            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId } });
           },
           error => {
             console.log(error);

@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder } from '@angular/forms';
-import { WizardComponent } from 'angular-archwizard';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { ActivatedRoute } from '@angular/router';
@@ -10,26 +9,27 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-customer-contact-check',
   templateUrl: './customer-contact-check.component.html',
-  styleUrls: ['./customer-contact-check.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class CustomerContactCheckComponent implements OnInit {
-  isAdd: boolean;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
- 
-  IdCust : any;
-  tempCustomerPersonalContactPerson;
+
+  isAdd: boolean;
+  IdCust: number;
+  tempCustomerPersonalContactPerson: any;
   getCustomerPersonalContactPersonUrl: string;
   deleteCustomerPersonalContactPersonUrl: string;
-  custPersonContactPersonObj: CustPersonalContactPersonObj; 
-  constructor(private route: ActivatedRoute,private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+  custPersonContactPersonObj: CustPersonalContactPersonObj;
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
     this.deleteCustomerPersonalContactPersonUrl = AdInsConstant.DeleteCustPersonalContactPerson;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
-         this.IdCust = params["IdCust"];
-       }
-     });
+        this.IdCust = params["IdCust"];
+      }
+    });
   }
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class CustomerContactCheckComponent implements OnInit {
     this.outputValue.emit({ isAdd: this.isAdd });
   }
   deleteItem(custId: any) {
-    if(confirm('Are you sure to delete this record?')){
+    if (confirm('Are you sure to delete this record?')) {
       this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonContactPersonObj.CustPersonalContactPersonId = custId;
       this.http.post(this.deleteCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
@@ -54,7 +54,6 @@ export class CustomerContactCheckComponent implements OnInit {
         }
       );
     }
- 
   }
 
   editItem(custPersonalContactPersonId: any) {
@@ -70,12 +69,5 @@ export class CustomerContactCheckComponent implements OnInit {
         this.tempCustomerPersonalContactPerson = response["ReturnObject"];
         // console.log("aaaa" + this.tempCustomerPersonalContactPerson);
       });
-  }
-
-  next() {
-    this.wizard.goToNextStep();
-  }
-  back(){
-    this.wizard.goToPreviousStep();
   }
 }

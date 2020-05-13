@@ -12,16 +12,21 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./customer-view-coy-legal.component.scss']
 })
 
-export class CustomerViewCoyLegalComponent implements OnInit { 
-  CustId: number;
+export class CustomerViewCoyLegalComponent implements OnInit {
+  arrCrit: any;
+  ddlItem: any;
+  inputObj: any;
+  responseResultLegal: any;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
-  ddlItem: any;
+
+  CustId: number;
+  GetCustCompanyLegalDocForCustViewByCustIdUrl: string;
+
   CustForm = this.fb.group({
     DdlAddress: ['']
   });
-  GetCustCompanyLegalDocForCustViewByCustIdUrl = AdInsConstant.GetCustCompanyLegalDocForCustViewByCustId;
-  responseResultLegal: any;
+
 
   constructor(
     private http: HttpClient,
@@ -29,7 +34,9 @@ export class CustomerViewCoyLegalComponent implements OnInit {
     private router: Router,
     private adInsService: AdInsService,
     private fb: FormBuilder
-  ) { }
+  ) {
+    this.GetCustCompanyLegalDocForCustViewByCustIdUrl= AdInsConstant.GetCustCompanyLegalDocForCustViewByCustId
+   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

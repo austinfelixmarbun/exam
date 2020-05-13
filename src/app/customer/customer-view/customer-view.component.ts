@@ -9,27 +9,35 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./customer-view.component.scss']
 })
 export class CustomerViewComponent implements OnInit {
-  viewCustMainInfoHeaderObj : string;
-  CustId: number; 
-  getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
+  custModel: any;
   custResultData: any;
-  custModel: string; 
-  isMainData: boolean;
-  isAddress: boolean;
-  isJobData: boolean;
-  isCustModel: boolean;
-  isFinData: boolean;
-  isContactPerson: boolean;
-  isCustGroup: any;
-  isOtherAttr: boolean;
-  isAppListing: boolean;
-  custType: string;
-  viewCustCoyMainInfoHeader: string;
-  isManagement: boolean;
-  isContact: boolean;
+  viewCustMainInfoHeaderObj: any;
+  viewCustCoyMainInfoHeader: any;
+
+  CustId: number;
+
   isLegal: boolean;
   isOther: boolean;
-  constructor(private http: HttpClient, private route: ActivatedRoute) { }
+  isAddress: boolean;
+  isJobData: boolean;
+  isFinData: boolean;
+  isContact: boolean;
+  isMainData: boolean;
+  isCustModel: boolean;
+  isCustGroup: boolean;
+  isOtherAttr: boolean;
+  isAppListing: boolean;
+  isManagement: boolean;
+  isContactPerson: boolean;
+
+  custType: string;
+  viewCustJobData: string;
+  getCustByCustIdUrl: string;
+  viewCustJobDataAddress: string;
+
+  constructor(private http: HttpClient, private route: ActivatedRoute) { 
+    this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
+  }
 
   ngOnInit() {
     this.viewCustMainInfoHeaderObj =  "./assets/ucviewgeneric/viewCustMainInfoHeader.json";

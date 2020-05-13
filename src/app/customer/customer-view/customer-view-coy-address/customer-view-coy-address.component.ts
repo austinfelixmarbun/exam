@@ -13,13 +13,18 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
   styleUrls: ['./customer-view-coy-address.component.scss']
 })
 export class CustomerViewCoyAddressComponent implements OnInit {
-  GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
-  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;  
   CustId: number;
+
+  ddlItem: any;
+  arrCrit: any;
+  inputObj: any;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
-  ddlItem: any;
+
+  GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
+  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
+  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
+
   CustForm = this.fb.group({
     DdlAddress: ['']
   });

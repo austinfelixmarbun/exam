@@ -11,6 +11,21 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
   styleUrls: ['./customer-view-header-company.component.scss']
 })
 export class CustomerViewHeaderCompanyComponent implements OnInit {
+  IdCust: number; 
+
+  tempCustObj: any;
+  tempCustCompanyObj: any;
+  tempMrCustModelCode: any;
+  tempMrCompanyTypeCode: any;
+
+  custObj: CustObj;
+  custCompanyObj: CustCompanyObj;
+  
+  getCustUrl: string;
+  StatusIsVip : string;
+  StatusAffiliate : string;
+  getCustCompanyUrl: string;
+  getRefMasterByMasterCodeUrl: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
@@ -26,18 +41,6 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
       }
     });
   }
-  custObj: CustObj;
-  custCompanyObj: any;
-  tempCustObj: any;
-  tempCustCompanyObj: any;
-  getRefMasterByMasterCodeUrl: string;
-  getCustCompanyUrl: string;
-  getCustUrl: string;
-  tempMrCustModelCode: any;
-  tempMrCompanyTypeCode: any;
-  StatusIsVip : string;
-  StatusAffiliate : string;
-  IdCust: number; 
   ngOnInit() {
     
     this.custObj = new CustObj();
