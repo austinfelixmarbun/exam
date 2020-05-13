@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'uc-prod-offering-comp',
@@ -30,7 +31,9 @@ export class UcProdOfferingCompComponent implements OnInit {
   @Output() Save: EventEmitter<any> = new EventEmitter();
   @Output() Next: EventEmitter<any> = new EventEmitter();
 
-
+  DlRuleObj = {
+    CompntValue: "",
+  };
   ngOnInit() {
     this.FormProdOfferingComp = this.fb.group(
       {
@@ -219,6 +222,17 @@ export class UcProdOfferingCompComponent implements OnInit {
     this.FormProdOfferingComp.controls["groups"].controls[indexparent].controls["components"].controls[index].patchValue({
       OfferingCompntValueDesc : this.dictOptions[val].find(f=>f.Key == event.target.value).Value
     })
+  }
+  DownloadRule(CompntValue, CompntValueDesc) {
+    this.DlRuleObj.CompntValue = CompntValue;
+    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+      response => {
+        saveAs(response, CompntValueDesc + '.xlsx');
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }
 

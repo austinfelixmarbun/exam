@@ -44,7 +44,10 @@
             <mat-divider></mat-divider>
             <br />
             <div *ngFor="let item of ProdCompRule">
-              <label class="col-md-4">{{item.ProdCompntName}}</label>
+              <label class="col-md-3">{{item.ProdCompntName}}</label>
+              <span class="material-icons col-md-1" (click)="DownloadRule(item.CompntValue,item.CompntValueDesc)">
+                get_app
+              </span>
               <label class="col-md-4">{{item.CompntValueDesc}}</label>
               <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
             </div>
