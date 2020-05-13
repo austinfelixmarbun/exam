@@ -99,6 +99,7 @@ export class CustFinDataTabComponent implements OnInit {
       this.httpClient.post(AdInsConstant.GetCustPersonalbyCustId, custPersonal).pipe(
         map((response: CustPersonalObj) => {
           this.mrMaritalStatCode = response.MrMaritalStatCode;
+          console.log(this.mrMaritalStatCode);
           custPersonalData = response;
           return response;
         }),
