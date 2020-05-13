@@ -18,15 +18,15 @@ export class AssetCategoryAddEditComponent implements OnInit {
     AssetCategoryCode: ['', [Validators.required, Validators.maxLength(50)]],
     IsActive: [true]
   });
-  pageType: any;
-  AssetTypeId: any;
-  AssetCategoryId: any;
-  apiUrl: any;
-  result: any;
+  pageType: string;
+  AssetTypeId: number;
+  AssetCategoryId: number;
+  apiUrl: string;
+  result: AssetCategoryObj;
   acObj: AssetCategoryObj;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
+  getUrl: string;
+  addUrl: string;
+  editUrl: string;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.addUrl = AdInsConstant.AddNewAssetCategory;
     this.editUrl = AdInsConstant.EditAssetCategory;
@@ -52,7 +52,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       acObj.AssetTypeId = this.AssetTypeId;
       acObj.AssetCategoryId = this.AssetCategoryId;
       this.http.post(this.apiUrl, acObj).subscribe(
-        (response) => {
+        (response: AssetCategoryObj) => {
           this.result = response;
           this.AssetCategoryForm.patchValue({
             AssetCategoryCode: this.result.AssetCategoryCode,

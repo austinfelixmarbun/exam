@@ -14,7 +14,7 @@ import { UcpagingComponent } from '@adins/ucpaging';
 })
 export class AssetMasterComponent implements OnInit {
 
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj;
   
   constructor() { }
 

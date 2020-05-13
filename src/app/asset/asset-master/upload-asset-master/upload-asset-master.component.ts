@@ -7,7 +7,7 @@ import { environment } from 'environments/environment';
   templateUrl: './upload-asset-master.component.html'
 })
 export class UploadAssetMasterComponent implements OnInit {
-  uploadObj: any;
+  uploadObj: Object;
   constructor() { }
 
   ngOnInit() {

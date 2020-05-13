@@ -27,21 +27,21 @@ export class AssetDocumentAddEditComponent implements OnInit {
     IsActive: [true],
 
   });
-  assetDocName: any;
-  pageType: any;
-  AssetTypeId: any;
-  AssetDocListId: any;
-  apiUrl: any;
+  assetDocName: string;
+  pageType: string;
+  AssetTypeId: number;
+  AssetDocListId: number;
+  apiUrl: string;
   settingUrl: string = environment.FoundationR3Url;
   urlEnviPaging: string = environment.foundationUrl;
-  result: any;
+  result: AssetDocListObj;
   assetDocListObj: AssetDocListObj;
-  GetListRefAssetDocUrl: any;
-  AddNewAssetDocListUrl: any;
-  EditAssetDocListUrl: any;
-  getRefAssetDocUrl: any;
+  GetListRefAssetDocUrl: string;
+  AddNewAssetDocListUrl: string;
+  EditAssetDocListUrl: string;
+  getRefAssetDocUrl: string;
   tempAssetName: any;
-  temp: any;
+  temp: RefAssetDocObj;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
     this.AddNewAssetDocListUrl =  AdInsConstant.AddNewAssetDocList;
@@ -79,12 +79,12 @@ export class AssetDocumentAddEditComponent implements OnInit {
       assetDocListObj.AssetDocListId = this.AssetDocListId;
 
       this.http.post(this.apiUrl, assetDocListObj).subscribe(
-        (response) => {
+        (response: AssetDocListObj) => {
           this.result = response;
           refAssetDocObj.RefAssetDocId = this.result.RefAssetDocId;
 
           this.http.post(this.getRefAssetDocUrl, refAssetDocObj).subscribe(
-            (response) => {
+            (response: RefAssetDocObj) => {
               this.temp = response;
               this.assetDocName = this.temp.AssetDocName;
             });

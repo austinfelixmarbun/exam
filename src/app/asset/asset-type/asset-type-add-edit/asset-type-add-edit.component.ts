@@ -16,7 +16,7 @@ import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 })
 export class AssetTypeAddEditComponent implements OnInit {
   ItemMaxHierarchyLevelNumber = [1, 2, 3, 4, 5];
-  HierarchyNumber: any;
+  HierarchyNumber: number;
   AssetTypeForm = this.fb.group({
     AssetTypeCode: ['', Validators.required],
     AssetTypeName: ['', Validators.required],
@@ -45,10 +45,10 @@ export class AssetTypeAddEditComponent implements OnInit {
   editUrl: string;
   pageType: string = "add";
   assetTypeObj: AssetTypeObj;
-  assetTypeId: any;
-  resultData: any;
-  RowVersion: any;
-  assetTypeCode: any;
+  assetTypeId: number;
+  resultData: AssetTypeObj;
+  RowVersion: string;
+  assetTypeCode: string;
   getGeneralSettingUrl = AdInsConstant.GetGeneralSettingByCode;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -106,7 +106,7 @@ export class AssetTypeAddEditComponent implements OnInit {
           this.assetTypeObj.AssetTypeId = this.assetTypeId;
           this.AssetTypeForm.controls["AssetTypeCode"].disable();
           this.http.post(this.getUrl, this.assetTypeObj).subscribe(
-            response => {
+            (response: AssetTypeObj) => {
               this.resultData = response;
               this.RowVersion = this.resultData.RowVersion;
               this.AssetTypeForm.patchValue({

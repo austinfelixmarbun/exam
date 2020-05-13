@@ -10,6 +10,7 @@ import { ListRequestCriteriaObj } from 'app/shared/model/ListRequestCriteriaObj.
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AssetSchmListObj } from 'app/shared/model/AssetSchmListObj.Model';
 import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
+import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 
 @Component({
   selector: 'app-asset-master-add-edit-parent',
@@ -20,29 +21,29 @@ import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
 export class AssetMasterAddEditParentComponent implements OnInit {
 
   pageType: string = "add";
-  AssetMasterId: any;
+  AssetMasterId: number;
   assetMasterObj: AssetMasterObj;
   assetTypeObj: AssetTypeObj;
-  resultAssetType: any;
-  resultData: any;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
-  getValueAssetType: any;
-  getAssetType: any;
+  resultAssetType: AssetTypeObj;
+  resultData: AssetMasterObj;
+  getUrl: string;
+  addUrl: string;
+  editUrl: string;
+  getValueAssetType: string;
+  getAssetType: string;
   allAssetMasterMethod: any;
-  refCustModelCode: any;
-  listRequest: any;
+  // refCustModelCode: any;
+  listRequest: ListRequestCriteriaObj;
   resultAssetCategory: any;
-  getListAssetCategory: any;
-  getListAssetSchmH: any;
+  getListAssetCategory: string;
+  getListAssetSchmH: string;
   assetSchmListDObj : AssetSchmListObj;
   listAssetSchmDObj: ListAssetSchmDObj;
-  listSelectedId: Array<any> = [];
-  listAssetScheme: any;
-  checkboxAll: any = false;
-  isFinal: any;
-  editListAssetSchmD: any;
+  listSelectedId: Array<number> = new Array<number>();
+  listAssetScheme: Array<AssetSchmListObj> = new Array<AssetSchmListObj>();
+  checkboxAll: boolean = false;
+  isFinal: boolean;
+  editListAssetSchmD: string;
   AssetMasterParentForm = this.fb.group({
     AssetCategoryId: [''],
     AssetTypeId: [0, [Validators.required]],
@@ -80,7 +81,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
     this.assetTypeObj = new AssetTypeObj();
     this.assetTypeObj.AssetTypeId = this.AssetMasterParentForm.controls['AssetTypeId'].value;
     this.http.post(this.getAssetType, this.assetTypeObj).subscribe(
-        response => {
+        (response: AssetTypeObj) => {
           this.resultAssetType = response;
           if (this.resultAssetType.MaxHierarchyLevel == 1)
           {
@@ -176,7 +177,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.http.post(this.getUrl, this.assetMasterObj).subscribe(
-        response => {
+        (response: AssetMasterObj) => {
           this.resultData = response;
           console.log("abc");
           console.log(this.resultData);
@@ -198,7 +199,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
           this.http.post(this.getAssetType, this.assetTypeObj).subscribe(
-              response => {
+              (response: AssetTypeObj) => {
                 this.resultAssetType = response;
 
                 var critObj = new CriteriaObj();
@@ -268,7 +269,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
     console.log(this.listSelectedId);
   }
 
-  Checked(AssetSchmHIdFromH: any, isChecked: any): void {
+  Checked(AssetSchmHIdFromH: number, isChecked: boolean): void {
     if (isChecked) {
       this.listSelectedId.push(AssetSchmHIdFromH);
     } else {

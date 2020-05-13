@@ -6,6 +6,7 @@ import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 import { environment } from 'environments/environment';
+import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 
 @Component({
   selector: 'app-asset-scheme-add-edit-information',
@@ -21,16 +22,16 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
     IsActive: ['']
   });
   pageType: string = "add";
-  assetSchmHObj: any;
+  assetSchmHObj: AssetSchemeHObj;
   getUrl: string;
   addUrl: string;
   editUrl: string;
-  AssetSchmHId: any;
-  resultData: any;
-  RowVersion: any;
-  ItemAssetType: any;
+  AssetSchmHId: number;
+  resultData: AssetSchemeHObj;
+  RowVersion: string;
+  ItemAssetType: Array<AssetTypeObj>;
   getAssetTypeUrl: string;
-  AssetSchmCode: any;
+  AssetSchmCode: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getUrl = AdInsConstant.GetAssetSchmHById;
@@ -70,7 +71,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.AssetSchemeInfoForm.controls["AssetSchmCode"].disable();
 
       this.http.post(this.getUrl, this.assetSchmHObj).subscribe(
-        response => {
+        (response: AssetSchemeHObj) => {
           this.resultData = response;
           this.RowVersion = this.resultData.RowVersion;
           this.AssetSchemeInfoForm.patchValue({

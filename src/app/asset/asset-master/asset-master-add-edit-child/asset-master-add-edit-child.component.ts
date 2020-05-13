@@ -22,34 +22,34 @@ import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
 export class AssetMasterAddEditChildComponent implements OnInit {
 
   pageType: string;
-  AssetMasterId: any;
-  AssetTypeId: any;
-  AssetTypeName: any;
-  AssetTypeCode: any;
-  HierarchyLvl: any;
-  FullAssetCode: any;
-  FullAssetName: any;
+  AssetMasterId: number;
+  AssetTypeId: number;
+  AssetTypeName: string;
+  AssetTypeCode: string;
+  HierarchyLvl: number;
+  FullAssetCode: string;
+  FullAssetName: string;
   assetMasterObj: AssetMasterObj;
   assetTypeObj: AssetTypeObj;
   assetCategoryObj : AssetCategoryObj;
   assetSchmListDObj : AssetSchmListObj;
   listAssetSchmDObj: ListAssetSchmDObj;
-  resultAssetType: any;
-  resultData: any;
+  resultAssetType: AssetTypeObj;
+  resultData: AssetMasterObj;
   resultAssetCategory: any;
-  resultParentMaster:any;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
-  getAssetType: any;
-  getListAssetCategory: any;
-  getListAssetSchmH: any;
-  editListAssetSchmD: any;
-  listRequest: any;
-  listAssetScheme: any;
-  isFinal: any;
-  listSelectedId: Array<any> = [];
-  checkboxAll: any = false;
+  resultParentMaster:AssetMasterObj;
+  getUrl: string;
+  addUrl: string;
+  editUrl: string;
+  getAssetType: string;
+  getListAssetCategory: string;
+  getListAssetSchmH: string;
+  editListAssetSchmD: string;
+  listRequest: ListRequestCriteriaObj;
+  listAssetScheme: Array<AssetSchmListObj>;
+  isFinal: boolean;
+  listSelectedId: Array<number> = [];
+  checkboxAll: boolean = false;
   AssetMasterChildForm = this.fb.group({
     AssetCategoryId: [''],
     AssetTypeId: [0, [Validators.required]],
@@ -93,7 +93,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.http.post(this.getUrl, this.assetMasterObj).subscribe(
-        response => {
+        (response: AssetMasterObj) => {
           this.resultData = response;
           this.AssetMasterChildForm.patchValue({
             AssetCategoryId: this.resultData.AssetCategoryId,
@@ -112,7 +112,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           this.assetMasterObj = new AssetMasterObj();
           this.assetMasterObj.AssetMasterId = this.resultData.ParentId;
           this.http.post(this.getUrl, this.assetMasterObj).subscribe(
-          response => {
+          (response: AssetMasterObj) => {
             this.resultParentMaster = response;
             this.AssetMasterChildForm.patchValue({
               FullAssetCode: this.resultParentMaster.FullAssetCode,
@@ -131,7 +131,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
           this.http.post(this.getAssetType, this.assetTypeObj).subscribe(
-            response => {
+            (response: AssetTypeObj) => {
               this.resultAssetType = response;
               this.AssetMasterChildForm.patchValue({
                 AssetTypeName: this.resultAssetType.AssetTypeName
@@ -193,7 +193,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.http.post(this.getUrl, this.assetMasterObj).subscribe(
-        response => {
+        (response: AssetMasterObj) => {
           this.resultData = response;
           this.AssetMasterChildForm.patchValue({
             AssetTypeId: this.resultData.AssetTypeId,
@@ -208,7 +208,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
           this.http.post(this.getAssetType, this.assetTypeObj).subscribe(
-            response => {
+            (response: AssetTypeObj) => {
               this.resultAssetType = response;
               this.AssetMasterChildForm.patchValue({
                 AssetTypeName: this.resultAssetType.AssetTypeName

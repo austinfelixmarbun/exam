@@ -9,7 +9,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./asset-document-master-paging.component.scss'],
 })
 export class AssetDocumentMasterPagingComponent implements OnInit {
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj;
   constructor() { }
 
   ngOnInit() {
