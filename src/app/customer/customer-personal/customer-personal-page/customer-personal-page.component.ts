@@ -144,6 +144,7 @@ export class CustomerPersonalPageComponent implements OnInit {
 
     if (ev.stepMode != undefined)
     {
+      console.log("testingg");
       if (ev.stepMode == "next")
         this.stepper.next();
       else
