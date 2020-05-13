@@ -13,7 +13,6 @@ export class AssetSchemePagingComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('masuk ke scheme paging');
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetScheme.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;

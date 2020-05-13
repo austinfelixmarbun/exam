@@ -1,6 +1,6 @@
 {
   "title": "Asset Master",
-  "exportExcel": false,
+  "exportExcel": true,
   "component": [
     {
       "type": "dropdown",
