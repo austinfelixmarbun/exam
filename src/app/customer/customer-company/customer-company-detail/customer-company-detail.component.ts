@@ -31,12 +31,11 @@ export class CustomerCompanyDetailComponent implements OnInit {
   IdCust: number;
   tempRefIndustryTypeId: number;
 
+  Page: String;
   editCustCompanyUrl: string;
   getCustByCustIdUrl: string;
   getCustCompanyByCustIdUrl: string;
   getRefIndustryTypeByIndustryTypeIdUrl: string;
-
-  Page: String;
 
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],

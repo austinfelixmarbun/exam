@@ -22,7 +22,6 @@ export class CustomerContactCheckComponent implements OnInit {
   deleteCustomerPersonalContactPersonUrl: string;
   custPersonContactPersonObj: CustPersonalContactPersonObj;
 
-
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
     this.deleteCustomerPersonalContactPersonUrl = AdInsConstant.DeleteCustPersonalContactPerson;

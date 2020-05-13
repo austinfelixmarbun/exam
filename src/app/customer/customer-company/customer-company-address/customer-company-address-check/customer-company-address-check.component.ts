@@ -17,32 +17,17 @@ import { WizardComponent } from 'angular-archwizard';
 export class CustomerCompanyAddressCheckComponent implements OnInit {
  
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  IdCust: number;
-  CustName: string;
-  Gender: string;
-  GenderDesc: string;
-  MrIdTypeCode: string;
-  MrIdTypeCodeDesc: string;
-  CustModel: string;
-  CustModelDesc
-  BirthPlace: string;
-  BirthDt: Date;
-  IdNo: string;
-  TaxIdNo: string;
-  IdExpiredDt: Date;
-  MotherMaidenName: string;
-  resultData: any;
-  addUrl: string;
-  IdCustPersonal: number;
+  IdCust: number;     
   custObj: any;
+  objCust : CustObj;
   custAddrObj: CustAddrObj;
   listCustAddr: any;
-  getCustById: string;
-  getListCustAddr: string;
+  getCustByIdUrl: string;
+  getListCustAddrUrl: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
-    this.getCustById = AdInsConstant.GetCustByCustId;
-    this.getListCustAddr = AdInsConstant.GetListCustAddr;
+    this.getCustByIdUrl = AdInsConstant.GetCustByCustId;
+    this.getListCustAddrUrl = AdInsConstant.GetListCustAddr;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -51,16 +36,16 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.custObj = new CustObj();
-    this.custObj.CustId = this.IdCust;
-    this.http.post(this.getCustById, this.custObj).subscribe(
+    this.objCust = new CustObj();
+    this.objCust.CustId = this.IdCust;
+    this.http.post(this.getCustByIdUrl, this.objCust).subscribe(
       (response) => {
         this.custObj = response;
       });
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.IdCust;
     this.custAddrObj.MrCustAddrTypeCode = "-";
-    this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
+    this.http.post(this.getListCustAddrUrl, this.custAddrObj).subscribe(
       (response) => {
         this.listCustAddr = response["ReturnObject"];
       });

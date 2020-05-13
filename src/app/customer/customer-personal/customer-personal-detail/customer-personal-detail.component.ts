@@ -159,7 +159,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
                   (response) => {
                     this.tempCountry = response;
                     this.lookUpObj.nameSelect = this.tempCountry.CountryName;
-                    // this.lookUpObj.jsonSelect = response;
+                    this.lookUpObj.jsonSelect = this.tempCountry;
                   });
                 this.lookUpObj.isRequired = true;
               }

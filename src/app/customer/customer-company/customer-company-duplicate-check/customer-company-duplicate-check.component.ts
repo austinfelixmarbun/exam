@@ -71,7 +71,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.DuplicateCustObj = new DuplicateCustObj();
     this.DuplicateCustObj.CustName = this.CustName;
     this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Company;
@@ -164,8 +164,8 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
 
   EditCustCompany(item)
   {
-    var CustObj = {CustName: item.CustName, TaxIdNo: item.TaxIdNo};
-    this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNo, CustObj).subscribe(
+     var custObj = {CustNo: item.CustNo, CustName: item.CustName, TaxIdNo: item.TaxIdNo};
+    this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNo, custObj).subscribe(
       (response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];
@@ -205,8 +205,8 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
 
   EditNegativeCustCompany(item)
   {
-    var CustObj = {CustName: item.CustName, TaxIdNo: item.TaxIdNo};
-    this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNo, CustObj).subscribe(
+    var custObj = {CustNo: item.CustNo, CustName: item.CustName, TaxIdNo: item.TaxIdNo};
+    this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNo, custObj).subscribe(
       (response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];

@@ -38,7 +38,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
   CustModelDesc: string;
   MotherMaidenName: string;
   MrIdTypeCodeDesc: string;
-  StatusAffiliate : string;
+  StatusAffiliate: string;
   getRefMasterByMasterCodeUrl: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
@@ -51,10 +51,10 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         this.IdCust = params["CustId"];
       }
     });
-   }
+  }
 
   ngOnInit() {
-      this.custObj = new CustObj();
+    this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
     this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
       (response) => {
@@ -98,7 +98,6 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrGenderCode).subscribe(
           (response) => {
             this.tempMrGenderCode = response;
-         
           }
         );
       });

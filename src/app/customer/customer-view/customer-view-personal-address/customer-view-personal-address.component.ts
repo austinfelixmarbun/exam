@@ -26,6 +26,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
   CustForm = this.fb.group({
     DdlAddress: ['']
   });
+  
   viewCustFinData: string;
 
   constructor(

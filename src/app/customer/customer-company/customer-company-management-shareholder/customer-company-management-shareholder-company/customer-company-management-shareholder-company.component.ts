@@ -18,8 +18,8 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 })
 export class CustomerCompanyManagementShareholderCompanyComponent implements OnInit {
   @Input() custCompanyId: number;
-  @Input() CustCompanyMgmntShrholderId : number;
-  @Output () outputValue : EventEmitter<object>= new EventEmitter();
+  @Input() CustCompanyMgmntShrholderId: number;
+  @Output () outputValue : EventEmitter<object> = new EventEmitter();
 
   inputLookupCustCompanyObj : InputLookupObj;
   custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;

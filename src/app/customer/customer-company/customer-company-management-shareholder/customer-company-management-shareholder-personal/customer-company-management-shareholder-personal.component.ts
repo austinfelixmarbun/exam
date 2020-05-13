@@ -21,7 +21,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   @Input() custCompanyId : number;
   @Input() CustCompanyMgmntShrholderId : number;
   @Output () outputValue : EventEmitter<object>= new EventEmitter();
-
+  
   tempIdType: any;
   tempMrGenderCode: any;
   tempMrCustModelCode : any;

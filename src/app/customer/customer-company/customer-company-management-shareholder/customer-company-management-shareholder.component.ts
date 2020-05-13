@@ -6,10 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./customer-company-management-shareholder.component.scss']
 })
 export class CustomerCompanyManagementShareholderComponent implements OnInit {
-  @Input () custCompanyId : number;
+  @Input () custCompanyId: number;
+  mode: string;  
+  CustCompanyMgmntShrholderId: number;
   
-  mode : string;  
-  CustCompanyMgmntShrholderId : number;
   constructor() {  
   }
 

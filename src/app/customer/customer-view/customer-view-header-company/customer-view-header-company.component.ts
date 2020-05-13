@@ -41,7 +41,6 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
       }
     });
   }
-
   ngOnInit() {
     
     this.custObj = new CustObj();

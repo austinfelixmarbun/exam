@@ -19,6 +19,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   // @Output() outputTab: EventEmitter<object> = new EventEmitter();
   
   custObj : any;
+  objCust: CustObj;
   IdCust : number;
 
   CustModel : string;
@@ -42,9 +43,9 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   }
 
   ngOnInit() { 
-    this.custObj = new CustObj();
-    this.custObj.CustId = this.IdCust;
-    this.http.post(this.getCustById, this.custObj).subscribe(
+    this.objCust = new CustObj();
+    this.objCust.CustId = this.IdCust;
+    this.http.post(this.getCustById, this.objCust).subscribe(
       (response) => {
           this.custObj = response;
           this.CustModel = this.custObj.MrCustModelCode;

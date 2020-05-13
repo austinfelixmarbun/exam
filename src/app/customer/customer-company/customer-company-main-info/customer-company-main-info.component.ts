@@ -37,7 +37,6 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     VipNotes: ['', [Validators.required]]
   });
 
-
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
