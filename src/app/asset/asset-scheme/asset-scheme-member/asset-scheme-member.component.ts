@@ -7,15 +7,14 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-asset-scheme-member',
-  templateUrl: './asset-scheme-member.component.html',
-  styleUrls: ['./asset-scheme-member.component.scss']
+  templateUrl: './asset-scheme-member.component.html'
 })
 
 export class AssetSchemeMemberComponent implements OnInit {
-  AssetSchmHId:any;
-  inputPagingObj: any;
-  viewObj:any;
-  arrCrit:any;
+  AssetSchmHId:number;
+  inputPagingObj: UcPagingObj;
+  viewObj:string;
+  arrCrit:Array<CriteriaObj>;
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetSchmHId"] != null) {
@@ -37,7 +36,7 @@ export class AssetSchemeMemberComponent implements OnInit {
     var critObj = new CriteriaObj();
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.propName = 'ASD.ASSET_SCHM_H_ID';
-    critObj.value = this.AssetSchmHId;
+    critObj.value = this.AssetSchmHId.toString();
 
     var critObjIsActive = new CriteriaObj();
     critObjIsActive.restriction = AdInsConstant.RestrictionEq;

@@ -9,7 +9,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-asset-accessory-add-edit',
   templateUrl: './asset-accessory-add-edit.component.html',
-  styleUrls: ['./asset-accessory-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetAccessoryAddEditComponent implements OnInit {
@@ -18,17 +17,20 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     AssetAccessoryCode: ['', [Validators.required, Validators.maxLength(50)]],
     IsActive: [true]
   });
-  pageType: any;
-  AssetTypeId: any;
-  AssetAccessoryId: any;
-  apiUrl: any;
-  result: any;
-  acObj: AssetAccessoryObj; 
-  addUrl: any;
-  editUrl: any;
+  pageType: string;
+  AssetTypeId: number;
+  AssetAccessoryId: number;
+  apiUrl: string;
+  result: AssetAccessoryObj;
+  acObj: AssetAccessoryObj;
+  addUrl: string;
+  editUrl: string;
+  GetAssetTypeById: string;
+  assetTypeName: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.addUrl = AdInsConstant.AddNewAssetAccesory;
     this.editUrl = AdInsConstant.EditAssetAccessory;
+    this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -42,6 +44,13 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     });
   }
   ngOnInit() {
+    console.log('test');
+    var assetTypeReq = { "AssetTypeId": this.AssetTypeId };
+    this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
+      (response) => {
+        this.assetTypeName = response['AssetTypeName'];
+      }
+    );
     if (this.pageType == "edit") {
       var acObj = new AssetAccessoryObj();
       acObj.AssetAccessoryId = this.AssetAccessoryId;
@@ -50,7 +59,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.AssetAccessoryForm.controls.AssetAccessoryCode.disable();
 
       this.http.post(this.apiUrl, acObj).subscribe(
-        (response) => {
+        (response: AssetAccessoryObj) => {
           this.result = response;
           this.AssetAccessoryForm.patchValue({
             AssetAccessoryCode: this.result.AssetAccessoryCode,
@@ -96,7 +105,5 @@ export class AssetAccessoryAddEditComponent implements OnInit {
         }
       );
     }
-
   }
-
 }

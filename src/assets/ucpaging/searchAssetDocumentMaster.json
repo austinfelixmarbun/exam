@@ -1,6 +1,6 @@
 {
     "title": "Asset Document Master",
-    "exportExcel": true,
+    "exportExcel": false,
     "component": [
       {
         "type": "textbox",
