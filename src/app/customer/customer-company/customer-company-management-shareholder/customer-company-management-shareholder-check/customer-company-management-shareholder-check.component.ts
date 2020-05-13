@@ -5,13 +5,12 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { WizardComponent } from 'angular-archwizard';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-check',
   templateUrl: './customer-company-management-shareholder-check.component.html',
-  styleUrls: ['./customer-company-management-shareholder-check.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderCheckComponent implements OnInit {
@@ -28,7 +27,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   DeleteCustCompanyMgmntShrholderUrl: string;
   getListCompanyManagementShareholderByCustCompanyIdUrl: string;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.getCustCompanyIdUrl = AdInsConstant.GetCustCompanyByCustId;
     this.getListCompanyManagementShareholderByCustCompanyIdUrl = AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
     this.DeleteCustCompanyMgmntShrholderUrl = AdInsConstant.DeleteCustCompanyMgmntShrholder;
@@ -91,9 +90,9 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
     );
   }
   next() {
-    this.wizard.goToNextStep();
+    this.outputValue.emit({ stepMode: 'next'});
   }
   back() {
-    this.wizard.goToPreviousStep();
+    this.outputValue.emit({ stepMode: 'previous'});
   }
 }

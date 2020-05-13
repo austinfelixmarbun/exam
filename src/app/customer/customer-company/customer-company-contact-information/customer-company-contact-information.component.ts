@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -9,17 +9,16 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustCompanyContactPersonObj } from 'app/shared/model/CustCompanyContactPersonObj.model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-customer-company-contact-information',
   templateUrl: './customer-company-contact-information.component.html',
-  styleUrls: ['./customer-company-contact-information.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class CustomerCompanyContactInformationComponent implements OnInit {
-  @Input() custCompanyId : number ;
-
+  @Input() custCompanyId: number;
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
 
   tempCustAddrObj: any;
   tempMrGenderCode: any;
@@ -27,7 +26,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   tempCustCompanyContactPersonObj: any;
 
   custAddrObj: CustAddrObj;
-  UcAddressObj:  UcAddressObj;
+  UcAddressObj: UcAddressObj;
   inputFieldObj: InputFieldObj;
   custCompanyContactPersonObj: CustCompanyContactPersonObj;
 
@@ -36,7 +35,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   editCustAddrUrl: string;
   addNewCustAddrUrl: string;
   getListActiveRefMasterUrl: string;
-  getCustCompanyByCustIdUrl : string;
+  getCustCompanyByCustIdUrl: string;
   addCustCompanyContactPersonUrl: string;
   getCustAddrByMrCustAddrTypeUrl: string;
   editCustCompanyContactPersonByCustCompanyIdUrl: string;
@@ -52,9 +51,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     Email1: [''],
     Email2: [''],
   });
-  
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent ) { 
-    this.route.queryParams.subscribe(params => { 
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+    this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
@@ -151,7 +150,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   }
 
   back() {
-    this.wizard.goToPreviousStep();
+    this.outputTab.emit({ stepMode: 'previous' });
   }
 
   SaveValue() {
@@ -200,7 +199,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
           this.http.post(this.editCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
             (response) => {
               this.toastr.successMessage(response["Message"]);
-              this.wizard.goToNextStep();
+              this.outputTab.emit({ stepMode: 'next' });
             },
             error => {
               console.log(error);
@@ -217,7 +216,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
           this.http.post(this.addCustCompanyContactPersonUrl, this.custCompanyContactPersonObj).subscribe(
             (response) => {
               this.toastr.successMessage(response["Message"]);
-              this.wizard.goToNextStep();
+              this.outputTab.emit({ stepMode: 'next' });
             },
             error => {
               console.log(error);
@@ -229,8 +228,5 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         }
       );
     }
-
-
   }
-
 }

@@ -11,11 +11,8 @@
           </form>
           <app-customer-view-header-personal> </app-customer-view-header-personal>
         </div>
-
-
         <div id="stepper1" class="bs-stepper">
           <div class="bs-stepper-header" role="tablist" style="overflow-x: auto;">
-            <!-- your steps here -->
             <div class="step" data-target="#customer-detail-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="customer-detail-tab"
                 id="customer-detail-tab-trigger" (click)="EnterTab('Detail')">
@@ -25,29 +22,28 @@
             </div>
             <div class="line"></div>
             <div class="step" data-target="#address-tab">
-              <button type="button" class="step-trigger" role="tab" aria-controls="address-tab"
-                id="address-tab-trigger" (click)="EnterTab('Address')">
+              <button type="button" class="step-trigger" role="tab" aria-controls="address-tab" id="address-tab-trigger"
+                (click)="EnterTab('Address')">
                 <span class="bs-stepper-circle">2</span>
                 <span class="bs-stepper-label">Address</span>
               </button>
             </div>
             <div class="line"></div>
             <div class="step" data-target="#contact-tab">
-              <button type="button" class="step-trigger" role="tab" aria-controls="contact-tab"
-                id="contact-tab-trigger" (click)="EnterTab('Contact')">
+              <button type="button" class="step-trigger" role="tab" aria-controls="contact-tab" id="contact-tab-trigger"
+                (click)="EnterTab('Contact')">
                 <span class="bs-stepper-circle">3</span>
                 <span class="bs-stepper-label">Contact Person</span>
               </button>
             </div>
             <div class="line"></div>
             <div class="step" data-target="#group-tab">
-              <button type="button" class="step-trigger" role="tab" aria-controls="group-tab"
-                id="group-tab-trigger" (click)="EnterTab('Group')">
+              <button type="button" class="step-trigger" role="tab" aria-controls="group-tab" id="group-tab-trigger"
+                (click)="EnterTab('Group')">
                 <span class="bs-stepper-circle">4</span>
                 <span class="bs-stepper-label">Customer Group</span>
               </button>
             </div>
-
             <div class="line"></div>
             <div class="step" data-target="#job-data-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="job-data-tab"
@@ -56,7 +52,6 @@
                 <span class="bs-stepper-label">Customer Job Data</span>
               </button>
             </div>
-
             <div class="line"></div>
             <div class="step" data-target="#financial-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="financial-tab"
@@ -68,66 +63,31 @@
           </div>
           <br><br>
           <div class="bs-stepper-content">
-            <!-- your steps content here -->
             <div id="customer-detail-tab" class="content" role="tabpanel" aria-labelledby="customer-detail-tab-trigger">
-              <app-customer-personal-detail (outputTab)="terimaValue($event)">
+              <app-customer-personal-detail (outputTab)="getValue($event)">
               </app-customer-personal-detail>
             </div>
             <div id="address-tab" class="content" role="tabpanel" aria-labelledby="address-tab-trigger">
-              <app-customer-personal-address (outputTab)="terimaValue($event)">
+              <app-customer-personal-address (outputTab)="getValue($event)">
               </app-customer-personal-address>
             </div>
             <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
-              <app-customer-contact-person (outputTab)="terimaValue($event)">
+              <app-customer-contact-person (outputTab)="getValue($event)">
               </app-customer-contact-person>
             </div>
             <div id="group-tab" class="content" role="tabpanel" aria-labelledby="group-tab-trigger">
-              <app-cust-group-tab [MrCustTypeCode]="'PERSONAL'" [CustId]="IdCust" (outputTab)="terimaValue($event)">
+              <app-cust-group-tab [MrCustTypeCode]="'PERSONAL'" [CustId]="IdCust" (outputTab)="getValue($event)">
               </app-cust-group-tab>
             </div>
             <div id="job-data-tab" class="content" role="tabpanel" aria-labelledby="job-data-tab-trigger">
-              <app-customer-personal-job-data (outputTab)="terimaValue($event)"> </app-customer-personal-job-data>
+              <app-customer-personal-job-data (outputTab)="getValue($event)"> </app-customer-personal-job-data>
             </div>
             <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
-              <app-cust-fin-data-tab [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="terimaValue($event)"> </app-cust-fin-data-tab>
+              <app-cust-fin-data-tab [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="getValue($event)">
+              </app-cust-fin-data-tab>
             </div>
           </div>
         </div>
-
-        <!-- <aw-wizard #wizard navBarLayout="large-empty-symbols" [disableNavigationBar]=true [awNavigationMode]
-          navigateBackward="allow" navigateForward="allow">
-          <aw-wizard-step [stepTitle]="'Customer Detail'"
-            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Detail')">
-            <app-customer-personal-detail *ngIf="isDetail == true" (outputValue)="terimaValue($event)">
-            </app-customer-personal-detail>
-          </aw-wizard-step>
-          <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }"
-            (stepEnter)="EnterTab('Address')">
-            <app-customer-personal-address >
-            </app-customer-personal-address>
-          </aw-wizard-step>
-          <aw-wizard-step [stepTitle]="'Contact Person'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-            <app-customer-contact-person >
-            </app-customer-contact-person>
-          </aw-wizard-step>
-          <aw-wizard-step [stepTitle]="'Customer Group'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome'}" (stepEnter)="EnterTab('Group')">
-            <app-cust-group-tab *ngIf="isGroup == true" [MrCustTypeCode]="'PERSONAL'" [CustId]="IdCust">
-            </app-cust-group-tab>
-          </aw-wizard-step>
-          <aw-wizard-step [stepTitle]="'Job Data'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Job')">
-            <app-customer-personal-job-data *ngIf="isJob == true"> </app-customer-personal-job-data>
-          </aw-wizard-step>
-          <aw-wizard-step [stepTitle]="'Financial Data'"
-            [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Financial')">
-            <app-cust-fin-data-tab *ngIf="isFinancial == true" [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'"> </app-cust-fin-data-tab>
-          </aw-wizard-step>
-        </aw-wizard> -->
-
-
-
       </div>
     </div>
   </div>

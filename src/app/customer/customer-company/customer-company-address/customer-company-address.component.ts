@@ -7,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 })
 
 export class CustomerCompanyAddressComponent implements OnInit {
-  @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
   
   mode: string;
   AddrId: number;
@@ -23,6 +23,6 @@ export class CustomerCompanyAddressComponent implements OnInit {
     this.AddrId =  ev.AddrId;
 
     if (ev.stepMode != undefined)
-      this.outputValue.emit({ stepMode: ev.stepMode })
+      this.outputTab.emit({ stepMode: ev.stepMode })
   }  
 }

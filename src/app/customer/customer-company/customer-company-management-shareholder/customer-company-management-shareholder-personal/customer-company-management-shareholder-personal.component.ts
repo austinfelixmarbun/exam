@@ -3,7 +3,6 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { WizardComponent } from 'angular-archwizard';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { DatePipe } from '@angular/common';
@@ -14,13 +13,13 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 @Component({
   selector: 'app-customer-company-management-shareholder-personal',
   templateUrl: './customer-company-management-shareholder-personal.component.html',
-  styleUrls: ['./customer-company-management-shareholder-personal.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderPersonalComponent implements OnInit {
   @Input() custCompanyId : number;
   @Input() CustCompanyMgmntShrholderId : number;
-  @Output () outputValue : EventEmitter<object>= new EventEmitter();
+  @Output () outputTab : EventEmitter<object>= new EventEmitter();
   
   tempIdType: any;
   tempMrGenderCode: any;
@@ -56,7 +55,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     IsSigner: [false], 
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
@@ -195,7 +194,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputValue.emit({mode : 'check'});
+          this.outputTab.emit({mode : 'check', stepMode: 'next'});
         },
         error => {
           console.log(error);
@@ -222,7 +221,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputValue.emit({mode : 'check'});
+          this.outputTab.emit({mode : 'check', stepMode: 'next'});
         },
         error => {
           console.log(error);
@@ -231,7 +230,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
   }
   back(){
-    this.outputValue.emit({mode : 'check'});
+    this.outputTab.emit({mode : 'check', stepMode: 'previous'});
   }
   onOptionsSelected(event){  
     if(event.target.value == this.KTP){
@@ -243,8 +242,6 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
   }
-
-  
 
   getLookUpCustomer(event) {
     
