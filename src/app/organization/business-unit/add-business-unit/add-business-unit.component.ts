@@ -44,7 +44,7 @@ export class AddBusinessUnitComponent implements OnInit {
         this.title = "Business Unit Add";
         if (this.mode == "edit") {
             this.title = "Business Unit Edit";
-            this.apiUrl = this.foundationUrl + AdInsConstant.GetRefBizUnit;
+            this.apiUrl =AdInsConstant.GetRefBizUnit;
             this.bizUnitObj = new BusinessUnitObj();
             this.bizUnitObj.RefBizUnitId = this.RefBizUnitId;
             this.BizUnitForm.controls.BizUnitCode.disable();
@@ -71,7 +71,7 @@ export class AddBusinessUnitComponent implements OnInit {
         this.bizUnitObj = new BusinessUnitObj();
         this.bizUnitObj = this.BizUnitForm.value;
         if (this.mode == "edit") {
-            this.editUrl = this.foundationUrl + AdInsConstant.EditRefBizUnit;
+            this.editUrl = AdInsConstant.EditRefBizUnit;
             this.bizUnitObj.BizUnitCode = this.result.BizUnitCode;
             this.bizUnitObj.RefBizUnitId = this.RefBizUnitId;
             
@@ -85,8 +85,7 @@ export class AddBusinessUnitComponent implements OnInit {
                 });
         }
         else {
-            this.bizUnitObj.RefBizUnitId = "0";
-            this.editUrl = this.foundationUrl + AdInsConstant.AddRefBizUnit;
+            this.editUrl = AdInsConstant.AddRefBizUnit;
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);

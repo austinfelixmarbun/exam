@@ -9,17 +9,16 @@ import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 @Component({
   selector: 'app-asset-document-master-add-edit',
   templateUrl: './asset-document-master-add-edit.component.html',
-  styleUrls: ['./asset-document-master-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetDocumentMasterAddEditComponent implements OnInit {
-  addUrl : any;
-  editUrl: any;
-  pageType: any;
-  apiUrl: any;
-  RefAssetDocId: any;
+  addUrl : string;
+  editUrl: string;
+  pageType: string;
+  apiUrl: string;
+  RefAssetDocId: number;
    
-  result: any;
+  result: RefAssetDocObj;
   refAssetObj: RefAssetDocObj;
 
   RefAssetDocForm = this.fb.group({
@@ -52,7 +51,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.RefAssetDocForm.controls.AssetDocCode.disable(); 
       
       this.http.post(this.apiUrl, refAssetObj).subscribe(
-        (response) => {
+        (response: RefAssetDocObj) => {
           this.result = response;
           this.RefAssetDocForm.patchValue({
             AssetDocCode: this.result.AssetDocCode,

@@ -5,11 +5,10 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-asset-type-paging',
-  templateUrl: './asset-type-paging.component.html',
-  styleUrls: ['./asset-type-paging.component.scss']
+  templateUrl: './asset-type-paging.component.html'
 })
 export class AssetTypePagingComponent implements OnInit {
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj;
 
   constructor() { }
   ngOnInit() {

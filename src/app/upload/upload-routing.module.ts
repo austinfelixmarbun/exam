@@ -3,7 +3,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { UploadMonitoringComponent } from "./upload-monitoring/upload-monitoring.component";
 import { UploadSettingPagingComponent } from "./upload-setting/upload-setting/upload-setting-paging.component";
 import { UploadSettingEditComponent } from "./upload-setting/upload-setting-edit/upload-setting-edit.component";
-
 const routes: Routes = [
   {
     path: '',
@@ -35,6 +34,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule], 
 })
 export class UploadRoutingModule { }

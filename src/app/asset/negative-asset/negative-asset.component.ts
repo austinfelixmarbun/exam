@@ -10,13 +10,11 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-negative-asset',
   templateUrl: './negative-asset.component.html',
-  styleUrls: ['./negative-asset.component.scss'],
   providers: [NGXToastrService]
 })
 export class NegativeAssetComponent implements OnInit {
   @ViewChild(UcpagingComponent) ucpaging;
-  inputPagingObj: any;
-  navigationSubscription: any;
+  inputPagingObj: UcPagingObj;
 
   constructor(
     private service: NGXToastrService,

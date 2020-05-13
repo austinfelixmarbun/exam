@@ -13,7 +13,10 @@ import { UCSearchModule } from "@adins/ucsearch";
 import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { LookuproleModule } from "@adins/lookuprole";
 import { UcSubsectionModule } from "@adins/uc-subsection";
-
+import { UcpagingModule } from "@adins/ucpaging";
+import { UcviewgenericModule } from "@adins/ucviewgeneric";
+import { UcuploadModule } from '@adins/ucupload';
+import { UploadNegativeAssetComponent } from './upload-negative-asset/upload-negative-asset.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -26,12 +29,16 @@ import { UcSubsectionModule } from "@adins/uc-subsection";
         ReactiveFormsModule,
         LookuproleModule,
         UcSubsectionModule,
-        UploadRoutingModule
+        UploadRoutingModule,
+        UcpagingModule,
+        UcviewgenericModule,
+        UcuploadModule
     ],
     declarations: [
         UploadMonitoringComponent,
         UploadSettingPagingComponent,
-        UploadSettingEditComponent
+        UploadSettingEditComponent,
+        UploadNegativeAssetComponent
     ],
 
 })

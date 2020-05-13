@@ -14,21 +14,26 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   providers: [NGXToastrService]
 })
 export class EditMainDataCompanyComponent implements OnInit {
-  getCustCompanyByCustIdUrl: string;
-  getCustByCustIdUrl: string;
+  
+  tempCustObj: any;
   tempCustModel: any;
-  getListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl : string;
-  tempCompanyTypeCode: any;
   custCompanyObj: any;
-  custObj: any
+  tempCompanyTypeCode: any;
   tempCustCompanyObj: any;
-  tempCustObj: any
-  CustId: any;
-  editCustUrl: any;
-  editCustCompanyUrl: any;
-  From: any;
-  VipNotesRequired : any;
+
+  custObj: CustObj
+
+  CustId: number;
+  VipNotesRequired : boolean;
+
+  From: string;
+  editCustUrl: string;
+  editCustCompanyUrl: string;
+  getCustByCustIdUrl: string;
+  getListActiveRefMasterUrl: string;
+  getCustCompanyByCustIdUrl: string;
+  GetListActiveRefMasterWithReserveFieldAllUrl : string;
+
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;

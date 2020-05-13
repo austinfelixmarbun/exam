@@ -17,7 +17,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 })
 export class CustGroupTabDetailComponent implements OnInit {
   @Input() MrCustTypeCode: string;
-  @Input() CustId: any;
+  @Input() CustId: number;
   @Output() AddCustGroupResponse = new EventEmitter<any>();
   inputLookupCustPersonalObj: InputLookupObj;
   inputLookupCustCompanyObj: InputLookupObj;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
@@ -6,24 +6,24 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustGroupTabDetailComponent } from './cust-group-tab-detail/cust-group-tab-detail.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-cust-group-tab',
   templateUrl: './cust-group-tab.component.html',
-  styleUrls: ['./cust-group-tab.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class CustGroupTabComponent implements OnInit {
   @Input() CustId: number;
   @Input() MrCustTypeCode: string;
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
   CustGrpList: any;
 
   constructor(
     private httpClient: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
-    private spinner: NgxSpinnerService, private wizard: WizardComponent
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -74,12 +74,12 @@ export class CustGroupTabComponent implements OnInit {
       }
     );
     }
-
   }
+  
   next() {
-    this.wizard.goToNextStep();
+    this.outputTab.emit({ stepMode: "next"});
   }
   back(){
-    this.wizard.goToPreviousStep();
+    this.outputTab.emit({ stepMode: "previous"});
   }
 }

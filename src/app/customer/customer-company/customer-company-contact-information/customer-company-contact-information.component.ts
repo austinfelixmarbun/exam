@@ -18,38 +18,41 @@ import { WizardComponent } from 'angular-archwizard';
   providers: [NGXToastrService],
 })
 export class CustomerCompanyContactInformationComponent implements OnInit {
-  
-  @Input() custCompanyId : any ;
+  @Input() custCompanyId : number ;
+
+
+  tempCustAddrObj: any;
+  tempMrGenderCode: any;
+  tempMrJobPositionCode: any;
+  tempCustCompanyContactPersonObj: any;
+
+  custAddrObj: CustAddrObj;
+  UcAddressObj:  UcAddressObj;
+  inputFieldObj: InputFieldObj;
+  custCompanyContactPersonObj: CustCompanyContactPersonObj;
+
+  IdCust: number;
+  getCustAddrUrl: string;
+  editCustAddrUrl: string;
+  addNewCustAddrUrl: string;
+  getListActiveRefMasterUrl: string;
+  getCustCompanyByCustIdUrl : string;
+  addCustCompanyContactPersonUrl: string;
+  getCustAddrByMrCustAddrTypeUrl: string;
+  editCustCompanyContactPersonByCustCompanyIdUrl: string;
+  getCustCompanyContactPersonByCustCompanyIdUrl: string;
+
   ContactInformationForm = this.fb.group({
-    ContactPersonName: ['', [Validators.maxLength(100),Validators.required]],
+    ContactPersonName: ['', [Validators.maxLength(100), Validators.required]],
     MrGenderCode: ['', [Validators.maxLength(100)]],
-    MrJobPositionCode: ['',[Validators.required]],
-    JobTitleName: ['',[Validators.required]], 
-    MobilePhnNo1:['', [ Validators.pattern("^[0-9]+$"),Validators.maxLength(100),Validators.required]],
-    MobilePhnNo2:['', Validators.pattern("^[0-9]+$")],
-    Email1: [''], 
-    Email2: [''], 
+    MrJobPositionCode: ['', [Validators.required]],
+    JobTitleName: ['', [Validators.required]],
+    MobilePhnNo1: ['', [Validators.pattern("^[0-9]+$"), Validators.maxLength(100), Validators.required]],
+    MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
+    Email1: [''],
+    Email2: [''],
   });
-
-  custAddrObj: any;
-  IdCust: any;
-  custCompanyContactPersonObj  : any;
-  addCustCompanyContactPersonUrl : any;
-  UcAddressObj :  any;
-  inputFieldObj : any;
-  addNewCustAddrUrl :any;
-  tempMrGenderCode : any;
-  getListActiveRefMasterUrl : any;
-  tempMrJobPositionCode : any;
-  getCustCompanyByCustIdUrl : any;
-  tempCustCompanyContactPersonObj : any;
-  tempCustAddrObj : any;
-  getCustAddrUrl : any;
-  getCustAddrByMrCustAddrTypeUrl : any;
-  getCustCompanyContactPersonByCustCompanyIdUrl : any;
-  editCustAddrUrl : any;
-  editCustCompanyContactPersonByCustCompanyIdUrl : any;
-
+  
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent ) { 
     this.route.queryParams.subscribe(params => { 
       if (params["IdCust"] != null) {
@@ -58,45 +61,45 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     });
     this.addNewCustAddrUrl = AdInsConstant.AddCustAddr;
     this.addCustCompanyContactPersonUrl = AdInsConstant.AddCustCompanyContactPerson;
-    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster; 
+    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.getCustAddrUrl = AdInsConstant.GetCustAddr;
     this.getCustCompanyContactPersonByCustCompanyIdUrl = AdInsConstant.GetCustCompanyContactPersonByCustCompanyId;
     this.getCustAddrByMrCustAddrTypeUrl = AdInsConstant.GetCustAddrByMrCustAddrType;
     this.editCustAddrUrl = AdInsConstant.EditCustAddr;
-    this.editCustCompanyContactPersonByCustCompanyIdUrl =AdInsConstant.EditCustCompanyContactPersonByCustCompanyId
-  } 
+    this.editCustCompanyContactPersonByCustCompanyIdUrl = AdInsConstant.EditCustCompanyContactPersonByCustCompanyId
+  }
 
-  ngOnInit() {  
+  ngOnInit() {
     this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj = new InputFieldObj();
-    this.inputFieldObj.inputLookupObj = new InputLookupObj(); 
+    this.inputFieldObj.inputLookupObj = new InputLookupObj();
     var refMasterObjMrJobPositionCode = {
       RefMasterTypeCode: "JOB_POSITION",
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
-        this.tempMrJobPositionCode = response["ReturnObject"]; 
+        this.tempMrJobPositionCode = response["ReturnObject"];
       }
-    ); 
+    );
     var refMasterObjMrGenderCode = {
       RefMasterTypeCode: "GENDER",
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
-        this.tempMrGenderCode = response["ReturnObject"]; 
+        this.tempMrGenderCode = response["ReturnObject"];
       }
     );
 
     this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
     this.custAddrObj = new CustAddrObj();
 
-    this.custCompanyContactPersonObj.CustCompanyId = this.custCompanyId; 
+    this.custCompanyContactPersonObj.CustCompanyId = this.custCompanyId;
     this.http.post(this.getCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
-      (response) => { 
+      (response) => {
         this.tempCustCompanyContactPersonObj = response;
-         console.log(this.tempCustCompanyContactPersonObj);
+        console.log(this.tempCustCompanyContactPersonObj);
         this.ContactInformationForm.patchValue({
           ContactPersonName: this.tempCustCompanyContactPersonObj.ContactPersonName,
           MrGenderCode: this.tempCustCompanyContactPersonObj.MrGenderCode,
@@ -105,70 +108,70 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
           MobilePhnNo1: this.tempCustCompanyContactPersonObj.MobilePhnNo1,
           MobilePhnNo2: this.tempCustCompanyContactPersonObj.MobilePhnNo2,
           Email1: this.tempCustCompanyContactPersonObj.Email1,
-          Email2: this.tempCustCompanyContactPersonObj.Email2, 
+          Email2: this.tempCustCompanyContactPersonObj.Email2,
         });
 
-        if(this.tempCustCompanyContactPersonObj.MrGenderCode==null){
+        if (this.tempCustCompanyContactPersonObj.MrGenderCode == null) {
           this.ContactInformationForm.patchValue({
             MrGenderCode: this.tempMrGenderCode[0].Key
           });
         }
-        if(this.tempCustCompanyContactPersonObj.MrJobPositionCode==null){
+        if (this.tempCustCompanyContactPersonObj.MrJobPositionCode == null) {
           this.ContactInformationForm.patchValue({
             MrJobPositionCode: this.tempMrJobPositionCode[0].Key
           });
         }
 
-      });  
+      });
 
- 
-      this.custAddrObj.CustId = this.IdCust;
-      this.custAddrObj.MrCustAddrTypeCode = "CONTACT";
-      this.http.post(this.getCustAddrByMrCustAddrTypeUrl, this.custAddrObj).subscribe(
-        (response) => { 
-          this.tempCustAddrObj = response; 
-          this.UcAddressObj.AreaCode1 = this.tempCustAddrObj.AreaCode1;
-          this.UcAddressObj.AreaCode2 = this.tempCustAddrObj.AreaCode2;
-          this.UcAddressObj.AreaCode3 = this.tempCustAddrObj.AreaCode3;
-          this.UcAddressObj.AreaCode4 = this.tempCustAddrObj.AreaCode4;
-          this.UcAddressObj.Addr = this.tempCustAddrObj.Addr;
-          this.UcAddressObj.City = this.tempCustAddrObj.City;
-          this.UcAddressObj.PhnArea1 = this.tempCustAddrObj.PhnArea1;
-          this.UcAddressObj.Phn1 = this.tempCustAddrObj.Phn1;
-          this.UcAddressObj.PhnExt1 = this.tempCustAddrObj.PhnExt1;
-          this.UcAddressObj.PhnArea2 = this.tempCustAddrObj.PhnArea2;
-          this.UcAddressObj.Phn2 = this.tempCustAddrObj.Phn2;
-          this.UcAddressObj.PhnExt2 = this.tempCustAddrObj.PhnExt2;
-          this.UcAddressObj.FaxArea = this.tempCustAddrObj.FaxArea;
-          this.UcAddressObj.Fax = this.tempCustAddrObj.Fax;
-          this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrObj.Zipcode;
-          this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrObj.Zipcode };
-        });
- 
+
+    this.custAddrObj.CustId = this.IdCust;
+    this.custAddrObj.MrCustAddrTypeCode = "CONTACT";
+    this.http.post(this.getCustAddrByMrCustAddrTypeUrl, this.custAddrObj).subscribe(
+      (response) => {
+        this.tempCustAddrObj = response;
+        this.UcAddressObj.AreaCode1 = this.tempCustAddrObj.AreaCode1;
+        this.UcAddressObj.AreaCode2 = this.tempCustAddrObj.AreaCode2;
+        this.UcAddressObj.AreaCode3 = this.tempCustAddrObj.AreaCode3;
+        this.UcAddressObj.AreaCode4 = this.tempCustAddrObj.AreaCode4;
+        this.UcAddressObj.Addr = this.tempCustAddrObj.Addr;
+        this.UcAddressObj.City = this.tempCustAddrObj.City;
+        this.UcAddressObj.PhnArea1 = this.tempCustAddrObj.PhnArea1;
+        this.UcAddressObj.Phn1 = this.tempCustAddrObj.Phn1;
+        this.UcAddressObj.PhnExt1 = this.tempCustAddrObj.PhnExt1;
+        this.UcAddressObj.PhnArea2 = this.tempCustAddrObj.PhnArea2;
+        this.UcAddressObj.Phn2 = this.tempCustAddrObj.Phn2;
+        this.UcAddressObj.PhnExt2 = this.tempCustAddrObj.PhnExt2;
+        this.UcAddressObj.FaxArea = this.tempCustAddrObj.FaxArea;
+        this.UcAddressObj.Fax = this.tempCustAddrObj.Fax;
+        this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrObj.Zipcode;
+        this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrObj.Zipcode };
+      });
+
   }
 
-  back(){
+  back() {
     this.wizard.goToPreviousStep();
   }
 
-  SaveValue(){ 
+  SaveValue() {
     this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
     this.custAddrObj = new CustAddrObj();
-    if(this.tempCustAddrObj.CustAddrId !=null){
+    if (this.tempCustAddrObj.CustAddrId != null) {
       this.custAddrObj = this.tempCustAddrObj;
-      this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj; 
+      this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj;
     }
- 
+
     this.custCompanyContactPersonObj.CustCompanyId = this.custCompanyId;
     this.custCompanyContactPersonObj.ContactPersonName = this.ContactInformationForm.controls["ContactPersonName"].value;
-    this.custCompanyContactPersonObj.MrGenderCode = this.ContactInformationForm.controls["MrGenderCode"].value;  
+    this.custCompanyContactPersonObj.MrGenderCode = this.ContactInformationForm.controls["MrGenderCode"].value;
     this.custCompanyContactPersonObj.MrJobPositionCode = this.ContactInformationForm.controls["MrJobPositionCode"].value;
     this.custCompanyContactPersonObj.JobTitleName = this.ContactInformationForm.controls["JobTitleName"].value;
-    this.custCompanyContactPersonObj.MobilePhnNo1 = this.ContactInformationForm.controls["MobilePhnNo1"].value;  
+    this.custCompanyContactPersonObj.MobilePhnNo1 = this.ContactInformationForm.controls["MobilePhnNo1"].value;
     this.custCompanyContactPersonObj.MobilePhnNo2 = this.ContactInformationForm.controls["MobilePhnNo2"].value;
     this.custCompanyContactPersonObj.Email1 = this.ContactInformationForm.controls["Email1"].value;
     this.custCompanyContactPersonObj.Email2 = this.ContactInformationForm.controls["Email2"].value;
- 
+
     this.custAddrObj.CustId = this.IdCust;
     this.custAddrObj.MrCustAddrTypeCode = "CONTACT";
     this.custAddrObj.Addr = this.ContactInformationForm.value.UcAddress.Addr;
@@ -177,7 +180,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custAddrObj.AreaCode3 = this.ContactInformationForm.value.UcAddress.AreaCode3;
     this.custAddrObj.AreaCode4 = this.ContactInformationForm.value.UcAddress.AreaCode4;
     this.custAddrObj.City = this.ContactInformationForm.value.UcAddress.City;
-    this.custAddrObj.ZipCode = this.ContactInformationForm.value.UcAddressZipcode.value;
+    this.custAddrObj.Zipcode = this.ContactInformationForm.value.UcAddressZipcode.value;
     this.custAddrObj.SubZipcode = this.ContactInformationForm.value.UcAddressZipcode.value;
     this.custAddrObj.Fax = this.ContactInformationForm.value.UcAddress.Fax;
     this.custAddrObj.FaxArea = this.ContactInformationForm.value.UcAddress.FaxArea;
@@ -187,16 +190,16 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custAddrObj.PhnArea2 = this.ContactInformationForm.value.UcAddress.PhnArea2;
     this.custAddrObj.PhnExt1 = this.ContactInformationForm.value.UcAddress.PhnExt1;
     this.custAddrObj.PhnExt2 = this.ContactInformationForm.value.UcAddress.PhnExt2;
-    
-    if(this.tempCustAddrObj.Zipcode !=null){
+
+    if (this.tempCustAddrObj.Zipcode != null) {
       this.custAddrObj = this.tempCustAddrObj;
-      this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj; 
+      this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj;
 
       this.http.post(this.editCustAddrUrl, this.custAddrObj).subscribe(
-        (response) => { 
+        (response) => {
           this.http.post(this.editCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
-            (response) => { 
-              this.toastr.successMessage(response["Message"]); 
+            (response) => {
+              this.toastr.successMessage(response["Message"]);
               this.wizard.goToNextStep();
             },
             error => {
@@ -208,12 +211,12 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
           console.log(error);
         }
       );
-    }else{
+    } else {
       this.http.post(this.addNewCustAddrUrl, this.custAddrObj).subscribe(
-        (response) => { 
+        (response) => {
           this.http.post(this.addCustCompanyContactPersonUrl, this.custCompanyContactPersonObj).subscribe(
-            (response) => { 
-              this.toastr.successMessage(response["Message"]); 
+            (response) => {
+              this.toastr.successMessage(response["Message"]);
               this.wizard.goToNextStep();
             },
             error => {
@@ -226,8 +229,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         }
       );
     }
-  
-     
+
+
   }
 
 }
