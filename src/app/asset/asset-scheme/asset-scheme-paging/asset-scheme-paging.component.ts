@@ -5,15 +5,13 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-asset-scheme-paging',
-  templateUrl: './asset-scheme-paging.component.html',
-  styleUrls: ['./asset-scheme-paging.component.scss']
+  templateUrl: './asset-scheme-paging.component.html'
 })
 export class AssetSchemePagingComponent implements OnInit {
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj;
   constructor() { }
 
   ngOnInit() {
-    console.log('masuk ke scheme paging');
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetScheme.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;

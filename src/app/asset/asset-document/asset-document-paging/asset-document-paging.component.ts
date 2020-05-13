@@ -7,14 +7,13 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-asset-document-paging',
-  templateUrl: './asset-document-paging.component.html',
-  styleUrls: ['./asset-document-paging.component.scss']
+  templateUrl: './asset-document-paging.component.html'
 })
 export class AssetDocumentPagingComponent implements OnInit {
-  AssetTypeId:any;
-  inputPagingObj: any;
-  viewObj:any;
-  arrCrit:any;
+  AssetTypeId:number;
+  inputPagingObj: UcPagingObj;
+  viewObj:string;
+  arrCrit:Array<CriteriaObj>;
   
   constructor(private route: ActivatedRoute) { this.route.queryParams.subscribe(params => {
 
@@ -36,11 +35,11 @@ export class AssetDocumentPagingComponent implements OnInit {
     
     this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
 
-    this.arrCrit = new Array();
+    this.arrCrit = new Array<CriteriaObj>();
     var critObj = new CriteriaObj();
     critObj.restriction = AdInsConstant.RestrictionLike;
     critObj.propName = 'ASSET_TYPE_ID';
-    critObj.value = this.AssetTypeId;
+    critObj.value = this.AssetTypeId.toString();
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
