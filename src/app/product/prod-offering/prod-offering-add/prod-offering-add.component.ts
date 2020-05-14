@@ -9,6 +9,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcLookupObj } from 'app/shared/model/UcLookupObj.Model';
 import { formatDate } from '@angular/common';
 import { environment } from 'environments/environment';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-prod-offering-add',
@@ -60,14 +61,25 @@ export class ProdOfferingAddComponent implements OnInit {
 
     var context = JSON.parse(localStorage.getItem("UserAccess"));
 
-    var arrCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.propName = 'O.OFFICE_CODE';
-    critObj.value = context["OfficeCode"];
-    arrCrit.push(critObj);
-    this.inputLookupObj.addCritInput = arrCrit;
+    var currOfcCode = context["OfficeCode"];
+    if(currOfcCode != "HO")
+    {
+      var arrCrit = new Array();
+      var critObj = new CriteriaObj();
+      critObj.restriction = AdInsConstant.RestrictionEq;
+      critObj.propName = 'O.OFFICE_CODE';
+      critObj.value = context["OfficeCode"];
+      arrCrit.push(critObj);
 
+      critObj = new CriteriaObj();
+      critObj.restriction = AdInsConstant.RestrictionEq;
+      critObj.propName = 'PBM.IS_ALLOWED_CRT';
+      critObj.value = '1';
+      arrCrit.push(critObj);
+
+      this.inputLookupObj.addCritInput = arrCrit;
+    }
+   
     if (this.mode == "edit") {
 
       this.ProdOfferingForm.controls.ProdOfferingCode.disable();
@@ -115,6 +127,7 @@ export class ProdOfferingAddComponent implements OnInit {
         }
       );
     } else {
+      
       this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
       this.prodOfferingObj.ProdOfferingId = "0";
       this.prodOfferingObj.RowVersion = "";
@@ -152,6 +165,7 @@ export class ProdOfferingAddComponent implements OnInit {
       );
     }
     else {
+      
       this.prodOfferingObj.ProdOfferingId = "0";
       this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
       this.prodOfferingObj.RowVersion = "";
