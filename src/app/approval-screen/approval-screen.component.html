@@ -1,2 +1,45 @@
-<!-- <app-uc-approval [inputObj]="inputObj" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></app-uc-approval> -->
-<lib-ucapproval [inputObj]="inputObj" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></lib-ucapproval>
+<app-uc-approval [inputObj]="inputObj" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></app-uc-approval>
+<!-- <lib-ucapproval [inputObj]="inputObj" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></lib-ucapproval> -->
+
+<form [formGroup]="FormApv" #enjiForm="ngForm" (ngSubmit)="FormApv.valid && Test()">
+    <!-- <app-uc-approveby 
+        [apvBaseUrl]="apvBaseUrl"
+        [parentForm]="FormApv" 
+        [isRequired]="'true'" 
+        [identifier] ="'approveById'"
+        [schemeCode]="'PRE_GLV_APV_CF'"
+        [enjiForm]="enjiForm"
+        (onChange)="onChange($event)">
+    </app-uc-approveby> -->
+
+    <lib-ucapprovalsummary [inputObj]="inputObj" ></lib-ucapprovalsummary>
+
+
+    <lib-ucapproveby
+        [apvBaseUrl]="apvBaseUrl"
+        [parentForm]="FormApv" 
+        [isRequired]="'true'" 
+        [identifier] ="'approveById'"
+        [schemeCode]="'PRE_GLV_APV_CF'"
+        [enjiForm]="enjiForm"
+        (onChange)="onChange($event)">
+    </lib-ucapproveby>
+
+    <lib-ucapprovalhist 
+        [inputObj]="instanceHistObj">
+    </lib-ucapprovalhist>
+    <lib-ucapprovalhist 
+        [inputObj]="taskHistObj">
+    </lib-ucapprovalhist>
+
+    <lib-ucapprovalrecommendation
+        [apvBaseUrl]="apvBaseUrl"
+        [schemeCode]="'CRD_APV_CF'"
+        [identifier] ="'recommendations'"
+        [parentForm]="FormApv" 
+        [enjiForm]="enjiForm"
+    >
+    </lib-ucapprovalrecommendation>
+
+    <button type="submit"> Test </button>
+</form>
