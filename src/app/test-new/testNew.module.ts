@@ -13,7 +13,7 @@ import { UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcLookupGroupComponent } from './uc-lookup-group/uc-lookup-group.component';
 import { UcpagingModule } from "@adins/ucpaging";
 import { UcSubsectionModule } from "@adins/uc-subsection";
-// import { UcaddressModule } from "@adins/ucaddress";
+ import { UcaddressModule } from "@adins/ucaddress";
 import { DummyComponent } from './dummy/dummy.component';
 import { ArchwizardModule } from "angular-archwizard";
 import { UcSubsectionComponent } from './uc-subsection/uc-subsection.component';
@@ -35,7 +35,7 @@ import { UcinputnumberModule } from "@adins/ucinputnumber";
         UclookupgenericModule,
         UcpagingModule,
         UcSubsectionModule,
-        // UcaddressModule,
+        UcaddressModule,
         ArchwizardModule,
         UcShowErrorsModule,
         UcinputnumberModule
