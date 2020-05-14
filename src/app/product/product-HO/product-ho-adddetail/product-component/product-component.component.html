@@ -12,7 +12,7 @@
             <div class="form-group row" [formGroupName]="l">
               <label class="col-md-3 " *ngIf="FormProdComp.controls['groups'].value[j].groupCode == 'RULE'">{{type.controls['components'].value[l].ProdCompntName}}</label>
               <label class="col-md-4 " *ngIf="FormProdComp.controls['groups'].value[j].groupCode != 'RULE'">{{type.controls['components'].value[l].ProdCompntName}}</label>
-              <span class="material-icons col-md-1" *ngIf="FormProdComp.controls['groups'].value[j].groupCode == 'RULE'" (click)="DownloadRule(type.controls['components'].value[l].CompntValue,type.controls['components'].value[l].CompntValueDesc)">
+              <span class="material-icons col-md-1 pointer" *ngIf="FormProdComp.controls['groups'].value[j].groupCode == 'RULE'" (click)="DownloadRule(type.controls['components'].value[l].CompntValue,type.controls['components'].value[l].CompntValueDesc)">
                 get_app
               </span>
               <div class="col-md-6" style="border-right: 1px solid grey" *ngIf="type.controls['components'].value[l].ProdCompntType == 'DDL'">
