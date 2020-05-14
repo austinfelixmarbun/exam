@@ -5,7 +5,7 @@ import { CustCompanyObj } from "./CustCompanyObj.Model";
  
  
 export class AddCustObj {
-custObj : CustObj;
-custPersonalObj : CustPersonalObj;
-custCompanyObj : CustCompanyObj;
+CustObj : CustObj;
+CustPersonalObj : CustPersonalObj;
+CustCompanyObj : CustCompanyObj;
 }

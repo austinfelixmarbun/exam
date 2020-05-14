@@ -1,0 +1,139 @@
+{
+    "title": "Test Upload",
+    "exportExcel": true,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "FILE_NAME",
+            "id": "FileNameId",
+            "value": "",
+            "label": "File Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "UPLOAD_MONITORING_NO",
+            "id": "UploadMonitoringNoId",
+            "value": "",
+            "label": "Upload No",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "datatype": "text",
+            "name": "UPLOAD_STATUS",
+            "id": "MrUploadStatusId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefStatus/GetRefStatusByTrxTypeCode",
+            "label": "UPLOAD STATUS",
+            "items": [],
+            "itemsUrl": [],
+            "criteriaPropName": "TrxTypeCode",
+            "criteriaPropValue": "UPLOAD"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT UMH.UPLOAD_MONITORING_NO AS UploadMonitoringNo, UMH.OFFICE_CODE AS OfficeCode, UMH.FILE_NAME AS [FileName], UMH.TOTAL_RECORD AS TotalRecord, UMH.TOTAL_RECORD_PROCESSED AS TotalRecordProcessed, UMH.TOTAL_RECORD_ERROR AS TotalRecordError, RS.DESCR AS UploadStatus, UMH.IS_EXECUTED AS IsExecuted, UMH.ERROR_MESSAGE AS ErrorMessage",
+        "from": "FROM dbo.UPLOAD_MONITORING_H UMH WITH(NOLOCK) LEFT JOIN dbo.REF_STATUS RS WITH(NOLOCK) ON RS.REF_STATUS_CODE = UMH.UPLOAD_STATUS AND RS.STATUS_GRP_CODE='UPLOAD_STATUS'"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "UPLOAD MONITORING NO",
+            "name": "UPLOAD_MONITORING_NO"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE CODE",
+            "name": "OFFICE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "FILE NAME",
+            "name": "FILE_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "right",
+            "label": "TOTAL RECORD",
+            "name": "TOTAL_RECORD"
+        },
+        {
+            "type": "sort",
+            "position": "right",
+            "label": "TOTAL RECORD PROCESSED",
+            "name": "TOTAL_RECORD_PROCESS"
+        },
+        {
+            "type": "sort",
+            "position": "right",
+            "label": "TOTAL RECORD ERROR",
+            "name": "TOTAL_RECORD_ERROR"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "UPLOAD STATUS",
+            "name": "UPLOAD_STATUS"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "ERROR MESSAGE",
+            "name": "ERROR_MESSAGE"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "DOWNLOAD"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "UploadMonitoringNo"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "FileName"
+        },
+        {
+            "type": "text",
+            "position": "right",
+            "property": "TotalRecord"
+        },
+        {
+            "type": "text",
+            "position": "right",
+            "property": "TotalRecordProcessed"
+        },
+        {
+            "type": "text",
+            "position": "right",
+            "property": "TotalRecordError"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "UploadStatus"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ErrorMessage"
+        }
+    ]
+}

@@ -60,7 +60,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './pages/full-pages/full-pages.module#FullPagesModule'
   },
   {
-    path: 'upload',
+    path: 'Upload',
     loadChildren: './upload/upload.module#UploadModule'
   },
   {

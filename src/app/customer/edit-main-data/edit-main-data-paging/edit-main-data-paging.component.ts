@@ -9,9 +9,9 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./edit-main-data-paging.component.scss']
 })
 export class EditMainDataPagingComponent implements OnInit {
+  inputPagingObj: UcPagingObj;
 
   constructor() { }
-  inputPagingObj:any;
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/editMainDataCustomer.json";
@@ -20,5 +20,4 @@ export class EditMainDataPagingComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/editMainDataCustomer.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetAccessory;
   }
-
 }

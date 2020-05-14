@@ -11,15 +11,18 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 export class CustomerViewCoyManagementComponent implements OnInit {
-  CustId: any;
-  GetCustCompanyMgmntShrholderForCustViewByCustIdUrl = AdInsConstant.GetCustCompanyMgmntShrholderForCustViewByCustId;
+
+  CustId: number;
   responseObj: any;
+  GetCustCompanyMgmntShrholderForCustViewByCustIdUrl: string;
 
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) { 
+    this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl = AdInsConstant.GetCustCompanyMgmntShrholderForCustViewByCustId
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

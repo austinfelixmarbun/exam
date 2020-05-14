@@ -1,16 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
-import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
 import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductOfferingDetailObj } from 'app/shared/model/ListRefProductOfferingDetailObj.Model'
-import { ListRefProductDetailObj } from 'app/shared/model/ListRefProductDetailObj.Model';
-import { RefProdOfferingDetailObj } from 'app/shared/model/RefProdOfferingDetailObj.Model';
 import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOfferingDetailObj.Model';
 
 @Component({
@@ -23,10 +17,8 @@ export class ProductComponentComponent implements OnInit {
   @Input() objInput: any;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private fb: FormBuilder,
     private toastr: NGXToastrService,
     private wizard: WizardComponent
   ) { }

@@ -10,7 +10,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 })
 export class CustomerViewCoyFinancialComponent implements OnInit {
   viewCustCoyFinData = "./assets/ucviewgeneric/viewCustCoyFinData.json";
-  CustId: any;
+  CustId: number;
   GetCBAForCustFinDataByCustIdUrl = AdInsConstant.GetCBAForCustFinDataByCustId;
   responseCBAObj: any;
 

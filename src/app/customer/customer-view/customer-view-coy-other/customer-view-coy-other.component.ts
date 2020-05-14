@@ -9,7 +9,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./customer-view-coy-other.component.scss']
 })
 export class CustomerViewCoyOtherComponent implements OnInit {
-  CustId: any;
+  CustId: number;
   GetCustAttrContentForCustViewByCustIdUrl = AdInsConstant.GetCustAttrContentForCustViewByCustId;
   responseCustAttr: any;
 

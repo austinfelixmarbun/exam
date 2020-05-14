@@ -11,7 +11,6 @@ import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 @Component({
   selector: 'app-asset-document-add-edit',
   templateUrl: './asset-document-add-edit.component.html',
-  styleUrls: ['./asset-document-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetDocumentAddEditComponent implements OnInit {
@@ -27,26 +26,29 @@ export class AssetDocumentAddEditComponent implements OnInit {
     IsActive: [true],
 
   });
-  assetDocName: any;
-  pageType: any;
-  AssetTypeId: any;
-  AssetDocListId: any;
-  apiUrl: any;
+  assetTypeName:string;
+  assetDocName: string;
+  pageType: string;
+  AssetTypeId: number;
+  AssetDocListId: number;
+  apiUrl: string;
   settingUrl: string = environment.FoundationR3Url;
   urlEnviPaging: string = environment.foundationUrl;
-  result: any;
+  result: AssetDocListObj;
   assetDocListObj: AssetDocListObj;
-  GetListRefAssetDocUrl: any;
-  AddNewAssetDocListUrl: any;
-  EditAssetDocListUrl: any;
-  getRefAssetDocUrl: any;
+  GetListRefAssetDocUrl: string;
+  AddNewAssetDocListUrl: string;
+  EditAssetDocListUrl: string;
+  getRefAssetDocUrl: string;
   tempAssetName: any;
-  temp: any;
+  temp: RefAssetDocObj;
+  GetAssetTypeById : string;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
     this.AddNewAssetDocListUrl =  AdInsConstant.AddNewAssetDocList;
     this.EditAssetDocListUrl =  AdInsConstant.EditAssetDocList;
     this.GetListRefAssetDocUrl = AdInsConstant.GetListRefAssetDoc;
+    this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
     this.route.queryParams.subscribe(params => {
       
       if (params["AssetTypeId"] != null) {
@@ -70,6 +72,12 @@ export class AssetDocumentAddEditComponent implements OnInit {
         });
       }
     );
+    var assetTypeReq = {"AssetTypeId": this.AssetTypeId};
+    this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
+      (response) => {
+        this.assetTypeName = response['AssetTypeName'];
+      }
+    );
 
     if (this.pageType == "edit") {
       this.apiUrl = AdInsConstant.GetAssetDocListByAssetDocListId;
@@ -79,12 +87,12 @@ export class AssetDocumentAddEditComponent implements OnInit {
       assetDocListObj.AssetDocListId = this.AssetDocListId;
 
       this.http.post(this.apiUrl, assetDocListObj).subscribe(
-        (response) => {
+        (response: AssetDocListObj) => {
           this.result = response;
           refAssetDocObj.RefAssetDocId = this.result.RefAssetDocId;
 
           this.http.post(this.getRefAssetDocUrl, refAssetDocObj).subscribe(
-            (response) => {
+            (response: RefAssetDocObj) => {
               this.temp = response;
               this.assetDocName = this.temp.AssetDocName;
             });

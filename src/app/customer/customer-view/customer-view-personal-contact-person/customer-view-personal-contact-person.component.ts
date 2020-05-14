@@ -9,7 +9,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./customer-view-personal-contact-person.component.scss']
 })
 export class CustomerViewPersonalContactPersonComponent implements OnInit {
-  CustId: any;
+  CustId: number;
   GetListCustPersonalContactPersonForCustViewByCustIdUrl = AdInsConstant.GetListCustPersonalContactPersonForCustViewByCustId;
   responseObj: any;
 
