@@ -53,17 +53,25 @@ export class ProdOfferingAddComponent implements OnInit {
 
   ngOnInit() {
     this.inputLookupObj = new UcLookupObj();
-    this.inputLookupObj.urlJson = "./assets/uclookup/lookupProdOffering.json";
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupObj.pagingJson = "./assets/uclookup/lookupProdOffering.json";
-    this.inputLookupObj.genericJson = "./assets/uclookup/lookupProdOffering.json";
+    
 
     var context = JSON.parse(localStorage.getItem("UserAccess"));
 
     var currOfcCode = context["OfficeCode"];
-    if(currOfcCode != "HO")
+    if(currOfcCode == "HO")
     {
+      this.inputLookupObj.urlJson = "./assets/uclookup/product/lookupProductForHO.json";
+      this.inputLookupObj.pagingJson = "./assets/uclookup/product/lookupProductForHO.json";
+      this.inputLookupObj.genericJson = "./assets/uclookup/product/lookupProductForHO.json";
+    }
+    else
+    {
+      this.inputLookupObj.urlJson = "./assets/uclookup/lookupProdOffering.json";
+      this.inputLookupObj.pagingJson = "./assets/uclookup/lookupProdOffering.json";
+      this.inputLookupObj.genericJson = "./assets/uclookup/lookupProdOffering.json";
+
       var arrCrit = new Array();
       var critObj = new CriteriaObj();
       critObj.restriction = AdInsConstant.RestrictionEq;
