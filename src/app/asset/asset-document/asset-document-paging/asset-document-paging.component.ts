@@ -16,14 +16,11 @@ export class AssetDocumentPagingComponent implements OnInit {
   viewObj:string;
   arrCrit:Array<CriteriaObj>;
   
-  constructor(private route: ActivatedRoute) { this.route.queryParams.subscribe(params => {
-
-      
+  constructor(private route: ActivatedRoute) { 
+    this.route.queryParams.subscribe(params => {
     if (params["AssetTypeId"] != null) {
       this.AssetTypeId = params["AssetTypeId"];
-    }
-  
-   
+    }  
   }); }
 
   ngOnInit() {
