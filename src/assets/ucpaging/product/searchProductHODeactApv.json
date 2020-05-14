@@ -2,7 +2,22 @@
   "title": "Product HO Deactivation Approval",
   "exportExcel": false,
   "component": [
-    
+    {
+      "type": "textbox",
+      "name": "TL.TRX_NO",
+      "id": "ProdCodeId",
+      "value": "",
+      "label": "TRX NO",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "P.PROD_NAME",
+      "id": "ProdNameId",
+      "value": "",
+      "label": "PRODUCT NAME",
+      "placeholder": "Placeholder"
+    }
   ],
   "querystring": {
     "select": "SELECT TL.TASK_ID AS TaskId, TL.INSTANCE_ID AS InstanceId,TL.APV_REQ_ID AS ApvReqId, TL.TRX_NO AS TRX_NO, TL.APV_NO AS APV_NO, TL.REQUEST_BY AS REQUEST_BY, TL.REQUEST_DATE AS REQUEST_DATE, TL.MAIN_USER_ID AS MAIN_USER_ID, TL.CURRENT_USER_ID AS CURRENT_USER_ID, TL.CATEGORY_CODE AS CATEGORY_CODE, P.PROD_NAME AS PROD_NAME, P.DRAFT_PROD_H_ID AS ProdHId ,P.START_DT AS START_DT,P.END_DT AS END_DT",
