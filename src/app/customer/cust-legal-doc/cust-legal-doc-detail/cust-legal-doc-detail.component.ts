@@ -14,8 +14,8 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class CustLegalDocDetailComponent implements OnInit {
   @Input() CustCompanyId: number;
   legalDocTypeList: any;
-  businessDtMin: any;
-  businessDtMax: any;
+  businessDtMin: Date;
+  businessDtMax: Date;
 
   CustCompanyLegalDocForm = this.fb.group({
     CustCompanyLegalDocId: [0, [Validators.required]],

@@ -58,6 +58,16 @@ export class ProdOfferingAddComponent implements OnInit {
     this.inputLookupObj.pagingJson = "./assets/uclookup/lookupProdOffering.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/lookupProdOffering.json";
 
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+
+    var arrCrit = new Array();
+    var critObj = new CriteriaObj();
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'O.OFFICE_CODE';
+    critObj.value = context["OfficeCode"];
+    arrCrit.push(critObj);
+    this.inputLookupObj.addCritInput = arrCrit;
+
     if (this.mode == "edit") {
 
       this.ProdOfferingForm.controls.ProdOfferingCode.disable();

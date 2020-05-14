@@ -36,7 +36,6 @@ export class OfficeAreaMemberPagingComponent implements OnInit {
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.RefOfficeAreaId;
     this.inputPagingObj.addCritInput.push(critInput);
-    console.log(this.inputPagingObj);
 
     this.viewObj = "./assets/ucviewgeneric/viewOfficeAreaMember.json";
   }

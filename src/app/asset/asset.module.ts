@@ -12,6 +12,7 @@ import { AssetTypePagingComponent } from "./asset-type/asset-type-paging/asset-t
 import { ShowErrorsComponent } from "app/test-new/show-errors.component";
 import { RouterModule } from "@angular/router";
 import { UcSubsectionModule } from "@adins/uc-subsection";
+import { UcuploadModule } from '@adins/ucupload';
 import { AssetSchemeAddEditInformationComponent } from "./asset-scheme/asset-scheme-add-edit-information/asset-scheme-add-edit-information.component";
 import { AssetConfigurationPagingComponent } from "./asset-configuration/asset-configuration-paging/asset-configuration-paging.component";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
@@ -34,6 +35,12 @@ import { AssetMasterAddEditParentComponent } from "./asset-master/asset-master-a
 import { AssetMasterAddEditChildComponent } from "./asset-master/asset-master-add-edit-child/asset-master-add-edit-child.component";
 import { AddAssetSchemeComponent } from './asset-scheme/add-asset-scheme/add-asset-scheme.component';
 import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/asset-scheme-member.component';
+import { UploadAssetMasterComponent } from './asset-master/upload-asset-master/upload-asset-master.component';
+import { ReviewUploadAssetMasterDetailComponent } from "./asset-master/review-upload-asset-master/review-upload-asset-master-detail/review-upload-asset-master-detail.component";
+import { ReviewUploadAssetMasterPagingComponent } from "./asset-master/review-upload-asset-master/review-upload-asset-master-paging/review-upload-asset-master-paging.component";
+import { NegativeAssetUploadComponent } from './negative-asset/negative-asset-upload/negative-asset-upload.component';
+import { ReviewUploadNegativeAssetPagingComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-paging/review-upload-negative-asset-paging.component';
+import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-detail/review-upload-negative-asset-detail.component';
 
 @NgModule({
   imports: [
@@ -47,6 +54,7 @@ import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/a
     NgbModule,
     ReactiveFormsModule,
     UcSubsectionModule,
+    UcuploadModule,
     UcviewgenericModule,
     UclookupgenericModule,
     SharingComponentModule
@@ -72,7 +80,13 @@ import { AssetSchemeMemberComponent } from './asset-scheme/asset-scheme-member/a
     AssetMasterAddEditParentComponent,
     AssetMasterAddEditChildComponent,
     AddAssetSchemeComponent,
-    AssetSchemeMemberComponent
+    AssetSchemeMemberComponent,
+    UploadAssetMasterComponent,
+    ReviewUploadAssetMasterDetailComponent,
+    ReviewUploadAssetMasterPagingComponent,
+    NegativeAssetUploadComponent,
+    ReviewUploadNegativeAssetPagingComponent,
+    ReviewUploadNegativeAssetDetailComponent
   ]
 })
 export class AssetModule { }

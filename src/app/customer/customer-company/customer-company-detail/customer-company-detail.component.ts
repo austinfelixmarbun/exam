@@ -18,25 +18,29 @@ import { DatePipe } from '@angular/common';
   providers: [NGXToastrService],
 })
 export class CustomerCompanyDetailComponent implements OnInit {
+  @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  lookUpObj: InputLookupObj; 
+
+  tempCustObj: any;
+  tempCustCompanyObj: any;
+  tempRefIndustryObj: any;
+
+  custCompanyObj: CustCompanyObj;
+  refIndustryTypeObj: RefIndustryTypeObj;
+
+  IdCust: number;
+  tempRefIndustryTypeId: number;
+
+  Page: String;
+  editCustCompanyUrl: string;
+  getCustByCustIdUrl: string;
+  getCustCompanyByCustIdUrl: string;
+  getRefIndustryTypeByIndustryTypeIdUrl: string;
+
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
     EstablishmentDt: ['', [Validators.required]]
   });
-  lookUpObj: any; 
-  custCompanyObj: any;
-  tempRefIndustryTypeId: any;
- 
-  editCustCompanyUrl: any;
-  IdCust: any;
-  getCustCompanyByCustIdUrl: any;
-  tempCustCompanyObj: any;
-  getCustByCustIdUrl: any;
-  tempCustObj: any;
-  refIndustryTypeObj: any;
-  getRefIndustryTypeByIndustryTypeIdUrl: any;
-  tempRefIndustryObj: any;
-  Page: String;
-  @Output() outputValue: EventEmitter<object> = new EventEmitter();
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
  

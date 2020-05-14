@@ -86,7 +86,8 @@ export class NGXToastrService {
 
     successMessageTitle(title,message)
     {
-        this.toastr.info(message,title);
+        //this.toastr.info(message,title);
+        this.toastr.success(message,title);
     }
 
     errorAPI(status, reason) {

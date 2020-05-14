@@ -21,16 +21,15 @@
           </div>
         </div>
         <div class="form-group row adins">
-        
         </div>
-        <div class="form-group row  ">
+        <div class="form-group row ">
           <label class="col-md-2 adins-required-label" translate>Establishment Date</label>
           <div class="col-md-4">
             <input type="date" class="form-control adInsInput" formControlName="EstablishmentDt"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.EstablishmentDt.invalid}">
             <show-errors [control]="CustomerDetailForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
             </show-errors>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
@@ -41,7 +40,6 @@
       <button type="submit" class="btn btn-raised btn-primary" translate>
         <i class="fa fa-check-square-o"></i> Save & Continue
       </button>
- 
     </div>
   </form>
 </div>

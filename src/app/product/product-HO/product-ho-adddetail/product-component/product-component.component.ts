@@ -9,6 +9,7 @@ import { environment } from 'environments/environment';
 import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
 import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductDetailObj } from 'app/shared/model/ListRefProductDetailObj.Model';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-product-component-HO',
@@ -35,6 +36,9 @@ export class ProductComponentHOComponent implements OnInit {
   ProdHId: number;
   StateSave : string;
   dictBehaviour: {[key: string]: any;} = {};
+  DlRuleObj = {
+    CompntValue: "",
+  };
 
   ngOnInit() {
     this.UrlGetProdCompGrouped = AdInsConstant.GetProductHOComponentGrouped;
@@ -252,6 +256,18 @@ export class ProductComponentHOComponent implements OnInit {
     else
     {
       this.NextDetail();
+      console.log(this.FormProdComp);
     }
+  }
+  DownloadRule(CompntValue, CompntValueDesc) {
+    this.DlRuleObj.CompntValue = CompntValue;
+    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+      response => {
+        saveAs(response, CompntValueDesc + '.xlsx');
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
  }

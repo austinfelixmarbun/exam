@@ -1,6 +1,6 @@
 {
   "title": "Asset Master",
-  "exportExcel": false,
+  "exportExcel": true,
   "component": [
     {
       "type": "dropdown",
@@ -207,13 +207,15 @@
               "conditions" : [ 
                 {
                   "property" : "IsFinal", 
-                  "value" : "0"
+                  "value" : "0",
+                  "restriction": "EQ"
                 }
               ],
                 "result" : 
                 {
-                  "type": "edit",
+                  "type": "url",
                   "path": "/Asset/AssetMaster/Child",
+                  "icon": "ft-edit-2",
                   "param": [
                     {
                       "type": "AssetMasterId",
@@ -241,11 +243,13 @@
               "conditions" : [ 
                 {
                   "property" : "HierarchyLvl", 
-                  "value" : "1"
+                  "value" : "1",
+                  "restriction": "EQ"
                 }
               ],
                 "result" : 
                 {
+                  "type": "url",
                   "path" : "/Asset/AssetMaster/Detail",
                   "param" : [
                     {
@@ -268,10 +272,12 @@
               "conditions" : [ 
                 {
                   "property" : "HierarchyLvl", 
-                  "value" : "2"
+                  "value" : "2",
+                  "restriction": "EQ"
                 }
               ],
                 "result" : {
+                  "type": "url",
                   "path" : "/Asset/AssetMaster/Child",
                   "param" : [
                     {
@@ -294,10 +300,12 @@
               "conditions" : [ 
                 {
                   "property" : "HierarchyLvl", 
-                  "value" : "3"
+                  "value" : "3",
+                  "restriction": "EQ"
                 }
               ],
                 "result" : {
+                  "type": "url",
                   "path" : "/Asset/AssetMaster/Child",
                   "param" : [
                     {
@@ -320,10 +328,12 @@
               "conditions" : [ 
                 {
                   "property" : "HierarchyLvl", 
-                  "value" : "4"
+                  "value" : "4",
+                  "restriction": "EQ"
                 }
               ],
                 "result" : {
+                  "type": "url",
                   "path" : "/Asset/AssetMaster/Child",
                   "param" : [
                     {
@@ -346,10 +356,12 @@
               "conditions" : [ 
                 {
                   "property" : "HierarchyLvl", 
-                  "value" : "5"
+                  "value" : "5",
+                  "restriction": "EQ"
                 }
               ],
                 "result" : {
+                  "type": "url",
                   "path" : "/Asset/AssetMaster/Child",
                   "param" : [
                     {

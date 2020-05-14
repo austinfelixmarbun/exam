@@ -15,22 +15,24 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderCheckComponent implements OnInit {
-  
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  getCustCompanyIdUrl: any;
-  IdCust: any;
-  custCompanyObj: any;
+
   tempCustCompanyObj: any;
-  getListCompanyManagementShareholderByCustCompanyId: any;
   tempListCompanyManagementShareholder: any;
-  custCompanyMgmntShrholderObj: any;
-  DeleteCustCompanyMgmntShrholderUrl: any;
+
+  custCompanyObj: CustCompanyObj;
+  custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
+
+  IdCust: number;
+  getCustCompanyIdUrl: string;
+  DeleteCustCompanyMgmntShrholderUrl: string;
+  getListCompanyManagementShareholderByCustCompanyIdUrl: string;
+
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
     this.getCustCompanyIdUrl = AdInsConstant.GetCustCompanyByCustId;
-    this.getListCompanyManagementShareholderByCustCompanyId = AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
+    this.getListCompanyManagementShareholderByCustCompanyIdUrl = AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
     this.DeleteCustCompanyMgmntShrholderUrl = AdInsConstant.DeleteCustCompanyMgmntShrholder;
     this.route.queryParams.subscribe(params => {
-
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
@@ -38,7 +40,6 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
 
   ngOnInit() {
-
     this.getList();
   }
 
@@ -51,10 +52,10 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
 
   deleteItem(CustCompanyMgmntShrholderId: any) {
-    if(confirm('Are you sure to delete this record?')){
+    if (confirm('Are you sure to delete this record?')) {
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
-  
+
       console.log(CustCompanyMgmntShrholderId);
       this.http.post(this.DeleteCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         response => {
@@ -65,9 +66,8 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
           console.log(error);
         }
       );
-
     }
-  
+
   }
   editItem(custCompanyMgmntShrholderObj: any) {
     if (custCompanyMgmntShrholderObj.MrCustTypeCode == RefMasterConstant.Personal) {
@@ -82,7 +82,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
     this.http.post(this.getCustCompanyIdUrl, this.custCompanyObj).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
-        this.http.post(this.getListCompanyManagementShareholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
+        this.http.post(this.getListCompanyManagementShareholderByCustCompanyIdUrl, this.tempCustCompanyObj).subscribe(
           (response) => {
             this.tempListCompanyManagementShareholder = response["ReturnObject"];
             console.log(this.tempListCompanyManagementShareholder);
@@ -93,7 +93,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   next() {
     this.wizard.goToNextStep();
   }
-  back(){
+  back() {
     this.wizard.goToPreviousStep();
   }
 }

@@ -1,6 +1,6 @@
 {
   "title": "Asset Accessory",
-  "exportExcel": true,
+  "exportExcel": false,
   "component": [
     {
       "type": "textbox",

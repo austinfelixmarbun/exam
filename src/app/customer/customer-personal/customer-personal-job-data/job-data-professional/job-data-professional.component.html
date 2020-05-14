@@ -4,7 +4,7 @@
     <div class="form-body">
       <div id="jobData">
           <div class="form-group row">
-            <label class="col-md-3 adInsLabel adins-required-label" translate>Profession Name</label>
+            <label class="col-md-2 adInsLabel adins-required-label" translate>Profession Name</label>
             <div class="col-md-4">
               <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="JobDataProForm"
                 [enjiForm]="enjiForm" [identifier]="'MrJobProfessionCode'" (lookup)=getLookUpProfession($event)>
@@ -12,7 +12,7 @@
             </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-3 adInsLabel adins-required" translate>Professional No </label>
+              <label class="col-md-2 adInsLabel adins-required" translate>Professional No </label>
               <div class="col-md-4">
                 <input type="text" class="form-control adInsInput" formControlName="ProfessionalNo"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.ProfessionalNo.invalid }">
@@ -20,7 +20,7 @@
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-3 adInsLabel adins-required" translate>Job Title Name </label>
+              <label class="col-md-2 adInsLabel adins-required" translate>Job Title Name </label>
               <div class="col-md-4">
                 <input type="text" class="form-control adInsInput" formControlName="JobTitleName"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.JobTitleName.invalid }">
@@ -28,7 +28,7 @@
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-3 adInsLabel adins-required-label" translate>Industry Type Name </label>
+              <label class="col-md-2 adInsLabel adins-required-label" translate>Industry Type Name </label>
               <div class="col-md-4">
                 <lib-uclookupgeneric [lookupInput]="industryLookUpObj" [parentForm]="JobDataProForm"
                 [enjiForm]="enjiForm" [identifier]="'IndustryTypeCode'" (lookup)=getLookUpIndustry($event)>
@@ -36,7 +36,7 @@
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-3 adInsLabel adins-required-label" translate>Establishment Date </label>
+              <label class="col-md-2 adInsLabel adins-required-label" translate>Establishment Date </label>
               <div class="col-md-4">
                 <input type="date" id="establishmentDt" class="form-control adInsInput" formControlName="EstablishmentDate"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.EstablishmentDate.invalid }">

@@ -20,8 +20,9 @@
         }
     ],
     "querystring": {
-        "select": "SELECT PROD_CODE AS ProdCode,PROD_NAME AS ProdName, CURRENT_PROD_H_ID AS CurrentProdHId",
-        "from": "FROM PROD A WITH(NOLOCK)"
+        "select": "SELECT P.PROD_CODE AS ProdCode, P.PROD_NAME AS ProdName, O.OFFICE_CODE",
+        "from": "FROM PROD P WITH(NOLOCK) JOIN PROD_H PH WITH(NOLOCK) on P.CURRENT_PROD_H_ID = PH.PROD_H_ID JOIN PROD_BRANCH_MBR PBM WITH(NOLOCK) on PH.PROD_H_ID = PBM.PROD_H_ID JOIN REF_OFFICE O WITH(NOLOCK) on PBM.REF_OFFICE_ID = O.REF_OFFICE_ID",
+        "where" : "WHERE P.PROD_STAT = 'ACT' AND PBM.IS_ALLOWED_CRT = '1'"
     },
         "headerList": [
         {
