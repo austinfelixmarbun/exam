@@ -12,7 +12,6 @@ import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 @Component({
   selector: 'app-review-upload-negative-asset-detail',
   templateUrl: './review-upload-negative-asset-detail.component.html',
-  styleUrls: ['./review-upload-negative-asset-detail.component.scss'],
   providers: [NGXToastrService]
 })
 export class ReviewUploadNegativeAssetDetailComponent implements OnInit {

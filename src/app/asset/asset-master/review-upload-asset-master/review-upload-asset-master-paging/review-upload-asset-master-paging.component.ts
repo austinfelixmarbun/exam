@@ -10,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-review-upload-asset-master-paging',
   templateUrl: './review-upload-asset-master-paging.component.html',
-  styleUrls: ['./review-upload-asset-master-paging.component.scss'],
   providers: [NGXToastrService]
 })
 export class ReviewUploadAssetMasterPagingComponent implements OnInit {

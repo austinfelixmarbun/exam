@@ -10,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-review-upload-negative-asset-paging',
   templateUrl: './review-upload-negative-asset-paging.component.html',
-  styleUrls: ['./review-upload-negative-asset-paging.component.scss'],
   providers: [NGXToastrService]
 })
 export class ReviewUploadNegativeAssetPagingComponent implements OnInit {

@@ -9,7 +9,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-asset-category-add-edit',
   templateUrl: './asset-category-add-edit.component.html',
-  styleUrls: ['./asset-category-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetCategoryAddEditComponent implements OnInit {
@@ -47,7 +46,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    var assetTypeReq = {"AssetTypeId": this.AssetTypeId};
+    var assetTypeReq = { "AssetTypeId": this.AssetTypeId };
     this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];

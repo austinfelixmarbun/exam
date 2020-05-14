@@ -181,9 +181,11 @@ export class UcApprovalComponent implements OnInit {
       ListNodePersonObj.push({ Key : nodes[i].nodeId, Value : nodes[i].slcMemberId})
     }
 
+    var result = this.remakeApprovalResult(this.FormApproval.get("result").value);
+
     var SubmitObj = {
       taskId : this.FormApproval.get("taskId").value,
-      result : this.FormApproval.get("result").value,
+      result : result,
       instanceId : this.FormApproval.get("instanceId").value,
       reason : this.FormApproval.get("reason").value,
       reasonType : this.FormApproval.get("reasonType").value,

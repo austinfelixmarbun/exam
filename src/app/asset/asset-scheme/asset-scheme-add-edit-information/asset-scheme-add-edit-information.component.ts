@@ -11,7 +11,6 @@ import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 @Component({
   selector: 'app-asset-scheme-add-edit-information',
   templateUrl: './asset-scheme-add-edit-information.component.html',
-  styleUrls: ['./asset-scheme-add-edit-information.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetSchemeAddEditInformationComponent implements OnInit {

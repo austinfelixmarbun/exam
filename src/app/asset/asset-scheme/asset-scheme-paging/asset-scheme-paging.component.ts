@@ -5,8 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-asset-scheme-paging',
-  templateUrl: './asset-scheme-paging.component.html',
-  styleUrls: ['./asset-scheme-paging.component.scss']
+  templateUrl: './asset-scheme-paging.component.html'
 })
 export class AssetSchemePagingComponent implements OnInit {
   inputPagingObj: UcPagingObj;

@@ -11,7 +11,6 @@ import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 @Component({
   selector: 'app-asset-type-add-edit',
   templateUrl: './asset-type-add-edit.component.html',
-  styleUrls: ['./asset-type-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetTypeAddEditComponent implements OnInit {

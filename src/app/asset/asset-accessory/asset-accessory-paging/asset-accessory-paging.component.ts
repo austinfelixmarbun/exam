@@ -7,8 +7,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-asset-accessory-paging',
-  templateUrl: './asset-accessory-paging.component.html',
-  styleUrls: ['./asset-accessory-paging.component.scss']
+  templateUrl: './asset-accessory-paging.component.html'
 })
 export class AssetAccessoryPagingComponent implements OnInit {
   AssetTypeId: number;

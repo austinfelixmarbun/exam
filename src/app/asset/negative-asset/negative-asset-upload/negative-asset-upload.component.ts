@@ -4,8 +4,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-negative-asset-upload',
-  templateUrl: './negative-asset-upload.component.html',
-  styleUrls: ['./negative-asset-upload.component.scss']
+  templateUrl: './negative-asset-upload.component.html'
 })
 
 export class NegativeAssetUploadComponent implements OnInit {
