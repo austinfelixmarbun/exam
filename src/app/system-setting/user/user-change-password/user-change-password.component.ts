@@ -16,7 +16,7 @@ import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
   providers: [NGXToastrService]
 })
 export class UserChangePasswordComponent implements OnInit {
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   refUserObj: RefUserObj;
   refEmpObj: RefEmpObj = new RefEmpObj();

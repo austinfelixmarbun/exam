@@ -49,7 +49,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
   supervisorUrl: any;
   bizUrl: any;
   orgJobTitleUrl: any;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   empPositionVisible: boolean = true;
   addEditVisible: boolean = false;
   pageNow: any;

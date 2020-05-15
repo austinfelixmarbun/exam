@@ -23,7 +23,7 @@ export class EditCompanyComponent implements OnInit {
     result: any;
     mode: string = "add";
     apiUrl: any;
-    foundationUrl: string = environment.foundationUrl;
+    foundationUrl: string = environment.FoundationR3Url;
     editUrl: any;
     coyCode: any;
     fullName : any;
