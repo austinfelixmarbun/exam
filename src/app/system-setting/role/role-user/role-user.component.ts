@@ -35,7 +35,7 @@ export class RoleUserComponent implements OnInit {
   refRoleObj: RefRoleObj = new RefRoleObj();
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
 
   refRoleId: any;
   check: any;
@@ -71,7 +71,7 @@ export class RoleUserComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchUser.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetListUserEmployee;
     
     console.log("masuk");

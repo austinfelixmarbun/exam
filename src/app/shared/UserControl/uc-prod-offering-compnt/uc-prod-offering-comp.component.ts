@@ -101,8 +101,8 @@ export class UcProdOfferingCompComponent implements OnInit {
         }  
       }
     }else{
-      hoMrProdBehaviour = "LOCKED";
-      offeringMrProdBehaviour = "LOCKED";
+      hoMrProdBehaviour = "LOCK";
+      offeringMrProdBehaviour = "LOCK";
     }
 
     return this.fb.group({
@@ -169,7 +169,7 @@ export class UcProdOfferingCompComponent implements OnInit {
             {
               await this.PopulateDDL(comp)
             }
-            if(this.ShowBehaviour == true && comp.IsProdOffering == true){
+            if(this.ShowBehaviour == true){
               await this.PopulateBehaviourDDL(comp, behaviourDDL);
             }
           }
@@ -189,6 +189,12 @@ export class UcProdOfferingCompComponent implements OnInit {
 
 
   GetBehaviourValue(refProdCompntCode, behaviourCode) {
+    console.log("THIS")
+    console.log(this.dictBehaviour);
+    console.log(refProdCompntCode + ":" + behaviourCode)
+    console.log(this.dictBehaviour[refProdCompntCode])
+    console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode))
+    console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode).Value)
     return this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode).Value
   }
 

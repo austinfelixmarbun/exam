@@ -83,6 +83,7 @@ import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/c
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
 import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
+import { MatTabsModule } from '@angular/material';
  @NgModule({
   exports: [],
   imports: [
@@ -104,7 +105,8 @@ import { CustomerViewAddressComponent } from './customer-view/customer-view-addr
     UcviewgenericModule,
     UcaddressModule,
     UcShowErrorsModule,
-    UcinputnumberModule
+    UcinputnumberModule,
+    MatTabsModule
   ],
   declarations: [
     CustomerPagingComponent,
