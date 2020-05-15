@@ -41,6 +41,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       RoleCode: item.RoleCode,
       JobTitleCode: item.JobTitleCode,
       RequestDateTime: item.BusinessDt,
+      ModuleCode:environment.Module,
       Ip: "",
       RowVersion: ""
 
