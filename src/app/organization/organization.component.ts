@@ -32,14 +32,14 @@ export class OrganizationComponent implements OnInit {
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
 
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService) { }
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrganization.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetRefOrgPaging;
     
     this.pageNow = 1;

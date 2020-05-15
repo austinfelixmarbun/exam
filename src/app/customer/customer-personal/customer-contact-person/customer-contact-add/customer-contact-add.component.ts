@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { WizardComponent } from 'angular-archwizard';
 import { HttpClient } from '@angular/common/http';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
@@ -20,13 +19,59 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 @Component({
   selector: 'app-customer-contact-add',
   templateUrl: './customer-contact-add.component.html',
-  styleUrls: ['./customer-contact-add.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class CustomerContactAddComponent implements OnInit {
-  @Output() outputValues: EventEmitter<any> = new EventEmitter();
-  @Input() custPersonalContactPersonId: any;
-  IdCust: any;
+  @Output() outputTab: EventEmitter<any> = new EventEmitter();
+  @Input() custPersonalContactPersonId: number;
+
+  Country: any;
+  tempCust: any;
+  tempIdType: any;
+  tempCountry: any;
+  LocalCountry: any;
+  tempProfession: any;
+  tempNationality: any;
+  tempCustAddress: any;
+  tempCustPersonal: any;
+  tempMrGenderCode: any;
+  tempMrReligionCode: any;
+  tempMrEducationCode: any;
+  tempMrMaritalStatCode: any;
+  tempProfessionCodeObj: any;
+  tempMrCustRelationshipCode: any;
+  tempCustPersonalContactPerson: any;
+
+  lookUpObj: InputLookupObj;
+  inputFieldObj: InputFieldObj;
+  professionLookUpObj: InputLookupObj;
+  existingCustomerLookUpObj: InputLookupObj;
+
+  custObj: CustObj;
+  criteriaObj: CriteriaObj;
+  custAddrObj: CustAddrObj;
+  UcAddressObj: UcAddressObj;
+  custPersonalObj: CustPersonalObj;
+  criteriaList: Array<CriteriaObj>;
+  custPersonalContactPersonObj: CustPersonalContactPersonObj;
+
+  IdCust: number;
+  tempCustId: number;
+
+  flag: boolean;
+  tempKTPCheck: boolean;
+
+  businessDtMin: Date;
+  businessDtMax: Date;
+
+  KTP: string;
+  tempCountryCode: string;
+  GetListActiveRefMasterUrl: string;
+  GetGeneralSettingByCodeUrl: string;
+  addCustPersonalContactPersonUrl: string;
+  editCustPersonalContactPersonUrl: string;
+
   CustomerContactForm = this.fb.group({
     ContactPersonName: ['', [Validators.maxLength(100), Validators.required]],
     MotherMaidenName: ['', [Validators.maxLength(100)]],
@@ -49,45 +94,9 @@ export class CustomerContactAddComponent implements OnInit {
     Email: [''],
     ContactPersonCustNo: [''],
   });
-  flag: any;
-  KTP = RefMasterConstant.EKtp;
-  tempKTPCheck: any;
-  GetListActiveRefMasterUrl: any;
-  tempIdType: any;
-  tempNationality: any;
-  tempMrMaritalStatCode: any;
-  tempMrEducationCode: any;
-  tempMrReligionCode: any;
-  tempMrCustRelationshipCode: any;
-  tempMrGenderCode: any;
-  professionLookUpObj: any;
-  lookUpObj: any;
-  existingCustomerLookUpObj: any;
-  criteriaList: any;
-  criteriaObj: any;
-  UcAddressObj: any;
-  custPersonalContactPersonObj: any;
-  tempCountryCode: any;
-  tempProfession: any;
-  tempCustId: any;
-  tempCustPersonal: any;
-  tempCust: any;
-  tempCountry: any;
-  tempCustAddress: any;
-  tempCustPersonalContactPerson: any;
-  addCustPersonalContactPersonUrl: any;
-  editCustPersonalContactPersonUrl: any;
-  custObj: any;
-  custPersonalObj: any;
-  custAddrObj: any;
-  inputFieldObj: any;
-  tempProfessionCodeObj;
-  GetGeneralSettingByCodeUrl: string;
-  Country: any;
-  businessDtMin: any;
-  businessDtMax: any;
-  LocalCountry: any;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+    this.KTP = RefMasterConstant.EKtp;
     this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addCustPersonalContactPersonUrl = AdInsConstant.AddNewCustPersonalContactPerson;
     this.editCustPersonalContactPersonUrl = AdInsConstant.EditCustPersonalContactPerson;
@@ -184,7 +193,6 @@ export class CustomerContactAddComponent implements OnInit {
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrNationalityCode).subscribe(
       (response) => {
-        console.log("awd");
         this.tempNationality = response["ReturnObject"];
         this.CustomerContactForm.patchValue({
           MrNationalityCode: "LOCAL"
@@ -250,7 +258,7 @@ export class CustomerContactAddComponent implements OnInit {
 
     if (this.custPersonalContactPersonId != null) {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
-      this.custPersonalContactPersonObj.custPersonalContactPersonId = this.custPersonalContactPersonId;
+      this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.custPersonalContactPersonId;
       console.log("aaaaaa");
       this.http.post(AdInsConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
         (response) => {
@@ -344,7 +352,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.custPersonalContactPersonObj.AreaCode3 = this.CustomerContactForm.value.UcAddress.AreaCode3;
     this.custPersonalContactPersonObj.AreaCode4 = this.CustomerContactForm.value.UcAddress.AreaCode4;
     this.custPersonalContactPersonObj.City = this.CustomerContactForm.value.UcAddress.City;
-    this.custPersonalContactPersonObj.ZipCode = this.CustomerContactForm.value.UcAddressZipcode.value;
+    this.custPersonalContactPersonObj.Zipcode = this.CustomerContactForm.value.UcAddressZipcode.value;
     this.custPersonalContactPersonObj.SubZipcode = this.CustomerContactForm.value.UcAddressZipcode.value;
     if (this.tempCust != null) {
       this.custPersonalContactPersonObj.ContactPersonCustNo = this.tempCust.CustNo;
@@ -368,7 +376,8 @@ export class CustomerContactAddComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           // this.wizard.goToNextStep();
           this.isAdd = false;
-          this.outputValues.emit({ isAdd: this.isAdd });
+          this.outputTab.emit({ isAdd: this.isAdd });
+          // this.outputTab.emit({ stepMode: "next"});
         },
         error => {
           console.log(error);
@@ -381,7 +390,7 @@ export class CustomerContactAddComponent implements OnInit {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.isAdd = false;
-          this.outputValues.emit({ isAdd: this.isAdd });
+          this.outputTab.emit({ isAdd: this.isAdd });
           // this.wizard.goToNextStep();
         },
         error => {
@@ -452,7 +461,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.custAddrObj.CustId = this.tempCustId;
     console.log(this.tempCustId);
     this.custAddrObj.MrCustAddrTypeCode = RefMasterConstant.LegalAddr;
-    this.http.post(AdInsConstant.GetCustAddrLegalAddrByCustId, this.custAddrObj).subscribe(
+    this.http.post(AdInsConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
       (response) => {
         this.tempCustAddress = response;
         this.UcAddressObj.AreaCode1 = this.tempCustAddress.AreaCode1;
@@ -506,6 +515,6 @@ export class CustomerContactAddComponent implements OnInit {
   }
   back() {
     this.isAdd = false;
-    this.outputValues.emit({ isAdd: this.isAdd });
+    this.outputTab.emit({ isAdd: this.isAdd });
   }
 }

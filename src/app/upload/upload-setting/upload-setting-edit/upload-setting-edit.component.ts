@@ -26,7 +26,7 @@ export class UploadSettingEditComponent implements OnInit {
   @ViewChild('uclRole') ucLookupRole;
   inputLookupObj: any;
   resultData: string;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   nameSelect: any;
   idSelect: any;
@@ -100,7 +100,7 @@ export class UploadSettingEditComponent implements OnInit {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = './assets/lookup/lookupRole.json';
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefRolePaging;
-    this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
 
     this.addCritLookup = new Array();
     const critIsActive = new CriteriaObj();

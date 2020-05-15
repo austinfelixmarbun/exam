@@ -19,8 +19,8 @@ export class NegativeCustomerViewComponent implements OnInit {
   negativeCustId: number = 0;
   response: any;
   responseTrx: any;
-  expiredDt: any;
-  birthDt: any;
+  expiredDt: string;
+  birthDt: string;
   custType: string = 'P';
 
   constructor(

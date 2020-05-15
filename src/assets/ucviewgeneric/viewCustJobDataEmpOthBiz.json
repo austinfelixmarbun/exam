@@ -8,27 +8,27 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "Other Business Name",
+            "label": "OTHER BUSINESS NAME",
             "property": "OthBizName"
           },
           {
             "type": "text",
-            "label": "Other Job Position",
+            "label": "OTHER JOB POSITION",
             "property": "OthBizJobPos"
           },
           {
             "type": "text",
-            "label": "Other Business Type",
+            "label": "OTHER BUSINESS TYPE",
             "property": "OthBizType"
           },
           {
             "type": "date",
-            "label": "Establishment Date",
+            "label": "ESTABLISHMENT DATE",
             "property": "OthBizEstDt"
           },
           {
             "type": "text",
-            "label": "Other Business Industry Type",
+            "label": "OTHER BUSINESS INDUSTRY TYPE",
             "property": "OthBizIndType"
           }
         ],

@@ -34,7 +34,7 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
   officeUrl: any;
   arrCrit: any;
 
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
   orderByKey: any = null;
   orderByValue: boolean = true;
 

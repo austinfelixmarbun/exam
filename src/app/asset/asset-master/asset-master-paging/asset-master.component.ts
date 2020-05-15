@@ -9,12 +9,11 @@ import { UcpagingComponent } from '@adins/ucpaging';
 @Component({
   selector: 'app-asset-master',
   templateUrl: './asset-master.component.html',
-  styleUrls: ['./asset-master.component.scss'],
   providers: [DecimalPipe]
 })
 export class AssetMasterComponent implements OnInit {
 
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj;
   
   constructor() { }
 

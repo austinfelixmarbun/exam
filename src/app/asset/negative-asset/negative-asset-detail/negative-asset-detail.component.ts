@@ -18,7 +18,6 @@ import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 @Component({
   selector: 'app-negative-asset-detail',
   templateUrl: './negative-asset-detail.component.html',
-  styleUrls: ['./negative-asset-detail.component.scss'],
   providers: [NGXToastrService]
 })
 export class NegativeAssetDetailComponent implements OnInit {
@@ -27,8 +26,7 @@ export class NegativeAssetDetailComponent implements OnInit {
   inputLookupObj: InputLookupObj;
   criteriaList: Array<CriteriaObj>;
   criteriaObj: CriteriaObj;
-  assetTypeList: any;
-  negativeAssetSourceList: any;
+  negativeAssetSourceList: Array<Object>;
   fullAssetName: string = "";
   serial1Disabled: boolean = false;
   serial2Disabled: boolean = false;
@@ -104,10 +102,10 @@ export class NegativeAssetDetailComponent implements OnInit {
       var refMasterObj = new RefMasterObj();
       refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
       this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterObj).pipe(
-        map((response: any) => {
-          this.negativeAssetSourceList = response;
+        map((response) => {
+          this.negativeAssetSourceList = [...response["ReturnObject"]];
           this.AssetNegativeForm.patchValue({
-            MrNegAssetSourceCode: response.ReturnObject[0].Key
+            MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
           });
         }),
         mergeMap(() => {
@@ -115,51 +113,50 @@ export class NegativeAssetDetailComponent implements OnInit {
           return assetNegativeData;
         })
       ).subscribe(
-        (response: any) => {
-          // console.log("Response Edit : " + JSON.stringify(response));
+        (response) => {
           this.AssetNegativeForm.patchValue({
-            AssetNegativeId: response.AssetNegativeObj.AssetNegativeId,
-            AssetMasterId: response.AssetNegativeObj.AssetMasterId,
-            AssetTypeId: response.AssetMasterObj.AssetTypeId,
-            SerialNo1: response.AssetNegativeObj.SerialNo1,
-            SerialNo2: response.AssetNegativeObj.SerialNo2,
-            SerialNo3: response.AssetNegativeObj.SerialNo3,
-            SerialNo4: response.AssetNegativeObj.SerialNo4,
-            SerialNo5: response.AssetNegativeObj.SerialNo5,
-            MrNegAssetSourceCode: response.AssetNegativeObj.MrNegAssetSourceCode,
-            Notes: response.AssetNegativeObj.Notes,
-            IsActive: response.AssetNegativeObj.IsActive,
-            RowVersion: response.RowVersion
+            AssetNegativeId: response["AssetNegativeObj"]["AssetNegativeId"],
+            AssetMasterId: response["AssetNegativeObj"]["AssetMasterId"],
+            AssetTypeId: response["AssetMasterObj"]["AssetTypeId"],
+            SerialNo1: response["AssetNegativeObj"]["SerialNo1"],
+            SerialNo2: response["AssetNegativeObj"]["SerialNo2"],
+            SerialNo3: response["AssetNegativeObj"]["SerialNo3"],
+            SerialNo4: response["AssetNegativeObj"]["SerialNo4"],
+            SerialNo5: response["AssetNegativeObj"]["SerialNo5"],
+            MrNegAssetSourceCode: response["AssetNegativeObj"]["MrNegAssetSourceCode"],
+            Notes: response["AssetNegativeObj"]["Notes"],
+            IsActive: response["AssetNegativeObj"]["IsActive"],
+            RowVersion: response["RowVersion"]
           });
           // this.inputLookupObj.nameSelect = response.AssetMasterObj.FullAssetName;
-          this.fullAssetName = response.AssetMasterObj.FullAssetName;
+          this.fullAssetName = response["AssetMasterObj"]["FullAssetName"];
 
-          if (response.AssetTypeObj.IsMndtrySerialNo1 == "1") {
+          if (response["AssetTypeObj"]["IsMndtrySerialNo1"] == "1") {
             this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);
             this.serial1Mandatory = true;
           }
-          if (response.AssetTypeObj.IsMndtrySerialNo2 == "1") {
+          if (response["AssetTypeObj"]["IsMndtrySerialNo2"] == "1") {
             this.AssetNegativeForm.controls['SerialNo2'].setValidators([Validators.required]);
             this.serial2Mandatory = true;
           }
-          if (response.AssetTypeObj.IsMndtrySerialNo3 == "1") {
+          if (response["AssetTypeObj"]["IsMndtrySerialNo3"] == "1") {
             this.AssetNegativeForm.controls['SerialNo3'].setValidators([Validators.required]);
             this.serial3Mandatory = true;
           }
-          if (response.AssetTypeObj.IsMndtrySerialNo4 == "1") {
+          if (response["AssetTypeObj"]["IsMndtrySerialNo4"] == "1") {
             this.AssetNegativeForm.controls['SerialNo4'].setValidators([Validators.required]);
             this.serial4Mandatory = true;
           }
-          if (response.AssetTypeObj.IsMndtrySerialNo5 == "1") {
+          if (response["AssetTypeObj"]["IsMndtrySerialNo5"] == "1") {
             this.AssetNegativeForm.controls['SerialNo5'].setValidators([Validators.required]);
             this.serial5Mandatory = true;
           }
 
-          this.serial1Disabled = response.AssetTypeObj.SerialNo1Label == "" ? true : false;
-          this.serial2Disabled = response.AssetTypeObj.SerialNo2Label == "" ? true : false;
-          this.serial3Disabled = response.AssetTypeObj.SerialNo3Label == "" ? true : false;
-          this.serial4Disabled = response.AssetTypeObj.SerialNo4Label == "" ? true : false;
-          this.serial5Disabled = response.AssetTypeObj.SerialNo5Label == "" ? true : false;
+          this.serial1Disabled = response["AssetTypeObj"]["SerialNo1Label"] == "" ? true : false;
+          this.serial2Disabled = response["AssetTypeObj"]["SerialNo2Label"] == "" ? true : false;
+          this.serial3Disabled = response["AssetTypeObj"]["SerialNo3Label"] == "" ? true : false;
+          this.serial4Disabled = response["AssetTypeObj"]["SerialNo4Label"] == "" ? true : false;
+          this.serial5Disabled = response["AssetTypeObj"]["SerialNo5Label"] == "" ? true : false;
         },
         (error) => {
           console.log(error);
@@ -170,10 +167,10 @@ export class NegativeAssetDetailComponent implements OnInit {
       var refMasterObj = new RefMasterObj();
       refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
       this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterObj).subscribe(
-        (response: any) => {
-          this.negativeAssetSourceList = response;
+        (response) => {
+          this.negativeAssetSourceList = [...response["ReturnObject"]];
           this.AssetNegativeForm.patchValue({
-            MrNegAssetSourceCode: response.ReturnObject[0].Key
+            MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
           });
         },
         (error) => {
@@ -192,8 +189,8 @@ export class NegativeAssetDetailComponent implements OnInit {
     var assetType = new AssetTypeObj();
     assetType.AssetTypeId = e.assetTypeId;
     this.httpClient.post(AdInsConstant.GetAssetTypeById, assetType).subscribe(
-      (response: any) => {
-        if (response.IsMndtrySerialNo1 == "1") {
+      (response) => {
+        if (response["IsMndtrySerialNo1"] == "1") {
           this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo1'].updateValueAndValidity();
           this.serial1Mandatory = true;
@@ -204,7 +201,7 @@ export class NegativeAssetDetailComponent implements OnInit {
           this.serial1Mandatory = false;
         }
 
-        if (response.IsMndtrySerialNo2 == "1") {
+        if (response["IsMndtrySerialNo2"] == "1") {
           this.AssetNegativeForm.controls['SerialNo2'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo2'].updateValueAndValidity();
           this.serial2Mandatory = true;
@@ -215,7 +212,7 @@ export class NegativeAssetDetailComponent implements OnInit {
           this.serial2Mandatory = false;
         }
 
-        if (response.IsMndtrySerialNo3 == "1") {
+        if (response["IsMndtrySerialNo3"] == "1") {
           this.AssetNegativeForm.controls['SerialNo3'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo3'].updateValueAndValidity();
           this.serial3Mandatory = true;
@@ -226,7 +223,7 @@ export class NegativeAssetDetailComponent implements OnInit {
           this.serial3Mandatory = false;
         }
 
-        if (response.IsMndtrySerialNo4 == "1") {
+        if (response["IsMndtrySerialNo4"] == "1") {
           this.AssetNegativeForm.controls['SerialNo4'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo4'].updateValueAndValidity();
           this.serial4Mandatory = true;
@@ -237,7 +234,7 @@ export class NegativeAssetDetailComponent implements OnInit {
           this.serial4Mandatory = false;
         }
 
-        if (response.IsMndtrySerialNo5 == "1") {
+        if (response["IsMndtrySerialNo5"] == "1") {
           this.AssetNegativeForm.controls['SerialNo5'].setValidators([Validators.required]);
           this.AssetNegativeForm.controls['SerialNo5'].updateValueAndValidity();
           this.serial5Mandatory = true;
@@ -248,11 +245,11 @@ export class NegativeAssetDetailComponent implements OnInit {
           this.serial5Mandatory = false;
         }
 
-        this.serial1Disabled = response.SerialNo1Label == "" ? true : false;
-        this.serial2Disabled = response.SerialNo2Label == "" ? true : false;
-        this.serial3Disabled = response.SerialNo3Label == "" ? true : false;
-        this.serial4Disabled = response.SerialNo4Label == "" ? true : false;
-        this.serial5Disabled = response.SerialNo5Label == "" ? true : false;
+        this.serial1Disabled = response["SerialNo1Label"] == "" ? true : false;
+        this.serial2Disabled = response["SerialNo2Label"] == "" ? true : false;
+        this.serial3Disabled = response["SerialNo3Label"] == "" ? true : false;
+        this.serial4Disabled = response["SerialNo4Label"] == "" ? true : false;
+        this.serial5Disabled = response["SerialNo5Label"] == "" ? true : false;
 
         this.AssetNegativeForm.patchValue({
           AssetMasterId: e.assetMasterId,
@@ -271,11 +268,10 @@ export class NegativeAssetDetailComponent implements OnInit {
     if (this.pageType == "add") {
       this.httpClient.post(AdInsConstant.AddAssetNegative, assetNegativeObj).subscribe(
         (response) => {
-          this.toastr.successMessage(response["message"]);
+          this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/NegativeAsset/Paging"]);
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );
@@ -283,11 +279,10 @@ export class NegativeAssetDetailComponent implements OnInit {
     else {
       this.httpClient.post(AdInsConstant.EditAssetNegative, assetNegativeObj).subscribe(
         (response) => {
-          this.toastr.successMessage(response["message"]);
+          this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/NegativeAsset/Paging"]);
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );

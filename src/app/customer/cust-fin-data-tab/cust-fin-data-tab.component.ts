@@ -6,7 +6,6 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
 import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
-import { WizardComponent } from 'angular-archwizard';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
@@ -24,6 +23,7 @@ export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
   @Input() CustId: number;
   // @Output() CustFinDataResponse: EventEmitter<any> = new EventEmitter();
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
   sourceOfIncomeList: any;
   isCalculated: boolean;
   spouseMonthlyIncomeAmt: number;
@@ -80,7 +80,6 @@ export class CustFinDataTabComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder, 
-    private wizard: WizardComponent,
     private router: Router
   ) {
     if(this.MrCustTypeCode == "PERSONAL"){
@@ -100,6 +99,7 @@ export class CustFinDataTabComponent implements OnInit {
       this.httpClient.post(AdInsConstant.GetCustPersonalbyCustId, custPersonal).pipe(
         map((response: CustPersonalObj) => {
           this.mrMaritalStatCode = response.MrMaritalStatCode;
+          console.log(this.mrMaritalStatCode);
           custPersonalData = response;
           return response;
         }),
@@ -233,7 +233,7 @@ export class CustFinDataTabComponent implements OnInit {
   }
 
   back(){
-    this.wizard.goToPreviousStep();
+    this.outputTab.emit({ stepMode: "previous"});
   }
 
   // getCustFinData() {
@@ -274,7 +274,7 @@ export class CustFinDataTabComponent implements OnInit {
   //     this.httpClient.post(url, response).subscribe(
   //       (response) => {
   //         this.toastr.successMessage(response["Message"]);
-  //         this.wizard.goToNextStep();
+  //         this.outputTab.emit({ stepMode: "next"});
   //       },
   //       (error) => {
   //         console.log(error);
@@ -354,10 +354,9 @@ export class CustFinDataTabComponent implements OnInit {
             this.router.navigate(['/Customer/Paging']);
           }
           else if(this.MrCustTypeCode == "COMPANY"){
-            this.wizard.goToNextStep();
+            this.outputTab.emit({ stepMode: "next"});
           }
-          
-          // this.wizard.goToNextStep();
+          this.outputTab.emit({ stepMode: "next"});
         },
         (error) => {
           console.log(error);

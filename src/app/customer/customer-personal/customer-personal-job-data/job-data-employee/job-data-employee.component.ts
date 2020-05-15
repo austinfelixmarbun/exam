@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -12,7 +12,6 @@ import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
-import { WizardComponent } from 'angular-archwizard';
 import { formatDate } from '@angular/common';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
@@ -20,54 +19,57 @@ import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 @Component({
   selector: 'app-job-data-employee',
   templateUrl: './job-data-employee.component.html',
-  styleUrls: ['./job-data-employee.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class JobDataEmployeeComponent implements OnInit {
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
+  
   jobAddrId: any;
   othBizAddrId: any;
   jobDataId: any;
   rowVersion: any;
   typePage: string;
-  IdCust: any;
-  IdCustPersonal: any;
+  IdCust: number;
+  IdCustPersonal: number;
   custObj: any;
-  getListActiveRefMaster: any;
-  getCustById: any;
+  objCust : CustObj;
+  getListActiveRefMaster: string;
+  getCustById: string;
   jobAddressObj: CustAddrObj;
   otherAddressObj: CustAddrObj;
   inputJobAddressObj: InputFieldObj;
   inputOtherAddressObj: InputFieldObj;
-  jobStatus: any;
+  jobStatus: RefMasterObj;
   listJobStatus: any;
-  jobPosition: any;
+  jobPosition: RefMasterObj;
   listJobPosition: any;
-  companyScale: any;
+  companyScale: RefMasterObj;
   listCompanyScale: any;
   tempProfession: any;
   tempRefIndustryType: any;
-  professionLookUpObj: any;
-  industryLookUpObj: any;
-  custPersonalJobDataObj: any;
-  custJobDataObj: any;
+  professionLookUpObj: InputLookupObj;
+  industryLookUpObj: InputLookupObj;
+  custPersonalJobDataObj: CustPersonalJobDataObj;
+  custJobDataObj: CustPersonalJobDataObj;
   returnCustJobDataObj: any;
-  addJobData: any;
-  editJobData: any;
-  getJobDataByCustId: any;
-  getCustAddr: any;
-  getRefProfession: any;
-  getRefIndustryType: any;
-  refProfessionObj: any;
+  addJobData: string;
+  editJobData: string;
+  getJobDataByCustId: string;
+  getCustAddr: string;
+  getRefProfession: string;
+  getRefIndustryType: string;
+  refProfessionObj: RefProfessionObj;
   returnRefProfessionObj: any;
-  reqCustPersonalJobDataObj: any;
-  refIndustryTypeObj: any;
+  reqCustPersonalJobDataObj: RequestCustPersonalJobDataObj;
+  refIndustryTypeObj: RefIndustryTypeObj;
   returnIndustryTypeObj: any;
-  custJobAddrObj: any;
-  custOthBizAddrObj;
+  custJobAddrObj: CustAddrObj;
+  custOthBizAddrObj: CustAddrObj;
   getJobAddr: any;
   getOthBizAddr: any;
-  addressObj: any;
-  otherAddrObj: any;
+  addressObj: CustAddrObj;
+  otherAddrObj: CustAddrObj;
   JobDataEmpForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
@@ -94,7 +96,7 @@ export class JobDataEmployeeComponent implements OnInit {
     OtherStayLength: ['']
   });
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder,private wizard: WizardComponent) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
     this.addJobData = AdInsConstant.AddCustPersonalJobData;
@@ -168,8 +170,8 @@ export class JobDataEmployeeComponent implements OnInit {
         this.JobDataEmpForm.patchValue({ CompanyScale: response['ReturnObject'][0]['Key'] });
     });
     
-    this.custObj = new CustObj();
-    this.custObj.CustId = this.IdCust;
+    this.objCust = new CustObj();
+    this.objCust.CustId = this.IdCust;
     this.http.post(this.getCustById, this.custObj).subscribe(
       (response) => {
           this.custObj = response;
@@ -376,7 +378,7 @@ export class JobDataEmployeeComponent implements OnInit {
   }
 
   back(){
-    this.wizard.goToPreviousStep();
+    this.outputTab.emit({ stepMode: "previous"});
   }
 
   SaveForm(){
@@ -408,7 +410,7 @@ export class JobDataEmployeeComponent implements OnInit {
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
           // console.log(response);
-          this.wizard.goToNextStep();
+          this.outputTab.emit({ stepMode: "next"});
         },
         (error) => {
           console.log(error);
@@ -438,7 +440,7 @@ export class JobDataEmployeeComponent implements OnInit {
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
           // console.log(response);
-          this.wizard.goToNextStep();
+          this.outputTab.emit({ stepMode: "next"});
         },
         (error) => {
           console.log(error);
