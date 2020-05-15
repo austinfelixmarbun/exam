@@ -1,16 +1,8 @@
 {
   "title": "UC Report",
   "reportName": "Report New",
-  "reportTemplateName": "DailySales.rdlc",
-  "reportParameter": [
-    "UserName",
-    "SystemDate",
-    "CoyName",
-    "OfficeName",
-    "From",
-    "To"
-  ],
-  "providerParameter": [
+  "reportTemplateName": "ReportTestingMaster.rdlc",
+  "component": [
     {
       "type": "dropdown",
       "label": "Office Name",
@@ -44,7 +36,9 @@
           "value": "Used"
         }
       ],
-      "itemsUrl": []
+      "itemsUrl": [],
+      "isReportParam": true,
+      "isProviderParam": true
     },
     {
       "type": "datepicker",
@@ -52,7 +46,8 @@
       "name": "PeriodFrom",
       "datatype": "date",
       "value": "BD-10",
-      "restriction": "gte"
+      "restriction": "gte",
+      "isReportParam": false
     },
     {
       "type": "datepicker",
@@ -60,7 +55,8 @@
       "name": "PeriodTo",
       "datatype": "date",
       "value": "BD+10",
-      "restriction": "lte"
+      "restriction": "lte",
+      "isReportParam": false
     },
     {
       "type": "datepicker",
@@ -68,7 +64,8 @@
       "name": "AppDtFrom",
       "datatype": "date",
       "value": "BD-10",
-      "restriction": "gte"
+      "restriction": "gte",
+      "isReportParam": true
     },
     {
       "type": "datepicker",
@@ -76,7 +73,8 @@
       "name": "AppDtTo",
       "datatype": "date",
       "value": "BD+10",
-      "restriction": "lte"
+      "restriction": "lte",
+      "isReportParam": false
     }
   ]
 }

@@ -25,17 +25,9 @@ export class RdlcReportObj {
 
 export class MainReportObj {
     FilterBy: string;
-    UserName: string;
-    SystemDate: Date;
-    CoyName: string;
-    OfficeName: string;
 
     constructor() {
         this.FilterBy = "";
-        this.UserName = "";
-        this.SystemDate = new Date();
-        this.CoyName = "";
-        this.OfficeName = "";
     }
 }
 
