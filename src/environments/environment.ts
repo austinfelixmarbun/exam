@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: true,
+  production: false,
   navbarColor: 'lightgray',
   settingUrl: 'http://r3app.ad-ins.com/setting', //'https://localhost:4999',
   localHostUrl: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',

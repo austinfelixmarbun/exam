@@ -38,7 +38,7 @@
                 </ng-template>
                 <!-- Second level menu -->
                 <ul class="menu-content" *ngIf="menuItem.Submenu.length > 0">
-                    <li *ngFor="let menuSubItem of menuItem.Submenu" [routerLinkActive]="menuSubItem.Submenu.length > 0 ? '' : 'active'" [ngClass]="[menuSubItem.class]">
+                    <li *ngFor="let menuSubItem of menuItem.Submenu" [routerLinkActive]="menuSubItem.Submenu.length > 0 ? '' : 'active'" [ngClass]="[menuSubItem.Class]">
                         <a [routerLink]="menuSubItem.Submenu.length > 0 ? null : [menuSubItem.Path]" *ngIf="!menuSubItem.IsExternalLink; else externalSubLinkBlock">
                             <i [ngClass]="[menuSubItem.Icon]"></i>
                             <span class="menu-title">{{menuSubItem.Title | translate }}</span>
