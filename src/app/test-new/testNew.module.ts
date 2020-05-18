@@ -33,6 +33,7 @@ import { Step7Component } from './dummy6/step7/step7.component';
 import { Step8Component } from './dummy6/step8/step8.component';
 import { SharingComponentModule } from "app/shared/sharingcomponent.module";
 import { Dummy7Component } from './dummy7/dummy7.component';
+import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 
 @NgModule({
     imports: [
@@ -75,7 +76,8 @@ import { Dummy7Component } from './dummy7/dummy7.component';
     ],
     providers: [
         ArchwizardComponent,
-        ArchwizardModule
+        ArchwizardModule,
+        NGXToastrService
     ]
 })
 export class TestNewModule { }

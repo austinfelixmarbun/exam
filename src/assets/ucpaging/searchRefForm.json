@@ -11,7 +11,7 @@
             "isFromURL": true,
             "isSelectOne": false,
             "isQueryIn": true,
-            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefModule/GetListKeyValueById",
+            "url": "http://r3impl-appsvr.ad-ins.com/Foundation/RefModule/GetListKeyValueById",
             "label": "Module",
             "items": [],
             "itemsUrl": []
