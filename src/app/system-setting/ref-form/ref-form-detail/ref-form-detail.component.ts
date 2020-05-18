@@ -47,7 +47,7 @@ export class RefFormDetailComponent implements OnInit {
     var refMasterModuleObj = {
     }
 
-    this.http.post(AdInsConstant.GetListKeyValueRefModuleById, refMasterModuleObj).subscribe(
+    this.http.post(AdInsConstant.GetListRefModuleKeyValue, refMasterModuleObj).subscribe(
       (response) => {
         this.itemModuleType = response["ReturnObject"];
         this.RefForm.patchValue({
