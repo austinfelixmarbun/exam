@@ -44,6 +44,8 @@ import { ListOfficeMemberComponentOffering } from './prod-offering/prod-offering
 import { SearchOfficeComponentOffering } from './prod-offering/prod-offering-add-detail/office-member/search-office/search-office.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { UcapprovalModule } from '@adins/ucapproval';
+import { ProductReturnHoPagingComponent } from './product-HO/product-return-ho-paging/product-return-ho-paging.component';
+import { ProdOfferingReturnPagingComponent } from './prod-offering/prod-offering-return-paging/prod-offering-return-paging.component';
 
 @NgModule({
   imports: [
@@ -95,7 +97,9 @@ import { UcapprovalModule } from '@adins/ucapproval';
     OfficeMemberHOComponent,
     ListOfficeMemberComponentOffering,
     SearchOfficeComponentOffering,
-    ProductOfferingDeactivateEditComponent
+    ProductOfferingDeactivateEditComponent,
+    ProductReturnHoPagingComponent,
+    ProdOfferingReturnPagingComponent
   ]
 })
 export class ProductModule { }
