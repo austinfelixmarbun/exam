@@ -52,6 +52,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       this.http.post(updateRoleUrl, roleObject).subscribe(
         (response) => {
           localStorage.setItem("Token", response["Token"]);
+          //localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
           var currentUserContext = new CurrentUserContext;
           currentUserContext.UserName = localStorage.getItem("Username");
           currentUserContext.Office = item.OfficeCode;
@@ -75,6 +76,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       this.http.post(roleUrl, roleObject).subscribe(
         (response) => {
           localStorage.setItem("Token", response["Token"]);
+          //localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
           var currentUserContext = new CurrentUserContext;
           currentUserContext.UserName = localStorage.getItem("Username");
           currentUserContext.Office = item.OfficeCode;
