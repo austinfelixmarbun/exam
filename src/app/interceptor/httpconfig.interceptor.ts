@@ -34,6 +34,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         var myObj;
         let today = new Date();
         var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US');
+        //token = localStorage.getItem("Token");
 
         var checkSession = AdInsHelper.CheckSessionTimeout();
         if (checkSession == "1") {
@@ -50,43 +51,26 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         }
 
         //Ini kalau buat Login belom punya Current User Contexts
-        if (request.url == "http://r3app-server/foundation/UserManagement/HTML5Login") {
-            if (currentUserContext != null) {
-                token = localStorage.getItem("Token");
-                myObj = new Object();
-                if (request.body != null) {
-                    myObj = request.body;
-                }
-                myObj["Ip"] = localStorage.getItem("LocalIp");
-                myObj["RequestDateTime"] = businessDt;
+        
+        if (currentUserContext != null) {
+            token = localStorage.getItem("Token");
+            myObj = new Object();
+            if (request.body != null) {
+                myObj = request.body;
             }
-            else {
-                myObj = new Object();
-                if (request.body != null) {
-                    myObj = request.body;
-                }
-                myObj["Ip"] = localStorage.getItem("LocalIp");
-                myObj["RequestDateTime"] = businessDt;
-            }
-        } else {
-            if (currentUserContext != null) {
-                token = localStorage.getItem("Token");
-                myObj = new Object();
-                if (request.body != null) {
-                    myObj = request.body;
-                }
-                myObj["Ip"] = localStorage.getItem("LocalIp");
-                myObj["RequestDateTime"] = businessDt;
-            }
-            else {
-                myObj = new Object();
-                if (request.body != null) {
-                    myObj = request.body;
-                }
-                myObj["Ip"] = localStorage.getItem("LocalIp");
-                myObj["RequestDateTime"] = businessDt;
-            }
+            myObj["Ip"] = localStorage.getItem("LocalIp");
+            myObj["RequestDateTime"] = businessDt;
         }
+        else {
+            myObj = new Object();
+            if (request.body != null) {
+                myObj = request.body;
+            }
+            myObj["Ip"] = localStorage.getItem("LocalIp");
+            myObj["RequestDateTime"] = businessDt;
+            token = localStorage.getItem("Token");
+        }
+        
 
         if (token != "") {
             request = request.clone({ headers: request.headers.set('Authorization', token) });
