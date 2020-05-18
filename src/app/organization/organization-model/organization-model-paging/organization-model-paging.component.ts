@@ -37,7 +37,7 @@ export class OrganizationModelPagingComponent implements OnInit {
   orgObj: OrganizationObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
   addCrit: CriteriaObj[];
 
   constructor(private route: ActivatedRoute, private service: NGXToastrService, private https: HttpClient, private location: Location) {
@@ -51,7 +51,7 @@ export class OrganizationModelPagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrgModel.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetOrgMdlPaging;
     
     this.show = AdInsConstant.showData.split(',');

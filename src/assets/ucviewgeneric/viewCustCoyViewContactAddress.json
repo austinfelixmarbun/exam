@@ -4,16 +4,16 @@
       {
         "subSectionId": "ContactAddressId",
         "subSectionTitle": "Contact Address",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
-            "label": "Address",
+            "label": "ADDRESS",
             "property": "FullAddr"
           },
           {
             "type": "text",
-            "label": "Zip Code",
+            "label": "ZIP CODE",
             "property": "ZipCode"
           },
           {
@@ -23,7 +23,7 @@
           },
           {
             "type": "text",
-            "label": "Kelurahan",
+            "label": "KELURAHAN",
             "property": "Kelurahan"
           },
           {
@@ -33,7 +33,7 @@
           },
           {
             "type": "text",
-            "label": "Kecamatan",
+            "label": "KECAMATAN",
             "property": "Kecamatan"
           },
           {
@@ -48,7 +48,7 @@
           },
           {
             "type": "text",
-            "label": "City",
+            "label": "CITY",
             "property": "City"
           }
         ],

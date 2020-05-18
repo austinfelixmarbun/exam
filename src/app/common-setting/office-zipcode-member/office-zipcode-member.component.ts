@@ -22,7 +22,7 @@ export class OfficeZipcodeMemberComponent implements OnInit {
     //** lib-ucpaging **//
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/search/searchOfficeZipcodeMember.json";
-    this.inputPagingObj.enviromentUrl = environment.foundationUrl;
+    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetOfficeZipCodeMemberPaging;
     this.inputPagingObj.pagingJson = "./assets/search/searchOfficeZipcodeMemberGridPaging.json"
     //** lib-ucpaging **//

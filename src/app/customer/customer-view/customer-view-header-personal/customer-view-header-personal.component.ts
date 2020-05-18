@@ -11,6 +11,35 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
   styleUrls: ['./customer-view-header-personal.component.scss']
 })
 export class CustomerViewHeaderPersonalComponent implements OnInit {
+  resultData: any;
+  tempCustObj: any;
+  tempMrGenderCode: any;
+  tempMrIdTypeCode: any;
+  tempMrCustModelCode: any;
+  tempCustPersonalObj: any;
+  viewCustMainInfoHeaderObj: any;
+
+  custObj: CustObj;
+  custPersonalObj: CustPersonalObj;
+
+  IdCust: number;
+
+  BirthDt: Date;
+  IdExpiredDt: Date;
+
+  IdNo: string;
+  addUrl: string;
+  TaxIdNo: string;
+  CustModel: string;
+  BirthPlace: string;
+  GenderDesc: string;
+  StatusIsVip: string;
+  MrIdTypeCode: string;
+  CustModelDesc: string;
+  MotherMaidenName: string;
+  MrIdTypeCodeDesc: string;
+  StatusAffiliate: string;
+  getRefMasterByMasterCodeUrl: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
@@ -22,34 +51,10 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         this.IdCust = params["CustId"];
       }
     });
-   }
-  Gender: any;
-  GenderDesc: any;
-  MrIdTypeCode: any;
-  MrIdTypeCodeDesc: any;
-  CustModel: any;
-  CustModelDesc
-  BirthPlace: any;
-  BirthDt: any;
-  IdNo: any;
-  TaxIdNo: any;
-  IdExpiredDt: any;
-  MotherMaidenName: any;
-  resultData: any;
-  addUrl: any; IdCust: any;
-  custObj: any;
-  tempCustPersonalObj: any;
-  custPersonalObj: any;
-  tempCustObj: any;
-  getRefMasterByMasterCodeUrl: any;
-  tempMrGenderCode: any;
-  tempMrIdTypeCode;
-  tempMrCustModelCode: any;
-  StatusIsVip : any;
-  StatusAffiliate : any;
-  viewCustMainInfoHeaderObj : any;
+  }
+
   ngOnInit() {
-      this.custObj = new CustObj();
+    this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
     this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
       (response) => {
@@ -93,7 +98,6 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrGenderCode).subscribe(
           (response) => {
             this.tempMrGenderCode = response;
-         
           }
         );
       });

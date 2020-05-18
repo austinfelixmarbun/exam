@@ -32,8 +32,8 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
   chooseRole(item) {
     console.log(item);
-    var url = environment.foundationUrl + AdInsConstant.GetAllActiveRefFormByRefRoleId;
-    var roleUrl = environment.foundationUrl + AdInsConstant.LoginByRole;
+    var url = environment.FoundationR3Url + AdInsConstant.GetAllActiveRefFormByRefRoleId;
+    var roleUrl = environment.FoundationR3Url + AdInsConstant.LoginByRole;
     var roleObject = {
       UserName: this.data.user,
       Password: this.data.pwd,
@@ -41,16 +41,18 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       RoleCode: item.RoleCode,
       JobTitleCode: item.JobTitleCode,
       RequestDateTime: item.BusinessDt,
+      ModuleCode:environment.Module,
       Ip: "",
       RowVersion: ""
 
     };
     if(this.data.pwd==null)
     {
-      var updateRoleUrl = environment.foundationUrl+AdInsConstant.UpdateToken;
+      var updateRoleUrl = environment.FoundationR3Url+AdInsConstant.UpdateToken;
       this.http.post(updateRoleUrl, roleObject).subscribe(
         (response) => {
           localStorage.setItem("Token", response["Token"]);
+          localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
           var currentUserContext = new CurrentUserContext;
           currentUserContext.UserName = localStorage.getItem("Username");
           currentUserContext.Office = item.OfficeCode;
@@ -74,6 +76,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       this.http.post(roleUrl, roleObject).subscribe(
         (response) => {
           localStorage.setItem("Token", response["Token"]);
+          localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
           var currentUserContext = new CurrentUserContext;
           currentUserContext.UserName = localStorage.getItem("Username");
           currentUserContext.Office = item.OfficeCode;

@@ -10,15 +10,15 @@
               </lib-ucSubsection>
               <div id="ManagementShareholderId">
                 <div class="form-group row  ">
-                  <label class="col-md-4 adInsLabel" translate>Select Existing Cust Personal</label>
-                  <div class="col-md-8">
+                  <label class="col-md-2 adInsLabel" translate>Select Existing Cust Personal</label>
+                  <div class="col-md-10">
                     <lib-uclookupgeneric [lookupInput]="inputLookupCustPersonalObj" [parentForm]='ManagementShareholderForm' [enjiForm]='enjiForm' [identifier]="'CustPersonalLookup'"
                     (lookup)="getLookUpCustomer($event)"></lib-uclookupgeneric>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-4 adins-required-label" translate>Full Name</label>
-                  <div class="col-md-8">
+                  <label class="col-md-2 adins-required-label" translate>Full Name</label>
+                  <div class="col-md-10">
                       <input type="text" class="form-control adInsInput" formControlName="MgmntShrholderName"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MgmntShrholderName.invalid}">
                       <show-errors [control]="ManagementShareholderForm.controls.MgmntShrholderName" [submit]="enjiForm.submitted">
@@ -26,8 +26,8 @@
                   </div>
                 </div>
                 <div class="form-group row adins">
-                  <label class="col-md-4 adInsLabel" translate>Customer Model</label>
-                  <div class="col-md-8">
+                  <label class="col-md-2 adInsLabel" translate>Customer Model</label>
+                  <div class="col-md-10">
                     <select class="form-control adInsInput" (change)="onOptionsSelected($event)" style="width: auto" formControlName="MrCustModelCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MrCustModelCode.invalid }">
                     <option *ngFor="let it of tempMrCustModelCode " [value]="it.Key" >
@@ -36,8 +36,8 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-4 adins-required-label" translate>Id Type</label>
-                  <div class="col-md-8">
+                  <label class="col-md-2 adins-required-label" translate>ID Type</label>
+                  <div class="col-md-10">
                     <select class="form-control adInsInput" (change)="onOptionsSelected($event)" style="width: auto" formControlName="MrIdTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MrIdTypeCode.invalid }">
                     <option *ngFor="let it of tempIdType " [value]="it.Key" >
@@ -46,8 +46,8 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-4 adInsLabel" translate>Id Number</label>
-                  <div class="col-md-8">
+                  <label class="col-md-2 adInsLabel" translate>ID Number</label>
+                  <div class="col-md-10">
                     <input type="text" class="form-control adInsInput" formControlName="IdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.IdNo.invalid}">
                   <show-errors [control]="ManagementShareholderForm.controls.IdNo" [submit]="enjiForm.submitted">
@@ -55,8 +55,8 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-4 adInsLabel"[ngClass]="{'adins-required-label' : tempKTPCheck==false}" translate>Id Expired Date</label>
-                  <div class="col-md-8">
+                  <label class="col-md-2 adInsLabel"[ngClass]="{'adins-required-label' : tempKTPCheck==false}" translate>ID Expired Date</label>
+                  <div class="col-md-10">
                     <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.IdExpiredDt.invalid}">
                   <show-errors [control]="ManagementShareholderForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
@@ -64,8 +64,8 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-4 adInsLabel" translate>Gender</label>
-                  <div class="col-md-8">
+                  <label class="col-md-2 adInsLabel" translate>Gender</label>
+                  <div class="col-md-10">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrGenderCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MrGenderCode.invalid }">
                     <option *ngFor="let it of tempMrGenderCode" [value]="it.Key">
@@ -74,8 +74,8 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-4 adInsLabel" translate>Birth Place / Date</label> 
-                  <div class="col-md-8">
+                  <label class="col-md-2 adInsLabel" translate>Birth Place / Date</label> 
+                  <div class="col-md-10">
                     <div class="row">
                       <div class="col-md-6" style="border-right: 1px solid grey">
                         <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
@@ -93,8 +93,8 @@
                   </div>       
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-4 adInsLabel" translate>NPWP</label>
-                  <div class="col-md-8">
+                  <label class="col-md-2 adInsLabel" translate>NPWP</label>
+                  <div class="col-md-10">
                     <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.TaxIdNo.invalid}">
                   <show-errors [control]="ManagementShareholderForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
@@ -102,8 +102,8 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-4 adins-required-label" translate>Job Position</label>
-                  <div class="col-md-8">
+                  <label class="col-md-2 adins-required-label" translate>Job Position</label>
+                  <div class="col-md-10">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrJobPositionCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MrJobPositionCode.invalid }">
                     <option *ngFor="let it of tempMrJobPositionCode" [value]="it.Key">
@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="form-group row  ">
-                  <label class="col-md-4 adInsLabel" translate>Share (%)</label>
+                  <label class="col-md-2 adInsLabel" translate>Share (%)</label>
                   <div class="col-md-3">
                     <input type="number" min="1" max="100" step="0.01" class="form-control adInsInput"
                       formControlName="SharePrcnt"
@@ -136,8 +136,8 @@
                     </show-errors></div>
                 </div> -->
                 <div class="form-group row">
-                  <label class="col-md-4 adInsLabel" translate>Default Signer</label>                  
-                  <div class="col-md-8">
+                  <label class="col-md-2 adInsLabel" translate>Default Signer</label>                  
+                  <div class="col-md-1">
                     <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsSigner" />
                   </div>              
                 </div>          

@@ -6,108 +6,108 @@
 					<h4 class="form-section card-title" *ngIf="custType == 'PERSONAL'" translate>CUSTOMER PERSONAL</h4>
 					<h4 class="form-section card-title" *ngIf="custType == 'COMPANY'" translate>CUSTOMER COMPANY</h4>
 					<div *ngIf="custType == 'PERSONAL'">
-						<app-customer-view-header-personal></app-customer-view-header-personal>
-						<aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode]
-							navigateBackward="allow" navigateForward="allow" [defaultStepIndex]="0">
-							<aw-wizard-step [stepTitle]="'Main Data'" (stepEnter)="EnterTab('mainData')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-detail *ngIf="isMainData == true">
-								</app-customer-view-personal-detail>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Address'" (stepEnter)="EnterTab('address')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-address *ngIf="isAddress == true">
-								</app-customer-view-address>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Contact Person'" (stepEnter)="EnterTab('contactPerson')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-contact-person *ngIf="isContactPerson == true">
-								</app-customer-view-personal-contact-person>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Customer Group'" (stepEnter)="EnterTab('custGroup')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-customer-group *ngIf="isCustGroup == true">
-								</app-customer-view-customer-group>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Job Data'" (stepEnter)="EnterTab('jobData')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-job-data
-									*ngIf="isJobData == true && custModel == 'PROF'">
-								</app-customer-view-personal-job-data>
-								<app-customer-view-personal-job-data-non-prof
-									*ngIf="isJobData == true && custModel == 'NONPROF'">
-								</app-customer-view-personal-job-data-non-prof>
-								<app-customer-view-personal-job-data-emp
-									*ngIf="isJobData == true && custModel == 'EMP'">
-								</app-customer-view-personal-job-data-emp>
-								<app-customer-view-personal-job-data-sme
-									*ngIf="isJobData == true && custModel == 'SME'">
-								</app-customer-view-personal-job-data-sme>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Financial Data'" (stepEnter)="EnterTab('finData')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-financial-data *ngIf="isFinData == true">
-								</app-customer-view-personal-financial-data>
-							</aw-wizard-step>
-							<!-- <aw-wizard-step [stepTitle]="'Other Attribute'" (stepEnter)="EnterTab('otherAttr')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-other-attr *ngIf="isOtherAttr == true">
-								</app-customer-view-personal-other-attr>
-							</aw-wizard-step> -->
-							<!-- <aw-wizard-step [stepTitle]="'Application Listing'" (stepEnter)="EnterTab('appListing')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-personal-app-listing *ngIf="isAppListing == true">
-								</app-customer-view-personal-app-listing>
-							</aw-wizard-step> -->
-						</aw-wizard>
+						<app-customer-view-header-personal></app-customer-view-header-personal> 
+						<mat-tab-group>
+							<mat-tab label="Main Data">
+								<ng-template matTabContent>
+									<app-customer-view-personal-detail></app-customer-view-personal-detail>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Address">
+								<ng-template matTabContent>
+									<app-customer-view-address></app-customer-view-address>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Contact Person">
+								<ng-template matTabContent>
+									<app-customer-view-personal-contact-person></app-customer-view-personal-contact-person>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Customer Group">
+								<ng-template matTabContent>
+									<app-customer-view-customer-group></app-customer-view-customer-group>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Job Data">
+								<ng-template matTabContent>
+									<app-customer-view-personal-job-data *ngIf="custModel == 'PROF'">
+									</app-customer-view-personal-job-data>
+									<app-customer-view-personal-job-data-non-prof *ngIf="custModel == 'NONPROF'">
+									</app-customer-view-personal-job-data-non-prof>
+									<app-customer-view-personal-job-data-emp *ngIf="custModel == 'EMP'">
+									</app-customer-view-personal-job-data-emp>
+									<app-customer-view-personal-job-data-sme *ngIf="custModel == 'SME'">
+									</app-customer-view-personal-job-data-sme>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Financial Data">
+								<ng-template matTabContent>
+									<app-customer-view-personal-financial-data>
+									</app-customer-view-personal-financial-data>
+								</ng-template>
+							</mat-tab>
+							<!-- <mat-tab label="Other Attribute">
+									<ng-template matTabContent>
+										<app-customer-view-coy-other></app-customer-view-coy-other>
+									</ng-template>
+								  </mat-tab>   
+								  <mat-tab label="Application Listing">
+									<ng-template matTabContent>
+									  <app-customer-view-personal-app-listing *ngIf="isAppListing == true">
+									  </app-customer-view-personal-app-listing>
+									</ng-template>
+								  </mat-tab> -->
+						</mat-tab-group>
+	 
+	
 					</div>
 					<div *ngIf="custType == 'COMPANY'">
 						<app-customer-view-header-company></app-customer-view-header-company>
-						<aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode]
-							navigateBackward="allow" navigateForward="allow" [defaultStepIndex]="0">
-							<aw-wizard-step [stepTitle]="'Main Data'" (stepEnter)="EnterTabCoy('mainData')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-coy-detail *ngIf="isMainData == true">
-								</app-customer-view-coy-detail>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Address'" (stepEnter)="EnterTab('address')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-address *ngIf="isAddress == true">
-								</app-customer-view-address>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Management / Shareholder'"
-								(stepEnter)="EnterTabCoy('management')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-coy-management *ngIf="isManagement == true">
-								</app-customer-view-coy-management>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Customer Group'" (stepEnter)="EnterTab('custGroup')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-customer-group *ngIf="isCustGroup == true">
-								</app-customer-view-customer-group>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Contact Information'" (stepEnter)="EnterTabCoy('contact')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-coy-contact *ngIf="isContact == true">
-								</app-customer-view-coy-contact>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Financial Data'" (stepEnter)="EnterTabCoy('finData')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-coy-financial *ngIf="isFinData == true">
-								</app-customer-view-coy-financial>
-							</aw-wizard-step>
-							<aw-wizard-step [stepTitle]="'Legal Document'" (stepEnter)="EnterTabCoy('legal')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-coy-legal *ngIf="isLegal == true"> </app-customer-view-coy-legal>
-							</aw-wizard-step>
-							<!-- <aw-wizard-step [stepTitle]="'Other Attribute'" (stepEnter)="EnterTabCoy('other')"
-								[navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-								<app-customer-view-coy-other *ngIf="isOther == true"> </app-customer-view-coy-other>
-							</aw-wizard-step> -->
-						</aw-wizard>
+						<mat-tab-group>
+							<mat-tab label="Main Data">
+								<ng-template matTabContent>
+									<app-customer-view-coy-detail></app-customer-view-coy-detail>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Address">
+								<ng-template matTabContent>
+									<app-customer-view-address></app-customer-view-address>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Management / Shareholder">
+								<ng-template matTabContent>
+									<app-customer-view-coy-management> </app-customer-view-coy-management>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Customer Group">
+								<ng-template matTabContent>
+									<app-customer-view-customer-group></app-customer-view-customer-group>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Contact Information">
+								<ng-template matTabContent>
+									<app-customer-view-coy-contact>
+									</app-customer-view-coy-contact>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Financial Data">
+								<ng-template matTabContent>
+									<app-customer-view-coy-financial></app-customer-view-coy-financial>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Legal Document">
+								<ng-template matTabContent>
+									<app-customer-view-coy-legal></app-customer-view-coy-legal>
+								</ng-template>
+							</mat-tab>
+							<!-- <mat-tab label="Other Attribute">
+									<ng-template matTabContent>
+										<app-customer-view-coy-other></app-customer-view-coy-other>
+									</ng-template>
+								  </mat-tab>  -->
+						</mat-tab-group>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-<!-- </div> -->
+	</div> 

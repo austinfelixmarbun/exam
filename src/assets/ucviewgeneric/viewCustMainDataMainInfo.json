@@ -4,80 +4,80 @@
       {
         "subSectionId": "viewCustMainDataMainInfoId1",
         "subSectionTitle": "Main Info",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
-            "label": "Full Name",
+            "label": "FULL NAME",
             "property": "CustFullName"
           },
           {
             "type": "text",
-            "label": "Nick Name",
+            "label": "NICK NAME",
             "property": "NickName"
           },
           {
             "type": "text",
-            "label": "Salutation",
+            "label": "SALUTATION",
             "property": "MrSalutationCode"
           },
           {
             "type": "text",
-            "label": "Marital Status",
+            "label": "MARITAL STATUS",
             "property": "MrMaritalStatCode"
           },
           {
             "type": "text",
-            "label": "Gelar Depan Nama",
+            "label": "GELAR DEPAN NAMA",
             "property": "CustPrefixName"
           },
           {
             "type": "text",
-            "label": "Num Of Dependents",
+            "label": "NUM OF DEPENDENTS",
             "property": "NoOfResidence"
           },
           {
             "type": "text",
-            "label": "Gelar Belakang Nama",
+            "label": "GELAR BELAKANG NAMA",
             "property": "CustSuffixName"
           },
           {
             "type": "text",
-            "label": "Num Of Residence (Last 3 Years)",
+            "label": "NUM OF RESIDENCE (LAST 3 YEARS)",
             "property": "NoOfResidence"
           },
           {
             "type": "text",
-            "label": "Nationality",
+            "label": "NATIONALITY",
             "property": "MrNationalityCode"
           },
           {
             "type": "text",
-            "label": "Family Card Num",
+            "label": "FAMILY CARD NUM",
             "property": "FamilyCardNo"
           },
           {
             "type": "text",
-            "label": "Country",
+            "label": "COUNTRY",
             "property": "CountryName"
           },
           {
             "type": "text",
-            "label": "Mother Maiden Name",
+            "label": "MOTHER MAIDEN NAME",
             "property": "MotherMaidenName"
           },
           {
             "type": "text",
-            "label": "Education",
+            "label": "EDUCATION",
             "property": "MrEducationCode"
           },
           {
             "type": "text",
-            "label": "Religion",
+            "label": "RELIGION",
             "property": "MrReligionCode"
           },          {
             "type": "boolean",
-            "label": "Rest In Peace",
+            "label": "REST IN PEACE",
             "property": "IsRestInPeace"
           }
         ],

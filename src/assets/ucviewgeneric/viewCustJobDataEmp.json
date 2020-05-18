@@ -4,56 +4,56 @@
       {
         "subSectionId": "JobDataId",
         "subSectionTitle": "Job Data",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
-            "label": "Customer Model",
+            "label": "CUSTOMER MODEL",
             "property": "MrCustModelCode"
           },
           {
             "type": "text",
-            "label": "Profession Name",
+            "label": "PROFESSION NAME",
             "property": "ProfessionName"
           },
           {
             "type": "text",
-            "label": "Job Position",
+            "label": "JOB POSITION",
             "property": "JobPosition"
           },
           {
             "type": "text",
-            "label": "Job Title Name",
+            "label": "JOB TITLE NAME",
             "property": "JobTitleName"
           },
           {
             "type": "text",
-            "label": "Job Status",
+            "label": "JOB STATUS",
             "property": "JobStatus"
           },
           {
             "type": "text",
-            "label": "Nama Perusahaan/Usaha",
+            "label": "NAMA PERUSAHAAN / USAHA",
             "property": "CoyName"
           },
           {
             "type": "boolean",
-            "label": "Internal Employee",
+            "label": "INTERNAL EMPLOYEE",
             "property": "InternalEmp"
           },
           {
             "type": "text",
-            "label": "Industry Type Name",
+            "label": "INDUSTRY TYPE NAME",
             "property": "IndustryTypeName"
           },
           {
             "type": "text",
-            "label": "Company Scale",
+            "label": "COMPANY SCALE",
             "property": "CoyScale"
           },
           {
             "type": "date",
-            "label": "Employeement Establishment Date",
+            "label": "EMPLOYMENT ESTABLISHMENT DATE",
             "property": "EmploymentEstablishmentDt"
           }
         ],
