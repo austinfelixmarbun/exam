@@ -16,8 +16,6 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { RequestCriteriaObj } from 'app/shared/model/RequestCriteriaObj.model';
-
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
@@ -28,7 +26,11 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (request.method == "POST" && (request.body == null || request.body.isLoading == undefined || request.body.isLoading == true)) {
             this.spinner.show();
         }
-        this.count++;
+
+        if (request.url != "./assets/i18n/en.json") {
+            this.count++;
+        }
+
         var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
         var token: string = "";
         var myObj;
@@ -50,7 +52,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         }
 
         //Ini kalau buat Login belom punya Current User Contexts
-        
+
         if (currentUserContext != null) {
             token = localStorage.getItem("Token");
             myObj = new Object();
@@ -69,10 +71,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             myObj["RequestDateTime"] = businessDt;
             token = localStorage.getItem("Token");
         }
-        
-        if(token==null)
-        {
-            token="";
+
+        if (token == null) {
+            token = "";
         }
 
         if (token != "") {
@@ -149,7 +150,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 console.log(JSON.stringify(request.body));
                 return throwError(error);
             }), finalize(() => {
-                this.count--;
+                if (request.url != "./assets/i18n/en.json") {
+                    this.count--;
+                }
 
                 if (request.method == "POST") {
                     AdInsHelper.ClearPageAccessLog();
