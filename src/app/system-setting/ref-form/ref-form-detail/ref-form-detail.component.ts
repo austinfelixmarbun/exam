@@ -23,6 +23,7 @@ export class RefFormDetailComponent implements OnInit {
   refFormObj: RefFormObj = new RefFormObj;
   resultRefForm: any;
   RefFormId: number;
+  checkClass: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -38,8 +39,8 @@ export class RefFormDetailComponent implements OnInit {
     Title: ['', Validators.required],
     Path: ['', Validators.required],
     Icon: [''],
-    OrderNo: ['', Validators.pattern("^[0-9]+$")],
-    HierarchyNo: ['', Validators.pattern("^[0-9]+$")],
+    OrderNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    HierarchyNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     IsHidden: false,
     IsExternalLink: false
   });
@@ -71,13 +72,9 @@ export class RefFormDetailComponent implements OnInit {
             Class: this.itemClassType[0].Key
           });
         }
+        this.CheckClass();
       }
     );
-
-    this.refFormObj.Path = "";
-    this.RefForm.controls.Path.clearValidators();
-    this.RefForm.controls.Path.disable();
-    this.RefForm.controls.Path.updateValueAndValidity();
 
     if (this.mode == "edit") {
       var refFormObj = {
@@ -115,11 +112,16 @@ export class RefFormDetailComponent implements OnInit {
   CheckClass(){
     this.refFormObj.Path = "";
     if(this.RefForm.controls.Class.value == "has-sub"){
+      this.RefForm.patchValue({
+        Path: ""
+      });
       this.RefForm.controls.Path.clearValidators();
       this.RefForm.controls.Path.disable();
+      this.checkClass = false;
     }else{
       this.RefForm.controls.Path.setValidators(Validators.required);
       this.RefForm.controls.Path.enable();
+      this.checkClass = true;
     }
     this.RefForm.controls.Path.updateValueAndValidity();
   }

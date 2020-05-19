@@ -50,7 +50,7 @@
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Form Code</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="FormCode">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="FormCode" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.FormCode.invalid }">
                   <lib-uc-show-errors [control]="RefForm.controls.FormCode" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -58,15 +58,15 @@
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Title</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Title">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Title" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.Title.invalid }">
                   <lib-uc-show-errors [control]="RefForm.controls.Title" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3  adins-required-label" translate>Path</label>
+                <label class="col-md-3" [ngClass]="{'adins-required-label' : checkClass}" translate>Path</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Path">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Path" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.Path.invalid }">
                   <lib-uc-show-errors [control]="RefForm.controls.Path" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -74,23 +74,23 @@
               <div class="form-group row">
                 <label class="col-md-3" translate>Icon</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Icon">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Icon" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.Icon.invalid }">
                   <lib-uc-show-errors [control]="RefForm.controls.Icon" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3" translate>OrderNo</label>
+                <label class="col-md-3 adins-required-label" translate >Order No</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="OrderNo">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="OrderNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.OrderNo.invalid }">
                   <lib-uc-show-errors [control]="RefForm.controls.OrderNo" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3" translate>Hierarchy No</label>
+                <label class="col-md-3 adins-required-label" translate>Hierarchy No</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="HierarchyNo">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="HierarchyNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.HierarchyNo.invalid }">
                   <lib-uc-show-errors [control]="RefForm.controls.HierarchyNo" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -98,13 +98,13 @@
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Is Hidden</label>
                 <div class="col-md-9">
-                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsHidden"/>
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsHidden" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.IsHidden.invalid }"/>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Is External Link</label>
                 <div class="col-md-9">
-                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsExternalLink"/>
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsExternalLink" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.IsExternalLink.invalid }"/>
                 </div>
               </div>
             </div>
