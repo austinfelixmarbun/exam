@@ -10,7 +10,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-edit-main-data-company',
   templateUrl: './edit-main-data-company.component.html',
-  styleUrls: ['./edit-main-data-company.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class EditMainDataCompanyComponent implements OnInit {

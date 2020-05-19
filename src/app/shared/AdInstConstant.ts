@@ -829,13 +829,14 @@ export class AdInsConstant {
   public static EditRefFormData = environment.FoundationR3Url + "/RefForm/EditRefForm";
   public static AddRefFormData = environment.FoundationR3Url + "/RefForm/AddRefForm";
   public static GetRefFormDataByRefFormId = environment.FoundationR3Url + "/RefForm/GetRefFormByRefFormId"
+  public static DeleteRefFormData = "/RefForm/DeleteRefForm";
 
   //AUTH FORM
   public static AddListAuthForm = environment.FoundationR3Url + "/AuthForm/AddListAuthForm";
   public static GetListAuthFormByRefFormId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefFormId";
+  public static DeleteAuthForm = "/AuthForm/DeleteAuthForm";
+  public static GetListAuthFormByRefRoleId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefRoleId";
 
   // Workflow Engine
   public static ClaimTask = environment.FoundationR3Url + "/Workflow/ClaimTask";
-  public static DeleteAuthForm = "/AuthForm/DeleteAuthForm";
-  public static GetListAuthFormByRefRoleId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefRoleId";
 }

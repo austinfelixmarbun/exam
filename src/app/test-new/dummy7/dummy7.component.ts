@@ -193,11 +193,10 @@ export class Dummy7Component implements OnInit {
         }
 
       }
-      // this.RdlcReport.MainReportParameter.FilterBy = FilterBy;
+      this.RdlcReport.MainReportParameter.FilterBy = FilterBy;
       this.RdlcReport.MainReportInfoDetail.ReportDataProviderParameter = ProviderObj;
     }
 
-    this.RdlcReport.MainReportParameter = null;
     let Obj = {
       RequestObject: this.RdlcReport
     };

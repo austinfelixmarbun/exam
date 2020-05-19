@@ -8,7 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-negative-customer',
   templateUrl: './negative-customer.component.html',
-  styleUrls: ['./negative-customer.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class NegativeCustomerComponent implements OnInit {

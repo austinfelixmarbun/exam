@@ -3,7 +3,6 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
-import { WizardComponent } from 'angular-archwizard';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment'; 
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
@@ -14,11 +13,11 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-customer-company-detail',
   templateUrl: './customer-company-detail.component.html',
-  styleUrls: ['./customer-company-detail.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class CustomerCompanyDetailComponent implements OnInit {
-  @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
   lookUpObj: InputLookupObj; 
 
   tempCustObj: any;
@@ -42,7 +41,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
     EstablishmentDt: ['', [Validators.required]]
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
  
     this.editCustCompanyUrl = AdInsConstant.EditCustCompany;
     this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;
@@ -106,8 +105,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
         this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
           (response) => { 
             this.toastr.successMessage(response["Message"]);
-            this.outputValue.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId });
-            this.wizard.goToNextStep();
+            this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next'});
           },
           error => {
             console.log(error);
