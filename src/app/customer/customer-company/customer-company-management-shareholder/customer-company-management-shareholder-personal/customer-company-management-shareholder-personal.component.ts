@@ -194,17 +194,18 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputTab.emit({mode : 'check', stepMode: 'next'});
+          this.outputTab.emit({mode : 'check'});
         },
         error => {
           console.log(error);
         }
       );
     }else{
-
+      console.log(" ");
       if(this.tempShareholderCustNo!=null){
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
       }
+      this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;
       this.custCompanyMgmntShrholderObj.MrIdTypeCode = this.ManagementShareholderForm.controls["MrIdTypeCode"].value;
@@ -221,7 +222,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputTab.emit({mode : 'check', stepMode: 'next'});
+          this.outputTab.emit({mode : 'check'});
         },
         error => {
           console.log(error);
@@ -230,7 +231,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
   }
   back(){
-    this.outputTab.emit({mode : 'check', stepMode: 'previous'});
+    this.outputTab.emit({mode : 'check'});
   }
   onOptionsSelected(event){  
     if(event.target.value == this.KTP){

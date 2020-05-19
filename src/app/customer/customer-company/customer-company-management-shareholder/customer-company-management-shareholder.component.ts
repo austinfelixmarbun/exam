@@ -28,4 +28,10 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
       this.outputTab.emit({ stepMode: ev.stepMode })
     }
   }
+  next() {
+    this.outputTab.emit({ stepMode: 'next'});
+  }
+  back() {
+    this.outputTab.emit({ stepMode: 'previous'});
+  }
 }

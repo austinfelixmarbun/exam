@@ -56,10 +56,5 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   addAddr() {
     this.outputValue.emit({ mode: 'add' });    
   }
-  next() {
-    this.outputValue.emit({ stepMode: 'next' });
-  }
-  back(){
-    this.outputValue.emit({ stepMode: 'previous' });
-  }
+   
 }
