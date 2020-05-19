@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,17 +6,18 @@ import { HttpClient } from '@angular/common/http';
 import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
-import { WizardComponent } from 'angular-archwizard';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cust-legal-doc',
   templateUrl: './cust-legal-doc.component.html',
-  styleUrls: ['./cust-legal-doc.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class CustLegalDocComponent implements OnInit {
   @Input() CustCompanyId: number;
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
+  
   custLegalDocs: any;
 
   constructor(
@@ -24,7 +25,7 @@ export class CustLegalDocComponent implements OnInit {
     private httpClient: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
-    private spinner: NgxSpinnerService, private wizard: WizardComponent
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -88,6 +89,6 @@ export class CustLegalDocComponent implements OnInit {
     this.router.navigate(['/Customer/Paging']);
   }
   back(){
-    this.wizard.goToPreviousStep();
+    this.outputTab.emit({ stepMode: 'previous'});
   }
 }

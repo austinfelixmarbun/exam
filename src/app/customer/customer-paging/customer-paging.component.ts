@@ -6,7 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-customer-paging',
   templateUrl: './customer-paging.component.html',
-  styleUrls: ['./customer-paging.component.scss']
+  styleUrls: []
 })
 export class CustomerPagingComponent implements OnInit {
   inputPagingObj : UcPagingObj;

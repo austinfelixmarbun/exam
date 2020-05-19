@@ -12,7 +12,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-customer-company-address-add',
   templateUrl: './customer-company-address-add.component.html',
-  styleUrls: ['./customer-company-address-add.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class CustomerCompanyAddressAddComponent implements OnInit {
