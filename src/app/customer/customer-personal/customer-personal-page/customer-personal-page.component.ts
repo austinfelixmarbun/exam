@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
@@ -29,10 +29,15 @@ export class CustomerPersonalPageComponent implements OnInit {
   isContact: boolean;
   isFinancial: boolean;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { 
+  Page: string;
+
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
+      }
+      if (params["Page"] != null) {
+        this.Page = params["Page"];
       }
     });
   }
@@ -45,6 +50,14 @@ export class CustomerPersonalPageComponent implements OnInit {
     "Job": 5,
     "Financial": 6,
     "Other": 7
+  }
+
+  back() {
+    if (this.Page != null) {
+      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    } else {
+      this.router.navigate(["/Customer/Paging"]);
+    }
   }
 
   ngOnInit() { 

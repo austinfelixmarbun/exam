@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-view-header-personal',
@@ -40,6 +41,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
   MrIdTypeCodeDesc: string;
   StatusAffiliate: string;
   getRefMasterByMasterCodeUrl: string;
+  custUrl: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
@@ -51,6 +53,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         this.IdCust = params["CustId"];
       }
     });
+    this.custUrl = '../Customer/CustomerView/Page?CustId=' + this.IdCust;
   }
 
   ngOnInit() {

@@ -7,6 +7,7 @@ import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntS
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { WizardComponent } from 'angular-archwizard';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
+import { CustObj } from 'app/shared/model/CustObj.Model';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-check',
@@ -27,6 +28,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   getCustCompanyIdUrl: string;
   DeleteCustCompanyMgmntShrholderUrl: string;
   getListCompanyManagementShareholderByCustCompanyIdUrl: string;
+  resCustObj: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
     this.getCustCompanyIdUrl = AdInsConstant.GetCustCompanyByCustId;
@@ -41,6 +43,22 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
 
   ngOnInit() {
     this.getList();
+  }
+
+  openView(ShareholderCustNo)
+  {
+    // GetCustByCustNo
+    var custObj = new CustObj;
+    custObj.CustNo = ShareholderCustNo
+    this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
+      response => {
+        this.resCustObj = response;
+        window.open("../Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   addPersonal() {
