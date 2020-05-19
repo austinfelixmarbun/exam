@@ -23,13 +23,16 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   listCustAddr: any;
   getCustByIdUrl: string;
   getListCustAddrUrl: string;
-
+  From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustByIdUrl = AdInsConstant.GetCustByCustId;
     this.getListCustAddrUrl = AdInsConstant.GetListCustAddr;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
+      }
+      if (params["From"] != null) {
+        this.From = params["From"];
       }
     });
   }
