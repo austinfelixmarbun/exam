@@ -11,6 +11,7 @@ import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model'
 import { RefProductBrancMbrObj } from "../../../shared/model/RefProductBrancMbrObj.Model";
 import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
 import { getComponent } from "@angular/core/src/linker/component_factory_resolver";
+import { saveAs } from 'file-saver';
 
 
 
@@ -53,6 +54,9 @@ export class ProductHOViewComponent implements OnInit {
     });
   }
 
+  DlRuleObj = {
+    CompntValue: "",
+  };
   ngOnInit() {
     if(this.prodHId == undefined){
       this.prodHId = this.inputProdHId;
@@ -148,6 +152,18 @@ export class ProductHOViewComponent implements OnInit {
       }
     );
 
+  }
+
+  DownloadRule(CompntValue, CompntValueDesc) {
+    this.DlRuleObj.CompntValue = CompntValue;
+    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+      response => {
+        saveAs(response, CompntValueDesc + '.xlsx');
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }

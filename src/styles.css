@@ -46,6 +46,10 @@
     margin-bottom: 5px !important;
 }
 
+.pointer{
+    cursor: pointer;
+}
+
 .form-section{
     line-height: 2rem !important;
     margin-bottom: 7px !important;

@@ -1,14 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
-import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
 import { WizardComponent } from 'angular-archwizard';
-import { ListRefProductDetailObj } from 'app/shared/model/ListRefProductDetailObj.Model';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-product-component-HO',
@@ -20,7 +17,6 @@ export class ProductComponentHOComponent implements OnInit {
   @Input() objInput: any;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
@@ -35,6 +31,9 @@ export class ProductComponentHOComponent implements OnInit {
   ProdHId: number;
   StateSave : string;
   dictBehaviour: {[key: string]: any;} = {};
+  DlRuleObj = {
+    CompntValue: "",
+  };
 
   ngOnInit() {
     this.UrlGetProdCompGrouped = AdInsConstant.GetProductHOComponentGrouped;
@@ -252,6 +251,18 @@ export class ProductComponentHOComponent implements OnInit {
     else
     {
       this.NextDetail();
+      console.log(this.FormProdComp);
     }
+  }
+  DownloadRule(CompntValue, CompntValueDesc) {
+    this.DlRuleObj.CompntValue = CompntValue;
+    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+      response => {
+        saveAs(response, CompntValueDesc + '.xlsx');
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
  }

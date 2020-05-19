@@ -19,7 +19,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 export class OrganizationModelDetailComponent implements OnInit {
 
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   orgModelObj: OrgMdlObj;
   orgObj: OrganizationObj;

@@ -19,7 +19,7 @@ export class UserRoleComponent implements OnInit {
 
   @ViewChild(SearchComponent) searchComponent;
   resultData: any;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   refUserObj: RefUserObj;
   refEmpObj: RefEmpObj;

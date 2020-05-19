@@ -49,7 +49,7 @@ export class EmployeePositionAddComponent implements OnInit {
     supervisorUrl: any;
     bizUrl: any;
     orgJobTitleUrl: any;
-    foundationUrl: string = environment.foundationUrl;
+    foundationUrl: string = environment.FoundationR3Url;
     settingUrl: string = environment.settingUrl;
     empPositionVisible: boolean = true;
     addEditVisible: boolean = false;
@@ -107,7 +107,7 @@ export class EmployeePositionAddComponent implements OnInit {
         this.inputLookupObj = new InputLookupObj();
         this.inputLookupObj.urlJson = "./assets/lookup/lookupSupervisor.json";
         this.inputLookupObj.urlQryPaging = AdInsConstant.GetListEmployee;
-        this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+        this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
 
         const getuserAccess = JSON.parse(localStorage.getItem('UserAccess'));
         this.refOfficeId = getuserAccess.refOfficeId;

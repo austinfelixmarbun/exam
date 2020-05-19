@@ -29,6 +29,7 @@ export class AdInsConstant {
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
   public static Login = "/Authenticate/Login";
+  public static LoginWithToken = environment.FoundationR3Url+"/Authenticate/LoginWithToken";
   public static LoginToken = "/UserManagement/HTML6Login";
   public static Logout = "/UserManagement/LogOut"
   public static GetListOffice = "/RefOffice/GetRefOfficePaging";
@@ -398,7 +399,7 @@ export class AdInsConstant {
   //REF MODULE
   public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
   public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
-  public static GetListKeyValueRefModuleById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
+  public static GetListKeyValueRefModuleById = environment.FoundationR3Url + "/RefModule/GetListKeyValueRefModuleById";
 
   //REF EMP LEAVE MANAGEMENT
   public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
@@ -453,6 +454,7 @@ export class AdInsConstant {
   public static GetListProdHVersionByProdId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdId";
   public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
   public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
+  public static DownloadProductRule = environment.FoundationR3Url + "/Product/DownloadProductRule";
 
   //PRODUCT OFFERING
   public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
