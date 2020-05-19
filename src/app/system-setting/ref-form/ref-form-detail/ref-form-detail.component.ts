@@ -110,7 +110,6 @@ export class RefFormDetailComponent implements OnInit {
   }
 
   CheckClass(){
-    this.refFormObj.Path = "";
     if(this.RefForm.controls.Class.value == "has-sub"){
       this.RefForm.patchValue({
         Path: ""
