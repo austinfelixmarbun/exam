@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -73,6 +74,11 @@ export class RefFormDetailComponent implements OnInit {
       }
     );
 
+    this.refFormObj.Path = "";
+    this.RefForm.controls.Path.clearValidators();
+    this.RefForm.controls.Path.disable();
+    this.RefForm.controls.Path.updateValueAndValidity();
+
     if (this.mode == "edit") {
       var refFormObj = {
         RefFormId: this.RefFormId
@@ -97,22 +103,25 @@ export class RefFormDetailComponent implements OnInit {
           });
           this.RefForm.controls.FormCode.disable();
           this.setLookup();
-
-          if(this.refFormObj.Class=="has-sub"){
-            this.RefForm.patchValue({
-              Class: "HAS_SUB"
-            })
-          }else{
-            this.RefForm.patchValue({
-              Class: "NO_SUB"
-            })
-          }
+          this.CheckClass();
         }
       );
     } else {
       this.mode = "add";
       this.setLookup();
     }
+  }
+
+  CheckClass(){
+    this.refFormObj.Path = "";
+    if(this.RefForm.controls.Class.value == "has-sub"){
+      this.RefForm.controls.Path.clearValidators();
+      this.RefForm.controls.Path.disable();
+    }else{
+      this.RefForm.controls.Path.setValidators(Validators.required);
+      this.RefForm.controls.Path.enable();
+    }
+    this.RefForm.controls.Path.updateValueAndValidity();
   }
 
   setLookup() {
@@ -123,6 +132,13 @@ export class RefFormDetailComponent implements OnInit {
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
     this.inputLookupParentObj.isRequired = false;
+    this.inputLookupParentObj.addCritInput = new Array();
+
+    var critInput = new CriteriaObj();
+    critInput.propName = "CLASS";
+    critInput.restriction = AdInsConstant.RestrictionEq;
+    critInput.value = "has-sub";
+    this.inputLookupParentObj.addCritInput.push(critInput);
 
     if (this.resultRefForm != null) {
       this.inputLookupParentObj.jsonSelect = { Title: this.resultRefForm.ParentTitle }
@@ -138,12 +154,16 @@ export class RefFormDetailComponent implements OnInit {
     this.refFormObj.Class = this.RefForm.controls.Class.value;
     this.refFormObj.FormCode = this.RefForm.controls.FormCode.value;
     this.refFormObj.Title = this.RefForm.controls.Title.value;
-    this.refFormObj.Path = this.RefForm.controls.Path.value;
     this.refFormObj.Icon = this.RefForm.controls.Icon.value;
     this.refFormObj.OrderNo = this.RefForm.controls.OrderNo.value;
     this.refFormObj.HierarchyNo = this.RefForm.controls.HierarchyNo.value;
     this.refFormObj.IsHidden = this.RefForm.controls.IsHidden.value;
     this.refFormObj.IsExternalLink = this.RefForm.controls.IsExternalLink.value;
+    if(this.refFormObj.Class=="has-sub"){
+      this.refFormObj.Path = "";
+    }else if(this.refFormObj.Class=="no-sub"){
+      this.refFormObj.Path = this.RefForm.controls.Path.value;
+    }
 
     if (this.mode == "edit") {
       this.http.post(AdInsConstant.EditRefFormData, this.refFormObj).subscribe(

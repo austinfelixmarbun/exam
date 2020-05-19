@@ -1,22 +1,22 @@
 {
-    "title": "Ref Form Role Mapping",
-    "subsection": [
-      {
-        "subSectionId": "RefFormId",
-        "subSectionTitle": "Ref Form",
-        "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
-        "mainInfo": [
-          {
-            "type": "text",
-            "label": "Title",
-            "property": "Title"
-          }
-        ],
-        "querystring": {
-          "select": "SELECT TITLE AS Title",
-          "from": "FROM dbo.REF_FORM WITH(NOLOCK)",
-          "where": "WHERE REF_FORM_ID = {0}"
+  "title": "Ref Form Role Mapping",
+  "subsection": [
+    {
+      "subSectionId": "RefFormId",
+      "subSectionTitle": "Ref Form",
+      "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
+      "mainInfo": [
+        {
+          "type": "text",
+          "label": "Title",
+          "property": "Title"
         }
+      ],
+      "querystring": {
+        "select": "SELECT TITLE AS Title",
+        "from": "FROM dbo.REF_FORM WITH(NOLOCK)",
+        "where": "WHERE REF_FORM_ID = {0}"
       }
-    ]
-  }
+    }
+  ]
+}
