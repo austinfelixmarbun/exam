@@ -11,7 +11,7 @@
             "isFromURL": true,
             "isSelectOne": false,
             "isQueryIn": true,
-            "url": "http://r3impl-appsvr.ad-ins.com/Foundation/RefModule/GetListRefModuleKeyValue",
+            "url": "http://r3app-server/Foundation_R3/RefModule/GetListRefModuleKeyValue",
             "label": "Module",
             "items": [],
             "itemsUrl": []
@@ -52,10 +52,26 @@
                 }
             ],
             "itemsUrl": []
+        },
+        {
+            "type": "dropdown",
+            "name": "RF.CLASS", 
+            "id": "ClassId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "http://r3app-server/Foundation_R3/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Class",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "FORM_CLASS",
+            "items": [],
+            "itemsUrl": []
         }
     ],
     "querystring": {
-        "select": "SELECT RM.MODULE_NAME AS ModuleName, RF.PATH AS Path, RF.REF_MODULE_ID AS RefModuleId, RF.ORDER_NO AS OrderNo, RF.TITLE AS Title, RF.IS_HIDDEN AS IsHidden, RF.REF_FORM_ID AS RefFormId",
+        "select": "SELECT RM.MODULE_NAME AS ModuleName, RF.PATH AS Path, RF.REF_MODULE_ID AS RefModuleId, RF.ORDER_NO AS OrderNo, RF.TITLE AS Title, RF.IS_HIDDEN AS IsHidden, RF.REF_FORM_ID AS RefFormId, RF.CLASS AS Class",
         "from": "FROM REF_FORM RF WITH(NOLOCK) JOIN REF_MODULE RM WITH(NOLOCK) ON RF.REF_MODULE_ID = RM.REF_MODULE_ID"
     },
     "headerList": [
@@ -82,6 +98,12 @@
             "position": "center",
             "label": "Order No",
             "name": "RF.ORDER_NO"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Class",
+            "name": "RF.CLASS"
         },
         {
             "type": "sort",
@@ -122,6 +144,11 @@
             "property": "OrderNo"
         },
         {
+            "type": "text",
+            "position": "center",
+            "property": "Class"
+        },
+        {
             "type": "boolean",
             "position": "center",
             "property": "IsHidden"
@@ -159,6 +186,10 @@
                             "property": "edit"
                         }
                     ]
+                },
+                {
+                    "type": "delete",
+                    "property": "RefFormId"
                 }
             ]
         }
