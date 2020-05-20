@@ -20,7 +20,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 export class OrgJobTitleDetailComponent implements OnInit {
   inputLookupObj: any;
   inputLookupObj2: any;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   type: string = "add";
   resultData: any;
@@ -83,12 +83,12 @@ export class OrgJobTitleDetailComponent implements OnInit {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupRefJobTitle.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefJobTitle;
-    this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     
     this.inputLookupObj2 = new InputLookupObj();
     this.inputLookupObj2.urlJson = "./assets/lookup/lookupParentForm.json";
     this.inputLookupObj2.urlQryPaging = AdInsConstant.GetOrgJobTitlePaging;
-    this.inputLookupObj2.urlEnviPaging = environment.foundationUrl;
+    this.inputLookupObj2.urlEnviPaging = environment.FoundationR3Url;
     console.log("masuk");
     this.orgJobTitleObj = new OrgJobTitleObj();
     this.InitForm();

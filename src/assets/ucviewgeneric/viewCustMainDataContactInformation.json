@@ -4,26 +4,26 @@
       {
         "subSectionId": "viewCustMainDataContactInformationId",
         "subSectionTitle": "Contact Information",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
-            "label": "Mobile Phone 1",
+            "label": "MOBILE PHONE 1",
             "property": "MobilePhone1"
           },
           {
             "type": "text",
-            "label": "Mobile Phone 2",
+            "label": "MOBILE PHONE 2",
             "property": "MobilePhone2"
           },
           {
             "type": "text",
-            "label": "Email 1",
+            "label": "EMAIL 1",
             "property": "Email1"
           },
           {
             "type": "text",
-            "label": "Email 2",
+            "label": "EMAIL 2",
             "property": "Email2"
           }
         ],

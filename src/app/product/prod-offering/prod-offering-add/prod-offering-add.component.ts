@@ -9,6 +9,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcLookupObj } from 'app/shared/model/UcLookupObj.Model';
 import { formatDate } from '@angular/common';
 import { environment } from 'environments/environment';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-prod-offering-add',
@@ -52,22 +53,41 @@ export class ProdOfferingAddComponent implements OnInit {
 
   ngOnInit() {
     this.inputLookupObj = new UcLookupObj();
-    this.inputLookupObj.urlJson = "./assets/uclookup/lookupProdOffering.json";
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupObj.pagingJson = "./assets/uclookup/lookupProdOffering.json";
-    this.inputLookupObj.genericJson = "./assets/uclookup/lookupProdOffering.json";
+    
 
     var context = JSON.parse(localStorage.getItem("UserAccess"));
 
-    var arrCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.propName = 'O.OFFICE_CODE';
-    critObj.value = context["OfficeCode"];
-    arrCrit.push(critObj);
-    this.inputLookupObj.addCritInput = arrCrit;
+    var currOfcCode = context["OfficeCode"];
+    if(currOfcCode == "HO")
+    {
+      this.inputLookupObj.urlJson = "./assets/uclookup/product/lookupProductForHO.json";
+      this.inputLookupObj.pagingJson = "./assets/uclookup/product/lookupProductForHO.json";
+      this.inputLookupObj.genericJson = "./assets/uclookup/product/lookupProductForHO.json";
+    }
+    else
+    {
+      this.inputLookupObj.urlJson = "./assets/uclookup/lookupProdOffering.json";
+      this.inputLookupObj.pagingJson = "./assets/uclookup/lookupProdOffering.json";
+      this.inputLookupObj.genericJson = "./assets/uclookup/lookupProdOffering.json";
 
+      var arrCrit = new Array();
+      var critObj = new CriteriaObj();
+      critObj.restriction = AdInsConstant.RestrictionEq;
+      critObj.propName = 'O.OFFICE_CODE';
+      critObj.value = context["OfficeCode"];
+      arrCrit.push(critObj);
+
+      critObj = new CriteriaObj();
+      critObj.restriction = AdInsConstant.RestrictionEq;
+      critObj.propName = 'PBM.IS_ALLOWED_CRT';
+      critObj.value = '1';
+      arrCrit.push(critObj);
+
+      this.inputLookupObj.addCritInput = arrCrit;
+    }
+   
     if (this.mode == "edit") {
 
       this.ProdOfferingForm.controls.ProdOfferingCode.disable();
@@ -115,6 +135,7 @@ export class ProdOfferingAddComponent implements OnInit {
         }
       );
     } else {
+      
       this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
       this.prodOfferingObj.ProdOfferingId = "0";
       this.prodOfferingObj.RowVersion = "";
@@ -152,6 +173,7 @@ export class ProdOfferingAddComponent implements OnInit {
       );
     }
     else {
+      
       this.prodOfferingObj.ProdOfferingId = "0";
       this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
       this.prodOfferingObj.RowVersion = "";

@@ -16,7 +16,7 @@ import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 })
 export class MasterTypeAddEditComponent implements OnInit {
 
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
   apiUrl: any;
   parents: any;
   refRoleObj: RefRoleObj;

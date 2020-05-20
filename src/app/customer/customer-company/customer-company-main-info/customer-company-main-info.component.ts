@@ -6,8 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-customer-company-main-info',
-  templateUrl: './customer-company-main-info.component.html',
-  styleUrls: ['./customer-company-main-info.component.scss']
+  templateUrl: './customer-company-main-info.component.html'
 })
 export class CustomerCompanyMainInfoComponent implements OnInit {
 

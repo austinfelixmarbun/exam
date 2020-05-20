@@ -36,7 +36,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-2 adins-required-label" translate>Id Type</label>
+                  <label class="col-md-2 adins-required-label" translate>ID Type</label>
                   <div class="col-md-10">
                     <select class="form-control adInsInput" (change)="onOptionsSelected($event)" style="width: auto" formControlName="MrIdTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MrIdTypeCode.invalid }">
@@ -46,7 +46,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-2 adInsLabel" translate>Id Number</label>
+                  <label class="col-md-2 adInsLabel" translate>ID Number</label>
                   <div class="col-md-10">
                     <input type="text" class="form-control adInsInput" formControlName="IdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.IdNo.invalid}">
@@ -55,7 +55,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-2 adInsLabel"[ngClass]="{'adins-required-label' : tempKTPCheck==false}" translate>Id Expired Date</label>
+                  <label class="col-md-2 adInsLabel"[ngClass]="{'adins-required-label' : tempKTPCheck==false}" translate>ID Expired Date</label>
                   <div class="col-md-10">
                     <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.IdExpiredDt.invalid}">

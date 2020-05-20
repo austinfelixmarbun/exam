@@ -30,7 +30,7 @@ export class UserPagingComponent implements OnInit {
   ExcelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
   constructor(
     private service: NGXToastrService,
     private https: HttpClient,
@@ -40,7 +40,7 @@ export class UserPagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchUser.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetRefUserPaging;
     
     this.pageNow = 1;

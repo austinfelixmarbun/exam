@@ -26,6 +26,7 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
   StatusAffiliate : string;
   getCustCompanyUrl: string;
   getRefMasterByMasterCodeUrl: string;
+  custUrl: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
@@ -40,6 +41,8 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
         this.IdCust = params["CustId"];
       }
     });
+
+    this.custUrl = '../Customer/CustomerView/Page?CustId=' + this.IdCust;
   }
   ngOnInit() {
     
@@ -47,8 +50,9 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
     this.custObj.CustId = this.IdCust;
     this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
       (response) => {
-
         this.tempCustObj = response;
+        console.log("aaa")
+        console.log(this.tempCustObj)
         var refMasterObjMrCustModelCode = {
           MasterCode: this.tempCustObj.MrCustModelCode
         }
@@ -68,6 +72,7 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
           this.StatusAffiliate = "No";
         } 
       });
+
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj.CustId = this.IdCust;
     this.http.post(this.getCustCompanyUrl, this.custCompanyObj).subscribe(

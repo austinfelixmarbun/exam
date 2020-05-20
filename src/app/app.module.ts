@@ -99,7 +99,7 @@ export class AppModule {
         // localStorage.setItem("LocalIp", window.location.origin);
         // console.log(window.location.origin); // 192.168.0.122
 
-        // var url = environment.foundationUrl + AdInsConstant.GetBusinessDt;
+        // var url = environment.FoundationR3Url + AdInsConstant.GetBusinessDt;
         // this.http.post(url, null).subscribe(
         //     (response) => {
         //         var datePipe = new DatePipe("en-US");

@@ -29,14 +29,14 @@ export class MenuSettingComponent implements OnInit {
   orderByValue: boolean = true;
   editUrl: any;
 
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
   refCoyId: any;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchRefForm.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetRefFormPaging;
 
     this.pageNow = 1;

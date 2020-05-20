@@ -1,25 +1,37 @@
-import { Component, OnInit, Input } from '@angular/core'; 
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-customer-company-management-shareholder',
   templateUrl: './customer-company-management-shareholder.component.html',
-  styleUrls: ['./customer-company-management-shareholder.component.scss']
+  styleUrls: []
 })
 export class CustomerCompanyManagementShareholderComponent implements OnInit {
-  @Input () custCompanyId: number;
-  mode: string;  
+  @Input() custCompanyId: number;
+  @Output() outputTab: EventEmitter<object> = new EventEmitter();
+
+  mode: string;
   CustCompanyMgmntShrholderId: number;
-  
-  constructor() {  
+
+  constructor() {
   }
 
   ngOnInit() {
-     this.mode = "check";
+    this.mode = "check";
     console.log(this.custCompanyId);
   }
-  terimaValue(ev){
+  terimaValue(ev) {
     console.log(ev);
-    this.mode = ev.mode; 
-    this.CustCompanyMgmntShrholderId =  ev.CustCompanyMgmntShrholderId;
+    this.mode = ev.mode;
+    this.CustCompanyMgmntShrholderId = ev.CustCompanyMgmntShrholderId;
+
+    if (ev.stepMode != undefined) {
+      this.outputTab.emit({ stepMode: ev.stepMode })
+    }
+  }
+  next() {
+    this.outputTab.emit({ stepMode: 'next'});
+  }
+  back() {
+    this.outputTab.emit({ stepMode: 'previous'});
   }
 }

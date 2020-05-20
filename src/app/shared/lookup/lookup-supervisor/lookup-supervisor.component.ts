@@ -41,7 +41,7 @@ export class LookupSupervisorComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
   closeResult: string;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
 
   addCrit: Array<any>;
 

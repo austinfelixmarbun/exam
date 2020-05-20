@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { WizardComponent } from 'angular-archwizard';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -13,7 +12,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 @Component({
   selector: 'app-customer-company-management-shareholder-company',
   templateUrl: './customer-company-management-shareholder-company.component.html',
-  styleUrls: ['./customer-company-management-shareholder-company.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderCompanyComponent implements OnInit {
@@ -44,7 +43,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     IsSigner: [false],
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
     this.getCustCompanyMgmntShrholderUrl = AdInsConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;

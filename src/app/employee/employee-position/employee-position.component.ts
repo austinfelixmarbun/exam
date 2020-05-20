@@ -33,7 +33,7 @@ export class EmployeePositionComponent implements OnInit {
   empPositionObj: EmpPositionObj;
   apiUrl: any;
   deleteUrl: any;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
@@ -63,7 +63,7 @@ export class EmployeePositionComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchEmpList.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetEmpPositionPaging;
     this.getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
 

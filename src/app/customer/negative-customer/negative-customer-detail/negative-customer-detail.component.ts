@@ -19,7 +19,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 @Component({
   selector: 'app-negative-customer-detail',
   templateUrl: './negative-customer-detail.component.html',
-  styleUrls: ['./negative-customer-detail.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class NegativeCustomerDetailComponent implements OnInit {

@@ -490,4 +490,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
   }
 
+  Back(){
+    if(this.mode == "edit"){
+      this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": this.VendorId} });
+    }else{
+      this.router.navigate(['/Vendor/Branch/Paging']);
+    }
+  }
 }

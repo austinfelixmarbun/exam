@@ -1,6 +1,6 @@
 <lib-ucSubsection [id]="'CustBankAccId'" [title]="'Customer Bank Account'" [panel]="'CustBankAccSection'"></lib-ucSubsection>
 <div id="CustBankAccSection">
-  <div class="col-md-12" style="text-align: right;">
+  <div style="text-align: right;">
     <span class="mr-1">
       <button type="button" class="addButton" (click)="custBankHandler('add', '0')" style="margin-right: 0!important;" translate>
         <i class="ft-plus-circle"></i> Add
@@ -30,19 +30,19 @@
             <thead>
               <tr class="table-header">
                 <th style="text-align: left;">
-                  <span class="thead-header" name='month' translate>Month</span>
+                  <span class="thead-header" name='month' translate>MONTH</span>
                 </th>
                 <th style="text-align: left;">
-                  <span class="thead-header" name='year' translate>Year</span>
+                  <span class="thead-header" name='year' translate>YEAR</span>
                 </th>
                 <th style="text-align: left;">
-                  <span class="thead-header" name='debit' translate>Debit (-)</span>
+                  <span class="thead-header" name='debit' translate>DEBIT (-)</span>
                 </th>
                 <th style="text-align: left;">
-                  <span class="thead-header" name='credit' translate>Credit (+)</span>
+                  <span class="thead-header" name='credit' translate>CREDIT (+)</span>
                 </th>
                 <th style="text-align: left;">
-                  <span class="thead-header" name='endingBalance' translate>Ending Balance</span>
+                  <span class="thead-header" name='endingBalance' translate>ENDING BALANCE</span>
                 </th>
               </tr>
             </thead>
@@ -50,9 +50,9 @@
               <tr *ngFor="let stmnt of item.BankStmntList">
                 <td style="text-align: left;">{{stmnt.Month}}</td>
                 <td style="text-align: left;">{{stmnt.Year}}</td>
-                <td style="text-align: left;">{{stmnt.DebitAmt}}</td>
-                <td style="text-align: left;">{{stmnt.CreditAmt}}</td>
-                <td style="text-align: left;">{{stmnt.BalanceAmt}}</td>
+                <td style="text-align: left;">{{stmnt.DebitAmt | number:'.2':'en-US'}}</td>
+                <td style="text-align: left;">{{stmnt.CreditAmt | number:'.2':'en-US'}}</td>
+                <td style="text-align: left;">{{stmnt.BalanceAmt | number:'.2':'en-US'}}</td>
               </tr>
             </tbody>
           </table>
