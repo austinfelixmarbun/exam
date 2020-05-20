@@ -45,7 +45,8 @@
         <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}</td>
         <td style="text-align: left;">{{item.Notes}}</td>
         <td style="text-align: left;">
-          <span *ngIf="item.MrCustAddrTypeCode != 'Legal Address'" (click)="editItem(item)"
+          
+          <span *ngIf="item.MrCustAddrTypeCode != 'Legal' || From != 'CustPaging'" (click)="editItem(item)"
             class="material-icons">edit</span>
         </td>
       </tr>
@@ -55,11 +56,4 @@
 <br>
 <br>
 <br>
-<div class="form-actions right" style="text-align: right;">
-  <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
-    <i class="ft-x"></i> Back
-  </button>
-  <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
-    <i class="fa fa-check-square-o"></i> Save and Continue
-  </button>
-</div>
+ 

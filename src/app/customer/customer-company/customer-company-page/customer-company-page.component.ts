@@ -83,7 +83,7 @@ export class CustomerCompanyPageComponent implements OnInit {
   getValue(ev: any) {
     console.log(ev);
 
-    if (ev.CustPersonalId != undefined)
+    if (ev.CustCompanyId != undefined)
       this.CustCompanyId = ev.CustCompanyId;
 
     if (ev.stepMode != undefined) {

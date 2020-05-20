@@ -9,9 +9,16 @@ export const environment = {
   settingUrl: 'http://r3app.ad-ins.com/setting', //'https://localhost:4999',
   localHostUrl: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
   r2AppServerUrl: 'http://R2AppServer/POC/api',
+<<<<<<< HEAD
   losUrl : 'http://r3web-server.ad-ins.com/LOSR3/pages/login',
   FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
   // FoundationR3Url: 'http://localhost:5000',
+=======
+  //losUrl : 'http://r3web-server.ad-ins.com/LOSR3/pages/login',
+  losUrl : 'http://localhost:4300/pages/login',
+  FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
+  //FoundationR3Url: 'http://localhost:5000',
+>>>>>>> 34b4d7188ad0d1dbadf3e45792b768e9677c730e
   Module:"FOU",
   ApprovalURL : 'http://r3app-server/APPROVAL'
 };
