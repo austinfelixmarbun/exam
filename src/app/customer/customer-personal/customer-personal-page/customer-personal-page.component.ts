@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CustObj } from 'app/shared/model/CustObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import Stepper from 'bs-stepper';
@@ -24,14 +27,19 @@ export class CustomerPersonalPageComponent implements OnInit {
   isAddress: boolean;
   isContact: boolean;
   isFinancial: boolean;
+  Page: string;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
+      if (params["Page"] != null) {
+        this.Page = params["Page"];
+      }
     });
   }
+  
 
   CustStep = {
     "Detail": 1,
@@ -43,6 +51,14 @@ export class CustomerPersonalPageComponent implements OnInit {
     "Other": 7
   }
 
+  back() {
+    if (this.Page != null) {
+      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    } else {
+      this.router.navigate(["/Customer/Paging"]);
+    }
+  }
+ 
   ngOnInit() {
     this.stepper = new Stepper(document.querySelector('#stepper1'), {
       linear: false,

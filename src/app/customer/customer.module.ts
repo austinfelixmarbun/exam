@@ -84,6 +84,20 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
 import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
 import { MatTabsModule } from '@angular/material';
+import { NgxCurrencyModule } from "ngx-currency";
+
+export const customCurrencyMaskConfig = {     
+  align: "left",     
+  allowNegative: true,     
+  allowZero: true,     
+  decimal: ".",     
+  precision: 2,     
+  prefix: "",     
+  suffix: "",     
+  thousands: ",",     
+  nullable: false 
+};
+
  @NgModule({
   exports: [],
   imports: [
@@ -106,7 +120,8 @@ import { MatTabsModule } from '@angular/material';
     UcaddressModule,
     UcShowErrorsModule,
     UcinputnumberModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [
     CustomerPagingComponent,

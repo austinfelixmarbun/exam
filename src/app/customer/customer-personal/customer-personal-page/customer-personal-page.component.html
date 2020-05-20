@@ -5,8 +5,16 @@
         <div class="addEdit">
           <form class="form form-horizontal">
             <div class="form-body">
-              <h4 class="form-section card-title" translate> Customer Personal
-              </h4>
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title" id="horz-layout-colored-controls" translate> Customer Personal</h4>
+                </div>
+                <div class="col-md-4" style="text-align-last: right">
+                  <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+                    <i class="ft-x"></i> Cancel
+                  </button>
+                </div>
+              </div>
             </div>
           </form>
           <app-customer-view-header-personal> </app-customer-view-header-personal>

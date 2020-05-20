@@ -39,6 +39,15 @@ export class CustomerCompanyPageComponent implements OnInit {
       }
     });
   }
+  
+  back() {
+    if (this.Page != null) {
+      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    } else {
+      this.router.navigate(["/Customer/Paging"]);
+    }
+  }
+
   ngOnInit() {
     console.log(this.IdCust);
     if (this.IdCust == null) {

@@ -50,9 +50,9 @@
               <tr *ngFor="let stmnt of item.BankStmntList">
                 <td style="text-align: left;">{{stmnt.Month}}</td>
                 <td style="text-align: left;">{{stmnt.Year}}</td>
-                <td style="text-align: left;">{{stmnt.DebitAmt}}</td>
-                <td style="text-align: left;">{{stmnt.CreditAmt}}</td>
-                <td style="text-align: left;">{{stmnt.BalanceAmt}}</td>
+                <td style="text-align: left;">{{stmnt.DebitAmt | number:'.2':'en-US'}}</td>
+                <td style="text-align: left;">{{stmnt.CreditAmt | number:'.2':'en-US'}}</td>
+                <td style="text-align: left;">{{stmnt.BalanceAmt | number:'.2':'en-US'}}</td>
               </tr>
             </tbody>
           </table>

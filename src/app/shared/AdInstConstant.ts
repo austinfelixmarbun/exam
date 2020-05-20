@@ -704,6 +704,7 @@ export class AdInsConstant {
   public static GetCustCompanyForUpdateByCustNo = environment.FoundationR3Url + "/Cust/GetCustCompanyForUpdateByCustNo";
   public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
   public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
+  public static GetCustByCustNo = environment.FoundationR3Url + "/Cust/GetCustByCustNo";
 
   // CUSTOMER COMPANY
   public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
@@ -767,7 +768,7 @@ export class AdInsConstant {
   public static EditCustCompanyContactPersonByCustCompanyId = environment.FoundationR3Url + "/CustCompanyContactPerson/EditCustCompanyContactPersonByCustCompanyId"
   // CUSTOMER COMPANY MANAGEMENT SHAREHOLDER
   public static AddCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholder"
-  public static GetListCustCompanyMgmntShrholderByCustCompanyId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderByCustCompanyId"
+  public static GetListCustCompanyMgmntShrholderByCustCompanyId = "http://localhost:5000" + "/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderByCustCompanyId"
   public static DeleteCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholder"
   public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId"
   public static EditCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholder"
