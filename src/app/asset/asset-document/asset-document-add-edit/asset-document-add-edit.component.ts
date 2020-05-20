@@ -34,7 +34,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
   AssetDocListId: number;
   apiUrl: string;
   settingUrl: string = environment.FoundationR3Url;
-  urlEnviPaging: string = environment.foundationUrl;
+  urlEnviPaging: string = environment.FoundationR3Url;
   result: AssetDocListObj;
   assetDocListObj: AssetDocListObj;
   GetListRefAssetDocUrl: string;

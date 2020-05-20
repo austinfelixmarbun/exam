@@ -34,7 +34,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   addUrl: any;
   arrCrit: any;
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   settingUrl: string = environment.settingUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;

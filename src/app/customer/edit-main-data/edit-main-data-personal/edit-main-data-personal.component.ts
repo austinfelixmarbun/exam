@@ -194,9 +194,9 @@ export class EditMainDataPersonalComponent implements OnInit {
             this.toastr.successMessage(response["Message"]);
             
             if (this.From == "EditMainData") {
-              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit' } });
+              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'EditMainData' } });
             } else {
-              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId } });
+              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId,From:'CustPaging' } });
             } 
           },
           error => {

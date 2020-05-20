@@ -29,6 +29,7 @@ export class AdInsConstant {
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
   public static Login = "/Authenticate/Login";
+  public static LoginWithToken = environment.FoundationR3Url+"/Authenticate/LoginWithToken";
   public static LoginToken = "/UserManagement/HTML6Login";
   public static Logout = "/UserManagement/LogOut"
   public static GetListOffice = "/RefOffice/GetRefOfficePaging";
@@ -398,7 +399,7 @@ export class AdInsConstant {
   //REF MODULE
   public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
   public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
-  public static GetListKeyValueRefModuleById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
+  public static GetListKeyValueRefModuleById = environment.FoundationR3Url + "/RefModule/GetListKeyValueRefModuleById";
 
   //REF EMP LEAVE MANAGEMENT
   public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
@@ -703,6 +704,7 @@ export class AdInsConstant {
   public static GetCustCompanyForUpdateByCustNo = environment.FoundationR3Url + "/Cust/GetCustCompanyForUpdateByCustNo";
   public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
   public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
+  public static GetCustByCustNo = environment.FoundationR3Url + "/Cust/GetCustByCustNo";
 
   // CUSTOMER COMPANY
   public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
@@ -766,7 +768,7 @@ export class AdInsConstant {
   public static EditCustCompanyContactPersonByCustCompanyId = environment.FoundationR3Url + "/CustCompanyContactPerson/EditCustCompanyContactPersonByCustCompanyId"
   // CUSTOMER COMPANY MANAGEMENT SHAREHOLDER
   public static AddCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholder"
-  public static GetListCustCompanyMgmntShrholderByCustCompanyId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderByCustCompanyId"
+  public static GetListCustCompanyMgmntShrholderByCustCompanyId = "http://localhost:5000" + "/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderByCustCompanyId"
   public static DeleteCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholder"
   public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId"
   public static EditCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholder"
@@ -827,13 +829,14 @@ export class AdInsConstant {
   public static EditRefFormData = environment.FoundationR3Url + "/RefForm/EditRefForm";
   public static AddRefFormData = environment.FoundationR3Url + "/RefForm/AddRefForm";
   public static GetRefFormDataByRefFormId = environment.FoundationR3Url + "/RefForm/GetRefFormByRefFormId"
+  public static DeleteRefFormData = "/RefForm/DeleteRefForm";
 
   //AUTH FORM
   public static AddListAuthForm = environment.FoundationR3Url + "/AuthForm/AddListAuthForm";
   public static GetListAuthFormByRefFormId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefFormId";
+  public static DeleteAuthForm = "/AuthForm/DeleteAuthForm";
+  public static GetListAuthFormByRefRoleId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefRoleId";
 
   // Workflow Engine
   public static ClaimTask = environment.FoundationR3Url + "/Workflow/ClaimTask";
-  public static DeleteAuthForm = "/AuthForm/DeleteAuthForm";
-  public static GetListAuthFormByRefRoleId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefRoleId";
 }

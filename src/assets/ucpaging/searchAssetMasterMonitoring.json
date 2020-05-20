@@ -3,6 +3,21 @@
     "exportExcel": true,
     "component": [
         {
+            "type": "dropdown",
+            "name": "UMH.OFFICE_CODE",
+            "id": "OriOfficeNameId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "http://r3app-server/FOUNDATION_R3/RefOffice/GetListKvpActiveRefOfficeForPaging",
+            "label": "Office Name",
+            "isQueryIn": true,
+            "items": [],
+            "itemsUrl": []
+        },
+        {
             "type": "textbox",
             "name": "UMH.FILE_NAME",
             "id": "FileNameId",
@@ -27,7 +42,7 @@
             "placeholder": "Placeholder",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefStatus/GetRefStatusByTrxTypeCode",
+            "url": "http://r3impl-appsvr.ad-ins.com/Foundation/RefStatus/GetRefStatusByTrxTypeCode",
             "label": "UPLOAD STATUS",
             "items": [],
             "itemsUrl": [],

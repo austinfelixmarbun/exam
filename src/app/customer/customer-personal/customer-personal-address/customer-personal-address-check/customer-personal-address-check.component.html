@@ -14,25 +14,25 @@
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
-        <th style="text-align: left;"><span class="thead-header" name='assetTypeName' translate>Address Type Name
+        <th style="text-align: left;"><span class="thead-header" name='assetTypeName' translate>ADDRESS TYPE NAME
           </span>
         </th>
-        <th style="text-align: left;"><span class="thead-header" name='fullAddress' translate>Address
+        <th style="text-align: left;"><span class="thead-header" name='fullAddress' translate>ADDRESS
           </span>
         </th>
-        <th style="text-align: left;"><span class="thead-header" name='buildingOwnership' translate>Building Ownership
+        <th style="text-align: left;"><span class="thead-header" name='buildingOwnership' translate>BUILDING OWNERSHIP
           </span>
         </th>
-        <th style="text-align: left;"><span class="thead-header" name='phone1' translate>Phone (Fix Line) 1
+        <th style="text-align: left;"><span class="thead-header" name='phone1' translate>PHONE (FIX LINE) 1
           </span>
         </th>
-        <th style="text-align: left;"><span class="thead-header" name='phone2' translate>Phone (Fix Line) 2
+        <th style="text-align: left;"><span class="thead-header" name='phone2' translate>PHONE (FIX LINE) 2
           </span>
         </th>
-        <th style="text-align: left;"><span class="thead-header" name='notes' translate>Notes
+        <th style="text-align: left;"><span class="thead-header" name='notes' translate>NOTES
           </span>
         </th>
-        <th style="text-align: left;"><span class="thead-header" translate>Action
+        <th style="text-align: left;"><span class="thead-header" translate>ACTION
           </span>
         </th>
       </tr>
@@ -46,8 +46,9 @@
         <td style="text-align: left;">{{item.PhnArea1}}-{{item.Phn1}}</td>
         <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}</td>
         <td style="text-align: left;">{{item.Notes}}</td>
+
         <td style="text-align: center;">
-          <a *ngIf="item.MrCustAddrTypeCode != 'Legal Address'"
+          <a *ngIf="item.MrCustAddrTypeCode != 'Legal' || From != 'CustPaging'"
             (click)="editItem(item)">
             <i class="fa fa-pen"></i>
           </a>

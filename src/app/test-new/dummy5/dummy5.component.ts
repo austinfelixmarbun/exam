@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { InputReportObj } from '../dummy7/InputReportObj.model';
 
 @Component({
   selector: 'app-dummy5',
@@ -10,11 +11,16 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 })
 export class Dummy5Component implements OnInit {
 
+  inputReportObj: InputReportObj = new InputReportObj();
   inputObj: any;
   resultData: any;
   constructor() { }
 
   ngOnInit() {
+    this.inputReportObj.JsonPath = "./assets/ucreport/ReportDummy.json";
+    this.inputReportObj.EnvironmentUrl = environment.FoundationR3Url;
+    this.inputReportObj.ApiReportPath = "/Report/GenerateReportSync";
+
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/ucpaging/searchTest.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;

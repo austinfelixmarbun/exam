@@ -45,19 +45,21 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th class="text-left"><span translate class="thead-header" name='Name'>Name</span></th>
-            <th class="text-left"><span translate class="thead-header" name='MrEmployeePosition'>Position</span></th>
-            <th class="text-left"><span translate class="thead-header" name='Phone1'>Phone 1</span></th>
-            <th class="text-left"><span translate class="thead-header" name='Phone2'>Phone 2</span></th>
-            <th class="text-left"><span translate class="thead-header" name='Email'>E-mail</span></th>
-            <th class="text-left"><span translate class="thead-header" name='JoinDate'>Join Date</span></th>
-            <th class="text-left"><span translate class="thead-header" name='IsOwner'>Owner</span></th>
-            <th class="text-left"><span translate class="thead-header" name='Addr'>Address</span></th>
-            <th class="text-left"><span translate class="thead-header" name='Zipcode'>Zip Code</span></th>
-            <th class="text-left"><span translate class="thead-header" name='AreaCode2'>Kelurahan</span></th>
-            <th class="text-left"><span translate class="thead-header" name='AreaCode1'>Kecamatan</span></th>
-            <th class="text-left"><span translate class="thead-header" name='City'>City</span></th>
-            <th class="text-left"><span translate class="thead-header" name='Province'>Provice</span></th>
+            <th class="text-left"><span class="thead-header" name='Name' translate>Name
+                Code</span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='MrEmployeePosition' translate>Position
+              </span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='Phone1' translate>Phone 1
+              </span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='IsOwner' translate>Owner
+              </span>
+            </th>
+            <th class="text-left"><span class="thead-header" name='Addr' translate>Address
+            </span>
+          </th>
           </tr>
         </thead>
         <tbody>
@@ -65,16 +67,9 @@
             <td class="text-left">{{item.Name}}</td>
             <td class="text-left">{{item.MrEmployeePosition}}</td>
             <td class="text-left">{{item.Phone1}}</td>
-            <td class="text-left">{{item.Phone2}}</td>
-            <td class="text-left">{{item.Email}}</td>
-            <td class="text-left">{{item.JoinDate}}</td>
-            <td class="text-left">{{item.IsOwner}}</td>
+            <td class="text-left" *ngIf="item.IsOwner === true">Yes</td>
+            <td class="text-left" *ngIf="item.IsOwner === false">No</td>
             <td class="text-left">{{item.Addr}}</td>
-            <td class="text-left">{{item.Zipcode}}</td>
-            <td class="text-left">{{item.AreaCode2}}</td>
-            <td class="text-left">{{item.AreaCode1}}</td>
-            <td class="text-left">{{item.City}}</td>
-            <td class="text-left">{{item.Province}}</td>
           </tr>
         </tbody>
       </table>

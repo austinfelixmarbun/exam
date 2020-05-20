@@ -6,12 +6,11 @@ import { FormBuilder } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model'; 
-import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-customer-company-address-check',
   templateUrl: './customer-company-address-check.component.html',
-  styleUrls: ['./customer-company-address-check.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class CustomerCompanyAddressCheckComponent implements OnInit {
@@ -24,13 +23,16 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   listCustAddr: any;
   getCustByIdUrl: string;
   getListCustAddrUrl: string;
-
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+  From : string;
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustByIdUrl = AdInsConstant.GetCustByCustId;
     this.getListCustAddrUrl = AdInsConstant.GetListCustAddr;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
+      }
+      if (params["From"] != null) {
+        this.From = params["From"];
       }
     });
   }
@@ -57,10 +59,5 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   addAddr() {
     this.outputValue.emit({ mode: 'add' });    
   }
-  next() {
-    this.wizard.goToNextStep();
-  }
-  back(){
-    this.wizard.goToPreviousStep();
-  }
+   
 }

@@ -4,26 +4,26 @@
       {
         "subSectionId": "AssetSchmId",
         "subSectionTitle": "Asset Scheme",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
-            "label": "Asset Scheme Code",
+            "label": "ASSET SCHEME CODE",
             "property": "AssetSchmCode"
           },
           {
             "type": "text",
-            "label": "Asset Scheme Name",
+            "label": "ASSET SCHEME NAME",
             "property": "AssetSchmName"
           },
           {
             "type": "text",
-            "label": "Asset Type Name",
+            "label": "ASSET TYPE NAME",
             "property": "AssetTypeName"
           },
           {
             "type": "boolean",
-            "label": "Active Status",
+            "label": "ACTIVE STATUS",
             "property": "IsActive"
           }
          

@@ -14,7 +14,7 @@ import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
   providers: [NGXToastrService]
 })
 export class AssetTypeAddEditComponent implements OnInit {
-  ItemMaxHierarchyLevelNumber = [1, 2, 3, 4, 5];
+  ItemMaxHierarchyLevelNumber: Array<number> = [1, 2, 3, 4, 5];
   HierarchyNumber: number;
   AssetTypeForm = this.fb.group({
     AssetTypeCode: ['', Validators.required],
@@ -37,7 +37,8 @@ export class AssetTypeAddEditComponent implements OnInit {
         label: ['Hierarchy Level 1 Label'],
         values: [''],
       })
-    ])
+    ]),
+    TotalSerialNo: ['', [Validators.required]]
   });
   getUrl: string;
   addUrl: string;
@@ -48,7 +49,9 @@ export class AssetTypeAddEditComponent implements OnInit {
   resultData: AssetTypeObj;
   RowVersion: string;
   assetTypeCode: string;
-  getGeneralSettingUrl = AdInsConstant.GetGeneralSettingByCode;
+  getGeneralSettingUrl: string = AdInsConstant.GetGeneralSettingByCode;
+  serialNoOptions: Array<number> = [1,2,3,4,5];
+  serialNoShown: Array<boolean> = [false,false,false,false,false];
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getUrl = AdInsConstant.GetAssetTypeById;
@@ -108,6 +111,27 @@ export class AssetTypeAddEditComponent implements OnInit {
             (response: AssetTypeObj) => {
               this.resultData = response;
               this.RowVersion = this.resultData.RowVersion;
+              if(this.resultData.SerialNo1Label != null){
+                this.serialNoShown[0] = true;
+              }
+              if(this.resultData.SerialNo2Label != null){
+                this.serialNoShown[1] = true;
+              }
+              if(this.resultData.SerialNo3Label != null){
+                this.serialNoShown[2] = true;
+              }
+              if(this.resultData.SerialNo4Label != null){
+                this.serialNoShown[3] = true;
+              }
+              if(this.resultData.SerialNo5Label != null){
+                this.serialNoShown[4] = true;
+              }
+              var totalSerialCount = 0;
+              for(var i = 0; i < this.serialNoShown.length; i++){
+                if(this.serialNoShown[i]){
+                  totalSerialCount++;
+                }
+              }
               this.AssetTypeForm.patchValue({
                 AssetTypeCode: this.resultData.AssetTypeCode,
                 AssetTypeName: this.resultData.AssetTypeName,
@@ -123,7 +147,8 @@ export class AssetTypeAddEditComponent implements OnInit {
                 IsMndtrySerialNo5: this.resultData.IsMndtrySerialNo5,
                 IsLoanObj: this.resultData.IsLoanObj,
                 IsActive: this.resultData.IsActive,
-                MaxHierarchyLevel: this.resultData.MaxHierarchyLevel
+                MaxHierarchyLevel: this.resultData.MaxHierarchyLevel,
+                TotalSerialNo: totalSerialCount
               });
               this.assetTypeCode = this.resultData.AssetTypeCode;
               this.clearHierarchyArr();
@@ -141,6 +166,25 @@ export class AssetTypeAddEditComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  totalSerialNoHandler(){
+    var totalSerialNo = this.AssetTypeForm.controls["TotalSerialNo"].value;
+    this.AssetTypeForm.patchValue({
+      SerialNo1Label: '',
+      SerialNo2Label: '',
+      SerialNo3Label: '',
+      SerialNo4Label: '',
+      SerialNo5Label: '',
+      IsMndtrySerialNo1: '',
+      IsMndtrySerialNo2: '',
+      IsMndtrySerialNo3: '',
+      IsMndtrySerialNo4: '',
+      IsMndtrySerialNo5: ''
+    });
+    for(var i = 0; i < totalSerialNo; i++){
+      this.serialNoShown[i] = true;
+    }
   }
 
   SaveForm() {

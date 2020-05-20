@@ -35,13 +35,13 @@ export class UploadMonitoringComponent implements OnInit {
   orderByKey: any = null;
   orderByValue = true;
 
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = './assets/search/searchUploadMonitoring.json';
-    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetUploadMonitoringPaging;
 
     this.pageNow = 1;
