@@ -25,7 +25,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'TaskWF',
+        path: 'ViewOrderExternal',
         component: SurveyOrderTaskWfComponent,
         data: {
           title: 'Survey Order Task'

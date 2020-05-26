@@ -169,7 +169,7 @@ export class NotificationAddEditComponent implements OnInit {
     }
     else
     {
-      var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+      var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
 
       if (this.mode == "add") 
       {

@@ -116,7 +116,7 @@ export class SearchV2Component implements OnInit {
           var request = new RequestCriteriaObj();
           var arrayCrit = new Array();
           var criteriaObject = new CriteriaObj();
-          var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+          var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
 
           criteriaObject.DataType = "text";
           criteriaObject.propName = "officeCode";
@@ -135,7 +135,7 @@ export class SearchV2Component implements OnInit {
         //pengecekan tanggal
         if (data.component[i].type == "datepicker") {
           if (data.component[i].value.includes("BD")) {
-            let businessDate = new Date(JSON.parse(localStorage.getItem("UserContext")).BusinessDate);
+            let businessDate = new Date(JSON.parse(localStorage.getItem("UserAccess")).BusinessDate);
             var operator = data.component[i].value.charAt(2);
             var dateShow = new Date();
             if (operator == "-") {

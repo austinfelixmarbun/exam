@@ -240,7 +240,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         );
       }
       else if(this.pageType == "editStmnt"){
-        var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+        var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
         var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
         var listCustBankStmntD = new Array<CustBankStmntDObj>();
         var totalBalance = 0;
