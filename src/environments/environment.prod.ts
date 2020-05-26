@@ -5,11 +5,11 @@
 
 export const environment = {
     production: true,
-    navbarColor: 'blue',
+    navbarColor: 'transparent',
     settingUrl: 'http://r3app.ad-ins.com/setting', //'https://localhost:4999',
     localHostUrl: 'http://r3impl-appsvr.ad-ins.com/Foundation',
     r2AppServerUrl: 'http://R2AppServer/POC/api',
-    losUrl : 'http://r3web.ad-ins.com/LOSR3/pages/login',
+    losUrl : 'http://r3web-server.ad-ins.com/LOSR3/pages/login',
     FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
     Module:"FOU",
     //FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3', 
