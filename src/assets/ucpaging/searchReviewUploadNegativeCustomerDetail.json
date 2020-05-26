@@ -74,7 +74,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT FULL_ASSET_CODE AS FullAssetCode, SERIAL_NO_1 AS SerialNo1, SERIAL_NO_2 AS SerialNo2, SERIAL_NO_3 AS SerialNo3, SERIAL_NO_4 AS SerialNo4, SERIAL_NO_5 AS SerialNo5, MR_SOURCE_TYPE_CODE AS MrSourceTypeCode, NOTES AS Notes",
+        "select": "SELECT FULL_ASSET_CODE AS FullAssetCode, SERIAL_NO_1 AS SerialNo1, SERIAL_NO_2 AS SerialNo2, SERIAL_NO_3 AS SerialNo3, SERIAL_NO_4 AS SerialNo4, SERIAL_NO_5 AS SerialNo5, MR_NEG_ASSET_SOURCE_CODE AS MrNegAssetSourceCode, NOTES AS Notes",
         "from": "FROM dbo.UPLOAD_ASSET_NEGATIVE WITH(NOLOCK)"
     },
     "headerList": [
