@@ -134,7 +134,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     changeModul(modul: string) {
         var token = localStorage.getItem("Token");
-        var url = environment.losUrl + "?token=" + token;
+        var url = environment.LosURL+AdInsConstant.LoginURLFrontEnd + "?token=" + token;
         window.open(url, "_blank");
     }
 
