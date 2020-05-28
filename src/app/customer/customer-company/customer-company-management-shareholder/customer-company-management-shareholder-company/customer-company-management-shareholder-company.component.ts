@@ -18,6 +18,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 export class CustomerCompanyManagementShareholderCompanyComponent implements OnInit {
   @Input() custCompanyId: number;
   @Input() CustCompanyMgmntShrholderId: number;
+  @Input() TotalShare : number;
   @Output () outputValue : EventEmitter<object> = new EventEmitter();
 
   inputLookupCustCompanyObj : InputLookupObj;
@@ -113,7 +114,14 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     } 
   }
 
-  SaveValue() { 
+  LeftShare: number;
+  SaveValue() {
+    if(this.TotalShare > 100){
+      this.LeftShare = 100 - this.TotalShare;
+      this.toastr.errorMessage("Total Share left is "+this.LeftShare);
+      return;
+    }
+
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
     this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
@@ -155,11 +163,12 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         }
       );
     }
-   
   }
+
   back(){
     this.outputValue.emit({mode : 'check'});
   }
+
   getLookUpCustomer(event) {
     console.log(event); 
     this.ManagementShareholderForm.patchValue({
