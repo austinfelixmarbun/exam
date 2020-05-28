@@ -28,9 +28,20 @@
                 </div>
               </div>
               <div class="form-group row adins-required">
-                <label class="col-md-4  adInsLabel" translate>Serial No 1 Label / Is Mandatory </label>
+                <label class="col-md-4  adInsLabel" translate>Total Serial No. Label </label>
                 <div class="col-md-7">
-                  <input type="text" class="form-control adInsInput" formControlName="SerialNo1Label">
+                  <select class="form-control adInsInput" formControlName="TotalSerialNo" (change)="totalSerialNoHandler()"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.TotalSerialNo.invalid }">
+                    <option *ngFor="let serialItem of serialNoOptions" [value]="serialItem">{{serialItem}}</option>
+                  </select>
+                  <show-errors [control]="AssetTypeForm.controls.TotalSerialNo" [submit]="enjiForm.submitted"></show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required" *ngIf="serialNoShown[0] == true">
+                <label class="col-md-4 adInsLabel" translate>Serial No 1 Label / Is Mandatory </label>
+                <div class="col-md-7">
+                  <input type="text" class="form-control adInsInput" formControlName="SerialNo1Label"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.SerialNo1Label.invalid }" />
                   <show-errors [control]="AssetTypeForm.controls.SerialNo1Label" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
@@ -38,10 +49,11 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMndtrySerialNo1" />
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row adins-required" *ngIf="serialNoShown[1] == true">
                 <label class="col-md-4  adInsLabel" translate>Serial No 2 Label / Is Mandatory </label>
                 <div class="col-md-7">
-                  <input type="text" class="form-control adInsInput" formControlName="SerialNo2Label">
+                  <input type="text" class="form-control adInsInput" formControlName="SerialNo2Label"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.SerialNo2Label.invalid }" />
                   <show-errors [control]="AssetTypeForm.controls.SerialNo2Label" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
@@ -49,10 +61,11 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMndtrySerialNo2" />
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row adins-required" *ngIf="serialNoShown[2] == true">
                 <label class="col-md-4  adInsLabel" translate>Serial No 3 Label / Is Mandatory </label>
                 <div class="col-md-7">
-                  <input type="text" class="form-control adInsInput" formControlName="SerialNo3Label">
+                  <input type="text" class="form-control adInsInput" formControlName="SerialNo3Label"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.SerialNo3Label.invalid }" />
                   <show-errors [control]="AssetTypeForm.controls.SerialNo3Label" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
@@ -60,10 +73,11 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMndtrySerialNo3" />
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row adins-required" *ngIf="serialNoShown[3] == true">
                 <label class="col-md-4  adInsLabel" translate>Serial No 4 Label / Is Mandatory </label>
                 <div class="col-md-7">
-                  <input type="text" class="form-control adInsInput" formControlName="SerialNo4Label">
+                  <input type="text" class="form-control adInsInput" formControlName="SerialNo4Label"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.SerialNo4Label.invalid }" />
                   <show-errors [control]="AssetTypeForm.controls.SerialNo4Label" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
@@ -71,10 +85,11 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMndtrySerialNo4" />
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row adins-required" *ngIf="serialNoShown[4] == true">
                 <label class="col-md-4  adInsLabel" translate>Serial No 5 Label / Is Mandatory </label>
                 <div class="col-md-7">
-                  <input type="text" class="form-control adInsInput" formControlName="SerialNo5Label">
+                  <input type="text" class="form-control adInsInput" formControlName="SerialNo5Label"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.SerialNo5Label.invalid }" />
                   <show-errors [control]="AssetTypeForm.controls.SerialNo5Label" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>

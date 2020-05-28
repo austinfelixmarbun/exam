@@ -4,31 +4,31 @@
       {
         "subSectionId": "viewCustCoyMainDataMainInfoId1",
         "subSectionTitle": "Main Info",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
-            "label": "Industry Type Name",
+            "label": "INDUSTRY TYPE NAME",
             "property": "IndTypeName"
           },
           {
             "type": "date",
-            "label": "Establishment Date",
+            "label": "ESTABLISHMENT DATE",
             "property": "EstDt"
           },
           {
             "type": "text",
-            "label": "Number Of Employee",
+            "label": "NUMBER OF EMPLOYEE",
             "property": "NumOfEmp"
           },
           {
             "type": "text",
-            "label": "Tanda Daftar Perusahaan (TDP)",
+            "label": "TANDA DAFTAR PERUSAHAAN (TDP)",
             "property": "RegNo"
           },
           {
             "type": "text",
-            "label": "Surat Izin Usaha Perdagangan (SIUP)",
+            "label": "SURAT IZIN USAHA PERDAGANGAN (SIUP)",
             "property": "LisNo"
           }
         ],

@@ -16,7 +16,7 @@ import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
   providers: [NGXToastrService]
 })
 export class UserChangePasswordComponent implements OnInit {
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   refUserObj: RefUserObj;
   refEmpObj: RefEmpObj = new RefEmpObj();
@@ -37,7 +37,7 @@ export class UserChangePasswordComponent implements OnInit {
     private toastr: NGXToastrService,
     private service: NGXToastrService
   ) {
-    var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
     this.username = currentUserContext.UserName;
   }
 

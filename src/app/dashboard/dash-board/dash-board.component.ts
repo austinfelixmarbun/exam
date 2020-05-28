@@ -13,7 +13,7 @@ export class DashBoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.Item = {Url : environment.FoundationR3Url + "/ThingsToDo/GetThingsToDoByRole", Module : "LOS"};
+    this.Item = {Url : environment.FoundationR3Url + "/ThingsToDo/GetThingsToDoByRole", Module : "FOU"};
   }
   
   showMessage(message: any) {

@@ -8,32 +8,32 @@
       "mainInfo": [
         {
           "type": "text",
-          "label": "Upload No",
+          "label": "UPLOAD NO.",
           "property": "UploadNo"
         },
         {
           "type": "text",
-          "label": "Office Name",
+          "label": "OFFICE NAME",
           "property": "OfficeName"
         },
         {
           "type": "text",
-          "label": "File Name",
+          "label": "FILE NAME",
           "property": "FileName"
         },
         {
           "type": "date",
-          "label": "Upload Date",
+          "label": "UPLOAD DATE",
           "property": "UploadDt"
         },
         {
           "type": "text",
-          "label": "Total Record",
+          "label": "TOTAL RECORD",
           "property": "TotalRecord"
         },
         {
           "type": "text",
-          "label": "Total Record Processed",
+          "label": "TOTAL RECORD PROCESSED",
           "property": "TotalRecordProcessed"
         }
       ],

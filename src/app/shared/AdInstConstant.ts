@@ -29,6 +29,7 @@ export class AdInsConstant {
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
   public static Login = "/Authenticate/Login";
+  public static LoginWithToken = environment.FoundationR3Url+"/Authenticate/LoginWithToken";
   public static LoginToken = "/UserManagement/HTML6Login";
   public static Logout = "/UserManagement/LogOut"
   public static GetListOffice = "/RefOffice/GetRefOfficePaging";
@@ -52,7 +53,7 @@ export class AdInsConstant {
   public static GetGeneralSettingById = environment.FoundationR3Url + "/GeneralSetting/GetGeneralSettingById";
   public static GetGeneralSettingValue = "/GeneralSetting/GetGeneralSettingValue";
   public static GetGeneralSettingByCode = environment.FoundationR3Url + "/GeneralSetting/GetGeneralSettingByCode";
-
+  public static GetListGeneralSettingByListGsCode = environment.FoundationR3Url + "/GeneralSetting/GetListGeneralSettingByListGsCode";
 
   //REF OFFICE
   public static GetRefOfficeObj = "/RefOffice/GetRefOfficeObj";
@@ -293,6 +294,7 @@ export class AdInsConstant {
   public static LoginByRole = "/Authenticate/LoginByRole";
   public static LoginByToken = "/Authenticate/LoginByToken";
   public static UpdateToken = "/Authenticate/UpdateRole";
+  public static LoginURLFrontEnd = "pages/login";
 
   //FORM FEATURE
   public static GetListRefFeature = "/RefFeature/GetListRefFeature";
@@ -399,7 +401,7 @@ export class AdInsConstant {
   //REF MODULE
   public static GetListRefModuleKeyValue = environment.FoundationR3Url + "/RefModule/GetListRefModuleKeyValue";
   public static GetListKeyValueByCode = environment.FoundationR3Url + "/RefModule/GetListKeyValueByCode";
-  public static GetListKeyValueRefModuleById = environment.FoundationR3Url + "/RefModule/GetListKeyValueById";
+  public static GetListKeyValueRefModuleById = environment.FoundationR3Url + "/RefModule/GetListKeyValueRefModuleById";
 
   //REF EMP LEAVE MANAGEMENT
   public static GetRefEmpLeaveMngmntPaging = "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
@@ -704,6 +706,7 @@ export class AdInsConstant {
   public static GetCustCompanyForUpdateByCustNo = environment.FoundationR3Url + "/Cust/GetCustCompanyForUpdateByCustNo";
   public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
   public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
+  public static GetCustByCustNo = environment.FoundationR3Url + "/Cust/GetCustByCustNo";
 
   // CUSTOMER COMPANY
   public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
@@ -791,7 +794,7 @@ export class AdInsConstant {
   public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
   public static GetNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetNegativeCustChangeTrxByNegativeCustId";
   public static GetListNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetListNegativeCustChangeTrxByNegativeCustId";
-
+  public static GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType =  environment.FoundationR3Url + '/NegativeCust/GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType';
   //REF BEHAVIOUR
   public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
   public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
@@ -828,13 +831,14 @@ export class AdInsConstant {
   public static EditRefFormData = environment.FoundationR3Url + "/RefForm/EditRefForm";
   public static AddRefFormData = environment.FoundationR3Url + "/RefForm/AddRefForm";
   public static GetRefFormDataByRefFormId = environment.FoundationR3Url + "/RefForm/GetRefFormByRefFormId"
+  public static DeleteRefFormData = "/RefForm/DeleteRefForm";
 
   //AUTH FORM
   public static AddListAuthForm = environment.FoundationR3Url + "/AuthForm/AddListAuthForm";
   public static GetListAuthFormByRefFormId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefFormId";
+  public static DeleteAuthForm = "/AuthForm/DeleteAuthForm";
+  public static GetListAuthFormByRefRoleId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefRoleId";
 
   // Workflow Engine
   public static ClaimTask = environment.FoundationR3Url + "/Workflow/ClaimTask";
-  public static DeleteAuthForm = "/AuthForm/DeleteAuthForm";
-  public static GetListAuthFormByRefRoleId = environment.FoundationR3Url + "/AuthForm/GetListAuthFormByRefRoleId";
 }

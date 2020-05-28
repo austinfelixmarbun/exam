@@ -11,7 +11,7 @@ import { UcAddressGroupComponent } from './uc-address-group/uc-address-group.com
 import { UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcpagingModule } from "@adins/ucpaging";
 import { UcSubsectionModule } from "@adins/uc-subsection";
-// import { UcaddressModule } from "@adins/ucaddress";
+ import { UcaddressModule } from "@adins/ucaddress";
 import { DummyComponent } from './dummy/dummy.component';
 import { ArchwizardModule } from "angular-archwizard";
 import { UcSubsectionComponent } from './uc-subsection/uc-subsection.component';
@@ -33,6 +33,8 @@ import { Step7Component } from './dummy6/step7/step7.component';
 import { Step8Component } from './dummy6/step8/step8.component';
 import { SharingComponentModule } from "app/shared/sharingcomponent.module";
 import { Dummy7Component } from './dummy7/dummy7.component';
+import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { UcreportModule } from "@adins/ucreport";
 
 @NgModule({
     imports: [
@@ -45,12 +47,13 @@ import { Dummy7Component } from './dummy7/dummy7.component';
         UclookupgenericModule,
         UcpagingModule,
         UcSubsectionModule,
-        // UcaddressModule,
+        UcaddressModule,
         ArchwizardModule,
         UcShowErrorsModule,
         UcinputnumberModule,
         NgxStepperModule,
-        SharingComponentModule
+        SharingComponentModule,
+        UcreportModule
     ],
     declarations: [
         Dummy1Component,
@@ -75,7 +78,8 @@ import { Dummy7Component } from './dummy7/dummy7.component';
     ],
     providers: [
         ArchwizardComponent,
-        ArchwizardModule
+        ArchwizardModule,
+        NGXToastrService
     ]
 })
 export class TestNewModule { }

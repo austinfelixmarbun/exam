@@ -4,127 +4,127 @@
       {
         "subSectionId": "FinDataId",
         "subSectionTitle": "Financial Data",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "currency",
-            "label": "Gross Monthly Income Amount",
+            "label": "GROSS MONTHLY INCOME AMOUNT",
             "property": "GmiA"
           },
           {
             "type": "currency",
-            "label": "Gross Profit Amount",
+            "label": "GROSS PROFIT AMOUNT",
             "property": "GpA"
           },
           {
             "type": "text",
-            "label": "Return Of Investment Percent",
+            "label": "RETURN OF INVESTMENT PERCENT",
             "property": "RoiP"
           },
           {
             "type": "text",
-            "label": "Return Of Equity Percent",
+            "label": "RETURN OF EQUITY PERCENT",
             "property": "RoeP"
           },
           {
             "type": "text",
-            "label": "Return Of Asset Percent",
+            "label": "RETURN OF ASSET PERCENT",
             "property": "RoaP"
           },
 
           {
             "type": "text",
-            "label": "Profit Margin Percent",
+            "label": "PROFIT MARGIN PERCENT",
             "property": "PmP"
           },
           {
             "type": "text",
-            "label": "Current Ratio Percent",
+            "label": "CURRENT RATION PERCENT",
             "property": "CrP"
           },
           {
             "type": "text",
-            "label": "Debt Equity Ratio Percent",
+            "label": "DEBT EQUITY RATIO PERCENT",
             "property": "DerP"
           },
           {
             "type": "text",
-            "label": "Investment Turn Over Percent",
+            "label": "INVESTMENT TURN OVER PERCENT",
             "property": "ItoP"
           },
           {
             "type": "text",
-            "label": "Account Receivable Turn Over Percent",
+            "label": "ACCOUNT RECEIVABLE TURN OVER PERCENT",
             "property": "AtoP"
           },          
           {
             "type": "text",
-            "label": "Growth Percent",
+            "label": "GROWTH PERCENT",
             "property": "GP"
           },
           {
             "type": "currency",
-            "label": "Working Capital Amount",
+            "label": "WORKING CAPITAL AMOUNT",
             "property": "WcA"
           },
           {
             "type": "currency",
-            "label": "Other Monthly Installment Amount",
+            "label": "OTHER MONTHLY INSTALLMENT AMOUNT",
             "property": "OmiA"
           },
           {
             "type": "date",
-            "label": "Date As Of",
+            "label": "DATE AS OF",
             "property": "Dtao"
           },
           {
             "type": "currency",
-            "label": "Revenue",
+            "label": "REVENUE",
             "property": "R"
           },
           {
             "type": "currency",
-            "label": "Operation Cost",
+            "label": "OPERATION COST",
             "property": "Oc"
           },
           {
             "type": "currency",
-            "label": "Profit Before Tax",
+            "label": "PROFIT BEFORE TAX",
             "property": "Pbt"
           },
           {
             "type": "currency",
-            "label": "Current Asset",
+            "label": "CURRENT ASSET",
             "property": "Ca"
           },
           {
             "type": "currency",
-            "label": "Nett Fixed Asset",
+            "label": "NETT FIXED ASSET",
             "property": "Nfa"
           },
           {
             "type": "currency",
-            "label": "Total Asset",
+            "label": "TOTAL ASSET",
             "property": "Ta"
           },
           {
             "type": "currency",
-            "label": "Current Liabilities",
+            "label": "CURRENT LIABILITIES",
             "property": "Cl"
           },
           {
             "type": "currency",
-            "label": "Long Term Liabilities",
+            "label": "LONG TERM LIABILITIES",
             "property": "Ltl"
           },
           {
             "type": "currency",
-            "label": "Shareholder Equity",
+            "label": "SHAREHOLDER EQUITY",
             "property": "Se"
           },
           {
             "type": "text",
-            "label": "Current Ratio",
+            "label": "CURRENT RATIO",
             "property": "Cr"
           }
         ],

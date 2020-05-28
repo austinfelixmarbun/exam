@@ -16,8 +16,6 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { RequestCriteriaObj } from 'app/shared/model/RequestCriteriaObj.model';
-
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
@@ -28,8 +26,12 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (request.method == "POST" && (request.body == null || request.body.isLoading == undefined || request.body.isLoading == true)) {
             this.spinner.show();
         }
-        this.count++;
-        var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+
+        if (request.url != "./assets/i18n/en.json") {
+            this.count++;
+        }
+
+        var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
         var token: string = "";
         var myObj;
         let today = new Date();
@@ -50,42 +52,28 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         }
 
         //Ini kalau buat Login belom punya Current User Contexts
-        if (request.url == "http://r3app-server/foundation/UserManagement/HTML5Login") {
-            if (currentUserContext != null) {
-                token = localStorage.getItem("Token");
-                myObj = new Object();
-                if (request.body != null) {
-                    myObj = request.body;
-                }
-                myObj["Ip"] = localStorage.getItem("LocalIp");
-                myObj["RequestDateTime"] = businessDt;
+
+        if (currentUserContext != null) {
+            token = localStorage.getItem("Token");
+            myObj = new Object();
+            if (request.body != null) {
+                myObj = request.body;
             }
-            else {
-                myObj = new Object();
-                if (request.body != null) {
-                    myObj = request.body;
-                }
-                myObj["Ip"] = localStorage.getItem("LocalIp");
-                myObj["RequestDateTime"] = businessDt;
+            myObj["Ip"] = localStorage.getItem("LocalIp");
+            myObj["RequestDateTime"] = businessDt;
+        }
+        else {
+            myObj = new Object();
+            if (request.body != null) {
+                myObj = request.body;
             }
-        } else {
-            if (currentUserContext != null) {
-                token = localStorage.getItem("Token");
-                myObj = new Object();
-                if (request.body != null) {
-                    myObj = request.body;
-                }
-                myObj["Ip"] = localStorage.getItem("LocalIp");
-                myObj["RequestDateTime"] = businessDt;
-            }
-            else {
-                myObj = new Object();
-                if (request.body != null) {
-                    myObj = request.body;
-                }
-                myObj["Ip"] = localStorage.getItem("LocalIp");
-                myObj["RequestDateTime"] = businessDt;
-            }
+            myObj["Ip"] = localStorage.getItem("LocalIp");
+            myObj["RequestDateTime"] = businessDt;
+            token = localStorage.getItem("Token");
+        }
+
+        if (token == null) {
+            token = "";
         }
 
         if (token != "") {
@@ -120,7 +108,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 if (event instanceof HttpResponse) {
                     //Ini Error kalau sudah masuk sampai ke Back End
                     if (event.body.StatusCode != undefined) {
-                        if (event.body.StatusCode != '200' && event.body.StatusCode != '999') {
+                        if (event.body.StatusCode != '200' && event.body.StatusCode != '999' && event.body.StatusCode != "001") {
                             let data = {};
                             data = {
                                 reason: event.body.Message ? event.body.Message : '',
@@ -162,7 +150,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 console.log(JSON.stringify(request.body));
                 return throwError(error);
             }), finalize(() => {
-                this.count--;
+                if (request.url != "./assets/i18n/en.json") {
+                    this.count--;
+                }
 
                 if (request.method == "POST") {
                     AdInsHelper.ClearPageAccessLog();

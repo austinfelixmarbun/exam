@@ -44,7 +44,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   getCustById: string;
   deleteCustAddr: string;
   getListCustAddr: string;
-
+  From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
     this.getListCustAddr = AdInsConstant.GetListCustAddr;
@@ -54,10 +54,15 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
       if (params["IdCust"] != null) {
          this.IdCust = params["IdCust"];
        }
+       if (params["From"] != null) {
+        this.From = params["From"];
+      }
      });
   }
 
   ngOnInit() {
+    
+    console.log(this.From);
     console.log(this.IdCust);
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
@@ -72,6 +77,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
             this.listCustAddr = response["ReturnObject"];
+            console.log(this.listCustAddr);
         });
   }
 

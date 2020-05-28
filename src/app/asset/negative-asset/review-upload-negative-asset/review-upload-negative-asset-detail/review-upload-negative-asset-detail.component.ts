@@ -35,7 +35,6 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
     this.viewUpload = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
   }
   ngOnInit() {
-    console.log('test');
     this.claimTask();
     this.UploadReviewUrl = AdInsConstant.UploadReview;
     this.CancelUpload = AdInsConstant.CancelUpload;
@@ -70,7 +69,7 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
     );
   }
   claimTask() {
-    var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
     var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: currentUserContext["UserName"] };
     console.log(wfClaimObj);
     this.http.post(AdInsConstant.ClaimTask, wfClaimObj).subscribe(
