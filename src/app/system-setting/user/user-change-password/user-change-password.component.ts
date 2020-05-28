@@ -37,7 +37,7 @@ export class UserChangePasswordComponent implements OnInit {
     private toastr: NGXToastrService,
     private service: NGXToastrService
   ) {
-    var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
     this.username = currentUserContext.UserName;
   }
 

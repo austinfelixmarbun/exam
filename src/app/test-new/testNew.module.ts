@@ -11,7 +11,7 @@ import { UcAddressGroupComponent } from './uc-address-group/uc-address-group.com
 import { UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcpagingModule } from "@adins/ucpaging";
 import { UcSubsectionModule } from "@adins/uc-subsection";
-// import { UcaddressModule } from "@adins/ucaddress";
+ import { UcaddressModule } from "@adins/ucaddress";
 import { DummyComponent } from './dummy/dummy.component';
 import { ArchwizardModule } from "angular-archwizard";
 import { UcSubsectionComponent } from './uc-subsection/uc-subsection.component';
@@ -47,7 +47,7 @@ import { UcreportModule } from "@adins/ucreport";
         UclookupgenericModule,
         UcpagingModule,
         UcSubsectionModule,
-        // UcaddressModule,
+        UcaddressModule,
         ArchwizardModule,
         UcShowErrorsModule,
         UcinputnumberModule,

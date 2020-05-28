@@ -72,7 +72,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
 
   SaveForm(event: any)
   {
-    var currentUserContext = JSON.parse(localStorage.getItem("UserContext"));
+    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
     var notificationResultStat;
     var resultForMsg;
 
