@@ -21,6 +21,9 @@ import { CustomerCompanyPageComponent } from './customer-company/customer-compan
 import { EditMainDataPagingComponent } from './edit-main-data/edit-main-data-paging/edit-main-data-paging.component';
 import { EditMainDataPersonalComponent } from './edit-main-data/edit-main-data-personal/edit-main-data-personal.component';
 import { EditMainDataCompanyComponent } from './edit-main-data/edit-main-data-company/edit-main-data-company.component';
+import { UploadNegativeCustomerComponent } from './negative-customer/upload-negative-customer/upload-negative-customer.component';
+import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
+import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-detail/review-upload-negative-customer-detail.component';
 
 const routes: Routes = [
   {
@@ -81,6 +84,28 @@ const routes: Routes = [
           title: 'Negative Customer View'
         }
       },
+      {
+        path: 'NegativeCustomer/Upload',
+        component: UploadNegativeCustomerComponent,
+        data: {
+          title: 'Upload Negative Customer'
+        }
+      },
+      {
+        path: 'NegativeCustomer/ReviewUploadPaging',
+        component: ReviewUploadNegativeCustomerPagingComponent,
+        data: {
+          title: 'Review Upload Negative Customer Paging'
+        }
+      },
+      {
+        path: 'NegativeCustomer/ReviewUploadDetail',
+        component: ReviewUploadNegativeCustomerDetailComponent,
+        data: {
+          title: 'Review Upload Negative Customer Detail'
+        }
+      },
+
       {
         path: 'CustomerPersonal/Page',
         component: CustomerPersonalPageComponent,
