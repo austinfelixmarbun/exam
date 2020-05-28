@@ -10,11 +10,11 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 
 @Component({
-  selector: 'app-review-upload-negative-asset-detail',
-  templateUrl: './review-upload-negative-asset-detail.component.html',
+  selector: 'app-review-upload-negative-customer-detail',
+  templateUrl: './review-upload-negative-customer-detail.component.html',
   providers: [NGXToastrService]
 })
-export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
+export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   uploadNo: string;
   viewUpload: string;
   inputPagingObj: any;
@@ -32,17 +32,18 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
         this.taskListId = params["TaskListId"];
       }
     });
-    this.viewUpload = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
+    this.viewUpload = "./assets/ucviewgeneric/viewReviewUploadNegativeCust.json";
   }
   ngOnInit() {
+    console.log('test')
     this.claimTask();
     this.UploadReviewUrl = AdInsConstant.UploadReview;
     this.CancelUpload = AdInsConstant.CancelUpload;
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeAssetDetail.json";
+    this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeCustomerDetail.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeAssetDetail.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeCustomerDetail.json";
     this.inputPagingObj.addCritInput = new Array();
     const addCritAssetMasterId = new CriteriaObj();
     addCritAssetMasterId.DataType = 'text';
@@ -61,7 +62,7 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
     this.http.post(this.UploadReviewUrl, uploadObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        this.router.navigate(["/Asset/AssetMaster/ReviewUploadPaging"]);
+        this.router.navigate(["/Customer/NegativeCustomer/ReviewUploadPaging"]);
       },
       error => {
         console.log(error);

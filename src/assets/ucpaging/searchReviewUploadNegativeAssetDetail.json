@@ -58,7 +58,7 @@
         },
         {
             "type": "textbox",
-            "name": "MR_SOURCE_TYPE_CODE",
+            "name": "MR_NEG_ASSET_SOURCE_CODE",
             "id": "SourceTypeCode",
             "value": "",
             "label": "Source Type Code",
@@ -118,7 +118,7 @@
             "type": "sort",
             "position": "center",
             "label": "Source Type Code",
-            "name": "MrSourceTypeCode"
+            "name": "MrNegAssetSourceCode"
         },
         {
             "type": "sort",
@@ -161,7 +161,7 @@
         {
             "type": "text",
             "position": "center",
-            "property": "MrSourceTypeCode"
+            "property": "MrNegAssetSourceCode"
         },
         {
             "type": "text",

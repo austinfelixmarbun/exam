@@ -85,6 +85,10 @@ import { CustomerViewCustomerGroupComponent } from './customer-view/customer-vie
 import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
 import { MatTabsModule } from '@angular/material';
 import { NgxCurrencyModule } from "ngx-currency";
+import { UploadNegativeCustomerComponent } from './negative-customer/upload-negative-customer/upload-negative-customer.component';
+import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-detail/review-upload-negative-customer-detail.component';
+import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
+import { UcuploadModule } from '@adins/ucupload';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -121,6 +125,7 @@ export const customCurrencyMaskConfig = {
     UcShowErrorsModule,
     UcinputnumberModule,
     MatTabsModule,
+    UcuploadModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [
@@ -184,7 +189,10 @@ export const customCurrencyMaskConfig = {
     CustomerViewHeaderCompanyComponent,
     CustomerViewPersonalFinancialSectionComponent,
     CustomerViewCustomerGroupComponent,
-    CustomerViewAddressComponent
+    CustomerViewAddressComponent,
+    UploadNegativeCustomerComponent,
+    ReviewUploadNegativeCustomerDetailComponent,
+    ReviewUploadNegativeCustomerPagingComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
