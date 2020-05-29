@@ -66,8 +66,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   ngOnInit() {
-    console.log("TotalShare")
-    console.log(this.TotalShare)
+    // console.log("TotalShare")
+    // console.log(this.custCompanyId)
     this.inputLookupCustPersonalObj = new InputLookupObj();
     this.inputLookupCustPersonalObj.urlJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -167,6 +167,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             this.ManagementShareholderForm.controls.MrGenderCode.disable();
             this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
           }
+
+          this.TotalShare = this.TotalShare - this.tempCustCompanyMgmntShrholderObj.SharePrcnt;
         }
       );
       
@@ -174,13 +176,16 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   LeftShare: number;
-  SaveValue(){ 
+  TotalShareCurrent: number;
+  SaveValue(){
+    this.TotalShareCurrent = this.TotalShare + this.ManagementShareholderForm.controls["SharePrcnt"].value;
 
-    if(this.TotalShare > 100){
+    if(this.TotalShareCurrent > 100){
       this.LeftShare = 100 - this.TotalShare;
-      this.toastr.errorMessage("Total Share left is "+this.LeftShare);
+      this.toastr.errorMessage("Total Share left is "+this.LeftShare+"%");
       return;
     }
+
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
     this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
@@ -227,6 +232,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Personal;
+
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -238,9 +244,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       );
     }
   }
+
   back(){
     this.outputTab.emit({mode : 'check'});
   }
+
   onOptionsSelected(event){  
     if(event.target.value == this.KTP){
       this.ManagementShareholderForm.controls.IdExpiredDt.clearValidators();

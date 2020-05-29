@@ -43,6 +43,8 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
 
   ngOnInit() {
     this.getList();
+    console.log("testid")
+    console.log(this.IdCust)
   }
 
   openView(ShareholderCustNo)
