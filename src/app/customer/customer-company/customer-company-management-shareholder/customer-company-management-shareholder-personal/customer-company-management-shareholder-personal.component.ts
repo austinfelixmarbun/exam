@@ -20,6 +20,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   @Input() custCompanyId : number;
   @Input() CustCompanyMgmntShrholderId : number;
   @Input() TotalShare : number;
+  @Input() TotalShareCurrent : number;
   @Output () outputTab : EventEmitter<object>= new EventEmitter();
   
   tempIdType: any;
@@ -166,7 +167,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             this.ManagementShareholderForm.controls.BirthDt.disable();
             this.ManagementShareholderForm.controls.MrGenderCode.disable();
             this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
-          }
+          }          
+          this.TotalShare = this.TotalShare - this.tempCustCompanyMgmntShrholderObj.SharePrcnt;
         }
       );
       
@@ -176,7 +178,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   LeftShare: number;
   SaveValue(){ 
 
-    if(this.TotalShare > 100){
+    this.TotalShareCurrent = this.TotalShare + this.ManagementShareholderForm.controls["SharePrcnt"].value;
+    if(this.TotalShareCurrent > 100){ 
       this.LeftShare = 100 - this.TotalShare;
       this.toastr.errorMessage("Total Share left is "+this.LeftShare);
       return;
