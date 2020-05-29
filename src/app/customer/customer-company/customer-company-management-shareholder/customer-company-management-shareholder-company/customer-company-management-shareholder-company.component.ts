@@ -109,16 +109,20 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
             this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable(); 
             this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
           }
+          this.TotalShare = this.TotalShare - parseFloat(this.tempCustCompanyMgmntShrholderObj.SharePrcnt);
         }
       );
     } 
   }
 
   LeftShare: number;
+  TotalShareCurrent: number;
   SaveValue() {
-    if(this.TotalShare > 100){
+    this.TotalShareCurrent = this.TotalShare + parseFloat(this.ManagementShareholderForm.controls["SharePrcnt"].value);
+
+    if(this.TotalShareCurrent > 100){
       this.LeftShare = 100 - this.TotalShare;
-      this.toastr.errorMessage("Total Share left is "+this.LeftShare);
+      this.toastr.errorMessage("Total Share left is "+this.LeftShare+"%");
       return;
     }
 

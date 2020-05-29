@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-customer-company-management-shareholder',
@@ -25,12 +26,20 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
   custCompanyObj: CustCompanyObj;
   custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
 
-  constructor(private toastr: NGXToastrService, private http: HttpClient,) {
+  constructor(private route: ActivatedRoute, private toastr: NGXToastrService, private http: HttpClient,) {
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+        this.IdCust = params["IdCust"];
+      }
+    });
   }
 
   ngOnInit() {
     this.mode = "check";
+    console.log("checkIdCust");
+    console.log(this.custCompanyId);
   }
+
   terimaValue(ev) {
     console.log(ev);
     this.mode = ev.mode;
@@ -42,28 +51,28 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
     }
   }
   next() {
-    // this.custCompanyObj = new CustCompanyObj;
-    // this.custCompanyObj.CustId = this.IdCust;
-    // this.http.post(AdInsConstant.GetCustCompanyByCustId, this.custCompanyObj).subscribe(
-    //   (response) => {
-    //     this.tempCustCompanyObj = response;
-    //     this.http.post(AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
-    //       (response) => {
-    //         this.tempListCompanyManagementShareholder = response["ReturnObject"];
-    //         this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
-    //         // console.log("testdata")
-    //         // console.log(this.TotalShare);
+    this.custCompanyObj = new CustCompanyObj;
+    this.custCompanyObj.CustId = this.IdCust;
+    this.http.post(AdInsConstant.GetCustCompanyByCustId, this.custCompanyObj).subscribe(
+      (response) => {
+        this.tempCustCompanyObj = response;
+        this.http.post(AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
+          (response) => {
+            this.tempListCompanyManagementShareholder = response["ReturnObject"];
+            this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
+            // console.log("testdata")
+            // console.log(this.TotalShare);
 
-    //         if(this.TotalShare < 100){
-    //           this.toastr.errorMessage("Total Share less than 100%");
-    //           return;
-    //         }
-    //       });
-    //   }
-    // );
-
-    this.outputTab.emit({ stepMode: 'next'});
+            if(this.TotalShare < 100){
+              this.toastr.errorMessage("Total Share % must be 100%");
+              return;
+            }
+            this.outputTab.emit({ stepMode: 'next'});
+          });
+      }
+    );
   }
+
   back() {
     this.outputTab.emit({ stepMode: 'previous'});
   }
