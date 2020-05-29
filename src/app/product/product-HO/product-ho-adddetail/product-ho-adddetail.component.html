@@ -17,19 +17,19 @@
       <div class="card-body">
         <div class="px-3">
           <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="0">
-            <aw-wizard-step [stepTitle]="'General Data'"
+            <aw-wizard-step [stepTitle]="'General Data'" (stepEnter)="EnterTab('GeneralData')"
               [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-              <app-general-data-HO [objInput]="objPassing"></app-general-data-HO>
+              <app-general-data-HO *ngIf="type == 'GeneralData'" [objInput]="objPassing"></app-general-data-HO>
             </aw-wizard-step> 
           
-            <aw-wizard-step [stepTitle]="'Product Component'" 
+            <aw-wizard-step [stepTitle]="'Product Component'" (stepEnter)="EnterTab('ProductComponent')"
               [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-              <app-product-component-HO [objInput]="objPassing"></app-product-component-HO>
+              <app-product-component-HO *ngIf="type == 'ProductComponent'" [objInput]="objPassing"></app-product-component-HO>
             </aw-wizard-step>
 
-            <aw-wizard-step [stepTitle]="'Office Member'" 
+            <aw-wizard-step [stepTitle]="'Office Member'" (stepEnter)="EnterTab('OfficeMember')"
               [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-              <app-office-member-HO [objInput]="objPassing"></app-office-member-HO>
+              <app-office-member-HO *ngIf="type == 'OfficeMember'" [objInput]="objPassing"></app-office-member-HO>
             </aw-wizard-step>
           </aw-wizard>
         </div>

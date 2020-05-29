@@ -54,7 +54,7 @@ export class GeneralDataHOComponent implements OnInit {
 
     this.ProdHId = this.objInput["param"];
     this.ProdId = this.objInput["ProdId"];
-    this.LoadProdComponent(this.ProdHId, "GEN");
+    this.LoadProdComponent(this.ProdHId, "GEN", false);
 
 
     this.inputLookUpObj = new InputLookupObj();
@@ -194,10 +194,11 @@ export class GeneralDataHOComponent implements OnInit {
     )
   }
 
-  LoadProdComponent(ProdHId, CompGroups) {
+  LoadProdComponent(ProdHId, CompGroups, IsFilterBizTmpltCode) {
     var ProdHOComponent = {
       ProdHId: ProdHId,
       GroupCodes: CompGroups.split(","),
+      IsFilterBizTmpltCode: IsFilterBizTmpltCode,
       RowVersion: ""
     }
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
