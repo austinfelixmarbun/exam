@@ -19,7 +19,6 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   @Input() custCompanyId: number;
   @Input() CustCompanyMgmntShrholderId: number;
   @Input() TotalShare : number;
-  @Input() TotalShareCurrent : number;
   @Output () outputValue : EventEmitter<object> = new EventEmitter();
 
   inputLookupCustCompanyObj : InputLookupObj;
@@ -117,11 +116,13 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   }
 
   LeftShare: number;
+  TotalShareCurrent: number;
   SaveValue() {
     this.TotalShareCurrent = this.TotalShare + this.ManagementShareholderForm.controls["SharePrcnt"].value;
-    if(this.TotalShareCurrent > 100){ 
+
+    if(this.TotalShareCurrent > 100){
       this.LeftShare = 100 - this.TotalShare;
-      this.toastr.errorMessage("Total Share left is "+this.LeftShare);
+      this.toastr.errorMessage("Total Share left is "+this.LeftShare+"%");
       return;
     }
 
