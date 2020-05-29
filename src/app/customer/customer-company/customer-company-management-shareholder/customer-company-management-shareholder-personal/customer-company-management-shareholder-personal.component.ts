@@ -66,8 +66,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   ngOnInit() {
-    // console.log("TotalShare")
-    // console.log(this.custCompanyId)
+    console.log("TotalShare")
+    console.log(this.TotalShare)
     this.inputLookupCustPersonalObj = new InputLookupObj();
     this.inputLookupCustPersonalObj.urlJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -168,7 +168,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
           }
 
-          this.TotalShare = this.TotalShare - this.tempCustCompanyMgmntShrholderObj.SharePrcnt;
+          this.TotalShare = this.TotalShare - parseFloat(this.tempCustCompanyMgmntShrholderObj.SharePrcnt);
+          console.log("TotalShare")
+          console.log(this.TotalShare);
         }
       );
       
@@ -178,8 +180,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   LeftShare: number;
   TotalShareCurrent: number;
   SaveValue(){
-    this.TotalShareCurrent = this.TotalShare + this.ManagementShareholderForm.controls["SharePrcnt"].value;
-
+    this.TotalShareCurrent = this.TotalShare + parseFloat(this.ManagementShareholderForm.controls["SharePrcnt"].value);
+    console.log("TotalShareCurrent")
+    console.log(this.TotalShareCurrent);
     if(this.TotalShareCurrent > 100){
       this.LeftShare = 100 - this.TotalShare;
       this.toastr.errorMessage("Total Share left is "+this.LeftShare+"%");
