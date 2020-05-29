@@ -19,6 +19,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 export class CustomerCompanyManagementShareholderPersonalComponent implements OnInit {
   @Input() custCompanyId : number;
   @Input() CustCompanyMgmntShrholderId : number;
+  @Input() TotalShare : number;
   @Output () outputTab : EventEmitter<object>= new EventEmitter();
   
   tempIdType: any;
@@ -65,7 +66,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   ngOnInit() {
-
+    console.log("TotalShare")
+    console.log(this.TotalShare)
     this.inputLookupCustPersonalObj = new InputLookupObj();
     this.inputLookupCustPersonalObj.urlJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -169,10 +171,16 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       );
       
     } 
-  
-
   }
+
+  LeftShare: number;
   SaveValue(){ 
+
+    if(this.TotalShare > 100){
+      this.LeftShare = 100 - this.TotalShare;
+      this.toastr.errorMessage("Total Share left is "+this.LeftShare);
+      return;
+    }
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
     this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
