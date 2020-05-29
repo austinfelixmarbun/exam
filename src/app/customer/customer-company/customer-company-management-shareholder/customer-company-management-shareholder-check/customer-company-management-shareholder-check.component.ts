@@ -16,6 +16,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 })
 export class CustomerCompanyManagementShareholderCheckComponent implements OnInit {
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  @Input() TotalShare : number;
 
   tempCustCompanyObj: any;
   tempListCompanyManagementShareholder: any;
@@ -104,19 +105,16 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
           (response) => {
             this.tempListCompanyManagementShareholder = response["ReturnObject"];
             this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
-            console.log("testdata")
-            console.log(this.TotalShare);
+            // console.log("testdata")
+            // console.log(this.TotalShare);
+
+            //this.outputValue.emit({ TotalShare: this.TotalShare});
           });
       }
     );
   }
-  TotalShare: number;
-  LeftShare: number;
+  //TotalShare: number;
   next() {
-    if(this.TotalShare < 100){
-      this.toastr.errorMessage("Total Share less than 100%");
-      return;
-    }
     this.outputValue.emit({ stepMode: 'next'});
   }
 
