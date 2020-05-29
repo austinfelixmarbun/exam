@@ -32,7 +32,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
   addCrit: CriteriaObj[];
 
   orgJobTitleObj: OrgJobTitleObj;
@@ -64,7 +64,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrgJobTitle.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetOrgJobTitlePaging;
     
     this.pageNow = 1;

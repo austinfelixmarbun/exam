@@ -1,0 +1,254 @@
+{
+    "title": "NEGATIVE CUSTOMER",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "CUST_NAME",
+            "id": "CustNameId",
+            "value": "",
+            "label": "Customer Name",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT UPLOAD_MONITORING_NO AS UploadMonitoringNo, MR_CUST_TYPE_CODE AS MrCustTypeCode, CUST_NO AS CustNo,CUST_NAME AS CustName,MR_ID_TYPE_CODE AS MrIdTypeCode,ID_NO AS IdNo, ID_EXPIRED_DT AS IdExpiredDt,  TAX_ID_NO AS TaxIdNo, BIRTH_PLACE AS BirthPlace, BIRTH_DT AS BirthDt,MR_GENDER_CODE AS MrGenderCode,MOTHER_MAIDEN_NAME AS MotherMaidenName, LEGAL_ADDR AS LegalAddr, MOBILE_PHN AS MobilePhn,MR_NEG_CUST_TYPE_CODE AS MrNegCustTypeCode, MR_NEG_CUST_SOURCE_CODE AS MrNegCustSourceCode, UPLOAD_STATUS AS UploadStatus,  NEG_CUST_CAUSE AS NegCustCause, NOTES AS Notes, IS_ACTIVE AS IsActive, NEGATIVE_CUST_ID AS NegativeCustId, CUST_ID AS CustId",
+        "from": "FROM dbo.UPLOAD_NEGATIVE_CUST WITH(NOLOCK) "
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Customer No",
+            "name": "CUST_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Customer Name",
+            "name": "CUST_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Cust Type Code",
+            "name": "MR_CUST_TYPE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Id Type Code",
+            "name": "MR_ID_TYPE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Id No",
+            "name": "ID_NO"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Id Expired Date",
+            "name": "ID_EXPIRED_DT"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Tax Id No",
+            "name": "TAX_ID_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Birth Place",
+            "name": "BIRTH_PLACE"
+        },        
+		{
+            "type": "sort",
+            "position": "center",
+            "label": "Birth Date",
+            "name": "BIRTH_DT"
+        },        
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Gender Code",
+            "name": "MR_GENDER_CODE"
+        },       
+		{
+            "type": "sort",
+            "position": "left",
+            "label": "Mother Maiden Name",
+            "name": "MOTHER_MAIDEN_NAME"
+        },        
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Legal Address",
+            "name": "LEGAL_ADDR"
+        },        
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Mobile Phone",
+            "name": "MOBILE_PHN"
+        },        
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Neg Cust Type Code",
+            "name": "MR_NEG_CUST_TYPE_CODE"
+        },        
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Neg Cust Source Code",
+            "name": "MR_NEG_CUST_SOURCE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Upload Status",
+            "name": "UPLOAD_STATUS"
+        },        
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Negative Cust Cause",
+            "name": "NEG_CUST_CAUSE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Notes",
+            "name": "NOTES"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "IS_ACTIVE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Negative Cust Id",
+            "name": "NEGATIVE_CUST_ID"
+        },
+		{
+            "type": "sort",
+            "position": "center",
+            "label": "Cust Id",
+            "name": "CUST_ID"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "CustNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "CustName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "MrCustTypeCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "MrIdTypeCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "IdNo"
+        },
+        {
+            "type": "date",
+            "position": "center",
+            "property": "IdExpiredDt"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "TaxIdNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "BirthPlace"
+        },
+        {
+            "type": "date",
+            "position": "center",
+            "property": "BirthDt"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "MrGenderCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MotherMaidenName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "LegalAddr"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "MobilePhn"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "MrNegCustTypeCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "MrNegCustSourceCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "UploadStatus"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "NegCustCause"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Notes"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "NegativeCustId"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "CustId"
+        }
+    ]
+}

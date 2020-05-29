@@ -27,7 +27,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of CustGrpList; let i = index">
-          <td style="text-align: left;">{{item.CustNo}}</td>
+          <td style="color: blue; cursor: pointer; text-align: left;"><a (click)="openView(item.CustNo)">{{item.CustNo}}</a></td>
           <td style="text-align: left;">{{item.CustName}}</td>
           <td style="text-align: left;">{{item.Relationship}}</td>
           <td style="text-align: center;">

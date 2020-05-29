@@ -32,7 +32,7 @@ export class AddMenuSettingComponent implements OnInit {
     param: string;
     mode: string = "add";
     apiUrl: any;
-    foundationUrl: string = environment.foundationUrl;
+    foundationUrl: string = environment.FoundationR3Url;
     editUrl: any;
     result: any;
     hierarchyNo: any;
@@ -50,7 +50,7 @@ export class AddMenuSettingComponent implements OnInit {
         this.inputLookupObj = new InputLookupObj();
         this.inputLookupObj.urlJson = "./assets/lookup/lookupMenu.json";
         this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefFormPaging;
-        this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+        this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
         this.inputLookupObj.pagingJson = "./assets/form-setting/lookupMenuPaging.json";
         this.inputLookupObj.genericJson = "./assets/form-setting/lookupMenuPaging.json";
         //** app-lookupgeneric **//

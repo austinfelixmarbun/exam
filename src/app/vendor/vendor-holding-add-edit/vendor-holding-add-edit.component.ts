@@ -275,6 +275,15 @@ export class VendorHoldingAddEditComponent implements OnInit {
     }
   }
 
+  Back(){
+    if(this.mode == "edit"){
+      this.router.navigate(['/Vendor/Holding/Registration'],{queryParams :{"VendorId": this.VendorId, "mode":'edit'}});
+    }else{
+      this.router.navigate(['/Vendor/Holding/Paging']);
+    }
+    
+  }
+
   setLookup(){
     this.inputLookupZipcodeObj = new InputLookupObj();
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";

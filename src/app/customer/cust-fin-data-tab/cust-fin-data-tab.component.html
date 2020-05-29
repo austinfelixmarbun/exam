@@ -6,19 +6,19 @@
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="MonthlyIncomeAmt" translate>Monthly Income</label>
           <div class="col-md-6">
-            <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'MonthlyIncomeAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.MonthlyIncomeAmt.value"></lib-ucinputnumber>
-            <!-- <input type="text" class="form-control adInsInput" formControlName="MonthlyIncomeAmt"
+            <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'MonthlyIncomeAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.MonthlyIncomeAmt.value"></lib-ucinputnumber> -->
+            <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyIncomeAmt"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.MonthlyIncomeAmt.invalid }" />
-            <show-errors [control]="CustPersonalFinDataForm.controls.MonthlyIncomeAmt" [submit]="enjiForm.submitted"></show-errors> -->
+            <show-errors [control]="CustPersonalFinDataForm.controls.MonthlyIncomeAmt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="OtherIncomeAmt" translate>Other Income</label>
           <div class="col-md-6">
-            <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'OtherIncomeAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.OtherIncomeAmt.value"></lib-ucinputnumber>
-            <!-- <input type="text" class="form-control adInsInput" formControlName="OtherIncomeAmt" 
+            <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'OtherIncomeAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.OtherIncomeAmt.value"></lib-ucinputnumber> -->
+            <input type="" currencyMask class="form-control adInsInput" formControlName="OtherIncomeAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.OtherIncomeAmt.invalid }" />
-            <show-errors [control]="CustPersonalFinDataForm.controls.OtherIncomeAmt" [submit]="enjiForm.submitted"></show-errors> -->
+            <show-errors [control]="CustPersonalFinDataForm.controls.OtherIncomeAmt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
@@ -34,10 +34,10 @@
         <div class="form-group row" *ngIf="mrMaritalStatCode == 'MARRIED'">
           <label class="col-md-2 adInsLabel" for="SpouseMonthlyIncomeAmt" translate>Spouse Monthly Income Amount</label>
           <div class="col-md-6">
-            <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'SpouseMonthlyIncomeAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt.value"></lib-ucinputnumber>
-            <!-- <input type="text" class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt" 
+            <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'SpouseMonthlyIncomeAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt.value"></lib-ucinputnumber> -->
+            <input type="" currencyMask class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt.invalid }" />
-            <show-errors [control]="CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt" [submit]="enjiForm.submitted"></show-errors> -->
+            <show-errors [control]="CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
@@ -49,19 +49,19 @@
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="MonthlyInstallmentAmt" translate>Monthly Installment Amount</label>
           <div class="col-md-6">
-            <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'MonthlyInstallmentAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.MonthlyInstallmentAmt.value"></lib-ucinputnumber>
-            <!-- <input type="text" class="form-control adInsInput" formControlName="MonthlyInstallmentAmt" 
+            <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'MonthlyInstallmentAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.MonthlyInstallmentAmt.value"></lib-ucinputnumber> -->
+            <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyInstallmentAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.MonthlyInstallmentAmt.invalid }" />
-            <show-errors [control]="CustPersonalFinDataForm.controls.MonthlyInstallmentAmt" [submit]="enjiForm.submitted"></show-errors> -->
+            <show-errors [control]="CustPersonalFinDataForm.controls.MonthlyInstallmentAmt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="MonthlyExpenseAmt" translate>Monthly Expense Amount</label>
           <div class="col-md-6">
-            <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'MonthlyExpenseAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.MonthlyExpenseAmt.value"></lib-ucinputnumber>
-            <!-- <input type="text" class="form-control adInsInput" formControlName="MonthlyExpenseAmt" 
+            <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'MonthlyExpenseAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.MonthlyExpenseAmt.value"></lib-ucinputnumber> -->
+            <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyExpenseAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.MonthlyExpenseAmt.invalid }" />
-            <show-errors [control]="CustPersonalFinDataForm.controls.MonthlyExpenseAmt" [submit]="enjiForm.submitted"></show-errors> -->
+            <show-errors [control]="CustPersonalFinDataForm.controls.MonthlyExpenseAmt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
@@ -109,72 +109,81 @@
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="ReturnOfInvestmentPrcnt" translate>Return Of Investment Percentage</label>
           <div class="col-md-6">
-            <input type="text" class="form-control adInsInput" formControlName="ReturnOfInvestmentPrcnt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.ReturnOfInvestmentPrcnt.invalid }" />
+            <input type="" currencyMask class="form-control adInsInput" formControlName="ReturnOfInvestmentPrcnt" 
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.ReturnOfInvestmentPrcnt.invalid }"
+              [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }"/>
             <show-errors [control]="CustCompanyFinDataForm.controls.ReturnOfInvestmentPrcnt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="ReturnOfEquityPrcnt" translate>Return Of Equity Percentage</label>
           <div class="col-md-6">
-            <input type="text" class="form-control adInsInput" formControlName="ReturnOfEquityPrcnt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.ReturnOfEquityPrcnt.invalid }" />
+            <input type="" currencyMask class="form-control adInsInput" formControlName="ReturnOfEquityPrcnt" 
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.ReturnOfEquityPrcnt.invalid }"
+              [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }" />
             <show-errors [control]="CustCompanyFinDataForm.controls.ReturnOfEquityPrcnt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="ReturnOfAssetPrcnt" translate>Return Of Asset Percentage</label>
           <div class="col-md-6">
-            <input type="text" class="form-control adInsInput" formControlName="ReturnOfAssetPrcnt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.ReturnOfAssetPrcnt.invalid }" />
+            <input type="" currencyMask class="form-control adInsInput" formControlName="ReturnOfAssetPrcnt" 
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.ReturnOfAssetPrcnt.invalid }"
+              [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }" />
             <show-errors [control]="CustCompanyFinDataForm.controls.ReturnOfAssetPrcnt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="ProfitMarginPrcnt" translate>Profit Margin Percentage</label>
           <div class="col-md-6">
-            <input type="text" class="form-control adInsInput" formControlName="ProfitMarginPrcnt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.ProfitMarginPrcnt.invalid }" />
+            <input type="" currencyMask class="form-control adInsInput" formControlName="ProfitMarginPrcnt" 
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.ProfitMarginPrcnt.invalid }"
+              [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }" />
             <show-errors [control]="CustCompanyFinDataForm.controls.ProfitMarginPrcnt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="CurrentRatioPrcnt" translate>Current Ratio Percentage</label>
           <div class="col-md-6">
-            <input type="text" class="form-control adInsInput" formControlName="CurrentRatioPrcnt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.CurrentRatioPrcnt.invalid }" />
+            <input type="" currencyMask class="form-control adInsInput" formControlName="CurrentRatioPrcnt" 
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.CurrentRatioPrcnt.invalid }"
+              [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }" />
             <show-errors [control]="CustCompanyFinDataForm.controls.CurrentRatioPrcnt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="DebtEquityRatioPrcnt" translate>Debt Equity Ratio Percentage</label>
           <div class="col-md-6">
-            <input type="text" class="form-control adInsInput" formControlName="DebtEquityRatioPrcnt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.DebtEquityRatioPrcnt.invalid }" />
+            <input type="" currencyMask class="form-control adInsInput" formControlName="DebtEquityRatioPrcnt" 
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.DebtEquityRatioPrcnt.invalid }"
+              [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }" />
             <show-errors [control]="CustCompanyFinDataForm.controls.DebtEquityRatioPrcnt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="InvTurnOverPrcnt" translate>Inventory Turn Over Percentage</label>
           <div class="col-md-6">
-            <input type="text" class="form-control adInsInput" formControlName="InvTurnOverPrcnt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.InvTurnOverPrcnt.invalid }" />
+            <input type="" currencyMask class="form-control adInsInput" formControlName="InvTurnOverPrcnt" 
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.InvTurnOverPrcnt.invalid }"
+              [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }" />
             <show-errors [control]="CustCompanyFinDataForm.controls.InvTurnOverPrcnt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="ArTurnOverPrcnt" translate>Account Receivable Turn Over Percentage</label>
           <div class="col-md-6">
-            <input type="text" class="form-control adInsInput" formControlName="ArTurnOverPrcnt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.ArTurnOverPrcnt.invalid }" />
+            <input type="" currencyMask class="form-control adInsInput" formControlName="ArTurnOverPrcnt" 
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.ArTurnOverPrcnt.invalid }"
+              [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }" />
             <show-errors [control]="CustCompanyFinDataForm.controls.ArTurnOverPrcnt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="GrowthPrcnt" translate>Growth Percentage</label>
           <div class="col-md-6">
-            <input type="text" class="form-control adInsInput" formControlName="GrowthPrcnt" 
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.GrowthPrcnt.invalid }" />
+            <input type="" currencyMask class="form-control adInsInput" formControlName="GrowthPrcnt" 
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyFinDataForm.controls.GrowthPrcnt.invalid }"
+              [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }" />
             <show-errors [control]="CustCompanyFinDataForm.controls.GrowthPrcnt" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>

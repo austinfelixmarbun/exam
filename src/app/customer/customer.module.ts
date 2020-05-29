@@ -84,6 +84,24 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
 import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
 import { MatTabsModule } from '@angular/material';
+import { NgxCurrencyModule } from "ngx-currency";
+import { UploadNegativeCustomerComponent } from './negative-customer/upload-negative-customer/upload-negative-customer.component';
+import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-detail/review-upload-negative-customer-detail.component';
+import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
+import { UcuploadModule } from '@adins/ucupload';
+
+export const customCurrencyMaskConfig = {     
+  align: "left",     
+  allowNegative: true,     
+  allowZero: true,     
+  decimal: ".",     
+  precision: 2,     
+  prefix: "",     
+  suffix: "",     
+  thousands: ",",     
+  nullable: false 
+};
+
  @NgModule({
   exports: [],
   imports: [
@@ -106,7 +124,9 @@ import { MatTabsModule } from '@angular/material';
     UcaddressModule,
     UcShowErrorsModule,
     UcinputnumberModule,
-    MatTabsModule
+    MatTabsModule,
+    UcuploadModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [
     CustomerPagingComponent,
@@ -169,7 +189,10 @@ import { MatTabsModule } from '@angular/material';
     CustomerViewHeaderCompanyComponent,
     CustomerViewPersonalFinancialSectionComponent,
     CustomerViewCustomerGroupComponent,
-    CustomerViewAddressComponent
+    CustomerViewAddressComponent,
+    UploadNegativeCustomerComponent,
+    ReviewUploadNegativeCustomerDetailComponent,
+    ReviewUploadNegativeCustomerPagingComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

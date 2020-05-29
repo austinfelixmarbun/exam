@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustGroupTabDetailComponent } from './cust-group-tab-detail/cust-group-tab-detail.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CustObj } from 'app/shared/model/CustObj.Model';
 
 @Component({
   selector: 'app-cust-group-tab',
@@ -18,12 +19,14 @@ export class CustGroupTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   CustGrpList: any;
+  resCustObj: any;
 
   constructor(
     private httpClient: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -32,6 +35,23 @@ export class CustGroupTabComponent implements OnInit {
     this.httpClient.post(AdInsConstant.GetListCustGrpByCustIdForCustGrpTab, custGrp).subscribe(
       (response: any) => {
         this.CustGrpList = response.CustGrpObjForCustGrpTabs;
+        console.log(this.CustGrpList)
+      }
+    );
+  }
+
+  openView(CustNo)
+  {
+    // GetCustByCustNo
+    var custObj = new CustObj;
+    custObj.CustNo = CustNo
+    this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
+      response => {
+        this.resCustObj = response;
+        window.open("../Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
+      },
+      error => {
+        console.log(error);
       }
     );
   }
