@@ -6,11 +6,11 @@
           <div class="col-md-8">
             <h4 class="card-title" translate> {{mode}} Product Offering </h4>
           </div>
-          <div class="col-md-4" style="text-align-last: right">
+          <!-- <div class="col-md-4" style="text-align-last: right">
             <button type="button" class="backButton" [routerLink]="['/Product/ProdOffering/paging']" translate>
               <i class="ft-arrow-left"></i> Back
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="card-body">
@@ -56,13 +56,19 @@
                 </div>
               </div>
             </div>
-            <div class="form-actions right margin-r-5">
-              <button type="submit" class="btn btn-raised btn-primary" (click)="SaveForm()">
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Product/ProdOffering/paging']" translate>
+                <i class="ft-x"></i> Cancel
+              </button>
+              <button type="submit" (click)="AddDetail()" class="btn btn-raised btn-primary">
+                <i class="far fa-check-square"></i> Save
+              </button>
+              <!-- <button type="submit" class="btn btn-raised btn-primary" (click)="SaveForm()">
                 <i class="fa fa-check-square-o"></i> Save
               </button>
               <button type="submit" class="btn btn-raised btn-primary" (click)="AddDetail()">
                 <i class="fa fa-check-square-o"></i> Next
-              </button>
+              </button> -->
             </div>
           </form>
         </div>

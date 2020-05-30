@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card">
 
-      <div class="card-header header-title">
+      <!-- <div class="card-header header-title">
         <div class="row">
           <div class="col-md-12" style="text-align-last: right">
             <button type="button" class="backButton" [routerLink]="['/product/HOpaging']" translate>
@@ -10,7 +10,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <lib-ucviewgeneric [viewInput]="viewProdMainInfoObj"> </lib-ucviewgeneric>
 
@@ -18,17 +18,17 @@
         <div class="px-3">
           <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="0">
             <aw-wizard-step [stepTitle]="'General Data'" (stepEnter)="EnterTab('GeneralData')"
-              [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+              [navigationSymbol]="{ symbol: '1', fontFamily: 'FontAwesome' }">
               <app-general-data-HO *ngIf="type == 'GeneralData'" [objInput]="objPassing"></app-general-data-HO>
             </aw-wizard-step> 
           
             <aw-wizard-step [stepTitle]="'Product Component'" (stepEnter)="EnterTab('ProductComponent')"
-              [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+              [navigationSymbol]="{ symbol: '2', fontFamily: 'FontAwesome' }">
               <app-product-component-HO *ngIf="type == 'ProductComponent'" [objInput]="objPassing"></app-product-component-HO>
             </aw-wizard-step>
 
             <aw-wizard-step [stepTitle]="'Office Member'" (stepEnter)="EnterTab('OfficeMember')"
-              [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+              [navigationSymbol]="{ symbol: '3', fontFamily: 'FontAwesome' }">
               <app-office-member-HO *ngIf="type == 'OfficeMember'" [objInput]="objPassing"></app-office-member-HO>
             </aw-wizard-step>
           </aw-wizard>
