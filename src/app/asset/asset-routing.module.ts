@@ -176,21 +176,21 @@ const routes: Routes = [
         path: 'NegativeAsset/Upload',
         component: NegativeAssetUploadComponent,
         data: {
-          title: 'Negative Asset'
+          title: 'Upload Negative Asset'
         },
       },
       {
         path: 'NegativeAsset/ReviewUploadPaging',
         component: ReviewUploadNegativeAssetPagingComponent,
         data: {
-          title: 'Negative Asset'
+          title: 'Review Upload Negative Asset Paging'
         },
       },
       {
         path: 'NegativeAsset/ReviewUploadDetail',
         component: ReviewUploadNegativeAssetDetailComponent,
         data: {
-          title: 'Negative Asset'
+          title: 'Review Upload Negative Asset Detail'
         },
       },
       {

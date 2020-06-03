@@ -19,7 +19,7 @@ export class AssetTypeAddEditComponent implements OnInit {
   AssetTypeForm = this.fb.group({
     AssetTypeCode: ['', Validators.required],
     AssetTypeName: ['', Validators.required],
-    SerialNo1Label: ['', Validators.required],
+    SerialNo1Label: [''],
     SerialNo2Label: [''],
     SerialNo3Label: [''],
     SerialNo4Label: [''],
@@ -169,6 +169,7 @@ export class AssetTypeAddEditComponent implements OnInit {
   }
 
   totalSerialNoHandler(){
+    this.serialNoShown = [false,false,false,false,false];
     var totalSerialNo = this.AssetTypeForm.controls["TotalSerialNo"].value;
     this.AssetTypeForm.patchValue({
       SerialNo1Label: '',
@@ -182,7 +183,17 @@ export class AssetTypeAddEditComponent implements OnInit {
       IsMndtrySerialNo4: '',
       IsMndtrySerialNo5: ''
     });
+    for(var a = 0; a < this.serialNoShown.length; a++){
+      var idxReset = a + 1;
+      var resetKey = "SerialNo"+ idxReset +"Label";
+      this.AssetTypeForm.controls[resetKey].clearValidators();
+      this.AssetTypeForm.controls[resetKey].updateValueAndValidity();
+    }
     for(var i = 0; i < totalSerialNo; i++){
+      var idx = i + 1;
+      var key = "SerialNo"+ idx +"Label";
+      this.AssetTypeForm.controls[key].setValidators([Validators.required]);
+      this.AssetTypeForm.controls[key].updateValueAndValidity();
       this.serialNoShown[i] = true;
     }
   }

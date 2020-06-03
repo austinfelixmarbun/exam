@@ -19,7 +19,7 @@
     },
     {
       "type": "textbox",
-      "name": "ProdOffering_Code",
+      "name": "Prod_Offering_Code",
       "id": "ProdCode",
       "value": "",
       "label": "Product Offering Code",
@@ -27,7 +27,7 @@
     },
     {
       "type": "textbox",
-      "name": "ProdOffering_Name",
+      "name": "Prod_Offering_Name",
       "id": "ProdOfferingName",
       "value": "",
       "label": "Product Offering Name",
@@ -35,28 +35,22 @@
     },
     {
       "type": "dropdown",
-      "name": "ProdOffering_Stat",
+      "name": "A.Prod_Offering_Stat",
       "id": "ProdOfferingStat",
       "value": "Product Offering Status",
       "placeholder": "Placeholder",
-      "isFromURL": false,
+      "isFromURL": true,
       "isSelectOne": false,
-      "url": "https://api.myjson.com/bins/ld6e8",
+      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
       "label": "Product Offering Status",
-      "items": [{
-          "key": "1",
-          "value": "Yes"
-        },
-        {
-          "key": "0",
-          "value": "No"
-        }
-      ],
-      "itemsUrl": []
+      "items": [],
+      "itemsUrl": [],
+      "criteriaPropName": "RefMasterTypeCode",
+      "criteriaPropValue": "PRODUCT_STAT"
     },
     {
       "type": "datepicker",
-      "name": "EndDate",
+      "name": "A.End_Dt",
       "id": "EndDt",
       "value": "",
       "label": "End Date",
@@ -118,7 +112,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT P.PROD_CODE as ProdCode, P.PROD_NAME as ProdName,A.PROD_OFFERING_CODE as ProdOfferingCode, A.PROD_OFFERING_NAME as ProdOfferingName,A.CURRENT_PROD_OFFERING_H_ID AS CurrentProdOfferingHId , A.DRAFT_PROD_OFFERING_H_ID AS DraftProdOfferingHId, A.END_DT AS EndDt, A.PROD_OFFERING_STAT AS ProdOfferingStat, C.PROD_OFFERING_VERSION AS CurrentProdOfrVersion, D.PROD_OFFERING_VERSION AS DraftProdOfrVersion",
+    "select": "SELECT P.PROD_CODE as ProdCode, P.PROD_NAME as ProdName,A.PROD_OFFERING_CODE as ProdOfferingCode, A.PROD_OFFERING_NAME as ProdOfferingName,A.CURRENT_PROD_OFFERING_H_ID AS prodOfferingHId , A.DRAFT_PROD_OFFERING_H_ID AS DraftProdOfferingHId, A.END_DT AS EndDt, A.PROD_OFFERING_STAT AS ProdOfferingStat, C.PROD_OFFERING_VERSION AS CurrentProdOfrVersion, D.PROD_OFFERING_VERSION AS DraftProdOfrVersion",
     "from": "FROM PROD_OFFERING A WITH(NOLOCK) LEFT JOIN PROD_OFFERING_H B WITH(NOLOCK) ON A.CURRENT_PROD_OFFERING_H_ID = B.PROD_OFFERING_H_ID JOIN PROD P WITH(NOLOCK) ON A.PROD_ID = P.PROD_ID LEFT JOIN PROD_OFFERING_H D ON A.DRAFT_PROD_OFFERING_H_ID = D.PROD_OFFERING_H_ID LEFT JOIN PROD_OFFERING_H C WITH(NOLOCK) ON A.CURRENT_PROD_OFFERING_H_ID = C.PROD_OFFERING_H_ID"
   },
   "bodyList": [{
@@ -142,14 +136,30 @@
       "property": "ProdOfferingName"
     },
     {
-      "type": "text",
+      "type": "link",
       "position": "center",
-      "property": "CurrentProdOfrVersion"
+      "property": "CurrentProdOfrVersion",
+      "path": "../../OfferingView",
+      "target": "_blank",
+      "param": [
+          {
+              "type": "prodOfferingHId",
+              "property": "prodOfferingHId"
+          }
+      ]
     },
     {
-      "type": "text",
+      "type": "link",
       "position": "center",
-      "property": "DraftProdOfrVersion"
+      "property": "DraftProdOfrVersion",
+      "path": "../../OfferingView",
+      "target": "_blank",
+      "param": [
+          {
+              "type": "prodOfferingHId",
+              "property": "DraftProdOfferingHId"
+          }
+      ]
     },
     {
       "type": "text",

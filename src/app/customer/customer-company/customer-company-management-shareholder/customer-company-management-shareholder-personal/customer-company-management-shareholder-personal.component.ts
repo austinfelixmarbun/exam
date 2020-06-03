@@ -19,6 +19,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 export class CustomerCompanyManagementShareholderPersonalComponent implements OnInit {
   @Input() custCompanyId : number;
   @Input() CustCompanyMgmntShrholderId : number;
+  @Input() TotalShare : number;
   @Output () outputTab : EventEmitter<object>= new EventEmitter();
   
   tempIdType: any;
@@ -65,7 +66,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   ngOnInit() {
-
+    console.log("TotalShare")
+    console.log(this.TotalShare)
     this.inputLookupCustPersonalObj = new InputLookupObj();
     this.inputLookupCustPersonalObj.urlJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -165,14 +167,28 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             this.ManagementShareholderForm.controls.MrGenderCode.disable();
             this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
           }
+
+          this.TotalShare = this.TotalShare - parseFloat(this.tempCustCompanyMgmntShrholderObj.SharePrcnt);
+          console.log("TotalShare")
+          console.log(this.TotalShare);
         }
       );
       
     } 
-  
-
   }
-  SaveValue(){ 
+
+  LeftShare: number;
+  TotalShareCurrent: number;
+  SaveValue(){
+    this.TotalShareCurrent = this.TotalShare + parseFloat(this.ManagementShareholderForm.controls["SharePrcnt"].value);
+    console.log("TotalShareCurrent")
+    console.log(this.TotalShareCurrent);
+    if(this.TotalShareCurrent > 100){
+      this.LeftShare = 100 - this.TotalShare;
+      this.toastr.errorMessage("Total Share left is "+this.LeftShare+"%");
+      return;
+    }
+
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
     this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
@@ -219,6 +235,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Personal;
+
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -230,9 +247,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       );
     }
   }
+
   back(){
     this.outputTab.emit({mode : 'check'});
   }
+
   onOptionsSelected(event){  
     if(event.target.value == this.KTP){
       this.ManagementShareholderForm.controls.IdExpiredDt.clearValidators();

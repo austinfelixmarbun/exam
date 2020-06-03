@@ -52,6 +52,8 @@ export class ProductHoAdddetailComponent implements OnInit {
   ResultResponse: any;
   ProdHOBj: any;
   UrlBackEnd: any;
+  type: string;
+  
   ngOnInit() {
     //** Main Information **//
     this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
@@ -74,5 +76,9 @@ export class ProductHoAdddetailComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  EnterTab(type) {
+    this.type = type;
   }
 }

@@ -60,6 +60,14 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
  
   ngOnInit() {
+
+    var custObj = { CustId: this.IdCust };
+    this.http.post(AdInsConstant.GetCustPersonalbyCustId, custObj).subscribe(
+      (response: any) => {
+        this.CustPersonalId = response['CustPersonalId'];
+      }
+    );
+
     this.stepper = new Stepper(document.querySelector('#stepper1'), {
       linear: false,
       animation: true
@@ -99,9 +107,6 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
 
   getValue(ev: any) {
-    if (ev.CustPersonalId != undefined)
-      this.CustPersonalId = ev.CustPersonalId;
-
     if (ev.stepMode != undefined) {
       if (ev.stepMode == "next")
         this.stepper.next();

@@ -98,7 +98,9 @@ export const ROUTES: RouteInfo[] = [
     Submenu: [
       { Path: '/Customer/Paging', Title: 'Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
       { Path: '/Customer/EditMainData/Paging', Title: 'Edit Main Data Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },  
-      { Path: '/Customer/NegativeCustomer/Paging', Title: 'Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },      
+      { Path: '/Customer/NegativeCustomer/Paging', Title: 'Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },   
+      { Path: '/Customer/NegativeCustomer/Upload', Title: 'Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },         
+      { Path: '/Customer/NegativeCustomer/ReviewUploadPaging', Title: 'Review Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },      
     ]
   },
   // {

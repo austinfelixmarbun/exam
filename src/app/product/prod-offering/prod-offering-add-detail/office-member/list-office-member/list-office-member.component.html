@@ -44,9 +44,15 @@
       </div>
         <div class="card-header">
           <div class="text-right">
-            <button type="submit" (click)="DoneForm()" class="btn btn-raised btn-primary" translate>
-              <i class="far"></i> Done
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Product/ProdOffering/paging']" translate>
+              <i class="ft-x"></i> Cancel
             </button>
+            <button type="submit" (click)="DoneForm()" class="btn btn-raised btn-primary">
+              <i class="far fa-check-square"></i> Save
+            </button>
+            <!-- <button type="submit" (click)="DoneForm()" class="btn btn-raised btn-primary" translate>
+              <i class="far"></i> Done
+            </button> -->
           </div>
         </div>
     </div>
