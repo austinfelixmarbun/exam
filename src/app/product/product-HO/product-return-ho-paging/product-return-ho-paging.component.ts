@@ -28,8 +28,8 @@ export class ProductReturnHoPagingComponent implements OnInit {
     var criteriaList = new Array<CriteriaObj>();
     var criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    criteriaObj.propName = 'A.PROD_STAT';
-    criteriaObj.value = "RTN";
+    criteriaObj.propName = 'C.PROD_STAT';
+    criteriaObj.value = "RET";
     criteriaList.push(criteriaObj);
 
     this.inputPagingObj.addCritInput = criteriaList;
