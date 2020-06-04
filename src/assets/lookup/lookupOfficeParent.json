@@ -19,7 +19,11 @@
             "datatype":"text",
             "isFromURL":true,
             "isSelectOne" : false,
+<<<<<<< HEAD
             "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueOfficeTypeWithoutCg",
+=======
+            "url": "http://r3app-server.ad-ins.com/Foundation_R3/RefMaster/GetListKeyValueOfficeTypeWithoutCg",
+>>>>>>> e9732b7605d5fb457af8bb814a10d679da4aa76d
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "OFFICE_TYPE",
             "items" : [],
