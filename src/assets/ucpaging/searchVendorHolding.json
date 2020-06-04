@@ -11,7 +11,7 @@
             "isFromURL": true,
             "isSelectOne": false,
             "isQueryIn": true,
-            "url": "http://r3app-server.ad-ins.com/Foundation/RefMaster/GetListActiveRefMasterByVendorCategoryByReserveField1",
+            "url": "http://r3app-server.ad-ins.com/Foundation_R3/RefMaster/GetListActiveRefMasterByVendorCategoryByReserveField1",
             "label": "Vendor Category",
             "criteriaPropName": "ReserveField1",
             "criteriaPropValue": "HOLDING",

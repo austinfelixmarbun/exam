@@ -27,7 +27,7 @@
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server.ad-ins.com/Foundation/RefMaster/GetListKeyValueActiveByCode",
+            "url": "http://r3app-server.ad-ins.com/Foundation_R3/RefMaster/GetListKeyValueActiveByCode",
             "label": "Type",
             "criteriaPropName": "RefMasterTypeCode",
             "criteriaPropValue": "CUST_TYPE",
