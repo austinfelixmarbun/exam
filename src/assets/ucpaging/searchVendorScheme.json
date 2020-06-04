@@ -10,7 +10,7 @@
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3impl-appsvr.ad-ins.com/Foundation/RefMaster/GetListKeyValueActiveByCode",
+            "url": "http://r3app-server.ad-ins.com/Foundation/RefMaster/GetListKeyValueActiveByCode",
             "label": "Vendor Category",
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "VENDOR_CATEGORY",

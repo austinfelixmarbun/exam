@@ -10,6 +10,7 @@ import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model'
 import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductDetailObj } from 'app/shared/model/ListRefProductDetailObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-general-data-HO',
@@ -32,6 +33,8 @@ export class GeneralDataHOComponent implements OnInit {
 
   FormProdComp: any;
   dictOptions: { [key: string]: any; } = {};
+  dictMultiOptions: { [key: string]: any; } = {};
+  selectedMultiDDLItems: { [key: string]: any; } = {};
   UrlGetProdCompGrouped: string;
   UrlPostAddEditProdD: string;
   ProdHId: number;
@@ -41,6 +44,16 @@ export class GeneralDataHOComponent implements OnInit {
 
   inputLookUpObj: any;
   indentifierTemp;
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 5,
+    allowSearchFilter: true
+  };
 
   ngOnInit() {
     this.UrlGetProdCompGrouped = AdInsConstant.GetProductHOComponentGrouped;
@@ -54,7 +67,7 @@ export class GeneralDataHOComponent implements OnInit {
 
     this.ProdHId = this.objInput["param"];
     this.ProdId = this.objInput["ProdId"];
-    this.LoadProdComponent(this.ProdHId, "GEN");
+    this.LoadProdComponent(this.ProdHId, "GEN", false);
 
 
     this.inputLookUpObj = new InputLookupObj();
@@ -94,6 +107,20 @@ export class GeneralDataHOComponent implements OnInit {
       else {
         compValue = obj.CompntValue;
         compDescr = obj.CompntValueDesc;
+      }
+    }else if(obj.ProdCompntType == "MULTI_DDL"){
+      if (obj.CompntValue != "") {
+        compValue = obj.CompntValue;
+        compDescr = obj.CompntValueDesc;
+
+        var selectedId = obj.CompntValue.split(";");
+        var selectedText = obj.CompntValueDesc.split(",");
+
+        this.selectedMultiDDLItems[obj.RefProdCompntCode] = new Array();
+
+        for(var i = 0; i < selectedId.length; i++){
+          this.selectedMultiDDLItems[obj.RefProdCompntCode].push({item_id: selectedId[i], item_text: selectedText[i]});
+        }
       }
     }
     else {
@@ -142,6 +169,26 @@ export class GeneralDataHOComponent implements OnInit {
     }
   }
 
+  async PopulateMultiDDL(obj) {
+    if (url != "") {
+      var url = obj.ProdCompntDtaSrcApi;
+      var payload = JSON.parse(obj.ProdCompntDtaValue);
+      await this.http.post(url, payload).toPromise().then(
+        (response) => {
+          var result = response["ReturnObject"];
+          this.dictMultiOptions[obj.RefProdCompntCode] = new Array();
+          this.selectedMultiDDLItems[obj.RefProdCompntCode] = new Array();
+          for (let i = 0; i < result.length; i++) {
+            this.dictMultiOptions[obj.RefProdCompntCode].push({ item_id: result[i].Key, item_text: result[i].Value});
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
   async PopulateFinMapFromLOB() {
     var url = AdInsConstant.GetKvpRefFinMapByLobCode;
     await this.http.post(url, { LobCode: this.LOBSelected, RowVersion: "" }).toPromise().then(
@@ -176,16 +223,12 @@ export class GeneralDataHOComponent implements OnInit {
     var url = AdInsConstant.GetListKvpInstSchmByLobCode;
     await this.http.post(url, { LobCode: this.LOBSelected, RowVersion: "" }).toPromise().then(
       (response) => {
-        this.dictOptions["INSTSCHM"] = response["ReturnObject"]
+        var result = response["ReturnObject"];
+        this.dictMultiOptions["INST_SCHM"] = new Array();
+        this.selectedMultiDDLItems["INST_SCHM"] = new Array();
 
-        for (var i = 0; i < this.FormProdComp.controls["groups"].controls.length; i++) {
-          for (var j = 0; j < this.FormProdComp.controls["groups"].controls[i].controls["components"].length; j++) {
-            var comp = this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j] as FormGroup;
-            var compCode = comp.value["RefProdCompntCode"];
-            if (compCode == "INSTSCHM") {
-              comp.patchValue({ CompntValueDesc: this.dictOptions["INSTSCHM"][0].Value, CompntValue: this.dictOptions["INSTSCHM"][0].Key })
-            }
-          }
+        for (let i = 0; i < result.length; i++) {
+          this.dictMultiOptions["INST_SCHM"].push({ item_id: result[i].Key, item_text: result[i].Value});
         }
       },
       (error) => {
@@ -194,10 +237,11 @@ export class GeneralDataHOComponent implements OnInit {
     )
   }
 
-  LoadProdComponent(ProdHId, CompGroups) {
+  LoadProdComponent(ProdHId, CompGroups, IsFilterBizTmpltCode) {
     var ProdHOComponent = {
       ProdHId: ProdHId,
       GroupCodes: CompGroups.split(","),
+      IsFilterBizTmpltCode: IsFilterBizTmpltCode,
       RowVersion: ""
     }
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
@@ -211,6 +255,9 @@ export class GeneralDataHOComponent implements OnInit {
             var comp = group.Components[j];
             if (comp.ProdCompntType == "DDL") {
               await this.PopulateDDL(comp);
+            }
+            if(comp.ProdCompntType == "MULTI_DDL"){
+              await this.PopulateMultiDDL(comp);
             }
           }
           await this.PopulateFinMapFromLOB();
@@ -246,10 +293,35 @@ export class GeneralDataHOComponent implements OnInit {
     })
   }
 
+  onMultiDDLChangeEvent(refProdCompntCode, index, indexparent) {
+    var selectedId = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_id);
+    var selectedText = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_text);
+    this.FormProdComp.controls["groups"].controls[indexparent].controls["components"].controls[index].patchValue({
+      CompntValue : selectedId.join(";"),
+      CompntValueDesc: selectedText.join(",")
+    })
+  }
+
   BuildReqProdDetail() {
     var list = new Array();
     for (let i = 0; i < this.FormProdComp.controls.groups.length; i++) {
       for (let j = 0; j < this.FormProdComp.controls.groups.controls[i].controls["components"].length; j++) {
+        var prodCompntType = this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].controls.ProdCompntType.value;
+
+        if(prodCompntType == "AMT"){
+          this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].patchValue({
+            CompntValueDesc : this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].controls.CompntValue.value
+          });
+        }
+        if(prodCompntType == "MULTI_DDL"){
+          var refProdCompntCode = this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].controls.RefProdCompntCode.value;
+          var selectedId = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_id);
+          var selectedText = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_text);
+          this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].patchValue({
+            CompntValue : selectedId.join(";"),
+            CompntValueDesc: selectedText.join(",")
+          });
+        }
         list.push(Object.assign({}, ...this.FormProdComp.controls.groups.controls[i].controls["components"].controls[j].value));
       }
     }
@@ -325,5 +397,16 @@ export class GeneralDataHOComponent implements OnInit {
         );
       }
     }
+  }
+
+  test(){
+    console.log(this.FormProdComp);
+    console.log(this.selectedMultiDDLItems);
+    var objPost = this.BuildReqProdDetail();
+    console.log(objPost);
+  }
+  
+  onSelect(){
+    console.log("event");
   }
 }

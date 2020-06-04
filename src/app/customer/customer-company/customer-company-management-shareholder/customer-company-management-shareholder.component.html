@@ -1,6 +1,6 @@
 <app-customer-company-management-shareholder-check *ngIf="mode == 'check'"  (outputValue)="terimaValue($event)"> </app-customer-company-management-shareholder-check>
-<app-customer-company-management-shareholder-company *ngIf="mode == 'addCompany'"  [custCompanyId] ="this.custCompanyId"  [CustCompanyMgmntShrholderId] = "this.CustCompanyMgmntShrholderId" (outputValue)="terimaValue($event)"> </app-customer-company-management-shareholder-company>
-<app-customer-company-management-shareholder-personal *ngIf="mode == 'addPersonal'" [custCompanyId] ="this.custCompanyId"  [CustCompanyMgmntShrholderId] = "this.CustCompanyMgmntShrholderId "(outputTab)="terimaValue($event)"> </app-customer-company-management-shareholder-personal>
+<app-customer-company-management-shareholder-company *ngIf="mode == 'addCompany'"  [custCompanyId] ="this.custCompanyId"  [CustCompanyMgmntShrholderId] = "this.CustCompanyMgmntShrholderId" [TotalShare]="this.TotalShare" (outputValue)="terimaValue($event)"> </app-customer-company-management-shareholder-company>
+<app-customer-company-management-shareholder-personal *ngIf="mode == 'addPersonal'" [custCompanyId] ="this.custCompanyId"  [CustCompanyMgmntShrholderId] = "this.CustCompanyMgmntShrholderId" [TotalShare]="this.TotalShare" (outputTab)="terimaValue($event)"> </app-customer-company-management-shareholder-personal>
 <!-- (outputValue)="terimaValue($event)" -->
 <!-- <app-customer-contact-add  *ngIf="isAdd == true" [inputValue] ="this.inputValue" [custPersonalContactPersonId] = this.custPersonalContactPersonId (outputValues)="terimaValue($event)" > </app-customer-contact-add> -->
 

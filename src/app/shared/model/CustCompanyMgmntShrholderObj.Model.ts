@@ -3,7 +3,7 @@ export class CustCompanyMgmntShrholderObj {
     CustCompanyId: any;
     MgmntShrholderName: any;
     MrJobPositionCode: any;
-    SharePrcnt: any;
+    SharePrcnt: number;
     IsSigner: any;
     MrIdTypeCode: any;
     IdNo: any;

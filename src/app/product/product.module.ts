@@ -44,6 +44,8 @@ import { ListOfficeMemberComponentOffering } from './prod-offering/prod-offering
 import { SearchOfficeComponentOffering } from './prod-offering/prod-offering-add-detail/office-member/search-office/search-office.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { UcapprovalModule } from '@adins/ucapproval';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
   imports: [
@@ -63,7 +65,8 @@ import { UcapprovalModule } from '@adins/ucapproval';
     MatDividerModule,
     UclookupgenericModule,
     UcShowErrorsModule,
-    UcapprovalModule
+    UcapprovalModule,
+    NgMultiSelectDropDownModule
   ],
   declarations: [
     ProductHOApprovalComponent,
