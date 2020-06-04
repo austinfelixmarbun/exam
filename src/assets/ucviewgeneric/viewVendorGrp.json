@@ -3,7 +3,7 @@
         {
             "subSectionId": "Vendor Group Member Information",
             "subSectionTitle": "VENDOR GROUP MEMBER",
-            "mainInfoUrl": "http://r3app-server.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
+            "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
             "mainInfo": [
                 {
                     "type": "text",

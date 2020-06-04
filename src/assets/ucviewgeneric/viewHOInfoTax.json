@@ -3,7 +3,7 @@
       {
         "subSectionId": "HOTaxId",
         "subSectionTitle": "Tax Info",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
@@ -38,7 +38,7 @@
       {
         "subSectionId": "HOTaxAddressId",
         "subSectionTitle": "Tax Info",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",

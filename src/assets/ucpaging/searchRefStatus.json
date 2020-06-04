@@ -19,7 +19,7 @@
         "placeholder": "Placeholder",
         "isFromURL": true,
         "isSelectOne": false,
-        "url": "http://r3app-server.ad-ins.com/Foundation/RefTrxType/GetListKeyValueActiveById",
+        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefTrxType/GetListKeyValueActiveById",
         "label": "Transaction Type",
         "items": [],
         "itemsUrl": []
@@ -41,7 +41,7 @@
         "placeholder": "Placeholder",
         "isFromURL": true,
         "isSelectOne": true,
-        "url": "http://r3app-server.ad-ins.com/Foundation/RefModule/GetListKeyValueByCode",
+        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefModule/GetListKeyValueByCode",
         "label": "Module Code",
         "items": [],
         "itemsUrl": []
