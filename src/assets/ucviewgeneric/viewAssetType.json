@@ -4,7 +4,7 @@
     {
       "subSectionId": "AssetTypeId",
       "subSectionTitle": "Asset Type",
-      "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
+      "mainInfoUrl": "http://r3app-server.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
       "mainInfo": [
         {
           "type": "text",

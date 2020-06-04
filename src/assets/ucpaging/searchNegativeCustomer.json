@@ -27,7 +27,7 @@
             "isSelectOne" : false,
             "items" : [],
             "isFromURL" : true, 
-            "url" : "http://r3impl-appsvr.ad-ins.com/Foundation/RefMaster/GetListKeyValueActiveByCode", 
+            "url" : "http://r3app-server.ad-ins.com/Foundation/RefMaster/GetListKeyValueActiveByCode", 
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "CUST_TYPE"
@@ -72,7 +72,7 @@
             "isSelectOne" : false,
             "items" : [],
             "isFromURL" : true, 
-            "url" : "http://r3impl-appsvr.ad-ins.com/Foundation/RefMaster/GetListKeyValueActiveByCode", 
+            "url" : "http://r3app-server.ad-ins.com/Foundation/RefMaster/GetListKeyValueActiveByCode", 
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "NEG_CUST_TYPE"

@@ -17,7 +17,7 @@ export class HolidayPagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/ucpaging/searchHoliday.json";
-    this.inputObj.enviromentUrl = "http://r3impl-appsvr.ad-ins.com/Foundation";
+    this.inputObj.enviromentUrl = "http://r3app-server.ad-ins.com/Foundation";
     this.inputObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputObj.pagingJson = "./assets/ucpaging/searchHoliday.json";
     this.inputObj.deleteUrl = "/HolidaySchm/DeleteHolidaySchmH";
