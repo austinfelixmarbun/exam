@@ -18,21 +18,21 @@
 <table class="table table-responsive-md text-center table-hover">
   <thead>
     <tr class="table-header">
-      <th class="text-left"><span class="thead-header" name='Status' translate>Status</span></th>
-      <th class="text-left"><span class="thead-header" name='CustNo' translate>Shareholder Name</span></th>
-      <th class="text-left"><span class="thead-header" name='Name' translate>Type</span></th>
-      <th class="text-left"><span class="thead-header" name='Gender' translate>Customer Model</span></th>
+      <th class="text-left"><span class="thead-header" name='Status' translate>STATUS</span></th>
+      <th class="text-left"><span class="thead-header" name='CustNo' translate>SHAREHOLDER NAME</span></th>
+      <th class="text-left"><span class="thead-header" name='Name' translate>TYPE</span></th>
+      <th class="text-left"><span class="thead-header" name='Gender' translate>CUSTOMER MODEL</span></th>
       <th class="text-left"><span class="thead-header" name='CustomerRelationship' translate>NPWP</span></th>
-      <th class="text-left"><span class="thead-header" name='IdType' translate>Share(%)</span></th>
-      <th class="text-left"><span class="thead-header" name='IdNo' translate>Default Signer</span></th>
-      <th translate>Edit</th>
-      <th translate>Delete</th>
+      <th class="text-left"><span class="thead-header" name='IdType' translate>SHARE (%)</span></th>
+      <th class="text-left"><span class="thead-header" name='IdNo' translate>DEFAULT SIGNER</span></th>
+      <th translate>EDIT</th>
+      <th translate>DELETE</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of tempListCompanyManagementShareholder">
       <td class="text-left">{{item.MrNegCustTypeCode}}</td>
-      <td class="text-left">{{item.MgmntShrholderName}}</td>
+      <td class="text-left" style="color: blue; cursor: pointer; text-align: left;"><a (click)="openView(item.ShareholderCustNo)">{{item.MgmntShrholderName}}</a></td>
       <td class="text-left">{{item.MrCustTypeCode}}</td>
       <td class="text-left">{{item.MrCustModelCode}}</td>
       <td class="text-left">{{item.TaxIdNo}}</td>
@@ -57,11 +57,4 @@
 <br>
 <br>
 <br>
-<div class="form-actions right" style="text-align: right;">
-  <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
-    <i class="ft-x"></i> Back
-  </button>
-  <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
-    <i class="fa fa-check-square-o"></i> Save and Continue
-  </button>
-</div>
+ 

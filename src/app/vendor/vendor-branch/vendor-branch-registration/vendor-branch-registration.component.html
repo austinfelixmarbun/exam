@@ -13,14 +13,14 @@
         <app-main-info-view></app-main-info-view>
         <form>
           <div class="form-actions right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch/Paging']"
-            translate>
-            Finish
-          </button>
-            <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Branch/Add']"
+            <span class="mr-1">
+              <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Branch/Add']"
               [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
               <i class="ft-plus-circle"></i> Edit Main Info
             </button>
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch/Paging']"
+            translate> Finish </button>
+            </span>
           </div>
         </form>
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode] navigateBackward="allow"

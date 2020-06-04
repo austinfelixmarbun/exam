@@ -286,25 +286,30 @@ form .form-section{
 }
 
 .multiselect-dropdown .dropdown-btn .dropdown-down{
-    border-top: 7px solid #000000 !important;
-    border-left: 3.5px solid transparent !important;
-    border-right: 3.5px solid transparent !important;
-    }
-    
-     .multiselect-dropdown .dropdown-btn .dropdown-up{
-    border-bottom: 7px solid #000000 !important;
-    border-left: 3.5px solid transparent !important;
-    border-right: 3.5px solid transparent !important;
-    }
-    
-     .multiselect-dropdown .dropdown-btn {
-    border: 1px solid #cccccc!important;
-    border-radius: 0px !important;
-    }
-    
-    .dropdown-btn > span {
-    color: #000000;
-    }
+border-top: 7px solid #000000 !important;
+border-left: 3.5px solid transparent !important;
+border-right: 3.5px solid transparent !important;
+}
+
+.multiselect-dropdown .dropdown-btn .dropdown-up{
+border-bottom: 7px solid #000000 !important;
+border-left: 3.5px solid transparent !important;
+border-right: 3.5px solid transparent !important;
+}
+
+.multiselect-dropdown .dropdown-btn {
+border: 1px solid #cccccc!important;
+border-radius: 0px !important;
+}
+
+.dropdown-btn > span {
+color: #000000;
+}
+
+.margin-stepper{
+    margin-left: 150px;
+    margin-right: 150px;
+}
 
 /* 
 .adInsReqMsg {

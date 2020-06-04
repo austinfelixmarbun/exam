@@ -16,14 +16,14 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-cust-fin-data-tab',
   templateUrl: './cust-fin-data-tab.component.html',
-  styleUrls: ['./cust-fin-data-tab.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService]
 })
 export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
   @Input() CustId: number;
-  // @Output() CustFinDataResponse: EventEmitter<any> = new EventEmitter();
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
+  
   sourceOfIncomeList: any;
   isCalculated: boolean;
   spouseMonthlyIncomeAmt: number;
@@ -99,6 +99,7 @@ export class CustFinDataTabComponent implements OnInit {
       this.httpClient.post(AdInsConstant.GetCustPersonalbyCustId, custPersonal).pipe(
         map((response: CustPersonalObj) => {
           this.mrMaritalStatCode = response.MrMaritalStatCode;
+          console.log(this.mrMaritalStatCode);
           custPersonalData = response;
           return response;
         }),

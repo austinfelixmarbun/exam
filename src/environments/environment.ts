@@ -4,15 +4,13 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: true,
+  production: false,
   navbarColor: 'lightgray',
-  foundationUrl: 'http://r3app-server.ad-ins.com/FOUNDATION_R3', //'https://localhost:5000', //
-  settingUrl: 'http://r3app.ad-ins.com/setting', //'https://localhost:4999',
+  settingUrl: 'http://r3app.ad-ins.com/setting',
   localHostUrl: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
   r2AppServerUrl: 'http://R2AppServer/POC/api',
-  losUrl : 'http://r3web.ad-ins.com/LOSR3/pages/login',
-  FoundationR3Url: 'http://r3app-server.ad-ins.com/Foundation_R3',
-  // FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  // FoundationR3Url: 'http://localhost:5000',
+  LosURL : 'http://r3web-server.ad-ins.com/LOSR3/',
+  FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
+  Module:"FOU",
   ApprovalURL : 'http://r3app-server/APPROVAL'
 };

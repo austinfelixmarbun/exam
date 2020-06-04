@@ -35,7 +35,7 @@ export class UploadSettingPagingComponent implements OnInit {
   deleteUrl: any;
   orderByKey: any = null;
   orderByValue = true;
-  foundationUrl: any = environment.foundationUrl
+  foundationUrl: any = environment.FoundationR3Url
   inputObj: any;
   verfTrxTypeId: any;
   exportData: any;

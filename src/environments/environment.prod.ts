@@ -5,15 +5,14 @@
 
 export const environment = {
     production: true,
-    navbarColor: 'blue',
-    foundationUrl: 'http://r3app-server.ad-ins.com/FOUNDATION_R3', //'https://localhost:5000', //
-    settingUrl: 'http://r3app.ad-ins.com/setting', //'https://localhost:4999',
+    navbarColor: 'transparent',
+    settingUrl: 'http://r3app.ad-ins.com/setting',
     localHostUrl: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
     r2AppServerUrl: 'http://R2AppServer/POC/api',
-    losUrl : 'http://r3web.ad-ins.com/LOSR3/pages/login',
+    LosURL : 'http://r3web-server.ad-ins.com/LOSR3/',
     FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-    //FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3', 
-    ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL'
+    Module:"FOU",
+    ApprovalURL : 'http://r3app-server/APPROVAL'
   };
   
   

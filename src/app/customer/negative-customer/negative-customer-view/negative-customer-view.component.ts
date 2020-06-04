@@ -13,7 +13,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 @Component({
   selector: 'app-negative-customer-view',
   templateUrl: './negative-customer-view.component.html',
-  styleUrls: ['./negative-customer-view.component.scss']
+  styleUrls: []
 })
 export class NegativeCustomerViewComponent implements OnInit {
   negativeCustId: number = 0;

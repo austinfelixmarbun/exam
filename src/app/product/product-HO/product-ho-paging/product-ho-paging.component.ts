@@ -29,7 +29,7 @@ export class ProductHOPagingComponent implements OnInit {
     
     if(e.RowObj.DraftProdHId == null)
     {
-      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.CurrentProdHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.prodHId, "mode" : "edit" } });
     }
     else
     {

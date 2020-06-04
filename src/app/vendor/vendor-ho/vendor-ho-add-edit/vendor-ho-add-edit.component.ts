@@ -230,7 +230,7 @@ export class VendorHoAddEditComponent implements OnInit {
     }
   }
 
-  CheckMode(){
+  Back(){
     if(this.mode == "edit"){
       this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": this.VendorId} });
     }else{

@@ -116,7 +116,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     logout() {
-        var url = environment.foundationUrl + AdInsConstant.Logout;
+        var url = environment.FoundationR3Url + AdInsConstant.Logout;
         this.http.post(url, "");
         AdInsHelper.ClearAllLog();
         this.router.navigate(['pages/login']);
@@ -134,7 +134,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     changeModul(modul: string) {
         var token = localStorage.getItem("Token");
-        var url = environment.losUrl + "?token=" + token;
+        var url = environment.LosURL+AdInsConstant.LoginURLFrontEnd + "?token=" + token;
         window.open(url, "_blank");
     }
 

@@ -4,36 +4,36 @@
       {
         "subSectionId": "JobDataId",
         "subSectionTitle": "Job Data",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",
-            "label": "Customer Model",
+            "label": "CUSTOMER MODEL",
             "property": "MrCustModelCode"
           },
           {
             "type": "text",
-            "label": "Profession Name",
+            "label": "PROFESSION NAME",
             "property": "ProfessionName"
           },
           {
             "type": "text",
-            "label": "Professional No",
+            "label": "PROFESSIONAL NO.",
             "property": "ProfessionalNo"
           },
           {
             "type": "text",
-            "label": "Job Title Name",
+            "label": "JOB TITLE NAME",
             "property": "JobTitleName"
           },
           {
             "type": "text",
-            "label": "Industry Type Name",
+            "label": "INDUSTRY TYPE NAME",
             "property": "IndustryTypeName"
           },
           {
             "type": "date",
-            "label": "Establishment Date",
+            "label": "ESTABLISHMENT DATE",
             "property": "EmploymentEstablishmentDt"
           }
         ],

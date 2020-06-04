@@ -1,31 +1,32 @@
 {
-    "subsection": [
-      {
-        "subSectionId": "EmployeeInfo",
-        "subSectionTitle": "Employee Info",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
-        "mainInfo": [
-          {
-            "type": "text",
-            "label": "Username",
-            "property": "Username"
-          },
-          {
-            "type": "text",
-            "label": "Employee Name",
-            "property":"EmployeeName"
-          }, 
-          {
-            "type": "text",
-            "label": "Employee No",
-            "property": "EmpNo"
-          }
-        ],
-        "querystring": {
-            "select": "SELECT usr.USERNAME AS Username, emp.EMP_NO AS EmpNo, emp.EMP_NAME AS EmployeeName",
-            "from": "FROM dbo.REF_USER usr WITH(NOLOCK) JOIN dbo.REF_EMP emp WITH(NOLOCK) on usr.REF_EMP_ID = emp.REF_EMP_ID", 
-            "where": "WHERE usr.REF_USER_ID = {0}" 
+  "title": "Employee Business Unit",
+  "subsection": [
+    {
+      "subSectionId": "EmployeeInfo",
+      "subSectionTitle": "Employee Info",
+      "mainInfoUrl": "http://r3app-server.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
+      "mainInfo": [
+        {
+          "type": "text",
+          "label": "Username",
+          "property": "Username"
+        },
+        {
+          "type": "text",
+          "label": "Employee Name",
+          "property": "EmployeeName"
+        },
+        {
+          "type": "text",
+          "label": "Employee No",
+          "property": "EmpNo"
         }
+      ],
+      "querystring": {
+        "select": "SELECT usr.USERNAME AS Username, emp.EMP_NO AS EmpNo, emp.EMP_NAME AS EmployeeName",
+        "from": "FROM dbo.REF_USER usr WITH(NOLOCK) JOIN dbo.REF_EMP emp WITH(NOLOCK) on usr.REF_EMP_ID = emp.REF_EMP_ID",
+        "where": "WHERE usr.REF_USER_ID = {0}"
       }
-    ]
-  }
+    }
+  ]
+}

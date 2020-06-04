@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
+import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 
 @Component({
   selector: 'app-asset-document-add-edit',
@@ -33,7 +34,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
   AssetDocListId: number;
   apiUrl: string;
   settingUrl: string = environment.FoundationR3Url;
-  urlEnviPaging: string = environment.foundationUrl;
+  urlEnviPaging: string = environment.FoundationR3Url;
   result: AssetDocListObj;
   assetDocListObj: AssetDocListObj;
   GetListRefAssetDocUrl: string;
@@ -43,14 +44,17 @@ export class AssetDocumentAddEditComponent implements OnInit {
   tempAssetName: any;
   temp: RefAssetDocObj;
   GetAssetTypeById : string;
+  generalSettingUrl: string;
+  isShowCbxBorrow: boolean;
+  isShowCbxPledge: boolean;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
     this.AddNewAssetDocListUrl =  AdInsConstant.AddNewAssetDocList;
     this.EditAssetDocListUrl =  AdInsConstant.EditAssetDocList;
     this.GetListRefAssetDocUrl = AdInsConstant.GetListRefAssetDoc;
     this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
-    this.route.queryParams.subscribe(params => {
-      
+    this.generalSettingUrl = AdInsConstant.GetListGeneralSettingByListGsCode;
+    this.route.queryParams.subscribe(params => {      
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
       }
@@ -76,6 +80,26 @@ export class AssetDocumentAddEditComponent implements OnInit {
     this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];
+      }
+    );
+
+    var generalSettingObj : GeneralSettingObj = new GeneralSettingObj();
+    generalSettingObj.ListGsCode = ["IS_SHOW_CBX_BORROW","IS_SHOW_CBX_PLEDGE"];
+    this.http.post(this.generalSettingUrl, generalSettingObj).subscribe(
+      (response) => {
+        var tempResponse = response['ResponseGeneralSettingObj'];
+        if(tempResponse[0]['GsCode'] == "IS_SHOW_CBX_BORROW"){
+          this.isShowCbxBorrow = tempResponse[0]["GsValue"];
+        }
+        else if(tempResponse[1]['GsCode'] == "IS_SHOW_CBX_BORROW"){
+          this.isShowCbxBorrow = tempResponse[1]["GsValue"];
+        }
+        if(tempResponse[0]['GsCode'] == "IS_SHOW_CBX_PLEDGE"){
+          this.isShowCbxPledge = tempResponse[0]["GsValue"];
+        }
+        else if(tempResponse[1]['GsCode'] == "IS_SHOW_CBX_PLEDGE"){
+          this.isShowCbxPledge = tempResponse[1]["GsValue"];
+        }
       }
     );
 

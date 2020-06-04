@@ -3,7 +3,6 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { WizardComponent } from 'angular-archwizard';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { DatePipe } from '@angular/common';
@@ -14,13 +13,14 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 @Component({
   selector: 'app-customer-company-management-shareholder-personal',
   templateUrl: './customer-company-management-shareholder-personal.component.html',
-  styleUrls: ['./customer-company-management-shareholder-personal.component.scss'],
+  styleUrls: [],
   providers: [NGXToastrService],
 })
 export class CustomerCompanyManagementShareholderPersonalComponent implements OnInit {
   @Input() custCompanyId : number;
   @Input() CustCompanyMgmntShrholderId : number;
-  @Output () outputValue : EventEmitter<object>= new EventEmitter();
+  @Input() TotalShare : number;
+  @Output () outputTab : EventEmitter<object>= new EventEmitter();
   
   tempIdType: any;
   tempMrGenderCode: any;
@@ -56,7 +56,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     IsSigner: [false], 
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private wizard: WizardComponent) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
@@ -66,7 +66,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   ngOnInit() {
-
+    console.log("TotalShare")
+    console.log(this.TotalShare)
     this.inputLookupCustPersonalObj = new InputLookupObj();
     this.inputLookupCustPersonalObj.urlJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -166,14 +167,28 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             this.ManagementShareholderForm.controls.MrGenderCode.disable();
             this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
           }
+
+          this.TotalShare = this.TotalShare - parseFloat(this.tempCustCompanyMgmntShrholderObj.SharePrcnt);
+          console.log("TotalShare")
+          console.log(this.TotalShare);
         }
       );
       
     } 
-  
-
   }
-  SaveValue(){ 
+
+  LeftShare: number;
+  TotalShareCurrent: number;
+  SaveValue(){
+    this.TotalShareCurrent = this.TotalShare + parseFloat(this.ManagementShareholderForm.controls["SharePrcnt"].value);
+    console.log("TotalShareCurrent")
+    console.log(this.TotalShareCurrent);
+    if(this.TotalShareCurrent > 100){
+      this.LeftShare = 100 - this.TotalShare;
+      this.toastr.errorMessage("Total Share left is "+this.LeftShare+"%");
+      return;
+    }
+
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
     this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
@@ -195,17 +210,18 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputValue.emit({mode : 'check'});
+          this.outputTab.emit({mode : 'check'});
         },
         error => {
           console.log(error);
         }
       );
     }else{
-
+      console.log(" ");
       if(this.tempShareholderCustNo!=null){
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
       }
+      this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;
       this.custCompanyMgmntShrholderObj.MrIdTypeCode = this.ManagementShareholderForm.controls["MrIdTypeCode"].value;
@@ -219,10 +235,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Personal;
+
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputValue.emit({mode : 'check'});
+          this.outputTab.emit({mode : 'check'});
         },
         error => {
           console.log(error);
@@ -230,9 +247,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       );
     }
   }
+
   back(){
-    this.outputValue.emit({mode : 'check'});
+    this.outputTab.emit({mode : 'check'});
   }
+
   onOptionsSelected(event){  
     if(event.target.value == this.KTP){
       this.ManagementShareholderForm.controls.IdExpiredDt.clearValidators();
@@ -243,8 +262,6 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
   }
-
-  
 
   getLookUpCustomer(event) {
     

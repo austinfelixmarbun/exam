@@ -30,7 +30,7 @@ export class ProdOfferingPagingComponent implements OnInit {
   {
     if(e.RowObj.DraftProdOfferingHId == null)
     {
-      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.CurrentProdOfferingHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.prodOfferingHId, "mode" : "edit" } });
     }
     else
     {

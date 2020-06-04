@@ -38,6 +38,9 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   addressType: RefMasterObj;
   custAddrObj : CustAddrObj;
   custAddressObj: CustAddrObj;
+  
+  custAddrFromObj: CustAddrObj;
+  copyCustomerAddrFrom: any;
 
   BirthDt: Date;
   IdExpiredDt: Date;
@@ -159,39 +162,39 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   }
 
   copyAddress(){
-    this.custAddrObj = new CustAddrObj();
-    this.custAddrObj.CustAddrId = this.CustDataPersonalForm.controls["CopyAddrFrom"].value;
-    this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
+    this.custAddrFromObj = new CustAddrObj();
+    this.custAddrFromObj.CustAddrId = this.CustDataPersonalForm.controls["CopyAddrFrom"].value;
+    this.http.post(this.getCustAddr, this.custAddrFromObj).subscribe(
       (response) => {
-          this.copyCustomerAddr = response;
+          this.copyCustomerAddrFrom = response;
           this.CustDataPersonalForm.patchValue({
-              Notes: this.copyCustomerAddr.Notes
+              Notes: this.copyCustomerAddrFrom.Notes
           });
           
           this.addressObj = new CustAddrObj();
-          this.addressObj.Addr = this.copyCustomerAddr.Addr;
-          this.addressObj.AreaCode3 = this.copyCustomerAddr.AreaCode3;
-          this.addressObj.AreaCode4 = this.copyCustomerAddr.AreaCode4;
-          this.addressObj.AreaCode1 = this.copyCustomerAddr.AreaCode1;
-          this.addressObj.AreaCode2 = this.copyCustomerAddr.AreaCode2;
-          this.addressObj.City = this.copyCustomerAddr.City;
-          this.addressObj.PhnArea1 = this.copyCustomerAddr.PhnArea1;
-          this.addressObj.Phn1 = this.copyCustomerAddr.Phn1;
-          this.addressObj.PhnExt1 = this.copyCustomerAddr.PhnExt1;
-          this.addressObj.PhnArea2 = this.copyCustomerAddr.PhnArea2;
-          this.addressObj.Phn2 = this.copyCustomerAddr.Phn2;
-          this.addressObj.PhnExt2 = this.copyCustomerAddr.PhnExt2;
-          this.addressObj.PhnArea3 = this.copyCustomerAddr.PhnArea3;
-          this.addressObj.Phn3 = this.copyCustomerAddr.Phn3;
-          this.addressObj.PhnExt3 = this.copyCustomerAddr.PhnExt3;
-          this.addressObj.FaxArea = this.copyCustomerAddr.FaxArea;
-          this.addressObj.Fax = this.copyCustomerAddr.Fax;
-          this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddr.MrBuildingOwnershipCode;
+          this.addressObj.Addr = this.copyCustomerAddrFrom.Addr;
+          this.addressObj.AreaCode3 = this.copyCustomerAddrFrom.AreaCode3;
+          this.addressObj.AreaCode4 = this.copyCustomerAddrFrom.AreaCode4;
+          this.addressObj.AreaCode1 = this.copyCustomerAddrFrom.AreaCode1;
+          this.addressObj.AreaCode2 = this.copyCustomerAddrFrom.AreaCode2;
+          this.addressObj.City = this.copyCustomerAddrFrom.City;
+          this.addressObj.PhnArea1 = this.copyCustomerAddrFrom.PhnArea1;
+          this.addressObj.Phn1 = this.copyCustomerAddrFrom.Phn1;
+          this.addressObj.PhnExt1 = this.copyCustomerAddrFrom.PhnExt1;
+          this.addressObj.PhnArea2 = this.copyCustomerAddrFrom.PhnArea2;
+          this.addressObj.Phn2 = this.copyCustomerAddrFrom.Phn2;
+          this.addressObj.PhnExt2 = this.copyCustomerAddrFrom.PhnExt2;
+          this.addressObj.PhnArea3 = this.copyCustomerAddrFrom.PhnArea3;
+          this.addressObj.Phn3 = this.copyCustomerAddrFrom.Phn3;
+          this.addressObj.PhnExt3 = this.copyCustomerAddrFrom.PhnExt3;
+          this.addressObj.FaxArea = this.copyCustomerAddrFrom.FaxArea;
+          this.addressObj.Fax = this.copyCustomerAddrFrom.Fax;
+          this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddrFrom.MrBuildingOwnershipCode;
 
           this.inputFieldAddressObj = new InputFieldObj();
           this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
-          this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddr.Zipcode;
-          this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.copyCustomerAddr.Zipcode};
+          this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddrFrom.Zipcode;
+          this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.copyCustomerAddrFrom.Zipcode};
           
       });
       console.log("vvv")

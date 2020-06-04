@@ -188,7 +188,9 @@ export class JobDataSmeComponent implements OnInit {
               EstablishmentDate: formatDate(this.returnCustJobDataObj.OthBizEstablishmentDt,  'yyyy-MM-dd', 'en-US'),
             });
 
-            this.refProfessionObj = new RefProfessionObj();
+            if(this.returnCustJobDataObj.RefProfessionId != null)
+            {
+              this.refProfessionObj = new RefProfessionObj();
             this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
             this.http.post(this.getRefProfession, this.refProfessionObj).subscribe(
               (response) => {
@@ -197,18 +199,21 @@ export class JobDataSmeComponent implements OnInit {
                   this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
                   this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
               });
-
-            this.refIndustryTypeObj = new RefIndustryTypeObj();
-            this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
-            this.http.post(this.getRefIndustryType, this.refIndustryTypeObj).subscribe(
-              (response) => {
-                  this.returnIndustryTypeObj = response;
-
-                  this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
-                  this.industryLookUpObj.jsonSelect = this.returnIndustryTypeObj;
-                  this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
-              });
+            }
             
+            if(this.returnCustJobDataObj.RefIndustryTypeId != null)
+            {
+              this.refIndustryTypeObj = new RefIndustryTypeObj();
+              this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
+              this.http.post(this.getRefIndustryType, this.refIndustryTypeObj).subscribe(
+                (response) => {
+                    this.returnIndustryTypeObj = response;
+
+                    this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
+                    this.industryLookUpObj.jsonSelect = this.returnIndustryTypeObj;
+                    this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
+                });
+            }
               
             if(this.returnCustJobDataObj.JobAddrId != null) {
               this.custJobAddrObj = new CustAddrObj();

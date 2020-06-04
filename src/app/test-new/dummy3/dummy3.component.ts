@@ -48,7 +48,7 @@ export class Dummy3Component implements OnInit {
 
       var BankObj = new RefBankObj();
       BankObj.RefBankId = this.param;
-      this.http.post("http://r3app-server.ad-ins.com/FOUNDATION_R3/RefBank/GetRefBankByRefBankIdAsync", BankObj).subscribe(
+      this.http.post("http://r3app-server.ad-ins.com/Foundation/RefBank/GetRefBankByRefBankIdAsync", BankObj).subscribe(
         (response) => {
           console.log(response);
           // this.result = response['returnObject'];
@@ -73,7 +73,7 @@ export class Dummy3Component implements OnInit {
     if (this.mode == "edit") {
       this.bankObj.BankCode = this.result.BankCode;
       this.bankObj.RefBankId = this.param;
-      this.http.post("http://r3app-server.ad-ins.com/FOUNDATION_R3/RefBank/EditRefBankAsync", this.bankObj).subscribe(
+      this.http.post("http://r3app-server.ad-ins.com/Foundation/RefBank/EditRefBankAsync", this.bankObj).subscribe(
         (response) => {
           console.log(response);
         },
@@ -84,7 +84,7 @@ export class Dummy3Component implements OnInit {
     else {
       this.bankObj.RefBankId = "0";
       this.bankObj["RowVersion"] = "";
-      this.http.post("http://r3app-server.ad-ins.com/FOUNDATION_R3/RefBank/AddRefbankAsync", this.bankObj).subscribe(
+      this.http.post("http://r3app-server.ad-ins.com/Foundation/RefBank/AddRefbankAsync", this.bankObj).subscribe(
         (response) => {
           console.log(response);
         },

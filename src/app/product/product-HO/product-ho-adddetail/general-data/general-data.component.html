@@ -40,6 +40,13 @@
                 <lib-uc-show-errors [control]="node.controls.CompntValue" [submit]="enjiForm.submitted">
                 </lib-uc-show-errors>
               </div>
+              <div class="col-md-8" *ngIf="type.controls['components'].value[l].ProdCompntType == 'MULTI_DDL'">
+                <ng-multiselect-dropdown *ngIf="dictMultiOptions[type.controls['components'].value[l].RefProdCompntCode].length != 0" [placeholder]="'Search'" [data]="dictMultiOptions[type.controls['components'].value[l].RefProdCompntCode]"
+                [(ngModel)]="selectedMultiDDLItems[type.controls['components'].value[l].RefProdCompntCode]" [ngModelOptions]="{standalone: true}" [settings]="dropdownSettings" (onDropDownClose)="onMultiDDLChangeEvent(type.controls['components'].value[l].RefProdCompntCode,l,j)">
+                </ng-multiselect-dropdown>
+                <lib-uc-show-errors [control]="node.controls.CompntValue" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
               <div class="col-md-8" *ngIf="type.controls['components'].value[l].ProdCompntType == 'AMT'">
                 <input type="text" class="form-control adInsInput width-25-per" formControlName="CompntValue">
                 <lib-uc-show-errors [control]="node.controls.CompntValue" [submit]="enjiForm.submitted">
@@ -50,12 +57,15 @@
         </div>
       </div>
       <div class="form-actions right">
-        <button type="submit" (click)="ClickSave('save')" class="btn btn-raised btn-primary margin-r-5">
-          <i class="fa fa-check-square-o"></i> Save
+        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/product/HOpaging']" translate>
+          <i class="ft-x"></i> Cancel
         </button>
         <button type="submit" (click)="ClickSave('next')" class="btn btn-raised btn-primary">
-          <i class="fa fa-check-square-o"></i> Next
+          <i class="far fa-check-square"></i> Save
         </button>
+        <!-- <button type="button" (click)="test()" class="btn btn-raised btn-primary">
+          <i class="fa fa-check-square-o"></i> test
+        </button> -->
         
       </div>
     </form>
