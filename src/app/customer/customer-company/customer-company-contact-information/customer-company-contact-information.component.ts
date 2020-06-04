@@ -94,35 +94,42 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
     this.custAddrObj = new CustAddrObj();
 
-    this.custCompanyContactPersonObj.CustCompanyId = this.custCompanyId;
-    this.http.post(this.getCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
-      (response) => {
-        this.tempCustCompanyContactPersonObj = response;
-        console.log(this.tempCustCompanyContactPersonObj);
-        this.ContactInformationForm.patchValue({
-          ContactPersonName: this.tempCustCompanyContactPersonObj.ContactPersonName,
-          MrGenderCode: this.tempCustCompanyContactPersonObj.MrGenderCode,
-          MrJobPositionCode: this.tempCustCompanyContactPersonObj.MrJobPositionCode,
-          JobTitleName: this.tempCustCompanyContactPersonObj.JobTitleName,
-          MobilePhnNo1: this.tempCustCompanyContactPersonObj.MobilePhnNo1,
-          MobilePhnNo2: this.tempCustCompanyContactPersonObj.MobilePhnNo2,
-          Email1: this.tempCustCompanyContactPersonObj.Email1,
-          Email2: this.tempCustCompanyContactPersonObj.Email2,
-        });
+    var custObj = { CustId: this.IdCust };
+      this.http.post(AdInsConstant.GetCustCompanyByCustId, custObj).subscribe(
+        (response: any) => {
+          this.custCompanyId = response['CustCompanyId'];
 
-        if (this.tempCustCompanyContactPersonObj.MrGenderCode == null) {
-          this.ContactInformationForm.patchValue({
-            MrGenderCode: this.tempMrGenderCode[0].Key
-          });
+          this.custCompanyContactPersonObj.CustCompanyId = this.custCompanyId;
+          this.http.post(this.getCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
+            (response) => {
+              this.tempCustCompanyContactPersonObj = response;
+              // console.log("testcontact")
+              // console.log(this.tempCustCompanyContactPersonObj);
+              this.ContactInformationForm.patchValue({
+                ContactPersonName: this.tempCustCompanyContactPersonObj.ContactPersonName,
+                MrGenderCode: this.tempCustCompanyContactPersonObj.MrGenderCode,
+                MrJobPositionCode: this.tempCustCompanyContactPersonObj.MrJobPositionCode,
+                JobTitleName: this.tempCustCompanyContactPersonObj.JobTitleName,
+                MobilePhnNo1: this.tempCustCompanyContactPersonObj.MobilePhnNo1,
+                MobilePhnNo2: this.tempCustCompanyContactPersonObj.MobilePhnNo2,
+                Email1: this.tempCustCompanyContactPersonObj.Email1,
+                Email2: this.tempCustCompanyContactPersonObj.Email2,
+              });
+
+              if (this.tempCustCompanyContactPersonObj.MrGenderCode == null) {
+                this.ContactInformationForm.patchValue({
+                  MrGenderCode: this.tempMrGenderCode[0].Key
+                });
+              }
+              if (this.tempCustCompanyContactPersonObj.MrJobPositionCode == null) {
+                this.ContactInformationForm.patchValue({
+                  MrJobPositionCode: this.tempMrJobPositionCode[0].Key
+                });
+              }
+
+            });
         }
-        if (this.tempCustCompanyContactPersonObj.MrJobPositionCode == null) {
-          this.ContactInformationForm.patchValue({
-            MrJobPositionCode: this.tempMrJobPositionCode[0].Key
-          });
-        }
-
-      });
-
+      );
 
     this.custAddrObj.CustId = this.IdCust;
     this.custAddrObj.MrCustAddrTypeCode = "CONTACT";
@@ -186,13 +193,17 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custAddrObj.Phn1 = this.ContactInformationForm.value.UcAddress.Phn1;
     this.custAddrObj.Phn2 = this.ContactInformationForm.value.UcAddress.Phn2;
     this.custAddrObj.PhnArea1 = this.ContactInformationForm.value.UcAddress.PhnArea1;
-    this.custAddrObj.PhnArea2 = this.ContactInformationForm.value.UcAddress.PhnArea2;
+    this.custAddrObj.PhnArea2 = this.ContactInformationForm.value.UcAddress.PhnArea2; 
     this.custAddrObj.PhnExt1 = this.ContactInformationForm.value.UcAddress.PhnExt1;
     this.custAddrObj.PhnExt2 = this.ContactInformationForm.value.UcAddress.PhnExt2;
 
-    if (this.tempCustAddrObj.Zipcode != null) {
+    if (this.tempCustCompanyContactPersonObj.CustCompanyContactPersonId != 0) {
       this.custAddrObj = this.tempCustAddrObj;
       this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj;
+      this.custCompanyContactPersonObj.RowVersion = this.tempCustCompanyContactPersonObj.RowVersion;
+
+      // console.log("tempcust")
+      // console.log(this.custCompanyContactPersonObj)
 
       this.http.post(this.editCustAddrUrl, this.custAddrObj).subscribe(
         (response) => {
