@@ -11,7 +11,7 @@
             "isSelectOne" : false,
             "items" : [],
             "isFromURL" : true, 
-            "url" : "http://r3app-server.ad-ins.com/Foundation/AssetType/GetListKeyValueActiveByCode", 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetType/GetListKeyValueActiveByCode", 
             "itemsUrl" : [],
             "isEvent" : true,
             "affectedFilter" : ["AC.ASSET_CATEGORY_CODE"]
@@ -34,7 +34,7 @@
             "isSelectOne" : false,
             "items" : [],
             "isFromURL" : true, 
-            "url" : "http://r3app-server.ad-ins.com/Foundation/AssetCategory/GetListAssetCategoryByCodeWithCriteriaObj", 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetCategory/GetListAssetCategoryByCodeWithCriteriaObj", 
             "itemsUrl" : []
         },
         {
@@ -87,7 +87,7 @@
             "isSelectOne" : false,
             "items" : [],
             "isFromURL" : true, 
-            "url" : "http://r3app-server.ad-ins.com/Foundation/RefMaster/GetListKeyValueActiveByCode", 
+            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", 
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "NEG_ASSET_SOURCE"
