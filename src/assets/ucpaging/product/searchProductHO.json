@@ -19,24 +19,18 @@
     },
     {
       "type": "dropdown",
-      "name": "Prod_Stat",
+      "name": "A.Prod_Stat",
       "id": "ProdStatId",
       "value": "PRODUCT STATUS",
       "placeholder": "Placeholder",
-      "isFromURL": false,
+      "isFromURL": true,
       "isSelectOne": false,
-      "url": "https://api.myjson.com/bins/ld6e8",
-      "label": "Active Status",
-      "items": [{
-          "key": "1",
-          "value": "Yes"
-        },
-        {
-          "key": "0",
-          "value": "No"
-        }
-      ],
-      "itemsUrl": []
+      "url": "http://r3app-server.ad-ins.com/Foundation_R3/RefMaster/GetListKeyValueActiveByCode",
+      "label": "Product Status",
+      "items": [],
+      "itemsUrl": [],
+      "criteriaPropName": "RefMasterTypeCode",
+      "criteriaPropValue": "PRODUCT_STAT"
     },
     {
       "type": "datepicker",
@@ -90,7 +84,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.PROD_CODE AS ProdCode, A.PROD_NAME AS ProdName, B.PROD_VERSION AS CurrentProdVersion, C.PROD_VERSION AS DraftProdVersion, A.END_DT AS EndDt, A.PROD_STAT AS ProdStat, A.PROD_ID AS ProdId, A.DRAFT_PROD_H_ID AS DraftProdHId, A.CURRENT_PROD_H_ID AS CurrentProdHId",
+    "select": "SELECT A.PROD_CODE AS ProdCode, A.PROD_NAME AS ProdName, B.PROD_VERSION AS CurrentProdVersion, C.PROD_VERSION AS DraftProdVersion, A.END_DT AS EndDt, A.PROD_STAT AS ProdStat, A.PROD_ID AS ProdId, A.DRAFT_PROD_H_ID AS DraftProdHId, A.CURRENT_PROD_H_ID AS prodHId",
     "from": "FROM dbo.PROD A WITH(NOLOCK) LEFT JOIN dbo.PROD_H B WITH(NOLOCK) ON A.CURRENT_PROD_H_ID=B.PROD_H_ID LEFT JOIN dbo.PROD_H C WITH(NOLOCK) ON A.DRAFT_PROD_H_ID=C.PROD_H_ID"
   },
   "bodyList": [{
@@ -104,14 +98,30 @@
       "property": "ProdName"
     },
     {
-      "type": "text",
+      "type": "link",
       "position": "center",
-      "property": "CurrentProdVersion"
+      "property": "CurrentProdVersion",
+      "path": "../HOView",
+      "target": "_blank",
+      "param": [
+          {
+              "type": "prodHId",
+              "property": "prodHId"
+          }
+      ]
     },
     {
-      "type": "text",
+      "type": "link",
       "position": "center",
-      "property": "DraftProdVersion"
+      "property": "DraftProdVersion",
+      "path": "../HOView",
+      "target": "_blank",
+      "param": [
+          {
+              "type": "prodHId",
+              "property": "DraftProdHId"
+          }
+      ]
     },
     {
       "type": "date",

@@ -18,6 +18,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 export class CustomerCompanyManagementShareholderCompanyComponent implements OnInit {
   @Input() custCompanyId: number;
   @Input() CustCompanyMgmntShrholderId: number;
+  @Input() TotalShare : number;
   @Output () outputValue : EventEmitter<object> = new EventEmitter();
 
   inputLookupCustCompanyObj : InputLookupObj;
@@ -108,12 +109,23 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
             this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable(); 
             this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
           }
+          this.TotalShare = this.TotalShare - parseFloat(this.tempCustCompanyMgmntShrholderObj.SharePrcnt);
         }
       );
     } 
   }
 
-  SaveValue() { 
+  LeftShare: number;
+  TotalShareCurrent: number;
+  SaveValue() {
+    this.TotalShareCurrent = this.TotalShare + parseFloat(this.ManagementShareholderForm.controls["SharePrcnt"].value);
+
+    if(this.TotalShareCurrent > 100){
+      this.LeftShare = 100 - this.TotalShare;
+      this.toastr.errorMessage("Total Share left is "+this.LeftShare+"%");
+      return;
+    }
+
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
     this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
@@ -155,11 +167,12 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         }
       );
     }
-   
   }
+
   back(){
     this.outputValue.emit({mode : 'check'});
   }
+
   getLookUpCustomer(event) {
     console.log(event); 
     this.ManagementShareholderForm.patchValue({

@@ -11,7 +11,7 @@
       "datatype": "text",
       "isFromURL": true,
       "isSelectOne": true,
-      "url": "http://r3impl-appsvr.ad-ins.com/Foundation/RefMasterType/GetListActiveRefMasterTypeKeyValue",
+      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMasterType/GetListActiveRefMasterTypeKeyValue",
       "label": "Master Type",
       "items": [],
       "itemsUrl": []

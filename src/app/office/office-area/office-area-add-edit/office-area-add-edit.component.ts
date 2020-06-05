@@ -33,7 +33,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
   OfficeAreaForm = this.fb.group({
     AreaCode: ['', Validators.required],
     AreaName: ['', Validators.required],
-    IsActive: [false],
+    IsActive: [true],
     RowVersion: ['']
   })
 

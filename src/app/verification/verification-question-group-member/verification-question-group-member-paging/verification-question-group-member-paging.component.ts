@@ -55,4 +55,15 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
     this.router.navigateByUrl('/Verification/QuestionGroupMember/Edit?VerfQuestionGrpDId=' + item.VerfQuestionGrpDId + '&VerfQuestionGrpHId=' + this.VerfQuestionGrpHId);
   }
 
+  Delete(verfQuestionGrpDId){
+    if (confirm("Are you sure to delete this record?")) {
+      var verfGroupObj = {VerfQuestionGrpHId: this.VerfQuestionGrpHId, VerfQuestionGrpDId: verfQuestionGrpDId};
+      this.http.post(AdInsConstant.DeleteVerfQuestionGroupDById, verfGroupObj).subscribe(
+        (response) => {
+          this.listVerfQuestionGrpD = response["ReturnObject"];
+        }
+      );
+    }
+  }
+
 }

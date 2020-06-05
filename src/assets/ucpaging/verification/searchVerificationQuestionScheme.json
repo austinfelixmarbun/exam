@@ -5,7 +5,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "SCHEME_CODE",
+            "name": "VERF_SCHEME_CODE",
             "id": "SchemeCodeId",
             "value": "",
             "label": "SCHEME CODE",
@@ -13,7 +13,7 @@
         },
         {
             "type": "textbox",
-            "name": "SCHEME_NAME",
+            "name": "VERF_SCHEME_NAME",
             "id": "SchemeNameId",
             "value": "",
             "label": "SCHEME NAME",
@@ -124,10 +124,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "VerfSchemeHId"
                 }
             ]
         }

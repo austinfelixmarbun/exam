@@ -35,7 +35,6 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
     this.viewUpload = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
   }
   ngOnInit() {
-    console.log('test');
     this.claimTask();
     this.UploadReviewUrl = AdInsConstant.UploadReview;
     this.CancelUpload = AdInsConstant.CancelUpload;
