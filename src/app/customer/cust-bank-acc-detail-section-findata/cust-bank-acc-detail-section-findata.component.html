@@ -107,17 +107,17 @@
                             <show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.Year" [submit]="enjiForm.submitted"></show-errors>
                           </td>
                           <td style="text-align: left;">
-                            <input type="text" class="form-control adInsInput" formControlName="DebitAmt" 
+                            <input type="" currencyMask class="form-control adInsInput" formControlName="DebitAmt" 
                               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitAmt.invalid }" />
                             <show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitAmt" [submit]="enjiForm.submitted"></show-errors>
                           </td>
                           <td style="text-align: left;">
-                            <input type="text" class="form-control adInsInput" formControlName="CreditAmt" 
+                            <input type="" currencyMask class="form-control adInsInput" formControlName="CreditAmt" 
                               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditAmt.invalid }" />
                             <show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditAmt" [submit]="enjiForm.submitted"></show-errors>
                           </td>
                           <td style="text-align: left;">
-                            <input type="text" class="form-control adInsInput" formControlName="BalanceAmt" 
+                            <input type="" currencyMask class="form-control adInsInput" formControlName="BalanceAmt" 
                               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.BalanceAmt.invalid }" />
                             <show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.BalanceAmt" [submit]="enjiForm.submitted"></show-errors>
                           </td>
