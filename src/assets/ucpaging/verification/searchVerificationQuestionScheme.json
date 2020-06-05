@@ -124,10 +124,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "VerfSchemeHId"
                 }
             ]
         }

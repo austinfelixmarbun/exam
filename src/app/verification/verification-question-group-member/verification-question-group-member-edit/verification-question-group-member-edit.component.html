@@ -5,16 +5,17 @@
         <div class="card-header header-title">
           <div class="row">
             <div class="col-md-8">
-              <h4 class="card-title" id="horz-layout-colored-controls" translate> VERIFICATION QUESTION GROUP MEMBER Edit Seq No
+              <h4 class="card-title" id="horz-layout-colored-controls" translate>
+                VERIFICATION QUESTION GROUP MEMBER Edit Seq No
               </h4>
             </div>
           </div>
         </div>
         <div class="px-3">
           <form class="form form-horizontal" [formGroup]="QuestionGroupForm" (ngSubmit)="QuestionGroupForm.valid  && SaveForm()"
-            #enjiForm="ngForm">
+                #enjiForm="ngForm">
             <lib-ucSubsection [id]="'QuestionGroupId'" [title]="'Verification Question Answer'"
-              [panel]="'QuestionGroup'">
+                              [panel]="'QuestionGroup'">
             </lib-ucSubsection>
             <div class="form-body" id="QuestionGroup">
             </div>
@@ -50,12 +51,12 @@
 
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1"
-                [routerLink]="['/Verification/QuestionGroupMemberPaging']"
-                [queryParams]="{VerfQuestionGrpHId: this.VerfQuestionGrpHId}">
-                <i class="fa fa-arrow-circle-left"></i> Back
+                      [routerLink]="['/Verification/QuestionGroupMemberPaging']"
+                      [queryParams]="{VerfQuestionGrpHId: this.VerfQuestionGrpHId}">
+                <i class="ft-x"></i> Cancel
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="fa fa-check"></i> Submit
+                <i class="far fa-check-square"></i> Save
               </button>
             </div>
           </form>
