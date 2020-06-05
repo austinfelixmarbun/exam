@@ -28,7 +28,7 @@ export class ProdOfferingReturnPagingComponent implements OnInit {
     var criteriaList = new Array<CriteriaObj>();
     var criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    criteriaObj.propName = 'C.PROD_STAT';
+    criteriaObj.propName = 'D.PROD_STAT';
     criteriaObj.value = "RET";
     criteriaList.push(criteriaObj);
 

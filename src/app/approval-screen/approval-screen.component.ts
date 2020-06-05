@@ -26,8 +26,8 @@ export class ApprovalScreenComponent implements OnInit {
 
   ngOnInit() {
     var obj = {
-      taskId : 65554,
-      instanceId : 60394,
+      taskId : 75659,
+      instanceId : 70487,
       approvalBaseUrl : environment.ApprovalURL
     }
 
