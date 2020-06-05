@@ -5,7 +5,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "VERF_QUESTION_ANSWER_CODE",
+            "name": "VQA.VERF_QUESTION_CODE",
             "id": "SchemeCodeId",
             "value": "",
             "label": "QUESTION CODE",
@@ -13,7 +13,7 @@
         },
         {
             "type": "textbox",
-            "name": "VERF_QUESTION_ANSWER_TEXT",
+            "name": "VQA.VERF_QUESTION_TEXT",
             "id": "SchemeNameId",
             "value": "",
             "label": "QUESTION TEXT",
@@ -35,7 +35,7 @@
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "VQA.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "ACTIVE STATUS",
             "value": "",
