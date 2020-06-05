@@ -49,7 +49,7 @@ export class UcApprovalComponent implements OnInit {
     this.taskId = this.inputObj.taskId;
     this.instanceId = this.inputObj.instanceId;
     this.baseUrl = this.inputObj.approvalBaseUrl;
-
+     
     this.FormApproval = this.fb.group(
       {
         taskId: [this.taskId],
