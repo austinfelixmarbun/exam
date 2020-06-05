@@ -5,11 +5,11 @@
           <div class="card">
               <div class="card-body">
                   <div class="px-3">
-                      <div class="form-body">
+                    <lib-ucSubsection [id]="'Summary'" [title]="'Summary -
+                    Transaction No : '+ RFAInformation.TrxNo" [panel]="'SummaryId'">
+                    </lib-ucSubsection>
+                      <div id="SummaryId" class="form-body">
                           <form class="form form-horizontal">
-                              <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Summary -
-                                  Transaction No : {{RFAInformation.TrxNo}}
-                              </h4>
                               <div class="form-group row">
                                   <label class="col-md-2 adInsLabel text-bold" translate>Approval Scheme</label>
                                   <label class="col-md-4  adInsLabel" translate>{{RFAInformation.SchemeName}}</label>
@@ -49,80 +49,82 @@
           <div class="card">
               <div class="card-body">
                   <div class="px-3">
-                      <div class="form-body">
-                          <form class="form-horizontal" [formGroup]="FormApproval" (ngSubmit)="FormApproval.valid && Submit()"
-                              #enjiForm="ngForm">
-                              <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Approval
-                                  Action
-                              </h4>
-                              <div class="form-group row">
-                                  <label class="col-md-2 adins-required-label">Action</label>
-                                  <div class="col-md-4">
-                                      <select formControlName="result" class="form-control" id="result" name="result"
-                                          (change)="onResultChange($event);">
-                                          <option value="">--Select--</option>
-                                          <option *ngFor="let m of PossibleResults" value={{m}}>{{m}}</option>
-                                      </select>
-                                      <span *ngIf="showFinal">
-                                          <input type="checkbox" formControlName="approveFinal" [(ngModel)]="isFinal"
-                                              (change)="isFinalChange($event)" name="isFinal" id="isFinal">
-                                          <label class="label-control" translate>Final</label>
-                                      </span>
-                                      <lib-uc-show-errors [control]="FormApproval.controls.result" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                                  </div>
-                              </div>
-                              <div class="form-group row" *ngIf="ListMinFinLevel.length > 0">
-                                  <label class="col-md-2 adInsLabel">Min Final Level</label>
-                                  <div class="col-md-10">
-                                      <select formControlName="minFinalLevel" class="form-control width-25-per"
-                                          id="minFinalLevel" name="minFinalLevel">
-                                          <option value="-1">--Change if necessary--</option>
-                                          <option *ngFor="let m of ListMinFinLevel" value={{m.Value}}>{{m.Key}}
-                                          </option>
-                                      </select>
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label class="col-md-2 adInsLabel">Notes</label>
-                                  <div class="col-md-10">
-                                      <textarea type="textarea" row="5" class="form-control" formControlName="notes" [ngClass]="{ 'is-invalid': enjiForm.submitted && FormApproval.controls.notes.invalid}"></textarea>
-                                          <lib-uc-show-errors [control]="FormApproval.controls.notes" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                                  </div>
-                              </div>
-                              <div class="form-group row" *ngIf="showReason">
-                                  <label class="col-md-2">Reason</label>
-                                  <div class="col-md-10">
-                                      <select formControlName="reason" class="form-control width-25-per"
-                                          id="reason" name="reason" [ngClass]="{ 'is-invalid': enjiForm.submitted && FormApproval.controls.reason.invalid}">
-                                          <option value="">--Select--</option>
-                                          <option *ngFor="let m of ListReason" value={{m.ReasonCode}}>{{m.ReasonDescr}}
-                                          </option>
-                                      </select>
-                                      <lib-uc-show-errors [control]="FormApproval.controls.reason" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                                  </div>
-                              </div>
-
-                              <div class="form-group row" *ngIf="showNextPerson">
-                                  <div class="col-md-12" formArrayName="nodes" *ngFor="let node of FormApproval['controls']['nodes']['controls']; let i = index">
-                                      <div class="form-group row" [formGroupName]="i">
-                                        <label class="col-md-2">{{FormApproval.controls['nodes'].value[i].nodeName}}</label>
-                                        <div class="col-md-8">
-                                          <select formControlName="slcMemberId" class="form-control" id="slcMemberId" name="slcMemberId">
+                    <lib-ucSubsection [id]="'Action'" [title]="'Action'" [panel]="'ActionId'">
+                    </lib-ucSubsection>
+                    <div id="ActionId">
+                        <div class="form-body">
+                            <form class="form-horizontal" [formGroup]="FormApproval" (ngSubmit)="FormApproval.valid && Submit()"
+                                #enjiForm="ngForm">
+                                <div class="form-group row">
+                                    <label class="col-md-2 adins-required-label">Action</label>
+                                    <div class="col-md-4">
+                                        <select formControlName="result" class="form-control" id="result" name="result"
+                                            (change)="onResultChange($event);">
                                             <option value="">--Select--</option>
-                                            <option *ngFor="let m of dictMember[FormApproval['controls']['nodes'].value[i].nodeId]" value={{m.MemberId}} >{{m.MemberName}}</option>
-                                          </select>
-                                          <lib-uc-show-errors [control]="node.controls.slcMemberId" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                            <option *ngFor="let m of PossibleResults" value={{m}}>{{m}}</option>
+                                        </select>
+                                        <span *ngIf="showFinal">
+                                            <input type="checkbox" formControlName="approveFinal" [(ngModel)]="isFinal"
+                                                (change)="isFinalChange($event)" name="isFinal" id="isFinal">
+                                            <label class="label-control" translate>Final</label>
+                                        </span>
+                                        <lib-uc-show-errors [control]="FormApproval.controls.result" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                    </div>
+                                </div>
+                                <div class="form-group row" *ngIf="ListMinFinLevel.length > 0">
+                                    <label class="col-md-2 adInsLabel">Min Final Level</label>
+                                    <div class="col-md-10">
+                                        <select formControlName="minFinalLevel" class="form-control width-25-per"
+                                            id="minFinalLevel" name="minFinalLevel">
+                                            <option value="-1">--Change if necessary--</option>
+                                            <option *ngFor="let m of ListMinFinLevel" value={{m.Value}}>{{m.Key}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-2 adInsLabel">Notes</label>
+                                    <div class="col-md-10">
+                                        <textarea type="textarea" row="5" class="form-control" formControlName="notes" [ngClass]="{ 'is-invalid': enjiForm.submitted && FormApproval.controls.notes.invalid}"></textarea>
+                                            <lib-uc-show-errors [control]="FormApproval.controls.notes" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                    </div>
+                                </div>
+                                <div class="form-group row" *ngIf="showReason">
+                                    <label class="col-md-2">Reason</label>
+                                    <div class="col-md-10">
+                                        <select formControlName="reason" class="form-control width-25-per"
+                                            id="reason" name="reason" [ngClass]="{ 'is-invalid': enjiForm.submitted && FormApproval.controls.reason.invalid}">
+                                            <option value="">--Select--</option>
+                                            <option *ngFor="let m of ListReason" value={{m.ReasonCode}}>{{m.ReasonDescr}}
+                                            </option>
+                                        </select>
+                                        <lib-uc-show-errors [control]="FormApproval.controls.reason" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                    </div>
+                                </div>
+  
+                                <div class="form-group row" *ngIf="showNextPerson">
+                                    <div class="col-md-12" formArrayName="nodes" *ngFor="let node of FormApproval['controls']['nodes']['controls']; let i = index">
+                                        <div class="form-group row" [formGroupName]="i">
+                                          <label class="col-md-2">{{FormApproval.controls['nodes'].value[i].nodeName}}</label>
+                                          <div class="col-md-8">
+                                            <select formControlName="slcMemberId" class="form-control" id="slcMemberId" name="slcMemberId">
+                                              <option value="">--Select--</option>
+                                              <option *ngFor="let m of dictMember[FormApproval['controls']['nodes'].value[i].nodeId]" value={{m.MemberId}} >{{m.MemberName}}</option>
+                                            </select>
+                                            <lib-uc-show-errors [control]="node.controls.slcMemberId" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
-                              </div>
-                              <div class="form-actions right">
-                                  <button type="submit" class="btn btn-raised btn-primary">
-                                    <i class="fa fa-check-square-o"></i> Submit
-                                  </button>
-                              </div>
-                          </form>
-                      </div>
+                                </div>
+                                <div class="form-actions right">
+                                    <button type="submit" class="btn btn-raised btn-primary">
+                                      <i class="fa fa-check-square-o"></i> Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                      
                   </div>
               </div>
           </div>
