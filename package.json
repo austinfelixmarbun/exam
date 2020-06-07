@@ -8,7 +8,7 @@
     "build": "ng build --prod --base-href /Foundation/",
     "sit": "ng build --configuration=sit --base-href /FOUNDATION_SIT/",
     "test": "ng test",
-    "version:patch": "npm version patch && git push --follow-tags --force",
+    "version:patch": "npm version patch && git push -u origin master --follow-tags --force",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
