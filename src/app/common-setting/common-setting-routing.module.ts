@@ -180,7 +180,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'EconomicSector/paging',
+        path: 'EconomicSector/Paging',
         component: EconomicSectorComponent,
         data: {
           title: 'Economic Sector Paging'
@@ -229,7 +229,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'Profession/paging',
+        path: 'Profession/Paging',
         component: ProfessionComponent,
         data: {
           title: 'Profession Paging'
