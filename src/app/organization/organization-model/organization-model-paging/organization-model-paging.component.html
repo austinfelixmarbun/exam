@@ -6,7 +6,7 @@
                     <button type="button" class="backButton"  (click)="Back()" translate>
                     <i class="fa fa-arrow-circle-left"> </i> Back </button></span>
             <span class="mr-1" >
-                <button type="button" class="btn btn-raised btn-primary mr-1 btn-sm" [queryParams]="{refOrgId:refOrgId, mode:'add'}" [routerLink]="['/organization/model/detail']"
+                <button type="button" class="btn btn-raised btn-primary mr-1 btn-sm" [queryParams]="{refOrgId:refOrgId, mode:'add'}" [routerLink]="['/organization/model/Detail']"
                 translate>
                 <i class="ft-plus-circle"></i> Add
               </button>
@@ -55,7 +55,7 @@
           </a>
         </td>
         <td>
-          <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/model/detail']"
+          <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/model/Detail']"
             [queryParams]="{orgMdlId:item.orgMdlId,mode:'edit',refOrgId:refOrgId}">
             <i class="ft-edit-2 font-medium-3 mr-2"></i>
           </a>
@@ -72,7 +72,7 @@
   <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
     <i class="fa fa-arrow-circle-left"></i> Back
   </button>
-  <i class="fa fa-plus-circle" [routerLink]="['/organization/model/detail']"
+  <i class="fa fa-plus-circle" [routerLink]="['/organization/model/Detail']"
     [queryParams]="{refOrgId:refOrgId, mode:'add'}"
     style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
 </div> -->

@@ -5,6 +5,7 @@ import { Message } from 'primeng/primeng';
 import { AdInsConstant } from './shared/AdInstConstant';
 import { environment } from 'environments/environment';
 // import * as signalR from '@aspnet/signalr';
+import {version} from '../../package.json';
 
 @Component({
     selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
+        localStorage.setItem("Version",version);
         //this._hubConnection = new HubConnectionBuilder().withUrl(environment.FoundationR3Url+"/NotificationHub").build();
         // this._hubConnection
         //     .start()

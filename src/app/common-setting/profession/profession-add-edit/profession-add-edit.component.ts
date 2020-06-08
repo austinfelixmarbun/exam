@@ -91,7 +91,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.refProfessionObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/CommonSetting/Profession/paging"]);
+            this.router.navigate(["/CommonSetting/Profession/Paging"]);
           
         },
         error => {
@@ -108,7 +108,7 @@ export class ProfessionAddEditComponent implements OnInit {
         response => {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/Profession/paging"]);
+          this.router.navigate(["/CommonSetting/Profession/Paging"]);
         },
         error => {
           console.log(error);

@@ -38,7 +38,7 @@
             "submenu": []
           },
           {
-            "path": "/commonSetting/master/detail",
+            "path": "/commonSetting/master/Detail",
             "title": "Master Add",
             "icon": "",
             "class": "",
@@ -172,7 +172,7 @@
             "submenu": []
           },
           {
-            "path": "/office/officeArea/detail",
+            "path": "/office/officeArea/Detail",
             "title": "Office Area Add",
             "icon": "",
             "class": "",
@@ -276,7 +276,7 @@
             "submenu": []
           },
           {
-            "path": "/systemSetting/role/detail",
+            "path": "/systemSetting/role/Detail",
             "title": "Role Add",
             "icon": "",
             "class": "",
@@ -307,7 +307,7 @@
             "submenu": []
           },
           {
-            "path": "/systemSetting/refUser/detail",
+            "path": "/systemSetting/refUser/Detail",
             "title": "User Add",
             "icon": "",
             "class": "",

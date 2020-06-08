@@ -137,7 +137,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/CommonSetting/Zipcode/detail",
+          "path": "/CommonSetting/Zipcode/Detail",
           "param": [
             {
               "type": "refZipcodeId",

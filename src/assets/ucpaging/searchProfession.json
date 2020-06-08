@@ -86,7 +86,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/CommonSetting/Profession/detail",
+            "path": "/CommonSetting/Profession/Detail",
             "param": [
               {
                 "type": "refProfessionId",

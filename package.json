@@ -1,6 +1,6 @@
 {
   "name": "apex",
-  "version": "6.0.0",
+  "version": "1.0.0-22",
   "license": "",
   "scripts": {
     "ng": "ng",
@@ -8,6 +8,7 @@
     "build": "ng build --prod --base-href /Foundation/",
     "sit": "ng build --configuration=sit --base-href /FOUNDATION_SIT/",
     "test": "ng test",
+    "version:patch": "npm version prerelease -m UpVersion && git push origin HEAD:master --follow-tags --force",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
