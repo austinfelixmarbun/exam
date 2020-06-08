@@ -77,7 +77,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.refEconomicSectorObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/CommonSetting/economicSector/paging"]);
+            this.router.navigate(["/CommonSetting/economicSector/Paging"]);
           
         },
         error => {
@@ -94,7 +94,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
         response => {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/economicSector/paging"]);
+          this.router.navigate(["/CommonSetting/economicSector/Paging"]);
         },
         error => {
           console.log(error);

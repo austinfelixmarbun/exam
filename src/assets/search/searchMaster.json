@@ -165,7 +165,7 @@
               ],
               "result": {
                 "type": "url",
-                "path": "/CommonSetting/Master/detail",
+                "path": "/CommonSetting/Master/Detail",
                 "param": [
                   {
                     "type": "refMasterId",

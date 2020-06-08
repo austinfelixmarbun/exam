@@ -25,7 +25,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'JobTitle/detail',
+        path: 'JobTitle/Detail',
         component: RefJobTitleAddComponent,
         data: {
           title: 'Job Title add'
@@ -39,7 +39,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'BusinessUnit/detail',
+        path: 'BusinessUnit/Detail',
         component: AddBusinessUnitComponent,
         data: {
           title: 'Add Business Unit'

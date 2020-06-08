@@ -115,7 +115,7 @@
             "action" : [ 
                 {
                     "type" : "edit", 
-                    "path" : "/CommonSetting/IndustryType/detail", 
+                    "path" : "/CommonSetting/IndustryType/Detail", 
                     "param" : [ 
                         {
                           "type" : "refIndustryTypeId", 
