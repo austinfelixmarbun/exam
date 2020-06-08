@@ -139,6 +139,6 @@ export class ListOfficeMemberComponentOffering implements OnInit {
     );
     this.toastr.successMessage("Submitted");
     this.toastr.successMessage("Submitted");
-    this.router.navigate(["/Product/ProdOffering/paging"]);
+    this.router.navigate(["/Product/ProdOffering/Paging"]);
   }
 }

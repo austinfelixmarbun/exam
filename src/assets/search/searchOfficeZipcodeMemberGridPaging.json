@@ -58,7 +58,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/commonSetting/officeZipcodeMember/paging",
+                    "path": "/commonSetting/officeZipcodeMember/Paging",
                     "param": [
                         {
                             "type": "mode",

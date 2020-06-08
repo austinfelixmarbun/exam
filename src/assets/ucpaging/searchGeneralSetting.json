@@ -117,7 +117,7 @@
               ],
               "result": {
                 "type": "url",
-                "path": "/CommonSetting/GeneralSetting/detail",
+                "path": "/CommonSetting/GeneralSetting/Detail",
                 "param": [
                   {
                     "type": "generalSettingId",

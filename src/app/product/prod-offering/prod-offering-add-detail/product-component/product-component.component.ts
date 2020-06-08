@@ -39,7 +39,7 @@ export class ProductComponentComponent implements OnInit {
       (response) => {
         console.log(response);
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/Product/ProdOffering/paging"]);
+        this.router.navigate(["/Product/ProdOffering/Paging"]);
       },
       (error) => {
         console.log(error);
