@@ -1,6 +1,6 @@
 {
   "name": "apex",
-  "version": "1.0.0-22",
+  "version": "1.0.0-24",
   "license": "",
   "scripts": {
     "ng": "ng",
@@ -120,6 +120,7 @@
     "rxjs": "6.3.3",
     "screenfull": "3.3.3",
     "sweetalert2": "7.28.8",
+    "ucpaging": "^2.0.10",
     "videogular2": "6.3.0",
     "web-animations-js": "2.2.5",
     "xlsx": "^0.14.5",
