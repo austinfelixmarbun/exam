@@ -18,7 +18,6 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService){}
 
   ngOnInit() {
-    console.log('test');
     this.CancelUpload = AdInsConstant.CancelUpload;
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeAsset.json";

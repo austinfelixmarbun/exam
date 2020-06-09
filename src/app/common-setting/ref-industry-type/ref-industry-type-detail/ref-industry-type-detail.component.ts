@@ -123,7 +123,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
         (response) => {
           this.service.successMessage(response["Message"]);
           this.router.navigateByUrl('industryType', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['/industryType/detail']));
+          this.router.navigate(['/industryType/Detail']));
         },
         (error) => {
           this.service.typeErrorCustom(error);

@@ -20,6 +20,7 @@ import { UcApprovalhistComponent } from './uc-approvalhist/uc-approvalhist.compo
 import { UcApprovalrecommendationComponent } from './uc-approvalrecommendation/uc-approvalrecommendation.component';
 import { UcApprovalsummaryComponent } from './uc-approvalsummary/uc-approvalsummary.component'
 import { UcApprovalComponent } from './uc-approval/uc-approval.component';
+import { UcSubsectionModule } from '@adins/uc-subsection';
 
 @NgModule({
   declarations: [ApprovalScreenComponent,UcProdCompComponent, TestComponent, LookupTestComponent, 
@@ -36,7 +37,7 @@ import { UcApprovalComponent } from './uc-approval/uc-approval.component';
     UcapprovalhistModule,
     UcapprovalrecommendationModule,
     UcapprovalsummaryModule,
-    
+    UcSubsectionModule
   ],
   entryComponents : [TestComponent,LookupTestComponent],
   providers: [

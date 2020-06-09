@@ -59,9 +59,14 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
         this.http.post(AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
           (response) => {
             this.tempListCompanyManagementShareholder = response["ReturnObject"];
-            this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
-            // console.log("testdata")
-            // console.log(this.TotalShare);
+            if(this.tempListCompanyManagementShareholder.length != 0)
+            {
+              this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
+            }
+            else
+            {
+              this.TotalShare = 0;
+            }
 
             if(this.TotalShare < 100){
               this.toastr.errorMessage("Total Share % must be 100%");

@@ -59,7 +59,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'RefUser/detail',
+        path: 'RefUser/Detail',
         component: UserAddEditComponent,
         data: {
           title: 'User Maintenance Add Edit'
@@ -87,7 +87,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'UserRole/detail',
+        path: 'UserRole/Detail',
         component: UserRoleDetailComponent,
         data: {
           title: 'Assign User to Role'

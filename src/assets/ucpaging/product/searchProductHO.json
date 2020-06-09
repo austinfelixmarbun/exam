@@ -25,7 +25,7 @@
       "placeholder": "Placeholder",
       "isFromURL": true,
       "isSelectOne": false,
-      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+      "url": "http://r3app-server.ad-ins.com/Foundation_R3/RefMaster/GetListKeyValueActiveByCode",
       "label": "Product Status",
       "items": [],
       "itemsUrl": [],
@@ -75,7 +75,7 @@
       "type": "sort",
       "position": "center",
       "label": "Product Status",
-      "name": "ProdStat"
+      "name": "ProdStatDesc"
     },
     {
       "type": "label",
@@ -84,8 +84,9 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.PROD_CODE AS ProdCode, A.PROD_NAME AS ProdName, B.PROD_VERSION AS CurrentProdVersion, C.PROD_VERSION AS DraftProdVersion, A.END_DT AS EndDt, A.PROD_STAT AS ProdStat, A.PROD_ID AS ProdId, A.DRAFT_PROD_H_ID AS DraftProdHId, A.CURRENT_PROD_H_ID AS prodHId",
-    "from": "FROM dbo.PROD A WITH(NOLOCK) LEFT JOIN dbo.PROD_H B WITH(NOLOCK) ON A.CURRENT_PROD_H_ID=B.PROD_H_ID LEFT JOIN dbo.PROD_H C WITH(NOLOCK) ON A.DRAFT_PROD_H_ID=C.PROD_H_ID"
+    "select": "SELECT A.PROD_CODE AS ProdCode, A.PROD_NAME AS ProdName, B.PROD_VERSION AS CurrentProdVersion, C.PROD_VERSION AS DraftProdVersion, A.END_DT AS EndDt, A.PROD_STAT AS ProdStat, A.PROD_ID AS ProdId, A.DRAFT_PROD_H_ID AS DraftProdHId, A.CURRENT_PROD_H_ID AS prodHId, RTX.TRX_TYPE_CODE AS TrxTypeCode, RS.DESCR AS ProdStatDesc",
+    "from": "FROM dbo.PROD A WITH(NOLOCK) LEFT JOIN dbo.PROD_H B WITH(NOLOCK) ON A.CURRENT_PROD_H_ID=B.PROD_H_ID LEFT JOIN dbo.PROD_H C WITH(NOLOCK) ON A.DRAFT_PROD_H_ID=C.PROD_H_ID JOIN dbo.REF_STATUS RS WITH(NOLOCK) ON RS.REF_STATUS_CODE = A.PROD_STAT JOIN dbo.REF_TRX_TYPE RTX WITH(NOLOCK) ON RTX.REF_TRX_TYPE_ID = RS.REF_TRX_TYPE_ID",
+    "where": "WHERE RTX.TRX_TYPE_CODE = 'PROD'"
   },
   "bodyList": [{
       "type": "text",
@@ -131,7 +132,7 @@
     {
       "type": "text",
       "position": "center",
-      "property": "ProdStat"
+      "property": "ProdStatDesc"
     },
     {
 

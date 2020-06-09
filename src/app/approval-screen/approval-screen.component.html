@@ -1,8 +1,8 @@
 <app-uc-approval [inputObj]="inputObj" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></app-uc-approval>
-<!-- <lib-ucapproval [inputObj]="inputObj" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></lib-ucapproval> -->
+<lib-ucapproval [inputObj]="inputObj" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></lib-ucapproval>
 
 <form [formGroup]="FormApv" #enjiForm="ngForm" (ngSubmit)="FormApv.valid && Test()">
-    <!-- <app-uc-approveby 
+    <app-uc-approveby 
         [apvBaseUrl]="apvBaseUrl"
         [parentForm]="FormApv" 
         [isRequired]="'true'" 
@@ -10,10 +10,10 @@
         [schemeCode]="'PRE_GLV_APV_CF'"
         [enjiForm]="enjiForm"
         (onChange)="onChange($event)">
-    </app-uc-approveby> -->
+    </app-uc-approveby>
 
     <lib-ucapprovalsummary [inputObj]="inputObj" ></lib-ucapprovalsummary>
-
+    <app-uc-approvalsummary [inputObj]="inputObj" ></app-uc-approvalsummary>
 
     <lib-ucapproveby
         [apvBaseUrl]="apvBaseUrl"

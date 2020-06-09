@@ -99,7 +99,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/CommonSetting/District/paging",
+          "path": "/CommonSetting/District/Paging",
           "param": [
             {
               "type": "refProvDistrictId",
@@ -115,7 +115,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/CommonSetting/RefProvince/detail",
+          "path": "/CommonSetting/RefProvince/Detail",
           "param": [
             {
               "type": "refProvDistrictId",

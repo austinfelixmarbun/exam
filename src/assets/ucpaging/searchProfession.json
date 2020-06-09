@@ -20,7 +20,7 @@
         "placeholder": "Placeholder",
         "isFromURL": true,
         "isSelectOne": false,
-        "url": "http://r3impl-appsvr.ad-ins.com/Foundation/RefCustModel/GetListKeyValueByCode",
+        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefCustModel/GetListKeyValueByCode",
         "label": "Customer Model Name",
         "items": [],
         "itemsUrl": []
@@ -86,7 +86,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/CommonSetting/Profession/detail",
+            "path": "/CommonSetting/Profession/Detail",
             "param": [
               {
                 "type": "refProfessionId",

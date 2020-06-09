@@ -5,7 +5,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "VQA.VERF_QUESTION_ANSWER_CODE",
+            "name": "VQA.VERF_QUESTION_CODE",
             "id": "SchemeCodeId",
             "value": "",
             "label": "QUESTION CODE",
@@ -13,7 +13,7 @@
         },
         {
             "type": "textbox",
-            "name": "VQA.VERF_QUESTION_ANSWER_TEXT",
+            "name": "VQA.VERF_QUESTION_TEXT",
             "id": "SchemeNameId",
             "value": "",
             "label": "QUESTION TEXT",
@@ -28,7 +28,7 @@
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3impl-appsvr.ad-ins.com/Foundation/RefVerfAnswerType/GetListKeyValueActiveByCode",
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefVerfAnswerType/GetListKeyValueActiveByCode",
             "label": "Answer Type",
             "items": [],
             "itemsUrl": []

@@ -236,7 +236,7 @@ export class VendorGroupmemberComponent implements OnInit {
     this.http.post(this.addUrl, obj).subscribe(
       (response) => {
         console.log(response);
-        this.router.navigate(['/Vendor/Group/View/'], { queryParams: { VendorGrpId: this.VendorGrpId,MrVendorCategoryCode:this.MrVendorCategoryCode } });
+        this.router.navigate(['/Vendor/Group/View/'], { queryParams: { VendorGrpId: this.VendorGrpId, MrVendorCategoryCode: this.MrVendorCategoryCode } });
       },
       (error) => {
         console.log(error);
@@ -261,15 +261,16 @@ export class VendorGroupmemberComponent implements OnInit {
         for (let index = 0; index < this.vendorGrpMbrObj.ReturnObject.length; index++) {
           arrMemberList.push(this.vendorGrpMbrObj.ReturnObject[index].VendorId)
         }
-        
 
-        const addCritListVendorGrp = new CriteriaObj();
-        addCritListVendorGrp.DataType = 'numeric';
-        addCritListVendorGrp.propName = 'VENDOR_ID';
-        addCritListVendorGrp.restriction = AdInsConstant.RestrictionNotIn;
-        addCritListVendorGrp.listValue = arrMemberList;
-        this.arrCrit.push(addCritListVendorGrp);
-        this.inputObj.addCritInput.push(addCritListVendorGrp);
+        if (arrMemberList.length != 0) {
+          const addCritListVendorGrp = new CriteriaObj();
+          addCritListVendorGrp.DataType = 'numeric';
+          addCritListVendorGrp.propName = 'VENDOR_ID';
+          addCritListVendorGrp.restriction = AdInsConstant.RestrictionNotIn;
+          addCritListVendorGrp.listValue = arrMemberList;
+          this.arrCrit.push(addCritListVendorGrp);
+          this.inputObj.addCritInput.push(addCritListVendorGrp);
+        }
       },
       (error) => {
         console.log(error);
