@@ -11,7 +11,7 @@ import { UcAddressGroupComponent } from './uc-address-group/uc-address-group.com
 import { UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcpagingModule } from "@adins/ucpaging";
 import { UcSubsectionModule } from "@adins/uc-subsection";
- import { UcaddressModule } from "@adins/ucaddress";
+import { UcaddressModule } from "@adins/ucaddress";
 import { DummyComponent } from './dummy/dummy.component';
 import { ArchwizardModule } from "angular-archwizard";
 import { UcSubsectionComponent } from './uc-subsection/uc-subsection.component';
@@ -35,6 +35,8 @@ import { SharingComponentModule } from "app/shared/sharingcomponent.module";
 import { Dummy7Component } from './dummy7/dummy7.component';
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { UcreportModule } from "@adins/ucreport";
+import { Dummy8Component } from './dummy8/dummy8.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
     imports: [
@@ -53,7 +55,8 @@ import { UcreportModule } from "@adins/ucreport";
         UcinputnumberModule,
         NgxStepperModule,
         SharingComponentModule,
-        UcreportModule
+        UcreportModule,
+        InfiniteScrollModule
     ],
     declarations: [
         Dummy1Component,
@@ -74,7 +77,8 @@ import { UcreportModule } from "@adins/ucreport";
         Step5Component,
         Step7Component,
         Step8Component,
-        Dummy7Component
+        Dummy7Component,
+        Dummy8Component
     ],
     providers: [
         ArchwizardComponent,
