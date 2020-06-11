@@ -38,7 +38,7 @@
       "placeholder": "Placeholder",
       "isFromURL": true,
       "isSelectOne": true,
-      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefModule/GetListRefModuleKeyValue",
+      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefModule/GetListKeyValueByCode",
       "label": "Module Code",
       "items": [],
       "itemsUrl": []
@@ -117,7 +117,7 @@
               ],
               "result": {
                 "type": "url",
-                "path": "/CommonSetting/GeneralSetting/detail",
+                "path": "/CommonSetting/GeneralSetting/Detail",
                 "param": [
                   {
                     "type": "generalSettingId",

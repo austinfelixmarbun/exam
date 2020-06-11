@@ -166,7 +166,7 @@ export class ProdOfferingAddComponent implements OnInit {
       this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Product/ProdOffering/paging"]);
+          this.router.navigate(["/Product/ProdOffering/Paging"]);
         },
         error => {
           console.log(error);
@@ -181,7 +181,7 @@ export class ProdOfferingAddComponent implements OnInit {
       this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Product/ProdOffering/paging"]);
+          this.router.navigate(["/Product/ProdOffering/Paging"]);
         },
         error => {
           console.log(error);

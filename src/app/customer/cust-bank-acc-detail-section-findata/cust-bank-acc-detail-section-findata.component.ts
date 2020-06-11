@@ -95,7 +95,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             BankAccName: response.CustBankAccObj.BankAccName,
             IsBankStmnt: response.CustBankAccObj.IsBankStmnt,
             BankBranchRegRptCode: response.CustBankAccObj.BankBranchRegRptCode,
-            BalanceAmt: response.CustBankAccObj.BalanceAmt,
+            BalanceAmt: parseFloat(response.CustBankAccObj.BalanceAmt),
             IsDefault: response.CustBankAccObj.IsDefault,
             IsActive: response.CustBankAccObj.IsActive,
             RowVersion: response.CustBankAccObj.RowVersion
@@ -121,7 +121,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             BankAccName: response.CustBankAccObj.BankAccName,
             IsBankStmnt: true,
             BankBranchRegRptCode: response.CustBankAccObj.BankBranchRegRptCode,
-            BalanceAmt: response.CustBankAccObj.BalanceAmt,
+            BalanceAmt: parseFloat(response.CustBankAccObj.BalanceAmt),
             IsDefault: response.CustBankAccObj.IsDefault,
             IsActive: response.CustBankAccObj.IsActive,
             RowVersion: response.CustBankAccObj.RowVersion
@@ -137,7 +137,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             this.custBankStmntH.InputBy = response.CustBankStmntHObj.InputBy;
             this.custBankStmntH.StartPeriod = response.CustBankStmntHObj.StartPeriod;
             this.custBankStmntH.EndPeriod = response.CustBankStmntHObj.EndPeriod;
-            this.custBankStmntH.BalanceAmt = response.CustBankStmntHObj.BalanceAmt;
+            this.custBankStmntH.BalanceAmt = parseFloat(response.CustBankStmntHObj.BalanceAmt);
             this.custBankStmntH.RowVersion = response.CustBankStmntHObj.RowVersion;
 
             for (const item of response.CustBankStmntDObjs) {
@@ -148,7 +148,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
                 Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$")]],
                 DebitAmt: [item.DebitAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
                 CreditAmt: [item.CreditAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
-                BalanceAmt: [item.BalanceAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
+                BalanceAmt: [parseFloat(item.BalanceAmt), [Validators.required, Validators.pattern("^[0-9]+$")]],
                 RowVersion: [item.RowVersion]
               });
               formArray.push(formGroup);
@@ -210,7 +210,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     custBankAccObj.BankAccName = formData.BankAccName;
     custBankAccObj.IsBankStmnt = formData.IsBankStmnt;
     custBankAccObj.BankBranchRegRptCode = formData.BankBranchRegRptCode;
-    custBankAccObj.BalanceAmt = formData.BalanceAmt;
+    custBankAccObj.BalanceAmt = parseFloat(formData.BalanceAmt);
     custBankAccObj.IsDefault = formData.IsDefault;
     custBankAccObj.RowVersion = formData.RowVersion;
     custBankAccObj.IsActive = formData.IsActive;
@@ -263,9 +263,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
           custBankStmntD.Year = bankStmnt.Year;
           custBankStmntD.DebitAmt = bankStmnt.DebitAmt;
           custBankStmntD.CreditAmt = bankStmnt.CreditAmt;
-          custBankStmntD.BalanceAmt = bankStmnt.BalanceAmt;
+          custBankStmntD.BalanceAmt = parseFloat(bankStmnt.BalanceAmt);
           listCustBankStmntD.push(custBankStmntD);
-          totalBalance += bankStmnt.BalanceAmt;
+          totalBalance += parseFloat(bankStmnt.BalanceAmt);
         }
 
         var custBankStmntH = new CustBankStmntHObj();

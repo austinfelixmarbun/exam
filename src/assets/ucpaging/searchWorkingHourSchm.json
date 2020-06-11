@@ -97,7 +97,7 @@
           "action": [
             {
               "type": "edit",
-              "path": "/CommonSetting/WorkingHour/detail",
+              "path": "/CommonSetting/WorkingHour/Detail",
               "param": [
                 {
                   "type": "workingHourSchmHId",

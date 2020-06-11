@@ -211,7 +211,7 @@ export class UserAddEditComponent implements OnInit {
 
                           this.service.typeSave(response['message']);
                           this.router.navigateByUrl('/systemSetting/refUser', { skipLocationChange: true }).then(() =>
-                          this.router.navigate(['/systemSetting/refUser/detail']));
+                          this.router.navigate(['/systemSetting/refUser/Detail']));
                           this.spinner.hide();
                         },
                         error => {

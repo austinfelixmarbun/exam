@@ -19,6 +19,7 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
       this.objPassing["VendorEmpId"] = params['VendorEmpId'];
+      this.VendorId = params['VendorId'];
     });
   }
 

@@ -15,5 +15,6 @@ export class CustCompanyContactPersonObj{
     PhnArea2 : any;
     Phn2 : any;
     PhnExt2 : any;
+    RowVersion: any;
    
 }

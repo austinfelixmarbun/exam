@@ -46,7 +46,7 @@ export class ProductComponentHOComponent implements OnInit {
     );
 
     this.ProdHId = this.objInput["param"];
-    this.LoadProdComponent(this.ProdHId, "SCORE,RULE,OTHR", true);
+    this.LoadProdComponent(this.ProdHId, "SCORE,RULE,OTHR,LOS", true);
   }
 
 

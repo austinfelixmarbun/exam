@@ -132,7 +132,7 @@
             "action" : [ 
                 {
                     "type" : "edit", 
-                    "path" : "/Employee/detail", 
+                    "path" : "/Employee/Detail", 
                     "param" : [ 
                         {
                             "type" : "RefEmpId", 

@@ -5,7 +5,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "QUESTION_GROUP_CODE",
+            "name": "VERF_QUESTION_GRP_CODE",
             "id": "SchemeCodeId",
             "value": "",
             "label": "QUESTION GROUP CODE",
@@ -13,7 +13,7 @@
         },
         {
             "type": "textbox",
-            "name": "QUESTION_GROUP_NAME",
+            "name": "VERF_QUESTION_GRP_NAME",
             "id": "SchemeNameId",
             "value": "",
             "label": "QUESTION GROUP NAME",

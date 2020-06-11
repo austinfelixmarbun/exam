@@ -361,7 +361,7 @@ export class EmployeeAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigateByUrl('/Employee', { skipLocationChange: true }).then(() =>
-          // this.router.navigate(['/Employee/detail']))
+          // this.router.navigate(['/Employee/Detail']))
           this.router.navigate(["/Employee/Paging"]);
         },
         (error) => {
