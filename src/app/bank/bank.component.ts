@@ -17,6 +17,7 @@ export class BankComponent implements OnInit {
   inputPagingObj: any;
 
   ngOnInit() {
+    //PERUBUAHAN HABIS REJECT
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchBank.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
