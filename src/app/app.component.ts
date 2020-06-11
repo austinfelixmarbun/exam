@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
     private _hubConnection: HubConnection;
     msgs: Message[] = [];
-    //TEST PUSH MASTER 2
+    //TEST PUSH MASTER 3
     constructor() { }
  
     ngOnInit(): void {
