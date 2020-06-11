@@ -1,0 +1,62 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "ContactAddressId",
+        "subSectionTitle": "Contact Address",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "ADDRESS",
+            "property": "FullAddr"
+          },
+          {
+            "type": "text",
+            "label": "ZIP CODE",
+            "property": "ZipCode"
+          },
+          {
+            "type": "text",
+            "label": "RT / RW",
+            "property": "RtRw"
+          },
+          {
+            "type": "text",
+            "label": "KELURAHAN",
+            "property": "Kelurahan"
+          },
+          {
+            "type": "text",
+            "label": "PHONE NO (FIX LINE) 1",
+            "property": "Phone1"
+          },
+          {
+            "type": "text",
+            "label": "KECAMATAN",
+            "property": "Kecamatan"
+          },
+          {
+            "type": "text",
+            "label": "PHONE NO (FIX LINE) 2",
+            "property": "Phone2"
+          },
+          {
+            "type": "text",
+            "label": "FAX",
+            "property": "Fax"
+          },
+          {
+            "type": "text",
+            "label": "CITY",
+            "property": "City"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT CA.FULL_ADDR AS FullAddr, CONCAT(CA.AREA_CODE_4, '/', CA.AREA_CODE_3) AS RtRw, CA.AREA_CODE_1 AS Kecamatan, CA.AREA_CODE_2 AS Kelurahan, CA.CITY AS City, CA.ZIPCODE AS ZipCode, CONCAT(CA.PHN_AREA_1,' ',CA.PHN_1, '-',CA.PHN_EXT_1) AS Phone1, CONCAT(CA.PHN_AREA_2,' ',CA.PHN_2, '-',CA.PHN_EXT_2) AS Phone2, CONCAT(CA.FAX_AREA,' ',CA.FAX) AS Fax",
+          "from": "FROM dbo.CUST_COMPANY_CONTACT_PERSON CCCP WITH(NOLOCK) JOIN dbo.CUST_COMPANY CC ON CC.CUST_COMPANY_ID = CCCP.CUST_COMPANY_ID JOIN dbo.CUST_ADDR CA WITH(NOLOCK) ON CA.CUST_ID = CC.CUST_ID AND CA.MR_CUST_ADDR_TYPE_CODE = 'CONTACT' JOIN dbo.CUST C WITH(NOLOCK) ON C.CUST_ID = CC.CUST_ID",
+          "where": "WHERE C.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

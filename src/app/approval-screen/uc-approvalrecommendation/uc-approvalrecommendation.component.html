@@ -1,0 +1,20 @@
+<div [formGroup]="parentForm">
+  <div class="col-md-12">
+    <ng-container [formArrayName]="identifier"
+      *ngFor="let item of parentForm['controls'][identifier]['controls']; let i = index">
+      <div class="form-group" [formGroupName]="i">
+        <div class="row">
+          <div class="col-md-6 form-inline">
+            <label>{{parentForm.controls[identifier].value[i].RecommendationName}}</label>
+          </div>
+          <div class="col-md-6 ">
+            <input class="form-control" formControlName="RecommendationValue"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm['controls'][identifier]['controls'][i]['controls']['RecommendationValue']['invalid']}">
+            <lib-uc-show-errors [control]="item.controls.RecommendationValue" [submit]="enjiForm.submitted">
+            </lib-uc-show-errors>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

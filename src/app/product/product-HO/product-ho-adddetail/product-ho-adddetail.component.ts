@@ -11,7 +11,6 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-product-ho-adddetail',
   templateUrl: './product-ho-adddetail.component.html',
-  styleUrls: ['./product-ho-adddetail.component.scss'],
   providers: [NGXToastrService]
 })
 export class ProductHoAdddetailComponent implements OnInit {
@@ -20,6 +19,7 @@ export class ProductHoAdddetailComponent implements OnInit {
   mode: string = "add";
   key: any;
   criteria: CriteriaObj[] = [];
+  viewProdMainInfoObj: any;
 
   objPassing: any = {};
 
@@ -40,13 +40,10 @@ export class ProductHoAdddetailComponent implements OnInit {
     private toastr: NGXToastrService
   ) {
     this.route.queryParams.subscribe(params => {
-      // console.log("Params: ");
-      // console.log(params);
+      this.objPassing["ProdId"] = params["ProdId"];
       this.objPassing["param"] = params["ProdHId"];
       this.objPassing["mode"] = params["mode"];
       this.objPassing["url"] = AdInsConstant.GetProductDetailComponentInfo;
-      // console.log("obj passing: ");
-      // console.log(this.objPassing);
       
       this.key = params["key"];
     })
@@ -55,13 +52,16 @@ export class ProductHoAdddetailComponent implements OnInit {
   ResultResponse: any;
   ProdHOBj: any;
   UrlBackEnd: any;
+  type: string;
+  
   ngOnInit() {
+    //** Main Information **//
+    this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
     this.ProdHOBj=new RefProductHOObj();
     this.ProdHOBj.ProdHId = this.objPassing.param;
     this.UrlBackEnd=AdInsConstant.GetProductMainInfo;
     this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
       (response) => {
-        // console.log(response);
         this.ResultResponse=response;
         this.RefProductHOForm.patchValue({
           ProdCode: this.ResultResponse.ProdCode,
@@ -77,7 +77,8 @@ export class ProductHoAdddetailComponent implements OnInit {
       }
     );
   }
-  
-  
 
+  EnterTab(type) {
+    this.type = type;
+  }
 }

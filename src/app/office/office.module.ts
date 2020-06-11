@@ -14,11 +14,14 @@ import { OfficeGroupMemberComponent } from './office-group-member/office-group-m
 import { UcpagingModule } from '@adins/ucpaging';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-group-member-add.component';
+import { UcaddressModule } from '@adins/ucaddress';
+import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { OfficeAreaMemberAddComponent } from './office-area/office-area-member/office-area-member-add/office-area-member-add.component';
 import { OfficeAreaAddEditComponent } from './office-area/office-area-add-edit/office-area-add-edit.component';
 import { OfficeAreaPagingComponent } from './office-area/office-area-paging/office-area-paging.component';
 import { OfficeAreaMemberPagingComponent } from './office-area/office-area-member/office-area-member-paging/office-area-member-paging.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
 
 
 @NgModule({
@@ -33,6 +36,9 @@ import { OfficeAreaMemberPagingComponent } from './office-area/office-area-membe
     UcSubsectionModule,
     SharingComponentModule,
     ReactiveFormsModule,
+    UcaddressModule,
+    UclookupgenericModule,
+    UcShowErrorsModule,
     UcviewgenericModule
   ],
   declarations: [

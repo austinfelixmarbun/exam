@@ -1,0 +1,117 @@
+{
+  "title": "Product Offering Management",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "A.PROD_OFFERING_CODE",
+      "id": "prodCodeId",
+      "value": "",
+      "label": "Product Offering Code",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "A.PROD_OFFERING_NAME",
+      "id": "prodNameId",
+      "value": "",
+      "label": "Product Offering Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "datepicker",
+      "datatype": "date",
+      "name": "A.END_DT",
+      "id": "endDtLte",
+      "value": "",
+      "restriction": "Lte",
+      "label": "End Date <=",
+      "placeholder": "Placeholder"
+    }
+
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Product Offering Code",
+      "name": "prodOfferingCode"
+    },
+    {
+      "type": "sort",
+      "position": "left",
+      "label": "Product Offering Name",
+      "name": "prodOfferingName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Current Version",
+      "name": "prodOfferingVersion"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "End Date",
+      "name": "endDt"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Stat"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Deactive"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT A.PROD_OFFERING_CODE as prodOfferingCode,A.PROD_OFFERING_ID as prodOfferingId,A.PROD_OFFERING_NAME as prodOfferingName, B.PROD_OFFERING_VERSION as prodOfferingVersion, A.END_DT as endDt, A.PROD_OFFERING_STAT as prodOfferingStat, A.CURRENT_PROD_OFFERING_H_ID as prodOfferingHId, B.PROD_STAT as conditionStat, RS.DESCR AS conditionStatDesc, RTX.TRX_TYPE_CODE AS TrxTypeCode",
+    "from": "FROM dbo.PROD_OFFERING A WITH(NOLOCK) LEFT JOIN dbo.PROD_OFFERING_H B WITH(NOLOCK) ON A.CURRENT_PROD_OFFERING_H_ID=B.PROD_OFFERING_H_ID LEFT JOIN dbo.REF_STATUS RS WITH(NOLOCK) ON RS.REF_STATUS_CODE = B.PROD_STAT JOIN dbo.REF_TRX_TYPE RTX WITH(NOLOCK) ON RTX.REF_TRX_TYPE_ID = RS.REF_TRX_TYPE_ID",
+    "where": "WHERE RTX.TRX_TYPE_CODE = 'PROD'"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "prodOfferingCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "prodOfferingName"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "prodOfferingVersion"
+    },
+    {
+      "type": "date",
+      "position": "center",
+      "property": "endDt"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "conditionStatDesc"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "./edit",
+          "param": [
+            {
+              "type": "prodOfferingHId",
+              "property": "prodOfferingHId"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

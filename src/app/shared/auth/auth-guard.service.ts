@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router,public errorDialogService: ErrorDialogService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    var currentUser = localStorage.getItem("UserContext");
+    var currentUser = localStorage.getItem("UserAccess");
     // console.log("Router Interceptor" + route.url);
 
     this.previousUrl = route.url;
@@ -22,7 +22,8 @@ export class AuthGuard implements CanActivate {
 
     AdInsHelper.InsertLog(this.currentUrl,"PAGE");
 
-    console.log("pengecekan menu dihilangkan dulu, karna belum get menu dari backend");
+    // pengecekan menu dihilangkan dulu, karna belum get menu dari backend
+
     // if(!AdInsHelper.IsGrantAccess(this.currentUrl))
     // {
     //   // this.errorDialogService.openDialog(AdInsErrorMessage.PageNotAuthorized);

@@ -1,48 +1,77 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
   templateUrl: './customer-personal-duplicate-check.component.html',
-  styleUrls: ['./customer-personal-duplicate-check.component.scss']
+  styleUrls: [],
+  providers: [NGXToastrService]
 })
 export class CustomerPersonalDuplicateCheckComponent implements OnInit {
-  CustomerPersonalForm = this.fb.group({
-    CustName: ['', [Validators.required, Validators.maxLength(100)]],
-    Gender: ['', [Validators.required]],
-    MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
-    BirthPlace: ['', [Validators.required]],
-    BirthDt: ['', [Validators.required]],
-    IdNo: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.required]],
-    IdExpiredDt: ['', [Validators.required]],
-    MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]]
+  
+  resultData: any;
+  tempGender: any;
+  tempCustModel: any; 
+  ResultDuplicate: any;
+  tempMrIdTypeCode: any;
+  ResultDuplicateNegative: any;
 
-  });
+  IdCust: number;
+  BirthDt: Date;
+  IdExpiredDt: Date;
 
-  CustName  : any;
-  Gender : any;
-  MrIdTypeCode : any;
-  BirthPlace : any;
-  BirthDt : any;
-  IdNo : any;
-  TaxIdNo : any;
-  IdExpiredDt : any;
-  MotherMaidenName : any;
+  custObj: CustObj;
+  addCustObj: AddCustObj;
+  custPersonalObj: CustPersonalObj;
+  DuplicateCustObj: DuplicateCustObj;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
+  IdNo: string;
+  IsVip: string;
+  Gender: string;
+  TaxIdNo: string;
+  CustName: string;
+  VipNotes: string;
+  CustModel: string;
+  BirthPlace: string;
+  StatusIsVip: string;
+  MrIdTypeCode: string;
+  IdCustPersonal: string;
+  StatusAffiliate: string;
+  DuplicateStatus: string;
+  MotherMaidenName: string;
+  IsAffiliateWithMf: string;
+
+  addCustUrl: string;
+  resultPersonalUrl: string;
+  addCustPersonalUrl: string;
+  urlGetDescByMasterCode: string;
+  
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+    this.addCustUrl = AdInsConstant.AddNewCust;
+    this.addCustPersonalUrl = AdInsConstant.AddNewCustPersonal;
+    this.urlGetDescByMasterCode = AdInsConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
-   
+
       if (params["CustName"] != null) {
         this.CustName = params["CustName"];
       }
       if (params["Gender"] != null) {
-      this.Gender = params["Gender"];
-    }
+        this.Gender = params["Gender"];
+      }
       if (params["MrIdTypeCode"] != null) {
         this.MrIdTypeCode = params["MrIdTypeCode"];
+      }
+      if (params["CustModel"] != null) {
+        this.CustModel = params["CustModel"];
       }
       if (params["BirthPlace"] != null) {
         this.BirthPlace = params["BirthPlace"];
@@ -62,37 +91,215 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
       if (params["MotherMaidenName"] != null) {
         this.MotherMaidenName = params["MotherMaidenName"];
       }
+      if (params["IsAffiliateWithMf"] != null) {
+        this.IsAffiliateWithMf = params["IsAffiliateWithMf"];
+      }
+      if (params["IsVip"] != null) {
+        this.IsVip = params["IsVip"];
+      }
+      if (params["VipNotes"] != null) {
+        this.VipNotes = params["VipNotes"];
+      }
     });
- 
-   }
-
-  ngOnInit() { 
-    this.CustomerPersonalForm.patchValue({
-      CustName: this.CustName,
-      Gender: this.Gender,
-      MrIdTypeCode: this.MrIdTypeCode,
-      BirthPlace: this.BirthPlace,
-      BirthDt: this.BirthDt,
-      IdNo: this.IdNo,
-      IdExpiredDt: this.IdExpiredDt,
-      MotherMaidenName: this.MotherMaidenName,
-      TaxIdNo: this.TaxIdNo
-
-    });
-    this.CustomerPersonalForm.controls.CustName.disable();
-    this.CustomerPersonalForm.controls.Gender.disable();
-    this.CustomerPersonalForm.controls.MrIdTypeCode.disable();
-    this.CustomerPersonalForm.controls.BirthPlace.disable();
-    this.CustomerPersonalForm.controls.BirthDt.disable();
-    this.CustomerPersonalForm.controls.IdNo.disable();
-    this.CustomerPersonalForm.controls.IdExpiredDt.disable();
-    this.CustomerPersonalForm.controls.MotherMaidenName.disable();
-    this.CustomerPersonalForm.controls.TaxIdNo.disable();
-
-
-
-
-
   }
 
+  ngOnInit() {
+    this.DuplicateCustObj = new DuplicateCustObj();
+    this.DuplicateCustObj.CustName = this.CustName;
+    this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Personal;
+    this.DuplicateCustObj.IdNo = this.IdNo;
+    this.DuplicateCustObj.TaxIdNo = this.TaxIdNo;
+    this.DuplicateCustObj.MotherMaidenName = this.MotherMaidenName;
+    this.DuplicateCustObj.BirthDt = this.BirthDt;
+    console.log(this.DuplicateCustObj);
+    this.http.post(AdInsConstant.GetCustomerAndNegativeCustDuplicateCheck, this.DuplicateCustObj).subscribe(
+      (response) => {
+        this.DuplicateStatus = response["Status"];
+        console.log(this.DuplicateStatus);
+        if (this.DuplicateStatus != null && this.DuplicateStatus != undefined)
+        {
+          this.ResultDuplicate = response["ReturnObject"]["CustDuplicate"];
+          this.ResultDuplicateNegative = response["ReturnObject"]["NegativeCustDuplicate"];
+        }
+        else
+          this.SaveValue();
+      });
+
+    var refMasterObjGender = {
+      MasterCode: this.Gender,
+      RowVersion: ""
+    }
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjGender).subscribe(
+      (response) => {
+        this.tempGender = response;
+      }
+    );
+
+    var refMasterObjMrIdTypeCode = {
+      MasterCode: this.MrIdTypeCode,
+      RowVersion: ""
+    }
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjMrIdTypeCode).subscribe(
+      (response) => {
+        this.tempMrIdTypeCode = response;
+      }
+    );
+
+    var refMasterObjCustModel = {
+      MasterCode: this.CustModel,
+      RowVersion: ""
+    }
+    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
+      (response) => {
+        this.tempCustModel = response;
+      }
+    );
+
+    if (this.IsAffiliateWithMf === "true") {
+      this.StatusAffiliate = "Yes";
+    } else {
+      this.StatusAffiliate = "No";
+    }
+    if (this.IsVip === "true") {
+      this.StatusIsVip = "Yes";
+    } else {
+      this.StatusIsVip = "No";
+    }
+  }
+
+  SaveValue() {
+
+    this.addCustObj = new AddCustObj();
+    this.addCustObj.CustObj = new CustObj();
+    this.addCustObj.CustPersonalObj = new CustPersonalObj();
+    this.addCustObj.CustObj.CustName = this.CustName;
+    this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
+    this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+    this.addCustObj.CustObj.MrIdTypeCode = this.MrIdTypeCode;
+    this.addCustObj.CustObj.IdNo = this.IdNo;
+    this.addCustObj.CustObj.IdExpiredDt = this.IdExpiredDt;
+    this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
+    if(this.IsVip === "true"){
+      this.addCustObj.CustObj.IsVip = true;
+    }else{
+      this.addCustObj.CustObj.IsVip = false;
+    }
+    if(this.IsAffiliateWithMf === "true"){
+      this.addCustObj.CustObj.IsAffiliateWithMf = true;
+    }else{
+      this.addCustObj.CustObj.IsAffiliateWithMf = false;
+    } 
+    this.addCustObj.CustObj.VipNotes = this.VipNotes;
+    this.addCustObj.CustPersonalObj.CustFullName = this.CustName;
+    this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;
+    this.addCustObj.CustPersonalObj.BirthPlace = this.BirthPlace;
+    this.addCustObj.CustPersonalObj.BirthDt = this.BirthDt;
+    this.addCustObj.CustPersonalObj.MotherMaidenName = this.MotherMaidenName;
+    this.addCustObj.CustPersonalObj.IsRestInPeace = false;
+
+    this.http.post(this.addCustUrl, this.addCustObj).subscribe(
+      (response) => {
+        this.resultData = response;
+        this.IdCust = this.resultData.CustObj.CustId; 
+        this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.IdCust } });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  EditCustPersonal(item)
+  {
+    var CustObj = {CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo};
+    this.http.post(AdInsConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
+      (response) => {
+        this.addCustObj = new AddCustObj();
+        this.addCustObj.CustObj = response['CustObj'];
+        this.addCustObj.CustPersonalObj = response['CustPersonalObj'];
+        this.addCustObj.CustObj.CustName = item.CustName;
+        this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
+        this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+        this.addCustObj.CustObj.MrIdTypeCode = this.MrIdTypeCode;
+        this.addCustObj.CustObj.IdNo = item.IdNo;
+        this.addCustObj.CustObj.IdExpiredDt = this.IdExpiredDt;
+        this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
+        if(this.IsVip === "true"){
+          this.addCustObj.CustObj.IsVip = true;
+        }else{
+          this.addCustObj.CustObj.IsVip = false;
+        }
+        if(this.IsAffiliateWithMf === "true"){
+          this.addCustObj.CustObj.IsAffiliateWithMf = true;
+        }else{
+          this.addCustObj.CustObj.IsAffiliateWithMf = false;
+        } 
+        this.addCustObj.CustObj.VipNotes = this.VipNotes;
+        this.addCustObj.CustPersonalObj.CustFullName = item.CustName;
+        this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;
+        this.addCustObj.CustPersonalObj.BirthPlace = this.BirthPlace;
+        this.addCustObj.CustPersonalObj.BirthDt = item.BirthDt;
+        this.addCustObj.CustPersonalObj.MotherMaidenName = item.MotherMaidenName;
+        this.addCustObj.CustPersonalObj.IsRestInPeace = false;
+        this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
+          () => {
+            this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId } });
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  EditNegativeCustPersonal(item)
+  {
+    var CustObj = {CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo};
+    this.http.post(AdInsConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
+      (response) => {
+        this.addCustObj = new AddCustObj();
+        this.addCustObj.CustObj = response['CustObj'];
+        this.addCustObj.CustPersonalObj = response['CustPersonalObj'];
+        this.addCustObj.CustObj.CustName = item.CustName;
+        this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
+        this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+        this.addCustObj.CustObj.MrIdTypeCode = this.MrIdTypeCode;
+        this.addCustObj.CustObj.IdNo = item.IdNo;
+        this.addCustObj.CustObj.IdExpiredDt = this.IdExpiredDt;
+        this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
+        if(this.IsVip === "true"){
+          this.addCustObj.CustObj.IsVip = true;
+        }else{
+          this.addCustObj.CustObj.IsVip = false;
+        }
+        if(this.IsAffiliateWithMf === "true"){
+          this.addCustObj.CustObj.IsAffiliateWithMf = true;
+        }else{
+          this.addCustObj.CustObj.IsAffiliateWithMf = false;
+        } 
+        this.addCustObj.CustObj.VipNotes = this.VipNotes;
+        this.addCustObj.CustPersonalObj.CustFullName = item.CustName;
+        this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;
+        this.addCustObj.CustPersonalObj.BirthPlace = this.BirthPlace;
+        this.addCustObj.CustPersonalObj.BirthDt = item.BirthDt;
+        this.addCustObj.CustPersonalObj.MotherMaidenName = item.MotherMaidenName;
+        this.addCustObj.CustPersonalObj.IsRestInPeace = false;
+        this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
+          () => {
+            this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId } });
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }

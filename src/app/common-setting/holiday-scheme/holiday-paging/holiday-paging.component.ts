@@ -1,19 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
-import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { UCSearchComponent } from '@adins/ucsearch';
-import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 
 @Component({
   selector: 'app-holiday-paging',
   templateUrl: './holiday-paging.component.html',
   styleUrls: ['./holiday-paging.component.scss'],
-  providers: [NGXToastrService, DecimalPipe]
+  providers: [NGXToastrService]
 })
 export class HolidayPagingComponent implements OnInit {
   
@@ -23,7 +17,7 @@ export class HolidayPagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/ucpaging/searchHoliday.json";
-    this.inputObj.enviromentUrl = "http://r3app-server.ad-ins.com/FOUNDATION_R3";
+    this.inputObj.enviromentUrl = "http://r3app-server.ad-ins.com/Foundation_R3";
     this.inputObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputObj.pagingJson = "./assets/ucpaging/searchHoliday.json";
     this.inputObj.deleteUrl = "/HolidaySchm/DeleteHolidaySchmH";

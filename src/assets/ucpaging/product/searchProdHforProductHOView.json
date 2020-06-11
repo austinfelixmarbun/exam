@@ -1,0 +1,67 @@
+{
+  "title": "Product Version List",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "A.PROD_STAT",
+      "id": "prodStatId",
+      "value": "",
+      "label": "Product Status (TEMP)",
+      "placeholder": "Placeholder"
+    }
+
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Product Version",
+      "name": "prodVersion"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Start Date",
+      "name": "startDt"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "End Date",
+      "name": "endDt"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Product Status",
+      "name": "prodStat"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT A.PROD_VERSION as prodVersion ,A.START_DT as startDt, A.END_DT as endDt, A.PROD_STAT as prodStat",
+    "from": "FROM dbo.PROD_H A WITH(NOLOCK) INNER JOIN dbo.PROD B WITH(NOLOCK) ON A.PROD_ID=B.PROD_ID"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "center",
+      "property": "prodVersion"
+    },
+    {
+      "type": "date",
+      "position": "center",
+      "property": "startDt"
+    },
+    {
+      "type": "date",
+      "position": "center",
+      "property": "endDt"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "prodStat"
+    }
+  ]
+}

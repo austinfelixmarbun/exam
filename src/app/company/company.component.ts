@@ -18,7 +18,7 @@ export class CompanyComponent implements OnInit {
   pageNow: any;
   pageSize: any;
   apiUrl: any;
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   resultData: string;
 
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService) { }

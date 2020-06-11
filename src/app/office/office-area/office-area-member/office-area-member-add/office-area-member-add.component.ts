@@ -3,12 +3,12 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 
 @Component({
   selector: 'app-office-area-member-add',
@@ -22,8 +22,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   @ViewChild(UCSearchComponent) UCSearchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  OfficeCode: any;
-  OfficeName: any;
   RefOfficeId: any;
   refOfficeAreaObj: any;
   //** End UC Search **//
@@ -32,8 +30,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   totalData: any;
   pageSize: any;
   apiUrl: any;
-  officeUrl: any;
-  addUrl: any;
   arrCrit: any;
 
   foundationUrl: string = environment.FoundationR3Url;
@@ -47,7 +43,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   listDeletedId: Array<any> = [];
   Data = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location,) {
     this.route.queryParams.subscribe(params => {
       if (params['RefOfficeAreaId'] != null) {
         this.RefOfficeId = params['RefOfficeAreaId'];
@@ -56,7 +52,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("test");
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeAreaMember.json";
     this.inputObj.enviromentUrl = this.foundationUrl;
@@ -65,8 +60,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetPagingObjectBySQL;
-    this.officeUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
-    this.addUrl = this.foundationUrl + AdInsConstant.AddOfficeZipcodeMember;
 
     this.arrCrit = new Array();
 
@@ -74,7 +67,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
 
   getResult(event) {
     this.resultData = event.response;
-    console.log(this.resultData)
     this.totalData = event.response.Count;
     this.ucgridFooter.pageNow = event.pageNow;
     this.ucgridFooter.totalData = this.totalData;
@@ -115,16 +107,12 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   }
 
   Checked(RefOfficeId: any, isChecked: any): void {
-    console.log(RefOfficeId);
     if (isChecked) {
       this.listSelectedId.push(RefOfficeId);
     } else {
       let index = this.listSelectedId.indexOf(RefOfficeId)
-      console.log(index);
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
-    console.log('Sel', this.listSelectedId);
-    console.log('Del', this.listDeletedId);
   }
 
   AddToTemp() {
@@ -165,7 +153,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   }
 
   DeleteFromTemp(RefOfficeId) {
-    console.log("Delete From Temp")
     if (confirm('Are you sure to delete this record?')) {
       this.arrAddCrit = new Array();
       if (this.arrCrit.length != 0) {
@@ -201,45 +188,11 @@ export class OfficeAreaMemberAddComponent implements OnInit {
     }
   }
 
-  SaveOfficeAreaMember() {
-    // this.refOfficeAreaObj = new RefOfficeAreaObj()
-    // for (let index = 0; index < this.tempData.length; index++) {
-    //   console.log(this.tempData);
-    //   var refOfficeAreaObj = {
-    //     AssetSchmDId:this.tempData[index].assetSchmDId,
-    //     AssetSchmHId: this.tempData[index].assetSchmHId,
-    //     AssetMasterId: this.tempData[index].assetMasterId
-    //   }
-    //   this.arrAssetSchmD.push(refOfficeAreaObj);
-    // }
+  Back() {
+    this.location.back();
+  }
 
-    // var AssetSchmObj = {
-    //   AssetSchmH: this.assetSchmHObj,
-    //   AssetSchmD: this.arrAssetSchmD
-    // }
-    // console.log(refOfficeAreaObj);
-    // // if (this.pageType === 'add') {
-    // //   this.assetService.addAssetSchmHAndD(AssetSchmObj).subscribe(
-    // //     response => {
-    // //       console.log(response);
-    // //       this.toastr.successMessage(response['message']);
-    // //       this.router.navigateByUrl('asset/assetSchmPaging');
-    // //     },
-    // //     error => {
-    // //       console.log(error);
-    // //     }
-    // //   );
-    // // } else {
-    //   this.assetService.editAssetSchmHAndD(AssetSchmObj).subscribe(
-    //     response => {
-    //       console.log(response);
-    //       this.toastr.successMessage(response['message']);
-    //       this.router.navigateByUrl('asset/assetSchmPaging');
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   );
-    // // }
+  SaveOfficeAreaMember() {
+    //belum ada function save
   }
 }

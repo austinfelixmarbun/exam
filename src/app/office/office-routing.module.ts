@@ -16,14 +16,14 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'paging',
+        path: 'Paging',
         component: OfficeComponent,
         data: {
           title: 'Office'
         },
       },
       {
-        path: 'add',
+        path: 'Add',
         component: OfficeAddComponent,
         data: {
           title: 'Add Office'
@@ -51,14 +51,14 @@ const routes: Routes = [
         }
       },
       {
-        path: 'Office-group-member',
+        path: 'Group/Member',
         component: OfficeGroupMemberComponent,
         data: {
           title: 'Office Group Member'
         }
       },
       {
-        path: 'Office-group-member-add',
+        path: 'Group/Member/Add',
         component: OfficeGroupMemberAddComponent,
         data: {
           title: 'Office Group Member Add'

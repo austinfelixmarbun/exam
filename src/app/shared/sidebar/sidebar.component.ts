@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ContextMenuComponent } from 'ngx-contextmenu';
 import { ROUTES } from './sidebar-routes.config';
+import { environment } from 'environments/environment';
 
 declare var $: any;
 
@@ -17,10 +18,12 @@ export class SidebarComponent implements OnInit {
     public menuItems: any[];
     public menu:any[];
     private url:string;
+    version : string;
     @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
         private route: ActivatedRoute, public translate: TranslateService, private http: HttpClient) {
+            this.version = localStorage.getItem("Version");
 
     }
 
@@ -36,9 +39,13 @@ export class SidebarComponent implements OnInit {
         //         this.menuItems = data;
         //     }
         //     );
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-        // this.menuItems = JSON.parse(localStorage.getItem("Menu"));
-        //this.menu = JSON.parse(localStorage.getItem("Menu"));
+        if(environment.production==false){
+            this.menuItems = ROUTES.filter(menuItem => menuItem);
+        }
+        else
+        {
+            this.menuItems = JSON.parse(localStorage.getItem("Menu"));
+        }
     }
 
     //NGX Wizard - skip url change

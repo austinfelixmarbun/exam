@@ -1,8 +1,8 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="addButton" [routerLink]="['/product/prod-offering/add']" translate>
+    <button type="button" class="addButton" [routerLink]="['/Product/ProdOffering/add']" translate>
       <i class="ft-plus-circle"></i> Add Product Offering
     </button>
   </span>
 </div>
-<lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
+<lib-ucpaging [searchObj]="inputPagingObj" (callback)="EditProdOfr($event)"></lib-ucpaging>

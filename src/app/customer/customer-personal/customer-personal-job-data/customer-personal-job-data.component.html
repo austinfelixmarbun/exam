@@ -1,0 +1,36 @@
+ 
+         <div class="customerData">
+            <form class="form form-horizontal" [formGroup]="CustJobDataForm" (ngSubmit)="CustJobDataForm.valid && SaveForm()"
+                #enjiForm="ngForm">
+              <div class="form-body">
+                <lib-ucSubsection [id]="'custAddrId'" [title]="'Job Data'" [panel]="'jobData'">
+                </lib-ucSubsection>
+                <div id="jobData">
+                    <!-- <div class="form-group row">
+                      <label class="col-md-3 adInsLabel adins-required" translate>Address Type Name </label>
+                      <div class="col-md-4">
+                        <select class="form-control adInsInput" formControlName="JobDataType">
+                          <option *ngFor="let ram of listJobType" [value]="ram.Key">
+                            {{ram.Value}}
+                          </option>
+                        </select>
+                        <show-errors [control]="CustJobDataForm.controls.JobDataType" [submit]="enjiForm.submitted"></show-errors>
+                      </div>
+                    </div> -->
+                    <div *ngIf="this.CustModel == 'EMP'">
+                      <app-job-data-employee (outputTab)="getValue($event)"></app-job-data-employee>
+                    </div>
+                    <div *ngIf="this.CustModel == 'NONPROF'">
+                      <app-job-data-non-professional (outputTab)="getValue($event)"></app-job-data-non-professional>
+                    </div>
+                    <div *ngIf="this.CustModel == 'PROF'">
+                      <app-job-data-professional (outputTab)="getValue($event)"></app-job-data-professional>
+                    </div>
+                    <div *ngIf="this.CustModel == 'SME'">
+                      <app-job-data-sme (outputTab)="getValue($event)"></app-job-data-sme>
+                    </div>
+                </div>
+              </div>
+            </form>
+          </div>
+     

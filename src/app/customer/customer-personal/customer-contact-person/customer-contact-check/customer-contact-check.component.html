@@ -1,0 +1,58 @@
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="addButton" (click)="keluarinValue()" translate>
+      <i class="ft-plus-circle"></i> Add
+    </button>
+
+  </span>
+</div>
+
+<form class="form form-horizontal">
+  <div class="form-body">
+    <h4 class="form-section card-title" translate>
+      Contact Person Listing
+    </h4>
+  </div>
+</form>
+<table class="table table-responsive-md text-center table-hover">
+  <thead>
+    <tr class="table-header">
+      <th class="text-left"><span class="thead-header" name='Status' translate>STATUS</span></th>
+      <th class="text-left"><span class="thead-header" name='CustNo' translate>CUSTOMER NO.</span></th>
+      <th class="text-left"><span class="thead-header" name='Name' translate>NAME</span></th>
+      <th class="text-left"><span class="thead-header" name='Gender' translate>GENDER</span></th>
+      <th class="text-left"><span class="thead-header" name='CustomerRelationship' translate>CUSTOMER RELATIONSHIP</span></th>
+      <th class="text-left"><span class="thead-header" name='IdType' translate>ID TYPE</span></th>
+      <th class="text-left"><span class="thead-header" name='IdNo' translate>ID NO.</span></th>
+      <th class="text-left"><span class="thead-header" name='BirthDate' translate>BIRTH DATE</span></th>
+      <th translate>EDIT</th>
+      <th translate>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of tempCustomerPersonalContactPerson">
+      <td class="text-left">{{item.MrNegCustTypeCode}}</td>
+      <td class="text-left">{{item.ContactPersonCustNo}}</td>
+      <td class="text-left">{{item.ContactPersonName}}</td>
+      <td class="text-left">{{item.MrGenderCode}}</td>
+      <td class="text-left">{{item.MrCustRelationshipCode}}</td>
+      <td class="text-left">{{item.MrIdTypeCode}}</td>
+      <td class="text-left">{{item.IdNo}}</td>
+      <td class="text-left">{{item.BirthDt  | date: 'dd-MMM-yyyy' }}</td>
+
+      <td>
+        <a class="success p-0" data-original-title="" title="" (click)="editItem(item.CustPersonalContactPersonId)">
+          <i class="ft-edit-2 font-medium-3 mr-2"></i>
+        </a>
+      </td>
+      <td>
+        <a class="danger p-0" data-original-title="" title="" (click)="deleteItem(item.CustPersonalContactPersonId)">
+          <i class="ft-trash-2 font-medium-3 mr-2"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<br>

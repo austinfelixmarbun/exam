@@ -1,0 +1,145 @@
+{
+    "title": "Vendor Holding",
+    "component": [
+        {
+            "type": "dropdown",
+            "name": "V.MR_VENDOR_CATEGORY_CODE",
+            "id": "MrVendorCategoryCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "isQueryIn": true,
+            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListActiveRefMasterByVendorCategoryByReserveField1",
+            "label": "Vendor Category",
+            "criteriaPropName": "ReserveField1",
+            "criteriaPropValue": "HOLDING",
+            "items": [],
+            "itemsUrl": []
+        },
+        {
+            "type": "dropdown",
+            "name": "V.IS_ACTIVE",
+            "id": "IsActiveId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "url": "",
+            "label": "Active Status",
+            "items": [
+                {
+                    "key": true,
+                    "value": "Yes"
+                },
+                {
+                    "key": false,
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "V.VENDOR_CODE",
+            "id": "HoldingCodeId",
+            "value": "",
+            "label": "Holding Code",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "V.VENDOR_NAME",
+            "id": "HoldingNameId",
+            "value": "",
+            "label": "Holding Name",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        }
+    ],
+    "querystring": {
+        "select": "select V.VENDOR_CODE AS VendorCode, V.VENDOR_NAME AS VendorName, V.IS_ACTIVE AS IsActive, V.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, V.VENDOR_ID AS VendorId, VA.ADDR AS VendorAddr",
+        "from": "FROM dbo.VENDOR V JOIN dbo.VENDOR_ADDR VA WITH(NOLOCK) on V.VENDOR_ID = VA.VENDOR_ID",
+        "where": "WHERE VA.MR_ADDR_TYPE_CODE ='TAX'"
+        
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Holding Code",
+            "name": "V.VENDOR_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Holding Name",
+            "name": "V.VENDOR_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Holding Address",
+            "name": "VA.ADDR"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "V.IS_ACTIVE"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "VendorCode"
+        },
+        {
+            "type" : "link",
+            "property" : "VendorName",
+            "path" : "/Vendor/Holding/View",
+            "target": "_blank",
+            "param" :
+            [
+                {
+                    "type" : "VendorId",
+                    "property" : "VendorId"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "VendorAddr"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/Vendor/Holding/Registration",
+                    "param": [
+                        {
+                            "type": "VendorId",
+                            "property": "VendorId"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -4,24 +4,21 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
 import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
  
-
 @Component({
   selector: 'app-asset-document-master-add-edit',
   templateUrl: './asset-document-master-add-edit.component.html',
-  styleUrls: ['./asset-document-master-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetDocumentMasterAddEditComponent implements OnInit {
-  addUrl : any;
-  editUrl: any;
-  pageType: any;
-  apiUrl: any;
-  RefAssetDocId: any;
-  settingUrl: string = environment.FoundationR3Url;
-  result: any;
+  addUrl : string;
+  editUrl: string;
+  pageType: string;
+  apiUrl: string;
+  RefAssetDocId: number;
+   
+  result: RefAssetDocObj;
   refAssetObj: RefAssetDocObj;
 
   RefAssetDocForm = this.fb.group({
@@ -30,11 +27,9 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
     IsActive: [true]
   });
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewRefAssetDocData;
-    this.editUrl = environment.FoundationR3Url + AdInsConstant.EditRefAssetDocData;
+    this.addUrl =  AdInsConstant.AddNewRefAssetDocData;
+    this.editUrl =  AdInsConstant.EditRefAssetDocData;
     this.route.queryParams.subscribe(params => {
-
- 
 
         if (params["mode"] != null) {
           this.pageType = params["mode"];
@@ -47,20 +42,16 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
 
     });
   }
-
-  ngOnInit() {
-    
-    
+  ngOnInit() { 
     if (this.pageType == "edit") {
-      // this.title = "Edit Bank";
-      console.log("awd");
-      this.apiUrl = this.settingUrl + AdInsConstant.GetRefAssetDocByRefAssetDocId;
+     
+      this.apiUrl =   AdInsConstant.GetRefAssetDocByRefAssetDocId;
       var refAssetObj = new RefAssetDocObj();
       refAssetObj.RefAssetDocId = this.RefAssetDocId; 
       this.RefAssetDocForm.controls.AssetDocCode.disable(); 
       
       this.http.post(this.apiUrl, refAssetObj).subscribe(
-        (response) => {
+        (response: RefAssetDocObj) => {
           this.result = response;
           this.RefAssetDocForm.patchValue({
             AssetDocCode: this.result.AssetDocCode,
@@ -86,12 +77,10 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.refAssetObj.AssetDocName = this.RefAssetDocForm.controls["AssetDocName"].value;
       this.refAssetObj.IsActive = this.RefAssetDocForm.controls["IsActive"].value;
   
-
       this.http.post(this.addUrl, this.refAssetObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/Asset/DocumentMaster/Paging"]);
-          
+            this.router.navigate(["/Asset/DocumentMaster/Paging"]);        
         },
         error => {
           console.log(error);

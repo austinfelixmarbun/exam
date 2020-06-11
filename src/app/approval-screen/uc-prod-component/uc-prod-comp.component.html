@@ -1,0 +1,35 @@
+<form class="col-md-12 form-horizontal" [formGroup]="FormProdComp" (ngSubmit)="submit()">
+  <div class="col-md-12" formArrayName="groups" *ngFor="let type of FormProdComp.controls['groups'].controls; let j = index">
+    <div class="form-group row" [formGroupName]="j">
+      <div class="col-md-12">
+        <h4 class="form-section">{{FormProdComp.controls['groups'].value[j].groupName}}</h4>
+      </div>
+      <div class="col-md-12" formArrayName="components" *ngFor="let node of type.controls['components'].controls; let l = index">
+        <div class="form-group row" [formGroupName]="l">
+          <label class="col-md-4 ">{{type.controls['components'].value[l].ProdCompntName}}</label>
+          <div class="col-md-8" *ngIf="type.controls['components'].value[l].ProdCompntType == 'DDL'">
+            <select formControlName="CompntValue" class="form-control width-25-per" id="CompntValue" name="CompntValue" (change)="onChangeEvent(type.controls['components'].value[l].RefProdCompntCode,$event,l,j);">
+              <option value="">--Change if necessary--</option>
+              <option *ngFor="let m of dictOptions[type.controls['components'].value[l].RefProdCompntCode]" value={{m.Key}} >{{m.Value}}</option>
+            </select>
+          </div>
+          <div class="col-md-8" *ngIf="type.controls['components'].value[l].ProdCompntType == 'AMT'">
+            <input type="text" class="form-control adInsInput width-25-per" formControlName="CompntValue">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<button class="btn btn-raised btn-raised btn-warning mr-1" type="button" (click)="ChangeDropdown()">
+  <i class="ft-x"></i> ChangeDropdown Comp 3
+</button>
+
+<button class="btn btn-raised btn-raised btn-warning mr-1" type="button" (click)="checkValue()">
+  <i class="ft-x"></i> Check Value
+</button>
+
+<button class="btn btn-raised btn-raised btn-warning mr-1" type="button" (click)="save()">
+  <i class="ft-x"></i> Save
+</button>

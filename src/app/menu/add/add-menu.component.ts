@@ -32,7 +32,7 @@ export class AddMenuSettingComponent implements OnInit {
     param: string;
     mode: string = "add";
     apiUrl: any;
-    foundationUrl: string = environment.foundationUrl;
+    foundationUrl: string = environment.FoundationR3Url;
     editUrl: any;
     result: any;
     hierarchyNo: any;
@@ -50,7 +50,7 @@ export class AddMenuSettingComponent implements OnInit {
         this.inputLookupObj = new InputLookupObj();
         this.inputLookupObj.urlJson = "./assets/lookup/lookupMenu.json";
         this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefFormPaging;
-        this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+        this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
         this.inputLookupObj.pagingJson = "./assets/form-setting/lookupMenuPaging.json";
         this.inputLookupObj.genericJson = "./assets/form-setting/lookupMenuPaging.json";
         //** app-lookupgeneric **//
@@ -79,7 +79,7 @@ export class AddMenuSettingComponent implements OnInit {
         if (this.mode == "edit") {
             this.apiUrl = this.foundationUrl + AdInsConstant.GetRefFormByRefFormId;
             var refFormObj = new RefFormObj();
-            refFormObj.refFormId = this.param;
+            refFormObj.RefFormId = this.param;
             this.http.post(this.apiUrl, refFormObj).subscribe(
                 (response) => {
                     console.log("Success");
@@ -107,7 +107,7 @@ export class AddMenuSettingComponent implements OnInit {
         this.inputLookupObj.idSelect = data.parentId;
         if (this.inputLookupObj.idSelect != null) {
             var formParent = new RefFormObj();
-            formParent.refFormId = this.inputLookupObj.idSelect;
+            formParent.RefFormId = this.inputLookupObj.idSelect;
             this.http.post(this.apiUrl, formParent).subscribe(
                 (response) => {
                     this.inputLookupObj.nameSelect = response['returnObject'].title;
@@ -138,31 +138,31 @@ export class AddMenuSettingComponent implements OnInit {
 
     Save(form, lookupZipcode) {
         var refForm = new RefFormObj();
-        refForm.formCode = form.value.formCode;
-        refForm.title = form.value.title;
-        refForm.path = form.value.path;
-        refForm.icon = form.value.icon;
-        refForm.refModuleId = this.module;
+        refForm.FormCode = form.value.formCode;
+        refForm.Title = form.value.title;
+        refForm.Path = form.value.path;
+        refForm.Icon = form.value.icon;
+        refForm.RefModuleId = this.module;
         if (this.hasSub == true) {
-            refForm.class = "has-sub";
+            refForm.Class = "has-sub";
         }
         else {
-            refForm.class = "";
+            refForm.Class = "";
         }
-        refForm.badgeClass = form.value.badgeClass;
-        refForm.parentId = lookupZipcode.lookupInput.idSelect;
-        refForm.orderNo = form.value.orderNo;
+        refForm.BadgeClass = form.value.badgeClass;
+        refForm.ParentId = lookupZipcode.lookupInput.idSelect;
+        refForm.OrderNo = form.value.orderNo;
         if (this.isHidden == true) {
-            refForm.isHidden = "1";
+            refForm.IsHidden = "1";
         }
         else {
-            refForm.isHidden = "0";
+            refForm.IsHidden = "0";
         }
-        refForm.isExternalLink = this.isExternalLink;
+        refForm.IsExternalLink = this.isExternalLink;
         if (this.mode == "edit") {
             this.editUrl = this.foundationUrl + AdInsConstant.EditRefForm;
-            refForm.hierarchyNo = this.hierarchyNo;
-            refForm.refFormId = this.param;
+            refForm.HierarchyNo = this.hierarchyNo;
+            refForm.RefFormId = this.param;
             this.http.post(this.editUrl, refForm).subscribe(
                 (response) => {
                     console.log(response);
@@ -174,7 +174,7 @@ export class AddMenuSettingComponent implements OnInit {
         }
         else {
             this.editUrl = this.foundationUrl + AdInsConstant.AddRefForm;
-            refForm.hierarchyNo = "0";
+            refForm.HierarchyNo = "0";
             this.http.post(this.editUrl, refForm).subscribe(
                 (response) => {
                     console.log(response);

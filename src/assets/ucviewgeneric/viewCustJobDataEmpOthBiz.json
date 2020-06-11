@@ -1,0 +1,42 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "OthBizAddId",
+        "subSectionTitle": "Other Business",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "OTHER BUSINESS NAME",
+            "property": "OthBizName"
+          },
+          {
+            "type": "text",
+            "label": "OTHER JOB POSITION",
+            "property": "OthBizJobPos"
+          },
+          {
+            "type": "text",
+            "label": "OTHER BUSINESS TYPE",
+            "property": "OthBizType"
+          },
+          {
+            "type": "date",
+            "label": "ESTABLISHMENT DATE",
+            "property": "OthBizEstDt"
+          },
+          {
+            "type": "text",
+            "label": "OTHER BUSINESS INDUSTRY TYPE",
+            "property": "OthBizIndType"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT CPJD.OTH_BIZ_NAME AS OthBizName, CPJD.OTH_BIZ_TYPE AS OthBizType, RIT.INDUSTRY_TYPE_NAME AS OthBizIndType, CPJD.OTH_BIZ_JOB_POSITION AS OthBizJobPos,  CPJD.OTH_BIZ_ESTABLISHMENT_DT AS OthBizEstDt",
+          "from": "FROM dbo.CUST_PERSONAL_JOB_DATA CPJD WITH(NOLOCK) LEFT JOIN dbo.REF_INDUSTRY_TYPE RIT WITH(NOLOCK) ON RIT.INDUSTRY_TYPE_CODE = CPJD.OTH_BIZ_INDUSTRY_TYPE_CODE",
+          "where": "WHERE CPJD.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

@@ -7,5 +7,6 @@ export class GeneralSettingObj {
   ModuleCode: any;
   RoleCode: any;
   RowVersion: any;
+  ListGsCode : Array<string>;
   constructor() { this.GeneralSettingId = 0; this.RowVersion = ""}
 }

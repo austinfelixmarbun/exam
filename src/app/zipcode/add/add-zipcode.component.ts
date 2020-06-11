@@ -38,9 +38,9 @@ export class ZipcodeAddComponent implements OnInit {
     AreaCode2: ['', [Validators.required, Validators.maxLength(50)]],
     City: ['', [Validators.required, Validators.maxLength(50)]],
     Zipcode: ['', [Validators.required, Validators.maxLength(10)]],
-    SubZipcode: ['', Validators.maxLength(10)],
+    SubZipcode: [' ', Validators.maxLength(10)],
     PhnArea: ['', Validators.maxLength(10)],
-    IsActive: ['', Validators.required]
+    IsActive: [true, Validators.required]
   });
 
 
@@ -51,8 +51,8 @@ export class ZipcodeAddComponent implements OnInit {
     this.getRefDistrictUrl = AdInsConstant.GetRefProvDistrictById;
 
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      if (params["mode"] != null) {
+        this.pageType = params["mode"];
       }
       if (params["refZipcodeId"] != null) {
         this.refZipcodeId = params["refZipcodeId"];
@@ -113,15 +113,20 @@ export class ZipcodeAddComponent implements OnInit {
   }
 
   SaveForm() {
+    console.log("a");
     this.rzcObj = new RefZipcodeObj();
     this.rzcObj = this.RefZipCodeForm.value;
     this.rzcObj.RefProvDistrictId = this.inputDistrictLookupObj.jsonSelect.refProvDistrictId;
+    if(this.rzcObj.SubZipcode=="")
+    {
+      this.rzcObj.SubZipcode = " ";
+    }
     if (this.pageType == "add") {
       this.rzcObj.RowVersion = "";
       this.http.post(this.addUrl, this.rzcObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/CommonSetting/Zipcode/paging"]);
+          this.router.navigate(["/CommonSetting/Zipcode/Paging"]);
         },
         error => {
           console.log(error);
@@ -133,7 +138,7 @@ export class ZipcodeAddComponent implements OnInit {
       this.http.post(this.editUrl, this.rzcObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/CommonSetting/Zipcode/paging"]);
+          this.router.navigate(["/CommonSetting/Zipcode/Paging"]);
         },
         error => {
           console.log(error);

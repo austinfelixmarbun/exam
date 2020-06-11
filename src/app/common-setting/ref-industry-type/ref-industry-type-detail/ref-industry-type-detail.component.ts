@@ -68,7 +68,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     if (this.type == 'edit') {
       this.refIndustryType = new RefIndustryTypeObj();
       this.refIndustryType.RefIndustryTypeId = this.refIndustryTypeId;
-      var getRefIndustryUrl = this.settingUrl + AdInsConstant.GetRefIndustryTypeById;
+      var getRefIndustryUrl =  AdInsConstant.GetRefIndustryTypeById;
       var getRefEconomicSectorById = AdInsConstant.GetRefEconomicSectorById;
       this.httpClient.post(getRefIndustryUrl, this.refIndustryType).pipe(
         map( response => {
@@ -121,9 +121,9 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       this.httpClient.post(addRefIndustryType, this.refIndustryType).subscribe(
         //SAVE
         (response) => {
-          this.service.typeSave(response['message']);
+          this.service.successMessage(response["Message"]);
           this.router.navigateByUrl('industryType', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['/industryType/detail']));
+          this.router.navigate(['/industryType/Detail']));
         },
         (error) => {
           this.service.typeErrorCustom(error);
@@ -136,7 +136,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       //SAVE
       this.httpClient.post(editRefIndustryType, this.refIndustryType).subscribe(
         (response) => {
-          this.service.typeSave(response['message']);
+          this.service.successMessage(response["Message"]);
           this.location.back();
           this.spinner.hide();
         },

@@ -1,0 +1,59 @@
+<div class="customerData">
+  <form class="form form-horizontal" [formGroup]="CustDataPersonalForm"
+    (ngSubmit)="CustDataPersonalForm.valid && SaveForm()" #enjiForm="ngForm">
+    <div class="form-body">
+      <lib-ucSubsection [id]="'custAddrId'" [title]="'Customer Address'" [panel]="'customerAddr'">
+      </lib-ucSubsection>
+      <div id="customerAddr">
+        <div class="form-group row adins-required">
+          <label class="col-md-2  adInsLabel adins-required adins-required-label" translate>Address Type Name </label>
+          <div class="col-md-4">
+            <select class="form-control adInsInput" formControlName="MrCustAddrTypeCode" required>
+              <option *ngFor="let ram of listAddressType" [value]="ram.Key">
+                {{ram.Value}}
+              </option>
+            </select>
+            <show-errors [control]="CustDataPersonalForm.controls.MrCustAddrTypeCode" [submit]="enjiForm.submitted">
+            </show-errors>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2  adInsLabel" translate>Copy Address From </label>
+          <div class="col-md-3">
+            <select class="form-control adInsInput" formControlName="CopyAddrFrom">
+              <option *ngFor="let ram of listCustAddr" [value]="ram.CustAddrId">
+                {{ram.MrCustAddrTypeCode}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-raised btn-primary" (click)="copyAddress()">
+              <i class="fa fa-check-square-o"></i> Copy
+            </button>
+          </div>
+        </div>
+        <div id="CustMainDataPersonal">
+          <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Customer Address'"
+            [UCAddrForm]="CustDataPersonalForm" [enjiForm]="enjiForm" [identifier]="'custAddress'"
+            [default]="addressObj" [inputField]="inputFieldAddressObj" ></lib-ucaddress>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
+          <div class="col-md-4">
+            <textarea type="text" class="form-control adInsInput" formControlName="Notes"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustDataPersonalForm.controls.Notes.invalid }"></textarea>
+            <show-errors [control]="CustDataPersonalForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions right">
+      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+        <i class="ft-x"></i> Cancel
+      </button>
+      <button type="submit" class="btn btn-raised btn-primary" translate>
+        <i class="fa fa-check-square-o"></i> Save
+      </button>
+    </div>
+  </form>
+</div>

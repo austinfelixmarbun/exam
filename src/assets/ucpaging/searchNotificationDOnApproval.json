@@ -1,0 +1,64 @@
+{
+    "title": "Notification Detail",
+    "exportExcel": false,
+    "component": [
+      {
+        "type": "textbox",
+        "name": "RU.USERNAME",
+        "id": "Username",
+        "value": "",
+        "label": "Username",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "RE.EMP_NAME",
+        "id": "EmpName",
+        "value": "",
+        "label": "Employee Name",
+        "placeholder": "Placeholder"
+      }
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Username",
+        "name": "Username"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Employee Name",
+        "name": "EmpName"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT RU.USERNAME AS Username, RE.EMP_NAME AS EmpName, ND.NOTIFICATION_H_ID AS NotificationHId, ND.NOTIFICATION_D_ID AS NotificationDId",
+      "from": "FROM dbo.NOTIFICATION_D ND WITH(NOLOCK) LEFT JOIN dbo.REF_USER RU WITH(NOLOCK) ON RU.REF_USER_ID = ND.REF_USER_ID LEFT JOIN dbo.REF_EMP RE WITH(NOLOCK) ON RE.REF_EMP_ID = RU.REF_EMP_ID"
+    },
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "center",
+        "property": "Username"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "EmpName"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+        ]
+      }
+    ]
+  }
+  

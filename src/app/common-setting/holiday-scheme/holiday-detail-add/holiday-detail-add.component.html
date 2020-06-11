@@ -1,90 +1,142 @@
-<div class="col-md-12">
-  <div class="card">
-    <div class="card-body">
-      <div class="card-header header-title">
-        <div class="row">
-          <div class="col-md-8">
-            <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} HOLLIDAY SCHEME DETAIL </h4>
+<form class="form form-horizontal" [formGroup]="HolidayListForm" #HolidayListReqForm="ngForm"
+  (ngSubmit)="HolidayListForm.valid && SaveForm()">
+  <div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="ucSearch-Button-Right">
+                <span class="mr-1 ">
+                  <button type="button" class="btn btn-raised btn-warning mr-1" (click)="BackNavigate()">
+                    <i class=""></i> Back
+                  </button>
+                  <button type="submit" class="btn btn-raised btn-primary" translate>
+                    <i class="fa fa-check-square-o"></i> Save
+                  </button>
+                </span>
+              </div>
+              <h4 class="card-title" translate>HOLIDAY LIST</h4>
+              <hr>
+            </div>
           </div>
-          <div class="col-md-4" style="text-align-last: right">
-            <button type="button" class="backButton" [queryParams]="{param:'edit',holidaySchmHId:holidaySchmHId}" [routerLink]="['/commonSetting/holiday/add']" translate>
-              <i class="ft-arrow-left"></i> Back
-            </button>
+        </div>
+        <lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
+        <div class="card-body">
+          <div class="px-3">
+
+
+            <lib-ucSubsection [id]="'HolidayListFormId'" [title]="title" [panel]="'HolidayListForm'"></lib-ucSubsection>
+            <div class="form-body" id="HolidayListForm">
+
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" for="IsPublicHoliday" translate>Public Holiday</label>
+                <div class="col-md-9">
+                  <input type="checkbox" id="IsPublicHoliday" formControlName="IsPublicHoliday" (click)="Checkbox()">
+                  <show-errors [control]="HolidayListForm.controls.IsPublicHoliday"
+                    [submit]="HolidayListReqForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
+              <div *ngIf="check">
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel" for="Date" translate>Date</label>
+                  <div class="col-md-9">
+                    <input type="date" id="Date" class="form-control adInsInput width-25-per" formControlName="Date">
+                    <show-errors [control]="HolidayListForm.controls.Date" [submit]="HolidayListReqForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+
+
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel" for="Descr" translate>Description</label>
+                  <div class="col-md-9">
+                    <input type="text" id="Descr" class="form-control adInsInput width-25-per" formControlName="Descr">
+                    <show-errors [control]="HolidayListForm.controls.Descr" [submit]="HolidayListReqForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="!check">
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="Sunday" translate>Sunday</label>
+                  <div class="col-md-9">
+                    <input type="checkbox" id="Sunday" formControlName="Sunday">
+                    <show-errors [control]="HolidayListForm.controls.Sunday" [submit]="HolidayListReqForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="Monday" translate>Monday</label>
+                  <div class="col-md-9">
+                    <input type="checkbox" id="Monday" formControlName="Monday">
+                    <show-errors [control]="HolidayListForm.controls.Monday" [submit]="HolidayListReqForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="Tuesday" translate>Tuesday</label>
+                  <div class="col-md-9">
+                    <input type="checkbox" id="Tuesday" formControlName="Tuesday">
+                    <show-errors [control]="HolidayListForm.controls.Tuesday" [submit]="HolidayListReqForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="Wednesday" translate>Wednesday</label>
+                  <div class="col-md-9">
+                    <input type="checkbox" id="Wednesday" formControlName="Wednesday">
+                    <show-errors [control]="HolidayListForm.controls.Wednesday" [submit]="HolidayListReqForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="Thursday" translate>Thursday</label>
+                  <div class="col-md-9">
+                    <input type="checkbox" id="Thursday" formControlName="Thursday">
+                    <show-errors [control]="HolidayListForm.controls.Thursday" [submit]="HolidayListReqForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="Friday" translate>Friday</label>
+                  <div class="col-md-9">
+                    <input type="checkbox" id="Friday" formControlName="Friday">
+                    <show-errors [control]="HolidayListForm.controls.Friday" [submit]="HolidayListReqForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="Saturday" translate>Saturday</label>
+                  <div class="col-md-9">
+                    <input type="checkbox" id="Saturday" formControlName="Saturday">
+                    <show-errors [control]="HolidayListForm.controls.Saturday" [submit]="HolidayListReqForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel" for="UntilYear" translate>Until Year</label>
+                  <div class="col-md-9">
+                    <input type="text" id="UntilYear" class="form-control adInsInput width-25-per"
+                      formControlName="UntilYear" maxlength="4">
+                    <show-errors [control]="HolidayListForm.controls.UntilYear" [submit]="HolidayListReqForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="px-3">
-        <form class="form form-horizontal" name="HolidayDetReqForm" #HolidayDetReqForm="ngForm"
-          (ngSubmit)="HolidayDetReqForm.form.valid && SaveHolidayDetForm(HolidayDetReqForm)">
-          <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Holiday Detail Information</h4>
-            <div class="form-group row">
-              <label class="col-md-3  adInsLabel">Public Holiday </label>
-              <div class="col-md-9">
-                <select class="form-control adInsInput" name="isPublicHoliday" [(ngModel)]="isPublicHoliday"
-                  #IsPublicHoliday>
-                  <option value="1">Yes</option>
-                  <option value="0">No</option>
-                </select>
-              </div>
-            </div>
-            <div *ngIf="isPublicHoliday == '1'">
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Date </label>
-                <div class="col-md-9">
-                  <input type="date" class="form-control adInsInput width-25-per" name="holidayDt" required [(ngModel)]="holidayDt"
-                    #HolidayDt="ngModel"
-                    [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || HolidayDt.touched || HolidayDt.dirty) && HolidayDt.invalid }">
-                  <div
-                    *ngIf="(HolidayDetReqForm.submitted || HolidayDt.touched || HolidayDt.dirty) && HolidayDt.invalid"
-                    class="invalid-feedback">
-                    <div *ngIf="HolidayDt.errors.required" class="adInsReqMsg" translate>This field is required</div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Description </label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" name="descr" required [(ngModel)]="descr"
-                    #Descr="ngModel"
-                    [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || Descr.touched || Descr.dirty) && Descr.invalid }">
-                  <div *ngIf="(HolidayDetReqForm.submitted || Descr.touched || Descr.dirty) && Descr.invalid"
-                    class="invalid-feedback">
-                    <div *ngIf="Descr.errors.required" class="adInsReqMsg" translate>This field is required</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div *ngIf="isPublicHoliday == '0'">
-              <div class="form-group row" *ngFor="let item of listOfDay;let i = index;">
-                <label class="col-md-3  adInsLabel" translate>{{item.day}} </label>
-                <div class="col-md-9">
-                  <input class="border-primary" type="checkbox" [(ngModel)]="item.isActive"
-                    [ngModelOptions]="{standalone: true}" data-md-icheck>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Until Year </label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" name="untilYear" required [(ngModel)]="untilYear"
-                    #UntilYear="ngModel"
-                    [ngClass]="{ 'is-invalid': (HolidayDetReqForm.submitted || UntilYear.touched || UntilYear.dirty) && UntilYear.invalid }">
-                  <div
-                    *ngIf="(HolidayDetReqForm.submitted || UntilYear.touched || UntilYear.dirty) && UntilYear.invalid"
-                    class="invalid-feedback">
-                    <div *ngIf="UntilYear.errors.required" class="adInsReqMsg" translate>This field is required</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-actions right">
-            <button type="submit" class="btn btn-raised btn-primary" translate>
-              <i class="fa fa-check-square-o"></i> Save
-            </button>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
-</div>
+</form>

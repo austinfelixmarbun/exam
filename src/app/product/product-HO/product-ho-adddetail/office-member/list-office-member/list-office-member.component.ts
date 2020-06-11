@@ -1,0 +1,130 @@
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'environments/environment';
+import { empty } from 'rxjs';
+
+@Component({
+  selector: 'app-list-office-member',
+  templateUrl: './list-office-member.component.html',
+  providers: [NGXToastrService]
+})
+export class ListOfficeMemberComponent implements OnInit {
+
+  @ViewChild(UCSearchComponent) UCSearchComponent;
+  @Input() ListOfficeMemberObjInput: any;
+  @Output() componentIsOn: EventEmitter<any> = new EventEmitter();
+  resultData;
+  constructor(
+    private http: HttpClient,
+    private toastr:NGXToastrService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) { }
+  
+  pageNow;
+  pageSize;
+  apiUrl;
+  ProdHId ;
+  ngOnInit() {
+    this.pageNow = 1;
+    this.pageSize = 10;
+    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+
+    this.ProdHId = this.ListOfficeMemberObjInput["param"];
+    var obj={
+      ProdHId: this.ListOfficeMemberObjInput["param"],
+      RowVersion: ""
+    }
+
+    var url = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
+    this.http.post(url, obj).subscribe(
+      (response) => {
+        this.resultData = response["ReturnObject"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  addOfficeMember(){
+    var temp = [];
+    var obj;
+    if(this.resultData == empty){
+      obj = {
+        isOn: false,
+        result: []
+      }
+    }else{
+      for(var i=0;i<this.resultData.length;i++){
+        temp.push(this.resultData[i].RefOfficeId);
+      }
+      obj = {
+        isOn: false,
+        result: temp
+      }
+    }
+    
+    this.componentIsOn.emit(obj);
+  }
+
+  orderByKey;
+  orderByValue
+  searchSort(ev: any){
+    if (this.resultData != null) {
+      if (this.orderByKey == ev.target.attributes.name.nodeValue) {
+        this.orderByValue = !this.orderByValue
+      } else {
+        this.orderByValue = true
+      }
+      this.orderByKey = ev.target.attributes.name.nodeValue
+      let order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+      this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
+    }
+  }
+
+  deleteFromList(ev: any){
+    if (confirm('Are you sure to delete this record?')) {
+      var url = AdInsConstant.DeleteProductOfficeMbr;
+      var obj = {
+        ProductBranchMbrs:[
+          {
+            ProdBranchMbrId: ev.ProdBranchMbrId,
+            RowVersion: " "
+          }
+        ]
+      };
+
+      this.http.post(url, obj).subscribe(
+        (response) => {
+          var idx = this.resultData.findIndex(x=>x.ProdBranchMbrId == ev.ProdBranchMbrId);
+          if(idx > -1) this.resultData.splice(idx, 1);
+          this.toastr.successMessage(response["message"]);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  DoneForm(){
+    this.http.post(environment.FoundationR3Url + "/Product/SubmitProduct", {ProdHId : this.ProdHId}).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["message"]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    this.toastr.successMessage("Submitted");
+    this.router.navigate(["/product/HOpaging"]);
+  }
+}

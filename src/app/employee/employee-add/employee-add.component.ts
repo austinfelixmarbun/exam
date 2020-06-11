@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
 import { NgForm, FormBuilder, Validators, AbstractControl, FormGroup, FormControl } from "@angular/forms";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { formatDate } from "@angular/common";
+import { formatDate, DatePipe } from "@angular/common";
 import { RefBankObj } from "app/shared/model/RefBankObj.Model";
 import { UcAddressComponent } from "app/shared/UserControl/ucAddress/ucAddress.component";
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
@@ -29,23 +29,28 @@ export class EmployeeAddComponent implements OnInit {
   private getEmpUrl: string = AdInsConstant.GetRefEmployeeById;
   private getRefUserUrl: string = environment.FoundationR3Url + AdInsConstant.GetRefUserByRefEmpId;
   private getEmpBankUrl: string = environment.FoundationR3Url + AdInsConstant.GetEmpBankAccByRefEmpId;
-  private getGeneralSettingUrl : string = environment.FoundationR3Url + AdInsConstant.GetGeneralSettingByCode;
+  private getGeneralSettingUrl : string = AdInsConstant.GetGeneralSettingByCode;
   private getRefBankUrl: string = AdInsConstant.GetRefBankByRefBankIdAsync;
   private addUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefEmp;
   private editUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefEmp;
   private addUsrUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefUserR3;
-  private editUsrUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefUser;
+  private editUsrUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefUserForRefEmpR3;
   private addEmpBankAcc: string = environment.FoundationR3Url + AdInsConstant.AddEmpBankAcc;
   private editEmpBankAcc: string = environment.FoundationR3Url + AdInsConstant.EditEmpBankAcc;
   
   pageType: string = "add";
-  refEmpId: number;
+  RefEmpId: number;
   inputLookupZipCodeObj: InputLookupObj;
   inputLookupBankObj: InputLookupObj;
   resultData: any;
   isPasswordNotSame: boolean = false;
   generalSettingObj: GeneralSettingObj;
   passwordPattern: string;
+  refEmpObj: any;
+  refUserObj: any;
+  empBankAccObj: any;
+  refBankObj: any;
+  IdTypeList:any;
 
   RefEmpForm = this.fb.group({
     RefUserId: [0, [Validators.required]],
@@ -65,6 +70,7 @@ export class EmployeeAddComponent implements OnInit {
     IsActive: [true],
     IsLeave: [false],
     Addr: ['', [Validators.required]],
+    Zipcode: ['', [Validators.required]],
     AreaCode1: ['', [Validators.required]],
     AreaCode2: ['', [Validators.required]],
     AreaCode3: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
@@ -100,17 +106,16 @@ export class EmployeeAddComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private http: HttpClient
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      if (params["RefEmpId"] != null) {
+        this.RefEmpId = params["RefEmpId"];
       }
-      if (params["refEmpId"] != null) {
-        this.refEmpId = params["refEmpId"];
+      if (params["mode"] != null) {
+        this.pageType = params["mode"];
       }
-      console.log(this.pageType);
-      console.log(this.refEmpId);
     });
 
     this.generalSettingObj = new GeneralSettingObj();
@@ -127,6 +132,20 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    var RefMasterIdType = {
+      RefMasterTypeCode: "ID_TYPE",
+    }
+    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
+      (response) => {
+        this.IdTypeList = response["ReturnObject"];
+        if (this.pageType != "edit") {
+          this.RefEmpForm.patchValue({
+            MrIdTypeCode: this.IdTypeList[0].Key
+          });
+        }
+      }
+    );
+
     this.inputLookupZipCodeObj = new InputLookupObj();
     this.inputLookupZipCodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipCodeObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -141,14 +160,14 @@ export class EmployeeAddComponent implements OnInit {
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
 
-    console.log("EmpUrl : " + this.getEmpUrl);
-    console.log("UsrUrl : " + this.getRefUserUrl);
-    console.log("EmpBank : " + this.getEmpBankUrl);
-    console.log("RefBank : " + this.getRefBankUrl);
+    // console.log("EmpUrl : " + this.getEmpUrl);
+    // console.log("UsrUrl : " + this.getRefUserUrl);
+    // console.log("EmpBank : " + this.getEmpBankUrl);
+    // console.log("RefBank : " + this.getRefBankUrl);
     
     if (this.pageType == "edit") {
       var empObj = new RefEmpObj();
-      empObj.RefEmpId = this.refEmpId;
+      empObj.RefEmpId = this.RefEmpId;
 
       this.httpClient.post(this.getEmpUrl, empObj).pipe(
         map( response => {
@@ -190,6 +209,14 @@ export class EmployeeAddComponent implements OnInit {
           var empBankAccData = response[2];
           var refBankData = response[3];
 
+          this.refEmpObj = refEmpData;
+          this.refUserObj = refUserData;
+          this.empBankAccObj = empBankAccData;
+          this.refBankObj = refBankData;
+
+          var datePipe = new DatePipe("en-US");
+          var joinDt = datePipe.transform(refEmpData.JoinDt, 'yyyy-MM-dd');
+
           this.RefEmpForm.patchValue({
             RefUserId: refUserData.RefUserId,
             Username: refUserData.Username,
@@ -200,7 +227,7 @@ export class EmployeeAddComponent implements OnInit {
             RefEmpId: refEmpData.RefEmpId,
             EmpNo: refEmpData.EmpNo,
             EmpName: refEmpData.EmpName,
-            JoinDt: refEmpData.JoinDt,
+            JoinDt: joinDt,
             MrIdTypeCode: refEmpData.MrIdTypeCode,
             IdNo: refEmpData.IdNo,
             TaxIdNo: refEmpData.TaxIdNo,
@@ -208,6 +235,7 @@ export class EmployeeAddComponent implements OnInit {
             IsActive: refEmpData.IsActive,
             IsLeave: refEmpData.IsLeave,
             Addr: refEmpData.Addr,
+            Zipcode: refEmpData.Zipcode,
             AreaCode1: refEmpData.AreaCode1,
             AreaCode2: refEmpData.AreaCode2,
             AreaCode3: refEmpData.AreaCode3,
@@ -236,14 +264,10 @@ export class EmployeeAddComponent implements OnInit {
             BankAccNo: empBankAccData.BankAccNo,
             BankAccName: empBankAccData.BankAccName
           });
-
-          console.log("zipcode : " + refEmpData.Zipcode);
-          console.log("bankname: " + refBankData.BankName);
           this.inputLookupZipCodeObj.nameSelect = refEmpData.Zipcode;
           this.inputLookupBankObj.nameSelect = refBankData.BankName;
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );
@@ -251,11 +275,13 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   getLookupZipCodeResponse(e){
-    // console.log(JSON.stringify(e));
+    console.log("Test Lookup");
+    console.log(e);
     this.RefEmpForm.patchValue({
-      AreaCode1: e.areaCode1,
-      AreaCode2: e.areaCode2,
-      City: e.city,
+      Zipcode: e.Zipcode,
+      AreaCode1: e.AreaCode1,
+      AreaCode2: e.AreaCode2,
+      City: e.City,
     });
   }
 
@@ -287,7 +313,7 @@ export class EmployeeAddComponent implements OnInit {
     refEmpData.AreaCode2 = refEmpFormData.AreaCode2;
     refEmpData.AreaCode3 = refEmpFormData.AreaCode3;
     refEmpData.AreaCode4 = refEmpFormData.AreaCode4;
-    // refEmpData.City = refEmpData.City;
+    refEmpData.City = refEmpFormData.City;
     refEmpData.PhnArea1 = refEmpFormData.PhnArea1;
     refEmpData.Phn1 = refEmpFormData.Phn1;
     refEmpData.PhnExt1 = refEmpFormData.PhnExt1;
@@ -319,7 +345,7 @@ export class EmployeeAddComponent implements OnInit {
     empBankAccData.BankBranch = refEmpFormData.BankBranch;
     empBankAccData.BankBranchRegCode = refEmpFormData.BankBranchRegCode
     empBankAccData.BankAccNo = refEmpFormData.BankAccNo;
-    empBankAccData.BankAccName = refEmpFormData.BankAccNo;
+    empBankAccData.BankAccName = refEmpFormData.BankAccName;
     empBankAccData.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
@@ -334,8 +360,9 @@ export class EmployeeAddComponent implements OnInit {
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Employee', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['/Employee/detail']))
+          // this.router.navigateByUrl('/Employee', { skipLocationChange: true }).then(() =>
+          // this.router.navigate(['/Employee/Detail']))
+          this.router.navigate(["/Employee/Paging"]);
         },
         (error) => {
           console.log("Error");
@@ -344,6 +371,8 @@ export class EmployeeAddComponent implements OnInit {
       );
     }
     else {
+      empBankAccData.RowVersion = this.empBankAccObj.RowVersion;
+      refUserData.RowVersion = this.refUserObj.RowVersion;
       this.httpClient.post(this.editUrl, refEmpFormData).pipe(
         map( response => {}),
         mergeMap(() => this.httpClient.post(this.editEmpBankAcc, empBankAccData)),
@@ -351,7 +380,7 @@ export class EmployeeAddComponent implements OnInit {
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Employee/paging"]);
+          this.router.navigate(["/Employee/Paging"]);
         },
         (error) => {
           console.log("Error");

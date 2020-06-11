@@ -1,0 +1,38 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "viewCustMainDataContactInformationId",
+        "subSectionTitle": "Contact Information",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "MOBILE PHONE 1",
+            "property": "MobilePhone1"
+          },
+          {
+            "type": "text",
+            "label": "MOBILE PHONE 2",
+            "property": "MobilePhone2"
+          },
+          {
+            "type": "text",
+            "label": "EMAIL 1",
+            "property": "Email1"
+          },
+          {
+            "type": "text",
+            "label": "EMAIL 2",
+            "property": "Email2"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT CP.MOBILE_PHN_NO_1 AS MobilePhone1, CP.MOBILE_PHN_NO_2 AS MobilePhone2, CP.EMAIL_1 AS Email1, CP.EMAIL_2 AS Email2",
+          "from": "FROM dbo.CUST_PERSONAL CP WITH(NOLOCK)",
+          "where": "WHERE CP.CUST_ID = {0}"
+        }
+      }
+    ]
+  }
+  

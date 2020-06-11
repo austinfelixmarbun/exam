@@ -34,7 +34,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   addUrl: any;
   arrCrit: any;
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   settingUrl: string = environment.settingUrl;
   orderByKey: any = null;
   orderByValue: boolean = true;
@@ -218,7 +218,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
       (response) => {
           console.log(response);
           this.toastr.successMessage(response['message']);
-          this.router.navigateByUrl('/commonSetting/officeZipcodeMember/paging?refOfficeId=' + this.refOfficeId);
+          this.router.navigateByUrl('/commonSetting/officeZipcodeMember/Paging?refOfficeId=' + this.refOfficeId);
       },
       (error) => {
           console.log(error);

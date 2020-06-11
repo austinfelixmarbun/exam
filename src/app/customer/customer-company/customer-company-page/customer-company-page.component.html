@@ -1,0 +1,117 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <div class="addEdit">
+          <form class="form form-horizontal">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title" id="horz-layout-colored-controls" translate> Customer Company</h4>
+                </div>
+                <div class="col-md-4" style="text-align-last: right">
+                  <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+                    <i class="ft-x"></i> Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <app-customer-view-header-company> </app-customer-view-header-company>
+        </div>
+        <div id="stepper1" class="bs-stepper">
+          <div class="bs-stepper-header" role="tablist" style="overflow-x: auto;">
+            <div class="step" data-target="#customer-detail-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="customer-detail-tab"
+                id="customer-detail-tab-trigger" (click)="EnterTab('Detail')">
+                <span class="bs-stepper-circle">1</span>
+                <span class="bs-stepper-label">Customer Detail</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#address-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="address-tab" id="address-tab-trigger"
+                (click)="EnterTab('Address')">
+                <span class="bs-stepper-circle">2</span>
+                <span class="bs-stepper-label">Address Information</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#shareholder-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="shareholder-tab"
+                id="shareholder-tab-trigger" (click)="EnterTab('Management')">
+                <span class="bs-stepper-circle">3</span>
+                <span class="bs-stepper-label">Management / Shareholder</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#group-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="group-tab" id="group-tab-trigger"
+                (click)="EnterTab('Group')">
+                <span class="bs-stepper-circle">4</span>
+                <span class="bs-stepper-label">Customer Group</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#contact-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="contact-tab" id="contact-tab-trigger"
+                (click)="EnterTab('Contact')">
+                <span class="bs-stepper-circle">5</span>
+                <span class="bs-stepper-label">Contact Information</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#financial-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="financial-tab"
+                id="financial-tab-trigger" (click)="EnterTab('Financial')">
+                <span class="bs-stepper-circle">6</span>
+                <span class="bs-stepper-label">Financial Data</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#legal-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="legal-tab" id="legal-tab-trigger"
+                (click)="EnterTab('Legal')">
+                <span class="bs-stepper-circle">7</span>
+                <span class="bs-stepper-label">Legal Document</span>
+              </button>
+            </div>
+          </div>
+          <br><br>
+          <div class="bs-stepper-content">
+            <div id="customer-detail-tab" class="content" role="tabpanel" aria-labelledby="customer-detail-tab-trigger">
+              <app-customer-company-detail (outputTab)="getValue($event)">
+              </app-customer-company-detail>
+            </div>
+            <div id="address-tab" class="content" role="tabpanel" aria-labelledby="address-tab-trigger">
+              <app-customer-company-address (outputTab)="getValue($event)">
+              </app-customer-company-address>
+            </div>
+          </div>
+          <div id="shareholder-tab" class="content" role="tabpanel" aria-labelledby="shareholder-tab-trigger">
+            <app-customer-company-management-shareholder [custCompanyId]="this.CustCompanyId"
+              (outputTab)="getValue($event)">
+            </app-customer-company-management-shareholder>
+          </div>
+          <div id="group-tab" class="content" role="tabpanel" aria-labelledby="group-tab-trigger">
+            <app-cust-group-tab [MrCustTypeCode]="'COMPANY'" [CustId]="IdCust" (outputTab)="getValue($event)">
+            </app-cust-group-tab>
+          </div>
+          <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
+            <app-customer-company-contact-information [custCompanyId]="this.CustCompanyId"
+              (outputTab)="getValue($event)">
+            </app-customer-company-contact-information>
+          </div>
+          <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
+            <app-cust-fin-data-tab [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'" (outputTab)="getValue($event)">
+            </app-cust-fin-data-tab>
+          </div>
+          <div id="legal-tab" class="content" role="tabpanel" aria-labelledby="legal-tab-trigger">
+            <app-cust-legal-doc [CustCompanyId]="this.CustCompanyId" (outputTab)="getValue($event)">
+            </app-cust-legal-doc>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

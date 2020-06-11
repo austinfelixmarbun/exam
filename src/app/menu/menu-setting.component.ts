@@ -29,14 +29,14 @@ export class MenuSettingComponent implements OnInit {
   orderByValue: boolean = true;
   editUrl: any;
 
-  foundationUrl: any = environment.foundationUrl;
+  foundationUrl: any = environment.FoundationR3Url;
   refCoyId: any;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchRefForm.json";
-    this.inputObj.enviromentUrl = environment.foundationUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetRefFormPaging;
 
     this.pageNow = 1;
@@ -102,7 +102,7 @@ export class MenuSettingComponent implements OnInit {
     if (confirm("Are you sure to delete this record?")) {
       this.editUrl = this.foundationUrl + AdInsConstant.DeleteRefForm;
       var refFormObj = new RefFormObj();
-      refFormObj.refFormId = refFormId;
+      refFormObj.RefFormId = refFormId;
       this.http.post(this.editUrl, refFormObj).subscribe(
         (response) => {
           console.log(response);

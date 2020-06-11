@@ -1,0 +1,138 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "FinDataId",
+        "subSectionTitle": "Financial Data",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "currency",
+            "label": "GROSS MONTHLY INCOME AMOUNT",
+            "property": "GmiA"
+          },
+          {
+            "type": "currency",
+            "label": "GROSS PROFIT AMOUNT",
+            "property": "GpA"
+          },
+          {
+            "type": "text",
+            "label": "RETURN OF INVESTMENT PERCENT",
+            "property": "RoiP"
+          },
+          {
+            "type": "text",
+            "label": "RETURN OF EQUITY PERCENT",
+            "property": "RoeP"
+          },
+          {
+            "type": "text",
+            "label": "RETURN OF ASSET PERCENT",
+            "property": "RoaP"
+          },
+
+          {
+            "type": "text",
+            "label": "PROFIT MARGIN PERCENT",
+            "property": "PmP"
+          },
+          {
+            "type": "text",
+            "label": "CURRENT RATION PERCENT",
+            "property": "CrP"
+          },
+          {
+            "type": "text",
+            "label": "DEBT EQUITY RATIO PERCENT",
+            "property": "DerP"
+          },
+          {
+            "type": "text",
+            "label": "INVESTMENT TURN OVER PERCENT",
+            "property": "ItoP"
+          },
+          {
+            "type": "text",
+            "label": "ACCOUNT RECEIVABLE TURN OVER PERCENT",
+            "property": "AtoP"
+          },          
+          {
+            "type": "text",
+            "label": "GROWTH PERCENT",
+            "property": "GP"
+          },
+          {
+            "type": "currency",
+            "label": "WORKING CAPITAL AMOUNT",
+            "property": "WcA"
+          },
+          {
+            "type": "currency",
+            "label": "OTHER MONTHLY INSTALLMENT AMOUNT",
+            "property": "OmiA"
+          },
+          {
+            "type": "date",
+            "label": "DATE AS OF",
+            "property": "Dtao"
+          },
+          {
+            "type": "currency",
+            "label": "REVENUE",
+            "property": "R"
+          },
+          {
+            "type": "currency",
+            "label": "OPERATION COST",
+            "property": "Oc"
+          },
+          {
+            "type": "currency",
+            "label": "PROFIT BEFORE TAX",
+            "property": "Pbt"
+          },
+          {
+            "type": "currency",
+            "label": "CURRENT ASSET",
+            "property": "Ca"
+          },
+          {
+            "type": "currency",
+            "label": "NETT FIXED ASSET",
+            "property": "Nfa"
+          },
+          {
+            "type": "currency",
+            "label": "TOTAL ASSET",
+            "property": "Ta"
+          },
+          {
+            "type": "currency",
+            "label": "CURRENT LIABILITIES",
+            "property": "Cl"
+          },
+          {
+            "type": "currency",
+            "label": "LONG TERM LIABILITIES",
+            "property": "Ltl"
+          },
+          {
+            "type": "currency",
+            "label": "SHAREHOLDER EQUITY",
+            "property": "Se"
+          },
+          {
+            "type": "text",
+            "label": "CURRENT RATIO",
+            "property": "Cr"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT CCFD.GROSS_MONTHLY_INCOME_AMT AS GmiA, CCFD.GROSS_PROFIT_AMT AS GpA, CCFD.RETURN_OF_INVESTMENT_PRCNT AS RoiP, CCFD.RETURN_OF_EQUITY_PRCNT AS RoeP, CCFD.RETURN_OF_ASSET_PRCNT AS RoaP, CCFD.PROFIT_MARGIN_PRCNT AS PmP, CCFD.CURRENT_RATIO_PRCNT AS CrP, CCFD.DEBT_EQUITY_RATIO_PRCNT AS DerP, CCFD.INV_TURN_OVER_PRCNT AS ItoP, CCFD.AR_TURN_OVER_PRCNT AS AtoP, CCFD.GROWTH_PRCNT AS GP, CCFD.WORKING_CAPITAL_AMT AS WcA, CCFD.OTH_MONTHLY_INST_AMT AS OmiA, CCFD.DATE_AS_OF AS Dtao, CCFD.REVENUE AS R, CCFD.OPR_COST AS Oc, CCFD.PROFIT_BEFORE_TAX AS Pbt, CCFD.CURR_ASSET AS Ca, CCFD.NET_FIXED_ASSET AS Nfa, CCFD.TOTAL_ASSET AS Ta, CCFD.CURR_LIABLTS AS Cl, CCFD.LONG_TEMR_LIABLTS AS Ltl, CCFD.SHAREHOLDER_EQUITY AS Se, CCFD.CURR_RATIO AS Cr",
+          "from": "FROM dbo.CUST_COMPANY_FIN_DATA CCFD WITH(NOLOCK) JOIN dbo.CUST_COMPANY CC WITH(NOLOCK) ON CC.CUST_COMPANY_ID = CCFD.CUST_COMPANY_ID",
+          "where": "WHERE CC.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

@@ -1,0 +1,47 @@
+{
+    "title": "",
+    "subsection": [
+        {
+            "subSectionId": "BranchViewInformationId",
+            "subSectionTitle": "Main Info",
+            "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+            "mainInfo": [
+                {
+                    "type": "text",
+                    "label": "Vendor Categoy:",
+                    "property": "VendorCategory"
+                },
+                {
+                    "type": "boolean",
+                    "label": "Active Status:",
+                    "property": "ActiveStatus"
+                },
+                {
+                    "type": "text",
+                    "label": "Branch Code:",
+                    "property": "BranchCode"
+                },
+                {
+                    "type": "text",
+                    "label": "Tax Number:",
+                    "property": "TaxNumber"
+                },
+                {
+                    "type": "text",
+                    "label": "Branch Name:",
+                    "property": "BranchName"
+                },
+                {
+                    "type": "text",
+                    "label": "Branch Type:",
+                    "property": "BranchType"
+                }
+            ],
+            "querystring": {
+                "select": " SELECT B.DESCR AS VendorCategory,A.IS_ACTIVE AS ActiveStatus, A.VENDOR_CODE AS BranchCode,A.TAX_ID_NO AS TaxNumber,A.VENDOR_NAME AS BranchName, C.DESCR AS BranchType",
+                "from": "FROM dbo.VENDOR A WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER B WITH(NOLOCK) ON A.MR_VENDOR_CATEGORY_CODE = B.MASTER_CODE LEFT JOIN dbo.REF_MASTER C WITH (NOLOCK) ON a.MR_VENDOR_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE LIKE '%VENDOR_TYPE%'",
+                "where": " WHERE MR_VENDOR_CLASS = 'BRANCH' AND  VENDOR_ID = {0}"
+            }
+        }
+    ]
+}

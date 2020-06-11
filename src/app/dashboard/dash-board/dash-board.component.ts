@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContextMenuComponent } from '@progress/kendo-angular-menu';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-dash-board',
@@ -7,10 +8,12 @@ import { ContextMenuComponent } from '@progress/kendo-angular-menu';
   styleUrls: ['./dash-board.component.scss']
 })
 export class DashBoardComponent implements OnInit {
+  Item : any;
 
   constructor() { }
 
   ngOnInit() {
+    this.Item = {Url : environment.FoundationR3Url + "/ThingsToDo/GetThingsToDoByRole", Module : "FOU"};
   }
   
   showMessage(message: any) {

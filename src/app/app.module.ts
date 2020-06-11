@@ -39,8 +39,8 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GrowlModule } from 'primeng/primeng';
 import { environment } from 'environments/environment';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
- 
- 
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -52,8 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
         ContentLayoutComponent,
         UserMaintenanceComponent,
         ErrorDialogComponent,
-        RolepickComponent
-        
+        RolepickComponent,
     ],
     imports: [
         HttpModule,
@@ -80,7 +79,8 @@ export function createTranslateLoader(http: HttpClient) {
         MatDialogModule,
         BrowserAnimationsModule,
         GrowlModule,
-        TreeViewModule
+        TreeViewModule,
+        NgMultiSelectDropDownModule.forRoot()
     ],
     providers: [
         AuthService,
@@ -99,7 +99,7 @@ export class AppModule {
         // localStorage.setItem("LocalIp", window.location.origin);
         // console.log(window.location.origin); // 192.168.0.122
 
-        // var url = environment.foundationUrl + AdInsConstant.GetBusinessDt;
+        // var url = environment.FoundationR3Url + AdInsConstant.GetBusinessDt;
         // this.http.post(url, null).subscribe(
         //     (response) => {
         //         var datePipe = new DatePipe("en-US");

@@ -43,11 +43,12 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/bs-stepper/dist/css/bs-stepper.min.css",
               "src/assets/css/demo.css",
               "src/assets/sass/app.scss",
               "src/styles.css",
               "src/adInsStyles.css",
-              "node_modules/angular-archwizard/archwizard.css"
+              "node_modules/angular-archwizard/archwizard.css",
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -61,6 +62,23 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false
+            },
+            "sit": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sit.ts"
                 }
               ],
               "optimization": true,

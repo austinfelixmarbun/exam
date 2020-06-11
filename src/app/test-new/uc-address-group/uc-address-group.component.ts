@@ -69,6 +69,7 @@ export class UcAddressGroupComponent implements OnInit {
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupObj.nameSelect = "456789";
   }
 
   getLookup(event) {

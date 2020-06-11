@@ -1,0 +1,73 @@
+<h4 class="form-section card-title" translate><i class="ft-file-text"></i> Deactivate Product Offering</h4>
+<lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
+<div class="card">
+  <div class="card-body">
+    <br />
+    <table class="table table-responsive-md text-center table-hover">
+      <thead>
+        <tr class="table-header">
+          <th class="text-left">Office Code</th>
+          <th class="text-left">Office name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of OfficeList">
+          <td class="text-left">{{item.OfficeCode}}</td>
+          <td class="text-left">{{item.OfficeName}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="px-3">
+      <br />
+      <div class="addEdit">
+        <form class="form form-horizontal" [formGroup]="ProdOfferingHDeactForm" (ngSubmit)="ProdOfferingHDeactForm.valid && SaveForm()"
+              #enjiForm="ngForm">
+          <div class="form-body">
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Reason </label>
+              <div class="col-md-9">
+                <select class="form-control adInsInput" formControlName="Reason">
+                  <option *ngFor="let ram of allRefReasonMethod" [ngValue]="ram.Key">
+                    {{ram.Value}}
+                  </option>
+                </select>
+                <show-errors [control]="ProdOfferingHDeactForm.controls.Reason" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Effective Date </label>
+              <div class="col-md-9">
+                <input type="date" class="form-control adInsInput" formControlName="EffectiveDate"
+                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdOfferingHDeactForm.controls.EffectiveDate.invalid }">
+                <show-errors [control]="ProdOfferingHDeactForm.controls.EffectiveDate" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Notes </label>
+              <div class="col-md-9">
+                <textarea type="text" class="form-control adInsInput" formControlName="Notes"
+                          [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdOfferingHDeactForm.controls.Notes.invalid }"></textarea>
+                <show-errors [control]="ProdOfferingHDeactForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Product/OfferingDeactivate']"
+                    translate>
+              <i class="ft-x"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="fa fa-check-square-o"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

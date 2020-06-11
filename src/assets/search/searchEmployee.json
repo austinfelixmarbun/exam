@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "username",
+            "name": "B.USERNAME",
             "id": "username",
             "value": "",
             "label": "Username",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "employee_Name",
+            "name": "A.EMP_NAME",
             "id": "employeeName",
             "value": "",
             "label": "Employee Name",
@@ -19,7 +19,7 @@
         },
         {
             "type": "textbox",
-            "name": "employee_No",
+            "name": "A.EMP_NO",
             "id": "employeeNo",
             "value": "",
             "label": "Employee No",
@@ -49,32 +49,32 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT A.REF_EMP_ID AS refEmpId, B.USERNAME AS username, A.EMP_NO AS empNo, A.EMP_NAME AS empName, A.IS_ACTIVE AS isActive, B.REF_USER_ID AS RefUserId",
+        "select": "SELECT A.REF_EMP_ID AS RefEmpId, B.USERNAME AS username, A.EMP_NO AS empNo, A.EMP_NAME AS empName, A.IS_ACTIVE AS isActive, B.REF_USER_ID AS RefUserId",
         "from": "FROM REF_EMP AS A INNER JOIN REF_USER AS B ON A.REF_EMP_ID = B.REF_EMP_ID",
-        "where": "A.IS_ACTIVE = 1"
+        "where": "WHERE A.IS_ACTIVE = 1"
     },
     "headerList" : [ 
         {
             "type" : "sort", 
-            "position" : "left", 
+            "position" : "center", 
             "label" : "Username",
             "name" : "username" 
         },
         {
             "type" : "sort", 
-            "position" : "left", 
+            "position" : "center", 
             "label" : "Employee No.", 
             "name" : "empNo" 
         },
         {
             "type" : "sort", 
-            "position" : "left", 
+            "position" : "center", 
             "label" : "Employee Name", 
             "name" : "empName" 
         },
         {
             "type" : "sort", 
-            "position" : "left", 
+            "position" : "center", 
             "label" : "Active", 
             "name" : "isActive"
         },
@@ -97,7 +97,7 @@
         },
         {
             "type" : "text", 
-            "position" : "left", 
+            "position" : "center", 
             "property" : "empNo" 
         },
         {
@@ -116,7 +116,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/employee/EmployeeBusinessUnit/Paging",
+                    "path": "/Employee/EmployeeBusinessUnit/Paging",
                     "param": [
                         {
                             "type" : "RefUserId",
@@ -132,21 +132,17 @@
             "action" : [ 
                 {
                     "type" : "edit", 
-                    "path" : "/Employee/detail", 
+                    "path" : "/Employee/Detail", 
                     "param" : [ 
                         {
-                            "type" : "refEmpId", 
-                            "property" : "refEmpId" 
+                            "type" : "RefEmpId", 
+                            "property" : "RefEmpId" 
                         },
                         {
-                            "type": "param",
+                            "type": "mode",
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type" : "delete", 
-                    "property" : "refEmpId" 
                 }
             ]
         }

@@ -1,0 +1,322 @@
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { environment } from 'environments/environment';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+
+@Component({
+  selector: 'app-customer-personal-detail',
+  templateUrl: './customer-personal-detail.component.html',
+  styleUrls: [],
+  providers: [NGXToastrService],
+
+})
+export class CustomerPersonalDetailComponent implements OnInit {
+  @Output() outputTab: EventEmitter<any> = new EventEmitter();
+
+  IdCust: number;
+  flag: boolean;
+
+  criteriaObj: CriteriaObj;
+  lookUpObj: InputLookupObj;
+  criteriaList: Array<CriteriaObj>;
+  
+  custObj: CustObj;
+  custPersonalObj: CustPersonalObj;
+  
+  Country: any;
+  tempCustObj: any;
+  tempCountry: any;
+  tempReligion: any;
+  LocalCountry: any;
+  tempEducation: any;
+  tempSalutation: any;
+  tempCountryCode: any;
+  tempNationality: any;
+  tempCustPersonalObj: any;
+  tempMrMaritalStatCode: any;
+
+  Page: String;
+  getListCountryUrl: string;
+  GetCustByCustIdUrl: string;
+  EditCustPersonalUrl: string;
+  GetCustPersonalbyCustIdUrl: string;
+  GetGeneralSettingByCodeUrl: string;
+  getListActiveRefMasterUrl: string;
+
+  CustomerDetailForm = this.fb.group({
+    CustFullName: ['', [Validators.maxLength(100)]],
+    NickName: ['', [Validators.maxLength(100)]],
+    MrSalutationCode: [''],
+    MrMaritalStatCode: [''],
+    CustPrefixName: [''],
+    CustSuffixName: [''],
+    NoOfDependents: ['', [Validators.pattern("^[0-9]+$")]],
+    MrNationalityCode: [''],
+    NoOfResidence: ['', Validators.pattern("^[0-9]+$")],
+    FamilyCardNo: ['', Validators.pattern("^[0-9]+$")],
+    MrEducationCode: ['',],
+    MrReligionCode: ['',],
+    IsRestInPeace: [false],
+    MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
+    Email1: [''],
+    Email2: [''],
+  }); 
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+
+    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
+    this.getListCountryUrl = AdInsConstant.GetListRefCountry;
+    this.GetCustByCustIdUrl = AdInsConstant.GetCustByCustId;
+    this.EditCustPersonalUrl = AdInsConstant.EditCustPersonal;
+    this.route.queryParams.subscribe(params => {
+      this.GetCustPersonalbyCustIdUrl = AdInsConstant.GetCustPersonalbyCustId;
+      this.GetGeneralSettingByCodeUrl = AdInsConstant.GetGeneralSettingByCode;
+      if (params["IdCust"] != null) {
+        this.IdCust = params["IdCust"];
+      }
+      if (params["Page"] != null) {
+        this.Page = params["Page"];
+      }
+    });
+
+  }
+
+  ngOnInit() {
+
+    var generalSettingObjDefLocalNationality = {
+      GsCode: "DEF_LOCAL_NATIONALITY"
+    }
+    this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
+      (response) => {
+        this.Country = response;
+        this.lookUpObj = new InputLookupObj();
+        this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
+        this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+        this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
+        this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
+        this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
+        this.criteriaList = new Array();
+        this.criteriaObj = new CriteriaObj();
+        this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
+        this.criteriaObj.propName = 'COUNTRY_CODE';
+        this.criteriaObj.value = this.Country.GsValue;
+        this.criteriaList.push(this.criteriaObj);
+        this.lookUpObj.addCritInput = this.criteriaList;
+
+
+        var countryCode = {
+          CountryCode: this.Country.GsValue
+        };
+        this.http.post(AdInsConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+          (response) => {
+            this.LocalCountry = response;
+            console.log(this.LocalCountry.CountryName);
+          });
+
+      });
+
+    this.custObj = new CustObj()
+    this.custObj.CustId = this.IdCust;
+
+    this.http.post(this.GetCustByCustIdUrl, this.custObj).subscribe(
+      (response) => {
+        this.tempCustObj = response;
+      });
+    this.custPersonalObj = new CustPersonalObj();
+    this.custPersonalObj.CustId = this.IdCust;
+    this.http.post(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).subscribe(
+      (response) => {
+        this.tempCustPersonalObj = response;
+        var refMasterObjMrNationalityCode = {
+          RefMasterTypeCode: "NATIONALITY"
+        }
+        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrNationalityCode).subscribe(
+          (response) => {
+            this.tempNationality = response["ReturnObject"];
+
+            if (this.tempCustPersonalObj.MrNationalityCode != null) {
+              this.CustomerDetailForm.patchValue({
+                MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode
+              });
+              if (this.tempCustPersonalObj.MrNationalityCode == "LOCAL") {
+                this.flag = true;
+                this.lookUpObj.isRequired = false;
+              } else {
+                var countryCode = {
+                  CountryCode: this.tempCustPersonalObj.WnaCountryCode
+                };
+                this.http.post(AdInsConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+                  (response) => {
+                    this.tempCountry = response;
+                    this.lookUpObj.nameSelect = this.tempCountry.CountryName;
+                    this.lookUpObj.jsonSelect = this.tempCountry;
+                  });
+                this.lookUpObj.isRequired = true;
+              }
+            } else {
+              this.CustomerDetailForm.patchValue({
+                MrNationalityCode: "LOCAL"
+              });
+              this.flag = true;
+              this.lookUpObj.isRequired = false;
+            }
+          }
+        );
+
+        var refMasterObjMrSalutationCode = {
+          RefMasterTypeCode: "SALUTATION"
+        }
+        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrSalutationCode).subscribe(
+          (response) => {
+            this.tempSalutation = response["ReturnObject"];
+
+            if (this.tempCustPersonalObj.MrSalutationCode != null) {
+              this.CustomerDetailForm.patchValue({
+                MrSalutationCode: this.tempCustPersonalObj.MrSalutationCode
+              });
+            } else {
+              this.CustomerDetailForm.patchValue({
+                MrSalutationCode: response['ReturnObject'][0]['Key']
+              });
+            }
+          }
+        );
+        var refMasterObjMrEducationCode = {
+          RefMasterTypeCode: "EDUCATION"
+        }
+        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrEducationCode).subscribe(
+          (response) => {
+            this.tempEducation = response["ReturnObject"];
+            if (this.tempCustPersonalObj.MrEducationCode != null) {
+              this.CustomerDetailForm.patchValue({
+                MrEducationCode: this.tempCustPersonalObj.MrEducationCode
+              });
+            } else {
+              this.CustomerDetailForm.patchValue({
+                MrEducationCode: response['ReturnObject'][0]['Key']
+              });
+            }
+          }
+        );
+        var refMasterObjMrReligionCode = {
+          RefMasterTypeCode: "RELIGION"
+        }
+        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrReligionCode).subscribe(
+          (response) => {
+            this.tempReligion = response["ReturnObject"];
+            if (this.tempCustPersonalObj.MrReligionCode != null) {
+              this.CustomerDetailForm.patchValue({
+                MrReligionCode: this.tempCustPersonalObj.MrReligionCode
+              });
+            } else {
+              this.CustomerDetailForm.patchValue({
+                MrReligionCode: response['ReturnObject'][0]['Key']
+              });
+            }
+          }
+        );
+        var refMasterObjMrMaritalStatCode = {
+          RefMasterTypeCode: "MARITAL_STAT"
+        }
+        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
+          (response) => {
+            this.tempMrMaritalStatCode = response["ReturnObject"];
+            if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
+              this.CustomerDetailForm.patchValue({
+                MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
+              });
+            } else {
+              this.CustomerDetailForm.patchValue({
+                MrMaritalStatCode: response['ReturnObject'][0]['Key']
+              });
+            }
+          }
+        );
+
+
+        this.CustomerDetailForm.patchValue({
+          NickName: this.tempCustPersonalObj.NickName,
+          MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode,
+          CustSuffixName: this.tempCustPersonalObj.CustSuffixName,
+          CustPrefixName: this.tempCustPersonalObj.CustPrefixName,
+          NoOfDependents: this.tempCustPersonalObj.NoOfDependents,
+          NoOfResidence: this.tempCustPersonalObj.NoOfResidence,
+          FamilyCardNo: this.tempCustPersonalObj.FamilyCardNo,
+          IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
+          MobilePhnNo1: this.tempCustPersonalObj.MobilePhnNo1,
+          MobilePhnNo2: this.tempCustPersonalObj.MobilePhnNo2,
+          Email1: this.tempCustPersonalObj.Email1,
+          Email2: this.tempCustPersonalObj.Email1
+        });
+      });
+  }
+  SaveValue() {
+    this.custPersonalObj = new CustPersonalObj();
+    this.custPersonalObj = this.tempCustPersonalObj;
+    this.custPersonalObj.CustFullName = this.tempCustObj.CustName;
+    this.custPersonalObj.NickName = this.CustomerDetailForm.controls["NickName"].value;
+    this.custPersonalObj.MrSalutationCode = this.CustomerDetailForm.controls["MrSalutationCode"].value;
+    this.custPersonalObj.MrMaritalStatCode = this.CustomerDetailForm.controls["MrMaritalStatCode"].value;
+    this.custPersonalObj.CustPrefixName = this.CustomerDetailForm.controls["CustPrefixName"].value;
+    this.custPersonalObj.CustSuffixName = this.CustomerDetailForm.controls["CustSuffixName"].value;
+    this.custPersonalObj.NoOfDependents = this.CustomerDetailForm.controls["NoOfDependents"].value;
+    this.custPersonalObj.MotherMaidenName = this.tempCustPersonalObj.MotherMaidenName;
+    this.custPersonalObj.MrGenderCode = this.tempCustPersonalObj.MrGenderCode;
+    this.custPersonalObj.MrNationalityCode = this.CustomerDetailForm.controls["MrNationalityCode"].value;
+    this.custPersonalObj.NoOfResidence = this.CustomerDetailForm.controls["NoOfResidence"].value;
+
+    if (this.custPersonalObj.MrNationalityCode == "LOCAL") {
+      this.custPersonalObj.WnaCountryCode = "IDN";
+    }
+    if (this.tempCustPersonalObj.WnaCountryCode != null && this.tempCountryCode == null) {
+      this.custPersonalObj.WnaCountryCode = this.tempCustPersonalObj.WnaCountryCode;
+    } else {
+      this.custPersonalObj.WnaCountryCode = this.tempCountryCode;
+    }
+    this.custPersonalObj.FamilyCardNo = this.CustomerDetailForm.controls["FamilyCardNo"].value;
+    this.custPersonalObj.MrEducationCode = this.CustomerDetailForm.controls["MrEducationCode"].value;
+    this.custPersonalObj.MrReligionCode = this.CustomerDetailForm.controls["MrReligionCode"].value;
+    this.custPersonalObj.IsRestInPeace = this.CustomerDetailForm.controls["IsRestInPeace"].value;
+    this.custPersonalObj.MobilePhnNo1 = this.CustomerDetailForm.controls["MobilePhnNo1"].value;
+    this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
+    this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
+    this.custPersonalObj.Email2 = this.CustomerDetailForm.controls["Email2"].value;
+    this.http.post(this.EditCustPersonalUrl, this.custPersonalObj).subscribe(
+      response => {
+        this.toastr.successMessage(response["Message"]);
+        // this.wizard.goToNextStep();
+        this.outputTab.emit({ CustPersonalId: this.tempCustPersonalObj.CustPersonalId, stepMode: "next" });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  onOptionsSelected(event) {
+    if (event.target.value == "LOCAL") {
+      this.flag = true;
+      this.lookUpObj.isRequired = false;
+    } else {
+      this.flag = false;
+      this.lookUpObj.isRequired = true;
+    }
+  }
+  getLookUp(event) {
+    this.tempCountryCode = event.CountryCode;
+  }
+  back() {
+    if (this.Page != null) {
+      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    } else {
+      this.router.navigate(["/Customer/Paging"]);
+    }
+  }
+}

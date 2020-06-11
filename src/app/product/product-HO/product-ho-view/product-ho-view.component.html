@@ -1,0 +1,126 @@
+<lib-ucviewgeneric [viewInput]="viewProdMainInfoObj"> </lib-ucviewgeneric>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="GENERAL DATA">
+    <ng-template matTabContent>
+      <div class="card">
+        <div class="card-body px-3">
+          <lib-ucSubsection [id]="'genId'" [title]="'General Data'" [panel]="'gen'">
+          </lib-ucSubsection>
+          <div id="gen">
+            <div *ngFor="let item of GenData">
+              <label class="col-md-3">{{item.ProdCompntName}}</label>
+              <label class="col-md-9">{{item.CompntValueDesc}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="PRODUCT COMPONENT">
+    <ng-template matTabContent>
+      <div class="card">
+        <div class="card-body px-3">
+          <div>
+            <lib-ucSubsection [id]="'schemeId'" [title]="'Scheme'" [panel]="'scheme'">
+            </lib-ucSubsection>
+            <div id="scheme">
+              <div *ngFor="let item of ProdCompSchm">
+                <label class="col-md-4">{{item.ProdCompntName}}</label>
+                <label class="col-md-2">{{item.CompntValueDesc}}</label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <lib-ucSubsection [id]="'scoreId'" [title]="'Score'" [panel]="'score'">
+            </lib-ucSubsection>
+            <div id="score">
+              <div *ngFor="let item of ProdCompScore">
+                <label class="col-md-4">{{item.ProdCompntName}}</label>
+                <label class="col-md-2">{{item.CompntValueDesc}}</label>
+                <label class="col-md-2">{{item.MrProdBehaviourCode}}</label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <lib-ucSubsection [id]="'ruleId'" [title]="'Rule'" [panel]="'rule'">
+            </lib-ucSubsection>
+            <div id="rule">
+              <div *ngFor="let item of ProdCompRule">
+                <label class="col-md-3">{{item.ProdCompntName}}</label>
+                <span class="material-icons col-md-1" (click)="DownloadRule(item.CompntValue,item.CompntValueDesc)">
+                  get_app
+                </span>
+                <label class="col-md-4">{{item.CompntValueDesc}}</label>
+                <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <lib-ucSubsection [id]="'otherId'" [title]="'Other'" [panel]="'other'">
+            </lib-ucSubsection>
+            <div id="other">
+              <div *ngFor="let item of ProdCompOther">
+                <label class="col-md-4">{{item.ProdCompntName}}</label>
+                <label class="col-md-4">{{item.CompntValueDesc}}</label>
+                <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="OFFICE MEMBER">
+    <ng-template matTabContent>
+      <lib-ucSubsection [id]="'officembrId'" [title]="'Office Member'" [panel]="'officembr'">
+      </lib-ucSubsection>
+      <div id="officembr">
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+              <th class="text-left">Office Code</th>
+              <th class="text-left">Office Name</th>
+              <th class="text-left">Area Name</th>
+              <th class="text-left">Allowed to Create Offering</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of ProdBranchMbr">
+              <td class="text-left">{{item.OfficeCode}}</td>
+              <td class="text-left">{{item.OfficeName}}</td>
+              <td class="text-left">{{item.AreaName}}</td>
+              <td class="text-left" *ngIf="item.IsAllowedCrt == 1">Yes</td>
+              <td class="text-left" *ngIf="item.IsAllowedCrt == 0">No</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="PRODUCT VERSION">
+    <ng-template matTabContent>
+      <lib-ucSubsection [id]="'offerverId'" [title]="'Product Version'" [panel]="'offerver'">
+      </lib-ucSubsection>
+      <div id="offerver">
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+              <th class="text-left">Prod Version</th>
+              <th class="text-left">Star Date</th>
+              <th class="text-left">End Date</th>
+              <th class="text-left">Product Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of ProdVersion">
+              <td class="text-left">{{item.ProdVersion}}</td>
+              <td class="text-left">{{item.StarDt | date}}</td>
+              <td class="text-left">{{item.EndDt | date}}</td>
+              <td class="text-left">{{item.Descr}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

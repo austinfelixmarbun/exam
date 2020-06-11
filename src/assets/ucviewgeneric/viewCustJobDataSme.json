@@ -1,0 +1,64 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "JobDataId",
+        "subSectionTitle": "Job Data",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "CUSTOMER MODEL",
+            "property": "MrCustModelCode"
+          },
+          {
+            "type": "text",
+            "label": "PROFESSION NAME",
+            "property": "ProfessionName"
+          },
+          {
+            "type": "text",
+            "label": "JOB POSITION",
+            "property": "JobPosition"
+          },
+          {
+            "type": "text",
+            "label": "JOB TITLE NAME",
+            "property": "JobTitleName"
+          },
+         
+          {
+            "type": "text",
+            "label": "NAMA PERUSAHAAN / USAHA",
+            "property": "CoyName"
+          },
+
+          {
+            "type": "text",
+            "label": "INDUSTRY TYPE NAME",
+            "property": "IndustryTypeName"
+          },
+          {
+            "type": "text",
+            "label": "COMPANY SCALE",
+            "property": "CoyScale"
+          },
+          {
+            "type": "text",
+            "label": "NUMBER OF EMPLOYEE",
+            "property": "NoOfEmp"
+          },
+          {
+            "type": "date",
+            "label": "EMPLOYMENT ESTABLISHMENT DATE",
+            "property": "EmploymentEstablishmentDt"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT CPJD.NO_OF_EMPLOY AS NoOfEmp , RM.DESCR AS MrCustModelCode , RP.PROFESSION_NAME AS ProfessionName, RMPOS.DESCR AS JobPosition, CPJD.COY_NAME AS CoyName, RMCOYSCALE.DESCR AS CoyScale, CPJD.JOB_TITLE_NAME AS JobTitleName, RIT.INDUSTRY_TYPE_NAME AS IndustryTypeName, CPJD.EMPLOYMENT_ESTABLISHMENT_DT AS EmploymentEstablishmentDt",
+          "from": "FROM dbo.CUST CU WITH(NOLOCK) JOIN dbo.CUST_PERSONAL_JOB_DATA CPJD WITH(NOLOCK) ON CPJD.CUST_ID = CU.CUST_ID LEFT JOIN dbo.REF_INDUSTRY_TYPE RIT WITH(NOLOCK) ON RIT.REF_INDUSTRY_TYPE_ID = CPJD.REF_INDUSTRY_TYPE_ID LEFT JOIN dbo.REF_PROFESSION RP WITH(NOLOCK) ON RP.REF_PROFESSION_ID = CPJD.REF_PROFESSION_ID LEFT JOIN dbo.REF_MASTER RM WITH(NOLOCK) ON CU.MR_CUST_MODEL_CODE = RM.MASTER_CODE AND 'CUST_MODEL' = RM.REF_MASTER_TYPE_CODE LEFT JOIN dbo.REF_MASTER RMPOS WITH(NOLOCK) ON RMPOS.REF_MASTER_TYPE_CODE='JOB_POSITION' AND RMPOS.MASTER_CODE = CPJD.MR_JOB_POSITION_CODE LEFT JOIN dbo.REF_MASTER RMCOYSCALE WITH(NOLOCK) ON RMCOYSCALE.REF_MASTER_TYPE_CODE='COMPANY_SCALE' AND RMCOYSCALE.MASTER_CODE = CPJD.MR_COY_SCALE_CODE",
+          "where": "WHERE CU.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

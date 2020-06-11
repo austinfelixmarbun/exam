@@ -19,7 +19,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 export class OrganizationModelDetailComponent implements OnInit {
 
 
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   orgModelObj: OrgMdlObj;
   orgObj: OrganizationObj;
@@ -116,7 +116,7 @@ export class OrganizationModelDetailComponent implements OnInit {
                 console.log("Success Save");
                 this.service.typeSave(response['message']);
                 this.location.back();
-                // this.router.navigate(['/commonSetting/master/detail']);
+                // this.router.navigate(['/commonSetting/master/Detail']);
 
               },
               (error) => {

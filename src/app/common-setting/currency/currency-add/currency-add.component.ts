@@ -25,10 +25,16 @@ export class CurrencyAddComponent implements OnInit {
     CurrCode: ['', [Validators.required, Validators.maxLength(5)]],
     CurrName: ['', [Validators.required, Validators.maxLength(100)]],
     RegRptCode: ['', [Validators.required, Validators.maxLength(100)]],
+    UCNumber: [''],
+    UCNumber2: [''],
     IsActive: [true]
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+  UcNumber: any;
+  UcNumber2: any;
+  UcNumber3: any;
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getUrl = AdInsConstant.GetRefCurrById;
     this.addUrl = AdInsConstant.AddRefCurr;
     this.editUrl = AdInsConstant.EditRefCurr;
@@ -68,6 +74,25 @@ export class CurrencyAddComponent implements OnInit {
 
   }
 
+  CommaFormatted(event) {
+    // skip for arrow keys
+    if (event.which >= 37 && event.which <= 40) return;
+
+    // format number
+    if (this.UcNumber) {
+      this.UcNumber = this.UcNumber.replace(/\D/g, "")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  }
+
+  numberCheck(args) {
+    if (args.key === 'e' || args.key === '+' || args.key === '-') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   SaveForm() {
     if (this.pageType == "add") {
       this.currObj = new CurrObj();
@@ -77,8 +102,8 @@ export class CurrencyAddComponent implements OnInit {
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.http.post(this.addUrl, this.currObj).subscribe(
         response => {
-            this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/CommonSetting/Currency/paging"]);      
+          this.toastr.successMessage(response["Message"]);
+          this.router.navigate(["/CommonSetting/Currency/Paging"]);
         },
         error => {
           console.log(error);
@@ -93,7 +118,7 @@ export class CurrencyAddComponent implements OnInit {
       this.http.post(this.editUrl, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/Currency/paging"]);
+          this.router.navigate(["/CommonSetting/Currency/Paging"]);
         },
         error => {
           console.log(error);
@@ -101,5 +126,5 @@ export class CurrencyAddComponent implements OnInit {
       );
     }
   }
-  
+
 }

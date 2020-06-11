@@ -1,0 +1,55 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+
+@Component({
+  selector: 'app-customer-view',
+  templateUrl: './customer-view.component.html',
+  styleUrls: ['./customer-view.component.scss']
+})
+export class CustomerViewComponent implements OnInit {
+  custModel: any;
+  custResultData: any;
+  viewCustMainInfoHeaderObj: any;
+  viewCustCoyMainInfoHeader: any;
+
+  CustId: number;
+
+  
+
+  custType: string;
+  viewCustJobData: string;
+  getCustByCustIdUrl: string;
+  viewCustJobDataAddress: string;
+
+  constructor(private http: HttpClient, private route: ActivatedRoute) { 
+    this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
+  }
+
+  ngOnInit() {
+    this.viewCustMainInfoHeaderObj =  "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
+    this.viewCustCoyMainInfoHeader =  "./assets/ucviewgeneric/viewCustCoyMainInfoHeader.json";
+    this.route.queryParams.subscribe(params => {
+      if (params["CustId"] != null) {
+        this.CustId = params["CustId"];
+      }
+    });
+    var custObj = {
+      CustId: this.CustId
+    }
+    this.http.post(this.getCustByCustIdUrl, custObj).subscribe(
+      (response) => {
+        this.custResultData = response;
+        this.custModel = this.custResultData['MrCustModelCode'];
+        this.custType  = this.custResultData['MrCustTypeCode'];
+        console.log(this.custType);
+      },
+      (error) =>{
+        this.custModel = "";
+        this.custType = "";
+        console.log(error);
+      }
+    );
+  } 
+}

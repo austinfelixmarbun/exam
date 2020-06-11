@@ -1,0 +1,131 @@
+
+{
+    "title": "Verification Question Scheme",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "VERF_SCHEME_CODE",
+            "id": "SchemeCodeId",
+            "value": "",
+            "label": "SCHEME CODE",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "VERF_SCHEME_NAME",
+            "id": "SchemeNameId",
+            "value": "",
+            "label": "SCHEME NAME",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "IS_ACTIVE",
+            "id": "ActiveStatusId",
+            "label": "ACTIVE STATUS",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ],
+    "querystring": {
+        "select": "SELECT VERF_SCHEME_H_ID AS VerfSchemeHId, VERF_SCHEME_CODE AS VerfSchemeCode, VERF_SCHEME_NAME AS VerfSchemeName, IS_ACTIVE AS IsActive",
+        "from": "FROM dbo.VERF_SCHEME_H WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Scheme Code",
+            "name": "VerfSchemeCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Scheme Name",
+            "name": "VerfSchemeName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Question Group"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "VerfSchemeCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "VerfSchemeName"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/Verification/QuestionSchemeMemberPaging",
+                    "param": [
+                        {
+                            "type": "VerfSchemeHId",
+                            "property": "VerfSchemeHId"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/Verification/QuestionScheme/Edit",
+                    "param": [
+                        {
+                            "type": "VerfSchemeHId",
+                            "property": "VerfSchemeHId"
+                        },
+                        {
+                            "type": "mode",
+                            "property": "edit"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

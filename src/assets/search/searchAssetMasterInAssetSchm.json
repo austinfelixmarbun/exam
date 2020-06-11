@@ -1,0 +1,33 @@
+{
+    "title": "Asset Master",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "AM.FULL_ASSET_CODE",
+            "id": "AssetFullCode",
+            "value": "",
+            "label": "Asset Full Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "AM.FULL_ASSET_NAME",
+            "id": "AssetFullName",
+            "value": "",
+            "label": "Asset Full Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "AC.ASSET_CATEGORY_NAME",
+            "id": "AssetCategoryName",
+            "value": "",
+            "label": "Asset Category Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT AM.FULL_ASSET_CODE AS FullAssetCode, AC.ASSET_CATEGORY_NAME AS AssetCategoryName,AM.FULL_ASSET_NAME AS FullAssetName, AM.ASSET_MASTER_ID AS AssetMasterId, AM.IS_ACTIVE AS IsActive",
+        "from": "FROM dbo.ASSET_MASTER AM JOIN dbo.ASSET_CATEGORY AC ON AC.ASSET_CATEGORY_ID = AM.ASSET_CATEGORY_ID"
+      }
+}

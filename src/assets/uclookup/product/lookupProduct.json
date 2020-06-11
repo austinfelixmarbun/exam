@@ -6,22 +6,20 @@
         "type": "textbox",
         "name": "Prod_Code",
         "id": "ProdCode",
-        "value": "%",
         "label": "Prod Code",
-        "placeholder": "Prod Code"
+        "placeholder": "Product Code"
       },
       {
         "type": "textbox",
         "name": "Prod_Name",
         "id": "ProdName",
-        "value": "",
         "label": "Prod Name",
-        "placeholder": "Prod Name"
+        "placeholder": "Product Name"
       }
     ],
     "querystring": {
-      "select": "SELECT PROD_CODE AS ProdCode, PROD_NAME AS ProdName, PROD_STAT as ProdStat, DRAFT_PROD_H_ID AS DraftProdHId",
-      "from": "FROM dbo.PROD WITH(NOLOCK)"
+      "select": "SELECT P.PROD_CODE AS ProdCode, P.PROD_NAME AS ProdName, P.PROD_ID AS ProdId",
+      "from": "FROM dbo.PROD P WITH(NOLOCK)"
     },
     "headerList": [
         {
@@ -35,12 +33,6 @@
             "position": "center",
             "label": "Prod Name",
             "name": "ProdName"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Status",
-            "name": "ProdStat"
         },
         {
             "type": "label",
@@ -60,21 +52,16 @@
             "property": "ProdName"
         },
         {
-            "type": "text",
-            "position": "center",
-            "property": "ProdStat"
-        },
-        {
             "type": "action",
             "position": "center",
             "action": [
                 {
                     "type": "select",
-                    "property": "ProdCode"
+                    "property": "ProdName"
                 }
             ]
         }
     ],
-    "propertyId": "ProdCode",
-    "propertyName": "ProdCode"
+    "propertyId": "ProdName",
+    "propertyName": "ProdName"
 }

@@ -95,6 +95,7 @@
             "action": [
                 {
                     "type": "edit",
+                    "icon":"ft-users",
                     "path": "/Organization/BusinessUnit/member",
                     "param": [
                         {
@@ -111,7 +112,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Organization/BusinessUnit/detail",
+                    "path": "/Organization/BusinessUnit/Detail",
                     "param": [
                         {
                             "type": "RefBizUnitId",

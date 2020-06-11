@@ -1,0 +1,91 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "viewCustMainDataMainInfoId1",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "FULL NAME",
+            "property": "CustFullName"
+          },
+          {
+            "type": "text",
+            "label": "NICK NAME",
+            "property": "NickName"
+          },
+          {
+            "type": "text",
+            "label": "SALUTATION",
+            "property": "MrSalutationCode"
+          },
+          {
+            "type": "text",
+            "label": "MARITAL STATUS",
+            "property": "MrMaritalStatCode"
+          },
+          {
+            "type": "text",
+            "label": "GELAR DEPAN NAMA",
+            "property": "CustPrefixName"
+          },
+          {
+            "type": "text",
+            "label": "NUM OF DEPENDENTS",
+            "property": "NoOfResidence"
+          },
+          {
+            "type": "text",
+            "label": "GELAR BELAKANG NAMA",
+            "property": "CustSuffixName"
+          },
+          {
+            "type": "text",
+            "label": "NUM OF RESIDENCE (LAST 3 YEARS)",
+            "property": "NoOfResidence"
+          },
+          {
+            "type": "text",
+            "label": "NATIONALITY",
+            "property": "MrNationalityCode"
+          },
+          {
+            "type": "text",
+            "label": "FAMILY CARD NUM",
+            "property": "FamilyCardNo"
+          },
+          {
+            "type": "text",
+            "label": "COUNTRY",
+            "property": "CountryName"
+          },
+          {
+            "type": "text",
+            "label": "MOTHER MAIDEN NAME",
+            "property": "MotherMaidenName"
+          },
+          {
+            "type": "text",
+            "label": "EDUCATION",
+            "property": "MrEducationCode"
+          },
+          {
+            "type": "text",
+            "label": "RELIGION",
+            "property": "MrReligionCode"
+          },          {
+            "type": "boolean",
+            "label": "REST IN PEACE",
+            "property": "IsRestInPeace"
+          }
+        ],
+        "querystring": {
+          "select": "SELECT RC.COUNTRY_NAME AS CountryName, CP.CUST_FULL_NAME AS CustFullName, C.CUST_ID AS CustId, RMSAL.DESCR AS MrSalutationCode, CP.CUST_PREFIX_NAME AS CustPrefixName, CP.CUST_SUFFIX_NAME AS CustSuffixName, RMNAT.DESCR AS MrNationalityCode, RC.COUNTRY_NAME AS WnaCountryCode, RMEDU.DESCR AS MrEducationCode, RMREG.DESCR AS MrReligionCode, CP.NICK_NAME AS NickName, RMMAR.DESCR AS MrMaritalStatCode, CP.NO_OF_DEPENDENTS AS NoOfDependents, CP.NO_OF_RESIDENCE AS NoOfResidence, CP.FAMILY_CARD_NO AS FamilyCardNo, CP.MOTHER_MAIDEN_NAME AS MotherMaidenName, CP.IS_REST_IN_PEACE AS IsRestInPeace",
+          "from": "FROM dbo.CUST_PERSONAL CP WITH(NOLOCK) JOIN dbo.CUST C WITH(NOLOCK) ON C.CUST_ID = CP.CUST_ID LEFT JOIN dbo.REF_COUNTRY RC WITH(NOLOCK) ON RC.COUNTRY_CODE = CP.WNA_COUNTRY_CODE LEFT JOIN dbo.REF_MASTER RMSAL WITH(NOLOCK) ON RMSAL.REF_MASTER_TYPE_CODE = 'SALUTATION' AND RMSAL.MASTER_CODE = CP.MR_SALUTATION_CODE LEFT JOIN dbo.REF_MASTER RMEDU WITH(NOLOCK) ON RMEDU.REF_MASTER_TYPE_CODE = 'EDUCATION' AND RMEDU.MASTER_CODE = CP.MR_EDUCATION_CODE LEFT JOIN dbo.REF_MASTER RMNAT WITH(NOLOCK) ON RMNAT.REF_MASTER_TYPE_CODE = 'NATIONALITY' AND RMNAT.MASTER_CODE = CP.MR_NATIONALITY_CODE LEFT JOIN dbo.REF_MASTER RMREG WITH(NOLOCK) ON RMREG.REF_MASTER_TYPE_CODE = 'RELIGION' AND RMREG.MASTER_CODE = CP.MR_RELIGION_CODE LEFT JOIN dbo.REF_MASTER RMMAR WITH(NOLOCK) ON RMMAR.REF_MASTER_TYPE_CODE = 'MARITAL_STAT' AND RMMAR.MASTER_CODE = CP.MR_MARITAL_STAT_CODE",
+          "where": "WHERE C.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

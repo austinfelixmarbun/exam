@@ -1,0 +1,32 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <app-main-info-view></app-main-info-view>
+        <form>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch/Employee/Paging']"
+            [queryParams]="{VendorId: this.VendorId}" translate>
+            Finish
+            </button>
+          </div>
+        </form>
+        <aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode] navigateBackward="allow"
+        navigateForward="allow" >
+        <aw-wizard-step [stepTitle]="'Employee'"
+          [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+          <app-vendor-employee [objInput]="objPassing" (objOutput)="outputValue($event)"></app-vendor-employee>
+        </aw-wizard-step>
+        <aw-wizard-step [stepTitle]="'Address'"
+          [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+          <app-address  [objInput]="objPassing"> </app-address>
+        </aw-wizard-step>
+        <aw-wizard-step [stepTitle]="'Bank Info'"
+        [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+        <app-bank-info [objInput]="objPassing"> </app-bank-info>
+      </aw-wizard-step>
+        </aw-wizard>
+      </div>
+    </div>
+  </div>
+</div>

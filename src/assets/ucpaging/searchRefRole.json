@@ -1,5 +1,5 @@
 {
-  "title": "Ref Role Registration",
+  "title": "Role Registration",
   "exportExcel": false,
   "component": [
     {
@@ -8,14 +8,6 @@
       "id": "RoleCode",
       "value": "",
       "label": "Role Code",
-      "placeholder": "Placeholder"
-    },
-    {
-      "type": "textbox",
-      "name": "Role_Name",
-      "id": "RoleName",
-      "value": "",
-      "label": "Role Name",
       "placeholder": "Placeholder"
     },
     {
@@ -39,6 +31,14 @@
         }
       ],
       "itemsUrl": []
+    },
+    {
+      "type": "textbox",
+      "name": "Role_Name",
+      "id": "RoleName",
+      "value": "",
+      "label": "Role Name",
+      "placeholder": "Placeholder"
     }
   ],
   "headerList": [
@@ -113,7 +113,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/SystemSetting/Role/detail",
+          "path": "/SystemSetting/Role/Detail",
           "param": [
             {
               "type": "RefRoleId",
@@ -124,10 +124,6 @@
               "property": "edit"
             }
           ]
-        },
-        {
-            "type": "delete",
-            "property": "RefRoleId"
         }
       ]
     }

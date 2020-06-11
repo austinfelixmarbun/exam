@@ -60,7 +60,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: './pages/full-pages/full-pages.module#FullPagesModule'
   },
   {
-    path: 'upload',
+    path: 'Upload',
     loadChildren: './upload/upload.module#UploadModule'
   },
   {
@@ -72,12 +72,35 @@ export const Full_ROUTES: Routes = [
     loadChildren: './test-new/testNew.module#TestNewModule'
   }, 
   {
+    path: 'product',
+    loadChildren: './product/product.module#ProductModule'
+  },
+  {
     path: 'Asset',
     loadChildren: './asset/asset.module#AssetModule'
+  }, 
+  {
+    path: 'Vendor',
+    loadChildren: './vendor/vendor.module#VendorModule'
+  },
+  {
+    path: 'Verification',
+    loadChildren: './verification/verification.module#VerificationModule'
   },
   {
     path: 'Product',
     loadChildren: './product/product.module#ProductModule'
+  },
+  {
+    path: 'ApprovalScreen',
+    loadChildren: './approval-screen/approval-screen.module#ApprovalScreenModule'
+  },
+  {
+    path: 'Error',
+    loadChildren: './error-page/error-page.module#ErrorPageModule'
+  },
+  {
+    path: 'Survey',
+    loadChildren: './survey/survey.module#SurveyModule'
   }
-  
 ];

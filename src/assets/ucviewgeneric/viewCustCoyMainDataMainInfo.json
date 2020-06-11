@@ -1,0 +1,42 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "viewCustCoyMainDataMainInfoId1",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "INDUSTRY TYPE NAME",
+            "property": "IndTypeName"
+          },
+          {
+            "type": "date",
+            "label": "ESTABLISHMENT DATE",
+            "property": "EstDt"
+          },
+          {
+            "type": "text",
+            "label": "NUMBER OF EMPLOYEE",
+            "property": "NumOfEmp"
+          },
+          {
+            "type": "text",
+            "label": "TANDA DAFTAR PERUSAHAAN (TDP)",
+            "property": "RegNo"
+          },
+          {
+            "type": "text",
+            "label": "SURAT IZIN USAHA PERDAGANGAN (SIUP)",
+            "property": "LisNo"
+          }
+        ],
+        "querystring": {
+        "select": "SELECT RIT.INDUSTRY_TYPE_NAME AS IndTypeName, CP.NUM_OF_EMP AS NumOfEmp, CP.ESTABLISHMENT_DT AS EstDt,CP.LICENSE_NO AS LisNo, CP.REGISTRATION_NO AS RegNo",
+          "from": "FROM dbo.CUST AS C WITH(NOLOCK) JOIN dbo.CUST_COMPANY CP WITH(NOLOCK) ON C.CUST_ID = CP.CUST_ID  LEFT JOIN dbo.REF_INDUSTRY_TYPE RIT WITH(NOLOCK) ON CP.REF_INDUSTRY_TYPE_ID = RIT.REF_INDUSTRY_TYPE_ID",
+          "where": "WHERE C.CUST_ID = {0}"
+        }
+      }
+    ]
+  }

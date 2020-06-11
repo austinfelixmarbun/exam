@@ -1,0 +1,70 @@
+{
+    "title": "LOOK UP - HOLIDAY SCHEME",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "HOLIDAY_SCHM_CODE",
+            "id": "HolidaySchmCode",
+            "value": "",
+            "label": "Holiday Scheme Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "HOLIDAY_SCHM_NAME",
+            "id": "HolidaySchmName",
+            "value": "",
+            "label": "Holidayd Scheme Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT HOLIDAY_SCHM_H_ID AS HolidaySchmHId, HOLIDAY_SCHM_CODE As HolidaySchmCode, HOLIDAY_SCHM_NAME AS HolidaySchmName",
+        "from": "FROM dbo.HOLIDAY_SCHM_H WITH(NOLOCK)",
+        "where":"WHERE IS_ACTIVE = 1"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "HOLIDAY SCHEME CODE",
+            "name": "HolidaySchmCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "HOLIDAY SCHEME NAME",
+            "name": "HolidaySchmName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "SELECT"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "HolidaySchmCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "HolidaySchmName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "HolidaySchmHId"
+                }
+            ]
+        }
+    ],
+    "propertyId": "HolidaySchmName",
+    "propertyName": "HolidaySchmName"
+}

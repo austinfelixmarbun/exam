@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { environment } from 'environments/environment';
 import { AssetAccessoryObj } from 'app/shared/model/AssetAccesorryObj.Model';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,104 +9,81 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-asset-accessory-add-edit',
   templateUrl: './asset-accessory-add-edit.component.html',
-  styleUrls: ['./asset-accessory-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class AssetAccessoryAddEditComponent implements OnInit {
-
   AssetAccessoryForm = this.fb.group({
     AssetAccessoryName: ['', [Validators.required, Validators.maxLength(100)]],
     AssetAccessoryCode: ['', [Validators.required, Validators.maxLength(50)]],
     IsActive: [true]
   });
-
-
-
-  pageType: any;
-  AssetTypeId: any;
-  AssetAccessoryId: any;
-  apiUrl: any;
-  settingUrl: string = environment.FoundationR3Url;
-  urlEnviPaging: string = environment.foundationUrl;
-  result: any;
+  pageType: string;
+  AssetTypeId: number;
+  AssetAccessoryId: number;
+  apiUrl: string;
+  result: AssetAccessoryObj;
   acObj: AssetAccessoryObj;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
+  addUrl: string;
+  editUrl: string;
+  GetAssetTypeById: string;
+  assetTypeName: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-
-    this.addUrl = environment.FoundationR3Url + AdInsConstant.AddNewAssetAccesory;
-    this.editUrl = environment.FoundationR3Url + AdInsConstant.EditAssetAccessory;
+    this.addUrl = AdInsConstant.AddNewAssetAccesory;
+    this.editUrl = AdInsConstant.EditAssetAccessory;
+    this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
     this.route.queryParams.subscribe(params => {
-
-
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
       }
       if (params["mode"] != null) {
         this.pageType = params["mode"];
       }
-
       if (params["AssetAccessoryId"] != null) {
         this.AssetAccessoryId = params["AssetAccessoryId"];
       }
-
-
-
     });
-
   }
-
   ngOnInit() {
-    
-
-    
+    console.log('test');
+    var assetTypeReq = { "AssetTypeId": this.AssetTypeId };
+    this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
+      (response) => {
+        this.assetTypeName = response['AssetTypeName'];
+      }
+    );
     if (this.pageType == "edit") {
-      console.log("awd");
-      // this.title = "Edit Bank";
       var acObj = new AssetAccessoryObj();
-    
       acObj.AssetAccessoryId = this.AssetAccessoryId;
       acObj.AssetTypeId = this.AssetTypeId;
-      this.apiUrl = this.settingUrl + AdInsConstant.GetAssetAccessorybyAssetAccessoryId;
+      this.apiUrl = AdInsConstant.GetAssetAccessorybyAssetAccessoryId;
       this.AssetAccessoryForm.controls.AssetAccessoryCode.disable();
 
-      console.log("awd");
-       
       this.http.post(this.apiUrl, acObj).subscribe(
-          (response) => {
-              this.result = response;
-              this.AssetAccessoryForm.patchValue({
-                AssetAccessoryCode: this.result.AssetAccessoryCode,
-                AssetAccessoryName: this.result.AssetAccessoryName, 
-                IsActive : this.result.IsActive
-                 
-              })
-          },
-          (error) => {
-              console.log(error);
-          }
+        (response: AssetAccessoryObj) => {
+          this.result = response;
+          this.AssetAccessoryForm.patchValue({
+            AssetAccessoryCode: this.result.AssetAccessoryCode,
+            AssetAccessoryName: this.result.AssetAccessoryName,
+            IsActive: this.result.IsActive
+          })
+        },
+        (error) => {
+          console.log(error);
+        }
       );
+    }
   }
-
-  }
-
-  SaveForm(){
-    
-    console.log("awd");
+  SaveForm() {
     if (this.pageType == "add") {
-      
       this.acObj = new AssetAccessoryObj();
       this.acObj.AssetAccessoryCode = this.AssetAccessoryForm.controls["AssetAccessoryCode"].value;
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
       this.acObj.AssetTypeId = this.AssetTypeId;
-
       this.http.post(this.addUrl, this.acObj).subscribe(
         response => {
-            this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/Asset/Accessory/Paging"],{ queryParams: { "AssetTypeId": this.acObj.AssetTypeId   } });
-          
+          this.toastr.successMessage(response["Message"]);
+          this.router.navigate(["/Asset/Accessory/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
         },
         error => {
           console.log(error);
@@ -118,20 +94,16 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.acObj.AssetAccessoryCode = this.AssetAccessoryForm.controls["AssetAccessoryCode"].value;
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
-      
       this.http.post(this.editUrl, this.acObj).subscribe(
         response => {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Accessory/Paging"],{ queryParams: { "AssetTypeId": this.acObj.AssetTypeId   } });
-      
+          this.router.navigate(["/Asset/Accessory/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
         },
         error => {
           console.log(error);
         }
       );
     }
-
   }
-  
 }

@@ -6,23 +6,23 @@
           <div class="col-md-8">
             <h4 class="card-title" translate> {{mode}} Product Offering </h4>
           </div>
-          <div class="col-md-4" style="text-align-last: right">
-            <button type="button" class="backButton" [routerLink]="['/product/prod-offering/prod-offering-paging']" translate>
+          <!-- <div class="col-md-4" style="text-align-last: right">
+            <button type="button" class="backButton" [routerLink]="['/Product/ProdOffering/Paging']" translate>
               <i class="ft-arrow-left"></i> Back
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="card-body">
         <div class="px-3">
-          <form class="form form-horizontal" [formGroup]="ProdOfferingForm" (ngSubmit)="SaveForm()"
+          <form class="form form-horizontal" [formGroup]="ProdOfferingForm"
             #enjiForm="ngForm">
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Main Information</h4>
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel">Product Name </label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-75-per" formControlName="ProdName">
+                <div class="col-md-3">
+                  <lib-uclookupgeneric [lookupInput]="inputLookupObj" [parentForm]="ProdOfferingForm" [enjiForm]="enjiForm" [identifier]="ProdName" (lookup)="handleOutput($event)"></lib-uclookupgeneric>
                 </div>
               </div>
               <div class="form-group row adins-required">
@@ -57,15 +57,20 @@
               </div>
             </div>
             <div class="form-actions right">
-              <button type="submit" class="btn btn-raised btn-primary">
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Product/ProdOffering/Paging']" translate>
+                <i class="ft-x"></i> Cancel
+              </button>
+              <button type="submit" (click)="AddDetail()" class="btn btn-raised btn-primary">
+                <i class="far fa-check-square"></i> Save
+              </button>
+              <!-- <button type="submit" class="btn btn-raised btn-primary" (click)="SaveForm()">
                 <i class="fa fa-check-square-o"></i> Save
               </button>
-              <button type="submit" class="btn btn-raised btn-primary">
+              <button type="submit" class="btn btn-raised btn-primary" (click)="AddDetail()">
                 <i class="fa fa-check-square-o"></i> Next
-              </button>
+              </button> -->
             </div>
           </form>
-
         </div>
       </div>
     </div>

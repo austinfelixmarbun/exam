@@ -68,8 +68,7 @@
       </table>
       <div class="card-header">
         <div class="text-right">
-          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/office/OfficeArea']"
-          [queryParams]="{RefOfficeId:RefOfficeId}" translate>
+          <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()" translate>
           <i class="fa fa-arrow-circle-left"></i> Back
         </button>
           <button type="submit" (click)="SaveOfficeAreaMember()" class="btn btn-raised btn-primary"

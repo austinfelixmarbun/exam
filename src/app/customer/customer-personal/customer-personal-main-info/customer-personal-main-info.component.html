@@ -3,94 +3,79 @@
     <div class="card-body">
       <div class="px-3">
         <div class="addEdit">
-
-
-          <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Main Info
+          <h4 class="form-section card-title" translate> Customer Personal
           </h4>
-        
           <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
           </lib-ucSubsection>
           <form class="form form-horizontal" [formGroup]="CustomerPersonalForm"
             (ngSubmit)="CustomerPersonalForm.valid && SaveValue()" #enjiForm="ngForm" id="MainInfoId">
-
-
-            <div class="form-body" >
-            
-          
-     
-               
-              <div class="form-group row adins-required">
-                <label class="col-md-2 adInsLabel" translate>Customer Name </label>
+            <div class="form-body">
+              <div class="form-group row">
+                <label class="col-md-2 adins-required-label" translate>Customer Name </label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="CustName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.CustName.invalid}">
                   <show-errors [control]="CustomerPersonalForm.controls.CustName" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
-
-                <label class="col-md-2  adInsLabel" translate>Gender </label>
-                
+                <label class="col-md-2  adins-required-label" translate>Gender </label>
                 <div class="col-md-4">
                   <select class="form-control adInsInput" style="width: auto" formControlName="Gender"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.Gender.invalid }">
-                      <option *ngFor="let it of tempGender" value="{{it.Key}}">
-                        {{it.Value}}</option>
-                        </select>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.Gender.invalid }">
+                    <option *ngFor="let it of tempGender" [value]="it.Key">
+                      {{it.Value}}</option>
+                  </select>
                   <show-errors [control]="CustomerPersonalForm.controls.Gender" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
-
-
-                
-              </div>
-
-              <div class="form-group row adins-required">
-                <label class="col-md-2 adInsLabel" translate>ID Type </label>
+             </div>
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>Customer Model </label>
                 <div class="col-md-4">
-                  <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.MrIdTypeCode.invalid }">
-                      <option *ngFor="let it of tempIdType" value="{{it.Key}}">
-                        {{it.Value}}</option>
-                        </select>
-                  
+                 <select class="form-control adInsInput" style="width: auto" formControlName="CustModel"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.CustModel.invalid }">
+                    <option *ngFor="let it of tempCustModel" [value]="it.Key">
+                      {{it.Value}}</option>
+                  </select>
+                  <show-errors [control]="CustomerPersonalForm.controls.CustModel" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+                <label class="col-md-2  adins-required-label" translate>Birth Place</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthPlace.invalid}">
+                  <show-errors [control]="CustomerPersonalForm.controls.BirthPlace" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>      
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 adins-required-label" translate>ID Type </label>
+                <div class="col-md-4">
+                  <select class="form-control adInsInput" (change)="onOptionsSelected($event)" style="width: auto" formControlName="MrIdTypeCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.MrIdTypeCode.invalid }">
+                    <option *ngFor="let it of tempIdType " [value]="it.Key" >
+                      {{it.Value}}</option>
+                  </select>
                   <show-errors [control]="CustomerPersonalForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
-
-                <label class="col-md-2 adInsLabel" translate>Birth Place/Date </label>
+                <label class="col-md-2 adins-required-label" translate>Birth Date</label>
                 <div class="col-md-4">
-                  <div class="row">
-                    <div class="col-md-6"  style="border-right: 1px solid grey">
-                      <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthPlace.invalid}">
-                      <show-errors [control]="CustomerPersonalForm.controls.BirthPlace" [submit]="enjiForm.submitted">
-                      </show-errors>
-
-                    </div>
-               
-
-                    <div class="col-md-6=">
-                      <input type="date" class="form-control adInsInput" formControlName="BirthDt"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthDt.invalid}">
-                      <show-errors [control]="CustomerPersonalForm.controls.BirthDt " [submit]="enjiForm.submitted">
-                      </show-errors>
-                    </div>
-
-                  </div>
- 
+                  <input type="date" class="form-control adInsInput" formControlName="BirthDt" 
+                  [max]="businessDtMin | date: 'yyyy-MM-dd'"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthDt.invalid}">
+                  <show-errors [control]="CustomerPersonalForm.controls.BirthDt" [submit]="enjiForm.submitted">
+                  </show-errors>
                 </div>
- 
               </div>
-
- 
-              <div class="form-group row adins-required">
-                <label class="col-md-2 adInsLabel" translate>ID Number </label>
+              <div class="form-group row  ">
+                <label class="col-md-2 adins-required-label" translate>ID Number </label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="IdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdNo.invalid}">
                   <show-errors [control]="CustomerPersonalForm.controls.IdNo" [submit]="enjiForm.submitted">
                   </show-errors>
-                </div>
+                </div>               
                 <label class="col-md-2 adInsLabel" translate>NPWP</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
@@ -99,18 +84,16 @@
                   </show-errors>
                 </div>
               </div>
-
-
-              <div class="form-group row adins-required">
-                <label class="col-md-2 adInsLabel" translate>ID Expired Date</label>
+              <div class="form-group row">
+                <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : tempKTPCheck==false}" translate>ID Expired Date</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="IdExpiredDt"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdExpiredDt.invalid}">
+                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt" 
+                  [min]="businessDtMax | date: 'yyyy-MM-dd'"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdExpiredDt.invalid } " >
                   <show-errors [control]="CustomerPersonalForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
-
-                <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
+                <label class="col-md-2 adins-required-label" translate>Mother Maiden Name</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="MotherMaidenName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.MotherMaidenName.invalid}">
@@ -118,25 +101,37 @@
                   </show-errors>
                 </div>
               </div>
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
+                </div>
+              </div>            
+              <div class="form-group row  ">
+                <label class="col-md-2 adInsLabel" translate>VIP</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
+                    (click)="checkState()" />
+                </div>         
+                <label class="col-md-2 adInsLabel" translate [ngClass]="{'adins-required-label' : VipNotesRequired==true}">VIP Notes</label>
+                <div class="col-md-4">
+                    <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"  
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.VipNotes.invalid }"></textarea>
 
-
+                    <show-errors [control]="CustomerPersonalForm.controls.VipNotes" [submit]="enjiForm.submitted">
+                  </show-errors>
+                </div>
+              </div>
             </div>
-
-
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1"
-               translate>
-          
- 
-                <i class="ft-x"></i> Cancel
+              <button type="button" class="btn btn-raised btn-warning mr-1"  [routerLink]="['../../Paging']" translate>
+               <i class="ft-x"></i> Cancel
               </button>
-              <button type="submit" class="btn btn-raised btn-primary"  translate>
-                <i class="fa fa-check-square-o"></i> Next
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="fa fa-check"></i> Next
               </button>
             </div>
           </form>
-
-
         </div>
       </div>
     </div>

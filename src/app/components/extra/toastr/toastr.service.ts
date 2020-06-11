@@ -69,7 +69,7 @@ export class NGXToastrService {
     }
 
     errorMessage(msg) {
-        this.toastr.info(msg);
+        this.toastr.error(msg);
     }
 
     typeSave(msg) {
@@ -82,6 +82,12 @@ export class NGXToastrService {
 
     successMessage(msg) {
         this.toastr.success(msg, 'Success!');
+    }
+
+    successMessageTitle(title,message)
+    {
+        //this.toastr.info(message,title);
+        this.toastr.success(message,title);
     }
 
     errorAPI(status, reason) {

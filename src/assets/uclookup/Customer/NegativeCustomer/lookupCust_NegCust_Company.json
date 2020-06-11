@@ -1,0 +1,68 @@
+{
+    "title": "Customer",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "CUST_NO",
+            "id": "CustNo",
+            "value": "",
+            "label": "Customer No",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "CUST_NAME",
+            "id": "CustName",
+            "value": "",
+            "label": "Customer Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT A.CUST_NO AS custNo, A.CUST_NAME AS custName, A.TAX_ID_NO AS taxIdNo, A.CUST_ID AS custId",
+        "from": "FROM CUST AS A WITH(NOLOCK) INNER JOIN CUST_COMPANY AS B WITH(NOLOCK) ON A.CUST_ID = B.CUST_ID"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Customer No",
+            "name": "custNo"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Customer Name",
+            "name": "custName"
+        }, 
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "custNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "custName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "custId"
+                }
+            ]
+        }
+    ],
+    "propertyId": "custId",
+    "propertyName": "custNo"
+}

@@ -14,7 +14,7 @@ import { HttpClient } from "@angular/common/http";
   providers: [NGXToastrService]
 })
 export class OrgAddEditComponent implements OnInit {
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   parents: any;
   orgObj: OrganizationObj;

@@ -1,0 +1,71 @@
+{
+    "title": "Search Product",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "ProdCode",
+            "id": "ProdCodeId",
+            "value": "",
+            "label": "Product Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "ProdName",
+            "id": "ProdNameId",
+            "value": "",
+            "label": "Product Name",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT P.PROD_CODE AS ProdCode, P.PROD_NAME AS ProdName, O.OFFICE_CODE AS OfficeCOde, PH.PROD_H_ID AS CurrentProdHId",
+        "from": "FROM PROD P WITH(NOLOCK) JOIN PROD_H PH WITH(NOLOCK) on P.CURRENT_PROD_H_ID = PH.PROD_H_ID JOIN PROD_BRANCH_MBR PBM WITH(NOLOCK) on PH.PROD_H_ID = PBM.PROD_H_ID JOIN REF_OFFICE O WITH(NOLOCK) on PBM.REF_OFFICE_ID = O.REF_OFFICE_ID",
+        "where" : "WHERE P.PROD_STAT = 'ACT'"
+    },
+        "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Prod Code",
+            "name": "ProdCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Prod Name",
+            "name": "ProdName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Action",
+            "name": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ProdCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ProdName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "ProdName"
+                }
+            ]
+        }
+    ],
+    "propertyId": "ProdName", 
+    "propertyName": "ProdName" 
+}

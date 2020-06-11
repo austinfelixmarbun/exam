@@ -19,7 +19,7 @@ import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
   providers: [NGXToastrService]
 })
 export class UserAddEditComponent implements OnInit {
-  foundationUrl: string = environment.foundationUrl;
+  foundationUrl: string = environment.FoundationR3Url;
   inputLookupObj: any;
   apiUrl: any;
   parents: string;
@@ -61,7 +61,7 @@ export class UserAddEditComponent implements OnInit {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupEmp.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetListEmployee;
-    this.inputLookupObj.urlEnviPaging = environment.foundationUrl;
+    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
 
     if (this.type == "edit") {
       var empObj: RefEmpObj;
@@ -211,7 +211,7 @@ export class UserAddEditComponent implements OnInit {
 
                           this.service.typeSave(response['message']);
                           this.router.navigateByUrl('/systemSetting/refUser', { skipLocationChange: true }).then(() =>
-                          this.router.navigate(['/systemSetting/refUser/detail']));
+                          this.router.navigate(['/systemSetting/refUser/Detail']));
                           this.spinner.hide();
                         },
                         error => {

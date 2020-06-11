@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant'; 
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-asset-document-master-paging',
-  templateUrl: './asset-document-master-paging.component.html',
-  styleUrls: ['./asset-document-master-paging.component.scss'],
-  
+  templateUrl: './asset-document-master-paging.component.html'
 })
 export class AssetDocumentMasterPagingComponent implements OnInit {
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj;
   constructor() { }
 
   ngOnInit() {

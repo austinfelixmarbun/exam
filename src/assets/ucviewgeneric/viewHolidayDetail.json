@@ -1,0 +1,27 @@
+{
+  "title" : "",
+    "subsection": [
+      {
+        "subSectionId": "HolidayManagementId",
+        "subSectionTitle": "Holiday Scheme Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Holiday Scheme Code",
+            "property": "HolidaySchmCode"
+          },
+          {
+            "type": "text",
+            "label": "Holiday Scheme Name",
+            "property":"HolidaySchmName"
+          }
+        ],
+        "querystring": {
+            "select": "SELECT HOLIDAY_SCHM_NAME AS HolidaySchmName, HOLIDAY_SCHM_CODE AS HolidaySchmCode",
+            "from": "FROM dbo.HOLIDAY_SCHM_H",
+            "where": "WHERE HOLIDAY_SCHM_H_ID = {0}" 
+        }
+      }
+    ]
+  }

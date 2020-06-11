@@ -14,7 +14,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'paging',
+        path: 'Paging',
         component: EmployeeComponent,
         data: {
           title: 'Employee'
@@ -35,7 +35,7 @@ const routes: Routes = [
       //   }
       // },
       {
-        path: 'detail',
+        path: 'Detail',
         component: EmployeeAddComponent,
         data: {
           title: 'Employee Detail'
@@ -49,28 +49,28 @@ const routes: Routes = [
         }
       },
       {
-        path: 'employeePositionAddEdit',
+        path: 'EmployeePositionAddEdit',
         component: EmployeePositionAddComponent,
         data: {
           title: 'Employee Position Add Edit'
         }
       },
       {
-        path: 'leaveMaintenance',
+        path: 'Leave/Paging',
         component: LeaveMaintenanceComponent,
         data: {
           title: 'Leave Maintenance'
         }
       },
       {
-        path: 'leaveMaintenanceAdd',
+        path: 'Leave/Add',
         component: LeaveMaintenanceAddEditComponent,
         data: {
           title: 'Leave Maintenance Add'
         }
       },
       {
-        path: 'leaveMaintenanceEdit',
+        path: 'Leave/Edit',
         component: LeaveMaintenanceAddEditComponent,
         data: {
           title: 'Leave Maintenance Edit'

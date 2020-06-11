@@ -1,0 +1,47 @@
+<div *ngIf="RFARoot">
+  <div class="row margin-bot-15">
+      <!-- Summary -->
+      <div class="col-md-12">
+          <div class="card">
+              <div class="card-body">
+                  <div class="px-3">
+                    <lib-ucSubsection [id]="'Summary'" [title]="'Summary -
+                    Transaction No : '+ RFAInformation.TrxNo" [panel]="'SummaryId'">
+                    </lib-ucSubsection>
+                      <div id = "SummaryId" class="form-body">
+                          <form class="form form-horizontal">
+                              <div class="form-group row">
+                                  <label class="col-md-2 adInsLabel text-bold" translate>Approval Scheme</label>
+                                  <label class="col-md-4  adInsLabel" translate>{{RFAInformation.SchemeName}}</label>
+                                  <label class="col-md-2 adInsLabel text-bold" translate>Request By</label>
+                                  <label class="col-md-4  adInsLabel" translate>{{RFAInformation.RequestBy}}</label>
+                                  <label class="col-md-2  adInsLabel text-bold" translate>Request Date</label>
+                                  <label class="col-md-4  adInsLabel"
+                                      translate>{{RFAInformation.RequestDate | date: 'dd-MMM-yyyy' }}</label>
+                                  <label class="col-md-2  adInsLabel text-bold" translate>Reason</label>
+                                  <label class="col-md-4  adInsLabel"
+                                      translate>{{RFAInformation.Reason || "-"}}</label>
+                                  <label class="col-md-2  adInsLabel text-bold" translate>Min Final Level</label>
+                                  <label class="col-md-4  adInsLabel"
+                                      translate>{{RFAInformation.MinimumFinalLevel || "-"}}</label>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-md-2  adInsLabel text-bold" translate>Note</label>
+                                  <label class="col-md-10  adInsLabel"
+                                      translate>{{RFAInformation.Notes  || "-"}}</label>
+                              </div>
+
+                              <div class="row">
+                                  <ng-container *ngFor="let rec of RFARoot.RecomendationObj;">
+                                      <label class="col-md-2 text-bold" translate>{{rec.Key}}</label>
+                                      <label class="col-md-4">{{rec.Value}}</label>
+                                  </ng-container>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Action -->
+  </div>

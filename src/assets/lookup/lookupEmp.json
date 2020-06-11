@@ -34,20 +34,21 @@
     {
       "type": "label",
       "position": "center",
-      "label": "Action"
+      "label": "Select"
     }
   ],
 
   "querystring": {
     "select": "SELECT A.EMP_NO AS empNo, A.REF_EMP_ID AS refEmpId, A.EMP_NAME AS empName",
-    "from": "FROM dbo.REF_EMP A WITH(NOLOCK)"
+    "from": "FROM dbo.REF_EMP A WITH(NOLOCK)",
+    "where":"WHERE IS_ACTIVE = 1"
   },
 
   "bodyList": [
     {
       "type": "text",
       "position": "center",
-      "property": "empNo"
+      "property": "empNo" 
     },
     {
       "type": "text",

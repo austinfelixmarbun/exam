@@ -1,0 +1,38 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "AssetSchmId",
+        "subSectionTitle": "Asset Scheme",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "ASSET SCHEME CODE",
+            "property": "AssetSchmCode"
+          },
+          {
+            "type": "text",
+            "label": "ASSET SCHEME NAME",
+            "property": "AssetSchmName"
+          },
+          {
+            "type": "text",
+            "label": "ASSET TYPE NAME",
+            "property": "AssetTypeName"
+          },
+          {
+            "type": "boolean",
+            "label": "ACTIVE STATUS",
+            "property": "IsActive"
+          }
+         
+        ],
+        "querystring": {
+          "select": "SELECT ASH.ASSET_SCHM_CODE AS AssetSchmCode, AT.ASSET_TYPE_NAME AS AssetTypeName, ASH.ASSET_SCHM_NAME AS AssetSchmName, ASH.IS_ACTIVE AS IsActive",
+          "from": "FROM dbo.ASSET_SCHM_H ASH WITH(NOLOCK) JOIN dbo.ASSET_TYPE AT WITH(NOLOCK) ON AT.ASSET_TYPE_ID = ASH.ASSET_TYPE_ID",
+          "where": "WHERE ASH.ASSET_SCHM_H_ID = {0}"
+        }
+      }
+    ]
+  }
