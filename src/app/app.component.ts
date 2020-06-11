@@ -16,6 +16,11 @@ export class AppComponent implements OnInit {
     private _hubConnection: HubConnection;
     msgs: Message[] = [];
 
+
+
+    
+
+    
     constructor() { }
 
     ngOnInit(): void {
