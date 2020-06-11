@@ -74,12 +74,18 @@
         </div>
       </ng-container>
       <div class="form-actions right">
-        <button type="submit" (click)="SaveForm()" class="btn btn-raised btn-primary mr-1">
+        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Product/ProdOffering/Paging']" translate>
+          <i class="ft-x"></i> Cancel
+        </button>
+        <button type="submit" (click)="NextDetail()" class="btn btn-raised btn-primary">
+          <i class="far fa-check-square"></i> Save
+        </button>
+        <!-- <button type="submit" (click)="SaveForm()" class="btn btn-raised btn-primary mr-1">
           <i class="fa fa-check-square-o"></i> Save
         </button>
         <button type="submit" (click)="NextDetail()" class="btn btn-raised btn-primary">
           <i class="fa fa-check-square-o"></i> Next
-        </button>
+        </button> -->
       </div>
     </form>
   </div>

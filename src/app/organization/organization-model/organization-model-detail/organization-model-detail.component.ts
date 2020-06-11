@@ -116,7 +116,7 @@ export class OrganizationModelDetailComponent implements OnInit {
                 console.log("Success Save");
                 this.service.typeSave(response['message']);
                 this.location.back();
-                // this.router.navigate(['/commonSetting/master/detail']);
+                // this.router.navigate(['/commonSetting/master/Detail']);
 
               },
               (error) => {

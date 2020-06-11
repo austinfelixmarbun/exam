@@ -20,16 +20,25 @@ import { ProductOfferingDeactivatePagingComponent } from "./prod-offering/prod-o
 import { ProductOfferingDeactivateApprovalComponent } from "./prod-offering/prod-offering-deact-apv/product-offering-deact-apv.component";
 import { ProductOfferingDeactivateApprovalDetailComponent } from "./prod-offering/prod-offering-deact-apv-detail/product-offering-deact-apv-detail.component";
 import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-offering-deactivate-edit/product-offering-deactivate-edit.component";
+import { ProductReturnHoPagingComponent } from './product-HO/product-return-ho-paging/product-return-ho-paging.component';
+import { ProdOfferingReturnPagingComponent } from './prod-offering/prod-offering-return-paging/prod-offering-return-paging.component';
 
 const routes: Routes = [
     {
       path: '',
       children: [
         {
-          path: 'ProdOffering/paging',
+          path: 'ProdOffering/Paging',
           component: ProdOfferingPagingComponent,
           data: {
             title: 'Paging'
+          },
+        },
+        {
+          path: 'ProdOffering/Returnpaging',
+          component: ProdOfferingReturnPagingComponent,
+          data: {
+            title: 'Return Paging'
           },
         },
         {
@@ -52,6 +61,13 @@ const routes: Routes = [
           component: ProductHOPagingComponent,
           data: {
               title: 'Product HO Paging'
+          }
+      },
+      {
+          path: 'HOReturnPaging',
+          component: ProductReturnHoPagingComponent,
+          data: {
+              title: 'Product Return HO Paging'
           }
       },
       {

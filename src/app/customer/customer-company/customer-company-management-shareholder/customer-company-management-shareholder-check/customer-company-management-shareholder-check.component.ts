@@ -43,6 +43,8 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
 
   ngOnInit() {
     this.getList();
+    console.log("testid")
+    console.log(this.IdCust)
   }
 
   openView(ShareholderCustNo)
@@ -62,11 +64,25 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
 
   addPersonal() {
-    this.outputValue.emit({ mode: 'addPersonal', TotalShare: this.tempListCompanyManagementShareholder[0].TotalShare });
+    if(this.tempListCompanyManagementShareholder.length == 0)
+    {
+      this.outputValue.emit({ mode: 'addPersonal'});
+    }
+    else
+    {
+      this.outputValue.emit({ mode: 'addPersonal', TotalShare: this.tempListCompanyManagementShareholder[0].TotalShare });
+    }
   }
 
   addCompany() {
-    this.outputValue.emit({ mode: 'addCompany', TotalShare: this.tempListCompanyManagementShareholder[0].TotalShare });
+    if(this.tempListCompanyManagementShareholder.length == 0)
+    {
+      this.outputValue.emit({ mode: 'addCompany'});
+    }
+    else
+    {
+      this.outputValue.emit({ mode: 'addCompany', TotalShare: this.tempListCompanyManagementShareholder[0].TotalShare });
+    }
   }
 
   deleteItem(CustCompanyMgmntShrholderId: any) {
@@ -104,10 +120,13 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
         this.http.post(this.getListCompanyManagementShareholderByCustCompanyIdUrl, this.tempCustCompanyObj).subscribe(
           (response) => {
             this.tempListCompanyManagementShareholder = response["ReturnObject"];
-            this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
             // console.log("testdata")
-            // console.log(this.TotalShare);
-
+            // console.log(this.tempListCompanyManagementShareholder.length);
+            if(this.tempListCompanyManagementShareholder.length != 0)
+            {
+              this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
+            }
+            
             //this.outputValue.emit({ TotalShare: this.TotalShare});
           });
       }

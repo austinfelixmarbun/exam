@@ -103,7 +103,7 @@ export class CurrencyAddComponent implements OnInit {
       this.http.post(this.addUrl, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/Currency/paging"]);
+          this.router.navigate(["/CommonSetting/Currency/Paging"]);
         },
         error => {
           console.log(error);
@@ -118,7 +118,7 @@ export class CurrencyAddComponent implements OnInit {
       this.http.post(this.editUrl, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/Currency/paging"]);
+          this.router.navigate(["/CommonSetting/Currency/Paging"]);
         },
         error => {
           console.log(error);

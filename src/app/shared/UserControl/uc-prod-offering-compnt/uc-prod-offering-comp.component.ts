@@ -27,6 +27,7 @@ export class UcProdOfferingCompComponent implements OnInit {
   @Input() ProdOfferingHId : number;
   @Input() ShowComparison : boolean;
   @Input() ShowBehaviour : boolean;
+  @Input() IsFilterBizTmpltCode: boolean;
 
   @Output() Save: EventEmitter<any> = new EventEmitter();
   @Output() Next: EventEmitter<any> = new EventEmitter();
@@ -41,7 +42,7 @@ export class UcProdOfferingCompComponent implements OnInit {
       }
     );
     
-    this.LoadProdComponent(this.ProdOfferingHId,this.CompGroups);
+    this.LoadProdComponent(this.ProdOfferingHId,this.CompGroups, this.IsFilterBizTmpltCode);
     
   }
 
@@ -144,13 +145,14 @@ export class UcProdOfferingCompComponent implements OnInit {
     this.dictBehaviour[obj.RefProdCompntCode] = behaviourDDL.filter(f=>f.BehaviourType == obj.BehaviourType);
   }
 
-  LoadProdComponent(ProdOfferingHId, CompGroups)
+  LoadProdComponent(ProdOfferingHId, CompGroups, IsFilterBizTmpltCode)
   {
     this.UrlGetProdOfferingCompGrouped = AdInsConstant.GetProductOfferingComponentGrouped;
 
     var ProdOfferingComponent = {
       ProdOfferingHId : ProdOfferingHId,
       GroupCodes: CompGroups.split(","),
+      IsFilterBizTmpltCode: IsFilterBizTmpltCode,
       RowVersion: ""
     }
 

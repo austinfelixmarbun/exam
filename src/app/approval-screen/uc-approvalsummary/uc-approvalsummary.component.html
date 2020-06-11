@@ -5,11 +5,11 @@
           <div class="card">
               <div class="card-body">
                   <div class="px-3">
-                      <div class="form-body">
+                    <lib-ucSubsection [id]="'Summary'" [title]="'Summary -
+                    Transaction No : '+ RFAInformation.TrxNo" [panel]="'SummaryId'">
+                    </lib-ucSubsection>
+                      <div id = "SummaryId" class="form-body">
                           <form class="form form-horizontal">
-                              <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Summary -
-                                  Transaction No : {{RFAInformation.TrxNo}}
-                              </h4>
                               <div class="form-group row">
                                   <label class="col-md-2 adInsLabel text-bold" translate>Approval Scheme</label>
                                   <label class="col-md-4  adInsLabel" translate>{{RFAInformation.SchemeName}}</label>

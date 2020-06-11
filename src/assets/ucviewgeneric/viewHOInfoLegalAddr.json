@@ -3,7 +3,7 @@
         {
             "subSectionId": "HOLegalAddressId",
             "subSectionTitle": "Address Info",
-            "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
+            "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
             "mainInfo": [
                 {
                     "type": "text",
@@ -50,7 +50,7 @@
         {
             "subSectionId": "HOLatLongId",
             "subSectionTitle": "Lat Long Info",
-            "mainInfoUrl": "http://r3impl-appsvr.ad-ins.com/Foundation/Generic/GetDataViewBySQL",
+            "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
             "mainInfo": [
                 {
                     "type": "text",

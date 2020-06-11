@@ -41,6 +41,7 @@ export class ProductOfferingViewComponent implements OnInit {
   ProdOfferingBranchMbr: any;
   ProdOfferingVersion: any;
   ProdOfferingCodeVersion: any;
+  mainInfoByHIdOnly: boolean = true;
 
   DlRuleObj = {
     CompntValue: "",
@@ -64,6 +65,7 @@ export class ProductOfferingViewComponent implements OnInit {
           this.prodOfferingVersion = params["prodOfferingVersion"];
         }
         this.prodOfferingHId = params["prodOfferingHId"];
+        this.mainInfoByHIdOnly = false;
       }
     });
   }
@@ -91,7 +93,13 @@ export class ProductOfferingViewComponent implements OnInit {
       this.prodOfferingHId = this.inputProdOfferingHId;
     }
     //** Main Information **//
-    this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
+    if (this.mainInfoByHIdOnly == true) {
+      this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformationByHId.json";
+    }
+    else {
+      this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
+    }
+
 
     if (this.prodOfferingHId == 0) {
       await this.LoadMainInfo();

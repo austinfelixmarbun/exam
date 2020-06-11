@@ -6,7 +6,7 @@
                     <button type="button" class="backButton"  (click)="Back()" translate>
                     <i class="fa fa-arrow-circle-left"> </i> Back </button></span>
             <span class="mr-1" >
-                <button type="button" class="addButton" [routerLink]="['/organization/struc/detail']"
+                <button type="button" class="addButton" [routerLink]="['/organization/struc/Detail']"
                 [queryParams]="{orgMdlId:orgMdlId, mode:'add'}"
                 translate>
                 <i class="ft-plus-circle"></i> Add
@@ -56,7 +56,7 @@
           </a>
         </td>
         <td>
-          <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/struc/detail']"
+          <a class="success p-0" data-original-title="" title="" [routerLink]="['/organization/struc/Detail']"
             [queryParams]="{orgMdlStrucId:item.orgMdlStrucId,mode:'edit',orgMdlId:orgMdlId,refBizUnitId:item.refBizUnitId}">
             <i class="ft-edit-2 font-medium-3 mr-2"></i>
           </a>
@@ -73,7 +73,7 @@
   <button type="button" (click)="Back()" class="btn btn-raised btn-warning mr-1">
     <i class="fa fa-arrow-circle-left"></i> Back
   </button>
-  <i class="fa fa-plus-circle" [routerLink]="['/organization/struc/detail']"
+  <i class="fa fa-plus-circle" [routerLink]="['/organization/struc/Detail']"
     [queryParams]="{orgMdlId:orgMdlId, mode:'add'}"
     style="position: absolute; right: 30px; bottom: 0; cursor: pointer; font-size: 36px"></i>
 </div> -->

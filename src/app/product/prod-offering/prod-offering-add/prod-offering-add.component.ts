@@ -99,6 +99,7 @@ export class ProdOfferingAddComponent implements OnInit {
           console.log(response);
           this.resultData = response;
           this.inputLookupObj.nameSelect = this.resultData.ProdName;
+          this.inputLookupObj.jsonSelect = {ProdName: this.resultData.ProdName, CurrentProdHId: this.resultData.ProdHId};
           prodOfferingObj.ProdHId = this.resultData.ProdHId;
           this.ProdOfferingForm.patchValue({
             ProdOfferingCode: this.resultData.ProdOfferingCode,
@@ -121,7 +122,7 @@ export class ProdOfferingAddComponent implements OnInit {
     this.prodOfferingObj = this.ProdOfferingForm.value;
     if (this.mode == "edit") {
       this.prodOfferingObj.ProdOfferingCode = this.resultData.ProdOfferingCode;
-      this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
+      this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
       this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
       this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
       this.prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
@@ -165,7 +166,7 @@ export class ProdOfferingAddComponent implements OnInit {
       this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Product/ProdOffering/paging"]);
+          this.router.navigate(["/Product/ProdOffering/Paging"]);
         },
         error => {
           console.log(error);
@@ -180,7 +181,7 @@ export class ProdOfferingAddComponent implements OnInit {
       this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Product/ProdOffering/paging"]);
+          this.router.navigate(["/Product/ProdOffering/Paging"]);
         },
         error => {
           console.log(error);

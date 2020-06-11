@@ -46,7 +46,7 @@ export class ProductComponentHOComponent implements OnInit {
     );
 
     this.ProdHId = this.objInput["param"];
-    this.LoadProdComponent(this.ProdHId, "SCORE,RULE,OTHR");
+    this.LoadProdComponent(this.ProdHId, "SCORE,RULE,OTHR,LOS", true);
   }
 
 
@@ -137,14 +137,16 @@ export class ProductComponentHOComponent implements OnInit {
     }
   }
 
-  LoadProdComponent(ProdHId, CompGroups) {
+  LoadProdComponent(ProdHId, CompGroups, IsFilterBizTmpltCode) {
     var ProdHOComponent = {
       ProdHId: ProdHId,
       GroupCodes: CompGroups.split(","),
+      IsFilterBizTmpltCode: IsFilterBizTmpltCode,
       RowVersion: ""
     }
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
+        console.log(response);
         for (var i = 0; i < response["ReturnObject"].length; i++) {
           var group = response["ReturnObject"][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
