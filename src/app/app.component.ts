@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
     msgs: Message[] = [];
 
     constructor() { }
-
+ 
     ngOnInit(): void {
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
 
