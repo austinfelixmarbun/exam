@@ -13,6 +13,8 @@ import {version} from '../../package.json';
 })
 export class AppComponent implements OnInit {
 
+    
+
     private _hubConnection: HubConnection;
     msgs: Message[] = [];
 
@@ -20,7 +22,7 @@ export class AppComponent implements OnInit {
 
 
 
-    
+
 
 
 
