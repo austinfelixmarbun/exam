@@ -1,16 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/OfficeObj.model';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
-import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component'
-import { Console } from '@angular/core/src/console';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
@@ -28,7 +25,7 @@ export class OfficeAddComponent implements OnInit {
   // @ViewChild(UcAddressComponent) ucAddr;
   // @ViewChild(UcContactInfoComponent) ucContact;
   // @ViewChild('ParentId') test: ElementRef;
-  inputFieldAddr : InputFieldObj = new InputFieldObj();
+  inputFieldAddr: InputFieldObj = new InputFieldObj();
   pageType: string = "add";
   mrKonvenSyariah = 'KON';
   isDisabledState: boolean = false;
@@ -55,8 +52,6 @@ export class OfficeAddComponent implements OnInit {
   refOfficeAreaId: any = '';
   holidaySchmHId: any;
   workingHourSchmHId: any;
-  cntctPersonName: any;
-  cntctPersonJobTitle: any;
   hierarchyNo: any;
   officeCode: any;
   officeName: any;
@@ -81,11 +76,11 @@ export class OfficeAddComponent implements OnInit {
   officeObj: OfficeObj;
   centerGrpObj: OfficeObj;
   refMasterObj: RefMasterObj;
-  lookUpRefMasterOfficeObj : RefMasterObj;
+  lookUpRefMasterOfficeObj: RefMasterObj;
   refMasterOfficeType: RefMasterObj;
   refMasterCgType: RefMasterObj;
   orgMdlObj: OrgMdlObj
-  arrCrit:any;
+  arrCrit: any;
 
   refMasterKonsyaType: RefMasterObj;
   konSyaUrl: any;
@@ -114,6 +109,8 @@ export class OfficeAddComponent implements OnInit {
     // Phn3:  [''],
     // PhnExt3:  ['',Validators.max(4)],
     // Fax:  ['',Validators.max(4)],
+    CntctPersonName: ['', Validators.required],
+    CntctPersonJobTitle: ['', Validators.required],
     CntctPersonEmail1: ['', Validators.required],
     CntctPersonEmail2: [''],
     CntctPersonMobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
@@ -170,17 +167,9 @@ export class OfficeAddComponent implements OnInit {
     this.lookUpRefMasterOfficeObj = new RefMasterObj();
     this.lookUpRefMasterOfficeObj.RefMasterTypeCode = "OFFICE_TYPE";
 
-    
-
-
-
-
     this.httpClient.post(AdInsConstant.GetRefMasterTypeOfficeWithoutCG, this.lookUpRefMasterOfficeObj).subscribe(
       (response) => {
-        console.log(response);
         this.lookupOfficeType = response['ReturnObject'];
-
-        
 
         this.arrCrit = new Array();
         var critObj = new CriteriaObj();
@@ -190,7 +179,7 @@ export class OfficeAddComponent implements OnInit {
         this.lookupOfficeType.forEach(element => {
           critObj.listValue.push(element.Key);
         });
-        
+
         this.arrCrit.push(critObj);
         this.InputLookupObj.addCritInput = this.arrCrit;
         //this.lookUpRefMasterOfficeObj.addCritInput = this.arrCrit;
@@ -202,7 +191,6 @@ export class OfficeAddComponent implements OnInit {
     if (this.pageType == "add") {
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
         (response) => {
-          console.log(response);
           this.allOfficeClass = response['ReturnObject'];
           this.OfficeForm.patchValue({
             MrOfficeClassCode: this.allOfficeClass[0].Key
@@ -211,10 +199,9 @@ export class OfficeAddComponent implements OnInit {
         (error) => {
           console.log(error);
         });
-      
+
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
         (response) => {
-          console.log(response);
           this.allCgType = response['ReturnObject'];
           this.OfficeForm.patchValue({
             MrCenterGrpTypeCode: this.allCgType[0].Key
@@ -226,7 +213,6 @@ export class OfficeAddComponent implements OnInit {
         });
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterKonsyaType).subscribe(
         (response) => {
-          console.log(response);
           this.allKonSya = response['ReturnObject'];
           this.OfficeForm.patchValue({
             KonSya: this.allKonSya[0].Key
@@ -237,7 +223,6 @@ export class OfficeAddComponent implements OnInit {
         })
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
         (response) => {
-          console.log(response);
           this.allOfficeType = response['ReturnObject'];
           this.OfficeForm.patchValue({
             OfficeType: this.allOfficeType[0].Key
@@ -249,7 +234,6 @@ export class OfficeAddComponent implements OnInit {
 
       this.httpClient.post(this.holidaySchmUrl, null).subscribe(
         (response) => {
-          console.log(response);
           this.allHolidaySchm = response['ReturnObject'];
           this.OfficeForm.patchValue({
             HolidayScheme: this.allHolidaySchm[0].HolidaySchmHId
@@ -260,7 +244,6 @@ export class OfficeAddComponent implements OnInit {
         })
       this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
         (response) => {
-          console.log(response);
           this.allWorkingHourSchm = response['ReturnObject'];
           this.OfficeForm.patchValue({
             WorkingHourScheme: this.allWorkingHourSchm[0].WorkingHourSchmHId
@@ -279,10 +262,8 @@ export class OfficeAddComponent implements OnInit {
       this.addressObj = new UcAddressObj();
       this.officeObj.RefOfficeId = this.RefOfficeId;
       // this.centerGrpObj.RefOfficeId = this.RefOfficeId;
-      // console.log(this.centerGrpObj.RefOfficeId); 
       this.httpClient.post(AdInsConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
         (response) => {
-          console.log(response);
           this.resultData = response;
           this.InputLookupObj.nameSelect = this.resultData["ParentOfficeCode"];
 
@@ -298,6 +279,8 @@ export class OfficeAddComponent implements OnInit {
             IsActive: this.resultData.IsActive,
             OfficeClose: this.resultData.IsOfficeClose,
             AllowAppCreated: this.resultData.IsAllowAppCreated,
+            CntctPersonName: this.resultData.CntctPersonName,
+            CntctPersonJobTitle: this.resultData.CntctPersonJobTitle,
             CntctPersonEmail1: this.resultData.CntctPersonEmail1,
             CntctPersonEmail2: this.resultData.CntctPersonEmail2,
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
@@ -321,12 +304,11 @@ export class OfficeAddComponent implements OnInit {
           this.addressObj.FaxArea = this.resultData.FaxArea
           this.addressObj.Fax = this.resultData.Fax
           this.inputFieldAddr.inputLookupObj = new InputLookupObj();
-          this.inputFieldAddr.inputLookupObj.jsonSelect = {Zipcode: this.resultData.Zipcode};
+          this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.resultData.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.resultData.Zipcode;
 
           this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
             (response) => {
-              console.log(response);
               this.allCgType = response['ReturnObject'];
               this.OfficeForm.patchValue({
                 MrCenterGrpTypeCode: this.resultData.MrCenterGrpTypeCode
@@ -337,10 +319,8 @@ export class OfficeAddComponent implements OnInit {
               console.log(error);
             })
 
-          var orgMdlObj = new OrgMdlObj();
           this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
             (response) => {
-              console.log(response);
               this.allOfficeClass = response['ReturnObject'];
               this.OfficeForm.patchValue({
                 MrOfficeClassCode: this.resultData.MrOfficeClassCode
@@ -351,7 +331,6 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.officeTypeUrl, this.refMasterOfficeType).subscribe(
             (response) => {
-              console.log(response);
               this.allOfficeType = response['ReturnObject'];
               this.OfficeForm.patchValue({
                 OfficeType: this.resultData.MrOfficeTypeCode
@@ -362,7 +341,6 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.konSyaUrl, this.refMasterKonsyaType).subscribe(
             (response) => {
-              console.log(response);
               this.allKonSya = response['ReturnObject'];
 
               this.OfficeForm.patchValue({
@@ -374,7 +352,6 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.holidaySchmUrl, null).subscribe(
             (response) => {
-              console.log(response);
               this.allHolidaySchm = response['ReturnObject'];
               this.OfficeForm.patchValue({
                 HolidayScheme: this.resultData.HolidaySchmHId
@@ -385,7 +362,6 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
             (response) => {
-              console.log(response);
               this.allWorkingHourSchm = response['ReturnObject'];
               this.OfficeForm.patchValue({
                 WorkingHourScheme: this.resultData.WorkingHourSchmHId
@@ -399,21 +375,13 @@ export class OfficeAddComponent implements OnInit {
     }
   }
 
-  onChangeGrpType(value) {
-    console.log(value.key);
-    console.log(value.value);
-  }
-
   SaveForm(): void {
     this.officeObj = new OfficeObj();
     this.centerGrpObj = new OfficeObj();
-    //this.officeObj = this.OfficeForm.value;
     this.officeObj.RowVersion = "";
-    console.log(this.OfficeForm);
-    console.log(this.OfficeForm.value);
 
     // this.officeObj.RefOfficeId = this.OfficeForm.value.RefOfficeId;
-    this.officeObj.OfficeCode = this.resultData.OfficeCode;
+    this.officeObj.OfficeCode = this.OfficeForm.value.OfficeCode;
     this.officeObj.OfficeShortName = this.OfficeForm.value.OfficeShortName;
     this.officeObj.OfficeName = this.OfficeForm.value.OfficeName;
     this.officeObj.MrOfficeClassCode = this.OfficeForm.value.MrOfficeClassCode;
@@ -423,8 +391,10 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.HolidaySchmHId = this.OfficeForm.value.HolidayScheme;
     this.officeObj.WorkingHourSchmHId = this.OfficeForm.value.WorkingHourScheme;
     this.officeObj.MrKonvenSyariahCode = this.OfficeForm.value.KonSya;
-    this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode;
+    this.officeObj.MrOfficeTypeCode = this.OfficeForm.value.OfficeType;
     this.officeObj.IsOfficeClose = this.OfficeForm.value.OfficeClose;
+    this.officeObj.CntctPersonName = this.OfficeForm.value.CntctPersonName;
+    this.officeObj.CntctPersonJobTitle = this.OfficeForm.value.CntctPersonJobTitle;
 
 
     if (this.officeObj.MrOfficeTypeCode == "CG") {
@@ -460,16 +430,10 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.FaxArea = this.OfficeForm.value.UcAddress.FaxArea;
     this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;
 
-    this.officeObj.CntctPersonName = "asd"
-    this.officeObj.CntctPersonJobTitle = "asd"
-
-    console.log(this.officeObj);
-
     if (this.pageType == "add") {
       if (this.officeObj.MrOfficeTypeCode == "CG") {
         this.httpClient.post(AdInsConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {
-            console.log(response);
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/Office/Paging"]);
           },
@@ -480,7 +444,6 @@ export class OfficeAddComponent implements OnInit {
 
         this.httpClient.post(AdInsConstant.AddCenterGrp, this.centerGrpObj).subscribe(
           (response) => {
-            console.log(response);
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/Office/Paging"]);
           },
@@ -493,7 +456,6 @@ export class OfficeAddComponent implements OnInit {
       else {
         this.httpClient.post(AdInsConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {
-            console.log(response);
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/Office/Paging"]);
           },
@@ -504,11 +466,11 @@ export class OfficeAddComponent implements OnInit {
       }
     }
     else {
+      this.officeObj.OfficeCode = this.resultData.OfficeCode;
       this.officeObj.RefOfficeId = this.resultData.RefOfficeId;
       this.officeObj.RowVersion = this.resultData.RowVersion;
       this.httpClient.post(this.editUrl, this.officeObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response['message']);
           this.router.navigate(["/Office/Paging"]);
         },
@@ -522,15 +484,12 @@ export class OfficeAddComponent implements OnInit {
 
   toggleActive(e) {
     this.isActive = e.target.checked;
-    // console.log(this.test);
   }
 
   toggleAllowAppCreated(e) {
     this.isAllowAppCreated = e.target.checked;
   }
   getLookUp(ev) {
-    console.log("isi ev");
-    console.log(ev);
     this.OfficeForm.patchValue({
       OfficeParent: ev.RefOfficeId
     })
@@ -540,7 +499,6 @@ export class OfficeAddComponent implements OnInit {
     //   City: ev.City,
     //   ZipCode: ev.ZipCode
     // });
-    //console.log(this.CustForm.controls["lookupZipCode"]["controls"]);
     // this.InputLookupObj.nameSelect = ev.zipcode;
     // this.InputLookupObj.idSelect = ev.zipcode;
   }
