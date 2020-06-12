@@ -9,7 +9,10 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th translate>Check All</th>
+            <th>
+            <input type="checkbox" id="checkAll" name="CheckAll" [checked]="checkboxAll"
+                  (change)="SelectAll($event.target.checked)">
+                </th>
             <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
                 name='OfficeCode'>Office Code</span></th>
             <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
