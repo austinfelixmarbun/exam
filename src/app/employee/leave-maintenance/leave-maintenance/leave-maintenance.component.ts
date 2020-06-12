@@ -1,16 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
-import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
-import { HttpClient } from '@angular/common/http';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { Observable } from 'rxjs';
-import { UCSearchComponent } from '@adins/ucsearch';
-import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { formatDate, DecimalPipe } from '@angular/common';
-import { RefEmpLeaveMngmntObj } from 'app/shared/model/RefEmpLeaveMngmntObj.Model';
-import { UcPagingObj } from '../../../shared/model/UcPagingObj.Model';
+import { DecimalPipe } from '@angular/common';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-leave-maintenance',
