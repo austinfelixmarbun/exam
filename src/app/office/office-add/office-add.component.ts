@@ -467,6 +467,7 @@ export class OfficeAddComponent implements OnInit {
     }
     else {
       this.officeObj.OfficeCode = this.resultData.OfficeCode;
+      this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode
       this.officeObj.RefOfficeId = this.resultData.RefOfficeId;
       this.officeObj.RowVersion = this.resultData.RowVersion;
       this.httpClient.post(this.editUrl, this.officeObj).subscribe(
