@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "BIZ_UNIT_NAME",
+            "name": "bu.BIZ_UNIT_NAME",
             "id": "BusinessUnitNameId",
             "value": "",
             "label": "Business Unit",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "OFFICE_NAME",
+            "name": "ofc.OFFICE_NAME",
             "id": "OfficeNameId",
             "value": "",
             "label": "Office",
@@ -19,7 +19,7 @@
         },
         {
             "type": "textbox",
-            "name": "JOB_TITLE_NAME",
+            "name": "jt.JOB_TITLE_NAME",
             "id": "JobTitleNameId",
             "value": "",
             "label": "Job Title",
@@ -27,7 +27,7 @@
         },
         {
             "type": "textbox",
-            "name": "ROLE_NAME",
+            "name": "rl.ROLE_NAME",
             "id": "RoleNameId",
             "value": "",
             "label": "Role",
@@ -35,7 +35,7 @@
         },
         {
             "type": "textbox",
-            "name": "USERNAME",
+            "name": "ussr.USERNAME",
             "id": "UsernameId",
             "value": "",
             "label": "Supervisor",
@@ -70,70 +70,70 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "BUSINESS UNIT",
-            "name": "BusinessUnitName"
+            "name": "bu.BIZ_UNIT_NAME"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "JOB TITLE",
-            "name": "JobTitleName"
+            "name": "jt.JOB_TITLE_NAME"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "SUPERVISOR",
-            "name": "SupervisorName"
+            "name": "ussr.USERNAME"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "OFFICE",
-            "name": "OfficeName"
+            "name": "ofc.OFFICE_NAME"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "ROLE",
-            "name" : "RoleName"
+            "name": "rl.ROLE_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "ACTIVE",
-            "name" : "IsActive"
-        } ,
+            "name": "ur.IS_ACTIVE"
+        },
         {
             "type": "label",
             "position": "center",
-            "label": "ACTION"
+            "label": "Action"
         }
     ],
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "BusinessUnitName"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "JobTitleName"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "SupervisorName"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "OfficeName"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "RoleName"
         },
         {
