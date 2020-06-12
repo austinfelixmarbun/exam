@@ -43,7 +43,6 @@ export class EmployeeAddComponent implements OnInit {
   inputLookupZipCodeObj: InputLookupObj;
   inputLookupBankObj: InputLookupObj;
   resultData: any;
-  isPasswordNotSame: boolean = false;
   generalSettingObj: GeneralSettingObj;
   passwordPattern: string;
   refEmpObj: any;
@@ -55,17 +54,15 @@ export class EmployeeAddComponent implements OnInit {
   RefEmpForm = this.fb.group({
     RefUserId: [0, [Validators.required]],
     Username: ['', [Validators.required]],
-    Password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
-    ConfirmPassword: ['', [Validators.required]],
     IsLockedOut: [false],
-    LoggedInMethod: ['Desktop'],
+    LoggedInMethod: ['DB'],
     RefEmpId: [0, [Validators.required]],
     EmpNo: ['', [Validators.required]],
     EmpName: ['', [Validators.required]],
     JoinDt: ['', [Validators.required]],
     MrIdTypeCode: ['', [Validators.required]],
     IdNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    TaxIdNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    TaxIdNo: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
     IsExt: [false],
     IsActive: [true],
     IsLeave: [false],
@@ -73,29 +70,29 @@ export class EmployeeAddComponent implements OnInit {
     Zipcode: ['', [Validators.required]],
     AreaCode1: ['', [Validators.required]],
     AreaCode2: ['', [Validators.required]],
-    AreaCode3: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    AreaCode4: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    AreaCode3: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(3)]],
+    AreaCode4: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(3)]],
     PhnArea1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     City: ['', [Validators.required]],
     Phn1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    PhnExt1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    PhnArea2: ['', [Validators.pattern('^[0-9]+$')]],
+    PhnExt1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
+    PhnArea2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
     Phn2: ['', [Validators.pattern('^[0-9]+$')]],
-    PhnExt2: ['', [Validators.pattern('^[0-9]+$')]],
-    PhnArea3: ['', [Validators.pattern('^[0-9]+$')]],
+    PhnExt2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
+    PhnArea3: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
     Phn3: ['', [Validators.pattern('^[0-9]+$')]],
-    PhnExt3: ['', [Validators.pattern('^[0-9]+$')]],
+    PhnExt3: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
     FaxArea: ['', [Validators.pattern('^[0-9]+$')]],
     Fax: ['', [Validators.pattern('^[0-9]+$')]],
-    MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$')]],
+    MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
+    MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
     Email1: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]],
     Email2: ['', [Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]],
     RowVersion: [''],
     EmpBankAccId: [0, [Validators.required]],
     RefBankId: [0, [Validators.required]],
     BankBranch: ['', [Validators.required]],
-    BankBranchRegCode: ['', [Validators.required]],
+    BankBranchRegCode: [''],
     BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     BankAccName: ['', [Validators.required]]
   });
@@ -160,11 +157,6 @@ export class EmployeeAddComponent implements OnInit {
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
 
-    // console.log("EmpUrl : " + this.getEmpUrl);
-    // console.log("UsrUrl : " + this.getRefUserUrl);
-    // console.log("EmpBank : " + this.getEmpBankUrl);
-    // console.log("RefBank : " + this.getRefBankUrl);
-    
     if (this.pageType == "edit") {
       var empObj = new RefEmpObj();
       empObj.RefEmpId = this.RefEmpId;
@@ -220,8 +212,6 @@ export class EmployeeAddComponent implements OnInit {
           this.RefEmpForm.patchValue({
             RefUserId: refUserData.RefUserId,
             Username: refUserData.Username,
-            Password: refUserData.Password,
-            ConfirmPassword: refUserData.Password,
             IsLockedOut: refUserData.IsLockedOut,
             LoggedInMethod: refUserData.LoggedInMethod,
             RefEmpId: refEmpData.RefEmpId,
@@ -275,8 +265,6 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   getLookupZipCodeResponse(e){
-    console.log("Test Lookup");
-    console.log(e);
     this.RefEmpForm.patchValue({
       Zipcode: e.Zipcode,
       AreaCode1: e.AreaCode1,
@@ -334,10 +322,11 @@ export class EmployeeAddComponent implements OnInit {
     var refUserData = new RefUserObj();
     refUserData.RefUserId = refEmpFormData.RefUserId;
     refUserData.Username = refEmpFormData.Username;
-    refUserData.Password = refEmpFormData.Password;
     refUserData.IsLockedOut = refEmpFormData.IsLockedOut;
     refUserData.RefEmpId = refEmpFormData.RefEmpId;
     refUserData.LoggedInMethod = refEmpFormData.LoggedInMethod;
+    refUserData.IsActive = refEmpFormData.IsActive;
+    refUserData.Password = "-";
 
     var empBankAccData = new EmpBankAccObj();
     empBankAccData.EmpBankAccId = refEmpFormData.EmpBankAccId;
@@ -360,12 +349,9 @@ export class EmployeeAddComponent implements OnInit {
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          // this.router.navigateByUrl('/Employee', { skipLocationChange: true }).then(() =>
-          // this.router.navigate(['/Employee/Detail']))
           this.router.navigate(["/Employee/Paging"]);
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );
@@ -383,22 +369,9 @@ export class EmployeeAddComponent implements OnInit {
           this.router.navigate(["/Employee/Paging"]);
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );
-    }
-  }
-
-  checkConfirmPassword(){
-    var confirmPass = this.RefEmpForm.get('ConfirmPassword').value;
-    var pass = this.RefEmpForm.get('Password').value;
-
-    if(confirmPass != pass){
-      this.isPasswordNotSame = true;
-    }
-    else{
-      this.isPasswordNotSame = false;
     }
   }
 }
