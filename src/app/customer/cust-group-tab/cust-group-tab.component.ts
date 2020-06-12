@@ -32,6 +32,7 @@ export class CustGroupTabComponent implements OnInit {
   ngOnInit() {
     var custGrp = new CustGrpObj();
     custGrp.CustId = this.CustId;
+    console.log(custGrp.CustId);
     this.httpClient.post(AdInsConstant.GetListCustGrpByCustIdForCustGrpTab, custGrp).subscribe(
       (response: any) => {
         this.CustGrpList = response.CustGrpObjForCustGrpTabs;
