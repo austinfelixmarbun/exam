@@ -1,6 +1,6 @@
 {
   "name": "apex",
-  "version": "1.0.0-26",
+  "version": "1.0.0-28",
   "license": "",
   "scripts": {
     "ng": "ng",
@@ -105,7 +105,7 @@
     "ngx-contextmenu": "^5.4.0",
     "ngx-currency": "^2.3.3",
     "ngx-indexed-db": "^2.2.6",
-    "ngx-infinite-scroll": "^6.0.0",
+    "ngx-infinite-scroll": "^6.9.1",
     "ngx-quill": "4.0.0",
     "ngx-spinner": "^7.1.4",
     "ngx-stepper": "^1.1.6",

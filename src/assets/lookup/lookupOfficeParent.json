@@ -58,7 +58,7 @@
             "type": "sort",
             "position": "center",
             "label": "OFFICE TYPE",
-            "name": " MrOfficeTypeId"
+            "name": " MrOfficeType"
         },
         {
             "type": "label",
