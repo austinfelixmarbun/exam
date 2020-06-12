@@ -223,6 +223,7 @@ export class OfficeAddComponent implements OnInit {
         })
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
         (response) => {
+          this.checkType();
           this.allOfficeType = response['ReturnObject'];
           this.OfficeForm.patchValue({
             OfficeType: this.allOfficeType[0].Key
@@ -253,7 +254,9 @@ export class OfficeAddComponent implements OnInit {
           console.log(error);
         })
 
-    } else if (this.pageType == "edit") {
+
+    }
+    else if (this.pageType == "edit") {
       this.OfficeForm.controls["OfficeCode"].disable();
       this.OfficeForm.controls["OfficeType"].disable();
       this.OfficeForm.controls["MrCenterGrpTypeCode"].disable();
@@ -373,6 +376,7 @@ export class OfficeAddComponent implements OnInit {
 
         })
     }
+
   }
 
   SaveForm(): void {
@@ -386,7 +390,6 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.OfficeName = this.OfficeForm.value.OfficeName;
     this.officeObj.MrOfficeClassCode = this.OfficeForm.value.MrOfficeClassCode;
     this.officeObj.IsActive = this.OfficeForm.value.IsActive;
-    this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
     this.officeObj.IsAllowAppCreated = this.OfficeForm.value.AllowAppCreated;
     this.officeObj.HolidaySchmHId = this.OfficeForm.value.HolidayScheme;
     this.officeObj.WorkingHourSchmHId = this.OfficeForm.value.WorkingHourScheme;
@@ -396,6 +399,12 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.CntctPersonName = this.OfficeForm.value.CntctPersonName;
     this.officeObj.CntctPersonJobTitle = this.OfficeForm.value.CntctPersonJobTitle;
 
+    if(this.OfficeForm.controls.OfficeType.value == 'HO'){
+      this.officeObj.ParentId = null;
+    }
+    if(this.OfficeForm.controls.OfficeType.value != 'HO'){
+      this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
+    }
 
     if (this.officeObj.MrOfficeTypeCode == "CG") {
       this.centerGrpObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
@@ -480,6 +489,17 @@ export class OfficeAddComponent implements OnInit {
         }
       );
 
+    }
+  }
+  checkType() {
+    if (this.OfficeForm.controls.OfficeType.value == 'HO') {
+      this.InputLookupObj.isRequired = false;
+      this.OfficeForm.controls.OfficeParent.clearValidators();
+      this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
+    }
+    else{
+      this.OfficeForm.controls.OfficeParent.setValidators([Validators.required]);
+      this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
     }
   }
 
