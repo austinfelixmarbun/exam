@@ -50,33 +50,32 @@
     ],
     "querystring": { 
         "select": "SELECT A.REF_EMP_ID AS RefEmpId, B.USERNAME AS username, A.EMP_NO AS empNo, A.EMP_NAME AS empName, A.IS_ACTIVE AS isActive, B.REF_USER_ID AS RefUserId",
-        "from": "FROM REF_EMP AS A INNER JOIN REF_USER AS B ON A.REF_EMP_ID = B.REF_EMP_ID",
-        "where": "WHERE A.IS_ACTIVE = 1"
+        "from": "FROM REF_EMP AS A INNER JOIN REF_USER AS B ON A.REF_EMP_ID = B.REF_EMP_ID"
     },
     "headerList" : [ 
         {
             "type" : "sort", 
-            "position" : "center", 
+            "position" : "left", 
             "label" : "Username",
-            "name" : "username" 
+            "name" : "B.USERNAME" 
         },
         {
             "type" : "sort", 
-            "position" : "center", 
-            "label" : "Employee No.", 
-            "name" : "empNo" 
+            "position" : "left", 
+            "label" : "Employee No", 
+            "name" : "A.EMP_NO" 
         },
         {
             "type" : "sort", 
-            "position" : "center", 
+            "position" : "left", 
             "label" : "Employee Name", 
-            "name" : "empName" 
+            "name" : "A.EMP_NAME" 
         },
         {
             "type" : "sort", 
             "position" : "center", 
             "label" : "Active", 
-            "name" : "isActive"
+            "name" : "A.IS_ACTIVE"
         },
         {
             "type" : "label",
@@ -97,7 +96,7 @@
         },
         {
             "type" : "text", 
-            "position" : "center", 
+            "position" : "left", 
             "property" : "empNo" 
         },
         {
