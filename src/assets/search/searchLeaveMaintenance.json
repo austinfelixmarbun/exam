@@ -159,20 +159,12 @@
               "conditions": [
                 {
                   "property": "isPassed",
-                  "value": "1"
-                }
-              ],
-              "isHide": true
-            },
-            {
-              "conditions": [
-                {
-                  "property": "isPassed",
-                  "value": "0"
+                  "value": false,
+                  "restriction": "EQ"
                 }
               ],
               "result": {
-                "type": "edit",
+                "type": "url",
                 "path": "/Employee/Leave/Add",
                 "param": [
                   {
@@ -185,12 +177,21 @@
                   }
                 ]
               }
+            },
+            {
+              "conditions": [
+                {
+                  "property": "isPassed",
+                  "value": false,
+                  "restriction": "EQ"
+                }
+              ],
+              "result": {
+                "type": "delete",
+                "property": "refEmpLeaveMngmntId"
+              }
             }
           ]
-        },
-        {
-          "type": "delete",
-          "property": "refEmpLeaveMngmntId"
         }
       ]
     }
