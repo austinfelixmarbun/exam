@@ -1,5 +1,6 @@
 {
     "title": "Negative Asset",
+    "exportExcel": true,
     "component": [
         {
             "type" : "dropdown",
