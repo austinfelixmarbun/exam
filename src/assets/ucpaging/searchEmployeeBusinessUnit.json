@@ -96,14 +96,14 @@
             "type": "sort",
             "position": "left",
             "label": "ROLE",
-            "name" : "rl.ROLE_NAME"
+            "name": "rl.ROLE_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "ACTIVE",
-            "name" : "ur.IS_ACTIVE"
-        } ,
+            "name": "ur.IS_ACTIVE"
+        },
         {
             "type": "label",
             "position": "center",
