@@ -42,6 +42,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   listSelectedId: Array<any> = [];
   listDeletedId: Array<any> = [];
   Data = [];
+  checkboxAll: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location,) {
     this.route.queryParams.subscribe(params => {
@@ -105,7 +106,24 @@ export class OfficeAreaMemberAddComponent implements OnInit {
     }
     this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
+  SelectAll(condition) {
+    this.checkboxAll = condition;
+    if (condition) {
+      for (let i = 0; i < this.resultData.Data.length; i++) {
+        if (this.listSelectedId.indexOf(this.resultData.Data[i].RefOfficeId) < 0) {
+          this.listSelectedId.push(this.resultData.Data[i].RefOfficeId);
+        }
+      }
 
+    } else {
+      for (let i = 0; i < this.resultData.Data.length; i++) {
+        let index = this.listSelectedId.indexOf(this.resultData.Data[i].RefOfficeId);
+        if (index > -1) {
+          this.listSelectedId.splice(index, 1);
+        }
+      }
+    }
+  }
   Checked(RefOfficeId: any, isChecked: any): void {
     if (isChecked) {
       this.listSelectedId.push(RefOfficeId);
@@ -146,7 +164,8 @@ export class OfficeAreaMemberAddComponent implements OnInit {
       }
       this.inputObj.addCritInput = this.arrAddCrit;
       this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
-      this.listSelectedId = [];
+      this.listSelectedId = []
+      this.checkboxAll = false;
     } else {
       this.toastr.typeErrorCustom("Please select at least one Office");
     }
