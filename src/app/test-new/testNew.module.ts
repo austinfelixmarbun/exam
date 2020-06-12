@@ -37,6 +37,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { UcreportModule } from "@adins/ucreport";
 import { Dummy8Component } from './dummy8/dummy8.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { UcviewgenericModule } from "@adins/ucviewgeneric";
 
 @NgModule({
     imports: [
@@ -56,7 +57,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         NgxStepperModule,
         SharingComponentModule,
         UcreportModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        UcviewgenericModule
     ],
     declarations: [
         Dummy1Component,
