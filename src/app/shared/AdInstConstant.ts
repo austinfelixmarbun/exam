@@ -146,12 +146,12 @@ export class AdInsConstant {
   //REF-EMP
   public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
   public static GetRefEmployeeById = environment.FoundationR3Url + "/RefEmp/GetRefEmpByRefEmpId"
-  public static AddRefEmp = "/RefEmp/AddRefEmp";
-  public static EditRefEmp = "/RefEmp/EditRefEmp";
+  public static AddRefEmp = environment.FoundationR3Url + "/RefEmp/AddRefEmp";
+  public static EditRefEmp = environment.FoundationR3Url +  "/RefEmp/EditRefEmp";
   public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
-  public static AddEmpBankAcc = "/EmpBankAcc/AddEmpBankAcc";
-  public static EditEmpBankAcc = "/EmpBankAcc/EditEmpBankAcc";
-  public static GetEmpBankAccByRefEmpId = "/EmpBankAcc/GetEmpBankAccByRefEmpId";
+  public static AddEmpBankAcc = environment.FoundationR3Url + "/EmpBankAcc/AddEmpBankAcc";
+  public static EditEmpBankAcc = environment.FoundationR3Url + "/EmpBankAcc/EditEmpBankAcc";
+  public static GetEmpBankAccByRefEmpId = environment.FoundationR3Url + "/EmpBankAcc/GetEmpBankAccByRefEmpId";
   public static AddRefEmpAndEmpBankAcc = "/RefEmp/AddRefEmpAndEmpBankAcc";
   public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
   public static DeleteRefEmpAndEmpBankAcc = "/RefEmp/DeleteRefEmpAndEmpBankAcc";
@@ -170,7 +170,7 @@ export class AdInsConstant {
   public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
   public static AddRefUser = "/UserManagement/AddRefUser";
   public static EditRefUser = "/UserManagement/EditRefUser";
-  public static EditRefUserForRefEmpR3 = "/RefUser/EditRefUserForRefEmp";
+  public static EditRefUserForRefEmpR3 = environment.FoundationR3Url + "/RefUser/EditRefUserForRefEmp";
   // public static EditRefUserForRefEmpR3 = "/RefUser/EditRefUserForRefEmp";
   public static ChangePassword = "/UserManagement/ChangePassword";
   public static GetRefUser = "/UserManagement/GetRefUser";
@@ -178,10 +178,10 @@ export class AdInsConstant {
   public static ValidatePwd = "/UserManagement/ValidatePwd";
   public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
   public static ResetPassword = "/UserManagement/ResetPassword";
-  public static AddRefUserR3 = "/RefUser/AddRefUser";
+  public static AddRefUserR3 = environment.FoundationR3Url + "/RefUser/AddRefUser";
   public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
   public static GetRefUserByUsername = environment.FoundationR3Url + "/RefUser/GetRefUserByUsername";
-  public static GetRefUserByRefEmpId = "/RefUser/GetRefUserByRefEmpId";
+  public static GetRefUserByRefEmpId = environment.FoundationR3Url + "/RefUser/GetRefUserByRefEmpId";
   public static AddRefUserRole = environment.FoundationR3Url + "/RefUserRole/AddRefUserRole"
   public static EditRefUserRole = environment.FoundationR3Url + "/RefUserRole/EditRefUserRole";
   public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
