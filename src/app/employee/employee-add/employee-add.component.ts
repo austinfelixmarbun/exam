@@ -50,7 +50,8 @@ export class EmployeeAddComponent implements OnInit {
   empBankAccObj: any;
   refBankObj: any;
   IdTypeList:any;
-
+  businessDt: any;
+  
   RefEmpForm = this.fb.group({
     RefUserId: [0, [Validators.required]],
     Username: ['', [Validators.required]],
@@ -129,6 +130,9 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDt = new Date(context["BusinessDt"]);
+
     var RefMasterIdType = {
       RefMasterTypeCode: "ID_TYPE",
     }
@@ -281,6 +285,11 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   SaveForm() {
+    if (Date.parse(this.RefEmpForm.controls.JoinDt.value) > Date.parse(formatDate(this.businessDt,  'yyyy-MM-dd', 'en-US'))) {
+      this.toastr.errorMessage("Join Date Must Be Lesser Than Business Date")
+      return;
+    }
+
     this.spinner.show();
     var refEmpFormData = this.RefEmpForm.value;
 
