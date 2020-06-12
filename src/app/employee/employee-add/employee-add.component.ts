@@ -129,7 +129,6 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("EMPLOYEE")
     var RefMasterIdType = {
       RefMasterTypeCode: "ID_TYPE",
     }
