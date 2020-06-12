@@ -125,7 +125,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.http.post(this.addUrl, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["Employee/leaveMaintenance"]);
+            this.router.navigate(["Employee/Leave/Paging"]);
           },
           error => {
             console.log(error);
@@ -137,7 +137,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.http.post(this.editUrl, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["Employee/leaveMaintenance"]);
+            this.router.navigate(["Employee/Leave/Paging"]);
           },
           error => {
             console.log(error);
