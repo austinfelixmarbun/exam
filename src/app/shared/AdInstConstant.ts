@@ -224,7 +224,7 @@ export class AdInsConstant {
   public static GetRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
   public static AddRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/AddRefBizUnit";
   public static EditRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/EditRefBizUnit";
-  public static DeleteRefBizUnit = environment.FoundationR3Url + "/RefBizUnit/DeleteRefBizUnit";
+  public static DeleteRefBizUnit = "/RefBizUnit/DeleteRefBizUnit";
 
   //REF COY
   public static GetRefCoyPaging = environment.FoundationR3Url + "/RefCoy/GetRefCoyPaging";
