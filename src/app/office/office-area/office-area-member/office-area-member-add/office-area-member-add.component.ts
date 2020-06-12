@@ -108,14 +108,11 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   }
   SelectAll(condition) {
     this.checkboxAll = condition;
-    console.log(condition);
     if (condition) {
       for (let i = 0; i < this.resultData.Data.length; i++) {
         if (this.listSelectedId.indexOf(this.resultData.Data[i].RefOfficeId) < 0) {
           this.listSelectedId.push(this.resultData.Data[i].RefOfficeId);
         }
-        console.log("aaa")
-        console.log(this.resultData)
       }
 
     } else {
@@ -124,7 +121,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
         if (index > -1) {
           this.listSelectedId.splice(index, 1);
         }
-        console.log(this.resultData[i]);
       }
     }
   }
