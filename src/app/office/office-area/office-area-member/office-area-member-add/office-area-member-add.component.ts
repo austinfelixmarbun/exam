@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
+import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 
 @Component({
   selector: 'app-office-area-member-add',
@@ -22,7 +24,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   @ViewChild(UCSearchComponent) UCSearchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
-  RefOfficeId: any;
+  RefOfficeAreaId: any;
   refOfficeAreaObj: any;
   //** End UC Search **//
   resultData: any;
@@ -47,7 +49,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location,) {
     this.route.queryParams.subscribe(params => {
       if (params['RefOfficeAreaId'] != null) {
-        this.RefOfficeId = params['RefOfficeAreaId'];
+        this.RefOfficeAreaId = params['RefOfficeAreaId'];
       }
     });
   }
@@ -212,6 +214,20 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   }
 
   SaveOfficeAreaMember() {
-    //belum ada function save
+    var RequestItem = {
+      RefOfficeAreaIdObj : {
+        RefOfficeAreaId : this.RefOfficeAreaId
+      },
+      ListRequestRefOfficeId : this.tempData
+    }
+    this.http.post<Array<RefOfficeObj>>(AdInsConstant.AddRefOfficeAreaMember, RequestItem).subscribe(
+      (response) => {
+        this.toastr.successMessage(response['message']);
+        this.router.navigate(["/Office/OfficeArea/Member"], { queryParams: { "RefOfficeAreaId": this.RefOfficeAreaId } });
+      },
+      (error) => {
+          console.log(error);
+      });
+    
   }
 }
