@@ -12,7 +12,7 @@
     },
     {
       "type": "dropdown",
-      "name": "A.isPassed",
+      "name": "A.IS_PASSED",
       "id": "isPassedId",
       "value": "Passed",
       "placeholder": "Placeholder",
@@ -84,33 +84,33 @@
   "headerList": [
     {
       "type": "sort",
-      "position": "center",
+      "position": "left",
       "label": "Employee No",
-      "name": "empNo"
+      "name": "B.EMP_NO"
     },
     {
       "type": "sort",
-      "position": "center",
+      "position": "left",
       "label": "Employee Name",
-      "name": "empName"
+      "name": "B.EMP_NAME"
     },
     {
       "type": "sort",
-      "position": "center",
+      "position": "left",
       "label": "Start Date",
-      "name": "startDt"
+      "name": "A.START_DT"
     },
     {
       "type": "sort",
-      "position": "center",
+      "position": "left",
       "label": "End Date",
-      "name": "endDt"
+      "name": "A.END_DT"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "Passed",
-      "name": "isPassed"
+      "name": "A.IS_PASSED"
     },
     {
       "type": "label",

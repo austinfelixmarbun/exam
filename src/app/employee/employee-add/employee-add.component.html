@@ -21,25 +21,6 @@
                 <show-errors [control]="RefEmpForm.controls.Username" [submit]="enjiForm.submitted"></show-errors>
               </div>
             </div>
-            <div class="form-group row adins-required" *ngIf="pageType == 'add'">
-              <label class="col-md-3  adInsLabel" for="Password">Password</label>
-              <div class="col-md-9">
-                <input type="password" class="form-control adInsInput width-50-per" formControlName="Password" required
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.Password.invalid }">
-                <show-errors [control]="RefEmpForm.controls.Password" [submit]="enjiForm.submitted"></show-errors>
-              </div>
-            </div>
-            <div class="form-group row adins-required" *ngIf="pageType == 'add'">
-              <label class="col-md-3  adInsLabel" for="ConfirmPassword">Re-enter Password</label>
-              <div class="col-md-9">
-                <input type="password" class="form-control adInsInput width-50-per" formControlName="ConfirmPassword" required
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && (RefEmpForm.controls.ConfirmPassword.invalid || isPasswordNotSame) }" (blur)="checkConfirmPassword()">
-                <show-errors [control]="RefEmpForm.controls.ConfirmPassword" [submit]="enjiForm.submitted"></show-errors>
-                <div *ngIf="isPasswordNotSame" class="invalid-feedback d-block">
-                  <div translate>Password Must Be Same</div>
-                </div>
-              </div>
-            </div>
             <div class="form-group row" *ngIf="pageType == 'edit'">
               <label class="col-md-3  adInsLabel" for="IsLockedOut">Locked</label>
               <div class="col-md-9">
@@ -68,7 +49,7 @@
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="JoinDt">Join Date </label>
               <div class="col-md-9">
-                <input type="date" id="joinDt" class="form-control adInsInput width-25-per" formControlName="JoinDt" required
+                <input type="date" id="joinDt" max="{{businessDt | date: 'yyyy-MM-dd'}}" class="form-control adInsInput width-25-per" formControlName="JoinDt" required
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.JoinDt.invalid }">
                 <show-errors [control]="RefEmpForm.controls.JoinDt" [submit]="enjiForm.submitted"></show-errors>
               </div>
@@ -95,7 +76,7 @@
             <div class="form-group row">
               <label class="col-md-3  adInsLabel" for="NpwpNo">NPWP No</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput width-75-per" formControlName="TaxIdNo" required />
+                <input type="text" class="form-control adInsInput width-75-per" formControlName="TaxIdNo"/>
               </div>
             </div>
             <div class="form-group row">
