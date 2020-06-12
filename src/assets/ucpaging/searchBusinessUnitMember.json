@@ -94,43 +94,43 @@
             "type": "sort",
             "position": "center",
             "label": "USERNAME",
-            "name": "Username"
+            "name": "B.USERNAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "EMPLOYEE NAME",
-            "name": "EmployeeName"
+            "name": "C.EMP_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "EMPLOYEE NO",
-            "name": "EmployeeNo"
+            "name": "C.EMP_NO"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "JOB TITLE",
-            "name": "JobTitleName"
+            "name": "D.JOB_TITLE_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "SUPERVISOR",
-            "name": "Supervisor"
+            "name": "A.SPV_ID"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "OFFICE NAME",
-            "name": "OfficeName"
+            "name": "E.OFFICE_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "ACTIVE",
-            "name": "IsActive"
+            "name": "A.IS_ACTIVE"
         }
     ],
     "bodyList": [
