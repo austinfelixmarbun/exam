@@ -78,7 +78,7 @@ export class RefJobTitleAddComponent implements OnInit {
       this.http.post(this.addUrl, this.rjtObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/organization/refjobtitle"]);
+          this.router.navigate(["/Organization/JobTitle"]);
         },
         error => {
           console.log(error);
@@ -90,7 +90,7 @@ export class RefJobTitleAddComponent implements OnInit {
       this.http.post(this.editUrl, this.rjtObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/organization/refjobtitle"]);
+          this.router.navigate(["/Organization/JobTitle"]);
         },
         error => {
           console.log(error);
