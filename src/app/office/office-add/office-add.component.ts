@@ -154,6 +154,7 @@ export class OfficeAddComponent implements OnInit {
     this.InputLookupObj.urlEnviPaging = "http://r3app-server.ad-ins.com/Foundation_R3";
     this.InputLookupObj.pagingJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.genericJson = "./assets/lookup/lookupOfficeParent.json";
+    this.InputLookupObj.isRequired = true;
 
     this.refMasterObj = new RefMasterObj();
     this.refMasterObj.RefMasterTypeCode = 'OFFICE_CLASS';
@@ -223,7 +224,6 @@ export class OfficeAddComponent implements OnInit {
         })
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
         (response) => {
-          this.checkType();
           this.allOfficeType = response['ReturnObject'];
           this.OfficeForm.patchValue({
             OfficeType: this.allOfficeType[0].Key
@@ -498,6 +498,7 @@ export class OfficeAddComponent implements OnInit {
       this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
     }
     else{
+      this.InputLookupObj.isRequired = true;
       this.OfficeForm.controls.OfficeParent.setValidators([Validators.required]);
       this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
     }
