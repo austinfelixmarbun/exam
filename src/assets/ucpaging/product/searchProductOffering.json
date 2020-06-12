@@ -163,7 +163,7 @@
       ]
     },
     {
-      "type": "text",
+      "type": "date",
       "position": "center",
       "property": "EndDt"
     },
