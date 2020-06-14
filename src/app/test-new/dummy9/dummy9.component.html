@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title" translate> Vendor Scheme Member </h4>
+    </div>
+    <div class="card-body">
+        <app-uc-temp *ngIf="tempPagingObj.isReady" [tempPagingObj]="tempPagingObj" (callback)="getListTemp($event)">
+        </app-uc-temp>
+
+        <div class="card-header">
+            <div class="text-right">
+                <button type="button" class="btn btn-raised btn-warning mr-1"
+                    [routerLink]="['/Vendor/VendorScheme/Member']"
+                    [queryParams]="{VendorSchmId:VendorSchmId,MrVendorCategoryCode:MrVendorCategoryCode}" translate>
+                    <i class="fa fa-arrow-circle-left"></i> Back
+                </button>
+                <button type="submit" (click)="SaveVendorSchemeMember()" class="btn btn-raised btn-primary" translate>
+                    <i class="far fa-check-square"></i> Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

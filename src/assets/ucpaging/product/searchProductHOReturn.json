@@ -1,0 +1,140 @@
+{
+  "title": "Edit Returned Product",
+  "exportExcel": false,
+  "component": [
+    {
+      "type": "textbox",
+      "name": "Prod_Code",
+      "id": "ProdCodeId",
+      "value": "",
+      "label": "PRODUCT CODE",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "Prod_Name",
+      "id": "ProdNameId",
+      "value": "",
+      "label": "PRODUCT NAME",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "A.PROD_DESCR",
+      "id": "ProdDescId",
+      "value": "",
+      "label": "PRODUCT DESCRIPTION",
+      "placeholder": "Placeholder"
+    }
+  ],
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Product Code",
+      "name": "ProdCode"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Product Name",
+      "name": "ProdName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Product Description",
+      "name": "A.PROD_DESCR"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Current Version",
+      "name": "CurrentProdVersion"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Draft Version",
+      "name": "DraftProdVersion"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT A.PROD_CODE AS ProdCode, A.PROD_NAME AS ProdName, B.PROD_VERSION AS CurrentProdVersion, C.PROD_VERSION AS DraftProdVersion, A.END_DT AS EndDt, A.PROD_STAT AS ProdStat, A.PROD_ID AS ProdId, A.DRAFT_PROD_H_ID AS DraftProdHId, A.CURRENT_PROD_H_ID AS prodHId, RTX.TRX_TYPE_CODE AS TrxTypeCode, RS.DESCR AS ProdStatDesc, A.PROD_DESCR AS Descr, C.REQUEST_DT AS ReqDt",
+    "from": "FROM dbo.PROD A WITH(NOLOCK) LEFT JOIN dbo.PROD_H B WITH(NOLOCK) ON A.CURRENT_PROD_H_ID=B.PROD_H_ID LEFT JOIN dbo.PROD_H C WITH(NOLOCK) ON A.DRAFT_PROD_H_ID=C.PROD_H_ID JOIN dbo.REF_STATUS RS WITH(NOLOCK) ON RS.REF_STATUS_CODE = A.PROD_STAT JOIN dbo.REF_TRX_TYPE RTX WITH(NOLOCK) ON RTX.REF_TRX_TYPE_ID = RS.REF_TRX_TYPE_ID",
+    "where": "WHERE RTX.TRX_TYPE_CODE = 'PROD'"
+  },
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "center",
+      "property": "ProdCode"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "ProdName"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "Descr"
+    },
+    {
+      "type": "link",
+      "position": "center",
+      "property": "CurrentProdVersion",
+      "path": "../HOView",
+      "target": "_blank",
+      "param": [
+        {
+          "type": "prodHId",
+          "property": "prodHId"
+        }
+      ]
+    },
+    {
+      "type": "link",
+      "position": "center",
+      "property": "DraftProdVersion",
+      "path": "../HOView",
+      "target": "_blank",
+      "param": [
+        {
+          "type": "prodHId",
+          "property": "DraftProdHId"
+        }
+      ]
+    },
+    {
+
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "switch",
+          "case": [
+            {
+              "conditions": [
+                {
+                  "property": "ProdStat",
+                  "value": "DEACT",
+                  "restriction": "NEQ"
+                }
+              ],
+              "result": {
+                "type": "callback",
+                "key": "EditProductOffering"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

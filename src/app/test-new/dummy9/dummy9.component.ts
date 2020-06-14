@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-vendor-scheme-member-add',
-  templateUrl: './vendor-scheme-member-add.component.html',
-  styleUrls: ['./vendor-scheme-member-add.component.scss']
+  selector: 'app-dummy9',
+  templateUrl: './dummy9.component.html',
+  styleUrls: ['./dummy9.component.scss']
 })
-export class VendorSchemeMemberAddComponent implements OnInit {
+export class Dummy9Component implements OnInit {
 
   VendorSchmId: number = 0;
   MrVendorCategoryCode: string;
@@ -75,7 +75,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       this.toastr.error('Please add at least one data');
       return;
     }
-    
+    return true;
     var obj = {
       VendorSchmId: this.VendorSchmId,
       VendorId: this.listSelectedId
@@ -83,11 +83,12 @@ export class VendorSchemeMemberAddComponent implements OnInit {
 
     this.http.post(AdInsConstant.AddVendorSchmMember, obj).subscribe(
       (response) => {
-        this.toastr.success(response["message"], 'Success!');
+        console.log(response);
         this.router.navigate(['/Vendor/VendorScheme/Member'], { queryParams: { VendorSchmId: this.VendorSchmId } });
       },
       (error) => {
         console.log(error);
       });
+
   }
 }

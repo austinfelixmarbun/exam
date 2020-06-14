@@ -1,17 +1,14 @@
-import { Component, OnInit, ViewChild} from "@angular/core";
+import { Component, OnInit} from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { environment } from "environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
-import { NgForm, FormBuilder, Validators, AbstractControl, FormGroup, FormControl } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { formatDate, DatePipe } from "@angular/common";
 import { RefBankObj } from "app/shared/model/RefBankObj.Model";
-import { UcAddressComponent } from "app/shared/UserControl/ucAddress/ucAddress.component";
-import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
-import { LookuprefbankComponent } from "@adins/lookuprefbank";
 import { NgxSpinnerService } from "ngx-spinner";
 import { RefUserObj } from "app/shared/model/RefUserObj.Model";
 import { EmpBankAccObj } from "app/shared/model/EmpBankAccObj.Model";
@@ -26,24 +23,11 @@ import { forkJoin } from "rxjs";
   providers: [NGXToastrService]
 })
 export class EmployeeAddComponent implements OnInit {
-  private getEmpUrl: string = AdInsConstant.GetRefEmployeeById;
-  private getRefUserUrl: string = environment.FoundationR3Url + AdInsConstant.GetRefUserByRefEmpId;
-  private getEmpBankUrl: string = environment.FoundationR3Url + AdInsConstant.GetEmpBankAccByRefEmpId;
-  private getGeneralSettingUrl : string = AdInsConstant.GetGeneralSettingByCode;
-  private getRefBankUrl: string = AdInsConstant.GetRefBankByRefBankIdAsync;
-  private addUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefEmp;
-  private editUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefEmp;
-  private addUsrUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefUserR3;
-  private editUsrUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefUserForRefEmpR3;
-  private addEmpBankAcc: string = environment.FoundationR3Url + AdInsConstant.AddEmpBankAcc;
-  private editEmpBankAcc: string = environment.FoundationR3Url + AdInsConstant.EditEmpBankAcc;
-  
   pageType: string = "add";
   RefEmpId: number;
   inputLookupZipCodeObj: InputLookupObj;
   inputLookupBankObj: InputLookupObj;
   resultData: any;
-  isPasswordNotSame: boolean = false;
   generalSettingObj: GeneralSettingObj;
   passwordPattern: string;
   refEmpObj: any;
@@ -51,21 +35,20 @@ export class EmployeeAddComponent implements OnInit {
   empBankAccObj: any;
   refBankObj: any;
   IdTypeList:any;
-
+  businessDt: Date;
+  
   RefEmpForm = this.fb.group({
     RefUserId: [0, [Validators.required]],
     Username: ['', [Validators.required]],
-    Password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
-    ConfirmPassword: ['', [Validators.required]],
     IsLockedOut: [false],
-    LoggedInMethod: ['Desktop'],
+    LoggedInMethod: ['DB'],
     RefEmpId: [0, [Validators.required]],
     EmpNo: ['', [Validators.required]],
     EmpName: ['', [Validators.required]],
     JoinDt: ['', [Validators.required]],
     MrIdTypeCode: ['', [Validators.required]],
     IdNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    TaxIdNo: ['', [Validators.required]],
+    TaxIdNo: [''],
     IsExt: [false],
     IsActive: [true],
     IsLeave: [false],
@@ -73,29 +56,29 @@ export class EmployeeAddComponent implements OnInit {
     Zipcode: ['', [Validators.required]],
     AreaCode1: ['', [Validators.required]],
     AreaCode2: ['', [Validators.required]],
-    AreaCode3: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    AreaCode4: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    AreaCode3: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(3)]],
+    AreaCode4: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(3)]],
     PhnArea1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     City: ['', [Validators.required]],
     Phn1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    PhnExt1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    PhnArea2: ['', [Validators.pattern('^[0-9]+$')]],
+    PhnExt1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
+    PhnArea2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
     Phn2: ['', [Validators.pattern('^[0-9]+$')]],
-    PhnExt2: ['', [Validators.pattern('^[0-9]+$')]],
-    PhnArea3: ['', [Validators.pattern('^[0-9]+$')]],
+    PhnExt2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
+    PhnArea3: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
     Phn3: ['', [Validators.pattern('^[0-9]+$')]],
-    PhnExt3: ['', [Validators.pattern('^[0-9]+$')]],
+    PhnExt3: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
     FaxArea: ['', [Validators.pattern('^[0-9]+$')]],
     Fax: ['', [Validators.pattern('^[0-9]+$')]],
-    MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$')]],
+    MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
+    MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
     Email1: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]],
     Email2: ['', [Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]],
     RowVersion: [''],
     EmpBankAccId: [0, [Validators.required]],
     RefBankId: [0, [Validators.required]],
     BankBranch: ['', [Validators.required]],
-    BankBranchRegCode: ['', [Validators.required]],
+    BankBranchRegCode: [''],
     BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     BankAccName: ['', [Validators.required]]
   });
@@ -120,7 +103,7 @@ export class EmployeeAddComponent implements OnInit {
 
     this.generalSettingObj = new GeneralSettingObj();
     this.generalSettingObj.GsCode = "PASSWORD_REGEX";
-    httpClient.post(this.getGeneralSettingUrl, this.generalSettingObj).subscribe(
+    httpClient.post(AdInsConstant.GetGeneralSettingByCode, this.generalSettingObj).subscribe(
       (response) => {
         this.resultData = response;
         this.passwordPattern = this.resultData.GsValue;
@@ -132,6 +115,9 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDt = new Date(context["BusinessDt"]);
+
     var RefMasterIdType = {
       RefMasterTypeCode: "ID_TYPE",
     }
@@ -160,16 +146,11 @@ export class EmployeeAddComponent implements OnInit {
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
 
-    // console.log("EmpUrl : " + this.getEmpUrl);
-    // console.log("UsrUrl : " + this.getRefUserUrl);
-    // console.log("EmpBank : " + this.getEmpBankUrl);
-    // console.log("RefBank : " + this.getRefBankUrl);
-    
     if (this.pageType == "edit") {
       var empObj = new RefEmpObj();
       empObj.RefEmpId = this.RefEmpId;
 
-      this.httpClient.post(this.getEmpUrl, empObj).pipe(
+      this.httpClient.post(AdInsConstant.GetRefEmployeeById, empObj).pipe(
         map( response => {
           return response;
         }),
@@ -182,8 +163,8 @@ export class EmployeeAddComponent implements OnInit {
           var tempResponse = [];
           tempResponse.push(response);
 
-          const refUserObj = this.httpClient.post(this.getRefUserUrl, tempRefUser);
-          const empBankAccObj = this.httpClient.post(this.getEmpBankUrl, tempEmpBankAcc);
+          const refUserObj = this.httpClient.post(AdInsConstant.GetRefUserByRefEmpId, tempRefUser);
+          const empBankAccObj = this.httpClient.post(AdInsConstant.GetEmpBankAccByRefEmpId, tempEmpBankAcc);
 
           return forkJoin([tempResponse, refUserObj, empBankAccObj]);
         }),
@@ -198,7 +179,7 @@ export class EmployeeAddComponent implements OnInit {
           var tempResponseEmpBank = [];
           tempResponseEmpBank.push(response[2]);
 
-          const refBankObj = this.httpClient.post(this.getRefBankUrl, tempRefBank);
+          const refBankObj = this.httpClient.post(AdInsConstant.GetRefBankByRefBankIdAsync, tempRefBank);
 
           return forkJoin([tempResponseEmp, tempResponseUsr, tempResponseEmpBank, refBankObj]);
         })
@@ -220,8 +201,6 @@ export class EmployeeAddComponent implements OnInit {
           this.RefEmpForm.patchValue({
             RefUserId: refUserData.RefUserId,
             Username: refUserData.Username,
-            Password: refUserData.Password,
-            ConfirmPassword: refUserData.Password,
             IsLockedOut: refUserData.IsLockedOut,
             LoggedInMethod: refUserData.LoggedInMethod,
             RefEmpId: refEmpData.RefEmpId,
@@ -275,8 +254,6 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   getLookupZipCodeResponse(e){
-    console.log("Test Lookup");
-    console.log(e);
     this.RefEmpForm.patchValue({
       Zipcode: e.Zipcode,
       AreaCode1: e.AreaCode1,
@@ -293,6 +270,11 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   SaveForm() {
+    if (Date.parse(this.RefEmpForm.controls.JoinDt.value) > Date.parse(formatDate(this.businessDt,  'yyyy-MM-dd', 'en-US'))) {
+      this.toastr.errorMessage("Join Date Must Be Lesser Than Business Date")
+      return;
+    }
+
     this.spinner.show();
     var refEmpFormData = this.RefEmpForm.value;
 
@@ -334,10 +316,11 @@ export class EmployeeAddComponent implements OnInit {
     var refUserData = new RefUserObj();
     refUserData.RefUserId = refEmpFormData.RefUserId;
     refUserData.Username = refEmpFormData.Username;
-    refUserData.Password = refEmpFormData.Password;
     refUserData.IsLockedOut = refEmpFormData.IsLockedOut;
     refUserData.RefEmpId = refEmpFormData.RefEmpId;
     refUserData.LoggedInMethod = refEmpFormData.LoggedInMethod;
+    refUserData.IsActive = refEmpFormData.IsActive;
+    refUserData.Password = "-";
 
     var empBankAccData = new EmpBankAccObj();
     empBankAccData.EmpBankAccId = refEmpFormData.EmpBankAccId;
@@ -349,23 +332,20 @@ export class EmployeeAddComponent implements OnInit {
     empBankAccData.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
-      this.httpClient.post(this.addUrl, refEmpData).pipe(
+      this.httpClient.post(AdInsConstant.AddRefEmp, refEmpData).pipe(
         map( response => {
           this.resultData = response;
           refUserData.RefEmpId = this.resultData.RefEmpId;
           empBankAccData.RefEmpId = this.resultData.RefEmpId;
         }),
-        mergeMap(() => this.httpClient.post(this.addEmpBankAcc, empBankAccData)),
-        mergeMap(() => this.httpClient.post(this.addUsrUrl, refUserData))
+        mergeMap(() => this.httpClient.post(AdInsConstant.AddEmpBankAcc, empBankAccData)),
+        mergeMap(() => this.httpClient.post(AdInsConstant.AddRefUserR3, refUserData))
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          // this.router.navigateByUrl('/Employee', { skipLocationChange: true }).then(() =>
-          // this.router.navigate(['/Employee/Detail']))
           this.router.navigate(["/Employee/Paging"]);
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );
@@ -373,32 +353,19 @@ export class EmployeeAddComponent implements OnInit {
     else {
       empBankAccData.RowVersion = this.empBankAccObj.RowVersion;
       refUserData.RowVersion = this.refUserObj.RowVersion;
-      this.httpClient.post(this.editUrl, refEmpFormData).pipe(
-        map( response => {}),
-        mergeMap(() => this.httpClient.post(this.editEmpBankAcc, empBankAccData)),
-        mergeMap(() => this.httpClient.post(this.editUsrUrl, refUserData))
+      this.httpClient.post(AdInsConstant.EditRefEmp, refEmpFormData).pipe(
+        map( () => {}),
+        mergeMap(() => this.httpClient.post(AdInsConstant.EditEmpBankAcc, empBankAccData)),
+        mergeMap(() => this.httpClient.post(AdInsConstant.EditRefUserForRefEmpR3, refUserData))
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(["/Employee/Paging"]);
         },
         (error) => {
-          console.log("Error");
           console.log(error);
         }
       );
-    }
-  }
-
-  checkConfirmPassword(){
-    var confirmPass = this.RefEmpForm.get('ConfirmPassword').value;
-    var pass = this.RefEmpForm.get('Password').value;
-
-    if(confirmPass != pass){
-      this.isPasswordNotSame = true;
-    }
-    else{
-      this.isPasswordNotSame = false;
     }
   }
 }
