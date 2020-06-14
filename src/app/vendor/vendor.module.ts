@@ -57,7 +57,7 @@ import { VendorBranchViewComponent } from './vendor-branch/vendor-branch-view/ve
 import { HoContactPersonInfoComponent } from './vendor-ho/vendor-ho-info/ho-contact-person-info/ho-contact-person-info.component';
 import { HoGroupInfoComponent } from './vendor-ho/vendor-ho-info/ho-group-info/ho-group-info.component';
 import { HoBranchInfoComponent } from './vendor-ho/vendor-ho-info/ho-branch-info/ho-branch-info.component';
-
+import { UcaddtotempModule } from '@adins/ucaddtotemp';
 
 @NgModule({
   imports: [
@@ -79,7 +79,8 @@ import { HoBranchInfoComponent } from './vendor-ho/vendor-ho-info/ho-branch-info
     ArchwizardModule,
     MatTabsModule,
     UcShowErrorsModule,
-    UcaddressModule
+    UcaddressModule,
+    UcaddtotempModule
   ],
   declarations: [
     VendorComponent,

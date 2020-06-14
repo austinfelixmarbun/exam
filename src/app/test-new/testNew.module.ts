@@ -38,6 +38,10 @@ import { UcreportModule } from "@adins/ucreport";
 import { Dummy8Component } from './dummy8/dummy8.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
+import { Dummy9Component } from './dummy9/dummy9.component';
+import { UcTempComponent } from './uc-temp/uc-temp.component';
+import { UCSearchModule } from "@adins/ucsearch";
+import { UcgridfooterModule } from "@adins/ucgridfooter";
 
 @NgModule({
     imports: [
@@ -58,7 +62,9 @@ import { UcviewgenericModule } from "@adins/ucviewgeneric";
         SharingComponentModule,
         UcreportModule,
         InfiniteScrollModule,
-        UcviewgenericModule
+        UcviewgenericModule,
+        UCSearchModule,
+        UcgridfooterModule
     ],
     declarations: [
         Dummy1Component,
@@ -80,7 +86,9 @@ import { UcviewgenericModule } from "@adins/ucviewgeneric";
         Step7Component,
         Step8Component,
         Dummy7Component,
-        Dummy8Component
+        Dummy8Component,
+        Dummy9Component,
+        UcTempComponent
     ],
     providers: [
         ArchwizardComponent,
