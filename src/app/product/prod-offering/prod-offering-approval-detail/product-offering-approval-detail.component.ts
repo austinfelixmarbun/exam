@@ -48,4 +48,8 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
     this.router.navigate(["/Product/OfferingApproval"]);
   }
 
+  onCancelClick()
+  {
+    this.router.navigate(["/Product/OfferingApproval"]);
+  }
 }

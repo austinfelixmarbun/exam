@@ -55,6 +55,11 @@ export class ApprovalScreenComponent implements OnInit {
     this.apvBaseUrl = environment.ApprovalURL;
   }
 
+  onCancelClick()
+  {
+    console.log("cancel click")
+  }
+
   onChange(event)
   {
     console.log(event.target.value);

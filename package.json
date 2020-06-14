@@ -29,7 +29,7 @@
     "@adins/uc-show-errors": "0.0.5",
     "@adins/uc-subsection": "^1.0.4",
     "@adins/ucaddress": "^1.0.12",
-    "@adins/ucapproval": "^1.0.4",
+    "@adins/ucapproval": "^1.0.5",
     "@adins/ucapprovalhist": "^1.0.3",
     "@adins/ucapprovalrecommendation": "^1.0.0",
     "@adins/ucapprovalsummary": "^1.0.1",
