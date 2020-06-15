@@ -19,5 +19,11 @@ export class EditMainDataPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/editMainDataCustomer.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetAccessory;
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "C.MR_CUST_TYPE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 }

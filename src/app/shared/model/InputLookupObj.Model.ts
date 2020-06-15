@@ -11,6 +11,7 @@ export class InputLookupObj{
     isReadonly: any
     pagingJson: any
     genericJson: any
+    ddlEnvironments:any
 
     constructor()
     {

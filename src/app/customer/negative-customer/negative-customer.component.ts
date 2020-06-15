@@ -24,5 +24,16 @@ export class NegativeCustomerComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteNegativeCustomer;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNegativeCustomer.json";
+
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "A.MR_CUST_TYPE_CODE",
+        environment: environment.FoundationR3Url
+      },
+      {
+        name: "A.MR_NEG_CUST_TYPE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 }
