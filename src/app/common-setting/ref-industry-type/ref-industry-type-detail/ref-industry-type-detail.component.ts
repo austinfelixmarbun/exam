@@ -43,8 +43,8 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['param'] != null) {
-        this.type = params['param'];
+      if (params['mode'] != null) {
+        this.type = params['mode'];
       }
       if (params['RefIndustryTypeId'] != null) {
         this.RefIndustryTypeId = params['RefIndustryTypeId'];
@@ -60,7 +60,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
-
+    
     if (this.type == 'edit') {
       this.refIndustryType = new RefIndustryTypeObj();
       this.refIndustryType.RefIndustryTypeId = this.RefIndustryTypeId;
