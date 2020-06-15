@@ -9,18 +9,14 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-economic-sector-add-edit',
   templateUrl: './economic-sector-add-edit.component.html',
-  styleUrls: ['./economic-sector-add-edit.component.scss'],
-  providers: [NGXToastrService]
+  styleUrls: ['./economic-sector-add-edit.component.scss']
 })
 export class EconomicSectorAddEditComponent implements OnInit {
-
+  title: string = "Economic Sector Add"
   pageType: string = "add";
-  refEconomicSectorId: any;
+  RefEconomicSectorId: number;
   refEconomicSectorObj: RefEconomicSectorObj;
   resultData: any;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
   RefEconomicSectorForm = this.fb.group({
     EconomicSectorCode: ['', [Validators.required, Validators.maxLength(50)]],
     EconomicSectorName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -29,27 +25,23 @@ export class EconomicSectorAddEditComponent implements OnInit {
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getUrl = AdInsConstant.GetRefEconomicSectorById;
-    this.addUrl = AdInsConstant.AddRefEconomicSector;
-    this.editUrl = AdInsConstant.EditRefEconomicSector;
-
-
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      if (params["mode"] != null) {
+        this.pageType = params["mode"];
       }
-      if (params["refEconomicSectorId"] != null) {
-        this.refEconomicSectorId = params["refEconomicSectorId"];
+      if (params["RefEconomicSectorId"] != null) {
+        this.RefEconomicSectorId = params["RefEconomicSectorId"];
       }
     });
   }
 
   ngOnInit() {
     if (this.pageType == "edit") {
+      this.title = "Economic Sector Edit"
       this.RefEconomicSectorForm.controls["EconomicSectorCode"].disable();
       this.refEconomicSectorObj = new RefEconomicSectorObj();
-      this.refEconomicSectorObj.RefEconomicSectorId = this.refEconomicSectorId;
-      this.http.post(this.getUrl, this.refEconomicSectorObj).subscribe(
+      this.refEconomicSectorObj.RefEconomicSectorId = this.RefEconomicSectorId;
+      this.http.post(AdInsConstant.GetRefEconomicSectorById, this.refEconomicSectorObj).subscribe(
         response => {
           this.resultData = response;
           this.RefEconomicSectorForm.patchValue({
@@ -74,10 +66,10 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.refEconomicSectorObj.EconomicSectorName = this.RefEconomicSectorForm.controls["EconomicSectorName"].value;
       this.refEconomicSectorObj.RegRptCode = this.RefEconomicSectorForm.controls["RegRptCode"].value;
       this.refEconomicSectorObj.IsActive = this.RefEconomicSectorForm.controls["IsActive"].value;
-      this.http.post(this.addUrl, this.refEconomicSectorObj).subscribe(
+      this.http.post(AdInsConstant.AddRefEconomicSector, this.refEconomicSectorObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/CommonSetting/economicSector/Paging"]);
+            this.router.navigate(["/CommonSetting/EconomicSector/Paging"]);
           
         },
         error => {
@@ -86,15 +78,15 @@ export class EconomicSectorAddEditComponent implements OnInit {
       );
     } else {
       this.refEconomicSectorObj = this.resultData;
-      this.refEconomicSectorObj.RefEconomicSectorId = this.refEconomicSectorId;
+      this.refEconomicSectorObj.RefEconomicSectorId = this.RefEconomicSectorId;
       this.refEconomicSectorObj.EconomicSectorName = this.RefEconomicSectorForm.controls["EconomicSectorName"].value;
       this.refEconomicSectorObj.RegRptCode = this.RefEconomicSectorForm.controls["RegRptCode"].value;
       this.refEconomicSectorObj.IsActive = this.RefEconomicSectorForm.controls["IsActive"].value;
-      this.http.post(this.editUrl, this.refEconomicSectorObj).subscribe(
+      this.http.post(AdInsConstant.EditRefEconomicSector, this.refEconomicSectorObj).subscribe(
         response => {
           console.log(response);
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/economicSector/Paging"]);
+          this.router.navigate(["/CommonSetting/EconomicSector/Paging"]);
         },
         error => {
           console.log(error);
