@@ -115,6 +115,7 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.RefEmpForm.controls.BankBranchRegCode.disable();
     var context = JSON.parse(localStorage.getItem("UserAccess"));
     this.businessDt = new Date(context["BusinessDt"]);
 
@@ -263,6 +264,7 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   getLookupBankResponse(e){
+    console.log(e)
     this.RefEmpForm.patchValue({
       RefBankId: e.refBankId,
       BankBranchRegCode: e.regRptCode
