@@ -210,7 +210,7 @@ export class AdInsConstant {
   public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
   public static EditRefZipcode = environment.FoundationR3Url + "/RefZipcode/EditRefZipCode";
   public static AddRefZipcode = environment.FoundationR3Url + "/RefZipcode/AddRefZipCode";
-  public static DeleteRefZipcode = environment.FoundationR3Url + "/RefZipcode/DeleteRefZipCode";
+  public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode";
   public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
   public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
 
