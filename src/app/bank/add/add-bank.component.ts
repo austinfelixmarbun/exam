@@ -76,7 +76,7 @@ export class BankAddComponent implements OnInit {
 
             this.http.post(AdInsConstant.EditRefBank, this.bankObj).subscribe(
                 (response) => {
-                    this.router.navigateByUrl('/bank/Paging');
+                    this.router.navigateByUrl('/CommonSetting/Bank/Paging');
                     this.toastr.successMessage(response['message']);
                 },
                 (error) => {
@@ -91,7 +91,7 @@ export class BankAddComponent implements OnInit {
 
             this.http.post(AdInsConstant.AddRefBankAsync, this.bankObj).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
-                this.router.navigateByUrl('/bank/Paging');
+                this.router.navigateByUrl('/CommonSetting/Bank/Paging');
             },
                 (error) => {
                     console.log(error);
