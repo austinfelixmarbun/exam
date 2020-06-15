@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
@@ -10,8 +9,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
     selector: 'add-bank',
-    templateUrl: './add-bank.component.html',
-    providers: [NgbPaginationConfig, NGXToastrService]
+    templateUrl: './add-bank.component.html'
 })
 export class BankAddComponent implements OnInit {
 
@@ -76,7 +74,7 @@ export class BankAddComponent implements OnInit {
 
             this.http.post(AdInsConstant.EditRefBank, this.bankObj).subscribe(
                 (response) => {
-                    this.router.navigateByUrl('/bank/Paging');
+                    this.router.navigate(["/CommonSetting/Bank/Paging"]);
                     this.toastr.successMessage(response['message']);
                 },
                 (error) => {
@@ -91,7 +89,7 @@ export class BankAddComponent implements OnInit {
 
             this.http.post(AdInsConstant.AddRefBankAsync, this.bankObj).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
-                this.router.navigateByUrl('/bank/Paging');
+                this.router.navigate(["/CommonSetting/Bank/Paging"]);
             },
                 (error) => {
                     console.log(error);
