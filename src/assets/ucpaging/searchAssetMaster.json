@@ -11,23 +11,25 @@
       "placeholder": "Placeholder",
       "isFromURL": true,
       "isSelectOne": false,
-      "url": "http://r3app-server/FOUNDATION_R3/AssetType/GetListKeyValueActiveByCode",
+      "url": "",
+      "path": "/AssetType/GetListKeyValueActiveByCode",
       "label": "Asset Type Name",
       "items": [],
       "isEvent" : "true",
-      "affectedFilter" : ["AC.ASSET_CATEGORY_NAME"],
+      "affectedFilter" : ["AC.ASSET_CATEGORY_ID"],
       "itemsUrl": []
     },
     {
       "type": "dropdown",
       "datatype": "text",
-      "name": "AC.ASSET_CATEGORY_NAME",
+      "name": "AC.ASSET_CATEGORY_ID",
       "id": "assetCategoryNameId",
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": true,
       "isSelectOne": false,
-      "url": "http://r3app-server/FOUNDATION_R3/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj",
+      "url": "",
+      "path": "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj",
       "label": "Asset Category Name",
       "items": [],
       "itemsUrl": []
@@ -103,7 +105,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.FULL_ASSET_CODE as FullAssetCode,A.ASSET_MASTER_ID as AssetMasterId,A.FULL_ASSET_NAME as FullAssetName,A.HIERARCHY_LVL as HierarchyLvl,A.IS_FINAL as IsFinal,A.IS_ACTIVE as IsActive,ATH.ASSET_TYPE_ID as AssetTypeId,ATH.ASSET_TYPE_CODE as AssetTypeCode,ATH.ASSET_TYPE_NAME as AssetTypeName,AC.ASSET_CATEGORY_NAME as AssetCategoryName, AC.IS_ACTIVE as IsActiveCategory",
+    "select": "SELECT A.FULL_ASSET_CODE as FullAssetCode,A.ASSET_MASTER_ID as AssetMasterId,A.FULL_ASSET_NAME as FullAssetName,A.HIERARCHY_LVL as HierarchyLvl,A.IS_FINAL as IsFinal,A.IS_ACTIVE as IsActive,ATH.ASSET_TYPE_ID as AssetTypeId,ATH.ASSET_TYPE_CODE as AssetTypeCode,ATH.ASSET_TYPE_NAME as AssetTypeName, AC.ASSET_CATEGORY_NAME as AssetCategoryName, AC.ASSET_CATEGORY_ID as AssetCategoryId, AC.IS_ACTIVE as IsActiveCategory",
     "from": "FROM dbo.ASSET_MASTER A WITH(NOLOCK) LEFT JOIN dbo.ASSET_TYPE ATH WITH(NOLOCK) ON ATH.ASSET_TYPE_ID = A.ASSET_TYPE_ID LEFT JOIN dbo.ASSET_CATEGORY AC WITH(NOLOCK) ON AC.ASSET_CATEGORY_ID = A.ASSET_CATEGORY_ID"
   },
   "headerList": [

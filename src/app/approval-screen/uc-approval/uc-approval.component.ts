@@ -17,8 +17,10 @@ export class UcApprovalComponent implements OnInit {
     ) { }
 
   @Input() inputObj: any;
+  @Input() showCancel: boolean = false;
   @Output() nextTask: EventEmitter<any> = new EventEmitter();
   @Output() result: EventEmitter<any> = new EventEmitter();
+  @Output() onCancel: EventEmitter<any> = new EventEmitter();
 
   taskId: number;
   instanceId: number;
@@ -46,6 +48,7 @@ export class UcApprovalComponent implements OnInit {
   PossibleResults = new Array();
 
   ngOnInit() {
+    console.log("Show Cancel",this.showCancel)
     this.taskId = this.inputObj.taskId;
     this.instanceId = this.inputObj.instanceId;
     this.baseUrl = this.inputObj.approvalBaseUrl;
@@ -198,6 +201,11 @@ export class UcApprovalComponent implements OnInit {
       }
     }
     this.CompleteTask(SubmitObj);
+  }
+
+  onCancelClick()
+  {
+    this.onCancel.emit();
   }
 
   CompleteTask(SubmitObj)

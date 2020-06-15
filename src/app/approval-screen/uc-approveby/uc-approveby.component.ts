@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, Validators, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -20,7 +20,7 @@ export class UcApprovebyComponent implements OnInit {
   DDLOpt : any;
 
   constructor(
-    private http: HttpClient,
+    private http: HttpClient,private cdRef:ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -28,8 +28,10 @@ export class UcApprovebyComponent implements OnInit {
     {
       this.parentForm.controls[this.identifier].setValidators([Validators.required])
     }
+    this.cdRef.detectChanges();
     this.LoadDDLData();
   }
+
 
 LoadDDLData() {
   this.http.post(this.apvBaseUrl + "/api/RFAWeb/GetApprovedBy", { schemeCode: this.schemeCode }).subscribe(

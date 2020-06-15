@@ -19,6 +19,12 @@ export class VendorHoPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHO.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "V.MR_VENDOR_CATEGORY_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.arrCrit = new Array();
 

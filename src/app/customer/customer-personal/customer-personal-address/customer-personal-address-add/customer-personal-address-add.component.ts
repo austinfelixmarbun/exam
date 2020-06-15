@@ -49,7 +49,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   IdNo: string;
   Gender: string;
-  TaxIdNo: string;
   pageType: string;
   CustName: string;
   GenderDesc:string;

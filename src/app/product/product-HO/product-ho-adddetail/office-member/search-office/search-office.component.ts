@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { template } from '@angular/core/src/render3';
 import { empty } from 'rxjs';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
 
 @Component({
   selector: 'app-search-office',
@@ -17,6 +18,8 @@ import { empty } from 'rxjs';
 export class SearchOfficeComponent implements OnInit {
   
   @ViewChild(UCSearchComponent) UCSearchComponent;
+  @ViewChild(UcgridfooterComponent) UCGridFooter;
+
   @Output() componentIsOn: EventEmitter<any> = new EventEmitter();
   @Input() ListOfficeMemberObjInput: any;
   constructor(
@@ -29,6 +32,7 @@ export class SearchOfficeComponent implements OnInit {
   pageNow;
   pageSize;
   apiUrl;
+  totalData;
   
   ngOnInit() {
     this.arrAddCrit = new Array();
@@ -48,6 +52,12 @@ export class SearchOfficeComponent implements OnInit {
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputObj.addCritInput = this.arrAddCrit;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "roa.AREA_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.listSelectedId = new Array();
     this.tempListId = new Array();
@@ -64,6 +74,10 @@ export class SearchOfficeComponent implements OnInit {
   resultData;
   getResult(ev){
     this.resultData=ev["response"];
+    this.totalData = ev.response.Count;
+    this.UCGridFooter.pageNow = ev.pageNow;
+    this.UCGridFooter.totalData = this.totalData;
+    this.UCGridFooter.resultData = this.resultData;
     // console.log(this.resultData);
     // console.log(this.tempData);
   }
@@ -267,5 +281,24 @@ export class SearchOfficeComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  onSelect(event) {
+    this.pageNow = event.pageNow;
+    this.pageSize = event.pageSize;
+    this.totalData = event.Count;
+    this.searchPagination(this.pageNow);
+  }
+
+  searchPagination(event: number) {
+    this.pageNow = event;
+    let order = null;
+    if (this.orderByKey != null) {
+      order = {
+        key: this.orderByKey,
+        value: this.orderByValue
+      }
+    }
+    this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
   }
 }

@@ -1,15 +1,29 @@
-export class InputSearchObj{
-    _url: any
-    enviromentUrl: any
-    apiQryPaging: any
-    arrCritObj: any
-    addCritInput: any
-    ddlEnvironments: any
+import { CriteriaObj } from "./CriteriaObj.model";
 
-    constructor()
-    {
+export class InputSearchObj {
+    _url: string;
+    enviromentUrl: string;
+    apiQryPaging: string;
+    arrCritObj: any;
+    addCritInput: Array<CriteriaObj>;
+    ddlEnvironments: Array<EnviObj>;
+
+    constructor() {
+        this._url = "";
+        this.enviromentUrl = "";
+        this.apiQryPaging = "";
         this.arrCritObj = null;
-        this.addCritInput = null;
-        this.ddlEnvironments = [];
+        this.addCritInput = new Array<CriteriaObj>();
+        this.ddlEnvironments = new Array<EnviObj>();
+    }
+}
+
+export class EnviObj {
+    name: string;
+    environment: string;
+
+    constructor() {
+        this.name = "";
+        this.environment = "";
     }
 }

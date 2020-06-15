@@ -35,7 +35,7 @@ export class Dummy3Component implements OnInit {
   apiUrl2: any;
   addCrit: CriteriaObj[];
 
-  settingUrl: any = environment.settingUrl;
+  settingUrl: any = environment.FoundationR3Url;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
@@ -45,12 +45,12 @@ export class Dummy3Component implements OnInit {
     console.log("dummy3");
     this.inputObj1 = new InputSearchObj();
     this.inputObj1._url = "./assets/search/searchBank.json";
-    this.inputObj1.enviromentUrl = environment.settingUrl;
+    this.inputObj1.enviromentUrl = environment.FoundationR3Url;
     this.inputObj1.apiQryPaging = AdInsConstant.GetBankPaging;
 
     this.inputObj2 = new InputSearchObj();
     this.inputObj2._url = "./assets/search/searchMaster.json";
-    this.inputObj2.enviromentUrl = environment.settingUrl;
+    this.inputObj2.enviromentUrl = environment.FoundationR3Url;
     this.inputObj2.apiQryPaging = AdInsConstant.GetRefMasterPaging;
 
     this.pageNow1 = 1;
