@@ -45,7 +45,7 @@ export class UcAddressComponent implements OnInit {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupZipcode.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefZipcodePaging;
-    this.inputLookupObj.urlEnviPaging = environment.settingUrl;
+    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/form-setting/zipcodePaging.json";
     this.inputLookupObj.genericJson = "./assets/form-setting/zipcodeGeneric.json";
   }
