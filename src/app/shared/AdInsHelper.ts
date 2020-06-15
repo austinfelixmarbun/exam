@@ -42,7 +42,6 @@ export class AdInsHelper {
             if (timeLeft > 0) {
                 console.log("Time Left : " + timeLeft)
                 toastr.errorMessage("Automatic Log out at : " + timeLeft);
-                toastr.clearToast();
                 timeLeft--;
             } else {
                 this.ClearAllLog();

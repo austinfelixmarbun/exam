@@ -19,16 +19,16 @@ export class ProdOfferingReturnPagingComponent implements OnInit {
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/ucpaging/product/searchProductOffering.json";
+    this.inputPagingObj._url = "./assets/ucpaging/product/searchProductOfferingReturn.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.deleteUrl = "/RefBank/DeleteRefBank";
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOffering.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOfferingReturn.json";
 
     var criteriaList = new Array<CriteriaObj>();
     var criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    criteriaObj.propName = 'A.PROD_STAT';
+    criteriaObj.propName = 'A.PROD_OFFERING_STAT';
     criteriaObj.value = "RET";
     criteriaList.push(criteriaObj);
 

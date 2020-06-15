@@ -40,7 +40,7 @@ export class AdInsConstant {
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
 
-  public static WebSocketUrl = environment.FoundationR3Url + "/Notificationhub";
+  public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
 
   // DOWNLOAD
   public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';

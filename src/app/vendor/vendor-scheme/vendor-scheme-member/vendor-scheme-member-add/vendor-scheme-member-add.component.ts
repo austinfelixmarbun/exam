@@ -67,7 +67,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   }
 
   getListTemp(ev) {
-    this.listSelectedId = ev;
+    this.listSelectedId = ev.TempListId;
   }
 
   SaveVendorSchemeMember() {
@@ -84,7 +84,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     this.http.post(AdInsConstant.AddVendorSchmMember, obj).subscribe(
       (response) => {
         this.toastr.success(response["message"], 'Success!');
-        this.router.navigate(['/Vendor/VendorScheme/Member'], { queryParams: { VendorSchmId: this.VendorSchmId } });
+        this.router.navigate(['/Vendor/VendorScheme/Member'], { queryParams: { VendorSchmId: this.VendorSchmId, MrVendorCategoryCode: this.MrVendorCategoryCode } });
       },
       (error) => {
         console.log(error);
