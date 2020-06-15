@@ -50,7 +50,7 @@ export class EmployeePositionAddComponent implements OnInit {
     bizUrl: any;
     orgJobTitleUrl: any;
     foundationUrl: string = environment.FoundationR3Url;
-    settingUrl: string = environment.settingUrl;
+    settingUrl: string = environment.FoundationR3Url;
     empPositionVisible: boolean = true;
     addEditVisible: boolean = false;
     pageNow: any;

@@ -31,7 +31,7 @@ export class CommissionerAddComponent implements OnInit {
     idTypeUrl: any;
     isActive: boolean = false;
     foundationUrl: string = environment.FoundationR3Url;
-    settingUrl: string = environment.settingUrl;
+    settingUrl: string = environment.FoundationR3Url;
     editUrl: any;
     idType: any;
     name: any;
