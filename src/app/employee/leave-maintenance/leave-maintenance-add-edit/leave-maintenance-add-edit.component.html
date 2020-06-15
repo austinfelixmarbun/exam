@@ -8,7 +8,7 @@
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Leave Management</h4>
               <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Employee Name </label>
+                <label class="col-md-3  adins-required-label" translate>Employee Name </label>
                 <div class="col-md-9" *ngIf="this.pageType == 'add'">
                   <lib-uclookupgeneric width-75-per [lookupInput]="inputEmpLookupObj" [identifier]="'RefEmpId'"
                     [enjiForm]='enjiForm' [parentForm]='RefEmpLeaveMngmntForm'>
@@ -19,7 +19,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Start Date </label>
+                <label class="col-md-3  adins-required-label" translate>Start Date </label>
                 <div class="col-md-9">
                   <input type="date" class="form-control adInsInput" formControlName="StartDt"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpLeaveMngmntForm.controls.StartDt.invalid }">
@@ -28,7 +28,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>End Date </label>
+                <label class="col-md-3  adins-required-label" translate>End Date </label>
                 <div class="col-md-9">
                   <input type="date" class="form-control adInsInput" formControlName="EndDt"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpLeaveMngmntForm.controls.EndDt.invalid }">
