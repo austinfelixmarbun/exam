@@ -23,5 +23,12 @@ export class RefFormPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefForm.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefFormData;
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "RF.CLASS",
+        environment: environment.FoundationR3Url
+      }
+    ];
+    
   }
 }
