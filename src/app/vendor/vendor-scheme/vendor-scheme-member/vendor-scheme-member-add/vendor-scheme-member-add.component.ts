@@ -67,7 +67,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   }
 
   getListTemp(ev) {
-    this.listSelectedId = ev;
+    this.listSelectedId = ev.TempListId;
   }
 
   SaveVendorSchemeMember() {
