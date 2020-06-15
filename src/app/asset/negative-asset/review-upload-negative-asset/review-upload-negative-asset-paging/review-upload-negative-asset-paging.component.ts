@@ -24,6 +24,12 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeAsset.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "UMH.OFFICE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
   cancel(ev) {
     var wfObj = new WorkflowApiObj();

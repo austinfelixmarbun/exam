@@ -24,7 +24,17 @@ export class UploadAssetMasterComponent implements OnInit {
       environmentUrl: environment.FoundationR3Url,
       apiQryPaging: AdInsConstant.GetPagingObjectBySQL,
       pagingJson: "./assets/ucpaging/searchAssetMasterMonitoring.json",
-      url: AdInsConstant.UploadFile
+      url: AdInsConstant.UploadFile,
+      ddlEnvironments: [
+        {
+          name: "UMH.OFFICE_CODE",
+          environment: environment.FoundationR3Url
+        },
+        {
+          name: "UMH.UPLOAD_STATUS",
+          environment: environment.FoundationR3Url
+        }
+      ]
     }
   }
 }

@@ -24,7 +24,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
-    TaxIdNo: ['' ],
+    TaxIdNo: [''],
     IdExpiredDt: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel: ['', [Validators.required]],

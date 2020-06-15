@@ -3,7 +3,6 @@
     <div class="card-header header-title">
       <div class="row">
         <div class="col-md-8">
-          <h4 class="card-title" id="horz-layout-colored-controls" translate> {{pageType}} OFFICE </h4>
         </div>
       </div>
     </div>
@@ -14,7 +13,6 @@
           <form class="form form-horizontal" [formGroup]="OfficeForm" (ngSubmit)="OfficeForm.valid && SaveForm()"
             #enjiForm="ngForm">
             <div class="form-body">
-              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> [-] Main Info</h4>
               <div class="row text-left">
                 <div class="card-body">
                   <div class="px-3">
@@ -22,7 +20,7 @@
                     <div class="form-group row adins-required">
                       <label class="col-md-3  adInsLabel" translate>Office Code </label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control adInsInput width-30-per" formControlName="OfficeCode">
+                        <input type="text" class="form-control adInsInput code" formControlName="OfficeCode">
                         <lib-uc-show-errors [control]="OfficeForm.controls.OfficeCode" [submit]="enjiForm.submitted">
                         </lib-uc-show-errors>
                       </div>
@@ -30,7 +28,7 @@
                     <div class="form-group row adins-required">
                       <label class="col-md-3  adInsLabel" translate>Office Name </label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control adInsInput width-30-per" formControlName="OfficeName">
+                        <input type="text" class="form-control adInsInput name" formControlName="OfficeName">
                         <lib-uc-show-errors [control]="OfficeForm.controls.OfficeName" [submit]="enjiForm.submitted">
                         </lib-uc-show-errors>
                       </div>
@@ -38,7 +36,7 @@
                     <div class="form-group row">
                       <label class="col-md-3  adInsLabel" translate>Office Short Name </label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control adInsInput width-30-per"
+                        <input type="text" class="form-control adInsInput name"
                           formControlName="OfficeShortName">
                         <lib-uc-show-errors [control]="OfficeForm.controls.OfficeShortName"
                           [submit]="enjiForm.submitted">

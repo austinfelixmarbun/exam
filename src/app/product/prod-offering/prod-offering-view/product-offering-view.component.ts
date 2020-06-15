@@ -94,10 +94,10 @@ export class ProductOfferingViewComponent implements OnInit {
     }
     //** Main Information **//
     if (this.mainInfoByHIdOnly == true) {
-      this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformationByHId.json";
+      this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
     }
     else {
-      this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
+      this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformationByCode.json";
     }
 
 

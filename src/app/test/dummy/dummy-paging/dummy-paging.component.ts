@@ -25,7 +25,7 @@ export class DummyPagingComponent implements OnInit {
   resultData: any;
 
   apiUrl: any;
-  settingUrl: string = environment.settingUrl;
+  settingUrl: string = environment.FoundationR3Url;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
@@ -39,7 +39,7 @@ export class DummyPagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchBank.json";
-    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetBankPaging;
 
     this.apiUrl = this.settingUrl + AdInsConstant.GetBankPaging;

@@ -70,6 +70,12 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.inputObj._url = "./assets/ucpaging/verification/searchVerificationQuestionAnswr.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "VQA.REF_VERF_ANSWER_TYPE_ID",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.pageNow = 1;
     this.pageSize = 10;

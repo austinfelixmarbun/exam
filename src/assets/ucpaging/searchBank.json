@@ -56,25 +56,25 @@
             "type": "sort",
             "position": "left",
             "label": "Bank Code",
-            "name": "BankCode"
+            "name": "BANK_CODE"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Bank Name",
-            "name": "BankName"
+            "name": "BANK_NAME"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "BI Code",
-            "name": "RegRptCode"
+            "name": "REG_RPT_CODE"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Active Status",
-            "name": "IsActive"
+            "name": "IS_ACTIVE"
         },
         {
             "type": "label",

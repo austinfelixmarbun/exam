@@ -10,7 +10,7 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" translate>Economic Sector Code </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="EconomicSectorCode"
+                  <input type="text" class="form-control adInsInput code" formControlName="EconomicSectorCode"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEconomicSectorForm.controls.EconomicSectorCode.invalid }">
                   <show-errors [control]="RefEconomicSectorForm.controls.EconomicSectorCode" [submit]="enjiForm.submitted"></show-errors>
                 </div>
@@ -18,13 +18,13 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Economic Sector Name </label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="EconomicSectorName"
+                  <input type="text" class="form-control adInsInput name" formControlName="EconomicSectorName"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEconomicSectorForm.controls.EconomicSectorName.invalid }">
                   <show-errors [control]="RefEconomicSectorForm.controls.EconomicSectorName" [submit]="enjiForm.submitted"></show-errors>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>BI Code </label>
+                <label class="col-md-3  adInsLabel number" translate>BI Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="RegRptCode">
                 </div>

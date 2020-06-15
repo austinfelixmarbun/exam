@@ -48,6 +48,7 @@ import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
 import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { HolidayDetailEditComponent } from './holiday-scheme/holiday-detail-edit/holiday-detail-edit.component';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @NgModule({
   imports: [
@@ -103,6 +104,7 @@ import { HolidayDetailEditComponent } from './holiday-scheme/holiday-detail-edit
     HolidayDetailEditComponent
   ],
   providers: [
+    NGXToastrService,
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => LookupemployeeComponent),

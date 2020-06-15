@@ -18,13 +18,18 @@ export class ReviewUploadAssetMasterPagingComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService){}
 
   ngOnInit() {
-    console.log('test');
     this.CancelUpload = AdInsConstant.CancelUpload;
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadAssetMaster.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadAssetMaster.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "UMH.OFFICE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
   cancel(ev) {
     var wfObj = new WorkflowApiObj();
