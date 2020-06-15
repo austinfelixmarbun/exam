@@ -84,7 +84,6 @@ export function createTranslateLoader(http: HttpClient) {
         NgMultiSelectDropDownModule.forRoot()
     ],
     providers: [
-    NGXToastrService,
         AuthService,
         AuthGuard,
         ErrorDialogService,
