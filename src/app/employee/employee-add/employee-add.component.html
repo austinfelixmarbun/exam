@@ -3,7 +3,7 @@
     <div class="card-header header-title">
       <div class="row">
         <div class="col-md-12">
-          <h4 class="card-title" id="horz-layout-colored-controls" translate> EMPLOYEE {{pageType}} </h4>
+          <!-- <h4 class="card-title" id="horz-layout-colored-controls" translate> EMPLOYEE {{pageType}} </h4> -->
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="Username">Username</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput width-50-per" formControlName="Username" required
+                <input type="text" class="form-control adInsInput code" formControlName="Username" required
                   [attr.disabled]="pageType == 'edit' ? true : null" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.Username.invalid }">
                 <show-errors [control]="RefEmpForm.controls.Username" [submit]="enjiForm.submitted"></show-errors>
               </div>
@@ -33,7 +33,7 @@
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="EmpNo">Employee No </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput width-75-per" formControlName="EmpNo" required
+                <input type="text" class="form-control adInsInput code" formControlName="EmpNo" required
                   [attr.disabled]="pageType == 'edit' ? true : null" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.EmpNo.invalid }">
                 <show-errors [control]="RefEmpForm.controls.EmpNo" [submit]="enjiForm.submitted"></show-errors>
               </div>
@@ -41,7 +41,7 @@
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="EmpName">Employee Name </label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput width-75-per" formControlName="EmpName" required 
+                <input type="text" class="form-control adInsInput name" formControlName="EmpName" required 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.EmpName.invalid }">
                 <show-errors [control]="RefEmpForm.controls.EmpName" [submit]="enjiForm.submitted"></show-errors>
               </div>
