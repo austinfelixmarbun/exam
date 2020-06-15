@@ -16,7 +16,7 @@ export class MasterPagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/search/searchMaster.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/search/searchMaster.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefMaster;
   }
