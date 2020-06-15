@@ -392,7 +392,7 @@ export class AdInsConstant {
   public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
   public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
   public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
-  public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchm";
+  public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchmH";
   public static GetWorkingHourSchmHById = environment.FoundationR3Url + "/WorkingHourSchm/GetWorkingHourSchmHById";
   public static GetListWorkingHourSchmDByWorkingHourHId = environment.FoundationR3Url + "/WorkingHourSchm/GetListWorkingHourSchmDByWorkingHourHId";
 
