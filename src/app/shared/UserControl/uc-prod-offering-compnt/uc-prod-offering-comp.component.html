@@ -52,12 +52,16 @@
             </div>
             <div class="col-md-12" formArrayName="components" *ngFor="let node of type.controls['components'].controls; let l = index">
               <div class="form-group row" [formGroupName]="l">
-                <label class="col-md-2">{{type.controls['components'].value[l].ProdCompntName}}</label>
-                <label class="col-md-3">{{type.controls['components'].value[l].HOCompntValueDesc}}</label>
+                <label class="col-md-2 " *ngIf="FormProdOfferingComp.controls['groups'].value[j].groupCode == 'RULE'">{{type.controls['components'].value[l].ProdCompntName}}</label>
+                <label class="col-md-3 " *ngIf="FormProdOfferingComp.controls['groups'].value[j].groupCode != 'RULE'">{{type.controls['components'].value[l].ProdCompntName}}</label>
+                <span class="material-icons col-md-1" *ngIf="FormProdOfferingComp.controls['groups'].value[j].groupCode == 'RULE'" (click)="DownloadRule(type.controls['components'].value[l].OfferingCompntValue,type.controls['components'].value[l].OfferingCompntValueDesc)">
+                  get_app
+                </span>
+                <label class="col-md-2">{{type.controls['components'].value[l].HOCompntValueDesc}}</label>
                 <label class="col-md-2" *ngIf="ShowBehaviour == true">{{GetBehaviourValue(type.controls['components'].value[l].RefProdCompntCode, type.controls['components'].value[l].HOMrProdBehaviour )}}</label>
                 <div class="col-md-3" *ngIf="type.controls['components'].value[l].ProdCompntType == 'DDL' && type.controls['components'].value[l].IsProdOffering == true">
                   <select formControlName="OfferingCompntValue" class="form-control width-95-per" id="OfferingCompntValue" name="OfferingCompntValue" (change)="onChangeCompntEvent(type.controls['components'].value[l].RefProdCompntCode,$event,l,j);">
-                    <option *ngFor="let m of dictOptions[type.controls['components'].value[l].RefProdCompntCode]" value={{m.Key}} >{{m.Value}}</option>
+                    <option *ngFor="let m of dictOptions[type.controls['components'].value[l].RefProdCompntCode]" value={{m.Key}}>{{m.Value}}</option>
                   </select>
                 </div>
                 <div class="col-md-3" *ngIf="type.controls['components'].value[l].ProdCompntType == 'AMT' && type.controls['components'].value[l].IsProdOffering == true">
@@ -65,7 +69,7 @@
                 </div>
                 <div class="col-md-2" *ngIf="ShowBehaviour == true && type.controls['components'].value[l].IsProdOffering == true">
                   <select formControlName="OfferingMrProdBehaviour" class="form-control" id="OfferingMrProdBehaviour" name="OfferingMrProdBehaviour">
-                    <option *ngFor="let m of dictBehaviour[type.controls['components'].value[l].RefProdCompntCode]" value={{m.Key}} >{{m.Value}}</option>
+                    <option *ngFor="let m of dictBehaviour[type.controls['components'].value[l].RefProdCompntCode]" value={{m.Key}}>{{m.Value}}</option>
                   </select>
                 </div>
               </div>
