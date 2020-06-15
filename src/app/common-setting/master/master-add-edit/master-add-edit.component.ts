@@ -22,7 +22,7 @@ export class MasterAddEditComponent implements OnInit {
   refMasterObj: RefMasterObj = new RefMasterObj();
   refMasterTypeObj: any;
   type: string = 'add';
-  refMasterId: any;
+  RefMasterId: any;
   resultData: any;
 
   RefMasterForm = this.fb.group({
@@ -50,8 +50,8 @@ export class MasterAddEditComponent implements OnInit {
       if (params['mode'] != null) {
         this.type = params['mode'];
       }
-      if (params['refMasterId'] != null) {
-        this.refMasterId = params['refMasterId'];
+      if (params['RefMasterId'] != null) {
+        this.RefMasterId = params['RefMasterId'];
       }
     });
   }
@@ -61,7 +61,7 @@ export class MasterAddEditComponent implements OnInit {
     console.log('masuk');
     this.GetListMasterType();
     if (this.type == 'edit') {
-      this.refMasterObj.RefMasterId = this.refMasterId;
+      this.refMasterObj.RefMasterId = this.RefMasterId;
       var getRefMasterUrl = this.settingUrl + AdInsConstant.GetRefMasterByRefMasterId;
       this.httpClient.post(getRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
