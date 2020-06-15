@@ -295,6 +295,7 @@ export class OfficeAddComponent implements OnInit {
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
           })
+          this.checkType();
           this.addressObj.Addr = this.resultData.OfficeAddr;
           this.addressObj.AreaCode4 = this.resultData.AreaCode4;
           this.addressObj.AreaCode3 = this.resultData.AreaCode3;
