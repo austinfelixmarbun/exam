@@ -5,7 +5,7 @@
         {
             "type": "textbox",
             "name": "INDUSTRY_TYPE_CODE",
-            "id": "industryTypeCode",
+            "id": "IndustryTypeCode",
             "value": "",
             "label": "Industry Type Code",
             "placeholder": "Placeholder",
@@ -14,7 +14,7 @@
         {
             "type": "textbox",
             "name": "ECONOMIC_SECTOR_NAME",
-            "id": "economicSectorName",
+            "id": "EconomicSectorName",
             "value": "",
             "label": "Economic Sector Name",
             "placeholder": "Placeholder",
@@ -23,7 +23,7 @@
         {
             "type": "textbox",
             "name": "INDUSTRY_TYPE_NAME",
-            "id": "industryTypeName",
+            "id": "IndustryTypeName",
             "value": "",
             "label": "Industry Type Name",
             "placeholder": "Placeholder",
@@ -33,7 +33,7 @@
             "type": "dropdown",
             "name": "A.IS_ACTIVE",
             "datatype": "text",
-            "id": "isActive",
+            "id": "IsActive",
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
@@ -54,7 +54,7 @@
         }
     ],
     "querystring": { 
-      "select": "SELECT A.REF_INDUSTRY_TYPE_ID AS refIndustryTypeId, A.INDUSTRY_TYPE_CODE AS industryTypeCode, A.INDUSTRY_TYPE_NAME AS industryTypeName, B.ECONOMIC_SECTOR_NAME AS economicSectorName, A.IS_ACTIVE AS isActive",
+      "select": "SELECT A.REF_INDUSTRY_TYPE_ID AS RefIndustryTypeId, A.INDUSTRY_TYPE_CODE AS IndustryTypeCode, A.INDUSTRY_TYPE_NAME AS IndustryTypeName, B.ECONOMIC_SECTOR_NAME AS EconomicSectorName, A.IS_ACTIVE AS IsActive",
       "from": "FROM REF_INDUSTRY_TYPE AS A WITH(NOLOCK) JOIN REF_ECONOMIC_SECTOR AS B WITH(NOLOCK) ON A.REF_ECONOMIC_SECTOR_ID = B.REF_ECONOMIC_SECTOR_ID"
     },
     "headerList" : [ 
@@ -62,25 +62,25 @@
             "type" : "sort", 
             "position" : "left", 
             "label" : "Industry Type Code",
-            "name" : "industryTypeCode" 
+            "name" : "IndustryTypeCode" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Industry Type Name", 
-            "name" : "industryTypeName" 
+            "name" : "IndustryTypeName" 
         },
         {
             "type" : "sort", 
             "position" : "left", 
             "label" : "Economic Sector Name", 
-            "name" : "economicSectorName" 
+            "name" : "EconomicSectorName" 
         },
         {
             "type" : "sort", 
-            "position" : "left", 
+            "position" : "center", 
             "label" : "Active", 
-            "name" : "isActive"
+            "name" : "IsActive"
         },
         {
             "type" : "label",
@@ -92,22 +92,22 @@
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "industryTypeCode" 
+            "property" : "IndustryTypeCode" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "industryTypeName" 
+            "property" : "IndustryTypeName" 
         },
         {
             "type" : "text", 
             "position" : "left", 
-            "property" : "economicSectorName" 
+            "property" : "EconomicSectorName" 
         },
         {
             "type" : "boolean", 
             "position" : "center",
-            "property" : "isActive"
+            "property" : "IsActive"
         },
         {
             "type" : "action", 
@@ -118,18 +118,14 @@
                     "path" : "/CommonSetting/IndustryType/Detail", 
                     "param" : [ 
                         {
-                          "type" : "refIndustryTypeId", 
-                          "property" : "refIndustryTypeId" 
+                          "type" : "RefIndustryTypeId", 
+                          "property" : "RefIndustryTypeId" 
                         },
                         {
                           "type": "param",
                           "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type" : "delete", 
-                    "property" : "refIndustryTypeId" 
                 }
             ]
         }

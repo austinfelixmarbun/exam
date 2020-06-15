@@ -3,6 +3,7 @@ import { UcpagingComponent } from '@adins/ucpaging';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-ref-industry-type',
@@ -12,7 +13,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class RefIndustryTypeComponent implements OnInit {
 
   @ViewChild(UcpagingComponent) ucpaging;
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj;
 
   constructor() { }
 
@@ -20,8 +21,7 @@ export class RefIndustryTypeComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/search/searchIndustryType.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefIndustryType;
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/search/searchIndustryType.json";
   }
 
