@@ -31,6 +31,12 @@ export class MasterPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputPagingObj.deleteUrl = "/RefMaster/DeleteRefMaster";
     this.inputPagingObj.pagingJson = "./assets/search/searchMaster.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "ref_Master_Type_Code",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 
 }

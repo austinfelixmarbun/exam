@@ -20,7 +20,8 @@
         "placeholder": "Placeholder",
         "isFromURL": true,
         "isSelectOne": false,
-        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefCustModel/GetListKeyValueByCode",
+        "url": "",
+        "path": "/RefCustModel/GetListKeyValueByCode",
         "label": "Customer Model Name",
         "items": [],
         "itemsUrl": []

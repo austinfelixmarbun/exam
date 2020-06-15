@@ -27,6 +27,10 @@ export class RefFormPagingComponent implements OnInit {
       {
         name: "RF.CLASS",
         environment: environment.FoundationR3Url
+      },
+      {
+        name: "RF.REF_MODULE_ID",
+        environment: environment.FoundationR3Url
       }
     ];
     

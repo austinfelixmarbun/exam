@@ -27,8 +27,14 @@ export class VendorBranchPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "vdr.MR_VENDOR_CATEGORY_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
+    
     this.inputPagingObj.addCritInput = new Array();
-
     var critObj = new CriteriaObj();
     critObj.propName = "vdr.MR_VENDOR_CLASS";
     critObj.restriction = AdInsConstant.RestrictionEq;

@@ -30,6 +30,10 @@ export class NotificationApprovalPagingComponent implements OnInit {
       {
         name: "NH.MR_NOTIFICATION_TYPE_CODE",
         environment: environment.FoundationR3Url
+      },
+      {
+        name: "NH.STATUS",
+        environment: environment.FoundationR3Url
       }
     ];
 
