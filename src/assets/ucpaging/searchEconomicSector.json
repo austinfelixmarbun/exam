@@ -31,8 +31,8 @@
     },
     {
       "type": "dropdown",
-      "name": "is_Active",
-      "id": "isActive",
+      "name": "IS_ACTIVE",
+      "id": "IsActive",
       "value": "Active Status",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -57,25 +57,25 @@
       "type": "sort",
       "position": "left",
       "label": "Economic Sector Code",
-      "name": "economicSectorCode"
+      "name": "ECONOMIC_SECTOR_CODE"
     },
     {
       "type": "sort",
       "position": "left",
       "label": "Economic Sector Name",
-      "name": "economicSectorName"
+      "name": "ECONOMIC_SECTOR_NAME"
     },
     {
       "type": "sort",
       "position": "left",
       "label": "Bi Code",
-      "name": "regRptCode"
+      "name": "REG_RPT_CODE"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "Active",
-      "name": "isActive"
+      "name": "IS_ACTIVE"
     },
     {
       "type": "label",
@@ -84,29 +84,29 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.ECONOMIC_SECTOR_CODE as economicSectorCode,A.REF_ECONOMIC_SECTOR_ID as refEconomicSectorId,A.ECONOMIC_SECTOR_NAME as economicSectorName,A.REG_RPT_CODE as regRptCode,A.IS_ACTIVE as isActive",
-    "from": "FROM dbo.REF_ECONOMIC_SECTOR A WITH(NOLOCK)"
+    "select": "SELECT ECONOMIC_SECTOR_CODE as EconomicSectorCode, REF_ECONOMIC_SECTOR_ID as RefEconomicSectorId, ECONOMIC_SECTOR_NAME as EconomicSectorName, REG_RPT_CODE as RegRptCode, IS_ACTIVE as IsActive",
+    "from": "FROM dbo.REF_ECONOMIC_SECTOR WITH(NOLOCK)"
   },
   "bodyList": [
     {
       "type": "text",
       "position": "left",
-      "property": "economicSectorCode"
+      "property": "EconomicSectorCode"
     },
     {
       "type": "text",
       "position": "left",
-      "property": "economicSectorName"
+      "property": "EconomicSectorName"
     },
     {
       "type": "text",
       "position": "left",
-      "property": "regRptCode"
+      "property": "RegRptCode"
     },
     {
       "type": "boolean",
       "position": "center",
-      "property": "isActive"
+      "property": "IsActive"
     },
     {
       "type": "action",
@@ -117,18 +117,18 @@
           "path": "/CommonSetting/EconomicSector/Detail",
           "param": [
             {
-              "type": "refEconomicSectorId",
-              "property": "refEconomicSectorId"
+              "type": "RefEconomicSectorId",
+              "property": "RefEconomicSectorId"
             },
             {
-              "type": "param",
+              "type": "mode",
               "property": "edit"
             }
           ]
         },
         {
           "type": "delete",
-          "property": "refEconomicSectorId"
+          "property": "RefEconomicSectorId"
         }
       ]
     }
