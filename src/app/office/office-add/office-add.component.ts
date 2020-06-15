@@ -265,12 +265,14 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(AdInsConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
         (response) => {
           this.resultData = response;
+          this.InputLookupObj.jsonSelect = {OfficeCode: this.resultData.ParentOfficeCode, RefOfficeId: this.resultData.ParentId};
           this.InputLookupObj.nameSelect = this.resultData["ParentOfficeCode"];
 
           this.OfficeForm.patchValue({
             OfficeCode: this.resultData.OfficeCode,
             OfficeName: this.resultData.OfficeName,
             OfficeType: this.resultData.MrOfficeTypeCode,
+            OfficeParent: this.resultData.ParentId,
             OfficeShortName: this.resultData.OfficeShortName,
             MrOfficeClassCode: this.resultData.MrOfficeClassCode,
             KonSya: this.resultData.MrKonvenSyariahCode,
@@ -286,6 +288,8 @@ export class OfficeAddComponent implements OnInit {
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
           })
+          this.checkType();
+          console.log(this.OfficeForm.value);
           this.addressObj.Addr = this.resultData.OfficeAddr;
           this.addressObj.AreaCode4 = this.resultData.AreaCode4;
           this.addressObj.AreaCode3 = this.resultData.AreaCode3;
@@ -386,7 +390,6 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.OfficeName = this.OfficeForm.value.OfficeName;
     this.officeObj.MrOfficeClassCode = this.OfficeForm.value.MrOfficeClassCode;
     this.officeObj.IsActive = this.OfficeForm.value.IsActive;
-    this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
     this.officeObj.IsAllowAppCreated = this.OfficeForm.value.AllowAppCreated;
     this.officeObj.HolidaySchmHId = this.OfficeForm.value.HolidayScheme;
     this.officeObj.WorkingHourSchmHId = this.OfficeForm.value.WorkingHourScheme;
@@ -396,6 +399,12 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.CntctPersonName = this.OfficeForm.value.CntctPersonName;
     this.officeObj.CntctPersonJobTitle = this.OfficeForm.value.CntctPersonJobTitle;
 
+    if(this.OfficeForm.controls.OfficeType.value == 'HO'){
+      this.officeObj.ParentId = null;
+    }
+    if(this.OfficeForm.controls.OfficeType.value != 'HO'){
+      this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
+    }
 
     if (this.officeObj.MrOfficeTypeCode == "CG") {
       this.centerGrpObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
@@ -482,7 +491,21 @@ export class OfficeAddComponent implements OnInit {
 
     }
   }
-
+  checkType() {
+    if (this.OfficeForm.controls.OfficeType.value == 'HO') {
+      this.OfficeForm.patchValue({
+        OfficeParent: null
+      });
+      this.InputLookupObj.isRequired = false;
+      this.OfficeForm.controls.OfficeParent.clearValidators();
+      this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
+    }
+    else{
+      this.InputLookupObj.isRequired = true;
+      this.OfficeForm.controls.OfficeParent.setValidators([Validators.required]);
+      this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
+    }
+  }
   toggleActive(e) {
     this.isActive = e.target.checked;
   }
