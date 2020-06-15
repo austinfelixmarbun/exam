@@ -154,6 +154,12 @@ export class OfficeAddComponent implements OnInit {
     this.InputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.InputLookupObj.pagingJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.genericJson = "./assets/lookup/lookupOfficeParent.json";
+    this.InputLookupObj.ddlEnvironments = [
+      {
+        name: "A.MR_OFFICE_TYPE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.refMasterObj = new RefMasterObj();
     this.refMasterObj.RefMasterTypeCode = 'OFFICE_CLASS';
