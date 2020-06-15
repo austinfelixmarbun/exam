@@ -154,6 +154,7 @@ export class OfficeAddComponent implements OnInit {
     this.InputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.InputLookupObj.pagingJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.genericJson = "./assets/lookup/lookupOfficeParent.json";
+    this.InputLookupObj.isRequired = true;
     this.InputLookupObj.ddlEnvironments = [
       {
         name: "A.MR_OFFICE_TYPE_CODE",
@@ -259,7 +260,9 @@ export class OfficeAddComponent implements OnInit {
           console.log(error);
         })
 
-    } else if (this.pageType == "edit") {
+
+    }
+    else if (this.pageType == "edit") {
       this.OfficeForm.controls["OfficeCode"].disable();
       this.OfficeForm.controls["OfficeType"].disable();
       this.OfficeForm.controls["MrCenterGrpTypeCode"].disable();
@@ -292,6 +295,7 @@ export class OfficeAddComponent implements OnInit {
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
           })
+          this.checkType();
           this.addressObj.Addr = this.resultData.OfficeAddr;
           this.addressObj.AreaCode4 = this.resultData.AreaCode4;
           this.addressObj.AreaCode3 = this.resultData.AreaCode3;
@@ -379,6 +383,7 @@ export class OfficeAddComponent implements OnInit {
 
         })
     }
+
   }
 
   SaveForm(): void {
@@ -392,7 +397,6 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.OfficeName = this.OfficeForm.value.OfficeName;
     this.officeObj.MrOfficeClassCode = this.OfficeForm.value.MrOfficeClassCode;
     this.officeObj.IsActive = this.OfficeForm.value.IsActive;
-    this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
     this.officeObj.IsAllowAppCreated = this.OfficeForm.value.AllowAppCreated;
     this.officeObj.HolidaySchmHId = this.OfficeForm.value.HolidayScheme;
     this.officeObj.WorkingHourSchmHId = this.OfficeForm.value.WorkingHourScheme;
@@ -402,6 +406,12 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.CntctPersonName = this.OfficeForm.value.CntctPersonName;
     this.officeObj.CntctPersonJobTitle = this.OfficeForm.value.CntctPersonJobTitle;
 
+    if(this.OfficeForm.controls.OfficeType.value == 'HO'){
+      this.officeObj.ParentId = null;
+    }
+    if(this.OfficeForm.controls.OfficeType.value != 'HO'){
+      this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
+    }
 
     if (this.officeObj.MrOfficeTypeCode == "CG") {
       this.centerGrpObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
@@ -486,6 +496,18 @@ export class OfficeAddComponent implements OnInit {
         }
       );
 
+    }
+  }
+  checkType() {
+    if (this.OfficeForm.controls.OfficeType.value == 'HO') {
+      this.InputLookupObj.isRequired = false;
+      this.OfficeForm.controls.OfficeParent.clearValidators();
+      this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
+    }
+    else{
+      this.InputLookupObj.isRequired = true;
+      this.OfficeForm.controls.OfficeParent.setValidators([Validators.required]);
+      this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
     }
   }
 
