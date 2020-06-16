@@ -1,0 +1,74 @@
+{
+    "title": "Vendor HO",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "VENDOR_CODE",
+            "id": "VendorCodeId",
+            "value": "",
+            "label": "VENDOR CODE",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "VENDOR_NAME",
+            "id": "VendorNameId",
+            "value": "",
+            "label": "VENDOR NAME",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT VENDOR_CODE AS VendorCode, VENDOR_NAME AS VendorName, MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, VENDOR_ID AS VendorId",
+        "from": "FROM dbo.VENDOR WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "VENDOR CODE",
+            "name": "VENDOR_CODE "
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "VENDOR NAME",
+            "name": "VENDOR_NAME"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "VendorCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "VendorName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "path": "Vendor/HO/Detail",
+                    "param": [
+                        {
+                            "type": "VendorId",
+                            "property": "VendorId"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "propertyId": "VendorId",
+    "propertyName": "VendorName"  
+}

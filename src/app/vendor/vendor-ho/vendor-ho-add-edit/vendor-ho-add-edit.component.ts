@@ -262,6 +262,12 @@ export class VendorHoAddEditComponent implements OnInit {
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = "SUPPLIER_HOLDING";
     this.inputLookupParentObj.addCritInput.push(critInput);
+
+    var critIsActive = new CriteriaObj();
+    critIsActive.propName = "IS_ACTIVE";
+    critIsActive.restriction = AdInsConstant.RestrictionEq;
+    critIsActive.value = "1";
+    this.inputLookupParentObj.addCritInput.push(critIsActive);
   }
 
   SaveForm() {

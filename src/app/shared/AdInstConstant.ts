@@ -635,7 +635,7 @@ export class AdInsConstant {
   // VERF QUESTION GRP H
   public static AddVerfQuestionGrpH = environment.FoundationR3Url + "/VerfQuestionGrpH/AddVerfQuestionGrpH";
   public static EditVerfQuestionGrpH = environment.FoundationR3Url + "/VerfQuestionGrpH/EditVerfQuestionGrpH";
-  public static DeleteVerfQuestionGroupHById = environment.FoundationR3Url + "/VerfQuestionGrpH/DeleteVerfQuestionGroupHById";
+  public static DeleteVerfQuestionGroupHById = "/VerfQuestionGrpH/DeleteVerfQuestionGroupHById";
   public static GetActiveVerfQuestionGrpHs = environment.FoundationR3Url + "/VerfQuestionGrpH/GetActiveVerfQuestionGrpHs";
   public static GetVerfQuestionGrpHs = environment.FoundationR3Url + "/VerfQuestionGrpH/GetVerfQuestionGrpHs";
   public static GetQuestionGrpHById = environment.FoundationR3Url + "/VerfQuestionGrpH/GetQuestionGrpHById";
