@@ -41,94 +41,111 @@
             "url": "",
             "label": "Active Status",
             "items": [
-            {
-                "key": "1",
-                "value": "Yes"
-            },
-            {
-                "key": "0",
-                "value": "No"
-            }
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
             ],
             "itemsUrl": []
         }
     ],
-    "querystring": { 
-      "select": "SELECT A.REF_INDUSTRY_TYPE_ID AS RefIndustryTypeId, A.INDUSTRY_TYPE_CODE AS IndustryTypeCode, A.INDUSTRY_TYPE_NAME AS IndustryTypeName, B.ECONOMIC_SECTOR_NAME AS EconomicSectorName, A.IS_ACTIVE AS IsActive",
-      "from": "FROM REF_INDUSTRY_TYPE AS A WITH(NOLOCK) JOIN REF_ECONOMIC_SECTOR AS B WITH(NOLOCK) ON A.REF_ECONOMIC_SECTOR_ID = B.REF_ECONOMIC_SECTOR_ID"
+    "querystring": {
+        "select": "SELECT A.REF_INDUSTRY_TYPE_ID AS RefIndustryTypeId, A.INDUSTRY_TYPE_CODE AS IndustryTypeCode, A.INDUSTRY_TYPE_NAME AS IndustryTypeName, B.ECONOMIC_SECTOR_NAME AS EconomicSectorName, A.IS_ACTIVE AS IsActive",
+        "from": "FROM REF_INDUSTRY_TYPE AS A WITH(NOLOCK) JOIN REF_ECONOMIC_SECTOR AS B WITH(NOLOCK) ON A.REF_ECONOMIC_SECTOR_ID = B.REF_ECONOMIC_SECTOR_ID"
     },
-    "headerList" : [ 
+    "headerList": [
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Industry Type Code",
-            "name" : "IndustryTypeCode" 
+            "type": "sort",
+            "position": "left",
+            "label": "Industry Type Code",
+            "name": "IndustryTypeCode"
         },
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Industry Type Name", 
-            "name" : "IndustryTypeName" 
+            "type": "sort",
+            "position": "left",
+            "label": "Industry Type Name",
+            "name": "IndustryTypeName"
         },
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Economic Sector Name", 
-            "name" : "EconomicSectorName" 
+            "type": "sort",
+            "position": "left",
+            "label": "Economic Sector Name",
+            "name": "EconomicSectorName"
         },
         {
-            "type" : "sort", 
-            "position" : "center", 
-            "label" : "Active Status", 
-            "name" : "IsActive"
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "IsActive"
         },
         {
-            "type" : "label",
-            "position" : "center",
-            "label" : "Action"
+            "type": "label",
+            "position": "center",
+            "label": "Action"
         }
     ],
-    "bodyList" : [
+    "bodyList": [
         {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "IndustryTypeCode" 
+            "type": "text",
+            "position": "left",
+            "property": "IndustryTypeCode"
         },
         {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "IndustryTypeName" 
+            "type": "text",
+            "position": "left",
+            "property": "IndustryTypeName"
         },
         {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "EconomicSectorName" 
+            "type": "text",
+            "position": "left",
+            "property": "EconomicSectorName"
         },
         {
-            "type" : "boolean", 
-            "position" : "center",
-            "property" : "IsActive"
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
         },
         {
-            "type" : "action", 
-            "position" : "center",
-            "action" : [ 
+            "type": "action",
+            "position": "center",
+            "action": [
                 {
-                    "type" : "edit", 
-                    "path" : "/CommonSetting/IndustryType/Detail", 
-                    "param" : [ 
+                    "type": "edit",
+                    "path": "/CommonSetting/IndustryType/Detail",
+                    "param": [
                         {
-                          "type" : "RefIndustryTypeId", 
-                          "property" : "RefIndustryTypeId" 
+                            "type": "RefIndustryTypeId",
+                            "property": "RefIndustryTypeId"
                         },
                         {
-                          "type": "mode",
-                          "property": "edit"
+                            "type": "mode",
+                            "property": "edit"
+                        }
+                    ]
+                },
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "IsActive",
+                                    "value": "1",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "delete",
+                                "property": "RefIndustryTypeId"
+                            }
                         }
                     ]
                 }
             ]
         }
     ]
-  }
-  
+}
