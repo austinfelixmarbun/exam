@@ -54,8 +54,8 @@ export class ProductHODeactivateEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.http.post(this.getValueReasonModel, null).subscribe(
+    var obj = { RefReasonTypeCode: AdInsConstant.RefReasonTypeCodeProdDeactivate };
+    this.http.post(this.getValueReasonModel, obj).subscribe(
       (response) => {
         console.log(response);
         this.allRefReasonMethod = response['ReturnObject'];

@@ -12,7 +12,7 @@
     },
     {
       "type": "textbox",
-      "name": "P.PROD_NAME",
+      "name": "P.PROD_OFFERING_NAME",
       "id": "ProdNameId",
       "value": "",
       "label": "PRODUCT NAME",
