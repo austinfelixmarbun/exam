@@ -85,6 +85,9 @@ export class ProductHODeactivateEditComponent implements OnInit {
   SaveForm() {
     this.prodHDeactivateObj = new ProdHDeactivateObj();
     this.prodHDeactivateObj = this.ProdHDeactForm.value;
+    //var reason = this.allRefReasonMethod.filter(
+    //  x => x.Key == this.ProdHDeactForm.controls.Reason.value)
+    //this.prodHDeactivateObj.Reason = reason[0].Value;
     this.prodHDeactivateObj.ProdHId = this.prodHId;
     this.prodHDeactivateObj.RowVersion = "";
     this.http.post(this.requestDeactURL, this.prodHDeactivateObj).subscribe(
