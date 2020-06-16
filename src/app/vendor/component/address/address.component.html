@@ -12,8 +12,8 @@
                 <label class="col-md-3  adInsLabel" translate>Address</label>
                 <div class="col-md-5">
                   <textarea class="form-control" formControlName="Addr"> </textarea>
-                  <show-errors [control]="AddressForm.controls.Addr" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AddressForm.controls.Addr" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row" *ngIf="inputLookupZipcodeObj.isReady">
@@ -28,32 +28,32 @@
                 <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
                 <div class="col-md-5">
                   <input type="text" class="form-control" formControlName="AreaCode2">
-                  <show-errors [control]="AddressForm.controls.AreaCode2" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AddressForm.controls.AreaCode2" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
                 <div class="col-md-5">
                   <input type="text" class="form-control" formControlName="AreaCode1">
-                  <show-errors [control]="AddressForm.controls.AreaCode1" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AddressForm.controls.AreaCode1" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>City</label>
                 <div class="col-md-5">
                   <input type="text" class="form-control" formControlName="City">
-                  <show-errors [control]="AddressForm.controls.City" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AddressForm.controls.City" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Province</label>
                 <div class="col-md-5">
                   <input type="text" class="form-control" formControlName="Province">
-                  <show-errors [control]="AddressForm.controls.Province" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AddressForm.controls.Province" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
             </div>
@@ -65,16 +65,16 @@
                   <label class="col-md-3  adInsLabel" translate>Latitude</label>
                   <div class="col-md-5">
                     <input type="text" class="form-control" formControlName="Latitude">
-                    <show-errors [control]="AddressForm.controls.Latitude" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="AddressForm.controls.Latitude" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3  adInsLabel" translate>Longitude</label>
                   <div class="col-md-5">
                     <input type="text" class="form-control" formControlName="Longitude">
-                    <show-errors [control]="AddressForm.controls.Longitude" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="AddressForm.controls.Longitude" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
               </div>
