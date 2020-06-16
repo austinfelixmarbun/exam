@@ -63,7 +63,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.EditVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Verification/QuestionGroupPaging');
+          this.router.navigateByUrl('/Verification/QuestionGroup/Paging');
         },
         (error) => {
           console.log(error);
@@ -74,7 +74,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.AddVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Verification/QuestionGroupPaging');
+          this.router.navigateByUrl('/Verification/QuestionGroup/Paging');
         },
         (error) => {
           console.log(error);

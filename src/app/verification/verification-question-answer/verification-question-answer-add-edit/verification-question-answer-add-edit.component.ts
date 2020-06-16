@@ -15,25 +15,21 @@ import { VerfQuestionAnswerObj } from 'app/shared/model/VerfQuestionAnswerObj.Mo
 })
 export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   verfQuestionAnswerObj: VerfQuestionAnswerObj;
-  VerfQuestionAnswerId: any;
-  pageType: any;
-  result: any;
-  title: string;
+  VerfQuestionAnswerId: number;
   mode: string = "add";
-  apiUrl: any;
   isActive: boolean = true;
   foundationUrl: string = environment.FoundationR3Url;
-  editUrl: any;
   itemVerfQuestionAnswer: any;
   verfQuestionAnswer: any;
-  answerTypeValue: any = "DDL";
+  answerTypeCode: string = "DDL";
+  isHidden: boolean = true;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionAnswerId = params["VerfQuestionAnswerId"];
       this.mode = params["mode"];
-      if (this.mode != "edit")
-        this.mode = "Add";
+      if (this.mode == "edit")
+        this.mode = "edit";
     })
   }
 
@@ -66,7 +62,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
           refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
           this.http.post(AdInsConstant.GetRefVerfAnswerTypeById, refAnswerObj).subscribe(
             (respond) => {
-              this.answerTypeValue = respond["VerfAnswerTypeCode"];
+              this.answerTypeCode = respond["VerfAnswerTypeCode"];
             }
           )
 
@@ -78,31 +74,24 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
             IsActive: this.verfQuestionAnswer.IsActive,
             RowVersion: this.verfQuestionAnswer.RowVersion
           });
+
+          this.AnswerTypeChanged(this.verfQuestionAnswer.RefVerfAnswerTypeId);
         }
       );
     }
   }
 
-  AnswerTypeChanged(selectedvalue)
-  {
-    var refAnswerObj = { RefVerfAnswerTypeId: selectedvalue };
-    if(selectedvalue!="DDL")
-    {
-      this.QuestionAnswerForm.controls.VerfAnswer.clearValidators();
-      
-    }
-    else
-    {
-      this.QuestionAnswerForm.controls.VerfAnswer.setValidators([Validators.required]);
-    }
-    this.QuestionAnswerForm.controls.VerfAnswer.updateValueAndValidity();
-    
-    
-    this.http.post(AdInsConstant.GetRefVerfAnswerTypeById, refAnswerObj).subscribe(
-      (respond) => {
-        this.answerTypeValue = respond["VerfAnswerTypeCode"];
-      }
-    )
+  AnswerTypeChanged(RefVerfAnswerTypeId) {
+    var object = this.itemVerfQuestionAnswer.find(x => x.RefVerfAnswerTypeId == RefVerfAnswerTypeId);
+        if (object.VerfAnswerTypeCode != "DDL") {
+          this.QuestionAnswerForm.controls.VerfAnswer.clearValidators();
+          this.isHidden = true;
+        }
+        else {
+          this.QuestionAnswerForm.controls.VerfAnswer.setValidators([Validators.required]);
+          this.isHidden = false;
+        }
+        this.QuestionAnswerForm.controls.VerfAnswer.updateValueAndValidity();
   }
 
   SaveForm() {
@@ -112,13 +101,14 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     this.verfQuestionAnswerObj.VerfQuestionText = this.verfQuestionAnswerObj.VerfQuestionText;
     this.verfQuestionAnswerObj.RefVerfAnswerTypeId = this.verfQuestionAnswerObj.RefVerfAnswerTypeId;
     this.verfQuestionAnswerObj.IsActive = this.verfQuestionAnswerObj.IsActive;
+
     if (this.mode == "edit") {
       this.verfQuestionAnswerObj.VerfQuestionAnswerId = this.VerfQuestionAnswerId;
       this.verfQuestionAnswerObj.RowVersion = this.verfQuestionAnswerObj.RowVersion;
       this.http.post(AdInsConstant.EditVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Verification/QuestionAnswerPaging');
+          this.router.navigateByUrl('/Verification/QuestionAnswer/Paging');
         },
         (error) => {
           console.log(error);
@@ -129,7 +119,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.AddVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Verification/QuestionAnswerPaging');
+          this.router.navigateByUrl('/Verification/QuestionAnswer/Paging');
         },
         (error) => {
           console.log(error);

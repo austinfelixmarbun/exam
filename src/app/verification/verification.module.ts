@@ -27,6 +27,7 @@ import { VerificationQuestionSchemeAddEditComponent } from './verification-quest
 import { VerificationQuestionSchemeMemberPagingComponent } from './verification-question-scheme-member/verification-question-scheme-member-paging/verification-question-scheme-member-paging.component';
 import { VerificationQuestionSchemeMemberAddComponent } from './verification-question-scheme-member/verification-question-scheme-member-add/verification-question-scheme-member-add.component';
 import { VerificationQuestionSchemeMemberEditComponent } from './verification-question-scheme-member/verification-question-scheme-member-edit/verification-question-scheme-member-edit.component';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { VerificationQuestionSchemeMemberEditComponent } from './verification-qu
     UcviewgenericModule,
     UclookupgenericModule,
     NgbDropdownModule,
-    ArchwizardModule
+    ArchwizardModule,
+    UcShowErrorsModule
   ],
   declarations: [
     VerificationComponent,
