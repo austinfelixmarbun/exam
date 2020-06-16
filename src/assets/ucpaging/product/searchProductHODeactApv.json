@@ -139,17 +139,18 @@
           "path": "/Product/HODeactivateApproval/Detail",
           "param": [
             {
+              "type": "ProdHId",
+              "property": "ProdHId"
+            },
+            {
               "type": "TaskId",
               "property": "TaskId"
             },
             {
               "type": "InstanceId",
               "property": "InstanceId"
-            },
-            {
-              "type": "ProdHId",
-              "property": "ProdHId"
             }
+
           ]
         }
       ]

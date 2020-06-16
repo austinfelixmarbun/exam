@@ -41,7 +41,8 @@ export class AdInsConstant {
   public static FormDefault = "dashboard/dash-board";
 
   public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
-
+  // ProductDeact
+  public static PROD_REASON_DEACT = "PROD_DEACT"
   // DOWNLOAD
   public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';
 
