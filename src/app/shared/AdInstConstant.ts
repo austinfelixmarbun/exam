@@ -272,8 +272,8 @@ export class AdInsConstant {
 
   //REF INDUSTRY TYPE
   public static GetRefIndustryTypeById = environment.FoundationR3Url + "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
-  public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
-  public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
+  public static AddRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/AddRefIndustryType";
+  public static EditRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/EditRefIndustryType";
   public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
 
   //REF PROV DISTRICT
@@ -392,7 +392,7 @@ export class AdInsConstant {
   public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
   public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
   public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
-  public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchm";
+  public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchmH";
   public static GetWorkingHourSchmHById = environment.FoundationR3Url + "/WorkingHourSchm/GetWorkingHourSchmHById";
   public static GetListWorkingHourSchmDByWorkingHourHId = environment.FoundationR3Url + "/WorkingHourSchm/GetListWorkingHourSchmDByWorkingHourHId";
 

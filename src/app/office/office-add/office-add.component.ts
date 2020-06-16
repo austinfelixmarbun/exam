@@ -154,6 +154,7 @@ export class OfficeAddComponent implements OnInit {
     this.InputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.InputLookupObj.pagingJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.genericJson = "./assets/lookup/lookupOfficeParent.json";
+    this.InputLookupObj.isRequired = true;
     this.InputLookupObj.ddlEnvironments = [
       {
         name: "A.MR_OFFICE_TYPE_CODE",
@@ -188,7 +189,6 @@ export class OfficeAddComponent implements OnInit {
 
         this.arrCrit.push(critObj);
         this.InputLookupObj.addCritInput = this.arrCrit;
-        //this.lookUpRefMasterOfficeObj.addCritInput = this.arrCrit;
       },
       (error) => {
         console.log(error);
@@ -259,7 +259,9 @@ export class OfficeAddComponent implements OnInit {
           console.log(error);
         })
 
-    } else if (this.pageType == "edit") {
+
+    }
+    else if (this.pageType == "edit") {
       this.OfficeForm.controls["OfficeCode"].disable();
       this.OfficeForm.controls["OfficeType"].disable();
       this.OfficeForm.controls["MrCenterGrpTypeCode"].disable();
@@ -272,10 +274,11 @@ export class OfficeAddComponent implements OnInit {
         (response) => {
           this.resultData = response;
           this.InputLookupObj.nameSelect = this.resultData["ParentOfficeCode"];
-
+          this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData["ParentOfficeCode"] };
           this.OfficeForm.patchValue({
             OfficeCode: this.resultData.OfficeCode,
             OfficeName: this.resultData.OfficeName,
+            OfficeParent : this.resultData.ParentId,
             OfficeType: this.resultData.MrOfficeTypeCode,
             OfficeShortName: this.resultData.OfficeShortName,
             MrOfficeClassCode: this.resultData.MrOfficeClassCode,
@@ -292,6 +295,7 @@ export class OfficeAddComponent implements OnInit {
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
           })
+          this.checkType();
           this.addressObj.Addr = this.resultData.OfficeAddr;
           this.addressObj.AreaCode4 = this.resultData.AreaCode4;
           this.addressObj.AreaCode3 = this.resultData.AreaCode3;
@@ -312,7 +316,6 @@ export class OfficeAddComponent implements OnInit {
           this.inputFieldAddr.inputLookupObj = new InputLookupObj();
           this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.resultData.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.resultData.Zipcode;
-
           this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
             (response) => {
               this.allCgType = response['ReturnObject'];
@@ -379,20 +382,18 @@ export class OfficeAddComponent implements OnInit {
 
         })
     }
-  }
 
+  }
   SaveForm(): void {
     this.officeObj = new OfficeObj();
     this.centerGrpObj = new OfficeObj();
     this.officeObj.RowVersion = "";
 
-    // this.officeObj.RefOfficeId = this.OfficeForm.value.RefOfficeId;
     this.officeObj.OfficeCode = this.OfficeForm.value.OfficeCode;
     this.officeObj.OfficeShortName = this.OfficeForm.value.OfficeShortName;
     this.officeObj.OfficeName = this.OfficeForm.value.OfficeName;
     this.officeObj.MrOfficeClassCode = this.OfficeForm.value.MrOfficeClassCode;
     this.officeObj.IsActive = this.OfficeForm.value.IsActive;
-    this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
     this.officeObj.IsAllowAppCreated = this.OfficeForm.value.AllowAppCreated;
     this.officeObj.HolidaySchmHId = this.OfficeForm.value.HolidayScheme;
     this.officeObj.WorkingHourSchmHId = this.OfficeForm.value.WorkingHourScheme;
@@ -402,6 +403,12 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.CntctPersonName = this.OfficeForm.value.CntctPersonName;
     this.officeObj.CntctPersonJobTitle = this.OfficeForm.value.CntctPersonJobTitle;
 
+    if(this.OfficeForm.controls.OfficeType.value == 'HO'){
+      this.officeObj.ParentId = null;
+    }
+    if(this.OfficeForm.controls.OfficeType.value != 'HO'){
+      this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
+    }
 
     if (this.officeObj.MrOfficeTypeCode == "CG") {
       this.centerGrpObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
@@ -486,6 +493,18 @@ export class OfficeAddComponent implements OnInit {
         }
       );
 
+    }
+  }
+  checkType() {
+    if (this.OfficeForm.controls.OfficeType.value == 'HO') {
+      this.InputLookupObj.isRequired = false;
+      this.OfficeForm.controls.OfficeParent.clearValidators();
+      this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
+    }
+    else{
+      this.InputLookupObj.isRequired = true;
+      this.OfficeForm.controls.OfficeParent.setValidators([Validators.required]);
+      this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
     }
   }
 
