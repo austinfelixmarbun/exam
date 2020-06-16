@@ -31,6 +31,7 @@ export class UcProdOfferingCompComponent implements OnInit {
 
   @Output() Save: EventEmitter<any> = new EventEmitter();
   @Output() Next: EventEmitter<any> = new EventEmitter();
+  @Output() OnCancel: EventEmitter<any> = new EventEmitter();
 
   DlRuleObj = {
     CompntValue: "",
@@ -215,6 +216,12 @@ export class UcProdOfferingCompComponent implements OnInit {
   NextDetail(){
     this.generateListForm(this.FormProdOfferingComp);
     this.Next.emit(this.list);
+  }
+
+  Cancel()
+  {
+    console.log("cancel emit");
+    this.OnCancel.emit();
   }
 
   generateListForm(formProdOfferingComp){

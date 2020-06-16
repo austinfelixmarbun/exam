@@ -23,12 +23,17 @@ export class ListOfficeMemberComponentOffering implements OnInit {
     private toastr:NGXToastrService,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) { 
+    this.route.queryParams.subscribe(params => {
+      this.source = params["source"];
+    });
+  }
   
   pageNow;
   pageSize;
   apiUrl;
   ProdOfferingHId : number;
+  source:string ="";
 
   ngOnInit() {
     this.pageNow = 1;
@@ -139,6 +144,24 @@ export class ListOfficeMemberComponentOffering implements OnInit {
     );
     this.toastr.successMessage("Submitted");
     this.toastr.successMessage("Submitted");
-    this.router.navigate(["/Product/ProdOffering/Paging"]);
+    this.BackToPaging();
   }
+
+  Cancel()
+  {
+    this.BackToPaging();
+  }
+
+  BackToPaging()
+  {
+    if(this.source == "return")
+    {
+      this.router.navigate(["/Product/ProdOffering/Returnpaging"]);
+    }
+    else
+    {
+      this.router.navigate(["/Product/ProdOffering/Paging"]);
+    }
+  }
+
 }

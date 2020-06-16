@@ -45,11 +45,11 @@ export class ProdOfferingReturnPagingComponent implements OnInit {
   {
     if(e.RowObj.DraftProdOfferingHId == null)
     {
-      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.CurrentProdOfferingHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.CurrentProdOfferingHId, "mode" : "edit", "source" : "return" } });
     }
     else
     {
-      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit", "source" : "return" } });
     }
   }
 }

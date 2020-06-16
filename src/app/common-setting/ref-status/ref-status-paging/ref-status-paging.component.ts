@@ -22,11 +22,11 @@ export class RefStatusPagingComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefStatus.json";
     this.inputPagingObj.ddlEnvironments = [
       {
-        name: "MODULE_CODE",
+        name: "A.MODULE_CODE",
         environment: environment.FoundationR3Url
       },
       {
-        name: "REF_TRX_TYPE_ID",
+        name: "A.REF_TRX_TYPE_ID",
         environment: environment.FoundationR3Url
       }
     ];
