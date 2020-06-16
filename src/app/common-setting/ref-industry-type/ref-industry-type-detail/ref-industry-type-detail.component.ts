@@ -25,6 +25,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
   RefIndustryTypeId: Number;
   resultData: any;
   inputLookupObj: InputLookupObj;
+  title: string = "Industry Type - Add";
 
   RefIndustryTypeForm = this.fb.group({
     RefIndustryTypeId: [0, [Validators.required]],
@@ -62,6 +63,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     this.inputLookupObj.genericJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
     
     if (this.type == 'edit') {
+      this.title = "Industry Type - Edit";
       this.refIndustryType = new RefIndustryTypeObj();
       this.refIndustryType.RefIndustryTypeId = this.RefIndustryTypeId;
       this.httpClient.post(AdInsConstant.GetRefIndustryTypeById, this.refIndustryType).pipe(
@@ -94,7 +96,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
 
   getLookupResponse(e){
     this.RefIndustryTypeForm.patchValue({
-      RefEconomicSectorId: e.refEconomicSectorId,
+      RefEconomicSectorId: e.RefEconomicSectorId,
     });
   }
 

@@ -22,6 +22,7 @@ export class RefIndustryTypeComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/search/searchIndustryType.json";
+    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefIndustryType;
   }
 
 }
