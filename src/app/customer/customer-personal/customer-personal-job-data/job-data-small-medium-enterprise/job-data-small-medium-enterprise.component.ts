@@ -369,9 +369,9 @@ export class JobDataSmeComponent implements OnInit {
     this.custPersonalJobDataObj.OthBizEstablishmentDt = this.JobDataSmeForm.controls["EstablishmentDate"].value;
   }
 
-  back(){
-    this.outputTab.emit({ stepMode: "previous"});
-  }
+  // back(){
+  //   this.outputTab.emit({ stepMode: "previous"});
+  // }
 
   SaveForm(){
     if(this.typePage == "edit") {
