@@ -22,6 +22,7 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
 import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { UcviewgenericModule } from '@adins/ucviewgeneric';
     ReactiveFormsModule,
     UcSubsectionModule,
     UcpagingModule,
-    UcSubsectionModule
+    UcSubsectionModule,
+    UcShowErrorsModule
   ],
   declarations: [
     EmployeePositionAddComponent,

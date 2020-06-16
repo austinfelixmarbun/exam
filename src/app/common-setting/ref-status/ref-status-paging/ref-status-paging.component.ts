@@ -20,5 +20,15 @@ export class RefStatusPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefStatus.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "A.MODULE_CODE",
+        environment: environment.FoundationR3Url
+      },
+      {
+        name: "A.REF_TRX_TYPE_ID",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 }

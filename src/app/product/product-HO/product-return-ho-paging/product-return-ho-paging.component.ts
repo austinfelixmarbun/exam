@@ -40,11 +40,11 @@ export class ProductReturnHoPagingComponent implements OnInit {
     
     if(e.RowObj.DraftProdHId == null)
     {
-      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.CurrentProdHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.CurrentProdHId, "mode" : "edit", "source" : "return" } });
     }
     else
     {
-      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.DraftProdHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.DraftProdHId, "mode" : "edit","source" : "return" } });
     }
   }
 }

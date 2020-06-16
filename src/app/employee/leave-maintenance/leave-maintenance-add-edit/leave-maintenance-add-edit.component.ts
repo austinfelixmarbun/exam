@@ -38,6 +38,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     StartDt: ['', Validators.required],
     EndDt: ['', Validators.required]
   });
+  businessDt: Date;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -57,7 +58,9 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDt = new Date(context["BusinessDt"]);  
+    
     this.inputEmpLookupObj = new InputLookupObj();
     this.inputEmpLookupObj.urlJson = "./assets/lookup/lookupEmp.json";
     this.inputEmpLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
@@ -100,9 +103,14 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         });
     }
   }
-
+  
   SaveForm() {
-    if (this.RefEmpLeaveMngmntForm.controls["EndDt"].value < this.RefEmpLeaveMngmntForm.controls["StartDt"].value) {
+    var businessDtRaw = new Date(localStorage.getItem("BusinessDateRaw"));
+    var StartDt = new Date(this.RefEmpLeaveMngmntForm.controls["StartDt"].value);
+    if (StartDt < businessDtRaw) {
+      this.toastr.errorMessage("Start Date must be equal or more than Business Date");
+    }
+    else if (this.RefEmpLeaveMngmntForm.controls["EndDt"].value < this.RefEmpLeaveMngmntForm.controls["StartDt"].value) {
       this.toastr.errorMessage("End Date must be equal or more than Start Date");
     }
     else {

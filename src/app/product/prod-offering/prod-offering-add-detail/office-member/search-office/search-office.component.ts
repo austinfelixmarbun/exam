@@ -54,6 +54,12 @@ export class SearchOfficeComponentOffering implements OnInit {
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputObj.addCritInput = this.arrAddCrit;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "roa.AREA_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.listSelectedId = new Array();
     this.tempListId = new Array();

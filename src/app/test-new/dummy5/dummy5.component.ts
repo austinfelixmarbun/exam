@@ -28,11 +28,11 @@ export class Dummy5Component implements OnInit {
     this.inputObj.ddlEnvironments = [
       {
         name: "A.MR_OFFICE_TYPE_CODE",
-        environment: environment.localHostUrl
+        environment: environment.FoundationR3Url
       },
       {
         name: "A.MR_OFFICE_CLASS_CODE",
-        environment: environment.localHostUrl
+        environment: environment.FoundationR3Url
       }
     ];
   }

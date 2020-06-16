@@ -34,7 +34,7 @@
       "type": "sort",
       "position": "center",
       "label": "Product name",
-      "name": "PROD_NAME"
+      "name": "PROD_OFFERING_NAME"
     },
     {
       "type": "sort",
@@ -93,7 +93,7 @@
     {
       "type": "text",
       "position": "center",
-      "property": "PROD_NAME"
+      "property": "PROD_OFFERING_NAME"
     },
     {
       "type": "date",

@@ -25,6 +25,12 @@ export class SurveyOrderComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyOrder.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "RE.REF_OFFICE_ID",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 
   event(ev){

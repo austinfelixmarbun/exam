@@ -67,6 +67,12 @@ export class OfficeEmpPosComponent implements OnInit {
     this.inputObj._url = "./assets/search/searchEmpList.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetEmpPositionPaging;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "refOfficeId",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.pageNow = 1;
     this.arrCrit = new Array();

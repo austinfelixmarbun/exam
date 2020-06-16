@@ -40,7 +40,7 @@ export class AdInsConstant {
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
 
-  public static WebSocketUrl = environment.FoundationR3Url + "/Notificationhub";
+  public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
 
   // DOWNLOAD
   public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';
@@ -210,7 +210,7 @@ export class AdInsConstant {
   public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
   public static EditRefZipcode = environment.FoundationR3Url + "/RefZipcode/EditRefZipCode";
   public static AddRefZipcode = environment.FoundationR3Url + "/RefZipcode/AddRefZipCode";
-  public static DeleteRefZipcode = environment.FoundationR3Url + "/RefZipcode/DeleteRefZipCode";
+  public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode";
   public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
   public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
 
@@ -272,8 +272,8 @@ export class AdInsConstant {
 
   //REF INDUSTRY TYPE
   public static GetRefIndustryTypeById = environment.FoundationR3Url + "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
-  public static AddRefIndustryType = "/RefIndustryType/AddRefIndustryType";
-  public static EditRefIndustryType = "/RefIndustryType/EditRefIndustryType";
+  public static AddRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/AddRefIndustryType";
+  public static EditRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/EditRefIndustryType";
   public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
 
   //REF PROV DISTRICT
@@ -392,7 +392,7 @@ export class AdInsConstant {
   public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
   public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
   public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
-  public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchm";
+  public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchmH";
   public static GetWorkingHourSchmHById = environment.FoundationR3Url + "/WorkingHourSchm/GetWorkingHourSchmHById";
   public static GetListWorkingHourSchmDByWorkingHourHId = environment.FoundationR3Url + "/WorkingHourSchm/GetListWorkingHourSchmDByWorkingHourHId";
 
@@ -547,7 +547,7 @@ export class AdInsConstant {
   public static AddVendorAddr = environment.FoundationR3Url + "/VendorAddr/AddVendorAddr";
   public static EditVendorAddr = environment.FoundationR3Url + "/VendorAddr/EditVendorAddr";
   public static GetVendorAddrByVendorId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorIdMrAddrType";
-  public static GetListHoByVendorId = environment.localHostUrl + "/Vendor/GetListHoByVendorId";
+  public static GetListHoByVendorId = environment.FoundationR3Url + "/Vendor/GetListHoByVendorId";
   public static GetListVendorBankAccByVendorId = environment.FoundationR3Url + "/VendorBankAcc/GetListVendorBankAccByVendorId";
   public static AddVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/AddVendorBankAcc";
   public static EditVendorBankAcc = environment.FoundationR3Url + "/VendorBankAcc/EditVendorBankAcc";

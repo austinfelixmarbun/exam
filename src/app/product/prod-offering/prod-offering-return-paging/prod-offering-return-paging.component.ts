@@ -19,16 +19,22 @@ export class ProdOfferingReturnPagingComponent implements OnInit {
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/ucpaging/product/searchProductOffering.json";
+    this.inputPagingObj._url = "./assets/ucpaging/product/searchProductOfferingReturn.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.deleteUrl = "/RefBank/DeleteRefBank";
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOffering.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOfferingReturn.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "A.Prod_Offering_Stat",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     var criteriaList = new Array<CriteriaObj>();
     var criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    criteriaObj.propName = 'P.PROD_STAT';
+    criteriaObj.propName = 'A.PROD_OFFERING_STAT';
     criteriaObj.value = "RET";
     criteriaList.push(criteriaObj);
 
@@ -39,11 +45,11 @@ export class ProdOfferingReturnPagingComponent implements OnInit {
   {
     if(e.RowObj.DraftProdOfferingHId == null)
     {
-      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.CurrentProdOfferingHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.CurrentProdOfferingHId, "mode" : "edit", "source" : "return" } });
     }
     else
     {
-      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit", "source" : "return" } });
     }
   }
 }
