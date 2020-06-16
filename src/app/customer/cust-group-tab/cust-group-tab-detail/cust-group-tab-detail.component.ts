@@ -59,6 +59,12 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustPersonalObj.urlEnviPaging = environment.FoundationR3Url;
       this.inputLookupCustPersonalObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
+      this.inputLookupCustPersonalObj.ddlEnvironments = [
+        {
+          name: "A.MR_CUST_TYPE_CODE",
+          environment: environment.FoundationR3Url
+        }
+      ];
       criteriaList = new Array();
       criteriaObj = new CriteriaObj();
       criteriaObj.restriction = AdInsConstant.RestrictionEq;
