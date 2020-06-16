@@ -232,9 +232,9 @@ export class CustFinDataTabComponent implements OnInit {
     return value.replace(/,/g, "");
   }
 
-  back(){
-    this.outputTab.emit({ stepMode: "previous"});
-  }
+  // back(){
+  //   this.outputTab.emit({ stepMode: "previous"});
+  // }
 
   // getCustFinData() {
   //   var response;

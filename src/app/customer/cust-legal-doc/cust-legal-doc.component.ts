@@ -88,7 +88,7 @@ export class CustLegalDocComponent implements OnInit {
   next() {
     this.router.navigate(['/Customer/Paging']);
   }
-  back(){
-    this.outputTab.emit({ stepMode: 'previous'});
-  }
+  // back(){
+  //   this.outputTab.emit({ stepMode: 'previous'});
+  // }
 }
