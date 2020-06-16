@@ -27,11 +27,16 @@ export class GeneralDataComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: NGXToastrService,
     private wizard: WizardComponent
-  ) { }
+  ) { 
+    this.route.queryParams.subscribe(params => {
+      this.source = params["source"];
+    });
+  }
 
   UrlBackEnd;
   listGeneralDataObj;
   prodOfferingHId: any;
+  source:string = "";
 
   ngOnInit() {
     this.prodOfferingHId = this.objInput["param"];
@@ -90,4 +95,20 @@ export class GeneralDataComponent implements OnInit {
     }
   }
 
+  Cancel()
+  {
+    this.BackToPaging();
+  }
+
+  BackToPaging()
+  {
+    if(this.source == "return")
+    {
+      this.router.navigate(["/Product/ProdOffering/Returnpaging"]);
+    }
+    else
+    {
+      this.router.navigate(["/Product/ProdOffering/Paging"]);
+    }
+  }
 }

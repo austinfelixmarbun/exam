@@ -21,8 +21,8 @@ export class ProdOfferingAddComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.ProdOfferingHId = params["ProdOfferingHId"];
-      console.log(params);
       this.mode = params["mode"];
+      this.source = params["source"];
       if (this.mode == "edit") {
         var tempCrit = new CriteriaObj();
         tempCrit.propName = this.key;
@@ -33,6 +33,7 @@ export class ProdOfferingAddComponent implements OnInit {
     })
   }
 
+  source:string = "";
   mode: string = "add";
   key: any;
   criteria: CriteriaObj[] = [];
@@ -131,7 +132,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingHId": this.resultData.ProdOfferingHId } });
+            this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingHId": this.resultData.ProdOfferingHId, source : this.source } });
           },
           error => {
             console.log(error);
@@ -145,7 +146,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingHId": response["DraftProdOfferingHId"] } });
+            this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingHId": response["DraftProdOfferingHId"], source : this.source } });
           },
           error => {
             console.log(error);
@@ -171,7 +172,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/Product/ProdOffering/Paging"]);
+            this.BackToPaging();
           },
           error => {
             console.log(error);
@@ -186,7 +187,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/Product/ProdOffering/Paging"]);
+            this.BackToPaging();
           },
           error => {
             console.log(error);
@@ -207,8 +208,6 @@ export class ProdOfferingAddComponent implements OnInit {
     let startDate = new Date(this.ProdOfferingForm.get("StartDt").value);
     let endDate = new Date(this.ProdOfferingForm.get("EndDt").value);
 
-
-
     if (startDate > endDate) {
       this.toastr.errorMessage("Start Date Must be Less than End Date");
       return false;
@@ -220,4 +219,22 @@ export class ProdOfferingAddComponent implements OnInit {
     }
     return true;
   }
+  
+  Cancel()
+  {
+    this.BackToPaging();
+  }
+
+  BackToPaging()
+  {
+    if(this.source == "return")
+    {
+      this.router.navigate(["/Product/ProdOffering/Returnpaging"]);
+    }
+    else
+    {
+      this.router.navigate(["/Product/ProdOffering/Paging"]);
+    }
+  }
 }
+
