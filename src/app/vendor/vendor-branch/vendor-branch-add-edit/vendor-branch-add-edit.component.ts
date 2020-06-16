@@ -387,12 +387,6 @@ export class VendorBranchAddEditComponent implements OnInit {
       critObjAgencyPersonal.value = "AGENCY_PERSONAL";
       this.inputLookupParentObj.addCritInput.push(critObjAgencyPersonal);
     }
-
-    var critIsActive = new CriteriaObj();
-    critIsActive.propName = "IS_ACTIVE";
-    critIsActive.restriction = AdInsConstant.RestrictionEq;
-    critIsActive.value = "1";
-    this.inputLookupParentObj.addCritInput.push(critIsActive);
   }
 
   UpdateValueAndValidity() {
