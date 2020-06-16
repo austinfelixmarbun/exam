@@ -46,7 +46,7 @@ export class ContactPersonAddEditComponent implements OnInit {
   result: any;
   zipcodee: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
   }
 
@@ -183,7 +183,6 @@ export class ContactPersonAddEditComponent implements OnInit {
   }
 
   HiddenCheck(){
-    console.log("contact person add edit")
     var obj={
       HiddenState: true
     }

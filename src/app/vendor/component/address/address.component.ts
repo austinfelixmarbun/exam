@@ -7,7 +7,6 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-address',
