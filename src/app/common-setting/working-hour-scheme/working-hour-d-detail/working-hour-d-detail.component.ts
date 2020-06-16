@@ -185,13 +185,6 @@ export class WorkingHourDDetailComponent implements OnInit {
       this.toastr.errorMessage("Working Hour From 2 In Between Working Hour 1");
       return false;
     }
-    // WorkingHourFrom1: "07:00"
-    // WorkingHourTo1: "18:00"
-    // WorkingHourFrom2: "11:00"
-    // WorkingHourTo2: "17:00
-    // WorkingHourSchmDay: "Friday"
-
-    // WorkingHourTo2: "17:00
     if(this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom1"].value < this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom2"].value){
       continue;
     }
