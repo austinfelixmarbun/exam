@@ -203,8 +203,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   setCustAddr(){
     this.custAddressObj.CustId = this.IdCust;
     this.custAddressObj.MrCustAddrTypeCode = this.CustDataPersonalForm.controls["MrCustAddrTypeCode"].value;
-    this.custAddressObj.Addr = this.CustDataPersonalForm.controls["custAddress"]["controls"].Addr.value;
-    this.custAddressObj.FullAddr = this.CustDataPersonalForm.controls["custAddress"]["controls"].Addr.value;
+    this.custAddressObj.Addr = this.CustDataPersonalForm.controls["custAddress"]["controls"].Addr.value; 
+    this.custAddressObj.FullAddr = this.CustDataPersonalForm.controls["custAddress"]["controls"].Addr.value + " RT: "+ this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode4.value+ " RW: " + this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode3.value + " " +  this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode2.value +", " + this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode1.value + " " +this.CustDataPersonalForm.controls["custAddressZipcode"]["controls"].value.value;   
     this.custAddressObj.AreaCode3 = this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode3.value;
     this.custAddressObj.AreaCode4 = this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode4.value;
     this.custAddressObj.Zipcode = this.CustDataPersonalForm.controls["custAddressZipcode"]["controls"].value.value;
