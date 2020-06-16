@@ -24,7 +24,8 @@
             <ng-container *ngFor="let item of responseObj">
               <tr>
                 <td></td>
-                <td class="text-left"><a [routerLink]="['/Customer/CustomerView/Page]" [queryParams]="{CustId: item.CustId}">{{item.ShrholderName}}</a></td>
+                <td class="text-left" *ngIf="item.CustId != 0"><a [routerLink]="['/Customer/CustomerView/Page']" [queryParams]="{CustId: item.CustId}" target="_blank">{{item.ShrholderName}}</a></td>
+                <td class="text-left" *ngIf="item.CustId == 0">{{item.ShrholderName}}</td>
                 <td class="text-left">{{item.Type}}</td>
                 <td class="text-left">{{item.CustModel}}</td>
                 <td class="text-left">{{item.TaxIdNo}}</td>
