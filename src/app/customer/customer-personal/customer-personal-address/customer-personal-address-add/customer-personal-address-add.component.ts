@@ -105,8 +105,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.http.post(this.getRefMasterWithReserveField, this.addressType).subscribe(
       (response) => {
           this.listAddressType = response['ReturnObject'];
-          console.log("ccc")
-          console.log(this.listAddressType)
+          // console.log("ccc")
+          // console.log(this.listAddressType)
           this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
       });
     
@@ -196,8 +196,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.copyCustomerAddrFrom.Zipcode};
           
       });
-      console.log("vvv")
-      console.log(this.CustDataPersonalForm)
+      // console.log("vvv")
+      // console.log(this.CustDataPersonalForm)
   }
 
   setCustAddr(){
@@ -229,6 +229,9 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   SaveForm(){
     this.custAddressObj = new CustAddrObj();
     this.setCustAddr();
+    // console.log("vvv")
+    // console.log(this.custAddressObj)
+
     if(this.pageType == "add"){
       this.http.post(this.addCustAddr, this.custAddressObj).subscribe(
         (response) => {
