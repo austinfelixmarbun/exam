@@ -180,24 +180,6 @@
               }
             }
           ]
-        },
-        {
-          "type": "switch",
-          "case": [
-            {
-              "conditions": [
-                {
-                  "property": "IsSystem",
-                  "value": "0",
-                  "restriction": "EQ"
-                }
-              ],
-              "result": {
-                "type": "delete",
-                "property": "RefMasterId"
-              }
-            }
-          ]
         }
       ]
     }

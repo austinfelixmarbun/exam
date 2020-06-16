@@ -156,9 +156,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
 
   }
 
-  back() {
-    this.outputTab.emit({ stepMode: 'previous' });
-  }
+  // back() {
+  //   this.outputTab.emit({ stepMode: 'previous' });
+  // }
 
   SaveValue() {
     this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
