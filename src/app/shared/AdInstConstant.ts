@@ -483,6 +483,7 @@ export class AdInsConstant {
 
   //REF REASON
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
+  public static RefReasonTypeCodeProdDeactivate = "PROD_DEACT";
 
   //asset accesory
   public static AddNewAssetAccesory = environment.FoundationR3Url + "/AssetAccessory/AddAssetAccessory"
