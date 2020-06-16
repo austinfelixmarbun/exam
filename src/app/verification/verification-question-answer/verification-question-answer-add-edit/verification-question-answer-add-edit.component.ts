@@ -108,7 +108,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.EditVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Verification/QuestionAnswer/Paging');
+          this.router.navigate(['/Verification/QuestionAnswer/Paging']);
         },
         (error) => {
           console.log(error);
@@ -119,7 +119,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.AddVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Verification/QuestionAnswer/Paging');
+          this.router.navigate(['/Verification/QuestionAnswer/Paging']);
         },
         (error) => {
           console.log(error);
