@@ -66,8 +66,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
     IsRestInPeace: [false],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
-    Email1: [''],
-    Email2: [''],
+    Email1: ['', Validators.pattern("^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$")],
+    Email2: ['', Validators.pattern("^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$")]
   }); 
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -254,7 +254,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
           MobilePhnNo1: this.tempCustPersonalObj.MobilePhnNo1,
           MobilePhnNo2: this.tempCustPersonalObj.MobilePhnNo2,
           Email1: this.tempCustPersonalObj.Email1,
-          Email2: this.tempCustPersonalObj.Email1
+          Email2: this.tempCustPersonalObj.Email2
         });
       });
   }

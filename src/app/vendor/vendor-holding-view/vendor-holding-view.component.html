@@ -90,7 +90,8 @@
           <tr *ngFor="let item of VendorGrp">
             <td class="text-left">{{item.VendorGrpCode}}</td>
             <td class="text-left">{{item.VendorGrpName}}</td>
-            <td class="text-left">{{item.IsActive}}</td>
+            <td class="text-left" *ngIf="item.IsActive == true">Yes</td>
+            <td class="text-left" *ngIf="item.IsActive == false">No</td>
           </tr>
         </tbody>
       </table>
@@ -112,7 +113,8 @@
             <td class="text-left">{{item.VendorCode}}</td>
             <td class="text-left">{{item.VendorName}}</td>
             <td class="text-left">{{item.Addr}}</td>
-            <td class="text-left">{{item.IsActive}}</td>
+            <td class="text-left" *ngIf="item.IsActive == true">Yes</td>
+            <td class="text-left" *ngIf="item.IsActive == false">No</td>
           </tr>
         </tbody>
       </table>
