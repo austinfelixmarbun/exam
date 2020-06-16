@@ -29,9 +29,6 @@ export class ProductHODeactivateEditComponent implements OnInit {
   viewObj: any;
   prodOfferVerUrl: string;
   ProdOfferVer: any;
-  DeactObj = {
-    RefReasonTypeCode: AdInsConstant.PROD_REASON_DEACT
-  };
 
   ProdHDeactForm = this.fb.group({
     Reason: ['', [Validators.required, Validators.maxLength(50)]],
@@ -57,8 +54,8 @@ export class ProductHODeactivateEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.http.post(this.getValueReasonModel, this.DeactObj).subscribe(
+    var obj = { RefReasonTypeCode: AdInsConstant.RefReasonTypeCodeProdDeactivate };
+    this.http.post(this.getValueReasonModel, obj).subscribe(
       (response) => {
         console.log(response);
         this.allRefReasonMethod = response['ReturnObject'];

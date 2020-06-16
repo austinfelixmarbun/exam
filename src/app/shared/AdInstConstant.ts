@@ -25,6 +25,12 @@ export class AdInsConstant {
   public static ApvTrxTypeProductOffering = "PROD_OFF_APV";
   public static ApvTrxTypeProductOfferingDeact = "PROD_OFF_DEACT_APV";
 
+  //Behaviour Type
+  public static BehaviourTypeLock = "LOCK";
+  public static BehaviourTypeMin = "MIN";
+  public static BehaviourTypeMax = "MAX";
+  public static BehaviourTypeDefault = "DEFAULT";
+
   public static showData = "10,50,100";
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
@@ -484,6 +490,7 @@ export class AdInsConstant {
 
   //REF REASON
   public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
+  public static RefReasonTypeCodeProdDeactivate = "PROD_DEACT";
 
   //asset accesory
   public static AddNewAssetAccesory = environment.FoundationR3Url + "/AssetAccessory/AddAssetAccessory"
