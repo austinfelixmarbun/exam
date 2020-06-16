@@ -66,6 +66,12 @@ export class EmployeePositionComponent implements OnInit {
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetEmpPositionPaging;
     this.getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "refOfficeId",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.pageNow = 1;
     this.arrCrit = new Array();

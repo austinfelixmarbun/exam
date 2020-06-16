@@ -20,5 +20,12 @@ export class OfficeComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchOffice.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefOffice;
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "A.MR_OFFICE_TYPE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
+    
   }
 }

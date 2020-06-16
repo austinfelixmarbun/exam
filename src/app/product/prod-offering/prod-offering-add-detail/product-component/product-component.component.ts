@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -20,13 +20,18 @@ export class ProductComponentComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private toastr: NGXToastrService,
-    private wizard: WizardComponent
-  ) { }
+    private wizard: WizardComponent,
+    private route: ActivatedRoute,
+  ) { 
+    this.route.queryParams.subscribe(params => {
+      this.source = params["source"];
+    });
+  }
 
   UrlBackEnd;
   prodOfferingHId: any;
   listProductComponentObj;
-
+  source:string = "";
 
   ngOnInit() {
     this.prodOfferingHId = this.objInput["param"];
@@ -39,7 +44,7 @@ export class ProductComponentComponent implements OnInit {
       (response) => {
         console.log(response);
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/Product/ProdOffering/Paging"]);
+        this.BackToPaging();
       },
       (error) => {
         console.log(error);
@@ -82,6 +87,23 @@ export class ProductComponentComponent implements OnInit {
         GeneralDataObj.MrProdBehaviour = event[i].HOMrProdBehaviour;
       }
       this.listProductComponentObj.ProdOfferingDetails.push(GeneralDataObj);
+    }
+  }
+
+  Cancel()
+  {
+    this.BackToPaging();
+  }
+
+  BackToPaging()
+  {
+    if(this.source == "return")
+    {
+      this.router.navigate(["/Product/ProdOffering/Returnpaging"]);
+    }
+    else
+    {
+      this.router.navigate(["/Product/ProdOffering/Paging"]);
     }
   }
 

@@ -11,7 +11,8 @@
             "placeholder": "Placeholder",
             "isFromURL": true,
             "isSelectOne" : false,
-            "url": "http://r3app-server/foundation/UploadType/GetListUploadTypeKeyValue",
+            "url": "",
+            "path": "/UploadType/GetListUploadTypeKeyValue",
             "label": "Upload Type Name",
             "items": [
                 {
@@ -52,7 +53,8 @@
             "placeholder": "Placeholder",
             "isFromURL": true,
             "isSelectOne" : false,
-            "url": "http://r3app-server/setting/RefStatus/GetRefStatusKeyValuePairByCriteria",
+            "url": "",
+            "path": "/RefStatus/GetRefStatusKeyValuePairByCriteria",
             "criteriaPropValue":"UPLOAD_STAT",
             "criteriaPropName":"TrxTypeCode",
             "label": "Upload Status",

@@ -25,7 +25,7 @@ export class TestPagingV2Component implements OnInit {
     //** lib-ucpaging **//
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/search/searchBank.json";
-    this.inputPagingObj.enviromentUrl = environment.settingUrl;
+    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefBank;
     this.inputPagingObj.pagingJson = "./assets/form-setting/dummyPaging.json";
@@ -35,7 +35,7 @@ export class TestPagingV2Component implements OnInit {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupRefBank.json";
     this.inputLookupObj.urlQryPaging = AdInsConstant.GetBankPaging;
-    this.inputLookupObj.urlEnviPaging = environment.settingUrl;
+    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/form-setting/dummyPaging2.json";
     this.inputLookupObj.genericJson = "./assets/form-setting/dummyGeneric.json";
     this.inputLookupObj.isRequired = true;

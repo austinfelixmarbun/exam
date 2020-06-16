@@ -105,8 +105,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.http.post(this.getRefMasterWithReserveField, this.addressType).subscribe(
       (response) => {
           this.listAddressType = response['ReturnObject'];
-          console.log("ccc")
-          console.log(this.listAddressType)
+          // console.log("ccc")
+          // console.log(this.listAddressType)
           this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
       });
     
@@ -196,15 +196,15 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.copyCustomerAddrFrom.Zipcode};
           
       });
-      console.log("vvv")
-      console.log(this.CustDataPersonalForm)
+      // console.log("vvv")
+      // console.log(this.CustDataPersonalForm)
   }
 
   setCustAddr(){
     this.custAddressObj.CustId = this.IdCust;
     this.custAddressObj.MrCustAddrTypeCode = this.CustDataPersonalForm.controls["MrCustAddrTypeCode"].value;
-    this.custAddressObj.Addr = this.CustDataPersonalForm.controls["custAddress"]["controls"].Addr.value;
-    this.custAddressObj.FullAddr = this.CustDataPersonalForm.controls["custAddress"]["controls"].Addr.value;
+    this.custAddressObj.Addr = this.CustDataPersonalForm.controls["custAddress"]["controls"].Addr.value; 
+    this.custAddressObj.FullAddr = this.CustDataPersonalForm.controls["custAddress"]["controls"].Addr.value + " RT: "+ this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode4.value+ " RW: " + this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode3.value + " " +  this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode2.value +", " + this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode1.value + " " +this.CustDataPersonalForm.controls["custAddressZipcode"]["controls"].value.value;   
     this.custAddressObj.AreaCode3 = this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode3.value;
     this.custAddressObj.AreaCode4 = this.CustDataPersonalForm.controls["custAddress"]["controls"].AreaCode4.value;
     this.custAddressObj.Zipcode = this.CustDataPersonalForm.controls["custAddressZipcode"]["controls"].value.value;
@@ -229,6 +229,9 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   SaveForm(){
     this.custAddressObj = new CustAddrObj();
     this.setCustAddr();
+    // console.log("vvv")
+    // console.log(this.custAddressObj)
+
     if(this.pageType == "add"){
       this.http.post(this.addCustAddr, this.custAddressObj).subscribe(
         (response) => {

@@ -28,6 +28,12 @@ export class NegativeAssetComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputPagingObj.deleteUrl = "";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNegativeAsset.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "A.MR_NEG_ASSET_SOURCE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     var criteriaList = new Array();
     var criteriaObj = new CriteriaObj();

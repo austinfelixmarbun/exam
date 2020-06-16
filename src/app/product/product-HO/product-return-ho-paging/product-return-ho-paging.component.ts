@@ -4,6 +4,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UcPagingObj } from '../../../shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-product-return-ho-paging',
@@ -18,17 +19,16 @@ export class ProductReturnHoPagingComponent implements OnInit {
 
   inputPagingObj;
   ngOnInit() {
-    this.inputPagingObj=new UcpagingModule();
-    this.inputPagingObj._url="./assets/ucpaging/product/searchProductHO.json";
+    this.inputPagingObj = new UcPagingObj();
+    this.inputPagingObj._url="./assets/ucpaging/product/searchProductHOReturn.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    // this.inputPagingObj.deleteUrl = "/RefBank/DeleteRefBank";
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductHO.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductHOReturn.json";
 
     var criteriaList = new Array<CriteriaObj>();
     var criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    criteriaObj.propName = 'C.PROD_STAT';
+    criteriaObj.propName = 'A.PROD_STAT';
     criteriaObj.value = "RET";
     criteriaList.push(criteriaObj);
 
@@ -40,11 +40,11 @@ export class ProductReturnHoPagingComponent implements OnInit {
     
     if(e.RowObj.DraftProdHId == null)
     {
-      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.CurrentProdHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.CurrentProdHId, "mode" : "edit", "source" : "return" } });
     }
     else
     {
-      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.DraftProdHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.DraftProdHId, "mode" : "edit","source" : "return" } });
     }
   }
 }

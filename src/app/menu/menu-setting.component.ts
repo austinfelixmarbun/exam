@@ -38,6 +38,12 @@ export class MenuSettingComponent implements OnInit {
     this.inputObj._url = "./assets/search/searchRefForm.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetRefFormPaging;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "RF.CLASS",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.pageNow = 1;
     this.pageSize = 10;

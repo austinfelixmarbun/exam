@@ -26,6 +26,16 @@ export class NegativeAssetUploadComponent implements OnInit {
       environmentUrl: environment.FoundationR3Url,
       apiQryPaging: AdInsConstant.GetPagingObjectBySQL,
       pagingJson: "./assets/ucpaging/searchNegativeAssetMonitoring.json",
+      ddlEnvironments: [
+        {
+          name: "UMH.UPLOAD_STATUS",
+          environment: environment.FoundationR3Url
+        },
+        {
+          name: "UMH.OFFICE_CODE",
+          environment: environment.FoundationR3Url
+        }
+      ],
       url: AdInsConstant.UploadFile
     }
   }
