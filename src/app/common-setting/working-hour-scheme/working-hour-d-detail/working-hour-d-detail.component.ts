@@ -160,6 +160,43 @@ export class WorkingHourDDetailComponent implements OnInit {
   }
  
   SaveForm() {
+    
+    for (var i = 0; i < 7; i++) {
+
+    if(this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom1"].value > this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourTo1"].value){
+      this.toastr.errorMessage("Working Hour From 1 Greater Than Working Hour To 1");
+      return false;
+    }
+    if(this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom2"].value > this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourTo2"].value){
+      this.toastr.errorMessage("Working Hour From 2 Greater Than Working Hour To 2");
+      return false;
+    }
+
+    if(this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom2"].value < this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom1"].value){
+      this.toastr.errorMessage("Working Hour From 2 Less Than Working Hour From 1");
+      return false;
+    }
+
+    if(this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourTo2"].value < this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourTo1"].value){
+      this.toastr.errorMessage("Working Hour To 2 Less Than Working Hour To 1");
+      return false;
+    }
+    if(this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom2"].value > this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom1"].value && this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom2"].value < this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourTo1"].value){
+      this.toastr.errorMessage("Working Hour From 2 In Between Working Hour 1");
+      return false;
+    }
+    // WorkingHourFrom1: "07:00"
+    // WorkingHourTo1: "18:00"
+    // WorkingHourFrom2: "11:00"
+    // WorkingHourTo2: "17:00
+    // WorkingHourSchmDay: "Friday"
+
+    // WorkingHourTo2: "17:00
+    if(this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom1"].value < this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom2"].value){
+      continue;
+    }
+  }
+
     this.listWorkingHourSchmDObj = new ListWorkingHourSchmDObj();
     this.listWorkingHourSchmDObj.WorkingHourSchmDObj = new Array();
     for (var i = 0; i < 7; i++) {
