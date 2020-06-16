@@ -69,7 +69,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.EditVerfSchemeH, this.verfSchemeHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Verification/QuestionSchemePaging');
+          this.router.navigate(['/Verification/QuestionScheme/Paging']);
         },
         (error) => {
           console.log(error);
@@ -80,7 +80,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.AddVerfSchemeH, this.verfSchemeHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Verification/QuestionSchemePaging');
+          this.router.navigate(['/Verification/QuestionScheme/Paging']);
         },
         (error) => {
           console.log(error);

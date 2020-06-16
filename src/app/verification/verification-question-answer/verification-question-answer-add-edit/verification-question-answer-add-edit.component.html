@@ -21,18 +21,18 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Verification Question Code </label>
                 <div class="col-md-3">
-                  <input type="text" class="form-control adInsInput width-75-per" [attr.disabled]="mode == 'edit' ? true : null" formControlName="VerfQuestionCode">
-                  <show-errors [control]="QuestionAnswerForm.controls.VerfQuestionCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="text" class="form-control adInsInput width-75-per" [attr.disabled]="mode == 'edit' ? true : null" formControlName="VerfQuestionCode" [ngClass]="{ 'is-invalid': enjiForm.submitted && QuestionAnswerForm.controls.VerfQuestionCode.invalid }">
+                  <lib-uc-show-errors [control]="QuestionAnswerForm.controls.VerfQuestionCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Verification Question Text </label>
                 <div class="col-md-3">
-                  <input type="text" class="form-control adInsInput width-75-per" formControlName="VerfQuestionText">
-                  <show-errors [control]="QuestionAnswerForm.controls.VerfQuestionText" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="text" class="form-control adInsInput width-75-per" formControlName="VerfQuestionText" [ngClass]="{ 'is-invalid': enjiForm.submitted && QuestionAnswerForm.controls.VerfQuestionText.invalid }">
+                  <lib-uc-show-errors [control]="QuestionAnswerForm.controls.VerfQuestionText" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -42,19 +42,19 @@
                   <select class="form-control adInsInput" style="width: auto" formControlName="RefVerfAnswerTypeId" (change)="AnswerTypeChanged($event.target.value)"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && QuestionAnswerForm.controls.RefVerfAnswerTypeId.invalid }">
                     <option *ngFor="let it of itemVerfQuestionAnswer" value="{{it.RefVerfAnswerTypeId}}">
-                      {{it.VerfAnswerTypeCode}}</option>
+                      {{it.VerfAnswerTypeDescr}}</option>
                   </select>
-                  <show-errors [control]="QuestionAnswerForm.controls.RefVerfAnswerTypeId" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="QuestionAnswerForm.controls.RefVerfAnswerTypeId" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
-              <div *ngIf="answerTypeValue == 'DDL'" class="form-group row adins-required">
+              <div *ngIf="!isHidden" class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Verification Answer </label>
                 <div class="col-md-3">
                   <input type="text" class="form-control adInsInput width-75-per" formControlName="VerfAnswer">
-                  <show-errors [control]="QuestionAnswerForm.controls.VerfAnswer" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="QuestionAnswerForm.controls.VerfAnswer" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -67,7 +67,7 @@
 
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1"
-                        [routerLink]="['/Verification/QuestionAnswerPaging']" translate>
+                        [routerLink]="['/Verification/QuestionAnswer/Paging']" translate>
                   <i class="ft-x"></i> Cancel
                 </button>
                 <button type="submit" class="btn btn-raised btn-primary" translate>
