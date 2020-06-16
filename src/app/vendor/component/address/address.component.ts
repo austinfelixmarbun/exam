@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./address.component.scss']
 })
 export class AddressComponent implements OnInit {
-  inputLookupZipcodeObj: any;
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
   vendorAddrObj: VendorAddrObj = new VendorAddrObj();
   mode: string = "add";
   @Input() objInput: any;
@@ -71,7 +71,6 @@ export class AddressComponent implements OnInit {
   }
 
   setLookup(){
-    this.inputLookupZipcodeObj = new InputLookupObj();
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
@@ -81,6 +80,8 @@ export class AddressComponent implements OnInit {
     if(this.vendorAddrObj!=null){
       this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.vendorAddrObj.Zipcode};
     }
+
+    this.inputLookupZipcodeObj.isReady = true;
   }
 
   getLookupZipcode(event) {

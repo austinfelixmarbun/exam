@@ -10,15 +10,15 @@
             <div class="form-body" id="AddressInformation">
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Address</label>
-                <div class="col-md-9">
-                  <textarea class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
+                <div class="col-md-5">
+                  <textarea class="form-control" formControlName="Addr"> </textarea>
                   <show-errors [control]="AddressForm.controls.Addr" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row" *ngIf="inputLookupZipcodeObj!=undefined">
+              <div class="form-group row" *ngIf="inputLookupZipcodeObj.isReady">
                 <label class="col-md-3 adins-required-label">Zip Code</label>
-                <div class="col-md-3">
+                <div class="col-md-5">
                   <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="AddressForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookupZipcode($event)">
                   </lib-uclookupgeneric>
@@ -26,32 +26,32 @@
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode2">
+                <div class="col-md-5">
+                  <input type="text" class="form-control" formControlName="AreaCode2">
                   <show-errors [control]="AddressForm.controls.AreaCode2" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode1">
+                <div class="col-md-5">
+                  <input type="text" class="form-control" formControlName="AreaCode1">
                   <show-errors [control]="AddressForm.controls.AreaCode1" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>City</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="City">
+                <div class="col-md-5">
+                  <input type="text" class="form-control" formControlName="City">
                   <show-errors [control]="AddressForm.controls.City" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Province</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Province">
+                <div class="col-md-5">
+                  <input type="text" class="form-control" formControlName="Province">
                   <show-errors [control]="AddressForm.controls.Province" [submit]="enjiForm.submitted">
                   </show-errors>
                 </div>
@@ -63,16 +63,16 @@
               <div class="form-body" id="LatLongInformation">
                 <div class="form-group row">
                   <label class="col-md-3  adInsLabel" translate>Latitude</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="Latitude">
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" formControlName="Latitude">
                     <show-errors [control]="AddressForm.controls.Latitude" [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3  adInsLabel" translate>Longitude</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="Longitude">
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" formControlName="Longitude">
                     <show-errors [control]="AddressForm.controls.Longitude" [submit]="enjiForm.submitted">
                     </show-errors>
                   </div>
