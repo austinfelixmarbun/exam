@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormArray } from '@angular/forms';
+import { FormBuilder, FormArray, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { saveAs } from 'file-saver';
@@ -102,8 +102,8 @@ export class UcProdOfferingCompComponent implements OnInit {
         }  
       }
     }else{
-      hoMrProdBehaviour = "LOCK";
-      offeringMrProdBehaviour = "LOCK";
+      hoMrProdBehaviour = AdInsConstant.BehaviourTypeDefault;
+      offeringMrProdBehaviour = AdInsConstant.BehaviourTypeLock;
     }
 
     return this.fb.group({
@@ -120,9 +120,15 @@ export class UcProdOfferingCompComponent implements OnInit {
       HOCompntValue : obj.HOCompntValue,
       HOCompntValueDesc : obj.HOCompntValueDesc,
       HOMrProdBehaviour : hoMrProdBehaviour,
-      OfferingCompntValue : offeringCompCode,
+      OfferingCompntValue : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeLock == true ? [{ value: offeringCompCode, disabled: true }]
+                            : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeMin == true ? [offeringCompCode, (Validators.required, Validators.min(obj.HOCompntValue))]
+                            : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeMax == true ? [offeringCompCode, (Validators.required, Validators.max(obj.HOCompntValue))]                      
+                            : obj.IsProdOffering == true ? [offeringCompCode, Validators.required]
+                            : offeringCompCode,
       OfferingCompntValueDesc : offeringCompDescr,
-      OfferingMrProdBehaviour : offeringMrProdBehaviour
+      OfferingMrProdBehaviour : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeLock == true ? [{ value: offeringMrProdBehaviour, disabled: true }]                      
+                              : obj.IsProdOffering == true ? [offeringMrProdBehaviour, Validators.required]
+                              : offeringMrProdBehaviour
     })
   }
   
@@ -191,12 +197,12 @@ export class UcProdOfferingCompComponent implements OnInit {
 
 
   GetBehaviourValue(refProdCompntCode, behaviourCode) {
-    console.log("THIS")
-    console.log(this.dictBehaviour);
-    console.log(refProdCompntCode + ":" + behaviourCode)
-    console.log(this.dictBehaviour[refProdCompntCode])
-    console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode))
-    console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode).Value)
+    // console.log("THIS")
+    // console.log(this.dictBehaviour);
+    // console.log(refProdCompntCode + ":" + behaviourCode)
+    // console.log(this.dictBehaviour[refProdCompntCode])
+    // console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode))
+    // console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode).Value)
     return this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode).Value
   }
 
@@ -220,7 +226,7 @@ export class UcProdOfferingCompComponent implements OnInit {
             OfferingCompntValueDesc : this.FormProdOfferingComp.controls["groups"].controls[i].controls["components"].controls[j].controls.OfferingCompntValue.value
           });
         }  
-        this.list.push(Object.assign({}, ...formProdOfferingComp.controls.groups.controls[i].controls["components"].controls[j].value));
+        this.list.push(Object.assign({}, ...formProdOfferingComp.controls.groups.controls[i].controls["components"].controls[j].getRawValue()));
       }
     }
   }
@@ -241,6 +247,10 @@ export class UcProdOfferingCompComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  test(){
+    console.log(this.FormProdOfferingComp);
   }
 }
 

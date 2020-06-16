@@ -319,7 +319,7 @@ export class GeneralDataHOComponent implements OnInit {
           var selectedText = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_text);
           this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].patchValue({
             CompntValue : selectedId.join(";"),
-            CompntValueDesc: selectedText.join(",")
+            CompntValueDesc: selectedText.join(", ")
           });
         }
         list.push(Object.assign({}, ...this.FormProdComp.controls.groups.controls[i].controls["components"].controls[j].value));
