@@ -60,7 +60,7 @@ export class ContactPersonAddEditComponent implements OnInit {
       RefMasterTypeCode: "JOB_POSITION",
       RowVersion: ""
     }
-    this.http.post("http://r3app-server/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", JobPosition).subscribe(
+    this.http.post(AdInsConstant.GetListActiveRefMaster, JobPosition).subscribe(
       (response) => {
         this.itemJobPosition = response["ReturnObject"];
         this.ContactPersonForm.patchValue({
