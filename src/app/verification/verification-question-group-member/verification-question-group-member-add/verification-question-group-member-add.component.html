@@ -28,10 +28,6 @@
 
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header row">
-                <h4 class="card-title col-md-6">Vendor Scheme Member</h4>
-              </div>
-
               <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
               </lib-UCSearch>
               <div [hidden]="resultData?.Data == null">
