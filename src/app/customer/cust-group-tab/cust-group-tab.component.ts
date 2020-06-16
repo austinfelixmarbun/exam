@@ -100,7 +100,7 @@ export class CustGroupTabComponent implements OnInit {
   next() {
     this.outputTab.emit({ stepMode: "next"});
   }
-  back(){
-    this.outputTab.emit({ stepMode: "previous"});
-  }
+  // back(){
+  //   this.outputTab.emit({ stepMode: "previous"});
+  // }
 }
