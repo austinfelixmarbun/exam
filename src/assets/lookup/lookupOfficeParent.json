@@ -10,19 +10,20 @@
             "placeholder": "Placeholder"
         },
         {
-            "type" : "dropdown",
-            "label" : "Office Type",
-            "isQueryIn":"true",
-            "name" : "A.MR_OFFICE_TYPE_CODE",
-            "id" : "MrOfficeTypeId",
-            "value" : "",
-            "datatype":"text",
-            "isFromURL":true,
-            "isSelectOne" : false,
+            "type": "dropdown",
+            "name": "A.MR_OFFICE_TYPE_CODE", 
+            "id": "MrOfficeTypeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
             "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Type",
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "OFFICE_TYPE",
-            "items" : [],
+            "items": [],
             "itemsUrl": []
         },
         {
@@ -36,7 +37,7 @@
     ],
     "querystring": {
         "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.MR_OFFICE_TYPE_CODE AS MrOfficeType, REF_OFFICE_ID AS RefOfficeId, B.DESCR AS Descr, A.PARENT_ID AS ParentId",
-        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER B ON A.MR_OFFICE_TYPE_CODE = B.MASTER_CODE AND B.REF_MASTER_TYPE_CODE = 'OFFICE_TYPE'",
+        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER B WITH(NOLOCK) ON A.MR_OFFICE_TYPE_CODE = B.MASTER_CODE AND B.REF_MASTER_TYPE_CODE = 'OFFICE_TYPE'",
       "where":"WHERE A.IS_ACTIVE = 1"
     },
 

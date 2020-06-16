@@ -189,7 +189,6 @@ export class OfficeAddComponent implements OnInit {
 
         this.arrCrit.push(critObj);
         this.InputLookupObj.addCritInput = this.arrCrit;
-        //this.lookUpRefMasterOfficeObj.addCritInput = this.arrCrit;
       },
       (error) => {
         console.log(error);
@@ -275,10 +274,11 @@ export class OfficeAddComponent implements OnInit {
         (response) => {
           this.resultData = response;
           this.InputLookupObj.nameSelect = this.resultData["ParentOfficeCode"];
-
+          this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData["ParentOfficeCode"] };
           this.OfficeForm.patchValue({
             OfficeCode: this.resultData.OfficeCode,
             OfficeName: this.resultData.OfficeName,
+            OfficeParent : this.resultData.ParentId,
             OfficeType: this.resultData.MrOfficeTypeCode,
             OfficeShortName: this.resultData.OfficeShortName,
             MrOfficeClassCode: this.resultData.MrOfficeClassCode,
@@ -316,7 +316,6 @@ export class OfficeAddComponent implements OnInit {
           this.inputFieldAddr.inputLookupObj = new InputLookupObj();
           this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.resultData.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.resultData.Zipcode;
-
           this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
             (response) => {
               this.allCgType = response['ReturnObject'];
@@ -385,13 +384,11 @@ export class OfficeAddComponent implements OnInit {
     }
 
   }
-
   SaveForm(): void {
     this.officeObj = new OfficeObj();
     this.centerGrpObj = new OfficeObj();
     this.officeObj.RowVersion = "";
 
-    // this.officeObj.RefOfficeId = this.OfficeForm.value.RefOfficeId;
     this.officeObj.OfficeCode = this.OfficeForm.value.OfficeCode;
     this.officeObj.OfficeShortName = this.OfficeForm.value.OfficeShortName;
     this.officeObj.OfficeName = this.OfficeForm.value.OfficeName;
