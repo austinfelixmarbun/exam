@@ -126,24 +126,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "switch",
-                    "case": [
-                        {
-                            "conditions": [
-                                {
-                                    "property": "IsActive",
-                                    "value": "1",
-                                    "restriction": "EQ"
-                                }
-                            ],
-                            "result": {
-                                "type": "delete",
-                                "property": "RefIndustryTypeId"
-                            }
-                        }
-                    ]
                 }
             ]
         }
