@@ -45,6 +45,7 @@ export class AdInsConstant {
   public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
+  public static MR_MARITAL_STAT_CODE_MARRIED = "MARRIED";
 
   public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
   // ProductDeact
