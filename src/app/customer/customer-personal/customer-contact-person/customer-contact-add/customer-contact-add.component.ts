@@ -25,6 +25,7 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 export class CustomerContactAddComponent implements OnInit {
   @Output() outputTab: EventEmitter<any> = new EventEmitter();
   @Input() custPersonalContactPersonId: number;
+  @Input() listCustIdToExclude: Array<string>;
 
   Country: any;
   tempCust: any;
@@ -165,6 +166,16 @@ export class CustomerContactAddComponent implements OnInit {
     this.existingCustomerLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
+    if(this.listCustIdToExclude.length > 0){
+      var criteriaListCust = new Array();
+      var criteriaCustObj = new CriteriaObj();
+      criteriaCustObj.DataType = "text";
+      criteriaCustObj.restriction = AdInsConstant.RestrictionNotIn;
+      criteriaCustObj.propName = 'CUST_NO';
+      criteriaCustObj.listValue = this.listCustIdToExclude;
+      criteriaListCust.push(criteriaCustObj);
+      this.existingCustomerLookUpObj.addCritInput = criteriaListCust;
+    }
 
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();

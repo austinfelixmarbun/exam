@@ -24,6 +24,7 @@ export class CustomerContactCheckComponent implements OnInit {
   deleteCustomerPersonalContactPersonUrl: string;
   custPersonContactPersonObj: CustPersonalContactPersonObj;
   resCustObj:any;
+  listCustIdToExclude: Array<string>;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
@@ -33,6 +34,7 @@ export class CustomerContactCheckComponent implements OnInit {
         this.IdCust = params["IdCust"];
       }
     });
+    this.listCustIdToExclude = new Array<string>();
   }
 
   ngOnInit() {
@@ -70,6 +72,12 @@ export class CustomerContactCheckComponent implements OnInit {
     this.http.post(this.getCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
       (response) => {
         this.tempCustomerPersonalContactPerson = response["ReturnObject"];
+        console.log("Contact Person: " + JSON.stringify(this.tempCustomerPersonalContactPerson));
+        for (const item of this.tempCustomerPersonalContactPerson) {
+          if(item["ContactPersonCustNo"] != null){
+            this.listCustIdToExclude.push(item["ContactPersonCustNo"]);
+          }
+        }
         // console.log("contperson")
         // console.log(this.tempCustomerPersonalContactPerson)
         // console.log("aaaa" + this.tempCustomerPersonalContactPerson);
@@ -85,6 +93,7 @@ export class CustomerContactCheckComponent implements OnInit {
       response => {
         this.resCustObj = response;
         window.open( environment.FoundationR3Web + "/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
+        // window.open("/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
       },
       error => {
         console.log(error);
