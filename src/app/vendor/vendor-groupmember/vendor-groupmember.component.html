@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-header row">
-      <h4 class="card-title col-md-6">Branch Search</h4>
+      <h4 class="card-title col-md-6">Vendor Search</h4>
     </div>
     <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
     </lib-UCSearch>
@@ -12,9 +12,9 @@
             <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)" id="checkAll"
                 name="CheckAll"></th>
             <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                name='VendorCode'>Branch Code</span></th>
+                name='VendorCode'>Vendor Code</span></th>
             <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
-                name='VendorName'>Branch Name</span></th>
+                name='VendorName'>Vendor Name</span></th>
             <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)"
                 name='IsActive'>Active Status</span></th>
           </tr>
@@ -50,11 +50,11 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='VendorCode'>Vendor Code</span>
+            <th><span translate>Vendor Code</span>
             </th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='VendorName'>Vendor Name</span>
+            <th><span translate>Vendor Name</span>
             </th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='IsActive'>Active Status</span>
+            <th><span translate>Active Status</span>
             </th>
             <th translate>Delete</th>
           </tr>

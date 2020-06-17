@@ -1,12 +1,12 @@
 {
-    "title": "Branch Search",
+    "title": "Vendor Search",
     "component": [
         {
             "type": "textbox",
             "name": "VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
-            "label": "Group Code",
+            "label": "Vendor Code",
             "placeholder": "Placeholder"
         },
         {
@@ -14,7 +14,7 @@
             "name": "VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
-            "label": "Group Name",
+            "label": "Vendor Name",
             "placeholder": "Placeholder"
         },
         {
