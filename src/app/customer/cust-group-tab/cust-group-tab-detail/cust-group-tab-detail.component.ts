@@ -59,21 +59,21 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustPersonalObj.urlEnviPaging = environment.FoundationR3Url;
       this.inputLookupCustPersonalObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
-      // this.inputLookupCustPersonalObj.ddlEnvironments = [
-      //   {
-      //     name: "A.MR_CUST_TYPE_CODE",
-      //     environment: environment.FoundationR3Url
-      //   }
-      // ];
-      criteriaList = new Array();
-      criteriaObj = new CriteriaObj();
-      criteriaObj.restriction = AdInsConstant.RestrictionEq;
-      criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
-      criteriaObj.value = "PERSONAL";
-      criteriaList.push(criteriaObj);
-      this.inputLookupCustPersonalObj.addCritInput = criteriaList;
-      this.inputLookupCustPersonalObj.isRequired = false;
-      refMasterRelationship.RefMasterTypeCode = "CUST_PERSONAL_RELATIONSHIP";
+      this.inputLookupCustPersonalObj.ddlEnvironments = [
+        {
+          name: "A.MR_CUST_TYPE_CODE",
+          environment: environment.FoundationR3Url
+        }
+      ];
+      // criteriaList = new Array();
+      // criteriaObj = new CriteriaObj();
+      // criteriaObj.restriction = AdInsConstant.RestrictionEq;
+      // criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
+      // criteriaObj.value = "PERSONAL";
+      // criteriaList.push(criteriaObj);
+      // this.inputLookupCustPersonalObj.addCritInput = criteriaList;
+      // this.inputLookupCustPersonalObj.isRequired = false;
+      // refMasterRelationship.RefMasterTypeCode = "CUST_PERSONAL_RELATIONSHIP";
     }
     else if(this.MrCustTypeCode == "COMPANY"){
       this.inputLookupCustCompanyObj = new InputLookupObj();
@@ -82,22 +82,22 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustCompanyObj.urlEnviPaging = environment.FoundationR3Url;
       this.inputLookupCustCompanyObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
-      // this.inputLookupCustCompanyObj.ddlEnvironments = [
-      //   {
-      //     name: "A.MR_CUST_TYPE_CODE",
-      //     environment: environment.FoundationR3Url
-      //   }
-      // ];
+      this.inputLookupCustCompanyObj.ddlEnvironments = [
+        {
+          name: "A.MR_CUST_TYPE_CODE",
+          environment: environment.FoundationR3Url
+        }
+      ];
 
-      criteriaList = new Array();
-      criteriaObj = new CriteriaObj();
-      criteriaObj.restriction = AdInsConstant.RestrictionEq;
-      criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
-      criteriaObj.value = "COMPANY";
-      criteriaList.push(criteriaObj);
-      this.inputLookupCustCompanyObj.addCritInput = criteriaList;
-      this.inputLookupCustCompanyObj.isRequired = false;
-      refMasterRelationship.RefMasterTypeCode = "CUST_COMPANY_RELATIONSHIP";
+      // criteriaList = new Array();
+      // criteriaObj = new CriteriaObj();
+      // criteriaObj.restriction = AdInsConstant.RestrictionEq;
+      // criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
+      // criteriaObj.value = "COMPANY";
+      // criteriaList.push(criteriaObj);
+      // this.inputLookupCustCompanyObj.addCritInput = criteriaList;
+      // this.inputLookupCustCompanyObj.isRequired = false;
+      // refMasterRelationship.RefMasterTypeCode = "CUST_COMPANY_RELATIONSHIP";
     }
 
     this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).subscribe(
