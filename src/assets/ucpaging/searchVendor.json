@@ -1,9 +1,9 @@
 {
-    "title": "Branch Search",
+    "title": "Vendor Search",
     "component": [
         {
             "type": "textbox",
-            "name": "VendorCode",
+            "name": "A.VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
             "label": "Branch Code",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "VendorName",
+            "name": "A.VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
             "label": "Branch Name",
@@ -19,7 +19,7 @@
         },
         {
             "type": "dropdown",
-            "name": "IsActive",
+            "name": "A.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -47,20 +47,20 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "BRANCH CODE",
-            "name": "VendorCode"
+            "label": "Vendor Code",
+            "name": "A.VENDOR_CODE"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "BRANCH NAME",
-            "name": "VendorName"
+            "label": "Vendor Name",
+            "name": "A.VENDOR_NAME"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "ACTIVE STATUS",
-            "name": "IsActive"
+            "label": "Active Status",
+            "name": "A.IS_ACTIVE"
         },
         {
             "type": "label",
