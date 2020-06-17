@@ -33,8 +33,8 @@ export class VendorService {
         return this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, Obj);
     }
 
-    GetVendorHOAndVendorAddrByVendorId(Obj : any) : Observable<Object> {
-        return this.http.post(AdInsConstant.GetVendorHOAndVendorAddr, Obj);
+    GetVendorAndVendorAddrByVendorId(Obj : any) : Observable<Object> {
+        return this.http.post(AdInsConstant.GetVendorAndVendorAddr, Obj);
     }
 
     EditVendorHolding(Obj : any) :  Observable<Object> {
