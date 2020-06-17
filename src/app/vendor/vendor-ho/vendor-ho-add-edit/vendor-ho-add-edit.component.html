@@ -49,7 +49,7 @@
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrVendorTypeCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrVendorTypeCode.invalid }"
-                      (change)="checkHOType()">
+                      (change)="checkType()">
                       <option *ngFor="let it of itemType" value="{{it.Key}}">
                         {{it.Value}}</option>
                     </select>
@@ -164,7 +164,7 @@
                 <div class="form-body">
                   <div class="form-group row">
                     <label class="col-md-3 adins-required-label">Supplier Holding</label>
-                    <div class="col-md-3">
+                    <div class="col-md-3" *ngIf="inputLookupParentObj.isReady">
                       <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                         [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                       </lib-uclookupgeneric>
@@ -191,9 +191,10 @@
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label">VAT</label>
                 <div class="col-md-9">
-                  <select class="form-control" formControlName="IsVAT">
+                  <select class="form-control" formControlName="IsVat">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
+                    
                   </select>
                 </div>
               </div>
@@ -221,7 +222,7 @@
                   </show-errors>
                 </div>
               </div>
-                <div class="form-group row" *ngIf="inputLookupZipcodeObj!=undefined">
+                <div class="form-group row" *ngIf="inputLookupZipcodeObj.isReady">
                   <label class="col-md-3 adins-required-label">Zip Code</label>
                   <div class="col-md-3">
                     <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
