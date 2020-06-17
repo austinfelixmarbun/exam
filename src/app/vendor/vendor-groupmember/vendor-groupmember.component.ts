@@ -58,6 +58,15 @@ export class VendorGroupmemberComponent implements OnInit {
     this.inputObj._url = "./assets/ucpaging/searchVendorGrpMember.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.addCritInput = new Array();
+
+    this.arrCrit = new Array();
+    var crit1Obj = new CriteriaObj();
+    crit1Obj.propName = "MR_VENDOR_CATEGORY_CODE";
+    crit1Obj.restriction = AdInsConstant.RestrictionEq;
+    crit1Obj.value = this.MrVendorCategoryCode;
+    this.arrCrit.push(crit1Obj);
+    this.inputObj.addCritInput = this.arrCrit;
 
     this.GetListVendorGrpMbrByVendorGrpId();
 
@@ -65,7 +74,6 @@ export class VendorGroupmemberComponent implements OnInit {
     this.listSelectedId = new Array();
     this.tempListId = new Array();
     this.tempData = new Array();
-    this.arrCrit = new Array();
 
     this.pageNow = 1;
     this.pageSize = 10;
@@ -247,7 +255,6 @@ export class VendorGroupmemberComponent implements OnInit {
     var obj = {
       VendorGrpId: this.VendorGrpId,
     }
-    this.inputObj.addCritInput = new Array();
     var getListUrl = AdInsConstant.GetListVendorGrpMbrByVendorGrpId;
     this.http.post(getListUrl, obj).subscribe(
       (response) => {

@@ -20,7 +20,6 @@ export class VendorGroupPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVendorGrp;
 
     this.inputPagingObj.ddlEnvironments = [
       {

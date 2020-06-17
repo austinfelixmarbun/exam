@@ -51,7 +51,7 @@ export class VendorGroupViewComponent implements OnInit {
     this.inputPagingObj.addCritInput.push(critInput);
 
     var critInput = new CriteriaObj();
-    critInput.propName = "C.MR_VENDOR_CATEGORY_CODE";
+    critInput.propName = "A.MR_VENDOR_CATEGORY_CODE";
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.MrVendorCategoryCode;
     this.inputPagingObj.addCritInput.push(critInput);

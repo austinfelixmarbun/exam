@@ -24,7 +24,7 @@
           {
             "type": "text",
             "label": "Tax Number",
-            "property": "TaxpayerNo"
+            "property": "TaxIdNo"
           },
           {
             "type": "text",
@@ -38,7 +38,7 @@
           }
         ],
         "querystring": {
-            "select": "SELECT RMC.DESCR AS VendorCategory, V.IS_ACTIVE AS IsActive, V.VENDOR_CODE AS VendorCode, V.TAXPAYER_NO AS TaxpayerNo,V.VENDOR_NAME AS VendorName, V.MR_VENDOR_TYPE_CODE AS MrVendorTypeCode, RMT.DESCR AS VendorType",
+            "select": "SELECT RMC.DESCR AS VendorCategory, V.IS_ACTIVE AS IsActive, V.VENDOR_CODE AS VendorCode, V.TAXPAYER_NO AS TaxpayerNo,V.VENDOR_NAME AS VendorName, V.MR_VENDOR_TYPE_CODE AS MrVendorTypeCode, RMT.DESCR AS VendorType, V.TAX_ID_NO AS TaxIdNo",
             "from": "FROM dbo.VENDOR V LEFT JOIN REF_MASTER RMC ON V.MR_VENDOR_CATEGORY_CODE = RMC.MASTER_CODE AND RMC.REF_MASTER_TYPE_CODE = 'VENDOR_CATEGORY' LEFT JOIN REF_MASTER RMT ON V.MR_VENDOR_TYPE_CODE = RMT.MASTER_CODE AND RMT.REF_MASTER_TYPE_CODE = 'VENDOR_TYPE'", 
             "where": "WHERE V.VENDOR_ID = {0}" 
         }
