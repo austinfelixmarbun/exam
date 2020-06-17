@@ -20,6 +20,7 @@ export class CustLegalDocComponent implements OnInit {
   
   custLegalDocs: any;
   IdCust: number;
+  Page : string;
   constructor(
     private router: Router,
     private httpClient: HttpClient,
@@ -31,6 +32,9 @@ export class CustLegalDocComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
+      }
+      if (params["Page"] != null) {
+        this.Page = params["Page"];
       }
     });
    }
@@ -103,6 +107,11 @@ export class CustLegalDocComponent implements OnInit {
   }
   next() {
     this.router.navigate(['/Customer/Paging']);
+    if (this.Page != null) {
+      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    } else {
+      this.router.navigate(["/Customer/Paging"]);
+    }
   }
   // back(){
   //   this.outputTab.emit({ stepMode: 'previous'});

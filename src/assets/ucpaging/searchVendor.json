@@ -46,13 +46,13 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Vendor Code",
             "name": "A.VENDOR_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Vendor Name",
             "name": "A.VENDOR_NAME"
         },
@@ -71,12 +71,12 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorCode"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorName"
         },
         {
