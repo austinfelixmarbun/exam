@@ -10,7 +10,7 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -29,7 +29,7 @@ export class CustFinDataTabComponent implements OnInit {
   spouseMonthlyIncomeAmt: number;
   mrMaritalStatCode: string;
   maritalConstant: string = AdInsConstant.MR_MARITAL_STAT_CODE_MARRIED;
-
+  Page : string;
   CustPersonalFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0, [Validators.required]],
     CustPersonalId: [0, [Validators.required]],
@@ -81,7 +81,8 @@ export class CustFinDataTabComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder, 
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     if(this.MrCustTypeCode == "PERSONAL"){
       this.isCalculated = false;
@@ -89,6 +90,11 @@ export class CustFinDataTabComponent implements OnInit {
     else if(this.MrCustTypeCode == "COMPANY"){
       this.isCalculated = true;
     }
+    this.route.queryParams.subscribe(params => {
+    if (params["Page"] != null) {
+      this.Page = params["Page"];
+    }
+  });
   }
 
   ngOnInit() {
@@ -351,8 +357,12 @@ export class CustFinDataTabComponent implements OnInit {
       this.httpClient.post(url, response).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          if(this.MrCustTypeCode == "PERSONAL"){
-            this.router.navigate(['/Customer/Paging']);
+          if(this.MrCustTypeCode == "PERSONAL"){  
+            if (this.Page != null) {
+              this.router.navigate(["/Customer/EditMainData/Paging"]);
+            } else {
+              this.router.navigate(["/Customer/Paging"]);
+            }
           }
           else if(this.MrCustTypeCode == "COMPANY"){
             this.outputTab.emit({ stepMode: "next"});
