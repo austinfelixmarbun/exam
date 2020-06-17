@@ -10,12 +10,14 @@ export class Dummy8Component implements OnInit {
 
   allpost: any;
   IsOverflow: boolean = false;
+  viewObj:string;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     console.log("dummy 8");
     this.loadInitPost();
+    this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
   }
 
   loadInitPost() {
@@ -25,4 +27,9 @@ export class Dummy8Component implements OnInit {
       this.allpost = data[0];
     });
   }
+
+  callback(param : any){
+    console.log(param);
+  }
+
 }

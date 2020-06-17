@@ -117,8 +117,11 @@
                                       </div>
                                 </div>
                                 <div class="form-actions right">
+                                    <button type="button" *ngIf="showCancel" class="btn btn-raised btn-warning margin-r-5" (click)="onCancelClick()" >
+                                        <i class="ft ft-x"></i> Cancel
+                                      </button>
                                     <button type="submit" class="btn btn-raised btn-primary">
-                                      <i class="fa fa-check-square-o"></i> Submit
+                                      <i class="fa fa-check-square"></i> Save
                                     </button>
                                 </div>
                             </form>

@@ -10,6 +10,7 @@ import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model'
 import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductOfferingDetailObj } from 'app/shared/model/ListRefProductOfferingDetailObj.Model';
 import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOfferingDetailObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-general-data',
@@ -27,14 +28,84 @@ export class GeneralDataComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: NGXToastrService,
     private wizard: WizardComponent
-  ) { }
+  ) { 
+    this.route.queryParams.subscribe(params => {
+      this.source = params["source"];
+    });
+  }
 
   UrlBackEnd;
   listGeneralDataObj;
-  prodOfferingHId: any;
+  prodOfferingHId: number;
+  prodOfferingId: number;
+  source:string = "";
+  inputLookUpObj: InputLookupObj;
+
+  FormCopyProdOffering = this.fb.group(
+    {
+
+    }
+  );
 
   ngOnInit() {
     this.prodOfferingHId = this.objInput["param"];
+    this.prodOfferingId = this.objInput["ProdOfferingId"];
+
+    this.initLookup();
+  }
+
+  initLookup(){
+    var user = JSON.parse(localStorage.getItem("UserAccess"));
+
+    //if (user.MrOfficeTypeCode == "HO") {
+      this.inputLookUpObj = new InputLookupObj();
+      this.inputLookUpObj.urlJson = "./assets/uclookup/product/lookupCopyProductOfferingHO.json";
+      this.inputLookUpObj.urlEnviPaging = environment.FoundationR3Url;
+      this.inputLookUpObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+      this.inputLookUpObj.pagingJson = "./assets/uclookup/product/lookupCopyProductOfferingHO.json";
+      this.inputLookUpObj.genericJson = "./assets/uclookup/product/lookupCopyProductOfferingHO.json";
+      this.inputLookUpObj.isRequired = false;
+  
+      var critObj = new CriteriaObj();
+      critObj.propName = 'PO.PROD_OFFERING_ID';
+      critObj.restriction = AdInsConstant.RestrictionNeq;
+      critObj.value = this.prodOfferingId.toString();
+      var arrCrit = new Array();
+      arrCrit.push(critObj);
+
+      critObj = new CriteriaObj();
+      critObj.propName = 'PO.REF_OFFICE_ID';
+      critObj.restriction = AdInsConstant.RestrictionEq;
+      critObj.value = user.OfficeId;
+      arrCrit.push(critObj);
+
+      this.inputLookUpObj.addCritInput = arrCrit;
+
+    //}else{
+    //   this.inputLookUpObj = new InputLookupObj();
+    //   this.inputLookUpObj.urlJson = "./assets/uclookup/product/lookupCopyProductOfferingBranch.json";
+    //   this.inputLookUpObj.urlEnviPaging = environment.FoundationR3Url;
+    //   this.inputLookUpObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    //   this.inputLookUpObj.pagingJson = "./assets/uclookup/product/lookupCopyProductOfferingBranch.json";
+    //   this.inputLookUpObj.genericJson = "./assets/uclookup/product/lookupCopyProductOfferingBranch.json";
+    //   this.inputLookUpObj.isRequired = false;
+  
+    //   var critObj = new CriteriaObj();
+    //   critObj.propName = 'PO.PROD_OFFERING_ID';
+    //   critObj.restriction = AdInsConstant.RestrictionNeq;
+    //   critObj.value = this.prodOfferingId.toString();
+    //   var arrCrit = new Array();
+    //   arrCrit.push(critObj);
+
+    //   critObj = new CriteriaObj();
+    //   critObj.propName = 'POBM.REF_OFFICE_ID';
+    //   critObj.restriction = AdInsConstant.RestrictionEq;
+    //   critObj.value = user.OfficeId;
+    //   arrCrit.push(critObj);
+
+    //   this.inputLookUpObj.addCritInput = arrCrit;
+    // }
+    
   }
 
   SaveForm(event) {
@@ -50,6 +121,27 @@ export class GeneralDataComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  reload() {
+    if(this.inputLookUpObj.jsonSelect["ProdOfferingId"] == undefined)
+    {
+      this.toastr.errorMessage("Please select Product Offering to copied");
+    }
+    else
+    {
+      if (confirm('This action will overwrite your Product Component and Product Branch Member, Are you sure to copy this Product ?')) {
+        this.http.post(AdInsConstant.CopyProductOffering, { ProdOfferingHId: this.prodOfferingHId, FromProdOfferingId: this.inputLookUpObj.jsonSelect["ProdOfferingId"] }).subscribe(
+          (response) => {
+            this.toastr.successMessage("Product Offering Copied Successfully");
+            window.location.reload();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+    }
   }
 
   NextDetail(event) {
@@ -90,4 +182,20 @@ export class GeneralDataComponent implements OnInit {
     }
   }
 
+  Cancel()
+  {
+    this.BackToPaging();
+  }
+
+  BackToPaging()
+  {
+    if(this.source == "return")
+    {
+      this.router.navigate(["/Product/ProdOffering/Returnpaging"]);
+    }
+    else
+    {
+      this.router.navigate(["/Product/ProdOffering/Paging"]);
+    }
+  }
 }

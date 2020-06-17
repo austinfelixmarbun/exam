@@ -1,17 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NgForm, Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { LookupdistrictComponent } from '@adins/lookupdistrict';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { UcPagingObj } from '../../shared/model/UcPagingObj.Model';
 
 
 @Component({
@@ -21,13 +17,13 @@ import { UcPagingObj } from '../../shared/model/UcPagingObj.Model';
 })
 export class ZipcodeAddComponent implements OnInit {
   pageType: string = "add";
-  refZipcodeId: any;
+  refZipcodeId: number;
   rzcObj: RefZipcodeObj;
   resultData: any;
-  apiUrl: any;
-  addUrl: any;
-  editUrl: any;
-  getRefDistrictUrl: any;
+  apiUrl: string;
+  addUrl: string;
+  editUrl: string;
+  getRefDistrictUrl: string;
   inputPagingObj: any;
   inputDistrictLookupObj;
   refDistrict: RefProvDistrictObj;
@@ -38,8 +34,8 @@ export class ZipcodeAddComponent implements OnInit {
     AreaCode2: ['', [Validators.required, Validators.maxLength(50)]],
     City: ['', [Validators.required, Validators.maxLength(50)]],
     Zipcode: ['', [Validators.required, Validators.maxLength(10)]],
-    SubZipcode: [' ', Validators.maxLength(10)],
-    PhnArea: ['', Validators.maxLength(10)],
+    SubZipcode: [' ', Validators.maxLength(4)],
+    PhnArea: ['', [Validators.required, Validators.maxLength(10)]],
     IsActive: [true, Validators.required]
   });
 
@@ -61,7 +57,6 @@ export class ZipcodeAddComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.inputDistrictLookupObj = new InputLookupObj();
     this.inputDistrictLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
     this.inputDistrictLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
@@ -75,8 +70,6 @@ export class ZipcodeAddComponent implements OnInit {
       this.http.post(this.apiUrl, this.rzcObj).subscribe(
         response => {
           this.resultData = response;
-          console.log("Response: ");
-          console.log(response);
           this.refZipcodeId = this.resultData.RefZipcodeId;
           this.inputDistrictLookupObj.idSelect = this.resultData.RefProvDistrictId;
           this.RefZipCodeForm.patchValue({
@@ -101,24 +94,17 @@ export class ZipcodeAddComponent implements OnInit {
               console.log(error);
             });
         },
-
         error => {
           console.log(error);
         });
-
-      
-
     }
-
   }
 
   SaveForm() {
-    console.log("a");
     this.rzcObj = new RefZipcodeObj();
     this.rzcObj = this.RefZipCodeForm.value;
     this.rzcObj.RefProvDistrictId = this.inputDistrictLookupObj.jsonSelect.refProvDistrictId;
-    if(this.rzcObj.SubZipcode=="")
-    {
+    if (this.rzcObj.SubZipcode == "") {
       this.rzcObj.SubZipcode = " ";
     }
     if (this.pageType == "add") {

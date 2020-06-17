@@ -88,7 +88,8 @@
             "isSelectOne" : false,
             "items" : [],
             "isFromURL" : true, 
-            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", 
+            "url" : "", 
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "NEG_ASSET_SOURCE"

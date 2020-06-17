@@ -37,6 +37,11 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { UcreportModule } from "@adins/ucreport";
 import { Dummy8Component } from './dummy8/dummy8.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { UcviewgenericModule } from "@adins/ucviewgeneric";
+import { Dummy9Component } from './dummy9/dummy9.component';
+import { UcTempComponent } from './uc-temp/uc-temp.component';
+import { UCSearchModule } from "@adins/ucsearch";
+import { UcgridfooterModule } from "@adins/ucgridfooter";
 
 @NgModule({
     imports: [
@@ -56,7 +61,10 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         NgxStepperModule,
         SharingComponentModule,
         UcreportModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        UcviewgenericModule,
+        UCSearchModule,
+        UcgridfooterModule
     ],
     declarations: [
         Dummy1Component,
@@ -78,7 +86,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         Step7Component,
         Step8Component,
         Dummy7Component,
-        Dummy8Component
+        Dummy8Component,
+        Dummy9Component,
+        UcTempComponent
     ],
     providers: [
         ArchwizardComponent,

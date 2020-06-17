@@ -51,7 +51,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
     IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    TaxIdNo: ['', [Validators.pattern("^[0-9]+$")]],
+    TaxIdNo: [''],
     IdExpiredDt: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel: ['', [Validators.required]],

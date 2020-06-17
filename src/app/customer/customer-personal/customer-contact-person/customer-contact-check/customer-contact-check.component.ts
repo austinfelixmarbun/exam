@@ -5,6 +5,8 @@ import { FormBuilder } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { ActivatedRoute } from '@angular/router';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { environment } from 'environments/environment.sit';
 
 @Component({
   selector: 'app-customer-contact-check',
@@ -21,6 +23,7 @@ export class CustomerContactCheckComponent implements OnInit {
   getCustomerPersonalContactPersonUrl: string;
   deleteCustomerPersonalContactPersonUrl: string;
   custPersonContactPersonObj: CustPersonalContactPersonObj;
+  resCustObj:any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
@@ -67,7 +70,25 @@ export class CustomerContactCheckComponent implements OnInit {
     this.http.post(this.getCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
       (response) => {
         this.tempCustomerPersonalContactPerson = response["ReturnObject"];
+        // console.log("contperson")
+        // console.log(this.tempCustomerPersonalContactPerson)
         // console.log("aaaa" + this.tempCustomerPersonalContactPerson);
       });
+  }
+
+  openView(ContactPersonCustNo)
+  {
+    // GetCustByCustNo
+    var custObj = new CustObj;
+    custObj.CustNo = ContactPersonCustNo
+    this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
+      response => {
+        this.resCustObj = response;
+        window.open( environment.FoundationR3Web + "/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

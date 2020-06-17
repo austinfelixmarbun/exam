@@ -17,12 +17,12 @@
             "property": "LicenseNo"
           },
           {
-            "type": "text",
+            "type": "date",
             "label": "Establishment Date:",
             "property": "EstablishmentDt"
           },
           {
-            "type": "text",
+            "type": "date",
             "label": "Partnership Date:",
             "property": "PartnershipDt"
           },
@@ -50,13 +50,57 @@
             "type": "text",
             "label": "Mobile Phone 2:",
             "property": "Mp2"
+          },
+          {
+            "type": "text",
+            "label": "Tax Calculation Method:",
+            "property": "MrTaxCalcMethod"
+          },
+          {
+            "type": "boolean",
+            "label": "VAT :",
+            "property": "IsVat"
+          },
+          {
+            "type": "text",
+            "label": "Tax Payer Name:",
+            "property": "TaxpayerName"
+          }, 
+          {
+            "type": "text",
+            "label": "Address:",
+            "property": "Address"
+          },
+          {
+            "type": "text",
+            "label": "Zip Code:",
+            "property": "ZipCode"
+          },
+          {
+            "type": "text",
+            "label": "Kelurahan",
+            "property": "Kelurahan"
+          },
+          {
+            "type": "text",
+            "label": "Kecamatan",
+            "property": "Kecamatan"
+          },
+          {
+            "type": "text",
+            "label": "City",
+            "property": "City"
+          },
+          {
+            "type": "text",
+            "label": "Province",
+            "property": "Province"
           }
-
         ],
         "querystring": {
-            "select":"SELECT REGISTRATION_NO AS RegistrationNo,LICENSE_NO AS LicenseNo,ESTABLISHMENT_DT AS EstablishmentDt,PARTNERSHIP_DT AS PartnershipDt,VENDOR_RATING AS VendorRating,EMAIL AS Email,MOBILE_PHN_NO_1 AS Mp1,MOBILE_PHN_NO_2 AS Mp2",
-            "from":"FROM dbo.VENDOR WITH (NOLOCK)",
-            "where":"WHERE MR_VENDOR_CLASS = 'HOLDING' AND VENDOR_ID = {0}"
+            "select":"SELECT V.REGISTRATION_NO AS RegistrationNo, V.LICENSE_NO AS LicenseNo, V.ESTABLISHMENT_DT AS EstablishmentDt, V.PARTNERSHIP_DT AS PartnershipDt, V.VENDOR_RATING AS VendorRating, V.EMAIL AS Email, V.MOBILE_PHN_NO_1 AS Mp1, V.MOBILE_PHN_NO_2 AS Mp2, V.MR_TAX_CALC_METHOD_CODE AS MrTaxCalcMethod, V.TAXPAYER_NAME AS TaxpayerName, V.IS_VAT AS IsVat, VADDR.ADDR AS Address, VADDR.ZIPCODE AS ZipCode, VADDR.AREA_CODE_1 AS Kecamatan,VADDR.AREA_CODE_2 AS Kelurahan, VADDR.CITY AS City,VADDR.PROVINCE AS Province",
+            "from":"FROM dbo.VENDOR V WITH(NOLOCK) JOIN dbo.VENDOR_ADDR VADDR WITH(NOLOCK) ON V.VENDOR_ID = VADDR.VENDOR_ID",
+            "where":"WHERE V.MR_VENDOR_CLASS = 'HOLDING' AND V.VENDOR_ID = {0} AND VADDR.MR_ADDR_TYPE_CODE = 'TAX'"
         }
       }
     ]

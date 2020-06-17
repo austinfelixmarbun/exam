@@ -59,7 +59,7 @@ export class CustomerCompanyPageComponent implements OnInit {
       this.http.post(AdInsConstant.GetCustCompanyByCustId, custObj).subscribe(
         (response: any) => {
           this.CustCompanyId = response['CustCompanyId'];
-        }
+        } 
       );
       console.log(this.CustCompanyId);
 

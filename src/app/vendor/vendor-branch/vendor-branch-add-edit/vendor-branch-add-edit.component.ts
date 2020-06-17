@@ -329,11 +329,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
     this.inputLookupParentObj = new InputLookupObj();
-    this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupBranchParent.json";
     this.inputLookupParentObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupHOParent.json";
-    this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupHOParent.json";
+    this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupBranchParent.json";
+    this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupBranchParent.json";
     this.inputLookupParentObj.isRequired = true;
     this.inputLookupParentObj.addCritInput = new Array();
 
@@ -365,8 +365,6 @@ export class VendorBranchAddEditComponent implements OnInit {
       critObjSurveyor.restriction = AdInsConstant.RestrictionEq;
       critObjSurveyor.value = "SURVEYOR_HO";
       this.inputLookupParentObj.addCritInput.push(critObjSurveyor);
-
-      this.UpdateValueAndValidity();
     }
     if (this.MrVendorCategoryCode == "ASSET_INSCO_BRANCH") {
       var critObjAssetInsurance = new CriteriaObj();

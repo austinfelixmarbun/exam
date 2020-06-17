@@ -17,12 +17,12 @@
             "property": "IdNo"
           },
           {
-            "type": "text",
+            "type": "date",
             "label": "Establishment Date:",
             "property": "EstablishmentDt"
           },
           {
-            "type": "text",
+            "type": "date",
             "label": "Partnership Date:",
             "property": "PartnershipDt"
           },

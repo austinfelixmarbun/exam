@@ -32,7 +32,7 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
+    this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformationForDeactApv.json";
     var obj = {
       taskId: this.taskId,
       instanceId: this.instanceId,
@@ -52,5 +52,7 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
     this.toastr.successMessage("Success");
     this.router.navigate(["/Product/HODeactivate"]);
   }
-
+  onCancelClick() {
+    this.router.navigate(["/Product/HODeactivateApproval"]);
+  }
 }

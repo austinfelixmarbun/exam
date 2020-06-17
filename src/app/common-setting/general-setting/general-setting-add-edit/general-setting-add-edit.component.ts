@@ -16,9 +16,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 export class GeneralSettingAddEditComponent implements OnInit {
 
   gsObj: GeneralSettingObj;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
   type: string = 'add';
   generalSettingId: any;
   resultData: any;
@@ -33,16 +30,10 @@ export class GeneralSettingAddEditComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
-    private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
     private service: NGXToastrService,
     private fb: FormBuilder
   ) {
-    this.getUrl = AdInsConstant.GetGeneralSettingById;
-    this.addUrl = AdInsConstant.AddGeneralSetting;
-    this.editUrl = AdInsConstant.EditGeneralSetting;
-
     this.route.queryParams.subscribe(params => {
       if (params['generalSettingId'] != null) {
         this.generalSettingId = params['generalSettingId'];
@@ -54,7 +45,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
   ngOnInit() {
     this.gsObj = new GeneralSettingObj();
     this.gsObj.GeneralSettingId = this.generalSettingId
-    this.httpClient.post(this.getUrl, this.gsObj).subscribe(
+    this.httpClient.post(AdInsConstant.GetGeneralSettingById, this.gsObj).subscribe(
       (response) => {
         this.resultData = response;
         console.log(this.resultData);
@@ -77,7 +68,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.gsObj.GsName = this.GeneralSettingForm.controls["GsName"].value;
     this.gsObj.GsValue = this.GeneralSettingForm.controls["GsValue"].value;
     this.gsObj.GsDescr = this.GeneralSettingForm.controls["GsDescr"].value;
-    this.httpClient.post(this.editUrl, this.gsObj).subscribe(
+    this.httpClient.post(AdInsConstant.EditGeneralSetting, this.gsObj).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
         this.router.navigate(["/CommonSetting/GeneralSetting"]);
