@@ -48,8 +48,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     JobTitleName: ['', [Validators.required]],
     MobilePhnNo1: ['', [Validators.pattern("^[0-9]+$"), Validators.maxLength(100), Validators.required]],
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
-    Email1: [''],
-    Email2: [''],
+    Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    Email2: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
