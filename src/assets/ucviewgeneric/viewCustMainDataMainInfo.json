@@ -34,7 +34,7 @@
           {
             "type": "text",
             "label": "NUM OF DEPENDENTS",
-            "property": "NoOfResidence"
+            "property": "NoOfDependents"
           },
           {
             "type": "text",
