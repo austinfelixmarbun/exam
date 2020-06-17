@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-view-header-company',
@@ -40,9 +41,8 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
       else if (params["CustId"] != null) {
         this.IdCust = params["CustId"];
       }
+      this.custUrl = environment.FoundationR3Web + '/Customer/CustomerView/Page?CustId=' + this.IdCust;
     });
-
-    this.custUrl = '../Customer/CustomerView/Page?CustId=' + this.IdCust;
   }
   ngOnInit() {
     
