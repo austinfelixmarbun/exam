@@ -156,10 +156,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "VendorGrpId"
                 }
             ]
         }

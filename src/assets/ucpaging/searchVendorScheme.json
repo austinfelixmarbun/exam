@@ -155,10 +155,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "VendorSchmId"
                 }
             ]
         }
