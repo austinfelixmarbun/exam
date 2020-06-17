@@ -7,6 +7,7 @@ import { CustGroupTabDetailComponent } from './cust-group-tab-detail/cust-group-
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-cust-group-tab',
@@ -49,7 +50,7 @@ export class CustGroupTabComponent implements OnInit {
     this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
       response => {
         this.resCustObj = response;
-        window.open("../Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
+        window.open(environment.FoundationR3Web +  "/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
       },
       error => {
         console.log(error);
