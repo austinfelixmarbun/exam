@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { ActivatedRoute } from '@angular/router';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { environment } from 'environments/environment.sit';
 
 @Component({
   selector: 'app-customer-contact-check',
@@ -83,7 +84,7 @@ export class CustomerContactCheckComponent implements OnInit {
     this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
       response => {
         this.resCustObj = response;
-        window.open("/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
+        window.open( environment.FoundationR3Web + "/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
       },
       error => {
         console.log(error);

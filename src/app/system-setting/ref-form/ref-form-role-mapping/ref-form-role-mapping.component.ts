@@ -157,9 +157,6 @@ export class RefFormRoleMappingComponent implements OnInit {
     if (this.listSelectedId.length != 0) {
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
-        console.log(this.tempListId)
-      }
-      for (var i = 0; i < this.listSelectedId.length; i++) {
         var object = this.resultData.Data.find(x => x.RefRoleId == this.listSelectedId[i]);
         this.tempData.push(object);
       }
