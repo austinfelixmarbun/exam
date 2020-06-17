@@ -46,6 +46,8 @@ export class AdInsConstant {
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
   public static MR_MARITAL_STAT_CODE_MARRIED = "MARRIED";
+  public static MR_CUST_TYPE_CODE_PERSONAL = "PERSONAL";
+  public static MR_CUST_TYPE_CODE_COMPANY = "COMPANY";
 
   public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
   // ProductDeact
