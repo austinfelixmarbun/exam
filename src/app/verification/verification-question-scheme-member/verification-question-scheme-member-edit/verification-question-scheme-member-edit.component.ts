@@ -76,7 +76,6 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     this.verfSchemeDObj = this.QuestionGroupForm.value;
     this.verfSchemeDObj.VerfSchemeHId = this.VerfSchemeHId;
     this.verfSchemeDObj.VerfSchemeDId = this.VerfSchemeDId;
-    this.verfSchemeDObj.RowVersion = this.verfSchemeDObj.RowVersion;
     console.log(this.verfSchemeDObj);
     this.http.post(AdInsConstant.EditVerfSchemeD, this.verfSchemeDObj).subscribe(
       (response) => {
