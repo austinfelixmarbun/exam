@@ -39,7 +39,7 @@
     ],
   
     "querystring": {
-      "select": "SELECT CUST_NO AS CustNo, CUST_NAME AS CustName , CUST_ID as CustId",
+      "select": "SELECT CUST_NO AS CustNo, CUST_NAME AS CustName , CUST_ID AS CustId, MR_CUST_TYPE_CODE AS MrCustTypeCode",
       "from": "FROM dbo.Cust WITH(NOLOCK)"
     },
   
