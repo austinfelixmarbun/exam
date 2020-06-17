@@ -20,6 +20,7 @@ export class ProdOfferingAddDetailComponent implements OnInit {
       // console.log(params);
       
       this.objPassing["param"] = params["ProdOfferingHId"];
+      this.objPassing["ProdOfferingId"] = params["ProdOfferingId"];
       this.objPassing["mode"] = params["mode"];
       this.objPassing["url"] = AdInsConstant.GetProdOfferingDetailInfo;
       this.key = params["key"];
