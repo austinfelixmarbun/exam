@@ -4,31 +4,31 @@
     "component": [
       {
         "type": "textbox",
-        "name": "economic_Sector_Code",
-        "id": "economicSectorCode",
+        "name": "ECONOMIC_SECTOR_CODE",
+        "id": "EconomicSectorCodeId",
         "value": "",
         "label": "Economic Sector Code",
         "placeholder": ""
       },
       {
         "type": "textbox",
-        "name": "economic_Sector_Name",
-        "id": "economicSectorName",
+        "name": "ECONOMIC_SECTOR_NAME",
+        "id": "EconomicSectorNameId",
         "value": "",
         "label": "Economic Sector Name",
         "placeholder": ""
       },
       {
         "type": "textbox",
-        "name": "sandi_Bi",
-        "id": "sandiBi",
+        "name": "REG_RPT_CODE",
+        "id": "RegRptCodeId",
         "value": "",
         "label": "BI Code",
         "placeholder": ""
       }
     ],
     "querystring": {
-      "select": "SELECT REF_ECONOMIC_SECTOR_ID AS refEconomicSectorId, ECONOMIC_SECTOR_CODE AS economicSectorCode, ECONOMIC_SECTOR_NAME AS economicSectorName, REG_RPT_CODE AS regRptCode",
+      "select": "SELECT REF_ECONOMIC_SECTOR_ID AS RefEconomicSectorId, ECONOMIC_SECTOR_CODE AS EconomicSectorCode, ECONOMIC_SECTOR_NAME AS EconomicSectorName, REG_RPT_CODE AS RegRptCode",
       "from": "FROM REF_ECONOMIC_SECTOR WITH(NOLOCK)",
       "where": "WHERE IS_ACTIVE = 1"
     },
@@ -37,19 +37,19 @@
             "type": "sort",
             "position": "left",
             "label": "Economic Sector Code",
-            "name": "economicSectorCode"
+            "name": "REF_ECONOMIC_SECTOR_ID"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Economic Sector Name",
-            "name": "economicSectorName"
+            "name": "ECONOMIC_SECTOR_NAME"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Sandi BI",
-            "name": "regRptCode"
+            "label": "BI Code",
+            "name": "REG_RPT_CODE"
         },
         {
             "type": "label",
@@ -61,17 +61,17 @@
         {
             "type": "text",
             "position": "left",
-            "property": "economicSectorCode"
+            "property": "EconomicSectorCode"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "economicSectorName"
+            "property": "EconomicSectorName"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "regRptCode"
+            "property": "RegRptCode"
         },
         {
             "type": "action",
@@ -79,11 +79,11 @@
             "action": [
                 {
                     "type": "select",
-                    "property": "refEconomicSectorId"
+                    "property": "RefEconomicSectorId"
                 }
             ]
         }
     ],
-    "propertyId": "refEconomicSectorId",
-    "propertyName": "economicSectorName"
+    "propertyId": "RefEconomicSectorId",
+    "propertyName": "EconomicSectorName"
 }

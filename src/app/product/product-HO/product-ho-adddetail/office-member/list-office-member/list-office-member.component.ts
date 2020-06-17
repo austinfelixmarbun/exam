@@ -23,8 +23,13 @@ export class ListOfficeMemberComponent implements OnInit {
     private toastr:NGXToastrService,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) { 
+    this.route.queryParams.subscribe(params => {
+      this.source = params["source"];
+    })
+  }
   
+  source:string="";
   pageNow;
   pageSize;
   apiUrl;
@@ -125,6 +130,23 @@ export class ListOfficeMemberComponent implements OnInit {
       }
     );
     this.toastr.successMessage("Submitted");
-    this.router.navigate(["/product/HOpaging"]);
+    this.BackToPaging();
+  }
+
+  Cancel()
+  {
+    this.BackToPaging();
+  }
+
+  BackToPaging()
+  {
+    if(this.source == "return")
+    {
+      this.router.navigate(["/Product/HOReturnPaging"]);
+    }
+    else
+    {
+      this.router.navigate(["/product/HOpaging"]);
+    }
   }
 }

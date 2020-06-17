@@ -43,6 +43,16 @@ export class UploadMonitoringComponent implements OnInit {
     this.inputObj._url = './assets/search/searchUploadMonitoring.json';
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetUploadMonitoringPaging;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "uploadTypeId",
+        environment: environment.FoundationR3Url
+      },
+      {
+        name: "mrUploadStatus",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.pageNow = 1;
     this.apiUrl = this.foundationUrl + AdInsConstant.GetUploadMonitoringPaging;

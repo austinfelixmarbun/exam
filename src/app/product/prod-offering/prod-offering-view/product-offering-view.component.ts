@@ -34,14 +34,13 @@ export class ProductOfferingViewComponent implements OnInit {
   refProductDetailObj: any;
   GenData: any;
   ProdComp: any;
-  ProdCompSchm: any;
-  ProdCompScore: any;
-  ProdCompRule: any;
-  ProdCompOther: any;
+  ProdCompGen: any;
+  ProdCompNonGen: any;
   ProdOfferingBranchMbr: any;
   ProdOfferingVersion: any;
   ProdOfferingCodeVersion: any;
   mainInfoByHIdOnly: boolean = true;
+  IsLoaded: boolean = false;
 
   DlRuleObj = {
     CompntValue: "",
@@ -108,11 +107,12 @@ export class ProductOfferingViewComponent implements OnInit {
     //** Product Offering Version **//
     this.ProdOfferingVersionObj = new ProdOfferingHVersionObj;
     this.ProdOfferingVersionObj.ProdOfferingHId = this.prodOfferingHId;
-    this.http.post(this.ProdOfferingVerUrl, this.ProdOfferingVersionObj).subscribe(
+    await this.http.post(this.ProdOfferingVerUrl, this.ProdOfferingVersionObj).toPromise().then(
       response => {
         console.log("Response: ");
         console.log(response);
         this.ProdOfferingVersion = response['ReturnObject'];
+
       },
       error => {
         console.log(error);
@@ -122,11 +122,12 @@ export class ProductOfferingViewComponent implements OnInit {
     //** Office Member **//
     this.ProdOfferingBranchMemObj = new RefProductOfferingBrancMbrObj;
     this.ProdOfferingBranchMemObj.ProdOfferingHId = this.prodOfferingHId;
-    this.http.post(this.ProdOfferingBranchUrl, this.ProdOfferingBranchMemObj).subscribe(
+    await this.http.post(this.ProdOfferingBranchUrl, this.ProdOfferingBranchMemObj).toPromise().then(
       response => {
         console.log("Response: ");
         console.log(response);
         this.ProdOfferingBranchMbr = response['ReturnObject'];
+
       },
       error => {
         console.log(error);
@@ -137,29 +138,25 @@ export class ProductOfferingViewComponent implements OnInit {
     //** Product Component **//
     this.refProductDetailObj = new RefProductOfferingDetailObj;
     this.refProductDetailObj.ProdOfferingHId = this.prodOfferingHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR'];
-    this.http.post(this.ProdOfferingDUrl, this.refProductDetailObj).subscribe(
+    this.refProductDetailObj.RefProdCompntGrpCode = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR','LOS'];
+    await this.http.post(this.ProdOfferingDUrl, this.refProductDetailObj).toPromise().then(
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdComp = response['ReturnObject'];
-
+        this.ProdComp = response['ReturnObject'].ProdOffComponents;
+        console.log(this.ProdComp);
         this.GenData = this.ProdComp.filter(
-          comp => comp.RefProdCompntGrpCode === 'GEN');
-        this.ProdCompSchm = this.ProdComp.filter(
-          comp => comp.RefProdCompntGrpCode === 'SCHM');
-        this.ProdCompScore = this.ProdComp.filter(
-          comp => comp.RefProdCompntGrpCode === 'SCORE');
-        this.ProdCompRule = this.ProdComp.filter(
-          comp => comp.RefProdCompntGrpCode === 'RULE');
-        this.ProdCompOther = this.ProdComp.filter(
-          comp => comp.RefProdCompntGrpCode === 'OTHR');
+          comp => comp.GroupCode == 'GEN');
+        this.ProdCompGen = this.GenData[0];
+        this.ProdCompNonGen = this.ProdComp.filter(
+          comp => comp.GroupCode != 'GEN');
+        console.log(this.ProdCompNonGen);
       },
       error => {
         console.log(error);
       }
     );
-
+    this.IsLoaded = true;
   }
   DownloadRule(CompntValue, CompntValueDesc) {
     this.DlRuleObj.CompntValue = CompntValue;

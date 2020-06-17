@@ -22,6 +22,12 @@ export class ProductHOPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     // this.inputPagingObj.deleteUrl = "/RefBank/DeleteRefBank";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductHO.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "A.Prod_Stat",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 
   EditButtonClick(e)

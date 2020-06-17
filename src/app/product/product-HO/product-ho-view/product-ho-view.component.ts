@@ -34,14 +34,12 @@ export class ProductHOViewComponent implements OnInit {
   ProdDUrl: any;
   refProductDetailObj: any;
   GenData: any;
-  ProdCompSchm: any;
-  ProdCompScore: any;
-  ProdCompRule: any;
-  ProdCompOther: any;
+  ProdCompGen: any;
+  ProdCompNonGen: any;
   ProdBranchMbr: any;
   ProdVersion: any;
   ProdComp: any;
-
+  IsLoaded: boolean = false;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
     this.ProdDUrl = AdInsConstant.GetProductDetailComponentInfo;
@@ -58,7 +56,7 @@ export class ProductHOViewComponent implements OnInit {
   DlRuleObj = {
     CompntValue: "",
   };
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
     if(this.prodHId == undefined){
       this.prodHId = this.inputProdHId;
     }
@@ -90,79 +88,28 @@ export class ProductHOViewComponent implements OnInit {
       }
     );
 
-    //** General Data **//
-    this.refProductDetailObj = new RefProductDetailObj
+    //** Product Component **//
+    this.refProductDetailObj = new RefProductDetailObj;
     this.refProductDetailObj.ProdHId = this.prodHId;
-    this.refProductDetailObj.GroupCodes = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR'];
-    this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
+    this.refProductDetailObj.GroupCodes = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR', 'LOS'];
+    await this.http.post(this.ProdDUrl, this.refProductDetailObj).toPromise().then(
       response => {
-        this.ProdComp = response['ReturnObject'];
-
+        console.log("Response: ");
+        console.log(response);
+        this.ProdComp = response['ReturnObject'].ProdOffComponents;
+        console.log(this.ProdComp);
         this.GenData = this.ProdComp.filter(
-          comp => comp.RefProdCompntGrpCode === 'GEN');
-        this.ProdCompSchm = this.ProdComp.filter(
-          comp => comp.RefProdCompntGrpCode === 'SCHM');
-        this.ProdCompScore = this.ProdComp.filter(
-          comp => comp.RefProdCompntGrpCode === 'SCORE');
-        this.ProdCompRule = this.ProdComp.filter(
-          comp => comp.RefProdCompntGrpCode === 'RULE');
-        this.ProdCompOther = this.ProdComp.filter(
-          comp => comp.RefProdCompntGrpCode === 'OTHR');
+          comp => comp.GroupCode == 'GEN');
+        this.ProdCompGen = this.GenData[0];
+        this.ProdCompNonGen = this.ProdComp.filter(
+          comp => comp.GroupCode != 'GEN');
+        console.log(this.ProdCompNonGen);
+        this.IsLoaded = true;
       },
       error => {
         console.log(error);
       }
     );
-
-    ////** Scheme Component **//
-    //this.refProductDetailObj = new RefProductDetailObj
-    //this.refProductDetailObj.ProdHId = this.prodHId;
-    //this.refProductDetailObj.GroupCodes = ['SCHM'];
-    //this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-    //  response => {
-    //    this.ProdCompSchm = response['ReturnObject'];
-    //  },
-    //  error => {
-    //    console.log(error);
-    //  }
-    //);
-    ////** Score Component **//
-    //this.refProductDetailObj = new RefProductDetailObj
-    //this.refProductDetailObj.ProdHId = this.prodHId;
-    //this.refProductDetailObj.GroupCodes = ['SCORE'];
-    //this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-    //  response => {
-    //    this.ProdCompScore = response['ReturnObject'];
-    //  },
-    //  error => {
-    //    console.log(error);
-    //  }
-    //);
-    //      //** Rule Component **//
-    //this.refProductDetailObj = new RefProductDetailObj
-    //this.refProductDetailObj.ProdHId = this.prodHId;
-    //this.refProductDetailObj.GroupCodes = ['RULE'];
-    //this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-    //  response => {
-    //    this.ProdCompRule = response['ReturnObject'];
-    //  },
-    //  error => {
-    //    console.log(error);
-    //  }
-    //);
-    
-    //      //** Other Component **//
-    //this.refProductDetailObj = new RefProductDetailObj
-    //this.refProductDetailObj.ProdHId = this.prodHId;
-    //this.refProductDetailObj.GroupCodes = ['OTHR'];
-    //this.http.post(this.ProdDUrl, this.refProductDetailObj).subscribe(
-    //  response => {
-    //    this.ProdCompOther = response['ReturnObject'];
-    //  },
-    //  error => {
-    //    console.log(error);
-    //  }
-    //);
 
   }
 

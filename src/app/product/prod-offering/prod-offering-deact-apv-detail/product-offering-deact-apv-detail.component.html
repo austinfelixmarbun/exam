@@ -1,3 +1,4 @@
+<h4 class="form-section card-title" translate><i class="ft-file-text"></i> Product Offering Deactivate Approval</h4>
 <lib-ucviewgeneric [viewInput]="viewProdOfferMainInfoObj"> </lib-ucviewgeneric>
 <br/>
-<lib-ucapproval [inputObj]="inputObj" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></lib-ucapproval>
+<lib-ucapproval [inputObj]="inputObj" [showCancel]="'true'" (onCancel)="onCancelClick()" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></lib-ucapproval>

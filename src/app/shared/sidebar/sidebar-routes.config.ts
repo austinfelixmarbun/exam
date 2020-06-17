@@ -89,9 +89,9 @@ export const ROUTES: RouteInfo[] = [
   {
     Path: '', Title: 'Verification', Icon: 'ft-layers', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
-      { Path: '/Verification/QuestionAnswerPaging', Title: 'Question Answer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Verification/QuestionSchemePaging', Title: 'Question Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Verification/QuestionGroupPaging', Title: 'Question Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] }
+      { Path: '/Verification/QuestionAnswer/Paging', Title: 'Question Answer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
+      { Path: '/Verification/QuestionScheme/Paging', Title: 'Question Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
+      { Path: '/Verification/QuestionGroup/Paging', Title: 'Question Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] }
       
     ]
   },

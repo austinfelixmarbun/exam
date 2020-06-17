@@ -21,11 +21,11 @@ import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model'
 export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) UCGridFooter;
   @ViewChild(UCSearchComponent) UCSearchComponent;
-  
+
   inputObj: any;
   arrCrit: any[];
   checkboxAll = false;
-  listSelectedId: any;
+  listSelectedId: Array<number> = new Array<number>();
   tempListId: any;
   orderByKey: any;
   orderByValue: any;
@@ -37,7 +37,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   arrAddCrit: any[];
   viewObj: any;
   Data = [];
-  
+
   verfQuestionGrpHObj: VerfQuestionGrpHObj;
   verfQuestionGrpDObj: VerfQuestionGrpDObj;
   VerfQuestionGrpHId: any;
@@ -50,7 +50,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
-   })
+    })
   }
 
   QuestionGroupForm = this.fb.group({
@@ -61,15 +61,21 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
 
     this.arrCrit = new Array();
 
-    this.listSelectedId = new Array();
+    this.listSelectedId = new Array<number>();
     this.tempListId = new Array();
     this.tempData = new Array();
     this.arrCrit = new Array();
-    
+
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/ucpaging/verification/searchVerificationQuestionAnswr.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "VQA.REF_VERF_ANSWER_TYPE_ID",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.pageNow = 1;
     this.pageSize = 10;
@@ -79,7 +85,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.http.post(AdInsConstant.GetQuestionGrpHForUpdateById, verfGroupObj).subscribe(
       (response) => {
         this.verfQuestionGroup = response["ReturnObject"];
-          this.VerfQuestionGrpCode = this.verfQuestionGroup.VerfQuestionGrpCode,
+        this.VerfQuestionGrpCode = this.verfQuestionGroup.VerfQuestionGrpCode,
           this.VerfQuestionGrpName = this.verfQuestionGroup.VerfQuestionGrpName
       }
     );
@@ -109,7 +115,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
   }
-  
+
   searchPagination(event: number) {
     this.pageNow = event;
     let order = null;
@@ -128,6 +134,8 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.UCGridFooter.pageNow = event.pageNow;
     this.UCGridFooter.totalData = this.totalData;
     this.UCGridFooter.resultData = this.resultData;
+    this.listSelectedId = new Array<number>();
+    this.checkboxAll = false;
   }
 
   onSelect(event) {
@@ -186,7 +194,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
       }
       this.inputObj.addCritInput = this.arrAddCrit;
       this.UCSearchComponent.search(AdInsConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order, this.arrAddCrit);
-      this.listSelectedId = [];
+      this.listSelectedId = new Array<number>();
       this.checkboxAll = false;
     } else {
       this.toastr.typeErrorCustom("Please select at least one Question Answer");
@@ -227,8 +235,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     }
   }
 
-  GetListVerfQuestionGrpDByVerfQuestionGrpHId()
-  {
+  GetListVerfQuestionGrpDByVerfQuestionGrpHId() {
     var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
     this.http.post(AdInsConstant.GetActiveVerfQuestionGrpDForUpdateByGrpHId, verfGroupObj).subscribe(
       (response) => {
@@ -236,10 +243,10 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         var arrMemberList = new Array();
 
         for (let index = 0; index < this.listVerfQuestionGrpD.ReturnObject.length; index++) {
-           arrMemberList.push(this.listVerfQuestionGrpD.ReturnObject[index].VerfQuestionAnswerId)
+          arrMemberList.push(this.listVerfQuestionGrpD.ReturnObject[index].VerfQuestionAnswerId)
         }
-        
-        if(arrMemberList.length != 0){
+
+        if (arrMemberList.length != 0) {
           const addCritListVerfQuestionAnswerId = new CriteriaObj();
           addCritListVerfQuestionAnswerId.DataType = "numeric";
           addCritListVerfQuestionAnswerId.propName = "VERF_QUESTION_ANSWER_ID";

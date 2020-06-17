@@ -1,17 +1,14 @@
-import { Component, OnInit, ViewChild} from "@angular/core";
+import { Component, OnInit} from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { environment } from "environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
-import { NgForm, FormBuilder, Validators, AbstractControl, FormGroup, FormControl } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { formatDate, DatePipe } from "@angular/common";
 import { RefBankObj } from "app/shared/model/RefBankObj.Model";
-import { UcAddressComponent } from "app/shared/UserControl/ucAddress/ucAddress.component";
-import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
-import { LookuprefbankComponent } from "@adins/lookuprefbank";
 import { NgxSpinnerService } from "ngx-spinner";
 import { RefUserObj } from "app/shared/model/RefUserObj.Model";
 import { EmpBankAccObj } from "app/shared/model/EmpBankAccObj.Model";
@@ -26,18 +23,6 @@ import { forkJoin } from "rxjs";
   providers: [NGXToastrService]
 })
 export class EmployeeAddComponent implements OnInit {
-  private getEmpUrl: string = AdInsConstant.GetRefEmployeeById;
-  private getRefUserUrl: string = environment.FoundationR3Url + AdInsConstant.GetRefUserByRefEmpId;
-  private getEmpBankUrl: string = environment.FoundationR3Url + AdInsConstant.GetEmpBankAccByRefEmpId;
-  private getGeneralSettingUrl : string = AdInsConstant.GetGeneralSettingByCode;
-  private getRefBankUrl: string = AdInsConstant.GetRefBankByRefBankIdAsync;
-  private addUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefEmp;
-  private editUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefEmp;
-  private addUsrUrl: string = environment.FoundationR3Url + AdInsConstant.AddRefUserR3;
-  private editUsrUrl: string = environment.FoundationR3Url + AdInsConstant.EditRefUserForRefEmpR3;
-  private addEmpBankAcc: string = environment.FoundationR3Url + AdInsConstant.AddEmpBankAcc;
-  private editEmpBankAcc: string = environment.FoundationR3Url + AdInsConstant.EditEmpBankAcc;
-  
   pageType: string = "add";
   RefEmpId: number;
   inputLookupZipCodeObj: InputLookupObj;
@@ -50,7 +35,7 @@ export class EmployeeAddComponent implements OnInit {
   empBankAccObj: any;
   refBankObj: any;
   IdTypeList:any;
-  businessDt: any;
+  businessDt: Date;
   
   RefEmpForm = this.fb.group({
     RefUserId: [0, [Validators.required]],
@@ -63,7 +48,7 @@ export class EmployeeAddComponent implements OnInit {
     JoinDt: ['', [Validators.required]],
     MrIdTypeCode: ['', [Validators.required]],
     IdNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    TaxIdNo: ['', [Validators.required]],
+    TaxIdNo: [''],
     IsExt: [false],
     IsActive: [true],
     IsLeave: [false],
@@ -87,8 +72,8 @@ export class EmployeeAddComponent implements OnInit {
     Fax: ['', [Validators.pattern('^[0-9]+$')]],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
     MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
-    Email1: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]],
-    Email2: ['', [Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]],
+    Email1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    Email2: ['', [Validators.pattern('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$')]],
     RowVersion: [''],
     EmpBankAccId: [0, [Validators.required]],
     RefBankId: [0, [Validators.required]],
@@ -118,7 +103,7 @@ export class EmployeeAddComponent implements OnInit {
 
     this.generalSettingObj = new GeneralSettingObj();
     this.generalSettingObj.GsCode = "PASSWORD_REGEX";
-    httpClient.post(this.getGeneralSettingUrl, this.generalSettingObj).subscribe(
+    httpClient.post(AdInsConstant.GetGeneralSettingByCode, this.generalSettingObj).subscribe(
       (response) => {
         this.resultData = response;
         this.passwordPattern = this.resultData.GsValue;
@@ -165,7 +150,7 @@ export class EmployeeAddComponent implements OnInit {
       var empObj = new RefEmpObj();
       empObj.RefEmpId = this.RefEmpId;
 
-      this.httpClient.post(this.getEmpUrl, empObj).pipe(
+      this.httpClient.post(AdInsConstant.GetRefEmployeeById, empObj).pipe(
         map( response => {
           return response;
         }),
@@ -178,8 +163,8 @@ export class EmployeeAddComponent implements OnInit {
           var tempResponse = [];
           tempResponse.push(response);
 
-          const refUserObj = this.httpClient.post(this.getRefUserUrl, tempRefUser);
-          const empBankAccObj = this.httpClient.post(this.getEmpBankUrl, tempEmpBankAcc);
+          const refUserObj = this.httpClient.post(AdInsConstant.GetRefUserByRefEmpId, tempRefUser);
+          const empBankAccObj = this.httpClient.post(AdInsConstant.GetEmpBankAccByRefEmpId, tempEmpBankAcc);
 
           return forkJoin([tempResponse, refUserObj, empBankAccObj]);
         }),
@@ -194,7 +179,7 @@ export class EmployeeAddComponent implements OnInit {
           var tempResponseEmpBank = [];
           tempResponseEmpBank.push(response[2]);
 
-          const refBankObj = this.httpClient.post(this.getRefBankUrl, tempRefBank);
+          const refBankObj = this.httpClient.post(AdInsConstant.GetRefBankByRefBankIdAsync, tempRefBank);
 
           return forkJoin([tempResponseEmp, tempResponseUsr, tempResponseEmpBank, refBankObj]);
         })
@@ -347,14 +332,14 @@ export class EmployeeAddComponent implements OnInit {
     empBankAccData.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
-      this.httpClient.post(this.addUrl, refEmpData).pipe(
+      this.httpClient.post(AdInsConstant.AddRefEmp, refEmpData).pipe(
         map( response => {
           this.resultData = response;
           refUserData.RefEmpId = this.resultData.RefEmpId;
           empBankAccData.RefEmpId = this.resultData.RefEmpId;
         }),
-        mergeMap(() => this.httpClient.post(this.addEmpBankAcc, empBankAccData)),
-        mergeMap(() => this.httpClient.post(this.addUsrUrl, refUserData))
+        mergeMap(() => this.httpClient.post(AdInsConstant.AddEmpBankAcc, empBankAccData)),
+        mergeMap(() => this.httpClient.post(AdInsConstant.AddRefUserR3, refUserData))
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
@@ -368,10 +353,10 @@ export class EmployeeAddComponent implements OnInit {
     else {
       empBankAccData.RowVersion = this.empBankAccObj.RowVersion;
       refUserData.RowVersion = this.refUserObj.RowVersion;
-      this.httpClient.post(this.editUrl, refEmpFormData).pipe(
-        map( response => {}),
-        mergeMap(() => this.httpClient.post(this.editEmpBankAcc, empBankAccData)),
-        mergeMap(() => this.httpClient.post(this.editUsrUrl, refUserData))
+      this.httpClient.post(AdInsConstant.EditRefEmp, refEmpFormData).pipe(
+        map( () => {}),
+        mergeMap(() => this.httpClient.post(AdInsConstant.EditEmpBankAcc, empBankAccData)),
+        mergeMap(() => this.httpClient.post(AdInsConstant.EditRefUserForRefEmpR3, refUserData))
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);

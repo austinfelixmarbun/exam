@@ -28,6 +28,7 @@ export class CustFinDataTabComponent implements OnInit {
   isCalculated: boolean;
   spouseMonthlyIncomeAmt: number;
   mrMaritalStatCode: string;
+  maritalConstant: string = AdInsConstant.MR_MARITAL_STAT_CODE_MARRIED;
 
   CustPersonalFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0, [Validators.required]],
@@ -232,9 +233,9 @@ export class CustFinDataTabComponent implements OnInit {
     return value.replace(/,/g, "");
   }
 
-  back(){
-    this.outputTab.emit({ stepMode: "previous"});
-  }
+  // back(){
+  //   this.outputTab.emit({ stepMode: "previous"});
+  // }
 
   // getCustFinData() {
   //   var response;
@@ -292,7 +293,7 @@ export class CustFinDataTabComponent implements OnInit {
 
     if (this.MrCustTypeCode == "PERSONAL") {
       var tempResponse = this.CustPersonalFinDataForm.value;
-      if(this.mrMaritalStatCode != "MAR"){
+      if(this.mrMaritalStatCode != AdInsConstant.MR_MARITAL_STAT_CODE_MARRIED){
         tempResponse.SpouseMonthlyIncomeAmt = 0;
       }
       else{

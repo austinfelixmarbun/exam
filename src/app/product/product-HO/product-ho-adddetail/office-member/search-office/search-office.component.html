@@ -38,6 +38,7 @@
           </tr>
         </tbody>
       </table>
+      <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
 
       <div class="card-header">
         <div class="text-right">
@@ -45,8 +46,7 @@
             <i class="fa ft-plus"></i> Add To Temp
           </button>
         </div>
-      </div>
-
+      </div>      
       <div [hidden]="tempData?.length == 0">
         <table class="table table-responsive-md text-center table-hover">
           <thead>

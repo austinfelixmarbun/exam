@@ -49,4 +49,9 @@ export class ProductHOApprovalDetailComponent implements OnInit {
     this.toastr.successMessage("Success");
     this.router.navigate(["/Product/HOApproval"]);
   }
+
+  onCancelClick()
+  {
+    this.router.navigate(["/Product/HOApproval"]);
+  }
 }
