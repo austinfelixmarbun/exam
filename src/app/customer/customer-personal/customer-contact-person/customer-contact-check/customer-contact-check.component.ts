@@ -93,6 +93,7 @@ export class CustomerContactCheckComponent implements OnInit {
       response => {
         this.resCustObj = response;
         window.open( environment.FoundationR3Web + "/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
+        // window.open("/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
       },
       error => {
         console.log(error);

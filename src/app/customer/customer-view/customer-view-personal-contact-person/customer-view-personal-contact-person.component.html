@@ -7,9 +7,9 @@
             <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>ID TYPE</span> </th>
             <th class="text-left"><span class="thead-header" name='fullAssetName' translate>CONTACT PERSON NAME</span>
             </th>
-            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>ID NO</span> </th>
+            <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>ID NO</span> </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>BIRTH PLACE</span> </th>
-            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>BIRTH DATE</span> </th>
+            <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>BIRTH DATE</span> </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>MOTHER MAIDEN NAME</span>
             </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>GENDER</span> </th>
@@ -21,27 +21,27 @@
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>NATIONALITY</span> </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>NATIONALITY COUNTRY</span>
             </th>
-            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>CUSTOMER RELATIONSHIP</span>
+            <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>CUSTOMER RELATIONSHIP</span>
             </th>
-            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>IS EMERGENCY CONTACT</span>
+            <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>IS EMERGENCY CONTACT</span>
             </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>IS FAMILY</span> </th>
-            <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>MOBILE PHONE 1</span> </th>
-            <th class="text-left"><span class="thead-header" name='fullAssetName' translate>MOBILE PHONE 2</span> </th>
+            <th class="text-center"><span class="thead-header" name='fullAssetCode' translate>MOBILE PHONE 1</span> </th>
+            <th class="text-center"><span class="thead-header" name='fullAssetName' translate>MOBILE PHONE 2</span> </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>EMAIL</span> </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>ADDRESS</span> </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>KECAMATAN</span> </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>KELURAHAN</span> </th>
-            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>RW</span> </th>
-            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>RT</span> </th>
+            <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>RW</span> </th>
+            <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>RT</span> </th>
             <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>CITY</span> </th>
-            <th class="text-left"><span class="thead-header" name='fullAssetName' translate>ZIP CODE</span> </th>
-            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>SUB ZIP CODE</span>
+            <th class="text-center"><span class="thead-header" name='fullAssetName' translate>ZIP CODE</span> </th>
+            <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>SUB ZIP CODE</span>
             </th>
-            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>CONTACT PERSON CUST NO.</span> </th>
-            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>ID EXPIRED DATE</span>
+            <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>CONTACT PERSON CUST NO.</span> </th>
+            <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>ID EXPIRED DATE</span>
             </th>
-            <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>NPWP</span> </th>
+            <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>NPWP</span> </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>NEGATIVE CUST TYPE</span>
             </th>
           </tr>
@@ -51,9 +51,9 @@
             <tr>
               <td class="text-left">{{item.IdType}}</td>
               <td class="text-left">{{item.ContactPersonName}}</td>
-              <td class="text-left">{{item.IdNo}}</td>
+              <td class="text-center">{{item.IdNo}}</td>
               <td class="text-left">{{item.BirthPlace}}</td>
-              <td class="text-left">{{item.BirthDt  | date: 'dd-MMM-yyyy'}}</td>
+              <td class="text-center">{{item.BirthDt  | date: 'dd-MMM-yyyy'}}</td>
               <td class="text-left">{{item.MotherMaidenName}}</td>
               <td class="text-left">{{item.Gender}}</td>
               <td class="text-left">{{item.Religion}}</td>
@@ -63,24 +63,24 @@
               <td class="text-left">{{item.Nationality}}</td>
               <td class="text-left">{{item.NationalityCountry}}</td>
               <td class="text-left">{{item.CustRelationship}}</td>
-              <td class="text-left" *ngIf="item.IsEmergencyContact == true">Yes</td>
-              <td class="text-left" *ngIf="item.IsEmergencyContact == false">No</td>
-              <td class="text-left" *ngIf="item.IsFamily == true">Yes</td>
-              <td class="text-left" *ngIf="item.IsFamily == false">No</td>
-              <td class="text-left">{{item.MobilePhnNo1}}</td>
-              <td class="text-left">{{item.MobilePhnNo2}}</td>
+              <td class="text-center" *ngIf="item.IsEmergencyContact == true">Yes</td>
+              <td class="text-center" *ngIf="item.IsEmergencyContact == false">No</td>
+              <td class="text-center" *ngIf="item.IsFamily == true">Yes</td>
+              <td class="text-center" *ngIf="item.IsFamily == false">No</td>
+              <td class="text-center">{{item.MobilePhnNo1}}</td>
+              <td class="text-center">{{item.MobilePhnNo2}}</td>
               <td class="text-left">{{item.Email}}</td>
               <td class="text-left">{{item.Addr}}</td>
               <td class="text-left">{{item.AreaCode1}}</td>
               <td class="text-left">{{item.AreaCode2}}</td>
-              <td class="text-left">{{item.AreaCode3}}</td>
-              <td class="text-left">{{item.AreaCode4}}</td>
+              <td class="text-center">{{item.AreaCode3}}</td>
+              <td class="text-center">{{item.AreaCode4}}</td>
               <td class="text-left">{{item.City}}</td>
               <td class="text-left">{{item.Zipcode}}</td>
               <td class="text-left">{{item.SubZipcode}}</td>
-              <td class="text-left">{{item.ContactPersonCustNo}}</td>
-              <td class="text-left">{{item.IdExpiredDt | date: 'dd-MMM-yyyy'}}</td>
-              <td class="text-left">{{item.TaxIdNo}}</td>
+              <td class="text-center" style="color: blue; cursor: pointer; text-align: center;"><a (click)="openView(item.ContactPersonCustNo)">{{item.ContactPersonCustNo}}</a></td>
+              <td class="text-center">{{item.IdExpiredDt | date: 'dd-MMM-yyyy'}}</td>
+              <td class="text-center">{{item.TaxIdNo}}</td>
               <td class="text-left">{{item.NegCustType}}</td>
             </tr>
           </ng-container>
