@@ -19,7 +19,7 @@
           <ng-container *ngFor="let item of responseObj">
             <tr>
               <td class="text-left"></td>
-              <td class="text-left">{{item.CustNo}}</td>
+              <td class="text-left"><a href="{{custViewUrl + item.CustId}}" target="_blank">{{item.CustNo}} </a></td>
               <td class="text-left">{{item.CustName}}</td>
               <td class="text-left">{{item.CustRelationship}}</td>
               <td class="text-left">{{item.Notes}}</td>

@@ -12,7 +12,7 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
   CustId: number;
   GetListCustGrpForCustViewByCustIdUrl = AdInsConstant.GetListCustGrpForCustViewByCustId;
   responseObj: any;
-
+  custViewUrl : string;
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -20,6 +20,7 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.custViewUrl = "../Customer/CustomerView/Page?CustId=";
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
