@@ -4,10 +4,10 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>ID TYPE</span> </th>
             <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>CONTACT PERSON CUST NO.</span> </th>
             <th class="text-left"><span class="thead-header" name='fullAssetName' translate>CONTACT PERSON NAME</span>
             </th>
+            <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>ID TYPE</span> </th>
             <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>ID NO</span> </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>BIRTH PLACE</span> </th>
             <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>BIRTH DATE</span> </th>
@@ -49,9 +49,9 @@
         <tbody>
           <ng-container *ngFor="let item of responseObj">
             <tr>
-              <td class="text-left">{{item.IdType}}</td>
               <td class="text-center" style="color: blue; cursor: pointer; text-align: center;"><a (click)="openView(item.ContactPersonCustNo)">{{item.ContactPersonCustNo}}</a></td>
               <td class="text-left">{{item.ContactPersonName}}</td>
+              <td class="text-left">{{item.IdType}}</td>
               <td class="text-center">{{item.IdNo}}</td>
               <td class="text-left">{{item.BirthPlace}}</td>
               <td class="text-center">{{item.BirthDt  | date: 'dd-MMM-yyyy'}}</td>

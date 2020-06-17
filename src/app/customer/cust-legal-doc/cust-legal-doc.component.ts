@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cust-legal-doc',
@@ -15,30 +15,46 @@ import { Router } from '@angular/router';
   providers: [NGXToastrService]
 })
 export class CustLegalDocComponent implements OnInit {
-  @Input() CustCompanyId: number;
+   CustCompanyId: number;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   
   custLegalDocs: any;
-
+  IdCust: number;
   constructor(
     private router: Router,
     private httpClient: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
-    private spinner: NgxSpinnerService
-  ) { }
-
-  ngOnInit() {
-    var custCompanyLegalDoc = new CustCompanyLegalDocObj();
-    custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
-    this.httpClient.post(AdInsConstant.GetListViewCustCompanyLegalDocByCustCompanyId, custCompanyLegalDoc).subscribe(
-      (response: any) => {
-        this.custLegalDocs = response.ListCustCompanyLegalDoc;
-      },
-      (error) => {
-        console.log(error);
+    private spinner: NgxSpinnerService,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+        this.IdCust = params["IdCust"];
       }
-    );
+    });
+   }
+
+  ngOnInit() { 
+
+      var custObj = { CustId: this.IdCust };
+      this.httpClient.post(AdInsConstant.GetCustCompanyByCustId, custObj).subscribe(
+        (response: any) => {
+          
+          this.CustCompanyId = response['CustCompanyId'];
+          var custCompanyLegalDoc = new CustCompanyLegalDocObj();
+          custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
+          this.httpClient.post(AdInsConstant.GetListViewCustCompanyLegalDocByCustCompanyId, custCompanyLegalDoc).subscribe(
+            (response: any) => {
+              this.custLegalDocs = response.ListCustCompanyLegalDoc;
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        } 
+      ); 
+ 
   }
 
   openCustLegalDocDetail() {
