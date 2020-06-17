@@ -32,7 +32,8 @@
   <tbody>
     <tr *ngFor="let item of tempListCompanyManagementShareholder">
       <td class="text-left">{{item.MrNegCustTypeCode}}</td>
-      <td class="text-left" style="color: blue; cursor: pointer; text-align: left;"><a (click)="openView(item.ShareholderCustNo)">{{item.MgmntShrholderName}}</a></td>
+      <td class="text-left" *ngIf="item.ShareholderCustNo != null" style="color: blue; cursor: pointer; text-align: left;"><a (click)="openView(item.ShareholderCustNo)">{{item.MgmntShrholderName}}</a></td>
+      <td class="text-left" *ngIf="item.ShareholderCustNo == null">{{item.MgmntShrholderName}}</td>
       <td class="text-left">{{item.MrCustTypeCode}}</td>
       <td class="text-left">{{item.MrCustModelCode}}</td>
       <td class="text-left">{{item.TaxIdNo}}</td>
