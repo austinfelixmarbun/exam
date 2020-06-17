@@ -367,14 +367,6 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.inputLookupParentObj.title = "Life Insurance HO";
 
     }
-    if (this.MrVendorCategoryCode == "AGENCY_PERSONAL") {
-      var critObjAgencyPersonal = new CriteriaObj();
-      critObjAgencyPersonal.propName = 'MR_VENDOR_CATEGORY_CODE';
-      critObjAgencyPersonal.restriction = AdInsConstant.RestrictionEq;
-      critObjAgencyPersonal.value = "AGENCY_PERSONAL";
-      this.inputLookupParentObj.addCritInput.push(critObjAgencyPersonal);
-      this.inputLookupParentObj.title = "Agency Personal HO";
-    }
 
     if (this.mode == "edit"){
       if (this.result.VendorObj.VendorParentId != null) {
