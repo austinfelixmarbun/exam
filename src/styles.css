@@ -136,7 +136,7 @@ form label{
 
 thead tr th {
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .form-section {
@@ -311,16 +311,13 @@ color: #000000;
     margin-right: 150px;
 }
 
-/* 
-.adInsReqMsg {
-    
+label {
+    text-transform: none !important;
+    letter-spacing: 0.5px !important;
+    font-size:  1rem !important;
 }
 
-.adInsLabel {
-
+form.form-horizontal .form-group .label-control {
+    text-align: left;
+    padding-top: 10px;
 }
-
-.adInsInput {
-
-}
- */
