@@ -196,7 +196,7 @@
                   </show-errors>
                 </div>
               </div>
-              <div class="form-group row" *ngIf="inputLookupZipcodeObj!=undefined">
+              <div class="form-group row" *ngIf="inputLookupZipcodeObj.isReady">
                 <label class="col-md-3 adins-required-label">Zip Code</label>
                 <div class="col-md-3">
                   <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
