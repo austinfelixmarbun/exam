@@ -72,13 +72,21 @@ export class BankInfoComponent implements OnInit {
     }
   }
 
-  SaveForm(enjiForm:NgForm) {
+  SaveForm(enjiForm: NgForm) {
     if (this.objInput.Type == "Vendor") {
+      if (this.objInput.VendorId == undefined) {
+        this.toastr.errorMessage("Please add main data first");
+        return false;
+      }
       this.VendorBankAcc.VendorId = this.objInput.VendorId;
       this.VendorBankAcc.VendorEmpId = null;
     } else if (this.objInput.Type == "VendorEmployee") {
-    this.VendorBankAcc.VendorId = null;
-    this.VendorBankAcc.VendorEmpId = this.objInput.VendorEmpId;
+      if (this.objInput.VendorEmpId == undefined) {
+        this.toastr.errorMessage("Please add main data first");
+        return false;
+      }
+      this.VendorBankAcc.VendorId = null;
+      this.VendorBankAcc.VendorEmpId = this.objInput.VendorEmpId;
     }
     this.VendorBankAcc.RefBankId = this.BankRegisForm.controls.RefBankId.value
     this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls.AccNumber.value;
@@ -189,31 +197,36 @@ export class BankInfoComponent implements OnInit {
     }
   }
 
-  getListData(){
+  getListData() {
+    console.log("getlist");
     if (this.objInput.Type == "Vendor") {
-      var obj = {
-        VendorId: this.objInput.VendorId,
-        VendorEmpId: null
-      }
-      this.vendorService.GetListVendorBankAccByVendorId(obj).subscribe(
-        response => {
-          this.ListData = response["ReturnObject"];
+      if (this.objInput.VendorId != undefined && this.objInput.VendorId != null) {
+        var obj = {
+          VendorId: this.objInput.VendorId,
+          VendorEmpId: null
         }
-      );
+        this.vendorService.GetListVendorBankAccByVendorId(obj).subscribe(
+          response => {
+            this.ListData = response["ReturnObject"];
+          }
+        );
+      }
     } else if (this.objInput.Type == "VendorEmployee") {
-      var obj = {
-        VendorId: null,
-        VendorEmpId: this.objInput.VendorEmpId
-      }
-      this.vendorService.GetListVendorBankAccByVendorEmpId(obj).subscribe(
-        response => {
-          this.ListData = response["ReturnObject"];
+      if (this.objInput.VendorEmpId != undefined && this.objInput.VendorEmpId != null) {
+        var obj = {
+          VendorId: null,
+          VendorEmpId: this.objInput.VendorEmpId
         }
-      );
+        this.vendorService.GetListVendorBankAccByVendorEmpId(obj).subscribe(
+          response => {
+            this.ListData = response["ReturnObject"];
+          }
+        );
+      }
     }
   }
 
-  setLookup(){
+  setLookup() {
     this.inputLookupBankObj = new InputLookupObj();
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -221,10 +234,10 @@ export class BankInfoComponent implements OnInit {
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.isRequired = true;
-    
-    if(this.objEdit!=null && this.mode=="edit"){
+
+    if (this.objEdit != null && this.mode == "edit") {
       this.inputLookupBankObj.jsonSelect = { bankName: this.objEdit.BankName };
-    }else{
+    } else {
       this.inputLookupBankObj.jsonSelect = { bankName: "" };
     }
   }
