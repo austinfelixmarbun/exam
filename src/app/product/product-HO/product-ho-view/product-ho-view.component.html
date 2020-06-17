@@ -28,7 +28,7 @@
                 <div *ngFor="let item of x.Components">
                   <label class="col-md-3" *ngIf="x.GroupCode == 'RULE'">{{item.ProdCompntName}}</label>
                   <label class="col-md-4" *ngIf="x.GroupCode != 'RULE'">{{item.ProdCompntName}}</label>
-                  <span class="material-icons col-md-1" (click)="DownloadRule(item.CompntValue,item.CompntValueDesc)" *ngIf="x.GroupCode == 'RULE'">
+                  <span class="material-icons col-md-1 pointer" (click)="DownloadRule(item.CompntValue,item.CompntValueDesc)" *ngIf="x.GroupCode == 'RULE'">
                     get_app
                   </span>
                   <label class="col-md-4">{{item.CompntValueDesc}}</label>
