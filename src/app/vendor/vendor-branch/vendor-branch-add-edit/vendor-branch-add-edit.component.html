@@ -295,17 +295,6 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="MrVendorCategoryCode=='AGENCY_PERSONAL'">
-              <div class="form-group row">
-                <label class="col-md-3 adins-required-label">Agent Recuiter</label>
-                <div class="col-md-3" *ngIf="inputLookupParentObj.isReady">
-                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
-                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
-                  </lib-uclookupgeneric>
-                </div>
-              </div>
-            </div>
-
             <lib-ucSubsection [id]="'TaxInfo'" [title]="'Tax Info'" [panel]="'TaxInformation'">
             </lib-ucSubsection>
             <div id="TaxInformation">
