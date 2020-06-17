@@ -1,0 +1,67 @@
+{
+    "url": "http://getSupplier",
+    "title":"Lookup Product Offering",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "PO.PROD_OFFERING_CODE",
+        "id": "ProdOfferingCode",
+        "label": "Product Offering Code",
+        "placeholder": "Product Offering Code"
+      },
+      {
+        "type": "textbox",
+        "name": "PO.PROD_OFFERING_NAME",
+        "id": "ProdOfferingName",
+        "label": "Product Offering Name",
+        "placeholder": "Product Offering Name"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT PO.PROD_OFFERING_CODE AS ProdOfferingCode, PO.PROD_OFFERING_NAME AS ProdOfferingName, PO.PROD_OFFERING_ID AS ProdOfferingId",
+      "from": "FROM dbo.PROD_OFFERING PO WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Product Offering Code",
+            "name": "ProdOfferingCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Product Offering Name",
+            "name": "ProdOfferingName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "ProdOfferingCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ProdOfferingName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "ProdOfferingName"
+                }
+            ]
+        }
+    ],
+    "propertyId": "ProdOfferingId",
+    "propertyName": "ProdOfferingName"
+}
