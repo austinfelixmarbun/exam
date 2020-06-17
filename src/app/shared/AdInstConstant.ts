@@ -46,6 +46,8 @@ export class AdInsConstant {
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
   public static MR_MARITAL_STAT_CODE_MARRIED = "MARRIED";
+  public static MR_CUST_TYPE_CODE_PERSONAL = "PERSONAL";
+  public static MR_CUST_TYPE_CODE_COMPANY = "COMPANY";
 
   public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
   // ProductDeact
@@ -556,7 +558,7 @@ export class AdInsConstant {
   public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
   public static AddVendorHolding = environment.FoundationR3Url + "/Vendor/AddVendorHolding";
   public static EditVendorHolding = environment.FoundationR3Url + "/Vendor/EditVendorHolding";
-  public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
+  public static GetVendorAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
   public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
   public static AddVendorAddr = environment.FoundationR3Url + "/VendorAddr/AddVendorAddr";
   public static EditVendorAddr = environment.FoundationR3Url + "/VendorAddr/EditVendorAddr";

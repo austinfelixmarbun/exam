@@ -1,12 +1,12 @@
 {
-    "title": "Branch Search",
+    "title": "Vendor Search",
     "component": [
         {
             "type": "textbox",
             "name": "VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
-            "label": "Group Code",
+            "label": "Vendor Code",
             "placeholder": "Placeholder"
         },
         {
@@ -14,7 +14,7 @@
             "name": "VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
-            "label": "Group Name",
+            "label": "Vendor Name",
             "placeholder": "Placeholder"
         },
         {
@@ -40,8 +40,8 @@
         }
     ],
     "querystring": {
-       "select": "SELECT VENDOR_CODE AS VendorCode, VENDOR_NAME AS VendorName,  IS_ACTIVE IsActive, VENDOR_ID AS VendorId",
-        "from": "FROM dbo.VENDOR WITH(NOLOCK)"
-        
+       "select": "SELECT VENDOR_CODE AS VendorCode, VENDOR_NAME AS VendorName,  IS_ACTIVE IsActive, VENDOR_ID AS VendorId, MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode",
+        "from": "FROM dbo.VENDOR WITH(NOLOCK)",
+        "where": "WHERE MR_VENDOR_CLASS IS NOT NULL"
     }
 }
