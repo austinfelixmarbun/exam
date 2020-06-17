@@ -94,6 +94,8 @@ export class CustomerContactAddComponent implements OnInit {
     Email: ['', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
     ContactPersonCustNo: [''],
   });
+  criteriaExistingList: any[];
+  criteriaExistingObj: CriteriaObj;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
@@ -166,6 +168,14 @@ export class CustomerContactAddComponent implements OnInit {
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
 
+    this.criteriaExistingList = new Array();
+    this.criteriaExistingObj = new CriteriaObj();
+    this.criteriaExistingObj.restriction = AdInsConstant.RestrictionEq;
+    this.criteriaExistingObj.propName = 'MR_CUST_TYPE_CODE';
+    this.criteriaExistingObj.value = AdInsConstant.CustomerPersonal;
+    this.criteriaExistingList.push(this.criteriaExistingObj);
+    this.existingCustomerLookUpObj.addCritInput = this.criteriaExistingList;
+    
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
 

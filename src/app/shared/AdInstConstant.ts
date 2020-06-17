@@ -53,6 +53,10 @@ export class AdInsConstant {
   // DOWNLOAD
   public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';
 
+  // Customer Type
+  public static CustomerPersonal = "PERSONAL";
+  public static CustomerCompany = "COMPANY";
+  
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
   public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
