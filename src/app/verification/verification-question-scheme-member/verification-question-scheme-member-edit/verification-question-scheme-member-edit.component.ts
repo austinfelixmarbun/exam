@@ -53,7 +53,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
+    var verfGroupObj = { VerfSchemeDId: this.VerfSchemeDId }
     this.http.post(AdInsConstant.GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById, verfGroupObj).subscribe(
       (response) => {
         console.log(response);
@@ -76,6 +76,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     this.verfSchemeDObj = this.QuestionGroupForm.value;
     this.verfSchemeDObj.VerfSchemeHId = this.VerfSchemeHId;
     this.verfSchemeDObj.VerfSchemeDId = this.VerfSchemeDId;
+    this.verfSchemeDObj.RowVersion = this.verfSchemeDObj.RowVersion;
     console.log(this.verfSchemeDObj);
     this.http.post(AdInsConstant.EditVerfSchemeD, this.verfSchemeDObj).subscribe(
       (response) => {
