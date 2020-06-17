@@ -48,7 +48,7 @@
         <td style="text-align: left;">{{item.Notes}}</td>
 
         <td style="text-align: center;">
-          <a *ngIf="item.MrCustAddrTypeCode != 'Legal' || From != 'CustPaging'"
+          <a [hidden]="item.MrCustAddrTypeCode == 'LEGAL' && From == 'CustPaging'"
             (click)="editItem(item)">
             <i class="fa fa-pen"></i>
           </a>
