@@ -84,7 +84,7 @@ export class CustomerContactCheckComponent implements OnInit {
     this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
       response => {
         this.resCustObj = response;
-        window.open( environment.FoundationR3Url + "/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
+        window.open( environment.FoundationR3Web + "/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
       },
       error => {
         console.log(error);
