@@ -15,6 +15,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
 import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-negative-customer-detail',
@@ -39,7 +40,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   isFromLookup: boolean = false;
   businessDate: any;
   businessDateIdExp: any;
-
+  tempKTPCheck : boolean;
   NegativeCustForm = this.fb.group({
     NegativeCustId: [0, [Validators.required]],
     CustId: [0, [Validators.required]],
@@ -110,14 +111,21 @@ export class NegativeCustomerDetailComponent implements OnInit {
     let requestNegativeSource = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeSourceObj);
     forkJoin([requestIdType, requestNegativeCustType, requestNegativeSource]).subscribe(
       (response) => {
-        this.refMasterIdType = response[0];
+        this.refMasterIdType = response[0]; 
         this.negativeTypeList = response[1];
         this.negativeSourceList = response[2];
         this.NegativeCustForm.patchValue({
           MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key,
           MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key,
           MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key
-        });
+        }); 
+        if (this.refMasterIdType.ReturnObject[0].Key == RefMasterConstant.EKtp) {
+          this.tempKTPCheck = true; 
+        } else {
+          this.tempKTPCheck = false;
+          this.NegativeCustForm.controls.IdExpiredDt.setValidators(Validators.required);  
+          this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
+        } 
       }
     );
   }
@@ -368,6 +376,18 @@ export class NegativeCustomerDetailComponent implements OnInit {
       AreaCode2: e.AreaCode2,
       City: e.City
     });
+  }
+
+
+  onOptionsSelected(event) {
+    if (event.target.value == RefMasterConstant.EKtp) {
+      this.NegativeCustForm.controls.IdExpiredDt.clearValidators();
+      this.tempKTPCheck = true;
+    } else {
+      this.NegativeCustForm.controls.IdExpiredDt.setValidators(Validators.required);
+      this.tempKTPCheck = false;
+    }
+    this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
   }
 
   SaveForm(){

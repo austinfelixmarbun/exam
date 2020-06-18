@@ -32,11 +32,12 @@ export class VendorBranchAddEditComponent implements OnInit {
   inputLookupParentObj: InputLookupObj = new InputLookupObj();
   inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
 
-  MrVendorCategoryCode: any;
+  MrVendorCategoryCode: string;
+  MrVendorTypeCode: string;
   arrCrit: any;
   mode: string = "add";
   vendorBranchObj: any;
-  VendorId: any;
+  VendorId: number;
   ButtonLbl: string = "Continue";
 
   MRSupplierUpCalcMethod: any;
@@ -47,7 +48,9 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
-      this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      if(params["MrVendorCategoryCode"] != null){
+        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      }
       this.VendorId = params['VendorId'];
       if (params['mode'] != null) {
         this.mode = params['mode'];
@@ -96,8 +99,6 @@ export class VendorBranchAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.setDropdown();
-
     if (this.mode == "edit") {
       this.ButtonLbl = "Submit";
       this.VendorForm.controls.VendorCode.disable();
@@ -105,6 +106,8 @@ export class VendorBranchAddEditComponent implements OnInit {
         (response) => {
           this.result = response;
           this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
+          this.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
+          this.setDropdown();
           this.VendorForm.patchValue({
             MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
             VendorCode: this.result.VendorObj.VendorCode,
@@ -143,17 +146,15 @@ export class VendorBranchAddEditComponent implements OnInit {
             Province: this.result.VendorAddrObj.Province,
             RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion
           });
-
           this.setLookup();
-          this.checkType();
         },
         (error) => {
           console.log(error);
         }
       );
-    } else {
+    } else {   
+      this.setDropdown();
       this.setLookup();
-      this.checkType();
     }
 
   }
@@ -225,9 +226,27 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
       (response) => {
         this.itemType = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          MrVendorTypeCode: this.itemType[0].Key
-        });
+        if(this.MrVendorCategoryCode == "AGENCY_PERSONAL"){
+          var object = this.itemType.find(x => x.Key == 'P');
+          this.MrVendorTypeCode = object.Key;
+          this.VendorForm.patchValue({
+            MrVendorTypeCode: object.Key
+          });
+        }else if(this.MrVendorCategoryCode == "AGENCY_COMPANY"){
+          var object = this.itemType.find(x => x.Key == 'C');
+          this.MrVendorTypeCode = object.Key;
+          this.VendorForm.patchValue({
+            MrVendorTypeCode: object.Key
+          });
+        }else{
+          this.VendorForm.patchValue({
+            MrVendorTypeCode: this.itemType[0].Key
+          });
+        }
+        if(this.MrVendorCategoryCode == "AGENCY_PERSONAL" || this.MrVendorCategoryCode == "AGENCY_COMPANY"){
+          this.VendorForm.controls.MrVendorTypeCode.disable();
+          this.checkType();
+        }
       }
     );
 
@@ -294,19 +313,18 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   checkType() {
-    if (this.VendorForm.controls.MrVendorTypeCode.value == 'C') {
+    if (this.MrVendorTypeCode == 'C') {
       this.VendorForm.controls.MrIdTypeCode.clearValidators();
       this.VendorForm.controls.IdNo.clearValidators();
       this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
       this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
-      this.updateValueAndValidityForm();
-    } else if (this.VendorForm.controls.MrVendorTypeCode.value == 'P') {
+    } else if (this.MrVendorTypeCode == 'P') {
       this.VendorForm.controls.RegistrationNo.clearValidators();
       this.VendorForm.controls.LicenseNo.clearValidators();
       this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
       this.VendorForm.controls.IdNo.setValidators(Validators.required);
-      this.updateValueAndValidityForm();
     }
+    this.updateValueAndValidityForm();
   }
 
   setLookup() {
@@ -457,6 +475,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorAddrObj = vendorAddrObj;
 
       this.vendorBranchObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
+      this.vendorBranchObj.VendorObj.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
       this.vendorBranchObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
       this.vendorBranchObj.VendorObj.VendorId = this.VendorId;
       this.vendorBranchObj.VendorAddrObj.VendorAddrId = this.result.VendorAddrObj.VendorAddrId;
@@ -476,6 +495,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj = vendorObj;
       this.vendorBranchObj.VendorAddrObj = vendorAddrObj;
       this.vendorBranchObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
+      this.vendorBranchObj.MrVendorTypeCode = this.MrVendorTypeCode;
 
       this.http.post(AdInsConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
