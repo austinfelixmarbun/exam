@@ -69,16 +69,8 @@
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown">
                             <div class="noti-list">
-                                <a *ngFor="let item of notifications"
-                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
-                                    <i class="ft-bell info float-left d-block font-large-1 mt-1 mr-2"></i>
-                                    <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 info">{{item.title}}</span>
-                                        <span class="noti-text">{{item.desc}}</span>
-                                    </span>
-                                </a>
                                 <a *ngFor="let item of NotificationHListObj"
-                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4 " (click)="ClickNotification(item)">
                                     <i class="ft-bell info float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
                                         <span class="noti-title line-height-1 d-block text-bold-400 info">{{item.Title}}</span>

@@ -345,6 +345,7 @@ export class AdInsConstant {
   public static AddNotificationHAndD = "/NotificationH/AddNotificationHAndD"
   public static EditNotificationH = "/NotificationH/EditNotificationH"
   public static DeleteNotificationD = "/NotificationD/DeleteNotificationD"
+  public static UpdateReadNotification = environment.FoundationR3Url+"/NotificationD/UpdateReadNotificationD";
 
   public static GetListNotificationHByRefUserId = environment.FoundationR3Url + "/NotificationH/GetListNotificationHByRefUserId";
 
