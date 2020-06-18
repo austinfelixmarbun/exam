@@ -22,7 +22,8 @@
                     <td>{{item.VendorName}}</td>
                     <td>{{item.Addr}}</td>
                     <td>{{item.VendorRating}}</td>
-                    <td>{{item.IsActive}}</td>
+                    <td *ngIf="item.IsActive === true">Yes</td>
+                    <td *ngIf="item.IsActive === false">No</td>
                   </tr>
                 </tbody>
               </table>
