@@ -13,7 +13,7 @@
                     <th><span translate class="thead-header" name='VendorName'>Branch Name</span></th>
                     <th><span translate class="thead-header" name='Addr'>Address</span></th>
                     <th><span translate class="thead-header" name='VendorRating'>Vendor Rating</span></th>
-                    <th><span translate class="thead-header" name='IsActive'>IsActive</span></th>
+                    <th><span translate class="thead-header" name='IsActive'>Active Status</span></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -22,7 +22,8 @@
                     <td>{{item.VendorName}}</td>
                     <td>{{item.Addr}}</td>
                     <td>{{item.VendorRating}}</td>
-                    <td>{{item.IsActive}}</td>
+                    <td *ngIf="item.IsActive === true">Yes</td>
+                    <td *ngIf="item.IsActive === false">No</td>
                   </tr>
                 </tbody>
               </table>

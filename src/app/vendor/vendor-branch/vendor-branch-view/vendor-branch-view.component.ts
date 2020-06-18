@@ -20,7 +20,7 @@ import { VendorOfficeMbrObj } from 'app/shared/model/VendorOfficeMbrObj.Model';
   styleUrls: ['./vendor-branch-view.component.scss']
 })
 export class VendorBranchViewComponent implements OnInit {
-  VendorId: any;
+  VendorId: number;
   viewVendorHoldingObj: string;
   arrCrit: any[];
   vendorHoObj: VendorHoObj;
@@ -29,10 +29,7 @@ export class VendorBranchViewComponent implements OnInit {
   MrVendorTypeCode: any;
 
   VendorGrp: any;
-  GroupListObj: VendorGroupObj;
-  HoListObj: VendorObj;
   Vendor: any;
-  vendorContactPerson: Object;
   pageNow: any;
   pageSize: any;
   totalData: any;
@@ -84,7 +81,6 @@ export class VendorBranchViewComponent implements OnInit {
     }
     this.http.post(AdInsConstant.GetVendorByVendorId, vendorObj).subscribe(
       response => {
-        console.log(response);
         this.MrVendorTypeObj = response;
         this.MrVendorTypeCode = this.MrVendorTypeObj.MrVendorTypeCode;
         this.MrVendorCategoryCode = this.MrVendorTypeObj.MrVendorCategoryCode;
@@ -94,8 +90,6 @@ export class VendorBranchViewComponent implements OnInit {
       }
     )
 
-
-    console.log(this.MrVendorTypeCode);
     this.viewVendorBranchObj = "./assets/ucviewgeneric/viewVendorBranch.json";
     this.viewVendorBranchMainPObj = "./assets/ucviewgeneric/viewVendorBranchMainP.json";
     this.viewVendorBranchMainCObj = "./assets/ucviewgeneric/viewVendorBranchMainC.json";
@@ -103,20 +97,13 @@ export class VendorBranchViewComponent implements OnInit {
     this.viewBranchInfoSurObj = "./assets/ucviewgeneric/viewVendorBranchInfoSur.json";
     this.viewBranchInfoAssetObj = "./assets/ucviewgeneric/viewBranchInfoAsset.json";
     this.viewBranchInfoLifeObj = "./assets/ucviewgeneric/viewBranchInfoLife.json";
-    this.viewBranchAgencyPObj = "./assets/ucviewgeneric/viewBranchAgencyP.json";
-    this.viewBranchAgencyCObj = "./assets/ucviewgeneric/viewBranchAgencyC.json"
 
     this.viewVendorBranchTaxObj = "./assets/ucviewgeneric/viewVendorBranchTax.json";
     this.viewVendorBranchTaxAddrObj = "./assets/ucviewgeneric/viewVendorBranchTaxAddr.json";
     this.viewVendorBranchAddrObj = "./assets/ucviewgeneric/viewVendorBranchAddr.json";
-    this.viewVendorBranchLtLgObj = "./assets/ucviewgeneric/viewVendorBranchLtLg.json";
 
-    this.VendorBankAccListObj = new VendorBankAccObj();
-    this.VendorBankAccListObj.VendorId = this.VendorId;
-
-    this.http.post(AdInsConstant.GetListVendorBankAccByVendorId, this.VendorBankAccListObj).subscribe(
+    this.http.post(AdInsConstant.GetListVendorBankAccByVendorId, {VendorId : this.VendorId}).subscribe(
       response => {
-        console.log(response);
         this.VendorBankAcc = response['ReturnObject']
 
       },
@@ -125,13 +112,8 @@ export class VendorBranchViewComponent implements OnInit {
       }
     )
 
-    this.GroupListObj = new VendorGroupObj();
-    this.GroupListObj.VendorId = this.VendorId;
-
-
-    this.http.post(AdInsConstant.GetListVendorGrpByVendorId, this.GroupListObj).subscribe(
+    this.http.post(AdInsConstant.GetListVendorGrpByVendorId, {VendorId : this.VendorId}).subscribe(
       response => {
-        console.log(response);
         this.VendorGrp = response['ReturnObject']
 
       },
@@ -139,12 +121,9 @@ export class VendorBranchViewComponent implements OnInit {
         console.log(error);
       }
     )
-    this.VendorEmpListObj = new VendorEmpObj();
-    this.VendorEmpListObj.VendorId = this.VendorId;
 
-    this.http.post(AdInsConstant.GetListVendorEmpByVendorId, this.VendorEmpListObj).subscribe(
+    this.http.post(AdInsConstant.GetListVendorEmpByVendorId, {VendorId : this.VendorId}).subscribe(
       response => {
-        console.log(response);
         this.VendorEmp = response['ReturnObject']
       },
       error => {
@@ -152,12 +131,8 @@ export class VendorBranchViewComponent implements OnInit {
       }
     )
 
-    this.VendorOfficeMbrListObj = new VendorOfficeMbrObj();
-    this.VendorOfficeMbrListObj.VendorId = this.VendorId;
-
-    this.http.post(AdInsConstant.GetListVendorOfficeMbrByVendorId, this.VendorOfficeMbrListObj).subscribe(
+    this.http.post(AdInsConstant.GetListVendorOfficeMbrByVendorId, {VendorId : this.VendorId}).subscribe(
       response => {
-        console.log(response);
         this.VendorOfficeMbr = response['ReturnObject']
       },
       error => {

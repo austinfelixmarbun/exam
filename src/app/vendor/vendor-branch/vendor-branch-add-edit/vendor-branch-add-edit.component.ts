@@ -238,7 +238,7 @@ export class VendorBranchAddEditComponent implements OnInit {
           this.VendorForm.patchValue({
             MrVendorTypeCode: object.Key
           });
-        }else{
+        }else if(this.mode != "edit"){
           this.VendorForm.patchValue({
             MrVendorTypeCode: this.itemType[0].Key
           });
