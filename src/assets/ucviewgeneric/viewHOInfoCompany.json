@@ -26,7 +26,7 @@
             "property": "Email"
           },
           {
-            "type": "text",
+            "type": "date",
             "label": "Establishment Date",
             "property": "EstablishmentDt"
           },
@@ -36,7 +36,7 @@
             "property": "MobilePhnNo1"
           },
           {
-            "type": "text",
+            "type": "date",
             "label": "Partnership date",
             "property": "PartnershipDt"
           },
