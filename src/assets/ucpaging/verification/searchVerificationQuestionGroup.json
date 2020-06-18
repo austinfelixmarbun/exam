@@ -5,7 +5,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "VERF_QUESTION_GRP_CODE",
+            "name": "verf.VERF_QUESTION_GRP_CODE",
             "id": "SchemeCodeId",
             "value": "",
             "label": "QUESTION GROUP CODE",
@@ -13,7 +13,7 @@
         },
         {
             "type": "textbox",
-            "name": "VERF_QUESTION_GRP_NAME",
+            "name": "verf.VERF_QUESTION_GRP_NAME",
             "id": "SchemeNameId",
             "value": "",
             "label": "QUESTION GROUP NAME",
@@ -21,7 +21,7 @@
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "verf.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "ACTIVE STATUS",
             "value": "",
@@ -42,9 +42,9 @@
         }
     ],
     "querystring": {
-        "select": "SELECT VERF_QUESTION_GRP_H_ID AS VerfQuestionGrpHId, VERF_QUESTION_GRP_CODE AS VerfQuestionGrpCode, VERF_QUESTION_GRP_NAME AS VerfQuestionGrpName, IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.VERF_QUESTION_GRP_H WITH(NOLOCK)",
-        "where": "WHERE VERF_QUESTION_GRP_H_ID NOT IN (SELECT a.VERF_QUESTION_GRP_H_ID FROM dbo.VERF_SCHEME_D a WITH(NOLOCK) WHERE a.VERF_SCHEME_H_ID = VERF_QUESTION_GRP_H_ID) AND IS_ACTIVE = 1"
+        "select": "SELECT verf.VERF_QUESTION_GRP_H_ID AS VerfQuestionGrpHId, verf.VERF_QUESTION_GRP_CODE AS VerfQuestionGrpCode, verf.VERF_QUESTION_GRP_NAME AS VerfQuestionGrpName, verf.IS_ACTIVE AS IsActive",
+        "from": "FROM dbo.VERF_QUESTION_GRP_H verf WITH(NOLOCK)",
+        "where": "WHERE verf.IS_ACTIVE = 1"
     },
     "headerList": [
         {
