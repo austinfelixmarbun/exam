@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "EMP_NO",
+            "name": "A.EMP_NO",
             "id": "EmpCodeId",
             "value": "",
             "label": "Employee No",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "EMP_NAME",
+            "name": "A.EMP_NAME",
             "id": "EmpNameId",
             "value": "",
             "label": "Employee Name",
@@ -19,22 +19,21 @@
         }
     ],
     "querystring": {
-        "select": "SELECT EMP_NO AS EmpNo, EMP_NAME AS EmpName, REF_EMP_ID AS RefEmpId",
-        "from": "FROM dbo.REF_EMP",
-        "where": "WHERE IS_ACTIVE = 1"
+        "select": "SELECT A.EMP_NO AS EmpNo, A.EMP_NAME AS EmpName, A.REF_EMP_ID AS RefEmpId",
+        "from": "FROM dbo.REF_EMP AS A INNER JOIN REF_USER AS B ON A.REF_EMP_ID = B.REF_EMP_ID"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "left",
             "label": "VENDOR CODE",
-            "name": "EMP_NO"
+            "name": "A.EMP_NO"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "VENDOR NAME",
-            "name": "EMP_NAME"
+            "name": "A.EMP_NAME"
         },
         {
             "type": "label",
