@@ -252,13 +252,14 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
         var arrMemberList = new Array();
 
         for (let index = 0; index < this.VendorOfficeMbrObj.ReturnObject.length; index++) {
-          arrMemberList.push(this.VendorOfficeMbrObj.ReturnObject[index].RefOfficeId)
+          arrMemberList.push(this.VendorOfficeMbrObj.ReturnObject[index].OfficeCode);
         }
 
         if (arrMemberList.length != 0) {
           const addCritListRefOffice = new CriteriaObj();
-          addCritListRefOffice.DataType = 'numeric';
-          addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
+          addCritListRefOffice.DataType = 'text';
+          // addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
+          addCritListRefOffice.propName = 'RO.OFFICE_CODE';
           addCritListRefOffice.restriction = AdInsConstant.RestrictionNotIn;
           addCritListRefOffice.listValue = arrMemberList;
           this.arrCrit.push(addCritListRefOffice);
