@@ -226,7 +226,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         if(this.IsAffiliateWithMf === "true"){
           this.RequestNegativeCustObj.IsAffiliateWithMf = true;
         }else{
-          this.RequestNegativeCustObj.IsAffiliateWithMf = false;
+          this.RequestNegativeCustObj.IsAffiliateWithMf = false; 
         } 
         this.RequestNegativeCustObj.VipNotes = this.VipNotes;
         this.http.post(AdInsConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
