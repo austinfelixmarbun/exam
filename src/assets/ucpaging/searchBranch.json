@@ -139,6 +139,7 @@
             "type": "link",
             "position": "center",
             "property": "BranchName",
+            "target": "_blank",
             "path": "/Vendor/Branch/View",
             "param": [
                 {
