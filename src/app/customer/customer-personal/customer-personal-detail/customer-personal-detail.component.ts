@@ -258,9 +258,15 @@ export class CustomerPersonalDetailComponent implements OnInit {
         });
       });
   }
-  SaveValue() {
-    this.custPersonalObj = new CustPersonalObj();
-    this.custPersonalObj = this.tempCustPersonalObj;
+ async SaveValue() {
+
+    await this.http.post(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).toPromise().then(
+      (response) => {
+        this.tempCustPersonalObj = response;
+        this.custPersonalObj = new CustPersonalObj();
+        this.custPersonalObj = this.tempCustPersonalObj;
+      });
+
     this.custPersonalObj.CustFullName = this.tempCustObj.CustName;
     this.custPersonalObj.NickName = this.CustomerDetailForm.controls["NickName"].value;
     this.custPersonalObj.MrSalutationCode = this.CustomerDetailForm.controls["MrSalutationCode"].value;
