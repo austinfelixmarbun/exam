@@ -40,7 +40,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   isFromLookup: boolean = false;
   businessDate: any;
   businessDateIdExp: any;
-  tempKTPCheck : boolean;
+  tempKTPCheck: boolean;
   NegativeCustForm = this.fb.group({
     NegativeCustId: [0, [Validators.required]],
     CustId: [0, [Validators.required]],
@@ -60,7 +60,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     AreaCode1: ['', [Validators.required]],
     AreaCode2: ['', [Validators.required]],
     AreaCode3: ['', [Validators.required]],
-    AreaCode4: ['', [Validators.required]],    
+    AreaCode4: ['', [Validators.required]],
     City: ['', [Validators.required]],
     PhnArea1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     Phn1: ['', [Validators.required, Validators.pattern]],
@@ -90,7 +90,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder
-  ) { 
+  ) {
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
         this.pageType = params['param'];
@@ -111,26 +111,52 @@ export class NegativeCustomerDetailComponent implements OnInit {
     let requestNegativeSource = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeSourceObj);
     forkJoin([requestIdType, requestNegativeCustType, requestNegativeSource]).subscribe(
       (response) => {
-        this.refMasterIdType = response[0]; 
+        this.refMasterIdType = response[0];
         this.negativeTypeList = response[1];
         this.negativeSourceList = response[2];
         this.NegativeCustForm.patchValue({
           MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key,
           MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key,
           MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key
-        }); 
-        if (this.refMasterIdType.ReturnObject[0].Key == RefMasterConstant.EKtp) {
-          this.tempKTPCheck = true; 
-        } else {
-          this.tempKTPCheck = false;
-          this.NegativeCustForm.controls.IdExpiredDt.setValidators(Validators.required);  
+        });
+        if (this.pageType == "edit") {
+          if (this.custType == AdInsConstant.CustomerPersonal && this.refMasterIdType.ReturnObject[0].Key == RefMasterConstant.EKtp) {
+            this.tempKTPCheck = true;
+            this.NegativeCustForm.controls.IdExpiredDt.clearValidators();
+            this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('IdNo', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('BirthPlace', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('BirthDt', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('MotherMaidenName', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.removeControl('CompanyLookup');
+          } else if (this.custType == AdInsConstant.CustomerPersonal) {
+            this.tempKTPCheck = false;
+            this.NegativeCustForm.controls.IdExpiredDt.setValidators(Validators.required);
+            this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('IdNo', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('BirthPlace', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('BirthDt', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('MotherMaidenName', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.removeControl('CompanyLookup');
+          }
+          else {
+            this.tempKTPCheck = true;
+            this.NegativeCustForm.removeControl('MrIdTypeCode');
+            this.NegativeCustForm.removeControl('IdNo');
+            this.NegativeCustForm.removeControl('BirthPlace');
+            this.NegativeCustForm.removeControl('BirthDt');
+            this.NegativeCustForm.removeControl('MotherMaidenName');
+            this.NegativeCustForm.removeControl('PersonalLookup');
+            this.NegativeCustForm.removeControl('PersonalLookup');
+          }
           this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
-        } 
+        }
       }
     );
   }
 
   ngOnInit() {
+    console.log('Shinano');
     var datePipe = new DatePipe("en-US");
     var criteriaList;
     var criteriaObj;
@@ -139,7 +165,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.businessDate.setDate(this.businessDate.getDate() - 1);
     this.businessDateIdExp = new Date(context["BusinessDt"]);
     this.businessDateIdExp.setDate(this.businessDateIdExp.getDate() + 1);
-    
+
     this.inputLookupZipcodeObj = new InputLookupObj();
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -177,14 +203,14 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.inputLookupCustCompanyObj.addCritInput = criteriaList;
     this.inputLookupCustCompanyObj.isRequired = false;
 
-    if(this.pageType == "edit"){
+    if (this.pageType == "edit") {
       var negativeCustObj = new NegativeCustObj();
       negativeCustObj.NegativeCustId = this.negativeCustId;
       this.httpClient.post(AdInsConstant.GetNegativeCustByNegativeCustId, negativeCustObj).pipe(
-        map( (response) => {
+        map((response) => {
           return response;
         }),
-        mergeMap( (response: any) => {
+        mergeMap((response: any) => {
           var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
           negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
           const negativeCustChangeTrx = this.httpClient.post(AdInsConstant.GetListNegativeCustChangeTrxByNegativeCustId, negativeCustChangeTrxObj);
@@ -217,7 +243,8 @@ export class NegativeCustomerDetailComponent implements OnInit {
             AreaCode1: negativeCustData.AreaCode1,
             AreaCode2: negativeCustData.AreaCode2,
             AreaCode3: negativeCustData.AreaCode3,
-            AreaCode4: negativeCustData.AreaCode4,    
+            AreaCode4: negativeCustData.AreaCode4,
+            Zipcode: negativeCustData.Zipcode,
             City: negativeCustData.City,
             PhnArea1: negativeCustData.PhnArea1,
             Phn1: negativeCustData.Phn1,
@@ -238,6 +265,38 @@ export class NegativeCustomerDetailComponent implements OnInit {
             IsActive: negativeCustData.IsActive,
             RowVersion: negativeCustData.RowVersion
           });
+          console.log(this.NegativeCustForm.controls);
+          if (this.custType == AdInsConstant.CustomerPersonal && this.NegativeCustForm.controls.MrIdTypeCode.value == RefMasterConstant.EKtp) {
+            this.tempKTPCheck = true;
+            this.NegativeCustForm.controls.IdExpiredDt.clearValidators();
+            this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('IdNo', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('BirthPlace', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('BirthDt', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('MotherMaidenName', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.removeControl('CompanyLookup');
+          }
+          else if (this.custType == AdInsConstant.CustomerPersonal) {
+            this.tempKTPCheck = false;
+            this.NegativeCustForm.controls.IdExpiredDt.setValidators(Validators.required);
+            this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('IdNo', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('BirthPlace', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('BirthDt', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.addControl('MotherMaidenName', new FormControl('', [Validators.required]));
+            this.NegativeCustForm.removeControl('CompanyLookup');
+          }
+          else {
+            this.tempKTPCheck = true;
+            this.NegativeCustForm.removeControl('MrIdTypeCode');
+            this.NegativeCustForm.removeControl('IdNo');
+            this.NegativeCustForm.removeControl('BirthPlace');
+            this.NegativeCustForm.removeControl('BirthDt');
+            this.NegativeCustForm.removeControl('MotherMaidenName');
+            this.NegativeCustForm.removeControl('PersonalLookup');
+            this.NegativeCustForm.removeControl('PersonalLookup');
+          }
+          this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
           this.negativeDataHistoryList = response[1].ReturnObject;
         }
       );
@@ -248,9 +307,9 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.location.back();
   }
 
-  custTypeHandler(e){
+  custTypeHandler(e) {
     var selected = e.target.value;
-    if(selected == "PERSONAL"){
+    if (selected == "PERSONAL") {
       this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', [Validators.required]));
       this.NegativeCustForm.addControl('IdNo', new FormControl('', [Validators.required]));
       this.NegativeCustForm.addControl('BirthPlace', new FormControl('', [Validators.required]));
@@ -258,7 +317,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
       this.NegativeCustForm.addControl('MotherMaidenName', new FormControl('', [Validators.required]));
       this.NegativeCustForm.removeControl('CompanyLookup');
     }
-    else if(selected == "COMPANY"){
+    else if (selected == "COMPANY") {
       this.NegativeCustForm.removeControl('MrIdTypeCode');
       this.NegativeCustForm.removeControl('IdNo');
       this.NegativeCustForm.removeControl('BirthPlace');
@@ -280,7 +339,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.custType = e.target.value;
   }
 
-  getLookupCustPersonalResponse(e){
+  getLookupCustPersonalResponse(e) {
     var datePipe = new DatePipe("en-US");
     var expiredDt = datePipe.transform(e.idExpiredDate, 'yyyy-MM-dd');
     var birthDt = datePipe.transform(e.birthDate, 'yyyy-MM-dd');
@@ -306,7 +365,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           AreaCode1: response.AreaCode1,
           AreaCode2: response.AreaCode2,
           AreaCode3: response.AreaCode3,
-          AreaCode4: response.AreaCode4,    
+          AreaCode4: response.AreaCode4,
           City: response.City,
           PhnArea1: response.PhnArea1,
           Phn1: response.Phn1,
@@ -330,7 +389,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     );
   }
 
-  getLookupCustCompanyResponse(e){
+  getLookupCustCompanyResponse(e) {
     var custAddr = new CustAddrObj();
     custAddr.CustId = e.custId;
     custAddr.MrCustAddrTypeCode = "LEGAL";
@@ -346,7 +405,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           AreaCode1: response.AreaCode1,
           AreaCode2: response.AreaCode2,
           AreaCode3: response.AreaCode3,
-          AreaCode4: response.AreaCode4,    
+          AreaCode4: response.AreaCode4,
           City: response.City,
           PhnArea1: response.PhnArea1,
           Phn1: response.Phn1,
@@ -369,7 +428,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     );
   }
 
-  getLookupZipcodeResponse(e){
+  getLookupZipcodeResponse(e) {
     this.NegativeCustForm.patchValue({
       Zipcode: e.Zipcode,
       AreaCode1: e.AreaCode1,
@@ -390,16 +449,16 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
   }
 
-  SaveForm(){
+  SaveForm() {
     var negativeCustFormData = this.NegativeCustForm.value;
 
     // This Code Is Temporary Due to Negative Customer Approval Is Not Ready At The Moment
-    if(this.pageType == "add"){ 
+    if (this.pageType == "add") {
       this.httpClient.post(AdInsConstant.AddNegativeCustomer, negativeCustFormData).pipe(
-        map( (response) => {
+        map((response) => {
           return response;
         }),
-        mergeMap( (response: any) => {
+        mergeMap((response: any) => {
           var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
           negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
           negativeCustChangeTrxObj.TrxNo = "DUMMY_TRX_NO";
@@ -428,12 +487,12 @@ export class NegativeCustomerDetailComponent implements OnInit {
         }
       );
     }
-    else if(this.pageType == "edit"){
+    else if (this.pageType == "edit") {
       this.httpClient.post(AdInsConstant.EditNegativeCustomer, negativeCustFormData).pipe(
-        map( (response) => {
+        map((response) => {
           return response;
         }),
-        mergeMap( (response) => {
+        mergeMap((response) => {
           var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
           negativeCustChangeTrxObj.NegativeCustId = negativeCustFormData.NegativeCustId;
           negativeCustChangeTrxObj.TrxNo = "DUMMY_TRX_NO";
