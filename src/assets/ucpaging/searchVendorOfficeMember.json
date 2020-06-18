@@ -22,7 +22,7 @@
             "name": "RO.OFFICE_ADDR",
             "id": "OfficeAddrId",
             "value": "",
-            "label": "Office Addr",
+            "label": "Office Address",
             "placeholder": "Office Addr"
         },
         {
@@ -67,7 +67,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Office Addr",
+            "label": "Office Address",
             "name": "RO.OFFICE_ADDR"
         },
         {
