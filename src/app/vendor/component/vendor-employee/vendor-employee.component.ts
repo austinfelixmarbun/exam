@@ -33,6 +33,7 @@ export class VendorEmployeeComponent implements OnInit {
   VendorPositionList = new Array();
   IdTypeList = new Array();
   itemCalcMethodType: any;
+  businessDtMin: Date;
 
   VendorEmpForm = this.fb.group({
     VendorEmpCode: ['', [Validators.required]],
@@ -80,6 +81,8 @@ export class VendorEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
+    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDtMin = new Date(currentUserContext["BusinessDt"]);
     var RefMasterVendorPosition = {
       RefMasterTypeCode: "VENDOR_POSITION",
     }
@@ -248,6 +251,15 @@ export class VendorEmployeeComponent implements OnInit {
   }
   
   SaveForm() {
+    var joinDt = new Date(this.VendorEmpForm.controls.JoinDt.value);
+    joinDt.setHours(0,0,0,0);
+    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+    var businessDt = new Date(currentUserContext["BusinessDt"]);
+    businessDt.setHours(0,0,0,0);
+    if(joinDt > businessDt){
+      this.toastr.errorMessage("Join Date Cannot Exceed Business Date");
+      return false;
+    }
     var vendorEmpObj = {
       VendorEmpNo: this.VendorEmpForm.controls.VendorEmpCode.value,
       VendorEmpName: this.VendorEmpForm.controls.VendorEmpName.value,
