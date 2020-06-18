@@ -44,7 +44,7 @@
     "querystring": {
         "select": "SELECT VERF_QUESTION_GRP_H_ID AS VerfQuestionGrpHId, VERF_QUESTION_GRP_CODE AS VerfQuestionGrpCode, VERF_QUESTION_GRP_NAME AS VerfQuestionGrpName, IS_ACTIVE AS IsActive",
         "from": "FROM dbo.VERF_QUESTION_GRP_H WITH(NOLOCK)",
-        "where": "WHERE VERF_QUESTION_GRP_H_ID NOT IN (SELECT a.VERF_QUESTION_GRP_H_ID FROM dbo.VERF_SCHEME_D a WITH(NOLOCK) WHERE a.VERF_SCHEME_H_ID = VERF_QUESTION_GRP_H_ID) AND IS_ACTIVE = 1"
+        "where": "WHERE IS_ACTIVE = 1"
     },
     "headerList": [
         {

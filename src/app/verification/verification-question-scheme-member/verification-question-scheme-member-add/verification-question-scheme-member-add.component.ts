@@ -77,6 +77,12 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
 
+    var critObj = new CriteriaObj();
+    critObj.restriction = AdInsConstant.RestrictionLike;
+    critObj.propName = 'VERF_QUESTION_GRP_H_ID';
+    critObj.value = this.VerfSchemeHId.toString();
+    this.arrCrit.push(critObj);
+    this.inputObj.critObj = this.arrCrit;
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
