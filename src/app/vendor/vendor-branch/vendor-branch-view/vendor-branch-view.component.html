@@ -29,14 +29,6 @@
             <ng-container *ngIf="MrVendorCategoryCode =='LIFE_INSCO_BRANCH'">
               <lib-ucviewgeneric [viewInput]="viewBranchInfoLifeObj"></lib-ucviewgeneric>
             </ng-container>
-
-            <ng-container *ngIf="MrVendorCategoryCode == 'AGENCY_COMPANY'">
-              <lib-ucviewgeneric [viewInput]="viewBranchAgencyPObj"></lib-ucviewgeneric>
-            </ng-container>
-
-            <ng-container *ngIf="MrVendorCategoryCode == 'AGENCY_PERSONAL'">
-              <lib-ucviewgeneric [viewInput]="viewBranchAgencyCObj"></lib-ucviewgeneric>
-            </ng-container>
           </div>
         </div>
       </div>
@@ -72,10 +64,10 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th class="text-center">BANK</th>
-            <th class="text-center">ACCOUNT NUMBER</th>
-            <th class="text-center">ACCOUNT NAME</th>
-            <th class="text-center">DEFAULT</th>
+            <th class="text-left">BANK</th>
+            <th class="text-left">ACCOUNT NUMBER</th>
+            <th class="text-left">ACCOUNT NAME</th>
+            <th class="text-left">DEFAULT</th>
           </tr>
         </thead>
         <tbody>
@@ -95,13 +87,13 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th class="text-center">EMPLOYEE CODE</th>
-            <th class="text-center">EMPLOYEE NAME</th>
-            <th class="text-center">EMPLOYEE PHONE</th>
-            <th class="text-center">RATING</th>
-            <th class="text-center">CONTANCT PERSON</th>
-            <th class="text-center">OWNER</th>
-            <th class="text-center">ACTIVE STATUS</th>
+            <th class="text-left">EMPLOYEE CODE</th>
+            <th class="text-left">EMPLOYEE NAME</th>
+            <th class="text-left">EMPLOYEE PHONE</th>
+            <th class="text-left">RATING</th>
+            <th class="text-left">CONTANCT PERSON</th>
+            <th class="text-left">OWNER</th>
+            <th class="text-left">ACTIVE STATUS</th>
           </tr>
         </thead>
         <tbody>
