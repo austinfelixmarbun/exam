@@ -8,19 +8,19 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "Tax Payer Calculation Method:",
+            "label": "Tax Payer Calculation Method :",
             "property": "TaxCalculationMethod"
-          },
+          },{},
           {
             "type": "boolean",
             "label": "VAT:",
             "property": "Vat"
-          },
+          },{},
           {
             "type": "text",
             "label": "Tax Payer Number :",
             "property": "TaxNo"
-          },
+          },{},
           {
             "type": "text",
             "label": "Tax Payer Name :",
@@ -28,8 +28,8 @@
           }
         ],
         "querystring": {
-         "select":   "SELECT MR_TAX_CALC_METHOD_CODE AS TaxCalculationMethod,IS_VAT AS Vat,TAXPAYER_NO AS TaxNo,TAXPAYER_NAME AS TaxName",
-           "from": "FROM dbo.VENDOR WITH(NOLOCK)",
+         "select":   "SELECT B.DESCR AS TaxCalculationMethod, A.IS_VAT AS Vat, A.TAX_ID_NO AS TaxNo, A.TAXPAYER_NAME AS TaxName",
+           "from": "FROM dbo.VENDOR A WITH(NOLOCK) JOIN dbo.REF_MASTER B WITH(NOLOCK) ON A.MR_TAX_CALC_METHOD_CODE = B.MASTER_CODE",
            "where": "WHERE MR_VENDOR_CLASS = 'BRANCH' AND VENDOR_ID = {0}"
         }
       }

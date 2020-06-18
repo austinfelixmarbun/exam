@@ -74,65 +74,65 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
-            "label": "Asset Type Code",
+            "position": "left",
+            "label": "ASSET TYPE CODE",
             "name": "ASSET_TYPE_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Asset Category Code",
+            "position": "left",
+            "label": "ASSET CATEGORY CODE",
             "name": "ASSET_CATEGORY_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Asset Code",
+            "position": "left",
+            "label": "ASSET CODE",
             "name": "ASSET_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Asset Name",
+            "position": "left",
+            "label": "ASSET NAME",
             "name": "ASSET_NAME"
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Parent Full Asset Code",
+            "position": "left",
+            "label": "PARENT FULL ASSET CODE",
             "name": "PARENT_FULL_ASSET_CODE"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "Active Status",
+            "label": "ACTIVE STATUS",
             "name": "IS_ACTIVE"
         }
     ],
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "AssetTypeCode"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "AssetCategoryCode"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "AssetCode"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "AssetName"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "ParentAssetCode"
         },
         {
