@@ -60,7 +60,7 @@
                 <div class="col-md-9">
                   <select class="form-control adInsInput" formControlName="MrIdTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MrIdTypeCode.invalid }"
-                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
+                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null"  (change)="onOptionsSelected($event)">
                     <option *ngFor="let item of refMasterIdType?.ReturnObject" [value]="item.Key">{{item.Value}}
                     </option>
                   </select>
@@ -78,7 +78,7 @@
                 </div>
               </div>
               <div class="form-group row" *ngIf="custType == 'PERSONAL'">
-                <label class="col-md-3 adInsLabel" for="IdExpiredDt" translate>ID Expired Date</label>
+                <label class="col-md-3 adInsLabel" for="IdExpiredDt"  [ngClass]="{'adins-required-label' : tempKTPCheck==false}" translate>ID Expired Date</label>
                 <div class="col-md-9">
                   <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.IdExpiredDt.invalid }"
