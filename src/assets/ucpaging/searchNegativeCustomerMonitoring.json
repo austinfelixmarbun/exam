@@ -63,49 +63,49 @@
             "type": "sort",
             "position": "center",
             "label": "UPLOAD NO",
-            "name": "UPLOAD_MONITORING_NO"
+            "name": "UMH.UPLOAD_MONITORING_NO"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "OFFICE NAME",
-            "name": "OFFICE_NAME"
+            "name": "RO.OFFICE_NAME"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "FILE NAME",
-            "name": "FILE_NAME"
+            "name": "UMH.FILE_NAME"
         },
         {
             "type": "sort",
             "position": "right",
             "label": "TOTAL RECORD",
-            "name": "TOTAL_RECORD"
+            "name": "UMH.TOTAL_RECORD"
         },
         {
             "type": "sort",
             "position": "right",
             "label": "TOTAL RECORD PROCESSED",
-            "name": "TOTAL_RECORD_PROCESSED"
+            "name": "UMH.TOTAL_RECORD_PROCESSED"
         },
         {
             "type": "sort",
             "position": "right",
             "label": "TOTAL RECORD ERROR",
-            "name": "TOTAL_RECORD_ERROR"
+            "name": "UMH.TOTAL_RECORD_ERROR"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "UPLOAD STATUS",
-            "name": "UPLOAD_STATUS"
+            "name": "UMH.UPLOAD_STATUS"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "ERROR MESSAGE",
-            "name": "ERROR_MESSAGE"
+            "name": "UMH.ERROR_MESSAGE"
         },
         {
             "type": "label",
