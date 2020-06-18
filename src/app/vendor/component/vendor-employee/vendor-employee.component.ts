@@ -33,6 +33,7 @@ export class VendorEmployeeComponent implements OnInit {
   VendorPositionList = new Array();
   IdTypeList = new Array();
   itemCalcMethodType: any;
+  businessDtMin: Date;
 
   VendorEmpForm = this.fb.group({
     VendorEmpCode: ['', [Validators.required]],
@@ -80,6 +81,8 @@ export class VendorEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
+    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDtMin = new Date(currentUserContext["BusinessDt"]);
     var RefMasterVendorPosition = {
       RefMasterTypeCode: "VENDOR_POSITION",
     }

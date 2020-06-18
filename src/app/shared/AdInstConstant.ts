@@ -55,6 +55,10 @@ export class AdInsConstant {
   // DOWNLOAD
   public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';
 
+  // Customer Type
+  public static CustomerPersonal = "PERSONAL";
+  public static CustomerCompany = "COMPANY";
+  
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
   public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
@@ -468,6 +472,7 @@ export class AdInsConstant {
   public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
   public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
   public static DownloadProductRule = environment.FoundationR3Url + "/Product/DownloadProductRule";
+  public static UpdateProductPostApv = environment.FoundationR3Url + "/Product/UpdateProductPostApv";
 
   //PRODUCT OFFERING
   public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
@@ -484,7 +489,7 @@ export class AdInsConstant {
   public static RequestOfferingDeactivation = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationProdOffering"
   public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
   public static CopyProductOffering = environment.FoundationR3Url + "/ProductOffering/CopyProductOffering";
-
+  public static UpdateProdOfferingPostApv = environment.FoundationR3Url + "/ProductOffering/UpdateProdOfferingPostApv";
 
   // PRODUCT COMPONENT
   public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";

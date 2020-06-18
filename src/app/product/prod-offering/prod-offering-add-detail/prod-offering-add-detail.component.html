@@ -39,6 +39,10 @@
                 <label class="col-md-2 adInsLabel">Status</label>
                 <label class="col-md-4 adInsLabel">{{ProdOfferingForm.controls.ProdOfferingStat.value}} </label>
               </div>
+              <div class="form-group row">
+                <label *ngIf="source == 'return'" class="col-md-2 adInsLabel">Return Notes </label>
+                <label *ngIf="source == 'return'" class="col-md-4 adInsLabel">{{ProdOfferingForm.controls.ReturnNotes.value}} </label>
+              </div>
               </div>
             </div>
             <div class="card-body">
