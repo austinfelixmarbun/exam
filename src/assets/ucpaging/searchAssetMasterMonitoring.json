@@ -45,7 +45,7 @@
             "isSelectOne": false,
             "url": "",
             "path": "/RefStatus/GetRefStatusByTrxTypeCode",
-            "label": "UPLOAD STATUS",
+            "label": "Upload Status",
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "TrxTypeCode",

@@ -30,7 +30,7 @@
           }       
         ],
         "querystring": {
-            "select": "SELECT RM.DESCR AS TaxCalcMethod, V.IS_VAT AS Vat, V.TAXPAYER_NO AS TaxpayerNo, V.TAXPAYER_NAME AS TaxpayerName",
+            "select": "SELECT RM.DESCR AS TaxCalcMethod, V.IS_VAT AS Vat, V.TAX_ID_NO AS TaxpayerNo, V.TAXPAYER_NAME AS TaxpayerName",
             "from": "FROM DBO.VENDOR V JOIN DBO.REF_MASTER RM ON RM.MASTER_CODE = V.MR_TAX_CALC_METHOD_CODE AND RM.REF_MASTER_TYPE_CODE = 'TAX_CALC_METHOD'", 
             "where": "WHERE V.VENDOR_ID = {0}" 
         }

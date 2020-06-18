@@ -13,42 +13,37 @@
           },
           {
             "type": "text",
-            "label": "License Number:",
-            "property": "LicenseNo"
-          },
-          {
-            "type": "text",
-            "label": "Establishment Date:",
-            "property": "EstablishmentDt"
-          },
-          {
-            "type": "text",
-            "label": "Partnership Date:",
-            "property": "PartnershipDt"
-          },
-          {
-            "type": "text",
-            "label": "Vendor Rating:",
+            "label": "Rating :",
             "property": "VendorRating"
           },
           {
             "type": "text",
-            "label": "Email:",
-            "property": "Email"
+            "label": "License Number :",
+            "property": "LicenseNo"
           },
           {
             "type": "text",
-            "label": "Email:",
+            "label": "Email :",
             "property": "Email"
           },
           {
+            "type": "date",
+            "label": "Establishment Date :",
+            "property": "EstablishmentDt"
+          },
+          {
             "type": "text",
-            "label": "Mobile Phone 1:",
+            "label": "Mobile Phone 1 :",
             "property": "Mp1"
           },
           {
+            "type": "date",
+            "label": "Partnership Date :",
+            "property": "PartnershipDt"
+          },
+          {
             "type": "text",
-            "label": "Mobile Phone 2:",
+            "label": "Mobile Phone 2 :",
             "property": "Mp2"
           }
 
