@@ -19,6 +19,7 @@ import { first } from 'rxjs/operators';
 export class CustGroupTabDetailComponent implements OnInit {
   @Input() MrCustTypeCode: string;
   @Input() CustId: number;
+  @Input() ListCustIdToExclude: Array<number>;
   @Output() AddCustGroupResponse = new EventEmitter<any>();
   inputLookupCustPersonalObj: InputLookupObj;
   inputLookupCustCompanyObj: InputLookupObj;
@@ -66,6 +67,15 @@ export class CustGroupTabDetailComponent implements OnInit {
           environment: environment.FoundationR3Url
         }
       ];
+      criteriaList = new Array();
+      criteriaObj = new CriteriaObj();
+      criteriaObj.restriction = AdInsConstant.RestrictionNotIn;
+      criteriaObj.propName = 'A.CUST_ID';
+      criteriaObj.listValue = this.ListCustIdToExclude;
+      criteriaList.push(criteriaObj);
+      this.inputLookupCustPersonalObj.addCritInput = criteriaList;
+      this.inputLookupCustPersonalObj.isRequired = false;
+
       // criteriaList = new Array();
       // criteriaObj = new CriteriaObj();
       // criteriaObj.restriction = AdInsConstant.RestrictionEq;
@@ -89,6 +99,14 @@ export class CustGroupTabDetailComponent implements OnInit {
           environment: environment.FoundationR3Url
         }
       ];
+      criteriaList = new Array();
+      criteriaObj = new CriteriaObj();
+      criteriaObj.restriction = AdInsConstant.RestrictionNotIn;
+      criteriaObj.propName = 'A.CUST_ID';
+      criteriaObj.listValue = this.ListCustIdToExclude;
+      criteriaList.push(criteriaObj);
+      this.inputLookupCustCompanyObj.addCritInput = criteriaList;
+      this.inputLookupCustCompanyObj.isRequired = false;
 
       // criteriaList = new Array();
       // criteriaObj = new CriteriaObj();
@@ -125,6 +143,9 @@ export class CustGroupTabDetailComponent implements OnInit {
     this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).pipe(first()).subscribe(
       (response) => {
         this.relationshipList = response;
+        this.CustGrpForm.patchValue({
+          MrCustRelationshipCode: this.relationshipList["ReturnObject"][0]["Key"]
+        })
       }
     );
   }
@@ -146,6 +167,9 @@ export class CustGroupTabDetailComponent implements OnInit {
     this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).pipe(first()).subscribe(
       (response) => {
         this.relationshipList = response;
+        this.CustGrpForm.patchValue({
+          MrCustRelationshipCode: this.relationshipList["ReturnObject"][0]["Key"]
+        })
       }
     );
   }
