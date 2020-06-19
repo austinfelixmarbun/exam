@@ -20,128 +20,92 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Customer No",
+            "label": "CUSTOMER NO",
             "name": "CUST_NO"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Customer Name",
+            "label": "CUSTOMER NAME",
             "name": "CUST_NAME"
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Cust Type Code",
+            "position": "left",
+            "label": "CUST TYPE CODE",
             "name": "MR_CUST_TYPE_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Id Type Code",
-            "name": "MR_ID_TYPE_CODE"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Id No",
-            "name": "ID_NO"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Id Expired Date",
-            "name": "ID_EXPIRED_DT"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Tax Id No",
-            "name": "TAX_ID_NO"
-        },
-        {
-            "type": "sort",
             "position": "left",
-            "label": "Birth Place",
+            "label": "BIRTH PLACE",
             "name": "BIRTH_PLACE"
         },        
 		{
             "type": "sort",
             "position": "center",
-            "label": "Birth Date",
+            "label": "BIRTH DATE",
             "name": "BIRTH_DT"
         },        
         {
             "type": "sort",
-            "position": "center",
-            "label": "Gender Code",
+            "position": "left",
+            "label": "GENDER CODE",
             "name": "MR_GENDER_CODE"
         },       
 		{
             "type": "sort",
             "position": "left",
-            "label": "Mother Maiden Name",
+            "label": "MOTHER MAIDEN NAME",
             "name": "MOTHER_MAIDEN_NAME"
         },        
         {
             "type": "sort",
             "position": "left",
-            "label": "Legal Address",
+            "label": "LEGAL ADDRESS",
             "name": "LEGAL_ADDR"
         },        
         {
             "type": "sort",
-            "position": "center",
-            "label": "Mobile Phone",
+            "position": "left",
+            "label": "MOBILE PHONE",
             "name": "MOBILE_PHN"
         },        
         {
             "type": "sort",
-            "position": "center",
-            "label": "Neg Cust Type Code",
+            "position": "left",
+            "label": "NEG CUST TYPE CODE",
             "name": "MR_NEG_CUST_TYPE_CODE"
         },        
         {
             "type": "sort",
-            "position": "center",
-            "label": "Neg Cust Source Code",
+            "position": "left",
+            "label": "NEG CUST SOURCE CODE",
             "name": "MR_NEG_CUST_SOURCE_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Upload Status",
+            "position": "left",
+            "label": "UPLOAD STATUS",
             "name": "UPLOAD_STATUS"
         },        
         {
             "type": "sort",
-            "position": "center",
-            "label": "Negative Cust Cause",
+            "position": "left",
+            "label": "NEGATIVE CUST CAUSE",
             "name": "NEG_CUST_CAUSE"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Notes",
+            "label": "NOTES",
             "name": "NOTES"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "Active Status",
+            "label": "ACTIVE STATUS",
             "name": "IS_ACTIVE"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Negative Cust Id",
-            "name": "NEGATIVE_CUST_ID"
-        },
-		{
-            "type": "sort",
-            "position": "center",
-            "label": "Cust Id",
-            "name": "CUST_ID"
         }
     ],
     "bodyList": [
@@ -157,28 +121,8 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "MrCustTypeCode"
-        },
-        {
-            "type": "text",
-            "position": "center",
-            "property": "MrIdTypeCode"
-        },
-        {
-            "type": "text",
-            "position": "center",
-            "property": "IdNo"
-        },
-        {
-            "type": "date",
-            "position": "center",
-            "property": "IdExpiredDt"
-        },
-        {
-            "type": "text",
-            "position": "center",
-            "property": "TaxIdNo"
         },
         {
             "type": "text",
@@ -192,7 +136,7 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "MrGenderCode"
         },
         {
@@ -207,22 +151,22 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "MobilePhn"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "MrNegCustTypeCode"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "MrNegCustSourceCode"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "UploadStatus"
         },
         {
@@ -239,16 +183,6 @@
             "type": "boolean",
             "position": "center",
             "property": "IsActive"
-        },
-        {
-            "type": "text",
-            "position": "center",
-            "property": "NegativeCustId"
-        },
-        {
-            "type": "text",
-            "position": "center",
-            "property": "CustId"
         }
     ]
 }
