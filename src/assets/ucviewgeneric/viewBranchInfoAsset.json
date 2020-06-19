@@ -22,8 +22,8 @@
         ],
         "querystring": {
            "select":" SELECT B.VENDOR_NAME AS AssetHo, A.VENDOR_PARENT_ID AS VendorParentId",
-            "from":"FROM dbo.VENDOR A WITH(NOLOCK) JOIN dbo.VENDOR B WITH(NOLOCK) JOIN A.VENDOR_PARENT_ID = B.VENDOR_ID ",
-            "where":"WHERE MR_VENDOR_CLASS = 'BRANCH' AND MR_VENDOR_CATEGORY_CODE = 'ASSET_INSCO_BRANCH' AND VENDOR_ID = {0}"
+            "from":"FROM dbo.VENDOR A WITH(NOLOCK) JOIN dbo.VENDOR B WITH(NOLOCK) ON A.VENDOR_PARENT_ID = B.VENDOR_ID ",
+            "where":"WHERE A.MR_VENDOR_CLASS = 'BRANCH' AND A.MR_VENDOR_CATEGORY_CODE = 'ASSET_INSCO_BRANCH' AND A.VENDOR_ID = {0}"
             
         }
       }
