@@ -14,10 +14,10 @@ export class VerificationQuestionGroupPagingComponent implements OnInit {
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/ucpaging/verification/searchVerificationQuestionGroup.json";
+    this.inputPagingObj._url = "./assets/ucpaging/verification/searchVerificationQuestionGroupForPaging.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchVerificationQuestionGroup.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchVerificationQuestionGroupForPaging.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVerfQuestionGroupHById;
   }
 }
