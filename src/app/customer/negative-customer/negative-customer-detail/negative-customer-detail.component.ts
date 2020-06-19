@@ -43,7 +43,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   tempKTPCheck: boolean;
   NegativeCustForm = this.fb.group({
     NegativeCustId: [0, [Validators.required]],
-    CustId: [0, [Validators.required]],
+    CustId: [0],
     MrCustTypeCode: ['PERSONAL', [Validators.required]],
     CustNo: [''],
     CustName: ['', [Validators.required]],
@@ -296,6 +296,11 @@ export class NegativeCustomerDetailComponent implements OnInit {
             this.NegativeCustForm.removeControl('PersonalLookup');
             this.NegativeCustForm.removeControl('PersonalLookup');
           }
+
+          if (this.NegativeCustForm.controls.MrIdTypeCode.value == null && this.NegativeCustForm.controls.MrIdTypeCode.value == undefined) {
+            this.NegativeCustForm.removeControl('CustId');
+          }
+
           this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
           this.negativeDataHistoryList = response[1].ReturnObject;
         }
