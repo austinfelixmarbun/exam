@@ -185,7 +185,12 @@ export class CustomerContactAddComponent implements OnInit {
     this.criteriaExistingObj.propName = 'MR_CUST_TYPE_CODE';
     this.criteriaExistingObj.value = AdInsConstant.CustomerPersonal;
     this.criteriaExistingList.push(this.criteriaExistingObj);
-    this.existingCustomerLookUpObj.addCritInput = this.criteriaExistingList;
+    if(this.existingCustomerLookUpObj.addCritInput){
+      this.existingCustomerLookUpObj.addCritInput.push(this.criteriaExistingObj);
+    }
+    else{
+      this.existingCustomerLookUpObj.addCritInput = this.criteriaExistingList;
+    }
     
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();

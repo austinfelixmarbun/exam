@@ -229,7 +229,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       );
     }
   }
-  // back() {
-  //   this.outputValue.emit({ mode: 'check' });
-  // }
+  back() {
+    this.outputValue.emit({ mode: 'check' });
+  }
 }
