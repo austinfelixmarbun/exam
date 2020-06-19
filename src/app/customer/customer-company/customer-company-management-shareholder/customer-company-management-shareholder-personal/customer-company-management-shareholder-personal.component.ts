@@ -50,7 +50,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     MrGenderCode: [''],
     BirthPlace: [''],
     BirthDt: [''],
-    TaxIdNo: ['',Validators.pattern("^[0-9]+$")],
+    TaxIdNo: [''],
     MrJobPositionCode: ['',[Validators.required]],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     IsSigner: [false], 

@@ -44,11 +44,12 @@ export class ProductHoAdddetailComponent implements OnInit {
       this.objPassing["param"] = params["ProdHId"];
       this.objPassing["mode"] = params["mode"];
       this.objPassing["url"] = AdInsConstant.GetProductDetailComponentInfo;
-      
+      this.source = params["source"];
       this.key = params["key"];
     })
   }
 
+  source:string="";
   ResultResponse: any;
   ProdHOBj: any;
   UrlBackEnd: any;
@@ -56,7 +57,14 @@ export class ProductHoAdddetailComponent implements OnInit {
   
   ngOnInit() {
     //** Main Information **//
-    this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
+    if(this.source == "return")
+    {
+      this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformationReturn.json";
+
+    }
+    else{
+      this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
+    }
     this.ProdHOBj=new RefProductHOObj();
     this.ProdHOBj.ProdHId = this.objPassing.param;
     this.UrlBackEnd=AdInsConstant.GetProductMainInfo;

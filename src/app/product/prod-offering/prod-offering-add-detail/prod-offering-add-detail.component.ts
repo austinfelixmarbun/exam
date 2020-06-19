@@ -20,12 +20,15 @@ export class ProdOfferingAddDetailComponent implements OnInit {
       // console.log(params);
       
       this.objPassing["param"] = params["ProdOfferingHId"];
+      this.objPassing["ProdOfferingId"] = params["ProdOfferingId"];
       this.objPassing["mode"] = params["mode"];
+      this.source = params["source"];
       this.objPassing["url"] = AdInsConstant.GetProdOfferingDetailInfo;
       this.key = params["key"];
     })
   }
 
+  source:string ="";
   param: string;
   key: any;
   prodOfferingObj : ProdOfferingObj;
@@ -45,7 +48,8 @@ export class ProdOfferingAddDetailComponent implements OnInit {
     ProdOfferingDescr: [''],
     StartDt: [''],
     EndDt: [''],
-    ProdOfferingStat: ['']
+    ProdOfferingStat: [''],
+    ReturnNotes: ['']
   });
 
   ngOnInit() {
@@ -62,7 +66,8 @@ export class ProdOfferingAddDetailComponent implements OnInit {
           ProdOfferingDescr : this.resultData.ProdOfferingDescr,
           StartDt : formatDate(this.resultData.StartDt,'yyyy-MM-dd', 'en-US'),
           EndDt: formatDate(this.resultData.EndDt,'yyyy-MM-dd', 'en-US'),
-          ProdOfferingStat : this.resultData.ProdOfferingStat
+          ProdOfferingStat : this.resultData.ProdOfferingStat,
+          ReturnNotes : this.resultData.ReturnNotes
         })
       },
       (error) => {

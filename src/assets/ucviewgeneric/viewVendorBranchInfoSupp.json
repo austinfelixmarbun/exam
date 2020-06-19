@@ -7,45 +7,53 @@
         "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
-            "type": "text",
-            "label": "Supplier HO:",
-            "property": "SupplierHo"
-          },
+            "type": "link",
+            "label": "Supplier HO :",
+            "property": "SupplierHo",
+            "target": "_blank",
+            "path": "/Vendor/HO/View",
+            "param": [
+              {
+                "type": "VendorId",
+                "property": "VendorParentId"
+              }
+            ]
+          },{},
           {
             "type": "text",
-            "label": "Supplier Upping Calcuation Method:",
+            "label": "Supplier Upping Calcuation Method :",
             "property": "SuppCalc"
-          },
+          },{},
           {
             "type": "text",
-            "label": "Supplier Class",
+            "label": "Supplier Class :",
             "property": "SupplierClass"
-          },
+          },{},
           {
             "type": "text",
-            "label": "Bpkb Aging:",
+            "label": "BPKB Aging :",
             "property": "BpkbAging"
-          },
+          },{},
           {
             "type": "text",
-            "label": "Days A/P Payment Due after Go Live:",
+            "label": "Days A/P Payment Due after Go Live :",
             "property": "DAP"
-          },
+          },{},
           {
             "type": "text",
-            "label": "Max Refund Type:",
+            "label": "Max Refund Type :",
             "property": "MaxRefundType"
-          },
+          },{},
           {
             "type": "text",
-            "label": "Max Refund Value:",
+            "label": "Max Refund Value :",
             "property": "MaxRefundValue"
           }
         ],
         "querystring": {
-           "select":"SELECT VENDOR_NAME AS SupplierHo,RESERVED_FIELD_3 AS SuppCalc,MR_VENDOR_CLASS AS SupplierClass,RESERVED_FIELD_5 AS BpkbAging, RESERVED_FIELD_6 AS DAP,RESERVED_FIELD_7 AS MaxRefundType,RESERVED_FIELD_8 AS MaxRefundValue",
-            "from":"FROM dbo.VENDOR A WITH(NOLOCK)",
-            "where":"WHERE MR_VENDOR_CLASS = 'BRANCH'  AND MR_VENDOR_CATEGORY_CODE LIKE 'SUPPLIER%' AND MR_VENDOR_CATEGORY_CODE NOT LIKE '%HO' AND VENDOR_ID = {0}"
+           "select":"SELECT E.VENDOR_NAME AS SupplierHo, B.DESCR AS SuppCalc, D.DESCR AS SupplierClass, A.RESERVED_FIELD_5 AS BpkbAging, A.RESERVED_FIELD_6 AS DAP, C.DESCR AS MaxRefundType, A.RESERVED_FIELD_8 AS MaxRefundValue, A.VENDOR_PARENT_ID AS VendorParentId",
+            "from":"FROM dbo.VENDOR A WITH(NOLOCK) JOIN dbo.VENDOR E WITH(NOLOCK) ON A.VENDOR_PARENT_ID = E.VENDOR_ID LEFT JOIN dbo.REF_MASTER B WITH(NOLOCK) ON A.RESERVED_FIELD_3 = B.MASTER_CODE LEFT JOIN dbo.REF_MASTER C WITH(NOLOCK) ON A.RESERVED_FIELD_7 = C.MASTER_CODE LEFT JOIN dbo.REF_MASTER D WITH(NOLOCK) ON A.RESERVED_FIELD_4 = D.MASTER_CODE",
+            "where":"WHERE A.MR_VENDOR_CLASS = 'BRANCH' AND A.MR_VENDOR_CATEGORY_CODE = 'SUPPLIER_BRANCH' AND A.VENDOR_ID = {0} AND B.REF_MASTER_TYPE_CODE = 'SUPPLIER_UP_CALC_METHOD' AND C.REF_MASTER_TYPE_CODE = 'MAX_REFUND_TYPE' AND D.REF_MASTER_TYPE_CODE = 'SUPPLIER_CLASS'"
         }
       }
     ]

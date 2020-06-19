@@ -26,6 +26,16 @@ export class NotificationApprovalPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNotificationApproval.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "NH.MR_NOTIFICATION_TYPE_CODE",
+        environment: environment.FoundationR3Url
+      },
+      {
+        name: "NH.STATUS",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     
     this.arrCrit = new Array();

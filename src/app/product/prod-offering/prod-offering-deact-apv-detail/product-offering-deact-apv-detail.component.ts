@@ -32,7 +32,7 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
    }
 
   ngOnInit() {
-    this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
+    this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformationForDeactApv.json";
     var obj = {
       taskId: this.taskId,
       instanceId: this.instanceId,
@@ -54,5 +54,7 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
     this.toastr.successMessage("Success");
     this.router.navigate(["/Product/OfferingDeactivateApproval"]);
   }
-
+  onCancelClick() {
+    this.router.navigate(["/Product/OfferingDeactivateApproval"]);
+  }
 }

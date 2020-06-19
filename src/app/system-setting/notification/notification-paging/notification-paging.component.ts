@@ -24,6 +24,12 @@ export class NotificationPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNotification.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "NH.MR_NOTIFICATION_TYPE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 
 }

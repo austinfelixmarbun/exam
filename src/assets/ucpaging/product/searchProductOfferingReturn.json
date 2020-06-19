@@ -1,0 +1,204 @@
+{
+  "title": "Product Offering Return",
+  "exportExcel": false,
+  "component": [{
+      "type": "textbox",
+      "name": "Prod_Code",
+      "id": "ProdCode",
+      "value": "",
+      "label": "Product Code",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "Prod_Name",
+      "id": "ProdName",
+      "value": "",
+      "label": "Product Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "Prod_Offering_Code",
+      "id": "ProdCode",
+      "value": "",
+      "label": "Product Offering Code",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "Prod_Offering_Name",
+      "id": "ProdOfferingName",
+      "value": "",
+      "label": "Product Offering Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "dropdown",
+      "name": "A.Prod_Offering_Stat",
+      "id": "ProdOfferingStat",
+      "value": "Product Offering Status",
+      "placeholder": "Placeholder",
+      "isFromURL": true,
+      "isSelectOne": false,
+      "url": "",
+      "path": "/RefMaster/GetListKeyValueActiveByCode",
+      "label": "Product Offering Status",
+      "items": [],
+      "itemsUrl": [],
+      "criteriaPropName": "RefMasterTypeCode",
+      "criteriaPropValue": "PRODUCT_STAT"
+    },
+    {
+      "type": "datepicker",
+      "name": "A.End_Dt",
+      "id": "EndDt",
+      "value": "",
+      "label": "End Date",
+      "placeholder": "Placeholder"
+    }
+  ],
+  "headerList": [{
+      "type": "sort",
+      "position": "center",
+      "label": "Product Code",
+      "name": "ProdCode"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Product Name",
+      "name": "ProdName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Product Offering Code",
+      "name": "ProdOfferingCode"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Product Offering Name",
+      "name": "ProdOfferingName"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Current Version",
+      "name": "CurrentProdOfrVersion"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Draft Version",
+      "name": "DraftProdOfrVersion"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "End Date",
+      "name": "EndDt"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Product Offering Status",
+      "name": "ProdOfferingStatDesc"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Action"
+    }
+  ],
+  "querystring": {
+    "select": "SELECT P.PROD_CODE as ProdCode, P.PROD_NAME as ProdName,A.PROD_OFFERING_CODE as ProdOfferingCode, A.PROD_OFFERING_NAME as ProdOfferingName,A.CURRENT_PROD_OFFERING_H_ID AS prodOfferingHId , A.DRAFT_PROD_OFFERING_H_ID AS DraftProdOfferingHId, A.END_DT AS EndDt, A.PROD_OFFERING_STAT AS ProdOfferingStat, C.PROD_OFFERING_VERSION AS CurrentProdOfrVersion, D.PROD_OFFERING_VERSION AS DraftProdOfrVersion, RS.DESCR AS ProdOfferingStatDesc, RTX.TRX_TYPE_CODE AS TrxTypeCode",
+    "from": "FROM PROD_OFFERING A WITH(NOLOCK) LEFT JOIN PROD_OFFERING_H B WITH(NOLOCK) ON A.CURRENT_PROD_OFFERING_H_ID = B.PROD_OFFERING_H_ID JOIN PROD P WITH(NOLOCK) ON A.PROD_ID = P.PROD_ID LEFT JOIN PROD_OFFERING_H D ON A.DRAFT_PROD_OFFERING_H_ID = D.PROD_OFFERING_H_ID LEFT JOIN PROD_OFFERING_H C WITH(NOLOCK) ON A.CURRENT_PROD_OFFERING_H_ID = C.PROD_OFFERING_H_ID JOIN dbo.REF_STATUS RS WITH(NOLOCK) ON RS.REF_STATUS_CODE = A.PROD_OFFERING_STAT JOIN dbo.REF_TRX_TYPE RTX WITH(NOLOCK) ON RTX.REF_TRX_TYPE_ID = RS.REF_TRX_TYPE_ID",
+    "where": "WHERE RTX.TRX_TYPE_CODE = 'PROD'"
+  },
+  "bodyList": [{
+      "type": "text",
+      "position": "center",
+      "property": "ProdCode"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "ProdName"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "ProdOfferingCode"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "ProdOfferingName"
+    },
+    {
+      "type": "link",
+      "position": "center",
+      "property": "CurrentProdOfrVersion",
+      "path": "../../OfferingView",
+      "target": "_blank",
+      "param": [
+          {
+              "type": "prodOfferingHId",
+              "property": "prodOfferingHId"
+          }
+      ]
+    },
+    {
+      "type": "link",
+      "position": "center",
+      "property": "DraftProdOfrVersion",
+      "path": "../../OfferingView",
+      "target": "_blank",
+      "param": [
+          {
+              "type": "prodOfferingHId",
+              "property": "DraftProdOfferingHId"
+          }
+      ]
+    },
+    {
+      "type": "date",
+      "position": "center",
+      "property": "EndDt"
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "ProdOfferingStatDesc"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [{
+        "type": "switch",
+        "case": [
+        {
+          "conditions": [{
+            "property": "ProdOfferingStat",
+            "value": "DEACT",
+            "restriction": "NEQ"
+          }],
+          "result": {
+            "type": "callback",
+            "key": "EditProductOffering"
+          },
+          "isHide": false
+        }
+
+      
+      
+      ]
+
+      }]
+
+
+    }
+  ]
+}

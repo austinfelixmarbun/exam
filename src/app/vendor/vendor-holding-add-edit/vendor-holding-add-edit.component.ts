@@ -34,6 +34,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
   vendorObj: any;
   VendorId: any;
   ButtonLbl: string = "Continue";
+  businessDt: Date;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService) {
     this.route.queryParams.subscribe(params => {
@@ -79,6 +80,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
 
   ngOnInit() {
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDt = new Date(context["BusinessDt"]);
     var refMasterCategoryObj = {
       RefMasterTypeCode: "VENDOR_CATEGORY",
       ReserveField1: "HOLDING"
@@ -133,9 +136,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
       var vendorObj = new VendorObj();
       vendorObj.VendorId = this.VendorId; 
       this.VendorForm.controls.VendorCode.disable();
-      this.vendorService.GetVendorHOAndVendorAddrByVendorId(vendorObj).subscribe(
+      this.vendorService.GetVendorAndVendorAddrByVendorId(vendorObj).subscribe(
         (response) => {
-          this.setLookup();
           this.result = response;
           this.VendorForm.patchValue({
             MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
@@ -169,7 +171,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
             Zipcode: this.result.VendorAddrObj.Zipcode,
             RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion
           });
-          this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.result["VendorAddrObj"].Zipcode};
+
+          this.setLookup();
           this.checkType();
         },
         (error) => {
@@ -199,6 +202,13 @@ export class VendorHoldingAddEditComponent implements OnInit {
   }
 
   SaveForm() {
+    if (Date.parse(this.VendorForm.controls.EstablishmentDt.value) > Date.parse(formatDate(this.businessDt,  'yyyy-MM-dd', 'en-US'))) {
+      this.toastr.errorMessage("Establishment Date Must Be Lesser Than Business Date");
+    }
+    else if (Date.parse(this.VendorForm.controls.PartnershipDt.value) > Date.parse(formatDate(this.businessDt,  'yyyy-MM-dd', 'en-US'))) {
+      this.toastr.errorMessage("Partnership Date Must Be Lesser Than Business Date");
+    }
+    else {
     this.vendorObj = new VendorHoObj();
     var vendorObj = {
       MrVendorCategoryCode: this.VendorForm.controls.MrVendorCategoryCode.value,
@@ -274,6 +284,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         });
     }
   }
+  }
 
   Back(){
     if(this.mode == "edit"){
@@ -291,6 +302,11 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.isReady = true;
+    
+    if(this.result.VendorAddrObj.Zipcode != null){
+      this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
+    }
   }
 
   checkType() {

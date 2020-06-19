@@ -24,11 +24,17 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeAsset.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "UMH.OFFICE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
   cancel(ev) {
     var wfObj = new WorkflowApiObj();
-    wfObj.TaskListId = ev.TaskListId;
-    wfObj.TransactionNo = ev.UploadNo;
+    wfObj.TaskListId = ev.RowObj.TaskListId;
+    wfObj.TransactionNo = ev.RowObj.UploadNo;
     wfObj.ListValue = { "Status": "CAN" };
     this.http.post(this.CancelUpload, wfObj).subscribe(
       response => {

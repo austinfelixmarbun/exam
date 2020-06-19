@@ -26,8 +26,8 @@ export class ApprovalScreenComponent implements OnInit {
 
   ngOnInit() {
     var obj = {
-      taskId : 75659,
-      instanceId : 70487,
+      taskId : 75786,
+      instanceId : 70605,
       approvalBaseUrl : environment.ApprovalURL
     }
 
@@ -53,6 +53,11 @@ export class ApprovalScreenComponent implements OnInit {
     )
 
     this.apvBaseUrl = environment.ApprovalURL;
+  }
+
+  onCancelClick()
+  {
+    console.log("cancel click")
   }
 
   onChange(event)

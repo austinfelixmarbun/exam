@@ -1,5 +1,5 @@
-<app-uc-approval [inputObj]="inputObj" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></app-uc-approval>
-<lib-ucapproval [inputObj]="inputObj" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></lib-ucapproval>
+<app-uc-approval [inputObj]="inputObj" [showCancel] = "'true'" (onCancel)="onCancelClick()" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></app-uc-approval>
+<lib-ucapproval [inputObj]="inputObj" [showCancel] = "'true'" (onCancel)="onCancelClick()" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></lib-ucapproval>
 
 <form [formGroup]="FormApv" #enjiForm="ngForm" (ngSubmit)="FormApv.valid && Test()">
     <app-uc-approveby 
@@ -14,7 +14,7 @@
 
     <lib-ucapprovalsummary [inputObj]="inputObj" ></lib-ucapprovalsummary>
     <app-uc-approvalsummary [inputObj]="inputObj" ></app-uc-approvalsummary>
-
+<!-- 
     <lib-ucapproveby
         [apvBaseUrl]="apvBaseUrl"
         [parentForm]="FormApv" 
@@ -39,7 +39,7 @@
         [parentForm]="FormApv" 
         [enjiForm]="enjiForm"
     >
-    </lib-ucapprovalrecommendation>
+    </lib-ucapprovalrecommendation> -->
 
     <button type="submit"> Test </button>
 </form>

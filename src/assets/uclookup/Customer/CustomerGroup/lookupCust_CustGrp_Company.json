@@ -26,7 +26,8 @@
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Type",
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "CUST_TYPE",
@@ -35,8 +36,8 @@
         }
     ],
     "querystring": {
-        "select": "SELECT A.CUST_NO AS custNo, A.CUST_NAME AS custName, A.TAX_ID_NO AS taxIdNo, A.CUST_ID AS custId",
-        "from": "FROM CUST AS A WITH(NOLOCK) INNER JOIN CUST_COMPANY AS B WITH(NOLOCK) ON A.CUST_ID = B.CUST_ID"
+        "select": "SELECT A.CUST_NO AS custNo, A.CUST_NAME AS custName, A.TAX_ID_NO AS taxIdNo, A.MR_CUST_TYPE_CODE AS mrCustTypeCode, A.CUST_ID AS custId",
+        "from": "FROM CUST AS A WITH(NOLOCK)"
     },
     "headerList": [
         {

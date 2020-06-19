@@ -4,7 +4,7 @@
       <div class="card-header header-title">
         <div class="row">
           <div class="col-md-8">
-            <h4 class="card-title" id="horz-layout-colored-controls" translate> WORKING HOUR SCHEME {{pageType}} </h4>
+            <!-- <h4 class="card-title" id="horz-layout-colored-controls" translate> WORKING HOUR SCHEME {{pageType}} </h4> -->
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" translate>Working Hour Scheme Code </label>
               <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-25-per" formControlName="WorkingHourSchmCode"
+                  <input type="text" class="form-control adInsInput code" formControlName="WorkingHourSchmCode"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && WorkingHourSchmHForm.controls.WorkingHourSchmCode.invalid }">
                   <show-errors [control]="WorkingHourSchmHForm.controls.WorkingHourSchmCode" [submit]="enjiForm.submitted"></show-errors>
               </div>
@@ -24,7 +24,7 @@
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" translate>Working Hour Scheme Name </label>
               <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-75-per" formControlName="WorkingHourSchmName"
+                  <input type="text" class="form-control adInsInput name" formControlName="WorkingHourSchmName"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && WorkingHourSchmHForm.controls.WorkingHourSchmName.invalid }">
                   <show-errors [control]="WorkingHourSchmHForm.controls.WorkingHourSchmName" [submit]="enjiForm.submitted"></show-errors>
               </div>

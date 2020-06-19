@@ -35,7 +35,7 @@
         <div id="CustMainDataPersonal">
           <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Customer Address'"
             [UCAddrForm]="CustDataPersonalForm" [enjiForm]="enjiForm" [identifier]="'custAddress'"
-            [default]="addressObj" [inputField]="inputFieldAddressObj" ></lib-ucaddress>
+            [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true" ></lib-ucaddress>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
@@ -52,7 +52,7 @@
         <i class="ft-x"></i> Cancel
       </button>
       <button type="submit" class="btn btn-raised btn-primary" translate>
-        <i class="fa fa-check-square-o"></i> Save
+        <i class="far fa-check-square"></i> Save
       </button>
     </div>
   </form>

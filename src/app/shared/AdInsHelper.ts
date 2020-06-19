@@ -37,6 +37,19 @@ export class AdInsHelper {
         localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
     }
 
+    public static ForceLogOut(timeLeft,toastr) {
+        let interval = setInterval(() => {
+            if (timeLeft > 0) {
+                console.log("Time Left : " + timeLeft)
+                toastr.errorMessage("Automatic Log out at : " + timeLeft);
+                timeLeft--;
+            } else {
+                this.ClearAllLog();
+                window.location.reload();
+            }
+        }, 1000)
+    }
+
     public static ClearAllLog() {
         // localStorage.removeItem("UserContext");
         // localStorage.removeItem("PageAccess");
@@ -48,7 +61,7 @@ export class AdInsHelper {
         // localStorage.removeItem("Menu");
         let version = localStorage.getItem("Version");
         localStorage.clear();
-        localStorage.setItem("Version",version);
+        localStorage.setItem("Version", version);
     }
 
     public static ClearPageAccessLog() {
@@ -76,14 +89,13 @@ export class AdInsHelper {
 
     }
 
-    public static CreateUserAccess(response)
-    {
+    public static CreateUserAccess(response) {
         // var currentUserContext = new CurrentUserContext;
         // currentUserContext.UserName = response["Identity"].UserName;
         // currentUserContext.Office = response["Identity"].OfficeCode;
         // currentUserContext.Role = response["Identity"].RoleCode;
         // currentUserContext.BusinessDate = response["Identity"].BusinessDt;
-        localStorage.setItem("BusinessDateRaw",response["Identity"].BusinessDt);
+        localStorage.setItem("BusinessDateRaw", response["Identity"].BusinessDt);
         var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
         localStorage.setItem("BusinessDate", DateParse);
         localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));

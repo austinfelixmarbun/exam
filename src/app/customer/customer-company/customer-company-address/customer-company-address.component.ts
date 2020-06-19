@@ -55,8 +55,8 @@ export class CustomerCompanyAddressComponent implements OnInit {
         }
       }); 
   }
-  back() {
-    this.outputTab.emit({ stepMode: "previous" });
-  }
+  // back() {
+  //   this.outputTab.emit({ stepMode: "previous" });
+  // }
 }
 

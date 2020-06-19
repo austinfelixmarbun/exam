@@ -74,8 +74,8 @@
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="Email1"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.Email1.invalid}">
-            <show-errors [control]="ContactInformationForm.controls.Email1" [submit]="enjiForm.submitted">
-            </show-errors>
+            <lib-uc-show-errors [control]="ContactInformationForm.controls.Email1" [submit]="enjiForm.submitted">
+            </lib-uc-show-errors>
           </div>
         </div>
         <div class="form-group row ">
@@ -83,8 +83,8 @@
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="Email2"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.Email2.invalid}">
-            <show-errors [control]="ContactInformationForm.controls.Email2" [submit]="enjiForm.submitted">
-            </show-errors>
+            <lib-uc-show-errors [control]="ContactInformationForm.controls.Email2" [submit]="enjiForm.submitted">
+            </lib-uc-show-errors>
           </div>
         </div>
       </div>
@@ -95,11 +95,11 @@
       </div>
     </div>
     <div class="form-actions right">
-      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+      <!-- <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
         <i class="ft-x"></i> Back
-      </button>
+      </button> -->
       <button type="submit" class="btn btn-raised btn-primary" translate>
-        <i class="fa fa-check-square-o"></i> Save & Continue
+        <i class="far fa-check-square"></i> Save
       </button>
     </div>
   </form>

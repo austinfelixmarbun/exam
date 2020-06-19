@@ -37,6 +37,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
   VendorId: any;
   CenterGrpId: any;
   VendorOfficeMbrObj: any;
+  isReady: boolean = false;
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
@@ -46,36 +47,66 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.GetListVendorOfficeMbrByVendorId();
+    // this.GetListVendorOfficeMbrByVendorId();
+    var obj = {
+      VendorId: this.VendorId
+    }
 
-    this.arrCrit = new Array();
-    this.listSelectedId = new Array();
-    this.tempListId = new Array();
-    this.tempData = new Array();
-    this.arrCrit = new Array();
+    this.http.post(AdInsConstant.GetListVendorOfficeMbrByVendorId, obj).subscribe(
+      (response) => {
+        this.arrCrit = new Array();
+        this.listSelectedId = new Array();
+        this.tempListId = new Array();
+        this.tempData = new Array();
+        this.arrCrit = new Array();
+    
+        this.inputObj = new InputSearchObj();
+        this.inputObj._url = "./assets/ucpaging/searchRefOffice.json";
+        this.inputObj.enviromentUrl = environment.FoundationR3Url;
+        this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+        this.inputObj.addCritInput = new Array();
+    
+        this.pageNow = 1;
+        this.pageSize = 10;
+        this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    
+        const addCritIsActive = new CriteriaObj();
+        addCritIsActive.DataType = 'boolean';
+        addCritIsActive.propName = 'RO.IS_ACTIVE';
+        addCritIsActive.restriction = AdInsConstant.RestrictionEq;
+        addCritIsActive.value = "true";
+        this.arrCrit.push(addCritIsActive);
+    
+        this.inputObj.addCritInput.push(addCritIsActive);
+    
+        this.pageNow = 1;
+        this.pageSize = 10;
+        this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
 
-    this.inputObj = new InputSearchObj();
-    this.inputObj._url = "./assets/ucpaging/searchRefOffice.json";
-    this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputObj.addCritInput = new Array();
+        this.VendorOfficeMbrObj = response;
+        var arrMemberList = new Array();
 
-    this.pageNow = 1;
-    this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+        for (let index = 0; index < this.VendorOfficeMbrObj.ReturnObject.length; index++) {
+          arrMemberList.push(this.VendorOfficeMbrObj.ReturnObject[index].OfficeCode);
+        }
 
-    const addCritIsActive = new CriteriaObj();
-    addCritIsActive.DataType = 'boolean';
-    addCritIsActive.propName = 'RO.IS_ACTIVE';
-    addCritIsActive.restriction = AdInsConstant.RestrictionEq;
-    addCritIsActive.value = "true";
-    this.arrCrit.push(addCritIsActive);
-
-    this.inputObj.addCritInput.push(addCritIsActive);
-
-    this.pageNow = 1;
-    this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+        if (arrMemberList.length != 0) {
+          const addCritListRefOffice = new CriteriaObj();
+          addCritListRefOffice.DataType = 'text';
+          // addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
+          addCritListRefOffice.propName = 'RO.OFFICE_CODE';
+          addCritListRefOffice.restriction = AdInsConstant.RestrictionNotIn;
+          addCritListRefOffice.listValue = arrMemberList;
+          this.arrCrit.push(addCritListRefOffice);
+          this.inputObj.addCritInput.push(addCritListRefOffice);
+        }
+        
+        this.isReady = true;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   searchSort(event: any) {
@@ -135,8 +166,6 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
     if (this.listSelectedId.length != 0) {
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
-      }
-      for (var i = 0; i < this.listSelectedId.length; i++) {
         var object = this.resultData.Data.find(x => x.RefOfficeId == this.listSelectedId[i]);
         this.tempData.push(object);
       }
@@ -243,33 +272,34 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
 
   }
 
-  GetListVendorOfficeMbrByVendorId() {
-    var obj = {
-      VendorId: this.VendorId
-    }
+  // GetListVendorOfficeMbrByVendorId() {
+  //   var obj = {
+  //     VendorId: this.VendorId
+  //   }
 
-    this.http.post(AdInsConstant.GetListVendorOfficeMbrByVendorId, obj).subscribe(
-      (response) => {
-        this.VendorOfficeMbrObj = response;
-        var arrMemberList = new Array();
+  //   this.http.post(AdInsConstant.GetListVendorOfficeMbrByVendorId, obj).subscribe(
+  //     (response) => {
+  //       this.VendorOfficeMbrObj = response;
+  //       var arrMemberList = new Array();
 
-        for (let index = 0; index < this.VendorOfficeMbrObj.ReturnObject.length; index++) {
-          arrMemberList.push(this.VendorOfficeMbrObj.ReturnObject[index].RefOfficeId)
-        }
+  //       for (let index = 0; index < this.VendorOfficeMbrObj.ReturnObject.length; index++) {
+  //         arrMemberList.push(this.VendorOfficeMbrObj.ReturnObject[index].OfficeCode);
+  //       }
 
-        if (arrMemberList.length != 0) {
-          const addCritListRefOffice = new CriteriaObj();
-          addCritListRefOffice.DataType = 'numeric';
-          addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
-          addCritListRefOffice.restriction = AdInsConstant.RestrictionNotIn;
-          addCritListRefOffice.listValue = arrMemberList;
-          this.arrCrit.push(addCritListRefOffice);
-          this.inputObj.addCritInput.push(addCritListRefOffice);
-        }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+  //       if (arrMemberList.length != 0) {
+  //         const addCritListRefOffice = new CriteriaObj();
+  //         addCritListRefOffice.DataType = 'text';
+  //         // addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';
+  //         addCritListRefOffice.propName = 'RO.OFFICE_CODE';
+  //         addCritListRefOffice.restriction = AdInsConstant.RestrictionNotIn;
+  //         addCritListRefOffice.listValue = arrMemberList;
+  //         this.arrCrit.push(addCritListRefOffice);
+  //         this.inputObj.addCritInput.push(addCritListRefOffice);
+  //       }
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 }

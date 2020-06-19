@@ -45,8 +45,7 @@
         <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}-{{item.PhnExt2}}</td>
         <td style="text-align: left;">{{item.Notes}}</td>
         <td style="text-align: left;">
-          
-          <span *ngIf="item.MrCustAddrTypeCode != 'Legal' || From != 'CustPaging'" (click)="editItem(item)"
+          <span [hidden]="item.MrCustAddrTypeCode == 'LEGAL' && From == 'CustPaging'" (click)="editItem(item)"
             class="material-icons">edit</span>
         </td>
       </tr>
@@ -56,4 +55,3 @@
 <br>
 <br>
 <br>
- 

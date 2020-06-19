@@ -3,13 +3,13 @@
   <mat-tab label="GENERAL DATA">
     <ng-template matTabContent>
       <div class="card">
-        <div class="card-body px-3">
-          <lib-ucSubsection [id]="'genId'" [title]="'General Data'" [panel]="'gen'">
+        <div class="card-body px-3" *ngIf="IsLoaded">
+          <lib-ucSubsection [id]="'genId'" [title]="ProdCompGen.GroupName" [panel]="'gen'">
           </lib-ucSubsection>
           <div id="gen">
-            <div *ngFor="let item of GenData">
-              <label class="col-md-3">{{item.ProdCompntName}}</label>
-              <label class="col-md-9">{{item.CompntValueDesc}}</label>
+            <div *ngFor="let item of ProdCompGen.Components">
+              <label class="col-md-4">{{item.ProdCompntName}}</label>
+              <label class="col-md-8">{{item.CompntValueDesc}}</label>
             </div>
           </div>
         </div>
@@ -20,49 +20,20 @@
     <ng-template matTabContent>
       <div class="card">
         <div class="card-body px-3">
-          <div>
-            <lib-ucSubsection [id]="'schemeId'" [title]="'Scheme'" [panel]="'scheme'">
-            </lib-ucSubsection>
-            <div id="scheme">
-              <div *ngFor="let item of ProdCompSchm">
-                <label class="col-md-4">{{item.ProdCompntName}}</label>
-                <label class="col-md-2">{{item.CompntValueDesc}}</label>
-              </div>
-            </div>
-          </div>
-          <div>
-            <lib-ucSubsection [id]="'scoreId'" [title]="'Score'" [panel]="'score'">
-            </lib-ucSubsection>
-            <div id="score">
-              <div *ngFor="let item of ProdCompScore">
-                <label class="col-md-4">{{item.ProdCompntName}}</label>
-                <label class="col-md-2">{{item.CompntValueDesc}}</label>
-                <label class="col-md-2">{{item.MrProdBehaviourCode}}</label>
-              </div>
-            </div>
-          </div>
-          <div>
-            <lib-ucSubsection [id]="'ruleId'" [title]="'Rule'" [panel]="'rule'">
-            </lib-ucSubsection>
-            <div id="rule">
-              <div *ngFor="let item of ProdCompRule">
-                <label class="col-md-3">{{item.ProdCompntName}}</label>
-                <span class="material-icons col-md-1" (click)="DownloadRule(item.CompntValue,item.CompntValueDesc)">
-                  get_app
-                </span>
-                <label class="col-md-4">{{item.CompntValueDesc}}</label>
-                <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
-              </div>
-            </div>
-          </div>
-          <div>
-            <lib-ucSubsection [id]="'otherId'" [title]="'Other'" [panel]="'other'">
-            </lib-ucSubsection>
-            <div id="other">
-              <div *ngFor="let item of ProdCompOther">
-                <label class="col-md-4">{{item.ProdCompntName}}</label>
-                <label class="col-md-4">{{item.CompntValueDesc}}</label>
-                <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
+          <div *ngFor=" let x of ProdCompNonGen">
+            <div *ngIf="x.Components != 0">
+              <lib-ucSubsection [id]="x.GroupName+'id'" [title]="x.GroupName" [panel]="x.GroupName">
+              </lib-ucSubsection>
+              <div id="{{x.GroupName}}">
+                <div *ngFor="let item of x.Components">
+                  <label class="col-md-3" *ngIf="x.GroupCode == 'RULE'">{{item.ProdCompntName}}</label>
+                  <label class="col-md-4" *ngIf="x.GroupCode != 'RULE'">{{item.ProdCompntName}}</label>
+                  <span class="material-icons col-md-1 pointer" (click)="DownloadRule(item.CompntValue,item.CompntValueDesc)" *ngIf="x.GroupCode == 'RULE'">
+                    get_app
+                  </span>
+                  <label class="col-md-4">{{item.CompntValueDesc}}</label>
+                  <label class="col-md-4">{{item.MrProdBehaviourCode}}</label>
+                </div>
               </div>
             </div>
           </div>

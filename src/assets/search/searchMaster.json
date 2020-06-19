@@ -11,7 +11,8 @@
       "datatype": "text",
       "isFromURL": true,
       "isSelectOne": true,
-      "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMasterType/GetListActiveRefMasterTypeKeyValue",
+      "url": "",
+      "path": "/RefMasterType/GetListActiveRefMasterTypeKeyValue",
       "label": "Master Type",
       "items": [],
       "itemsUrl": []
@@ -19,7 +20,7 @@
     {
       "type": "textbox",
       "name": "master_Code",
-      "id": "masterCodeId",
+      "id": "MasterCodeId",
       "value": "",
       "label": "Master Code",
       "placeholder": "Placeholder",
@@ -27,8 +28,8 @@
     },
     {
       "type": "textbox",
-      "name": "descr",
-      "id": "descrId",
+      "name": "Descr",
+      "id": "DescrId",
       "value": "",
       "label": "Description",
       "placeholder": "Placeholder",
@@ -38,7 +39,7 @@
       "type": "dropdown",
       "name": "is_Active",
       "datatype": "text",
-      "id": "isActiveId",
+      "id": "IsActiveId",
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -61,7 +62,7 @@
       "type": "dropdown",
       "name": "is_System",
       "datatype": "text",
-      "id": "isSystemId",
+      "id": "IsSystemId",
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -82,7 +83,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT REF_MASTER_ID AS refMasterId, MASTER_CODE AS masterCode, DESCR AS descr, SEQ_NO AS seqNo, IS_ACTIVE AS isActive, IS_SYSTEM AS isSystem",
+    "select": "SELECT MASTER_CODE AS MasterCode, DESCR AS Descr, SEQ_NO AS SeqNo, IS_ACTIVE AS IsActive, IS_SYSTEM AS IsSystem, REF_MASTER_ID AS RefMasterId",
     "from": "FROM REF_MASTER WITH(NOLOCK)"
   },
   "headerList": [
@@ -90,31 +91,31 @@
       "type": "sort",
       "position": "left",
       "label": "Master Code",
-      "name": "masterCode"
+      "name": "MASTER_CODE"
     },
     {
       "type": "sort",
       "position": "left",
       "label": "Description",
-      "name": "descr"
+      "name": "DESCR"
     },
     {
       "type": "sort",
       "position": "left",
       "label": "Sequence No",
-      "name": "seqNo"
+      "name": "SEQ_NO"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "Active",
-      "name": "isActive"
+      "name": "IS_ACTIVE"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "System",
-      "name": "isSystem"
+      "name": "IS_SYSTEM"
     },
     {
       "type": "label",
@@ -126,27 +127,27 @@
     {
       "type": "text",
       "position": "left",
-      "property": "masterCode"
+      "property": "MasterCode"
     },
     {
       "type": "text",
       "position": "left",
-      "property": "descr"
+      "property": "Descr"
     },
     {
       "type": "text",
       "position": "left",
-      "property": "seqNo"
+      "property": "SeqNo"
     },
     {
       "type": "boolean",
       "position": "center",
-      "property": "isActive"
+      "property": "IsActive"
     },
     {
       "type": "boolean",
       "position": "center",
-      "property": "isSystem"
+      "property": "IsSystem"
     },
     {
       "type": "action",
@@ -158,7 +159,7 @@
             {
               "conditions": [
                 {
-                  "property": "isSystem",
+                  "property": "IsSystem",
                   "value": "0",
                   "restriction": "EQ"
                 }
@@ -168,35 +169,12 @@
                 "path": "/CommonSetting/Master/Detail",
                 "param": [
                   {
-                    "type": "refMasterId",
-                    "property": "refMasterId"
+                    "type": "RefMasterId",
+                    "property": "RefMasterId"
                   },
                   {
                     "type":"mode",
                     "property":"edit"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "type": "switch",
-          "case": [
-            {
-              "conditions": [
-                {
-                  "property": "isSystem",
-                  "value": "0",
-                  "restriction": "EQ"
-                }
-              ],
-              "result": {
-                "type": "delete",
-                "param": [
-                  {
-                    "type": "refMasterId",
-                    "property": "refMasterId"
                   }
                 ]
               }

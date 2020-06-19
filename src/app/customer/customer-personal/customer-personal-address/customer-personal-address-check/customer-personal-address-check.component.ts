@@ -31,7 +31,6 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   IdNo: string;
   addUrl: string;  
   Gender: string;
-  TaxIdNo: string;
   CustName: string;
   GenderDesc: string;
   CustModel: string;

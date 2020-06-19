@@ -25,6 +25,7 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 export class CustomerContactAddComponent implements OnInit {
   @Output() outputTab: EventEmitter<any> = new EventEmitter();
   @Input() custPersonalContactPersonId: number;
+  @Input() listCustIdToExclude: Array<string>;
 
   Country: any;
   tempCust: any;
@@ -89,11 +90,13 @@ export class CustomerContactAddComponent implements OnInit {
     MrCustRelationshipCode: [''],
     IsEmergencyContact: [true],
     IsFamily: [true],
-    MobilePhnNo1: ['', [Validators.required]],
-    MobilePhnNo2: [''],
-    Email: [''],
+    MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    MobilePhnNo2: ['', [Validators.pattern("^[0-9]+$")]],
+    Email: ['', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
     ContactPersonCustNo: [''],
   });
+  criteriaExistingList: any[];
+  criteriaExistingObj: CriteriaObj;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
@@ -165,7 +168,30 @@ export class CustomerContactAddComponent implements OnInit {
     this.existingCustomerLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
+    if(this.listCustIdToExclude.length > 0){
+      var criteriaListCust = new Array();
+      var criteriaCustObj = new CriteriaObj();
+      criteriaCustObj.DataType = "text";
+      criteriaCustObj.restriction = AdInsConstant.RestrictionNotIn;
+      criteriaCustObj.propName = 'CUST_NO';
+      criteriaCustObj.listValue = this.listCustIdToExclude;
+      criteriaListCust.push(criteriaCustObj);
+      this.existingCustomerLookUpObj.addCritInput = criteriaListCust;
+    }
 
+    this.criteriaExistingList = new Array();
+    this.criteriaExistingObj = new CriteriaObj();
+    this.criteriaExistingObj.restriction = AdInsConstant.RestrictionEq;
+    this.criteriaExistingObj.propName = 'MR_CUST_TYPE_CODE';
+    this.criteriaExistingObj.value = AdInsConstant.CustomerPersonal;
+    this.criteriaExistingList.push(this.criteriaExistingObj);
+    if(this.existingCustomerLookUpObj.addCritInput){
+      this.existingCustomerLookUpObj.addCritInput.push(this.criteriaExistingObj);
+    }
+    else{
+      this.existingCustomerLookUpObj.addCritInput = this.criteriaExistingList;
+    }
+    
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
 

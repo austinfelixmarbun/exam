@@ -35,7 +35,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   arrCrit: any;
 
   foundationUrl: string = environment.FoundationR3Url;
-  settingUrl: string = environment.settingUrl;
+  settingUrl: string = environment.FoundationR3Url;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
@@ -143,8 +143,6 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     if (this.listSelectedId.length != 0) {
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
-      }
-      for (var i = 0; i < this.listSelectedId.length; i++) {
         var object = this.resultData.data.find(x => x.refZipcodeId == this.listSelectedId[i]);
         this.tempData.push(object);
       }

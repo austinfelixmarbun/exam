@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-ho-approval-detail',
@@ -18,7 +19,11 @@ export class ProductHOApprovalDetailComponent implements OnInit {
   instanceId: number;
   inputObj: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService,) {
+  constructor(private router: Router, 
+    private route: ActivatedRoute,
+     private toastr: NGXToastrService,
+     private http: HttpClient,
+     ) {
 
     this.route.queryParams.subscribe(params => {
 
@@ -46,7 +51,28 @@ export class ProductHOApprovalDetailComponent implements OnInit {
 
   onApprovalSubmited(event)
   {
-    this.toastr.successMessage("Success");
+    var data = {
+      ProdHId : this.prodHId,
+      TaskId : event.taskId,
+      InstanceId : event.instanceId,
+      Notes : event.notes,
+      Reason : event.reason,
+      ReasonType : event.reasonType,
+      Result : event.result
+    }
+    this.http.post(AdInsConstant.UpdateProductPostApv, data).subscribe(
+      (response) => {
+        this.toastr.successMessage("Success");
+        this.router.navigate(["/Product/HOApproval"]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  onCancelClick()
+  {
     this.router.navigate(["/Product/HOApproval"]);
   }
 }

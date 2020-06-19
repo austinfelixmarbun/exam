@@ -53,7 +53,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     ngOnInit() {
         this.GetListNotifH();
-
+        Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         console.log(this.userAccess.UserName);
         var _hubConnection = new HubConnectionBuilder()
             .withUrl(AdInsConstant.WebSocketUrl)
@@ -66,17 +66,27 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             .then(() => _hubConnection.invoke("SubscribeNotification", this.userAccess.UserName, this.userAccess.RoleCode))
             .catch((e) => console.log("Exception : " + e));
 
-        _hubConnection.on("GetUserNotification", (response) => {
-            console.log("Response : " + response);
-            //this.toastr.successMessageTitle(response.Title,response.Message);
-            //this.GetListNotifH();
-            this.notifications = JSON.parse(response);
-        });
-
         _hubConnection.on("ReceiveNotification", (response) => {
             console.log("Response API : " + response);
-            this.toastr.successMessageTitle(response.title,response.message);
+            if(response.type=="SUCCESS")
+            {
+                this.toastr.successMessageTitle(response.title,response.message);
+            }
+            else if(response.type=="ERROR")
+            {
+                this.toastr.errorMessageTitle(response.title,response.message);
+            }
+            else if(response.type=="INFO")
+            {
+                this.toastr.infoMessageTitle(response.title,response.message);
+            }
+            
+            
             this.GetListNotifH();
+            if(response.isNeedLogout==true)
+            {
+                AdInsHelper.ForceLogOut(response.timeLogOut,this.toastr);
+            }
             //this.notifications.push({ title: response, desc: "User " + response });
         });
     }
@@ -113,6 +123,26 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         // }, 3000);
 
 
+    }
+
+    ClickNotification(item)
+    {
+        this.http.post(AdInsConstant.UpdateReadNotification, {NotificationDId:item.NotificationDId}).subscribe(
+            (response) => {
+            },
+            (error) => {
+                console.log(error);
+            });
+        if(item.MrNotificationMethodCode=="EXT_LINK")
+        {
+            window.open(item.Url,"_blank");
+        }
+        else if(item.MrNotificationMethodCode="INT_LINK")
+        {
+            window.open(item.Url);
+        }
+
+        
     }
 
     logout() {

@@ -1,7 +1,3 @@
-<div class="col-md-12">
-  <div class="card">
-    <div class="card-body">
-      <div class="px-3">
         <div class="addEdit">
           <form class="form form-horizontal" [formGroup]="CustomerContactForm"
             (ngSubmit)="CustomerContactForm.valid && SaveValue()  " #enjiForm="ngForm">
@@ -243,12 +239,11 @@
                 <i class="ft-x"></i> Cancel
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="fa fa-check-square-o"></i> Save & Continue
+                <i class="far fa-check-square"></i> Save
               </button>
             </div>
+
+            
           </form>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+   

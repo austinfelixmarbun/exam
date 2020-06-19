@@ -41,6 +41,12 @@ export class OrganizationComponent implements OnInit {
     this.inputObj._url = "./assets/search/searchOrganization.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetRefOrgPaging;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "parentId",
+        environment: environment.FoundationR3Url
+      }
+    ];
     
     this.pageNow = 1;
     this.pageSize = 10;

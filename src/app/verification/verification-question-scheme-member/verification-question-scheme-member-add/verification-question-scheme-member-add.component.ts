@@ -77,10 +77,12 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
 
+   
+
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
-    this.inputObj.addCritInput = new Array();
+    
 
     var verfSchemeObj = { VerfSchemeHId: this.VerfSchemeHId }
     this.http.post(AdInsConstant.GetVerfSchemeHById, verfSchemeObj).subscribe(
@@ -175,8 +177,6 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     if (this.listSelectedId.length != 0) {
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
-      }
-      for (var i = 0; i < this.listSelectedId.length; i++) {
         var object = this.resultData.Data.find(x => x.VerfQuestionGrpHId == this.listSelectedId[i]);
         this.tempData.push(object);
       }
@@ -259,7 +259,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
         if(arrMemberList.length != 0){
           const addCritListVerfQuestionGrpHId = new CriteriaObj();
           addCritListVerfQuestionGrpHId.DataType = "numeric";
-          addCritListVerfQuestionGrpHId.propName = "VERF_QUESTION_GRP_H_ID";
+          addCritListVerfQuestionGrpHId.propName = "verf.VERF_QUESTION_GRP_H_ID";
           addCritListVerfQuestionGrpHId.restriction = AdInsConstant.RestrictionNotIn;
           addCritListVerfQuestionGrpHId.listValue = arrMemberList;
           this.arrCrit.push(addCritListVerfQuestionGrpHId);

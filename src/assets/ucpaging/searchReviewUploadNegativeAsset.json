@@ -11,7 +11,8 @@
         "datatype": "text",
         "isFromURL": true,
         "isSelectOne": false,
-        "url": "http://r3app-server/FOUNDATION_R3/RefOffice/GetListKvpActiveRefOfficeForPaging",
+        "url": "",
+        "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
         "label": "Office Name",
         "isQueryIn": true,
         "items": [],
@@ -39,7 +40,7 @@
         "type": "dropdown",
         "name": "VWF.CLAIM_STAT",
         "id": "ActiveStatusId",
-        "label": "TASK CLAIM STATUS",
+        "label": "Task Claim Status",
         "value": "",
         "placeholder": "Placeholder",
         "isFromURL": false,
@@ -61,7 +62,7 @@
         "name": "VWF.USERNAME",
         "id": "ClaimById",
         "value": "",
-        "label": "CLAIM BY",
+        "label": "Claim By",
         "placeholder": "Placeholder"
       }
     ],
@@ -87,7 +88,7 @@
         "type": "sort",
         "position": "left",
         "label": "FILE NAME",
-        "name": "descr"
+        "name": "UMH.FILE_NAME"
       },
       {
         "type": "sort",

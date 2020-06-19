@@ -66,8 +66,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
     IsRestInPeace: [false],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
-    Email1: [''],
-    Email2: [''],
+    Email1: ['', Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")],
+    Email2: ['', Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]
   }); 
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -254,13 +254,19 @@ export class CustomerPersonalDetailComponent implements OnInit {
           MobilePhnNo1: this.tempCustPersonalObj.MobilePhnNo1,
           MobilePhnNo2: this.tempCustPersonalObj.MobilePhnNo2,
           Email1: this.tempCustPersonalObj.Email1,
-          Email2: this.tempCustPersonalObj.Email1
+          Email2: this.tempCustPersonalObj.Email2
         });
       });
   }
-  SaveValue() {
-    this.custPersonalObj = new CustPersonalObj();
-    this.custPersonalObj = this.tempCustPersonalObj;
+ async SaveValue() {
+
+    await this.http.post(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).toPromise().then(
+      (response) => {
+        this.tempCustPersonalObj = response;
+        this.custPersonalObj = new CustPersonalObj();
+        this.custPersonalObj = this.tempCustPersonalObj;
+      });
+
     this.custPersonalObj.CustFullName = this.tempCustObj.CustName;
     this.custPersonalObj.NickName = this.CustomerDetailForm.controls["NickName"].value;
     this.custPersonalObj.MrSalutationCode = this.CustomerDetailForm.controls["MrSalutationCode"].value;

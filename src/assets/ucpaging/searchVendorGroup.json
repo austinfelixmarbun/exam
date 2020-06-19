@@ -11,7 +11,8 @@
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Vendor Category",
             "criteriaPropName": "RefMasterTypeCode",
             "criteriaPropValue": "VENDOR_CATEGORY",
@@ -155,10 +156,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "VendorGrpId"
                 }
             ]
         }

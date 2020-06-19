@@ -33,7 +33,7 @@ export class DummyComponent implements OnInit {
   pageSize: any;
   apiUrl: any;
 
-  settingUrl: string = environment.settingUrl;
+  settingUrl: string = environment.FoundationR3Url;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
@@ -51,7 +51,7 @@ export class DummyComponent implements OnInit {
   constructor(private excelService: ExcelService, private http: HttpClient) {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchDummy.json";
-    this.inputObj.enviromentUrl = environment.settingUrl;
+    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetBankPaging;
   }
 

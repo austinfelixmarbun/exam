@@ -19,6 +19,12 @@ export class CustomerPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustomer.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetAccessory;
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "C.MR_CUST_TYPE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 
 }

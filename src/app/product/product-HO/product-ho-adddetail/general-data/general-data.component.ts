@@ -28,7 +28,12 @@ export class GeneralDataHOComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: NGXToastrService,
     private wizard: WizardComponent
-  ) { }
+  ) { 
+    this.route.queryParams.subscribe(params => {
+      this.source = params["source"];
+    })
+
+  }
 
 
   FormProdComp: any;
@@ -44,6 +49,7 @@ export class GeneralDataHOComponent implements OnInit {
 
   inputLookUpObj: any;
   indentifierTemp;
+  source:string="";
 
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
@@ -319,7 +325,7 @@ export class GeneralDataHOComponent implements OnInit {
           var selectedText = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_text);
           this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].patchValue({
             CompntValue : selectedId.join(";"),
-            CompntValueDesc: selectedText.join(",")
+            CompntValueDesc: selectedText.join(", ")
           });
         }
         list.push(Object.assign({}, ...this.FormProdComp.controls.groups.controls[i].controls["components"].controls[j].value));
@@ -343,7 +349,7 @@ export class GeneralDataHOComponent implements OnInit {
     this.http.post(this.UrlPostAddEditProdD, objPost).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/Product/HOpaging"]);
+        this.BackToPaging();
       },
       (error) => {
         console.log(error);
@@ -408,5 +414,22 @@ export class GeneralDataHOComponent implements OnInit {
   
   onSelect(){
     console.log("event");
+  }
+
+  Cancel()
+  {
+    this.BackToPaging();
+  }
+
+  BackToPaging()
+  {
+    if(this.source == "return")
+    {
+      this.router.navigate(["/Product/HOReturnPaging"]);
+    }
+    else
+    {
+      this.router.navigate(["/product/HOpaging"]);
+    }
   }
 }

@@ -11,7 +11,8 @@
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server/FOUNDATION_R3/RefOffice/GetListKvpActiveRefOfficeForPaging",
+            "url": "",
+            "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Office Name",
             "isQueryIn": true,
             "items": [],
@@ -42,8 +43,9 @@
             "placeholder": "Placeholder",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefStatus/GetRefStatusByTrxTypeCode",
-            "label": "UPLOAD STATUS",
+            "url": "",
+            "path": "/RefStatus/GetRefStatusByTrxTypeCode",
+            "label": "Upload Status",
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "TrxTypeCode",
@@ -52,7 +54,7 @@
     ],
     "querystring": {
         "select": "SELECT UMH.UPLOAD_MONITORING_NO AS UploadMonitoringNo, UMH.OFFICE_CODE AS OfficeCode, RO.OFFICE_NAME AS OfficeName, UMH.UPLOAD_STATUS AS UploadStatus, UMH.FILE_NAME AS FileName, UMH.TOTAL_RECORD AS TotalRecord, UMH.TOTAL_RECORD_PROCESSED AS TotalRecordProcessed, UMH.TOTAL_RECORD_ERROR AS TotalRecordError, UT.UPLOAD_TYPE_CODE AS UploadTypeCode, UMH.IS_EXECUTED AS IsExecuted, UMH.ERROR_MESSAGE AS ErrorMessage",
-        "from": "FROM dbo.UPLOAD_MONITORING_H UMH WITH(NOLOCK) JOIN dbo.UPLOAD_TYPE UT ON UT.UPLOAD_TYPE_ID = UMH.UPLOAD_TYPE_ID JOIN dbo.UPLOAD_ASSET_MASTER USM WITH(NOLOCK) ON UMH.UPLOAD_MONITORING_NO = USM.UPLOAD_MONITORING_NO JOIN dbo.REF_OFFICE RO WITH(NOLOCK) ON UMH.OFFICE_CODE = RO.OFFICE_CODE",
+        "from": "FROM dbo.UPLOAD_MONITORING_H UMH WITH(NOLOCK) JOIN dbo.UPLOAD_TYPE UT ON UT.UPLOAD_TYPE_ID = UMH.UPLOAD_TYPE_ID JOIN dbo.REF_OFFICE RO WITH(NOLOCK) ON UMH.OFFICE_CODE = RO.OFFICE_CODE",
         "where": "WHERE UT.UPLOAD_TYPE_CODE = 'UPL_ASM'",
         "groupby": "GROUP BY UMH.UPLOAD_MONITORING_NO, UMH.OFFICE_CODE, RO.OFFICE_NAME, UMH.UPLOAD_STATUS, UMH.FILE_NAME, UMH.TOTAL_RECORD, UMH.TOTAL_RECORD_PROCESSED, UMH.TOTAL_RECORD_ERROR, UT.UPLOAD_TYPE_CODE, UMH.IS_EXECUTED, UMH.ERROR_MESSAGE"
     },
@@ -61,49 +63,49 @@
             "type": "sort",
             "position": "center",
             "label": "UPLOAD NO",
-            "name": "UPLOAD_MONITORING_NO"
+            "name": "UMH.UPLOAD_MONITORING_NO"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "OFFICE NAME",
-            "name": "OFFICE_NAME"
+            "name": "RO.OFFICE_NAME"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "FILE NAME",
-            "name": "FILE_NAME"
+            "name": "UMH.FILE_NAME"
         },
         {
             "type": "sort",
             "position": "right",
             "label": "TOTAL RECORD",
-            "name": "TOTAL_RECORD"
+            "name": "UMH.TOTAL_RECORD"
         },
         {
             "type": "sort",
             "position": "right",
             "label": "TOTAL RECORD PROCESSED",
-            "name": "TOTAL_RECORD_PROCESSED"
+            "name": "UMH.TOTAL_RECORD_PROCESSED"
         },
         {
             "type": "sort",
             "position": "right",
             "label": "TOTAL RECORD ERROR",
-            "name": "TOTAL_RECORD_ERROR"
+            "name": "UMH.TOTAL_RECORD_ERROR"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "UPLOAD STATUS",
-            "name": "UPLOAD_STATUS"
+            "name": "UMH.UPLOAD_STATUS"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "ERROR MESSAGE",
-            "name": "ERROR_MESSAGE"
+            "name": "UMH.ERROR_MESSAGE"
         },
         {
             "type": "label",
