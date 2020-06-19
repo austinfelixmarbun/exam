@@ -79,7 +79,8 @@ export class VendorHoAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    console.log("this is HO")
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDt = new Date(context["BusinessDt"]);
     this.setDropdown();
 
     this.VendorForm.controls.VendorRating.disable();
