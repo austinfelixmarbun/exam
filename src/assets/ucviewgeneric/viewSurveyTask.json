@@ -24,12 +24,12 @@
         {
           "type": "text",
           "label": "Survey Object",
-          "property": "MrSrvyObjCode"
+          "property": "MrSrvyObj"
         },
         {
           "type": "text",
           "label": "Surveyor Name",
-          "property": "SrvyTaskId"
+          "property": "MrSrvySubj"
         },
         {
           "type": "text",
@@ -38,7 +38,7 @@
         }
       ],
       "querystring": {
-        "select": "SELECT ST.SRVY_TASK_NO AS SrvyTaskNo, SFS.SRVY_FORM_SCHM_NAME AS SrvyFormSchmName, ST.MR_SRVY_SUBJ_CODE AS MrSrvySubjCode, ST.MR_SRVY_OBJ_CODE AS MrSrvyObjCode, ST.MR_SRVY_STAT_CODE AS MrSrvyStatCode, ST.SRVY_TASK_ID AS SrvyTaskId",
+        "select": "SELECT ST.SRVY_TASK_NO AS SrvyTaskNo, SFS.SRVY_FORM_SCHM_NAME AS SrvyFormSchmName, ST.MR_SRVY_SUBJ_CODE AS MrSrvySubjCode, ST.MR_SRVY_OBJ_CODE AS MrSrvyObjCode, ST.MR_SRVY_SUBJ AS MrSrvySubj, ST.MR_SRVY_OBJ AS MrSrvyObj, ST.MR_SRVY_STAT_CODE AS MrSrvyStatCode, ST.SRVY_TASK_ID AS SrvyTaskId",
         "from": "FROM dbo.SRVY_TASK ST JOIN dbo.SRVY_FORM_SCHM SFS ON SFS.SRVY_FORM_SCHM_ID = ST.SRVY_FORM_SCHM_ID",
         "where": "WHERE ST.SRVY_TASK_ID = {0}"
       }
