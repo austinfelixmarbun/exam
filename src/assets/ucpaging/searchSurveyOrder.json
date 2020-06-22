@@ -32,20 +32,34 @@
             "placeholder": "Placeholder"
         },
         {
-            "type": "textbox",
+            "type": "dropdown",
             "name": "SO.MR_SRVY_STAT_CODE",
             "id": "MrSrvyStatCodeId",
             "value": "",
             "label": "Survey Order Status",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "path": "/RefStatus/GetRefStatusByTrxTypeCode",
+            "items": [],
+            "itemsUrl": [],
+            "criteriaPropName": "TrxTypeCode",
+            "criteriaPropValue": "FOU_SURVEY"
         },
         {
-            "type": "textbox",
+            "type": "dropdown",
             "name": "SO.MR_SRVY_SOURCE_CODE",
             "id": "MrSrvySourceCodeId",
             "value": "",
             "label": "Survey Type",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "items": [],
+            "itemsUrl": [],
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "SRVY_SOURCE_CODE"
         },
         {
             "type": "textbox",
@@ -142,7 +156,7 @@
             "type": "sort",
             "position": "center",
             "label": "# of Survey Task",
-            "name": "SO.TASK_TOTAL"
+            "name": "TaskTotal"
         },
         {
             "type": "label",
@@ -180,17 +194,9 @@
             "property": "MrSrvySourceCode"
         },
         {
-            "type": "link",
+            "type": "text",
             "position": "center",
-            "property": "TrxRefNo",
-            "path": "/Survey/View",
-            "target": "_blank",
-            "param": [
-                {
-                    "type": "SrvyOrderId",
-                    "property": "SrvyOrderId"
-                }
-            ]
+            "property": "TrxRefNo"
         },
         {
             "type": "text",
