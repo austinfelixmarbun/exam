@@ -76,7 +76,7 @@
             "id": "ReqDtGT",
             "value": "",
             "label": "Request Date >=",
-            "restriction": "lte",
+            "restriction": "gte",
             "placeholder": "Placeholder"
         },
         {
