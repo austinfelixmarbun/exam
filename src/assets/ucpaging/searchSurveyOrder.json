@@ -284,22 +284,8 @@
                             "conditions": [
                                 {
                                     "property": "MrSrvyStatCode",
-                                    "value": "DONE",
+                                    "value": "NEW",
                                     "restriction": "EQ"
-                                }
-                            ],
-                            "result" : {
-                                "type": "callback",
-                                "property" : "SrvyOrderId"
-                            },
-                            "isHide" : true
-                        },
-                        {
-                            "conditions": [
-                                {
-                                    "property": "MrSrvyStatCode",
-                                    "value": "DONE",
-                                    "restriction": "NEQ"
                                 }
                             ],
                             "result" : {
