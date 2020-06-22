@@ -49,6 +49,8 @@ export class VendorSchemeAddEditComponent implements OnInit {
       RefMasterTypeCode: "VENDOR_CATEGORY",
     }
 
+    //TEMUIAN STEVEN INI AMBIL DARI CONSTANTA
+
     this.http.post("http://r3app-server/FOUNDATION_R3/RefMaster/GetListActiveRefMaster", refMasterCategoryObj).subscribe(
       (response) => {
         this.itemCategoryType = response["ReturnObject"];
