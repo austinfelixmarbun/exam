@@ -36,6 +36,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
   VendorId: any;
   ButtonLbl: string = "Continue";
   businessDt: Date;
+  isHidden: boolean = true;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService) {
     this.route.queryParams.subscribe(params => {
@@ -199,7 +200,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
     );
   }
 
-  isHidden: boolean = true;
   NpwpCheck(){
     if(this.VendorForm.controls.IsNpwpExist.value == true){
       this.isHidden = false;

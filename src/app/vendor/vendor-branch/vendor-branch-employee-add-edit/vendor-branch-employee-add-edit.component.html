@@ -14,15 +14,15 @@
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode] navigateBackward="allow"
         navigateForward="allow" >
         <aw-wizard-step [stepTitle]="'Employee'"
-          [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-          <app-vendor-employee [objInput]="objPassing" (objOutput)="outputValue($event)"></app-vendor-employee>
+          [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Employee')">
+          <app-vendor-employee [objInput]="objPassing" (objOutput)="outputValue($event)" *ngIf="IsReload"></app-vendor-employee>
         </aw-wizard-step>
         <aw-wizard-step [stepTitle]="'Address'"
-          [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+          [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('Address')">
           <app-address  [objInput]="objPassing"> </app-address>
         </aw-wizard-step>
         <aw-wizard-step [stepTitle]="'Bank Info'"
-        [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+        [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('BankInfo')">
         <app-bank-info [objInput]="objPassing"> </app-bank-info>
       </aw-wizard-step>
         </aw-wizard>
