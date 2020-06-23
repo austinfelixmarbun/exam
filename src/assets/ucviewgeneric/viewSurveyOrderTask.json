@@ -12,26 +12,14 @@
           "property": "OfficeName"
         },
         {
-          "type": "link",
+          "type": "text",
           "label": "Transaction Number",
-          "property": "TrxRefNo",
-          "path": "/Vendor/View",
-          "param": [
-            {
-              "property": "TrxRefNo"
-            }
-          ]
+          "property": "TrxRefNo"
         },
         {
-          "type": "link",
+          "type": "text",
           "label": "Survey Order No",
-          "property": "SrvyOrderNo",
-          "path": "/Vendor/View",
-          "param": [
-            {
-              "property": "SrvyOrderNo"
-            }
-          ]
+          "property": "SrvyOrderNo"
         },
         {
           "type": "text",

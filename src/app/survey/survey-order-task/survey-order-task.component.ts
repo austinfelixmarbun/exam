@@ -33,7 +33,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   SrvyObjList = [];
   FormSchmList = [];
   SrvyOrderObj: any;
-  SrvyTaskObj: any;
+  SrvyTaskObj: SrvyTaskObj = new SrvyTaskObj();
   VendorObj: any;
 
   constructor(private fb: FormBuilder, private modalService: NgbModal,
@@ -48,7 +48,6 @@ export class SurveyOrderTaskComponent implements OnInit {
   ngOnInit() {
     this.SurveyTaskList = new Array();
     this.viewObj = "./assets/ucviewgeneric/viewSurveyOrderTask.json";
-    this.SrvyTaskObj = new SrvyTaskObj();
 
     this.generateSurveyTaskList();
     this.generateListSrvyObject();
@@ -128,7 +127,7 @@ export class SurveyOrderTaskComponent implements OnInit {
     this.SurveyTaskForm.patchValue({
       SrvyTaskId: "",
       SrvyTaskNo: "",
-      MrSrvySubjCode: this.SrvySubjList[0],
+      MrSrvySubjCode: this.SrvySubjList[0].Key,
       MrSrvyObjCode: "",
       SrvyFormSchmId: this.FormSchmList[0].SrvyFormSchmId
     });
@@ -163,7 +162,7 @@ export class SurveyOrderTaskComponent implements OnInit {
     var TaskObj = {
       SrvyTaskId: ev
     }
-    this.http.post(AdInsConstant.GetSrvyTaskBySrvyTaskId, TaskObj).subscribe(
+    this.http.post<SrvyTaskObj>(AdInsConstant.GetSrvyTaskBySrvyTaskId, TaskObj).subscribe(
       response => {
         this.SrvyTaskObj = response;
         this.onChange(this.SrvyTaskObj.MrSrvySubjCode);
@@ -205,6 +204,14 @@ export class SurveyOrderTaskComponent implements OnInit {
     this.SrvyTaskObj.MrSrvyObjCode = this.SurveyTaskForm.controls["MrSrvyObjCode"].value;
     this.SrvyTaskObj.SrvyFormSchmId = this.SurveyTaskForm.controls["SrvyFormSchmId"].value;
     this.SrvyTaskObj.SurveyorCode = this.SurveyTaskForm.controls["SurveyorCode"].value;
+
+
+    let srvySubj = this.SrvySubjList.find(x => x.Key == this.SrvyTaskObj.MrSrvySubjCode);
+    this.SrvyTaskObj.MrSrvySubj = srvySubj.Value;
+    let srvyObj = this.SrvyObjList.find(x => x.Key == this.SrvyTaskObj.MrSrvyObjCode);
+    this.SrvyTaskObj.MrSrvyObj = srvyObj.Value;
+
+    console.log(this.SrvyTaskObj);
     if (this.SurveyTaskForm.controls["SrvyTaskId"].value == "") {
       this.SrvyTaskObj.SrvyTaskNo = "";
 
@@ -257,14 +264,15 @@ export class SurveyOrderTaskComponent implements OnInit {
       SrvyOrderId: this.SrvyOrderId
     }
     this.http.post(AdInsConstant.GetListSryvObject, obj).subscribe(
-      response => {
+      (response) => {
+        console.log(JSON.stringify(response));
         this.resultData = response;
         if (this.resultData.length != 0) {
           for (let i = 0; i < this.resultData.length; i++) {
-            this.SrvySubjList.push(this.resultData[i].SurveySubject);
+            this.SrvySubjList.push({ Key: this.resultData[i].SurveySubject, Value: this.resultData[i].CustomerName });
           }
           this.SurveyTaskForm.patchValue({
-            MrSrvySubjCode: this.SrvySubjList[0]
+            MrSrvySubjCode: this.SrvySubjList[0].Key
           });
           this.setSrvyObjList();
         }

@@ -29,6 +29,14 @@ export class SurveyOrderComponent implements OnInit {
       {
         name: "RE.REF_OFFICE_ID",
         environment: environment.FoundationR3Url
+      },
+      {
+        name: "SO.MR_SRVY_SOURCE_CODE",
+        environment: environment.FoundationR3Url
+      },
+      {
+        name: "SO.MR_SRVY_STAT_CODE",
+        environment: environment.FoundationR3Url
       }
     ];
   }

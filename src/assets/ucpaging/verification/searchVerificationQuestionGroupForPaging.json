@@ -1,19 +1,29 @@
+
 {
-    "title": "Business Unit",
+    "title": "verification Question Group",
+    "exportExcel": false,
     "component": [
         {
             "type": "textbox",
-            "name": "BIZ_UNIT_CODE",
-            "id": "businessUnitCodeId",
+            "name": "verf.VERF_QUESTION_GRP_CODE",
+            "id": "SchemeCodeId",
             "value": "",
-            "label": "Business Unit Code",
+            "label": "QUESTION GROUP CODE",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "verf.VERF_QUESTION_GRP_NAME",
+            "id": "SchemeNameId",
+            "value": "",
+            "label": "QUESTION GROUP NAME",
             "placeholder": "Placeholder"
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
-            "id": "activeStatusId",
-            "label": "Active Status",
+            "name": "verf.IS_ACTIVE",
+            "id": "ActiveStatusId",
+            "label": "ACTIVE STATUS",
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
@@ -29,43 +39,35 @@
                 }
             ],
             "itemsUrl": []
-        },
-        {
-            "type": "textbox",
-            "name": "BIZ_UNIT_NAME",
-            "id": "businessUnitNameId",
-            "value": "",
-            "label": "Business Unit Name",
-            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "select": "SELECT REF_BIZ_UNIT_ID AS RefBizUnitId, BIZ_UNIT_CODE AS BizUnitCode, BIZ_UNIT_NAME AS BizUnitName, DESCR AS Descr, IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.REF_BIZ_UNIT WITH(NOLOCK)"
+        "select": "SELECT verf.VERF_QUESTION_GRP_H_ID AS VerfQuestionGrpHId, verf.VERF_QUESTION_GRP_CODE AS VerfQuestionGrpCode, verf.VERF_QUESTION_GRP_NAME AS VerfQuestionGrpName, verf.IS_ACTIVE AS IsActive",
+        "from": "FROM dbo.VERF_QUESTION_GRP_H verf WITH(NOLOCK)"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "center",
-            "label": "BUSINESS UNIT CODE",
-            "name": "BizUnitCode"
+            "label": "Question Group Code",
+            "name": "VerfQuestionGrpCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Question Group Name",
+            "name": "VerfQuestionGrpName"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "BUSINESS UNIT NAME",
-            "name": "BizUnitName"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "ACTIVE",
+            "label": "Active",
             "name": "IsActive"
         },
         {
             "type": "label",
             "position": "center",
-            "label": "BUSINESS UNIT MEMBER"
+            "label": "Question Answer"
         },
         {
             "type": "label",
@@ -77,12 +79,12 @@
         {
             "type": "text",
             "position": "center",
-            "property": "BizUnitCode"
+            "property": "VerfQuestionGrpCode"
         },
         {
             "type": "text",
-            "position": "center",
-            "property": "BizUnitName"
+            "position": "left",
+            "property": "VerfQuestionGrpName"
         },
         {
             "type": "boolean",
@@ -95,12 +97,15 @@
             "action": [
                 {
                     "type": "edit",
-                    "icon":"ft-users",
-                    "path": "/Organization/BusinessUnit/member",
+                    "path": "/Verification/QuestionGroupMemberPaging",
                     "param": [
                         {
-                            "type": "RefBizUnitId",
-                            "property": "RefBizUnitId"
+                            "type": "VerfQuestionGrpHId",
+                            "property": "VerfQuestionGrpHId"
+                        },
+                        {
+                            "type": "mode",
+                            "property": "edit"
                         }
                     ]
                 }
@@ -112,11 +117,11 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Organization/BusinessUnit/Detail",
+                    "path": "/Verification/QuestionGroup/Edit",
                     "param": [
                         {
-                            "type": "RefBizUnitId",
-                            "property": "RefBizUnitId"
+                            "type": "VerfQuestionGrpHId",
+                            "property": "VerfQuestionGrpHId"
                         },
                         {
                             "type": "mode",
@@ -126,7 +131,7 @@
                 },
                 {
                     "type": "delete",
-                    "property": "RefBizUnitId"
+                    "property": "VerfQuestionGrpHId"
                 }
             ]
         }
