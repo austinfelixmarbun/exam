@@ -21,6 +21,7 @@ export class VendorEmpObj {
     IsOwner: boolean;
     VendorEmpRating: any;
     RowVersion: any;
+    IsNpwpExist : boolean;
 
     constructor() { this.RowVersion = ""; }
 }

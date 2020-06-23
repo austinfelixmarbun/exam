@@ -177,51 +177,57 @@
             </lib-ucSubsection>
             <div id="TaxInformation">
               <div class="form-group row">
-                <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
+                <label class="col-md-3">NPWP Exist</label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrTaxCalcMethodCode.invalid }">
-                    <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
-                      {{it.Value}}</option>
-                  </select>
-                  <show-errors [control]="VendorForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="checkbox" formControlName="IsNpwpExist" (change)="NpwpCheck()">
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-md-3  adins-required-label">VAT</label>
-                <div class="col-md-9">
-                  <select class="form-control" formControlName="IsVat">
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                    
-                  </select>
+              <div *ngIf="!isHidden">
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
+                  <div class="col-md-9">
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrTaxCalcMethodCode.invalid }">
+                      <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
+                        {{it.Value}}</option>
+                    </select>
+                    <show-errors [control]="VendorForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo">
-                  <show-errors [control]="VendorForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
-                  </show-errors>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label">VAT</label>
+                  <div class="col-md-9">
+                    <select class="form-control" formControlName="IsVat">
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adins-required-label" translate>Tax Payer Name</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerName">
-                  <show-errors [control]="VendorForm.controls.TaxpayerName" [submit]="enjiForm.submitted">
-                  </show-errors>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo">
+                    <show-errors [control]="VendorForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Tax Address</label>
-                <div class="col-md-9">
-                  <textarea class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
-                  <show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
-                  </show-errors>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>Tax Payer Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerName">
+                    <show-errors [control]="VendorForm.controls.TaxpayerName" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
                 </div>
-              </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Tax Address</label>
+                  <div class="col-md-9">
+                    <textarea class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
+                    <show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
+                </div>
                 <div class="form-group row" *ngIf="inputLookupZipcodeObj.isReady">
                   <label class="col-md-3 adins-required-label">Zip Code</label>
                   <div class="col-md-3">
@@ -230,36 +236,37 @@
                     </lib-uclookupgeneric>
                   </div>
                 </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode2">
-                  <show-errors [control]="VendorForm.controls.AreaCode2" [submit]="enjiForm.submitted">
-                  </show-errors>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode2">
+                    <show-errors [control]="VendorForm.controls.AreaCode2" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode1">
-                  <show-errors [control]="VendorForm.controls.AreaCode1" [submit]="enjiForm.submitted">
-                  </show-errors>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode1">
+                    <show-errors [control]="VendorForm.controls.AreaCode1" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>City</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="City">
-                  <show-errors [control]="VendorForm.controls.City" [submit]="enjiForm.submitted">
-                  </show-errors>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>City</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="City">
+                    <show-errors [control]="VendorForm.controls.City" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Province</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Province">
-                  <show-errors [control]="VendorForm.controls.Province" [submit]="enjiForm.submitted">
-                  </show-errors>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Province</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="Province">
+                    <show-errors [control]="VendorForm.controls.Province" [submit]="enjiForm.submitted">
+                    </show-errors>
+                  </div>
                 </div>
               </div>
             </div>

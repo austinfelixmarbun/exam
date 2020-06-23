@@ -10,6 +10,8 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { formatDate } from '@angular/common';
+import { areaChartYAxisLabel } from 'app/shared/configs/ngx-charts.config';
+import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -75,69 +77,75 @@ export class VendorHoAddEditComponent implements OnInit {
     City: [{ value: '', disabled: true }],
     Province: [{ value: '', disabled: true }],
     RowVersionVendor: [''],
-    RowVersionVendorAddr: ['']
+    RowVersionVendorAddr: [''],
+    IsNpwpExist: [false]
   })
 
   ngOnInit() {
     var context = JSON.parse(localStorage.getItem("UserAccess"));
     this.businessDt = new Date(context["BusinessDt"]);
-    this.setDropdown();
-
     this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();
 
     if (this.mode == "edit") {
       this.ButtonLbl = "Submit";
       this.VendorForm.controls.VendorCode.disable();
-      this.http.post(AdInsConstant.GetVendorAndVendorAddr, {VendorId: this.VendorId}).subscribe(
-        (response) => {
-          this.result = response;
-          this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
-          this.VendorForm.patchValue({
-            MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
-            VendorCode: this.result.VendorObj.VendorCode,
-            VendorName: this.result.VendorObj.VendorName,
-            MrVendorTypeCode: this.result.VendorObj.MrVendorTypeCode,
-            RegistrationNo: this.result.VendorObj.RegistrationNo,
-            LicenseNo: this.result.VendorObj.LicenseNo,
-            MrIdTypeCode: this.result.VendorObj.MrIdTypeCode,
-            IdNo: this.result.VendorObj.IdNo,
-            MobilePhnNo1: this.result.VendorObj.MobilePhnNo1,
-            MobilePhnNo2: this.result.VendorObj.MobilePhnNo2,
-            Email: this.result.VendorObj.Email,
-            VendorRating: this.result.VendorObj.VendorRating,
-            EstablishmentDt: formatDate(this.result.VendorObj['EstablishmentDt'], 'yyyy-MM-dd', 'en-US'),
-            PartnershipDt: formatDate(this.result.VendorObj['PartnershipDt'], 'yyyy-MM-dd', 'en-US'),
-            IsActive: this.result.VendorObj.IsActive,
-            VendorParentId: this.result.VendorObj.VendorParentId,
-            MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
-            IsVat: this.result.VendorObj.IsVat,
-            TaxIdNo: this.result.VendorObj.TaxIdNo,
-            TaxpayerName: this.result.VendorObj.TaxpayerName,
-            RowVersionVendor: this.result.VendorObj.RowVersion,
-            MrAddrTypeCode: this.result.VendorObj.MrAddrTypeCode,
-            Addr: this.result.VendorAddrObj.Addr,
-            AreaCode2: this.result.VendorAddrObj.AreaCode2,
-            AreaCode1: this.result.VendorAddrObj.AreaCode1,
-            City: this.result.VendorAddrObj.City,
-            Province: this.result.VendorAddrObj.Province,
-            RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion
-          });
-
-          this.setLookup();
-          this.checkType();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      this.getData();
     } else {
+      this.setDropdown();
       this.setLookup();
       this.checkType();
     }
   }
 
-  setDropdown(){
+  getData() {
+    this.http.post(AdInsConstant.GetVendorAndVendorAddr, { VendorId: this.VendorId }).subscribe(
+      (response) => {
+        this.result = response;
+        this.setDropdown();
+        this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
+        this.VendorForm.patchValue({
+          MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
+          VendorCode: this.result.VendorObj.VendorCode,
+          VendorName: this.result.VendorObj.VendorName,
+          MrVendorTypeCode: this.result.VendorObj.MrVendorTypeCode,
+          RegistrationNo: this.result.VendorObj.RegistrationNo,
+          LicenseNo: this.result.VendorObj.LicenseNo,
+          MrIdTypeCode: this.result.VendorObj.MrIdTypeCode,
+          IdNo: this.result.VendorObj.IdNo,
+          MobilePhnNo1: this.result.VendorObj.MobilePhnNo1,
+          MobilePhnNo2: this.result.VendorObj.MobilePhnNo2,
+          Email: this.result.VendorObj.Email,
+          VendorRating: this.result.VendorObj.VendorRating,
+          EstablishmentDt: formatDate(this.result.VendorObj['EstablishmentDt'], 'yyyy-MM-dd', 'en-US'),
+          PartnershipDt: formatDate(this.result.VendorObj['PartnershipDt'], 'yyyy-MM-dd', 'en-US'),
+          IsActive: this.result.VendorObj.IsActive,
+          VendorParentId: this.result.VendorObj.VendorParentId,
+          MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
+          IsVat: this.result.VendorObj.IsVat,
+          TaxIdNo: this.result.VendorObj.TaxIdNo,
+          TaxpayerName: this.result.VendorObj.TaxpayerName,
+          RowVersionVendor: this.result.VendorObj.RowVersion,
+          MrAddrTypeCode: this.result.VendorObj.MrAddrTypeCode,
+          Addr: this.result.VendorAddrObj.Addr,
+          AreaCode2: this.result.VendorAddrObj.AreaCode2,
+          AreaCode1: this.result.VendorAddrObj.AreaCode1,
+          City: this.result.VendorAddrObj.City,
+          Province: this.result.VendorAddrObj.Province,
+          RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion,
+          IsNpwpExist: this.result.VendorObj.IsNpwpExist
+        });
+
+        this.setLookup();
+        this.checkType();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: "VENDOR_CATEGORY",
       ReserveField1: "HO"
@@ -157,9 +165,11 @@ export class VendorHoAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
       (response) => {
         this.itemType = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          MrVendorTypeCode: this.itemType[0].Key
-        });
+        if (this.mode != "edit"){
+          this.VendorForm.patchValue({
+            MrVendorTypeCode: this.itemType[0].Key
+          });
+        }
       }
     );
 
@@ -169,9 +179,11 @@ export class VendorHoAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          MrIdTypeCode: this.itemIdType[0].Key
-        });
+        if (this.mode != "edit"){
+          this.VendorForm.patchValue({
+            MrIdTypeCode: this.itemIdType[0].Key
+          }); 
+        }
       }
     );
 
@@ -181,12 +193,38 @@ export class VendorHoAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
-        });
+        if (this.mode != "edit" || this.result.VendorObj.IsNpwpExist != true) {
+          this.VendorForm.patchValue({
+            MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
+          });
+        }
       }
     );
   }
+
+  isHidden: boolean = true;
+  NpwpCheck(){
+    if(this.VendorForm.controls.IsNpwpExist.value == true){
+      this.isHidden = false;
+      this.inputLookupZipcodeObj.isRequired = true;
+      this.VendorForm.controls.IsVat.setValidators(Validators.required);
+      this.VendorForm.controls.MrTaxCalcMethodCode.setValidators(Validators.required);
+      this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
+      this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
+    }else{
+      this.isHidden = true;
+      this.inputLookupZipcodeObj.isRequired = false;
+      this.VendorForm.controls.IsVat.clearValidators();
+      this.VendorForm.controls.MrTaxCalcMethodCode.clearValidators();
+      this.VendorForm.controls.TaxIdNo.clearValidators();
+      this.VendorForm.controls.TaxpayerName.clearValidators();
+    }
+    this.VendorForm.controls.IsVat.updateValueAndValidity();
+    this.VendorForm.controls.MrTaxCalcMethodCode.updateValueAndValidity();
+    this.VendorForm.controls.TaxIdNo.updateValueAndValidity();
+    this.VendorForm.controls.TaxpayerName.updateValueAndValidity();
+  }
+
   getLookupParent(event) {
     this.VendorForm.patchValue({
       VendorParentId: event.VendorId
@@ -233,7 +271,7 @@ export class VendorHoAddEditComponent implements OnInit {
     }
   }
 
-  setLookup(){
+  setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
@@ -265,69 +303,80 @@ export class VendorHoAddEditComponent implements OnInit {
     this.inputLookupParentObj.addCritInput.push(critInput);
     this.inputLookupParentObj.title = "Supplier Holding";
 
-    if(this.mode == "edit"){
-      if(this.result.VendorObj.VendorParentId != null){
+    if (this.mode == "edit") {
+      if (this.result.VendorObj.VendorParentId != null) {
         this.inputLookupParentObj.jsonSelect = { VendorName: this.result.VendorParentName };
       }
-      if(this.result.VendorAddrObj.Zipcode != null){
+      if (this.result.VendorAddrObj != null) {
         this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
       }
     }
 
     this.inputLookupParentObj.isReady = true;
     this.inputLookupZipcodeObj.isReady = true;
+
+    this.NpwpCheck();
   }
 
   SaveForm() {
-    if (Date.parse(this.VendorForm.controls.EstablishmentDt.value) > Date.parse(formatDate(this.businessDt,  'yyyy-MM-dd', 'en-US'))) {
+    if (Date.parse(this.VendorForm.controls.EstablishmentDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
       this.toastr.errorMessage("Establishment Date Must Be Lesser Than Business Date");
     }
-    else if (Date.parse(this.VendorForm.controls.PartnershipDt.value) > Date.parse(formatDate(this.businessDt,  'yyyy-MM-dd', 'en-US'))) {
+    else if (Date.parse(this.VendorForm.controls.PartnershipDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
       this.toastr.errorMessage("Partnership Date Must Be Lesser Than Business Date");
     }
     else {
       this.vendorHoObj = new VendorHoObj();
-      var vendorObj = {
-        MrVendorCategoryCode: "",
-        VendorCode: this.VendorForm.controls.VendorCode.value,
-        VendorName: this.VendorForm.controls.VendorName.value,
-        MrVendorTypeCode: this.VendorForm.controls.MrVendorTypeCode.value,
-        RegistrationNo: this.VendorForm.controls.RegistrationNo.value,
-        LicenseNo: this.VendorForm.controls.LicenseNo.value,
-        MrIdTypeCode: "",
-        IdNo: this.VendorForm.controls.IdNo.value,
-        MobilePhnNo1: this.VendorForm.controls.MobilePhnNo1.value,
-        MobilePhnNo2: this.VendorForm.controls.MobilePhnNo2.value,
-        Email: this.VendorForm.controls.Email.value,
-        VendorRating: this.VendorForm.controls.VendorRating.value,
-        EstablishmentDt: this.VendorForm.controls.EstablishmentDt.value,
-        PartnershipDt: this.VendorForm.controls.PartnershipDt.value,
-        IsActive: this.VendorForm.controls.IsActive.value,
-        VendorParentId: this.VendorForm.controls.VendorParentId.value,
-        MrTaxCalcMethodCode: this.VendorForm.controls.MrTaxCalcMethodCode.value,
-        IsVat: this.VendorForm.controls.IsVat.value,
-        TaxIdNo: this.VendorForm.controls.TaxIdNo.value,
-        TaxpayerName: this.VendorForm.controls.TaxpayerName.value,
-        MrVendorClass: "HO"
+      this.vendorHoObj.VendorObj = new VendorObj();
+      this.vendorHoObj.VendorAddrObj = new VendorAddrObj();
+      this.vendorHoObj.VendorObj.MrVendorCategoryCode = "";
+      this.vendorHoObj.VendorObj.VendorCode = this.VendorForm.controls.VendorCode.value;
+      this.vendorHoObj.VendorObj.VendorName = this.VendorForm.controls.VendorName.value;
+      this.vendorHoObj.VendorObj.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
+      this.vendorHoObj.VendorObj.RegistrationNo = this.VendorForm.controls.RegistrationNo.value;
+      this.vendorHoObj.VendorObj.LicenseNo = this.VendorForm.controls.LicenseNo.value;
+      this.vendorHoObj.VendorObj.MrIdTypeCode = "";
+      this.vendorHoObj.VendorObj.IdNo = this.VendorForm.controls.IdNo.value;
+      this.vendorHoObj.VendorObj.MobilePhnNo1 = this.VendorForm.controls.MobilePhnNo1.value;
+      this.vendorHoObj.VendorObj.MobilePhnNo2 = this.VendorForm.controls.MobilePhnNo2.value;
+      this.vendorHoObj.VendorObj.Email = this.VendorForm.controls.Email.value;
+      this.vendorHoObj.VendorObj.VendorRating = this.VendorForm.controls.VendorRating.value;
+      this.vendorHoObj.VendorObj.EstablishmentDt = this.VendorForm.controls.EstablishmentDt.value;
+      this.vendorHoObj.VendorObj.PartnershipDt = this.VendorForm.controls.PartnershipDt.value;
+      this.vendorHoObj.VendorObj.IsActive = this.VendorForm.controls.IsActive.value;
+      this.vendorHoObj.VendorObj.VendorParentId = this.VendorForm.controls.VendorParentId.value;
+      this.vendorHoObj.VendorObj.MrVendorClass = "HO";
+      this.vendorHoObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
+
+
+      if (this.vendorHoObj.VendorObj.MrVendorTypeCode == "P") {
+        this.vendorHoObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value;
       }
 
-      if (vendorObj.MrVendorTypeCode == "P") {
-        vendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value;
-      }
+      if (this.VendorForm.controls.IsNpwpExist.value == true) {
+        this.vendorHoObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
+        this.vendorHoObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
+        this.vendorHoObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
+        this.vendorHoObj.VendorObj.TaxpayerName = this.VendorForm.controls.TaxpayerName.value;
 
-      var vendorAddrObj = {
-        MrAddrTypeCode: "TAX",
-        Addr: this.VendorForm.controls.Addr.value,
-        Zipcode: this.VendorForm.controls["lookupZipcode"]["controls"].value.value,
-        AreaCode2: this.VendorForm.controls.AreaCode2.value,
-        AreaCode1: this.VendorForm.controls.AreaCode1.value,
-        City: this.VendorForm.controls.City.value,
-        Province: this.VendorForm.controls.Province.value,
+        this.vendorHoObj.VendorAddrObj.MrAddrTypeCode = "TAX";
+        this.vendorHoObj.VendorAddrObj.Addr = this.VendorForm.controls.Addr.value;
+        this.vendorHoObj.VendorAddrObj.Zipcode = this.VendorForm.controls["lookupZipcode"]["controls"].value.value;
+        this.vendorHoObj.VendorAddrObj.AreaCode2 = this.VendorForm.controls.AreaCode2.value;
+        this.vendorHoObj.VendorAddrObj.AreaCode1 = this.VendorForm.controls.AreaCode1.value;
+        this.vendorHoObj.VendorAddrObj.City = this.VendorForm.controls.City.value;
+        this.vendorHoObj.VendorAddrObj.Province = this.VendorForm.controls.Province.value;
+      }else if(this.result!=null){
+        this.vendorHoObj.VendorAddrObj.MrAddrTypeCode = "TAX";
+        this.vendorHoObj.VendorAddrObj.Addr= this.result.VendorAddrObj.Addr;
+        this.vendorHoObj.VendorAddrObj.Zipcode= this.result.VendorAddrObj.Zipcode;
+        this.vendorHoObj.VendorAddrObj.AreaCode2= this.result.VendorAddrObj.AreaCode2;
+        this.vendorHoObj.VendorAddrObj.AreaCode1= this.result.VendorAddrObj.AreaCode1;
+        this.vendorHoObj.VendorAddrObj.City= this.result.VendorAddrObj.City;
+        this.vendorHoObj.VendorAddrObj.Province= this.result.VendorAddrObj.Province;
       }
 
       if (this.mode == "edit") {
-        this.vendorHoObj.VendorObj = vendorObj;
-        this.vendorHoObj.VendorAddrObj = vendorAddrObj;
         this.vendorHoObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
         this.vendorHoObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
         this.vendorHoObj.VendorObj.VendorId = this.VendorId;
@@ -345,8 +394,6 @@ export class VendorHoAddEditComponent implements OnInit {
           });
       }
       else {
-        this.vendorHoObj.VendorObj = vendorObj;
-        this.vendorHoObj.VendorAddrObj = vendorAddrObj;
         this.vendorHoObj.VendorObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
         this.http.post(AdInsConstant.AddVendorHO, this.vendorHoObj).subscribe(
