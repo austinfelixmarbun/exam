@@ -47,25 +47,25 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "AREA CODE",
+            "label": "Area Code",
             "name": "AreaCode"
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "AREA NAME",
+            "position": "left",
+            "label": "Area Name",
             "name": "AreaName"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "ACTIVE",
+            "label": "Active Status",
             "name": "IsActive"
         },
         {
             "type": "label",
             "position": "center",
-            "label": "AREA MEMBER"
+            "label": "Area Member"
         },
         {
             "type": "label",
@@ -81,7 +81,7 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "AreaName"
         },
         {
