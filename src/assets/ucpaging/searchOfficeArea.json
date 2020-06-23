@@ -48,19 +48,19 @@
             "type": "sort",
             "position": "center",
             "label": "Area Code",
-            "name": "AreaCode"
+            "name": "AREA_CODE"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Area Name",
-            "name": "AreaName"
+            "name": "AREA_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Active Status",
-            "name": "IsActive"
+            "name": "IS_ACTIVE"
         },
         {
             "type": "label",
