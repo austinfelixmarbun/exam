@@ -32,7 +32,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
   MrVendorCategoryCode: any;
   arrCrit: any;
   mode: string = "add";
-  vendorObj: any;
+  vendorHoldingObj: any;
   VendorId: any;
   ButtonLbl: string = "Continue";
   businessDt: Date;
@@ -57,7 +57,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     IdNo: [''],
     MobilePhnNo1: [''],
     MobilePhnNo2: [''],
-    Email: ['', Validators.required],
+    Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     VendorRating: [''],
     EstablishmentDt: ['', Validators.required],
     PartnershipDt: ['', Validators.required],
@@ -246,66 +246,66 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.toastr.errorMessage("Partnership Date Must Be Lesser Than Business Date");
     }
     else {
-      this.vendorObj = new VendorHoObj();
-      this.vendorObj.VendorObj = new VendorObj();
-      this.vendorObj.VendorAddrObj = new VendorAddrObj();
+      this.vendorHoldingObj = new VendorHoObj();
+      this.vendorHoldingObj.VendorObj = new VendorObj();
+      this.vendorHoldingObj.VendorAddrObj = new VendorAddrObj();
 
-      this.vendorObj.VendorObj.MrVendorCategoryCode = this.VendorForm.controls.MrVendorCategoryCode.value;
-      this.vendorObj.VendorObj.VendorCode = this.VendorForm.controls.VendorCode.value;
-      this.vendorObj.VendorObj.VendorName = this.VendorForm.controls.VendorName.value;
-      this.vendorObj.VendorObj.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
-      this.vendorObj.VendorObj.RegistrationNo = this.VendorForm.controls.RegistrationNo.value;
-      this.vendorObj.VendorObj.LicenseNo = this.VendorForm.controls.LicenseNo.value;
-      this.vendorObj.VendorObj.MrIdTypeCode = "";
-      this.vendorObj.VendorObj.IdNo = this.VendorForm.controls.IdNo.value;
-      this.vendorObj.VendorObj.MobilePhnNo1 = this.VendorForm.controls.MobilePhnNo1.value;
-      this.vendorObj.VendorObj.MobilePhnNo2 = this.VendorForm.controls.MobilePhnNo2.value;
-      this.vendorObj.VendorObj.Email = this.VendorForm.controls.Email.value;
-      this.vendorObj.VendorObj.EstablishmentDt = this.VendorForm.controls.EstablishmentDt.value;
-      this.vendorObj.VendorObj.PartnershipDt = this.VendorForm.controls.PartnershipDt.value;
-      this.vendorObj.VendorObj.IsActive = this.VendorForm.controls.IsActive.value;
-      this.vendorObj.VendorObj.VendorParentId = this.VendorForm.controls.VendorParentId.value;
-      this.vendorObj.VendorObj.ReservedField1 = this.VendorForm.controls.ReservedField1.value;
-      this.vendorObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
-      this.vendorObj.VendorObj.MrVendorClass = "HOLDING";
+      this.vendorHoldingObj.VendorObj.MrVendorCategoryCode = this.VendorForm.controls.MrVendorCategoryCode.value;
+      this.vendorHoldingObj.VendorObj.VendorCode = this.VendorForm.controls.VendorCode.value;
+      this.vendorHoldingObj.VendorObj.VendorName = this.VendorForm.controls.VendorName.value;
+      this.vendorHoldingObj.VendorObj.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
+      this.vendorHoldingObj.VendorObj.RegistrationNo = this.VendorForm.controls.RegistrationNo.value;
+      this.vendorHoldingObj.VendorObj.LicenseNo = this.VendorForm.controls.LicenseNo.value;
+      this.vendorHoldingObj.VendorObj.MrIdTypeCode = "";
+      this.vendorHoldingObj.VendorObj.IdNo = this.VendorForm.controls.IdNo.value;
+      this.vendorHoldingObj.VendorObj.MobilePhnNo1 = this.VendorForm.controls.MobilePhnNo1.value;
+      this.vendorHoldingObj.VendorObj.MobilePhnNo2 = this.VendorForm.controls.MobilePhnNo2.value;
+      this.vendorHoldingObj.VendorObj.Email = this.VendorForm.controls.Email.value;
+      this.vendorHoldingObj.VendorObj.EstablishmentDt = this.VendorForm.controls.EstablishmentDt.value;
+      this.vendorHoldingObj.VendorObj.PartnershipDt = this.VendorForm.controls.PartnershipDt.value;
+      this.vendorHoldingObj.VendorObj.IsActive = this.VendorForm.controls.IsActive.value;
+      this.vendorHoldingObj.VendorObj.VendorParentId = this.VendorForm.controls.VendorParentId.value;
+      this.vendorHoldingObj.VendorObj.ReservedField1 = this.VendorForm.controls.ReservedField1.value;
+      this.vendorHoldingObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
+      this.vendorHoldingObj.VendorObj.MrVendorClass = "HOLDING";
 
-      if (this.vendorObj.VendorObj.MrVendorTypeCode == "P") {
-        this.vendorObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value
+      if (this.vendorHoldingObj.VendorObj.MrVendorTypeCode == "P") {
+        this.vendorHoldingObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value
       }
 
       if (this.VendorForm.controls.IsNpwpExist.value == true) {
-        this.vendorObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
-        this.vendorObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
-        this.vendorObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
-        this.vendorObj.VendorObj.TaxpayerName = this.VendorForm.controls.TaxpayerName.value;
+        this.vendorHoldingObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
+        this.vendorHoldingObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
+        this.vendorHoldingObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
+        this.vendorHoldingObj.VendorObj.TaxpayerName = this.VendorForm.controls.TaxpayerName.value;
 
-        this.vendorObj.VendorAddrObj.MrAddrTypeCode = "TAX";
-        this.vendorObj.VendorAddrObj.Addr = this.VendorForm.controls.Addr.value;
-        this.vendorObj.VendorAddrObj.Zipcode = this.VendorForm.controls["lookupZipcode"]["controls"].value.value;
-        this.vendorObj.VendorAddrObj.AreaCode2 = this.VendorForm.controls.AreaCode2.value;
-        this.vendorObj.VendorAddrObj.AreaCode1 = this.VendorForm.controls.AreaCode1.value;
-        this.vendorObj.VendorAddrObj.City = this.VendorForm.controls.City.value;
-        this.vendorObj.VendorAddrObj.Province = this.VendorForm.controls.Province.value;
+        this.vendorHoldingObj.VendorAddrObj.MrAddrTypeCode = "TAX";
+        this.vendorHoldingObj.VendorAddrObj.Addr = this.VendorForm.controls.Addr.value;
+        this.vendorHoldingObj.VendorAddrObj.Zipcode = this.VendorForm.controls["lookupZipcode"]["controls"].value.value;
+        this.vendorHoldingObj.VendorAddrObj.AreaCode2 = this.VendorForm.controls.AreaCode2.value;
+        this.vendorHoldingObj.VendorAddrObj.AreaCode1 = this.VendorForm.controls.AreaCode1.value;
+        this.vendorHoldingObj.VendorAddrObj.City = this.VendorForm.controls.City.value;
+        this.vendorHoldingObj.VendorAddrObj.Province = this.VendorForm.controls.Province.value;
       } else if (this.result != null) {
-        this.vendorObj.VendorAddrObj.MrAddrTypeCode = "TAX";
-        this.vendorObj.VendorAddrObj.Addr = this.result.VendorAddrObj.Addr;
-        this.vendorObj.VendorAddrObj.Zipcode = this.result.VendorAddrObj.Zipcode;
-        this.vendorObj.VendorAddrObj.AreaCode2 = this.result.VendorAddrObj.AreaCode2;
-        this.vendorObj.VendorAddrObj.AreaCode1 = this.result.VendorAddrObj.AreaCode1;
-        this.vendorObj.VendorAddrObj.City = this.result.VendorAddrObj.City;
-        this.vendorObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
+        this.vendorHoldingObj.VendorAddrObj.MrAddrTypeCode = "TAX";
+        this.vendorHoldingObj.VendorAddrObj.Addr = this.result.VendorAddrObj.Addr;
+        this.vendorHoldingObj.VendorAddrObj.Zipcode = this.result.VendorAddrObj.Zipcode;
+        this.vendorHoldingObj.VendorAddrObj.AreaCode2 = this.result.VendorAddrObj.AreaCode2;
+        this.vendorHoldingObj.VendorAddrObj.AreaCode1 = this.result.VendorAddrObj.AreaCode1;
+        this.vendorHoldingObj.VendorAddrObj.City = this.result.VendorAddrObj.City;
+        this.vendorHoldingObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
       }
 
 
       if (this.mode == "edit") {
-        this.vendorObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
-        this.vendorObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
-        this.vendorObj.VendorObj.VendorId = this.VendorId;
-        this.vendorObj.VendorAddrObj.VendorAddrId = this.result.VendorAddrObj.VendorAddrId;
-        this.vendorObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
-        this.vendorObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
+        this.vendorHoldingObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
+        this.vendorHoldingObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
+        this.vendorHoldingObj.VendorObj.VendorId = this.VendorId;
+        this.vendorHoldingObj.VendorAddrObj.VendorAddrId = this.result.VendorAddrObj.VendorAddrId;
+        this.vendorHoldingObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
+        this.vendorHoldingObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
-        this.vendorService.EditVendorHolding(this.vendorObj).subscribe(
+        this.vendorService.EditVendorHolding(this.vendorHoldingObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
             this.router.navigateByUrl('/Vendor/Holding/Paging');
@@ -314,9 +314,9 @@ export class VendorHoldingAddEditComponent implements OnInit {
             console.log(error);
           });
       } else {
-        this.vendorObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
+        this.vendorHoldingObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
-        this.vendorService.AddVendorHolding(this.vendorObj).subscribe(
+        this.vendorService.AddVendorHolding(this.vendorHoldingObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(['/Vendor/Holding/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
@@ -345,7 +345,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
-    if (this.result.VendorAddrObj != null) {
+    if (this.result != null) {
       this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
     }
 

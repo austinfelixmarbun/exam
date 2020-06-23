@@ -31,7 +31,7 @@
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Holding Code</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorCode">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorCode" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.VendorCode.invalid}">
                   <lib-uc-show-errors [control]="VendorForm.controls.VendorCode" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -39,7 +39,7 @@
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Holding Name</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorName">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorName" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.VendorName.invalid}">
                   <lib-uc-show-errors [control]="VendorForm.controls.VendorName" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -63,7 +63,7 @@
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>Registration Number</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="RegistrationNo">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="RegistrationNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.RegistrationNo.invalid}">
                     <lib-uc-show-errors [control]="VendorForm.controls.RegistrationNo" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
@@ -71,7 +71,7 @@
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>License Number</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="LicenseNo">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="LicenseNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.LicenseNo.invalid}">
                     <lib-uc-show-errors [control]="VendorForm.controls.LicenseNo" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
@@ -93,7 +93,7 @@
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>ID Number</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="IdNo">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="IdNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.IdNo.invalid}">
                     <lib-uc-show-errors [control]="VendorForm.controls.IdNo" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
@@ -102,7 +102,7 @@
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Mobile Phone 1</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="MobilePhnNo1">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="MobilePhnNo1" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MobilePhnNo1.invalid}">
                   <lib-uc-show-errors [control]="VendorForm.controls.MobilePhnNo1" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -110,7 +110,7 @@
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Mobile Phone 2</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="MobilePhnNo2">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="MobilePhnNo2" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MobilePhnNo2.invalid}">
                   <lib-uc-show-errors [control]="VendorForm.controls.MobilePhnNo2" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -118,8 +118,8 @@
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Email</label>
                 <div class="col-md-9">
-                  <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                    class="form-control adInsInput width-50-per" formControlName="Email">
+                  <input type="text"
+                    class="form-control adInsInput width-50-per" formControlName="Email" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.Email.invalid}">
                   <lib-uc-show-errors [control]="VendorForm.controls.Email" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -128,7 +128,7 @@
                 <label class="col-md-3  adins-required-label" translate>Establishment Date</label>
                 <div class="col-md-9">
                   <input type="date" max="{{businessDt | date: 'yyyy-MM-dd'}}"
-                    class="form-control adInsInput width-50-per" formControlName="EstablishmentDt">
+                    class="form-control adInsInput width-50-per" formControlName="EstablishmentDt" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.EstablishmentDt.invalid}">
                   <lib-uc-show-errors [control]="VendorForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -137,7 +137,7 @@
                 <label class="col-md-3  adins-required-label" translate>Partnership Date</label>
                 <div class="col-md-9">
                   <input type="date" max="{{businessDt | date: 'yyyy-MM-dd'}}"
-                    class="form-control adInsInput width-50-per" formControlName="PartnershipDt">
+                    class="form-control adInsInput width-50-per" formControlName="PartnershipDt" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.PartnershipDt.invalid}">
                   <lib-uc-show-errors [control]="VendorForm.controls.PartnershipDt" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -187,7 +187,7 @@
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.TaxIdNo.invalid}">
                     <lib-uc-show-errors [control]="VendorForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
@@ -195,7 +195,7 @@
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>Tax Payer Name</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerName">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerName" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.TaxpayerName.invalid}">
                     <lib-uc-show-errors [control]="VendorForm.controls.TaxpayerName" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>

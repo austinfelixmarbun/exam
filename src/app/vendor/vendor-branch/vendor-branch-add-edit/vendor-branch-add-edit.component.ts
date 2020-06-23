@@ -72,7 +72,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     IdNo: [''],
     MobilePhnNo1: [''],
     MobilePhnNo2: [''],
-    Email: ['', Validators.required],
+    Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     VendorRating: [{ value: '', disabled: true }],
     EstablishmentDt: ['', Validators.required],
     PartnershipDt: ['', Validators.required],
