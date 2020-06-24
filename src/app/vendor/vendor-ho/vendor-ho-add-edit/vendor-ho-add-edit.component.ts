@@ -387,7 +387,7 @@ export class VendorHoAddEditComponent implements OnInit {
         this.http.post(AdInsConstant.EditVendorHO, this.vendorHoObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigateByUrl('/Vendor/HO/Paging');
+            this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": this.VendorId } });
           },
           (error) => {
             console.log(error);

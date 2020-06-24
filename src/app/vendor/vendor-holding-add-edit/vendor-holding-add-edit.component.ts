@@ -309,7 +309,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorService.EditVendorHolding(this.vendorHoldingObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigateByUrl('/Vendor/Holding/Paging');
+            this.router.navigate(['/Vendor/Holding/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
           },
           (error) => {
             console.log(error);

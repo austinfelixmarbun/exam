@@ -539,7 +539,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Vendor/Branch/Paging');
+          this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": this.VendorId } });
         },
         (error) => {
           console.log(error);
