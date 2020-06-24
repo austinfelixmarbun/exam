@@ -268,6 +268,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.vendorHoldingObj.VendorObj.ReservedField1 = this.VendorForm.controls.ReservedField1.value;
       this.vendorHoldingObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
       this.vendorHoldingObj.VendorObj.MrVendorClass = "HOLDING";
+      this.vendorHoldingObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
 
       if (this.vendorHoldingObj.VendorObj.MrVendorTypeCode == "P") {
         this.vendorHoldingObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value
