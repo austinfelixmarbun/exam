@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
@@ -12,8 +12,7 @@ export class UcApprovalComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private http: HttpClient,
-    private toastr: ToastrService,
-    private modalService: NgbModal
+    // private cdRef:ChangeDetectorRef
     ) { }
 
   @Input() inputObj: any;
@@ -48,7 +47,6 @@ export class UcApprovalComponent implements OnInit {
   PossibleResults = new Array();
 
   ngOnInit() {
-    console.log("Show Cancel",this.showCancel)
     this.taskId = this.inputObj.taskId;
     this.instanceId = this.inputObj.instanceId;
     this.baseUrl = this.inputObj.approvalBaseUrl;
@@ -74,6 +72,7 @@ export class UcApprovalComponent implements OnInit {
     this.URLGetNextPerson = this.baseUrl + "/api/ApprovalInstanceWeb/GetPossibleNextPersons"
     this.URLPostCompleteTask = this.baseUrl + "/api/ApprovalInstanceWeb/CompleteTask"
 
+    // this.cdRef.detectChanges();
     this.LoadCanChangeMinFinLevel();
     this.LoadApprovalInfo(this.taskId, this.instanceId)
   }

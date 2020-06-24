@@ -154,7 +154,7 @@ export class ProductHOAddComponent implements OnInit {
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
-              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": this.ResultResponse.ProdHId, "ProdId" : this.ResultResponse.ProdId, "mode": this.mode, source : this.source } });
+              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": response["DraftProdHId"], "ProdId" : response["ProdId"], "mode": this.mode, source : this.source } });
             },
             (error) => {
               console.log(error);
