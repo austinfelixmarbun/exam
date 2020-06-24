@@ -203,7 +203,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
       (response) => {
         this.resultData = response;
         this.IdCust = this.resultData.CustObj.CustId; 
-        this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.IdCust } });
+        this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.IdCust, 'From': 'CustPaging' } });
       },
       error => {
         console.log(error);
@@ -245,7 +245,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.addCustObj.CustPersonalObj.IsRestInPeace = false;
         this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
-            this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId } });
+            this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId, 'From': 'CustPaging' } });
           },
           error => {
             console.log(error);
@@ -291,7 +291,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.http.post(AdInsConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
           (response) => {
             var custId = response['CustId'];
-            this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": custId } });
+            this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { 'IdCust': custId, 'From': 'CustPaging' } });
           },
           error => {
             console.log(error);

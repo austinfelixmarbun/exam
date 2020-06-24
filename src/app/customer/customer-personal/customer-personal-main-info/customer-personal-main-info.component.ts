@@ -9,8 +9,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-customer-personal-main-info',
-  templateUrl: './customer-personal-main-info.component.html',
-  styleUrls: ['./customer-personal-main-info.component.scss']
+  templateUrl: './customer-personal-main-info.component.html'
 })
 export class CustomerPersonalMainInfoComponent implements OnInit {
 
