@@ -273,6 +273,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(AdInsConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
         (response) => {
           this.resultData = response;
+          this.InputLookupObj.jsonSelect = {OfficeCode: this.resultData.ParentOfficeCode, RefOfficeId: this.resultData.ParentId};
           this.InputLookupObj.nameSelect = this.resultData["ParentOfficeCode"];
           this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData["ParentOfficeCode"] };
           this.OfficeForm.patchValue({
@@ -497,6 +498,9 @@ export class OfficeAddComponent implements OnInit {
   }
   checkType() {
     if (this.OfficeForm.controls.OfficeType.value == 'HO') {
+      this.OfficeForm.patchValue({
+        OfficeParent: null
+      });
       this.InputLookupObj.isRequired = false;
       this.OfficeForm.controls.OfficeParent.clearValidators();
       this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
@@ -507,7 +511,6 @@ export class OfficeAddComponent implements OnInit {
       this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
     }
   }
-
   toggleActive(e) {
     this.isActive = e.target.checked;
   }

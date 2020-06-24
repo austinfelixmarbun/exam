@@ -52,8 +52,8 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
       else if (params["CustId"] != null) {
         this.IdCust = params["CustId"];
       }
+      this.custUrl = environment.FoundationR3Web + '/Customer/CustomerView/Page?CustId=' + this.IdCust;
     });
-    this.custUrl = '../Customer/CustomerView/Page?CustId=' + this.IdCust;
   }
 
   ngOnInit() {

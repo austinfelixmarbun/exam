@@ -8,6 +8,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
+import { RequestNegativeCustObj } from 'app/shared/model/RequestNegativeCustObj.Model';
 
 @Component({
   selector: 'app-customer-company-duplicate-check',
@@ -26,6 +27,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
 
   addCustObj: AddCustObj;
   DuplicateCustObj: DuplicateCustObj;
+  RequestNegativeCustObj: RequestNegativeCustObj = new RequestNegativeCustObj();
 
   CustId: number;
 
@@ -154,7 +156,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
       (response) => {
         this.resultData = response;
         this.CustId = this.resultData.CustObj.CustId;
-        this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.CustId } });
+        this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.CustId, 'From': 'CustPaging' } });
       },
       error => {
         console.log(error);
@@ -190,7 +192,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         this.addCustObj.CustObj.VipNotes = this.VipNotes;
         this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
-            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId } });
+            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId, 'From': 'CustPaging' } });
           },
           error => {
             console.log(error);
@@ -205,33 +207,32 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
 
   EditNegativeCustCompany(item)
   {
-    var custObj = {CustNo: item.CustNo, CustName: item.CustName, TaxIdNo: item.TaxIdNo};
-    this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNo, custObj).subscribe(
+    var NegativeCustObj = {CustNo: item.CustNo, CustName: item.CustName, MrCustTypeCode: item.MrCustTypeCode, TaxIdNo: item.TaxIdNo};
+    this.http.post<RequestNegativeCustObj>(AdInsConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
       (response) => {
-        this.addCustObj = new AddCustObj();
-        this.addCustObj.CustObj = response['CustObj'];
-        this.addCustObj.CustCompanyObj = response['CustCompanyObj'];
-        this.addCustObj.CustObj.CustName = item.CustName;
-        this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-        this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;
-        this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
-        this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
-        this.addCustObj.CustObj.IdNo = item.TaxIdNo;
-        this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
+        this.RequestNegativeCustObj = response;
+        this.RequestNegativeCustObj.CustName = item.CustName;
+        this.RequestNegativeCustObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
+        this.RequestNegativeCustObj.MrCustTypeCode = RefMasterConstant.Company;
+        this.RequestNegativeCustObj.MrCustModelCode = this.CustModel;
+        this.RequestNegativeCustObj.MrIdTypeCode = RefMasterConstant.Npwp;
+        this.RequestNegativeCustObj.IdNo = item.TaxIdNo;
+        this.RequestNegativeCustObj.TaxIdNo = item.TaxIdNo;
         if(this.IsVip === "true"){
-          this.addCustObj.CustObj.IsVip = true;
+          this.RequestNegativeCustObj.IsVip = true;
         }else{
-          this.addCustObj.CustObj.IsVip = false;
+          this.RequestNegativeCustObj.IsVip = false;
         }
         if(this.IsAffiliateWithMf === "true"){
-          this.addCustObj.CustObj.IsAffiliateWithMf = true;
+          this.RequestNegativeCustObj.IsAffiliateWithMf = true;
         }else{
-          this.addCustObj.CustObj.IsAffiliateWithMf = false;
+          this.RequestNegativeCustObj.IsAffiliateWithMf = false; 
         } 
-        this.addCustObj.CustObj.VipNotes = this.VipNotes;
-        this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
+        this.RequestNegativeCustObj.VipNotes = this.VipNotes;
+        this.http.post(AdInsConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
           () => {
-            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId } });
+            var custId = response['CustId'];
+            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { 'IdCust': custId, 'From': 'CustPaging' } });
           },
           error => {
             console.log(error);

@@ -7,25 +7,23 @@
         "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
-            "type": "text",
+            "type": "link",
             "label": "Asset Insurance HO:",
-            "property": "AssetHo"
-          },
-          {
-            "type": "text",
-            "label": "Assignment Type:",
-            "property": "Atype"
-          },
-          {
-            "type": "text",
-            "label": "Maximum Task Load",
-            "property": "MaxTaskLoad"
+            "property": "AssetHo",
+            "target": "_blank",
+            "path": "/Vendor/HO/View",
+            "param": [
+              {
+                "type": "VendorId",
+                "property": "VendorParentId"
+              }
+            ]
           }
         ],
         "querystring": {
-           "select":" SELECT VENDOR_NAME AS AssetHo,RESERVED_FIELD_9 AS Atype,RESERVED_FIELD_2 AS MaxTaskLoad",
-            "from":"FROM dbo.VENDOR A WITH(NOLOCK)",
-            "where":"WHERE MR_VENDOR_CLASS = 'BRANCH'  AND MR_VENDOR_CATEGORY_CODE LIKE 'ASSET_INSCO%' AND MR_VENDOR_CATEGORY_CODE NOT LIKE '%HO' AND VENDOR_ID = {0}"
+           "select":" SELECT B.VENDOR_NAME AS AssetHo, A.VENDOR_PARENT_ID AS VendorParentId",
+            "from":"FROM dbo.VENDOR A WITH(NOLOCK) JOIN dbo.VENDOR B WITH(NOLOCK) ON A.VENDOR_PARENT_ID = B.VENDOR_ID ",
+            "where":"WHERE A.MR_VENDOR_CLASS = 'BRANCH' AND A.MR_VENDOR_CATEGORY_CODE = 'ASSET_INSCO_BRANCH' AND A.VENDOR_ID = {0}"
             
         }
       }

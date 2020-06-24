@@ -26,24 +26,24 @@
                     <option *ngFor="let it of itemCategoryType" value="{{it.Key}}">
                       {{it.Value}}</option>
                   </select>
-                  <show-errors [control]="VendorForm.controls.MrVendorCategoryCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="VendorForm.controls.MrVendorCategoryCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Branch Code</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorCode">
-                  <show-errors [control]="VendorForm.controls.VendorCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorCode" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.VendorCode.invalid}">
+                  <lib-uc-show-errors [control]="VendorForm.controls.VendorCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Branch Name</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorName">
-                  <show-errors [control]="VendorForm.controls.VendorName" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="VendorName" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.VendorName.invalid}">
+                  <lib-uc-show-errors [control]="VendorForm.controls.VendorName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-body">
@@ -52,12 +52,12 @@
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrVendorTypeCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrVendorTypeCode.invalid }"
-                      (change)="checkHOType()">
+                      (change)="checkType()">
                       <option *ngFor="let it of itemType" value="{{it.Key}}">
                         {{it.Value}}</option>
                     </select>
-                    <show-errors [control]="VendorForm.controls.MrVendorTypeCode" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="VendorForm.controls.MrVendorTypeCode" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
               </div>
@@ -65,17 +65,17 @@
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>Registration Number</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="RegistrationNo">
-                    <show-errors [control]="VendorForm.controls.RegistrationNo" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="RegistrationNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.RegistrationNo.invalid}">
+                    <lib-uc-show-errors [control]="VendorForm.controls.RegistrationNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>License Number</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="LicenseNo">
-                    <show-errors [control]="VendorForm.controls.LicenseNo" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="LicenseNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.LicenseNo.invalid}">
+                    <lib-uc-show-errors [control]="VendorForm.controls.LicenseNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
               </div>
@@ -88,66 +88,68 @@
                       <option *ngFor="let it of itemIdType" value="{{it.Key}}">
                         {{it.Value}}</option>
                     </select>
-                    <show-errors [control]="VendorForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="VendorForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>ID Number</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="IdNo">
-                    <show-errors [control]="VendorForm.controls.IdNo" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="IdNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.IdNo.invalid}">
+                    <lib-uc-show-errors [control]="VendorForm.controls.IdNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Mobile Phone 1</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="MobilePhnNo1">
-                  <show-errors [control]="VendorForm.controls.MobilePhnNo1" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="MobilePhnNo1" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MobilePhnNo1.invalid}">
+                  <lib-uc-show-errors [control]="VendorForm.controls.MobilePhnNo1" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Mobile Phone 2</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="MobilePhnNo2">
-                  <show-errors [control]="VendorForm.controls.MobilePhnNo2" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="MobilePhnNo2" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MobilePhnNo2.invalid}">
+                  <lib-uc-show-errors [control]="VendorForm.controls.MobilePhnNo2" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Email</label>
                 <div class="col-md-9">
-                  <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                    class="form-control adInsInput width-50-per" formControlName="Email">
-                  <show-errors [control]="VendorForm.controls.Email" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="text"
+                    class="form-control adInsInput width-50-per" formControlName="Email" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.Email.invalid}">
+                  <lib-uc-show-errors [control]="VendorForm.controls.Email" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Rating</label>
                 <div class="col-md-9">
                   <input type="number" class="form-control adInsInput width-50-per" formControlName="VendorRating">
-                  <show-errors [control]="VendorForm.controls.VendorRating" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="VendorForm.controls.VendorRating" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Establishment Date</label>
                 <div class="col-md-9">
-                  <input type="date" class="form-control adInsInput width-50-per" formControlName="EstablishmentDt">
-                  <show-errors [control]="VendorForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="date" max="{{businessDt | date: 'yyyy-MM-dd'}}"
+                    class="form-control adInsInput width-50-per" formControlName="EstablishmentDt" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.EstablishmentDt.invalid}">
+                  <lib-uc-show-errors [control]="VendorForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Partnership Date</label>
                 <div class="col-md-9">
-                  <input type="date" class="form-control adInsInput width-50-per" formControlName="PartnershipDt">
-                  <show-errors [control]="VendorForm.controls.PartnershipDt" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="date" max="{{businessDt | date: 'yyyy-MM-dd'}}"
+                    class="form-control adInsInput width-50-per" formControlName="PartnershipDt" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.PartnershipDt.invalid}"> 
+                  <lib-uc-show-errors [control]="VendorForm.controls.PartnershipDt" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
@@ -165,7 +167,7 @@
             <div id="HOInformation">
               <div
                 *ngIf="MrVendorCategoryCode=='SUPPLIER_HO' || MrVendorCategoryCode=='SUPPLIER_HOLDING' || MrVendorCategoryCode=='SUPPLIER_BRANCH'">
-                <div class="form-body" *ngIf="inputLookupParentObj!=undefined">
+                <div class="form-body" *ngIf="inputLookupParentObj.isReady">
                   <div class="form-group row">
                     <label class="col-md-3 adins-required-label">Supplier HO</label>
                     <div class="col-md-3">
@@ -183,8 +185,8 @@
                         <option *ngFor="let it of itemTypeUpCalcMethod" value="{{it.Key}}">
                           {{it.Value}}</option>
                       </select>
-                      <show-errors [control]="VendorForm.controls.ReservedField3" [submit]="enjiForm.submitted">
-                      </show-errors>
+                      <lib-uc-show-errors [control]="VendorForm.controls.ReservedField3" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
                     </div>
                   </div>
 
@@ -196,17 +198,18 @@
                         <option *ngFor="let it of itemSupplierClass" value="{{it.Key}}">
                           {{it.Value}}</option>
                       </select>
-                      <show-errors [control]="VendorForm.controls.ReservedField4" [submit]="enjiForm.submitted">
-                      </show-errors>
+                      <lib-uc-show-errors [control]="VendorForm.controls.ReservedField4" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-md-3 adins-required-label">Bpkb Aging</label>
                     <div class="col-md-9">
-                      <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField5">
-                      <show-errors [control]="VendorForm.controls.ReservedField5" [submit]="enjiForm.submitted">
-                      </show-errors>
+                      <input type="number" class="form-control adInsInput width-50-per"
+                        formControlName="ReservedField5" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField5.invalid}">
+                      <lib-uc-show-errors [control]="VendorForm.controls.ReservedField5" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
                     </div>
                   </div>
 
@@ -214,9 +217,9 @@
                     <label class="col-md-3 adins-required-label">Days A/P Payment Due after Go Live</label>
                     <div class="col-md-9">
                       <input type="number" class="form-control adInsInput width-50-per"
-                        formControlName="ReservedField6">
-                      <show-errors [control]="VendorForm.controls.ReservedField6" [submit]="enjiForm.submitted">
-                      </show-errors>
+                        formControlName="ReservedField6" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField6.invalid}">
+                      <lib-uc-show-errors [control]="VendorForm.controls.ReservedField6" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
                     </div>
                   </div>
 
@@ -228,17 +231,18 @@
                         <option *ngFor="let it of itemMaxRefundType" value="{{it.Key}}">
                           {{it.Value}}</option>
                       </select>
-                      <show-errors [control]="VendorForm.controls.ReservedField7" [submit]="enjiForm.submitted">
-                      </show-errors>
+                      <lib-uc-show-errors [control]="VendorForm.controls.ReservedField7" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-md-3 adins-required-label">Max Refund Value </label>
                     <div class="col-md-9">
-                      <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField8">
-                      <show-errors [control]="VendorForm.controls.ReservedField8" [submit]="enjiForm.submitted">
-                      </show-errors>
+                      <input type="number" class="form-control adInsInput width-50-per"
+                        formControlName="ReservedField8" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField8.invalid}">
+                      <lib-uc-show-errors [control]="VendorForm.controls.ReservedField8" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
                     </div>
                   </div>
                 </div>
@@ -247,7 +251,7 @@
             <div *ngIf="MrVendorCategoryCode=='SURVEYOR_HO' || MrVendorCategoryCode=='SURVEYOR_BRANCH' ">
               <div class="form-group row">
                 <label class="col-md-3 adins-required-label">Surveyor HO</label>
-                <div class="col-md-3" *ngIf="inputLookupParentObj!=undefined">
+                <div class="col-md-3" *ngIf="inputLookupParentObj.isReady">
                   <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupParentSurveyor'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
@@ -261,16 +265,16 @@
                     <option *ngFor="let it of itemAssignmentTypeTele" value="{{it.Key}}">
                       {{it.Value}}</option>
                   </select>
-                  <show-errors [control]="VendorForm.controls.ReservedField9" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="VendorForm.controls.ReservedField9" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" translate>Maximum Task Load</label>
                 <div class="col-md-9">
-                  <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField2">
-                  <show-errors [control]="VendorForm.controls.ReservedField2" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="number" class="form-control adInsInput width-50-per" formControlName="ReservedField2" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField2.invalid}">
+                  <lib-uc-show-errors [control]="VendorForm.controls.ReservedField2" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
             </div>
@@ -278,7 +282,7 @@
             <div *ngIf="MrVendorCategoryCode=='ASSET_INSCO_HO' || MrVendorCategoryCode=='ASSET_INSCO_BRANCH'">
               <div class="form-group row">
                 <label class="col-md-3 adins-required-label">Asset Insurance HO</label>
-                <div class="col-md-3" *ngIf="inputLookupParentObj!=undefined">
+                <div class="col-md-3" *ngIf="inputLookupParentObj.isReady">
                   <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
@@ -288,117 +292,113 @@
             <div *ngIf="MrVendorCategoryCode=='LIFE_INSCO_BRANCH'">
               <div class="form-group row">
                 <label class="col-md-3 adins-required-label">Life Insurance HO</label>
-                <div class="col-md-3" *ngIf="inputLookupParentObj!=undefined">
+                <div class="col-md-3" *ngIf="inputLookupParentObj.isReady">
                   <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                   </lib-uclookupgeneric>
                 </div>
               </div>
             </div>
-            <div *ngIf="MrVendorCategoryCode=='AGENCY_PERSONAL'">
-              <div class="form-group row">
-                <label class="col-md-3 adins-required-label">Agent Recuiter</label>
-                <div class="col-md-3" *ngIf="inputLookupParentObj!=undefined">
-                  <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
-                    [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
-                  </lib-uclookupgeneric>
-                </div>
-              </div>
-            </div>
-
             <lib-ucSubsection [id]="'TaxInfo'" [title]="'Tax Info'" [panel]="'TaxInformation'">
             </lib-ucSubsection>
             <div id="TaxInformation">
               <div class="form-group row">
-                <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
+                <label class="col-md-3">NPWP Exist</label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrTaxCalcMethodCode.invalid }">
-                    <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
-                      {{it.Value}}</option>
-                  </select>
-                  <show-errors [control]="VendorForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <input type="checkbox" formControlName="IsNpwpExist" (change)="NpwpCheck()">
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-md-3  adins-required-label">VAT</label>
-                <div class="col-md-9">
-                  <select class="form-control" formControlName="IsVat">
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo">
-                  <show-errors [control]="VendorForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
-                  </show-errors>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adins-required-label" translate>Tax Payer Name</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerName">
-                  <show-errors [control]="VendorForm.controls.TaxpayerName" [submit]="enjiForm.submitted">
-                  </show-errors>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Tax Address</label>
-                <div class="col-md-9">
-                  <textarea class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
-                  <show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
-                  </show-errors>
-                </div>
-              </div>
-              <div class="form-body">
+              <div [hidden]="isHidden">
                 <div class="form-group row">
-                  <label class="col-md-3 adins-required-label">Zip Code</label>
-                  <div class="col-md-3" *ngIf="inputLookupParentObj!=undefined">
-                    <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
-                      [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookupZipcode($event)">
-                    </lib-uclookupgeneric>
+                  <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
+                  <div class="col-md-9">
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrTaxCalcMethodCode.invalid }">
+                      <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
+                        {{it.Value}}</option>
+                    </select>
+                    <lib-uc-show-errors [control]="VendorForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label">VAT</label>
+                  <div class="col-md-9">
+                    <select class="form-control" formControlName="IsVat">
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.TaxIdNo.invalid}">
+                    <lib-uc-show-errors [control]="VendorForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>Tax Payer Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerName" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.TaxpayerName.invalid}">
+                    <lib-uc-show-errors [control]="VendorForm.controls.TaxpayerName" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Tax Address</label>
+                  <div class="col-md-9">
+                    <textarea class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
+                    <lib-uc-show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-body">
+                  <div class="form-group row">
+                    <label class="col-md-3 adins-required-label">Zip Code</label>
+                    <div class="col-md-3" *ngIf="inputLookupParentObj.isReady">
+                      <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
+                        [enjiForm]="enjiForm" [identifier]="'Zipcode'" (lookup)="getLookupZipcode($event)">
+                      </lib-uclookupgeneric>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode2">
+                    <lib-uc-show-errors [control]="VendorForm.controls.AreaCode2" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode1">
+                    <lib-uc-show-errors [control]="VendorForm.controls.AreaCode1" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>City</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="City">
+                    <lib-uc-show-errors [control]="VendorForm.controls.City" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Province</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="Province">
+                    <lib-uc-show-errors [control]="VendorForm.controls.Province" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode2">
-                  <show-errors [control]="VendorForm.controls.AreaCode2" [submit]="enjiForm.submitted">
-                  </show-errors>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode1">
-                  <show-errors [control]="VendorForm.controls.AreaCode1" [submit]="enjiForm.submitted">
-                  </show-errors>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>City</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="City">
-                  <show-errors [control]="VendorForm.controls.City" [submit]="enjiForm.submitted">
-                  </show-errors>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Province</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="Province">
-                  <show-errors [control]="VendorForm.controls.Province" [submit]="enjiForm.submitted">
-                  </show-errors>
-                </div>
-              </div>
               <div class="form-actions right">
-                <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()"
-                  translate>
+                <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()" translate>
                   <i class="fa fa-arrow-circle-left"></i> Back
                 </button>
                 <button type="submit" class="btn btn-raised btn-primary">

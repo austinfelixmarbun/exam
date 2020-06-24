@@ -43,8 +43,7 @@
     ],
     "querystring": {
         "select": "SELECT verf.VERF_QUESTION_GRP_H_ID AS VerfQuestionGrpHId, verf.VERF_QUESTION_GRP_CODE AS VerfQuestionGrpCode, verf.VERF_QUESTION_GRP_NAME AS VerfQuestionGrpName, verf.IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.VERF_QUESTION_GRP_H verf WITH(NOLOCK)",
-        "where": "WHERE verf.IS_ACTIVE = 1"
+        "from": "FROM dbo.VERF_QUESTION_GRP_H verf WITH(NOLOCK)"
     },
     "headerList": [
         {

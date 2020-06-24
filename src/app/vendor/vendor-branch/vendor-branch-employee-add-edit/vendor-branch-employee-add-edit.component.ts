@@ -10,6 +10,7 @@ export class VendorBranchEmployeeAddEditComponent implements OnInit {
   VendorId: number;
   objPassing: any = {};
   VendorEmpId: number;
+  IsReload: boolean;
 
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
@@ -22,12 +23,23 @@ export class VendorBranchEmployeeAddEditComponent implements OnInit {
 
   ngOnInit() {
     this.VendorId = this.objPassing["VendorId"];
-
+    this.objPassing["mode"] = "add";
     this.objPassing["Type"]="VendorEmployee";
   }
 
   outputValue(ev){
+    console.log("TESST")
     this.VendorEmpId = ev;
     this.objPassing["VendorEmpId"] = this.VendorEmpId;
+    this.objPassing["mode"] = "edit";
+  }
+
+  //Untuk force component employee load ulang
+  EnterTab(ev){
+    if(ev == "Employee"){
+      this.IsReload = true
+    }else{
+      this.IsReload = false
+    }
   }
 }

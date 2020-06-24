@@ -45,6 +45,10 @@ export class AdInsConstant {
   public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
+  public static MR_MARITAL_STAT_CODE_MARRIED = "MARRIED";
+  public static MR_MARITAL_STAT_CODE_SINGLE = "SINGLE";
+  public static MR_CUST_TYPE_CODE_PERSONAL = "PERSONAL";
+  public static MR_CUST_TYPE_CODE_COMPANY = "COMPANY";
 
   public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
   // ProductDeact
@@ -52,6 +56,10 @@ export class AdInsConstant {
   // DOWNLOAD
   public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';
 
+  // Customer Type
+  public static CustomerPersonal = "PERSONAL";
+  public static CustomerCompany = "COMPANY";
+  
   //GENERAL SETTING
   public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
   public static AddGeneralSetting = environment.FoundationR3Url + "/GeneralSetting/AddGeneralSetting";
@@ -70,6 +78,7 @@ export class AdInsConstant {
   public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
   public static AddRefOffice = environment.FoundationR3Url + "/RefOffice/AddRefOffice";
   public static AddRefOfficeAreaMember = environment.FoundationR3Url + "/RefOffice/AddRefOfficeAreaMember";
+  public static UpdateRefOfficeAreaId = "/RefOffice/UpdateRefOfficeAreaId";
   public static EditRefOffice = "/RefOffice/EditRefOffice";
   public static DeleteRefOffice = "/RefOffice/DeleteRefOffice";
   public static GetCenterGrpByCenterGrpTypeCode = "/RefOffice/GetCenterGrpByCenterGrpCode";
@@ -338,6 +347,7 @@ export class AdInsConstant {
   public static AddNotificationHAndD = "/NotificationH/AddNotificationHAndD"
   public static EditNotificationH = "/NotificationH/EditNotificationH"
   public static DeleteNotificationD = "/NotificationD/DeleteNotificationD"
+  public static UpdateReadNotification = environment.FoundationR3Url+"/NotificationD/UpdateReadNotificationD";
 
   public static GetListNotificationHByRefUserId = environment.FoundationR3Url + "/NotificationH/GetListNotificationHByRefUserId";
 
@@ -465,6 +475,7 @@ export class AdInsConstant {
   public static GetProductDetailComponentInfo = environment.FoundationR3Url + "/Product/GetProductDetailComponentInfo";
   public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
   public static DownloadProductRule = environment.FoundationR3Url + "/Product/DownloadProductRule";
+  public static UpdateProductPostApv = environment.FoundationR3Url + "/Product/UpdateProductPostApv";
 
   //PRODUCT OFFERING
   public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
@@ -481,7 +492,7 @@ export class AdInsConstant {
   public static RequestOfferingDeactivation = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationProdOffering"
   public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
   public static CopyProductOffering = environment.FoundationR3Url + "/ProductOffering/CopyProductOffering";
-
+  public static UpdateProdOfferingPostApv = environment.FoundationR3Url + "/ProductOffering/UpdateProdOfferingPostApv";
 
   // PRODUCT COMPONENT
   public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
@@ -551,7 +562,7 @@ export class AdInsConstant {
   public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
   public static AddVendorHolding = environment.FoundationR3Url + "/Vendor/AddVendorHolding";
   public static EditVendorHolding = environment.FoundationR3Url + "/Vendor/EditVendorHolding";
-  public static GetVendorHOAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
+  public static GetVendorAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
   public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
   public static AddVendorAddr = environment.FoundationR3Url + "/VendorAddr/AddVendorAddr";
   public static EditVendorAddr = environment.FoundationR3Url + "/VendorAddr/EditVendorAddr";
@@ -800,12 +811,15 @@ export class AdInsConstant {
   // NEGATIVE CUSTOMER
   public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
   public static EditNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/EditNegativeCust";
+  public static EditDuplicateNegativeCust = environment.FoundationR3Url + "/NegativeCust/EditDuplicateNegativeCust";
   public static GetNegativeCustByNegativeCustId = environment.FoundationR3Url + "/NegativeCust/GetNegativeCustByNegativeCustId";
   public static AddNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/AddNegativeCustChangeTrx";
   public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
   public static GetNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetNegativeCustChangeTrxByNegativeCustId";
   public static GetListNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/NegativeCustChangeTrx/GetListNegativeCustChangeTrxByNegativeCustId";
   public static GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType =  environment.FoundationR3Url + '/NegativeCust/GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType';
+  public static GetNegativeCustByNegativeCustNameAndCustType = environment.FoundationR3Url + "/NegativeCust/GetNegativeCustByNegativeCustNameAndCustType";
+  
   //REF BEHAVIOUR
   public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
   public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";

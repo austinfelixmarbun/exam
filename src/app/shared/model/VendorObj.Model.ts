@@ -22,5 +22,6 @@ export class VendorObj{
     TaxpayerName: any;
     MrVendorClass: any;
     RowVersion: any;
+    IsNpwpExist: boolean;
     constructor() { this.VendorId = 0; }
 }

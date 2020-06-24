@@ -28,14 +28,18 @@ export class MemberBusinessUnitComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBusinessUnitMember.json";
     this.inputPagingObj.ddlEnvironments = [
       {
-        name: "D.JOB_TITLE_CODE",
+        name: "RJT.JOB_TITLE_CODE",
+        environment: environment.FoundationR3Url
+      },
+      {
+        name: "RO.OFFICE_CODE",
         environment: environment.FoundationR3Url
       }
     ];
 
     this.inputPagingObj.addCritInput = new Array();
     var critInput = new CriteriaObj();
-    critInput.propName = "A.REF_BIZ_UNIT_ID";
+    critInput.propName = "RUR.REF_BIZ_UNIT_ID";
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.RefBizUnitId;
     this.inputPagingObj.addCritInput.push(critInput);
