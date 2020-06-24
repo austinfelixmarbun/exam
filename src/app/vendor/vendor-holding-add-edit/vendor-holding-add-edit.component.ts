@@ -27,8 +27,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   result: any;
   check: any;
-  inputLookupParentObj: any;
-  inputLookupZipcodeObj: any;
+  inputLookupParentObj: InputLookupObj = new InputLookupObj();
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
   MrVendorCategoryCode: any;
   arrCrit: any;
   mode: string = "add";
@@ -339,7 +339,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
   }
 
   setLookup() {
-    this.inputLookupZipcodeObj = new InputLookupObj();
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
