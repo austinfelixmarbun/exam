@@ -308,7 +308,7 @@
                   <input type="checkbox" formControlName="IsNpwpExist" (change)="NpwpCheck()">
                 </div>
               </div>
-              <div *ngIf="!isHidden">
+              <div [hidden]="isHidden">
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
                   <div class="col-md-9">
@@ -359,7 +359,7 @@
                     <label class="col-md-3 adins-required-label">Zip Code</label>
                     <div class="col-md-3" *ngIf="inputLookupParentObj.isReady">
                       <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
-                        [enjiForm]="enjiForm" [identifier]="'lookupZipcode'" (lookup)="getLookupZipcode($event)">
+                        [enjiForm]="enjiForm" [identifier]="'Zipcode'" (lookup)="getLookupZipcode($event)">
                       </lib-uclookupgeneric>
                     </div>
                   </div>

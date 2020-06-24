@@ -92,7 +92,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
     Addr: [''],
-    Zipcode: [''],
     AreaCode2: [{ value: '', disabled: true }], //kelurahan
     AreaCode1: [{ value: '', disabled: true }], //kecamatan
     City: [{ value: '', disabled: true }],
@@ -302,7 +301,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
   }
 
-  NpwpCheck(){
+  NpwpCheck(isGetData: boolean = false){
     if(this.VendorForm.controls.IsNpwpExist.value == true){
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
@@ -311,12 +310,13 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     }else{
-      this.isHidden = true;
       this.inputLookupZipcodeObj.isRequired = false;
+      if(!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
       this.VendorForm.controls.IsVat.clearValidators();
       this.VendorForm.controls.MrTaxCalcMethodCode.clearValidators();
       this.VendorForm.controls.TaxIdNo.clearValidators();
       this.VendorForm.controls.TaxpayerName.clearValidators();
+      this.isHidden = true;
     }
     this.VendorForm.controls.IsVat.updateValueAndValidity();
     this.VendorForm.controls.MrTaxCalcMethodCode.updateValueAndValidity();
@@ -440,7 +440,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.isReady = true;
     this.inputLookupParentObj.isReady = true;
 
-    this.NpwpCheck();
+    this.NpwpCheck(true);
   }
 
   UpdateValueAndValidity() {
@@ -511,7 +511,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
       this.vendorBranchObj.VendorAddrObj.MrAddrTypeCode = "TAX";
       this.vendorBranchObj.VendorAddrObj.Addr= this.VendorForm.controls.Addr.value;
-      this.vendorBranchObj.VendorAddrObj.Zipcode= this.VendorForm.controls["lookupZipcode"]["controls"].value.value;
+      this.vendorBranchObj.VendorAddrObj.Zipcode= this.VendorForm.controls["Zipcode"]["controls"].value.value;
       this.vendorBranchObj.VendorAddrObj.AreaCode2= this.VendorForm.controls.AreaCode2.value;
       this.vendorBranchObj.VendorAddrObj.AreaCode1= this.VendorForm.controls.AreaCode1.value;
       this.vendorBranchObj.VendorAddrObj.City= this.VendorForm.controls.City.value;
@@ -539,7 +539,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": this.VendorId } });
+          this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": this.VendorId, "mode":"edit" } });
         },
         (error) => {
           console.log(error);

@@ -48,10 +48,9 @@ export class VendorEmployeeComponent implements OnInit {
     BirthDate: [''],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', [Validators.pattern("^[0-9]+$")]],
-    Email: ['', [Validators.required]],
+    Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     JoinDt: ['', [Validators.required]],
     VendorEmpRating: ['0'],
-    Zipcode: [''],
     Addr: [''],
     AreaCode1: [''],
     AreaCode2: [''],
@@ -192,7 +191,7 @@ export class VendorEmployeeComponent implements OnInit {
       this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.resultVendorEmpAndAddr["VendorAddrObj"].Zipcode };
       this.inputLookupSpvObj.jsonSelect = { VendorEmpName: this.resultVendorEmpAndAddr["VendorEmpObj"].SupervisorName };
     }
-    this.NpwpCheck(this.VendorEmpForm.controls.IsNpwpExist.value);
+    this.NpwpCheck(true);
   }
 
   getLookupInternal(ev) {
@@ -270,23 +269,15 @@ export class VendorEmployeeComponent implements OnInit {
     );
   }
 
-  NpwpCheck(IsNpwpExist) {
-    if (IsNpwpExist == true) {
+  NpwpCheck(isGetData: boolean = false) {
+    if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
-      this.VendorEmpForm.controls.MrTaxCalcMethodCode.setValidators(Validators.required);
-      this.VendorEmpForm.controls.TaxIdNo.setValidators(Validators.required);
-      this.VendorEmpForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
-      this.isHidden = true;
       this.inputLookupZipcodeObj.isRequired = false;
-      this.VendorEmpForm.controls.MrTaxCalcMethodCode.clearValidators();
-      this.VendorEmpForm.controls.TaxIdNo.clearValidators();
-      this.VendorEmpForm.controls.TaxpayerName.clearValidators();
+      if(!isGetData) this.VendorEmpForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
+      this.isHidden = true;
     }
-    this.VendorEmpForm.controls.MrTaxCalcMethodCode.updateValueAndValidity();
-    this.VendorEmpForm.controls.TaxIdNo.updateValueAndValidity();
-    this.VendorEmpForm.controls.TaxpayerName.updateValueAndValidity();
   }
 
   SaveForm() {

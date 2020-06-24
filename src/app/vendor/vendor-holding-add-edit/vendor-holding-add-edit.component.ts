@@ -71,7 +71,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
     TaxpayerName: [''],
     MrAddrTypeCode: [''],
     Addr: [''],
-    Zipcode: [''],
     AreaCode2: [{ value: '', disabled: true }], //kelurahan
     AreaCode1: [{ value: '', disabled: true }], //kecamatan
     City: [{ value: '', disabled: true }],
@@ -200,7 +199,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     );
   }
 
-  NpwpCheck(){
+  NpwpCheck(isGetData: boolean = false){
     if(this.VendorForm.controls.IsNpwpExist.value == true){
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
@@ -209,12 +208,13 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     }else{
-      this.isHidden = true;
       this.inputLookupZipcodeObj.isRequired = false;
+      if(!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
       this.VendorForm.controls.IsVat.clearValidators();
       this.VendorForm.controls.MrTaxCalcMethodCode.clearValidators();
       this.VendorForm.controls.TaxIdNo.clearValidators();
       this.VendorForm.controls.TaxpayerName.clearValidators();
+      this.isHidden = true;
     }
     this.VendorForm.controls.IsVat.updateValueAndValidity();
     this.VendorForm.controls.MrTaxCalcMethodCode.updateValueAndValidity();
@@ -282,7 +282,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
         this.vendorHoldingObj.VendorAddrObj.MrAddrTypeCode = "TAX";
         this.vendorHoldingObj.VendorAddrObj.Addr = this.VendorForm.controls.Addr.value;
-        this.vendorHoldingObj.VendorAddrObj.Zipcode = this.VendorForm.controls["lookupZipcode"]["controls"].value.value;
+        this.vendorHoldingObj.VendorAddrObj.Zipcode = this.VendorForm.controls["Zipcode"]["controls"].value.value;
         this.vendorHoldingObj.VendorAddrObj.AreaCode2 = this.VendorForm.controls.AreaCode2.value;
         this.vendorHoldingObj.VendorAddrObj.AreaCode1 = this.VendorForm.controls.AreaCode1.value;
         this.vendorHoldingObj.VendorAddrObj.City = this.VendorForm.controls.City.value;
@@ -351,7 +351,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     }
 
     this.inputLookupZipcodeObj.isReady = true;
-    this.NpwpCheck();
+    this.NpwpCheck(true);
   }
 
   checkType() {
