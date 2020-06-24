@@ -24,32 +24,32 @@
                     <option *ngFor="let it of itemCategoryType" value="{{it.MasterCode}}">
                       {{it.Descr}}</option>
                   </select>
-                  <show-errors [control]="VendorSchmForm.controls.MrVendorCategoryCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="VendorSchmForm.controls.MrVendorCategoryCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Scheme Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-75-per" formControlName="VendorSchmCode">
-                  <show-errors [control]="VendorSchmForm.controls.VendorSchmCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="VendorSchmForm.controls.VendorSchmCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Scheme Name </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-75-per" formControlName="VendorSchmName">
-                  <show-errors [control]="VendorSchmForm.controls.VendorSchmName" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="VendorSchmForm.controls.VendorSchmName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Desc</label>
                 <div class="col-md-9">
                   <textarea class="form-control adInsInput width-75-per" formControlName="VendorSchmDesc"> </textarea>
-                  <show-errors [control]="VendorSchmForm.controls.VendorSchmDesc" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="VendorSchmForm.controls.VendorSchmDesc" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
