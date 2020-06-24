@@ -19,21 +19,21 @@
         }
     ],
     "querystring": {
-        "select": "SELECT A.AREA_CODE AS AreaCode, A.REF_OFFICE_AREA_ID AS RefOfficeAreaId, B.OFFICE_CODE AS OfficeCode, B.OFFICE_NAME AS OfficeName",
+        "select": "SELECT A.AREA_CODE AS AreaCode, A.REF_OFFICE_AREA_ID AS RefOfficeAreaId, B.OFFICE_CODE AS OfficeCode, B.OFFICE_NAME AS OfficeName, B.REF_OFFICE_ID AS RefOfficeId",
         "from": "FROM dbo.REF_OFFICE_AREA A WITH(NOLOCK) JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_AREA_ID = A.REF_OFFICE_AREA_ID"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "center",
-            "label": "OFFICE CODE",
-            "name": "OfficeCode"
+            "label": "Office Code",
+            "name": "B.OFFICE_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "OFFICE NAME",
-            "name": "OfficeName"
+            "position": "left",
+            "label": "Office Name",
+            "name": "B.OFFICE_NAME"
         },
         {
             "type": "label",
@@ -49,7 +49,7 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "OfficeName"
         },
         {
@@ -58,7 +58,7 @@
             "action": [
                 {
                     "type": "delete",
-                    "property": "RefOfficeAreaId"
+                    "property": "RefOfficeId"
                 }
             ]
         }
