@@ -77,7 +77,7 @@ export class AdInsConstant {
   public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
   public static AddRefOffice = environment.FoundationR3Url + "/RefOffice/AddRefOffice";
   public static AddRefOfficeAreaMember = environment.FoundationR3Url + "/RefOffice/AddRefOfficeAreaMember";
-  public static DeleteOfficeAreaMember = "/RefOffice/DeleteRefOfficeAreaMember";
+  public static UpdateRefOfficeAreaId = "/RefOffice/UpdateRefOfficeAreaId";
   public static EditRefOffice = "/RefOffice/EditRefOffice";
   public static DeleteRefOffice = "/RefOffice/DeleteRefOffice";
   public static GetCenterGrpByCenterGrpTypeCode = "/RefOffice/GetCenterGrpByCenterGrpCode";
