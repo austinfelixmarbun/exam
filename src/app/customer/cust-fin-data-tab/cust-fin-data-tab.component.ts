@@ -105,7 +105,12 @@ export class CustFinDataTabComponent implements OnInit {
       custPersonal.CustId = this.CustId;
       this.httpClient.post(AdInsConstant.GetCustPersonalbyCustId, custPersonal).pipe(
         map((response: CustPersonalObj) => {
-          this.mrMaritalStatCode = response.MrMaritalStatCode;
+          if(!response || response.MrMaritalStatCode == null){
+            this.mrMaritalStatCode = AdInsConstant.MR_MARITAL_STAT_CODE_SINGLE;
+          }
+          else{
+            this.mrMaritalStatCode = response.MrMaritalStatCode;
+          }
           console.log(this.mrMaritalStatCode);
           custPersonalData = response;
           return response;
@@ -122,6 +127,7 @@ export class CustFinDataTabComponent implements OnInit {
       ).subscribe(
         (response: any) => {
           var custFinData = response[0];
+          console.log("Cust Fin Data: " + JSON.stringify(custFinData));
           var sourceIncome = response[1];
           this.CustPersonalFinDataForm.patchValue({
             CustPersonalFinDataId: custFinData.CustPersonalFinDataId,
@@ -130,8 +136,8 @@ export class CustFinDataTabComponent implements OnInit {
             MonthlyExpenseAmt: custFinData.MonthlyExpenseAmt,
             MonthlyInstallmentAmt: custFinData.MonthlyInstallmentAmt,
             MrSourceOfIncomeCode: custFinData.MrSourceOfIncomeCode,
-            SpouseMonthlyIncomeAmt: custFinData.SpouseMonthlyIncomeAmt,
-            IsJoinIncome: custFinData.IsJoinIncome,
+            SpouseMonthlyIncomeAmt: this.mrMaritalStatCode == AdInsConstant.MR_MARITAL_STAT_CODE_MARRIED ? custFinData.SpouseMonthlyIncomeAmt : 0,
+            IsJoinIncome: this.mrMaritalStatCode == AdInsConstant.MR_MARITAL_STAT_CODE_MARRIED ? custFinData.IsJoinIncome : false,
             TotalIncomeAmt: this.currencyFormatter(custFinData.TotalIncomeAmt.toString()),
             NettIncomeAmt: this.currencyFormatter(custFinData.NettIncomeAmt.toString()),
             NettProfitMonthlyAmt: custFinData.NettProfitMonthlyAmt,
@@ -353,7 +359,8 @@ export class CustFinDataTabComponent implements OnInit {
       if(response.SpouseMonthlyIncomeAmt == ""){
         response.SpouseMonthlyIncomeAmt = this.spouseMonthlyIncomeAmt;
       }
-      console.log(response);
+      console.log("URL : " + url);
+      console.log("Request : " + JSON.stringify(response));
       this.httpClient.post(url, response).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
