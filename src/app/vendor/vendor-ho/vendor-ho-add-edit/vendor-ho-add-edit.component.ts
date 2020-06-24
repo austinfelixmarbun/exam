@@ -60,7 +60,7 @@ export class VendorHoAddEditComponent implements OnInit {
     IdNo: [''],
     MobilePhnNo1: [''],
     MobilePhnNo2: [''],
-    Email: ['', Validators.required],
+    Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     VendorRating: [''],
     EstablishmentDt: ['', Validators.required],
     PartnershipDt: ['', Validators.required],
@@ -72,7 +72,6 @@ export class VendorHoAddEditComponent implements OnInit {
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
     Addr: [''],
-    Zipcode: [''],
     AreaCode2: [{ value: '', disabled: true }], //kelurahan
     AreaCode1: [{ value: '', disabled: true }], //kecamatan
     City: [{ value: '', disabled: true }],
@@ -203,7 +202,7 @@ export class VendorHoAddEditComponent implements OnInit {
     );
   }
 
-  NpwpCheck(){
+  NpwpCheck(isGetData: boolean = false){
     if(this.VendorForm.controls.IsNpwpExist.value == true){
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
@@ -212,12 +211,13 @@ export class VendorHoAddEditComponent implements OnInit {
       this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     }else{
-      this.isHidden = true;
       this.inputLookupZipcodeObj.isRequired = false;
+      if(!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
       this.VendorForm.controls.IsVat.clearValidators();
       this.VendorForm.controls.MrTaxCalcMethodCode.clearValidators();
       this.VendorForm.controls.TaxIdNo.clearValidators();
       this.VendorForm.controls.TaxpayerName.clearValidators();
+      this.isHidden = true;
     }
     this.VendorForm.controls.IsVat.updateValueAndValidity();
     this.VendorForm.controls.MrTaxCalcMethodCode.updateValueAndValidity();
@@ -265,7 +265,7 @@ export class VendorHoAddEditComponent implements OnInit {
 
   Back() {
     if (this.mode == "edit") {
-      this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": this.VendorId } });
+      this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": this.VendorId, "mode":"edit"} });
     } else {
       this.router.navigate(['/Vendor/HO/Paging']);
     }
@@ -315,7 +315,7 @@ export class VendorHoAddEditComponent implements OnInit {
     this.inputLookupParentObj.isReady = true;
     this.inputLookupZipcodeObj.isReady = true;
 
-    this.NpwpCheck();
+    this.NpwpCheck(true);
   }
 
   SaveForm() {
@@ -361,7 +361,7 @@ export class VendorHoAddEditComponent implements OnInit {
 
         this.vendorHoObj.VendorAddrObj.MrAddrTypeCode = "TAX";
         this.vendorHoObj.VendorAddrObj.Addr = this.VendorForm.controls.Addr.value;
-        this.vendorHoObj.VendorAddrObj.Zipcode = this.VendorForm.controls["lookupZipcode"]["controls"].value.value;
+        this.vendorHoObj.VendorAddrObj.Zipcode = this.VendorForm.controls["Zipcode"]["controls"].value.value;
         this.vendorHoObj.VendorAddrObj.AreaCode2 = this.VendorForm.controls.AreaCode2.value;
         this.vendorHoObj.VendorAddrObj.AreaCode1 = this.VendorForm.controls.AreaCode1.value;
         this.vendorHoObj.VendorAddrObj.City = this.VendorForm.controls.City.value;
@@ -387,7 +387,7 @@ export class VendorHoAddEditComponent implements OnInit {
         this.http.post(AdInsConstant.EditVendorHO, this.vendorHoObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigateByUrl('/Vendor/HO/Paging');
+            this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": this.VendorId, "mode":"edit"} });
           },
           (error) => {
             console.log(error);
