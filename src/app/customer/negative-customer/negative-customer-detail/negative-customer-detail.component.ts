@@ -224,11 +224,11 @@ export class NegativeCustomerDetailComponent implements OnInit {
           var birthDt = datePipe.transform(negativeCustData.BirthDt, 'yyyy-MM-dd');
           this.custNo = negativeCustData.CustNo;
           this.zipcode = negativeCustData.Zipcode;
-          this.custType = negativeCustData.MrCustTypeCode;
+          this.custType = negativeCustData.MrCustTypeCode.toUpperCase();
           this.NegativeCustForm.patchValue({
             NegativeCustId: negativeCustData.NegativeCustId,
             CustId: negativeCustData.CustId,
-            MrCustTypeCode: negativeCustData.MrCustTypeCode,
+            MrCustTypeCode: negativeCustData.MrCustTypeCode.toUpperCase(),
             CustNo: negativeCustData.CustNo,
             CustName: negativeCustData.CustName,
             MrIdTypeCode: negativeCustData.MrIdTypeCode,
@@ -258,8 +258,8 @@ export class NegativeCustomerDetailComponent implements OnInit {
             FaxArea: negativeCustData.FaxArea,
             Fax: negativeCustData.Fax,
             MobilePhn: negativeCustData.MobilePhn,
-            MrNegCustTypeCode: negativeCustData.MrNegCustTypeCode,
-            MrNegCustSourceCode: negativeCustData.MrNegCustSourceCode,
+            MrNegCustTypeCode: negativeCustData.MrNegCustTypeCode.toUpperCase(),
+            MrNegCustSourceCode: negativeCustData.MrNegCustSourceCode.toUpperCase(),
             NegCustCause: negativeCustData.NegCustCause,
             Notes: negativeCustData.Notes,
             IsActive: negativeCustData.IsActive,
