@@ -91,6 +91,7 @@ export class JobDataSmeComponent implements OnInit {
     OtherPriceEstimates: [''],
     OtherStayLength: ['']
   });
+  businessDtMin: Date;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
@@ -121,13 +122,16 @@ export class JobDataSmeComponent implements OnInit {
   }
 
   ngOnInit() {
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDtMin = new Date(context["BusinessDt"]);
+    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputJobAddressObj = new InputFieldObj();
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
     this.inputOtherAddressObj = new InputFieldObj();
     this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
     
     this.professionLookUpObj = new InputLookupObj();
-    this.professionLookUpObj.isRequired = false;
+    this.professionLookUpObj.isRequired = true;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.professionLookUpObj.urlEnviPaging = environment.FoundationR3Url;
@@ -140,7 +144,7 @@ export class JobDataSmeComponent implements OnInit {
     this.industryLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.isRequired = false;
+    this.industryLookUpObj.isRequired = true;
 
     this.jobPosition = new RefMasterObj();
     this.jobPosition.RefMasterTypeCode = "JOB_POSITION";
