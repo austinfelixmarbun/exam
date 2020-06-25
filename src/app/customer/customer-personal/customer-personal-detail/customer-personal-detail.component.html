@@ -163,7 +163,7 @@
         <div class="form-group row  ">
           <label class="col-md-2 adInsLabel" translate>Email 1 </label>
           <div class="col-md-4">
-            <input type="text" class="form-control adInsInput" formControlName="Email1"
+            <input type="text" class="form-control adins-required" formControlName="Email1"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.Email1.invalid}">
             <show-errors [control]="CustomerDetailForm.controls.Email1" [submit]="enjiForm.submitted">
             </show-errors>
