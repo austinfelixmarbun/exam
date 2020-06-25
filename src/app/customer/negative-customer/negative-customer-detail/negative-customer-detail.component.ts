@@ -295,9 +295,10 @@ export class NegativeCustomerDetailComponent implements OnInit {
             this.NegativeCustForm.removeControl('MotherMaidenName');
             this.NegativeCustForm.removeControl('PersonalLookup');
             this.NegativeCustForm.removeControl('PersonalLookup');
+            this.NegativeCustForm.removeControl('CustId');
           }
 
-          if (this.NegativeCustForm.controls.MrIdTypeCode.value == null && this.NegativeCustForm.controls.MrIdTypeCode.value == undefined) {
+          if (this.NegativeCustForm.controls.MrIdTypeCode != undefined && this.NegativeCustForm.controls.MrIdTypeCode.value == null && this.NegativeCustForm.controls.MrIdTypeCode.value == undefined) {
             this.NegativeCustForm.removeControl('CustId');
           }
 
