@@ -12,10 +12,10 @@
     },
     {
       "type": "textbox",
-      "name": "B.ASSET_CATEGORY_NAME",
-      "id": "AssetCategoryNameId",
+      "name": "B.ASSET_DOC_NAME",
+      "id": "AssetDocumentNameId",
       "value": "",
-      "label": "Asset Category Name",
+      "label": "Asset Document Name",
       "placeholder": "Placeholder"
     },
     {
