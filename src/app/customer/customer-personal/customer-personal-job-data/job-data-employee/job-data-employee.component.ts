@@ -95,6 +95,7 @@ export class JobDataEmployeeComponent implements OnInit {
     OtherPriceEstimates: [''],
     OtherStayLength: ['']
   });
+  businessDtMin: Date;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustById = AdInsConstant.GetCustByCustId;
@@ -125,6 +126,9 @@ export class JobDataEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDtMin = new Date(context["BusinessDt"]);
+    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputJobAddressObj = new InputFieldObj();
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
     this.inputOtherAddressObj = new InputFieldObj();
