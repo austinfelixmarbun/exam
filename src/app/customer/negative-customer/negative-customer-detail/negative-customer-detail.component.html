@@ -94,8 +94,8 @@
                   <select class="form-control adInsInput" formControlName="MrGenderCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MrGenderCode.invalid }"
                     [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
-                    <option [value]="'M'">Male</option>
-                    <option [value]="'F'">Female</option>
+                    <option [value]="'MALE'">Male</option>
+                    <option [value]="'FEMALE'">Female</option>
                   </select>
                 </div>
               </div>
@@ -406,7 +406,7 @@
               <i class="fa fa-arrow-circle-left"></i> Cancel
             </button>
             <button type="submit" class="btn btn-raised btn-primary">
-              <i class="fa fa-check-square-o"></i> Save
+              <i class="far fa-check-square"></i> Save
             </button>
           </div>
         </form>
