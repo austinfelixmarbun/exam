@@ -123,7 +123,7 @@ export class NegativeAssetDetailComponent implements OnInit {
             SerialNo3: response["AssetNegativeObj"]["SerialNo3"],
             SerialNo4: response["AssetNegativeObj"]["SerialNo4"],
             SerialNo5: response["AssetNegativeObj"]["SerialNo5"],
-            MrNegAssetSourceCode: response["AssetNegativeObj"]["MrNegAssetSourceCode"],
+            MrNegAssetSourceCode: response["AssetNegativeObj"]["MrNegAssetSourceCode"].toUpperCase(),
             Notes: response["AssetNegativeObj"]["Notes"],
             IsActive: response["AssetNegativeObj"]["IsActive"],
             RowVersion: response["RowVersion"]

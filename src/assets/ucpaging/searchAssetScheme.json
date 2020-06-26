@@ -31,7 +31,7 @@
       "isSelectOne": false,
       "url": "",
       "path": "/AssetType/GetListKeyValueActiveById",
-      "label": "Asset Type NAME",
+      "label": "Asset Type Name",
       "items": [],
       "itemsUrl": []
     },
