@@ -25,6 +25,9 @@ export class AdInsConstant {
   public static ApvTrxTypeProductOffering = "PROD_OFF_APV";
   public static ApvTrxTypeProductOfferingDeact = "PROD_OFF_DEACT_APV";
 
+  public static ApvHoldTaskUrl = environment.FoundationR3Url + "/Approval/Hold";
+  public static ApvTakeBackTaskUrl = environment.FoundationR3Url + "/Approval/TakeBack";
+
   //Behaviour Type
   public static BehaviourTypeLock = "LOCK";
   public static BehaviourTypeMin = "MIN";

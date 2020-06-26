@@ -8,10 +8,10 @@ export const environment = {
   navbarColor: 'lightgray',
   LosURL : 'http://r3web-server.ad-ins.com/LOSR3/',
   WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  // FoundationR3Url: 'http://localhost:5000',
+  // FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
+  FoundationR3Url: 'http://localhost:5000',
   Module:"FOU",
-  ApprovalURL : 'http://r3app-server/APPROVAL',
+  ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL',
   FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation'
   // comment
 };

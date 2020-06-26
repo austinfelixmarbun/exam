@@ -20,7 +20,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT TL.TASK_ID AS TaskId, TL.INSTANCE_ID AS InstanceId,TL.APV_REQ_ID AS ApvReqId, TL.TRX_NO AS TRX_NO, TL.APV_NO AS APV_NO, TL.REQUEST_BY AS REQUEST_BY, TL.REQUEST_DATE AS REQUEST_DATE, TL.MAIN_USER_ID AS MAIN_USER_ID, TL.CURRENT_USER_ID AS CURRENT_USER_ID, TL.CATEGORY_CODE AS CATEGORY_CODE, P.PROD_OFFERING_NAME AS PROD_NAME, P.CURRENT_PROD_OFFERING_H_ID AS ProdOfferingHId ,P.START_DT AS START_DT,P.END_DT AS END_DT",
+    "select": "SELECT TL.TASK_ID AS TaskId, TL.INSTANCE_ID AS InstanceId,TL.APV_REQ_ID AS ApvReqId, TL.TRX_NO AS TRX_NO, TL.APV_NO AS APV_NO, TL.REQUEST_BY AS REQUEST_BY, TL.REQUEST_DATE AS REQUEST_DATE, TL.MAIN_USER_ID AS MAIN_USER_ID, TL.CURRENT_USER_ID AS CURRENT_USER_ID, TL.CATEGORY_CODE AS CATEGORY_CODE, P.PROD_OFFERING_NAME AS PROD_NAME, P.CURRENT_PROD_OFFERING_H_ID AS ProdOfferingHId ,P.START_DT AS START_DT,P.END_DT AS END_DT, TL.IS_HOLD",
     "from": "FROM dbo.V_APV_TASK_LIST AS TL JOIN PROD_OFFERING AS P ON TL.TRX_NO = P.PROD_OFFERING_CODE"
   },
   "headerList": [
@@ -81,7 +81,17 @@
     {
       "type": "label",
       "position": "center",
-      "label": "Action"
+      "label": "Process"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Hold"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Take Back"
     }
   ],
   "bodyList": [
@@ -151,6 +161,26 @@
               "property": "InstanceId"
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "callback",
+          "key": "HoldTask"
+        }
+      ]
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "callback",
+          "key": "TakeBack"
         }
       ]
     }

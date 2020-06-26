@@ -3,17 +3,21 @@ import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { ApprovalReqObj } from 'app/shared/model/Approval/ApprovalReqObj.Model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-offering-approval',
   templateUrl: './product-offering-approval.component.html',
+  providers:[NGXToastrService]
 })
 export class ProductOfferingApprovalComponent implements OnInit {
 
   inputPagingObj: any;
   arrCrit: any;
 
-  constructor() { }
+  constructor(private toastr:NGXToastrService, private httpClient:HttpClient) { }
 
   ngOnInit() {
     this.inputPagingObj=new UcpagingModule();
@@ -30,6 +34,31 @@ export class ProductOfferingApprovalComponent implements OnInit {
     critObj.value = 'PRD_OFR_APV';
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
+  }
+
+  CallBackHandler(ReturnObject){
+    var ApvReqObj = new ApprovalReqObj();
+    if(ReturnObject.Key == "HoldTask"){
+      ApvReqObj.TaskId = ReturnObject.RowObj.TaskId
+      this.httpClient.post(AdInsConstant.ApvHoldTaskUrl, ApvReqObj).subscribe(
+        (response)=>{
+          this.toastr.successMessage(response["Message"]);
+        }
+      )
+    }
+    else if(ReturnObject.Key == "TakeBack"){
+      ApvReqObj.TaskId = ReturnObject.RowObj.TaskId
+      this.httpClient.post(AdInsConstant.ApvTakeBackTaskUrl, ApvReqObj).subscribe(
+        (response)=>{
+          this.toastr.successMessage(response["Message"]);
+        }
+      )
+    }
+    else{
+      this.toastr.errorMessage("There is no seting for "+ ReturnObject.Key +" callback");
+    }
+
+    console.log(ReturnObject);
   }
 
 }

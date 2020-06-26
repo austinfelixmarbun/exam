@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { HttpClient } from '@angular/common/http';
+import { ApprovalReqObj } from 'app/shared/model/Approval/ApprovalReqObj.Model';
 
 @Component({
   selector: 'app-product-ho-deact-apv-detail',
@@ -20,11 +20,10 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
   viewProdMainInfoObj: any;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService ) { 
+  constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private http:HttpClient) { 
     this.route.queryParams.subscribe(params => {
     if (params["ProdHId"] != null) {
         this.prodHId = params["ProdHId"];
-
         this.taskId = params["TaskId"];
         this.instanceId = params["InstanceId"];
       }
@@ -40,14 +39,28 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
     }
 
     this.inputObj = obj;
+    
+    var ApvHoldObj = new ApprovalReqObj()
+    ApvHoldObj.TaskId = obj.taskId
+
+    this.HoldTask(ApvHoldObj);
   }
 
-  onAvailableNextTask(event)
+
+  HoldTask(obj){
+    this.http.post(AdInsConstant.ApvHoldTaskUrl, obj).subscribe(
+      (response)=>{
+        this.toastr.successMessage(response["Message"]);
+      }
+    )
+  }
+
+  onAvailableNextTask()
   {
     
   }
 
-  onApprovalSubmited(event)
+  onApprovalSubmited()
   {
     this.toastr.successMessage("Success");
     this.router.navigate(["/Product/HODeactivate"]);

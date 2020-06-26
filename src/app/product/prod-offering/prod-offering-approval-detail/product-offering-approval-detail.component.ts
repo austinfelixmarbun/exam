@@ -6,6 +6,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
+import { ApprovalReqObj } from 'app/shared/model/Approval/ApprovalReqObj.Model';
 
 @Component({
   selector: 'app-product-offering-approval-detail',
@@ -26,19 +27,33 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params["ProdOfferingHId"] != null) {
         this.prodOfferingHId = params["ProdOfferingHId"];
+        this.taskId = params["TaskId"];
+        this.instanceId = params["InstanceId"];
       }
-
-      var obj = {
-        taskId: params["TaskId"],
-        instanceId: params["InstanceId"],
-        approvalBaseUrl: environment.ApprovalURL
-      }
-
-      this.inputObj = obj;
     });
    }
 
   ngOnInit() {
+    var obj = {
+      taskId: this.taskId,
+      instanceId: this.instanceId,
+      approvalBaseUrl: environment.ApprovalURL
+    }
+
+    this.inputObj = obj;
+
+    var ApvHoldObj = new ApprovalReqObj()
+    ApvHoldObj.TaskId = obj.taskId
+
+    this.HoldTask(ApvHoldObj);
+  }
+
+  HoldTask(obj){
+    this.http.post(AdInsConstant.ApvHoldTaskUrl, obj).subscribe(
+      (response)=>{
+        this.toastr.successMessage(response["Message"]);
+      }
+    )
   }
 
   onAvailableNextTask(event)
