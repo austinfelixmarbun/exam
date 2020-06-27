@@ -27,6 +27,7 @@ export class AdInsConstant {
 
   public static ApvHoldTaskUrl = environment.FoundationR3Url + "/Approval/Hold";
   public static ApvTakeBackTaskUrl = environment.FoundationR3Url + "/Approval/TakeBack";
+  public static ERROR_NO_CALLBACK_SETTING = "System Error - No Callback Handler set for {0} Callback Trigger";
 
   //Behaviour Type
   public static BehaviourTypeLock = "LOCK";

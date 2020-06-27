@@ -6,6 +6,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ApprovalReqObj } from 'app/shared/model/Approval/ApprovalReqObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
+import { String } from 'typescript-string-operations';
 
 @Component({
   selector: 'app-product-offering-approval',
@@ -55,7 +56,7 @@ export class ProductOfferingApprovalComponent implements OnInit {
       )
     }
     else{
-      this.toastr.errorMessage("There is no seting for "+ ReturnObject.Key +" callback");
+      this.toastr.errorMessage(String.Format(AdInsConstant.ERROR_NO_CALLBACK_SETTING, ReturnObject.Key));
     }
 
     console.log(ReturnObject);
