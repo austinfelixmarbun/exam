@@ -2,6 +2,7 @@ import { formatDate } from "@angular/common";
 import { environment } from "../../environments/environment";
 
 export class AdInsConstant {
+  //Application Item
   public static RestrictionBetween = "Between"
   public static RestrictionLike = "Like";
   public static RestrictionEq = "Eq";
@@ -18,6 +19,10 @@ export class AdInsConstant {
   public static RestrictionIsNotNull = "isnotnull";
   public static RestrictionGTE = "GTE";
   public static RestrictionLTE = "LTE";
+  
+  public static USER_ACCESS = "UserAccess";
+  public static ERROR_NO_CALLBACK_SETTING = "System Error - No Callback Handler for {0} Callback Trigger";
+  public static NOT_ELIGIBLE_FOR_TAKE_BACK = "You are not Eligible to Take Back this Task";
 
   //APPROVAL TASK MAPPER - TRX TYPE
   public static ApvTrxTypeProductHO = "PROD_HO_APV";
@@ -27,7 +32,6 @@ export class AdInsConstant {
 
   public static ApvHoldTaskUrl = environment.FoundationR3Url + "/Approval/Hold";
   public static ApvTakeBackTaskUrl = environment.FoundationR3Url + "/Approval/TakeBack";
-  public static ERROR_NO_CALLBACK_SETTING = "System Error - No Callback Handler set for {0} Callback Trigger";
 
   //Behaviour Type
   public static BehaviourTypeLock = "LOCK";

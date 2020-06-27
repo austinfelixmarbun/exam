@@ -7,22 +7,24 @@ import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { String } from 'typescript-string-operations';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 
 @Component({
   selector: 'app-product-offering-approval',
   templateUrl: './product-offering-approval.component.html',
-  providers:[NGXToastrService]
+  providers: [NGXToastrService]
 })
 export class ProductOfferingApprovalComponent implements OnInit {
 
   inputPagingObj: any;
   arrCrit: any;
+  userContext: CurrentUserContext = JSON.parse(localStorage.getItem(AdInsConstant.USER_ACCESS));
 
-  constructor(private toastr:NGXToastrService, private httpClient:HttpClient) { }
+  constructor(private toastr: NGXToastrService, private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.inputPagingObj=new UcpagingModule();
-    this.inputPagingObj._url="./assets/ucpaging/product/searchProductOfferingApproval.json";
+    this.inputPagingObj = new UcpagingModule();
+    this.inputPagingObj._url = "./assets/ucpaging/product/searchProductOfferingApproval.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOfferingApproval.json";
@@ -37,29 +39,30 @@ export class ProductOfferingApprovalComponent implements OnInit {
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 
-  CallBackHandler(ReturnObject){
+  CallBackHandler(ev) {
     var ApvReqObj = new ApprovalObj();
-    if(ReturnObject.Key == "HoldTask"){
-      ApvReqObj.TaskId = ReturnObject.RowObj.TaskId
+    if (ev.Key == "HoldTask") {
+      ApvReqObj.TaskId = ev.RowObj.TaskId
       this.httpClient.post(AdInsConstant.ApvHoldTaskUrl, ApvReqObj).subscribe(
-        (response)=>{
+        (response) => {
           this.toastr.successMessage(response["Message"]);
         }
       )
     }
-    else if(ReturnObject.Key == "TakeBack"){
-      ApvReqObj.TaskId = ReturnObject.RowObj.TaskId
-      this.httpClient.post(AdInsConstant.ApvTakeBackTaskUrl, ApvReqObj).subscribe(
-        (response)=>{
-          this.toastr.successMessage(response["Message"]);
-        }
-      )
+    else if (ev.Key == "TakeBack") {
+      if (String.Format("{0}:L", ev.RowObj.CURRENT_USER_ID) != String.Format("{0}:L", this.userContext.UserName)) {
+        this.toastr.warningMessage(AdInsConstant.NOT_ELIGIBLE_FOR_TAKE_BACK);
+      } else {
+        ApvReqObj.TaskId = ev.RowObj.TaskId
+        this.httpClient.post(AdInsConstant.ApvTakeBackTaskUrl, ApvReqObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+          }
+        )
+      }
     }
-    else{
-      this.toastr.errorMessage(String.Format(AdInsConstant.ERROR_NO_CALLBACK_SETTING, ReturnObject.Key));
+    else {
+      this.toastr.errorMessage(String.Format(AdInsConstant.ERROR_NO_CALLBACK_SETTING, ev.Key));
     }
-
-    console.log(ReturnObject);
   }
-
 }
