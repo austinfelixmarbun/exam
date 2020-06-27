@@ -54,6 +54,9 @@ export class ProductHOApprovalDetailComponent implements OnInit {
     this.http.post(AdInsConstant.ApvHoldTaskUrl, obj).subscribe(
       (response)=>{
         this.toastr.successMessage(response["Message"]);
+      },
+      (error)=>{
+        this.router.navigate(["/Product/HOApproval"]);
       }
     )
   }

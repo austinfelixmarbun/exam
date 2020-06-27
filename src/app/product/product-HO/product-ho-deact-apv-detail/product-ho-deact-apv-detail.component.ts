@@ -51,6 +51,9 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
     this.http.post(AdInsConstant.ApvHoldTaskUrl, obj).subscribe(
       (response)=>{
         this.toastr.successMessage(response["Message"]);
+      },
+      (error)=>{
+        this.router.navigate(["/Product/HODeactivateApproval"]);
       }
     )
   }
@@ -63,7 +66,7 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
   onApprovalSubmited()
   {
     this.toastr.successMessage("Success");
-    this.router.navigate(["/Product/HODeactivate"]);
+    this.router.navigate(["/Product/HODeactivateApproval"]);
   }
   onCancelClick() {
     this.router.navigate(["/Product/HODeactivateApproval"]);
