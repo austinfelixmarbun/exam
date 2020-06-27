@@ -50,7 +50,7 @@ export class ProductOfferingApprovalComponent implements OnInit {
       )
     }
     else if (ev.Key == "TakeBack") {
-      if (String.Format("{0}:L", ev.RowObj.CURRENT_USER_ID) != String.Format("{0}:L", this.userContext.UserName)) {
+      if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(AdInsConstant.NOT_ELIGIBLE_FOR_TAKE_BACK);
       } else {
         ApvReqObj.TaskId = ev.RowObj.TaskId
