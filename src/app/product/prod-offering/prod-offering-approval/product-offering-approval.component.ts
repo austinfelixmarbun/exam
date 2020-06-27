@@ -3,7 +3,7 @@ import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { ApprovalReqObj } from 'app/shared/model/Approval/ApprovalReqObj.Model';
+import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { String } from 'typescript-string-operations';
@@ -38,7 +38,7 @@ export class ProductOfferingApprovalComponent implements OnInit {
   }
 
   CallBackHandler(ReturnObject){
-    var ApvReqObj = new ApprovalReqObj();
+    var ApvReqObj = new ApprovalObj();
     if(ReturnObject.Key == "HoldTask"){
       ApvReqObj.TaskId = ReturnObject.RowObj.TaskId
       this.httpClient.post(AdInsConstant.ApvHoldTaskUrl, ApvReqObj).subscribe(

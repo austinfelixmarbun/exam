@@ -1,4 +1,4 @@
-export class ApprovalReqObj {
+export class ApprovalObj {
     TaskId : number
 
     constructor(){

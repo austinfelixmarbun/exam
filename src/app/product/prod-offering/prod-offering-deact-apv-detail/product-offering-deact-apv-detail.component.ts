@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ApprovalReqObj } from 'app/shared/model/Approval/ApprovalReqObj.Model';
+import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 
@@ -41,7 +41,7 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
 
     this.inputObj = obj;
 
-    var ApvHoldObj = new ApprovalReqObj()
+    var ApvHoldObj = new ApprovalObj()
     ApvHoldObj.TaskId = obj.taskId
 
     this.HoldTask(ApvHoldObj);

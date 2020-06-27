@@ -4,7 +4,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
-import { ApprovalReqObj } from 'app/shared/model/Approval/ApprovalReqObj.Model';
+import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 
 @Component({
   selector: 'app-product-ho-approval-detail',
@@ -44,7 +44,7 @@ export class ProductHOApprovalDetailComponent implements OnInit {
 
     this.inputObj = obj;
 
-    var ApvHoldObj = new ApprovalReqObj()
+    var ApvHoldObj = new ApprovalObj()
     ApvHoldObj.TaskId = obj.taskId
 
     this.HoldTask(ApvHoldObj);

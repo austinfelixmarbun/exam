@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
-import { ApprovalReqObj } from 'app/shared/model/Approval/ApprovalReqObj.Model';
+import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 
 @Component({
   selector: 'app-product-offering-approval-detail',
@@ -42,7 +40,7 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
 
     this.inputObj = obj;
 
-    var ApvHoldObj = new ApprovalReqObj()
+    var ApvHoldObj = new ApprovalObj()
     ApvHoldObj.TaskId = obj.taskId
 
     this.HoldTask(ApvHoldObj);
@@ -53,13 +51,13 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
       (response)=>{
         this.toastr.successMessage(response["Message"]);
       },
-      (error)=>{
+      ()=>{
         this.router.navigate(["/Product/OfferingApproval"]);
       }
     )
   }
 
-  onAvailableNextTask(event)
+  onAvailableNextTask()
   {
     
   }
@@ -77,7 +75,7 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
       Result : event.result
     }
     this.http.post(AdInsConstant.UpdateProdOfferingPostApv, data).subscribe(
-      (response) => {
+      () => {
         this.toastr.successMessage("Success");
         this.router.navigate(["/Product/OfferingApproval"]);
       },
