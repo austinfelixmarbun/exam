@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { String } from 'typescript-string-operations';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-offering-approval',
@@ -20,7 +21,7 @@ export class ProductOfferingApprovalComponent implements OnInit {
   arrCrit: any;
   userContext: CurrentUserContext = JSON.parse(localStorage.getItem(AdInsConstant.USER_ACCESS));
 
-  constructor(private toastr: NGXToastrService, private httpClient: HttpClient) { }
+  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.inputPagingObj = new UcpagingModule();
@@ -36,12 +37,36 @@ export class ProductOfferingApprovalComponent implements OnInit {
     critObj.propName = 'CATEGORY_CODE';
     critObj.value = 'PRD_OFR_APV';
     this.arrCrit.push(critObj);
+
+    critObj = new CriteriaObj();
+    critObj.DataType = 'text';
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'CURRENT_USER_ID';
+    critObj.value = this.userContext.UserName;
+    this.arrCrit.push(critObj);
+
+    
+    critObj = new CriteriaObj();
+    critObj.DataType = 'text';
+    critObj.restriction = AdInsConstant.RestrictionOr;
+    critObj.propName = 'MAIN_USER_ID';
+    critObj.value = this.userContext.UserName;
+    this.arrCrit.push(critObj);
+
     this.inputPagingObj.addCritInput = this.arrCrit;
+
   }
 
   CallBackHandler(ev) {
     var ApvReqObj = new ApprovalObj();
-    if (ev.Key == "HoldTask") {
+    if(ev.Key == "Process"){
+      if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
+        this.toastr.warningMessage(AdInsConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
+      } else {
+        this.router.navigate(["/Product/OfferingApproval/Detail"], { queryParams: { "ProdOfferingHId": ev.RowObj.ProdOfferingHId, "TaskId" : ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId } });
+      }
+    }
+    else if (ev.Key == "HoldTask") {
       ApvReqObj.TaskId = ev.RowObj.TaskId
       this.httpClient.post(AdInsConstant.ApvHoldTaskUrl, ApvReqObj).subscribe(
         (response) => {
@@ -50,7 +75,7 @@ export class ProductOfferingApprovalComponent implements OnInit {
       )
     }
     else if (ev.Key == "TakeBack") {
-      if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
+      if (String.Format("{0:L}", ev.RowObj.MAIN_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(AdInsConstant.NOT_ELIGIBLE_FOR_TAKE_BACK);
       } else {
         ApvReqObj.TaskId = ev.RowObj.TaskId

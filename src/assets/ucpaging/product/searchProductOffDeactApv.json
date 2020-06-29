@@ -145,22 +145,8 @@
       "position": "center",
       "action": [
         {
-          "type": "edit",
-          "path": "/Product/OfferingDeactivateApproval/Detail",
-          "param": [
-            {
-              "type": "ProdOfferingHId",
-              "property": "ProdOfferingHId"
-            },
-            {
-              "type": "TaskId",
-              "property": "TaskId"
-            },
-            {
-              "type": "InstanceId",
-              "property": "InstanceId"
-            }
-          ]
+          "type": "callback",
+          "key": "Process"
         }
       ]
     },

@@ -145,22 +145,8 @@
       "position": "center",
       "action": [
         {
-          "type": "edit",
-          "path": "/Product/OfferingApproval/Detail",
-          "param": [
-            {
-              "type": "ProdOfferingHId",
-              "property": "ProdOfferingHId"
-            },
-            {
-              "type": "TaskId",
-              "property": "TaskId"
-            },
-            {
-              "type": "InstanceId",
-              "property": "InstanceId"
-            }
-          ]
+          "type": "callback",
+          "key": "Process"
         }
       ]
     },

@@ -145,22 +145,8 @@
       "position": "center",
       "action": [
         {
-          "type": "edit",
-          "path": "/Product/HOApproval/Detail",
-          "param": [
-            {
-              "type": "ProdHId",
-              "property": "ProdHId"
-            },
-            {
-              "type": "TaskId",
-              "property": "TaskId"
-            },
-            {
-              "type": "InstanceId",
-              "property": "InstanceId"
-            }
-          ]
+          "type": "callback",
+          "key": "Process"
         }
       ]
     },
