@@ -40,7 +40,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
     this.requestDeactURL = AdInsConstant.RequestDeactivation;
-    this.getValueReasonModel = AdInsConstant.GetValueReasonModel;
+    this.getValueReasonModel = AdInsConstant.GetListActiveRefReason;
     this.prodOfferVerUrl = AdInsConstant.GetListProdOfferingVersionByProdId;
 
     this.route.queryParams.subscribe(params => {

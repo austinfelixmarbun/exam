@@ -39,7 +39,7 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
     this.editUrl = AdInsConstant.RequestOfferingDeactivation;
-    this.getValueReasonModel = AdInsConstant.GetValueReasonModel;
+    this.getValueReasonModel = AdInsConstant.GetListActiveRefReason;
     this.ProdOfferingBranchUrl = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHIdAndApp;
 
     this.route.queryParams.subscribe(params => {
