@@ -20,6 +20,7 @@ export class ContactPersonAddEditComponent implements OnInit {
   @Output() objOutput: EventEmitter<any> = new EventEmitter();
   HiddenState: boolean = false;
   mode: string;
+  businessDt : Date;
 
   title: string = "Contact Person Main Info";
   title2: string = "Contact Person Address Info";
@@ -53,6 +54,9 @@ export class ContactPersonAddEditComponent implements OnInit {
   async ngOnInit() {
     this.mode = this.objInput["mode"];
     this.VendorContactPersonId = this.objInput["VendorContactPersonId"];
+
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDt = new Date(context["BusinessDt"]);
 
     var JobPosition = {
       RefMasterTypeCode: "JOB_POSITION",
