@@ -77,7 +77,7 @@
                   <lib-uc-show-errors [control]="type.controls['components'].controls[l].controls.OfferingCompntValue" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
-                <span class="material-icons col-md-1 pointer" *ngIf="(FormProdOfferingComp.controls['groups'].value[j].groupCode == 'RULE' || FormProdOfferingComp.controls['groups'].value[j].groupCode == 'SCORE') && type.controls['components'].value[l].IsProdOffering == true" (click)="DownloadRule(type.controls['components'].value[l].OfferingCompntValue,type.controls['components'].value[l].OfferingCompntValueDesc)">
+                <span class="material-icons col-md-1 pointer" *ngIf="(FormProdOfferingComp.controls['groups'].value[j].groupCode == 'RULE' || FormProdOfferingComp.controls['groups'].value[j].groupCode == 'SCORE') && type.controls['components'].value[l].IsProdOffering == true" (click)="DownloadRule(type.controls['components'].getRawValue()[l].OfferingCompntValue,type.controls['components'].value[l].OfferingCompntValueDesc)">
                   get_app
                 </span>
                 <label class="col-md-1" *ngIf="FormProdOfferingComp.controls['groups'].value[j].groupCode != 'RULE' && FormProdOfferingComp.controls['groups'].value[j].groupCode != 'SCORE'"> </label>
