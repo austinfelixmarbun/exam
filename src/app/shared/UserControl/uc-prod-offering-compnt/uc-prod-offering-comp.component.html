@@ -22,6 +22,13 @@
                   <lib-uc-show-errors [control]="type.controls['components'].controls[l].controls.OfferingCompntValue" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
+                <div class="col-md-4" *ngIf="type.controls['components'].value[l].ProdCompntType == 'MULTI_DDL' && type.controls['components'].value[l].IsProdOffering == true">
+                  <ng-multiselect-dropdown *ngIf="dictMultiOptions[type.controls['components'].value[l].RefProdCompntCode].length != 0" [placeholder]="'Search'" [data]="dictMultiOptions[type.controls['components'].value[l].RefProdCompntCode]"
+                                           [(ngModel)]="selectedMultiDDLItems[type.controls['components'].value[l].RefProdCompntCode]" [ngModelOptions]="{standalone: true}" [settings]="dropdownSettings" (onDropDownClose)="onMultiDDLChangeEvent(type.controls['components'].value[l].RefProdCompntCode,l,j)">
+                  </ng-multiselect-dropdown>
+                  <lib-uc-show-errors [control]="node.controls.OfferingCompntValue" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
                 <div class="col-md-4" *ngIf="type.controls['components'].value[l].ProdCompntType == 'AMT' && type.controls['components'].value[l].IsProdOffering == true">
                   <input type="number" class="form-control adInsInput width-95-per" formControlName="OfferingCompntValue">
                   <lib-uc-show-errors [control]="type.controls['components'].controls[l].controls.OfferingCompntValue" [submit]="enjiForm.submitted">

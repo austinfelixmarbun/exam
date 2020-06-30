@@ -12,7 +12,7 @@ import { CustomizerComponent } from 'app/shared/customizer/customizer.component'
 import { NotificationSidebarComponent } from 'app/shared/notification-sidebar/notification-sidebar.component';
 import { ToggleFullscreenDirective } from "app/shared/directives/toggle-fullscreen.directive";
 import { ContextMenuModule } from 'ngx-contextmenu';
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
     exports: [
@@ -31,7 +31,8 @@ import { ContextMenuModule } from 'ngx-contextmenu';
         CommonModule,
         NgbModule,
         TranslateModule,
-        ContextMenuModule.forRoot()
+      ContextMenuModule.forRoot(),
+      NgMultiSelectDropDownModule
     ],
     declarations: [
         FooterComponent,
