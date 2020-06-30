@@ -230,7 +230,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         } 
         this.RequestNegativeCustObj.VipNotes = this.VipNotes;
         this.http.post(AdInsConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
-          () => {
+          (response) => {
             var custId = response['CustId'];
             this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { 'IdCust': custId, 'From': 'CustPaging' } });
           },

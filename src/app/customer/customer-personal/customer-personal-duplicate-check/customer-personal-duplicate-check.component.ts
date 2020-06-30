@@ -244,7 +244,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.addCustObj.CustPersonalObj.MotherMaidenName = item.MotherMaidenName;
         this.addCustObj.CustPersonalObj.IsRestInPeace = false;
         this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
-          () => {
+          (response) => {
             this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId, 'From': 'CustPaging' } });
           },
           error => {
