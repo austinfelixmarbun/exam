@@ -1,6 +1,7 @@
 import { formatDate } from "@angular/common";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CurrentUserContext } from "./model/CurrentUserContext.model";
+import { environment } from "environments/environment";
 
 export class AdInsHelper {
     //Function
@@ -141,5 +142,9 @@ export class AdInsHelper {
             }
         }
         return parsedValue;
+    }
+    public static OpenCustomerViewByCustId(CustId){
+        var url = environment.FoundationR3Web + "/Customer/CustomerView/Page?CustId=" + CustId;
+        window.open(url, "_blank");
     }
 }

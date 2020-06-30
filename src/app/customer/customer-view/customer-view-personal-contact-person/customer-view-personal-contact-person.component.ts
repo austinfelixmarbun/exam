@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { environment } from 'environments/environment.sit';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-view-personal-contact-person',
@@ -47,8 +48,7 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
     this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
       response => {
         this.resCustObj = response;
-        window.open( environment.FoundationR3Web + "/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
-        // window.open("/Customer/CustomerView/Page?CustId=" + this.resCustObj.CustId, "_blank");
+        AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
       },
       error => {
         console.log(error);
