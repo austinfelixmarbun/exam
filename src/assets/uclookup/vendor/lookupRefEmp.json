@@ -20,7 +20,8 @@
     ],
     "querystring": {
         "select": "SELECT A.EMP_NO AS EmpNo, A.EMP_NAME AS EmpName, A.REF_EMP_ID AS RefEmpId",
-        "from": "FROM dbo.REF_EMP AS A INNER JOIN REF_USER AS B ON A.REF_EMP_ID = B.REF_EMP_ID"
+        "from": "FROM dbo.REF_EMP AS A INNER JOIN REF_USER AS B ON A.REF_EMP_ID = B.REF_EMP_ID",
+        "where": "WHERE A.IS_ACTIVE = 1"
     },
     "headerList": [
         {

@@ -234,28 +234,8 @@
                             "conditions": [
                                 {
                                     "property": "MrSrvyStatCode",
-                                    "value": "DONE",
+                                    "value": "NEW",
                                     "restriction": "EQ"
-                                }
-                            ],
-                            "result" : {
-                                "type": "url",
-                                "path" : "/Survey/Task",
-                                "param" : [
-                                    {
-                                        "type" : "SrvyOrderId",
-                                        "property" : "SrvyOrderId"
-                                    }
-                                ]
-                            },
-                            "isHide" : true
-                        },
-                        {
-                            "conditions": [
-                                {
-                                    "property": "MrSrvyStatCode",
-                                    "value": "DONE",
-                                    "restriction": "NEQ"
                                 }
                             ],
                             "result" : {
