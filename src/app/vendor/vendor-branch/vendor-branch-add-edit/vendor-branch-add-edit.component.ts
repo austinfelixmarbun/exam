@@ -86,8 +86,8 @@ export class VendorBranchAddEditComponent implements OnInit {
     ReservedField7: [''], //MaxRefundType
     ReservedField8: [''], //MaxRefundValue
     ReservedField9: [''], //ASSGMNT_TYPE tele, field
-    MrTaxCalcMethodCode: [''],
-    IsVat: [true],
+    MrTaxCalcMethodCode: ['', Validators.required],
+    IsVat: [true, Validators.required],
     TaxIdNo: ['', Validators.required],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
