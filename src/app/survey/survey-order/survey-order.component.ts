@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { UcpagingComponent } from '@adins/ucpaging';
 
 @Component({
   selector: 'app-survey-order',
@@ -11,6 +13,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
   styleUrls: ['./survey-order.component.scss']
 })
 export class SurveyOrderComponent implements OnInit {
+
+  @ViewChild(UcpagingComponent) ucPaging: UcpagingComponent;
 
   inputPagingObj: any;
 
@@ -48,6 +52,7 @@ export class SurveyOrderComponent implements OnInit {
     this.http.post(AdInsConstant.SendSrvyOrder, SrvyOrderObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
+        this.ucPaging.searchPagination(1);
       },
       error => {
         console.log(error);
