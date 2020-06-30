@@ -31,7 +31,6 @@
                 <span *ngIf="menuItem.Class == ''; then internalNoSubBlock else internalHasSubBlock"></span>
                 <ng-template #internalNoSubBlock>
                     <a [routerLink]="menuItem.Class == '' ? [menuItem.Path] : null"
-                        [queryParams]="genParam(menuItem.Params)"
                         *ngIf="!menuItem.IsExternalLink; else externalLinkBlock" [contextMenu]="basicMenu"
                         [contextMenuSubject]="menuItem">
                         <i [ngClass]="[menuItem.Icon]"></i>
