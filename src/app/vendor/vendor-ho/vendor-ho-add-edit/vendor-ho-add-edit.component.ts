@@ -206,21 +206,15 @@ export class VendorHoAddEditComponent implements OnInit {
     if(this.VendorForm.controls.IsNpwpExist.value == true){
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
-      this.VendorForm.controls.IsVat.setValidators(Validators.required);
-      this.VendorForm.controls.MrTaxCalcMethodCode.setValidators(Validators.required);
       this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     }else{
       this.inputLookupZipcodeObj.isRequired = false;
       if(!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
-      this.VendorForm.controls.IsVat.clearValidators();
-      this.VendorForm.controls.MrTaxCalcMethodCode.clearValidators();
       this.VendorForm.controls.TaxIdNo.clearValidators();
       this.VendorForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
     }
-    this.VendorForm.controls.IsVat.updateValueAndValidity();
-    this.VendorForm.controls.MrTaxCalcMethodCode.updateValueAndValidity();
     this.VendorForm.controls.TaxIdNo.updateValueAndValidity();
     this.VendorForm.controls.TaxpayerName.updateValueAndValidity();
   }
@@ -346,6 +340,8 @@ export class VendorHoAddEditComponent implements OnInit {
       this.vendorHoObj.VendorObj.IsActive = this.VendorForm.controls.IsActive.value;
       this.vendorHoObj.VendorObj.VendorParentId = this.VendorForm.controls.VendorParentId.value;
       this.vendorHoObj.VendorObj.MrVendorClass = "HO";
+      this.vendorHoObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
+      this.vendorHoObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorHoObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
 
 
@@ -354,8 +350,6 @@ export class VendorHoAddEditComponent implements OnInit {
       }
 
       if (this.VendorForm.controls.IsNpwpExist.value == true) {
-        this.vendorHoObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
-        this.vendorHoObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
         this.vendorHoObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
         this.vendorHoObj.VendorObj.TaxpayerName = this.VendorForm.controls.TaxpayerName.value;
 

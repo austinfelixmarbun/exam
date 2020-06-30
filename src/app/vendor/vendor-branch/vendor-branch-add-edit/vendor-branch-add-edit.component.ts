@@ -111,7 +111,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     } else {
       this.setDropdown();
       this.setLookup();
-      this.checkType();
     }
   }
 
@@ -255,8 +254,8 @@ export class VendorBranchAddEditComponent implements OnInit {
         }
         if (this.MrVendorCategoryCode == "AGENCY_PERSONAL" || this.MrVendorCategoryCode == "AGENCY_COMPANY") {
           this.VendorForm.controls.MrVendorTypeCode.disable();
-          this.checkType();
         }
+        this.checkType();
       }
     );
 
@@ -305,21 +304,15 @@ export class VendorBranchAddEditComponent implements OnInit {
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
-      this.VendorForm.controls.IsVat.setValidators(Validators.required);
-      this.VendorForm.controls.MrTaxCalcMethodCode.setValidators(Validators.required);
       this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
       this.inputLookupZipcodeObj.isRequired = false;
       if (!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
-      this.VendorForm.controls.IsVat.clearValidators();
-      this.VendorForm.controls.MrTaxCalcMethodCode.clearValidators();
       this.VendorForm.controls.TaxIdNo.clearValidators();
       this.VendorForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
     }
-    this.VendorForm.controls.IsVat.updateValueAndValidity();
-    this.VendorForm.controls.MrTaxCalcMethodCode.updateValueAndValidity();
     this.VendorForm.controls.TaxIdNo.updateValueAndValidity();
     this.VendorForm.controls.TaxpayerName.updateValueAndValidity();
   }
@@ -348,6 +341,9 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   checkType() {
+    if(this.VendorForm.controls.MrVendorTypeCode.value != ""){
+      this.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
+    }
     if (this.MrVendorTypeCode == 'C') {
       this.VendorForm.controls.MrIdTypeCode.clearValidators();
       this.VendorForm.controls.IdNo.clearValidators();
@@ -451,6 +447,9 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.VendorForm.controls.ReservedField8.updateValueAndValidity();
   }
 
+  CHECKFORM(){
+    console.log(this.VendorForm)
+  }
   SaveForm() {
     if (Date.parse(this.VendorForm.controls.EstablishmentDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
       this.toastr.errorMessage("Establishment Date Must Be Lesser Than Business Date");
@@ -487,6 +486,8 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.ReservedField7 = "";
       this.vendorBranchObj.VendorObj.ReservedField8 = "";
       this.vendorBranchObj.VendorObj.ReservedField9 = "";
+      this.vendorBranchObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
+      this.vendorBranchObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorBranchObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value
     }
 
@@ -504,8 +505,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
 
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
-      this.vendorBranchObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
-      this.vendorBranchObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorBranchObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
       this.vendorBranchObj.VendorObj.TaxpayerName = this.VendorForm.controls.TaxpayerName.value;
 

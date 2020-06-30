@@ -306,13 +306,13 @@ export class VendorEmployeeComponent implements OnInit {
     this.VendorBranchEmpObj.VendorEmpObj.IsContactPerson = this.VendorEmpForm.controls.IsContactPerson.value;
     this.VendorBranchEmpObj.VendorEmpObj.VendorEmpRating = this.VendorEmpForm.controls.VendorEmpRating.value;
     this.VendorBranchEmpObj.VendorEmpObj.RowVersion = "";
+    this.VendorBranchEmpObj.VendorEmpObj.MrTaxCalcMethodCode = this.VendorEmpForm.controls.MrTaxCalcMethodCode.value;
     this.VendorBranchEmpObj.VendorEmpObj.IsNpwpExist = this.VendorEmpForm.controls.IsNpwpExist.value;
     this.VendorBranchEmpObj.VendorEmpObj.SupervisorId = this.VendorBranchEmpObj.VendorEmpObj.SupervisorId;
 
     if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
       this.VendorBranchEmpObj.VendorEmpObj.TaxIdNo = this.VendorEmpForm.controls.TaxIdNo.value;
       this.VendorBranchEmpObj.VendorEmpObj.TaxpayerName = this.VendorEmpForm.controls.TaxpayerName.value;
-      this.VendorBranchEmpObj.VendorEmpObj.MrTaxCalcMethodCode = this.VendorEmpForm.controls.MrTaxCalcMethodCode.value;
 
       this.VendorBranchEmpObj.VendorAddrObj.MrAddrTypeCode = "TAX";
       this.VendorBranchEmpObj.VendorAddrObj.Zipcode = this.VendorBranchEmpObj.VendorAddrObj.Zipcode;

@@ -203,21 +203,15 @@ export class VendorHoldingAddEditComponent implements OnInit {
     if(this.VendorForm.controls.IsNpwpExist.value == true){
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
-      this.VendorForm.controls.IsVat.setValidators(Validators.required);
-      this.VendorForm.controls.MrTaxCalcMethodCode.setValidators(Validators.required);
       this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     }else{
       this.inputLookupZipcodeObj.isRequired = false;
       if(!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
-      this.VendorForm.controls.IsVat.clearValidators();
-      this.VendorForm.controls.MrTaxCalcMethodCode.clearValidators();
       this.VendorForm.controls.TaxIdNo.clearValidators();
       this.VendorForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
     }
-    this.VendorForm.controls.IsVat.updateValueAndValidity();
-    this.VendorForm.controls.MrTaxCalcMethodCode.updateValueAndValidity();
     this.VendorForm.controls.TaxIdNo.updateValueAndValidity();
     this.VendorForm.controls.TaxpayerName.updateValueAndValidity();
   }
@@ -268,6 +262,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.vendorHoldingObj.VendorObj.ReservedField1 = this.VendorForm.controls.ReservedField1.value;
       this.vendorHoldingObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
       this.vendorHoldingObj.VendorObj.MrVendorClass = "HOLDING";
+      this.vendorHoldingObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
+      this.vendorHoldingObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorHoldingObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
 
       if (this.vendorHoldingObj.VendorObj.MrVendorTypeCode == "P") {
@@ -275,8 +271,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
       }
 
       if (this.VendorForm.controls.IsNpwpExist.value == true) {
-        this.vendorHoldingObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
-        this.vendorHoldingObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
         this.vendorHoldingObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
         this.vendorHoldingObj.VendorObj.TaxpayerName = this.VendorForm.controls.TaxpayerName.value;
 
