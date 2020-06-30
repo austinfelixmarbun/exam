@@ -140,7 +140,7 @@ export class VendorEmployeeComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
-        if (this.mode != "edit" || this.resultVendorEmpAndAddr.VendorEmpObj.IsNpwpExist != true) {
+        if (this.mode != "edit") {
           this.VendorEmpForm.patchValue({
             MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
           });

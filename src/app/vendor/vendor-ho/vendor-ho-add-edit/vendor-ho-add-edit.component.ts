@@ -193,7 +193,7 @@ export class VendorHoAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
-        if (this.mode != "edit" || this.result.VendorObj.IsNpwpExist != true) {
+        if (this.mode != "edit") {
           this.VendorForm.patchValue({
             MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
           });

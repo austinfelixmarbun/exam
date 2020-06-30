@@ -291,7 +291,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
-        if (this.mode != "edit" || this.result.VendorObj.IsNpwpExist != true) {
+        if (this.mode != "edit") {
           this.VendorForm.patchValue({
             MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
           });
@@ -447,9 +447,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.VendorForm.controls.ReservedField8.updateValueAndValidity();
   }
 
-  CHECKFORM(){
-    console.log(this.VendorForm)
-  }
   SaveForm() {
     if (Date.parse(this.VendorForm.controls.EstablishmentDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
       this.toastr.errorMessage("Establishment Date Must Be Lesser Than Business Date");
