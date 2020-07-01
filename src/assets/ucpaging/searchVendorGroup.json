@@ -4,7 +4,7 @@
     "component": [
         {
             "type": "dropdown",
-            "name": "A.MR_VENDOR_CATEGORY_CODE",
+            "name": "VG.MR_VENDOR_CATEGORY_CODE",
             "id": "VendorCategoryId",
             "value": "",
             "placeholder": "Placeholder",
@@ -21,7 +21,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.IS_ACTIVE",
+            "name": "VG.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -42,7 +42,7 @@
         },
         {
             "type": "textbox",
-            "name": "A.VENDOR_GRP_CODE",
+            "name": "VG.VENDOR_GRP_CODE",
             "id": "VendorGrpCodeId",
             "value": "",
             "label": "Group Code",
@@ -50,7 +50,7 @@
         },
         {
             "type": "textbox",
-            "name": "A.VENDOR_GRP_NAME",
+            "name": "VG.VENDOR_GRP_NAME",
             "id": "VendorGrpNameId",
             "value": "",
             "label": "Group Name",
@@ -66,19 +66,19 @@
             "type": "sort",
             "position": "center",
             "label": "GROUP CODE",
-            "name": "VendorGrpCode"
+            "name": "VG.VENDOR_GRP_CODE"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "GROUP NAME",
-            "name": "VendorGrpName"
+            "name": "VG.VENDOR_GRP_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Active Status",
-            "name": "IsActive"
+            "name": "VG.IS_ACTIVE"
         },
         {
             "type": "sort",
