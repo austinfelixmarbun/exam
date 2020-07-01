@@ -156,6 +156,18 @@
           </lib-ucSubsection>
           <div id="EmpTaxInfoId">
             <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Tax Calculation Method</label>
+              <div class="col-md-9">
+                <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.MrTaxCalcMethodCode.invalid }">
+                  <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
+                    {{it.Value}}</option>
+                </select>
+                <show-errors [control]="VendorEmpForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
+                </show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
               <label class="col-md-3">NPWP Exist</label>
               <div class="col-md-9">
                 <input type="checkbox" formControlName="IsNpwpExist"
@@ -163,18 +175,6 @@
               </div>
             </div>
             <div [hidden]="isHidden">
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Tax Calculation Method</label>
-                <div class="col-md-9">
-                  <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.MrTaxCalcMethodCode.invalid }">
-                    <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
-                      {{it.Value}}</option>
-                  </select>
-                  <show-errors [control]="VendorEmpForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
-                  </show-errors>
-                </div>
-              </div>
               <div class="form-body">
                 <div class="form-group row">
                   <label class="col-md-3" translate>Tax Number </label>

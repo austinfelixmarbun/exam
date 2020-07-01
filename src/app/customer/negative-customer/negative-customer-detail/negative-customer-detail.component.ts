@@ -416,6 +416,10 @@ export class NegativeCustomerDetailComponent implements OnInit {
       this.NegativeCustForm.removeControl('PersonalLookup');
     }
 
+    this.inputLookupCustPersonalObj.nameSelect = "";
+    this.inputLookupCustCompanyObj.nameSelect = "";
+    this.custType = e.target.value;
+
     this.NegativeCustForm.reset();
     var refMasterIdTypeObj = new RefMasterObj();
     refMasterIdTypeObj.RefMasterTypeCode = "ID_TYPE";
@@ -432,19 +436,15 @@ export class NegativeCustomerDetailComponent implements OnInit {
         this.negativeTypeList = response[1];
         this.negativeSourceList = response[2];
         this.NegativeCustForm.patchValue({
-          NegativeCustId: 0,
           CustId: 0,
           IsActive: true,
+          NegativeCustId: 0,
           MrCustTypeCode: selected,
-
+          MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key,
           MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key,
           MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key
         });
       });
-
-    this.inputLookupCustPersonalObj.nameSelect = "";
-    this.inputLookupCustCompanyObj.nameSelect = "";
-    this.custType = e.target.value;
   }
 
   getLookupCustPersonalResponse(e) {

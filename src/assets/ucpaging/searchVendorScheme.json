@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "dropdown",
-            "name": "vs.MR_VENDOR_CATEGORY_CODE", 
+            "name": "VS.MR_VENDOR_CATEGORY_CODE", 
             "id": "MrVendorCategoryCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -20,7 +20,7 @@
         },
         {
             "type": "dropdown",
-            "name": "vs.IS_ACTIVE",
+            "name": "VS.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -41,7 +41,7 @@
         },
         {
             "type": "textbox",
-            "name": "vs.VENDOR_SCHM_CODE",
+            "name": "VS.VENDOR_SCHM_CODE",
             "id": "VendorSchemeCodeId",
             "value": "",
             "label": "Scheme Code",
@@ -49,7 +49,7 @@
         },
         {
             "type": "textbox",
-            "name": "vs.VENDOR_SCHM_NAME",
+            "name": "VS.VENDOR_SCHM_NAME",
             "id": "VendorSchemeNameId",
             "value": "",
             "label": "Scheme Name",
@@ -57,9 +57,9 @@
         }
     ],
     "querystring": {
-        "select": "SELECT vs.VENDOR_SCHM_CODE AS VendorSchmCode, vs.VENDOR_SCHM_NAME AS VendorSchmName, vs.VENDOR_SCHM_ID AS VendorSchmId, vs.IS_ACTIVE AS IsActive, COUNT(vsm.VENDOR_SCHM_MBR_ID) AS NumMember, vs.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode",
-        "from": "FROM VENDOR_SCHM vs LEFT JOIN VENDOR_SCHM_MBR vsm ON vsm.VENDOR_SCHM_ID = vs.VENDOR_SCHM_ID",
-        "groupby": "GROUP BY vs.VENDOR_SCHM_CODE,  vs.VENDOR_SCHM_CODE, vs.VENDOR_SCHM_NAME, vs.IS_ACTIVE, vs.VENDOR_SCHM_ID, vsm.VENDOR_ID, vs.MR_VENDOR_CATEGORY_CODE"
+        "select": "SELECT VS.VENDOR_SCHM_CODE AS VendorSchmCode, VS.VENDOR_SCHM_NAME AS VendorSchmName, VS.IS_ACTIVE AS IsActive, COUNT(VSM.VENDOR_SCHM_MBR_ID) AS NumOfMbr, VS.VENDOR_SCHM_ID AS VendorSchmId",
+        "from": "FROM DBO.VENDOR_SCHM VS LEFT JOIN DBO.VENDOR_SCHM_MBR VSM ON VS.VENDOR_SCHM_ID = VSM.VENDOR_SCHM_ID",
+        "groupby": "GROUP BY VS.VENDOR_SCHM_ID, VS.VENDOR_SCHM_CODE, VS.VENDOR_SCHM_NAME, VS.IS_ACTIVE"
     },
     "headerList": [
         {
@@ -70,7 +70,7 @@
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "SCHEME NAME",
             "name": "VendorSchmName"
         },
@@ -84,7 +84,7 @@
             "type": "label",
             "position": "center",
             "label": "# OF MEMBER",
-            "name": "NumMember"
+            "name": "NumOfMbr"
         },
         {
             "type": "label",
@@ -105,7 +105,7 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorSchmName"
         },
         {
@@ -116,7 +116,7 @@
         {
             "type": "text",
             "position": "center",
-            "property": "NumMember"
+            "property": "NumOfMbr"
         },
         {
             "type": "action",
