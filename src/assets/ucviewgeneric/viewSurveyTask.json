@@ -17,14 +17,36 @@
           "property": "SrvyFormSchmName"
         },
         {
-          "type": "text",
+          "type": "concat",
           "label": "Survey Subject",
-          "property": "MrSrvySubjCode"
+          "propertyList": [
+            {
+              "property": "MrSrvySubjCode",
+              "prefix": "",
+              "suffix": " - "
+            },
+            {
+              "property": "MrSrvySubj",
+              "prefix": "",
+              "suffix": ""
+            }
+          ]
         },
         {
-          "type": "text",
+          "type": "concat",
           "label": "Survey Object",
-          "property": "MrSrvySubj"
+          "propertyList": [
+            {
+              "property": "MrSrvyObjCode",
+              "prefix": "",
+              "suffix": " - "
+            },
+            {
+              "property": "MrSrvyObj",
+              "prefix": "",
+              "suffix": ""
+            }
+          ]
         },
         {
           "type": "text",

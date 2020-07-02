@@ -38,7 +38,7 @@ export class VendorGroupmemberComponent implements OnInit {
   vendorGrpMbrObj: any;
   checkboxAll = false;
   addUrl: string;
-  MrVendorCategoryCode: any;
+  MrVendorCategoryCode: string = '';
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -66,6 +66,27 @@ export class VendorGroupmemberComponent implements OnInit {
     crit1Obj.restriction = AdInsConstant.RestrictionEq;
     crit1Obj.value = this.MrVendorCategoryCode;
     this.arrCrit.push(crit1Obj);
+
+    if (this.MrVendorCategoryCode.includes("_HOLDING")) {
+      var crit1Obj = new CriteriaObj();
+      crit1Obj.propName = "MR_VENDOR_CLASS";
+      crit1Obj.restriction = AdInsConstant.RestrictionEq;
+      crit1Obj.value = "HOLDING";
+      this.arrCrit.push(crit1Obj);
+    } else if (this.MrVendorCategoryCode.includes("_HO")) {
+      var crit1Obj = new CriteriaObj();
+      crit1Obj.propName = "MR_VENDOR_CLASS";
+      crit1Obj.restriction = AdInsConstant.RestrictionEq;
+      crit1Obj.value = "HO";
+      this.arrCrit.push(crit1Obj);
+    } else if (this.MrVendorCategoryCode.includes("_BRANCH")) {
+      var crit1Obj = new CriteriaObj();
+      crit1Obj.propName = "MR_VENDOR_CLASS";
+      crit1Obj.restriction = AdInsConstant.RestrictionEq;
+      crit1Obj.value = "BRANCH";
+      this.arrCrit.push(crit1Obj);
+    }
+
     this.inputObj.addCritInput = this.arrCrit;
 
     this.GetListVendorGrpMbrByVendorGrpId();

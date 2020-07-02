@@ -23,7 +23,7 @@ export class VendorGroupPagingComponent implements OnInit {
 
     this.inputPagingObj.ddlEnvironments = [
       {
-        name: "A.MR_VENDOR_CATEGORY_CODE",
+        name: "VG.MR_VENDOR_CATEGORY_CODE",
         environment: environment.FoundationR3Url
       }
     ];

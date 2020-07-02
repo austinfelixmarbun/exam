@@ -303,33 +303,33 @@
             </lib-ucSubsection>
             <div id="TaxInformation">
               <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrTaxCalcMethodCode.invalid }">
+                    <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="VendorForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label">VAT</label>
+                <div class="col-md-9">
+                  <select class="form-control" formControlName="IsVat">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
                 <label class="col-md-3">NPWP Exist</label>
                 <div class="col-md-9">
                   <input type="checkbox" formControlName="IsNpwpExist" (change)="NpwpCheck()">
                 </div>
               </div>
               <div [hidden]="isHidden">
-                <div class="form-group row">
-                  <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
-                  <div class="col-md-9">
-                    <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrTaxCalcMethodCode.invalid }">
-                      <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
-                        {{it.Value}}</option>
-                    </select>
-                    <lib-uc-show-errors [control]="VendorForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
-                    </lib-uc-show-errors>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adins-required-label">VAT</label>
-                  <div class="col-md-9">
-                    <select class="form-control" formControlName="IsVat">
-                      <option value="true">Yes</option>
-                      <option value="false">No</option>
-                    </select>
-                  </div>
-                </div>
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
                   <div class="col-md-9">
