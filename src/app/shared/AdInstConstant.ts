@@ -65,6 +65,9 @@ export class AdInsConstant {
   public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
   // ProductDeact
   public static PROD_REASON_DEACT = "PROD_DEACT"
+
+  //Product Status
+  public static ProdStatApproval = "APVL";
   // DOWNLOAD
   public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';
 
