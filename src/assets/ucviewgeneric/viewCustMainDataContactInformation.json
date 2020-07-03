@@ -8,22 +8,22 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "MOBILE PHONE 1",
+            "label": "Mobile Phone 1",
             "property": "MobilePhone1"
           },
           {
             "type": "text",
-            "label": "MOBILE PHONE 2",
+            "label": "Mobile Phone 2",
             "property": "MobilePhone2"
           },
           {
             "type": "text",
-            "label": "EMAIL 1",
+            "label": "Email 1",
             "property": "Email1"
           },
           {
             "type": "text",
-            "label": "EMAIL 2",
+            "label": "Email 2",
             "property": "Email2"
           }
         ],

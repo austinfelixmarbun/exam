@@ -13,7 +13,7 @@
         },
         {
           "type": "text",
-          "label": "NPWP",
+          "label": "Tax Id No",
           "property": "TaxIdNo"
         },
         {
@@ -29,17 +29,17 @@
         },
         {
           "type": "text",
-          "label": "ID Type",
+          "label": "Id Type",
           "property": "IdType"
         },
                 {
           "type": "text",
-          "label": "ID No",
+          "label": "Id No",
           "property": "IdNo"
         },
         {
           "type": "date",
-          "label": "ID Expired Date",
+          "label": "Id Expired Date",
           "property": "IdExpiredDt"
         },
         {

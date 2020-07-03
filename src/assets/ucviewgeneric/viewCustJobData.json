@@ -8,32 +8,32 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "CUSTOMER MODEL",
+            "label": "Customer Model",
             "property": "MrCustModelCode"
           },
           {
             "type": "text",
-            "label": "PROFESSION NAME",
+            "label": "Profession Name",
             "property": "ProfessionName"
           },
           {
             "type": "text",
-            "label": "PROFESSIONAL NO.",
+            "label": "Professional No.",
             "property": "ProfessionalNo"
           },
           {
             "type": "text",
-            "label": "JOB TITLE NAME",
+            "label": "Job Title Name",
             "property": "JobTitleName"
           },
           {
             "type": "text",
-            "label": "INDUSTRY TYPE NAME",
+            "label": "Industry Type Name",
             "property": "IndustryTypeName"
           },
           {
             "type": "date",
-            "label": "ESTABLISHMENT DATE",
+            "label": "Establishment Date",
             "property": "EmploymentEstablishmentDt"
           }
         ],

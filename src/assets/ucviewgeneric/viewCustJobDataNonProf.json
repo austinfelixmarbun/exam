@@ -8,17 +8,17 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "CUSTOMER MODEL",
+            "label": "Customer Model",
             "property": "CustModel"
           },
           {
             "type": "text",
-            "label": "JOB TITLE NAME",
+            "label": "Job Title Name",
             "property": "JobTitleName"
           },
           {
             "type": "text",
-            "label": "PROFESSION NAME",
+            "label": "Profession Name",
             "property": "ProfessionName"
           }
         ],

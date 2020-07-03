@@ -8,27 +8,27 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "INDUSTRY TYPE NAME",
+            "label": "Industry Type Name",
             "property": "IndTypeName"
           },
           {
             "type": "date",
-            "label": "ESTABLISHMENT DATE",
+            "label": "Establishment Date",
             "property": "EstDt"
           },
           {
             "type": "text",
-            "label": "NUMBER OF EMPLOYEE",
+            "label": "Number Of Employee",
             "property": "NumOfEmp"
           },
           {
             "type": "text",
-            "label": "TANDA DAFTAR PERUSAHAAN (TDP)",
+            "label": "Tanda Daftar Perusahaan (TDP)",
             "property": "RegNo"
           },
           {
             "type": "text",
-            "label": "SURAT IZIN USAHA PERDAGANGAN (SIUP)",
+            "label": "Surat Izin Usaha Perdagangan (SIUP)",
             "property": "LisNo"
           }
         ],

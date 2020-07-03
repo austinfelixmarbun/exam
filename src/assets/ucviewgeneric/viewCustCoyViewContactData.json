@@ -8,22 +8,22 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "NAME",
+            "label": "Name",
             "property": "Cpn"
           },
           {
             "type": "text",
-            "label": "JOB POSITION",
+            "label": "Job Position",
             "property": "Jp"
           },
           {
             "type": "text",
-            "label": "GENDER",
+            "label": "Gender",
             "property": "G"
           },
           {
             "type": "text",
-            "label": "JOB TITLE",
+            "label": "Job Title",
             "property": "Jtn"
           }
         ],

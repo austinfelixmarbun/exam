@@ -8,49 +8,49 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "CUSTOMER MODEL",
+            "label": "Customer Model",
             "property": "MrCustModelCode"
           },
           {
             "type": "text",
-            "label": "PROFESSION NAME",
+            "label": "Profession Name",
             "property": "ProfessionName"
           },
           {
             "type": "text",
-            "label": "JOB POSITION",
+            "label": "Job Position",
             "property": "JobPosition"
           },
           {
             "type": "text",
-            "label": "JOB TITLE NAME",
+            "label": "Job Title Name",
             "property": "JobTitleName"
           },
          
           {
             "type": "text",
-            "label": "NAMA PERUSAHAAN / USAHA",
+            "label": "Company Name",
             "property": "CoyName"
           },
 
           {
             "type": "text",
-            "label": "INDUSTRY TYPE NAME",
+            "label": "Industry Type Name",
             "property": "IndustryTypeName"
           },
           {
             "type": "text",
-            "label": "COMPANY SCALE",
+            "label": "Company Scale",
             "property": "CoyScale"
           },
           {
             "type": "text",
-            "label": "NUMBER OF EMPLOYEE",
+            "label": "Number Of Employee",
             "property": "NoOfEmp"
           },
           {
             "type": "date",
-            "label": "EMPLOYMENT ESTABLISHMENT DATE",
+            "label": "Employment Establishment Date",
             "property": "EmploymentEstablishmentDt"
           }
         ],
