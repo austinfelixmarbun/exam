@@ -21,8 +21,8 @@
                 <div class="col-md-9">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrVendorCategoryCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorSchmForm.controls.MrVendorCategoryCode.invalid }">
-                    <option *ngFor="let it of itemCategoryType" value="{{it.MasterCode}}">
-                      {{it.Descr}}</option>
+                    <option *ngFor="let it of itemCategoryType" value="{{it.Key}}">
+                      {{it.Value}}</option>
                   </select>
                   <lib-uc-show-errors [control]="VendorSchmForm.controls.MrVendorCategoryCode" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>

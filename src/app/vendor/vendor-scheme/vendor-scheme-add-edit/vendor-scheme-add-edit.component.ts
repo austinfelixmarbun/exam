@@ -45,17 +45,11 @@ export class VendorSchemeAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    var refMasterCategoryObj = {
-      RefMasterTypeCode: "VENDOR_CATEGORY",
-    }
-
-    //TEMUIAN STEVEN INI AMBIL DARI CONSTANTA
-
-    this.http.post("http://r3app-server/FOUNDATION_R3/RefMaster/GetListActiveRefMaster", refMasterCategoryObj).subscribe(
+    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: "VENDOR_CATEGORY"}).subscribe(
       (response) => {
         this.itemCategoryType = response["ReturnObject"];
         this.VendorSchmForm.patchValue({
-          MrVendorCategoryCode: this.itemCategoryType[0].MasterCode
+          MrVendorCategoryCode: this.itemCategoryType[0].Key
         });
       } 
     );
