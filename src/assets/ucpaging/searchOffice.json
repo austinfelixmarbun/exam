@@ -7,7 +7,7 @@
             "name": "A.OFFICE_CODE",
             "id": "OfficeCodeId",
             "value": "",
-            "label": "OFFICE CODE",
+            "label": "Office Code",
             "placeholder": "Placeholder"
         },
         {
@@ -15,7 +15,7 @@
             "name": "B.OFFICE_NAME",
             "id": "OfficeParentId",
             "value": "",
-            "label": "OFFICE PARENT",
+            "label": "Office Parent",
             "placeholder": "Placeholder"
         },
         {
@@ -23,14 +23,14 @@
             "name": "A.OFFICE_NAME",
             "id": "OfficeNameId",
             "value": "",
-            "label": "OFFICE NAME",
+            "label": "Office Name",
             "placeholder": "Placeholder"
         },
         {
             "type": "dropdown",
             "name": "A.IS_ACTIVE",
             "id": "ActiveStatusId",
-            "label": "ACTIVE",
+            "label": "Active",
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
@@ -52,7 +52,7 @@
             "name": "A.OFFICE_ADDR",
             "id": "OfficeAddrId",
             "value": "",
-            "label": "OFFICE ADDRESS",
+            "label": "Office Address",
             "placeholder": "Placeholder"
         },
         {

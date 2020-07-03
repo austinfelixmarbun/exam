@@ -16,8 +16,7 @@ import { VendorOfficeMbrObj } from 'app/shared/model/VendorOfficeMbrObj.Model';
 
 @Component({
   selector: 'app-vendor-branch-view',
-  templateUrl: './vendor-branch-view.component.html',
-  styleUrls: ['./vendor-branch-view.component.scss']
+  templateUrl: './vendor-branch-view.component.html'
 })
 export class VendorBranchViewComponent implements OnInit {
   VendorId: number;

@@ -9,7 +9,6 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 @Component({
   selector: 'app-vendor-branch-paging',
   templateUrl: './vendor-branch-paging.component.html',
-  styleUrls: ['./vendor-branch-paging.component.scss'],
   providers: [NGXToastrService]
 })
 export class VendorBranchPagingComponent implements OnInit {

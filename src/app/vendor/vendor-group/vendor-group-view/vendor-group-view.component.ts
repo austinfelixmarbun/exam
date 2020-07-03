@@ -9,8 +9,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-vendor-group-view',
-  templateUrl: './vendor-group-view.component.html',
-  styleUrls: ['./vendor-group-view.component.scss']
+  templateUrl: './vendor-group-view.component.html'
 })
 export class VendorGroupViewComponent implements OnInit {
   VendorGrpId: any;

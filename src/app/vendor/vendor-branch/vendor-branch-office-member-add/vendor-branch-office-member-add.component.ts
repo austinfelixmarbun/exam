@@ -9,8 +9,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 
 @Component({
   selector: 'app-vendor-branch-office-member-add',
-  templateUrl: './vendor-branch-office-member-add.component.html',
-  styleUrls: ['./vendor-branch-office-member-add.component.scss']
+  templateUrl: './vendor-branch-office-member-add.component.html'
 })
 
 export class VendorBranchOfficeMemberAddComponent implements OnInit {

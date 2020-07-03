@@ -12,7 +12,6 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 @Component({
   selector: 'app-office-group-member-add',
   templateUrl: './office-group-member-add.component.html',
-  styleUrls: ['./office-group-member-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class OfficeGroupMemberAddComponent implements OnInit {

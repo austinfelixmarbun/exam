@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-vendor-ho-info',
-  templateUrl: './vendor-ho-info.component.html',
-  styleUrls: ['./vendor-ho-info.component.scss']
+  templateUrl: './vendor-ho-info.component.html'
 })
 export class VendorHoInfoComponent implements OnInit {
   VendorId: any;

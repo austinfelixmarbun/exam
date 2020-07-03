@@ -15,8 +15,7 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 
 @Component({
   selector: 'app-vendor-employee',
-  templateUrl: './vendor-employee.component.html',
-  styleUrls: ['./vendor-employee.component.scss']
+  templateUrl: './vendor-employee.component.html'
 })
 export class VendorEmployeeComponent implements OnInit {
   @Input() objInput: any;

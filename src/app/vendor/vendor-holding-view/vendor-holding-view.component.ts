@@ -13,7 +13,6 @@ import { environment } from 'environments/environment';
 @Component({
   selector: 'app-vendor-holding-view',
   templateUrl: './vendor-holding-view.component.html',
-  styleUrls: ['./vendor-holding-view.component.scss'],
   providers: [NGXToastrService]
 })
 export class VendorHoldingViewComponent implements OnInit {

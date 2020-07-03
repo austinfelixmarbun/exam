@@ -7,8 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-vendor-holding-paging',
-  templateUrl: './vendor-holding-paging.component.html',
-  styleUrls: ['./vendor-holding-paging.component.scss']
+  templateUrl: './vendor-holding-paging.component.html'
 })
 export class VendorHoldingPagingComponent implements OnInit {
   inputPagingObj: any;

@@ -14,7 +14,6 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-office-emp-pos-add',
   templateUrl: './office-emp-pos-add.component.html',
-  styleUrls: ['./office-emp-pos-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class OfficeEmpPosAddComponent implements OnInit {

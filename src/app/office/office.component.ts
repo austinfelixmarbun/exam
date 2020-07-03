@@ -5,8 +5,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-office',
-  templateUrl: './office.component.html',
-  styleUrls: ['./office.component.scss']
+  templateUrl: './office.component.html'
 })
 
 export class OfficeComponent implements OnInit {

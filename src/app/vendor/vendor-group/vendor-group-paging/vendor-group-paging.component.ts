@@ -6,8 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-vendor-group-paging',
-  templateUrl: './vendor-group-paging.component.html',
-  styleUrls: ['./vendor-group-paging.component.scss']
+  templateUrl: './vendor-group-paging.component.html'
 })
 export class VendorGroupPagingComponent implements OnInit {
 
