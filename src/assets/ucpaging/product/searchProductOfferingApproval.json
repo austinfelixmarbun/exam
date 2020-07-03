@@ -7,7 +7,7 @@
       "name": "TL.TRX_NO",
       "id": "ProdOfferingCodeId",
       "value": "",
-      "label": "TRX NO",
+      "label": "Trx No",
       "placeholder": "Placeholder"
     },
     {
@@ -15,7 +15,7 @@
       "name": "P.PROD_OFFERING_NAME",
       "id": "ProdOfferingNameId",
       "value": "",
-      "label": "PRODUCT OFFERING NAME",
+      "label": "Product Offering Name",
       "placeholder": "Placeholder"
     }
   ],

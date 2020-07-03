@@ -7,7 +7,7 @@
       "name": "Prod_Code",
       "id": "ProdCodeId",
       "value": "",
-      "label": "PRODUCT CODE",
+      "label": "Product Code",
       "placeholder": "Placeholder"
     },
     {
@@ -15,7 +15,7 @@
       "name": "Prod_Name",
       "id": "ProdNameId",
       "value": "",
-      "label": "PRODUCT NAME",
+      "label": "Product Name",
       "placeholder": "Placeholder"
     },
     {
@@ -23,7 +23,7 @@
       "name": "A.PROD_DESCR",
       "id": "ProdDescId",
       "value": "",
-      "label": "PRODUCT DESCRIPTION",
+      "label": "Product Description",
       "placeholder": "Placeholder"
     }
   ],

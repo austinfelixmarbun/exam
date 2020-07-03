@@ -6,14 +6,14 @@
         "type": "textbox",
         "name": "Prod_Code",
         "id": "ProdCode",
-        "label": "Prod Code",
+        "label": "Product Code",
         "placeholder": "Product Code"
       },
       {
         "type": "textbox",
         "name": "Prod_Name",
         "id": "ProdName",
-        "label": "Prod Name",
+        "label": "Product Name",
         "placeholder": "Product Name"
       }
     ],
@@ -25,13 +25,13 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Prod Code",
+            "label": "Product Code",
             "name": "ProdCode"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "Prod Name",
+            "label": "Product Name",
             "name": "ProdName"
         },
         {
