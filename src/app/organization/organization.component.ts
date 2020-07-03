@@ -13,7 +13,6 @@ import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',
-  styleUrls: ['./organization.component.scss'],
   providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe]
 })
 export class OrganizationComponent implements OnInit {

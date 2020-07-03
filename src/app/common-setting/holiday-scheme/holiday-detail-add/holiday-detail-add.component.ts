@@ -10,7 +10,6 @@ import { HolidayDByYearObj } from 'app/shared/model/HolidayDByYearObj.Model';
 @Component({
   selector: 'app-holiday-detail-add',
   templateUrl: './holiday-detail-add.component.html',
-  styleUrls: ['./holiday-detail-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class HolidayDetailAddComponent implements OnInit {

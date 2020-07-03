@@ -13,7 +13,6 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 @Component({
   selector: 'app-notification-add-edit',
   templateUrl: './notification-add-edit.component.html',
-  styleUrls: ['./notification-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class NotificationAddEditComponent implements OnInit {

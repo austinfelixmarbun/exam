@@ -10,7 +10,6 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 @Component({
   selector: 'app-notification-approval-paging',
   templateUrl: './notification-approval-paging.component.html',
-  styleUrls: ['./notification-approval-paging.component.scss'],
   providers: [NGXToastrService, NgbPaginationConfig]
 })
 export class NotificationApprovalPagingComponent implements OnInit {

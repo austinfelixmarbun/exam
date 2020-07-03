@@ -9,7 +9,6 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 @Component({
   selector: 'app-province',
   templateUrl: './province.component.html',
-  styleUrls: ['./province.component.scss'],
   providers: [DecimalPipe]
 })
 export class ProvinceComponent implements OnInit {

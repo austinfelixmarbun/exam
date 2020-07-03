@@ -14,7 +14,6 @@ import { ListWorkingHourSchmDObj } from 'app/shared/model/ListWorkingHourSchmDOb
 @Component({
   selector: 'app-working-hour-d-detail',
   templateUrl: './working-hour-d-detail.component.html',
-  styleUrls: ['./working-hour-d-detail.component.scss'],
   providers: [NGXToastrService]
 })
 

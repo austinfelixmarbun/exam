@@ -7,7 +7,6 @@ import { environment } from 'environments/environment';
 @Component({
   selector: 'app-holiday-paging',
   templateUrl: './holiday-paging.component.html',
-  styleUrls: ['./holiday-paging.component.scss'],
   providers: [NGXToastrService]
 })
 export class HolidayPagingComponent implements OnInit {

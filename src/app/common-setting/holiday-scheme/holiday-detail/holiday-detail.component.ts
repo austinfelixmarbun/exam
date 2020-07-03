@@ -13,7 +13,6 @@ import { HolidayCopyObj } from 'app/shared/model/HolidayCopy.Model';
 @Component({
   selector: 'app-holiday-detail',
   templateUrl: './holiday-detail.component.html',
-  styleUrls: ['./holiday-detail.component.scss'],
   providers: [NGXToastrService]
 })
 export class HolidayDetailComponent implements OnInit {

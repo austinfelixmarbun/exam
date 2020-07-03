@@ -5,8 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-test-paging-v3',
-  templateUrl: './test-paging-v3.component.html',
-  styleUrls: ['./test-paging-v3.component.scss']
+  templateUrl: './test-paging-v3.component.html'
 })
 export class TestPagingV3Component implements OnInit {
 

@@ -16,7 +16,7 @@
       "name": "REG_RPT_CODE",
       "id": "regRptCodeId",
       "value": "",
-      "label": "Bi Code",
+      "label": "BI Code",
       "placeholder": "Placeholder",
       "datatype": "text"
     },

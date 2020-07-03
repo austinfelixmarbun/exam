@@ -10,7 +10,6 @@ import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
 @Component({
   selector: 'app-holiday-add',
   templateUrl: './holiday-add.component.html',
-  styleUrls: ['./holiday-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class HolidayAddComponent implements OnInit {

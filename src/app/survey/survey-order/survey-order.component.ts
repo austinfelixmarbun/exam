@@ -9,8 +9,7 @@ import { UcpagingComponent } from '@adins/ucpaging';
 
 @Component({
   selector: 'app-survey-order',
-  templateUrl: './survey-order.component.html',
-  styleUrls: ['./survey-order.component.scss']
+  templateUrl: './survey-order.component.html'
 })
 export class SurveyOrderComponent implements OnInit {
 

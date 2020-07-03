@@ -9,7 +9,6 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 @Component({
   selector: 'app-role-paging',
   templateUrl: './role-paging.component.html',
-  styleUrls: ['./role-paging.component.scss'],
   providers: [NGXToastrService, NgbPaginationConfig]
 })
 export class RolePagingComponent implements OnInit {

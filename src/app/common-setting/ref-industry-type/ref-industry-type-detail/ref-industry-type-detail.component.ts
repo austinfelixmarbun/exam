@@ -15,7 +15,6 @@ import { RefEconomicSectorObj } from 'app/shared/model/RefEconomicSectorObj.Mode
 @Component({
   selector: 'app-ref-industry-type-detail',
   templateUrl: './ref-industry-type-detail.component.html',
-  styleUrls: ['./ref-industry-type-detail.component.scss'],
   providers: [NGXToastrService]
 })
 export class RefIndustryTypeDetailComponent implements OnInit {

@@ -15,7 +15,6 @@ import { CustBankStmntHObj } from 'app/shared/model/CustBankStmntHObj.Model';
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',
   templateUrl: './cust-bank-acc-detail-section-findata.component.html',
-  styleUrls: ['./cust-bank-acc-detail-section-findata.component.scss'],
   providers: [NGXToastrService]
 })
 export class CustBankAccDetailSectionFindataComponent implements OnInit {

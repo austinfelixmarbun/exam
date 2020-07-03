@@ -10,7 +10,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-bank',
   templateUrl: './bank.component.html',
-  styleUrls: ['./bank.component.scss'],
   providers: [NGXToastrService, NgbPaginationConfig]
 })
 export class BankComponent implements OnInit {

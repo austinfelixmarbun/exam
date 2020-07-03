@@ -9,7 +9,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-profession-add-edit',
   templateUrl: './profession-add-edit.component.html',
-  styleUrls: ['./profession-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class ProfessionAddEditComponent implements OnInit {

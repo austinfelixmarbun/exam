@@ -9,8 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-survey-order-task',
-  templateUrl: './survey-order-task.component.html',
-  styleUrls: ['./survey-order-task.component.scss']
+  templateUrl: './survey-order-task.component.html'
 })
 export class SurveyOrderTaskComponent implements OnInit {
 

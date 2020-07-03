@@ -8,8 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-cust-legal-doc-detail',
-  templateUrl: './cust-legal-doc-detail.component.html',
-  styleUrls: ['./cust-legal-doc-detail.component.scss']
+  templateUrl: './cust-legal-doc-detail.component.html'
 })
 export class CustLegalDocDetailComponent implements OnInit {
   @Input() CustCompanyId: number;
