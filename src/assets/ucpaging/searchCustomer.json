@@ -48,25 +48,25 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "Customer No",
+            "label": "CUSTOMER NO",
             "name": "C.CUST_NO"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Customer Name",
+            "label": "CUSTOMER NAME",
             "name": "C.CUST_NAME"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Type",
+            "label": "TYPE",
             "name": "C.MR_CUST_TYPE_CODE"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Id No",
+            "label": "ID NO",
             "name": "C.ID_NO"
         },
         {

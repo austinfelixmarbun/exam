@@ -5,37 +5,37 @@
         {
           "type": "sort",
           "position": "left",
-          "label": "Address Type Name",
+          "label": "ADDRESS TYPE NAME",
           "name": "AddressTypeName"
         },
         {
           "type": "sort",
           "position": "left",
-          "label": "Address",
+          "label": "ADDRESS",
           "name": "Address"
         },
         {
           "type": "sort",
           "position": "left",
-          "label": "Building Ownership",
+          "label": "BUILDING OWNERSHIP",
           "name": "BuildingOwnership"
         },
         {
           "type": "sort",
           "position": "left",
-          "label": "Phone (Fix Line) 1",
+          "label": "PHONE (FIX LINE) 1",
           "name": "Phone1"
         },
         {
           "type": "sort",
           "position": "left",
-          "label": "Phone (Fix Line) 2",
+          "label": "PHONE (FIX LINE) 2",
           "name": "Phone2"
         },
         {
           "type": "sort",
           "position": "left",
-          "label": "Notes",
+          "label": "NOTES",
           "name": "Notes"
         }
         
