@@ -12,7 +12,6 @@ import { NotificationHObj } from 'app/shared/model/NotificationHObj.Model';
 @Component({
   selector: 'app-notification-approval-detail',
   templateUrl: './notification-approval-detail.component.html',
-  styleUrls: ['./notification-approval-detail.component.scss'],
   providers: [NGXToastrService]
 })
 export class NotificationApprovalDetailComponent implements OnInit {

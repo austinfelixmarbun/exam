@@ -10,7 +10,6 @@ import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model'
 @Component({
   selector: 'app-working-hour-h-detail',
   templateUrl: './working-hour-h-detail.component.html',
-  styleUrls: ['./working-hour-h-detail.component.scss'],
   providers: [NGXToastrService]
 })
 

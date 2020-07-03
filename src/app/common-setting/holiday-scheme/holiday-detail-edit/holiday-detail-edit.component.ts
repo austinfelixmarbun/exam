@@ -10,7 +10,6 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-holiday-detail-edit',
   templateUrl: './holiday-detail-edit.component.html',
-  styleUrls: ['./holiday-detail-edit.component.scss'],
   providers : [NGXToastrService]
 })
 export class HolidayDetailEditComponent implements OnInit {

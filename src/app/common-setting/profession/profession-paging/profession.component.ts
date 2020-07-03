@@ -9,7 +9,6 @@ import { UcpagingComponent } from '@adins/ucpaging';
 @Component({
   selector: 'app-profession',
   templateUrl: './profession.component.html',
-  styleUrls: ['./profession.component.scss'],
   providers: [DecimalPipe]
 })
 export class ProfessionComponent implements OnInit {

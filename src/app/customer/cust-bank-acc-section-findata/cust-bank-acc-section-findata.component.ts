@@ -11,7 +11,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-cust-bank-acc-section-findata',
   templateUrl: './cust-bank-acc-section-findata.component.html',
-  styleUrls: ['./cust-bank-acc-section-findata.component.scss'],  
   providers: [NGXToastrService] 
 })
 export class CustBankAccSectionFindataComponent implements OnInit {

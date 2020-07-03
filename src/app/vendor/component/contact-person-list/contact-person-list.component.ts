@@ -11,7 +11,6 @@ import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-contact-person-list',
   templateUrl: './contact-person-list.component.html',
-  styleUrls: ['./contact-person-list.component.scss'],
   providers: [NGXToastrService]
 })
 export class ContactPersonListComponent implements OnInit {

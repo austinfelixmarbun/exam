@@ -19,7 +19,7 @@
               <i class="ft-plus-circle"></i> Edit Main Info
             </button>
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Holding/Paging']"
-            translate> Finish
+            translate> <i class="far fa-check-square"></i> Finish
             </button>
             </span>
           </div>
@@ -27,11 +27,11 @@
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode] navigateBackward="allow"
           navigateForward="allow">
           <aw-wizard-step [stepTitle]="'Address'"
-            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+            [navigationSymbol]="{ symbol: '1', fontFamily: 'FontAwesome' }">
             <app-address [objInput]="objPassing"> </app-address>
           </aw-wizard-step>
           <aw-wizard-step [stepTitle]="'Contact Person'"
-            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }" (stepEnter)="OnEnter()" (stepExit)="OnExit()">
+            [navigationSymbol]="{ symbol: '2', fontFamily: 'FontAwesome' }" (stepEnter)="OnEnter()" (stepExit)="OnExit()">
             <div *ngIf="HiddenState==true">
               <app-contact-person-list (objOutput)="outputValue($event)" [objInput] = "objPassing" [show]="show"> </app-contact-person-list>
             </div>

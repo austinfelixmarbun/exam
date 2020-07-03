@@ -9,8 +9,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 
 @Component({
   selector: 'app-customer-view-address',
-  templateUrl: './customer-view-address.component.html',
-  styleUrls: ['./customer-view-address.component.scss']
+  templateUrl: './customer-view-address.component.html'
 })
 export class CustomerViewAddressComponent implements OnInit {
   CustId: number;

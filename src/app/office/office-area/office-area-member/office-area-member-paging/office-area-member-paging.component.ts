@@ -7,8 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-office-area-member-paging',
-  templateUrl: './office-area-member-paging.component.html',
-  styleUrls: ['./office-area-member-paging.component.scss']
+  templateUrl: './office-area-member-paging.component.html'
 })
 export class OfficeAreaMemberPagingComponent implements OnInit {
 

@@ -13,7 +13,6 @@ import { first } from 'rxjs/operators';
 @Component({
   selector: 'app-cust-group-tab-detail',
   templateUrl: './cust-group-tab-detail.component.html',
-  styleUrls: ['./cust-group-tab-detail.component.scss'],
   providers: [NGXToastrService]
 })
 export class CustGroupTabDetailComponent implements OnInit {

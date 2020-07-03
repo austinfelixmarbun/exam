@@ -9,7 +9,6 @@ import { UcpagingComponent } from '@adins/ucpaging';
 @Component({
   selector: 'app-economic-sector',
   templateUrl: './economic-sector.component.html',
-  styleUrls: ['./economic-sector.component.scss'],
   providers: [DecimalPipe]
 })
 export class EconomicSectorComponent implements OnInit {

@@ -13,7 +13,6 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 @Component({
   selector: 'app-working-hour-paging',
   templateUrl: './working-hour-paging.component.html',
-  styleUrls: ['./working-hour-paging.component.scss'],
   providers: [NGXToastrService, DecimalPipe]
 })
 export class WorkingHourPagingComponent implements OnInit {

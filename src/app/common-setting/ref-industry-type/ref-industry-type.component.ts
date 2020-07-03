@@ -6,8 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-ref-industry-type',
-  templateUrl: './ref-industry-type.component.html',
-  styleUrls: ['./ref-industry-type.component.scss']
+  templateUrl: './ref-industry-type.component.html'
 })
 export class RefIndustryTypeComponent implements OnInit {
 

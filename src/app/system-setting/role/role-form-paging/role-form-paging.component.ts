@@ -7,8 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-role-form-paging',
-  templateUrl: './role-form-paging.component.html',
-  styleUrls: ['./role-form-paging.component.scss']
+  templateUrl: './role-form-paging.component.html'
 })
 export class RoleFormPagingComponent implements OnInit {
   RefRoleId: string;

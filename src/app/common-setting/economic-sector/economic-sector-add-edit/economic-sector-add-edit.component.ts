@@ -9,7 +9,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-economic-sector-add-edit',
   templateUrl: './economic-sector-add-edit.component.html',
-  styleUrls: ['./economic-sector-add-edit.component.scss']
 })
 export class EconomicSectorAddEditComponent implements OnInit {
   title: string = "Economic Sector Add"

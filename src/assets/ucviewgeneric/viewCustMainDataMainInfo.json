@@ -8,76 +8,76 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "FULL NAME",
+            "label": "Full Name",
             "property": "CustFullName"
           },
           {
             "type": "text",
-            "label": "NICK NAME",
+            "label": "Nick Name",
             "property": "NickName"
           },
           {
             "type": "text",
-            "label": "SALUTATION",
+            "label": "Salutation",
             "property": "MrSalutationCode"
           },
           {
             "type": "text",
-            "label": "MARITAL STATUS",
+            "label": "Marital Status",
             "property": "MrMaritalStatCode"
           },
           {
             "type": "text",
-            "label": "GELAR DEPAN NAMA",
+            "label": "Gelar Depan Nama",
             "property": "CustPrefixName"
           },
           {
             "type": "text",
-            "label": "NUM OF DEPENDENTS",
+            "label": "Num Of Dependents",
             "property": "NoOfDependents"
           },
           {
             "type": "text",
-            "label": "GELAR BELAKANG NAMA",
+            "label": "Gelar Belakang Nama",
             "property": "CustSuffixName"
           },
           {
             "type": "text",
-            "label": "NUM OF RESIDENCE (LAST 3 YEARS)",
+            "label": "Num Of Residence (Last 3 Years)",
             "property": "NoOfResidence"
           },
           {
             "type": "text",
-            "label": "NATIONALITY",
+            "label": "Nationality",
             "property": "MrNationalityCode"
           },
           {
             "type": "text",
-            "label": "FAMILY CARD NUM",
+            "label": "Family Card Num",
             "property": "FamilyCardNo"
           },
           {
             "type": "text",
-            "label": "COUNTRY",
+            "label": "Country",
             "property": "CountryName"
           },
           {
             "type": "text",
-            "label": "MOTHER MAIDEN NAME",
+            "label": "Mother Maiden Name",
             "property": "MotherMaidenName"
           },
           {
             "type": "text",
-            "label": "EDUCATION",
+            "label": "Education",
             "property": "MrEducationCode"
           },
           {
             "type": "text",
-            "label": "RELIGION",
+            "label": "Religion",
             "property": "MrReligionCode"
           },          {
             "type": "boolean",
-            "label": "REST IN PEACE",
+            "label": "Rest In Peace",
             "property": "IsRestInPeace"
           }
         ],

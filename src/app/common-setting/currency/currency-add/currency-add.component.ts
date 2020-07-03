@@ -9,7 +9,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-currency-add',
   templateUrl: './currency-add.component.html',
-  styleUrls: ['./currency-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class CurrencyAddComponent implements OnInit {

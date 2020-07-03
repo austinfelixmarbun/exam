@@ -14,7 +14,6 @@ import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 @Component({
   selector: 'app-bod',
   templateUrl: './bod.component.html',
-  styleUrls: ['./bod.component.scss'],
   providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe]
 })
 export class BODComponent implements OnInit {

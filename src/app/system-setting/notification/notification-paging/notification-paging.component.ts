@@ -9,7 +9,6 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 @Component({
   selector: 'app-notification-paging',
   templateUrl: './notification-paging.component.html',
-  styleUrls: ['./notification-paging.component.scss'],
   providers: [NGXToastrService, NgbPaginationConfig]
 })
 export class NotificationPagingComponent implements OnInit {

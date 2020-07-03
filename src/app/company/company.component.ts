@@ -10,7 +10,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.scss'],
   providers: [NgbPaginationConfig, NGXToastrService]
 })
 export class CompanyComponent implements OnInit {

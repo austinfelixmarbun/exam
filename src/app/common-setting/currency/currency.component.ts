@@ -9,7 +9,6 @@ import { UcpagingComponent } from '@adins/ucpaging';
 @Component({
   selector: 'app-currency',
   templateUrl: './currency.component.html',
-  styleUrls: ['./currency.component.scss'],
   providers: [DecimalPipe]
 })
 export class CurrencyComponent implements OnInit {

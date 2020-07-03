@@ -8,58 +8,58 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "ADDRESS",
+            "label": "Address",
             "property": "Addr"
           },
           {
             "type": "text",
-            "label": "PHONE 1",
+            "label": "Phone 1",
             "property": "Phone1"
           },
           {
             "type": "text",
-            "label": "RT / RW",
+            "label": "Rt / Rw",
             "property": "RtRw"
           },
           {
             "type": "text",
-            "label": "PHONE 2",
+            "label": "Phone 2",
             "property": "Phone2"
           },
 
           {
             "type": "text",
-            "label": "ZIP CODE",
+            "label": "Zip Code",
             "property": "ZipCode"
           },
           {
             "type": "text",
-            "label": "PHONE 3",
+            "label": "Phone 3",
             "property": "Phone3"
           },
           {
             "type": "text",
-            "label": "KELURAHAN",
+            "label": "Kelurahan",
             "property": "Kelurahan"
           },
           {
             "type": "text",
-            "label": "FAX",
+            "label": "Fax",
             "property": "Fax"
           },
           {
             "type": "text",
-            "label": "KECAMATAN",
+            "label": "Kecamatan",
             "property": "Kecamatan"
           },
           {
             "type": "text",
-            "label": "CITY",
+            "label": "City",
             "property": "City"
           },
           {
             "type": "text",
-            "label": "BUILDING OWNERSHIP",
+            "label": "Building Ownership",
             "property": "BuildingOwn"
           }
         ],
