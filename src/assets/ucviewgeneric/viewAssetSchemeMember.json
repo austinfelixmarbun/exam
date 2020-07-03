@@ -8,22 +8,22 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "ASSET SCHEME CODE",
+            "label": "Asset Scheme Code",
             "property": "AssetSchmCode"
           },
           {
             "type": "text",
-            "label": "ASSET SCHEME NAME",
+            "label": "Asset Scheme Name",
             "property": "AssetSchmName"
           },
           {
             "type": "text",
-            "label": "ASSET TYPE NAME",
+            "label": "Asset Type Name",
             "property": "AssetTypeName"
           },
           {
             "type": "boolean",
-            "label": "ACTIVE STATUS",
+            "label": "Active Status",
             "property": "IsActive"
           }
          

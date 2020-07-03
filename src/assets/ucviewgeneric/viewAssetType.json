@@ -8,12 +8,12 @@
       "mainInfo": [
         {
           "type": "text",
-          "label": "ASSET TYPE CODE",
+          "label": "Asset Type Code",
           "property": "AssetTypeCode"
         },
         {
           "type": "text",
-          "label": "ASSET TYPE NAME",
+          "label": "Asset Type Name",
           "property": "AssetTypeName"
         } 
         
