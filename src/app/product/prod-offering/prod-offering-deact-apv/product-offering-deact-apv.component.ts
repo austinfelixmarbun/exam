@@ -41,6 +41,13 @@ export class ProductOfferingDeactivateApprovalComponent implements OnInit {
     critObj = new CriteriaObj();
     critObj.DataType = 'text';
     critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'PROD_OFFERING_STAT';
+    critObj.value = AdInsConstant.ProdStatReqDeact;
+    this.arrCrit.push(critObj);
+
+    critObj = new CriteriaObj();
+    critObj.DataType = 'text';
+    critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.propName = 'CURRENT_USER_ID';
     critObj.value = this.userContext.UserName;
     this.arrCrit.push(critObj);

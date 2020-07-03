@@ -68,6 +68,7 @@ export class AdInsConstant {
 
   //Product Status
   public static ProdStatApproval = "APVL";
+  public static ProdStatReqDeact = "REQD";
   // DOWNLOAD
   public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';
 
