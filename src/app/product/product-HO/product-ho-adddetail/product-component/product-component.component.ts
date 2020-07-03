@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -18,12 +18,18 @@ export class ProductComponentHOComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route:ActivatedRoute,
     private http: HttpClient,
     private fb: FormBuilder,
     private toastr: NGXToastrService,
     private wizard: WizardComponent
-  ) { }
+  ) { 
+    this.route.queryParams.subscribe(params => {
+      this.source = params["source"];
+    })
+  }
 
+  source:string = "";
   FormProdComp: any;
   dictOptions: { [key: string]: any; } = {};
   UrlGetProdCompGrouped: string;
@@ -219,7 +225,7 @@ export class ProductComponentHOComponent implements OnInit {
     this.http.post(this.UrlPostAddEditProdD, objPost).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/Product/HOpaging"]);
+        this.BackToPaging();
       },
       (error) => {
         console.log(error);
@@ -266,5 +272,22 @@ export class ProductComponentHOComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  Cancel()
+  {
+    this.BackToPaging();
+  }
+
+  BackToPaging()
+  {
+    if(this.source == "return")
+    {
+      this.router.navigate(["/Product/HOReturnPaging"]);
+    }
+    else
+    {
+      this.router.navigate(["/product/HOpaging"]);
+    }
   }
  }

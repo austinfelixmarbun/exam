@@ -5,6 +5,9 @@ import { FormBuilder } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { ActivatedRoute } from '@angular/router';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { environment } from 'environments/environment.sit';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-contact-check',
@@ -21,6 +24,8 @@ export class CustomerContactCheckComponent implements OnInit {
   getCustomerPersonalContactPersonUrl: string;
   deleteCustomerPersonalContactPersonUrl: string;
   custPersonContactPersonObj: CustPersonalContactPersonObj;
+  resCustObj:any;
+  listCustIdToExclude: Array<string>;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
@@ -30,6 +35,7 @@ export class CustomerContactCheckComponent implements OnInit {
         this.IdCust = params["IdCust"];
       }
     });
+    this.listCustIdToExclude = new Array<string>();
   }
 
   ngOnInit() {
@@ -67,7 +73,31 @@ export class CustomerContactCheckComponent implements OnInit {
     this.http.post(this.getCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
       (response) => {
         this.tempCustomerPersonalContactPerson = response["ReturnObject"];
+        console.log("Contact Person: " + JSON.stringify(this.tempCustomerPersonalContactPerson));
+        for (const item of this.tempCustomerPersonalContactPerson) {
+          if(item["ContactPersonCustNo"] != null){
+            this.listCustIdToExclude.push(item["ContactPersonCustNo"]);
+          }
+        }
+        // console.log("contperson")
+        // console.log(this.tempCustomerPersonalContactPerson)
         // console.log("aaaa" + this.tempCustomerPersonalContactPerson);
       });
+  }
+
+  openView(ContactPersonCustNo)
+  {
+    // GetCustByCustNo
+    var custObj = new CustObj;
+    custObj.CustNo = ContactPersonCustNo
+    this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
+      response => {
+        this.resCustObj = response;
+        AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

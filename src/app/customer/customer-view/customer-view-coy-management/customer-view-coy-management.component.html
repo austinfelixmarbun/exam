@@ -24,7 +24,8 @@
             <ng-container *ngFor="let item of responseObj">
               <tr>
                 <td></td>
-                <td class="text-left">{{item.ShrholderName}}</td>
+                <td class="text-left" *ngIf="item.CustId != 0"><a href="{{custUrl + item.CustId}}" target="_blank">{{item.ShrholderName}}</a></td>
+                <td class="text-left" *ngIf="item.CustId == 0">{{item.ShrholderName}}</td>
                 <td class="text-left">{{item.Type}}</td>
                 <td class="text-left">{{item.CustModel}}</td>
                 <td class="text-left">{{item.TaxIdNo}}</td>

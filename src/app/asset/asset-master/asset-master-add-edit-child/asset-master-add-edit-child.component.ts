@@ -12,6 +12,7 @@ import { AssetCategoryObj } from 'app/shared/model/AssetCategoryObj.Model';
 import { AssetSchmDObj } from 'app/shared/model/AssetSchmDObj.Model';
 import { AssetSchmListObj } from 'app/shared/model/AssetSchmListObj.Model';
 import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-asset-master-add-edit-child',
@@ -341,24 +342,42 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           this.listAssetScheme[i].AssetMasterId = null;
         }
       }
-
-        this.http.post(this.editListAssetSchmD, this.listAssetSchmDObj).subscribe(
-        response => {
-          console.log(response['ReturnObject']);
-        });
-      }
-
-      this.http.post(this.addUrl, this.assetMasterObj).subscribe(
-        response => {
-            this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/Asset/AssetMaster/Paging"]);
-            console.log(response)
-          
+      
+      this.http.post(this.addUrl, this.assetMasterObj).pipe(
+        map((response) => {
+          return response;
+        }),
+        mergeMap((response) => {
+          this.listAssetSchmDObj.AssetMasterId = response["AssetMasterId"];
+          return this.http.post(this.editListAssetSchmD, this.listAssetSchmDObj);
+        })
+      ).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.router.navigate(["/Asset/AssetMaster/Paging"]);
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
+
+        // this.http.post(this.editListAssetSchmD, this.listAssetSchmDObj).subscribe(
+        // response => {
+        //   console.log(response['ReturnObject']);
+        // });
+      }
+
+      // this.http.post(this.addUrl, this.assetMasterObj).subscribe(
+      //   response => {
+      //       this.toastr.successMessage(response["Message"]);
+      //       this.router.navigate(["/Asset/AssetMaster/Paging"]);
+      //       console.log(response)
+          
+      //   },
+      //   error => {
+      //     console.log(error);
+      //   }
+      // );
     } else {
       this.assetMasterObj = this.resultData;
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;

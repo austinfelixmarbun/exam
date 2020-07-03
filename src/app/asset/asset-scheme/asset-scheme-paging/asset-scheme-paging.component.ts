@@ -17,6 +17,11 @@ export class AssetSchemePagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetScheme.json";
-    this.inputPagingObj.deleteUrl = "";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "ATH.ASSET_TYPE_ID",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 }

@@ -1,5 +1,4 @@
 {
-    "title": "Supplier Holding",
     "component": [
         {
             "type": "textbox",
@@ -20,7 +19,8 @@
     ],
     "querystring": {
         "select": "SELECT VENDOR_CODE AS VendorCode, VENDOR_NAME AS VendorName, MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, VENDOR_ID AS VendorId",
-        "from": "FROM dbo.VENDOR WITH(NOLOCK)"
+        "from": "FROM dbo.VENDOR WITH(NOLOCK)",
+        "where": "WHERE IS_ACTIVE = 1"
     },
     "headerList": [
         {

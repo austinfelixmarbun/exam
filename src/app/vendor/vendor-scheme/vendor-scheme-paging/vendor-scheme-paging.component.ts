@@ -17,7 +17,12 @@ export class VendorSchemePagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorScheme.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVendorSchm;
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "vs.MR_VENDOR_CATEGORY_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 
 }

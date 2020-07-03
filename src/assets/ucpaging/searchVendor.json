@@ -1,25 +1,25 @@
 {
-    "title": "Branch Search",
+    "title": "Vendor Search",
     "component": [
         {
             "type": "textbox",
-            "name": "VendorCode",
+            "name": "A.VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
-            "label": "Branch Code",
+            "label": "Vendor Code",
             "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
-            "name": "VendorName",
+            "name": "A.VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
-            "label": "Branch Name",
+            "label": "Vendor Name",
             "placeholder": "Placeholder"
         },
         {
             "type": "dropdown",
-            "name": "IsActive",
+            "name": "A.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -46,21 +46,21 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
-            "label": "BRANCH CODE",
-            "name": "VendorCode"
+            "position": "left",
+            "label": "Vendor Code",
+            "name": "A.VENDOR_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Vendor Name",
+            "name": "A.VENDOR_NAME"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "BRANCH NAME",
-            "name": "VendorName"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "ACTIVE STATUS",
-            "name": "IsActive"
+            "label": "Active Status",
+            "name": "A.IS_ACTIVE"
         },
         {
             "type": "label",
@@ -71,12 +71,12 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorCode"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorName"
         },
         {

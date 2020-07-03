@@ -31,7 +31,7 @@
             <show-errors [control]="CustPersonalFinDataForm.controls.MrSourceOfIncomeCode" [submit]="enjiForm.submitted"></show-errors>
           </div>
         </div>
-        <div class="form-group row" *ngIf="mrMaritalStatCode == 'MARRIED'">
+        <div class="form-group row" *ngIf="mrMaritalStatCode == maritalConstant">
           <label class="col-md-2 adInsLabel" for="SpouseMonthlyIncomeAmt" translate>Spouse Monthly Income Amount</label>
           <div class="col-md-6">
             <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'SpouseMonthlyIncomeAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt.value"></lib-ucinputnumber> -->
@@ -70,7 +70,7 @@
             {{CustPersonalFinDataForm.controls.NettIncomeAmt.value}}
           </div>
         </div>
-        <div class="form-group row" *ngIf="mrMaritalStatCode == 'MAR'">
+        <div class="form-group row" *ngIf="mrMaritalStatCode == maritalConstant">
           <label class="col-md-2 adInsLabel" for="IsJoinIncome" translate>Is Join Income</label>
           <div class="col-md-6">
             <input type="checkbox" formControlName="IsJoinIncome" />
@@ -310,10 +310,10 @@
 <br>
 <br>
 <div class="form-actions right" style="text-align: right;">
-  <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+  <!-- <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
     <i class="ft-x"></i> Back
-  </button>
+  </button> -->
   <button type="button" class="btn btn-raised btn-primary" (click)="next()" translate>
-    <i class="fa fa-check-square-o"></i> {{MrCustTypeCode == 'PERSONAL' ? 'Submit' : 'Save and Continue'}}
+    <i class="far fa-check-square"></i> {{MrCustTypeCode == 'PERSONAL' ? 'Submit' : 'Save'}}
   </button>
 </div>

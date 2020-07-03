@@ -148,10 +148,6 @@
               "property": "edit"
             }
           ]
-        },
-        {
-          "type": "delete",
-          "property": "refZipcodeId"
         }
       ]
     }

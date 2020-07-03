@@ -52,6 +52,12 @@ export class SearchOfficeComponent implements OnInit {
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputObj.addCritInput = this.arrAddCrit;
+    this.inputObj.ddlEnvironments = [
+      {
+        name: "roa.AREA_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.listSelectedId = new Array();
     this.tempListId = new Array();
@@ -142,8 +148,6 @@ export class SearchOfficeComponent implements OnInit {
     if(this.listSelectedId.length != 0){
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
-      }
-      for (var i = 0; i < this.listSelectedId.length; i++) {
         var object = this.resultData.Data.find(x => x.RefOfficeId == this.listSelectedId[i]);
         object["IsAllowedCrt"]=false;
         this.tempData.push(object);

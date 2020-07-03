@@ -72,8 +72,8 @@ export class EmployeeAddComponent implements OnInit {
     Fax: ['', [Validators.pattern('^[0-9]+$')]],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
     MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
-    Email1: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]],
-    Email2: ['', [Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]],
+    Email1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    Email2: ['', [Validators.pattern('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$')]],
     RowVersion: [''],
     EmpBankAccId: [0, [Validators.required]],
     RefBankId: [0, [Validators.required]],
@@ -115,7 +115,6 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.RefEmpForm.controls.BankBranchRegCode.disable();
     var context = JSON.parse(localStorage.getItem("UserAccess"));
     this.businessDt = new Date(context["BusinessDt"]);
 
@@ -264,7 +263,6 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   getLookupBankResponse(e){
-    console.log(e)
     this.RefEmpForm.patchValue({
       RefBankId: e.refBankId,
       BankBranchRegCode: e.regRptCode

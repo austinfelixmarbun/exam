@@ -24,6 +24,12 @@ export class ProdOfferingReturnPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.deleteUrl = "/RefBank/DeleteRefBank";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOfferingReturn.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "A.Prod_Offering_Stat",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     var criteriaList = new Array<CriteriaObj>();
     var criteriaObj = new CriteriaObj();
@@ -39,11 +45,11 @@ export class ProdOfferingReturnPagingComponent implements OnInit {
   {
     if(e.RowObj.DraftProdOfferingHId == null)
     {
-      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.CurrentProdOfferingHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.CurrentProdOfferingHId, "mode" : "edit", "source" : "return" } });
     }
     else
     {
-      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit" } });
+      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit", "source" : "return" } });
     }
   }
 }

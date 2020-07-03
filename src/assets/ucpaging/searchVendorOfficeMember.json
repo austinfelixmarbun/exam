@@ -22,7 +22,7 @@
             "name": "RO.OFFICE_ADDR",
             "id": "OfficeAddrId",
             "value": "",
-            "label": "Office Addr",
+            "label": "Office Address",
             "placeholder": "Office Addr"
         },
         {
@@ -48,7 +48,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT RO.OFFICE_CODE AS OfficeCode, RO.OFFICE_NAME AS OfficeName, RO.OFFICE_ADDR AS OfficeAddr, VOM.IS_ACTIVE AS IsActive, VOM.VENDOR_OFFICE_MBR_ID AS VendorOfficeMbrId",
+        "select": "SELECT RO.OFFICE_CODE AS OfficeCode, RO.OFFICE_NAME AS OfficeName, RO.OFFICE_ADDR AS OfficeAddr, RO.IS_ACTIVE AS IsActive, VOM.VENDOR_OFFICE_MBR_ID AS VendorOfficeMbrId",
         "from": "FROM dbo.VENDOR_OFFICE_MBR VOM WITH(NOLOCK) JOIN dbo.REF_OFFICE RO WITH(NOLOCK) ON RO.REF_OFFICE_ID = VOM.REF_OFFICE_ID"
     },
     "headerList": [
@@ -67,7 +67,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Office Addr",
+            "label": "Office Address",
             "name": "RO.OFFICE_ADDR"
         },
         {

@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormArray } from '@angular/forms';
+import { FormBuilder, FormArray, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { saveAs } from 'file-saver';
-
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 @Component({
   selector: 'uc-prod-offering-comp',
   templateUrl: './uc-prod-offering-comp.component.html',
@@ -21,8 +22,8 @@ export class UcProdOfferingCompComponent implements OnInit {
   dictBehaviour: {[key: string]: any;} = {};
   list = new Array();
   UrlGetProdOfferingCompGrouped : any;
-
-
+  dictMultiOptions: { [key: string]: any; } = {};
+  selectedMultiDDLItems: { [key: string]: any; } = {};
   @Input() CompGroups : string;
   @Input() ProdOfferingHId : number;
   @Input() ShowComparison : boolean;
@@ -31,6 +32,17 @@ export class UcProdOfferingCompComponent implements OnInit {
 
   @Output() Save: EventEmitter<any> = new EventEmitter();
   @Output() Next: EventEmitter<any> = new EventEmitter();
+  @Output() OnCancel: EventEmitter<any> = new EventEmitter();
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 5,
+    allowSearchFilter: true
+  };
 
   DlRuleObj = {
     CompntValue: "",
@@ -74,6 +86,21 @@ export class UcProdOfferingCompComponent implements OnInit {
         offeringCompDescr = obj.OfferingCompntValueDesc;
       }
     }
+    else if (obj.ProdCompntType == "MULTI_DDL") {
+      if (obj.OfferingCompntValue != "") {
+        offeringCompCode = obj.OfferingCompntValue;
+        offeringCompDescr = obj.OfferingCompntValueDesc;
+
+        var selectedId = obj.OfferingCompntValue.split(";");
+        var selectedText = obj.OfferingCompntValueDesc.split(",");
+
+        this.selectedMultiDDLItems[obj.RefProdCompntCode] = new Array();
+
+        for (var i = 0; i < selectedId.length; i++) {
+          this.selectedMultiDDLItems[obj.RefProdCompntCode].push({ item_id: selectedId[i], item_text: selectedText[i] });
+        }
+      }
+    }
     else
     {
       offeringCompCode = obj.OfferingCompntValue;
@@ -102,8 +129,8 @@ export class UcProdOfferingCompComponent implements OnInit {
         }  
       }
     }else{
-      hoMrProdBehaviour = "LOCK";
-      offeringMrProdBehaviour = "LOCK";
+      hoMrProdBehaviour = AdInsConstant.BehaviourTypeDefault;
+      offeringMrProdBehaviour = AdInsConstant.BehaviourTypeLock;
     }
 
     return this.fb.group({
@@ -120,9 +147,15 @@ export class UcProdOfferingCompComponent implements OnInit {
       HOCompntValue : obj.HOCompntValue,
       HOCompntValueDesc : obj.HOCompntValueDesc,
       HOMrProdBehaviour : hoMrProdBehaviour,
-      OfferingCompntValue : offeringCompCode,
+      OfferingCompntValue : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeLock == true ? [{ value: offeringCompCode, disabled: true }]
+                            : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeMin == true ? [offeringCompCode, (Validators.required, Validators.min(obj.HOCompntValue))]
+                            : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeMax == true ? [offeringCompCode, (Validators.required, Validators.max(obj.HOCompntValue))]                      
+                            : obj.IsProdOffering == true ? [offeringCompCode, Validators.required]
+                            : offeringCompCode,
       OfferingCompntValueDesc : offeringCompDescr,
-      OfferingMrProdBehaviour : offeringMrProdBehaviour
+      OfferingMrProdBehaviour : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeLock == true ? [{ value: offeringMrProdBehaviour, disabled: true }]                      
+                              : obj.IsProdOffering == true ? [offeringMrProdBehaviour, Validators.required]
+                              : offeringMrProdBehaviour
     })
   }
   
@@ -138,6 +171,35 @@ export class UcProdOfferingCompComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  async PopulateMultiDDL(obj) {
+    if (url != "") {
+      var url = obj.ProdCompntDtaSrcApi;
+      var payload = JSON.parse(obj.ProdCompntDtaValue);
+      await this.http.post(url, payload).toPromise().then(
+        (response) => {
+          var result = response["ReturnObject"];
+          this.dictMultiOptions[obj.RefProdCompntCode] = new Array();
+          this.selectedMultiDDLItems[obj.RefProdCompntCode] = new Array();
+          for (let i = 0; i < result.length; i++) {
+            this.dictMultiOptions[obj.RefProdCompntCode].push({ item_id: result[i].Key, item_text: result[i].Value });
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  onMultiDDLChangeEvent(refProdCompntCode, index, indexparent) {
+    var selectedId = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_id);
+    var selectedText = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_text);
+    this.FormProdOfferingComp.controls["groups"].controls[indexparent].controls["components"].controls[index].patchValue({
+      OfferingCompntValue: selectedId.join(";"),
+      OfferingCompntValueDesc: selectedText.join(",")
+    })
   }
 
   async PopulateBehaviourDDL(obj, behaviourDDL)
@@ -171,6 +233,9 @@ export class UcProdOfferingCompComponent implements OnInit {
             {
               await this.PopulateDDL(comp)
             }
+            if (comp.ProdCompntType == "MULTI_DDL" && comp.IsProdOffering == true) {
+              await this.PopulateMultiDDL(comp);
+            }
             if(this.ShowBehaviour == true){
               await this.PopulateBehaviourDDL(comp, behaviourDDL);
             }
@@ -191,12 +256,12 @@ export class UcProdOfferingCompComponent implements OnInit {
 
 
   GetBehaviourValue(refProdCompntCode, behaviourCode) {
-    console.log("THIS")
-    console.log(this.dictBehaviour);
-    console.log(refProdCompntCode + ":" + behaviourCode)
-    console.log(this.dictBehaviour[refProdCompntCode])
-    console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode))
-    console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode).Value)
+    // console.log("THIS")
+    // console.log(this.dictBehaviour);
+    // console.log(refProdCompntCode + ":" + behaviourCode)
+    // console.log(this.dictBehaviour[refProdCompntCode])
+    // console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode))
+    // console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode).Value)
     return this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode).Value
   }
 
@@ -211,6 +276,12 @@ export class UcProdOfferingCompComponent implements OnInit {
     this.Next.emit(this.list);
   }
 
+  Cancel()
+  {
+    console.log("cancel emit");
+    this.OnCancel.emit();
+  }
+
   generateListForm(formProdOfferingComp){
     this.list = [];
     for (let i = 0; i < formProdOfferingComp.controls.groups.length; i++) {
@@ -219,8 +290,17 @@ export class UcProdOfferingCompComponent implements OnInit {
           this.FormProdOfferingComp.controls["groups"].controls[i].controls["components"].controls[j].patchValue({
             OfferingCompntValueDesc : this.FormProdOfferingComp.controls["groups"].controls[i].controls["components"].controls[j].controls.OfferingCompntValue.value
           });
-        }  
-        this.list.push(Object.assign({}, ...formProdOfferingComp.controls.groups.controls[i].controls["components"].controls[j].value));
+        }
+        if (this.FormProdOfferingComp.controls["groups"].controls[i].controls["components"].controls[j].controls.ProdCompntType.value == "MULTI_DDL") {
+          var refProdCompntCode = this.FormProdOfferingComp.controls["groups"].controls[i].controls["components"].controls[j].controls.RefProdCompntCode.value;
+          var selectedId = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_id);
+          var selectedText = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_text);
+          this.FormProdOfferingComp.controls["groups"].controls[i].controls["components"].controls[j].patchValue({
+            OfferingCompntValue: selectedId.join(";"),
+            OfferingCompntValueDesc: selectedText.join(", ")
+          });
+        }
+        this.list.push(Object.assign({}, ...formProdOfferingComp.controls.groups.controls[i].controls["components"].controls[j].getRawValue()));
       }
     }
   }
@@ -241,6 +321,10 @@ export class UcProdOfferingCompComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  test(){
+    console.log(this.FormProdOfferingComp);
   }
 }
 

@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "B.USERNAME",
+            "name": "RU.USERNAME",
             "id": "UsernameId",
             "value": "",
             "label": "Username",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "A.SPV_ID",
+            "name": "SPVEMP.EMP_NAME",
             "id": "SupervisorId",
             "value": "",
             "label": "Supervisor",
@@ -19,7 +19,7 @@
         },
         {
             "type": "textbox",
-            "name": "C.EMP_NAME",
+            "name": "RE.EMP_NAME",
             "id": "EmpNameId",
             "value": "",
             "label": "Employee Name",
@@ -27,21 +27,22 @@
         },
         {
             "type": "dropdown",
-            "name": "E.OFFICE_NAME",
+            "name": "RO.OFFICE_CODE", 
             "id": "OfficeNameId",
-            "label": "Office Name",
             "value": "",
             "placeholder": "Placeholder",
-            "isFromURL": false,
+            "datatype": "text",
+            "isFromURL": true,
             "isSelectOne": false,
-            "criteriaPropName" : "REF_OFFICE_ID",
-            "criteriaPropValue" : "OFFICE_NAME",
+            "url": "",
+            "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
+            "label": "Office Name",
             "items": [],
             "itemsUrl": []
         },
         {
             "type": "textbox",
-            "name": "C.EMP_NO",
+            "name": "RE.EMP_NO",
             "id": "EmpNoId",
             "value": "",
             "label": "Employee No",
@@ -49,7 +50,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.IS_ACTIVE",
+            "name": "RUR.IS_ACTIVE",
             "id": "activeStatusId",
             "label": "Active Status",
             "value": "",
@@ -70,14 +71,15 @@
         },
         {
             "type": "dropdown",
-            "name": "D.JOB_TITLE_CODE", 
+            "name": "RJT.JOB_TITLE_CODE", 
             "id": "JobTitleName",
             "value": "",
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefJobTitle/GetListKeyValueActiveByCode",
+            "url": "",
+            "path": "/RefJobTitle/GetListKeyValueActiveByCode",
             "label": "JOB TITLE",
             "criteriaPropName" : "RefJobTitleId",
             "criteriaPropValue" : "JOB_TITLE_CODE",
@@ -86,62 +88,62 @@
         }
     ],
     "querystring": {
-        "select": "SELECT B.USERNAME AS Username, A.SPV_ID AS Supervisor, A.IS_ACTIVE AS IsActive, C.EMP_NAME AS EmpName, C.EMP_NO AS EmpNo, D.JOB_TITLE_NAME AS JobTitleName, A.REF_OFFICE_ID AS OfficeId, E.OFFICE_NAME AS OfficeName, A.REF_BIZ_UNIT_ID AS RefBizUnitId",
-        "from": "FROM dbo.REF_USER_ROLE A WITH(NOLOCK) JOIN dbo.REF_USER B WITH(NOLOCK) ON B.REF_USER_ID = A.REF_USER_ID JOIN dbo.REF_EMP C WITH(NOLOCK) ON C.REF_EMP_ID = B.REF_EMP_ID JOIN dbo.REF_JOB_TITLE D WITH(NOLOCK) ON D.REF_JOB_TITLE_ID = A.REF_JOB_TITLE_ID JOIN dbo.REF_OFFICE E WITH(NOLOCK) ON E.REF_OFFICE_ID = A.REF_OFFICE_ID LEFT JOIN dbo.REF_USER_ROLE F WITH(NOLOCK) ON F.REF_USER_ID = A.SPV_ID"
+        "select": "SELECT RU.USERNAME AS Username, RE.EMP_NAME AS EmpName, RE.EMP_NO AS EmpNo, RJT.JOB_TITLE_CODE, RJT.JOB_TITLE_NAME AS JobTitleName, RO.OFFICE_CODE, RO.OFFICE_NAME AS OfficeName, SPVEMP.EMP_NAME AS SpvName, RUR.IS_ACTIVE AS IsActive, RUR.REF_BIZ_UNIT_ID AS RefBizUnitId, RUR.SPV_ID AS SpvId",
+        "from": "FROM DBO.REF_USER RU WITH(NOLOCK) JOIN DBO.REF_EMP RE ON RU.REF_EMP_ID = RE.REF_EMP_ID JOIN REF_USER_ROLE RUR WITH(NOLOCK) ON RUR.REF_USER_ID = RU.REF_USER_ID LEFT JOIN DBO.REF_JOB_TITLE RJT WITH(NOLOCK) ON RUR.REF_JOB_TITLE_ID = RJT.REF_JOB_TITLE_ID JOIN DBO.REF_OFFICE RO WITH(NOLOCK) ON RO.REF_OFFICE_ID = RUR.REF_OFFICE_ID LEFT JOIN REF_USER SPVRU WITH(NOLOCK) ON SPVRU.REF_USER_ID = RUR.SPV_ID LEFT JOIN REF_EMP SPVEMP WITH(NOLOCK) ON SPVEMP.REF_EMP_ID = SPVRU.REF_EMP_ID"
     },
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
-            "label": "USERNAME",
-            "name": "B.USERNAME"
+            "position": "left",
+            "label": "Username",
+            "name": "RU.USERNAME"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Employee Name",
+            "name": "RE.EMP_NAME"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "EMPLOYEE NAME",
-            "name": "C.EMP_NAME"
+            "label": "Employee No",
+            "name": "RE.EMP_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Job Title",
+            "name": "RJT.JOB_TITLE_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Supervisor",
+            "name": "SPVEMP.EMP_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Office Name",
+            "name": "RO.OFFICE_NAME"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "EMPLOYEE NO",
-            "name": "C.EMP_NO"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "JOB TITLE",
-            "name": "D.JOB_TITLE_NAME"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "SUPERVISOR",
-            "name": "A.SPV_ID"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "OFFICE NAME",
-            "name": "E.OFFICE_NAME"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "ACTIVE",
-            "name": "A.IS_ACTIVE"
+            "label": "Active Status",
+            "name": "RUR.IS_ACTIVE"
         }
     ],
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "Username"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "EmpName"
         },
         {
@@ -151,17 +153,17 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "JobTitleName"
         },
         {
             "type": "text",
-            "position": "center",
-            "property": "Supervisor"
+            "position": "left",
+            "property": "SpvName"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "OfficeName"
         },
         {

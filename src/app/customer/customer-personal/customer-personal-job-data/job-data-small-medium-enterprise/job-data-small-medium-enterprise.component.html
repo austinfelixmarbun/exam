@@ -19,7 +19,7 @@
                     {{ram.Value}}
                   </option>
                 </select>
-                <show-errors [control]="JobDataSmeForm.controls.JobPosition" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="JobDataSmeForm.controls.JobPosition" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
           </div>
           <div class="form-group row">
@@ -27,7 +27,7 @@
               <div class="col-md-4">
                 <input type="text" class="form-control adInsInput" formControlName="JobTitleName"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.JobTitleName.invalid }">
-                <show-errors [control]="JobDataSmeForm.controls.JobTitleName" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="JobDataSmeForm.controls.JobTitleName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
           </div>
           <div class="form-group row">
@@ -35,7 +35,7 @@
               <div class="col-md-4">
                 <input type="text" class="form-control adInsInput" formControlName="IndustryName" required
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.IndustryName.invalid }">
-                <show-errors [control]="JobDataSmeForm.controls.IndustryName" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="JobDataSmeForm.controls.IndustryName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
           </div>
           <div class="form-group row">
@@ -54,7 +54,7 @@
                     {{ram.Value}}
                   </option>
                 </select>
-                <show-errors [control]="JobDataSmeForm.controls.CompanyScale" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="JobDataSmeForm.controls.CompanyScale" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
           </div>
           <div class="form-group row">
@@ -62,15 +62,15 @@
               <div class="col-md-4">
                 <input type="number" class="form-control adInsInput" formControlName="NumberEmployee"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.NumberEmployee.invalid }">
-                <show-errors [control]="JobDataSmeForm.controls.NumberEmployee" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="JobDataSmeForm.controls.NumberEmployee" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
           </div>
           <div class="form-group row">
               <label class="col-md-2 adInsLabel adins-required" translate>Employment Establishment Date </label>
               <div class="col-md-4">
-                <input type="date" id="empEstablishmentDt" class="form-control adInsInput" formControlName="EmpEstablishmentDate"
+                <input type="date" id="empEstablishmentDt" class="form-control adInsInput" formControlName="EmpEstablishmentDate" [max]="businessDtMin | date: 'yyyy-MM-dd'"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.EmpEstablishmentDate.invalid }">
-                <show-errors [control]="JobDataSmeForm.controls.EmpEstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="JobDataSmeForm.controls.EmpEstablishmentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
           </div>
           <lib-ucSubsection [id]="'jobAddrId'" [title]="'Job Address'" [panel]="'jobAddr'">
@@ -84,7 +84,7 @@
                 <div class="col-md-4">
                 <textarea type="text" class="form-control adInsInput" formControlName="NotesJob"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.NotesJob.invalid }"></textarea>
-                <show-errors [control]="JobDataSmeForm.controls.NotesJob" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="JobDataSmeForm.controls.NotesJob" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
             </div>
           </div>
@@ -96,7 +96,7 @@
                   <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="LocationClass"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.LocationClass.invalid }">
-                  <show-errors [control]="JobDataSmeForm.controls.LocationClass" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.LocationClass" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
               <div class="form-group row">
@@ -104,7 +104,7 @@
                   <div class="col-md-4">
                   <input type="number" class="form-control adInsInput" formControlName="PriceEstimates"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.PriceEstimates.invalid }">
-                  <show-errors [control]="JobDataSmeForm.controls.PriceEstimates" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.PriceEstimates" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
               <div class="form-group row">
@@ -112,7 +112,7 @@
                   <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="StayLength"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.StayLength.invalid }">
-                  <show-errors [control]="JobDataSmeForm.controls.StayLength" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.StayLength" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
           </div> -->
@@ -124,7 +124,7 @@
                   <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="OtherBusinessName"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherBusinessName.invalid }">
-                  <show-errors [control]="JobDataSmeForm.controls.OtherBusinessName" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.OtherBusinessName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
               <div class="form-group row">
@@ -132,7 +132,7 @@
                   <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="OtherBusinessType"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherBusinessType.invalid }">
-                  <show-errors [control]="JobDataSmeForm.controls.OtherBusinessType" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.OtherBusinessType" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
               <div class="form-group row">
@@ -140,7 +140,7 @@
                   <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="OtherBusinessIndustry"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherBusinessIndustry.invalid }">
-                  <show-errors [control]="JobDataSmeForm.controls.OtherBusinessIndustry" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.OtherBusinessIndustry" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
               <div class="form-group row">
@@ -148,15 +148,15 @@
                   <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="OtherJobPosition"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherJobPosition.invalid }">
-                  <show-errors [control]="JobDataSmeForm.controls.OtherJobPosition" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.OtherJobPosition" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
               <div class="form-group row">
                   <label class="col-md-2 adInsLabel adins-required" translate>Establishment Date </label>
                   <div class="col-md-4">
-                    <input type="date" id="establishmentDt" class="form-control adInsInput" formControlName="EstablishmentDate"
+                    <input type="date" id="establishmentDt" class="form-control adInsInput" formControlName="EstablishmentDate" [max]="businessDtMin | date: 'yyyy-MM-dd'"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.EstablishmentDate.invalid }">
-                    <show-errors [control]="JobDataSmeForm.controls.EstablishmentDate" [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="JobDataSmeForm.controls.EstablishmentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
           </div>
@@ -171,7 +171,7 @@
                   <div class="col-md-4">
                   <textarea type="text" class="form-control adInsInput" formControlName="NotesOther"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.NotesOther.invalid }"></textarea>
-                  <show-errors [control]="JobDataSmeForm.controls.NotesOther" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.NotesOther" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
           </div>
@@ -183,7 +183,7 @@
                   <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="OtherLocationClass"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherLocationClass.invalid }">
-                  <show-errors [control]="JobDataSmeForm.controls.OtherLocationClass" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.OtherLocationClass" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
               <div class="form-group row">
@@ -191,7 +191,7 @@
                   <div class="col-md-4">
                   <input type="number" class="form-control adInsInput" formControlName="OtherPriceEstimates"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherPriceEstimates.invalid }">
-                  <show-errors [control]="JobDataSmeForm.controls.OtherPriceEstimates" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.OtherPriceEstimates" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
               <div class="form-group row">
@@ -199,18 +199,18 @@
                   <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="OtherStayLength"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.OtherStayLength.invalid }">
-                  <show-errors [control]="JobDataSmeForm.controls.OtherStayLength" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="JobDataSmeForm.controls.OtherStayLength" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
               </div>
           </div> -->
       </div>
     </div>
     <div class="form-actions right" style="text-align: right;" >
-      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+      <!-- <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
         <i class="ft-x"></i> Back
-      </button>
+      </button> -->
       <button type="submit" class="btn btn-raised btn-primary" translate>
-        <i class="fa fa-check-square-o"></i> Save and Continue
+        <i class="far fa-check-square"></i> Save
       </button>
     </div>
   </form>

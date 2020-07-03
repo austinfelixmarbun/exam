@@ -24,5 +24,11 @@ export class ProfessionComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchProfession.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: "MR_CUST_MODEL_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
   }
 }

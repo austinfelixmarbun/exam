@@ -1,135 +1,182 @@
 <div *ngIf="RFARoot">
-  <div class="row margin-bot-15">
-      <!-- Summary -->
-      <div class="col-md-12">
-          <div class="card">
-              <div class="card-body">
-                  <div class="px-3">
-                    <lib-ucSubsection [id]="'Summary'" [title]="'Summary -
+    <div class="row margin-bot-15">
+        <!-- Summary -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <lib-ucSubsection [id]="'Summary'" [title]="'Summary -
                     Transaction No : '+ RFAInformation.TrxNo" [panel]="'SummaryId'">
-                    </lib-ucSubsection>
-                      <div id="SummaryId" class="form-body">
-                          <form class="form form-horizontal">
-                              <div class="form-group row">
-                                  <label class="col-md-2 adInsLabel text-bold" translate>Approval Scheme</label>
-                                  <label class="col-md-4  adInsLabel" translate>{{RFAInformation.SchemeName}}</label>
-                                  <label class="col-md-2 adInsLabel text-bold" translate>Request By</label>
-                                  <label class="col-md-4  adInsLabel" translate>{{RFAInformation.RequestBy}}</label>
-                                  <label class="col-md-2  adInsLabel text-bold" translate>Request Date</label>
-                                  <label class="col-md-4  adInsLabel"
-                                      translate>{{RFAInformation.RequestDate | date: 'dd-MMM-yyyy' }}</label>
-                                  <label class="col-md-2  adInsLabel text-bold" translate>Reason</label>
-                                  <label class="col-md-4  adInsLabel"
-                                      translate>{{RFAInformation.Reason || "-"}}</label>
-                                  <label class="col-md-2  adInsLabel text-bold" translate>Min Final Level</label>
-                                  <label class="col-md-4  adInsLabel"
-                                      translate>{{RFAInformation.MinimumFinalLevel || "-"}}</label>
-                              </div>
-                              <div class="form-group row">
-                                  <label class="col-md-2  adInsLabel text-bold" translate>Note</label>
-                                  <label class="col-md-10  adInsLabel"
-                                      translate>{{RFAInformation.Notes  || "-"}}</label>
-                              </div>
-
-                              <div class="row">
-                                  <ng-container *ngFor="let rec of RFARoot.RecomendationObj;">
-                                      <label class="col-md-2 text-bold" translate>{{rec.Key}}</label>
-                                      <label class="col-md-4">{{rec.Value}}</label>
-                                  </ng-container>
-                              </div>
-
-                          </form>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- Action -->
-      <div class="col-md-12">
-          <div class="card">
-              <div class="card-body">
-                  <div class="px-3">
-                    <lib-ucSubsection [id]="'Action'" [title]="'Action'" [panel]="'ActionId'">
-                    </lib-ucSubsection>
-                    <div id="ActionId">
-                        <div class="form-body">
-                            <form class="form-horizontal" [formGroup]="FormApproval" (ngSubmit)="FormApproval.valid && Submit()"
-                                #enjiForm="ngForm">
-                                <div class="form-group row">
-                                    <label class="col-md-2 adins-required-label">Action</label>
-                                    <div class="col-md-4">
-                                        <select formControlName="result" class="form-control" id="result" name="result"
-                                            (change)="onResultChange($event);">
-                                            <option value="">--Select--</option>
-                                            <option *ngFor="let m of PossibleResults" value={{m}}>{{m}}</option>
-                                        </select>
-                                        <span *ngIf="showFinal">
-                                            <input type="checkbox" formControlName="approveFinal" [(ngModel)]="isFinal"
-                                                (change)="isFinalChange($event)" name="isFinal" id="isFinal">
-                                            <label class="label-control" translate>Final</label>
-                                        </span>
-                                        <lib-uc-show-errors [control]="FormApproval.controls.result" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                        </lib-ucSubsection>
+                        <div id="SummaryId" class="form-body">
+                            <form class="form form-horizontal">
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 adInsLabel text-bold" translate>Approval Scheme</label>
+                                        <label class="col-md-8  adInsLabel"
+                                            translate>{{RFAInformation.SchemeName}}</label>
                                     </div>
                                 </div>
-                                <div class="form-group row" *ngIf="ListMinFinLevel.length > 0">
-                                    <label class="col-md-2 adInsLabel">Min Final Level</label>
-                                    <div class="col-md-10">
-                                        <select formControlName="minFinalLevel" class="form-control width-25-per"
-                                            id="minFinalLevel" name="minFinalLevel">
-                                            <option value="-1">--Change if necessary--</option>
-                                            <option *ngFor="let m of ListMinFinLevel" value={{m.Value}}>{{m.Key}}
-                                            </option>
-                                        </select>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 adInsLabel text-bold" translate>Request By</label>
+                                        <label class="col-md-8  adInsLabel"
+                                            translate>{{RFAInformation.RequestBy}}</label>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-md-2 adInsLabel">Notes</label>
-                                    <div class="col-md-10">
-                                        <textarea type="textarea" row="5" class="form-control" formControlName="notes" [ngClass]="{ 'is-invalid': enjiForm.submitted && FormApproval.controls.notes.invalid}"></textarea>
-                                            <lib-uc-show-errors [control]="FormApproval.controls.notes" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-4  adInsLabel text-bold" translate>Request Date</label>
+                                        <label class="col-md-8  adInsLabel"
+                                            translate>{{RFAInformation.RequestDate | date: 'dd-MMM-yyyy' }}</label>
                                     </div>
                                 </div>
-                                <div class="form-group row" *ngIf="showReason">
-                                    <label class="col-md-2">Reason</label>
-                                    <div class="col-md-10">
-                                        <select formControlName="reason" class="form-control width-25-per"
-                                            id="reason" name="reason" [ngClass]="{ 'is-invalid': enjiForm.submitted && FormApproval.controls.reason.invalid}">
-                                            <option value="">--Select--</option>
-                                            <option *ngFor="let m of ListReason" value={{m.ReasonCode}}>{{m.ReasonDescr}}
-                                            </option>
-                                        </select>
-                                        <lib-uc-show-errors [control]="FormApproval.controls.reason" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-4  adInsLabel text-bold" translate>Reason</label>
+                                        <label class="col-md-8  adInsLabel"
+                                            translate>{{RFAInformation.Reason || "-"}}</label>
                                     </div>
                                 </div>
-  
-                                <div class="form-group row" *ngIf="showNextPerson">
-                                    <div class="col-md-12" formArrayName="nodes" *ngFor="let node of FormApproval['controls']['nodes']['controls']; let i = index">
-                                        <div class="form-group row" [formGroupName]="i">
-                                          <label class="col-md-2">{{FormApproval.controls['nodes'].value[i].nodeName}}</label>
-                                          <div class="col-md-8">
-                                            <select formControlName="slcMemberId" class="form-control" id="slcMemberId" name="slcMemberId">
-                                              <option value="">--Select--</option>
-                                              <option *ngFor="let m of dictMember[FormApproval['controls']['nodes'].value[i].nodeId]" value={{m.MemberId}} >{{m.MemberName}}</option>
-                                            </select>
-                                            <lib-uc-show-errors [control]="node.controls.slcMemberId" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                                          </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-4  adInsLabel text-bold" translate>Min Final Level</label>
+                                        <label class="col-md-8  adInsLabel"
+                                            translate>{{RFAInformation.MinimumFinalLevel || "-"}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label *ngIf="RFAInformation.Value > 0" class="col-md-4 adInsLabel text-bold"
+                                            translate>Value</label>
+                                        <label *ngIf="RFAInformation.Value > 0" class="col-md-8  adInsLabel"
+                                            translate>{{RFAInformation.Value | number:'.2':'en-US'}}</label>
+                                    </div>
+                                </div>
+                                <ng-container *ngFor="let rec of RFARoot.RecomendationObj;">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <label class="col-md-4 text-bold" translate>{{rec.Key}}</label>
+                                            <label class="col-md-8">{{rec.Value}}</label>
                                         </div>
-                                      </div>
+                                    </div>
+                                </ng-container>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-2  adInsLabel text-bold" translate>Note</label>
+                                        <label class="col-md-10  adInsLabel"
+                                            translate>{{RFAInformation.Notes  || "-"}}</label>
+                                    </div>
                                 </div>
-                                <div class="form-actions right">
-                                    <button type="button" *ngIf="showCancel" class="btn btn-raised btn-warning margin-r-5" (click)="onCancelClick()" >
-                                        <i class="ft ft-x"></i> Cancel
-                                      </button>
-                                    <button type="submit" class="btn btn-raised btn-primary">
-                                      <i class="fa fa-check-square-o"></i> Save
-                                    </button>
-                                </div>
+                            </div>
                             </form>
                         </div>
                     </div>
-                      
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                </div>
+            </div>
+        </div>
+        <!-- Action -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <lib-ucSubsection [id]="'Action'" [title]="'Action'" [panel]="'ActionId'">
+                        </lib-ucSubsection>
+                        <div id="ActionId">
+                            <div class="form-body">
+                                <form class="form-horizontal" [formGroup]="FormApproval"
+                                    (ngSubmit)="FormApproval.valid && Submit()" #enjiForm="ngForm">
+                                    <div class="form-group row">
+                                        <label class="col-md-2 adins-required-label">Action</label>
+                                        <div class="col-md-4">
+                                            <select formControlName="result" class="form-control" id="result"
+                                                name="result" (change)="onResultChange($event);">
+                                                <option value="">--Select--</option>
+                                                <option *ngFor="let m of PossibleResults" value={{m}}>{{m}}</option>
+                                            </select>
+                                            <span *ngIf="showFinal">
+                                                <input type="checkbox" formControlName="approveFinal"
+                                                    [(ngModel)]="isFinal" (change)="isFinalChange($event)"
+                                                    name="isFinal" id="isFinal">
+                                                <label class="label-control" translate>Final</label>
+                                            </span>
+                                            <lib-uc-show-errors [control]="FormApproval.controls.result"
+                                                [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" *ngIf="ListMinFinLevel.length > 0">
+                                        <label class="col-md-2 adInsLabel">Min Final Level</label>
+                                        <div class="col-md-10">
+                                            <select formControlName="minFinalLevel" class="form-control width-25-per"
+                                                id="minFinalLevel" name="minFinalLevel">
+                                                <option value="-1">--Change if necessary--</option>
+                                                <option *ngFor="let m of ListMinFinLevel" value={{m.Value}}>{{m.Key}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 adInsLabel adins-required-label">Notes</label>
+                                        <div class="col-md-10">
+                                            <textarea type="textarea" row="5" class="form-control"
+                                                formControlName="notes"
+                                                [ngClass]="{ 'is-invalid': enjiForm.submitted && FormApproval.controls.notes.invalid}"></textarea>
+                                            <lib-uc-show-errors [control]="FormApproval.controls.notes"
+                                                [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" *ngIf="showReason">
+                                        <label class="col-md-2 adins-required-label">Reason</label>
+                                        <div class="col-md-10">
+                                            <select formControlName="reason" class="form-control width-25-per"
+                                                id="reason" name="reason"
+                                                [ngClass]="{ 'is-invalid': enjiForm.submitted && FormApproval.controls.reason.invalid}">
+                                                <option value="">--Select--</option>
+                                                <option *ngFor="let m of ListReason" value={{m.ReasonCode}}>
+                                                    {{m.ReasonDescr}}
+                                                </option>
+                                            </select>
+                                            <lib-uc-show-errors [control]="FormApproval.controls.reason"
+                                                [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row" *ngIf="showNextPerson">
+                                        <div class="col-md-12" formArrayName="nodes"
+                                            *ngFor="let node of FormApproval['controls']['nodes']['controls']; let i = index">
+                                            <div class="form-group row" [formGroupName]="i">
+                                                <label
+                                                    class="col-md-2">{{FormApproval.controls['nodes'].value[i].nodeName}}</label>
+                                                <div class="col-md-8">
+                                                    <select formControlName="slcMemberId" class="form-control"
+                                                        id="slcMemberId" name="slcMemberId">
+                                                        <option value="">--Select--</option>
+                                                        <option
+                                                            *ngFor="let m of dictMember[FormApproval['controls']['nodes'].value[i].nodeId]"
+                                                            value={{m.MemberId}}>{{m.MemberName}}</option>
+                                                    </select>
+                                                    <lib-uc-show-errors [control]="node.controls.slcMemberId"
+                                                        [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions right">
+                                        <button type="button" *ngIf="showCancel"
+                                            class="btn btn-raised btn-warning margin-r-5" (click)="onCancelClick()">
+                                            <i class="ft ft-x"></i> Cancel
+                                        </button>
+                                        <button type="submit" class="btn btn-raised btn-primary">
+                                            <i class="fa fa-check-square"></i> Save
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

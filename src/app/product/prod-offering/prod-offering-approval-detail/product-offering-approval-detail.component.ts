@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { HttpClient } from '@angular/common/http';
+import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 
 @Component({
   selector: 'app-product-offering-approval-detail',
@@ -18,34 +18,68 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
   instanceId: number;
   inputObj: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService) {
+  constructor(private router: Router, 
+    private route: ActivatedRoute, 
+    private toastr: NGXToastrService,
+    private http: HttpClient,) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdOfferingHId"] != null) {
         this.prodOfferingHId = params["ProdOfferingHId"];
+        this.taskId = params["TaskId"];
+        this.instanceId = params["InstanceId"];
       }
-
-      var obj = {
-        taskId: params["TaskId"],
-        instanceId: params["InstanceId"],
-        approvalBaseUrl: environment.ApprovalURL
-      }
-
-      this.inputObj = obj;
     });
    }
 
   ngOnInit() {
+    var obj = {
+      taskId: this.taskId,
+      instanceId: this.instanceId,
+      approvalBaseUrl: environment.ApprovalURL
+    }
+
+    this.inputObj = obj;
+
+    var ApvHoldObj = new ApprovalObj()
+    ApvHoldObj.TaskId = obj.taskId
+
+    this.HoldTask(ApvHoldObj);
   }
 
-  onAvailableNextTask(event)
+  HoldTask(obj){
+    this.http.post(AdInsConstant.ApvHoldTaskUrl, obj).subscribe(
+      (response)=>{      
+        
+      }
+    )
+  }
+
+  onAvailableNextTask()
   {
     
   }
 
   onApprovalSubmited(event)
   {
-    this.toastr.successMessage("Success");
-    this.router.navigate(["/Product/OfferingApproval"]);
+
+    var data = {
+      ProdHId : this.prodOfferingHId,
+      TaskId : event.taskId,
+      InstanceId : event.instanceId,
+      Notes : event.notes,
+      Reason : event.reason,
+      ReasonType : event.reasonType,
+      Result : event.result
+    }
+    this.http.post(AdInsConstant.UpdateProdOfferingPostApv, data).subscribe(
+      () => {
+        this.toastr.successMessage("Success");
+        this.router.navigate(["/Product/OfferingApproval"]);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   onCancelClick()

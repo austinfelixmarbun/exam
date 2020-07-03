@@ -27,9 +27,12 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of SurveyTaskList?.ReturnObject">
-                  <td>{{item.SrvyTaskNo}}</td>
-                  <td>{{item.MrSrvySubjCode}}</td>
-                  <td>{{item.MrSrvyObjCode}}</td>
+                  <td>
+                    <a target="_blank" [routerLink]="['/Survey/View/Task']"
+                      [queryParams]="{ SrvyTaskId: item.SrvyTaskId }">{{item.SrvyTaskNo}}</a>
+                  </td>
+                  <td>{{item.MrSrvySubjCode + ' - ' + item.MrSrvySubj}}</td>
+                  <td>{{item.MrSrvyObjCode + ' - ' + item.MrSrvyObj}}</td>
                   <td>{{item.SrvyFormSchmName}}</td>
                   <td>{{item.SurveyorCode}}</td>
                   <td>
@@ -58,7 +61,7 @@
                     <lib-ucSubsection [id]="'SurveyTaskId'" [title]="'Task'" [panel]="'SurveyTask'">
                     </lib-ucSubsection>
                     <div id="SurveyTask">
-                      <div class="form-group row">
+                      <div class="form-group row" *ngIf="SurveyTaskForm.value.SrvyTaskId != ''">
                         <label class="col-md-2 label-control" translate>Survey Task No</label>
                         <div class="col-md-4">
                           <input type="text" class="form-control" readonly formControlName="SrvyTaskNo"
@@ -70,32 +73,39 @@
                       <div class="form-group row">
                         <label class="col-md-2 label-control adins-required-label" translate>Surveyee Subject</label>
                         <div class="col-md-4">
-                          <select class="form-control" formControlName="MrSrvySubjCode" 
+                          <select class="form-control" formControlName="MrSrvySubjCode"
                             [ngClass]="{ 'is-invalid': enjiForm.submitted && SurveyTaskForm.controls.MrSrvySubjCode.invalid }"
                             (change)="onChange($event.target.value)">
-                            <option *ngFor="let item of SrvySubjList" [value]="item">{{item}}</option>
+                            <option *ngFor="let item of SrvySubjList" [value]="item.Key">
+                              {{item.Key + ' - ' + item.Value}}</option>
                           </select>
-                          <lib-uc-show-errors [control]="SurveyTaskForm.controls.MrSrvySubjCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                          <lib-uc-show-errors [control]="SurveyTaskForm.controls.MrSrvySubjCode"
+                            [submit]="enjiForm.submitted"></lib-uc-show-errors>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label class="col-md-2 label-control adins-required-label" translate>Surveyee Object</label>
                         <div class="col-md-4">
-                          <select class="form-control" formControlName="MrSrvyObjCode" 
+                          <select class="form-control" formControlName="MrSrvyObjCode"
                             [ngClass]="{ 'is-invalid': enjiForm.submitted && SurveyTaskForm.controls.MrSrvyObjCode.invalid }">
-                            <option *ngFor="let item of SrvyObjList" [value]="item.Key">{{item.Value}}</option>
+                            <option *ngFor="let item of SrvyObjList" [value]="item.Key">
+                              {{item.Key + ' - ' + item.Value}}
+                            </option>
                           </select>
-                          <lib-uc-show-errors [control]="SurveyTaskForm.controls.MrSrvyObjCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                          <lib-uc-show-errors [control]="SurveyTaskForm.controls.MrSrvyObjCode"
+                            [submit]="enjiForm.submitted"></lib-uc-show-errors>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label class="col-md-2 label-control adins-required-label" translate>Form Scheme</label>
                         <div class="col-md-4">
-                          <select class="form-control" formControlName="SrvyFormSchmId" 
+                          <select class="form-control" formControlName="SrvyFormSchmId"
                             [ngClass]="{ 'is-invalid': enjiForm.submitted && SurveyTaskForm.controls.SrvyFormSchmId.invalid }">
-                            <option *ngFor="let item of FormSchmList" [value]="item.SrvyFormSchmId">{{item.SrvyFormSchmName}}</option>
+                            <option *ngFor="let item of FormSchmList" [value]="item.SrvyFormSchmId">
+                              {{item.SrvyFormSchmName}}</option>
                           </select>
-                          <lib-uc-show-errors [control]="SurveyTaskForm.controls.SrvyFormSchmId" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                          <lib-uc-show-errors [control]="SurveyTaskForm.controls.SrvyFormSchmId"
+                            [submit]="enjiForm.submitted"></lib-uc-show-errors>
                         </div>
                       </div>
                       <div class="form-group row">
@@ -108,7 +118,7 @@
                         <i class="ft-arrow-left"></i> Back
                       </button>
                       <button type="submit" class="btn btn-raised btn-primary" translate>
-                        <i class="fa fa-check-square-o"></i> Send
+                        <i class="fa fa-check-square-o"></i> Save
                       </button>
                     </div>
                   </form>

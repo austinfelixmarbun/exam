@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { environment } from 'environments/environment.sit';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-view-personal-contact-person',
@@ -12,6 +15,7 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
   CustId: number;
   GetListCustPersonalContactPersonForCustViewByCustIdUrl = AdInsConstant.GetListCustPersonalContactPersonForCustViewByCustId;
   responseObj: any;
+  resCustObj: any;
 
   constructor(
     private http: HttpClient,
@@ -32,6 +36,22 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
       },
       error => {
         this.router.navigateByUrl('Error');
+      }
+    );
+  }
+
+  openView(ContactPersonCustNo)
+  {
+    // GetCustByCustNo
+    var custObj = new CustObj;
+    custObj.CustNo = ContactPersonCustNo
+    this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
+      response => {
+        this.resCustObj = response;
+        AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
+      },
+      error => {
+        console.log(error);
       }
     );
   }

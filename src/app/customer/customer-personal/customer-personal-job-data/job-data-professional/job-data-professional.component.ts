@@ -62,7 +62,7 @@ export class JobDataProfessionalComponent implements OnInit {
     ProfessionalNo: [''],
     JobTitleName: [''],
     IndustryTypeName: [''],
-    EstablishmentDate: [''],
+    EstablishmentDate: ['', Validators.required],
     Notes:[''],
     LuasBangunan: [''],
     LuasTanah: [''],
@@ -71,6 +71,7 @@ export class JobDataProfessionalComponent implements OnInit {
     PriceEstimates: [''],
     StayLength: ['']
   });
+  businessDtMin: Date;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = AdInsConstant.GetCustByCustId;
@@ -101,11 +102,14 @@ export class JobDataProfessionalComponent implements OnInit {
   }
 
   ngOnInit() {
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDtMin = new Date(context["BusinessDt"]);
+    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
     this.professionLookUpObj = new InputLookupObj();
-    this.professionLookUpObj.isRequired = false;
+    this.professionLookUpObj.isRequired = true;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.professionLookUpObj.urlEnviPaging = environment.FoundationR3Url;
@@ -118,7 +122,7 @@ export class JobDataProfessionalComponent implements OnInit {
     this.industryLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.isRequired = false;
+    this.industryLookUpObj.isRequired = true;
     
     this.custJobDataObj = new CustPersonalJobDataObj();
     this.custJobDataObj.CustId = this.IdCust;
@@ -203,8 +207,8 @@ export class JobDataProfessionalComponent implements OnInit {
   setJobAddr(){
     this.jobAddressObj.CustId = this.IdCust;
     this.jobAddressObj.MrCustAddrTypeCode = 'JOB';
-    this.jobAddressObj.Addr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value;
-    this.jobAddressObj.FullAddr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value;
+    this.jobAddressObj.Addr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value; 
+    this.jobAddressObj.FullAddr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataProForm.controls["jobAddressZipcode"]["controls"].value.value; 
     this.jobAddressObj.AreaCode3 = this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode3.value;
     this.jobAddressObj.AreaCode4 = this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode4.value;
     this.jobAddressObj.Zipcode = this.JobDataProForm.controls["jobAddressZipcode"]["controls"].value.value;
@@ -235,9 +239,9 @@ export class JobDataProfessionalComponent implements OnInit {
     this.custPersonalJobDataObj.EmploymentEstablishmentDt = this.JobDataProForm.controls["EstablishmentDate"].value;
   }
 
-  back(){
-    this.outputTab.emit({ stepMode: "previous"});
-  }
+  // back(){
+  //   this.outputTab.emit({ stepMode: "previous"});
+  // }
 
   SaveForm(){
     if(this.typePage == "edit") {

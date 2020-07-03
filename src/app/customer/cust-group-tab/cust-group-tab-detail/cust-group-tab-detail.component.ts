@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment'; 
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cust-group-tab-detail',
@@ -18,6 +19,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 export class CustGroupTabDetailComponent implements OnInit {
   @Input() MrCustTypeCode: string;
   @Input() CustId: number;
+  @Input() ListCustIdToExclude: Array<number>;
   @Output() AddCustGroupResponse = new EventEmitter<any>();
   inputLookupCustPersonalObj: InputLookupObj;
   inputLookupCustCompanyObj: InputLookupObj;
@@ -59,14 +61,31 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustPersonalObj.urlEnviPaging = environment.FoundationR3Url;
       this.inputLookupCustPersonalObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
-      criteriaList = new Array();
-      criteriaObj = new CriteriaObj();
-      criteriaObj.restriction = AdInsConstant.RestrictionEq;
-      criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
-      criteriaObj.value = "PERSONAL";
-      criteriaList.push(criteriaObj);
-      this.inputLookupCustPersonalObj.addCritInput = criteriaList;
-      this.inputLookupCustPersonalObj.isRequired = false;
+      this.inputLookupCustPersonalObj.ddlEnvironments = [
+        {
+          name: "A.MR_CUST_TYPE_CODE",
+          environment: environment.FoundationR3Url
+        }
+      ];
+      if(this.ListCustIdToExclude && this.ListCustIdToExclude.length > 0){
+        criteriaList = new Array();
+        criteriaObj = new CriteriaObj();
+        criteriaObj.restriction = AdInsConstant.RestrictionNotIn;
+        criteriaObj.propName = 'A.CUST_ID';
+        criteriaObj.listValue = this.ListCustIdToExclude;
+        criteriaList.push(criteriaObj);
+        this.inputLookupCustPersonalObj.addCritInput = criteriaList;
+        this.inputLookupCustPersonalObj.isRequired = false;
+      }
+
+      // criteriaList = new Array();
+      // criteriaObj = new CriteriaObj();
+      // criteriaObj.restriction = AdInsConstant.RestrictionEq;
+      // criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
+      // criteriaObj.value = "PERSONAL";
+      // criteriaList.push(criteriaObj);
+      // this.inputLookupCustPersonalObj.addCritInput = criteriaList;
+      // this.inputLookupCustPersonalObj.isRequired = false;
       refMasterRelationship.RefMasterTypeCode = "CUST_PERSONAL_RELATIONSHIP";
     }
     else if(this.MrCustTypeCode == "COMPANY"){
@@ -76,18 +95,35 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustCompanyObj.urlEnviPaging = environment.FoundationR3Url;
       this.inputLookupCustCompanyObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
-      criteriaList = new Array();
-      criteriaObj = new CriteriaObj();
-      criteriaObj.restriction = AdInsConstant.RestrictionEq;
-      criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
-      criteriaObj.value = "COMPANY";
-      criteriaList.push(criteriaObj);
-      this.inputLookupCustCompanyObj.addCritInput = criteriaList;
-      this.inputLookupCustCompanyObj.isRequired = false;
+      this.inputLookupCustCompanyObj.ddlEnvironments = [
+        {
+          name: "A.MR_CUST_TYPE_CODE",
+          environment: environment.FoundationR3Url
+        }
+      ];
+      if(this.ListCustIdToExclude && this.ListCustIdToExclude.length > 0){
+        criteriaList = new Array();
+        criteriaObj = new CriteriaObj();
+        criteriaObj.restriction = AdInsConstant.RestrictionNotIn;
+        criteriaObj.propName = 'A.CUST_ID';
+        criteriaObj.listValue = this.ListCustIdToExclude;
+        criteriaList.push(criteriaObj);
+        this.inputLookupCustCompanyObj.addCritInput = criteriaList;
+        this.inputLookupCustCompanyObj.isRequired = false;
+      }
+
+      // criteriaList = new Array();
+      // criteriaObj = new CriteriaObj();
+      // criteriaObj.restriction = AdInsConstant.RestrictionEq;
+      // criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
+      // criteriaObj.value = "COMPANY";
+      // criteriaList.push(criteriaObj);
+      // this.inputLookupCustCompanyObj.addCritInput = criteriaList;
+      // this.inputLookupCustCompanyObj.isRequired = false;
       refMasterRelationship.RefMasterTypeCode = "CUST_COMPANY_RELATIONSHIP";
     }
 
-    this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).subscribe(
+    this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).pipe(first()).subscribe(
       (response) => {
         this.relationshipList = response;
       }
@@ -96,20 +132,50 @@ export class CustGroupTabDetailComponent implements OnInit {
 
   getLookupCustPersonalResponse(e){
     this.isCustPicked = true;
+    var refMasterRelationship = new RefMasterObj();
     this.CustGrpForm.patchValue({
       MemberCustId: e.custId,
       CustNo: e.custNo,
       CustName: e.custName
     });
+    if(e.mrCustTypeCode == AdInsConstant.MR_CUST_TYPE_CODE_PERSONAL){
+      refMasterRelationship.RefMasterTypeCode = "CUST_PERSONAL_RELATIONSHIP";
+    }
+    else{
+      refMasterRelationship.RefMasterTypeCode = "CUST_COMPANY_RELATIONSHIP";
+    }
+    this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).pipe(first()).subscribe(
+      (response) => {
+        this.relationshipList = response;
+        this.CustGrpForm.patchValue({
+          MrCustRelationshipCode: this.relationshipList["ReturnObject"][0]["Key"]
+        })
+      }
+    );
   }
 
   getLookupCustCompanyResponse(e){
     this.isCustPicked = true;
+    var refMasterRelationship = new RefMasterObj();
     this.CustGrpForm.patchValue({
       MemberCustId: e.custId,
       CustNo: e.custNo,
       CustName: e.custName
     });
+    if(e.mrCustTypeCode == AdInsConstant.MR_CUST_TYPE_CODE_PERSONAL){
+      refMasterRelationship.RefMasterTypeCode = "CUST_PERSONAL_RELATIONSHIP";
+    }
+    else{
+      refMasterRelationship.RefMasterTypeCode = "CUST_COMPANY_RELATIONSHIP";
+    }
+    this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).pipe(first()).subscribe(
+      (response) => {
+        this.relationshipList = response;
+        this.CustGrpForm.patchValue({
+          MrCustRelationshipCode: this.relationshipList["ReturnObject"][0]["Key"]
+        })
+      }
+    );
   }
 
   Save(){

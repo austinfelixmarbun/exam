@@ -40,7 +40,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
     this.requestDeactURL = AdInsConstant.RequestDeactivation;
-    this.getValueReasonModel = AdInsConstant.GetValueReasonModel;
+    this.getValueReasonModel = AdInsConstant.GetListActiveRefReason;
     this.prodOfferVerUrl = AdInsConstant.GetListProdOfferingVersionByProdId;
 
     this.route.queryParams.subscribe(params => {
@@ -54,8 +54,8 @@ export class ProductHODeactivateEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.http.post(this.getValueReasonModel, null).subscribe(
+    var obj = { RefReasonTypeCode: AdInsConstant.RefReasonTypeCodeProdDeactivate };
+    this.http.post(this.getValueReasonModel, obj).subscribe(
       (response) => {
         console.log(response);
         this.allRefReasonMethod = response['ReturnObject'];
@@ -85,6 +85,9 @@ export class ProductHODeactivateEditComponent implements OnInit {
   SaveForm() {
     this.prodHDeactivateObj = new ProdHDeactivateObj();
     this.prodHDeactivateObj = this.ProdHDeactForm.value;
+    //var reason = this.allRefReasonMethod.filter(
+    //  x => x.Key == this.ProdHDeactForm.controls.Reason.value)
+    //this.prodHDeactivateObj.Reason = reason[0].Value;
     this.prodHDeactivateObj.ProdHId = this.prodHId;
     this.prodHDeactivateObj.RowVersion = "";
     this.http.post(this.requestDeactURL, this.prodHDeactivateObj).subscribe(

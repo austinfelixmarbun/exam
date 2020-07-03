@@ -19,6 +19,7 @@ export class ProductHOAddComponent implements OnInit {
   mode: string = "add";
   key: any;
   criteria: CriteriaObj[] = [];
+  source:string="";
 
   RefProductHOForm = this.fb.group({
     ProdCode: ['', Validators.required],
@@ -40,6 +41,7 @@ export class ProductHOAddComponent implements OnInit {
       this.param = params["ProdHId"];
       this.mode = params["mode"];
       this.key = params["key"];
+      this.source = params["source"];
       if (this.mode == "edit") {
         var tempCrit = new CriteriaObj();
         tempCrit.propName = this.key;
@@ -118,7 +120,7 @@ export class ProductHOAddComponent implements OnInit {
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
-              this.router.navigate(["/product/HOpaging"]);
+              this.BackToPaging();
             },
             (error) => {
               console.log(error);
@@ -132,7 +134,7 @@ export class ProductHOAddComponent implements OnInit {
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
-              this.router.navigate(["/product/HOpaging"]);
+              this.BackToPaging();
             },
             (error) => {
               console.log(error);
@@ -152,7 +154,7 @@ export class ProductHOAddComponent implements OnInit {
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
-              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": this.ResultResponse.ProdHId, "ProdId" : this.ResultResponse.ProdId, "mode": this.mode } });
+              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": response["DraftProdHId"], "ProdId" : response["ProdId"], "mode": this.mode, source : this.source } });
             },
             (error) => {
               console.log(error);
@@ -166,7 +168,7 @@ export class ProductHOAddComponent implements OnInit {
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
-              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": response["DraftProdHId"],"ProdId" : response["ProdId"], "mode": this.mode } });
+              this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": response["DraftProdHId"],"ProdId" : response["ProdId"], "mode": this.mode, source : this.source } });
             },
             (error) => {
               console.log(error);
@@ -177,6 +179,20 @@ export class ProductHOAddComponent implements OnInit {
     }
   }
 
-  AddDetail() {
+  Cancel()
+  {
+    this.BackToPaging();
+  }
+
+  BackToPaging()
+  {
+    if(this.source == "return")
+    {
+      this.router.navigate(["/Product/HOReturnPaging"]);
+    }
+    else
+    {
+      this.router.navigate(["/product/HOpaging"]);
+    }
   }
 }

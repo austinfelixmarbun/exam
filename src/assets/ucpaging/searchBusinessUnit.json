@@ -57,7 +57,7 @@
             "name": "BizUnitName"
         },
         {
-            "type": "label",
+            "type": "sort",
             "position": "center",
             "label": "ACTIVE",
             "name": "IsActive"

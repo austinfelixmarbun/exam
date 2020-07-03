@@ -56,7 +56,7 @@ export class CustomerPersonalAddressComponent implements OnInit {
               }else if( this.legalAddr.Addr==null && this.residenceAddr.Addr != null){
                 this.toastr.errorMessage("Please complete Legal Address First");
               }else{
-                this.toastr.errorMessage("Please complete Legal and Residenec Address First");
+                this.toastr.errorMessage("Please complete Legal and Residence Address First");
               }
 
             } 
@@ -67,7 +67,7 @@ export class CustomerPersonalAddressComponent implements OnInit {
           }); 
       }); 
   }
-  back(){
-    this.outputTab.emit({ stepMode: "previous"});
-  }
+  // back(){
+  //   this.outputTab.emit({ stepMode: "previous"});
+  // }
 }

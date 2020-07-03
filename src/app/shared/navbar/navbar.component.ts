@@ -53,7 +53,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     ngOnInit() {
         this.GetListNotifH();
-
+        Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         console.log(this.userAccess.UserName);
         var _hubConnection = new HubConnectionBuilder()
             .withUrl(AdInsConstant.WebSocketUrl)
@@ -123,6 +123,26 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         // }, 3000);
 
 
+    }
+
+    ClickNotification(item)
+    {
+        this.http.post(AdInsConstant.UpdateReadNotification, {NotificationDId:item.NotificationDId}).subscribe(
+            (response) => {
+            },
+            (error) => {
+                console.log(error);
+            });
+        if(item.MrNotificationMethodCode=="EXT_LINK")
+        {
+            window.open(item.Url,"_blank");
+        }
+        else if(item.MrNotificationMethodCode="INT_LINK")
+        {
+            window.open(item.Url);
+        }
+
+        
     }
 
     logout() {

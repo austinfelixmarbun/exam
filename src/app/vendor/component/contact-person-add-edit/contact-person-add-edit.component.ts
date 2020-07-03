@@ -20,15 +20,16 @@ export class ContactPersonAddEditComponent implements OnInit {
   @Output() objOutput: EventEmitter<any> = new EventEmitter();
   HiddenState: boolean = false;
   mode: string;
+  businessDt : Date;
 
   title: string = "Contact Person Main Info";
   title2: string = "Contact Person Address Info";
   ContactPersonForm = this.fb.group({
     Name: ['', Validators.required],
     JobPosition: ['', Validators.required],
-    Phn1: ['', Validators.required],
-    Phn2: [''],
-    Email: ['', Validators.required],
+    Phn1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    Phn2: ['', Validators.pattern("^[0-9]+$")],
+    Email: ['', [Validators.required, Validators.pattern("^\\w+([\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$")]],
     JoinDt: ['', Validators.required],
     IsOwner: [false],
     Addr: [''],
@@ -37,9 +38,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     City: [{ value: '', disabled: true }, Validators.required],
     ProvDistrictName: [{ value: '', disabled: true }, Validators.required]
   })
-  inputPagingObjSupervisor: InputLookupObj;
-  inputEmpLookupObj: InputLookupObj;
-  inputZipcodeLookupObj: InputLookupObj;
+  inputZipcodeLookupObj: InputLookupObj = new InputLookupObj();
 
   contactPersonObj: VendorContactPersonObj;
 
@@ -48,19 +47,22 @@ export class ContactPersonAddEditComponent implements OnInit {
   result: any;
   zipcodee: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.mode = this.objInput["mode"];
     this.VendorContactPersonId = this.objInput["VendorContactPersonId"];
+
+    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    this.businessDt = new Date(context["BusinessDt"]);
 
     var JobPosition = {
       RefMasterTypeCode: "JOB_POSITION",
       RowVersion: ""
     }
-    this.http.post("http://r3app-server/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", JobPosition).subscribe(
+    this.http.post(AdInsConstant.GetListActiveRefMaster, JobPosition).subscribe(
       (response) => {
         this.itemJobPosition = response["ReturnObject"];
         this.ContactPersonForm.patchValue({
@@ -69,7 +71,6 @@ export class ContactPersonAddEditComponent implements OnInit {
       }
     )
 
-    this.inputZipcodeLookupObj = new InputLookupObj();
     this.inputZipcodeLookupObj.urlJson = "./assets/lookup/lookupZipcode.json";
     this.inputZipcodeLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputZipcodeLookupObj.urlEnviPaging = environment.FoundationR3Url;
@@ -79,7 +80,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       var contactPerson = new VendorContactPersonObj();
       contactPerson.VendorContactPersonId = this.VendorContactPersonId;
-      this.http.post(AdInsConstant.GetVendorContactPersonById, contactPerson).subscribe(
+      await this.http.post(AdInsConstant.GetVendorContactPersonById, contactPerson).toPromise().then(
         (response) => {
           this.result = response;
           this.ContactPersonForm.patchValue({
@@ -96,7 +97,7 @@ export class ContactPersonAddEditComponent implements OnInit {
             City: this.result.City,
             ProvDistrictName: this.result.Province
           })
-          this.inputZipcodeLookupObj.nameSelect = this.result.Zipcode;
+          this.inputZipcodeLookupObj.jsonSelect = {Zipcode: this.result.Zipcode};
           this.zipcodee = this.result.Zipcode;
         },
         (error) => {
@@ -104,6 +105,7 @@ export class ContactPersonAddEditComponent implements OnInit {
         }
       );
     }
+    this.inputZipcodeLookupObj.isReady = true;
   }
 
   getEmpData(ev) {
@@ -115,6 +117,7 @@ export class ContactPersonAddEditComponent implements OnInit {
       JoinDt: formatDate(ev.JoinDt, 'yyyy-MM-dd', 'en-US'),
     })
   }
+
   getZipcodeData(ev) {
     this.ContactPersonForm.patchValue({
       AreaCode1: ev.AreaCode1,
@@ -174,7 +177,6 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.contactPersonObj.VendorContactPersonId = "0";
       this.contactPersonObj.RowVersion = "";
       this.http.post(AdInsConstant.AddVendorContactPerson, this.contactPersonObj).subscribe((response) => {
-
         this.toastr.successMessage(response['message']);
         this.HiddenCheck();
       },

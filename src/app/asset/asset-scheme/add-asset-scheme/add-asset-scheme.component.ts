@@ -211,10 +211,6 @@ export class AddAssetSchemeComponent implements OnInit {
     }
 
     for (let index = 0; index < this.tempData.length; index++) {
-      // var assetSchmDObj = {
-      //   AssetSchmHId: this.AssetSchmHId,
-      //   AssetMasterId: this.tempData[index].AssetMasterId
-      // }
       var assetSchmDObj = new AssetSchmDObj();
       assetSchmDObj.AssetSchmHId = this.AssetSchmHId;
       assetSchmDObj.AssetMasterId = this.tempData[index].AssetMasterId;
@@ -245,8 +241,6 @@ export class AddAssetSchemeComponent implements OnInit {
     if (this.listSelectedId.length !== 0) {
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
-      }
-      for (var i = 0; i < this.listSelectedId.length; i++) {
         var object = this.resultData.find(x => x.AssetMasterId == this.listSelectedId[i]);
         this.tempData.push(object);
       }

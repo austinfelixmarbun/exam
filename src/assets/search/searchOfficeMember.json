@@ -26,7 +26,8 @@
         "label": "Area Name",
         "placeholder": "Area Name",
         "isFromURL": true,
-        "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefOfficeArea/GetListKvpActiveRefOfficeArea",
+        "url": "",
+        "path": "/RefOfficeArea/GetListKvpActiveRefOfficeArea",
         "itemsUrl": [],
         "items": [],
         "isSelectOne": false
@@ -34,6 +35,6 @@
     ],
     "querystring": {
       "select": "SELECT ro.OFFICE_CODE AS OfficeCode, ro.OFFICE_NAME AS OfficeName, roa.AREA_NAME AS AreaName, roa.AREA_CODE AS AreaCode, ro.REF_OFFICE_ID AS RefOfficeId",
-      "from": "FROM dbo.REF_OFFICE ro WITH(NOLOCK) JOIN dbo.REF_OFFICE_AREA roa WITH(NOLOCK) ON ro.REF_OFFICE_AREA_ID = roa.REF_OFFICE_AREA_ID"
+      "from": "FROM dbo.REF_OFFICE ro WITH(NOLOCK) LEFT JOIN dbo.REF_OFFICE_AREA roa WITH(NOLOCK) ON ro.REF_OFFICE_AREA_ID = roa.REF_OFFICE_AREA_ID"
     }
   }

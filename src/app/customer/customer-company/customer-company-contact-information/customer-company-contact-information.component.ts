@@ -48,8 +48,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     JobTitleName: ['', [Validators.required]],
     MobilePhnNo1: ['', [Validators.pattern("^[0-9]+$"), Validators.maxLength(100), Validators.required]],
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
-    Email1: [''],
-    Email2: [''],
+    Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    Email2: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -156,9 +156,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
 
   }
 
-  back() {
-    this.outputTab.emit({ stepMode: 'previous' });
-  }
+  // back() {
+  //   this.outputTab.emit({ stepMode: 'previous' });
+  // }
 
   SaveValue() {
     this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
@@ -187,6 +187,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custAddrObj.AreaCode4 = this.ContactInformationForm.value.UcAddress.AreaCode4;
     this.custAddrObj.City = this.ContactInformationForm.value.UcAddress.City;
     this.custAddrObj.Zipcode = this.ContactInformationForm.value.UcAddressZipcode.value;
+    this.custAddrObj.FullAddr = this.ContactInformationForm.value.UcAddress.Addr + " RT: "+ this.ContactInformationForm.value.UcAddress.AreaCode4 + " RW: " +this.ContactInformationForm.value.UcAddress.AreaCode3 + " " +  this.ContactInformationForm.value.UcAddress.AreaCode2 +", " + this.ContactInformationForm.value.UcAddress.AreaCode1 + " " + this.ContactInformationForm.value.UcAddressZipcode.value; 
     this.custAddrObj.SubZipcode = this.ContactInformationForm.value.UcAddressZipcode.value;
     this.custAddrObj.Fax = this.ContactInformationForm.value.UcAddress.Fax;
     this.custAddrObj.FaxArea = this.ContactInformationForm.value.UcAddress.FaxArea;

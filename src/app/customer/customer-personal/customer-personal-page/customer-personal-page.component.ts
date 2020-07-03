@@ -107,11 +107,16 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
 
   getValue(ev: any) {
+    console.log("GetValue: " + JSON.stringify(ev));
     if (ev.stepMode != undefined) {
-      if (ev.stepMode == "next")
+      if (ev.stepMode == "next"){
         this.stepper.next();
-      else
+        this.CustStepIndex++;
+      }
+      else{
         this.stepper.previous();
+        this.CustStepIndex--;
+      }
     }
   }
 }

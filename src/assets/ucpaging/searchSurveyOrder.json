@@ -11,7 +11,8 @@
             "datatype": "numeric",
             "isFromURL": true,
             "isSelectOne" : true,
-            "url": "http://r3app-server.ad-ins.com/Foundation_R3/RefOffice/GetListKvpActiveRefOfficeIdForPaging",
+            "url": "",
+            "path": "/RefOffice/GetListKvpActiveRefOfficeIdForPaging",
             "itemsUrl": []
         },
         {
@@ -31,20 +32,34 @@
             "placeholder": "Placeholder"
         },
         {
-            "type": "textbox",
+            "type": "dropdown",
             "name": "SO.MR_SRVY_STAT_CODE",
             "id": "MrSrvyStatCodeId",
             "value": "",
             "label": "Survey Order Status",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "path": "/RefStatus/GetRefStatusByTrxTypeCode",
+            "items": [],
+            "itemsUrl": [],
+            "criteriaPropName": "TrxTypeCode",
+            "criteriaPropValue": "FOU_SURVEY"
         },
         {
-            "type": "textbox",
+            "type": "dropdown",
             "name": "SO.MR_SRVY_SOURCE_CODE",
             "id": "MrSrvySourceCodeId",
             "value": "",
             "label": "Survey Type",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "items": [],
+            "itemsUrl": [],
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "SRVY_SOURCE_CODE"
         },
         {
             "type": "textbox",
@@ -61,7 +76,7 @@
             "id": "ReqDtGT",
             "value": "",
             "label": "Request Date >=",
-            "restriction": "lte",
+            "restriction": "gte",
             "placeholder": "Placeholder"
         },
         {
@@ -141,7 +156,7 @@
             "type": "sort",
             "position": "center",
             "label": "# of Survey Task",
-            "name": "SO.TASK_TOTAL"
+            "name": "TaskTotal"
         },
         {
             "type": "label",
@@ -179,17 +194,9 @@
             "property": "MrSrvySourceCode"
         },
         {
-            "type": "link",
+            "type": "text",
             "position": "center",
-            "property": "TrxRefNo",
-            "path": "/Survey/View",
-            "target": "_blank",
-            "param": [
-                {
-                    "type": "SrvyOrderId",
-                    "property": "SrvyOrderId"
-                }
-            ]
+            "property": "TrxRefNo"
         },
         {
             "type": "text",
@@ -227,28 +234,8 @@
                             "conditions": [
                                 {
                                     "property": "MrSrvyStatCode",
-                                    "value": "DONE",
+                                    "value": "NEW",
                                     "restriction": "EQ"
-                                }
-                            ],
-                            "result" : {
-                                "type": "url",
-                                "path" : "/Survey/Task",
-                                "param" : [
-                                    {
-                                        "type" : "SrvyOrderId",
-                                        "property" : "SrvyOrderId"
-                                    }
-                                ]
-                            },
-                            "isHide" : true
-                        },
-                        {
-                            "conditions": [
-                                {
-                                    "property": "MrSrvyStatCode",
-                                    "value": "DONE",
-                                    "restriction": "NEQ"
                                 }
                             ],
                             "result" : {
@@ -277,22 +264,8 @@
                             "conditions": [
                                 {
                                     "property": "MrSrvyStatCode",
-                                    "value": "DONE",
+                                    "value": "NEW",
                                     "restriction": "EQ"
-                                }
-                            ],
-                            "result" : {
-                                "type": "callback",
-                                "property" : "SrvyOrderId"
-                            },
-                            "isHide" : true
-                        },
-                        {
-                            "conditions": [
-                                {
-                                    "property": "MrSrvyStatCode",
-                                    "value": "DONE",
-                                    "restriction": "NEQ"
                                 }
                             ],
                             "result" : {

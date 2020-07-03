@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
+import { HttpClient } from '@angular/common/http';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-product-offering-deact-apv-detail',
@@ -19,7 +19,7 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
   instanceId: number;
   inputObj: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private http:HttpClient) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdOfferingHId"] != null) {
         this.prodOfferingHId = params["ProdOfferingHId"];
@@ -32,27 +32,39 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
    }
 
   ngOnInit() {
-    this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
+    this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformationForDeactApv.json";
     var obj = {
       taskId: this.taskId,
       instanceId: this.instanceId,
       approvalBaseUrl: environment.ApprovalURL
     }
-    console.log("OBEJE")
-    console.log(obj);
 
     this.inputObj = obj;
+
+    var ApvHoldObj = new ApprovalObj()
+    ApvHoldObj.TaskId = obj.taskId
+
+    this.HoldTask(ApvHoldObj);
   }
 
-  onAvailableNextTask(event)
+  HoldTask(obj){
+    this.http.post(AdInsConstant.ApvHoldTaskUrl, obj).subscribe(
+      (response)=>{
+      }
+    )
+  }
+
+  onAvailableNextTask()
   {
     
   }
 
-  onApprovalSubmited(event)
+  onApprovalSubmited()
   {
     this.toastr.successMessage("Success");
     this.router.navigate(["/Product/OfferingDeactivateApproval"]);
   }
-
+  onCancelClick() {
+    this.router.navigate(["/Product/OfferingDeactivateApproval"]);
+  }
 }

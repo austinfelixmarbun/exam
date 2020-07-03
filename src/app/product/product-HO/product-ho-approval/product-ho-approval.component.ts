@@ -3,21 +3,29 @@ import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { HttpClient } from '@angular/common/http';
+import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
+import { String } from 'typescript-string-operations';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-ho-approval',
   templateUrl: './product-ho-approval.component.html',
+  providers: [NGXToastrService]
 })
 export class ProductHOApprovalComponent implements OnInit {
 
   inputPagingObj: any;
   arrCrit: any;
+  userContext: CurrentUserContext = JSON.parse(localStorage.getItem(AdInsConstant.USER_ACCESS));
 
-  constructor() { }
+  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    this.inputPagingObj=new UcpagingModule();
-    this.inputPagingObj._url="./assets/ucpaging/product/searchProductHOApproval.json";
+    this.inputPagingObj = new UcpagingModule();
+    this.inputPagingObj._url = "./assets/ucpaging/product/searchProductHOApproval.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductHOApproval.json";
@@ -29,7 +37,60 @@ export class ProductHOApprovalComponent implements OnInit {
     critObj.propName = 'CATEGORY_CODE';
     critObj.value = 'PRD_HO_APV';
     this.arrCrit.push(critObj);
+
+    critObj = new CriteriaObj();
+    critObj.DataType = 'text';
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'CURRENT_USER_ID';
+    critObj.value = this.userContext.UserName;
+    this.arrCrit.push(critObj);
+
+    
+    critObj = new CriteriaObj();
+    critObj.DataType = 'text';
+    critObj.restriction = AdInsConstant.RestrictionOr;
+    critObj.propName = 'MAIN_USER_ID';
+    critObj.value = this.userContext.UserName;
+    this.arrCrit.push(critObj);
+
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 
+  CallBackHandler(ev) {
+    var ApvReqObj = new ApprovalObj();
+    if(ev.Key == "Process"){
+      if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
+        this.toastr.warningMessage(AdInsConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
+      } else {
+        this.router.navigate(["/Product/HOApproval/Detail"], { queryParams: { "ProdHId": ev.RowObj.ProdHId, "TaskId" : ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId } });
+      }
+    }
+    else if (ev.Key == "HoldTask") {
+      if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
+        this.toastr.warningMessage(AdInsConstant.NOT_ELIGIBLE_FOR_HOLD);
+      } else {
+        ApvReqObj.TaskId = ev.RowObj.TaskId
+        this.httpClient.post(AdInsConstant.ApvHoldTaskUrl, ApvReqObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+          }
+        )
+      }
+    }
+    else if (ev.Key == "TakeBack") {
+      if (String.Format("{0:L}", ev.RowObj.MAIN_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
+        this.toastr.warningMessage(AdInsConstant.NOT_ELIGIBLE_FOR_TAKE_BACK);
+      } else {
+        ApvReqObj.TaskId = ev.RowObj.TaskId
+        this.httpClient.post(AdInsConstant.ApvTakeBackTaskUrl, ApvReqObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+          }
+        )
+      }
+    }
+    else {
+      this.toastr.errorMessage(String.Format(AdInsConstant.ERROR_NO_CALLBACK_SETTING, ev.Key));
+    }
+  }
 }

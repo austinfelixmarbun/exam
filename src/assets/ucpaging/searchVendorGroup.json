@@ -4,14 +4,15 @@
     "component": [
         {
             "type": "dropdown",
-            "name": "A.MR_VENDOR_CATEGORY_CODE",
+            "name": "VG.MR_VENDOR_CATEGORY_CODE",
             "id": "VendorCategoryId",
             "value": "",
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Vendor Category",
             "criteriaPropName": "RefMasterTypeCode",
             "criteriaPropValue": "VENDOR_CATEGORY",
@@ -20,7 +21,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.IS_ACTIVE",
+            "name": "VG.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -41,7 +42,7 @@
         },
         {
             "type": "textbox",
-            "name": "A.VENDOR_GRP_CODE",
+            "name": "VG.VENDOR_GRP_CODE",
             "id": "VendorGrpCodeId",
             "value": "",
             "label": "Group Code",
@@ -49,7 +50,7 @@
         },
         {
             "type": "textbox",
-            "name": "A.VENDOR_GRP_NAME",
+            "name": "VG.VENDOR_GRP_NAME",
             "id": "VendorGrpNameId",
             "value": "",
             "label": "Group Name",
@@ -57,28 +58,27 @@
         }
     ],
     "querystring": {
-        "select": "SELECT  A.VENDOR_GRP_CODE AS VendorGrpCode, A.VENDOR_GRP_NAME AS VendorGrpName, A.IS_ACTIVE AS IsActive, COUNT(B.VENDOR_GRP_ID) AS NumOfMbr, A.VENDOR_GRP_ID AS VendorGrpId,A.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode",
-        "from": "FROM dbo.VENDOR_GRP A WITH(NOLOCK) LEFT JOIN dbo.VENDOR_GRP_MBR B WITH(NOLOCK) ON A.VENDOR_GRP_ID = B.VENDOR_GRP_ID",
-        "groupby": "GROUP BY A.VENDOR_GRP_CODE, A.VENDOR_GRP_NAME, A.IS_ACTIVE, A.VENDOR_GRP_ID,A.MR_VENDOR_CATEGORY_CODE "
+        "select": "SELECT VG.VENDOR_GRP_CODE AS VendorGrpCode, VG.VENDOR_GRP_NAME AS VendorGrpName, VG.IS_ACTIVE AS IsActive, ISNULL(QRY_MBR.JUMLAH_MBR,0) AS NumOfMbr, VG.VENDOR_GRP_ID AS VendorGrpId,VG.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode",
+        "from": "FROM VENDOR_GRP VG WITH(NOLOCK) LEFT JOIN (SELECT VENDOR_GRP_ID, V.MR_VENDOR_CATEGORY_CODE, COUNT(0) JUMLAH_MBR FROM VENDOR_GRP_MBR VGM WITH(NOLOCK) INNER JOIN VENDOR V WITH(NOLOCK) ON VGM.VENDOR_ID = V.VENDOR_ID GROUP BY VENDOR_GRP_ID, V.MR_VENDOR_CATEGORY_CODE) QRY_MBR ON VG.VENDOR_GRP_ID = QRY_MBR.VENDOR_GRP_ID AND VG.MR_VENDOR_CATEGORY_CODE = QRY_MBR.MR_VENDOR_CATEGORY_CODE"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "center",
             "label": "GROUP CODE",
-            "name": "VendorGrpCode"
+            "name": "VG.VENDOR_GRP_CODE"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "GROUP NAME",
-            "name": "VendorGrpName"
+            "name": "VG.VENDOR_GRP_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Active Status",
-            "name": "IsActive"
+            "name": "VG.IS_ACTIVE"
         },
         {
             "type": "sort",
@@ -155,10 +155,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "VendorGrpId"
                 }
             ]
         }

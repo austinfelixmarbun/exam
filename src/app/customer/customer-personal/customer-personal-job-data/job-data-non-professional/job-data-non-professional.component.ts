@@ -123,9 +123,9 @@ export class JobDataNonProfessionalComponent implements OnInit {
       });
   }
 
-  back(){
-    this.outputTab.emit({ stepMode: "previous"});
-  }
+  // back(){
+  //   this.outputTab.emit({ stepMode: "previous"});
+  // }
 
   SaveForm(){
     if(this.typePage == "edit"){

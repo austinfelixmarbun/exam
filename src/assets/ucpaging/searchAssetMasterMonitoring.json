@@ -11,7 +11,8 @@
             "datatype": "text",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server/FOUNDATION_R3/RefOffice/GetListKvpActiveRefOfficeForPaging",
+            "url": "",
+            "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Office Name",
             "isQueryIn": true,
             "items": [],
@@ -42,8 +43,9 @@
             "placeholder": "Placeholder",
             "isFromURL": true,
             "isSelectOne": false,
-            "url": "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefStatus/GetRefStatusByTrxTypeCode",
-            "label": "UPLOAD STATUS",
+            "url": "",
+            "path": "/RefStatus/GetRefStatusByTrxTypeCode",
+            "label": "Upload Status",
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "TrxTypeCode",
@@ -67,31 +69,31 @@
             "type": "sort",
             "position": "left",
             "label": "OFFICE NAME",
-            "name": "OFFICE_NAME"
+            "name": "RO.OFFICE_NAME"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "FILE NAME",
-            "name": "FILE_NAME"
+            "name": "UMH.FILE_NAME"
         },
         {
             "type": "sort",
             "position": "right",
             "label": "TOTAL RECORD",
-            "name": "TOTAL_RECORD"
+            "name": "UMH.TOTAL_RECORD"
         },
         {
             "type": "sort",
             "position": "right",
             "label": "TOTAL RECORD PROCESSED",
-            "name": "TOTAL_RECORD_PROCESSED"
+            "name": "UMH.TOTAL_RECORD_PROCESSED"
         },
         {
             "type": "sort",
             "position": "right",
             "label": "TOTAL RECORD ERROR",
-            "name": "TOTAL_RECORD_ERROR"
+            "name": "UMH.TOTAL_RECORD_ERROR"
         },
         {
             "type": "sort",
