@@ -12,7 +12,6 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 @Component({
   selector: 'app-vendor-groupmember',
   templateUrl: './vendor-groupmember.component.html',
-  styleUrls: ['./vendor-groupmember.component.scss'],
   providers: [NGXToastrService]
 })
 export class VendorGroupmemberComponent implements OnInit {

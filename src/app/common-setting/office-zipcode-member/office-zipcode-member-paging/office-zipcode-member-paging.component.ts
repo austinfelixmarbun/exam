@@ -12,7 +12,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-office-zipcode-member-paging',
   templateUrl: './office-zipcode-member-paging.component.html',
-  styleUrls: ['./office-zipcode-member-paging.component.scss'],
   providers: [NGXToastrService]
 })
 export class OfficeZipcodeMemberPagingComponent implements OnInit {

@@ -7,8 +7,7 @@ import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
 
 @Component({
   selector: 'app-office-group-member',
-  templateUrl: './office-group-member.component.html',
-  styleUrls: ['./office-group-member.component.scss'],
+  templateUrl: './office-group-member.component.html'
 })
 export class OfficeGroupMemberComponent implements OnInit {
 

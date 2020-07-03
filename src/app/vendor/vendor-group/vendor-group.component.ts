@@ -10,7 +10,6 @@ import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
 @Component({
   selector: 'app-vendor-group',
   templateUrl: './vendor-group.component.html',
-  styleUrls: ['./vendor-group.component.scss'],
   providers: [NGXToastrService]
 })
 export class VendorGroupComponent implements OnInit {

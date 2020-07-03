@@ -15,7 +15,6 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 @Component({
   selector: 'app-vendor-holding-add-edit',
   templateUrl: './vendor-holding-add-edit.component.html',
-  styleUrls: ['./vendor-holding-add-edit.component.scss'],
   providers: [VendorService, NGXToastrService]
 })
 export class VendorHoldingAddEditComponent implements OnInit {

@@ -151,9 +151,11 @@
                       </div>
                     </div>
                     <!-- <app-ucAddress #ucAddress [parentForm]='OfficeReqForm'></app-ucAddress> -->
+                    <div style="margin-left: 10px;">
                     <lib-ucaddress [UCAddrForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
                       [default]="addressObj" [inputField]="inputFieldAddr">
                     </lib-ucaddress>
+                  </div>
                     <!-- <app-ucContactInfo #ucContactInfo [parentForm]='OfficeReqForm'></app-ucContactInfo> -->
 
 
@@ -231,7 +233,7 @@
                         <i class="ft-x"></i> Cancel
                       </button>
                       <button type="submit" class="btn btn-raised btn-primary" translate>
-                        <i class="fa fa-check-square-o"></i> Save
+                        <i class="far fa-check-square"></i> Save
                       </button>
                     </div>
 

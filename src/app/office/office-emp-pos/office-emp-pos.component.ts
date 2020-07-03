@@ -16,7 +16,6 @@ import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 @Component({
   selector: 'app-office-emp-pos',
   templateUrl: './office-emp-pos.component.html',
-  styleUrls: ['./office-emp-pos.component.scss'],
   providers: [NGXToastrService, DecimalPipe]
 })
 export class OfficeEmpPosComponent implements OnInit {

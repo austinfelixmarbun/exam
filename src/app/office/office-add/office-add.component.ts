@@ -17,7 +17,6 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 @Component({
   selector: 'app-office-add',
   templateUrl: './office-add.component.html',
-  styleUrls: ['./office-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class OfficeAddComponent implements OnInit {

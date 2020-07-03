@@ -5,8 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-customer-view',
-  templateUrl: './customer-view.component.html',
-  styleUrls: ['./customer-view.component.scss']
+  templateUrl: './customer-view.component.html'
 })
 export class CustomerViewComponent implements OnInit {
   custModel: any;

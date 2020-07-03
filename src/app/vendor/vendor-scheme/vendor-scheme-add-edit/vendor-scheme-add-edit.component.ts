@@ -10,7 +10,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-vendor-scheme-add-edit',
   templateUrl: './vendor-scheme-add-edit.component.html',
-  styleUrls: ['./vendor-scheme-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class VendorSchemeAddEditComponent implements OnInit {

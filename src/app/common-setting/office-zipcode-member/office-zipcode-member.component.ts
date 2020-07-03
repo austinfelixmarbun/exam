@@ -8,8 +8,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-office-zipcode-member',
-  templateUrl: './office-zipcode-member.component.html',
-  styleUrls: ['./office-zipcode-member.component.scss']
+  templateUrl: './office-zipcode-member.component.html'
 })
 export class OfficeZipcodeMemberComponent implements OnInit {
   //** Start UC Search **//

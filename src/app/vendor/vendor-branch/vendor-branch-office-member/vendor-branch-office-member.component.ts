@@ -7,8 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-vendor-branch-office-member',
-  templateUrl: './vendor-branch-office-member.component.html',
-  styleUrls: ['./vendor-branch-office-member.component.scss']
+  templateUrl: './vendor-branch-office-member.component.html'
 })
 export class VendorBranchOfficeMemberComponent implements OnInit {
   inputPagingObj: any;

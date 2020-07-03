@@ -12,7 +12,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-office-zipcode-member-add',
   templateUrl: './office-zipcode-member-add.component.html',
-  styleUrls: ['./office-zipcode-member-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class OfficeZipcodeMemberAddComponent implements OnInit {

@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-branch-employee-add-edit',
-  templateUrl: './vendor-branch-employee-add-edit.component.html',
-  styleUrls: ['./vendor-branch-employee-add-edit.component.scss']
+  templateUrl: './vendor-branch-employee-add-edit.component.html'
 })
 export class VendorBranchEmployeeAddEditComponent implements OnInit {
   VendorId: number;

@@ -7,8 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-vendor-branch-employee-paging',
-  templateUrl: './vendor-branch-employee-paging.component.html',
-  styleUrls: ['./vendor-branch-employee-paging.component.scss']
+  templateUrl: './vendor-branch-employee-paging.component.html'
 })
 export class VendorBranchEmployeePagingComponent implements OnInit {
 

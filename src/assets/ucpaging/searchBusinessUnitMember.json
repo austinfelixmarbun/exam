@@ -80,7 +80,7 @@
             "isSelectOne": false,
             "url": "",
             "path": "/RefJobTitle/GetListKeyValueActiveByCode",
-            "label": "JOB TITLE",
+            "label": "Job Title",
             "criteriaPropName" : "RefJobTitleId",
             "criteriaPropValue" : "JOB_TITLE_CODE",
             "items": [],

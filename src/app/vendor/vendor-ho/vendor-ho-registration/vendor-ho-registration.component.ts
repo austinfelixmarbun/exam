@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-ho-registration',
-  templateUrl: './vendor-ho-registration.component.html',
-  styleUrls: ['./vendor-ho-registration.component.scss']
+  templateUrl: './vendor-ho-registration.component.html'
 })
 export class VendorHoRegistrationComponent implements OnInit {
   VendorId: any; 

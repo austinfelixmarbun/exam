@@ -7,8 +7,7 @@ import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 
 @Component({
   selector: 'app-vendor-scheme-member-paging',
-  templateUrl: './vendor-scheme-member-paging.component.html',
-  styleUrls: ['./vendor-scheme-member-paging.component.scss']
+  templateUrl: './vendor-scheme-member-paging.component.html'
 })
 export class VendorSchemeMemberPagingComponent implements OnInit {
 

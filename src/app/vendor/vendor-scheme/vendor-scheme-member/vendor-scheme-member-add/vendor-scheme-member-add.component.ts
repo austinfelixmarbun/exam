@@ -9,8 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-vendor-scheme-member-add',
-  templateUrl: './vendor-scheme-member-add.component.html',
-  styleUrls: ['./vendor-scheme-member-add.component.scss']
+  templateUrl: './vendor-scheme-member-add.component.html'
 })
 export class VendorSchemeMemberAddComponent implements OnInit {
 

@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-holding-registration',
-  templateUrl: './vendor-holding-registration.component.html',
-  styleUrls: ['./vendor-holding-registration.component.scss']
+  templateUrl: './vendor-holding-registration.component.html'
 })
 export class VendorHoldingRegistrationComponent implements OnInit {
   viewObj: any;

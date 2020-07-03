@@ -15,7 +15,6 @@ import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 @Component({
   selector: 'app-office-area-member-add',
   templateUrl: './office-area-member-add.component.html',
-  styleUrls: ['./office-area-member-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class OfficeAreaMemberAddComponent implements OnInit {
