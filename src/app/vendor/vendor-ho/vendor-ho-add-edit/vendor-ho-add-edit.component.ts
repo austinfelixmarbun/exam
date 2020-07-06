@@ -313,10 +313,10 @@ export class VendorHoAddEditComponent implements OnInit {
 
   SaveForm() {
     if (Date.parse(this.VendorForm.controls.EstablishmentDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
-      this.toastr.errorMessage("Establishment Date Must Be Lesser Than Business Date");
+      this.toastr.warningMessage("Establishment Date Must Be Lesser Than Business Date");
     }
     else if (Date.parse(this.VendorForm.controls.PartnershipDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
-      this.toastr.errorMessage("Partnership Date Must Be Lesser Than Business Date");
+      this.toastr.warningMessage("Partnership Date Must Be Lesser Than Business Date");
     }
     else {
       this.vendorHoObj = new VendorHoObj();
