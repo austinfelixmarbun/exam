@@ -52,11 +52,11 @@ export class CustomerPersonalAddressComponent implements OnInit {
             this.residenceAddr = response; 
             if(this.legalAddr.Addr==null || this.residenceAddr.Addr == null){
               if(this.legalAddr.Addr!=null && this.residenceAddr.Addr == null){
-                this.toastr.errorMessage("Please complete Residence Address First");
+                this.toastr.warningMessage("Please complete Residence Address First");
               }else if( this.legalAddr.Addr==null && this.residenceAddr.Addr != null){
-                this.toastr.errorMessage("Please complete Legal Address First");
+                this.toastr.warningMessage("Please complete Legal Address First");
               }else{
-                this.toastr.errorMessage("Please complete Legal and Residence Address First");
+                this.toastr.warningMessage("Please complete Legal and Residence Address First");
               }
 
             } 

@@ -48,7 +48,7 @@ export class CustomerCompanyAddressComponent implements OnInit {
       (response) => {
         this.legalAddr = response; 
         if (this.legalAddr.Addr == null) {
-          this.toastr.errorMessage("Please complete Legal Address First");
+          this.toastr.warningMessage("Please complete Legal Address First");
         }
         else {
           this.outputTab.emit({ stepMode: "next" });
