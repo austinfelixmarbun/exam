@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { UcpagingComponent } from '@adins/ucpaging';
+import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { HttpClient } from '@angular/common/http';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
@@ -13,16 +11,11 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   providers: [NGXToastrService]
 })
 export class NegativeAssetComponent implements OnInit {
-  @ViewChild(UcpagingComponent) ucpaging;
-  inputPagingObj: UcPagingObj;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
-  constructor(
-    private service: NGXToastrService,
-    private https: HttpClient
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchNegativeAsset.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
