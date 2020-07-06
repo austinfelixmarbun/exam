@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { UcPagingObj, WhereValueObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute } from '@angular/router';
@@ -28,17 +28,11 @@ export class VendorHoldingPagingComponent implements OnInit {
         environment: environment.FoundationR3Url
       }
     ];
-    this.inputPagingObj.addCritInput = new Array();
 
-    this.arrCrit = new Array();
-
-    var crit1Obj = new CriteriaObj();
-    crit1Obj.propName = "V.MR_VENDOR_CLASS";
-    crit1Obj.restriction = AdInsConstant.RestrictionEq;
-    crit1Obj.value = "HOLDING";
-    this.arrCrit.push(crit1Obj);
-
-    this.inputPagingObj.addCritInput = this.arrCrit;
+    var WVendorClassObj = new WhereValueObj();
+    WVendorClassObj.property = "VendorClass";
+    WVendorClassObj.value = "HOLDING";
+    this.inputPagingObj.whereValue.push(WVendorClassObj);
   }
 
 }

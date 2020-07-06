@@ -63,7 +63,7 @@
     "querystring": {
         "select": "select V.VENDOR_CODE AS VendorCode, V.VENDOR_NAME AS VendorName, V.IS_ACTIVE AS IsActive, V.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, V.VENDOR_ID AS VendorId",
         "from": "FROM dbo.VENDOR V",
-        "where": ""
+        "where": "WHERE V.MR_VENDOR_CLASS = N'{0}'"
         
     },
     "headerList": [

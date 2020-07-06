@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UcPagingObj } from '../../../shared/model/UcPagingObj.Model';
+import { UcPagingObj, WhereValueObj } from '../../../shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-product-return-ho-paging',
@@ -25,14 +24,16 @@ export class ProductReturnHoPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductHOReturn.json";
 
-    var criteriaList = new Array<CriteriaObj>();
-    var criteriaObj = new CriteriaObj();
-    criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    criteriaObj.propName = 'A.PROD_STAT';
-    criteriaObj.value = "RET";
-    criteriaList.push(criteriaObj);
+    
+    var WVTrxTypeCodeObj = new WhereValueObj();
+    WVTrxTypeCodeObj.property = "TrxTypeCode";
+    WVTrxTypeCodeObj.value = "PROD";
+    this.inputPagingObj.whereValue.push(WVTrxTypeCodeObj);
 
-    this.inputPagingObj.addCritInput = criteriaList;
+    var WVProdStatObj = new WhereValueObj();
+    WVProdStatObj.property = "ProdStat";
+    WVProdStatObj.value = "RET";
+    this.inputPagingObj.whereValue.push(WVProdStatObj);
   }
 
   EditButtonClick(e)
