@@ -1,7 +1,6 @@
 import { AssetRoutingComponent } from "./asset-routing.module";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { AssetRoutingModule } from "app/test/test-paging-v3/asset/asset-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { UCSearchModule } from "@adins/ucsearch";
@@ -9,8 +8,6 @@ import { UcpagingModule } from "@adins/ucpaging";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AssetTypeAddEditComponent } from "./asset-type/asset-type-add-edit/asset-type-add-edit.component";
 import { AssetTypePagingComponent } from "./asset-type/asset-type-paging/asset-type-paging.component";
-import { ShowErrorsComponent } from "app/test-new/show-errors.component";
-import { RouterModule } from "@angular/router";
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { UcuploadModule } from '@adins/ucupload';
 import { AssetSchemeAddEditInformationComponent } from "./asset-scheme/asset-scheme-add-edit-information/asset-scheme-add-edit-information.component";
@@ -22,7 +19,7 @@ import { AssetAccessoryPagingComponent } from './asset-accessory/asset-accessory
 import { AssetDocumentPagingComponent } from './asset-document/asset-document-paging/asset-document-paging.component';
 import { AssetDocumentMasterPagingComponent } from './asset-document-master/asset-document-master-paging/asset-document-master-paging.component';
 import { AssetSchemePagingComponent } from "./asset-scheme/asset-scheme-paging/asset-scheme-paging.component";
-import { UcgridfooterModule, UcgridfooterComponent } from "@adins/ucgridfooter";
+import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { NegativeAssetComponent } from './negative-asset/negative-asset.component';
 import { NegativeAssetDetailComponent } from './negative-asset/negative-asset-detail/negative-asset-detail.component';
 import { UclookupgenericModule } from "@adins/uclookupgeneric";
