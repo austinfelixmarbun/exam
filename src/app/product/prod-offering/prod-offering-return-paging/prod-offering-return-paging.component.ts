@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { UcPagingObj, WhereValueObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
@@ -31,14 +31,15 @@ export class ProdOfferingReturnPagingComponent implements OnInit {
       }
     ];
 
-    var criteriaList = new Array<CriteriaObj>();
-    var criteriaObj = new CriteriaObj();
-    criteriaObj.restriction = AdInsConstant.RestrictionEq;
-    criteriaObj.propName = 'A.PROD_OFFERING_STAT';
-    criteriaObj.value = "RET";
-    criteriaList.push(criteriaObj);
+    var WVTrxTypeCodeObj = new WhereValueObj();
+    WVTrxTypeCodeObj.property = "TrxTypeCode";
+    WVTrxTypeCodeObj.value = "PROD";
+    this.inputPagingObj.whereValue.push(WVTrxTypeCodeObj);
 
-    this.inputPagingObj.addCritInput = criteriaList;
+    var WVProdOfferingStatObj = new WhereValueObj();
+    WVProdOfferingStatObj.property = "ProdOfferingStat";
+    WVProdOfferingStatObj.value = "RET";
+    this.inputPagingObj.whereValue.push(WVProdOfferingStatObj);
   }
 
   EditProdOfr(e)

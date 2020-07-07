@@ -2,7 +2,7 @@ import { environment } from "environments/environment";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { DecimalPipe } from "@angular/common";
-import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
+import { UcPagingObj, WhereValueObj } from "app/shared/model/UcPagingObj.Model";
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 
 @Component({
@@ -22,12 +22,14 @@ export class ProductOfferingDeactivatePagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOfferingDeactivate.json";
 
-    this.arrCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.restriction = AdInsConstant.RestrictionLike;
-    critObj.propName = 'A.PROD_OFFERING_STAT';
-    critObj.value = 'ACT';
-    this.arrCrit.push(critObj);
-    this.inputPagingObj.addCritInput = this.arrCrit;
+    var WVTrxTypeCodeObj = new WhereValueObj();
+    WVTrxTypeCodeObj.property = "TrxTypeCode";
+    WVTrxTypeCodeObj.value = "PROD";
+    this.inputPagingObj.whereValue.push(WVTrxTypeCodeObj);
+
+    var WVProdOfferingStatObj = new WhereValueObj();
+    WVProdOfferingStatObj.property = "ProdOfferingStat";
+    WVProdOfferingStatObj.value = "ACT";
+    this.inputPagingObj.whereValue.push(WVProdOfferingStatObj);
   }
 }
