@@ -11,9 +11,11 @@ import { environment } from 'environments/environment';
 })
 export class AssetAccessoryPagingComponent implements OnInit {
   AssetTypeId: number;
-  inputPagingObj: UcPagingObj;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   viewObj: string;
-  arrCrit: Array<CriteriaObj>;
+  arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
+  critObj: CriteriaObj = new CriteriaObj();
+
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
@@ -22,19 +24,17 @@ export class AssetAccessoryPagingComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetAccessory.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetAccessory.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetAccessory;
     this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
-    this.arrCrit = new Array<CriteriaObj>();
-    var critObj = new CriteriaObj();
-    critObj.restriction = AdInsConstant.RestrictionLike;
-    critObj.propName = 'ASSET_TYPE_ID';
-    critObj.value = this.AssetTypeId.toString();
-    this.arrCrit.push(critObj);
+
+    this.critObj.restriction = AdInsConstant.RestrictionLike;
+    this.critObj.propName = 'ASSET_TYPE_ID';
+    this.critObj.value = this.AssetTypeId.toString();
+    this.arrCrit.push(this.critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 }

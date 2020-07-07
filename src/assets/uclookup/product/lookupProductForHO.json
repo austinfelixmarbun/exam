@@ -22,7 +22,7 @@
     "querystring": {
         "select": "SELECT P.PROD_CODE AS ProdCode, P.PROD_NAME AS ProdName, PH.PROD_H_ID AS CurrentProdHId",
         "from": "FROM PROD P WITH(NOLOCK) JOIN PROD_H PH WITH(NOLOCK) on P.CURRENT_PROD_H_ID = PH.PROD_H_ID",
-        "where" : "WHERE P.PROD_STAT = 'ACT'"
+        "where" : "WHERE P.PROD_STAT = N'ACT'"
     },
         "headerList": [
         {
