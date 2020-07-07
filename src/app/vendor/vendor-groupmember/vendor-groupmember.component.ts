@@ -14,11 +14,9 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 })
 export class VendorGroupmemberComponent implements OnInit {
   VendorId: number;
-  VendorGrpMbrId: number;
   listSelectedId: Array<number> = new Array<number>();
   VendorGrpId: number;
   MrVendorCategoryCode: string = '';
-  
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
   
   constructor(private http: HttpClient,
@@ -33,7 +31,7 @@ export class VendorGroupmemberComponent implements OnInit {
       }
     });
   }
-  
+
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/vendorGrpMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
