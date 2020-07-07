@@ -35,7 +35,7 @@ export class ReviewUploadAssetMasterPagingComponent implements OnInit {
     var wfObj = new WorkflowApiObj();
     wfObj.TaskListId = ev.RowObj.TaskListId;
     wfObj.TransactionNo = ev.RowObj.UploadNo;
-    wfObj.ListValue = { "Status": "CAN" };
+    wfObj.ListValue = { "Status": "RJC" };
     this.http.post(this.CancelUpload, wfObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
