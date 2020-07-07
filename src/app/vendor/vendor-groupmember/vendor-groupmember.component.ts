@@ -9,8 +9,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 
 @Component({
   selector: 'app-vendor-groupmember',
-  templateUrl: './vendor-groupmember.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './vendor-groupmember.component.html'
 })
 export class VendorGroupmemberComponent implements OnInit {
   VendorId: number;
@@ -97,7 +96,7 @@ export class VendorGroupmemberComponent implements OnInit {
 
   SaveVendorGroupMember() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.typeErrorCustom('Please Add At Least One Data');
+      this.toastr.errorMessage('Please Add At Least One Data');
       return;
     }
 
