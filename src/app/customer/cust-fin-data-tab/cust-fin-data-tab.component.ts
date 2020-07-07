@@ -382,7 +382,7 @@ export class CustFinDataTabComponent implements OnInit {
       );
     }
     else {
-      this.toastr.errorMessage("Please Calculate First");
+      this.toastr.warningMessage("Please Calculate First");
     }
   }
 }

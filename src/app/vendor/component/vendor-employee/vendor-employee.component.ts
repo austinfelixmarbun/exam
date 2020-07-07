@@ -286,7 +286,7 @@ export class VendorEmployeeComponent implements OnInit {
     var businessDt = new Date(currentUserContext["BusinessDt"]);
     businessDt.setHours(0, 0, 0, 0);
     if (joinDt > businessDt) {
-      this.toastr.errorMessage("Join Date Cannot Exceed Business Date");
+      this.toastr.warningMessage("Join Date Cannot Exceed Business Date");
       return false;
     }
     this.VendorBranchEmpObj.VendorEmpObj.VendorEmpNo = this.VendorEmpForm.controls.VendorEmpCode.value;
