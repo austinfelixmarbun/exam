@@ -8,8 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-asset-category-add-edit',
-  templateUrl: './asset-category-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './asset-category-add-edit.component.html'
 })
 export class AssetCategoryAddEditComponent implements OnInit {
   AssetCategoryForm = this.fb.group({
@@ -20,18 +19,11 @@ export class AssetCategoryAddEditComponent implements OnInit {
   pageType: string;
   AssetTypeId: number;
   AssetCategoryId: number;
-  apiUrl: string;
   result: AssetCategoryObj;
   acObj: AssetCategoryObj;
-  getUrl: string;
-  addUrl: string;
-  editUrl: string;
-  GetAssetTypeById: string;
   assetTypeName: string;
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.addUrl = AdInsConstant.AddNewAssetCategory;
-    this.editUrl = AdInsConstant.EditAssetCategory;
-    this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -46,20 +38,16 @@ export class AssetCategoryAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    var assetTypeReq = { "AssetTypeId": this.AssetTypeId };
-    this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
+    this.http.post(AdInsConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];
-      }
-    );
+      });
     if (this.pageType == "edit") {
-
       var acObj = new AssetCategoryObj();
-      this.apiUrl = AdInsConstant.GetAssetCategorybyAssetCategoryId;
       this.AssetCategoryForm.controls.AssetCategoryCode.disable();
       acObj.AssetTypeId = this.AssetTypeId;
       acObj.AssetCategoryId = this.AssetCategoryId;
-      this.http.post(this.apiUrl, acObj).subscribe(
+      this.http.post(AdInsConstant.GetAssetCategorybyAssetCategoryId, acObj).subscribe(
         (response: AssetCategoryObj) => {
           this.result = response;
           this.AssetCategoryForm.patchValue({
@@ -70,10 +58,10 @@ export class AssetCategoryAddEditComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-        }
-      );
+        });
     }
   }
+
   SaveForm() {
     if (this.pageType == "add") {
       this.acObj = new AssetCategoryObj();
@@ -81,31 +69,28 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.acObj.AssetCategoryName = this.AssetCategoryForm.controls["AssetCategoryName"].value;
       this.acObj.IsActive = this.AssetCategoryForm.controls["IsActive"].value;
       this.acObj.AssetTypeId = this.AssetTypeId;
-      this.http.post(this.addUrl, this.acObj).subscribe(
+      this.http.post(AdInsConstant.AddNewAssetCategory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Category/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
         },
         error => {
           console.log(error);
-        }
-      );
+        });
     } else {
-      this.acObj = this.result
+      this.acObj = this.result;
       this.acObj.AssetCategoryCode = this.AssetCategoryForm.controls["AssetCategoryCode"].value;
       this.acObj.AssetCategoryName = this.AssetCategoryForm.controls["AssetCategoryName"].value;
       this.acObj.IsActive = this.AssetCategoryForm.controls["IsActive"].value;
 
-      this.http.post(this.editUrl, this.acObj).subscribe(
+      this.http.post(AdInsConstant.EditAssetCategory, this.acObj).subscribe(
         response => {
-          console.log(response);
-          this.toastr.successMessage(response["Message"]); console.log(this.acObj.AssetTypeId);
+          this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Category/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
         },
         error => {
           console.log(error);
-        }
-      );
+        });
     }
   }
 }

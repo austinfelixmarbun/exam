@@ -4,22 +4,19 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-review-upload-negative-asset-paging',
-  templateUrl: './review-upload-negative-asset-paging.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './review-upload-negative-asset-paging.component.html'
 })
 export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj;
-  CancelUpload: string;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService){}
+  inputPagingObj: UcPagingObj = new UcPagingObj();
+
+  constructor(private router: Router, private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
-    this.CancelUpload = AdInsConstant.CancelUpload;
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeAsset.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
@@ -36,12 +33,12 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
     wfObj.TaskListId = ev.RowObj.TaskListId;
     wfObj.TransactionNo = ev.RowObj.UploadNo;
     wfObj.ListValue = { "Status": "RJC" };
-    this.http.post(this.CancelUpload, wfObj).subscribe(
+    this.http.post(AdInsConstant.CancelUpload, wfObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['/Asset/NegativeAsset/ReviewUploadPaging']);
-      }); 
+        });
       },
       error => {
         console.log(error);

@@ -1,101 +1,66 @@
 import { Component, OnInit } from '@angular/core';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service'; 
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
- 
+
 @Component({
   selector: 'app-asset-document-master-add-edit',
-  templateUrl: './asset-document-master-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './asset-document-master-add-edit.component.html'
 })
+
 export class AssetDocumentMasterAddEditComponent implements OnInit {
-  addUrl : string;
-  editUrl: string;
   pageType: string;
-  apiUrl: string;
   RefAssetDocId: number;
-   
-  result: RefAssetDocObj;
-  refAssetObj: RefAssetDocObj;
+  result: RefAssetDocObj = new RefAssetDocObj();
+  refAssetObj: RefAssetDocObj = new RefAssetDocObj();
 
   RefAssetDocForm = this.fb.group({
     AssetDocCode: ['', [Validators.required, Validators.maxLength(50)]],
     AssetDocName: ['', [Validators.required, Validators.maxLength(100)]],
     IsActive: [true]
   });
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.addUrl =  AdInsConstant.AddNewRefAssetDocData;
-    this.editUrl =  AdInsConstant.EditRefAssetDocData;
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
-
-        if (params["mode"] != null) {
-          this.pageType = params["mode"];
-        }
-        if (params["RefAssetDocId"] != null) {
-          this.RefAssetDocId = params["RefAssetDocId"];
-        }
- 
-
-
+      if (params["mode"] != null) {
+        this.pageType = params["mode"];
+      }
+      if (params["RefAssetDocId"] != null) {
+        this.RefAssetDocId = params["RefAssetDocId"];
+      }
     });
   }
-  ngOnInit() { 
+
+  ngOnInit() {
     if (this.pageType == "edit") {
-     
-      this.apiUrl =   AdInsConstant.GetRefAssetDocByRefAssetDocId;
-      var refAssetObj = new RefAssetDocObj();
-      refAssetObj.RefAssetDocId = this.RefAssetDocId; 
-      this.RefAssetDocForm.controls.AssetDocCode.disable(); 
-      
-      this.http.post(this.apiUrl, refAssetObj).subscribe(
+      this.RefAssetDocForm.controls.AssetDocCode.disable();
+      this.http.post(AdInsConstant.GetRefAssetDocByRefAssetDocId, { RefAssetDocId: this.RefAssetDocId }).subscribe(
         (response: RefAssetDocObj) => {
           this.result = response;
           this.RefAssetDocForm.patchValue({
             AssetDocCode: this.result.AssetDocCode,
             AssetDocName: this.result.AssetDocName,
             IsActive: this.result.IsActive
-
           })
         },
         (error) => {
           console.log(error);
-        }
-      );
+        });
     }
-
   }
 
-  SaveForm(){
- 
+  SaveForm() {
     if (this.pageType == "add") {
-      
       this.refAssetObj = new RefAssetDocObj();
       this.refAssetObj.AssetDocCode = this.RefAssetDocForm.controls["AssetDocCode"].value;
       this.refAssetObj.AssetDocName = this.RefAssetDocForm.controls["AssetDocName"].value;
       this.refAssetObj.IsActive = this.RefAssetDocForm.controls["IsActive"].value;
-  
-      this.http.post(this.addUrl, this.refAssetObj).subscribe(
+
+      this.http.post(AdInsConstant.AddNewRefAssetDocData, this.refAssetObj).subscribe(
         response => {
-            this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/Asset/DocumentMaster/Paging"]);        
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
-      else {
-      this.refAssetObj = this.result;
-      this.refAssetObj.AssetDocCode = this.RefAssetDocForm.controls["AssetDocCode"].value;
-      this.refAssetObj.AssetDocName = this.RefAssetDocForm.controls["AssetDocName"].value;
-      this.refAssetObj.IsActive = this.RefAssetDocForm.controls["IsActive"].value;
-      
-      this.http.post(this.editUrl, this.refAssetObj).subscribe(
-        response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/DocumentMaster/Paging"]);
         },
@@ -104,6 +69,20 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
         }
       );
     }
+    else {
+      this.refAssetObj = this.result;
+      this.refAssetObj.AssetDocCode = this.RefAssetDocForm.controls["AssetDocCode"].value;
+      this.refAssetObj.AssetDocName = this.RefAssetDocForm.controls["AssetDocName"].value;
+      this.refAssetObj.IsActive = this.RefAssetDocForm.controls["IsActive"].value;
 
+      this.http.post(AdInsConstant.EditRefAssetDocData, this.refAssetObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["Message"]);
+          this.router.navigate(["/Asset/DocumentMaster/Paging"]);
+        },
+        error => {
+          console.log(error);
+        });
+    }
   }
 }

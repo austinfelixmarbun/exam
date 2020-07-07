@@ -10,34 +10,32 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
   templateUrl: './asset-document-paging.component.html'
 })
 export class AssetDocumentPagingComponent implements OnInit {
-  AssetTypeId:number;
-  inputPagingObj: UcPagingObj;
-  viewObj:string;
-  arrCrit:Array<CriteriaObj>;
-  
-  constructor(private route: ActivatedRoute) { 
+  AssetTypeId: number;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
+  viewObj: string;
+  arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
+  critObj: CriteriaObj = new CriteriaObj();
+  constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
-    if (params["AssetTypeId"] != null) {
-      this.AssetTypeId = params["AssetTypeId"];
-    }  
-  }); }
+      if (params["AssetTypeId"] != null) {
+        this.AssetTypeId = params["AssetTypeId"];
+      }
+    });
+  }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetDocument.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetDocument.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetDocList;
-    
+
     this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
 
-    this.arrCrit = new Array<CriteriaObj>();
-    var critObj = new CriteriaObj();
-    critObj.restriction = AdInsConstant.RestrictionLike;
-    critObj.propName = 'ASSET_TYPE_ID';
-    critObj.value = this.AssetTypeId.toString();
-    this.arrCrit.push(critObj);
+    this.critObj.restriction = AdInsConstant.RestrictionLike;
+    this.critObj.propName = 'ASSET_TYPE_ID';
+    this.critObj.value = this.AssetTypeId.toString();
+    this.arrCrit.push(this.critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 

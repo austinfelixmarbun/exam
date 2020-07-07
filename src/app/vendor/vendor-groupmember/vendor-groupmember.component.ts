@@ -17,13 +17,12 @@ export class VendorGroupmemberComponent implements OnInit {
   VendorGrpId: number;
   MrVendorCategoryCode: string = '';
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
-  
+
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params['VendorGrpId'] != null) {
         this.VendorGrpId = params['VendorGrpId'];
-
       }
       if (params['MrVendorCategoryCode'] != null) {
         this.MrVendorCategoryCode = params['MrVendorCategoryCode'];
@@ -67,7 +66,7 @@ export class VendorGroupmemberComponent implements OnInit {
   }
 
   GetListVendorGrpMbrByVendorGrpId() {
-    this.http.post(AdInsConstant.GetListVendorGrpMbrByVendorGrpId, {VendorGrpId: this.VendorGrpId}).subscribe(
+    this.http.post(AdInsConstant.GetListVendorGrpMbrByVendorGrpId, { VendorGrpId: this.VendorGrpId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response["ReturnObject"].length; index++) {
@@ -112,6 +111,5 @@ export class VendorGroupmemberComponent implements OnInit {
       (error) => {
         console.log(error);
       });
-
   }
 }

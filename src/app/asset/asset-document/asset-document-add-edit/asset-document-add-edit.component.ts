@@ -5,15 +5,14 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
 import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 
 @Component({
   selector: 'app-asset-document-add-edit',
-  templateUrl: './asset-document-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './asset-document-add-edit.component.html'
 })
+
 export class AssetDocumentAddEditComponent implements OnInit {
 
   AssetDocumentForm = this.fb.group({
@@ -25,36 +24,21 @@ export class AssetDocumentAddEditComponent implements OnInit {
     IsMandatoryNew: [false],
     IsMandatoryUsed: [false],
     IsActive: [true],
-
   });
-  assetTypeName:string;
+  assetTypeName: string;
   assetDocName: string;
   pageType: string;
   AssetTypeId: number;
   AssetDocListId: number;
-  apiUrl: string;
-  settingUrl: string = environment.FoundationR3Url;
-  urlEnviPaging: string = environment.FoundationR3Url;
-  result: AssetDocListObj;
-  assetDocListObj: AssetDocListObj;
-  GetListRefAssetDocUrl: string;
-  AddNewAssetDocListUrl: string;
-  EditAssetDocListUrl: string;
+  result: AssetDocListObj = new AssetDocListObj();
+  assetDocListObj: AssetDocListObj = new AssetDocListObj();
   getRefAssetDocUrl: string;
   tempAssetName: any;
-  temp: RefAssetDocObj;
-  GetAssetTypeById : string;
-  generalSettingUrl: string;
+  temp: RefAssetDocObj = new RefAssetDocObj();
   isShowCbxBorrow: boolean;
   isShowCbxPledge: boolean;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-
-    this.AddNewAssetDocListUrl =  AdInsConstant.AddNewAssetDocList;
-    this.EditAssetDocListUrl =  AdInsConstant.EditAssetDocList;
-    this.GetListRefAssetDocUrl = AdInsConstant.GetListRefAssetDoc;
-    this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
-    this.generalSettingUrl = AdInsConstant.GetListGeneralSettingByListGsCode;
-    this.route.queryParams.subscribe(params => {      
+    this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
       }
@@ -67,8 +51,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
     });
   }
   ngOnInit() {
-    console.log("wd");
-    this.http.post(this.GetListRefAssetDocUrl, assetDocListObj).subscribe(
+    this.http.post(AdInsConstant.GetListRefAssetDoc, this.assetDocListObj).subscribe(
       (response) => {
         this.tempAssetName = response["ReturnObject"];
         this.AssetDocumentForm.patchValue({
@@ -76,46 +59,39 @@ export class AssetDocumentAddEditComponent implements OnInit {
         });
       }
     );
-    var assetTypeReq = {"AssetTypeId": this.AssetTypeId};
-    this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
+    this.http.post(AdInsConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];
       }
     );
 
-    var generalSettingObj : GeneralSettingObj = new GeneralSettingObj();
-    generalSettingObj.ListGsCode = ["IS_SHOW_CBX_BORROW","IS_SHOW_CBX_PLEDGE"];
-    this.http.post(this.generalSettingUrl, generalSettingObj).subscribe(
+    var generalSettingObj: GeneralSettingObj = new GeneralSettingObj();
+    generalSettingObj.ListGsCode = ["IS_SHOW_CBX_BORROW", "IS_SHOW_CBX_PLEDGE"];
+    this.http.post(AdInsConstant.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
       (response) => {
         var tempResponse = response['ResponseGeneralSettingObj'];
-        if(tempResponse[0]['GsCode'] == "IS_SHOW_CBX_BORROW"){
+        if (tempResponse[0]['GsCode'] == "IS_SHOW_CBX_BORROW") {
           this.isShowCbxBorrow = tempResponse[0]["GsValue"];
         }
-        else if(tempResponse[1]['GsCode'] == "IS_SHOW_CBX_BORROW"){
+        else if (tempResponse[1]['GsCode'] == "IS_SHOW_CBX_BORROW") {
           this.isShowCbxBorrow = tempResponse[1]["GsValue"];
         }
-        if(tempResponse[0]['GsCode'] == "IS_SHOW_CBX_PLEDGE"){
+        if (tempResponse[0]['GsCode'] == "IS_SHOW_CBX_PLEDGE") {
           this.isShowCbxPledge = tempResponse[0]["GsValue"];
         }
-        else if(tempResponse[1]['GsCode'] == "IS_SHOW_CBX_PLEDGE"){
+        else if (tempResponse[1]['GsCode'] == "IS_SHOW_CBX_PLEDGE") {
           this.isShowCbxPledge = tempResponse[1]["GsValue"];
         }
       }
     );
 
     if (this.pageType == "edit") {
-      this.apiUrl = AdInsConstant.GetAssetDocListByAssetDocListId;
       this.getRefAssetDocUrl = AdInsConstant.GetRefAssetDocByRefAssetDocId;
-      var assetDocListObj = new AssetDocListObj();
-      var refAssetDocObj = new RefAssetDocObj();
-      assetDocListObj.AssetDocListId = this.AssetDocListId;
 
-      this.http.post(this.apiUrl, assetDocListObj).subscribe(
+      this.http.post(AdInsConstant.GetAssetDocListByAssetDocListId, { AssetDocListId: this.AssetDocListId }).subscribe(
         (response: AssetDocListObj) => {
           this.result = response;
-          refAssetDocObj.RefAssetDocId = this.result.RefAssetDocId;
-
-          this.http.post(this.getRefAssetDocUrl, refAssetDocObj).subscribe(
+          this.http.post(this.getRefAssetDocUrl, { RefAssetDocId: this.result.RefAssetDocId }).subscribe(
             (response: RefAssetDocObj) => {
               this.temp = response;
               this.assetDocName = this.temp.AssetDocName;
@@ -150,7 +126,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsActive = this.AssetDocumentForm.controls["IsActive"].value;
       this.assetDocListObj.AssetTypeId = this.AssetTypeId;
 
-      this.http.post(this.AddNewAssetDocListUrl, this.assetDocListObj).subscribe(
+      this.http.post(AdInsConstant.AddNewAssetDocList, this.assetDocListObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });
@@ -170,9 +146,8 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsMandatoryUsed = this.AssetDocumentForm.controls["IsMandatoryUsed"].value;
       this.assetDocListObj.IsActive = this.AssetDocumentForm.controls["IsActive"].value;
 
-      this.http.post(this.EditAssetDocListUrl, this.assetDocListObj).subscribe(
+      this.http.post(AdInsConstant.EditAssetDocList, this.assetDocListObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });
         },
