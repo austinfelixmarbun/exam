@@ -23,9 +23,9 @@
                   <div class="col-md-10">
                     <input type="text" class="form-control adInsInput" formControlName="MgmntShrholderName"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MgmntShrholderName.invalid}">
-                    <show-errors [control]="ManagementShareholderForm.controls.MgmntShrholderName"
+                    <lib-uc-show-errors [control]="ManagementShareholderForm.controls.MgmntShrholderName"
                       [submit]="enjiForm.submitted">
-                    </show-errors>
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row adins">
@@ -55,8 +55,8 @@
                   <div class="col-md-10">
                     <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.TaxIdNo.invalid}">
-                    <show-errors [control]="ManagementShareholderForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="ManagementShareholderForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row  ">
@@ -66,9 +66,9 @@
                       formControlName="SharePrcnt"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.SharePrcnt.invalid}"
                       [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }">
-                    <lib-uc-show-errors [control]="ManagementShareholderForm.controls.SharePrcnt"
+                    <lib-uc-lib-uc-show-errors [control]="ManagementShareholderForm.controls.SharePrcnt"
                       [submit]="enjiForm.submitted">
-                    </lib-uc-show-errors>  
+                    </lib-uc-lib-uc-show-errors>  
                   </div>
                   <div><h4 class="d-flex justify-content-center align-items-center">%</h4></div>
                 </div>

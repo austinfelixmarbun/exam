@@ -15,8 +15,8 @@
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="CustName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.CustName.invalid}">
-                  <show-errors [control]="CustomerPersonalForm.controls.CustName" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.CustName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
                 <label class="col-md-2  adins-required-label" translate>Gender </label>
                 <div class="col-md-4">
@@ -25,8 +25,8 @@
                     <option *ngFor="let it of tempGender" [value]="it.Key">
                       {{it.Value}}</option>
                   </select>
-                  <show-errors [control]="CustomerPersonalForm.controls.Gender" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.Gender" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
              </div>
               <div class="form-group row ">
@@ -37,15 +37,15 @@
                     <option *ngFor="let it of tempCustModel" [value]="it.Key">
                       {{it.Value}}</option>
                   </select>
-                  <show-errors [control]="CustomerPersonalForm.controls.CustModel" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.CustModel" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
                 <label class="col-md-2  adins-required-label" translate>Birth Place</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthPlace.invalid}">
-                  <show-errors [control]="CustomerPersonalForm.controls.BirthPlace" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.BirthPlace" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>      
               </div>
               <div class="form-group row">
@@ -56,16 +56,16 @@
                     <option *ngFor="let it of tempIdType " [value]="it.Key" >
                       {{it.Value}}</option>
                   </select>
-                  <show-errors [control]="CustomerPersonalForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
                 <label class="col-md-2 adins-required-label" translate>Birth Date</label>
                 <div class="col-md-4">
                   <input type="date" class="form-control adInsInput" formControlName="BirthDt" 
                   [max]="businessDtMin | date: 'yyyy-MM-dd'"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthDt.invalid}">
-                  <show-errors [control]="CustomerPersonalForm.controls.BirthDt" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.BirthDt" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row  ">
@@ -73,15 +73,15 @@
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="IdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdNo.invalid}">
-                  <show-errors [control]="CustomerPersonalForm.controls.IdNo" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.IdNo" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>               
                 <label class="col-md-2 adInsLabel" translate>Tax Id No</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.TaxIdNo.invalid}">
-                  <show-errors [control]="CustomerPersonalForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
@@ -90,15 +90,15 @@
                   <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt" 
                   [min]="businessDtMax | date: 'yyyy-MM-dd'"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdExpiredDt.invalid } " >
-                  <show-errors [control]="CustomerPersonalForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
                 <label class="col-md-2 adins-required-label" translate>Mother Maiden Name</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="MotherMaidenName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.MotherMaidenName.invalid}">
-                  <show-errors [control]="CustomerPersonalForm.controls.MotherMaidenName" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.MotherMaidenName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row ">
@@ -118,8 +118,8 @@
                     <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"  
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.VipNotes.invalid }"></textarea>
 
-                    <show-errors [control]="CustomerPersonalForm.controls.VipNotes" [submit]="enjiForm.submitted">
-                  </show-errors>
+                    <lib-uc-show-errors [control]="CustomerPersonalForm.controls.VipNotes" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
             </div>

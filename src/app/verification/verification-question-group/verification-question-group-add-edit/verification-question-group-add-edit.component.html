@@ -23,8 +23,8 @@
                 <div class="col-md-3">
                   <input type="text" class="form-control adInsInput width-75-per"
                     [attr.disabled]="mode == 'edit' ? true : null" formControlName="VerfQuestionGrpCode">
-                  <show-errors [control]="QuestionGroupForm.controls.VerfQuestionGrpCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="QuestionGroupForm.controls.VerfQuestionGrpCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -32,8 +32,8 @@
                 <label class="col-md-3  adInsLabel" translate>Question Group Name </label>
                 <div class="col-md-3">
                   <input type="text" class="form-control adInsInput width-75-per" formControlName="VerfQuestionGrpName">
-                  <show-errors [control]="QuestionGroupForm.controls.VerfQuestionGrpName" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="QuestionGroupForm.controls.VerfQuestionGrpName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 

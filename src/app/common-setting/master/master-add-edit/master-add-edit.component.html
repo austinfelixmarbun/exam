@@ -20,8 +20,8 @@
                     {{item.Value}}
                   </option>
                 </select>
-                <show-errors [control]="RefMasterForm.controls.RefMasterTypeCode" [submit]="enjiForm.submitted">
-                </show-errors>
+                <lib-uc-show-errors [control]="RefMasterForm.controls.RefMasterTypeCode" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row">
@@ -30,7 +30,7 @@
                 <input type="text" class="form-control adInsInput code" formControlName="MasterCode"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefMasterForm.controls.MasterCode.invalid }"
                   [attr.disabled]="type == 'edit' ? true : null">
-                <show-errors [control]="RefMasterForm.controls.MasterCode" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="RefMasterForm.controls.MasterCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row">
@@ -39,7 +39,7 @@
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput adins-required-label" formControlName="Descr"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefMasterForm.controls.Descr.invalid }">
-                <show-errors [control]="RefMasterForm.controls.Descr" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="RefMasterForm.controls.Descr" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row">
@@ -47,7 +47,7 @@
               <div class="col-md-9">
                 <input type="text" pattern="^[0-9]+$" class="form-control adInsInput adins-required-label number" formControlName="SeqNo"
                   [ngClass]="{ 'is-invalid':(enjiForm.submitted || RefMasterForm.controls.SeqNo.touched || RefMasterForm.controls.SeqNo.dirty) && RefMasterForm.controls.SeqNo.invalid }">
-                <show-errors [control]="RefMasterForm.controls.SeqNo" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="RefMasterForm.controls.SeqNo" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row">
