@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { UcPagingObj, WhereValueObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
@@ -24,15 +24,14 @@ export class VendorHoPagingComponent implements OnInit {
         environment: environment.FoundationR3Url
       }
     ];
-
-    this.arrCrit = new Array();
-
-    var crit1Obj = new CriteriaObj();
-    crit1Obj.propName = "V.MR_VENDOR_CLASS";
-    crit1Obj.restriction = AdInsConstant.RestrictionEq;
-    crit1Obj.value = "HO";
-    this.arrCrit.push(crit1Obj);
-
-    this.inputPagingObj.addCritInput = this.arrCrit;
+    var WVAddrTypeObj = new WhereValueObj();
+    WVAddrTypeObj.property = "AddrType";
+    WVAddrTypeObj.value = "TAX";
+    this.inputPagingObj.whereValue.push(WVAddrTypeObj);
+    
+    var WVendorClassObj = new WhereValueObj();
+    WVendorClassObj.property = "VendorClass";
+    WVendorClassObj.value = "HO";
+    this.inputPagingObj.whereValue.push(WVendorClassObj);
   }
 }

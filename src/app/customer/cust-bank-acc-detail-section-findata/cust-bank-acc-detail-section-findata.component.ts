@@ -251,7 +251,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             }
             const bankStmntCompare = formArray.at(j).value;
             if(bankStmnt.Month == bankStmntCompare.Month && bankStmnt.Year == bankStmntCompare.Year){
-              this.toastr.errorMessage("Cannot Input Statement With The Same Month and Year");
+              this.toastr.warningMessage("Cannot Input Statement With The Same Month and Year");
               return false;
             }
           }

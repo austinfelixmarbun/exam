@@ -271,7 +271,7 @@ export class EmployeeAddComponent implements OnInit {
 
   SaveForm() {
     if (Date.parse(this.RefEmpForm.controls.JoinDt.value) > Date.parse(formatDate(this.businessDt,  'yyyy-MM-dd', 'en-US'))) {
-      this.toastr.errorMessage("Join Date Must Be Lesser Than Business Date")
+      this.toastr.warningMessage("Join Date Must Be Lesser Than Business Date")
       return;
     }
 

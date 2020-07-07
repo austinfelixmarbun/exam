@@ -126,7 +126,7 @@ export class GeneralDataComponent implements OnInit {
   reload() {
     if(this.inputLookUpObj.jsonSelect["ProdOfferingId"] == undefined)
     {
-      this.toastr.errorMessage("Please select Product Offering to copied");
+      this.toastr.warningMessage("Please select Product Offering to copied");
     }
     else
     {

@@ -7,7 +7,6 @@ import 'rxjs/add/operator/map';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { RequestCriteriaObj } from 'app/shared/model/RequestCriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { HttpRequestObj } from 'app/shared/model/HttpRequestObj.model';
 import { DOCUMENT } from '@angular/platform-browser';
 import { ExcelService } from '../excel-service/excel-service';
 @Component({

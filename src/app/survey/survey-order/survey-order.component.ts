@@ -4,7 +4,6 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { UCSearchComponent } from '@adins/ucsearch';
 import { UcpagingComponent } from '@adins/ucpaging';
 
 @Component({
@@ -15,15 +14,13 @@ export class SurveyOrderComponent implements OnInit {
 
   @ViewChild(UcpagingComponent) ucPaging: UcpagingComponent;
 
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
-  constructor(private http: HttpClient,private toastr: NGXToastrService)
-  {
+  constructor(private http: HttpClient, private toastr: NGXToastrService) {
 
   }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchSurveyOrder.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
@@ -44,11 +41,8 @@ export class SurveyOrderComponent implements OnInit {
     ];
   }
 
-  event(ev){
-    var SrvyOrderObj = {
-      SrvyOrderId: ev.RowObj.SrvyOrderId
-    }
-    this.http.post(AdInsConstant.SendSrvyOrder, SrvyOrderObj).subscribe(
+  event(ev) {
+    this.http.post(AdInsConstant.SendSrvyOrder, { SrvyOrderId: ev.RowObj.SrvyOrderId }).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.ucPaging.searchPagination(1);

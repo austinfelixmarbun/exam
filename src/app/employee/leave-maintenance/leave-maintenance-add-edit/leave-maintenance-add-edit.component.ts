@@ -108,10 +108,10 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     var businessDtRaw = new Date(localStorage.getItem("BusinessDateRaw"));
     var StartDt = new Date(this.RefEmpLeaveMngmntForm.controls["StartDt"].value);
     if (StartDt < businessDtRaw) {
-      this.toastr.errorMessage("Start Date must be equal or more than Business Date");
+      this.toastr.warningMessage("Start Date must be equal or more than Business Date");
     }
     else if (this.RefEmpLeaveMngmntForm.controls["EndDt"].value < this.RefEmpLeaveMngmntForm.controls["StartDt"].value) {
-      this.toastr.errorMessage("End Date must be equal or more than Start Date");
+      this.toastr.warningMessage("End Date must be equal or more than Start Date");
     }
     else {
       this.relmObj = new RefEmpLeaveMngmntObj();

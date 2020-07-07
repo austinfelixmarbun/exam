@@ -95,12 +95,12 @@ export class ProductHOAddComponent implements OnInit {
 
 
     if (startDate > endDate) {
-      this.toastr.errorMessage("Start Date Must be Less than End Date");
+      this.toastr.warningMessage("Start Date Must be Less than End Date");
       return false;
     }
 
     if (endDate <= businessDate) {
-      this.toastr.errorMessage("End Date Must be Greater than Business Date");
+      this.toastr.warningMessage("End Date Must be Greater than Business Date");
       return false;
     }
     return true;

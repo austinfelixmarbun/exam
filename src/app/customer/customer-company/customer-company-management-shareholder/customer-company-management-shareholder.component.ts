@@ -69,7 +69,7 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
             }
 
             if(this.TotalShare < 100){
-              this.toastr.errorMessage("Total Share % must be 100%");
+              this.toastr.warningMessage("Total Share % must be 100%");
               return;
             }
             this.outputTab.emit({ stepMode: 'next'});

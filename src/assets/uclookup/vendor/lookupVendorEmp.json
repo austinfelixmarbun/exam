@@ -63,7 +63,7 @@
     "querystring": {
       "select": "SELECT VENDOR_EMP_NO AS VendorEmpNo, VENDOR_EMP_NAME AS VendorEmpName, MOBILE_PHN_NO_1 AS MobilePhnNo1, VENDOR_EMP_RATING AS VendorEmpRating, IS_ACTIVE AS IsActive, VENDOR_EMP_ID AS VendorEmpId, VENDOR_ID AS VendorId",
       "from": "FROM dbo.VENDOR_EMP",
-      "where": "WHERE IS_ACTIVE = '1'"
+      "where": "WHERE IS_ACTIVE = 1"
     },
     "headerList": [
       {

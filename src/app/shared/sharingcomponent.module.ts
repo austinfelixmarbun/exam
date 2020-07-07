@@ -12,9 +12,7 @@ import { SearchComponent } from './search/search.component';
 import { UCGridFooterComponent } from './UserControl/ucgrid-footer/ucgrid-footer.component';
 import { UcgridviewComponent } from './UserControl/ucgridview/ucgridview.component';
 import { RouterModule } from '@angular/router';
-import { SearchV2Component } from './search-v2/search-v2.component';
 import { LookupgenericComponent } from './UserControl/lookupgeneric/lookupgeneric.component';
-import { UcpagingComponent } from './UserControl/ucpaging/ucpaging.component';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { ViewgenericComponent } from './UserControl/viewgeneric/viewgeneric.component';
@@ -35,12 +33,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
         UcContactInfoComponent,
         SearchComponent,
         UCGridFooterComponent,
-        SearchV2Component,
         UcgridviewComponent,
         UcInfoComponent,
-        SearchV2Component,
         LookupgenericComponent,
-        UcpagingComponent,
         ViewgenericComponent,
         LookupgenericComponent,
         ShowErrorsComponent,
@@ -68,15 +63,12 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ],
     declarations: [
         UcAddressComponent,
-        SearchV2Component,
         UcContactInfoComponent,
         SearchComponent,
         UCGridFooterComponent,
         UcgridviewComponent,
         UcInfoComponent,
-        SearchV2Component,
         LookupgenericComponent,
-        UcpagingComponent,
         ViewgenericComponent,
         LookupgenericComponent,
         ShowErrorsComponent,

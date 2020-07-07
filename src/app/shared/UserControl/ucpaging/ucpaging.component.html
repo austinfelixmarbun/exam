@@ -1,7 +1,0 @@
-<app-search-v2 id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)"></app-search-v2>
-
-<app-ucgridview [gridInput]="gridObj" (output)="getOutput($event)" (select)="getSelect($event)"></app-ucgridview>
-
-<div [hidden]="gridObj?.resultData?.data == null">
-    <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
-</div>
