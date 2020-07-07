@@ -386,7 +386,7 @@ export class GeneralDataHOComponent implements OnInit {
   reload() {
     if(this.inputLookUpObj.jsonSelect["ProdId"] == undefined)
     {
-      this.toastr.errorMessage("Please select Product to copied");
+      this.toastr.warningMessage("Please select Product to copied");
     }
     else
     {

@@ -185,7 +185,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     console.log(this.TotalShareCurrent);
     if(this.TotalShareCurrent > 100){
       this.LeftShare = 100 - this.TotalShare;
-      this.toastr.errorMessage("Total Share left is "+this.LeftShare+"%");
+      this.toastr.warningMessage("Total Share left is "+this.LeftShare+"%");
       return;
     }
 

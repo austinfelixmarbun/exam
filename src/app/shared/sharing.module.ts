@@ -21,7 +21,6 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { LookupsupervisorModule } from '@adins/lookupsupervisor';
 import { MatStepperModule, MatIconModule, MatExpansionModule, MatTabsModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { LookupSupervisorComponent } from './lookup/lookup-supervisor/lookup-supervisor.component';
 import { lookupbizunitmodule } from '@adins/lookupbizunit';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
@@ -50,7 +49,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatIconModule,
     MatExpansionModule,
     MatTabsModule,
-    LookupSupervisorComponent,
   ],
   imports: [
     CommonModule,
@@ -66,7 +64,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NgMultiSelectDropDownModule
   ],
   declarations: [
-    LookupSupervisorComponent
   ]
 })
 
