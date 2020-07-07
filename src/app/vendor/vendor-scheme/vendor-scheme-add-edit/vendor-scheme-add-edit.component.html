@@ -61,7 +61,8 @@
             </div>
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1"
-                [routerLink]="['/Vendor/VendorScheme/Paging']" translate>
+               [routerLink]="['/Vendor/Paging']"
+                [queryParams]="{ Type: 'Scheme', MrVendorCategoryCode : this.MrVendorCategoryCode }" translate>
                 <i class="fa fa-arrow-left"></i> Back
               </button>
               <button type="submit" class="btn btn-raised btn-primary"

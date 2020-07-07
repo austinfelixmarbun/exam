@@ -326,7 +326,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       this.router.navigate(['/Vendor/Holding/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
     } else {
-      this.router.navigate(['/Vendor/Holding/Paging']);
+      this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode" : this.MrVendorCategoryCode } });
     }
 
   }

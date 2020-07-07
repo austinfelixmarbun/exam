@@ -21,7 +21,7 @@ export class VendorGroupComponent implements OnInit {
     VendorGrpCode: ['', Validators.required],
     VendorGrpName: ['', Validators.required],
     VendorGrpDesc: [''],
-    MrVendorCategoryCode: ['', Validators.required],
+    MrVendorCategoryCode: [{ value: '', disabled: true }],
     IsActive: false,
   })
   refMasterObj: RefMasterObj;
@@ -29,6 +29,7 @@ export class VendorGroupComponent implements OnInit {
   allVendorCategory: any;
   vendorGrpObj: VendorGroupObj;
   resultData: any;
+  MrVendorCategoryCode: string;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -38,6 +39,9 @@ export class VendorGroupComponent implements OnInit {
       }
       if (params['VendorGrpId'] != null) {
         this.VendorGrpId = params['VendorGrpId'];
+      } 
+      if (params["MrVendorCategoryCode"] != null) {
+        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       }
     });
   }
@@ -54,7 +58,7 @@ export class VendorGroupComponent implements OnInit {
           console.log(response);
           this.allVendorCategory = response['ReturnObject'];
           this.VendorGroupFrom.patchValue({
-            MrVendorCategoryCode: this.allVendorCategory[0].Key
+            MrVendorCategoryCode: this.MrVendorCategoryCode
           });
         },
         (error) => {
@@ -70,6 +74,7 @@ export class VendorGroupComponent implements OnInit {
         (response) => {
           console.log(response);
           this.resultData = response;
+          this.MrVendorCategoryCode = this.resultData.MrVendorCategoryCode;
           this.VendorGroupFrom.patchValue({
 
             VendorGrpCode: this.resultData.VendorGrpCode,
@@ -96,6 +101,7 @@ export class VendorGroupComponent implements OnInit {
   SaveForm(): void {
     this.vendorGrpObj = new VendorGroupObj();
     this.vendorGrpObj = this.VendorGroupFrom.value;
+    this.vendorGrpObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
     this.vendorGrpObj.RowVersion = "";
     console.log(this.VendorGroupFrom.value);
     console.log(this.vendorGrpObj);
@@ -105,7 +111,7 @@ export class VendorGroupComponent implements OnInit {
         (response) => {
           console.log(response);
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/Vendor/Group/Paging"]);
+          this.router.navigate(["/Vendor/Paging"], { queryParams: { "Type": "Group", "MrVendorCategoryCode" : this.MrVendorCategoryCode } });
         },
         (error) => {
           console.log(error);
@@ -120,7 +126,7 @@ export class VendorGroupComponent implements OnInit {
         (response) => {
           console.log(response);
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/Vendor/Group/Paging"]);
+          this.router.navigate(["/Vendor/Paging"], { queryParams: { "Type": "Group", "MrVendorCategoryCode" : this.MrVendorCategoryCode } });
         },
         (error) => {
           console.log(error);

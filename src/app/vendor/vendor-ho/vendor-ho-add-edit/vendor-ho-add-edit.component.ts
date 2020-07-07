@@ -260,7 +260,7 @@ export class VendorHoAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": this.VendorId, "mode":"edit"} });
     } else {
-      this.router.navigate(['/Vendor/HO/Paging']);
+      this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode" : this.MrVendorCategoryCode } });
     }
   }
 

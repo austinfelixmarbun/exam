@@ -25,9 +25,11 @@ export class VendorSchemeAddEditComponent implements OnInit {
   editUrl: any;
   itemCategoryType: any;
   item
+    MrVendorCategoryCode: string;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
       this.route.queryParams.subscribe(params => {
           this.VendorSchmId = params["VendorSchmId"];
+          this.MrVendorCategoryCode =  params["MrVendorCategoryCode"];
           this.mode = params["mode"];
       })
   }
@@ -36,7 +38,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
     VendorSchmCode:  ['', Validators.required],
     VendorSchmName:  ['', Validators.required],
     VendorSchmDesc: [''],
-    MrVendorCategoryCode: ['', Validators.required], 
+    MrVendorCategoryCode: [{ value: '', disabled: true }],
     IsActive:  [false],
     RowVersion: ['']    
   })
@@ -48,7 +50,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
       (response) => {
         this.itemCategoryType = response["ReturnObject"];
         this.VendorSchmForm.patchValue({
-          MrVendorCategoryCode: this.itemCategoryType[0].Key
+          MrVendorCategoryCode: this.MrVendorCategoryCode
         });
       } 
     );
@@ -61,6 +63,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
           this.http.post(AdInsConstant.GetVendorSchmByVendorSchmId, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.result = response;
+                  this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
                   this.VendorSchmForm.patchValue({
                       VendorSchmCode: this.result.VendorSchmCode,
                       VendorSchmName: this.result.VendorSchmName,
@@ -79,7 +82,9 @@ export class VendorSchemeAddEditComponent implements OnInit {
 
   SaveForm(){
       this.vendorSchemeObj = new VendorSchemeObj();
+
       this.vendorSchemeObj = this.VendorSchmForm.value;
+      this.vendorSchemeObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
       if (this.mode == "edit") {
           this.vendorSchemeObj.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
           this.vendorSchemeObj.VendorSchmCode = this.result.VendorSchmCode;

@@ -560,7 +560,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": this.VendorId } });
     } else {
-      this.router.navigate(['/Vendor/Branch/Paging']);
+      this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode" : this.MrVendorCategoryCode } });
     }
   }
 }

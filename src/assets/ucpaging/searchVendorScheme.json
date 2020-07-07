@@ -3,23 +3,6 @@
     "component": [
         {
             "type": "dropdown",
-            "name": "VS.MR_VENDOR_CATEGORY_CODE", 
-            "id": "MrVendorCategoryCodeId",
-            "value": "",
-            "placeholder": "Placeholder",
-            "datatype": "text",
-            "isFromURL": true,
-            "isSelectOne": false,
-            "url": "",
-            "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Vendor Category",
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "VENDOR_CATEGORY",
-            "items": [],
-            "itemsUrl": []
-        },
-        {
-            "type": "dropdown",
             "name": "VS.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
