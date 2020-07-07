@@ -11,7 +11,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { UserTitleRoleObj } from 'app/shared/model/UserTitleRoleObj';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UploadService } from 'app/shared/upload/upload.service';
 
@@ -45,18 +45,21 @@ export class UploadSettingEditComponent implements OnInit {
   uploadSettingObj: any;
 
   uploadTypeId: any;
-  uploadTypeObject: any;
+  uploadTypeObject: any;z
   userTitleRoleObj: any;
   empPositionId: any;
   addCritLookup: any;
   tempRefRole: any;
   listRefRoleId: Array<any> = [];
 
+  UploadForm = this.fb.group({});
+
   constructor(private spinner: NgxSpinnerService,
     private service: NGXToastrService,
     private httpClient: HttpClient,
     private route: ActivatedRoute,
     private location: Location,
+    private fb: FormBuilder,
     private uploadService: UploadService) { }
 
   ngOnInit() {
@@ -98,18 +101,11 @@ export class UploadSettingEditComponent implements OnInit {
     this.pageNow = 1;
     this.pageSize = 10;
     this.inputLookupObj = new InputLookupObj();
-    this.inputLookupObj.urlJson = './assets/lookup/lookupRole.json';
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefRolePaging;
+    this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
+    this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
-
-    this.addCritLookup = new Array();
-    const critIsActive = new CriteriaObj();
-    critIsActive.propName = 'IsActive';
-    critIsActive.value = '1';
-    critIsActive.restriction = AdInsConstant.RestrictionEq;
-    critIsActive.DataType = 'text';
-    this.addCritLookup.push(critIsActive);
-    this.inputLookupObj.addCritInput = this.addCritLookup;
+    this.inputLookupObj.pagingJson = "./assets/lookup/lookupRole.json";
+    this.inputLookupObj.genericJson = "./assets/lookup/lookupRole.json";
 
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
     this.initiateForm();
@@ -125,18 +121,18 @@ export class UploadSettingEditComponent implements OnInit {
   }
 
   add(uclRoleObj: any) {
-    const refRoleObj = JSON.parse(uclRoleObj.lookupInput.jsonSelect);
+    const refRoleObj = uclRoleObj.jsonSelect;
     if (refRoleObj != null) {
       if (this.listRefRoleId != null) {
-        if (this.listRefRoleId.includes(refRoleObj.refRoleId)) {
+        if (this.listRefRoleId.includes(refRoleObj.RefRoleId)) {
           this.service.errorMessage('Cannot add same Role');
         } else {
           this.tempRefRole.push(refRoleObj);
-          this.listRefRoleId.push(refRoleObj.refRoleId);
+          this.listRefRoleId.push(refRoleObj.RefRoleId);
         }
       }
-      this.ucLookupRole.lookupInput.nameSelect = '';
-      this.ucLookupRole.lookupInput.jsonSelect = null;
+      this.inputLookupObj.nameSelect = '';
+      this.inputLookupObj.jsonSelect = null;
     } else {
       this.service.errorMessage('Please select Role First');
     }
