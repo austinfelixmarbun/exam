@@ -16,7 +16,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 export class VendorPagingComponent implements OnInit {
   inputPagingObj: any;
   MrVendorCategoryCode: string;
-  Type: string;
+  Type: string = "default";
   mode: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private router: Router) {
@@ -36,6 +36,31 @@ export class VendorPagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+
+
+
+    if (this.Type == "Scheme") {
+      this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorScheme.json";
+      this.inputPagingObj._url = "./assets/ucpaging/searchVendorScheme.json";
+      this.inputPagingObj.addCritInput = new Array();
+      var critObj = new CriteriaObj();
+      critObj.propName = "VS.MR_VENDOR_CATEGORY_CODE";
+      critObj.restriction = AdInsConstant.RestrictionEq;
+      critObj.value = this.MrVendorCategoryCode;
+      this.inputPagingObj.addCritInput.push(critObj);
+      return;
+    }
+    if (this.Type == "Group") {
+      this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
+      this.inputPagingObj._url = "./assets/ucpaging/searchVendorGroup.json";
+      this.inputPagingObj.addCritInput = new Array();
+      var critObj = new CriteriaObj();
+      critObj.propName = "VG.MR_VENDOR_CATEGORY_CODE";
+      critObj.restriction = AdInsConstant.RestrictionEq;
+      critObj.value = this.MrVendorCategoryCode;
+      this.inputPagingObj.addCritInput.push(critObj);
+      return;
+    }
 
     if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
@@ -70,7 +95,7 @@ export class VendorPagingComponent implements OnInit {
       WVAddrTypeObj.property = "AddrType";
       WVAddrTypeObj.value = "TAX";
       this.inputPagingObj.whereValue.push(WVAddrTypeObj);
-      
+
       var WVendorClassObj = new WhereValueObj();
       WVendorClassObj.property = "VendorClass";
       WVendorClassObj.value = "HO";
@@ -93,33 +118,11 @@ export class VendorPagingComponent implements OnInit {
       WVendorClassObj.value = "HOLDING";
       this.inputPagingObj.whereValue.push(WVendorClassObj);
     }
-    if (this.Type == "Scheme") {
-      this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorScheme.json";
-      this.inputPagingObj._url = "./assets/ucpaging/searchVendorScheme.json";
-      this.inputPagingObj.addCritInput = new Array();
-      var critObj = new CriteriaObj();
-      critObj.propName = "VS.MR_VENDOR_CATEGORY_CODE";
-      critObj.restriction = AdInsConstant.RestrictionEq;
-      critObj.value = this.MrVendorCategoryCode;
-      this.inputPagingObj.addCritInput.push(critObj);
 
-    }
-    else if (this.Type == "Group") {
-      this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
-      this.inputPagingObj._url = "./assets/ucpaging/searchVendorGroup.json";
-      this.inputPagingObj.addCritInput = new Array();
-      var critObj = new CriteriaObj();
-      critObj.propName = "VG.MR_VENDOR_CATEGORY_CODE";
-      critObj.restriction = AdInsConstant.RestrictionEq;
-      critObj.value = this.MrVendorCategoryCode;
-      this.inputPagingObj.addCritInput.push(critObj);
-
-
-    }
 
   }
 
-  navigate(){
+  navigate() {
     if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
       this.router.navigate(["/Vendor/Branch/Add"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
     }
