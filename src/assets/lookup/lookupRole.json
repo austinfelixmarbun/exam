@@ -1,24 +1,68 @@
 {
-  "url": "http://getRole",
+  "url": "",
   "title":"Lookup Role",
   "component": [
     {
       "type": "textbox",
-      "name": "roleCode",
-      "id": "roleCodeId",
-      "value": "",
+      "name": "ROLE_CODE",
+      "id": "RoleCodeId",
       "label": "Role Code",
-      "placeholder": "Placeholder",
-      "datatype": "text"
+      "placeholder": ""
     },
     {
       "type": "textbox",
-      "name": "roleName",
-      "id": "roleNameId",
-      "value": "",
+      "name": "ROLE_NAME",
+      "id": "RoleNameId",
       "label": "Role Name",
-      "placeholder": "Placeholder",
-      "datatype": "text"
+      "placeholder": ""
     }
-  ]
+  ],
+  "querystring": {
+    "select": "SELECT ROLE_CODE AS RoleCode, ROLE_NAME AS RoleName, IS_ACTIVE AS IsActive, REF_ROLE_ID AS RefRoleId",
+    "from": "FROM DBO.REF_ROLE WITH(NOLOCK)",
+    "where": "WHERE IS_ACTIVE = 1"
+  },
+  "headerList": [
+      {
+          "type": "sort",
+          "position": "center",
+          "label": "Role Code",
+          "name": "ROLE_CODE"
+      },
+      {
+          "type": "sort",
+          "position": "left",
+          "label": "Role Name",
+          "name": "ROLE_NAME"
+      },
+      {
+          "type": "label",
+          "position": "center",
+          "label": "Select"
+      }
+  ],
+  "bodyList": [
+      {
+          "type": "text",
+          "position": "center",
+          "property": "RoleCode"
+      },
+      {
+          "type": "text",
+          "position": "left",
+          "property": "RoleName"
+      },
+      {
+          "type": "action",
+          "position": "center",
+          "action": [
+              {
+                  "type": "select",
+                  "property": "RefRoleId"
+              }
+          ]
+      }
+  ],
+  "propertyId": "RefRoleId",
+  "propertyName": "RoleName"
 }

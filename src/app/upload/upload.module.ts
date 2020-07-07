@@ -17,6 +17,7 @@ import { UcpagingModule } from "@adins/ucpaging";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcuploadModule } from '@adins/ucupload';
 import { UploadNegativeAssetComponent } from './upload-negative-asset/upload-negative-asset.component';
+import { UclookupgenericModule } from "@adins/uclookupgeneric";
 @NgModule({
     imports: [
         CommonModule,
@@ -32,7 +33,8 @@ import { UploadNegativeAssetComponent } from './upload-negative-asset/upload-neg
         UploadRoutingModule,
         UcpagingModule,
         UcviewgenericModule,
-        UcuploadModule
+        UcuploadModule,
+        UclookupgenericModule
     ],
     declarations: [
         UploadMonitoringComponent,

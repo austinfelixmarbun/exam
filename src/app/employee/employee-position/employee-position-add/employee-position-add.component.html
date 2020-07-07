@@ -13,7 +13,7 @@
     </div>
     <div class="card-body">
         <div class="px-3">
-            <form class="form form-horizontal" name="EmpPositionForm" #EmpPositionForm="ngForm" novalidate
+            <form class="form form-horizontal" name="EmpPositionForm" [formGroup]="RefEmpPositionForm" #EmpPositionForm="ngForm" novalidate
                 (ngSubmit)="EmpPositionForm.form.valid && SaveForm(EmpPositionForm)">
                 <div class="form-body">
                     <div class="form-group row">
@@ -92,8 +92,8 @@
                     <div class="form-group row">
                         <label class="col-md-3  adInsLabel">Supervisor </label>
                         <div class="col-md-9">
-                            <lib-lookupsupervisor [lookupInput]="inputLookupObj">
-                            </lib-lookupsupervisor>
+                            <lib-uclookupgeneric [lookupInput]="inputLookupObj" [parentForm]='RefEmpPositionForm' [enjiForm]='EmpPositionForm' [identifier]="'Supervisor'"
+                            (lookup)="getLookupResponse($event)"></lib-uclookupgeneric>
                         </div>
                     </div>
                     <div class="form-group row">

@@ -3,19 +3,17 @@
   "component": [
     {
       "type": "textbox",
-      "name": "A.EMP_NAME",
-      "id": "empNameId",
-      "value": "",
-      "label": "Employee Name",
-      "placeholder": "Employee Name"
+      "name": "A.EMP_NO",
+      "id": "empNoId",
+      "label": "Employee No",
+      "placeholder": "Employee No"
     },
     {
       "type": "textbox",
-      "name": "A.EMP_NO",
-      "id": "empNoId",
-      "value": "",
-      "label": "Employee No",
-      "placeholder": "Employee No"
+      "name": "A.EMP_NAME",
+      "id": "empNameId",
+      "label": "Employee Name",
+      "placeholder": "Employee Name"
     }
   ],
   "headerList": [
@@ -23,13 +21,13 @@
       "type": "sort",
       "position": "center",
       "label": "Employee No",
-      "name": "empNo"
+      "name": "A.EMP_NO"
     },
     {
       "type": "sort",
-      "position": "center",
+      "position": "left",
       "label": "Employee Name",
-      "name": "empName"
+      "name": "A.EMP_NAME"
     },
     {
       "type": "label",
@@ -52,7 +50,7 @@
     },
     {
       "type": "text",
-      "position": "center",
+      "position": "left",
       "property": "empName"
     },
     {

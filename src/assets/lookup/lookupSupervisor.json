@@ -1,24 +1,68 @@
 {
-    "url": "http://getSupervisor",
-    "title": "Lookup Supervisor",
+    "url": "",
+    "title":"Lookup Supervisor",
     "component": [
+      {
+        "type": "textbox",
+        "name": "EMP_NO",
+        "id": "EmployeeNoId",
+        "label": "Employee No",
+        "placeholder": ""
+      },
+      {
+        "type": "textbox",
+        "name": "EMP_NAME",
+        "id": "EmployeeNameId",
+        "label": "Employee Name",
+        "placeholder": ""
+      }
+    ],
+    "querystring": {
+      "select": "SELECT EMP_NO AS EmpNo, EMP_NAME AS EmpName, REF_EMP_ID AS RefEmpId",
+      "from": "FROM DBO.REF_EMP WITH(NOLOCK)",
+      "where": "WHERE IS_ACTIVE = 1"
+    },
+    "headerList": [
         {
-            "type": "textbox",
-            "name": "empNo",
-            "id": "empNoId",
-            "value": "",
+            "type": "sort",
+            "position": "center",
             "label": "Employee No",
-            "placeholder": "Placeholder",
-            "datatype": "text"
+            "name": "EMP_NO"
         },
         {
-            "type": "textbox",
-            "name": "empName",
-            "id": "empNameId",
-            "value": "",
+            "type": "sort",
+            "position": "left",
             "label": "Employee Name",
-            "placeholder": "Placeholder",
-            "datatype": "text"
+            "name": "EMP_NAME"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Select"
         }
-    ]
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "EmpNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "EmpName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "RefEmpId"
+                }
+            ]
+        }
+    ],
+    "propertyId": "RefEmpId",
+    "propertyName": "EmpName"
 }

@@ -4,7 +4,7 @@ import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder } from '@angular/forms';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
@@ -38,7 +38,7 @@ export class EmployeePositionAddComponent implements OnInit {
     positionFinishDt: any;
     empObj: RefEmpObj;
     refOfficeObj: RefOfficeObj
-    empPositionObj: EmpPositionObj;
+    empPositionObj: EmpPositionObj = new EmpPositionObj();
     orgJobTitleObj: OrgJobTitleObj;
     addUrl: any;
     getEditUrl: any;
@@ -66,7 +66,9 @@ export class EmployeePositionAddComponent implements OnInit {
     inputLookupObj: any;
     getEmpUrl:any;
 
-    constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
+    RefEmpPositionForm = this.fb.group({});
+
+    constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
         this.getUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
         this.addUrl = this.foundationUrl + AdInsConstant.AddEmpPosition;
         this.refOfficeUrl = this.foundationUrl + AdInsConstant.GetAllRefOffice;
@@ -106,8 +108,10 @@ export class EmployeePositionAddComponent implements OnInit {
 
         this.inputLookupObj = new InputLookupObj();
         this.inputLookupObj.urlJson = "./assets/lookup/lookupSupervisor.json";
-        this.inputLookupObj.urlQryPaging = AdInsConstant.GetListEmployee;
+        this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
         this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
+        this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupervisor.json";
+        this.inputLookupObj.genericJson = "./assets/lookup/lookupSupervisor.json";
 
         const getuserAccess = JSON.parse(localStorage.getItem('UserAccess'));
         this.refOfficeId = getuserAccess.refOfficeId;
@@ -151,7 +155,6 @@ export class EmployeePositionAddComponent implements OnInit {
                 console.log(error);
             })
         if (this.pageType == "edit") {
-            this.empPositionObj = new EmpPositionObj();
             this.empPositionObj.empPositionId = this.empPositionId
             this.onChangeBiz(this.refBizUnitId)
             this.httpClient.post(this.getEditUrl, this.empPositionObj).subscribe(
@@ -183,6 +186,7 @@ export class EmployeePositionAddComponent implements OnInit {
         } else {
         }
     }
+
     onChangeBiz(bizValue) {
         this.orgJobTitleObj = new OrgJobTitleObj()
         this.orgJobTitleObj.orgMdlStrucId = bizValue
@@ -202,7 +206,6 @@ export class EmployeePositionAddComponent implements OnInit {
 
     SaveForm(ReqForm: NgForm) {
         if (this.pageType == 'add') {
-            this.empPositionObj = new EmpPositionObj();
             this.empPositionObj = ReqForm.value;
             this.empPositionObj.refEmpId = this.refEmpId;
             this.empPositionObj.skillLvl = this.masterCode;
@@ -231,7 +234,6 @@ export class EmployeePositionAddComponent implements OnInit {
                 }
             );
         } else {
-            this.empPositionObj = new EmpPositionObj();
             this.empPositionObj = ReqForm.value
             this.empPositionObj.refEmpId = this.refEmpId
             this.empPositionObj.empPositionId = this.empPositionId
@@ -265,4 +267,7 @@ export class EmployeePositionAddComponent implements OnInit {
         this.isActive = e.target.checked;
     }
 
+    getLookupResponse(e){
+        this.empPositionObj.superiorRefEmpId = e.RefEmpId
+    }
 }

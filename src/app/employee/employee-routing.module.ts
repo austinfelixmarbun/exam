@@ -49,7 +49,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'EmployeePositionAddEdit',
+        path: 'EmployeePosition/Detail',
         component: EmployeePositionAddComponent,
         data: {
           title: 'Employee Position Add Edit'
