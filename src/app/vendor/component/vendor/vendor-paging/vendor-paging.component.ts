@@ -48,6 +48,11 @@ export class VendorPagingComponent implements OnInit {
 
       this.inputPagingObj.addCritInput.push(critObj);
 
+      var WVendorClassObj = new WhereValueObj();
+      WVendorClassObj.property = "VendorClass";
+      WVendorClassObj.value = "BRANCH";
+      this.inputPagingObj.whereValue.push(WVendorClassObj);
+
     }
     else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
 
