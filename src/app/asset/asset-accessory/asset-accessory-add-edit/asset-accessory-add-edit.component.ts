@@ -8,8 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-asset-accessory-add-edit',
-  templateUrl: './asset-accessory-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './asset-accessory-add-edit.component.html'
 })
 export class AssetAccessoryAddEditComponent implements OnInit {
   AssetAccessoryForm = this.fb.group({
@@ -20,17 +19,10 @@ export class AssetAccessoryAddEditComponent implements OnInit {
   pageType: string;
   AssetTypeId: number;
   AssetAccessoryId: number;
-  apiUrl: string;
-  result: AssetAccessoryObj;
-  acObj: AssetAccessoryObj;
-  addUrl: string;
-  editUrl: string;
-  GetAssetTypeById: string;
-  assetTypeName: any;
+  result: AssetAccessoryObj = new AssetAccessoryObj();
+  acObj: AssetAccessoryObj = new AssetAccessoryObj();
+  assetTypeName: string;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.addUrl = AdInsConstant.AddNewAssetAccesory;
-    this.editUrl = AdInsConstant.EditAssetAccessory;
-    this.GetAssetTypeById = AdInsConstant.GetAssetTypeById;
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -44,9 +36,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     });
   }
   ngOnInit() {
-    console.log('test');
-    var assetTypeReq = { "AssetTypeId": this.AssetTypeId };
-    this.http.post(this.GetAssetTypeById, assetTypeReq).subscribe(
+    this.http.post(AdInsConstant.GetAssetTypeById, { "AssetTypeId": this.AssetTypeId }).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];
       }
@@ -55,11 +45,10 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       var acObj = new AssetAccessoryObj();
       acObj.AssetAccessoryId = this.AssetAccessoryId;
       acObj.AssetTypeId = this.AssetTypeId;
-      this.apiUrl = AdInsConstant.GetAssetAccessorybyAssetAccessoryId;
       this.AssetAccessoryForm.controls.AssetAccessoryCode.disable();
 
-      this.http.post(this.apiUrl, acObj).subscribe(
-        (response: AssetAccessoryObj) => {
+      this.http.post<AssetAccessoryObj>(AdInsConstant.GetAssetAccessorybyAssetAccessoryId, acObj).subscribe(
+        (response) => {
           this.result = response;
           this.AssetAccessoryForm.patchValue({
             AssetAccessoryCode: this.result.AssetAccessoryCode,
@@ -80,7 +69,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
       this.acObj.AssetTypeId = this.AssetTypeId;
-      this.http.post(this.addUrl, this.acObj).subscribe(
+      this.http.post(AdInsConstant.AddNewAssetAccesory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Accessory/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
@@ -94,9 +83,8 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.acObj.AssetAccessoryCode = this.AssetAccessoryForm.controls["AssetAccessoryCode"].value;
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
-      this.http.post(this.editUrl, this.acObj).subscribe(
+      this.http.post(AdInsConstant.EditAssetAccessory, this.acObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Accessory/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
         },
