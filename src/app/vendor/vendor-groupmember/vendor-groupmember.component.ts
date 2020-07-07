@@ -33,7 +33,7 @@ export class VendorGroupmemberComponent implements OnInit {
       }
     });
   }
-  inputObj: any;
+  
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/vendorGrpMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
