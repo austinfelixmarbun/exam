@@ -53,7 +53,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     TaxIdNo: [''],
     MrJobPositionCode: ['',[Validators.required]],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
-    IsSigner: [false], 
+    IsSigner: [false],
+    IsActive: [false],
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -154,7 +155,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             MrCompanyTypeCode: this.tempCustCompanyMgmntShrholderObj.MrCompanyTypeCode ,
             TaxIdNo:  this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
-            IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner
+            IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner,
+            IsActive: this.tempCustCompanyMgmntShrholderObj.IsActive
           });
           if(this.tempCustCompanyMgmntShrholderObj.ShareholderCustNo!=null){ 
             this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
@@ -185,7 +187,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     console.log(this.TotalShareCurrent);
     if(this.TotalShareCurrent > 100){
       this.LeftShare = 100 - this.TotalShare;
-      this.toastr.errorMessage("Total Share left is "+this.LeftShare+"%");
+      this.toastr.warningMessage("Total Share left is "+this.LeftShare+"%");
       return;
     }
 
@@ -205,6 +207,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.MrJobPositionCode = this.ManagementShareholderForm.controls["MrJobPositionCode"].value;
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
+      this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value;
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Personal;
       
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
@@ -234,6 +237,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.MrJobPositionCode = this.ManagementShareholderForm.controls["MrJobPositionCode"].value;
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
+      this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value;
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Personal;
 
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(

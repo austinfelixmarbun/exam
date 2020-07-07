@@ -76,14 +76,14 @@ export class BankInfoComponent implements OnInit {
   SaveForm(enjiForm: NgForm) {
     if (this.objInput.Type == "Vendor") {
       if (this.objInput.VendorId == undefined) {
-        this.toastr.errorMessage("Please add main data first");
+        this.toastr.warningMessage("Please add main data first");
         return false;
       }
       this.VendorBankAcc.VendorId = this.objInput.VendorId;
       this.VendorBankAcc.VendorEmpId = null;
     } else if (this.objInput.Type == "VendorEmployee") {
       if (this.objInput.VendorEmpId == undefined) {
-        this.toastr.errorMessage("Please add main data first");
+        this.toastr.warningMessage("Please add main data first");
         return false;
       }
       this.VendorBankAcc.VendorId = null;

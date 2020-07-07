@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { FooterComponent } from "app/shared/footer/footer.component";
 import { NavbarComponent } from "app/shared/navbar/navbar.component";
 import { SidebarComponent } from "app/shared/sidebar/sidebar.component";
@@ -31,8 +29,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
         CommonModule,
         NgbModule,
         TranslateModule,
-      ContextMenuModule.forRoot(),
-      NgMultiSelectDropDownModule
+        ContextMenuModule.forRoot(),
+        NgMultiSelectDropDownModule
     ],
     declarations: [
         FooterComponent,

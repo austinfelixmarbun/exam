@@ -30,7 +30,7 @@
         "querystring": {
          "select":   "SELECT B.DESCR AS TaxCalculationMethod, A.IS_VAT AS Vat, A.TAX_ID_NO AS TaxNo, A.TAXPAYER_NAME AS TaxName",
            "from": "FROM dbo.VENDOR A WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER B WITH(NOLOCK) ON A.MR_TAX_CALC_METHOD_CODE = B.MASTER_CODE",
-           "where": "WHERE A.MR_VENDOR_CLASS = 'BRANCH' AND A.VENDOR_ID = {0} AND B.REF_MASTER_TYPE_CODE = 'TAX_CALC_METHOD'"
+           "where": "WHERE A.MR_VENDOR_CLASS = N'BRANCH' AND A.VENDOR_ID = {0} AND B.REF_MASTER_TYPE_CODE = N'TAX_CALC_METHOD'"
         }
       }
     ]

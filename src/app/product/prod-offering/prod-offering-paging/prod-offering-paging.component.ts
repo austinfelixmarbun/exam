@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { UcPagingObj, WhereValueObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -30,6 +30,16 @@ export class ProdOfferingPagingComponent implements OnInit {
         environment: environment.FoundationR3Url
       }
     ];
+    
+    var WVTrxTypeCodeObj = new WhereValueObj();
+    WVTrxTypeCodeObj.property = "TrxTypeCode";
+    WVTrxTypeCodeObj.value = "PROD";
+    this.inputPagingObj.whereValue.push(WVTrxTypeCodeObj);
+
+    var WVProdStatObj = new WhereValueObj();
+    WVProdStatObj.property = "ProdOfferingStat";
+    WVProdStatObj.value = "RET";
+    this.inputPagingObj.whereValue.push(WVProdStatObj);
   }
 
   EditProdOfr(e)
