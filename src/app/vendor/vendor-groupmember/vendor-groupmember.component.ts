@@ -4,9 +4,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
-import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { UCSearchComponent } from '@adins/ucsearch';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 
@@ -73,8 +70,7 @@ export class VendorGroupmemberComponent implements OnInit {
   }
 
   GetListVendorGrpMbrByVendorGrpId() {
-    var getListUrl = AdInsConstant.GetListVendorGrpMbrByVendorGrpId;
-    this.http.post(getListUrl, {VendorGrpId: this.VendorGrpId}).subscribe(
+    this.http.post(AdInsConstant.GetListVendorGrpMbrByVendorGrpId, {VendorGrpId: this.VendorGrpId}).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response["ReturnObject"].length; index++) {
