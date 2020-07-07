@@ -16,11 +16,10 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
   providers: [NGXToastrService]
 })
 export class VendorGroupmemberComponent implements OnInit {
-  VendorId: any;
-  VendorGrpMbrId: any;
-  listSelectedId: any;
-  VendorGrpId: any;
-  tempListId: any[];
+  VendorId: number;
+  VendorGrpMbrId: number;
+  listSelectedId: Array<number> = new Array<number>();
+  VendorGrpId: number;
   MrVendorCategoryCode: string = '';
   
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
