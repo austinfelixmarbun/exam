@@ -22,5 +22,6 @@ export class CustCompanyMgmntShrholderObj {
     MrCustTypeCode: any;
     ShareholderCustNo: any;
     MrCustModelCode : any;
+    IsActive: any;
     RowVersion: any;
 }
