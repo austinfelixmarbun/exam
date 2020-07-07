@@ -3,108 +3,156 @@ import { RouteInfo } from './sidebar.metadata';
 //Sidebar menu Routes and data
 export const ROUTES: RouteInfo[] = [
 
-  { Path: '/dashboard/dash-board', Title: 'Menu', Icon: 'ft-home', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
+  { Path: '/dashboard/dash-board', Title: 'Menu', Icon: 'ft-home', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : [] },
   {
     Path: '', Title: 'Organization', Icon: 'ft-bar-chart-2', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
-      { Path: '/Office/Paging', Title: 'Office', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Office/OfficeArea', Title: 'Office Area', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Organization/BusinessUnit', Title: 'Business unit', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Organization/JobTitle', Title: 'Job Title', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Employee/Paging', Title: 'Employee', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Employee/Leave/Paging', Title: 'Employee Leave', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/SystemSetting/Role', Title: 'Role', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] }
+      { Path: '/Office/Paging', Title: 'Office', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : [] },
+      { Path: '/Office/OfficeArea', Title: 'Office Area', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Organization/BusinessUnit', Title: 'Business unit', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Organization/JobTitle', Title: 'Job Title', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Employee/Paging', Title: 'Employee', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Employee/Leave/Paging', Title: 'Employee Leave', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : [] },
+      { Path: '/SystemSetting/Role', Title: 'Role', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
 
-    ]
+    ], Params : [] 
   },
   {
     Path: '', Title: 'System Setting', Icon: 'ft-users', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
-      { Path: '/CommonSetting/GeneralSetting', Title: 'General Setting', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/Holiday', Title: 'Holiday Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/WorkingHour', Title: 'Working Hour', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/Bank/Paging', Title: 'Bank', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/RefProvince/Paging', Title: 'Province', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/Zipcode/Paging', Title: 'Zipcode', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/Master', Title: 'Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/RefStatus/Paging', Title: 'Status', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/IndustryType/Paging', Title: 'Industry Type', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/EconomicSector/Paging', Title: 'Economic Sector', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/Currency/Paging', Title: 'Currency', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/CommonSetting/Profession/Paging', Title: 'Profession', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/SystemSetting/Notification', Title: 'Notification', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/SystemSetting/NotificationApproval', Title: 'Notification Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/SystemSetting/RefForm/Paging', Title: 'Ref Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] }
-    ]
+      { Path: '/CommonSetting/GeneralSetting', Title: 'General Setting', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] , Params : [] },
+      { Path: '/CommonSetting/Holiday', Title: 'Holiday Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] , Params : [] },
+      { Path: '/CommonSetting/WorkingHour', Title: 'Working Hour', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Bank/Paging', Title: 'Bank', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/RefProvince/Paging', Title: 'Province', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Zipcode/Paging', Title: 'Zipcode', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Master', Title: 'Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/RefStatus/Paging', Title: 'Status', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/IndustryType/Paging', Title: 'Industry Type', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/EconomicSector/Paging', Title: 'Economic Sector', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Currency/Paging', Title: 'Currency', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Profession/Paging', Title: 'Profession', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/SystemSetting/Notification', Title: 'Notification', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/SystemSetting/NotificationApproval', Title: 'Notification Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/SystemSetting/RefForm/Paging', Title: 'Ref Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
+    ], Params : [] 
   },
   {
     Path: '', Title: 'Asset', Icon: 'ft-aperture', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
-      { Path: '/Asset/Configuration/Paging', Title: 'Asset Configuration', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Asset/DocumentMaster/Paging', Title: 'Asset Document Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Asset/NegativeAsset/Paging', Title: 'Negative Asset', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Asset/AssetMaster/Paging', Title: 'Asset Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Asset/Scheme/Paging', Title: 'Asset Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Asset/Type/Paging', Title: 'Asset Type', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Asset/AssetMaster/Upload', Title: 'Upload Asset Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Asset/AssetMaster/ReviewUploadPaging', Title: 'Review Upload Asset Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Asset/NegativeAsset/Upload', Title: 'Upload Negative Asset', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Asset/NegativeAsset/ReviewUploadPaging', Title: 'Review Upload Negative Asset', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] }
-    ]
+      { Path: '/Asset/Configuration/Paging', Title: 'Asset Configuration', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Asset/DocumentMaster/Paging', Title: 'Asset Document Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Asset/NegativeAsset/Paging', Title: 'Negative Asset', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Asset/AssetMaster/Paging', Title: 'Asset Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Asset/Scheme/Paging', Title: 'Asset Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Asset/Type/Paging', Title: 'Asset Type', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Asset/AssetMaster/Upload', Title: 'Upload Asset Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Asset/AssetMaster/ReviewUploadPaging', Title: 'Review Upload Asset Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Asset/NegativeAsset/Upload', Title: 'Upload Negative Asset', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Asset/NegativeAsset/ReviewUploadPaging', Title: 'Review Upload Negative Asset', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
+    ], Params : [] 
   },
   {
     Path: '', Title: 'Vendor', Icon: 'ft-briefcase', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
+      {
+        Path: '', Title: 'Supplier', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+        Submenu: [
+          
+          { Path: '/Vendor/Paging', Title: 'Supplier Holding', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "SUPPLIER_HOLDING" }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "SUPPLIER_HO" }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "SUPPLIER_BRANCH" }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "SUPPLIER_BRANCH" }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "SUPPLIER_BRANCH" }] },
       
-      { Path: '/Vendor/Holding/Paging', Title: 'Vendor Holding', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Vendor/HO/Paging', Title: 'Vendor Head Office', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Vendor/Branch/Paging', Title: 'Vendor Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Vendor/VendorScheme/Paging', Title: 'Vendor Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Vendor/Group/Paging', Title: 'Vendor Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] }
-    ]
+        ], Params : [] 
+      },{
+        Path: '', Title: 'Asset Insurance', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+        Submenu: [
+          
+          { Path: '/Vendor/Paging', Title: 'Insurance HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "ASSET_INSCO_HO" }] },
+          { Path: '/Vendor/Paging', Title: 'Insurance Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "ASSET_INSCO_BRANCH" }] },
+          { Path: '/Vendor/Paging', Title: 'Insurance Branch Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }] },
+          { Path: '/Vendor/Paging', Title: 'Insurance Branch Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }] },
+      
+        ], Params : [] 
+      },{
+        Path: '', Title: 'Life Insurance', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+        Submenu: [
+          
+          { Path: '/Vendor/Paging', Title: 'Life Insurance HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "LIFE_INSCO_HO" }] },
+          { Path: '/Vendor/Paging', Title: 'Life Insurance Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "LIFE_INSCO_BRANCH" }] },      
+          { Path: '/Vendor/Paging', Title: 'Life Insurance Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }] },      
+          { Path: '/Vendor/Paging', Title: 'Life Insurance Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }] },      
+        ], Params : [] 
+      },
+      {
+        Path: '', Title: 'Surveyor', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+        Submenu: [
+          
+          { Path: '/Vendor/Paging', Title: 'Surveyor HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "SURVEYOR_BRANCH" }] },
+          { Path: '/Vendor/Paging', Title: 'Surveyor Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "SURVEYOR_HO" }] },  
+          { Path: '/Vendor/Paging', Title: 'Surveyor Branch Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }] },      
+          { Path: '/Vendor/Paging', Title: 'Surveyor Branch Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }] },    
+        ], Params : [] 
+      },
+      {
+        Path: '', Title: 'Agency', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+        Submenu: [
+          
+          { Path: '/Vendor/Paging', Title: 'Agency Personal', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "AGENCY_PERSONAL" }] },
+          { Path: '/Vendor/Paging', Title: 'Agency Company', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: "AGENCY_COMPANY" }] },  
+          { Path: '/Vendor/Paging', Title: 'Agency Personal Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }] },      
+          { Path: '/Vendor/Paging', Title: 'Agency Company Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }] },      
+          { Path: '/Vendor/Paging', Title: 'Agency Personal Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }] },    
+          { Path: '/Vendor/Paging', Title: 'Agency Company Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }] },    
+      
+        ], Params : [] 
+      },
+    ], Params : [] 
   },
   {
     Path: '', Title: 'Product', Icon: 'ft-package', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
-      { Path: '/Product/HOpaging', Title: 'Product HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Product/HOApproval', Title: 'Product HO Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Product/HOReturnPaging', Title: 'Product HO Return', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Product/HODeactivate', Title: 'Product HO Deactivation', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Product/HODeactivateApproval', Title: 'Product HO Deactivate Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Product/ProdOffering/Paging', Title: 'Product Offering', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Product/OfferingApproval', Title: 'Product Offering Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Product/ProdOffering/Returnpaging', Title: 'Product Offering Return', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Product/OfferingDeactivate', Title: 'Product Offering Deactivation', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Product/OfferingDeactivateApproval', Title: 'Product Offering Deactivate Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] }
+      { Path: '/Product/HOpaging', Title: 'Product HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/HOApproval', Title: 'Product HO Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/HOReturnPaging', Title: 'Product HO Return', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/HODeactivate', Title: 'Product HO Deactivation', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/HODeactivateApproval', Title: 'Product HO Deactivate Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/ProdOffering/Paging', Title: 'Product Offering', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/OfferingApproval', Title: 'Product Offering Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/ProdOffering/Returnpaging', Title: 'Product Offering Return', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/OfferingDeactivate', Title: 'Product Offering Deactivation', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/OfferingDeactivateApproval', Title: 'Product Offering Deactivate Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
       
-    ]
+    ], Params : [] 
   },
   {
     Path: '', Title: 'Survey', Icon: 'ft-clipboard', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
-      { Path: '/Survey/Paging', Title: 'Survey Order', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] }
+      { Path: '/Survey/Paging', Title: 'Survey Order', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
       
-    ]
+    ], Params : [] 
   },
   {
     Path: '', Title: 'Verification', Icon: 'ft-layers', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
-      { Path: '/Verification/QuestionAnswer/Paging', Title: 'Question Answer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Verification/QuestionScheme/Paging', Title: 'Question Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Verification/QuestionGroup/Paging', Title: 'Question Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] }
+      { Path: '/Verification/QuestionAnswer/Paging', Title: 'Question Answer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Verification/QuestionScheme/Paging', Title: 'Question Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Verification/QuestionGroup/Paging', Title: 'Question Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
       
-    ]
+    ], Params : [] 
   },
   
   {
     Path: '', Title: 'Customer', Icon: 'ft-user', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
-      { Path: '/Customer/Paging', Title: 'Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },
-      { Path: '/Customer/EditMainData/Paging', Title: 'Edit Main Data Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },  
-      { Path: '/Customer/NegativeCustomer/Paging', Title: 'Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },   
-      { Path: '/Customer/NegativeCustomer/Upload', Title: 'Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },         
-      { Path: '/Customer/NegativeCustomer/ReviewUploadPaging', Title: 'Review Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] },      
-    ]
+      { Path: '/Customer/Paging', Title: 'Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Customer/EditMainData/Paging', Title: 'Edit Main Data Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
+      { Path: '/Customer/NegativeCustomer/Paging', Title: 'Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },   
+      { Path: '/Customer/NegativeCustomer/Upload', Title: 'Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },         
+      { Path: '/Customer/NegativeCustomer/ReviewUploadPaging', Title: 'Review Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },      
+    ], Params : [] 
   },
   // {
   //     Path: '', Title: 'LOS', Icon: 'ft-users', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,

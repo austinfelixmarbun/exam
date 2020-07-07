@@ -58,6 +58,8 @@ import { HoContactPersonInfoComponent } from './vendor-ho/vendor-ho-info/ho-cont
 import { HoGroupInfoComponent } from './vendor-ho/vendor-ho-info/ho-group-info/ho-group-info.component';
 import { HoBranchInfoComponent } from './vendor-ho/vendor-ho-info/ho-branch-info/ho-branch-info.component';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
+import { VendorPagingComponent } from './component/vendor/vendor-paging/vendor-paging.component';
+import { VendorDetailComponent } from './component/vendor/vendor-detail/vendor-detail.component';
 
 @NgModule({
   imports: [
@@ -121,7 +123,9 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
     VendorBranchViewComponent,
     HoContactPersonInfoComponent,
     HoGroupInfoComponent,
-    HoBranchInfoComponent
+    HoBranchInfoComponent,
+    VendorPagingComponent,
+    VendorDetailComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

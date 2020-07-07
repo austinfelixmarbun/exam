@@ -3,24 +3,6 @@
     "component": [
         {
             "type": "dropdown",
-            "name": "vdr.MR_VENDOR_CATEGORY_CODE", 
-            "id": "MrVendorCategoryCodeId",
-            "value": "",
-            "placeholder": "Placeholder",
-            "datatype": "text",
-            "isFromURL": true,
-            "isSelectOne": false,
-            "isQueryIn": true,
-            "url": "",
-            "path": "/RefMaster/GetListActiveRefMasterByVendorCategoryByReserveField1",
-            "label": "Vendor Category",
-            "criteriaPropName" : "ReserveField1",
-            "criteriaPropValue" : "BRANCH",
-            "items": [],
-            "itemsUrl": []
-        },
-        {
-            "type": "dropdown",
             "name": "vdr.IS_ACTIVE",
             "id": "activeStatusId",
             "label": "Active Status",

@@ -31,6 +31,7 @@
                 <span *ngIf="menuItem.Class == ''; then internalNoSubBlock else internalHasSubBlock"></span>
                 <ng-template #internalNoSubBlock>
                     <a [routerLink]="menuItem.Class == '' ? [menuItem.Path] : null"
+                    [queryParams]="genParam(menuItem.Params)"
                         *ngIf="!menuItem.IsExternalLink; else externalLinkBlock" [contextMenu]="basicMenu"
                         [contextMenuSubject]="menuItem">
                         <i [ngClass]="[menuItem.Icon]"></i>
@@ -59,6 +60,7 @@
                         [routerLinkActive]="menuSubItem.Submenu.length > 0 ? '' : 'active'"
                         [ngClass]="[menuSubItem.Class]">
                         <a [routerLink]="menuSubItem.Submenu.length > 0 ? null : [menuSubItem.Path]"
+                            [queryParams]="genParam(menuSubItem.Params)"
                             *ngIf="!menuSubItem.IsExternalLink; else externalSubLinkBlock">
                             <i [ngClass]="[menuSubItem.Icon]"></i>
                             <span class="menu-title">{{menuSubItem.Title | translate }}</span>
@@ -78,6 +80,7 @@
                             <li *ngFor="let menuSubsubItem of menuSubItem.Submenu" routerLinkActive="active"
                                 [routerLinkActiveOptions]="{exact: true}" [ngClass]="[menuSubsubItem.Class]">
                                 <a [routerLink]="[menuSubsubItem.Path]"
+                                [queryParams]="genParam(menuSubsubItem.Params)"
                                     *ngIf="!menuSubsubItem.IsExternalLink; else externalSubSubLinkBlock">
                                     <i [ngClass]="[menuSubsubItem.Icon]"></i>
                                     <span class="menu-title">{{menuSubsubItem.Title | translate }}</span>

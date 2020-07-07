@@ -29,6 +29,7 @@ import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch
 import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
 import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
 import { VendorBranchViewComponent } from './vendor-branch/vendor-branch-view/vendor-branch-view.component';
+import { VendorPagingComponent } from './component/vendor/vendor-paging/vendor-paging.component';
 
 const routes: Routes = [
   {
@@ -144,6 +145,13 @@ const routes: Routes = [
         component: VendorSchemePagingComponent,
         data: {
           title: 'Vendor Scheme Paging'
+        },
+      },
+      {
+        path: 'Paging',
+        component: VendorPagingComponent,
+        data: {
+          title: 'Vendor Paging'
         },
       },
       {
