@@ -12,6 +12,8 @@
               <div class="col-md-7">
                 <input type="text" class="form-control adInsInput" formControlName="AssetSchmCode"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetSchemeInfoForm.controls.AssetSchmCode.invalid }">
+                  <lib-uc-show-errors [control]="AssetSchemeInfoForm.controls.AssetSchmCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row adins-required">

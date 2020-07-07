@@ -25,8 +25,8 @@ export class ProductHOAddComponent implements OnInit {
     ProdCode: ['', Validators.required],
     ProdName: ['',Validators.required],
     ProdDescr: ['',Validators.required],
-    StartDt: [''],
-    EndDt: ['']
+    StartDt: ['',Validators.required],
+    EndDt: ['',Validators.required]
   });
 
   constructor(

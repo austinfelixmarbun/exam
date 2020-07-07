@@ -47,7 +47,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     VerfQuestionGrpDId: [''],
     VerfQuestionGrpHId: [''],
     VerfQuestionAnswerId: [''],
-    SeqNo: [''],
+    SeqNo: ['',Validators.required],
     IsActive: [false],
     RowVersion: ['']
   })

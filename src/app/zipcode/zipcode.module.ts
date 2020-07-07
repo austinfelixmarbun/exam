@@ -12,6 +12,7 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { UcpagingModule } from '@adins/ucpaging';
     UcgridfooterModule,
     ReactiveFormsModule,
     UclookupgenericModule,
-    UcpagingModule
+    UcpagingModule,
+    UcShowErrorsModule
 
   ],
   declarations: [
