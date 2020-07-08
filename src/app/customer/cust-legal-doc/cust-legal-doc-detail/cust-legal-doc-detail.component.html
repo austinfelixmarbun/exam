@@ -22,8 +22,8 @@
                       <option *ngFor="let item of legalDocTypeList?.ReturnObject" [value]="item.Key">{{item.Value}}
                       </option>
                     </select>
-                    <show-errors [control]="CustCompanyLegalDocForm.controls.MrLegalDocTypeCode"
-                      [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="CustCompanyLegalDocForm.controls.MrLegalDocTypeCode"
+                      [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -31,8 +31,8 @@
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput" formControlName="DocNo"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyLegalDocForm.controls.DocNo.invalid }" />
-                    <show-errors [control]="CustCompanyLegalDocForm.controls.DocNo" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="CustCompanyLegalDocForm.controls.DocNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -40,8 +40,8 @@
                   <div class="col-md-9">
                     <input type="date" class="form-control adInsInput" formControlName="DocDt" [max]="businessDtMin | date: 'yyyy-MM-dd'"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyLegalDocForm.controls.DocDt.invalid }" />
-                    <show-errors [control]="CustCompanyLegalDocForm.controls.DocDt" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="CustCompanyLegalDocForm.controls.DocDt" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -49,8 +49,8 @@
                   <div class="col-md-9">
                     <input type="date" class="form-control adInsInput" formControlName="DocExpiredDt" [min]="businessDtMax | date: 'yyyy-MM-dd'"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyLegalDocForm.controls.DocExpiredDt.invalid }">
-                    <show-errors [control]="CustCompanyLegalDocForm.controls.DocExpiredDt"
-                      [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="CustCompanyLegalDocForm.controls.DocExpiredDt"
+                      [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -58,8 +58,8 @@
                   <div class="col-md-9">
                     <textarea class="form-control adInsInput" formControlName="DocNotes"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyLegalDocForm.controls.DocNotes.invalid }"></textarea>
-                    <show-errors [control]="CustCompanyLegalDocForm.controls.DocNotes" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="CustCompanyLegalDocForm.controls.DocNotes" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -67,8 +67,8 @@
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput" formControlName="NotaryName"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyLegalDocForm.controls.NotaryName.invalid }" />
-                    <show-errors [control]="CustCompanyLegalDocForm.controls.NotaryName" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="CustCompanyLegalDocForm.controls.NotaryName" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -77,8 +77,8 @@
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput" formControlName="NotaryLocation"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyLegalDocForm.controls.NotaryLocation.invalid }" />
-                    <show-errors [control]="CustCompanyLegalDocForm.controls.NotaryLocation"
-                      [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="CustCompanyLegalDocForm.controls.NotaryLocation"
+                      [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
               </div>

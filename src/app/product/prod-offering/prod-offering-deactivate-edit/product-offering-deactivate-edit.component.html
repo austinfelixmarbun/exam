@@ -35,7 +35,7 @@
                     {{ram.Value}}
                   </option>
                 </select>
-                <show-errors [control]="ProdOfferingHDeactForm.controls.Reason" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="ProdOfferingHDeactForm.controls.Reason" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row">
@@ -43,7 +43,7 @@
               <div class="col-md-9">
                 <input type="date" class="form-control adInsInput" formControlName="EffectiveDate"
                        [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdOfferingHDeactForm.controls.EffectiveDate.invalid }">
-                <show-errors [control]="ProdOfferingHDeactForm.controls.EffectiveDate" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="ProdOfferingHDeactForm.controls.EffectiveDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row">
@@ -51,7 +51,7 @@
               <div class="col-md-9">
                 <textarea type="text" class="form-control adInsInput" formControlName="Notes"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdOfferingHDeactForm.controls.Notes.invalid }"></textarea>
-                <show-errors [control]="ProdOfferingHDeactForm.controls.Notes" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="ProdOfferingHDeactForm.controls.Notes" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
             </div>
           </div>

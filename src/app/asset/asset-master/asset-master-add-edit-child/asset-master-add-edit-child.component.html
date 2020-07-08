@@ -24,7 +24,7 @@
                     <div class="col-md-9">
                         <input type="text" class="form-control adInsInput" formControlName="HierarchyLvl"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.HierarchyLvl.invalid }" disabled>
-                    <show-errors [control]="AssetMasterChildForm.controls.HierarchyLvl" [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="AssetMasterChildForm.controls.HierarchyLvl" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -35,7 +35,7 @@
                   <div class="col-md-5">
                     <input type="text" class="form-control adInsInput" formControlName="AssetCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetCode.invalid }">
-                    <show-errors [control]="AssetMasterChildForm.controls.AssetCode" [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="AssetMasterChildForm.controls.AssetCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -46,7 +46,7 @@
                   <div class="col-md-5">
                     <input type="text" class="form-control adInsInput" formControlName="AssetName"
                      [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetName.invalid }">
-                    <show-errors [control]="AssetMasterChildForm.controls.AssetName" [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="AssetMasterChildForm.controls.AssetName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
               <div *ngIf="isFinal == true">
@@ -58,7 +58,7 @@
                           {{ram.Value}}
                         </option>
                       </select>
-                      <show-errors [control]="AssetMasterChildForm.controls.AssetCategoryId" [submit]="enjiForm.submitted"></show-errors>
+                      <lib-uc-show-errors [control]="AssetMasterChildForm.controls.AssetCategoryId" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                     </div>
                 </div>
               </div>

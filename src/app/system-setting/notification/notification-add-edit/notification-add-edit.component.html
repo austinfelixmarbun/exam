@@ -26,7 +26,7 @@
                     {{item.Value}}
                   </option>
                 </select>
-                  <show-errors [control]="NotificationForm.controls.NotificationType" [submit]="NotificationReqForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="NotificationForm.controls.NotificationType" [submit]="NotificationReqForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
 
@@ -39,7 +39,7 @@
                     {{item.Value}}
                   </option>
                 </select>
-                  <show-errors [control]="NotificationForm.controls.NotificationMethod" [submit]="NotificationReqForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="NotificationForm.controls.NotificationMethod" [submit]="NotificationReqForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
 
@@ -48,7 +48,7 @@
                 <div class="col-md-9">
                   <input type="text" id="Title" class="form-control adInsInput name"
                     formControlName="Title">
-                  <show-errors [control]="NotificationForm.controls.Title" [submit]="NotificationReqForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="NotificationForm.controls.Title" [submit]="NotificationReqForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               
@@ -57,7 +57,7 @@
                 <div class="col-md-9">
                   <input type="text" id="ShortDescription" class="form-control adInsInput name"
                     formControlName="ShortDescription">
-                  <show-errors [control]="NotificationForm.controls.ShortDescription" [submit]="NotificationReqForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="NotificationForm.controls.ShortDescription" [submit]="NotificationReqForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
 
@@ -74,7 +74,7 @@
                 <div class="col-md-9">
                   <input type="date" id="PublishDate" class="form-control adInsInput name"
                     formControlName="PublishDate">
-                    <show-errors [control]="NotificationForm.controls.PublishDate" [submit]="NotificationReqForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="NotificationForm.controls.PublishDate" [submit]="NotificationReqForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               

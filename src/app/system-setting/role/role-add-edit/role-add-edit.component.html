@@ -14,7 +14,7 @@
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput code" formControlName="RoleCode"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefRoleForm.controls.RoleCode.invalid }">
-                  <show-errors [control]="RefRoleForm.controls.RoleCode" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="RefRoleForm.controls.RoleCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
@@ -22,7 +22,7 @@
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput name" formControlName="RoleName"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefRoleForm.controls.RoleName.invalid }">
-                  <show-errors [control]="RefRoleForm.controls.RoleName" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="RefRoleForm.controls.RoleName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
