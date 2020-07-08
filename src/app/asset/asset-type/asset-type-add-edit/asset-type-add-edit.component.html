@@ -14,8 +14,8 @@
                 <div class="col-md-7">
                   <input type="text" class="form-control adInsInput" formControlName="AssetTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.AssetTypeCode.invalid }">
-                  <show-errors [control]="AssetTypeForm.controls.AssetTypeCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AssetTypeForm.controls.AssetTypeCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
@@ -23,8 +23,8 @@
                 <div class="col-md-7">
                   <input type="text" class="form-control adInsInput" formControlName="AssetTypeName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.AssetTypeName.invalid }">
-                  <show-errors [control]="AssetTypeForm.controls.AssetTypeName" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AssetTypeForm.controls.AssetTypeName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
@@ -34,7 +34,7 @@
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.TotalSerialNo.invalid }">
                     <option *ngFor="let serialItem of serialNoOptions" [value]="serialItem">{{serialItem}}</option>
                   </select>
-                  <show-errors [control]="AssetTypeForm.controls.TotalSerialNo" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="AssetTypeForm.controls.TotalSerialNo" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required" *ngIf="serialNoShown[0] == true">
@@ -42,8 +42,8 @@
                 <div class="col-md-7">
                   <input type="text" class="form-control adInsInput" formControlName="SerialNo1Label"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.SerialNo1Label.invalid }" />
-                  <show-errors [control]="AssetTypeForm.controls.SerialNo1Label" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AssetTypeForm.controls.SerialNo1Label" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
                 <div class="col-md-1">
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMndtrySerialNo1" />
@@ -54,8 +54,8 @@
                 <div class="col-md-7">
                   <input type="text" class="form-control adInsInput" formControlName="SerialNo2Label"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.SerialNo2Label.invalid }" />
-                  <show-errors [control]="AssetTypeForm.controls.SerialNo2Label" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AssetTypeForm.controls.SerialNo2Label" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
                 <div class="col-md-1">
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMndtrySerialNo2" />
@@ -66,8 +66,8 @@
                 <div class="col-md-7">
                   <input type="text" class="form-control adInsInput" formControlName="SerialNo3Label"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.SerialNo3Label.invalid }" />
-                  <show-errors [control]="AssetTypeForm.controls.SerialNo3Label" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AssetTypeForm.controls.SerialNo3Label" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
                 <div class="col-md-1">
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMndtrySerialNo3" />
@@ -78,8 +78,8 @@
                 <div class="col-md-7">
                   <input type="text" class="form-control adInsInput" formControlName="SerialNo4Label"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.SerialNo4Label.invalid }" />
-                  <show-errors [control]="AssetTypeForm.controls.SerialNo4Label" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AssetTypeForm.controls.SerialNo4Label" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
                 <div class="col-md-1">
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMndtrySerialNo4" />
@@ -90,8 +90,8 @@
                 <div class="col-md-7">
                   <input type="text" class="form-control adInsInput" formControlName="SerialNo5Label"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.SerialNo5Label.invalid }" />
-                  <show-errors [control]="AssetTypeForm.controls.SerialNo5Label" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="AssetTypeForm.controls.SerialNo5Label" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
                 <div class="col-md-1">
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMndtrySerialNo5" />
@@ -121,8 +121,8 @@
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.MaxHierarchyLevel.invalid }">
                   <option *ngFor="let it of ItemMaxHierarchyLevelNumber" value="{{it}}">{{it}}</option>
                 </select>
-                <show-errors [control]="AssetTypeForm.controls.MaxHierarchyLevel" [submit]="enjiForm.submitted">
-                </show-errors>
+                <lib-uc-show-errors [control]="AssetTypeForm.controls.MaxHierarchyLevel" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
               </div>
             </div>
             <div formArrayName="HierarchyArr">
@@ -131,8 +131,8 @@
                   <label class="col-md-4 adInsLabel" translate>{{item.controls.label.value}} </label>
                   <div class="col-md-7">
                     <input type="text" class="form-control adInsInput" formControlName="values" required>
-                    <show-errors [control]="AssetTypeForm.controls.HierarchyArr['controls'][i]['controls'].values"
-                      [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="AssetTypeForm.controls.HierarchyArr['controls'][i]['controls'].values"
+                      [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
               </div>

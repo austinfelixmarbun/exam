@@ -7,21 +7,17 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 
 @Component({
   selector: 'app-review-upload-asset-master-detail',
-  templateUrl: './review-upload-asset-master-detail.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './review-upload-asset-master-detail.component.html'
 })
 export class ReviewUploadAssetMasterDetailComponent implements OnInit {
   uploadNo: string;
-  viewUpload: string;
-  inputPagingObj: any;
+  viewUpload: string = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   arrCrit = new Array();
   taskListId: any;
-  UploadReviewUrl: string;
-  CancelUpload: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -32,14 +28,10 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
         this.taskListId = params["TaskListId"];
       }
     });
-    this.viewUpload = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
   }
   ngOnInit() {
-    console.log('test');
     this.claimTask();
-    this.UploadReviewUrl = AdInsConstant.UploadReview;
-    this.CancelUpload = AdInsConstant.CancelUpload;
-    this.inputPagingObj = new UcPagingObj();
+
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadAssetMasterDetail.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
@@ -54,12 +46,12 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
     this.inputPagingObj.addCritInput.push(addCritAssetMasterId);
   }
 
-  uploadReview(status) {
+  uploadReview(status: string) {
     var uploadObj = new UploadReviewCustomObj();
     uploadObj.MrUploadStatusCode = status;
     uploadObj.TaskListId = this.taskListId;
     uploadObj.UploadMonitoringNo = this.uploadNo;
-    this.http.post(this.UploadReviewUrl, uploadObj).subscribe(
+    this.http.post(AdInsConstant.UploadReview, uploadObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigate(["/Asset/AssetMaster/ReviewUploadPaging"]);
@@ -69,10 +61,10 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
       }
     );
   }
+
   claimTask() {
     var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
     var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: currentUserContext["UserName"] };
-    console.log(wfClaimObj);
     this.http.post(AdInsConstant.ClaimTask, wfClaimObj).subscribe(
       (response) => {
       });

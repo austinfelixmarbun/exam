@@ -33,8 +33,8 @@
                           <option *ngFor="let vc of allVendorCategory" value="{{vc.Key}}">
                             {{vc.Value}}</option>
                         </select>
-                        <show-errors [control]="VendorGroupFrom.controls.MrVendorCategoryCode" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="VendorGroupFrom.controls.MrVendorCategoryCode" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <!-- <ng-container *ngIf="VendorGroupFrom.controls.MrVendorCategoryCode.value == 'LIFE_INS_HO'">
@@ -47,9 +47,9 @@
                             <option *ngFor="let vt of allVendorType" value="{{vt.Key}}">
                               {{vt.Value}}</option>
                           </select>
-                          <show-errors [control]="VendorGroupFrom.controls.MrVendorTypeCode"
+                          <lib-uc-show-errors [control]="VendorGroupFrom.controls.MrVendorTypeCode"
                             [submit]="enjiForm.submitted">
-                          </show-errors>
+                          </lib-uc-show-errors>
                         </div>
                       </div>
                     </ng-container> -->
@@ -59,24 +59,24 @@
                       <label class="col-md-3  adInsLabel" translate>Group Code </label>
                       <div class="col-md-9">
                         <input type="text" class="form-control adInsInput width-30-per" formControlName="VendorGrpCode">
-                        <show-errors [control]="VendorGroupFrom.controls.VendorGrpCode" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="VendorGroupFrom.controls.VendorGrpCode" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <div class="form-group row adins-required">
                       <label class="col-md-3  adInsLabel" translate>Group Name </label>
                       <div class="col-md-9">
                         <input type="text" class="form-control adInsInput width-30-per" formControlName="VendorGrpName">
-                        <show-errors [control]="VendorGroupFrom.controls.VendorGrpName" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="VendorGroupFrom.controls.VendorGrpName" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-md-3  adInsLabel" translate>Description </label>
                       <div class="col-md-9">
                         <textarea class="form-control rounded-0" rows="3" formControlName = "VendorGrpDesc"></textarea>
-                        <show-errors [control]="VendorGroupFrom.controls.VenderGrpDesc" [submit]="enjiForm.submitted">
-                        </show-errors>
+                        <lib-uc-show-errors [control]="VendorGroupFrom.controls.VenderGrpDesc" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                     <div class="form-group row">

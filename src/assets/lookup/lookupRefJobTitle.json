@@ -1,22 +1,68 @@
 {
-  "url": "http://getRefJobTitle",
+  "url": "",
   "title":"Lookup Job Title",
   "component": [
     {
       "type": "textbox",
-      "name": "jobTitleCode",
-      "id": "jobTitleCodeId",
-      "value": "",
+      "name": "JOB_TITLE_CODE",
+      "id": "JobTitleCodeId",
       "label": "Job Title Code",
-      "placeholder": "Job Title Code"
+      "placeholder": ""
     },
     {
       "type": "textbox",
-      "name": "jobTitleName",
-      "id": "jobTitleNameId",
-      "value": "",
+      "name": "JOB_TITLE_NAME",
+      "id": "JobTitleNameId",
       "label": "Job Title Name",
-      "placeholder": "Job Title Name"
+      "placeholder": ""
     }
-  ]
+  ],
+  "querystring": {
+    "select": "SELECT JOB_TITLE_CODE AS JobTitleCode, JOB_TITLE_NAME AS JobTitleName, REF_JOB_TITLE_ID AS RefJobTitleId",
+    "from": "FROM DBO.REF_JOB_TITLE WITH(NOLOCK)",
+    "where": "WHERE IS_ACTIVE = 1"
+  },
+  "headerList": [
+      {
+          "type": "sort",
+          "position": "center",
+          "label": "Job Title Code",
+          "name": "JOB_TITLE_CODE"
+      },
+      {
+          "type": "sort",
+          "position": "left",
+          "label": "Job Title Name",
+          "name": "JOB_TITLE_NAME"
+      },
+      {
+          "type": "label",
+          "position": "center",
+          "label": "Select"
+      }
+  ],
+  "bodyList": [
+      {
+          "type": "text",
+          "position": "center",
+          "property": "JobTitleCode"
+      },
+      {
+          "type": "text",
+          "position": "left",
+          "property": "JobTitleName"
+      },
+      {
+          "type": "action",
+          "position": "center",
+          "action": [
+              {
+                  "type": "select",
+                  "property": "RefJobTitleId"
+              }
+          ]
+      }
+  ],
+  "propertyId": "RefJobTitleId",
+  "propertyName": "JobTitleName"
 }

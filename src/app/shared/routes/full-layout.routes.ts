@@ -48,10 +48,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: './common-setting/common-setting.module#CommonSettingModule'
   },
   {
-    path: 'menuSetting',
-    loadChildren: './menu/menu-setting.module#MenuSettingModule'
-  },
-  {
     path: 'notification',
     loadChildren: './notification/notification.module#NotificationModule'
   },

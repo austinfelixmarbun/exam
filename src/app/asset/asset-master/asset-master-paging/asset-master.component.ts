@@ -3,7 +3,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
-
 @Component({
   selector: 'app-asset-master',
   templateUrl: './asset-master.component.html'

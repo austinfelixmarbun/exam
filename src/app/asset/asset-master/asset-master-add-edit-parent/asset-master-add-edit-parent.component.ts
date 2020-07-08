@@ -10,12 +10,10 @@ import { ListRequestCriteriaObj } from 'app/shared/model/ListRequestCriteriaObj.
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AssetSchmListObj } from 'app/shared/model/AssetSchmListObj.Model';
 import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
-import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 
 @Component({
   selector: 'app-asset-master-add-edit-parent',
-  templateUrl: './asset-master-add-edit-parent.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './asset-master-add-edit-parent.component.html'
 })
 export class AssetMasterAddEditParentComponent implements OnInit {
 
@@ -25,24 +23,15 @@ export class AssetMasterAddEditParentComponent implements OnInit {
   assetTypeObj: AssetTypeObj;
   resultAssetType: AssetTypeObj;
   resultData: AssetMasterObj;
-  getUrl: string;
-  addUrl: string;
-  editUrl: string;
-  getValueAssetType: string;
-  getAssetType: string;
   allAssetMasterMethod: any;
-  // refCustModelCode: any;
   listRequest: ListRequestCriteriaObj;
   resultAssetCategory: any;
-  getListAssetCategory: string;
-  getListAssetSchmH: string;
-  assetSchmListDObj : AssetSchmListObj;
+  assetSchmListDObj: AssetSchmListObj;
   listAssetSchmDObj: ListAssetSchmDObj;
   listSelectedId: Array<number> = new Array<number>();
   listAssetScheme: Array<AssetSchmListObj> = new Array<AssetSchmListObj>();
   checkboxAll: boolean = false;
   isFinal: boolean;
-  editListAssetSchmD: string;
   AssetMasterParentForm = this.fb.group({
     AssetCategoryId: [''],
     AssetTypeId: [0, [Validators.required]],
@@ -56,16 +45,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
     IsActive: [false],
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getUrl = AdInsConstant.GetAssetMasterById;
-    this.addUrl = AdInsConstant.AddAssetMaster;
-    this.editUrl = AdInsConstant.EditAssetMaster;
-    this.getValueAssetType = AdInsConstant.GetValueAssetType;
-    this.getAssetType = AdInsConstant.GetAssetTypeById;
-    this.getListAssetCategory = AdInsConstant.GetListAssetCategory;
-    this.getListAssetSchmH = AdInsConstant.GetListAssetSchmH;
-    this.editListAssetSchmD = AdInsConstant.EditListAssetSchmDByAssetMasterId;
-
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -79,93 +59,85 @@ export class AssetMasterAddEditParentComponent implements OnInit {
   onChange() {
     this.assetTypeObj = new AssetTypeObj();
     this.assetTypeObj.AssetTypeId = this.AssetMasterParentForm.controls['AssetTypeId'].value;
-    this.http.post(this.getAssetType, this.assetTypeObj).subscribe(
-        (response: AssetTypeObj) => {
-          this.resultAssetType = response;
-          if (this.resultAssetType.MaxHierarchyLevel == 1)
-          {
-              this.AssetMasterParentForm.patchValue({
-                  IsFinal: true
-              });
-          }
-          else {
-            this.AssetMasterParentForm.patchValue({
-                IsFinal: false
-            });
-          }
-
-          this.isFinal = this.AssetMasterParentForm.controls["IsFinal"].value;
-
-          var critObj = new CriteriaObj();
-          critObj.DataType = 'text';
-          critObj.restriction = AdInsConstant.RestrictionEq;
-          critObj.propName = 'ASSET_TYPE_CODE';
-          critObj.value = this.resultAssetType.AssetTypeCode;
-  
-          this.listRequest = new ListRequestCriteriaObj();
-          this.listRequest.criteria = new Array();
-          this.listRequest.criteria.push(critObj);
-          this.http.post(this.getListAssetCategory, this.listRequest).subscribe(
-            response => {
-              this.resultAssetCategory = response['ReturnObject'];
-              console.log(this.resultAssetCategory);
-              if(this.resultAssetCategory.length == 0) {
-                this.AssetMasterParentForm.patchValue({ AssetCategoryId: null });
-              } else {
-                this.AssetMasterParentForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
-              }
-            },
-          (error) => {
-            console.log(error);
+    this.http.post(AdInsConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
+      (response: AssetTypeObj) => {
+        this.resultAssetType = response;
+        if (this.resultAssetType.MaxHierarchyLevel == 1) {
+          this.AssetMasterParentForm.patchValue({
+            IsFinal: true
           });
+        }
+        else {
+          this.AssetMasterParentForm.patchValue({
+            IsFinal: false
+          });
+        }
+        this.isFinal = this.AssetMasterParentForm.controls["IsFinal"].value;
 
-          this.assetSchmListDObj = new AssetSchmListObj();
-          this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
-          this.assetSchmListDObj.AssetTypeId = this.AssetMasterParentForm.controls['AssetTypeId'].value;
-          this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
-            response => {
-              this.listAssetScheme = response['ReturnObject'];
-              for (let i = 0; i < this.listAssetScheme.length; i++) {
-                if(this.listAssetScheme[i].AssetSchmHIdFromD != null)
-                {
-                  this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
-                }
-              }
-            });
+        var critObj = new CriteriaObj();
+        critObj.DataType = 'text';
+        critObj.restriction = AdInsConstant.RestrictionEq;
+        critObj.propName = 'ASSET_TYPE_CODE';
+        critObj.value = this.resultAssetType.AssetTypeCode;
+
+        this.listRequest = new ListRequestCriteriaObj();
+        this.listRequest.criteria = new Array();
+        this.listRequest.criteria.push(critObj);
+        this.http.post(AdInsConstant.GetListAssetCategory, this.listRequest).subscribe(
+          (response) => {
+            this.resultAssetCategory = response['ReturnObject'];
+            if (this.resultAssetCategory.length == 0) {
+              this.AssetMasterParentForm.patchValue({ AssetCategoryId: null });
+            } else {
+              this.AssetMasterParentForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
+            }
           },
           (error) => {
             console.log(error);
           });
-  }
-
-  ngOnInit() {
-      this.http.post(this.getValueAssetType, null).subscribe(
-        (response) => {
-            console.log(response);
-          this.allAssetMasterMethod = response['ReturnObject'];
-          this.AssetMasterParentForm.patchValue({ 
-            AssetTypeId: response['ReturnObject'][0]['Key'] 
-          });
 
         this.assetSchmListDObj = new AssetSchmListObj();
         this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
-        this.assetSchmListDObj.AssetTypeId = response['ReturnObject'][0]['Key'];
-        console.log("rrrr");
-        console.log(this.assetSchmListDObj);
-        this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
-          response => {
+        this.assetSchmListDObj.AssetTypeId = this.AssetMasterParentForm.controls['AssetTypeId'].value;
+        this.http.post(AdInsConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
+          (response) => {
             this.listAssetScheme = response['ReturnObject'];
             for (let i = 0; i < this.listAssetScheme.length; i++) {
-              if(this.listAssetScheme[i].AssetSchmHIdFromD != null)
-              {
+              if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
                 this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
               }
             }
           });
-        },
-        (error) => {
-          console.log(error);
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+
+  ngOnInit() {
+    this.http.post(AdInsConstant.GetValueAssetType, null).subscribe(
+      (response) => {
+        this.allAssetMasterMethod = response['ReturnObject'];
+        this.AssetMasterParentForm.patchValue({
+          AssetTypeId: response['ReturnObject'][0]['Key']
         });
+
+        this.assetSchmListDObj = new AssetSchmListObj();
+        this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
+        this.assetSchmListDObj.AssetTypeId = response['ReturnObject'][0]['Key'];
+        this.http.post(AdInsConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
+          (response) => {
+            this.listAssetScheme = response['ReturnObject'];
+            for (let i = 0; i < this.listAssetScheme.length; i++) {
+              if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
+                this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
+              }
+            }
+          });
+      },
+      (error) => {
+        console.log(error);
+      });
 
 
     if (this.pageType == "edit") {
@@ -175,11 +147,9 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       this.AssetMasterParentForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
-      this.http.post(this.getUrl, this.assetMasterObj).subscribe(
+      this.http.post(AdInsConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
         (response: AssetMasterObj) => {
           this.resultData = response;
-          console.log("abc");
-          console.log(this.resultData);
           this.AssetMasterParentForm.patchValue({
             AssetCategoryId: this.resultData.AssetCategoryId,
             AssetTypeId: this.resultData.AssetTypeId,
@@ -192,48 +162,46 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             IsFinal: this.resultData.IsFinal,
             IsActive: this.resultData.IsActive,
           });
-          
+
           this.isFinal = this.resultData.IsFinal;
 
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(this.getAssetType, this.assetTypeObj).subscribe(
-              (response: AssetTypeObj) => {
-                this.resultAssetType = response;
+          this.http.post(AdInsConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
+            (response: AssetTypeObj) => {
+              this.resultAssetType = response;
 
-                var critObj = new CriteriaObj();
-                critObj.DataType = 'text';
-                critObj.restriction = AdInsConstant.RestrictionEq;
-                critObj.propName = 'ASSET_TYPE_CODE';
-                critObj.value = this.resultAssetType.AssetTypeCode;
-        
-                this.listRequest = new ListRequestCriteriaObj();
-                this.listRequest.criteria = new Array();
-                this.listRequest.criteria.push(critObj);
-                this.http.post(this.getListAssetCategory, this.listRequest).subscribe(
-                  response => {
-                    this.resultAssetCategory = response['ReturnObject'];
-                    console.log(this.resultAssetCategory);
-                    if(this.resultAssetCategory.length == 0) {
-                      this.AssetMasterParentForm.patchValue({ AssetCategoryId: null });
-                    } else {
-                      this.AssetMasterParentForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
-                    }
-                  },
+              var critObj = new CriteriaObj();
+              critObj.DataType = 'text';
+              critObj.restriction = AdInsConstant.RestrictionEq;
+              critObj.propName = 'ASSET_TYPE_CODE';
+              critObj.value = this.resultAssetType.AssetTypeCode;
+
+              this.listRequest = new ListRequestCriteriaObj();
+              this.listRequest.criteria = new Array();
+              this.listRequest.criteria.push(critObj);
+              this.http.post(AdInsConstant.GetListAssetCategory, this.listRequest).subscribe(
+                (response) => {
+                  this.resultAssetCategory = response['ReturnObject'];
+                  if (this.resultAssetCategory.length == 0) {
+                    this.AssetMasterParentForm.patchValue({ AssetCategoryId: null });
+                  } else {
+                    this.AssetMasterParentForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
+                  }
+                },
                 (error) => {
                   console.log(error);
                 });
-              });
+            });
 
           this.assetSchmListDObj = new AssetSchmListObj();
           this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
           this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(this.getListAssetSchmH, this.assetSchmListDObj).subscribe(
-            response => {
+          this.http.post(AdInsConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
+            (response) => {
               this.listAssetScheme = response['ReturnObject'];
               for (let i = 0; i < this.listAssetScheme.length; i++) {
-                if(this.listAssetScheme[i].AssetSchmHIdFromD != null)
-                {
+                if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
                   this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
                 }
               }
@@ -248,7 +216,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
 
   SelectAll(condition) {
     this.checkboxAll = condition;
-    console.log(condition);
     if (condition) {
       for (let i = 0; i < this.listAssetScheme.length; i++) {
         if (this.listSelectedId.indexOf(this.listAssetScheme[i].AssetSchmHIdFromD) < 0) {
@@ -261,11 +228,8 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         if (index >= -1) {
           this.listSelectedId.splice(index, 1);
         }
-        console.log(this.listAssetScheme[i]);
       }
     }
-    console.log(this.checkboxAll);
-    console.log(this.listSelectedId);
   }
 
   Checked(AssetSchmHIdFromH: number, isChecked: boolean): void {
@@ -275,8 +239,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       let index = this.listSelectedId.indexOf(AssetSchmHIdFromH)
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
-    console.log("bbb")
-        console.log(this.listSelectedId)
   }
 
   SaveForm() {
@@ -292,47 +254,42 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       this.assetMasterObj.IsFinal = this.AssetMasterParentForm.controls["IsFinal"].value;
       this.assetMasterObj.IsActive = this.AssetMasterParentForm.controls["IsActive"].value;
 
-      if(this.assetMasterObj.IsFinal == true)
-      {
+      if (this.assetMasterObj.IsFinal == true) {
         this.assetMasterObj.AssetCategoryId = this.AssetMasterParentForm.controls["AssetCategoryId"].value;
       }
-      else
-      {
+      else {
         this.assetMasterObj.AssetCategoryId = '';
       }
 
-      if(this.assetMasterObj.IsFinal == true)
-      {
+      if (this.assetMasterObj.IsFinal == true) {
         this.listAssetSchmDObj = new ListAssetSchmDObj();
         this.listAssetSchmDObj.AssetMasterId = this.AssetMasterId;
         this.listAssetSchmDObj.AssetSchmHId = [];
         for (var i = 0; i < this.listAssetScheme.length; i++) {
-          if(this.listSelectedId.length != 0){
+          if (this.listSelectedId.length != 0) {
             for (let j = 0; j < this.listSelectedId.length; j++) {
-              if(this.listAssetScheme[i].AssetSchmHIdFromH == this.listSelectedId[j]){
+              if (this.listAssetScheme[i].AssetSchmHIdFromH == this.listSelectedId[j]) {
                 this.listAssetSchmDObj.AssetSchmHId.push(this.listAssetScheme[i].AssetSchmHIdFromH);
                 break;
-              }else {
+              } else {
                 this.listAssetScheme[i].AssetMasterId = null;
               }
             }
-          }else{
+          } else {
             this.listAssetScheme[i].AssetMasterId = null;
           }
         }
 
-        this.http.post(this.editListAssetSchmD, this.listAssetSchmDObj).subscribe(
-        response => {
-          console.log(response['ReturnObject']);
-        });
+        this.http.post(AdInsConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj).subscribe(
+          (response) => {
+          });
       }
 
-      this.http.post(this.addUrl, this.assetMasterObj).subscribe(
-        response => {
-            this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/Asset/AssetMaster/Paging"]);
-            console.log(response)
-          
+      this.http.post(AdInsConstant.AddAssetMaster, this.assetMasterObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.router.navigate(["/Asset/AssetMaster/Paging"]);
+
         },
         error => {
           console.log(error);
@@ -351,26 +308,24 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       this.assetMasterObj.IsFinal = this.AssetMasterParentForm.controls["IsFinal"].value;
       this.assetMasterObj.IsActive = this.AssetMasterParentForm.controls["IsActive"].value;
 
-      if(this.assetMasterObj.IsFinal == true)
-      {
+      if (this.assetMasterObj.IsFinal == true) {
         this.assetMasterObj.AssetCategoryId = this.AssetMasterParentForm.controls["AssetCategoryId"].value;
       }
-      else
-      {
+      else {
         this.assetMasterObj.AssetCategoryId = '';
       }
 
-      if(this.assetMasterObj.IsFinal == true){
+      if (this.assetMasterObj.IsFinal == true) {
         this.listAssetSchmDObj = new ListAssetSchmDObj();
         this.listAssetSchmDObj.AssetMasterId = this.AssetMasterId;
         this.listAssetSchmDObj.AssetSchmHId = [];
         for (var i = 0; i < this.listAssetScheme.length; i++) {
-          if(this.listSelectedId.length != 0){
+          if (this.listSelectedId.length != 0) {
             for (let j = 0; j < this.listSelectedId.length; j++) {
-              if(this.listAssetScheme[i].AssetSchmHIdFromH == this.listSelectedId[j]){
+              if (this.listAssetScheme[i].AssetSchmHIdFromH == this.listSelectedId[j]) {
                 this.listAssetSchmDObj.AssetSchmHId.push(this.listAssetScheme[i].AssetSchmHIdFromH);
                 break;
-              }else {
+              } else {
                 this.listAssetScheme[i].AssetMasterId = null;
               }
             }
@@ -378,15 +333,13 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             this.listAssetScheme[i].AssetMasterId = null;
           }
         }
-        this.http.post(this.editListAssetSchmD, this.listAssetSchmDObj).subscribe(
-          response => {
-            console.log(response['ReturnObject']);
+        this.http.post(AdInsConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj).subscribe(
+          (response) => {
           });
       }
 
-      this.http.post(this.editUrl, this.assetMasterObj).subscribe(
-        response => {
-          console.log(response);
+      this.http.post(AdInsConstant.EditAssetMaster, this.assetMasterObj).subscribe(
+        (response) => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/AssetMaster/Paging"]);
         },
@@ -396,5 +349,4 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       );
     }
   }
-  
 }

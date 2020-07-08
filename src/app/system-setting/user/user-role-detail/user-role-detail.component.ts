@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder } from '@angular/forms';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { environment } from 'environments/environment';
 import { UserTitleRoleObj } from 'app/shared/model/UserTitleRoleObj';
@@ -42,7 +42,7 @@ export class UserRoleDetailComponent implements OnInit {
 
   userTitleRoleObj: UserTitleRoleObj = new UserTitleRoleObj();
 
-
+  RefUserRoleForm = this.fb.group({});
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -50,6 +50,7 @@ export class UserRoleDetailComponent implements OnInit {
     private httpClient: HttpClient,
     private route: ActivatedRoute,
     private location: Location,
+    private fb: FormBuilder
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['officeCode'] != null) {
@@ -76,8 +77,10 @@ export class UserRoleDetailComponent implements OnInit {
   ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefRolePaging;
+    this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupObj.pagingJson = "./assets/lookup/lookupRole.json";
+    this.inputLookupObj.genericJson = "./assets/lookup/lookupRole.json";
     
     this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
     this.initiateForm()
@@ -167,7 +170,6 @@ export class UserRoleDetailComponent implements OnInit {
     {
       console.log("add");
       this.apiUrl = this.foundationUrl + AdInsConstant.AddUserTitleRole;
-      this.userTitleRoleObj = new UserTitleRoleObj();
       this.userTitleRoleObj.empPositionId = +this.empPositionId;
       this.userTitleRoleObj.refRoleId = lookupRole.idSelect;
       if(UserRoleDetailForm.value.isActive){this.userTitleRoleObj.isActive = '1'} else {this.userTitleRoleObj.isActive = '0'} ;
@@ -191,4 +193,7 @@ export class UserRoleDetailComponent implements OnInit {
 
   }
 
+  getLookupResponse(e){
+    this.userTitleRoleObj.refRoleId = e.RefRoleId
+  }
 }

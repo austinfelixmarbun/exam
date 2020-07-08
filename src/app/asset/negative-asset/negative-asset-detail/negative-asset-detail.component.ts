@@ -11,22 +11,20 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { map, mergeMap } from 'rxjs/operators';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
-import { forkJoin } from 'rxjs';
 import { AssetNegativeObj } from 'app/shared/model/AssetNegativeObj.Model';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 
 @Component({
   selector: 'app-negative-asset-detail',
-  templateUrl: './negative-asset-detail.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './negative-asset-detail.component.html'
 })
 export class NegativeAssetDetailComponent implements OnInit {
   pageType: string = "add";
   assetNegativeId: number;
-  inputLookupObj: InputLookupObj;
-  criteriaList: Array<CriteriaObj>;
+  inputLookupObj: InputLookupObj = new InputLookupObj();
+  criteriaList: Array<CriteriaObj> = new Array<CriteriaObj>();
   criteriaObj: CriteriaObj;
-  negativeAssetSourceList: Array<Object>;
+  negativeAssetSourceList: Array<Object> = new Array<Object>();
   fullAssetName: string = "";
   serial1Disabled: boolean = false;
   serial2Disabled: boolean = false;
@@ -58,7 +56,6 @@ export class NegativeAssetDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder
@@ -74,7 +71,6 @@ export class NegativeAssetDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/uclookup/NegativeAsset/lookupAssetMaster_NegAst.json";
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
@@ -164,9 +160,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       );
     }
     else {
-      var refMasterObj = new RefMasterObj();
-      refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
-      this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterObj).subscribe(
+      this.httpClient.post(AdInsConstant.GetListActiveRefMaster, { RefMasterTypeCode: "NEG_ASSET_SOURCE" }).subscribe(
         (response) => {
           this.negativeAssetSourceList = [...response["ReturnObject"]];
           this.AssetNegativeForm.patchValue({
@@ -179,16 +173,13 @@ export class NegativeAssetDetailComponent implements OnInit {
       );
     }
   }
-  
-  getLookupAssetMasterResponse(e) {
 
+  getLookupAssetMasterResponse(e) {
     this.serial2Mandatory = false;
     this.serial3Mandatory = false;
     this.serial4Mandatory = false;
     this.serial5Mandatory = false;
-    var assetType = new AssetTypeObj();
-    assetType.AssetTypeId = e.assetTypeId;
-    this.httpClient.post(AdInsConstant.GetAssetTypeById, assetType).subscribe(
+    this.httpClient.post(AdInsConstant.GetAssetTypeById, { AssetTypeId: e.assetTypeId }).subscribe(
       (response) => {
         if (response["IsMndtrySerialNo1"] == "1") {
           this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);

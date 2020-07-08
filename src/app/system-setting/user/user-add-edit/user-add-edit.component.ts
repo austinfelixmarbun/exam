@@ -2,7 +2,7 @@
 import { RefUserObj } from "app/shared/model/RefUserObj.Model";
 import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormBuilder } from "@angular/forms";
 import { environment } from "environments/environment";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { HttpClient } from "@angular/common/http";
@@ -23,7 +23,7 @@ export class UserAddEditComponent implements OnInit {
   inputLookupObj: any;
   apiUrl: any;
   parents: string;
-  refUserObj: RefUserObj;
+  refUserObj: RefUserObj = new RefUserObj();
   type: string = "add";
   nameSelect: any;
   idSelect: any;
@@ -37,13 +37,17 @@ export class UserAddEditComponent implements OnInit {
   RefUserId: any;
   loggedInMethod: any = 'DB';
 
+  
+  RefUserForm = this.fb.group({});
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
-    private service: NGXToastrService
+    private service: NGXToastrService,
+    private fb: FormBuilder
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
@@ -60,8 +64,10 @@ export class UserAddEditComponent implements OnInit {
   ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupEmp.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetListEmployee;
+    this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupObj.pagingJson = "./assets/lookup/lookupEmp.json";
+    this.inputLookupObj.genericJson = "./assets/lookup/lookupEmp.json";
 
     if (this.type == "edit") {
       var empObj: RefEmpObj;
@@ -188,7 +194,6 @@ export class UserAddEditComponent implements OnInit {
                   } else {
                     this.apiUrl = this.foundationUrl + AdInsConstant.AddRefUser;
                     console.log(lookupEmp);
-                    this.refUserObj = new RefUserObj();
                     // this.refUserObj.refEmpId = lookupEmp.idSelect;
                     // this.refUserObj.username = UserAddEditForm.value.Username;
                     // this.refUserObj.password = UserAddEditForm.value.Password;
@@ -319,5 +324,9 @@ export class UserAddEditComponent implements OnInit {
     //     );
     //   }
     // }
+  }
+
+  getLookupResponse(e){
+    this.refUserObj.RefUserId = e.RefEmpId
   }
 }

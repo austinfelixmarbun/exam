@@ -8,11 +8,11 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   templateUrl: './asset-configuration-paging.component.html'
 })
 export class AssetConfigurationPagingComponent implements OnInit {
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   constructor() { }
-  inputPagingObj: UcPagingObj;
+
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetConfiguration.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;

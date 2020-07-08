@@ -16,7 +16,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 export class VendorPagingComponent implements OnInit {
   inputPagingObj: any;
   MrVendorCategoryCode: string;
-  Type: string = "default";
+  Type: string = "Default";
   mode: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private router: Router) {
@@ -32,7 +32,6 @@ export class VendorPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("asd");
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
@@ -48,9 +47,8 @@ export class VendorPagingComponent implements OnInit {
       critObj.restriction = AdInsConstant.RestrictionEq;
       critObj.value = this.MrVendorCategoryCode;
       this.inputPagingObj.addCritInput.push(critObj);
-      return;
     }
-    if (this.Type == "Group") {
+    else if (this.Type == "Group") {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
       this.inputPagingObj._url = "./assets/ucpaging/searchVendorGroup.json";
       this.inputPagingObj.addCritInput = new Array();
@@ -59,66 +57,65 @@ export class VendorPagingComponent implements OnInit {
       critObj.restriction = AdInsConstant.RestrictionEq;
       critObj.value = this.MrVendorCategoryCode;
       this.inputPagingObj.addCritInput.push(critObj);
-      return;
     }
+    else if (this.Type == "Default") {
+      if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
+        this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
+        this.inputPagingObj._url = "./assets/ucpaging/searchBranch.json";
+        this.inputPagingObj.addCritInput = new Array();
+        var critObj = new CriteriaObj();
+        critObj.propName = "vdr.MR_VENDOR_CATEGORY_CODE";
+        critObj.restriction = AdInsConstant.RestrictionEq;
+        critObj.value = this.MrVendorCategoryCode;
 
-    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
-      this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
-      this.inputPagingObj._url = "./assets/ucpaging/searchBranch.json";
-      this.inputPagingObj.addCritInput = new Array();
-      var critObj = new CriteriaObj();
-      critObj.propName = "vdr.MR_VENDOR_CATEGORY_CODE";
-      critObj.restriction = AdInsConstant.RestrictionEq;
-      critObj.value = this.MrVendorCategoryCode;
+        this.inputPagingObj.addCritInput.push(critObj);
 
-      this.inputPagingObj.addCritInput.push(critObj);
+        var WVendorClassObj = new WhereValueObj();
+        WVendorClassObj.property = "VendorClass";
+        WVendorClassObj.value = "BRANCH";
+        this.inputPagingObj.whereValue.push(WVendorClassObj);
 
-      var WVendorClassObj = new WhereValueObj();
-      WVendorClassObj.property = "VendorClass";
-      WVendorClassObj.value = "BRANCH";
-      this.inputPagingObj.whereValue.push(WVendorClassObj);
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
 
+        this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHO.json";
+        this.inputPagingObj._url = "./assets/ucpaging/searchVendorHO.json";
+        this.inputPagingObj.addCritInput = new Array();
+        var critObj = new CriteriaObj();
+        critObj.propName = "V.MR_VENDOR_CATEGORY_CODE";
+        critObj.restriction = AdInsConstant.RestrictionEq;
+        critObj.value = this.MrVendorCategoryCode;
+
+        this.inputPagingObj.addCritInput.push(critObj);
+
+        var WVAddrTypeObj = new WhereValueObj();
+        WVAddrTypeObj.property = "AddrType";
+        WVAddrTypeObj.value = "TAX";
+        this.inputPagingObj.whereValue.push(WVAddrTypeObj);
+
+        var WVendorClassObj = new WhereValueObj();
+        WVendorClassObj.property = "VendorClass";
+        WVendorClassObj.value = "HO";
+        this.inputPagingObj.whereValue.push(WVendorClassObj);
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
+
+        this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHolding.json";
+        this.inputPagingObj._url = "./assets/ucpaging/searchVendorHolding.json";
+        this.inputPagingObj.addCritInput = new Array();
+        var critObj = new CriteriaObj();
+        critObj.propName = "V.MR_VENDOR_CATEGORY_CODE";
+        critObj.restriction = AdInsConstant.RestrictionEq;
+        critObj.value = this.MrVendorCategoryCode;
+
+        this.inputPagingObj.addCritInput.push(critObj);
+
+        var WVendorClassObj = new WhereValueObj();
+        WVendorClassObj.property = "VendorClass";
+        WVendorClassObj.value = "HOLDING";
+        this.inputPagingObj.whereValue.push(WVendorClassObj);
+      }
     }
-    else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
-
-      this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHO.json";
-      this.inputPagingObj._url = "./assets/ucpaging/searchVendorHO.json";
-      this.inputPagingObj.addCritInput = new Array();
-      var critObj = new CriteriaObj();
-      critObj.propName = "V.MR_VENDOR_CATEGORY_CODE";
-      critObj.restriction = AdInsConstant.RestrictionEq;
-      critObj.value = this.MrVendorCategoryCode;
-
-      this.inputPagingObj.addCritInput.push(critObj);
-
-      var WVAddrTypeObj = new WhereValueObj();
-      WVAddrTypeObj.property = "AddrType";
-      WVAddrTypeObj.value = "TAX";
-      this.inputPagingObj.whereValue.push(WVAddrTypeObj);
-
-      var WVendorClassObj = new WhereValueObj();
-      WVendorClassObj.property = "VendorClass";
-      WVendorClassObj.value = "HO";
-      this.inputPagingObj.whereValue.push(WVendorClassObj);
-    }
-    else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
-
-      this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHolding.json";
-      this.inputPagingObj._url = "./assets/ucpaging/searchVendorHolding.json";
-      this.inputPagingObj.addCritInput = new Array();
-      var critObj = new CriteriaObj();
-      critObj.propName = "V.MR_VENDOR_CATEGORY_CODE";
-      critObj.restriction = AdInsConstant.RestrictionEq;
-      critObj.value = this.MrVendorCategoryCode;
-
-      this.inputPagingObj.addCritInput.push(critObj);
-
-      var WVendorClassObj = new WhereValueObj();
-      WVendorClassObj.property = "VendorClass";
-      WVendorClassObj.value = "HOLDING";
-      this.inputPagingObj.whereValue.push(WVendorClassObj);
-    }
-
 
   }
 

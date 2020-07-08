@@ -1,17 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
-import { environment } from 'environments/environment';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 
 @Component({
   selector: 'app-asset-scheme-add-edit-information',
-  templateUrl: './asset-scheme-add-edit-information.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './asset-scheme-add-edit-information.component.html'
 })
 export class AssetSchemeAddEditInformationComponent implements OnInit {
   AssetSchemeInfoForm = this.fb.group({
@@ -21,22 +19,14 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
     IsActive: ['']
   });
   pageType: string = "add";
-  assetSchmHObj: AssetSchemeHObj;
-  getUrl: string;
-  addUrl: string;
-  editUrl: string;
+  assetSchmHObj: AssetSchemeHObj = new AssetSchemeHObj();
   AssetSchmHId: number;
-  resultData: AssetSchemeHObj;
+  resultData: AssetSchemeHObj = new AssetSchemeHObj();
   RowVersion: string;
-  ItemAssetType: Array<AssetTypeObj>;
-  getAssetTypeUrl: string;
+  ItemAssetType: Array<AssetTypeObj> = new Array<AssetTypeObj>();
   AssetSchmCode: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getUrl = AdInsConstant.GetAssetSchmHById;
-    this.addUrl = AdInsConstant.AddAssetSchmH;
-    this.editUrl = AdInsConstant.EditAssetSchmH;
-    this.getAssetTypeUrl = AdInsConstant.GetListActiveAssetType;
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -52,7 +42,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       RefMasterTypeCode: "ASSET_TYPE_ID",
       RowVersion: ""
     }
-    this.http.post(this.getAssetTypeUrl, assetTypeObj).subscribe(
+    this.http.post(AdInsConstant.GetListActiveAssetType, assetTypeObj).subscribe(
       (response) => {
         this.ItemAssetType = response["ReturnObject"];
         if (this.pageType == "add") {
@@ -69,7 +59,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.AssetSchemeInfoForm.controls["AssetSchmCode"].disable();
 
-      this.http.post(this.getUrl, this.assetSchmHObj).subscribe(
+      this.http.post(AdInsConstant.GetAssetSchmHById, this.assetSchmHObj).subscribe(
         (response: AssetSchemeHObj) => {
           this.resultData = response;
           this.RowVersion = this.resultData.RowVersion;
@@ -98,7 +88,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.assetSchmHObj.RowVersion = "";
-      this.http.post(this.addUrl, this.assetSchmHObj).subscribe(
+      this.http.post(AdInsConstant.AddAssetSchmH, this.assetSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Scheme/Paging"]);
@@ -107,12 +97,12 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
           console.log(error);
         }
       );
-    } 
+    }
     else {
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.assetSchmHObj.RowVersion = this.RowVersion;
       this.assetSchmHObj.AssetSchmCode = this.AssetSchmCode;
-      this.http.post(this.editUrl, this.assetSchmHObj).subscribe(
+      this.http.post(AdInsConstant.EditAssetSchmH, this.assetSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Scheme/Paging"]);

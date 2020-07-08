@@ -1,17 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
-import { environment } from 'environments/environment';
-import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 
 @Component({
   selector: 'app-asset-type-add-edit',
-  templateUrl: './asset-type-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './asset-type-add-edit.component.html'
 })
 export class AssetTypeAddEditComponent implements OnInit {
   ItemMaxHierarchyLevelNumber: Array<number> = [1, 2, 3, 4, 5];
@@ -40,23 +37,16 @@ export class AssetTypeAddEditComponent implements OnInit {
     ]),
     TotalSerialNo: ['', [Validators.required]]
   });
-  getUrl: string;
-  addUrl: string;
-  editUrl: string;
   pageType: string = "add";
-  assetTypeObj: AssetTypeObj;
+  assetTypeObj: AssetTypeObj = new AssetTypeObj();
   assetTypeId: number;
-  resultData: AssetTypeObj;
+  resultData: AssetTypeObj = new AssetTypeObj();
   RowVersion: string;
   assetTypeCode: string;
-  getGeneralSettingUrl: string = AdInsConstant.GetGeneralSettingByCode;
-  serialNoOptions: Array<number> = [1,2,3,4,5];
-  serialNoShown: Array<boolean> = [false,false,false,false,false];
+  serialNoOptions: Array<number> = [1, 2, 3, 4, 5];
+  serialNoShown: Array<boolean> = [false, false, false, false, false];
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getUrl = AdInsConstant.GetAssetTypeById;
-    this.addUrl = AdInsConstant.AddAssetType;
-    this.editUrl = AdInsConstant.EditAssetType;
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -93,11 +83,9 @@ export class AssetTypeAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    var gsObj = new GeneralSettingObj();
-    gsObj.GsCode = 'MAXASSETTYPELVL';
-    this.http.post(this.getGeneralSettingUrl, gsObj).subscribe(
+    this.http.post(AdInsConstant.GetGeneralSettingByCode, { GsCode: 'MAXASSETTYPELVL' }).subscribe(
       response => {
-        this.ItemMaxHierarchyLevelNumber = this.ItemMaxHierarchyLevelNumber.slice(0, parseInt(response['GsValue']) );
+        this.ItemMaxHierarchyLevelNumber = this.ItemMaxHierarchyLevelNumber.slice(0, parseInt(response['GsValue']));
         this.AssetTypeForm.patchValue({
           MaxHierarchyLevel: this.ItemMaxHierarchyLevelNumber[0],
           IsLoanObj: true,
@@ -107,28 +95,28 @@ export class AssetTypeAddEditComponent implements OnInit {
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.assetTypeId;
           this.AssetTypeForm.controls["AssetTypeCode"].disable();
-          this.http.post(this.getUrl, this.assetTypeObj).subscribe(
+          this.http.post(AdInsConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
             (response: AssetTypeObj) => {
               this.resultData = response;
               this.RowVersion = this.resultData.RowVersion;
-              if(this.resultData.SerialNo1Label != null){
+              if (this.resultData.SerialNo1Label != null) {
                 this.serialNoShown[0] = true;
               }
-              if(this.resultData.SerialNo2Label != null){
+              if (this.resultData.SerialNo2Label != null) {
                 this.serialNoShown[1] = true;
               }
-              if(this.resultData.SerialNo3Label != null){
+              if (this.resultData.SerialNo3Label != null) {
                 this.serialNoShown[2] = true;
               }
-              if(this.resultData.SerialNo4Label != null){
+              if (this.resultData.SerialNo4Label != null) {
                 this.serialNoShown[3] = true;
               }
-              if(this.resultData.SerialNo5Label != null){
+              if (this.resultData.SerialNo5Label != null) {
                 this.serialNoShown[4] = true;
               }
               var totalSerialCount = 0;
-              for(var i = 0; i < this.serialNoShown.length; i++){
-                if(this.serialNoShown[i]){
+              for (var i = 0; i < this.serialNoShown.length; i++) {
+                if (this.serialNoShown[i]) {
                   totalSerialCount++;
                 }
               }
@@ -168,8 +156,8 @@ export class AssetTypeAddEditComponent implements OnInit {
     );
   }
 
-  totalSerialNoHandler(){
-    this.serialNoShown = [false,false,false,false,false];
+  totalSerialNoHandler() {
+    this.serialNoShown = [false, false, false, false, false];
     var totalSerialNo = this.AssetTypeForm.controls["TotalSerialNo"].value;
     this.AssetTypeForm.patchValue({
       SerialNo1Label: '',
@@ -183,15 +171,15 @@ export class AssetTypeAddEditComponent implements OnInit {
       IsMndtrySerialNo4: '',
       IsMndtrySerialNo5: ''
     });
-    for(var a = 0; a < this.serialNoShown.length; a++){
+    for (var a = 0; a < this.serialNoShown.length; a++) {
       var idxReset = a + 1;
-      var resetKey = "SerialNo"+ idxReset +"Label";
+      var resetKey = "SerialNo" + idxReset + "Label";
       this.AssetTypeForm.controls[resetKey].clearValidators();
       this.AssetTypeForm.controls[resetKey].updateValueAndValidity();
     }
-    for(var i = 0; i < totalSerialNo; i++){
+    for (var i = 0; i < totalSerialNo; i++) {
       var idx = i + 1;
-      var key = "SerialNo"+ idx +"Label";
+      var key = "SerialNo" + idx + "Label";
       this.AssetTypeForm.controls[key].setValidators([Validators.required]);
       this.AssetTypeForm.controls[key].updateValueAndValidity();
       this.serialNoShown[i] = true;
@@ -266,28 +254,26 @@ export class AssetTypeAddEditComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.assetTypeObj.RowVersion = "";
-      this.http.post(this.addUrl, this.assetTypeObj).subscribe(
+      this.http.post(AdInsConstant.AddAssetType, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Type/Paging"]);
         },
         error => {
           console.log(error);
-        }
-      );
+        });
     } else {
       this.assetTypeObj.AssetTypeCode = this.assetTypeCode;
       this.assetTypeObj.RowVersion = this.RowVersion;
       this.assetTypeObj.AssetTypeId = this.assetTypeId;
-      this.http.post(this.editUrl, this.assetTypeObj).subscribe(
+      this.http.post(AdInsConstant.EditAssetType, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Type/Paging"]);
         },
         error => {
           console.log(error);
-        }
-      );
+        });
     }
   }
 }

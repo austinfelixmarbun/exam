@@ -11,7 +11,7 @@
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" formControlName="GsCode"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && GeneralSettingForm.controls.GsCode.invalid }">
-                <show-errors [control]="GeneralSettingForm.controls.GsCode" [submit]="enjiForm.submitted"></show-errors>
+                <lib-uc-show-errors [control]="GeneralSettingForm.controls.GsCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row adins-required">
@@ -19,7 +19,7 @@
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" formControlName="GsName"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && GeneralSettingForm.controls.GsName.invalid }">
-                <show-errors [control]="GeneralSettingForm.controls.GsName" [submit]="enjiForm.submitted"></show-errors>              
+                <lib-uc-show-errors [control]="GeneralSettingForm.controls.GsName" [submit]="enjiForm.submitted"></lib-uc-show-errors>              
               </div>
             </div>
 
@@ -28,7 +28,7 @@
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput" formControlName="GsValue"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && GeneralSettingForm.controls.GsValue.invalid }">
-                <show-errors [control]="GeneralSettingForm.controls.GsValue" [submit]="enjiForm.submitted"></show-errors>              
+                <lib-uc-show-errors [control]="GeneralSettingForm.controls.GsValue" [submit]="enjiForm.submitted"></lib-uc-show-errors>              
               </div>
             </div>
             <div class="form-group row">

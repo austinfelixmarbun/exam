@@ -10,23 +10,21 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-holiday-detail-edit',
   templateUrl: './holiday-detail-edit.component.html',
-  providers : [NGXToastrService]
+  providers: [NGXToastrService]
 })
 export class HolidayDetailEditComponent implements OnInit {
-
 
   HolidaySchmDId: any;
   HolidaySchmHId: any;
   HolidayListForm = this.fb.group({
     IsPublicHoliday: [false, Validators.required],
-    Date: ['',Validators.required],
+    Date: ['', Validators.required],
     Descr: ['', Validators.required]
   })
 
   viewObj: any;
   title: string;
   result: any;
-
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
@@ -42,21 +40,21 @@ export class HolidayDetailEditComponent implements OnInit {
     var HolidayObj = new HolidayDObj;
     HolidayObj.HolidaySchmDId = this.HolidaySchmDId;
     this.http.post(AdInsConstant.GetHolidaySchmDById, HolidayObj).subscribe(
-        (response) => {
-            this.result = response;
-               this.HolidayListForm.patchValue({
-               IsPublicHoliday : this.result.IsPublicHoliday,
-               Date :  formatDate(this.result.HolidayDt,  'yyyy-MM-dd', 'en-US'),
-               Descr : this.result.Descr
-           })
-        },
-        (error) => {
-            console.log(error);
-        }
+      (response) => {
+        this.result = response;
+        this.HolidayListForm.patchValue({
+          IsPublicHoliday: this.result.IsPublicHoliday,
+          Date: formatDate(this.result.HolidayDt, 'yyyy-MM-dd', 'en-US'),
+          Descr: this.result.Descr
+        })
+      },
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
-  SaveForm(){
+  SaveForm() {
     var HolidayObj = new HolidayDObj;
     HolidayObj.Descr = this.HolidayListForm.controls.Descr.value;
     HolidayObj.IsPublicHoliday = this.HolidayListForm.controls.IsPublicHoliday.value;
@@ -66,13 +64,13 @@ export class HolidayDetailEditComponent implements OnInit {
     HolidayObj.RowVersion = this.result.RowVersion;
 
     this.http.post(AdInsConstant.EditHolidaySchmD, HolidayObj).subscribe(
-        (response) => {
-          this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
-            this.toastr.successMessage(response['message']);
-        },
-        (error) => {
-            console.log(error);
-        });
+      (response) => {
+        this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+        this.toastr.successMessage(response['message']);
+      },
+      (error) => {
+        console.log(error);
+      });
   }
 
   BackNavigate() {

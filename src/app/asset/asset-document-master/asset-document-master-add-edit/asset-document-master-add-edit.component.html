@@ -12,8 +12,8 @@
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="AssetDocCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAssetDocForm.controls.AssetDocCode.invalid}">
-                  <show-errors [control]="RefAssetDocForm.controls.AssetDocCode" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="RefAssetDocForm.controls.AssetDocCode"
+                  [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
@@ -21,8 +21,8 @@
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="AssetDocName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAssetDocForm.controls.AssetDocName.invalid}">
-                  <show-errors [control]="RefAssetDocForm.controls.AssetDocName" [submit]="enjiForm.submitted">
-                  </show-errors>
+                  <lib-uc-show-errors [control]="RefAssetDocForm.controls.AssetDocName"
+                  [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">

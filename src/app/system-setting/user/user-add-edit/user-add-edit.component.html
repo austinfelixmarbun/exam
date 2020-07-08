@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
       <div class="px-3">
-        <form class="form form-horizontal" name="UserAddEditForm" #UserAddEditForm="ngForm" novalidate
+        <form class="form form-horizontal" name="UserAddEditForm" [formGroup]="RefUserForm" #UserAddEditForm="ngForm" novalidate
           (ngSubmit)="UserAddEditForm.form.valid && Save(UserAddEditForm, lookupEmp)">
           <div class="form-body">
             <h4 class="form-section card-title" translate><i class="ft-file-text"></i> User Information </h4>
@@ -10,9 +10,8 @@
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" for="EmpName">Employee Name</label>
               <div class="col-md-7">
-
-                <lib-lookupemployee #lookupEmp [lookupInput]="inputLookupObj"> </lib-lookupemployee>
-
+                <lib-uclookupgeneric [lookupInput]="inputLookupObj" [parentForm]='RefUserForm' [enjiForm]='UserAddEditForm' [identifier]="'EmployeeName'"
+                (lookup)="getLookupResponse($event)"></lib-uclookupgeneric>
                 <!--<input type="text" class="form-control adInsInput" name="EmployeeName" required [(ngModel)]="EmployeeName"
                     #employeeName="ngModel" [ngClass]="{ 'is-invalid': UserAddEditForm.submitted && username.invalid }">
                   <div *ngIf="UserAddEditForm.submitted && employeeName.invalid" class="invalid-feedback">

@@ -11,28 +11,25 @@ import { environment } from 'environments/environment';
 })
 
 export class AssetSchemeMemberComponent implements OnInit {
-  AssetSchmHId:number;
-  inputPagingObj: UcPagingObj;
-  viewObj:string;
-  arrCrit:Array<CriteriaObj>;
+  AssetSchmHId: number;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
+  viewObj: string = "./assets/ucviewgeneric/viewAssetSchemeMember.json";
+  arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetSchmHId"] != null) {
         this.AssetSchmHId = params["AssetSchmHId"];
       }
     });
-   }
- 
+  }
+
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetSchemeMember.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetSchemeMember.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetSchmD;
-    
-    this.viewObj = "./assets/ucviewgeneric/viewAssetSchemeMember.json";
-    this.arrCrit = new Array();
+
     var critObj = new CriteriaObj();
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.propName = 'ASD.ASSET_SCHM_H_ID';
@@ -47,7 +44,7 @@ export class AssetSchemeMemberComponent implements OnInit {
     critObjIsFinal.restriction = AdInsConstant.RestrictionEq;
     critObjIsFinal.propName = 'AM.IS_FINAL';
     critObjIsFinal.value = "true";
-    
+
     this.arrCrit.push(critObj);
     this.arrCrit.push(critObjIsActive);
     this.arrCrit.push(critObjIsFinal);

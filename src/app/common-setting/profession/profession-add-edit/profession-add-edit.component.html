@@ -12,7 +12,7 @@
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput code" formControlName="ProfessionCode"
                            [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProfessionForm.controls.ProfessionCode.invalid }">
-                    <show-errors [control]="RefProfessionForm.controls.ProfessionCode" [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="RefProfessionForm.controls.ProfessionCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -20,7 +20,7 @@
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput adins-required-label" formControlName="ProfessionName"
                            [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProfessionForm.controls.ProfessionName.invalid }">
-                    <show-errors [control]="RefProfessionForm.controls.ProfessionName" [submit]="enjiForm.submitted"></show-errors>
+                    <lib-uc-show-errors [control]="RefProfessionForm.controls.ProfessionName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -31,7 +31,7 @@
                           {{ram.Value}}
                         </option>
                       </select>
-                      <show-errors [control]="RefProfessionForm.controls.MrCustModelCode" [submit]="enjiForm.submitted"></show-errors>
+                      <lib-uc-show-errors [control]="RefProfessionForm.controls.MrCustModelCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                     </div>
                 </div>
                 <div class="form-group row">

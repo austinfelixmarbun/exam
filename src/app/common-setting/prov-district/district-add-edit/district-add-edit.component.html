@@ -18,7 +18,7 @@
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="ProvDistrictCode"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && DistrictForm.controls.ProvDistrictCode.invalid }">
-                  <show-errors [control]="DistrictForm.controls.ProvDistrictCode" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="DistrictForm.controls.ProvDistrictCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
@@ -26,7 +26,7 @@
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput adins-required" formControlName="ProvDistrictName"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && DistrictForm.controls.ProvDistrictName.invalid }">
-                  <show-errors [control]="DistrictForm.controls.ProvDistrictName" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="DistrictForm.controls.ProvDistrictName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">

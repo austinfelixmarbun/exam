@@ -14,7 +14,7 @@
                   <input type="text" class="form-control adInsInput code" formControlName="JobTitleCode"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.JobTitleCode.invalid }"
                          [attr.disabled]="pageType == 'edit' ? true : null">
-                  <show-errors [control]="RefJobTitleForm.controls.JobTitleCode" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="RefJobTitleForm.controls.JobTitleCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
@@ -22,7 +22,7 @@
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput name" formControlName="JobTitleName"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.JobTitleName.invalid }">
-                  <show-errors [control]="RefJobTitleForm.controls.JobTitleName" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="RefJobTitleForm.controls.JobTitleName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
@@ -30,7 +30,7 @@
                 <div class="col-md-9">
                   <textarea type="text" class="form-control adInsInput" formControlName="Descr"
                             [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.Descr.invalid }"></textarea>
-                  <show-errors [control]="RefJobTitleForm.controls.Descr" [submit]="enjiForm.submitted"></show-errors>
+                  <lib-uc-show-errors [control]="RefJobTitleForm.controls.Descr" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
             </div>

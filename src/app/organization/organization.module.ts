@@ -28,6 +28,7 @@ import { UcpagingModule } from '@adins/ucpaging';
 import { MemberBusinessUnitComponent } from './business-unit/member-business-unit/member-business-unit.component';
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { UcSubsectionModule } from '@adins/uc-subsection';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
     UcpagingModule,
     ReactiveFormsModule,
     UcviewgenericModule,
-    UcSubsectionModule
+    UcSubsectionModule,
+    UcShowErrorsModule
   ],
   declarations: [
     RefJobTitleComponent,

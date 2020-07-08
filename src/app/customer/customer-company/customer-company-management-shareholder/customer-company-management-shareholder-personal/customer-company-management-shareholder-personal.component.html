@@ -23,9 +23,9 @@
                   <div class="col-md-10">
                     <input type="text" class="form-control adInsInput" formControlName="MgmntShrholderName"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MgmntShrholderName.invalid}">
-                    <show-errors [control]="ManagementShareholderForm.controls.MgmntShrholderName"
+                    <lib-uc-show-errors [control]="ManagementShareholderForm.controls.MgmntShrholderName"
                       [submit]="enjiForm.submitted">
-                    </show-errors>
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row adins">
@@ -55,8 +55,8 @@
                   <div class="col-md-10">
                     <input type="text" class="form-control adInsInput" formControlName="IdNo"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.IdNo.invalid}">
-                    <show-errors [control]="ManagementShareholderForm.controls.IdNo" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="ManagementShareholderForm.controls.IdNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -65,9 +65,9 @@
                   <div class="col-md-10">
                     <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.IdExpiredDt.invalid}">
-                    <show-errors [control]="ManagementShareholderForm.controls.IdExpiredDt"
+                    <lib-uc-show-errors [control]="ManagementShareholderForm.controls.IdExpiredDt"
                       [submit]="enjiForm.submitted">
-                    </show-errors>
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -87,16 +87,16 @@
                       <div class="col-md-6" style="border-right: 1px solid grey">
                         <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.BirthPlace.invalid}">
-                        <show-errors [control]="ManagementShareholderForm.controls.BirthPlace"
+                        <lib-uc-show-errors [control]="ManagementShareholderForm.controls.BirthPlace"
                           [submit]="enjiForm.submitted">
-                        </show-errors>
+                        </lib-uc-show-errors>
                       </div>
                       <div class="col-md-6">
                         <input type="date" class="form-control adInsInput" formControlName="BirthDt"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.BirthDt.invalid}">
-                        <show-errors [control]="ManagementShareholderForm.controls.BirthDt "
+                        <lib-uc-show-errors [control]="ManagementShareholderForm.controls.BirthDt "
                           [submit]="enjiForm.submitted">
-                        </show-errors>
+                        </lib-uc-show-errors>
                       </div>
                     </div>
                   </div>
@@ -106,8 +106,8 @@
                   <div class="col-md-10">
                     <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.TaxIdNo.invalid}">
-                    <show-errors [control]="ManagementShareholderForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
-                    </show-errors>
+                    <lib-uc-show-errors [control]="ManagementShareholderForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -144,8 +144,8 @@
              
                   </div>
                   <div class="col-md-3"><h4 class="d-flex   align-items-center">%</h4>
-                    <show-errors [control]="ManagementShareholderForm.controls.SharePrcnt" [submit]="enjiForm.submitted">
-                    </show-errors></div>
+                    <lib-uc-show-errors [control]="ManagementShareholderForm.controls.SharePrcnt" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors></div>
                 </div> -->
                 <div class="form-group row">
                   <label class="col-md-2 adInsLabel" translate>Default Signer</label>
