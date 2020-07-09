@@ -103,7 +103,7 @@ export class ZipcodeAddComponent implements OnInit {
   SaveForm() {
     this.rzcObj = new RefZipcodeObj();
     this.rzcObj = this.RefZipCodeForm.value;
-    this.rzcObj.RefProvDistrictId = this.inputDistrictLookupObj.jsonSelect.refProvDistrictId;
+    this.rzcObj.RefProvDistrictId = this.inputDistrictLookupObj.idSelect;
     if (this.rzcObj.SubZipcode == "") {
       this.rzcObj.SubZipcode = " ";
     }
