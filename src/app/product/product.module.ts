@@ -47,6 +47,8 @@ import { UcapprovalModule } from '@adins/ucapproval';
 import { ProductReturnHoPagingComponent } from './product-HO/product-return-ho-paging/product-return-ho-paging.component';
 import { ProdOfferingReturnPagingComponent } from './prod-offering/prod-offering-return-paging/prod-offering-return-paging.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { UcaddtotempModule } from '@adins/ucaddtotemp';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 
 @NgModule({
@@ -68,7 +70,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     UclookupgenericModule,
     UcShowErrorsModule,
     UcapprovalModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    UcaddtotempModule
   ],
   declarations: [
     ProductHOApprovalComponent,
@@ -103,6 +106,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ProductOfferingDeactivateEditComponent,
     ProductReturnHoPagingComponent,
     ProdOfferingReturnPagingComponent
+  ],
+  providers: [
+    NGXToastrService
   ]
 })
 export class ProductModule { }
