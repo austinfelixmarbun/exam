@@ -49,9 +49,11 @@ export class VendorSchemeAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: "VENDOR_CATEGORY"}).subscribe(
       (response) => {
         this.itemCategoryType = response["ReturnObject"];
-        this.VendorSchmForm.patchValue({
-          MrVendorCategoryCode: this.MrVendorCategoryCode
-        });
+        if(this.itemCategoryType.length > 0){
+          this.VendorSchmForm.patchValue({
+            MrVendorCategoryCode: this.MrVendorCategoryCode
+          });
+        }
       } 
     );
     
