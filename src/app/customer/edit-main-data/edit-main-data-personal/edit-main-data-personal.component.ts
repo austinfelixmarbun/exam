@@ -83,9 +83,11 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjGender).subscribe(
       (response) => {
         this.tempGender = response["ReturnObject"];
-        this.CustomerPersonalForm.patchValue({
-          Gender: this.tempGender[0].Key
-        });
+        if(this.tempGender.length > 0){
+          this.CustomerPersonalForm.patchValue({
+            Gender: this.tempGender[0].Key
+          });
+        }
       }
     );
     var refMasterObjMrIdTypeCode = {
@@ -95,9 +97,11 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempIdType = response["ReturnObject"];
-        this.CustomerPersonalForm.patchValue({
-          MrIdTypeCode: this.tempIdType[0].Key
-        });
+        if(this.tempIdType.length > 0){
+          this.CustomerPersonalForm.patchValue({
+            MrIdTypeCode: this.tempIdType[0].Key
+          });
+        }
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
         } else {
@@ -114,9 +118,11 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
-        this.CustomerPersonalForm.patchValue({
-          CustModel: this.tempCustModel[0].Key
-        });
+        if(this.tempCustModel.length > 0){
+          this.CustomerPersonalForm.patchValue({
+            CustModel: this.tempCustModel[0].Key
+          });
+        }
       }
     );
     this.custObj = new CustObj();

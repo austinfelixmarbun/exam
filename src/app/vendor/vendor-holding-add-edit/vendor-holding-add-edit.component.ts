@@ -95,8 +95,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   }
 
-  getData(){
-    this.vendorService.GetVendorAndVendorAddrByVendorId({VendorId :this.VendorId}).subscribe(
+  getData() {
+    this.vendorService.GetVendorAndVendorAddrByVendorId({ VendorId: this.VendorId }).subscribe(
       (response) => {
         this.result = response;
         this.setDropdown();
@@ -143,7 +143,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     );
   }
 
-  setDropdown(){
+  setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: "VENDOR_CATEGORY",
       ReserveField1: "HOLDING"
@@ -151,9 +151,11 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).subscribe(
       (response) => {
         this.itemCategoryType = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          MrVendorCategoryCode: response["ReturnObject"][0].Key
-        });
+        if (this.itemCategoryType.length > 0) {
+          this.VendorForm.patchValue({
+            MrVendorCategoryCode: response["ReturnObject"][0].Key
+          });
+        }
       }
     );
 
@@ -163,10 +165,12 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.vendorService.GetRefMasterListKeyValuePair(refMasterTypeObj).subscribe(
       (response) => {
         this.itemType = response["ReturnObject"];
-        if(this.mode != "edit"){
-          this.VendorForm.patchValue({
-            MrVendorTypeCode: this.itemType[0].Key
-          });
+        if (this.itemType.length > 0) {
+          if (this.mode != "edit") {
+            this.VendorForm.patchValue({
+              MrVendorTypeCode: this.itemType[0].Key
+            });
+          }
         }
       }
     );
@@ -177,9 +181,11 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.vendorService.GetRefMasterListKeyValuePair(refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          MrIdTypeCode: this.itemIdType[0].Key
-        });
+        if (this.itemIdType.length > 0) {
+          this.VendorForm.patchValue({
+            MrIdTypeCode: this.itemIdType[0].Key
+          });
+        }
       }
     );
 
@@ -189,24 +195,26 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.vendorService.GetRefMasterListKeyValuePair(refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
-        if(this.mode != "edit"){
-        this.VendorForm.patchValue({
-          MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
-        });
-      }
+        if (this.itemCalcMethodType.length > 0) {
+          if (this.mode != "edit") {
+            this.VendorForm.patchValue({
+              MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
+            });
+          }
+        }
       }
     );
   }
 
-  NpwpCheck(isGetData: boolean = false){
-    if(this.VendorForm.controls.IsNpwpExist.value == true){
+  NpwpCheck(isGetData: boolean = false) {
+    if (this.VendorForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
       this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
-    }else{
+    } else {
       this.inputLookupZipcodeObj.isRequired = false;
-      if(!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
+      if (!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
       this.VendorForm.controls.TaxIdNo.clearValidators();
       this.VendorForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
@@ -326,7 +334,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       this.router.navigate(['/Vendor/Holding/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
     } else {
-      this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode" : this.MrVendorCategoryCode } });
+      this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
     }
 
   }

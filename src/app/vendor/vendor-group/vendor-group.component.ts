@@ -57,9 +57,11 @@ export class VendorGroupComponent implements OnInit {
         (response) => {
           console.log(response);
           this.allVendorCategory = response['ReturnObject'];
-          this.VendorGroupFrom.patchValue({
-            MrVendorCategoryCode: this.MrVendorCategoryCode
-          });
+          if(this.allVendorCategory.length > 0){
+            this.VendorGroupFrom.patchValue({
+              MrVendorCategoryCode: this.MrVendorCategoryCode
+            });
+          }
         },
         (error) => {
           console.log(error);
@@ -88,9 +90,11 @@ export class VendorGroupComponent implements OnInit {
             (response) => {
               console.log(response);
               this.allVendorCategory = response['ReturnObject'];
-              this.VendorGroupFrom.patchValue({
-                MrVendorCategoryCode: this.resultData.MrVendorCategoryCode
-              });
+              if(this.allVendorCategory.length > 0){
+                this.VendorGroupFrom.patchValue({
+                  MrVendorCategoryCode: this.resultData.MrVendorCategoryCode
+                });
+              }
             },
             (error) => {
               console.log(error);
