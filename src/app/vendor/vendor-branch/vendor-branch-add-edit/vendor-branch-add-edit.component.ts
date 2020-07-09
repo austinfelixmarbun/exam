@@ -174,9 +174,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
       (response) => {
         this.itemCategoryType = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          MrVendorCategoryCode: this.MrVendorCategoryCode
-        });
+        if (this.itemCategoryType.length > 0) {
+          this.VendorForm.patchValue({
+            MrVendorCategoryCode: this.MrVendorCategoryCode
+          });
+        }
       }
     );
 
@@ -186,9 +188,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMaxRefundType).subscribe(
       (response) => {
         this.itemMaxRefundType = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          ReservedField7: this.itemMaxRefundType[0].Key
-        });
+        if (this.itemMaxRefundType.length > 0) {
+          this.VendorForm.patchValue({
+            ReservedField7: this.itemMaxRefundType[0].Key
+          });
+        }
       }
     );
 
@@ -198,9 +202,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refAssignmentType).subscribe(
       (response) => {
         this.itemAssignmentTypeTele = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          ReservedField9: this.itemAssignmentTypeTele[0].Key
-        });
+        if (this.itemAssignmentTypeTele.length > 0) {
+          this.VendorForm.patchValue({
+            ReservedField9: this.itemAssignmentTypeTele[0].Key
+          });
+        }
       }
     );
 
@@ -210,9 +216,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMrSupplierClass).subscribe(
       (response) => {
         this.itemSupplierClass = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          ReservedField4: this.itemSupplierClass[0].Key
-        });
+        if (this.itemSupplierClass.length > 0) {
+          this.VendorForm.patchValue({
+            ReservedField4: this.itemSupplierClass[0].Key
+          });
+        }
       }
     );
 
@@ -222,9 +230,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).subscribe(
       (response) => {
         this.itemTypeUpCalcMethod = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          ReservedField3: this.itemTypeUpCalcMethod[0].Key
-        });
+        if (this.itemTypeUpCalcMethod.length > 0) {
+          this.VendorForm.patchValue({
+            ReservedField3: this.itemTypeUpCalcMethod[0].Key
+          });
+        }
       }
     );
 
@@ -234,22 +244,24 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
       (response) => {
         this.itemType = response["ReturnObject"];
-        if (this.MrVendorCategoryCode == "AGENCY_PERSONAL") {
-          var object = this.itemType.find(x => x.Key == 'P');
-          this.MrVendorTypeCode = object.Key;
-          this.VendorForm.patchValue({
-            MrVendorTypeCode: object.Key
-          });
-        } else if (this.MrVendorCategoryCode == "AGENCY_COMPANY") {
-          var object = this.itemType.find(x => x.Key == 'C');
-          this.MrVendorTypeCode = object.Key;
-          this.VendorForm.patchValue({
-            MrVendorTypeCode: object.Key
-          });
-        } else if (this.mode != "edit") {
-          this.VendorForm.patchValue({
-            MrVendorTypeCode: this.itemType[0].Key
-          });
+        if (this.itemType.length > 0) {
+          if (this.MrVendorCategoryCode == "AGENCY_PERSONAL") {
+            var object = this.itemType.find(x => x.Key == 'P');
+            this.MrVendorTypeCode = object.Key;
+            this.VendorForm.patchValue({
+              MrVendorTypeCode: object.Key
+            });
+          } else if (this.MrVendorCategoryCode == "AGENCY_COMPANY") {
+            var object = this.itemType.find(x => x.Key == 'C');
+            this.MrVendorTypeCode = object.Key;
+            this.VendorForm.patchValue({
+              MrVendorTypeCode: object.Key
+            });
+          } else if (this.mode != "edit") {
+            this.VendorForm.patchValue({
+              MrVendorTypeCode: this.itemType[0].Key
+            });
+          }
         }
         if (this.MrVendorCategoryCode == "AGENCY_PERSONAL" || this.MrVendorCategoryCode == "AGENCY_COMPANY") {
           this.VendorForm.controls.MrVendorTypeCode.disable();
@@ -264,9 +276,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          MrIdTypeCode: this.itemIdType[0].Key
-        });
+        if (this.itemIdType.lenth > 0) {
+          this.VendorForm.patchValue({
+            MrIdTypeCode: this.itemIdType[0].Key
+          });
+        }
       }
     );
 
@@ -277,9 +291,11 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterAssignmentObj).subscribe(
         (response) => {
           this.itemAssignmentType = response["ReturnObject"];
-          this.VendorForm.patchValue({
-            ReservedField1: this.itemAssignmentType[0].Key
-          });
+          if (this.itemAssignmentType.length > 0) {
+            this.VendorForm.patchValue({
+              ReservedField1: this.itemAssignmentType[0].Key
+            });
+          }
         }
       );
     }
@@ -290,10 +306,12 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
-        if (this.mode != "edit") {
-          this.VendorForm.patchValue({
-            MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
-          });
+        if (this.itemCalcMethodType.length > 0) {
+          if (this.mode != "edit") {
+            this.VendorForm.patchValue({
+              MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
+            });
+          }
         }
       }
     );
@@ -340,7 +358,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   checkType() {
-    if(this.VendorForm.controls.MrVendorTypeCode.value != ""){
+    if (this.VendorForm.controls.MrVendorTypeCode.value != "") {
       this.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
     }
     if (this.MrVendorTypeCode == 'C') {
@@ -560,7 +578,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": this.VendorId } });
     } else {
-      this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode" : this.MrVendorCategoryCode } });
+      this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
     }
   }
 }

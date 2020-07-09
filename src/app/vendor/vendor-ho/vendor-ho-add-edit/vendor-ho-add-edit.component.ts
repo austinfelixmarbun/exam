@@ -152,9 +152,11 @@ export class VendorHoAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
       (response) => {
         this.itemCategoryType = response["ReturnObject"];
-        this.VendorForm.patchValue({
-          MrVendorCategoryCode: this.MrVendorCategoryCode
-        });
+        if(this.itemCategoryType.length > 0){
+          this.VendorForm.patchValue({
+            MrVendorCategoryCode: this.MrVendorCategoryCode
+          });
+        }
       }
     );
 
@@ -164,10 +166,12 @@ export class VendorHoAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
       (response) => {
         this.itemType = response["ReturnObject"];
-        if (this.mode != "edit"){
-          this.VendorForm.patchValue({
-            MrVendorTypeCode: this.itemType[0].Key
-          });
+        if(this.itemType.length > 0){
+          if (this.mode != "edit"){
+            this.VendorForm.patchValue({
+              MrVendorTypeCode: this.itemType[0].Key
+            });
+          }
         }
       }
     );
@@ -178,10 +182,12 @@ export class VendorHoAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response["ReturnObject"];
-        if (this.mode != "edit"){
-          this.VendorForm.patchValue({
-            MrIdTypeCode: this.itemIdType[0].Key
-          }); 
+        if(this.itemIdType.length > 0){
+          if (this.mode != "edit"){
+            this.VendorForm.patchValue({
+              MrIdTypeCode: this.itemIdType[0].Key
+            }); 
+          }
         }
       }
     );
@@ -192,10 +198,12 @@ export class VendorHoAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
-        if (this.mode != "edit") {
-          this.VendorForm.patchValue({
-            MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
-          });
+        if(this.itemCalcMethodType.length > 0){
+          if (this.mode != "edit") {
+            this.VendorForm.patchValue({
+              MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
+            });
+          }
         }
       }
     );
