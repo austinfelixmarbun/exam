@@ -52,7 +52,9 @@ export class ProfessionAddEditComponent implements OnInit {
         (response) => {
             console.log(response);
           this.allRefProfessionMethod = response['ReturnObject'];
-          this.RefProfessionForm.patchValue({ MrCustModelCode: response['ReturnObject'][0]['Key'] });
+          if(this.allRefProfessionMethod.length > 0){
+            this.RefProfessionForm.patchValue({ MrCustModelCode: response['ReturnObject'][0]['Key'] });
+          }
         },
         (error) => {
           console.log(error);
