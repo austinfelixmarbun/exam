@@ -56,9 +56,8 @@ export class AssetDocumentAddEditComponent implements OnInit {
         // console.log(response);
         this.tempAssetName = response["ReturnObject"];
         if (this.tempAssetName.length > 0) {
-          let AssetDocData = this.tempAssetName.find(x => x.AssetDocCode == "AssetDocument");
           this.AssetDocumentForm.patchValue({
-            AssetDocName: AssetDocData.RefAssetDocId
+            AssetDocName: this.tempAssetName[0].RefAssetDocId
           });
         }
       }
