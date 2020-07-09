@@ -111,14 +111,25 @@ export class NegativeCustomerDetailComponent implements OnInit {
     let requestNegativeSource = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeSourceObj);
     forkJoin([requestIdType, requestNegativeCustType, requestNegativeSource]).subscribe(
       (response) => {
-        this.refMasterIdType = response[0];
-        this.negativeTypeList = response[1];
-        this.negativeSourceList = response[2];
-        this.NegativeCustForm.patchValue({
-          MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key,
-          MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key,
-          MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key
-        });
+        // console.log(response);
+        if (response[0]['ReturnObject'].length > 0) {
+          this.refMasterIdType = response[0];
+          this.NegativeCustForm.patchValue({
+            MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key
+          });
+        }
+        if (response[1]['ReturnObject'].length > 0) {
+          this.negativeTypeList = response[1];
+          this.NegativeCustForm.patchValue({
+            MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key
+          });
+        }
+        if (response[2]['ReturnObject'].length > 0) {
+          this.negativeSourceList = response[2];
+          this.NegativeCustForm.patchValue({
+            MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key
+          });
+        }
         if (this.pageType == "edit") {
           if (this.custType == AdInsConstant.CustomerPersonal && this.refMasterIdType.ReturnObject[0].Key == RefMasterConstant.EKtp) {
             this.tempKTPCheck = true;

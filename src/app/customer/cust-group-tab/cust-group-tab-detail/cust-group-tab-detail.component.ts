@@ -146,9 +146,12 @@ export class CustGroupTabDetailComponent implements OnInit {
     this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).pipe(first()).subscribe(
       (response) => {
         this.relationshipList = response;
-        this.CustGrpForm.patchValue({
-          MrCustRelationshipCode: this.relationshipList["ReturnObject"][0]["Key"]
-        })
+        console.log(this.relationshipList);
+        if (this.relationshipList["ReturnObject"].length > 0) {
+          this.CustGrpForm.patchValue({
+            MrCustRelationshipCode: this.relationshipList["ReturnObject"][0]["Key"]
+          });
+        }
       }
     );
   }
@@ -170,9 +173,12 @@ export class CustGroupTabDetailComponent implements OnInit {
     this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).pipe(first()).subscribe(
       (response) => {
         this.relationshipList = response;
-        this.CustGrpForm.patchValue({
-          MrCustRelationshipCode: this.relationshipList["ReturnObject"][0]["Key"]
-        })
+        console.log(this.relationshipList);
+        if (this.relationshipList["ReturnObject"].length > 0) {
+          this.CustGrpForm.patchValue({
+            MrCustRelationshipCode: this.relationshipList["ReturnObject"][0]["Key"]
+          });
+        }
       }
     );
   }

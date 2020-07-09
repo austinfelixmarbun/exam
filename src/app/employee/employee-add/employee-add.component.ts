@@ -123,11 +123,13 @@ export class EmployeeAddComponent implements OnInit {
     }
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
-        this.IdTypeList = response["ReturnObject"];
-        if (this.pageType != "edit") {
-          this.RefEmpForm.patchValue({
-            MrIdTypeCode: this.IdTypeList[0].Key
-          });
+        if (response['ReturnObject'].length > 0) {
+          this.IdTypeList = response["ReturnObject"];
+          if (this.pageType != "edit") {
+            this.RefEmpForm.patchValue({
+              MrIdTypeCode: this.IdTypeList[0].Key
+            });
+          }
         }
       }
     );
