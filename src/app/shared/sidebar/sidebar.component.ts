@@ -50,9 +50,10 @@ export class SidebarComponent implements OnInit {
     }
     genParam(params: [{ 'attr': string, 'value': string }]) {
         var arrList = {};
-
-        for (var i = 0; i < params.length; i++) {
-            arrList[params[i].attr] = params[i].value;
+        if(params != undefined){
+            for (var i = 0; i < params.length; i++) {
+                arrList[params[i].attr] = params[i].value;
+            }
         }
         return arrList;
     }
