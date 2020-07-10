@@ -112,10 +112,12 @@ export class VendorEmployeeComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, RefMasterVendorPosition).subscribe(
       (response) => {
         this.VendorPositionList = response["ReturnObject"];
-        if (this.mode != "edit") {
-          this.VendorEmpForm.patchValue({
-            MrVendorEmpPositionCode: this.VendorPositionList[0].Key
-          });
+        if(this.VendorPositionList.length > 0){
+          if (this.mode != "edit") {
+            this.VendorEmpForm.patchValue({
+              MrVendorEmpPositionCode: this.VendorPositionList[0].Key
+            });
+          }
         }
       }
     );
@@ -125,10 +127,12 @@ export class VendorEmployeeComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
         this.IdTypeList = response["ReturnObject"];
-        if (this.mode != "edit") {
-          this.VendorEmpForm.patchValue({
-            MrIdTypeCode: this.IdTypeList[0].Key
-          });
+        if(this.IdTypeList.length > 0){
+          if (this.mode != "edit") {
+            this.VendorEmpForm.patchValue({
+              MrIdTypeCode: this.IdTypeList[0].Key
+            });
+          }
         }
       }
     );
@@ -139,10 +143,12 @@ export class VendorEmployeeComponent implements OnInit {
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
-        if (this.mode != "edit") {
-          this.VendorEmpForm.patchValue({
-            MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
-          });
+        if(this.itemCalcMethodType.length > 0){
+          if (this.mode != "edit") {
+            this.VendorEmpForm.patchValue({
+              MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
+            });
+          }
         }
       }
     );

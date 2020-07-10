@@ -100,9 +100,11 @@ export class NegativeAssetDetailComponent implements OnInit {
       this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterObj).pipe(
         map((response) => {
           this.negativeAssetSourceList = [...response["ReturnObject"]];
-          this.AssetNegativeForm.patchValue({
-            MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
-          });
+          if(this.negativeAssetSourceList.length >0){
+            this.AssetNegativeForm.patchValue({
+              MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
+            });
+          }
         }),
         mergeMap(() => {
           const assetNegativeData = this.httpClient.post(AdInsConstant.GetAssetNegativeByIdEditPage, negativeAsset);
@@ -163,9 +165,11 @@ export class NegativeAssetDetailComponent implements OnInit {
       this.httpClient.post(AdInsConstant.GetListActiveRefMaster, { RefMasterTypeCode: "NEG_ASSET_SOURCE" }).subscribe(
         (response) => {
           this.negativeAssetSourceList = [...response["ReturnObject"]];
-          this.AssetNegativeForm.patchValue({
-            MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
-          });
+          if(this.negativeAssetSourceList.length > 0){
+            this.AssetNegativeForm.patchValue({
+              MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
+            });
+          }
         },
         (error) => {
           console.log(error);

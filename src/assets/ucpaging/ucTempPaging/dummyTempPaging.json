@@ -81,5 +81,52 @@
             "position": "center",
             "property": "IsActive"
         }
+    ],
+    "headerListTemp": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "BRANCH CODE",
+            "name": "VendorCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "BRANCH NAME",
+            "name": "VendorName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "ACTIVE STATUS",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "checkbox input"
+        }
+    ],
+    "bodyListTemp": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "VendorCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "VendorName"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "checkbox",
+            "position": "center",
+            "property": "IsAllowedCrt"
+        }
     ]
 }

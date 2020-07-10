@@ -1,22 +1,13 @@
-import { CriteriaObj } from '../CriteriaObj.model';
 
-export class UcTempPagingObj {
-    urlJson: string;
-    enviromentUrl: string;
-    apiQryPaging: string;
-    pagingJson: string;
-    isReady: boolean;
-    addCritInput: Array<CriteriaObj>;
+export class UcViewGenericObj {
+    viewInput: string;
+    viewEnvironment: string;
     ddlEnvironments: Array<EnviObj>;
     whereValue: Array<WhereValueObj>;
 
     constructor() {
-        this.urlJson = "";
-        this.enviromentUrl = "";
-        this.apiQryPaging = "";
-        this.pagingJson = "";
-        this.isReady = false;
-        this.addCritInput = new Array<CriteriaObj>();
+        this.viewInput = "";
+        this.viewEnvironment = "";
         this.ddlEnvironments = new Array<EnviObj>();
         this.whereValue = new Array<WhereValueObj>();
     }

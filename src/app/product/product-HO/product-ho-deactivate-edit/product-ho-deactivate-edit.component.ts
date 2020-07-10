@@ -59,7 +59,9 @@ export class ProductHODeactivateEditComponent implements OnInit {
       (response) => {
         console.log(response);
         this.allRefReasonMethod = response['ReturnObject'];
-        this.ProdHDeactForm.patchValue({ Reason: response['ReturnObject'][0]['Key'] });
+        if(this.allRefReasonMethod.length > 0){
+          this.ProdHDeactForm.patchValue({ Reason: response['ReturnObject'][0]['Key'] });
+        }
       },
       (error) => {
         console.log(error);

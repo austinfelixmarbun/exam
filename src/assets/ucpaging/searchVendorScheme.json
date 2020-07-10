@@ -40,44 +40,44 @@
         }
     ],
     "querystring": {
-        "select": "SELECT VS.VENDOR_SCHM_CODE AS VendorSchmCode, VS.VENDOR_SCHM_NAME AS VendorSchmName, VS.IS_ACTIVE AS IsActive, COUNT(VSM.VENDOR_SCHM_MBR_ID) AS NumOfMbr, VS.VENDOR_SCHM_ID AS VendorSchmId",
+        "select": "SELECT VS.VENDOR_SCHM_CODE AS VendorSchmCode, VS.VENDOR_SCHM_NAME AS VendorSchmName, VS.IS_ACTIVE AS IsActive, COUNT(VSM.VENDOR_SCHM_MBR_ID) AS NumOfMbr, VS.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, VS.VENDOR_SCHM_ID AS VendorSchmId",
         "from": "FROM DBO.VENDOR_SCHM VS LEFT JOIN DBO.VENDOR_SCHM_MBR VSM ON VS.VENDOR_SCHM_ID = VSM.VENDOR_SCHM_ID",
-        "groupby": "GROUP BY VS.VENDOR_SCHM_ID, VS.VENDOR_SCHM_CODE, VS.VENDOR_SCHM_NAME, VS.IS_ACTIVE"
+        "groupby": "GROUP BY VS.VENDOR_SCHM_ID, VS.VENDOR_SCHM_CODE, VS.VENDOR_SCHM_NAME, VS.IS_ACTIVE, VS.MR_VENDOR_CATEGORY_CODE"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "center",
-            "label": "SCHEME CODE",
+            "label": "Scheme Code",
             "name": "VendorSchmCode"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "SCHEME NAME",
+            "label": "Scheme Name",
             "name": "VendorSchmName"
         },
         {
             "type": "label",
             "position": "center",
-            "label": "ACTIVE STATUS",
+            "label": "Active Status",
             "name": "IsActive"
         },
         {
             "type": "label",
             "position": "center",
-            "label": "# OF MEMBER",
+            "label": "# of Member",
             "name": "NumOfMbr"
         },
         {
             "type": "label",
             "position": "center",
-            "label": "MEMBER"
+            "label": "Member"
         },
         {
             "type": "label",
             "position": "center",
-            "label": "ACTION"
+            "label": "Action"
         }
     ],
     "bodyList": [
