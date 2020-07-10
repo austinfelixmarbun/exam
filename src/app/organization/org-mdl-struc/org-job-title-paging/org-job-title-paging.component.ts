@@ -12,6 +12,7 @@ import { Location, DecimalPipe } from "@angular/common";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
+import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 
 @Component({
   selector: "app-org-job-title-paging",
@@ -116,7 +117,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
   }
 
   del(id: any) {
-    if (confirm("Are you sure to delete this record?")) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteOrgJobTitle;
       this.orgJobTitleObj = new OrgJobTitleObj();
       this.orgJobTitleObj.orgJobTitleId = +id;

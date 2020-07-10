@@ -11,6 +11,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-office-area-member-add',
@@ -166,12 +167,12 @@ export class OfficeAreaMemberAddComponent implements OnInit {
       this.listSelectedId = []
       this.checkboxAll = false;
     } else {
-      this.toastr.typeErrorCustom("Please select at least one Office");
+      this.toastr.typeErrorCustom(ExceptionConstant.PLEASE_SELECT_MIN_1_OFFICE);
     }
   }
 
   DeleteFromTemp(RefOfficeId) {
-    if (confirm('Are you sure to delete this record?')) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.arrAddCrit = new Array();
       if (this.arrCrit.length != 0) {
         for (var i = 0; i < this.arrCrit.length; i++) {

@@ -12,6 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 @Component({
   selector: "app-org-mdl-struc-detail",
@@ -193,9 +194,9 @@ export class OrgMdlStrucDetailComponent implements OnInit {
                 this.orgMdlStrucObj.refBizUnitId = this.inputLookupObj2.idSelect;
                this.orgMdlStrucObj.parentId = this.inputLookupObj.idSelect;
                 if (OrgMdlForm.value.isActive) {
-                  this.orgMdlStrucObj.isActive = "1";
+                  this.orgMdlStrucObj.isActive = CommonConstant.TRUE_CONDITION;
                 } else {
-                  this.orgMdlStrucObj.isActive = "0";
+                  this.orgMdlStrucObj.isActive = CommonConstant.FALSE_CONDITION;
                 }
 
                 this.httpClient.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
@@ -217,9 +218,9 @@ export class OrgMdlStrucDetailComponent implements OnInit {
                 this.orgMdlStrucObj.refBizUnitId = this.inputLookupObj.idSelect;
                this.orgMdlStrucObj.parentId = this.inputLookupObj2.idSelect;
                 if (OrgMdlForm.value.isActive) {
-                  this.orgMdlStrucObj.isActive = "1";
+                  this.orgMdlStrucObj.isActive = CommonConstant.TRUE_CONDITION;
                 } else {
-                  this.orgMdlStrucObj.isActive = "0";
+                  this.orgMdlStrucObj.isActive = CommonConstant.FALSE_CONDITION;
                 }
                 this.httpClient.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
                   response => {
@@ -247,9 +248,9 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           this.orgMdlStrucObj.orgMdlLvl = OrgMdlForm.value.orgMdlLvl;
           this.orgMdlStrucObj.refBizUnitId = this.inputLookupObj2.idSelect;
           if (OrgMdlForm.value.isActive) {
-            this.orgMdlStrucObj.isActive = "1";
+            this.orgMdlStrucObj.isActive = CommonConstant.TRUE_CONDITION;
           } else {
-            this.orgMdlStrucObj.isActive = "0";
+            this.orgMdlStrucObj.isActive = CommonConstant.FALSE_CONDITION;
           }
 
           this.httpClient.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
@@ -270,9 +271,9 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           this.orgMdlStrucObj.orgMdlLvl = OrgMdlForm.value.orgMdlLvl;
           this.orgMdlStrucObj.refBizUnitId = this.inputLookupObj2.idSelect;
           if (OrgMdlForm.value.isActive) {
-            this.orgMdlStrucObj.isActive = "1";
+            this.orgMdlStrucObj.isActive = CommonConstant.TRUE_CONDITION;
           } else {
-            this.orgMdlStrucObj.isActive = "0";
+            this.orgMdlStrucObj.isActive = CommonConstant.FALSE_CONDITION;
           }
           this.httpClient.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
             response => {

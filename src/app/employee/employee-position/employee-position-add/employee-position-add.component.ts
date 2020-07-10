@@ -212,10 +212,10 @@ export class EmployeePositionAddComponent implements OnInit {
             this.empPositionObj.skillLvl = this.masterCode;
             this.empPositionObj.superiorRefEmpId = this.inputLookupObj.idSelect;
             if (this.isActive == false) {
-                this.empPositionObj.isActive = "0";
+                this.empPositionObj.isActive = CommonConstant.FALSE_CONDITION;
             }
             else {
-                this.empPositionObj.isActive = "1";
+                this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
             }
 
             console.log(JSON.stringify(this.empPositionObj))
@@ -241,10 +241,10 @@ export class EmployeePositionAddComponent implements OnInit {
             this.empPositionObj.skillLvl = this.masterCode;
             this.empPositionObj.superiorRefEmpId = this.inputLookupObj.idSelect;
             if (this.isActive == false) {
-                this.empPositionObj.isActive = "0";
+                this.empPositionObj.isActive = CommonConstant.FALSE_CONDITION;
             }
             else {
-                this.empPositionObj.isActive = "1";
+                this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
             }
             console.log(JSON.stringify(this.empPositionObj))
             console.log(this.empPositionObj);
