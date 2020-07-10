@@ -82,10 +82,12 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
-        this.tempMrGenderCode = response["ReturnObject"];
-        this.ManagementShareholderForm.patchValue({
-          MrGenderCode: this.tempMrGenderCode[0].Key
-        });
+        if (response['ReturnObject'].length > 0) {
+          this.tempMrGenderCode = response["ReturnObject"];
+          this.ManagementShareholderForm.patchValue({
+            MrGenderCode: this.tempMrGenderCode[0].Key
+          });
+        }
       }
     );
 	
@@ -94,16 +96,18 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
-        this.tempIdType = response["ReturnObject"];
-        this.ManagementShareholderForm.patchValue({
-          MrIdTypeCode: this.tempIdType[0].Key
-        });
-        if (this.tempIdType[0].Key == this.KTP) {
-          this.tempKTPCheck = true; 
-        } else {
-          this.tempKTPCheck = false;
-          this.ManagementShareholderForm.controls.IdExpiredDt.setValidators(Validators.required);  
-          this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
+        if (response['ReturnObject'].length > 0) {
+          this.tempIdType = response["ReturnObject"];
+          this.ManagementShareholderForm.patchValue({
+            MrIdTypeCode: this.tempIdType[0].Key
+          });
+          if (this.tempIdType[0].Key == this.KTP) {
+            this.tempKTPCheck = true; 
+          } else {
+            this.tempKTPCheck = false;
+            this.ManagementShareholderForm.controls.IdExpiredDt.setValidators(Validators.required);  
+            this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
+          }
         }
       }
     );
@@ -114,10 +118,12 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
-        this.tempMrJobPositionCode = response["ReturnObject"];
-        this.ManagementShareholderForm.patchValue({
-          MrJobPositionCode: this.tempMrJobPositionCode[0].Key
-        });
+        if (response['ReturnObject'].length > 0) {
+          this.tempMrJobPositionCode = response["ReturnObject"];
+          this.ManagementShareholderForm.patchValue({
+            MrJobPositionCode: this.tempMrJobPositionCode[0].Key
+          });
+        }
       }
     );
     var refMasterObjMrCustModelCode = {
@@ -127,10 +133,12 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
       (response) => {
-        this.tempMrCustModelCode = response["ReturnObject"];
-        this.ManagementShareholderForm.patchValue({
-          MrCustModelCode: this.tempMrCustModelCode[0].Key
-        });
+        if (response['ReturnObject'].length > 0) {
+          this.tempMrCustModelCode = response["ReturnObject"];
+          this.ManagementShareholderForm.patchValue({
+            MrCustModelCode: this.tempMrCustModelCode[0].Key
+          });
+        }
       }
     );
     if(this.CustCompanyMgmntShrholderId!=null){

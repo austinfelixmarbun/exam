@@ -72,10 +72,12 @@ export class NotificationAddEditComponent implements OnInit {
     }
     this.http.post(AdInsConstant.GetListActiveRefMaster, refMasterNotifTypeObj).subscribe(
       (response) => {
-        this.tempListNotifType = response["ReturnObject"];
-        this.NotificationForm.patchValue({
-          NotificationType: this.tempListNotifType[0].Key
-        });
+        if (response['ReturnObject'].length > 0) {
+          this.tempListNotifType = response["ReturnObject"];
+          this.NotificationForm.patchValue({
+            NotificationType: this.tempListNotifType[0].Key
+          });
+        }
       }
     );
 
@@ -85,10 +87,12 @@ export class NotificationAddEditComponent implements OnInit {
     }
     this.http.post(AdInsConstant.GetListActiveRefMaster, refMasterNotifMethodObj).subscribe(
       (response) => {
-        this.tempListNotifMethod = response["ReturnObject"];
-        this.NotificationForm.patchValue({
-          NotificationMethod: this.tempListNotifMethod[0].Key
-        });
+        if (response['ReturnObject'].length > 0) {
+          this.tempListNotifMethod = response["ReturnObject"];
+          this.NotificationForm.patchValue({
+            NotificationMethod: this.tempListNotifMethod[0].Key
+          });
+        }
       }
     );
 

@@ -13,7 +13,8 @@ export class NotificationHObj {
     IsActive: any;
     IsDraft: any;
     listTargetRefOfficeId = [];
-    listTargetRefRoleId = []
+    listTargetRefRoleId = [];
+    listUsername = [];
     RowVersion: any;
     constructor() { this.NotificationHId = 0, this.RowVersion = "" }
   }

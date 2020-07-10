@@ -45,7 +45,9 @@ export class CustomerViewCoyAddressComponent implements OnInit {
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
-        this.responseResultCustAddr = response['ReturnObject'];
+        if (response['ReturnObject'].length > 0) {
+          this.responseResultCustAddr = response['ReturnObject'];
+        }
       },
       error => {
         this.router.navigateByUrl('Error');
@@ -53,7 +55,9 @@ export class CustomerViewCoyAddressComponent implements OnInit {
     );
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
-        this.responseResultCustAddrHist = response['ReturnObject'];
+        if (response['ReturnObject'].length > 0) {
+          this.responseResultCustAddrHist = response['ReturnObject'];
+        }
       },
       error => {
         this.router.navigateByUrl('Error');
@@ -64,10 +68,12 @@ export class CustomerViewCoyAddressComponent implements OnInit {
     refMasterObj.RefMasterTypeCode = RefMasterConstant.AddrType;
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
       response => {
-        this.ddlItem = response['ReturnObject'];
-        this.CustForm.patchValue({
-          DdlAddress: this.ddlItem[0].Value
-        });
+        if (response['ReturnObject'].length > 0) {
+          this.ddlItem = response['ReturnObject'];
+          this.CustForm.patchValue({
+            DdlAddress: this.ddlItem[0].Value
+          });
+        }
       }
     );
   }

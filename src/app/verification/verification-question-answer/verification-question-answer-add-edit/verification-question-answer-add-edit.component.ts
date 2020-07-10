@@ -47,9 +47,13 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetActiveRefVerfAnswerTypes, refAnswerObj).subscribe(
       (response) => {
         this.itemVerfQuestionAnswer = response["ReturnObject"];
-        this.QuestionAnswerForm.patchValue({
-          RefVerfAnswerTypeId: this.itemVerfQuestionAnswer[0].RefVerfAnswerTypeId
-        });
+        console.log(this.itemVerfQuestionAnswer);
+        if (this.itemVerfQuestionAnswer.length > 0) {
+          let VerfAnswerData = this.itemVerfQuestionAnswer.find(x => x.VerfAnswerTypeCode == "DDL");
+          this.QuestionAnswerForm.patchValue({
+            RefVerfAnswerTypeId: VerfAnswerData.RefVerfAnswerTypeId
+          });
+        }
       })
 
 
@@ -83,15 +87,15 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
 
   AnswerTypeChanged(RefVerfAnswerTypeId) {
     var object = this.itemVerfQuestionAnswer.find(x => x.RefVerfAnswerTypeId == RefVerfAnswerTypeId);
-        if (object.VerfAnswerTypeCode != "DDL") {
-          this.QuestionAnswerForm.controls.VerfAnswer.clearValidators();
-          this.isHidden = true;
-        }
-        else {
-          this.QuestionAnswerForm.controls.VerfAnswer.setValidators([Validators.required]);
-          this.isHidden = false;
-        }
-        this.QuestionAnswerForm.controls.VerfAnswer.updateValueAndValidity();
+    if (object.VerfAnswerTypeCode != "DDL") {
+      this.QuestionAnswerForm.controls.VerfAnswer.clearValidators();
+      this.isHidden = true;
+    }
+    else {
+      this.QuestionAnswerForm.controls.VerfAnswer.setValidators([Validators.required]);
+      this.isHidden = false;
+    }
+    this.QuestionAnswerForm.controls.VerfAnswer.updateValueAndValidity();
   }
 
   SaveForm() {
