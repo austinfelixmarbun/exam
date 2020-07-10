@@ -91,8 +91,8 @@ export const ROUTES: RouteInfo[] = [
         Path: '', Title: 'Surveyor', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
         Submenu: [
           
-          { Path: '/Vendor/Paging', Title: 'Surveyor HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SURVEYOR_BRANCH }] },
-          { Path: '/Vendor/Paging', Title: 'Surveyor Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SURVEYOR_HO }] },  
+          { Path: '/Vendor/Paging', Title: 'Surveyor HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SURVEYOR_HO }] },
+          { Path: '/Vendor/Paging', Title: 'Surveyor Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SURVEYOR_BRANCH }] },  
           { Path: '/Vendor/Paging', Title: 'Surveyor Branch Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }, { attr: "MrVendorCategoryCode", value: CommonConstant.SURVEYOR_BRANCH }] },      
           { Path: '/Vendor/Paging', Title: 'Surveyor Branch Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }, { attr: "MrVendorCategoryCode", value: CommonConstant.SURVEYOR_BRANCH }] },   
         ], Params : [] 

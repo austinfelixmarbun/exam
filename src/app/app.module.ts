@@ -25,7 +25,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatDialogModule } from '@angular/material';
 
 import * as $ from 'jquery';
-import { UserMaintenanceComponent } from 'app/user/user-maintenance/user-maintenance.component';
 import { HttpModule } from '@angular/http';
 import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
@@ -50,7 +49,6 @@ export function createTranslateLoader(http: HttpClient) {
         AppComponent,
         FullLayoutComponent,
         ContentLayoutComponent,
-        UserMaintenanceComponent,
         ErrorDialogComponent,
         RolepickComponent,
     ],

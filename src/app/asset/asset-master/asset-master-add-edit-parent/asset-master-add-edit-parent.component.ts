@@ -118,9 +118,11 @@ export class AssetMasterAddEditParentComponent implements OnInit {
     this.http.post(AdInsConstant.GetValueAssetType, null).subscribe(
       (response) => {
         this.allAssetMasterMethod = response['ReturnObject'];
-        this.AssetMasterParentForm.patchValue({
-          AssetTypeId: response['ReturnObject'][0]['Key']
-        });
+        if(this.allAssetMasterMethod.length > 0){
+          this.AssetMasterParentForm.patchValue({
+            AssetTypeId: response['ReturnObject'][0]['Key']
+          });
+        }
 
         this.assetSchmListDObj = new AssetSchmListObj();
         this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;

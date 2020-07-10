@@ -19,11 +19,9 @@ import { ViewgenericComponent } from './UserControl/viewgeneric/viewgeneric.comp
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
-import { ShowErrorsComponent } from '../test-new/show-errors.component';
 import { UcProdOfferingCompComponent } from './UserControl/uc-prod-offering-compnt/uc-prod-offering-comp.component';
 import { ThingsToDoComponent } from './things-to-do/things-to-do.component';
 import { UcthingstodoModule } from '@adins/ucthingstodo';
-import { UcLookupGroupComponent } from 'app/test-new/uc-lookup-group/uc-lookup-group.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
@@ -38,11 +36,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
         LookupgenericComponent,
         ViewgenericComponent,
         LookupgenericComponent,
-        ShowErrorsComponent,
         UcProdOfferingCompComponent,
         ThingsToDoComponent,
-        UcthingstodoModule,        
-        UcLookupGroupComponent,
+        UcthingstodoModule
     ],
     imports: [
         FormsModule,
@@ -58,8 +54,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
         UcpagingModule,
         ReactiveFormsModule,
         UcthingstodoModule,
-      UcShowErrorsModule,
-      NgMultiSelectDropDownModule
+        UcShowErrorsModule,
+        NgMultiSelectDropDownModule
     ],
     declarations: [
         UcAddressComponent,
@@ -71,10 +67,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
         LookupgenericComponent,
         ViewgenericComponent,
         LookupgenericComponent,
-        ShowErrorsComponent,
         UcProdOfferingCompComponent,
-        ThingsToDoComponent,        
-        UcLookupGroupComponent,
+        ThingsToDoComponent,
     ]
 })
 

@@ -201,9 +201,11 @@ export class CustomerContactAddComponent implements OnInit {
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempIdType = response["ReturnObject"];
-        this.CustomerContactForm.patchValue({
-          MrIdTypeCode: this.tempIdType[0].Key
-        });
+        if(this.tempIdType.length > 0){
+          this.CustomerContactForm.patchValue({
+            MrIdTypeCode: this.tempIdType[0].Key
+          });
+        }
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
         } else {
@@ -232,9 +234,11 @@ export class CustomerContactAddComponent implements OnInit {
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
       (response) => {
         this.tempMrMaritalStatCode = response["ReturnObject"];
-        this.CustomerContactForm.patchValue({
-          MrMaritalStatCode: this.tempMrMaritalStatCode[0].Key
-        });
+        if(this.tempMrMaritalStatCode.length > 0){
+          this.CustomerContactForm.patchValue({
+            MrMaritalStatCode: this.tempMrMaritalStatCode[0].Key
+          });
+        }
       });
 
     var refMasterObjMrEducationCode = {
@@ -243,9 +247,11 @@ export class CustomerContactAddComponent implements OnInit {
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrEducationCode).subscribe(
       (response) => {
         this.tempMrEducationCode = response["ReturnObject"];
-        this.CustomerContactForm.patchValue({
-          MrEducationCode: this.tempMrEducationCode[0].Key
-        });
+        if(this.tempMrEducationCode.length > 0){
+          this.CustomerContactForm.patchValue({
+            MrEducationCode: this.tempMrEducationCode[0].Key
+          });
+        }
       });
     var refMasterObjMrReligionCode = {
       RefMasterTypeCode: "RELIGION"
@@ -253,9 +259,11 @@ export class CustomerContactAddComponent implements OnInit {
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrReligionCode).subscribe(
       (response) => {
         this.tempMrReligionCode = response["ReturnObject"];
-        this.CustomerContactForm.patchValue({
-          MrReligionCode: this.tempMrReligionCode[0].Key
-        });
+        if(this.tempMrReligionCode.length > 0){
+          this.CustomerContactForm.patchValue({
+            MrReligionCode: this.tempMrReligionCode[0].Key
+          });
+        }
       });
 
     var refMasterObjMrCustRelationshipCode = {
@@ -264,9 +272,11 @@ export class CustomerContactAddComponent implements OnInit {
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {
         this.tempMrCustRelationshipCode = response["ReturnObject"];
-        this.CustomerContactForm.patchValue({
-          MrCustRelationshipCode: this.tempMrCustRelationshipCode[0].Key
-        });
+        if(this.tempMrCustRelationshipCode.length > 0){
+          this.CustomerContactForm.patchValue({
+            MrCustRelationshipCode: this.tempMrCustRelationshipCode[0].Key
+          });
+        }
       });
 
     var refMasterObjMrGenderCode = {
@@ -276,9 +286,11 @@ export class CustomerContactAddComponent implements OnInit {
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
         this.tempMrGenderCode = response["ReturnObject"];
-        this.CustomerContactForm.patchValue({
-          MrGenderCode: this.tempMrGenderCode[0].Key
-        });
+        if(this.tempMrGenderCode.length > 0){
+          this.CustomerContactForm.patchValue({
+            MrGenderCode: this.tempMrGenderCode[0].Key
+          });
+        }
       }
     );
 

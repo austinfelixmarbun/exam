@@ -7,6 +7,7 @@ export class InputSearchObj {
     arrCritObj: any;
     addCritInput: Array<CriteriaObj>;
     ddlEnvironments: Array<EnviObj>;
+    whereValue: Array<WhereValueObj>;
 
     constructor() {
         this._url = "";
@@ -15,6 +16,7 @@ export class InputSearchObj {
         this.arrCritObj = null;
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
+        this.whereValue = new Array<WhereValueObj>();
     }
 }
 
@@ -25,5 +27,14 @@ export class EnviObj {
     constructor() {
         this.name = "";
         this.environment = "";
+    }
+}
+
+export class WhereValueObj {
+    property: string;
+    value: any;
+
+    constructor() {
+        this.property = "";
     }
 }
