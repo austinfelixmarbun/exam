@@ -1,6 +1,9 @@
 
 export class CommonConstant {
 
+    // APPLICATION DATA
+    public static ReturnObj = 'ReturnObject';
+
     // VENDOR CATEGORY
     public static SUPPLIER_BRANCH = "SUPPLIER_BRANCH";
     public static ASSET_INSCO_BRANCH = "ASSET_INSCO_BRANCH";
@@ -30,4 +33,13 @@ export class CommonConstant {
     // CUST ADDR TYPE 
     public static CustAddrTypeLegal = "LEGAL";
     
+    public static FROM = 'From';
+    public static TO = 'To';
+    public static BETWEEN = 'In Between';
+
+    public static GTE = "Greater Than Equal";
+    public static GT = "Greater Than";
+    public static LTE = "Less Than Equal";
+    public static LT = "Less Than";
+
 }
