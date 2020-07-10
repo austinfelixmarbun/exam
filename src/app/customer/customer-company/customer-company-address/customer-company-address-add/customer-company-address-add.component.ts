@@ -8,6 +8,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -81,8 +82,8 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
     this.addressType = new RefMasterObj();
-    this.addressType.RefMasterTypeCode = "CUST_ADDR_TYPE";
-    this.addressType.ReserveField1 = "COMPANY";
+    this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
+    this.addressType.ReserveField1 = CommonConstant.CustTypeCompany;
     this.http.post(this.getRefMasterWithReserveFieldUrl, this.addressType).subscribe(
       (response) => {
         this.listAddressType = response['ReturnObject'];

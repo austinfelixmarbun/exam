@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { ActivatedRoute } from '@angular/router';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder',
@@ -69,7 +70,7 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
             }
 
             if(this.TotalShare < 100){
-              this.toastr.warningMessage("Total Share % must be 100%");
+              this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_MUST_100);
               return;
             }
             this.outputTab.emit({ stepMode: 'next'});

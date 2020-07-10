@@ -9,6 +9,7 @@ import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -92,7 +93,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   ngOnInit() {
 
     var generalSettingObjDefLocalNationality = {
-      GsCode: "DEF_LOCAL_NATIONALITY"
+      GsCode: CommonConstant.GSCodeDefLocalNationality
     }
     this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
       (response) => {
@@ -136,7 +137,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
       (response) => {
         this.tempCustPersonalObj = response;
         var refMasterObjMrNationalityCode = {
-          RefMasterTypeCode: "NATIONALITY"
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
         }
         this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrNationalityCode).subscribe(
           (response) => {
@@ -146,7 +147,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
               this.CustomerDetailForm.patchValue({
                 MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode
               });
-              if (this.tempCustPersonalObj.MrNationalityCode == "LOCAL") {
+              if (this.tempCustPersonalObj.MrNationalityCode == CommonConstant.NationalityCodeLocal) {
                 this.flag = true;
                 this.lookUpObj.isRequired = false;
               } else {
@@ -163,7 +164,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
               }
             } else {
               this.CustomerDetailForm.patchValue({
-                MrNationalityCode: "LOCAL"
+                MrNationalityCode: CommonConstant.NationalityCodeLocal
               });
               this.flag = true;
               this.lookUpObj.isRequired = false;
@@ -172,7 +173,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         );
 
         var refMasterObjMrSalutationCode = {
-          RefMasterTypeCode: "SALUTATION"
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSalutation
         }
         this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrSalutationCode).subscribe(
           (response) => {
@@ -190,7 +191,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
           }
         );
         var refMasterObjMrEducationCode = {
-          RefMasterTypeCode: "EDUCATION"
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation
         }
         this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrEducationCode).subscribe(
           (response) => {
@@ -207,7 +208,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
           }
         );
         var refMasterObjMrReligionCode = {
-          RefMasterTypeCode: "RELIGION"
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion
         }
         this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrReligionCode).subscribe(
           (response) => {
@@ -224,7 +225,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
           }
         );
         var refMasterObjMrMaritalStatCode = {
-          RefMasterTypeCode: "MARITAL_STAT"
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat
         }
         this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
           (response) => {
@@ -279,8 +280,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.MrNationalityCode = this.CustomerDetailForm.controls["MrNationalityCode"].value;
     this.custPersonalObj.NoOfResidence = this.CustomerDetailForm.controls["NoOfResidence"].value;
 
-    if (this.custPersonalObj.MrNationalityCode == "LOCAL") {
-      this.custPersonalObj.WnaCountryCode = "IDN";
+    if (this.custPersonalObj.MrNationalityCode == CommonConstant.NationalityCodeLocal) {
+      this.custPersonalObj.WnaCountryCode = CommonConstant.WnaCountryCodeIdn;
     }
     if (this.tempCustPersonalObj.WnaCountryCode != null && this.tempCountryCode == null) {
       this.custPersonalObj.WnaCountryCode = this.tempCustPersonalObj.WnaCountryCode;
@@ -307,7 +308,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     );
   }
   onOptionsSelected(event) {
-    if (event.target.value == "LOCAL") {
+    if (event.target.value == CommonConstant.NationalityCodeLocal) {
       this.flag = true;
       this.lookUpObj.isRequired = false;
     } else {

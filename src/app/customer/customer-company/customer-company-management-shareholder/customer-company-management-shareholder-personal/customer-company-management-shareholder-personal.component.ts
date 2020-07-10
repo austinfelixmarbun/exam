@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-personal',
@@ -77,7 +78,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.inputLookupCustPersonalObj.genericJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.isRequired = false;
     var refMasterObjMrGenderCode= {
-      RefMasterTypeCode: "GENDER",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
@@ -90,7 +91,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     );
 	
 	   var refMasterObjMrIdTypeCode = {
-      RefMasterTypeCode: "ID_TYPE"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
@@ -109,7 +110,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     );
    
     var refMasterObjMrJobPositionCode = {
-      RefMasterTypeCode: "JOB_POSITION",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
@@ -121,8 +122,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       }
     );
     var refMasterObjMrCustModelCode = {
-      RefMasterTypeCode: "CUST_MODEL",
-      Reservefield1: "PERSONAL",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      Reservefield1: CommonConstant.CustTypePersonal,
       RowVersion: ""
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(

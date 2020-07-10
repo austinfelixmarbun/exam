@@ -11,6 +11,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AddrObj } from 'app/shared/model/AddrObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
  
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -100,8 +101,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
     this.addressType = new RefMasterObj();
-    this.addressType.RefMasterTypeCode = "CUST_ADDR_TYPE";
-    this.addressType.ReserveField1 = "PERSONAL";
+    this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
+    this.addressType.ReserveField1 = CommonConstant.CustTypePersonal;
     this.http.post(this.getRefMasterWithReserveField, this.addressType).subscribe(
       (response) => {
           this.listAddressType = response['ReturnObject'];

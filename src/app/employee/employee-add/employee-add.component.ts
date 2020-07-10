@@ -15,6 +15,8 @@ import { EmpBankAccObj } from "app/shared/model/EmpBankAccObj.Model";
 import { map, mergeMap } from "rxjs/operators";
 import { GeneralSettingObj } from "app/shared/model/GeneralSettingObj.Model";
 import { forkJoin } from "rxjs";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
+import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 
 @Component({
   selector: "app-employee-add",
@@ -102,7 +104,7 @@ export class EmployeeAddComponent implements OnInit {
     });
 
     this.generalSettingObj = new GeneralSettingObj();
-    this.generalSettingObj.GsCode = "PASSWORD_REGEX";
+    this.generalSettingObj.GsCode = CommonConstant.GsCodePasswordRegex;
     httpClient.post(AdInsConstant.GetGeneralSettingByCode, this.generalSettingObj).subscribe(
       (response) => {
         this.resultData = response;
@@ -119,7 +121,7 @@ export class EmployeeAddComponent implements OnInit {
     this.businessDt = new Date(context["BusinessDt"]);
 
     var RefMasterIdType = {
-      RefMasterTypeCode: "ID_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
     }
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
@@ -271,7 +273,7 @@ export class EmployeeAddComponent implements OnInit {
 
   SaveForm() {
     if (Date.parse(this.RefEmpForm.controls.JoinDt.value) > Date.parse(formatDate(this.businessDt,  'yyyy-MM-dd', 'en-US'))) {
-      this.toastr.warningMessage("Join Date Must Be Lesser Than Business Date")
+      this.toastr.warningMessage(ExceptionConstant.JOIN_DATE_MUST_LESS_THAN_+ "Business Date")
       return;
     }
 

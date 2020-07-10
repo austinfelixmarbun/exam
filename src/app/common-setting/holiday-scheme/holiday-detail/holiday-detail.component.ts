@@ -9,6 +9,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { HolidayCopyObj } from 'app/shared/model/HolidayCopy.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-holiday-detail',
@@ -75,7 +76,7 @@ export class HolidayDetailComponent implements OnInit {
   }
 
   Copy(key: any, value: any) {
-    if (confirm("The copy will replace all existing holiday listings")) {
+    if (confirm(ExceptionConstant.COPY_REPLACE_CONFIRMATION + "holiday listings")) {
       this.copyHoliday = new HolidayCopyObj();
       this.copyHoliday.HolidaySchmHId = this.HolidaySchmHId;
       this.copyHoliday.HolidaySchmHIdCopy = this.HolidaySchmHIdCopy;
