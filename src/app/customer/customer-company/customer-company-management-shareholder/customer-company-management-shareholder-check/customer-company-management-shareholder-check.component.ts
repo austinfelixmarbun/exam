@@ -9,6 +9,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-check',
@@ -88,7 +89,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
 
   deleteItem(CustCompanyMgmntShrholderId: any) {
-    if (confirm('Are you sure to delete this record?')) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
 

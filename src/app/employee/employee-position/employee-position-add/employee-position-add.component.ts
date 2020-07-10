@@ -11,6 +11,7 @@ import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { OrgJobTitleObj } from 'app/shared/model/OrgJobTitleObj.Model';
 import { formatDate } from '@angular/common';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
     selector: 'app-employee-position',
@@ -125,7 +126,7 @@ export class EmployeePositionAddComponent implements OnInit {
                 console.log(error);
             });
 
-        this.refMasterTypeCode = "SKILL_LVL";
+        this.refMasterTypeCode = CommonConstant.RefMasterTypeCodeSkillLvl;
         var RefMasterObj = { RefMasterTypeCode: this.refMasterTypeCode, MasterCode: "" };
         this.httpClient.post(this.refMasterUrl, RefMasterObj).subscribe(
             (response) => {

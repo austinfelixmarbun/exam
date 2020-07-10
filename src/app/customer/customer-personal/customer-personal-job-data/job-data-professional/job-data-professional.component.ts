@@ -15,6 +15,7 @@ import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPerso
 import { formatDate } from '@angular/common';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-job-data-professional',
@@ -206,7 +207,7 @@ export class JobDataProfessionalComponent implements OnInit {
 
   setJobAddr(){
     this.jobAddressObj.CustId = this.IdCust;
-    this.jobAddressObj.MrCustAddrTypeCode = 'JOB';
+    this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
     this.jobAddressObj.Addr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value; 
     this.jobAddressObj.FullAddr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataProForm.controls["jobAddressZipcode"]["controls"].value.value; 
     this.jobAddressObj.AreaCode3 = this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode3.value;
@@ -253,8 +254,8 @@ export class JobDataProfessionalComponent implements OnInit {
       this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
-      this.jobAddressObj.MrCustAddrTypeCode = "JOB";
-      this.othBizAddrObj.MrCustAddrTypeCode = "OTH_BIZ";
+      this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
+      this.othBizAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
@@ -284,7 +285,7 @@ export class JobDataProfessionalComponent implements OnInit {
       this.jobAddressObj = new CustAddrObj;
       this.setJobAddr();
       this.othBizAddrObj = new CustAddrObj;
-      this.othBizAddrObj.MrCustAddrTypeCode = "OTH_BIZ";
+      this.othBizAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;

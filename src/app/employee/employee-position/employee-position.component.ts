@@ -13,6 +13,7 @@ import { formatDate, DecimalPipe } from '@angular/common';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 @Component({
   selector: 'app-employee-position',
   templateUrl: './employee-position.component.html',
@@ -122,7 +123,7 @@ export class EmployeePositionComponent implements OnInit {
   }
 
   delete(empPositionId: any) {
-    if (confirm("Are you sure to delete this record?")) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.empPositionObj = new EmpPositionObj();
       this.empPositionObj.empPositionId = empPositionId;
       this.httpClient.post(this.deleteUrl, this.empPositionObj).subscribe(

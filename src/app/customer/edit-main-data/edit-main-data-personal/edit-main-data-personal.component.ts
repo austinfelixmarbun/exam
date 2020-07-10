@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { ifStmt } from '@angular/compiler/src/output/output_ast';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -77,7 +78,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
   
     var refMasterObjGender = {
-      RefMasterTypeCode: "GENDER",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjGender).subscribe(
@@ -91,7 +92,7 @@ export class EditMainDataPersonalComponent implements OnInit {
       }
     );
     var refMasterObjMrIdTypeCode = {
-      RefMasterTypeCode: "ID_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
@@ -110,8 +111,8 @@ export class EditMainDataPersonalComponent implements OnInit {
       }
     );
     var refMasterObjCustModel = {
-      RefMasterTypeCode: "CUST_MODEL",
-      ReserveField1: "PERSONAL",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      ReserveField1: CommonConstant.CustTypePersonal,
       RowVersion: ""
     }
 

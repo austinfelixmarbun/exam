@@ -16,6 +16,7 @@ import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
 import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-negative-customer-detail',
@@ -101,11 +102,11 @@ export class NegativeCustomerDetailComponent implements OnInit {
     });
 
     var refMasterIdTypeObj = new RefMasterObj();
-    refMasterIdTypeObj.RefMasterTypeCode = "ID_TYPE";
+    refMasterIdTypeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdType;
     var refMasterNegativeCustTypeObj = new RefMasterObj();
-    refMasterNegativeCustTypeObj.RefMasterTypeCode = "NEG_CUST_TYPE";
+    refMasterNegativeCustTypeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustType;
     var refMasterNegativeSourceObj = new RefMasterObj();
-    refMasterNegativeSourceObj.RefMasterTypeCode = "NEG_CUST_SOURCE";
+    refMasterNegativeSourceObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustSource;
     let requestIdType = this.httpClient.post(this.refMasterByTypeUrl, refMasterIdTypeObj);
     let requestNegativeCustType = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeCustTypeObj);
     let requestNegativeSource = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeSourceObj);
@@ -183,7 +184,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
     criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
-    criteriaObj.value = "PERSONAL";
+    criteriaObj.value = CommonConstant.CustTypePersonal;
     criteriaList.push(criteriaObj);
     this.inputLookupCustPersonalObj.addCritInput = criteriaList;
     this.inputLookupCustPersonalObj.isRequired = false;
@@ -198,7 +199,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
     criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
-    criteriaObj.value = "COMPANY";
+    criteriaObj.value = CommonConstant.CustTypeCompany;
     criteriaList.push(criteriaObj);
     this.inputLookupCustCompanyObj.addCritInput = criteriaList;
     this.inputLookupCustCompanyObj.isRequired = false;
@@ -399,7 +400,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
 
   custTypeHandler(e) {
     var selected = e.target.value;
-    if (selected == "PERSONAL") {
+    if (selected == CommonConstant.CustTypePersonal) {
       this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', [Validators.required]));
       this.NegativeCustForm.addControl('IdNo', new FormControl('', [Validators.required]));
       this.NegativeCustForm.addControl('BirthPlace', new FormControl('', [Validators.required]));
@@ -407,7 +408,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
       this.NegativeCustForm.addControl('MotherMaidenName', new FormControl('', [Validators.required]));
       this.NegativeCustForm.removeControl('CompanyLookup');
     }
-    else if (selected == "COMPANY") {
+    else if (selected == CommonConstant.CustTypeCompany) {
       this.NegativeCustForm.removeControl('MrIdTypeCode');
       this.NegativeCustForm.removeControl('IdNo');
       this.NegativeCustForm.removeControl('BirthPlace');
@@ -422,11 +423,11 @@ export class NegativeCustomerDetailComponent implements OnInit {
 
     this.NegativeCustForm.reset();
     var refMasterIdTypeObj = new RefMasterObj();
-    refMasterIdTypeObj.RefMasterTypeCode = "ID_TYPE";
+    refMasterIdTypeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdType;
     var refMasterNegativeCustTypeObj = new RefMasterObj();
-    refMasterNegativeCustTypeObj.RefMasterTypeCode = "NEG_CUST_TYPE";
+    refMasterNegativeCustTypeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustType;
     var refMasterNegativeSourceObj = new RefMasterObj();
-    refMasterNegativeSourceObj.RefMasterTypeCode = "NEG_CUST_SOURCE";
+    refMasterNegativeSourceObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustSource;
     let requestIdType = this.httpClient.post(this.refMasterByTypeUrl, refMasterIdTypeObj);
     let requestNegativeCustType = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeCustTypeObj);
     let requestNegativeSource = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeSourceObj);
@@ -453,7 +454,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var birthDt = datePipe.transform(e.birthDate, 'yyyy-MM-dd');
     var custAddr = new CustAddrObj();
     custAddr.CustId = e.custId;
-    custAddr.MrCustAddrTypeCode = "LEGAL";
+    custAddr.MrCustAddrTypeCode = CommonConstant.CustAddrTypeLegal;
     this.httpClient.post(AdInsConstant.GetCustAddrByMrCustAddrType, custAddr).subscribe(
       (response: any) => {
         this.NegativeCustForm.patchValue({
@@ -500,7 +501,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   getLookupCustCompanyResponse(e) {
     var custAddr = new CustAddrObj();
     custAddr.CustId = e.custId;
-    custAddr.MrCustAddrTypeCode = "LEGAL";
+    custAddr.MrCustAddrTypeCode = CommonConstant.CustAddrTypeLegal;
     this.httpClient.post(AdInsConstant.GetCustAddrByMrCustAddrType, custAddr).subscribe(
       (response: any) => {
         this.NegativeCustForm.patchValue({

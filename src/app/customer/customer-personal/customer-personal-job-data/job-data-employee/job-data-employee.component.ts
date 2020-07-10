@@ -15,6 +15,7 @@ import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPerso
 import { formatDate } from '@angular/common';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-job-data-employee',
@@ -151,7 +152,7 @@ export class JobDataEmployeeComponent implements OnInit {
     this.industryLookUpObj.isRequired = false;
 
     this.jobPosition = new RefMasterObj();
-    this.jobPosition.RefMasterTypeCode = "JOB_POSITION";
+    this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
     this.http.post(this.getListActiveRefMaster, this.jobPosition).subscribe(
       (response) => {
         this.listJobPosition = response['ReturnObject'];
@@ -159,7 +160,7 @@ export class JobDataEmployeeComponent implements OnInit {
       });
 
     this.jobStatus = new RefMasterObj();
-    this.jobStatus.RefMasterTypeCode = "JOB_STAT";
+    this.jobStatus.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobStat;
     this.http.post(this.getListActiveRefMaster, this.jobStatus).subscribe(
       (response) => {
         this.listJobStatus = response['ReturnObject'];
@@ -167,7 +168,7 @@ export class JobDataEmployeeComponent implements OnInit {
       });
 
     this.companyScale = new RefMasterObj();
-    this.companyScale.RefMasterTypeCode = "COY_SCALE";
+    this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
     this.http.post(this.getListActiveRefMaster, this.companyScale).subscribe(
       (response) => {
         this.listCompanyScale = response['ReturnObject'];
@@ -317,7 +318,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
   setJobAddr() {
     this.jobAddressObj.CustId = this.IdCust;
-    this.jobAddressObj.MrCustAddrTypeCode = 'JOB';
+    this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
     this.jobAddressObj.Addr = this.JobDataEmpForm.controls["jobAddress"]["controls"].Addr.value;
     this.jobAddressObj.FullAddr = this.JobDataEmpForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataEmpForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataEmpForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataEmpForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataEmpForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataEmpForm.controls["jobAddressZipcode"]["controls"].value.value;
     this.jobAddressObj.AreaCode3 = this.JobDataEmpForm.controls["jobAddress"]["controls"].AreaCode3.value;
@@ -343,7 +344,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
   setOthBizAddr() {
     this.otherAddressObj.CustId = this.IdCust;
-    this.otherAddressObj.MrCustAddrTypeCode = 'OTH_BIZ';
+    this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
     this.otherAddressObj.Addr = this.JobDataEmpForm.controls["otherBusinessAddress"]["controls"].Addr.value;  
     this.otherAddressObj.FullAddr = this.JobDataEmpForm.controls["otherBusinessAddress"]["controls"].Addr.value + " RT: " + this.JobDataEmpForm.controls["otherBusinessAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataEmpForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value + " " + this.JobDataEmpForm.controls["otherBusinessAddress"]["controls"].AreaCode2.value + ", " + this.JobDataEmpForm.controls["otherBusinessAddress"]["controls"].AreaCode1.value + " " + this.JobDataEmpForm.controls["otherBusinessAddressZipcode"]["controls"].value.value; 
     this.otherAddressObj.AreaCode3 = this.JobDataEmpForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value;
@@ -400,8 +401,8 @@ export class JobDataEmployeeComponent implements OnInit {
       this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
-      this.jobAddressObj.MrCustAddrTypeCode = 'JOB';
-      this.otherAddressObj.MrCustAddrTypeCode = 'OTH_BIZ';
+      this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
+      this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-customer-company-address',
@@ -49,7 +50,7 @@ export class CustomerCompanyAddressComponent implements OnInit {
       (response) => {
         this.legalAddr = response; 
         if (this.legalAddr.Addr == null) {
-          this.toastr.warningMessage("Please complete Legal Address First");
+          this.toastr.warningMessage(ExceptionConstant.PLEASE_COMPLETE_LEGAL_ADDRESS);
         }
         else {
           this.outputTab.emit({ stepMode: "next" });

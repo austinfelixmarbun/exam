@@ -15,6 +15,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { ActivatedRoute } from '@angular/router';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-contact-add',
@@ -121,7 +122,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.UcAddressObj = new UcAddressObj();
 
     var generalSettingObjDefLocalNationality = {
-      GsCode: "DEF_LOCAL_NATIONALITY"
+      GsCode:  CommonConstant.GSCodeDefLocalNationality
     }
      
     this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
@@ -217,19 +218,19 @@ export class CustomerContactAddComponent implements OnInit {
     );
 
     var refMasterObjMrNationalityCode = {
-      RefMasterTypeCode: "NATIONALITY"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrNationalityCode).subscribe(
       (response) => {
         this.tempNationality = response["ReturnObject"];
         this.CustomerContactForm.patchValue({
-          MrNationalityCode: "LOCAL"
+          MrNationalityCode: CommonConstant.NationalityCodeLocal
         });
         this.lookUpObj.isRequired = false;
         this.flag = true;
       });
     var refMasterObjMrMaritalStatCode = {
-      RefMasterTypeCode: "MARITAL_STAT"
+      RefMasterTypeCode:  CommonConstant.RefMasterTypeCodeMaritalStat
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
       (response) => {
@@ -242,7 +243,7 @@ export class CustomerContactAddComponent implements OnInit {
       });
 
     var refMasterObjMrEducationCode = {
-      RefMasterTypeCode: "EDUCATION"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrEducationCode).subscribe(
       (response) => {
@@ -254,7 +255,7 @@ export class CustomerContactAddComponent implements OnInit {
         }
       });
     var refMasterObjMrReligionCode = {
-      RefMasterTypeCode: "RELIGION"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrReligionCode).subscribe(
       (response) => {
@@ -267,7 +268,7 @@ export class CustomerContactAddComponent implements OnInit {
       });
 
     var refMasterObjMrCustRelationshipCode = {
-      RefMasterTypeCode: "CUST_RELATIONSHIP"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {
@@ -280,7 +281,7 @@ export class CustomerContactAddComponent implements OnInit {
       });
 
     var refMasterObjMrGenderCode = {
-      RefMasterTypeCode: "GENDER",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
@@ -460,7 +461,7 @@ export class CustomerContactAddComponent implements OnInit {
           MobilePhnNo2: this.tempCustPersonal.MobilePhnNo2,
           Email: this.tempCustPersonal.Email1
         });
-        if (this.tempCustPersonal.MrNationalityCode != "LOCAL") {
+        if (this.tempCustPersonal.MrNationalityCode != CommonConstant.NationalityCodeLocal) {
           this.flag = false;
           var countryCode = {
             CountryCode: this.tempCustPersonal.WnaCountryCode
@@ -543,7 +544,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
   }
   onOptionsNationalitySelected(event) {
-    if (event.target.value == "LOCAL") {
+    if (event.target.value == CommonConstant.NationalityCodeLocal) {
       this.lookUpObj.isRequired = false;
       this.flag = true;
     } else {

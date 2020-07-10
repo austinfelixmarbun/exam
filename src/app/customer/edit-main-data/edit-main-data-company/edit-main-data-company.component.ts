@@ -6,6 +6,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-edit-main-data-company',
@@ -62,8 +63,8 @@ export class EditMainDataCompanyComponent implements OnInit {
 
   ngOnInit() {
     var refMasterObjCustModel = {
-      RefMasterTypeCode: "CUST_MODEL",
-      ReserveField1: "COMPANY",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      ReserveField1: CommonConstant.CustTypeCompany,
       RowVersion: ""
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
@@ -77,7 +78,7 @@ export class EditMainDataCompanyComponent implements OnInit {
       }
     );
     var refMasterObjMrCompanyTypeCode = {
-      RefMasterTypeCode: "COMPANY_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(

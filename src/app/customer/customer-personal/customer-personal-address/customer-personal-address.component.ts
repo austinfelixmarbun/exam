@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
  
  
 @Component({
@@ -41,22 +43,22 @@ export class CustomerPersonalAddressComponent implements OnInit {
   }
   next() { 
     this.custAddrObj = new CustAddrObj();
-    this.custAddrObj.MrCustAddrTypeCode= "LEGAL";
+    this.custAddrObj.MrCustAddrTypeCode= CommonConstant.CustAddrTypeLegal;
     this.custAddrObj.CustId = this.IdCust;
     this.http.post(AdInsConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
       (response) => { 
         this.legalAddr = response; 
-        this.custAddrObj.MrCustAddrTypeCode = "RESIDENCE";
+        this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeResidence;
         this.http.post(AdInsConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
           (response) => { 
             this.residenceAddr = response; 
             if(this.legalAddr.Addr==null || this.residenceAddr.Addr == null){
               if(this.legalAddr.Addr!=null && this.residenceAddr.Addr == null){
-                this.toastr.warningMessage("Please complete Residence Address First");
+                this.toastr.warningMessage(ExceptionConstant.PLEASE_COMPLETE_RESIDENCE_ADDRESS);
               }else if( this.legalAddr.Addr==null && this.residenceAddr.Addr != null){
-                this.toastr.warningMessage("Please complete Legal Address First");
+                this.toastr.warningMessage(ExceptionConstant.PLEASE_COMPLETE_LEGAL_ADDRESS);
               }else{
-                this.toastr.warningMessage("Please complete Legal and Residence Address First");
+                this.toastr.warningMessage(ExceptionConstant.PLEASE_COMPLETE_LEGAL_AND_RESIDENCE_ADDRESS);
               }
 
             } 

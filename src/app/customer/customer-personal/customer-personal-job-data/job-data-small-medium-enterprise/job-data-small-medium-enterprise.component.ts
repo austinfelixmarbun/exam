@@ -15,6 +15,7 @@ import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPerso
 import { formatDate } from '@angular/common';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
  
 @Component({
   selector: 'app-job-data-sme',
@@ -147,7 +148,7 @@ export class JobDataSmeComponent implements OnInit {
     this.industryLookUpObj.isRequired = true;
 
     this.jobPosition = new RefMasterObj();
-    this.jobPosition.RefMasterTypeCode = "JOB_POSITION";
+    this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
     this.http.post(this.getListActiveRefMaster, this.jobPosition).subscribe(
     (response) => {
         this.listJobPosition = response['ReturnObject'];
@@ -155,7 +156,7 @@ export class JobDataSmeComponent implements OnInit {
     });
 
     this.companyScale = new RefMasterObj();
-    this.companyScale.RefMasterTypeCode = "COY_SCALE";
+    this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
     this.http.post(this.getListActiveRefMaster, this.companyScale).subscribe(
     (response) => {
         this.listCompanyScale = response['ReturnObject'];
@@ -306,7 +307,7 @@ export class JobDataSmeComponent implements OnInit {
 
   setJobAddr(){
     this.jobAddressObj.CustId = this.IdCust;
-    this.jobAddressObj.MrCustAddrTypeCode = 'JOB';
+    this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
     this.jobAddressObj.Addr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value; 
     this.jobAddressObj.FullAddr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["jobAddressZipcode"]["controls"].value.value;  
     this.jobAddressObj.AreaCode3 = this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value;
@@ -332,7 +333,7 @@ export class JobDataSmeComponent implements OnInit {
 
   setOthBizAddr(){
     this.otherAddressObj.CustId = this.IdCust;
-    this.otherAddressObj.MrCustAddrTypeCode = 'OTH_BIZ';
+    this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
     this.otherAddressObj.Addr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value;
     this.otherAddressObj.FullAddr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["otherBusinessAddressZipcode"]["controls"].value.value; 
     this.otherAddressObj.AreaCode3 = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value;
@@ -388,8 +389,8 @@ export class JobDataSmeComponent implements OnInit {
       this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
-      this.jobAddressObj.MrCustAddrTypeCode = 'JOB';
-      this.otherAddressObj.MrCustAddrTypeCode = 'OTH_BIZ';
+      this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
+      this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
