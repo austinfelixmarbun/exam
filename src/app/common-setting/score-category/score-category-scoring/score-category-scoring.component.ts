@@ -78,8 +78,10 @@ export class ScoreCategoryScoringComponent implements OnInit {
 
   deleteScore(i){
     if (confirm('Are you sure to delete this record?')) {
-      var custSocmedObjs = this.RefScoreCategoryForm.controls.RefScoreCategoryTypeObjs as FormArray;
-      custSocmedObjs.removeAt(i);
+      var scoreForm = this.RefScoreCategoryForm.controls.RefScoreCategoryTypeObjs as FormArray;
+      scoreForm.removeAt(i);
+      this.maxBottomValue.splice(i, 1);
+      this.minTopValue.splice(i, 1);
       this.ListHexColorValue.splice(i, 1);
     }
   }
@@ -140,7 +142,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
         ||
         (x.TopValue >= this.listRefScoreCategoryObj.RefScoreCategoryObjs[i].BottomValue
           && x.TopValue <= this.listRefScoreCategoryObj.RefScoreCategoryObjs[i].TopValue)));
-          
+
       if(checkOverlap != -1 && checkOverlap != i){
         this.toastr.warningMessage("Score cannot be overlap with each other.");
         return;
