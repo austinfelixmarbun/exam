@@ -55,8 +55,10 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
     this.http.post(this.getValueReasonModel, obj).subscribe(
       (response) => {
         console.log(response);
-        this.allRefReasonMethod = response['ReturnObject'];
-        this.ProdOfferingHDeactForm.patchValue({ Reason: response['ReturnObject'][0]['Key'] });
+        if (response['ReturnObject'].length > 0) {
+          this.allRefReasonMethod = response['ReturnObject'];
+          this.ProdOfferingHDeactForm.patchValue({ Reason: response['ReturnObject'][0]['Key'] });
+        }
       },
       (error) => {
         console.log(error);
@@ -68,7 +70,9 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.OfficeList = response['ReturnObject'];
+        if (response['ReturnObject'].length > 0) {          
+          this.OfficeList = response['ReturnObject'];
+        }
       },
       error => {
         console.log(error);

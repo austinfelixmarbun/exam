@@ -51,7 +51,9 @@ export class CustomerViewAddressComponent implements OnInit {
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
-        this.responseResultCustAddr = response['ReturnObject'];
+        if (response['ReturnObject'].length > 0) {
+          this.responseResultCustAddr = response['ReturnObject'];
+        }
       },
       error => {
         this.router.navigateByUrl('Error');
@@ -67,16 +69,20 @@ export class CustomerViewAddressComponent implements OnInit {
         refMasterObj.ReserveField1 = this.CustType;
         this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObj).subscribe(
           response => {
-            this.ddlItem = response['ReturnObject'];
-            this.CustForm.patchValue({
-              DdlAddress: this.ddlItem[0].Value
-            });
+            if (response['ReturnObject'].length > 0) {
+              this.ddlItem = response['ReturnObject'];
+              this.CustForm.patchValue({
+                DdlAddress: this.ddlItem[0].Value
+              });
+            }
           }
         );
       });
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
-        this.responseResultCustAddrHist = response['ReturnObject'];
+        if (response['ReturnObject'].length > 0) {
+          this.responseResultCustAddrHist = response['ReturnObject'];
+        }
       },
       error => {
         this.router.navigateByUrl('Error');

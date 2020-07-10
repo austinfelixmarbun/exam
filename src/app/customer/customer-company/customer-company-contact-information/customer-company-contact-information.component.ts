@@ -80,7 +80,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
-        this.tempMrJobPositionCode = response["ReturnObject"];
+        console.log(response);
+        if (response["ReturnObject"].length > 0)
+          this.tempMrJobPositionCode = response["ReturnObject"];
       }
     );
     var refMasterObjMrGenderCode = {
@@ -89,7 +91,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
-        this.tempMrGenderCode = response["ReturnObject"];
+        console.log(response);
+        if (response["ReturnObject"].length > 0)
+          this.tempMrGenderCode = response["ReturnObject"];
       }
     );
 

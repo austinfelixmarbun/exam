@@ -176,19 +176,22 @@ export class OfficeAddComponent implements OnInit {
 
     this.httpClient.post(AdInsConstant.GetRefMasterTypeOfficeWithoutCG, this.lookUpRefMasterOfficeObj).subscribe(
       (response) => {
-        this.lookupOfficeType = response['ReturnObject'];
+        if (response['ReturnObject'].length > 0) {
+          this.lookupOfficeType = response['ReturnObject'];
 
-        this.arrCrit = new Array();
-        var critObj = new CriteriaObj();
-        critObj.restriction = AdInsConstant.RestrictionIn;
-        critObj.propName = 'MR_OFFICE_TYPE_CODE';
-        critObj.listValue = new Array();
-        this.lookupOfficeType.forEach(element => {
-          critObj.listValue.push(element.Key);
-        });
+          this.arrCrit = new Array();
+          var critObj = new CriteriaObj();
+          critObj.restriction = AdInsConstant.RestrictionIn;
+          critObj.propName = 'MR_OFFICE_TYPE_CODE';
+          critObj.listValue = new Array();
+          this.lookupOfficeType.forEach(element => {
+            critObj.listValue.push(element.Key);
+          });
+  
+          this.arrCrit.push(critObj);
+          this.InputLookupObj.addCritInput = this.arrCrit;
+        }
 
-        this.arrCrit.push(critObj);
-        this.InputLookupObj.addCritInput = this.arrCrit;
       },
       (error) => {
         console.log(error);
@@ -197,10 +200,12 @@ export class OfficeAddComponent implements OnInit {
     if (this.pageType == "add") {
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
         (response) => {
-          this.allOfficeClass = response['ReturnObject'];
-          this.OfficeForm.patchValue({
-            MrOfficeClassCode: this.allOfficeClass[0].Key
-          });
+          if (response['ReturnObject'].length > 0) {
+            this.allOfficeClass = response['ReturnObject'];
+            this.OfficeForm.patchValue({
+              MrOfficeClassCode: this.allOfficeClass[0].Key
+            });
+          }
         },
         (error) => {
           console.log(error);
@@ -208,10 +213,12 @@ export class OfficeAddComponent implements OnInit {
 
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
         (response) => {
-          this.allCgType = response['ReturnObject'];
-          this.OfficeForm.patchValue({
-            MrCenterGrpTypeCode: this.allCgType[0].Key
-          });
+          if (response['ReturnObject'].length > 0) {
+            this.allCgType = response['ReturnObject'];
+            this.OfficeForm.patchValue({
+              MrCenterGrpTypeCode: this.allCgType[0].Key
+            });
+          }
 
         },
         (error) => {
@@ -219,20 +226,24 @@ export class OfficeAddComponent implements OnInit {
         });
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterKonsyaType).subscribe(
         (response) => {
-          this.allKonSya = response['ReturnObject'];
-          this.OfficeForm.patchValue({
-            KonSya: this.allKonSya[0].Key
-          });
+          if (response['ReturnObject'].length > 0) {
+            this.allKonSya = response['ReturnObject'];
+            this.OfficeForm.patchValue({
+              KonSya: this.allKonSya[0].Key
+            });
+          }
         },
         (error) => {
           console.log(error);
         })
       this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
         (response) => {
-          this.allOfficeType = response['ReturnObject'];
-          this.OfficeForm.patchValue({
-            OfficeType: this.allOfficeType[0].Key
-          });
+          if (response['ReturnObject'].length > 0) {
+            this.allOfficeType = response['ReturnObject'];
+            this.OfficeForm.patchValue({
+              OfficeType: this.allOfficeType[0].Key
+            });
+          }
         },
         (error) => {
           console.log(error);
@@ -240,20 +251,24 @@ export class OfficeAddComponent implements OnInit {
 
       this.httpClient.post(this.holidaySchmUrl, null).subscribe(
         (response) => {
-          this.allHolidaySchm = response['ReturnObject'];
-          this.OfficeForm.patchValue({
-            HolidayScheme: this.allHolidaySchm[0].HolidaySchmHId
-          });
+          if (response['ReturnObject'].length > 0) {
+            this.allHolidaySchm = response['ReturnObject'];
+            this.OfficeForm.patchValue({
+              HolidayScheme: this.allHolidaySchm[0].HolidaySchmHId
+            });
+          }
         },
         (error) => {
           console.log(error);
         })
       this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
         (response) => {
-          this.allWorkingHourSchm = response['ReturnObject'];
-          this.OfficeForm.patchValue({
-            WorkingHourScheme: this.allWorkingHourSchm[0].WorkingHourSchmHId
-          });
+          if (response['ReturnObject'].length > 0) {
+            this.allWorkingHourSchm = response['ReturnObject'];
+            this.OfficeForm.patchValue({
+              WorkingHourScheme: this.allWorkingHourSchm[0].WorkingHourSchmHId
+            });
+          }
         },
         (error) => {
           console.log(error);
@@ -319,10 +334,12 @@ export class OfficeAddComponent implements OnInit {
           this.inputFieldAddr.inputLookupObj.nameSelect = this.resultData.Zipcode;
           this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
             (response) => {
-              this.allCgType = response['ReturnObject'];
-              this.OfficeForm.patchValue({
-                MrCenterGrpTypeCode: this.resultData.MrCenterGrpTypeCode
-              });
+              if (response['ReturnObject'].length > 0) {
+                this.allCgType = response['ReturnObject'];
+                this.OfficeForm.patchValue({
+                  MrCenterGrpTypeCode: this.resultData.MrCenterGrpTypeCode
+                });
+              }
 
             },
             (error) => {
@@ -331,51 +348,61 @@ export class OfficeAddComponent implements OnInit {
 
           this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
             (response) => {
-              this.allOfficeClass = response['ReturnObject'];
-              this.OfficeForm.patchValue({
-                MrOfficeClassCode: this.resultData.MrOfficeClassCode
-              });
+              if (response['ReturnObject'].length > 0) {
+                this.allOfficeClass = response['ReturnObject'];
+                this.OfficeForm.patchValue({
+                  MrOfficeClassCode: this.resultData.MrOfficeClassCode
+                });
+              }
             },
             (error) => {
               console.log(error);
             })
           this.httpClient.post(this.officeTypeUrl, this.refMasterOfficeType).subscribe(
             (response) => {
-              this.allOfficeType = response['ReturnObject'];
-              this.OfficeForm.patchValue({
-                OfficeType: this.resultData.MrOfficeTypeCode
-              });
+              if (response['ReturnObject'].length > 0) {
+                this.allOfficeType = response['ReturnObject'];
+                this.OfficeForm.patchValue({
+                  OfficeType: this.resultData.MrOfficeTypeCode
+                });
+              }
             },
             (error) => {
               console.log(error);
             })
           this.httpClient.post(this.konSyaUrl, this.refMasterKonsyaType).subscribe(
             (response) => {
-              this.allKonSya = response['ReturnObject'];
-
-              this.OfficeForm.patchValue({
-                KonSya: this.resultData.MrKonvenSyariahCode
-              });
+              if (response['ReturnObject'].length > 0) {
+                this.allKonSya = response['ReturnObject'];
+  
+                this.OfficeForm.patchValue({
+                  KonSya: this.resultData.MrKonvenSyariahCode
+                });
+              }
             },
             (error) => {
               console.log(error);
             })
           this.httpClient.post(this.holidaySchmUrl, null).subscribe(
             (response) => {
-              this.allHolidaySchm = response['ReturnObject'];
-              this.OfficeForm.patchValue({
-                HolidayScheme: this.resultData.HolidaySchmHId
-              });
+              if (response['ReturnObject'].length > 0) {
+                this.allHolidaySchm = response['ReturnObject'];
+                this.OfficeForm.patchValue({
+                  HolidayScheme: this.resultData.HolidaySchmHId
+                });
+              }
             },
             (error) => {
               console.log(error);
             })
           this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
             (response) => {
-              this.allWorkingHourSchm = response['ReturnObject'];
-              this.OfficeForm.patchValue({
-                WorkingHourScheme: this.resultData.WorkingHourSchmHId
-              });
+              if (response['ReturnObject'].length > 0) {
+                this.allWorkingHourSchm = response['ReturnObject'];
+                this.OfficeForm.patchValue({
+                  WorkingHourScheme: this.resultData.WorkingHourSchmHId
+                });
+              }
             },
             (error) => {
               console.log(error);
