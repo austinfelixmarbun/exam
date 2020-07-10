@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-master-type-add-edit',
@@ -92,7 +93,7 @@ export class MasterTypeAddEditComponent implements OnInit {
           console.log("Success Check Duplicate");
           roleObj = response['returnObject'];
           if (roleObj != null) {
-            this.service.typeErrorCustom('Code Has Been Used');
+            this.service.typeErrorCustom(ExceptionConstant.CODE_HAS_BEEN_USED);
           }
           else {
             this.apiUrl = this.foundationUrl + AdInsConstant.AddRefRole;
@@ -107,7 +108,7 @@ export class MasterTypeAddEditComponent implements OnInit {
               (response) => {
                 console.log("Success Save");
 
-                this.service.typeSave('Save Successed');
+                this.service.typeSave(ExceptionConstant.SAVE_SUCCESSED);
                 this.location.back();
                 this.spinner.hide();
 
@@ -143,7 +144,7 @@ export class MasterTypeAddEditComponent implements OnInit {
         (response) => {
           console.log("Success Edit");
 
-          this.service.typeSave('Edit Successed');
+          this.service.typeSave(ExceptionConstant.EDIT_SUCCESSED);
           this.location.back();
           this.spinner.hide();
 

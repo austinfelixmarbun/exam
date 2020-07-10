@@ -4,6 +4,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-company-address',
@@ -42,7 +43,7 @@ export class CustomerCompanyAddressComponent implements OnInit {
  
   next() {
     this.custAddrObj = new CustAddrObj();
-    this.custAddrObj.MrCustAddrTypeCode = "LEGAL";
+    this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeLegal;
     this.custAddrObj.CustId = this.IdCust;
     this.http.post(AdInsConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
       (response) => {

@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-office-zipcode-member-add',
@@ -165,7 +166,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
       console.log(this.listSelectedId);
       console.log(this.tempData);
     } else {
-      this.toastr.typeErrorCustom("Please select at least one Zipcode");
+      this.toastr.typeErrorCustom(ExceptionConstant.PLEASE_SELECT_MIN_1_ZIPCODE);
     }
   }
 

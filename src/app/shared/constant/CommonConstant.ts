@@ -14,4 +14,20 @@ export class CommonConstant {
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";
 
+    //REF PROV DISTRICT
+    public static RefProvDistrictTypeDis = "DIS";
+    public static RefProvDistrictTypePrv = "PRV";
+
+    // REF MASTER TYPE
+    public static RefMasterTypeCodeSourceIncome = "SOURCE_INCOME";
+    public static RefMasterTypeCodeCustCompanyRelationship = "CUST_COMPANY_RELATIONSHIP";
+    public static RefMasterTypeCodeCustPersonalRelationship = "CUST_PERSONAL_RELATIONSHIP";
+    public static RefMasterTypeCodeLegalDocType = "LEGAL_DOC_TYPE";
+    public static RefMasterTypeCodeCustAddrType = "CUST_ADDR_TYPE";
+    // CUST TYPE
+    public static CustTypePersonal = "PERSONAL";
+    public static CustTypeCompany = "COMPANY";
+    // CUST ADDR TYPE 
+    public static CustAddrTypeLegal = "LEGAL";
+    
 }

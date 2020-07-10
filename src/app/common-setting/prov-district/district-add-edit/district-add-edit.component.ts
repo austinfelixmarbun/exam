@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-district-add-edit',
@@ -89,7 +90,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.DistrictRegRptCode = this.DistrictForm.controls["DistrictRegRptCode"].value;
       this.refProvDistrictObj.IsActive = this.DistrictForm.controls["IsActive"].value;
       this.refProvDistrictObj.ParentId = this.parentId;
-      this.refProvDistrictObj.Type = "DIS";
+      this.refProvDistrictObj.Type = CommonConstant.RefProvDistrictTypeDis;
       this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
@@ -105,7 +106,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.ProvDistrictName = this.DistrictForm.controls["ProvDistrictName"].value;
       this.refProvDistrictObj.DistrictRegRptCode = this.DistrictForm.controls["DistrictRegRptCode"].value;
       this.refProvDistrictObj.IsActive = this.DistrictForm.controls["IsActive"].value;
-      this.refProvDistrictObj.Type = "DIS";
+      this.refProvDistrictObj.Type =  CommonConstant.RefProvDistrictTypeDis;
       this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);

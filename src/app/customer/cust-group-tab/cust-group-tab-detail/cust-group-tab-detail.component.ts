@@ -9,6 +9,7 @@ import { environment } from 'environments/environment';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { first } from 'rxjs/operators';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-cust-group-tab-detail',
@@ -53,7 +54,7 @@ export class CustGroupTabDetailComponent implements OnInit {
       CustId: this.CustId
     });
     
-    if(this.MrCustTypeCode == "PERSONAL"){
+    if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){
       this.inputLookupCustPersonalObj = new InputLookupObj();
       this.inputLookupCustPersonalObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -87,7 +88,7 @@ export class CustGroupTabDetailComponent implements OnInit {
       // this.inputLookupCustPersonalObj.isRequired = false;
       refMasterRelationship.RefMasterTypeCode = "CUST_PERSONAL_RELATIONSHIP";
     }
-    else if(this.MrCustTypeCode == "COMPANY"){
+    else if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
       this.inputLookupCustCompanyObj = new InputLookupObj();
       this.inputLookupCustCompanyObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -119,7 +120,7 @@ export class CustGroupTabDetailComponent implements OnInit {
       // criteriaList.push(criteriaObj);
       // this.inputLookupCustCompanyObj.addCritInput = criteriaList;
       // this.inputLookupCustCompanyObj.isRequired = false;
-      refMasterRelationship.RefMasterTypeCode = "CUST_COMPANY_RELATIONSHIP";
+      refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustCompanyRelationship;
     }
 
     this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).pipe(first()).subscribe(
@@ -138,10 +139,10 @@ export class CustGroupTabDetailComponent implements OnInit {
       CustName: e.custName
     });
     if(e.mrCustTypeCode == AdInsConstant.MR_CUST_TYPE_CODE_PERSONAL){
-      refMasterRelationship.RefMasterTypeCode = "CUST_PERSONAL_RELATIONSHIP";
+      refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustCompanyRelationship;
     }
     else{
-      refMasterRelationship.RefMasterTypeCode = "CUST_COMPANY_RELATIONSHIP";
+      refMasterRelationship.RefMasterTypeCode =CommonConstant.RefMasterTypeCodeCustCompanyRelationship ;
     }
     this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).pipe(first()).subscribe(
       (response) => {
@@ -162,10 +163,10 @@ export class CustGroupTabDetailComponent implements OnInit {
       CustName: e.custName
     });
     if(e.mrCustTypeCode == AdInsConstant.MR_CUST_TYPE_CODE_PERSONAL){
-      refMasterRelationship.RefMasterTypeCode = "CUST_PERSONAL_RELATIONSHIP";
+      refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustPersonalRelationship;
     }
     else{
-      refMasterRelationship.RefMasterTypeCode = "CUST_COMPANY_RELATIONSHIP";
+      refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustCompanyRelationship;
     }
     this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterRelationship).pipe(first()).subscribe(
       (response) => {

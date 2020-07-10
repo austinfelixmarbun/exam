@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-province-add-edit',
@@ -70,7 +71,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.refProvDistrictObj.ProvDistrictCode = this.ProvinceForm.controls["ProvDistrictCode"].value
       this.refProvDistrictObj.ProvDistrictName = this.ProvinceForm.controls["ProvDistrictName"].value;
       this.refProvDistrictObj.IsActive = this.ProvinceForm.controls["IsActive"].value;
-      this.refProvDistrictObj.Type = "PRV";
+      this.refProvDistrictObj.Type = CommonConstant.RefProvDistrictTypePrv;
       this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
