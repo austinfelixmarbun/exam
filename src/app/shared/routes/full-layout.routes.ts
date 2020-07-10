@@ -64,10 +64,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: './test/test.module#TestModule'
   },
   {
-    path: 'testNew',
-    loadChildren: './test-new/testNew.module#TestNewModule'
-  }, 
-  {
     path: 'product',
     loadChildren: './product/product.module#ProductModule'
   },
