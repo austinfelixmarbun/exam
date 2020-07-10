@@ -308,6 +308,15 @@ export class AdInsConstant {
   public static EditRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/EditRefIndustryType";
   public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
 
+  //REF SCORE CATEGORY TYPE
+  public static GetRefScoreCategoryTypeById = environment.FoundationR3Url + "/RefScoreCategoryType/GetRefScoreCategoryTypeById";
+  public static AddRefScoreCategoryType = environment.FoundationR3Url + "/RefScoreCategoryType/AddRefScoreCategoryType";
+  public static EditRefScoreCategoryType = environment.FoundationR3Url + "/RefScoreCategoryType/EditRefScoreCategoryType";
+  public static GetRefScoreCategoryTypeWithDetailById = environment.FoundationR3Url + "/RefScoreCategoryType/GetRefScoreCategoryTypeWithDetailById";
+
+  // REF SCORE CATEGORY
+  public static AddRangeAndDeleteRefScoreCategory = environment.FoundationR3Url + "/RefScoreCategory/AddRangeAndDeleteRefScoreCategory";
+
   //REF PROV DISTRICT
   public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
 

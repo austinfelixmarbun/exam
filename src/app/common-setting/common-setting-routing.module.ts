@@ -34,6 +34,9 @@ import { BankAddComponent } from 'app/bank/add/add-bank.component';
 import { ZipcodeComponent } from 'app/zipcode/zipcode.component';
 import { ZipcodeAddComponent } from 'app/zipcode/add/add-zipcode.component';
 import { HolidayDetailEditComponent } from './holiday-scheme/holiday-detail-edit/holiday-detail-edit.component';
+import { ScoreCategoryPagingComponent } from './score-category/score-category-paging/score-category-paging';
+import { ScoreCategoryTypeComponent } from './score-category/score-category-type/score-category-type.component';
+import { ScoreCategoryScoringComponent } from './score-category/score-category-scoring/score-category-scoring.component';
 
 const routes: Routes = [
   {
@@ -283,7 +286,28 @@ const routes: Routes = [
         data: {
           title: 'Zipcode Detail'
         },
-      }
+      },
+      {
+        path: 'ScoreCategory/Paging',
+        component: ScoreCategoryPagingComponent,
+        data: {
+          title: 'Score Category Paging'
+        },
+      },
+      {
+        path: 'ScoreCategory/Type',
+        component: ScoreCategoryTypeComponent,
+        data: {
+          title: 'Score Category Type'
+        },
+      },
+      {
+        path: 'ScoreCategory/Score',
+        component: ScoreCategoryScoringComponent,
+        data: {
+          title: 'Score Category Scoring'
+        },
+      },
     ]
   }
 ];

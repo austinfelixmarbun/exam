@@ -1,0 +1,134 @@
+{
+    "title": "Score Category Type",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "REF_SCORE_CATEGORY_CODE",
+            "id": "RefScoreCategoryCode",
+            "value": "",
+            "label": "Score Category Code",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "DESCR",
+            "id": "Descr",
+            "value": "",
+            "label": "Description",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "dropdown",
+            "name": "IS_ACTIVE",
+            "datatype": "text",
+            "id": "IsActive",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "url": "",
+            "label": "Active Status",
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ],
+    "querystring": {
+        "select": "SELECT RSCT.REF_SCORE_CATEGORY_TYPE_ID AS RefScoreCategoryTypeId, RSCT.REF_SCORE_CATEGORY_CODE AS RefScoreCategoryCode, RSCT.DESCR AS Descr, RSCT.IS_ACTIVE AS IsActive",
+        "from": "FROM REF_SCORE_CATEGORY_TYPE AS RSCT WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Score Category Code",
+            "name": "RefScoreCategoryCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Description",
+            "name": "Descr"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Score"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Edit"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "RefScoreCategoryCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Descr"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/CommonSetting/ScoreCategory/Score",
+                    "param": [
+                        {
+                            "type": "RefScoreCategoryTypeId",
+                            "property": "RefScoreCategoryTypeId"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/CommonSetting/ScoreCategory/Type",
+                    "param": [
+                        {
+                            "type": "RefScoreCategoryTypeId",
+                            "property": "RefScoreCategoryTypeId"
+                        },
+                        {
+                            "type": "mode",
+                            "property": "edit"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
