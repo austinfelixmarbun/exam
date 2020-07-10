@@ -35,6 +35,8 @@ import { RefFormRoleMappingComponent } from './ref-form/ref-form-role-mapping/re
 import { RefFormRolePagingComponent } from './ref-form/ref-form-role-paging/ref-form-role-paging.component';
 import { RoleFormPagingComponent } from './role/role-form-paging/role-form-paging.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { UcaddtotempModule } from '@adins/ucaddtotemp';
 
 
 @NgModule({
@@ -57,7 +59,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     UcviewgenericModule,
     UcgridviewModule,
     UclookupgenericModule,
-    UcShowErrorsModule
+    UcShowErrorsModule,
+    UcaddtotempModule
   ],
   declarations: [
     UserPagingComponent,
@@ -81,6 +84,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [
+    NGXToastrService,
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() =>LookupemployeeComponent),

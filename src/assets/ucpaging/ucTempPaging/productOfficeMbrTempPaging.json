@@ -1,0 +1,79 @@
+{
+    "title": "Office Search",
+    "keyProperty": "RefOfficeId",
+    "keyPropCriteria": "RO.REF_OFFICE_ID",
+    "component": [
+      {
+        "type": "textbox",
+        "name": "RO.OFFICE_CODE",
+        "id": "officeCodeId",
+        "value": "",
+        "label": "Office Code",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "RO.OFFICE_NAME",
+        "id": "officeNameId",
+        "value": "",
+        "label": "Office Name",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "dropdown",
+        "datatype": "text",
+        "name": "ROA.AREA_CODE",
+        "id": "areaNameId",
+        "value": "",
+        "label": "Area Name",
+        "placeholder": "Placeholder",
+        "isFromURL": true,
+        "url": "",
+        "path": "/RefOfficeArea/GetListKvpActiveRefOfficeArea",
+        "itemsUrl": [],
+        "items": [],
+        "isSelectOne": false
+      }
+    ],
+    "querystring": {
+      "select": "SELECT RO.OFFICE_CODE AS OfficeCode, RO.OFFICE_NAME AS OfficeName, ROA.AREA_NAME AS AreaName, ROA.AREA_CODE AS AreaCode, RO.REF_OFFICE_ID AS RefOfficeId",
+      "from": "FROM dbo.REF_OFFICE RO WITH(NOLOCK) LEFT JOIN dbo.REF_OFFICE_AREA ROA WITH(NOLOCK) ON RO.REF_OFFICE_AREA_ID = ROA.REF_OFFICE_AREA_ID"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Office Code",
+            "name": "RO.OFFICE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Office Name",
+            "name": "RO.OFFICE_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Office Area",
+            "name": "ROA.AREA_CODE"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "OfficeName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "AreaName"
+        }
+    ]
+  }

@@ -1,0 +1,27 @@
+{
+    "title": "Verification Question Group Member",
+    "subsection": [
+      {
+        "subSectionId": "MainInfoId",
+        "subSectionTitle": "Main Info",
+        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Verification Question Group Code",
+            "property": "VerfQuestionGrpCode"
+          },
+          {
+            "type": "text",
+            "label": "Verification Question Group Name",
+            "property": "VerfQuestionGrpName"
+          }
+        ],
+        "querystring": {
+            "select": "SELECT VERF_QUESTION_GRP_CODE AS VerfQuestionGrpCode, VERF_QUESTION_GRP_NAME AS VerfQuestionGrpName, VERF_QUESTION_GRP_H_ID AS VerfQuestionGrpHId",
+            "from": " FROM DBO.VERF_QUESTION_GRP_H WITH(NOLOCK) ", 
+            "where": "WHERE VERF_QUESTION_GRP_H_ID = {0}" 
+        }
+      }
+    ]
+  }
