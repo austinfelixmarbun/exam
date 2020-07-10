@@ -4,7 +4,7 @@
       <div class="px-3">
         <form class="form form-horizontal" (ngSubmit)="SendSrvyOrder()">
           <div class="form-body">
-            <lib-ucviewgeneric *ngIf="isDataAlreadyLoaded == true" [viewInput]="viewObj" [whereValue]="arrValue"></lib-ucviewgeneric>
+            <lib-ucviewgeneric *ngIf="isDataAlreadyLoaded == true" [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
           </div>
           <lib-ucSubsection [id]="'SurveyOrderTaskFormId'" [title]="'Survey Task'" [panel]="'SurveyOrderTaskForm'">
           </lib-ucSubsection>

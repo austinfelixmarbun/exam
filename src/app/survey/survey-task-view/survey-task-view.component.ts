@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-survey-task-view',
@@ -7,9 +9,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./survey-task-view.component.scss']
 })
 export class SurveyTaskViewComponent implements OnInit {
-
-  viewObj: string;
   SrvyTaskId: string;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
@@ -20,7 +21,8 @@ export class SurveyTaskViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewSurveyTask.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyTask.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
 
 }

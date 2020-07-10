@@ -4,7 +4,7 @@
       <div class="card-body">
         <div class="col-md-12">
           <div class="card">
-            <lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
             <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
             </lib-UCSearch>
             <div [hidden]="resultData?.Data == null">

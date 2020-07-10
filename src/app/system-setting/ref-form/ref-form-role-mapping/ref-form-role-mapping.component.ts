@@ -10,6 +10,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ListAuthFormObj } from 'app/shared/model/ListAuthFormObj.Model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-ref-form-role-mapping',
@@ -35,11 +36,11 @@ export class RefFormRoleMappingComponent implements OnInit {
   resultData: any;
   tempData: any;
   arrAddCrit: any[] = new Array();
-  viewObj: any;
   Data = [];
   RefFormId: number;
   AuthFormObj: AuthFormObj;
   listAuthFormObj: ListAuthFormObj;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
@@ -49,7 +50,8 @@ export class RefFormRoleMappingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewRefForm.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefForm.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.GetListRefFormRoleByRefFormId();
 

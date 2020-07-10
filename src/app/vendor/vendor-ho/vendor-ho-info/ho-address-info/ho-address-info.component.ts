@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-ho-address-info',
@@ -6,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ho-address-info.component.scss']
 })
 export class HoAddressInfoComponent implements OnInit {
-  viewLegalAddressObj: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor() { }
 
   ngOnInit() {
-    this.viewLegalAddressObj = "./assets/ucviewgeneric/viewHOInfoLegalAddr.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHOInfoLegalAddr.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
 
 }

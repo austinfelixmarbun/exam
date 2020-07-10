@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { AdInsService } from 'app/shared/services/adIns.service';
-import { FormBuilder } from '@angular/forms';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-view-coy-contact',
@@ -12,19 +9,18 @@ import { FormBuilder } from '@angular/forms';
 export class CustomerViewCoyContactComponent implements OnInit {
   responseResult: any;
   CustId: number;
-  viewCustCoyViewContactData: string;
-  viewCustCoyViewContactAddress: string;
-  viewCustCoyViewContactInformation: string;
-  constructor(
-    private http: HttpClient,
-    private route: ActivatedRoute,
-    private router: Router,
-    private adInsService: AdInsService,
-    private fb: FormBuilder
-  ) { }
+  viewCustCoyViewContactData: UcViewGenericObj = new UcViewGenericObj();
+  viewCustCoyViewContactAddress: UcViewGenericObj = new UcViewGenericObj();
+  viewCustCoyViewContactInformation: UcViewGenericObj = new UcViewGenericObj();
+
+  constructor(){}
+
   ngOnInit() {
-    this.viewCustCoyViewContactData =  "./assets/ucviewgeneric/viewCustCoyViewContactData.json";
-    this.viewCustCoyViewContactInformation = "./assets/ucviewgeneric/viewCustCoyViewContactInformation.json";
-    this.viewCustCoyViewContactAddress =  "./assets/ucviewgeneric/viewCustCoyViewContactAddress.json";
+    this.viewCustCoyViewContactData.viewInput  =  "./assets/ucviewgeneric/viewCustCoyViewContactData.json";
+    this.viewCustCoyViewContactData.viewEnvironment = environment.FoundationR3Url;
+    this.viewCustCoyViewContactInformation.viewInput  = "./assets/ucviewgeneric/viewCustCoyViewContactInformation.json";
+    this.viewCustCoyViewContactInformation.viewEnvironment = environment.FoundationR3Url;
+    this.viewCustCoyViewContactAddress.viewInput  =  "./assets/ucviewgeneric/viewCustCoyViewContactAddress.json";
+    this.viewCustCoyViewContactAddress.viewEnvironment = environment.FoundationR3Url;
   }
 }

@@ -4,6 +4,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-employee-businessunit-paging',
@@ -12,9 +13,10 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 })
 export class EmployeeBusinessunitPagingComponent implements OnInit {
 
-  viewObj : any;
   RefUserId : string;
   inputPagingObj : any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
       this.RefUserId = params["RefUserId"];
@@ -22,6 +24,9 @@ export class EmployeeBusinessunitPagingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewEmployeeBusinessUnitMember.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchEmployeeBusinessUnit.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
@@ -35,8 +40,6 @@ export class EmployeeBusinessunitPagingComponent implements OnInit {
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.RefUserId;
     this.inputPagingObj.addCritInput.push(critInput);
-
-    this.viewObj = "./assets/ucviewgeneric/viewEmployeeBusinessUnitMember.json";
   }
 
 }

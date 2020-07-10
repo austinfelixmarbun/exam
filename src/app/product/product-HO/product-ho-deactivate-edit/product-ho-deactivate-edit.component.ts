@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ProdHDeactivateObj } from '../../../shared/model/ProdHDeactivateObj.Model';
 import { environment } from '../../../../environments/environment';
 import { ProdOfferingVersionObj } from '../../../shared/model/ProdOfferingVersionObj.Mode';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 
 @Component({
@@ -26,9 +27,9 @@ export class ProductHODeactivateEditComponent implements OnInit {
   arrCrit: any;
   getValueReasonModel: any;
   allRefReasonMethod: any;
-  viewObj: any;
   prodOfferVerUrl: string;
   ProdOfferVer: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   ProdHDeactForm = this.fb.group({
     Reason: ['', [Validators.required, Validators.maxLength(50)]],
@@ -54,6 +55,9 @@ export class ProductHODeactivateEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformation.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     var obj = { RefReasonTypeCode: AdInsConstant.RefReasonTypeCodeProdDeactivate };
     this.http.post(this.getValueReasonModel, obj).subscribe(
       (response) => {
@@ -80,8 +84,6 @@ export class ProductHODeactivateEditComponent implements OnInit {
         console.log(error);
       }
     );
-
-    this.viewObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
   }
 
   SaveForm() {

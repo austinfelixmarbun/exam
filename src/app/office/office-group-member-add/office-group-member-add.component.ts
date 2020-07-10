@@ -8,6 +8,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-office-group-member-add',
@@ -32,12 +33,12 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   resultData: any;
   tempData: any;
   arrAddCrit: any[];
-  viewObj: any;
   Data = [];
   RefOfficeId: any;
   CenterGrpId: any;
   MrOfficeTypeCode: string = "CG";
   refOfficeobj: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr:NGXToastrService) {
@@ -48,6 +49,9 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.GetListCenterGrpMemberByRefOfficeId();
 
     this.arrCrit = new Array();
@@ -84,7 +88,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     this.inputObj.addCritInput.push(addCritTypeOCode);
     this.inputObj.addCritInput.push(addCritIsActive);
 
-    this.viewObj = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
     this.pageNow = 1;
     this.pageSize = 10;
     this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;

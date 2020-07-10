@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-ho-tax-info',
@@ -6,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ho-tax-info.component.scss']
 })
 export class HoTaxInfoComponent implements OnInit {
-  viewTaxObj:any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor() { }
 
   ngOnInit() {
-    this.viewTaxObj = "./assets/ucviewgeneric/viewHOInfoTax.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHOInfoTax.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
 
 }

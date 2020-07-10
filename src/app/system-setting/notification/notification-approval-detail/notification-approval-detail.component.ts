@@ -8,6 +8,7 @@ import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NotificationHObj } from 'app/shared/model/NotificationHObj.Model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-notification-approval-detail',
@@ -18,7 +19,6 @@ export class NotificationApprovalDetailComponent implements OnInit {
   inputPagingObj:any;
   arrCrit: any;
   settingUrl: string = environment.FoundationR3Url;
-  viewNotificationOnApprovalObj: string;
   notificationHObj: NotificationHObj;
   NotificationHId: any;
   detailData: any;
@@ -28,6 +28,8 @@ export class NotificationApprovalDetailComponent implements OnInit {
   resultData: any;
   getUrl:any;
   submitUrl:any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
     this.route.queryParams.subscribe(params => {
       if (params["NotificationHId"] != null) {
@@ -38,6 +40,9 @@ export class NotificationApprovalDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewNotificationOnApproval.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.getUrl = this.settingUrl + AdInsConstant.GetNotificationHByNotificationHId;
     this.submitUrl = this.settingUrl + AdInsConstant.EditNotificationH;
     this.notificationHObj = new NotificationHObj();
@@ -50,8 +55,6 @@ export class NotificationApprovalDetailComponent implements OnInit {
         console.log(error);
       }
     );
-
-    this.viewNotificationOnApprovalObj = "./assets/ucviewgeneric/viewNotificationOnApproval.json";
 
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchNotificationDOnApproval.json";

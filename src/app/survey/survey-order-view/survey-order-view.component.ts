@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-survey-order-view',
@@ -9,10 +11,9 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
   styleUrls: ['./survey-order-view.component.scss']
 })
 export class SurveyOrderViewComponent implements OnInit {
-
-  viewObj: string;
   SrvyOrderId: string;
   TaskList = new Array();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
@@ -23,7 +24,8 @@ export class SurveyOrderViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewSurveyOrder.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     var SrvyTaskObj = {
       SrvyOrderId: this.SrvyOrderId,

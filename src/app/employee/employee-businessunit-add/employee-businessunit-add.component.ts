@@ -14,6 +14,7 @@ import { OfficeObj } from 'app/shared/model/OfficeObj.model';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { environment } from 'environments/environment';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-employee-businessunit-add',
@@ -39,10 +40,11 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
   RefUserId: any;
   RefUserRoleId: any;
-  viewObj: string;
   criteria: CriteriaObj[] = [];
   result: any;
   userRole = new RefUserRole;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.RefUserId = params["RefUserId"];
@@ -52,6 +54,8 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewEmployeeBusinessUnitMember.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.initLookUp();
     var critInput = new CriteriaObj();
@@ -59,7 +63,6 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.RefUserId;
 
-    this.viewObj = "./assets/ucviewgeneric/viewEmployeeBusinessUnitMember.json";
     if (this.mode == "edit") {
       this.title = "Business Unit-Edit";
       this.userRole.RefUserRoleId = this.RefUserRoleId;

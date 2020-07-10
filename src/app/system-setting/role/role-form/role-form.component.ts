@@ -13,6 +13,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { AuthFormObj } from "app/shared/model/AuthFormObj.Model";
 import { ListAuthFormObj } from "app/shared/model/ListAuthFormObj.Model";
+import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
 
 @Component({
   selector: 'app-role-form',
@@ -37,12 +38,12 @@ export class RoleFormComponent implements OnInit {
   resultData: any;
   tempData: any;
   arrAddCrit: any[] = new Array();
-  viewObj: any;
   Data = [];
   member: AuthFormObj[];
   RefRoleId: number;
   AuthFormObj: AuthFormObj;
   listAuthFormObj: ListAuthFormObj;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
@@ -52,7 +53,8 @@ export class RoleFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewRefRole.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefRole.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.GetListRefFormRoleByRefRoleId();
 

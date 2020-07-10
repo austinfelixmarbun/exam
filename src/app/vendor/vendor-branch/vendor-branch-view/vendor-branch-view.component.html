@@ -1,4 +1,4 @@
-<lib-ucviewgeneric [viewInput]="viewVendorBranchObj"></lib-ucviewgeneric>
+<lib-ucviewgeneric [viewGenericObj]="viewVendorBranchObj"></lib-ucviewgeneric>
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Main Information">
     <ng-template matTabContent>
@@ -7,27 +7,27 @@
           <br>
           <div>
             <ng-container *ngIf="MrVendorTypeCode == 'P'">
-              <lib-ucviewgeneric [viewInput]="viewVendorBranchMainPObj"></lib-ucviewgeneric>
+              <lib-ucviewgeneric [viewGenericObj]="viewVendorBranchMainPObj"></lib-ucviewgeneric>
             </ng-container>
 
             <ng-container *ngIf="MrVendorTypeCode == 'C'">
-              <lib-ucviewgeneric [viewInput]="viewVendorBranchMainCObj"></lib-ucviewgeneric>
+              <lib-ucviewgeneric [viewGenericObj]="viewVendorBranchMainCObj"></lib-ucviewgeneric>
             </ng-container>
 
             <ng-container *ngIf="MrVendorCategoryCode =='SUPPLIER_BRANCH'">
-              <lib-ucviewgeneric [viewInput]="viewBranchInfoSuppObj"></lib-ucviewgeneric>
+              <lib-ucviewgeneric [viewGenericObj]="viewBranchInfoSuppObj"></lib-ucviewgeneric>
             </ng-container>
 
             <ng-container *ngIf="MrVendorCategoryCode =='SURVEYOR_BRANCH'">
-              <lib-ucviewgeneric [viewInput]="viewBranchInfoSurObj"></lib-ucviewgeneric>
+              <lib-ucviewgeneric [viewGenericObj]="viewBranchInfoSurObj"></lib-ucviewgeneric>
             </ng-container>
 
             <ng-container *ngIf="MrVendorCategoryCode =='ASSET_INSCO_BRANCH'">
-              <lib-ucviewgeneric [viewInput]="viewBranchInfoAssetObj"></lib-ucviewgeneric>
+              <lib-ucviewgeneric [viewGenericObj]="viewBranchInfoAssetObj"></lib-ucviewgeneric>
             </ng-container>
 
             <ng-container *ngIf="MrVendorCategoryCode =='LIFE_INSCO_BRANCH'">
-              <lib-ucviewgeneric [viewInput]="viewBranchInfoLifeObj"></lib-ucviewgeneric>
+              <lib-ucviewgeneric [viewGenericObj]="viewBranchInfoLifeObj"></lib-ucviewgeneric>
             </ng-container>
           </div>
         </div>
@@ -40,8 +40,8 @@
       <div class="card">
         <div class="card-body">
           <div>
-            <lib-ucviewgeneric [viewInput]="viewVendorBranchTaxObj"></lib-ucviewgeneric>
-            <lib-ucviewgeneric [viewInput]="viewVendorBranchTaxAddrObj"></lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewGenericObj]="viewVendorBranchTaxObj"></lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewGenericObj]="viewVendorBranchTaxAddrObj"></lib-ucviewgeneric>
           </div>
         </div>
       </div>
@@ -52,8 +52,7 @@
       <div class="card">
         <div class="card-body">
           <div>
-            <lib-ucviewgeneric [viewInput]="viewVendorBranchAddrObj"></lib-ucviewgeneric>
-            <lib-ucviewgeneric [viewInput]="viewVendorBranchLtLgObj"></lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewGenericObj]="viewVendorBranchAddrObj"></lib-ucviewgeneric>
           </div>
         </div>
       </div>
