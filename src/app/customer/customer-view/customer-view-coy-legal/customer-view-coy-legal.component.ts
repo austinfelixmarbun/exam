@@ -47,7 +47,9 @@ export class CustomerViewCoyLegalComponent implements OnInit {
     var custObj = { "CustId": this.CustId };
     this.http.post(this.GetCustCompanyLegalDocForCustViewByCustIdUrl, custObj).subscribe(
       response => {
-        this.responseResultLegal = response['ReturnObject'];
+        if (response['ReturnObject'].length > 0) {
+          this.responseResultLegal = response['ReturnObject'];
+        }
       },
       error => {
         this.router.navigateByUrl('Error');
