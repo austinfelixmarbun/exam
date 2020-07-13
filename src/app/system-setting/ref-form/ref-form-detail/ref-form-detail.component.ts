@@ -51,11 +51,13 @@ export class RefFormDetailComponent implements OnInit {
 
     this.http.post(AdInsConstant.GetListRefModuleKeyValue, refMasterModuleObj).subscribe(
       (response) => {
-        this.itemModuleType = response["ReturnObject"];
-        if (this.mode == "add") {
-          this.RefForm.patchValue({
-            RefModuleId: this.itemModuleType[0].Key
-          });
+        if (response['ReturnObject'].length > 0) {
+          this.itemModuleType = response["ReturnObject"];
+          if (this.mode == "add") {
+            this.RefForm.patchValue({
+              RefModuleId: this.itemModuleType[0].Key
+            });
+          }
         }
       }
     );
@@ -66,11 +68,13 @@ export class RefFormDetailComponent implements OnInit {
 
     this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterClassObj).subscribe(
       (response) => {
-        this.itemClassType = response["ReturnObject"];
-        if (this.mode == "add") {
-          this.RefForm.patchValue({
-            Class: this.itemClassType[0].Key
-          });
+        if (response['ReturnObject'].length > 0) {
+          this.itemClassType = response["ReturnObject"];
+          if (this.mode == "add") {
+            this.RefForm.patchValue({
+              Class: this.itemClassType[0].Key
+            });
+          }
         }
         this.CheckClass();
       }

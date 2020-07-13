@@ -105,6 +105,7 @@ export class AdInsConstant {
   public static DeleteCenterGroupOfficeMember = "/RefOffice/DeleteCenterGroupOfficeMember";
   public static DeleteCenterGrpOfficeMember = "/CenterGrpOfficeMbr/DeleteCenterGrpOfficeMember";
   public static GetListActiveRefOffice = "/RefOffice/GetListActiveRefOffice";
+  public static GetListRefOfficeByRefOfficeAreaId = environment.FoundationR3Url + "/RefOffice/GetListRefOfficeByRefOfficeAreaId";
 
   //CENTER GROUP
   public static AddCenterGrp = environment.FoundationR3Url + "/CenterGrp/AddCenterGrp";

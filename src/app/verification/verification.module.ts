@@ -28,6 +28,8 @@ import { VerificationQuestionSchemeMemberPagingComponent } from './verification-
 import { VerificationQuestionSchemeMemberAddComponent } from './verification-question-scheme-member/verification-question-scheme-member-add/verification-question-scheme-member-add.component';
 import { VerificationQuestionSchemeMemberEditComponent } from './verification-question-scheme-member/verification-question-scheme-member-edit/verification-question-scheme-member-edit.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { UcaddtotempModule } from '@adins/ucaddtotemp';
 
 @NgModule({
   imports: [
@@ -48,7 +50,8 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     UclookupgenericModule,
     NgbDropdownModule,
     ArchwizardModule,
-    UcShowErrorsModule
+    UcShowErrorsModule,
+    UcaddtotempModule
   ],
   declarations: [
     VerificationComponent,
@@ -67,6 +70,7 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [
+    NGXToastrService,
     VerificationService
   ]
 })

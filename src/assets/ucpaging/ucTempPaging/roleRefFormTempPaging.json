@@ -1,0 +1,53 @@
+{
+    "title": "Ref Form Search",
+    "keyProperty": "RefFormId",
+    "keyPropCriteria": "REF_FORM_ID",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "FORM_CODE",
+            "id": "FormCodeId",
+            "value": "",
+            "label": "Form Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "TITLE",
+            "id": "TitleId",
+            "value": "",
+            "label": "Title",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+       "select": "SELECT FORM_CODE AS FormCode, TITLE AS Title, REF_FORM_ID AS RefFormId",
+        "from": "FROM dbo.REF_FORM WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Form Code",
+            "name": "FORM_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Title",
+            "name": "TITLE"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "FormCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Title"
+        }
+    ]
+}

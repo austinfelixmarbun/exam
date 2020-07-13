@@ -95,7 +95,10 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.http.post(this.getListCustAddrUrl, this.custAddrObj).subscribe(
       (response) => {
         this.listCustAddr = response["ReturnObject"];
-        this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] }); 
+        console.log(this.listCustAddr);
+        if (this.listCustAddr.length > 0) {
+          this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] }); 
+        }
       });
 
     if (this.pageType == "edit") {

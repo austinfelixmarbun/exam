@@ -53,10 +53,13 @@ export class AssetDocumentAddEditComponent implements OnInit {
   ngOnInit() {
     this.http.post(AdInsConstant.GetListRefAssetDoc, this.assetDocListObj).subscribe(
       (response) => {
+        // console.log(response);
         this.tempAssetName = response["ReturnObject"];
-        this.AssetDocumentForm.patchValue({
-          AssetDocName: this.tempAssetName[0].RefAssetDocId
-        });
+        if (this.tempAssetName.length > 0) {
+          this.AssetDocumentForm.patchValue({
+            AssetDocName: this.tempAssetName[0].RefAssetDocId
+          });
+        }
       }
     );
     this.http.post(AdInsConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
@@ -70,18 +73,16 @@ export class AssetDocumentAddEditComponent implements OnInit {
     this.http.post(AdInsConstant.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
       (response) => {
         var tempResponse = response['ResponseGeneralSettingObj'];
-        if (tempResponse[0]['GsCode'] == "IS_SHOW_CBX_BORROW") {
-          this.isShowCbxBorrow = tempResponse[0]["GsValue"];
-        }
-        else if (tempResponse[1]['GsCode'] == "IS_SHOW_CBX_BORROW") {
-          this.isShowCbxBorrow = tempResponse[1]["GsValue"];
-        }
-        if (tempResponse[0]['GsCode'] == "IS_SHOW_CBX_PLEDGE") {
-          this.isShowCbxPledge = tempResponse[0]["GsValue"];
-        }
-        else if (tempResponse[1]['GsCode'] == "IS_SHOW_CBX_PLEDGE") {
-          this.isShowCbxPledge = tempResponse[1]["GsValue"];
-        }
+        // console.log(tempResponse);
+        let GSIsShowCbxBorrow = tempResponse.find(x => x.GsCode == "IS_SHOW_CBX_BORROW");
+        let GSIsShowCbxPledge = tempResponse.find(x => x.GsCode == "IS_SHOW_CBX_PLEDGE");
+        // console.log(GSIsShowCbxBorrow);
+        // console.log(GSIsShowCbxPledge);
+
+        if (GSIsShowCbxBorrow != undefined || GSIsShowCbxBorrow != null)
+          this.isShowCbxBorrow = GSIsShowCbxBorrow["GsValue"];
+        if (GSIsShowCbxPledge != undefined || GSIsShowCbxPledge != null)
+          this.isShowCbxPledge = GSIsShowCbxPledge["GsValue"];
       }
     );
 
