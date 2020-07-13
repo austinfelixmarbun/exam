@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -62,8 +61,8 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
-    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {

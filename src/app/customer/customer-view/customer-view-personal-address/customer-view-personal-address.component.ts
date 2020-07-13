@@ -6,17 +6,17 @@ import { AdInsService } from 'app/shared/services/adIns.service';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 
 @Component({
   selector: 'app-customer-view-personal-address',
-  templateUrl: './customer-view-personal-address.component.html',
-  styleUrls: ['./customer-view-personal-address.component.scss']
+  templateUrl: './customer-view-personal-address.component.html'
 })
 export class CustomerViewPersonalAddressComponent implements OnInit {
-  GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
-  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
+  GetListCustAddrByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrByCustIdForCustomerPersonalView;
+  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
+  GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
   arrCrit: any;
   inputObj: any;
   CustId: number;

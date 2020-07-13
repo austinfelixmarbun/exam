@@ -5,15 +5,15 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { environment } from 'environments/environment.sit';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-personal-contact-person',
-  templateUrl: './customer-view-personal-contact-person.component.html',
-  styleUrls: ['./customer-view-personal-contact-person.component.scss']
+  templateUrl: './customer-view-personal-contact-person.component.html'
 })
 export class CustomerViewPersonalContactPersonComponent implements OnInit {
   CustId: number;
-  GetListCustPersonalContactPersonForCustViewByCustIdUrl = AdInsConstant.GetListCustPersonalContactPersonForCustViewByCustId;
+  GetListCustPersonalContactPersonForCustViewByCustIdUrl = URLConstant.GetListCustPersonalContactPersonForCustViewByCustId;
   responseObj: any;
   resCustObj: any;
 
@@ -45,7 +45,7 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
     // GetCustByCustNo
     var custObj = new CustObj;
     custObj.CustNo = ContactPersonCustNo
-    this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustNo, custObj).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);

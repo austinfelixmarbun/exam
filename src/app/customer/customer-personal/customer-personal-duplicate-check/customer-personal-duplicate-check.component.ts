@@ -10,6 +10,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { RequestNegativeCustObj } from 'app/shared/model/RequestNegativeCustObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -18,10 +19,10 @@ import { RequestNegativeCustObj } from 'app/shared/model/RequestNegativeCustObj.
   providers: [NGXToastrService]
 })
 export class CustomerPersonalDuplicateCheckComponent implements OnInit {
-  
+
   resultData: any;
   tempGender: any;
-  tempCustModel: any; 
+  tempCustModel: any;
   ResultDuplicate: any;
   tempMrIdTypeCode: any;
   ResultDuplicateNegative: any;
@@ -56,11 +57,11 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   resultPersonalUrl: string;
   addCustPersonalUrl: string;
   urlGetDescByMasterCode: string;
-  
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
-    this.addCustUrl = AdInsConstant.AddNewCust;
-    this.addCustPersonalUrl = AdInsConstant.AddNewCustPersonal;
-    this.urlGetDescByMasterCode = AdInsConstant.GetRefMasterByMasterCode;
+    this.addCustUrl = URLConstant.AddNewCust;
+    this.addCustPersonalUrl = URLConstant.AddNewCustPersonal;
+    this.urlGetDescByMasterCode = URLConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
 
       if (params["CustName"] != null) {
@@ -114,12 +115,11 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.DuplicateCustObj.MotherMaidenName = this.MotherMaidenName;
     this.DuplicateCustObj.BirthDt = this.BirthDt;
     console.log(this.DuplicateCustObj);
-    this.http.post(AdInsConstant.GetCustomerAndNegativeCustDuplicateCheck, this.DuplicateCustObj).subscribe(
+    this.http.post(URLConstant.GetCustomerAndNegativeCustDuplicateCheck, this.DuplicateCustObj).subscribe(
       (response) => {
         this.DuplicateStatus = response["Status"];
         console.log(this.DuplicateStatus);
-        if (this.DuplicateStatus != null && this.DuplicateStatus != undefined)
-        {
+        if (this.DuplicateStatus != null && this.DuplicateStatus != undefined) {
           this.ResultDuplicate = response["ReturnObject"]["CustDuplicate"];
           this.ResultDuplicateNegative = response["ReturnObject"]["NegativeCustDuplicate"];
         }
@@ -181,16 +181,16 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.addCustObj.CustObj.IdNo = this.IdNo;
     this.addCustObj.CustObj.IdExpiredDt = this.IdExpiredDt;
     this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
-    if(this.IsVip === "true"){
+    if (this.IsVip === "true") {
       this.addCustObj.CustObj.IsVip = true;
-    }else{
+    } else {
       this.addCustObj.CustObj.IsVip = false;
     }
-    if(this.IsAffiliateWithMf === "true"){
+    if (this.IsAffiliateWithMf === "true") {
       this.addCustObj.CustObj.IsAffiliateWithMf = true;
-    }else{
+    } else {
       this.addCustObj.CustObj.IsAffiliateWithMf = false;
-    } 
+    }
     this.addCustObj.CustObj.VipNotes = this.VipNotes;
     this.addCustObj.CustPersonalObj.CustFullName = this.CustName;
     this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;
@@ -202,7 +202,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.http.post(this.addCustUrl, this.addCustObj).subscribe(
       (response) => {
         this.resultData = response;
-        this.IdCust = this.resultData.CustObj.CustId; 
+        this.IdCust = this.resultData.CustObj.CustId;
         this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.IdCust, 'From': 'CustPaging' } });
       },
       error => {
@@ -211,10 +211,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     );
   }
 
-  EditCustPersonal(item)
-  {
-    var CustObj = {CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo};
-    this.http.post(AdInsConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
+  EditCustPersonal(item) {
+    var CustObj = { CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo };
+    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
       (response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];
@@ -226,16 +225,16 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.addCustObj.CustObj.IdNo = item.IdNo;
         this.addCustObj.CustObj.IdExpiredDt = this.IdExpiredDt;
         this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
-        if(this.IsVip === "true"){
+        if (this.IsVip === "true") {
           this.addCustObj.CustObj.IsVip = true;
-        }else{
+        } else {
           this.addCustObj.CustObj.IsVip = false;
         }
-        if(this.IsAffiliateWithMf === "true"){
+        if (this.IsAffiliateWithMf === "true") {
           this.addCustObj.CustObj.IsAffiliateWithMf = true;
-        }else{
+        } else {
           this.addCustObj.CustObj.IsAffiliateWithMf = false;
-        } 
+        }
         this.addCustObj.CustObj.VipNotes = this.VipNotes;
         this.addCustObj.CustPersonalObj.CustFullName = item.CustName;
         this.addCustObj.CustPersonalObj.MrGenderCode = this.Gender;
@@ -243,7 +242,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.addCustObj.CustPersonalObj.BirthDt = item.BirthDt;
         this.addCustObj.CustPersonalObj.MotherMaidenName = item.MotherMaidenName;
         this.addCustObj.CustPersonalObj.IsRestInPeace = false;
-        this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
+        this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           (response) => {
             this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId, 'From': 'CustPaging' } });
           },
@@ -258,10 +257,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     );
   }
 
-  EditNegativeCustPersonal(item)
-  {
-    var NegativeCustObj = {CustNo: item.CustNo, CustName: item.CustName, MrCustTypeCode: item.MrCustTypeCode, IdNo: item.IdNo};
-    this.http.post<RequestNegativeCustObj>(AdInsConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
+  EditNegativeCustPersonal(item) {
+    var NegativeCustObj = { CustNo: item.CustNo, CustName: item.CustName, MrCustTypeCode: item.MrCustTypeCode, IdNo: item.IdNo };
+    this.http.post<RequestNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
       (response) => {
         this.RequestNegativeCustObj = response;
         this.RequestNegativeCustObj.CustName = item.CustName;
@@ -271,16 +269,16 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.RequestNegativeCustObj.IdNo = item.IdNo;
         this.RequestNegativeCustObj.IdExpiredDt = this.IdExpiredDt;
         this.RequestNegativeCustObj.TaxIdNo = item.TaxIdNo;
-        if(this.IsVip === "true"){
+        if (this.IsVip === "true") {
           this.RequestNegativeCustObj.IsVip = true;
-        }else{
+        } else {
           this.RequestNegativeCustObj.IsVip = false;
         }
-        if(this.IsAffiliateWithMf === "true"){
+        if (this.IsAffiliateWithMf === "true") {
           this.RequestNegativeCustObj.IsAffiliateWithMf = true;
-        }else{
+        } else {
           this.RequestNegativeCustObj.IsAffiliateWithMf = false;
-        } 
+        }
         this.RequestNegativeCustObj.VipNotes = this.VipNotes;
         this.RequestNegativeCustObj.CustFullName = item.CustName;
         this.RequestNegativeCustObj.MrGenderCode = this.Gender;
@@ -288,7 +286,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.RequestNegativeCustObj.BirthDt = item.BirthDt;
         this.RequestNegativeCustObj.MotherMaidenName = item.MotherMaidenName;
         this.RequestNegativeCustObj.IsRestInPeace = false;
-        this.http.post(AdInsConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
+        this.http.post(URLConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
           (response) => {
             var custId = response['CustId'];
             this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { 'IdCust': custId, 'From': 'CustPaging' } });

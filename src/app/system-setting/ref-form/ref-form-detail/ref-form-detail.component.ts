@@ -8,6 +8,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -49,7 +50,7 @@ export class RefFormDetailComponent implements OnInit {
     var refMasterModuleObj = {
     }
 
-    this.http.post(AdInsConstant.GetListRefModuleKeyValue, refMasterModuleObj).subscribe(
+    this.http.post(URLConstant.GetListRefModuleKeyValue, refMasterModuleObj).subscribe(
       (response) => {
         if (response['ReturnObject'].length > 0) {
           this.itemModuleType = response["ReturnObject"];
@@ -66,7 +67,7 @@ export class RefFormDetailComponent implements OnInit {
       RefMasterTypeCode: "FORM_CLASS",
     }
 
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterClassObj).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterClassObj).subscribe(
       (response) => {
         if (response['ReturnObject'].length > 0) {
           this.itemClassType = response["ReturnObject"];
@@ -84,7 +85,7 @@ export class RefFormDetailComponent implements OnInit {
       var refFormObj = {
         RefFormId: this.RefFormId
       }
-      this.http.post<RefFormObj>(AdInsConstant.GetRefFormDataByRefFormId, refFormObj).subscribe(
+      this.http.post<RefFormObj>(URLConstant.GetRefFormDataByRefFormId, refFormObj).subscribe(
         (response) => {
           this.resultRefForm = response;
           this.refFormObj = response;
@@ -113,15 +114,15 @@ export class RefFormDetailComponent implements OnInit {
     }
   }
 
-  CheckClass(){
-    if(this.RefForm.controls.Class.value == "has-sub"){
+  CheckClass() {
+    if (this.RefForm.controls.Class.value == "has-sub") {
       this.RefForm.patchValue({
         Path: ""
       });
       this.RefForm.controls.Path.clearValidators();
       this.RefForm.controls.Path.disable();
       this.checkClass = false;
-    }else{
+    } else {
       this.RefForm.controls.Path.setValidators(Validators.required);
       this.RefForm.controls.Path.enable();
       this.checkClass = true;
@@ -132,7 +133,7 @@ export class RefFormDetailComponent implements OnInit {
   setLookup() {
     this.inputLookupParentObj = new InputLookupObj();
     this.inputLookupParentObj.urlJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
-    this.inputLookupParentObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupParentObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
@@ -164,14 +165,14 @@ export class RefFormDetailComponent implements OnInit {
     this.refFormObj.HierarchyNo = this.RefForm.controls.HierarchyNo.value;
     this.refFormObj.IsHidden = this.RefForm.controls.IsHidden.value;
     this.refFormObj.IsExternalLink = this.RefForm.controls.IsExternalLink.value;
-    if(this.refFormObj.Class=="has-sub"){
+    if (this.refFormObj.Class == "has-sub") {
       this.refFormObj.Path = "";
-    }else if(this.refFormObj.Class=="no-sub"){
+    } else if (this.refFormObj.Class == "no-sub") {
       this.refFormObj.Path = this.RefForm.controls.Path.value;
     }
 
     if (this.mode == "edit") {
-      this.http.post(AdInsConstant.EditRefFormData, this.refFormObj).subscribe(
+      this.http.post(URLConstant.EditRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigateByUrl('/SystemSetting/RefForm/Paging');
@@ -180,7 +181,7 @@ export class RefFormDetailComponent implements OnInit {
           console.log(error);
         });
     } else {
-      this.http.post(AdInsConstant.AddRefFormData, this.refFormObj).subscribe(
+      this.http.post(URLConstant.AddRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/SystemSetting/RefForm/Paging']);

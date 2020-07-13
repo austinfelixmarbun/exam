@@ -11,11 +11,11 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-add',
   templateUrl: './verification-question-group-member-add.component.html',
-  styleUrls: ['./verification-question-group-member-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class VerificationQuestionGroupMemberAddComponent implements OnInit {
@@ -69,7 +69,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/ucpaging/verification/searchVerificationQuestionAnswr.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputObj.ddlEnvironments = [
       {
         name: "VQA.REF_VERF_ANSWER_TYPE_ID",
@@ -82,7 +82,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.inputObj.addCritInput = new Array();
 
     var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
-    this.http.post(AdInsConstant.GetQuestionGrpHForUpdateById, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetQuestionGrpHForUpdateById, verfGroupObj).subscribe(
       (response) => {
         this.verfQuestionGroup = response["ReturnObject"];
         this.VerfQuestionGrpCode = this.verfQuestionGroup.VerfQuestionGrpCode,
@@ -103,7 +103,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         key: this.orderByKey,
         value: this.orderByValue
       }
-      this.UCSearchComponent.search(AdInsConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order)
+      this.UCSearchComponent.search(URLConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order)
     }
   }
 
@@ -125,7 +125,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.UCSearchComponent.search(AdInsConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order)
+    this.UCSearchComponent.search(URLConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order)
   }
 
   getResult(event) {
@@ -193,7 +193,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         };
       }
       this.inputObj.addCritInput = this.arrAddCrit;
-      this.UCSearchComponent.search(AdInsConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order, this.arrAddCrit);
+      this.UCSearchComponent.search(URLConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order, this.arrAddCrit);
       this.listSelectedId = new Array<number>();
       this.checkboxAll = false;
     } else {
@@ -231,13 +231,13 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
         };
       }
       this.inputObj.addCritInput = this.arrAddCrit;
-      this.UCSearchComponent.search(AdInsConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order, this.arrAddCrit);
+      this.UCSearchComponent.search(URLConstant.GetUrlPagingObjectBySQL, this.pageNow, this.pageSize, order, this.arrAddCrit);
     }
   }
 
   GetListVerfQuestionGrpDByVerfQuestionGrpHId() {
     var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
-    this.http.post(AdInsConstant.GetActiveVerfQuestionGrpDForUpdateByGrpHId, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetActiveVerfQuestionGrpDForUpdateByGrpHId, verfGroupObj).subscribe(
       (response) => {
         this.listVerfQuestionGrpD = response;
         var arrMemberList = new Array();
@@ -277,7 +277,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
       return;
     }
 
-    this.http.post(AdInsConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
+    this.http.post(URLConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Verification/QuestionGroupMemberPaging"], { queryParams: { "VerfQuestionGrpHId": this.VerfQuestionGrpHId } });
@@ -287,5 +287,4 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
       }
     );
   }
-
 }

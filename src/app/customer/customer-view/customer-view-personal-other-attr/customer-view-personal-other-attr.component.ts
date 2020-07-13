@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-personal-other-attr',
-  templateUrl: './customer-view-personal-other-attr.component.html',
-  styleUrls: ['./customer-view-personal-other-attr.component.scss']
+  templateUrl: './customer-view-personal-other-attr.component.html'
 })
 export class CustomerViewPersonalOtherAttrComponent implements OnInit {
   CustId: number;
-  GetCustAttrContentForCustViewByCustIdUrl = AdInsConstant.GetCustAttrContentForCustViewByCustId;
+  GetCustAttrContentForCustViewByCustIdUrl = URLConstant.GetCustAttrContentForCustViewByCustId;
   responseCustAttr: any;
 
   constructor(

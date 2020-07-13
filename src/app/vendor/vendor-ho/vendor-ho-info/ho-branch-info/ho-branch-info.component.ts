@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-ho-branch-info',
-  templateUrl: './ho-branch-info.component.html',
-  styleUrls: ['./ho-branch-info.component.scss']
+  templateUrl: './ho-branch-info.component.html'
 })
 export class HoBranchInfoComponent implements OnInit {
   VendorId: any;
@@ -27,7 +26,7 @@ export class HoBranchInfoComponent implements OnInit {
       VendorId : this.VendorId
     }
 
-    this.http.post(AdInsConstant.GetListBranchByVendorId, obj).subscribe(
+    this.http.post(URLConstant.GetListBranchByVendorId, obj).subscribe(
       (response) => {
         this.ListData = response["ReturnObject"];
       }

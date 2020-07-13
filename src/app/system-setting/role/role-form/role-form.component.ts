@@ -3,8 +3,6 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { HttpClient } from "@angular/common/http";
-import { Location, DecimalPipe } from "@angular/common";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { environment } from "environments/environment";
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
@@ -13,11 +11,12 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { AuthFormObj } from "app/shared/model/AuthFormObj.Model";
 import { ListAuthFormObj } from "app/shared/model/ListAuthFormObj.Model";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: 'app-role-form',
   templateUrl: './role-form.component.html',
-  providers: [NGXToastrService, ExcelService, DecimalPipe]
+  providers: [NGXToastrService, ExcelService]
 })
 export class RoleFormComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) UCGridFooter;
@@ -43,7 +42,7 @@ export class RoleFormComponent implements OnInit {
   RefRoleId: number;
   AuthFormObj: AuthFormObj;
   listAuthFormObj: ListAuthFormObj;
-  
+
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -64,16 +63,16 @@ export class RoleFormComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchRoleRefForm.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputObj.addCritInput = new Array();
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
   }
 
   searchSort(event: any) {
@@ -237,10 +236,10 @@ export class RoleFormComponent implements OnInit {
       this.listAuthFormObj.ListAuthFormObj.push(this.AuthFormObj);
     }
 
-    this.http.post(AdInsConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
+    this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(['/SystemSetting/RoleForm'], { queryParams: { "RefRoleId": this.RefRoleId} });
+        this.router.navigate(['/SystemSetting/RoleForm'], { queryParams: { "RefRoleId": this.RefRoleId } });
       },
       (error) => {
         console.log(error);
@@ -252,7 +251,7 @@ export class RoleFormComponent implements OnInit {
       RefRoleId: this.RefRoleId
     }
 
-    this.http.post<Array<AuthFormObj>>(AdInsConstant.GetListAuthFormByRefRoleId, obj).subscribe(
+    this.http.post<Array<AuthFormObj>>(URLConstant.GetListAuthFormByRefRoleId, obj).subscribe(
       (response) => {
         this.member = response["ReturnObject"];
 

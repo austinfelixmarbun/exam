@@ -12,6 +12,7 @@ import { RefProductBrancMbrObj } from "../../../shared/model/RefProductBrancMbrO
 import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
 import { getComponent } from "@angular/core/src/linker/component_factory_resolver";
 import { saveAs } from 'file-saver';
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 
 
@@ -42,9 +43,9 @@ export class ProductHOViewComponent implements OnInit {
   IsLoaded: boolean = false;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
-    this.ProdDUrl = AdInsConstant.GetProductDetailComponentInfo;
-    this.ProdBranchUrl = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
-    this.ProdVerUrl = AdInsConstant.GetListProdHVersionByProdHId;
+    this.ProdDUrl = URLConstant.GetProductDetailComponentInfo;
+    this.ProdBranchUrl = URLConstant.GetListProdBranchOfficeMbrByProdHId;
+    this.ProdVerUrl = URLConstant.GetListProdHVersionByProdHId;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {
@@ -115,7 +116,7 @@ export class ProductHOViewComponent implements OnInit {
 
   DownloadRule(CompntValue, CompntValueDesc) {
     this.DlRuleObj.CompntValue = CompntValue;
-    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+    this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
       },

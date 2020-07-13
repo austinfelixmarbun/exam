@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { empty } from 'rxjs';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-list-office-member-offering',
@@ -20,32 +21,32 @@ export class ListOfficeMemberComponentOffering implements OnInit {
   resultData;
   constructor(
     private http: HttpClient,
-    private toastr:NGXToastrService,
+    private toastr: NGXToastrService,
     private route: ActivatedRoute,
     private router: Router,
-  ) { 
+  ) {
     this.route.queryParams.subscribe(params => {
       this.source = params["source"];
     });
   }
-  
+
   pageNow;
   pageSize;
   apiUrl;
-  ProdOfferingHId : number;
-  source:string ="";
+  ProdOfferingHId: number;
+  source: string = "";
 
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
     this.ProdOfferingHId = this.ListOfficeMemberObjInput["param"];
-    var obj={
+    var obj = {
       ProdOfferingHId: this.ProdOfferingHId,
       RowVersion: ""
     }
 
-    var url = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
+    var url = URLConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
     this.http.post(url, obj).subscribe(
       (response) => {
         console.log("list member");
@@ -53,7 +54,7 @@ export class ListOfficeMemberComponentOffering implements OnInit {
         this.resultData = response["ReturnObject"];
         console.log("result data");
         console.log(this.resultData);
-        
+
       },
       (error) => {
         console.log(error);
@@ -61,18 +62,18 @@ export class ListOfficeMemberComponentOffering implements OnInit {
     );
   }
 
-  addOfficeMember(){
+  addOfficeMember() {
     console.log("add office member");
     // var tempIsOn = false;
     var temp = [];
     var obj;
-    if(this.resultData == empty){
+    if (this.resultData == empty) {
       obj = {
         isOn: false,
         result: []
       }
-    }else{
-      for(var i=0;i<this.resultData.length;i++){
+    } else {
+      for (var i = 0; i < this.resultData.length; i++) {
         temp.push(this.resultData[i].RefOfficeId);
       }
       obj = {
@@ -80,14 +81,14 @@ export class ListOfficeMemberComponentOffering implements OnInit {
         result: temp
       }
     }
-    
+
     this.componentIsOn.emit(obj);
     // console.log(this.ListOfficeMemberObjInput);
   }
 
   orderByKey;
   orderByValue
-  searchSort(ev: any){
+  searchSort(ev: any) {
     console.log(ev);
     if (this.resultData != null) {
       if (this.orderByKey == ev.target.attributes.name.nodeValue) {
@@ -104,12 +105,12 @@ export class ListOfficeMemberComponentOffering implements OnInit {
     }
   }
 
-  deleteFromList(ev: any){
+  deleteFromList(ev: any) {
     // console.log(ev);
     if (confirm('Are you sure to delete this record?')) {
-      var url = AdInsConstant.DeleteProdOfferingOfficeMbr;
+      var url = URLConstant.DeleteProdOfferingOfficeMbr;
       var obj = {
-        ProdOfferingBranchMbrs:[
+        ProdOfferingBranchMbrs: [
           {
             ProdOfferingBranchMbrId: ev.ProdOfferingBranchMbrId,
             RowVersion: ""
@@ -122,8 +123,8 @@ export class ListOfficeMemberComponentOffering implements OnInit {
         (response) => {
           console.log("delete member");
           console.log(response);
-          var idx = this.resultData.findIndex(x=>x.ProdOfferingBranchMbrId == ev.ProdOfferingBranchMbrId);
-          if(idx > -1) this.resultData.splice(idx, 1);
+          var idx = this.resultData.findIndex(x => x.ProdOfferingBranchMbrId == ev.ProdOfferingBranchMbrId);
+          if (idx > -1) this.resultData.splice(idx, 1);
           this.toastr.successMessage(response["message"]);
         },
         (error) => {
@@ -133,8 +134,8 @@ export class ListOfficeMemberComponentOffering implements OnInit {
     }
   }
 
-  DoneForm(){
-    this.http.post(environment.FoundationR3Url + "/ProductOffering/SubmitProdOffering", {ProdOfferingHId : this.ProdOfferingHId}).subscribe(
+  DoneForm() {
+    this.http.post(environment.FoundationR3Url + "/ProductOffering/SubmitProdOffering", { ProdOfferingHId: this.ProdOfferingHId }).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
       },
@@ -147,21 +148,16 @@ export class ListOfficeMemberComponentOffering implements OnInit {
     this.BackToPaging();
   }
 
-  Cancel()
-  {
+  Cancel() {
     this.BackToPaging();
   }
 
-  BackToPaging()
-  {
-    if(this.source == "return")
-    {
+  BackToPaging() {
+    if (this.source == "return") {
       this.router.navigate(["/Product/ProdOffering/Returnpaging"]);
     }
-    else
-    {
+    else {
       this.router.navigate(["/Product/ProdOffering/Paging"]);
     }
   }
-
 }

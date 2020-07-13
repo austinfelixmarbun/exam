@@ -4,11 +4,12 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment'; 
+import { environment } from 'environments/environment';
 import { NotificationHObj } from 'app/shared/model/NotificationHObj.Model';
 import { NotificationDObj } from 'app/shared/model/NotificationDObj.Model';
 import { formatDate } from '@angular/common';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-notification-add-edit',
@@ -17,7 +18,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class NotificationAddEditComponent implements OnInit {
   settingUrl: string = environment.FoundationR3Url;
-  title: string ="Notification-Add";
+  title: string = "Notification-Add";
   mode: any = "add";
   notificationHObj: NotificationHObj;
   notificationHId: any;
@@ -29,9 +30,9 @@ export class NotificationAddEditComponent implements OnInit {
   editUrl: any;
   tempListNotifType: any;
   tempListNotifMethod: any;
-  refOfficeObj:any;
-  refRoleObj:any;
-  dropdownSettings:IDropdownSettings;
+  refOfficeObj: any;
+  refRoleObj: any;
+  dropdownSettings: IDropdownSettings;
   dropdownListOffice = [];
   selectedItemsOffice = [];
   dropdownListRole = [];
@@ -48,12 +49,10 @@ export class NotificationAddEditComponent implements OnInit {
     TargetRole: [''],
 
   })
-  
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-     this.getHUrl = this.settingUrl + AdInsConstant.GetNotificationHByNotificationHId;
-    // this.getDUrl = AdInsConstant.;
-    this.addUrl = this.settingUrl + AdInsConstant.AddNotificationHAndD;
-    // this.editUrl = AdInsConstant.;
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+    this.getHUrl = this.settingUrl + URLConstant.GetNotificationHByNotificationHId;
+    this.addUrl = this.settingUrl + URLConstant.AddNotificationHAndD;
 
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
@@ -70,7 +69,7 @@ export class NotificationAddEditComponent implements OnInit {
       RefMasterTypeCode: "NOTIFICATION_TYPE",
       RowVersion: ""
     }
-    this.http.post(AdInsConstant.GetListActiveRefMaster, refMasterNotifTypeObj).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterNotifTypeObj).subscribe(
       (response) => {
         if (response['ReturnObject'].length > 0) {
           this.tempListNotifType = response["ReturnObject"];
@@ -85,7 +84,7 @@ export class NotificationAddEditComponent implements OnInit {
       RefMasterTypeCode: "NOTIFICATION_METHOD",
       RowVersion: ""
     }
-    this.http.post(AdInsConstant.GetListActiveRefMaster, refMasterNotifMethodObj).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterNotifMethodObj).subscribe(
       (response) => {
         if (response['ReturnObject'].length > 0) {
           this.tempListNotifMethod = response["ReturnObject"];
@@ -106,13 +105,13 @@ export class NotificationAddEditComponent implements OnInit {
         response => {
           this.resultDataH = response;
           this.NotificationForm.patchValue({
-           NotificationType: this.resultDataH.MrNotificationTypeCode,
-           NotificationMethod: this.resultDataH.MrNotificationMethodCode,
-           Title: this.resultDataH.Title,
-           ShortDescription: this.resultDataH.ShortDesc,
-           LongDescription: this.resultDataH.LongDesc,
-           PublishDate: formatDate(this.resultDataH.PublishDt,  'yyyy-MM-dd', 'en-US')
-           
+            NotificationType: this.resultDataH.MrNotificationTypeCode,
+            NotificationMethod: this.resultDataH.MrNotificationMethodCode,
+            Title: this.resultDataH.Title,
+            ShortDescription: this.resultDataH.ShortDesc,
+            LongDescription: this.resultDataH.LongDesc,
+            PublishDate: formatDate(this.resultDataH.PublishDt, 'yyyy-MM-dd', 'en-US')
+
           });
         },
         error => {
@@ -120,17 +119,16 @@ export class NotificationAddEditComponent implements OnInit {
         }
       );
     }
-    
   }
 
-  settingMultiSelectDropdown(){
+  settingMultiSelectDropdown() {
 
-    var urlOffice = this.settingUrl + AdInsConstant.GetListActiveRefOffice;
+    var urlOffice = this.settingUrl + URLConstant.GetListActiveRefOffice;
     this.http.post(urlOffice, null).subscribe(
       (response) => {
         this.refOfficeObj = response["ReturnObject"];
         for (let i = 0; i < this.refOfficeObj.length; i++) {
-          this.dropdownListOffice.push({ item_id: this.refOfficeObj[i].RefOfficeId, item_text: this.refOfficeObj[i].OfficeName});
+          this.dropdownListOffice.push({ item_id: this.refOfficeObj[i].RefOfficeId, item_text: this.refOfficeObj[i].OfficeName });
         }
       },
       (error) => {
@@ -138,12 +136,12 @@ export class NotificationAddEditComponent implements OnInit {
       }
     );
 
-    var urlRole = this.settingUrl + AdInsConstant.GetListActiveRefRole;
+    var urlRole = this.settingUrl + URLConstant.GetListActiveRefRole;
     this.http.post(urlRole, null).subscribe(
       (response) => {
         this.refRoleObj = response["ReturnObject"];
         for (let i = 0; i < this.refRoleObj.length; i++) {
-          this.dropdownListRole.push({ item_id: this.refRoleObj[i].RefRoleId, item_text: this.refRoleObj[i].RoleName});
+          this.dropdownListRole.push({ item_id: this.refRoleObj[i].RefRoleId, item_text: this.refRoleObj[i].RoleName });
         }
       },
       (error) => {
@@ -160,22 +158,19 @@ export class NotificationAddEditComponent implements OnInit {
       itemsShowLimit: 5,
       allowSearchFilter: true
     };
-    
+
 
   }
 
   SaveForm() {
-    if(this.selectedItemsOffice.length == 0 && this.selectedItemsRole.length == 0)
-    {
+    if (this.selectedItemsOffice.length == 0 && this.selectedItemsRole.length == 0) {
       this.toastr.errorMessage("Please choose office and/or role to be notified");
       return false;
     }
-    else
-    {
+    else {
       var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
 
-      if (this.mode == "add") 
-      {
+      if (this.mode == "add") {
         this.notificationHObj = new NotificationHObj();
         this.notificationHObj.MrNotificationTypeCode = this.NotificationForm.controls["NotificationType"].value
         this.notificationHObj.MrNotificationMethodCode = this.NotificationForm.controls["NotificationMethod"].value;
@@ -189,12 +184,12 @@ export class NotificationAddEditComponent implements OnInit {
         this.notificationHObj.IsDraft = false;
         this.notificationHObj.listTargetRefOfficeId = this.selectedItemsOffice.map(x => x.item_id);
         this.notificationHObj.listTargetRefRoleId = this.selectedItemsRole.map(x => x.item_id);
-  
+
         this.http.post(this.addUrl, this.notificationHObj).subscribe(
           response => {
-              this.toastr.successMessage(response["Message"]);
-              this.router.navigate(["/SystemSetting/Notification"]);
-            
+            this.toastr.successMessage(response["Message"]);
+            this.router.navigate(["/SystemSetting/Notification"]);
+
           },
           error => {
             console.log(error);
@@ -203,10 +198,8 @@ export class NotificationAddEditComponent implements OnInit {
       }
       else //Edit
       {
-  
+
       }
     }
-    
   }
-
 }

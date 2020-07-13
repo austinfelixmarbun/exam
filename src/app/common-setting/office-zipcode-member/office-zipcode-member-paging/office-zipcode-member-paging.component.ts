@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-office-zipcode-member-paging',
@@ -50,13 +51,13 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
     this.inputObj.enviromentUrl = this.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetRefOfficeZipcodePaging;
+    this.inputObj.apiQryPaging = URLConstant.GetRefOfficeZipcodePaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOfficeZipcodePaging;
-    this.officeUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
-    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteOfficeZipcodeMember;
+    this.apiUrl = this.foundationUrl + URLConstant.GetRefOfficeZipcodePaging;
+    this.officeUrl = this.foundationUrl + URLConstant.GetRefOfficeObj;
+    this.deleteUrl = this.foundationUrl + URLConstant.DeleteOfficeZipcodeMember;
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();

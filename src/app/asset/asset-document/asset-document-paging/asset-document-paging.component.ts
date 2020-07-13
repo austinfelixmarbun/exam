@@ -4,6 +4,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-asset-document-paging',
@@ -26,9 +27,9 @@ export class AssetDocumentPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetDocument.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetDocument.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetDocList;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetDocList;
 
     this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
 

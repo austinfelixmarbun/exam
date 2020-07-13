@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-groupmember',
@@ -33,7 +34,7 @@ export class VendorGroupmemberComponent implements OnInit {
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/vendorGrpMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/vendorGrpMbrTempPaging.json";
 
     var crit1Obj = new CriteriaObj();
@@ -66,7 +67,7 @@ export class VendorGroupmemberComponent implements OnInit {
   }
 
   GetListVendorGrpMbrByVendorGrpId() {
-    this.http.post(AdInsConstant.GetListVendorGrpMbrByVendorGrpId, { VendorGrpId: this.VendorGrpId }).subscribe(
+    this.http.post(URLConstant.GetListVendorGrpMbrByVendorGrpId, { VendorGrpId: this.VendorGrpId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response["ReturnObject"].length; index++) {
@@ -104,7 +105,7 @@ export class VendorGroupmemberComponent implements OnInit {
       VendorId: this.listSelectedId
     }
 
-    this.http.post(AdInsConstant.AddVendorGrpMbr, obj).subscribe(
+    this.http.post(URLConstant.AddVendorGrpMbr, obj).subscribe(
       (response) => {
         this.router.navigate(['/Vendor/Group/View/'], { queryParams: { VendorGrpId: this.VendorGrpId, MrVendorCategoryCode: this.MrVendorCategoryCode } });
       },

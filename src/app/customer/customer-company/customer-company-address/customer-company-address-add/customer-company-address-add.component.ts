@@ -9,6 +9,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -20,7 +21,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   @Input() AddrId: number;
   @Input() mode: string;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  
+
   listCustAddr: any;
   listAddressType: any;
   copyCustomerAddr: any;
@@ -29,10 +30,10 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   addressObj: CustAddrObj;
   custAddrObj: CustAddrObj;
   addressType: RefMasterObj;
-  custAddressObj: CustAddrObj; 
+  custAddressObj: CustAddrObj;
   inputFieldAddressObj: InputFieldObj;
   custAddrFromObj: CustAddrObj;
-  
+
   IdCust: number;
   pageType: string;
   addCustAddrUrl: string;
@@ -40,7 +41,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   editCustAddrUrl: string;
   getListCustAddrUrl: string;
   getRefMasterWithReserveFieldUrl: string;
-  
+
   CustDataCompanyForm = this.fb.group({
     Notes: [''],
     LuasBangunan: [''],
@@ -54,11 +55,11 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   });
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
-    this.getRefMasterWithReserveFieldUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
-    this.getListCustAddrUrl = AdInsConstant.GetListCustAddr;
-    this.addCustAddrUrl = AdInsConstant.AddCustAddr;
-    this.editCustAddrUrl = AdInsConstant.EditCustAddr;
-    this.getCustAddrUrl = AdInsConstant.GetCustAddr;
+    this.getRefMasterWithReserveFieldUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListCustAddrUrl = URLConstant.GetListCustAddr;
+    this.addCustAddrUrl = URLConstant.AddCustAddr;
+    this.editCustAddrUrl = URLConstant.EditCustAddr;
+    this.getCustAddrUrl = URLConstant.GetCustAddr;
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -98,7 +99,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         this.listCustAddr = response["ReturnObject"];
         console.log(this.listCustAddr);
         if (this.listCustAddr.length > 0) {
-          this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] }); 
+          this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] });
         }
       });
 
@@ -142,7 +143,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         });
     }
   }
-  
+
   copyAddress() {
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
@@ -183,8 +184,8 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   setCustAddr() {
     this.custAddressObj.CustId = this.IdCust;
     this.custAddressObj.MrCustAddrTypeCode = this.CustDataCompanyForm.controls["MrCustAddrTypeCode"].value;
-    this.custAddressObj.Addr = this.CustDataCompanyForm.controls["custAddress"]["controls"].Addr.value; 
-    this.custAddressObj.FullAddr = this.CustDataCompanyForm.controls["custAddress"]["controls"].Addr.value + " RT: "+ this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode4.value+ " RW: " + this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode3.value + " " +  this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode2.value +", " + this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode1.value + " " +this.CustDataCompanyForm.controls["custAddressZipcode"]["controls"].value.value;  
+    this.custAddressObj.Addr = this.CustDataCompanyForm.controls["custAddress"]["controls"].Addr.value;
+    this.custAddressObj.FullAddr = this.CustDataCompanyForm.controls["custAddress"]["controls"].Addr.value + " RT: " + this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode4.value + " RW: " + this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode3.value + " " + this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode2.value + ", " + this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode1.value + " " + this.CustDataCompanyForm.controls["custAddressZipcode"]["controls"].value.value;
     this.custAddressObj.AreaCode3 = this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode3.value;
     this.custAddressObj.AreaCode4 = this.CustDataCompanyForm.controls["custAddress"]["controls"].AreaCode4.value;
     this.custAddressObj.Zipcode = this.CustDataCompanyForm.controls["custAddressZipcode"]["controls"].value.value;

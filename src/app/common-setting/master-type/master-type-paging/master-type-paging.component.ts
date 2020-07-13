@@ -10,6 +10,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-master-type-paging',
@@ -44,13 +45,13 @@ export class MasterTypePagingComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchRefMasterType.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetRefRolePaging;
+    this.inputObj.apiQryPaging = URLConstant.GetRefRolePaging;
     
     console.log('masuk');
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetRefRolePaging;
     this.initiateForm()
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
@@ -91,7 +92,7 @@ export class MasterTypePagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteRefRole;
+      this.deleteUrl = this.foundationUrl + URLConstant.DeleteRefRole;
       this.refRoleObj = new RefRoleObj();
       this.refRoleObj.RefRoleId = +id;
       console.log(this.refRoleObj);

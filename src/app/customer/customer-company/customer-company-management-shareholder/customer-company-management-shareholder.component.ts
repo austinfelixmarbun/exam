@@ -6,6 +6,7 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { ActivatedRoute } from '@angular/router';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder',
@@ -54,10 +55,10 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
   next() {
     this.custCompanyObj = new CustCompanyObj;
     this.custCompanyObj.CustId = this.IdCust;
-    this.http.post(AdInsConstant.GetCustCompanyByCustId, this.custCompanyObj).subscribe(
+    this.http.post(URLConstant.GetCustCompanyByCustId, this.custCompanyObj).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
-        this.http.post(AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
+        this.http.post(URLConstant.GetListCustCompanyMgmntShrholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
           (response) => {
             this.tempListCompanyManagementShareholder = response["ReturnObject"];
             if(this.tempListCompanyManagementShareholder.length != 0)

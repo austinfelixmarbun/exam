@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { template } from '@angular/core/src/render3';
 import { empty } from 'rxjs';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-search-office-offering',
@@ -16,7 +17,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
   providers: [NGXToastrService]
 })
 export class SearchOfficeComponentOffering implements OnInit {
-  
+
   @ViewChild(UCSearchComponent) UCSearchComponent;
   @ViewChild(UcgridfooterComponent) UCGridFooter;
 
@@ -24,7 +25,7 @@ export class SearchOfficeComponentOffering implements OnInit {
   @Input() ListOfficeMemberObjInput: any;
   constructor(
     private http: HttpClient,
-    private toastr:NGXToastrService
+    private toastr: NGXToastrService
   ) { }
 
   inputObj;
@@ -33,11 +34,11 @@ export class SearchOfficeComponentOffering implements OnInit {
   pageSize;
   apiUrl;
   totalData;
-  
+
   ngOnInit() {
     this.arrAddCrit = new Array();
 
-    if(this.ListOfficeMemberObjInput["result"].length){
+    if (this.ListOfficeMemberObjInput["result"].length) {
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
       addCrit.propName = "ro.REF_OFFICE_ID";
@@ -47,12 +48,12 @@ export class SearchOfficeComponentOffering implements OnInit {
       // console.log(this.arrAddCrit);
       this.arrAddCrit.push(addCrit);
     }
-    
+
     // uc search obj
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeMember.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputObj.addCritInput = this.arrAddCrit;
     this.inputObj.ddlEnvironments = [
       {
@@ -66,17 +67,17 @@ export class SearchOfficeComponentOffering implements OnInit {
     this.tempData = new Array();
     this.arrCrit = new Array();
 
-    
+
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
   }
 
   resultData;
-  getResult(ev){
+  getResult(ev) {
     // console.log(ev);
-    this.resultData=ev["response"];
+    this.resultData = ev["response"];
     this.totalData = ev.response.Count;
     this.UCGridFooter.pageNow = ev.pageNow;
     this.UCGridFooter.totalData = this.totalData;
@@ -84,7 +85,7 @@ export class SearchOfficeComponentOffering implements OnInit {
 
   }
 
-  searchSort(ev: any){
+  searchSort(ev: any) {
     console.log(ev);
     if (this.resultData != null) {
       if (this.orderByKey == ev.target.attributes.name.nodeValue) {
@@ -102,22 +103,22 @@ export class SearchOfficeComponentOffering implements OnInit {
   }
 
   checkboxAll;
-  SelectAll(ev: any){
+  SelectAll(ev: any) {
     // console.log(ev);
     // console.log(this.resultData);
-    this.checkboxAll=ev;
-    if(this.checkboxAll){
-      for(var i=0;i<this.resultData.Data.length;i++){
+    this.checkboxAll = ev;
+    if (this.checkboxAll) {
+      for (var i = 0; i < this.resultData.Data.length; i++) {
         var idx = this.resultData.Data[i].RefOfficeId;
-        if(this.listSelectedId.indexOf(idx)<0){
+        if (this.listSelectedId.indexOf(idx) < 0) {
           this.listSelectedId.push(idx);
         }
       }
-    }else{
-      for(var i=0;i<this.resultData.Data.length;i++){
+    } else {
+      for (var i = 0; i < this.resultData.Data.length; i++) {
         var index = this.resultData.Data[i].RefOfficeId;
         var idx = this.listSelectedId.indexOf(index);
-        if(idx > -1){
+        if (idx > -1) {
           this.listSelectedId.splice(idx, 1);
         }
         // console.log(this.resultData.Data[i]);
@@ -126,14 +127,14 @@ export class SearchOfficeComponentOffering implements OnInit {
     // console.log(this.listSelectedId);
   }
 
-  Checked(RefOfficeId: any, isChecked: any){
+  Checked(RefOfficeId: any, isChecked: any) {
     // console.log(RefOfficeId);
     // console.log(isChecked);
-    if(isChecked){
+    if (isChecked) {
       this.listSelectedId.push(RefOfficeId);
-    }else{
+    } else {
       var idx = this.listSelectedId.indexOf(RefOfficeId);
-      if(idx > -1){
+      if (idx > -1) {
         this.listSelectedId.splice(idx, 1);
         this.checkboxAll = false;
       }
@@ -146,14 +147,14 @@ export class SearchOfficeComponentOffering implements OnInit {
   arrCrit;
   orderByKey;
   orderByValue;
-  
-  addToTemp(){
+
+  addToTemp() {
     console.log("ADD to TEMP");
-    if(this.listSelectedId.length != 0){
+    if (this.listSelectedId.length != 0) {
       for (var i = 0; i < this.listSelectedId.length; i++) {
         this.tempListId.push(this.listSelectedId[i]);
         var object = this.resultData.Data.find(x => x.RefOfficeId == this.listSelectedId[i]);
-        object["IsAllowedCrt"]=false;
+        object["IsAllowedCrt"] = false;
         this.tempData.push(object);
       }
 
@@ -168,10 +169,10 @@ export class SearchOfficeComponentOffering implements OnInit {
       addCrit.propName = "ro.REF_OFFICE_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       var tempList = [];
-      for(var i=0;i<this.tempListId.length;i++){
+      for (var i = 0; i < this.tempListId.length; i++) {
         tempList.push(this.tempListId[i]);
       }
-      for(var i=0;i<this.ListOfficeMemberObjInput["result"].length;i++){
+      for (var i = 0; i < this.ListOfficeMemberObjInput["result"].length; i++) {
         tempList.push(this.ListOfficeMemberObjInput["result"][i]);
       }
       // console.log(tempList);
@@ -191,20 +192,20 @@ export class SearchOfficeComponentOffering implements OnInit {
       // console.log("temp data");
       // console.log(this.tempData);
       this.checkboxAll = false;
-    }else{
+    } else {
       this.toastr.typeErrorCustom("Please select at least one Office");
     }
   }
 
-  ClickTest(ev: any, item: any){
+  ClickTest(ev: any, item: any) {
     console.log(ev);
     console.log(item);
     var idx = this.tempData.findIndex(x => x.RefOfficeId == item.RefOfficeId);
-    if(idx > -1) this.tempData[idx].IsAllowedCrt =  ev.returnValue;
+    if (idx > -1) this.tempData[idx].IsAllowedCrt = ev.returnValue;
     // console.log(this.tempData);
   }
 
-  deleteFromTemp(RefOfficeId: any){
+  deleteFromTemp(RefOfficeId: any) {
     if (confirm('Are you sure to delete this record?')) {
       this.arrAddCrit = new Array();
       if (this.arrCrit.length != 0) {
@@ -223,10 +224,10 @@ export class SearchOfficeComponentOffering implements OnInit {
       addCrit.propName = "ro.REF_OFFICE_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       var tempList = [];
-      for(var i=0;i<this.tempListId.length;i++){
+      for (var i = 0; i < this.tempListId.length; i++) {
         tempList.push(this.tempListId[i]);
       }
-      for(var i=0;i<this.ListOfficeMemberObjInput["result"].length;i++){
+      for (var i = 0; i < this.ListOfficeMemberObjInput["result"].length; i++) {
         tempList.push(this.ListOfficeMemberObjInput["result"][i]);
       }
       // console.log(tempList);
@@ -248,7 +249,7 @@ export class SearchOfficeComponentOffering implements OnInit {
     }
   }
 
-  GoBack(){
+  GoBack() {
     var obj = {
       isOn: true,
       result: []
@@ -256,15 +257,15 @@ export class SearchOfficeComponentOffering implements OnInit {
     this.componentIsOn.emit(obj);
   }
 
-  SaveForm(){
+  SaveForm() {
 
     var obj = {
       ProdOfferingBranchMbrs: [],
       RowVersion: ""
     };
 
-    for(var i=0;i<this.tempData.length;i++){
-      var tempObj={
+    for (var i = 0; i < this.tempData.length; i++) {
+      var tempObj = {
         ProdOfferingHId: this.ListOfficeMemberObjInput["param"],
         RefOfficeId: this.tempData[i].RefOfficeId,
         IsAllowedCrt: true,
@@ -274,7 +275,7 @@ export class SearchOfficeComponentOffering implements OnInit {
     }
     console.log(obj);
 
-    var url=AdInsConstant.AddProdOfferingOfficeMbrBatch;
+    var url = URLConstant.AddProdOfferingOfficeMbrBatch;
     this.http.post(url, obj).subscribe(
       (response) => {
         console.log(response);
@@ -283,7 +284,7 @@ export class SearchOfficeComponentOffering implements OnInit {
           isOn: true,
           result: []
         }
-        this.componentIsOn.emit(obj );
+        this.componentIsOn.emit(obj);
       },
       (error) => {
         console.log(error);

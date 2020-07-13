@@ -10,6 +10,7 @@ import { environment } from 'environments/environment';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-company',
@@ -48,11 +49,11 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
-    this.getCustCompanyMgmntShrholderUrl = AdInsConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
-    this.editManagementShareholderUrl = AdInsConstant.EditCustCompanyMgmntShrholder; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
+    this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
+    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {  

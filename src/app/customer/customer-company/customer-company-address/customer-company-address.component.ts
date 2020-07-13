@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-address',
@@ -46,7 +47,7 @@ export class CustomerCompanyAddressComponent implements OnInit {
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeLegal;
     this.custAddrObj.CustId = this.IdCust;
-    this.http.post(AdInsConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
+    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
       (response) => {
         this.legalAddr = response; 
         if (this.legalAddr.Addr == null) {

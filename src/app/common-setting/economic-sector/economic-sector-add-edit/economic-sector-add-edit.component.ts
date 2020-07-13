@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RefEconomicSectorObj } from 'app/shared/model/RefEconomicSectorObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-economic-sector-add-edit',
@@ -40,7 +41,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.RefEconomicSectorForm.controls["EconomicSectorCode"].disable();
       this.refEconomicSectorObj = new RefEconomicSectorObj();
       this.refEconomicSectorObj.RefEconomicSectorId = this.RefEconomicSectorId;
-      this.http.post(AdInsConstant.GetRefEconomicSectorById, this.refEconomicSectorObj).subscribe(
+      this.http.post(URLConstant.GetRefEconomicSectorById, this.refEconomicSectorObj).subscribe(
         response => {
           this.resultData = response;
           this.RefEconomicSectorForm.patchValue({
@@ -65,7 +66,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.refEconomicSectorObj.EconomicSectorName = this.RefEconomicSectorForm.controls["EconomicSectorName"].value;
       this.refEconomicSectorObj.RegRptCode = this.RefEconomicSectorForm.controls["RegRptCode"].value;
       this.refEconomicSectorObj.IsActive = this.RefEconomicSectorForm.controls["IsActive"].value;
-      this.http.post(AdInsConstant.AddRefEconomicSector, this.refEconomicSectorObj).subscribe(
+      this.http.post(URLConstant.AddRefEconomicSector, this.refEconomicSectorObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
             this.router.navigate(["/CommonSetting/EconomicSector/Paging"]);
@@ -81,7 +82,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.refEconomicSectorObj.EconomicSectorName = this.RefEconomicSectorForm.controls["EconomicSectorName"].value;
       this.refEconomicSectorObj.RegRptCode = this.RefEconomicSectorForm.controls["RegRptCode"].value;
       this.refEconomicSectorObj.IsActive = this.RefEconomicSectorForm.controls["IsActive"].value;
-      this.http.post(AdInsConstant.EditRefEconomicSector, this.refEconomicSectorObj).subscribe(
+      this.http.post(URLConstant.EditRefEconomicSector, this.refEconomicSectorObj).subscribe(
         response => {
           console.log(response);
           this.toastr.successMessage(response["Message"]);

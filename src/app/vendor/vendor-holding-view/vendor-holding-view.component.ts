@@ -9,6 +9,7 @@ import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-holding-view',
@@ -31,7 +32,7 @@ export class VendorHoldingViewComponent implements OnInit {
   viewVendorHoldingTaxAddrObj: string;
   viewVendorHoldingAddrObj: string;
   viewVendorHoldingLtLgObj: string;
-  
+
   VendorGrp: any;
   GroupListObj: VendorGroupObj;
   HoListObj: VendorObj;
@@ -65,7 +66,7 @@ export class VendorHoldingViewComponent implements OnInit {
     var vendorObj = {
       VendorId: this.VendorId
     }
-    this.http.post(AdInsConstant.GetVendorByVendorId, vendorObj).subscribe(
+    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
       response => {
         console.log(response);
         this.MrVendorTypeObj = response;
@@ -73,7 +74,7 @@ export class VendorHoldingViewComponent implements OnInit {
       },
       error => {
         console.log(error);
-      } 
+      }
     )
 
 
@@ -86,18 +87,18 @@ export class VendorHoldingViewComponent implements OnInit {
     this.viewVendorHoldingAddrObj = "./assets/ucviewgeneric/viewVendorHoldingAddr.json";
     this.viewVendorHoldingLtLgObj = "./assets/ucviewgeneric/viewVendorHoldingLtLg.json";
     this.GetListVendorContactPersonByVendorId();
-    
+
     this.listSelectedId = new Array();
     this.tempListId = new Array();
     this.tempData = new Array();
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
 
     this.GroupListObj = new VendorGroupObj();
     this.GroupListObj.VendorId = this.VendorId;
 
-    this.http.post(AdInsConstant.GetListVendorGrpByVendorId, this.GroupListObj).subscribe(
+    this.http.post(URLConstant.GetListVendorGrpByVendorId, this.GroupListObj).subscribe(
       response => {
         console.log(response);
         this.VendorGrp = response['ReturnObject']
@@ -105,12 +106,12 @@ export class VendorHoldingViewComponent implements OnInit {
       },
       error => {
         console.log(error);
-      } 
+      }
     )
     this.HoListObj = new VendorObj();
     this.HoListObj.VendorId = this.VendorId;
 
-    this.http.post(AdInsConstant.GetListHoByVendorId, this.HoListObj).subscribe(
+    this.http.post(URLConstant.GetListHoByVendorId, this.HoListObj).subscribe(
       response => {
         console.log(response);
         this.Vendor = response['ReturnObject']
@@ -118,7 +119,7 @@ export class VendorHoldingViewComponent implements OnInit {
       },
       error => {
         console.log(error);
-      } 
+      }
     )
   }
 
@@ -143,7 +144,6 @@ export class VendorHoldingViewComponent implements OnInit {
     this.UCGridFooter.resultData = this.resultData;
   }
 
-
   onSelect(event) {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
@@ -155,17 +155,15 @@ export class VendorHoldingViewComponent implements OnInit {
     var obj = {
       VendorId: this.VendorId
     }
-    var getListUrl = AdInsConstant.GetListVendorContactPersonByVendorId;
+    var getListUrl = URLConstant.GetListVendorContactPersonByVendorId;
     this.http.post(getListUrl, obj).subscribe(
       (response) => {
         console.log(response);
         this.vendorContactPerson = response['ReturnObject'];
-        
       },
       (error) => {
         console.log(error);
       }
     );
   }
-
 }

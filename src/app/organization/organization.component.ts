@@ -11,6 +11,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',
@@ -40,7 +41,7 @@ export class OrganizationComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrganization.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetRefOrgPaging;
+    this.inputObj.apiQryPaging = URLConstant.GetRefOrgPaging;
     this.inputObj.ddlEnvironments = [
       {
         name: "parentId",
@@ -50,7 +51,7 @@ export class OrganizationComponent implements OnInit {
     
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrgPaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetRefOrgPaging;
     this.show = AdInsConstant.showData.split(',');
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
@@ -101,7 +102,7 @@ export class OrganizationComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      var url = this.foundationUrl + AdInsConstant.DeleteRefOrg;
+      var url = this.foundationUrl + URLConstant.DeleteRefOrg;
       var organizObj: OrganizationObj;
       organizObj = new OrganizationObj();
       organizObj.refOrgId = id;

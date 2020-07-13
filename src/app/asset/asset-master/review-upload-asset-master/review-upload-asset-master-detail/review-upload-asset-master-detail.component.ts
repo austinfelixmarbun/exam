@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-review-upload-asset-master-detail',
@@ -34,7 +35,7 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
 
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadAssetMasterDetail.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadAssetMasterDetail.json";
     this.inputPagingObj.addCritInput = new Array();
     const addCritAssetMasterId = new CriteriaObj();
@@ -51,7 +52,7 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
     uploadObj.MrUploadStatusCode = status;
     uploadObj.TaskListId = this.taskListId;
     uploadObj.UploadMonitoringNo = this.uploadNo;
-    this.http.post(AdInsConstant.UploadReview, uploadObj).subscribe(
+    this.http.post(URLConstant.UploadReview, uploadObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigate(["/Asset/AssetMaster/ReviewUploadPaging"]);
@@ -65,7 +66,7 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
   claimTask() {
     var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
     var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: currentUserContext["UserName"] };
-    this.http.post(AdInsConstant.ClaimTask, wfClaimObj).subscribe(
+    this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
       (response) => {
       });
   }

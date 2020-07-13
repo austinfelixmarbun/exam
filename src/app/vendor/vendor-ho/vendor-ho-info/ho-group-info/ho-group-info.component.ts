@@ -3,6 +3,7 @@ import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-ho-group-info',
@@ -28,7 +29,7 @@ export class HoGroupInfoComponent implements OnInit {
     this.VendorGroupObj = new VendorGroupObj();
     this.VendorGroupObj.VendorId = this.VendorId;
 
-    this.http.post(AdInsConstant.GetListVendorGrpByVendorId, this.VendorGroupObj).subscribe(
+    this.http.post(URLConstant.GetListVendorGrpByVendorId, this.VendorGroupObj).subscribe(
       (response) => {
         this.resultData = response["ReturnObject"];
       },

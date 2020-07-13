@@ -9,6 +9,7 @@ import { CoyBodObj } from 'app/shared/model/CoyBodObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.component';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
     selector: 'add-bod',
@@ -50,7 +51,7 @@ export class BodAddComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.idTypeUrl = this.settingUrl + AdInsConstant.GetRefMasterList;
+        this.idTypeUrl = this.settingUrl + URLConstant.GetRefMasterList;
         var refMasterObj = new RefMasterObj();
         // refMasterObj.refMasterTypeCode = "ID_TYPE";
         this.http.post(this.idTypeUrl, refMasterObj).subscribe(
@@ -60,7 +61,7 @@ export class BodAddComponent implements OnInit {
             }
         );
         if (this.mode == "edit") {
-            this.apiUrl = this.foundationUrl + AdInsConstant.GetCoyBod;
+            this.apiUrl = this.foundationUrl + URLConstant.GetCoyBod;
             var coyBodObj = new CoyBodObj();
             coyBodObj.coyBodId = this.param;
             this.http.post(this.apiUrl, coyBodObj).subscribe(
@@ -95,65 +96,63 @@ export class BodAddComponent implements OnInit {
     }
 
     Save(form, ucAddress, ucInfo) {
-            var coyAdd = new CoyBodObj();
-            console.log(ucAddress);
-            console.log(ucInfo);
-            coyAdd.name = form.value.name;
-            coyAdd.jobTitle = form.value.jobTitle;
-            coyAdd.taxIdNo = form.value.taxIdNo;
-            coyAdd.mrIdType = form.value.mrIdType;
-            coyAdd.idNo = form.value.idNo;
-            coyAdd.addr = ucAddress.addr;
-            coyAdd.city = ucAddress.city;
-            coyAdd.email1 = ucInfo.email1;
-            coyAdd.email2 = ucInfo.email2;
-            coyAdd.fax = ucAddress.fax;
-            coyAdd.faxArea = ucAddress.faxArea;
-            coyAdd.areaCode1 = ucAddress.areaCode1;
-            coyAdd.areaCode2 = ucAddress.areaCode2;
-            coyAdd.mobilePhn1 = ucInfo.mobilePhn1;
-            coyAdd.mobilePhn2 = ucInfo.mobilePhn2;
-            coyAdd.phn1 = ucAddress.phn1;
-            coyAdd.phn2 = ucAddress.phn2;
-            coyAdd.phn3 = ucAddress.phn3;
-            coyAdd.phnArea1 = ucAddress.phnArea1;
-            coyAdd.phnArea2 = ucAddress.phnArea2;
-            coyAdd.phnArea3 = ucAddress.phnArea3;
-            coyAdd.phnExt1 = ucAddress.phnExt1;
-            coyAdd.phnExt2 = ucAddress.phnExt2;
-            coyAdd.phnExt3 = ucAddress.phnExt3;
-            coyAdd.areaCode4 = ucAddress.areaCode4;
-            coyAdd.areaCode3 = ucAddress.areaCode3;
-            coyAdd.zipcodeNumber = ucAddress.zipcodeNumber;
-            coyAdd.refCoyId = this.refCoyId;
+        var coyAdd = new CoyBodObj();
+        console.log(ucAddress);
+        console.log(ucInfo);
+        coyAdd.name = form.value.name;
+        coyAdd.jobTitle = form.value.jobTitle;
+        coyAdd.taxIdNo = form.value.taxIdNo;
+        coyAdd.mrIdType = form.value.mrIdType;
+        coyAdd.idNo = form.value.idNo;
+        coyAdd.addr = ucAddress.addr;
+        coyAdd.city = ucAddress.city;
+        coyAdd.email1 = ucInfo.email1;
+        coyAdd.email2 = ucInfo.email2;
+        coyAdd.fax = ucAddress.fax;
+        coyAdd.faxArea = ucAddress.faxArea;
+        coyAdd.areaCode1 = ucAddress.areaCode1;
+        coyAdd.areaCode2 = ucAddress.areaCode2;
+        coyAdd.mobilePhn1 = ucInfo.mobilePhn1;
+        coyAdd.mobilePhn2 = ucInfo.mobilePhn2;
+        coyAdd.phn1 = ucAddress.phn1;
+        coyAdd.phn2 = ucAddress.phn2;
+        coyAdd.phn3 = ucAddress.phn3;
+        coyAdd.phnArea1 = ucAddress.phnArea1;
+        coyAdd.phnArea2 = ucAddress.phnArea2;
+        coyAdd.phnArea3 = ucAddress.phnArea3;
+        coyAdd.phnExt1 = ucAddress.phnExt1;
+        coyAdd.phnExt2 = ucAddress.phnExt2;
+        coyAdd.phnExt3 = ucAddress.phnExt3;
+        coyAdd.areaCode4 = ucAddress.areaCode4;
+        coyAdd.areaCode3 = ucAddress.areaCode3;
+        coyAdd.zipcodeNumber = ucAddress.zipcodeNumber;
+        coyAdd.refCoyId = this.refCoyId;
 
-            console.log(coyAdd);
-            if (this.mode == "edit") {
-                this.editUrl = this.foundationUrl + AdInsConstant.EditCoyBod;
-                coyAdd.coyBodId = this.param;
-                this.http.post(this.editUrl, coyAdd).subscribe(
-                    (response) => {
-                        console.log(response);
-                        this.toastr.successMessage(response['message']);
-                        this.router.navigateByUrl('/company/bod?refCoyId=' + this.refCoyId);
-                    },
-                    (error) => {
-                        console.log(error);
-                    });
-            }
-            else {
-                this.editUrl = this.foundationUrl + AdInsConstant.AddCoyBod;
-                this.http.post(this.editUrl, coyAdd).subscribe(
-                    (response) => {
-                        console.log(response);
-                        this.toastr.successMessage(response['message']);
-                        this.router.navigateByUrl('/company/bod?refCoyId=' + this.refCoyId);
-                    },
-                    (error) => {
-                        console.log(error);
-                    });
-            }
-
+        console.log(coyAdd);
+        if (this.mode == "edit") {
+            this.editUrl = this.foundationUrl + URLConstant.EditCoyBod;
+            coyAdd.coyBodId = this.param;
+            this.http.post(this.editUrl, coyAdd).subscribe(
+                (response) => {
+                    console.log(response);
+                    this.toastr.successMessage(response['message']);
+                    this.router.navigateByUrl('/company/bod?refCoyId=' + this.refCoyId);
+                },
+                (error) => {
+                    console.log(error);
+                });
+        }
+        else {
+            this.editUrl = this.foundationUrl + URLConstant.AddCoyBod;
+            this.http.post(this.editUrl, coyAdd).subscribe(
+                (response) => {
+                    console.log(response);
+                    this.toastr.successMessage(response['message']);
+                    this.router.navigateByUrl('/company/bod?refCoyId=' + this.refCoyId);
+                },
+                (error) => {
+                    console.log(error);
+                });
+        }
     }
-
 }

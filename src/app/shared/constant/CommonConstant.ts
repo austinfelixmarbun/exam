@@ -2,12 +2,43 @@
 export class CommonConstant {
 
     // APPLICATION DATA
+    public static USER_ACCESS = "UserAccess";
     public static ReturnObj = 'ReturnObject';
+
+    //APPROVAL TASK MAPPER - TRX TYPE
+    public static ApvTrxTypeProductHO = "PROD_HO_APV";
+    public static ApvTrxTypeProductHODeact = "PROD_HO_DEACT_APV";
+    public static ApvTrxTypeProductOffering = "PROD_OFF_APV";
+    public static ApvTrxTypeProductOfferingDeact = "PROD_OFF_DEACT_APV";
+
+    //Behaviour Type
+    public static BehaviourTypeLock = "LOCK";
+    public static BehaviourTypeMin = "MIN";
+    public static BehaviourTypeMax = "MAX";
+    public static BehaviourTypeDefault = "DEFAULT";
+
+    // ProductDeact
+    public static PROD_REASON_DEACT = "PROD_DEACT"
+
+    //Product Status
+    public static ProdStatApproval = "APVL";
+    public static ProdStatReqDeact = "REQD";
+
+    // Customer Type
+    public static CustomerPersonal = "PERSONAL";
+    public static CustomerCompany = "COMPANY";
+    
+    public static MR_MARITAL_STAT_CODE_MARRIED = "MARRIED";
+    public static MR_MARITAL_STAT_CODE_SINGLE = "SINGLE";
+    public static MR_CUST_TYPE_CODE_PERSONAL = "PERSONAL";
+    public static MR_CUST_TYPE_CODE_COMPANY = "COMPANY";
+
+    public static RefReasonTypeCodeProdDeactivate = "PROD_DEACT";
 
     // BOOLEAN CONDITION
     public static TRUE_CONDITION = "1";
     public static FALSE_CONDITION = "0";
-    
+
     // VENDOR CATEGORY
     public static SUPPLIER_BRANCH = "SUPPLIER_BRANCH";
     public static ASSET_INSCO_BRANCH = "ASSET_INSCO_BRANCH";
@@ -24,7 +55,7 @@ export class CommonConstant {
     //OFFICE TYPE
     public static HeadOffice = "HO";
     public static CollectionGroup = "CG"
-    
+
     //REF PROV DISTRICT
     public static RefProvDistrictTypeDis = "DIS";
     public static RefProvDistrictTypePrv = "PRV";
@@ -34,17 +65,17 @@ export class CommonConstant {
     public static RefMasterTypeCodeCustCompanyRelationship = "CUST_COMPANY_RELATIONSHIP";
     public static RefMasterTypeCodeCustPersonalRelationship = "CUST_PERSONAL_RELATIONSHIP";
     public static RefMasterTypeCodeCustRelationship = "CUST_RELATIONSHIP";
-    
+
     public static RefMasterTypeCodeLegalDocType = "LEGAL_DOC_TYPE";
     public static RefMasterTypeCodeCustAddrType = "CUST_ADDR_TYPE";
-    public static RefMasterTypeCodeAddrType= "ADDR_TYPE";
+    public static RefMasterTypeCodeAddrType = "ADDR_TYPE";
     public static RefMasterTypeCodeJobPosition = "JOB_POSITION";
     public static RefMasterTypeCodeGender = "GENDER";
     public static RefMasterTypeCodeCustModel = "CUST_MODEL"
     public static RefMasterTypeCodeCompanyType = "COMPANY_TYPE";
     public static RefMasterTypeCodeIdType = "ID_TYPE";
     public static RefMasterTypeCodeNationality = "NATIONALITY";
-    public static RefMasterTypeCodeMaritalStat = "MARITAL_STAT"; 
+    public static RefMasterTypeCodeMaritalStat = "MARITAL_STAT";
     public static RefMasterTypeCodeEducation = "EDUCATION";
     public static RefMasterTypeCodeReligion = "RELIGION";
     public static RefMasterTypeCodeSalutation = "SALUTATION";
@@ -55,16 +86,16 @@ export class CommonConstant {
     public static RefMasterTypeCodeSkillLvl = "SKILL_LVL"
     public static RefMasterTypeCodeOfficeClass = "OFFICE_CLASS";
     public static RefMasterTypeCodeOfficeType = "OFFICE_TYPE";
-   
+
     public static RefMasterTypeCodeCenterGrpType = "CENTER_GRP_TYPE";
-    
+
     public static RefMasterTypeCodeKonvenSyariah = "KONVEN_SYARIAH";
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     // GENERAL SETTING CODE
     public static GSCodeDefLocalNationality = "DEF_LOCAL_NATIONALITY";
     public static GsCodePasswordRegex = "PASSWORD_REGEX";
-    
+
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
     // CUST TYPE
@@ -76,7 +107,7 @@ export class CommonConstant {
     public static CustAddrTypeContact = "CONTACT";
     public static CustAddrTypeResidence = "RESIDENCE";
     public static CustAddrTypeJob = "JOB";
-    public static CustAddrTypeOthBiz= "OTH_BIZ";
+    public static CustAddrTypeOthBiz = "OTH_BIZ";
 
 
     public static FROM = 'From';

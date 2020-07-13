@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-ho-info',
-  templateUrl: './ho-info.component.html',
-  styleUrls: ['./ho-info.component.scss']
+  templateUrl: './ho-info.component.html'
 })
 export class HoInfoComponent implements OnInit {
   MrVendorCategoryCode:any;
@@ -25,7 +25,7 @@ export class HoInfoComponent implements OnInit {
       VendorId: this.VendorId
     }
 
-    this.http.post(AdInsConstant.GetVendorByVendorId, obj).subscribe(
+    this.http.post(URLConstant.GetVendorByVendorId, obj).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["MrVendorCategoryCode"];
       }

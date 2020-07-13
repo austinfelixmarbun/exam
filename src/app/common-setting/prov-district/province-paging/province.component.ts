@@ -4,6 +4,7 @@ import { environment } from 'environments/environment';
 import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 
 @Component({
@@ -22,9 +23,9 @@ export class ProvinceComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchProvince.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchProvince.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefProvDistrict;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefProvDistrict;
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();

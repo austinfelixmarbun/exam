@@ -12,11 +12,11 @@ import { OrgJobTitleObj } from 'app/shared/model/OrgJobTitleObj.Model';
 import { formatDate } from '@angular/common';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
     selector: 'app-employee-position',
     templateUrl: './employee-position-add.component.html',
-    styleUrls: ['./employee-position-add.component.scss'],
     providers: [NGXToastrService]
 })
 export class EmployeePositionAddComponent implements OnInit {
@@ -70,16 +70,16 @@ export class EmployeePositionAddComponent implements OnInit {
     RefEmpPositionForm = this.fb.group({});
 
     constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-        this.getUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
-        this.addUrl = this.foundationUrl + AdInsConstant.AddEmpPosition;
-        this.refOfficeUrl = this.foundationUrl + AdInsConstant.GetAllRefOffice;
-        this.supervisorUrl = this.foundationUrl + AdInsConstant.GetEmpListByOfficeIdAndIsActive;
-        this.refMasterUrl = this.settingUrl + AdInsConstant.GetRefMasterListDesc;
-        this.bizUrl = this.foundationUrl + AdInsConstant.GetRefBizUnitByOffice;
-        this.orgJobTitleUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitleByMdlStruc;
-        this.getEditUrl = this.foundationUrl + AdInsConstant.GetEmpByEmpPositionId;
-        this.editUrl = this.foundationUrl + AdInsConstant.EditEmpPosition;
-        this.getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
+        this.getUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
+        this.addUrl = this.foundationUrl + URLConstant.AddEmpPosition;
+        this.refOfficeUrl = this.foundationUrl + URLConstant.GetAllRefOffice;
+        this.supervisorUrl = this.foundationUrl + URLConstant.GetEmpListByOfficeIdAndIsActive;
+        this.refMasterUrl = this.settingUrl + URLConstant.GetRefMasterListDesc;
+        this.bizUrl = this.foundationUrl + URLConstant.GetRefBizUnitByOffice;
+        this.orgJobTitleUrl = this.foundationUrl + URLConstant.GetOrgJobTitleByMdlStruc;
+        this.getEditUrl = this.foundationUrl + URLConstant.GetEmpByEmpPositionId;
+        this.editUrl = this.foundationUrl + URLConstant.EditEmpPosition;
+        this.getEmpUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
 
         this.route.queryParams.subscribe(params => {
             if (params['param'] != null) {
@@ -109,7 +109,7 @@ export class EmployeePositionAddComponent implements OnInit {
 
         this.inputLookupObj = new InputLookupObj();
         this.inputLookupObj.urlJson = "./assets/lookup/lookupSupervisor.json";
-        this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+        this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
         this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
         this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupervisor.json";
         this.inputLookupObj.genericJson = "./assets/lookup/lookupSupervisor.json";

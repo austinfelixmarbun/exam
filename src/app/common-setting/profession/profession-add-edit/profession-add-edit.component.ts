@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-profession-add-edit',
@@ -30,11 +30,11 @@ export class ProfessionAddEditComponent implements OnInit {
     RegRptCode: ['', Validators.maxLength(50)]
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getUrl = AdInsConstant.GetRefProfessionById;
-    this.addUrl = AdInsConstant.AddRefProfession;
-    this.editUrl = AdInsConstant.EditRefProfession;
-    this.getValueCustModel = AdInsConstant.GetValueCustModel;
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+    this.getUrl = URLConstant.GetRefProfessionById;
+    this.addUrl = URLConstant.AddRefProfession;
+    this.editUrl = URLConstant.EditRefProfession;
+    this.getValueCustModel = URLConstant.GetValueCustModel;
 
 
     this.route.queryParams.subscribe(params => {
@@ -49,16 +49,16 @@ export class ProfessionAddEditComponent implements OnInit {
 
   ngOnInit() {
     this.http.post(this.getValueCustModel, null).subscribe(
-        (response) => {
-            console.log(response);
-          this.allRefProfessionMethod = response['ReturnObject'];
-          if(this.allRefProfessionMethod.length > 0){
-            this.RefProfessionForm.patchValue({ MrCustModelCode: response['ReturnObject'][0]['Key'] });
-          }
-        },
-        (error) => {
-          console.log(error);
-        });
+      (response) => {
+        console.log(response);
+        this.allRefProfessionMethod = response['ReturnObject'];
+        if (this.allRefProfessionMethod.length > 0) {
+          this.RefProfessionForm.patchValue({ MrCustModelCode: response['ReturnObject'][0]['Key'] });
+        }
+      },
+      (error) => {
+        console.log(error);
+      });
 
     if (this.pageType == "edit") {
       this.RefProfessionForm.controls["ProfessionCode"].disable();
@@ -91,9 +91,9 @@ export class ProfessionAddEditComponent implements OnInit {
       this.refProfessionObj.RegRptCode = this.RefProfessionForm.controls["RegRptCode"].value;
       this.http.post(this.addUrl, this.refProfessionObj).subscribe(
         response => {
-            this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/CommonSetting/Profession/Paging"]);
-          
+          this.toastr.successMessage(response["Message"]);
+          this.router.navigate(["/CommonSetting/Profession/Paging"]);
+
         },
         error => {
           console.log(error);
@@ -117,5 +117,4 @@ export class ProfessionAddEditComponent implements OnInit {
       );
     }
   }
-  
 }

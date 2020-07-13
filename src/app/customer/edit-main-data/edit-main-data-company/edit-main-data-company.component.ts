@@ -7,6 +7,7 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-edit-main-data-company',
@@ -36,12 +37,12 @@ export class EditMainDataCompanyComponent implements OnInit {
   GetListActiveRefMasterWithReserveFieldAllUrl : string;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
-    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;
-    this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
-    this.editCustUrl = AdInsConstant.EditCust;
-    this.editCustCompanyUrl = AdInsConstant.EditCustCompany; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.getCustCompanyByCustIdUrl = URLConstant.GetCustCompanyByCustId;
+    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
+    this.editCustUrl = URLConstant.EditCust;
+    this.editCustCompanyUrl = URLConstant.EditCustCompany; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];

@@ -10,6 +10,7 @@ import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { HolidayCopyObj } from 'app/shared/model/HolidayCopy.Model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-holiday-detail',
@@ -59,7 +60,7 @@ export class HolidayDetailComponent implements OnInit {
     this.inputPagingObjHolidayDetail.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObjHolidayDetail.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputPagingObjHolidayDetail.pagingJson = "./assets/ucpaging/searchHolidayDetail.json";
-    this.inputPagingObjHolidayDetail.deleteUrl = AdInsConstant.DeleteHolidaySchmD;
+    this.inputPagingObjHolidayDetail.deleteUrl = URLConstant.DeleteHolidaySchmD;
     this.inputPagingObjHolidayDetail.addCritInput = new Array();
     
     var critInput = new CriteriaObj();
@@ -81,7 +82,7 @@ export class HolidayDetailComponent implements OnInit {
       this.copyHoliday.HolidaySchmHId = this.HolidaySchmHId;
       this.copyHoliday.HolidaySchmHIdCopy = this.HolidaySchmHIdCopy;
 
-      this.http.post(AdInsConstant.CopyHolidaySchmH, this.copyHoliday).subscribe((response) => {
+      this.http.post(URLConstant.CopyHolidaySchmH, this.copyHoliday).subscribe((response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);
     },

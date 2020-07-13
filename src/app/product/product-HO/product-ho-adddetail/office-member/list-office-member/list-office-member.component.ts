@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { empty } from 'rxjs';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-list-office-member',
@@ -20,32 +21,32 @@ export class ListOfficeMemberComponent implements OnInit {
   resultData;
   constructor(
     private http: HttpClient,
-    private toastr:NGXToastrService,
+    private toastr: NGXToastrService,
     private route: ActivatedRoute,
     private router: Router,
-  ) { 
+  ) {
     this.route.queryParams.subscribe(params => {
       this.source = params["source"];
     })
   }
-  
-  source:string="";
+
+  source: string = "";
   pageNow;
   pageSize;
   apiUrl;
-  ProdHId ;
+  ProdHId;
   ngOnInit() {
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
 
     this.ProdHId = this.ListOfficeMemberObjInput["param"];
-    var obj={
+    var obj = {
       ProdHId: this.ListOfficeMemberObjInput["param"],
       RowVersion: ""
     }
 
-    var url = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
+    var url = URLConstant.GetListProdBranchOfficeMbrByProdHId;
     this.http.post(url, obj).subscribe(
       (response) => {
         this.resultData = response["ReturnObject"];
@@ -56,16 +57,16 @@ export class ListOfficeMemberComponent implements OnInit {
     );
   }
 
-  addOfficeMember(){
+  addOfficeMember() {
     var temp = [];
     var obj;
-    if(this.resultData == empty){
+    if (this.resultData == empty) {
       obj = {
         isOn: false,
         result: []
       }
-    }else{
-      for(var i=0;i<this.resultData.length;i++){
+    } else {
+      for (var i = 0; i < this.resultData.length; i++) {
         temp.push(this.resultData[i].RefOfficeId);
       }
       obj = {
@@ -73,13 +74,13 @@ export class ListOfficeMemberComponent implements OnInit {
         result: temp
       }
     }
-    
+
     this.componentIsOn.emit(obj);
   }
 
   orderByKey;
   orderByValue
-  searchSort(ev: any){
+  searchSort(ev: any) {
     if (this.resultData != null) {
       if (this.orderByKey == ev.target.attributes.name.nodeValue) {
         this.orderByValue = !this.orderByValue
@@ -95,11 +96,11 @@ export class ListOfficeMemberComponent implements OnInit {
     }
   }
 
-  deleteFromList(ev: any){
+  deleteFromList(ev: any) {
     if (confirm('Are you sure to delete this record?')) {
-      var url = AdInsConstant.DeleteProductOfficeMbr;
+      var url = URLConstant.DeleteProductOfficeMbr;
       var obj = {
-        ProductBranchMbrs:[
+        ProductBranchMbrs: [
           {
             ProdBranchMbrId: ev.ProdBranchMbrId,
             RowVersion: " "
@@ -109,8 +110,8 @@ export class ListOfficeMemberComponent implements OnInit {
 
       this.http.post(url, obj).subscribe(
         (response) => {
-          var idx = this.resultData.findIndex(x=>x.ProdBranchMbrId == ev.ProdBranchMbrId);
-          if(idx > -1) this.resultData.splice(idx, 1);
+          var idx = this.resultData.findIndex(x => x.ProdBranchMbrId == ev.ProdBranchMbrId);
+          if (idx > -1) this.resultData.splice(idx, 1);
           this.toastr.successMessage(response["message"]);
         },
         (error) => {
@@ -120,8 +121,8 @@ export class ListOfficeMemberComponent implements OnInit {
     }
   }
 
-  DoneForm(){
-    this.http.post(environment.FoundationR3Url + "/Product/SubmitProduct", {ProdHId : this.ProdHId}).subscribe(
+  DoneForm() {
+    this.http.post(environment.FoundationR3Url + "/Product/SubmitProduct", { ProdHId: this.ProdHId }).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
       },
@@ -133,19 +134,15 @@ export class ListOfficeMemberComponent implements OnInit {
     this.BackToPaging();
   }
 
-  Cancel()
-  {
+  Cancel() {
     this.BackToPaging();
   }
 
-  BackToPaging()
-  {
-    if(this.source == "return")
-    {
+  BackToPaging() {
+    if (this.source == "return") {
       this.router.navigate(["/Product/HOReturnPaging"]);
     }
-    else
-    {
+    else {
       this.router.navigate(["/product/HOpaging"]);
     }
   }

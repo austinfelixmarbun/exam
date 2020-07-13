@@ -5,11 +5,11 @@ import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-ref-job-title-add',
   templateUrl: './ref-job-title-add.component.html',
-  styleUrls: ['./ref-job-title-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class RefJobTitleAddComponent implements OnInit {
@@ -30,10 +30,9 @@ export class RefJobTitleAddComponent implements OnInit {
 
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.apiUrl = AdInsConstant.GetRefJobTitleById;
-    this.addUrl = AdInsConstant.AddRefJobTitle;
-    this.editUrl = AdInsConstant.EditRefJobTitle;
-
+    this.apiUrl = URLConstant.GetRefJobTitleById;
+    this.addUrl = URLConstant.AddRefJobTitle;
+    this.editUrl = URLConstant.EditRefJobTitle;
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -67,7 +66,6 @@ export class RefJobTitleAddComponent implements OnInit {
         }
       );
     }
-
   }
 
   SaveForm() {

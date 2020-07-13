@@ -6,11 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-edit',
   templateUrl: './verification-question-group-member-edit.component.html',
-  styleUrls: ['./verification-question-group-member-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class VerificationQuestionGroupMemberEditComponent implements OnInit {
@@ -54,7 +54,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
 
   ngOnInit() {
     var verfGroupObj = { VerfQuestionGrpDId: this.VerfQuestionGrpDId }
-    this.http.post(AdInsConstant.GetVerfQuestionGrpDForUpdateById, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetVerfQuestionGrpDForUpdateById, verfGroupObj).subscribe(
       (response) => {
         this.verfQuestionGroup = response["ReturnObject"];
         this.QuestionGroupForm.patchValue({
@@ -81,7 +81,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
     this.verfQuestionGrpDObj.IsActive = this.verfQuestionGrpDObj.IsActive;
       this.verfQuestionGrpDObj.RowVersion = this.verfQuestionGrpDObj.RowVersion;
       console.log(this.verfQuestionGrpDObj);
-      this.http.post(AdInsConstant.EditVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
+      this.http.post(URLConstant.EditVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigateByUrl('/Verification/QuestionGroupMemberPaging?VerfQuestionGrpHId=' + this.VerfQuestionGrpHId);

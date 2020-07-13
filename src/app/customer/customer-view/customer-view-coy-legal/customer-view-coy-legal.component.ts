@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsService } from 'app/shared/services/adIns.service';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-coy-legal',
-  templateUrl: './customer-view-coy-legal.component.html',
-  styleUrls: ['./customer-view-coy-legal.component.scss']
+  templateUrl: './customer-view-coy-legal.component.html'
 })
 
 export class CustomerViewCoyLegalComponent implements OnInit {
@@ -35,8 +35,8 @@ export class CustomerViewCoyLegalComponent implements OnInit {
     private adInsService: AdInsService,
     private fb: FormBuilder
   ) {
-    this.GetCustCompanyLegalDocForCustViewByCustIdUrl= AdInsConstant.GetCustCompanyLegalDocForCustViewByCustId
-   }
+    this.GetCustCompanyLegalDocForCustViewByCustIdUrl = URLConstant.GetCustCompanyLegalDocForCustViewByCustId
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

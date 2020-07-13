@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-main-info',
@@ -38,8 +39,8 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
-    this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
@@ -99,13 +100,13 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       this.CustomerCompanyForm.controls.VipNotes.disable();
       this.VipNotesRequired = false;
       this.CustomerCompanyForm.controls.IdExpiredDt.clearValidators();
-    
-      
+
+
 
     } else {
       this.CustomerCompanyForm.controls.VipNotes.enable();
       this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
-      this.VipNotesRequired = true; 
+      this.VipNotesRequired = true;
     }
     this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
   }

@@ -4,6 +4,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute } from '@angular/router';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'member-app-business-unit',
@@ -24,7 +25,7 @@ export class MemberBusinessUnitComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchBusinessUnitMember.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBusinessUnitMember.json";
     this.inputPagingObj.ddlEnvironments = [
       {

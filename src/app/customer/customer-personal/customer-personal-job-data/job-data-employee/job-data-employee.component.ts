@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -16,6 +15,7 @@ import { formatDate } from '@angular/common';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-job-data-employee',
@@ -99,14 +99,14 @@ export class JobDataEmployeeComponent implements OnInit {
   businessDtMin: Date;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getCustById = AdInsConstant.GetCustByCustId;
-    this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
-    this.addJobData = AdInsConstant.AddCustPersonalJobData;
-    this.editJobData = AdInsConstant.EditCustPersonalJobData;
-    this.getJobDataByCustId = AdInsConstant.GetCustPersonalJobDataByCustId;
-    this.getCustAddr = AdInsConstant.GetCustAddr;
-    this.getRefProfession = AdInsConstant.GetRefProfessionById;
-    this.getRefIndustryType = AdInsConstant.GetRefIndustryTypeById;
+    this.getCustById = URLConstant.GetCustByCustId;
+    this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
+    this.addJobData = URLConstant.AddCustPersonalJobData;
+    this.editJobData = URLConstant.EditCustPersonalJobData;
+    this.getJobDataByCustId = URLConstant.GetCustPersonalJobDataByCustId;
+    this.getCustAddr = URLConstant.GetCustAddr;
+    this.getRefProfession = URLConstant.GetRefProfessionById;
+    this.getRefIndustryType = URLConstant.GetRefIndustryTypeById;
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {

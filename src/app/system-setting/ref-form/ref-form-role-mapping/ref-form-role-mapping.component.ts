@@ -10,11 +10,11 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ListAuthFormObj } from 'app/shared/model/ListAuthFormObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-ref-form-role-mapping',
   templateUrl: './ref-form-role-mapping.component.html',
-  styleUrls: ['./ref-form-role-mapping.component.scss'],
   providers: [NGXToastrService]
 })
 export class RefFormRoleMappingComponent implements OnInit {
@@ -61,7 +61,7 @@ export class RefFormRoleMappingComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchRefFormRole.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputObj.addCritInput = new Array();
 
     const addCritIsActive = new CriteriaObj();
@@ -74,11 +74,11 @@ export class RefFormRoleMappingComponent implements OnInit {
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
   }
 
   searchSort(event: any) {
@@ -241,7 +241,7 @@ export class RefFormRoleMappingComponent implements OnInit {
       this.listAuthFormObj.ListAuthFormObj.push(this.AuthFormObj);
     }
 
-    this.http.post(AdInsConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
+    this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate(['/SystemSetting/RefForm/RoleMapping'], { queryParams: { "RefFormId": this.RefFormId} });
@@ -256,7 +256,7 @@ export class RefFormRoleMappingComponent implements OnInit {
       RefFormId: this.RefFormId
     }
 
-    this.http.post(AdInsConstant.GetListAuthFormByRefFormId, obj).subscribe(
+    this.http.post(URLConstant.GetListAuthFormByRefFormId, obj).subscribe(
       (response) => {
         var arrMemberList = new Array();
 

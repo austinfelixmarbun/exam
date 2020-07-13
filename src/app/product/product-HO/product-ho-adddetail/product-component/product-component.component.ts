@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { WizardComponent } from 'angular-archwizard';
 import { saveAs } from 'file-saver';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-product-component-HO',
@@ -42,8 +43,8 @@ export class ProductComponentHOComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.UrlGetProdCompGrouped = AdInsConstant.GetProductHOComponentGrouped;
-    this.UrlPostAddEditProdD = AdInsConstant.AddOrEditProductDetail;
+    this.UrlGetProdCompGrouped = URLConstant.GetProductHOComponentGrouped;
+    this.UrlPostAddEditProdD = URLConstant.AddOrEditProductDetail;
 
     this.FormProdComp = this.fb.group(
       {
@@ -131,7 +132,7 @@ export class ProductComponentHOComponent implements OnInit {
     var bhvrTypeCode = obj.BehaviourType;
     if(this.dictBehaviour[bhvrTypeCode] == undefined)
     {
-      var url = AdInsConstant.GetRefBehaviourByBehaviourTypeCode;
+      var url = URLConstant.GetRefBehaviourByBehaviourTypeCode;
       await this.http.post(url, { RowVersion : "", BehaviourTypeCode : bhvrTypeCode}).toPromise().then(
         (response) => {
           this.dictBehaviour[bhvrTypeCode] = response["ReturnObject"];
@@ -264,7 +265,7 @@ export class ProductComponentHOComponent implements OnInit {
   }
   DownloadRule(CompntValue, CompntValueDesc) {
     this.DlRuleObj.CompntValue = CompntValue;
-    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+    this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
       },

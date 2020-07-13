@@ -7,6 +7,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-test1',
@@ -40,7 +41,7 @@ export class Test1Component implements OnInit {
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/dummyTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/dummyTempPaging.json";
 
     const addCritTypeCode = new CriteriaObj();
@@ -54,7 +55,7 @@ export class Test1Component implements OnInit {
   }
 
   GetListVendorSchmMemberByVendorSchmId() {
-    this.http.post(AdInsConstant.GetListVendorSchmMemberByVendorSchmId, { VendorSchmId: this.VendorSchmId }).subscribe(
+    this.http.post(URLConstant.GetListVendorSchmMemberByVendorSchmId, { VendorSchmId: this.VendorSchmId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response["ListVendorSchmMbr"].length; index++) {

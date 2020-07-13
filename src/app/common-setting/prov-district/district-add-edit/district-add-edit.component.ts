@@ -6,6 +6,7 @@ import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-district-add-edit',
@@ -31,9 +32,9 @@ export class DistrictAddEditComponent implements OnInit {
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getUrl = AdInsConstant.GetRefProvDistrictById;
-    this.addUrl = AdInsConstant.AddRefProvDistrict;
-    this.editUrl = AdInsConstant.EditRefProvDistrict;
+    this.getUrl = URLConstant.GetRefProvDistrictById;
+    this.addUrl = URLConstant.AddRefProvDistrict;
+    this.editUrl = URLConstant.EditRefProvDistrict;
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];

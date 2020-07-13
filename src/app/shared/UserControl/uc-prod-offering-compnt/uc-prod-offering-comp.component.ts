@@ -5,6 +5,8 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { saveAs } from 'file-saver';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 @Component({
   selector: 'uc-prod-offering-comp',
   templateUrl: './uc-prod-offering-comp.component.html',
@@ -129,8 +131,8 @@ export class UcProdOfferingCompComponent implements OnInit {
         }  
       }
     }else{
-      hoMrProdBehaviour = AdInsConstant.BehaviourTypeDefault;
-      offeringMrProdBehaviour = AdInsConstant.BehaviourTypeLock;
+      hoMrProdBehaviour = CommonConstant.BehaviourTypeDefault;
+      offeringMrProdBehaviour = CommonConstant.BehaviourTypeLock;
     }
 
     return this.fb.group({
@@ -147,13 +149,13 @@ export class UcProdOfferingCompComponent implements OnInit {
       HOCompntValue : obj.HOCompntValue,
       HOCompntValueDesc : obj.HOCompntValueDesc,
       HOMrProdBehaviour : hoMrProdBehaviour,
-      OfferingCompntValue : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeLock == true ? [{ value: offeringCompCode, disabled: true }]
-                            : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeMin == true ? [offeringCompCode, (Validators.required, Validators.min(obj.HOCompntValue))]
-                            : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeMax == true ? [offeringCompCode, (Validators.required, Validators.max(obj.HOCompntValue))]                      
+      OfferingCompntValue : obj.IsProdOffering == true && hoMrProdBehaviour == CommonConstant.BehaviourTypeLock == true ? [{ value: offeringCompCode, disabled: true }]
+                            : obj.IsProdOffering == true && hoMrProdBehaviour == CommonConstant.BehaviourTypeMin == true ? [offeringCompCode, (Validators.required, Validators.min(obj.HOCompntValue))]
+                            : obj.IsProdOffering == true && hoMrProdBehaviour == CommonConstant.BehaviourTypeMax == true ? [offeringCompCode, (Validators.required, Validators.max(obj.HOCompntValue))]                      
                             : obj.IsProdOffering == true ? [offeringCompCode, Validators.required]
                             : offeringCompCode,
       OfferingCompntValueDesc : offeringCompDescr,
-      OfferingMrProdBehaviour : obj.IsProdOffering == true && hoMrProdBehaviour == AdInsConstant.BehaviourTypeLock == true ? [{ value: offeringMrProdBehaviour, disabled: true }]                      
+      OfferingMrProdBehaviour : obj.IsProdOffering == true && hoMrProdBehaviour == CommonConstant.BehaviourTypeLock == true ? [{ value: offeringMrProdBehaviour, disabled: true }]                      
                               : obj.IsProdOffering == true ? [offeringMrProdBehaviour, Validators.required]
                               : offeringMrProdBehaviour
     })
@@ -209,7 +211,7 @@ export class UcProdOfferingCompComponent implements OnInit {
 
   LoadProdComponent(ProdOfferingHId, CompGroups, IsFilterBizTmpltCode)
   {
-    this.UrlGetProdOfferingCompGrouped = AdInsConstant.GetProductOfferingComponentGrouped;
+    this.UrlGetProdOfferingCompGrouped = URLConstant.GetProductOfferingComponentGrouped;
 
     var ProdOfferingComponent = {
       ProdOfferingHId : ProdOfferingHId,
@@ -313,7 +315,7 @@ export class UcProdOfferingCompComponent implements OnInit {
   }
   DownloadRule(CompntValue, CompntValueDesc) {
     this.DlRuleObj.CompntValue = CompntValue;
-    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+    this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
       },

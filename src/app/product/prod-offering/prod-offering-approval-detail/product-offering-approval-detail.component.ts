@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-product-offering-approval-detail',
@@ -71,7 +72,7 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
       ReasonType : event.reasonType,
       Result : event.result
     }
-    this.http.post(AdInsConstant.UpdateProdOfferingPostApv, data).subscribe(
+    this.http.post(URLConstant.UpdateProdOfferingPostApv, data).subscribe(
       () => {
         this.toastr.successMessage("Success");
         this.router.navigate(["/Product/OfferingApproval"]);

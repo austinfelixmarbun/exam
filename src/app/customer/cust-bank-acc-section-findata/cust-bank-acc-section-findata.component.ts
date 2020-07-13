@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustBankAccDetailSectionFindataComponent } from '../cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-cust-bank-acc-section-findata',
@@ -28,7 +29,7 @@ export class CustBankAccSectionFindataComponent implements OnInit {
   ngOnInit() {
     var custBankAccObj = new CustBankAccObj();
     custBankAccObj.CustId = this.CustId;
-    this.httpClient.post(AdInsConstant.GetCBAForCustFinDataByCustId, custBankAccObj).subscribe(
+    this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, custBankAccObj).subscribe(
       (response: any) => {
         this.cbaFinDataList = response.ListCBAForCustFinData;
       },
@@ -66,7 +67,7 @@ export class CustBankAccSectionFindataComponent implements OnInit {
         this.spinner.show();
         var custBankAccObj = new CustBankAccObj();
         custBankAccObj.CustId = this.CustId;
-        this.httpClient.post(AdInsConstant.GetCBAForCustFinDataByCustId, custBankAccObj).subscribe(
+        this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, custBankAccObj).subscribe(
           (response: any) => {
             this.cbaFinDataList = response.ListCBAForCustFinData;
           },

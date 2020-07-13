@@ -15,6 +15,7 @@ import { formatDate } from '@angular/common';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-job-data-non-professional',
@@ -55,12 +56,12 @@ export class JobDataNonProfessionalComponent implements OnInit {
   });
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getCustById = AdInsConstant.GetCustByCustId;
-    this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
-    this.addJobData = AdInsConstant.AddCustPersonalJobData;
-    this.editJobData = AdInsConstant.EditCustPersonalJobData;
-    this.getJobDataByCustId = AdInsConstant.GetCustPersonalJobDataByCustId;
-    this.getRefProfession = AdInsConstant.GetRefProfessionById;
+    this.getCustById = URLConstant.GetCustByCustId;
+    this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
+    this.addJobData = URLConstant.AddCustPersonalJobData;
+    this.editJobData = URLConstant.EditCustPersonalJobData;
+    this.getJobDataByCustId = URLConstant.GetCustPersonalJobDataByCustId;
+    this.getRefProfession = URLConstant.GetRefProfessionById;
 
     this.route.queryParams.subscribe(params => {
         if (params["IdCust"] != null) {

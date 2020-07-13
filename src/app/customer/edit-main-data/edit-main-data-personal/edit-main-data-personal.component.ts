@@ -2,19 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { DatePipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
-import { ifStmt } from '@angular/compiler/src/output/output_ast';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-edit-main-data-personal',
   templateUrl: './edit-main-data-personal.component.html',
-  styleUrls: ['./edit-main-data-personal.component.scss'],
   providers: [NGXToastrService]
 })
 export class EditMainDataPersonalComponent implements OnInit {
@@ -54,12 +52,12 @@ export class EditMainDataPersonalComponent implements OnInit {
   businessDtMax: any;
   VipNotesRequired : boolean;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
-    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.getCustPersonalByCustIdUrl = AdInsConstant.GetCustPersonalbyCustId;
-    this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
-    this.editCustUrl = AdInsConstant.EditCust;
-    this.editCustPersonalUrl = AdInsConstant.EditCustPersonal; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
+    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
+    this.editCustUrl = URLConstant.EditCust;
+    this.editCustPersonalUrl = URLConstant.EditCustPersonal; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];

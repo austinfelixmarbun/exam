@@ -11,6 +11,7 @@ import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductDetailObj } from 'app/shared/model/ListRefProductDetailObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-general-data-HO',
@@ -62,8 +63,8 @@ export class GeneralDataHOComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.UrlGetProdCompGrouped = AdInsConstant.GetProductHOComponentGrouped;
-    this.UrlPostAddEditProdD = AdInsConstant.AddOrEditProductDetail;
+    this.UrlGetProdCompGrouped = URLConstant.GetProductHOComponentGrouped;
+    this.UrlPostAddEditProdD = URLConstant.AddOrEditProductDetail;
 
     this.FormProdComp = this.fb.group(
       {
@@ -79,7 +80,7 @@ export class GeneralDataHOComponent implements OnInit {
     this.inputLookUpObj = new InputLookupObj();
     this.inputLookUpObj.urlJson = "./assets/uclookup/product/lookupProduct.json";
     this.inputLookUpObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookUpObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookUpObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookUpObj.pagingJson = "./assets/uclookup/product/lookupProduct.json";
     this.inputLookUpObj.genericJson = "./assets/uclookup/product/lookupProduct.json";
     this.inputLookUpObj.isRequired = false;
@@ -196,7 +197,7 @@ export class GeneralDataHOComponent implements OnInit {
   }
 
   async PopulateFinMapFromLOB() {
-    var url = AdInsConstant.GetKvpRefFinMapByLobCode;
+    var url = URLConstant.GetKvpRefFinMapByLobCode;
     await this.http.post(url, { LobCode: this.LOBSelected, RowVersion: "" }).toPromise().then(
       (response) => {
         this.dictOptions["WAY_OF_FINANCING"] = response["RefWayOfFin"]
@@ -226,7 +227,7 @@ export class GeneralDataHOComponent implements OnInit {
   }
 
   async PopulateInstallmentSchedule() {
-    var url = AdInsConstant.GetListKvpInstSchmByLobCode;
+    var url = URLConstant.GetListKvpInstSchmByLobCode;
     await this.http.post(url, { LobCode: this.LOBSelected, RowVersion: "" }).toPromise().then(
       (response) => {
         var result = response["ReturnObject"];

@@ -11,6 +11,7 @@ import { formatDate } from '@angular/common';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-holding-add-edit',
@@ -341,7 +342,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";

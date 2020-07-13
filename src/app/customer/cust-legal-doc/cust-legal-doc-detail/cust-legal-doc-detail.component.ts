@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-cust-legal-doc-detail',
@@ -46,7 +47,7 @@ export class CustLegalDocDetailComponent implements OnInit {
 
     var refMasterDocType = new RefMasterObj();
     refMasterDocType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeLegalDocType;
-    this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterDocType).subscribe(
+    this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterDocType).subscribe(
       (response: any) => {
         this.legalDocTypeList = response;
         this.CustCompanyLegalDocForm.patchValue({
@@ -63,7 +64,7 @@ export class CustLegalDocDetailComponent implements OnInit {
   Save(enjiForm) {
     var custCompanyLegalDocData = this.CustCompanyLegalDocForm.value;
 
-    this.httpClient.post(AdInsConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
+    this.httpClient.post(URLConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
       (response) => {
         this.activeModal.close(response);
       },

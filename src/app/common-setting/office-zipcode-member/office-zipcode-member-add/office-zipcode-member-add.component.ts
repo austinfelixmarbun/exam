@@ -9,6 +9,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-office-zipcode-member-add',
@@ -59,13 +60,13 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
     this.inputObj.enviromentUrl = this.settingUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetOfficeZipcodeMemberAddPaging;
+    this.inputObj.apiQryPaging = URLConstant.GetOfficeZipcodeMemberAddPaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.settingUrl + AdInsConstant.GetOfficeZipcodeMemberAddPaging;
-    this.officeUrl = this.foundationUrl + AdInsConstant.GetRefOfficeObj;
-    this.addUrl = this.foundationUrl + AdInsConstant.AddOfficeZipcodeMember;
+    this.apiUrl = this.settingUrl + URLConstant.GetOfficeZipcodeMemberAddPaging;
+    this.officeUrl = this.foundationUrl + URLConstant.GetRefOfficeObj;
+    this.addUrl = this.foundationUrl + URLConstant.AddOfficeZipcodeMember;
 
     this.arrCrit = new Array();
 

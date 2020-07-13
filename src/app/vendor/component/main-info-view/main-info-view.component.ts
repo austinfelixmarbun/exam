@@ -1,12 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-main-info-view',
-  templateUrl: './main-info-view.component.html',
-  styleUrls: ['./main-info-view.component.scss']
+  templateUrl: './main-info-view.component.html'
 })
 export class MainInfoViewComponent implements OnInit {
   viewObj: any;
@@ -15,25 +14,24 @@ export class MainInfoViewComponent implements OnInit {
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
-        this.VendorId = params["VendorId"];
-  })
+      this.VendorId = params["VendorId"];
+    })
   }
 
   ngOnInit() {
     var vendorObj = {
       VendorId: this.VendorId
     }
-    this.http.post(AdInsConstant.GetVendorByVendorId, vendorObj).subscribe(
+    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
       (response) => {
         this.MrVendorClass = response["MrVendorClass"];
-        if(this.MrVendorClass == "HOLDING"){
+        if (this.MrVendorClass == "HOLDING") {
           this.viewObj = "./assets/ucviewgeneric/viewVendorHoldingMainInfo.json"
-        }else if(this.MrVendorClass == "HO"){
+        } else if (this.MrVendorClass == "HO") {
           this.viewObj = "./assets/ucviewgeneric/viewVendorHOMainInfo.json"
-        }else if(this.MrVendorClass == "BRANCH")
+        } else if (this.MrVendorClass == "BRANCH")
           this.viewObj = "./assets/ucviewgeneric/viewVendorBranchMainInfo.json"
       }
     );
   }
-
 }

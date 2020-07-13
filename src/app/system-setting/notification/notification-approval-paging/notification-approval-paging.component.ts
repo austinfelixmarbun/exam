@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-notification-approval-paging',
@@ -23,7 +24,7 @@ export class NotificationApprovalPagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchNotificationApproval.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNotificationApproval.json";
     this.inputPagingObj.ddlEnvironments = [
       {
@@ -36,7 +37,6 @@ export class NotificationApprovalPagingComponent implements OnInit {
       }
     ];
 
-    
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.DataType = 'text';
@@ -46,5 +46,4 @@ export class NotificationApprovalPagingComponent implements OnInit {
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
-
 }

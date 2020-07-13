@@ -4,13 +4,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfSchemeHObj } from 'app/shared/model/VerfSchemeHObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-add-edit',
   templateUrl: './verification-question-scheme-add-edit.component.html',
-  styleUrls: ['./verification-question-scheme-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class VerificationQuestionSchemeAddEditComponent implements OnInit {
@@ -45,7 +44,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
   ngOnInit() {
     if (this.mode == "edit") {
       var verfGroupObj = { VerfSchemeHId: this.VerfSchemeHId }
-      this.http.post(AdInsConstant.GetVerfSchemeHForUpdateById, verfGroupObj).subscribe(
+      this.http.post(URLConstant.GetVerfSchemeHForUpdateById, verfGroupObj).subscribe(
         (response) => {
           this.verfQuestionScheme = response;
           console.log(this.verfQuestionScheme);
@@ -66,7 +65,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
     this.verfSchemeHObj = this.QuestionSchemeForm.value;
     if (this.mode == "edit") {
       this.verfSchemeHObj.RowVersion = this.verfSchemeHObj.RowVersion;
-      this.http.post(AdInsConstant.EditVerfSchemeH, this.verfSchemeHObj).subscribe(
+      this.http.post(URLConstant.EditVerfSchemeH, this.verfSchemeHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionScheme/Paging']);
@@ -77,7 +76,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
     }
     else {
       this.verfSchemeHObj.VerfSchemeHId = "0";
-      this.http.post(AdInsConstant.AddVerfSchemeH, this.verfSchemeHObj).subscribe(
+      this.http.post(URLConstant.AddVerfSchemeH, this.verfSchemeHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionScheme/Paging']);

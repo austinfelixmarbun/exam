@@ -7,6 +7,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-address',
@@ -28,8 +29,8 @@ export class CustomerViewAddressComponent implements OnInit {
     DdlAddress: ['']
   });
   viewCustFinData: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
-  GetCustByCustIdUrl = AdInsConstant.GetCustByCustId;
+  GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+  GetCustByCustIdUrl = URLConstant.GetCustByCustId;
   CustType: any;
   constructor(
     private http: HttpClient,
@@ -38,8 +39,8 @@ export class CustomerViewAddressComponent implements OnInit {
     private adInsService: AdInsService,
     private fb: FormBuilder
   ) { 
-  this.GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
-  this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
+  this.GetListCustAddrByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrByCustIdForCustomerPersonalView;
+  this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
   }
 
   ngOnInit() {

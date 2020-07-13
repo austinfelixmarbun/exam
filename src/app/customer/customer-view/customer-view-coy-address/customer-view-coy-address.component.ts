@@ -6,6 +6,7 @@ import { AdInsService } from 'app/shared/services/adIns.service';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-coy-address',
@@ -20,9 +21,9 @@ export class CustomerViewCoyAddressComponent implements OnInit {
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
 
-  GetListCustAddrByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrByCustIdForCustomerPersonalView;
-  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = AdInsConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
+  GetListCustAddrByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrByCustIdForCustomerPersonalView;
+  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
+  GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
 
   CustForm = this.fb.group({
     DdlAddress: ['']

@@ -12,6 +12,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorBranchObj } from 'app/shared/model/VendorBranchObj.Model';
 import { VendorBranchMainObj } from 'app/shared/model/VendorBranchMainObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-branch-add-edit',
@@ -114,7 +115,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   getData() {
-    this.http.post(AdInsConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
       (response) => {
         this.result = response;
         this.setDropdown();
@@ -171,7 +172,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMasterCategoryObj = {
       RefMasterTypeCode: "VENDOR_CATEGORY"
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
       (response) => {
         this.itemCategoryType = response["ReturnObject"];
         if (this.itemCategoryType.length > 0) {
@@ -185,7 +186,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMaxRefundType = {
       RefMasterTypeCode: "MAX_REFUND_TYPE"
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMaxRefundType).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMaxRefundType).subscribe(
       (response) => {
         this.itemMaxRefundType = response["ReturnObject"];
         if (this.itemMaxRefundType.length > 0) {
@@ -199,7 +200,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refAssignmentType = {
       RefMasterTypeCode: "ASSGMNT_TYPE"
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refAssignmentType).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refAssignmentType).subscribe(
       (response) => {
         this.itemAssignmentTypeTele = response["ReturnObject"];
         if (this.itemAssignmentTypeTele.length > 0) {
@@ -213,7 +214,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMrSupplierClass = {
       RefMasterTypeCode: "SUPPLIER_CLASS"
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMrSupplierClass).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMrSupplierClass).subscribe(
       (response) => {
         this.itemSupplierClass = response["ReturnObject"];
         if (this.itemSupplierClass.length > 0) {
@@ -227,7 +228,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMRSupplierUpCalcMethod = {
       RefMasterTypeCode: "SUPPLIER_UP_CALC_METHOD",
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).subscribe(
       (response) => {
         this.itemTypeUpCalcMethod = response["ReturnObject"];
         if (this.itemTypeUpCalcMethod.length > 0) {
@@ -241,7 +242,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMasterTypeObj = {
       RefMasterTypeCode: "VENDOR_TYPE",
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
       (response) => {
         this.itemType = response["ReturnObject"];
         if (this.itemType.length > 0) {
@@ -273,7 +274,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMasterIdObj = {
       RefMasterTypeCode: "ID_TYPE_VENDOR",
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterIdObj).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response["ReturnObject"];
         if (this.itemIdType.lenth > 0) {
@@ -288,7 +289,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       var refMasterAssignmentObj = {
         RefMasterTypeCode: "TASK_ASSIGNMENT_TYPE",
       }
-      this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterAssignmentObj).subscribe(
+      this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterAssignmentObj).subscribe(
         (response) => {
           this.itemAssignmentType = response["ReturnObject"];
           if (this.itemAssignmentType.length > 0) {
@@ -303,7 +304,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: "TAX_CALC_METHOD",
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
         if (this.itemCalcMethodType.length > 0) {
@@ -377,13 +378,13 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
     this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupParentObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupParentObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
@@ -550,7 +551,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
       this.vendorBranchObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
-      this.http.post(AdInsConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
+      this.http.post(URLConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": "edit" } });
@@ -563,7 +564,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
       this.vendorBranchObj.MrVendorTypeCode = this.MrVendorTypeCode;
 
-      this.http.post(AdInsConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
+      this.http.post(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });

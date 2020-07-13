@@ -14,11 +14,11 @@ import { OfficeObj } from 'app/shared/model/OfficeObj.model';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-employee-businessunit-add',
   templateUrl: './employee-businessunit-add.component.html',
-  styleUrls: ['./employee-businessunit-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class EmployeeBusinessunitAddComponent implements OnInit {
@@ -64,19 +64,19 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.title = "Business Unit-Edit";
       this.userRole.RefUserRoleId = this.RefUserRoleId;
 
-      this.http.post(AdInsConstant.GetRefUserRoleById, this.userRole).subscribe(
+      this.http.post(URLConstant.GetRefUserRoleById, this.userRole).subscribe(
         (response) => {
           console.log(response);
           this.result = response;
           this.userRole = this.result;
           this.EmployeeBusinessUnitForm.patchValue({
-            IsActive : this.result.IsActive
+            IsActive: this.result.IsActive
           });
           var BizUnit = new BusinessUnitObj();
 
           BizUnit.RefBizUnitId = this.result["RefBizUnitId"];
 
-          this.http.post(AdInsConstant.GetRefBizUnit, BizUnit).subscribe(
+          this.http.post(URLConstant.GetRefBizUnit, BizUnit).subscribe(
             (response) => {
               this.inputPagingObjBusinessUnit.nameSelect = response["BizUnitName"];
             }
@@ -85,7 +85,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
           var JobTitle = new RefJobTitleObj();
           JobTitle.RefJobTitleId = this.result["RefJobTitleId"];
 
-          this.http.post(AdInsConstant.GetRefJobTitleById, JobTitle).subscribe(
+          this.http.post(URLConstant.GetRefJobTitleById, JobTitle).subscribe(
             (response) => {
               this.inputPagingObjJobTitle.nameSelect = response["JobTitleName"];
             }
@@ -97,7 +97,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
             this.inputPagingObjSupervisor.nameSelect = "";
           }
           else {
-            this.http.post(AdInsConstant.GetRefUserById, Supervisor).subscribe(
+            this.http.post(URLConstant.GetRefUserById, Supervisor).subscribe(
               (response) => {
                 this.inputPagingObjSupervisor.nameSelect = response["Username"];
               }
@@ -105,7 +105,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
           }
           var Office = new OfficeObj();
           Office.RefOfficeId = this.result["RefOfficeId"];
-          this.http.post(AdInsConstant.GetRefOfficeByRefOfficeId, Office).subscribe(
+          this.http.post(URLConstant.GetRefOfficeByRefOfficeId, Office).subscribe(
             (response) => {
               console.log("isi Office");
               console.log(Office);
@@ -115,7 +115,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
           var Role = new RefRoleObj();
           Role.RefRoleId = this.result["RefRoleId"];
-          this.http.post(AdInsConstant.GetRefRoleByRefRoleId, Role).subscribe(
+          this.http.post(URLConstant.GetRefRoleByRefRoleId, Role).subscribe(
             (response) => {
               this.inputPagingObjRole.nameSelect = response["RoleName"];
             }
@@ -197,7 +197,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.userRole.RefUserId = this.RefUserId;
       this.userRole.RowVersion = this.result["RowVersion"];
 
-      this.http.post(AdInsConstant.EditRefUserRole, this.userRole).subscribe(
+      this.http.post(URLConstant.EditRefUserRole, this.userRole).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.router.navigate(['/Employee/EmployeeBusinessUnit/Paging'], { queryParams: { RefUserId: this.RefUserId } });
@@ -211,7 +211,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.userRole.IsActive = this.EmployeeBusinessUnitForm.controls.IsActive.value;
       this.userRole.RowVersion = "";
       this.userRole.RefUserId = this.RefUserId;
-      this.http.post(AdInsConstant.AddRefUserRole, this.userRole).subscribe((response) => {
+      this.http.post(URLConstant.AddRefUserRole, this.userRole).subscribe((response) => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(['/Employee/EmployeeBusinessUnit/Paging'], { queryParams: { RefUserId: this.RefUserId } });
       },

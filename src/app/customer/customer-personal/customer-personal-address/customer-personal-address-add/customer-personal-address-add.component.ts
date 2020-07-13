@@ -12,6 +12,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AddrObj } from 'app/shared/model/AddrObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
  
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -79,13 +80,13 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   });
 
   constructor(private route: ActivatedRoute,private router: Router,private http: HttpClient,private fb: FormBuilder,private toastr: NGXToastrService) { 
-    this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
-    this.getRefMasterWithReserveField = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
-    this.getListCustAddr = AdInsConstant.GetListCustAddr;
-    this.addCustAddr = AdInsConstant.AddCustAddr;
-    this.editCustAddr = AdInsConstant.EditCustAddr;
-    this.getCustAddr = AdInsConstant.GetCustAddr;
-    this.getCustByCustId = AdInsConstant.GetCustByCustId;
+    this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
+    this.getRefMasterWithReserveField = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListCustAddr = URLConstant.GetListCustAddr;
+    this.addCustAddr = URLConstant.AddCustAddr;
+    this.editCustAddr = URLConstant.EditCustAddr;
+    this.getCustAddr = URLConstant.GetCustAddr;
+    this.getCustByCustId = URLConstant.GetCustByCustId;
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {

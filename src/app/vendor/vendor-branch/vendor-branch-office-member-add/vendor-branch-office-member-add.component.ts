@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-branch-office-member-add',
@@ -13,7 +14,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 })
 
 export class VendorBranchOfficeMemberAddComponent implements OnInit {
-  
+
   VendorId: number;
   listSelectedId: Array<number> = new Array<number>();
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
@@ -28,7 +29,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/vendorBranchMemberTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/vendorBranchMemberTempPaging.json";
 
     const addCritIsActive = new CriteriaObj();
@@ -41,10 +42,9 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
     this.GetListVendorOfficeMbrByVendorId();
   }
 
-  
   GetListVendorOfficeMbrByVendorId() {
-    this.http.post(AdInsConstant.GetListVendorOfficeMbrByVendorId, {VendorId: this.VendorId}).subscribe(
-      (response) => {          
+    this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { VendorId: this.VendorId }).subscribe(
+      (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response["ReturnObject"].length; index++) {
           arrMemberList.push(response["ReturnObject"][index].RefOfficeId)
@@ -81,13 +81,12 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
       RefOfficeId: this.listSelectedId
     }
 
-    this.http.post(AdInsConstant.AddListVendorOfficeMember, obj).subscribe(
+    this.http.post(URLConstant.AddListVendorOfficeMember, obj).subscribe(
       (response) => {
         this.router.navigate(['/Vendor/Branch/Member/Paging'], { queryParams: { VendorId: this.VendorId } });
       },
       (error) => {
         console.log(error);
       });
-
   }
 }

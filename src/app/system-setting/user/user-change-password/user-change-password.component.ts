@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-user-change-password",
@@ -44,14 +45,14 @@ export class UserChangePasswordComponent implements OnInit {
   ngOnInit() {
     var getEmpUrl: any;
 
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetUserByUsername;
+    this.apiUrl = this.foundationUrl + URLConstant.GetUserByUsername;
     this.refUserObj = new RefUserObj();
     // this.refUserObj.username = this.username;
     this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
       response => {
         this.refUserObj = response["returnObject"];
         this.refEmpObj = new RefEmpObj();
-        getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
+        getEmpUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
         // this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
         this.httpClient.post(getEmpUrl, this.refEmpObj).subscribe(response => {
           this.refEmpObj = response["returnObject"];
@@ -83,7 +84,7 @@ export class UserChangePasswordComponent implements OnInit {
       // this.refUserObj.oldPass = UserAddEditForm.value.Password;
       // this.refUserObj.newPassVerif = UserAddEditForm.value.NewRePassword;
       //SAVE
-      this.apiUrl = this.foundationUrl + AdInsConstant.ChangePassword;
+      this.apiUrl = this.foundationUrl + URLConstant.ChangePassword;
       this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
         response => {
           this.service.typeSave(response["message"]);

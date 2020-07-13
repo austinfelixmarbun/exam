@@ -12,6 +12,7 @@ import { VendorEmpObj } from 'app/shared/model/VendorEmpObj.Model';
 import { formatDate } from '@angular/common';
 import { WizardComponent } from 'angular-archwizard';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-employee',
@@ -27,16 +28,16 @@ export class VendorEmployeeComponent implements OnInit {
   VendorBranchEmpObj: VendorBranchEmpObj = new VendorBranchEmpObj();
   result: any;
   resultVendorEmpAndAddr: any;
-  inputLookupInternalEmpObj : InputLookupObj = new InputLookupObj();
-  inputLookupSpvObj : InputLookupObj = new InputLookupObj();
-  inputLookupZipcodeObj : InputLookupObj = new InputLookupObj();
+  inputLookupInternalEmpObj: InputLookupObj = new InputLookupObj();
+  inputLookupSpvObj: InputLookupObj = new InputLookupObj();
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
   VendorPositionList = new Array();
   IdTypeList = new Array();
   itemCalcMethodType: any;
   businessDtMin: Date;
 
   isHidden: boolean = true;
-  
+
   VendorEmpForm = this.fb.group({
     VendorEmpCode: ['', [Validators.required]],
     VendorEmpName: ['', [Validators.required]],
@@ -86,7 +87,7 @@ export class VendorEmployeeComponent implements OnInit {
     var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
     this.businessDtMin = new Date(currentUserContext["BusinessDt"]);
 
-    if(this.mode == undefined){
+    if (this.mode == undefined) {
       this.mode = this.objInput.mode;
     }
 
@@ -109,10 +110,10 @@ export class VendorEmployeeComponent implements OnInit {
     var RefMasterVendorPosition = {
       RefMasterTypeCode: "VENDOR_POSITION",
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, RefMasterVendorPosition).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterVendorPosition).subscribe(
       (response) => {
         this.VendorPositionList = response["ReturnObject"];
-        if(this.VendorPositionList.length > 0){
+        if (this.VendorPositionList.length > 0) {
           if (this.mode != "edit") {
             this.VendorEmpForm.patchValue({
               MrVendorEmpPositionCode: this.VendorPositionList[0].Key
@@ -124,10 +125,10 @@ export class VendorEmployeeComponent implements OnInit {
     var RefMasterIdType = {
       RefMasterTypeCode: "ID_TYPE",
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
         this.IdTypeList = response["ReturnObject"];
-        if(this.IdTypeList.length > 0){
+        if (this.IdTypeList.length > 0) {
           if (this.mode != "edit") {
             this.VendorEmpForm.patchValue({
               MrIdTypeCode: this.IdTypeList[0].Key
@@ -140,10 +141,10 @@ export class VendorEmployeeComponent implements OnInit {
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: "TAX_CALC_METHOD",
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response["ReturnObject"];
-        if(this.itemCalcMethodType.length > 0){
+        if (this.itemCalcMethodType.length > 0) {
           if (this.mode != "edit") {
             this.VendorEmpForm.patchValue({
               MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
@@ -156,7 +157,7 @@ export class VendorEmployeeComponent implements OnInit {
     var vendorObj = {
       VendorId: this.objInput.VendorId
     }
-    this.http.post(AdInsConstant.GetVendorByVendorId, vendorObj).subscribe(
+    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
       (response) => {
         this.result = response;
         this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
@@ -230,7 +231,7 @@ export class VendorEmployeeComponent implements OnInit {
     var vendorEmpObj = new VendorEmpObj();
     vendorEmpObj.VendorId = null;
     vendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
-    this.http.post(AdInsConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, vendorEmpObj).subscribe(
+    this.http.post(URLConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, vendorEmpObj).subscribe(
       (response) => {
         this.resultVendorEmpAndAddr = response;
         this.setDropdown();
@@ -280,7 +281,7 @@ export class VendorEmployeeComponent implements OnInit {
       this.inputLookupZipcodeObj.isRequired = true;
     } else {
       this.inputLookupZipcodeObj.isRequired = false;
-      if(!isGetData) this.VendorEmpForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
+      if (!isGetData) this.VendorEmpForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
       this.isHidden = true;
     }
   }
@@ -337,9 +338,8 @@ export class VendorEmployeeComponent implements OnInit {
       this.VendorBranchEmpObj.VendorAddrObj.Province = this.resultVendorEmpAndAddr.VendorAddrObj.Province;
     }
 
-
     if (this.mode == "add") {
-      this.http.post(AdInsConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
+      this.http.post(URLConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
           this.mode = "edit";
           this.objInput.VendorEmpId = response["VendorEmpId"];
@@ -357,7 +357,7 @@ export class VendorEmployeeComponent implements OnInit {
       this.VendorBranchEmpObj.VendorAddrObj.RowVersion = this.resultVendorEmpAndAddr.VendorAddrObj.RowVersion;
       this.VendorBranchEmpObj.VendorEmpObj.TaxpayerNo = this.resultVendorEmpAndAddr.VendorEmpObj.TaxpayerNo;
 
-      this.http.post(AdInsConstant.EditVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
+      this.http.post(URLConstant.EditVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();

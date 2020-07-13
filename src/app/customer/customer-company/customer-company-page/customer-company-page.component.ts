@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import Stepper from 'bs-stepper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -56,7 +57,7 @@ export class CustomerCompanyPageComponent implements OnInit {
     }
     else {
       var custObj = { CustId: this.IdCust };
-      this.http.post(AdInsConstant.GetCustCompanyByCustId, custObj).subscribe(
+      this.http.post(URLConstant.GetCustCompanyByCustId, custObj).subscribe(
         (response: any) => {
           this.CustCompanyId = response['CustCompanyId'];
         } 

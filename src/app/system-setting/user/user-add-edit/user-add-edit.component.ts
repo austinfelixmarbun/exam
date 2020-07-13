@@ -12,6 +12,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
 import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-user-add-edit",
@@ -64,7 +65,7 @@ export class UserAddEditComponent implements OnInit {
   ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupEmp.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupEmp.json";
     this.inputLookupObj.genericJson = "./assets/lookup/lookupEmp.json";
@@ -74,7 +75,7 @@ export class UserAddEditComponent implements OnInit {
       var getEmpUrl: any;
       var userTemp: RefUserObj;
 
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetRefUser;
+      this.apiUrl = this.foundationUrl + URLConstant.GetRefUser;
       this.refUserObj = new RefUserObj();
       // this.refUserObj.refUserId = this.RefUserId;
       this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
@@ -103,7 +104,7 @@ export class UserAddEditComponent implements OnInit {
           // }
 
           empObj = new RefEmpObj();
-          getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
+          getEmpUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
           // empObj.refEmpId = +this.refUserObj.refEmpId;
           this.httpClient.post(getEmpUrl, empObj).subscribe(response => {
             empObj = response["returnObject"];
@@ -121,7 +122,7 @@ export class UserAddEditComponent implements OnInit {
       var empObj: RefEmpObj;
       var getEmpUrl: any;
 
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetRefUser;
+      this.apiUrl = this.foundationUrl + URLConstant.GetRefUser;
       this.refUserObj = new RefUserObj();
       // this.refUserObj.refUserId = this.RefUserId;
       this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
@@ -133,7 +134,7 @@ export class UserAddEditComponent implements OnInit {
           // this.Username = this.refUserObj.username;
 
           empObj = new RefEmpObj();
-          getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
+          getEmpUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
           // empObj.refEmpId = +this.refUserObj.refEmpId;
           this.httpClient.post(getEmpUrl, empObj).subscribe(response => {
             empObj = response["returnObject"];
@@ -159,9 +160,9 @@ export class UserAddEditComponent implements OnInit {
 
     this.spinner.show();
     console.log(UserAddEditForm.value);
-    var getUserUrl = this.foundationUrl + AdInsConstant.GetUserByUsername;
+    var getUserUrl = this.foundationUrl + URLConstant.GetUserByUsername;
     var getCountUserUrl =
-      this.foundationUrl + AdInsConstant.GetCountRefUserByRefEmpId;
+      this.foundationUrl + URLConstant.GetCountRefUserByRefEmpId;
     var empObj: RefEmpObj;
     empObj = new RefEmpObj();
     // empObj.refEmpId = lookupEmp.idSelect;
@@ -192,7 +193,7 @@ export class UserAddEditComponent implements OnInit {
                     this.service.typeErrorCustom("Employee Already Have User");
                     this.spinner.hide();
                   } else {
-                    this.apiUrl = this.foundationUrl + AdInsConstant.AddRefUser;
+                    this.apiUrl = this.foundationUrl + URLConstant.AddRefUser;
                     console.log(lookupEmp);
                     // this.refUserObj.refEmpId = lookupEmp.idSelect;
                     // this.refUserObj.username = UserAddEditForm.value.Username;

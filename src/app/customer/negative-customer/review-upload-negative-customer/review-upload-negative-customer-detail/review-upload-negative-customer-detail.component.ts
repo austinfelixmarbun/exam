@@ -8,6 +8,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-review-upload-negative-customer-detail',
@@ -36,12 +37,12 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   }
   ngOnInit() {
     this.claimTask();
-    this.UploadReviewUrl = AdInsConstant.UploadReview;
-    this.CancelUpload = AdInsConstant.CancelUpload;
+    this.UploadReviewUrl = URLConstant.UploadReview;
+    this.CancelUpload = URLConstant.CancelUpload;
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeCustomerDetail.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeCustomerDetail.json";
     this.inputPagingObj.addCritInput = new Array();
     const addCritAssetMasterId = new CriteriaObj();
@@ -72,7 +73,7 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
     var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
     var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: currentUserContext["UserName"] };
     console.log(wfClaimObj);
-    this.http.post(AdInsConstant.ClaimTask, wfClaimObj).subscribe(
+    this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
       (response) => {
       });
   }

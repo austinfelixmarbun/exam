@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-verification-question-answer-paging',
-  templateUrl: './verification-question-answer-paging.component.html',
-  styleUrls: ['./verification-question-answer-paging.component.scss']
+  templateUrl: './verification-question-answer-paging.component.html'
 })
 export class VerificationQuestionAnswerPagingComponent implements OnInit {
 
@@ -16,9 +16,9 @@ export class VerificationQuestionAnswerPagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/verification/searchVerificationQuestionAnswer.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchVerificationQuestionAnswer.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVerfQuestionAnswerById;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteVerfQuestionAnswerById;
     this.inputPagingObj.ddlEnvironments = [
       {
         name: "VQA.REF_VERF_ANSWER_TYPE_ID",

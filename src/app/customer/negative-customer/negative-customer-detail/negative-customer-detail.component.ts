@@ -17,6 +17,7 @@ import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrx
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-negative-customer-detail',
@@ -25,7 +26,6 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
   providers: [NGXToastrService]
 })
 export class NegativeCustomerDetailComponent implements OnInit {
-  private refMasterByTypeUrl: string = AdInsConstant.GetListActiveRefMaster;
   pageType: string = "add";
   negativeCustId: number;
   refMasterIdType: any;
@@ -107,9 +107,9 @@ export class NegativeCustomerDetailComponent implements OnInit {
     refMasterNegativeCustTypeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustType;
     var refMasterNegativeSourceObj = new RefMasterObj();
     refMasterNegativeSourceObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustSource;
-    let requestIdType = this.httpClient.post(this.refMasterByTypeUrl, refMasterIdTypeObj);
-    let requestNegativeCustType = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeCustTypeObj);
-    let requestNegativeSource = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeSourceObj);
+    let requestIdType = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterIdTypeObj);
+    let requestNegativeCustType = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterNegativeCustTypeObj);
+    let requestNegativeSource = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterNegativeSourceObj);
     forkJoin([requestIdType, requestNegativeCustType, requestNegativeSource]).subscribe(
       (response) => {
         // console.log(response);
@@ -132,7 +132,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           });
         }
         if (this.pageType == "edit") {
-          if (this.custType == AdInsConstant.CustomerPersonal && this.refMasterIdType.ReturnObject[0].Key == RefMasterConstant.EKtp) {
+          if (this.custType == CommonConstant.CustomerPersonal && this.refMasterIdType.ReturnObject[0].Key == RefMasterConstant.EKtp) {
             this.tempKTPCheck = true;
             this.NegativeCustForm.controls.IdExpiredDt.clearValidators();
             this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', [Validators.required]));
@@ -141,7 +141,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
             this.NegativeCustForm.addControl('BirthDt', new FormControl('', [Validators.required]));
             this.NegativeCustForm.addControl('MotherMaidenName', new FormControl('', [Validators.required]));
             this.NegativeCustForm.removeControl('CompanyLookup');
-          } else if (this.custType == AdInsConstant.CustomerPersonal) {
+          } else if (this.custType == CommonConstant.CustomerPersonal) {
             this.tempKTPCheck = false;
             this.NegativeCustForm.controls.IdExpiredDt.setValidators(Validators.required);
             this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', [Validators.required]));
@@ -218,14 +218,14 @@ export class NegativeCustomerDetailComponent implements OnInit {
     if (this.pageType == "edit") {
       var negativeCustObj = new NegativeCustObj();
       negativeCustObj.NegativeCustId = this.negativeCustId;
-      this.httpClient.post(AdInsConstant.GetNegativeCustByNegativeCustId, negativeCustObj).pipe(
+      this.httpClient.post(URLConstant.GetNegativeCustByNegativeCustId, negativeCustObj).pipe(
         map((response) => {
           return response;
         }),
         mergeMap((response: any) => {
           var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
           negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
-          const negativeCustChangeTrx = this.httpClient.post(AdInsConstant.GetListNegativeCustChangeTrxByNegativeCustId, negativeCustChangeTrxObj);
+          const negativeCustChangeTrx = this.httpClient.post(URLConstant.GetListNegativeCustChangeTrxByNegativeCustId, negativeCustChangeTrxObj);
           var tempResponse = [response];
           return forkJoin([tempResponse, negativeCustChangeTrx]);
         })
@@ -278,7 +278,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
             RowVersion: negativeCustData.RowVersion
           });
           console.log(this.NegativeCustForm.controls);
-          if (this.custType == AdInsConstant.CustomerPersonal) {
+          if (this.custType == CommonConstant.CustomerPersonal) {
             if (this.NegativeCustForm.controls.MrIdTypeCode.value == RefMasterConstant.EKtp) {
               this.tempKTPCheck = true;
               this.NegativeCustForm.controls.IdExpiredDt.clearValidators();
@@ -320,7 +320,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           if (this.NegativeCustForm.controls.CustName.value == '' || this.NegativeCustForm.controls.CustName.value == null)
             this.NegativeCustForm.controls.CustName.enable();
 
-          if (this.custType.toUpperCase() == AdInsConstant.CustomerPersonal.toUpperCase()) {
+          if (this.custType.toUpperCase() == CommonConstant.CustomerPersonal.toUpperCase()) {
             if (this.NegativeCustForm.controls.MrIdTypeCode.value == '' || this.NegativeCustForm.controls.MrIdTypeCode.value == null)
             {
               this.NegativeCustForm.controls.MrIdTypeCode.enable();
@@ -346,7 +346,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
             if (this.NegativeCustForm.controls.MotherMaidenName.value == '' || this.NegativeCustForm.controls.MotherMaidenName.value == null)
               this.NegativeCustForm.controls.MotherMaidenName.enable();
           }
-          else if (this.custType.toUpperCase() == AdInsConstant.CustomerCompany.toUpperCase()) {
+          else if (this.custType.toUpperCase() == CommonConstant.CustomerCompany.toUpperCase()) {
             if (this.NegativeCustForm.controls.IdExpiredDt.value == '' || this.NegativeCustForm.controls.IdExpiredDt.value == null)
               this.NegativeCustForm.controls.IdExpiredDt.enable();
           }
@@ -439,9 +439,9 @@ export class NegativeCustomerDetailComponent implements OnInit {
     refMasterNegativeCustTypeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustType;
     var refMasterNegativeSourceObj = new RefMasterObj();
     refMasterNegativeSourceObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustSource;
-    let requestIdType = this.httpClient.post(this.refMasterByTypeUrl, refMasterIdTypeObj);
-    let requestNegativeCustType = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeCustTypeObj);
-    let requestNegativeSource = this.httpClient.post(this.refMasterByTypeUrl, refMasterNegativeSourceObj);
+    let requestIdType = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterIdTypeObj);
+    let requestNegativeCustType = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterNegativeCustTypeObj);
+    let requestNegativeSource = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterNegativeSourceObj);
     forkJoin([requestIdType, requestNegativeCustType, requestNegativeSource]).subscribe(
       (response) => {
         this.refMasterIdType = response[0];
@@ -466,7 +466,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var custAddr = new CustAddrObj();
     custAddr.CustId = e.custId;
     custAddr.MrCustAddrTypeCode = CommonConstant.CustAddrTypeLegal;
-    this.httpClient.post(AdInsConstant.GetCustAddrByMrCustAddrType, custAddr).subscribe(
+    this.httpClient.post(URLConstant.GetCustAddrByMrCustAddrType, custAddr).subscribe(
       (response: any) => {
         this.NegativeCustForm.patchValue({
           CustId: e.custId,
@@ -513,7 +513,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var custAddr = new CustAddrObj();
     custAddr.CustId = e.custId;
     custAddr.MrCustAddrTypeCode = CommonConstant.CustAddrTypeLegal;
-    this.httpClient.post(AdInsConstant.GetCustAddrByMrCustAddrType, custAddr).subscribe(
+    this.httpClient.post(URLConstant.GetCustAddrByMrCustAddrType, custAddr).subscribe(
       (response: any) => {
         this.NegativeCustForm.patchValue({
           CustId: e.custId,
@@ -570,7 +570,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   }
 
   SaveForm() {
-    if (this.NegativeCustForm.controls.MrCustTypeCode.value == AdInsConstant.CustomerCompany) {
+    if (this.NegativeCustForm.controls.MrCustTypeCode.value == CommonConstant.CustomerCompany) {
       this.NegativeCustForm.addControl('MrIdTypeCode', new FormControl('', []));
       this.NegativeCustForm.addControl('IdNo', new FormControl('', []));
       this.NegativeCustForm.patchValue({
@@ -583,7 +583,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
 
     // This Code Is Temporary Due to Negative Customer Approval Is Not Ready At The Moment
     if (this.pageType == "add") {
-      this.httpClient.post(AdInsConstant.AddNegativeCustomer, negativeCustFormData).pipe(
+      this.httpClient.post(URLConstant.AddNegativeCustomer, negativeCustFormData).pipe(
         map((response) => {
           return response;
         }),
@@ -601,7 +601,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           negativeCustChangeTrxObj.ApvDt = new Date();
           negativeCustChangeTrxObj.ExeDt = new Date();
 
-          const addNegativeCustChangeTrx = this.httpClient.post(AdInsConstant.AddNegativeCustChangeTrx, negativeCustChangeTrxObj);
+          const addNegativeCustChangeTrx = this.httpClient.post(URLConstant.AddNegativeCustChangeTrx, negativeCustChangeTrxObj);
           var tempResponse = [response];
           return forkJoin([tempResponse, addNegativeCustChangeTrx]);
         })
@@ -617,7 +617,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
       );
     }
     else if (this.pageType == "edit") {
-      this.httpClient.post(AdInsConstant.EditNegativeCustomer, negativeCustFormData).pipe(
+      this.httpClient.post(URLConstant.EditNegativeCustomer, negativeCustFormData).pipe(
         map((response) => {
           return response;
         }),
@@ -635,7 +635,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           negativeCustChangeTrxObj.ApvDt = new Date();
           negativeCustChangeTrxObj.ExeDt = new Date();
 
-          const addNegativeCustChangeTrx = this.httpClient.post(AdInsConstant.AddNegativeCustChangeTrx, negativeCustChangeTrxObj);
+          const addNegativeCustChangeTrx = this.httpClient.post(URLConstant.AddNegativeCustChangeTrx, negativeCustChangeTrxObj);
           var tempResponse = [response];
           return forkJoin([tempResponse, addNegativeCustChangeTrx]);
         })

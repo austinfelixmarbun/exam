@@ -7,6 +7,7 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-address',
@@ -46,12 +47,12 @@ export class AddressComponent implements OnInit {
     this.AddressForm.controls.Province.disable();
 
     if (this.objInput.Type == "Vendor") {
-      this.getUrl = AdInsConstant.GetVendorAddrByVendorId;
+      this.getUrl = URLConstant.GetVendorAddrByVendorId;
       this.vendorAddrObj.VendorId = this.objInput.VendorId;
       this.vendorAddrObj.VendorEmpId = null;
       this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
     } else if (this.objInput.Type == "VendorEmployee") {
-      this.getUrl = AdInsConstant.GetVendorAddrByVendorEmpId;
+      this.getUrl = URLConstant.GetVendorAddrByVendorEmpId;
       this.vendorAddrObj.VendorId = null;
       this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
       this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
@@ -60,7 +61,7 @@ export class AddressComponent implements OnInit {
     var vendorObj = {
       VendorId: this.objInput.VendorId
     }
-    this.http.post(AdInsConstant.GetVendorByVendorId, vendorObj).subscribe(
+    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
       (response) => {
         this.result = response;
         this.MrVendorClass = this.result.MrVendorClass;
@@ -69,15 +70,15 @@ export class AddressComponent implements OnInit {
     );
   }
 
-  setLookup(){
+  setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
-    if(this.vendorAddrObj!=null){
-      this.inputLookupZipcodeObj.jsonSelect = {Zipcode: this.vendorAddrObj.Zipcode};
+    if (this.vendorAddrObj != null) {
+      this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.vendorAddrObj.Zipcode };
     }
 
     this.inputLookupZipcodeObj.isReady = true;
@@ -116,7 +117,7 @@ export class AddressComponent implements OnInit {
     this.vendorAddrObj.PhnArea2 = "";
 
     if (this.mode == "edit") {
-      this.http.post(AdInsConstant.EditVendorAddr, this.vendorAddrObj).subscribe(
+      this.http.post(URLConstant.EditVendorAddr, this.vendorAddrObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
@@ -127,7 +128,7 @@ export class AddressComponent implements OnInit {
         });
     }
     else {
-      this.http.post<VendorAddrObj>(AdInsConstant.AddVendorAddr, this.vendorAddrObj).subscribe(
+      this.http.post<VendorAddrObj>(URLConstant.AddVendorAddr, this.vendorAddrObj).subscribe(
         (response) => {
           this.vendorAddrObj = response;
           this.mode = "edit";
@@ -142,7 +143,7 @@ export class AddressComponent implements OnInit {
     }
   }
 
-  refreshVendorAddress() { 
+  refreshVendorAddress() {
     this.http.post<VendorAddrObj>(this.getUrl, this.vendorAddrObj).subscribe(
       (response) => {
         this.vendorAddrObj = response;
@@ -159,9 +160,9 @@ export class AddressComponent implements OnInit {
         this.setLookup();
         this.VendorAddrId = this.vendorAddrObj.VendorAddrId;
 
-        if(this.VendorAddrId==0){
+        if (this.VendorAddrId == 0) {
           this.mode = "add";
-        }else{
+        } else {
           this.mode = "edit";
         }
       },

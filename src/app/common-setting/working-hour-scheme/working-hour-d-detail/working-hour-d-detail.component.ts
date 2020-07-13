@@ -11,6 +11,7 @@ import { ListWorkingHourSchmDObj } from 'app/shared/model/ListWorkingHourSchmDOb
 import { String, StringBuilder } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-working-hour-d-detail',
@@ -105,10 +106,10 @@ export class WorkingHourDDetailComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.getSchmHUrl = AdInsConstant.GetWorkingHourSchmHById;
-    this.getSchmDUrl = AdInsConstant.GetListWorkingHourSchmDByWorkingHourHId;
-    this.addUrl = AdInsConstant.AddListWorkingHourSchmD;
-    this.editUrl = AdInsConstant.EditWorkingHourSchmH;
+    this.getSchmHUrl = URLConstant.GetWorkingHourSchmHById;
+    this.getSchmDUrl = URLConstant.GetListWorkingHourSchmDByWorkingHourHId;
+    this.addUrl = URLConstant.AddListWorkingHourSchmD;
+    this.editUrl = URLConstant.EditWorkingHourSchmH;
 
     this.route.queryParams.subscribe(params => {
       if (params["workingHourSchmHId"] != null) {
@@ -206,7 +207,7 @@ export class WorkingHourDDetailComponent implements OnInit {
       this.listWorkingHourSchmDObj.WorkingHourSchmDObj.push(this.workingHourSchmDObj);
     }
     if (this.isEdit) {
-      this.addUrl = AdInsConstant.EditListWorkingHourSchmD;
+      this.addUrl = URLConstant.EditListWorkingHourSchmD;
     }
     this.http.post(this.addUrl, this.listWorkingHourSchmDObj).subscribe(
       response => {

@@ -10,6 +10,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-office-group-member-add',
@@ -42,12 +43,12 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   refOfficeobj: any;
 
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private router: Router, private toastr:NGXToastrService) {
-      this.route.queryParams.subscribe(params => {
-        this.RefOfficeId = params['RefOfficeId'];
-        this.CenterGrpId = params['CenterGrpId'];
-      });
-    }
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
+    this.route.queryParams.subscribe(params => {
+      this.RefOfficeId = params['RefOfficeId'];
+      this.CenterGrpId = params['CenterGrpId'];
+    });
+  }
 
   ngOnInit() {
     this.GetListCenterGrpMemberByRefOfficeId();
@@ -58,15 +59,15 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     this.tempListId = new Array();
     this.tempData = new Array();
     this.arrCrit = new Array();
-    
+
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeCenterGrp.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
 
     this.inputObj.addCritInput = new Array();
     const addCritTypeOCode = new CriteriaObj();
@@ -89,7 +90,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     this.viewObj = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
   }
 
   searchSort(event: any) {
@@ -116,7 +117,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
   }
-  
+
   searchPagination(event: number) {
     this.pageNow = event;
     let order = null;
@@ -245,13 +246,13 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       RefOfficeId: this.tempListId
     }
 
-    this.http.post(AdInsConstant.AddCenterGrpOfficeMember, obj).subscribe(
-        (response) => {
-            this.router.navigate(['/Office/Group/Member'], {queryParams: {RefOfficeId:this.RefOfficeId, CenterGrpId:this.CenterGrpId}});
-        },
-        (error) => {
-            console.log(error);
-        });
+    this.http.post(URLConstant.AddCenterGrpOfficeMember, obj).subscribe(
+      (response) => {
+        this.router.navigate(['/Office/Group/Member'], { queryParams: { RefOfficeId: this.RefOfficeId, CenterGrpId: this.CenterGrpId } });
+      },
+      (error) => {
+        console.log(error);
+      });
 
   }
 
@@ -261,16 +262,16 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       RefOfficeId: this.RefOfficeId
     }
 
-    this.http.post(AdInsConstant.GetListCenterGrpMemberByRefOfficeId, obj).subscribe(
+    this.http.post(URLConstant.GetListCenterGrpMemberByRefOfficeId, obj).subscribe(
       (response) => {
         this.refOfficeobj = response;
         var arrMemberList = new Array();
 
         for (let index = 0; index < this.refOfficeobj.ListCenterGrpOfficeMbr.length; index++) {
-           arrMemberList.push(this.refOfficeobj.ListCenterGrpOfficeMbr[index].RefOfficeId)
+          arrMemberList.push(this.refOfficeobj.ListCenterGrpOfficeMbr[index].RefOfficeId)
         }
-        
-        if(arrMemberList.length != 0){
+
+        if (arrMemberList.length != 0) {
           const addCritListRefOffice = new CriteriaObj();
           addCritListRefOffice.DataType = 'numeric';
           addCritListRefOffice.propName = 'RO.REF_OFFICE_ID';

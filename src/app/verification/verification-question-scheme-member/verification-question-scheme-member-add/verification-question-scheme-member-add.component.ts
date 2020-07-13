@@ -10,11 +10,11 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-member-add',
   templateUrl: './verification-question-scheme-member-add.component.html',
-  styleUrls: ['./verification-question-scheme-member-add.component.scss'],
   providers: [NGXToastrService]
 })
 export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
@@ -75,17 +75,17 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/ucpaging/verification/searchVerificationQuestionGroup.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
 
    
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
     
 
     var verfSchemeObj = { VerfSchemeHId: this.VerfSchemeHId }
-    this.http.post(AdInsConstant.GetVerfSchemeHById, verfSchemeObj).subscribe(
+    this.http.post(URLConstant.GetVerfSchemeHById, verfSchemeObj).subscribe(
       (response) => {
         console.log(response);
         this.verfQuestionScheme = response;
@@ -247,7 +247,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
   GetListVerfQuestionGrpHByVerfSchemeDId()
   {
     var verfGroupObj = { VerfSchemeHId: this.VerfSchemeHId }
-    this.http.post(AdInsConstant.GetVerfSchemeDsByVerfSchemeHId, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetVerfSchemeDsByVerfSchemeHId, verfGroupObj).subscribe(
       (response) => {
         this.listVerfQuestionGrpD = response;
         var arrMemberList = new Array();
@@ -291,7 +291,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
       return;
     }
 
-    this.http.post(AdInsConstant.AddListVerfSchemeD, this.verfSchemeDObj).subscribe(
+    this.http.post(URLConstant.AddListVerfSchemeD, this.verfSchemeDObj).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Verification/QuestionSchemeMemberPaging"], { queryParams: { "VerfSchemeHId": this.VerfSchemeHId } });

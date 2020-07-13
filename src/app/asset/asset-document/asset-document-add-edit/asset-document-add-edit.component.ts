@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-asset-document-add-edit',
@@ -51,7 +52,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.http.post(AdInsConstant.GetListRefAssetDoc, this.assetDocListObj).subscribe(
+    this.http.post(URLConstant.GetListRefAssetDoc, this.assetDocListObj).subscribe(
       (response) => {
         // console.log(response);
         this.tempAssetName = response["ReturnObject"];
@@ -62,7 +63,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
         }
       }
     );
-    this.http.post(AdInsConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
+    this.http.post(URLConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];
       }
@@ -70,7 +71,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
 
     var generalSettingObj: GeneralSettingObj = new GeneralSettingObj();
     generalSettingObj.ListGsCode = ["IS_SHOW_CBX_BORROW", "IS_SHOW_CBX_PLEDGE"];
-    this.http.post(AdInsConstant.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
+    this.http.post(URLConstant.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
       (response) => {
         var tempResponse = response['ResponseGeneralSettingObj'];
         // console.log(tempResponse);
@@ -87,9 +88,9 @@ export class AssetDocumentAddEditComponent implements OnInit {
     );
 
     if (this.pageType == "edit") {
-      this.getRefAssetDocUrl = AdInsConstant.GetRefAssetDocByRefAssetDocId;
+      this.getRefAssetDocUrl = URLConstant.GetRefAssetDocByRefAssetDocId;
 
-      this.http.post(AdInsConstant.GetAssetDocListByAssetDocListId, { AssetDocListId: this.AssetDocListId }).subscribe(
+      this.http.post(URLConstant.GetAssetDocListByAssetDocListId, { AssetDocListId: this.AssetDocListId }).subscribe(
         (response: AssetDocListObj) => {
           this.result = response;
           this.http.post(this.getRefAssetDocUrl, { RefAssetDocId: this.result.RefAssetDocId }).subscribe(
@@ -127,7 +128,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsActive = this.AssetDocumentForm.controls["IsActive"].value;
       this.assetDocListObj.AssetTypeId = this.AssetTypeId;
 
-      this.http.post(AdInsConstant.AddNewAssetDocList, this.assetDocListObj).subscribe(
+      this.http.post(URLConstant.AddNewAssetDocList, this.assetDocListObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });
@@ -147,7 +148,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsMandatoryUsed = this.AssetDocumentForm.controls["IsMandatoryUsed"].value;
       this.assetDocListObj.IsActive = this.AssetDocumentForm.controls["IsActive"].value;
 
-      this.http.post(AdInsConstant.EditAssetDocList, this.assetDocListObj).subscribe(
+      this.http.post(URLConstant.EditAssetDocList, this.assetDocListObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });

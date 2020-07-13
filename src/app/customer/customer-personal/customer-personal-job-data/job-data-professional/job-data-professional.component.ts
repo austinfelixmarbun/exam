@@ -4,9 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
@@ -16,6 +13,7 @@ import { formatDate } from '@angular/common';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-job-data-professional',
@@ -29,10 +27,8 @@ export class JobDataProfessionalComponent implements OnInit {
   jobAddrId: any;
   rowVersion: any;
   typePage: string;
-  IdCust : number;
-  IdCustPersonal : number; 
-  getListActiveRefMaster: string;
-  getCustById: string;
+  IdCust: number;
+  IdCustPersonal: number;
   inputFieldAddressObj: InputFieldObj;
   tempProfession: any;
   tempRefIndustryType: any;
@@ -44,12 +40,6 @@ export class JobDataProfessionalComponent implements OnInit {
   jobAddressObj: CustAddrObj;
   addressObj: CustAddrObj;
   othBizAddrObj: CustAddrObj;
-  addJobData: string;
-  editJobData: string;
-  getJobDataByCustId: string;
-  getCustAddr: string;
-  getRefProfession: string;
-  getRefIndustryType: string;
   reqCustPersonalJobDataObj: RequestCustPersonalJobDataObj;
   refProfessionObj: RefProfessionObj;
   returnRefProfessionObj: any;
@@ -64,7 +54,7 @@ export class JobDataProfessionalComponent implements OnInit {
     JobTitleName: [''],
     IndustryTypeName: [''],
     EstablishmentDate: ['', Validators.required],
-    Notes:[''],
+    Notes: [''],
     LuasBangunan: [''],
     LuasTanah: [''],
     KapasitasListrik: [''],
@@ -74,23 +64,14 @@ export class JobDataProfessionalComponent implements OnInit {
   });
   businessDtMin: Date;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getCustById = AdInsConstant.GetCustByCustId;
-    this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
-    this.addJobData = AdInsConstant.AddCustPersonalJobData;
-    this.editJobData = AdInsConstant.EditCustPersonalJobData;
-    this.getJobDataByCustId = AdInsConstant.GetCustPersonalJobDataByCustId;
-    this.getCustAddr = AdInsConstant.GetCustAddr;
-    this.getRefProfession = AdInsConstant.GetRefProfessionById;
-    this.getRefIndustryType = AdInsConstant.GetRefIndustryTypeById;
-
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
-        if (params["IdCust"] != null) {
-            this.IdCust = params["IdCust"];
-        }
-        if (params["IdCustPersonal"] != null) {
-            this.IdCustPersonal = params["IdCustPersonal"];
-        }
+      if (params["IdCust"] != null) {
+        this.IdCust = params["IdCust"];
+      }
+      if (params["IdCustPersonal"] != null) {
+        this.IdCustPersonal = params["IdCustPersonal"];
+      }
     });
   }
 
@@ -99,7 +80,7 @@ export class JobDataProfessionalComponent implements OnInit {
   }
 
   getLookUpIndustry(event) {
-    this.tempRefIndustryType  = event.RefIndustryTypeId;
+    this.tempRefIndustryType = event.RefIndustryTypeId;
   }
 
   ngOnInit() {
@@ -124,92 +105,92 @@ export class JobDataProfessionalComponent implements OnInit {
     this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.isRequired = true;
-    
+
     this.custJobDataObj = new CustPersonalJobDataObj();
     this.custJobDataObj.CustId = this.IdCust;
-    this.http.post(this.getJobDataByCustId, this.custJobDataObj).subscribe(
+    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, this.custJobDataObj).subscribe(
       (response: any) => {
-          this.returnCustJobDataObj = response;
+        this.returnCustJobDataObj = response;
 
-          if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
-            this.JobDataProForm.patchValue({ 
-              ProfessionalNo: this.returnCustJobDataObj.ProfessionalNo,
-              JobTitleName: this.returnCustJobDataObj.JobTitleName,
-              EstablishmentDate: formatDate(this.returnCustJobDataObj.EmploymentEstablishmentDt,  'yyyy-MM-dd', 'en-US'),
+        if (this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
+          this.JobDataProForm.patchValue({
+            ProfessionalNo: this.returnCustJobDataObj.ProfessionalNo,
+            JobTitleName: this.returnCustJobDataObj.JobTitleName,
+            EstablishmentDate: formatDate(this.returnCustJobDataObj.EmploymentEstablishmentDt, 'yyyy-MM-dd', 'en-US'),
+          });
+
+          this.refProfessionObj = new RefProfessionObj();
+          this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
+          this.http.post(URLConstant.GetRefProfessionById, this.refProfessionObj).subscribe(
+            (response) => {
+              this.returnRefProfessionObj = response;
+              this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
+              this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
+              this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
             });
 
-            this.refProfessionObj = new RefProfessionObj();
-            this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
-            this.http.post(this.getRefProfession, this.refProfessionObj).subscribe(
-              (response) => {
-                  this.returnRefProfessionObj = response;
-                  this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
-                  this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
-                  this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
-              });
+          this.refIndustryTypeObj = new RefIndustryTypeObj();
+          this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
+          this.http.post(URLConstant.GetRefIndustryTypeById, this.refIndustryTypeObj).subscribe(
+            (response) => {
+              this.returnIndustryTypeObj = response;
 
-            this.refIndustryTypeObj = new RefIndustryTypeObj();
-            this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
-            this.http.post(this.getRefIndustryType, this.refIndustryTypeObj).subscribe(
-              (response) => {
-                  this.returnIndustryTypeObj = response;
+              this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
+              this.industryLookUpObj.jsonSelect = this.returnIndustryTypeObj;
+              this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
+            });
 
-                  this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
-                  this.industryLookUpObj.jsonSelect = this.returnIndustryTypeObj;
-                  this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
-              });
-            
-            if(this.returnCustJobDataObj.JobAddrId != null) {
-              this.custAddrObj = new CustAddrObj();
-              this.custAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
-              this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
-                (response) => {
-                    this.getCustomerAddr = response;
-                    this.JobDataProForm.patchValue({
-                        Notes: this.getCustomerAddr.Notes
-                    });
-                    
-                    this.addressObj = new CustAddrObj();
-                    this.addressObj.Addr = this.getCustomerAddr.Addr;
-                    this.addressObj.AreaCode3 = this.getCustomerAddr.AreaCode3;
-                    this.addressObj.AreaCode4 = this.getCustomerAddr.AreaCode4;
-                    this.addressObj.AreaCode1 = this.getCustomerAddr.AreaCode1;
-                    this.addressObj.AreaCode2 = this.getCustomerAddr.AreaCode2;
-                    this.addressObj.City = this.getCustomerAddr.City;
-                    this.addressObj.PhnArea1 = this.getCustomerAddr.PhnArea1;
-                    this.addressObj.Phn1 = this.getCustomerAddr.Phn1;
-                    this.addressObj.PhnExt1 = this.getCustomerAddr.PhnExt1;
-                    this.addressObj.PhnArea2 = this.getCustomerAddr.PhnArea2;
-                    this.addressObj.Phn2 = this.getCustomerAddr.Phn2;
-                    this.addressObj.PhnExt2 = this.getCustomerAddr.PhnExt2;
-                    this.addressObj.PhnArea3 = this.getCustomerAddr.PhnArea3;
-                    this.addressObj.Phn3 = this.getCustomerAddr.Phn3;
-                    this.addressObj.PhnExt3 = this.getCustomerAddr.PhnExt3;
-                    this.addressObj.FaxArea = this.getCustomerAddr.FaxArea;
-                    this.addressObj.Fax = this.getCustomerAddr.Fax;
-                    this.addressObj.MrHouseOwnershipCode = this.getCustomerAddr.MrBuildingOwnershipCode;
-      
-                    this.inputFieldAddressObj = new InputFieldObj();
-                    this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
-                    this.inputFieldAddressObj.inputLookupObj.nameSelect = this.getCustomerAddr.Zipcode;
-                    this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.getCustomerAddr.Zipcode};
-                    
+          if (this.returnCustJobDataObj.JobAddrId != null) {
+            this.custAddrObj = new CustAddrObj();
+            this.custAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
+            this.http.post(URLConstant.GetCustAddr, this.custAddrObj).subscribe(
+              (response) => {
+                this.getCustomerAddr = response;
+                this.JobDataProForm.patchValue({
+                  Notes: this.getCustomerAddr.Notes
                 });
-            }
-            
-            this.jobAddrId = this.returnCustJobDataObj.JobAddrId;
-            this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
-            this.rowVersion = this.returnCustJobDataObj.RowVersion;
-            this.typePage = "edit";
+
+                this.addressObj = new CustAddrObj();
+                this.addressObj.Addr = this.getCustomerAddr.Addr;
+                this.addressObj.AreaCode3 = this.getCustomerAddr.AreaCode3;
+                this.addressObj.AreaCode4 = this.getCustomerAddr.AreaCode4;
+                this.addressObj.AreaCode1 = this.getCustomerAddr.AreaCode1;
+                this.addressObj.AreaCode2 = this.getCustomerAddr.AreaCode2;
+                this.addressObj.City = this.getCustomerAddr.City;
+                this.addressObj.PhnArea1 = this.getCustomerAddr.PhnArea1;
+                this.addressObj.Phn1 = this.getCustomerAddr.Phn1;
+                this.addressObj.PhnExt1 = this.getCustomerAddr.PhnExt1;
+                this.addressObj.PhnArea2 = this.getCustomerAddr.PhnArea2;
+                this.addressObj.Phn2 = this.getCustomerAddr.Phn2;
+                this.addressObj.PhnExt2 = this.getCustomerAddr.PhnExt2;
+                this.addressObj.PhnArea3 = this.getCustomerAddr.PhnArea3;
+                this.addressObj.Phn3 = this.getCustomerAddr.Phn3;
+                this.addressObj.PhnExt3 = this.getCustomerAddr.PhnExt3;
+                this.addressObj.FaxArea = this.getCustomerAddr.FaxArea;
+                this.addressObj.Fax = this.getCustomerAddr.Fax;
+                this.addressObj.MrHouseOwnershipCode = this.getCustomerAddr.MrBuildingOwnershipCode;
+
+                this.inputFieldAddressObj = new InputFieldObj();
+                this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+                this.inputFieldAddressObj.inputLookupObj.nameSelect = this.getCustomerAddr.Zipcode;
+                this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getCustomerAddr.Zipcode };
+
+              });
           }
+
+          this.jobAddrId = this.returnCustJobDataObj.JobAddrId;
+          this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
+          this.rowVersion = this.returnCustJobDataObj.RowVersion;
+          this.typePage = "edit";
+        }
       });
   }
 
-  setJobAddr(){
+  setJobAddr() {
     this.jobAddressObj.CustId = this.IdCust;
     this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
-    this.jobAddressObj.Addr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value; 
-    this.jobAddressObj.FullAddr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataProForm.controls["jobAddressZipcode"]["controls"].value.value; 
+    this.jobAddressObj.Addr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value;
+    this.jobAddressObj.FullAddr = this.JobDataProForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataProForm.controls["jobAddressZipcode"]["controls"].value.value;
     this.jobAddressObj.AreaCode3 = this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode3.value;
     this.jobAddressObj.AreaCode4 = this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode4.value;
     this.jobAddressObj.Zipcode = this.JobDataProForm.controls["jobAddressZipcode"]["controls"].value.value;
@@ -231,7 +212,7 @@ export class JobDataProfessionalComponent implements OnInit {
     this.jobAddressObj.Notes = this.JobDataProForm.controls["Notes"].value;
   }
 
-  setCustJobData(){
+  setCustJobData() {
     this.custPersonalJobDataObj.CustId = this.IdCust;
     this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
     this.custPersonalJobDataObj.ProfessionalNo = this.JobDataProForm.controls["ProfessionalNo"].value;
@@ -240,12 +221,8 @@ export class JobDataProfessionalComponent implements OnInit {
     this.custPersonalJobDataObj.EmploymentEstablishmentDt = this.JobDataProForm.controls["EstablishmentDate"].value;
   }
 
-  // back(){
-  //   this.outputTab.emit({ stepMode: "previous"});
-  // }
-
-  SaveForm(){
-    if(this.typePage == "edit") {
+  SaveForm() {
+    if (this.typePage == "edit") {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.custPersonalJobDataObj = new CustPersonalJobDataObj;
       this.jobAddressObj = new CustAddrObj;
@@ -260,19 +237,11 @@ export class JobDataProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
 
-      console.log("ccc");
-      console.log(this.reqCustPersonalJobDataObj)
-
-      this.http.post(this.editJobData, this.reqCustPersonalJobDataObj).subscribe(
+      this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          // this.router.navigate(
-          //   ["/Customer/CustomerPersonal/Address"], 
-          //   { queryParams: { "IdCust": this.IdCust }}
-          //   );
-          // console.log(response)
-          this.outputTab.emit({ stepMode: "next"});
+          this.outputTab.emit({ stepMode: "next" });
         },
         (error) => {
           console.log(error);
@@ -290,16 +259,11 @@ export class JobDataProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
 
-      this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
+      this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
           console.log(response);
           this.toastr.successMessage(response["message"]);
-          // this.router.navigate(
-          //   ["/Customer/CustomerPersonal/Address"], 
-          //   { queryParams: { "IdCust": this.IdCust }}
-          //   );
-          // console.log(response)
-          this.outputTab.emit({ stepMode: "next"});
+          this.outputTab.emit({ stepMode: "next" });
         },
         (error) => {
           console.log(error);

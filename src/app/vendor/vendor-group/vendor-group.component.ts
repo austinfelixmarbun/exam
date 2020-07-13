@@ -6,6 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-group',
@@ -39,7 +40,7 @@ export class VendorGroupComponent implements OnInit {
       }
       if (params['VendorGrpId'] != null) {
         this.VendorGrpId = params['VendorGrpId'];
-      } 
+      }
       if (params["MrVendorCategoryCode"] != null) {
         this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       }
@@ -53,11 +54,11 @@ export class VendorGroupComponent implements OnInit {
     this.refMasterObj.RefMasterTypeCode = 'VENDOR_CATEGORY';
 
     if (this.pageType == "add") {
-      this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
+      this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
         (response) => {
           console.log(response);
           this.allVendorCategory = response['ReturnObject'];
-          if(this.allVendorCategory.length > 0){
+          if (this.allVendorCategory.length > 0) {
             this.VendorGroupFrom.patchValue({
               MrVendorCategoryCode: this.MrVendorCategoryCode
             });
@@ -72,7 +73,7 @@ export class VendorGroupComponent implements OnInit {
       this.vendorGrpObj = new VendorGroupObj();
       this.vendorGrpObj.VendorGrpId = this.VendorGrpId;
 
-      this.httpClient.post(AdInsConstant.GetVendorGrpByVendorGrpId, this.vendorGrpObj).subscribe(
+      this.httpClient.post(URLConstant.GetVendorGrpByVendorGrpId, this.vendorGrpObj).subscribe(
         (response) => {
           console.log(response);
           this.resultData = response;
@@ -86,11 +87,11 @@ export class VendorGroupComponent implements OnInit {
             IsActive: this.resultData.IsActive
           })
 
-          this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
+          this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
             (response) => {
               console.log(response);
               this.allVendorCategory = response['ReturnObject'];
-              if(this.allVendorCategory.length > 0){
+              if (this.allVendorCategory.length > 0) {
                 this.VendorGroupFrom.patchValue({
                   MrVendorCategoryCode: this.resultData.MrVendorCategoryCode
                 });
@@ -111,26 +112,26 @@ export class VendorGroupComponent implements OnInit {
     console.log(this.vendorGrpObj);
 
     if (this.pageType == "add") {
-      this.httpClient.post(AdInsConstant.AddVendorGrp, this.vendorGrpObj).subscribe(
+      this.httpClient.post(URLConstant.AddVendorGrp, this.vendorGrpObj).subscribe(
         (response) => {
           console.log(response);
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/Vendor/Paging"], { queryParams: { "Type": "Group", "MrVendorCategoryCode" : this.MrVendorCategoryCode } });
+          this.router.navigate(["/Vendor/Paging"], { queryParams: { "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
         },
         (error) => {
           console.log(error);
         }
       );
     }
-    else{
+    else {
       this.vendorGrpObj.VendorGrpId = this.resultData.VendorGrpId;
       this.vendorGrpObj.RowVersion = this.resultData.RowVersion;
 
-      this.httpClient.post(AdInsConstant.EditVendorGrp, this.vendorGrpObj).subscribe(
+      this.httpClient.post(URLConstant.EditVendorGrp, this.vendorGrpObj).subscribe(
         (response) => {
           console.log(response);
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/Vendor/Paging"], { queryParams: { "Type": "Group", "MrVendorCategoryCode" : this.MrVendorCategoryCode } });
+          this.router.navigate(["/Vendor/Paging"], { queryParams: { "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
         },
         (error) => {
           console.log(error);

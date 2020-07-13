@@ -12,6 +12,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-office-area-member-add',
@@ -58,11 +59,11 @@ export class OfficeAreaMemberAddComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeAreaMember.json";
     this.inputObj.enviromentUrl = this.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = this.foundationUrl + URLConstant.GetPagingObjectBySQL;
 
     this.arrCrit = new Array();
 
@@ -218,7 +219,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
       },
       ListRequestRefOfficeId : this.tempData
     }
-    this.http.post<Array<RefOfficeObj>>(AdInsConstant.AddRefOfficeAreaMember, RequestItem).subscribe(
+    this.http.post<Array<RefOfficeObj>>(URLConstant.AddRefOfficeAreaMember, RequestItem).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Office/OfficeArea/Member"], { queryParams: { "RefOfficeAreaId": this.RefOfficeAreaId } });
