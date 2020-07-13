@@ -27,7 +27,7 @@ export class CommonConstant {
     // Customer Type
     public static CustomerPersonal = "PERSONAL";
     public static CustomerCompany = "COMPANY";
-    
+
     public static MR_MARITAL_STAT_CODE_MARRIED = "MARRIED";
     public static MR_MARITAL_STAT_CODE_SINGLE = "SINGLE";
     public static MR_CUST_TYPE_CODE_PERSONAL = "PERSONAL";
