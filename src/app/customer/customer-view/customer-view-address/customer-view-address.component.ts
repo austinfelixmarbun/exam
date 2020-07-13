@@ -6,6 +6,7 @@ import { AdInsService } from 'app/shared/services/adIns.service';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-address',
@@ -64,7 +65,7 @@ export class CustomerViewAddressComponent implements OnInit {
       response => {
         this.CustType = response['MrCustTypeCode'];
         var refMasterObj = new RefMasterObj();
-        refMasterObj.RefMasterTypeCode = "CUST_ADDR_TYPE";
+        refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
         refMasterObj.ReserveField1 = this.CustType;
         this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObj).subscribe(
           response => {

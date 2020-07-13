@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsService } from 'app/shared/services/adIns.service';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 
 @Component({
@@ -67,7 +68,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     );
 
     var refMasterObj = new RefMasterObj();
-    refMasterObj.RefMasterTypeCode = "ADDR_TYPE";
+    refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAddrType;
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
       response => {
         if (response['ReturnObject'].length > 0) {

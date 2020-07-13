@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-cust-group-tab',
@@ -94,7 +95,7 @@ export class CustGroupTabComponent implements OnInit {
   }
 
   deleteCustGrp(CustGrpId, i) {
-    if(confirm('Are you sure to delete this record?')){
+    if(confirm(ExceptionConstant.DELETE_CONFIRMATION)){
     var custGrp = new CustGrpObj();
     custGrp.CustGrpId = CustGrpId;
     this.httpClient.post(AdInsConstant.DeleteCustGrp, custGrp).subscribe(

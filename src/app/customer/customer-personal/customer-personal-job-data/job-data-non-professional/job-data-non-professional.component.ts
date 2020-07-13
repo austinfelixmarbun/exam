@@ -14,6 +14,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { formatDate } from '@angular/common';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-job-data-non-professional',
@@ -138,8 +139,8 @@ export class JobDataNonProfessionalComponent implements OnInit {
       this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
       this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
-      this.jobAddrObj.MrCustAddrTypeCode = "JOB";
-      this.othBizAddrObj.MrCustAddrTypeCode = "OTH_BIZ";
+      this.jobAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
+      this.othBizAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddrObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
@@ -167,8 +168,8 @@ export class JobDataNonProfessionalComponent implements OnInit {
       this.custPersonalJobDataObj.CustId = this.IdCust;
       this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
       this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
-      this.jobAddrObj.MrCustAddrTypeCode = "JOB";
-      this.othBizAddrObj.MrCustAddrTypeCode = "OTH_BIZ";
+      this.jobAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
+      this.othBizAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddrObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;

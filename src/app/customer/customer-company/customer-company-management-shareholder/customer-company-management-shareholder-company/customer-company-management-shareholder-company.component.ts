@@ -8,6 +8,8 @@ import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntS
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-company',
@@ -62,7 +64,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.inputLookupCustCompanyObj.genericJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.isRequired = false;
     var refMasterObjMrCompanyTypeCode = {
-      RefMasterTypeCode: "COMPANY_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
@@ -76,8 +78,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       }
     );
     var refMasterObjMrCustModelCode = {
-      RefMasterTypeCode: "CUST_MODEL",
-      Reservefield1: "COMPANY",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      Reservefield1: CommonConstant.CustTypeCompany,
       RowVersion: ""
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
@@ -128,7 +130,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
     if(this.TotalShareCurrent > 100){
       this.LeftShare = 100 - this.TotalShare;
-      this.toastr.warningMessage("Total Share left is "+this.LeftShare+"%");
+      this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_LEFT +this.LeftShare+"%");
       return;
     }
 

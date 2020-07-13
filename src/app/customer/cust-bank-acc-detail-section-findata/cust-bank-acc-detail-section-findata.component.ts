@@ -12,6 +12,7 @@ import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
 import { CustBankStmntDObj } from 'app/shared/model/CustBankStmntDObj.Model';
 import { CustBankStmntHObj } from 'app/shared/model/CustBankStmntHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',
@@ -184,8 +185,8 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   }
 
   removeCustBankStmnt(i) {
-    var confirmation = confirm("Are you sure to delete this data ?");
-    if (confirmation == true) {
+    var confirmation = confirm(ExceptionConstant.DELETE_CONFIRMATION);
+    if(confirmation == true){
       var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
       formArray.removeAt(i);
       this.rowCustBankStmnt--;
@@ -251,8 +252,8 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
               continue;
             }
             const bankStmntCompare = formArray.at(j).value;
-            if (bankStmnt.Month == bankStmntCompare.Month && bankStmnt.Year == bankStmntCompare.Year) {
-              this.toastr.warningMessage("Cannot Input Statement With The Same Month and Year");
+            if(bankStmnt.Month == bankStmntCompare.Month && bankStmnt.Year == bankStmntCompare.Year){
+              this.toastr.warningMessage(ExceptionConstant.STATEMENT_WITH_SAME_MONTH_AND_YEAR);
               return false;
             }
           }

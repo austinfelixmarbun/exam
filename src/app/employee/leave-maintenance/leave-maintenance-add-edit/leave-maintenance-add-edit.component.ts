@@ -12,6 +12,7 @@ import { environment } from 'environments/environment';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { LookupemployeeComponent } from '@adins/lookupemployee';
 import { RefEmpObj } from '../../../shared/model/RefEmpObj.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-leave-maintenance-add-edit',
@@ -108,10 +109,10 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     var businessDtRaw = new Date(localStorage.getItem("BusinessDateRaw"));
     var StartDt = new Date(this.RefEmpLeaveMngmntForm.controls["StartDt"].value);
     if (StartDt < businessDtRaw) {
-      this.toastr.warningMessage("Start Date must be equal or more than Business Date");
+      this.toastr.warningMessage(ExceptionConstant.START_DATE_MUST_EQUAL_OR_MORE_THAN+"Business Date");
     }
     else if (this.RefEmpLeaveMngmntForm.controls["EndDt"].value < this.RefEmpLeaveMngmntForm.controls["StartDt"].value) {
-      this.toastr.warningMessage("End Date must be equal or more than Start Date");
+      this.toastr.warningMessage(ExceptionConstant.END_DATE_MUST_EQUAL_OR_MORE_THAN + "Start Date");
     }
     else {
       this.relmObj = new RefEmpLeaveMngmntObj();

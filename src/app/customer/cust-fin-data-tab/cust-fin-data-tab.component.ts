@@ -12,6 +12,7 @@ import { forkJoin } from 'rxjs';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -99,7 +100,7 @@ export class CustFinDataTabComponent implements OnInit {
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    if (this.MrCustTypeCode == "PERSONAL") {
+    if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       var custPersonalData;
       var custPersonal = new CustPersonalObj();
       custPersonal.CustId = this.CustId;
@@ -120,7 +121,7 @@ export class CustFinDataTabComponent implements OnInit {
           custPersonalFinData.CustPersonalId = response.CustPersonalId;
           let custFinData = this.httpClient.post(AdInsConstant.GetCustPersonalFinDataByCustPersonalId, custPersonalFinData);
           var refMasterSourceIncome = new RefMasterObj();
-          refMasterSourceIncome.RefMasterTypeCode = 'SOURCE_INCOME';
+          refMasterSourceIncome.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeSourceIncome;
           let sourceIncomeList = this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterSourceIncome);
           return forkJoin([custFinData, sourceIncomeList]);
         })
@@ -152,7 +153,7 @@ export class CustFinDataTabComponent implements OnInit {
         }
       );
     }
-    else if (this.MrCustTypeCode == "COMPANY") {
+    else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
       var custCompanyData;
       var custCompany = new CustCompanyObj();
       custCompany.CustId = this.CustId;
@@ -303,7 +304,7 @@ export class CustFinDataTabComponent implements OnInit {
     var response;
     var url;
 
-    if (this.MrCustTypeCode == "PERSONAL") {
+    if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       var tempResponse = this.CustPersonalFinDataForm.value;
       if(this.mrMaritalStatCode != AdInsConstant.MR_MARITAL_STAT_CODE_MARRIED){
         tempResponse.SpouseMonthlyIncomeAmt = 0;
@@ -331,7 +332,7 @@ export class CustFinDataTabComponent implements OnInit {
         url = AdInsConstant.AddCustPersonalFinData
       }
     }
-    else if (this.MrCustTypeCode == "COMPANY") {
+    else if (this.MrCustTypeCode ==  CommonConstant.CustTypeCompany) {
       response = this.CustCompanyFinDataForm.value;
       response.GrossMonthlyIncomeAmt = this.currencyToNumber(response.GrossMonthlyIncomeAmt.toString());
       response.GrossProfitAmt = this.currencyToNumber(response.GrossProfitAmt.toString());
@@ -364,14 +365,14 @@ export class CustFinDataTabComponent implements OnInit {
       this.httpClient.post(url, response).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          if(this.MrCustTypeCode == "PERSONAL"){  
+          if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){  
             if (this.Page != null) {
               this.router.navigate(["/Customer/EditMainData/Paging"]);
             } else {
               this.router.navigate(["/Customer/Paging"]);
             }
           }
-          else if(this.MrCustTypeCode == "COMPANY"){
+          else if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
             this.outputTab.emit({ stepMode: "next"});
           }
           this.outputTab.emit({ stepMode: "next"});

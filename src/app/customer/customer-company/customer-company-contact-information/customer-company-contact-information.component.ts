@@ -9,6 +9,8 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustCompanyContactPersonObj } from 'app/shared/model/CustCompanyContactPersonObj.model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-company-contact-information',
@@ -73,7 +75,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
     var refMasterObjMrJobPositionCode = {
-      RefMasterTypeCode: "JOB_POSITION",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
@@ -84,7 +86,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       }
     );
     var refMasterObjMrGenderCode = {
-      RefMasterTypeCode: "GENDER",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
@@ -136,7 +138,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       );
 
     this.custAddrObj.CustId = this.IdCust;
-    this.custAddrObj.MrCustAddrTypeCode = "CONTACT";
+    this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeContact;
     this.http.post(this.getCustAddrByMrCustAddrTypeUrl, this.custAddrObj).subscribe(
       (response) => {
         this.tempCustAddrObj = response;
@@ -183,7 +185,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custCompanyContactPersonObj.Email2 = this.ContactInformationForm.controls["Email2"].value;
 
     this.custAddrObj.CustId = this.IdCust;
-    this.custAddrObj.MrCustAddrTypeCode = "CONTACT";
+    this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeContact;
     this.custAddrObj.Addr = this.ContactInformationForm.value.UcAddress.Addr;
     this.custAddrObj.AreaCode1 = this.ContactInformationForm.value.UcAddress.AreaCode1;
     this.custAddrObj.AreaCode2 = this.ContactInformationForm.value.UcAddress.AreaCode2;

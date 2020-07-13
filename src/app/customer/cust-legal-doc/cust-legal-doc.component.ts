@@ -7,6 +7,7 @@ import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-cust-legal-doc',
@@ -90,7 +91,7 @@ export class CustLegalDocComponent implements OnInit {
   }
 
   deleteCustLegalDoc(custCompanyLegalDocId, idx) {
-    var confirmation = confirm("Are you sure to delete this data ?");
+    var confirmation = confirm(ExceptionConstant.DELETE_CONFIRMATION);
     if(confirmation == true){
       var custCompanyLegalDoc = new CustCompanyLegalDocObj();
       custCompanyLegalDoc.CustCompanyLegalDocId = custCompanyLegalDocId;

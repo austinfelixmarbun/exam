@@ -5,6 +5,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-cust-legal-doc-detail',
@@ -44,7 +45,7 @@ export class CustLegalDocDetailComponent implements OnInit {
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
     var refMasterDocType = new RefMasterObj();
-    refMasterDocType.RefMasterTypeCode = "LEGAL_DOC_TYPE";
+    refMasterDocType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeLegalDocType;
     this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterDocType).subscribe(
       (response: any) => {
         this.legalDocTypeList = response;
