@@ -4,6 +4,10 @@ export class CommonConstant {
     // APPLICATION DATA
     public static ReturnObj = 'ReturnObject';
 
+    // BOOLEAN CONDITION
+    public static TRUE_CONDITION = "1";
+    public static FALSE_CONDITION = "0";
+    
     // VENDOR CATEGORY
     public static SUPPLIER_BRANCH = "SUPPLIER_BRANCH";
     public static ASSET_INSCO_BRANCH = "ASSET_INSCO_BRANCH";
@@ -17,6 +21,10 @@ export class CommonConstant {
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";
 
+    //OFFICE TYPE
+    public static HeadOffice = "HO";
+    public static CollectionGroup = "CG"
+    
     //REF PROV DISTRICT
     public static RefProvDistrictTypeDis = "DIS";
     public static RefProvDistrictTypePrv = "PRV";
@@ -41,12 +49,16 @@ export class CommonConstant {
     public static RefMasterTypeCodeReligion = "RELIGION";
     public static RefMasterTypeCodeSalutation = "SALUTATION";
     public static RefMasterTypeCodeJobStat = "JOB_STAT"
-
     public static RefMasterTypeCodeCoyScale = "COY_SCALE"
     public static RefMasterTypeCodeNegCustType = "NEG_CUST_TYPE";
-
     public static RefMasterTypeCodeNegCustSource = "NEG_CUST_SOURCE";
     public static RefMasterTypeCodeSkillLvl = "SKILL_LVL"
+    public static RefMasterTypeCodeOfficeClass = "OFFICE_CLASS";
+    public static RefMasterTypeCodeOfficeType = "OFFICE_TYPE";
+   
+    public static RefMasterTypeCodeCenterGrpType = "CENTER_GRP_TYPE";
+    
+    public static RefMasterTypeCodeKonvenSyariah = "KONVEN_SYARIAH";
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     // GENERAL SETTING CODE

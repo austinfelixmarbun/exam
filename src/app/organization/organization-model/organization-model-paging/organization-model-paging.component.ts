@@ -12,6 +12,7 @@ import { Location, DecimalPipe } from "@angular/common";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-organization-model-paging',
@@ -111,7 +112,7 @@ export class OrganizationModelPagingComponent implements OnInit {
   }
 
   del(id: any) {
-    if (confirm("Are you sure to delete this record?")) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteOrgMdl;
       this.orgModelObj = new OrgMdlObj();
       this.orgModelObj.orgMdlId = +id;

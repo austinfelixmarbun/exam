@@ -10,6 +10,7 @@ import { OrgJobTitleObj } from 'app/shared/model/OrgJobTitleObj.Model';
 import { environment } from 'environments/environment';
 import { formatDate } from '@angular/common';
 import { NgForm } from '@angular/forms';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-office-emp-pos-add',
@@ -140,7 +141,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
           this.positionStartDt = formatDate(response['returnObject']['positionStartDt'], 'yyyy-MM-dd', 'en-US')
           this.positionFinishDt = formatDate(response['returnObject']['positionFinishDt'], 'yyyy-MM-dd', 'en-US')
           this.superiorRefEmpId = response['returnObject']['superiorRefEmpId']
-          if (this.resultData.isActive == "1") {
+          if (this.resultData.isActive == CommonConstant.TRUE_CONDITION) {
             this.isActive = true;
           }
           else {
@@ -173,10 +174,10 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.empPositionObj = ReqForm.value
       this.empPositionObj.refEmpId = this.refEmpId
       if (this.isActive == false) {
-        this.empPositionObj.isActive = "0";
+        this.empPositionObj.isActive = CommonConstant.FALSE_CONDITION;
       }
       else {
-        this.empPositionObj.isActive = "1";
+        this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
       }
 
       console.log(JSON.stringify(this.empPositionObj))
@@ -201,10 +202,10 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.empPositionObj.refEmpId = this.refEmpId
       this.empPositionObj.empPositionId = this.empPositionId
       if (this.isActive == false) {
-        this.empPositionObj.isActive = "0";
+        this.empPositionObj.isActive = CommonConstant.FALSE_CONDITION;
       }
       else {
-        this.empPositionObj.isActive = "1";
+        this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
       }
       console.log(JSON.stringify(this.empPositionObj))
       console.log(this.empPositionObj);

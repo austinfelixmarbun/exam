@@ -10,6 +10,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',
@@ -99,7 +100,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   del(id: any) {
-    if (confirm("Are you sure to delete this record?")) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       var url = this.foundationUrl + AdInsConstant.DeleteRefOrg;
       var organizObj: OrganizationObj;
       organizObj = new OrganizationObj();

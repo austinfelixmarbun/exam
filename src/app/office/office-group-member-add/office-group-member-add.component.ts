@@ -8,6 +8,8 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-office-group-member-add',
@@ -36,7 +38,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   Data = [];
   RefOfficeId: any;
   CenterGrpId: any;
-  MrOfficeTypeCode: string = "CG";
+  MrOfficeTypeCode: string = CommonConstant.CollectionGroup;
   refOfficeobj: any;
 
   constructor(private http: HttpClient,
@@ -175,7 +177,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
       this.listSelectedId = [];
     } else {
-      this.toastr.typeErrorCustom("Please select at least one Office");
+      this.toastr.typeErrorCustom(ExceptionConstant.PLEASE_SELECT_MIN_1_OFFICE);
     }
   }
 
@@ -199,7 +201,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   }
 
   deleteFromTemp(RefOfficeId: any) {
-    if (confirm('Are you sure to delete this record?')) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.arrAddCrit = new Array();
       if (this.arrCrit.length != 0) {
         for (var i = 0; i < this.arrCrit.length; i++) {
@@ -234,7 +236,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
   SaveOfficeGroupMember() {
     if (this.tempListId.length == 0) {
-      this.toastr.typeErrorCustom('Please Add At Least One Data');
+      this.toastr.typeErrorCustom(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 

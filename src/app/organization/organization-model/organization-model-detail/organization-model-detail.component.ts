@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 
 @Component({
@@ -100,7 +101,7 @@ export class OrganizationModelDetailComponent implements OnInit {
         (response) => {
           console.log("Success Check Duplicate");
           if (response['returnObject'] != null) {
-            this.service.typeErrorCustom('Code Has Been Used');
+            this.service.typeErrorCustom(ExceptionConstant.CODE_HAS_BEEN_USED);
           }
           else {
             this.apiUrl = this.foundationUrl + AdInsConstant.AddOrgMdl;

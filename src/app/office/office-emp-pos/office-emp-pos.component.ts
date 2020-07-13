@@ -12,6 +12,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-office-emp-pos',
@@ -116,7 +117,7 @@ export class OfficeEmpPosComponent implements OnInit {
   }
 
   delete(empPositionId: any) {
-    if (confirm("Are you sure to delete this record?")) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.empPositionObj = new EmpPositionObj();
       this.empPositionObj.empPositionId = empPositionId;
       this.httpClient.post(this.deleteUrl, this.empPositionObj).subscribe(

@@ -12,6 +12,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 
 @Component({
@@ -162,16 +163,16 @@ export class OfficeAddComponent implements OnInit {
     ];
 
     this.refMasterObj = new RefMasterObj();
-    this.refMasterObj.RefMasterTypeCode = 'OFFICE_CLASS';
+    this.refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeClass;
     this.refMasterOfficeType = new RefMasterObj();
-    this.refMasterOfficeType.RefMasterTypeCode = 'OFFICE_TYPE';
+    this.refMasterOfficeType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeType;
     this.refMasterCgType = new RefMasterObj();
-    this.refMasterCgType.RefMasterTypeCode = 'CENTER_GRP_TYPE';
+    this.refMasterCgType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCenterGrpType;
     this.refMasterKonsyaType = new RefMasterObj();
-    this.refMasterKonsyaType.RefMasterTypeCode = 'KONVEN_SYARIAH';
+    this.refMasterKonsyaType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeKonvenSyariah;
 
     this.lookUpRefMasterOfficeObj = new RefMasterObj();
-    this.lookUpRefMasterOfficeObj.RefMasterTypeCode = "OFFICE_TYPE";
+    this.lookUpRefMasterOfficeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeType;
 
     this.httpClient.post(AdInsConstant.GetRefMasterTypeOfficeWithoutCG, this.lookUpRefMasterOfficeObj).subscribe(
       (response) => {
@@ -430,14 +431,14 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.CntctPersonName = this.OfficeForm.value.CntctPersonName;
     this.officeObj.CntctPersonJobTitle = this.OfficeForm.value.CntctPersonJobTitle;
 
-    if(this.OfficeForm.controls.OfficeType.value == 'HO'){
+    if(this.OfficeForm.controls.OfficeType.value == CommonConstant.HeadOffice){
       this.officeObj.ParentId = null;
     }
-    if(this.OfficeForm.controls.OfficeType.value != 'HO'){
+    if(this.OfficeForm.controls.OfficeType.value != CommonConstant.HeadOffice){
       this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
     }
 
-    if (this.officeObj.MrOfficeTypeCode == "CG") {
+    if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
       this.centerGrpObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
       this.centerGrpObj.CenterGrpCode = this.OfficeForm.value.OfficeCode;
       this.centerGrpObj.CenterGrpName = this.OfficeForm.value.OfficeName;
@@ -471,7 +472,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;
 
     if (this.pageType == "add") {
-      if (this.officeObj.MrOfficeTypeCode == "CG") {
+      if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
         this.httpClient.post(AdInsConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
@@ -523,7 +524,7 @@ export class OfficeAddComponent implements OnInit {
     }
   }
   checkType() {
-    if (this.OfficeForm.controls.OfficeType.value == 'HO') {
+    if (this.OfficeForm.controls.OfficeType.value == CommonConstant.HeadOffice) {
       this.OfficeForm.patchValue({
         OfficeParent: null
       });
