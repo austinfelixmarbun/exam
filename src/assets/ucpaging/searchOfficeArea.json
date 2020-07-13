@@ -122,10 +122,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "RefOfficeAreaId"
                 }
             ]
         }
