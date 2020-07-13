@@ -10,6 +10,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 @Component({
   selector: "app-user-change-password",
@@ -38,7 +39,7 @@ export class UserChangePasswordComponent implements OnInit {
     private toastr: NGXToastrService,
     private service: NGXToastrService
   ) {
-    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.username = currentUserContext.UserName;
   }
 

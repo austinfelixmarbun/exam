@@ -11,6 +11,7 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { NotificationHObj } from '../model/NotificationH/NotificationHObj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from '../constant/URLConstant';
+import { CommonConstant } from '../constant/CommonConstant';
 
 @Component({
     selector: 'app-navbar',
@@ -42,8 +43,8 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
-        var userAccess = JSON.parse(localStorage.getItem("UserAccess"));
-        var businessDate = localStorage.getItem("BusinessDate");
+        var userAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+        var businessDate = localStorage.getItem(CommonConstant.BUSINESS_DT);
         var date = new Date(businessDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         businessDate = formatDate(date, 'dd-MMM-yyyy', 'en-US');
         this.businessDate = businessDate;
@@ -125,10 +126,10 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             (error) => {
                 console.log(error);
             });
-        if (item.MrNotificationMethodCode == "EXT_LINK") {
+        if (item.MrNotificationMethodCode == CommonConstant.NotificationMethodExtLink) {
             window.open(item.Url, "_blank");
         }
-        else if (item.MrNotificationMethodCode = "INT_LINK") {
+        else if (item.MrNotificationMethodCode = CommonConstant.NotificationMethodIntLink) {
             window.open(item.Url);
         }
     }
@@ -151,7 +152,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     changeModul(modul: string) {
-        var token = localStorage.getItem("Token");
+        var token = localStorage.getItem(CommonConstant.TOKEN);
         var url = environment.LosURL + URLConstant.LoginURLFrontEnd + "?token=" + token;
         window.open(url, "_blank");
     }

@@ -9,6 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-survey-order-task-wf',
@@ -95,7 +96,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
 
         this.http.post(URLConstant.GetListAllSrvyFormSchm, GetListSrvey).subscribe(
           response => {
-            this.FormSchmList = response["ReturnObject"];
+            this.FormSchmList = response[CommonConstant.ReturnObj];
             this.SurveyTaskForm.patchValue({
               SrvyFormSchmId: this.FormSchmList[0].SrvyFormSchmId
             });

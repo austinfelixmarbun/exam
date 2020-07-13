@@ -4,7 +4,16 @@ export class CommonConstant {
     // APPLICATION DATA
     public static USER_ACCESS = "UserAccess";
     public static ReturnObj = 'ReturnObject';
-
+    public static USER_NAME = "UserName";
+    public static BUSINESS_DT = "BusinessDt"; 
+    public static BUSINESS_DATE_RAW = "BusinessDateRaw";
+    public static CURRENT_USER_CONTEXT = "currentUserContext"
+    public static PAGE_ACCESS = "PageAccess";
+    public static TOKEN = "Token";
+    public static LOCAL_IP = "LocalIp"; 
+    public static VERSION = "Version";
+    public static LAST_ACCESS_TIME = "LastAccessTime";
+    public static MENU = "Menmu"
     //APPROVAL TASK MAPPER - TRX TYPE
     public static ApvTrxTypeProductHO = "PROD_HO_APV";
     public static ApvTrxTypeProductHODeact = "PROD_HO_DEACT_APV";
@@ -52,10 +61,15 @@ export class CommonConstant {
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";
 
+    // NOTIFICATION METHOD
+    public static NotificationMethodIntLink = "INT_LINK";
+    public static NotificationMethodExtLink = "EXT_LINK";
     //OFFICE TYPE
     public static HeadOffice = "HO";
-    public static CollectionGroup = "CG"
-
+    public static CollectionGroup = "CG";
+    public static Holding = "HOLDING";
+    public static Branch = "BRANCH";
+    
     //REF PROV DISTRICT
     public static RefProvDistrictTypeDis = "DIS";
     public static RefProvDistrictTypePrv = "PRV";
@@ -90,6 +104,29 @@ export class CommonConstant {
     public static RefMasterTypeCodeCenterGrpType = "CENTER_GRP_TYPE";
 
     public static RefMasterTypeCodeKonvenSyariah = "KONVEN_SYARIAH";
+    public static RefMasterTypeCodeNegAssetSource = "NEG_ASSET_SOURCE";
+    public static RefMasterTypeCodeAssetTypeId = "ASSET_TYPE_ID";
+
+
+    public static RefMasterTypeCodeNotificationType = "NOTIFICATION_TYPE";
+    public static RefMasterTypeCodeNotificationMethod = "NOTIFICATION_METHOD";
+    public static RefMasterTypeCodeVendorPosition = "VENDOR_POSITION";
+    public static RefMasterTypeCodeTaxCalcMethod = "TAX_CALC_METHOD";
+    
+
+    public static RefMasterTypeCodeVendorCategory = "VENDOR_CATEGORY";
+    public static RefMasterTypeCodeMaxRefundType = "MAX_REFUND_TYPE";
+    public static RefMasterTypeCodeAssgmntType = "ASSGMNT_TYPE";
+    public static RefMasterTypeCodeSupplierClass = "SUPPLIER_CLASS";
+
+    
+    public static RefMasterTypeCodeSupplierUpCalcMethod = "SUPPLIER_UP_CALC_METHOD";
+    public static RefMasterTypeCodeVendorType = "VENDOR_TYPE";
+    public static RefMasterTypeCodeIdTypeVendor = "ID_TYPE_VENDOR";
+    public static RefMasterTypeCodeTaskAssignmentType = "TASK_ASSIGNMENT_TYPE";
+    
+    
+    
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     // GENERAL SETTING CODE
@@ -109,6 +146,10 @@ export class CommonConstant {
     public static CustAddrTypeJob = "JOB";
     public static CustAddrTypeOthBiz = "OTH_BIZ";
 
+
+    // ADDR TYPE 
+    public static AddrTypeLegal = "LEGAL";
+    public static AddrTypeTax = "TAX";
 
     public static FROM = 'From';
     public static TO = 'To';

@@ -87,7 +87,7 @@ export class CustGroupTabDetailComponent implements OnInit {
       // criteriaList.push(criteriaObj);
       // this.inputLookupCustPersonalObj.addCritInput = criteriaList;
       // this.inputLookupCustPersonalObj.isRequired = false;
-      refMasterRelationship.RefMasterTypeCode = "CUST_PERSONAL_RELATIONSHIP";
+      refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustPersonalRelationship;
     }
     else if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
       this.inputLookupCustCompanyObj = new InputLookupObj();
@@ -149,9 +149,9 @@ export class CustGroupTabDetailComponent implements OnInit {
       (response) => {
         this.relationshipList = response;
         console.log(this.relationshipList);
-        if (this.relationshipList["ReturnObject"].length > 0) {
+        if (this.relationshipList[CommonConstant.ReturnObj].length > 0) {
           this.CustGrpForm.patchValue({
-            MrCustRelationshipCode: this.relationshipList["ReturnObject"][0]["Key"]
+            MrCustRelationshipCode: this.relationshipList[CommonConstant.ReturnObj][0]["Key"]
           });
         }
       }
@@ -176,9 +176,9 @@ export class CustGroupTabDetailComponent implements OnInit {
       (response) => {
         this.relationshipList = response;
         console.log(this.relationshipList);
-        if (this.relationshipList["ReturnObject"].length > 0) {
+        if (this.relationshipList[CommonConstant.ReturnObj].length > 0) {
           this.CustGrpForm.patchValue({
-            MrCustRelationshipCode: this.relationshipList["ReturnObject"][0]["Key"]
+            MrCustRelationshipCode: this.relationshipList[CommonConstant.ReturnObj][0]["Key"]
           });
         }
       }

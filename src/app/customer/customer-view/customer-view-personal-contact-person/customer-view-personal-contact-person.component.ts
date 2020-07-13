@@ -6,6 +6,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { environment } from 'environments/environment.sit';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-personal-contact-person',
@@ -32,7 +33,7 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetListCustPersonalContactPersonForCustViewByCustIdUrl, custAddrObj).subscribe(
       response => {
-        this.responseObj = response['ReturnObject'];
+        this.responseObj = response[CommonConstant.ReturnObj];
       },
       error => {
         this.router.navigateByUrl('Error');

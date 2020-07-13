@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-scheme-add-edit',
@@ -49,7 +50,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
   ngOnInit() {
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: "VENDOR_CATEGORY"}).subscribe(
       (response) => {
-        this.itemCategoryType = response["ReturnObject"];
+        this.itemCategoryType = response[CommonConstant.ReturnObj];
         if(this.itemCategoryType.length > 0){
           this.VendorSchmForm.patchValue({
             MrVendorCategoryCode: this.MrVendorCategoryCode

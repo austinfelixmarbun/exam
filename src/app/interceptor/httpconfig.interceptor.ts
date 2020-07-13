@@ -16,6 +16,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
@@ -31,7 +32,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             this.count++;
         }
 
-        var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+        var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
         var token: string = "";
         var myObj;
         let today = new Date();
@@ -54,12 +55,12 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         //Ini kalau buat Login belom punya Current User Contexts
 
         if (currentUserContext != null) {
-            token = localStorage.getItem("Token");
+            token = localStorage.getItem(CommonConstant.TOKEN);
             myObj = new Object();
             if (request.body != null) {
                 myObj = request.body;
             }
-            myObj["Ip"] = localStorage.getItem("LocalIp");
+            myObj["Ip"] = localStorage.getItem(CommonConstant.LOCAL_IP);
             myObj["RequestDateTime"] = businessDt;
         }
         else {
@@ -67,9 +68,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             if (request.body != null) {
                 myObj = request.body;
             }
-            myObj["Ip"] = localStorage.getItem("LocalIp");
+            myObj["Ip"] = localStorage.getItem(CommonConstant.LOCAL_IP);
             myObj["RequestDateTime"] = businessDt;
-            token = localStorage.getItem("Token");
+            token = localStorage.getItem(CommonConstant.TOKEN);
         }
 
         if (token == null) {

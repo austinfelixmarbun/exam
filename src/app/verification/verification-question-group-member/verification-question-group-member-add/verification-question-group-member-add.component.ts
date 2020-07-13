@@ -10,6 +10,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-add',
@@ -56,8 +57,8 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
       (response) => {
         var arrMemberList = new Array();
 
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-          arrMemberList.push(response["ReturnObject"][index].VerfQuestionAnswerId)
+        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+          arrMemberList.push(response[CommonConstant.ReturnObj][index].VerfQuestionAnswerId)
         }
 
         if (arrMemberList.length != 0) {

@@ -86,10 +86,10 @@ export class CustFinDataTabComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    if(this.MrCustTypeCode == "PERSONAL"){
+    if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){
       this.isCalculated = false;
     }
-    else if(this.MrCustTypeCode == "COMPANY"){
+    else if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
       this.isCalculated = true;
     }
     this.route.queryParams.subscribe(params => {

@@ -142,7 +142,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         }
         this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrNationalityCode).subscribe(
           (response) => {
-            this.tempNationality = response["ReturnObject"];
+            this.tempNationality = response[CommonConstant.ReturnObj];
 
             if (this.tempCustPersonalObj.MrNationalityCode != null) {
               this.CustomerDetailForm.patchValue({
@@ -178,7 +178,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         }
         this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrSalutationCode).subscribe(
           (response) => {
-            this.tempSalutation = response["ReturnObject"];
+            this.tempSalutation = response[CommonConstant.ReturnObj];
 
             if (this.tempCustPersonalObj.MrSalutationCode != null) {
               this.CustomerDetailForm.patchValue({
@@ -186,7 +186,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
               });
             } else {
               this.CustomerDetailForm.patchValue({
-                MrSalutationCode: response['ReturnObject'][0]['Key']
+                MrSalutationCode: response[CommonConstant.ReturnObj][0]['Key']
               });
             }
           }
@@ -196,14 +196,14 @@ export class CustomerPersonalDetailComponent implements OnInit {
         }
         this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrEducationCode).subscribe(
           (response) => {
-            this.tempEducation = response["ReturnObject"];
+            this.tempEducation = response[CommonConstant.ReturnObj];
             if (this.tempCustPersonalObj.MrEducationCode != null) {
               this.CustomerDetailForm.patchValue({
                 MrEducationCode: this.tempCustPersonalObj.MrEducationCode
               });
             } else {
               this.CustomerDetailForm.patchValue({
-                MrEducationCode: response['ReturnObject'][0]['Key']
+                MrEducationCode: response[CommonConstant.ReturnObj][0]['Key']
               });
             }
           }
@@ -213,14 +213,14 @@ export class CustomerPersonalDetailComponent implements OnInit {
         }
         this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrReligionCode).subscribe(
           (response) => {
-            this.tempReligion = response["ReturnObject"];
+            this.tempReligion = response[CommonConstant.ReturnObj];
             if (this.tempCustPersonalObj.MrReligionCode != null) {
               this.CustomerDetailForm.patchValue({
                 MrReligionCode: this.tempCustPersonalObj.MrReligionCode
               });
             } else {
               this.CustomerDetailForm.patchValue({
-                MrReligionCode: response['ReturnObject'][0]['Key']
+                MrReligionCode: response[CommonConstant.ReturnObj][0]['Key']
               });
             }
           }
@@ -230,14 +230,14 @@ export class CustomerPersonalDetailComponent implements OnInit {
         }
         this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
           (response) => {
-            this.tempMrMaritalStatCode = response["ReturnObject"];
+            this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
             if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
               this.CustomerDetailForm.patchValue({
                 MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
               });
             } else {
               this.CustomerDetailForm.patchValue({
-                MrMaritalStatCode: response['ReturnObject'][0]['Key']
+                MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
               });
             }
           }

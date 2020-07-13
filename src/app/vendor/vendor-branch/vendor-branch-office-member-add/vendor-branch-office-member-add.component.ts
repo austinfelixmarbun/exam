@@ -7,6 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-branch-office-member-add',
@@ -46,8 +47,8 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
     this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { VendorId: this.VendorId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-          arrMemberList.push(response["ReturnObject"][index].RefOfficeId)
+        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+          arrMemberList.push(response[CommonConstant.ReturnObj][index].RefOfficeId)
         }
 
         if (arrMemberList.length != 0) {

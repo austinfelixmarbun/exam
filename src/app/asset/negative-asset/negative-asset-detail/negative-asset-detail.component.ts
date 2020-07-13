@@ -14,6 +14,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AssetNegativeObj } from 'app/shared/model/AssetNegativeObj.Model';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-negative-asset-detail',
@@ -97,10 +98,10 @@ export class NegativeAssetDetailComponent implements OnInit {
       var negativeAsset = new AssetNegativeObj();
       negativeAsset.AssetNegativeId = this.assetNegativeId;
       var refMasterObj = new RefMasterObj();
-      refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
+      refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegAssetSource;
       this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterObj).pipe(
         map((response) => {
-          this.negativeAssetSourceList = [...response["ReturnObject"]];
+          this.negativeAssetSourceList = [...response[CommonConstant.ReturnObj]];
           if (this.negativeAssetSourceList.length > 0) {
             this.AssetNegativeForm.patchValue({
               MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
@@ -163,9 +164,9 @@ export class NegativeAssetDetailComponent implements OnInit {
       );
     }
     else {
-      this.httpClient.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: "NEG_ASSET_SOURCE" }).subscribe(
+      this.httpClient.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNegAssetSource }).subscribe(
         (response) => {
-          this.negativeAssetSourceList = [...response["ReturnObject"]];
+          this.negativeAssetSourceList = [...response[CommonConstant.ReturnObj]];
           if (this.negativeAssetSourceList.length > 0) {
             this.AssetNegativeForm.patchValue({
               MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]

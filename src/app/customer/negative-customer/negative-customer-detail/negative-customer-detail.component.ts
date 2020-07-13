@@ -34,7 +34,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   inputLookupCustPersonalObj: InputLookupObj;
   inputLookupCustCompanyObj: InputLookupObj;
   inputLookupZipcodeObj: InputLookupObj;
-  custType: string = "PERSONAL";
+  custType: string = CommonConstant.CustTypePersonal;
   custNo: string = "";
   zipcode: string = "";
   negativeDataHistoryList: any;
@@ -45,7 +45,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   NegativeCustForm = this.fb.group({
     NegativeCustId: [0, [Validators.required]],
     CustId: [0],
-    MrCustTypeCode: ['PERSONAL', [Validators.required]],
+    MrCustTypeCode: [CommonConstant.CustTypePersonal, [Validators.required]],
     CustNo: [''],
     CustName: ['', [Validators.required]],
     MrIdTypeCode: ['', [Validators.required]],
@@ -113,19 +113,19 @@ export class NegativeCustomerDetailComponent implements OnInit {
     forkJoin([requestIdType, requestNegativeCustType, requestNegativeSource]).subscribe(
       (response) => {
         // console.log(response);
-        if (response[0]['ReturnObject'].length > 0) {
+        if (response[0][CommonConstant.ReturnObj].length > 0) {
           this.refMasterIdType = response[0];
           this.NegativeCustForm.patchValue({
             MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key
           });
         }
-        if (response[1]['ReturnObject'].length > 0) {
+        if (response[1][CommonConstant.ReturnObj].length > 0) {
           this.negativeTypeList = response[1];
           this.NegativeCustForm.patchValue({
             MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key
           });
         }
-        if (response[2]['ReturnObject'].length > 0) {
+        if (response[2][CommonConstant.ReturnObj].length > 0) {
           this.negativeSourceList = response[2];
           this.NegativeCustForm.patchValue({
             MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key
@@ -172,10 +172,10 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     var criteriaList;
     var criteriaObj;
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDate = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDate.setDate(this.businessDate.getDate() - 1);
-    this.businessDateIdExp = new Date(context["BusinessDt"]);
+    this.businessDateIdExp = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDateIdExp.setDate(this.businessDateIdExp.getDate() + 1);
 
     this.inputLookupZipcodeObj = new InputLookupObj();

@@ -9,6 +9,7 @@ import { environment } from 'environments/environment';
 import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -52,8 +53,8 @@ export class RefFormDetailComponent implements OnInit {
 
     this.http.post(URLConstant.GetListRefModuleKeyValue, refMasterModuleObj).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.itemModuleType = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.itemModuleType = response[CommonConstant.ReturnObj];
           if (this.mode == "add") {
             this.RefForm.patchValue({
               RefModuleId: this.itemModuleType[0].Key
@@ -69,8 +70,8 @@ export class RefFormDetailComponent implements OnInit {
 
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterClassObj).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.itemClassType = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.itemClassType = response[CommonConstant.ReturnObj];
           if (this.mode == "add") {
             this.RefForm.patchValue({
               Class: this.itemClassType[0].Key

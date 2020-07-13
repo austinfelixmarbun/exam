@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-ho-bank-info',
@@ -25,7 +26,7 @@ ListData : any = new Array();
 
     this.http.post(URLConstant.GetListVendorBankAccByVendorId, obj).subscribe(
       (response) => {
-        this.ListData = response["ReturnObject"];
+        this.ListData = response[CommonConstant.ReturnObj];
       }
     ); 
   }

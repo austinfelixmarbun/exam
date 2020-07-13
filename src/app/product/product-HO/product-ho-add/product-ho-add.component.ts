@@ -8,6 +8,7 @@ import { RefProductHOObj } from 'app/shared/model/RefProductHOObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-product-ho-add',
@@ -88,8 +89,8 @@ export class ProductHOAddComponent implements OnInit {
   UrlBackEnd: any;
 
   ValidateDate() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    let businessDate = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    let businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     let startDate = new Date(this.RefProductHOForm.get("StartDt").value);
     let endDate = new Date(this.RefProductHOForm.get("EndDt").value);
 

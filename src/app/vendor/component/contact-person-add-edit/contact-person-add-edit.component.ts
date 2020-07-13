@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-contact-person-add-edit',
@@ -56,16 +57,16 @@ export class ContactPersonAddEditComponent implements OnInit {
     this.mode = this.objInput["mode"];
     this.VendorContactPersonId = this.objInput["VendorContactPersonId"];
 
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDt = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
     var JobPosition = {
-      RefMasterTypeCode: "JOB_POSITION",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
       RowVersion: ""
     }
     this.http.post(URLConstant.GetListActiveRefMaster, JobPosition).subscribe(
       (response) => {
-        this.itemJobPosition = response["ReturnObject"];
+        this.itemJobPosition = response[CommonConstant.ReturnObj];
         this.ContactPersonForm.patchValue({
           JobPosition: this.itemJobPosition[0].Key
         });

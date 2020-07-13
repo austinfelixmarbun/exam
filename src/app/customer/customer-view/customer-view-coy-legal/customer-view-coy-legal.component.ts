@@ -6,6 +6,7 @@ import { AdInsService } from 'app/shared/services/adIns.service';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-coy-legal',
@@ -47,8 +48,8 @@ export class CustomerViewCoyLegalComponent implements OnInit {
     var custObj = { "CustId": this.CustId };
     this.http.post(this.GetCustCompanyLegalDocForCustViewByCustIdUrl, custObj).subscribe(
       response => {
-        if (response['ReturnObject'].length > 0) {
-          this.responseResultLegal = response['ReturnObject'];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.responseResultLegal = response[CommonConstant.ReturnObj];
         }
       },
       error => {

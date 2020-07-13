@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-ho-branch-info',
@@ -28,7 +29,7 @@ export class HoBranchInfoComponent implements OnInit {
 
     this.http.post(URLConstant.GetListBranchByVendorId, obj).subscribe(
       (response) => {
-        this.ListData = response["ReturnObject"];
+        this.ListData = response[CommonConstant.ReturnObj];
       }
     ); 
   }

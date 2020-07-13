@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
 import { FormBuilder } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 
 @Component({
@@ -39,7 +40,7 @@ export class ContactPersonListComponent implements OnInit {
 
     this.http.post(URLConstant.GetListVendorContactPersonByVendorId, this.VendorContactPerson).subscribe(
       (response) => {
-        this.resultData = response["ReturnObject"];
+        this.resultData = response[CommonConstant.ReturnObj];
       },
       (error) => {
         console.log(error);

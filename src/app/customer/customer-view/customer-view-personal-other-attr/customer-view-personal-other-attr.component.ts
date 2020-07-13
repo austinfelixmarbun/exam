@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-personal-other-attr',
@@ -28,7 +29,7 @@ export class CustomerViewPersonalOtherAttrComponent implements OnInit {
     var custObj = { "CustId": this.CustId };
     this.http.post(this.GetCustAttrContentForCustViewByCustIdUrl, custObj).subscribe(
       response => {
-        this.responseCustAttr = response['ReturnObject'];
+        this.responseCustAttr = response[CommonConstant.ReturnObj];
       },
       error => {
         this.router.navigateByUrl('Error');

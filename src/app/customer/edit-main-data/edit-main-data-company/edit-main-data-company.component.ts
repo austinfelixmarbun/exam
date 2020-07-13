@@ -70,7 +70,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response["ReturnObject"];
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         if(this.tempCustModel.length > 0){
           this.CustomerCompanyForm.patchValue({
             CustModel: this.tempCustModel[0].Key
@@ -84,7 +84,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
-        this.tempCompanyTypeCode = response["ReturnObject"];
+        this.tempCompanyTypeCode = response[CommonConstant.ReturnObj];
         if(this.tempCompanyTypeCode.length > 0){
           this.CustomerCompanyForm.patchValue({
             MrCompanyTypeCode: this.tempCompanyTypeCode[0].Key

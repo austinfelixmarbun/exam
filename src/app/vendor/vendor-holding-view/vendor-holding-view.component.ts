@@ -11,6 +11,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-holding-view',
@@ -108,7 +109,7 @@ export class VendorHoldingViewComponent implements OnInit {
     this.http.post(URLConstant.GetListVendorGrpByVendorId, this.GroupListObj).subscribe(
       response => {
         console.log(response);
-        this.VendorGrp = response['ReturnObject']
+        this.VendorGrp = response[CommonConstant.ReturnObj]
 
       },
       error => {
@@ -121,7 +122,7 @@ export class VendorHoldingViewComponent implements OnInit {
     this.http.post(URLConstant.GetListHoByVendorId, this.HoListObj).subscribe(
       response => {
         console.log(response);
-        this.Vendor = response['ReturnObject']
+        this.Vendor = response[CommonConstant.ReturnObj]
 
       },
       error => {
@@ -166,7 +167,7 @@ export class VendorHoldingViewComponent implements OnInit {
     this.http.post(getListUrl, obj).subscribe(
       (response) => {
         console.log(response);
-        this.vendorContactPerson = response['ReturnObject'];
+        this.vendorContactPerson = response[CommonConstant.ReturnObj];
       },
       (error) => {
         console.log(error);

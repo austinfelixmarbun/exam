@@ -10,6 +10,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NotificationHObj } from 'app/shared/model/NotificationHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-notification-approval-detail',
@@ -75,7 +76,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
 
   SaveForm(event: any)
   {
-    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     var notificationResultStat;
     var resultForMsg;
 

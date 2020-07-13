@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { empty } from 'rxjs';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-list-office-member',
@@ -49,7 +50,7 @@ export class ListOfficeMemberComponent implements OnInit {
     var url = URLConstant.GetListProdBranchOfficeMbrByProdHId;
     this.http.post(url, obj).subscribe(
       (response) => {
-        this.resultData = response["ReturnObject"];
+        this.resultData = response[CommonConstant.ReturnObj];
       },
       (error) => {
         console.log(error);

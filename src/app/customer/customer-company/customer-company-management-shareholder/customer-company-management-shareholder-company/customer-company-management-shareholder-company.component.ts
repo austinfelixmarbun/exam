@@ -70,8 +70,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.tempMrCompanyTypeCode = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempMrCompanyTypeCode = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({
             MrCompanyTypeCode: this.tempMrCompanyTypeCode[0].Key
           });
@@ -85,8 +85,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.tempMrCustModelCode = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
           console.log(this.tempMrCustModelCode);
           this.ManagementShareholderForm.patchValue({
             MrCustModelCode: this.tempMrCustModelCode[0].Key

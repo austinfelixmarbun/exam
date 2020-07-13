@@ -13,6 +13,7 @@ import { AssetSchmListObj } from 'app/shared/model/AssetSchmListObj.Model';
 import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
 import { map, mergeMap } from 'rxjs/operators';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-asset-master-add-edit-child',
@@ -143,7 +144,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
               this.listRequest.criteria.push(critObj);
               this.http.post(URLConstant.GetListAssetCategory, this.listRequest).subscribe(
                 response => {
-                  this.resultAssetCategory = response['ReturnObject'];
+                  this.resultAssetCategory = response[CommonConstant.ReturnObj];
                   this.AssetMasterChildForm.patchValue({ AssetCategoryId: this.resultData.AssetCategoryId });
                 },
                 (error) => {
@@ -156,7 +157,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
           this.http.post(URLConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
             response => {
-              this.listAssetScheme = response['ReturnObject'];
+              this.listAssetScheme = response[CommonConstant.ReturnObj];
               for (let i = 0; i < this.listAssetScheme.length; i++) {
                 if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
                   this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
@@ -217,9 +218,9 @@ export class AssetMasterAddEditChildComponent implements OnInit {
               this.listRequest.criteria.push(critObj);
               this.http.post(URLConstant.GetListAssetCategory, this.listRequest).subscribe(
                 response => {
-                  this.resultAssetCategory = response['ReturnObject'];
+                  this.resultAssetCategory = response[CommonConstant.ReturnObj];
                   if (this.resultAssetCategory.length > 0) {
-                    this.AssetMasterChildForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
+                    this.AssetMasterChildForm.patchValue({ AssetCategoryId: response[CommonConstant.ReturnObj][0]['Key'] });
                   }
                 },
                 (error) => {
@@ -232,7 +233,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
           this.http.post(URLConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
             response => {
-              this.listAssetScheme = response['ReturnObject'];
+              this.listAssetScheme = response[CommonConstant.ReturnObj];
               for (let i = 0; i < this.listAssetScheme.length; i++) {
                 if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
                   this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);

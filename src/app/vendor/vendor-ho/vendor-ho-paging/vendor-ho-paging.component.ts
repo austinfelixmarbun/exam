@@ -4,6 +4,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-ho-paging',
@@ -27,12 +28,12 @@ export class VendorHoPagingComponent implements OnInit {
     ];
     var WVAddrTypeObj = new WhereValueObj();
     WVAddrTypeObj.property = "AddrType";
-    WVAddrTypeObj.value = "TAX";
+    WVAddrTypeObj.value = CommonConstant.AddrTypeTax;
     this.inputPagingObj.whereValue.push(WVAddrTypeObj);
     
     var WVendorClassObj = new WhereValueObj();
     WVendorClassObj.property = "VendorClass";
-    WVendorClassObj.value = "HO";
+    WVendorClassObj.value = CommonConstant.HeadOffice;
     this.inputPagingObj.whereValue.push(WVendorClassObj);
   }
 }

@@ -7,6 +7,7 @@ import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntS
 import { ActivatedRoute } from '@angular/router';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder',
@@ -60,7 +61,7 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
         this.tempCustCompanyObj = response;
         this.http.post(URLConstant.GetListCustCompanyMgmntShrholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
           (response) => {
-            this.tempListCompanyManagementShareholder = response["ReturnObject"];
+            this.tempListCompanyManagementShareholder = response[CommonConstant.ReturnObj];
             if(this.tempListCompanyManagementShareholder.length != 0)
             {
               this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;

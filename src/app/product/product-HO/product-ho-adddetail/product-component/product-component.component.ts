@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { WizardComponent } from 'angular-archwizard';
 import { saveAs } from 'file-saver';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-product-component-HO',
@@ -119,7 +120,7 @@ export class ProductComponentHOComponent implements OnInit {
       var payload = JSON.parse(obj.ProdCompntDtaValue);
       await this.http.post(url, payload).toPromise().then(
         (response) => {
-          this.dictOptions[obj.RefProdCompntCode] = response["ReturnObject"];
+          this.dictOptions[obj.RefProdCompntCode] = response[CommonConstant.ReturnObj];
         },
         (error) => {
           console.log(error);
@@ -135,7 +136,7 @@ export class ProductComponentHOComponent implements OnInit {
       var url = URLConstant.GetRefBehaviourByBehaviourTypeCode;
       await this.http.post(url, { RowVersion : "", BehaviourTypeCode : bhvrTypeCode}).toPromise().then(
         (response) => {
-          this.dictBehaviour[bhvrTypeCode] = response["ReturnObject"];
+          this.dictBehaviour[bhvrTypeCode] = response[CommonConstant.ReturnObj];
         },
         (error) => {
           console.log(error);
@@ -154,8 +155,8 @@ export class ProductComponentHOComponent implements OnInit {
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
         console.log(response);
-        for (var i = 0; i < response["ReturnObject"].length; i++) {
-          var group = response["ReturnObject"][i];
+        for (var i = 0; i < response[CommonConstant.ReturnObj].length; i++) {
+          var group = response[CommonConstant.ReturnObj][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
           fa_group.push(this.addGroup(group.GroupCode, group.GroupName));
 

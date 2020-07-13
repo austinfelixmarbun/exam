@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-paging',
@@ -38,14 +39,14 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
     var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
     this.http.post(URLConstant.GetQuestionGrpHForUpdateById, verfGroupObj).subscribe(
       (response) => {
-        this.verfQuestionGroup = response["ReturnObject"];
+        this.verfQuestionGroup = response[CommonConstant.ReturnObj];
           this.VerfQuestionGrpCode = this.verfQuestionGroup.VerfQuestionGrpCode,
           this.VerfQuestionGrpName = this.verfQuestionGroup.VerfQuestionGrpName
       }
     );
     this.http.post(URLConstant.GetVerfQuestionGrpDByGrpHId, verfGroupObj).subscribe(
       (response) => {
-        this.listVerfQuestionGrpD = response["ReturnObject"];
+        this.listVerfQuestionGrpD = response[CommonConstant.ReturnObj];
       }
     );
   }
@@ -60,7 +61,7 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
       var verfGroupObj = {VerfQuestionGrpHId: this.VerfQuestionGrpHId, VerfQuestionGrpDId: verfQuestionGrpDId};
       this.http.post(URLConstant.DeleteVerfQuestionGroupDById, verfGroupObj).subscribe(
         (response) => {
-          this.listVerfQuestionGrpD = response["ReturnObject"];
+          this.listVerfQuestionGrpD = response[CommonConstant.ReturnObj];
         }
       );
     }

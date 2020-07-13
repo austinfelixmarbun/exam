@@ -117,16 +117,16 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDt = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
     var RefMasterIdType = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.IdTypeList = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.IdTypeList = response[CommonConstant.ReturnObj];
           if (this.pageType != "edit") {
             this.RefEmpForm.patchValue({
               MrIdTypeCode: this.IdTypeList[0].Key

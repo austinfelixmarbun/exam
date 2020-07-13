@@ -127,8 +127,8 @@ export class JobDataEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDtMin = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputJobAddressObj = new InputFieldObj();
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
@@ -155,24 +155,24 @@ export class JobDataEmployeeComponent implements OnInit {
     this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
     this.http.post(this.getListActiveRefMaster, this.jobPosition).subscribe(
       (response) => {
-        this.listJobPosition = response['ReturnObject'];
-        this.JobDataEmpForm.patchValue({ JobPosition: response['ReturnObject'][0]['Key'] });
+        this.listJobPosition = response[CommonConstant.ReturnObj];
+        this.JobDataEmpForm.patchValue({ JobPosition: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 
     this.jobStatus = new RefMasterObj();
     this.jobStatus.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobStat;
     this.http.post(this.getListActiveRefMaster, this.jobStatus).subscribe(
       (response) => {
-        this.listJobStatus = response['ReturnObject'];
-        this.JobDataEmpForm.patchValue({ JobStatus: response['ReturnObject'][0]['Key'] });
+        this.listJobStatus = response[CommonConstant.ReturnObj];
+        this.JobDataEmpForm.patchValue({ JobStatus: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 
     this.companyScale = new RefMasterObj();
     this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
     this.http.post(this.getListActiveRefMaster, this.companyScale).subscribe(
       (response) => {
-        this.listCompanyScale = response['ReturnObject'];
-        this.JobDataEmpForm.patchValue({ CompanyScale: response['ReturnObject'][0]['Key'] });
+        this.listCompanyScale = response[CommonConstant.ReturnObj];
+        this.JobDataEmpForm.patchValue({ CompanyScale: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 
     this.objCust = new CustObj();

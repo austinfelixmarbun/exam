@@ -11,6 +11,7 @@ import { formatDate } from '@angular/common';
 import { environment } from 'environments/environment';
 import { IfStmt } from '@angular/compiler';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-prod-offering-add',
@@ -59,10 +60,10 @@ export class ProdOfferingAddComponent implements OnInit {
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
 
 
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
 
     var currOfcCode = context["OfficeCode"];
-    if (currOfcCode == "HO") {
+    if (currOfcCode == CommonConstant.HeadOffice) {
       this.inputLookupObj.urlJson = "./assets/uclookup/product/lookupProductForHO.json";
       this.inputLookupObj.pagingJson = "./assets/uclookup/product/lookupProductForHO.json";
       this.inputLookupObj.genericJson = "./assets/uclookup/product/lookupProductForHO.json";
@@ -203,8 +204,8 @@ export class ProdOfferingAddComponent implements OnInit {
   }
 
   ValidateDate() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    let businessDate = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    let businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     let startDate = new Date(this.ProdOfferingForm.get("StartDt").value);
     let endDate = new Date(this.ProdOfferingForm.get("EndDt").value);
 

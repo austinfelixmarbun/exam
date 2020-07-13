@@ -67,10 +67,10 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
 
   ngOnInit() {
     this.VipNotesRequired = true;
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDtMin = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
 
@@ -80,7 +80,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObj).subscribe(
       (response) => {
-        this.tempGender = response["ReturnObject"];
+        this.tempGender = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           Gender: this.tempGender[0].Key
         });
@@ -92,7 +92,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
-        this.tempIdType = response["ReturnObject"];
+        this.tempIdType = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           MrIdTypeCode: this.tempIdType[0].Key
         });
@@ -114,7 +114,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
 
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response["ReturnObject"];
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });

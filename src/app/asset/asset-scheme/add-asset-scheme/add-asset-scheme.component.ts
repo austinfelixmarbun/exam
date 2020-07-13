@@ -14,6 +14,7 @@ import { AdInsService } from 'app/shared/services/adIns.service';
 import { AssetSchmDObj } from 'app/shared/model/AssetSchmDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -96,7 +97,7 @@ export class AddAssetSchemeComponent implements OnInit {
     var temp;
     this.http.post(url, obj).subscribe(
       response => {
-        temp = response['ReturnObject'];
+        temp = response[CommonConstant.ReturnObj];
 
         for (var i = 0; i < temp.length; i++) {
           arr.push(temp[i]['AssetMasterId']);

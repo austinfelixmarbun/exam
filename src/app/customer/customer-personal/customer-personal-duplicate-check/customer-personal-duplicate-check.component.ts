@@ -11,6 +11,7 @@ import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { RequestNegativeCustObj } from 'app/shared/model/RequestNegativeCustObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -120,8 +121,8 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.DuplicateStatus = response["Status"];
         console.log(this.DuplicateStatus);
         if (this.DuplicateStatus != null && this.DuplicateStatus != undefined) {
-          this.ResultDuplicate = response["ReturnObject"]["CustDuplicate"];
-          this.ResultDuplicateNegative = response["ReturnObject"]["NegativeCustDuplicate"];
+          this.ResultDuplicate = response[CommonConstant.ReturnObj]["CustDuplicate"];
+          this.ResultDuplicateNegative = response[CommonConstant.ReturnObj]["NegativeCustDuplicate"];
         }
         else
           this.SaveValue();

@@ -103,7 +103,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    const getuserAccess = JSON.parse(localStorage.getItem('UserAccess'));
+    const getuserAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.refOfficeId = getuserAccess.refOfficeId
     this.refOfficeObj = new RefOfficeObj()
     this.httpClient.post(this.refOfficeUrl, null).subscribe(

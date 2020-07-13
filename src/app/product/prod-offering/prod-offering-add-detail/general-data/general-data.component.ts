@@ -12,6 +12,7 @@ import { ListRefProductOfferingDetailObj } from 'app/shared/model/ListRefProduct
 import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOfferingDetailObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-general-data',
@@ -56,7 +57,7 @@ export class GeneralDataComponent implements OnInit {
   }
 
   initLookup() {
-    var user = JSON.parse(localStorage.getItem("UserAccess"));
+    var user = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
 
     //if (user.MrOfficeTypeCode == "HO") {
     this.inputLookUpObj = new InputLookupObj();

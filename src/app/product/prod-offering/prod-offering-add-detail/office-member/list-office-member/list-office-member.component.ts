@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { empty } from 'rxjs';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-list-office-member-offering',
@@ -51,7 +52,7 @@ export class ListOfficeMemberComponentOffering implements OnInit {
       (response) => {
         console.log("list member");
         // console.log(response);
-        this.resultData = response["ReturnObject"];
+        this.resultData = response[CommonConstant.ReturnObj];
         console.log("result data");
         console.log(this.resultData);
 

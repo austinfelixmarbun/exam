@@ -10,6 +10,7 @@ import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
 import { saveAs } from 'file-saver';
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 
 
@@ -69,7 +70,7 @@ export class ProductHOViewComponent implements OnInit {
     this.ProdVersionObj.ProdHId = this.prodHId;
     this.http.post(this.ProdVerUrl, this.ProdVersionObj).subscribe(
       response => {
-        this.ProdVersion = response['ReturnObject'];
+        this.ProdVersion = response[CommonConstant.ReturnObj];
       },
       error => {
         console.log(error);
@@ -81,7 +82,7 @@ export class ProductHOViewComponent implements OnInit {
     this.ProdBranchMemObj.ProdHId = this.prodHId;
     this.http.post(this.ProdBranchUrl, this.ProdBranchMemObj).subscribe(
       response => {
-        this.ProdBranchMbr = response['ReturnObject'];
+        this.ProdBranchMbr = response[CommonConstant.ReturnObj];
       },
       error => {
         console.log(error);
@@ -96,7 +97,7 @@ export class ProductHOViewComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdComp = response['ReturnObject'].ProdOffComponents;
+        this.ProdComp = response[CommonConstant.ReturnObj].ProdOffComponents;
         console.log(this.ProdComp);
         this.GenData = this.ProdComp.filter(
           comp => comp.GroupCode == 'GEN');

@@ -12,6 +12,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { OrgJobTitleObj } from 'app/shared/model/OrgJobTitleObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-org-job-title-detail',
@@ -103,7 +104,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
           console.log("obj", response["returnObject"]);
           this.inputLookupObj.idSelect = response["returnObject"]["refJobTitleId"];
           this.inputLookupObj2.idSelect = response["returnObject"]["parentOrgJobTitleId"];
-          if (response["returnObject"]["isActive"] == "1") {
+          if (response["returnObject"]["isActive"] == CommonConstant.TRUE_CONDITION) {
             this.isActive = true;
           } else {
             this.isActive = false;

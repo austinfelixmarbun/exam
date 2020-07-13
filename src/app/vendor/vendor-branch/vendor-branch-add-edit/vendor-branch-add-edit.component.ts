@@ -13,6 +13,7 @@ import { VendorBranchObj } from 'app/shared/model/VendorBranchObj.Model';
 import { VendorBranchMainObj } from 'app/shared/model/VendorBranchMainObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-branch-add-edit',
@@ -102,8 +103,8 @@ export class VendorBranchAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDt = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
       this.ButtonLbl = "Submit";
       this.VendorForm.controls.VendorCode.disable();
@@ -170,11 +171,11 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   setDropdown() {
     var refMasterCategoryObj = {
-      RefMasterTypeCode: "VENDOR_CATEGORY"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
       (response) => {
-        this.itemCategoryType = response["ReturnObject"];
+        this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
           this.VendorForm.patchValue({
             MrVendorCategoryCode: this.MrVendorCategoryCode
@@ -184,11 +185,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
 
     var refMaxRefundType = {
-      RefMasterTypeCode: "MAX_REFUND_TYPE"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaxRefundType
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMaxRefundType).subscribe(
       (response) => {
-        this.itemMaxRefundType = response["ReturnObject"];
+        this.itemMaxRefundType = response[CommonConstant.ReturnObj];
         if (this.itemMaxRefundType.length > 0) {
           this.VendorForm.patchValue({
             ReservedField7: this.itemMaxRefundType[0].Key
@@ -198,11 +199,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
 
     var refAssignmentType = {
-      RefMasterTypeCode: "ASSGMNT_TYPE"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeAssgmntType
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refAssignmentType).subscribe(
       (response) => {
-        this.itemAssignmentTypeTele = response["ReturnObject"];
+        this.itemAssignmentTypeTele = response[CommonConstant.ReturnObj];
         if (this.itemAssignmentTypeTele.length > 0) {
           this.VendorForm.patchValue({
             ReservedField9: this.itemAssignmentTypeTele[0].Key
@@ -212,11 +213,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
 
     var refMrSupplierClass = {
-      RefMasterTypeCode: "SUPPLIER_CLASS"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSupplierClass
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMrSupplierClass).subscribe(
       (response) => {
-        this.itemSupplierClass = response["ReturnObject"];
+        this.itemSupplierClass = response[CommonConstant.ReturnObj];
         if (this.itemSupplierClass.length > 0) {
           this.VendorForm.patchValue({
             ReservedField4: this.itemSupplierClass[0].Key
@@ -226,11 +227,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
 
     var refMRSupplierUpCalcMethod = {
-      RefMasterTypeCode: "SUPPLIER_UP_CALC_METHOD",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSupplierUpCalcMethod,
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).subscribe(
       (response) => {
-        this.itemTypeUpCalcMethod = response["ReturnObject"];
+        this.itemTypeUpCalcMethod = response[CommonConstant.ReturnObj];
         if (this.itemTypeUpCalcMethod.length > 0) {
           this.VendorForm.patchValue({
             ReservedField3: this.itemTypeUpCalcMethod[0].Key
@@ -240,11 +241,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
 
     var refMasterTypeObj = {
-      RefMasterTypeCode: "VENDOR_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorType,
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
       (response) => {
-        this.itemType = response["ReturnObject"];
+        this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
           if (this.MrVendorCategoryCode == "AGENCY_PERSONAL") {
             var object = this.itemType.find(x => x.Key == 'P');
@@ -272,11 +273,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
 
     var refMasterIdObj = {
-      RefMasterTypeCode: "ID_TYPE_VENDOR",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterIdObj).subscribe(
       (response) => {
-        this.itemIdType = response["ReturnObject"];
+        this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.lenth > 0) {
           this.VendorForm.patchValue({
             MrIdTypeCode: this.itemIdType[0].Key
@@ -287,11 +288,11 @@ export class VendorBranchAddEditComponent implements OnInit {
 
     if (this.MrVendorCategoryCode == "SURVEYOR_HO" || this.MrVendorCategoryCode == "ASSET_INSCO_HO") {
       var refMasterAssignmentObj = {
-        RefMasterTypeCode: "TASK_ASSIGNMENT_TYPE",
+        RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaskAssignmentType,
       }
       this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterAssignmentObj).subscribe(
         (response) => {
-          this.itemAssignmentType = response["ReturnObject"];
+          this.itemAssignmentType = response[CommonConstant.ReturnObj];
           if (this.itemAssignmentType.length > 0) {
             this.VendorForm.patchValue({
               ReservedField1: this.itemAssignmentType[0].Key
@@ -302,11 +303,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
 
     var refMasterCalcMethodObj = {
-      RefMasterTypeCode: "TAX_CALC_METHOD",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
-        this.itemCalcMethodType = response["ReturnObject"];
+        this.itemCalcMethodType = response[CommonConstant.ReturnObj];
         if (this.itemCalcMethodType.length > 0) {
           if (this.mode != "edit") {
             this.VendorForm.patchValue({
@@ -448,7 +449,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var critVendorClass = new CriteriaObj();
     critVendorClass.propName = "MR_VENDOR_CLASS";
     critVendorClass.restriction = AdInsConstant.RestrictionEq;
-    critVendorClass.value = "HO";
+    critVendorClass.value = CommonConstant.HeadOffice;
     this.inputLookupParentObj.addCritInput.push(critVendorClass);
 
     this.inputLookupZipcodeObj.isReady = true;
@@ -506,7 +507,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value
     }
 
-    if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == "SUPPLIER_BRANCH") {
+    if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH) {
       this.vendorBranchObj.VendorObj.ReservedField3 = this.VendorForm.controls.ReservedField3.value;
       this.vendorBranchObj.VendorObj.ReservedField4 = this.VendorForm.controls.ReservedField4.value;
       this.vendorBranchObj.VendorObj.ReservedField5 = this.VendorForm.controls.ReservedField5.value;
@@ -514,7 +515,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.ReservedField7 = this.VendorForm.controls.ReservedField7.value;
       this.vendorBranchObj.VendorObj.ReservedField8 = this.VendorForm.controls.ReservedField8.value;
     }
-    if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == "SURVEYOR_BRANCH") {
+    if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH) {
       this.vendorBranchObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
       this.vendorBranchObj.VendorObj.ReservedField9 = this.VendorForm.controls.ReservedField9.value;
     }
@@ -523,7 +524,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
       this.vendorBranchObj.VendorObj.TaxpayerName = this.VendorForm.controls.TaxpayerName.value;
 
-      this.vendorBranchObj.VendorAddrObj.MrAddrTypeCode = "TAX";
+      this.vendorBranchObj.VendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeTax;
       this.vendorBranchObj.VendorAddrObj.Addr = this.VendorForm.controls.Addr.value;
       this.vendorBranchObj.VendorAddrObj.Zipcode = this.VendorForm.controls["Zipcode"]["controls"].value.value;
       this.vendorBranchObj.VendorAddrObj.AreaCode2 = this.VendorForm.controls.AreaCode2.value;
@@ -531,7 +532,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorAddrObj.City = this.VendorForm.controls.City.value;
       this.vendorBranchObj.VendorAddrObj.Province = this.VendorForm.controls.Province.value;
     } else if (this.result != null) {
-      this.vendorBranchObj.VendorAddrObj.MrAddrTypeCode = "TAX";
+      this.vendorBranchObj.VendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeTax;
       this.vendorBranchObj.VendorAddrObj.Addr = this.result.VendorAddrObj.Addr;
       this.vendorBranchObj.VendorAddrObj.Zipcode = this.result.VendorAddrObj.Zipcode;
       this.vendorBranchObj.VendorAddrObj.AreaCode2 = this.result.VendorAddrObj.AreaCode2;
@@ -541,7 +542,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
 
     if (this.mode == "edit") {
-      if (this.MrVendorCategoryCode == "AGENCY_PERSONAL" || this.MrVendorCategoryCode == "AGENCY_COMPANY") {
+      if (this.MrVendorCategoryCode == "AGENCY_PERSONAL" || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY) {
         this.vendorBranchObj.VendorObj.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
       }
       this.vendorBranchObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;

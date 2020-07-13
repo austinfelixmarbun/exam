@@ -10,6 +10,7 @@ import { ListAuthFormObj } from 'app/shared/model/ListAuthFormObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-ref-form-role-mapping',
@@ -49,8 +50,8 @@ export class RefFormRoleMappingComponent implements OnInit {
       (response) => {
         var arrMemberList = new Array();
 
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-          arrMemberList.push(response["ReturnObject"][index].RefRoleId)
+        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+          arrMemberList.push(response[CommonConstant.ReturnObj][index].RefRoleId)
         }
 
         if (arrMemberList.length != 0) {

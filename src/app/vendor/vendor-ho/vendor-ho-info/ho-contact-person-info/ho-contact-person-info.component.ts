@@ -4,6 +4,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-ho-contact-person-info',
@@ -30,7 +31,7 @@ export class HoContactPersonInfoComponent implements OnInit {
 
     this.http.post(URLConstant.GetListVendorContactPersonByVendorId, this.VendorContactPerson).subscribe(
       (response) => {
-        this.resultData = response["ReturnObject"];
+        this.resultData = response[CommonConstant.ReturnObj];
       },
       (error) => {
         console.log(error);

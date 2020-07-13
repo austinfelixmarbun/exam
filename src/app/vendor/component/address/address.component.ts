@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-address',
@@ -50,12 +51,12 @@ export class AddressComponent implements OnInit {
       this.getUrl = URLConstant.GetVendorAddrByVendorId;
       this.vendorAddrObj.VendorId = this.objInput.VendorId;
       this.vendorAddrObj.VendorEmpId = null;
-      this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
+      this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
     } else if (this.objInput.Type == "VendorEmployee") {
       this.getUrl = URLConstant.GetVendorAddrByVendorEmpId;
       this.vendorAddrObj.VendorId = null;
       this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
-      this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
+      this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
     }
 
     var vendorObj = {
@@ -94,7 +95,7 @@ export class AddressComponent implements OnInit {
   }
 
   SaveForm() {
-    this.vendorAddrObj.MrAddrTypeCode = "LEGAL";
+    this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
     this.vendorAddrObj.AreaCode2 = this.AddressForm.controls.AreaCode2.value;
     this.vendorAddrObj.AreaCode1 = this.AddressForm.controls.AreaCode1.value;
     this.vendorAddrObj.City = this.AddressForm.controls.City.value;

@@ -102,7 +102,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           //this.orgMdlLvl = response["returnObject"]["orgMdlLvl"];
           this.inputLookupObj2.idSelect = response["returnObject"]["refBizUnitId"];
           this.inputLookupObj.idSelect = response["returnObject"]["parentId"];
-          if (response["returnObject"]["isActive"] == "1") {
+          if (response["returnObject"]["isActive"] == CommonConstant.TRUE_CONDITION) {
             this.isActive = true;
           } else {
             this.isActive = false;

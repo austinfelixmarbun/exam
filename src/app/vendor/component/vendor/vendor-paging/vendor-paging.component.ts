@@ -90,12 +90,12 @@ export class VendorPagingComponent implements OnInit {
 
         var WVAddrTypeObj = new WhereValueObj();
         WVAddrTypeObj.property = "AddrType";
-        WVAddrTypeObj.value = "TAX";
+        WVAddrTypeObj.value = CommonConstant.AddrTypeTax;
         this.inputPagingObj.whereValue.push(WVAddrTypeObj);
 
         var WVendorClassObj = new WhereValueObj();
         WVendorClassObj.property = "VendorClass";
-        WVendorClassObj.value = "HO";
+        WVendorClassObj.value = CommonConstant.HeadOffice;
         this.inputPagingObj.whereValue.push(WVendorClassObj);
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {

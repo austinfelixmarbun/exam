@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { VerfSchemeHObj } from 'app/shared/model/VerfSchemeHObj.Model';
 import { ToastrService } from 'ngx-toastr';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-member-paging',
@@ -43,7 +44,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   GetListVerfSchmD() {
     this.http.post(URLConstant.GetVerfSchemeDataByVerfSchemeHId, this.verfSchemeObj).subscribe(
       (response) => {
-        this.listQuestionGroupD = response["ReturnObject"];
+        this.listQuestionGroupD = response[CommonConstant.ReturnObj];
       }
     );
   }

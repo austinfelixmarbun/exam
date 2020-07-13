@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-survey-order-view',
@@ -33,7 +34,7 @@ export class SurveyOrderViewComponent implements OnInit {
     }
     this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, SrvyTaskObj).subscribe(
       response => {
-        this.TaskList = response["ReturnObject"];
+        this.TaskList = response[CommonConstant.ReturnObj];
       },
       error => {
         console.log(error);

@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-asset-scheme-add-edit-information',
@@ -40,12 +41,12 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
 
   ngOnInit() {
     var assetTypeObj = {
-      RefMasterTypeCode: "ASSET_TYPE_ID",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeAssetTypeId,
       RowVersion: ""
     }
     this.http.post(URLConstant.GetListActiveAssetType, assetTypeObj).subscribe(
       (response) => {
-        this.ItemAssetType = response["ReturnObject"];
+        this.ItemAssetType = response[CommonConstant.ReturnObj];
         if (this.pageType == "add") {
           this.AssetSchemeInfoForm.patchValue({
             AssetTypeId: this.ItemAssetType[0].AssetTypeId,

@@ -12,6 +12,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-member-add',
@@ -49,8 +50,8 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
       (response) => {
         var arrMemberList = new Array();
         console.log(arrMemberList);
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-          arrMemberList.push(response["ReturnObject"][index].VerfQuestionGrpHId)
+        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+          arrMemberList.push(response[CommonConstant.ReturnObj][index].VerfQuestionGrpHId)
         }
 
         if (arrMemberList.length != 0) {

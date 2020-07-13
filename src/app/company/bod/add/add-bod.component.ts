@@ -10,6 +10,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.component';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
     selector: 'add-bod',
@@ -87,7 +88,7 @@ export class BodAddComponent implements OnInit {
         this.jobTitle = data.jobTitle;
         this.taxIdNo = data.taxIdNo;
         this.idNo = data.idNo;
-        if (this.result.isActive == "1") {
+        if (this.result.isActive == CommonConstant.TRUE_CONDITION) {
             this.isActive = true;
         }
         else {

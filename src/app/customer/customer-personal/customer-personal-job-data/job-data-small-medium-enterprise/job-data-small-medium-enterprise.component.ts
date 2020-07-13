@@ -124,8 +124,8 @@ export class JobDataSmeComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDtMin = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputJobAddressObj = new InputFieldObj();
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
@@ -152,16 +152,16 @@ export class JobDataSmeComponent implements OnInit {
     this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
     this.http.post(this.getListActiveRefMaster, this.jobPosition).subscribe(
     (response) => {
-        this.listJobPosition = response['ReturnObject'];
-        this.JobDataSmeForm.patchValue({ JobPosition: response['ReturnObject'][0]['Key'] });
+        this.listJobPosition = response[CommonConstant.ReturnObj];
+        this.JobDataSmeForm.patchValue({ JobPosition: response[CommonConstant.ReturnObj][0]['Key'] });
     });
 
     this.companyScale = new RefMasterObj();
     this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
     this.http.post(this.getListActiveRefMaster, this.companyScale).subscribe(
     (response) => {
-        this.listCompanyScale = response['ReturnObject'];
-        this.JobDataSmeForm.patchValue({ CompanyScale: response['ReturnObject'][0]['Key'] });
+        this.listCompanyScale = response[CommonConstant.ReturnObj];
+        this.JobDataSmeForm.patchValue({ CompanyScale: response[CommonConstant.ReturnObj][0]['Key'] });
     });
     
     this.objCust = new CustObj();

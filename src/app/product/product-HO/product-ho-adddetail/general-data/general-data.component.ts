@@ -12,6 +12,7 @@ import { ListRefProductDetailObj } from 'app/shared/model/ListRefProductDetailOb
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-general-data-HO',
@@ -156,7 +157,7 @@ export class GeneralDataHOComponent implements OnInit {
       var payload = JSON.parse(obj.ProdCompntDtaValue);
       await this.http.post(url, payload).toPromise().then(
         (response) => {
-          this.dictOptions[obj.RefProdCompntCode] = response["ReturnObject"];
+          this.dictOptions[obj.RefProdCompntCode] = response[CommonConstant.ReturnObj];
           var compValue;
           if (obj.CompntValue == "") {
             compValue = this.dictOptions[obj.RefProdCompntCode][0].Key;
@@ -182,7 +183,7 @@ export class GeneralDataHOComponent implements OnInit {
       var payload = JSON.parse(obj.ProdCompntDtaValue);
       await this.http.post(url, payload).toPromise().then(
         (response) => {
-          var result = response["ReturnObject"];
+          var result = response[CommonConstant.ReturnObj];
           this.dictMultiOptions[obj.RefProdCompntCode] = new Array();
           this.selectedMultiDDLItems[obj.RefProdCompntCode] = new Array();
           for (let i = 0; i < result.length; i++) {
@@ -230,7 +231,7 @@ export class GeneralDataHOComponent implements OnInit {
     var url = URLConstant.GetListKvpInstSchmByLobCode;
     await this.http.post(url, { LobCode: this.LOBSelected, RowVersion: "" }).toPromise().then(
       (response) => {
-        var result = response["ReturnObject"];
+        var result = response[CommonConstant.ReturnObj];
         this.dictMultiOptions["INST_SCHM"] = new Array();
         this.selectedMultiDDLItems["INST_SCHM"] = new Array();
 
@@ -253,8 +254,8 @@ export class GeneralDataHOComponent implements OnInit {
     }
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
-        for (var i = 0; i < response["ReturnObject"].length; i++) {
-          var group = response["ReturnObject"][i];
+        for (var i = 0; i < response[CommonConstant.ReturnObj].length; i++) {
+          var group = response[CommonConstant.ReturnObj][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
           fa_group.push(this.addGroup(group.GroupCode, group.GroupName));
 

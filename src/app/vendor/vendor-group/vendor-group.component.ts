@@ -7,6 +7,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-group',
@@ -57,7 +58,7 @@ export class VendorGroupComponent implements OnInit {
       this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
         (response) => {
           console.log(response);
-          this.allVendorCategory = response['ReturnObject'];
+          this.allVendorCategory = response[CommonConstant.ReturnObj];
           if (this.allVendorCategory.length > 0) {
             this.VendorGroupFrom.patchValue({
               MrVendorCategoryCode: this.MrVendorCategoryCode
@@ -90,7 +91,7 @@ export class VendorGroupComponent implements OnInit {
           this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
             (response) => {
               console.log(response);
-              this.allVendorCategory = response['ReturnObject'];
+              this.allVendorCategory = response[CommonConstant.ReturnObj];
               if (this.allVendorCategory.length > 0) {
                 this.VendorGroupFrom.patchValue({
                   MrVendorCategoryCode: this.resultData.MrVendorCategoryCode

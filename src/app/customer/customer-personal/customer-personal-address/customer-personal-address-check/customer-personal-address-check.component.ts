@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-personal-address-check',
@@ -76,7 +77,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
       this.custAddrObj.MrCustAddrTypeCode = "-";
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
-            this.listCustAddr = response["ReturnObject"];
+            this.listCustAddr = response[CommonConstant.ReturnObj];
             console.log(this.listCustAddr);
         });
   }

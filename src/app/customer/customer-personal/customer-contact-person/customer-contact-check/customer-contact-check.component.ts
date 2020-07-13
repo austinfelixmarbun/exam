@@ -8,6 +8,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-contact-check',
@@ -69,7 +70,7 @@ export class CustomerContactCheckComponent implements OnInit {
     this.custPersonContactPersonObj.CustId = this.IdCust;
     this.http.post(URLConstant.GetListCustPersonalContactPersonByCustId, this.custPersonContactPersonObj).subscribe(
       (response) => {
-        this.tempCustomerPersonalContactPerson = response["ReturnObject"];
+        this.tempCustomerPersonalContactPerson = response[CommonConstant.ReturnObj];
         console.log("Contact Person: " + JSON.stringify(this.tempCustomerPersonalContactPerson));
         for (const item of this.tempCustomerPersonalContactPerson) {
           if (item["ContactPersonCustNo"] != null) {

@@ -87,8 +87,8 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.addressType.ReserveField1 = CommonConstant.CustTypeCompany;
     this.http.post(this.getRefMasterWithReserveFieldUrl, this.addressType).subscribe(
       (response) => {
-        this.listAddressType = response['ReturnObject'];
-        //this.CustDataCompanyForm.patchValue({ MrCustAddrTypeCode: response['ReturnObject'][0]['Key'] });
+        this.listAddressType = response[CommonConstant.ReturnObj];
+        //this.CustDataCompanyForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 
     this.custAddrObj = new CustAddrObj();
@@ -96,10 +96,10 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.custAddrObj.MrCustAddrTypeCode = "-";
     this.http.post(this.getListCustAddrUrl, this.custAddrObj).subscribe(
       (response) => {
-        this.listCustAddr = response["ReturnObject"];
+        this.listCustAddr = response[CommonConstant.ReturnObj];
         console.log(this.listCustAddr);
         if (this.listCustAddr.length > 0) {
-          this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response['ReturnObject'][0]['CustAddrId'] });
+          this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'] });
         }
       });
 

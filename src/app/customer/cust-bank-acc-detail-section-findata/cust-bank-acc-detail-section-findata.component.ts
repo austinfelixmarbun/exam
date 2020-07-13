@@ -13,6 +13,7 @@ import { CustBankStmntDObj } from 'app/shared/model/CustBankStmntDObj.Model';
 import { CustBankStmntHObj } from 'app/shared/model/CustBankStmntHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',
@@ -72,7 +73,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     var criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
     criteriaObj.propName = 'IS_ACTIVE';
-    criteriaObj.value = "1";
+    criteriaObj.value = CommonConstant.TRUE_CONDITION;
     criteriaList.push(criteriaObj);
     this.inputLookupBank.addCritInput = criteriaList;
 
@@ -241,7 +242,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         );
       }
       else if (this.pageType == "editStmnt") {
-        var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+        var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
         var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
         var listCustBankStmntD = new Array<CustBankStmntDObj>();
         var totalBalance = 0;

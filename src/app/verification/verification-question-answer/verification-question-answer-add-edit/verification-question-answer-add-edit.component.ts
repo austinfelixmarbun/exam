@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionAnswerObj } from 'app/shared/model/VerfQuestionAnswerObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-verification-question-answer-add-edit',
@@ -46,7 +47,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     var refAnswerObj = {}
     this.http.post(URLConstant.GetActiveRefVerfAnswerTypes, refAnswerObj).subscribe(
       (response) => {
-        this.itemVerfQuestionAnswer = response["ReturnObject"];
+        this.itemVerfQuestionAnswer = response[CommonConstant.ReturnObj];
         console.log(this.itemVerfQuestionAnswer);
         if (this.itemVerfQuestionAnswer.length > 0) {
           let VerfAnswerData = this.itemVerfQuestionAnswer.find(x => x.VerfAnswerTypeCode == "DDL");
@@ -61,7 +62,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       var verfAnswerObj = { VerfQuestionAnswerId: this.VerfQuestionAnswerId }
       this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, verfAnswerObj).subscribe(
         (response) => {
-          this.verfQuestionAnswer = response["ReturnObject"];
+          this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
 
           refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
           this.http.post(URLConstant.GetRefVerfAnswerTypeById, refAnswerObj).subscribe(

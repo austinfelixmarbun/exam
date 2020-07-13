@@ -84,8 +84,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.tempMrGenderCode = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempMrGenderCode = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({
             MrGenderCode: this.tempMrGenderCode[0].Key
           });
@@ -98,8 +98,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.tempIdType = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempIdType = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
           });
@@ -120,8 +120,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.tempMrJobPositionCode = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempMrJobPositionCode = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({
             MrJobPositionCode: this.tempMrJobPositionCode[0].Key
           });
@@ -135,8 +135,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.tempMrCustModelCode = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({
             MrCustModelCode: this.tempMrCustModelCode[0].Key
           });

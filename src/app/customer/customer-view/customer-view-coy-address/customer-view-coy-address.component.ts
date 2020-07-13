@@ -7,6 +7,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-coy-address',
@@ -46,8 +47,8 @@ export class CustomerViewCoyAddressComponent implements OnInit {
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
-        if (response['ReturnObject'].length > 0) {
-          this.responseResultCustAddr = response['ReturnObject'];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.responseResultCustAddr = response[CommonConstant.ReturnObj];
         }
       },
       error => {
@@ -56,8 +57,8 @@ export class CustomerViewCoyAddressComponent implements OnInit {
     );
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
-        if (response['ReturnObject'].length > 0) {
-          this.responseResultCustAddrHist = response['ReturnObject'];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.responseResultCustAddrHist = response[CommonConstant.ReturnObj];
         }
       },
       error => {
@@ -69,8 +70,8 @@ export class CustomerViewCoyAddressComponent implements OnInit {
     refMasterObj.RefMasterTypeCode = RefMasterConstant.AddrType;
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
       response => {
-        if (response['ReturnObject'].length > 0) {
-          this.ddlItem = response['ReturnObject'];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.ddlItem = response[CommonConstant.ReturnObj];
           this.CustForm.patchValue({
             DdlAddress: this.ddlItem[0].Value
           });

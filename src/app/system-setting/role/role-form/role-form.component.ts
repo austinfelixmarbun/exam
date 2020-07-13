@@ -11,6 +11,7 @@ import { ListAuthFormObj } from "app/shared/model/ListAuthFormObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
 import { UcTempPagingObj } from "app/shared/model/TempPaging/UcTempPagingObj.model";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 @Component({
   selector: 'app-role-form',
@@ -50,11 +51,11 @@ export class RoleFormComponent implements OnInit {
       (response) => {
         var arrMemberList = new Array();
 
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-          arrMemberList.push(response["ReturnObject"][index].RefFormId)
+        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+          arrMemberList.push(response[CommonConstant.ReturnObj][index].RefFormId)
         }
 
-        if (response["ReturnObject"].length != 0) {
+        if (response[CommonConstant.ReturnObj].length != 0) {
           var addCritListRefFormId = new CriteriaObj();
           addCritListRefFormId.DataType = "numeric";
           addCritListRefFormId.propName = "REF_FORM_ID";

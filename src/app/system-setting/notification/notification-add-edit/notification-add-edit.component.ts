@@ -10,6 +10,7 @@ import { NotificationDObj } from 'app/shared/model/NotificationDObj.Model';
 import { formatDate } from '@angular/common';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-notification-add-edit',
@@ -66,13 +67,13 @@ export class NotificationAddEditComponent implements OnInit {
 
   ngOnInit() {
     var refMasterNotifTypeObj = {
-      RefMasterTypeCode: "NOTIFICATION_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNotificationType,
       RowVersion: ""
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterNotifTypeObj).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.tempListNotifType = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempListNotifType = response[CommonConstant.ReturnObj];
           this.NotificationForm.patchValue({
             NotificationType: this.tempListNotifType[0].Key
           });
@@ -81,13 +82,13 @@ export class NotificationAddEditComponent implements OnInit {
     );
 
     var refMasterNotifMethodObj = {
-      RefMasterTypeCode: "NOTIFICATION_METHOD",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNotificationMethod,
       RowVersion: ""
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterNotifMethodObj).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.tempListNotifMethod = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempListNotifMethod = response[CommonConstant.ReturnObj];
           this.NotificationForm.patchValue({
             NotificationMethod: this.tempListNotifMethod[0].Key
           });
@@ -126,7 +127,7 @@ export class NotificationAddEditComponent implements OnInit {
     var urlOffice = this.settingUrl + URLConstant.GetListActiveRefOffice;
     this.http.post(urlOffice, null).subscribe(
       (response) => {
-        this.refOfficeObj = response["ReturnObject"];
+        this.refOfficeObj = response[CommonConstant.ReturnObj];
         for (let i = 0; i < this.refOfficeObj.length; i++) {
           this.dropdownListOffice.push({ item_id: this.refOfficeObj[i].RefOfficeId, item_text: this.refOfficeObj[i].OfficeName });
         }
@@ -139,7 +140,7 @@ export class NotificationAddEditComponent implements OnInit {
     var urlRole = this.settingUrl + URLConstant.GetListActiveRefRole;
     this.http.post(urlRole, null).subscribe(
       (response) => {
-        this.refRoleObj = response["ReturnObject"];
+        this.refRoleObj = response[CommonConstant.ReturnObj];
         for (let i = 0; i < this.refRoleObj.length; i++) {
           this.dropdownListRole.push({ item_id: this.refRoleObj[i].RefRoleId, item_text: this.refRoleObj[i].RoleName });
         }
@@ -168,7 +169,7 @@ export class NotificationAddEditComponent implements OnInit {
       return false;
     }
     else {
-      var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+      var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
 
       if (this.mode == "add") {
         this.notificationHObj = new NotificationHObj();

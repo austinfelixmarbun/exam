@@ -5,6 +5,7 @@ import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-profession-add-edit',
@@ -51,9 +52,9 @@ export class ProfessionAddEditComponent implements OnInit {
     this.http.post(this.getValueCustModel, null).subscribe(
       (response) => {
         console.log(response);
-        this.allRefProfessionMethod = response['ReturnObject'];
+        this.allRefProfessionMethod = response[CommonConstant.ReturnObj];
         if (this.allRefProfessionMethod.length > 0) {
-          this.RefProfessionForm.patchValue({ MrCustModelCode: response['ReturnObject'][0]['Key'] });
+          this.RefProfessionForm.patchValue({ MrCustModelCode: response[CommonConstant.ReturnObj][0]['Key'] });
         }
       },
       (error) => {

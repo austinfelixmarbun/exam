@@ -177,8 +177,8 @@ export class OfficeAddComponent implements OnInit {
 
     this.httpClient.post(URLConstant.GetRefMasterTypeOfficeWithoutCG, this.lookUpRefMasterOfficeObj).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.lookupOfficeType = response['ReturnObject'];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.lookupOfficeType = response[CommonConstant.ReturnObj];
 
           this.arrCrit = new Array();
           var critObj = new CriteriaObj();
@@ -201,8 +201,8 @@ export class OfficeAddComponent implements OnInit {
     if (this.pageType == "add") {
       this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allOfficeClass = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allOfficeClass = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               MrOfficeClassCode: this.allOfficeClass[0].Key
             });
@@ -214,8 +214,8 @@ export class OfficeAddComponent implements OnInit {
 
       this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allCgType = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allCgType = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               MrCenterGrpTypeCode: this.allCgType[0].Key
             });
@@ -227,8 +227,8 @@ export class OfficeAddComponent implements OnInit {
         });
       this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterKonsyaType).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allKonSya = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allKonSya = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               KonSya: this.allKonSya[0].Key
             });
@@ -239,8 +239,8 @@ export class OfficeAddComponent implements OnInit {
         })
       this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allOfficeType = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allOfficeType = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               OfficeType: this.allOfficeType[0].Key
             });
@@ -252,8 +252,8 @@ export class OfficeAddComponent implements OnInit {
 
       this.httpClient.post(this.holidaySchmUrl, null).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allHolidaySchm = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allHolidaySchm = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               HolidayScheme: this.allHolidaySchm[0].HolidaySchmHId
             });
@@ -264,8 +264,8 @@ export class OfficeAddComponent implements OnInit {
         })
       this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allWorkingHourSchm = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allWorkingHourSchm = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               WorkingHourScheme: this.allWorkingHourSchm[0].WorkingHourSchmHId
             });
@@ -335,8 +335,8 @@ export class OfficeAddComponent implements OnInit {
           this.inputFieldAddr.inputLookupObj.nameSelect = this.resultData.Zipcode;
           this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allCgType = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allCgType = response[CommonConstant.ReturnObj];
                 this.OfficeForm.patchValue({
                   MrCenterGrpTypeCode: this.resultData.MrCenterGrpTypeCode
                 });
@@ -349,8 +349,8 @@ export class OfficeAddComponent implements OnInit {
 
           this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allOfficeClass = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allOfficeClass = response[CommonConstant.ReturnObj];
                 this.OfficeForm.patchValue({
                   MrOfficeClassCode: this.resultData.MrOfficeClassCode
                 });
@@ -361,8 +361,8 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.officeTypeUrl, this.refMasterOfficeType).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allOfficeType = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allOfficeType = response[CommonConstant.ReturnObj];
                 this.OfficeForm.patchValue({
                   OfficeType: this.resultData.MrOfficeTypeCode
                 });
@@ -373,8 +373,8 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.konSyaUrl, this.refMasterKonsyaType).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allKonSya = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allKonSya = response[CommonConstant.ReturnObj];
 
                 this.OfficeForm.patchValue({
                   KonSya: this.resultData.MrKonvenSyariahCode
@@ -386,8 +386,8 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.holidaySchmUrl, null).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allHolidaySchm = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allHolidaySchm = response[CommonConstant.ReturnObj];
                 this.OfficeForm.patchValue({
                   HolidayScheme: this.resultData.HolidaySchmHId
                 });
@@ -398,8 +398,8 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allWorkingHourSchm = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allWorkingHourSchm = response[CommonConstant.ReturnObj];
                 this.OfficeForm.patchValue({
                   WorkingHourScheme: this.resultData.WorkingHourSchmHId
                 });

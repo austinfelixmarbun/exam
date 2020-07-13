@@ -181,7 +181,7 @@ export class UcProdOfferingCompComponent implements OnInit {
       var payload = JSON.parse(obj.ProdCompntDtaValue);
       await this.http.post(url, payload).toPromise().then(
         (response) => {
-          var result = response["ReturnObject"];
+          var result = response[CommonConstant.ReturnObj];
           this.dictMultiOptions[obj.RefProdCompntCode] = new Array();
           this.selectedMultiDDLItems[obj.RefProdCompntCode] = new Array();
           for (let i = 0; i < result.length; i++) {

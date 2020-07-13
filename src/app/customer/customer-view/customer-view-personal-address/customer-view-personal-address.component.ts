@@ -48,8 +48,8 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
-        if (response['ReturnObject'].length > 0) {
-          this.responseResultCustAddr = response['ReturnObject'];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.responseResultCustAddr = response[CommonConstant.ReturnObj];
         }
       },
       error => {
@@ -58,8 +58,8 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     );
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
-        if (response['ReturnObject'].length > 0) {
-          this.responseResultCustAddrHist = response['ReturnObject'];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.responseResultCustAddrHist = response[CommonConstant.ReturnObj];
         }
       },
       error => {
@@ -71,8 +71,8 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAddrType;
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
       response => {
-        if (response['ReturnObject'].length > 0) {
-          this.ddlItem = response['ReturnObject'];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.ddlItem = response[CommonConstant.ReturnObj];
           this.CustForm.patchValue({
             DdlAddress: this.ddlItem[0].Value
           });

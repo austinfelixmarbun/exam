@@ -15,6 +15,7 @@ import { OfficeObj } from 'app/shared/model/OfficeObj.model';
 import { VendorOfficeMbrObj } from 'app/shared/model/VendorOfficeMbrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-branch-view',
@@ -138,7 +139,7 @@ export class VendorBranchViewComponent implements OnInit {
 
     this.http.post(URLConstant.GetListVendorBankAccByVendorId, { VendorId: this.VendorId }).subscribe(
       response => {
-        this.VendorBankAcc = response['ReturnObject']
+        this.VendorBankAcc = response[CommonConstant.ReturnObj]
 
       },
       error => {
@@ -148,7 +149,7 @@ export class VendorBranchViewComponent implements OnInit {
 
     this.http.post(URLConstant.GetListVendorGrpByVendorId, { VendorId: this.VendorId }).subscribe(
       response => {
-        this.VendorGrp = response['ReturnObject']
+        this.VendorGrp = response[CommonConstant.ReturnObj]
 
       },
       error => {
@@ -158,7 +159,7 @@ export class VendorBranchViewComponent implements OnInit {
 
     this.http.post(URLConstant.GetListVendorEmpByVendorId, { VendorId: this.VendorId }).subscribe(
       response => {
-        this.VendorEmp = response['ReturnObject']
+        this.VendorEmp = response[CommonConstant.ReturnObj]
       },
       error => {
         console.log(error);
@@ -167,7 +168,7 @@ export class VendorBranchViewComponent implements OnInit {
 
     this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { VendorId: this.VendorId }).subscribe(
       response => {
-        this.VendorOfficeMbr = response['ReturnObject']
+        this.VendorOfficeMbr = response[CommonConstant.ReturnObj]
       },
       error => {
         console.log(error);

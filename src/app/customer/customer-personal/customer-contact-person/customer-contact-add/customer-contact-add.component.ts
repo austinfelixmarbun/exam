@@ -114,10 +114,10 @@ export class CustomerContactAddComponent implements OnInit {
   }
   isAdd: any;
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDtMin = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
     this.UcAddressObj = new UcAddressObj();
@@ -196,11 +196,11 @@ export class CustomerContactAddComponent implements OnInit {
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
 
     var refMasterObjMrIdTypeCode = {
-      RefMasterTypeCode: "ID_TYPE"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
-        this.tempIdType = response["ReturnObject"];
+        this.tempIdType = response[CommonConstant.ReturnObj];
         if (this.tempIdType.length > 0) {
           this.CustomerContactForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
@@ -221,7 +221,7 @@ export class CustomerContactAddComponent implements OnInit {
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrNationalityCode).subscribe(
       (response) => {
-        this.tempNationality = response["ReturnObject"];
+        this.tempNationality = response[CommonConstant.ReturnObj];
         this.CustomerContactForm.patchValue({
           MrNationalityCode: CommonConstant.NationalityCodeLocal
         });
@@ -233,7 +233,7 @@ export class CustomerContactAddComponent implements OnInit {
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
       (response) => {
-        this.tempMrMaritalStatCode = response["ReturnObject"];
+        this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
         if (this.tempMrMaritalStatCode.length > 0) {
           this.CustomerContactForm.patchValue({
             MrMaritalStatCode: this.tempMrMaritalStatCode[0].Key
@@ -246,7 +246,7 @@ export class CustomerContactAddComponent implements OnInit {
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrEducationCode).subscribe(
       (response) => {
-        this.tempMrEducationCode = response["ReturnObject"];
+        this.tempMrEducationCode = response[CommonConstant.ReturnObj];
         if (this.tempMrEducationCode.length > 0) {
           this.CustomerContactForm.patchValue({
             MrEducationCode: this.tempMrEducationCode[0].Key
@@ -258,7 +258,7 @@ export class CustomerContactAddComponent implements OnInit {
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrReligionCode).subscribe(
       (response) => {
-        this.tempMrReligionCode = response["ReturnObject"];
+        this.tempMrReligionCode = response[CommonConstant.ReturnObj];
         if (this.tempMrReligionCode.length > 0) {
           this.CustomerContactForm.patchValue({
             MrReligionCode: this.tempMrReligionCode[0].Key
@@ -271,7 +271,7 @@ export class CustomerContactAddComponent implements OnInit {
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {
-        this.tempMrCustRelationshipCode = response["ReturnObject"];
+        this.tempMrCustRelationshipCode = response[CommonConstant.ReturnObj];
         if (this.tempMrCustRelationshipCode.length > 0) {
           this.CustomerContactForm.patchValue({
             MrCustRelationshipCode: this.tempMrCustRelationshipCode[0].Key
@@ -285,7 +285,7 @@ export class CustomerContactAddComponent implements OnInit {
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
-        this.tempMrGenderCode = response["ReturnObject"];
+        this.tempMrGenderCode = response[CommonConstant.ReturnObj];
         if (this.tempMrGenderCode.length > 0) {
           this.CustomerContactForm.patchValue({
             MrGenderCode: this.tempMrGenderCode[0].Key
@@ -332,7 +332,7 @@ export class CustomerContactAddComponent implements OnInit {
               }
             );
           }
-          if (this.tempCustPersonalContactPerson.MrNationalityCode != "LOCAL") {
+          if (this.tempCustPersonalContactPerson.MrNationalityCode != CommonConstant.NationalityCodeLocal) {
             this.flag = false;
             var countryCode = {
               CountryCode: this.tempCustPersonalContactPerson.NationalityCountryCode

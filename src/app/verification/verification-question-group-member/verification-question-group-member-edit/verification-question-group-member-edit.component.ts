@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-edit',
@@ -56,7 +57,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
     var verfGroupObj = { VerfQuestionGrpDId: this.VerfQuestionGrpDId }
     this.http.post(URLConstant.GetVerfQuestionGrpDForUpdateById, verfGroupObj).subscribe(
       (response) => {
-        this.verfQuestionGroup = response["ReturnObject"];
+        this.verfQuestionGroup = response[CommonConstant.ReturnObj];
         this.QuestionGroupForm.patchValue({
           VerfQuestionGrpDId: this.verfQuestionGroup.VerfQuestionGrpDId,
           VerfQuestionGrpHId: this.verfQuestionGroup.VerfQuestionGrpHId,

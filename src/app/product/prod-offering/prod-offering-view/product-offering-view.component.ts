@@ -12,6 +12,7 @@ import { ProdOfferingCodeVersion } from "../../../shared/model/ProdOfferingCodeV
 import { saveAs } from 'file-saver';
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 
 @Component({
@@ -114,7 +115,7 @@ export class ProductOfferingViewComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdOfferingVersion = response['ReturnObject'];
+        this.ProdOfferingVersion = response[CommonConstant.ReturnObj];
 
       },
       error => {
@@ -129,7 +130,7 @@ export class ProductOfferingViewComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdOfferingBranchMbr = response['ReturnObject'];
+        this.ProdOfferingBranchMbr = response[CommonConstant.ReturnObj];
 
       },
       error => {
@@ -146,7 +147,7 @@ export class ProductOfferingViewComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdComp = response['ReturnObject'].ProdOffComponents;
+        this.ProdComp = response[CommonConstant.ReturnObj].ProdOffComponents;
         console.log(this.ProdComp);
         this.GenData = this.ProdComp.filter(
           comp => comp.GroupCode == 'GEN');

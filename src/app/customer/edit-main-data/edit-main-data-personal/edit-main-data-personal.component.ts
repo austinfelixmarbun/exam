@@ -69,10 +69,10 @@ export class EditMainDataPersonalComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDtMin = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
   
     var refMasterObjGender = {
@@ -81,7 +81,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjGender).subscribe(
       (response) => {
-        this.tempGender = response["ReturnObject"];
+        this.tempGender = response[CommonConstant.ReturnObj];
         if(this.tempGender.length > 0){
           this.CustomerPersonalForm.patchValue({
             Gender: this.tempGender[0].Key
@@ -95,7 +95,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
-        this.tempIdType = response["ReturnObject"];
+        this.tempIdType = response[CommonConstant.ReturnObj];
         if(this.tempIdType.length > 0){
           this.CustomerPersonalForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
@@ -116,7 +116,7 @@ export class EditMainDataPersonalComponent implements OnInit {
 
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response["ReturnObject"];
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         if(this.tempCustModel.length > 0){
           this.CustomerPersonalForm.patchValue({
             CustModel: this.tempCustModel[0].Key

@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-asset-document-add-edit',
@@ -55,7 +56,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
     this.http.post(URLConstant.GetListRefAssetDoc, this.assetDocListObj).subscribe(
       (response) => {
         // console.log(response);
-        this.tempAssetName = response["ReturnObject"];
+        this.tempAssetName = response[CommonConstant.ReturnObj];
         if (this.tempAssetName.length > 0) {
           this.AssetDocumentForm.patchValue({
             AssetDocName: this.tempAssetName[0].RefAssetDocId
