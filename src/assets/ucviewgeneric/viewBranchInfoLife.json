@@ -4,12 +4,13 @@
       {
         "subSectionId": "BranchInformationLifeId",
         "subSectionTitle": "Main Info",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoPath": "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "link",
             "label": "Life Insurance HO:",
             "property": "LifeHo",
+            "name": "LinkLifeHO",
             "target": "_blank",
             "path": "/Vendor/HO/View",
             "param": [

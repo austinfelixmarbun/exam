@@ -8,6 +8,8 @@ import { RefProductHOObj } from 'app/shared/model/RefProductHOObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { environment } from 'environments/environment';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-product-ho-adddetail',
@@ -20,7 +22,7 @@ export class ProductHoAdddetailComponent implements OnInit {
   mode: string = "add";
   key: any;
   criteria: CriteriaObj[] = [];
-  viewProdMainInfoObj: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   objPassing: any = {};
 
@@ -58,14 +60,16 @@ export class ProductHoAdddetailComponent implements OnInit {
 
   ngOnInit() {
     //** Main Information **//
-    if (this.source == "return") {
-      this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformationReturn.json";
-
+    if(this.source == "return")
+    {
+      this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformationReturn.json";
     }
-    else {
-      this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
+    else{
+      this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformation.json";
     }
-    this.ProdHOBj = new RefProductHOObj();
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+    
+    this.ProdHOBj=new RefProductHOObj();
     this.ProdHOBj.ProdHId = this.objPassing.param;
     this.UrlBackEnd = URLConstant.GetProductMainInfo;
     this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(

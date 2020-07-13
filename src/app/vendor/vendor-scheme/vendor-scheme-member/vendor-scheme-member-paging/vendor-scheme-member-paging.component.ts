@@ -5,6 +5,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-vendor-scheme-member-paging',
@@ -13,9 +14,9 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class VendorSchemeMemberPagingComponent implements OnInit {
 
   VendorSchmId: string;
-  viewObj: any;
   inputPagingObj: any;
   MrVendorCategoryCode: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private route: ActivatedRoute){
     this.route.queryParams.subscribe(params => {
@@ -25,6 +26,9 @@ export class VendorSchemeMemberPagingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorSchemeMember.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorSchemeMember.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
@@ -38,8 +42,6 @@ export class VendorSchemeMemberPagingComponent implements OnInit {
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.VendorSchmId;
     this.inputPagingObj.addCritInput.push(critInput);
-
-    this.viewObj = "./assets/ucviewgeneric/viewVendorSchemeMember.json";
   }
 
 }

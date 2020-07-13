@@ -5,6 +5,7 @@ import { environment } from "environments/environment";
 import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";
+import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
 
 @Component({
   selector: 'app-office-group-member',
@@ -14,8 +15,8 @@ export class OfficeGroupMemberComponent implements OnInit {
 
   RefOfficeId: string;
   CenterGrpId: string;
-  viewObj: any;
   inputPagingObj: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
@@ -25,6 +26,9 @@ export class OfficeGroupMemberComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchCenterGrpMbr.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
@@ -38,7 +42,5 @@ export class OfficeGroupMemberComponent implements OnInit {
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.RefOfficeId;
     this.inputPagingObj.addCritInput.push(critInput);
-
-    this.viewObj = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
   }
 }

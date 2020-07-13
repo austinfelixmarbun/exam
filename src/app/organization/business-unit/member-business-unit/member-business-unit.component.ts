@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'member-app-business-unit',
@@ -12,9 +13,9 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class MemberBusinessUnitComponent implements OnInit {
   RefBizUnitId: string;
-  viewObj: any;
-
   inputPagingObj: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  
   constructor(private route: ActivatedRoute){
     this.route.queryParams.subscribe(params => {
       this.RefBizUnitId = params["RefBizUnitId"];
@@ -22,6 +23,9 @@ export class MemberBusinessUnitComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewBusinessUnitMember.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchBusinessUnitMember.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
@@ -45,7 +49,5 @@ export class MemberBusinessUnitComponent implements OnInit {
     critInput.value = this.RefBizUnitId;
     this.inputPagingObj.addCritInput.push(critInput);
     console.log(this.inputPagingObj);
-
-    this.viewObj = "./assets/ucviewgeneric/viewBusinessUnitMember.json";
   }
 }

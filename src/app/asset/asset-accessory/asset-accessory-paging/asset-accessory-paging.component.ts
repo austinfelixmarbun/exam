@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-asset-accessory-paging',
@@ -13,9 +14,9 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class AssetAccessoryPagingComponent implements OnInit {
   AssetTypeId: number;
   inputPagingObj: UcPagingObj = new UcPagingObj();
-  viewObj: string;
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
   critObj: CriteriaObj = new CriteriaObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
@@ -30,7 +31,9 @@ export class AssetAccessoryPagingComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetAccessory.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
-    this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
+    
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetType.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.critObj.restriction = AdInsConstant.RestrictionLike;
     this.critObj.propName = 'ASSET_TYPE_ID';

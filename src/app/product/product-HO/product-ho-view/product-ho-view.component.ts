@@ -1,18 +1,15 @@
 import { environment } from "environments/environment";
 import { Component, OnInit, ViewChild, Input } from "@angular/core";
-import { AdInsConstant } from "app/shared/AdInstConstant";
 import { DecimalPipe } from "@angular/common";
-import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
 import { RefProductBrancMbrObj } from "../../../shared/model/RefProductBrancMbrObj.Model";
 import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
-import { getComponent } from "@angular/core/src/linker/component_factory_resolver";
 import { saveAs } from 'file-saver';
 import { URLConstant } from "app/shared/constant/URLConstant";
+import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
 
 
 
@@ -27,7 +24,6 @@ export class ProductHOViewComponent implements OnInit {
 
   prodId: any;
   prodHId: any;
-  viewProdMainInfoObj: any;
   ProdBranchMemObj: any;
   ProdVersionObj: any;
   ProdBranchUrl: any;
@@ -41,6 +37,8 @@ export class ProductHOViewComponent implements OnInit {
   ProdVersion: any;
   ProdComp: any;
   IsLoaded: boolean = false;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
     this.ProdDUrl = URLConstant.GetProductDetailComponentInfo;
@@ -58,12 +56,13 @@ export class ProductHOViewComponent implements OnInit {
     CompntValue: "",
   };
   async ngOnInit(): Promise<void> {
-    if(this.prodHId == undefined){
+    if (this.prodHId == undefined) {
       this.prodHId = this.inputProdHId;
     }
-    
+
     //** Main Information **//
-    this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformation.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     //** Product Version **//
     this.ProdVersionObj = new ProdHVersionObj

@@ -1,4 +1,3 @@
-import { formatDate } from "@angular/common";
 import { environment } from "../../environments/environment";
 
 export class AdInsConstant {
@@ -37,6 +36,4 @@ export class AdInsConstant {
   public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
-
-
 }

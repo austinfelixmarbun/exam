@@ -10,6 +10,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-vendor-holding-view',
@@ -20,19 +21,19 @@ export class VendorHoldingViewComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) UCGridFooter;
   @ViewChild(UCSearchComponent) UCSearchComponent;
   VendorId: any;
-  viewVendorHoldingObj: string;
+  viewVendorHoldingObj: UcViewGenericObj = new UcViewGenericObj();
   arrCrit: any[];
   vendorHoObj: VendorHoObj;
   MainInfo: any;
   vendorAddrObj: VendorHoObj;
   MrVendorTypeCode: any;
-  viewVendorHoldingMainPObj: string;
-  viewVendorHoldingMainCObj: string;
-  viewVendorHoldingTaxObj: string;
-  viewVendorHoldingTaxAddrObj: string;
-  viewVendorHoldingAddrObj: string;
-  viewVendorHoldingLtLgObj: string;
-
+  viewVendorHoldingMainPObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingMainCObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingTaxObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingTaxAddrObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingAddrObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingLtLgObj: UcViewGenericObj = new UcViewGenericObj();
+  
   VendorGrp: any;
   GroupListObj: VendorGroupObj;
   HoListObj: VendorObj;
@@ -77,15 +78,21 @@ export class VendorHoldingViewComponent implements OnInit {
       }
     )
 
-
-    console.log(this.MrVendorTypeCode);
-    this.viewVendorHoldingObj = "./assets/ucviewgeneric/viewVendorHolding.json";
-    this.viewVendorHoldingMainPObj = "./assets/ucviewgeneric/viewVendorHoldingMainP.json";
-    this.viewVendorHoldingMainCObj = "./assets/ucviewgeneric/viewVendorHoldingMainC.json";
-    this.viewVendorHoldingTaxObj = "./assets/ucviewgeneric/viewVendorHoldingTax.json";
-    this.viewVendorHoldingTaxAddrObj = "./assets/ucviewgeneric/viewVendorHoldingTaxAddr.json";
-    this.viewVendorHoldingAddrObj = "./assets/ucviewgeneric/viewVendorHoldingAddr.json";
-    this.viewVendorHoldingLtLgObj = "./assets/ucviewgeneric/viewVendorHoldingLtLg.json";
+    this.viewVendorHoldingObj.viewInput = "./assets/ucviewgeneric/viewVendorHolding.json";
+    this.viewVendorHoldingObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingMainPObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainP.json";
+    this.viewVendorHoldingMainPObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingMainCObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainC.json";
+    this.viewVendorHoldingMainCObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingTaxObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingTax.json";
+    this.viewVendorHoldingTaxObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingTaxAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingTaxAddr.json";
+    this.viewVendorHoldingTaxAddrObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingAddr.json";
+    this.viewVendorHoldingAddrObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingLtLgObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingLtLg.json";
+    this.viewVendorHoldingLtLgObj.viewEnvironment = environment.FoundationR3Url;
+    
     this.GetListVendorContactPersonByVendorId();
 
     this.listSelectedId = new Array();

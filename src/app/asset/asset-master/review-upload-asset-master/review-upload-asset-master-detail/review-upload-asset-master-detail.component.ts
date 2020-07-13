@@ -8,6 +8,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-review-upload-asset-master-detail',
@@ -15,10 +16,10 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class ReviewUploadAssetMasterDetailComponent implements OnInit {
   uploadNo: string;
-  viewUpload: string = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
   inputPagingObj: UcPagingObj = new UcPagingObj();
   arrCrit = new Array();
   taskListId: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -31,6 +32,9 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.claimTask();
 
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadAssetMasterDetail.json";

@@ -4,7 +4,7 @@
       {
         "subSectionId": "Area Info",
         "subSectionTitle": "Area Info",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoPath": "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "text",

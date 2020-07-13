@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-product-ho-deact-apv-detail',
@@ -17,7 +18,7 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
   taskId: number;
   instanceId: number;
   inputObj: any;
-  viewProdMainInfoObj: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
 
   constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private http:HttpClient) { 
@@ -31,7 +32,9 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformationForDeactApv.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformationForDeactApv.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+    
     var obj = {
       taskId: this.taskId,
       instanceId: this.instanceId,

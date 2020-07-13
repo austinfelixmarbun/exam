@@ -11,6 +11,7 @@ import { RefProductOfferingDetailObj } from "../../../shared/model/RefProductOff
 import { ProdOfferingCodeVersion } from "../../../shared/model/ProdOfferingCodeVersion.Model";
 import { saveAs } from 'file-saver';
 import { URLConstant } from "app/shared/constant/URLConstant";
+import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
 
 
 @Component({
@@ -24,7 +25,6 @@ export class ProductOfferingViewComponent implements OnInit {
   prodOfferingHId: any;
   prodOfferingCode: any;
   prodOfferingVersion: any;
-  viewProdOfferMainInfoObj: any;
   ProdOfferingBranchMemObj: any;
   ProdOfferingVersionObj: any;
   GetProdOfferByVerCode: any;
@@ -42,6 +42,7 @@ export class ProductOfferingViewComponent implements OnInit {
   ProdOfferingCodeVersion: any;
   mainInfoByHIdOnly: boolean = true;
   IsLoaded: boolean = false;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   DlRuleObj = {
     CompntValue: "",
@@ -94,11 +95,12 @@ export class ProductOfferingViewComponent implements OnInit {
     }
     //** Main Information **//
     if (this.mainInfoByHIdOnly == true) {
-      this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
+      this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
     }
     else {
-      this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformationByCode.json";
+      this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductOfferingMainInformationByCode.json";
     }
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
 
     if (this.prodOfferingHId == 0) {
@@ -139,7 +141,7 @@ export class ProductOfferingViewComponent implements OnInit {
     //** Product Component **//
     this.refProductDetailObj = new RefProductOfferingDetailObj;
     this.refProductDetailObj.ProdOfferingHId = this.prodOfferingHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR','LOS'];
+    this.refProductDetailObj.RefProdCompntGrpCode = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR', 'LOS'];
     await this.http.post(this.ProdOfferingDUrl, this.refProductDetailObj).toPromise().then(
       response => {
         console.log("Response: ");

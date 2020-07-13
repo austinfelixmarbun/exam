@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-vendor-holding-registration',
   templateUrl: './vendor-holding-registration.component.html'
 })
 export class VendorHoldingRegistrationComponent implements OnInit {
-  viewObj: any;
   VendorId : any;
   objPassing: any = {};
   objPassingCP: any = {};
@@ -15,6 +16,8 @@ export class VendorHoldingRegistrationComponent implements OnInit {
   HiddenState: boolean = true;
   show : boolean = false;
   ButtonText : string = "Back";
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
@@ -22,7 +25,9 @@ export class VendorHoldingRegistrationComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewVendorHolding.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorHolding.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.VendorId = this.objPassing["VendorId"];
     this.objPassing["Type"]="Vendor";
   }
