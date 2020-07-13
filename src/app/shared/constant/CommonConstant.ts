@@ -3,7 +3,6 @@ export class CommonConstant {
 
     // APPLICATION DATA
     public static USER_ACCESS = "UserAccess";
-    public static ReturnObj = 'ReturnObject';
     public static USER_NAME = "UserName";
     public static BUSINESS_DT = "BusinessDt"; 
     public static BUSINESS_DATE_RAW = "BusinessDateRaw";
@@ -13,7 +12,9 @@ export class CommonConstant {
     public static LOCAL_IP = "LocalIp"; 
     public static VERSION = "Version";
     public static LAST_ACCESS_TIME = "LastAccessTime";
-    public static MENU = "Menmu"
+    public static MENU = "Menu"
+    public static ReturnObj = 'ReturnObject';
+
     //APPROVAL TASK MAPPER - TRX TYPE
     public static ApvTrxTypeProductHO = "PROD_HO_APV";
     public static ApvTrxTypeProductHODeact = "PROD_HO_DEACT_APV";
