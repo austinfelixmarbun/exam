@@ -4,7 +4,7 @@
     {
       "subSectionId": "RefFormId",
       "subSectionTitle": "Ref Form",
-      "mainInfoUrl": "http://r3app-server/Foundation_R3/Generic/GetDataViewBySQL",
+      "mainInfoPath": "/Generic/GetDataViewBySQL",
       "mainInfo": [
         {
           "type": "text",

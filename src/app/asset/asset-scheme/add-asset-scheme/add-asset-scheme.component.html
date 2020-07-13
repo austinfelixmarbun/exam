@@ -19,7 +19,7 @@
     </div>
   </div>
 </section>
-<lib-ucviewgeneric [viewInput]="viewObj"></lib-ucviewgeneric>
+<lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
 <form class="form form-horizontal" name="AssetSchmForm" #AssetSchmForm="ngForm" novalidate
   (ngSubmit)="SaveAssetSchmMember(AssetSchmForm)">
   <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">

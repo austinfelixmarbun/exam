@@ -5,6 +5,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-product-offering-deact-apv-detail',
@@ -14,25 +15,27 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit {
 
   prodOfferingHId: any;
-  viewProdOfferMainInfoObj: any;
   taskId: number;
   instanceId: number;
   inputObj: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
-  constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private http:HttpClient) {
+  constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdOfferingHId"] != null) {
         this.prodOfferingHId = params["ProdOfferingHId"];
         this.taskId = params["TaskId"];
         this.instanceId = params["InstanceId"];
 
-        
+
       }
     });
-   }
+  }
 
   ngOnInit() {
-    this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformationForDeactApv.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductOfferingMainInformationForDeactApv.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     var obj = {
       taskId: this.taskId,
       instanceId: this.instanceId,
@@ -47,20 +50,18 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
     this.HoldTask(ApvHoldObj);
   }
 
-  HoldTask(obj){
+  HoldTask(obj) {
     this.http.post(AdInsConstant.ApvHoldTaskUrl, obj).subscribe(
-      (response)=>{
+      (response) => {
       }
     )
   }
 
-  onAvailableNextTask()
-  {
-    
+  onAvailableNextTask() {
+
   }
 
-  onApprovalSubmited()
-  {
+  onApprovalSubmited() {
     this.toastr.successMessage("Success");
     this.router.navigate(["/Product/OfferingDeactivateApproval"]);
   }

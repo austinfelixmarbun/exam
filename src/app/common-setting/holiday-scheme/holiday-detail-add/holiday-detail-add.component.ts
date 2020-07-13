@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HolidayDByYearObj } from 'app/shared/model/HolidayDByYearObj.Model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-holiday-detail-add',
@@ -15,12 +17,12 @@ import { HolidayDByYearObj } from 'app/shared/model/HolidayDByYearObj.Model';
 export class HolidayDetailAddComponent implements OnInit {
 
   HolidaySchmHId: string;
-  viewObj: any;
   title: string = "Holiday Detail";
   holidayDetailObj: HolidayDObj;
   holidayDetailByYearObj: HolidayDByYearObj;
   check: boolean = false;
   mode: any = "";
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   HolidayListForm = this.fb.group({
     IsPublicHoliday: [false, Validators.required],
@@ -44,10 +46,10 @@ export class HolidayDetailAddComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.viewObj = "./assets/ucviewgeneric/viewHolidayDetail.json";
-
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHolidayDetail.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
+  
   SaveForm() {
     if (this.HolidayListForm.controls.IsPublicHoliday.value) {
       this.holidayDetailObj = new HolidayDObj;

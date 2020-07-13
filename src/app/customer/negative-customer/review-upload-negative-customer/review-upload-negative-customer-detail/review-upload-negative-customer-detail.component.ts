@@ -8,6 +8,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-review-upload-negative-customer-detail',
@@ -16,12 +17,12 @@ import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 })
 export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   uploadNo: string;
-  viewUpload: string;
   inputPagingObj: any;
   arrCrit = new Array();
   taskListId: any;
   UploadReviewUrl: string;
   CancelUpload: string;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -32,9 +33,12 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
         this.taskListId = params["TaskListId"];
       }
     });
-    this.viewUpload = "./assets/ucviewgeneric/viewReviewUploadNegativeCust.json";
   }
-  ngOnInit() {
+  
+  ngOnInit() {    
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewReviewUploadNegativeCust.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.claimTask();
     this.UploadReviewUrl = AdInsConstant.UploadReview;
     this.CancelUpload = AdInsConstant.CancelUpload;

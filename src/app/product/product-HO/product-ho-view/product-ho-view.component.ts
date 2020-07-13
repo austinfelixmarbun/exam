@@ -12,6 +12,7 @@ import { RefProductBrancMbrObj } from "../../../shared/model/RefProductBrancMbrO
 import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
 import { getComponent } from "@angular/core/src/linker/component_factory_resolver";
 import { saveAs } from 'file-saver';
+import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
 
 
 
@@ -26,7 +27,6 @@ export class ProductHOViewComponent implements OnInit {
 
   prodId: any;
   prodHId: any;
-  viewProdMainInfoObj: any;
   ProdBranchMemObj: any;
   ProdVersionObj: any;
   ProdBranchUrl: any;
@@ -40,6 +40,8 @@ export class ProductHOViewComponent implements OnInit {
   ProdVersion: any;
   ProdComp: any;
   IsLoaded: boolean = false;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
     this.ProdDUrl = AdInsConstant.GetProductDetailComponentInfo;
@@ -57,12 +59,13 @@ export class ProductHOViewComponent implements OnInit {
     CompntValue: "",
   };
   async ngOnInit(): Promise<void> {
-    if(this.prodHId == undefined){
+    if (this.prodHId == undefined) {
       this.prodHId = this.inputProdHId;
     }
-    
+
     //** Main Information **//
-    this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformation.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     //** Product Version **//
     this.ProdVersionObj = new ProdHVersionObj

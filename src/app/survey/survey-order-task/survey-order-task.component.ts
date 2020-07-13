@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-survey-order-task',
@@ -22,7 +24,6 @@ export class SurveyOrderTaskComponent implements OnInit {
     SurveyorCode: ['', [Validators.required]]
   });
 
-  viewObj: string;
   modal: any;
   closeResult: any;
   SurveyTaskList: any;
@@ -34,6 +35,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   SrvyOrderObj: any;
   SrvyTaskObj: SrvyTaskObj = new SrvyTaskObj();
   VendorObj: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private fb: FormBuilder, private modalService: NgbModal,
     private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
@@ -46,7 +48,8 @@ export class SurveyOrderTaskComponent implements OnInit {
 
   ngOnInit() {
     this.SurveyTaskList = new Array();
-    this.viewObj = "./assets/ucviewgeneric/viewSurveyOrderTask.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrderTask.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.generateSurveyTaskList();
     this.generateListSrvyObject();

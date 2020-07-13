@@ -13,6 +13,7 @@ import { VendorBankAccObj } from 'app/shared/model/VendorBankAccObj.Model';
 import { VendorEmpObj } from 'app/shared/model/VendorEmpObj.Model';
 import { OfficeObj } from 'app/shared/model/OfficeObj.model';
 import { VendorOfficeMbrObj } from 'app/shared/model/VendorOfficeMbrObj.Model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-vendor-branch-view',
@@ -41,20 +42,20 @@ export class VendorBranchViewComponent implements OnInit {
   listSelectedId: any[];
   MrVendorTypeObj: any;
 
-  viewVendorBranchObj: string;
-  viewVendorBranchMainPObj: string;
-  viewBranchInfoSuppObj: string;
-  viewBranchInfoSurObj: string;
-  viewBranchInfoAssetObj: string;
-  viewBranchInfoLifeObj: string;
-  viewBranchAgencyPObj: string;
-  viewBranchAgencyCObj: string;
-  viewVendorBranchMainCObj: string;
+  viewVendorBranchObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorBranchMainPObj: UcViewGenericObj = new UcViewGenericObj();
+  viewBranchInfoSuppObj: UcViewGenericObj = new UcViewGenericObj();
+  viewBranchInfoSurObj: UcViewGenericObj = new UcViewGenericObj();
+  viewBranchInfoAssetObj: UcViewGenericObj = new UcViewGenericObj();
+  viewBranchInfoLifeObj: UcViewGenericObj = new UcViewGenericObj();
+  viewBranchAgencyPObj: UcViewGenericObj = new UcViewGenericObj();
+  viewBranchAgencyCObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorBranchMainCObj: UcViewGenericObj = new UcViewGenericObj();
   MrVendorCategoryCode: any;
-  viewVendorBranchTaxObj: string;
-  viewVendorBranchTaxAddrObj: string;
-  viewVendorBranchAddrObj: string;
-  viewVendorBranchLtLgObj: string;
+  viewVendorBranchTaxObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorBranchTaxAddrObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorBranchAddrObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorBranchLtLgObj: UcViewGenericObj = new UcViewGenericObj();
 
   VendorBankAccListObj: VendorBankAccObj;
   VendorBankAcc: any;
@@ -89,19 +90,52 @@ export class VendorBranchViewComponent implements OnInit {
       }
     )
 
-    this.viewVendorBranchObj = "./assets/ucviewgeneric/viewVendorBranch.json";
-    this.viewVendorBranchMainPObj = "./assets/ucviewgeneric/viewVendorBranchMainP.json";
-    this.viewVendorBranchMainCObj = "./assets/ucviewgeneric/viewVendorBranchMainC.json";
-    this.viewBranchInfoSuppObj = "./assets/ucviewgeneric/viewVendorBranchInfoSupp.json";
-    this.viewBranchInfoSurObj = "./assets/ucviewgeneric/viewVendorBranchInfoSur.json";
-    this.viewBranchInfoAssetObj = "./assets/ucviewgeneric/viewBranchInfoAsset.json";
-    this.viewBranchInfoLifeObj = "./assets/ucviewgeneric/viewBranchInfoLife.json";
+    this.viewVendorBranchObj.viewInput = "./assets/ucviewgeneric/viewVendorBranch.json";
+    this.viewVendorBranchObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorBranchMainPObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchMainP.json";
+    this.viewVendorBranchMainPObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorBranchMainCObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchMainC.json";
+    this.viewVendorBranchMainCObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewBranchInfoSuppObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchInfoSupp.json";
+    this.viewBranchInfoSuppObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewBranchInfoSuppObj.ddlEnvironments = [
+      {
+        name: "LinkSupplierHO",
+        environment: environment.FoundationR3Web
+      },
+    ];
+    this.viewBranchInfoSurObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchInfoSur.json";
+    this.viewBranchInfoSurObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewBranchInfoSurObj.ddlEnvironments = [
+      {
+        name: "LinkSurveyorHO",
+        environment: environment.FoundationR3Web
+      },
+    ];
+    this.viewBranchInfoAssetObj.viewInput = "./assets/ucviewgeneric/viewBranchInfoAsset.json";
+    this.viewBranchInfoAssetObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewBranchInfoAssetObj.ddlEnvironments = [
+      {
+        name: "LinkAssetHO",
+        environment: environment.FoundationR3Web
+      },
+    ];
+    this.viewBranchInfoLifeObj.viewInput = "./assets/ucviewgeneric/viewBranchInfoLife.json";
+    this.viewBranchInfoLifeObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewBranchInfoLifeObj.ddlEnvironments = [
+      {
+        name: "LinkLifeHO",
+        environment: environment.FoundationR3Web
+      },
+    ];
+    this.viewVendorBranchTaxObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchTax.json";
+    this.viewVendorBranchTaxObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorBranchTaxAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchTaxAddr.json";
+    this.viewVendorBranchTaxAddrObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorBranchAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchAddr.json";
+    this.viewVendorBranchAddrObj.viewEnvironment = environment.FoundationR3Url;
 
-    this.viewVendorBranchTaxObj = "./assets/ucviewgeneric/viewVendorBranchTax.json";
-    this.viewVendorBranchTaxAddrObj = "./assets/ucviewgeneric/viewVendorBranchTaxAddr.json";
-    this.viewVendorBranchAddrObj = "./assets/ucviewgeneric/viewVendorBranchAddr.json";
-
-    this.http.post(AdInsConstant.GetListVendorBankAccByVendorId, {VendorId : this.VendorId}).subscribe(
+    this.http.post(AdInsConstant.GetListVendorBankAccByVendorId, { VendorId: this.VendorId }).subscribe(
       response => {
         this.VendorBankAcc = response['ReturnObject']
 
@@ -111,7 +145,7 @@ export class VendorBranchViewComponent implements OnInit {
       }
     )
 
-    this.http.post(AdInsConstant.GetListVendorGrpByVendorId, {VendorId : this.VendorId}).subscribe(
+    this.http.post(AdInsConstant.GetListVendorGrpByVendorId, { VendorId: this.VendorId }).subscribe(
       response => {
         this.VendorGrp = response['ReturnObject']
 
@@ -121,7 +155,7 @@ export class VendorBranchViewComponent implements OnInit {
       }
     )
 
-    this.http.post(AdInsConstant.GetListVendorEmpByVendorId, {VendorId : this.VendorId}).subscribe(
+    this.http.post(AdInsConstant.GetListVendorEmpByVendorId, { VendorId: this.VendorId }).subscribe(
       response => {
         this.VendorEmp = response['ReturnObject']
       },
@@ -130,7 +164,7 @@ export class VendorBranchViewComponent implements OnInit {
       }
     )
 
-    this.http.post(AdInsConstant.GetListVendorOfficeMbrByVendorId, {VendorId : this.VendorId}).subscribe(
+    this.http.post(AdInsConstant.GetListVendorOfficeMbrByVendorId, { VendorId: this.VendorId }).subscribe(
       response => {
         this.VendorOfficeMbr = response['ReturnObject']
       },

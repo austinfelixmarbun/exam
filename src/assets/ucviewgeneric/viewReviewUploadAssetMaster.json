@@ -4,7 +4,7 @@
     {
       "subSectionId": "ReviewUploadId",
       "subSectionTitle": "REVIEW UPLOAD ASSET MASTER",
-      "mainInfoUrl": "http://r3app-server.ad-ins.com/Foundation_R3/Generic/GetDataViewBySQL",
+      "mainInfoPath": "/Generic/GetDataViewBySQL",
       "mainInfo": [
         {
           "type": "text",

@@ -8,6 +8,9 @@ import { NgForm, FormBuilder, Validators, FormArray, FormGroup } from '@angular/
 import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
 import { WorkingHourSchmDObj } from 'app/shared/model/WorkingHourSchmDObj.Model';
 import { ListWorkingHourSchmDObj } from 'app/shared/model/ListWorkingHourSchmDObj.Model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+
+
 import { String, StringBuilder } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -19,7 +22,6 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 })
 
 export class WorkingHourDDetailComponent implements OnInit {
-  viewObj: any;
   workingHourSchmHId: any;
   isActive: boolean = true;
   workingHourSchmHObj: WorkingHourSchmHObj;
@@ -31,6 +33,7 @@ export class WorkingHourDDetailComponent implements OnInit {
   addUrl: any;
   editUrl: any;
   items: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   listOfDay: any = [
     {
@@ -118,7 +121,9 @@ export class WorkingHourDDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewWorkingHourScheme.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewWorkingHourScheme.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.workingHourSchmHObj = new WorkingHourSchmHObj();
     this.workingHourSchmHObj.WorkingHourSchmHId = this.workingHourSchmHId;
     this.items = this.WorkingHourSchmDForm.get('items') as FormArray;

@@ -12,6 +12,7 @@ import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsService } from 'app/shared/services/adIns.service';
 import { AssetSchmDObj } from 'app/shared/model/AssetSchmDObj.Model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -50,7 +51,8 @@ export class AddAssetSchemeComponent implements OnInit {
 
   AssetSchmHId: any;
   getListAssetSchmDByAssetSchmHId = AdInsConstant.GetListAssetSchmDByAssetSchmHId;
-  viewObj: string;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+
   constructor(
     private http: HttpClient,
     private toastr: NGXToastrService,
@@ -59,7 +61,9 @@ export class AddAssetSchemeComponent implements OnInit {
     private adInsService: AdInsService) { }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewAssetSchemeMember.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetSchemeMember.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+    
     this.arrCrit = new Array();
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {

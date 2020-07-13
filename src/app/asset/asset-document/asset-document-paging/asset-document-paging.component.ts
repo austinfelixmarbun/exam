@@ -4,6 +4,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-asset-document-paging',
@@ -12,9 +13,10 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 export class AssetDocumentPagingComponent implements OnInit {
   AssetTypeId: number;
   inputPagingObj: UcPagingObj = new UcPagingObj();
-  viewObj: string;
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
   critObj: CriteriaObj = new CriteriaObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
@@ -30,7 +32,8 @@ export class AssetDocumentPagingComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetDocument.json";
     this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetDocList;
 
-    this.viewObj = "./assets/ucviewgeneric/viewAssetType.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetType.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.critObj.restriction = AdInsConstant.RestrictionLike;
     this.critObj.propName = 'ASSET_TYPE_ID';

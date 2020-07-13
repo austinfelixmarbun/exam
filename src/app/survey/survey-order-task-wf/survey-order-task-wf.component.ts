@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-survey-order-task-wf',
@@ -23,7 +25,6 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     SurveyorCode: ['', [Validators.required]]
   });
   arrValue = [];
-  viewObj: string;
   modal: any;
   closeResult: any;
   SurveyTaskList: any;
@@ -38,6 +39,8 @@ export class SurveyOrderTaskWfComponent implements OnInit {
   TrxNo: string;
   TrxType: string;
   isDataAlreadyLoaded: boolean = false;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  
   constructor(private fb: FormBuilder, private modalService: NgbModal,
     private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -51,8 +54,10 @@ export class SurveyOrderTaskWfComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrderTask.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.SurveyTaskList = new Array();
-    this.viewObj = "./assets/ucviewgeneric/viewSurveyOrderTask.json";
     this.SrvyTaskObj = new SrvyTaskObj();
 
     var SrvyObj = {
@@ -64,6 +69,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
         this.SrvyOrderObj = response;
         this.SrvyOrderId = this.SrvyOrderObj["SrvyOrderId"];
         this.arrValue.push(this.SrvyOrderId);
+        this.viewGenericObj.whereValue = this.arrValue;
         this.isDataAlreadyLoaded = true;
         var VendorObj = {
           VendorId: this.SrvyOrderObj.VendorId

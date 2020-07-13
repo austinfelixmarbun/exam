@@ -7,6 +7,8 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { RefProductHOObj } from 'app/shared/model/RefProductHOObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-product-ho-adddetail',
@@ -19,7 +21,7 @@ export class ProductHoAdddetailComponent implements OnInit {
   mode: string = "add";
   key: any;
   criteria: CriteriaObj[] = [];
-  viewProdMainInfoObj: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   objPassing: any = {};
 
@@ -59,12 +61,13 @@ export class ProductHoAdddetailComponent implements OnInit {
     //** Main Information **//
     if(this.source == "return")
     {
-      this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformationReturn.json";
-
+      this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformationReturn.json";
     }
     else{
-      this.viewProdMainInfoObj = "./assets/ucviewgeneric/viewProductMainInformation.json";
+      this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformation.json";
     }
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+    
     this.ProdHOBj=new RefProductHOObj();
     this.ProdHOBj.ProdHId = this.objPassing.param;
     this.UrlBackEnd=AdInsConstant.GetProductMainInfo;
