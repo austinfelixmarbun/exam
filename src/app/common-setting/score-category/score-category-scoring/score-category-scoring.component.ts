@@ -5,9 +5,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { RefScoreCategoryTypeObj } from 'app/shared/model/ScoreCategory/RefScoreCategoryTypeObj.model';
-import { RefScoreCategoryObj } from 'app/shared/model/ScoreCategory/RefScoreCategoryObj.model';
-import { ListRefScoreCategoryObj } from 'app/shared/model/ScoreCategory/ListRefScoreCategoryObj.model';
+import { ScoreCategorySchmHObj } from 'app/shared/model/ScoreCategory/ScoreCategorySchmHObj.model';
+import { ScoreCategorySchmDObj } from 'app/shared/model/ScoreCategory/ScoreCategorySchmDObj.model';
+import { ListScoreCategorySchmDObj } from 'app/shared/model/ScoreCategory/ListScoreCategorySchmDObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-score-category-scoring',
@@ -15,12 +16,12 @@ import { ListRefScoreCategoryObj } from 'app/shared/model/ScoreCategory/ListRefS
   providers: [NGXToastrService]
 })
 export class ScoreCategoryScoringComponent implements OnInit {
-  refScoreCategoryTypeObj: RefScoreCategoryTypeObj = new RefScoreCategoryTypeObj();
-  refScoreCategoryTypeId: number = 0;
-  listRefScoreCategoryObj: ListRefScoreCategoryObj = new ListRefScoreCategoryObj();
+  scoreCategorySchmHObj: ScoreCategorySchmHObj = new ScoreCategorySchmHObj();
+  scoreCategorySchmHId: number = 0;
+  listScoreCategorySchmDObj: ListScoreCategorySchmDObj = new ListScoreCategorySchmDObj();
 
-  RefScoreCategoryForm = this.fb.group({
-    RefScoreCategoryTypeObjs: new FormArray([])
+  ScoreCategoryForm = this.fb.group({
+    ScoreCategorySchmDObjs: new FormArray([])
   });
 
   ListHexColorValue: Array<string> = new Array<string>();
@@ -35,30 +36,30 @@ export class ScoreCategoryScoringComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['RefScoreCategoryTypeId'] != null) {
-        this.refScoreCategoryTypeId = params['RefScoreCategoryTypeId'];
+      if (params['ScoreCategorySchmHId'] != null) {
+        this.scoreCategorySchmHId = params['ScoreCategorySchmHId'];
       }
     });
   }
 
 
   ngOnInit() {   
-    this.refScoreCategoryTypeObj.RefScoreCategoryTypeId = this.refScoreCategoryTypeId;
-    this.httpClient.post(AdInsConstant.GetRefScoreCategoryTypeWithDetailById, this.refScoreCategoryTypeObj).subscribe(
+    this.scoreCategorySchmHObj.ScoreCategorySchmHId = this.scoreCategorySchmHId;
+    this.httpClient.post(URLConstant.GetRefScoreCategoryTypeWithDetailById, this.scoreCategorySchmHObj).subscribe(
       (response) => {
-        this.refScoreCategoryTypeObj.RefScoreCategoryTypeCode = response["RefScoreCategoryTypeCode"];
-        this.refScoreCategoryTypeObj.Descr = response["Descr"];
-        this.refScoreCategoryTypeObj.Notes = response["Notes"];
+        this.scoreCategorySchmHObj.ScoreCategorySchmHCode = response["ScoreCategorySchmHCode"];
+        this.scoreCategorySchmHObj.ScoreCategorySchmHName = response["ScoreCategorySchmHName"];
+        this.scoreCategorySchmHObj.Notes = response["Notes"];
 
-        if(response["RefScoreCategoryObjs"] != null){
-          var listRefScoreCategory = response["RefScoreCategoryObjs"];
-          var scoreForm = this.RefScoreCategoryForm.controls.RefScoreCategoryTypeObjs as FormArray;
+        if(response["ScoreCategorySchmDObjs"] != null){
+          var listScoreCategorySchmD = response["ScoreCategorySchmDObjs"];
+          var scoreForm = this.ScoreCategoryForm.controls.ScoreCategorySchmDObjs as FormArray;
 
-          for(let i = 0; i < listRefScoreCategory.length; i++){
-            this.maxBottomValue.push(listRefScoreCategory[i].TopValue);
-            this.minTopValue.push(listRefScoreCategory[i].BottomValue);
-            scoreForm.push(this.addGroup(listRefScoreCategory[i], this.maxBottomValue[this.maxBottomValue.length -1], this.minTopValue[this.minTopValue.length - 1]));
-            this.ListHexColorValue.push(listRefScoreCategory[i].HexColorValue);
+          for(let i = 0; i < listScoreCategorySchmD.length; i++){
+            this.maxBottomValue.push(listScoreCategorySchmD[i].TopValue);
+            this.minTopValue.push(listScoreCategorySchmD[i].BottomValue);
+            scoreForm.push(this.addGroup(listScoreCategorySchmD[i], this.maxBottomValue[this.maxBottomValue.length -1], this.minTopValue[this.minTopValue.length - 1]));
+            this.ListHexColorValue.push(listScoreCategorySchmD[i].HexColorValue);
           }
         }
       },
@@ -69,7 +70,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
   }
 
   addScore(){
-    var scoreForm = this.RefScoreCategoryForm.controls.RefScoreCategoryTypeObjs as FormArray;
+    var scoreForm = this.ScoreCategoryForm.controls.ScoreCategorySchmDObjs as FormArray;
     this.maxBottomValue.push(0);
     this.minTopValue.push(0);
     scoreForm.push(this.addGroup(undefined, this.maxBottomValue[this.maxBottomValue.length -1], this.minTopValue[this.minTopValue.length - 1]));
@@ -78,7 +79,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
 
   deleteScore(i){
     if (confirm('Are you sure to delete this record?')) {
-      var scoreForm = this.RefScoreCategoryForm.controls.RefScoreCategoryTypeObjs as FormArray;
+      var scoreForm = this.ScoreCategoryForm.controls.ScoreCategorySchmDObjs as FormArray;
       scoreForm.removeAt(i);
       this.maxBottomValue.splice(i, 1);
       this.minTopValue.splice(i, 1);
@@ -86,8 +87,8 @@ export class ScoreCategoryScoringComponent implements OnInit {
     }
   }
 
-  addGroup(refScoreCategoryObj, maxBottomValue, minTopValue){
-    if(refScoreCategoryObj == undefined){
+  addGroup(scoreCategorySchmDObj, maxBottomValue, minTopValue){
+    if(scoreCategorySchmDObj == undefined){
       return this.fb.group({
         BottomValue: [0, [Validators.required, Validators.max(maxBottomValue)]],
         TopValue: [0, [Validators.required, Validators.min(minTopValue)]],
@@ -95,53 +96,53 @@ export class ScoreCategoryScoringComponent implements OnInit {
       })
     }else{
       return this.fb.group({
-        BottomValue: [refScoreCategoryObj.BottomValue, [Validators.required, Validators.max(maxBottomValue)]],
-        TopValue: [refScoreCategoryObj.TopValue, [Validators.required, Validators.min(minTopValue)]],
-        HexColorValue: [refScoreCategoryObj.HexColorValue, [Validators.required, Validators.maxLength(50)]]
+        BottomValue: [scoreCategorySchmDObj.BottomValue, [Validators.required, Validators.max(maxBottomValue)]],
+        TopValue: [scoreCategorySchmDObj.TopValue, [Validators.required, Validators.min(minTopValue)]],
+        HexColorValue: [scoreCategorySchmDObj.HexColorValue, [Validators.required, Validators.maxLength(50)]]
       })
     } 
   }
 
   HexColorValueChanged(event, i){
-    this.RefScoreCategoryForm.controls["RefScoreCategoryTypeObjs"]["controls"][i].patchValue({
+    this.ScoreCategoryForm.controls["ScoreCategorySchmDObjs"]["controls"][i].patchValue({
       HexColorValue: event
     });
   }
 
   BottomValueChanged(event, i){
-    this.RefScoreCategoryForm.controls["RefScoreCategoryTypeObjs"]["controls"][i]["controls"].TopValue.setValidators([Validators.required, Validators.min(event.target.value)]);
-    this.RefScoreCategoryForm.controls["RefScoreCategoryTypeObjs"]["controls"][i]["controls"].TopValue.updateValueAndValidity();
+    this.ScoreCategoryForm.controls["ScoreCategorySchmDObjs"]["controls"][i]["controls"].TopValue.setValidators([Validators.required, Validators.min(event.target.value)]);
+    this.ScoreCategoryForm.controls["ScoreCategorySchmDObjs"]["controls"][i]["controls"].TopValue.updateValueAndValidity();
   }
 
   TopValueChanged(event, i){
-    this.RefScoreCategoryForm.controls["RefScoreCategoryTypeObjs"]["controls"][i]["controls"].BottomValue.setValidators([Validators.required, Validators.max(event.target.value)]);
-    this.RefScoreCategoryForm.controls["RefScoreCategoryTypeObjs"]["controls"][i]["controls"].BottomValue.updateValueAndValidity();
+    this.ScoreCategoryForm.controls["ScoreCategorySchmDObjs"]["controls"][i]["controls"].BottomValue.setValidators([Validators.required, Validators.max(event.target.value)]);
+    this.ScoreCategoryForm.controls["ScoreCategorySchmDObjs"]["controls"][i]["controls"].BottomValue.updateValueAndValidity();
   }
 
   Save() {
-    if(this.RefScoreCategoryForm.controls["RefScoreCategoryTypeObjs"].value.length == 0){
+    if(this.ScoreCategoryForm.controls["ScoreCategorySchmDObjs"].value.length == 0){
       this.toastr.warningMessage("Please input at least one score.");
       return;
     }
-    this.listRefScoreCategoryObj = new ListRefScoreCategoryObj();    
-    this.listRefScoreCategoryObj.RefScoreCategoryTypeId = this.refScoreCategoryTypeId;
+    this.listScoreCategorySchmDObj = new ListScoreCategorySchmDObj();    
+    this.listScoreCategorySchmDObj.ScoreCategorySchmHId = this.scoreCategorySchmHId;
 
-    for (let i = 0; i < this.RefScoreCategoryForm.controls["RefScoreCategoryTypeObjs"].value.length; i++) {
-      var refScoreCategoryObj = new RefScoreCategoryObj();
-      refScoreCategoryObj.RefScoreCategoryTypeId = this.refScoreCategoryTypeId;
-      refScoreCategoryObj.BottomValue = this.RefScoreCategoryForm.controls["RefScoreCategoryTypeObjs"].value[i].BottomValue;
-      refScoreCategoryObj.TopValue = this.RefScoreCategoryForm.controls["RefScoreCategoryTypeObjs"].value[i].TopValue;
-      refScoreCategoryObj.HexColorValue = this.RefScoreCategoryForm.controls["RefScoreCategoryTypeObjs"].value[i].HexColorValue;
-      this.listRefScoreCategoryObj.RefScoreCategoryObjs.push(refScoreCategoryObj);
+    for (let i = 0; i < this.ScoreCategoryForm.controls["ScoreCategorySchmDObjs"].value.length; i++) {
+      var scoreCategorySchmDObj = new ScoreCategorySchmDObj();
+      scoreCategorySchmDObj.ScoreCategorySchmHId = this.scoreCategorySchmHId;
+      scoreCategorySchmDObj.BottomValue = this.ScoreCategoryForm.controls["ScoreCategorySchmDObjs"].value[i].BottomValue;
+      scoreCategorySchmDObj.TopValue = this.ScoreCategoryForm.controls["ScoreCategorySchmDObjs"].value[i].TopValue;
+      scoreCategorySchmDObj.HexColorValue = this.ScoreCategoryForm.controls["ScoreCategorySchmDObjs"].value[i].HexColorValue;
+      this.listScoreCategorySchmDObj.ScoreCategorySchmDObjs.push(scoreCategorySchmDObj);
     }
 
-    for(let i = 0; i < this.listRefScoreCategoryObj.RefScoreCategoryObjs.length; i++){
-      var checkOverlap = this.listRefScoreCategoryObj.RefScoreCategoryObjs.findIndex(x =>
-        ((x.BottomValue >= this.listRefScoreCategoryObj.RefScoreCategoryObjs[i].BottomValue
-          && x.BottomValue <= this.listRefScoreCategoryObj.RefScoreCategoryObjs[i].TopValue)
+    for(let i = 0; i < this.listScoreCategorySchmDObj.ScoreCategorySchmDObjs.length; i++){
+      var checkOverlap = this.listScoreCategorySchmDObj.ScoreCategorySchmDObjs.findIndex(x =>
+        ((x.BottomValue >= this.listScoreCategorySchmDObj.ScoreCategorySchmDObjs[i].BottomValue
+          && x.BottomValue <= this.listScoreCategorySchmDObj.ScoreCategorySchmDObjs[i].TopValue)
         ||
-        (x.TopValue >= this.listRefScoreCategoryObj.RefScoreCategoryObjs[i].BottomValue
-          && x.TopValue <= this.listRefScoreCategoryObj.RefScoreCategoryObjs[i].TopValue)));
+        (x.TopValue >= this.listScoreCategorySchmDObj.ScoreCategorySchmDObjs[i].BottomValue
+          && x.TopValue <= this.listScoreCategorySchmDObj.ScoreCategorySchmDObjs[i].TopValue)));
 
       if(checkOverlap != -1 && checkOverlap != i){
         this.toastr.warningMessage("Score cannot be overlap with each other.");
@@ -149,7 +150,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
       }
     }
 
-    this.httpClient.post(AdInsConstant.AddRangeAndDeleteRefScoreCategory, this.listRefScoreCategoryObj).subscribe(
+    this.httpClient.post(URLConstant.AddRangeAndDeleteScoreCategorySchmD, this.listScoreCategorySchmDObj).subscribe(
       //SAVE
       (response) => {
         this.toastr.successMessage(response["Message"]);

@@ -4,8 +4,8 @@
     "component": [
         {
             "type": "textbox",
-            "name": "REF_SCORE_CATEGORY_CODE",
-            "id": "RefScoreCategoryCode",
+            "name": "SCORE_CATEGORY_SCHM_H_CODE",
+            "id": "ScoreCategorySchmHCode",
             "value": "",
             "label": "Score Category Code",
             "placeholder": "Placeholder",
@@ -13,10 +13,10 @@
         },
         {
             "type": "textbox",
-            "name": "DESCR",
-            "id": "Descr",
+            "name": "SCORE_CATEGORY_SCHM_H_NAME",
+            "id": "ScoreCategorySchmHName",
             "value": "",
-            "label": "Description",
+            "label": "Score Category Name",
             "placeholder": "Placeholder",
             "datatype": "text"
         },
@@ -45,21 +45,21 @@
         }
     ],
     "querystring": {
-        "select": "SELECT RSCT.REF_SCORE_CATEGORY_TYPE_ID AS RefScoreCategoryTypeId, RSCT.REF_SCORE_CATEGORY_CODE AS RefScoreCategoryCode, RSCT.DESCR AS Descr, RSCT.IS_ACTIVE AS IsActive",
-        "from": "FROM REF_SCORE_CATEGORY_TYPE AS RSCT WITH(NOLOCK)"
+        "select": "SELECT SCSH.SCORE_CATEGORY_SCHM_H_ID AS ScoreCategorySchmHId, SCSH.SCORE_CATEGORY_SCHM_H_CODE AS ScoreCategorySchmHCode, SCSH.SCORE_CATEGORY_SCHM_H_NAME AS ScoreCategorySchmHName, SCSH.IS_ACTIVE AS IsActive",
+        "from": "FROM SCORE_CATEGORY_SCHM_H AS SCSH WITH(NOLOCK)"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "center",
             "label": "Score Category Code",
-            "name": "RefScoreCategoryCode"
+            "name": "ScoreCategorySchmHCode"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Description",
-            "name": "Descr"
+            "label": "Score Category Name",
+            "name": "ScoreCategorySchmHName"
         },
         {
             "type": "sort",
@@ -82,12 +82,12 @@
         {
             "type": "text",
             "position": "center",
-            "property": "RefScoreCategoryCode"
+            "property": "ScoreCategorySchmHCode"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "Descr"
+            "property": "ScoreCategorySchmHName"
         },
         {
             "type": "boolean",
@@ -103,8 +103,8 @@
                     "path": "/CommonSetting/ScoreCategory/Score",
                     "param": [
                         {
-                            "type": "RefScoreCategoryTypeId",
-                            "property": "RefScoreCategoryTypeId"
+                            "type": "ScoreCategorySchmHId",
+                            "property": "ScoreCategorySchmHId"
                         }
                     ]
                 }
@@ -119,8 +119,8 @@
                     "path": "/CommonSetting/ScoreCategory/Type",
                     "param": [
                         {
-                            "type": "RefScoreCategoryTypeId",
-                            "property": "RefScoreCategoryTypeId"
+                            "type": "ScoreCategorySchmHId",
+                            "property": "ScoreCategorySchmHId"
                         },
                         {
                             "type": "mode",

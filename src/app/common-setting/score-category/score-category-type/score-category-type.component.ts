@@ -4,8 +4,11 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { RefScoreCategoryTypeObj } from 'app/shared/model/ScoreCategory/RefScoreCategoryTypeObj.model';
+import { ScoreCategorySchmHObj } from 'app/shared/model/ScoreCategory/ScoreCategorySchmHObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 
 @Component({
   selector: 'app-score-category-type',
@@ -13,14 +16,16 @@ import { RefScoreCategoryTypeObj } from 'app/shared/model/ScoreCategory/RefScore
   providers: [NGXToastrService]
 })
 export class ScoreCategoryTypeComponent implements OnInit {
-  refScoreCategoryTypeObj: RefScoreCategoryTypeObj = new RefScoreCategoryTypeObj();
+  scoreCategorySchmHObj: ScoreCategorySchmHObj = new ScoreCategorySchmHObj();
   type: string = 'add';
-  refScoreCategoryTypeId: number = 0;
+  scoreCategorySchmHId: number = 0;
   title: string = "Score Category Type - Add";
+  ScoreTrxTypeObj: Array<KeyValueObj> = new Array<KeyValueObj>();
 
-  RefScoreCategoryTypeForm = this.fb.group({
-    RefScoreCategoryTypeCode: ['', [Validators.required, Validators.maxLength(50)]],
-    Descr: ['', [Validators.required, Validators.maxLength(100)]],
+  ScoreCategorySchmHForm = this.fb.group({
+    ScoreCategorySchmHCode: ['', [Validators.required, Validators.maxLength(50)]],
+    ScoreCategorySchmHName: ['', [Validators.required, Validators.maxLength(100)]],
+    MrScoreTrxTypeCode: ['', [Validators.required, Validators.maxLength(50)]],
     Notes: ['', [Validators.maxLength(4000)]],
     IsActive: [true],
     RowVersion: ['']
@@ -37,22 +42,31 @@ export class ScoreCategoryTypeComponent implements OnInit {
       if (params['mode'] != null) {
         this.type = params['mode'];
       }
-      if (params['RefScoreCategoryTypeId'] != null) {
-        this.refScoreCategoryTypeId = params['RefScoreCategoryTypeId'];
+      if (params['ScoreCategorySchmHId'] != null) {
+        this.scoreCategorySchmHId = params['ScoreCategorySchmHId'];
       }
     });
   }
 
 
   ngOnInit() {   
+    var refMasterObj = new RefMasterObj();
+    refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeScoreTrxType;
+    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObj).subscribe(
+      (response) => {
+        this.ScoreTrxTypeObj = response[CommonConstant.ReturnObj];
+      }
+    );
+
     if (this.type == 'edit') {
       this.title = "Score Category Type - Edit";
-      this.refScoreCategoryTypeObj.RefScoreCategoryTypeId = this.refScoreCategoryTypeId;
-      this.httpClient.post(AdInsConstant.GetRefScoreCategoryTypeById, this.refScoreCategoryTypeObj).subscribe(
+      this.scoreCategorySchmHObj.ScoreCategorySchmHId = this.scoreCategorySchmHId;
+      this.httpClient.post(URLConstant.GetScoreCategorySchmHById, this.scoreCategorySchmHObj).subscribe(
         (response) => {
-          this.RefScoreCategoryTypeForm.patchValue({
-            RefScoreCategoryTypeCode: response["RefScoreCategoryTypeCode"],
-            Descr: response["Descr"],
+          this.ScoreCategorySchmHForm.patchValue({
+            ScoreCategorySchmHCode: response["ScoreCategorySchmHCode"],
+            ScoreCategorySchmHName: response["ScoreCategorySchmHName"],
+            MrScoreTrxTypeCode: response["MrScoreTrxTypeCode"],
             Notes: response["Notes"],
             IsActive: response["IsActive"],
             RowVersion: response["RowVersion"]
@@ -66,16 +80,17 @@ export class ScoreCategoryTypeComponent implements OnInit {
   }
 
   Save() {
-    this.refScoreCategoryTypeObj = new RefScoreCategoryTypeObj();
-    this.refScoreCategoryTypeObj.RefScoreCategoryTypeId = this.refScoreCategoryTypeId;
-    this.refScoreCategoryTypeObj.RefScoreCategoryTypeCode = this.RefScoreCategoryTypeForm.controls.RefScoreCategoryTypeCode.value;
-    this.refScoreCategoryTypeObj.Descr = this.RefScoreCategoryTypeForm.controls.Descr.value;
-    this.refScoreCategoryTypeObj.Notes = this.RefScoreCategoryTypeForm.controls.Notes.value;
-    this.refScoreCategoryTypeObj.IsActive = this.RefScoreCategoryTypeForm.controls.IsActive.value;
-    this.refScoreCategoryTypeObj.RowVersion = this.RefScoreCategoryTypeForm.controls.RowVersion.value;
+    this.scoreCategorySchmHObj = new ScoreCategorySchmHObj();
+    this.scoreCategorySchmHObj.ScoreCategorySchmHId = this.scoreCategorySchmHId;
+    this.scoreCategorySchmHObj.ScoreCategorySchmHCode = this.ScoreCategorySchmHForm.controls.ScoreCategorySchmHCode.value;
+    this.scoreCategorySchmHObj.ScoreCategorySchmHName = this.ScoreCategorySchmHForm.controls.ScoreCategorySchmHName.value;
+    this.scoreCategorySchmHObj.MrScoreTrxTypeCode = this.ScoreCategorySchmHForm.controls.MrScoreTrxTypeCode.value;
+    this.scoreCategorySchmHObj.Notes = this.ScoreCategorySchmHForm.controls.Notes.value;
+    this.scoreCategorySchmHObj.IsActive = this.ScoreCategorySchmHForm.controls.IsActive.value;
+    this.scoreCategorySchmHObj.RowVersion = this.ScoreCategorySchmHForm.controls.RowVersion.value;
     //MODE-ADD
     if (this.type == 'add') {
-      this.httpClient.post(AdInsConstant.AddRefScoreCategoryType, this.refScoreCategoryTypeObj).subscribe(
+      this.httpClient.post(URLConstant.AddScoreCategorySchmH, this.scoreCategorySchmHObj).subscribe(
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
@@ -89,7 +104,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
     //MODE-EDIT
     else {
       //SAVE
-      this.httpClient.post(AdInsConstant.EditRefScoreCategoryType, this.refScoreCategoryTypeObj).subscribe(
+      this.httpClient.post(URLConstant.EditScoreCategorySchmH, this.scoreCategorySchmHObj).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
           this.router.navigate(['/CommonSetting/ScoreCategory/Paging']);

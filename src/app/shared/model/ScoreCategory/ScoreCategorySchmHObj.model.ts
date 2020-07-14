@@ -1,7 +1,8 @@
-export class RefScoreCategoryTypeObj {
-    RefScoreCategoryTypeId: number;
-    RefScoreCategoryTypeCode: string;
-    Descr: string;
+export class ScoreCategorySchmHObj {
+    ScoreCategorySchmHId: number;
+    ScoreCategorySchmHCode: string;
+    ScoreCategorySchmHName: string;
+    MrScoreTrxTypeCode: string;
     Notes: string;
     IsActive: boolean;
     ReservedField1: string;
