@@ -7,20 +7,14 @@
           <div class="col-md-8">
             <h4 class="card-title" translate> Main Information </h4>
           </div>
-          <!-- <div class="col-md-4" style="text-align-last: right">
-            <button type="button" class="backButton" [routerLink]="['/product/HOpaging']" translate>
-              <i class="ft-arrow-left"></i> Back
-            </button>
-          </div> -->
         </div>
       </div>
 
       <div class="card-body">
         <div class="px-3">
 
-          <form class="form form-horizontal" [formGroup]="RefProductHOForm" (ngSubmit)="RefProductHOForm.valid && SaveForm()"
-            #enjiForm="ngForm">
-            <!-- Main Info -->
+          <form class="form form-horizontal" [formGroup]="RefProductHOForm"
+            (ngSubmit)="RefProductHOForm.valid && SaveForm()" #enjiForm="ngForm">
             <div class="form-body">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Main Info </h4>
 
@@ -28,8 +22,9 @@
                 <label class="col-md-3 adInsLabel">Product Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-25-per" formControlName="ProdCode"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.ProdCode.invalid }">
-                  <lib-uc-show-errors [control]="RefProductHOForm.controls.ProdCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.ProdCode.invalid }">
+                  <lib-uc-show-errors [control]="RefProductHOForm.controls.ProdCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -37,8 +32,9 @@
                 <label class="col-md-3 adInsLabel">Product Name </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-25-per" formControlName="ProdName"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.ProdName.invalid }">
-                  <lib-uc-show-errors [control]="RefProductHOForm.controls.ProdName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.ProdName.invalid }">
+                  <lib-uc-show-errors [control]="RefProductHOForm.controls.ProdName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -46,8 +42,9 @@
                 <label class="col-md-3 adInsLabel">Product Description </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-25-per" formControlName="ProdDescr"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.ProdDescr.invalid }">
-                  <lib-uc-show-errors [control]="RefProductHOForm.controls.ProdDescr" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.ProdDescr.invalid }">
+                  <lib-uc-show-errors [control]="RefProductHOForm.controls.ProdDescr" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -55,8 +52,9 @@
                 <label class="col-md-3 adInsLabel"> Start Active Date </label>
                 <div class="col-md-9">
                   <input type="date" class="form-control adInsInput width-25-per" formControlName="StartDt"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.StartDt.invalid }">
-                  <lib-uc-show-errors [control]="RefProductHOForm.controls.StartDt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.StartDt.invalid }">
+                  <lib-uc-show-errors [control]="RefProductHOForm.controls.StartDt" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -64,8 +62,9 @@
                 <label class="col-md-3 adInsLabel"> End Date </label>
                 <div class="col-md-9">
                   <input type="date" class="form-control adInsInput width-25-per" formControlName="EndDt"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.EndDt.invalid }">
-                  <lib-uc-show-errors [control]="RefProductHOForm.controls.EndDt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefProductHOForm.controls.EndDt.invalid }">
+                  <lib-uc-show-errors [control]="RefProductHOForm.controls.EndDt" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -78,12 +77,6 @@
               <button type="submit" (click)="ClickSave('next')" class="btn btn-raised btn-primary">
                 <i class="far fa-check-square"></i> Save
               </button>
-              <!-- <button type="submit" (click)="ClickSave('save')" class="btn btn-raised btn-primary margin-r-5">
-                <i class="far fa-check-square"></i> Save
-              </button>
-              <button type="submit" (click)="ClickSave('next')" class="btn btn-raised btn-primary">
-                <i class="far fa-check-square"></i> Next
-              </button> -->
             </div>
 
           </form>
