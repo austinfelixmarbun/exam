@@ -35,7 +35,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
   mode: string = "add";
   vendorHoldingObj: any;
   VendorId: any;
-  ButtonLbl: string = "Continue";
   businessDt: Date;
   isHidden: boolean = true;
 
@@ -86,7 +85,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
-      this.ButtonLbl = "Submit";
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
     } else {
