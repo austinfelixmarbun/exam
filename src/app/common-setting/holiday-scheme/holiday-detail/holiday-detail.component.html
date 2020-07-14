@@ -10,12 +10,18 @@
                   <i class="fa fa-arrow-left"></i> Back
                 </button>
               </span>
+              <span class="mr-1">
+                <button type="button" class="btn btn-raised btn-primary mr-1" (click)="AddNavigate()">
+                  <i class="fa fa-plus"></i> Add
+                </button>
+              </span>
             </div>
             <h4 class="card-title" translate>HOLIDAY MANAGEMENT</h4>
             <hr>
           </div>
         </div>
       </div>
+      <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
 
       <div class="card-body">
         <div class="px-3">
@@ -36,18 +42,10 @@
                   </button>
                 </div>
               </div>
-              <div class="ucSearch-Button-Right">
-                <span class="mr-1">
-                  <button type="button" class="btn btn-raised btn-primary mr-1" (click)="AddNavigate()">
-                    <i class="fa fa-plus"></i> Add
-                  </button>
-                </span>
-              </div>
             </form>
           </div>
         </div>
       </div>
-      <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
       <lib-ucpaging [searchObj]="inputPagingObjHolidayDetail"></lib-ucpaging>
     </div>
   </div>

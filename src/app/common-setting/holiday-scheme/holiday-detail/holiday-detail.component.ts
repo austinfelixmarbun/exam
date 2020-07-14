@@ -24,7 +24,7 @@ export class HolidayDetailComponent implements OnInit {
   inputPagingObjHolidayScheme : InputLookupObj;
   inputPagingObjHolidayDetail : any;
   copyHoliday : any;
-  title : string = "Holiday Scheme Info";
+  title : string = "Copy Holiday Scheme";
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   HolidayManagementForm = this.fb.group({
