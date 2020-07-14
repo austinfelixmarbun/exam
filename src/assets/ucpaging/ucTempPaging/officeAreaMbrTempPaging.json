@@ -20,31 +20,18 @@
             "placeholder": "Placeholder"
         },
         {
-            "type": "dropdown",
-            "name": "IS_ACTIVE",
-            "id": "ActiveStatusId",
-            "label": "Active Status",
+            "type": "textbox",
+            "name": "OFFICE_ADDR",
+            "id": "OfficeAddrId",
             "value": "",
-            "placeholder": "Placeholder",
-            "isFromURL": false,
-            "isSelectOne": false,
-            "items": [
-                {
-                    "key": "1",
-                    "value": "Yes"
-                },
-                {
-                    "key": "0",
-                    "value": "No"
-                }
-            ],
-            "itemsUrl": []
+            "label": "Office Address",
+            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-       "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName, REF_OFFICE_ID AS RefOfficeId, IS_ACTIVE AS IsActive",
+        "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName, REF_OFFICE_ID AS RefOfficeId, IS_ACTIVE AS IsActive, OFFICE_ADDR AS OfficeAddr",
         "from": "FROM dbo.REF_OFFICE WITH(NOLOCK)",
-        "where": "WHERE REF_OFFICE_AREA_ID IS NULL AND IS_ACTIVE = 1"
+        "where": "WHERE REF_OFFICE_AREA_ID IS NULL AND MR_OFFICE_TYPE_CODE != N'CG' AND IS_ACTIVE = 1"
     },
     "headerList": [
         {
@@ -61,9 +48,9 @@
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Active Status",
-            "name": "IS_ACTIVE"
+            "position": "left",
+            "label": "Office Addr",
+            "name": "OFFICE_ADDR"
         }
     ],
     "bodyList": [
@@ -78,9 +65,9 @@
             "property": "OfficeName"
         },
         {
-            "type": "boolean",
-            "position": "center",
-            "property": "IsActive"
+            "type": "text",
+            "position": "left",
+            "property": "OfficeAddr"
         }
     ]
 }
