@@ -123,10 +123,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "RefBizUnitId"
                 }
             ]
         }

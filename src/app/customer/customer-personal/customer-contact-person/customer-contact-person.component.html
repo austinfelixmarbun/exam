@@ -2,7 +2,7 @@
 <app-customer-contact-add  *ngIf="isAdd == true" [listCustIdToExclude]="listCustIdToExclude" [custPersonalContactPersonId]="this.custPersonalContactPersonId" (outputTab)="terimaValue($event)" > </app-customer-contact-add>
 <div *ngIf="isAdd == false" class="form-actions right" style="text-align: right;">
     <!-- <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
-      <i class="fa fa-arrow-left"></i> Back
+      <i class="far fa-window-close"></i> Cancel
     </button> -->
     <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
       <i class="far fa-check-square"></i> Save and Continue

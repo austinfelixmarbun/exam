@@ -126,6 +126,8 @@ export class CommonConstant {
     public static RefMasterTypeCodeVendorType = "VENDOR_TYPE";
     public static RefMasterTypeCodeIdTypeVendor = "ID_TYPE_VENDOR";
     public static RefMasterTypeCodeTaskAssignmentType = "TASK_ASSIGNMENT_TYPE";
+
+    public static RefMasterTypeCodeScoreTrxType = "SCORE_TRX_TYPE";
     
     
     
