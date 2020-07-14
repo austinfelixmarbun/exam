@@ -44,7 +44,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
         var userAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
-        var businessDate = localStorage.getItem(CommonConstant.BUSINESS_DT);
+        var businessDate = localStorage.getItem(CommonConstant.BUSINESS_DATE);
         var date = new Date(businessDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         businessDate = formatDate(date, 'dd-MMM-yyyy', 'en-US');
         this.businessDate = businessDate;
