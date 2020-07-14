@@ -4,6 +4,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UcPagingObj, WhereValueObj } from '../../../shared/model/UcPagingObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-product-return-ho-paging',
@@ -21,7 +22,7 @@ export class ProductReturnHoPagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url="./assets/ucpaging/product/searchProductHOReturn.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductHOReturn.json";
 
     

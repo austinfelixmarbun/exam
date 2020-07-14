@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-personal-financial-data',
-  templateUrl: './customer-view-personal-financial-data.component.html',
-  styleUrls: ['./customer-view-personal-financial-data.component.scss']
+  templateUrl: './customer-view-personal-financial-data.component.html'
 })
 export class CustomerViewPersonalFinancialDataComponent implements OnInit {
   CustId: number;
-  GetCBAForCustFinDataByCustIdUrl = AdInsConstant.GetCBAForCustFinDataByCustId;
+  GetCBAForCustFinDataByCustIdUrl = URLConstant.GetCBAForCustFinDataByCustId;
   viewCustFinData =   "./assets/ucviewgeneric/viewCustFinData.json";
   responseCBAObj: any;
   allBankStmntList : any;

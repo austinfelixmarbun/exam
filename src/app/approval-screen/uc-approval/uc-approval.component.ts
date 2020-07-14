@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-uc-approval',
@@ -176,7 +177,7 @@ export class UcApprovalComponent implements OnInit {
 
   Submit()
   {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     var nodes = this.FormApproval.get("nodes").value;
     var ListNodePersonObj = new Array();
     for (let i = 0; i < nodes.length ; i++) {
@@ -195,8 +196,8 @@ export class UcApprovalComponent implements OnInit {
       notes : this.FormApproval.get("notes").value,
       nextPersonPerNodeObj : ListNodePersonObj,
       context : { 
-        UserId : context["UserName"],
-        BusinessDt : context["BusinessDt"]
+        UserId : context[CommonConstant.USER_NAME],
+        BusinessDt : context[CommonConstant.BUSINESS_DT]
       }
     }
     this.CompleteTask(SubmitObj);

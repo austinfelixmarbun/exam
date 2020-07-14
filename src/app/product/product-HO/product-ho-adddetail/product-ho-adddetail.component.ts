@@ -7,8 +7,9 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { RefProductHOObj } from 'app/shared/model/RefProductHOObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-product-ho-adddetail',
@@ -25,7 +26,7 @@ export class ProductHoAdddetailComponent implements OnInit {
 
   objPassing: any = {};
 
-  RefProductHOForm=this.fb.group({
+  RefProductHOForm = this.fb.group({
     ProdCode: [''],
     ProdName: [''],
     StatusCode: [''],
@@ -33,7 +34,7 @@ export class ProductHoAdddetailComponent implements OnInit {
     StartDt: [''],
     EndDt: [''],
   });
-  
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -45,18 +46,18 @@ export class ProductHoAdddetailComponent implements OnInit {
       this.objPassing["ProdId"] = params["ProdId"];
       this.objPassing["param"] = params["ProdHId"];
       this.objPassing["mode"] = params["mode"];
-      this.objPassing["url"] = AdInsConstant.GetProductDetailComponentInfo;
+      this.objPassing["url"] = URLConstant.GetProductDetailComponentInfo;
       this.source = params["source"];
       this.key = params["key"];
     })
   }
 
-  source:string="";
+  source: string = "";
   ResultResponse: any;
   ProdHOBj: any;
   UrlBackEnd: any;
   type: string;
-  
+
   ngOnInit() {
     //** Main Information **//
     if(this.source == "return")
@@ -70,17 +71,17 @@ export class ProductHoAdddetailComponent implements OnInit {
     
     this.ProdHOBj=new RefProductHOObj();
     this.ProdHOBj.ProdHId = this.objPassing.param;
-    this.UrlBackEnd=AdInsConstant.GetProductMainInfo;
+    this.UrlBackEnd = URLConstant.GetProductMainInfo;
     this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
       (response) => {
-        this.ResultResponse=response;
+        this.ResultResponse = response;
         this.RefProductHOForm.patchValue({
           ProdCode: this.ResultResponse.ProdCode,
           ProdName: this.ResultResponse.ProdName,
           ProdDescr: this.ResultResponse.ProdDescr,
           StatusCode: this.ResultResponse.StatusCode,
-          StartDt: formatDate(this.ResultResponse.StartDt,'yyyy-MM-dd', 'en-US'),
-          EndDt: formatDate(this.ResultResponse.EndDt,'yyyy-MM-dd', 'en-US')
+          StartDt: formatDate(this.ResultResponse.StartDt, 'yyyy-MM-dd', 'en-US'),
+          EndDt: formatDate(this.ResultResponse.EndDt, 'yyyy-MM-dd', 'en-US')
         });
       },
       (error) => {

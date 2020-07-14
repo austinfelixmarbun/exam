@@ -9,6 +9,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { formatDate } from '@angular/common';
 import { Observable } from 'rxjs';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-uc-search',
@@ -139,7 +140,7 @@ export class UcSearchComponent implements OnInit {
         //pengecekan tanggal
         if (data.component[i].type == "datepicker") {
           if (data.component[i].value.includes("BD")) {
-            let businessDate = new Date(JSON.parse(localStorage.getItem("UserAccess")).BusinessDate);
+            let businessDate = new Date(JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS)).BusinessDate);
             var operator = data.component[i].value.charAt(2);
             var dateShow = new Date();
             if (operator == "-") {

@@ -6,6 +6,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
+import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 
 @Component({
@@ -28,14 +32,14 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/officeAreaMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/officeAreaMbrTempPaging.json";
 
     this.GetListOfficeAreaMbrByRefOfficeAreaId();
   }
 
   GetListOfficeAreaMbrByRefOfficeAreaId(){
-    this.http.post(AdInsConstant.GetListRefOfficeByRefOfficeAreaId, { RefOfficeAreaId: this.RefOfficeAreaId }).subscribe(
+    this.http.post(URLConstant.GetListRefOfficeByRefOfficeAreaId, { RefOfficeAreaId: this.RefOfficeAreaId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response["RefOfficeObjs"].length; index++) {
@@ -72,7 +76,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
       RefOfficeAreaId : this.RefOfficeAreaId,
       RefOfficeId: this.listSelectedId
     }
-    this.http.post(AdInsConstant.AddRefOfficeAreaMember, RequestItem).subscribe(
+    this.http.post(URLConstant.AddRefOfficeAreaMember, RequestItem).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Office/OfficeArea/Member"], { queryParams: { "RefOfficeAreaId": this.RefOfficeAreaId } });

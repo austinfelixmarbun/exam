@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-coy-management',
-  templateUrl: './customer-view-coy-management.component.html',
-  styleUrls: ['./customer-view-coy-management.component.scss']
+  templateUrl: './customer-view-coy-management.component.html'
 })
 
 
@@ -23,7 +24,7 @@ export class CustomerViewCoyManagementComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
   ) { 
-    this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl = AdInsConstant.GetCustCompanyMgmntShrholderForCustViewByCustId
+    this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl = URLConstant.GetCustCompanyMgmntShrholderForCustViewByCustId
   }
 
   ngOnInit() {
@@ -36,7 +37,7 @@ export class CustomerViewCoyManagementComponent implements OnInit {
     var custObj = { "CustId": this.CustId };
     this.http.post(this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl, custObj).subscribe(
       response => {
-        this.responseObj = response['ReturnObject'];
+        this.responseObj = response[CommonConstant.ReturnObj];
       },
       error => {
         this.router.navigateByUrl('Error');

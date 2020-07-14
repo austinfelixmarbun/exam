@@ -10,6 +10,8 @@ import { OrgJobTitleObj } from 'app/shared/model/OrgJobTitleObj.Model';
 import { environment } from 'environments/environment';
 import { formatDate } from '@angular/common';
 import { NgForm } from '@angular/forms';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-office-emp-pos-add',
@@ -60,14 +62,14 @@ export class OfficeEmpPosAddComponent implements OnInit {
   arrCrit: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
-    this.getUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
-    this.addUrl = this.foundationUrl + AdInsConstant.AddEmpPosition;
-    this.refOfficeUrl = this.foundationUrl + AdInsConstant.GetAllRefOffice;
-    this.supervisorUrl = this.foundationUrl + AdInsConstant.GetEmpListByOfficeIdAndIsActive;
-    this.bizUrl = this.foundationUrl + AdInsConstant.GetRefBizUnitByOffice;
-    this.orgJobTitleUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitleByMdlStruc;
-    this.getEditUrl = this.foundationUrl + AdInsConstant.GetEmpByEmpPositionId;
-    this.editUrl = this.foundationUrl + AdInsConstant.EditEmpPosition;
+    this.getUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
+    this.addUrl = this.foundationUrl + URLConstant.AddEmpPosition;
+    this.refOfficeUrl = this.foundationUrl + URLConstant.GetAllRefOffice;
+    this.supervisorUrl = this.foundationUrl + URLConstant.GetEmpListByOfficeIdAndIsActive;
+    this.bizUrl = this.foundationUrl + URLConstant.GetRefBizUnitByOffice;
+    this.orgJobTitleUrl = this.foundationUrl + URLConstant.GetOrgJobTitleByMdlStruc;
+    this.getEditUrl = this.foundationUrl + URLConstant.GetEmpByEmpPositionId;
+    this.editUrl = this.foundationUrl + URLConstant.EditEmpPosition;
 
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
@@ -101,7 +103,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    const getuserAccess = JSON.parse(localStorage.getItem('UserAccess'));
+    const getuserAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.refOfficeId = getuserAccess.refOfficeId
     this.refOfficeObj = new RefOfficeObj()
     this.httpClient.post(this.refOfficeUrl, null).subscribe(
@@ -140,7 +142,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
           this.positionStartDt = formatDate(response['returnObject']['positionStartDt'], 'yyyy-MM-dd', 'en-US')
           this.positionFinishDt = formatDate(response['returnObject']['positionFinishDt'], 'yyyy-MM-dd', 'en-US')
           this.superiorRefEmpId = response['returnObject']['superiorRefEmpId']
-          if (this.resultData.isActive == "1") {
+          if (this.resultData.isActive == CommonConstant.TRUE_CONDITION) {
             this.isActive = true;
           }
           else {
@@ -173,10 +175,10 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.empPositionObj = ReqForm.value
       this.empPositionObj.refEmpId = this.refEmpId
       if (this.isActive == false) {
-        this.empPositionObj.isActive = "0";
+        this.empPositionObj.isActive = CommonConstant.FALSE_CONDITION;
       }
       else {
-        this.empPositionObj.isActive = "1";
+        this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
       }
 
       console.log(JSON.stringify(this.empPositionObj))
@@ -201,10 +203,10 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.empPositionObj.refEmpId = this.refEmpId
       this.empPositionObj.empPositionId = this.empPositionId
       if (this.isActive == false) {
-        this.empPositionObj.isActive = "0";
+        this.empPositionObj.isActive = CommonConstant.FALSE_CONDITION;
       }
       else {
-        this.empPositionObj.isActive = "1";
+        this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
       }
       console.log(JSON.stringify(this.empPositionObj))
       console.log(this.empPositionObj);

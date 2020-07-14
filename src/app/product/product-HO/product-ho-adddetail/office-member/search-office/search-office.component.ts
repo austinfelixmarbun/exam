@@ -4,6 +4,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 
 @Component({
@@ -15,17 +16,17 @@ export class SearchOfficeComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
   @Output() componentIsOn: EventEmitter<any> = new EventEmitter();
   @Input() ListOfficeMemberObjInput: any;
-  
+
   constructor(
     private http: HttpClient,
-    private toastr:NGXToastrService
+    private toastr: NGXToastrService
   ) { }
 
-  
+
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/productHOfficeMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/productHOfficeMbrTempPaging.json";
     this.tempPagingObj.ddlEnvironments = [
       {
@@ -34,7 +35,7 @@ export class SearchOfficeComponent implements OnInit {
       }
     ];
 
-    if(this.ListOfficeMemberObjInput["result"].length!=0){
+    if (this.ListOfficeMemberObjInput["result"].length != 0) {
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
       addCrit.propName = "RO.REF_OFFICE_ID";
@@ -45,7 +46,7 @@ export class SearchOfficeComponent implements OnInit {
     this.tempPagingObj.isReady = true;
   }
 
-  GoBack(){
+  GoBack() {
     var obj = {
       isOn: true,
       result: []
@@ -57,7 +58,7 @@ export class SearchOfficeComponent implements OnInit {
     this.listSelectedId = ev;
   }
 
-  SaveForm(){
+  SaveForm() {
     if (this.listSelectedId["TempListId"].length == 0) {
       this.toastr.errorMessage('Please Add At Least One Data');
       return;
@@ -68,19 +69,19 @@ export class SearchOfficeComponent implements OnInit {
       RowVersion: ""
     };
 
-    for(var i=0; i<this.listSelectedId["TempListId"].length ; i++){
+    for (var i = 0; i < this.listSelectedId["TempListId"].length; i++) {
       obj.ProductBranchMbrs[i].ProdHId = this.ListOfficeMemberObjInput["param"],
-      obj.ProductBranchMbrs[i].RowVersion = "";
+        obj.ProductBranchMbrs[i].RowVersion = "";
     }
 
-    this.http.post(AdInsConstant.AddProductOfficeMbrBatch, obj).subscribe(
+    this.http.post(URLConstant.AddProductOfficeMbrBatch, obj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         var obj = {
           isOn: true,
           result: []
         }
-        this.componentIsOn.emit(obj );
+        this.componentIsOn.emit(obj);
       },
       (error) => {
         console.log(error);

@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators, NgForm, FormGroupDirective, Control
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-uc-address-group',
   templateUrl: './uc-address-group.component.html',
-  styleUrls: ['./uc-address-group.component.scss'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class UcAddressGroupComponent implements OnInit {
@@ -65,7 +65,7 @@ export class UcAddressGroupComponent implements OnInit {
 
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";

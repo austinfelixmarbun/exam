@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfSchemeHObj } from 'app/shared/model/VerfSchemeHObj.Model';
 import { ToastrService } from 'ngx-toastr';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-member-paging',
-  templateUrl: './verification-question-scheme-member-paging.component.html',
-  styleUrls: ['./verification-question-scheme-member-paging.component.scss']
+  templateUrl: './verification-question-scheme-member-paging.component.html'
 })
 export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   verfSchemeHObj: VerfSchemeHObj;
@@ -31,7 +31,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
 
   ngOnInit() {
     this.verfSchemeObj = { VerfSchemeHId: this.VerfSchemeHId }
-    this.http.post(AdInsConstant.GetVerfSchemeHById, this.verfSchemeObj).subscribe(
+    this.http.post(URLConstant.GetVerfSchemeHById, this.verfSchemeObj).subscribe(
       (response) => {
         this.verfQuestionScheme = response;
         this.VerfSchemeCode = this.verfQuestionScheme.VerfSchemeCode;
@@ -42,9 +42,9 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   }
 
   GetListVerfSchmD() {
-    this.http.post(AdInsConstant.GetVerfSchemeDataByVerfSchemeHId, this.verfSchemeObj).subscribe(
+    this.http.post(URLConstant.GetVerfSchemeDataByVerfSchemeHId, this.verfSchemeObj).subscribe(
       (response) => {
-        this.listQuestionGroupD = response["ReturnObject"];
+        this.listQuestionGroupD = response[CommonConstant.ReturnObj];
       }
     );
   }
@@ -58,7 +58,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
       var VerfSchemeDObj = {
         VerfSchemeDId: VerfSchemeDId
       };
-      this.http.post(AdInsConstant.DeleteVerfSchemeD, VerfSchemeDObj).subscribe(
+      this.http.post(URLConstant.DeleteVerfSchemeD, VerfSchemeDObj).subscribe(
         (response) => {
           this.toastr.success(response['message'], 'Success!');
           this.GetListVerfSchmD();

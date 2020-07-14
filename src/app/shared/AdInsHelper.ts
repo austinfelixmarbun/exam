@@ -2,6 +2,7 @@ import { formatDate } from "@angular/common";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CurrentUserContext } from "./model/CurrentUserContext.model";
 import { environment } from "environments/environment";
+import { CommonConstant } from "./constant/CommonConstant";
 
 export class AdInsHelper {
     //Function
@@ -10,8 +11,8 @@ export class AdInsHelper {
         var dateNow = formatDate(today, 'yyyy-MM-dd hh:mm:ss', 'en-US');
 
         var listPageAccess = [];
-        listPageAccess = JSON.parse(localStorage.getItem("PageAccess"));
-        var userAcc = JSON.parse(localStorage.getItem("UserAccess"));
+        listPageAccess = JSON.parse(localStorage.getItem(CommonConstant.PAGE_ACCESS));
+        var userAcc = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
         var pageAccess = listPageAccess;
         if (listPageAccess == null) {
             pageAccess = [];
@@ -60,7 +61,7 @@ export class AdInsHelper {
         // localStorage.removeItem("UserAccess");
         // localStorage.removeItem("Token");
         // localStorage.removeItem("Menu");
-        let version = localStorage.getItem("Version");
+        let version = localStorage.getItem(CommonConstant.VERSION);
         localStorage.clear();
         localStorage.setItem("Version", version);
     }
@@ -71,7 +72,7 @@ export class AdInsHelper {
 
     public static CheckSessionTimeout() {
         let today = new Date();
-        var businessDtBefore = localStorage.getItem("LastAccessTime");
+        var businessDtBefore = localStorage.getItem(CommonConstant.LAST_ACCESS_TIME);
         var businessDtNow = formatDate(today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
         if (businessDtBefore == undefined || businessDtBefore == null) {
             localStorage.setItem("LastAccessTime", businessDtNow);
@@ -104,7 +105,7 @@ export class AdInsHelper {
     }
 
     public static IsGrantAccess(formPath) {
-        var temp = localStorage.getItem("Menu");
+        var temp = localStorage.getItem(CommonConstant.MENU);
         var objectMenu = [];
         objectMenu = JSON.parse(temp);
         if (objectMenu != null) {

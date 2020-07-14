@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HolidayDByYearObj } from 'app/shared/model/HolidayDByYearObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
 
@@ -60,7 +61,7 @@ export class HolidayDetailAddComponent implements OnInit {
       this.holidayDetailObj.Descr = this.HolidayListForm.controls.Descr.value;
 
       console.log(this.holidayDetailObj);
-      this.http.post(AdInsConstant.AddHolidaySchmD, this.holidayDetailObj).subscribe((response) => {
+      this.http.post(URLConstant.AddHolidaySchmD, this.holidayDetailObj).subscribe((response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);
       },
@@ -96,7 +97,7 @@ export class HolidayDetailAddComponent implements OnInit {
       if (this.HolidayListForm.controls.Saturday.value) {
         this.holidayDetailByYearObj.DictOfDays.push("Saturday");
       }
-      this.http.post(AdInsConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj).subscribe((response) => {
+      this.http.post(URLConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj).subscribe((response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);
       },

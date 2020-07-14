@@ -12,7 +12,9 @@ import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsService } from 'app/shared/services/adIns.service';
 import { AssetSchmDObj } from 'app/shared/model/AssetSchmDObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -46,11 +48,12 @@ export class AddAssetSchemeComponent implements OnInit {
   arrAddCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
   checkboxAll: boolean = false;
-  getAssetSchmHByIdUrl: string = AdInsConstant.GetAssetSchmHById;
-  addListAssetSchmDUrl: string = AdInsConstant.AddRangeAssetSchmD;
+  getAssetSchmHByIdUrl: string = URLConstant.GetAssetSchmHById;
+  addListAssetSchmDUrl: string = URLConstant.AddRangeAssetSchmD;
 
   AssetSchmHId: any;
-  getListAssetSchmDByAssetSchmHId = AdInsConstant.GetListAssetSchmDByAssetSchmHId;
+  viewObj: string;
+  getListAssetSchmDByAssetSchmHId = URLConstant.GetListAssetSchmDByAssetSchmHId;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(
@@ -82,19 +85,19 @@ export class AddAssetSchemeComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = './assets/search/searchAssetMasterInAssetSchm.json';
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputObj.addCritInput = new Array();
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
     let assetSchmHObj = { AssetSchmHId: this.AssetSchmHId, "RowVersion": "" };
-    var url = AdInsConstant.GetListAssetSchmDByAssetSchmHId;
+    var url = URLConstant.GetListAssetSchmDByAssetSchmHId;
     var obj = { "AssetSchmHId": this.AssetSchmHId, "RowVersion": "" };
     var arr = [0];
     var temp;
     this.http.post(url, obj).subscribe(
       response => {
-        temp = response['ReturnObject'];
+        temp = response[CommonConstant.ReturnObj];
 
         for (var i = 0; i < temp.length; i++) {
           arr.push(temp[i]['AssetMasterId']);

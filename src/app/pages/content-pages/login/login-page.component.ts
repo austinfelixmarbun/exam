@@ -9,12 +9,13 @@ import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { environment } from 'environments/environment';
 import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
-    styleUrls: ['./login-page.component.scss'],
-    providers:[RolePickService]
+    providers: [RolePickService]
 })
 
 export class LoginPageComponent implements OnInit {
@@ -22,26 +23,25 @@ export class LoginPageComponent implements OnInit {
     @ViewChild('pass') userPassRef: ElementRef;
     @ViewChild('f') loginForm: NgForm;
     private apiUrl: string;
-    IsNeedUpdate : boolean;
+    IsNeedUpdate: boolean;
     FoundationR3Url: string;
-    token:string;
-    version:string;
+    token: string;
+    version: string;
     result: any;
 
-    constructor(private router: Router, private http: HttpClient, public rolePickService : RolePickService,
+    constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
         private route: ActivatedRoute,
         private currentUserContextService: CurrentUserContextService) {
         //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
 
-        this.version = localStorage.getItem("Version");
+        this.version = localStorage.getItem(CommonConstant.VERSION);
         this.route.queryParams.subscribe(params => {
             if (params['token'] != null) {
-              this.token = params['token'];
+                this.token = params['token'];
             }
-          });
-      
-        if(localStorage.getItem("UserAccess") != null)
-        {
+        });
+
+        if (localStorage.getItem(CommonConstant.USER_ACCESS) != null) {
             this.router.navigate(['dashboard/dash-board']);
         }
     }
@@ -49,12 +49,11 @@ export class LoginPageComponent implements OnInit {
     ngOnInit() {
         console.log("Init Login");
         this.FoundationR3Url = environment.FoundationR3Url;
-        
 
-        if(this.token!=null)
-        {
-            localStorage.setItem("Token",this.token);
-            this.http.post(AdInsConstant.LoginWithToken, {ModuleCode:environment.Module}).subscribe(
+
+        if (this.token != null) {
+            localStorage.setItem("Token", this.token);
+            this.http.post(AdInsConstant.LoginWithToken, { ModuleCode: environment.Module }).subscribe(
                 (response) => {
                     console.log(response);
                     AdInsHelper.CreateUserAccess(response);
@@ -76,47 +75,47 @@ export class LoginPageComponent implements OnInit {
             );
         }
     }
-    
+
     onSubmit(event) {
         event.preventDefault();
         const username = this.userInputRef.nativeElement.value;
         const password = this.userPassRef.nativeElement.value;
         this.apiUrl = this.FoundationR3Url + AdInsConstant.Login;
         var requestObj = { "Username": username, "Password": password };
-        localStorage.setItem("Username",username);
+        localStorage.setItem("Username", username);
         console.log("Login Page Comp");
         //this.rolePickService.openDialog(data.returnObject);
         this.http.post(this.apiUrl, requestObj).subscribe(
             (response) => {
                 console.log(response);
-                localStorage.setItem("Username",username);
+                localStorage.setItem("Username", username);
                 const object = {
-                    response: response["ReturnObject"],
+                    response: response[CommonConstant.ReturnObj],
                     user: username,
                     pwd: password
                 };
-                this.http.post(AdInsConstant.GetRefUserByUsername, requestObj).subscribe(
-                (response) => {
-                   this.result = response;
-                   if(this.result.IsNeedUpdatePassword){
-                    this.router.navigate(['/pages/ChangePassword'], { queryParams: { "Username": username } });
-                   }
-                   else{
-                    this.rolePickService.openDialog(object);
-                    const object2 = {
-                        Usernames: [
-                            username
-                        ],
-                        Role: "",
-                        Message: "",
-                        Title: "Password Expiration",
-                        Type: "Notification"
-                    };
-                    this.http.post(AdInsConstant.SendNotificationRemainingPasswordExpirationDaysToUser, object2).subscribe();
-                   }
-               
+                this.http.post(URLConstant.GetRefUserByUsername, requestObj).subscribe(
+                    (response) => {
+                        this.result = response;
+                        if (this.result.IsNeedUpdatePassword) {
+                            this.router.navigate(['/pages/ChangePassword'], { queryParams: { "Username": username } });
+                        }
+                        else {
+                            this.rolePickService.openDialog(object);
+                            const object2 = {
+                                Usernames: [
+                                    username
+                                ],
+                                Role: "",
+                                Message: "",
+                                Title: "Password Expiration",
+                                Type: "Notification"
+                            };
+                            this.http.post(URLConstant.SendNotificationRemainingPasswordExpirationDaysToUser, object2).subscribe();
+                        }
 
-                })
+
+                    })
             },
             (error) => {
                 console.log(error);

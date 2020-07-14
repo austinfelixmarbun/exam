@@ -14,6 +14,7 @@ import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { NgForm, FormBuilder } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UploadService } from 'app/shared/upload/upload.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-upload-setting-edit',
@@ -45,7 +46,7 @@ export class UploadSettingEditComponent implements OnInit {
   uploadSettingObj: any;
 
   uploadTypeId: any;
-  uploadTypeObject: any;z
+  uploadTypeObject: any; z
   userTitleRoleObj: any;
   empPositionId: any;
   addCritLookup: any;
@@ -65,28 +66,28 @@ export class UploadSettingEditComponent implements OnInit {
   ngOnInit() {
     this.tempRefRole = new Array();
     this.route.queryParams.subscribe(params => {
-    if (params['param'] != null) {
-      this.pageType = params['param'];
-    } else {
-      this.pageType = 'add';
-    }
-    if (params['uploadTypeId'] != null) {
-      this.uploadTypeId = params['uploadTypeId'];
-    }
+      if (params['param'] != null) {
+        this.pageType = params['param'];
+      } else {
+        this.pageType = 'add';
+      }
+      if (params['uploadTypeId'] != null) {
+        this.uploadTypeId = params['uploadTypeId'];
+      }
 
-    if (this.pageType === 'edit') {
-      this.uploadTypeObject = { uploadTypeId: this.uploadTypeId };
-      this.uploadService.getUploadTypeByUploadTypeId(this.uploadTypeObject).subscribe(
-        response => {
-          console.log(response);
-          this.uploadTypeCode = response['returnObject'].uploadTypeCode;
-          this.uploadTypeName = response['returnObject'].uploadTypeName;
-          if (response['isActive']) {
-            this.isActive = true;
-          } else {
-          this.isActive = false;
-          }
-        });
+      if (this.pageType === 'edit') {
+        this.uploadTypeObject = { uploadTypeId: this.uploadTypeId };
+        this.uploadService.getUploadTypeByUploadTypeId(this.uploadTypeObject).subscribe(
+          response => {
+            console.log(response);
+            this.uploadTypeCode = response['returnObject'].uploadTypeCode;
+            this.uploadTypeName = response['returnObject'].uploadTypeName;
+            if (response['isActive']) {
+              this.isActive = true;
+            } else {
+              this.isActive = false;
+            }
+          });
 
         this.uploadService.getListRefRoleByUploadTypeId(this.uploadTypeObject).subscribe(
           response => {
@@ -98,17 +99,17 @@ export class UploadSettingEditComponent implements OnInit {
           });
       }
 
-    this.pageNow = 1;
-    this.pageSize = 10;
-    this.inputLookupObj = new InputLookupObj();
-    this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
-    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupObj.pagingJson = "./assets/lookup/lookupRole.json";
-    this.inputLookupObj.genericJson = "./assets/lookup/lookupRole.json";
+      this.pageNow = 1;
+      this.pageSize = 10;
+      this.inputLookupObj = new InputLookupObj();
+      this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
+      this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
+      this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
+      this.inputLookupObj.pagingJson = "./assets/lookup/lookupRole.json";
+      this.inputLookupObj.genericJson = "./assets/lookup/lookupRole.json";
 
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
-    this.initiateForm();
+      this.apiUrl = this.foundationUrl + URLConstant.GetRefRolePaging;
+      this.initiateForm();
     });
   }
 
@@ -147,25 +148,25 @@ export class UploadSettingEditComponent implements OnInit {
   }
 
   SaveForm(): void {
-    const assignRoleToUpload = { uploadTypeId: this.uploadTypeId, listRoleId: this.listRefRoleId}
+    const assignRoleToUpload = { uploadTypeId: this.uploadTypeId, listRoleId: this.listRefRoleId }
     this.spinner.show();
 
-      this.apiUrl = this.foundationUrl + AdInsConstant.AssignRoleToUploadSetting;
-      this.httpClient.post(this.apiUrl, assignRoleToUpload).subscribe(
-        (response) => {
-          console.log(response);
+    this.apiUrl = this.foundationUrl + URLConstant.AssignRoleToUploadSetting;
+    this.httpClient.post(this.apiUrl, assignRoleToUpload).subscribe(
+      (response) => {
+        console.log(response);
 
-          this.service.typeSave('Assign Role to Upload Setting Success');
-          this.location.back();
-          this.spinner.hide();
+        this.service.typeSave('Assign Role to Upload Setting Success');
+        this.location.back();
+        this.spinner.hide();
 
-        },
-        (error) => {
-          console.log(error);
-          this.service.typeErrorCustom(error);
-          this.spinner.hide();
-        }
-      );
+      },
+      (error) => {
+        console.log(error);
+        this.service.typeErrorCustom(error);
+        this.spinner.hide();
+      }
+    );
   }
 
   searchSort(event: any) {
@@ -181,5 +182,4 @@ export class UploadSettingEditComponent implements OnInit {
     }
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
   }
-
 }

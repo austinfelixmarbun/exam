@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
@@ -20,34 +21,34 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
 
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private router: Router, private toastr:NGXToastrService) {
-      this.route.queryParams.subscribe(params => {
-        this.RefOfficeId = params['RefOfficeId'];
-        this.CenterGrpId = params['CenterGrpId'];
-      });
-    }
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
+    this.route.queryParams.subscribe(params => {
+      this.RefOfficeId = params['RefOfficeId'];
+      this.CenterGrpId = params['CenterGrpId'];
+    });
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
-    
+
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/officeGrpMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/officeGrpMbrTempPaging.json";
-    
+
     this.GetListCenterGrpMemberByRefOfficeId();
   }
 
   GetListCenterGrpMemberByRefOfficeId() {
-    this.http.post(AdInsConstant.GetListCenterGrpMemberByRefOfficeId, { CenterGrpId: this.CenterGrpId, RefOfficeId: this.RefOfficeId }).subscribe(
+    this.http.post(URLConstant.GetListCenterGrpMemberByRefOfficeId, { CenterGrpId: this.CenterGrpId, RefOfficeId: this.RefOfficeId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response["ListCenterGrpOfficeMbr"].length; index++) {
-           arrMemberList.push(response["ListCenterGrpOfficeMbr"][index].RefOfficeId)
+          arrMemberList.push(response["ListCenterGrpOfficeMbr"][index].RefOfficeId)
         }
-        
-        if(arrMemberList.length != 0){
+
+        if (arrMemberList.length != 0) {
           const addCritListRefOffice = new CriteriaObj();
           addCritListRefOffice.DataType = 'numeric';
           addCritListRefOffice.propName = 'REF_OFFICE_ID';
@@ -78,13 +79,12 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       RefOfficeId: this.listSelectedId
     }
 
-    this.http.post(AdInsConstant.AddCenterGrpOfficeMember, obj).subscribe(
-        (response) => {
-            this.router.navigate(['/Office/Group/Member'], {queryParams: {RefOfficeId:this.RefOfficeId, CenterGrpId:this.CenterGrpId}});
-        },
-        (error) => {
-            console.log(error);
-        });
-
+    this.http.post(URLConstant.AddCenterGrpOfficeMember, obj).subscribe(
+      (response) => {
+        this.router.navigate(['/Office/Group/Member'], { queryParams: { RefOfficeId: this.RefOfficeId, CenterGrpId: this.CenterGrpId } });
+      },
+      (error) => {
+        console.log(error);
+      });
   }
 }

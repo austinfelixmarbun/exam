@@ -4,6 +4,10 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
+import { template } from '@angular/core/src/render3';
+import { empty } from 'rxjs';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 
 @Component({
@@ -18,13 +22,13 @@ export class SearchOfficeComponentOffering implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private toastr:NGXToastrService
+    private toastr: NGXToastrService
   ) { }
   
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/productHOfficeMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/productHOfficeMbrTempPaging.json";
     this.tempPagingObj.ddlEnvironments = [
       {
@@ -44,7 +48,7 @@ export class SearchOfficeComponentOffering implements OnInit {
     this.tempPagingObj.isReady = true;
   }
 
-  GoBack(){
+  GoBack() {
     var obj = {
       isOn: true,
       result: []
@@ -77,14 +81,14 @@ export class SearchOfficeComponentOffering implements OnInit {
       obj.ProdOfferingBranchMbrs.push(tempObj);
     }
 
-    this.http.post(AdInsConstant.AddProdOfferingOfficeMbrBatch, obj).subscribe(
+    this.http.post(URLConstant.AddProdOfferingOfficeMbrBatch, obj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         var obj = {
           isOn: true,
           result: []
         }
-        this.componentIsOn.emit(obj );
+        this.componentIsOn.emit(obj);
       },
       (error) => {
         console.log(error);

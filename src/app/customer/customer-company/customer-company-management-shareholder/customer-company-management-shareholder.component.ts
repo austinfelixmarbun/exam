@@ -5,6 +5,9 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { ActivatedRoute } from '@angular/router';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder',
@@ -53,12 +56,12 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
   next() {
     this.custCompanyObj = new CustCompanyObj;
     this.custCompanyObj.CustId = this.IdCust;
-    this.http.post(AdInsConstant.GetCustCompanyByCustId, this.custCompanyObj).subscribe(
+    this.http.post(URLConstant.GetCustCompanyByCustId, this.custCompanyObj).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
-        this.http.post(AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
+        this.http.post(URLConstant.GetListCustCompanyMgmntShrholderByCustCompanyId, this.tempCustCompanyObj).subscribe(
           (response) => {
-            this.tempListCompanyManagementShareholder = response["ReturnObject"];
+            this.tempListCompanyManagementShareholder = response[CommonConstant.ReturnObj];
             if(this.tempListCompanyManagementShareholder.length != 0)
             {
               this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
@@ -69,7 +72,7 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
             }
 
             if(this.TotalShare < 100){
-              this.toastr.warningMessage("Total Share % must be 100%");
+              this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_MUST_100);
               return;
             }
             this.outputTab.emit({ stepMode: 'next'});

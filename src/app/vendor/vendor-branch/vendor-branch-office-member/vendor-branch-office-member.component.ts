@@ -4,6 +4,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-branch-office-member',
@@ -14,7 +15,7 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
   VendorId: string;
   objPassing: any = {};
 
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
       this.objPassing["VendorEmpId"] = params['VendorEmpId'];
@@ -26,7 +27,7 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorOfficeMember.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorOfficeMember.json";
     this.inputPagingObj.deleteUrl = "/VendorOfficeMbr/DeleteVendorOfficeMember";
 

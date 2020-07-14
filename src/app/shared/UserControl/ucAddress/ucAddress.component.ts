@@ -4,6 +4,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 @Component({
   selector: 'app-ucAddress',
   templateUrl: './ucAddress.component.html',
@@ -44,7 +45,7 @@ export class UcAddressComponent implements OnInit {
   ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupZipcode.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefZipcodePaging;
+    this.inputLookupObj.urlQryPaging = URLConstant.GetRefZipcodePaging;
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/form-setting/zipcodePaging.json";
     this.inputLookupObj.genericJson = "./assets/form-setting/zipcodeGeneric.json";

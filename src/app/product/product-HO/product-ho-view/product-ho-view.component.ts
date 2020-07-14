@@ -1,18 +1,16 @@
 import { environment } from "environments/environment";
 import { Component, OnInit, ViewChild, Input } from "@angular/core";
-import { AdInsConstant } from "app/shared/AdInstConstant";
 import { DecimalPipe } from "@angular/common";
-import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
 import { RefProductBrancMbrObj } from "../../../shared/model/RefProductBrancMbrObj.Model";
 import { ProdHVersionObj } from "../../../shared/model/ProdHVersionObj.Model";
-import { getComponent } from "@angular/core/src/linker/component_factory_resolver";
 import { saveAs } from 'file-saver';
+import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 
 
@@ -44,9 +42,9 @@ export class ProductHOViewComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
-    this.ProdDUrl = AdInsConstant.GetProductDetailComponentInfo;
-    this.ProdBranchUrl = AdInsConstant.GetListProdBranchOfficeMbrByProdHId;
-    this.ProdVerUrl = AdInsConstant.GetListProdHVersionByProdHId;
+    this.ProdDUrl = URLConstant.GetProductDetailComponentInfo;
+    this.ProdBranchUrl = URLConstant.GetListProdBranchOfficeMbrByProdHId;
+    this.ProdVerUrl = URLConstant.GetListProdHVersionByProdHId;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {
@@ -72,7 +70,7 @@ export class ProductHOViewComponent implements OnInit {
     this.ProdVersionObj.ProdHId = this.prodHId;
     this.http.post(this.ProdVerUrl, this.ProdVersionObj).subscribe(
       response => {
-        this.ProdVersion = response['ReturnObject'];
+        this.ProdVersion = response[CommonConstant.ReturnObj];
       },
       error => {
         console.log(error);
@@ -84,7 +82,7 @@ export class ProductHOViewComponent implements OnInit {
     this.ProdBranchMemObj.ProdHId = this.prodHId;
     this.http.post(this.ProdBranchUrl, this.ProdBranchMemObj).subscribe(
       response => {
-        this.ProdBranchMbr = response['ReturnObject'];
+        this.ProdBranchMbr = response[CommonConstant.ReturnObj];
       },
       error => {
         console.log(error);
@@ -99,7 +97,7 @@ export class ProductHOViewComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdComp = response['ReturnObject'].ProdOffComponents;
+        this.ProdComp = response[CommonConstant.ReturnObj].ProdOffComponents;
         console.log(this.ProdComp);
         this.GenData = this.ProdComp.filter(
           comp => comp.GroupCode == 'GEN');
@@ -118,7 +116,7 @@ export class ProductHOViewComponent implements OnInit {
 
   DownloadRule(CompntValue, CompntValueDesc) {
     this.DlRuleObj.CompntValue = CompntValue;
-    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+    this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
       },

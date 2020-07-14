@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-header-company',
-  templateUrl: './customer-view-header-company.component.html',
-  styleUrls: ['./customer-view-header-company.component.scss']
+  templateUrl: './customer-view-header-company.component.html'
 })
 export class CustomerViewHeaderCompanyComponent implements OnInit {
   IdCust: number; 
@@ -30,9 +30,9 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
   custUrl: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { 
-    this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
-    this.getCustCompanyUrl = AdInsConstant.GetCustCompanyByCustId;
-    this.getCustUrl = AdInsConstant.GetCustByCustId;
+    this.getRefMasterByMasterCodeUrl = URLConstant.GetRefMasterByMasterCode;
+    this.getCustCompanyUrl = URLConstant.GetCustCompanyByCustId;
+    this.getCustUrl = URLConstant.GetCustByCustId;
     this.route.queryParams.subscribe(params => {
 
       if (params["IdCust"] != null) {
@@ -48,7 +48,7 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
     
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
-    this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
       (response) => {
         this.tempCustObj = response;
         console.log("aaa")

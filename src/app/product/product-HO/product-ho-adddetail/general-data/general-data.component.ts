@@ -11,6 +11,8 @@ import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductDetailObj } from 'app/shared/model/ListRefProductDetailObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-general-data-HO',
@@ -62,8 +64,8 @@ export class GeneralDataHOComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.UrlGetProdCompGrouped = AdInsConstant.GetProductHOComponentGrouped;
-    this.UrlPostAddEditProdD = AdInsConstant.AddOrEditProductDetail;
+    this.UrlGetProdCompGrouped = URLConstant.GetProductHOComponentGrouped;
+    this.UrlPostAddEditProdD = URLConstant.AddOrEditProductDetail;
 
     this.FormProdComp = this.fb.group(
       {
@@ -79,7 +81,7 @@ export class GeneralDataHOComponent implements OnInit {
     this.inputLookUpObj = new InputLookupObj();
     this.inputLookUpObj.urlJson = "./assets/uclookup/product/lookupProduct.json";
     this.inputLookUpObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookUpObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookUpObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookUpObj.pagingJson = "./assets/uclookup/product/lookupProduct.json";
     this.inputLookUpObj.genericJson = "./assets/uclookup/product/lookupProduct.json";
     this.inputLookUpObj.isRequired = false;
@@ -155,7 +157,7 @@ export class GeneralDataHOComponent implements OnInit {
       var payload = JSON.parse(obj.ProdCompntDtaValue);
       await this.http.post(url, payload).toPromise().then(
         (response) => {
-          this.dictOptions[obj.RefProdCompntCode] = response["ReturnObject"];
+          this.dictOptions[obj.RefProdCompntCode] = response[CommonConstant.ReturnObj];
           var compValue;
           if (obj.CompntValue == "") {
             compValue = this.dictOptions[obj.RefProdCompntCode][0].Key;
@@ -181,7 +183,7 @@ export class GeneralDataHOComponent implements OnInit {
       var payload = JSON.parse(obj.ProdCompntDtaValue);
       await this.http.post(url, payload).toPromise().then(
         (response) => {
-          var result = response["ReturnObject"];
+          var result = response[CommonConstant.ReturnObj];
           this.dictMultiOptions[obj.RefProdCompntCode] = new Array();
           this.selectedMultiDDLItems[obj.RefProdCompntCode] = new Array();
           for (let i = 0; i < result.length; i++) {
@@ -196,7 +198,7 @@ export class GeneralDataHOComponent implements OnInit {
   }
 
   async PopulateFinMapFromLOB() {
-    var url = AdInsConstant.GetKvpRefFinMapByLobCode;
+    var url = URLConstant.GetKvpRefFinMapByLobCode;
     await this.http.post(url, { LobCode: this.LOBSelected, RowVersion: "" }).toPromise().then(
       (response) => {
         this.dictOptions["WAY_OF_FINANCING"] = response["RefWayOfFin"]
@@ -226,10 +228,10 @@ export class GeneralDataHOComponent implements OnInit {
   }
 
   async PopulateInstallmentSchedule() {
-    var url = AdInsConstant.GetListKvpInstSchmByLobCode;
+    var url = URLConstant.GetListKvpInstSchmByLobCode;
     await this.http.post(url, { LobCode: this.LOBSelected, RowVersion: "" }).toPromise().then(
       (response) => {
-        var result = response["ReturnObject"];
+        var result = response[CommonConstant.ReturnObj];
         this.dictMultiOptions["INST_SCHM"] = new Array();
         this.selectedMultiDDLItems["INST_SCHM"] = new Array();
 
@@ -252,8 +254,8 @@ export class GeneralDataHOComponent implements OnInit {
     }
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
-        for (var i = 0; i < response["ReturnObject"].length; i++) {
-          var group = response["ReturnObject"][i];
+        for (var i = 0; i < response[CommonConstant.ReturnObj].length; i++) {
+          var group = response[CommonConstant.ReturnObj][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
           fa_group.push(this.addGroup(group.GroupCode, group.GroupName));
 

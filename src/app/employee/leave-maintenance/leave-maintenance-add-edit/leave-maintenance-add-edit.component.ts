@@ -4,19 +4,17 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefEmpLeaveMngmntObj } from 'app/shared/model/RefEmpLeaveMngmntObj.Model';
-import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
-import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate, DatePipe } from '@angular/common';
 import { environment } from 'environments/environment';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { LookupemployeeComponent } from '@adins/lookupemployee';
 import { RefEmpObj } from '../../../shared/model/RefEmpObj.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-leave-maintenance-add-edit',
   templateUrl: './leave-maintenance-add-edit.component.html',
-  styleUrls: ['./leave-maintenance-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class LeaveMaintenanceAddEditComponent implements OnInit {
@@ -42,10 +40,10 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
 
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.apiUrl = AdInsConstant.GetRefEmpLeaveMngmntById;
-    this.addUrl = AdInsConstant.AddRefEmpLeaveMngmnt;
-    this.editUrl = AdInsConstant.EditRefEmpLeaveMngmnt;
-    this.getRefEmpUrl = AdInsConstant.GetRefEmployeeById;
+    this.apiUrl = URLConstant.GetRefEmpLeaveMngmntById;
+    this.addUrl = URLConstant.AddRefEmpLeaveMngmnt;
+    this.editUrl = URLConstant.EditRefEmpLeaveMngmnt;
+    this.getRefEmpUrl = URLConstant.GetRefEmployeeById;
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -58,12 +56,12 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDt = new Date(context["BusinessDt"]);  
-    
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
+
     this.inputEmpLookupObj = new InputLookupObj();
     this.inputEmpLookupObj.urlJson = "./assets/lookup/lookupEmp.json";
-    this.inputEmpLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputEmpLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputEmpLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputEmpLookupObj.pagingJson = "./assets/lookup/lookupEmp.json";
     this.inputEmpLookupObj.genericJson = "./assets/lookup/lookupEmp.json";
@@ -103,20 +101,20 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         });
     }
   }
-  
+
   SaveForm() {
-    var businessDtRaw = new Date(localStorage.getItem("BusinessDateRaw"));
+    var businessDtRaw = new Date(localStorage.getItem(CommonConstant.BUSINESS_DATE_RAW));
     var StartDt = new Date(this.RefEmpLeaveMngmntForm.controls["StartDt"].value);
     if (StartDt < businessDtRaw) {
-      this.toastr.warningMessage("Start Date must be equal or more than Business Date");
+      this.toastr.warningMessage(ExceptionConstant.START_DATE_MUST_EQUAL_OR_MORE_THAN + "Business Date");
     }
     else if (this.RefEmpLeaveMngmntForm.controls["EndDt"].value < this.RefEmpLeaveMngmntForm.controls["StartDt"].value) {
-      this.toastr.warningMessage("End Date must be equal or more than Start Date");
+      this.toastr.warningMessage(ExceptionConstant.END_DATE_MUST_EQUAL_OR_MORE_THAN + "Start Date");
     }
     else {
       this.relmObj = new RefEmpLeaveMngmntObj();
       this.relmObj = this.RefEmpLeaveMngmntForm.value;
-      var Business_Date = localStorage.getItem('BusinessDate');
+      var Business_Date = localStorage.getItem(CommonConstant.BUSINESS_DT);
       var datePipe = new DatePipe("en-US");
       var value = datePipe.transform(Business_Date, "yyyy-MM-dd");
       var businessDt = new Date(value);
@@ -153,6 +151,5 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         );
       }
     }
-
   }
 }

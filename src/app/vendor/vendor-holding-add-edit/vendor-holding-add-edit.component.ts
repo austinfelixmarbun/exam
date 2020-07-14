@@ -11,6 +11,8 @@ import { formatDate } from '@angular/common';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-holding-add-edit',
@@ -81,8 +83,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDt = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
       this.ButtonLbl = "Submit";
       this.VendorForm.controls.VendorCode.disable();
@@ -145,26 +147,26 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   setDropdown() {
     var refMasterCategoryObj = {
-      RefMasterTypeCode: "VENDOR_CATEGORY",
-      ReserveField1: "HOLDING"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
+      ReserveField1: CommonConstant.Holding
     }
     this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).subscribe(
       (response) => {
-        this.itemCategoryType = response["ReturnObject"];
+        this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
           this.VendorForm.patchValue({
-            MrVendorCategoryCode: response["ReturnObject"][0].Key
+            MrVendorCategoryCode: response[CommonConstant.ReturnObj][0].Key
           });
         }
       }
     );
 
     var refMasterTypeObj = {
-      RefMasterTypeCode: "VENDOR_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorType,
     }
     this.vendorService.GetRefMasterListKeyValuePair(refMasterTypeObj).subscribe(
       (response) => {
-        this.itemType = response["ReturnObject"];
+        this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
           if (this.mode != "edit") {
             this.VendorForm.patchValue({
@@ -176,11 +178,11 @@ export class VendorHoldingAddEditComponent implements OnInit {
     );
 
     var refMasterIdObj = {
-      RefMasterTypeCode: "ID_TYPE_VENDOR",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
     }
     this.vendorService.GetRefMasterListKeyValuePair(refMasterIdObj).subscribe(
       (response) => {
-        this.itemIdType = response["ReturnObject"];
+        this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
           this.VendorForm.patchValue({
             MrIdTypeCode: this.itemIdType[0].Key
@@ -190,11 +192,11 @@ export class VendorHoldingAddEditComponent implements OnInit {
     );
 
     var refMasterCalcMethodObj = {
-      RefMasterTypeCode: "TAX_CALC_METHOD",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
     this.vendorService.GetRefMasterListKeyValuePair(refMasterCalcMethodObj).subscribe(
       (response) => {
-        this.itemCalcMethodType = response["ReturnObject"];
+        this.itemCalcMethodType = response[CommonConstant.ReturnObj];
         if (this.itemCalcMethodType.length > 0) {
           if (this.mode != "edit") {
             this.VendorForm.patchValue({
@@ -281,7 +283,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorHoldingObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
         this.vendorHoldingObj.VendorObj.TaxpayerName = this.VendorForm.controls.TaxpayerName.value;
 
-        this.vendorHoldingObj.VendorAddrObj.MrAddrTypeCode = "TAX";
+        this.vendorHoldingObj.VendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeTax;
         this.vendorHoldingObj.VendorAddrObj.Addr = this.VendorForm.controls.Addr.value;
         this.vendorHoldingObj.VendorAddrObj.Zipcode = this.VendorForm.controls["Zipcode"]["controls"].value.value;
         this.vendorHoldingObj.VendorAddrObj.AreaCode2 = this.VendorForm.controls.AreaCode2.value;
@@ -289,7 +291,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorHoldingObj.VendorAddrObj.City = this.VendorForm.controls.City.value;
         this.vendorHoldingObj.VendorAddrObj.Province = this.VendorForm.controls.Province.value;
       } else if (this.result != null) {
-        this.vendorHoldingObj.VendorAddrObj.MrAddrTypeCode = "TAX";
+        this.vendorHoldingObj.VendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeTax;
         this.vendorHoldingObj.VendorAddrObj.Addr = this.result.VendorAddrObj.Addr;
         this.vendorHoldingObj.VendorAddrObj.Zipcode = this.result.VendorAddrObj.Zipcode;
         this.vendorHoldingObj.VendorAddrObj.AreaCode2 = this.result.VendorAddrObj.AreaCode2;
@@ -341,7 +343,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";

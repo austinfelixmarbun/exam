@@ -9,6 +9,7 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { DatePipe } from '@angular/common';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-detail',
@@ -43,10 +44,10 @@ export class CustomerCompanyDetailComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
  
-    this.editCustCompanyUrl = AdInsConstant.EditCustCompany;
-    this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;
-    this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
-    this.getRefIndustryTypeByIndustryTypeIdUrl = AdInsConstant.GetRefIndustryTypeById;
+    this.editCustCompanyUrl = URLConstant.EditCustCompany;
+    this.getCustCompanyByCustIdUrl = URLConstant.GetCustCompanyByCustId;
+    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
+    this.getRefIndustryTypeByIndustryTypeIdUrl = URLConstant.GetRefIndustryTypeById;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];

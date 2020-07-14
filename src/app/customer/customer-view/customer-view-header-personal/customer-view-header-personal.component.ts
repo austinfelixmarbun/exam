@@ -5,11 +5,11 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-header-personal',
-  templateUrl: './customer-view-header-personal.component.html',
-  styleUrls: ['./customer-view-header-personal.component.scss']
+  templateUrl: './customer-view-header-personal.component.html'
 })
 export class CustomerViewHeaderPersonalComponent implements OnInit {
   resultData: any;
@@ -44,7 +44,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
   custUrl: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
-    this.getRefMasterByMasterCodeUrl = AdInsConstant.GetRefMasterByMasterCode;
+    this.getRefMasterByMasterCodeUrl = URLConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -59,7 +59,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
   ngOnInit() {
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
-    this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
       (response) => {
         this.tempCustObj = response;
         var refMasterObjMrCustModelCode = {
@@ -92,7 +92,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
 
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
-    this.http.post(AdInsConstant.GetCustPersonalbyCustId, this.custPersonalObj).subscribe(
+    this.http.post(URLConstant.GetCustPersonalbyCustId, this.custPersonalObj).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
         var refMasterObjMrGenderCode = {

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessUnitObj } from 'app/shared/model/BusinessUnitObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
     selector: 'add-app-business-unit',
@@ -14,11 +15,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 
 export class AddBusinessUnitComponent implements OnInit {
-    bizUnitObj : BusinessUnitObj;
+    bizUnitObj: BusinessUnitObj;
     RefBizUnitId: string;
-    pageType:any;
+    pageType: any;
     result: any;
-    title:string;
+    title: string;
     mode: string = "add";
     apiUrl: any;
     isActive: boolean = true;
@@ -34,21 +35,21 @@ export class AddBusinessUnitComponent implements OnInit {
 
     BizUnitForm = this.fb.group({
         BizUnitCode: ['', Validators.required],
-        BizUnitName:  ['', Validators.required],
-        Descr:  [''],
-        IsActive:  [true],
-        RowVersion: ['']    
+        BizUnitName: ['', Validators.required],
+        Descr: [''],
+        IsActive: [true],
+        RowVersion: ['']
     })
 
     ngOnInit() {
         this.title = "Business Unit Add";
         if (this.mode == "edit") {
             this.title = "Business Unit Edit";
-            this.apiUrl =AdInsConstant.GetRefBizUnit;
+            this.apiUrl = URLConstant.GetRefBizUnit;
             this.bizUnitObj = new BusinessUnitObj();
             this.bizUnitObj.RefBizUnitId = this.RefBizUnitId;
             this.BizUnitForm.controls.BizUnitCode.disable();
-            this.http.post(this.apiUrl,  this.bizUnitObj).subscribe(
+            this.http.post(this.apiUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.result = response;
                     console.log(this.result);
@@ -67,14 +68,14 @@ export class AddBusinessUnitComponent implements OnInit {
         }
     }
 
-    SaveForm(){
+    SaveForm() {
         this.bizUnitObj = new BusinessUnitObj();
         this.bizUnitObj = this.BizUnitForm.value;
         if (this.mode == "edit") {
-            this.editUrl = AdInsConstant.EditRefBizUnit;
+            this.editUrl = URLConstant.EditRefBizUnit;
             this.bizUnitObj.BizUnitCode = this.result.BizUnitCode;
             this.bizUnitObj.RefBizUnitId = this.RefBizUnitId;
-            
+
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
@@ -85,7 +86,7 @@ export class AddBusinessUnitComponent implements OnInit {
                 });
         }
         else {
-            this.editUrl = AdInsConstant.AddRefBizUnit;
+            this.editUrl = URLConstant.AddRefBizUnit;
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);

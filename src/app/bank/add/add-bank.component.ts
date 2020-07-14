@@ -6,6 +6,7 @@ import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
     selector: 'add-bank',
@@ -47,7 +48,7 @@ export class BankAddComponent implements OnInit {
             var bankObj = new RefBankObj();
             bankObj.RefBankId = this.refBankId;
             
-            this.http.post(AdInsConstant.GetRefBankByRefBankIdAsync, bankObj).subscribe(
+            this.http.post(URLConstant.GetRefBankByRefBankIdAsync, bankObj).subscribe(
                 (response) => {
                     this.result = response;
                     this.BankAddForm.patchValue({
@@ -72,7 +73,7 @@ export class BankAddComponent implements OnInit {
             this.bankObj.RefBankId = this.refBankId;
             this.bankObj.RowVersion  = this.result.RowVersion;
 
-            this.http.post(AdInsConstant.EditRefBank, this.bankObj).subscribe(
+            this.http.post(URLConstant.EditRefBank, this.bankObj).subscribe(
                 (response) => {
                     this.router.navigate(["/CommonSetting/Bank/Paging"]);
                     this.toastr.successMessage(response['message']);
@@ -87,7 +88,7 @@ export class BankAddComponent implements OnInit {
             this.bankObj.RefBankId = "0";
             this.bankObj.RowVersion = "";
 
-            this.http.post(AdInsConstant.AddRefBankAsync, this.bankObj).subscribe((response) => {
+            this.http.post(URLConstant.AddRefBankAsync, this.bankObj).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
                 this.router.navigate(["/CommonSetting/Bank/Paging"]);
             },

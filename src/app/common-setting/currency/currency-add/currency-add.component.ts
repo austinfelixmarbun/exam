@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CurrObj } from 'app/shared/model/CurrObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-currency-add',
@@ -34,9 +35,9 @@ export class CurrencyAddComponent implements OnInit {
   UcNumber3: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getUrl = AdInsConstant.GetRefCurrById;
-    this.addUrl = AdInsConstant.AddRefCurr;
-    this.editUrl = AdInsConstant.EditRefCurr;
+    this.getUrl = URLConstant.GetRefCurrById;
+    this.addUrl = URLConstant.AddRefCurr;
+    this.editUrl = URLConstant.EditRefCurr;
 
 
     this.route.queryParams.subscribe(params => {

@@ -3,16 +3,20 @@ import { Component, OnInit } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { HttpClient } from "@angular/common/http";
+import { ExcelService } from "app/shared/excel-service/excel-service";
 import { environment } from "environments/environment";
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AuthFormObj } from "app/shared/model/AuthFormObj.Model";
 import { ListAuthFormObj } from "app/shared/model/ListAuthFormObj.Model";
+import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
 import { UcTempPagingObj } from "app/shared/model/TempPaging/UcTempPagingObj.model";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 @Component({
   selector: 'app-role-form',
   templateUrl: './role-form.component.html',
+  providers: [NGXToastrService, ExcelService]
 })
 export class RoleFormComponent implements OnInit {
   RefRoleId: number;
@@ -22,7 +26,7 @@ export class RoleFormComponent implements OnInit {
   RefOfficeAreaId: number;
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-  
+
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -33,25 +37,25 @@ export class RoleFormComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefRole.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
-    
+
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/roleRefFormTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/roleRefFormTempPaging.json";
 
     this.GetListRefFormRoleByRefRoleId();
   }
 
   GetListRefFormRoleByRefRoleId() {
-    this.http.post<Array<AuthFormObj>>(AdInsConstant.GetListAuthFormByRefRoleId, {RefRoleId: this.RefRoleId}).subscribe(
+    this.http.post<Array<AuthFormObj>>(URLConstant.GetListAuthFormByRefRoleId, { RefRoleId: this.RefRoleId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
 
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-          arrMemberList.push(response["ReturnObject"][index].RefFormId)
+        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+          arrMemberList.push(response[CommonConstant.ReturnObj][index].RefFormId)
         }
 
-        if (response["ReturnObject"].length != 0) {
+        if (response[CommonConstant.ReturnObj].length != 0) {
           var addCritListRefFormId = new CriteriaObj();
           addCritListRefFormId.DataType = "numeric";
           addCritListRefFormId.propName = "REF_FORM_ID";
@@ -70,7 +74,7 @@ export class RoleFormComponent implements OnInit {
   getListTemp(ev) {
     this.listSelectedId = ev.TempListId;
   }
-  
+
   SaveListAuthForm() {
     if (this.listSelectedId.length == 0) {
       this.toastr.errorMessage('Please Add At Least One Data');
@@ -88,10 +92,10 @@ export class RoleFormComponent implements OnInit {
       this.listAuthFormObj.ListAuthFormObj.push(this.AuthFormObj);
     }
 
-    this.http.post(AdInsConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
+    this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(['/SystemSetting/RoleForm'], { queryParams: { "RefRoleId": this.RefRoleId} });
+        this.router.navigate(['/SystemSetting/RoleForm'], { queryParams: { "RefRoleId": this.RefRoleId } });
       },
       (error) => {
         console.log(error);

@@ -5,6 +5,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-asset-accessory-add-edit',
@@ -37,7 +38,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.http.post(AdInsConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
+    this.http.post(URLConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];
       }
@@ -48,7 +49,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       acObj.AssetTypeId = this.AssetTypeId;
       this.AssetAccessoryForm.controls.AssetAccessoryCode.disable();
 
-      this.http.post<AssetAccessoryObj>(AdInsConstant.GetAssetAccessorybyAssetAccessoryId, acObj).subscribe(
+      this.http.post<AssetAccessoryObj>(URLConstant.GetAssetAccessorybyAssetAccessoryId, acObj).subscribe(
         (response) => {
           this.result = response;
           this.AssetAccessoryForm.patchValue({
@@ -70,7 +71,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
       this.acObj.AssetTypeId = this.AssetTypeId;
-      this.http.post(AdInsConstant.AddNewAssetAccesory, this.acObj).subscribe(
+      this.http.post(URLConstant.AddNewAssetAccesory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Accessory/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
@@ -84,7 +85,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.acObj.AssetAccessoryCode = this.AssetAccessoryForm.controls["AssetAccessoryCode"].value;
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
-      this.http.post(AdInsConstant.EditAssetAccessory, this.acObj).subscribe(
+      this.http.post(URLConstant.EditAssetAccessory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Accessory/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });

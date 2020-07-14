@@ -4,12 +4,12 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-employee-businessunit-paging',
-  templateUrl: './employee-businessunit-paging.component.html',
-  styleUrls: ['./employee-businessunit-paging.component.scss']
+  templateUrl: './employee-businessunit-paging.component.html'
 })
 export class EmployeeBusinessunitPagingComponent implements OnInit {
 
@@ -30,7 +30,7 @@ export class EmployeeBusinessunitPagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchEmployeeBusinessUnit.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchEmployeeBusinessUnit.json";
     this.inputPagingObj.deleteUrl = "/RefUserRole/DeleteRefUserRole";
     this.inputPagingObj.addCritInput = new Array();
