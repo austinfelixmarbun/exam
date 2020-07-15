@@ -24,6 +24,7 @@ import { ThingsToDoComponent } from './things-to-do/things-to-do.component';
 import { UcthingstodoModule } from '@adins/ucthingstodo';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { UcaddtotempModule } from '@adins/ucaddtotemp';
 
 @NgModule({
     exports: [
@@ -38,7 +39,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
         LookupgenericComponent,
         UcProdOfferingCompComponent,
         ThingsToDoComponent,
-        UcthingstodoModule
+        UcthingstodoModule,
+        UcaddtotempModule
     ],
     imports: [
         FormsModule,
@@ -55,7 +57,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
         ReactiveFormsModule,
         UcthingstodoModule,
         UcShowErrorsModule,
-        NgMultiSelectDropDownModule
+        NgMultiSelectDropDownModule,
+        UcaddtotempModule
     ],
     declarations: [
         UcAddressComponent,
