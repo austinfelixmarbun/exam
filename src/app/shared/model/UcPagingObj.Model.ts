@@ -10,6 +10,9 @@ export class UcPagingObj {
     addCritInput: Array<CriteriaObj>;
     ddlEnvironments: Array<EnviObj>;
     whereValue: Array<WhereValueObj>;
+    isHideSearch: boolean;
+    delay: number;
+    isSearched: boolean;
 
     constructor() {
         this._url = "";
@@ -21,6 +24,9 @@ export class UcPagingObj {
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
         this.whereValue = new Array<WhereValueObj>();
+        this.isHideSearch = false;
+        this.delay = 0;
+        this.isSearched = false;
     }
 }
 
