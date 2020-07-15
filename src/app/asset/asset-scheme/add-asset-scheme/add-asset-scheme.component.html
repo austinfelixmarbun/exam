@@ -1,34 +1,21 @@
-<section id="horizontal-form-layouts">
-  <div class="row text-left">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-md-8">
-              <h4 class="card-title" id="horz-layout-colored-controls" translate>{{pageType}} ASSET SCHEME MEMBER</h4>
-            </div>
-            <div class="col-md-4" style="text-align-last: right">
-              <button type="button" class="backButton" [routerLink]="['/Asset/Scheme/MemberDetail']"
-                [queryParams]="{AssetSchmHId: this.AssetSchmHId}" translate>
-                <i class="far fa-window-close"></i> Cancel
-              </button>
-            </div>
-          </div>
-        </div>
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title" id="horz-layout-colored-controls" translate>{{pageType}} ASSET SCHEME MEMBER</h4>
+  </div>
+  <div class="card-body">
+    <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
+    <lib-ucaddtotemp *ngIf="tempPagingObj.isReady" [tempPagingObj]="tempPagingObj" (callback)="getListTemp($event)">
+    </lib-ucaddtotemp>
+    <div class="card-header">
+      <div class="text-right">
+        <button class="btn btn-raised btn-raised btn-warning mr-1" type="button"
+          [routerLink]="['/Asset/Scheme/MemberDetail']" [queryParams]="{AssetSchmHId: this.AssetSchmHId}" translate>
+          <i class="ft-x"></i> Cancel
+        </button>
+        <button type="button" (click)="SaveAssetSchmMember()" class="btn btn-raised btn-primary" translate>
+          <i class="far fa-check-square"></i> Save
+        </button>
       </div>
     </div>
   </div>
-</section>
-<lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
-<form class="form form-horizontal" name="AssetSchmForm" #AssetSchmForm="ngForm" novalidate
-  (ngSubmit)="SaveAssetSchmMember()">
-  <lib-ucaddtotemp *ngIf="tempPagingObj.isReady" [tempPagingObj]="tempPagingObj" (callback)="getListTemp($event)">
-  </lib-ucaddtotemp>
-  <div class="form-body">
-    <div class="form-actions right">
-      <button type="submit" (click)="formValidate(AssetSchmForm)" class="btn btn-raised btn-primary" translate>
-        <i class="far fa-check-square"></i> Save
-      </button>
-    </div>
-  </div>
-</form>
+</div>
