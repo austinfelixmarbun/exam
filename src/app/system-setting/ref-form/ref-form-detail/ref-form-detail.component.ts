@@ -128,7 +128,7 @@ export class RefFormDetailComponent implements OnInit {
       return;
     }
     var paramObj = new ParameterObj();
-    paramObj.Attribute = this.ParamForm.controls.ParameterAttribute.value;
+    paramObj.Attr = this.ParamForm.controls.ParameterAttribute.value;
     paramObj.Value = this.ParamForm.controls.ParameterValue.value;
     this.parameterObj.push(paramObj);
     this.ParamForm.reset();

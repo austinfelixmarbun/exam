@@ -1,7 +1,7 @@
 export class ParameterObj {
-Attribute : string;
+Attr : string;
 Value : string;
   
-    constructor() { this.Attribute = ""; this.Value = ""; }
+    constructor() { this.Attr = ""; this.Value = ""; }
   }
   
