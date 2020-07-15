@@ -4,7 +4,8 @@ export class CommonConstant {
     // APPLICATION DATA
     public static USER_ACCESS = "UserAccess";
     public static USER_NAME = "UserName";
-    public static BUSINESS_DT = "BusinessDt"; 
+    public static BUSINESS_DT = "BusinessDt";
+    public static BUSINESS_DATE = "BusinessDate";
     public static BUSINESS_DATE_RAW = "BusinessDateRaw";
     public static CURRENT_USER_CONTEXT = "currentUserContext"
     public static PAGE_ACCESS = "PageAccess";
@@ -125,6 +126,8 @@ export class CommonConstant {
     public static RefMasterTypeCodeVendorType = "VENDOR_TYPE";
     public static RefMasterTypeCodeIdTypeVendor = "ID_TYPE_VENDOR";
     public static RefMasterTypeCodeTaskAssignmentType = "TASK_ASSIGNMENT_TYPE";
+
+    public static RefMasterTypeCodeScoreTrxType = "SCORE_TRX_TYPE";
     
     
     

@@ -37,7 +37,6 @@ export class VendorHoAddEditComponent implements OnInit {
   mode: string = "add";
   vendorHoObj: any;
   VendorId: any;
-  ButtonLbl: string = "Continue";
   isHidden: boolean = true;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
@@ -89,7 +88,6 @@ export class VendorHoAddEditComponent implements OnInit {
     this.VendorForm.controls.MrVendorCategoryCode.disable();
 
     if (this.mode == "edit") {
-      this.ButtonLbl = "Submit";
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
     } else {

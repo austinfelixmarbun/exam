@@ -39,7 +39,6 @@ export class VendorBranchAddEditComponent implements OnInit {
   mode: string = "add";
   vendorBranchObj: any;
   VendorId: number;
-  ButtonLbl: string = "Continue";
 
   MRSupplierUpCalcMethod: any;
   itemTypeUpCalcMethod: any;
@@ -106,7 +105,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
-      this.ButtonLbl = "Submit";
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
     } else {
