@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-working-hour-h-detail',
@@ -90,10 +91,10 @@ export class WorkingHourHDetailComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     
-    this.getUrl = AdInsConstant.GetWorkingHourSchmHById;
-    // this.api2Url = this.foundationUrl + AdInsConstant.GetWorkingHourSchmD;
-    this.addUrl = AdInsConstant.AddWorkingHourSchmH;
-    this.editUrl = AdInsConstant.EditWorkingHourSchmH;
+    this.getUrl = URLConstant.GetWorkingHourSchmHById;
+    // this.api2Url = this.foundationUrl + URLConstant.GetWorkingHourSchmD;
+    this.addUrl = URLConstant.AddWorkingHourSchmH;
+    this.editUrl = URLConstant.EditWorkingHourSchmH;
     
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {

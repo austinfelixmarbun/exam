@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { ProdOfferingObj } from 'app/shared/model/ProdOfferingObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-prod-offering-add-detail',
@@ -23,7 +24,7 @@ export class ProdOfferingAddDetailComponent implements OnInit {
       this.objPassing["ProdOfferingId"] = params["ProdOfferingId"];
       this.objPassing["mode"] = params["mode"];
       this.source = params["source"];
-      this.objPassing["url"] = AdInsConstant.GetProdOfferingDetailInfo;
+      this.objPassing["url"] = URLConstant.GetProdOfferingDetailInfo;
       this.key = params["key"];
     })
   }
@@ -55,7 +56,7 @@ export class ProdOfferingAddDetailComponent implements OnInit {
   ngOnInit() {
     var prodOfferingObj = new ProdOfferingObj();
     prodOfferingObj.ProdOfferingHId = this.objPassing.param;
-    this.http.post(AdInsConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
+    this.http.post(URLConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
       (response) => {
         this.resultData=response;
         console.log("response: ");

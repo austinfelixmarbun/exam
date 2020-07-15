@@ -5,6 +5,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AssetCategoryObj } from 'app/shared/model/AssetCategoryObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-asset-category-add-edit',
@@ -38,7 +39,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(AdInsConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
+    this.http.post(URLConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];
       });
@@ -47,7 +48,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.AssetCategoryForm.controls.AssetCategoryCode.disable();
       acObj.AssetTypeId = this.AssetTypeId;
       acObj.AssetCategoryId = this.AssetCategoryId;
-      this.http.post(AdInsConstant.GetAssetCategorybyAssetCategoryId, acObj).subscribe(
+      this.http.post(URLConstant.GetAssetCategorybyAssetCategoryId, acObj).subscribe(
         (response: AssetCategoryObj) => {
           this.result = response;
           this.AssetCategoryForm.patchValue({
@@ -69,7 +70,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.acObj.AssetCategoryName = this.AssetCategoryForm.controls["AssetCategoryName"].value;
       this.acObj.IsActive = this.AssetCategoryForm.controls["IsActive"].value;
       this.acObj.AssetTypeId = this.AssetTypeId;
-      this.http.post(AdInsConstant.AddNewAssetCategory, this.acObj).subscribe(
+      this.http.post(URLConstant.AddNewAssetCategory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Category/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
@@ -83,7 +84,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.acObj.AssetCategoryName = this.AssetCategoryForm.controls["AssetCategoryName"].value;
       this.acObj.IsActive = this.AssetCategoryForm.controls["IsActive"].value;
 
-      this.http.post(AdInsConstant.EditAssetCategory, this.acObj).subscribe(
+      this.http.post(URLConstant.EditAssetCategory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Category/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });

@@ -6,6 +6,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import Stepper from 'bs-stepper';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-personal-page',
@@ -62,7 +63,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   ngOnInit() {
 
     var custObj = { CustId: this.IdCust };
-    this.http.post(AdInsConstant.GetCustPersonalbyCustId, custObj).subscribe(
+    this.http.post(URLConstant.GetCustPersonalbyCustId, custObj).subscribe(
       (response: any) => {
         this.CustPersonalId = response['CustPersonalId'];
       }

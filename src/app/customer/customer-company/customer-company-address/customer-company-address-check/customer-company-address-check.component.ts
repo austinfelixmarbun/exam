@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model'; 
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-address-check',
@@ -25,8 +26,8 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   getListCustAddrUrl: string;
   From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getCustByIdUrl = AdInsConstant.GetCustByCustId;
-    this.getListCustAddrUrl = AdInsConstant.GetListCustAddr;
+    this.getCustByIdUrl = URLConstant.GetCustByCustId;
+    this.getListCustAddrUrl = URLConstant.GetListCustAddr;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];

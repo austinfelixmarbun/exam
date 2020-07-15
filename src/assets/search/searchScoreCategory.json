@@ -1,0 +1,134 @@
+{
+    "title": "Score Category Type",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "SCORE_CATEGORY_SCHM_H_CODE",
+            "id": "ScoreCategorySchmHCode",
+            "value": "",
+            "label": "Score Category Code",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "SCORE_CATEGORY_SCHM_H_NAME",
+            "id": "ScoreCategorySchmHName",
+            "value": "",
+            "label": "Score Category Name",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "dropdown",
+            "name": "IS_ACTIVE",
+            "datatype": "text",
+            "id": "IsActive",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "url": "",
+            "label": "Active Status",
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ],
+    "querystring": {
+        "select": "SELECT SCSH.SCORE_CATEGORY_SCHM_H_ID AS ScoreCategorySchmHId, SCSH.SCORE_CATEGORY_SCHM_H_CODE AS ScoreCategorySchmHCode, SCSH.SCORE_CATEGORY_SCHM_H_NAME AS ScoreCategorySchmHName, SCSH.IS_ACTIVE AS IsActive",
+        "from": "FROM SCORE_CATEGORY_SCHM_H AS SCSH WITH(NOLOCK)"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Score Category Code",
+            "name": "ScoreCategorySchmHCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Score Category Name",
+            "name": "ScoreCategorySchmHName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Score"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Edit"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "ScoreCategorySchmHCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ScoreCategorySchmHName"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/CommonSetting/ScoreCategory/Score",
+                    "param": [
+                        {
+                            "type": "ScoreCategorySchmHId",
+                            "property": "ScoreCategorySchmHId"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/CommonSetting/ScoreCategory/Type",
+                    "param": [
+                        {
+                            "type": "ScoreCategorySchmHId",
+                            "property": "ScoreCategorySchmHId"
+                        },
+                        {
+                            "type": "mode",
+                            "property": "edit"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

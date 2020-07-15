@@ -7,6 +7,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from '../../../../environments/environment';
 import { ProdOfferingHDeactivateObj } from '../../../shared/model/ProdOfferingHDeactivateObj.Model';
 import { RefProductOfferingBrancMbrObj } from '../../../shared/model/RefProductOfferingBranchMbrObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 
@@ -39,9 +41,9 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.editUrl = AdInsConstant.RequestOfferingDeactivation;
-    this.getValueReasonModel = AdInsConstant.GetListActiveRefReason;
-    this.ProdOfferingBranchUrl = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHIdAndApp;
+    this.editUrl = URLConstant.RequestOfferingDeactivation;
+    this.getValueReasonModel = URLConstant.GetListActiveRefReason;
+    this.ProdOfferingBranchUrl = URLConstant.GetListProdOfferingBranchOfficeMbrByProdHIdAndApp;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodOfferingHId"] != null) {
@@ -55,7 +57,7 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
-    var obj = { RefReasonTypeCode: AdInsConstant.RefReasonTypeCodeProdDeactivate };
+    var obj = { RefReasonTypeCode: CommonConstant.RefReasonTypeCodeProdDeactivate };
     this.http.post(this.getValueReasonModel, obj).subscribe(
       (response) => {
         console.log(response);

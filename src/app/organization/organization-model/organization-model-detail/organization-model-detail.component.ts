@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 
 @Component({
@@ -46,7 +48,7 @@ export class OrganizationModelDetailComponent implements OnInit {
       }
       if (params['orgMdlId'] != null) {
         this.orgMdlId = params['orgMdlId'];
-        console.log('MdlCode',this.orgMdlId);
+        console.log('MdlCode', this.orgMdlId);
       }
       if (params['refOrgId'] != null) {
         this.refOrgId = params['refOrgId'];
@@ -60,14 +62,14 @@ export class OrganizationModelDetailComponent implements OnInit {
     this.orgModelObj = new OrgMdlObj()
     this.GetRefOrg();
     if (this.type == 'edit') {
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlByOrgMdlId;
+      this.apiUrl = this.foundationUrl + URLConstant.GetOrgMdlByOrgMdlId;
       this.orgModelObj = new OrgMdlObj();
       this.orgModelObj.orgMdlId = +this.orgMdlId;
       this.httpClient.post(this.apiUrl, this.orgModelObj).subscribe(
         (response) => {
           console.log('Success Get');
           this.orgModelObj = response['returnObject'];
-          console.log('obj',response['returnObject'])
+          console.log('obj', response['returnObject'])
           this.modelCode = response['returnObject']['orgMdlCode'];
           this.modelName = response['returnObject']['orgMdlName'];
           if (response['returnObject']['isActive'] == '1') { this.isActive = true; } else { this.isActive = false; }
@@ -86,7 +88,7 @@ export class OrganizationModelDetailComponent implements OnInit {
 
   Save(OrgMdlForm: NgForm): void {
     this.spinner.show();
-    var getOrgModel = this.foundationUrl + AdInsConstant.GetOrgMdl;
+    var getOrgModel = this.foundationUrl + URLConstant.GetOrgMdl;
     var orgMdlObj: OrgMdlObj;
     orgMdlObj = new OrgMdlObj()
     orgMdlObj.refOrgId = +this.refOrgId;
@@ -100,10 +102,10 @@ export class OrganizationModelDetailComponent implements OnInit {
         (response) => {
           console.log("Success Check Duplicate");
           if (response['returnObject'] != null) {
-            this.service.typeErrorCustom('Code Has Been Used');
+            this.service.typeErrorCustom(ExceptionConstant.CODE_HAS_BEEN_USED);
           }
           else {
-            this.apiUrl = this.foundationUrl + AdInsConstant.AddOrgMdl;
+            this.apiUrl = this.foundationUrl + URLConstant.AddOrgMdl;
             this.orgModelObj = new OrgMdlObj();
             this.orgModelObj.refOrgId = +this.refOrgId;
             this.orgModelObj.orgMdlCode = OrgMdlForm.value.modelCode;
@@ -134,7 +136,7 @@ export class OrganizationModelDetailComponent implements OnInit {
     }
     //MODE-EDIT
     else {
-      this.apiUrl = this.foundationUrl + AdInsConstant.EditOrgMdl;
+      this.apiUrl = this.foundationUrl + URLConstant.EditOrgMdl;
       this.orgModelObj.refOrgId = +this.refOrgId;
       this.orgModelObj.orgMdlCode = OrgMdlForm.value.modelCode;
       this.orgModelObj.orgMdlName = OrgMdlForm.value.modelName;
@@ -160,7 +162,7 @@ export class OrganizationModelDetailComponent implements OnInit {
   }
 
   GetRefOrg() {
-    var getOrgUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
+    var getOrgUrl = this.foundationUrl + URLConstant.GetRefOrg;
     this.orgObj = new OrganizationObj();
     this.orgObj.refOrgId = +this.refOrgId;
     this.httpClient.post(getOrgUrl, this.orgObj).subscribe(

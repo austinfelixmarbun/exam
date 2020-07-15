@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ContextMenuComponent } from 'ngx-contextmenu';
 import { ROUTES } from './sidebar-routes.config';
 import { environment } from 'environments/environment';
+import { CommonConstant } from '../constant/CommonConstant';
 
 declare var $: any;
 
@@ -23,7 +24,7 @@ export class SidebarComponent implements OnInit {
 
     constructor(private router: Router,
         private route: ActivatedRoute, public translate: TranslateService, private http: HttpClient) {
-        this.version = localStorage.getItem("Version");
+        this.version = localStorage.getItem(CommonConstant.VERSION);
 
     }
 
@@ -45,7 +46,7 @@ export class SidebarComponent implements OnInit {
             this.menuItems = ROUTES.filter(menuItem => menuItem);
         }
         else {
-            this.menuItems = JSON.parse(localStorage.getItem("Menu"));
+            this.menuItems = JSON.parse(localStorage.getItem(CommonConstant.MENU));
         }
     }
     genParam(params: [{ 'attr': string, 'value': string }]) {

@@ -7,8 +7,10 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AssetSchmDObj } from 'app/shared/model/AssetSchmDObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -23,7 +25,8 @@ export class AddAssetSchemeComponent implements OnInit {
   responseResultData: AssetSchemeHObj;
 
   AssetSchmHId: any;
-  getListAssetSchmDByAssetSchmHId = AdInsConstant.GetListAssetSchmDByAssetSchmHId;
+  viewObj: string;
+  getListAssetSchmDByAssetSchmHId = URLConstant.GetListAssetSchmDByAssetSchmHId;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   listSelectedId: Array<number> = new Array<number>();
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
@@ -33,20 +36,20 @@ export class AddAssetSchemeComponent implements OnInit {
     private toastr: NGXToastrService,
     private route: ActivatedRoute,
     private router: Router) {
-      this.route.queryParams.subscribe(params => {
-        if (params['param'] != null) {
-          this.pageType = params['param'];
-        } else {
-          this.pageType = 'add';
-        }
-        if (params['AssetSchmHId'] != null) {
-          this.AssetSchmHId = params['AssetSchmHId'];
-        }
-        if (params['AssetTypeId'] != null) {
-          this.AssetTypeId = params['AssetTypeId'];
-        }
-      });
-    }
+    this.route.queryParams.subscribe(params => {
+      if (params['param'] != null) {
+        this.pageType = params['param'];
+      } else {
+        this.pageType = 'add';
+      }
+      if (params['AssetSchmHId'] != null) {
+        this.AssetSchmHId = params['AssetSchmHId'];
+      }
+      if (params['AssetTypeId'] != null) {
+        this.AssetTypeId = params['AssetTypeId'];
+      }
+    });
+  }
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetSchemeMember.json";
@@ -54,21 +57,21 @@ export class AddAssetSchemeComponent implements OnInit {
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/assetSchmMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/assetSchmMbrTempPaging.json";
     this.tempPagingObj.isReady = true;
 
     var arr = [0];
     var temp;
-    this.http.post(AdInsConstant.GetListAssetSchmDByAssetSchmHId, { "AssetSchmHId": this.AssetSchmHId, "RowVersion": "" }).subscribe(
+    this.http.post(URLConstant.GetListAssetSchmDByAssetSchmHId, { "AssetSchmHId": this.AssetSchmHId, "RowVersion": "" }).subscribe(
       response => {
-        temp = response['ReturnObject'];
+        temp = response[CommonConstant.ReturnObj];
 
         for (var i = 0; i < temp.length; i++) {
           arr.push(temp[i]['AssetMasterId']);
         }
 
-        this.http.post(AdInsConstant.GetAssetSchmHById, { AssetSchmHId: this.AssetSchmHId, "RowVersion": "" }).subscribe(
+        this.http.post(URLConstant.GetAssetSchmHById, { AssetSchmHId: this.AssetSchmHId, "RowVersion": "" }).subscribe(
           (response: AssetSchemeHObj) => {
             this.responseResultData = response;
             this.AssetTypeId = this.responseResultData.AssetTypeId;
@@ -129,7 +132,7 @@ export class AddAssetSchemeComponent implements OnInit {
       AssetSchmH: this.assetSchmHObj,
       AssetSchmDObjs: this.arrAssetSchmD
     }
-    this.http.post( AdInsConstant.AddRangeAssetSchmD, AssetSchmObj).subscribe(
+    this.http.post(URLConstant.AddRangeAssetSchmD, AssetSchmObj).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Asset/Scheme/MemberDetail"], { queryParams: { "AssetSchmHId": this.AssetSchmHId } });

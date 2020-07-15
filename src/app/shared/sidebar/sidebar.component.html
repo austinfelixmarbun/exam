@@ -28,9 +28,9 @@
             <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.Class]"
                 [routerLinkActive]="menuItem.Submenu.length != 0 ? '' : 'active'"
                 [routerLinkActiveOptions]="{exact: true}">
-                <span *ngIf="menuItem.Class == ''; then internalNoSubBlock else internalHasSubBlock"></span>
+                <span *ngIf="menuItem.Class != 'has-sub'; then internalNoSubBlock else internalHasSubBlock"></span>
                 <ng-template #internalNoSubBlock>
-                    <a [routerLink]="menuItem.Class == '' ? [menuItem.Path] : null"
+                    <a [routerLink]="menuItem.Class != 'has-sub' ? [menuItem.Path] : null"
                         [queryParams]="genParam(menuItem.Params)"
                         *ngIf="!menuItem.IsExternalLink; else externalLinkBlock" [contextMenu]="basicMenu"
                         [contextMenuSubject]="menuItem">
@@ -59,7 +59,7 @@
                     <li *ngFor="let menuSubItem of menuItem.Submenu"
                         [routerLinkActive]="menuSubItem.Submenu.length > 0 ? '' : 'active'"
                         [ngClass]="[menuSubItem.Class]">
-                        <span *ngIf="menuSubItem.Class == ''; then secondLevelNoSubBlock else secondLevelHasSubBlock"></span>
+                        <span *ngIf="menuSubItem.Class != 'has-sub'; then secondLevelNoSubBlock else secondLevelHasSubBlock"></span>
                         <ng-template #secondLevelNoSubBlock>
                             <a (click)="navigateSkipLocationChange(menuSubItem)"
                                 *ngIf="!menuSubItem.IsExternalLink; else externalSubLinkBlock">

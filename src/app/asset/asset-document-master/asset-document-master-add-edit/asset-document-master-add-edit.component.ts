@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-asset-document-master-add-edit',
@@ -37,7 +38,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
   ngOnInit() {
     if (this.pageType == "edit") {
       this.RefAssetDocForm.controls.AssetDocCode.disable();
-      this.http.post(AdInsConstant.GetRefAssetDocByRefAssetDocId, { RefAssetDocId: this.RefAssetDocId }).subscribe(
+      this.http.post(URLConstant.GetRefAssetDocByRefAssetDocId, { RefAssetDocId: this.RefAssetDocId }).subscribe(
         (response: RefAssetDocObj) => {
           this.result = response;
           this.RefAssetDocForm.patchValue({
@@ -59,7 +60,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.refAssetObj.AssetDocName = this.RefAssetDocForm.controls["AssetDocName"].value;
       this.refAssetObj.IsActive = this.RefAssetDocForm.controls["IsActive"].value;
 
-      this.http.post(AdInsConstant.AddNewRefAssetDocData, this.refAssetObj).subscribe(
+      this.http.post(URLConstant.AddNewRefAssetDocData, this.refAssetObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/DocumentMaster/Paging"]);
@@ -75,7 +76,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.refAssetObj.AssetDocName = this.RefAssetDocForm.controls["AssetDocName"].value;
       this.refAssetObj.IsActive = this.RefAssetDocForm.controls["IsActive"].value;
 
-      this.http.post(AdInsConstant.EditRefAssetDocData, this.refAssetObj).subscribe(
+      this.http.post(URLConstant.EditRefAssetDocData, this.refAssetObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/DocumentMaster/Paging"]);

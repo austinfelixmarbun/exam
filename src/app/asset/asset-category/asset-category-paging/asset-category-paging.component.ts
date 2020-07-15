@@ -4,6 +4,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
@@ -31,9 +32,9 @@ export class AssetCategoryPagingComponent implements OnInit {
 
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetCategory.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetCategory.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetCategory;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetCategory;
 
     this.critObj.restriction = AdInsConstant.RestrictionLike;
     this.critObj.propName = 'ASSET_TYPE_ID';

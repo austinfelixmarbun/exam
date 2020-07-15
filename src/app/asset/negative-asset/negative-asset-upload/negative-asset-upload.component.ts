@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-negative-asset-upload',
@@ -17,14 +18,14 @@ export class NegativeAssetUploadComponent implements OnInit {
       subsectionId: 'UcUploadFile', // Ga perlu diubah
       formatsAllowed: '.xls, .xlsx', // File yang bisa di upload
       UploadTypeCode: 'UPL_NAS', // UploadTypeCode berdasarkan keperluan
-      ErrorDownloadUrl: AdInsConstant.GetUploadAssetNegativeByUploadMonitoringNoAndTrxType, // URL untuk Download Error File
-      TemplateUrl: AdInsConstant.DownloadTemplate, // URL untuk Download Template File
+      ErrorDownloadUrl: URLConstant.GetUploadAssetNegativeByUploadMonitoringNoAndTrxType, // URL untuk Download Error File
+      TemplateUrl: URLConstant.DownloadTemplate, // URL untuk Download Template File
       TemplateName: 'Upload_Negative_Asset_Template', // Nama Excel Template File
       FileErrorName: "Upload_Negative_Asset_ErrorDownload", // Nama Excel Download Error File
       // SheetName: 'TemplateGan',
 
       environmentUrl: environment.FoundationR3Url,
-      apiQryPaging: AdInsConstant.GetPagingObjectBySQL,
+      apiQryPaging: URLConstant.GetPagingObjectBySQL,
       pagingJson: "./assets/ucpaging/searchNegativeAssetMonitoring.json",
       ddlEnvironments: [
         {
@@ -36,7 +37,7 @@ export class NegativeAssetUploadComponent implements OnInit {
           environment: environment.FoundationR3Url
         }
       ],
-      url: AdInsConstant.UploadFile
+      url: URLConstant.UploadFile
     }
   }
 }

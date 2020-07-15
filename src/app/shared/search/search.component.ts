@@ -9,6 +9,7 @@ import { RequestCriteriaObj } from 'app/shared/model/RequestCriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { DOCUMENT } from '@angular/platform-browser';
 import { ExcelService } from '../excel-service/excel-service';
+import { CommonConstant } from '../constant/CommonConstant';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -93,7 +94,7 @@ export class SearchComponent implements OnInit {
         //pengecekan tanggal
         if (data.component[i].type == "datepicker") {
           if (data.component[i].value.includes("BD")) {
-            let businessDate = new Date(JSON.parse(localStorage.getItem("UserAccess")).BusinessDate);
+            let businessDate = new Date(JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS)).BusinessDate);
             var operator = data.component[i].value.charAt(2);
             var dateShow = new Date();
             if (operator == "-") {

@@ -10,6 +10,8 @@ import { UcLookupObj } from 'app/shared/model/UcLookupObj.Model';
 import { formatDate } from '@angular/common';
 import { environment } from 'environments/environment';
 import { IfStmt } from '@angular/compiler';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-prod-offering-add',
@@ -58,10 +60,10 @@ export class ProdOfferingAddComponent implements OnInit {
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
 
 
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
 
     var currOfcCode = context["OfficeCode"];
-    if (currOfcCode == "HO") {
+    if (currOfcCode == CommonConstant.HeadOffice) {
       this.inputLookupObj.urlJson = "./assets/uclookup/product/lookupProductForHO.json";
       this.inputLookupObj.pagingJson = "./assets/uclookup/product/lookupProductForHO.json";
       this.inputLookupObj.genericJson = "./assets/uclookup/product/lookupProductForHO.json";
@@ -92,7 +94,7 @@ export class ProdOfferingAddComponent implements OnInit {
       this.ProdOfferingForm.controls.ProdOfferingCode.disable();
       var prodOfferingObj = new ProdOfferingObj();
       prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
-      this.http.post(AdInsConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
+      this.http.post(URLConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
         (response) => {
           console.log("response: ");
           console.log(response);
@@ -113,7 +115,6 @@ export class ProdOfferingAddComponent implements OnInit {
         }
       );
     }
-
   }
 
   AddDetail() {
@@ -129,7 +130,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
         this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
         this.prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
-        this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
+        this.http.post(URLConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source : this.source } });
@@ -143,7 +144,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
         this.prodOfferingObj.ProdOfferingId = "0";
         this.prodOfferingObj.RowVersion = "";
-        this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
+        this.http.post(URLConstant.AddProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source : this.source } });
@@ -169,7 +170,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
         this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
         this.prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
-        this.http.post(AdInsConstant.EditProdOffering, this.prodOfferingObj).subscribe(
+        this.http.post(URLConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             this.BackToPaging();
@@ -184,7 +185,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.prodOfferingObj.ProdOfferingId = "0";
         this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
         this.prodOfferingObj.RowVersion = "";
-        this.http.post(AdInsConstant.AddProdOffering, this.prodOfferingObj).subscribe(
+        this.http.post(URLConstant.AddProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             this.BackToPaging();
@@ -203,8 +204,8 @@ export class ProdOfferingAddComponent implements OnInit {
   }
 
   ValidateDate() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    let businessDate = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    let businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     let startDate = new Date(this.ProdOfferingForm.get("StartDt").value);
     let endDate = new Date(this.ProdOfferingForm.get("EndDt").value);
 

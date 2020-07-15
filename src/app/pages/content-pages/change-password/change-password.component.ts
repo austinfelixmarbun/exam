@@ -8,12 +8,11 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
-import { text } from '@angular/core/src/render3';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss'],
   providers: [NGXToastrService]
 })
 export class ChangePasswordComponent implements OnInit {
@@ -35,11 +34,11 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.eventValidatePassword(this.userConfirmNewPasswordRef.nativeElement);
-   this.eventValidatePassword(this.userNewPasswordRef.nativeElement);
+    this.eventValidatePassword(this.userConfirmNewPasswordRef.nativeElement);
+    this.eventValidatePassword(this.userNewPasswordRef.nativeElement);
   }
 
-  eventValidatePassword(any){
+  eventValidatePassword(any) {
     fromEvent(any, 'keyup').pipe(debounceTime(1000), distinctUntilChanged(), tap((text) => {
       if (this.userConfirmNewPasswordRef.nativeElement.value != this.userNewPasswordRef.nativeElement.value) {
         this.isMatch = false;
@@ -56,7 +55,7 @@ export class ChangePasswordComponent implements OnInit {
       const newpassword = this.userNewPasswordRef.nativeElement.value;
 
       var requestObj = { "Username": this.username, "Password": password, "NewPassword": newpassword };
-      this.http.post(AdInsConstant.ChangePasswordRefUserByUsername, requestObj).subscribe(
+      this.http.post(URLConstant.ChangePasswordRefUserByUsername, requestObj).subscribe(
         (response) => {
           console.log(response);
           if (response["Message"] == "Success") {
@@ -74,7 +73,5 @@ export class ChangePasswordComponent implements OnInit {
     }
     else
       this.toastr.errorMessage("Password Mismatch.");
-    
   }
-
 }

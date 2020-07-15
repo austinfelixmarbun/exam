@@ -4,6 +4,7 @@ import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Injectable()
 export class ErrorDialogService {
@@ -11,7 +12,7 @@ export class ErrorDialogService {
     openDialog(data): void {
         console.log(data)
         //Ini Logout jadi panggil Service untuk Call Logoutnya
-        if(data.status=="001" && localStorage.getItem("Username") != undefined)
+        if(data.status=="001" && localStorage.getItem(CommonConstant.USER_NAME) != undefined)
         {   
 
             var url = environment.FoundationR3Url+AdInsConstant.Logout;

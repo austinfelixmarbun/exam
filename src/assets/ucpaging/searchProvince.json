@@ -126,10 +126,6 @@
               "property": "edit"
             }
           ]
-        },
-        {
-          "type": "delete",
-          "property": "refProvDistrictId"
         }
       ]
     }

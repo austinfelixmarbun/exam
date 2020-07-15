@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { environment } from 'environments/environment';
 import { RefUserObj } from 'app/shared/model/RefUserObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 
 @Component({
@@ -39,15 +40,15 @@ export class UserRoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefUserPaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetRefUserPaging;
 
     this.initiateForm();
   }
 
   initiateForm() {
-    var urlGetUser: any = this.foundationUrl + AdInsConstant.GetRefUser;
-    var urlGetEmp: any = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
-    var urlGetListEmpPos: any = this.foundationUrl + AdInsConstant.GetListEmployeebyRefEmpId;
+    var urlGetUser: any = this.foundationUrl + URLConstant.GetRefUser;
+    var urlGetEmp: any = this.foundationUrl + URLConstant.GetRefEmployeeById;
+    var urlGetListEmpPos: any = this.foundationUrl + URLConstant.GetListEmployeebyRefEmpId;
     var empObj: RefEmpObj = new RefEmpObj;
     var urlGetEmpPosition: any;
 

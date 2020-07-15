@@ -8,6 +8,9 @@ import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntS
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-company',
@@ -46,11 +49,11 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
-    this.getCustCompanyMgmntShrholderUrl = AdInsConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
-    this.editManagementShareholderUrl = AdInsConstant.EditCustCompanyMgmntShrholder; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
+    this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
+    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {  
@@ -62,13 +65,13 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.inputLookupCustCompanyObj.genericJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.isRequired = false;
     var refMasterObjMrCompanyTypeCode = {
-      RefMasterTypeCode: "COMPANY_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.tempMrCompanyTypeCode = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempMrCompanyTypeCode = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({
             MrCompanyTypeCode: this.tempMrCompanyTypeCode[0].Key
           });
@@ -76,14 +79,14 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       }
     );
     var refMasterObjMrCustModelCode = {
-      RefMasterTypeCode: "CUST_MODEL",
-      Reservefield1: "COMPANY",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      Reservefield1: CommonConstant.CustTypeCompany,
       RowVersion: ""
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.tempMrCustModelCode = response["ReturnObject"];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
           console.log(this.tempMrCustModelCode);
           this.ManagementShareholderForm.patchValue({
             MrCustModelCode: this.tempMrCustModelCode[0].Key
@@ -128,7 +131,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
     if(this.TotalShareCurrent > 100){
       this.LeftShare = 100 - this.TotalShare;
-      this.toastr.warningMessage("Total Share left is "+this.LeftShare+"%");
+      this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_LEFT +this.LeftShare+"%");
       return;
     }
 

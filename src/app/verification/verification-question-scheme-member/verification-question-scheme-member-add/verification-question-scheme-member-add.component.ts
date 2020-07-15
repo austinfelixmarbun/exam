@@ -7,12 +7,17 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfSchemeDObj } from 'app/shared/model/VerfSchemeDObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { UcgridfooterComponent } from '@adins/ucgridfooter';
+import { UCSearchComponent } from '@adins/ucsearch';
+import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-member-add',
   templateUrl: './verification-question-scheme-member-add.component.html',
-  styleUrls: ['./verification-question-scheme-member-add.component.scss']
+  providers: [NGXToastrService]
 })
 export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
   viewObj: any;
@@ -20,12 +25,12 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
   verfSchemeDObj: VerfSchemeDObj;
   VerfSchemeHId: number;
-  
-  
+
+
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VerfSchemeHId = params["VerfSchemeHId"];
-   })
+    })
   }
 
   ngOnInit() {
@@ -33,24 +38,23 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/verifQuestionSchmMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/verifQuestionSchmMbrTempPaging.json";
 
     this.GetListVerfQuestionGrpHByVerfSchemeDId();
   }
 
-  GetListVerfQuestionGrpHByVerfSchemeDId()
-  {
+  GetListVerfQuestionGrpHByVerfSchemeDId() {
     var verfGroupObj = { VerfSchemeHId: this.VerfSchemeHId }
-    this.http.post(AdInsConstant.GetVerfSchemeDsByVerfSchemeHId, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetVerfSchemeDsByVerfSchemeHId, verfGroupObj).subscribe(
       (response) => {
         var arrMemberList = new Array();
         console.log(arrMemberList);
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-           arrMemberList.push(response["ReturnObject"][index].VerfQuestionGrpHId)
+        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+          arrMemberList.push(response[CommonConstant.ReturnObj][index].VerfQuestionGrpHId)
         }
-        
-        if(arrMemberList.length != 0){
+
+        if (arrMemberList.length != 0) {
           const addCritListVerfQuestionGrpHId = new CriteriaObj();
           addCritListVerfQuestionGrpHId.DataType = "numeric";
           addCritListVerfQuestionGrpHId.propName = "VERF_QUESTION_GRP_H_ID";
@@ -75,13 +79,13 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
       this.toastr.errorMessage('Please Add At Least One Data');
       return;
     }
-    
+
     this.verfSchemeDObj = new VerfSchemeDObj();
     this.verfSchemeDObj.VerfSchemeHId = this.VerfSchemeHId;
     this.verfSchemeDObj.VerfSchemeDId = "0";
     this.verfSchemeDObj.ListVerfQuestionGrpHId = this.listSelectedId;
 
-    this.http.post(AdInsConstant.AddListVerfSchemeD, this.verfSchemeDObj).subscribe(
+    this.http.post(URLConstant.AddListVerfSchemeD, this.verfSchemeDObj).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Verification/QuestionSchemeMemberPaging"], { queryParams: { "VerfSchemeHId": this.VerfSchemeHId } });
@@ -91,5 +95,4 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
       }
     );
   }
-
 }

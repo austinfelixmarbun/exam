@@ -4,6 +4,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
@@ -31,9 +32,9 @@ export class AssetSchemeMemberComponent implements OnInit {
 
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetSchemeMember.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetSchemeMember.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAssetSchmD;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetSchmD;
 
     var critObj = new CriteriaObj();
     critObj.restriction = AdInsConstant.RestrictionEq;

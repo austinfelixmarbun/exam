@@ -7,6 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { HttpClient } from '@angular/common/http';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 
 
@@ -27,7 +28,7 @@ export class DistrictComponent implements OnInit {
   getUrl: any;
   
   constructor(private route: ActivatedRoute, private http: HttpClient) {
-    this.getUrl = AdInsConstant.GetRefProvDistrictById;
+    this.getUrl = URLConstant.GetRefProvDistrictById;
     this.route.queryParams.subscribe(params => {
       if (params['refProvDistrictId'] != null) {
         this.parentId = params['refProvDistrictId'];
@@ -39,9 +40,9 @@ export class DistrictComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchDistrict.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchDistrict.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefProvDistrict;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefProvDistrict;
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();

@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductOfferingDetailObj } from 'app/shared/model/ListRefProductOfferingDetailObj.Model'
 import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOfferingDetailObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-product-component',
@@ -38,7 +39,7 @@ export class ProductComponentComponent implements OnInit {
   }
   
   SaveForm(event) {
-    this.UrlBackEnd = AdInsConstant.AddOrEditProdOfferingDetail;
+    this.UrlBackEnd = URLConstant.AddOrEditProdOfferingDetail;
     this.generateSaveObj(event);
     this.http.post(this.UrlBackEnd, this.listProductComponentObj).subscribe(
       (response) => {
@@ -53,7 +54,7 @@ export class ProductComponentComponent implements OnInit {
   }
 
   NextDetail(event) {
-    this.UrlBackEnd = AdInsConstant.AddOrEditProdOfferingDetail;
+    this.UrlBackEnd = URLConstant.AddOrEditProdOfferingDetail;
     this.generateSaveObj(event);
     this.http.post(this.UrlBackEnd, this.listProductComponentObj).subscribe(
       (response) => {

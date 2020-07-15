@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-district-add-edit',
@@ -30,9 +32,9 @@ export class DistrictAddEditComponent implements OnInit {
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getUrl = AdInsConstant.GetRefProvDistrictById;
-    this.addUrl = AdInsConstant.AddRefProvDistrict;
-    this.editUrl = AdInsConstant.EditRefProvDistrict;
+    this.getUrl = URLConstant.GetRefProvDistrictById;
+    this.addUrl = URLConstant.AddRefProvDistrict;
+    this.editUrl = URLConstant.EditRefProvDistrict;
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -89,7 +91,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.DistrictRegRptCode = this.DistrictForm.controls["DistrictRegRptCode"].value;
       this.refProvDistrictObj.IsActive = this.DistrictForm.controls["IsActive"].value;
       this.refProvDistrictObj.ParentId = this.parentId;
-      this.refProvDistrictObj.Type = "DIS";
+      this.refProvDistrictObj.Type = CommonConstant.RefProvDistrictTypeDis;
       this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
@@ -105,7 +107,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.ProvDistrictName = this.DistrictForm.controls["ProvDistrictName"].value;
       this.refProvDistrictObj.DistrictRegRptCode = this.DistrictForm.controls["DistrictRegRptCode"].value;
       this.refProvDistrictObj.IsActive = this.DistrictForm.controls["IsActive"].value;
-      this.refProvDistrictObj.Type = "DIS";
+      this.refProvDistrictObj.Type =  CommonConstant.RefProvDistrictTypeDis;
       this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);

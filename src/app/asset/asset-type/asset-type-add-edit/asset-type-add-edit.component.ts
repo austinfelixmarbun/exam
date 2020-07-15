@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-asset-type-add-edit',
@@ -83,7 +84,7 @@ export class AssetTypeAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(AdInsConstant.GetGeneralSettingByCode, { GsCode: 'MAXASSETTYPELVL' }).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: 'MAXASSETTYPELVL' }).subscribe(
       response => {
         this.ItemMaxHierarchyLevelNumber = this.ItemMaxHierarchyLevelNumber.slice(0, parseInt(response['GsValue']));
         this.AssetTypeForm.patchValue({
@@ -95,7 +96,7 @@ export class AssetTypeAddEditComponent implements OnInit {
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.assetTypeId;
           this.AssetTypeForm.controls["AssetTypeCode"].disable();
-          this.http.post(AdInsConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
+          this.http.post(URLConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
             (response: AssetTypeObj) => {
               this.resultData = response;
               this.RowVersion = this.resultData.RowVersion;
@@ -254,7 +255,7 @@ export class AssetTypeAddEditComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.assetTypeObj.RowVersion = "";
-      this.http.post(AdInsConstant.AddAssetType, this.assetTypeObj).subscribe(
+      this.http.post(URLConstant.AddAssetType, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Type/Paging"]);
@@ -266,7 +267,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.assetTypeObj.AssetTypeCode = this.assetTypeCode;
       this.assetTypeObj.RowVersion = this.RowVersion;
       this.assetTypeObj.AssetTypeId = this.assetTypeId;
-      this.http.post(AdInsConstant.EditAssetType, this.assetTypeObj).subscribe(
+      this.http.post(URLConstant.EditAssetType, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Type/Paging"]);

@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 
 @Component({
@@ -62,7 +63,7 @@ export class MasterAddEditComponent implements OnInit {
     this.GetListMasterType();
     if (this.type == 'edit') {
       this.refMasterObj.RefMasterId = this.RefMasterId;
-      var getRefMasterUrl = this.settingUrl + AdInsConstant.GetRefMasterByRefMasterId;
+      var getRefMasterUrl = this.settingUrl + URLConstant.GetRefMasterByRefMasterId;
       this.httpClient.post(getRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
           console.log('Success Get');
@@ -98,7 +99,7 @@ export class MasterAddEditComponent implements OnInit {
 
     //MODE-ADD
     if (this.type != 'edit') {
-      var addRefMasterUrl = this.settingUrl + AdInsConstant.AddRefMaster;
+      var addRefMasterUrl = this.settingUrl + URLConstant.AddRefMaster;
       this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
         //SAVE
         (response) => {
@@ -114,7 +115,7 @@ export class MasterAddEditComponent implements OnInit {
     }
     //MODE-EDIT
     else {
-      var addRefMasterUrl = this.settingUrl + AdInsConstant.EditRefMaster;
+      var addRefMasterUrl = this.settingUrl + URLConstant.EditRefMaster;
       //SAVE
       this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
@@ -133,7 +134,7 @@ export class MasterAddEditComponent implements OnInit {
   }
 
   GetListMasterType() {
-    var url = this.settingUrl + AdInsConstant.GetListActiveRefMasterType;
+    var url = this.settingUrl + URLConstant.GetListActiveRefMasterType;
     this.httpClient.post(url, null).subscribe(
       (response) => {
         this.refMasterTypeObj = response;

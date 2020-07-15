@@ -7,14 +7,17 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ListAuthFormObj } from 'app/shared/model/ListAuthFormObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-ref-form-role-mapping',
   templateUrl: './ref-form-role-mapping.component.html',
-  styleUrls: ['./ref-form-role-mapping.component.scss']
+  providers: [NGXToastrService]
 })
+
 export class RefFormRoleMappingComponent implements OnInit {
   RefFormId: number;
   AuthFormObj: AuthFormObj;
@@ -33,22 +36,22 @@ export class RefFormRoleMappingComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefForm.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
-    
+
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/refFormRoleTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/refFormRoleTempPaging.json";
 
     this.GetListRefFormRoleByRefFormId();
   }
 
   GetListRefFormRoleByRefFormId() {
-    this.http.post(AdInsConstant.GetListAuthFormByRefFormId, {RefFormId: this.RefFormId}).subscribe(
+    this.http.post(URLConstant.GetListAuthFormByRefFormId, { RefFormId: this.RefFormId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
 
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-          arrMemberList.push(response["ReturnObject"][index].RefRoleId)
+        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+          arrMemberList.push(response[CommonConstant.ReturnObj][index].RefRoleId)
         }
 
         if (arrMemberList.length != 0) {
@@ -70,7 +73,7 @@ export class RefFormRoleMappingComponent implements OnInit {
   getListTemp(ev) {
     this.listSelectedId = ev.TempListId;
   }
-  
+
 
   SaveListAuthForm() {
     if (this.listSelectedId.length == 0) {
@@ -89,10 +92,10 @@ export class RefFormRoleMappingComponent implements OnInit {
       this.listAuthFormObj.ListAuthFormObj.push(this.AuthFormObj);
     }
 
-    this.http.post(AdInsConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
+    this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(['/SystemSetting/RefForm/RoleMapping'], { queryParams: { "RefFormId": this.RefFormId} });
+        this.router.navigate(['/SystemSetting/RefForm/RoleMapping'], { queryParams: { "RefFormId": this.RefFormId } });
       },
       (error) => {
         console.log(error);

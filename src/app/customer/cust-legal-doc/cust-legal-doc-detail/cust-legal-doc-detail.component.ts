@@ -5,6 +5,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-cust-legal-doc-detail',
@@ -36,16 +38,16 @@ export class CustLegalDocDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     console.log(context);
-    this.businessDtMin = new Date(context["BusinessDt"]);
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
     var refMasterDocType = new RefMasterObj();
-    refMasterDocType.RefMasterTypeCode = "LEGAL_DOC_TYPE";
-    this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterDocType).subscribe(
+    refMasterDocType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeLegalDocType;
+    this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterDocType).subscribe(
       (response: any) => {
         this.legalDocTypeList = response;
         this.CustCompanyLegalDocForm.patchValue({
@@ -62,7 +64,7 @@ export class CustLegalDocDetailComponent implements OnInit {
   Save(enjiForm) {
     var custCompanyLegalDocData = this.CustCompanyLegalDocForm.value;
 
-    this.httpClient.post(AdInsConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
+    this.httpClient.post(URLConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
       (response) => {
         this.activeModal.close(response);
       },
