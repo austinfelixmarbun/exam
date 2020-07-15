@@ -1,6 +1,6 @@
 {
   "name": "apex",
-  "version": "1.0.0-107",
+  "version": "1.0.0-108",
   "license": "",
   "scripts": {
     "ng": "ng",
@@ -39,7 +39,7 @@
     "@adins/ucgridview": "^2.0.27",
     "@adins/ucinputnumber": "^1.0.1",
     "@adins/uclookupgeneric": "^2.0.16",
-    "@adins/ucpaging": "^2.0.23",
+    "@adins/ucpaging": "^2.0.24",
     "@adins/ucreport": "^1.0.3",
     "@adins/ucsearch": "^2.0.29",
     "@adins/ucthingstodo": "^1.0.2",
